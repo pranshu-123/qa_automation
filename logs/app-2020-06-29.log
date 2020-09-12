@@ -1,0 +1,34 @@
+13:43:20.349 INFO  TestBase -Using Chrome browser
+13:43:40.720 INFO  TestBase -INFO: Calling setUp
+13:43:40.720 INFO  TestBase -Using Chrome browser
+13:43:54.518 INFO  TestBase -INFO: Calling verifyAllTextOnDropDownMenuTest
+13:43:57.084 INFO  TestBase -INFO: Calling verifydashBoardEnable
+13:43:57.590 INFO  TestBase -INFO: Calling verifygetLoggedUserName
+13:43:57.614 INFO  TestBase -INFO: Calling tearDown
+13:47:14.485 INFO  TestBase -Using Chrome browser
+13:51:40.360 INFO  TestBase -Using Chrome browser
+13:52:14.823 INFO  TestBase -INFO: Calling setUp
+13:52:14.824 INFO  TestBase -Using Chrome browser
+13:52:49.871 INFO  TestBase -INFO: Calling verifyAllTextOnDropDownMenuTest
+13:52:53.185 INFO  TestBase -INFO: Calling verifydashBoardEnable
+13:52:53.264 INFO  TestBase -INFO: Calling verifygetLoggedUserName
+13:52:53.297 INFO  TestBase -INFO: Calling tearDown
+14:38:46.565 INFO  TestBase -Using Chrome browser
+14:40:56.843 INFO  TestBase -Using Chrome browser
+14:50:34.758 INFO  TestBase -Using Chrome browser
+20:54:35.840 INFO  TestBase -Using Chrome browser
+20:55:04.616 INFO  TestBase -verifying setUp of ManagePageTest.
+20:55:05.113 INFO  TestBase -verifying Stats Tab is Displayed.
+20:55:05.260 INFO  TestBase -verifying Title of ManagePageTest.
+22:14:02.136 INFO  TestBase -Using Chrome browser
+22:14:28.408 INFO  TestBase -verifing click on SignIn button
+22:14:28.523 INFO  TestBase -verifing Header logo is displayed
+22:14:28.536 INFO  TestBase -verifing Title of Logi  page
+22:14:28.582 INFO  TestBase -verifing name on logo is displayed
+22:14:29.291 INFO  TestBase -Close the current window and quits this driver, closing every associated window
+22:16:04.706 INFO  base.TestBase -Using Chrome browser
+22:16:26.423 INFO  base.TestBase -verifing click on SignIn button
+22:16:26.533 INFO  base.TestBase -verifing Header logo is displayed
+22:16:26.546 INFO  base.TestBase -verifing Title of Logi  page
+22:16:26.590 INFO  base.TestBase -verifing name on logo is displayed
+22:16:27.263 INFO  base.TestBase -Close the current window and quits this driver, closing every associated window

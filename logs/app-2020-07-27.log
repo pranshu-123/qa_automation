@@ -1,0 +1,26 @@
+21:13:00.478 INFO  base.TestBase -INFO: Calling setUp
+21:13:00.520 INFO  base.TestBase -Using Chrome browser
+21:15:17.495 INFO  base.TestBase -Using Chrome browser
+21:17:36.131 INFO  base.TestBase -Using Chrome browser
+21:19:51.903 INFO  base.TestBase -INFO: Calling setUp
+21:19:51.912 INFO  base.TestBase -Using Chrome browser
+21:25:43.269 INFO  base.TestBase -Using Chrome browser
+21:29:30.294 INFO  base.TestBase -Using Chrome browser
+21:36:07.983 INFO  base.TestBase -Using Chrome browser
+21:38:21.493 INFO  base.TestBase -Using Chrome browser
+21:46:54.198 INFO  base.TestBase -Using Chrome browser
+21:48:19.875 INFO  base.TestBase -verifing click on SignIn button
+21:48:19.983 INFO  base.TestBase -verifing Header logo is displayed
+21:48:19.994 INFO  base.TestBase -verifing Title of Login page
+21:48:20.097 INFO  base.TestBase -verifing name on logo is displayed
+21:48:20.963 INFO  base.TestBase -Close the current window and quits this driver, closing every associated window
+21:52:04.601 INFO  base.TestBase -Using Chrome browser
+21:53:56.424 INFO  base.TestBase -verifying setUp of ManagePageTest.
+21:53:56.686 INFO  base.TestBase -verifying Stats Tab is Displayed.
+21:53:56.833 INFO  base.TestBase -verifying Title of ManagePageTest.
+22:16:17.560 INFO  base.TestBase -Using Chrome browser
+22:19:42.644 INFO  base.TestBase -verifying setUp of ManagePageTest.
+22:32:18.744 INFO  base.TestBase -Using Chrome browser
+22:35:33.848 INFO  base.TestBase -verifying setUp of ManagePageTest.
+22:35:34.089 INFO  base.TestBase -verifying Stats Tab is Displayed.
+22:35:34.282 INFO  base.TestBase -verifying Title of ManagePageTest.

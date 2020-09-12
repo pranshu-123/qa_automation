@@ -1,0 +1,10 @@
+13:48:03.549 INFO  base.TestBase -Using Chrome browser
+17:36:55.317 INFO  base.TestBase -Using Chrome browser
+21:16:44.297 INFO  base.TestBase -Using Chrome browser
+21:17:08.707 INFO  base.TestBase -Verifying url in ApplicationHomePage
+21:18:55.217 INFO  base.TestBase -Using Chrome browser
+21:19:27.121 INFO  base.TestBase -Verifying url in ApplicationHomePage
+21:19:30.657 INFO  base.TestBase -Verifying all application type and status checkboxes are checked ApplicationHomePage
+21:24:38.845 INFO  base.TestBase -Using Chrome browser
+21:25:49.209 INFO  base.TestBase -Verifying url in ApplicationHomePage
+21:25:52.710 INFO  base.TestBase -Verifying all application type and status checkboxes are checked ApplicationHomePage

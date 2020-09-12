@@ -1,0 +1,19 @@
+14:05:18.848 INFO  base.TestBase -Using Chrome browser
+14:08:19.343 INFO  base.TestBase -Using Chrome browser
+14:09:18.003 INFO  base.TestBase -Using Chrome browser
+14:13:16.389 INFO  base.TestBase -Using Chrome browser
+14:13:54.126 INFO  base.TestBase -Verifying url in ApplicationHomePage
+14:15:24.002 INFO  base.TestBase -Using Chrome browser
+14:16:07.952 INFO  base.TestBase -Verifying url in ApplicationHomePage
+15:18:27.523 INFO  base.TestBase -Using Chrome browser
+15:18:49.184 INFO  base.TestBase -Verifying all application type and status checkboxes are checked ApplicationHomePage
+15:18:49.198 INFO  base.TestBase -Verifying url in ApplicationHomePage
+15:55:06.610 INFO  base.TestBase -Using Chrome browser
+15:55:27.553 INFO  base.TestBase -Verifying all application type and status checkboxes are checked ApplicationHomePage
+15:55:27.587 INFO  base.TestBase -Verifying url in ApplicationHomePage
+15:57:21.336 INFO  base.TestBase -Using Chrome browser
+15:57:43.398 INFO  base.TestBase -Verifying all application type and status checkboxes are checked ApplicationHomePage
+15:57:43.409 INFO  base.TestBase -Verifying url in ApplicationHomePage
+15:58:44.948 INFO  base.TestBase -Using Chrome browser
+15:59:10.752 INFO  base.TestBase -Verifying all application type and status checkboxes are checked ApplicationHomePage
+15:59:10.763 INFO  base.TestBase -Verifying url in ApplicationHomePage

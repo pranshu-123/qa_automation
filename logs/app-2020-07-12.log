@@ -1,0 +1,6 @@
+08:45:17.467 INFO  base.TestBase -Using Chrome browser
+08:46:10.304 INFO  base.TestBase -Using Chrome browser
+08:48:48.360 INFO  base.TestBase -Using Chrome browser
+08:49:14.544 INFO  base.TestBase -Verifying url in ApplicationHomePage
+08:52:50.555 INFO  base.TestBase -Using Chrome browser
+08:53:17.353 INFO  base.TestBase -Verifying url in ApplicationHomePage

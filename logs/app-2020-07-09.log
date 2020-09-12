@@ -1,0 +1,3 @@
+08:27:39.827 INFO  base.TestBase -Using Chrome browser
+08:43:30.084 INFO  base.TestBase -Verifying url in ApplicationHomePage
+08:43:33.841 INFO  base.TestBase -Verifying all application type and status checkboxes are checked ApplicationHomePage

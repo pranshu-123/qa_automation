@@ -1,0 +1,32 @@
+17:20:07.585 INFO  base.TestBase -Using Chrome browser
+17:20:33.825 INFO  base.TestBase -verifying setUp of ManagePageTest.
+17:20:34.040 INFO  base.TestBase -verifying Stats Tab is Displayed.
+17:20:34.288 INFO  base.TestBase -verifying Title of ManagePageTest.
+17:21:19.885 INFO  base.TestBase -Using Chrome browser
+17:21:42.358 INFO  base.TestBase -verifying setUp of ManagePageTest.
+17:21:42.366 INFO  base.TestBase -Using Chrome browser
+17:21:57.853 INFO  base.TestBase -verifing click on SignIn button
+17:21:57.944 INFO  base.TestBase -verifing Header logo is displayed
+17:21:57.957 INFO  base.TestBase -verifing Title of Login page
+17:21:58.000 INFO  base.TestBase -verifing name on logo is displayed
+17:21:58.717 INFO  base.TestBase -Close the current window and quits this driver, closing every associated window
+17:21:58.773 INFO  base.TestBase -INFO: Calling setUp
+17:21:58.774 INFO  base.TestBase -Using Chrome browser
+17:22:18.756 INFO  base.TestBase -INFO: Calling verifyAllTextOnDropDownMenuTest
+17:22:22.631 INFO  base.TestBase -verifying Stats Tab is Displayed.
+17:22:22.634 INFO  base.TestBase -INFO: Calling verifydashBoardEnable
+17:22:22.900 INFO  base.TestBase -INFO: Calling verifygetLoggedUserName
+17:22:22.934 INFO  base.TestBase -INFO: Calling tearDown
+17:22:23.677 INFO  base.TestBase -verifying Title of ManagePageTest.
+19:11:50.982 INFO  base.TestBase -INFO: Calling setUp
+19:11:50.985 INFO  base.TestBase -Using Chrome browser
+19:12:09.583 INFO  base.TestBase -INFO: Calling verifyAllTextOnDropDownMenuTest
+19:12:13.975 INFO  base.TestBase -INFO: Calling verifydashBoardEnable
+19:12:14.086 INFO  base.TestBase -INFO: Calling verifygetLoggedUserName
+19:12:14.120 INFO  base.TestBase -INFO: Calling tearDown
+21:17:50.060 INFO  base.TestBase -Using Chrome browser
+21:18:10.980 INFO  base.TestBase -verifing click on SignIn button
+21:18:11.114 INFO  base.TestBase -verifing Header logo is displayed
+21:18:11.139 INFO  base.TestBase -verifing Title of Login page
+21:18:11.212 INFO  base.TestBase -verifing name on logo is displayed
+21:18:12.090 INFO  base.TestBase -Close the current window and quits this driver, closing every associated window

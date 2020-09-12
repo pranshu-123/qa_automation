@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="UnravelUISuite">
+	<test name="Smoke">
+		<classes>
+			<class name="com.qa.testcases.cluster.overview.TC_CO_07" />
+			<class name="com.qa.testcases.cluster.overview.TC_CO_11" />
+			<class name="com.qa.testcases.cluster.overview.TC_CO_15" />
+			<class name="com.qa.testcases.cluster.overview.TC_CO_19" />
+			<class name="com.qa.testcases.cluster.impala.chargeback.TC_CB_01" />
+			<class name="com.qa.testcases.cluster.impala.chargeback.TC_CB_06" />
+			<class name="com.qa.testcases.cluster.impala.chargeback.TC_CB_39" />
+		</classes>
+	</test> <!-- Test -->
+</suite> <!-- Suite -->

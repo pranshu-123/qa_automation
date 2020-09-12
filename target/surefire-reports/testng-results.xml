@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="3" ignored="12" total="22" passed="7">
+  <reporter-output>
+  </reporter-output>
+  <suite name="UnravelUISuite" duration-ms="303771" started-at="2020-08-27T15:33:57Z" finished-at="2020-08-27T15:39:01Z">
+    <groups>
+    </groups>
+    <test name="Smoke" duration-ms="303771" started-at="2020-08-27T15:33:57Z" finished-at="2020-08-27T15:39:01Z">
+      <class name="com.qa.testcases.cluster.overview.TC_CO_11">
+        <test-method status="PASS" signature="beforeClass()[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_11@97e1986]" name="beforeClass" is-config="true" duration-ms="10212" started-at="2020-08-27T15:34:11Z" finished-at="2020-08-27T15:34:21Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method status="PASS" signature="TC_CO_11_verifyMemoryGraph(java.lang.String)[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_11@97e1986]" name="TC_CO_11_verifyMemoryGraph" duration-ms="15130" started-at="2020-08-27T15:34:21Z" data-provider="clusterid-data-provider" finished-at="2020-08-27T15:34:37Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Cluster1 [296b...2ac9]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_CO_11_verifyMemoryGraph -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_11@97e1986]" name="tearDown" is-config="true" duration-ms="44" started-at="2020-08-27T15:34:37Z" finished-at="2020-08-27T15:34:37Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=TC_CO_11_verifyMemoryGraph status=SUCCESS method=TC_CO_11.TC_CO_11_verifyMemoryGraph(java.lang.String)[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_11@97e1986] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="TC_CO_11_verifyMemoryGraph(java.lang.String)[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_11@97e1986]" name="TC_CO_11_verifyMemoryGraph" duration-ms="14526" started-at="2020-08-27T15:34:37Z" data-provider="clusterid-data-provider" finished-at="2020-08-27T15:34:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Cluster1 [f5a6...2ac9]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_CO_11_verifyMemoryGraph -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_11@97e1986]" name="tearDown" is-config="true" duration-ms="22" started-at="2020-08-27T15:34:51Z" finished-at="2020-08-27T15:34:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=TC_CO_11_verifyMemoryGraph status=SUCCESS method=TC_CO_11.TC_CO_11_verifyMemoryGraph(java.lang.String)[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_11@97e1986] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="afterClass()[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_11@97e1986]" name="afterClass" is-config="true" duration-ms="1445" started-at="2020-08-27T15:34:51Z" finished-at="2020-08-27T15:34:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterClass -->
+      </class> <!-- com.qa.testcases.cluster.overview.TC_CO_11 -->
+      <class name="com.qa.testcases.cluster.overview.TC_CO_07">
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_07@3dd3bcd]" name="setup" is-config="true" duration-ms="56915" started-at="2020-08-27T15:33:00Z" finished-at="2020-08-27T15:33:57Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method status="PASS" signature="beforeClass()[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_07@3dd3bcd]" name="beforeClass" is-config="true" duration-ms="9018" started-at="2020-08-27T15:33:57Z" finished-at="2020-08-27T15:34:06Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method status="PASS" signature="TC_CO_07_verifyClusterOverviewForDifferentCluster()[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_07@3dd3bcd]" name="TC_CO_07_verifyClusterOverviewForDifferentCluster" duration-ms="3770" started-at="2020-08-27T15:34:06Z" finished-at="2020-08-27T15:34:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_CO_07_verifyClusterOverviewForDifferentCluster -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_07@3dd3bcd]" name="tearDown" is-config="true" duration-ms="160" started-at="2020-08-27T15:34:10Z" finished-at="2020-08-27T15:34:10Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=TC_CO_07_verifyClusterOverviewForDifferentCluster status=SUCCESS method=TC_CO_07.TC_CO_07_verifyClusterOverviewForDifferentCluster()[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_07@3dd3bcd] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="afterClass()[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_07@3dd3bcd]" name="afterClass" is-config="true" duration-ms="1229" started-at="2020-08-27T15:34:10Z" finished-at="2020-08-27T15:34:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterClass -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_07@3dd3bcd]" name="tearDown" is-config="true" duration-ms="0" started-at="2020-08-27T15:39:01Z" finished-at="2020-08-27T15:39:01Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- com.qa.testcases.cluster.overview.TC_CO_07 -->
+      <class name="com.qa.testcases.cluster.impala.chargeback.TC_CB_39">
+        <test-method status="PASS" signature="beforeClass()[pri:0, instance:com.qa.testcases.cluster.impala.chargeback.TC_CB_39@13a57a3b]" name="beforeClass" is-config="true" duration-ms="9112" started-at="2020-08-27T15:37:57Z" finished-at="2020-08-27T15:38:07Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method status="PASS" signature="TC_CB_39_VerifyAppDetails(java.lang.String)[pri:0, instance:com.qa.testcases.cluster.impala.chargeback.TC_CB_39@13a57a3b]" name="TC_CB_39_VerifyAppDetails" duration-ms="23946" started-at="2020-08-27T15:38:07Z" data-provider="clusterid-data-provider" finished-at="2020-08-27T15:38:31Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Cluster1]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_CB_39_VerifyAppDetails -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.qa.testcases.cluster.impala.chargeback.TC_CB_39@13a57a3b]" name="tearDown" is-config="true" duration-ms="22" started-at="2020-08-27T15:38:31Z" finished-at="2020-08-27T15:38:31Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=TC_CB_39_VerifyAppDetails status=SUCCESS method=TC_CB_39.TC_CB_39_VerifyAppDetails(java.lang.String)[pri:0, instance:com.qa.testcases.cluster.impala.chargeback.TC_CB_39@13a57a3b] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="FAIL" signature="afterClass()[pri:0, instance:com.qa.testcases.cluster.impala.chargeback.TC_CB_39@13a57a3b]" name="afterClass" is-config="true" duration-ms="30246" started-at="2020-08-27T15:38:31Z" finished-at="2020-08-27T15:39:01Z">
+          <exception class="org.openqa.selenium.NoSuchWindowException">
+            <message>
+              <![CDATA[no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=84.0.4147.89)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'ankurjais', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '5.4.0-42-generic', java.version: '1.8.0_252'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 84.0.4147.89, chrome: {chromedriverVersion: 84.0.4147.30 (48b3e868b4cc0..., userDataDir: /tmp/.com.google.Chrome.24CGpa}, goog:chromeOptions: {debuggerAddress: localhost:37123}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:virtualAuthenticators: true}
+Session ID: 022a281a81ff582265f4b220fc0472ac
+*** Element info: {Using=css selector, value=a.icon-logout}]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.NoSuchWindowException: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=84.0.4147.89)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'ankurjais', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '5.4.0-42-generic', java.version: '1.8.0_252'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 84.0.4147.89, chrome: {chromedriverVersion: 84.0.4147.30 (48b3e868b4cc0..., userDataDir: /tmp/.com.google.Chrome.24CGpa}, goog:chromeOptions: {debuggerAddress: localhost:37123}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:virtualAuthenticators: true}
+Session ID: 022a281a81ff582265f4b220fc0472ac
+*** Element info: {Using=css selector, value=a.icon-logout}
+at sun.reflect.GeneratedConstructorAccessor17.newInstance(Unknown Source)
+at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
+at org.openqa.selenium.remote.RemoteWebDriver.findElementByCssSelector(RemoteWebDriver.java:420)
+at org.openqa.selenium.By$ByCssSelector.findElement(By.java:431)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
+at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
+at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+at com.sun.proxy.$Proxy15.toString(Unknown Source)
+at java.lang.String.valueOf(String.java:2994)
+at java.lang.StringBuilder.append(StringBuilder.java:131)
+at org.openqa.selenium.support.ui.ExpectedConditions$10.toString(ExpectedConditions.java:305)
+at java.lang.String.valueOf(String.java:2994)
+at java.lang.StringBuilder.append(StringBuilder.java:131)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:268)
+at com.qa.utils.WaitExecuter.waitUntilElementPresent(WaitExecuter.java:25)
+at com.qa.scripts.Login.logout(Login.java:61)
+at com.qa.base.BaseClass.afterClass(BaseClass.java:71)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:59)
+at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:458)
+at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:222)
+at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:142)
+at org.testng.internal.TestMethodWorker.invokeAfterClassMethods(TestMethodWorker.java:214)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)
+at org.testng.TestRunner.privateRun(TestRunner.java:648)
+at org.testng.TestRunner.run(TestRunner.java:505)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+at org.testng.TestNG.runSuites(TestNG.java:1049)
+at org.testng.TestNG.run(TestNG.java:1017)
+at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:178)
+at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:92)
+at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:96)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.NoSuchWindowException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterClass -->
+      </class> <!-- com.qa.testcases.cluster.impala.chargeback.TC_CB_39 -->
+      <class name="com.qa.testcases.cluster.impala.chargeback.TC_CB_06">
+        <test-method status="PASS" signature="beforeClass()[pri:0, instance:com.qa.testcases.cluster.impala.chargeback.TC_CB_06@69d9c55]" name="beforeClass" is-config="true" duration-ms="9031" started-at="2020-08-27T15:37:22Z" finished-at="2020-08-27T15:37:31Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method status="PASS" signature="TC_CB_06_VerifyCustomDateRange(java.lang.String)[pri:0, instance:com.qa.testcases.cluster.impala.chargeback.TC_CB_06@69d9c55]" name="TC_CB_06_VerifyCustomDateRange" duration-ms="24433" started-at="2020-08-27T15:37:31Z" data-provider="clusterid-data-provider" finished-at="2020-08-27T15:37:56Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Cluster1]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_CB_06_VerifyCustomDateRange -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.qa.testcases.cluster.impala.chargeback.TC_CB_06@69d9c55]" name="tearDown" is-config="true" duration-ms="21" started-at="2020-08-27T15:37:56Z" finished-at="2020-08-27T15:37:56Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=TC_CB_06_VerifyCustomDateRange status=SUCCESS method=TC_CB_06.TC_CB_06_VerifyCustomDateRange(java.lang.String)[pri:0, instance:com.qa.testcases.cluster.impala.chargeback.TC_CB_06@69d9c55] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="afterClass()[pri:0, instance:com.qa.testcases.cluster.impala.chargeback.TC_CB_06@69d9c55]" name="afterClass" is-config="true" duration-ms="1546" started-at="2020-08-27T15:37:56Z" finished-at="2020-08-27T15:37:57Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterClass -->
+      </class> <!-- com.qa.testcases.cluster.impala.chargeback.TC_CB_06 -->
+      <class name="com.qa.testcases.cluster.overview.TC_CO_19">
+        <test-method status="PASS" signature="beforeClass()[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_19@153f5a29]" name="beforeClass" is-config="true" duration-ms="7902" started-at="2020-08-27T15:35:38Z" finished-at="2020-08-27T15:35:46Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method status="FAIL" signature="TC_CO_19_ValidateAutoAlertOfHomePage(java.lang.String)[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_19@153f5a29]" name="TC_CO_19_ValidateAutoAlertOfHomePage" duration-ms="42697" started-at="2020-08-27T15:35:46Z" data-provider="clusterid-data-provider" finished-at="2020-08-27T15:36:29Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Cluster1 [296b...2ac9]]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.openqa.selenium.NoSuchElementException">
+            <message>
+              <![CDATA[no such element: Unable to locate element: {"method":"xpath","selector":"//div[@class='row pointer'][1]"}
+  (Session info: chrome=84.0.4147.89)
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'ankurjais', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '5.4.0-42-generic', java.version: '1.8.0_252'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 84.0.4147.89, chrome: {chromedriverVersion: 84.0.4147.30 (48b3e868b4cc0..., userDataDir: /tmp/.com.google.Chrome.24CGpa}, goog:chromeOptions: {debuggerAddress: localhost:37123}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:virtualAuthenticators: true}
+Session ID: 022a281a81ff582265f4b220fc0472ac
+*** Element info: {Using=xpath, value=//div[@class='row pointer'][1]}]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//div[@class='row pointer'][1]"}
+  (Session info: chrome=84.0.4147.89)
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'ankurjais', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '5.4.0-42-generic', java.version: '1.8.0_252'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 84.0.4147.89, chrome: {chromedriverVersion: 84.0.4147.30 (48b3e868b4cc0..., userDataDir: /tmp/.com.google.Chrome.24CGpa}, goog:chromeOptions: {debuggerAddress: localhost:37123}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:virtualAuthenticators: true}
+Session ID: 022a281a81ff582265f4b220fc0472ac
+*** Element info: {Using=xpath, value=//div[@class='row pointer'][1]}
+at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
+at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:428)
+at org.openqa.selenium.By$ByXPath.findElement(By.java:353)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
+at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
+at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+at com.sun.proxy.$Proxy15.getWrappedElement(Unknown Source)
+at org.openqa.selenium.remote.internal.WebElementToJsonConverter.apply(WebElementToJsonConverter.java:50)
+at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+at java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:566)
+at org.openqa.selenium.remote.RemoteWebDriver.executeScript(RemoteWebDriver.java:484)
+at com.qa.utils.JavaScriptExecuter.clickOnElement(JavaScriptExecuter.java:21)
+at com.qa.testcases.cluster.overview.TC_CO_19.TC_CO_19_ValidateAutoAlertOfHomePage(TC_CO_19.java:43)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+at org.testng.internal.Invoker.invokeMethod(Invoker.java:583)
+at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)
+at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+at org.testng.TestRunner.privateRun(TestRunner.java:648)
+at org.testng.TestRunner.run(TestRunner.java:505)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+at org.testng.TestNG.runSuites(TestNG.java:1049)
+at org.testng.TestNG.run(TestNG.java:1017)
+at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:178)
+at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:92)
+at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:96)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.NoSuchElementException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_CO_19_ValidateAutoAlertOfHomePage -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_19@153f5a29]" name="tearDown" is-config="true" duration-ms="28" started-at="2020-08-27T15:36:29Z" finished-at="2020-08-27T15:36:29Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=TC_CO_19_ValidateAutoAlertOfHomePage status=FAILURE method=TC_CO_19.TC_CO_19_ValidateAutoAlertOfHomePage(java.lang.String)[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_19@153f5a29] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="FAIL" signature="TC_CO_19_ValidateAutoAlertOfHomePage(java.lang.String)[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_19@153f5a29]" name="TC_CO_19_ValidateAutoAlertOfHomePage" duration-ms="12752" started-at="2020-08-27T15:36:29Z" data-provider="clusterid-data-provider" finished-at="2020-08-27T15:36:42Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Cluster1 [f5a6...2ac9]]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Yarn Resource Usage page is not displayed expected [Yarn Resource Usage] but found [Overview]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Yarn Resource Usage page is not displayed expected [Yarn Resource Usage] but found [Overview]
+at org.testng.Assert.fail(Assert.java:96)
+at org.testng.Assert.failNotEquals(Assert.java:776)
+at org.testng.Assert.assertEqualsImpl(Assert.java:137)
+at org.testng.Assert.assertEquals(Assert.java:118)
+at org.testng.Assert.assertEquals(Assert.java:453)
+at com.qa.testcases.cluster.overview.TC_CO_19.TC_CO_19_ValidateAutoAlertOfHomePage(TC_CO_19.java:51)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+at org.testng.internal.Invoker.invokeMethod(Invoker.java:583)
+at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)
+at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+at org.testng.TestRunner.privateRun(TestRunner.java:648)
+at org.testng.TestRunner.run(TestRunner.java:505)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+at org.testng.TestNG.runSuites(TestNG.java:1049)
+at org.testng.TestNG.run(TestNG.java:1017)
+at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:178)
+at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:92)
+at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:96)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_CO_19_ValidateAutoAlertOfHomePage -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_19@153f5a29]" name="tearDown" is-config="true" duration-ms="24" started-at="2020-08-27T15:36:42Z" finished-at="2020-08-27T15:36:42Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=TC_CO_19_ValidateAutoAlertOfHomePage status=FAILURE method=TC_CO_19.TC_CO_19_ValidateAutoAlertOfHomePage(java.lang.String)[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_19@153f5a29] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="afterClass()[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_19@153f5a29]" name="afterClass" is-config="true" duration-ms="2369" started-at="2020-08-27T15:36:42Z" finished-at="2020-08-27T15:36:44Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterClass -->
+      </class> <!-- com.qa.testcases.cluster.overview.TC_CO_19 -->
+      <class name="com.qa.testcases.cluster.overview.TC_CO_15">
+        <test-method status="PASS" signature="beforeClass()[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_15@26f67b76]" name="beforeClass" is-config="true" duration-ms="10006" started-at="2020-08-27T15:34:53Z" finished-at="2020-08-27T15:35:03Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method status="FAIL" signature="TC_CO_15_verifyInefficientGraph(java.lang.String)[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_15@26f67b76]" name="TC_CO_15_verifyInefficientGraph" duration-ms="15941" started-at="2020-08-27T15:35:03Z" data-provider="clusterid-data-provider" finished-at="2020-08-27T15:35:19Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Cluster1 [296b...2ac9]]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Map Reduce graph is not loaded expected [true] but found [false]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Map Reduce graph is not loaded expected [true] but found [false]
+at org.testng.Assert.fail(Assert.java:96)
+at org.testng.Assert.failNotEquals(Assert.java:776)
+at org.testng.Assert.assertTrue(Assert.java:44)
+at com.qa.testcases.cluster.overview.TC_CO_15.TC_CO_15_verifyInefficientGraph(TC_CO_15.java:57)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+at org.testng.internal.Invoker.invokeMethod(Invoker.java:583)
+at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)
+at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+at org.testng.TestRunner.privateRun(TestRunner.java:648)
+at org.testng.TestRunner.run(TestRunner.java:505)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+at org.testng.TestNG.runSuites(TestNG.java:1049)
+at org.testng.TestNG.run(TestNG.java:1017)
+at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:178)
+at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:92)
+at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:96)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_CO_15_verifyInefficientGraph -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_15@26f67b76]" name="tearDown" is-config="true" duration-ms="38" started-at="2020-08-27T15:35:19Z" finished-at="2020-08-27T15:35:19Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=TC_CO_15_verifyInefficientGraph status=FAILURE method=TC_CO_15.TC_CO_15_verifyInefficientGraph(java.lang.String)[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_15@26f67b76] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="TC_CO_15_verifyInefficientGraph(java.lang.String)[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_15@26f67b76]" name="TC_CO_15_verifyInefficientGraph" duration-ms="18302" started-at="2020-08-27T15:35:19Z" data-provider="clusterid-data-provider" finished-at="2020-08-27T15:35:37Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Cluster1 [f5a6...2ac9]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_CO_15_verifyInefficientGraph -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_15@26f67b76]" name="tearDown" is-config="true" duration-ms="22" started-at="2020-08-27T15:35:37Z" finished-at="2020-08-27T15:35:37Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=TC_CO_15_verifyInefficientGraph status=SUCCESS method=TC_CO_15.TC_CO_15_verifyInefficientGraph(java.lang.String)[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_15@26f67b76] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="afterClass()[pri:0, instance:com.qa.testcases.cluster.overview.TC_CO_15@26f67b76]" name="afterClass" is-config="true" duration-ms="1468" started-at="2020-08-27T15:35:37Z" finished-at="2020-08-27T15:35:38Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterClass -->
+      </class> <!-- com.qa.testcases.cluster.overview.TC_CO_15 -->
+      <class name="com.qa.testcases.cluster.impala.chargeback.TC_CB_01">
+        <test-method status="PASS" signature="beforeClass()[pri:0, instance:com.qa.testcases.cluster.impala.chargeback.TC_CB_01@7f560810]" name="beforeClass" is-config="true" duration-ms="8257" started-at="2020-08-27T15:36:44Z" finished-at="2020-08-27T15:36:52Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method status="PASS" signature="TC_CB_01_VerifyImpalaChargeBackPage()[pri:0, instance:com.qa.testcases.cluster.impala.chargeback.TC_CB_01@7f560810]" name="TC_CB_01_VerifyImpalaChargeBackPage" duration-ms="28479" started-at="2020-08-27T15:36:52Z" finished-at="2020-08-27T15:37:21Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_CB_01_VerifyImpalaChargeBackPage -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.qa.testcases.cluster.impala.chargeback.TC_CB_01@7f560810]" name="tearDown" is-config="true" duration-ms="16" started-at="2020-08-27T15:37:21Z" finished-at="2020-08-27T15:37:21Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=TC_CB_01_VerifyImpalaChargeBackPage status=SUCCESS method=TC_CB_01.TC_CB_01_VerifyImpalaChargeBackPage()[pri:0, instance:com.qa.testcases.cluster.impala.chargeback.TC_CB_01@7f560810] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="afterClass()[pri:0, instance:com.qa.testcases.cluster.impala.chargeback.TC_CB_01@7f560810]" name="afterClass" is-config="true" duration-ms="1528" started-at="2020-08-27T15:37:21Z" finished-at="2020-08-27T15:37:22Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterClass -->
+      </class> <!-- com.qa.testcases.cluster.impala.chargeback.TC_CB_01 -->
+    </test> <!-- Smoke -->
+  </suite> <!-- UnravelUISuite -->
+</testng-results>

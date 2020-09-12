@@ -1,0 +1,20 @@
+07:03:00.827 INFO  base.TestBase -Using Chrome browser
+16:50:10.042 INFO  base.TestBase -Using Chrome browser
+16:50:36.116 INFO  base.TestBase -Verifying url in workflows page
+17:14:09.725 INFO  base.TestBase -Using Chrome browser
+17:15:04.760 INFO  base.TestBase -Verifying url in workflows page
+17:15:04.762 INFO  base.TestBase -INFO: Calling tearDown
+17:17:29.169 INFO  base.TestBase -Using Chrome browser
+17:18:22.742 INFO  base.TestBase -Verifying url in workflows page
+17:18:22.744 INFO  base.TestBase -INFO: Calling tearDown
+17:19:15.503 INFO  base.TestBase -Using Chrome browser
+17:19:40.589 INFO  base.TestBase -Verifying url in workflows page
+17:19:40.593 INFO  base.TestBase -INFO: Calling tearDown
+19:59:40.583 INFO  base.TestBase -Using Chrome browser
+20:00:41.756 INFO  base.TestBase -Verifying url in workflows page
+20:00:41.759 INFO  base.TestBase -INFO: Calling tearDown
+20:03:08.515 INFO  base.TestBase -Using Chrome browser
+20:03:32.774 INFO  base.TestBase -Verifying url in workflows page
+20:03:33.066 INFO  base.TestBase -INFO: Calling tearDown
+20:03:55.332 INFO  base.TestBase -Using Chrome browser
+20:04:19.832 INFO  base.TestBase -Verifying url in workflows page

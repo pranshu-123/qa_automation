@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<title>TestNG Report</title>
+<style type="text/css">table {margin-bottom:10px;border-collapse:collapse;empty-cells:show}th,td {border:1px solid #009;padding:.25em .5em}th {vertical-align:bottom}td {vertical-align:top}table a {font-weight:bold}.stripe td {background-color: #E6EBF9}.num {text-align:right}.passedodd td {background-color: #3F3}.passedeven td {background-color: #0A0}.skippedodd td {background-color: #DDD}.skippedeven td {background-color: #CCC}.failedodd td,.attn {background-color: #F33}.failedeven td,.stripe .attn {background-color: #D00}.stacktrace {white-space:pre;font-family:monospace}.totop {font-size:85%;text-align:center;border-bottom:2px solid #000}.invisible {display:none}</style>
+</head>
+<body>
+<table>
+<tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
+<tr><th colspan="7">UnravelUISuite</th></tr>
+<tr><td><a href="#t0">Smoke</a></td><td class="num">7</td><td class="num">0</td><td class="num attn">3</td><td class="num">303,771</td><td></td><td></td></tr>
+</table>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">UnravelUISuite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Smoke &#8212; failed (configuration methods)</th></tr><tr class="failedeven"><td rowspan="1">com.qa.testcases.cluster.impala.chargeback.TC_CB_39</td><td><a href="#m0">afterClass</a></td><td rowspan="1">1598542711028</td><td rowspan="1">30246</td></tr><tr><th colspan="4">Smoke &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">com.qa.testcases.cluster.overview.TC_CO_15</td><td><a href="#m1">TC_CO_15_verifyInefficientGraph</a></td><td rowspan="1">1598542503088</td><td rowspan="1">15941</td></tr><tr class="failedodd"><td rowspan="2">com.qa.testcases.cluster.overview.TC_CO_19</td><td><a href="#m2">TC_CO_19_ValidateAutoAlertOfHomePage</a></td><td rowspan="2">1598542589490</td><td rowspan="2">12752</td></tr><tr class="failedodd"><td><a href="#m3">TC_CO_19_ValidateAutoAlertOfHomePage</a></td></tr><tr><th colspan="4">Smoke &#8212; passed</th></tr><tr class="passedeven"><td rowspan="1">com.qa.testcases.cluster.impala.chargeback.TC_CB_01</td><td><a href="#m4">TC_CB_01_VerifyImpalaChargeBackPage</a></td><td rowspan="1">1598542612893</td><td rowspan="1">28479</td></tr><tr class="passedodd"><td rowspan="1">com.qa.testcases.cluster.impala.chargeback.TC_CB_06</td><td><a href="#m5">TC_CB_06_VerifyCustomDateRange</a></td><td rowspan="1">1598542651947</td><td rowspan="1">24433</td></tr><tr class="passedeven"><td rowspan="1">com.qa.testcases.cluster.impala.chargeback.TC_CB_39</td><td><a href="#m6">TC_CB_39_VerifyAppDetails</a></td><td rowspan="1">1598542687059</td><td rowspan="1">23946</td></tr><tr class="passedodd"><td rowspan="1">com.qa.testcases.cluster.overview.TC_CO_07</td><td><a href="#m7">TC_CO_07_verifyClusterOverviewForDifferentCluster</a></td><td rowspan="1">1598542446536</td><td rowspan="1">3770</td></tr><tr class="passedeven"><td rowspan="2">com.qa.testcases.cluster.overview.TC_CO_11</td><td><a href="#m8">TC_CO_11_verifyMemoryGraph</a></td><td rowspan="2">1598542461913</td><td rowspan="2">15130</td></tr><tr class="passedeven"><td><a href="#m9">TC_CO_11_verifyMemoryGraph</a></td></tr><tr class="passedodd"><td rowspan="1">com.qa.testcases.cluster.overview.TC_CO_15</td><td><a href="#m10">TC_CO_15_verifyInefficientGraph</a></td><td rowspan="1">1598542519070</td><td rowspan="1">18302</td></tr></tbody>
+</table>
+<h2>Smoke</h2><h3 id="m0">com.qa.testcases.cluster.impala.chargeback.TC_CB_39#afterClass</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.openqa.selenium.NoSuchWindowException: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=84.0.4147.89)
+Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:17:03&apos;
+System info: host: &apos;ankurjais&apos;, ip: &apos;127.0.1.1&apos;, os.name: &apos;Linux&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;5.4.0-42-generic&apos;, java.version: &apos;1.8.0_252&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 84.0.4147.89, chrome: {chromedriverVersion: 84.0.4147.30 (48b3e868b4cc0..., userDataDir: /tmp/.com.google.Chrome.24CGpa}, goog:chromeOptions: {debuggerAddress: localhost:37123}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:virtualAuthenticators: true}
+Session ID: 022a281a81ff582265f4b220fc0472ac
+*** Element info: {Using=css selector, value=a.icon-logout}
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementByCssSelector(RemoteWebDriver.java:420)
+	at org.openqa.selenium.By$ByCssSelector.findElement(By.java:431)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
+	at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
+	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+	at com.sun.proxy.$Proxy15.toString(Unknown Source)
+	at java.lang.String.valueOf(String.java:2994)
+	at java.lang.StringBuilder.append(StringBuilder.java:131)
+	at org.openqa.selenium.support.ui.ExpectedConditions$10.toString(ExpectedConditions.java:305)
+	at java.lang.String.valueOf(String.java:2994)
+	at java.lang.StringBuilder.append(StringBuilder.java:131)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:268)
+	at com.qa.utils.WaitExecuter.waitUntilElementPresent(WaitExecuter.java:25)
+	at com.qa.scripts.Login.logout(Login.java:61)
+	at com.qa.base.BaseClass.afterClass(BaseClass.java:71)
+... Removed 38 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m1">com.qa.testcases.cluster.overview.TC_CO_15#TC_CO_15_verifyInefficientGraph</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>Cluster1 [296b...2ac9]</td></tr><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.AssertionError: Map Reduce graph is not loaded expected [true] but found [false]
+	at com.qa.testcases.cluster.overview.TC_CO_15.TC_CO_15_verifyInefficientGraph(TC_CO_15.java:57)
+... Removed 37 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m2">com.qa.testcases.cluster.overview.TC_CO_19#TC_CO_19_ValidateAutoAlertOfHomePage</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>Cluster1 [f5a6...2ac9]</td></tr><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.AssertionError: Yarn Resource Usage page is not displayed expected [Yarn Resource Usage] but found [Overview]
+	at com.qa.testcases.cluster.overview.TC_CO_19.TC_CO_19_ValidateAutoAlertOfHomePage(TC_CO_19.java:51)
+... Removed 39 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m3">com.qa.testcases.cluster.overview.TC_CO_19#TC_CO_19_ValidateAutoAlertOfHomePage</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>Cluster1 [296b...2ac9]</td></tr><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[@class=&apos;row pointer&apos;][1]&quot;}
+  (Session info: chrome=84.0.4147.89)
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:17:03&apos;
+System info: host: &apos;ankurjais&apos;, ip: &apos;127.0.1.1&apos;, os.name: &apos;Linux&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;5.4.0-42-generic&apos;, java.version: &apos;1.8.0_252&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 84.0.4147.89, chrome: {chromedriverVersion: 84.0.4147.30 (48b3e868b4cc0..., userDataDir: /tmp/.com.google.Chrome.24CGpa}, goog:chromeOptions: {debuggerAddress: localhost:37123}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:virtualAuthenticators: true}
+Session ID: 022a281a81ff582265f4b220fc0472ac
+*** Element info: {Using=xpath, value=//div[@class=&apos;row pointer&apos;][1]}
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:428)
+	at org.openqa.selenium.By$ByXPath.findElement(By.java:353)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
+	at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
+	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+	at com.sun.proxy.$Proxy15.getWrappedElement(Unknown Source)
+	at org.openqa.selenium.remote.internal.WebElementToJsonConverter.apply(WebElementToJsonConverter.java:50)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+	at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:566)
+	at org.openqa.selenium.remote.RemoteWebDriver.executeScript(RemoteWebDriver.java:484)
+	at com.qa.utils.JavaScriptExecuter.clickOnElement(JavaScriptExecuter.java:21)
+	at com.qa.testcases.cluster.overview.TC_CO_19.TC_CO_19_ValidateAutoAlertOfHomePage(TC_CO_19.java:43)
+... Removed 38 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m4">com.qa.testcases.cluster.impala.chargeback.TC_CB_01#TC_CB_01_VerifyImpalaChargeBackPage</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m5">com.qa.testcases.cluster.impala.chargeback.TC_CB_06#TC_CB_06_VerifyCustomDateRange</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>Cluster1</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m6">com.qa.testcases.cluster.impala.chargeback.TC_CB_39#TC_CB_39_VerifyAppDetails</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>Cluster1</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m7">com.qa.testcases.cluster.overview.TC_CO_07#TC_CO_07_verifyClusterOverviewForDifferentCluster</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m8">com.qa.testcases.cluster.overview.TC_CO_11#TC_CO_11_verifyMemoryGraph</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>Cluster1 [296b...2ac9]</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m9">com.qa.testcases.cluster.overview.TC_CO_11#TC_CO_11_verifyMemoryGraph</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>Cluster1 [f5a6...2ac9]</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m10">com.qa.testcases.cluster.overview.TC_CO_15#TC_CO_15_verifyInefficientGraph</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>Cluster1 [f5a6...2ac9]</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+</body>
+</html>

@@ -79,6 +79,18 @@ public class ApplicationsPageObject {
 	
 	@FindBy (xpath = "//tbody/tr")
 	public List<WebElement> getTableData;
+	
+	@FindBy(xpath ="(//label[contains(@class,'checkbox')])/span[2]")
+	public List<WebElement> getEachApplicationTypeJobCounts;
+	
+	@FindBy (xpath = "//div[contains(@class,'check-items-container')]//input//following-sibling::span")
+	public List<WebElement> selectOneApplicationType; 
+	
+	@FindBy (xpath = "//p[contains(@class,'float-right')]/b")
+	public WebElement getTotalAppCount;
+	
+	@FindBy (id = "reset")
+	public WebElement resetButton;
 
     /**
      * @param driver The driver that will be used to look up the elements

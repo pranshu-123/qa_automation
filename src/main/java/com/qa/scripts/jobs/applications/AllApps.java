@@ -66,5 +66,32 @@ public class AllApps {
 		} else
 			LOGGER.info("No cluster to remove");
 	}
+		/* Add all application count */
+	public int addApplicationTypeCount() {
+		List<WebElement> appJobCounts = applicationsPageObject.getEachApplicationTypeJobCounts;
+		List<Integer> listOfJobCounts = new ArrayList<>();
+		int totalCount = 0;
+		for (int i = 0; i < appJobCounts.size(); i++) {
+			listOfJobCounts.add(Integer.parseInt(appJobCounts.get(i).getText().replaceAll("[^\\dA-Za-z ]", "").trim()));
+		}
+		for (int jobCount : listOfJobCounts) {
+			totalCount += jobCount;
+		}
+		return totalCount;
+	}
 
-}
+	/* De-Select all app types */
+	public void deselectAllAppTypes() {
+		List<WebElement> appTypes = applicationsPageObject.selectOneApplicationType;
+		for (int i = 0; i < appTypes.size(); i++) {		
+				appTypes.get(i).click();
+			}
+			// Assert if the application type is selected successfully.
+			Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
+					"After de-selecting all application types, the application are still displayed ");
+
+		}
+
+	}
+
+

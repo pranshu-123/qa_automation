@@ -37,7 +37,7 @@ public class TC_CO_11 extends BaseClass {
         datePicker.selectLast30Days();
 
         WaitExecuter executer = new WaitExecuter(driver);
-        executer.sleep(2000);
+        executer.sleep(20000);
 
         // Take Screenshot and validate the graph
         OverviewGraphPageObject overviewGraph = new OverviewGraphPageObject(driver);

@@ -109,7 +109,8 @@ public class ChargeBackYarn {
     public void clickOnGroupBySearchBox(){
         // Click on yarn chargeback group by combobox
         waitExecuter.sleep(1000);
-        chargebackYarnPageObject.groupBySearchBox.click();
+        //chargebackYarnPageObject.groupBySearchBox.click();
+        JavaScriptExecuter.clickOnElement(driver,chargebackYarnPageObject.groupBySearchBox);
     }
 
     public void verifyNumberOfOptionsInGroupBy(){
@@ -163,7 +164,7 @@ public class ChargeBackYarn {
         for(int i=0; i<=listOfGroupByTableColumnNames.size()-1; i++){
             listOfGroupByColumnNames.add(listOfGroupByTableColumnNames.get(i).getText());
         }
-        List<String> definedGroupByColumnNames = Arrays.asList("Job Count", "Cpu Hours", "Memory Hours");
+        List<String> definedGroupByColumnNames = Arrays.asList("Job Count", "CPU Hours", "Memory Hours");
         LOGGER.info("Actual ist of options: " + listOfGroupByColumnNames);
         Boolean boolColumnNames = listOfGroupByColumnNames.containsAll(definedGroupByColumnNames);
         //boolean boolColumnNames = listOfGroupByColumnNames.stream().anyMatch(element -> definedGroupByColumnNames.contains(element));

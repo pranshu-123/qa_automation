@@ -11,7 +11,7 @@ public class MouseActions {
         try {
             executer.waitUntilElementPresent(element);
             element.click();
-        } catch (ElementClickInterceptedException clickInterceptedException) {
+        } catch (Exception clickInterceptedException) {
             JavaScriptExecuter.clickOnElement(driver, element);
         }
         executer.sleep(2000);

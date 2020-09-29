@@ -10,6 +10,9 @@ import org.testng.annotations.Test;
 
 import java.util.Properties;
 
+/**
+ * @author Birender Kumar
+ */
 public class TC_CO_01 extends BaseClass{
 
     @Test(dataProvider = "clusterid-data-provider")
@@ -34,7 +37,6 @@ public class TC_CO_01 extends BaseClass{
         System.out.println(datePicker.getDefaultDate());
         Assert.assertEquals(datePicker.getDefaultDate().trim(), "Last 1 Hour","Default date not match.");
         test.log(LogStatus.PASS, "The default date Last 1 Hour verified on clusters/overview page.");
-
 
     }
 }

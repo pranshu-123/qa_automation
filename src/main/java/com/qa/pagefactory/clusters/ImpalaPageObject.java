@@ -43,6 +43,10 @@ public class ImpalaPageObject {
 	@FindBy(xpath = "(//div[contains(@class,'dashboard-module')]//div[contains(@id,'highcharts')])[1]")
 	public WebElement parentMemoryConsumptionGraph;
 
+	@FindBy(xpath = "(//*[@id=\"app\"]/div/div/div/div[3]/div[1]/div[1]/div/div/div/div/div[3]/div/label[6]/span[2]")
+	public WebElement Nodecheckbox;
+
+
 	public By checkNoDataOnGraph = By.xpath(
 			"(.//*[local-name() = 'svg']/*[local-name() = 'g']/*[local-name() = 'text']/*[local-name() = 'tspan'])[1]");
 
@@ -54,6 +58,9 @@ public class ImpalaPageObject {
 
 	@FindBy(xpath = "//li[contains(@class,'active')]/ul[contains(@class,'sub-menu')]//li/span[contains(text(),'Impala')]")
 	public WebElement clusterImpalaTab;
+
+	@FindBy(xpath = "//div/table[@id='runningImpalaQueriesTable']/tbody/tr/td//span")
+	public WebElement selectimpalatable;
 
 	@FindBy(xpath = "//div[contains(@class,'component-section-header')]/h1[text()='Impala']")
 	public WebElement getImpalaPageHeader;

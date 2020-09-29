@@ -6,12 +6,15 @@ import com.qa.pagefactory.clusters.ImpalaPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.clusters.impala.Impala;
+import com.qa.utils.GraphUtils;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+/**
+ * @author Birender Kumar
+ */
 public class IM_RES_24  extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
@@ -27,11 +30,11 @@ public class IM_RES_24  extends BaseClass {
         executer.waitUntilElementClickable(topPanelPageObject.impalaTab);
         JavaScriptExecuter.clickOnElement(driver, topPanelPageObject.impalaTab);
         executer.waitUntilElementPresent(impalaPageObject.getImpalaPageHeader);
-
+        //Select cluster id
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
         executer.waitUntilPageFullyLoaded();
-
+        //Select date
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         executer.sleep(1000);
@@ -40,19 +43,26 @@ public class IM_RES_24  extends BaseClass {
         test.log(LogStatus.INFO, "Select Date from DatePicker.");
 
         Impala impala = new Impala(driver);
-        impala.selectUserInGroupBy();
-        test.log(LogStatus.INFO, "Select Queue in Group by option.");
+        executer.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
+        executer.sleep(3000);
+        impalaPageObject.groupByDropdownButton.click();
+        impalaPageObject.groupByUserList.click();
+        executer.waitUntilPageFullyLoaded();
+        test.log(LogStatus.INFO, "Select User in Group by option.");
+
+        //1. Click on Queries graph at that point where Impala Queries Table should get populated.
+        test.log(LogStatus.INFO, "Navigate different section in queries graph");
+        GraphUtils graphUtils = new GraphUtils();
+        graphUtils.navigateDifferentPointOnGraphGetTextClickCheckImpalaTbl(driver, impalaPageObject.queryHighChartContainer);
+        test.log(LogStatus.PASS,"Successfully read the impalaQueries header text, after click on queries graph.");
 
         //TBD
-        //1. Click on Memory Consumption at that point where Impala Queries Table should get populated.
-
-
         //Impala Queries table is populated and validate its Header columns
-        impala.getImpalaJobsTableRecord();
-        //Impala Table Header Text: 24 Impala queries running between  26-08-2020 05:30:00 and 27-08-2020 05:30:00
-        System.out.println("Impala Table Header Text: "+impala.getImpalaQueriesTableHeaderText());
-        test.log(LogStatus.INFO, "Impala Queuries table is populated.");
-        Assert.assertTrue(impala.validateHeaderColumnNameInImpalaQueriesTable(), "Mismatch in Impala Table header column.");
+//        impala.getImpalaJobsTableRecord();
+//        //Impala Table Header Text: 24 Impala queries running between  26-08-2020 05:30:00 and 27-08-2020 05:30:00
+//        System.out.println("Impala Table Header Text: "+impala.getImpalaQueriesTableHeaderText());
+//        test.log(LogStatus.INFO, "Impala Queries table is populated.");
+//        Assert.assertTrue(impala.validateHeaderColumnNameInImpalaQueriesTable(), "Mismatch in Impala Table header column.");
 
     }
 

@@ -12,7 +12,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import com.qa.pagefactory.clusters.ImpalaPageObject;
 import com.qa.utils.WaitExecuter;
-import org.testng.Assert;
 
 public class Impala {
 
@@ -129,17 +128,9 @@ public class Impala {
 	}
 
 	public void selectQueueInGroupBy(){
-		//waitExecuter.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
-		//JavaScriptExecuter.clickOnElement(driver, impalaPageObject.groupByDropdownButton);
-		waitExecuter.sleep(1000);
-		try {
-			impalaPageObject.groupByDropdownButton.click();
-		}catch (StaleElementReferenceException e){
-			impalaPageObject.groupByDropdownButton.click();
-		}
-
+		impalaPageObject.groupByDropdownButton.click();
 		waitExecuter.sleep(2000);
-		//JavaScriptExecuter.clickOnElement(driver, impalaPageObject.groupByQueueList);
+		waitExecuter.waitUntilElementPresent(impalaPageObject.groupByQueueList);
 		impalaPageObject.groupByQueueList.click();
 	}
 
@@ -188,6 +179,11 @@ public class Impala {
 				"Actual Peak Mem per Host");
 		Boolean boolColumnNames = listOfImpalaQueriesColumnNames.equals(definedImpalaQueriesColumnNames);
 		return boolColumnNames;
+	}
+
+	public void selecttable() {
+		waitExecuter.waitUntilElementPresent(impalaPageObject.selectimpalatable);
+		impalaPageObject.selectimpalatable.click();
 	}
 
 

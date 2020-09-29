@@ -35,6 +35,10 @@ public class GraphUtils {
     return memoryTooltipValues;
   }
 
+  public List<String> getjobsTooltipValues() {
+    return memoryTooltipValues;
+  }
+
   /**
    * This methods returns the query tooltip values displayed at
    * different coordinates of memory/query graph
@@ -120,8 +124,10 @@ public class GraphUtils {
       waitExecuter.sleep(2000);
       if(impalaPageObject.impalaQueriesHeader.getText().contains("No Impala queries")){
         System.out.println("Impala query header :"+impalaPageObject.impalaQueriesHeader.getText());
+        Log.info("Impala query header :"+impalaPageObject.impalaQueriesHeader.getText());
       }else{
         System.out.println("Impala query header :"+impalaPageObject.impalaQueriesHeader.getText());
+        Log.info("Impala query header :"+impalaPageObject.impalaQueriesHeader.getText());
         //If Impala queries table populated then verufy for other details.
 
       }
@@ -134,12 +140,77 @@ public class GraphUtils {
       waitExecuter.sleep(2000);
       if(!impalaPageObject.impalaQueriesHeader.getText().contains("No Impala queries")){
         System.out.println("Impala query header :"+impalaPageObject.impalaQueriesHeader.getText());
+        Log.info("Impala query header :"+impalaPageObject.impalaQueriesHeader.getText());
       }else{
         System.out.println("Impala query header :"+impalaPageObject.impalaQueriesHeader.getText());
+        Log.info("Impala query header :"+impalaPageObject.impalaQueriesHeader.getText());
       }
       runningWidth += incrementalWidth;
     }
   }
+
+  /**
+   * This methods search all elements inside a graph elements and get the colors
+   * from all elements.
+   * @param graphElement - Graph element
+   * @return All colors present in the graph
+   */
+
+  public void navigateDifferentPointOnGraphGetTextClickCheckJobTbl(WebDriver driver, WebElement graphElement) {
+    WaitExecuter waitExecuter = new WaitExecuter(driver);
+
+    int width = graphElement.getSize().getWidth();
+    int height = graphElement.getSize().getHeight();
+
+    int incrementalWidth = width/10;
+    int incrementalHeight = height/10;
+
+    int runningWidth = incrementalWidth;
+    int runningHeight = incrementalHeight;
+
+    ActionPerformer actionPerformer = new ActionPerformer(driver);
+    // When we use moveToElement, offsets are from the center of element
+    actionPerformer.moveToTheElementByOffset(graphElement, 0, 0);
+    waitExecuter.sleep(2000);
+    ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);
+
+    for (int i=0; i<4; i++) {
+      /** Moving the cursor to the left of the graph since offsets are from
+       the center of element **/
+      actionPerformer.moveToTheElementByOffset(graphElement, -runningWidth, 0);
+      memoryTooltipValues.add(impalaPageObject.memoryTooltip.getText());
+      //Move and click on the graph
+      actionPerformer.moveToTheElementByOffsetAndClick(graphElement, -runningWidth, 0);
+
+      waitExecuter.sleep(2000);
+      if(impalaPageObject.impalaQueriesHeader.getText().contains("No Impala queries")){
+        System.out.println("Impala query header :"+impalaPageObject.impalaQueriesHeader.getText());
+        Log.info("Impala query header :"+impalaPageObject.impalaQueriesHeader.getText());
+      }else{
+        System.out.println("Impala query header :"+impalaPageObject.impalaQueriesHeader.getText());
+        Log.info("Impala query header :"+impalaPageObject.impalaQueriesHeader.getText());
+        //If Impala queries table populated then verufy for other details.
+
+      }
+
+      actionPerformer.moveToTheElementByOffset(graphElement, runningWidth, 0);
+      memoryTooltipValues.add(impalaPageObject.memoryTooltip.getText());
+      //Move and click on the graph
+      actionPerformer.moveToTheElementByOffsetAndClick(graphElement, runningWidth, 0);
+
+      waitExecuter.sleep(2000);
+      if(!impalaPageObject.impalaQueriesHeader.getText().contains("No Impala queries")){
+        System.out.println("Impala query header :"+impalaPageObject.impalaQueriesHeader.getText());
+        Log.info("Impala query header :"+impalaPageObject.impalaQueriesHeader.getText());
+      }else{
+        System.out.println("Impala query header :"+impalaPageObject.impalaQueriesHeader.getText());
+        Log.info("Impala query header :"+impalaPageObject.impalaQueriesHeader.getText());
+      }
+      runningWidth += incrementalWidth;
+    }
+  }
+
+
 
   /**
    * This methods search all elements inside a graph elements and get the colors

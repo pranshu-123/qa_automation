@@ -12,7 +12,9 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+/**
+ * @author Birender Kumar
+ */
 public class IM_RES_22  extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
@@ -28,11 +30,11 @@ public class IM_RES_22  extends BaseClass {
         executer.waitUntilElementClickable(topPanelPageObject.impalaTab);
         JavaScriptExecuter.clickOnElement(driver, topPanelPageObject.impalaTab);
         executer.waitUntilElementPresent(impalaPageObject.getImpalaPageHeader);
-
+        //Select clsuter id
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
         executer.waitUntilPageFullyLoaded();
-
+        //Select date
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         executer.sleep(1000);
@@ -41,8 +43,12 @@ public class IM_RES_22  extends BaseClass {
         test.log(LogStatus.INFO, "Select Date from DatePicker.");
 
         Impala impala = new Impala(driver);
-        impala.selectUserInGroupBy();
-        test.log(LogStatus.INFO, "Select Queue in Group by option.");
+        executer.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
+        executer.sleep(3000);
+        impalaPageObject.groupByDropdownButton.click();
+        impalaPageObject.groupByUserList.click();
+        executer.waitUntilPageFullyLoaded();
+        test.log(LogStatus.INFO, "Select User in Group by option.");
 
         // Validate of Memory graph is present for selected date range
         Assert.assertTrue(impala.isMemoryGraphPresent(), "The memory graph is not present with expected conditions");
@@ -51,12 +57,11 @@ public class IM_RES_22  extends BaseClass {
         //TBD
         //1. Navigate to Memory graph and click
         //2. Read the impalaQueries header text if it does not matches "No Impala queries" then matches tooltip text with header impala queries text
-        //3.
 
         test.log(LogStatus.INFO, "Navigate different section in memory graph");
         GraphUtils graphUtils = new GraphUtils();
         graphUtils.navigateDifferentPointOnGraphGetTextClickCheckImpalaTbl(driver, impalaPageObject.memoryHighChartContainer);
-
+        test.log(LogStatus.PASS,"Successfully read the impalaQueries header text, after click on memory graph.");
 
     }
 

@@ -8,10 +8,7 @@ import com.qa.pagefactory.clusters.ImpalaPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.clusters.impala.Impala;
-import com.qa.utils.GraphUtils;
-import com.qa.utils.JavaScriptExecuter;
-import com.qa.utils.ScreenshotHelper;
-import com.qa.utils.WaitExecuter;
+import com.qa.utils.*;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -51,8 +48,8 @@ public class IM_RES_21 extends BaseClass {
 
     executer.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
     executer.sleep(3000);
-    impalaPageObject.groupByDropdownButton.click();
-    impalaPageObject.groupByQueueList.click();
+    MouseActions.clickOnElement(driver, impalaPageObject.groupByDropdownButton);
+    MouseActions.clickOnElement(driver, impalaPageObject.groupByQueueList);
     executer.waitUntilPageFullyLoaded();
     JavaScriptExecuter.scrollViewWithYAxis(driver,-100);
 

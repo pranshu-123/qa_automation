@@ -24,21 +24,24 @@ public class YR_011 extends BaseClass {
         Yarn yarn = new Yarn(driver);
         yarn.verifyYarnResourceHeaderisDisplayed();
         Log.info("Yarn Resource Header is displayed.");
+        test.log(LogStatus.INFO, "Yarn Resource Header is displayed.");
 
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
         Log.info("ClusterId is selected: "+clusterId);
+        test.log(LogStatus.INFO, "Cluster Id selected"+clusterId);
+
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();
         Log.info("DatePicker is selected for last30 Days");
+        test.log(LogStatus.INFO, "Date is selected from DatePicker");
 
         yarn.clickOnGroupByDropDown();
         Log.info("Click on GroupByDropDown.");
         yarn.selectApplicationType();
         Log.info("Selected Application Type, from dropdown.");
-
         //TBD
 //        1. The 2nd set of Graphs for the Application type must be Present
 //        2. The graphs must be plotted with number of apps vs time

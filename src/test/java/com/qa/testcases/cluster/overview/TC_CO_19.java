@@ -1,22 +1,25 @@
 package com.qa.testcases.cluster.overview;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.constants.PageConstants;
 import com.qa.pagefactory.HomePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
-import com.qa.scripts.ComponentHelper;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
-import com.qa.utils.JavaScriptExecuter;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
  * @author Ankur Jaiswal
  */
+@Marker.Smoke
+@Marker.ClusterOverview
 public class TC_CO_19 extends BaseClass {
 
   /**
@@ -27,6 +30,8 @@ public class TC_CO_19 extends BaseClass {
   public void TC_CO_19_ValidateAutoAlertOfHomePage(String clusterId) {
     test = extent.startTest("TC_CO_19_ValidateAutoAlertOfHomePage: "+clusterId, "Validate alert row of home page is redirecting to yarn page on clicking.");
     test.assignCategory("4620 - Cluster Overview");
+    TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
+    MouseActions.clickOnElement(driver, topPanelPageObject.overviewTab);
 
     HomePage homePage = new HomePage(driver);
     homePage.selectMultiClusterId(clusterId);
@@ -42,19 +47,23 @@ public class TC_CO_19 extends BaseClass {
 
     //Click on first alert displayed at homepage
     try {
-      JavaScriptExecuter.clickOnElement(driver,homePageObject.firstAlertRow);
+      MouseActions.clickOnElement(driver, homePageObject.firstAlertRow);
     } catch (NoSuchElementException e) {
       Assert.assertTrue(false, "No Alert present.");
     }
 
-    boolean isUrlContainResource = ComponentHelper.isUrlContain(driver,"/clusters/resources");
+    try {
+      executer.waitUntilUrlContains("/clusters/resources");
+      test.log(LogStatus.PASS, "Url contains the resources path");
+    } catch (TimeoutException te) {
+      Assert.assertTrue(false,"Url does not contain resources path");
+    }
 
-    Assert.assertTrue(isUrlContainResource,"Url does not contain resources path");
-    test.log(LogStatus.PASS, "Url contains the resources path");
-
-    TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-    Assert.assertEquals(topPanelPageObject.pageHeading.getText(), PageConstants.YARN_RESOURCE_HEADER,
-      "Yarn Resource Usage page is not displayed");
-    test.log(LogStatus.PASS, "Successfully verified Yarn Resource Usage page is displayed.");
+    try {
+      executer.waitUntilTextToBeInWebElement(topPanelPageObject.pageHeading, PageConstants.YARN_RESOURCE_HEADER);
+      test.log(LogStatus.PASS, "Successfully verified Yarn Resource Usage page is displayed.");
+    } catch (TimeoutException te) {
+      Assert.assertTrue(false, "Yarn Resource Usage page is not displayed");
+    }
   }
 }

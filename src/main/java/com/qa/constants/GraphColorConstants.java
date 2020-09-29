@@ -39,6 +39,7 @@ public class GraphColorConstants {
 
   public static class ByStatusGraph {
     public static final String Success_COLOR = "44,199,23";
+    public static final String Killed_COLOR = "213,68,81";
     public static final String Failed_COLOR = "249,141,6";
   }
   /**

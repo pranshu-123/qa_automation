@@ -77,6 +77,19 @@ public class HomePageObject {
   @FindBy(xpath = "//div[@class='clearfix']/table//td/p")
   public WebElement noRecentAlertsText;
 
+  @FindBy(xpath = "//a[@href='#/alerts/autoaction']")
+  public WebElement autoalert;
+
+  @FindBy(xpath = "//a[@href='#/alerts/autoaction/add']")
+  public WebElement newautoalert;
+
+  @FindBy(xpath = "//h4[contains(text(),'Nodes')]/following-sibling::div/span/div/span/a")
+  public WebElement nodesGraphDownloadMenu;
+
+  @FindBy(xpath = "//h4[contains(text(),'Nodes')]/following-sibling::div/span/div/ul/li")
+  public List<WebElement> listnodesGraphDownloadMenu;
+
+
   /**
    * @param driver The driver that will be used to look up the elements
    */

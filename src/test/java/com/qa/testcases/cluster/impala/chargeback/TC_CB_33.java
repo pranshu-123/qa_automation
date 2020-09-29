@@ -8,8 +8,12 @@ import com.qa.scripts.clusters.impala.ChargeBackImpala;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class TC_CB_33 extends BaseClass {
     private WaitExecuter waitExecuter;
@@ -46,34 +50,60 @@ public class TC_CB_33 extends BaseClass {
         waitExecuter.sleep(1000);
         picker.clickOnDatePicker();
         waitExecuter.sleep(1000);
-        picker.selectThisMonth();
+        picker.selectLast30Days();
         waitExecuter.sleep(1000);
         chargebackImpalaPageObject.groupBySearchBox.click();
-        waitExecuter.sleep(1000);
-        chargebackImpala.selectgroupby();
         waitExecuter.sleep(3000);
-        test.log(LogStatus.PASS, "verify the user clicks on each row the User is further group by realUser");
-        chargebackImpala.selecttable();
-        waitExecuter.sleep(1000);
-        test.log(LogStatus.PASS, "verify grouped by User table");
-        chargebackImpala.selectQueuetable();
-        test.log(LogStatus.PASS, "verify the Group by Queue table");
-        waitExecuter.sleep(1000);
-        chargebackImpala.selectdepttable();
-        test.log(LogStatus.PASS, "verify the Group by dept table");
-        waitExecuter.sleep(1000);
-        chargebackImpala.selectgrouptable();
-        test.log(LogStatus.PASS, "verify the Group by group table");
-        waitExecuter.sleep(1000);
-        chargebackImpala.selectrealUsertable();
-        test.log(LogStatus.PASS, "verify the Group by realUser table");
-        waitExecuter.sleep(1000);
-        chargebackImpala.selectdbstable();
-        test.log(LogStatus.PASS, "verify the Group by dbs table");
-        waitExecuter.sleep(1000);
-        chargebackImpala.selectinputtables();
-        test.log(LogStatus.PASS, "verify the Group by input table");
-        waitExecuter.sleep(1000);
+        if (!chargebackImpala.selectgroupby())
+        {
+            test.log(LogStatus.PASS, "verify the user clicks on each row the User is further group by realUser");
+        }
+        else{
+            test.log(LogStatus.FAIL, "Test Failed further group by realUser");
+        }
+        if (!chargebackImpala.selecttable())
+        {
+            test.log(LogStatus.PASS, "verify grouped by User table");
+        }
+        else{
+            test.log(LogStatus.FAIL, "Test Failed grouped by User table");
+        }
 
-    }
+        if (!chargebackImpala.selectQueuetable())
+        {
+            test.log(LogStatus.PASS, "verify the Group by Queue table");
+        }
+        else{
+            test.log(LogStatus.FAIL, "Test Failed the Group by Queue table");
+        }
+        if (!chargebackImpala.selectdepttable())
+        {
+            test.log(LogStatus.PASS, "verify the Group by dept table");
+        }
+        else{
+            test.log(LogStatus.FAIL, "Test Failed the Group by dept table");
+        }
+        if (!chargebackImpala.selectgrouptable())
+        {
+            test.log(LogStatus.PASS, "verify the Group by group table");
+        }
+        else{
+            test.log(LogStatus.FAIL, "Test Failed the Group by group table");
+        }
+        if (!chargebackImpala.selectrealUsertable())
+        {
+            test.log(LogStatus.PASS, "verify the Group by realUser table");
+        }
+        else{
+            test.log(LogStatus.FAIL, "Test Failed the Group by realUser table");
+        }
+
+        if(!chargebackImpala.selectdbstable())
+        {
+            test.log(LogStatus.PASS, "verify the Group by dbs table");
+        }
+        else{
+            test.log(LogStatus.FAIL, "Test Failed the Group by dbs table");
+        }
+        }
 }

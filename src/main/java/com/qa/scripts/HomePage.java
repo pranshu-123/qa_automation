@@ -6,12 +6,11 @@ import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
-import org.openqa.selenium.By;
-import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.openqa.selenium.support.ui.Select;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +22,7 @@ public class HomePage {
   private final TopPanelPageObject topPanel;
   private final HomePageObject homePageObject;
   private final WaitExecuter waitExecuter;
+  private CommonPageObject commonPageObject;
   private final WebDriver driver;
   /**
    * Constructor which initialize all necessary things to perform action
@@ -114,7 +114,7 @@ public class HomePage {
   }
 
   //click on cluster drop down
-  public void selectMultiClusterId(String clusterId){
+  public void selectMultiClusterId(String clusterId) {
     waitExecuter.sleep(2000);
     CommonPageObject commonPageObject = new CommonPageObject(driver);
     MouseActions.clickOnElement(driver, commonPageObject.clusterDropdown);
@@ -127,5 +127,52 @@ public class HomePage {
     waitExecuter.sleep(2000);
   }
 
+  /* Get the list of clusters from UI */
+  public List<String> getListOfClusters(List<WebElement> clusterList) {
+    int clusterSize = clusterList.size();
+    List<String> listOfClusters = new ArrayList<>();
+
+    if (clusterSize > 0) {
+      for (int i = 0; i < clusterList.size(); i++) {
+        String clusterNames = clusterList.get(i).getText();
+        //System.out.println("Cluster name: "+ clusterNames);
+        listOfClusters.add(clusterNames);
+      }
+    }
+    return listOfClusters;
+  }
+
+  public void clickOnNodesGraphDownloadMenu(){
+    waitExecuter.sleep(3000);
+    homePageObject.nodesGraphDownloadMenu.click();
+  }
+
+  public void nodesGraphDownloadPNG(){
+    waitExecuter.sleep(3000);
+    int graphDownloadMenuCount = homePageObject.listnodesGraphDownloadMenu.size();
+    if( graphDownloadMenuCount > 0){
+      for(int i=0; i<graphDownloadMenuCount; i++){
+        if(homePageObject.listnodesGraphDownloadMenu.get(i).getText().equals("Download PNG")){
+          System.out.println("Download file found now click on it");
+          homePageObject.listnodesGraphDownloadMenu.get(i).click();
+          waitExecuter.sleep(15000);
+        }
+      }
+    }
+  }
+
+  public void nodesGraphDownloadJPEG(){
+    waitExecuter.sleep(3000);
+    int graphDownloadMenuCount = homePageObject.listnodesGraphDownloadMenu.size();
+    if( graphDownloadMenuCount > 0){
+      for(int i=0; i<graphDownloadMenuCount; i++){
+        if(homePageObject.listnodesGraphDownloadMenu.get(i).getText().equals("Download JPEG")){
+          System.out.println("Download file found now click on it");
+          homePageObject.listnodesGraphDownloadMenu.get(i).click();
+          waitExecuter.sleep(15000);
+        }
+      }
+    }
+  }
 
 }

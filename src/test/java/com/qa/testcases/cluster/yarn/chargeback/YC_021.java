@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.yarn.chargeback;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.CommonPageObject;
 import com.qa.scripts.DatePicker;
@@ -9,6 +10,7 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.annotations.Test;
 
+@Marker.Smoke
 public class YC_021 extends BaseClass {
 
     /**

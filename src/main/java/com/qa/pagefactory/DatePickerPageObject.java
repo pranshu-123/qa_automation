@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 /** @author Ankur Jaiswal
  * All date picker related webelements of unravel ui
  * is present in this class. Wherever you need to access these page object
@@ -63,7 +65,8 @@ public class DatePickerPageObject {
   @FindBy(xpath = "//div[contains(@class,'component-date-picker')]/span")
   public WebElement calendarDate;
 
-
+  @FindBy(xpath = "//div[contains(@class,'daterangepicker') and contains(concat(' ', @class, ' '), ' open ')]//li")
+  public List<WebElement> dateRangeOptions;
 
     /**
    * @param driver The driver that will be used to look up the elements

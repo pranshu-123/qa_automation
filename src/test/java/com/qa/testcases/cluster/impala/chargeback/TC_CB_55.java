@@ -13,6 +13,9 @@ import org.testng.annotations.Test;
 import java.nio.file.*;
 import java.util.List;
 
+/**
+ * @author Birender Kumar
+ */
 //This class contains TC_CB_55 and TC_CB_56 both test case.
 public class TC_CB_55 extends BaseClass {
 
@@ -38,11 +41,7 @@ public class TC_CB_55 extends BaseClass {
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(2000);
         datePicker.selectLast30Days();
-        waitExecuter.sleep(1000);
-
-//        select 'Last 1 Hour'
-//        datePicker.selectLastOneHour();
-//        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilPageFullyLoaded();
 
         //click on DownloadCSV
         chargeBackImpala.clikOnDownloadCSV();

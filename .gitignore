@@ -69,5 +69,7 @@ test-output/
 #Screenshot
 screenshots/
 
+result/
+
 #Log
 *.log

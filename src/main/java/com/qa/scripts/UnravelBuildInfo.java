@@ -51,11 +51,11 @@ public class UnravelBuildInfo {
 		WaitExecuter wait = new WaitExecuter(driver);
 		List<String> unravelDetails = getBuildInfo(driver);
 		for (int i = 0; i < unravelDetails.size(); i++) {
-			String[] splitByColon = unravelDetails.get(i).split(":");
-			LOGGER.info("splitByColon " + splitByColon);
-			LOGGER.info("splitByColon[0] " + splitByColon[0]);
-			LOGGER.info("splitByColon[1] " + splitByColon[1]);
-			map.put(splitByColon[0].trim(), splitByColon[1].trim());
+			String[] unravelBuildDetails = unravelDetails.get(i).split(":");
+			LOGGER.info("unravelBuildDetails " + unravelBuildDetails);
+			LOGGER.info("unravelBuildDetails[0] " + unravelBuildDetails[0]);
+			LOGGER.info("unravelBuildDetails[1] " + unravelBuildDetails[1]);
+			map.put(unravelBuildDetails[0].trim(), unravelBuildDetails[1].trim());
 		}
 		extent.addSystemInfo(map);
 		wait.sleep(1000);

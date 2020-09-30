@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.utils.WaitExecuter;
+import org.testng.Assert;
 
 public class AllApps {
 

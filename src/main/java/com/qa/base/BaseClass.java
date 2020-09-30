@@ -35,8 +35,10 @@ public class BaseClass {
 		// driver = driverManager.getDriver("chrome"); //Read chrome from property file.
 		driver = driverManager.getDriver(browser);
 		FileUtils.createDirectory(DirectoryConstants.getExtentResultDir());
+		FileUtils.moveFileToArchive(FileConstants.getExtentReportFile(), true);
 		FileUtils.createDirectory(DirectoryConstants.getScreenshotDir());
 		extent = new ExtentReports(FileConstants.getExtentReportFile(), true);
+		extent.addSystemInfo("Selenium Version", prop.getProperty("SeleniumVersion"));
 		extent.loadConfig(new File(DirectoryConstants.getConfigDir() + "extent_config.xml"));
 		UnravelBuildInfo.setBuildInfo(driver, extent);
 	}
@@ -45,7 +47,6 @@ public class BaseClass {
 	public void beforeClass() {
 		Login login = new Login(driver);
 		login.loginToApp();
-		
 	}
 
 	@BeforeMethod(alwaysRun = true)
@@ -56,10 +57,10 @@ public class BaseClass {
 	@AfterMethod(alwaysRun = true)
 	public void tearDown(ITestResult result, Method method) {
 		try {
-			/*Mark TC as FAIL if its an assertion error, else FATAL */
+			/* Mark TC as FAIL if its an assertion error, else FATAL */
 			if (result.getStatus() == ITestResult.FAILURE) {
 				if (result.getThrowable() instanceof AssertionError)
-					test.log(LogStatus.FAIL,"<b style='color:yellow'>" + result.getThrowable().getMessage());				
+					test.log(LogStatus.FAIL, "<b style='color:yellow'>" + result.getThrowable().getMessage());
 				else
 					test.log(LogStatus.FATAL, result.getThrowable().getMessage());
 			}
@@ -77,18 +78,13 @@ public class BaseClass {
 	public void afterClass() {
 		Login login = new Login(driver);
 		login.logout();
-		FileUtils.deleteDownloadFolderUUIDFiles();
+		FileUtils.deleteDownloadsFolderFiles();
 	}
 
 	@AfterSuite
 	public void tearDown() {
 		driver.quit();
 	}
-
-	/*
-	 * List of available clusterid's Cluster1 [296b...2ac9] Cluster1 [f5a6...2ac9]
-	 * HDP7f17c HDPabac5 default
-	 */
 
 	@DataProvider(name = "clusterid-data-provider")
 	public Object[][] getClusterIds(Method method) {

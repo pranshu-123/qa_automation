@@ -9,7 +9,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
-
+/**
+ * @author Sarbashree Ray
+ * This class contains all User report related  action methods
+ * An implementation of the page object model can be
+ * achieved by separating the abstraction of the test object and the test scripts
+ */
 public class UserReport {
 
     private WebDriver driver;

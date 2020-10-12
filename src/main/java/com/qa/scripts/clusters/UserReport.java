@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+
 /**
  * @author Sarbashree Ray
  * This class contains all User report related  action methods
@@ -21,18 +22,6 @@ public class UserReport {
     private WaitExecuter waitExecuter;
     private UserReportPageObject userReportPageObject;
 
-    public void HeaderMessage() {
-        if (userReportPageObject.HeaderElement.size() > 0) {
-            waitExecuter.waitUntilElementClickable(userReportPageObject.HeaderElement.get(0));
-            JavaScriptExecuter.clickOnElement(driver, userReportPageObject.HeaderElement.get(0));
-        }
-    }
-
-
-    public void clickscheduleButton() {
-        MouseActions.clickOnElement(driver, userReportPageObject.scheduleuserreportButton);
-    }
-
 
     public UserReport(WebDriver driver) {
         this.driver = driver;
@@ -40,6 +29,22 @@ public class UserReport {
         userReportPageObject = new UserReportPageObject(driver);
     }
 
+    /**
+     * This method verify Header Message on UserReport page
+     */
+    public void HeaderMessage() {
+        if (userReportPageObject.HeaderElement.size() > 0) {
+            waitExecuter.waitUntilElementClickable(userReportPageObject.HeaderElement.get(0));
+            JavaScriptExecuter.clickOnElement(driver, userReportPageObject.HeaderElement.get(0));
+        }
+    }
+
+    /**
+     * This method verify the schedule Button on UserReport page
+     */
+    public void clickscheduleButton() {
+        MouseActions.clickOnElement(driver, userReportPageObject.scheduleuserreportButton);
+    }
 
 }
 

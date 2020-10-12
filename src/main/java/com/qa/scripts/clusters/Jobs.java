@@ -40,7 +40,7 @@ public class Jobs {
     }
 
     /**
-     * This method clear the filter present on Jobs page
+     * This method default filter present on Jobs page
      */
     public List<String> getAllDefaultSelectedFilterElements() {
         waitExecuter.sleep(3000);
@@ -54,6 +54,7 @@ public class Jobs {
         }
         return listOfAllDefaultFilterElements;
     }
+
     /**
      * This method verify jobs Header on Jobs page
      */
@@ -91,6 +92,7 @@ public class Jobs {
         }
         return dateLabels;
     }
+
     /**
      * This method verify the filter present on Jobs page
      */
@@ -104,6 +106,7 @@ public class Jobs {
         }
         return false;
     }
+
     /**
      * This method verify the Group By DropDown present on Jobs page
      */
@@ -117,6 +120,7 @@ public class Jobs {
         }
         return false;
     }
+
     /**
      * This method verify the ApplicationType present on Jobs page
      */
@@ -130,6 +134,7 @@ public class Jobs {
         }
         return false;
     }
+
     /**
      * This method verify the select User present on Jobs page
      */
@@ -143,6 +148,7 @@ public class Jobs {
         }
         return false;
     }
+
     /**
      * This method verify the select Queue present on Jobs page
      */
@@ -156,6 +162,7 @@ public class Jobs {
         }
         return false;
     }
+
     /**
      * This method verify the select State present on Jobs page
      */

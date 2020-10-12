@@ -64,9 +64,9 @@ public class Jobs {
             waitExecuter.waitUntilElementClickable(jobsPageObject.clusterResourcesTab);
             JavaScriptExecuter.clickOnElement(driver, jobsPageObject.clusterResourcesTab);
             waitExecuter.waitUntilElementPresent(jobsPageObject.getjobsPageHeader);
-            Log.info("Yarn Page Header is: " + jobsPageObject.getjobsPageHeader.getText());
+            LOGGER.info("Yarn Page Header is: " + jobsPageObject.getjobsPageHeader.getText());
         } catch (WebDriverException e) {
-            Log.info("click On verify jobs Header is Displayed:" + e.getStackTrace());
+            LOGGER.info("click On verify jobs Header is Displayed:" + e.getStackTrace());
         }
         return false;
     }
@@ -102,7 +102,7 @@ public class Jobs {
         try {
             boolean boolYarnApp = defineListOfJobsApp.containsAll(listOfAllFilterElements);
         } catch (WebDriverException e) {
-            Log.info("click On verify State Filter:" + e.getStackTrace());
+            LOGGER.info("click On verify State Filter:" + e.getStackTrace());
         }
         return false;
     }
@@ -116,7 +116,7 @@ public class Jobs {
             waitExecuter.sleep(6000);
             jobsPageObject.groupByDropdownButton.click();
         } catch (WebDriverException e) {
-            Log.info("click On Group By DropDown" + e.getStackTrace());
+            LOGGER.info("click On Group By DropDown" + e.getStackTrace());
         }
         return false;
     }
@@ -130,7 +130,7 @@ public class Jobs {
             waitExecuter.sleep(2000);
             jobsPageObject.groupByAppType.click();
         } catch (WebDriverException e) {
-            Log.info("click On select ApplicationType is:" + e.getStackTrace());
+            LOGGER.info("click On select ApplicationType is:" + e.getStackTrace());
         }
         return false;
     }
@@ -144,7 +144,7 @@ public class Jobs {
             waitExecuter.sleep(2000);
             jobsPageObject.groupByUser.click();
         } catch (WebDriverException e) {
-            Log.info("click On select ApplicationType is:" + e.getStackTrace());
+            LOGGER.info("click On select ApplicationType is:" + e.getStackTrace());
         }
         return false;
     }
@@ -158,7 +158,7 @@ public class Jobs {
             waitExecuter.sleep(2000);
             jobsPageObject.groupByQueue.click();
         } catch (WebDriverException e) {
-            Log.info("click On select select Queue is:" + e.getStackTrace());
+            LOGGER.info("click On select select Queue is:" + e.getStackTrace());
         }
         return false;
     }
@@ -172,7 +172,7 @@ public class Jobs {
             waitExecuter.sleep(2000);
             jobsPageObject.groupByState.click();
         } catch (WebDriverException e) {
-            Log.info("click On select select State is:" + e.getStackTrace());
+            LOGGER.info("click On select select State is:" + e.getStackTrace());
         }
         return false;
     }
@@ -191,7 +191,7 @@ public class Jobs {
                 waitExecuter.sleep(2000);
             }
         } catch (WebDriverException e) {
-            Log.info("click On select select State is:" + e.getStackTrace());
+            LOGGER.info("click On select select State is:" + e.getStackTrace());
         }
         return false;
 

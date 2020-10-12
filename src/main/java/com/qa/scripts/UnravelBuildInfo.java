@@ -17,6 +17,7 @@ import com.relevantcodes.extentreports.ExtentReports;
 public class UnravelBuildInfo {
 	private static final Logger LOGGER = Logger.getLogger(UnravelBuildInfo.class.getName());
 
+	/* Method helps in getting unravel about info from UI  */
 	public static List<String> getBuildInfo(WebDriver driver) {
 		WaitExecuter wait = new WaitExecuter(driver);
 		TopPanelComponentPageObject topPanel = new TopPanelComponentPageObject(driver);
@@ -24,11 +25,9 @@ public class UnravelBuildInfo {
 		LOGGER.info("Loging to app to get build info");
 		login.loginToApp();
 		wait.sleep(3000);
-
 		LOGGER.info("Click on about button");
 		topPanel.aboutInfo.click();
 		wait.sleep(1000);
-
 		String versionDetails = topPanel.versionInfo.getText();
 		List<String> list = new ArrayList<String>();
 		String[] unravelDetails = versionDetails.split("\\n");
@@ -46,6 +45,7 @@ public class UnravelBuildInfo {
 		return list;
 	}
 
+	/* Method helps in setting unravel about info in extent report */
 	public static void setBuildInfo(WebDriver driver, ExtentReports extent) {
 		LinkedHashMap map = new LinkedHashMap<>();
 		WaitExecuter wait = new WaitExecuter(driver);
@@ -59,7 +59,5 @@ public class UnravelBuildInfo {
 		}
 		extent.addSystemInfo(map);
 		wait.sleep(1000);
-
 	}
-
 }

@@ -7,7 +7,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
-
+/**
+ * @author Sarbashree Ray
+ * All WebElement which is related with clusters Jobs
+ * is present in this class. Wherever you need to access these page object
+ * create an instance of this class and access the members with that object.
+ */
 public class JobsPageObject {
 
     @FindBy(css = "div#highcharts-bpp6qdh-101.highcharts-container svg.highcharts-root g.highcharts-label.highcharts-no-data text tspan")

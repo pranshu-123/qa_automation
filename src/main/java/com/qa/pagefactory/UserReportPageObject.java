@@ -7,10 +7,17 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
+/**
+ * @author Sarbashree Ray
+ * All date User report related webelements of unravel ui
+ * is present in this class. Wherever you need to access these page object
+ * encapsulates  an instance of this class and access the members with that object.
+ */
+
 public class UserReportPageObject {
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[1]/h1")
-    public  List<WebElement>  HeaderElement;
+    public List<WebElement> HeaderElement;
 
     @FindBy(xpath = "//div[@class='row']//a/span[text()='Schedule User Report']")
     public WebElement scheduleuserreportButton;
@@ -29,7 +36,7 @@ public class UserReportPageObject {
      * @param driver The driver that will be used to look up the elements
      */
     public UserReportPageObject(WebDriver driver) {
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
     }
-    }
+}
 

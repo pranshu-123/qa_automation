@@ -16,14 +16,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+/**
+ * @author Sarbashree Ray
+ */
 public class CUR01 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(CUR01.class);
 
     @Test(dataProvider = "clusterid-data-provider")
     public void CUR01_Verifyscheduleuserreport(String clusterId) {
         test = extent.startTest("CUR01.Verifyscheduleuserreport", "Verify schedule user report is working fine");
-        test.assignCategory("4620 Cluster - User Report");
+        test.assignCategory(" Cluster - User Report");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
 
         UserReportPageObject userReportPageObject = new UserReportPageObject(driver);

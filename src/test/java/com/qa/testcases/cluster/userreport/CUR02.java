@@ -11,14 +11,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+/**
+ * @author Sarbashree Ray
+ */
 public class CUR02 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(CUR02.class);
 
     @Test(dataProvider = "clusterid-data-provider")
     public void CUR02_Verifyspecialcharacter(String clusterId) {
         test = extent.startTest("CUR02_Verifyspecialcharacter", "Verify in schedule name accepts special character and numerical value");
-        test.assignCategory("4620 Cluster - User Report");
+        test.assignCategory("Cluster - User Report");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
 
         UserReportPageObject userReportPageObject = new UserReportPageObject(driver);

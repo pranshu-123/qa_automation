@@ -39,7 +39,9 @@ public class Jobs {
         jobsPageObject = new JobsPageObject(driver);
     }
 
-
+    /**
+     * This method clear the filter present on Jobs page
+     */
     public List<String> getAllDefaultSelectedFilterElements() {
         waitExecuter.sleep(3000);
         jobsPageObject.filterInput.click();
@@ -52,7 +54,9 @@ public class Jobs {
         }
         return listOfAllDefaultFilterElements;
     }
-
+    /**
+     * This method verify jobs Header on Jobs page
+     */
     public boolean verifyjobsHeaderisDisplayed() {
         System.out.println(jobsPageObject.clusterResourcesTab.getText());
         try {
@@ -87,7 +91,9 @@ public class Jobs {
         }
         return dateLabels;
     }
-
+    /**
+     * This method verify the filter present on Jobs page
+     */
     public boolean verifyStateFilter() {
 
         List<String> defineListOfJobsApp = Arrays.asList("ACCEPTED", "RUNNING", "NEW");
@@ -98,7 +104,9 @@ public class Jobs {
         }
         return false;
     }
-
+    /**
+     * This method verify the Group By DropDown present on Jobs page
+     */
     public boolean clickOnGroupByDropDown() {
         try {
             waitExecuter.waitUntilElementPresent(jobsPageObject.groupByDropdownButton);
@@ -109,7 +117,9 @@ public class Jobs {
         }
         return false;
     }
-
+    /**
+     * This method verify the ApplicationType present on Jobs page
+     */
     public boolean selectApplicationType() {
         try {
             waitExecuter.waitUntilElementPresent(jobsPageObject.groupByAppType);
@@ -120,7 +130,9 @@ public class Jobs {
         }
         return false;
     }
-
+    /**
+     * This method verify the select User present on Jobs page
+     */
     public boolean selectUser() {
         try {
             waitExecuter.waitUntilElementPresent(jobsPageObject.groupByUser);
@@ -131,7 +143,9 @@ public class Jobs {
         }
         return false;
     }
-
+    /**
+     * This method verify the select Queue present on Jobs page
+     */
     public boolean selectQueue() {
         try {
             waitExecuter.waitUntilElementPresent(jobsPageObject.groupByQueue);
@@ -142,7 +156,9 @@ public class Jobs {
         }
         return false;
     }
-
+    /**
+     * This method verify the select State present on Jobs page
+     */
     public boolean selectState() {
         try {
             waitExecuter.waitUntilElementPresent(jobsPageObject.groupByState);
@@ -154,13 +170,9 @@ public class Jobs {
         return false;
     }
 
-    public void clickOnGroupBySearchBox() {
-        // Click on yarn chargeback group by combobox
-        waitExecuter.sleep(1000);
-        jobsPageObject.groupBySearchBox.click();
-    }
-
-
+    /**
+     * This method verify deselect GroupBy Filters on Jobs page
+     */
     public boolean deselectGroupByFilters() {
         try {
             int countChargeBackDrill = jobsPageObject.listChargeBackDrillFromGroupByFilters.size();

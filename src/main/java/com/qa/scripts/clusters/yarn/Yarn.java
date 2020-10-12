@@ -15,20 +15,20 @@ import java.util.logging.Logger;
 
 /**
  * @author Briender Kumar
+ * This class contains all Yarn related action methods
  */
 
 public class Yarn {
-
     private WaitExecuter waitExecuter;
     private WebDriver driver;
     private YarnPageObject yarnPageObject;
     private static final Logger LOGGER = Logger.getLogger(Yarn.class.getName());
-
     List<String> listOfAllFilterElements = new ArrayList<String>();
+
     /**
      * Constructor to initialize wait, driver and necessary objects
-     * @param driver
-     * - WebDriver instance
+     *
+     * @param driver - WebDriver instance
      */
     public Yarn(WebDriver driver) {
         waitExecuter = new WaitExecuter(driver);
@@ -36,38 +36,44 @@ public class Yarn {
         yarnPageObject = new YarnPageObject(driver);
     }
 
+    /* Check for Group Drop Down */
     public void verifyGroupByDropDownIsPresent(){
         waitExecuter.waitUntilElementPresent(yarnPageObject.groupByDropdownButton);
         MouseActions.clickOnElement(driver, yarnPageObject.groupByDropdownButton);
         waitExecuter.waitUntilElementPresent(yarnPageObject.groupByUser);
     }
 
+    /* Check for Yarn Resource header is displayed */
     public void verifyYarnResourceHeaderisDisplayed(){
-        System.out.println(yarnPageObject.clusterResourcesTab.getText());
+        LOGGER.info("Cluster Resources Tab text: "+yarnPageObject.clusterResourcesTab.getText());
         waitExecuter.waitUntilElementClickable(yarnPageObject.clusterResourcesTab);
         JavaScriptExecuter.clickOnElement(driver, yarnPageObject.clusterResourcesTab);
         waitExecuter.waitUntilElementPresent(yarnPageObject.getResourcesPageHeader);
-        Log.info("Yarn Page Header is: "+yarnPageObject.getResourcesPageHeader.getText());
+        LOGGER.info("Yarn Page Header is: "+yarnPageObject.getResourcesPageHeader.getText());
     }
 
+    /* Click on Group dropdown */
     public void clickOnGroupByDropDown(){
         waitExecuter.waitUntilElementPresent(yarnPageObject.groupByDropdownButton);
         waitExecuter.sleep(5000);
         yarnPageObject.groupByDropdownButton.click();
     }
 
+    /* Select Application Type */
     public void selectApplicationType(){
         waitExecuter.waitUntilElementPresent(yarnPageObject.groupByApplicationType);
         waitExecuter.sleep(2000);
         yarnPageObject.groupByApplicationType.click();
     }
 
+    /* Select User */
     public void selectUser(){
         waitExecuter.waitUntilElementPresent(yarnPageObject.groupByUser);
         waitExecuter.sleep(2000);
         yarnPageObject.groupByUser.click();
     }
 
+    /* Select Queue */
     public void selectQueue(){
         waitExecuter.waitUntilElementPresent(yarnPageObject.groupByQueue);
         waitExecuter.sleep(2000);
@@ -75,6 +81,7 @@ public class Yarn {
 
     }
 
+    /* Select Department */
     public void selectDept(){
         waitExecuter.waitUntilElementPresent(yarnPageObject.groupByDept);
         waitExecuter.sleep(2000);
@@ -82,12 +89,14 @@ public class Yarn {
 
     }
 
+    /* Select Project */
     public void selectProject(){
         waitExecuter.waitUntilElementPresent(yarnPageObject.groupByProject);
         waitExecuter.sleep(2000);
         yarnPageObject.groupByProject.click();
     }
 
+    /* Select Real User */
     public void selectRealUser(){
         waitExecuter.waitUntilElementPresent(yarnPageObject.groupByRealUser);
         waitExecuter.sleep(2000);
@@ -95,13 +104,14 @@ public class Yarn {
 
     }
 
+    /* Select DBS */
     public void selectDbs(){
         waitExecuter.waitUntilElementPresent(yarnPageObject.groupBydbs);
         waitExecuter.sleep(2000);
         yarnPageObject.groupBydbs.click();
-
     }
 
+    /* Select InputTable */
     public void selectInputTables(){
         waitExecuter.waitUntilElementPresent(yarnPageObject.groupByInputTables);
         waitExecuter.sleep(2000);
@@ -109,6 +119,7 @@ public class Yarn {
 
     }
 
+    /* Get list of default filter elements */
     public List<String> getAllDefaultSelectedFilterElements(){
         waitExecuter.sleep(3000);
         yarnPageObject.filterInput.click();
@@ -122,6 +133,7 @@ public class Yarn {
         return listOfAllDefaultFilterElements;
     }
 
+    /* Get list of all filter elements */
     public List<String> getAllFilterElements(){
         waitExecuter.sleep(3000);
         yarnPageObject.filterInput.click();
@@ -135,6 +147,7 @@ public class Yarn {
         return listOfAllFilterElements;
     }
 
+    /* Verify filter elements */
     public boolean verifyFilterElements(){
         List<String> defineListOfYarnApp = Arrays.asList("MAPREDUCE","SPARK","TEZ");
         boolean boolYarnApp = defineListOfYarnApp.containsAll(listOfAllFilterElements);
@@ -152,18 +165,17 @@ public class Yarn {
         }
     }
 
+    /* Check for Vcores Graph */
     public Boolean isVCoresGraphPresent() {
         if (yarnPageObject.vcoresSVGGraph.isDisplayed()) {
             if (yarnPageObject.vcoresTotalAllocatedChkBox.isDisplayed()) {
                 waitExecuter.sleep(1000);
                 String vcoreTotalAllocatedText = yarnPageObject.vcoresTotalAllocatedChkBox.getText();
                 LOGGER.info("The VCores TotalAllocated graph is being displayed for nodes: " + vcoreTotalAllocatedText);
-                System.out.println("The VCores TotalAllocated graph is being displayed for nodes: " + vcoreTotalAllocatedText);
                 if (yarnPageObject.vcoresTotalAvailableChkBox.isDisplayed()) {
                     waitExecuter.sleep(1000);
                     String vcoreTotalAvailableText = yarnPageObject.vcoresTotalAvailableChkBox.getText();
                     LOGGER.info("The VCores TotalAvailable graph is being displayed for nodes: " + vcoreTotalAvailableText);
-                    System.out.println("The VCores TotalAvailable graph is being displayed for nodes: " + vcoreTotalAvailableText);
 
                     return true;
                 }
@@ -174,19 +186,17 @@ public class Yarn {
         return false;
     }
 
+    /* Check for Memory Graph */
     public Boolean isMemoryGraphPresent() {
         if(yarnPageObject.memorySVGGraph.isDisplayed()){
             if( yarnPageObject.memoryTotalAllocatedChkBox.isDisplayed()){
                 waitExecuter.sleep(1000);
                 String memoryTotalAllocatedText = yarnPageObject.memoryTotalAllocatedChkBox.getText();
                 LOGGER.info("The Memory TotalAllocated graph is being displayed for nodes: " + memoryTotalAllocatedText);
-                System.out.println("The Memory TotalAllocated graph is being displayed for nodes: " + memoryTotalAllocatedText);
                 if(yarnPageObject.memoryTotalAvailableChkBox.isDisplayed()){
                     waitExecuter.sleep(1000);
                     String memoryTotalAvailableText = yarnPageObject.memoryTotalAvailableChkBox.getText();
                     LOGGER.info("The Memory TotalAvailable graph is being displayed for nodes: " + memoryTotalAvailableText);
-                    System.out.println("The Memory TotalAvailable graph is being displayed for nodes: " + memoryTotalAvailableText);
-
                     return true;
                 }
                 return false;
@@ -197,6 +207,7 @@ public class Yarn {
     }
 
 
+    /* Check for Vcores App graph */
     public Boolean isVCoresApplicationGraphPresent(List<String> allDefaultFilterElement) {
 
         List<WebElement> parentVCoresNodeList = yarnPageObject.vcoreApplicationChkBoxList;
@@ -208,7 +219,6 @@ public class Yarn {
                 vcoresNodeListText.add(text);
             }
             LOGGER.info("The vcores graph is being displayed for nodes: " + vcoresNodeListText);
-            System.out.println("The vcores graph is being displayed for nodes: " + vcoresNodeListText);
 
             if(compareList(allDefaultFilterElement,vcoresNodeListText)){
                 return true;
@@ -218,6 +228,7 @@ public class Yarn {
         return  false;
     }
 
+    /* Check for Memory App graph */
     public Boolean isMemoryApplicationGraphPresent(List<String> allDefaultFilterElement) {
 
         List<WebElement> parentMemoryNodeList = yarnPageObject.memoryApplicationChkBoxList;
@@ -229,7 +240,6 @@ public class Yarn {
                 memoryNodeListText.add(text);
             }
             LOGGER.info("The memory graph is being displayed for nodes: " + memoryNodeListText);
-            System.out.println("The memory graph is being displayed for nodes: " + memoryNodeListText);
 
             if(compareList(allDefaultFilterElement,memoryNodeListText)){
                 return true;
@@ -239,7 +249,7 @@ public class Yarn {
         return  false;
     }
 
-
+    /* Check for comparison two list */
     public  boolean compareList(List ls1, List ls2){
         return ls1.containsAll(ls2) && ls1.size() == ls2.size() ? true :false;
     }

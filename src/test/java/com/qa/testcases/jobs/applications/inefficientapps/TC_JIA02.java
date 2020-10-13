@@ -14,9 +14,9 @@ public class TC_JIA02 extends BaseClass {
      * Verify Custom Range in datepicker
      */
     @Test(dataProvider = "clusterid-data-provider")
-    public void TC_JIA01_verifyCustomRangeDatePicker(String clusterId) {
-        test = extent.startTest("TC_JIA01_verifyCustomRangeDatePicker" + clusterId, "Verify the calender time");
-        test.assignCategory("4620 Jobs / InEfficient Apps");
+    public void verifyCustomRangeDatePicker(String clusterId) {
+        test = extent.startTest("TC_JIA02.verifyCustomRangeDatePicker" + clusterId, "Verify the calender time");
+        test.assignCategory(" Jobs / InEfficient Apps");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         test.log(LogStatus.PASS, "Passed Parameter Is : " + clusterId);

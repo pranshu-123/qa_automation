@@ -23,29 +23,37 @@ public class YR_010 extends BaseClass {
         test.assignCategory("4620 Cluster - Yarn Resources");
         Log.startTestCase("YR_010_verifyYarnResourcePageForGroupByDropDownAndItFields");
 
-        //Initialize Yarn Page Object
-        YarnPageObject yarnPageObject = new YarnPageObject(driver);
-        System.out.println(yarnPageObject.clusterResourcesTab.getText());
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        waitExecuter.waitUntilElementClickable(yarnPageObject.clusterResourcesTab);
-        JavaScriptExecuter.clickOnElement(driver, yarnPageObject.clusterResourcesTab);
-        waitExecuter.waitUntilElementPresent(yarnPageObject.getResourcesPageHeader);
-        Log.info("Yarn Page Header is: "+yarnPageObject.getResourcesPageHeader.getText());
+        YarnPageObject yarnPageObject = new YarnPageObject(driver);
 
+        //Initialize Yarn Page Object
+        Yarn yarn = new Yarn(driver);
+        yarn.verifyYarnResourceHeaderisDisplayed();
+        Log.info("Yarn Resource Header is displayed.");
+        test.log(LogStatus.INFO, "Yarn Resource Header is displayed.");
+
+        //Select cluster id
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
         Log.info("ClusterId is selected: "+clusterId);
+        test.log(LogStatus.INFO, "Cluster Id selected"+clusterId);
 
+        //Select date
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();
+        waitExecuter.waitUntilPageFullyLoaded();
         Log.info("DatePicker is selected for last30 Days");
+        test.log(LogStatus.INFO, "Date is selected from DatePicker");
 
-        Yarn yarn = new Yarn(driver);
-        yarn.verifyGroupByDropDownIsPresent();
-        Log.info("Group By DropDown is verified");
-
-        test.log(LogStatus.INFO, "Group By DropDown is verified");
+        //Verify GroupBy drop down and its elements
+        waitExecuter.waitUntilElementClickable(yarnPageObject.groupByDropdownButton);
+        waitExecuter.sleep(5000);
+        yarnPageObject.groupByDropdownButton.click();
+        int allGroupByDropDownElements = yarnPageObject.getGroupByDropdownElements.size();
+        System.out.println("Elements in Group By DropDown: "+allGroupByDropDownElements);
+        Log.info("Group By DropDown is verified, total elements found :"+allGroupByDropDownElements);
+        test.log(LogStatus.INFO, "Group By DropDown is verified, total elements found :"+allGroupByDropDownElements);
         Log.endTestCase("YR_010_verifyYarnResourcePageForGroupByDropDownAndItFields");
 
     }

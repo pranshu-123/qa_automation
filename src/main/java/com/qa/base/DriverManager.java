@@ -68,7 +68,8 @@ public class DriverManager {
 
     //chrome option setting for downloadFile
     //String downloadFilePath = prop.getProperty("downloadFilePath");
-    File folderUUID = FileUtils.createRandomUUIDDirectory();
+    //File folderUUID = FileUtils.createRandomUUIDDirectory();
+    File folderUUID = FileUtils.createDownloadsFolder();
 
     HashMap<String, Object> chromePref = new HashMap<String, Object>();
     chromePref.put("profile.default_content_settings.popups", 0);
@@ -93,7 +94,8 @@ public class DriverManager {
 
     //chrome option setting for downloadFile
     //String downloadFilePath = prop.getProperty("downloadFilePath");
-    File folderUUID = FileUtils.createRandomUUIDDirectory();
+    //File folderUUID = FileUtils.createRandomUUIDDirectory();
+    File folderUUID = FileUtils.createDownloadsFolder();
 
     HashMap<String, Object> fireFoxPref = new HashMap<String, Object>();
     fireFoxPref.put("profile.default_content_settings.popups", 0);

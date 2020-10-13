@@ -24,24 +24,26 @@ public class YR_012 extends BaseClass {
         Yarn yarn = new Yarn(driver);
         yarn.verifyYarnResourceHeaderisDisplayed();
         Log.info("Yarn Resource Header is displayed.");
+        test.log(LogStatus.INFO, "Yarn Resource Header is displayed.");
 
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
         Log.info("ClusterId is selected: " + clusterId);
+        test.log(LogStatus.INFO, "ClusterId is selected: " + clusterId);
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();
         Log.info("DatePicker is selected for last30 Days");
+        test.log(LogStatus.INFO, "Date is selected from DatePicker");
 
         yarn.clickOnGroupByDropDown();
         Log.info("Click on GroupByDropDown.");
         yarn.selectApplicationType();
         Log.info("Selected Application Type, from dropdown.");
+        test.log(LogStatus.INFO, "Selected Application Type, from dropdown.");
 
-        yarn.verifyFilterElements();
         Log.info("Verify Filter elements.");
-
         Assert.assertTrue(yarn.verifyFilterElements(),"Filter Elements do not have Yarn applications.");
         test.log(LogStatus.INFO,"Verified Filter Elements on Yarn Resource Page. ");
         Log.endTestCase("YR_012_verifyYarnResourcePageShowOnlyYarnApp");

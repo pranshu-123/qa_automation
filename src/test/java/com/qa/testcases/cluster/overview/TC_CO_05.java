@@ -7,7 +7,9 @@ import com.qa.scripts.HomePage;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+/**
+ * @author Birender Kumar
+ */
 public class TC_CO_05 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
@@ -27,7 +29,7 @@ public class TC_CO_05 extends BaseClass {
         // Click on custom range
         datePicker.selectCustomRange();
         datePicker.datePickerPageObject.customRangeStartDate.sendKeys("08/07/2020");
-        datePicker.datePickerPageObject.customRangeStartDate.sendKeys("08/08/2020");
+        datePicker.datePickerPageObject.customRangeEndDate.sendKeys("08/08/2020");
         datePicker.clickOnCustomDateApplyBtn();
         test.log(LogStatus.PASS, "Successfully clicked on custom date range Apply button.");
 

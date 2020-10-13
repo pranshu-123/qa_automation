@@ -11,6 +11,8 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class TC_CB_29 extends BaseClass {
     private WaitExecuter waitExecuter;
     private ChargeBackImpala chargebackImpala;
@@ -46,7 +48,7 @@ public class TC_CB_29 extends BaseClass {
         waitExecuter.sleep(1000);
         picker.clickOnDatePicker();
         waitExecuter.sleep(1000);
-        picker.selectThisMonth();
+        picker.selectLastOneHour();
         waitExecuter.sleep(1000);
         chargebackImpalaPageObject.groupBySearchBox.click();
         waitExecuter.sleep(1000);

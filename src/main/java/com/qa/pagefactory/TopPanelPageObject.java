@@ -60,6 +60,13 @@ public class TopPanelPageObject {
     "ul[contains(@class,'sub-menu')]//li/span[contains(text(),'Impala')]")
   public WebElement impalaTab;
 
+  @FindBy(xpath = "//li[contains(@class,'active')]/" +
+          "ul[contains(@class,'sub-menu')]//li/span[contains(text(),'Overview')]")
+  public WebElement overviewTab;
+
+  @FindBy(xpath = "//li[contains(@class,'active')]/" +
+          "ul[contains(@class,'sub-menu')]//li/span[contains(text(),'Top X')]")
+  public WebElement topXTab;
   /**
    * @param driver The driver that will be used to look up the elements
    */

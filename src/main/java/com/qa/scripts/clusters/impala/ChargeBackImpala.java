@@ -1,6 +1,5 @@
 package com.qa.scripts.clusters.impala;
 
-import com.qa.pagefactory.CommonPageObject;
 import com.qa.pagefactory.clusters.ChargebackImpalaPageObject;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
@@ -15,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
+
+import static org.testng.Assert.assertEquals;
 
 /**
  * @author Ankur Jaiswal This class contains all impala Chargeback related
@@ -99,12 +100,11 @@ public class ChargeBackImpala {
         ArrayList<String> listOfGroupByOptions = new ArrayList<String>();
         // Itterate Webelement list to get the value of each element
         for (int i = 0; i < listOfWebElemnts.size(); i++) {
-            listOfGroupByOptions.add(listOfWebElemnts.get(i).getText());
+            listOfGroupByOptions.add(listOfWebElemnts.get(i).getText().toLowerCase());
         }
-        List<String> definedGroupByOption = Arrays.asList("User", "Real User", "Queue", "Department", "Priority",
-                "team", "project", "realUser", "dBs");
+        List<String> definedGroupByOption = Arrays.asList("user", "real user", "queue");
         LOGGER.info("Actual ist of options" + listOfGroupByOptions);
-        Boolean compareGroupByOptions = listOfGroupByOptions.equals(definedGroupByOption);
+        Boolean compareGroupByOptions = listOfGroupByOptions.containsAll(definedGroupByOption);
         LOGGER.info("Expected list of options" + definedGroupByOption);
         return compareGroupByOptions;
 
@@ -141,40 +141,56 @@ public class ChargeBackImpala {
     }
 
 
-    public void selectgroupby() {
+    public boolean selectgroupby() {
         waitExecuter.waitUntilElementPresent(chargebackImpalaPageObject.realUser);
         chargebackImpalaPageObject.realUser.click();
+        waitExecuter.sleep(3000);
+        return false;
     }
 
-    public void selecttable() {
+    public boolean selecttable() {
         waitExecuter.waitUntilElementPresent(chargebackImpalaPageObject.selectgroup);
         chargebackImpalaPageObject.selectgroup.click();
+        waitExecuter.sleep(3000);
+        return false;
     }
 
-    public void selectQueuetable() {
+    public boolean selectQueuetable() {
         waitExecuter.waitUntilElementPresent(chargebackImpalaPageObject.selectQueue);
         chargebackImpalaPageObject.selectQueue.click();
+        waitExecuter.sleep(3000);
+        return false;
     }
 
-    public void selectdepttable() {
+    public boolean selectdepttable() {
         waitExecuter.waitUntilElementPresent(chargebackImpalaPageObject.selectdept);
         chargebackImpalaPageObject.selectdept.click();
+        waitExecuter.sleep(3000);
+        return false;
     }
 
-    public void selectgrouptable() {
+    public boolean selectgrouptable() {
         waitExecuter.waitUntilElementPresent(chargebackImpalaPageObject.selectprojectgroup);
         chargebackImpalaPageObject.selectprojectgroup.click();
+        waitExecuter.sleep(3000);
+        return false;
     }
 
-    public void selectrealUsertable() {
+    public boolean selectrealUsertable() {
         waitExecuter.waitUntilElementPresent(chargebackImpalaPageObject.selectrealUser);
         chargebackImpalaPageObject.selectrealUser.click();
+        waitExecuter.sleep(3000);
+        return false;
     }
 
-    public void selectdbstable() {
+    public boolean selectdbstable() {
         waitExecuter.waitUntilElementPresent(chargebackImpalaPageObject.selectdbs);
         chargebackImpalaPageObject.selectdbs.click();
+
+        waitExecuter.sleep(3000);
+        return false;
     }
+
 
     public void selectinputtables() {
         waitExecuter.waitUntilElementPresent(chargebackImpalaPageObject.selectinput);
@@ -406,10 +422,14 @@ public class ChargeBackImpala {
         List<Double> userCosts = new ArrayList<Double>();
         for (int i = 0; i < getAllUsersCPUHoursCosts.size(); i++) {
             String indivualcost = getAllUsersCPUHoursCosts.get(i).getText();
+            LOGGER.info("cpu hour cost from chargeback table" +indivualcost);
             String[] splitted = indivualcost.split(" ");
             String trimmedSplitValue = splitted[2];
+            LOGGER.info("Get only CPU hour cost from string" +trimmedSplitValue);
+            String removeCommaFromCost = trimmedSplitValue.replaceAll(",","");
+            LOGGER.info("Remove comma from cost " +trimmedSplitValue);
             // System.out.println(trimmedSplitValue);
-            userCosts.add(Double.parseDouble(trimmedSplitValue));
+            userCosts.add(Double.parseDouble(removeCommaFromCost));
         }
         LOGGER.info("List of CPU costs calculated from table" + userCosts);
         return userCosts;
@@ -519,6 +539,8 @@ public class ChargeBackImpala {
         waitExecuter.waitUntilElementPresent(chargebackImpalaPageObject.JobsFromGraphHeader);
         System.out.println("Total Job Counts: "+getTotalJobCountFromJobsGraphHeader());
         String strTotalJobCountHeader = getTotalJobCountFromJobsGraphHeader();
+        strTotalJobCountHeader= strTotalJobCountHeader.substring(0, strTotalJobCountHeader.length()-1);
+        System.out.println("Total Job Counts after removing last char: "+strTotalJobCountHeader);
         Integer intTotalJobCountHeader = Integer.parseInt(strTotalJobCountHeader);
         System.out.println("Total Job Counts in Integer: "+intTotalJobCountHeader);
         if(intTotalJobCountHeader == 0)
@@ -547,7 +569,8 @@ public class ChargeBackImpala {
         List<WebElement> listChargeBackDrill = chargebackImpalaPageObject.listChargeBackDrillFromGroupByFilters;
 
         for(int i =countChargeBackDrill-1 ; i >= 0; i-- ){
-            listChargeBackDrill.get(i).click();
+            MouseActions.clickOnElement(driver,listChargeBackDrill.get(i));
+            //listChargeBackDrill.get(i).click();
             waitExecuter.sleep(2000);
         }
     }

@@ -29,6 +29,15 @@
 			<class name="com.qa.testcases.cluster.overview.TC_CO_17"/>
 			<class name="com.qa.testcases.cluster.overview.TC_CO_18"/>
 			<class name="com.qa.testcases.cluster.overview.TC_CO_19"/>
+			<class name="com.qa.testcases.cluster.overview.TC_CO_20"/>
+
+
+			<!--Cluster / Job-->
+			<class name="com.qa.testcases.cluster.jobs.TC_CJ_01"/>
+			<class name="com.qa.testcases.cluster.jobs.TC_CJ_02"/>
+			<class name="com.qa.testcases.cluster.jobs.TC_CJ_03"/>
+			<class name="com.qa.testcases.cluster.jobs.TC_CJ_04"/>
+			<class name="com.qa.testcases.cluster.jobs.TC_CJ_05"/>
 
 			<!--Impala Chargeback TC's-->
 			<class name="com.qa.testcases.cluster.impala.chargeback.TC_CB_01"/>
@@ -48,16 +57,16 @@
 			<class name="com.qa.testcases.cluster.impala.chargeback.TC_CB_52"/>
 			<class name="com.qa.testcases.cluster.impala.chargeback.TC_CB_55"/>
 
-<!--			&lt;!&ndash;Yarn Chargeback TC's&ndash;&gt;-->
-<!--			<class name="com.qa.testcases.cluster.yarn.chargeback.YC_019_020"/>-->
-<!--			<class name="com.qa.testcases.cluster.yarn.chargeback.YC_021"/>-->
-<!--			<class name="com.qa.testcases.cluster.yarn.chargeback.YC_022"/>-->
-<!--			<class name="com.qa.testcases.cluster.yarn.chargeback.YC_023"/>-->
-<!--			<class name="com.qa.testcases.cluster.yarn.chargeback.YC_027"/>-->
-<!--			<class name="com.qa.testcases.cluster.yarn.chargeback.YC_028"/>-->
-<!--			<class name="com.qa.testcases.cluster.yarn.chargeback.YC_031"/>-->
-<!--			<class name="com.qa.testcases.cluster.yarn.chargeback.YC_032"/>-->
-<!--			<class name="com.qa.testcases.cluster.yarn.chargeback.YC_033"/>-->
+			<!--Yarn Chargeback TC's-->
+			<class name="com.qa.testcases.cluster.yarn.chargeback.YC_019_020"/>
+			<class name="com.qa.testcases.cluster.yarn.chargeback.YC_021"/>
+			<class name="com.qa.testcases.cluster.yarn.chargeback.YC_022"/>
+			<class name="com.qa.testcases.cluster.yarn.chargeback.YC_023"/>
+			<class name="com.qa.testcases.cluster.yarn.chargeback.YC_027"/>
+			<class name="com.qa.testcases.cluster.yarn.chargeback.YC_028"/>
+			<class name="com.qa.testcases.cluster.yarn.chargeback.YC_031"/>
+			<class name="com.qa.testcases.cluster.yarn.chargeback.YC_032"/>
+			<class name="com.qa.testcases.cluster.yarn.chargeback.YC_033"/>
 
 			<!--Impala Resources TC's-->
 			<class name="com.qa.testcases.cluster.impala.resources.IM_RES_01"/>
@@ -66,6 +75,7 @@
 			<class name="com.qa.testcases.cluster.impala.resources.IM_RES_04"/>
 			<class name="com.qa.testcases.cluster.impala.resources.IM_RES_05"/>
 			<class name="com.qa.testcases.cluster.impala.resources.IM_RES_06"/>
+			<class name="com.qa.testcases.cluster.impala.resources.IM_RES_07"/>
 			<class name="com.qa.testcases.cluster.impala.resources.IM_RES_08"/>
 			<class name="com.qa.testcases.cluster.impala.resources.IM_RES_09"/>
 			<class name="com.qa.testcases.cluster.impala.resources.IM_RES_10"/>
@@ -73,6 +83,7 @@
 			<class name="com.qa.testcases.cluster.impala.resources.IM_RES_12"/>
 			<class name="com.qa.testcases.cluster.impala.resources.IM_RES_13"/>
 			<class name="com.qa.testcases.cluster.impala.resources.IM_RES_14"/>
+			<class name="com.qa.testcases.cluster.impala.resources.IM_RES_15"/>
 			<class name="com.qa.testcases.cluster.impala.resources.IM_RES_16"/>
 			<class name="com.qa.testcases.cluster.impala.resources.IM_RES_17"/>
 			<class name="com.qa.testcases.cluster.impala.resources.IM_RES_18"/>
@@ -80,14 +91,31 @@
 			<class name="com.qa.testcases.cluster.impala.resources.IM_RES_20"/>
 			<class name="com.qa.testcases.cluster.impala.resources.IM_RES_21"/>
 			<class name="com.qa.testcases.cluster.impala.resources.IM_RES_22"/>
+			<class name="com.qa.testcases.cluster.impala.resources.IM_RES_23"/>
 			<class name="com.qa.testcases.cluster.impala.resources.IM_RES_24"/>
+			<class name="com.qa.testcases.cluster.impala.resources.IM_RES_25"/>
 			<class name="com.qa.testcases.cluster.impala.resources.IM_RES_26"/>
 
-<!--			&lt;!&ndash;Yarn Resources TC's&ndash;&gt;-->
-<!--			<class name="com.qa.testcases.cluster.yarn.resources.YR_010"/>-->
-<!--			<class name="com.qa.testcases.cluster.yarn.resources.YR_011"/>-->
-<!--			<class name="com.qa.testcases.cluster.yarn.resources.YR_012"/>-->
-<!--			<class name="com.qa.testcases.cluster.yarn.resources.YR_014"/>-->
+			<!--Yarn Resources TC's-->
+			<class name="com.qa.testcases.cluster.yarn.resources.YR_010"/>
+			<class name="com.qa.testcases.cluster.yarn.resources.YR_011"/>
+			<class name="com.qa.testcases.cluster.yarn.resources.YR_012"/>
+			<class name="com.qa.testcases.cluster.yarn.resources.YR_014"/>
+			<class name="com.qa.testcases.cluster.yarn.resources.YR_017"/>
+			<class name="com.qa.testcases.cluster.yarn.resources.YR_019"/>
+
+			<!--TopX TC's-->
+			<class name="com.qa.testcases.cluster.topx.TC_CTX_20"/>
+			<class name="com.qa.testcases.cluster.topx.TC_CTX_21"/>
+			<class name="com.qa.testcases.cluster.topx.TC_CTX_22"/>
+			<class name="com.qa.testcases.cluster.topx.TC_CTX_23"/>
+
+			<!--Jobs InefficientApps TC's-->
+			<class name="com.qa.testcases.jobs.applications.inefficientapps.TC_JIA01"/>
+			<class name="com.qa.testcases.jobs.applications.inefficientapps.TC_JIA02"/>
+			<class name="com.qa.testcases.jobs.applications.inefficientapps.TC_JIA03"/>
+			<class name="com.qa.testcases.jobs.applications.inefficientapps.TC_JIA04"/>
+			<class name="com.qa.testcases.jobs.applications.inefficientapps.TC_JIA05"/>
 
 
 		</classes>

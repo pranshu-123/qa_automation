@@ -27,6 +27,10 @@ public class CommonPageObject {
   @FindBy(xpath="//span[@class='select2-results']//li")
   public WebElement clusterSearchFirstField;
 
+  @FindBy(xpath = "//span[contains(@class,'select2-dropdown--below')]//li")
+  public List<WebElement> listOfClusters;
+
+
   public CommonPageObject(WebDriver driver) {
     PageFactory.initElements(driver,this);
   }

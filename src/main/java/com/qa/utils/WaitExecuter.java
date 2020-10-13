@@ -12,7 +12,7 @@ public class WaitExecuter {
 
   public WaitExecuter(WebDriver driver) {
     this.driver = driver;
-    wait = new WebDriverWait(driver,30);
+    wait = new WebDriverWait(driver,60);
   }
 
   public void sleep(int milisecs) {
@@ -37,6 +37,10 @@ public class WaitExecuter {
   public void waitUntilPageFullyLoaded() {
     wait.until(
       webDriver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
+  }
+
+  public void waitUntilTextToBeInWebElement(WebElement element, String textValue) {
+    wait.until(ExpectedConditions.textToBePresentInElement(element, textValue));
   }
 
   public void waitUntilNumberOfWindowsToBe(int size) {

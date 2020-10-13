@@ -10,11 +10,14 @@ import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+/**
+ * @author Sarbashree Ray
+ */
 public class TC_CO_18 extends BaseClass
 {
 
@@ -31,19 +34,43 @@ public class TC_CO_18 extends BaseClass
         homePage.selectMultiClusterId(clusterId);
         waitExecuter.sleep(3000);
 
-        // Select this month
+        // Select this 90 Days
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();
+        waitExecuter.sleep(1000);
+
 
         //Click on first alert displayed at homepage
-        JavaScriptExecuter.clickOnElement(driver,homePageObject.firstAlertRow);
+        JavaScriptExecuter.clickOnElement(driver,homePageObject.autoalert);
+        test.log(LogStatus.PASS, "Successfully verified autoaction.");
+        waitExecuter.sleep(3000);
+        JavaScriptExecuter.clickOnElement(driver,homePageObject.newautoalert);
+        waitExecuter.sleep(3000);
+        test.log(LogStatus.PASS, "Successfully verified Add new autoaction.");
 
-        boolean isUrlContainResource = ComponentHelper.isUrlContain(driver,"/clusters/resources");
 
-        Assert.assertTrue(isUrlContainResource,"Url does not contain resources path");
-        test.log(LogStatus.PASS, "Url contains the resources path");
+        try {
+            String parentWindow = driver.getWindowHandle();
+            waitExecuter.sleep(3000);
+            test.log(LogStatus.PASS, "Validate window is opened by clicking at New Auto Action Policy.");
+            System.out.println(driver.getCurrentUrl());
+            for (String window : driver.getWindowHandles()) {
+                if (!window.equals(parentWindow)) {
+                    driver.switchTo().window(window);
+                    Assert.assertTrue(driver.getCurrentUrl().contains("/alerts/autoaction/add"), "application is not redirected on clicking on New Auto Action Policy.");
+                    test.log(LogStatus.PASS, "Validate application is redirected by clicking at New Auto Action Policy.");
+                    driver.close();
+                }
+            }
+            driver.switchTo().window(parentWindow);
+        } catch (TimeoutException te) {
+            Assert.assertTrue(false,"Validate does not contain Auto Actions");
+        }
+
 
     }
-}
+
+    }
+
 

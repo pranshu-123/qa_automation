@@ -36,10 +36,11 @@ public class TC_CO_13 extends BaseClass {
         //Default validate the Running graph
         test.log(LogStatus.INFO, "Running and accepted check box checked and validate the running graph");
         OverviewGraphPageObject overviewGraph = new OverviewGraphPageObject(driver);
-        int scrollY = 300;
+        int scrollY = 370;
         JavaScriptExecuter.scrollViewWithYAxis(driver,scrollY);
-
+        executer.sleep(3000);
         File screenshot = ScreenshotHelper.takeScreenshotOfElement(driver,overviewGraph.runningGraph, scrollY);
+
         ScreenshotHelper.saveFileToLocation(screenshot, DirectoryConstants.getScreenshotDir() + screenshot.getName());
         test.log(LogStatus.INFO, test.addScreenCapture(DirectoryConstants.getScreenshotDir() + screenshot.getName()));
 
@@ -49,16 +50,17 @@ public class TC_CO_13 extends BaseClass {
 
         Assert.assertTrue(ScreenshotHelper.isContainColor(screenshot, GraphColorConstants.RunningGraph.ACCEPTED_COLOR),
                 "Running accepted graph is not loaded.");
+        executer.sleep(3000);
         test.log(LogStatus.PASS, "Running accepted graph is loaded.");
 
         //Uncheck the running checkBox, and validate accepted graph
-        overviewGraph.runningChkBoxText.click();
+        JavaScriptExecuter.clickOnElement(driver,overviewGraph.runningChkBoxText);
         executer.sleep(2000);
         test.log(LogStatus.INFO, "Uncheck running check box.");
         executer.sleep(2000);
         test.log(LogStatus.INFO, "Uncheck running check box and validate the accepted graph");
         executer.sleep(1000);
-        screenshot = ScreenshotHelper.takeScreenshotOfElement(driver,overviewGraph.runningGraph,0);
+        screenshot = ScreenshotHelper.takeScreenshotOfElement(driver,overviewGraph.runningGraph,scrollY);
         ScreenshotHelper.saveFileToLocation(screenshot, DirectoryConstants.getScreenshotDir() + screenshot.getName());
         test.log(LogStatus.INFO, test.addScreenCapture(DirectoryConstants.getScreenshotDir() + screenshot.getName()));
         Assert.assertTrue(ScreenshotHelper.isContainColor(screenshot, GraphColorConstants.RunningGraph.ACCEPTED_COLOR),
@@ -66,14 +68,14 @@ public class TC_CO_13 extends BaseClass {
         test.log(LogStatus.PASS, "Accepted graph is loaded after deselecting running checkbox.");
 
         //Check the running checkBox and uncheck accepted check-box and validate running graph
-        overviewGraph.runningChkBoxText.click();
+        JavaScriptExecuter.clickOnElement(driver,overviewGraph.runningChkBoxText);
         executer.sleep(2000);
-        overviewGraph.acceptedChkBoxText.click();
+        JavaScriptExecuter.clickOnElement(driver,overviewGraph.acceptedChkBoxText);
         test.log(LogStatus.INFO, "Check running check box and unchecked accepted checkbox.");
         executer.sleep(2000);
         test.log(LogStatus.INFO, "Uncheck accepted check box and validate the running graph.");
         executer.sleep(1000);
-        screenshot = ScreenshotHelper.takeScreenshotOfElement(driver,overviewGraph.runningGraph,0);
+        screenshot = ScreenshotHelper.takeScreenshotOfElement(driver,overviewGraph.runningGraph,scrollY);
         ScreenshotHelper.saveFileToLocation(screenshot, DirectoryConstants.getScreenshotDir() + screenshot.getName());
         test.log(LogStatus.INFO, test.addScreenCapture(DirectoryConstants.getScreenshotDir() + screenshot.getName()));
         Assert.assertTrue(ScreenshotHelper.isContainColor(screenshot, GraphColorConstants.RunningGraph.RUNNING_COLOR),

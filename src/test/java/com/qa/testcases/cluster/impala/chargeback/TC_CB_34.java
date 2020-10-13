@@ -8,7 +8,9 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+/**
+ * @author Birender Kumar
+ */
 public class TC_CB_34 extends BaseClass {
 
     /**
@@ -41,8 +43,10 @@ public class TC_CB_34 extends BaseClass {
             chargeBackImpala.clickOnGroupBySearchBox();
             //chargeBackImpala.verifyNumberOfOptionsInGroupBy();
             int totalOptionInGroupBy =  chargeBackImpala.getNumberOfOptionsInGroupBy();
-            for(int i =0 ; i<= totalOptionInGroupBy -1; i++){
+            System.out.println("Toal number of GroupBy Options: "+totalOptionInGroupBy);
+            for(int i =0 ; i< totalOptionInGroupBy-2; i++){
                 chargeBackImpala.click1Row1ColumnFromGroupByTable();
+                waitExecuter.waitUntilPageFullyLoaded();
             }
             chargeBackImpala.deselectGroupByFilters();
             test.log(LogStatus.PASS, "Validate the user is able to deselect the filters.");

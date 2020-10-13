@@ -9,7 +9,9 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+/**
+ * @author Birender Kumar
+ */
 public class TC_CO_17 extends BaseClass {
 
     private WaitExecuter waitExecuter;

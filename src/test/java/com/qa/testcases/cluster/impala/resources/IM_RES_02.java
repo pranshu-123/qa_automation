@@ -10,6 +10,8 @@ import com.qa.scripts.clusters.impala.Impala;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+
+import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.util.logging.Logger;
@@ -24,6 +26,7 @@ public class IM_RES_02 extends BaseClass {
 	private ImpalaPageObject impalaPageObject;
 	private DatePicker picker;
 	private Parameter param;
+	private HomePage homePage;
 	private DatePickerPageObject datePickerPageObject;
 	private static final Logger LOGGER = Logger.getLogger(IM_RES_02.class.getName());
 
@@ -41,7 +44,7 @@ public class IM_RES_02 extends BaseClass {
 		picker = new DatePicker(driver);
 		impala = new Impala(driver);
 		datePickerPageObject = new DatePickerPageObject(driver);
-		HomePage homePage = new HomePage(driver);
+		homePage = new HomePage(driver);
 		impalaPageObject = new ImpalaPageObject(driver);
 
 		// Select impala tab
@@ -69,7 +72,6 @@ public class IM_RES_02 extends BaseClass {
 		waitExecuter.sleep(1000);
 		picker.selectCustomRange();
 		waitExecuter.sleep(1000);
-
 		// Set start date in calendar
 		LOGGER.info("Set the start date");
 		test.log(LogStatus.INFO, "Set the custom date in date picker");
@@ -83,17 +85,21 @@ public class IM_RES_02 extends BaseClass {
 		impalaPageObject.customRangeEndDate.clear();
 		impalaPageObject.customRangeEndDate.sendKeys(param.impalaResourceEndDate);
 		waitExecuter.sleep(1000);
+		
 		// Click apply button
 		LOGGER.info("Click on apply button");
 		test.log(LogStatus.INFO, "Click on apply button");
-		if (impalaPageObject.applyBtnImpalaDatePicker.isDisplayed()) {
-			//waitExecuter.waitUntilElementClickable(impalaPageObject.applyBtnImpalaDatePicker);
-			JavaScriptExecuter.clickOnElement(driver, impalaPageObject.applyBtnImpalaDatePicker);
-			waitExecuter.sleep(1000);
-		} else
+		try {
+			if (impalaPageObject.applyBtnImpalaDatePicker.isDisplayed()) {
+				// waitExecuter.waitUntilElementClickable(impalaPageObject.applyBtnImpalaDatePicker);
+				JavaScriptExecuter.clickOnElement(driver, impalaPageObject.applyBtnImpalaDatePicker);
+				waitExecuter.sleep(1000);
+			}
+		} catch (NoSuchElementException exception) {
 			JavaScriptExecuter.clickOnElement(driver, impalaPageObject.applyBtn);
-		waitExecuter.sleep(1000);
-		
+			waitExecuter.sleep(1000);
+		}
+
 		// Verify if memory graph is present
 		LOGGER.info("Verify if memory graph is present");
 		test.log(LogStatus.INFO, "Verify if memory graph is present");

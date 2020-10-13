@@ -7,9 +7,12 @@ import com.qa.utils.WaitExecuter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  * @author Ankur Jaiswal
@@ -260,4 +263,14 @@ public class DatePicker {
             return false;
     }
 
+    /**
+     * This method used to get DatePicker options
+     */
+    public List<String> getDatePickerOptions() {
+        List<String> list = new ArrayList<>();
+        for (WebElement element : datePickerPageObject.dateRangeOptions) {
+            list.add(element.getText());
+        }
+        return list;
+    }
 }

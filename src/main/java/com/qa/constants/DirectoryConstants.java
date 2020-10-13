@@ -12,7 +12,10 @@ public class DirectoryConstants {
   public static final String CONFIG = "config";
   public static final String RESULT = "result";
   public static final String EXTENT = "extent";
+  public static final String ARCHIVE = "archive";
   public static final String SCREENSHOTS = "screenshots";
+  public static final String DOWNLOADSFOLDER = "downloadsFolder";
+
 
   public static String getUserDir() {
     return System.getProperty("user.dir");
@@ -28,7 +31,15 @@ public class DirectoryConstants {
     return getUserDir() + File.separator + RESULT + File.separator + EXTENT + File.separator;
   }
 
+  public static String getExtentArchiveDir() {
+    return getUserDir() + File.separator + RESULT + File.separator + EXTENT + File.separator +
+      ARCHIVE + File.separator;
+  }
+
   public static String getScreenshotDir() {
     return getUserDir() + File.separator + SCREENSHOTS + File.separator;
   }
+
+  public static String getDownloadsDir() { return getUserDir()+ File.separator + DOWNLOADSFOLDER ;}
+
 }

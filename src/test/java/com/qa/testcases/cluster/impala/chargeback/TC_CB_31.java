@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.impala.chargeback;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.clusters.ChargebackImpalaPageObject;
 import com.qa.scripts.DatePicker;
@@ -12,6 +13,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
+@Marker.Smoke
 public class TC_CB_31 extends BaseClass {
 	private WaitExecuter waitExecuter;
 	private ChargeBackImpala chargebackImpala;

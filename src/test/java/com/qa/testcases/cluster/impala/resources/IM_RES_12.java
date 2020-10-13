@@ -30,6 +30,7 @@ public class IM_RES_12 extends BaseClass {
         executer.waitUntilElementPresent(impalaPageObject.getImpalaPageHeader);
 
         HomePage homePage = new HomePage(driver);
+        executer.sleep(2000);
         homePage.selectMultiClusterId(clusterId);
         executer.waitUntilPageFullyLoaded();
 
@@ -41,7 +42,9 @@ public class IM_RES_12 extends BaseClass {
         test.log(LogStatus.INFO, "Select Date from DatePicker.");
 
         Impala impala = new Impala(driver);
+        executer.sleep(3000);
         impala.selectQueueInGroupBy();
+        executer.sleep(1000);
         test.log(LogStatus.INFO, "Select Queue in Group by option.");
 
         // Validate of Memory graph is present for selected date range

@@ -42,4 +42,8 @@ public class JavaScriptExecuter {
     javascriptExecutor.executeScript("window.scrollBy(0," + scroll +")");
   }
 
+  public static void clearTextField(WebDriver driver, WebElement element) {
+    JavascriptExecutor js = (JavascriptExecutor)driver;
+    js.executeScript("arguments[0].value = '';", element);
+  }
 }

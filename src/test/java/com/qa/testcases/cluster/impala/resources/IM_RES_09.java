@@ -7,6 +7,7 @@ import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.clusters.impala.Impala;
 import com.qa.utils.JavaScriptExecuter;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
@@ -45,6 +46,7 @@ public class IM_RES_09 extends BaseClass {
     impala.clearFilter();
     executer.waitUntilPageFullyLoaded();
 
+    MouseActions.clickOnElement(driver, impalaPageObject.filterInput);
     for(int i=0; i<impalaPageObject.filterElements.size(); i++) {
       String userName = impalaPageObject.filterElements.get(i).getText();
       impalaPageObject.filterElements.get(i).click();

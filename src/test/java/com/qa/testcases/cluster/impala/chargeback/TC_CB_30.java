@@ -8,7 +8,9 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+/**
+ * @author Birender Kumar
+ */
 public class TC_CB_30 extends BaseClass {
 
     /**
@@ -31,7 +33,7 @@ public class TC_CB_30 extends BaseClass {
         // Click on datepicker button
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
-        waitExecuter.sleep(2000);
+        waitExecuter.sleep(1000);
         datePicker.selectLast30Days();
         waitExecuter.sleep(1000);
 
@@ -46,7 +48,8 @@ public class TC_CB_30 extends BaseClass {
 
             // 1. Impala jobs displayed in the applications,
             String strJobsCountFromHeader = chargeBackImpala.getTotalJobCountFromJobsGraphHeader();
-            int jobsCountFromHeader = Integer.parseInt(chargeBackImpala.getTotalJobCountFromJobsGraphHeader());
+            strJobsCountFromHeader= strJobsCountFromHeader.substring(0, strJobsCountFromHeader.length()-1);
+            int jobsCountFromHeader = Integer.parseInt(strJobsCountFromHeader);
 
             //2. TBD Job Count from Donut chart
 
@@ -55,7 +58,7 @@ public class TC_CB_30 extends BaseClass {
 
             //4. Total Jobs Count from Impala queries table headers.
             chargeBackImpala.getImpalatableHeader().contains(strJobsCountFromHeader);
-            Assert.assertTrue(jobsCountFromHeader == jobsCountFromChargebackTable, "Jobs Count does not matches.");
+            Assert.assertTrue(jobsCountFromChargebackTable >= jobsCountFromHeader, "Jobs Count does not matches.");
             test.log(LogStatus.PASS, "Validate the jobs count from chargeback Header, chargeback table and from impala table.");
 
         }else{
@@ -75,7 +78,8 @@ public class TC_CB_30 extends BaseClass {
 
             // 1. Impala jobs displayed in the applications,
             String strJobsCountFromHeader = chargeBackImpala.getTotalJobCountFromJobsGraphHeader();
-            int jobsCountFromHeader = Integer.parseInt(chargeBackImpala.getTotalJobCountFromJobsGraphHeader());
+            strJobsCountFromHeader= strJobsCountFromHeader.substring(0, strJobsCountFromHeader.length()-1);
+            int jobsCountFromHeader = Integer.parseInt(strJobsCountFromHeader);
 
             //2. TBD Job Count from Donut chart
 
@@ -84,7 +88,7 @@ public class TC_CB_30 extends BaseClass {
 
             //4. Total Jobs Count from Impala queries table headers.
             chargeBackImpala.getImpalatableHeader().contains(strJobsCountFromHeader);
-            Assert.assertTrue(jobsCountFromHeader == jobsCountFromChargebackTable, "Jobs Count does not matches.");
+            Assert.assertTrue(jobsCountFromChargebackTable >= jobsCountFromHeader, "Jobs Count does not matches.");
             test.log(LogStatus.PASS, "Validate the jobs count from chargeback Header, chargeback table and from impala table.");
 
         }else{

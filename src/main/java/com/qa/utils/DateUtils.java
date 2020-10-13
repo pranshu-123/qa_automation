@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 /**
  *  @author  Ojasvi Pandey
@@ -17,6 +19,16 @@ public class DateUtils {
 		cal = Calendar.getInstance();
 		dateFormatter = new SimpleDateFormat("MM/dd/YYYY");
 		String startDate = dateFormatter.format(cal.getTime()).toString();
+		return startDate;
+	}
+
+	/**
+	 * @return Return current Date & Time
+	 */
+	public static String getCurrentDateTime() {
+		cal = Calendar.getInstance();
+		dateFormatter = new SimpleDateFormat("MM-dd-YYYY hh:mm:ss");
+		String startDate = dateFormatter.format(cal.getTime());
 		return startDate;
 	}
 
@@ -71,5 +83,15 @@ public class DateUtils {
 		Date date1 = new Date(epochDate1);
 		Date date2 = new Date(epochDate2);
 		return date1.compareTo(date2);
+	}
+
+	public static long getDaysDifferenceBetweenDates(String startDate, String endDate)
+		throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
+		Date firstDate = sdf.parse(startDate);
+		Date secondDate = sdf.parse(endDate);
+		long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
+		long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+		return diff;
 	}
 }

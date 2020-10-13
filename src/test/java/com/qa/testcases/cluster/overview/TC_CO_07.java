@@ -39,9 +39,10 @@ public class TC_CO_07 extends BaseClass {
                   + networkAPI.get("message").getAsJsonObject().get("params")
                   .getAsJsonObject().get("request").getAsJsonObject()
                   .get("url"));
-          Assert.assertTrue(requestUrl.contains(clusterId), "No or Incorrect clusterId is displayed in request.");
-          if (actualCluster != null) {
+          if (actualCluster != null && actualCluster.trim() != "") {
             Assert.assertEquals(clusterId, actualCluster, "Incorrect clusterId is requests in KPI requests.");
+          } else {
+            Assert.assertTrue(requestUrl.contains(clusterId), "No or Incorrect clusterId is displayed in request.");
           }
         }
       }

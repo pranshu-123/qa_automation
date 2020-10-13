@@ -9,6 +9,8 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class YR_014 extends BaseClass {
 
     /**
@@ -24,58 +26,45 @@ public class YR_014 extends BaseClass {
         Yarn yarn = new Yarn(driver);
         yarn.verifyYarnResourceHeaderisDisplayed();
         Log.info("Yarn Resource Header is displayed.");
+        test.log(LogStatus.INFO, "Yarn Resource Header is displayed.");
 
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
         Log.info("ClusterId is selected: " + clusterId);
+        test.log(LogStatus.INFO, "ClusterId is selected: " + clusterId);
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();
         Log.info("DatePicker is selected for last30 Days");
+        test.log(LogStatus.INFO, "Date is selected from DatePicker");
 
         yarn.clickOnGroupByDropDown();
         yarn.selectApplicationType();
-        System.out.print("All ApplicationType : filter elements: "+yarn.getAllFilterElements());
-        Log.info("All ApplicationType : filter elements: "+yarn.getAllFilterElements());
+        test.log(LogStatus.INFO, "Selected Application Type, from dropdown.");
+        List<String> allFilterElements = yarn.getAllFilterElements();
+        System.out.println("All ApplicationType : filter elements: "+allFilterElements);
+        Log.info("All ApplicationType : filter elements: "+ allFilterElements);
+        test.log(LogStatus.INFO, "All ApplicationType : filter elements: "+ allFilterElements);
         Assert.assertTrue(yarn.verifyFilterElements(), "Application Type: Filter elements MAPREDUCE, SPARK, TEZ is mismatch.");
 
         yarn.clickOnGroupByDropDown();
         yarn.selectUser();
-        System.out.print("All User: filter default selected elements: "+yarn.getAllDefaultSelectedFilterElements());
-        Log.info("All User: filter default selected elements: "+yarn.getAllDefaultSelectedFilterElements());
+        test.log(LogStatus.INFO, "Selected User, from dropdown.");
+        List<String> allDefaultFilterElementForUser = yarn.getAllDefaultSelectedFilterElements();
+        System.out.println("All User: filter default selected elements: "+allDefaultFilterElementForUser);
+        Log.info("All User: filter default selected elements: "+allDefaultFilterElementForUser);
+        test.log(LogStatus.INFO, "All User: filter default selected elements: "+allDefaultFilterElementForUser);
 
         yarn.clickOnGroupByDropDown();
         yarn.selectQueue();
-        System.out.print("All Queue: filter default selected elements: "+yarn.getAllDefaultSelectedFilterElements());
-        Log.info("All Queue: filter default selected elements: "+yarn.getAllDefaultSelectedFilterElements());
+        test.log(LogStatus.INFO, "Selected Queue, from dropdown.");
+        List<String> allDefaultFilterElementForQueue = yarn.getAllDefaultSelectedFilterElements();
+        System.out.println("All Queue: filter default selected elements: "+ allDefaultFilterElementForQueue);
+        Log.info("All Queue: filter default selected elements: "+ allDefaultFilterElementForQueue);
+        test.log(LogStatus.INFO, "All Queue: filter default selected elements: "+ allDefaultFilterElementForQueue);
 
-        yarn.clickOnGroupByDropDown();
-        yarn.selectProject();
-        System.out.print("All Project: filter default selected elements: "+yarn.getAllDefaultSelectedFilterElements());
-        Log.info("All Project: filter default selected elements: "+yarn.getAllDefaultSelectedFilterElements());
-
-        yarn.clickOnGroupByDropDown();
-        yarn.selectDept();
-        System.out.print("All Dept: filter default selected elements: "+yarn.getAllDefaultSelectedFilterElements());
-        Log.info("All Dept: filter default selected elements: "+yarn.getAllDefaultSelectedFilterElements());
-
-        yarn.clickOnGroupByDropDown();
-        yarn.selectRealUser();
-        System.out.print("All RealUser: filter elements: "+yarn.getAllDefaultSelectedFilterElements());
-        Log.info("All RealUser: filter elements: "+yarn.getAllDefaultSelectedFilterElements());
-
-        yarn.clickOnGroupByDropDown();
-        yarn.selectDbs();
-        System.out.print("All Dbs: filter default selected elements: "+yarn.getAllDefaultSelectedFilterElements());
-        Log.info("All Dbs: filter default selected elements: "+yarn.getAllDefaultSelectedFilterElements());
-
-        yarn.clickOnGroupByDropDown();
-        yarn.selectInputTables();
-        System.out.print("All inputTables: filter default selected elements: "+yarn.getAllDefaultSelectedFilterElements());
-        Log.info("All inputTables: filter default selected elements: "+yarn.getAllDefaultSelectedFilterElements());
-
-        test.log(LogStatus.INFO,"Verified group by element and default filter elements on Yarn Resource Page. ");
+        test.log(LogStatus.PASS,"Verified group by element and default filter elements on Yarn Resource Page. ");
         Log.endTestCase("YR_014_verifyFilterTabAndEntries");
 
     }

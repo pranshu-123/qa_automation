@@ -1,5 +1,6 @@
 package com.qa.base;
 
+import com.qa.constants.ConfigConstants;
 import com.qa.constants.DirectoryConstants;
 import com.qa.constants.FileConstants;
 import com.qa.io.ConfigReader;
@@ -8,6 +9,7 @@ import com.qa.scripts.Login;
 import com.qa.scripts.UnravelBuildInfo;
 import com.qa.utils.FileUtils;
 import com.qa.utils.Log;
+import com.qa.utils.UnravelConfigUtils;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -41,10 +43,12 @@ public class BaseClass {
      */
     @BeforeSuite
     public void setup() {
+        LOGGER.info("Update config based on user input");
+        UnravelConfigUtils.updateConfig();
         LOGGER.info("Starting browser");
         DriverManager driverManager = new DriverManager();
         Properties prop = ConfigReader.readBaseConfig();
-        String browser = prop.getProperty("browser");
+        String browser = prop.getProperty(ConfigConstants.UnravelConfigConstants.BROWSER);
         driver = driverManager.getDriver(browser);
         FileUtils.createDirectory(DirectoryConstants.getExtentResultDir());
         LOGGER.info("Moving old report to archive directory.");
@@ -52,10 +56,8 @@ public class BaseClass {
         FileUtils.createDirectory(DirectoryConstants.getScreenshotDir());
         LOGGER.info("Initiated html report.");
         extent = new ExtentReports(FileConstants.getExtentReportFile(), true);
-        extent.addSystemInfo("Selenium Version", prop.getProperty("SeleniumVersion"));
         extent.loadConfig(new File(DirectoryConstants.getConfigDir() + "extent_config.xml"));
         LOGGER.info("Set build info to html report.");
-        UnravelBuildInfo.setBuildInfo(driver, extent);
     }
 
     /**

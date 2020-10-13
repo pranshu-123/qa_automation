@@ -1,5 +1,6 @@
 package com.qa.base;
 
+import com.qa.constants.ConfigConstants;
 import com.qa.io.ConfigReader;
 import com.qa.utils.FileUtils;
 import com.qa.utils.TestUtils;
@@ -61,28 +62,28 @@ public class DriverManager {
     return driver;
   }
 
+  /**
+   *
+   * @return Chrome Options with customized configurations
+   */
   private ChromeOptions getChromeOptionWithNetworkEnable() {
     LoggingPreferences logPrefs = new LoggingPreferences();
     logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
     WebDriverManager.chromedriver().setup();
-
-    //chrome option setting for downloadFile
-    //String downloadFilePath = prop.getProperty("downloadFilePath");
-    //File folderUUID = FileUtils.createRandomUUIDDirectory();
     File folderUUID = FileUtils.createDownloadsFolder();
-
     HashMap<String, Object> chromePref = new HashMap<String, Object>();
     chromePref.put("profile.default_content_settings.popups", 0);
     chromePref.put("download.default_directory", folderUUID.getAbsolutePath());
-
     ChromeOptions options = new ChromeOptions();
     options.setCapability("goog:loggingPrefs", logPrefs);
+    if (System.getProperty(ConfigConstants.SystemConfigConstants.HEADLESS).equals("true")) {
+      options.addArguments("--headless");
+      options.addArguments("--no-sandbox","--disable-dev-shm-usage");
+    }
     options.setExperimentalOption("useAutomationExtension", false);
     options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
-
     options.setExperimentalOption("prefs", chromePref);
     options.setCapability(ChromeOptions.CAPABILITY,options);
-
     return options;
   }
 

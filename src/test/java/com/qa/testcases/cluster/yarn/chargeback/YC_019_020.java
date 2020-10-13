@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.yarn.chargeback;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.constants.PageConstants;
 import com.qa.scripts.HomePage;
@@ -11,6 +12,9 @@ import org.testng.annotations.Test;
 /**
  * @author Birender Kumar
  */
+
+@Marker.YarnChargeback
+@Marker.All
 public class YC_019_020 extends BaseClass {
 
     /**

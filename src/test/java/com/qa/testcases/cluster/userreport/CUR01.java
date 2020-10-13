@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.userreport;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.UserReportPageObject;
@@ -19,6 +20,9 @@ import org.testng.annotations.Test;
 /**
  * @author Sarbashree Ray
  */
+
+@Marker.UserReports
+@Marker.All
 public class CUR01 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(CUR01.class);
 

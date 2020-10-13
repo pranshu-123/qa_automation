@@ -8,8 +8,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Paths;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.logging.Logger;
 
 /**
@@ -28,7 +28,7 @@ public class Main {
    */
   public static void main(String[] args) throws MalformedURLException, ClassNotFoundException {
     String markers = System.getProperty(ConfigConstants.SystemConfigConstants.MARKERS);
-    Set<Class> classes = new HashSet<>();
+    Set<Class> classes = new TreeSet<>();
     /**
      * Get the list of classes which are having provided markers
      */

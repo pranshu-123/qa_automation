@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.yarn.resources;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.CommonPageObject;
 import com.qa.pagefactory.clusters.YarnPageObject;
@@ -14,6 +15,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+@Marker.YarnResources
+@Marker.All
 public class YR_017 extends BaseClass {
 
     /**

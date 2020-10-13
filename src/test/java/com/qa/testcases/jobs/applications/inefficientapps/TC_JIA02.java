@@ -1,5 +1,6 @@
 package com.qa.testcases.jobs.applications.inefficientapps;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
@@ -8,6 +9,8 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.annotations.Test;
 
+@Marker.InefficientApps
+@Marker.All
 public class TC_JIA02 extends BaseClass {
 
     /**

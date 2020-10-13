@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.yarn.chargeback;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.clusters.ChargebackYarnPageObject;
 import com.qa.scripts.DatePicker;
@@ -11,6 +12,8 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.annotations.Test;
 
+@Marker.YarnChargeback
+@Marker.All
 public class YC_022 extends BaseClass {
     /**
      * Verify User is able to access Yarn chargeback page and Verify the cost edit fields

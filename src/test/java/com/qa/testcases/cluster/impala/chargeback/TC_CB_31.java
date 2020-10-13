@@ -13,7 +13,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
 
-@Marker.Smoke
+@Marker.All
+@Marker.ImpalaChargeback
 public class TC_CB_31 extends BaseClass {
 	private WaitExecuter waitExecuter;
 	private ChargeBackImpala chargebackImpala;

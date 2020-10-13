@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.impala.resources;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.clusters.ImpalaPageObject;
@@ -12,8 +13,9 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+@Marker.ImpalaResources
+@Marker.All
 public class IM_RES_12 extends BaseClass {
-
 
     @Test(dataProvider = "clusterid-data-provider")
     public void verifyGroupByFilterForQueue(String clusterId) {

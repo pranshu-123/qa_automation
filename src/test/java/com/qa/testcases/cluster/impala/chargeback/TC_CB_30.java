@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.impala.chargeback;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
@@ -11,6 +12,8 @@ import org.testng.annotations.Test;
 /**
  * @author Birender Kumar
  */
+@Marker.All
+@Marker.ImpalaChargeback
 public class TC_CB_30 extends BaseClass {
 
     /**

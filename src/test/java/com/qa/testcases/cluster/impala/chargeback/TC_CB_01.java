@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.impala.chargeback;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.constants.PageConstants;
 import com.qa.scripts.HomePage;
@@ -11,12 +12,13 @@ import org.testng.annotations.Test;
 /**
  * @author Ankur Jaiswal
  */
-public class TC_CB_01 extends BaseClass {
 
+@Marker.All
+@Marker.ImpalaChargeback
+public class TC_CB_01 extends BaseClass {
   /**
    * Verify User is able to access Impala chargeback page
    */
-
   @Test(dataProvider = "clusterid-data-provider")
   public void TC_CB_01_VerifyImpalaChargeBackPage(String clusterId) {
     test = extent.startTest("TC_CB_01_VerifyImpalaChargeBackPage: "+clusterId,"Verify User is able to access Impala chrageback page");

@@ -1,6 +1,7 @@
 package com.qa.testcases.cluster.overview;
 
 import com.google.gson.JsonObject;
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.scripts.HomePage;
 import com.qa.utils.NetworkManager;
@@ -13,6 +14,8 @@ import java.util.List;
 /**
  * @author Ankur Jaiswal
  */
+@Marker.ClusterOverview
+@Marker.All
 public class TC_CO_07 extends BaseClass {
 
   @Test()

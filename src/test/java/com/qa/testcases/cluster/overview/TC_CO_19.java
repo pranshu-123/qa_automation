@@ -18,8 +18,8 @@ import org.testng.annotations.Test;
 /**
  * @author Ankur Jaiswal
  */
-@Marker.Smoke
 @Marker.ClusterOverview
+@Marker.All
 public class TC_CO_19 extends BaseClass {
 
   /**

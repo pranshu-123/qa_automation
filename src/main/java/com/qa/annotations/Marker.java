@@ -10,6 +10,18 @@ import java.lang.annotation.Target;
 public @interface Marker {
   @interface Smoke {}
   @interface Regression {}
+  @interface All {}
   @interface ClusterOverview {}
   @interface TopX {}
+  @interface ImpalaResources {}
+  @interface ImpalaChargeback {}
+  @interface AllApps {}
+  @interface QueueAnalysis {}
+  @interface AppDetailsImpala {}
+  @interface InefficientApps {}
+  @interface YarnChargeback {}
+  @interface YarnResources {}
+  @interface ClusterJobs {}
+  @interface ClusterUserReports {}
+  @interface ClusterWorkload {}
 }

@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.impala.resources;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.DatePickerPageObject;
 import com.qa.pagefactory.clusters.ImpalaPageObject;
@@ -20,6 +21,8 @@ import java.util.logging.Logger;
  * @author - Ojasvi Pandey 
 */
 
+@Marker.ImpalaResources
+@Marker.All
 public class IM_RES_02 extends BaseClass {
 	private WaitExecuter waitExecuter;
 	private Impala impala;

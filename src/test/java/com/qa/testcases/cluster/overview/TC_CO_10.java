@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.overview;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.constants.DirectoryConstants;
 import com.qa.constants.GraphColorConstants;
@@ -16,6 +17,8 @@ import java.io.File;
 /**
  * @author Sarbashree Ray
  */
+@Marker.ClusterOverview
+@Marker.All
 public class TC_CO_10  extends BaseClass
 {
     @Test(dataProvider = "clusterid-data-provider")

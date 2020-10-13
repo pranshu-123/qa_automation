@@ -11,7 +11,7 @@ import com.qa.pagefactory.clusters.TopXPageObject;
 import com.qa.scripts.clusters.TopX;
 import com.qa.utils.WaitExecuter;
 
-@Marker.ClusterOverview
+@Marker.All
 @Marker.TopX
 public class TC_CTX_30 extends BaseClass {
 	Logger logger = LoggerFactory.getLogger(TC_CTX_30.class);

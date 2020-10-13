@@ -3,6 +3,8 @@ package com.qa.testcases.cluster.impala.resources;
 import java.io.File;
 import java.util.List;
 import java.util.logging.Logger;
+
+import com.qa.annotations.Marker;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -23,6 +25,8 @@ import com.relevantcodes.extentreports.LogStatus;
  * @author - Ojasvi Pandey 
 */
 
+@Marker.ImpalaResources
+@Marker.All
 public class IM_RES_19 extends BaseClass {
 	private static final Logger LOGGER = Logger.getLogger(IM_RES_19.class.getName());
 

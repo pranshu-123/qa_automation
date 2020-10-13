@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.impala.resources;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.constants.DirectoryConstants;
 import com.qa.constants.GraphColorConstants;
@@ -19,6 +20,8 @@ import java.util.List;
 /**
  * @author Ankur Jaiswal
  */
+@Marker.ImpalaResources
+@Marker.All
 public class IM_RES_21 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider")

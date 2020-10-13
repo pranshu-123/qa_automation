@@ -58,6 +58,8 @@ public class BaseClass {
         extent = new ExtentReports(FileConstants.getExtentReportFile(), true);
         extent.loadConfig(new File(DirectoryConstants.getConfigDir() + "extent_config.xml"));
         LOGGER.info("Set build info to html report.");
+        extent.addSystemInfo("Selenium Version", prop.getProperty("SeleniumVersion"));
+        UnravelBuildInfo.setBuildInfo(driver, extent);
     }
 
     /**

@@ -18,7 +18,8 @@ import java.util.List;
 /**
  * @author Ankur Jaiswal
  */
-@Marker.Regression
+@Marker.ImpalaResources
+@Marker.All
 public class IM_RES_03 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider")

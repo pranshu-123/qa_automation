@@ -1,6 +1,8 @@
 package com.qa.testcases.cluster.overview;
 
 import java.util.logging.Logger;
+
+import com.qa.annotations.Marker;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.qa.base.BaseClass;
@@ -10,6 +12,8 @@ import com.qa.scripts.HomePage;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 
+@Marker.ClusterOverview
+@Marker.All
 public class TC_CO_04 extends BaseClass {
 	
 	private WaitExecuter waitExecuter;

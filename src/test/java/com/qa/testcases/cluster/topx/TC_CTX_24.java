@@ -14,8 +14,8 @@ import org.testng.annotations.Test;
 /**
  * @author Ankur Jaiswal
  */
+@Marker.All
 @Marker.TopX
-@Marker.Regression
 public class TC_CTX_24 extends BaseClass {
 
   @Test()

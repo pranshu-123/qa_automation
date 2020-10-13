@@ -1,4 +1,5 @@
 package com.qa.testcases.cluster.overview;
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.constants.PageConstants;
 import com.qa.pagefactory.HomePageObject;
@@ -18,6 +19,8 @@ import org.testng.annotations.Test;
 /**
  * @author Sarbashree Ray
  */
+@Marker.ClusterOverview
+@Marker.All
 public class TC_CO_18 extends BaseClass
 {
 

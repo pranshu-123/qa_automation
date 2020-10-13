@@ -12,6 +12,7 @@ import com.qa.utils.FileUtils;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 
+@Marker.All
 @Marker.TopX
 public class TC_CTX_31 extends BaseClass {
 	Logger logger = LoggerFactory.getLogger(TC_CTX_30.class);

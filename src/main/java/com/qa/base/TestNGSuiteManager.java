@@ -31,7 +31,6 @@ public class TestNGSuiteManager {
         myTest.setName("UnravelTest");
         //Create a list which can contain the classes that you want to run.
         List<XmlClass> myClasses = new ArrayList<XmlClass>();
-
         for (Class testClass : classes) {
             testClass = Class.forName(testClass.getName());
             myClasses.add(new XmlClass(testClass));
@@ -43,8 +42,7 @@ public class TestNGSuiteManager {
         myTests.add(myTest);
         //add the list of tests to your Suite.
         mySuite.setTests(myTests);
-
-        System.out.println(mySuite.toXml());
+        LOGGER.info(mySuite.toXml());
         //Add the suite to the list of suites.
         List<XmlSuite> mySuites = new ArrayList<>();
         mySuites.add(mySuite);

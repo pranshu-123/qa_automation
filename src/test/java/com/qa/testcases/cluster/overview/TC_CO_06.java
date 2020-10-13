@@ -1,6 +1,7 @@
 package com.qa.testcases.cluster.overview;
 
 import com.google.gson.JsonObject;
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.CommonPageObject;
 import com.qa.pagefactory.clusters.ChargebackImpalaPageObject;
@@ -20,6 +21,8 @@ import java.util.List;
 /**
  * @author Sarbashree Ray
  */
+@Marker.ClusterOverview
+@Marker.All
 public class TC_CO_06 extends BaseClass {
     private CommonPageObject commonPageObject;
 

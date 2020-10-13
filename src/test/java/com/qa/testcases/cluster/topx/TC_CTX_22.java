@@ -20,6 +20,7 @@ import org.testng.annotations.Test;
  * @author Ankur Jaiswal
  */
 
+@Marker.All
 @Marker.TopX
 public class TC_CTX_22 extends BaseClass {
 

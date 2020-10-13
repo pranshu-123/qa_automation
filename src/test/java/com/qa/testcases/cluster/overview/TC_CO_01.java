@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.overview;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.io.ConfigReader;
 import com.qa.scripts.DatePicker;
@@ -13,6 +14,9 @@ import java.util.Properties;
 /**
  * @author Birender Kumar
  */
+
+@Marker.ClusterOverview
+@Marker.All
 public class TC_CO_01 extends BaseClass{
 
     @Test(dataProvider = "clusterid-data-provider")

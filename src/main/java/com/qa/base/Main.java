@@ -28,7 +28,7 @@ public class Main {
    * @throws MalformedURLException
    */
   public static void main(String[] args) throws MalformedURLException, ClassNotFoundException {
-    String markers = System.getProperty(ConfigConstants.SystemConfigConstants.MARKERS);
+    String markers = System.getProperty(ConfigConstants.SystemConfig.MARKERS);
     Set<Class> classes = new TreeSet<>(Comparator.comparing(Class::getName));
     /**
      * Get the list of classes which are having provided markers

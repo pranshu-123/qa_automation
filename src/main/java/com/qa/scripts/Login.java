@@ -39,9 +39,9 @@ public class Login {
   public void loginToApp() {
     driver.navigate().refresh();
     Properties prop = ConfigReader.readBaseConfig();
-    String user = prop.getProperty(ConfigConstants.UnravelConfigConstants.USERNAME);
+    String user = prop.getProperty(ConfigConstants.UnravelConfig.USERNAME);
     loginObj.loginUserName.sendKeys(user);
-    String pwd = prop.getProperty(ConfigConstants.UnravelConfigConstants.PASSWORD);
+    String pwd = prop.getProperty(ConfigConstants.UnravelConfig.PASSWORD);
     loginObj.loginPassword.sendKeys(pwd);
     executer.sleep(2000);
     JavaScriptExecuter.clickOnElement(driver,loginObj.signInButton);

@@ -15,7 +15,6 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
 import java.util.Collections;
@@ -76,7 +75,7 @@ public class DriverManager {
     chromePref.put("download.default_directory", folderUUID.getAbsolutePath());
     ChromeOptions options = new ChromeOptions();
     options.setCapability("goog:loggingPrefs", logPrefs);
-    if (System.getProperty(ConfigConstants.SystemConfigConstants.HEADLESS).equals("true")) {
+    if (System.getProperty(ConfigConstants.SystemConfig.HEADLESS).equals("true")) {
       options.addArguments("--headless");
       options.addArguments("--no-sandbox","--disable-dev-shm-usage");
     }

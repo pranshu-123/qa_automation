@@ -19,14 +19,14 @@ public class UnravelConfigUtils {
      */
     public static void updateConfig() {
         Properties prop = ConfigReader.readBaseConfig();
-        prop.setProperty(ConfigConstants.UnravelConfigConstants.URL, System.getProperty(
-            ConfigConstants.SystemConfigConstants.URL));
-        prop.setProperty(ConfigConstants.UnravelConfigConstants.USERNAME, System.getProperty(
-            ConfigConstants.SystemConfigConstants.USERNAME));
-        prop.setProperty(ConfigConstants.UnravelConfigConstants.PASSWORD, System.getProperty(
-            ConfigConstants.SystemConfigConstants.PASSWORD));
-        prop.setProperty(ConfigConstants.UnravelConfigConstants.BROWSER, System.getProperty(
-            ConfigConstants.SystemConfigConstants.BROWSER));
+        prop.setProperty(ConfigConstants.UnravelConfig.URL, System.getProperty(
+            ConfigConstants.SystemConfig.URL));
+        prop.setProperty(ConfigConstants.UnravelConfig.USERNAME, System.getProperty(
+            ConfigConstants.SystemConfig.USERNAME));
+        prop.setProperty(ConfigConstants.UnravelConfig.PASSWORD, System.getProperty(
+            ConfigConstants.SystemConfig.PASSWORD));
+        prop.setProperty(ConfigConstants.UnravelConfig.BROWSER, System.getProperty(
+            ConfigConstants.SystemConfig.BROWSER));
         try {
             FileOutputStream out = new FileOutputStream(FileConstants.getConfigFile());
             prop.store(out, null);

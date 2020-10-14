@@ -48,7 +48,7 @@ public class BaseClass {
         LOGGER.info("Starting browser");
         DriverManager driverManager = new DriverManager();
         Properties prop = ConfigReader.readBaseConfig();
-        String browser = prop.getProperty(ConfigConstants.UnravelConfigConstants.BROWSER);
+        String browser = prop.getProperty(ConfigConstants.UnravelConfig.BROWSER);
         driver = driverManager.getDriver(browser);
         FileUtils.createDirectory(DirectoryConstants.getExtentResultDir());
         LOGGER.info("Moving old report to archive directory.");
@@ -58,7 +58,8 @@ public class BaseClass {
         extent = new ExtentReports(FileConstants.getExtentReportFile(), true);
         extent.loadConfig(new File(DirectoryConstants.getConfigDir() + "extent_config.xml"));
         LOGGER.info("Set build info to html report.");
-        extent.addSystemInfo("Selenium Version", prop.getProperty("SeleniumVersion"));
+        extent.addSystemInfo(ConfigConstants.ReportConfig.SELENIUM_VERSION,
+            prop.getProperty(ConfigConstants.ReportConfig.SELENIUM_VERSION));
         UnravelBuildInfo.setBuildInfo(driver, extent);
     }
 
@@ -144,9 +145,8 @@ public class BaseClass {
      */
     @DataProvider(name = "clusterid-data-provider")
     public Object[][] getClusterIds(Method method) {
-        // TBD Read the cluster drop down box and store
-        System.setProperty("isMultiCluster", "true");
-        if (System.getProperty("isMultiCluster").trim().toLowerCase().equals("true")) {
+        if (System.getProperty(ConfigConstants.SystemConfig.IS_MULTI_CLUSTER).trim()
+            .toLowerCase().equals("true")) {
             LOGGER.info("Getting multiple cluster Ids");
             return DataProviderClass.getClusterIdsForClusterType(method);
         } else {

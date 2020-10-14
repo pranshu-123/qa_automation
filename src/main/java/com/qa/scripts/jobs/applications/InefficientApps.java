@@ -1,6 +1,8 @@
 package com.qa.scripts.jobs.applications;
 
+import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
+import com.qa.scripts.DatePicker;
 import com.qa.utils.WaitExecuter;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -28,6 +30,35 @@ public class InefficientApps {
         waitExecuter = new WaitExecuter(driver);
         this.driver = driver;
         applicationsPageObject = new ApplicationsPageObject(driver);
+    }
+
+    /* This method will do the setup for getting inefficientApp page
+    * 1. Click on Jobs tab
+    * 2. Click on inefficientApps tab
+    * 3. Select last 30 days from date picker
+    * */
+    public void setupInefficientApps(){
+        //Click on Jobs tab
+        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+        waitExecuter.sleep(2000);
+        topPanelComponentPageObject.jobs.click();
+        waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
+        waitExecuter.waitUntilPageFullyLoaded();
+        LOGGER.info("Click on Job tab");
+
+        //Click on inefficientApps tab
+        waitExecuter.sleep(2000);
+        applicationsPageObject.inefficientApps.click();
+        waitExecuter.waitUntilPageFullyLoaded();
+        LOGGER.info("Click on inefficient Apps tab");
+
+        DatePicker datePicker = new DatePicker(driver);
+        // Select last 30 days from date picker
+        LOGGER.info("Select last 30 days");
+        datePicker.clickOnDatePicker();
+        waitExecuter.sleep(1000);
+        datePicker.selectLast30Days();
+        waitExecuter.sleep(2000);
     }
 
     /* Check InefficientApp Table is populated */

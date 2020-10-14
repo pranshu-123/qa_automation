@@ -29,29 +29,9 @@ public class TC_JIA10 extends BaseClass {
         InefficientApps inefficientApps = new InefficientApps(driver);
         test.log(LogStatus.INFO, "ClusterId parameter passed is : " + clusterId);
 
-        //Click on Jobs tab
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
-        ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
-        waitExecuter.sleep(2000);
-        topPanelComponentPageObject.jobs.click();
-        waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
-        waitExecuter.waitUntilPageFullyLoaded();
-        test.log(LogStatus.INFO, "Click on Job tab");
-
-        //Click on inefficientApps tab
-        waitExecuter.sleep(2000);
-        applicationsPageObject.inefficientApps.click();
-        waitExecuter.waitUntilPageFullyLoaded();
-        test.log(LogStatus.INFO, "Click on inefficient Apps tab");
-
-        DatePicker datePicker = new DatePicker(driver);
-        // Select last 30 days from date picker
-        test.log(LogStatus.INFO, "Select last 30 days");
-        LOGGER.info("Select last 7 days");
-        datePicker.clickOnDatePicker();
-        waitExecuter.sleep(1000);
-        datePicker.selectLast7Days();
-        waitExecuter.sleep(2000);
+        // Get setup done for InefficientApps page
+        inefficientApps.setupInefficientApps();
+        test.log(LogStatus.INFO, "setup for InefficientApps done.");
 
         // Select cluster
         test.log(LogStatus.INFO, "Select clusterid : " + clusterId);

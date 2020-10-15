@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.impala.resources;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.clusters.ImpalaPageObject;
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+@Marker.ImpalaResources
+@Marker.All
 public class IM_RES_15 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(IM_RES_15.class.getName());
     @Test(dataProvider = "clusterid-data-provider")

@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * @author Ankur Jaiswal
  */
-@Marker.Regression
+@Marker.All
 @Marker.TopX
 public class TC_CTX_25 extends BaseClass {
 

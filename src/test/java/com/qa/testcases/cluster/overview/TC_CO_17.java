@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.overview;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.HomePageObject;
 import com.qa.scripts.DatePicker;
@@ -12,6 +13,8 @@ import org.testng.annotations.Test;
 /**
  * @author Birender Kumar
  */
+@Marker.ClusterOverview
+@Marker.All
 public class TC_CO_17 extends BaseClass {
 
     private WaitExecuter waitExecuter;

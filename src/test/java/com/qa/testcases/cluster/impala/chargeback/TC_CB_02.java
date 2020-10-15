@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.impala.chargeback;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.DatePickerPageObject;
 import com.qa.pagefactory.TopPanelPageObject;
@@ -18,7 +19,8 @@ import com.relevantcodes.extentreports.LogStatus;
 /**
  * @author - Ojasvi Pandey
  */
-
+@Marker.All
+@Marker.ImpalaChargeback
 public class TC_CB_02 extends BaseClass {
 	private WaitExecuter waitExecuter;
 	private ChargeBackImpala chargebackImpala;

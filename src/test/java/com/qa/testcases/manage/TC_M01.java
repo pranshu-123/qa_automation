@@ -1,5 +1,6 @@
 package com.qa.testcases.manage;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.pagefactory.TopPanelPageObject;
@@ -16,6 +17,9 @@ import org.testng.annotations.Test;
 /**
  * @author Birender Kumar
  */
+
+@Marker.Manage
+@Marker.All
 public class TC_M01 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_M01.class);
 

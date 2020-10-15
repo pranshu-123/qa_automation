@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.impala.chargeback;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.CommonPageObject;
 import com.qa.scripts.DatePicker;
@@ -16,6 +17,8 @@ import java.util.List;
 /**
  * @author Birender Kumar
  */
+@Marker.All
+@Marker.ImpalaChargeback
 //This class contains TC_CB_55 and TC_CB_56 both test case.
 public class TC_CB_55 extends BaseClass {
 

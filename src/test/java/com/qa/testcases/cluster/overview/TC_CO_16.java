@@ -1,6 +1,8 @@
 package com.qa.testcases.cluster.overview;
 
 import java.util.logging.Logger;
+
+import com.qa.annotations.Marker;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -12,6 +14,8 @@ import com.qa.scripts.HomePage;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 
+@Marker.ClusterOverview
+@Marker.All
 public class TC_CO_16 extends BaseClass {
 
 	private WaitExecuter waitExecuter;

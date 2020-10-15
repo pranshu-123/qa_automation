@@ -3,6 +3,7 @@ package com.qa.testcases.jobs.applications.all;
 import java.util.List;
 import java.util.logging.Logger;
 
+import com.qa.annotations.Marker;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -17,6 +18,8 @@ import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 
+@Marker.AllApps
+@Marker.All
 public class TC_JAL_05 extends BaseClass {
 	private static final Logger LOGGER = Logger.getLogger(TC_JAL_05.class.getName());
 

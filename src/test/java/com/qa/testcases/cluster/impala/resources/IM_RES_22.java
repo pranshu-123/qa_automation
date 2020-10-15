@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.impala.resources;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.clusters.ImpalaPageObject;
@@ -15,6 +16,8 @@ import org.testng.annotations.Test;
 /**
  * @author Birender Kumar
  */
+@Marker.ImpalaResources
+@Marker.All
 public class IM_RES_22  extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")

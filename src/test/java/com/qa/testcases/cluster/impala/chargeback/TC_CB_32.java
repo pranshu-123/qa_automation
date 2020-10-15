@@ -2,6 +2,8 @@ package com.qa.testcases.cluster.impala.chargeback;
 
 import java.util.List;
 import java.util.logging.Logger;
+
+import com.qa.annotations.Marker;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -17,7 +19,8 @@ import com.relevantcodes.extentreports.LogStatus;
 /**
  * @author - Ojasvi Pandey
  */
-
+@Marker.All
+@Marker.ImpalaChargeback
 public class TC_CB_32 extends BaseClass {
 	private WaitExecuter waitExecuter;
 	private ChargeBackImpala chargebackImpala;

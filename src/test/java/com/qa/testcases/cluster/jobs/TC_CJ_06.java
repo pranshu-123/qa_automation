@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.jobs;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.clusters.JobsPageObject;
 import com.qa.scripts.DatePicker;
@@ -14,6 +15,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+@Marker.ClusterJobs
+@Marker.All
 public class TC_CJ_06 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")

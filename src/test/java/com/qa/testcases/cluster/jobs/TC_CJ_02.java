@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.jobs;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.constants.DirectoryConstants;
 import com.qa.constants.GraphColorConstants;
@@ -19,6 +20,8 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.util.List;
 
+@Marker.ClusterJobs
+@Marker.All
 public class TC_CJ_02 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")

@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.overview;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.HomePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
@@ -11,6 +12,8 @@ import com.qa.utils.WaitExecuter;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+@Marker.ClusterOverview
+@Marker.All
 public class TC_CO_20 extends BaseClass {
 
     /**

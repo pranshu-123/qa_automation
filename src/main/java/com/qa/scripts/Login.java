@@ -1,5 +1,6 @@
 package com.qa.scripts;
 
+import com.qa.constants.ConfigConstants;
 import com.qa.io.ConfigReader;
 import com.qa.pagefactory.HomePageObject;
 import com.qa.pagefactory.LoginPageObject;
@@ -38,9 +39,9 @@ public class Login {
   public void loginToApp() {
     driver.navigate().refresh();
     Properties prop = ConfigReader.readBaseConfig();
-    String user = prop.getProperty("user_name");
+    String user = prop.getProperty(ConfigConstants.UnravelConfig.USERNAME);
     loginObj.loginUserName.sendKeys(user);
-    String pwd = prop.getProperty("password");
+    String pwd = prop.getProperty(ConfigConstants.UnravelConfig.PASSWORD);
     loginObj.loginPassword.sendKeys(pwd);
     executer.sleep(2000);
     JavaScriptExecuter.clickOnElement(driver,loginObj.signInButton);

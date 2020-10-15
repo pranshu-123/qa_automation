@@ -10,7 +10,8 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.annotations.Test;
 
-@Marker.Smoke
+@Marker.YarnChargeback
+@Marker.All
 public class YC_021 extends BaseClass {
 
     /**

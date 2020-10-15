@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.yarn.resources;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
@@ -11,6 +12,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+@Marker.YarnResources
+@Marker.All
 public class YR_019 extends BaseClass {
 
     /**

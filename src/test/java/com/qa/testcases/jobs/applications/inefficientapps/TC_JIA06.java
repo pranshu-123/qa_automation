@@ -1,5 +1,6 @@
 package com.qa.testcases.jobs.applications.inefficientapps;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
@@ -13,7 +14,8 @@ import org.testng.annotations.Test;
 import org.slf4j.Logger;
 
 import java.util.List;
-
+@Marker.InefficientApps
+@Marker.All
 public class TC_JIA06 extends BaseClass {
 
     Logger LOGGER = LoggerFactory.getLogger(TC_JIA06.class);

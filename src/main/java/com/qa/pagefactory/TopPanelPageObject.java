@@ -67,6 +67,10 @@ public class TopPanelPageObject {
   @FindBy(xpath = "//li[contains(@class,'active')]/" +
           "ul[contains(@class,'sub-menu')]//li/span[contains(text(),'Top X')]")
   public WebElement topXTab;
+
+  @FindBy(xpath = "//li[contains(@class,'active')]/" +
+          "ul[contains(@class,'sub-menu')]//li/span[contains(text(),'Queue Analysis')]")
+  public WebElement queueAnalysisTab;
   /**
    * @param driver The driver that will be used to look up the elements
    */

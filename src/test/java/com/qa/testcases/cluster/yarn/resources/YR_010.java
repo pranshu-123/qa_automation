@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.yarn.resources;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.clusters.YarnPageObject;
 import com.qa.scripts.DatePicker;
@@ -11,6 +12,8 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.annotations.Test;
 
+@Marker.YarnResources
+@Marker.All
 public class YR_010 extends BaseClass {
 
     /**

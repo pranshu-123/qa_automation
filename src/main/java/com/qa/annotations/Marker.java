@@ -24,4 +24,6 @@ public @interface Marker {
   @interface ClusterJobs {}
   @interface ClusterUserReports {}
   @interface ClusterWorkload {}
+  @interface UserReports {}
+  @interface Manage {}
 }

@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.jobs;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.clusters.JobsPageObject;
 import com.qa.scripts.DatePicker;
@@ -19,6 +20,8 @@ import java.util.logging.Logger;
  * @author Sarbashree Ray
  */
 
+@Marker.ClusterJobs
+@Marker.All
 public class TC_CJ_01 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_CJ_01.class.getName());
 

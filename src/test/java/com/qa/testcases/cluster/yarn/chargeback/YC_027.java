@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.yarn.chargeback;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
@@ -9,6 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+@Marker.YarnChargeback
+@Marker.All
 public class YC_027 extends BaseClass {
 
     /**

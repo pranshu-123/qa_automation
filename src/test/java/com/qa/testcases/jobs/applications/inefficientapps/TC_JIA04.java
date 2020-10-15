@@ -1,5 +1,6 @@
 package com.qa.testcases.jobs.applications.inefficientapps;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
@@ -12,6 +13,8 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+@Marker.InefficientApps
+@Marker.All
 public class TC_JIA04 extends BaseClass {
 
     /**

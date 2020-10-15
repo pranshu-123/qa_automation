@@ -1,12 +1,10 @@
 package com.qa.pagefactory.manage;
 
-import com.sun.xml.internal.ws.model.WrapperBeanGenerator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import javax.swing.text.html.CSS;
 import java.util.List;
 
 /**

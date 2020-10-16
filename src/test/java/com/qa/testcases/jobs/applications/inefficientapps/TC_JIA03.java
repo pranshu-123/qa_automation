@@ -21,7 +21,7 @@ public class TC_JIA03 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_JIA03_verifyAllDatePicker(String clusterId) {
         test = extent.startTest("TC_JIA03_verifyAllDatePicker" + clusterId, "Verify applications with Inefficient events are listed for different date ranges");
-        test.assignCategory("4620 Jobs / InEfficient Apps");
+        test.assignCategory(" Jobs / InEfficient Apps");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         test.log(LogStatus.PASS, "Passed Parameter Is : " + clusterId);

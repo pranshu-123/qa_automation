@@ -6,10 +6,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 /** @author Ankur Jaiswal
-* All WebElement which is present at top level of unravel ui
-* is present in this class. Wherever you need to access these page object
-* create an instance of this class and access the members with that object.
-*/
+ * All WebElement which is present at top level of unravel ui
+ * is present in this class. Wherever you need to access these page object
+ * create an instance of this class and access the members with that object.
+ */
 
 public class TopPanelPageObject {
   @FindBy(css = ".head-logo")
@@ -57,7 +57,7 @@ public class TopPanelPageObject {
   public WebElement apiTab;
 
   @FindBy(xpath = "//li[contains(@class,'active')]/" +
-    "ul[contains(@class,'sub-menu')]//li/span[contains(text(),'Impala')]")
+          "ul[contains(@class,'sub-menu')]//li/span[contains(text(),'Impala')]")
   public WebElement impalaTab;
 
   @FindBy(xpath = "//li[contains(@class,'active')]/" +
@@ -71,6 +71,7 @@ public class TopPanelPageObject {
   @FindBy(xpath = "//li[contains(@class,'active')]/" +
           "ul[contains(@class,'sub-menu')]//li/span[contains(text(),'Queue Analysis')]")
   public WebElement queueAnalysisTab;
+
   /**
    * @param driver The driver that will be used to look up the elements
    */

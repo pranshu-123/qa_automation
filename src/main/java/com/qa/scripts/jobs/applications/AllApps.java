@@ -1,27 +1,28 @@
 package com.qa.scripts.jobs.applications;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
+import com.qa.pagefactory.jobs.ApplicationsPageObject;
+import com.qa.utils.WaitExecuter;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
-import com.qa.pagefactory.jobs.ApplicationsPageObject;
-import com.qa.utils.WaitExecuter;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
 public class AllApps {
-    private WaitExecuter waitExecuter;
-    private WebDriver driver;
-    private ApplicationsPageObject applicationsPageObject;
-    private Actions action;
     private static final Logger LOGGER = Logger.getLogger(AllApps.class.getName());
+    private final WaitExecuter waitExecuter;
+    private final WebDriver driver;
+    private final ApplicationsPageObject applicationsPageObject;
+    private final Actions action;
+
     /**
      * Constructer to initialize wait, driver and necessary objects
      *
-     * @param driver
-     *            - WebDriver instance
+     * @param driver - WebDriver instance
      */
     public AllApps(WebDriver driver) {
         waitExecuter = new WaitExecuter(driver);

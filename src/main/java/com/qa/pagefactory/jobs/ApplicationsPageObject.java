@@ -4,175 +4,172 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import java.util.List;
 
 public class ApplicationsPageObject {
 
-	@FindBy(css = "a#inefficientApps")
-	public WebElement inefficientApps;
+    @FindBy(css = "a#inefficientApps")
+    public WebElement inefficientApps;
 
-	@FindBy(css = ".select2-search__field")
-	public WebElement clusterIdsearchfield;
+    @FindBy(css = ".select2-search__field")
+    public WebElement clusterIdsearchfield;
 
-	@FindBy(xpath = "//span[@class='select2-results']/ul/li")
-	public List<WebElement> clusterIdsList;
+    @FindBy(xpath = "//span[@class='select2-results']/ul/li")
+    public List<WebElement> clusterIdsList;
 
-	@FindBy(xpath = "//tbody[@id='inefficientApps-body']")
-	public WebElement tblInefficientApps;
+    @FindBy(xpath = "//tbody[@id='inefficientApps-body']")
+    public WebElement tblInefficientApps;
 
-	@FindBy(xpath = "//tbody[@id='inefficientApps-body']/tr")
-	public List<WebElement> tblInefficientAppsRowsList;
+    @FindBy(xpath = "//tbody[@id='inefficientApps-body']/tr")
+    public List<WebElement> tblInefficientAppsRowsList;
 
-	@FindBy(xpath = "//input[@name='daterangepicker_start' and contains(@class,'active')]")
-	public WebElement startDatePicker;
+    @FindBy(xpath = "//input[@name='daterangepicker_start' and contains(@class,'active')]")
+    public WebElement startDatePicker;
 
-	@FindBy(xpath = "//div[contains(@class,'opensleft')]/div[3]/div/button[1]")
-	public WebElement applyBtn;
+    @FindBy(xpath = "//div[contains(@class,'opensleft')]/div[3]/div/button[1]")
+    public WebElement applyBtn;
 
-	@FindBy(xpath = "//div[contains(@class,'component-section-header')]/h1[text()='Jobs']")
-	public WebElement jobsPageHeader;
+    @FindBy(xpath = "//div[contains(@class,'component-section-header')]/h1[text()='Jobs']")
+    public WebElement jobsPageHeader;
 
-	@FindBy(xpath = "//div[contains(@class,'ranges')]//li")
-	public List<WebElement> dateRanges;
+    @FindBy(xpath = "//div[contains(@class,'ranges')]//li")
+    public List<WebElement> dateRanges;
 
-	@FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')]//input)[1]")
-	public WebElement clusterSearchBox;
+    @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')]//input)[1]")
+    public WebElement clusterSearchBox;
 
-	@FindBy(xpath = "//ul[contains(@class,'select2-results__options')]/li[1]")
-	public WebElement select1stCluster;
+    @FindBy(xpath = "//ul[contains(@class,'select2-results__options')]/li[1]")
+    public WebElement select1stCluster;
 
-	@FindBy(xpath = "//span[contains(@class,'select2-selection__choice__remove')]")
-	public WebElement removeCluster;
+    @FindBy(xpath = "//span[contains(@class,'select2-selection__choice__remove')]")
+    public WebElement removeCluster;
 
-	@FindBy(xpath = "//div[contains(@class,'opensleft') and contains(@class,'show-calendar')]")
-	public WebElement datepickerCalendar;
+    @FindBy(xpath = "//div[contains(@class,'opensleft') and contains(@class,'show-calendar')]")
+    public WebElement datepickerCalendar;
 
-	@FindBy(xpath = "//span[contains(@class,'select2-dropdown--below')]//ul/li")
-	public List<WebElement> getclusterListDropdown;
+    @FindBy(xpath = "//span[contains(@class,'select2-dropdown--below')]//ul/li")
+    public List<WebElement> getclusterListDropdown;
 
-	@FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[5]")
-	public List<WebElement> getApplicationClusterId;
+    @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[5]")
+    public List<WebElement> getApplicationClusterId;
 
-	@FindBy(xpath = "//h3[contains(text(),'No Data Available')]")
-	public WebElement whenNoApplicationPresent;
+    @FindBy(xpath = "//h3[contains(text(),'No Data Available')]")
+    public WebElement whenNoApplicationPresent;
 
-	@FindBy(xpath = "(//div[contains(@class,'check-items-container')])[1]//span[1]")
-	public List<WebElement> getApplicationTypes;
+    @FindBy(xpath = "(//div[contains(@class,'check-items-container')])[1]//span[1]")
+    public List<WebElement> getApplicationTypes;
 
-	@FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')])[2]")
-	public WebElement userSearchBox;
+    @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')])[2]")
+    public WebElement userSearchBox;
 
-	@FindBy(xpath = "(//ul[contains(@class,'select2-results')])/li")
-	public List<WebElement> getNamesFromDropDown;
+    @FindBy(xpath = "(//ul[contains(@class,'select2-results')])/li")
+    public List<WebElement> getNamesFromDropDown;
 
-	@FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[1]")
-	public WebElement getTypeFromTable;
+    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[1]")
+    public WebElement getTypeFromTable;
 
-	@FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[3]")
-	public WebElement getUsernameFromTable;
+    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[3]")
+    public WebElement getUsernameFromTable;
 
-	@FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[8]")
-	public WebElement getQueueNameTable;
+    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[8]")
+    public WebElement getQueueNameTable;
 
-	@FindBy(id = "apps-global-search-filter")
-	public WebElement globalSearchBox;
+    @FindBy(id = "apps-global-search-filter")
+    public WebElement globalSearchBox;
 
-	@FindBy(xpath = "//tbody/tr")
-	public List<WebElement> getTableData;
-	// Add to master
-	@FindBy(xpath = "(//label[contains(@class,'checkbox')])/span[2]")
-	public List<WebElement> getEachApplicationTypeJobCounts;
+    @FindBy(xpath = "//tbody/tr")
+    public List<WebElement> getTableData;
+    // Add to master
+    @FindBy(xpath = "(//label[contains(@class,'checkbox')])/span[2]")
+    public List<WebElement> getEachApplicationTypeJobCounts;
 
-	@FindBy(xpath = "//div[contains(@class,'check-items-container')]//input//following-sibling::span")
-	public List<WebElement> selectOneApplicationType;
+    @FindBy(xpath = "//div[contains(@class,'check-items-container')]//input//following-sibling::span")
+    public List<WebElement> selectOneApplicationType;
 
-	@FindBy(xpath = "//p[contains(@class,'float-right')]/b")
-	public WebElement getTotalAppCount;
+    @FindBy(xpath = "//p[contains(@class,'float-right')]/b")
+    public WebElement getTotalAppCount;
 
-	@FindBy(id = "reset")
-	public WebElement resetButton;
+    @FindBy(id = "reset")
+    public WebElement resetButton;
 
-	// Add to master
-	@FindBy(className = "show-all")
-	public WebElement showAll;
+    // Add to master
+    @FindBy(className = "show-all")
+    public WebElement showAll;
 
-	@FindBy(xpath = "//a[contains(text(),'Status')]")
-	public WebElement expandStatus;
+    @FindBy(xpath = "//a[contains(text(),'Status')]")
+    public WebElement expandStatus;
 
-	@FindBy(xpath = "//a[text()='Status']//following::div[contains(@class,'check-items-container')]//span[@class='checkmark']")
-	public List<WebElement> selectSingleStatusType;
+    @FindBy(xpath = "//a[text()='Status']//following::div[contains(@class,'check-items-container')]//span[@class='checkmark']")
+    public List<WebElement> selectSingleStatusType;
 
-	@FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[2]")
-	public WebElement getStatusFromTable;
+    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[2]")
+    public WebElement getStatusFromTable;
 
-	@FindBy(xpath = "(//div[contains(@class,'check-items-container')])[2]//span[1]")
-	public List<WebElement> getStatusTypes;
+    @FindBy(xpath = "(//div[contains(@class,'check-items-container')])[2]//span[1]")
+    public List<WebElement> getStatusTypes;
 
-	@FindBy(xpath = "//a[text()='Status']//following::div[contains(@class,'check-items-container')]//span[2]")
-	public List<WebElement> getEachStatusTypeJobCount;
+    @FindBy(xpath = "//a[text()='Status']//following::div[contains(@class,'check-items-container')]//span[2]")
+    public List<WebElement> getEachStatusTypeJobCount;
 
-	@FindBy(xpath = "(//div[@id='app-filter-panel']//div[@class='placeholder']//div[contains(@class,'vue-slider-ltr')])[1]")
-	public WebElement durationSlider;
+    @FindBy(xpath = "(//div[@id='app-filter-panel']//div[@class='placeholder']//div[contains(@class,'vue-slider-ltr')])[1]")
+    public WebElement durationSlider;
 
-	@FindBy(xpath = "(//div[contains(@class,'input-section')])[2]/input[1]")
-	public WebElement durationSliderInputLeft;
+    @FindBy(xpath = "(//div[contains(@class,'input-section')])[2]/input[1]")
+    public WebElement durationSliderInputLeft;
 
-	@FindBy(xpath = "(//div[contains(@class,'input-section')])[2]/input[2]")
-	public WebElement durationSliderInputRight;
+    @FindBy(xpath = "(//div[contains(@class,'input-section')])[2]/input[2]")
+    public WebElement durationSliderInputRight;
 
-	@FindBy(xpath = "//span[@id = 'allApps-headerspan-6']//following-sibling::a[contains(@class, 'sorting')]")
-	public WebElement sortDuration;
+    @FindBy(xpath = "//span[@id = 'allApps-headerspan-6']//following-sibling::a[contains(@class, 'sorting')]")
+    public WebElement sortDuration;
 
-	@FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[7]")
-	public WebElement getDurationFromTable;
+    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[7]")
+    public WebElement getDurationFromTable;
 
-	@FindBy(xpath = "(//div[@id='app-filter-panel']//div[@class='placeholder']//div[contains(@class,'vue-slider-ltr')])[2]")
-	public WebElement eventsSlider;
+    @FindBy(xpath = "(//div[@id='app-filter-panel']//div[@class='placeholder']//div[contains(@class,'vue-slider-ltr')])[2]")
+    public WebElement eventsSlider;
 
-	@FindBy(xpath = "(//div[contains(@class,'input-section')])[4]/input[1]")
-	public WebElement eventsSliderInputLeft;
+    @FindBy(xpath = "(//div[contains(@class,'input-section')])[4]/input[1]")
+    public WebElement eventsSliderInputLeft;
 
-	@FindBy(xpath = "(//div[contains(@class,'input-section')])[4]/input[2]")
-	public WebElement eventsSliderInputRight;
+    @FindBy(xpath = "(//div[contains(@class,'input-section')])[4]/input[2]")
+    public WebElement eventsSliderInputRight;
 
-	@FindBy(xpath = "(//span[contains(@class,'badge')])")
-	public List<WebElement> getBadgeTitle;
+    @FindBy(xpath = "(//span[contains(@class,'badge')])")
+    public List<WebElement> getBadgeTitle;
 
-	@FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')])[3]")
-	public WebElement queueNameSearchBox;
+    @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')])[3]")
+    public WebElement queueNameSearchBox;
 
-	@FindBy(xpath = "(//div/h3[contains(@class,'expandable-header')])[7]//following-sibling::div//label")
-	public List<WebElement> getTagTypes;
+    @FindBy(xpath = "(//div/h3[contains(@class,'expandable-header')])[7]//following-sibling::div//label")
+    public List<WebElement> getTagTypes;
 
-	@FindBy(xpath = "(//div/h3[contains(@class,'expandable-header')])[7]//following-sibling::div//label/span")
-	public List<WebElement> tagsCheckboxes;
+    @FindBy(xpath = "(//div/h3[contains(@class,'expandable-header')])[7]//following-sibling::div//label/span")
+    public List<WebElement> tagsCheckboxes;
 
-	@FindBy(xpath = "((//div[contains(@class,'col-md-2')])//div[contains(@class,'filter-section')])[8]//ul[contains(@class,'select2-selection__rendered')]")
-	public List<WebElement> tagTypeSearchbox;
+    @FindBy(xpath = "((//div[contains(@class,'col-md-2')])//div[contains(@class,'filter-section')])[8]//ul[contains(@class,'select2-selection__rendered')]")
+    public List<WebElement> tagTypeSearchbox;
 
-	@FindBy(xpath = "(//ul[contains(@class,'select2-results')])/li")
-	public List<WebElement> select1stOptionInTagsSearchBox;
+    @FindBy(xpath = "(//ul[contains(@class,'select2-results')])/li")
+    public List<WebElement> select1stOptionInTagsSearchBox;
 
-	@FindBy (xpath = "//a[contains(@content,'Tags')]")
-	public WebElement tagsTab;
+    @FindBy(xpath = "//a[contains(@content,'Tags')]")
+    public WebElement tagsTab;
 
-	@FindBy (xpath = "//table[contains(@id,'appTagsTable')]/tbody/tr")
-	public List<WebElement> tagsTable;
+    @FindBy(xpath = "//table[contains(@id,'appTagsTable')]/tbody/tr")
+    public List<WebElement> tagsTable;
 
-	@FindBy (xpath = "//table[contains(@id,'appTagsTable')]/tbody/tr/td[1]")
-	public List<WebElement> tagsInTable;
+    @FindBy(xpath = "//table[contains(@id,'appTagsTable')]/tbody/tr/td[1]")
+    public List<WebElement> tagsInTable;
 
-	@FindBy (xpath = "//table[contains(@id,'appTagsTable')]/tbody/tr/td[2]")
-	public List<WebElement> descriptionInTable;
+    @FindBy(xpath = "//table[contains(@id,'appTagsTable')]/tbody/tr/td[2]")
+    public List<WebElement> descriptionInTable;
 
-	// @FindBy (xpath = "(//label[contains(@class,'checkbox')])/span[1]")
-	// public List<WebElement> getApplicationTypes;
-
-	/**
-	 * @param driver
-	 *            The driver that will be used to look up the elements
-	 */
-	public ApplicationsPageObject(WebDriver driver) {
-		PageFactory.initElements(driver, this);
-	}
+    /**
+     * @param driver The driver that will be used to look up the elements
+     */
+    public ApplicationsPageObject(WebDriver driver) {
+        PageFactory.initElements(driver, this);
+    }
 }

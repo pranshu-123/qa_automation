@@ -19,7 +19,7 @@ public class TC_JIA05 extends BaseClass {
     public void TC_JIA05_verifyClusterFilter(String clusterId) {
         test = extent.startTest("TC_JIA05_verifyClusterFilter" + clusterId, "Verify cluster filter" +
                 " in UI");
-        test.assignCategory("4620 Jobs / InEfficient Apps");
+        test.assignCategory(" Jobs / InEfficient Apps");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         test.log(LogStatus.INFO, "Passed Parameter Is : " + clusterId);

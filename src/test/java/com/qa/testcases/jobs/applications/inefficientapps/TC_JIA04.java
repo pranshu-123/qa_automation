@@ -24,7 +24,7 @@ public class TC_JIA04 extends BaseClass {
     public void TC_JIA04_verifyCustomRangeDatePicker(String clusterId) {
         test = extent.startTest("TC_JIA04_verifyCustomRangeDatePicker" + clusterId, "Verify " +
                 "Application with Inefficient events are listed for Custom Range");
-        test.assignCategory("4620 Jobs / InEfficient Apps");
+        test.assignCategory(" Jobs / InEfficient Apps");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         test.log(LogStatus.PASS, "Passed Parameter Is : " + clusterId);

@@ -11,6 +11,7 @@ import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import java.util.List;
 /**
@@ -21,7 +22,7 @@ import java.util.List;
 @Marker.All
 public class TC_CJ_08 extends BaseClass {
 
-
+    @Test(dataProvider = "clusterid-data-provider")
     public void TC_CJ_08_VerifyJobsuserinGroupBy (String clusterId) {
         test = extent.startTest("TC_CJ_08_VerifyJobsuserinGroupBy (" + clusterId + ")", "Validate Jobs user in Group By");
         test.assignCategory("4620 - Cluster / Job");

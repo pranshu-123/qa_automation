@@ -11,6 +11,7 @@ import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import java.util.List;
 /**
@@ -21,7 +22,7 @@ import java.util.List;
 @Marker.All
 public class TC_CJ_12 extends BaseClass {
 
-
+    @Test(dataProvider = "clusterid-data-provider")
     public void TC_CJ_12_VerifyJobsqueuefilters(String clusterId) {
         test = extent.startTest("TC_CJ_12_VerifyJobsqueuefilters (" + clusterId + ")", "Verify Jobs queue filters");
         test.assignCategory("4620 - Cluster / Job");

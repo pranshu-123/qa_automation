@@ -50,7 +50,7 @@ public class ApplicationsPageObject {
 	@FindBy(xpath = "//span[contains(@class,'select2-dropdown--below')]//ul/li")
 	public List<WebElement> getclusterListDropdown;
 	
-		@FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[5]")
+	@FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[5]")
 	public List<WebElement> getApplicationClusterId;
 	
 	@FindBy (xpath = "//h3[contains(text(),'No Data Available')]")
@@ -91,6 +91,36 @@ public class ApplicationsPageObject {
 	
 	@FindBy (id = "reset")
 	public WebElement resetButton;
+
+	@FindBy(xpath="(//h3[contains(@class,'expandable-header')]/a)[1]")
+	public WebElement applicationType;
+
+	@FindBy(xpath="(//h3[contains(@class,'expandable-header')]/a)[2]")
+	public WebElement applicationEvent;
+
+	@FindBy(xpath="(//label[contains(@class,'checkbox')])[1]/input")
+	public WebElement applicationTypeFirstApp;
+
+	@FindBy(xpath="(//label[contains(@class,'checkbox')])[6]/input")
+	public WebElement applicationEventFirstApp;
+
+	@FindBy(xpath="(//label[contains(@class,'checkbox')])/input")
+	public List<WebElement> getApplicationTypeChkBoxList;
+
+	@FindBy(xpath="(//label[contains(@class,'checkbox')])/input")
+	public List<WebElement> getApplicationEventChkBoxList;
+
+	@FindBy(css = ".show-all")
+	public WebElement showAll;
+
+	@FindBy(xpath="//tbody[@id='inefficientApps-body']/tr")
+	public List<WebElement> inefficientAppsTblRowsList;
+
+	@FindBy(xpath="//h3[contains(@class,'no-data-msg')]")
+	public WebElement inefficientAppsTblNoDataMsg;
+
+	@FindBy(xpath="//a[contains(@class,'icon-sort')]")
+	public List<WebElement> inefficientAppsIconSortTbl;
 
     /**
      * @param driver The driver that will be used to look up the elements

@@ -30,6 +30,8 @@ public class CommonPageObject {
   @FindBy(xpath = "//span[contains(@class,'select2-dropdown--below')]//li")
   public List<WebElement> listOfClusters;
 
+  @FindBy(xpath = "//div[contains(@class,'close pointer')]")
+  public List<WebElement> closeModalButton;
 
   public CommonPageObject(WebDriver driver) {
     PageFactory.initElements(driver,this);

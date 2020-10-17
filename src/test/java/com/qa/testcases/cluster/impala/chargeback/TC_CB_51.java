@@ -28,7 +28,7 @@ public class TC_CB_51 extends BaseClass {
 	public void TC_CB_51_VerifyTotalCPUAndMemoryHoursOfTable(String clusterId) {
 		test = extent.startTest("TC_CB_51_VerifyTotalCPUAndMemoryHoursOfTable: " + clusterId,
 				"Verify User is able to see list of clusters available");
-		test.assignCategory("4620 Cluster - Impala Chargeback");
+		test.assignCategory(" Cluster - Impala Chargeback");
 		test.log(LogStatus.INFO, "Login to the application");
 
 		// Initialize all classes objects

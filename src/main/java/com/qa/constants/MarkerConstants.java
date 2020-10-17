@@ -44,6 +44,7 @@ public class MarkerConstants {
     map.put(TOPX, Marker.TopX.class);
     map.put(REGRESSION, Marker.Regression.class);
     map.put(ALL, Marker.All.class);
+    map.put(ALERTS, Marker.Alerts.class);
     map.put(IMPALA_RESOURCES, Marker.ImpalaResources.class);
     map.put(IMPALA_CHARGEBACK, Marker.ImpalaChargeback.class);
     map.put(ALL_APPS, Marker.AllApps.class);

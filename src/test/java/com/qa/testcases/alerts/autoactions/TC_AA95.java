@@ -4,8 +4,6 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.scripts.alerts.AutoActions;
-import com.qa.scripts.manage.Manage;
-import com.qa.testcases.manage.TC_M01;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;

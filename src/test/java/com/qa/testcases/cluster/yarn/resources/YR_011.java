@@ -21,7 +21,7 @@ public class YR_011 extends BaseClass {
     public void YR_011_verifyYarnResourcePageAndSelectApplicationType(String clusterId) {
         test = extent.startTest("YR_011_verifyYarnResourcePageAndSelectApplicationType: " + clusterId,
                 "Select the application Type in the dropdown (group by)");
-        test.assignCategory("4620 Cluster - Yarn Resources");
+        test.assignCategory(" Cluster - Yarn Resources");
         Log.startTestCase("YR_011_verifyYarnResourcePageAndSelectApplicationType");
 
         Yarn yarn = new Yarn(driver);

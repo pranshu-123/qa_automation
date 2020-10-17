@@ -26,7 +26,7 @@ public class YC_022 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void YC_022_Verifythecosteditfields(String clusterId) {
         test = extent.startTest("YC_021_Verifythecalender"+clusterId, "Verify the cost edit fields");
-        test.assignCategory("4620 Cluster - Yarn Chargeback");
+        test.assignCategory(" Cluster - Yarn Chargeback");
         Log.startTestCase("YC_022_Verifythecosteditfields");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);

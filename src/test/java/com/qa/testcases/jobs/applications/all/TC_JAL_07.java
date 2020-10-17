@@ -29,7 +29,7 @@ public class TC_JAL_07 extends BaseClass {
 	public void validateGlobalSearch(String clusterId) {
 		test = extent.startTest("TC_JAL_07.validateGlobalSearch",
 				"Verify that global search is able to search by application type, queue name, user name or app Id");
-		test.assignCategory("4620 Jobs - Applications");
+		test.assignCategory(" Jobs - Applications");
 		test.log(LogStatus.INFO, "Login to the application");
 
 		// Initialize all classes objects

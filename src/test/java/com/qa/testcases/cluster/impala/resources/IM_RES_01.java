@@ -32,7 +32,7 @@ public class IM_RES_01 extends BaseClass {
 	public void IM_RES_01_verifyGraphIsDisplayedForMemoryConsumptionAndQueryForAllDatePickerOption(String clusterId) {
 		test = extent.startTest("IM_RES_01_verifyGraphIsDisplayedForMemoryConsumptionAndQueryForAllDatePickerOption",
 				"Verify if user is able to view graph for Memory and Query on selecting different options from date picker from 1hour to last month");
-		test.assignCategory("4620 - Cluster/Impala Resources");
+		test.assignCategory(" Cluster/Impala Resources");
 		LOGGER.info("Verifying memory and query graph for last 1 hour");
 		waitExecuter = new WaitExecuter(driver);
 		picker = new DatePicker(driver);

@@ -22,7 +22,7 @@ public class TC_CTX_24 extends BaseClass {
   public void verifyClusterFilter() {
     test = extent.startTest("TC_CTX_24.verifyClusterFilter",
       "Verify cluster filter in new report page.");
-    test.assignCategory("4620 Cluster - Top X");
+    test.assignCategory(" Cluster - Top X");
     WaitExecuter waitExecuter = new WaitExecuter(driver);
     TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
 

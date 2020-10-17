@@ -22,7 +22,7 @@ public class TC_CTX_23 extends BaseClass {
   public void verifyTopXWithDifferentCount(String clusterId) {
     test = extent.startTest("TC_CTX_23.verifyTopXWithDifferentCount",
       "Verify TopX report is generation for different application counts.");
-    test.assignCategory("4620 Cluster - Top X");
+    test.assignCategory(" Cluster - Top X");
     WaitExecuter waitExecuter = new WaitExecuter(driver);
     TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
 

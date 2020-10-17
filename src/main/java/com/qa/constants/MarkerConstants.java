@@ -16,6 +16,7 @@ public class MarkerConstants {
   public static final String TOPX = "topx";
   public static final String REGRESSION = "regression";
   public static final String ALL = "all";
+  public static final String ALERTS = "alerts";
   public static final String CLUSTER_OVERVIEW = "cluster_overview";
   public static final String IMPALA_RESOURCES = "impala_resources";
   public static final String IMPALA_CHARGEBACK = "impala_chargeback";

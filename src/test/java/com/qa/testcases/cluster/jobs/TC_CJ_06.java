@@ -22,7 +22,7 @@ public class TC_CJ_06 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_CJ_06_VerifyJobsApplicationtypeinGroupBy(String clusterId) {
         test = extent.startTest("TC_CJ_06_VerifyJobsApplicationtypeinGroupBy (" + clusterId + ")", "Validate Jobs Application type in Group By ");
-        test.assignCategory("4620 - Cluster / Job");
+        test.assignCategory(" Cluster / Job");
         Log.startTestCase("TC_CJ_05_VerifyJobsApplicationtypeinGroupBy");
         WaitExecuter executer = new WaitExecuter(driver);
         JobsPageObject jobsPageObject = new JobsPageObject(driver);

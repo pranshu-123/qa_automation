@@ -29,7 +29,7 @@ public class TC_CO_06 extends BaseClass {
     @Test()
     public void TC_CO_06_VerifyclusterfilterinUI() {
         test = extent.startTest("TC_CO_06_VerifyclusterfilterinUI" , "Verify cluster filter in UI ");
-        test.assignCategory("4620 - Cluster Overview");
+        test.assignCategory(" Cluster Overview");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         Log.info("Verify cluster filter in UI");
         HomePage homePage = new HomePage(driver);

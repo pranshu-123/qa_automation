@@ -18,7 +18,7 @@ public class TC_CO_05 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_CO_05_VerifyCluster0verviewReportCustomRange(String clusterId) {
         test = extent.startTest("TC_CO_05_VerifyCluster0verviewReportCustomRange: "+clusterId, "Verify Cluster 0verview report for Custom Range.");
-        test.assignCategory("4620 - Cluster Overview");
+        test.assignCategory(" Cluster Overview");
 
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);

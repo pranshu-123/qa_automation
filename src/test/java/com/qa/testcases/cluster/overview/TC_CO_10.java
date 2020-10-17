@@ -24,7 +24,7 @@ public class TC_CO_10  extends BaseClass
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_CO_10_VerifyclusterVCoresKPIgraphfilter(String clusterId) {
         test = extent.startTest("TC_CO_10_VerifyclusterVCoresKPIgraphfilter"+clusterId, "Verify cluster VCores KPI graph filter");
-        test.assignCategory("4620 - Cluster Overview");
+        test.assignCategory(" Cluster Overview");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
 

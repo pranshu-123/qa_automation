@@ -30,7 +30,7 @@ public class TC_CO_15 extends BaseClass {
     executer.sleep(2000);
 
     test = extent.startTest("TC_CO_15_verifyInefficientGraph: "+clusterId, "Verify jobs 'Inefficient events' KPI graph filter.");
-    test.assignCategory("4620 - Cluster Overview");
+    test.assignCategory(" Cluster Overview");
 
     HomePage homePage = new HomePage(driver);
     homePage.selectMultiClusterId(clusterId);

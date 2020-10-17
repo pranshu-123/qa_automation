@@ -19,7 +19,7 @@ public class TC_CTX_30 extends BaseClass {
 	@Test
 	public void TC_CTX_30_validateReportSchedule() {
 		test = extent.startTest("TC_CTX_30_validateReportSchedule", "Verify new TopX report is scheduled");
-		test.assignCategory(" Cluster - TopX");
+		test.assignCategory(" Cluster - Top X");
 		WaitExecuter waitExecuter = new WaitExecuter(driver);
 		TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
 		waitExecuter.waitUntilElementPresent(topPanelPageObject.topXTab);

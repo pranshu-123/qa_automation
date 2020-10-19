@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.workload;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.clusters.WorkloadPageObject;
@@ -11,7 +12,8 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
-
+@Marker.All
+@Marker.ClusterWorkload
 public class TC_CTP_08 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_CTP_08.class);
 
@@ -55,8 +57,6 @@ public class TC_CTP_08 extends BaseClass {
         scrollY = scrollY + datePicker.getDatePickerYPosition();
         waitExecuter.sleep(3000);
 
-        workload.setStartDate(workload.getFirstDateOfYear());
-        workload.setEndDate(workload.getCurrentDate());
 
 
     }

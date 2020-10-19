@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.workload;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.clusters.WorkloadPageObject;
 import com.qa.scripts.DatePicker;
@@ -10,7 +11,8 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
-
+@Marker.All
+@Marker.ClusterWorkload
 public class TC_CTP_06 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_CTP_06.class);
 

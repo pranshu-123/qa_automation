@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.workload;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.clusters.WorkloadPageObject;
@@ -15,7 +16,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+@Marker.All
+@Marker.ClusterWorkload
 public class TC_CTP_11 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_CTP_11.class);
 

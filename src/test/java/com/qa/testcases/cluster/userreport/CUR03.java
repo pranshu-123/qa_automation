@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.userreport;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.UserReportPageObject;
@@ -18,7 +19,8 @@ import org.testng.annotations.Test;
  * @author Sarbashree Ray
  * This class contains all schedule date related action methods
  */
-
+@Marker.All
+@Marker.UserReports
 public class CUR03 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(CUR03.class);
 

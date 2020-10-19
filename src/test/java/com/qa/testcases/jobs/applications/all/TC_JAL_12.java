@@ -5,9 +5,7 @@ package com.qa.testcases.jobs.applications.all;
  */
 
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
-import com.qa.scripts.DatePicker;
 import com.qa.scripts.clusters.impala.ChargeBackImpala;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.WaitExecuter;
@@ -29,38 +27,20 @@ public class TC_JAL_12 extends BaseClass {
     public void VerifyDurationSliderFilter(String clusterId) {
         test = extent.startTest("TC_JAL_12.VerifyDurationSliderFilter",
                 "Verify duration selected in slider matches the apps duration in table.");
-        test.assignCategory("4620 Jobs - Applications");
+        test.assignCategory("Jobs - Applications");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
         LOGGER.info("Initialize all class objects");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
-        DatePicker datePicker = new DatePicker(driver);
         AllApps allApps = new AllApps(driver);
         ChargeBackImpala impala = new ChargeBackImpala(driver);
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-        LOGGER.info("Navigate to jobs tab from header");
-        waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.jobs);
-        waitExecuter.sleep(1000);
-        topPanelComponentPageObject.jobs.click();
-        waitExecuter.sleep(3000);
-        waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
-        waitExecuter.waitUntilPageFullyLoaded();
-        // Select last 7 days from date picker
         test.log(LogStatus.INFO, "Select last 7 days");
-        LOGGER.info("Select last 7 days");
-        datePicker.clickOnDatePicker();
-        waitExecuter.sleep(1000);
-        datePicker.selectLast7Days();
-        waitExecuter.sleep(2000);
-        // Select cluster
-        test.log(LogStatus.INFO, "Select clusterid : " + clusterId);
-        LOGGER.info("Select clusterId : " + clusterId);
-        allApps.selectCluster(clusterId);
-        waitExecuter.sleep(3000);
+        test.log(LogStatus.INFO, "Select clusterId : " + clusterId);
+        allApps.inJobsSelectClusterAndLast7Days(clusterId);
         // Slide the duration slider to get min and max value of duration
         test.log(LogStatus.INFO, "Slide the duration slider to get min and max value of duration");
         LOGGER.info("Slide the duration slider to get min and max value of duration");

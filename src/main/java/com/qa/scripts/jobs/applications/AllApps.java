@@ -1,7 +1,10 @@
 package com.qa.scripts.jobs.applications;
 
+import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
+import com.qa.scripts.DatePicker;
 import com.qa.utils.WaitExecuter;
+import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,19 +21,27 @@ public class AllApps {
     private final WebDriver driver;
     private final ApplicationsPageObject applicationsPageObject;
     private final Actions action;
+    private final TopPanelComponentPageObject topPanelComponentPageObject;
+    private final DatePicker datePicker;
+    private final AllApps allApps;
 
     /**
      * Constructer to initialize wait, driver and necessary objects
      *
      * @param driver - WebDriver instance
      */
+
     public AllApps(WebDriver driver) {
         waitExecuter = new WaitExecuter(driver);
         applicationsPageObject = new ApplicationsPageObject(driver);
         action = new Actions(driver);
+        topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+        datePicker = new DatePicker(driver);
+        allApps = new AllApps(driver);
         this.driver = driver;
     }
 
+    /*Get all range from calendar */
     public List<String> getCalendarRanges() {
         List<WebElement> getCalendarRangeElements = applicationsPageObject.dateRanges;
         waitExecuter.sleep(1000);
@@ -45,14 +56,16 @@ public class AllApps {
 
     /* Select cluster from list */
     public void selectCluster(String clusterId) {
+        LOGGER.info("Select Cluster: " + clusterId);
         removeClusterIfPresent();
         applicationsPageObject.clusterSearchBox.click();
         waitExecuter.sleep(1000);
-        LOGGER.info("Search for clusrer: " + clusterId);
+        LOGGER.info("Search for cluster: " + clusterId);
         applicationsPageObject.clusterSearchBox.sendKeys(clusterId);
         waitExecuter.sleep(1000);
         applicationsPageObject.select1stCluster.click();
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(4000);
+
     }
 
     /* Check and remove cluster from searchbox */
@@ -108,5 +121,37 @@ public class AllApps {
     public void moveTheSlider(WebElement sliderElement, int width) {
         action.dragAndDropBy(sliderElement, width, 0).click();
         action.build().perform();
+    }
+
+    /* Navigate to Jobs Tab */
+    public void navigateToJobsTab() {
+        LOGGER.info("Navigate to jobs tab from header");
+        waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.jobs);
+        waitExecuter.sleep(1000);
+        topPanelComponentPageObject.jobs.click();
+        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
+        waitExecuter.waitUntilPageFullyLoaded();
+    }
+
+    /* Select last 7 days from date range */
+    public void select7Days(){
+        LOGGER.info("Select last 7 days");
+        datePicker.clickOnDatePicker();
+        waitExecuter.sleep(1000);
+        datePicker.selectLast7Days();
+        waitExecuter.sleep(2000);
+    }
+
+    /* Select cluster and Last 7 days */
+    public void inJobsSelectClusterAndLast7Days(String clusterId){
+        // Navigate to Jobs tab from header
+        allApps.navigateToJobsTab();
+        // Select last 7 days from date picker
+        allApps.select7Days();
+        // Select cluster
+        LOGGER.info("Select clusterId : " + clusterId);
+        allApps.selectCluster(clusterId);
+        waitExecuter.sleep(3000);
     }
 }

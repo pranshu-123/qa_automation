@@ -2,7 +2,6 @@ package com.qa.testcases.jobs.applications.all;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.WaitExecuter;
@@ -24,26 +23,19 @@ public class TC_JAL_06 extends BaseClass {
     public void validateApplicationsAreOfSelectedClusterId(String clusterId) {
         test = extent.startTest("TC_JAL_06.validateApplicationsAreOfSelectedClusterId",
                 "Verify the apps listed in page are of selected cluster id only");
-        test.assignCategory("4620 Jobs - Applications");
+        test.assignCategory("Jobs - Applications");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
         LOGGER.info("Initialize all class objects");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         AllApps allApps = new AllApps(driver);
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-        LOGGER.info("Navigate to jobs tab from header");
-        waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.jobs);
-        waitExecuter.sleep(1000);
-        topPanelComponentPageObject.jobs.click();
-        waitExecuter.sleep(3000);
-        waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
-        waitExecuter.waitUntilPageFullyLoaded();
+        allApps.navigateToJobsTab();
         String subStringOfSelectedClusterId = clusterId.substring(0, 19);
-        System.out.println("subStringOfSelectedClusterId " + subStringOfSelectedClusterId);
+        LOGGER.info("subStringOfSelectedClusterId " + subStringOfSelectedClusterId);
         // Select cluster
         test.log(LogStatus.INFO, "Select clusterid : " + clusterId);
         LOGGER.info("Select clusterId : " + clusterId);

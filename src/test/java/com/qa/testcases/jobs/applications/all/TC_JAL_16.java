@@ -28,7 +28,7 @@ public class TC_JAL_16 extends BaseClass {
     public void VerifyTagsDropdownOptions(String clusterId) {
         test = extent.startTest("TC_JAL_16.VerifyTagsDropdownOptions",
                 "Verify that on expanding tags the option available are 'dept, priority, team, project, real users, dbs and inputTables'");
-        test.assignCategory("4620 Jobs - Applications");
+        test.assignCategory("Jobs - Applications");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -39,27 +39,11 @@ public class TC_JAL_16 extends BaseClass {
         DatePicker datePicker = new DatePicker(driver);
         AllApps allApps = new AllApps(driver);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
-        // Navigate to Jobs tab from header
+        // Navigate to Jobs tab from header select cluster and clisk on last 7 days
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-        LOGGER.info("Navigate to jobs tab from header");
-        waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.jobs);
-        waitExecuter.sleep(1000);
-        topPanelComponentPageObject.jobs.click();
-        waitExecuter.sleep(3000);
-        waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
-        waitExecuter.waitUntilPageFullyLoaded();
-        // Select last 7 days from date picker
         test.log(LogStatus.INFO, "Select last 7 days");
-        LOGGER.info("Select last 7 days");
-        datePicker.clickOnDatePicker();
-        waitExecuter.sleep(1000);
-        datePicker.selectLast7Days();
-        waitExecuter.sleep(2000);
-        // Select cluster
-        test.log(LogStatus.INFO, "Select clusterid : " + clusterId);
-        LOGGER.info("Select clusterId : " + clusterId);
-        allApps.selectCluster(clusterId);
-        waitExecuter.sleep(3000);
+        test.log(LogStatus.INFO, "Select clusterId : " + clusterId);
+        allApps.inJobsSelectClusterAndLast7Days(clusterId);
         // Scroll to view Tags filter
         test.log(LogStatus.INFO, "Scroll to view Tags filter.");
         LOGGER.info("Scroll to view Tags filter.");

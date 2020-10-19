@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
+import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
@@ -20,7 +21,7 @@ public class TC_JAL_02 extends BaseClass {
 	public void validateCustomRangeCalendar() {
 		test = extent.startTest("TC_JAL_02.validateCustomRangeCalendar",
 				"Verify custom range click opens date-time calendar");
-		test.assignCategory("4620 Jobs - Applications");
+		test.assignCategory("Jobs - Applications");
 		test.log(LogStatus.INFO, "Login to the application");
 		// Initialize all classes objects
 		test.log(LogStatus.INFO, "Initialize all class objects");
@@ -29,15 +30,10 @@ public class TC_JAL_02 extends BaseClass {
 		TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
 		ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
 		DatePicker datePicker = new DatePicker(driver);
+		AllApps allApps = new AllApps(driver);
 		// Navigate to Jobs tab from header
 		test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-		LOGGER.info("Navigate to jobs tab from header");
-		waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.jobs);
-		waitExecuter.sleep(1000);
-		topPanelComponentPageObject.jobs.click();
-		waitExecuter.sleep(3000);
-		waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
-		waitExecuter.waitUntilPageFullyLoaded();
+		allApps.navigateToJobsTab();
 		// Click on date picker and select custom range
 		test.log(LogStatus.INFO, "Click on date picker and select custom range");
 		LOGGER.info("Click on date picker and select custom range");

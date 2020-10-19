@@ -31,7 +31,7 @@ public class TC_JAL_01 extends BaseClass {
 	public void validateDatePickerFilters(String clusterId) {
 		test = extent.startTest("TC_JAL_01.validateDatePickerFilters",
 				"Verify the options available in date picker filter");
-		test.assignCategory("4620 Jobs - Applications");
+		test.assignCategory(" Jobs - Applications");
 		test.log(LogStatus.INFO, "Login to the application");
 
 		// Initialize all classes objects

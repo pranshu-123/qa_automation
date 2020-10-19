@@ -24,7 +24,7 @@ public class IM_RES_25 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void verifyusertotheapplicationdetailspage(String clusterId) {
         test = extent.startTest("IM_RES_25.verifyusertotheapplicationdetailspage (" + clusterId + ")", "Verify UI should open the Impala details page.");
-        test.assignCategory("4620 - Cluster/Impala Resources");
+        test.assignCategory(" Cluster/Impala Resources");
         WaitExecuter executer = new WaitExecuter(driver);
         HomePage homePage = new HomePage(driver);
 

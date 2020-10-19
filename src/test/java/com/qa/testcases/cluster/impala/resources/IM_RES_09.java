@@ -24,7 +24,7 @@ public class IM_RES_09 extends BaseClass {
   @Test(dataProvider = "clusterid-data-provider")
   public void verifyDataDisplayedAsFilteredUser(String clusterId) {
     test = extent.startTest("IM_RES_09.verifyQueryGraphForUserGroup ("+clusterId+")", "Validate the \"Group By\" filter for user.");
-    test.assignCategory("4620 - Cluster/Impala Resources");
+    test.assignCategory(" Cluster/Impala Resources");
     WaitExecuter executer = new WaitExecuter(driver);
 
     ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);

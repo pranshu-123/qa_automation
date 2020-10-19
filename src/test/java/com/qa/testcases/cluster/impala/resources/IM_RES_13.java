@@ -25,7 +25,7 @@ public class IM_RES_13 extends BaseClass {
   @Test
   public void verifyQueryGraphForQueueGroup() {
     test = extent.startTest("IM_RES_13.verifyQueryGraphForQueueGroup", "Verify Query graph with mouse hover.)");
-    test.assignCategory("4620 - Cluster/Impala Resources");
+    test.assignCategory(" Cluster/Impala Resources");
 
     test.log(LogStatus.INFO, "Login to the application");
     WaitExecuter waitExecuter = new WaitExecuter(driver);

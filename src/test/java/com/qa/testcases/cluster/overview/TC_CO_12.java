@@ -24,7 +24,7 @@ public class TC_CO_12 extends BaseClass {
 	@Test(dataProvider = "clusterid-data-provider")
 	public void TC_CO_12_verifyKPIJobs(String clusterId) {
 		test = extent.startTest("TC_CO_12_verifyKPIJobs : "+clusterId, "Verify Custom Date KPIs under Jobs heading ");
-		test.assignCategory("4620 - Cluster Overview");
+		test.assignCategory(" Cluster Overview");
 		waitExecuter = new WaitExecuter(driver);
 		datePicker = new DatePicker(driver);
 

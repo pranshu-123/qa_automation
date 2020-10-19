@@ -33,7 +33,7 @@ public class TC_CB_32 extends BaseClass {
 	public void TC_CB_32_VerifyTotalMemoryHoursToUserMemoryHours(String clusterId) {
 		test = extent.startTest("TC_CB_32_VerifyTotalMemoryHoursToUserMemoryHours : " + clusterId,
 				"Verify that the Total Memory hours displayed pie chart is equal to the sum of all the users memory hours from chargeback table");
-		test.assignCategory("4620 Cluster - Impala Chargeback");
+		test.assignCategory(" Cluster - Impala Chargeback");
 		test.log(LogStatus.INFO, "Login to the application");
 
 		// Initialize all classes objects

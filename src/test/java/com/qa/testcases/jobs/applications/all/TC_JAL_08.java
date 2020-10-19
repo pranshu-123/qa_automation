@@ -27,7 +27,7 @@ public class TC_JAL_08 extends BaseClass {
 	public void validateResetFunctionality(String clusterId) {
 		test = extent.startTest("TC_JAL_08.validateResetFunctionality",
 				"Selection of reset option should reset all the filters which are applied");
-		test.assignCategory("4620 Jobs - Applications");
+		test.assignCategory(" Jobs - Applications");
 		test.log(LogStatus.INFO, "Login to the application");
 
 		// Initialize all classes objects

@@ -26,7 +26,7 @@ public class TC_CB_39 extends BaseClass {
   @Test(dataProvider = "clusterid-data-provider")
   public void TC_CB_39_VerifyAppDetails(String clusterId) {
     test = extent.startTest("TC_CB_39_VerifyAppDetails: "+clusterId,"Validate the user can view the app details by clicking on the application");
-    test.assignCategory("4620 Cluster - Impala Chargeback");
+    test.assignCategory(" Cluster - Impala Chargeback");
 
     WaitExecuter waitExecuter = new WaitExecuter(driver);
     ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);

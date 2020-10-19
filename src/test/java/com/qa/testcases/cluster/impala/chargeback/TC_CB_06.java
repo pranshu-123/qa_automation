@@ -30,7 +30,7 @@ public class TC_CB_06 extends BaseClass {
   @Test(dataProvider = "clusterid-data-provider")
   public void TC_CB_06_VerifyCustomDateRange(String clusterId) {
     test = extent.startTest("TC_CB_06_VerifyCustomDateRange: "+clusterId, "Verify the user can select custom date ranges");
-    test.assignCategory("4620 Cluster - Impala Chargeback");
+    test.assignCategory(" Cluster - Impala Chargeback");
 
     WaitExecuter waitExecuter = new WaitExecuter(driver);
     ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);

@@ -23,7 +23,7 @@ public class YC_019_020 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void YC_019_verifyYarnChargeBackPageAndClustersId(String clusterId) {
         test = extent.startTest("YC_019_verifyYarnChargeBackPageAndClustersId: "+clusterId,"Verify User is able to access Yarn chrageback page and Verify the cluster functionality.");
-        test.assignCategory("4620 Cluster - Yarn Chargeback");
+        test.assignCategory(" Cluster - Yarn Chargeback");
 
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);

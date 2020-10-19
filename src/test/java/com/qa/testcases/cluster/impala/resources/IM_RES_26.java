@@ -33,7 +33,7 @@ public class IM_RES_26 extends BaseClass {
 	public void IM_RES_26_verifyIsGraphDisplayedForMemoryConsumptionAndQuery(String clusterId) {
 		test = extent.startTest("IM_RES_26_verifyIsGraphDisplayedForMemoryConsumptionAndQuery : " + clusterId,
 				"Verify if user is able to view No data if graph is not visible");
-		test.assignCategory("4620 - Cluster/Impala Resources");
+		test.assignCategory(" Cluster/Impala Resources");
 		test.log(LogStatus.INFO, "Login to the application");
 
 		// Initialize all classes objects

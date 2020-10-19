@@ -1,5 +1,6 @@
 package com.qa.testcases.jobs.applications.all;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.jobs.applications.AllApps;
@@ -13,8 +14,10 @@ import org.testng.annotations.Test;
 import java.util.List;
 import java.util.logging.Logger;
 
+@Marker.AllApps
+@Marker.All
 public class TC_JAL_07 extends BaseClass {
-    private static final Logger LOGGER = Logger.getLogger(TC_JAL_07.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TC_JAL_06.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void validateGlobalSearch(String clusterId) {

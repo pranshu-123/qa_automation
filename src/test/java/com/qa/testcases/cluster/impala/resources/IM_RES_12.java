@@ -20,7 +20,7 @@ public class IM_RES_12 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void verifyGroupByFilterForQueue(String clusterId) {
         test = extent.startTest("IM_RES_12.verifyGroupByFilterForQueue (" + clusterId + ")", "Validate the \"Group By\" filter for Queue.");
-        test.assignCategory("4620 - Cluster/Impala Resources");
+        test.assignCategory(" Cluster/Impala Resources");
         WaitExecuter executer = new WaitExecuter(driver);
 
         ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);

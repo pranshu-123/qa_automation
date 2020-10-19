@@ -25,7 +25,7 @@ public class TC_CTX_20 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void validateTopXGenerated(String clusterId) {
         test = extent.startTest("TC_CTX_20.validateTopXGenerated", "Verify new TopX report is generated");
-        test.assignCategory("4620 Cluster - Top X");
+        test.assignCategory(" Cluster - Top X");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
         waitExecuter.waitUntilElementPresent(topPanelPageObject.topXTab);

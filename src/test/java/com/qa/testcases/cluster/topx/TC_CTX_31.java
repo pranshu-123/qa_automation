@@ -20,7 +20,7 @@ public class TC_CTX_31 extends BaseClass {
 	@Test
 	public void TC_CTX_31_validateReportSchedule() {
 		test = extent.startTest("TC_CTX_31_validateJsonDownload", "Verify in TopX Json file is downloaded successfully");
-		test.assignCategory("4620 Cluster - TopX");
+		test.assignCategory(" Cluster - Top X");
 		WaitExecuter waitExecuter = new WaitExecuter(driver);
 		TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
 		waitExecuter.waitUntilElementPresent(topPanelPageObject.topXTab);

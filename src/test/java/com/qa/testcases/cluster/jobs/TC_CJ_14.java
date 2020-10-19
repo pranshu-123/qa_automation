@@ -25,7 +25,7 @@ public class TC_CJ_14 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_CJ_14_Filterbycluster(String clusterId) {
         test = extent.startTest("TC_CJ_14_Filterbycluster (" + clusterId + ")", "Verify filter by cluster ");
-        test.assignCategory("4620 - Cluster / Job");
+        test.assignCategory(" Cluster / Job");
         Log.startTestCase("TC_CJ_14_Filterbycluster");
         WaitExecuter executer = new WaitExecuter(driver);
         JobsPageObject jobsPageObject=new JobsPageObject(driver);

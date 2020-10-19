@@ -22,7 +22,7 @@ public class TC_CB_01 extends BaseClass {
   @Test(dataProvider = "clusterid-data-provider")
   public void TC_CB_01_VerifyImpalaChargeBackPage(String clusterId) {
     test = extent.startTest("TC_CB_01_VerifyImpalaChargeBackPage: "+clusterId,"Verify User is able to access Impala chrageback page");
-    test.assignCategory("4620 Cluster - Impala Chargeback");
+    test.assignCategory(" Cluster - Impala Chargeback");
 
     ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
     chargeBackImpala.selectImpalaChargeback();

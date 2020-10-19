@@ -20,7 +20,7 @@ public class YC_021 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void YC_021_Verifythecalender(String clusterId) {
         test = extent.startTest("YC_021_Verifythecalender"+clusterId, "Verify the calender time");
-        test.assignCategory("4620 Cluster - Yarn Chargeback");
+        test.assignCategory(" Cluster - Yarn Chargeback");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         test.log(LogStatus.PASS, "Passed Parameter Is : " + clusterId);

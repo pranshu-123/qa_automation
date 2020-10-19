@@ -39,6 +39,20 @@ public class TC_AA95 extends BaseClass {
         test.log(LogStatus.INFO, "Verified Auto Actions Header.");
         logger.info("Auto Actions Header found and matched");
 
+        aa.clickOnNewAutoActionBtn();
+        test.log(LogStatus.INFO, "clicked on new auto action button");
+        Assert.assertTrue(aa.validateNewAutoActionPolicyPageDisplayed(), "New Auto Action Policy page" +
+                " not displayed");
+        String policyName = "policy1";
+        aa.enterNewAutoActionPolicyDetails(policyName,"User", "3");
+        test.log(LogStatus.INFO,"Fill new auto action policy details");
+        aa.clickOnSaveBtn();
+        test.log(LogStatus.INFO,"Click on save button");
+        logger.info("Filled New Auto Action Policy details and clicked on save button");
+
+        Assert.assertTrue(aa.validateAutoActionAdded(policyName), "Newly added Policy: "+
+                policyName + " not found.");
+        test.log(LogStatus.PASS, "New policy added successfully on alerts auto action page.");
 
     }
 

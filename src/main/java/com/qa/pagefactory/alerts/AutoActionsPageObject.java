@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 /**
  * @author Birender Kumar All Auto Actions related webelements of unravel ui is present in
  *          this class. Wherever you need to access these page object create an
@@ -22,6 +24,8 @@ public class AutoActionsPageObject {
     @FindBy(xpath = "//div[contains(@class,'component-section-header')]/div/span[2]/a")
     public WebElement newAutoActionBtn;
 
+    @FindBy (xpath = "//table[@id = 'aa-list-table']/tbody/tr/td[1]")
+    public List<WebElement> firstColumnElementsAATable;
 
     /**
      * @param driver The driver that will be used to look up the elements

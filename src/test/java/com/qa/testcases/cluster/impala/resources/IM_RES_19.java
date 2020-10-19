@@ -34,7 +34,7 @@ public class IM_RES_19 extends BaseClass {
 	public void validateUserCheckbox(String clusterId) {
 		test = extent.startTest("IM_RES_19.validateUserCheckbox (" + clusterId + ")",
 				"Validate the \"Group By\" filter for Queue.");
-		test.assignCategory("4620 - Cluster/Impala Resources");
+		test.assignCategory(" Cluster/Impala Resources");
 		test.log(LogStatus.INFO, "Login to the application");
 
 		// Initialize all classes objects

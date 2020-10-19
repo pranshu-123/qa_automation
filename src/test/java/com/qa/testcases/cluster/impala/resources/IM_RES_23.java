@@ -25,7 +25,7 @@ public class IM_RES_23 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void verifythedatadisplayedfortheImpalaqueriesTblToolTip(String clusterId) {
         test = extent.startTest("IM_RES_23.verifythedatadisplayedfortheImpalaqueriesTblToolTip (" + clusterId + ")", "Verify if more than 5 hosts exist, the memory chart displays the top-5 hosts .");
-        test.assignCategory("4620 - Cluster/Impala Resources");
+        test.assignCategory(" Cluster/Impala Resources");
         test.log(LogStatus.INFO, "Login to the application");
         WaitExecuter executer = new WaitExecuter(driver);
         DatePicker datePicker = new DatePicker(driver);

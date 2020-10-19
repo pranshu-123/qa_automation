@@ -23,7 +23,7 @@ public class YR_014 extends BaseClass {
     public void YR_014_verifyFilterTabAndEntries(String clusterId) {
         test = extent.startTest("YR_014_verifyFilterTabAndEntries: " + clusterId,
                 "Filter tab should contain all the entries populated by default.");
-        test.assignCategory("4620 Cluster - Yarn Resources");
+        test.assignCategory(" Cluster - Yarn Resources");
         Log.startTestCase("YR_014_verifyFilterTabAndEntries");
 
         Yarn yarn = new Yarn(driver);

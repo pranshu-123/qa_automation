@@ -33,7 +33,7 @@ public class TC_CB_02 extends BaseClass {
 	public void TC_CB_02_VerifyClusterList(String clusterId) {
 		test = extent.startTest("TC_CB_02_VerifyClusterList: " + clusterId,
 				"Verify User is able to see list of clusters available");
-		test.assignCategory("4620 Cluster - Impala Chargeback");
+		test.assignCategory(" Cluster - Impala Chargeback");
 		test.log(LogStatus.INFO, "Login to the application");
 
 		// Initialize all classes objects

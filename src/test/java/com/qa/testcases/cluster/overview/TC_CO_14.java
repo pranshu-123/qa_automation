@@ -28,7 +28,7 @@ public class TC_CO_14 extends BaseClass {
     public void TC_CO_14_VerifyJobsByStatusKPIGraphFilter(String clusterId) {
         // Select this month
         test = extent.startTest("TC_CO_14_VerifyJobsByStatusKPIGraphFilter"+clusterId, "Verify cluster by status KPI graph filter");
-        test.assignCategory("4620 - Cluster Overview");
+        test.assignCategory(" Cluster Overview");
         DatePicker datePicker = new DatePicker(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);

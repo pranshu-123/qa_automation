@@ -29,7 +29,7 @@ public class TC_CO_19 extends BaseClass {
   @Test(dataProvider = "clusterid-data-provider")
   public void TC_CO_19_ValidateAutoAlertOfHomePage(String clusterId) {
     test = extent.startTest("TC_CO_19_ValidateAutoAlertOfHomePage: "+clusterId, "Validate alert row of home page is redirecting to yarn page on clicking.");
-    test.assignCategory("4620 - Cluster Overview");
+    test.assignCategory(" Cluster Overview");
     TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
     MouseActions.clickOnElement(driver, topPanelPageObject.overviewTab);
 

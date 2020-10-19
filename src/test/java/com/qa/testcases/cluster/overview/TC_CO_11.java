@@ -30,7 +30,7 @@ public class TC_CO_11 extends BaseClass {
     public void TC_CO_11_verifyMemoryGraph(String clusterId) {
         // Select this month
         test = extent.startTest("TC_CO_11_verifyMemoryGraph: "+clusterId,"Verify cluster Memory KPI graph filter");
-        test.assignCategory("4620 - Cluster Overview");
+        test.assignCategory(" Cluster Overview");
 
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);

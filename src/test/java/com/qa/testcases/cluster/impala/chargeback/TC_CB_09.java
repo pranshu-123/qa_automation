@@ -30,7 +30,7 @@ public class TC_CB_09 extends BaseClass {
 	public void TC_CB_09_VerifyGroupByOptions(String clusterId) {
 		test = extent.startTest("TC_CB_09_VerifyGroupByOptions : " + clusterId,
 				"Verify group by options available in list");
-		test.assignCategory("4620 Cluster - Impala Chargeback");
+		test.assignCategory(" Cluster - Impala Chargeback");
 		test.log(LogStatus.INFO, "Login to the application");
 
 		// Initialize all classes objects

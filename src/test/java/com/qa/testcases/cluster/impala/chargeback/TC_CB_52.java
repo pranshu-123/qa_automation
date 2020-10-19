@@ -33,7 +33,7 @@ public class TC_CB_52 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_CB_52_VerifyValidatethecostsfordecimalnumbers(String clusterId) {
         test = extent.startTest("TC_CB_52_VerifyValidatethecostsfordecimalnumbers"+clusterId, "Verify  the costs for decimal numbers");
-        test.assignCategory("4620 Cluster - Impala Chargeback");
+        test.assignCategory(" Cluster - Impala Chargeback");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
 

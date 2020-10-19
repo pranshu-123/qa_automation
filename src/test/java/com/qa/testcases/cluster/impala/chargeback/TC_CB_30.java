@@ -22,7 +22,7 @@ public class TC_CB_30 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_CB_30_verifyICB_JobsCountForDifferentDatePickers( String clusterId) {
         test = extent.startTest("TC_CB_30_verifyICB_JobsCountForDifferentDatePickers: " + clusterId, "Validate the number of applications displayed in the chargeback report for Different Date pickers.");
-        test.assignCategory("4620 Cluster - Impala Chargeback");
+        test.assignCategory(" Cluster - Impala Chargeback");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
 

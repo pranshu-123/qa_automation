@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.workload;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.scripts.DatePicker;
@@ -15,6 +16,8 @@ import org.testng.annotations.Test;
 /**
  * @author Sarbashree Ray
  */
+@Marker.All
+@Marker.ClusterWorkload
 public class TC_CTP_01 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_CTP_01.class);
 

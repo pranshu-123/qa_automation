@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.workload;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.clusters.WorkloadPageObject;
@@ -15,6 +16,8 @@ import org.testng.annotations.Test;
 /**
  * @author Sarbashree Ray
  */
+@Marker.All
+@Marker.ClusterWorkload
 public class TC_CTP_02 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_CTP_02.class);
 
@@ -45,8 +48,7 @@ public class TC_CTP_02 extends BaseClass {
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 +workloadPageObject.timerangeMessageElement.getText());
 
-         //TBD
-        //Cluster workload report
+
         datePicker.clickOnDatePicker();
         datePicker.selectLast14Days();
 
@@ -60,8 +62,6 @@ public class TC_CTP_02 extends BaseClass {
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 +workloadPageObject.timerangeMessageElement.getText());
 
-        //TBD
-        //Cluster workload report
 
 
         datePicker.clickOnDatePicker();
@@ -70,8 +70,7 @@ public class TC_CTP_02 extends BaseClass {
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 +workloadPageObject.timerangeMessageElement.getText());
 
-        //TBD
-        //Cluster workload report
+
 
         datePicker.clickOnDatePicker();
         datePicker.selectCustomRange();
@@ -79,11 +78,6 @@ public class TC_CTP_02 extends BaseClass {
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 +workloadPageObject.ViewByCal.getText());
 
-
-
-
-        //TBD
-        //Cluster workload report
 
 
     }

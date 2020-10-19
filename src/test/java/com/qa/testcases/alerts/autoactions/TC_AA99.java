@@ -14,13 +14,13 @@ import org.testng.annotations.Test;
 
 @Marker.Alerts
 @Marker.All
-public class TC_AA96 extends BaseClass {
-    Logger logger = LoggerFactory.getLogger(TC_AA96.class);
+public class TC_AA99 extends BaseClass {
+    Logger logger = LoggerFactory.getLogger(TC_AA99.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateNameAsNumber(String clusterId) {
-        test = extent.startTest("TC_AA96.validateNameAsNumber", "Verify user can set " +
-                "a name using numbers and save the auto action.");
+    public void validateNameAsSingleChar(String clusterId) {
+        test = extent.startTest("TC_AA99.validateNameAsSingleChar", "Verify user can set " +
+                "a single character and save the auto action.");
         test.assignCategory(" Alerts ");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
@@ -43,7 +43,7 @@ public class TC_AA96 extends BaseClass {
         test.log(LogStatus.INFO, "clicked on new auto action button");
         Assert.assertTrue(aa.validateNewAutoActionPolicyPageDisplayed(), "New Auto Action Policy page" +
                 " not displayed");
-        String policyName = "12345";
+        String policyName = "p";
         aa.enterNewAutoActionPolicyDetails(policyName, "User", "3");
         test.log(LogStatus.INFO, "Fill new auto action policy details");
         aa.clickOnSaveBtn();
@@ -52,6 +52,7 @@ public class TC_AA96 extends BaseClass {
 
         Assert.assertTrue(aa.validateAutoActionAdded(policyName), "Newly added Policy: " +
                 policyName + " not found.");
-        test.log(LogStatus.PASS, "New Auto action policy added successfully by using policy name as numbers.");
+        test.log(LogStatus.PASS, "New Auto action policy added successfully by using policy name " +
+                "as single character.");
     }
 }

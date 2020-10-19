@@ -14,13 +14,13 @@ import org.testng.annotations.Test;
 
 @Marker.Alerts
 @Marker.All
-public class TC_AA96 extends BaseClass {
-    Logger logger = LoggerFactory.getLogger(TC_AA96.class);
+public class TC_AA100 extends BaseClass {
+    Logger logger = LoggerFactory.getLogger(TC_AA100.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateNameAsNumber(String clusterId) {
-        test = extent.startTest("TC_AA96.validateNameAsNumber", "Verify user can set " +
-                "a name using numbers and save the auto action.");
+    public void validateNameAs500Chars(String clusterId) {
+        test = extent.startTest("TC_AA100.validateNameAs500Chars", "Verify user can set " +
+                "a name which is 500 characters long and save the auto action.");
         test.assignCategory(" Alerts ");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
@@ -43,7 +43,13 @@ public class TC_AA96 extends BaseClass {
         test.log(LogStatus.INFO, "clicked on new auto action button");
         Assert.assertTrue(aa.validateNewAutoActionPolicyPageDisplayed(), "New Auto Action Policy page" +
                 " not displayed");
-        String policyName = "12345";
+        String policyName = "abcpolicyname0123456789validateNameAs500CharsvalidateNameAs500CharsvalidateNameAs500Chars" +
+                "validateNameAs500Charsabpolicyname0123456789validateNameAs500CharsvalidateNameAs500Chars" +
+                "validateNameAs500CharsvalidateNameAs500Charsabpolicyname0123456789validateNameAs500Chars" +
+                "validateNameAs500CharsvalidateNameAs500CharsvalidateNameAs500Charsabpolicyname0123456789" +
+                "validateNameAs500CharsvalidateNameAs500CharsvalidateNameAs500CharsvalidateNameAs500" +
+                "Charsabpolicyname0123456789validateNameAs500CharsvalidateNameAs5";
+
         aa.enterNewAutoActionPolicyDetails(policyName, "User", "3");
         test.log(LogStatus.INFO, "Fill new auto action policy details");
         aa.clickOnSaveBtn();
@@ -52,6 +58,7 @@ public class TC_AA96 extends BaseClass {
 
         Assert.assertTrue(aa.validateAutoActionAdded(policyName), "Newly added Policy: " +
                 policyName + " not found.");
-        test.log(LogStatus.PASS, "New Auto action policy added successfully by using policy name as numbers.");
+        test.log(LogStatus.PASS, "New Auto action policy added successfully by using policy name " +
+                "as 500 characters long.");
     }
 }

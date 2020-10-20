@@ -2,10 +2,7 @@ package com.qa.testcases.alerts.autoactions;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.scripts.alerts.AutoActions;
-import com.qa.utils.MouseActions;
-import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,13 +11,14 @@ import org.testng.annotations.Test;
 
 @Marker.Alerts
 @Marker.All
-public class TC_AA102 extends BaseClass {
-    Logger logger = LoggerFactory.getLogger(TC_AA102.class);
+public class TC_AA105 extends BaseClass {
+    Logger logger = LoggerFactory.getLogger(TC_AA105.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateDescriptionNameAsAlphabets(String clusterId) {
-        test = extent.startTest("TC_AA102.validateDescriptionNameAsAlphabets", "Verify user can set" +
-                " a description using alphabets and save the auto action.");
+    public void validateDescriptionNameAsAlphanumericAndSpecialChars(String clusterId) {
+        test = extent.startTest("TC_AA105.validateDescriptionNameAsAlphanumericAndSpecialChars",
+                "Verify user can set a description using a combination of alphanumeric and " +
+                        "special characters and save the auto action.");
         test.assignCategory(" Alerts ");
 
         AutoActions aa = new AutoActions(driver);
@@ -38,8 +36,8 @@ public class TC_AA102 extends BaseClass {
         test.log(LogStatus.INFO, "clicked on new auto action button");
         Assert.assertTrue(aa.validateNewAutoActionPolicyPageDisplayed(), "New Auto Action Policy page" +
                 " not displayed");
-        String policyName = "policy1";
-        String policyDescription = "policy1";
+        String policyName = "Abc12345!@#$%";
+        String policyDescription = "Abc12345!@#$%";
         aa.enterNewAutoActionPolicyDetails(policyName,"User", "3",policyDescription);
         test.log(LogStatus.INFO,"Fill new auto action policy details");
         aa.clickOnSaveBtn();
@@ -48,7 +46,7 @@ public class TC_AA102 extends BaseClass {
 
         Assert.assertTrue(aa.validateAutoActionAdded(policyName), "Newly added Policy: "+
                 policyName + " not found.");
-        test.log(LogStatus.PASS, "New policy with description name as alphabets added successfully " +
+        test.log(LogStatus.PASS, "New policy with description name as special chars added successfully " +
                 "on alerts auto action page.");
 
     }

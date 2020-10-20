@@ -65,8 +65,7 @@ public class TC_CTP_11 extends BaseClass {
         waitExecuter.sleep(3000);
         workload.clickOnDate();
         waitExecuter.sleep(3000);
-        test.log(LogStatus.PASS, "Verify current Date selected :"
-                + workloadPageObject.ViewByCal.getText());
+        test.log(LogStatus.PASS, "Verify current Date selected");
         waitExecuter.sleep(1000);
 
         //Checking workload Jobs Table Records populated

@@ -56,6 +56,7 @@ public class TC_AA100 extends BaseClass {
         test.log(LogStatus.INFO, "Click on save button");
         logger.info("Filled New Auto Action Policy details and clicked on save button");
 
+        aa.validateBanner();
         Assert.assertTrue(aa.validateAutoActionAdded(policyName), "Newly added Policy: " +
                 policyName + " not found.");
         test.log(LogStatus.PASS, "New Auto action policy added successfully by using policy name " +

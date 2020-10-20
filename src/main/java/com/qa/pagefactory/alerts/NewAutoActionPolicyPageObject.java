@@ -17,6 +17,9 @@ public class NewAutoActionPolicyPageObject {
     @FindBy(xpath="//div[contains(@class,'auto-action-head')]/h2")
     public WebElement newAutoActionPolicyHeader;
 
+    @FindBy(xpath = "//div[contains(@class,'auto-action-head')]/div")
+    public WebElement closeNewAutoAction;
+
     @FindBy(xpath = "(//div[contains(@class,'rule-row')][1]/div/label)[1]/following-sibling::input")
     public WebElement policyName;
 

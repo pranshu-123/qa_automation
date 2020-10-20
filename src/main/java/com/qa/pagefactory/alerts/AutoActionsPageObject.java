@@ -27,6 +27,8 @@ public class AutoActionsPageObject {
     @FindBy (xpath = "//table[@id = 'aa-list-table']/tbody/tr/td[1]")
     public List<WebElement> firstColumnElementsAATable;
 
+    @FindBy (xpath = "//div[@class='container-fluid']/section/span")
+    public WebElement messageBanner;
     /**
      * @param driver The driver that will be used to look up the elements
      */

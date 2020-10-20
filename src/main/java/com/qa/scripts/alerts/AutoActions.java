@@ -83,6 +83,17 @@ public class AutoActions {
         newAutoActionPolicyPageObject.triggerConditionValue.sendKeys(triggerValue);
     }
 
+    public void validateBanner(){
+        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilElementPresent(autoActionsPageObject.messageBanner);
+        String message = autoActionsPageObject.messageBanner.getText();
+        if(message.equals("There is a problem in saving the auto action .Please try again.")){
+            waitExecuter.sleep(2000);
+            MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.closeNewAutoAction);
+        }
+
+    }
+
     public boolean validateAutoActionAdded(String policyName){
         waitExecuter.sleep(1000);
         int rowCount = autoActionsPageObject.firstColumnElementsAATable.size();

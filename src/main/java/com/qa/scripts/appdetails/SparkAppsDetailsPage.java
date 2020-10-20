@@ -73,7 +73,7 @@ public class SparkAppsDetailsPage {
                                 collapsableList.get(c).click();
                             }
                         } catch (Exception ex) {
-                            logger.info("Caught exception while clicking the collapsable icon for insights.");
+                            throw new AssertionError("Caught exception while clicking the collapsable icon for insights.");
                         }
                         test.log(LogStatus.PASS, "Analysis tab is populated");
                         break;
@@ -149,7 +149,7 @@ public class SparkAppsDetailsPage {
                                // errorCollapsableList.get(c).click();
                             }
                         } catch (Exception ex) {
-                            logger.info("Caught exception while clicking the collapsable icon for insights.");
+                            throw new AssertionError("Caught exception while clicking the collapsable icon for insights.");
                         }
                         test.log(LogStatus.PASS, "Errors tab is populated");
                         break;
@@ -215,7 +215,7 @@ public class SparkAppsDetailsPage {
                                 cnt += 1;
                             }
                         } catch (NoSuchElementException ex) {
-                            logger.info("Caught exception while clicking the collapsable icon for insights.\n"+
+                            throw new AssertionError("Caught exception while clicking the collapsable icon for insights.\n"+
                                     ex.getMessage());
                         }
 
@@ -247,7 +247,7 @@ public class SparkAppsDetailsPage {
                             Assert.assertFalse(programDataList.isEmpty(), "The Programs data is not populated");
                         }
                         catch(NoSuchElementException ex){
-                            logger.info("Programs tab got exception "+ ex.getMessage());
+                            throw new AssertionError("Programs tab got exception "+ ex.getMessage());
                         }
                         break;
                     case "Timings":
@@ -530,7 +530,7 @@ public class SparkAppsDetailsPage {
                 }
             }
             catch(NoSuchElementException ex){
-                logger.info("No failed attempts found for this application");
+                throw new AssertionError("No failed attempts found for this application");
             }
         }
         else {

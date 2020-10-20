@@ -23,7 +23,7 @@ public class TC_CB_05 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_CB_05_VerifyImpalaChargeBackDatePicker(String clusterId) {
         test = extent.startTest("TC_CB_05_VerifyImpalaChargeBackDatePicker: "+clusterId, "Verify the user can pick all the date ranges from Impala chrageback page");
-        test.assignCategory("4620 Cluster - Impala Chargeback");
+        test.assignCategory(" Cluster - Impala Chargeback");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
 

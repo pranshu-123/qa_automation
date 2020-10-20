@@ -30,7 +30,7 @@ public class IM_RES_16 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void verifyGroupByFilterForQueueHoverMemoryGraph(String clusterId) {
         test = extent.startTest("IM_RES_16.verifyGroupByFilterForQueueHoverMemoryGraph (" + clusterId + ")", "Verify if more than 5 hosts exist, the memory chart displays the top-5 hosts .");
-        test.assignCategory("4620 - Cluster/Impala Resources");
+        test.assignCategory(" Cluster/Impala Resources");
         test.log(LogStatus.INFO, "Login to the application");
 
         //Initialize all classes objects

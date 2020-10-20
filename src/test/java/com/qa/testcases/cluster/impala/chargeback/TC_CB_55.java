@@ -28,7 +28,7 @@ public class TC_CB_55 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_CB_55_verifyImpalaChargeBackDownloadCSV( String clusterId) {
         test = extent.startTest("TC_CB_55_and_56_verifyImpalaChargeBackDownloadCSV: "+clusterId, "Validate the data displayed in the download Chargeback page");
-        test.assignCategory("4620 Cluster - Impala Chargeback");
+        test.assignCategory(" Cluster - Impala Chargeback");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
 

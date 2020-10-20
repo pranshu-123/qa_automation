@@ -22,7 +22,7 @@ public class TC_CO_01 extends BaseClass{
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_CO_01_VerifyUIConnectivity(String clusterId) {
         test = extent.startTest("TC_CO_01_VerifyUIConnectivity: "+clusterId, "Verify Default date Range is Last 1 Hour.");
-        test.assignCategory("4620 - Cluster Overview");
+        test.assignCategory(" Cluster Overview");
 
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);

@@ -27,7 +27,7 @@ public class IM_RES_08 extends BaseClass {
     public void verifyGroupByFilterForUser(String clusterId) {
         test = extent.startTest("IM_RES_08.verifyGroupByFilterForUser (" + clusterId + ")",
                 "Validate the \"Group By\" filter for User.");
-        test.assignCategory("4620 - Cluster/Impala Resources");
+        test.assignCategory(" Cluster/Impala Resources");
         WaitExecuter executer = new WaitExecuter(driver);
 
         ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);

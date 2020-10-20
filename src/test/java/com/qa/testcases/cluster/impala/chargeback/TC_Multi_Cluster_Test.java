@@ -13,7 +13,7 @@ public class TC_Multi_Cluster_Test extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void verifyTC_Multi_Cluster_Test(String clusterId) {
         test = extent.startTest("TC_Multi_Cluster_Test", "Validate the Multi Cluster test using Data Provider.");
-        test.assignCategory("4620 Cluster - Impala Chargeback - Multi-Cluster");
+        //test.assignCategory(" Cluster - Impala Chargeback - Multi-Cluster");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
 

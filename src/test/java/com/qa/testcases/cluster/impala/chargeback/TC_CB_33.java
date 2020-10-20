@@ -28,7 +28,7 @@ public class TC_CB_33 extends BaseClass {
     public void TC_CB_33_ChargebackTable(String clusterId) {
 
         test = extent.startTest("TC_CB_33_ChargebackTable " + clusterId, "Verify the user can further filter the contents in the chargeback table ");
-        test.assignCategory("4620 Cluster - Impala Chargeback");
+        test.assignCategory(" Cluster - Impala Chargeback");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);

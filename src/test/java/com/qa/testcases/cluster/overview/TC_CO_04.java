@@ -23,7 +23,7 @@ public class TC_CO_04 extends BaseClass {
 	@Test(dataProvider = "clusterid-data-provider")
 	public void TC_CO_04_verifyCustomRangeForCurrentDate(String clusterId) {
 		test = extent.startTest("TC_CO_04_verifySettingDateInCalendar : "+clusterId, "Verify Custom Date in datepicker calendar ");
-		test.assignCategory("4620 - Cluster Overview");		
+		test.assignCategory(" Cluster Overview");
 		waitExecuter = new WaitExecuter(driver);
 		datePicker = new DatePicker(driver);
 		//Select the cluster

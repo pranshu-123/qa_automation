@@ -26,7 +26,7 @@ public class IM_RES_03 extends BaseClass {
   public void validateDateRangeOfBothGraph(String clusterId) {
     test = extent.startTest("IM_RES_03.validateDateRangeOfBothGraph (" + clusterId + ")",
       "Verify that the Memory and Query graphs in sync (they display the same date range and granularity)");
-    test.assignCategory("4620 - Cluster/Impala Resources");
+    test.assignCategory(" Cluster/Impala Resources");
 
     WaitExecuter executer = new WaitExecuter(driver);
     ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);

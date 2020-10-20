@@ -29,7 +29,7 @@ public class IM_RES_20 extends BaseClass {
   @Test(dataProvider = "clusterid-data-provider")
   public void validateUserCheckbox(String clusterId) {
     test = extent.startTest("IM_RES_20.validateUserCheckbox (" + clusterId + ")", "Validate the \"Group By\" filter for Queue.");
-    test.assignCategory("4620 - Cluster/Impala Resources");
+    test.assignCategory(" Cluster/Impala Resources");
 
     WaitExecuter executer = new WaitExecuter(driver);
     ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);

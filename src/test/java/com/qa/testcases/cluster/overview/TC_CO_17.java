@@ -23,7 +23,7 @@ public class TC_CO_17 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_CO_17_VerifyAlertsFunc(String clusterId) {
         test = extent.startTest("TC_CO_17_VerifyAlertsFunc: "+clusterId, "Verify alerts functionality.");
-        test.assignCategory("4620 - Cluster Overview");
+        test.assignCategory(" Cluster Overview");
 
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);

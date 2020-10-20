@@ -25,7 +25,7 @@ public class TC_JAL_02 extends BaseClass {
 	public void validateCustomRangeCalendar(String clusterId) {
 		test = extent.startTest("TC_JAL_02.validateCustomRangeCalendar",
 				"Verify custom range click opens date-time calendar");
-		test.assignCategory("4620 Jobs - Applications");
+		test.assignCategory(" Jobs - Applications");
 		test.log(LogStatus.INFO, "Login to the application");
 
 		// Initialize all classes objects

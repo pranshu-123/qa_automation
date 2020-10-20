@@ -27,7 +27,7 @@ public class IM_RES_11 extends BaseClass {
     public void IM_RES_11_verifyQueryGraphForQueueGroupForTwoDaysDatePickerOptions(String clusterId) {
         test = extent.startTest("IM_RES_10_verifyQueryGraphForQueueGroupForTwoDaysDatePickerOptions : "+clusterId,
                 "Verify Query graph one by one for each of the options in date picker range");
-        test.assignCategory("4620 - Cluster/Impala Resources");
+        test.assignCategory(" Cluster/Impala Resources");
         impala = new Impala(driver);
         waitExecuter = new WaitExecuter(driver);
         datePicker = new DatePicker(driver);

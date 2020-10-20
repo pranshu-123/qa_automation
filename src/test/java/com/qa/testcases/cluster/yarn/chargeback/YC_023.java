@@ -19,7 +19,7 @@ public class YC_023 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void YC_023_verifyYarnChargeBackPageClickOnGroupBy(String clusterId) {
         test = extent.startTest("YC_023_verifyYarnChargeBackPageClickOnGroupBy: "+clusterId, "Verify Click on groupby edit field, Yarn chrageback page.");
-        test.assignCategory("4620 Cluster - Yarn Chargeback");
+        test.assignCategory(" Cluster - Yarn Chargeback");
 
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);

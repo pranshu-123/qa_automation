@@ -1,7 +1,6 @@
 package com.qa.testcases.cluster.queueanalysis;
 
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.clusters.QueueAnalysisPageObject;
 import com.qa.scripts.clusters.QueueAnalysis;
 import com.qa.utils.WaitExecuter;
@@ -24,7 +23,6 @@ public class TC_QU_04 extends BaseClass {
         test.log(LogStatus.INFO, "Initialize all class objects");
         LOGGER.info("Initialize all class objects");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
         QueueAnalysisPageObject qaPageObject = new QueueAnalysisPageObject(driver);
         QueueAnalysis queueAnalysis = new QueueAnalysis(driver);
         // Navigate to Queue Analysis tab from header

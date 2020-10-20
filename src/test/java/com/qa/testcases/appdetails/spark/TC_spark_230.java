@@ -6,8 +6,6 @@ import com.qa.utils.Log;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
-import java.util.logging.Logger;
-
 public class TC_spark_230 extends BaseClass {
     /**
      * Verify that on a Clicking on Resources tab:
@@ -23,7 +21,7 @@ public class TC_spark_230 extends BaseClass {
     public void TC_spark_230_verifyResourcesTab(String clusterId) {
         test = extent.startTest("TC_spark_230_verifyResourcesTab: " + clusterId,
                 "Verify all the spark apps are listed in the UI");
-        test.assignCategory("4620 Apps Details-Spark");
+        test.assignCategory(" Apps Details-Spark");
         Log.startTestCase("TC_spark_230_verifyResourcesTab");
         SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);
         appsDetailsPage.commonSetupCodeForSumarryTabValidation(test, clusterId, "Resources", logger);

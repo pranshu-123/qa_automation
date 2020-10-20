@@ -8,12 +8,10 @@ import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
-import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
-import java.util.logging.Logger;
 
 public class TC_spark_222 extends BaseClass {
     /**
@@ -29,7 +27,7 @@ public class TC_spark_222 extends BaseClass {
     public void TC_spark_222_verifyAppDetailsPageCompKpis(String clusterId) {
         test = extent.startTest("TC_spark_222_verifyAppDetailsPageCompKpis: " + clusterId,
                 "Verify all the spark apps are listed in the UI");
-        test.assignCategory("4620 Apps Details-Spark");
+        test.assignCategory(" Apps Details-Spark");
         Log.startTestCase("TC_spark_222_verifyAppDetailsPageCompKpis");
 
         // Initialize all classes objects
@@ -40,7 +38,6 @@ public class TC_spark_222 extends BaseClass {
         SparkAppsDetailsPageObject sparkAppsDetailsPageObject = new SparkAppsDetailsPageObject(driver);
         SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);
         DatePicker datePicker = new DatePicker(driver);
-        WaitExecuter waitExecuter = new WaitExecuter(driver);
         AllApps allApps = new AllApps(driver);
 
         // Navigate to Jobs tab from header
@@ -52,12 +49,12 @@ public class TC_spark_222 extends BaseClass {
         test.log(LogStatus.INFO, "Verify that the left pane has spark check box and the apps number");
         logger.info("Select individual app and assert that table contain its data");
         int appCount = appsDetailsPage.clickOnlyLink("Spark");
+
         //Clicking on the Spark app must go to apps detail page
         if (appCount > 0) {
             String headerAppId = appsDetailsPage.verifyAppId(sparkAppsDetailsPageObject, applicationsPageObject);
             test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);
-
-            /**clicking on the UI must go to apps detail page and verify the basic tabs present */
+            //Clicking on the UI must go to apps detail page and verify the basic tabs present
             appsDetailsPage.verifyAppsComponent(sparkAppsDetailsPageObject, true, false);
         }
         else {

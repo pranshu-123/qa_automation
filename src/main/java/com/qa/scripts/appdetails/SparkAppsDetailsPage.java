@@ -12,20 +12,20 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class SparkAppsDetailsPage {
 
     private WaitExecuter waitExecuter;
     private WebDriver driver;
 
-    private static final Logger LOGGER = Logger.getLogger(com.qa.scripts.jobs.applications.AllApps.class.getName());
+    org.slf4j.Logger logger = LoggerFactory.getLogger(com.qa.scripts.jobs.applications.AllApps.class);
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -35,16 +35,6 @@ public class SparkAppsDetailsPage {
     public SparkAppsDetailsPage(WebDriver driver) {
         waitExecuter = new WaitExecuter(driver);
         this.driver = driver;
-    }
-
-    /* De-Select all app types */
-    public void deselectAllAppTypes(ApplicationsPageObject appPageObj, WaitExecuter waitExecuter) {
-        List<WebElement> appTypes = appPageObj.selectOneApplicationType;
-        for (int i = 0; i < appTypes.size(); i++) {
-            appTypes.get(i).click();
-            waitExecuter.sleep(3000);
-        }
-        waitExecuter.sleep(1000);
     }
 
     /**Method to verify the summary tabs in the right pane of the App Details page */
@@ -57,7 +47,7 @@ public class SparkAppsDetailsPage {
 
         for (int i=0; i< appsTabList.size(); i++) {
             tabName = appsTabList.get(i).getText();
-            System.out.println("Tab Name is "+ tabName);
+            logger.info("Validating tab "+ tabName);
             if (tabName.equals(verifyTabName)){
                 switch (verifyTabName) {
                     case "Analysis":
@@ -67,7 +57,7 @@ public class SparkAppsDetailsPage {
                         Assert.assertFalse(insightType.isEmpty(), "No Insights generated");
                         for (int j = 0; j < insightType.size(); j++) {
                             String insights = insightType.get(j).getText();
-                            System.out.println("Insight is " + insights);
+                            logger.info("Insight generated are " + insights);
                             if (insights.equals("EFFICIENCY")) {
                                 // Store it in efficiency array
                                 efficiency.add(insights);
@@ -83,12 +73,11 @@ public class SparkAppsDetailsPage {
                                 collapsableList.get(c).click();
                             }
                         } catch (Exception ex) {
-                            LOGGER.info("Caught exception while clicking the collapsable icon for insights.");
+                            logger.info("Caught exception while clicking the collapsable icon for insights.");
                         }
                         test.log(LogStatus.PASS, "Analysis tab is populated");
                         break;
                     case "Resources":
-                        System.out.println("Resources Tab validations");
                         MouseActions.clickOnElement(driver, appsTabList.get(i));
                         //appsTabList.get(i).click();
                         waitExecuter.sleep(3000);
@@ -99,20 +88,22 @@ public class SparkAppsDetailsPage {
                         Assert.assertFalse(allGraphsList.isEmpty(),"No graphs displayed");
                         for(int t=0; t<graphTitleList.size(); t++) {
                             String graphTitle = graphTitleList.get(t).getText();
-                            LOGGER.info("Graph title is " + graphTitle);
+                            logger.info("Graph title is " + graphTitle);
                             Assert.assertTrue(Arrays.asList(expectedGraphTitle).contains(graphTitle));
                             Assert.assertTrue(allGraphsList.get(t).isDisplayed(), "");
                             switch(graphTitle){
                                 case "Task Attempts":
-                                    LOGGER.info("Validating the Graph "+graphTitle);
+                                    logger.info("Validating the Graph "+graphTitle);
                                     List<WebElement> footerNameList = sparkAppPageObj.taskAttFooterName;
-                                    Assert.assertFalse(footerNameList.isEmpty(), "SUCCESS/FAILED Attempts not displayed");
+                                    Assert.assertFalse(footerNameList.isEmpty(),
+                                            "SUCCESS/FAILED Attempts not displayed");
                                     List<WebElement> footerValList = sparkAppPageObj.taskAttFooterVal;
-                                    Assert.assertFalse(footerValList.isEmpty(), "SUCCESS/FAILED Attempts values not displayed");
+                                    Assert.assertFalse(footerValList.isEmpty(), "SUCCESS/FAILED Attempts values " +
+                                            "not displayed");
                                     String pValStr = sparkAppPageObj.resourcesPieChartInternalVal.getText();
                                     String regex = "((?<=[a-zA-Z])(?=[0-9]))|((?<=[0-9])(?=[a-zA-Z]))";
                                     int pieChartInternalVal = Integer.parseInt(Arrays.asList(pValStr.split(regex)).get(0));
-                                    LOGGER.info("The value displayed inside the Pie Chart is "+
+                                    logger.info("The value displayed inside the Pie Chart is "+
                                             pieChartInternalVal);
                                     int totalTaskCnt = 0;
                                     for(int f=0 ;f< footerNameList.size(); f++){
@@ -121,9 +112,9 @@ public class SparkAppsDetailsPage {
                                         int footerVal = Integer.parseInt(footerValStr.replaceAll("[^\\dA-Za-z ]",
                                                 "").trim());
                                         totalTaskCnt += footerVal;
-                                        LOGGER.info("FooterName = "+ footerName + " Value = "+ footerVal);
+                                        logger.info("FooterName = "+ footerName + " Value = "+ footerVal);
                                     }
-                                    LOGGER.info("Total Task Attempts = "+ totalTaskCnt + " pie chart val = "+
+                                    logger.info("Total Task Attempts = "+ totalTaskCnt + " pie chart val = "+
                                             pieChartInternalVal);
                                     //Assert.assertSame(totalTaskCnt, pieChartInternalVal, "The Values are not same");
                                     break;
@@ -131,7 +122,7 @@ public class SparkAppsDetailsPage {
                                 case "Metrics":
                                 case "Vcores" :
                                 case "Memory":
-                                    LOGGER.info("Validating the Graph "+graphTitle);
+                                    logger.info("Validating the Graph "+graphTitle);
                                     break;
 
                             }
@@ -141,9 +132,6 @@ public class SparkAppsDetailsPage {
                         break;
                     case "Errors":
                         String[] expectedErrorCategory = {"driver","executor-1","executor-2","rm-diagnostics"};
-                        System.out.println("Errors Tab validations");
-
-                      //  Use this instead of plain click().
                         MouseActions.clickOnElement(driver,appsTabList.get(i));
                         //appsTabList.get(i).click();
                         waitExecuter.sleep(3000);
@@ -151,7 +139,7 @@ public class SparkAppsDetailsPage {
                         Assert.assertFalse(errorTypeList.isEmpty(), "Errors tab is not populated");
                         for (int e = 0; e < errorTypeList.size(); e++) {
                             String errorType = errorTypeList.get(e).getText();
-                            System.out.println("Error Type is " + errorType);
+                            logger.info("Error Type is " + errorType);
                             Assert.assertTrue(Arrays.asList(expectedErrorCategory).contains(errorType));
                         }
                         List<WebElement> errorCollapsableList = sparkAppPageObj.errorCollapse;
@@ -161,12 +149,11 @@ public class SparkAppsDetailsPage {
                                // errorCollapsableList.get(c).click();
                             }
                         } catch (Exception ex) {
-                            LOGGER.info("Caught exception while clicking the collapsable icon for insights.");
+                            logger.info("Caught exception while clicking the collapsable icon for insights.");
                         }
                         test.log(LogStatus.PASS, "Errors tab is populated");
                         break;
                     case "Configuratio...":
-                        System.out.println("Conf Tab validations");
                         MouseActions.clickOnElement(driver,appsTabList.get(i));
                        // appsTabList.get(i).click();
                         waitExecuter.sleep(10000);
@@ -176,12 +163,12 @@ public class SparkAppsDetailsPage {
                         Assert.assertFalse(keyWordsList.isEmpty(), "Keywords not found");
                         String beforeResetProp = sparkAppPageObj.configPropNum.getText();
                         int propNum = Integer.parseInt(beforeResetProp.split("\\s+")[0]);
-                        System.out.println("The prop num = " + propNum);
+                        logger.info("Number of properties displayed by default are  " + propNum);
 
                         //Verify if property key value is present:
                         List<WebElement> propKeyList = sparkAppPageObj.configPropKey;
                         List<WebElement> propValueList = sparkAppPageObj.configPropValue;
-                        System.out.println("PropKey size = "+ propKeyList.size() + " propVal size = " +
+                        logger.info("PropKey size = "+ propKeyList.size() + " propVal size = " +
                                 propValueList.size());
                         Assert.assertFalse((propKeyList.isEmpty() && propValueList.isEmpty()), "Key/Value is empty");
                         Assert.assertEquals(propKeyList.size(), propValueList.size(),"One of the key/Value " +
@@ -190,7 +177,7 @@ public class SparkAppsDetailsPage {
                         //Verify the keywords are present and should be clickable
                         for (int k = 0; k < keyWordsList.size(); k++) {
                             String keyword = keyWordsList.get(k).getText();
-                            System.out.println("Keyword Type is " + keyword);
+                            logger.info("Keyword Type is " + keyword);
                             Assert.assertTrue(Arrays.asList(expectedKeyWords).contains(keyword));
                             MouseActions.clickOnElement(driver,keyWordsList.get(k));
                             //keyWordsList.get(k).click();
@@ -201,13 +188,12 @@ public class SparkAppsDetailsPage {
                       //  sparkAppPageObj.resetButton.click();
                         waitExecuter.sleep(3000);
                         String afterResetProp = sparkAppPageObj.configPropNum.getText();
-                        LOGGER.info("No. of Properties displayed by default " + beforeResetProp +"\n " +
+                        logger.info("No. of Properties displayed by default " + beforeResetProp +"\n " +
                                 "No. of Properties displayed after RESET "+ afterResetProp);
                         Assert.assertEquals(afterResetProp, beforeResetProp, "The properties have not been reset " +
                                 "to default");
                         break;
                     case "Logs":
-                        System.out.println("Logs Tab validations");
                         MouseActions.clickOnElement(driver,appsTabList.get(i));
                         // appsTabList.get(i).click();
                         waitExecuter.sleep(10000);
@@ -229,12 +215,12 @@ public class SparkAppsDetailsPage {
                                 cnt += 1;
                             }
                         } catch (NoSuchElementException ex) {
-                            LOGGER.info("Caught exception while clicking the collapsable icon for insights.\n"+ ex.getMessage());
+                            logger.info("Caught exception while clicking the collapsable icon for insights.\n"+
+                                    ex.getMessage());
                         }
 
                         break;
                     case "Tags":
-                        System.out.println("Tags Tab validations");
                         MouseActions.clickOnElement(driver,appsTabList.get(i));
                        //         appsTabList.get(i).click();
                         waitExecuter.sleep(3000);
@@ -246,14 +232,13 @@ public class SparkAppsDetailsPage {
                             for (int col = 1; col <= tagTableHeader.size(); col++) {
                                 String data = driver.findElement(By.xpath("//*[@id='appTagsTable']/tbody/tr["+rows+"]" +
                                         "/td["+col+"]")).getText();
-                                System.out.println("The data is " + data);
+                                logger.info("The data is " + data);
                                 Assert.assertNotSame("", data);
                             }
                         }
                         test.log(LogStatus.PASS, "Tags tab is populated");
                         break;
                     case "Program":
-                        System.out.println("Program Tab validations");
                         MouseActions.clickOnElement(driver, appsTabList.get(i));
                        // appsTabList.get(i).click();
                         waitExecuter.sleep(3000);
@@ -262,11 +247,10 @@ public class SparkAppsDetailsPage {
                             Assert.assertFalse(programDataList.isEmpty(), "The Programs data is not populated");
                         }
                         catch(NoSuchElementException ex){
-                            LOGGER.info("Programs tab got exception "+ ex.getMessage());
+                            logger.info("Programs tab got exception "+ ex.getMessage());
                         }
                         break;
                     case "Timings":
-                        System.out.println("Timing Tab validations");
                         MouseActions.clickOnElement(driver, appsTabList.get(i));
                        // appsTabList.get(i).click();
                         waitExecuter.sleep(3000);
@@ -277,19 +261,19 @@ public class SparkAppsDetailsPage {
                         String[] expectedATLegendNames = {"Queue Time", "Driver Time", "Job Time"};
                         for (int t=0; t< subTabList.size(); t++){
                             String subTabName =  subTabList.get(t).getText();
-                            LOGGER.info("The Timings subTab is " + subTabName);
+                            logger.info("The Timings subTab is " + subTabName);
                             Assert.assertTrue(Arrays.asList(expectedSubTabList).contains(subTabName));
                             MouseActions.clickOnElement(driver, subTabList.get(t));
                            // subTabList.get(t).click();
                             waitExecuter.sleep(1000);
                             String titleName = sparkAppPageObj.timingsTabTitle.getText();
-                            LOGGER.info("The Timings subTabs Title is " + titleName);
+                            logger.info("The Timings subTabs Title is " + titleName);
                             Assert.assertTrue(sparkAppPageObj.pieChart.isDisplayed());
                             List<WebElement> legendNameList = sparkAppPageObj.legendNames;
                             Assert.assertFalse(legendNameList.isEmpty(), "Empty legend list");
                             for (int l=0; l< legendNameList.size(); l++) {
                                 String legendName = legendNameList.get(l).getText();
-                                LOGGER.info("The Legends for subTab "+subTabName+" is " + legendName);
+                                logger.info("The Legends for subTab "+subTabName+" is " + legendName);
                                 if (subTabName.equals("Task Time")) {
                                     Assert.assertTrue(Arrays.asList(expectedTTLegendNames).contains(legendName));
                                 }
@@ -309,27 +293,26 @@ public class SparkAppsDetailsPage {
      * if validateCompData = true validate each component tab data
      * if validateExecutorTab = true validate jobs execution tabs data.
      * */
-    public void verifyAppsComponent(SparkAppsDetailsPageObject sparkPageObj, Boolean validateCompData, Boolean validateExecutorTab) {
+    public void verifyAppsComponent(SparkAppsDetailsPageObject sparkPageObj, Boolean validateCompData,
+                                    Boolean validateExecutorTab) {
         List<WebElement> componentList = sparkPageObj.component_element;
-//        Assert.assertEquals(componentList.size(), 4, "All the components are not present in the " +
-//                "applications page ");
-        System.out.println("componentList is " + componentList.size());
+        logger.info("ComponentList is " + componentList.size());
         int navigationRows = 0;
         String tabName = "";
         for (int j = 0; j < componentList.size(); j++) {
-            if (j != 3)
+            if(j != 3)
                 tabName = componentList.get(j).getText();
             switch (j) {
                 case 0:
                     Assert.assertEquals(tabName, "Navigation", "Navigation tab not present");
                     List<WebElement> navigationRowList = sparkPageObj.navigationTableRows;
                     navigationRows = navigationRowList.size();
-                    System.out.println("Navigation Rows are " + navigationRows);
+                    logger.info("Navigation Rows are " + navigationRows);
                     if (validateCompData) {
                         List<WebElement> headerList = sparkPageObj.navigationHeaders;
                         Assert.assertFalse(headerList.isEmpty(), "No headers for Navigation table for application");
                         for (int i = 0; i < headerList.size(); i++) {
-                            System.out.println("The header is " + headerList.get(i).getText());
+                            logger.info("The header is " + headerList.get(i).getText());
                             Assert.assertNotSame("", headerList.get(i).getText());
                         }
                         if (navigationRows > 0) {
@@ -337,7 +320,7 @@ public class SparkAppsDetailsPage {
                                 for (int col = 1; col <= headerList.size(); col++) {
                                     String data = driver.findElement(By.xpath("//*[@id='appNavigation-body']/" +
                                             "tr[" + rows + "]/td[" + col + "]/span")).getText();
-                                    System.out.println("The data is " + data);
+                                    logger.info("The data is " + data);
                                     Assert.assertNotSame("", data);
                                 }
                             }
@@ -351,12 +334,12 @@ public class SparkAppsDetailsPage {
                     MouseActions.clickOnElement(driver, componentList.get(j));
                   //  componentList.get(j).click();
                     List<WebElement> ganttChartTableRows = sparkPageObj.ganttChartTable;
-                    System.out.println("ganttChartTableRows is " + ganttChartTableRows.size());
+                    logger.info("No. of rows in Gantt Chart tables are " + ganttChartTableRows.size());
                     if (validateCompData) {
                         List<WebElement> headerList = sparkPageObj.ganttChartHeaders;
                         Assert.assertFalse(headerList.isEmpty(), "No headers for Gantt Chart table for application");
                         for (int i = 0; i < headerList.size(); i++) {
-                            System.out.println("The header is " + headerList.get(i).getText());
+                            logger.info("The header is " + headerList.get(i).getText());
                             Assert.assertNotSame("", headerList.get(i).getText());
                         }
                         if (ganttChartTableRows.size() > 0) {
@@ -364,11 +347,10 @@ public class SparkAppsDetailsPage {
                                 String jobId = sparkPageObj.ganttChartJobId.get(rows).getText();
                                 String startTime = sparkPageObj.ganttChartStartTime.get(rows).getText();
                                 String duration = sparkPageObj.ganttChartDuration.get(rows).getText();
-                                System.out.println("Duration = "+ duration+" JobId = "+ jobId+" starttime = "+startTime);
+                                logger.info("Duration = "+ duration+" JobId = "+ jobId+" starttime = "+startTime);
                                 Assert.assertNotSame("", jobId,"Value for jobId missing");
                                 Assert.assertNotSame("", startTime,"Value for startTime missing");
                                 Assert.assertNotSame("", duration,"Value for duration missing");
-
                             }
                         }
                     }
@@ -378,10 +360,9 @@ public class SparkAppsDetailsPage {
                     String[] jobCountArr = componentList.get(j).getText().split("\\s+");
                     int jobCnt = Integer.parseInt(jobCountArr[0]);
                     Assert.assertEquals(jobCnt, navigationRows, "JobCnt and navigation rows donot match");
-                    System.out.println("JobCount is " + jobCnt);
+                    logger.info("JobCount is " + jobCnt);
                     break;
             }
-
         }
     }
 
@@ -400,10 +381,10 @@ public class SparkAppsDetailsPage {
                 waitExecuter.sleep(2000);
                 if (validateExecutorTab){
                     Assert.assertTrue(sparkPageObj.DAGData.isDisplayed());
-                    LOGGER.info("Dags data is displayed ");
+                    logger.info("Dags data is displayed ");
                     List<WebElement> rddBlockList = sparkPageObj.rddBlockList;
                     Assert.assertFalse(rddBlockList.isEmpty(), "No DAGs data");
-                    LOGGER.info("No. of RDD blocks in the flow chart is "+ rddBlockList.size());
+                    logger.info("No. of RDD blocks in the flow chart is "+ rddBlockList.size());
                     for (int i =0 ;i< rddBlockList.size(); i++){
                         Assert.assertTrue(rddBlockList.get(i).isDisplayed());
                     }
@@ -433,7 +414,7 @@ public class SparkAppsDetailsPage {
          for (int i=0;i <appKpis.size(); i++){
              Assert.assertNotSame("",appKpis.get(i).getText(), "Kpi text is empty");
              Assert.assertNotSame("",appKpiVal.get(i).getText(), "Kpi Value is empty");
-             LOGGER.info("Kpi Name = "+ appKpis.get(i).getText()+ " Value = "+ appKpiVal.get(i).getText());
+             logger.info("Kpi Name = "+ appKpis.get(i).getText()+ " Value = "+ appKpiVal.get(i).getText());
          }
      }
 
@@ -442,16 +423,15 @@ public class SparkAppsDetailsPage {
      * (start, end and duration are listed and should not be empty)
      */
     public void validateLeftPaneKpis(List<WebElement> kpiList ){
-        //List<WebElement> kpiList = appPageObj.leftPaneKPIList;
         Assert.assertFalse(kpiList.isEmpty(), "The kpi list is empty");
         for (WebElement webElement : kpiList) {
-            System.out.println("The kpi is " + webElement.getText());
+            logger.info("The leftPane kpi is " + webElement.getText());
             String kpis = webElement.getText();
             Assert.assertNotSame("", kpis, "The kpis is empty");
             String[] kpisOut = kpis.split(": ");
             String kpiName = kpisOut[0];
             String kpiVal = kpisOut[1];
-            LOGGER.info("Kpi name = " + kpisOut[0] + "  Kpi Value = " + kpisOut[1]);
+            logger.info("Kpi name = " + kpisOut[0] + "  Kpi Value = " + kpisOut[1]);
             Assert.assertNotSame("", kpiName, "The kpi " + kpiName + " is empty");
             Assert.assertNotSame("", kpiVal, "The kpi " + kpiVal + " is empty");
         }
@@ -462,7 +442,7 @@ public class SparkAppsDetailsPage {
      * */
     public String verifyAppId(SparkAppsDetailsPageObject sparkPageObj, ApplicationsPageObject appPageObj){
         String appId = sparkPageObj.getAppId.getText().trim();
-        System.out.println("Spark application Id is "+appId);
+        logger.info("Spark application Id is "+appId);
         appPageObj.getTypeFromTable.click();
         waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();
@@ -479,7 +459,7 @@ public class SparkAppsDetailsPage {
      * */
     public void navigateToJobsTabFromHeader(TopPanelComponentPageObject topPanelObj, AllApps allApps,
                                             DatePicker datePicker, ApplicationsPageObject appPageObj, String clusterId) {
-        LOGGER.info("Navigate to jobs tab from header");
+        logger.info("Navigate to jobs tab from header");
         waitExecuter.sleep(3000);
         waitExecuter.waitUntilElementClickable(topPanelObj.jobs);
         waitExecuter.sleep(1000);
@@ -490,7 +470,7 @@ public class SparkAppsDetailsPage {
         waitExecuter.sleep(2000);
 
         //Select cluster
-        LOGGER.info("Select Cluster: "+clusterId);
+        logger.info("Select Cluster: "+clusterId);
         allApps.selectCluster(clusterId);
         waitExecuter.sleep(3000);
 
@@ -525,7 +505,7 @@ public class SparkAppsDetailsPage {
                                             Boolean verifyAppComp){
         applicationsPageObject.expandStatus.click();
         int failedAppCnt = clickOnlyLink("Failed");
-        System.out.println("FailedAppCnt is " + failedAppCnt);
+        logger.info("Failed App Cnt is " + failedAppCnt);
         if (failedAppCnt > 0) {
             verifyAppId(sparkPageObj, applicationsPageObject);
             List<WebElement> kpiList = sparkPageObj.leftPaneKPIList;
@@ -541,7 +521,7 @@ public class SparkAppsDetailsPage {
                 attempt = sparkPageObj.ifAttemptPresent.getText();
                 List<WebElement> numAttemptsList = sparkPageObj.numAttempts;
                 Assert.assertFalse(numAttemptsList.isEmpty(), "There are no attempts for failed apps");
-                LOGGER.info("Number of attempts for application is " + numAttemptsList.size());
+                logger.info("Number of attempts for application is " + numAttemptsList.size());
                 if (verifyAppComp) {
                     for (int a = 0; a <= numAttemptsList.size(); a++) {
                         numAttemptsList.get(a).click();
@@ -550,11 +530,11 @@ public class SparkAppsDetailsPage {
                 }
             }
             catch(NoSuchElementException ex){
-                LOGGER.info("No failed attempts found for this application");
+                logger.info("No failed attempts found for this application");
             }
         }
         else {
-            LOGGER.info("There are no failed apps to navigate to");
+            logger.info("There are no failed apps to navigate to");
             List<WebElement> kpiList = sparkPageObj.leftPaneKPIList;
             validateLeftPaneKpis(kpiList);
             test.log(LogStatus.PASS, "All the Kpis (start, end and duration are listed )are" +
@@ -606,4 +586,3 @@ public class SparkAppsDetailsPage {
         sparkAppPageObj.closeAppsPageTab.click();
     }
 }
-

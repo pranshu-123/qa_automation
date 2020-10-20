@@ -8,7 +8,6 @@ import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
-import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -39,7 +38,6 @@ public class TC_spark_219 extends BaseClass {
         SparkAppsDetailsPageObject sparkAppsDetailsPageObject = new SparkAppsDetailsPageObject(driver);
         SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);
         DatePicker datePicker = new DatePicker(driver);
-        WaitExecuter waitExecuter = new WaitExecuter(driver);
         AllApps allApps = new AllApps(driver);
 
         // Navigate to Jobs tab from header

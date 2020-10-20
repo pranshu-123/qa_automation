@@ -6,8 +6,6 @@ import com.qa.utils.Log;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
-import java.util.logging.Logger;
-
 public class TC_spark_233 extends BaseClass {
     /**
      * 1. Errors must be listed under this tab
@@ -20,7 +18,7 @@ public class TC_spark_233 extends BaseClass {
     public void TC_spark_233_verifyErrorsTab(String clusterId) {
         test = extent.startTest("TC_spark_233_verifyErrorsTab: " + clusterId,
                 "Verify all the spark apps are listed in the UI");
-        test.assignCategory("4620 Apps Details-Spark");
+        test.assignCategory(" Apps Details-Spark");
         Log.startTestCase("TC_spark_233_verifyErrorsTab");
         SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);
         appsDetailsPage.commonSetupCodeForSumarryTabValidation(test, clusterId, "Errors", logger);

@@ -28,7 +28,7 @@ public class TC_spark_220 extends BaseClass {
     public void TC_spark_220_verifyAttemptsAndKpis(String clusterId) {
         test = extent.startTest("TC_spark_220_verifyAttemptsAndKpis: " + clusterId,
                 "Verify all the spark apps are listed in the UI");
-        test.assignCategory("4620 Apps Details-Spark");
+        test.assignCategory(" Apps Details-Spark");
         Log.startTestCase("TC_spark_220_verifyAttemptsAndKpis");
 
         // Initialize all classes objects

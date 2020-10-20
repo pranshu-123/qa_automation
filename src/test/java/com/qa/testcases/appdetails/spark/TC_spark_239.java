@@ -12,8 +12,6 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
-import java.util.logging.Logger;
-
 public class TC_spark_239 extends BaseClass {
     /**
      * Verify that on a cluster with different kinds of Spark Apps:
@@ -26,7 +24,7 @@ public class TC_spark_239 extends BaseClass {
     public void TC_spark_239_verifyJobsExecutionTab(String clusterId) {
         test = extent.startTest("TC_spark_239_verifyJobsExecutionTab: " + clusterId,
                 "Verify all the spark apps are listed in the UI");
-        test.assignCategory("4620 Apps Details-Spark");
+        test.assignCategory(" Apps Details-Spark");
         Log.startTestCase("TC_spark_239_verifyJobsExecutionTab");
 
         // Initialize all classes objects
@@ -48,6 +46,7 @@ public class TC_spark_239 extends BaseClass {
         test.log(LogStatus.INFO, "Verify that the left pane has spark check box and the apps number");
         logger.info("Select individual app and assert that table contain its data");
         int appCount = appsDetailsPage.clickOnlyLink("Spark");
+
         //Clicking on the Spark app must go to apps detail page
         if (appCount > 0) {
             String headerAppId = appsDetailsPage.verifyAppId(sparkAppsDetailsPageObject, applicationsPageObject);

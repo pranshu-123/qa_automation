@@ -8,12 +8,9 @@ import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
-import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
-
-import java.util.logging.Logger;
 
 public class TC_spark_221 extends BaseClass {
     /**
@@ -30,7 +27,7 @@ public class TC_spark_221 extends BaseClass {
     public void TC_spark_221_verifyAttemptsAndComponents(String clusterId) {
         test = extent.startTest("TC_spark_221_verifyAttemptsAndComponents: " + clusterId,
                 "Verify all the spark apps are listed in the UI");
-        test.assignCategory("4620 Apps Details-Spark");
+        test.assignCategory(" Apps Details-Spark");
         Log.startTestCase("TC_spark_221_verifyAttemptsAndComponents");
 
         // Initialize all classes objects
@@ -40,7 +37,6 @@ public class TC_spark_221 extends BaseClass {
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         SparkAppsDetailsPageObject sparkPageObj = new SparkAppsDetailsPageObject(driver);
         DatePicker datePicker = new DatePicker(driver);
-        WaitExecuter waitExecuter = new WaitExecuter(driver);
         SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);
         AllApps allApps = new AllApps(driver);
 

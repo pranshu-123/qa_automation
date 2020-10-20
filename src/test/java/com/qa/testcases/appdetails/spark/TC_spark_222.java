@@ -1,5 +1,6 @@
 package com.qa.testcases.appdetails.spark;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.pagefactory.appsDetailsPage.SparkAppsDetailsPageObject;
@@ -12,7 +13,8 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
-
+@Marker.AppDetailsSpark
+@Marker.All
 public class TC_spark_222 extends BaseClass {
     /**
      * Verify that on a cluster with different kinds of Spark Apps:

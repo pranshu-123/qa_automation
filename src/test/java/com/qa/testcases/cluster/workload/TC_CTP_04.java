@@ -88,16 +88,5 @@ public class TC_CTP_04 extends BaseClass {
         test.log(LogStatus.PASS, "Verify View By Hour/Day :-" + workloadPageObject.viewByMonth.isDisplayed());
 
 
-
-        datePicker.clickOnDatePicker();
-        datePicker.selectCustomRange();
-
-        test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                +workloadPageObject.timerangeMessageElement.getText());
-
-        workload.clickOnHourDay();
-        test.log(LogStatus.PASS, "Verify View By Hour/Day :-" + workloadPageObject.viewByMonth.isDisplayed());
-
-
     }
 }

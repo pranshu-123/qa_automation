@@ -18,6 +18,9 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
+/**
+ * @author Sarbashree Ray
+ */
 @Marker.All
 @Marker.ClusterWorkload
 public class TC_CTP_09 extends BaseClass {
@@ -25,7 +28,7 @@ public class TC_CTP_09 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void Verifyjobdetailsaredisplayed(String clusterId) {
-        test = extent.startTest("TC_CTP_06.Verifyjobdetailsaredisplayed", "Verify This should display the job types with count executed on particulay day.");
+        test = extent.startTest("TC_CTP_09.Verifyjobdetailsaredisplayed", "Verify This should display the job types with count executed on particulay day.");
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);

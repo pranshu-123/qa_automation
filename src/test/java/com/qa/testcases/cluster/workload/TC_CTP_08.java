@@ -12,6 +12,9 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
+/**
+ * @author Sarbashree Ray
+ */
 @Marker.All
 @Marker.ClusterWorkload
 public class TC_CTP_08 extends BaseClass {

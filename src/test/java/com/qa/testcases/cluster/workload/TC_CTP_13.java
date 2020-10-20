@@ -16,6 +16,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+/**
+ * @author Sarbashree Ray
+ */
 @Marker.All
 @Marker.ClusterWorkload
 public class TC_CTP_13 extends BaseClass {
@@ -23,7 +26,7 @@ public class TC_CTP_13 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void VerifysearchoptioninGroupbyfilterofjobdetails(String clusterId) {
-        test = extent.startTest("TC_CTP_06.VerifysearchoptioninGroupbyfilterofjobdetails",
+        test = extent.startTest("TC_CTP_13.VerifysearchoptioninGroupbyfilterofjobdetails",
                 "Verify This should lists all the applications which are executed by selected user on that day.");
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -71,7 +74,7 @@ public class TC_CTP_13 extends BaseClass {
         workload.getworkloadJobsTableRecord();
         test.log(LogStatus.PASS, "Verified workload Jobs Table is available on workload chargeback page");
 
-
+        waitExecuter.sleep(1000);
         //Validate Header Column names in workload Jobs Table
         Assert.assertTrue(workload.validateHeaderColumnNameInworkloadJobsTable(),"Validation failed for header column names from workload Jobs Table");
         test.log(LogStatus.PASS, "Verified Column names in workload Jobs Table successfully on Yarn chargeback page");

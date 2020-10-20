@@ -17,6 +17,9 @@ import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
 import java.util.List;
+/**
+ * @author Sarbashree Ray
+ */
 @Marker.All
 @Marker.ClusterWorkload
 public class TC_CTP_10 extends BaseClass {
@@ -24,7 +27,7 @@ public class TC_CTP_10 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void VerifyGetjobsoptioninjobdetails(String clusterId) {
-        test = extent.startTest("TC_CTP_06.VerifyGetjobsoptioninjobdetails", "Verify This should lists all the applications with that type executed on selected day");
+        test = extent.startTest("TC_CTP_10.VerifyGetjobsoptioninjobdetails", "Verify This should lists all the applications with that type executed on selected day");
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
@@ -52,7 +55,7 @@ public class TC_CTP_10 extends BaseClass {
 
         workload.clickOnMonth();
         waitExecuter.sleep(1000);
-        test.log(LogStatus.PASS, "Verify View By Month :-" + workloadPageObject.viewByMonth.isDisplayed());
+        test.log(LogStatus.PASS, "Verify View By Month" + workloadPageObject.viewByMonth.isDisplayed());
 
         test.log(LogStatus.PASS, "Verify current month selected :"
                 + workloadPageObject.currentmonthHeader.getText());

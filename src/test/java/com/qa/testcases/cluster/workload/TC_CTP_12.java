@@ -16,6 +16,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+/**
+ * @author Sarbashree Ray
+ */
 @Marker.All
 @Marker.ClusterWorkload
 public class TC_CTP_12 extends BaseClass {
@@ -23,7 +26,7 @@ public class TC_CTP_12 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void VerifysearchoptioninGroupbyfilterofjobdetails(String clusterId) {
-        test = extent.startTest("TC_CTP_06.VerifysearchoptioninGroupbyfilterofjobdetails",
+        test = extent.startTest("TC_CTP_12.VerifysearchoptioninGroupbyfilterofjobdetails",
                 "Verify This should lists application count extecuted by particular user");
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -69,6 +72,7 @@ public class TC_CTP_12 extends BaseClass {
 
         //Checking workload Jobs Table Records populated
         workload.getworkloadJobsTableRecord();
+        waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Verified workload Jobs Table is available on workload chargeback page");
 
         //Validate Header Column names in workload Jobs Table

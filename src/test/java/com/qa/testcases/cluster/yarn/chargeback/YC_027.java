@@ -20,7 +20,7 @@ public class YC_027 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void YC_027_verifyGroupByTableColumnCountOnYarnChargeBackPage(String clusterId) {
         test = extent.startTest("YC_027_verifyGroupByTableColumnCountOnYarnChargeBackPage: "+clusterId, "Verify Click on groupby edit field, Yarn chrageback page.");
-        test.assignCategory("4620 Cluster - Yarn Chargeback");
+        test.assignCategory(" Cluster - Yarn Chargeback");
 
         ChargeBackYarn chargeBackYarn = new ChargeBackYarn(driver);
         chargeBackYarn.selectYarnChargeback();

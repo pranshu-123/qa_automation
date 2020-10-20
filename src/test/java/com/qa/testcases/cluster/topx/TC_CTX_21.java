@@ -21,7 +21,7 @@ public class TC_CTX_21 extends BaseClass {
   @Test(dataProvider = "clusterid-data-provider")
   public void verifyDatePicker(String clusterId) {
     test = extent.startTest("TC_CTX_21.verifyDatePicker", "Verify date picker in new report page");
-    test.assignCategory("4620 Cluster - Top X");
+    test.assignCategory(" Cluster - Top X");
     WaitExecuter waitExecuter = new WaitExecuter(driver);
     TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
     waitExecuter.waitUntilElementPresent(topPanelPageObject.topXTab);

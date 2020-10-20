@@ -27,7 +27,7 @@ public class TC_JAL_06 extends BaseClass {
 	public void validateApplicationsAreOfSelectedClusterId(String clusterId) {
 		test = extent.startTest("TC_JAL_06.validateApplicationsAreOfSelectedClusterId",
 				"Verify the apps listed in page are of selected cluster id only");
-		test.assignCategory("4620 Jobs - Applications");
+		test.assignCategory(" Jobs - Applications");
 		test.log(LogStatus.INFO, "Login to the application");
 
 		// Initialize all classes objects

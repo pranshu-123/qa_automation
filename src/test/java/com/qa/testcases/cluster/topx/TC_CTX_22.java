@@ -28,7 +28,7 @@ public class TC_CTX_22 extends BaseClass {
   public void verifyTopXWithDifferentDateRange(String clusterId) {
     test = extent.startTest("TC_CTX_22.verifyTopXWithDifferentDateRange",
         "Verify TopX report is generated for different date range");
-    test.assignCategory("4620 Cluster - Top X");
+    test.assignCategory(" Cluster - Top X");
     WaitExecuter waitExecuter = new WaitExecuter(driver);
     TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
     TopXPageObject topXPageObject = new TopXPageObject(driver);

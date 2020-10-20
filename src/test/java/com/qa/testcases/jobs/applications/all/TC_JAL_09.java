@@ -27,7 +27,7 @@ public class TC_JAL_09 extends BaseClass {
 	public void verifyApplicationCount(String clusterId) {
 		test = extent.startTest("TC_JAL_09.verifyApplicationCount",
 				"Verify both application count list and the showing result are same");
-		test.assignCategory("4620 Jobs - Applications");
+		test.assignCategory(" Jobs - Applications");
 		test.log(LogStatus.INFO, "Login to the application");
 
 		// Initialize all classes objects

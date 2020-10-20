@@ -28,7 +28,7 @@ public class IM_RES_06 extends BaseClass {
 	@Test(dataProvider = "clusterid-data-provider")
 	public void verifyQueryGraphForUserGroup(String clusterId) {
 		test = extent.startTest("IM_RES_06.verifyMemoryGraphForUserGroup", "Verify tool tips of Query graph on mouse hover.)");
-		test.assignCategory("4620 - Cluster/Impala Resources");
+		test.assignCategory(" Cluster/Impala Resources");
 		test.log(LogStatus.INFO, "Login to the application");
 		
 		//Initialize all classes objects

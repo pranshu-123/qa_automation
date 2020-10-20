@@ -26,7 +26,7 @@ public class IM_RES_15 extends BaseClass {
     public void IM_RES_15_verifymemorylimiandallocationeachnodeMemoryChart(String clusterId) {
         test = extent.startTest("IM_RES_15.verifymemorylimiandallocationeachnodeMemoryChart : " + clusterId,
                 "Verify that the memory limit and allocation for each node are displayed by the Memory Chart.)");
-        test.assignCategory("4620 - Cluster/Impala Resources");
+        test.assignCategory(" Cluster/Impala Resources");
 
         test.log(LogStatus.INFO, "Login to the application");
         WaitExecuter waitExecuter = new WaitExecuter(driver);

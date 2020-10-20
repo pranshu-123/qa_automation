@@ -32,7 +32,7 @@ public class IM_RES_10 extends BaseClass {
 	public void IM_RES_10_verifyQueryGraphForQueueGroupForAllDatePickerOptions(String clusterId) {
 		test = extent.startTest("IM_RES_10_verifyQueryGraphForQueueGroupForAllDatePickerOptions : " + clusterId,
 				"Verify Query graph one by one for each of the options in date picker range");
-		test.assignCategory("4620 - Cluster/Impala Resources");
+		test.assignCategory(" Cluster/Impala Resources");
 		test.log(LogStatus.INFO, "Login to the application");
 
 		// Initialize all classes objects

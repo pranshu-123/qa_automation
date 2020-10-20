@@ -24,7 +24,7 @@ public class TC_CO_20 extends BaseClass {
     public void TC_CO_20_ValidateNodesGraphDownloadAsPNG(String clusterId) {
 
         test = extent.startTest("TC_CO_20_ValidateNodesGraphDownloadAsPNG: " + clusterId, "Validate download of Nodes graph as PNG file.");
-        test.assignCategory("4620 - Cluster Overview");
+        test.assignCategory(" Cluster Overview");
 
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
         MouseActions.clickOnElement(driver, topPanelPageObject.overviewTab);

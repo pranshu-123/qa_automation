@@ -22,7 +22,7 @@ public class TC_CO_09 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_CO_09_VerifyClusterNodesKPIGraphFilter(String clusterId) {
         test = extent.startTest("TC_CO_09_VerifyClusterNodesKPIGraphFilter: "+clusterId , "Verify cluster Nodes KPI graph filter.");
-        test.assignCategory("4620 - Cluster Overview");
+        test.assignCategory(" Cluster Overview");
 
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);

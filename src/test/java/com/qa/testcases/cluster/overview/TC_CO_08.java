@@ -25,7 +25,7 @@ public class TC_CO_08 extends BaseClass {
 	public void TC_CO_08_verifyClusterKPI(String clusterId) {
 		test = extent.startTest("TC_CO_08_verifyClusterKPI : " + clusterId,
 				"Verify KPIs under cluster heading for Custom Date");
-		test.assignCategory("4620 - Cluster Overview");
+		test.assignCategory(" Cluster Overview");
 		KPI kpi = new KPI(driver);
 		waitExecuter = new WaitExecuter(driver);
 		datePicker = new DatePicker(driver);

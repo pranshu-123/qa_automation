@@ -26,7 +26,7 @@ public class TC_CB_31 extends BaseClass {
 	public void TC_CB_31_VerifyTotalMemoryHoursToUserMemoryHours(String clusterId) {
 		test = extent.startTest("TC_CB_31_VerifyTotalMemoryHoursToUserMemoryHours : " + clusterId,
 				"Verify User is able to see list of clusters available");
-		test.assignCategory("4620 Cluster - Impala Chargeback");
+		test.assignCategory(" Cluster - Impala Chargeback");
 
 		waitExecuter = new WaitExecuter(driver);
 		chargebackImpala = new ChargeBackImpala(driver);

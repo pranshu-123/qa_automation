@@ -11,7 +11,10 @@ public class ApplicationsPageObject {
     @FindBy(css="a#inefficientApps")
     public WebElement inefficientApps;
 
-    @FindBy(css=".select2-search__field")
+	@FindBy (xpath = "//a[contains(text(),'Status')]")
+	public WebElement expandStatus;
+
+	@FindBy(css=".select2-search__field")
     public WebElement clusterIdsearchfield;
 
     @FindBy(xpath="//span[@class='select2-results']/ul/li")

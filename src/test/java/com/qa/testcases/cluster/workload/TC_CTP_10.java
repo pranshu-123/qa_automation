@@ -69,8 +69,6 @@ public class TC_CTP_10 extends BaseClass {
         test.log(LogStatus.PASS, "Verify current Date selected");
         waitExecuter.sleep(1000);
 
-        test.log(LogStatus.PASS, "verify the total or queries table in job heading"+workloadPageObject.jobtableHeader);
-
 
         waitExecuter.sleep(1000);
         //Checking workload Jobs Table Records populated

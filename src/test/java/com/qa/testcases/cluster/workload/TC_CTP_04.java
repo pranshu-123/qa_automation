@@ -80,13 +80,15 @@ public class TC_CTP_04 extends BaseClass {
 
         datePicker.clickOnDatePicker();
         datePicker.selectLast60Days();
+        waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 +workloadPageObject.timerangeMessageElement.getText());
+        waitExecuter.sleep(1000);
 
         workload.clickOnHourDay();
         test.log(LogStatus.PASS, "Verify View By Hour/Day :-" + workloadPageObject.viewByMonth.isDisplayed());
-
+        waitExecuter.sleep(1000);
 
     }
 }

@@ -38,44 +38,57 @@ public class TC_CTP_05 extends BaseClass {
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         datePicker.selectLast7Days();
+        waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.getText());
+        waitExecuter.sleep(1000);
 
         workload.clickOnMonth();
         test.log(LogStatus.PASS, "Verify View By Month :-" + workloadPageObject.viewByMonth.isDisplayed());
+        waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify current month selected :"
                 + workloadPageObject.currentmonthHeader.getText());
+        waitExecuter.sleep(1000);
 
         datePicker.clickOnDatePicker();
         datePicker.selectLast14Days();
+        waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.getText());
+        waitExecuter.sleep(1000);
 
         workload.clickOnDay();
         test.log(LogStatus.PASS, "Verify View By Day :-" + workloadPageObject.viewByDay.isDisplayed());
+        waitExecuter.sleep(1000);
 
 
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();
+        waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.getText());
+        waitExecuter.sleep(1000);
 
         workload.clickOnHour();
         test.log(LogStatus.PASS, "Verify View By Hour :-" + workloadPageObject.viewByHour.isDisplayed());
+        waitExecuter.sleep(1000);
 
 
         datePicker.clickOnDatePicker();
         datePicker.selectLast60Days();
+        waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.getText());
+        waitExecuter.sleep(1000);
 
         workload.clickOnHourDay();
         test.log(LogStatus.PASS, "Verify View By Hour/Day :-" + workloadPageObject.viewByHourDay.isDisplayed());
+        waitExecuter.sleep(1000);
 
 
 

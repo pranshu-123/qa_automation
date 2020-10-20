@@ -47,6 +47,7 @@ public class TC_CTP_07 extends BaseClass {
 
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
+        waitExecuter.sleep(1000);
 
 
         DatePicker datePicker = new DatePicker(driver);
@@ -56,6 +57,7 @@ public class TC_CTP_07 extends BaseClass {
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.getText());
+        waitExecuter.sleep(1000);
 
         workload.clickOnHour();
         waitExecuter.sleep(1000);
@@ -68,6 +70,7 @@ public class TC_CTP_07 extends BaseClass {
 
         graphUtils.navigateDifferentPointOnGraph(driver, workloadPageObject.HourHighChartContainer);
         List<String> SumTooltipValues = graphUtils.getMemoryTooltipValues();
+        waitExecuter.sleep(1000);
 
 
         Assert.assertTrue(SumTooltipValues.size() > 0, "Hour Sum tooltips are not displayed");
@@ -83,6 +86,7 @@ public class TC_CTP_07 extends BaseClass {
         waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Verify Workload in selected Average Hour :"
                 +workloadPageObject.viewByAverage.getText());
+        waitExecuter.sleep(1000);
 
 
         graphUtils.navigateDifferentPointOnGraph(driver,  workloadPageObject.HourHighChartContainer);

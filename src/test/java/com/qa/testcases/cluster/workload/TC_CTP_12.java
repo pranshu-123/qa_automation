@@ -80,5 +80,6 @@ public class TC_CTP_12 extends BaseClass {
         //Validate Header Column names in workload Jobs Table
         Assert.assertTrue(workload.validateHeaderColumnNameInworkloadJobsTable(),"Validation failed for header column names from workload Jobs Table");
         test.log(LogStatus.PASS, "Verified Column names in workload Jobs Table successfully on Yarn chargeback page");
+        waitExecuter.sleep(1000);
     }
 }

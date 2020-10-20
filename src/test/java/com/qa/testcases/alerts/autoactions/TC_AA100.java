@@ -22,17 +22,12 @@ public class TC_AA100 extends BaseClass {
         test = extent.startTest("TC_AA100.validateNameAs500Chars", "Verify user can set " +
                 "a name which is 500 characters long and save the auto action.");
         test.assignCategory(" Alerts ");
-        WaitExecuter waitExecuter = new WaitExecuter(driver);
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
-        waitExecuter.waitUntilElementPresent(topPanelComponentPageObject.alerts);
-        waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.alerts);
-        waitExecuter.sleep(3000);
-        MouseActions.clickOnElement(driver, topPanelComponentPageObject.alerts);
+
+        AutoActions aa = new AutoActions(driver);
+        aa.setupForAutoActionsPage();
         test.log(LogStatus.INFO, "Verified Alerts Tab is clicked.");
         logger.info("Verified Alerts Tab is clicked.");
 
-        AutoActions aa = new AutoActions(driver);
         //Validate Auto Actions header default
         String aaHeader = aa.getAutoActionsHeader();
         Assert.assertEquals(aaHeader, "Auto Actions", "Auto Actions Header not matched.");

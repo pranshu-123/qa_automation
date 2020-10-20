@@ -23,6 +23,9 @@ public class NewAutoActionPolicyPageObject {
     @FindBy(xpath = "(//div[contains(@class,'rule-row')][1]/div/label)[1]/following-sibling::input")
     public WebElement policyName;
 
+    @FindBy(xpath = "//div[contains(@class, 'rule-row')]/div[2]/input")
+    public WebElement policyDescription;
+
     @FindBy (xpath = "(//div[contains(@class,'rule-row')])[2]/div/div/b/span[1]")
     public WebElement triggerConditionsBtn;
 

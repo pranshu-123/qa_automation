@@ -1,5 +1,6 @@
 package com.qa.scripts.alerts;
 
+import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.pagefactory.alerts.AutoActionsPageObject;
 import com.qa.pagefactory.alerts.NewAutoActionPolicyPageObject;
 import com.qa.utils.MouseActions;
@@ -30,6 +31,16 @@ public class AutoActions {
         waitExecuter = new WaitExecuter(driver);
         autoActionsPageObject = new AutoActionsPageObject(driver);
         newAutoActionPolicyPageObject = new NewAutoActionPolicyPageObject(driver);
+    }
+
+    public void setupForAutoActionsPage(){
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+        waitExecuter.waitUntilElementPresent(topPanelComponentPageObject.alerts);
+        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.alerts);
+        waitExecuter.sleep(3000);
+        MouseActions.clickOnElement(driver, topPanelComponentPageObject.alerts);
     }
 
 
@@ -81,6 +92,16 @@ public class AutoActions {
         selectTriggerCondition(triggerConditon);
         waitExecuter.sleep(2000);
         newAutoActionPolicyPageObject.triggerConditionValue.sendKeys(triggerValue);
+    }
+
+    public void enterNewAutoActionPolicyDetails(String policyName, String triggerConditon, String triggerValue, String policyDescrption){
+        waitExecuter.sleep(1000);
+        newAutoActionPolicyPageObject.policyName.sendKeys(policyName);
+        clickOnTriggerConditionBtn();
+        selectTriggerCondition(triggerConditon);
+        waitExecuter.sleep(2000);
+        newAutoActionPolicyPageObject.triggerConditionValue.sendKeys(triggerValue);
+        newAutoActionPolicyPageObject.policyDescription.sendKeys(policyDescrption);
     }
 
     public void validateBanner(){

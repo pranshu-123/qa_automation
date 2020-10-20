@@ -7,10 +7,7 @@ import com.qa.pagefactory.clusters.WorkloadPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.clusters.Workload;
-import com.qa.utils.GraphUtils;
-import com.qa.utils.JavaScriptExecuter;
-import com.qa.utils.MouseActions;
-import com.qa.utils.WaitExecuter;
+import com.qa.utils.*;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +27,9 @@ public class TC_CTP_12 extends BaseClass {
                 "Verify This should lists application count extecuted by particular user");
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
+        HomePage homePage = new HomePage(driver);
+
+        //Initialize Workload Page Object
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
         WorkloadPageObject workloadPageObject = new WorkloadPageObject(driver);
         waitExecuter.waitUntilElementPresent(topPanelPageObject.workloadTab);
@@ -40,10 +40,13 @@ public class TC_CTP_12 extends BaseClass {
         Workload workload = new Workload(driver);
         GraphUtils graphUtils = new GraphUtils();
 
-        test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
-
-        HomePage homePage = new HomePage(driver);
+        // Set multi cluster
+        test.log(LogStatus.INFO, "Select cluster : " + clusterId);
+        Log.info("Select cluster : " + clusterId);
         homePage.selectMultiClusterId(clusterId);
+        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.sleep(1000);
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();

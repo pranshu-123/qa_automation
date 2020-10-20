@@ -6,6 +6,7 @@ import com.qa.pagefactory.clusters.WorkloadPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.clusters.Workload;
+import com.qa.utils.DateUtils;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
@@ -76,6 +77,11 @@ public class TC_CTP_06 extends BaseClass {
 
         datePicker.clickOnDatePicker();
         datePicker.selectCustomRange();
+        datePicker.setStartDate(DateUtils.getFirstDateOfYear());
+        datePicker.setEndDate(DateUtils.getCurrentDate());
+        datePicker.clickOnCustomDateApplyBtn();
+
+        waitExecuter.sleep(2000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.getText());

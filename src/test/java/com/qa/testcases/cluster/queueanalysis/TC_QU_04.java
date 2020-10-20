@@ -29,20 +29,9 @@ public class TC_QU_04 extends BaseClass {
         QueueAnalysis queueAnalysis = new QueueAnalysis(driver);
         // Navigate to Queue Analysis tab from header
         test.log(LogStatus.INFO, "Navigate to Queue Analysis tab from header");
-        LOGGER.info("Navigate to Queue Analysis tab from header");
-        waitExecuter.waitUntilElementClickable(topPanelPageObject.queueAnalysisTab);
-        waitExecuter.sleep(1000);
-        //Click on Queue Analysis tab
         test.log(LogStatus.INFO, "Clicked on Queue Analysis tab");
-        LOGGER.info("Clicked on Queue Analysis tab");
-        topPanelPageObject.queueAnalysisTab.click();
-        waitExecuter.sleep(3000);
-        //Validate Queue Analysis tab loaded successfully
         test.log(LogStatus.INFO, "Validate Queue Analysis tab loaded successfully");
-        LOGGER.info("Validate Queue Analysis tab loaded successfully");
-        waitExecuter.waitUntilElementPresent(qaPageObject.queueAnalysisHeading);
-        waitExecuter.waitUntilPageFullyLoaded();
-
+        queueAnalysis.navigateToQueueAnalysis();
         // Close confirmation message box and search the queue
         test.log(LogStatus.INFO, "Close confirmation message box and search the queue");
         LOGGER.info("Close confirmation message box and search the queue");

@@ -1,14 +1,12 @@
 package com.qa.testcases.cluster.queueanalysis;
 
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.clusters.QueueAnalysisPageObject;
 import com.qa.scripts.clusters.QueueAnalysis;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Test;
-
 import java.util.logging.Logger;
 
 /*
@@ -27,24 +25,13 @@ public class TC_QU_01 extends BaseClass {
         test.log(LogStatus.INFO, "Initialize all class objects");
         LOGGER.info("Initialize all class objects");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
         QueueAnalysisPageObject qaPageObject = new QueueAnalysisPageObject(driver);
         QueueAnalysis queueAnalysis = new QueueAnalysis(driver);
         // Navigate to Queue Analysis tab from header
         test.log(LogStatus.INFO, "Navigate to Queue Analysis tab from header");
-        LOGGER.info("Navigate to Queue Analysis tab from header");
-        waitExecuter.waitUntilElementClickable(topPanelPageObject.queueAnalysisTab);
-        waitExecuter.sleep(1000);
-        //Click on Queue Analysis tab
         test.log(LogStatus.INFO, "Clicked on Queue Analysis tab");
-        LOGGER.info("Clicked on Queue Analysis tab");
-        topPanelPageObject.queueAnalysisTab.click();
-        waitExecuter.sleep(3000);
-		//Validate Queue Analysis tab loaded successfully
-		test.log(LogStatus.INFO, "Validate Queue Analysis tab loaded successfully");
-		LOGGER.info("Validate Queue Analysis tab loaded successfully");
-        waitExecuter.waitUntilElementPresent(qaPageObject.queueAnalysisHeading);
-        waitExecuter.waitUntilPageFullyLoaded();
+        test.log(LogStatus.INFO, "Validate Queue Analysis tab loaded successfully");
+        queueAnalysis.navigateToQueueAnalysis();
         // Close confirmation box
         test.log(LogStatus.INFO, "Closed the confirmation box");
         LOGGER.info("Closed the confirmation box");

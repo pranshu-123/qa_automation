@@ -17,6 +17,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
+
 /**
  * @author Sarbashree Ray
  */
@@ -73,9 +74,11 @@ public class TC_CTP_07 extends BaseClass {
         waitExecuter.sleep(1000);
 
 
-        Assert.assertTrue(SumTooltipValues.size() > 0, "Hour Sum tooltips are not displayed");
+        Assert.assertTrue(SumTooltipValues.size() > 0,
+                "Hour Sum tooltips are not displayed");
         for (int i = 0; i < SumTooltipValues.size(); i++) {
-            Assert.assertNotNull(SumTooltipValues.get(i), "Tooltip value displayed null value for Hour graph");
+            Assert.assertNotNull(SumTooltipValues.get(i),
+                    "Tooltip value displayed null value for Hour graph");
         }
 
 
@@ -85,16 +88,18 @@ public class TC_CTP_07 extends BaseClass {
         workload.clickOnAverage();
         waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Verify Workload in selected Average Hour :"
-                +workloadPageObject.viewByAverage.getText());
+                + workloadPageObject.viewByAverage.getText());
         waitExecuter.sleep(1000);
 
 
-        graphUtils.navigateDifferentPointOnGraph(driver,  workloadPageObject.HourHighChartContainer);
+        graphUtils.navigateDifferentPointOnGraph(driver, workloadPageObject.HourHighChartContainer);
         List<String> AverageTooltipValues = graphUtils.getMemoryTooltipValues();
 
-        Assert.assertTrue(AverageTooltipValues.size() > 0, "Hour Average tooltips are not displayed");
-        for (int i=0; i<AverageTooltipValues.size(); i++) {
-            Assert.assertNotNull(AverageTooltipValues.get(i), "Tooltip value displayed null value for Hour graph");
+        Assert.assertTrue(AverageTooltipValues.size() > 0,
+                "Hour Average tooltips are not displayed");
+        for (int i = 0; i < AverageTooltipValues.size(); i++) {
+            Assert.assertNotNull(AverageTooltipValues.get(i),
+                    "Tooltip value displayed null value for Hour graph");
         }
 
 
@@ -103,4 +108,4 @@ public class TC_CTP_07 extends BaseClass {
 
 
     }
-    }
+}

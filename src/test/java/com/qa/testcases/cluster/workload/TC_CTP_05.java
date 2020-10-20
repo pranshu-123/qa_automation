@@ -22,7 +22,8 @@ public class TC_CTP_05 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void VerifyallviewbyfiltersinByVcoresHourspage(String clusterId) {
-        test = extent.startTest("TC_CTP_05.VerifyallviewbyfiltersinByVcoresHourspage", "Verify Cluster workload report should be generated as per selected view by filter");
+        test = extent.startTest("TC_CTP_05.VerifyallviewbyfiltersinByVcoresHourspage",
+                "Verify Cluster workload report should be generated as per selected view by filter");
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         WorkloadPageObject workloadPageObject = new WorkloadPageObject(driver);
@@ -45,7 +46,8 @@ public class TC_CTP_05 extends BaseClass {
         waitExecuter.sleep(1000);
 
         workload.clickOnMonth();
-        test.log(LogStatus.PASS, "Verify View By Month :-" + workloadPageObject.viewByMonth.isDisplayed());
+        test.log(LogStatus.PASS, "Verify View By Month :-"
+                + workloadPageObject.viewByMonth.isDisplayed());
         waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify current month selected :"
@@ -61,7 +63,8 @@ public class TC_CTP_05 extends BaseClass {
         waitExecuter.sleep(1000);
 
         workload.clickOnDay();
-        test.log(LogStatus.PASS, "Verify View By Day :-" + workloadPageObject.viewByDay.isDisplayed());
+        test.log(LogStatus.PASS, "Verify View By Day :-"
+                + workloadPageObject.viewByDay.isDisplayed());
         waitExecuter.sleep(1000);
 
 
@@ -74,7 +77,8 @@ public class TC_CTP_05 extends BaseClass {
         waitExecuter.sleep(1000);
 
         workload.clickOnHour();
-        test.log(LogStatus.PASS, "Verify View By Hour :-" + workloadPageObject.viewByHour.isDisplayed());
+        test.log(LogStatus.PASS, "Verify View By Hour :-"
+                + workloadPageObject.viewByHour.isDisplayed());
         waitExecuter.sleep(1000);
 
 
@@ -87,9 +91,9 @@ public class TC_CTP_05 extends BaseClass {
         waitExecuter.sleep(1000);
 
         workload.clickOnHourDay();
-        test.log(LogStatus.PASS, "Verify View By Hour/Day :-" + workloadPageObject.viewByHourDay.isDisplayed());
+        test.log(LogStatus.PASS, "Verify View By Hour/Day :-"
+                + workloadPageObject.viewByHourDay.isDisplayed());
         waitExecuter.sleep(1000);
-
 
 
     }

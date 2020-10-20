@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
 import java.util.List;
+
 /**
  * @author Sarbashree Ray
  */
@@ -27,7 +28,8 @@ public class TC_CTP_10 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void VerifyGetjobsoptioninjobdetails(String clusterId) {
-        test = extent.startTest("TC_CTP_10.VerifyGetjobsoptioninjobdetails", "Verify This should lists all the applications with that type executed on selected day");
+        test = extent.startTest("TC_CTP_10.VerifyGetjobsoptioninjobdetails",
+                "Verify This should lists all the applications with that type executed on selected day");
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
@@ -61,7 +63,7 @@ public class TC_CTP_10 extends BaseClass {
                 + workloadPageObject.currentmonthHeader.getText());
         waitExecuter.sleep(1000);
         int scrollY = 370;
-        JavaScriptExecuter.scrollViewWithYAxis(driver,scrollY);
+        JavaScriptExecuter.scrollViewWithYAxis(driver, scrollY);
         scrollY = scrollY + datePicker.getDatePickerYPosition();
         waitExecuter.sleep(3000);
         workload.clickOnDate();
@@ -73,7 +75,8 @@ public class TC_CTP_10 extends BaseClass {
         waitExecuter.sleep(1000);
         //Checking workload Jobs Table Records populated
         workload.getworkloadJobsTableRecord();
-        test.log(LogStatus.PASS, "Verified workload Jobs Table is available on workload chargeback page");
+        test.log(LogStatus.PASS,
+                "Verified workload Jobs Table is available on workload chargeback page");
 
 
     }

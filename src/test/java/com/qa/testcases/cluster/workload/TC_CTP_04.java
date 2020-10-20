@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 /**
  * @author Sarbashree Ray
  */
@@ -23,11 +24,12 @@ public class TC_CTP_04 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_CTP_04.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void  VerifyallviewbyfiltersinByJobCountpage(String clusterId) {
-        test = extent.startTest("TC_CTP_04.VerifyallviewbyfiltersinByJobCountpage", "Verify Cluster workload report should be generated as per selected view by filter");
+    public void VerifyallviewbyfiltersinByJobCountpage(String clusterId) {
+        test = extent.startTest("TC_CTP_04.VerifyallviewbyfiltersinByJobCountpage",
+                "Verify Cluster workload report should be generated as per selected view by filter");
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        WorkloadPageObject workloadPageObject = new  WorkloadPageObject(driver);
+        WorkloadPageObject workloadPageObject = new WorkloadPageObject(driver);
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
         waitExecuter.waitUntilElementPresent(topPanelPageObject.workloadTab);
         waitExecuter.waitUntilPageFullyLoaded();
@@ -47,35 +49,35 @@ public class TC_CTP_04 extends BaseClass {
         datePicker.selectLast7Days();
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                +workloadPageObject.timerangeMessageElement.getText());
+                + workloadPageObject.timerangeMessageElement.getText());
 
         workload.clickOnMonth();
-        test.log(LogStatus.PASS, "Verify View By Month :-" + workloadPageObject.viewByMonth.isDisplayed());
+        test.log(LogStatus.PASS, "Verify View By Month :-"
+                + workloadPageObject.viewByMonth.isDisplayed());
 
         test.log(LogStatus.PASS, "Verify current month selected :"
-                +workloadPageObject.currentmonthHeader.getText());
+                + workloadPageObject.currentmonthHeader.getText());
 
         datePicker.clickOnDatePicker();
         datePicker.selectLast14Days();
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                +workloadPageObject.timerangeMessageElement.getText());
+                + workloadPageObject.timerangeMessageElement.getText());
 
         workload.clickOnDay();
-        test.log(LogStatus.PASS, "Verify View By Day :-" + workloadPageObject.viewByMonth.isDisplayed());
-
-
+        test.log(LogStatus.PASS, "Verify View By Day :-"
+                + workloadPageObject.viewByMonth.isDisplayed());
 
 
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                +workloadPageObject.timerangeMessageElement.getText());
+                + workloadPageObject.timerangeMessageElement.getText());
 
         workload.clickOnHour();
-        test.log(LogStatus.PASS, "Verify View By Hour :-" + workloadPageObject.viewByMonth.isDisplayed());
-
+        test.log(LogStatus.PASS, "Verify View By Hour :-"
+                + workloadPageObject.viewByMonth.isDisplayed());
 
 
         datePicker.clickOnDatePicker();
@@ -83,11 +85,12 @@ public class TC_CTP_04 extends BaseClass {
         waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                +workloadPageObject.timerangeMessageElement.getText());
+                + workloadPageObject.timerangeMessageElement.getText());
         waitExecuter.sleep(1000);
 
         workload.clickOnHourDay();
-        test.log(LogStatus.PASS, "Verify View By Hour/Day :-" + workloadPageObject.viewByMonth.isDisplayed());
+        test.log(LogStatus.PASS, "Verify View By Hour/Day :-"
+                + workloadPageObject.viewByMonth.isDisplayed());
         waitExecuter.sleep(1000);
 
     }

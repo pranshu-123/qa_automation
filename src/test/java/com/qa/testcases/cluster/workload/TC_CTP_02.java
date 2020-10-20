@@ -14,6 +14,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
+
 /**
  * @author Sarbashree Ray
  */
@@ -24,10 +25,11 @@ public class TC_CTP_02 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void validateclusterlistinclusterfiltertab(String clusterId) {
-        test = extent.startTest("TC_CTP_02.validateclusterlistinclusterfiltertab", "Verify Cluster workload report should be generated for the selected cluster");
+        test = extent.startTest("TC_CTP_02.validateclusterlistinclusterfiltertab",
+                "Verify Cluster workload report should be generated for the selected cluster");
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        WorkloadPageObject  workloadPageObject = new  WorkloadPageObject(driver);
+        WorkloadPageObject workloadPageObject = new WorkloadPageObject(driver);
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
         waitExecuter.waitUntilElementPresent(topPanelPageObject.workloadTab);
         waitExecuter.waitUntilPageFullyLoaded();
@@ -47,30 +49,28 @@ public class TC_CTP_02 extends BaseClass {
         datePicker.selectLast7Days();
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                +workloadPageObject.timerangeMessageElement.getText());
+                + workloadPageObject.timerangeMessageElement.getText());
 
 
         datePicker.clickOnDatePicker();
         datePicker.selectLast14Days();
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                +workloadPageObject.timerangeMessageElement.getText());
+                + workloadPageObject.timerangeMessageElement.getText());
 
 
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                +workloadPageObject.timerangeMessageElement.getText());
-
+                + workloadPageObject.timerangeMessageElement.getText());
 
 
         datePicker.clickOnDatePicker();
         datePicker.selectLast60Days();
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                +workloadPageObject.timerangeMessageElement.getText());
-
+                + workloadPageObject.timerangeMessageElement.getText());
 
 
         datePicker.clickOnDatePicker();
@@ -80,8 +80,7 @@ public class TC_CTP_02 extends BaseClass {
         datePicker.clickOnCustomDateApplyBtn();
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                +workloadPageObject.ViewByCal.getText());
-
+                + workloadPageObject.ViewByCal.getText());
 
 
     }

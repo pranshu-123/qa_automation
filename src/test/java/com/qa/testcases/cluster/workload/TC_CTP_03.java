@@ -16,6 +16,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
+
 /**
  * @author Sarbashree Ray
  */
@@ -40,7 +41,6 @@ public class TC_CTP_03 extends BaseClass {
         MouseActions.clickOnElement(driver, topPanelPageObject.workloadTab);
 
 
-
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
 
         HomePage homePage = new HomePage(driver);
@@ -48,7 +48,7 @@ public class TC_CTP_03 extends BaseClass {
         homePage.clickOnClusterDropDown();
 
         List<String> listOfClusters = workload.getListOfClusters(workloadPageObject.clusterList);
-        test.log(LogStatus.PASS,"List of all cluster are: "+ listOfClusters);
+        test.log(LogStatus.PASS, "List of all cluster are: " + listOfClusters);
 
         test.log(LogStatus.PASS, "Verify all Cluster is displayed in dropdown.");
     }

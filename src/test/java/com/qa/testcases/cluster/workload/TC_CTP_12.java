@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 /**
  * @author Sarbashree Ray
  */
@@ -58,13 +59,14 @@ public class TC_CTP_12 extends BaseClass {
 
         workload.clickOnMonth();
         waitExecuter.sleep(1000);
-        test.log(LogStatus.PASS, "Verify View By Month :-" + workloadPageObject.viewByMonth.isDisplayed());
+        test.log(LogStatus.PASS, "Verify View By Month :-"
+                + workloadPageObject.viewByMonth.isDisplayed());
 
         test.log(LogStatus.PASS, "Verify current month selected :"
                 + workloadPageObject.currentmonthHeader.getText());
         waitExecuter.sleep(1000);
         int scrollY = 370;
-        JavaScriptExecuter.scrollViewWithYAxis(driver,scrollY);
+        JavaScriptExecuter.scrollViewWithYAxis(driver, scrollY);
         scrollY = scrollY + datePicker.getDatePickerYPosition();
         waitExecuter.sleep(3000);
         workload.clickOnDate();
@@ -78,8 +80,10 @@ public class TC_CTP_12 extends BaseClass {
         test.log(LogStatus.PASS, "Verified workload Jobs Table is available on workload chargeback page");
 
         //Validate Header Column names in workload Jobs Table
-        Assert.assertTrue(workload.validateHeaderColumnNameInworkloadJobsTable(),"Validation failed for header column names from workload Jobs Table");
-        test.log(LogStatus.PASS, "Verified Column names in workload Jobs Table successfully on Yarn chargeback page");
+        Assert.assertTrue(workload.validateHeaderColumnNameInworkloadJobsTable(),
+                "Validation failed for header column names from workload Jobs Table");
+        test.log(LogStatus.PASS,
+                "Verified Column names in workload Jobs Table successfully on Yarn chargeback page");
         waitExecuter.sleep(1000);
     }
 }

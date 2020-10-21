@@ -74,10 +74,19 @@ public class TC_CTP_02 extends BaseClass {
 
 
         datePicker.clickOnDatePicker();
+        waitExecuter.sleep(1000);
+
+        // Click on custom range
         datePicker.selectCustomRange();
-        datePicker.setStartDate(DateUtils.getFirstDateOfYear());
-        datePicker.setEndDate(DateUtils.getCurrentDate());
+        waitExecuter.sleep(1000);
+
+        // Set Start date by substracting days from current date and end date as currentdate
+        datePicker.setCurrentAndPastDate(-30);
+        waitExecuter.sleep(1000);
+
+        // Click on apply button of Cluster
         datePicker.clickOnCustomDateApplyBtn();
+        waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.ViewByCal.getText());

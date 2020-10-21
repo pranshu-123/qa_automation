@@ -65,7 +65,7 @@ public class TC_CTP_05 extends BaseClass {
         workload.clickOnDay();
         test.log(LogStatus.PASS, "Verify View By Day :"
                 + workloadPageObject.viewByDay.isDisplayed());
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
 
 
         datePicker.clickOnDatePicker();

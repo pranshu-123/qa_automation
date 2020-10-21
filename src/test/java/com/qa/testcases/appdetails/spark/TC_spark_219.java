@@ -11,6 +11,7 @@ import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -24,7 +25,7 @@ public class TC_spark_219 extends BaseClass {
      * 3. clicking on the UI must go to apps detail page
      */
 
-    org.slf4j.Logger logger = LoggerFactory.getLogger(TC_spark_219.class);
+    Logger logger = LoggerFactory.getLogger(TC_spark_219.class);
 
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_spark_219_verifyAppDetailsPage(String clusterId) {
@@ -65,7 +66,7 @@ public class TC_spark_219 extends BaseClass {
         }
         else
             {
-                logger.info("No Spark Application present in the "+ clusterId+ " cluster for the time span " +
+                logger.error("No Spark Application present in the "+ clusterId+ " cluster for the time span " +
                             "of 90 days");
             }
          //Close apps details page

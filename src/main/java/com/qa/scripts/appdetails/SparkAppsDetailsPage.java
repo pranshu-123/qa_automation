@@ -91,8 +91,9 @@ public class SparkAppsDetailsPage {
                         for(int t=0; t<graphTitleList.size(); t++) {
                             String graphTitle = graphTitleList.get(t).getText();
                             logger.info("Graph title is " + graphTitle);
-                            Assert.assertTrue(Arrays.asList(expectedGraphTitle).contains(graphTitle));
-                            Assert.assertTrue(allGraphsList.get(t).isDisplayed(), "");
+                            Assert.assertTrue(Arrays.asList(expectedGraphTitle).contains(graphTitle), "The expected" +
+                                    " Graph title doesnot match with the titles in the UI");
+                            Assert.assertTrue(allGraphsList.get(t).isDisplayed(), "All Graphs are not displayed");
                             switch(graphTitle){
                                 case "Task Attempts":
                                     logger.info("Validating the Graph "+graphTitle);
@@ -142,7 +143,8 @@ public class SparkAppsDetailsPage {
                         for (int e = 0; e < errorTypeList.size(); e++) {
                             String errorType = errorTypeList.get(e).getText();
                             logger.info("Error Type is " + errorType);
-                            Assert.assertTrue(Arrays.asList(expectedErrorCategory).contains(errorType));
+                            Assert.assertTrue(Arrays.asList(expectedErrorCategory).contains(errorType),
+                                    "The UI error types displayed does not match with the Expected error types ");
                         }
                         List<WebElement> errorCollapsableList = sparkAppPageObj.errorCollapse;
                         try {
@@ -181,7 +183,8 @@ public class SparkAppsDetailsPage {
                         for (int k = 0; k < keyWordsList.size(); k++) {
                             String keyword = keyWordsList.get(k).getText();
                             logger.info("Keyword Type is " + keyword);
-                            Assert.assertTrue(Arrays.asList(expectedKeyWords).contains(keyword));
+                            Assert.assertTrue(Arrays.asList(expectedKeyWords).contains(keyword),
+                                    "Keywords displayed on the UI doesnot match with the expected keywords");
                             MouseActions.clickOnElement(driver,keyWordsList.get(k));
                             //keyWordsList.get(k).click();
                             waitExecuter.sleep(2000);
@@ -265,23 +268,27 @@ public class SparkAppsDetailsPage {
                         for (int t=0; t< subTabList.size(); t++){
                             String subTabName =  subTabList.get(t).getText();
                             logger.info("The Timings subTab is " + subTabName);
-                            Assert.assertTrue(Arrays.asList(expectedSubTabList).contains(subTabName));
+                            Assert.assertTrue(Arrays.asList(expectedSubTabList).contains(subTabName),
+                                    "Tab list displayed in the UI doesnot match with the expected list of tabs");
                             MouseActions.clickOnElement(driver, subTabList.get(t));
                            // subTabList.get(t).click();
                             waitExecuter.sleep(1000);
                             String titleName = sparkAppPageObj.timingsTabTitle.getText();
                             logger.info("The Timings subTabs Title is " + titleName);
-                            Assert.assertTrue(sparkAppPageObj.pieChart.isDisplayed());
+                            Assert.assertTrue(sparkAppPageObj.pieChart.isDisplayed(), "Piechart for Task Attempts" +
+                                    " is not displayed");
                             List<WebElement> legendNameList = sparkAppPageObj.legendNames;
                             Assert.assertFalse(legendNameList.isEmpty(), "Empty legend list");
                             for (int l=0; l< legendNameList.size(); l++) {
                                 String legendName = legendNameList.get(l).getText();
                                 logger.info("The Legends for subTab "+subTabName+" is " + legendName);
                                 if (subTabName.equals("Task Time")) {
-                                    Assert.assertTrue(Arrays.asList(expectedTTLegendNames).contains(legendName));
+                                    Assert.assertTrue(Arrays.asList(expectedTTLegendNames).contains(legendName),
+                                            "The legends displayed in the UI for Task Time doesnot match to the expected list of legends");
                                 }
                                 else {
-                                    Assert.assertTrue(Arrays.asList(expectedATLegendNames).contains(legendName));
+                                    Assert.assertTrue(Arrays.asList(expectedATLegendNames).contains(legendName),
+                                            "The legends displayed in the UI for App Time doesnot match to the expected list of legends");
                                 }
                             }
                         }
@@ -383,13 +390,13 @@ public class SparkAppsDetailsPage {
                 navigationRowList.get(rows).click();
                 waitExecuter.sleep(2000);
                 if (validateExecutorTab){
-                    Assert.assertTrue(sparkPageObj.DAGData.isDisplayed());
+                    Assert.assertTrue(sparkPageObj.DAGData.isDisplayed(), "Dag data is not displayed ");
                     logger.info("Dags data is displayed ");
                     List<WebElement> rddBlockList = sparkPageObj.rddBlockList;
                     Assert.assertFalse(rddBlockList.isEmpty(), "No DAGs data");
                     logger.info("No. of RDD blocks in the flow chart is "+ rddBlockList.size());
                     for (int i =0 ;i< rddBlockList.size(); i++){
-                        Assert.assertTrue(rddBlockList.get(i).isDisplayed());
+                        Assert.assertTrue(rddBlockList.get(i).isDisplayed(), "FlowChart doesnot have the RDD blocks displayed");
                     }
                 }
                 List<WebElement> stageHeaderList = sparkPageObj.stageHeaders;

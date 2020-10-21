@@ -73,7 +73,8 @@ public class SparkAppsDetailsPage {
                                 collapsableList.get(c).click();
                             }
                         } catch (Exception ex) {
-                            throw new AssertionError("Caught exception while clicking the collapsable icon for insights.");
+                            throw new AssertionError("Caught exception while clicking the collapsable" +
+                                    " icon for insights.\n" + ex.getMessage());
                         }
                         test.log(LogStatus.PASS, "Analysis tab is populated");
                         break;
@@ -149,7 +150,8 @@ public class SparkAppsDetailsPage {
                                // errorCollapsableList.get(c).click();
                             }
                         } catch (Exception ex) {
-                            throw new AssertionError("Caught exception while clicking the collapsable icon for insights.");
+                            throw new AssertionError("Caught exception while clicking the collapsable " +
+                                    "icon for insights.\n" + ex.getMessage());
                         }
                         test.log(LogStatus.PASS, "Errors tab is populated");
                         break;
@@ -530,7 +532,7 @@ public class SparkAppsDetailsPage {
                 }
             }
             catch(NoSuchElementException ex){
-                throw new AssertionError("No failed attempts found for this application");
+                throw new AssertionError("No failed attempts found for this application\n" + ex.getMessage());
             }
         }
         else {

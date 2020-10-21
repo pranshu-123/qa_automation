@@ -78,10 +78,10 @@ public class TC_CTP_02 extends BaseClass {
 
         // Click on custom range
         datePicker.selectCustomRange();
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
 
         // Set Start date by substracting days from current date and end date as currentdate
-        datePicker.setCurrentAndPastDate(-30);
+        datePicker.setCurrentAndPastDate(-10);
         waitExecuter.sleep(1000);
 
         // Click on apply button of Cluster

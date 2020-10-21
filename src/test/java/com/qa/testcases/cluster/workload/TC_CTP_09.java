@@ -69,10 +69,9 @@ public class TC_CTP_09 extends BaseClass {
         scrollY = scrollY + datePicker.getDatePickerYPosition();
         waitExecuter.sleep(3000);
         workload.clickOnDate();
-        waitExecuter.sleep(3000);
         test.log(LogStatus.PASS, "Verify current Date selected :"
                 + workloadPageObject.ViewByCal.getText());
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
 
 
     }

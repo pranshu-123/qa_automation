@@ -71,10 +71,9 @@ public class TC_CTP_10 extends BaseClass {
         test.log(LogStatus.PASS, "Verify current Date selected");
         waitExecuter.sleep(1000);
 
-
-        waitExecuter.sleep(1000);
         //Checking workload Jobs Table Records populated
         workload.getworkloadJobsTableRecord();
+        waitExecuter.sleep(1000);
         test.log(LogStatus.PASS,
                 "Verified workload Jobs Table is available on workload chargeback page");
 

@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.utils.Log;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.testng.annotations.Test;
 
 @Marker.AppDetailsSpark
@@ -15,7 +16,7 @@ public class TC_spark_237 extends BaseClass {
      * 1.The Analysis tab should list the Insights and the recommendations
      * 2. The tabs must be collapsable
      */
-    org.slf4j.Logger logger = LoggerFactory.getLogger(TC_spark_237.class);
+    Logger logger = LoggerFactory.getLogger(TC_spark_237.class);
 
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_spark_237_verifyTagsTab(String clusterId) {

@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.utils.Log;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.testng.annotations.Test;
 
 @Marker.AppDetailsSpark
@@ -15,7 +16,7 @@ public class TC_spark_233 extends BaseClass {
      * 2. Tabs must be collapsable
      * 3. error related to drivers, executors and rm diagnostics are some kind of error catagories
      */
-    org.slf4j.Logger logger = LoggerFactory.getLogger(TC_spark_233.class);
+    Logger logger = LoggerFactory.getLogger(TC_spark_233.class);
 
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_spark_233_verifyErrorsTab(String clusterId) {

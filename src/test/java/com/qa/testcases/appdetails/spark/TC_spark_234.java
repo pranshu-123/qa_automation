@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.utils.Log;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.testng.annotations.Test;
 
 @Marker.AppDetailsSpark
@@ -18,7 +19,7 @@ public class TC_spark_234 extends BaseClass {
      *    properties (metadata, memory, limit, resources, cpu, net, yarn, deploy)
      * 4. RESET should reset all the searches to default
      */
-    org.slf4j.Logger logger = LoggerFactory.getLogger(TC_spark_234.class);
+    Logger logger = LoggerFactory.getLogger(TC_spark_234.class);
 
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_spark_234_verifyConfigurationTab(String clusterId) {

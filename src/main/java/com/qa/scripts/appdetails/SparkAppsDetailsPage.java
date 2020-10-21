@@ -13,6 +13,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.testng.Assert;
 
 import java.time.Duration;
@@ -25,7 +26,7 @@ public class SparkAppsDetailsPage {
     private WaitExecuter waitExecuter;
     private WebDriver driver;
 
-    org.slf4j.Logger logger = LoggerFactory.getLogger(com.qa.scripts.jobs.applications.AllApps.class);
+    Logger logger = LoggerFactory.getLogger(com.qa.scripts.jobs.applications.AllApps.class);
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -581,7 +582,7 @@ public class SparkAppsDetailsPage {
         }
         else
         {
-            LOGGER.info("No Spark Application present in the "+ clusterId+ " cluster for the time span " +
+            LOGGER.error("No Spark Application present in the "+ clusterId+ " cluster for the time span " +
                     "of 90 days");
         }
         //Close apps details page

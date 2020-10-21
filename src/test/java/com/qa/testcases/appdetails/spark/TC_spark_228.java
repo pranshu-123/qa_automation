@@ -11,6 +11,7 @@ import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.testng.annotations.Test;
 
 @Marker.AppDetailsSpark
@@ -22,7 +23,7 @@ public class TC_spark_228 extends BaseClass {
      *    (Duration, Start time, end time, job count, stages count)
      * 2. Owner, cluster, queue must be populated on the top right
      */
-    org.slf4j.Logger logger = LoggerFactory.getLogger(TC_spark_228.class);
+    Logger logger = LoggerFactory.getLogger(TC_spark_228.class);
 
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_spark_228_verifyRightPaneKpis(String clusterId) {
@@ -58,7 +59,7 @@ public class TC_spark_228 extends BaseClass {
         }
         else
             {
-                logger.info("No Spark Application present in the "+ clusterId+ " cluster for the time span " +
+                logger.error("No Spark Application present in the "+ clusterId+ " cluster for the time span " +
                             "of 90 days");
             }
         //Close apps details page

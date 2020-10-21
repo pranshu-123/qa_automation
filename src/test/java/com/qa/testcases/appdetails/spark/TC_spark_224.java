@@ -11,6 +11,7 @@ import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.testng.annotations.Test;
 
 @Marker.AppDetailsSpark
@@ -22,7 +23,7 @@ public class TC_spark_224 extends BaseClass {
      * 2. Stage must contain these fields ,
      *     Stage ID, Start Time, Duration, tasks, shuffle read, Shuffle write, Input, Output
      */
-    org.slf4j.Logger logger = LoggerFactory.getLogger(TC_spark_224.class);
+    Logger logger = LoggerFactory.getLogger(TC_spark_224.class);
 
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_spark_224_verifyAppDetailsPageStage(String clusterId) {
@@ -61,7 +62,7 @@ public class TC_spark_224 extends BaseClass {
         }
         else
             {
-                logger.info("No Spark Application present in the "+ clusterId+ " cluster for the time span " +
+                logger.error("No Spark Application present in the "+ clusterId+ " cluster for the time span " +
                             "of 90 days");
             }
         //Close apps details page

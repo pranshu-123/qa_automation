@@ -11,6 +11,7 @@ import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.testng.annotations.Test;
 
 @Marker.AppDetailsSpark
@@ -21,7 +22,7 @@ public class TC_spark_239 extends BaseClass {
      * Execution should loaded
      * UI should contain flowchart about RDD
      */
-    org.slf4j.Logger logger = LoggerFactory.getLogger(TC_spark_239.class);
+    Logger logger = LoggerFactory.getLogger(TC_spark_239.class);
 
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_spark_239_verifyJobsExecutionTab(String clusterId) {
@@ -60,7 +61,7 @@ public class TC_spark_239 extends BaseClass {
         }
         else
         {
-            logger.info("No Spark Application present in the "+ clusterId+ " cluster for the time span " +
+            logger.error("No Spark Application present in the "+ clusterId+ " cluster for the time span " +
                     "of 90 days");
         }
         //Close apps details page

@@ -13,6 +13,7 @@ import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.testng.annotations.Test;
 
 @Marker.AppDetailsSpark
@@ -25,7 +26,7 @@ public class TC_spark_220 extends BaseClass {
      * 3. If there are failed attempts then, there should be attempts tab under which attempts attempts for "failed"
      *    and "success" must be displayed in the form of bar graph
      */
-    org.slf4j.Logger logger = LoggerFactory.getLogger(TC_spark_220.class);
+    Logger logger = LoggerFactory.getLogger(TC_spark_220.class);
 
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_spark_220_verifyAttemptsAndKpis(String clusterId) {
@@ -61,7 +62,7 @@ public class TC_spark_220 extends BaseClass {
         }
         else
             {
-                logger.info("No Spark Application present in the "+ clusterId+ " cluster for the time span " +
+                logger.error("No Spark Application present in the "+ clusterId+ " cluster for the time span " +
                         "of 90 days");
             }
         //Close apps details page

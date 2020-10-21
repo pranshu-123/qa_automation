@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.utils.Log;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.testng.annotations.Test;
 
 @Marker.AppDetailsSpark
@@ -18,7 +19,7 @@ public class TC_spark_230 extends BaseClass {
      * c. Vcores - bar chart - should show the number of vcores used by app
      * d. Memory - Bar chart - should show the memory utilised
      */
-    org.slf4j.Logger logger = LoggerFactory.getLogger(TC_spark_230.class);
+    Logger logger = LoggerFactory.getLogger(TC_spark_230.class);
 
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_spark_230_verifyResourcesTab(String clusterId) {

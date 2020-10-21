@@ -11,6 +11,7 @@ import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.testng.annotations.Test;
 
 @Marker.AppDetailsSpark
@@ -24,7 +25,7 @@ public class TC_spark_221 extends BaseClass {
      * 3. Verify that the navigation and the gantt chart should show jobs run under the attempts
      */
 
-    org.slf4j.Logger logger = LoggerFactory.getLogger(TC_spark_221.class);
+    Logger logger = LoggerFactory.getLogger(TC_spark_221.class);
 
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_spark_221_verifyAttemptsAndComponents(String clusterId) {
@@ -59,7 +60,7 @@ public class TC_spark_221 extends BaseClass {
         }
         else
         {
-            logger.info("No Spark Application present in the "+ clusterId+ " cluster for the time span " +
+            logger.error("No Spark Application present in the "+ clusterId+ " cluster for the time span " +
                     "of 90 days");
         }
         //Close apps details page

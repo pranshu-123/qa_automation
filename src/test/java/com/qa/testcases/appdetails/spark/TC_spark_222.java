@@ -11,6 +11,7 @@ import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.testng.annotations.Test;
 
 @Marker.AppDetailsSpark
@@ -23,7 +24,7 @@ public class TC_spark_222 extends BaseClass {
      * 2. Gantt chart should have "ID", "start", "Duration" columns
      * 3. Data must be populated in all the columns if job count is non zero
      */
-    org.slf4j.Logger logger = LoggerFactory.getLogger(TC_spark_222.class);
+    Logger logger = LoggerFactory.getLogger(TC_spark_222.class);
 
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_spark_222_verifyAppDetailsPageCompKpis(String clusterId) {
@@ -60,7 +61,7 @@ public class TC_spark_222 extends BaseClass {
             appsDetailsPage.verifyAppsComponent(sparkAppsDetailsPageObject, true, false);
         }
         else {
-            logger.info("No Spark Application present in the "+ clusterId+ " cluster for the time span " +
+            logger.error("No Spark Application present in the "+ clusterId+ " cluster for the time span " +
                         "of 90 days");
         }
 

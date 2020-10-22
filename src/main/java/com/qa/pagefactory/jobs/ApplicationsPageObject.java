@@ -93,6 +93,36 @@ public class ApplicationsPageObject {
     @FindBy(id = "reset")
     public WebElement resetButton;
 
+    @FindBy (xpath = "(//ul[contains(@class,'select2-results')])/li")
+	public List<WebElement> getUsername;
+	
+	@FindBy(xpath="(//h3[contains(@class,'expandable-header')]/a)[1]")
+	public WebElement applicationType;
+
+	@FindBy(xpath="(//h3[contains(@class,'expandable-header')]/a)[2]")
+	public WebElement applicationEvent;
+
+	@FindBy(xpath="(//label[contains(@class,'checkbox')])[1]/input")
+	public WebElement applicationTypeFirstApp;
+
+	@FindBy(xpath="(//label[contains(@class,'checkbox')])[6]/input")
+	public WebElement applicationEventFirstApp;
+
+	@FindBy(xpath="(//label[contains(@class,'checkbox')])/input")
+	public List<WebElement> getApplicationTypeChkBoxList;
+
+	@FindBy(xpath="(//label[contains(@class,'checkbox')])/input")
+	public List<WebElement> getApplicationEventChkBoxList;
+
+	@FindBy(xpath="//tbody[@id='inefficientApps-body']/tr")
+	public List<WebElement> inefficientAppsTblRowsList;
+
+	@FindBy(xpath="//h3[contains(@class,'no-data-msg')]")
+	public WebElement inefficientAppsTblNoDataMsg;
+
+	@FindBy(xpath="//a[contains(@class,'icon-sort')]")
+	public List<WebElement> inefficientAppsIconSortTbl;
+
     // Add to master
     @FindBy(className = "show-all")
     public WebElement showAll;

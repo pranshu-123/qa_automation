@@ -26,7 +26,7 @@ public class TC_CO_18 extends BaseClass
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_CO_18_VerifynewAddnewautoactionoralert(String clusterId) {
         test = extent.startTest("TC_CO_18_VerifynewAddnewautoactionoralert"+clusterId, "Validate Verify new Add new autoaction or alert page on clicking.");
-        test.assignCategory("4620 - Cluster Overview");
+        test.assignCategory(" Cluster Overview");
         // Click on first alert row on home page
         HomePageObject homePageObject = new HomePageObject(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);

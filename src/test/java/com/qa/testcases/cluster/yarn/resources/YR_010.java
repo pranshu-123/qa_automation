@@ -23,7 +23,7 @@ public class YR_010 extends BaseClass {
     public void YR_010_verifyYarnResourcePageForGroupByDropDownAndItFields(String clusterId) {
         test = extent.startTest("YR_010_verifyYarnResourcePageForGroupByDropDownAndItFields: " + clusterId,
                 "Verify if on top left \"Group by\" tab dropdown must be present, and Should contain fields.");
-        test.assignCategory("4620 Cluster - Yarn Resources");
+        test.assignCategory(" Cluster - Yarn Resources");
         Log.startTestCase("YR_010_verifyYarnResourcePageForGroupByDropDownAndItFields");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);

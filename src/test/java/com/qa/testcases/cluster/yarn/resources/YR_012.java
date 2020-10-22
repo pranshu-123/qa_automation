@@ -21,7 +21,7 @@ public class YR_012 extends BaseClass {
     public void YR_012_verifyYarnResourcePageShowOnlyYarnApp(String clusterId) {
         test = extent.startTest("YR_012_verifyYarnResourcePageShowOnlyYarnApp: " + clusterId,
                 "Yarn Resource page should Shown Only yarn applications.");
-        test.assignCategory("4620 Cluster - Yarn Resources");
+        test.assignCategory(" Cluster - Yarn Resources");
         Log.startTestCase("YR_012_verifyYarnResourcePageShowOnlyYarnApp");
 
         Yarn yarn = new Yarn(driver);

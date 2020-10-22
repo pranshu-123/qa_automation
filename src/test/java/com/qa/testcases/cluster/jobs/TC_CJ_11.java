@@ -25,7 +25,7 @@ public class TC_CJ_11 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_CJ_11_VerifyJobsQueueinGroupBy(String clusterId) {
         test = extent.startTest("TC_CJ_11_VerifyJobsQueueinGroupBy (" + clusterId + ")", "Validate Jobs Application type in Group By ");
-        test.assignCategory("4620 - Cluster / Job");
+        test.assignCategory(" Cluster / Job");
         Log.startTestCase("TC_CJ_11_VerifyJobsQueueinGroupBy");
         WaitExecuter executer = new WaitExecuter(driver);
         JobsPageObject jobsPageObject=new JobsPageObject(driver);

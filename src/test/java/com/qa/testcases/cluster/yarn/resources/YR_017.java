@@ -26,7 +26,7 @@ public class YR_017 extends BaseClass {
     public void YR_017_verifyClusterTab(String clusterId) {
         test = extent.startTest("YR_017_verifyclusterTabAndEntries: " + clusterId,
                 "Verify the cluster Tab should show the list of cluster.");
-        test.assignCategory("4620 Cluster - Yarn Resources");
+        test.assignCategory(" Cluster - Yarn Resources");
         Log.startTestCase("YR_017_verifyClusterTab");
 
         Yarn yarn = new Yarn(driver);

@@ -25,7 +25,7 @@ public class TC_CJ_07 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_CJ_07_VerifyJobsApplicationtypeinGroupBycombinations(String clusterId) {
         test = extent.startTest("TC_CJ_07_VerifyJobsApplicationtypeinGroupBycombinations (" + clusterId + ")", "Validate Jobs Application type in Group By combinations graph and page filter.");
-        test.assignCategory("4620 - Cluster / Job");
+        test.assignCategory(" Cluster / Job");
         Log.startTestCase("TC_CJ_07_VerifyJobsApplicationtypeinGroupBycombinations");
         WaitExecuter executer = new WaitExecuter(driver);
         JobsPageObject jobsPageObject = new JobsPageObject(driver);

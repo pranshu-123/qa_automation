@@ -25,7 +25,7 @@ public class TC_CTX_25 extends BaseClass {
   public void verifyForDifferentCluster() {
       test = extent.startTest("TC_CTX_25.verifyForDifferentCluster",
         "Verify TopX report is generation for different clusters");
-      test.assignCategory("4620 Cluster - Top X");
+      test.assignCategory(" Cluster - Top X");
       WaitExecuter waitExecuter = new WaitExecuter(driver);
       TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
 

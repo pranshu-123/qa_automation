@@ -29,7 +29,7 @@ public class IM_RES_18 extends BaseClass {
 	public void verifyDataDisplayedAsFilteredQueue(String clusterId) {
 		test = extent.startTest("IM_RES_18.verifyDataDisplayedAsFilteredQueue (" + clusterId + ")",
 				"Validate the \"Group By\" filter for Queue.");
-		test.assignCategory("4620 - Cluster/Impala Resources");
+		test.assignCategory(" Cluster/Impala Resources");
 		test.log(LogStatus.INFO, "Login to the application");
 
 		// Initialize all classes objects

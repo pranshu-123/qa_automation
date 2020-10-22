@@ -15,7 +15,7 @@ public class TC_CO_03 extends BaseClass {
   @Test(dataProvider = "clusterid-data-provider")
   public void TC_CO_03_verifyCustomRangeInDatepicker(String clusterId) {
     test = extent.startTest("TC_CO_03_verifyCustomRangeInDatepicker: "+clusterId, "Verify Custom Range in datepicker filter ");
-    test.assignCategory("4620 - Cluster Overview");
+    test.assignCategory(" Cluster Overview");
 
     HomePage homePage = new HomePage(driver);
     homePage.selectMultiClusterId(clusterId);

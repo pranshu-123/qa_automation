@@ -29,7 +29,7 @@ public class IM_RES_14 extends BaseClass {
 	public void IM_RES_14_verifyTooltipOfMemoryGraphOnHoveringQueryGraph(String clusterId) {
 		test = extent.startTest("IM_RES_14.verifyTooltipOfMemoryGraphOnHoveringQueryGraph : " + clusterId,
 				"Verify on hovering on Query graph, Memory graph tool tip should be visible too.)");
-		test.assignCategory("4620 - Cluster/Impala Resources");
+		test.assignCategory(" Cluster/Impala Resources");
 
 		test.log(LogStatus.INFO, "Login to the application");
 		WaitExecuter waitExecuter = new WaitExecuter(driver);

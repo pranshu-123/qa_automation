@@ -29,7 +29,7 @@ public class TC_CJ_01 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_CJ_01_VerifyGroupByfiltersavailable(String clusterId) {
         test = extent.startTest("TC_CJ_01.VerifyGroupByfiltersavailable(" + clusterId + ")", "Validate GroupBy filters available");
-        test.assignCategory("4620 - Cluster / Job");
+        test.assignCategory(" Cluster / Job");
         Log.startTestCase("TC_CJ_01_VerifyGroupByfiltersavailable");
         WaitExecuter executer = new WaitExecuter(driver);
         HomePage homePage = new HomePage(driver);

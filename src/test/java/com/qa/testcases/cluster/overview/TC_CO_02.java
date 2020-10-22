@@ -18,7 +18,7 @@ public class TC_CO_02 extends BaseClass {
     public void TC_CO_02_verifyCombinationOfDaterange(String clusterId) {
 
         test = extent.startTest("TC_CO_02_verifyCombinationOfDaterange: "+clusterId, "Verify Custom Range in datepicker filter ");
-        test.assignCategory("4620 - Cluster Overview");
+        test.assignCategory(" Cluster Overview");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);

@@ -27,7 +27,7 @@ public class TC_CB_03 extends BaseClass {
     public void TC_CB_03_Verifytheusercanselectacluster (String clusterId) {
 
         test = extent.startTest("TC_CB_03_Verifytheusercanselectacluster "+clusterId, "Verify the user can select a cluster ");
-        test.assignCategory("4620 Cluster - Impala Chargeback");
+        test.assignCategory(" Cluster - Impala Chargeback");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);

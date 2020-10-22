@@ -23,7 +23,7 @@ public class YR_019 extends BaseClass {
     public void YR_019_verifyVcoresAndMemoryGraph(String clusterId) {
         test = extent.startTest("YR_019_verifyVcoresAndMemoryGraph: " + clusterId,
                 "Verify 2 sets of graphs are shown In UI with Vcores and Memory.");
-        test.assignCategory("4620 Cluster - Yarn Resources");
+        test.assignCategory(" Cluster - Yarn Resources");
         Log.startTestCase("YR_019_verifyVcoresAndMemoryGraph");
 
         Yarn yarn = new Yarn(driver);

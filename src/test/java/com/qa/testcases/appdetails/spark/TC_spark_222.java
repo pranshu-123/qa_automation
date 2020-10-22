@@ -20,7 +20,7 @@ public class TC_spark_222 extends BaseClass {
     /**
      * Verify that on a cluster with different kinds of Spark Apps:
      * 1. The navigation should contain below table
-     *    job ID, start time, Duration, tasks, read, write, Stages
+     * job ID, start time, Duration, tasks, read, write, Stages
      * 2. Gantt chart should have "ID", "start", "Duration" columns
      * 3. Data must be populated in all the columns if job count is non zero
      */
@@ -60,10 +60,9 @@ public class TC_spark_222 extends BaseClass {
             //Clicking on the UI must go to apps detail page and verify the basic tabs present
             appsDetailsPage.verifyAppsComponent(sparkAppsDetailsPageObject, true, false);
             test.log(LogStatus.PASS, "The application has basic tabs present and has data populated accordingly");
-        }
-        else {
-            logger.error("No Spark Application present in the "+ clusterId+ " cluster for the time span " +
-                        "of 90 days");
+        } else {
+            logger.error("No Spark Application present in the " + clusterId + " cluster for the time span " +
+                    "of 90 days");
         }
 
         //Close apps details page

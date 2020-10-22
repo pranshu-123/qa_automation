@@ -17,7 +17,7 @@ public class TC_spark_234 extends BaseClass {
      * 1. Spark Properties and values must be listed here
      * 2. Search page must be present here and user should be able to search any property and values
      * 3. These key words must be present as templates and users should be able to select them and list related
-     *    properties (metadata, memory, limit, resources, cpu, net, yarn, deploy)
+     * properties (metadata, memory, limit, resources, cpu, net, yarn, deploy)
      * 4. RESET should reset all the searches to default
      */
     Logger logger = LoggerFactory.getLogger(TC_spark_234.class);

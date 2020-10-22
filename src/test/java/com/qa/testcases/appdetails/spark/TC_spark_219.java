@@ -9,6 +9,7 @@ import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
+import com.qa.utils.MouseActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
@@ -73,9 +74,7 @@ public class TC_spark_219 extends BaseClass {
                             "of 90 days");
             }
          //Close apps details page
-        sparkAppsDetailsPageObject.closeAppsPageTab.click();
+        MouseActions.clickOnElement(driver, sparkAppsDetailsPageObject.closeAppsPageTab);
+      //  sparkAppsDetailsPageObject.closeAppsPageTab.click();
     }
 }
-
-
-

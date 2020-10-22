@@ -59,10 +59,8 @@ public class TC_spark_239 extends BaseClass {
             /**clicking on the UI must go to apps detail page and verify the basic tabs present */
             appsDetailsPage.verifyAppsComponent(sparkAppsDetailsPageObject, false, true);
             test.log(LogStatus.PASS, "Verified that the Execution tab is loaded and contains a flowchart about RDD");
-        }
-        else
-        {
-            logger.error("No Spark Application present in the "+ clusterId+ " cluster for the time span " +
+        } else {
+            logger.error("No Spark Application present in the " + clusterId + " cluster for the time span " +
                     "of 90 days");
         }
         //Close apps details page

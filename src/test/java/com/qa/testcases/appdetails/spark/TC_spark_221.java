@@ -21,7 +21,7 @@ public class TC_spark_221 extends BaseClass {
      * Verify the attempts and the KPIs for a Spark App:
      * 1. Application details page should be opened
      * 2. If there are failed attempts then, there should be attempts tab under which attempts attempts for "failed"
-     *    and "success" must be displayed in the form of bar graph.
+     * and "success" must be displayed in the form of bar graph.
      * 3. Verify that the navigation and the gantt chart should show jobs run under the attempts
      */
 
@@ -58,10 +58,8 @@ public class TC_spark_221 extends BaseClass {
         if (appCount > 0) {
             appsDetailsPage.navigateToFailedAppsAppPage(applicationsPageObject, sparkPageObj, test, true);
             test.log(LogStatus.PASS, "The Failed apps have all kpis listed along with components present");
-        }
-        else
-        {
-            logger.error("No Spark Application present in the "+ clusterId+ " cluster for the time span " +
+        } else {
+            logger.error("No Spark Application present in the " + clusterId + " cluster for the time span " +
                     "of 90 days");
         }
         //Close apps details page

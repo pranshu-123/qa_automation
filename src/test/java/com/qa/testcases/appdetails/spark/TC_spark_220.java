@@ -24,7 +24,7 @@ public class TC_spark_220 extends BaseClass {
      * 1. Application details page should be opened
      * 2. Left pane must be opened and should have KPIs listed (start, end and duration listed and should not be empty)
      * 3. If there are failed attempts then, there should be attempts tab under which attempts attempts for "failed"
-     *    and "success" must be displayed in the form of bar graph
+     * and "success" must be displayed in the form of bar graph
      */
     Logger logger = LoggerFactory.getLogger(TC_spark_220.class);
 
@@ -60,12 +60,10 @@ public class TC_spark_220 extends BaseClass {
         if (appCount > 0) {
             appsDetailsPage.navigateToFailedAppsAppPage(applicationsPageObject, sparkPageObj, test, false);
             test.log(LogStatus.PASS, "The Failed apps have all kpis listed along with attempt data ");
+        } else {
+            logger.error("No Spark Application present in the " + clusterId + " cluster for the time span " +
+                    "of 90 days");
         }
-        else
-            {
-                logger.error("No Spark Application present in the "+ clusterId+ " cluster for the time span " +
-                        "of 90 days");
-            }
         //Close apps details page
         sparkPageObj.closeAppsPageTab.click();
     }

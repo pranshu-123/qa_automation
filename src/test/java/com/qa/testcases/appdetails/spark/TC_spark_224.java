@@ -21,7 +21,7 @@ public class TC_spark_224 extends BaseClass {
      * Verify that on a cluster with different kinds of Spark Apps:
      * 1. Stage for the Job should be displayed
      * 2. Stage must contain these fields ,
-     *     Stage ID, Start Time, Duration, tasks, shuffle read, Shuffle write, Input, Output
+     * Stage ID, Start Time, Duration, tasks, shuffle read, Shuffle write, Input, Output
      */
     Logger logger = LoggerFactory.getLogger(TC_spark_224.class);
 
@@ -60,12 +60,10 @@ public class TC_spark_224 extends BaseClass {
             /**clicking on the UI must go to apps detail page and verify the basic tabs present */
             appsDetailsPage.verifyAppsComponent(sparkAppsDetailsPageObject, false, false);
             test.log(LogStatus.PASS, "The job stage table has jobs and corresponding details displayed per job id");
+        } else {
+            logger.error("No Spark Application present in the " + clusterId + " cluster for the time span " +
+                    "of 90 days");
         }
-        else
-            {
-                logger.error("No Spark Application present in the "+ clusterId+ " cluster for the time span " +
-                            "of 90 days");
-            }
         //Close apps details page
         sparkAppsDetailsPageObject.closeAppsPageTab.click();
     }

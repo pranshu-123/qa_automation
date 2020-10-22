@@ -20,7 +20,7 @@ public class TC_spark_228 extends BaseClass {
     /**
      * Verify that on a cluster with different kinds of Spark Apps:
      * 1. All the KPIs should be listed and the data must be populated.
-     *    (Duration, Start time, end time, job count, stages count)
+     * (Duration, Start time, end time, job count, stages count)
      * 2. Owner, cluster, queue must be populated on the top right
      */
     Logger logger = LoggerFactory.getLogger(TC_spark_228.class);
@@ -57,12 +57,10 @@ public class TC_spark_228 extends BaseClass {
             test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);
             appsDetailsPage.verifyRightPaneKpis(sparkPageObj);
             test.log(LogStatus.PASS, "All the KPIs are listed and the data is populated");
+        } else {
+            logger.error("No Spark Application present in the " + clusterId + " cluster for the time span " +
+                    "of 90 days");
         }
-        else
-            {
-                logger.error("No Spark Application present in the "+ clusterId+ " cluster for the time span " +
-                            "of 90 days");
-            }
         //Close apps details page
         sparkPageObj.closeAppsPageTab.click();
     }

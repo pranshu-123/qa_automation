@@ -59,6 +59,7 @@ public class TC_spark_220 extends BaseClass {
         //Clicking on the Spark app must go to apps detail page
         if (appCount > 0) {
             appsDetailsPage.navigateToFailedAppsAppPage(applicationsPageObject, sparkPageObj, test, false);
+            test.log(LogStatus.PASS, "The Failed apps have all kpis listed along with attempt data ");
         }
         else
             {

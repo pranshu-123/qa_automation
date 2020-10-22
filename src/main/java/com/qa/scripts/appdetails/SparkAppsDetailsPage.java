@@ -26,7 +26,7 @@ public class SparkAppsDetailsPage {
     private WaitExecuter waitExecuter;
     private WebDriver driver;
 
-    Logger logger = LoggerFactory.getLogger(com.qa.scripts.jobs.applications.AllApps.class);
+    Logger logger = LoggerFactory.getLogger(SparkAppsDetailsPage.class);
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -559,11 +559,11 @@ public class SparkAppsDetailsPage {
      * Get Job count of selected App click on it and go to apps details page
      * Verify specific summary tabs.
      * */
-    public void commonSetupCodeForSumarryTabValidation(ExtentTest test, String clusterId, String tabName, org.slf4j.Logger LOGGER){
+    public void commonSetupCodeForSumarryTabValidation(ExtentTest test, String clusterId, String tabName, Logger logger){
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
 
-        LOGGER.info("Initialize all class objects");
+        logger.info("Initialize all class objects");
         TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         SparkAppsDetailsPageObject sparkAppPageObj = new SparkAppsDetailsPageObject(driver);
@@ -578,7 +578,7 @@ public class SparkAppsDetailsPage {
 
         //Verify that the left pane has spark check box and the apps number
         test.log(LogStatus.INFO, "Verify that the left pane has spark check box and the apps number");
-        LOGGER.info("Select individual app and assert that table contain its data");
+        logger.info("Select individual app and assert that table contain its data");
 
         int appCount = appsDetailsPage.clickOnlyLink("Spark");
         //Clicking on the Spark app must go to apps detail page
@@ -589,7 +589,7 @@ public class SparkAppsDetailsPage {
         }
         else
         {
-            LOGGER.error("No Spark Application present in the "+ clusterId+ " cluster for the time span " +
+            logger.error("No Spark Application present in the "+ clusterId+ " cluster for the time span " +
                     "of 90 days");
         }
         //Close apps details page

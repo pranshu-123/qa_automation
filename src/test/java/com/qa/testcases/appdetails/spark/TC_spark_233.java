@@ -4,6 +4,7 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.utils.Log;
+import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.testng.annotations.Test;
@@ -26,5 +27,6 @@ public class TC_spark_233 extends BaseClass {
         Log.startTestCase("TC_spark_233_verifyErrorsTab");
         SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);
         appsDetailsPage.commonSetupCodeForSumarryTabValidation(test, clusterId, "Errors", logger);
+        test.log(LogStatus.PASS, "Verified the Errors tab successfully");
     }
 }

@@ -56,6 +56,7 @@ public class TC_spark_228 extends BaseClass {
             String headerAppId = appsDetailsPage.verifyAppId(sparkPageObj, applicationsPageObject);
             test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);
             appsDetailsPage.verifyRightPaneKpis(sparkPageObj);
+            test.log(LogStatus.PASS, "All the KPIs are listed and the data is populated");
         }
         else
             {

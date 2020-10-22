@@ -55,6 +55,8 @@ public class TC_spark_219 extends BaseClass {
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
         Assert.assertEquals(appCount, totalCount, "The Spark app count of SparkApp is not equal to " +
                 "the total count of heading.");
+        test.log(LogStatus.PASS, "The left pane has spark check box and the app counts match to that " +
+                "displayed in the header");
 
         //Clicking on the Spark app must go to apps detail page
         if (appCount > 0) {
@@ -63,6 +65,7 @@ public class TC_spark_219 extends BaseClass {
 
             /**clicking on the UI must go to apps detail page and verify the basic tabs present */
             appsDetailsPage.verifyAppsComponent(sparkAppsDetailsPageObject, false, false);
+            test.log(LogStatus.PASS, "The basic components for an application is present");
         }
         else
             {

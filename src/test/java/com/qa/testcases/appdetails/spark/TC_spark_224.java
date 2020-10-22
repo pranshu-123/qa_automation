@@ -59,6 +59,7 @@ public class TC_spark_224 extends BaseClass {
 
             /**clicking on the UI must go to apps detail page and verify the basic tabs present */
             appsDetailsPage.verifyAppsComponent(sparkAppsDetailsPageObject, false, false);
+            test.log(LogStatus.PASS, "The job stage table has jobs and corresponding details displayed per job id");
         }
         else
             {

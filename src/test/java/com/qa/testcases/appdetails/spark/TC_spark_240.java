@@ -4,6 +4,7 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.utils.Log;
+import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.testng.annotations.Test;
@@ -27,5 +28,6 @@ public class TC_spark_240 extends BaseClass {
         Log.startTestCase("TC_spark_240_verifyTimingsTab");
         SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);
         appsDetailsPage.commonSetupCodeForSumarryTabValidation(test, clusterId, "Timings", logger);
+        test.log(LogStatus.PASS, "Verified the Timings tab successfully");
     }
 }

@@ -4,7 +4,6 @@ import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.utils.WaitExecuter;
-import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,7 +22,6 @@ public class AllApps {
     private final Actions action;
     private final TopPanelComponentPageObject topPanelComponentPageObject;
     private final DatePicker datePicker;
-    private final AllApps allApps;
 
     /**
      * Constructer to initialize wait, driver and necessary objects
@@ -37,7 +35,6 @@ public class AllApps {
         action = new Actions(driver);
         topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
         datePicker = new DatePicker(driver);
-        allApps = new AllApps(driver);
         this.driver = driver;
     }
 
@@ -135,7 +132,7 @@ public class AllApps {
     }
 
     /* Select last 7 days from date range */
-    public void select7Days(){
+    public void select7Days() {
         LOGGER.info("Select last 7 days");
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(1000);
@@ -144,14 +141,14 @@ public class AllApps {
     }
 
     /* Select cluster and Last 7 days */
-    public void inJobsSelectClusterAndLast7Days(String clusterId){
+    public void inJobsSelectClusterAndLast7Days(String clusterId) {
         // Navigate to Jobs tab from header
-        allApps.navigateToJobsTab();
+        navigateToJobsTab();
         // Select last 7 days from date picker
-        allApps.select7Days();
+        select7Days();
         // Select cluster
         LOGGER.info("Select clusterId : " + clusterId);
-        allApps.selectCluster(clusterId);
+        selectCluster(clusterId);
         waitExecuter.sleep(3000);
     }
 }

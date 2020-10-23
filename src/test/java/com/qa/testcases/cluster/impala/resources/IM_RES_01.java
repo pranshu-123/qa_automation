@@ -29,7 +29,7 @@ public class IM_RES_01 extends BaseClass {
 	private static final Logger LOGGER = Logger.getLogger(IM_RES_01.class.getName());
 
 	@Test(dataProvider = "clusterid-data-provider")
-	public void IM_RES_01_verifyGraphIsDisplayedForMemoryConsumptionAndQueryForAllDatePickerOption(String clusterId) {
+	public void IM_RES_01_verifyGraphsForDatePickerOptions(String clusterId) {
 		test = extent.startTest("IM_RES_01_verifyGraphIsDisplayedForMemoryConsumptionAndQueryForAllDatePickerOption",
 				"Verify if user is able to view graph for Memory and Query on selecting different options from date picker from 1hour to last month");
 		test.assignCategory(" Cluster/Impala Resources");

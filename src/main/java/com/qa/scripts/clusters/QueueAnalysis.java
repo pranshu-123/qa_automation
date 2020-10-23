@@ -10,6 +10,10 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.logging.Logger;
 
+/*
+@author - Ojasvi Pandey
+This class contains all the action methods related to Queue Analysis
+ */
 public class QueueAnalysis {
     private static final Logger LOGGER = Logger.getLogger(QueueAnalysis.class.getName());
     private final WebDriver driver;
@@ -19,6 +23,11 @@ public class QueueAnalysis {
     private final QueueAnalysisPageObject qaPageObject;
     private CommonPageObject commonPageObject;
 
+    /**
+     * Constructor to initialize wait, driver and necessary objects
+     *
+     * @param driver - WebDriver instance
+     */
     public QueueAnalysis(WebDriver driver) {
         this.driver = driver;
         waitExecuter = new WaitExecuter(driver);
@@ -27,6 +36,7 @@ public class QueueAnalysis {
         qaPageObject = new QueueAnalysisPageObject(driver);
     }
 
+    /* This method is to close the confirmation message that appears on landing of page */
     public void closeConfirmationMessageNotification() {
         if (queueAnalysisPageObject.confirmationMessageElementClose.size() > 0) {
             waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.confirmationMessageElementClose.get(0));
@@ -34,7 +44,7 @@ public class QueueAnalysis {
         }
     }
 
-    //click on cluster drop down
+    /* Method to select Cluster in Modal box */
     public void selectMultiClusterId(String clusterId) {
         waitExecuter.sleep(2000);
         commonPageObject = new CommonPageObject(driver);
@@ -47,7 +57,7 @@ public class QueueAnalysis {
         waitExecuter.sleep(2000);
     }
 
-    //Navigate to queue analysis tab
+    /* Navigate to Queue Analysis Tab */
     public void navigateToQueueAnalysis() {
         LOGGER.info("Navigate to Queue Analysis tab from header");
         waitExecuter.waitUntilElementClickable(topPanelPageObject.queueAnalysisTab);

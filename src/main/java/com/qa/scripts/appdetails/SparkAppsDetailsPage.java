@@ -43,7 +43,7 @@ public class SparkAppsDetailsPage {
      */
     public void verifyAppSummaryTabs(SparkAppsDetailsPageObject sparkAppPageObj, String verifyTabName, ExtentTest test) {
         List<WebElement> appsTabList = sparkAppPageObj.appSummaryTabs;
-        Assert.assertFalse(appsTabList.isEmpty(), "No Tabs loaded ");
+        verifyAssertFalse(appsTabList.isEmpty(), sparkAppPageObj, "No Tabs loaded");
         String tabName = "";
         WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.pollingEvery(Duration.ofMillis(10));
@@ -57,7 +57,7 @@ public class SparkAppsDetailsPage {
                         ArrayList<String> efficiency = new ArrayList<>();
                         ArrayList<String> recommendation = new ArrayList<>();
                         List<WebElement> insightType = sparkAppPageObj.insightsType;
-                        Assert.assertFalse(insightType.isEmpty(), "No Insights generated");
+                        verifyAssertFalse(insightType.isEmpty(), sparkAppPageObj, "No Insights generated");
                         for (int j = 0; j < insightType.size(); j++) {
                             String insights = insightType.get(j).getText();
                             logger.info("Insight generated are " + insights);
@@ -69,7 +69,7 @@ public class SparkAppsDetailsPage {
                                 recommendation.add(insights);
                             }
                         }
-                        Assert.assertFalse((efficiency.isEmpty() && recommendation.isEmpty()), "No insights generated");
+                        verifyAssertFalse((efficiency.isEmpty() && recommendation.isEmpty()), sparkAppPageObj, "No insights generated");
                         List<WebElement> collapsableList = sparkAppPageObj.analysisCollapse;
                         try {
                             for (int c = 0; c < collapsableList.size(); c++) {
@@ -87,9 +87,9 @@ public class SparkAppsDetailsPage {
                         waitExecuter.sleep(3000);
                         String[] expectedGraphTitle = {"Task Attempts", "Containers", "Vcores", "Memory", "Metrics"};
                         List<WebElement> graphTitleList = sparkAppPageObj.resourcesGraphTitle;
-                        Assert.assertFalse(graphTitleList.isEmpty(), "No title displayed");
+                        verifyAssertFalse(graphTitleList.isEmpty(), sparkAppPageObj, "No title displayed");
                         List<WebElement> allGraphsList = sparkAppPageObj.resourcesAllGraphs;
-                        Assert.assertFalse(allGraphsList.isEmpty(), "No graphs displayed");
+                        verifyAssertFalse(allGraphsList.isEmpty(), sparkAppPageObj, "No graphs displayed");
                         for (int t = 0; t < graphTitleList.size(); t++) {
                             String graphTitle = graphTitleList.get(t).getText();
                             logger.info("Graph title is " + graphTitle);
@@ -250,12 +250,8 @@ public class SparkAppsDetailsPage {
                         MouseActions.clickOnElement(driver, appsTabList.get(i));
                         // appsTabList.get(i).click();
                         waitExecuter.sleep(3000);
-                        try {
                             List<WebElement> programDataList = sparkAppPageObj.programTabData;
-                            Assert.assertFalse(programDataList.isEmpty(), "The Programs data is not populated");
-                        } catch (NoSuchElementException ex) {
-                            throw new AssertionError("Programs tab got exception " + ex.getMessage());
-                        }
+                            verifyAssertFalse(programDataList.isEmpty(), sparkAppPageObj, "The Programs data is not populated");
                         break;
                     case "Timings":
                         MouseActions.clickOnElement(driver, appsTabList.get(i));
@@ -269,6 +265,7 @@ public class SparkAppsDetailsPage {
                         for (int t = 0; t < subTabList.size(); t++) {
                             String subTabName = subTabList.get(t).getText();
                             logger.info("The Timings subTab is " + subTabName);
+                            System.out.println("The Timings subTab is " + subTabName);
                             Assert.assertTrue(Arrays.asList(expectedSubTabList).contains(subTabName),
                                     "Tab list displayed in the UI doesnot match with the expected list of tabs");
                             MouseActions.clickOnElement(driver, subTabList.get(t));
@@ -283,6 +280,7 @@ public class SparkAppsDetailsPage {
                             for (int l = 0; l < legendNameList.size(); l++) {
                                 String legendName = legendNameList.get(l).getText();
                                 logger.info("The Legends for subTab " + subTabName + " is " + legendName);
+                                System.out.println("The Legends for subTab " + subTabName + " is " + legendName);
                                 if (subTabName.equals("Task Time")) {
                                     Assert.assertTrue(Arrays.asList(expectedTTLegendNames).contains(legendName),
                                             "The legends displayed in the UI for Task Time doesnot match to the expected list of legends");
@@ -295,6 +293,17 @@ public class SparkAppsDetailsPage {
                         break;
                 }
             }
+        }
+    }
+
+    public void verifyAssertFalse(Boolean condition, SparkAppsDetailsPageObject sparkAppPageObj, String msg){
+        try {
+            Assert.assertFalse(condition, msg);
+        }
+        catch (Throwable e) {
+            //Close apps details page
+            sparkAppPageObj.closeAppsPageTab.click();
+            throw new AssertionError(msg + e.getMessage());
         }
     }
 
@@ -540,14 +549,18 @@ public class SparkAppsDetailsPage {
                 Assert.assertFalse(numAttemptsList.isEmpty(), "There are no attempts for failed apps");
                 logger.info("Number of attempts for application is " + numAttemptsList.size());
                 if (verifyAppComp) {
-                    for (int a = 0; a <= numAttemptsList.size(); a++) {
+                    for (int a = 0; a < numAttemptsList.size(); a++) {
                         numAttemptsList.get(a).click();
                         verifyAppsComponent(sparkPageObj, false, false);
                     }
                 }
-            } catch (NoSuchElementException ex) {
-                throw new AssertionError("No failed attempts found for this application\n" + ex.getMessage());
             }
+            catch (Exception e){
+                //Close apps details page
+                logger.info("Caught exception " + e.getMessage());
+                sparkPageObj.closeAppsPageTab.click();
+            }
+
         } else {
             logger.info("There are no failed apps to navigate to");
             List<WebElement> kpiList = sparkPageObj.leftPaneKPIList;

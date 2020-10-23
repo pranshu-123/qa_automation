@@ -39,8 +39,6 @@ public class Schedule {
     public void clickOnSchedule() {
         try {
             LOGGER.info("Click On Schedule dropdown");
-            List<WebElement> ScheduleList = schedulePageObject.schedule;
-            Assert.assertFalse(ScheduleList.isEmpty(), "No ScheduleList loaded ");
             waitExecuter.sleep(3000);
             schedulePageObject.schedule.clear();
             schedulePageObject.schedule.stream().findFirst().get().click();

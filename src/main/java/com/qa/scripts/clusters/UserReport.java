@@ -65,7 +65,9 @@ public class UserReport {
     public void clickscheduleButton() {
         MouseActions.clickOnElement(driver, userReportPageObject.scheduleuserreportButton);
     }
-
+    /**
+     * Method to Click on schedule dropdown
+     */
     public void scheduletorun() {
         schedule.clickOnSchedule();
         waitExecuter.sleep(1000);

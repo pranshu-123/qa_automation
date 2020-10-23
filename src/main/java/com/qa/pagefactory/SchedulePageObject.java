@@ -15,11 +15,11 @@ import java.util.List;
  */
 public class SchedulePageObject {
 
-    @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select")
-    public WebElement schedule;
+    @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div[2]/div[3]/div[3]/div[2]/select")
+    public List<WebElement> schedule;
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select/option[1]")
-    public WebElement Daily;
+    public List<WebElement> Daily;
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select/option[2]")
     public WebElement Sunday;

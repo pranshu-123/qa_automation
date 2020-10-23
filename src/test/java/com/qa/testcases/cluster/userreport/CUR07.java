@@ -55,31 +55,8 @@ public class CUR07 extends BaseClass {
 
         userReport.addscheduler("Cluster67");
         waitExecuter.sleep(1000);
-        //select 'Last 2 Hour'
-        schedule.clickOnSchedule();
-        waitExecuter.sleep(1000);
-
-        schedule.selectFriday();
-        waitExecuter.sleep(2000);
-
-        schedule.clicktimepicker();
-        waitExecuter.sleep(2000);
-
-        schedule.clickOndropdown();
-        waitExecuter.sleep(2000);
-
-        schedule.clickOnhours();
-        waitExecuter.sleep(1000);
-
-        schedule.selecttwentythreehours();
-        waitExecuter.sleep(1000);
-
-        schedule.clickOnminutes();
-        waitExecuter.sleep(1000);
-
-        schedule.selectFiftynine();
-        waitExecuter.sleep(1000);
-
+        //select 'schedule-days  '
+        userReport.scheduletorun();
 
         try {
             userReportPageObject.addconfiguration.click();
@@ -99,7 +76,7 @@ public class CUR07 extends BaseClass {
         userReport.assignEmail("sray@unraveldata.com");
         waitExecuter.sleep(1000);
 
-        waitExecuter.waitUntilElementPresent(userReportPageObject.addbuttom);
+        waitExecuter.waitUntilElementPresent(userReportPageObject.addbutton);
         userReport.clickOnaddButton();
         waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Successfully added Topx parameter");
@@ -119,7 +96,7 @@ public class CUR07 extends BaseClass {
         userReport.assignEmail("sray@unraveldata.com");
         waitExecuter.sleep(1000);
 
-        waitExecuter.waitUntilElementPresent(userReportPageObject.addbuttom);
+        waitExecuter.waitUntilElementPresent(userReportPageObject.addbutton);
         userReport.clickOnaddButton();
         waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Successfully clicked on add configuration page.");

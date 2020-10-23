@@ -37,16 +37,16 @@ public class UserReportPageObject {
     public WebElement scheduleSuccessfulMessage;
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[4]/div/div[3]/span[1]/a/span")
-    public WebElement addbuttom;
+    public WebElement addbutton;
 
     @FindBy(xpath = "//option[contains(text(),'Daily')]")
     public WebElement selectdaily;
 
     @FindBy(xpath = "//span[text()=\"Cancel\"]")
-    public WebElement cancelbuttom;
+    public WebElement cancelbutton;
 
     @FindBy(xpath = "//div[@class=\"pointer close right\"]")
-    public WebElement closebuttom;
+    public WebElement closebutton;
 
     @FindBy(xpath = "//input[contains(@type,'number')]")
     public WebElement topXNumber;

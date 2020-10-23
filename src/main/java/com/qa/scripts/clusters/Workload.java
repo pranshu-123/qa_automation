@@ -122,7 +122,13 @@ public class Workload {
     public void clickOnHourDay() {
         try {
             LOGGER.info("Click on HourDay dropdown");
-            MouseActions.clickOnElement(driver, workloadPageObject.viewByHourDay);
+            WebElement HourDay=(workloadPageObject.viewByHourDay);
+            System.out.println("X coordinate: " + HourDay.getLocation().getX()
+                    + ", Y coordinate: " + HourDay.getLocation().getY());
+            Actions actions = new Actions(driver);
+            actions.moveByOffset(HourDay.getLocation().getX() + 1, HourDay.
+                    getLocation().getY() + 1);
+            actions.perform();
         } catch (NoSuchElementException e) {
             LOGGER.severe("Class Workload | Method clickOnHourDay | Exception desc" + e.getMessage());
             throw (e);
@@ -140,6 +146,10 @@ public class Workload {
             listOfYarnJobsColumnNames.add(listOfworkloadJobsTableHeaderNames.get(i).getText());
         }
         List<String> definedworkloadJobsColumnNames = Arrays.asList("Job Type", "Job Count");
+        for(String definedworkloadjobsColumnNames : definedworkloadJobsColumnNames) {
+            System.out.println(definedworkloadjobsColumnNames);
+            definedworkloadJobsColumnNames.stream().forEach(System.out::println);
+        }
         Boolean boolColumnNames = listOfYarnJobsColumnNames.equals(definedworkloadJobsColumnNames);
         return boolColumnNames;
     }
@@ -148,7 +158,12 @@ public class Workload {
     public void clickOnSum() {
         try {
             LOGGER.info("Click on Sum in Hour page");
-            MouseActions.clickOnElement(driver, workloadPageObject.viewBySum);
+            WebElement Sum=(workloadPageObject.viewBySum);
+            Actions actions = new Actions(driver);
+            actions.moveToElement(Sum)
+                    .contextClick()
+                    .click(workloadPageObject.viewBySum)
+                    .perform();
         } catch (NoSuchElementException e) {
             LOGGER.severe("Class Workload | Method clickOnSum | Exception desc" + e.getMessage());
             throw (e);

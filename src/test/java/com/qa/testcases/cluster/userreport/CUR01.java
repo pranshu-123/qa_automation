@@ -88,7 +88,7 @@ public class CUR01 extends BaseClass {
         userReport.assignEmail("sray@unraveldata.com");
         waitExecuter.sleep(1000);
 
-        waitExecuter.waitUntilElementPresent(userReportPageObject.addbuttom);
+        waitExecuter.waitUntilElementPresent(userReportPageObject.addbutton);
         userReport.clickOnaddButton();
         waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Successfully added Topx parameter");

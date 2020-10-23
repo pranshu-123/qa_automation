@@ -1,6 +1,7 @@
 package com.qa.scripts.clusters;
 
 import com.qa.pagefactory.UserReportPageObject;
+import com.qa.scripts.Schedule;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
@@ -23,6 +24,7 @@ public class UserReport {
     private WebDriver driver;
     private WaitExecuter waitExecuter;
     private UserReportPageObject userReportPageObject;
+    Schedule schedule=new Schedule(driver);
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -64,6 +66,28 @@ public class UserReport {
         MouseActions.clickOnElement(driver, userReportPageObject.scheduleuserreportButton);
     }
 
+    public void scheduletorun() {
+        schedule.clickOnSchedule();
+        waitExecuter.sleep(1000);
+
+        schedule.clicktimepicker();
+        waitExecuter.sleep(2000);
+
+        schedule.clickOndropdown();
+        waitExecuter.sleep(2000);
+
+        schedule.clickOnhours();
+        waitExecuter.sleep(1000);
+
+        schedule.selecttwentythreehours();
+        waitExecuter.sleep(1000);
+
+        schedule.clickOnminutes();
+        waitExecuter.sleep(1000);
+
+        schedule.selectFiftynine();
+        waitExecuter.sleep(1000);
+    }
     /**
      * Method to Click on Clusterstab
      */
@@ -149,9 +173,9 @@ public class UserReport {
      */
     public void clickOnaddButton() {
         try {
-            MouseActions.clickOnElement(driver, userReportPageObject.addbuttom);
+            MouseActions.clickOnElement(driver, userReportPageObject.addbutton);
         } catch (TimeoutException te) {
-            MouseActions.clickOnElement(driver, userReportPageObject.cancelbuttom);
+            MouseActions.clickOnElement(driver, userReportPageObject.cancelbutton);
         }
     }
 
@@ -162,7 +186,7 @@ public class UserReport {
         try {
             MouseActions.clickOnElement(driver, userReportPageObject.scheduleuserreportButton);
         } catch (TimeoutException te) {
-            MouseActions.clickOnElement(driver, userReportPageObject.closebuttom);
+            MouseActions.clickOnElement(driver, userReportPageObject.closebutton);
         }
     }
 }

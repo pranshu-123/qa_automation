@@ -39,9 +39,8 @@ public class Schedule {
     public void clickOnSchedule() {
         try {
             LOGGER.info("Click On Schedule dropdown");
+            schedulePageObject.schedule.click();
             waitExecuter.sleep(3000);
-            schedulePageObject.schedule.clear();
-            schedulePageObject.schedule.stream().findFirst().get().click();
         } catch (NoSuchElementException e) {
             LOGGER.severe("Class Schedule | Method clickOnSchedule | Exception desc" + e.getMessage());
             throw (e);
@@ -53,8 +52,8 @@ public class Schedule {
      * Method to select 'Daily' in Schedule
      */
     public void selectDaily() {
-        schedulePageObject.Daily.stream()
-                .filter(WebElement::isDisplayed).findFirst().get().click();
+        schedulePageObject.Daily.click();
+
     }
 
     /**

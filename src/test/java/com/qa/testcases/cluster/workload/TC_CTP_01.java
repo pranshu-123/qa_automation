@@ -35,8 +35,6 @@ public class TC_CTP_01 extends BaseClass {
         waitExecuter.sleep(3000);
         MouseActions.clickOnElement(driver, topPanelPageObject.workloadTab);
 
-        Workload workload = new Workload(driver);
-
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
 
         HomePage homePage = new HomePage(driver);
@@ -78,28 +76,11 @@ public class TC_CTP_01 extends BaseClass {
 
         test.log(LogStatus.PASS, "Last 60 Days field is successfully verified in date range");
 
-        //select 'Last 90 Days'
-        datePicker.clickOnDatePicker();
-        waitExecuter.sleep(1000);
-        datePicker.selectLast90Days();
-        waitExecuter.sleep(1000);
-
-        test.log(LogStatus.PASS, "Last 90 Days field is successfully verified in date range");
-
         //select 'Custom Range'
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(1000);
         datePicker.selectCustomRange();
-        waitExecuter.sleep(1000);
-
-        // Set Start date by substracting days from current date and end date as current
-        // date
-        datePicker.setCurrentAndPastDate(-3);
-        waitExecuter.sleep(1000);
-
-        // Click on apply button of calendar
-        datePicker.clickOnCustomDateApplyBtn();
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
 
         test.log(LogStatus.PASS, "Start Date field is successfully verified in custom date range");
     }

@@ -4,7 +4,6 @@ import com.qa.base.BaseClass;
 import com.qa.constants.PageConstants;
 import com.qa.pagefactory.HomePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
-import com.qa.scripts.ComponentHelper;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
 import com.qa.utils.JavaScriptExecuter;

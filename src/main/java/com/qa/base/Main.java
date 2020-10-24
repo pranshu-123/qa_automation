@@ -39,9 +39,15 @@ public class Main {
     URLClassLoader classLoader = URLClassLoader.newInstance(new URL[]{sourceClassesURL,testClassesURL});
     for (String marker : markers.split(",")) {
       Reflections reflections = new Reflections("com.qa", classLoader, new TypeAnnotationsScanner());
-      Set<Class<?>> challengeClasses = reflections.getTypesAnnotatedWith(MarkerConstants.MARKER_MAPPING.get(marker), true);
+      Set<Class<?>> challengeClasses =
+          reflections.getTypesAnnotatedWith(MarkerConstants.MARKER_MAPPING.get(marker.startsWith("!") ?
+                  marker.substring(1) : marker), true);
       for (Class<?> className: challengeClasses) {
-        classes.add(className);
+        if (marker.startsWith("!")) {
+          classes.remove(className);
+        } else {
+          classes.add(className);
+        }
       }
     }
     LOGGER.info("Creating TestNg.xml suite");

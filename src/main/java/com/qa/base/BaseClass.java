@@ -5,6 +5,7 @@ import com.qa.constants.DirectoryConstants;
 import com.qa.constants.FileConstants;
 import com.qa.io.ConfigReader;
 import com.qa.pagefactory.clusters.DataProviderClass;
+import com.qa.scripts.CommonComponent;
 import com.qa.scripts.Login;
 import com.qa.scripts.UnravelBuildInfo;
 import com.qa.utils.FileUtils;
@@ -122,6 +123,8 @@ public class BaseClass {
     @AfterClass()
     public void afterClass() {
         LOGGER.info("Logout from the application.");
+        //Close if any pop modal is open
+        CommonComponent.closeModalIfExists(driver);
         Login login = new Login(driver);
         login.logout();
         FileUtils.deleteDownloadsFolderFiles();

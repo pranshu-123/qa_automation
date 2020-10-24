@@ -19,6 +19,7 @@ public @interface Marker {
   @interface AllApps {}
   @interface QueueAnalysis {}
   @interface AppDetailsImpala {}
+  @interface AppDetailsSpark {}
   @interface InefficientApps {}
   @interface YarnChargeback {}
   @interface YarnResources {}

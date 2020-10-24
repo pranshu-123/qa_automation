@@ -49,13 +49,13 @@ public class UserReportPageObject {
     public WebElement closebutton;
 
     @FindBy(xpath = "//input[contains(@type,'number')]")
-    public WebElement topXNumber;
+    public List<WebElement> topXNumber;
 
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
     public WebElement confirmationMessageElement;
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[1]/div[2]/input")
-    public WebElement Shedulename;
+    public List<WebElement> Shedulename;
 
     @FindBy(xpath = "(//*[@class=\"select2-selection__rendered\"])[4]")
     public WebElement queuesDropdown;
@@ -67,7 +67,7 @@ public class UserReportPageObject {
     public List<WebElement> rundropdown;
 
     @FindBy(xpath = "(//*[@class=\"select2-selection__rendered\"])[3]")
-    public WebElement readUsersDropdown;
+    public List<WebElement> readUsersDropdown;
 
 
     @FindBy(xpath = "(//select[@class=\"form-control input-sm schedule-days\"]")

@@ -16,55 +16,55 @@ import java.util.List;
 public class SchedulePageObject {
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div[2]/div[3]/div[3]/div[2]/select")
-    public WebElement schedule;
+    public  List<WebElement> schedule;
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select/option[1]")
-    public WebElement Daily;
+    public  List<WebElement> Daily;
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select/option[2]")
-    public WebElement Sunday;
+    public List<WebElement> Sunday;
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select/option[3]")
-    public WebElement Monday;
+    public List<WebElement> Monday;
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select/option[4]")
-    public WebElement Tuesday;
+    public List<WebElement> Tuesday;
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select/option[5]")
-    public WebElement Wednesday;
+    public List<WebElement> Wednesday;
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select/option[6]")
-    public WebElement Thursday;
+    public List<WebElement> Thursday;
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select/option[7]")
-    public WebElement Friday;
+    public List<WebElement> Friday;
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select/option[8]")
-    public WebElement Saturday;
+    public List<WebElement> Saturday;
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select/option[9]")
-    public WebElement Everytwoweeks;
+    public List<WebElement> Everytwoweeks;
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select/option[10]")
-    public WebElement Everymonths;
+    public List<WebElement> Everymonths;
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[3]/span/input")
     public WebElement timepicker;
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[3]/span/div[2]")
-    public WebElement timepickerdropdown;
+    public List<WebElement> timepickerdropdown;
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div[2]/div[3]/div[3]/div[3]/span/div[2]/div/select[1]")
-    public WebElement hoursRange;
+    public List<WebElement> hoursRange;
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[3]/span/div[2]/div/select[1]/option[25]")
-    public WebElement twentythreehours;
+    public List<WebElement> twentythreehours;
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div[2]/div[3]/div[3]/div[3]/span/div[2]/div/select[2]")
-    public WebElement minutes;
+    public List<WebElement> minutes;
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[3]/span/div[2]/div/select[2]/option[61]")
-    public WebElement Fiftynine;
+    public List<WebElement> Fiftynine;
 
     /**
      * @param driver The driver that will be used to look up the elements

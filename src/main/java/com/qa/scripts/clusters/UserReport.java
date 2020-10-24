@@ -1,20 +1,18 @@
 package com.qa.scripts.clusters;
 
 import com.qa.pagefactory.UserReportPageObject;
-import com.qa.scripts.Schedule;
-import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
-import org.openqa.selenium.Keys;
+import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Logger;
+
 /**
  * @author Sarbashree Ray
  */
@@ -24,7 +22,7 @@ public class UserReport {
     private WebDriver driver;
     private WaitExecuter waitExecuter;
     private UserReportPageObject userReportPageObject;
-    Schedule schedule=new Schedule(driver);
+
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -48,6 +46,7 @@ public class UserReport {
         }
     }
 
+
     /**
      * Method to Click on scheduledReportTbl
      */
@@ -65,31 +64,7 @@ public class UserReport {
     public void clickscheduleButton() {
         MouseActions.clickOnElement(driver, userReportPageObject.scheduleuserreportButton);
     }
-    /**
-     * Method to Click on schedule dropdown
-     */
-    public void scheduletorun() {
-        schedule.clickOnSchedule();
-        waitExecuter.sleep(1000);
 
-        schedule.clicktimepicker();
-        waitExecuter.sleep(2000);
-
-        schedule.clickOndropdown();
-        waitExecuter.sleep(2000);
-
-        schedule.clickOnhours();
-        waitExecuter.sleep(1000);
-
-        schedule.selecttwentythreehours();
-        waitExecuter.sleep(1000);
-
-        schedule.clickOnminutes();
-        waitExecuter.sleep(1000);
-
-        schedule.selectFiftynine();
-        waitExecuter.sleep(1000);
-    }
     /**
      * Method to Click on Clusterstab
      */
@@ -106,13 +81,12 @@ public class UserReport {
      * Method to Click on RealUser
      */
     public void selectRealUser() {
-        List<WebElement> listOfUsers = userReportPageObject.dropdownOptions;
-        userReportPageObject.readUsersDropdown.click();
+        userReportPageObject.readUsersDropdown.stream()
+                .filter(WebElement::isDisplayed).findFirst().get().click();
         waitExecuter.sleep(1000);
 
-        listOfUsers.get(0).click();
-
     }
+
 
     /**
      * Method to Click on Queue
@@ -122,6 +96,7 @@ public class UserReport {
         userReportPageObject.queuesDropdown.click();
         waitExecuter.sleep(1000);
         listOfQueue.get(0).click();
+        waitExecuter.sleep(1000);
     }
 
     /**
@@ -137,20 +112,45 @@ public class UserReport {
      * Method to Click on setTopXNumber
      */
     public void setTopXNumber(String number) {
-        waitExecuter.waitUntilElementPresent(userReportPageObject.topXNumber);
         waitExecuter.sleep(1000);
         userReportPageObject.topXNumber.clear();
-        JavaScriptExecuter.clearTextField(driver, userReportPageObject.topXNumber);
-        userReportPageObject.topXNumber.sendKeys(number);
+        userReportPageObject.topXNumber.stream().filter(WebElement::isDisplayed)
+                .findFirst().get().sendKeys(number);
     }
 
     /**
      * Method to Click  add scheduler on user report page
      */
-    public void addscheduler(String Shedulename) {
-        userReportPageObject.Shedulename.click();
+    public void addscheduler() {
+        int leftLimit = 48; // numeral '0'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 10;
+        Random random = new Random();
+        userReportPageObject.Shedulename.stream()
+                .filter(WebElement::isDisplayed).findFirst().get().click();
         waitExecuter.sleep(1000);
-        userReportPageObject.Shedulename.sendKeys(Shedulename);
+        String Char = random.ints(leftLimit, rightLimit + 1)
+                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                .limit(targetStringLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+        userReportPageObject.Shedulename.stream().filter(WebElement::isDisplayed)
+                .findFirst().get().sendKeys(Char);
+    }
+
+    public void RandomAlphanumeric() {
+        int leftLimit = 48; // numeral '0'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 10;
+        Random random = new Random();
+
+        String generatedString = random.ints(leftLimit, rightLimit + 1)
+                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                .limit(targetStringLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+
+        System.out.println(generatedString);
     }
 
 
@@ -175,9 +175,12 @@ public class UserReport {
      */
     public void clickOnaddButton() {
         try {
+            LOGGER.info("Click On add Button");
             MouseActions.clickOnElement(driver, userReportPageObject.addbutton);
-        } catch (TimeoutException te) {
-            MouseActions.clickOnElement(driver, userReportPageObject.cancelbutton);
+        } catch (TimeoutException e) {
+            LOGGER.severe("Class UserReport | Method clickOnaddButton | Exception desc" + e.getMessage());
+            throw (e);
+
         }
     }
 
@@ -186,9 +189,11 @@ public class UserReport {
      */
     public void clicksheduleusereport() {
         try {
+            LOGGER.info("Click On shedule usereport");
             MouseActions.clickOnElement(driver, userReportPageObject.scheduleuserreportButton);
-        } catch (TimeoutException te) {
-            MouseActions.clickOnElement(driver, userReportPageObject.closebutton);
+        } catch (TimeoutException e) {
+            LOGGER.severe("Class UserReport | Method clickOnaddButton | Exception desc" + e.getMessage());
+            throw (e);
         }
     }
 }

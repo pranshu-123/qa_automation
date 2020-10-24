@@ -21,7 +21,7 @@ public class CUR08 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(CUR08.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void CUR01_Verifyscheduleuserreport(String clusterId) {
+    public void CUR08_Verifyscheduleuserreport(String clusterId) {
         test = extent.startTest("CUR08_Verifysaveschedule" + clusterId,
                 "Verify the mandatory fields and should open a Scheduled Reports page and this report should be listed there");
         test.assignCategory(" Cluster - User Report");
@@ -50,11 +50,11 @@ public class CUR08 extends BaseClass {
         test.log(LogStatus.PASS, "Verified user click on schedule user report");
 
 
-        userReport.addscheduler("Cluster#567");
+        userReport.addscheduler();
         waitExecuter.sleep(1000);
 
         //select 'schedule-days  '
-        userReport.scheduletorun();
+        schedule.scheduletorun(schedule);
 
         try {
             userReportPageObject.addconfiguration.click();
@@ -85,10 +85,9 @@ public class CUR08 extends BaseClass {
         waitExecuter.sleep(3000);
         test.log(LogStatus.PASS, "Successfully clicked save sheduele.");
 
-        softassert.assertTrue(userReport.scheduledReportTbl(), "Scheduled Report Apps table is missing.");
+        Assert.assertTrue(userReport.scheduledReportTbl(), "Scheduled Report Apps table is missing.");
         test.log(LogStatus.PASS, "Scheduled Report table is present");
 
-        softassert.assertAll();
         Log.info("Loging off the app");
 
         Log.endTestCase("CUR08_Verifysaveschedule");

@@ -4,13 +4,8 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.UserReportPageObject;
-import com.qa.pagefactory.clusters.TopXPageObject;
-import com.qa.scripts.HomePage;
 import com.qa.scripts.Schedule;
-import com.qa.scripts.clusters.Jobs;
-import com.qa.scripts.clusters.TopX;
 import com.qa.scripts.clusters.UserReport;
-import com.qa.scripts.clusters.impala.ChargeBackImpala;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
@@ -59,7 +54,7 @@ public class CUR01 extends BaseClass {
         test.log(LogStatus.PASS, "Verified user click on schedule user report");
 
 
-        userReport.addscheduler("Cluster");
+        userReport.addscheduler();
         waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Successfully add Schedule Name");
 

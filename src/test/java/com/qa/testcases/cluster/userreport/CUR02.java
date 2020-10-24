@@ -47,7 +47,7 @@ public class CUR02 extends BaseClass {
         test.log(LogStatus.PASS, "Verified user click on schedule user report");
 
 
-        userReport.addscheduler("Cluster#567");
+        userReport.addscheduler();
         waitExecuter.sleep(1000);
         //select 'Last 2 Hour'
         schedule.clickOnSchedule();

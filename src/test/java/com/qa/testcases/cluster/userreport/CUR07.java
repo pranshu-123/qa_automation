@@ -4,7 +4,6 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.UserReportPageObject;
-import com.qa.scripts.HomePage;
 import com.qa.scripts.Schedule;
 import com.qa.scripts.clusters.UserReport;
 import com.qa.utils.Log;
@@ -53,10 +52,10 @@ public class CUR07 extends BaseClass {
         test.log(LogStatus.PASS, "Verified user click on schedule user report");
 
 
-        userReport.addscheduler("Cluster67");
+        userReport.addscheduler();
         waitExecuter.sleep(1000);
         //select 'schedule-days  '
-        userReport.scheduletorun();
+        schedule.scheduletorun(schedule);
 
         try {
             userReportPageObject.addconfiguration.click();

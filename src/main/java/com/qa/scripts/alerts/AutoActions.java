@@ -85,20 +85,28 @@ public class AutoActions {
         MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.saveBtn);
     }
 
-    public void enterNewAutoActionPolicyDetails(String policyName, String triggerConditon, String triggerValue){
+    public void enterNewAutoActionPolicyDetails(String policyName, String triggerCondition){
         waitExecuter.sleep(1000);
         newAutoActionPolicyPageObject.policyName.sendKeys(policyName);
         clickOnTriggerConditionBtn();
-        selectTriggerCondition(triggerConditon);
+        selectTriggerCondition(triggerCondition);
+        waitExecuter.sleep(2000);
+    }
+
+    public void enterNewAutoActionPolicyDetails(String policyName, String triggerCondition, String triggerValue){
+        waitExecuter.sleep(1000);
+        newAutoActionPolicyPageObject.policyName.sendKeys(policyName);
+        clickOnTriggerConditionBtn();
+        selectTriggerCondition(triggerCondition);
         waitExecuter.sleep(2000);
         newAutoActionPolicyPageObject.triggerConditionValue.sendKeys(triggerValue);
     }
 
-    public void enterNewAutoActionPolicyDetails(String policyName, String triggerConditon, String triggerValue, String policyDescrption){
+    public void enterNewAutoActionPolicyDetails(String policyName, String triggerCondition, String triggerValue, String policyDescrption){
         waitExecuter.sleep(1000);
         newAutoActionPolicyPageObject.policyName.sendKeys(policyName);
         clickOnTriggerConditionBtn();
-        selectTriggerCondition(triggerConditon);
+        selectTriggerCondition(triggerCondition);
         waitExecuter.sleep(2000);
         newAutoActionPolicyPageObject.triggerConditionValue.sendKeys(triggerValue);
         newAutoActionPolicyPageObject.policyDescription.sendKeys(policyDescrption);
@@ -112,7 +120,6 @@ public class AutoActions {
             waitExecuter.sleep(2000);
             MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.closeNewAutoAction);
         }
-
     }
 
     public boolean validateAutoActionAdded(String policyName){
@@ -122,6 +129,18 @@ public class AutoActions {
             if(autoActionsPageObject.firstColumnElementsAATable.get(i).getText().equals(policyName)){
                 return true;
             }
+        }
+        return false;
+    }
+
+    public boolean validateBannerForNoValue(){
+        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.messageBanner);
+        String errorMessage = newAutoActionPolicyPageObject.messageBanner.getText();
+        if(errorMessage.contains("\"value\" property is not set")){
+            waitExecuter.sleep(2000);
+            MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.closeNewAutoAction);
+            return true;
         }
         return false;
     }

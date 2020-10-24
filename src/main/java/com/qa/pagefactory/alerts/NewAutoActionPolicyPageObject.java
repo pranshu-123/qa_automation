@@ -47,6 +47,8 @@ public class NewAutoActionPolicyPageObject {
     @FindBy (xpath = "(//div[contains(@class,'auto-footer')]/div/div/span/a)[1]")
     public WebElement saveBtn;
 
+    @FindBy(xpath = "//div[@class='container-fluid']/section/span")
+    public WebElement messageBanner;
 
     /**
      * @param driver The driver that will be used to look up the elements

@@ -50,6 +50,18 @@ public class NewAutoActionPolicyPageObject {
     @FindBy(xpath = "//div[@class='container-fluid']/section/span")
     public WebElement messageBanner;
 
+    @FindBy(xpath = "//div[@class='component-activity-feed']/div/div[2]")
+    public WebElement iconX_RefineScope;
+
+    @FindBy(xpath = "(//div[contains(@class,'autoaction-icon-drop')])[2]/b/span[1]")
+    public WebElement refineScopeBtn;
+
+    @FindBy(xpath = "(//div[contains(@class,'dropdown-content')])[2]/a")
+    public List<WebElement> selectRefineScopeList;
+
+    @FindBy(xpath = "//div[contains(@class,'mode-div')]/div/div/span[text()='all']/parent::div/preceding-sibling::div/label/span")
+    public WebElement allUserChkBox;
+
     /**
      * @param driver The driver that will be used to look up the elements
      */

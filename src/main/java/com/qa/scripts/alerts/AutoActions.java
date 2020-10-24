@@ -145,4 +145,36 @@ public class AutoActions {
         return false;
     }
 
+    public void closeDefaultRefineScope(){
+        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.iconX_RefineScope);
+        newAutoActionPolicyPageObject.iconX_RefineScope.click();
+    }
+
+    public void clickOnRefineScope(){
+        waitExecuter.sleep(1000);
+        MouseActions.clickOnElement(driver,newAutoActionPolicyPageObject.refineScopeBtn);
+    }
+
+    public void selectRefineScope(String scope){
+        waitExecuter.sleep(1000);
+        int allScopeCount = newAutoActionPolicyPageObject.selectRefineScopeList.size();
+        System.out.println("Scope count: "+ allScopeCount);
+        for(int i=0; i<allScopeCount-1 ; i++){
+            if(newAutoActionPolicyPageObject.selectRefineScopeList.get(i).getText().equals(scope)){
+                waitExecuter.sleep(1000);
+                MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.selectRefineScopeList.get(i));
+            }
+        }
+    }
+
+    public boolean validateDefaultAllUserScopeChkBox(){
+        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.allUserChkBox);
+        if(newAutoActionPolicyPageObject.allUserChkBox.isSelected()){
+           return true;
+        }
+        return false;
+    }
+
 }

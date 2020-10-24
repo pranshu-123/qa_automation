@@ -44,6 +44,9 @@ public class TC_AA110 extends BaseClass {
 
         Assert.assertTrue(aa.validateBannerForNoValue(), "Error message is invalid, when no value is entered " +
                 "for the metric");
+        //Check policy is not get added for withoutvalue
+        Assert.assertFalse(aa.validateAutoActionAdded(policyName), "Policy: " +
+                policyName + " not found.");
         test.log(LogStatus.PASS, "Validated error message on banner, when no value is entered for the metric");
 
     }

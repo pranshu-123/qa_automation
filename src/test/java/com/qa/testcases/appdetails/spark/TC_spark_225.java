@@ -1,0 +1,87 @@
+package com.qa.testcases.appdetails.spark;
+
+import com.qa.base.BaseClass;
+import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.appsDetailsPage.SparkAppsDetailsPageObject;
+import com.qa.pagefactory.jobs.ApplicationsPageObject;
+import com.qa.scripts.DatePicker;
+import com.qa.scripts.appdetails.SparkAppsDetailsPage;
+import com.qa.scripts.jobs.applications.AllApps;
+import com.qa.utils.Log;
+import com.relevantcodes.extentreports.LogStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.annotations.Test;
+
+public class TC_spark_225 extends BaseClass {
+  /**
+   * Verify the following for a Spark App:
+   * 1. Stage for the Job should be displayed
+   * 2. Stage must contain these fields ,
+   * Stage ID, Start Time, Duration, tasks, shuffle read, Shuffle write, Input, Output
+   * 3. Once clicked on Stage ID, Taskattempts, program, timeline, timing will open on right pane of the UI
+   * 4. Task attempt should be doughnut graph
+   * 5. Program will have the program and should be able to copy by clicking on the copy code
+   * 6. Bargraphs should open for these - Shuffle Map Time(sec), ShuffleMap Input (KB), ShuffleMap Output (KB),
+   * Disk Bytes Spilled (KB), Memory Bytes Spilled (KB), Records Read (count)
+   * 7. Timeline and SelectedTasks must be present
+   * 8. Time line should contain taskstatus and TaskBreakdown in dropdown
+   * 9. Verify if "Stage timing Distribution " is available
+   * 10. Pie graphs should be available
+   * 11. IO. metrics must be available - Bar graphs
+   * 12. Time Metrics must be available - Bargraphs
+   */
+  Logger logger = LoggerFactory.getLogger(TC_spark_224.class);
+
+  @Test(dataProvider = "clusterid-data-provider")
+  public void TC_spark_224_verifyAppDetailsPageStage(String clusterId) {
+    test = extent.startTest("TC_spark_224_verifyAppDetailsPageStage: " + clusterId,
+        "Verify all the spark apps are listed in the UI");
+    test.assignCategory(" Apps Details-Spark");
+    Log.startTestCase("TC_spark_224_verifyAppDetailsPageStage");
+
+    // Initialize all classes objects
+    test.log(LogStatus.INFO, "Initialize all class objects");
+    logger.info("Initialize all class objects");
+    TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+    ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
+    SparkAppsDetailsPageObject sparkAppsDetailsPageObject = new SparkAppsDetailsPageObject(driver);
+    SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);
+    DatePicker datePicker = new DatePicker(driver);
+    AllApps allApps = new AllApps(driver);
+
+    // Navigate to Jobs tab from header
+    test.log(LogStatus.INFO, "Navigate to jobs tab from header");
+    appsDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
+        applicationsPageObject, clusterId);
+
+    //Verify that the left pane has spark check box and the apps number
+    test.log(LogStatus.INFO, "Verify that the left pane has spark check box and the apps number");
+    logger.info("Select individual app and assert that table contain its data");
+    int appCount = appsDetailsPage.clickOnlyLink("Spark");
+    //Clicking on the Spark app must go to apps detail page
+    if (appCount > 0) {
+      String headerAppId = appsDetailsPage.verifyAppId(sparkAppsDetailsPageObject, applicationsPageObject);
+      test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);
+
+      /**clicking on the UI must go to apps detail page and verify the basic tabs present */
+      test.log(LogStatus.INFO, "Verify that the job stages tabs are displayed and that each one of them" +
+          " have the required data in it");
+      appsDetailsPage.verifyAppsComponent(sparkAppsDetailsPageObject, false, false, true);
+      test.log(LogStatus.PASS, "The job stage table has jobs and corresponding details displayed per " +
+          "job id along with tabs and its respective data");
+    } else {
+      logger.error("No Spark Application present in the " + clusterId + " cluster for the time span " +
+          "of 90 days");
+    }
+    String s = "Source: SparkTC.scala: 62";
+    String a[] =  s.split(":");
+    for(int i=0;i<a.length;i++){
+      System.out.println("Boolean is " + a[i]);
+    }
+    //Close apps details page
+    sparkAppsDetailsPageObject.closeAppsPageTab.click();
+  }
+
+}
+

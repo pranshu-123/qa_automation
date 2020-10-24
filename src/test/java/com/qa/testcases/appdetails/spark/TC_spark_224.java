@@ -58,7 +58,7 @@ public class TC_spark_224 extends BaseClass {
             test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);
 
             /**clicking on the UI must go to apps detail page and verify the basic tabs present */
-            appsDetailsPage.verifyAppsComponent(sparkAppsDetailsPageObject, false, false);
+            appsDetailsPage.verifyAppsComponent(sparkAppsDetailsPageObject, false, false, false);
             test.log(LogStatus.PASS, "The job stage table has jobs and corresponding details displayed per job id");
         } else {
             logger.error("No Spark Application present in the " + clusterId + " cluster for the time span " +

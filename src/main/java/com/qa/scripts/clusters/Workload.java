@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
+
 /**
  * @author Sarbashree Ray
  */
@@ -89,7 +90,8 @@ public class Workload {
     public void clickOnMonth() {
         try {
             LOGGER.info("Click On Month dropdown");
-            MouseActions.clickOnElement(driver, workloadPageObject.viewByMonth);
+            workloadPageObject.viewByMonth.stream()
+                    .filter(WebElement::isDisplayed).findFirst().get().click();
         } catch (NoSuchElementException e) {
             LOGGER.severe("Class Workload | Method clickOnDay | Exception desc" + e.getMessage());
             throw (e);
@@ -100,7 +102,9 @@ public class Workload {
     public void clickOnDay() {
         try {
             LOGGER.info("Click On Day dropdown");
-            MouseActions.clickOnElement(driver, workloadPageObject.viewByDay);
+            workloadPageObject.viewByDay.stream()
+                    .filter(WebElement::isDisplayed).findFirst().get().click();
+            /* MouseActions.clickOnElement(driver, workloadPageObject.viewByDay);*/
         } catch (NoSuchElementException e) {
             LOGGER.severe("Class Workload | Method clickOnDay | Exception desc" + e.getMessage());
             throw (e);
@@ -111,7 +115,8 @@ public class Workload {
     public void clickOnHour() {
         try {
             LOGGER.info("Click on Hour dropdown");
-            MouseActions.clickOnElement(driver, workloadPageObject.viewByHour);
+            workloadPageObject.viewByHour.stream()
+                    .filter(WebElement::isDisplayed).findFirst().get().click();
         } catch (NoSuchElementException e) {
             LOGGER.severe("Class Workload | Method clickOnHourDay | Exception desc" + e.getMessage());
             throw (e);
@@ -122,7 +127,7 @@ public class Workload {
     public void clickOnHourDay() {
         try {
             LOGGER.info("Click on HourDay dropdown");
-            WebElement HourDay=(workloadPageObject.viewByHourDay);
+            WebElement HourDay = (workloadPageObject.viewByHourDay);
             System.out.println("X coordinate: " + HourDay.getLocation().getX()
                     + ", Y coordinate: " + HourDay.getLocation().getY());
             Actions actions = new Actions(driver);
@@ -146,7 +151,7 @@ public class Workload {
             listOfYarnJobsColumnNames.add(listOfworkloadJobsTableHeaderNames.get(i).getText());
         }
         List<String> definedworkloadJobsColumnNames = Arrays.asList("Job Type", "Job Count");
-        for(String definedworkloadjobsColumnNames : definedworkloadJobsColumnNames) {
+        for (String definedworkloadjobsColumnNames : definedworkloadJobsColumnNames) {
             System.out.println(definedworkloadjobsColumnNames);
             definedworkloadJobsColumnNames.stream().forEach(System.out::println);
         }
@@ -158,7 +163,7 @@ public class Workload {
     public void clickOnSum() {
         try {
             LOGGER.info("Click on Sum in Hour page");
-            WebElement Sum=(workloadPageObject.viewBySum);
+            WebElement Sum = (workloadPageObject.viewBySum);
             Actions actions = new Actions(driver);
             actions.moveToElement(Sum)
                     .contextClick()
@@ -174,7 +179,8 @@ public class Workload {
     public void clickOnAverage() {
         try {
             LOGGER.info("Click on Sum in Hour page");
-            MouseActions.clickOnElement(driver, workloadPageObject.viewByAverage);
+            workloadPageObject.viewByAverage.stream()
+                    .filter(WebElement::isDisplayed).findFirst().get().click();
         } catch (NoSuchElementException e) {
             LOGGER.severe("Class Workload | Method clickOnAverage | Exception desc" + e.getMessage());
             throw (e);
@@ -199,24 +205,6 @@ public class Workload {
             throw (e);
         }
         return false;
-    }
-
-    public void setStartDate(String startDate) {
-        waitExecuter.waitUntilElementPresent(workloadPageObject.customRangeStartDate);
-        workloadPageObject.customRangeStartDate.clear();
-        workloadPageObject.customRangeStartDate.sendKeys(startDate);
-    }
-
-    /**
-     * Method to click on End date
-     */
-
-    public void setEndDate(String endDate) {
-
-        waitExecuter.waitUntilElementPresent(workloadPageObject.customRangeEndDate);
-        workloadPageObject.customRangeEndDate.clear();
-        workloadPageObject.customRangeEndDate.sendKeys(endDate);
-
     }
 
     /**

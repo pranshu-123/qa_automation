@@ -4,7 +4,6 @@ import com.qa.pagefactory.UserReportPageObject;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
-import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -39,10 +38,11 @@ public class UserReport {
     /**
      * Method to Click on HeaderMessage
      */
-    public void HeaderMessage() {
-        if (userReportPageObject.HeaderElement.size() > 0) {
-            waitExecuter.waitUntilElementClickable(userReportPageObject.HeaderElement.get(0));
-            JavaScriptExecuter.clickOnElement(driver, userReportPageObject.HeaderElement.get(0));
+    /* This method is to close the confirmation message that appears on landing of page */
+    public void scheduleConfirmationMessageNotification() {
+        if (userReportPageObject.confirmationMessageschedule.size() > 0) {
+            waitExecuter.waitUntilElementClickable(userReportPageObject.confirmationMessageschedule.get(0));
+            JavaScriptExecuter.clickOnElement(driver, userReportPageObject.confirmationMessageschedule.get(0));
         }
     }
 
@@ -121,7 +121,7 @@ public class UserReport {
     /**
      * Method to Click  add scheduler on user report page
      */
-    public void addscheduler() {
+    public void addschedule() {
         int leftLimit = 48; // numeral '0'
         int rightLimit = 122; // letter 'z'
         int targetStringLength = 10;
@@ -136,34 +136,34 @@ public class UserReport {
                 .toString();
         userReportPageObject.Shedulename.stream().filter(WebElement::isDisplayed)
                 .findFirst().get().sendKeys(Char);
+
+
     }
+    /**
+     * Method to Click  verify scheduler on user report page
+     */
 
-    public void RandomAlphanumeric() {
-        int leftLimit = 48; // numeral '0'
-        int rightLimit = 122; // letter 'z'
-        int targetStringLength = 10;
-        Random random = new Random();
-
-        String generatedString = random.ints(leftLimit, rightLimit + 1)
-                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
-                .limit(targetStringLength)
-                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-                .toString();
-
-        System.out.println(generatedString);
-    }
-
-
-    public void addtime() {
-        List<WebElement> daysShedulerun = userReportPageObject.addtime;
-        userReportPageObject.addhour.click();
-        userReportPageObject.addminutes.click();
+    public void schedule(String schedulename) {
+        userReportPageObject.Shedulename.stream()
+                .filter(WebElement::isDisplayed).findFirst().get().click();
         waitExecuter.sleep(1000);
-        daysShedulerun.get(0).click();
+        userReportPageObject.Shedulename.stream().filter(WebElement::isDisplayed)
+                .findFirst().get().sendKeys(schedulename);
+
     }
 
     /**
-     * Method to Click  saveschedule on user report page
+     * Method to Click  verify scheduler on user report table
+     */
+    public void verifyschedule(String schedulename) {
+        userReportPageObject.searchShedulename.stream().filter(WebElement::isDisplayed)
+                .findFirst().get().sendKeys(schedulename);
+        waitExecuter.sleep(1000);
+    }
+
+
+    /**
+     * Method to Click  save schedule on user report page
      */
     public void clicksaveschedule() {
         MouseActions.clickOnElement(driver,

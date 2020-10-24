@@ -9,6 +9,7 @@ import com.qa.scripts.HomePage;
 import com.qa.scripts.clusters.Workload;
 import com.qa.utils.*;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
@@ -53,7 +54,7 @@ public class TC_CTP_08 extends BaseClass {
         workload.clickOnMonth();
         waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Verify View By Month :-"
-                + workloadPageObject.viewByMonth.isDisplayed());
+                + workloadPageObject.viewByMonth.stream().anyMatch(WebElement::isDisplayed));
 
         test.log(LogStatus.PASS, "Verify current month selected :"
                 + workloadPageObject.currentmonthHeader.getText());

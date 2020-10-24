@@ -27,6 +27,15 @@ public class UserReportPageObject {
     @FindBy(xpath = "//a[@href='#/clusters/overview']")
     public WebElement unravelLogo;
 
+    @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div[2]/div[2]/div/div/section/div")
+    public List<WebElement> confirmationMessageschedule;
+
+    @FindBy(xpath = "//*[@id=\"app\"]/div/div[1]/div/div[2]/div[3]/div/div[3]/div/table/tbody/tr[1]/td[1]")
+    public List<WebElement> getUserNameFromTable;
+
+    @FindBy(xpath = "/html/body/div[1]/div/div/div[1]/div/div[2]/div/div[3]/div/div/div/div[3]/div")
+    public List<WebElement> userOptions;
+
     @FindBy(xpath = "//div[@class='row']//a/span[text()='Schedule User Report']")
     public WebElement scheduleuserreportButton;
 
@@ -56,6 +65,9 @@ public class UserReportPageObject {
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[1]/div[2]/input")
     public List<WebElement> Shedulename;
+
+    @FindBy(xpath = "//*[@id=\"app\"]/div/div[1]/div/div[2]/div[2]/div[1]/input")
+    public List<WebElement> searchShedulename;
 
     @FindBy(xpath = "(//*[@class=\"select2-selection__rendered\"])[4]")
     public WebElement queuesDropdown;

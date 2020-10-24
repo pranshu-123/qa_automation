@@ -38,13 +38,13 @@ public class WorkloadPageObject {
     public WebElement currentmonthHeader;
 
     @FindBy(xpath = "//*[@id=\"radio-btn-opt\"]/span[1]")
-    public WebElement viewByMonth;
+    public List<WebElement> viewByMonth;
 
     @FindBy(xpath = "//span[@class=\"badge tag\" and text()=\"Day\"]")
-    public WebElement viewByDay;
+    public List<WebElement> viewByDay;
 
     @FindBy(xpath = "//*[@id=\"radio-btn-opt\"]/span[3]")
-    public WebElement viewByHour;
+    public List<WebElement> viewByHour;
 
     @FindBy(xpath = "//span[@class=\"badge tag\" and text()=\"Hour/Day\"]")
     public WebElement viewByHourDay;
@@ -56,7 +56,7 @@ public class WorkloadPageObject {
     public WebElement HourHighChartContainer;
 
     @FindBy(xpath = "//*[@id=\"radio-btn-opt\"]/span[2]")
-    public WebElement viewByAverage;
+    public List<WebElement> viewByAverage;
 
     @FindBy(xpath = "//*[@id=\"heat-cont\"]")
     public List<WebElement> ViewByMonthCal;

@@ -52,11 +52,11 @@ public class TC_CTP_04 extends BaseClass {
                 + workloadPageObject.timerangeMessageElement.getText());
 
         workload.clickOnMonth();
-        test.log(LogStatus.PASS, "Verify View By Month :-"
-                + workloadPageObject.viewByMonth.isDisplayed());
+        test.log(LogStatus.PASS, "Verify View By Month");
 
-        test.log(LogStatus.PASS, "Verify current month selected :"
-                + workloadPageObject.currentmonthHeader.getText());
+
+        test.log(LogStatus.PASS, "Verify current month selected");
+
 
         datePicker.clickOnDatePicker();
         datePicker.selectLast14Days();
@@ -65,8 +65,7 @@ public class TC_CTP_04 extends BaseClass {
                 + workloadPageObject.timerangeMessageElement.getText());
 
         workload.clickOnDay();
-        test.log(LogStatus.PASS, "Verify View By Day :-"
-                + workloadPageObject.viewByMonth.isDisplayed());
+        test.log(LogStatus.PASS, "Verify View By Day");
 
 
         datePicker.clickOnDatePicker();
@@ -76,8 +75,7 @@ public class TC_CTP_04 extends BaseClass {
                 + workloadPageObject.timerangeMessageElement.getText());
 
         workload.clickOnHour();
-        test.log(LogStatus.PASS, "Verify View By Hour :-"
-                + workloadPageObject.viewByMonth.isDisplayed());
+        test.log(LogStatus.PASS, "Verify View By Hour");
 
 
         datePicker.clickOnDatePicker();
@@ -89,8 +87,7 @@ public class TC_CTP_04 extends BaseClass {
         waitExecuter.sleep(1000);
 
         workload.clickOnHourDay();
-        test.log(LogStatus.PASS, "Verify View By Hour/Day :-"
-                + workloadPageObject.viewByMonth.isDisplayed());
+        test.log(LogStatus.PASS, "Verify View By Hour/Day");
         waitExecuter.sleep(1000);
 
     }

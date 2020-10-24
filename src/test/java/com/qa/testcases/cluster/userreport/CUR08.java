@@ -10,6 +10,7 @@ import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -50,7 +51,7 @@ public class CUR08 extends BaseClass {
         test.log(LogStatus.PASS, "Verified user click on schedule user report");
 
 
-        userReport.addscheduler();
+        userReport.schedule("Testschedule58");
         waitExecuter.sleep(1000);
 
         //select 'schedule-days  '
@@ -62,11 +63,8 @@ public class CUR08 extends BaseClass {
             test.log(LogStatus.PASS, "Successfully clicked on add configuration.");
 
         } catch (TimeoutException te) {
-            softassert.assertTrue(false, "Unable to clicked on add configuration.");
+            Assert.assertTrue(false, "Unable to clicked on add configuration.");
         }
-
-        waitExecuter.sleep(3000);
-        test.log(LogStatus.PASS, "Successfully clicked on add configuration page.");
 
         userReport.setTopXNumber("30");
         waitExecuter.sleep(1000);
@@ -85,8 +83,9 @@ public class CUR08 extends BaseClass {
         waitExecuter.sleep(3000);
         test.log(LogStatus.PASS, "Successfully clicked save sheduele.");
 
-        Assert.assertTrue(userReport.scheduledReportTbl(), "Scheduled Report Apps table is missing.");
-        test.log(LogStatus.PASS, "Scheduled Report table is present");
+        userReport.verifyschedule("Testschedule58");
+        waitExecuter.sleep(1000);
+        test.log(LogStatus.PASS, "Verified Scheduled Reports filtered.");
 
         Log.info("Loging off the app");
 

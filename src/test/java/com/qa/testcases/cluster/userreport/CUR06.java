@@ -48,7 +48,7 @@ public class CUR06 extends BaseClass {
         test.log(LogStatus.PASS, "Verified user click on schedule user report");
 
 
-        userReport.addscheduler();
+        userReport.addschedule();
         waitExecuter.sleep(1000);
         //select 'schedule-days  '
         schedule.scheduletorun(schedule);

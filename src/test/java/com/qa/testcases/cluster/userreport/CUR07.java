@@ -45,14 +45,12 @@ public class CUR07 extends BaseClass {
         } catch (TimeoutException te) {
             Assert.assertTrue(false, "Unable to clicked topXTab");
         }
-
-
+        
         waitExecuter.waitUntilElementClickable(userReportPageObject.scheduleuserreportButton);
         userReport.clicksheduleusereport();
         test.log(LogStatus.PASS, "Verified user click on schedule user report");
 
-
-        userReport.addscheduler();
+        userReport.addschedule();
         waitExecuter.sleep(1000);
         //select 'schedule-days  '
         schedule.scheduletorun(schedule);

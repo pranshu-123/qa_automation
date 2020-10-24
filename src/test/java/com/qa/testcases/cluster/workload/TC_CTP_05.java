@@ -46,8 +46,8 @@ public class TC_CTP_05 extends BaseClass {
         waitExecuter.sleep(1000);
 
         workload.clickOnMonth();
-        test.log(LogStatus.PASS, "Verify View By Month "
-                + workloadPageObject.viewByMonth.isDisplayed());
+        test.log(LogStatus.PASS, "Verify View By Month");
+
         waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify current month selected :"
@@ -63,8 +63,7 @@ public class TC_CTP_05 extends BaseClass {
         waitExecuter.sleep(1000);
 
         workload.clickOnDay();
-        test.log(LogStatus.PASS, "Verify View By Day :"
-                + workloadPageObject.viewByDay.isDisplayed());
+        test.log(LogStatus.PASS, "Verify View By Day ");
         waitExecuter.sleep(3000);
 
 
@@ -77,8 +76,8 @@ public class TC_CTP_05 extends BaseClass {
         waitExecuter.sleep(1000);
 
         workload.clickOnHour();
-        test.log(LogStatus.PASS, "Verify View By Hour "
-                + workloadPageObject.viewByHour.isDisplayed());
+        test.log(LogStatus.PASS, "Verify View By Hour ");
+
         waitExecuter.sleep(1000);
 
 

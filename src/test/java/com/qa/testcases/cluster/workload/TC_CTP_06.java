@@ -42,8 +42,7 @@ public class TC_CTP_06 extends BaseClass {
                 + workloadPageObject.timerangeMessageElement.getText());
 
         workload.clickOnMonth();
-        test.log(LogStatus.PASS, "Verify View By Month :-"
-                + workloadPageObject.viewByMonth.isDisplayed());
+        test.log(LogStatus.PASS, "Verify View By Month");
 
         test.log(LogStatus.PASS, "Verify current month selected :"
                 + workloadPageObject.currentmonthHeader.getText());
@@ -55,8 +54,7 @@ public class TC_CTP_06 extends BaseClass {
                 + workloadPageObject.timerangeMessageElement.getText());
 
         workload.clickOnDay();
-        test.log(LogStatus.PASS, "Verify View By Day :-"
-                + workloadPageObject.viewByDay.isDisplayed());
+        test.log(LogStatus.PASS, "Verify View By Day ");
 
 
         datePicker.clickOnDatePicker();
@@ -66,8 +64,7 @@ public class TC_CTP_06 extends BaseClass {
                 + workloadPageObject.timerangeMessageElement.getText());
 
         workload.clickOnHour();
-        test.log(LogStatus.PASS, "Verify View By Hour :-"
-                + workloadPageObject.viewByHour.isDisplayed());
+        test.log(LogStatus.PASS, "Verify View By Hour ");
 
 
         datePicker.clickOnDatePicker();

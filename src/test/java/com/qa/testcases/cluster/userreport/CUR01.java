@@ -54,7 +54,7 @@ public class CUR01 extends BaseClass {
         test.log(LogStatus.PASS, "Verified user click on schedule user report");
 
 
-        userReport.addscheduler();
+        userReport.schedule("Testschedule58");
         waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Successfully add Schedule Name");
 
@@ -63,7 +63,6 @@ public class CUR01 extends BaseClass {
 
         schedule.selectDaily();
         waitExecuter.sleep(2000);
-
 
 
         try {

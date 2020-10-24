@@ -42,23 +42,66 @@ public class TC_CTP_01 extends BaseClass {
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
 
-
+        //select 'Last 7 Days'
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
 
+        datePicker.selectLast7Days();
+        waitExecuter.sleep(1000);
+        test.log(LogStatus.PASS, "Last 7 Days field is successfully verified in date range");
 
-        String[] expectedDateOptions = {"Last 7 Days", "Last 14 Days", "Last 30 Days", "Last 60 Days"
-                , "Custom Range"};
 
-
-        for (String expectedDateOption : expectedDateOptions) {
-            waitExecuter.sleep(3000);
-            Assert.assertTrue(datePicker.getDatePickerOptions().contains(expectedDateOption),
-                    "Date list does not contain: " + expectedDateOption);
-            test.log(LogStatus.PASS, "Date list contains option: " + expectedDateOption);
-        }
+        //select 'Last 14 Days'
         datePicker.clickOnDatePicker();
+        waitExecuter.sleep(1000);
 
+        datePicker.selectLast14Days();
+        waitExecuter.sleep(2000);
+
+        test.log(LogStatus.PASS, "Last 14 Days field is successfully verified in date range");
+
+        //select 'Last 30 Days'
+        datePicker.clickOnDatePicker();
+        waitExecuter.sleep(1000);
+        datePicker.selectLast30Days();
+        waitExecuter.sleep(1000);
+
+
+        test.log(LogStatus.PASS, "Last 30 Days field is successfully verified in date range");
+
+        //select 'Last 60 Days'
+        datePicker.clickOnDatePicker();
+        waitExecuter.sleep(1000);
+        datePicker.selectLast60Days();
+        waitExecuter.sleep(1000);
+
+        test.log(LogStatus.PASS, "Last 60 Days field is successfully verified in date range");
+
+        //select 'Last 90 Days'
+        datePicker.clickOnDatePicker();
+        waitExecuter.sleep(1000);
+        datePicker.selectLast90Days();
+        waitExecuter.sleep(1000);
+
+        test.log(LogStatus.PASS, "Last 90 Days field is successfully verified in date range");
+
+        //select 'Custom Range'
+        datePicker.clickOnDatePicker();
+        waitExecuter.sleep(1000);
+        datePicker.selectCustomRange();
+        waitExecuter.sleep(1000);
+
+        // Set Start date by substracting days from current date and end date as current
+        // date
+        datePicker.setCurrentAndPastDate(-3);
+        waitExecuter.sleep(1000);
+
+        // Click on apply button of calendar
+        datePicker.clickOnCustomDateApplyBtn();
+        waitExecuter.sleep(1000);
+
+        test.log(LogStatus.PASS, "Start Date field is successfully verified in custom date range");
+    }
 
     }
 }

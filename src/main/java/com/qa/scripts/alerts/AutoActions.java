@@ -177,4 +177,16 @@ public class AutoActions {
         return false;
     }
 
+    public void clickScopeChkBox(String chkBoxName){
+        waitExecuter.sleep(2000);
+        if(chkBoxName.equals("only")){
+            MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.onlyUserChkBox);
+        }else if(chkBoxName.equals("except")){
+            MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.exceptUserChkBox);
+        }else{
+            logger.info("No Check Box found with name: "+ chkBoxName);
+        }
+
+    }
+
 }

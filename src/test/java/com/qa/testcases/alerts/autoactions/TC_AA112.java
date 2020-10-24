@@ -11,13 +11,13 @@ import org.testng.annotations.Test;
 
 @Marker.Alerts
 @Marker.All
-public class TC_AA111 extends BaseClass {
-    Logger logger = LoggerFactory.getLogger(TC_AA111.class.getName());
+public class TC_AA112 extends BaseClass {
+    Logger logger = LoggerFactory.getLogger(TC_AA112.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateEveryOneAsUser(String clusterId) {
-        test = extent.startTest("TC_AA111.validateEveryOneAsUser",
-                "Verify user is able to select EVERYONE as user, save the auto action.");
+    public void validateOnlyAsUser(String clusterId) {
+        test = extent.startTest("TC_AA112.validateOnlyAsUser",
+                "Verify user is able to select only particular users save the auto action.");
         test.assignCategory(" Alerts ");
 
         AutoActions aa = new AutoActions(driver);
@@ -49,12 +49,14 @@ public class TC_AA111 extends BaseClass {
         String scope = "User";
         aa.selectRefineScope(scope);
         test.log(LogStatus.INFO,"Selected scope");
-        Assert.assertFalse(aa.validateDefaultAllUserScopeChkBox(), "all check box in refine scope is not checked");
+        String userScopeChkBoxName = "only";
+        aa.clickScopeChkBox(userScopeChkBoxName);
+        test.log(LogStatus.INFO,"Clicked on user scope 'only' checkbox");
         aa.clickOnSaveBtn();
-        test.log(LogStatus.INFO,"Click on save button");
+        test.log(LogStatus.INFO,"Clicked on save button");
         Assert.assertTrue(aa.validateAutoActionAdded(policyName), "Policy: " +
                 policyName + " not found.");
-        test.log(LogStatus.PASS, "Validated EVERYONE or all user selected as scope on New Auto Action Policy page");
+        test.log(LogStatus.PASS, "Validated 'only' user selected as scope on New Auto Action Policy page");
 
     }
 }

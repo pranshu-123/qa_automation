@@ -103,5 +103,4 @@ public class TC_CTP_01 extends BaseClass {
         test.log(LogStatus.PASS, "Start Date field is successfully verified in custom date range");
     }
 
-    }
 }

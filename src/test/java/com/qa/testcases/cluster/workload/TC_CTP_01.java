@@ -41,6 +41,7 @@ public class TC_CTP_01 extends BaseClass {
 
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
+        waitExecuter.sleep(3000);
 
         //select 'Last 7 Days'
         DatePicker datePicker = new DatePicker(driver);

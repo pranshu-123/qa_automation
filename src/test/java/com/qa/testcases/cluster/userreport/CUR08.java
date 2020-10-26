@@ -10,26 +10,29 @@ import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 import org.testng.annotations.Test;
 @Marker.All
 @Marker.UserReports
-public class CUR02 extends BaseClass {
-    Logger logger = LoggerFactory.getLogger(CUR02.class);
+public class CUR08 extends BaseClass {
+    Logger logger = LoggerFactory.getLogger(CUR08.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void CUR02_VerifyAddConfigurationTab(String clusterId) {
-        test = extent.startTest("CUR02_VerifyAddConfigurationTab"+ clusterId, "Verify this should open a new page with all the parameters");
-        test.assignCategory("Cluster - User Report");
-        Log.startTestCase("CUR02_VerifyAddconfigurationtab");
+    public void CUR08_VerifyScheduleUserReport(String clusterId) {
+        test = extent.startTest("CUR08_VerifyScheduleUserReport" + clusterId,
+                "Verify the mandatory fields and should open a Scheduled Reports page and this report should be listed there");
+        test.assignCategory(" Cluster - User Report");
+        Log.startTestCase("CUR08_Verifysaveschedule");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         test.log(LogStatus.PASS, "Passed Parameter Is : " + clusterId);
-
-        Schedule schedule=new Schedule(driver);
+        Schedule schedule = new Schedule(driver);
 
         UserReportPageObject userReportPageObject = new UserReportPageObject(driver);
+
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
         UserReport userReport = new UserReport(driver);
         userReport.selectClusterstab();
@@ -49,30 +52,23 @@ public class CUR02 extends BaseClass {
 
         userReport.schedule("Testschedule58");
         waitExecuter.sleep(1000);
-        test.log(LogStatus.PASS, "Successfully add Schedule Name");
-        //select 'Last 2 Hour'
-        schedule.clickOnSchedule();
-        waitExecuter.sleep(1000);
 
-        schedule.selectDaily();
-        waitExecuter.sleep(3000);
+        //select 'schedule-days  '
+        schedule.scheduletorun(schedule);
 
         try {
             userReportPageObject.addconfiguration.click();
+            waitExecuter.sleep(1000);
             test.log(LogStatus.PASS, "Successfully clicked on add configuration.");
 
         } catch (TimeoutException te) {
             Assert.assertTrue(false, "Unable to clicked on add configuration.");
         }
 
-        waitExecuter.sleep(3000);
-        test.log(LogStatus.PASS, "Successfully clicked on add configuration page.");
-
         userReport.setTopXNumber("30");
         waitExecuter.sleep(1000);
         userReport.selectRealUser();
         userReport.selectQueue();
-        waitExecuter.sleep(1000);
 
         userReport.assignEmail("sray@unraveldata.com");
         waitExecuter.sleep(1000);
@@ -82,10 +78,16 @@ public class CUR02 extends BaseClass {
         waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Successfully added Topx parameter");
 
-        userReportPageObject.saveschedule.click();
+        userReport.clicksaveschedule();
         waitExecuter.sleep(3000);
         test.log(LogStatus.PASS, "Successfully clicked save sheduele.");
 
-        Log.endTestCase("CUR02_VerifyAddconfigurationtab");
+        userReport.verifyschedule("Testschedule58");
+        waitExecuter.sleep(1000);
+        test.log(LogStatus.PASS, "Verified Scheduled Reports filtered.");
+
+        logger.info("Loging off the app");
+
+        Log.endTestCase("CUR08_Verifysaveschedule");
     }
 }

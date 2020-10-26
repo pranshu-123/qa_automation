@@ -20,13 +20,13 @@ import org.openqa.selenium.WebElement;
  */
 
 public class DatePicker {
-    private WebDriver driver;
     public DatePickerPageObject datePickerPageObject;
     public WaitExecuter waitExecuter;
+    private WebDriver driver;
 
     /**
      * @param driver - WebDriver instance
-     * Constructor method initialize driver, datepicker object
+     *               Constructor method initialize driver, datepicker object
      */
     public DatePicker(WebDriver driver) {
         this.driver = driver;
@@ -43,11 +43,19 @@ public class DatePicker {
         waitExecuter.sleep(3000);
     }
 
+    /**
+     * Method to select 'Last 14 Days' in data picker
+     */
+    public void selectLast14Days() {
+        waitExecuter.waitUntilElementPresent(datePickerPageObject.last14Days);
+        datePickerPageObject.last14Days.click();
+    }
+
     public int getDatePickerYPosition() {
         return datePickerPageObject.dateRange.getLocation().getY();
     }
 
-    public String getDefaultDate(){
+    public String getDefaultDate() {
         waitExecuter.waitUntilElementPresent(datePickerPageObject.dateRange);
         return datePickerPageObject.dateRange.getText();
     }
@@ -61,7 +69,7 @@ public class DatePicker {
         waitExecuter.sleep(1000);
     }
 
-    public void clickOnCustomDateApplyBtn(){
+    public void clickOnCustomDateApplyBtn() {
         waitExecuter.waitUntilElementPresent(datePickerPageObject.applyBtn);
         datePickerPageObject.applyBtn.click();
         waitExecuter.sleep(1000);
@@ -129,6 +137,14 @@ public class DatePicker {
     public void selectLast30Days() {
         waitExecuter.waitUntilElementPresent(datePickerPageObject.last30Days);
         datePickerPageObject.last30Days.click();
+    }
+
+    /**
+     * Method to select 'Last 60 Days' in data picker
+     */
+    public void selectLast60Days() {
+        waitExecuter.waitUntilElementPresent(datePickerPageObject.last60Days);
+        datePickerPageObject.last60Days.click();
     }
 
     /**

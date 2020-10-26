@@ -104,7 +104,6 @@ public class Workload {
             LOGGER.info("Click On Day dropdown");
             workloadPageObject.viewByDay.stream()
                     .filter(WebElement::isDisplayed).findFirst().get().click();
-            /* MouseActions.clickOnElement(driver, workloadPageObject.viewByDay);*/
         } catch (NoSuchElementException e) {
             LOGGER.severe("Class Workload | Method clickOnDay | Exception desc" + e.getMessage());
             throw (e);
@@ -128,7 +127,7 @@ public class Workload {
         try {
             LOGGER.info("Click on HourDay dropdown");
             WebElement HourDay = (workloadPageObject.viewByHourDay);
-            System.out.println("X coordinate: " + HourDay.getLocation().getX()
+            LOGGER.info("X coordinate: " + HourDay.getLocation().getX()
                     + ", Y coordinate: " + HourDay.getLocation().getY());
             Actions actions = new Actions(driver);
             actions.moveByOffset(HourDay.getLocation().getX() + 1, HourDay.

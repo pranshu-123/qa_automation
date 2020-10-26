@@ -23,8 +23,8 @@ public class TC_CTP_08 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_CTP_08.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void Verifydaterangedisplayedinworkloadreport(String clusterId) {
-        test = extent.startTest("TC_CTP_08.Verifydaterangedisplayedinworkloadreport",
+    public void VerifyDateRangeDisplayedInWorkloadReport(String clusterId) {
+        test = extent.startTest("TC_CTP_08.VerifyDateRangeDisplayedInWorkloadReport",
                 "Verify Date range displayed in workload report should be same as date range selected in date picker");
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);

@@ -26,8 +26,8 @@ public class CUR01 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(CUR01.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void CUR01_Verifyscheduleuserreport(String clusterId) {
-        test = extent.startTest("CUR01.Verifyscheduleuserreport"+ clusterId,
+    public void CUR01_VerifyScheduleUserReport(String clusterId) {
+        test = extent.startTest("CUR01.VerifyScheduleUserReport"+ clusterId,
                 "Verify schedule user report is working fine");
         test.assignCategory("Cluster - User Report");
         Log.startTestCase("CUR01_Verifyscheduleuserreport");

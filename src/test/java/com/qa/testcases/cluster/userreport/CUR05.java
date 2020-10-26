@@ -20,8 +20,8 @@ public class CUR05 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(CUR03.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void CUR05_VerifytopXparameterpage(String clusterId) {
-        test = extent.startTest("CUR05_VerifytopXparameterpage"+clusterId,
+    public void CUR05_VerifyTopXParameterPage(String clusterId) {
+        test = extent.startTest("CUR05_VerifyTopXParameterPage"+clusterId,
                 "Verify  the mandatory fields and should add the configirations to the list");
         test.assignCategory(" Cluster - User Report");
         Log.startTestCase("CUR05_VerifytopXparameterpage");

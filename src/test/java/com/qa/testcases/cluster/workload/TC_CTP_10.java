@@ -28,8 +28,8 @@ public class TC_CTP_10 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_CTP_10.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void VerifyGetjobsoptioninjobdetails(String clusterId) {
-        test = extent.startTest("TC_CTP_10.VerifyGetjobsoptioninjobdetails",
+    public void VerifyGetJobsOptionInJobDetails(String clusterId) {
+        test = extent.startTest("TC_CTP_10.VerifyGetJobsOptionInJobDetails",
                 "Verify This should lists all the applications with that type executed on selected day");
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);

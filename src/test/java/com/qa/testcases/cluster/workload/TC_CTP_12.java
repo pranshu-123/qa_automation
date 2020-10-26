@@ -24,8 +24,8 @@ public class TC_CTP_12 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_CTP_12.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void VerifysearchoptioninGroupbyfilterofjobdetails(String clusterId) {
-        test = extent.startTest("TC_CTP_12.VerifysearchoptioninGroupbyfilterofjobdetails",
+    public void VerifySearchOptionInGroupbyFilterOfJobDetails(String clusterId) {
+        test = extent.startTest("TC_CTP_12.VerifySearchOptionInGroupbyFilterOfJobDetails",
                 "Verify This should lists application count extecuted by particular user");
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);

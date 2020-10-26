@@ -22,15 +22,14 @@ public class CUR08 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(CUR08.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void CUR08_Verifyscheduleuserreport(String clusterId) {
-        test = extent.startTest("CUR08_Verifysaveschedule" + clusterId,
+    public void CUR08_VerifyScheduleUserReport(String clusterId) {
+        test = extent.startTest("CUR08_VerifyScheduleUserReport" + clusterId,
                 "Verify the mandatory fields and should open a Scheduled Reports page and this report should be listed there");
         test.assignCategory(" Cluster - User Report");
         Log.startTestCase("CUR08_Verifysaveschedule");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         test.log(LogStatus.PASS, "Passed Parameter Is : " + clusterId);
         Schedule schedule = new Schedule(driver);
-        SoftAssert softassert = new SoftAssert();
 
         UserReportPageObject userReportPageObject = new UserReportPageObject(driver);
 
@@ -87,7 +86,7 @@ public class CUR08 extends BaseClass {
         waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Verified Scheduled Reports filtered.");
 
-        Log.info("Loging off the app");
+        logger.info("Loging off the app");
 
         Log.endTestCase("CUR08_Verifysaveschedule");
     }

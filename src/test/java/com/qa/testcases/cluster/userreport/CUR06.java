@@ -20,8 +20,8 @@ public class CUR06 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(CUR06.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void CUR06_Verifymailidcombination(String clusterId) {
-        test = extent.startTest("CUR06_Verifymailidcombination"+ clusterId, "Verify after select add option this should pass the email validation");
+    public void CUR06_VerifyMailIdCombination(String clusterId) {
+        test = extent.startTest("CUR06_VerifyMailIdCombination"+ clusterId, "Verify after select add option this should pass the email validation");
         test.assignCategory("Cluster - User Report");
         Log.startTestCase("CUR06_Verifymailidcombination");
         WaitExecuter waitExecuter = new WaitExecuter(driver);

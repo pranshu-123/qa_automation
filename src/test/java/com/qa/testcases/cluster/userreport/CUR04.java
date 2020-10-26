@@ -20,8 +20,8 @@ public class CUR04 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(CUR04.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void CUR04_VerifyAddconfigurationtab(String clusterId) {
-        test = extent.startTest("CUR04_VerifyAddconfigurationtab"+ clusterId, "Verify this should open a new page with all the parameters");
+    public void CUR04_VerifyAddConfigurationTab(String clusterId) {
+        test = extent.startTest("CUR04_VerifyAddConfigurationTab"+ clusterId, "Verify this should open a new page with all the parameters");
         test.assignCategory("Cluster - User Report");
         Log.startTestCase("CUR04_VerifyAddconfigurationtab");
 

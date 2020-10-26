@@ -23,8 +23,8 @@ public class TC_CTP_01 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_CTP_01.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateallthecombinationindatepicker(String clusterId) {
-        test = extent.startTest("TC_CTP_01.validateallthecombinationindatepicker",
+    public void validateAllTheCombinationInDatepicker(String clusterId) {
+        test = extent.startTest("TC_CTP_01.validateAllTheCombinationInDatepicker",
                 "Verify Cluster workload report should be generated for the select date range");
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);

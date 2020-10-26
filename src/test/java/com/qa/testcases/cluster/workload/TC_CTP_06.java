@@ -19,8 +19,8 @@ public class TC_CTP_06 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_CTP_06.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void VerifyallviewbyfiltersinByMemoryHourspage(String clusterId) {
-        test = extent.startTest("TC_CTP_06.VerifyallviewbyfiltersinByMemoryHourspage",
+    public void VerifyAllViewByFiltersInByMemoryHoursPage(String clusterId) {
+        test = extent.startTest("TC_CTP_06.VerifyAllViewByFiltersInByMemoryHoursPage",
                 "Verify Cluster workload report should be generated as per selected view by filter");
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);

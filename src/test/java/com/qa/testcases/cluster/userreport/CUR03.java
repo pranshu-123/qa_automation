@@ -25,8 +25,8 @@ public class CUR03 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(CUR03.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void CUR03_Verifyschedulenamewithspecialcharacter(String clusterId) {
-        test = extent.startTest("CUR03_Verifyschedulenamewithspecialcharacter"+ clusterId, "Verify user report should be scheduled with all the combinations in the name");
+    public void CUR03_VerifyScheduleNameWithSpecialCharacter(String clusterId) {
+        test = extent.startTest("CUR03_VerifyScheduleNameWithSpecialCharacter"+ clusterId, "Verify user report should be scheduled with all the combinations in the name");
         test.assignCategory("Cluster - User Report");
         Log.startTestCase("CUR03_Verifyschedulenamewithspecialcharacter");
         WaitExecuter waitExecuter = new WaitExecuter(driver);

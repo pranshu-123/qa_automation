@@ -20,8 +20,8 @@ public class CUR07 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(CUR07.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void CUR07_Verifymultipleconfigurations(String clusterId) {
-        test = extent.startTest("CUR07_Verifymultipleconfigurations"+ clusterId, "Verify multiple configurations should be added successfully");
+    public void CUR07_VerifyMultipleConfigurations(String clusterId) {
+        test = extent.startTest("CUR07_VerifyMultipleConfigurations"+ clusterId, "Verify multiple configurations should be added successfully");
         test.assignCategory("Cluster - User Report");
         Log.endTestCase("CUR07_Verifymultipleconfigurations");
         WaitExecuter waitExecuter = new WaitExecuter(driver);

@@ -20,8 +20,8 @@ public class CUR02 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(CUR02.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void CUR02_VerifyAddconfigurationtab(String clusterId) {
-        test = extent.startTest("CUR02_Verifyspecialcharacter"+ clusterId, "Verify this should open a new page with all the parameters");
+    public void CUR02_VerifyAddConfigurationTab(String clusterId) {
+        test = extent.startTest("CUR02_VerifyAddConfigurationTab"+ clusterId, "Verify this should open a new page with all the parameters");
         test.assignCategory("Cluster - User Report");
         Log.startTestCase("CUR02_VerifyAddconfigurationtab");
         WaitExecuter waitExecuter = new WaitExecuter(driver);

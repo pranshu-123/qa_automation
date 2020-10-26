@@ -27,8 +27,8 @@ public class TC_CTP_13 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_CTP_13.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void VerifysearchoptioninGroupbyfilterofjobdetails(String clusterId) {
-        test = extent.startTest("TC_CTP_13.VerifysearchoptioninGroupbyfilterofjobdetails",
+    public void VerifySearchOptionInGroupbyFilterOfJobDetails(String clusterId) {
+        test = extent.startTest("TC_CTP_13.VerifySearchOptionInGroupbyFilterOfJobDetails",
                 "Verify This should lists all the applications which are executed by selected user on that day.");
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);

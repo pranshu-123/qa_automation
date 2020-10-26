@@ -28,8 +28,8 @@ public class TC_CTP_07 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_CTP_07.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void VerifySumAverageoption(String clusterId) {
-        test = extent.startTest("TC_CTP_07.VerifySumAverageoption",
+    public void VerifySumAverageOption(String clusterId) {
+        test = extent.startTest("TC_CTP_07.VerifySumAverageOption",
                 "Verify Cluster workload report data will be generated as sum of application count/ average as per requirement");
         test.assignCategory("Cluster - Workload");
 

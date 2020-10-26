@@ -24,8 +24,8 @@ public class TC_CTP_02 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_CTP_02.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateclusterlistinclusterfiltertab(String clusterId) {
-        test = extent.startTest("TC_CTP_02.validateclusterlistinclusterfiltertab",
+    public void  validateClusterListInClusterFilterTab(String clusterId) {
+        test = extent.startTest("TC_CTP_02.validateClusterListInClusterFilterTab",
                 "Verify Cluster workload report should be generated for the selected cluster");
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);

@@ -19,6 +19,10 @@ import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 
+import com.qa.annotations.Marker;
+
+@Marker.AppDetailsHive
+@Marker.All
 public class TC_HIVE_37 extends BaseClass {
 	private static final Logger LOGGER = Logger.getLogger(TC_HIVE_37.class.getName());
 

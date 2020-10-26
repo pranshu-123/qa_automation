@@ -69,6 +69,9 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[1]")
     public WebElement getTypeFromTable;
 
+    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr[2]/td)[1]")
+    public WebElement getAnotherAppFromTable;
+
     @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[3]")
     public WebElement getUsernameFromTable;
 

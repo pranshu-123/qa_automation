@@ -9,6 +9,7 @@ import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
+import com.qa.utils.MouseActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
@@ -50,21 +51,26 @@ public class TC_spark_224 extends BaseClass {
 
         //Verify that the left pane has spark check box and the apps number
         test.log(LogStatus.INFO, "Verify that the left pane has spark check box and the apps number");
-        logger.info("Select individual app and assert that table contain its data");
-        int appCount = appsDetailsPage.clickOnlyLink("Spark");
+        appsDetailsPage.clickOnlyLink("Spark");
+        applicationsPageObject.expandStatus.click();
+        int appCount = appsDetailsPage.clickOnlyLink("Success");
+
         //Clicking on the Spark app must go to apps detail page
         if (appCount > 0) {
             String headerAppId = appsDetailsPage.verifyAppId(sparkAppsDetailsPageObject, applicationsPageObject);
             test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);
 
             /**clicking on the UI must go to apps detail page and verify the basic tabs present */
-            appsDetailsPage.verifyAppsComponent(sparkAppsDetailsPageObject, false, false, false);
+            String tagValue = appsDetailsPage.verifyAppSummaryTabs(sparkAppsDetailsPageObject, "Tags", test);
+            if (!tagValue.equals("spark-streaming"))
+              appsDetailsPage.verifyAppsComponent(sparkAppsDetailsPageObject, false, false, false);
             test.log(LogStatus.PASS, "The job stage table has jobs and corresponding details displayed per job id");
+            //Close apps details page
+            MouseActions.clickOnElement(driver, sparkAppsDetailsPageObject.closeAppsPageTab);
         } else {
+            test.log(LogStatus.SKIP, "No Spark Application present");
             logger.error("No Spark Application present in the " + clusterId + " cluster for the time span " +
-                    "of 90 days");
+                "of 90 days");
         }
-        //Close apps details page
-        sparkAppsDetailsPageObject.closeAppsPageTab.click();
     }
 }

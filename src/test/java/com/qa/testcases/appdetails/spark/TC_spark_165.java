@@ -63,14 +63,12 @@ public class TC_spark_165 extends BaseClass {
       test.log(LogStatus.INFO,"Verify if the user can execute the Load Diagnostics action");
       appsDetailsPage.verifyLoadDiagnosticAction(sparkAppsDetailsPageObject);
       test.log(LogStatus.PASS, "Verified that the user can execute the Load Diagnostics action");
-    }
-    else
-    {
-      logger.error("No Spark Application present in the "+ clusterId+ " cluster for the time span " +
+      //Close apps details page
+      MouseActions.clickOnElement(driver, sparkAppsDetailsPageObject.closeAppsPageTab);
+    } else {
+      test.log(LogStatus.SKIP, "No Spark Application present");
+      logger.error("No Spark Application present in the " + clusterId + " cluster for the time span " +
           "of 90 days");
     }
-    //Close apps details page
-    MouseActions.clickOnElement(driver, sparkAppsDetailsPageObject.closeAppsPageTab);
-    //  sparkAppsDetailsPageObject.closeAppsPageTab.click();
   }
 }

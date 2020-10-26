@@ -8,6 +8,7 @@ import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
+import com.qa.utils.MouseActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,7 +59,10 @@ public class TC_spark_225 extends BaseClass {
     //Verify that the left pane has spark check box and the apps number
     test.log(LogStatus.INFO, "Verify that the left pane has spark check box and the apps number");
     logger.info("Select individual app and assert that table contain its data");
-    int appCount = appsDetailsPage.clickOnlyLink("Spark");
+    appsDetailsPage.clickOnlyLink("Spark");
+    applicationsPageObject.expandStatus.click();
+    int appCount = appsDetailsPage.clickOnlyLink("Success");
+
     //Clicking on the Spark app must go to apps detail page
     if (appCount > 0) {
       String headerAppId = appsDetailsPage.verifyAppId(sparkAppsDetailsPageObject, applicationsPageObject);
@@ -67,21 +71,18 @@ public class TC_spark_225 extends BaseClass {
       /**clicking on the UI must go to apps detail page and verify the basic tabs present */
       test.log(LogStatus.INFO, "Verify that the job stages tabs are displayed and that each one of them" +
           " have the required data in it");
-      appsDetailsPage.verifyAppsComponent(sparkAppsDetailsPageObject, false, false, true);
+      String tagValue = appsDetailsPage.verifyAppSummaryTabs(sparkAppsDetailsPageObject, "Tags", test);
+      if (!tagValue.equals("spark-streaming"))
+        appsDetailsPage.verifyAppsComponent(sparkAppsDetailsPageObject, false, false, true);
       test.log(LogStatus.PASS, "The job stage table has jobs and corresponding details displayed per " +
           "job id along with tabs and its respective data");
+      //Close apps details page
+      MouseActions.clickOnElement(driver, sparkAppsDetailsPageObject.closeAppsPageTab);
     } else {
+      test.log(LogStatus.SKIP, "No Spark Application present");
       logger.error("No Spark Application present in the " + clusterId + " cluster for the time span " +
           "of 90 days");
     }
-    String s = "Source: SparkTC.scala: 62";
-    String a[] =  s.split(":");
-    for(int i=0;i<a.length;i++){
-      System.out.println("Boolean is " + a[i]);
-    }
-    //Close apps details page
-    sparkAppsDetailsPageObject.closeAppsPageTab.click();
   }
-
 }
 

@@ -151,4 +151,14 @@ public class AllApps {
         selectCluster(clusterId);
         waitExecuter.sleep(3000);
     }
+
+    /* Get all app types that have run in unravel UI */
+    public List<String> getAllApplicationTypes() {
+        List<WebElement> appTypes = applicationsPageObject.getApplicationTypes;
+        List<String> nameOfAppTypes = new ArrayList<>();
+        for (WebElement appType : appTypes) {
+            nameOfAppTypes.add(appType.getText().trim());
+        }
+        return nameOfAppTypes;
+    }
 }

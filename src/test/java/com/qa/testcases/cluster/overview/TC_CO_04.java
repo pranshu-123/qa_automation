@@ -75,7 +75,7 @@ public class TC_CO_04 extends BaseClass {
 	public void TC_CO_04_verifyCustomRangeForDesiredDates(String clusterId) {
 
 		test = extent.startTest("TC_CO_04_verifySettingDateInCalendar : "+clusterId, "Verify Custom Date for desired date ");
-		test.assignCategory(" Cluster Overview");
+		test.assignCategory("4620 - Cluster Overview");
 		//Select the cluster
 		LOGGER.info("Selecting the cluster");
 		HomePage homePage = new HomePage(driver);

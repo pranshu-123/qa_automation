@@ -11,10 +11,13 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Marker.InefficientApps
 @Marker.All
 public class TC_JIA01 extends BaseClass {
+
+    private static final Logger LOGGER = Logger.getLogger(TC_JIA01.class.getName());
 
     /**
      * Verify User is able to access Jobs / InEfficient Apps and Verify datepicker filter in UI
@@ -26,6 +29,7 @@ public class TC_JIA01 extends BaseClass {
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         test.log(LogStatus.PASS, "Passed Parameter Is : " + clusterId);
+        LOGGER.info("Passed Parameter Is : " + clusterId);
 
         //Click on Jobs tab
         TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
@@ -55,7 +59,7 @@ public class TC_JIA01 extends BaseClass {
 
         Assert.assertTrue(boolDate,"Some of date picker not found.");
         test.log(LogStatus.PASS, "Verified Date Picker successfully.");
-
+        LOGGER.info("Verified Date Picker successfully.");
 
 
     }

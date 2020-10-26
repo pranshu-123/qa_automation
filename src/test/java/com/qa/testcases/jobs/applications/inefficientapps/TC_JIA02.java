@@ -9,9 +9,13 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.annotations.Test;
 
+import java.util.logging.Logger;
+
 @Marker.InefficientApps
 @Marker.All
 public class TC_JIA02 extends BaseClass {
+
+    private static final Logger LOGGER = Logger.getLogger(TC_JIA02.class.getName());
 
     /**
      * Verify Custom Range in datepicker
@@ -23,18 +27,21 @@ public class TC_JIA02 extends BaseClass {
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         test.log(LogStatus.PASS, "Passed Parameter Is : " + clusterId);
+        LOGGER.info("Passed Parameter Is : " + clusterId);
 
         //Click on Jobs tab
         TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
         waitExecuter.sleep(2000);
         topPanelComponentPageObject.jobs.click();
         test.log(LogStatus.PASS, "Jobs tab is clicked successfully");
+        LOGGER.info("Jobs tab is clicked successfully");
 
         //Click on inefficientApps tab
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         waitExecuter.sleep(2000);
         applicationsPageObject.inefficientApps.click();
         test.log(LogStatus.PASS, "inefficientApps tab is clicked successfully");
+        LOGGER.info("inefficientApps tab is clicked successfully");
 
         //Click on date picker
         DatePicker datePicker = new DatePicker(driver);
@@ -45,7 +52,7 @@ public class TC_JIA02 extends BaseClass {
         waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Custom Range date is successfully verified in date range");
-
+        LOGGER.info("Custom Range date is successfully verified in date range");
 
     }
 }

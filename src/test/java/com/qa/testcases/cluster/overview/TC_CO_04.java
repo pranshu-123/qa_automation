@@ -18,7 +18,7 @@ public class TC_CO_04 extends BaseClass {
 	
 	private WaitExecuter waitExecuter;
 	private DatePicker datePicker;
-	private static final Logger LOGGER = Logger.getLogger(TC_CO_08.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(TC_CO_04.class.getName());
 
 	@Test(dataProvider = "clusterid-data-provider")
 	public void TC_CO_04_verifyCustomRangeForCurrentDate(String clusterId) {
@@ -75,7 +75,7 @@ public class TC_CO_04 extends BaseClass {
 	public void TC_CO_04_verifyCustomRangeForDesiredDates(String clusterId) {
 
 		test = extent.startTest("TC_CO_04_verifySettingDateInCalendar : "+clusterId, "Verify Custom Date for desired date ");
-		test.assignCategory("4620 - Cluster Overview");
+		test.assignCategory(" Cluster Overview");
 		//Select the cluster
 		LOGGER.info("Selecting the cluster");
 		HomePage homePage = new HomePage(driver);

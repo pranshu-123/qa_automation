@@ -35,6 +35,9 @@ public class TC_CB_52 extends BaseClass {
         test = extent.startTest("TC_CB_52_VerifyValidatethecostsfordecimalnumbers"+clusterId, "Verify  the costs for decimal numbers");
         test.assignCategory(" Cluster - Impala Chargeback");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
+        test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
+
+        test.assignCategory("4620 Cluster - Impala Chargeback");
         test.log(LogStatus.INFO, "Login to the application");
 
         // Initialize all classes objects

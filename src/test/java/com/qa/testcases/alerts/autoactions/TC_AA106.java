@@ -4,15 +4,16 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.scripts.alerts.AutoActions;
 import com.relevantcodes.extentreports.LogStatus;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.logging.Logger;
+
 @Marker.Alerts
 @Marker.All
 public class TC_AA106 extends BaseClass {
-    Logger logger = LoggerFactory.getLogger(TC_AA106.class);
+    private static final java.util.logging.Logger logger = Logger.getLogger(TC_AA106.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void validateDescriptionNameAsSingleChars(String clusterId) {

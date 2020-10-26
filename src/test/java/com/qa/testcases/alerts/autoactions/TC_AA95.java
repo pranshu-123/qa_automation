@@ -4,18 +4,20 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.scripts.alerts.AutoActions;
+import com.qa.testcases.jobs.applications.inefficientapps.TC_JIA02;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.logging.Logger;
+
 @Marker.Alerts
 @Marker.All
 public class TC_AA95 extends BaseClass {
-    Logger logger = LoggerFactory.getLogger(TC_AA95.class);
+    private static final java.util.logging.Logger logger = Logger.getLogger(TC_AA95.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void validateNameAsAlphabets(String clusterId) {

@@ -11,6 +11,7 @@ public @interface Marker {
   @interface Smoke {}
   @interface Regression {}
   @interface All {}
+  @interface Alerts {}
   @interface ClusterOverview {}
   @interface TopX {}
   @interface ImpalaResources {}

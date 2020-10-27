@@ -22,9 +22,9 @@ public class AutoActions {
     Logger logger = LoggerFactory.getLogger(AutoActions.class);
 
     /**
-     * Constructer to initialize wait, driver and necessary objects
-     * @param driver
-     *            - WebDriver instance
+     * Constructor to initialize wait, driver and necessary objects
+     *
+     * @param driver - WebDriver instance
      */
     public AutoActions(WebDriver driver) {
         this.driver = driver;

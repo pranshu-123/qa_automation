@@ -16,20 +16,21 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 @Marker.All
 @Marker.UserReports
-public class CUR02 extends BaseClass {
-    Logger logger = LoggerFactory.getLogger(CUR02.class);
+public class CUR05 extends BaseClass {
+    Logger logger = LoggerFactory.getLogger(CUR03.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void CUR02_VerifyAddConfigurationTab(String clusterId) {
-        test = extent.startTest("CUR02_VerifyAddConfigurationTab"+ clusterId, "Verify this should open a new page with all the parameters");
-        test.assignCategory("Cluster - User Report");
-        Log.startTestCase("CUR02_VerifyAddconfigurationtab");
+    public void CUR05_VerifyTopXParameterPage(String clusterId) {
+        test = extent.startTest("CUR05_VerifyTopXParameterPage"+clusterId,
+                "Verify  the mandatory fields and should add the configirations to the list");
+        test.assignCategory(" Cluster - User Report");
+        Log.startTestCase("CUR05_VerifytopXparameterpage");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         test.log(LogStatus.PASS, "Passed Parameter Is : " + clusterId);
-
-        Schedule schedule=new Schedule(driver);
+        Schedule schedule = new Schedule(driver);
 
         UserReportPageObject userReportPageObject = new UserReportPageObject(driver);
+
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
         UserReport userReport = new UserReport(driver);
         userReport.selectClusterstab();
@@ -47,24 +48,20 @@ public class CUR02 extends BaseClass {
         test.log(LogStatus.PASS, "Verified user click on schedule user report");
 
 
-        userReport.schedule("Testschedule58");
+        userReport.addschedule();
         waitExecuter.sleep(1000);
-        test.log(LogStatus.PASS, "Successfully add Schedule Name");
-        //select 'Last 2 Hour'
-        schedule.clickOnSchedule();
-        waitExecuter.sleep(1000);
+        //select 'schedule-days  '
+        schedule.scheduletorun(schedule);
 
-        schedule.selectDaily();
         waitExecuter.sleep(3000);
-
         try {
             userReportPageObject.addconfiguration.click();
+            waitExecuter.sleep(1000);
             test.log(LogStatus.PASS, "Successfully clicked on add configuration.");
 
         } catch (TimeoutException te) {
             Assert.assertTrue(false, "Unable to clicked on add configuration.");
         }
-
         waitExecuter.sleep(3000);
         test.log(LogStatus.PASS, "Successfully clicked on add configuration page.");
 
@@ -72,7 +69,6 @@ public class CUR02 extends BaseClass {
         waitExecuter.sleep(1000);
         userReport.selectRealUser();
         userReport.selectQueue();
-        waitExecuter.sleep(1000);
 
         userReport.assignEmail("sray@unraveldata.com");
         waitExecuter.sleep(1000);
@@ -82,10 +78,11 @@ public class CUR02 extends BaseClass {
         waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Successfully added Topx parameter");
 
-        userReportPageObject.saveschedule.click();
+        userReport.clicksaveschedule();
         waitExecuter.sleep(3000);
         test.log(LogStatus.PASS, "Successfully clicked save sheduele.");
 
-        Log.endTestCase("CUR02_VerifyAddconfigurationtab");
+
+        Log.startTestCase("CUR05_VerifytopXparameterpage");
     }
 }

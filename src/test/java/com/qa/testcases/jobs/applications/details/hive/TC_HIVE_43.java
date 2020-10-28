@@ -5,15 +5,16 @@ import com.qa.base.BaseClass;
 import com.qa.constants.PageConstants;
 import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
+import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.SkipException;
 import org.testng.annotations.Test;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -36,7 +37,7 @@ public class TC_HIVE_43 extends BaseClass {
         TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         AllApps allApps = new AllApps(driver);
-
+        SparkAppsDetailsPage sparkApp = new SparkAppsDetailsPage(driver);
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         LOGGER.info("Navigate to jobs tab from header");
@@ -46,38 +47,23 @@ public class TC_HIVE_43 extends BaseClass {
         waitExecuter.sleep(3000);
         waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
         waitExecuter.waitUntilPageFullyLoaded();
-
         applicationsPageObject.runningAppTab.click();
         waitExecuter.sleep(2000);
-
         // Select cluster
         test.log(LogStatus.INFO, "Select clusterid : " + clusterId);
         LOGGER.info("Select clusterId : " + clusterId);
         allApps.selectCluster(clusterId);
         waitExecuter.sleep(3000);
-
-        // De-Select all app types
-        test.log(LogStatus.INFO, "De-Select all app types");
-        LOGGER.info("De-Select all app types");
-        allApps.deselectAllAppTypes();
-        int hiveAppCount = 0;
-        // Select 'Only' hive type
-        test.log(LogStatus.INFO, "Select 'Only' hive from app types");
-        LOGGER.info("Select 'Only' hive from app types");
-        List<String> appType = allApps.getAllApplicationTypes();
-        for (int i = 0; i < appType.size(); i++) {
-            if (appType.get(i).trim().toLowerCase().contains(PageConstants.AppTypes.HIVE)) {
-                applicationsPageObject.selectOneApplicationType.get(i).click();
-                waitExecuter.sleep(2000);
-                hiveAppCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(i).getText()
-                        .replaceAll("[^\\dA-Za-z ]", "").trim());
-                break;
-            }
-        }
+        // Select 'Only' hive type and get its jobs count
+        test.log(LogStatus.INFO, "Select 'Only' hive from app types and get its jobs count");
+        LOGGER.info("Select 'Only' hive from app types and get its jobs count");
+        sparkApp.clickOnlyLink("Hive");
+        int hiveAppCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
+                .replaceAll("[^\\dA-Za-z ]", "").trim());
         if (hiveAppCount > 0) {
             Set<String> status = new HashSet<String>();
             for (WebElement statusFromTable : applicationsPageObject.getStatusColumnFromTable) {
-				status.add(statusFromTable.getText().trim().toLowerCase());
+                status.add(statusFromTable.getText().trim().toLowerCase());
             }
             Assert.assertTrue(status.contains(PageConstants.JobsStatusType.RUNNING));
             test.log(LogStatus.PASS, "The status contains only Running apps.");
@@ -85,8 +71,14 @@ public class TC_HIVE_43 extends BaseClass {
             Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
                     "The clusterId does not have any application under it and also does not display 'No Data Available' for it"
                             + clusterId);
-            test.log(LogStatus.PASS,
-                    "The clusterId does not have any application under it and 'No Data Available' is displayed");
+            test.log(LogStatus.SKIP, "The clusterId does not have any application under it.");
+            throw new SkipException("The clusterId does not have any application under it");
         }
+        // Reset set filter to default
+        test.log(LogStatus.INFO, "Reset set filter");
+        LOGGER.info("Reset set filter");
+        waitExecuter.sleep(2000);
+        applicationsPageObject.resetButton.click();
+        waitExecuter.sleep(3000);
     }
 }

@@ -5,11 +5,13 @@ import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
+import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.SkipException;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -37,7 +39,7 @@ public class TC_HIVE_39 extends BaseClass {
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         DatePicker datePicker = new DatePicker(driver);
         AllApps allApps = new AllApps(driver);
-
+        SparkAppsDetailsPage sparkApp = new SparkAppsDetailsPage(driver);
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         LOGGER.info("Navigate to jobs tab from header");
@@ -47,40 +49,24 @@ public class TC_HIVE_39 extends BaseClass {
         waitExecuter.sleep(3000);
         waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
         waitExecuter.waitUntilPageFullyLoaded();
-
-        // Select last 7 days from date picker
+        // Select last 30 days from date picker
         test.log(LogStatus.INFO, "Select last 30 days");
         LOGGER.info("Select last 30 days");
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(1000);
         datePicker.selectLast30Days();
         waitExecuter.sleep(2000);
-
         // Select cluster
         test.log(LogStatus.INFO, "Select clusterid : " + clusterId);
         LOGGER.info("Select clusterId : " + clusterId);
         allApps.selectCluster(clusterId);
         waitExecuter.sleep(3000);
-
-        // De-Select all app types
-        test.log(LogStatus.INFO, "De-Select all app types");
-        LOGGER.info("De-Select all app types");
-        allApps.deselectAllAppTypes();
-        int hiveAppCount = 0;
-        // Select 'Only' hive type
-        test.log(LogStatus.INFO, "Select 'Only' hive from app types");
-        LOGGER.info("Select 'Only' hive from app types");
-        List<String> appType = allApps.getAllApplicationTypes();
-        for (int i = 0; i < appType.size(); i++) {
-            if (appType.get(i).trim().toLowerCase().contains("hive")) {
-                applicationsPageObject.selectOneApplicationType.get(i).click();
-                waitExecuter.sleep(2000);
-                hiveAppCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(i).getText()
-                        .replaceAll("[^\\dA-Za-z ]", "").trim());
-                break;
-            }
-        }
-
+        // Select 'Only' hive type and get its jobs count
+        test.log(LogStatus.INFO, "Select 'Only' hive from app types and get its jobs count");
+        LOGGER.info("Select 'Only' hive from app types and get its jobs count");
+        sparkApp.clickOnlyLink("Hive");
+        int hiveAppCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
+                .replaceAll("[^\\dA-Za-z ]", "").trim());
         // Slide the event slider to get min and max value of events
         test.log(LogStatus.INFO, "Slide the event slider to get min and max value of events");
         LOGGER.info("Slide the event slider to get min and max value of events");
@@ -103,7 +89,6 @@ public class TC_HIVE_39 extends BaseClass {
             applicationsPageObject.getDurationFromTable.click();
             waitExecuter.sleep(5000);
             driver.getWindowHandle();
-
             // Click on the first app in table to get efficiency
             test.log(LogStatus.INFO, "Click on the first app in table to get efficiency");
             LOGGER.info("Click on the first app in table to get efficiency");
@@ -113,13 +98,11 @@ public class TC_HIVE_39 extends BaseClass {
                 badgeTitleTextList.add(badgeTitlesList.get(i).getText());
                 LOGGER.info("Badge tag- " + badgeTitlesList.get(i).getText());
             }
-
             // Click on the first app in table to get efficiency
             test.log(LogStatus.INFO, "Navigate back to parent window");
             LOGGER.info("Navigate back to parent window");
             driver.navigate().back();
             waitExecuter.sleep(5000);
-
             // Click on the first app in table to get efficiency
             int countEfficiency = Collections.frequency(badgeTitleTextList, "EFFICIENCY");
             test.log(LogStatus.INFO, "Count of Efficiency badges " + countEfficiency);
@@ -133,9 +116,9 @@ public class TC_HIVE_39 extends BaseClass {
         } else {
             Assert.assertEquals(applicationsPageObject.whenNoApplicationPresent.getText(), "No Data Available",
                     "For 0 application hive 'No Data Available' is not displayed");
-            test.log(LogStatus.PASS, "Table does not contain apps for set duration.");
+            test.log(LogStatus.SKIP, "Hive apps are not available for the selected duration and cluster.");
+            throw new SkipException("Hive apps are not available for the selected duration and cluster");
         }
-
         // Reset events to default
         test.log(LogStatus.INFO, "Reset events to default");
         LOGGER.info("Reset events to default");

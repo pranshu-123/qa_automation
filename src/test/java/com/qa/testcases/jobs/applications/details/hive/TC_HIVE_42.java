@@ -6,11 +6,13 @@ import com.qa.constants.PageConstants;
 import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
+import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.SkipException;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -38,7 +40,7 @@ public class TC_HIVE_42 extends BaseClass {
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         DatePicker datePicker = new DatePicker(driver);
         AllApps allApps = new AllApps(driver);
-
+        SparkAppsDetailsPage sparkApp = new SparkAppsDetailsPage(driver);
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         LOGGER.info("Navigate to jobs tab from header");
@@ -48,7 +50,6 @@ public class TC_HIVE_42 extends BaseClass {
         waitExecuter.sleep(3000);
         waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
         waitExecuter.waitUntilPageFullyLoaded();
-
         // Select last 30 days from date picker
         test.log(LogStatus.INFO, "Select last 30 days");
         LOGGER.info("Select last 30 days");
@@ -56,37 +57,22 @@ public class TC_HIVE_42 extends BaseClass {
         waitExecuter.sleep(1000);
         datePicker.selectLast30Days();
         waitExecuter.sleep(2000);
-
         // Select cluster
         test.log(LogStatus.INFO, "Select clusterid : " + clusterId);
         LOGGER.info("Select clusterId : " + clusterId);
         allApps.selectCluster(clusterId);
         waitExecuter.sleep(3000);
-
-        //De-Select all app types
-        test.log(LogStatus.INFO, "De-Select all app types, select only Hive type");
-        LOGGER.info("De-Select all app types");
-        allApps.deselectAllAppTypes();
-        int hiveAppCount;
-        // Select 'Only' hive type
-        LOGGER.info("Select 'Only' hive from app types");
-        List<String> appType = allApps.getAllApplicationTypes();
-        for (int i = 0; i < appType.size(); i++) {
-            if (appType.get(i).trim().toLowerCase().contains("hive")) {
-                applicationsPageObject.selectOneApplicationType.get(i).click();
-                waitExecuter.sleep(2000);
-                hiveAppCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(i).getText()
-                        .replaceAll("[^\\dA-Za-z ]", "").trim());
-                break;
-            }
-        }
-
+        // Select 'Only' hive type and get its jobs count
+        test.log(LogStatus.INFO, "Select 'Only' hive from app types and get its jobs count");
+        LOGGER.info("Select 'Only' hive from app types and get its jobs count");
+        sparkApp.clickOnlyLink("Hive");
+        int hiveAppCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
+                .replaceAll("[^\\dA-Za-z ]", "").trim());
         // Expand status filter on left pane
         test.log(LogStatus.INFO, "Expand status filter on left pane");
         LOGGER.info("Expand status filter on left pane");
         applicationsPageObject.expandStatus.click();
         waitExecuter.sleep(2000);
-
         // To apply filter - De-select all status types
         test.log(LogStatus.INFO, "To apply status filter - De-select all status types");
         LOGGER.info("To apply status filter - De-select all status types");
@@ -110,7 +96,6 @@ public class TC_HIVE_42 extends BaseClass {
         Assert.assertTrue(listOfStatusTypes.equals(existingStatusTypes),
                 "Status types displayed does not match the expected status list");
         test.log(LogStatus.PASS, "Status types displayed match the expected status list");
-
         // Select single app and assert that table contain its data.
         test.log(LogStatus.INFO, "Select single app and assert that table contain its data.");
         LOGGER.info("Select single app and assert that table contain its data.");
@@ -131,7 +116,6 @@ public class TC_HIVE_42 extends BaseClass {
             Assert.assertEquals(appCount, totalCount, "The app count of " + statusTypes.get(i).getText().trim()
                     + " is not equal to the total count of heading.");
             test.log(LogStatus.PASS, "The status count matches the total count");
-
             if (appCount > 0) {
                 String getStatusTypeFromTable = applicationsPageObject.getStatusFromTable.getText();
                 waitExecuter.sleep(2000);
@@ -145,8 +129,8 @@ public class TC_HIVE_42 extends BaseClass {
                 Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
                         "The clusterId does not have any application under it and also does not display 'No Data Available' for it"
                                 + clusterId);
-                test.log(LogStatus.PASS,
-                        "The clusterId does not have any application under it and 'No Data Available' is displayed");
+                test.log(LogStatus.SKIP, "The clusterId does not have any application under it.");
+                throw new SkipException("The clusterId does not have any application under it.");
             }
             waitExecuter.sleep(1000);
             clickOnIndividualStatus.get(i).click();

@@ -32,7 +32,6 @@ public class TC_HIVE_46 extends BaseClass {
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         AllApps allApps = new AllApps(driver);
         DatePicker datePicker = new DatePicker(driver);
-
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         LOGGER.info("Navigate to jobs tab from header");
@@ -42,7 +41,6 @@ public class TC_HIVE_46 extends BaseClass {
         waitExecuter.sleep(3000);
         waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
         waitExecuter.waitUntilPageFullyLoaded();
-
         // Select last 30 days from date picker
         test.log(LogStatus.INFO, "Select last 30 days");
         LOGGER.info("Select last 30 days");
@@ -55,7 +53,6 @@ public class TC_HIVE_46 extends BaseClass {
         LOGGER.info("Select clusterId : " + clusterId);
         allApps.selectCluster(clusterId);
         waitExecuter.sleep(3000);
-
         // Sort Up by Status
         test.log(LogStatus.INFO, "Sort Up by Status");
         LOGGER.info("Sort up by Status");
@@ -69,7 +66,6 @@ public class TC_HIVE_46 extends BaseClass {
         waitExecuter.sleep(2000);
         Assert.assertTrue(applicationsPageObject.sortDown.isDisplayed(), "Sort down is not working");
         test.log(LogStatus.PASS, "Verified sorting on Status.");
-
         // Sort Up by User
         test.log(LogStatus.INFO, "Sort Up by user");
         LOGGER.info("Sort up by User");
@@ -83,7 +79,6 @@ public class TC_HIVE_46 extends BaseClass {
         waitExecuter.sleep(2000);
         Assert.assertTrue(applicationsPageObject.sortDown.isDisplayed(), "Sort down is not working");
         test.log(LogStatus.PASS, "Verified sorting on Status.");
-
         // Sort Up by ClusterId
         test.log(LogStatus.INFO, "Sort Up by ClusterId");
         LOGGER.info("Sort up by ClusterId");
@@ -97,7 +92,6 @@ public class TC_HIVE_46 extends BaseClass {
         waitExecuter.sleep(2000);
         Assert.assertTrue(applicationsPageObject.sortDown.isDisplayed(), "Sort down is not working");
         test.log(LogStatus.PASS, "Verified sorting on ClusterId.");
-
         // Sort Up by Start Time
         test.log(LogStatus.INFO, "Sort Up by Start Time");
         LOGGER.info("Sort up by Start Time");
@@ -111,7 +105,6 @@ public class TC_HIVE_46 extends BaseClass {
         waitExecuter.sleep(2000);
         Assert.assertTrue(applicationsPageObject.sortDown.isDisplayed(), "Sort down is not working");
         test.log(LogStatus.PASS, "Verified sorting on Start Time.");
-
         // Sort Up by Duration
         test.log(LogStatus.INFO, "Sort Up by Duration");
         LOGGER.info("Sort up by Duration");
@@ -125,7 +118,6 @@ public class TC_HIVE_46 extends BaseClass {
         waitExecuter.sleep(2000);
         Assert.assertTrue(applicationsPageObject.sortDown.isDisplayed(), "Sort down is not working");
         test.log(LogStatus.PASS, "Verified sorting on Duration.");
-
         // Sort Up by Read
         test.log(LogStatus.INFO, "Sort Up by Read");
         LOGGER.info("Sort up by Read");
@@ -139,7 +131,6 @@ public class TC_HIVE_46 extends BaseClass {
         waitExecuter.sleep(2000);
         Assert.assertTrue(applicationsPageObject.sortDown.isDisplayed(), "Sort down is not working");
         test.log(LogStatus.PASS, "Verified sorting on Read.");
-
         // Sort Up by Write
         test.log(LogStatus.INFO, "Sort Up by Write");
         LOGGER.info("Sort up by Write");
@@ -153,13 +144,11 @@ public class TC_HIVE_46 extends BaseClass {
         waitExecuter.sleep(2000);
         Assert.assertTrue(applicationsPageObject.sortDown.isDisplayed(), "Sort down is not working");
         test.log(LogStatus.PASS, "Verified sorting on Write.");
-
         // Refresh the page and reload to original state
         test.log(LogStatus.INFO, "Refresh the page and reload to original state");
         LOGGER.info("Refresh the page and reload to original state");
         waitExecuter.sleep(1000);
         driver.navigate().refresh();
         waitExecuter.sleep(3000);
-
     }
 }

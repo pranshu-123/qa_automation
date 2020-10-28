@@ -20,8 +20,7 @@ public class TC_HIVE_47 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void VerifySortByParentApp(String clusterId) {
-        test = extent.startTest("TC_HIVE_47.VerifySortByParentApp",
-                "Verify that on sorting works for Parent App");
+        test = extent.startTest("TC_HIVE_47.VerifySortByParentApp", "Verify that on sorting works for Parent App");
         test.assignCategory("App Details - Hive");
         test.log(LogStatus.INFO, "Login to the application");
 
@@ -33,7 +32,6 @@ public class TC_HIVE_47 extends BaseClass {
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         AllApps allApps = new AllApps(driver);
         DatePicker datePicker = new DatePicker(driver);
-
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         LOGGER.info("Navigate to jobs tab from header");
@@ -43,7 +41,6 @@ public class TC_HIVE_47 extends BaseClass {
         waitExecuter.sleep(3000);
         waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
         waitExecuter.waitUntilPageFullyLoaded();
-
         // Select last 30 days from date picker
         test.log(LogStatus.INFO, "Select last 30 days");
         LOGGER.info("Select last 30 days");
@@ -51,13 +48,11 @@ public class TC_HIVE_47 extends BaseClass {
         waitExecuter.sleep(1000);
         datePicker.selectLastMonth();
         waitExecuter.sleep(2000);
-
         // Select cluster
         test.log(LogStatus.INFO, "Select clusterid : " + clusterId);
         LOGGER.info("Select clusterId : " + clusterId);
         allApps.selectCluster(clusterId);
         waitExecuter.sleep(3000);
-
         // Sort down by Parent App
         test.log(LogStatus.INFO, "Sort up by Parent App");
         LOGGER.info("Sort up by Parent App");
@@ -71,7 +66,7 @@ public class TC_HIVE_47 extends BaseClass {
         waitExecuter.sleep(2000);
         Assert.assertTrue(applicationsPageObject.sortDown.isDisplayed(), "Sort down is not working");
         test.log(LogStatus.PASS, "Verified sorting on Parent App.");
-        //Refresh the page and reload to original state
+        // Refresh the page and reload to original state
         test.log(LogStatus.INFO, "Refresh the page and reload to original state");
         LOGGER.info("Refresh the page and reload to original state");
         waitExecuter.sleep(1000);

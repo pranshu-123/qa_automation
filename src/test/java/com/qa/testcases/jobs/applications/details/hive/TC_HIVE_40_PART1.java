@@ -5,12 +5,14 @@ import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
+import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.SkipException;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -37,7 +39,7 @@ public class TC_HIVE_40_PART1 extends BaseClass {
         DatePicker datePicker = new DatePicker(driver);
         AllApps allApps = new AllApps(driver);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
-
+        SparkAppsDetailsPage sparkApp = new SparkAppsDetailsPage(driver);
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         LOGGER.info("Navigate to jobs tab from header");
@@ -47,40 +49,24 @@ public class TC_HIVE_40_PART1 extends BaseClass {
         waitExecuter.sleep(3000);
         waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
         waitExecuter.waitUntilPageFullyLoaded();
-
-        // Select last 7 days from date picker
+        // Select last 30 days from date picker
         test.log(LogStatus.INFO, "Select last 30 days");
         LOGGER.info("Select last 30 days");
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(1000);
         datePicker.selectLast30Days();
         waitExecuter.sleep(2000);
-
         // Select cluster
         test.log(LogStatus.INFO, "Select clusterid : " + clusterId);
         LOGGER.info("Select clusterId : " + clusterId);
         allApps.selectCluster(clusterId);
         waitExecuter.sleep(3000);
-
-        // De-Select all app types
-        test.log(LogStatus.INFO, "De-Select all app types");
-        LOGGER.info("De-Select all app types");
-        allApps.deselectAllAppTypes();
-        int hiveAppCount = 0;
-        // Select 'Only' hive type
-        test.log(LogStatus.INFO, "Select 'Only' hive from app types");
-        LOGGER.info("Select 'Only' hive from app types");
-        List<String> appType = allApps.getAllApplicationTypes();
-        for (int i = 0; i < appType.size(); i++) {
-            if (appType.get(i).trim().toLowerCase().contains("hive")) {
-                applicationsPageObject.selectOneApplicationType.get(i).click();
-                waitExecuter.sleep(2000);
-                hiveAppCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(i).getText()
-                        .replaceAll("[^\\dA-Za-z ]", "").trim());
-                break;
-            }
-        }
-
+        // Select 'Only' hive type and get its jobs count
+        test.log(LogStatus.INFO, "Select 'Only' hive from app types and get its jobs count");
+        LOGGER.info("Select 'Only' hive from app types and get its jobs count");
+        sparkApp.clickOnlyLink("Hive");
+        int hiveAppCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
+                .replaceAll("[^\\dA-Za-z ]", "").trim());
         // Get 1st username from table for hive apps
         String filterByUsername = applicationsPageObject.getUsernameFromTable.getText().trim();
         LOGGER.info("User name should be filtered by- " + filterByUsername);
@@ -107,7 +93,6 @@ public class TC_HIVE_40_PART1 extends BaseClass {
                 break;
             }
         }
-
         applicationsPageObject.queueNameSearchBox.click();
         waitExecuter.sleep(1000);
         applicationsPageObject.queueNameSearchBox.sendKeys(filterByQueue);
@@ -123,35 +108,33 @@ public class TC_HIVE_40_PART1 extends BaseClass {
                 break;
             }
         }
-
         executor.executeScript("arguments[0].scrollIntoView();", applicationsPageObject.jobsPageHeader);
         waitExecuter.sleep(2000);
-
         int totalCount = Integer
                 .parseInt(applicationsPageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
         waitExecuter.sleep(2000);
-
         if (totalCount > 0) {
             String usernameFromTable = applicationsPageObject.getUsernameFromTable.getAttribute("title");
             LOGGER.info("Username displayed in table " + usernameFromTable);
             Assert.assertEquals(usernameFromTable, usernameSelected,
                     "The application in table contains username other than that of " + usernameFromTable);
-        } else
+            test.log(LogStatus.PASS, "The application in table contains username i.e. selected in filter");
+        } else {
             Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
                     "The clusterId does not have any application under it and also does not display 'No Data Available' for it");
-
+            test.log(LogStatus.SKIP, "The clusterId does not have any application under it.");
+            throw new SkipException("The clusterId does not have any application under it");
+        }
         waitExecuter.sleep(2000);
         applicationsPageObject.userSearchBox.click();
         waitExecuter.sleep(2000);
         userList.get(0).click();
         waitExecuter.sleep(2000);
-
         // Reset username filter to default
         test.log(LogStatus.INFO, "Reset username filter");
         LOGGER.info("Reset username filter");
         waitExecuter.sleep(2000);
         applicationsPageObject.resetButton.click();
         waitExecuter.sleep(3000);
-
     }
 }

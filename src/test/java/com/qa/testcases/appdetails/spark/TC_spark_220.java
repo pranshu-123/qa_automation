@@ -10,6 +10,7 @@ import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.LoggerFactory;
@@ -60,14 +61,14 @@ public class TC_spark_220 extends BaseClass {
         if (appCount > 0) {
             appsDetailsPage.navigateToFailedAppsAppPage(applicationsPageObject, sparkPageObj, test, false);
             test.log(LogStatus.PASS, "The Failed apps have all kpis listed along with attempt data ");
+            //Close apps details page
+            MouseActions.clickOnElement(driver, sparkPageObj.closeAppsPageTab);
         } else {
+            test.log(LogStatus.SKIP, "No Spark Application present");
             logger.error("No Spark Application present in the " + clusterId + " cluster for the time span " +
-                    "of 90 days");
+                "of 90 days");
         }
-        //Close apps details page
-        sparkPageObj.closeAppsPageTab.click();
     }
-
 }
 
 

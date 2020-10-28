@@ -547,10 +547,6 @@ public class SparkAppsDetailsPage {
           }
           List<WebElement> rddNumberList = sparkPageObj.rddBlockNumList;
           verifyAssertFalse(rddNumberList.isEmpty(), sparkPageObj, "Rdd block numbers are present");
-//          for (int r =0; r< rddNumberList.size(); r++){
-//            String text = rddNumberList.get(r).getAttribute("aria-describedby");
-//            System.out.println("The aria-describedby text is "+ text);
-//          }
         }
         List<WebElement> stageHeaderList = sparkPageObj.stageHeaders;
         for (int i = 0; i < stageHeaderList.size(); i++) {
@@ -741,9 +737,9 @@ public class SparkAppsDetailsPage {
     waitExecuter.sleep(2000);
 
     //Select cluster
-//    logger.info("Select Cluster: " + clusterId);
-//    allApps.selectCluster(clusterId);
-//    waitExecuter.sleep(3000);
+    logger.info("Select Cluster: " + clusterId);
+    allApps.selectCluster(clusterId);
+    waitExecuter.sleep(3000);
 
     datePicker.clickOnDatePicker();
     waitExecuter.sleep(1000);

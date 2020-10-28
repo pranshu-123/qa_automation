@@ -69,6 +69,273 @@ public class SparkAppsDetailsPage {
         pieChartInternalVal);
   }
 
+  /**
+   * Method to validate AppSummary Analysis tab.
+   */
+  public void validateAnalysisTab(SparkAppsDetailsPageObject sparkAppPageObj){
+    ArrayList<String> efficiency = new ArrayList<>();
+    ArrayList<String> recommendation = new ArrayList<>();
+    List<WebElement> insightType = sparkAppPageObj.insightsType;
+    verifyAssertFalse(insightType.isEmpty(), sparkAppPageObj, "No Insights generated");
+    for (int j = 0; j < insightType.size(); j++) {
+      String insights = insightType.get(j).getText();
+      logger.info("Insight generated are " + insights);
+      if (insights.equals("EFFICIENCY")) {
+        // Store it in efficiency array
+        efficiency.add(insights);
+      } else {
+        //Store it in recommendation array
+        recommendation.add(insights);
+      }
+    }
+    verifyAssertFalse((efficiency.isEmpty() && recommendation.isEmpty()), sparkAppPageObj, "No insights generated");
+    List<WebElement> collapsableList = sparkAppPageObj.analysisCollapse;
+    try {
+      for (int c = 0; c < collapsableList.size(); c++) {
+        collapsableList.get(c).click();
+      }
+    } catch (Exception ex) {
+      throw new AssertionError("Caught exception while clicking the collapsable" +
+          " icon for insights.\n" + ex.getMessage());
+    }
+  }
+
+  /**
+   * Method to validate AppSummary Resource tab.
+   */
+  public void validateResourcesTab(SparkAppsDetailsPageObject sparkAppPageObj){
+    String[] expectedGraphTitle = {"Task Attempts", "Containers", "Vcores", "Memory", "Metrics"};
+    List<WebElement> graphTitleList = sparkAppPageObj.resourcesGraphTitle;
+    verifyAssertFalse(graphTitleList.isEmpty(), sparkAppPageObj, "No title displayed");
+    List<WebElement> allGraphsList = sparkAppPageObj.resourcesAllGraphs;
+    verifyAssertFalse(allGraphsList.isEmpty(), sparkAppPageObj, "No graphs displayed");
+    for (int t = 0; t < graphTitleList.size(); t++) {
+      String graphTitle = graphTitleList.get(t).getText();
+      logger.info("Graph title is " + graphTitle);
+      verifyAssertTrue(Arrays.asList(expectedGraphTitle).contains(graphTitle), sparkAppPageObj," The expected" +
+          " Graph title doesnot match with the titles in the UI");
+      verifyAssertTrue(allGraphsList.get(t).isDisplayed(), sparkAppPageObj," All Graphs are not displayed");
+      switch (graphTitle) {
+        case "Task Attempts":
+          logger.info("Validating the Graph " + graphTitle);
+          validateTaskAttemptTab(sparkAppPageObj);
+          //Assert.assertSame(totalTaskCnt, pieChartInternalVal, "The Values are not same");
+          break;
+        case "Containers":
+        case "Metrics":
+          logger.info("Validating the Graph " + graphTitle);
+          WebElement metricDropDown = sparkAppPageObj.resourcesMetricsDropDown;
+          MouseActions.clickOnElement(driver, metricDropDown);
+          List<WebElement> dropDownList = sparkAppPageObj.resourcesMetricsDropDownData;
+          waitExecuter.sleep(2000);
+          verifyAssertFalse(dropDownList.isEmpty(), sparkAppPageObj, " No contents listed in the dropdown");
+          String[] expectetContents = {"availableMemory", "vmRss", "systemCpuLoad",
+              "processCpuLoad", "gcLoad", "maxHeap", "usedHeap"};
+          for (int d = 0; d < dropDownList.size(); d++) {
+            String metric = dropDownList.get(d).getText();
+            logger.info("The metric is " + metric);
+            verifyAssertTrue(Arrays.asList(expectetContents).contains(metric), sparkAppPageObj, " The expected" +
+                " metric is not listed in the drop down box");
+            //click on the dropdown list element and validate the graph
+            MouseActions.clickOnElement(driver, dropDownList.get(d));
+            List<WebElement> resourcesMetricsPlotGraphList = sparkAppPageObj.resourcesMetricsPlotGraph;
+            List<WebElement> metricLegendList = sparkAppPageObj.resourcesMetricsPlotGraphLegend;
+            Assert.assertEquals(resourcesMetricsPlotGraphList.size(), metricLegendList.size(),
+                "The number of executors in the legend do not match to the ones plotted in the graph");
+            MouseActions.clickOnElement(driver, metricDropDown);
+          }
+        case "Vcores":
+        case "Memory":
+          logger.info("Validating the Graph " + graphTitle);
+          break;
+
+      }
+      verifyAssertTrue(allGraphsList.get(0).isDisplayed(), sparkAppPageObj, " No graph is displayed for "
+          + graphTitle);
+    }
+  }
+
+  /**
+   * Method to validate AppSummary Errors tab.
+   */
+  public void validateErrorsTab(SparkAppsDetailsPageObject sparkAppPageObj){
+    String[] expectedErrorCategory = {"driver", "executor-1", "executor-2", "rm-diagnostics"};
+    List<WebElement> errorTypeList = sparkAppPageObj.errorCategories;
+    verifyAssertFalse(errorTypeList.isEmpty(), sparkAppPageObj," Errors tab is not populated");
+    for (int e = 0; e < errorTypeList.size(); e++) {
+      String errorType = errorTypeList.get(e).getText();
+      logger.info("Error Type is " + errorType);
+      verifyAssertTrue(Arrays.asList(expectedErrorCategory).contains(errorType), sparkAppPageObj,
+          " The UI error types displayed does not match with the Expected error types ");
+    }
+    List<WebElement> errorCollapsableList = sparkAppPageObj.errorCollapse;
+    verifyAssertFalse(errorCollapsableList.isEmpty(), sparkAppPageObj, " No collapsable icon present");
+    List<WebElement> errorContentList = sparkAppPageObj.errorContents;
+    verifyAssertFalse(errorContentList.isEmpty(), sparkAppPageObj, " No error contents in the error tab");
+    //TODO check for specific error string in the content list.
+    boolean foundErrorMsg = false;
+    String msg = "";
+//    for (int c = 0; c < errorContentList.size(); c++) {
+//      String expectedErrorString = "Exception";
+//      String actualErrorString = errorContentList.get(c).getText();
+//      if (actualErrorString.contains(expectedErrorString)) {
+//        foundErrorMsg = true;
+//        msg = "Found the expected error message in the Errors Tab " +
+//            "Expected = " + expectedErrorString + "Actual Error Message = " + actualErrorString;
+//        break;
+//      }
+//    }
+//    verifyAssertTrue(foundErrorMsg, sparkAppPageObj, " Expected Error message not present in the Error tab");
+//    logger.info(msg);
+    for (int c = 0; c < errorCollapsableList.size(); c++) {
+      MouseActions.clickOnElement(driver, errorCollapsableList.get(c));
+    }
+  }
+
+  public void validateConfigurationTab(SparkAppsDetailsPageObject sparkAppPageObj){
+    String[] expectedKeyWords = {"METADATA", "MEMORY", "LIMIT", "RESOURCES", "CPU", "NET",
+        "YARN", "DEPLOY"};
+    List<WebElement> keyWordsList = sparkAppPageObj.configKeywords;
+    verifyAssertFalse(keyWordsList.isEmpty(), sparkAppPageObj, " Keywords not found");
+    String beforeResetProp = sparkAppPageObj.configPropNum.getText();
+    int propNum = Integer.parseInt(beforeResetProp.split("\\s+")[0]);
+    logger.info("Number of properties displayed by default are  " + propNum);
+
+    //Verify if property key value is present:
+    List<WebElement> propKeyList = sparkAppPageObj.configPropKey;
+    List<WebElement> propValueList = sparkAppPageObj.configPropValue;
+    logger.info("PropKey size = " + propKeyList.size() + " propVal size = " +
+        propValueList.size());
+    verifyAssertFalse((propKeyList.isEmpty() && propValueList.isEmpty()), sparkAppPageObj, " Key/Value is empty");
+    Assert.assertEquals(propKeyList.size(), propValueList.size(), "One of the key/Value " +
+        "is missing");
+
+    //Verify the keywords are present and should be clickable
+    for (int k = 0; k < keyWordsList.size(); k++) {
+      String keyword = keyWordsList.get(k).getText();
+      logger.info("Keyword Type is " + keyword);
+      verifyAssertTrue(Arrays.asList(expectedKeyWords).contains(keyword), sparkAppPageObj,
+          " Keywords displayed on the UI doesnot match with the expected keywords");
+      MouseActions.clickOnElement(driver, keyWordsList.get(k));
+      waitExecuter.sleep(2000);
+    }
+    //Check RESET buttons sets default props
+    MouseActions.clickOnElement(driver, sparkAppPageObj.resetButton);
+    waitExecuter.sleep(3000);
+    String afterResetProp = sparkAppPageObj.configPropNum.getText();
+    logger.info("No. of Properties displayed by default " + beforeResetProp + "\n " +
+        "No. of Properties displayed after RESET " + afterResetProp);
+    Assert.assertEquals(afterResetProp, beforeResetProp, "The properties have not been reset " +
+        "to default");
+  }
+
+  public void validateLogsTab(SparkAppsDetailsPageObject sparkAppPageObj){
+    List<WebElement> executorNameList = sparkAppPageObj.logExecutorNames;
+    verifyAssertFalse(executorNameList.isEmpty(), sparkAppPageObj," No executors listed in the Logs Tab");
+    List<WebElement> logCollapsableList = sparkAppPageObj.logElementCollapsable;
+    verifyAssertFalse(logCollapsableList.isEmpty(), sparkAppPageObj, " No executors listed in the Logs Tab");
+    try {
+      int cnt = 0;
+      for (int c = 0; c < logCollapsableList.size(); c++) {
+        if (cnt != 0)
+          MouseActions.clickOnElement(driver, logCollapsableList.get(c));
+        waitExecuter.sleep(5000);
+        WebElement contents = sparkAppPageObj.logExecutorContents;
+        verifyAssertTrue(contents.isDisplayed(), sparkAppPageObj, " No logs found");
+        WebElement showFullLogs = sparkAppPageObj.showFullLogLink;
+        logCollapsableList.get(c).click();
+        cnt += 1;
+      }
+    } catch (NoSuchElementException ex) {
+      throw new AssertionError("Caught exception while clicking the collapsable icon for insights.\n" +
+          ex.getMessage());
+    }
+  }
+
+  public String validateTagsTab(SparkAppsDetailsPageObject sparkAppPageObj){
+    List<WebElement> tagTableHeader = sparkAppPageObj.tagTableHeader;
+    verifyAssertFalse(tagTableHeader.isEmpty(), sparkAppPageObj, " Tags header is not populated");
+    List<WebElement> tagKeyList = sparkAppPageObj.tagKey;
+    List<WebElement> tagValueList = sparkAppPageObj.tagValue;
+    verifyAssertFalse((tagKeyList.isEmpty() || tagValueList.isEmpty()), sparkAppPageObj, "The tags key value pair are empty");
+    String tagValue = "";
+    for (int k = 0; k < tagKeyList.size(); k++) {
+      String key = tagKeyList.get(k).getText();
+      String value = tagValueList.get(k).getText();
+      logger.info("The key value pair is " + "Key = " + key + " | Value = " + value);
+      verifyAssertTrue(key.length() > 0, sparkAppPageObj, "Key is not present");
+      verifyAssertTrue(value.length() > 0, sparkAppPageObj, "Key is not present");
+      if (key.equals("JobType"))
+        tagValue = value;
+    }
+    return tagValue;
+  }
+
+  public void validateTimingTab(SparkAppsDetailsPageObject sparkAppPageObj){
+    Actions action = new Actions(driver);
+    List<WebElement> subTabList = sparkAppPageObj.timingsSubTabs;
+    Assert.assertFalse(subTabList.isEmpty(), "No sub tabs available");
+    String[] expectedSubTabList = {"Task Time", "App Time"};
+    String[] expectedTTLegendNames = {"Input Stages", "Output Stages", "Processing Stages"};
+    String[] expectedATLegendNames = {"Queue Time", "Driver Time", "Job Time"};
+    for (int t = 0; t < subTabList.size(); t++) {
+      String subTabName = subTabList.get(t).getText();
+      logger.info("The Timings subTab is " + subTabName);
+      verifyAssertTrue(Arrays.asList(expectedSubTabList).contains(subTabName),sparkAppPageObj,
+          " Tab list displayed in the UI doesnot match with the expected list of tabs");
+      MouseActions.clickOnElement(driver, subTabList.get(t));
+      waitExecuter.sleep(1000);
+      String titleName = sparkAppPageObj.timingsTabTitle.getText();
+      logger.info("The Timings subTabs Title is " + titleName);
+      verifyAssertTrue(sparkAppPageObj.pieChart.isDisplayed(), sparkAppPageObj, " Piechart for Task Attempts" +
+          " is not displayed");
+      if (subTabName.equals("Task Time")) {
+        List<WebElement> legendNameList = sparkAppPageObj.legendNames;
+        verifyAssertFalse(legendNameList.isEmpty(), sparkAppPageObj, "Empty legend list");
+        for (int l = 0; l < legendNameList.size(); l++) {
+          String legendName = legendNameList.get(l).getText();
+          logger.info("The Legends for subTab " + subTabName + " is " + legendName);
+          verifyAssertTrue(Arrays.asList(expectedTTLegendNames).contains(legendName),sparkAppPageObj,
+              " The legends displayed in the UI for Task Time doesnot match to the expected list of legends");
+          waitExecuter.sleep(1000);
+          if (legendName.equals("Processing Stages")) {
+            WebElement ele = sparkAppPageObj.processingStage;
+            verifyTimingStages(action, ele, sparkAppPageObj, legendName);
+          }
+          else if (legendName.equals("Input Stages")) {
+            WebElement ele = sparkAppPageObj.inputStage;
+            verifyTimingStages(action, ele, sparkAppPageObj, legendName);
+          } else {
+            WebElement ele = sparkAppPageObj.outputStage;
+            verifyTimingStages(action, ele, sparkAppPageObj, legendName);
+          }
+        }
+      } else {
+        List<WebElement> legendNameList = sparkAppPageObj.legendNames;
+        verifyAssertFalse(legendNameList.isEmpty(), sparkAppPageObj, "Empty legend list for APP TIME");
+        for (int l = 0; l < legendNameList.size(); l++) {
+          waitExecuter.sleep(1000);
+          String legendName = legendNameList.get(l).getText();
+          verifyAssertTrue(Arrays.asList(expectedATLegendNames).contains(legendName),sparkAppPageObj,
+              " The legends displayed in the UI for App Time doesnot match to the expected list of legends");
+          //waitExecuter.sleep(2000);
+          if (legendName.equals("Driver Time")) {
+            WebElement ele = sparkAppPageObj.driverDrillDown;
+            MouseActions.clickOnElement(driver, ele);
+            String[] expectedDriverLegends = {"FileCommit Time", "File Setup Time", "Others"};
+            List<WebElement> driverLegendNameList = sparkAppPageObj.legendNames;
+            verifyAssertFalse(driverLegendNameList.isEmpty(), sparkAppPageObj, "Empty legend list for DRIVER TIME");
+            for (int d = 0; d < driverLegendNameList.size(); d++) {
+              String driverLegend = driverLegendNameList.get(d).getText();
+              verifyAssertTrue(Arrays.asList(expectedDriverLegends).contains(driverLegend),sparkAppPageObj,
+                  " The legends displayed in the UI for App Time does not match to the expected list of legends");
+            }
+            driverLegendNameList.clear();
+          }
+        }
+      }
+    }
+  }
 
   /**
    * Method to verify the summary tabs in the right pane of the App Details page
@@ -86,280 +353,47 @@ public class SparkAppsDetailsPage {
       if (tabName.equals(verifyTabName)) {
         switch (verifyTabName) {
           case "Analysis":
-            ArrayList<String> efficiency = new ArrayList<>();
-            ArrayList<String> recommendation = new ArrayList<>();
-            List<WebElement> insightType = sparkAppPageObj.insightsType;
-            verifyAssertFalse(insightType.isEmpty(), sparkAppPageObj, "No Insights generated");
-            for (int j = 0; j < insightType.size(); j++) {
-              String insights = insightType.get(j).getText();
-              logger.info("Insight generated are " + insights);
-              if (insights.equals("EFFICIENCY")) {
-                // Store it in efficiency array
-                efficiency.add(insights);
-              } else {
-                //Store it in recommendation array
-                recommendation.add(insights);
-              }
-            }
-            verifyAssertFalse((efficiency.isEmpty() && recommendation.isEmpty()), sparkAppPageObj, "No insights generated");
-            List<WebElement> collapsableList = sparkAppPageObj.analysisCollapse;
-            try {
-              for (int c = 0; c < collapsableList.size(); c++) {
-                collapsableList.get(c).click();
-              }
-            } catch (Exception ex) {
-              throw new AssertionError("Caught exception while clicking the collapsable" +
-                  " icon for insights.\n" + ex.getMessage());
-            }
+            validateAnalysisTab(sparkAppPageObj);
             test.log(LogStatus.PASS, "Analysis tab is populated");
             break;
           case "Resources":
             MouseActions.clickOnElement(driver, appsTabList.get(i));
             waitExecuter.sleep(3000);
-            String[] expectedGraphTitle = {"Task Attempts", "Containers", "Vcores", "Memory", "Metrics"};
-            List<WebElement> graphTitleList = sparkAppPageObj.resourcesGraphTitle;
-            verifyAssertFalse(graphTitleList.isEmpty(), sparkAppPageObj, "No title displayed");
-            List<WebElement> allGraphsList = sparkAppPageObj.resourcesAllGraphs;
-            verifyAssertFalse(allGraphsList.isEmpty(), sparkAppPageObj, "No graphs displayed");
-            for (int t = 0; t < graphTitleList.size(); t++) {
-              String graphTitle = graphTitleList.get(t).getText();
-              logger.info("Graph title is " + graphTitle);
-              verifyAssertTrue(Arrays.asList(expectedGraphTitle).contains(graphTitle), sparkAppPageObj," The expected" +
-                  " Graph title doesnot match with the titles in the UI");
-              verifyAssertTrue(allGraphsList.get(t).isDisplayed(), sparkAppPageObj," All Graphs are not displayed");
-              switch (graphTitle) {
-                case "Task Attempts":
-                  logger.info("Validating the Graph " + graphTitle);
-                  validateTaskAttemptTab(sparkAppPageObj);
-                  //Assert.assertSame(totalTaskCnt, pieChartInternalVal, "The Values are not same");
-                  break;
-                case "Containers":
-                case "Metrics":
-                  logger.info("Validating the Graph " + graphTitle);
-                  WebElement metricDropDown = sparkAppPageObj.resourcesMetricsDropDown;
-                  MouseActions.clickOnElement(driver, metricDropDown);
-                  List<WebElement> dropDownList = sparkAppPageObj.resourcesMetricsDropDownData;
-                  verifyAssertFalse(dropDownList.isEmpty(), sparkAppPageObj, " No contents listed in the dropdown");
-                  String[] expectetContents = {"availableMemory", "vmRss", "systemCpuLoad",
-                      "processCpuLoad", "gcLoad", "maxHeap", "usedHeap"};
-                  for (int d = 0; d < dropDownList.size(); d++) {
-                    String metric = dropDownList.get(d).getText();
-                    logger.info("The metric is " + metric);
-                    verifyAssertTrue(Arrays.asList(expectetContents).contains(metric), sparkAppPageObj, " The expected" +
-                        " metric is not listed in the drop down box");
-                    //click on the dropdown list element and validate the graph
-                    MouseActions.clickOnElement(driver, dropDownList.get(d));
-                    List<WebElement> resourcesMetricsPlotGraphList = sparkAppPageObj.resourcesMetricsPlotGraph;
-                    List<WebElement> metricLegendList = sparkAppPageObj.resourcesMetricsPlotGraphLegend;
-                    Assert.assertEquals(resourcesMetricsPlotGraphList.size(), metricLegendList.size(),
-                        "The number of executors in the legend do not match to the ones plotted in the graph");
-                    MouseActions.clickOnElement(driver, metricDropDown);
-                  }
-                case "Vcores":
-                case "Memory":
-                  logger.info("Validating the Graph " + graphTitle);
-                  break;
-
-              }
-              verifyAssertTrue(allGraphsList.get(0).isDisplayed(), sparkAppPageObj, " No graph is displayed for "
-                  + graphTitle);
-            }
-            break;
+            validateResourcesTab(sparkAppPageObj);
+          break;
           case "Errors":
-            String[] expectedErrorCategory = {"driver", "executor-1", "executor-2", "rm-diagnostics"};
             MouseActions.clickOnElement(driver, appsTabList.get(i));
             waitExecuter.sleep(3000);
-            List<WebElement> errorTypeList = sparkAppPageObj.errorCategories;
-            verifyAssertFalse(errorTypeList.isEmpty(), sparkAppPageObj," Errors tab is not populated");
-            for (int e = 0; e < errorTypeList.size(); e++) {
-              String errorType = errorTypeList.get(e).getText();
-              logger.info("Error Type is " + errorType);
-              verifyAssertTrue(Arrays.asList(expectedErrorCategory).contains(errorType), sparkAppPageObj,
-                  " The UI error types displayed does not match with the Expected error types ");
-            }
-            List<WebElement> errorCollapsableList = sparkAppPageObj.errorCollapse;
-            verifyAssertFalse(errorCollapsableList.isEmpty(), sparkAppPageObj, " No collapsable icon present");
-            List<WebElement> errorContentList = sparkAppPageObj.errorContents;
-            verifyAssertFalse(errorContentList.isEmpty(), sparkAppPageObj, " No error contents in the error tab");
-            //TODO check for specific error string in the content list.
-            boolean foundErrorMsg = false;
-            String msg = "";
-            for (int c = 0; c < errorContentList.size(); c++) {
-              String expectedErrorString = "Exception";
-              String actualErrorString = errorContentList.get(c).getText();
-              if (actualErrorString.contains(expectedErrorString)) {
-                foundErrorMsg = true;
-                msg = "Found the expected error message in the Errors Tab " +
-                    "Expected = " + expectedErrorString + "Actual Error Message = " + actualErrorString;
-                break;
-              }
-            }
-            verifyAssertTrue(foundErrorMsg, sparkAppPageObj, " Expected Error message not present in the Error tab");
-            logger.info(msg);
-            for (int c = 0; c < errorCollapsableList.size(); c++) {
-              MouseActions.clickOnElement(driver, errorCollapsableList.get(c));
-            }
+            validateErrorsTab(sparkAppPageObj);
             test.log(LogStatus.PASS, "Errors tab is populated");
             break;
           case "Configuratio...":
             MouseActions.clickOnElement(driver, appsTabList.get(i));
             waitExecuter.sleep(10000);
-            String[] expectedKeyWords = {"METADATA", "MEMORY", "LIMIT", "RESOURCES", "CPU", "NET",
-                "YARN", "DEPLOY"};
-            List<WebElement> keyWordsList = sparkAppPageObj.configKeywords;
-            verifyAssertFalse(keyWordsList.isEmpty(), sparkAppPageObj, " Keywords not found");
-            String beforeResetProp = sparkAppPageObj.configPropNum.getText();
-            int propNum = Integer.parseInt(beforeResetProp.split("\\s+")[0]);
-            logger.info("Number of properties displayed by default are  " + propNum);
-
-            //Verify if property key value is present:
-            List<WebElement> propKeyList = sparkAppPageObj.configPropKey;
-            List<WebElement> propValueList = sparkAppPageObj.configPropValue;
-            logger.info("PropKey size = " + propKeyList.size() + " propVal size = " +
-                propValueList.size());
-            verifyAssertFalse((propKeyList.isEmpty() && propValueList.isEmpty()), sparkAppPageObj, " Key/Value is empty");
-            Assert.assertEquals(propKeyList.size(), propValueList.size(), "One of the key/Value " +
-                "is missing");
-
-            //Verify the keywords are present and should be clickable
-            for (int k = 0; k < keyWordsList.size(); k++) {
-              String keyword = keyWordsList.get(k).getText();
-              logger.info("Keyword Type is " + keyword);
-              verifyAssertTrue(Arrays.asList(expectedKeyWords).contains(keyword), sparkAppPageObj,
-                  " Keywords displayed on the UI doesnot match with the expected keywords");
-              MouseActions.clickOnElement(driver, keyWordsList.get(k));
-              waitExecuter.sleep(2000);
-            }
-            //Check RESET buttons sets default props
-            MouseActions.clickOnElement(driver, sparkAppPageObj.resetButton);
-            waitExecuter.sleep(3000);
-            String afterResetProp = sparkAppPageObj.configPropNum.getText();
-            logger.info("No. of Properties displayed by default " + beforeResetProp + "\n " +
-                "No. of Properties displayed after RESET " + afterResetProp);
-            Assert.assertEquals(afterResetProp, beforeResetProp, "The properties have not been reset " +
-                "to default");
+            validateConfigurationTab(sparkAppPageObj);
             break;
           case "Logs":
             MouseActions.clickOnElement(driver, appsTabList.get(i));
             waitExecuter.sleep(10000);
-            List<WebElement> executorNameList = sparkAppPageObj.logExecutorNames;
-            verifyAssertFalse(executorNameList.isEmpty(), sparkAppPageObj," No executors listed in the Logs Tab");
-            List<WebElement> logCollapsableList = sparkAppPageObj.logElementCollapsable;
-            verifyAssertFalse(logCollapsableList.isEmpty(), sparkAppPageObj, " No executors listed in the Logs Tab");
-            try {
-              int cnt = 0;
-              for (int c = 0; c < logCollapsableList.size(); c++) {
-                if (cnt != 0)
-                  MouseActions.clickOnElement(driver, logCollapsableList.get(c));
-                waitExecuter.sleep(5000);
-                WebElement contents = sparkAppPageObj.logExecutorContents;
-                verifyAssertTrue(contents.isDisplayed(), sparkAppPageObj, " No logs found");
-                WebElement showFullLogs = sparkAppPageObj.showFullLogLink;
-                logCollapsableList.get(c).click();
-                cnt += 1;
-              }
-            } catch (NoSuchElementException ex) {
-              throw new AssertionError("Caught exception while clicking the collapsable icon for insights.\n" +
-                  ex.getMessage());
-            }
-
+            validateLogsTab(sparkAppPageObj);
             break;
           case "Tags":
             MouseActions.clickOnElement(driver, appsTabList.get(i));
-            //         appsTabList.get(i).click();
             waitExecuter.sleep(3000);
-            List<WebElement> tagTableHeader = sparkAppPageObj.tagTableHeader;
-            verifyAssertFalse(tagTableHeader.isEmpty(), sparkAppPageObj, " Tags header is not populated");
-            List<WebElement> tagKeyList = sparkAppPageObj.tagKey;
-            List<WebElement> tagValueList = sparkAppPageObj.tagValue;
-            verifyAssertFalse((tagKeyList.isEmpty() || tagValueList.isEmpty()), sparkAppPageObj, "The tags key value pair are empty");
-            String tagValue = "";
-            for (int k = 0; k < tagKeyList.size(); k++) {
-              String key = tagKeyList.get(k).getText();
-              String value = tagValueList.get(k).getText();
-              logger.info("The key valus pair is " + "Key = " + key + " | Value = " + value);
-              System.out.println("The key valus pair is " + "Key = " + key + " | Value = " + value);
-              verifyAssertTrue(key.length() > 0, sparkAppPageObj, "Key is not present");
-              verifyAssertTrue(value.length() > 0, sparkAppPageObj, "Key is not present");
-              if (key.equals("JobType"))
-                tagValue = value;
-            }
+            String tagValue = validateTagsTab(sparkAppPageObj);
             test.log(LogStatus.PASS, "Tags tab is populated");
-            System.out.println("REturnig tag value as " + tagValue);
             return tagValue;
           //  break;
           case "Program":
             MouseActions.clickOnElement(driver, appsTabList.get(i));
             waitExecuter.sleep(3000);
             List<WebElement> programDataList = sparkAppPageObj.programTabData;
-            verifyAssertFalse(programDataList.isEmpty(), sparkAppPageObj, "The Programs data is not populated");
+            verifyAssertFalse(programDataList.isEmpty(), sparkAppPageObj, sparkAppPageObj.programDataNotFound.getText());
             break;
           case "Timings":
-            Actions action = new Actions(driver);
             MouseActions.clickOnElement(driver, appsTabList.get(i));
             waitExecuter.sleep(3000);
-            List<WebElement> subTabList = sparkAppPageObj.timingsSubTabs;
-            Assert.assertFalse(subTabList.isEmpty(), "No sub tabs available");
-            String[] expectedSubTabList = {"Task Time", "App Time"};
-            String[] expectedTTLegendNames = {"Input Stages", "Output Stages", "Processing Stages"};
-            String[] expectedATLegendNames = {"Queue Time", "Driver Time", "Job Time"};
-            for (int t = 0; t < subTabList.size(); t++) {
-              String subTabName = subTabList.get(t).getText();
-              logger.info("The Timings subTab is " + subTabName);
-              System.out.println("The Timings subTab is " + subTabName);
-              verifyAssertTrue(Arrays.asList(expectedSubTabList).contains(subTabName),sparkAppPageObj,
-                  " Tab list displayed in the UI doesnot match with the expected list of tabs");
-              MouseActions.clickOnElement(driver, subTabList.get(t));
-              waitExecuter.sleep(1000);
-              String titleName = sparkAppPageObj.timingsTabTitle.getText();
-              logger.info("The Timings subTabs Title is " + titleName);
-              verifyAssertTrue(sparkAppPageObj.pieChart.isDisplayed(), sparkAppPageObj, " Piechart for Task Attempts" +
-                  " is not displayed");
-              if (subTabName.equals("Task Time")) {
-                List<WebElement> legendNameList = sparkAppPageObj.legendNames;
-                verifyAssertFalse(legendNameList.isEmpty(), sparkAppPageObj, "Empty legend list");
-                for (int l = 0; l < legendNameList.size(); l++) {
-                  String legendName = legendNameList.get(l).getText();
-                  logger.info("The Legends for subTab " + subTabName + " is " + legendName);
-                  System.out.println("The Legends for subTab " + subTabName + " is " + legendName);
-                  verifyAssertTrue(Arrays.asList(expectedTTLegendNames).contains(legendName),sparkAppPageObj,
-                      " The legends displayed in the UI for Task Time doesnot match to the expected list of legends");
-                  waitExecuter.sleep(1000);
-                  if (legendName.equals("Processing Stages")) {
-                    WebElement ele = sparkAppPageObj.processingStage;
-                    verifyTimingStages(action, ele, sparkAppPageObj, legendName);
-                  } else if (legendName.equals("Input Stages")) {
-                    WebElement ele = sparkAppPageObj.inputStage;
-                    verifyTimingStages(action, ele, sparkAppPageObj, legendName);
-                  } else {
-                    WebElement ele = sparkAppPageObj.outputStage;
-                    verifyTimingStages(action, ele, sparkAppPageObj, legendName);
-                  }
-                }
-              } else {
-                List<WebElement> legendNameList = sparkAppPageObj.legendNames;
-                verifyAssertFalse(legendNameList.isEmpty(), sparkAppPageObj, "Empty legend list for APP TIME");
-                for (int l = 0; l < legendNameList.size(); l++) {
-                  String legendName = legendNameList.get(l).getText();
-                  verifyAssertTrue(Arrays.asList(expectedATLegendNames).contains(legendName),sparkAppPageObj,
-                      " The legends displayed in the UI for App Time doesnot match to the expected list of legends");
-                   waitExecuter.sleep(2000);
-                  if (legendName.equals("Driver Time")) {
-                    WebElement ele = driver.findElement(By.xpath("//*[@class='highcharts-series-group']//*[name()='path' " +
-                        "and  contains(@class, 'highcharts-drilldown-point')]"));
-                    MouseActions.clickOnElement(driver, ele);
-                    String[] expectedDriverLegends = {"FileCommit Time", "File Setup Time", "Others"};
-                    List<WebElement> driverLegendNameList = sparkAppPageObj.legendNames;
-                    verifyAssertFalse(driverLegendNameList.isEmpty(), sparkAppPageObj, "Empty legend list for DRIVER TIME");
-                    for (int d = 0; d < driverLegendNameList.size(); d++) {
-                      String driverLegend = driverLegendNameList.get(d).getText();
-                      verifyAssertTrue(Arrays.asList(expectedDriverLegends).contains(driverLegend),sparkAppPageObj,
-                          " The legends displayed in the UI for App Time does not match to the expected list of legends");
-                    }
-                  }
-                }
-              }
-            }
+            validateTimingTab(sparkAppPageObj);
         }
         break;
       }
@@ -385,7 +419,7 @@ public class SparkAppsDetailsPage {
       WebElement backButton = sparkAppPageObj.backButton;
       action.moveToElement(backButton).click().build().perform();
       waitExecuter.sleep(1000);
-    } catch (NoSuchElementException e) {
+    } catch (NoSuchElementException | JavascriptException ex) {
       System.out.println("The element is not present for stage " + legendName);
     }
   }
@@ -401,9 +435,7 @@ public class SparkAppsDetailsPage {
     verifyAssertTrue(lineChart.isDisplayed(), sparkPageObj, "Line chart is not displayed");
     verifyAssertTrue(waveChart.isDisplayed(), sparkPageObj, "Wave chart is not displayed");
     String completedBatchNum = sparkPageObj.completedBatchTitle.getText().split(":")[1];
-    System.out.println("The completed batch count is " + completedBatchNum);
     int completedBatches = Integer.parseInt(completedBatchNum.replaceAll("[^\\dA-Za-z ]", "").trim());
-    System.out.println("The completed batches are " + completedBatches);
     verifyAssertTrue(completedBatches > 0, sparkPageObj, "There are no completed batches count displayed in the title");
 
     //Verify tables have data in it
@@ -500,7 +532,7 @@ public class SparkAppsDetailsPage {
       String[] expectedHeader = {"Stage ID", "Start Time", "Duration", "Tasks", "Shuffle Read",
           "Shuffle Write", "Input", "Output"};
       //click the jobId to sort it .
-      driver.findElement(By.xpath("(//thead[@id='appNavigation-head'])/tr/th[1]")).click();
+      MouseActions.clickOnElement(driver,sparkPageObj.singleJobHeader);
       for (int rows = 0; rows < navigationRows; rows++) {
         navigationRowList.get(rows).click();
         waitExecuter.sleep(2000);
@@ -514,11 +546,11 @@ public class SparkAppsDetailsPage {
             verifyAssertTrue(rddBlockList.get(i).isDisplayed(), sparkPageObj, "FlowChart doesnot have the RDD blocks displayed");
           }
           List<WebElement> rddNumberList = sparkPageObj.rddBlockNumList;
-          verifyAssertFalse(rddNumberList.isEmpty(), sparkPageObj, "Rdd bloc numbers are present");
-          for (int r =0; r< rddNumberList.size(); r++){
-            String text = rddNumberList.get(r).getAttribute("aria-describedby");
-            System.out.println("The aria-describedby text is "+ text);
-          }
+          verifyAssertFalse(rddNumberList.isEmpty(), sparkPageObj, "Rdd block numbers are present");
+//          for (int r =0; r< rddNumberList.size(); r++){
+//            String text = rddNumberList.get(r).getAttribute("aria-describedby");
+//            System.out.println("The aria-describedby text is "+ text);
+//          }
         }
         List<WebElement> stageHeaderList = sparkPageObj.stageHeaders;
         for (int i = 0; i < stageHeaderList.size(); i++) {
@@ -563,10 +595,8 @@ public class SparkAppsDetailsPage {
               verifyAssertFalse(programDataList.isEmpty(), sparkPageObj," Program data not found");
               WebElement sourceText = sparkPageObj.programSourceLinkText;
               String sourceStr = sourceText.getText();
-              System.out.println("The Source string is " + sourceStr);
               int lineNo = Integer.parseInt(sourceStr.split(":")[2].trim());
               logger.info("LineNo to verify in the Programs tab is " + lineNo);
-              System.out.println("LineNo to verify in the Programs tab is " + lineNo);
               MouseActions.clickOnElement(driver, sparkPageObj.programSourceLink);
               List<WebElement> programList = sparkPageObj.programTabData;
               verifyAssertFalse(programList.isEmpty(), sparkPageObj, sparkPageObj.programDataNotFound.getText());
@@ -632,7 +662,6 @@ public class SparkAppsDetailsPage {
       }
     }
   }
-
 
   /**
    * Method to verify the following:
@@ -712,9 +741,9 @@ public class SparkAppsDetailsPage {
     waitExecuter.sleep(2000);
 
     //Select cluster
-    logger.info("Select Cluster: " + clusterId);
-    allApps.selectCluster(clusterId);
-    waitExecuter.sleep(3000);
+//    logger.info("Select Cluster: " + clusterId);
+//    allApps.selectCluster(clusterId);
+//    waitExecuter.sleep(3000);
 
     datePicker.clickOnDatePicker();
     waitExecuter.sleep(1000);
@@ -851,13 +880,13 @@ public class SparkAppsDetailsPage {
         String expectedStr = "APPLICATION DIAGNOSTICS";
         String winHeader = sparkAppPageObj.loadDiagnosticWinHeader.getText();
         logger.info("The LoadDignostics window header is " + winHeader);
-        System.out.println("The LoadDignostics window header is " + winHeader);
         verifyAssertTrue(winHeader.contains(expectedStr), sparkAppPageObj, " Expected Header String is not " +
             "displayed\n Expected = " + expectedStr + " Actual = " + winHeader);
         MouseActions.clickOnElement(driver, sparkAppPageObj.loadDiagnosticWinClose);
         MouseActions.clickOnElement(driver, actionMenu);
       }
     }
+    isDignosticWin = false;
   }
 
   public void verifyAssertFalse(Boolean condition, SparkAppsDetailsPageObject sparkAppPageObj, String msg) {
@@ -867,7 +896,6 @@ public class SparkAppsDetailsPage {
       Assert.assertFalse(condition, msg);
     } catch (Throwable e) {
       //Close apps details page
-      logger.info("The Duration of the Application is " + appDuration);
       if (isDignosticWin)
         MouseActions.clickOnElement(driver, sparkAppPageObj.loadDiagnosticWinClose);
       else

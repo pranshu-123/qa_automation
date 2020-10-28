@@ -9,6 +9,7 @@ import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,14 +33,14 @@ public class TC_spark_225 extends BaseClass {
    * 11. IO. metrics must be available - Bar graphs
    * 12. Time Metrics must be available - Bargraphs
    */
-  Logger logger = LoggerFactory.getLogger(TC_spark_224.class);
+  Logger logger = LoggerFactory.getLogger(TC_spark_225.class);
 
   @Test(dataProvider = "clusterid-data-provider")
-  public void TC_spark_224_verifyAppDetailsPageStage(String clusterId) {
-    test = extent.startTest("TC_spark_224_verifyAppDetailsPageStage: " + clusterId,
+  public void TC_spark_225_verifyAppDetailsPageStageTabs(String clusterId) {
+    test = extent.startTest("TC_spark_225_verifyAppDetailsPageStageTabs: " + clusterId,
         "Verify all the spark apps are listed in the UI");
     test.assignCategory(" Apps Details-Spark");
-    Log.startTestCase("TC_spark_224_verifyAppDetailsPageStage");
+    Log.startTestCase("TC_spark_225_verifyAppDetailsPageStageTabs");
 
     // Initialize all classes objects
     test.log(LogStatus.INFO, "Initialize all class objects");
@@ -49,6 +50,7 @@ public class TC_spark_225 extends BaseClass {
     SparkAppsDetailsPageObject sparkAppsDetailsPageObject = new SparkAppsDetailsPageObject(driver);
     SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);
     DatePicker datePicker = new DatePicker(driver);
+    WaitExecuter waitExecuter = new WaitExecuter(driver);
     AllApps allApps = new AllApps(driver);
 
     // Navigate to Jobs tab from header
@@ -74,6 +76,14 @@ public class TC_spark_225 extends BaseClass {
       String tagValue = appsDetailsPage.verifyAppSummaryTabs(sparkAppsDetailsPageObject, "Tags", test);
       if (!tagValue.equals("spark-streaming"))
         appsDetailsPage.verifyAppsComponent(sparkAppsDetailsPageObject, false, false, true);
+      else
+      {
+        sparkAppsDetailsPageObject.closeAppsPageTab.click();
+        waitExecuter.sleep(1000);
+        applicationsPageObject.getAnotherAppFromTable.click();
+        waitExecuter.sleep(2000);
+        appsDetailsPage.verifyAppsComponent(sparkAppsDetailsPageObject, false, false, true);
+      }
       test.log(LogStatus.PASS, "The job stage table has jobs and corresponding details displayed per " +
           "job id along with tabs and its respective data");
       //Close apps details page

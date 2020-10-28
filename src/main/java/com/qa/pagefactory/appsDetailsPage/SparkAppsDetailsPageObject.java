@@ -9,6 +9,22 @@ import java.util.List;
 
 public class SparkAppsDetailsPageObject {
 
+  //Streaming App Component xpath
+  @FindBy(xpath = "//*[name()='g' and contains(@class,'highcharts-spline-series')]//*[name()='path' and @class='highcharts-graph']")
+  public WebElement streamingLineChart;
+
+  @FindBy(xpath = "//*[name()='g']/*[name()='rect' and @class='highcharts-navigator-mask-inside']")
+  public WebElement streamingWaveChart;
+
+  @FindBy(xpath = "//*[@id='spark-stream-leftpanel']/h3/b")
+  public WebElement completedBatchTitle;
+
+  @FindBy(xpath = "//*[@id='sparkStreamNavigation-head']/tr/th")
+  public List<WebElement> streamTableHeader;
+
+  @FindBy(xpath = "//*[@id='sparkStreamNavigation-body']/tr")
+  public List<WebElement> streamTableRows;
+
   @FindBy(xpath = "//*[@id='app-filter-panel']/div[2]/div[2]/div/div[2]/p/label/span[2]")
   public WebElement failedAppCnt;
 
@@ -53,6 +69,12 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "//*[@class=\"error-code\"]/p")
   public List<WebElement> errorContents;
 
+  @FindBy(xpath = "//*[@id='appTagsTable']//tr/td[1]")
+  public List<WebElement> tagKey;
+
+  @FindBy(xpath = "//*[@id='appTagsTable']//tr/td[2]")
+  public List<WebElement> tagValue;
+
   @FindBy(xpath = "//*[@id='appTagsTable']/thead//th")
   public List<WebElement> tagTableHeader;
 
@@ -95,6 +117,9 @@ public class SparkAppsDetailsPageObject {
 
   @FindBy(xpath = "(//thead[@id='sparkStageNavigation-head'])/tr/th")
   public List<WebElement> stageHeaders;
+
+  @FindBy(xpath = "(//thead[@id='appNavigation-head'])/tr/th[1]")
+  public WebElement singleJobHeader;
 
   @FindBy(xpath = "//*[@id='app-query']/code/span")
   public List<WebElement> programTabData;
@@ -154,21 +179,33 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "//*[@class=\"highcharts-series-group\"]//*[name()='g'][1]")
   public WebElement pieChart;
 
-  @FindBy(xpath = "//*[@class='highcharts-series-group']//*[name()='path and  contains(@class," +
-      "'highcharts-drilldown-point') and @fill='#DDDF00' or @fill='#dddf00' or @fill='rgb(221,223,0)']")
+    @FindBy(xpath = "//*[@class='highcharts-series-group']//*[name()='path' and  contains(@class," +
+        "'highcharts-drilldown-point') and @fill='#DDDF00' or @fill='#dddf00' or @fill='rgb(221,223,0)']")
   public WebElement processingStage;
 
-  @FindBy(xpath = "//*[@class='highcharts-series-group']//*[name()='path and  contains(@class," +
+  @FindBy(xpath = "//*[@class='highcharts-series-group']//*[name()='path' and  contains(@class," +
       "'highcharts-drilldown-point') and @fill='#7cb5ec' or @fill='#7CB5EC' or @fill='rgb(124,181,236)']")
   public WebElement inputStage;
 
-  @FindBy(xpath = "//*[@class='highcharts-series-group']//*[name()='path and  contains(@class," +
+  @FindBy(xpath = "//*[@class='highcharts-series-group']//*[name()='path' and  contains(@class," +
       "'highcharts-drilldown-point') and @fill='rbg(92,184,92)']")
   public WebElement outputStage;
+
+  @FindBy(xpath ="//*[@class='highcharts-button-box']")
+  public WebElement backButton;
+
+  @FindBy(xpath ="//*[@class='stg-link link']")
+  public List<WebElement> topStages;
+
+  @FindBy(xpath = "//*[@class='highcharts-series-group']//*[name()='path' and  contains(@class, 'highcharts-drilldown-point')]")
+  public WebElement driverDrillDown;
 
   //Executor Tab xpath
   @FindBy(xpath = "//*[@id=\"dagContainer\"]/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']")
   public List<WebElement> rddBlockList;
+
+  @FindBy(xpath = "//*[@class='consumers']")
+  public List<WebElement> rddBlockNumList;
 
   @FindBy(xpath = "//*[@id=\"spark_exec_plan\"]/*[name()='svg']")
   public WebElement DAGData;
@@ -189,7 +226,7 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "//*[@id=\"taskattempts\"]//*[name()='svg']/*[name()='text' and @class='highcharts-subtitle']/*")
   public WebElement resourcesPieChartInternalVal;
 
-  @FindBy(xpath = "//*[@class=\"select2-selection__arrow\"]")
+  @FindBy(xpath = "//*[@class='col-md-12 no-left-gutter no-right-gutter']//*[@role='presentation'][1]")
   public WebElement resourcesMetricsDropDown;
 
   @FindBy(xpath = "//*[@class='select2-results']//ul/li/ul/li")
@@ -233,7 +270,7 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "//*[@class='modal-body']")
   public WebElement loadDiagnosticWin;
 
-  @FindBy(xpath = "//*[@class='text-white']")
+  @FindBy(xpath = "(//div[contains(@class,'modal-sec-head')])/h2")
   public WebElement loadDiagnosticWinHeader;
 
   @FindBy(xpath = "//*[@class='close pointer']")

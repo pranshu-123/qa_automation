@@ -10,6 +10,7 @@ import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
@@ -42,6 +43,7 @@ public class TC_spark_222 extends BaseClass {
     SparkAppsDetailsPageObject sparkAppsDetailsPageObject = new SparkAppsDetailsPageObject(driver);
     SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);
     DatePicker datePicker = new DatePicker(driver);
+    WaitExecuter waitExecuter = new WaitExecuter(driver);
     AllApps allApps = new AllApps(driver);
 
     // Navigate to Jobs tab from header
@@ -64,6 +66,14 @@ public class TC_spark_222 extends BaseClass {
       String tagValue = appsDetailsPage.verifyAppSummaryTabs(sparkAppsDetailsPageObject, "Tags", test);
       if (!tagValue.equals("spark-streaming"))
         appsDetailsPage.verifyAppsComponent(sparkAppsDetailsPageObject, true, false, false);
+      else
+      {
+        sparkAppsDetailsPageObject.closeAppsPageTab.click();
+        waitExecuter.sleep(1000);
+        applicationsPageObject.getAnotherAppFromTable.click();
+        waitExecuter.sleep(2000);
+        appsDetailsPage.verifyAppsComponent(sparkAppsDetailsPageObject, true, false, false);
+      }
       test.log(LogStatus.PASS, "The application has basic tabs present and has data populated accordingly");
       //Close apps details page
       MouseActions.clickOnElement(driver, sparkAppsDetailsPageObject.closeAppsPageTab);

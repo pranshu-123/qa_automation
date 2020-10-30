@@ -5,7 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.logging.Logger;
 import org.openqa.selenium.WebDriver;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.ExtentReports;
 
@@ -20,7 +20,7 @@ public class UnravelBuildInfo {
 	/* Method helps in getting unravel about info from UI  */
 	public static List<String> getBuildInfo(WebDriver driver) {
 		WaitExecuter wait = new WaitExecuter(driver);
-		TopPanelComponentPageObject topPanel = new TopPanelComponentPageObject(driver);
+		SubTopPanelModulePageObject topPanel = new SubTopPanelModulePageObject(driver);
 		Login login = new Login(driver);
 		LOGGER.info("Loging to app to get build info");
 		login.loginToApp();

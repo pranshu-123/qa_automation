@@ -12,7 +12,7 @@ import org.openqa.selenium.support.PageFactory;
  * create an instance of this class and access the members with that object.
  */
 
-public class TopPanelComponentPageObject {
+public class SubTopPanelModulePageObject {
 
     @FindBy(css = "a.logo")
     public WebElement unravelLogo;
@@ -44,10 +44,13 @@ public class TopPanelComponentPageObject {
     @FindBy(xpath = "//div[@class='close pointer']")
     public WebElement closeAboutWindow;
 
+    @FindBy(xpath = "//li[contains(@class,'active')]//span[contains(text(),'Pipelines')]")
+    public WebElement pipelinesTab;
+
     /**
      * @param driver The driver that will be used to look up the elements
      */
-    public TopPanelComponentPageObject(WebDriver driver) {
+    public SubTopPanelModulePageObject(WebDriver driver) {
         PageFactory.initElements(driver,this);
     }
 

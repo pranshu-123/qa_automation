@@ -2,7 +2,7 @@ package com.qa.testcases.manage;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.scripts.manage.Manage;
 import com.qa.utils.FileUtils;
 import com.qa.utils.MouseActions;
@@ -27,13 +27,13 @@ public class TC_M09 extends BaseClass {
         test.assignCategory(" Manage ");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+        SubTopPanelModulePageObject subTopPanelModulePageObject = new SubTopPanelModulePageObject(driver);
         // Navigate to Manage tab from header
-        waitExecuter.waitUntilElementPresent(topPanelComponentPageObject.gear);
+        waitExecuter.waitUntilElementPresent(subTopPanelModulePageObject.gear);
         waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.gear);
+        waitExecuter.waitUntilElementClickable(subTopPanelModulePageObject.gear);
         waitExecuter.sleep(3000);
-        MouseActions.clickOnElement(driver, topPanelComponentPageObject.gear);
+        MouseActions.clickOnElement(driver, subTopPanelModulePageObject.gear);
         test.log(LogStatus.INFO, "Verified Manage Tab is clicked.");
 
         Manage manage = new Manage(driver);

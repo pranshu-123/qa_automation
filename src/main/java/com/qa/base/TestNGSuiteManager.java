@@ -26,6 +26,7 @@ public class TestNGSuiteManager {
         //Create an instance of XML Suite and assign a name for it.
         XmlSuite mySuite = new XmlSuite();
         mySuite.setName("UnravelUISuite");
+        mySuite.addListener(CustomListener.class.getCanonicalName());
         //Create an instance of XmlTest and assign a name for it.
         XmlTest myTest = new XmlTest(mySuite);
         myTest.setName("UnravelTest");

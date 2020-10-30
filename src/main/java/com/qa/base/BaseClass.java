@@ -20,6 +20,8 @@ import org.testng.annotations.*;
 
 import java.io.File;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -142,19 +144,20 @@ public class BaseClass {
 
     /**
      * Data provider method which will pass cluster Ids to different classes
-     *
      * @param method - Method name of current test case
      * @return - clusterIds
      */
     @DataProvider(name = "clusterid-data-provider")
-    public Object[][] getClusterIds(Method method) {
+    public Iterator<Object[]> getClusterIds(Method method) {
         if (System.getProperty(ConfigConstants.SystemConfig.IS_MULTI_CLUSTER).trim()
             .toLowerCase().equals("true")) {
             LOGGER.info("Getting multiple cluster Ids");
             return DataProviderClass.getClusterIdsForClusterType(method);
         } else {
             LOGGER.info("Getting single cluster Id");
-            return new Object[][]{DataProviderClass.getClusterIdsForClusterType(method)[0]};
+            ArrayList<Object[]> cluster = new ArrayList<>();
+            cluster.add(DataProviderClass.getClusterIdsForClusterType(method).next());
+            return cluster.iterator();
         }
     }
 }

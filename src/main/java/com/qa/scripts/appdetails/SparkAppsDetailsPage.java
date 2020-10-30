@@ -1,7 +1,7 @@
 package com.qa.scripts.appdetails;
 
 import com.qa.annotations.Marker;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.SparkAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
@@ -724,7 +724,7 @@ public class SparkAppsDetailsPage {
    * Selects 90 days time interval
    * Deselsects all the selected apps from the left pane on jobs page.
    */
-  public void navigateToJobsTabFromHeader(TopPanelComponentPageObject topPanelObj, AllApps allApps,
+  public void navigateToJobsTabFromHeader(SubTopPanelModulePageObject topPanelObj, AllApps allApps,
                                           DatePicker datePicker, ApplicationsPageObject appPageObj, String clusterId) {
     logger.info("Navigate to jobs tab from header");
     waitExecuter.sleep(3000);
@@ -824,7 +824,7 @@ public class SparkAppsDetailsPage {
     test.log(LogStatus.INFO, "Initialize all class objects");
 
     logger.info("Initialize all class objects");
-    TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+    SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
     ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
     SparkAppsDetailsPageObject sparkAppPageObj = new SparkAppsDetailsPageObject(driver);
     SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);

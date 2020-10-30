@@ -2,7 +2,7 @@ package com.qa.testcases.alerts.autoactions;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.scripts.alerts.AutoActions;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;

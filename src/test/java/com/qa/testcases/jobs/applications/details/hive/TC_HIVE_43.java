@@ -3,7 +3,7 @@ package com.qa.testcases.jobs.applications.details.hive;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.constants.PageConstants;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
@@ -34,7 +34,7 @@ public class TC_HIVE_43 extends BaseClass {
         test.log(LogStatus.INFO, "Initialize all class objects");
         LOGGER.info("Initialize all class objects");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         AllApps allApps = new AllApps(driver);
         SparkAppsDetailsPage sparkApp = new SparkAppsDetailsPage(driver);

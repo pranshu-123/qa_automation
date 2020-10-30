@@ -47,4 +47,19 @@ public class Forecasting {
         forecastingPageObject.numOfDaysForForecasting.sendKeys(numOfDays);
     }
 
+    public void clickOnCancelButton(){
+        try{
+            MouseActions.clickOnElement(driver, forecastingPageObject.modalCancelButton);
+        }catch (TimeoutException te) {
+            MouseActions.clickOnElement(driver, forecastingPageObject.modalCancelButton);
+        }
+    }
+
+    public String getReportData(){
+        if(forecastingPageObject.previousReportData.isDisplayed()){
+            return forecastingPageObject.previousReportData.getText();
+        }
+        return null;
+    }
+
 }

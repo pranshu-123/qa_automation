@@ -79,6 +79,9 @@ public class TopPanelPageObject {
   @FindBy(xpath="//li[contains(@class,'active')]/ul[contains(@class,'sub-menu')]/li/span[contains(text(),'Tuning')]")
   public WebElement tuningTab;
 
+  @FindBy(xpath = "//ul[@class='primary-links']/li[3]/ul/li[3]/span")
+  public WebElement dataForecastingTab;
+
   /**
    * @param driver The driver that will be used to look up the elements
    */

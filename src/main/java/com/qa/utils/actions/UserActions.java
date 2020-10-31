@@ -5,10 +5,10 @@ import com.qa.utils.MouseActions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.concurrent.TimeoutException;
 
 public class UserActions {
     private Clock clock = Clock.systemDefaultZone();
@@ -21,7 +21,7 @@ public class UserActions {
         this.driver = driver;
     }
     public void performActionWithPolling(WebElement element,
-                                         UserAction action, String... keys) throws TimeoutException {
+                                         UserAction action, String... keys) {
         Instant end = clock.instant().plus(MAX_POLLING_TIME);
         while (true) {
             try {
@@ -36,7 +36,8 @@ public class UserActions {
                 return;
             } catch (Throwable throwable) {
                 if (end.isBefore(clock.instant())) {
-                    throw new TimeoutException(throwable.getMessage());
+                    Assert.assertTrue(false, "Timeout Exception: "
+                        + throwable.getMessage());
                 }
                 try {
                     Thread.sleep(SLEEP_INTERVAL);

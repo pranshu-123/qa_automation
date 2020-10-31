@@ -13,7 +13,6 @@ import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeoutException;
 
 /**
  * @author Ankur Jaiswal
@@ -60,7 +59,7 @@ public class HomePage {
     return homePageObject.clusterList;
   }
 
-  public void clickOnClusterDropDown() throws TimeoutException {
+  public void clickOnClusterDropDown() {
     CommonPageObject commonPageObject = new CommonPageObject(driver);
     userActions.performActionWithPolling(commonPageObject.clusterDropdown, UserAction.CLICK);
   }
@@ -117,7 +116,7 @@ public class HomePage {
   }
 
   //click on cluster drop down
-  public void selectMultiClusterId(String clusterId) throws TimeoutException {
+  public void selectMultiClusterId(String clusterId) {
     CommonPageObject commonPageObject = new CommonPageObject(driver);
     userActions.performActionWithPolling(commonPageObject.clusterDropdown, UserAction.CLICK);
     userActions.performActionWithPolling(commonPageObject.clusterSearchBox, UserAction.SEND_KEYS,

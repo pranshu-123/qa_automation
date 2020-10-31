@@ -59,7 +59,7 @@ public class UnravelConfigYamlReader implements YamlReader {
         } else {
             clusters = (String) unravelNode.get(ConfigConstants.UnravelYamlConfig.CLUSTERS);
         }
-        return Arrays.stream(clusters.split(",")).map(cluster -> new Object[]{cluster})
+        return Arrays.stream(clusters.split(",")).map(cluster -> new Object[]{cluster.trim()})
             .collect(Collectors.toList()).iterator();
     }
 }

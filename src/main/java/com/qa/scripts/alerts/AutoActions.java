@@ -6,8 +6,11 @@ import com.qa.pagefactory.alerts.NewAutoActionPolicyPageObject;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import org.openqa.selenium.WebDriver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Birender Kumar
@@ -19,7 +22,7 @@ public class AutoActions {
     private AutoActionsPageObject autoActionsPageObject;
     private NewAutoActionPolicyPageObject newAutoActionPolicyPageObject;
 
-    Logger logger = LoggerFactory.getLogger(AutoActions.class);
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AutoActions.class.getName());
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -186,7 +189,45 @@ public class AutoActions {
         }else{
             logger.info("No Check Box found with name: "+ chkBoxName);
         }
-
     }
 
+    public void clickOnRunHeader(){
+        if(autoActionsPageObject.headerRunColumn.isDisplayed()){
+            MouseActions.clickOnElement(driver, autoActionsPageObject.headerRunColumn);
+        }else{
+            logger.info("AutoAction Table with header is not displayed.");
+        }
+    }
+
+    /**
+     * Method to get all policy name which are triggered auto actions alerts.
+     */
+    public void getTriggeredAAs(){
+        List<WebElement> listRunCounts = autoActionsPageObject.listRunCount;
+        Assert.assertFalse(listRunCounts.isEmpty(), "The run count is empty from AutoAction Table.");
+
+        List<String> totalTriggeredPolicyNames = new ArrayList<>();
+        int numOfRows = autoActionsPageObject.listRunCount.size();
+        logger.info(" Total num of rows in AAs table: "+numOfRows);
+        waitExecuter.sleep(2000);
+        boolean triggerFlag = false;
+        for(int i=0 ; i< numOfRows ; i++ ){
+            waitExecuter.sleep(2000);
+            int runCount = Integer.parseInt(autoActionsPageObject.listRunCount.get(i).getText());
+            if(runCount > 0){
+                waitExecuter.sleep(2000);
+                totalTriggeredPolicyNames.add(autoActionsPageObject.listPolicyNames.get(i).getText());
+                triggerFlag = true;
+            }
+        }
+
+        if(triggerFlag){
+            logger.info("Trigger Policy are: "+totalTriggeredPolicyNames);
+            for(String triggerPolicy: totalTriggeredPolicyNames){
+                logger.info("Triggered Policy is: "+triggerPolicy);
+            }
+        }else{
+            logger.info("No Triggered Policy found");
+        }
+    }
 }

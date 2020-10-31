@@ -29,6 +29,16 @@ public class AutoActionsPageObject {
 
     @FindBy (xpath = "//div[@class='container-fluid']/section/span")
     public WebElement messageBanner;
+
+    @FindBy(xpath = "//table[@id='aa-list-table']/thead/tr/th[6]")
+    public WebElement headerRunColumn;
+
+    @FindBy(xpath = "//table[@id='aa-list-table']/tbody/tr/td[6]")
+    public List<WebElement> listRunCount;
+
+    @FindBy(xpath = "//table[@id='aa-list-table']/tbody/tr/td[1]")
+    public List<WebElement> listPolicyNames;
+
     /**
      * @param driver The driver that will be used to look up the elements
      */

@@ -6,6 +6,7 @@ import com.qa.constants.FileConstants;
 import com.qa.io.ConfigReader;
 import com.qa.pagefactory.clusters.DataProviderClass;
 import com.qa.scripts.CommonComponent;
+import com.qa.scripts.HomePage;
 import com.qa.scripts.Login;
 import com.qa.scripts.UnravelBuildInfo;
 import com.qa.utils.FileUtils;
@@ -64,6 +65,8 @@ public class BaseClass {
         extent.addSystemInfo(ConfigConstants.ReportConfig.SELENIUM_VERSION,
             prop.getProperty(ConfigConstants.ReportConfig.SELENIUM_VERSION));
         UnravelBuildInfo.setBuildInfo(driver, extent);
+        Login login = new Login(driver);
+        login.loginToApp();
     }
 
     /**
@@ -73,8 +76,6 @@ public class BaseClass {
     @BeforeClass
     public void beforeClass() {
         LOGGER.info("Login to the application.");
-        Login login = new Login(driver);
-        login.loginToApp();
     }
 
     /**
@@ -127,9 +128,8 @@ public class BaseClass {
         LOGGER.info("Logout from the application.");
         //Close if any pop modal is open
         CommonComponent.closeModalIfExists(driver);
-        Login login = new Login(driver);
-        login.logout();
-        FileUtils.deleteDownloadsFolderFiles();
+        HomePage homePage = new HomePage(driver);
+        homePage.navigateToHomePage();
     }
 
     /**
@@ -139,6 +139,9 @@ public class BaseClass {
     @AfterSuite
     public void tearDown() {
         LOGGER.info("Suite completed. Closing the browser.");
+        Login login = new Login(driver);
+        login.logout();
+        FileUtils.deleteDownloadsFolderFiles();
         driver.quit();
     }
 

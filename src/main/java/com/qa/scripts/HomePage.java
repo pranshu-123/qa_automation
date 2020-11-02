@@ -172,4 +172,8 @@ public class HomePage {
     }
   }
 
+  public void navigateToHomePage() {
+    userActions.performActionWithPolling(topPanel.unravelLogo, UserAction.CLICK);
+  }
+
 }

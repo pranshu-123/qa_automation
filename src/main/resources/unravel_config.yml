@@ -1,3 +1,3 @@
 unravel:
   clusters: tnode28-HDP315-TLS-Kerb-Ranger, tnode3-CDH633-TLS-Kerb-Sentry
-  implala_clusters: CM-tnode1-Unravel-tnode3-impala, tnode3-CDH633-TLS-Kerb-Sentry
+  impala_clusters: CM-tnode1-Unravel-tnode3-impala, tnode3-CDH633-TLS-Kerb-Sentry

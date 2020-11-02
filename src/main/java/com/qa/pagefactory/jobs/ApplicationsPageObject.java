@@ -252,6 +252,9 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//span[(text()='Write')]//following-sibling::a[contains(@class,'sorting')]")
     public WebElement sortByWrite;
 
+    @FindBy(xpath = "//table[@id='allApps']/tbody/tr/td[11]/span[2][@class='icon-alert']")
+    public List<WebElement> listOfInsights;
+
     /**
      * @param driver The driver that will be used to look up the elements
      */

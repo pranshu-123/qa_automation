@@ -30,8 +30,8 @@ public class TC_RRA05 extends BaseClass {
   @Test(dataProvider = "clusterid-data-provider")
   public void TC_RRA05_verifyReportArchiveSortingOption(String clusterId) {
     test = extent.startTest("TC_RRA05_verifyReportArchiveSortingOption: " + clusterId,
-        "Verify all the spark apps are listed in the UI");
-    test.assignCategory(" Apps Details-Spark");
+        "Verify Sorting should work fine on Name, Reports and Status tabs");
+    test.assignCategory(" Report Archive");
     Log.startTestCase("TC_RRA05_verifyReportArchiveSortingOption");
 
     // Initialize all classes objects
@@ -45,9 +45,9 @@ public class TC_RRA05 extends BaseClass {
     test.log(LogStatus.INFO, "Navigate to reports tab from header and validate the sorting options on " +
         "Name, Reports and Status tabs");
     MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
-    reportsPage.validateSortingOptionReportName(reportPageObj);
-    reportsPage.validateSortingOptionReportCnt(reportPageObj);
-    reportsPage.validateSortingOptionStatus(reportPageObj);
+    reportsPage.validateSortingOptionReportName(reportPageObj, false);
+    reportsPage.validateSortingOptionReportCnt(reportPageObj, false);
+    reportsPage.validateSortingOptionStatus(reportPageObj, false);
     test.log(LogStatus.PASS, "The sorting option has been validated successfully for Name, Reports and Status tabs");
   }
 }

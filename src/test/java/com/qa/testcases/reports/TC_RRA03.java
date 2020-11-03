@@ -29,8 +29,8 @@ public class TC_RRA03 extends BaseClass {
   @Test(dataProvider = "clusterid-data-provider")
   public void TC_RRA03_verifyReportsForDiffDateRange(String clusterId) {
     test = extent.startTest("TC_RRA03_verifyReportsForDiffDateRange: " + clusterId,
-        "Verify all the spark apps are listed in the UI");
-    test.assignCategory(" Apps Details-Spark");
+        "Verify all all the reports with latest report status is displayed");
+    test.assignCategory(" Report Archive");
     Log.startTestCase("TC_RRA03_verifyReportsForDiffDateRange");
 
     // Initialize all classes objects
@@ -151,14 +151,5 @@ public class TC_RRA03 extends BaseClass {
     reportsPage.validateReportNames(reportPageObj);
     reportsPage.validateReportStatus(reportPageObj);
     test.log(LogStatus.PASS, "Verified  reports with status between last month successfully");
-
-    test.log(LogStatus.INFO, "Verify reports with status between custom range ");
-    datePicker.clickOnDatePicker();
-    waitExecuter.sleep(1000);
-    datePicker.selectCustomRange();
-    waitExecuter.sleep(2000);
-    reportsPage.validateReportNames(reportPageObj);
-    reportsPage.validateReportStatus(reportPageObj);
-    test.log(LogStatus.PASS, "Verified  reports with status between custom range successfully");
   }
 }

@@ -30,8 +30,8 @@ public class TC_RRA02 extends BaseClass {
   @Test(dataProvider = "clusterid-data-provider")
   public void TC_RRA02_verifyReportArchiveDatePickerList(String clusterId) {
     test = extent.startTest("TC_RRA02_verifyReportArchiveDatePickerList: " + clusterId,
-        "Verify all the spark apps are listed in the UI");
-    test.assignCategory(" Apps Details-Spark");
+        "validate the datepicker list");
+    test.assignCategory(" Report Archive");
     Log.startTestCase("TC_RRA02_verifyReportArchiveDatePickerList");
 
     // Initialize all classes objects

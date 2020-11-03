@@ -19,20 +19,20 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class TC_RRA06 extends BaseClass {
+public class TC_RRA011 extends BaseClass {
   /**
    * Verify reports tab in Report Archive page :
-   * This will open new page with  all the reports list, count and list should match here
+   * Verify new report option from actions tab
    */
 
-  Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.TC_RRA06.class);
+  Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.TC_RRA011.class);
 
   @Test(dataProvider = "clusterid-data-provider")
-  public void TC_RRA06_verifyReportArchiveReportTab(String clusterId) {
-    test = extent.startTest("TC_RRA06_verifyReportArchiveReportTab: " + clusterId,
-        "Verify reports tab in Report Archive page");
+  public void TC_RRA011_verifyNewReportOption(String clusterId) {
+    test = extent.startTest("TC_RRA011_verifyNewReportOption: " + clusterId,
+        "Verify new report option from actions tab");
     test.assignCategory(" Report Archive");
-    Log.startTestCase("TC_RRA06_verifyReportArchiveReportTab");
+    Log.startTestCase("TC_RRA011_verifyNewReportOption");
 
     // Initialize all classes objects
     test.log(LogStatus.INFO, "Initialize all class objects");
@@ -42,9 +42,9 @@ public class TC_RRA06 extends BaseClass {
     ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);
 
     // Navigate to Reports tab from header
-    test.log(LogStatus.INFO, "Navigate to reports tab from header and validate the Report tab");
+    test.log(LogStatus.INFO, "Navigate to reports tab from header and Verify new report option from actions tab");
     MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
-    reportsPage.validateReportCnt(reportPageObj);
-    test.log(LogStatus.PASS, "Validated the report tab successfully");
+    reportsPage.validateNewReportAction(reportPageObj);
+    test.log(LogStatus.PASS, "Verified new report option from actions tab successfully");
   }
 }

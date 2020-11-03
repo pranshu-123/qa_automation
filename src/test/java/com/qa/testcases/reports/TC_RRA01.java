@@ -24,8 +24,8 @@ public class TC_RRA01 extends BaseClass {
   @Test(dataProvider = "clusterid-data-provider")
   public void TC_RRA01_verifyReportArchivePage(String clusterId) {
     test = extent.startTest("TC_RRA01_verifyReportArchivePage: " + clusterId,
-        "Verify all the spark apps are listed in the UI");
-    test.assignCategory(" Apps Details-Spark");
+        "Verify the reports with report status are present");
+    test.assignCategory(" Report Archive");
     Log.startTestCase("TC_RRA01_verifyReportArchivePage");
 
     // Initialize all classes objects

@@ -1,0 +1,46 @@
+package com.qa.testcases.reports;
+
+import com.qa.base.BaseClass;
+import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
+import com.qa.scripts.reports.ReportsArchiveSchedulePage;
+import com.qa.utils.Log;
+import com.qa.utils.MouseActions;
+import com.relevantcodes.extentreports.LogStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.annotations.Test;
+
+public class TC_RRA07 extends BaseClass {
+  /**
+   * Verify sorting option in Report Archive page :
+   * Verify Sorting should work fine on Name, Created and Status tabs for a particular report
+   */
+
+  Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.TC_RRA07.class);
+
+  @Test(dataProvider = "clusterid-data-provider")
+  public void TC_RRA07_verifyReportPageSortingOption(String clusterId) {
+    test = extent.startTest("TC_RRA07_verifyReportPageSortingOption: " + clusterId,
+        "Verify Sorting should work fine on Name, Created and Status tabs for a particular reportI");
+    test.assignCategory(" Report Archive");
+    Log.startTestCase("TC_RRA07_verifyReportPageSortingOption");
+
+    // Initialize all classes objects
+    test.log(LogStatus.INFO, "Initialize all class objects");
+    logger.info("Initialize all class objects");
+    TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+    ReportsArchiveSchedulePage reportsPage = new ReportsArchiveSchedulePage(driver);
+    ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);
+
+    // Navigate to Reports tab from header
+    test.log(LogStatus.INFO, "Navigate to reports tab from header and vVerify Sorting should work fine " +
+        "on Name, Created and Status tabs for a particular report");
+    MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
+    reportsPage.validateSortingOptionReportName(reportPageObj, true);
+    reportsPage.validateSortingOptionStatus(reportPageObj, true);
+    reportsPage.validateSortingOptionReportCnt(reportPageObj, true);
+    test.log(LogStatus.PASS, "The sorting option has been validated successfully for Name," +
+        " Created and Status tabs for particular report");
+  }
+}

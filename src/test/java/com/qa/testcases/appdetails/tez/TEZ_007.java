@@ -9,7 +9,10 @@ import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.TezAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.testcases.appdetails.spark.TC_spark_219;
+import com.qa.testcases.jobs.applications.details.hive.TC_HIVE_46;
 import com.qa.utils.Log;
+import com.qa.utils.MouseActions;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +23,7 @@ import org.testng.annotations.Test;
 @Marker.All
 public class TEZ_007 extends BaseClass {
 
-    Logger logger = LoggerFactory.getLogger(TEZ_007.class);
+    Logger logger = LoggerFactory.getLogger(TC_spark_219.class);
 
     @Test(dataProvider = "clusterid-data-provider")
     public void TEZ_007_verifyStarttimeandduration(String clusterId) {
@@ -32,6 +35,7 @@ public class TEZ_007 extends BaseClass {
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
         logger.info("Initialize all class objects");
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         TezAppsDetailsPageObject tezApps = new TezAppsDetailsPageObject(driver);
@@ -55,8 +59,22 @@ public class TEZ_007 extends BaseClass {
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 
-        String Status = tezDetailsPage.verifyStatus(tezApps);
-        test.log(LogStatus.PASS, "Tez Status is displayed in the Table: " + Status);
+        if (appCount > 0) {
+            String headerAppId = tezDetailsPage.verifyAppId(tezApps, applicationsPageObject);
+            test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);
+            test.log(LogStatus.INFO, "Verify if the user can execute the Load Diagnostics action");
+            tezDetailsPage.verifyAppsComponent(tezApps, false, false, true);
+            test.log(LogStatus.PASS, "Verified that the user can execute the Load Diagnostics action");
+            //Close apps details page
+            MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
+        } else {
+            test.log(LogStatus.SKIP, "No Spark Application present");
+            logger.error("No Spark Application present in the " + clusterId + " cluster for the time span " +
+                    "of 90 days");
+            //Close apps details page
+            MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
+
+        }
 
     }
 }

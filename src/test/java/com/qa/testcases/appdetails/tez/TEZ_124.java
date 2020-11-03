@@ -62,7 +62,7 @@ public class TEZ_124 extends BaseClass {
             test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);
 
             /**clicking on the UI must go to apps detail page and verify the basic tabs present */
-            tezDetailsPage.verifyAppsComponent(tezApps, false, false);
+            tezDetailsPage.verifyAppsComponent(tezApps, false, false, true);
             test.log(LogStatus.PASS, "The basic components for an application is present");
         } else {
             logger.error("No Spark Application present in the " + clusterId + " cluster for the time span " +

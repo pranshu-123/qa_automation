@@ -1,5 +1,6 @@
 package com.qa.testcases.appdetails.tez;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.pagefactory.appsDetailsPage.TezAppsDetailsPageObject;
@@ -20,13 +21,14 @@ import static com.qa.base.BaseClass.extent;
 public class TEZ_121 extends BaseClass {
 
     Logger logger = LoggerFactory.getLogger(TEZ_121.class);
-
+    @Marker.AppDetailsTez
+    @Marker.All
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_121_verifyTezApplicationInUnravelUI(String clusterId) {
-        test = extent.startTest("TEZ_121_verifyTezApplicationInUnravelUI: " + clusterId,
-                "Verify Application details in Unravel UI, application page.");
+    public void TEZ_121_verifyHiveappswithclusterIDs(String clusterId) {
+        test = extent.startTest("TEZ_121_verifyHiveappswithclusterIDs: " + clusterId,
+                "Verify All the Hive apps run on different Clusters must have the cluster ID.");
         test.assignCategory(" Apps Details-Tez");
-        Log.startTestCase("TEZ_003_verifyKPIsarelistedandhavedata");
+        Log.startTestCase("TEZ_121_verifyHiveappswithclusterIDs");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

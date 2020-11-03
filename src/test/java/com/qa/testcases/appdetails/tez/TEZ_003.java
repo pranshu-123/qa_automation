@@ -52,14 +52,17 @@ public class TEZ_003 extends BaseClass {
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
-        Assert.assertEquals(appCount, totalCount, "The tez app count of SparkApp is not equal to " +
+        Assert.assertEquals(appCount, totalCount, "The tez app count of tezApp is not equal to " +
                 "the total count of heading.");
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 
-        //Checking Tez Table Records populated
-        String type = tezDetailsPage.verifyType(tezApps);
-        test.log(LogStatus.PASS, "Verified Tez Table is available on App details page"+type);
+        test.log(LogStatus.INFO, "Assert if in all application Hive application are present");
+        logger.info("Assert if in all application TEZ application are present");
+        Assert.assertTrue(allApps.getAllApplicationTypes().contains("Tez"),
+                "The list of applications does not contains 'Tez' apps");
+        test.log(LogStatus.PASS, "Verified that in all application Tez application are present.");
+
 
     }
 

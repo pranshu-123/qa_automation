@@ -10,24 +10,24 @@ import com.qa.scripts.appdetails.TezAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.testcases.appdetails.spark.TC_spark_219;
 import com.qa.utils.Log;
-import com.qa.utils.MouseActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 @Marker.AppDetailsTez
 @Marker.All
-public class TEZ_129 extends BaseClass {
+public class TEZ_006 extends BaseClass {
 
-    Logger logger = LoggerFactory.getLogger(TEZ_129.class);
+    Logger logger = LoggerFactory.getLogger(TEZ_006.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_129_verifytheQuery(String clusterId) {
-        test = extent.startTest("TEZ_129_verifytheQuery: " + clusterId,
-                "Verify KPIs are listed and have data");
+    public void TEZ_006_verifyApplicationNameAndID(String clusterId) {
+        test = extent.startTest("TEZ_006_verifyApplicationNameAndID: " + clusterId,
+                "Verify Application details in Unravel UI, application page.");
         test.assignCategory(" Apps Details-Tez");
-        Log.startTestCase("TEZ_129_verifytheQuery");
+        Log.startTestCase("TEZ_006_verifyApplicationNameAndID");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -55,21 +55,11 @@ public class TEZ_129 extends BaseClass {
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 
-        //Clicking on the Spark app must go to apps detail page
-        if (appCount > 0) {
-            String headerAppId = tezDetailsPage.verifyAppId(tezApps, applicationsPageObject);
-            test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);
+        String appName = tezDetailsPage.verifyAppname(tezApps);
+        test.log(LogStatus.PASS, "Tez appName is displayed in the Table: " + appName);
 
-            /**clicking on the UI must go to apps detail page and verify the basic tabs present */
-            tezDetailsPage.verifyAppsComponent(tezApps, false, false);
-            test.log(LogStatus.PASS, "The basic components for an application is present");
-        } else {
-            logger.error("No Spark Application present in the " + clusterId + " cluster for the time span " +
-                    "of 90 days");
-        }
-        //Close apps details page
-        MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
-        //  sparkAppsDetailsPageObject.closeAppsPageTab.click();
+        String appId = tezDetailsPage.verifyAppid(tezApps);
+        test.log(LogStatus.PASS, "Tez appId is displayed in the Table: " + appId);
+
     }
-
 }

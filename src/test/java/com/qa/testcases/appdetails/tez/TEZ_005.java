@@ -8,26 +8,25 @@ import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.TezAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
-import com.qa.testcases.appdetails.spark.TC_spark_219;
 import com.qa.utils.Log;
-import com.qa.utils.MouseActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 @Marker.AppDetailsTez
 @Marker.All
-public class TEZ_129 extends BaseClass {
+public class TEZ_005 extends BaseClass {
 
-    Logger logger = LoggerFactory.getLogger(TEZ_129.class);
+    Logger logger = LoggerFactory.getLogger(TEZ_005.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_129_verifytheQuery(String clusterId) {
-        test = extent.startTest("TEZ_129_verifytheQuery: " + clusterId,
-                "Verify KPIs are listed and have data");
+    public void TEZ_005_verifyTezApplicationInUnravelUI(String clusterId) {
+        test = extent.startTest("TEZ_005_verifyTezApplicationInUnravelUI: " + clusterId,
+                "Verify Application details in Unravel UI, application page.");
         test.assignCategory(" Apps Details-Tez");
-        Log.startTestCase("TEZ_129_verifytheQuery");
+        Log.startTestCase("TEZ_003_verifyKPIsarelistedandhavedata");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -50,26 +49,13 @@ public class TEZ_129 extends BaseClass {
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
-        Assert.assertEquals(appCount, totalCount, "The tez app count of SparkApp is not equal to " +
+        Assert.assertEquals(appCount, totalCount, "The tez app count of TezApp is not equal to " +
                 "the total count of heading.");
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 
-        //Clicking on the Spark app must go to apps detail page
-        if (appCount > 0) {
-            String headerAppId = tezDetailsPage.verifyAppId(tezApps, applicationsPageObject);
-            test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);
+        String user = tezDetailsPage.verifyusername(tezApps);
+        test.log(LogStatus.PASS, "Tez app details user is displayed in the Table: " +user);
 
-            /**clicking on the UI must go to apps detail page and verify the basic tabs present */
-            tezDetailsPage.verifyAppsComponent(tezApps, false, false);
-            test.log(LogStatus.PASS, "The basic components for an application is present");
-        } else {
-            logger.error("No Spark Application present in the " + clusterId + " cluster for the time span " +
-                    "of 90 days");
-        }
-        //Close apps details page
-        MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
-        //  sparkAppsDetailsPageObject.closeAppsPageTab.click();
     }
-
 }

@@ -1,5 +1,6 @@
 package com.qa.testcases.appdetails.tez;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.pagefactory.appsDetailsPage.TezAppsDetailsPageObject;
@@ -15,17 +16,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+@Marker.AppDetailsTez
+@Marker.All
 public class TEZ_128 extends BaseClass {
 
-    Logger logger = LoggerFactory.getLogger(TC_spark_219.class);
+    Logger logger = LoggerFactory.getLogger(TEZ_128.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_124_verifyKPIsarelistedandhavedata(String clusterId) {
-        test = extent.startTest("TEZ_124_verifyKPIsarelistedandhavedata: " + clusterId,
+    public void TEZ_128_verifytheAnalysistab(String clusterId) {
+        test = extent.startTest("TEZ_128_verifytheAnalysistab: " + clusterId,
                 "Verify KPIs are listed and have data");
         test.assignCategory(" Apps Details-Tez");
-        Log.startTestCase("TEZ_124_verifyKPIsarelistedandhavedata");
+        Log.startTestCase("TEZ_128_verifytheAnalysistab");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

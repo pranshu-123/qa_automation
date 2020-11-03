@@ -15,7 +15,36 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "(//thead[@id='sparkStageNavigation-head'])/tr/th")
     public List<WebElement> stageHeaders;
 
-    // Configuration Tab xpaths
+    @FindBy(xpath = "/html/body/div[1]/div/div/div/div[3]/div/div[2]/div[2]/div[2]/div/div/table/tbody/tr[1]/td[1]")
+    public List<WebElement> tezTableRecords;
+
+    @FindBy(xpath = "/html/body/div[1]/div/div/div/div[3]/div/div[2]/div[2]/div[2]")
+    public WebElement tezTableRec;
+
+    @FindBy(xpath = "//tbody[@id=\"allApps-body\"]")
+    public WebElement tblTezApps;
+
+    @FindBy(xpath = "//tbody[@id='allApps-body']/tr")
+    public WebElement tblTezAppsRowsList;
+
+    @FindBy(xpath="//*[@id=\"allApps-headerspan-0\"]")
+    public List<WebElement> resultsGroupedByTableHeaderNames;
+
+    @FindBy(xpath="//*[@id=\"allApps-body\"]/tr[1]/td[1]")
+    public WebElement getType;
+
+    @FindBy(xpath="//*[@id=\"allApps-body\"]/tr[1]/td[2]")
+    public  WebElement getStatus;
+
+    @FindBy(xpath="//*[@id=\"allApps-body\"]/tr[1]/td[3]")
+    public  WebElement getUsername;
+
+    @FindBy(xpath="//*[@id=\"allApps-body\"]/tr[1]/td[4]/span[1]")
+    public  WebElement getAppname;
+
+    @FindBy(xpath="//*[@id=\"allApps-body\"]/tr[1]/td[4]/div")
+    public  WebElement getAppid;
+
 
     @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/p")
     public WebElement configPropNum;

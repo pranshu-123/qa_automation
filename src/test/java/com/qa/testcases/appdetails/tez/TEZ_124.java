@@ -21,7 +21,7 @@ import org.testng.annotations.Test;
 @Marker.All
 public class TEZ_124 extends BaseClass {
 
-    Logger logger = LoggerFactory.getLogger(TC_spark_219.class);
+    Logger logger = LoggerFactory.getLogger(TEZ_124.class);
 
     @Test(dataProvider = "clusterid-data-provider")
     public void TEZ_124_verifyKPIsarelistedandhavedata(String clusterId) {

@@ -4,7 +4,6 @@ import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.utils.LoggingUtils;
 import com.qa.utils.MouseActions;
-import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 /**

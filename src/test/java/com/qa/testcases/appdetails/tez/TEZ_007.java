@@ -26,11 +26,11 @@ public class TEZ_007 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_spark_219.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_007_verifyStarttimeandduration(String clusterId) {
-        test = extent.startTest("TEZ_007_verifyStarttimeandduration: " + clusterId,
+    public void TEZ_007_verifyStarttimeAndDuration(String clusterId) {
+        test = extent.startTest("TEZ_007_verifyStarttimeAndDuration: " + clusterId,
                 "Verify Application details in Unravel UI, application page.");
         test.assignCategory(" Apps Details-Tez");
-        Log.startTestCase("TEZ_007_verifyStarttimeandduration");
+        Log.startTestCase("TEZ_007_verifyStarttimeAndDuration");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

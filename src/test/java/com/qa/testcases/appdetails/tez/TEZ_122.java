@@ -1,8 +1,6 @@
 package com.qa.testcases.appdetails.tez;
 
 import com.qa.base.BaseClass;
-import com.qa.constants.PageConstants;
-import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.pagefactory.appsDetailsPage.TezAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
@@ -12,16 +10,10 @@ import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.Assert;
-import org.testng.SkipException;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class TEZ_122 extends BaseClass {
 

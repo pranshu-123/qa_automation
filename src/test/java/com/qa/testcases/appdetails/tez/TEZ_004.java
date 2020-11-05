@@ -33,8 +33,8 @@ public class TEZ_004 extends BaseClass {
     private static final java.util.logging.Logger LOGGER = Logger.getLogger(TEZ_004.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_004_verifyapplicationstatus(String clusterId) {
-        test = extent.startTest("TEZ_004_verifyapplicationstatus: " + clusterId,
+    public void TEZ_004_verifyApplicationStatus(String clusterId) {
+        test = extent.startTest("TEZ_004_verifyApplicationStatus: " + clusterId,
                 "Verify Application details in Unravel UI, application page.");
         test.assignCategory(" Apps Details-Tez");
         Log.startTestCase("TEZ_003_verifyKPIsarelistedandhavedata");

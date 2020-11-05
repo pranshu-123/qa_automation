@@ -24,11 +24,11 @@ public class TEZ_121 extends BaseClass {
     @Marker.AppDetailsTez
     @Marker.All
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_121_verifyHiveappswithclusterIDs(String clusterId) {
-        test = extent.startTest("TEZ_121_verifyHiveappswithclusterIDs: " + clusterId,
+    public void TEZ_121_verifyHiveAppsWithClusterIDs(String clusterId) {
+        test = extent.startTest("TEZ_121_verifyHiveAppsWithClusterIDs: " + clusterId,
                 "Verify All the Hive apps run on different Clusters must have the cluster ID.");
         test.assignCategory(" Apps Details-Tez");
-        Log.startTestCase("TEZ_121_verifyHiveappswithclusterIDs");
+        Log.startTestCase("TEZ_121_verifyHiveAppsWithClusterIDs");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

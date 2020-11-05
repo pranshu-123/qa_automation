@@ -23,11 +23,11 @@ public class TEZ_126 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TEZ_126.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_126_verifyOwnerclusterandqueue(String clusterId) {
-        test = extent.startTest("TEZ_126_verifyOwnerclusterandqueue: " + clusterId,
+    public void TEZ_126_verifyClusterAndQueue(String clusterId) {
+        test = extent.startTest("TEZ_126_verifyClusterAndQueue: " + clusterId,
                 "Verify KPIs are listed and have data");
         test.assignCategory(" Apps Details-Tez");
-        Log.startTestCase("TEZ_126_verifyOwnerclusterandqueue");
+        Log.startTestCase("TEZ_126_verifyClusterAndQueue");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

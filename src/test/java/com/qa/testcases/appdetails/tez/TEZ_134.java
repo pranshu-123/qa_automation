@@ -17,11 +17,11 @@ public class TEZ_134 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TEZ_134.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_134_verifyLeftpane(String clusterId) {
-        test = extent.startTest("TEZ_134_verifyTimingsTab: " + clusterId,
+    public void TEZ_134_verifyLeftPane(String clusterId) {
+        test = extent.startTest("TEZ_134_verifyLeftPane: " + clusterId,
                 "Verify all the spark apps are listed in the UI");
         test.assignCategory(" Apps Details-Spark");
-        Log.startTestCase("TEZ_134_verifyTimingsTab");
+        Log.startTestCase("TEZ_134_verifyLeftPane");
         TezAppsDetailsPage tezDetailsPage = new TezAppsDetailsPage(driver);
         //TBD DAG tab not poulated in apps detail page
         test.log(LogStatus.PASS, "Verified the Timings tab successfully");

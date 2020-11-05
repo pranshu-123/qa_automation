@@ -179,42 +179,6 @@ public class TezAppsDetailsPage {
         }
     }
 
-    public void validateConfigurationTab(TezAppsDetailsPageObject tezApps) {
-        String[] expectedKeyWords = {"METADATA", "MEMORY", "LIMIT", "RESOURCES", "CPU", "NET",
-                "YARN", "DEPLOY"};
-        List<WebElement> keyWordsList = tezApps.configKeywords;
-        verifyAssertFalse(keyWordsList.isEmpty(), tezApps, " Keywords not found");
-        String beforeResetProp = tezApps.configPropNum.getText();
-        int propNum = Integer.parseInt(beforeResetProp.split("\\s+")[0]);
-        LOGGER.info("Number of properties displayed by default are  " + propNum);
-
-        //Verify if property key value is present:
-        List<WebElement> propKeyList = tezApps.configPropKey;
-        List<WebElement> propValueList = tezApps.configPropValue;
-        LOGGER.info("PropKey size = " + propKeyList.size() + " propVal size = " +
-                propValueList.size());
-        verifyAssertFalse((propKeyList.isEmpty() && propValueList.isEmpty()), tezApps, " Key/Value is empty");
-        Assert.assertEquals(propKeyList.size(), propValueList.size(), "One of the key/Value " +
-                "is missing");
-
-        //Verify the keywords are present and should be clickable
-        for (int k = 0; k < keyWordsList.size(); k++) {
-            String keyword = keyWordsList.get(k).getText();
-            LOGGER.info("Keyword Type is " + keyword);
-            verifyAssertTrue(Arrays.asList(expectedKeyWords).contains(keyword), tezApps,
-                    " Keywords displayed on the UI doesnot match with the expected keywords");
-            MouseActions.clickOnElement(driver, keyWordsList.get(k));
-            waitExecuter.sleep(2000);
-        }
-        //Check RESET buttons sets default props
-        MouseActions.clickOnElement(driver, tezApps.resetButton);
-        waitExecuter.sleep(3000);
-        String afterResetProp = tezApps.configPropNum.getText();
-        LOGGER.info("No. of Properties displayed by default " + beforeResetProp + "\n " +
-                "No. of Properties displayed after RESET " + afterResetProp);
-        Assert.assertEquals(afterResetProp, beforeResetProp, "The properties have not been reset " +
-                "to default");
-    }
 
     public void validateLogsTab(TezAppsDetailsPageObject tezApps) {
         List<WebElement> executorNameList = tezApps.logExecutorNames;
@@ -347,21 +311,11 @@ public class TezAppsDetailsPage {
                         waitExecuter.sleep(3000);
                         validateResourcesTab(tezApps);
                         break;
-                    case "Errors":
+                    case "Diagnostics":
                         MouseActions.clickOnElement(driver, appsTabList.get(i));
                         waitExecuter.sleep(3000);
                         validateErrorsTab(tezApps);
                         test.log(LogStatus.PASS, "Errors tab is populated");
-                        break;
-                    case "Configuratio...":
-                        MouseActions.clickOnElement(driver, appsTabList.get(i));
-                        waitExecuter.sleep(10000);
-                        validateConfigurationTab(tezApps);
-                        break;
-                    case "Logs":
-                        MouseActions.clickOnElement(driver, appsTabList.get(i));
-                        waitExecuter.sleep(10000);
-                        validateLogsTab(tezApps);
                         break;
                     case "Tags":
                         MouseActions.clickOnElement(driver, appsTabList.get(i));
@@ -370,13 +324,7 @@ public class TezAppsDetailsPage {
                         test.log(LogStatus.PASS, "Tags tab is populated");
                         return tagValue;
                     //  break;
-                    case "Program":
-                        MouseActions.clickOnElement(driver, appsTabList.get(i));
-                        waitExecuter.sleep(3000);
-                        List<WebElement> programDataList = tezApps.programTabData;
-                        verifyAssertFalse(programDataList.isEmpty(), tezApps, tezApps.programDataNotFound.getText());
-                        break;
-                    case "Timings":
+                    case "Configuration":
                         MouseActions.clickOnElement(driver, appsTabList.get(i));
                         waitExecuter.sleep(3000);
                         validateTimingTab(tezApps);
@@ -694,7 +642,7 @@ public class TezAppsDetailsPage {
      */
     public String verifyAppId(TezAppsDetailsPageObject tezApps, ApplicationsPageObject appPageObj) {
         String appId = tezApps.getAppId.getText().trim();
-        LOGGER.info("Spark application Id is " + appId);
+        LOGGER.info("Tez application Id is " + appId);
         appPageObj.getTypeFromTable.click();
         waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();
@@ -710,7 +658,7 @@ public class TezAppsDetailsPage {
      */
     public String verifyStatus(TezAppsDetailsPageObject tezApps) {
         String Status = tezApps.Bystatus.getText();
-        LOGGER.info("Spark application Id is " + Status);
+        LOGGER.info("Tez application Id is " + Status);
         Assert.assertNotSame("", Status, "Tez Application Id is not displayed in the Header");
         return Status;
     }
@@ -726,6 +674,17 @@ public class TezAppsDetailsPage {
         waitExecuter.waitUntilPageFullyLoaded();
         Assert.assertNotSame("", typeValue, "Tez User name is not displayed in the Table");
         return typeValue;
+    }
+
+    /**
+     * Method to click the first app in jobs table , navigate to the details page.
+     * and verify App status  .
+     */
+    public String verifyAppstatus (TezAppsDetailsPageObject tezApps) {
+        String Status = tezApps.Bystatus.getText();
+        LOGGER.info("Tez application Id is " + Status);
+        Assert.assertNotSame("", Status, "Tez Application Id is not displayed in the Header");
+        return Status;
     }
 
 
@@ -932,7 +891,7 @@ public class TezAppsDetailsPage {
     /***
      * Common actions listed in one method that does the following:
      * Navigate to Jobs tab from header
-     * Verify that the left pane has spark app
+     * Verify that the left pane has Tez app
      * Get Job count of selected App click on it and go to apps details page
      * Verify specific summary tabs.
      * */

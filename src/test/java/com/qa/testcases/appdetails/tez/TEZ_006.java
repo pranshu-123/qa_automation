@@ -35,10 +35,10 @@ public class TEZ_006 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void TEZ_006_verifyApplicationNameID(String clusterId) {
-        test = extent.startTest("TEZ_006_verifyApplicationNameAndID: " + clusterId,
+        test = extent.startTest("TEZ_006_verifyApplicationNameID: " + clusterId,
                 "Verify Application details in Unravel UI, application page.");
         test.assignCategory(" Apps Details-Tez");
-        Log.startTestCase("TEZ_006_verifyApplicationNameAndID");
+        Log.startTestCase("TEZ_006_verifyApplicationNameID");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

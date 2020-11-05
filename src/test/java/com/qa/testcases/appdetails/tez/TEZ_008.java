@@ -24,11 +24,11 @@ public class TEZ_008 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TEZ_008.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_008_verifydataIO(String clusterId) {
-        test = extent.startTest("TEZ_008_verifydataIO: " + clusterId,
+    public void TEZ_008_verifyDataIO(String clusterId) {
+        test = extent.startTest("TEZ_008_verifyDataIO: " + clusterId,
                 "Verify Application details in Unravel UI, application page.");
         test.assignCategory(" Apps Details-Tez");
-        Log.startTestCase("TEZ_008_verifydataIO");
+        Log.startTestCase("TEZ_008_verifyDataIO");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

@@ -25,11 +25,11 @@ public class TEZ_005 extends BaseClass {
     private static final java.util.logging.Logger LOGGER = Logger.getLogger(TEZ_005.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_005_verifyapplicationusername(String clusterId) {
-        test = extent.startTest("TEZ_005_verifyapplicationusername: " + clusterId,
+    public void TEZ_005_verifyApplicationUsername(String clusterId) {
+        test = extent.startTest("TEZ_005_verifyApplicationUsername: " + clusterId,
                 "Verify Application details in Unravel UI, application page.");
         test.assignCategory(" Apps Details-Tez");
-        Log.startTestCase("TEZ_005_verifyapplicationusername");
+        Log.startTestCase("TEZ_005_verifyApplicationUsername");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

@@ -2,30 +2,31 @@ package com.qa.testcases.jobs.applications.details.hive;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.constants.PageConstants;
 import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
-import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Logger;
 
 @Marker.AppDetailsHive
 @Marker.All
-public class TC_HIVE_45 extends BaseClass {
-    private static final Logger LOGGER = Logger.getLogger(TC_HIVE_45.class.getName());
+public class TC_HIVE_43_54 extends BaseClass {
+    private static final Logger LOGGER = Logger.getLogger(TC_HIVE_43_54.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void VerifyCopyAppNameID(String clusterId) {
-        test = extent.startTest("TC_HIVE_45.VerifyCopyAppNameID",
-                "Verify that on hovering over app, user is able to copy app name/id by clicking on '+'");
+    public void VerifyRunningApps(String clusterId) {
+        test = extent.startTest("TC_HIVE_43_54.VerifyFilterByStatus",
+                "Verify that in Running Apps only jobs with Running status are present.");
         test.assignCategory("App Details - Hive");
         test.log(LogStatus.INFO, "Login to the application");
 
@@ -36,8 +37,6 @@ public class TC_HIVE_45 extends BaseClass {
         TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         AllApps allApps = new AllApps(driver);
-        DatePicker datePicker = new DatePicker(driver);
-        Actions actions = new Actions(driver);
         SparkAppsDetailsPage sparkApp = new SparkAppsDetailsPage(driver);
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
@@ -48,12 +47,7 @@ public class TC_HIVE_45 extends BaseClass {
         waitExecuter.sleep(4000);
         waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
         waitExecuter.waitUntilPageFullyLoaded();
-        // Select last 30 days from date picker
-        test.log(LogStatus.INFO, "Select last 30 days");
-        LOGGER.info("Select last 30 days");
-        datePicker.clickOnDatePicker();
-        waitExecuter.sleep(1000);
-        datePicker.selectLast30Days();
+        applicationsPageObject.runningAppTab.click();
         waitExecuter.sleep(2000);
         // Select cluster
         test.log(LogStatus.INFO, "Select clusterid : " + clusterId);
@@ -67,28 +61,27 @@ public class TC_HIVE_45 extends BaseClass {
         int hiveAppCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
                 .replaceAll("[^\\dA-Za-z ]", "").trim());
         if (hiveAppCount > 0) {
-            // Hive on to the first row
-            test.log(LogStatus.INFO, "Hive on to the first row");
-            LOGGER.info("Hive on to the first row");
-            WebElement type = applicationsPageObject.getTypeFromTable;
-            actions.moveToElement(type).perform();
-            waitExecuter.sleep(1000);
-            String tooltipValue = applicationsPageObject.getTypeFromTable.getAttribute("aria-describedby");
-            waitExecuter.sleep(1000);
-            // Validate that on hovering the row is highlighted
-            test.log(LogStatus.INFO, "Validate that on hovering the row is highlighted");
-            LOGGER.info("Validate that on hovering the row is highlighted");
-            Assert.assertNotNull(tooltipValue, "On hover the row is not highlighted");
-            test.log(LogStatus.PASS, "On hover, the application in table is highlighted");
+            Set<String> status = new HashSet<String>();
+            for (WebElement statusFromTable : applicationsPageObject.getStatusColumnOfRunningApps) {
+                status.add(statusFromTable.getText().trim().toLowerCase());
+            }
+            LOGGER.info("All apps status in tables are: " + status);
+            LOGGER.info("Compare to status: " + PageConstants.JobsStatusType.RUNNING);
+            Assert.assertTrue(status.contains(PageConstants.JobsStatusType.RUNNING),
+                    "The status should contain only Running apps but it does not");
+            test.log(LogStatus.PASS, "The status contains only Running apps.");
         } else {
             Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
                     "The clusterId does not have any application under it and also does not display 'No Data Available' for it"
                             + clusterId);
-            test.log(LogStatus.SKIP, "The clusterId does not have any application under it.");
-            throw new SkipException("The clusterId does not have any application under it");
+            test.log(LogStatus.SKIP, "The clusterId does not have any running application under it.");
+            throw new SkipException("The clusterId does not have any running application under it");
         }
-        // Click on show-all to view all type of applications
-        applicationsPageObject.resetButton.click();
+        // Reset set filter to default
+        test.log(LogStatus.INFO, "Reset set filter");
+        LOGGER.info("Reset set filter");
         waitExecuter.sleep(2000);
+        applicationsPageObject.resetButton.click();
+        waitExecuter.sleep(3000);
     }
 }

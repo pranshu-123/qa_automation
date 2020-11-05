@@ -426,7 +426,7 @@ public class TezAppsDetailsPage {
 
         //Verify tables have data in it
         List<WebElement> tableContentList = tezApps.streamTableRows;
-        verifyAssertFalse(tableContentList.isEmpty(), tezApps, "The spark streaming table is empty.");
+        verifyAssertFalse(tableContentList.isEmpty(), tezApps, "The Tez streaming table is empty.");
     }
 
     /**
@@ -551,7 +551,7 @@ public class TezAppsDetailsPage {
      */
     public void validateStagesTabs(TezAppsDetailsPageObject tezApps) {
         //click the stageId to sort it
-        driver.findElement(By.xpath("//*[@id='sparkStageNavigation-head']/tr/th[1]")).click();
+        driver.findElement(By.xpath("//*[@id='tezStageNavigation-head']/tr/th[1]")).click();
         List<WebElement> stageRowList = tezApps.stageRows;
         verifyAssertFalse(stageRowList.isEmpty(), tezApps, " No stages displayed for JobId");
         for (int i = 0; i < stageRowList.size(); i++) {
@@ -728,10 +728,7 @@ public class TezAppsDetailsPage {
         return typeValue;
     }
 
-    /**
-     * Method to click the first app in jobs table , navigate to the details page.
-     * and verify  Appname .
-     */
+
     /**
      * Method to click the first app in jobs table , navigate to the details page.
      * and verify  Appname .
@@ -769,7 +766,7 @@ public class TezAppsDetailsPage {
 
     /**
      * Method to click the first app in jobs table , navigate to the details page.
-     * and verify  Appid .
+     * and verify  clusterId .
      */
     public String verifyclusterId(TezAppsDetailsPageObject tezApps) {
         WebElement Appid =tezApps.getClusterId;
@@ -787,7 +784,7 @@ public class TezAppsDetailsPage {
 
     /**
      * Method to click the first app in jobs table , navigate to the details page.
-     * and verify  Status .
+     * and verify  starttime .
      */
     public String verifystarttime(TezAppsDetailsPageObject tezApps) {
         String typetarttime = tezApps.getstartTime.getText();
@@ -800,7 +797,7 @@ public class TezAppsDetailsPage {
 
     /**
      * Method to click the first app in jobs table , navigate to the details page.
-     * and verify  Status .
+     * and verify  duration .
      */
     public String verifyduration(TezAppsDetailsPageObject tezApps) {
         String typetarttime = tezApps.getduration.getText();
@@ -813,7 +810,7 @@ public class TezAppsDetailsPage {
 
     /**
      * Method to click the first app in jobs table , navigate to the details page.
-     * and verify  Status .
+     * and verify  Read IO .
      */
     public String verifyRead(TezAppsDetailsPageObject tezApps) {
         String ReadIO = tezApps.getRead.getText();
@@ -826,7 +823,7 @@ public class TezAppsDetailsPage {
 
     /**
      * Method to click the first app in jobs table , navigate to the details page.
-     * and verify  Status .
+     * and verify  Write .
      */
     public String verifyWrite(TezAppsDetailsPageObject tezApps) {
         String WriteIO = tezApps.getWrite.getText();
@@ -835,20 +832,6 @@ public class TezAppsDetailsPage {
         waitExecuter.waitUntilPageFullyLoaded();
         Assert.assertNotSame("", WriteIO, "Tez User name is not displayed in the Table");
         return WriteIO;
-    }
-    /**
-     * Method to click the first app in jobs table , navigate to the details page.
-     * and verify app Id .
-     */
-    public String verifyClusterId(TezAppsDetailsPageObject tezApps, ApplicationsPageObject appPageObj) {
-        String appId = tezApps.getClusterId.getText();
-        LOGGER.info("Tez application Id is " + appId);
-        appPageObj.getTypeFromTable.click();
-        waitExecuter.sleep(5000);
-        waitExecuter.waitUntilPageFullyLoaded();
-        String headerAppId = tezApps.getHeaderAppId.getText().trim();
-        Assert.assertNotSame("", headerAppId, "Spark Application Id is not displayed in the Header");
-        return headerAppId;
     }
 
     /**
@@ -970,23 +953,23 @@ public class TezAppsDetailsPage {
         appsDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
 
-        //Verify that the left pane has spark check box and the apps number
-        test.log(LogStatus.INFO, "Verify that the left pane has spark check box and the apps number");
+        //Verify that the left pane has Tez check box and the apps number
+        test.log(LogStatus.INFO, "Verify that the left pane has Tez check box and the apps number");
         logger.info("Select individual app and assert that table contain its data");
 
         appsDetailsPage.clickOnlyLink("Tez");
         applicationsPageObject.expandStatus.click();
         int appCount = appsDetailsPage.clickOnlyLink("Success");
-        //Clicking on the Spark app must go to apps detail page
+        //Clicking on the Tez app must go to apps detail page
         if (appCount > 0) {
             String headerAppId = appsDetailsPage.verifyAppId(sparkAppPageObj, applicationsPageObject);
-            test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);
+            test.log(LogStatus.PASS, "Tez Application Id is displayed in the Header: " + headerAppId);
             appsDetailsPage.verifyAppSummaryTabs(sparkAppPageObj, tabName, test);
             //Close apps details page
             MouseActions.clickOnElement(driver, sparkAppPageObj.closeAppsPageTab);
         } else {
-            test.log(LogStatus.SKIP, "No Spark Application present");
-            logger.error("No Spark Application present in the " + clusterId + " cluster for the time span " +
+            test.log(LogStatus.SKIP, "No Tez Application present");
+            logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +
                     "of 90 days");
         }
     }

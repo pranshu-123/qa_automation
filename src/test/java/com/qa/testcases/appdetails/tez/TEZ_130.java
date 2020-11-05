@@ -50,14 +50,12 @@ public class TEZ_130 extends BaseClass {
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
-        Assert.assertEquals(appCount, totalCount, "The tez app count of SparkApp is not equal to " +
+        Assert.assertEquals(appCount, totalCount, "The tez app count of TezApp is not equal to " +
                 "the total count of heading.");
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 
         //TBD Tables tab  value not poulated in apps detail page
-
-
 
 
         //Close apps details page

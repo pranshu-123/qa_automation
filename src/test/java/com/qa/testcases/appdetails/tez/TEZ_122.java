@@ -46,8 +46,8 @@ public class TEZ_122 extends BaseClass {
         AllApps allApps = new AllApps(driver);
 
 
-        logger.info("Select 'Only' hive from app types and get its jobs count");
-        sparkApp.clickOnlyLink("Hive");
+        logger.info("Select 'Only' Tez from app types and get its jobs count");
+        sparkApp.clickOnlyLink("Tez");
         int hiveAppCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
                 .replaceAll("[^\\dA-Za-z ]", "").trim());
         // Expand status filter on left pane

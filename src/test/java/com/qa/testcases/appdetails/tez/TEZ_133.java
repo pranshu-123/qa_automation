@@ -20,7 +20,7 @@ public class TEZ_133 extends BaseClass {
     public void TEZ_133_verifyTimingsTab(String clusterId) {
         test = extent.startTest("TEZ_133_verifyTimingsTab: " + clusterId,
                 "Verify all the spark apps are listed in the UI");
-        test.assignCategory(" Apps Details-Spark");
+        test.assignCategory(" Apps Details-Tez");
         Log.startTestCase("TEZ_133_verifyTimingsTab");
         TezAppsDetailsPage tezDetailsPage = new TezAppsDetailsPage(driver);
         //TBD Data base tab not poulated in apps detail page

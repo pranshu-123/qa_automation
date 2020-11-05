@@ -19,7 +19,7 @@ public class TEZ_131 extends BaseClass {
     public void TEZ_131_verifyTimingsTab(String clusterId) {
         test = extent.startTest("TEZ_131_verifyTimingsTab: " + clusterId,
                 "Verify all the spark apps are listed in the UI");
-        test.assignCategory(" Apps Details-Spark");
+        test.assignCategory(" Apps Details-Tez");
         Log.startTestCase("TEZ_131_verifyTimingsTab");
         SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);
 

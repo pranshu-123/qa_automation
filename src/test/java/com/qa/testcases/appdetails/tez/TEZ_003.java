@@ -57,7 +57,7 @@ public class TEZ_003 extends BaseClass {
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 
-        test.log(LogStatus.INFO, "Assert if in all application Hive application are present");
+        test.log(LogStatus.INFO, "Assert if in all application Tez application are present");
         logger.info("Assert if in all application TEZ application are present");
         Assert.assertTrue(allApps.getAllApplicationTypes().contains("Tez"),
                 "The list of applications does not contains 'Tez' apps");

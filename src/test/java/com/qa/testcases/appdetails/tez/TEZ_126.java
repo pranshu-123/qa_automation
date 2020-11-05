@@ -50,7 +50,7 @@ public class TEZ_126 extends BaseClass {
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
-        Assert.assertEquals(appCount, totalCount, "The tez app count of SparkApp is not equal to " +
+        Assert.assertEquals(appCount, totalCount, "The tez app count of TezApp is not equal to " +
                 "the total count of heading.");
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
@@ -58,13 +58,13 @@ public class TEZ_126 extends BaseClass {
         //Clicking on the Tez app must go to apps detail page
         if (appCount > 0) {
             String headerAppId = tezDetailsPage.verifyAppId(tezApps, applicationsPageObject);
-            test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);
+            test.log(LogStatus.PASS, "Tez Application Id is displayed in the Header: " + headerAppId);
 
             /**clicking on the UI must go to apps detail page and verify the basic tabs present */
             tezDetailsPage.verifyAppsComponent(tezApps, false, false, true);
             test.log(LogStatus.PASS, "The basic components for an application is present");
         } else {
-            logger.error("No Spark Application present in the " + clusterId + " cluster for the time span " +
+            logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +
                     "of 90 days");
         }
         //Close apps details page

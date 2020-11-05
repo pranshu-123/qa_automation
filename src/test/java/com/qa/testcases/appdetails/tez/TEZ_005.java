@@ -9,6 +9,7 @@ import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.TezAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.LoggerFactory;
@@ -57,16 +58,19 @@ public class TEZ_005 extends BaseClass {
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 
-        String user = tezDetailsPage.verifyusername(tezApps);
-        test.log(LogStatus.PASS, "Tez app details user is displayed in the Table: " +user);
+        /*
+         * Validate the username types are --
+         */
+        if (appCount > 0) {
+            String user = tezDetailsPage.verifyusername(tezApps);
+            test.log(LogStatus.PASS, "Tez user is displayed in the Table: " + user);
 
-        // Sort down by User
-        test.log(LogStatus.INFO, "Sort down by user");
-        LOGGER.info("Sort down by user");
-        tezApps.sortByUser.click();
-        waitExecuter.sleep(2000);
-        Assert.assertTrue(tezApps.sortDown.isDisplayed(), "Sort down is not working");
-        test.log(LogStatus.PASS, "Verified sorting on Status.");
-
+        } else {
+            test.log(LogStatus.SKIP, "No Tez Application present");
+            LOGGER.severe("No Tez Application present in the " + clusterId + " cluster for the time span " +
+                    "of 90 days");
+            //Close apps details page
+            MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
+        }
     }
 }

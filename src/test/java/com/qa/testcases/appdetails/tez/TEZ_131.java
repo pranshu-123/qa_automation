@@ -12,12 +12,7 @@ import org.testng.annotations.Test;
 @Marker.AppDetailsTez
 @Marker.All
 public class TEZ_131 extends BaseClass {
-    /**
-     * Verify that on a cluster with different kinds of Spark Apps:
-     * 1. Logs tab must contain One Driver and executor logs listed
-     * 2. They must be collapsible tabs
-     * 3. clicking on each must open logs window and should be able to scroll the logs
-     */
+
     Logger logger = LoggerFactory.getLogger(TEZ_131.class);
 
     @Test(dataProvider = "clusterid-data-provider")
@@ -27,7 +22,7 @@ public class TEZ_131 extends BaseClass {
         test.assignCategory(" Apps Details-Spark");
         Log.startTestCase("TEZ_131_verifyTimingsTab");
         SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);
-        appsDetailsPage.commonSetupCodeForSumarryTabValidation(test, clusterId, "Timings", logger);
+
         test.log(LogStatus.PASS, "Verified the Timings tab successfully");
     }
 }

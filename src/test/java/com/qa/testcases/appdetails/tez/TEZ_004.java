@@ -12,6 +12,7 @@ import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.testcases.appdetails.spark.TC_spark_219;
 import com.qa.testcases.jobs.applications.details.hive.TC_HIVE_42;
 import com.qa.utils.Log;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebElement;
@@ -67,59 +68,17 @@ public class TEZ_004 extends BaseClass {
 
         /*
          * Validate that status types are --
-         * "Killed","Failed","Running","Success","Pending","Unknown", "Waiting"
          */
-        test.log(LogStatus.INFO,
-                "Assert status types - 'Killed','Failed','Success','Waiting'");
-        LOGGER.info("Assert status types - 'Killed','Failed','Success','Waiting'");
-        List<String> existingStatusTypes = new ArrayList<>(Arrays.asList(PageConstants.JobsStatusType.STATUSTYPE));
-        List<WebElement> statusTypes = applicationsPageObject.getStatusTypes;
-        List<String> listOfStatusTypes = new ArrayList<String>();
-        waitExecuter.sleep(2000);
-        for (int i = 0; i < statusTypes.size(); i++) {
-            listOfStatusTypes.add(statusTypes.get(i).getText().trim());
-        }
-        Assert.assertTrue(listOfStatusTypes.equals(existingStatusTypes),
-                "Status types displayed does not match the expected status list");
-        test.log(LogStatus.PASS, "Status types displayed match the expected status list");
-        // Select single app and assert that table contain its data.
-        test.log(LogStatus.INFO, "Select single app and assert that table contain its data.");
-        LOGGER.info("Select single app and assert that table contain its data.");
-        List<WebElement> clickOnIndividualStatus = applicationsPageObject.selectSingleStatusType;
-        waitExecuter.sleep(2000);
-        List<WebElement> appStatusCounts = applicationsPageObject.getEachStatusTypeJobCount;
-        waitExecuter.sleep(2000);
-        for (int i = 0; i < clickOnIndividualStatus.size(); i++) {
-            waitExecuter.sleep(2000);
-            clickOnIndividualStatus.get(i).click();
-            waitExecuter.sleep(2000);
-            int tezCount = Integer.parseInt(appStatusCounts.get(i).getText().replaceAll("[^\\dA-Za-z ]", "").trim());
-            waitExecuter.sleep(1000);
-            int teztotalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
-            waitExecuter.sleep(1000);
+        if (appCount > 0) {
+            String statusValue = tezDetailsPage.verifyStatus(tezApps);
+            test.log(LogStatus.PASS, "Tez status Value is displayed in the Table: " + statusValue);
 
-            Assert.assertEquals(appCount, totalCount, "The app count of " + statusTypes.get(i).getText().trim()
-                    + " is not equal to the total count of heading.");
-            test.log(LogStatus.PASS, "The status count matches the total count");
-            waitExecuter.sleep(1000);
-            clickOnIndividualStatus.get(i).click();
-            waitExecuter.sleep(2000);
-
-
-            // Sort Up by Status
-            test.log(LogStatus.INFO, "Sort Up by Status");
-            LOGGER.info("Sort up by Status");
-            tezApps.sortStatus.click();
-            waitExecuter.sleep(2000);
-            Assert.assertTrue(tezApps.sortUp.isDisplayed(), "Sort up is not working");
-            // Sort down by Status
-            test.log(LogStatus.INFO, "Sort down by status");
-            LOGGER.info("Sort down by status");
-            tezApps.sortStatus.click();
-            waitExecuter.sleep(2000);
-            Assert.assertTrue(tezApps.sortDown.isDisplayed(), "Sort down is not working");
-            test.log(LogStatus.PASS, "Verified sorting on Status.");
+        } else {
+            test.log(LogStatus.SKIP, "No Tez Application present");
+            LOGGER.severe("No Tez Application present in the " + clusterId + " cluster for the time span " +
+                    "of 90 days");
+            //Close apps details page
+            MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
         }
     }
 }
-

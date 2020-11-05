@@ -12,20 +12,38 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[4]/div")
     public WebElement getAppId;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[1]/span[2]")
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[5]")
     public WebElement getClusterId;
 
     @FindBy(xpath = "(//thead[@id='sparkStageNavigation-head'])/tr/th")
     public List<WebElement> stageHeaders;
 
-    @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-down')]")
-    public WebElement sortDown;
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[2]")
+    public WebElement Bystatus;
 
-    @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-up')]")
-    public WebElement sortUp;
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[3]")
+    public WebElement getUsername;
 
-    @FindBy(xpath = "//span[(text()='User')]//following-sibling::a[contains(@class,'sorting')]")
-    public WebElement sortByUser;
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[4]/span[1]")
+    public WebElement getAppname;
+
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[6]")
+    public WebElement getstartTime;
+
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[7]")
+    public WebElement getduration;
+
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[9]")
+    public WebElement getRead;
+
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[10]")
+    public WebElement getWrite;
+
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[4]/span[1]")
+    public WebElement getApptooltips;
+
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[4]/div")
+    public WebElement getAppid;
 
     @FindBy(xpath = "//*[name()='g' and contains(@class,'highcharts-spline-series')]//*[name()='path' and @class='highcharts-graph']")
     public WebElement streamingLineChart;

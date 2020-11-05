@@ -9,6 +9,7 @@ import com.qa.scripts.appdetails.TezAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,7 @@ public class TEZ_009 extends BaseClass {
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
         logger.info("Initialize all class objects");
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         TezAppsDetailsPageObject tezApps = new TezAppsDetailsPageObject(driver);
@@ -37,6 +39,7 @@ public class TEZ_009 extends BaseClass {
         AllApps allApps = new AllApps(driver);
 
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
+        waitExecuter.sleep(3000);
         tezDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
         test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
@@ -52,20 +55,24 @@ public class TEZ_009 extends BaseClass {
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 
+        /*
+         * Validate the start time types are --
+         */
         if (appCount > 0) {
-            String headerAppId = tezDetailsPage.verifyAppId(tezApps, applicationsPageObject);
-            test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);
-            test.log(LogStatus.INFO, "Verify if the user can execute the Load Diagnostics action");
-            tezDetailsPage.verifyAppsComponent(tezApps, false, false, true);
-            test.log(LogStatus.PASS, "Verified that the user can execute the Load Diagnostics action");
-            //Close apps details page
-            MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
+            String clusterid = tezDetailsPage.verifyclusterId(tezApps);
+            test.log(LogStatus.PASS, "Read IO is displayed in the Tez Table: " + clusterid);
+
+
         } else {
-            test.log(LogStatus.SKIP, "No Spark Application present");
-            logger.error("No Spark Application present in the " + clusterId + " cluster for the time span " +
+            test.log(LogStatus.SKIP, "No Tez Application present");
+            logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +
                     "of 90 days");
             //Close apps details page
+            MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
+
 
         }
+
     }
-}
+    }
+

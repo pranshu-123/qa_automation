@@ -10,6 +10,7 @@ import com.qa.scripts.appdetails.TezAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.testcases.appdetails.spark.TC_spark_219;
 import com.qa.utils.Log;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.Keys;
@@ -59,51 +60,23 @@ public class TEZ_006 extends BaseClass {
         int tezCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         test.log(LogStatus.PASS, "Verify that the left pane apps count: "+tezCount);
-        if (tezCount > 0) {
-            // Hive on to the first row
-            test.log(LogStatus.INFO, "Hive on to the first row");
-            LOGGER.info("Hive on to the first row");
-            WebElement name = applicationsPageObject.getAppNameFromTable;
-            actions.moveToElement(name).perform();
-            waitExecuter.sleep(1000);
-            actions.moveToElement(applicationsPageObject.copyAppName).perform();
-            waitExecuter.sleep(1000);
-            applicationsPageObject.copyAppName.click();
-            Assert.assertTrue(applicationsPageObject.successBanner.isDisplayed(), "App id is not copied");
-            test.log(LogStatus.PASS, "On clicking on + app id got copied");
-            waitExecuter.sleep(1000);
-            applicationsPageObject.globalSearchBox.click();
-            waitExecuter.sleep(1000);
-            try {
-                String data = (String) Toolkit.getDefaultToolkit().getSystemClipboard()
-                        .getData(DataFlavor.stringFlavor);
-                String[] getCopiedText = data.split(":");
-                LOGGER.info("Search by ID - " + getCopiedText[2]);
-                applicationsPageObject.globalSearchBox.sendKeys(getCopiedText[2]);
-                applicationsPageObject.globalSearchBox.sendKeys(Keys.ENTER);
-                waitExecuter.sleep(1000);
-            } catch (HeadlessException | UnsupportedFlavorException | IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            waitExecuter.sleep(2000);
-            /*
-             * Validate that on copying the ID on globalsearch, only that row appears in
-             * table
-             */
-            test.log(LogStatus.INFO, "Validate that on copying the ID on globalsearch, only that row appears in table");
-            LOGGER.info("Validate that on copying the ID on globalsearch, only that row appears in table");
-            String value = applicationsPageObject.globalSearchBox.getAttribute("value");
-            Assert.assertTrue(applicationsPageObject.getStatusColumnFromTable.size() == 1,
-                    "On searching by ID the table contains more than 1 row. " + value);
-            test.log(LogStatus.PASS, "On searching by ID the table contains 1 row.");
-            waitExecuter.sleep(1000);
+        /*
+         * Validate the username types are --
+         */
+        if (appCount > 0) {
+            String Appname = tezDetailsPage.verifyAppname(tezApps);
+            test.log(LogStatus.PASS, "Tez App name is displayed in the Table: " + Appname);
+
+            String AppId = tezDetailsPage.verifyappId(tezApps);
+            test.log(LogStatus.PASS, "Tez App Id is displayed in the Table: " + AppId);
+
+
         } else {
-            Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
-                    "The clusterId does not have any application under it and also does not display 'No Data Available' for it"
-                            + clusterId);
-            test.log(LogStatus.SKIP, "The clusterId does not have any application under it.");
-            throw new SkipException("The clusterId does not have any application under it");
+            test.log(LogStatus.SKIP, "No Tez Application present");
+            LOGGER.severe("No Tez Application present in the " + clusterId + " cluster for the time span " +
+                    "of 90 days");
+            //Close apps details page
+            MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
         }
     }
 }

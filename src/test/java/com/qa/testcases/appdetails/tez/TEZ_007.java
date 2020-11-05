@@ -59,17 +59,19 @@ public class TEZ_007 extends BaseClass {
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 
+        /*
+         * Validate the start time types are --
+         */
         if (appCount > 0) {
-            String headerAppId = tezDetailsPage.verifyAppId(tezApps, applicationsPageObject);
-            test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);
-            test.log(LogStatus.INFO, "Verify if the user can execute the Load Diagnostics action");
-            tezDetailsPage.verifyAppsComponent(tezApps, false, false, true);
-            test.log(LogStatus.PASS, "Verified that the user can execute the Load Diagnostics action");
-            //Close apps details page
-            MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
+            String starttime = tezDetailsPage.verifystarttime(tezApps);
+            test.log(LogStatus.PASS, "Start time is displayed in the Tez Table: " + starttime);
+
+            String duration = tezDetailsPage.verifyduration(tezApps);
+            test.log(LogStatus.PASS, "Duration is displayed in the Tez Table: " + duration);
+
         } else {
-            test.log(LogStatus.SKIP, "No Spark Application present");
-            logger.error("No Spark Application present in the " + clusterId + " cluster for the time span " +
+            test.log(LogStatus.SKIP, "No Tez Application present");
+            logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +
                     "of 90 days");
             //Close apps details page
             MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);

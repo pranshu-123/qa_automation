@@ -51,30 +51,29 @@ public class TEZ_008 extends BaseClass {
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
-        Assert.assertEquals(appCount, totalCount, "The tez app count of SparkApp is not equal to " +
+        Assert.assertEquals(appCount, totalCount, "The tez app count of tezApp is not equal to " +
                 "the total count of heading.");
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 
-        String Status = tezDetailsPage.verifyAppId(tezApps, applicationsPageObject);
-        test.log(LogStatus.PASS, "Tez Status is displayed in the Table: " + Status);
-
-        //Clicking on the Spark app must go to apps detail page
+        /*
+         * Validate the start time types are --
+         */
         if (appCount > 0) {
-            String headerAppId = tezDetailsPage.verifyAppId(tezApps, applicationsPageObject);
-            test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);
-            test.log(LogStatus.INFO, "Verify if the user can execute the Load Diagnostics action");
-            tezDetailsPage.verifyAppsComponent(tezApps, false, false, true);
-            test.log(LogStatus.PASS, "Verified that the user can execute the Load Diagnostics action");
-            //Close apps details page
-            MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
+            String Read = tezDetailsPage.verifyRead(tezApps);
+            test.log(LogStatus.PASS, "Read IO is displayed in the Tez Table: " + Read);
+
+            String Write = tezDetailsPage.verifyWrite(tezApps);
+            test.log(LogStatus.PASS, "Write IO is displayed in the Tez Table: " + Write);
+
         } else {
-            test.log(LogStatus.SKIP, "No Spark Application present");
-            logger.error("No Spark Application present in the " + clusterId + " cluster for the time span " +
+            test.log(LogStatus.SKIP, "No Tez Application present");
+            logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +
                     "of 90 days");
-            //Close apps details page
-            MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
+
 
         }
+        //Close apps details page
+        MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
     }
 }

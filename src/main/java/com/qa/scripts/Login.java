@@ -1,11 +1,13 @@
 package com.qa.scripts;
 
 import com.qa.constants.ConfigConstants;
+import com.qa.enums.UserAction;
 import com.qa.io.ConfigReader;
 import com.qa.pagefactory.HomePageObject;
 import com.qa.pagefactory.LoginPageObject;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 
@@ -21,7 +23,7 @@ public class Login {
   WebDriver driver;
   WaitExecuter executer;
   HomePageObject homePageObject;
-
+  private UserActions userActions;
   /**
    * Constructor initialize the page components
    * @param driver - Instance of WebDriver
@@ -31,6 +33,7 @@ public class Login {
     loginObj = new LoginPageObject(driver);
     homePageObject = new HomePageObject(driver);
     executer = new WaitExecuter(driver);
+    userActions = new UserActions(driver);
   }
 
   /**
@@ -40,11 +43,11 @@ public class Login {
     driver.navigate().refresh();
     Properties prop = ConfigReader.readBaseConfig();
     String user = prop.getProperty(ConfigConstants.UnravelConfig.USERNAME);
-    loginObj.loginUserName.sendKeys(user);
     String pwd = prop.getProperty(ConfigConstants.UnravelConfig.PASSWORD);
-    loginObj.loginPassword.sendKeys(pwd);
+    userActions.performActionWithPolling(loginObj.loginUserName, UserAction.SEND_KEYS, user);
+    userActions.performActionWithPolling(loginObj.loginPassword, UserAction.SEND_KEYS, pwd);
     executer.sleep(2000);
-    JavaScriptExecuter.clickOnElement(driver,loginObj.signInButton);
+    userActions.performActionWithPolling(loginObj.signInButton, UserAction.CLICK);
 
     // Remove below code once login is working fine
     try {

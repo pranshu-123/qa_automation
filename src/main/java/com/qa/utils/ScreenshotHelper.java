@@ -1,5 +1,6 @@
 package com.qa.utils;
 
+import com.qa.constants.DirectoryConstants;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.Point;
@@ -90,5 +91,12 @@ public class ScreenshotHelper {
       }
     }
     return false;
+  }
+
+  public static String takeScreenshotOfPage(WebDriver driver) throws IOException {
+    File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+    File screenshot = new File(DirectoryConstants.getScreenshotDir() + System.currentTimeMillis() + ".png");
+    FileUtils.copyFile(scrFile, screenshot);
+    return screenshot.getAbsolutePath();
   }
 }

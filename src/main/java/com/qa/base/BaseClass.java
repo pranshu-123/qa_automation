@@ -11,7 +11,9 @@ import com.qa.scripts.Login;
 import com.qa.scripts.UnravelBuildInfo;
 import com.qa.utils.FileUtils;
 import com.qa.utils.Log;
+import com.qa.utils.ScreenshotHelper;
 import com.qa.utils.UnravelConfigUtils;
+import com.qa.utils.aws.S3BucketUtils;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -41,7 +43,7 @@ public class BaseClass {
     public static ExtentReports extent;
     public static ExtentTest test;
     private static final Logger LOGGER = Logger.getLogger(BaseClass.class.getName());
-
+    private S3BucketUtils s3BucketUtils = new S3BucketUtils();
     /**
      * This will be executed before suite starts. Start the browser. Initiate report
      */
@@ -107,6 +109,9 @@ public class BaseClass {
                     test.log(LogStatus.FATAL, result.getThrowable().getMessage());
                     LOGGER.info(method.getName() + " is failed due to code issue");
                 }
+                String screenshotImg = ScreenshotHelper.takeScreenshotOfPage(driver);
+                String s3BucketScreenshot = s3BucketUtils.uploadFileToS3Bucket(screenshotImg);
+                test.log(LogStatus.FAIL, test.addScreenCapture(s3BucketScreenshot));
             }
             Log.endTestCase(method.getName());
         } catch (Exception e) {

@@ -77,7 +77,7 @@ public class BaseClass {
      */
     @BeforeClass
     public void beforeClass() {
-        LOGGER.info("Login to the application.");
+        driver.navigate().refresh();
     }
 
     /**
@@ -87,7 +87,7 @@ public class BaseClass {
      */
     @BeforeMethod(alwaysRun = true)
     public void setupBeforeMethod(Method method) {
-        Log.startTestCase(method.getName());
+        Log.startTestCase(method.getDeclaringClass().getName() + " - " + method.getName());
     }
 
     /**
@@ -113,7 +113,7 @@ public class BaseClass {
                 String s3BucketScreenshot = s3BucketUtils.uploadFileToS3Bucket(screenshotImg);
                 test.log(LogStatus.FAIL, test.addScreenCapture(s3BucketScreenshot));
             }
-            Log.endTestCase(method.getName());
+            Log.endTestCase(method.getDeclaringClass().getName() + " - " + method.getName());
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -130,7 +130,6 @@ public class BaseClass {
      */
     @AfterClass()
     public void afterClass() {
-        LOGGER.info("Logout from the application.");
         //Close if any pop modal is open
         CommonComponent.closeModalIfExists(driver);
         HomePage homePage = new HomePage(driver);

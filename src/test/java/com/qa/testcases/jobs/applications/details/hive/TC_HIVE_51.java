@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import com.qa.annotations.Marker;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
@@ -17,6 +18,8 @@ import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 
+@Marker.AppDetailsHive
+@Marker.All
 public class TC_HIVE_51 extends BaseClass {
 	private static final Logger LOGGER = Logger.getLogger(TC_HIVE_51.class.getName());
 

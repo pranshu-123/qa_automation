@@ -66,9 +66,20 @@ public class BaseClass {
         LOGGER.info("Set build info to html report.");
         extent.addSystemInfo(ConfigConstants.ReportConfig.SELENIUM_VERSION,
             prop.getProperty(ConfigConstants.ReportConfig.SELENIUM_VERSION));
-        UnravelBuildInfo.setBuildInfo(driver, extent);
-        Login login = new Login(driver);
-        login.loginToApp();
+        try {
+            test = extent.startTest("Login to unravel..");
+            UnravelBuildInfo.setBuildInfo(driver, extent);
+            Login login = new Login(driver);
+            login.loginToApp();
+        } catch (RuntimeException e) {
+            test.log(LogStatus.FAIL, "Unable to login. " + e.getMessage());
+            String screenshotImg = ScreenshotHelper.takeScreenshotOfPage(driver);
+            String s3BucketScreenshot = s3BucketUtils.uploadFileToS3Bucket(screenshotImg);
+            test.log(LogStatus.FAIL, test.addScreenCapture(s3BucketScreenshot));
+            throw new RuntimeException("Unable to login into application");
+        } finally {
+            extent.endTest(test);
+        }
     }
 
     /**

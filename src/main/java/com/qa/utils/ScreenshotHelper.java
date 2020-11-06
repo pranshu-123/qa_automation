@@ -93,10 +93,14 @@ public class ScreenshotHelper {
     return false;
   }
 
-  public static String takeScreenshotOfPage(WebDriver driver) throws IOException {
+  public static String takeScreenshotOfPage(WebDriver driver) {
     File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
     File screenshot = new File(DirectoryConstants.getScreenshotDir() + System.currentTimeMillis() + ".png");
-    FileUtils.copyFile(scrFile, screenshot);
+    try {
+      FileUtils.copyFile(scrFile, screenshot);
+    } catch (IOException exception) {
+      return null;
+    }
     return screenshot.getAbsolutePath();
   }
 }

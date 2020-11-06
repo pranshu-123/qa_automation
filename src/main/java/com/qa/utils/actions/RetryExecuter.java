@@ -30,7 +30,7 @@ public class RetryExecuter<T> {
         while (retryCounter < MAX_RETRIES) {
             try {
                 return function.get();
-            } catch (Exception ex) {
+            } catch (Throwable ex) {
                 retryCounter++;
                 logger.warning("FAILED - Execution failed on retry " + retryCounter + " of " + MAX_RETRIES + " error: " + ex,
                     null);

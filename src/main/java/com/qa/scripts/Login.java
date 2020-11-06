@@ -62,11 +62,6 @@ public class Login {
    * Logout from the application.
    */
   public void logout() {
-    executer.waitUntilElementPresent(loginObj.logoutButton);
-    JavaScriptExecuter.clickOnElement(driver,loginObj.logoutButton);
-
-    //after logout fix this should be removed
-    driver.navigate().refresh();
-
+    userActions.performActionWithPolling(loginObj.logoutButton, UserAction.CLICK);
   }
 }

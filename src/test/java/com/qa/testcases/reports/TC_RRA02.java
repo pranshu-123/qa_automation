@@ -19,6 +19,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+@Marker.ReportArchive
+@Marker.All
 public class TC_RRA02 extends BaseClass {
   /**
    * Verify that after navigating to the reports page:
@@ -26,6 +28,7 @@ public class TC_RRA02 extends BaseClass {
    */
 
   Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.TC_RRA02.class);
+
 
   @Test(dataProvider = "clusterid-data-provider")
   public void TC_RRA02_verifyReportArchiveDatePickerList(String clusterId) {

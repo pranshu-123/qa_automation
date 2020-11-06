@@ -12,7 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
-
+@Marker.ReportArchive
+@Marker.All
 public class TC_RRA01 extends BaseClass {
   /**
    * Verify that after navigating to the reports page:

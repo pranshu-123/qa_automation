@@ -32,6 +32,7 @@ public class MarkerConstants {
   public static final String CLUSTER_WORKLOAD = "cluster_workload";
   public static final String USER_REPORTS = "user_reports";
   public static final String MANAGE = "manage";
+  public static final String REPORT_ARCHIEVE = "report_archieve";
 
   /**
    * This method will generate the reference of Marker Interface with
@@ -60,6 +61,7 @@ public class MarkerConstants {
     map.put(CLUSTER_WORKLOAD, Marker.ClusterWorkload.class);
     map.put(USER_REPORTS, Marker.UserReports.class);
     map.put(MANAGE, Marker.Manage.class);
+    map.put(REPORT_ARCHIEVE, Marker.ReportArchive.class);
     return Collections.unmodifiableMap(map);
   }
 }

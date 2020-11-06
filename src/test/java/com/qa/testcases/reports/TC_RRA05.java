@@ -19,6 +19,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+@Marker.ReportArchive
+@Marker.All
 public class TC_RRA05 extends BaseClass {
   /**
    * Verify sorting option in Report Archive page :

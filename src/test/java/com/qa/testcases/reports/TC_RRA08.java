@@ -1,5 +1,6 @@
 package com.qa.testcases.reports;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
@@ -11,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
+@Marker.ReportArchive
+@Marker.All
 public class TC_RRA08 extends BaseClass {
   /**
    * Verify search option in Report Archive page :

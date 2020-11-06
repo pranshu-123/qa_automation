@@ -19,6 +19,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+@Marker.ReportArchive
+@Marker.All
 public class TC_RRA06 extends BaseClass {
   /**
    * Verify reports tab in Report Archive page :

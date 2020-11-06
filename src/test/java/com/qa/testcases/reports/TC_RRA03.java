@@ -15,7 +15,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
-
+@Marker.ReportArchive
+@Marker.All
 public class TC_RRA03 extends BaseClass {
   /**
    * Verify report is generated for different date ranges

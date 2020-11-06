@@ -19,6 +19,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+@Marker.ReportArchive
+@Marker.All
 public class TC_RRA04 extends BaseClass {
   /**
    * Verify search option in Report Archive page :

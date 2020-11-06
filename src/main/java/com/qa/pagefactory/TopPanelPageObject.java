@@ -13,7 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class TopPanelPageObject {
 
-  @FindBy(xpath = "(//a[contains(@class,'logo')])[1]")
+  @FindBy(xpath = "(//a[contains(@href,'#/clusters/overview')])[1]")
   public WebElement unravelLogo;
 
   @FindBy(css = ".head-logo")

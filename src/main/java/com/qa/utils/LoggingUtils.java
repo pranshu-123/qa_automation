@@ -4,7 +4,6 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import javax.annotation.Nullable;
 
 /**
@@ -30,6 +29,20 @@ public class LoggingUtils {
         logger.info(message);
         if (test != null) {
             test.log(LogStatus.INFO, message);
+        }
+    }
+
+    public void error(String message, @Nullable ExtentTest test) {
+        logger.error(message);
+        if (test != null) {
+            test.log(LogStatus.ERROR, message);
+        }
+    }
+
+    public void warning(String message, @Nullable ExtentTest test) {
+        logger.warn(message);
+        if (test != null) {
+            test.log(LogStatus.WARNING, message);
         }
     }
 }

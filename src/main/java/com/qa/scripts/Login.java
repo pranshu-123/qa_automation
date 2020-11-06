@@ -7,11 +7,14 @@ import com.qa.pagefactory.HomePageObject;
 import com.qa.pagefactory.LoginPageObject;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.RetryExecuter;
 import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 
+import java.util.ArrayList;
 import java.util.Properties;
+import java.util.function.Supplier;
 
 /**
  * @author Ankur Jaiswal
@@ -40,24 +43,21 @@ public class Login {
    * Login to the application
    */
   public void loginToApp() {
-    driver.navigate().refresh();
     Properties prop = ConfigReader.readBaseConfig();
     String user = prop.getProperty(ConfigConstants.UnravelConfig.USERNAME);
     String pwd = prop.getProperty(ConfigConstants.UnravelConfig.PASSWORD);
+    RetryExecuter<Object> retryExecuter = new RetryExecuter<>();
+    Supplier<Object> method = () -> doLogin(user, pwd);
+    retryExecuter.run(method);
+  }
+
+  public Boolean doLogin(String user, String pwd) {
     userActions.performActionWithPolling(loginObj.loginUserName, UserAction.SEND_KEYS, user);
     userActions.performActionWithPolling(loginObj.loginPassword, UserAction.SEND_KEYS, pwd);
     executer.sleep(2000);
     userActions.performActionWithPolling(loginObj.signInButton, UserAction.CLICK);
-
-    // Remove below code once login is working fine
-    try {
-      executer.waitUntilElementPresent(homePageObject.unravelLogo);
-    } catch (TimeoutException timeoutException) {
-      driver.navigate().refresh();
-      loginToApp();
-    }
+    return true;
   }
-
   /**
    * Logout from the application.
    */

@@ -1,6 +1,5 @@
 package com.qa.testcases.appdetails.spark;
 
-import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.pagefactory.appsDetailsPage.SparkAppsDetailsPageObject;
@@ -10,30 +9,28 @@ import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
-import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
-import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-@Marker.AppDetailsSpark
-@Marker.All
-public class TC_spark_222 extends BaseClass {
+public class TC_spark_165 extends BaseClass {
   /**
-   * Verify that on a cluster with different kinds of Spark Apps:
-   * 1. The navigation should contain below table
-   * job ID, start time, Duration, tasks, read, write, Stages
-   * 2. Gantt chart should have "ID", "start", "Duration" columns
-   * 3. Data must be populated in all the columns if job count is non zero
+   * 1. Execute a spark application
+   * 2. From Unravel UI open the spark application.
+   * 3. Wait for the spark application to complete.
+   * 4. Click on actions and verify if the user can execute the action "Load Diagnostics".
    */
-  Logger logger = LoggerFactory.getLogger(TC_spark_222.class);
+
+  Logger logger = LoggerFactory.getLogger(TC_spark_165.class);
 
   @Test(dataProvider = "clusterid-data-provider")
-  public void TC_spark_222_verifyAppDetailsPageCompKpis(String clusterId) {
-    test = extent.startTest("TC_spark_222_verifyAppDetailsPageCompKpis: " + clusterId,
+  public void TC_spark_165_verifyLoadDiagnosticAction(String clusterId) {
+    test = extent.startTest("TC_spark_165_verifyLoadDiagnosticAction: " + clusterId,
         "Verify all the spark apps are listed in the UI");
     test.assignCategory(" Apps Details-Spark");
-    Log.startTestCase("TC_spark_222_verifyAppDetailsPageCompKpis");
+    Log.startTestCase("TC_spark_165_verifyLoadDiagnosticAction");
 
     // Initialize all classes objects
     test.log(LogStatus.INFO, "Initialize all class objects");
@@ -43,38 +40,29 @@ public class TC_spark_222 extends BaseClass {
     SparkAppsDetailsPageObject sparkAppsDetailsPageObject = new SparkAppsDetailsPageObject(driver);
     SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);
     DatePicker datePicker = new DatePicker(driver);
-    WaitExecuter waitExecuter = new WaitExecuter(driver);
     AllApps allApps = new AllApps(driver);
 
     // Navigate to Jobs tab from header
     test.log(LogStatus.INFO, "Navigate to jobs tab from header");
     appsDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
         applicationsPageObject, clusterId);
-
-    //Verify that the left pane has spark check box and the apps number
     test.log(LogStatus.INFO, "Verify that the left pane has spark check box and the apps number");
-    logger.info("Select individual app and assert that table contain its data");
-    appsDetailsPage.clickOnlyLink("Spark");
-    applicationsPageObject.expandStatus.click();
-    int appCount = appsDetailsPage.clickOnlyLink("Success");
+    int appCount = appsDetailsPage.clickOnlyLink("Spark");
+    int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
+        replaceAll("[^\\dA-Za-z ]", "").trim());
+    logger.info("AppCount is " + appCount + " total count is " + totalCount);
+    Assert.assertEquals(appCount, totalCount, "The Spark app count of SparkApp is not equal to " +
+        "the total count of heading.");
+    test.log(LogStatus.PASS, "The left pane has spark check box and the app counts match to that " +
+        "displayed in the header");
 
     //Clicking on the Spark app must go to apps detail page
     if (appCount > 0) {
       String headerAppId = appsDetailsPage.verifyAppId(sparkAppsDetailsPageObject, applicationsPageObject);
       test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);
-      //Clicking on the UI must go to apps detail page and verify the basic tabs present
-      String tagValue = appsDetailsPage.verifyAppSummaryTabs(sparkAppsDetailsPageObject, "Tags", test);
-      if (!tagValue.equals("spark-streaming"))
-        appsDetailsPage.verifyAppsComponent(sparkAppsDetailsPageObject, true, false, false);
-      else
-      {
-        sparkAppsDetailsPageObject.closeAppsPageTab.click();
-        waitExecuter.sleep(1000);
-        applicationsPageObject.getAnotherAppFromTable.click();
-        waitExecuter.sleep(2000);
-        appsDetailsPage.verifyAppsComponent(sparkAppsDetailsPageObject, true, false, false);
-      }
-      test.log(LogStatus.PASS, "The application has basic tabs present and has data populated accordingly");
+      test.log(LogStatus.INFO,"Verify if the user can execute the Load Diagnostics action");
+      appsDetailsPage.verifyLoadDiagnosticAction(sparkAppsDetailsPageObject);
+      test.log(LogStatus.PASS, "Verified that the user can execute the Load Diagnostics action");
       //Close apps details page
       MouseActions.clickOnElement(driver, sparkAppsDetailsPageObject.closeAppsPageTab);
     } else {

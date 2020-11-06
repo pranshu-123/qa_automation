@@ -69,6 +69,9 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[1]")
     public WebElement getTypeFromTable;
 
+    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr[2]/td)[1]")
+    public WebElement getAnotherAppFromTable;
+
     @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[3]")
     public WebElement getUsernameFromTable;
 
@@ -194,6 +197,60 @@ public class ApplicationsPageObject {
 
     @FindBy(xpath = "//table[contains(@id,'appTagsTable')]/tbody/tr/td[2]")
     public List<WebElement> descriptionInTable;
+
+    @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[1]")
+    public List<WebElement> getTypesColumnFromTable;
+
+    @FindBy(xpath = "//span[(text()='Type')]//following-sibling::a[contains(@class,'sorting')]")
+    public WebElement sortByType;
+
+    @FindBy(xpath = "//span[(text()='User')]//following-sibling::a[contains(@class,'sorting')]")
+    public WebElement sortByUser;
+
+    @FindBy(xpath = "//*[contains(@class,'nprogress-busy')]")
+    public WebElement loader;
+
+    @FindBy(id = "runningAppList")
+    public WebElement runningAppTab;
+
+    @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[2]")
+    public List<WebElement> getStatusColumnFromTable;
+
+    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[4]/span[2]")
+    public WebElement copyAppName;
+
+    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[4]")
+    public WebElement getAppNameFromTable;
+
+    @FindBy(xpath = "//section[contains(@class,'icon-success')]")
+    public WebElement successBanner;
+
+    @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-down')]")
+    public WebElement sortDown;
+
+    @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-up')]")
+    public WebElement sortUp;
+
+    @FindBy(xpath = "//span[(text()='Parent App')]//following-sibling::a[contains(@class,'sorting')]")
+    public WebElement sortByParentApp;
+
+    @FindBy(xpath = "//span[(text()='Status')]//following-sibling::a[contains(@class,'sorting')]")
+    public WebElement sortStatus;
+
+    @FindBy(xpath = "//span[(text()='ClusterId')]//following-sibling::a[contains(@class,'sorting')]")
+    public WebElement sortByClusterId;
+
+    @FindBy(xpath = "//span[(text()='Start Time')]//following-sibling::a[contains(@class,'sorting')]")
+    public WebElement sortByStartTime;
+
+    @FindBy(xpath = "//span[(text()='Duration')]//following-sibling::a[contains(@class,'sorting')]")
+    public WebElement sortByDuration;
+
+    @FindBy(xpath = "//span[(text()='Read')]//following-sibling::a[contains(@class,'sorting')]")
+    public WebElement sortByRead;
+
+    @FindBy(xpath = "//span[(text()='Write')]//following-sibling::a[contains(@class,'sorting')]")
+    public WebElement sortByWrite;
 
     /**
      * @param driver The driver that will be used to look up the elements

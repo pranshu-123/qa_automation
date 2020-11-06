@@ -29,4 +29,5 @@ public @interface Marker {
   @interface ClusterWorkload {}
   @interface UserReports {}
   @interface Manage {}
+  @interface AppDetailsHive {}
 }

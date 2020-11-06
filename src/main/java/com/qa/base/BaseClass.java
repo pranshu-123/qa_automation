@@ -9,10 +9,7 @@ import com.qa.scripts.CommonComponent;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.Login;
 import com.qa.scripts.UnravelBuildInfo;
-import com.qa.utils.FileUtils;
-import com.qa.utils.Log;
-import com.qa.utils.ScreenshotHelper;
-import com.qa.utils.UnravelConfigUtils;
+import com.qa.utils.*;
 import com.qa.utils.aws.S3BucketUtils;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
@@ -43,6 +40,7 @@ public class BaseClass {
     public static ExtentReports extent;
     public static ExtentTest test;
     private static final Logger LOGGER = Logger.getLogger(BaseClass.class.getName());
+    private final LoggingUtils logger = new LoggingUtils(BaseClass.class);
     private S3BucketUtils s3BucketUtils = new S3BucketUtils();
     /**
      * This will be executed before suite starts. Start the browser. Initiate report
@@ -139,11 +137,13 @@ public class BaseClass {
      * This will execute after every test class execution.
      * Logout from the application
      */
-    @AfterClass()
+    @AfterClass(alwaysRun = true)
     public void afterClass() {
         //Close if any pop modal is open
+        logger.info("Close modal if exixts.", null);
         CommonComponent.closeModalIfExists(driver);
         HomePage homePage = new HomePage(driver);
+        logger.info("Click on unravel logo to navigate on homepage", null);
         homePage.navigateToHomePage();
     }
 

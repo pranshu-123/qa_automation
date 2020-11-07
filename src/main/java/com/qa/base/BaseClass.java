@@ -4,6 +4,7 @@ import com.qa.constants.ConfigConstants;
 import com.qa.constants.DirectoryConstants;
 import com.qa.constants.FileConstants;
 import com.qa.io.ConfigReader;
+import com.qa.pagefactory.LoginPageObject;
 import com.qa.pagefactory.clusters.DataProviderClass;
 import com.qa.scripts.CommonComponent;
 import com.qa.scripts.HomePage;
@@ -42,6 +43,7 @@ public class BaseClass {
     private static final Logger LOGGER = Logger.getLogger(BaseClass.class.getName());
     private final LoggingUtils logger = new LoggingUtils(BaseClass.class);
     private S3BucketUtils s3BucketUtils = new S3BucketUtils();
+    private LoginPageObject loginPageObject = new LoginPageObject(driver);
     /**
      * This will be executed before suite starts. Start the browser. Initiate report
      */
@@ -87,6 +89,11 @@ public class BaseClass {
     @BeforeClass
     public void beforeClass() {
         driver.navigate().refresh();
+        // Login if user is logged out
+        if (loginPageObject.loginPage.size() > 0) {
+            Login login = new Login(driver);
+            login.loginToApp();
+        }
     }
 
     /**

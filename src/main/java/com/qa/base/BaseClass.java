@@ -43,7 +43,7 @@ public class BaseClass {
     private static final Logger LOGGER = Logger.getLogger(BaseClass.class.getName());
     private final LoggingUtils logger = new LoggingUtils(BaseClass.class);
     private S3BucketUtils s3BucketUtils = new S3BucketUtils();
-    private LoginPageObject loginPageObject = new LoginPageObject(driver);
+    private LoginPageObject loginPageObject;
     /**
      * This will be executed before suite starts. Start the browser. Initiate report
      */
@@ -56,6 +56,7 @@ public class BaseClass {
         Properties prop = ConfigReader.readBaseConfig();
         String browser = prop.getProperty(ConfigConstants.UnravelConfig.BROWSER);
         driver = driverManager.getDriver(browser);
+        loginPageObject = new LoginPageObject(driver);
         FileUtils.createDirectory(DirectoryConstants.getExtentResultDir());
         LOGGER.info("Moving old report to archive directory.");
         FileUtils.moveFileToArchive(FileConstants.getExtentReportFile(), true);
@@ -68,7 +69,8 @@ public class BaseClass {
             prop.getProperty(ConfigConstants.ReportConfig.SELENIUM_VERSION));
         try {
             test = extent.startTest("Login to unravel..");
-            UnravelBuildInfo.setBuildInfo(driver, extent);
+            UnravelBuildInfo unravelBuildInfo = new UnravelBuildInfo(driver);
+            unravelBuildInfo.setBuildInfo(extent);
             Login login = new Login(driver);
             login.loginToApp();
         } catch (RuntimeException e) {
@@ -88,7 +90,6 @@ public class BaseClass {
      */
     @BeforeClass
     public void beforeClass() {
-        driver.navigate().refresh();
         // Login if user is logged out
         if (loginPageObject.loginPage.size() > 0) {
             Login login = new Login(driver);

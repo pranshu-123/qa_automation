@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.logging.Logger;
+
+import com.qa.enums.UserAction;
+import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.WebDriver;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.utils.WaitExecuter;
@@ -16,18 +19,23 @@ import com.relevantcodes.extentreports.ExtentReports;
 
 public class UnravelBuildInfo {
 	private static final Logger LOGGER = Logger.getLogger(UnravelBuildInfo.class.getName());
+	private UserActions actions;
+	private WebDriver driver;
+
+	public UnravelBuildInfo(WebDriver driver) {
+		this.driver = driver;
+		actions = new UserActions(driver);
+	}
 
 	/* Method helps in getting unravel about info from UI  */
-	public static List<String> getBuildInfo(WebDriver driver) {
+	public List<String> getBuildInfo() {
 		WaitExecuter wait = new WaitExecuter(driver);
 		SubTopPanelModulePageObject topPanel = new SubTopPanelModulePageObject(driver);
 		Login login = new Login(driver);
 		LOGGER.info("Loging to app to get build info");
 		login.loginToApp();
-		wait.sleep(3000);
 		LOGGER.info("Click on about button");
-		topPanel.aboutInfo.click();
-		wait.sleep(1000);
+		actions.performActionWithPolling(topPanel.aboutInfo, UserAction.CLICK);
 		String versionDetails = topPanel.versionInfo.getText();
 		List<String> list = new ArrayList<String>();
 		String[] unravelDetails = versionDetails.split("\\n");
@@ -35,24 +43,20 @@ public class UnravelBuildInfo {
 			list.add(unravelDetails[i]);
 			LOGGER.info("Build info " + unravelDetails[i]);
 		}
-		wait.sleep(1000);
 		LOGGER.info("Closing About window");
-		topPanel.closeAboutWindow.click();
-		wait.sleep(1000);
+		actions.performActionWithPolling(topPanel.closeAboutWindow, UserAction.CLICK);
 		LOGGER.info("Loging off the app");
 		login.logout();
-		wait.sleep(2000);
 		return list;
 	}
 
 	/* Method helps in setting unravel about info in extent report */
-	public static void setBuildInfo(WebDriver driver, ExtentReports extent) {
+	public void setBuildInfo(ExtentReports extent) {
 		LinkedHashMap map = new LinkedHashMap<>();
 		WaitExecuter wait = new WaitExecuter(driver);
-		List<String> unravelDetails = getBuildInfo(driver);
+		List<String> unravelDetails = getBuildInfo();
 		for (int i = 0; i < unravelDetails.size(); i++) {
 			String[] unravelBuildDetails = unravelDetails.get(i).split(":");
-			LOGGER.info("unravelBuildDetails " + unravelBuildDetails);
 			LOGGER.info("unravelBuildDetails[0] " + unravelBuildDetails[0]);
 			LOGGER.info("unravelBuildDetails[1] " + unravelBuildDetails[1]);
 			map.put(unravelBuildDetails[0].trim(), unravelBuildDetails[1].trim());

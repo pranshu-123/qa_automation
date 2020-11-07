@@ -62,6 +62,13 @@ public class Login {
    * Logout from the application.
    */
   public void logout() {
+    RetryExecuter<Object> retryExecuter = new RetryExecuter<>();
+    Supplier<Object> method = () -> doLogout();
+    retryExecuter.run(method);
+  }
+
+  public Boolean doLogout() {
     userActions.performActionWithPolling(loginObj.logoutButton, UserAction.CLICK);
+    return true;
   }
 }

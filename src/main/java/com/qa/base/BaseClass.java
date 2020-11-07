@@ -56,7 +56,6 @@ public class BaseClass {
         Properties prop = ConfigReader.readBaseConfig();
         String browser = prop.getProperty(ConfigConstants.UnravelConfig.BROWSER);
         driver = driverManager.getDriver(browser);
-        loginPageObject = new LoginPageObject(driver);
         FileUtils.createDirectory(DirectoryConstants.getExtentResultDir());
         LOGGER.info("Moving old report to archive directory.");
         FileUtils.moveFileToArchive(FileConstants.getExtentReportFile(), true);
@@ -91,6 +90,7 @@ public class BaseClass {
     @BeforeClass
     public void beforeClass() {
         // Login if user is logged out
+        loginPageObject = new LoginPageObject(driver);
         if (loginPageObject.loginPage.size() > 0) {
             Login login = new Login(driver);
             login.loginToApp();

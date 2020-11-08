@@ -255,6 +255,9 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//table[@id='allApps']/tbody/tr/td[11]/span[2][@class='icon-alert']")
     public List<WebElement> listOfInsights;
 
+    @FindBy(xpath = "//table[@id='allApps']/tbody")
+    public WebElement allAppsTable;
+
     /**
      * @param driver The driver that will be used to look up the elements
      */

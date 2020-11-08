@@ -125,6 +125,8 @@ public class TC_AA136 extends BaseClass {
             String toolTipText = toolTip.getText();
             System.out.println("ToolTipText-->: "+toolTipText);
             MouseActions.clickOnElement(driver, homePageObject.unravelLogo);
+            test.log(LogStatus.PASS, "Verified auto alert detail by clicking app badge.");
+            logger.info("Verified auto alert detail by clicking app badge.");
 
         }else {
             test.log(LogStatus.INFO, "No data exist for the killed status");
@@ -132,6 +134,7 @@ public class TC_AA136 extends BaseClass {
             MouseActions.clickOnElement(driver, homePageObject.unravelLogo);
             System.out.println("ToolTipText--> Not Found");
             Assert.assertTrue(false);
+            logger.info("Verified auto alert, no killed application found.");
 
         }
     }

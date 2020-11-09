@@ -43,7 +43,7 @@ public class BaseClass {
     private static final Logger LOGGER = Logger.getLogger(BaseClass.class.getName());
     private final LoggingUtils logger = new LoggingUtils(BaseClass.class);
     private S3BucketUtils s3BucketUtils = new S3BucketUtils();
-    private LoginPageObject loginPageObject;
+
     /**
      * This will be executed before suite starts. Start the browser. Initiate report
      */
@@ -66,21 +66,8 @@ public class BaseClass {
         LOGGER.info("Set build info to html report.");
         extent.addSystemInfo(ConfigConstants.ReportConfig.SELENIUM_VERSION,
             prop.getProperty(ConfigConstants.ReportConfig.SELENIUM_VERSION));
-        try {
-            test = extent.startTest("Login to unravel..");
-            UnravelBuildInfo unravelBuildInfo = new UnravelBuildInfo(driver);
-            unravelBuildInfo.setBuildInfo(extent);
-            Login login = new Login(driver);
-            login.loginToApp();
-        } catch (RuntimeException e) {
-            test.log(LogStatus.FAIL, "Unable to login. " + e.getMessage());
-            String screenshotImg = ScreenshotHelper.takeScreenshotOfPage(driver);
-            String s3BucketScreenshot = s3BucketUtils.uploadFileToS3Bucket(screenshotImg);
-            test.log(LogStatus.FAIL, test.addScreenCapture(s3BucketScreenshot));
-            throw new RuntimeException("Unable to login into application");
-        } finally {
-            extent.endTest(test);
-        }
+        UnravelBuildInfo unravelBuildInfo = new UnravelBuildInfo(driver);
+        unravelBuildInfo.setBuildInfo(extent);
     }
 
     /**
@@ -90,11 +77,8 @@ public class BaseClass {
     @BeforeClass
     public void beforeClass() {
         // Login if user is logged out
-        loginPageObject = new LoginPageObject(driver);
-        if (loginPageObject.loginPage.size() > 0) {
-            Login login = new Login(driver);
-            login.loginToApp();
-        }
+        Login login = new Login(driver);
+        login.loginToApp();
     }
 
     /**
@@ -150,9 +134,9 @@ public class BaseClass {
         //Close if any pop modal is open
         logger.info("Close modal if exixts.", null);
         CommonComponent.closeModalIfExists(driver);
-        HomePage homePage = new HomePage(driver);
-        logger.info("Click on unravel logo to navigate on homepage", null);
-        homePage.navigateToHomePage();
+        Login login = new Login(driver);
+        login.logout();
+        driver.navigate().refresh();
     }
 
     /**
@@ -162,8 +146,6 @@ public class BaseClass {
     @AfterSuite
     public void tearDown() {
         LOGGER.info("Suite completed. Closing the browser.");
-        Login login = new Login(driver);
-        login.logout();
         FileUtils.deleteDownloadsFolderFiles();
         driver.quit();
     }

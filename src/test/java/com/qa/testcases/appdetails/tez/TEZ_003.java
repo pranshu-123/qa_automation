@@ -18,6 +18,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
+
 @Marker.AppDetailsTez
 @Marker.All
 public class TEZ_003 extends BaseClass {
@@ -27,7 +28,7 @@ public class TEZ_003 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TEZ_003_verifyTezApplicationInUnravelUI(String clusterId) {
         test = extent.startTest("TEZ_003_verifyTezApplicationInUnravelUI: " + clusterId,
-                "Verify Application details in Unravel UI, application page.");
+                "Verify App type should be tez");
         test.assignCategory(" Apps Details-Tez");
         Log.startTestCase("TEZ_003_verifyKPIsarelistedandhavedata");
 

@@ -26,7 +26,7 @@ public class TEZ_008 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TEZ_008_verifyDataIO(String clusterId) {
         test = extent.startTest("TEZ_008_verifyDataIO: " + clusterId,
-                "Verify Application details in Unravel UI, application page.");
+                "Verify Data IO must be present for apps that access the data.");
         test.assignCategory(" Apps Details-Tez");
         Log.startTestCase("TEZ_008_verifyDataIO");
 

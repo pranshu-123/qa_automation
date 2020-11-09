@@ -28,7 +28,7 @@ public class TEZ_123 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TEZ_124_verifyKPI(String clusterId) {
         test = extent.startTest("TEZ_124_verifyKPI: " + clusterId,
-                "Verify KPIs are listed and have data");
+                "Verify Tez apps should have Cluster IDs for all the states of application ");
         test.assignCategory(" Apps Details-Tez");
         Log.startTestCase("TEZ_124_verifyKPI");
 

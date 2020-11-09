@@ -27,7 +27,7 @@ public class TEZ_005 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TEZ_005_verifyApplicationUsername(String clusterId) {
         test = extent.startTest("TEZ_005_verifyApplicationUsername: " + clusterId,
-                "Verify Application details in Unravel UI, application page.");
+                "Verify Username must be present for all the apps.");
         test.assignCategory(" Apps Details-Tez");
         Log.startTestCase("TEZ_005_verifyApplicationUsername");
 
@@ -39,7 +39,6 @@ public class TEZ_005 extends BaseClass {
         TezAppsDetailsPageObject tezApps = new TezAppsDetailsPageObject(driver);
         TezAppsDetailsPage tezDetailsPage = new TezAppsDetailsPage(driver);
         DatePicker datePicker = new DatePicker(driver);
-        WaitExecuter waitExecuter = new WaitExecuter(driver);
         AllApps allApps = new AllApps(driver);
 
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
@@ -47,7 +46,6 @@ public class TEZ_005 extends BaseClass {
                 applicationsPageObject, clusterId);
         test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
 
-        test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
         int appCount = tezDetailsPage.clickOnlyLink("Tez");
 
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().

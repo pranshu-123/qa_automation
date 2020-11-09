@@ -19,7 +19,7 @@ public class TEZ_132 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TEZ_132_VerifyTheConfiguration(String clusterId) {
         test = extent.startTest("TEZ_132_VerifyTheConfiguration: " + clusterId,
-                "Verify all the spark apps are listed in the UI");
+                "Verify the configuration tab must be populated");
         test.assignCategory(" Apps Details-Tez");
         Log.startTestCase("TEZ_132_VerifyTheConfiguration");
         TezAppsDetailsPage tezDetailsPage = new TezAppsDetailsPage(driver);

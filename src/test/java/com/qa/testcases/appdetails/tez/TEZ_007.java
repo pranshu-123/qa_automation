@@ -28,7 +28,7 @@ public class TEZ_007 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TEZ_007_verifyStarttimeAndDuration(String clusterId) {
         test = extent.startTest("TEZ_007_verifyStarttimeAndDuration: " + clusterId,
-                "Verify Application details in Unravel UI, application page.");
+                "Verify Start time and duration. must be available for all the apps.");
         test.assignCategory(" Apps Details-Tez");
         Log.startTestCase("TEZ_007_verifyStarttimeAndDuration");
 

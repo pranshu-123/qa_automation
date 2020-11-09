@@ -18,8 +18,11 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "(//thead[@id='sparkStageNavigation-head'])/tr/th")
     public List<WebElement> stageHeaders;
 
+    @FindBy(xpath = "//span[@class=\"success badge\" and @style=\"margin-top: 16px; margin-left: 10px;\" and text()=\"Success\"]")
+    public WebElement appStatus;
+
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[2]")
-    public WebElement Bystatus;
+    public WebElement Status;
 
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[3]")
     public WebElement getUsername;
@@ -67,8 +70,11 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span/span")
     public WebElement getHeaderAppId;
 
-    @FindBy(xpath = "//*[@id='app']/div/div/div[1]/div[2]")
+    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[2]")
     public WebElement closeAppsPageTab;
+
+    @FindBy(xpath = "//a[@href='#/clusters/overview']")
+    public WebElement homeTab;
 
     @FindBy(xpath = "//*[@id='app-prev-header']/b")
     public WebElement ifAttemptPresent;
@@ -130,6 +136,32 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "(//div[@class='timeline gantt-timeline pipeline row no-gutters'])//span[2]")
     public List<WebElement> ganttChartStartTime;
 
+    @FindBy(xpath = "//*[@id=\"tezllap-container\"]/div[1]/div[2]/h4/span[1]/text()")
+    public WebElement startTime;
+
+    @FindBy(xpath = "//*[@id=\"tezllap-container\"]/div[1]/div[2]/h4/span[2]/text()")
+    public WebElement EndTime;
+
+    @FindBy(xpath = "//*[@id=\"SummaryDetails\"]/div/div[1]/div[1]/div/h3")
+    public WebElement Duration;
+
+    @FindBy(xpath = "//*[@id=\"SummaryDetails\"]/div/div[2]/div[1]/div/h3")
+    public WebElement DataIO;
+
+    @FindBy(xpath = "//*[@id=\"highcharts-vjvb3sy-64\"]/svg/rect[1]")
+    public WebElement Dags;
+
+    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[1]/span[1]")
+    public WebElement Owner;
+
+    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[1]/span[2]")
+    public WebElement Cluster;
+
+    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[1]/span[3]")
+    public WebElement Queue;
+
+
+
     @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[1]/div/div[2]/div/div/div/div[1]/div/p/b")
     public List<WebElement> ganttChartHeaders;
 
@@ -148,7 +180,7 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "(//div[@id='SummaryDetails']/div/div)/div//h3")
     public List<WebElement> rightPaneAppKpiVal;
 
-    @FindBy(xpath = "(//thead[@id='appNavigation-head'])/tr/th[1]")
+    @FindBy(xpath = "//span[contains(text(),'Dag Id')]")
     public WebElement singleJobHeader;
 
     @FindBy(xpath = "//*[@id='app-query']/code/span")
@@ -237,7 +269,7 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//*[@class='consumers']")
     public List<WebElement> rddBlockNumList;
 
-    @FindBy(xpath = "//*[@id=\"spark_exec_plan\"]/*[name()='svg']")
+    @FindBy(xpath = "//*[@id=\"highcharts-vjvb3sy-48\"]/svg/rect[1]")
     public WebElement DAGData;
 
     //Resources Tab xpath
@@ -303,7 +335,7 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "(//div[contains(@class,'modal-sec-head')])/h2")
     public WebElement loadDiagnosticWinHeader;
 
-    @FindBy(xpath = "//*[@class='close pointer']")
+    @FindBy(css = "//*[@class='close pointer']")
     public WebElement loadDiagnosticWinClose;
 
 

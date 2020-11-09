@@ -35,7 +35,7 @@ public class TEZ_004 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TEZ_004_verifyApplicationStatus(String clusterId) {
         test = extent.startTest("TEZ_004_verifyApplicationStatus: " + clusterId,
-                "Verify Application details in Unravel UI, application page.");
+                "Verify the status for the application should be present and not empty.");
         test.assignCategory(" Apps Details-Tez");
         Log.startTestCase("TEZ_003_verifyKPIsarelistedandhavedata");
 
@@ -53,7 +53,6 @@ public class TEZ_004 extends BaseClass {
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         tezDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
-        test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
 
         test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
         int appCount = tezDetailsPage.clickOnlyLink("Tez");
@@ -70,7 +69,7 @@ public class TEZ_004 extends BaseClass {
          * Validate that status types are --
          */
         if (appCount > 0) {
-            String statusValue = tezDetailsPage.verifyStatus(tezApps);
+            String statusValue = tezDetailsPage.verifyAppStatus(tezApps);
             test.log(LogStatus.PASS, "Tez status Value is displayed in the Table: " + statusValue);
 
         } else {

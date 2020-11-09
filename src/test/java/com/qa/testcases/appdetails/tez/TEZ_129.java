@@ -25,7 +25,7 @@ public class TEZ_129 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TEZ_129_verifyTheQuery(String clusterId) {
         test = extent.startTest("TEZ_129_verifyTheQuery: " + clusterId,
-                "Verify KPIs are listed and have data");
+                "Verify Query that was used to run the app must be populated");
         test.assignCategory(" Apps Details-Tez");
         Log.startTestCase("TEZ_129_verifyTheQuery");
 

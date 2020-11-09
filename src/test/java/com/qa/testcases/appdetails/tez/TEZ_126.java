@@ -25,7 +25,7 @@ public class TEZ_126 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TEZ_126_verifyClusterAndQueue(String clusterId) {
         test = extent.startTest("TEZ_126_verifyClusterAndQueue: " + clusterId,
-                "Verify KPIs are listed and have data");
+                "Verify KPIs should be populated and the values must be populated");
         test.assignCategory(" Apps Details-Tez");
         Log.startTestCase("TEZ_126_verifyClusterAndQueue");
 
@@ -61,7 +61,7 @@ public class TEZ_126 extends BaseClass {
             test.log(LogStatus.PASS, "Tez Application Id is displayed in the Header: " + headerAppId);
 
             /**clicking on the UI must go to apps detail page and verify the basic tabs present */
-            tezDetailsPage.verifyAppsComponent(tezApps, false, false, true);
+            tezDetailsPage.validateTopRightTab(tezApps,test);
             test.log(LogStatus.PASS, "The basic components for an application is present");
         } else {
             logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +

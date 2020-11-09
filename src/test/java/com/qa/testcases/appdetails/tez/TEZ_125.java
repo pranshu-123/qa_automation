@@ -25,7 +25,7 @@ public class TEZ_125 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TEZ_125_verifyTheDag(String clusterId) {
             test = extent.startTest("TEZ_125_verifyTheDag: " + clusterId,
-                "Verify KPIs are listed and have data");
+                "Verify Dag should be hyper link and should open the Tez app details page");
         test.assignCategory(" Apps Details-Tez");
         Log.startTestCase("TEZ_125_verifyTheDag");
 

@@ -26,7 +26,7 @@ public class TEZ_121 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TEZ_121_verifyHiveAppsWithClusterIDs(String clusterId) {
         test = extent.startTest("TEZ_121_verifyHiveAppsWithClusterIDs: " + clusterId,
-                "Verify All the Hive apps run on different Clusters must have the cluster ID.");
+                "Verify All the Tez apps run on different Clusters must have the cluster ID.");
         test.assignCategory(" Apps Details-Tez");
         Log.startTestCase("TEZ_121_verifyHiveAppsWithClusterIDs");
 
@@ -43,7 +43,6 @@ public class TEZ_121 extends BaseClass {
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         tezDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
-        test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
 
         test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
         int appCount = tezDetailsPage.clickOnlyLink("Tez");
@@ -57,7 +56,6 @@ public class TEZ_121 extends BaseClass {
                 "displayed in the header");
 
         //click on cluster search field
-        ApplicationsPageObject applicationsPageObject1 = new ApplicationsPageObject(driver);
         applicationsPageObject.clusterIdsearchfield.click();
         System.out.println("All clusterId size: "+applicationsPageObject.clusterIdsList.size());
         test.log(LogStatus.INFO, "All clusterId count: "+applicationsPageObject.clusterIdsList.size());

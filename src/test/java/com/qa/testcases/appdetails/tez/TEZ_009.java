@@ -23,7 +23,7 @@ public class TEZ_009 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TEZ_009_verifyClusterIDandGOTO(String clusterId) {
         test = extent.startTest("TEZ_009_verifyClusterIDandGOTO: " + clusterId,
-                "Verify Application details in Unravel UI, application page.");
+                "Verify Cluster ID must be present for the apps and parent app must be linked.");
         test.assignCategory(" Apps Details-Tez");
         Log.startTestCase("TEZ_009_verifyClusterIDandGOTO");
 

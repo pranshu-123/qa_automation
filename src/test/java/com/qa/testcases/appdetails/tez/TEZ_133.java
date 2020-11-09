@@ -19,7 +19,7 @@ public class TEZ_133 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TEZ_133_verifyDatabase(String clusterId) {
         test = extent.startTest("TEZ_133_verifyDatabase: " + clusterId,
-                "Verify all the spark apps are listed in the UI");
+                "Verify Name of the database must be listed in the UI");
         test.assignCategory(" Apps Details-Tez");
         Log.startTestCase("TEZ_133_verifyDatabase");
         TezAppsDetailsPage tezDetailsPage = new TezAppsDetailsPage(driver);

@@ -24,7 +24,7 @@ public class MarkerConstants {
   public static final String QUEUE_ANALYSIS = "queue_analysis";
   public static final String APP_DETAILS_IMPALA = "app_details_impala";
   public static final String APP_DETAILS_SPARK = "app_details_spark";
-  public static final String INEFFICIENT_APPS = "ineffient_apps";
+  public static final String INEFFICIENT_APPS = "inefficient_apps";
   public static final String YARN_CHARGEBACK = "yarn_chargeback";
   public static final String YARN_RESOURCES = "yarn_resources";
   public static final String CLUSTER_JOBS = "cluster_jobs";
@@ -33,6 +33,7 @@ public class MarkerConstants {
   public static final String USER_REPORTS = "user_reports";
   public static final String MANAGE = "manage";
   public static final String APP_DETAILS_HIVE = "app_details_hive";
+  public static final String DATA_FORECASTING = "data_forecasting";
 
   /**
    * This method will generate the reference of Marker Interface with
@@ -62,6 +63,7 @@ public class MarkerConstants {
     map.put(USER_REPORTS, Marker.UserReports.class);
     map.put(MANAGE, Marker.Manage.class);
     map.put(APP_DETAILS_HIVE, Marker.AppDetailsHive.class);
+    map.put(DATA_FORECASTING, Marker.DataForecasting.class);
     return Collections.unmodifiableMap(map);
   }
 }

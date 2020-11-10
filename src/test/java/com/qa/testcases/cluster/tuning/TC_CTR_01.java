@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.tuning;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.clusters.TopXPageObject;
@@ -19,12 +20,16 @@ import org.testng.annotations.Test;
 /*
  * Verify cluster tuning report is generated for default filters
  */
+
+@Marker.DataForecasting
+@Marker.All
 public class TC_CTR_01 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_CTR_01.class);
 
     @Test(dataProvider = "clusterid-data-provider")
     public void validateTuningReportGenerated(String clusterId) {
-        test = extent.startTest("TC_CTR_01.validateTuningReportGenerated", "Verify cluster tuning report is generated for default filters");
+        test = extent.startTest("TC_CTR_01.validateTuningReportGenerated", "Verify cluster tuning " +
+                "report is generated for default filters");
         test.assignCategory(" Cluster - Tuning ");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);

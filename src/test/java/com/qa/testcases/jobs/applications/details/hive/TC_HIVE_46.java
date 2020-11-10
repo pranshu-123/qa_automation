@@ -46,13 +46,18 @@ public class TC_HIVE_46 extends BaseClass {
         LOGGER.info("Select last 30 days");
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(1000);
-        datePicker.selectLastMonth();
+        datePicker.selectLast30Days();
         waitExecuter.sleep(2000);
         // Select cluster
         test.log(LogStatus.INFO, "Select clusterid : " + clusterId);
         LOGGER.info("Select clusterId : " + clusterId);
         allApps.selectCluster(clusterId);
         waitExecuter.sleep(3000);
+        
+        int appCount = Integer
+                .parseInt(applicationsPageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
+
+        if (appCount > 0) {
         // Sort Up by Status
         test.log(LogStatus.INFO, "Sort Up by Status");
         LOGGER.info("Sort up by Status");
@@ -150,5 +155,14 @@ public class TC_HIVE_46 extends BaseClass {
         waitExecuter.sleep(1000);
         driver.navigate().refresh();
         waitExecuter.sleep(3000);
+        }
+        else {
+            Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
+                    "The clusterId does not have any application under it and also does not display 'No Data Available' for it"
+                            + clusterId);
+            test.log(LogStatus.SKIP, "The clusterId does not have any application under it.");
+            driver.navigate().refresh();
+            waitExecuter.sleep(2000);
+        }
     }
 }

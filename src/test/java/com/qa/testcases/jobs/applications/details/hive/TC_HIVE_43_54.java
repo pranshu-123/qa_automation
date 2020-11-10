@@ -25,7 +25,7 @@ public class TC_HIVE_43_54 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void VerifyRunningApps(String clusterId) {
-        test = extent.startTest("TC_HIVE_43_54.VerifyFilterByStatus",
+        test = extent.startTest("TC_HIVE_43_54.VerifyRunningApps",
                 "Verify that in Running Apps only jobs with Running status are present.");
         test.assignCategory("App Details - Hive");
         test.log(LogStatus.INFO, "Login to the application");

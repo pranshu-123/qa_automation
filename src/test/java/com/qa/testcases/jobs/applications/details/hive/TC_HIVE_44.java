@@ -111,6 +111,8 @@ public class TC_HIVE_44 extends BaseClass {
             test.log(LogStatus.PASS, "On searching by ID the table contains 1 row.");
             waitExecuter.sleep(1000);
             driver.navigate().back();
+            waitExecuter.sleep(1000);
+            driver.navigate().refresh();
             // Reset the application filter
             test.log(LogStatus.INFO, "Reset the application filter");
             allApps.reset();
@@ -119,6 +121,10 @@ public class TC_HIVE_44 extends BaseClass {
                     "The clusterId does not have any application under it and also does not display 'No Data Available' for it"
                             + clusterId);
             test.log(LogStatus.SKIP, "The clusterId does not have any application under it.");
+            waitExecuter.sleep(1000);
+            driver.navigate().back();
+            waitExecuter.sleep(1000);
+            driver.navigate().refresh();
             // Reset the application filter
             test.log(LogStatus.INFO, "Reset the application filter");
             allApps.reset();

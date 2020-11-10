@@ -125,7 +125,7 @@ public class TC_HIVE_42 extends BaseClass {
                 Assert.assertEquals(getStatusTypeFromTable.toLowerCase(),
                         statusTypes.get(i).getText().trim().toLowerCase(),
                         "The Jobs displayed in tables contains application other than that of selected App Type");
-                test.log(LogStatus.PASS, "The Jobs displayed in tables contains application of selected App Type");
+                test.log(LogStatus.PASS, "The Jobs displayed in tables contains application of selected App Type: "+getStatusTypeFromTable);
                 waitExecuter.sleep(1000);
             } else {
                 Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),

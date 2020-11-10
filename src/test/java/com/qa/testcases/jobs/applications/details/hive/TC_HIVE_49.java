@@ -23,7 +23,7 @@ public class TC_HIVE_49 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void VerifyPagination(String clusterId) {
-        test = extent.startTest("TC_HIVE_49.VerifyGearIcon", "Verify that pagination works properly");
+        test = extent.startTest("TC_HIVE_49.VerifyPagination", "Verify that pagination works properly");
         test.assignCategory("App Details - Hive");
         test.log(LogStatus.INFO, "Login to the application");
 

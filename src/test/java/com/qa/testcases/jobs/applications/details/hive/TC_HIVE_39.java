@@ -25,9 +25,9 @@ public class TC_HIVE_39 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_HIVE_39.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void VerifyDurationSliderFilter(String clusterId) {
-        test = extent.startTest("TC_HIVE_39.VerifyDurationSliderFilter",
-                "Verify duration selected in slider matches the apps duration in table.");
+    public void VerifyEventSliderFilter(String clusterId) {
+        test = extent.startTest("TC_HIVE_39.VerifyEventSliderFilter",
+                "Verify event selected in slider matches the apps efficiency in app details table.");
         test.assignCategory("App Details - Hive");
         test.log(LogStatus.INFO, "Login to the application");
 

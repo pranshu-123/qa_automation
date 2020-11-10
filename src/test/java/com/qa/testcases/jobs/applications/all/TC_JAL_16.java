@@ -1,5 +1,6 @@
 package com.qa.testcases.jobs.applications.all;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
@@ -21,6 +22,8 @@ import java.util.logging.Logger;
  * @author - Ojasvi Pandey
  */
 
+@Marker.AllApps
+@Marker.All
 public class TC_JAL_16 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_JAL_16.class.getName());
 

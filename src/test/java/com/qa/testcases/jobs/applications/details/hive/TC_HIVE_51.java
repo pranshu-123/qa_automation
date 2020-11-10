@@ -75,6 +75,7 @@ public class TC_HIVE_51 extends BaseClass {
 				applicationsPageObject.sortByParentApp.click();
 				waitExecuter.sleep(1000);
 				list.add(applicationsPageObject.checkHiveInParentApp.size());
+				LOGGER.info("Size of hive apps: "+applicationsPageObject.checkHiveInParentApp.size());
 				waitExecuter.sleep(1000);
 			}
 			for (int value : list) {

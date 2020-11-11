@@ -74,7 +74,7 @@ public class ImpalaPageObject {
 	@FindBy(xpath = "(//div[contains(@class,'range_inputs')]/button[contains(@class,'applyBtn')])[2]")
 	public WebElement applyBtnImpalaDatePicker;
 	
-	@FindBy(xpath = "(//div[contains(@class,'range_inputs')]/button[contains(@class,'applyBtn')])")
+	@FindBy(xpath = "(//div[contains(@class,'range_inputs')]/button[contains(@class,'applyBtn')])[last()]")
 	public WebElement applyBtn;
 
 	@FindBy(xpath = "//input[contains(@class,'select2-search__field')]")

@@ -55,23 +55,23 @@ public class TC_CTP_09 extends BaseClass {
         waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.getText());
+                + workloadPageObject.timerangeMessageElement.stream()
+                .filter(WebElement::isDisplayed).findFirst().get().getText());
 
         workload.clickOnMonth();
         waitExecuter.sleep(1000);
-        test.log(LogStatus.PASS, "Verify View By Month :-"
-                + workloadPageObject.viewByMonth.stream().anyMatch(WebElement::isDisplayed));
 
         test.log(LogStatus.PASS, "Verify current month selected :"
-                + workloadPageObject.currentmonthHeader.getText());
+                + workloadPageObject.currentmonthHeader.stream()
+                .filter(WebElement::isDisplayed).findFirst().get().getText());
         waitExecuter.sleep(1000);
-        int scrollY = 370;
+ /*       int scrollY = 270;
         JavaScriptExecuter.scrollViewWithYAxis(driver, scrollY);
         scrollY = scrollY + datePicker.getDatePickerYPosition();
-        waitExecuter.sleep(3000);
+    */
         workload.clickOnDate();
-        test.log(LogStatus.PASS, "Verify current Date selected :"
-                + workloadPageObject.ViewByCal.getText());
+        waitExecuter.sleep(3000);
+        test.log(LogStatus.PASS, "Verify current Date selected");
         waitExecuter.sleep(3000);
 
 

@@ -180,7 +180,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "(//div/h3[contains(@class,'expandable-header')])[7]//following-sibling::div//label/span")
     public List<WebElement> tagsCheckboxes;
 
-    @FindBy(xpath = "((//div[contains(@class,'col-md-2')])//div[contains(@class,'filter-section')])[8]//ul[contains(@class,'select2-selection__rendered')]")
+    @FindBy(xpath = "((//div[contains(@class,'col-md-2')])//div[contains(@class,'filter-section')])[9]//ul//input")
     public List<WebElement> tagTypeSearchbox;
 
     @FindBy(xpath = "(//ul[contains(@class,'select2-results')])/li")

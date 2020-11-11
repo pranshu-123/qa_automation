@@ -1,6 +1,9 @@
 package com.qa.testcases.cluster.topx;
 
 import com.qa.annotations.Marker;
+import com.qa.enums.UserAction;
+import com.qa.utils.actions.UserActions;
+import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -24,31 +27,24 @@ public class TC_CTX_30 extends BaseClass {
 		TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
 		waitExecuter.waitUntilElementPresent(topPanelPageObject.topXTab);
 		waitExecuter.waitUntilPageFullyLoaded();
-		
+		UserActions actions = new UserActions(driver);
 		waitExecuter.waitUntilElementClickable(topPanelPageObject.topXTab);
-		waitExecuter.sleep(3000);
-		topPanelPageObject.topXTab.click();
-
+		actions.performActionWithPolling(topPanelPageObject.topXTab, UserAction.CLICK);
 		TopXPageObject topXPageObject = new TopXPageObject(driver);
 
 		TopX topX = new TopX(driver);
 		topX.closeConfirmationMessageNotification();
 
 		//Set all properties in schedule report
-		topXPageObject.scheduleButton.click();
-		waitExecuter.sleep(1000);
+		actions.performActionWithPolling(topXPageObject.scheduleButton, UserAction.CLICK);
 		waitExecuter.waitUntilElementPresent(topXPageObject.usersDropdown);
-		waitExecuter.sleep(1000);
 		topX.selectUserInScheduleReport();
 		topX.selectRealUser();
 		topX.selectQueue();
 		topX.assignScheduleName("ScheduleReport1");
 		topX.assignEmail("ojasvi.pandey@unraveldata.com");
-		waitExecuter.sleep(1000);
-		topXPageObject.scheduleButtonInReport.click();
-		
-		waitExecuter.sleep(1000);
+		actions.performActionWithPolling(topXPageObject.scheduleButtonInReport, UserAction.CLICK);
 		Assert.assertTrue(topXPageObject.scheduleSuccessfulMessage.isDisplayed());
-		
+		test.log(LogStatus.PASS, "Verified new TopX report is scheduled");
 	}
 }

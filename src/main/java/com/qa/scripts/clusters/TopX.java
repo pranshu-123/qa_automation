@@ -49,7 +49,8 @@ public class TopX {
         waitExecuter.sleep(1000);
         topXPageObject.topXNumber.clear();
         JavaScriptExecuter.clearTextField(driver, topXPageObject.topXNumber);
-        topXPageObject.topXNumber.sendKeys(number);
+        actions.performActionWithPolling(topXPageObject.topXNumber,
+            UserAction.SEND_KEYS, number);
     }
 
     public TopX(WebDriver driver) {

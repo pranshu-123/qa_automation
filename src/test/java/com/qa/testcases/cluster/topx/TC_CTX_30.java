@@ -38,6 +38,7 @@ public class TC_CTX_30 extends BaseClass {
 		//Set all properties in schedule report
 		actions.performActionWithPolling(topXPageObject.scheduleButton, UserAction.CLICK);
 		waitExecuter.waitUntilElementPresent(topXPageObject.usersDropdown);
+		topX.setTopXNumber("30");
 		topX.selectUserInScheduleReport();
 		topX.selectRealUser();
 		topX.selectQueue();

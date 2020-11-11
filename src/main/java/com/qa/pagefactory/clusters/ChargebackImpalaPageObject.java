@@ -115,10 +115,10 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "//div[@class='col-md-4'][1]//h4/span")
     public WebElement donutchart;
 
-    @FindBy(css = ".dashboard-section > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > h2")
+    @FindBy(xpath = "//*[@id="app"]/div/div[1]/div/div/div[3]/div/div/div/div[1]/div[1]/div[1]/div/div[1]/h4/span")
     public WebElement impalajobs;
 
-    @FindBy(xpath = "//span[contains(text(),'83')]")
+    @FindBy(xpath = "//*[@id="app"]/div/div[1]/div/div/div[3]/div/div/div/div[2]/div[1]/div[1]/h2")
     public WebElement Chargebacktable;
 
     @FindBy(xpath = "//div[@class='col-md-4'][1]//h4/span")

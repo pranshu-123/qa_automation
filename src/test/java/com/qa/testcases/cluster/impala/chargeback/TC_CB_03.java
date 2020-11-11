@@ -52,7 +52,7 @@ public class TC_CB_03 extends BaseClass {
         waitExecuter.sleep(1000);
         picker.clickOnDatePicker();
         waitExecuter.sleep(1000);
-        picker.selectThisMonth();
+        picker.selectLast12Hour();
         waitExecuter.sleep(1000);
 
         waitExecuter.sleep(1000);

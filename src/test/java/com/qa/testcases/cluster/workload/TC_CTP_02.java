@@ -11,6 +11,7 @@ import com.qa.utils.DateUtils;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
@@ -47,38 +48,43 @@ public class TC_CTP_02 extends BaseClass {
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         datePicker.selectLast7Days();
+        test.log(LogStatus.PASS, "Last 7 Days field is successfully verified in date range");
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.getText());
+                + workloadPageObject.timerangeMessageElement.stream()
+                .filter(WebElement::isDisplayed).findFirst().get().getText());
 
 
         datePicker.clickOnDatePicker();
         datePicker.selectLast14Days();
+        test.log(LogStatus.PASS, "Last 14 Days field is successfully verified in date range");
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.getText());
+                + workloadPageObject.timerangeMessageElement.stream()
+                .filter(WebElement::isDisplayed).findFirst().get().getText());
 
 
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();
+        test.log(LogStatus.PASS, "Last 30 Days field is successfully verified in date range");
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.getText());
+                + workloadPageObject.timerangeMessageElement.stream()
+                .filter(WebElement::isDisplayed).findFirst().get().getText());
 
 
         datePicker.clickOnDatePicker();
         datePicker.selectLast60Days();
+        test.log(LogStatus.PASS, "Last 60 Days field is successfully verified in date range");
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.getText());
+                + workloadPageObject.timerangeMessageElement.stream()
+                .filter(WebElement::isDisplayed).findFirst().get().getText());
 
 
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(1000);
-
-        // Set Start date by substracting days from current date and end date as current
-        // date
-        datePicker.setCurrentAndPastDate(-3);
+        datePicker.selectCustomRange();
         waitExecuter.sleep(1000);
 
         // Click on apply button of calendar
@@ -86,6 +92,10 @@ public class TC_CTP_02 extends BaseClass {
         waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Start Date field is successfully verified in custom date range");
+
+        test.log(LogStatus.PASS, "Verify Workload in selected time range :"
+                + workloadPageObject.timerangeMessageElement.stream()
+                .filter(WebElement::isDisplayed).findFirst().get().getText());
 
     }
 }

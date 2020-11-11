@@ -62,10 +62,10 @@ public class NewAutoActionPolicyPageObject {
     @FindBy(xpath = "//div[contains(@class,'mode-div')]/div/div/span[text()='all']/parent::div/preceding-sibling::div/label/span")
     public WebElement allUserChkBox;
 
-    @FindBy(xpath = "//div[contains(@class,'mode-div')]/div/div/span[text()='only']/parent::div/preceding-sibling::div/label/input")
+    @FindBy(xpath = "//div[contains(@class,'mode-div')]/div/div/span[text()='only']/parent::div/preceding-sibling::div/label/span")
     public  WebElement onlyUserChkBox;
 
-    @FindBy(xpath = "//div[contains(@class,'mode-div')]/div/div/span[text()='except']/parent::div/preceding-sibling::div/label/input")
+    @FindBy(xpath = "//div[contains(@class,'mode-div')]/div/div/span[text()='except']/parent::div/preceding-sibling::div/label/span")
     public WebElement exceptUserChkBox;
 
     /**

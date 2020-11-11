@@ -43,6 +43,7 @@ public class TC_CTX_25 extends BaseClass {
       homePage.clickOnClusterDropDown();
       waitExecuter.sleep(1000);
       for (int i=0; i<topX.getClustersList().size(); i++) {
+        String clusterId  = topX.getClustersList().get(i).getText();
         MouseActions.clickOnElement(driver, topX.getClustersList().get(i));
         waitExecuter.sleep(1000);
         topX.clickOnModalRunButton();
@@ -54,7 +55,7 @@ public class TC_CTX_25 extends BaseClass {
         }
         topX.closeConfirmationMessageNotification();
         topX.clickOnRunButton();
-        test.log(LogStatus.PASS, "TopX report is generated for cluster id: " + topX.getClustersList().get(i).getText());
+        test.log(LogStatus.PASS, "TopX report is generated for cluster id: " + clusterId);
         homePage.clickOnClusterDropDown();
       }
   }

@@ -252,6 +252,9 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//span[(text()='Write')]//following-sibling::a[contains(@class,'sorting')]")
     public WebElement sortByWrite;
 
+    @FindBy(xpath = "//span[@class='globalSearchIcon']")
+    public WebElement searchIcon;
+
     /**
      * @param driver The driver that will be used to look up the elements
      */

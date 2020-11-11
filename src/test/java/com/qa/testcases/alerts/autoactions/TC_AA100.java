@@ -53,9 +53,9 @@ public class TC_AA100 extends BaseClass {
         logger.info("Filled New Auto Action Policy details and clicked on save button");
 
         aa.validateBanner();
-        Assert.assertTrue(aa.validateAutoActionAdded(policyName), "Newly added Policy: " +
-                policyName + " not found.");
-        test.log(LogStatus.PASS, "New Auto action policy added successfully by using policy name " +
+        Assert.assertFalse(aa.validateAutoActionAdded(policyName), "Newly added Policy name 500 char : " +
+                policyName + " able to found.");
+        test.log(LogStatus.PASS, "New Auto action policy not added with policy name " +
                 "as 500 characters long.");
     }
 }

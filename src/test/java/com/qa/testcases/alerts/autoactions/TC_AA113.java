@@ -40,7 +40,7 @@ public class TC_AA113 extends BaseClass {
         //Close default Refine Scope cluster window on New auto action policy
         aa.closeDefaultRefineScope();
 
-        String policyName = "testPolicy";
+        String policyName = "testPolicyExcept";
         aa.enterNewAutoActionPolicyDetails(policyName, "User", "3");
         test.log(LogStatus.INFO,"Fill new auto action policy details, without value");
 

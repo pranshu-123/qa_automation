@@ -32,7 +32,7 @@ public class WorkloadPageObject {
     public WebElement workloadDropdownMemoryHours;
 
     @FindBy(xpath = "//*[@id=\"cluster-workload\"]/div[1]/div[2]/h3")
-    public WebElement timerangeMessageElement;
+    public List<WebElement> timerangeMessageElement;
 
     @FindBy(xpath = "//*[@id=\"cluster-workload\"]/div[1]/div[2]/div[4]/div/div/div[1]/div/div/div[2]/div")
     public WebElement currentmonthHeader;

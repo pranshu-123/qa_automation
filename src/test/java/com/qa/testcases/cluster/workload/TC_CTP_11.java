@@ -12,6 +12,7 @@ import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -52,7 +53,8 @@ public class TC_CTP_11 extends BaseClass {
         waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.getText());
+                + workloadPageObject.timerangeMessageElement.stream()
+                .filter(WebElement::isDisplayed).findFirst().get().getText());
 
         workload.clickOnMonth();
         waitExecuter.sleep(1000);

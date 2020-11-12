@@ -53,7 +53,8 @@ public class TC_CTP_13 extends BaseClass {
         waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.getText());
+                + workloadPageObject.timerangeMessageElement.stream()
+                .filter(WebElement::isDisplayed).findFirst().get().getText());
 
         workload.clickOnMonth();
         waitExecuter.sleep(1000);

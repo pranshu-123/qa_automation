@@ -10,6 +10,7 @@ import com.qa.scripts.clusters.Workload;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -49,7 +50,8 @@ public class TC_CTP_04 extends BaseClass {
         datePicker.selectLast7Days();
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.getText());
+                + workloadPageObject.timerangeMessageElement.stream()
+                .filter(WebElement::isDisplayed).findFirst().get().getText());
 
         workload.clickOnMonth();
         test.log(LogStatus.PASS, "Verify View By Month");
@@ -62,7 +64,8 @@ public class TC_CTP_04 extends BaseClass {
         datePicker.selectLast14Days();
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.getText());
+                + workloadPageObject.timerangeMessageElement.stream()
+                .filter(WebElement::isDisplayed).findFirst().get().getText());
 
         workload.clickOnDay();
         test.log(LogStatus.PASS, "Verify View By Day");
@@ -72,7 +75,8 @@ public class TC_CTP_04 extends BaseClass {
         datePicker.selectLast30Days();
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.getText());
+                + workloadPageObject.timerangeMessageElement.stream()
+                .filter(WebElement::isDisplayed).findFirst().get().getText());
 
         workload.clickOnHour();
         test.log(LogStatus.PASS, "Verify View By Hour");
@@ -83,7 +87,8 @@ public class TC_CTP_04 extends BaseClass {
         waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.getText());
+                + workloadPageObject.timerangeMessageElement.stream()
+                .filter(WebElement::isDisplayed).findFirst().get().getText());
         waitExecuter.sleep(1000);
 
         workload.clickOnHourDay();

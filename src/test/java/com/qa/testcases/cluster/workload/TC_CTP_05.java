@@ -11,6 +11,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
@@ -94,11 +95,19 @@ public class TC_CTP_05 extends BaseClass {
                 .filter(WebElement::isDisplayed).findFirst().get().getText());
         waitExecuter.sleep(1000);
 
-        workload.clickOnHourDay();
+        if (workload.clickOnHourDay())
+        {
+            test.log(LogStatus.PASS, "verify the Group by dept table");
+
         waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Verify View By Hour/Day :-"
                 + workloadPageObject.viewByHourDay.isDisplayed());
         waitExecuter.sleep(1000);
+        }
+        else{
+            Assert.assertEquals("","Test Failed the Group by dept table");
+            test.log(LogStatus.FAIL, "Test Failed the Group by dept table");
+        }
 
 
     }

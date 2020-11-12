@@ -68,10 +68,15 @@ public class TC_CTP_09 extends BaseClass {
         JavaScriptExecuter.scrollViewWithYAxis(driver, scrollY);
         scrollY = scrollY + datePicker.getDatePickerYPosition();
     */
-        workload.clickOnDate();
-        waitExecuter.sleep(3000);
-        test.log(LogStatus.PASS, "Verify current Date selected");
-        waitExecuter.sleep(3000);
+        if(workload.clickOnDate()) {
+            waitExecuter.sleep(3000);
+            test.log(LogStatus.PASS, "Verify current Date selected");
+            waitExecuter.sleep(3000);
+        }
+         else{
+            Assert.assertEquals("","Test Failed current Date not selected");
+            test.log(LogStatus.FAIL, "Test Failed current Date not selected");
+        }
 
 
     }

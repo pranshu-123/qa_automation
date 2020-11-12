@@ -70,7 +70,12 @@ public class WorkloadPageObject {
     @FindBy(xpath = "//*[@id=\"heat-cont\"]")
     public List<WebElement> ViewByMonthCal;
 
-    @FindBy(css = "g:nth-child(1) > rect")
+    @FindBy(css = "(//*[name()='svg'])[4]//*[local-name()='g']//*[local-name()='text']//*[local-name()='tspan']\n" +
+            "\n" +
+            "\n" +
+            " 23m 3s\n" +
+            "\n" +
+            "Type a message\n")
     public WebElement ViewByCal;
 
     @FindBy(css = "g:nth-child(1) > rect")

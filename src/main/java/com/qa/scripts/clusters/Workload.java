@@ -133,20 +133,27 @@ public class Workload {
     }
 
     /* Get Hour dropdown cluster workload */
-    public void clickOnHourDay() {
+    public boolean clickOnHourDay() {
         try {
             LOGGER.info("Click on HourDay dropdown");
-            WebElement HourDay = (workloadPageObject.viewByHourDay);
+            /*WebElement HourDay = (workloadPageObject.viewByHourDay);
             LOGGER.info("X coordinate: " + HourDay.getLocation().getX()
                     + ", Y coordinate: " + HourDay.getLocation().getY());
             Actions actions = new Actions(driver);
-            actions.moveByOffset(HourDay.getLocation().getX() + 1, HourDay.
+            actions.moveByOffset(HourDay.getLocation().getX() + 3, HourDay.
                     getLocation().getY() + 1);
-            actions.perform();
+            actions.perform();*/
+            WebElement HourDay = (workloadPageObject.viewByHourDay);
+            Actions actions = new Actions(driver);
+            actions.moveToElement(HourDay)
+                    .contextClick()
+                    .doubleClick(workloadPageObject.viewByHourDay)
+                    .perform();
         } catch (NoSuchElementException e) {
             LOGGER.severe("Class Workload | Method clickOnHourDay | Exception desc" + e.getMessage());
             throw (e);
         }
+        return false;
     }
 
     /* Get list of Users from workload table */

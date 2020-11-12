@@ -73,12 +73,14 @@ public class TC_CTP_13 extends BaseClass {
         waitExecuter.sleep(1000);
 
         //Checking workload Jobs Table Records populated
-        workload.getworkloadJobsTableRecord();
-        test.log(LogStatus.PASS,
-                "Verified workload Jobs Table is available on workload chargeback page");
 
-        waitExecuter.sleep(1000);
-        //Validate Header Column names in workload Jobs Table
+        if(workloadPageObject.workloadJobsTableRecords.size() > 0)
+        {
+            test.log(LogStatus.PASS, "Verified Jobs Table is available on workload page");
+        }
+        else{
+            test.log(LogStatus.FAIL, "Test Failed Jobs Table is not available on workload page");
+        }
         Assert.assertTrue(workload.validateHeaderColumnNameInworkloadJobsTable(),
                 "Validation failed for header column names from workload Jobs Table");
         test.log(LogStatus.PASS,

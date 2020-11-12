@@ -1,5 +1,6 @@
 package com.qa.testcases.jobs.applications.all;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.constants.DatePickerConstants;
 import com.qa.scripts.DatePicker;
@@ -16,7 +17,8 @@ import java.util.logging.Logger;
  * @author - Ojasvi Pandey
  */
 /* This test is to validate filters in date picker dropdown */
-
+@Marker.AllApps
+@Marker.All
 public class TC_JAL_01 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_JAL_01.class.getName());
 

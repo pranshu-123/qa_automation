@@ -4,6 +4,7 @@ package com.qa.testcases.jobs.applications.all;
  * This testcase should list all the applications with duration selected in duration slider filter
  */
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.clusters.impala.ChargeBackImpala;
@@ -20,6 +21,8 @@ import java.util.logging.Logger;
  * @author - Ojasvi Pandey
  */
 
+@Marker.AllApps
+@Marker.All
 public class TC_JAL_12 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_JAL_12.class.getName());
 

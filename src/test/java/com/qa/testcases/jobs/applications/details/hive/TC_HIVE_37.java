@@ -43,9 +43,9 @@ public class TC_HIVE_37 extends BaseClass {
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         LOGGER.info("Navigate to jobs tab from header");
         waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.jobs);
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(4000);
         topPanelComponentPageObject.jobs.click();
-        waitExecuter.sleep(3000);
+        waitExecuter.sleep(4000);
         waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
         waitExecuter.waitUntilPageFullyLoaded();
         // Select last 30 days from date picker
@@ -64,7 +64,9 @@ public class TC_HIVE_37 extends BaseClass {
         test.log(LogStatus.INFO, "Search for hive in global search box");
         LOGGER.info("Search for hive in global search box");
         applicationsPageObject.globalSearchBox.click();
+        applicationsPageObject.globalSearchBox.clear();
         applicationsPageObject.globalSearchBox.sendKeys("hive");
+        applicationsPageObject.searchIcon.click();
         Actions action = new Actions(driver);
         action.sendKeys(Keys.ENTER).build().perform();
         waitExecuter.sleep(3000);
@@ -89,7 +91,10 @@ public class TC_HIVE_37 extends BaseClass {
         //Reset set filters
         test.log(LogStatus.INFO, "Reset set filters ");
         LOGGER.info("Reset set filters ");
-        applicationsPageObject.resetButton.click();
+        //tnode6
+        waitExecuter.sleep(2000);
+        driver.navigate().back();
+        //applicationsPageObject.resetButton.click();
         waitExecuter.sleep(2000);
     }
 }

@@ -60,7 +60,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "(//div[contains(@class,'check-items-container')])[1]//span[1]")
     public List<WebElement> getApplicationTypes;
 
-    @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')])[2]")
+    @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')])[2]//input")
     public WebElement userSearchBox;
 
     @FindBy(xpath = "(//ul[contains(@class,'select2-results')])/li")
@@ -84,7 +84,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//tbody/tr")
     public List<WebElement> getTableData;
     // Add to master
-    @FindBy(xpath = "(//label[contains(@class,'checkbox')])/span[2]")
+    @FindBy(xpath = "(//label[contains(@class,'checkbox')])/span[2][not(contains(@class,'show-only'))]")
     public List<WebElement> getEachApplicationTypeJobCounts;
 
     @FindBy(xpath = "//div[contains(@class,'check-items-container')]//input//following-sibling::span")
@@ -171,7 +171,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "(//span[contains(@class,'badge')])")
     public List<WebElement> getBadgeTitle;
 
-    @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')])[3]")
+    @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')])[3]//input")
     public WebElement queueNameSearchBox;
 
     @FindBy(xpath = "(//div/h3[contains(@class,'expandable-header')])[7]//following-sibling::div//label")
@@ -180,7 +180,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "(//div/h3[contains(@class,'expandable-header')])[7]//following-sibling::div//label/span")
     public List<WebElement> tagsCheckboxes;
 
-    @FindBy(xpath = "((//div[contains(@class,'col-md-2')])//div[contains(@class,'filter-section')])[8]//ul[contains(@class,'select2-selection__rendered')]")
+    @FindBy(xpath = "((//div[contains(@class,'col-md-2')])//div[contains(@class,'filter-section')])[9]//ul//input")
     public List<WebElement> tagTypeSearchbox;
 
     @FindBy(xpath = "(//ul[contains(@class,'select2-results')])/li")
@@ -251,6 +251,48 @@ public class ApplicationsPageObject {
 
     @FindBy(xpath = "//span[(text()='Write')]//following-sibling::a[contains(@class,'sorting')]")
     public WebElement sortByWrite;
+
+    @FindBy(xpath = "//a[@class='icon-gear']")
+    public WebElement settings;
+
+    @FindBy(xpath = "//ul[@class='dropdown']/li")
+    public List<WebElement> settingsList;
+
+    @FindBy(xpath = "//table[@id='allApps']")
+    public WebElement isTableExist;
+
+    @FindBy(xpath = "//span[contains(@id,'allApps-headerspan')]")
+    public List<WebElement> getTableHeaders;
+
+    @FindBy(xpath = "//nav[contains(@class,'pagination')]")
+    public WebElement isPaginationPresent;
+
+    @FindBy(xpath = "(.//*[local-name() = 'svg']/*[local-name() = 'path'])[4]")
+    public WebElement lastPage;
+
+    @FindBy(xpath = "//nav[@class='pagination']//input")
+    public WebElement getPageNumber;
+
+    @FindBy(xpath = "//nav[@class='pagination']//p")
+    public WebElement getTotalNoOfPages;
+
+    @FindBy(xpath = "//tbody[@id = 'runningApps-body']/tr/td[2]")
+    public List<WebElement> getStatusColumnOfRunningApps;
+
+    @FindBy(xpath = "//a[text()='Status']//following::div[contains(@class,'check-items-container')]//span[2][not(contains(@class,'show-only'))]")
+    public WebElement statusJobCount;
+
+    @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[12]")
+    public List<WebElement> getParentAppColumnFromTable;
+
+    @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[12]//span[@class='Hive']")
+    public List<WebElement> checkHiveInParentApp;
+
+    @FindBy(xpath = "(//div[contains(@class,'component-section-header')]//h2)[2]")
+    public WebElement appSummary;
+
+    @FindBy(xpath = "//span[@class='globalSearchIcon']")
+    public WebElement searchIcon;
 
     /**
      * @param driver The driver that will be used to look up the elements

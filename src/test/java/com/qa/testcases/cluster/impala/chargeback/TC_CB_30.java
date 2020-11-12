@@ -72,7 +72,7 @@ public class TC_CB_30 extends BaseClass {
 
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(2000);
-        datePicker.selectLast12Hour();
+        datePicker.selectLast90Days();
         waitExecuter.sleep(1000);
 
         if(chargeBackImpala.isTotalNumberOfJobCountHeader()){

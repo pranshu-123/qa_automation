@@ -58,8 +58,7 @@ public class TC_CTP_13 extends BaseClass {
 
         workload.clickOnMonth();
         waitExecuter.sleep(1000);
-        test.log(LogStatus.PASS, "Verify View By Month :-"
-                + workloadPageObject.viewByMonth.stream().anyMatch(WebElement::isDisplayed));
+        test.log(LogStatus.PASS, "Verify View By Month");
 
         test.log(LogStatus.PASS, "Verify current month selected :"
                 + workloadPageObject.currentmonthHeader.getText());

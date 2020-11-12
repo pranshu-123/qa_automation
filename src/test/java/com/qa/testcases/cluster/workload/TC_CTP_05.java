@@ -95,6 +95,7 @@ public class TC_CTP_05 extends BaseClass {
         waitExecuter.sleep(1000);
 
         workload.clickOnHourDay();
+        waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Verify View By Hour/Day :-"
                 + workloadPageObject.viewByHourDay.isDisplayed());
         waitExecuter.sleep(1000);

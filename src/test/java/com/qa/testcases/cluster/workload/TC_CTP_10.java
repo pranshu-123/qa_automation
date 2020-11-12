@@ -50,8 +50,7 @@ public class TC_CTP_10 extends BaseClass {
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
-        datePicker.selectLast7Days();
-        waitExecuter.sleep(1000);
+        datePicker.selectLast60Days();
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.stream()
@@ -59,8 +58,7 @@ public class TC_CTP_10 extends BaseClass {
 
         workload.clickOnMonth();
         waitExecuter.sleep(1000);
-        test.log(LogStatus.PASS, "Verify View By Month" + workloadPageObject
-                .viewByMonth.stream().anyMatch(WebElement::isDisplayed));
+        test.log(LogStatus.PASS, "Verify View By Month");
 
         test.log(LogStatus.PASS, "Verify current month selected :"
                 + workloadPageObject.currentmonthHeader.getText());
@@ -73,12 +71,20 @@ public class TC_CTP_10 extends BaseClass {
         waitExecuter.sleep(3000);
         test.log(LogStatus.PASS, "Verify current Date selected");
         waitExecuter.sleep(1000);
-
         //Checking workload Jobs Table Records populated
-        workload.getworkloadJobsTableRecord();
+        if(workloadPageObject.workloadJobsTableRecords.size() > 0)
+        {
+            test.log(LogStatus.PASS, "Verified Jobs Table is available on workload page");
+        }
+        else{
+            test.log(LogStatus.FAIL, "Test Failed Jobs Table is not available on workload page");
+        }
         waitExecuter.sleep(1000);
         test.log(LogStatus.PASS,
                 "Verified workload Jobs Table is available on workload chargeback page");
+        workload.navigateTextClickCheckworkloadTbl(driver, workloadPageObject.workloadHighheatcont);
+        test.log(LogStatus.PASS,"Successfully read the workload header text, after click on memory graph.");
+
 
 
     }

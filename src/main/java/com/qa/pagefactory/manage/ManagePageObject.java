@@ -66,7 +66,7 @@ public class ManagePageObject {
     @FindBy(xpath="//div[contains(@class,'component-section-header')]//h1")
     public WebElement runDiagnosticsHeader;
 
-    @FindBy(xpath="//ul[@class='diagnostic-ul']/li[1]")
+    @FindBy(xpath = "//ul[@class='diagnostic-ul']/li[contains(text(),'Load Latest Diagnostics')]")
     public WebElement  loadLatestDiagnosticsBtn;
 
     @FindBy(css = ".diagnostic-cnt")

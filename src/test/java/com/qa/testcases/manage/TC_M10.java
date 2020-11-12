@@ -7,14 +7,15 @@ import com.qa.scripts.manage.Manage;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.logging.Logger;
+
 @Marker.Manage
 @Marker.All
 public class TC_M10 extends BaseClass {
-    Logger logger = LoggerFactory.getLogger(TC_M10.class);
+    private static final java.util.logging.Logger logger = Logger.getLogger(TC_M10.class.getName());
 
     /*
      * Verify Monitoring page in Manage tab
@@ -34,6 +35,7 @@ public class TC_M10 extends BaseClass {
         waitExecuter.sleep(3000);
         MouseActions.clickOnElement(driver, subTopPanelModulePageObject.gear);
         test.log(LogStatus.INFO, "Verified Manage Tab is clicked.");
+        logger.info("Verified Manage Tab is clicked.");
 
         Manage manage = new Manage(driver);
         //Validate daemon header default
@@ -46,20 +48,22 @@ public class TC_M10 extends BaseClass {
         manage.clickMonitoringTab();
         waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.INFO, "Clicked on Monitoring Tab.");
+        logger.info("Clicked on Monitoring Tab.");
         waitExecuter.sleep(3000);
         Assert.assertTrue(manage.validateMonitoringHeader(), "Monitoring Header is not present.");
         test.log(LogStatus.INFO, "Verified Monitoring Tab.");
 
         Assert.assertTrue(manage.verifyPartitionInfoTab(), "Partition Info tab is not present.");
         test.log(LogStatus.INFO, "Verified Partition Info tab on Monitoring Page.");
-
+        logger.info("Verified Partition Info tab on Monitoring Page.");
         Assert.assertTrue(manage.validatePartitionInfoTableHeaders(),"Verified Partition Info table headers.");
         test.log(LogStatus.INFO, "Verified Partition Info table headers.");
-
+        logger.info("Verified Partition Info table headers.");
         Assert.assertTrue(manage.verifyPartitionInfoTSAndDataAge(),"PartitionInfo TimeStamp and Data Age " +
                 "not displayed");
         test.log(LogStatus.INFO, "Verified Partition Info table TimeStamp and Data Age.");
         test.log(LogStatus.PASS, "Verified Monitoring page with Partition Info details.");
+        logger.info("Verified Monitoring page with Partition Info details.");
 
 
     }

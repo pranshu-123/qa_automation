@@ -96,6 +96,7 @@ public class TC_CB_30 extends BaseClass {
 
         }else{
             System.out.println("Jobs count displayed is Zero");
+            Assert.assertEquals("","Jobs count displayed is Zero");
             test.log(LogStatus.FAIL, "No Data Available for Last 12 Hours date picker.");
         }
 

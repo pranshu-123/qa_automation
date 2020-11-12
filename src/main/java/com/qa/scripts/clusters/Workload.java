@@ -70,7 +70,7 @@ public class Workload {
     }
 
     /* Get time range message cluster workload */
-    public WebElement gettimerangeMessage() {
+    public List<WebElement> gettimerangeMessage() {
         return workloadPageObject.timerangeMessageElement;
     }
 

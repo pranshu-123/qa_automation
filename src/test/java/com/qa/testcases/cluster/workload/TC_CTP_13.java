@@ -79,6 +79,7 @@ public class TC_CTP_13 extends BaseClass {
             test.log(LogStatus.PASS, "Verified Jobs Table is available on workload page");
         }
         else{
+
             test.log(LogStatus.FAIL, "Test Failed Jobs Table is not available on workload page");
         }
         Assert.assertTrue(workload.validateHeaderColumnNameInworkloadJobsTable(),

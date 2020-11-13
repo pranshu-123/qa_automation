@@ -100,12 +100,11 @@ public class TC_CTP_05 extends BaseClass {
             test.log(LogStatus.PASS, "verify the Group by dept table");
 
         waitExecuter.sleep(1000);
-        test.log(LogStatus.PASS, "Verify View By Hour/Day :-"
-                + workloadPageObject.viewByHourDay.isDisplayed());
+        test.log(LogStatus.PASS, "Verify View By Hour/Day");
         waitExecuter.sleep(1000);
         }
         else{
-            Assert.assertEquals("","Test Failed the Group by dept table");
+            Assert.assertEquals(false,"Test Failed the Group by dept table");
             test.log(LogStatus.FAIL, "Test Failed the Group by dept table");
         }
 

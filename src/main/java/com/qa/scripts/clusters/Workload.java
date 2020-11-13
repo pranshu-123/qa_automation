@@ -227,6 +227,19 @@ public class Workload {
         return false;
     }
 
+    /*Method to click on List Date */
+    public void selectDateRange(String date){
+        waitExecuter.sleep(1000);
+        int allDateCount = workloadPageObject.tspanCal.size();
+        System.out.println("Scope count: "+ allDateCount);
+        for(int i=0; i<allDateCount-1 ; i++){
+            if(workloadPageObject.tspanCal.get(i).getText().equals(date)){
+                waitExecuter.sleep(1000);
+                MouseActions.clickOnElement(driver, workloadPageObject.tspanCal.get(i));
+            }
+        }
+    }
+
     /**
      * Method to Click on workload CoreHours tab
      */

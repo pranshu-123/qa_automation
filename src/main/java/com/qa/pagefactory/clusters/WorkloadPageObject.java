@@ -70,12 +70,10 @@ public class WorkloadPageObject {
     @FindBy(xpath = "//*[@id=\"heat-cont\"]")
     public List<WebElement> ViewByMonthCal;
 
-    @FindBy(css = "(//*[name()='svg'])[4]//*[local-name()='g']//*[local-name()='text']//*[local-name()='tspan']\n" +
-            "\n" +
-            "\n" +
-            " 23m 3s\n" +
-            "\n" +
-            "Type a message\n")
+    @FindBy(xpath = "(//*[name()='svg'])[4]//*[local-name()='g']//*[local-name()='text']//*[local-name()='tspan']")
+    public List<WebElement> tspanCal;
+
+    @FindBy(xpath = "//*[name()='rect' and contains(@class,'r5 hover_c')]")
     public WebElement ViewByCal;
 
     @FindBy(css = "g:nth-child(1) > rect")
@@ -103,4 +101,6 @@ public class WorkloadPageObject {
     public WorkloadPageObject(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
+
+
 }

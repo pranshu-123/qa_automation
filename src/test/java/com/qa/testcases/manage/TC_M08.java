@@ -63,12 +63,23 @@ public class TC_M08 extends BaseClass {
         test.log(LogStatus.INFO, "Clicked on Load Latest Diagnostics Button.");
         logger.info("Clicked on Load Latest Diagnostics Button.");
 
-        manage.verifyLoadLatestDiagnosticsHeaderAndTimeStamp();
+        try{
+            Assert.assertTrue(managePageObject.latestDiagnosticsContentHeader.isDisplayed(),"Diagnostics Log " +
+                    "content not found.");
+        }catch (Exception e){
+            test.log(LogStatus.INFO, "Verified Latest Diagnostics Header and Time Stamp not found.");
+            logger.info("Verified Latest Diagnostics Header and Time Stamp not found. ");
+            Assert.assertTrue(false, "Latest Diagnostics Header and Time Stamp not found.");
+        }
+
+        Assert.assertTrue(manage.verifyLoadLatestDiagnosticsHeaderAndTimeStamp(),"Unable to get Latest " +
+                "Diagnostics Log.");
         test.log(LogStatus.INFO, "Verified Latest Diagnostics Header and Time Stamp.");
         logger.info("Verified Latest Diagnostics Header and Time Stamp.");
 
         waitExecuter.sleep(2000);
-        manage.verifyLoadLatestDiagnosticsContent();
+        Assert.assertTrue(manage.verifyLoadLatestDiagnosticsContent(), "Unable to load latest " +
+                "Diagnostics contents.");
         test.log(LogStatus.INFO, "Verified Load Latest Diagnostics contents.");
         test.log(LogStatus.PASS, "Verified diagnostics log with time stamp");
         logger.info("Verified diagnostics log with time stamp");

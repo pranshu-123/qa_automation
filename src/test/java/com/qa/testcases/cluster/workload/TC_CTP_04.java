@@ -48,32 +48,32 @@ public class TC_CTP_04 extends BaseClass {
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         datePicker.selectLast7Days();
+        waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.stream()
                 .filter(WebElement::isDisplayed).findFirst().get().getText());
 
         workload.clickOnMonth();
+        waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Verify View By Month");
 
-
-        test.log(LogStatus.PASS, "Verify current month selected");
-
-
         datePicker.clickOnDatePicker();
-        datePicker.selectLast14Days();
 
+        datePicker.selectLast14Days();
+        waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.stream()
                 .filter(WebElement::isDisplayed).findFirst().get().getText());
 
         workload.clickOnDay();
+        waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Verify View By Day");
 
 
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();
-
+        waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.stream()
                 .filter(WebElement::isDisplayed).findFirst().get().getText());

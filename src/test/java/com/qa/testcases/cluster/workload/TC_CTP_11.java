@@ -49,7 +49,7 @@ public class TC_CTP_11 extends BaseClass {
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
-        datePicker.selectLast7Days();
+        datePicker.selectLast60Days();
         waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
@@ -72,9 +72,15 @@ public class TC_CTP_11 extends BaseClass {
         waitExecuter.sleep(1000);
 
         //Checking workload Jobs Table Records populated
-        workload.getworkloadJobsTableRecord();
+        if(workloadPageObject.workloadJobsTableRecords.size() > 0)
+        {
+            test.log(LogStatus.PASS, "Verified Jobs Table is available on workload page");
+        }
+        else{
+            Assert.assertEquals(false,"Test Failed Jobs Table is not available on workload page");
+            test.log(LogStatus.FAIL, "Test Failed Jobs Table is not available on workload page");
+        }
         waitExecuter.sleep(1000);
-        test.log(LogStatus.PASS, "Verified workload Jobs Table is available on workload chargeback page");
 
         //Validate Header Column names in workload Jobs Table
         Assert.assertTrue(workload.validateHeaderColumnNameInworkloadJobsTable(),

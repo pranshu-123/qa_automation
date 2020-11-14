@@ -89,8 +89,7 @@ public class TC_CTP_07 extends BaseClass {
 
         workload.clickOnAverage();
         waitExecuter.sleep(1000);
-        test.log(LogStatus.PASS, "Verify Workload in selected Average Hour :"
-                + workloadPageObject.viewByAverage.stream().anyMatch(WebElement::isDisplayed));
+        test.log(LogStatus.PASS, "Verify Workload in selected Average Hour");
         waitExecuter.sleep(1000);
 
 

@@ -46,6 +46,7 @@ public class TC_CTP_03 extends BaseClass {
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
         homePage.clickOnClusterDropDown();
+        waitExecuter.sleep(1000);
 
         List<String> listOfClusters = workload.getListOfClusters(workloadPageObject.clusterList);
         test.log(LogStatus.PASS, "List of all cluster are: " + listOfClusters);

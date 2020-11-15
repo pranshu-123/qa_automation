@@ -8,6 +8,7 @@ import com.qa.scripts.manage.Manage;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.TimeoutException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -53,27 +54,27 @@ public class TC_M14 extends BaseClass {
 
         ManagePageObject managePageObject = new ManagePageObject(driver);
         try{
-            waitExecuter.waitUntilTextToBeInWebElement(managePageObject.monitoringZookeeperTab, "Zookeper Tab " +
-                    "displayed.");
-            test.log(LogStatus.INFO, "Verified Zookeper is loaded properly.");
+            waitExecuter.waitUntilTextToBeInWebElement(managePageObject.monitoringZookeeperTab, "Zookeeper");
+            test.log(LogStatus.INFO, "Verified Zookeeper is loaded properly.");
             Assert.assertTrue(managePageObject.monitoringZookeeperTab.isDisplayed(),"Zookeper Tab " +
                     "not found.");
-        }catch (Exception e){
-            test.log(LogStatus.INFO, "Zookeper Tab not found.");
-            logger.info("Zookeper Tab not found.");
-            Assert.assertTrue(false, "Zookeper Tab not found.");
+        }catch (TimeoutException e){
+            e.printStackTrace();
+            test.log(LogStatus.INFO, "Zookeeper Tab not found.");
+            logger.info("Zookeeper Tab not found.");
+            Assert.assertTrue(false, "Zookeeper Tab not found.");
         }
         //Click on Zookeper and validate its details
         waitExecuter.sleep(2000);
         manage.clickZookeperTab();
-        test.log(LogStatus.INFO, "Clicked on Zookeper Tab.");
+        test.log(LogStatus.INFO, "Clicked on Zookeeper Tab.");
         waitExecuter.sleep(3000);
-        Assert.assertTrue(manage.validateZookeperTableHeaders(),"Zookeper Header columns are not present");
+        Assert.assertTrue(manage.validateZookeperTableHeaders(),"Zookepeer Header columns are not present");
 
-        Assert.assertTrue(manage.verifyZookeperTSAndDataAge(),"Zookeper TimeStamp and Data Age " +
+        Assert.assertTrue(manage.verifyZookeperTSAndDataAge(),"Zookeeper TimeStamp and Data Age " +
                 "not displayed");
-        test.log(LogStatus.INFO, "Verified Zookeper table TimeStamp and Data Age.");
-        test.log(LogStatus.PASS, "Verified Monitoring page with Zookeper details.");
+        test.log(LogStatus.INFO, "Verified Zookeeper table TimeStamp and Data Age.");
+        test.log(LogStatus.PASS, "Verified Monitoring page with Zookeeper details.");
 
     }
 }

@@ -8,6 +8,7 @@ import com.qa.scripts.manage.Manage;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -56,12 +57,12 @@ public class TC_M10 extends BaseClass {
         test.log(LogStatus.INFO, "Verified Monitoring Tab.");
 
         try{
-            waitExecuter.waitUntilTextToBeInWebElement(managePageObject.partitionInfoTab, "Partition Tab " +
-                            "displayed.");
+            waitExecuter.waitUntilTextToBeInWebElement(managePageObject.partitionInfoTab, "Partition Info");
             test.log(LogStatus.PASS, "Verified Partition Tab is loaded properly.");
             Assert.assertTrue(managePageObject.partitionInfoTab.isDisplayed(),"Partition Info Tab " +
                     "not found.");
-        }catch (Exception e){
+        }catch (TimeoutException e){
+            e.printStackTrace();
             test.log(LogStatus.INFO, "Partition Info Tab not found.");
             logger.info("Partition Info Tab not found.");
             Assert.assertTrue(false, "Partition Info Tab not found.");

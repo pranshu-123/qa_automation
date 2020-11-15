@@ -8,6 +8,7 @@ import com.qa.scripts.manage.Manage;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -55,12 +56,12 @@ public class TC_M11 extends BaseClass {
         logger.info("Verified Monitoring Tab.");
 
         try{
-            waitExecuter.waitUntilTextToBeInWebElement(managePageObject.monitoringDBStatusTab, "DB Status Tab " +
-                    "displayed.");
+            waitExecuter.waitUntilTextToBeInWebElement(managePageObject.monitoringDBStatusTab, "DB Status");
             test.log(LogStatus.INFO, "Verified DB Status is loaded properly.");
             Assert.assertTrue(managePageObject.monitoringDBStatusTab.isDisplayed(),"DB Status Tab " +
                     "not found.");
-        }catch (Exception e){
+        }catch (TimeoutException e){
+            e.printStackTrace();
             test.log(LogStatus.INFO, "DB Status Tab not found.");
             logger.info("DB Status Tab not found.");
             Assert.assertTrue(false, "DB Status Tab not found.");

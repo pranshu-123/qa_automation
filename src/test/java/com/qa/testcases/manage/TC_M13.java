@@ -8,6 +8,7 @@ import com.qa.scripts.manage.Manage;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.TimeoutException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -53,12 +54,12 @@ public class TC_M13 extends BaseClass {
 
         ManagePageObject managePageObject = new ManagePageObject(driver);
         try{
-            waitExecuter.waitUntilTextToBeInWebElement(managePageObject.monitoringKafkaTab, "Kafka Tab " +
-                    "displayed.");
+            waitExecuter.waitUntilTextToBeInWebElement(managePageObject.monitoringKafkaTab, "Kafka");
             test.log(LogStatus.INFO, "Verified Kafka is loaded properly.");
             Assert.assertTrue(managePageObject.monitoringKafkaTab.isDisplayed(),"Kafka Tab " +
                     "not found.");
-        }catch (Exception e){
+        }catch (TimeoutException e){
+            e.printStackTrace();
             test.log(LogStatus.INFO, "Kafka Tab not found.");
             logger.info("Kafka Tab not found.");
             Assert.assertTrue(false, "Kafka Tab not found.");

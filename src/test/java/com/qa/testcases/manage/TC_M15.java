@@ -8,6 +8,7 @@ import com.qa.scripts.manage.Manage;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.TimeoutException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -53,12 +54,10 @@ public class TC_M15 extends BaseClass {
 
         ManagePageObject managePageObject = new ManagePageObject(driver);
         try{
-            waitExecuter.waitUntilTextToBeInWebElement(managePageObject.monitoringElasticTab, "Elastic Tab " +
-                    "displayed.");
+            waitExecuter.waitUntilTextToBeInWebElement(managePageObject.monitoringElasticTab, "Elastic");
             test.log(LogStatus.INFO, "Verified Elastic is loaded properly.");
-            Assert.assertTrue(managePageObject.monitoringElasticTab.isDisplayed(),"Elastic Tab " +
-                    "not found.");
-        }catch (Exception e){
+        }catch (TimeoutException e){
+            e.printStackTrace();
             test.log(LogStatus.INFO, "Elastic Tab not found.");
             logger.info("Elastic Tab not found.");
             Assert.assertTrue(false, "Elastic Tab not found.");

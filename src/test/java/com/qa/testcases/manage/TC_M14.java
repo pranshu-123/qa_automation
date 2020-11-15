@@ -3,6 +3,7 @@ package com.qa.testcases.manage;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
+import com.qa.pagefactory.manage.ManagePageObject;
 import com.qa.scripts.manage.Manage;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
@@ -50,6 +51,18 @@ public class TC_M14 extends BaseClass {
         Assert.assertTrue(manage.validateMonitoringHeader(), "Monitoring Header is not present.");
         test.log(LogStatus.INFO, "Verified Monitoring Tab.");
 
+        ManagePageObject managePageObject = new ManagePageObject(driver);
+        try{
+            waitExecuter.waitUntilTextToBeInWebElement(managePageObject.monitoringZookeeperTab, "Zookeper Tab " +
+                    "displayed.");
+            test.log(LogStatus.INFO, "Verified Zookeper is loaded properly.");
+            Assert.assertTrue(managePageObject.monitoringZookeeperTab.isDisplayed(),"Zookeper Tab " +
+                    "not found.");
+        }catch (Exception e){
+            test.log(LogStatus.INFO, "Zookeper Tab not found.");
+            logger.info("Zookeper Tab not found.");
+            Assert.assertTrue(false, "Zookeper Tab not found.");
+        }
         //Click on Zookeper and validate its details
         waitExecuter.sleep(2000);
         manage.clickZookeperTab();

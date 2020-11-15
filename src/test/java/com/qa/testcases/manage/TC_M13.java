@@ -3,6 +3,7 @@ package com.qa.testcases.manage;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
+import com.qa.pagefactory.manage.ManagePageObject;
 import com.qa.scripts.manage.Manage;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
@@ -50,6 +51,18 @@ public class TC_M13 extends BaseClass {
         Assert.assertTrue(manage.validateMonitoringHeader(), "Monitoring Header is not present.");
         test.log(LogStatus.INFO, "Verified Monitoring Tab.");
 
+        ManagePageObject managePageObject = new ManagePageObject(driver);
+        try{
+            waitExecuter.waitUntilTextToBeInWebElement(managePageObject.monitoringKafkaTab, "Kafka Tab " +
+                    "displayed.");
+            test.log(LogStatus.INFO, "Verified Kafka is loaded properly.");
+            Assert.assertTrue(managePageObject.monitoringKafkaTab.isDisplayed(),"Kafka Tab " +
+                    "not found.");
+        }catch (Exception e){
+            test.log(LogStatus.INFO, "Kafka Tab not found.");
+            logger.info("Kafka Tab not found.");
+            Assert.assertTrue(false, "Kafka Tab not found.");
+        }
         //Click on Kafka and validate its details
         waitExecuter.sleep(2000);
         manage.clickKafkaTab();

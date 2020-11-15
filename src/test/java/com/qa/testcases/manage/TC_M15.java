@@ -3,6 +3,7 @@ package com.qa.testcases.manage;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
+import com.qa.pagefactory.manage.ManagePageObject;
 import com.qa.scripts.manage.Manage;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
@@ -49,6 +50,19 @@ public class TC_M15 extends BaseClass {
         waitExecuter.sleep(3000);
         Assert.assertTrue(manage.validateMonitoringHeader(), "Monitoring Header is not present.");
         test.log(LogStatus.INFO, "Verified Monitoring Tab.");
+
+        ManagePageObject managePageObject = new ManagePageObject(driver);
+        try{
+            waitExecuter.waitUntilTextToBeInWebElement(managePageObject.monitoringElasticTab, "Elastic Tab " +
+                    "displayed.");
+            test.log(LogStatus.INFO, "Verified Elastic is loaded properly.");
+            Assert.assertTrue(managePageObject.monitoringElasticTab.isDisplayed(),"Elastic Tab " +
+                    "not found.");
+        }catch (Exception e){
+            test.log(LogStatus.INFO, "Elastic Tab not found.");
+            logger.info("Elastic Tab not found.");
+            Assert.assertTrue(false, "Elastic Tab not found.");
+        }
 
         //Click on Elastic tab and validate its details
         waitExecuter.sleep(2000);

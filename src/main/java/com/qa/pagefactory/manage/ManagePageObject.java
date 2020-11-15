@@ -57,7 +57,7 @@ public class ManagePageObject {
     @FindBy(xpath = "(//div[@class='component-tabs-primary']//a)[3]")
     public WebElement sensorHeartbeatTab;
 
-    @FindBy(xpath = "//table[contains(@class,'component-data-tables')]/tr")
+    @FindBy(xpath = "//table[contains(@class,'component-data-tables')]/tbody/tr")
     public List<WebElement> sensorHeartbeatTblRows;
 
     @FindBy(xpath="((//ul[@class='sub-menu']/li[contains(@class,'router-link-active')]/span[@class='selected'])[7]/parent::li/following-sibling::li/span)[2]")

@@ -8,8 +8,7 @@ import com.qa.scripts.reports.ReportsArchiveSchedulePage;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.relevantcodes.extentreports.LogStatus;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.logging.Logger;
 import org.testng.annotations.Test;
 
 @Marker.ReportArchive
@@ -20,18 +19,18 @@ public class TC_RRA01 extends BaseClass {
    * With default parameters, all the reports with latest report status should be displayed
    */
 
-  Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.TC_RRA01.class);
+  private static final Logger LOGGER = Logger.getLogger(com.qa.testcases.reports.TC_RRA01.class.getName());
 
   @Test(dataProvider = "clusterid-data-provider")
   public void TC_RRA01_verifyReportArchivePage(String clusterId) {
     test = extent.startTest("TC_RRA01_verifyReportArchivePage: " + clusterId,
-        "Verify the reports with report status are present");
+        "Verify that with default parameters, all the reports with latest report status should be displayed");
     test.assignCategory(" Report Archive");
     Log.startTestCase("TC_RRA01_verifyReportArchivePage");
 
     // Initialize all classes objects
     test.log(LogStatus.INFO, "Initialize all class objects");
-    logger.info("Initialize all class objects");
+    LOGGER.info("Initialize all class objects");
     TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
     ReportsArchiveSchedulePage reportsPage = new ReportsArchiveSchedulePage(driver);
     ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);

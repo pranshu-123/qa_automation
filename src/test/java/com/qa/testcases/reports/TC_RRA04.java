@@ -32,7 +32,8 @@ public class TC_RRA04 extends BaseClass {
   @Test(dataProvider = "clusterid-data-provider")
   public void TC_RRA04_verifyReportArchiveSearchOption(String clusterId) {
     test = extent.startTest("TC_RRA04_verifyReportArchiveSearchOption: " + clusterId,
-        "Verify search option");
+        "Verify search option in Report Archive page :\n" +
+            "should list all the reports which matches with search box");
     test.assignCategory(" Report Archive");
     Log.startTestCase("TC_RRA04_verifyReportArchiveSearchOption");
 
@@ -42,10 +43,12 @@ public class TC_RRA04 extends BaseClass {
     TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
     ReportsArchiveSchedulePage reportsPage = new ReportsArchiveSchedulePage(driver);
     ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);
+    WaitExecuter waitExecuter = new WaitExecuter(driver);
 
     // Navigate to Reports tab from header
     test.log(LogStatus.INFO, "Navigate to reports tab from header and validate the search option");
     MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
+    waitExecuter.sleep(2000);
     reportsPage.validateSearchOption(reportPageObj);
     test.log(LogStatus.PASS, "The search option has been validated successfully");
   }

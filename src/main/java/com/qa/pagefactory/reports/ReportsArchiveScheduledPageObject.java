@@ -66,6 +66,9 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "(//*[@class='icon-expand is-enabled'])[1]")
   public WebElement viewReportIcon;
 
+  @FindBy(xpath = "(//*[@class='icon-delete is-enabled'])[1]")
+  public WebElement deleteReportIcon;
+
   @FindBy(xpath = "(//*[@class='icon-calendar is-enabled'])")
   public List<WebElement> scheduleReportIcon;
 
@@ -96,14 +99,14 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//*[@class='tag-checkbox']")
   public List<WebElement> checkBoxSelections;
 
-  @FindBy(xpath = " //table/thead/tr/th[7]/label")
+  @FindBy(xpath = "//table/thead/tr/th[7]/label")
   public WebElement cloudMappingChkBox ;
 
   @FindBy(xpath = "//*[@class='tag-list']/span")
   public WebElement tagListFields;
 
   @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
-  public WebElement downloadSuccessfulBanner;
+  public WebElement successfulMsgBanner;
 
   @FindBy(xpath = "//div[contains(@class,'component-section-header')]/h2")
   public WebElement latestReportHeader;

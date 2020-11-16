@@ -7,6 +7,7 @@ import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.scripts.reports.ReportsArchiveSchedulePage;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +26,8 @@ public class TC_RRA08 extends BaseClass {
   @Test(dataProvider = "clusterid-data-provider")
   public void TC_RRA08_verifyReportArchiveSearchOption(String clusterId) {
     test = extent.startTest("TC_RRA08_verifyReportArchiveSearchOption: " + clusterId,
-        "Verify search option perReport");
+        "Verify search option in Report Archive page :\n" +
+            " should list all the reports which matches with search box");
     test.assignCategory(" Report Archive");
     Log.startTestCase("TC_RRA08_verifyReportArchiveSearchOption");
 
@@ -35,10 +37,12 @@ public class TC_RRA08 extends BaseClass {
     TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
     ReportsArchiveSchedulePage reportsPage = new ReportsArchiveSchedulePage(driver);
     ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);
+    WaitExecuter waitExecuter = new WaitExecuter(driver);
 
     // Navigate to Reports tab from header
     test.log(LogStatus.INFO, "Navigate to reports tab from header and Verify search option perReport");
     MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
+    waitExecuter.sleep(2000);
     reportsPage.validateSearchOption(reportPageObj);
     test.log(LogStatus.PASS, "The search option has been validated successfully");
   }

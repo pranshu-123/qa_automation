@@ -1,12 +1,10 @@
 package com.qa.scripts.appdetails;
 
-import com.qa.annotations.Marker;
 import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.pagefactory.appsDetailsPage.SparkAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.jobs.applications.AllApps;
-import com.qa.utils.ActionPerformer;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.ExtentTest;
@@ -14,8 +12,9 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import java.util.logging.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
+
 import org.testng.Assert;
 
 import java.time.Duration;
@@ -28,7 +27,7 @@ public class SparkAppsDetailsPage {
   private WaitExecuter waitExecuter;
   private WebDriver driver;
 
-  Logger logger = LoggerFactory.getLogger(SparkAppsDetailsPage.class);
+  Logger logger = Logger.getLogger(SparkAppsDetailsPage.class.getName());
   private static Boolean isDignosticWin = false;
 
   /**
@@ -193,7 +192,7 @@ public class SparkAppsDetailsPage {
   }
 
   public void validateConfigurationTab(SparkAppsDetailsPageObject sparkAppPageObj){
-    String[] expectedKeyWords = {"METADATA", "MEMORY", "LIMIT", "RESOURCES", "CPU", "NET",
+    String[] expectedKeyWords = {"METADATA", "MEMORY", "DRIVER", "EXECUTOR", "LIMIT", "RESOURCES", "CPU", "NET",
         "YARN", "DEPLOY"};
     List<WebElement> keyWordsList = sparkAppPageObj.configKeywords;
     verifyAssertFalse(keyWordsList.isEmpty(), sparkAppPageObj, " Keywords not found");
@@ -215,7 +214,8 @@ public class SparkAppsDetailsPage {
       String keyword = keyWordsList.get(k).getText();
       logger.info("Keyword Type is " + keyword);
       verifyAssertTrue(Arrays.asList(expectedKeyWords).contains(keyword), sparkAppPageObj,
-          " Keywords displayed on the UI doesnot match with the expected keywords");
+          " Keywords displayed on the UI: ["+ keyword +"] doesnot match with the expected keywords" +
+              Arrays.toString(expectedKeyWords));
       MouseActions.clickOnElement(driver, keyWordsList.get(k));
       waitExecuter.sleep(2000);
     }
@@ -290,13 +290,14 @@ public class SparkAppsDetailsPage {
       verifyAssertTrue(sparkAppPageObj.pieChart.isDisplayed(), sparkAppPageObj, " Piechart for Task Attempts" +
           " is not displayed");
       if (subTabName.equals("Task Time")) {
-        List<WebElement> legendNameList = sparkAppPageObj.legendNames;
-        verifyAssertFalse(legendNameList.isEmpty(), sparkAppPageObj, "Empty legend list");
-        for (int l = 0; l < legendNameList.size(); l++) {
-          String legendName = legendNameList.get(l).getText();
+        List<WebElement> legendNameTTList = sparkAppPageObj.legendNames;
+        verifyAssertFalse(legendNameTTList.isEmpty(), sparkAppPageObj, "Empty legend list");
+        for (int l = 0; l < legendNameTTList.size(); l++) {
+          String legendName = legendNameTTList.get(l).getText();
           logger.info("The Legends for subTab " + subTabName + " is " + legendName);
           verifyAssertTrue(Arrays.asList(expectedTTLegendNames).contains(legendName),sparkAppPageObj,
-              " The legends displayed in the UI for Task Time doesnot match to the expected list of legends");
+              " The legends:["+legendName+"] displayed in the UI for Task Time doesnot match to the" +
+                  " expected list of legends: "+ Arrays.toString(expectedTTLegendNames));
           waitExecuter.sleep(1000);
           if (legendName.equals("Processing Stages")) {
             WebElement ele = sparkAppPageObj.processingStage;
@@ -310,27 +311,32 @@ public class SparkAppsDetailsPage {
             verifyTimingStages(action, ele, sparkAppPageObj, legendName);
           }
         }
+
       } else {
-        List<WebElement> legendNameList = sparkAppPageObj.legendNames;
-        verifyAssertFalse(legendNameList.isEmpty(), sparkAppPageObj, "Empty legend list for APP TIME");
-        for (int l = 0; l < legendNameList.size(); l++) {
-          waitExecuter.sleep(1000);
-          String legendName = legendNameList.get(l).getText();
-          verifyAssertTrue(Arrays.asList(expectedATLegendNames).contains(legendName),sparkAppPageObj,
-              " The legends displayed in the UI for App Time doesnot match to the expected list of legends");
-          //waitExecuter.sleep(2000);
-          if (legendName.equals("Driver Time")) {
+        List<WebElement> legendNameATList = sparkAppPageObj.ATlegendNames;
+        verifyAssertFalse(legendNameATList.isEmpty(), sparkAppPageObj, "Empty legend list for APP TIME");
+        for (int a = 0; a < legendNameATList.size(); a++) {
+          String ATlegendName = legendNameATList.get(a).getText();
+          verifyAssertTrue(Arrays.asList(expectedATLegendNames).contains(ATlegendName),sparkAppPageObj,
+              " The legends ["+ATlegendName+"] displayed in the UI for App Time doesnot match to the " +
+                  "expected list of legends: "+ Arrays.toString(expectedATLegendNames));
+          if (ATlegendName.equals("Driver Time")) {
             WebElement ele = sparkAppPageObj.driverDrillDown;
             MouseActions.clickOnElement(driver, ele);
             String[] expectedDriverLegends = {"FileCommit Time", "File Setup Time", "Others"};
-            List<WebElement> driverLegendNameList = sparkAppPageObj.legendNames;
+            List<WebElement> driverLegendNameList = sparkAppPageObj.driverLegendNames;
             verifyAssertFalse(driverLegendNameList.isEmpty(), sparkAppPageObj, "Empty legend list for DRIVER TIME");
             for (int d = 0; d < driverLegendNameList.size(); d++) {
               String driverLegend = driverLegendNameList.get(d).getText();
+              logger.info("The driverLegend name "+ driverLegend);
               verifyAssertTrue(Arrays.asList(expectedDriverLegends).contains(driverLegend),sparkAppPageObj,
-                  " The legends displayed in the UI for App Time does not match to the expected list of legends");
+                  " The legend ["+driverLegend+"] displayed in the UI for App Time-> Driver Time does not " +
+                      "match to the expected list of legends: "+ Arrays.toString(expectedDriverLegends));
             }
             driverLegendNameList.clear();
+            WebElement backButton = sparkAppPageObj.backButton;
+            action.moveToElement(backButton).click().build().perform();
+            waitExecuter.sleep(1000);
           }
         }
       }
@@ -852,7 +858,7 @@ public class SparkAppsDetailsPage {
       MouseActions.clickOnElement(driver, sparkAppPageObj.closeAppsPageTab);
     } else {
       test.log(LogStatus.SKIP, "No Spark Application present");
-      logger.error("No Spark Application present in the " + clusterId + " cluster for the time span " +
+      logger.info("No Spark Application present in the " + clusterId + " cluster for the time span " +
           "of 90 days");
     }
   }
@@ -888,7 +894,7 @@ public class SparkAppsDetailsPage {
   public void verifyAssertFalse(Boolean condition, SparkAppsDetailsPageObject sparkAppPageObj, String msg) {
     String appDuration = "0";
     try {
-      appDuration = verifyRightPaneKpis(sparkAppPageObj);
+     // appDuration = verifyRightPaneKpis(sparkAppPageObj);
       Assert.assertFalse(condition, msg);
     } catch (Throwable e) {
       //Close apps details page
@@ -912,7 +918,7 @@ public class SparkAppsDetailsPage {
       }
       else
         MouseActions.clickOnElement(driver, sparkAppPageObj.closeAppsPageTab);
-      throw new AssertionError(msg + e.getMessage());
+      throw new AssertionError(msg);
     }
   }
 

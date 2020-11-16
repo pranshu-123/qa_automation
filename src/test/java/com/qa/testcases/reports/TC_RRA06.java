@@ -32,7 +32,8 @@ public class TC_RRA06 extends BaseClass {
   @Test(dataProvider = "clusterid-data-provider")
   public void TC_RRA06_verifyReportArchiveReportTab(String clusterId) {
     test = extent.startTest("TC_RRA06_verifyReportArchiveReportTab: " + clusterId,
-        "Verify reports tab in Report Archive page");
+        "Verify reports tab in Report Archive page :\n" +
+            "This will open new page with  all the reports list, count and list should match here");
     test.assignCategory(" Report Archive");
     Log.startTestCase("TC_RRA06_verifyReportArchiveReportTab");
 
@@ -42,10 +43,12 @@ public class TC_RRA06 extends BaseClass {
     TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
     ReportsArchiveSchedulePage reportsPage = new ReportsArchiveSchedulePage(driver);
     ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);
+    WaitExecuter waitExecuter = new WaitExecuter(driver);
 
     // Navigate to Reports tab from header
     test.log(LogStatus.INFO, "Navigate to reports tab from header and validate the Report tab");
     MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
+    waitExecuter.sleep(2000);
     reportsPage.validateReportCnt(reportPageObj);
     test.log(LogStatus.PASS, "Validated the report tab successfully");
   }

@@ -30,7 +30,9 @@ public class TC_spark_224 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_spark_224_verifyAppDetailsPageStage(String clusterId) {
         test = extent.startTest("TC_spark_224_verifyAppDetailsPageStage: " + clusterId,
-                "Verify all the spark apps are listed in the UI");
+                "Verify 1. Stage for the Job should be displayed\n" +
+                    " 2. Stage must contain these fields ,\n" +
+                    "  Stage ID, Start Time, Duration, tasks, shuffle read, Shuffle write, Input, Output");
         test.assignCategory(" Apps Details-Spark");
         Log.startTestCase("TC_spark_224_verifyAppDetailsPageStage");
 

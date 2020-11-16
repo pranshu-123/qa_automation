@@ -7,6 +7,7 @@ import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.scripts.reports.ReportsArchiveSchedulePage;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,10 +35,12 @@ public class TC_RRA013 extends BaseClass {
     TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
     ReportsArchiveSchedulePage reportsPage = new ReportsArchiveSchedulePage(driver);
     ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);
+    WaitExecuter waitExecuter = new WaitExecuter(driver);
 
     // Navigate to Reports tab from header
     test.log(LogStatus.INFO, "Navigate to reports tab from header and Verify latest report");
     MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
+    waitExecuter.sleep(2000);
     reportsPage.validateLatestReportAction(reportPageObj);
     test.log(LogStatus.PASS, "Verified latest report successfully");
   }

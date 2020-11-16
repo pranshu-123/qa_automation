@@ -42,11 +42,13 @@ public class TC_RRA05 extends BaseClass {
     TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
     ReportsArchiveSchedulePage reportsPage = new ReportsArchiveSchedulePage(driver);
     ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);
+    WaitExecuter waitExecuter = new WaitExecuter(driver);
 
     // Navigate to Reports tab from header
     test.log(LogStatus.INFO, "Navigate to reports tab from header and validate the sorting options on " +
         "Name, Reports and Status tabs");
     MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
+    waitExecuter.sleep(2000);
     reportsPage.validateSortingOptionReportName(reportPageObj, false);
     reportsPage.validateSortingOptionReportCnt(reportPageObj, false);
     reportsPage.validateSortingOptionStatus(reportPageObj, false);

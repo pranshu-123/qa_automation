@@ -30,7 +30,8 @@ public class TC_RRA03 extends BaseClass {
   @Test(dataProvider = "clusterid-data-provider")
   public void TC_RRA03_verifyReportsForDiffDateRange(String clusterId) {
     test = extent.startTest("TC_RRA03_verifyReportsForDiffDateRange: " + clusterId,
-        "Verify all all the reports with latest report status is displayed");
+        "Verify datepicker list and Popup should list all the combination of daterange\n" +
+            "This should list all the reports with latest report status (SUCCESS, FAILURE, NO REPORT)");
     test.assignCategory(" Report Archive");
     Log.startTestCase("TC_RRA03_verifyReportsForDiffDateRange");
 
@@ -47,12 +48,13 @@ public class TC_RRA03 extends BaseClass {
     // Navigate to Reports tab from header
     test.log(LogStatus.INFO, "Navigate to reports tab from header ");
     MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
+    waitExecuter.sleep(2000);
 
     // Click on date picker and get list of calendar ranges
     test.log(LogStatus.INFO, "Click on date picker and list of calendar ranges");
     logger.info("Click on date picker and list of calendar ranges");
     datePicker.clickOnDatePicker();
-    waitExecuter.sleep(1000);
+    waitExecuter.sleep(2000);
 
     // Click on combination of daterange
     test.log(LogStatus.INFO, "Verify reports with status between last one hour");

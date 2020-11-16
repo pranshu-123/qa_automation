@@ -32,7 +32,10 @@ public class TC_spark_220 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_spark_220_verifyAttemptsAndKpis(String clusterId) {
         test = extent.startTest("TC_spark_220_verifyAttemptsAndKpis: " + clusterId,
-                "Verify all the spark apps are listed in the UI");
+                "Verify 1. Application details page should be opened\n" +
+                    "  2. Left pane must be opened and should have KPIs listed (start, end and duration listed and should not be empty)\n" +
+                    "  3. If there are failed attempts then, there should be attempts tab under which attempts attempts for \"failed\"\n" +
+                    "    and \"success\" must be displayed in the form of bar graph");
         test.assignCategory(" Apps Details-Spark");
         Log.startTestCase("TC_spark_220_verifyAttemptsAndKpis");
 

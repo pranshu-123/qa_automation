@@ -33,7 +33,7 @@ public class TC_RRA02 extends BaseClass {
   @Test(dataProvider = "clusterid-data-provider")
   public void TC_RRA02_verifyReportArchiveDatePickerList(String clusterId) {
     test = extent.startTest("TC_RRA02_verifyReportArchiveDatePickerList: " + clusterId,
-        "validate the datepicker list");
+        "Verify datepicker list and Popup should list all the combination of daterange");
     test.assignCategory(" Report Archive");
     Log.startTestCase("TC_RRA02_verifyReportArchiveDatePickerList");
 
@@ -50,6 +50,7 @@ public class TC_RRA02 extends BaseClass {
     // Navigate to Reports tab from header
     test.log(LogStatus.INFO, "Navigate to reports tab from header and validate the datepicker list");
     MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
+    waitExecuter.sleep(3000);
 
     // Click on date picker and get list of calendar ranges
     test.log(LogStatus.INFO, "Click on date picker and list of calendar ranges");
@@ -57,7 +58,7 @@ public class TC_RRA02 extends BaseClass {
     datePicker.clickOnDatePicker();
     waitExecuter.sleep(1000);
     List<String> calendarRanges = allApps.getCalendarRanges();
-    waitExecuter.sleep(1000);
+    waitExecuter.sleep(3000);
 
     Assert.assertTrue(calendarRanges.contains(DatePickerConstants.DatePicker.LAST_1_HOUR),
         "Last 1 Hour is not presemt in datepicker filter ");

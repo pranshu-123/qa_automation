@@ -49,7 +49,7 @@ public class TC_CTP_13 extends BaseClass {
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
-        datePicker.selectLast7Days();
+        datePicker.selectLast30Days();
         waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"

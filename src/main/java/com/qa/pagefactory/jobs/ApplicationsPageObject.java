@@ -294,6 +294,9 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//span[@class='globalSearchIcon']")
     public WebElement searchIcon;
 
+    @FindBy(xpath = "//table[@id='allApps']/tbody")
+    public WebElement allAppsTable;
+
     /**
      * @param driver The driver that will be used to look up the elements
      */

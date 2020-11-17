@@ -3,7 +3,7 @@ package com.qa.testcases.alerts.autoactions;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.HomePageObject;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.alerts.AutoActionsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
@@ -38,7 +38,7 @@ public class TC_AA136 extends BaseClass {
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         AutoActionsPageObject autoActionsPageObject = new AutoActionsPageObject(driver);
         HomePageObject homePageObject = new HomePageObject(driver);
 

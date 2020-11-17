@@ -41,6 +41,7 @@ public class AutoActionsPageObject {
 
     @FindBy(xpath = "//h2[contains(@class,'inline-blk')]/span/span[contains(@class,'icon-alert')]")
     public WebElement icon_summary_header_apps;
+
     /**
      * @param driver The driver that will be used to look up the elements
      */

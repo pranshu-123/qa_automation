@@ -57,20 +57,18 @@ public class TC_CTP_11 extends BaseClass {
                 .filter(WebElement::isDisplayed).findFirst().get().getText());
 
         workload.clickOnMonth();
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
         test.log(LogStatus.PASS, "Verify View By Month");
         test.log(LogStatus.PASS, "Verify current month selected :"
                 + workloadPageObject.currentmonthHeader.getText());
-        waitExecuter.sleep(1000);
-        int scrollY = 370;
-        JavaScriptExecuter.scrollViewWithYAxis(driver, scrollY);
-        scrollY = scrollY + datePicker.getDatePickerYPosition();
-        waitExecuter.sleep(3000);
-        workload.clickOnDate();
-        waitExecuter.sleep(3000);
-        test.log(LogStatus.PASS, "Verify current Date selected");
-        waitExecuter.sleep(1000);
-
+        if(workload.clickOnDate()) {
+            waitExecuter.sleep(3000);
+            test.log(LogStatus.PASS, "Verify current Date selected");
+        }
+        else{
+            Assert.assertEquals(false,"Test Failed unable to click current Date");
+            test.log(LogStatus.FAIL, "Test Failed unable to click current Date");
+        }
         //Checking workload Jobs Table Records populated
         if(workloadPageObject.workloadJobsTableRecords.size() > 0)
         {

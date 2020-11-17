@@ -135,20 +135,21 @@ public class Workload {
     /* Get Hour dropdown cluster workload */
     public boolean clickOnHourDay() {
         try {
-            LOGGER.info("Click on HourDay dropdown");
-            /*WebElement HourDay = (workloadPageObject.viewByHourDay);
+          /*  LOGGER.info("Click on HourDay dropdown");
+            WebElement HourDay = (workloadPageObject.viewByHourDay);
             LOGGER.info("X coordinate: " + HourDay.getLocation().getX()
                     + ", Y coordinate: " + HourDay.getLocation().getY());
             Actions actions = new Actions(driver);
             actions.moveByOffset(HourDay.getLocation().getX() + 3, HourDay.
                     getLocation().getY() + 1);
             actions.perform();*/
-            WebElement HourDay = (workloadPageObject.viewByHourDay);
+            WebElement Hour = (workloadPageObject.viewByHourDay);
             Actions actions = new Actions(driver);
-            actions.moveToElement(HourDay)
+            actions.moveToElement(Hour)
                     .contextClick()
                     .doubleClick(workloadPageObject.viewByHourDay)
                     .perform();
+
         } catch (NoSuchElementException e) {
             LOGGER.severe("Class Workload | Method clickOnHourDay | Exception desc" + e.getMessage());
             throw (e);
@@ -217,15 +218,20 @@ public class Workload {
     /*Method to click on Date */
     public boolean clickOnDate() {
         try {
-            WebElement clickdate = workloadPageObject.ViewByCal;
-            Actions actionBuilder = new Actions(driver);
-            actionBuilder.doubleClick(clickdate).build().perform();
+            WebElement ClickDate = (workloadPageObject.viewByAverage);
+            Actions actions = new Actions(driver);
+            actions.moveToElement(ClickDate)
+                    .contextClick()
+                    .doubleClick(workloadPageObject.viewByAverage)
+                    .perform();
+
         } catch (NoSuchElementException e) {
             LOGGER.severe("Class Workload | Method clickOnAverage | Exception desc" + e.getMessage());
             throw (e);
         }
         return false;
     }
+
 
     /*Method to click on List Date */
     public void selectDateRange(String date){

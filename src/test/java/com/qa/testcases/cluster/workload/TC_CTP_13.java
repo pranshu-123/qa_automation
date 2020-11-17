@@ -67,10 +67,14 @@ public class TC_CTP_13 extends BaseClass {
         JavaScriptExecuter.scrollViewWithYAxis(driver, scrollY);
         scrollY = scrollY + datePicker.getDatePickerYPosition();
         waitExecuter.sleep(3000);
-        workload.clickOnDate();
-        waitExecuter.sleep(3000);
-        test.log(LogStatus.PASS, "Verify current Date selected");
-        waitExecuter.sleep(1000);
+        if(workload.clickOnDate()) {
+            waitExecuter.sleep(3000);
+            test.log(LogStatus.PASS, "Verify current Date selected");
+        }
+        else{
+            Assert.assertEquals(false,"Test Failed unable to click current Date");
+            test.log(LogStatus.FAIL, "Test Failed unable to click current Date");
+        }
 
         //Checking workload Jobs Table Records populated
 

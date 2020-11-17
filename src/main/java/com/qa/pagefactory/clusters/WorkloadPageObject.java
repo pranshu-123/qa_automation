@@ -55,7 +55,7 @@ public class WorkloadPageObject {
     @FindBy(xpath = "//*[@id=\"radio-btn-opt\"]/span[3]")
     public WebElement viewByHour;
 
-    @FindBy(xpath = "//span[@class=\"badge tag\" and text()=\"Hour/Day\"]")
+    @FindBy(xpath = "//span[normalize-space()='Hour/Day']")
     public WebElement viewByHourDay;
 
     @FindBy(xpath = "//span[@class=\"badge pending\" and text()=\"Sum\"]")
@@ -73,7 +73,7 @@ public class WorkloadPageObject {
     @FindBy(xpath = "(//*[name()='svg'])[4]//*[local-name()='g']//*[local-name()='text']//*[local-name()='tspan']")
     public List<WebElement> tspanCal;
 
-    @FindBy(xpath = "//*[name()='rect' and contains(@class,'r5 hover_c')]")
+    @FindBy(xpath = "//*[@id=\"heat-cont\"]/svg/svg/svg/svg/g[28]/rect")
     public WebElement ViewByCal;
 
     @FindBy(css = "g:nth-child(1) > rect")

@@ -3,10 +3,12 @@ package com.qa.testcases.manage;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
+import com.qa.pagefactory.manage.ManagePageObject;
 import com.qa.scripts.manage.Manage;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -38,6 +40,7 @@ public class TC_M10 extends BaseClass {
         logger.info("Verified Manage Tab is clicked.");
 
         Manage manage = new Manage(driver);
+        ManagePageObject managePageObject = new ManagePageObject(driver);
         //Validate daemon header default
         String daemonHeader = manage.validateDaemonHeader();
         Assert.assertEquals(daemonHeader, "Daemons", "Daemons Header not matched.");
@@ -52,6 +55,18 @@ public class TC_M10 extends BaseClass {
         waitExecuter.sleep(3000);
         Assert.assertTrue(manage.validateMonitoringHeader(), "Monitoring Header is not present.");
         test.log(LogStatus.INFO, "Verified Monitoring Tab.");
+
+        try{
+            waitExecuter.waitUntilTextToBeInWebElement(managePageObject.partitionInfoTab, "Partition Info");
+            test.log(LogStatus.PASS, "Verified Partition Tab is loaded properly.");
+            Assert.assertTrue(managePageObject.partitionInfoTab.isDisplayed(),"Partition Info Tab " +
+                    "not found.");
+        }catch (TimeoutException e){
+            e.printStackTrace();
+            test.log(LogStatus.INFO, "Partition Info Tab not found.");
+            logger.info("Partition Info Tab not found.");
+            Assert.assertTrue(false, "Partition Info Tab not found.");
+        }
 
         Assert.assertTrue(manage.verifyPartitionInfoTab(), "Partition Info tab is not present.");
         test.log(LogStatus.INFO, "Verified Partition Info tab on Monitoring Page.");

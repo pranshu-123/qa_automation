@@ -3,10 +3,12 @@ package com.qa.testcases.manage;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
+import com.qa.pagefactory.manage.ManagePageObject;
 import com.qa.scripts.manage.Manage;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -28,6 +30,7 @@ public class TC_M11 extends BaseClass {
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         SubTopPanelModulePageObject subTopPanelModulePageObject = new SubTopPanelModulePageObject(driver);
+        ManagePageObject managePageObject = new ManagePageObject(driver);
         // Navigate to Manage tab from header
         waitExecuter.waitUntilElementPresent(subTopPanelModulePageObject.gear);
         waitExecuter.waitUntilPageFullyLoaded();
@@ -52,6 +55,17 @@ public class TC_M11 extends BaseClass {
         test.log(LogStatus.INFO, "Verified Monitoring Tab.");
         logger.info("Verified Monitoring Tab.");
 
+        try{
+            waitExecuter.waitUntilTextToBeInWebElement(managePageObject.monitoringDBStatusTab, "DB Status");
+            test.log(LogStatus.INFO, "Verified DB Status is loaded properly.");
+            Assert.assertTrue(managePageObject.monitoringDBStatusTab.isDisplayed(),"DB Status Tab " +
+                    "not found.");
+        }catch (TimeoutException e){
+            e.printStackTrace();
+            test.log(LogStatus.INFO, "DB Status Tab not found.");
+            logger.info("DB Status Tab not found.");
+            Assert.assertTrue(false, "DB Status Tab not found.");
+        }
         //Click on DB Status and validate its details
         waitExecuter.sleep(2000);
         manage.clickDBStatusTab();

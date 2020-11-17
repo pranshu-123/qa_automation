@@ -53,7 +53,7 @@ public class TopXPageObject {
     @FindBy(xpath = "(//section[contains(@class,'component-message-banner')])[1]/span[contains(text(),'The report has been scheduled successfully.')]")
     public WebElement scheduleSuccessfulMessage;
     
-    @FindBy(id = "topx-download")
+    @FindBy(xpath = "//span[contains(@class,'icon-download')]")
     public WebElement downloadJsonButton;
 
     @FindBy(xpath = "//ul[contains(concat(' ', @class, ' '), 'select2-results__options')]/li")

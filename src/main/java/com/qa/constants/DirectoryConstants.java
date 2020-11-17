@@ -7,6 +7,7 @@ public class DirectoryConstants {
   public static final String SRC = "src";
   public static final String MAIN = "main";
   public static final String JAVA = "java";
+  public static final String RESOURCES = "resources";
   public static final String COM = "com";
   public static final String QA = "qa";
   public static final String CONFIG = "config";
@@ -41,5 +42,14 @@ public class DirectoryConstants {
   }
 
   public static String getDownloadsDir() { return getUserDir()+ File.separator + DOWNLOADSFOLDER ;}
+
+  /**
+   * This method with return the absolute path of resources folder
+   * @return Resources folder path
+   */
+  public static String getResourcesDir() {
+    return getUserDir() + File.separator + SRC + File.separator + MAIN + File.separator +
+        RESOURCES + File.separator;
+  }
 
 }

@@ -76,7 +76,7 @@ public class DriverManager {
     ChromeOptions options = new ChromeOptions();
     options.setCapability("goog:loggingPrefs", logPrefs);
     if (System.getProperty(ConfigConstants.SystemConfig.HEADLESS).equals("true")) {
-      options.addArguments("--headless");
+      options.addArguments("--headless","window-size=1920,1080");
       options.addArguments("--no-sandbox","--disable-dev-shm-usage");
     }
     options.setExperimentalOption("useAutomationExtension", false);

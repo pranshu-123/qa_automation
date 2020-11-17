@@ -2,7 +2,7 @@ package com.qa.testcases.jobs.applications.details.hive;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.jobs.applications.AllApps;
@@ -28,7 +28,7 @@ public class TC_HIVE_46 extends BaseClass {
         test.log(LogStatus.INFO, "Initialize all class objects");
         LOGGER.info("Initialize all class objects");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         AllApps allApps = new AllApps(driver);
         DatePicker datePicker = new DatePicker(driver);
@@ -36,9 +36,9 @@ public class TC_HIVE_46 extends BaseClass {
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         LOGGER.info("Navigate to jobs tab from header");
         waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.jobs);
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(4000);
         topPanelComponentPageObject.jobs.click();
-        waitExecuter.sleep(3000);
+        waitExecuter.sleep(4000);
         waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
         waitExecuter.waitUntilPageFullyLoaded();
         // Select last 30 days from date picker
@@ -46,13 +46,18 @@ public class TC_HIVE_46 extends BaseClass {
         LOGGER.info("Select last 30 days");
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(1000);
-        datePicker.selectLastMonth();
+        datePicker.selectLast30Days();
         waitExecuter.sleep(2000);
         // Select cluster
         test.log(LogStatus.INFO, "Select clusterid : " + clusterId);
         LOGGER.info("Select clusterId : " + clusterId);
         allApps.selectCluster(clusterId);
         waitExecuter.sleep(3000);
+        
+        int appCount = Integer
+                .parseInt(applicationsPageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
+
+        if (appCount > 0) {
         // Sort Up by Status
         test.log(LogStatus.INFO, "Sort Up by Status");
         LOGGER.info("Sort up by Status");
@@ -150,5 +155,14 @@ public class TC_HIVE_46 extends BaseClass {
         waitExecuter.sleep(1000);
         driver.navigate().refresh();
         waitExecuter.sleep(3000);
+        }
+        else {
+            Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
+                    "The clusterId does not have any application under it and also does not display 'No Data Available' for it"
+                            + clusterId);
+            test.log(LogStatus.SKIP, "The clusterId does not have any application under it.");
+            driver.navigate().refresh();
+            waitExecuter.sleep(2000);
+        }
     }
 }

@@ -2,7 +2,7 @@ package com.qa.testcases.jobs.applications.inefficientapps;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
@@ -25,9 +25,9 @@ public class TC_JIA05 extends BaseClass {
         test.log(LogStatus.INFO, "Passed Parameter Is : " + clusterId);
 
         //Click on Jobs tab
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+        SubTopPanelModulePageObject subTopPanelModulePageObject = new SubTopPanelModulePageObject(driver);
         waitExecuter.sleep(2000);
-        topPanelComponentPageObject.jobs.click();
+        subTopPanelModulePageObject.jobs.click();
         test.log(LogStatus.INFO, "Click on Job tab");
 
         //Click on inefficientApps tab

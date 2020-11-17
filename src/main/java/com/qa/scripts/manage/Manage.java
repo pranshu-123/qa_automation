@@ -2,16 +2,17 @@ package com.qa.scripts.manage;
 
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.manage.ManagePageObject;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * @author Birender Kumar
@@ -21,7 +22,7 @@ public class Manage {
     private WaitExecuter waitExecuter;
     private ManagePageObject managePageObject;
 
-    Logger logger = LoggerFactory.getLogger(Manage.class);
+    private static final java.util.logging.Logger logger = Logger.getLogger(Manage.class.getName());
 
     public Manage(WebDriver driver) {
         this.driver = driver;
@@ -200,8 +201,14 @@ public class Manage {
 
     public void clickOnLoadLatestDiagnostics(){
         waitExecuter.sleep(1000);
-        managePageObject.loadLatestDiagnosticsBtn.click();
+        try{
+            MouseActions.clickOnElement(driver,managePageObject.loadLatestDiagnosticsBtn);
+        }catch (TimeoutException te){
+            MouseActions.clickOnElement(driver,managePageObject.loadLatestDiagnosticsBtn);
+        }
         waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilElementClickable(managePageObject.loadLatestDiagnosticsBtn);
+
     }
 
     public boolean verifyLoadLatestDiagnosticsContent(){

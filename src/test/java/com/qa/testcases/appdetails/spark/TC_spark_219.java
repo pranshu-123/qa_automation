@@ -4,7 +4,7 @@ import com.qa.annotations.Marker;
 import com.qa.pagefactory.appsDetailsPage.SparkAppsDetailsPageObject;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.jobs.applications.AllApps;
@@ -40,7 +40,7 @@ public class TC_spark_219 extends BaseClass {
     // Initialize all classes objects
     test.log(LogStatus.INFO, "Initialize all class objects");
     logger.info("Initialize all class objects");
-    TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+    SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
     ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
     SparkAppsDetailsPageObject sparkAppsDetailsPageObject = new SparkAppsDetailsPageObject(driver);
     SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);

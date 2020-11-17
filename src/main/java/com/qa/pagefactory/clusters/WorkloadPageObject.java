@@ -28,25 +28,34 @@ public class WorkloadPageObject {
     @FindBy(xpath = "//a[contains(text(),'vCore Hours')]")
     public WebElement workloadDropdownvCoreHours;
 
+    @FindBy(css = "g:nth-child(1) > rect")
+    public WebElement memoryTooltip;
+
+    @FindBy(xpath = "//*[@id=\"heat-cont\"]/svg")
+    public WebElement workloadHighheatcont;
+
+    @FindBy(xpath= "//div[@class='panel-heading']")
+    public  WebElement workloadHeader;
+
     @FindBy(xpath = "//a[contains(text(),'Memory Hours')]")
     public WebElement workloadDropdownMemoryHours;
 
     @FindBy(xpath = "//*[@id=\"cluster-workload\"]/div[1]/div[2]/h3")
-    public WebElement timerangeMessageElement;
+    public List<WebElement> timerangeMessageElement;
 
     @FindBy(xpath = "//*[@id=\"cluster-workload\"]/div[1]/div[2]/div[4]/div/div/div[1]/div/div/div[2]/div")
     public WebElement currentmonthHeader;
 
     @FindBy(xpath = "//*[@id=\"radio-btn-opt\"]/span[1]")
-    public List<WebElement> viewByMonth;
+    public WebElement viewByMonth;
 
     @FindBy(xpath = "//span[@class=\"badge tag\" and text()=\"Day\"]")
-    public List<WebElement> viewByDay;
+    public WebElement viewByDay;
 
     @FindBy(xpath = "//*[@id=\"radio-btn-opt\"]/span[3]")
-    public List<WebElement> viewByHour;
+    public WebElement viewByHour;
 
-    @FindBy(xpath = "//span[@class=\"badge tag\" and text()=\"Hour/Day\"]")
+    @FindBy(xpath = "//span[normalize-space()='Hour/Day']")
     public WebElement viewByHourDay;
 
     @FindBy(xpath = "//span[@class=\"badge pending\" and text()=\"Sum\"]")
@@ -56,12 +65,15 @@ public class WorkloadPageObject {
     public WebElement HourHighChartContainer;
 
     @FindBy(xpath = "//*[@id=\"radio-btn-opt\"]/span[2]")
-    public List<WebElement> viewByAverage;
+    public WebElement viewByAverage;
 
     @FindBy(xpath = "//*[@id=\"heat-cont\"]")
     public List<WebElement> ViewByMonthCal;
 
-    @FindBy(xpath = "//*[name()='rect' and contains(@class,'r5 hover_c')]")
+    @FindBy(xpath = "(//*[name()='svg'])[4]//*[local-name()='g']//*[local-name()='text']//*[local-name()='tspan']")
+    public List<WebElement> tspanCal;
+
+    @FindBy(xpath = "//*[@id=\"heat-cont\"]/svg/svg/svg/svg/g[28]/rect")
     public WebElement ViewByCal;
 
     @FindBy(css = "g:nth-child(1) > rect")
@@ -76,6 +88,9 @@ public class WorkloadPageObject {
     @FindBy(xpath = "//*[@id=\"kindlist\"]/table/tbody/tr[1]")
     public List<WebElement> workloadJobsTableRecords;
 
+    @FindBy(xpath = "//*[@id=\"kindlist\"]/table/tbody/tr/td[1]")
+    public List<WebElement> getUsersFromworkloadTable;
+
     @FindBy(xpath = "//*[@id=\"kindlist\"]/table/thead/tr/th[1]")
     public List<WebElement> workloadJobsTableHeaderNames;
 
@@ -86,4 +101,6 @@ public class WorkloadPageObject {
     public WorkloadPageObject(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
+
+
 }

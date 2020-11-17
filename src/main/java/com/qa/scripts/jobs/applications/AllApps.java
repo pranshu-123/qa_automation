@@ -1,6 +1,6 @@
 package com.qa.scripts.jobs.applications;
 
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.utils.WaitExecuter;
@@ -20,7 +20,7 @@ public class AllApps {
     private final WebDriver driver;
     private final ApplicationsPageObject applicationsPageObject;
     private final Actions action;
-    private final TopPanelComponentPageObject topPanelComponentPageObject;
+    private final SubTopPanelModulePageObject subTopPanelModulePageObject;
     private final DatePicker datePicker;
 
     /**
@@ -33,7 +33,7 @@ public class AllApps {
         waitExecuter = new WaitExecuter(driver);
         applicationsPageObject = new ApplicationsPageObject(driver);
         action = new Actions(driver);
-        topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+        subTopPanelModulePageObject = new SubTopPanelModulePageObject(driver);
         datePicker = new DatePicker(driver);
         this.driver = driver;
     }
@@ -123,9 +123,9 @@ public class AllApps {
     /* Navigate to Jobs Tab */
     public void navigateToJobsTab() {
         LOGGER.info("Navigate to jobs tab from header");
-        waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.jobs);
+        waitExecuter.waitUntilElementClickable(subTopPanelModulePageObject.jobs);
         waitExecuter.sleep(1000);
-        topPanelComponentPageObject.jobs.click();
+        subTopPanelModulePageObject.jobs.click();
         waitExecuter.sleep(3000);
         waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
         waitExecuter.waitUntilPageFullyLoaded();
@@ -160,5 +160,14 @@ public class AllApps {
             nameOfAppTypes.add(appType.getText().trim());
         }
         return nameOfAppTypes;
+    }
+
+    /* To reset the settings made in apps page */
+    public void reset() {
+        LOGGER.info("Reset username filter");
+        waitExecuter.sleep(2000);
+        applicationsPageObject.resetButton.click();
+        waitExecuter.sleep(3000);
+
     }
 }

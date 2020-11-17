@@ -49,16 +49,16 @@ public class TC_CTP_13 extends BaseClass {
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
-        datePicker.selectLast7Days();
+        datePicker.selectLast30Days();
         waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.getText());
+                + workloadPageObject.timerangeMessageElement.stream()
+                .filter(WebElement::isDisplayed).findFirst().get().getText());
 
         workload.clickOnMonth();
         waitExecuter.sleep(1000);
-        test.log(LogStatus.PASS, "Verify View By Month :-"
-                + workloadPageObject.viewByMonth.stream().anyMatch(WebElement::isDisplayed));
+        test.log(LogStatus.PASS, "Verify View By Month");
 
         test.log(LogStatus.PASS, "Verify current month selected :"
                 + workloadPageObject.currentmonthHeader.getText());
@@ -67,18 +67,25 @@ public class TC_CTP_13 extends BaseClass {
         JavaScriptExecuter.scrollViewWithYAxis(driver, scrollY);
         scrollY = scrollY + datePicker.getDatePickerYPosition();
         waitExecuter.sleep(3000);
-        workload.clickOnDate();
-        waitExecuter.sleep(3000);
-        test.log(LogStatus.PASS, "Verify current Date selected");
-        waitExecuter.sleep(1000);
+        if(workload.clickOnDate()) {
+            waitExecuter.sleep(3000);
+            test.log(LogStatus.PASS, "Verify current Date selected");
+        }
+        else{
+            Assert.assertEquals(false,"Test Failed unable to click current Date");
+            test.log(LogStatus.FAIL, "Test Failed unable to click current Date");
+        }
 
         //Checking workload Jobs Table Records populated
-        workload.getworkloadJobsTableRecord();
-        test.log(LogStatus.PASS,
-                "Verified workload Jobs Table is available on workload chargeback page");
 
-        waitExecuter.sleep(1000);
-        //Validate Header Column names in workload Jobs Table
+        if(workloadPageObject.workloadJobsTableRecords.size() > 0)
+        {
+            test.log(LogStatus.PASS, "Verified Jobs Table is available on workload page");
+        }
+        else{
+
+            test.log(LogStatus.FAIL, "Test Failed Jobs Table is not available on workload page");
+        }
         Assert.assertTrue(workload.validateHeaderColumnNameInworkloadJobsTable(),
                 "Validation failed for header column names from workload Jobs Table");
         test.log(LogStatus.PASS,

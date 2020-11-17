@@ -4,12 +4,20 @@ package com.qa.utils.actions;
 import com.qa.utils.LoggingUtils;
 import java.util.function.Supplier;
 
+/**
+ * @author Ankur Jaiswal
+ * @param <T> Type operator class
+ */
 public class RetryExecuter<T> {
     private int retryCounter;
     private static final int MAX_RETRIES = 3;
     private LoggingUtils logger = new LoggingUtils(RetryExecuter.class);
 
-    // Takes a function and executes it, if fails, passes the function to the retry command
+    /**
+     * Takes a function and executes it, if fails, passes the function to the retry command
+     * @param function - Function that we want to retry on failure
+     * @return
+     */
     public T run(Supplier<T> function) {
         try {
             return function.get();
@@ -20,10 +28,18 @@ public class RetryExecuter<T> {
         }
     }
 
+    /**
+     * Return the current retry counter
+     */
     public int getRetryCounter() {
         return retryCounter;
     }
 
+    /**
+     * This will retry the function execution if we get any error/exeception
+     * @param function - function to be executed
+     * @throws RuntimeException
+     */
     private T retry(Supplier<T> function) throws RuntimeException {
         logger.error("FAILED - Execution failed, will be retried " + MAX_RETRIES + " times.", null);
         retryCounter = 0;

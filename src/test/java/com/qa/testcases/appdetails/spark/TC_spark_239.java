@@ -29,7 +29,8 @@ public class TC_spark_239 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_spark_239_verifyJobsExecutionTab(String clusterId) {
         test = extent.startTest("TC_spark_239_verifyJobsExecutionTab: " + clusterId,
-                "Verify all the spark apps are listed in the UI");
+                "Verify that  Execution should loaded\n" +
+                    " UI should contain flowchart about RDD");
         test.assignCategory(" Apps Details-Spark");
         Log.startTestCase("TC_spark_239_verifyJobsExecutionTab");
 

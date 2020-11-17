@@ -29,7 +29,9 @@ public class TC_spark_228 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_spark_228_verifyRightPaneKpis(String clusterId) {
         test = extent.startTest("TC_spark_228_verifyRightPaneKpis: " + clusterId,
-                "Verify all the spark apps are listed in the UI");
+                "Verify 1. All the KPIs should be listed and the data must be populated.\n" +
+                    "  (Duration, Start time, end time, job count, stages count)\n" +
+                    "  2. Owner, cluster, queue must be populated on the top right");
         test.assignCategory(" Apps Details-Spark");
         Log.startTestCase("TC_spark_228_verifyRightPaneKpis");
 

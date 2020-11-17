@@ -57,6 +57,7 @@ public class TC_CTP_02 extends BaseClass {
 
         datePicker.clickOnDatePicker();
         datePicker.selectLast14Days();
+        waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Last 14 Days field is successfully verified in date range");
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
@@ -66,6 +67,7 @@ public class TC_CTP_02 extends BaseClass {
 
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();
+        waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Last 30 Days field is successfully verified in date range");
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
@@ -75,6 +77,8 @@ public class TC_CTP_02 extends BaseClass {
 
         datePicker.clickOnDatePicker();
         datePicker.selectLast60Days();
+        waitExecuter.sleep(1000);
+
         test.log(LogStatus.PASS, "Last 60 Days field is successfully verified in date range");
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"

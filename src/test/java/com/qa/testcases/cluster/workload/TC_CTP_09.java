@@ -51,7 +51,7 @@ public class TC_CTP_09 extends BaseClass {
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
-        datePicker.selectLast7Days();
+        datePicker.selectLast30Days();
         waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
@@ -62,17 +62,18 @@ public class TC_CTP_09 extends BaseClass {
         waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify current month selected :"
-                + workloadPageObject.currentmonthHeader.stream()
-                .filter(WebElement::isDisplayed).findFirst().get().getText());
+                + workloadPageObject.currentmonthHeader.getText());
         waitExecuter.sleep(1000);
- /*       int scrollY = 270;
-        JavaScriptExecuter.scrollViewWithYAxis(driver, scrollY);
-        scrollY = scrollY + datePicker.getDatePickerYPosition();
-    */
-        workload.clickOnDate();
-        waitExecuter.sleep(3000);
-        test.log(LogStatus.PASS, "Verify current Date selected");
-        waitExecuter.sleep(3000);
+
+        if(workload.clickOnDate()) {
+            waitExecuter.sleep(3000);
+            test.log(LogStatus.PASS, "Verify current Date selected");
+            waitExecuter.sleep(3000);
+        }
+         else{
+            Assert.assertEquals(false,"Test Failed current Date not selected");
+            test.log(LogStatus.FAIL, "Test Failed current Date not selected");
+        }
 
 
     }

@@ -9,8 +9,10 @@ import com.qa.scripts.clusters.Workload;
 import com.qa.utils.DateUtils;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @Marker.All
@@ -36,12 +38,15 @@ public class TC_CTP_06 extends BaseClass {
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
-        datePicker.selectLast7Days();
+        datePicker.selectLast30Days();
+        waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.getText());
+                + workloadPageObject.timerangeMessageElement.stream()
+                .filter(WebElement::isDisplayed).findFirst().get().getText());
 
         workload.clickOnMonth();
+        waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Verify View By Month");
 
         test.log(LogStatus.PASS, "Verify current month selected :"
@@ -49,11 +54,14 @@ public class TC_CTP_06 extends BaseClass {
 
         datePicker.clickOnDatePicker();
         datePicker.selectLast14Days();
+        waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.getText());
+                + workloadPageObject.timerangeMessageElement.stream()
+                .filter(WebElement::isDisplayed).findFirst().get().getText());
 
         workload.clickOnDay();
+        waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Verify View By Day ");
 
 
@@ -61,7 +69,8 @@ public class TC_CTP_06 extends BaseClass {
         datePicker.selectLast30Days();
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.getText());
+                + workloadPageObject.timerangeMessageElement.stream()
+                .filter(WebElement::isDisplayed).findFirst().get().getText());
 
         workload.clickOnHour();
         test.log(LogStatus.PASS, "Verify View By Hour ");
@@ -69,14 +78,20 @@ public class TC_CTP_06 extends BaseClass {
 
         datePicker.clickOnDatePicker();
         datePicker.selectLast60Days();
+        waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.getText());
+                + workloadPageObject.timerangeMessageElement.stream()
+                .filter(WebElement::isDisplayed).findFirst().get().getText());
 
-        workload.clickOnHourDay();
+        if(workload.clickOnHourDay()){
+        waitExecuter.sleep(3000);
         test.log(LogStatus.PASS, "Verify View By Hour/Day :-"
                 + workloadPageObject.viewByHourDay.isDisplayed());
-
+       }
+        else{
+        test.log(LogStatus.FAIL, "Test Failed Verify View By Hour/Day");
+    }
 
     }
 }

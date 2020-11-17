@@ -3,10 +3,12 @@ package com.qa.testcases.manage;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
+import com.qa.pagefactory.manage.ManagePageObject;
 import com.qa.scripts.manage.Manage;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.TimeoutException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -50,6 +52,18 @@ public class TC_M12 extends BaseClass {
         Assert.assertTrue(manage.validateMonitoringHeader(), "Monitoring Header is not present.");
         test.log(LogStatus.INFO, "Verified Monitoring Tab.");
 
+        ManagePageObject managePageObject = new ManagePageObject(driver);
+        try{
+            waitExecuter.waitUntilTextToBeInWebElement(managePageObject.monitoringDBPerformanceTab, "DB Performance");
+            test.log(LogStatus.INFO, "Verified DB Performance is loaded properly.");
+            Assert.assertTrue(managePageObject.monitoringDBPerformanceTab.isDisplayed(),"DB Performance Tab " +
+                    "not found.");
+        }catch (TimeoutException e){
+            e.printStackTrace();
+            test.log(LogStatus.INFO, "DB Performance Tab not found.");
+            logger.info("DB Performance Tab not found.");
+            Assert.assertTrue(false, "DB Performance Tab not found.");
+        }
         //Click on DB Performance and validate its details
         waitExecuter.sleep(2000);
         manage.clickDBPerformanceTab();

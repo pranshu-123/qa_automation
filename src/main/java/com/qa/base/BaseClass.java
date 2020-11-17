@@ -37,10 +37,10 @@ import org.testng.annotations.BeforeSuite;
  * are here. Every test class must implement this class
  */
 public class BaseClass {
+    private static final Logger LOGGER = Logger.getLogger(BaseClass.class.getName());
     public static WebDriver driver;
     public static ExtentReports extent;
     public static ExtentTest test;
-    private static final Logger LOGGER = Logger.getLogger(BaseClass.class.getName());
     private final LoggingUtils logger = new LoggingUtils(BaseClass.class);
     private S3BucketUtils s3BucketUtils = new S3BucketUtils();
 
@@ -65,9 +65,10 @@ public class BaseClass {
         extent.loadConfig(new File(DirectoryConstants.getConfigDir() + "extent_config.xml"));
         LOGGER.info("Set build info to html report.");
         extent.addSystemInfo(ConfigConstants.ReportConfig.SELENIUM_VERSION,
-            prop.getProperty(ConfigConstants.ReportConfig.SELENIUM_VERSION));
+                prop.getProperty(ConfigConstants.ReportConfig.SELENIUM_VERSION));
         UnravelBuildInfo unravelBuildInfo = new UnravelBuildInfo(driver);
         unravelBuildInfo.setBuildInfo(extent);
+
     }
 
     /**
@@ -152,13 +153,14 @@ public class BaseClass {
 
     /**
      * Data provider method which will pass cluster Ids to different classes
+     *
      * @param method - Method name of current test case
      * @return - clusterIds
      */
     @DataProvider(name = "clusterid-data-provider")
     public Iterator<Object[]> getClusterIds(Method method) {
         if (System.getProperty(ConfigConstants.SystemConfig.IS_MULTI_CLUSTER).trim()
-            .toLowerCase().equals("true")) {
+                .toLowerCase().equals("true")) {
             LOGGER.info("Getting multiple cluster Ids");
             return DataProviderClass.getClusterIdsForClusterType(method);
         } else {

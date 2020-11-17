@@ -1,4 +1,3 @@
-
 package com.qa.testcases.jobs.applications.details.hive;
 
 import com.qa.annotations.Marker;
@@ -73,36 +72,34 @@ public class TC_HIVE_40_PART1 extends BaseClass {
             // Get 1st username from table for hive apps
             String filterByUsername = applicationsPageObject.getUsernameFromTable.getText().trim();
             String filterByQueue = applicationsPageObject.getQueueNameTable.getText().trim();
-            test.log(LogStatus.INFO, "Username and Queuename found for hive apps are- "+filterByUsername+" "+filterByQueue);
+            test.log(LogStatus.INFO, "Username and Queuename found for hive apps are- " + filterByUsername + " " + filterByQueue);
             LOGGER.info("Select 'Only' hive from app types and get its jobs count");
             String upTo10CharUserName = null;
             String upTo10CharQueueName = null;
-            if(filterByUsername != "-") {
-                if(filterByUsername.length() >10) {
+            if (!filterByUsername.equals("-")) {
+                if (filterByUsername.length() > 10) {
                     upTo10CharUserName = StringUtils.left(filterByUsername, 10);
                     LOGGER.info("User name should be filtered by- " + upTo10CharUserName);
-                    test.log(LogStatus.INFO,"Username should be filtered by- "+ upTo10CharUserName);
+                    test.log(LogStatus.INFO, "Username should be filtered by- " + upTo10CharUserName);
 
-                }
-                else if(filterByUsername.length() <=10 && filterByUsername.length()>0) {
+                } else if (filterByUsername.length() <= 10 && filterByUsername.length() > 0) {
                     upTo10CharUserName = filterByUsername;
                     LOGGER.info("User name should be filtered by- " + upTo10CharUserName);
-                    test.log(LogStatus.INFO,"Username should be filtered by- "+ upTo10CharUserName);
+                    test.log(LogStatus.INFO, "Username should be filtered by- " + upTo10CharUserName);
                 }
             }
             waitExecuter.sleep(2000);
-            if(filterByQueue != "-") {
-                if(filterByQueue.length() >10) {
-                    // Get 1st queuename from table for hive apps                    
+            if (!filterByQueue.equals("-")) {
+                if (filterByQueue.length() > 10) {
+                    // Get 1st queuename from table for hive apps
                     upTo10CharQueueName = StringUtils.left(filterByQueue, 10);
                     LOGGER.info("Queue name should be filtered by- " + upTo10CharQueueName);
-                    test.log(LogStatus.INFO,"Queue should be filtered by- "+ upTo10CharQueueName);
+                    test.log(LogStatus.INFO, "Queue should be filtered by- " + upTo10CharQueueName);
 
-                }
-                else if(filterByQueue.length() <=10 && filterByQueue.length()>0) {
+                } else if (filterByQueue.length() <= 10 && filterByQueue.length() > 0) {
                     upTo10CharQueueName = filterByQueue;
                     LOGGER.info("Queue name should be filtered by- " + upTo10CharQueueName);
-                    test.log(LogStatus.INFO,"Queue should be filtered by- "+ upTo10CharQueueName);
+                    test.log(LogStatus.INFO, "Queue should be filtered by- " + upTo10CharQueueName);
                 }
             }
             waitExecuter.sleep(2000);

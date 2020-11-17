@@ -1,3 +1,4 @@
+
 package com.qa.testcases.jobs.applications.details.hive;
 
 import com.qa.annotations.Marker;
@@ -27,7 +28,7 @@ public class TC_HIVE_40_PART1 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void VerifyFilterByUserQueue(String clusterId) {
         test = extent.startTest("TC_HIVE_40_PART1.VerifyFilterByUserQueue",
-                "Verify that User is able to see the apps sorted based on Users and Queue.");
+            "Verify that User is able to see the apps sorted based on Users and Queue.");
         test.assignCategory("App Details - Hive");
         test.log(LogStatus.INFO, "Login to the application");
 
@@ -67,39 +68,41 @@ public class TC_HIVE_40_PART1 extends BaseClass {
         LOGGER.info("Select 'Only' hive from app types and get its jobs count");
         sparkApp.clickOnlyLink("Hive");
         int hiveAppCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
-                .replaceAll("[^\\dA-Za-z ]", "").trim());
+            .replaceAll("[^\\dA-Za-z ]", "").trim());
         if (hiveAppCount > 0) {
             // Get 1st username from table for hive apps
             String filterByUsername = applicationsPageObject.getUsernameFromTable.getText().trim();
             String filterByQueue = applicationsPageObject.getQueueNameTable.getText().trim();
-            test.log(LogStatus.INFO, "Username and Queuename found for hive apps are- " + filterByUsername + " " + filterByQueue);
+            test.log(LogStatus.INFO, "Username and Queuename found for hive apps are- "+filterByUsername+" "+filterByQueue);
             LOGGER.info("Select 'Only' hive from app types and get its jobs count");
             String upTo10CharUserName = null;
             String upTo10CharQueueName = null;
-            if (!filterByUsername.equals("-")) {
-                if (filterByUsername.length() > 10) {
+            if(filterByUsername != "-") {
+                if(filterByUsername.length() >10) {
                     upTo10CharUserName = StringUtils.left(filterByUsername, 10);
                     LOGGER.info("User name should be filtered by- " + upTo10CharUserName);
-                    test.log(LogStatus.INFO, "Username should be filtered by- " + upTo10CharUserName);
+                    test.log(LogStatus.INFO,"Username should be filtered by- "+ upTo10CharUserName);
 
-                } else if (filterByUsername.length() <= 10 && filterByUsername.length() > 0) {
+                }
+                else if(filterByUsername.length() <=10 && filterByUsername.length()>0) {
                     upTo10CharUserName = filterByUsername;
                     LOGGER.info("User name should be filtered by- " + upTo10CharUserName);
-                    test.log(LogStatus.INFO, "Username should be filtered by- " + upTo10CharUserName);
+                    test.log(LogStatus.INFO,"Username should be filtered by- "+ upTo10CharUserName);
                 }
             }
             waitExecuter.sleep(2000);
-            if (!filterByQueue.equals("-")) {
-                if (filterByQueue.length() > 10) {
-                    // Get 1st queuename from table for hive apps
+            if(filterByQueue != "-") {
+                if(filterByQueue.length() >10) {
+                    // Get 1st queuename from table for hive apps                    
                     upTo10CharQueueName = StringUtils.left(filterByQueue, 10);
                     LOGGER.info("Queue name should be filtered by- " + upTo10CharQueueName);
-                    test.log(LogStatus.INFO, "Queue should be filtered by- " + upTo10CharQueueName);
+                    test.log(LogStatus.INFO,"Queue should be filtered by- "+ upTo10CharQueueName);
 
-                } else if (filterByQueue.length() <= 10 && filterByQueue.length() > 0) {
+                }
+                else if(filterByQueue.length() <=10 && filterByQueue.length()>0) {
                     upTo10CharQueueName = filterByQueue;
                     LOGGER.info("Queue name should be filtered by- " + upTo10CharQueueName);
-                    test.log(LogStatus.INFO, "Queue should be filtered by- " + upTo10CharQueueName);
+                    test.log(LogStatus.INFO,"Queue should be filtered by- "+ upTo10CharQueueName);
                 }
             }
             waitExecuter.sleep(2000);
@@ -140,17 +143,17 @@ public class TC_HIVE_40_PART1 extends BaseClass {
             executor.executeScript("arguments[0].scrollIntoView();", applicationsPageObject.jobsPageHeader);
             waitExecuter.sleep(2000);
             int totalCount = Integer
-                    .parseInt(applicationsPageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
+                .parseInt(applicationsPageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
             waitExecuter.sleep(2000);
             if (totalCount > 0) {
                 String usernameFromTable = applicationsPageObject.getUsernameFromTable.getAttribute("title");
                 LOGGER.info("Username displayed in table " + usernameFromTable);
                 Assert.assertEquals(usernameFromTable, usernameSelected,
-                        "The application in table contains username other than that of " + usernameFromTable);
+                    "The application in table contains username other than that of " + usernameFromTable);
                 test.log(LogStatus.PASS, "The application in table contains username i.e. selected in filter");
             } else {
                 Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
-                        "The clusterId does not have any application under it and also does not display 'No Data Available' for it");
+                    "The clusterId does not have any application under it and also does not display 'No Data Available' for it");
                 test.log(LogStatus.SKIP, "The clusterId does not have any application under it.");
                 // Reset username filter to default
                 test.log(LogStatus.INFO, "Reset username filter");

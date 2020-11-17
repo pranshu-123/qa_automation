@@ -22,12 +22,12 @@ import java.util.logging.Logger;
 @Marker.AppDetailsHive
 @Marker.All
 public class TC_HIVE_39 extends BaseClass {
-    private static final Logger LOGGER = Logger.getLogger(TC_HIVE_38.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TC_HIVE_39.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void VerifyDurationSliderFilter(String clusterId) {
-        test = extent.startTest("TC_HIVE_38.VerifyDurationSliderFilter",
-                "Verify duration selected in slider matches the apps duration in table.");
+    public void VerifyEventSliderFilter(String clusterId) {
+        test = extent.startTest("TC_HIVE_39.VerifyEventSliderFilter",
+                "Verify event selected in slider matches the apps efficiency in app details table.");
         test.assignCategory("App Details - Hive");
         test.log(LogStatus.INFO, "Login to the application");
 
@@ -44,9 +44,9 @@ public class TC_HIVE_39 extends BaseClass {
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         LOGGER.info("Navigate to jobs tab from header");
         waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.jobs);
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(4000);
         topPanelComponentPageObject.jobs.click();
-        waitExecuter.sleep(3000);
+        waitExecuter.sleep(4000);
         waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
         waitExecuter.waitUntilPageFullyLoaded();
         // Select last 30 days from date picker

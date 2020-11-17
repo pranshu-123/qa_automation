@@ -2,26 +2,28 @@ package com.qa.testcases.jobs.applications.details.hive;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.SubTopPanelModulePageObject;
+import com.qa.pagefactory.TopPanelComponentPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 @Marker.AppDetailsHive
 @Marker.All
-public class TC_HIVE_47 extends BaseClass {
-    private static final Logger LOGGER = Logger.getLogger(TC_HIVE_47.class.getName());
+public class TC_HIVE_49 extends BaseClass {
+    private static final Logger LOGGER = Logger.getLogger(TC_HIVE_49.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void VerifySortByParentApp(String clusterId) {
-        test = extent.startTest("TC_HIVE_47.VerifySortByParentApp", "Verify that on sorting works for Parent App");
+    public void VerifyPagination(String clusterId) {
+        test = extent.startTest("TC_HIVE_49.VerifyPagination", "Verify that pagination works properly");
         test.assignCategory("App Details - Hive");
         test.log(LogStatus.INFO, "Login to the application");
 
@@ -29,10 +31,11 @@ public class TC_HIVE_47 extends BaseClass {
         test.log(LogStatus.INFO, "Initialize all class objects");
         LOGGER.info("Initialize all class objects");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
+        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         AllApps allApps = new AllApps(driver);
         DatePicker datePicker = new DatePicker(driver);
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         LOGGER.info("Navigate to jobs tab from header");
@@ -49,39 +52,33 @@ public class TC_HIVE_47 extends BaseClass {
         waitExecuter.sleep(1000);
         datePicker.selectLast30Days();
         waitExecuter.sleep(2000);
-
         // Select cluster
         test.log(LogStatus.INFO, "Select clusterid : " + clusterId);
         LOGGER.info("Select clusterId : " + clusterId);
         allApps.selectCluster(clusterId);
         waitExecuter.sleep(3000);
 
-        int appCount = Integer
-                .parseInt(applicationsPageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
-
-        if (appCount > 0) {
-            // Sort down by Parent App
-            test.log(LogStatus.INFO, "Sort up by Parent App");
-            LOGGER.info("Sort up by Parent App");
-            applicationsPageObject.sortByParentApp.click();
-            waitExecuter.sleep(2000);
-            Assert.assertTrue(applicationsPageObject.sortUp.isDisplayed(), "Sort up is not working");
-            // Sort up by Memory Allocated
-            test.log(LogStatus.INFO, "Sort down by Parent App");
-            LOGGER.info("Sort down by Parent App");
-            applicationsPageObject.sortByParentApp.click();
-            waitExecuter.sleep(2000);
-            Assert.assertTrue(applicationsPageObject.sortDown.isDisplayed(), "Sort down is not working");
-            test.log(LogStatus.PASS, "Verified sorting on Parent App.");
-            // Refresh the page and reload to original state
-            test.log(LogStatus.INFO, "Refresh the page and reload to original state");
-            LOGGER.info("Refresh the page and reload to original state");
-            waitExecuter.sleep(1000);
-            driver.navigate().refresh();
+        executor.executeScript("arguments[0].scrollIntoView();", applicationsPageObject.userSearchBox);
+        if (applicationsPageObject.isPaginationPresent.isDisplayed()) {
+            applicationsPageObject.lastPage.click();
             waitExecuter.sleep(3000);
+            String[] totalPages = applicationsPageObject.getTotalNoOfPages.getText().trim().split("\\s+");
+            LOGGER.info("Total pages on UI- " + Arrays.toString(totalPages));
+            int pageNo = Integer.parseInt(totalPages[2]);
+            int pageValue = Integer.parseInt(applicationsPageObject.getPageNumber.getAttribute("value").trim());
+            Assert.assertEquals(pageNo, pageValue, "The last page icon is not working");
+            test.log(LogStatus.PASS, "Verified pagination by clicking on First-Last button of pagination.");
+            executor.executeScript("arguments[0].scrollIntoView();", applicationsPageObject.globalSearchBox);
+            // Reset username filter to default
+            test.log(LogStatus.INFO, "Reset username filter");
+            allApps.reset();
         } else {
-            test.log(LogStatus.SKIP, "There are no apps for selected duration and clusterId.");
-            throw new SkipException("There are no apps for selected duration and clusterId");
+            test.log(LogStatus.SKIP, "The pagination is not present for selected duration and clusterId.");
+            executor.executeScript("arguments[0].scrollIntoView();", applicationsPageObject.globalSearchBox);
+            // Reset username filter to default
+            test.log(LogStatus.INFO, "Reset username filter");
+            allApps.reset();
+            throw new SkipException("There pagination is not present for selected duration and clusterId");
         }
     }
 }

@@ -12,6 +12,7 @@ import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -48,31 +49,36 @@ public class TC_CTP_11 extends BaseClass {
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
-        datePicker.selectLast7Days();
+        datePicker.selectLast60Days();
         waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.getText());
+                + workloadPageObject.timerangeMessageElement.stream()
+                .filter(WebElement::isDisplayed).findFirst().get().getText());
 
         workload.clickOnMonth();
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
         test.log(LogStatus.PASS, "Verify View By Month");
         test.log(LogStatus.PASS, "Verify current month selected :"
                 + workloadPageObject.currentmonthHeader.getText());
-        waitExecuter.sleep(1000);
-        int scrollY = 370;
-        JavaScriptExecuter.scrollViewWithYAxis(driver, scrollY);
-        scrollY = scrollY + datePicker.getDatePickerYPosition();
-        waitExecuter.sleep(3000);
-        workload.clickOnDate();
-        waitExecuter.sleep(3000);
-        test.log(LogStatus.PASS, "Verify current Date selected");
-        waitExecuter.sleep(1000);
-
+        if(workload.clickOnDate()) {
+            waitExecuter.sleep(3000);
+            test.log(LogStatus.PASS, "Verify current Date selected");
+        }
+        else{
+            Assert.assertEquals(false,"Test Failed unable to click current Date");
+            test.log(LogStatus.FAIL, "Test Failed unable to click current Date");
+        }
         //Checking workload Jobs Table Records populated
-        workload.getworkloadJobsTableRecord();
+        if(workloadPageObject.workloadJobsTableRecords.size() > 0)
+        {
+            test.log(LogStatus.PASS, "Verified Jobs Table is available on workload page");
+        }
+        else{
+            Assert.assertEquals(false,"Test Failed Jobs Table is not available on workload page");
+            test.log(LogStatus.FAIL, "Test Failed Jobs Table is not available on workload page");
+        }
         waitExecuter.sleep(1000);
-        test.log(LogStatus.PASS, "Verified workload Jobs Table is available on workload chargeback page");
 
         //Validate Header Column names in workload Jobs Table
         Assert.assertTrue(workload.validateHeaderColumnNameInworkloadJobsTable(),

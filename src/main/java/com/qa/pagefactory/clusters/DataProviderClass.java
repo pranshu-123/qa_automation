@@ -1,6 +1,9 @@
 package com.qa.pagefactory.clusters;
 
+import com.qa.io.UnravelConfigYamlReader;
+
 import java.lang.reflect.Method;
+import java.util.Iterator;
 
 /**
  * @author Ankur Jaiswal
@@ -13,13 +16,14 @@ public class DataProviderClass {
      * @param method - Reflection @test method
      * @return - List of clusterIds
      */
-    public static Object[][] getClusterIdsForClusterType(Method method) {
+    public static Iterator<Object[]> getClusterIdsForClusterType(Method method) {
         /* @TODO - Need to remove hard coded values from cluster Ids this should be parameterized
            or it should be pulled from APIs. */
+        UnravelConfigYamlReader unravelConfigYamlReader = new UnravelConfigYamlReader();
         if (method.getDeclaringClass().getPackage().getName().contains("impala")) {
-            return new Object[][]{{"tnode54(CM)-wnode54(U)-TLS-Kerb-Sentry"}};
+            return unravelConfigYamlReader.getClusterList(true);
         } else {
-            return new Object[][]{{"wnode25-HDP315-TLS-Kerb-Ranger"}, {"wnode26-CDH633-TLS-Kerb-Sentry"}};
+            return unravelConfigYamlReader.getClusterList(false);
         }
     }
 }

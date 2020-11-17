@@ -35,4 +35,13 @@ public class ConfigConstants {
     public static class ReportConfig {
         public static final String SELENIUM_VERSION = "SeleniumVersion";
     }
+
+    /**
+     * This class contains constants related with unravel yaml config
+     */
+    public static class UnravelYamlConfig {
+        public static final String UNRAVEL = "unravel";
+        public static final String CLUSTERS = "clusters";
+        public static final String IMPALA_CLUSTERS = "impala_clusters";
+    }
 }

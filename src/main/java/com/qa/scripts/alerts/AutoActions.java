@@ -1,6 +1,6 @@
 package com.qa.scripts.alerts;
 
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.alerts.AutoActionsPageObject;
 import com.qa.pagefactory.alerts.NewAutoActionPolicyPageObject;
 import com.qa.utils.MouseActions;
@@ -40,8 +40,7 @@ public class AutoActions {
 
     public void setupForAutoActionsPage(){
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
-        waitExecuter.sleep(3000);
+        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         waitExecuter.waitUntilElementPresent(topPanelComponentPageObject.alerts);
         waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.alerts);

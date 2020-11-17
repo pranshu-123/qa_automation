@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 /** @author Ankur Jaiswal
  * All WebElement which is present at login page of unravel ui
  * is present in this class. Wherever you need to access these page object
@@ -15,6 +17,9 @@ public class LoginPageObject {
 
   @FindBy(name="username")
   public WebElement loginUserName;
+
+  @FindBy(name="username")
+  public List<WebElement> loginPage;
 
   @FindBy(name="password")
   public WebElement loginPassword;

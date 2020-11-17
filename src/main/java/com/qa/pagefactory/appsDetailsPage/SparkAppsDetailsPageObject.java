@@ -173,13 +173,19 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "//*[@class='highcharts-legend']/*[name()='g']//*[name()='g']//*[name()='tspan']")
   public List<WebElement> legendNames;
 
+  @FindBy(xpath = "//*[@class='highcharts-legend']/*[name()='g']//*[name()='g']//*[name()='tspan']")
+  public List<WebElement> ATlegendNames;
+
+  @FindBy(xpath = "//*[@class='highcharts-legend']/*[name()='g']//*[name()='g']//*[name()='tspan']")
+  public List<WebElement> driverLegendNames;
+
   @FindBy(xpath = "//*[@class=\"highcharts-container \"]/*[name()='svg']/*[name()='text']/*")
   public WebElement timingsTabTitle;
 
   @FindBy(xpath = "//*[@class=\"highcharts-series-group\"]//*[name()='g'][1]")
   public WebElement pieChart;
 
-    @FindBy(xpath = "//*[@class='highcharts-series-group']//*[name()='path' and  contains(@class," +
+  @FindBy(xpath = "//*[@class='highcharts-series-group']//*[name()='path' and  contains(@class," +
         "'highcharts-drilldown-point') and @fill='#DDDF00' or @fill='#dddf00' or @fill='rgb(221,223,0)']")
   public WebElement processingStage;
 

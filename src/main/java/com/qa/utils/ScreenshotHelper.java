@@ -1,5 +1,6 @@
 package com.qa.utils;
 
+import com.qa.constants.DirectoryConstants;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.Point;
@@ -90,5 +91,21 @@ public class ScreenshotHelper {
       }
     }
     return false;
+  }
+
+  /**
+   * Take the screenshot of the page and store it to local machine in png format.
+   * @param driver - WebDriver instance
+   * @return - Return the path of screenshot
+   */
+  public static String takeScreenshotOfPage(WebDriver driver) {
+    File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+    File screenshot = new File(DirectoryConstants.getScreenshotDir() + System.currentTimeMillis() + ".png");
+    try {
+      FileUtils.copyFile(scrFile, screenshot);
+    } catch (IOException exception) {
+      return null;
+    }
+    return screenshot.getAbsolutePath();
   }
 }

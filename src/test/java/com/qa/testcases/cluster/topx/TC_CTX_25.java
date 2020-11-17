@@ -8,6 +8,7 @@ import com.qa.scripts.clusters.TopX;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -40,14 +41,21 @@ public class TC_CTX_25 extends BaseClass {
       topX.clickOnRunButton();
       HomePage homePage = new HomePage(driver);
       homePage.clickOnClusterDropDown();
+      waitExecuter.sleep(1000);
       for (int i=0; i<topX.getClustersList().size(); i++) {
+        String clusterId  = topX.getClustersList().get(i).getText();
         MouseActions.clickOnElement(driver, topX.getClustersList().get(i));
         waitExecuter.sleep(1000);
-        topX.clickOnRunButton();
-        waitExecuter.waitUntilTextToBeInWebElement(topX.getConfirmationMessage(),
-          "Top X Report completed successfully.");
+        topX.clickOnModalRunButton();
+        try {
+            waitExecuter.waitUntilTextToBeInWebElement(topX.getConfirmationMessage(),
+                "Top X Report completed successfully.");
+        } catch (TimeoutException te) {
+            Assert.assertTrue(false, "TopX Report is not completed");
+        }
         topX.closeConfirmationMessageNotification();
         topX.clickOnRunButton();
+        test.log(LogStatus.PASS, "TopX report is generated for cluster id: " + clusterId);
         homePage.clickOnClusterDropDown();
       }
   }

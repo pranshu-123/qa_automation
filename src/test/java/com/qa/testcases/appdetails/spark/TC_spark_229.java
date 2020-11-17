@@ -5,8 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.utils.Log;
 import com.relevantcodes.extentreports.LogStatus;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
+import java.util.logging.Logger;
 import org.testng.annotations.Test;
 
 @Marker.AppDetailsSpark
@@ -17,12 +16,13 @@ public class TC_spark_229 extends BaseClass {
      * 1.The Analysis tab should list the Insights and the recommendations
      * 2. The tabs must be collapsable
      */
-    Logger logger = LoggerFactory.getLogger(TC_spark_229.class);
+    Logger logger = Logger.getLogger(TC_spark_229.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_spark_229_verifyAnalysisTab(String clusterId) {
         test = extent.startTest("TC_spark_229_verifyAnalysisTab: " + clusterId,
-                "Verify all the spark apps are listed in the UI");
+                "Verify 1.The Analysis tab should list the Insights and the recommendations\n" +
+                    "2. The tabs must be collapsable");
         test.assignCategory(" Apps Details-Spark");
         Log.startTestCase("TC_spark_229_verifyAnalysisTab");
         SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);

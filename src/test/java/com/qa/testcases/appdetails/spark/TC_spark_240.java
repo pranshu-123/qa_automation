@@ -5,25 +5,27 @@ import com.qa.base.BaseClass;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.utils.Log;
 import com.relevantcodes.extentreports.LogStatus;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
+import java.util.logging.Logger;
 import org.testng.annotations.Test;
 
 @Marker.AppDetailsSpark
 @Marker.All
 public class TC_spark_240 extends BaseClass {
     /**
-     * Verify that on a cluster with different kinds of Spark Apps:
-     * 1. Logs tab must contain One Driver and executor logs listed
-     * 2. They must be collapsible tabs
-     * 3. clicking on each must open logs window and should be able to scroll the logs
+     * Verify if "Stage timing Distribution " is available
+     * 2. Pie graphs should be available
+     * 3. IO. metrics must be available - Bar graphs
+     * 4. Time Metrics must be available - Bargraphs
      */
-    Logger logger = LoggerFactory.getLogger(TC_spark_240.class);
+    Logger logger = Logger.getLogger(TC_spark_240.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_spark_240_verifyTimingsTab(String clusterId) {
         test = extent.startTest("TC_spark_240_verifyTimingsTab: " + clusterId,
-                "Verify all the spark apps are listed in the UI");
+                "Verify if \"Stage timing Distribution \" is available \n" +
+                    "2. Pie graphs should be available\n" +
+                    "3. IO. metrics must be available - Bar graphs\n" +
+                    "4. Time Metrics must be available - Bargraphs");
         test.assignCategory(" Apps Details-Spark");
         Log.startTestCase("TC_spark_240_verifyTimingsTab");
         SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);

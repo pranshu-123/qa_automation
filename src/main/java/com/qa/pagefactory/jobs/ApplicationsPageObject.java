@@ -290,7 +290,7 @@ public class ApplicationsPageObject {
 
     @FindBy(xpath = "(//div[contains(@class,'component-section-header')]//h2)[2]")
     public WebElement appSummary;
-
+    
     @FindBy(xpath = "//span[@class='globalSearchIcon']")
     public WebElement searchIcon;
 

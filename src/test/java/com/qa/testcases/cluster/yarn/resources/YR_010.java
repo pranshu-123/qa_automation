@@ -38,6 +38,8 @@ public class YR_010 extends BaseClass {
         //Select cluster id
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
+        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilPageFullyLoaded();
         Log.info("ClusterId is selected: "+clusterId);
         test.log(LogStatus.INFO, "Cluster Id selected"+clusterId);
 
@@ -45,6 +47,7 @@ public class YR_010 extends BaseClass {
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();
+        waitExecuter.sleep(3000);
         waitExecuter.waitUntilPageFullyLoaded();
         Log.info("DatePicker is selected for last30 Days");
         test.log(LogStatus.INFO, "Date is selected from DatePicker");

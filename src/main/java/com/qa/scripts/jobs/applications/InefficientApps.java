@@ -1,6 +1,6 @@
 package com.qa.scripts.jobs.applications;
 
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.utils.WaitExecuter;
@@ -39,9 +39,9 @@ public class InefficientApps {
     * */
     public void setupInefficientApps(){
         //Click on Jobs tab
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+        SubTopPanelModulePageObject subTopPanelModulePageObject = new SubTopPanelModulePageObject(driver);
         waitExecuter.sleep(2000);
-        topPanelComponentPageObject.jobs.click();
+        subTopPanelModulePageObject.jobs.click();
         waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
         waitExecuter.waitUntilPageFullyLoaded();
         LOGGER.info("Click on Job tab");

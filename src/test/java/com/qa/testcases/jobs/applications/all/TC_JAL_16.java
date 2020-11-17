@@ -2,7 +2,7 @@ package com.qa.testcases.jobs.applications.all;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.jobs.applications.AllApps;
@@ -37,7 +37,7 @@ public class TC_JAL_16 extends BaseClass {
         test.log(LogStatus.INFO, "Initialize all class objects");
         LOGGER.info("Initialize all class objects");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+        SubTopPanelModulePageObject subTopPanelModulePageObject = new SubTopPanelModulePageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         DatePicker datePicker = new DatePicker(driver);
         AllApps allApps = new AllApps(driver);

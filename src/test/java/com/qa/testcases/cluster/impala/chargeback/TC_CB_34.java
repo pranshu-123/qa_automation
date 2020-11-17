@@ -38,7 +38,7 @@ public class TC_CB_34 extends BaseClass {
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(2000);
-        datePicker.selectLast30Days();
+        datePicker.selectLast90Days();
         waitExecuter.sleep(1000);
 
         if(chargeBackImpala.isTotalNumberOfJobCountHeader()){
@@ -47,12 +47,15 @@ public class TC_CB_34 extends BaseClass {
             chargeBackImpala.clickOnGroupBySearchBox();
             //chargeBackImpala.verifyNumberOfOptionsInGroupBy();
             int totalOptionInGroupBy =  chargeBackImpala.getNumberOfOptionsInGroupBy();
-            System.out.println("Toal number of GroupBy Options: "+totalOptionInGroupBy);
+            waitExecuter.sleep(1000);
+            System.out.println("Total number of GroupBy Options: "+totalOptionInGroupBy);
+            waitExecuter.sleep(1000);
             for(int i =0 ; i< totalOptionInGroupBy-2; i++){
                 chargeBackImpala.click1Row1ColumnFromGroupByTable();
                 waitExecuter.waitUntilPageFullyLoaded();
             }
             chargeBackImpala.deselectGroupByFilters();
+            waitExecuter.sleep(1000);
             test.log(LogStatus.PASS, "Validate the user is able to deselect the filters.");
 
         }else{

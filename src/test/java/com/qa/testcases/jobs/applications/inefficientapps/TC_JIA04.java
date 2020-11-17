@@ -2,14 +2,13 @@ package com.qa.testcases.jobs.applications.inefficientapps;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.jobs.applications.InefficientApps;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -30,9 +29,9 @@ public class TC_JIA04 extends BaseClass {
         test.log(LogStatus.PASS, "Passed Parameter Is : " + clusterId);
 
         //Click on Jobs tab
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+        SubTopPanelModulePageObject subTopPanelModulePageObject = new SubTopPanelModulePageObject(driver);
         waitExecuter.sleep(2000);
-        MouseActions.clickOnElement(driver, topPanelComponentPageObject.jobs);
+        MouseActions.clickOnElement(driver, subTopPanelModulePageObject.jobs);
 
         //Click on inefficientApps tab
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);

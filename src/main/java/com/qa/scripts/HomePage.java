@@ -1,10 +1,11 @@
 package com.qa.scripts;
 
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.CommonPageObject;
 import com.qa.pagefactory.HomePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.utils.JavaScriptExecuter;
-import com.qa.utils.MouseActions;
+import com.qa.utils.actions.UserActions;
 import com.qa.utils.WaitExecuter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,6 +25,7 @@ public class HomePage {
   private final WaitExecuter waitExecuter;
   private CommonPageObject commonPageObject;
   private final WebDriver driver;
+  private UserActions userActions;
   /**
    * Constructor which initialize all necessary things to perform action
    * @param driver : WebDriver instance on which action to be performed
@@ -33,6 +35,7 @@ public class HomePage {
     topPanel = new TopPanelPageObject(driver);
     homePageObject = new HomePageObject(driver);
     waitExecuter = new WaitExecuter(driver);
+    userActions = new UserActions(driver);
   }
 
   /**
@@ -57,9 +60,8 @@ public class HomePage {
   }
 
   public void clickOnClusterDropDown() {
-    waitExecuter.sleep(3000);
     CommonPageObject commonPageObject = new CommonPageObject(driver);
-    commonPageObject.clusterDropdown.click();
+    userActions.performActionWithPolling(commonPageObject.clusterDropdown, UserAction.CLICK);
   }
 
   public String getHomePageUrl(){
@@ -115,16 +117,11 @@ public class HomePage {
 
   //click on cluster drop down
   public void selectMultiClusterId(String clusterId) {
-    waitExecuter.sleep(2000);
     CommonPageObject commonPageObject = new CommonPageObject(driver);
-    MouseActions.clickOnElement(driver, commonPageObject.clusterDropdown);
-    waitExecuter.sleep(2000);
-    System.out.println("Size of cluster in dropdown: "+commonPageObject.clustersList.size());
-
-    waitExecuter.waitUntilElementPresent(commonPageObject.clusterSearchBox);
-    commonPageObject.clusterSearchBox.sendKeys(clusterId);
-    commonPageObject.clusterSearchFirstField.click();
-    waitExecuter.sleep(2000);
+    userActions.performActionWithPolling(commonPageObject.clusterDropdown, UserAction.CLICK);
+    userActions.performActionWithPolling(commonPageObject.clusterSearchBox, UserAction.SEND_KEYS,
+        clusterId);
+    userActions.performActionWithPolling(commonPageObject.clusterSearchFirstField, UserAction.CLICK);
   }
 
   /* Get the list of clusters from UI */
@@ -173,6 +170,10 @@ public class HomePage {
         }
       }
     }
+  }
+
+  public void navigateToHomePage() {
+    userActions.performActionWithPolling(topPanel.unravelLogo, UserAction.CLICK);
   }
 
 }

@@ -2,7 +2,7 @@ package com.qa.testcases.appdetails.spark;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.SparkAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
@@ -30,7 +30,9 @@ public class TC_spark_224 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_spark_224_verifyAppDetailsPageStage(String clusterId) {
         test = extent.startTest("TC_spark_224_verifyAppDetailsPageStage: " + clusterId,
-                "Verify all the spark apps are listed in the UI");
+                "Verify 1. Stage for the Job should be displayed\n" +
+                    " 2. Stage must contain these fields ,\n" +
+                    "  Stage ID, Start Time, Duration, tasks, shuffle read, Shuffle write, Input, Output");
         test.assignCategory(" Apps Details-Spark");
         Log.startTestCase("TC_spark_224_verifyAppDetailsPageStage");
 
@@ -38,7 +40,7 @@ public class TC_spark_224 extends BaseClass {
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
         logger.info("Initialize all class objects");
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         SparkAppsDetailsPageObject sparkAppsDetailsPageObject = new SparkAppsDetailsPageObject(driver);
         SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);

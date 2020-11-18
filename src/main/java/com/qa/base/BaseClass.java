@@ -4,13 +4,14 @@ import com.qa.constants.ConfigConstants;
 import com.qa.constants.DirectoryConstants;
 import com.qa.constants.FileConstants;
 import com.qa.io.ConfigReader;
+import com.qa.pagefactory.LoginPageObject;
 import com.qa.pagefactory.clusters.DataProviderClass;
 import com.qa.scripts.CommonComponent;
+import com.qa.scripts.HomePage;
 import com.qa.scripts.Login;
 import com.qa.scripts.UnravelBuildInfo;
-import com.qa.utils.FileUtils;
-import com.qa.utils.Log;
-import com.qa.utils.UnravelConfigUtils;
+import com.qa.utils.*;
+import com.qa.utils.aws.S3BucketUtils;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -20,6 +21,8 @@ import org.testng.annotations.*;
 
 import java.io.File;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -34,10 +37,12 @@ import org.testng.annotations.BeforeSuite;
  * are here. Every test class must implement this class
  */
 public class BaseClass {
+    private static final Logger LOGGER = Logger.getLogger(BaseClass.class.getName());
     public static WebDriver driver;
     public static ExtentReports extent;
     public static ExtentTest test;
-    private static final Logger LOGGER = Logger.getLogger(BaseClass.class.getName());
+    private final LoggingUtils logger = new LoggingUtils(BaseClass.class);
+    private S3BucketUtils s3BucketUtils = new S3BucketUtils();
 
     /**
      * This will be executed before suite starts. Start the browser. Initiate report
@@ -62,8 +67,10 @@ public class BaseClass {
         extent.loadConfig(new File(DirectoryConstants.getConfigDir() + "extent_config.xml"));
         LOGGER.info("Set build info to html report.");
         extent.addSystemInfo(ConfigConstants.ReportConfig.SELENIUM_VERSION,
-            prop.getProperty(ConfigConstants.ReportConfig.SELENIUM_VERSION));
-        UnravelBuildInfo.setBuildInfo(driver, extent);
+                prop.getProperty(ConfigConstants.ReportConfig.SELENIUM_VERSION));
+        UnravelBuildInfo unravelBuildInfo = new UnravelBuildInfo(driver);
+        unravelBuildInfo.setBuildInfo(extent);
+
     }
 
     /**
@@ -84,7 +91,7 @@ public class BaseClass {
      */
     @BeforeMethod(alwaysRun = true)
     public void setupBeforeMethod(Method method) {
-        Log.startTestCase(method.getName());
+        Log.startTestCase(method.getDeclaringClass().getName() + " - " + method.getName());
     }
 
     /**
@@ -106,8 +113,11 @@ public class BaseClass {
                     test.log(LogStatus.FATAL, result.getThrowable().getMessage());
                     LOGGER.info(method.getName() + " is failed due to code issue");
                 }
+                String screenshotImg = ScreenshotHelper.takeScreenshotOfPage(driver);
+                String s3BucketScreenshot = s3BucketUtils.uploadFileToS3Bucket(screenshotImg);
+                test.log(LogStatus.FAIL, test.addScreenCapture(s3BucketScreenshot));
             }
-            Log.endTestCase(method.getName());
+            Log.endTestCase(method.getDeclaringClass().getName() + " - " + method.getName());
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -122,14 +132,14 @@ public class BaseClass {
      * This will execute after every test class execution.
      * Logout from the application
      */
-    @AfterClass()
+    @AfterClass(alwaysRun = true)
     public void afterClass() {
-        LOGGER.info("Logout from the application.");
         //Close if any pop modal is open
+        logger.info("Close modal if exixts.", null);
         CommonComponent.closeModalIfExists(driver);
         Login login = new Login(driver);
         login.logout();
-        FileUtils.deleteDownloadsFolderFiles();
+        driver.navigate().refresh();
     }
 
     /**
@@ -139,6 +149,7 @@ public class BaseClass {
     @AfterSuite
     public void tearDown() {
         LOGGER.info("Suite completed. Closing the browser.");
+        FileUtils.deleteDownloadsFolderFiles();
         driver.quit();
     }
 
@@ -149,14 +160,16 @@ public class BaseClass {
      * @return - clusterIds
      */
     @DataProvider(name = "clusterid-data-provider")
-    public Object[][] getClusterIds(Method method) {
+    public Iterator<Object[]> getClusterIds(Method method) {
         if (System.getProperty(ConfigConstants.SystemConfig.IS_MULTI_CLUSTER).trim()
-            .toLowerCase().equals("true")) {
+                .toLowerCase().equals("true")) {
             LOGGER.info("Getting multiple cluster Ids");
             return DataProviderClass.getClusterIdsForClusterType(method);
         } else {
             LOGGER.info("Getting single cluster Id");
-            return new Object[][]{DataProviderClass.getClusterIdsForClusterType(method)[0]};
+            ArrayList<Object[]> cluster = new ArrayList<>();
+            cluster.add(DataProviderClass.getClusterIdsForClusterType(method).next());
+            return cluster.iterator();
         }
     }
 }

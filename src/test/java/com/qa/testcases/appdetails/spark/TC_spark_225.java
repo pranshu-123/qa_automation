@@ -1,7 +1,7 @@
 package com.qa.testcases.appdetails.spark;
 
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.SparkAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
@@ -38,14 +38,27 @@ public class TC_spark_225 extends BaseClass {
   @Test(dataProvider = "clusterid-data-provider")
   public void TC_spark_225_verifyAppDetailsPageStageTabs(String clusterId) {
     test = extent.startTest("TC_spark_225_verifyAppDetailsPageStageTabs: " + clusterId,
-        "Verify all the spark apps are listed in the UI");
+        "Verify 1. Stage for the Job should be displayed\n" +
+            " 2. Stage must contain these fields ,\n" +
+            "   Stage ID, Start Time, Duration, tasks, shuffle read, Shuffle write, Input, Output\n" +
+            " 3. Once clicked on Stage ID, Taskattempts, program, timeline, timing will open on right pane of the UI\n" +
+            " 4. Task attempt should be doughnut graph\n" +
+            " 5. Program will have the program and should be able to copy by clicking on the copy code\n" +
+            " 6. Bargraphs should open for these - Shuffle Map Time(sec), ShuffleMap Input (KB), ShuffleMap Output (KB),\n" +
+            "   Disk Bytes Spilled (KB), Memory Bytes Spilled (KB), Records Read (count)\n" +
+            "  7. Timeline and SelectedTasks must be present\n" +
+            "  8. Time line should contain taskstatus and TaskBreakdown in dropdown\n" +
+            "  9. Verify if \"Stage timing Distribution \" is available\n" +
+            "  10. Pie graphs should be available\n" +
+            "  11. IO. metrics must be available - Bar graphs\n" +
+            "  12. Time Metrics must be available - Bargraphs");
     test.assignCategory(" Apps Details-Spark");
     Log.startTestCase("TC_spark_225_verifyAppDetailsPageStageTabs");
 
     // Initialize all classes objects
     test.log(LogStatus.INFO, "Initialize all class objects");
     logger.info("Initialize all class objects");
-    TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+    SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
     ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
     SparkAppsDetailsPageObject sparkAppsDetailsPageObject = new SparkAppsDetailsPageObject(driver);
     SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);

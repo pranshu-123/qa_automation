@@ -7,6 +7,7 @@ import com.qa.scripts.HomePage;
 import com.qa.scripts.clusters.impala.Impala;
 import com.qa.scripts.clusters.yarn.Yarn;
 import com.qa.utils.Log;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.annotations.Test;
 
@@ -23,6 +24,7 @@ public class YR_011 extends BaseClass {
                 "Select the application Type in the dropdown (group by)");
         test.assignCategory(" Cluster - Yarn Resources");
         Log.startTestCase("YR_011_verifyYarnResourcePageAndSelectApplicationType");
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
 
         Yarn yarn = new Yarn(driver);
         yarn.verifyYarnResourceHeaderisDisplayed();
@@ -31,6 +33,8 @@ public class YR_011 extends BaseClass {
 
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
+        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilPageFullyLoaded();
         Log.info("ClusterId is selected: "+clusterId);
         test.log(LogStatus.INFO, "Cluster Id selected"+clusterId);
 
@@ -38,6 +42,8 @@ public class YR_011 extends BaseClass {
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();
+        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilPageFullyLoaded();
         Log.info("DatePicker is selected for last30 Days");
         test.log(LogStatus.INFO, "Date is selected from DatePicker");
 

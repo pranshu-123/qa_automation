@@ -62,11 +62,32 @@ public class NewAutoActionPolicyPageObject {
     @FindBy(xpath = "//div[contains(@class,'mode-div')]/div/div/span[text()='all']/parent::div/preceding-sibling::div/label/span")
     public WebElement allUserChkBox;
 
-    @FindBy(xpath = "//div[contains(@class,'mode-div')]/div/div/span[text()='only']/parent::div/preceding-sibling::div/label/input")
+    @FindBy(xpath = "//div[contains(@class,'mode-div')]/div/div/span[text()='only']/parent::div/preceding-sibling::div/label/span")
     public  WebElement onlyUserChkBox;
 
-    @FindBy(xpath = "//div[contains(@class,'mode-div')]/div/div/span[text()='except']/parent::div/preceding-sibling::div/label/input")
+    @FindBy(xpath = "//div[contains(@class,'mode-div')]/div/div/span[text()='except']/parent::div/preceding-sibling::div/label/span")
     public WebElement exceptUserChkBox;
+
+    @FindBy(xpath = "(//select[contains(@class, 'component-multi-select')])[1]")
+    public WebElement selectAppType;
+
+    @FindBy(xpath = "(//select[contains(@class, 'component-multi-select')])[2]")
+    public WebElement selectMetric;
+
+    @FindBy(xpath = "(//div[contains(@class,'autoaction-action-div')])/div/div/b/span[2]")
+    public WebElement actionButton;
+
+    @FindBy(xpath = "(//div[contains(@class,'autoaction-action-div')])/div/div/div/a")
+    public List<WebElement> listOfActions;
+
+    @FindBy(xpath = "(//span[contains(@class, 'select2-selection')])[4]/span[2]")
+    public WebElement metricCombo;
+
+    @FindBy(xpath = "//span[contains(@class, 'select2-dropdown')]/span[1]/input")
+    public WebElement metricComboSearch;
+
+    @FindBy(xpath = "//span[contains(@class, 'select2-dropdown')]/span[2]/ul/li")
+    public List<WebElement> listOfMetric;
 
     /**
      * @param driver The driver that will be used to look up the elements

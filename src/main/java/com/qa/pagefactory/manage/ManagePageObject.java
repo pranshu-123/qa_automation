@@ -57,7 +57,7 @@ public class ManagePageObject {
     @FindBy(xpath = "(//div[@class='component-tabs-primary']//a)[3]")
     public WebElement sensorHeartbeatTab;
 
-    @FindBy(xpath = "//table[contains(@class,'component-data-tables')]/tr")
+    @FindBy(xpath = "//table[contains(@class,'component-data-tables')]/tbody/tr")
     public List<WebElement> sensorHeartbeatTblRows;
 
     @FindBy(xpath="((//ul[@class='sub-menu']/li[contains(@class,'router-link-active')]/span[@class='selected'])[7]/parent::li/following-sibling::li/span)[2]")
@@ -66,7 +66,7 @@ public class ManagePageObject {
     @FindBy(xpath="//div[contains(@class,'component-section-header')]//h1")
     public WebElement runDiagnosticsHeader;
 
-    @FindBy(xpath="//ul[@class='diagnostic-ul']/li[1]")
+    @FindBy(xpath = "//ul[@class='diagnostic-ul']/li[contains(text(),'Load Latest Diagnostics')]")
     public WebElement  loadLatestDiagnosticsBtn;
 
     @FindBy(css = ".diagnostic-cnt")

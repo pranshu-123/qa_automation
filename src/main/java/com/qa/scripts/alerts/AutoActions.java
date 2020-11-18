@@ -1,13 +1,18 @@
 package com.qa.scripts.alerts;
 
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.alerts.AutoActionsPageObject;
 import com.qa.pagefactory.alerts.NewAutoActionPolicyPageObject;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import org.openqa.selenium.WebDriver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Birender Kumar
@@ -19,7 +24,7 @@ public class AutoActions {
     private AutoActionsPageObject autoActionsPageObject;
     private NewAutoActionPolicyPageObject newAutoActionPolicyPageObject;
 
-    Logger logger = LoggerFactory.getLogger(AutoActions.class);
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AutoActions.class.getName());
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -35,17 +40,18 @@ public class AutoActions {
 
     public void setupForAutoActionsPage(){
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         waitExecuter.waitUntilElementPresent(topPanelComponentPageObject.alerts);
         waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.alerts);
         waitExecuter.sleep(3000);
         MouseActions.clickOnElement(driver, topPanelComponentPageObject.alerts);
+        waitExecuter.waitUntilElementPresent(autoActionsPageObject.autoActionComponentHeader);
     }
 
 
     public String getAutoActionsHeader(){
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
         logger.info("Auto Actions component Header: "+ autoActionsPageObject.autoActionComponentHeader.getText());
         return autoActionsPageObject.autoActionComponentHeader.getText();
     }
@@ -70,11 +76,22 @@ public class AutoActions {
         MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.triggerConditionsBtn);
     }
 
-    public void selectTriggerCondition(String triggerCondition){
+
+    public void selectTriggerCondition(String triggerConditionAppType){
         waitExecuter.sleep(1000);
         int allTriggerCondition = newAutoActionPolicyPageObject.selectTriggerConditions.size();
         for(int i=0; i< allTriggerCondition ; i++){
-            if(newAutoActionPolicyPageObject.selectTriggerConditions.get(i).getText().equals(triggerCondition)){
+            if(newAutoActionPolicyPageObject.selectTriggerConditions.get(i).getText().equals(triggerConditionAppType)){
+                MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.selectTriggerConditions.get(i));
+            }
+        }
+    }
+
+    public void selectTriggerConditionMetric(String triggerConditionAppType){
+        waitExecuter.sleep(1000);
+        int allTriggerCondition = newAutoActionPolicyPageObject.selectTriggerConditions.size();
+        for(int i=0; i< allTriggerCondition ; i++){
+            if(newAutoActionPolicyPageObject.selectTriggerConditions.get(i).getText().equals(triggerConditionAppType)){
                 MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.selectTriggerConditions.get(i));
             }
         }
@@ -110,6 +127,53 @@ public class AutoActions {
         waitExecuter.sleep(2000);
         newAutoActionPolicyPageObject.triggerConditionValue.sendKeys(triggerValue);
         newAutoActionPolicyPageObject.policyDescription.sendKeys(policyDescrption);
+    }
+
+    public void selectActions(String inputAction){
+        waitExecuter.sleep(2000);
+        //Assert.assertTrue(newAutoActionPolicyPageObject.listOfActions.isEmpty(), "No list of actions present.");
+        List<WebElement> webElements = newAutoActionPolicyPageObject.listOfActions;
+        for(WebElement actions : webElements){
+            if(actions.getText().equals(inputAction)){
+                actions.click();
+            }
+        }
+    }
+
+    public void selectMetric(String inputMetric){
+        waitExecuter.sleep(2000);
+        MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.metricCombo);
+        waitExecuter.sleep(2000);
+        newAutoActionPolicyPageObject.metricComboSearch.sendKeys(inputMetric);
+        waitExecuter.sleep(5000);
+        //Assert.assertTrue(newAutoActionPolicyPageObject.listOfMetric.isEmpty(), "No Metric value found in combo box.");
+        List<WebElement> webElements = newAutoActionPolicyPageObject.listOfMetric;
+        if(webElements.get(0).getText().equals(inputMetric)){
+            MouseActions.clickOnElement(driver, webElements.get(0));
+        }else{
+            logger.info("No Metric value found.");
+        }
+    }
+
+    public void createNewAutoActionPolicy(Map<String,String> mapPolicyData){
+        waitExecuter.sleep(1000);
+        newAutoActionPolicyPageObject.policyName.sendKeys(mapPolicyData.get("PolicyName"));
+        clickOnTriggerConditionBtn();
+        selectTriggerCondition(mapPolicyData.get("TriggerCondition"));
+
+        Select selectAppType = new Select(newAutoActionPolicyPageObject.selectAppType);
+        selectAppType.selectByValue(mapPolicyData.get("ApplicationType"));
+
+        waitExecuter.sleep(2000);
+
+        selectMetric(mapPolicyData.get("Metric"));
+
+        waitExecuter.sleep(2000);
+
+        newAutoActionPolicyPageObject.triggerConditionValue.sendKeys(mapPolicyData.get("Value"));
+        MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.actionButton);
+        waitExecuter.sleep(2000);
+        selectActions(mapPolicyData.get("Actions"));
     }
 
     public void validateBanner(){
@@ -186,7 +250,45 @@ public class AutoActions {
         }else{
             logger.info("No Check Box found with name: "+ chkBoxName);
         }
-
     }
 
+    public void clickOnRunHeader(){
+        if(autoActionsPageObject.headerRunColumn.isDisplayed()){
+            MouseActions.clickOnElement(driver, autoActionsPageObject.headerRunColumn);
+        }else{
+            logger.info("AutoAction Table with header is not displayed.");
+        }
+    }
+
+    /**
+     * Method to get all policy name which are triggered auto actions alerts.
+     */
+    public void getTriggeredAAs(){
+        List<WebElement> listRunCounts = autoActionsPageObject.listRunCount;
+        Assert.assertFalse(listRunCounts.isEmpty(), "The run count is empty from AutoAction Table.");
+
+        List<String> totalTriggeredPolicyNames = new ArrayList<>();
+        int numOfRows = autoActionsPageObject.listRunCount.size();
+        logger.info(" Total num of rows in AAs table: "+numOfRows);
+        waitExecuter.sleep(2000);
+        boolean triggerFlag = false;
+        for(int i=0 ; i< numOfRows ; i++ ){
+            waitExecuter.sleep(2000);
+            int runCount = Integer.parseInt(autoActionsPageObject.listRunCount.get(i).getText());
+            if(runCount > 0){
+                waitExecuter.sleep(2000);
+                totalTriggeredPolicyNames.add(autoActionsPageObject.listPolicyNames.get(i).getText());
+                triggerFlag = true;
+            }
+        }
+
+        if(triggerFlag){
+            logger.info("Trigger Policy are: "+totalTriggeredPolicyNames);
+            for(String triggerPolicy: totalTriggeredPolicyNames){
+                logger.info("Triggered Policy is: "+triggerPolicy);
+            }
+        }else{
+            logger.info("No Triggered Policy found");
+        }
+    }
 }

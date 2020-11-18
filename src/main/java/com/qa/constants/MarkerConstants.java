@@ -32,6 +32,7 @@ public class MarkerConstants {
   public static final String CLUSTER_WORKLOAD = "cluster_workload";
   public static final String USER_REPORTS = "user_reports";
   public static final String MANAGE = "manage";
+  public static final String REPORT_ARCHIEVE = "report_archieve";
   public static final String APP_DETAILS_HIVE = "app_details_hive";
   public static final String DATA_FORECASTING = "data_forecasting";
 
@@ -62,6 +63,7 @@ public class MarkerConstants {
     map.put(CLUSTER_WORKLOAD, Marker.ClusterWorkload.class);
     map.put(USER_REPORTS, Marker.UserReports.class);
     map.put(MANAGE, Marker.Manage.class);
+    map.put(REPORT_ARCHIEVE, Marker.ReportArchive.class);
     map.put(APP_DETAILS_HIVE, Marker.AppDetailsHive.class);
     map.put(DATA_FORECASTING, Marker.DataForecasting.class);
     return Collections.unmodifiableMap(map);

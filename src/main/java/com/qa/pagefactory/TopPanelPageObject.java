@@ -12,6 +12,10 @@ import org.openqa.selenium.support.PageFactory;
  */
 
 public class TopPanelPageObject {
+
+  @FindBy(xpath = "(//a[contains(@href,'#/clusters/overview')])[1]")
+  public WebElement unravelLogo;
+
   @FindBy(css = ".head-logo")
   public WebElement headLogo;
 
@@ -82,6 +86,8 @@ public class TopPanelPageObject {
   @FindBy(xpath = "//ul[@class='primary-links']/li[3]/ul/li[3]/span")
   public WebElement dataForecastingTab;
 
+  @FindBy(xpath = "//h4/span[contains(text(), 'Jobs')]")
+  public WebElement jobsTab;
   /**
    * @param driver The driver that will be used to look up the elements
    */

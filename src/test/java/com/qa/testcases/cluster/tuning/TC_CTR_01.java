@@ -6,7 +6,6 @@ import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.clusters.TuningPageObject;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.clusters.Tuning;
-import com.qa.testcases.data.Forecasting.TC_CF_02;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;

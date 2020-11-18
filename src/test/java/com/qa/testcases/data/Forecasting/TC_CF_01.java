@@ -1,12 +1,9 @@
 package com.qa.testcases.data.Forecasting;
 
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
-import com.qa.pagefactory.clusters.TopXPageObject;
 import com.qa.pagefactory.data.ForecastingPageObject;
-import com.qa.scripts.HomePage;
-import com.qa.scripts.clusters.TopX;
 import com.qa.scripts.data.Forecasting;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
@@ -27,7 +24,7 @@ public class TC_CF_01 extends BaseClass {
         LOGGER.info("Passed Parameter Is : " + clusterId);
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         waitExecuter.waitUntilElementPresent(topPanelComponentPageObject.data);
         waitExecuter.sleep(2000);
         MouseActions.clickOnElement(driver, topPanelComponentPageObject.data);

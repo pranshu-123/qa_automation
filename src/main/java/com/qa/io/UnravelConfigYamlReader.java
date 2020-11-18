@@ -62,4 +62,14 @@ public class UnravelConfigYamlReader implements YamlReader {
         return Arrays.stream(clusters.split(",")).map(cluster -> new Object[]{cluster.trim()})
             .collect(Collectors.toList()).iterator();
     }
+
+    /**
+     * Return AWS details from unravel_config.yml in k,v pair
+     */
+    public Map<String,Object> getAWSDetails() {
+        Map<String, Object> unravelConfig = readYamlFile(FileConstants.getUnravelConfigYaml());
+        Map<String, Object> awsDetails =
+            (Map<String,Object>)unravelConfig.get(ConfigConstants.UnravelYamlConfig.AWS);
+        return awsDetails;
+    }
 }

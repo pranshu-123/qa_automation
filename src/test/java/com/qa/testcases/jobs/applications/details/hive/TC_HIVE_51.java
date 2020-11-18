@@ -10,7 +10,7 @@ import org.testng.SkipException;
 import org.testng.annotations.Test;
 
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
@@ -34,7 +34,7 @@ public class TC_HIVE_51 extends BaseClass {
 		test.log(LogStatus.INFO, "Initialize all class objects");
 		LOGGER.info("Initialize all class objects");
 		WaitExecuter waitExecuter = new WaitExecuter(driver);
-		TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+		SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
 		ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
 		AllApps allApps = new AllApps(driver);
 		DatePicker datePicker = new DatePicker(driver);

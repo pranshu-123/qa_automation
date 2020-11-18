@@ -45,7 +45,9 @@ public class BaseClass {
     @BeforeSuite
     public void setup() {
         LOGGER.info("Update config based on user input");
-        UnravelConfigUtils.updateConfig();
+        //UnravelConfigUtils.updateConfig();
+        System.setProperty(ConfigConstants.SystemConfig.IS_MULTI_CLUSTER, "true");
+        System.setProperty(ConfigConstants.SystemConfig.HEADLESS, "false");
         LOGGER.info("Starting browser");
         DriverManager driverManager = new DriverManager();
         Properties prop = ConfigReader.readBaseConfig();

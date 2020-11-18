@@ -1,5 +1,6 @@
 package com.qa.testcases.data.Forecasting;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
@@ -13,6 +14,8 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
+@Marker.DataForecasting
+@Marker.All
 public class TC_CF_01 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_CF_01.class.getName());
 

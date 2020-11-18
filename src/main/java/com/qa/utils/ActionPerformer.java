@@ -45,4 +45,13 @@ public class ActionPerformer {
     Actions actions = new Actions(driver);
     actions.sendKeys(key);
   }
+
+  /**
+   * Move the mouse to specific element
+   * @param element - Web Element
+   */
+  public void moveToTheElement(WebElement element) {
+    Actions actions = new Actions(driver);
+    actions.moveToElement(element).perform();
+  }
 }

@@ -30,4 +30,6 @@ public @interface Marker {
   @interface UserReports {}
   @interface Manage {}
   @interface AppDetailsHive {}
+  @interface DataForecasting {}
+  @interface Tuning {}
 }

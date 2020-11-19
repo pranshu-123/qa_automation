@@ -7,15 +7,16 @@ import com.qa.constants.GraphColorConstants;
 import com.qa.pagefactory.OverviewGraphPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
+import com.qa.utils.GraphUtils;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.ScreenshotHelper;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * @author Sarbashree Ray
@@ -41,8 +42,6 @@ public class TC_CO_14 extends BaseClass {
         WaitExecuter executer = new WaitExecuter(driver);
         executer.sleep(3000);
 
-
-
         // Take Screenshot and validate the graph
         OverviewGraphPageObject overviewGraph = new OverviewGraphPageObject(driver);
         int scrollY = 370;
@@ -55,42 +54,55 @@ public class TC_CO_14 extends BaseClass {
         test.log(LogStatus.INFO, test.addScreenCapture(DirectoryConstants.getScreenshotDir() + screenshot.getName()));
 
         Assert.assertTrue(ScreenshotHelper.isContainColor(screenshot, GraphColorConstants.ByStatusGraph.Failed_COLOR),
-                "Total Jobs by status allocated graph is not loaded");
-        test.log(LogStatus.PASS, "Successfully validated total Vcores allocated graph is loaded");
+                "Total Jobs By status graph is not loaded");
+        test.log(LogStatus.PASS, "Successfully validated By Status graph is loaded");
         executer.sleep(2000);
-        Assert.assertTrue(ScreenshotHelper.isContainColor(screenshot, GraphColorConstants.ByStatusGraph.Success_COLOR),
-                "Total available Failed graph is not loaded");
-        test.log(LogStatus.PASS, "Successfully Failed validated available graph is loaded");
+
+        GraphUtils graphUtils = new GraphUtils();
+        List<String> graphColors = graphUtils.getGraphContentColors(
+                overviewGraph.statusGraph.findElement(overviewGraph.graphGContents));
+        Assert.assertTrue(graphColors.contains(GraphColorConstants.ByStatusGraph.Success_COLOR),
+                "Failed graph is not loaded");
+        test.log(LogStatus.PASS, "Successfully loaded Failed graph");
 
         overviewGraph.FailedChkBox.click();
         executer.sleep(2000);
-        test.log(LogStatus.INFO, "Uncheck running check box.");
+        test.log(LogStatus.INFO, "Uncheck failed check box.");
         executer.sleep(2000);
-        test.log(LogStatus.INFO, "Uncheck running check box and validate the accepted graph");
+        test.log(LogStatus.INFO, "Uncheck failed check box and validate the Success graph");
         executer.sleep(1000);
         screenshot = ScreenshotHelper.takeScreenshotOfElement(driver,overviewGraph.statusGraph, scrollY);
         executer.sleep(4000);
         ScreenshotHelper.saveFileToLocation(screenshot, DirectoryConstants.getScreenshotDir() + screenshot.getName());
         test.log(LogStatus.INFO, test.addScreenCapture(DirectoryConstants.getScreenshotDir() + screenshot.getName()));
-        Assert.assertTrue(ScreenshotHelper.isContainColor(screenshot, GraphColorConstants.ByStatusGraph.Success_COLOR),
+        List<String> graphColors_success = graphUtils.getGraphContentColors(
+                overviewGraph.statusGraph.findElement(overviewGraph.graphGContents));
+        Assert.assertTrue(graphColors_success.contains(GraphColorConstants.ByStatusGraph.Success_COLOR),
                 "Success Graph is loaded when Success checkbox is not selected");
         test.log(LogStatus.PASS, "Successfully validated Success graph is loaded when Success checkbox is not selected.");
-
 
         overviewGraph.SuccessChkBox.click();
         executer.sleep(2000);
         overviewGraph.FailedChkBox.click();
-        test.log(LogStatus.INFO, "Check running check box and unchecked accepted checkbox.");
+        test.log(LogStatus.INFO, "Check Failed check box and unchecked success checkbox.");
         executer.sleep(3000);
-        test.log(LogStatus.INFO, "Uncheck accepted check box and validate the running graph.");
+        test.log(LogStatus.INFO, "Uncheck success check box and validate the failed graph.");
         executer.sleep(1000);
         screenshot = ScreenshotHelper.takeScreenshotOfElement(driver,overviewGraph.statusGraph,scrollY);
         ScreenshotHelper.saveFileToLocation(screenshot, DirectoryConstants.getScreenshotDir() + screenshot.getName());
         test.log(LogStatus.INFO, test.addScreenCapture(DirectoryConstants.getScreenshotDir() + screenshot.getName()));
-        Assert.assertTrue(ScreenshotHelper.isContainColor(screenshot, GraphColorConstants.ByStatusGraph.Failed_COLOR),
+        List<String> graphColors_failed = graphUtils.getGraphContentColors(
+                overviewGraph.statusGraph.findElement(overviewGraph.graphGContents));
+        Assert.assertTrue(graphColors_failed.contains(GraphColorConstants.ByStatusGraph.Failed_COLOR),
                 "Failed Graph is loaded when Failed checkbox is not selected.");
         executer.sleep(1000);
         test.log(LogStatus.PASS, "Successfully validated Failed graph is loaded when Failed checkbox is not selected.");
+
+        Assert.assertTrue(graphColors_failed.contains(GraphColorConstants.ByStatusGraph.Killed_COLOR),
+                "Killed Graph is loaded when killed checkbox is not selected.");
+        executer.sleep(1000);
+        test.log(LogStatus.PASS, "Successfully validated killed graph is loaded when killed checkbox is not selected.");
+
 
     }
 }

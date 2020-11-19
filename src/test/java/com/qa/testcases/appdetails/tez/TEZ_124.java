@@ -2,7 +2,7 @@ package com.qa.testcases.appdetails.tez;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.TezAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
@@ -34,7 +34,7 @@ public class TEZ_124 extends BaseClass {
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
         logger.info("Initialize all class objects");
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         TezAppsDetailsPageObject tezApps = new TezAppsDetailsPageObject(driver);
         TezAppsDetailsPage tezDetailsPage = new TezAppsDetailsPage(driver);
@@ -61,18 +61,15 @@ public class TEZ_124 extends BaseClass {
         if (appCount > 0) {
             String headerAppId = tezDetailsPage.verifyAppId(tezApps, applicationsPageObject);
             test.log(LogStatus.PASS, "Tez Application Id is displayed in the Header: " + headerAppId);
+            waitExecuter.sleep(3000);
 
-            tezDetailsPage.validateHeaderTab(tezApps,test);
+           /* tezDetailsPage.validateHeaderTab(tezApps,test);*/
             waitExecuter.sleep(3000);
             //Close apps details page
-            MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
-            waitExecuter.sleep(3000);
-
 
         } else {
             test.log(LogStatus.SKIP, "No Tez Application present");
             waitExecuter.sleep(3000);
-            MouseActions.clickOnElement(driver, tezApps.homeTab);
         }
 
 

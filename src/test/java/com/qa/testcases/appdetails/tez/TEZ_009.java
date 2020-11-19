@@ -1,7 +1,8 @@
 package com.qa.testcases.appdetails.tez;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.TezAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
@@ -16,6 +17,8 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+@Marker.AppDetailsTez
+@Marker.All
 public class TEZ_009 extends BaseClass {
 
     Logger logger = LoggerFactory.getLogger(TEZ_009.class);
@@ -31,7 +34,7 @@ public class TEZ_009 extends BaseClass {
         test.log(LogStatus.INFO, "Initialize all class objects");
         logger.info("Initialize all class objects");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         TezAppsDetailsPageObject tezApps = new TezAppsDetailsPageObject(driver);
         TezAppsDetailsPage tezDetailsPage = new TezAppsDetailsPage(driver);
@@ -44,7 +47,6 @@ public class TEZ_009 extends BaseClass {
                 applicationsPageObject, clusterId);
         test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
 
-        test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
         int appCount = tezDetailsPage.clickOnlyLink("Tez");
 
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().

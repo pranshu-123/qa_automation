@@ -2,7 +2,7 @@ package com.qa.testcases.appdetails.tez;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.TezAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
@@ -27,9 +27,9 @@ public class TEZ_134 extends BaseClass {
     public void TEZ_134_verifyLeftPane(String clusterId) {
         test = extent.startTest("TEZ_134_verifyLeftPane: " + clusterId,
                 "Verify left pane in the app details page");
-        test.assignCategory(" Apps Details-Spark");
+        test.assignCategory(" Apps Details-Tez");
         Log.startTestCase("TEZ_134_verifyLeftPane");
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         TezAppsDetailsPageObject tezApps = new TezAppsDetailsPageObject(driver);
         TezAppsDetailsPage tezDetailsPage = new TezAppsDetailsPage(driver);

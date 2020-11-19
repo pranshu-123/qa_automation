@@ -2,7 +2,7 @@ package com.qa.testcases.appdetails.tez;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.TezAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
@@ -35,7 +35,7 @@ public class TEZ_003 extends BaseClass {
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
         logger.info("Initialize all class objects");
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         TezAppsDetailsPageObject tezApps = new TezAppsDetailsPageObject(driver);
         TezAppsDetailsPage tezDetailsPage = new TezAppsDetailsPage(driver);
@@ -47,7 +47,6 @@ public class TEZ_003 extends BaseClass {
                 applicationsPageObject, clusterId);
         test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
 
-        test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
         int appCount = tezDetailsPage.clickOnlyLink("Tez");
 
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().

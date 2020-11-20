@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.queueanalysis;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.clusters.QueueAnalysisPageObject;
 import com.qa.scripts.clusters.QueueAnalysis;
@@ -12,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+@Marker.QueueAnalysis
+@Marker.All
 public class TC_QU_06 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_QU_06.class.getName());
 

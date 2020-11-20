@@ -2,7 +2,7 @@ package com.qa.testcases.appdetails.spark;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.SparkAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
@@ -31,14 +31,17 @@ public class TC_spark_221 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_spark_221_verifyAttemptsAndComponents(String clusterId) {
         test = extent.startTest("TC_spark_221_verifyAttemptsAndComponents: " + clusterId,
-                "Verify all the spark apps are listed in the UI");
+                "Verify 1. Application details page should be opened\n" +
+                    "     2. If there are failed attempts then, there should be attempts tab under which attempts attempts for \"failed\"\n" +
+                    "      and \"success\" must be displayed in the form of bar graph.\n" +
+                    "     3. Verify that the navigation and the gantt chart should show jobs run under the attempts\n");
         test.assignCategory(" Apps Details-Spark");
         Log.startTestCase("TC_spark_221_verifyAttemptsAndComponents");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
         logger.info("Initialize all class objects");
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         SparkAppsDetailsPageObject sparkPageObj = new SparkAppsDetailsPageObject(driver);
         DatePicker datePicker = new DatePicker(driver);

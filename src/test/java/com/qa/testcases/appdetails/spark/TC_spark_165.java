@@ -1,7 +1,8 @@
 package com.qa.testcases.appdetails.spark;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.SparkAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
@@ -15,6 +16,8 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+@Marker.AppDetailsSpark
+@Marker.All
 public class TC_spark_165 extends BaseClass {
   /**
    * 1. Execute a spark application
@@ -28,14 +31,14 @@ public class TC_spark_165 extends BaseClass {
   @Test(dataProvider = "clusterid-data-provider")
   public void TC_spark_165_verifyLoadDiagnosticAction(String clusterId) {
     test = extent.startTest("TC_spark_165_verifyLoadDiagnosticAction: " + clusterId,
-        "Verify all the spark apps are listed in the UI");
+        "Verify  Clicking on actions the user can execute the action Load Diagnostics");
     test.assignCategory(" Apps Details-Spark");
     Log.startTestCase("TC_spark_165_verifyLoadDiagnosticAction");
 
     // Initialize all classes objects
     test.log(LogStatus.INFO, "Initialize all class objects");
     logger.info("Initialize all class objects");
-    TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+    SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
     ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
     SparkAppsDetailsPageObject sparkAppsDetailsPageObject = new SparkAppsDetailsPageObject(driver);
     SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);

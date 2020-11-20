@@ -20,6 +20,7 @@ public @interface Marker {
   @interface QueueAnalysis {}
   @interface AppDetailsImpala {}
   @interface AppDetailsSpark {}
+  @interface ReportArchive {}
   @interface InefficientApps {}
   @interface YarnChargeback {}
   @interface YarnResources {}
@@ -29,4 +30,6 @@ public @interface Marker {
   @interface UserReports {}
   @interface Manage {}
   @interface AppDetailsHive {}
+  @interface DataForecasting {}
+  @interface Tuning {}
 }

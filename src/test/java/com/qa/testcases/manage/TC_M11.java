@@ -2,19 +2,22 @@ package com.qa.testcases.manage;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
+import com.qa.pagefactory.manage.ManagePageObject;
 import com.qa.scripts.manage.Manage;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.logging.Logger;
+
 @Marker.Manage
 @Marker.All
 public class TC_M11 extends BaseClass {
-    Logger logger = LoggerFactory.getLogger(TC_M11.class);
+    private static final java.util.logging.Logger logger = Logger.getLogger(TC_M11.class.getName());
 
     /*
      * Verify Monitoring page in Manage tab
@@ -26,14 +29,16 @@ public class TC_M11 extends BaseClass {
         test.assignCategory(" Manage ");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+        SubTopPanelModulePageObject subTopPanelModulePageObject = new SubTopPanelModulePageObject(driver);
+        ManagePageObject managePageObject = new ManagePageObject(driver);
         // Navigate to Manage tab from header
-        waitExecuter.waitUntilElementPresent(topPanelComponentPageObject.gear);
+        waitExecuter.waitUntilElementPresent(subTopPanelModulePageObject.gear);
         waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.gear);
+        waitExecuter.waitUntilElementClickable(subTopPanelModulePageObject.gear);
         waitExecuter.sleep(3000);
-        MouseActions.clickOnElement(driver, topPanelComponentPageObject.gear);
+        MouseActions.clickOnElement(driver, subTopPanelModulePageObject.gear);
         test.log(LogStatus.INFO, "Verified Manage Tab is clicked.");
+        logger.info("Verified Manage Tab is clicked.");
 
         Manage manage = new Manage(driver);
         //Validate daemon header default
@@ -48,11 +53,24 @@ public class TC_M11 extends BaseClass {
         waitExecuter.sleep(3000);
         Assert.assertTrue(manage.validateMonitoringHeader(), "Monitoring Header is not present.");
         test.log(LogStatus.INFO, "Verified Monitoring Tab.");
+        logger.info("Verified Monitoring Tab.");
 
+        try{
+            waitExecuter.waitUntilTextToBeInWebElement(managePageObject.monitoringDBStatusTab, "DB Status");
+            test.log(LogStatus.INFO, "Verified DB Status is loaded properly.");
+            Assert.assertTrue(managePageObject.monitoringDBStatusTab.isDisplayed(),"DB Status Tab " +
+                    "not found.");
+        }catch (TimeoutException e){
+            e.printStackTrace();
+            test.log(LogStatus.INFO, "DB Status Tab not found.");
+            logger.info("DB Status Tab not found.");
+            Assert.assertTrue(false, "DB Status Tab not found.");
+        }
         //Click on DB Status and validate its details
         waitExecuter.sleep(2000);
         manage.clickDBStatusTab();
         test.log(LogStatus.INFO, "Clicked on DB Status Tab.");
+        logger.info("Clicked on DB Status Tab.");
         waitExecuter.sleep(3000);
         Assert.assertTrue(manage.validateDBStatusTableHeaders(),"DB Status Header columns are not present");
 
@@ -60,6 +78,7 @@ public class TC_M11 extends BaseClass {
                 "not displayed");
         test.log(LogStatus.INFO, "Verified DB Status table TimeStamp and Data Age.");
         test.log(LogStatus.PASS, "Verified Monitoring page with DB Status details.");
+        logger.info("Verified Monitoring page with DB Status details.");
 
 
     }

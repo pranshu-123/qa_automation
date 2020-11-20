@@ -2,10 +2,8 @@ package com.qa.testcases.manage;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
-import com.qa.pagefactory.TopPanelPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.scripts.manage.Manage;
-import com.qa.testcases.cluster.topx.TC_CTX_20;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
@@ -28,12 +26,12 @@ public class TC_M01 extends BaseClass {
         test = extent.startTest("TC_M01.validateManageTabGenerated", "Verify all page is working fine in Manage tab");
         test.assignCategory(" Manage ");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
-        waitExecuter.waitUntilElementPresent(topPanelComponentPageObject.gear);
+        SubTopPanelModulePageObject subTopPanelModulePageObject = new SubTopPanelModulePageObject(driver);
+        waitExecuter.waitUntilElementPresent(subTopPanelModulePageObject.gear);
         waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.gear);
+        waitExecuter.waitUntilElementClickable(subTopPanelModulePageObject.gear);
         waitExecuter.sleep(3000);
-        MouseActions.clickOnElement(driver, topPanelComponentPageObject.gear);
+        MouseActions.clickOnElement(driver, subTopPanelModulePageObject.gear);
         test.log(LogStatus.PASS, "Verified Manage Tab is clicked.");
         logger.info("Verified Manage Tab is clicked.");
 

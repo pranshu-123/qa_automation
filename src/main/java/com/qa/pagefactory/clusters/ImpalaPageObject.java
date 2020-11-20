@@ -74,7 +74,7 @@ public class ImpalaPageObject {
 	@FindBy(xpath = "(//div[contains(@class,'range_inputs')]/button[contains(@class,'applyBtn')])[2]")
 	public WebElement applyBtnImpalaDatePicker;
 	
-	@FindBy(xpath = "(//div[contains(@class,'range_inputs')]/button[contains(@class,'applyBtn')])")
+	@FindBy(xpath = "(//div[contains(@class,'range_inputs')]/button[contains(@class,'applyBtn')])[last()]")
 	public WebElement applyBtn;
 
 	@FindBy(xpath = "//input[contains(@class,'select2-search__field')]")
@@ -98,7 +98,7 @@ public class ImpalaPageObject {
 	@FindBy(css = "svg > g.highcharts-axis-labels.highcharts-yaxis-labels")
 	public List<WebElement> graphYAxisLabels;
 
-	@FindBy(xpath= "/html/body/div[1]/div/div/div/div/div[3]/div[2]/div/h2")
+	@FindBy(xpath= "//*[@id=\"app\"]/div/div[1]/div/div/div[3]/div[2]/div/h2")
 	public  WebElement impalaQueriesHeader;
 
 	@FindBy(xpath="//table[@id='runningImpalaQueriesTable']/thead/tr/th")

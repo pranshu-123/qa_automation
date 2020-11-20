@@ -30,7 +30,6 @@ public class DatePickerPageObject {
     @FindBy(xpath = "//li[contains(text(),'Last 12 Hours')]")
     public WebElement last12Hour;
 
-
     @FindBy(xpath = "//li[contains(text(),'Last 14 Days')]")
     public WebElement last14Days;
 
@@ -61,13 +60,13 @@ public class DatePickerPageObject {
     @FindBy(xpath = "//li[contains(text(),'Custom Range')]")
     public WebElement customRange;
 
-    @FindBy(name = "daterangepicker_start")
+    @FindBy(xpath = "(//input[contains(@name,'daterangepicker_start')])[last()]")
     public WebElement customRangeStartDate;
 
-    @FindBy(name = "daterangepicker_end")
+    @FindBy(xpath = "(//input[contains(@name,'daterangepicker_end')])[last()]")
     public WebElement customRangeEndDate;
 
-    @FindBy(className = "applyBtn")
+    @FindBy(xpath = "(//button[contains( @class, 'applyBtn')])[last()]")
     public WebElement applyBtn;
 
     @FindBy(xpath = "//div[contains(@class,'component-date-picker')]/span")
@@ -81,5 +80,6 @@ public class DatePickerPageObject {
      */
     public DatePickerPageObject(WebDriver driver) {
         PageFactory.initElements(driver, this);
+
     }
 }

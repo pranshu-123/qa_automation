@@ -4,7 +4,7 @@ import com.qa.annotations.Marker;
 import com.qa.pagefactory.appsDetailsPage.SparkAppsDetailsPageObject;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.jobs.applications.AllApps;
@@ -31,14 +31,16 @@ public class TC_spark_219 extends BaseClass {
   @Test(dataProvider = "clusterid-data-provider")
   public void TC_spark_219_verifyAppDetailsPage(String clusterId) {
     test = extent.startTest("TC_spark_219_verifyAppDetailsPage: " + clusterId,
-        "Verify all the spark apps are listed in the UI");
+        "Verify 1. All the spark apps must be listed on the UI\n" +
+            " 2. left pane must have spark check box and the apps number\n" +
+            " 3. clicking on the UI must go to apps detail page");
     test.assignCategory(" Apps Details-Spark");
     Log.startTestCase("TC_spark_219_verifyAppDetailsPage");
 
     // Initialize all classes objects
     test.log(LogStatus.INFO, "Initialize all class objects");
     logger.info("Initialize all class objects");
-    TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+    SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
     ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
     SparkAppsDetailsPageObject sparkAppsDetailsPageObject = new SparkAppsDetailsPageObject(driver);
     SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);
@@ -69,11 +71,10 @@ public class TC_spark_219 extends BaseClass {
       /**clicking on the UI must go to apps detail page and verify the basic tabs present */
       String tagValue = appsDetailsPage.verifyAppSummaryTabs(sparkAppsDetailsPageObject, "Tags", test);
       if (tagValue.equals("spark-streaming")) {
-        System.out.println("Next write something to validate the streaming application");
         appsDetailsPage.verifyStreamingAppsComponent(sparkAppsDetailsPageObject, datePicker);
-      }
-      else
-        appsDetailsPage.verifyAppsComponent(sparkAppsDetailsPageObject, false, false, false);
+      } else
+        appsDetailsPage.verifyAppsComponent(sparkAppsDetailsPageObject, false, false,
+            false);
       test.log(LogStatus.PASS, "The basic components for an application is present");
       //Close apps details page
       MouseActions.clickOnElement(driver, sparkAppsDetailsPageObject.closeAppsPageTab);

@@ -1,5 +1,6 @@
 package com.qa.scripts;
 
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.DatePickerPageObject;
 import com.qa.utils.DateUtils;
 import com.qa.utils.JavaScriptExecuter;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -23,7 +25,7 @@ public class DatePicker {
     public DatePickerPageObject datePickerPageObject;
     public WaitExecuter waitExecuter;
     private WebDriver driver;
-
+    private UserActions userActions;
     /**
      * @param driver - WebDriver instance
      *               Constructor method initialize driver, datepicker object
@@ -32,15 +34,14 @@ public class DatePicker {
         this.driver = driver;
         datePickerPageObject = new DatePickerPageObject(driver);
         waitExecuter = new WaitExecuter(driver);
+        userActions = new UserActions(driver);
     }
 
     /**
      * This method used to click on date picker to open datepicker dropdown
      */
     public void clickOnDatePicker() {
-        waitExecuter.waitUntilElementPresent(datePickerPageObject.dateRange);
-        JavaScriptExecuter.clickOnElement(driver, datePickerPageObject.dateRange);
-        waitExecuter.sleep(3000);
+        userActions.performActionWithPolling(datePickerPageObject.dateRange, UserAction.CLICK);
     }
 
     /**

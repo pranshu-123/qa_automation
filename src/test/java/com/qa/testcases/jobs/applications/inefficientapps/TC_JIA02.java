@@ -2,7 +2,7 @@ package com.qa.testcases.jobs.applications.inefficientapps;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.utils.WaitExecuter;
@@ -30,9 +30,9 @@ public class TC_JIA02 extends BaseClass {
         LOGGER.info("Passed Parameter Is : " + clusterId);
 
         //Click on Jobs tab
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+        SubTopPanelModulePageObject subTopPanelModulePageObject = new SubTopPanelModulePageObject(driver);
         waitExecuter.sleep(2000);
-        topPanelComponentPageObject.jobs.click();
+        subTopPanelModulePageObject.jobs.click();
         test.log(LogStatus.PASS, "Jobs tab is clicked successfully");
         LOGGER.info("Jobs tab is clicked successfully");
 

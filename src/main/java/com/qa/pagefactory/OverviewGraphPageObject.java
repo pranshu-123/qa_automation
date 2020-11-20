@@ -35,7 +35,8 @@ public class OverviewGraphPageObject {
   @FindBy(xpath="//*[@id=\"app\"]/div/div/div[1]/div[2]/div/div[1]/div/div/div[1]/div/div[3]/label[2]")
   public  WebElement nodebBadChkBoxText;
 
-  @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[2]/div/div[1]/div/div[1]/div[2]/div/span/div")
+  //@FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[2]/div/div[1]/div/div[1]/div[2]/div/span/div")
+  @FindBy(xpath = "//*[@id='VCoreTSOverview']/span/div/div")
   public WebElement vcoreGraph;
 
   @FindBy(xpath = "//*[@id=\"VCoreTSOverview\"]/div[2]/div/label[1]")
@@ -64,6 +65,9 @@ public class OverviewGraphPageObject {
 
   @FindBy(xpath = "//*[@id=\"JobsFinishedByStatus\"]/div[3]/div/label[2]")
   public WebElement FailedChkBox;
+
+  @FindBy(xpath = "//*[@id=\"JobsFinishedByStatus\"]/div[3]/div/label[3]")
+  public WebElement KilledChkBox;
 
   @FindBy(xpath="//*[@id='JobByStatus']/div[2]")
   public WebElement runningGraph;

@@ -2,7 +2,7 @@ package com.qa.testcases.jobs.applications.details.hive;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
@@ -12,6 +12,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.SkipException;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class TC_HIVE_40_PART2 extends BaseClass {
         test.log(LogStatus.INFO, "Initialize all class objects");
         LOGGER.info("Initialize all class objects");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         DatePicker datePicker = new DatePicker(driver);
         AllApps allApps = new AllApps(driver);
@@ -45,9 +46,9 @@ public class TC_HIVE_40_PART2 extends BaseClass {
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         LOGGER.info("Navigate to jobs tab from header");
         waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.jobs);
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(4000);
         topPanelComponentPageObject.jobs.click();
-        waitExecuter.sleep(3000);
+        waitExecuter.sleep(4000);
         waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
         waitExecuter.waitUntilPageFullyLoaded();
         // Select last 30 days from date picker
@@ -66,8 +67,6 @@ public class TC_HIVE_40_PART2 extends BaseClass {
         test.log(LogStatus.INFO, "Select 'Only' hive from app types and get its jobs count");
         LOGGER.info("Select 'Only' hive from app types and get its jobs count");
         sparkApp.clickOnlyLink("Hive");
-        int hiveAppCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
-                .replaceAll("[^\\dA-Za-z ]", "").trim());
         // Scroll to view Tags filter
         test.log(LogStatus.INFO, "Scroll to view Tags filter.");
         LOGGER.info("Scroll to view Tags filter.");
@@ -90,42 +89,53 @@ public class TC_HIVE_40_PART2 extends BaseClass {
                     + applicationsPageObject.select1stOptionInTagsSearchBox.get(i).getText().trim().toLowerCase());
             applicationsPageObject.select1stOptionInTagsSearchBox.get(i).click();
             waitExecuter.sleep(2000);
+        }
+        int hiveAppCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
+                .replaceAll("[^\\dA-Za-z ]", "").trim());
+        if (hiveAppCount > 0) {
+            // Click on the first app in table to get efficiency
+            test.log(LogStatus.INFO, "Click on the first app in table to get efficiency");
+            LOGGER.info("Click on the first app in table to get efficiency");
+            applicationsPageObject.getDurationFromTable.click();
+            waitExecuter.sleep(5000);
+            driver.getWindowHandle();
+            applicationsPageObject.tagsTab.click();
+            waitExecuter.sleep(1000);
+            List<WebElement> getTagNamesFromTagTable = applicationsPageObject.tagsInTable;
+            List<WebElement> getTagsDescriptionFromTagTable = applicationsPageObject.descriptionInTable;
+            HashMap<String, String> map = new HashMap<>();
+            for (int j = 0; j < getTagNamesFromTagTable.size(); j++) {
+                map.put(getTagNamesFromTagTable.get(j).getText().trim().toLowerCase(),
+                        getTagsDescriptionFromTagTable.get(j).getText().trim().toLowerCase());
+            }
+            waitExecuter.sleep(1000);
+            driver.navigate().back();
+            waitExecuter.sleep(5000);
+            for (String tag : selectedTagType) {
 
+                Assert.assertTrue(map.containsKey(tag),
+                        "Table does not contain the tag selected " + map.keySet() + " ---" + selectedTagType);
+            }
+            for (String tagFilter : selectedFilterUnderTag) {
+                Assert.assertTrue(map.containsValue(tagFilter),
+                        "Table does not contain the tag filter selected " + map.values());
+                test.log(LogStatus.PASS, "Table does contains the tag filter selected.");
+            }
+            executor.executeScript("arguments[0].scrollIntoView();", applicationsPageObject.globalSearchBox);
+            // Reset tags filter to default
+            test.log(LogStatus.INFO, "Reset tags filter");
+            allApps.reset();
+        } else {
+            Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
+                    "The clusterId does not have any application under it and also does not display 'No Data Available' for it"
+                            + clusterId);
+            test.log(LogStatus.SKIP, "The clusterId does not have any application under it.");
+            waitExecuter.sleep(1000);
+            //Click on reset if there are no hive apps
+            test.log(LogStatus.INFO, "Click on reset if there are no hive apps");
+            LOGGER.info("Click on reset if there are no hive apps");
+            allApps.reset();
+            throw new SkipException("The clusterId does not have any application under it.");
         }
-        // Click on the first app in table to get efficiency
-        test.log(LogStatus.INFO, "Click on the first app in table to get efficiency");
-        LOGGER.info("Click on the first app in table to get efficiency");
-        applicationsPageObject.getDurationFromTable.click();
-        waitExecuter.sleep(5000);
-        driver.getWindowHandle();
-        applicationsPageObject.tagsTab.click();
-        waitExecuter.sleep(1000);
-        List<WebElement> getTagNamesFromTagTable = applicationsPageObject.tagsInTable;
-        List<WebElement> getTagsDescriptionFromTagTable = applicationsPageObject.descriptionInTable;
-        HashMap<String, String> map = new HashMap<>();
-        for (int j = 0; j < getTagNamesFromTagTable.size(); j++) {
-            map.put(getTagNamesFromTagTable.get(j).getText().trim().toLowerCase(),
-                    getTagsDescriptionFromTagTable.get(j).getText().trim().toLowerCase());
-        }
-        waitExecuter.sleep(1000);
-        driver.navigate().back();
-        waitExecuter.sleep(5000);
-        for (String tag : selectedTagType) {
-
-            Assert.assertTrue(map.containsKey(tag),
-                    "Table does not contain the tag selected " + map.keySet() + " ---" + selectedTagType);
-        }
-        for (String tagFilter : selectedFilterUnderTag) {
-            Assert.assertTrue(map.containsValue(tagFilter),
-                    "Table does not contain the tag filter selected " + map.values());
-            test.log(LogStatus.PASS, "Table does contains the tag filter selected.");
-        }
-        executor.executeScript("arguments[0].scrollIntoView();", applicationsPageObject.globalSearchBox);
-        // Reset tags filter to default
-        test.log(LogStatus.INFO, "Reset tags filter");
-        LOGGER.info("Reset tags filter");
-        waitExecuter.sleep(2000);
-        applicationsPageObject.resetButton.click();
-        waitExecuter.sleep(3000);
     }
 }

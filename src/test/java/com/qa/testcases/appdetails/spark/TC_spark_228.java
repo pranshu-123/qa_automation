@@ -2,7 +2,7 @@ package com.qa.testcases.appdetails.spark;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.SparkAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
@@ -29,14 +29,16 @@ public class TC_spark_228 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_spark_228_verifyRightPaneKpis(String clusterId) {
         test = extent.startTest("TC_spark_228_verifyRightPaneKpis: " + clusterId,
-                "Verify all the spark apps are listed in the UI");
+                "Verify 1. All the KPIs should be listed and the data must be populated.\n" +
+                    "  (Duration, Start time, end time, job count, stages count)\n" +
+                    "  2. Owner, cluster, queue must be populated on the top right");
         test.assignCategory(" Apps Details-Spark");
         Log.startTestCase("TC_spark_228_verifyRightPaneKpis");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
         logger.info("Initialize all class objects");
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         SparkAppsDetailsPageObject sparkPageObj = new SparkAppsDetailsPageObject(driver);
         SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);

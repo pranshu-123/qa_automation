@@ -2,7 +2,7 @@ package com.qa.testcases.alerts.autoactions;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.scripts.alerts.AutoActions;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
@@ -53,9 +53,9 @@ public class TC_AA100 extends BaseClass {
         logger.info("Filled New Auto Action Policy details and clicked on save button");
 
         aa.validateBanner();
-        Assert.assertTrue(aa.validateAutoActionAdded(policyName), "Newly added Policy: " +
-                policyName + " not found.");
-        test.log(LogStatus.PASS, "New Auto action policy added successfully by using policy name " +
+        Assert.assertFalse(aa.validateAutoActionAdded(policyName), "Newly added Policy name 500 char : " +
+                policyName + " able to found.");
+        test.log(LogStatus.PASS, "New Auto action policy not added with policy name " +
                 "as 500 characters long.");
     }
 }

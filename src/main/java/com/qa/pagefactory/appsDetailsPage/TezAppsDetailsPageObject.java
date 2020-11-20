@@ -42,29 +42,8 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[10]")
     public WebElement getWrite;
 
-    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[4]/span[1]")
-    public WebElement getApptooltips;
-
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[4]/div")
     public WebElement getAppid;
-
-    @FindBy(xpath = "//*[name()='g' and contains(@class,'highcharts-spline-series')]//*[name()='path' and @class='highcharts-graph']")
-    public WebElement streamingLineChart;
-
-    @FindBy(xpath = "//*[name()='g']/*[name()='rect' and @class='highcharts-navigator-mask-inside']")
-    public WebElement streamingWaveChart;
-
-    @FindBy(xpath = "//*[@id='spark-stream-leftpanel']/h3/b")
-    public WebElement completedBatchTitle;
-
-    @FindBy(xpath = "//*[@id='sparkStreamNavigation-head']/tr/th")
-    public List<WebElement> streamTableHeader;
-
-    @FindBy(xpath = "//*[@id='sparkStreamNavigation-body']/tr")
-    public List<WebElement> streamTableRows;
-
-    @FindBy(xpath = "//*[@id='app-filter-panel']/div[2]/div[2]/div/div[2]/p/label/span[2]")
-    public WebElement failedAppCnt;
 
 
     @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span/span")
@@ -76,15 +55,6 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//a[@href='#/clusters/overview']")
     public WebElement homeTab;
 
-    @FindBy(xpath = "//*[@id='app-prev-header']/b")
-    public WebElement ifAttemptPresent;
-
-    @FindBy(xpath = "//div[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0" +
-            " highcharts-tracker']/span")
-    public List<WebElement> numAttempts;
-
-    @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[1]/div/div[1]/div[2]/h4/span")
-    public List<WebElement> leftPaneKPIList;
 
     @FindBy(xpath = "//p[contains(@class,'float-right')]/b")
     public WebElement getTotalAppCount;
@@ -161,7 +131,6 @@ public class TezAppsDetailsPageObject {
     public WebElement Queue;
 
 
-
     @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[1]/div/div[2]/div/div/div/div[1]/div/p/b")
     public List<WebElement> ganttChartHeaders;
 
@@ -195,8 +164,6 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//*[@class='link-item']")
     public WebElement programSourceLinkText;
 
-    @FindBy(xpath = "//*[@id='app-query']/div[contains(@data-range,'31')]")
-    public WebElement programHighlightedLine;
 
     // Configuration Tab xpaths
 
@@ -209,11 +176,6 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/span/div/a/span")
     public WebElement resetButton;
 
-    @FindBy(xpath = " //*[@id='appConfiguration']//tbody/tr/td/p")
-    public List<WebElement> configPropKey;
-
-    @FindBy(xpath = " //*[@id='appConfiguration']//tbody/tr/td/span")
-    public List<WebElement> configPropValue;
 
     // Logs Tab xpaths
     @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[2]/div/div[2]/div[3]/div[1]/section/div/span")

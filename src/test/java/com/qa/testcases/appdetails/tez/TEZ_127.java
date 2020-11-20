@@ -2,7 +2,7 @@ package com.qa.testcases.appdetails.tez;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.TezAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
@@ -32,7 +32,7 @@ public class TEZ_127 extends BaseClass {
         test.assignCategory(" Apps Details-Tez");
         Log.startTestCase("TEZ_127_verifyAppStatus");
 
-        TopPanelComponentPageObject topPanelComponentPageObject = new TopPanelComponentPageObject(driver);
+        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         TezAppsDetailsPageObject tezApps = new TezAppsDetailsPageObject(driver);
         TezAppsDetailsPage tezDetailsPage = new TezAppsDetailsPage(driver);

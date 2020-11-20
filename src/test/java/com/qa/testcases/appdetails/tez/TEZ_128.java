@@ -2,14 +2,7 @@ package com.qa.testcases.appdetails.tez;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelComponentPageObject;
-import com.qa.pagefactory.appsDetailsPage.TezAppsDetailsPageObject;
-import com.qa.pagefactory.jobs.ApplicationsPageObject;
-import com.qa.scripts.DatePicker;
-import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.scripts.appdetails.TezAppsDetailsPage;
-import com.qa.scripts.jobs.applications.AllApps;
-import com.qa.testcases.appdetails.spark.TC_spark_219;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;

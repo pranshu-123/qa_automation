@@ -16,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 @Marker.AppDetailsTez
 @Marker.All
 public class TEZ_129 extends BaseClass {
@@ -68,17 +67,13 @@ public class TEZ_129 extends BaseClass {
 
             //TBD Query  value not poulated in Tez apps detail page
 
-            if (tezDetailsPage.validateQueryTab(tezApps, test)) {
-                test.log(LogStatus.SKIP, "No query tab  is displayed in the Header");
-
-                //Close apps details page
-            } else {
-                test.log(LogStatus.SKIP, "No Tez Application present");
-                logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +
-                        "of 90 days");
-            }
-            waitExecuter.sleep(3000);
-            MouseActions.clickOnElement(driver, tezApps.homeTab);
+            //Close apps details page
+        } else {
+            test.log(LogStatus.SKIP, "No Tez Application present");
+            logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +
+                    "of 90 days");
         }
+        waitExecuter.sleep(3000);
+        MouseActions.clickOnElement(driver, tezApps.homeTab);
     }
 }

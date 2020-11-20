@@ -109,6 +109,9 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"tezllap-container\"]/div[1]/div[2]/h4/span[1]/text()")
     public WebElement startTime;
 
+    @FindBy(xpath = "//*[@id=\"scrollableMenu\"]/ul/li[2]/a")
+    public WebElement queryTab;
+
     @FindBy(xpath = "//*[@id=\"tezllap-container\"]/div[1]/div[2]/h4/span[2]/text()")
     public WebElement EndTime;
 

@@ -67,6 +67,9 @@ public class TEZ_129 extends BaseClass {
 
             //TBD Query  value not poulated in Tez apps detail page
 
+            tezDetailsPage.validateQueryTab(tezApps,test);;
+            test.log(LogStatus.SKIP, "No query tab  is displayed in the Header");
+
             //Close apps details page
         } else {
             test.log(LogStatus.SKIP, "No Tez Application present");

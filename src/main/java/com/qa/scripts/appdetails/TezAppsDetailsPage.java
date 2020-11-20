@@ -523,6 +523,20 @@ public class TezAppsDetailsPage {
     }
 
     /**
+     * Method to validate the header query page and DAG.
+     *
+     * @return
+     */
+    public void validateQueryTab(TezAppsDetailsPageObject tezApps, ExtentTest test) {
+        String queryTab = tezApps.queryTab.getText();
+        test.log(LogStatus.PASS, "Query Tab  is displayed in the Header: " + queryTab);
+        Assert.assertNotSame("", queryTab, "Value for Query Tab missing");
+    }
+
+
+
+
+    /**
      * Method to validate  top right of the app details page.
      *
      * @return

@@ -396,6 +396,59 @@ public class TezAppsDetailsPage {
     }
 
     /**
+     * Method to verify the summary tabs in the right pane of the App Details page
+     */
+    public String verifyAppDagTabs(TezAppsDetailsPageObject tezApps, String verifyTabName, ExtentTest test) {
+        List<WebElement> appsTabList = tezApps.appSummaryTabs;
+        verifyAssertFalse(appsTabList.isEmpty(), tezApps, "No Tabs loaded");
+        String tabName = "";
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.pollingEvery(Duration.ofMillis(10));
+
+        for (int i = 0; i < appsTabList.size(); i++) {
+            tabName = appsTabList.get(i).getText();
+            LOGGER.info("Validating tab " + tabName);
+            if (tabName.equals(verifyTabName)) {
+                switch (verifyTabName) {
+                    case "Analysis":
+                        validateAnalysisTab(tezApps);
+                        test.log(LogStatus.PASS, "Analysis tab is populated");
+                        break;
+                    case "Resources":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        waitExecuter.sleep(3000);
+                        validateResourcesTab(tezApps);
+                        break;
+                    case "Program":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        waitExecuter.sleep(3000);
+                        validateProgramTab(tezApps);
+                        break;
+                    case "Diagnostics":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        waitExecuter.sleep(3000);
+                        validateErrorsTab(tezApps);
+                        test.log(LogStatus.PASS, "Errors tab is populated");
+                        break;
+                    case "Tags":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        waitExecuter.sleep(3000);
+                        String tagValue = validateTagsTab(tezApps);
+                        test.log(LogStatus.PASS, "Tags tab is populated");
+                        return tagValue;
+                    //  break;
+                    case "Configuration":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        waitExecuter.sleep(3000);
+                        validateTimingTab(tezApps);
+                }
+                break;
+            }
+        }
+        return "";
+    }
+
+    /**
      * Method to verify the Timings tabs stages ,legends, graphs and top stages
      */
     public void verifyTimingStages(Actions action, WebElement ele, TezAppsDetailsPageObject tezApps, String legendName) {
@@ -437,7 +490,7 @@ public class TezAppsDetailsPage {
             switch (j) {
                 case 0:
                     Assert.assertEquals(tabName, "Navigation", "Navigation tab not present");
-                    List<WebElement> navigationRowList = tezApps.navigationTableRows;
+                    List<WebElement> navigationRowList = tezApps.DagtableRows;
                     navigationRows = navigationRowList.size();
                     LOGGER.info("Navigation Rows are " + navigationRows);
                     if (validateCompData) {
@@ -521,6 +574,9 @@ public class TezAppsDetailsPage {
         Assert.assertNotSame("", duration, "Value for duration missing");
         Assert.assertNotSame("", dataIO, "Value for duration missing");
     }
+
+
+
 
     /**
      * Method to validate  top right of the app details page.

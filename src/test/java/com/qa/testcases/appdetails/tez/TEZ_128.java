@@ -19,7 +19,7 @@ public class TEZ_128 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void TEZ_128_verifyTheAnalysisTab(String clusterId) {
-        test = extent.startTest("TC_spark_234_verifyConfigurationTab: " + clusterId,
+        test = extent.startTest("TEZ_128_verifyTheAnalysisTab: " + clusterId,
                 "Verify App details should have the Analysis tab and the app events must be captured");
         test.assignCategory(" Apps Details-Tez");
         Log.startTestCase("TEZ_128_verifyTheAnalysisTab");

@@ -137,10 +137,10 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[1]/div/div[2]/div/div/div/div[1]/div/p/b")
     public List<WebElement> ganttChartHeaders;
 
-    @FindBy(xpath = "(//tbody[@id='appNavigation-body'])/tr")
-    public List<WebElement> navigationTableRows;
+    @FindBy(xpath = "//tbody")
+    public List<WebElement> DagtableRows;
 
-    @FindBy(xpath = "(//thead[@id='appNavigation-head'])/tr/th")
+    @FindBy(xpath = "//table[@class='component-data-tables']//thead//tr")
     public List<WebElement> navigationHeaders;
 
     @FindBy(xpath = "(//div[@id='app'])/div/div/div[1]/div[1]/span")

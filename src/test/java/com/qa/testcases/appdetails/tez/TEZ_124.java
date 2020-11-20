@@ -65,7 +65,7 @@ public class TEZ_124 extends BaseClass {
             tezDetailsPage.validateHeaderTab(tezApps,test);
             waitExecuter.sleep(3000);
             //Close apps details page
-            MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
+            MouseActions.clickOnElement(driver, tezApps.homeTab);
             waitExecuter.sleep(3000);
 
 

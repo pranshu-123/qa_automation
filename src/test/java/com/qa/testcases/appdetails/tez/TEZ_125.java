@@ -59,6 +59,5 @@ public class TEZ_125 extends BaseClass {
 
         //Close apps details page
         MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
-        //  sparkAppsDetailsPageObject.closeAppsPageTab.click();
     }
 }

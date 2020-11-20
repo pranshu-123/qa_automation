@@ -21,7 +21,8 @@ public class TC_CTR_02 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void validateTuningDatePickerList(String clusterId) {
-        test = extent.startTest("TC_CTR_02.validateTuningDatePickerList", "Verify datepicker list");
+        test = extent.startTest("TC_CTR_02.validateTuningDatePickerList: "+ clusterId,
+                "Verify datepicker list");
         test.assignCategory(" Cluster - Tuning ");
         LOGGER.info("Passed Parameter Is : " + clusterId);
 
@@ -33,11 +34,13 @@ public class TC_CTR_02 extends BaseClass {
         waitExecuter.sleep(3000);
         MouseActions.clickOnElement(driver, topPanelPageObject.tuningTab);
         LOGGER.info("Clicked on Tuning Tab");
+        test.log(LogStatus.INFO, "Clicked on Tuning Tab");
 
         Tuning tuning = new Tuning(driver);
         tuning.closeConfirmationMessageNotification();
         tuning.clickOnRunButton();
         LOGGER.info("Clicked on Run button");
+        test.log(LogStatus.FAIL,"Clicked on Run button");
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();

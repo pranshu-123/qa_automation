@@ -66,6 +66,19 @@ public class TEZ_129 extends BaseClass {
             test.log(LogStatus.PASS, "The basic components for an application is present");
 
             //TBD Query  value not poulated in Tez apps detail page
+            String tagValue = tezDetailsPage.verifyAppSummaryTabs(tezApps, "Tags", test);
+            if (!tagValue.equals("spark-streaming"))
+                tezDetailsPage.verifyAppsComponent(tezApps, false, false, true);
+            else
+            {
+                tezApps.closeAppsPageTab.click();
+                waitExecuter.sleep(1000);
+                applicationsPageObject.getAnotherAppFromTable.click();
+                waitExecuter.sleep(2000);
+                tezDetailsPage.verifyAppsComponent(tezApps, false, false, true);
+            }
+            test.log(LogStatus.PASS, "The job stage table has jobs and corresponding details displayed per " +
+                    "job id along with tabs and its respective data");
 
             //Close apps details page
         } else {

@@ -58,7 +58,7 @@ public class TEZ_130 extends BaseClass {
 
 
         //Close apps details page
-        MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
+        MouseActions.clickOnElement(driver, tezApps.homeTab);
 
     }
 

@@ -10,6 +10,7 @@ import com.qa.scripts.appdetails.TezAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,7 @@ public class TEZ_129 extends BaseClass {
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         TezAppsDetailsPageObject tezApps = new TezAppsDetailsPageObject(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         TezAppsDetailsPage tezDetailsPage = new TezAppsDetailsPage(driver);
         DatePicker datePicker = new DatePicker(driver);
         AllApps allApps = new AllApps(driver);
@@ -62,15 +64,16 @@ public class TEZ_129 extends BaseClass {
             /**clicking on the UI must go to apps detail page and verify the basic tabs present */
             tezDetailsPage.verifyAppsComponent(tezApps, false, false, true);
             test.log(LogStatus.PASS, "The basic components for an application is present");
+
+            //TBD Query  value not poulated in Tez apps detail page
+
+            //Close apps details page
         } else {
+            test.log(LogStatus.SKIP, "No Tez Application present");
             logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +
                     "of 90 days");
         }
-        //TBD Query  value not poulated in apps detail page
-
-        //Close apps details page
-        MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
-
+        waitExecuter.sleep(3000);
+        MouseActions.clickOnElement(driver, tezApps.homeTab);
     }
-
 }

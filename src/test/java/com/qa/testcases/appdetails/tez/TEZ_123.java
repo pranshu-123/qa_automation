@@ -23,14 +23,14 @@ import java.util.List;
 
 public class TEZ_123 extends BaseClass {
 
-    Logger logger = LoggerFactory.getLogger(TEZ_124.class);
+    Logger logger = LoggerFactory.getLogger(TEZ_123.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_124_verifyKPI(String clusterId) {
-        test = extent.startTest("TEZ_124_verifyKPI: " + clusterId,
+    public void TEZ_123_verifyKPI(String clusterId) {
+        test = extent.startTest("TEZ_123_verifyKPI: " + clusterId,
                 "Verify Tez apps should have Cluster IDs for all the states of application ");
         test.assignCategory(" Apps Details-Tez");
-        Log.startTestCase("TEZ_124_verifyKPI");
+        Log.startTestCase("TEZ_123_verifyKPI");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -56,8 +56,8 @@ public class TEZ_123 extends BaseClass {
          * "Killed","Failed","Running","Success","Pending","Unknown", "Waiting"
          */
         test.log(LogStatus.INFO,
-                "Assert status types - 'Killed','Failed','Running','Success','Pending','Unknown', 'Waiting'");
-        logger.info("Assert status types - 'Killed','Failed','Running','Success','Pending','Unknown', 'Waiting'");
+                "Assert status types - 'Killed','Success'");
+        logger.info("Assert status types - 'Killed','Success'");
         List<String> existingStatusTypes = new ArrayList<>(Arrays.asList(PageConstants.JobsStatusType.STATUSTYPE));
         List<WebElement> statusTypes = applicationsPageObject.getStatusTypes;
         List<String> listOfStatusTypes = new ArrayList<String>();

@@ -11,6 +11,7 @@ import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.testcases.appdetails.spark.TC_spark_219;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,7 @@ public class TEZ_126 extends BaseClass {
         logger.info("Initialize all class objects");
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         TezAppsDetailsPageObject tezApps = new TezAppsDetailsPageObject(driver);
         TezAppsDetailsPage tezDetailsPage = new TezAppsDetailsPage(driver);
         DatePicker datePicker = new DatePicker(driver);
@@ -44,7 +46,6 @@ public class TEZ_126 extends BaseClass {
                 applicationsPageObject, clusterId);
         test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
 
-        test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
         int appCount = tezDetailsPage.clickOnlyLink("Tez");
 
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
@@ -64,11 +65,12 @@ public class TEZ_126 extends BaseClass {
             tezDetailsPage.validateTopRightTab(tezApps,test);
             test.log(LogStatus.PASS, "The basic components for an application is present");
         } else {
+            test.log(LogStatus.SKIP, "No Tez Application present");
             logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +
                     "of 90 days");
         }
-        //Close apps details page
-        MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
+        waitExecuter.sleep(3000);
+        MouseActions.clickOnElement(driver, tezApps.homeTab);
 
     }
 }

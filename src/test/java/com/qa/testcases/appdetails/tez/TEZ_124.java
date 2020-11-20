@@ -71,10 +71,11 @@ public class TEZ_124 extends BaseClass {
 
         } else {
             test.log(LogStatus.SKIP, "No Tez Application present");
-            waitExecuter.sleep(3000);
-            MouseActions.clickOnElement(driver, tezApps.homeTab);
+            logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +
+                    "of 90 days");
         }
-
+        waitExecuter.sleep(3000);
+        MouseActions.clickOnElement(driver, tezApps.homeTab);
 
     }
 }

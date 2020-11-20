@@ -75,7 +75,7 @@ public class TEZ_124 extends BaseClass {
                     "of 90 days");
         }
         waitExecuter.sleep(3000);
-        MouseActions.clickOnElement(driver, tezApps.homeTab);
+        MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
 
     }
 }

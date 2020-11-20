@@ -40,7 +40,7 @@ public class TC_CTR_02 extends BaseClass {
         tuning.closeConfirmationMessageNotification();
         tuning.clickOnRunButton();
         LOGGER.info("Clicked on Run button");
-        test.log(LogStatus.FAIL,"Clicked on Run button");
+        test.log(LogStatus.INFO,"Clicked on Run button");
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();

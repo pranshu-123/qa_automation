@@ -56,7 +56,7 @@ public class TC_CTR_01 extends BaseClass {
 
         try {
             waitExecuter.waitUntilTextToBeInWebElement(tuningPageObject.confirmationMessageElement,
-                    "Tuning Report completed successfully.");
+                    "Cluster Tuning completed successfully.");
             test.log(LogStatus.PASS, "Verified Tuning report is loaded properly.");
             LOGGER.info("Verified Tuning report is loaded properly.");
         } catch (TimeoutException te) {

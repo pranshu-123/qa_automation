@@ -20,6 +20,7 @@ public @interface Marker {
   @interface QueueAnalysis {}
   @interface AppDetailsImpala {}
   @interface AppDetailsSpark {}
+  @interface AppDetailsTez {}
   @interface ReportArchive {}
   @interface InefficientApps {}
   @interface YarnChargeback {}

@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.tuning;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.CommonPageObject;
@@ -9,17 +10,16 @@ import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+@Marker.Tuning
+@Marker.All
 public class TC_CTR_04 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_CTR_04.class.getName());
-
 
     @Test(dataProvider = "clusterid-data-provider")
     public void validateTuningDatePickerList(String clusterId) {
@@ -48,9 +48,10 @@ public class TC_CTR_04 extends BaseClass {
         CommonPageObject commonPageObject = new CommonPageObject(driver);
         userActions.performActionWithPolling(commonPageObject.clusterDropdown, UserAction.CLICK);
         String[] expectedClusterOptions = {"tnode28-HDP315-TLS-Kerb-Ranger", "tnode3-CDH633-TLS-Kerb-Sentry", "tnode40-CDH5162"};
+        List<String> allClusters;
         if(commonPageObject.clustersList.size() > 0){
             //Get all clusters from UI
-            List<String> allClusters = getClusterOptions(commonPageObject);
+            allClusters = tuning.getClusterOptions(commonPageObject);
             for(String expectedCluster: expectedClusterOptions){
                 Assert.assertTrue(allClusters.contains(expectedCluster),
                         "Cluster list does not contain: " + expectedCluster);
@@ -60,18 +61,6 @@ public class TC_CTR_04 extends BaseClass {
             Assert.assertTrue(false, "Clusters not available.");
         }
 
-    }
-
-
-    /**
-     * This method used to get Cluster options
-     */
-    public List<String> getClusterOptions(CommonPageObject commonPageObject) {
-        List<String> list = new ArrayList<>();
-        for (WebElement element : commonPageObject.clustersList) {
-            list.add(element.getText());
-        }
-        return list;
     }
 
 }

@@ -24,6 +24,8 @@ public class TuningPageObject {
     @FindBy(xpath = "(//span[contains(text(),'Run')])[2]/parent::a")
     public WebElement modalRunButton;
 
+    @FindBy(xpath = "//div[@class='close pointer']")
+    public WebElement closeNewReport;
 
     public TuningPageObject(WebDriver driver){PageFactory.initElements(driver,this);}
 }

@@ -1,14 +1,17 @@
 package com.qa.scripts.clusters;
 
+import com.qa.pagefactory.CommonPageObject;
 import com.qa.pagefactory.clusters.TuningPageObject;
-import com.qa.scripts.DatePicker;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class Tuning {
@@ -41,4 +44,21 @@ public class Tuning {
     public void clickOnModalRunButton() {
         MouseActions.clickOnElement(driver, tuningPageObject.modalRunButton);
     }
+
+    public List<String> getClusterOptions(CommonPageObject commonPageObject) {
+        List<String> list = new ArrayList<>();
+        for (WebElement element : commonPageObject.clustersList) {
+            list.add(element.getText());
+        }
+        return list;
+    }
+
+    public void closeNewReport(){
+        try {
+            MouseActions.clickOnElement(driver, tuningPageObject.closeNewReport);
+        } catch (TimeoutException te) {
+            MouseActions.clickOnElement(driver, tuningPageObject.closeNewReport);
+        }
+    }
+
 }

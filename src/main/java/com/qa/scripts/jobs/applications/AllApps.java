@@ -108,7 +108,7 @@ public class AllApps {
         for (int i = 0; i < statusTypes.size(); i++) {
             statusTypes.get(i).click();
         }
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(4000);
         // Assert if the application type is selected successfully.
         Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
                 "After de-selecting all application types, the application are still displayed ");

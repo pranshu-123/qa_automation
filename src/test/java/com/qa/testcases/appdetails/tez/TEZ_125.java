@@ -55,8 +55,7 @@ public class TEZ_125 extends BaseClass {
                 "displayed in the header");
 
          //TBD Dag value not poulated in apps detail page
-
-        //Close apps details page
         MouseActions.clickOnElement(driver, tezApps.homeTab);
+
     }
 }

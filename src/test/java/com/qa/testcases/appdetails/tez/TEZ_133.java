@@ -23,6 +23,6 @@ public class TEZ_133 extends BaseClass {
         TezAppsDetailsPage tezDetailsPage = new TezAppsDetailsPage(driver);
         //TBD Data base tab not poulated in apps detail page
 
-        test.log(LogStatus.PASS, "Verified the Timings tab successfully");
+        test.log(LogStatus.SKIP, "Verified the Database tab not poulated in apps detail page");
     }
 }

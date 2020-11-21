@@ -23,9 +23,11 @@ public class TEZ_128 extends BaseClass {
                 "Verify App details should have the Analysis tab and the app events must be captured");
         test.assignCategory(" Apps Details-Tez");
         Log.startTestCase("TEZ_128_verifyTheAnalysisTab");
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         TezAppsDetailsPage tezDetailsPage = new TezAppsDetailsPage(driver);
 
         tezDetailsPage.commonTabValidation(test, clusterId, "Analysis", logger);
+        waitExecuter.sleep(2000);
         test.log(LogStatus.PASS, "Verified the Analysis tab successfully");
         }
 }

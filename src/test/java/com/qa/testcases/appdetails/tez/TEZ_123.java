@@ -48,16 +48,27 @@ public class TEZ_123 extends BaseClass {
                 applicationsPageObject, clusterId);
         test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
 
-        test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
-        int appCount = tezDetailsPage.clickOnlyLink("Tez");
+        tezDetailsPage.clickOnlyLink("Tez");
+        int tezAppCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
+                .replaceAll("[^\\dA-Za-z ]", "").trim());
+        // Expand status filter on left pane
+        test.log(LogStatus.INFO, "Expand status filter on left pane");
+        logger.info("Expand status filter on left pane");
+        applicationsPageObject.expandStatus.click();
+        waitExecuter.sleep(2000);
+        // To apply filter - De-select all status types
+        test.log(LogStatus.INFO, "To apply status filter - De-select all status types");
+        logger.info("To apply status filter - De-select all status types");
+        allApps.deselectAllStatusTypes();
+        waitExecuter.sleep(2000);
 
         /*
          * Validate that status types are --
          * "Killed","Failed","Running","Success","Pending","Unknown", "Waiting"
          */
         test.log(LogStatus.INFO,
-                "Assert status types - 'Killed','Success'");
-        logger.info("Assert status types - 'Killed','Success'");
+                "Assert status types - 'Killed','Failed','Running','Success','Pending','Unknown', 'Waiting'");
+        logger.info("Assert status types - 'Killed','Failed','Running','Success','Pending','Unknown', 'Waiting'");
         List<String> existingStatusTypes = new ArrayList<>(Arrays.asList(PageConstants.JobsStatusType.STATUSTYPE));
         List<WebElement> statusTypes = applicationsPageObject.getStatusTypes;
         List<String> listOfStatusTypes = new ArrayList<String>();
@@ -65,6 +76,9 @@ public class TEZ_123 extends BaseClass {
         for (int i = 0; i < statusTypes.size(); i++) {
             listOfStatusTypes.add(statusTypes.get(i).getText().trim());
         }
+        waitExecuter.sleep(2000);
+        logger.info("List of status type actual - " + listOfStatusTypes);
+        logger.info("List of status type expected - " + existingStatusTypes);
         Assert.assertTrue(listOfStatusTypes.equals(existingStatusTypes),
                 "Status types displayed does not match the expected status list");
         test.log(LogStatus.PASS, "Status types displayed match the expected status list");
@@ -73,22 +87,42 @@ public class TEZ_123 extends BaseClass {
         logger.info("Select single app and assert that table contain its data.");
         List<WebElement> clickOnIndividualStatus = applicationsPageObject.selectSingleStatusType;
         waitExecuter.sleep(2000);
-        List<WebElement> appStatusCounts = applicationsPageObject.getEachStatusTypeJobCount;
-        waitExecuter.sleep(2000);
         for (int i = 0; i < clickOnIndividualStatus.size(); i++) {
             waitExecuter.sleep(2000);
             clickOnIndividualStatus.get(i).click();
             waitExecuter.sleep(2000);
-            int TezCount = Integer.parseInt(appStatusCounts.get(i).getText().replaceAll("[^\\dA-Za-z ]", "").trim());
-            waitExecuter.sleep(1000);
+            int appCount = Integer.parseInt(applicationsPageObject.statusJobCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
+            logger.info("Status app count- " + appCount);
+            waitExecuter.sleep(2000);
             int totalCount = Integer
                     .parseInt(applicationsPageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
+            logger.info("Total app count- " + totalCount);
             waitExecuter.sleep(1000);
 
-            Assert.assertEquals(TezCount, totalCount, "The app count of " + statusTypes.get(i).getText().trim()
+            Assert.assertEquals(appCount, totalCount, "The app count of " + statusTypes.get(i).getText().trim()
                     + " is not equal to the total count of heading.");
             test.log(LogStatus.PASS, "The status count matches the total count");
-        }
 
+            if (appCount > 0) {
+                String getStatusTypeFromTable = applicationsPageObject.getStatusFromTable.getText();
+                waitExecuter.sleep(2000);
+                Assert.assertEquals(getStatusTypeFromTable.toLowerCase(),
+                        statusTypes.get(i).getText().trim().toLowerCase(),
+                        "The Jobs displayed in tables contains application other than that of selected App Type");
+                test.log(LogStatus.PASS, "The Jobs displayed in tables contains application of selected App Type: "+getStatusTypeFromTable);
+                waitExecuter.sleep(1000);
+            } else {
+                Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
+                        "The clusterId does not have any application under it and also does not display 'No Data Available' for it"
+                                + clusterId);
+                test.log(LogStatus.SKIP, "The clusterId does not have any application under it.");
+            }
+            waitExecuter.sleep(1000);
+            clickOnIndividualStatus.get(i).click();
+            waitExecuter.sleep(2000);
+        }
+        // Click on show-all to view all type of applications
+        applicationsPageObject.resetButton.click();
+        waitExecuter.sleep(3000);
     }
 }

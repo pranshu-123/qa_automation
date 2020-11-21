@@ -23,6 +23,6 @@ public class TEZ_135 extends BaseClass {
         Log.startTestCase("TEZ_135_verifytheDags");
         TezAppsDetailsPage tezDetailsPage = new TezAppsDetailsPage(driver);
         //TBD Data base tab not poulated in apps detail page
-        test.log(LogStatus.PASS, "Verified the Dags tab successfully");
+        test.log(LogStatus.SKIP, "Verified the Dags tab not poulated in apps detail page");
     }
 }

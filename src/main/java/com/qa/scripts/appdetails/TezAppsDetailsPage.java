@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.qa.base.BaseClass.test;
+
 public class TezAppsDetailsPage {
 
     private static final java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger(TezAppsDetailsPage.class.getName());
@@ -208,6 +210,7 @@ public class TezAppsDetailsPage {
         }
     }
 
+
     public String validateTagsTab(TezAppsDetailsPageObject tezApps) {
         List<WebElement> tagTableHeader = tezApps.tagTableHeader;
         verifyAssertFalse(tagTableHeader.isEmpty(), tezApps, " Tags header is not populated");
@@ -231,6 +234,7 @@ public class TezAppsDetailsPage {
         Actions action = new Actions(driver);
         List<WebElement> subTabList = tezApps.timingsSubTabs;
         Assert.assertFalse(subTabList.isEmpty(), "No sub tabs available");
+
         String[] expectedSubTabList = {"Task Time", "App Time"};
         String[] expectedTTLegendNames = {"Input Stages", "Output Stages", "Processing Stages"};
         String[] expectedATLegendNames = {"Queue Time", "Driver Time", "Job Time"};
@@ -337,6 +341,7 @@ public class TezAppsDetailsPage {
                 }
                 break;
             }
+
         }
         return "";
     }
@@ -388,6 +393,61 @@ public class TezAppsDetailsPage {
                         MouseActions.clickOnElement(driver, appsTabList.get(i));
                         waitExecuter.sleep(3000);
                         validateTimingTab(tezApps);
+
+                }
+                break;
+            }
+        }
+        return "";
+    }
+
+    /**
+     * Method to verify the summary tabs in the right pane of the App Details page
+     */
+    public String verifyAppDagTabs(TezAppsDetailsPageObject tezApps, String verifyTabName, ExtentTest test) {
+        List<WebElement> appsTabList = tezApps.appSummaryTabs;
+        verifyAssertFalse(appsTabList.isEmpty(), tezApps, "No Tabs loaded");
+        String tabName = "";
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.pollingEvery(Duration.ofMillis(10));
+
+        for (int i = 0; i < appsTabList.size(); i++) {
+            tabName = appsTabList.get(i).getText();
+            LOGGER.info("Validating tab " + tabName);
+            if (tabName.equals(verifyTabName)) {
+                switch (verifyTabName) {
+                    case "Analysis":
+                        validateAnalysisTab(tezApps);
+                        test.log(LogStatus.PASS, "Analysis tab is populated");
+                        break;
+                    case "Resources":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        waitExecuter.sleep(3000);
+                        validateResourcesTab(tezApps);
+                        break;
+                    case "Program":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        waitExecuter.sleep(3000);
+                        validateProgramTab(tezApps);
+                        break;
+                    case "Diagnostics":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        waitExecuter.sleep(3000);
+                        validateErrorsTab(tezApps);
+                        test.log(LogStatus.PASS, "Errors tab is populated");
+                        break;
+                    case "Tags":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        waitExecuter.sleep(3000);
+                        String tagValue = validateTagsTab(tezApps);
+                        test.log(LogStatus.PASS, "Tags tab is populated");
+                        return tagValue;
+                    //  break;
+                    case "Configuration":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        waitExecuter.sleep(3000);
+                        validateTimingTab(tezApps);
+                        test.log(LogStatus.PASS, "Tags tab is populated");
                 }
                 break;
             }
@@ -437,7 +497,7 @@ public class TezAppsDetailsPage {
             switch (j) {
                 case 0:
                     Assert.assertEquals(tabName, "Navigation", "Navigation tab not present");
-                    List<WebElement> navigationRowList = tezApps.navigationTableRows;
+                    List<WebElement> navigationRowList = tezApps.DagtableRows;
                     navigationRows = navigationRowList.size();
                     LOGGER.info("Navigation Rows are " + navigationRows);
                     if (validateCompData) {
@@ -503,24 +563,22 @@ public class TezAppsDetailsPage {
      * @return
      */
     public void validateHeaderTab(TezAppsDetailsPageObject tezApps, ExtentTest test) {
-        String jobId = tezApps.startTime.getText();
-        test.log(LogStatus.PASS, "Tez Status  is displayed in the Header: " + jobId);
-        String startTime = tezApps.EndTime.getText();
-        test.log(LogStatus.PASS, "Tez Status  is displayed in the Header: " + startTime);
+        String startTime = tezApps.startTime.getText();
+        waitExecuter.sleep(2000);
+        test.log(LogStatus.PASS, "Startime is displayed in the Header: " + startTime);
         String endTime = tezApps.EndTime.getText();
-        test.log(LogStatus.PASS, "Tez Status  is displayed in the Header: " + endTime);
+        waitExecuter.sleep(2000);
+        test.log(LogStatus.PASS, "Endtime is displayed in the Header: " + endTime);
         String duration = tezApps.Duration.getText();
-        test.log(LogStatus.PASS, "Tez Status  is displayed in the Header: " + duration);
-        String dataIO = tezApps.DataIO.getText();
-        test.log(LogStatus.PASS, "Tez Status  is displayed in the Header: " + dataIO);
-        verifyAssertTrue(tezApps.Dags.isDisplayed(), tezApps, " Dag data is not displayed ");
-        LOGGER.info("Duration = " + duration + " JobId = " + jobId + " starttime = " + startTime + " EndTime = " + endTime + " DataIO = " + dataIO);
-        Assert.assertNotSame("", jobId, "Value for jobId missing");
+        waitExecuter.sleep(2000);
+        test.log(LogStatus.PASS, "Duration is displayed in the Header: " + duration);
+        LOGGER.info("Duration = " + duration + " JobId = " + " starttime = " + startTime + " EndTime = " + endTime + " DataIO = ");
         Assert.assertNotSame("", startTime, "Value for startTime missing");
         Assert.assertNotSame("", endTime, "Value for duration missing");
         Assert.assertNotSame("", duration, "Value for duration missing");
-        Assert.assertNotSame("", dataIO, "Value for duration missing");
+
     }
+
 
     /**
      * Method to validate  top right of the app details page.

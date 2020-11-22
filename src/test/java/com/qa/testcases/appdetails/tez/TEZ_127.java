@@ -20,7 +20,8 @@ import org.testng.annotations.Test;
 
 @Marker.AppDetailsTez
 @Marker.All
-public class TEZ_127 extends BaseClass {
+public class
+TEZ_127 extends BaseClass {
 
     Logger logger = LoggerFactory.getLogger(TEZ_127.class);
 

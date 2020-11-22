@@ -28,7 +28,7 @@ public class TC_HIVE_37 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void verifyHiveAppsInAppTable(String clusterId) {
         test = extent.startTest("TC_HIVE_37.verifyHiveAppsInAppTable",
-                "Verify that In the UI Hive apps should be visible along with other apps on UI, in App list page");
+            "Verify that In the UI Hive apps should be visible along with other apps on UI, in App list page");
         test.assignCategory("App Details - Hive");
         test.log(LogStatus.INFO, "Login to the application");
 
@@ -74,7 +74,7 @@ public class TC_HIVE_37 extends BaseClass {
         List<WebElement> typesInPage = applicationsPageObject.getTypesColumnFromTable;
         List<String> nameOfTypesInPage = new ArrayList<>();
         int appCount = Integer
-                .parseInt(applicationsPageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
+            .parseInt(applicationsPageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
         if(appCount>0) {
             for (int j = 0; j < 2; j++) {
                 // Sort By Asc and Desc order of App Type in table
@@ -103,8 +103,8 @@ public class TC_HIVE_37 extends BaseClass {
         }
         else {
             Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
-                    "The clusterId does not have any application under it and also does not display 'No Data Available' for it"
-                            + clusterId);
+                "The clusterId does not have any application under it and also does not display 'No Data Available' for it"
+                    + clusterId);
             test.log(LogStatus.SKIP, "The clusterId does not have any application under it.");
             waitExecuter.sleep(1000);
             driver.navigate().refresh();

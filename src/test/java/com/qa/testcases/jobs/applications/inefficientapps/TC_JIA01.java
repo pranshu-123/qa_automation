@@ -28,7 +28,7 @@ public class TC_JIA01 extends BaseClass {
         test.assignCategory(" Jobs / InEfficient Apps");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        test.log(LogStatus.PASS, "Passed Parameter Is : " + clusterId);
+        test.log(LogStatus.INFO, "Passed Parameter Is : " + clusterId);
         LOGGER.info("Passed Parameter Is : " + clusterId);
 
         //Click on Jobs tab

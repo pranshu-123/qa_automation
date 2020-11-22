@@ -21,7 +21,7 @@ public @interface Marker {
   @interface AppDetailsImpala {}
   @interface AppDetailsSpark {}
   @interface AppDetailsTez {}
-  @interface AppDetailsMr {}
+  @interface ReportArchive {}
   @interface InefficientApps {}
   @interface YarnChargeback {}
   @interface YarnResources {}
@@ -31,4 +31,6 @@ public @interface Marker {
   @interface UserReports {}
   @interface Manage {}
   @interface AppDetailsHive {}
+  @interface DataForecasting {}
+  @interface Tuning {}
 }

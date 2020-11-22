@@ -21,6 +21,12 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//span[@class=\"success badge\" and @style=\"margin-top: 16px; margin-left: 10px;\" and text()=\"Success\"]")
     public WebElement appStatus;
 
+    @FindBy(xpath = "//p[normalize-space()='No Configruation Data Available']")
+    public WebElement NoConfigruationDataAvailable;
+
+    @FindBy(xpath = "//a[normalize-space()='Configuration']")
+    public WebElement Configtab;
+
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[2]")
     public WebElement Status;
 
@@ -42,14 +48,9 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[10]")
     public WebElement getWrite;
 
-    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[4]/span[1]")
-    public WebElement getApptooltips;
-
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[4]/div")
     public WebElement getAppid;
 
-    @FindBy(xpath = "//*[@id='app-filter-panel']/div[2]/div[2]/div/div[2]/p/label/span[2]")
-    public WebElement failedAppCnt;
 
     @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span/span")
     public WebElement getHeaderAppId;
@@ -111,13 +112,19 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "(//div[@class='timeline gantt-timeline pipeline row no-gutters'])//span[2]")
     public List<WebElement> ganttChartStartTime;
 
-    @FindBy(xpath = "//*[@id=\"tezllap-container\"]/div[1]/div[2]/h4/span[1]/text()")
+    @FindBy(xpath = "(//span[contains(@class,'start')])")
     public WebElement startTime;
 
-    @FindBy(xpath = "//*[@id=\"tezllap-container\"]/div[1]/div[2]/h4/span[2]/text()")
+    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/h2/span[2]/span/span")
+    public WebElement jobId;
+
+    @FindBy(xpath = "//*[@id=\"scrollableMenu\"]/ul/li[2]/a")
+    public WebElement queryTab;
+
+    @FindBy(xpath = "(//span[contains(@class,'start')])[2]")
     public WebElement EndTime;
 
-    @FindBy(xpath = "//*[@id=\"SummaryDetails\"]/div/div[1]/div[1]/div/h3")
+    @FindBy(xpath = "//*[@id=\"SummaryDetails\"]/div/div/div[1]/div/h3")
     public WebElement Duration;
 
     @FindBy(xpath = "//*[@id=\"SummaryDetails\"]/div/div[2]/div[1]/div/h3")
@@ -135,13 +142,14 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[1]/span[3]")
     public WebElement Queue;
 
+
     @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[1]/div/div[2]/div/div/div/div[1]/div/p/b")
     public List<WebElement> ganttChartHeaders;
 
-    @FindBy(xpath = "(//tbody[@id='appNavigation-body'])/tr")
-    public List<WebElement> navigationTableRows;
+    @FindBy(xpath = "//tbody")
+    public List<WebElement> DagtableRows;
 
-    @FindBy(xpath = "(//thead[@id='appNavigation-head'])/tr/th")
+    @FindBy(xpath = "//table[@class='component-data-tables']//thead//tr")
     public List<WebElement> navigationHeaders;
 
     @FindBy(xpath = "(//div[@id='app'])/div/div/div[1]/div[1]/span")
@@ -168,14 +176,18 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//*[@class='link-item']")
     public WebElement programSourceLinkText;
 
-    @FindBy(xpath = "//*[@id='app-query']/div[contains(@data-range,'31')]")
-    public WebElement programHighlightedLine;
 
     // Configuration Tab xpaths
 
+    @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/p")
+    public WebElement configPropNum;
+
+    @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/div[2]/span")
+    public List<WebElement> configKeywords;
 
     @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/span/div/a/span")
     public WebElement resetButton;
+
 
     // Logs Tab xpaths
     @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[2]/div/div[2]/div[3]/div[1]/section/div/span")

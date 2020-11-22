@@ -2,7 +2,9 @@ package com.qa.testcases.appdetails.tez;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+
 import com.qa.scripts.appdetails.TezAppsDetailsPage;
+
 import com.qa.utils.Log;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
@@ -21,6 +23,6 @@ public class TEZ_135 extends BaseClass {
         Log.startTestCase("TEZ_135_verifytheDags");
         TezAppsDetailsPage tezDetailsPage = new TezAppsDetailsPage(driver);
         //TBD Data base tab not poulated in apps detail page
-        test.log(LogStatus.PASS, "Verified the Dags tab successfully");
+        test.log(LogStatus.SKIP, "Verified the Dags tab not poulated in apps detail page");
     }
 }

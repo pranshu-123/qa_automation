@@ -3,9 +3,7 @@ package com.qa.testcases.appdetails.tez;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.appsDetailsPage.TezAppsDetailsPageObject;
-import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.scripts.appdetails.TezAppsDetailsPage;
-import com.qa.testcases.appdetails.spark.TC_spark_240;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.relevantcodes.extentreports.LogStatus;
@@ -31,6 +29,6 @@ public class TEZ_131 extends BaseClass {
 
         //Close apps details page
 
-        MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
+        MouseActions.clickOnElement(driver, tezApps.homeTab);
     }
 }

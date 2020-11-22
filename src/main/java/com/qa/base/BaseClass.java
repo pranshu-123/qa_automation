@@ -77,7 +77,7 @@ public class BaseClass {
      */
     @BeforeClass
     public void beforeClass() {
-        // Login if user is logged out
+        LOGGER.info("Login to the application.");
         Login login = new Login(driver);
         login.loginToApp();
     }

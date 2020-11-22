@@ -31,7 +31,10 @@ public class TC_spark_222 extends BaseClass {
   @Test(dataProvider = "clusterid-data-provider")
   public void TC_spark_222_verifyAppDetailsPageCompKpis(String clusterId) {
     test = extent.startTest("TC_spark_222_verifyAppDetailsPageCompKpis: " + clusterId,
-        "Verify all the spark apps are listed in the UI");
+        "Verify 1. The navigation should contain below table\n" +
+            "   job ID, start time, Duration, tasks, read, write, Stages\n" +
+            "   2. Gantt chart should have \"ID\", \"start\", \"Duration\" columns\n" +
+            "   3. Data must be populated in all the columns if job count is non zero");
     test.assignCategory(" Apps Details-Spark");
     Log.startTestCase("TC_spark_222_verifyAppDetailsPageCompKpis");
 

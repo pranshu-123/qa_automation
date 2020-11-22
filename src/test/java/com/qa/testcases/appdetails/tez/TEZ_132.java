@@ -21,7 +21,9 @@ public class TEZ_132 extends BaseClass {
         test.assignCategory(" Apps Details-Tez");
         Log.startTestCase("TEZ_132_VerifyTheConfiguration");
         TezAppsDetailsPage tezDetailsPage = new TezAppsDetailsPage(driver);
-        //TBD configuration tab  value not poulated in apps detail page
-        test.log(LogStatus.PASS, "Verified the Timings tab successfully");
+
+        tezDetailsPage.commonTabValidation(test, clusterId, "Configuration", logger);
+        test.log(LogStatus.PASS, "Verified the configuration tab successfully");
+
     }
 }

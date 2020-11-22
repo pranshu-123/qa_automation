@@ -43,9 +43,9 @@ public class TC_HIVE_45 extends BaseClass {
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         LOGGER.info("Navigate to jobs tab from header");
         waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.jobs);
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(4000);
         topPanelComponentPageObject.jobs.click();
-        waitExecuter.sleep(3000);
+        waitExecuter.sleep(4000);
         waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
         waitExecuter.waitUntilPageFullyLoaded();
         // Select last 30 days from date picker
@@ -53,7 +53,7 @@ public class TC_HIVE_45 extends BaseClass {
         LOGGER.info("Select last 30 days");
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(1000);
-        datePicker.selectLastMonth();
+        datePicker.selectLast30Days();
         waitExecuter.sleep(2000);
         // Select cluster
         test.log(LogStatus.INFO, "Select clusterid : " + clusterId);

@@ -66,6 +66,9 @@ public class OverviewGraphPageObject {
   @FindBy(xpath = "//*[@id=\"JobsFinishedByStatus\"]/div[3]/div/label[2]")
   public WebElement FailedChkBox;
 
+  @FindBy(xpath = "//*[@id=\"JobsFinishedByStatus\"]/div[3]/div/label[3]")
+  public WebElement KilledChkBox;
+
   @FindBy(xpath="//*[@id='JobByStatus']/div[2]")
   public WebElement runningGraph;
 

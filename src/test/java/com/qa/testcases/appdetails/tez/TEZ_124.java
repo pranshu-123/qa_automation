@@ -61,15 +61,19 @@ public class TEZ_124 extends BaseClass {
         if (appCount > 0) {
             String headerAppId = tezDetailsPage.verifyAppId(tezApps, applicationsPageObject);
             test.log(LogStatus.PASS, "Tez Application Id is displayed in the Header: " + headerAppId);
+
+            tezDetailsPage.validateHeaderTab(tezApps,test);
+            waitExecuter.sleep(4000);
+            //Close apps details page
+            MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
             waitExecuter.sleep(3000);
 
-           /* tezDetailsPage.validateHeaderTab(tezApps,test);*/
-            waitExecuter.sleep(3000);
-            //Close apps details page
+
 
         } else {
             test.log(LogStatus.SKIP, "No Tez Application present");
-            waitExecuter.sleep(3000);
+            logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +
+                    "of 90 days");
         }
 
 

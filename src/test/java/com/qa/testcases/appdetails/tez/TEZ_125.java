@@ -8,7 +8,6 @@ import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.TezAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
-import com.qa.testcases.appdetails.spark.TC_spark_219;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.relevantcodes.extentreports.LogStatus;
@@ -44,6 +43,7 @@ public class TEZ_125 extends BaseClass {
                 applicationsPageObject, clusterId);
         test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
 
+        test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
         int appCount = tezDetailsPage.clickOnlyLink("Tez");
 
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
@@ -55,8 +55,7 @@ public class TEZ_125 extends BaseClass {
                 "displayed in the header");
 
          //TBD Dag value not poulated in apps detail page
+        MouseActions.clickOnElement(driver, tezApps.homeTab);
 
-        //Close apps details page
-        MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
     }
 }

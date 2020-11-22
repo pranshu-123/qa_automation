@@ -9,7 +9,6 @@ import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
@@ -48,9 +47,9 @@ public class TC_HIVE_44 extends BaseClass {
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         LOGGER.info("Navigate to jobs tab from header");
         waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.jobs);
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(4000);
         topPanelComponentPageObject.jobs.click();
-        waitExecuter.sleep(3000);
+        waitExecuter.sleep(4000);
         waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
         waitExecuter.waitUntilPageFullyLoaded();
         // Select last 30 days from date picker
@@ -58,7 +57,7 @@ public class TC_HIVE_44 extends BaseClass {
         LOGGER.info("Select last 30 days");
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(1000);
-        datePicker.selectLastMonth();
+        datePicker.selectLast30Days();
         waitExecuter.sleep(2000);
         // Select cluster
         test.log(LogStatus.INFO, "Select clusterid : " + clusterId);
@@ -92,7 +91,8 @@ public class TC_HIVE_44 extends BaseClass {
                 String[] getCopiedText = data.split(":");
                 LOGGER.info("Search by ID - " + getCopiedText[2]);
                 applicationsPageObject.globalSearchBox.sendKeys(getCopiedText[2]);
-                applicationsPageObject.globalSearchBox.sendKeys(Keys.ENTER);
+                waitExecuter.sleep(1000);
+                applicationsPageObject.searchIcon.click();
                 waitExecuter.sleep(1000);
             } catch (HeadlessException | UnsupportedFlavorException | IOException e) {
                 // TODO Auto-generated catch block
@@ -110,17 +110,26 @@ public class TC_HIVE_44 extends BaseClass {
                     "On searching by ID the table contains more than 1 row. " + value);
             test.log(LogStatus.PASS, "On searching by ID the table contains 1 row.");
             waitExecuter.sleep(1000);
+            driver.navigate().back();
+            waitExecuter.sleep(1000);
+            driver.navigate().refresh();
+            // Reset the application filter
+            test.log(LogStatus.INFO, "Reset the application filter");
+            allApps.reset();
         } else {
             Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
                     "The clusterId does not have any application under it and also does not display 'No Data Available' for it"
                             + clusterId);
             test.log(LogStatus.SKIP, "The clusterId does not have any application under it.");
+            waitExecuter.sleep(1000);
+            driver.navigate().back();
+            waitExecuter.sleep(1000);
+            driver.navigate().refresh();
+            // Reset the application filter
+            test.log(LogStatus.INFO, "Reset the application filter");
+            allApps.reset();
             throw new SkipException("The clusterId does not have any application under it");
         }
-        // Reset the application filter
-        test.log(LogStatus.INFO, "Reset the application filter");
-        LOGGER.info("Reset the application filter");
-        applicationsPageObject.resetButton.click();
-        waitExecuter.sleep(2000);
+
     }
 }

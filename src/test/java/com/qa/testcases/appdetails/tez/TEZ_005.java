@@ -68,7 +68,7 @@ public class TEZ_005 extends BaseClass {
             LOGGER.severe("No Tez Application present in the " + clusterId + " cluster for the time span " +
                     "of 90 days");
             //Close apps details page
-            MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
+            MouseActions.clickOnElement(driver, tezApps.homeTab);
         }
     }
 }

@@ -12,6 +12,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @Marker.All
@@ -37,7 +38,7 @@ public class TC_CTP_06 extends BaseClass {
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
-        datePicker.selectLast60Days();
+        datePicker.selectLast30Days();
         waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
@@ -83,11 +84,14 @@ public class TC_CTP_06 extends BaseClass {
                 + workloadPageObject.timerangeMessageElement.stream()
                 .filter(WebElement::isDisplayed).findFirst().get().getText());
 
-        workload.clickOnHourDay();
-        waitExecuter.sleep(1000);
+        if(workload.clickOnHourDay()){
+        waitExecuter.sleep(3000);
         test.log(LogStatus.PASS, "Verify View By Hour/Day :-"
                 + workloadPageObject.viewByHourDay.isDisplayed());
-
+       }
+        else{
+        test.log(LogStatus.FAIL, "Test Failed Verify View By Hour/Day");
+    }
 
     }
 }

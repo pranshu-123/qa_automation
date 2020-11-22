@@ -45,5 +45,11 @@ public class TuningPageObject {
     @FindBy(xpath = "//select[contains(@class,'schedule-days')]")
     public WebElement scheduleToRun;
 
+    @FindBy(xpath = "//input[@type='email']")
+    public WebElement email;
+
+    @FindBy(xpath = "//input[@type='email']/following-sibling::span")
+    public WebElement addEmail;
+
     public TuningPageObject(WebDriver driver){PageFactory.initElements(driver,this);}
 }

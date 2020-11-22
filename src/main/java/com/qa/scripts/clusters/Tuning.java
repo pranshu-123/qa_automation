@@ -13,7 +13,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -78,7 +77,15 @@ public class Tuning {
 
     public void createScheduleWithName(String name){
         waitExecuter.waitUntilElementPresent(tuningPageObject.scheduleName);
-        userActions.performActionWithPolling(tuningPageObject.scheduleName, UserAction.SEND_KEYS,name);
+        userActions.performActionWithPolling(tuningPageObject.scheduleName, UserAction.SEND_KEYS, name);
+    }
+
+    public void createScheduleWithNameAndEmail(String name, String email){
+        waitExecuter.waitUntilElementPresent(tuningPageObject.scheduleName);
+        userActions.performActionWithPolling(tuningPageObject.scheduleName, UserAction.SEND_KEYS, name);
+        userActions.performActionWithPolling(tuningPageObject.email, UserAction.SEND_KEYS, email);
+        waitExecuter.waitUntilElementPresent(tuningPageObject.addEmail);
+        MouseActions.clickOnElement(driver, tuningPageObject.addEmail);
     }
 
     public void createSchedule(Map<String, String> scheduleMap ){

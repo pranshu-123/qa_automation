@@ -12,13 +12,13 @@ import java.util.logging.Logger;
 
 @Marker.Tuning
 @Marker.All
-public class TC_CTR_08 extends BaseClass {
-    private static final Logger LOGGER = Logger.getLogger(TC_CTR_08.class.getName());
+public class TC_CTR_09 extends BaseClass {
+    private static final Logger LOGGER = Logger.getLogger(TC_CTR_09.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateTuningScheduleRun (String clusterId) {
-        test = extent.startTest("TC_CTR_08.validateTuningScheduleWithSpecialCharAndNum: " + clusterId,
-                "Verify schedule to run tab is working as expected.");
+    public void validateTuningScheduleWithEmail (String clusterId) {
+        test = extent.startTest("TC_CTR_09.validateTuningScheduleWithEmail: " + clusterId,
+                "Verify in mail id accepts all the combination");
         test.assignCategory(" Cluster - Tuning ");
         LOGGER.info("Passed Parameter Is : " + clusterId);
 
@@ -35,9 +35,14 @@ public class TC_CTR_08 extends BaseClass {
         Tuning tuning = new Tuning(driver);
         tuning.clickOnScheduleButton();
         test.log(LogStatus.INFO, "Clicked on Schedule Button");
-
-        tuning.verifyScheduleToRun();
-        test.log(LogStatus.PASS, "Verified schedule to run.");
+        String scheduleName = "testScheduleWithEmail";
+        String scheduleEmail = "test@email.com";
+        tuning.createScheduleWithNameAndEmail(scheduleName,scheduleEmail);
+        tuning.clickOnModalScheduleButton();
+        test.log(LogStatus.INFO, "Clicked on modal Schedule Button");
+        String scheduleSuccessMsg = "The report has been scheduled successfully.";
+        tuning.verifyScheduleSuccessMsg(scheduleSuccessMsg);
+        test.log(LogStatus.PASS, "Verified schedule with email.");
 
     }
 }

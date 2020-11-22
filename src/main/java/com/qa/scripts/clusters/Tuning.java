@@ -10,9 +10,11 @@ import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -100,4 +102,18 @@ public class Tuning {
                 "message mismatch");
     }
 
+    public void verifyScheduleToRun(){
+        List<String> expectedSchedule = Arrays.asList("Daily","Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
+                "Friday","Saturday","Every 2 Weeks","Every Month");
+        waitExecuter.waitUntilElementPresent(tuningPageObject.scheduleToRun);
+        Select scheduleTorunDropDown = new Select(tuningPageObject.scheduleToRun);
+        List <WebElement> elementScheduleTorunDropDown = scheduleTorunDropDown.getOptions();
+        if(elementScheduleTorunDropDown.size() > 0 ){
+            for(int i=0; i<elementScheduleTorunDropDown.size(); i++){
+                WebElement e = elementScheduleTorunDropDown.get(i);
+                LOGGER.info("Schedule date: "+ e.getText());
+                Assert.assertEquals(e.getText().trim(), expectedSchedule.get(i), "Mismatch in schedule run date.");
+            }
+        }
+    }
 }

@@ -42,5 +42,8 @@ public class TuningPageObject {
     @FindBy(xpath = "//div[@class='task-runner-ht']/section/span[2]/a")
     public WebElement scheduleSuccessMsgClickHere;
 
+    @FindBy(xpath = "//select[contains(@class,'schedule-days')]")
+    public WebElement scheduleToRun;
+
     public TuningPageObject(WebDriver driver){PageFactory.initElements(driver,this);}
 }

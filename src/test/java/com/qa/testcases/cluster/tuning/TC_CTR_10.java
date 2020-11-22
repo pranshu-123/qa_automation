@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.tuning;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.scripts.clusters.Tuning;
@@ -7,11 +8,12 @@ import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.annotations.Test;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
+@Marker.Tuning
+@Marker.All
 public class TC_CTR_10  extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_CTR_10.class.getName());
 

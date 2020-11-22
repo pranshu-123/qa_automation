@@ -88,6 +88,16 @@ public class Tuning {
         MouseActions.clickOnElement(driver, tuningPageObject.addEmail);
     }
 
+    public void createScheduleWithNameAndMultiEmail(String name, List<String> multiEmail){
+        waitExecuter.waitUntilElementPresent(tuningPageObject.scheduleName);
+        userActions.performActionWithPolling(tuningPageObject.scheduleName, UserAction.SEND_KEYS, name);
+        for(String email: multiEmail){
+            userActions.performActionWithPolling(tuningPageObject.email, UserAction.SEND_KEYS, email);
+            waitExecuter.waitUntilElementPresent(tuningPageObject.addEmail);
+            MouseActions.clickOnElement(driver, tuningPageObject.addEmail);
+        }
+    }
+
     public void createSchedule(Map<String, String> scheduleMap ){
         for(Map.Entry<String, String> e: scheduleMap.entrySet()){
             if(e.getKey().equalsIgnoreCase("NAME")) {

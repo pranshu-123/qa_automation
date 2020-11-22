@@ -25,6 +25,7 @@ public class MarkerConstants {
   public static final String APP_DETAILS_IMPALA = "app_details_impala";
   public static final String APP_DETAILS_SPARK = "app_details_spark";
   public static final String APP_DETAILS_TEZ = "app_details_tez";
+  public static final String APP_DETAILS_MR = "app_details_mr";
   public static final String INEFFICIENT_APPS = "inefficient_apps";
   public static final String YARN_CHARGEBACK = "yarn_chargeback";
   public static final String YARN_RESOURCES = "yarn_resources";
@@ -58,6 +59,7 @@ public class MarkerConstants {
     map.put(APP_DETAILS_IMPALA, Marker.AppDetailsImpala.class);
     map.put(APP_DETAILS_SPARK, Marker.AppDetailsSpark.class);
     map.put(APP_DETAILS_TEZ, Marker.AppDetailsTez.class);
+    map.put(APP_DETAILS_MR, Marker.AppDetailsMr.class);
     map.put(INEFFICIENT_APPS, Marker.InefficientApps.class);
     map.put(YARN_CHARGEBACK, Marker.YarnChargeback.class);
     map.put(YARN_RESOURCES, Marker.YarnResources.class);

@@ -2,7 +2,6 @@ package com.qa.scripts.appdetails;
 
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.MrAppsDetailsPageObject;
-import com.qa.pagefactory.appsDetailsPage.TezAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.jobs.applications.AllApps;
@@ -292,55 +291,6 @@ public class MrAppsDetailsPage {
         }
     }
 
-    /**
-     * Method to verify the summary tabs in the right pane of the App Details page
-     */
-    public String verifyDagTabs(MrAppsDetailsPageObject mrApps, String verifyTabName, ExtentTest test) {
-
-        List<WebElement> appsTabList = mrApps.appSummaryTabs;
-        verifyAssertFalse(appsTabList.isEmpty(), mrApps, "No Tabs loaded");
-        String tabName = "";
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.pollingEvery(Duration.ofMillis(10));
-
-        for (int i = 0; i < appsTabList.size(); i++) {
-            tabName = appsTabList.get(i).getText();
-            LOGGER.info("Validating tab " + tabName);
-            if (tabName.equals(verifyTabName)) {
-                switch (verifyTabName) {
-                    case "Analysis":
-                        validateAnalysisTab(mrApps);
-                        test.log(LogStatus.PASS, "Analysis tab is populated");
-                        break;
-                    case "Resources":
-                        MouseActions.clickOnElement(driver, appsTabList.get(i));
-                        waitExecuter.sleep(3000);
-                        validateResourcesTab(mrApps);
-                        break;
-                    case "Diagnostics":
-                        MouseActions.clickOnElement(driver, appsTabList.get(i));
-                        waitExecuter.sleep(3000);
-                        validateErrorsTab(mrApps);
-                        test.log(LogStatus.PASS, "Errors tab is populated");
-                        break;
-                    case "Tags":
-                        MouseActions.clickOnElement(driver, appsTabList.get(i));
-                        waitExecuter.sleep(3000);
-                        String tagValue = validateTagsTab(mrApps);
-                        test.log(LogStatus.PASS, "Tags tab is populated");
-                        return tagValue;
-                    //  break;
-                    case "Configuration":
-                        MouseActions.clickOnElement(driver, appsTabList.get(i));
-                        waitExecuter.sleep(3000);
-                        validateTimingTab(mrApps);
-                }
-                break;
-            }
-        }
-        return "";
-    }
-
 
     /**
      * Method to verify the summary tabs in the right pane of the App Details page
@@ -418,84 +368,6 @@ public class MrAppsDetailsPage {
         }
     }
 
-
-    /**
-     * Method to verify if the component tabs like navigation | Gantt chart | jobs is present
-     * and contains data if job count is > 0
-     * if validateCompData = true validate each component tab data
-     * if validateExecutorTab = true validate jobs execution tabs data.
-     */
-    public void verifyAppsComponent(MrAppsDetailsPageObject mrApps, Boolean validateCompData,
-                                    Boolean validateExecutorTab, Boolean validateStageTab) {
-        List<WebElement> componentList = mrApps.component_element;
-        LOGGER.info("ComponentList is " + componentList.size());
-        int navigationRows = 0;
-        String tabName = "";
-        for (int j = 0; j < componentList.size(); j++) {
-            if (j != 3)
-                tabName = componentList.get(j).getText();
-            switch (j) {
-                case 0:
-                    Assert.assertEquals(tabName, "Navigation", "Navigation tab not present");
-                    List<WebElement> navigationRowList = mrApps.navigationTableRows;
-                    navigationRows = navigationRowList.size();
-                    LOGGER.info("Navigation Rows are " + navigationRows);
-                    if (validateCompData) {
-                        List<WebElement> headerList = mrApps.navigationHeaders;
-                        Assert.assertFalse(headerList.isEmpty(), "No headers for Navigation table for application");
-                        for (int i = 0; i < headerList.size(); i++) {
-                            LOGGER.info("The header is " + headerList.get(i).getText());
-                            Assert.assertNotSame("", headerList.get(i).getText());
-                        }
-                        if (navigationRows > 0) {
-                            for (int rows = 1; rows <= navigationRows; rows++) {
-                                for (int col = 1; col <= headerList.size(); col++) {
-                                    String data = driver.findElement(By.xpath("//*[@id='appNavigation-body']/" +
-                                            "tr[" + rows + "]/td[" + col + "]/span")).getText();
-                                    LOGGER.info("The data is " + data);
-                                    Assert.assertNotSame("", data);
-                                }
-                            }
-                        }
-                    }
-                    validateStageAndStageData(navigationRows, navigationRowList, mrApps, validateExecutorTab, validateStageTab);
-                    break;
-                case 1:
-                    //The component is Gantt Chart ,click it and then verify the no. rows in the table
-                    Assert.assertEquals(tabName, "Gantt Chart", "Gantt Chart tab not present");
-                    MouseActions.clickOnElement(driver, componentList.get(j));
-                    List<WebElement> ganttChartTableRows = mrApps.ganttChartTable;
-                    LOGGER.info("No. of rows in Gantt Chart tables are " + ganttChartTableRows.size());
-                    if (validateCompData) {
-                        List<WebElement> headerList = mrApps.ganttChartHeaders;
-                        verifyAssertFalse(headerList.isEmpty(), mrApps, " No headers for Gantt Chart table for application");
-                        for (int i = 0; i < headerList.size(); i++) {
-                            LOGGER.info("The header is " + headerList.get(i).getText());
-                            Assert.assertNotSame("", headerList.get(i).getText());
-                        }
-                        if (ganttChartTableRows.size() > 0) {
-                            for (int rows = 0; rows < ganttChartTableRows.size(); rows++) {
-                                String jobId = mrApps.ganttChartJobId.get(rows).getText();
-                                String startTime = mrApps.ganttChartStartTime.get(rows).getText();
-                                String duration = mrApps.ganttChartDuration.get(rows).getText();
-                                LOGGER.info("Duration = " + duration + " JobId = " + jobId + " starttime = " + startTime);
-                                Assert.assertNotSame("", jobId, "Value for jobId missing");
-                                Assert.assertNotSame("", startTime, "Value for startTime missing");
-                                Assert.assertNotSame("", duration, "Value for duration missing");
-                            }
-                        }
-                    }
-                    break;
-                case 2:
-                    Assert.assertEquals(tabName, navigationRows + " Jobs", "Jobs text not present");
-                    String[] jobCountArr = componentList.get(j).getText().split("\\s+");
-                    int jobCnt = Integer.parseInt(jobCountArr[0]);
-                    Assert.assertEquals(jobCnt, navigationRows, "JobCnt and navigation rows donot match");
-                    LOGGER.info("JobCount is " + jobCnt);
-                    break;
-            }
-        }
-    }
 
     /**
      * Method to validate the header app details page and DAG.

@@ -47,24 +47,6 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[4]/div")
     public WebElement getAppid;
 
-    @FindBy(xpath = "//*[name()='g' and contains(@class,'highcharts-spline-series')]//*[name()='path' and @class='highcharts-graph']")
-    public WebElement streamingLineChart;
-
-    @FindBy(xpath = "//*[name()='g']/*[name()='rect' and @class='highcharts-navigator-mask-inside']")
-    public WebElement streamingWaveChart;
-
-    @FindBy(xpath = "//*[@id='spark-stream-leftpanel']/h3/b")
-    public WebElement completedBatchTitle;
-
-    @FindBy(xpath = "//*[@id='sparkStreamNavigation-head']/tr/th")
-    public List<WebElement> streamTableHeader;
-
-    @FindBy(xpath = "//*[@id='sparkStreamNavigation-body']/tr")
-    public List<WebElement> streamTableRows;
-
-    @FindBy(xpath = "//*[@id='app-filter-panel']/div[2]/div[2]/div/div[2]/p/label/span[2]")
-    public WebElement failedAppCnt;
-
 
     @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span/span")
     public WebElement getHeaderAppId;
@@ -75,12 +57,6 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//a[@href='#/clusters/overview']")
     public WebElement homeTab;
 
-    @FindBy(xpath = "//*[@id='app-prev-header']/b")
-    public WebElement ifAttemptPresent;
-
-    @FindBy(xpath = "//div[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0" +
-            " highcharts-tracker']/span")
-    public List<WebElement> numAttempts;
 
     @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[1]/div/div[1]/div[2]/h4/span")
     public List<WebElement> leftPaneKPIList;
@@ -116,60 +92,6 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id='appTagsTable']/thead//th")
     public List<WebElement> tagTableHeader;
 
-    @FindBy(xpath = "//*[@id='appTagsTable']/tbody/tr")
-    public List<WebElement> tagTableRows;
-
-    @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[2]/div[1]/div/div[2]/div/ul/li")
-    public List<WebElement> component_element;
-
-    @FindBy(xpath = "(//div[@class='timeline gantt-timeline pipeline row no-gutters'])")
-    public List<WebElement> ganttChartTable;
-
-    // (//div[contains(@class, 'gantt-timeline')])//div/p
-    @FindBy(xpath = "(//div[@class='timeline gantt-timeline pipeline row no-gutters'])//div/p")
-    public List<WebElement> ganttChartDuration;
-
-    @FindBy(xpath = "(//div[@class='timeline gantt-timeline pipeline row no-gutters'])//span[1]")
-    public List<WebElement> ganttChartJobId;
-
-    @FindBy(xpath = "(//div[@class='timeline gantt-timeline pipeline row no-gutters'])//span[2]")
-    public List<WebElement> ganttChartStartTime;
-
-    @FindBy(xpath = "//*[@id=\"tezllap-container\"]/div[1]/div[2]/h4/span[1]/text()")
-    public WebElement startTime;
-
-    @FindBy(xpath = "//*[@id=\"tezllap-container\"]/div[1]/div[2]/h4/span[2]/text()")
-    public WebElement EndTime;
-
-    @FindBy(xpath = "//*[@id=\"SummaryDetails\"]/div/div[1]/div[1]/div/h3")
-    public WebElement Duration;
-
-    @FindBy(xpath = "//*[@id=\"SummaryDetails\"]/div/div[2]/div[1]/div/h3")
-    public WebElement DataIO;
-
-    @FindBy(xpath = "//*[@id=\"highcharts-vjvb3sy-64\"]/svg/rect[1]")
-    public WebElement Dags;
-
-    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[1]/span[1]")
-    public WebElement Owner;
-
-    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[1]/span[2]")
-    public WebElement Cluster;
-
-    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[1]/span[3]")
-    public WebElement Queue;
-
-
-
-    @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[1]/div/div[2]/div/div/div/div[1]/div/p/b")
-    public List<WebElement> ganttChartHeaders;
-
-    @FindBy(xpath = "(//tbody[@id='appNavigation-body'])/tr")
-    public List<WebElement> navigationTableRows;
-
-    @FindBy(xpath = "(//thead[@id='appNavigation-head'])/tr/th")
-    public List<WebElement> navigationHeaders;
-
     @FindBy(xpath = "(//div[@id='app'])/div/div/div[1]/div[1]/span")
     public List<WebElement> rightPaneKpis;
 
@@ -193,26 +115,6 @@ public class MrAppsDetailsPageObject {
 
     @FindBy(xpath = "//*[@class='link-item']")
     public WebElement programSourceLinkText;
-
-    @FindBy(xpath = "//*[@id='app-query']/div[contains(@data-range,'31')]")
-    public WebElement programHighlightedLine;
-
-    // Configuration Tab xpaths
-
-    @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/p")
-    public WebElement configPropNum;
-
-    @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/div[2]/span")
-    public List<WebElement> configKeywords;
-
-    @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/span/div/a/span")
-    public WebElement resetButton;
-
-    @FindBy(xpath = " //*[@id='appConfiguration']//tbody/tr/td/p")
-    public List<WebElement> configPropKey;
-
-    @FindBy(xpath = " //*[@id='appConfiguration']//tbody/tr/td/span")
-    public List<WebElement> configPropValue;
 
     // Logs Tab xpaths
     @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[2]/div/div[2]/div[3]/div[1]/section/div/span")

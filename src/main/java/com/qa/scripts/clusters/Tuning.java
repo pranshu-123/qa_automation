@@ -1,10 +1,12 @@
 package com.qa.scripts.clusters;
 
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.CommonPageObject;
 import com.qa.pagefactory.clusters.TuningPageObject;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,6 +14,7 @@ import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 public class Tuning {
@@ -19,6 +22,7 @@ public class Tuning {
     private WaitExecuter waitExecuter;
     private TuningPageObject tuningPageObject;
     private static final Logger LOGGER = Logger.getLogger(Tuning.class.getName());
+    private UserActions userActions = new UserActions(driver);
 
     public Tuning(WebDriver driver) {
         this.driver = driver;
@@ -59,6 +63,41 @@ public class Tuning {
         } catch (TimeoutException te) {
             MouseActions.clickOnElement(driver, tuningPageObject.closeNewReport);
         }
+    }
+
+    public void clickOnScheduleButton() {
+        try {
+            MouseActions.clickOnElement(driver, tuningPageObject.scheduleButton);
+        } catch (TimeoutException te) {
+            MouseActions.clickOnElement(driver, tuningPageObject.scheduleButton);
+        }
+    }
+
+    public void createScheduleWithName(String name){
+        waitExecuter.waitUntilElementPresent(tuningPageObject.scheduleName);
+        userActions.performActionWithPolling(tuningPageObject.scheduleName, UserAction.SEND_KEYS,name);
+    }
+
+    public void createSchedule(Map<String, String> scheduleMap ){
+        for(Map.Entry<String, String> e: scheduleMap.entrySet()){
+            if(e.getKey().equalsIgnoreCase("NAME")) {
+                tuningPageObject.scheduleName.sendKeys(e.getValue());
+            }
+        }
+    }
+
+    public void clickOnModalScheduleButton(){
+        try {
+            MouseActions.clickOnElement(driver, tuningPageObject.modalScheduleButton);
+        } catch (TimeoutException te) {
+            MouseActions.clickOnElement(driver, tuningPageObject.modalScheduleButton);
+        }
+    }
+
+    public void verifyScheduleSuccessMsg(String successMsg){
+        waitExecuter.waitUntilElementPresent(tuningPageObject.scheduleSuccessMsg);
+        Assert.assertEquals(tuningPageObject.scheduleSuccessMsg.getText(), successMsg, "The Schedule success " +
+                "message mismatch");
     }
 
 }

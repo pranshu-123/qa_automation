@@ -48,7 +48,7 @@ public class TC_CTR_04 extends BaseClass {
         CommonPageObject commonPageObject = new CommonPageObject(driver);
         userActions.performActionWithPolling(commonPageObject.clusterDropdown, UserAction.CLICK);
         String[] expectedClusterOptions = {"tnode28-HDP315-TLS-Kerb-Ranger", "tnode3-CDH633-TLS-Kerb-Sentry", "tnode40-CDH5162"};
-        List<String> allClusters;
+        List<String> allClusters = null;
         if(commonPageObject.clustersList.size() > 0){
             //Get all clusters from UI
             allClusters = tuning.getClusterOptions(commonPageObject);

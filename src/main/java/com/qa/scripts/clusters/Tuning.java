@@ -1,5 +1,6 @@
 package com.qa.scripts.clusters;
 
+import com.qa.constants.PageConstants;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.CommonPageObject;
 import com.qa.pagefactory.clusters.TuningPageObject;
@@ -103,8 +104,7 @@ public class Tuning {
     }
 
     public void verifyScheduleToRun(){
-        List<String> expectedSchedule = Arrays.asList("Daily","Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
-                "Friday","Saturday","Every 2 Weeks","Every Month");
+        List<String> expectedSchedule = new ArrayList<>(Arrays.asList(PageConstants.TuningScheduleRun.SCHEDULE_RUN));
         waitExecuter.waitUntilElementPresent(tuningPageObject.scheduleToRun);
         Select scheduleTorunDropDown = new Select(tuningPageObject.scheduleToRun);
         List <WebElement> elementScheduleTorunDropDown = scheduleTorunDropDown.getOptions();

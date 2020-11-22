@@ -16,4 +16,9 @@ public class PageConstants {
         public static String[] STATUSTYPE = {"Killed", "Failed", "Running", "Success", "Pending", "Unknown", "Waiting"};
         public static String RUNNING = "running";
     }
+
+    public static class TuningScheduleRun {
+        public static String[] SCHEDULE_RUN = {"Daily","Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
+                "Friday","Saturday","Every 2 Weeks","Every Month"};
+    }
 }

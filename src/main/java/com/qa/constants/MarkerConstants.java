@@ -33,7 +33,7 @@ public class MarkerConstants {
   public static final String USER_REPORTS = "user_reports";
   public static final String MANAGE = "manage";
   public static final String REPORT_ARCHIEVE = "report_archieve";
-  public static final String SCHEDULED = "scheduled";
+  public static final String SCHEDULED = "reports_scheduled";
   public static final String APP_DETAILS_HIVE = "app_details_hive";
 
   /**

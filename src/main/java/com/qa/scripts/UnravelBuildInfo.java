@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.ExtentReports;
+import org.openqa.selenium.interactions.Actions;
 
 /*
  * @author - Ojasvi Pandey
@@ -32,9 +33,12 @@ public class UnravelBuildInfo {
 		WaitExecuter wait = new WaitExecuter(driver);
 		SubTopPanelModulePageObject topPanel = new SubTopPanelModulePageObject(driver);
 		Login login = new Login(driver);
+		Actions builder = new Actions(driver);
 		LOGGER.info("Loging to app to get build info");
 		login.loginToApp();
 		LOGGER.info("Click on about button");
+		wait.sleep(3000);
+		builder.moveToElement(topPanel.supportList).perform();
 		actions.performActionWithPolling(topPanel.aboutInfo, UserAction.CLICK);
 		String versionDetails = topPanel.versionInfo.getText();
 		List<String> list = new ArrayList<String>();

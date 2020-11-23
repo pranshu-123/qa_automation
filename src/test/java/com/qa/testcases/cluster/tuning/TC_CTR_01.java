@@ -25,7 +25,7 @@ public class TC_CTR_01 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void validateTuningReportGenerated(String clusterId) {
-        test = extent.startTest("TC_CTR_01.validateTuningReportGenerated", "Verify cluster tuning " +
+        test = extent.startTest("TC_CTR_01.validateTuningReportGenerated: "+ clusterId, "Verify cluster tuning " +
                 "report is generated for default filters");
         test.assignCategory(" Cluster - Tuning ");
         LOGGER.info("Passed Parameter Is : " + clusterId);
@@ -38,6 +38,7 @@ public class TC_CTR_01 extends BaseClass {
         waitExecuter.sleep(3000);
         MouseActions.clickOnElement(driver, topPanelPageObject.tuningTab);
         LOGGER.info("Clicked on Tuning Tab");
+        test.log(LogStatus.INFO, "Clicked on Tuning Tab");
 
         TuningPageObject tuningPageObject = new TuningPageObject(driver);
 
@@ -48,12 +49,14 @@ public class TC_CTR_01 extends BaseClass {
         homePage.selectMultiClusterId(clusterId);
         tuning.clickOnModalRunButton();
         LOGGER.info("Clicked on Run Button");
+        test.log(LogStatus.INFO, "Clicked on Run Button");
+
         waitExecuter.waitUntilElementPresent(tuningPageObject.runButton);
         waitExecuter.waitUntilElementClickable(tuningPageObject.runButton);
 
         try {
             waitExecuter.waitUntilTextToBeInWebElement(tuningPageObject.confirmationMessageElement,
-                    "Tuning Report completed successfully.");
+                    "Cluster Tuning completed successfully.");
             test.log(LogStatus.PASS, "Verified Tuning report is loaded properly.");
             LOGGER.info("Verified Tuning report is loaded properly.");
         } catch (TimeoutException te) {

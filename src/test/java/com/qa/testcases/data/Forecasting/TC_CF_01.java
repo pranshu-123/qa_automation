@@ -21,7 +21,7 @@ public class TC_CF_01 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void validateForecastingReportGenerated(String clusterId) {
-        test = extent.startTest("TC_CF_01.validateForecastingReportGenerated", "Verify User is able " +
+        test = extent.startTest("TC_CF_01.validateForecastingReportGenerated: "+ clusterId, "Verify User is able " +
                 "to trigger a new report or cancel the selection");
         test.assignCategory(" Data - Forecasting ");
         LOGGER.info("Passed Parameter Is : " + clusterId);
@@ -32,6 +32,7 @@ public class TC_CF_01 extends BaseClass {
         waitExecuter.sleep(2000);
         MouseActions.clickOnElement(driver, topPanelComponentPageObject.data);
         LOGGER.info("Clicked on Data Tab");
+        test.log(LogStatus.INFO, "Clicked on Data Tab");
 
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
         waitExecuter.waitUntilElementPresent(topPanelPageObject.dataForecastingTab);
@@ -40,6 +41,7 @@ public class TC_CF_01 extends BaseClass {
         waitExecuter.sleep(3000);
         MouseActions.clickOnElement(driver, topPanelPageObject.dataForecastingTab);
         LOGGER.info("Clicked on Forecasting Tab");
+        test.log(LogStatus.INFO, "Clicked on Forecasting Tab");
 
         ForecastingPageObject forecastingPageObject = new ForecastingPageObject(driver);
 
@@ -47,12 +49,15 @@ public class TC_CF_01 extends BaseClass {
         forecasting.closeConfirmationMessageNotification();
         forecasting.clickOnRunButton();
         LOGGER.info("Clicked on Run Button");
+        test.log(LogStatus.INFO, "Clicked on Run Button");
 
         String forecastingNoOfDays = "2";
         forecasting.setForecastingDays(forecastingNoOfDays);
         LOGGER.info("Set Forecasting days as: "+ forecastingNoOfDays);
+        test.log(LogStatus.INFO, "Set Forecasting days as: "+ forecastingNoOfDays);
         forecasting.clickOnModalRunButton();
         LOGGER.info("Clicked on Modal Run Button");
+        test.log(LogStatus.INFO, "Clicked on Modal Run Button");
         waitExecuter.waitUntilElementPresent(forecastingPageObject.runNowButton);
         waitExecuter.waitUntilElementClickable(forecastingPageObject.runNowButton);
 

@@ -21,8 +21,8 @@ public class TC_CF_02 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void validateCanceledForecastingReport(String clusterId) {
-        test = extent.startTest("TC_CF_02.validateCanceledForecastingReport", "Verify User is able to" +
-                "clicks on \"Cancel\" button and the Mini Window should close ");
+        test = extent.startTest("TC_CF_02.validateCanceledForecastingReport: "+ clusterId,
+                "Verify User is able to clicks on \"Cancel\" button and the Mini Window should close ");
         test.assignCategory(" Data - Forecasting ");
         LOGGER.info("Passed Parameter Is : " + clusterId);
 
@@ -40,6 +40,7 @@ public class TC_CF_02 extends BaseClass {
         waitExecuter.sleep(3000);
         MouseActions.clickOnElement(driver, topPanelPageObject.dataForecastingTab);
         LOGGER.info("Clicked on Forecasting Tab");
+        test.log(LogStatus.INFO, "Clicked on Forecasting Tab");
 
         ForecastingPageObject forecastingPageObject = new ForecastingPageObject(driver);
 
@@ -51,17 +52,22 @@ public class TC_CF_02 extends BaseClass {
         LOGGER.info("Previous report generated data: "+previousReportData);
         forecasting.clickOnRunButton();
         LOGGER.info("Clicked on Run Button");
+        test.log(LogStatus.INFO, "Clicked on Run Button");
 
         String forecastingNoOfDays = "2";
         forecasting.setForecastingDays(forecastingNoOfDays);
         LOGGER.info("Set Forecasting days as: "+ forecastingNoOfDays);
+        test.log(LogStatus.INFO, "Set Forecasting days as: "+ forecastingNoOfDays);
         forecasting.clickOnModalRunButton();
         LOGGER.info("Clicked on Modal Run Button");
+        test.log(LogStatus.INFO, "Clicked on Modal Run Button");
         forecasting.clickOnCancelButton();
+        test.log(LogStatus.INFO, "Clicked on CancelButton");
 
         //Get the previous report data generated
         String reportDataAfterCancelled = forecasting.getReportData();
         LOGGER.info("Report generated data after cancelled: "+reportDataAfterCancelled);
+        test.log(LogStatus.INFO, "Report generated data after cancelled: "+reportDataAfterCancelled);
 
         //Validate both the report data
         Assert.assertEquals(previousReportData, reportDataAfterCancelled);

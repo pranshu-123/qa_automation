@@ -87,8 +87,14 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "(//*[@role='dialog'])")
   public WebElement viewReportDialogWin;
 
+  @FindBy(xpath = "//*[@class='base-modal-backdrop']//tr")
+  public List<WebElement> moreInfoTableRows;
+
   @FindBy(xpath = "(//*[@class='icon-expand is-enabled'])[1]")
   public WebElement viewReportIcon;
+
+  @FindBy(xpath = "(//*[@class='icon-edit is-enabled'])[1]")
+  public WebElement editReportIcon;
 
   @FindBy(xpath = "(//*[@class='icon-delete is-enabled'])[1]")
   public WebElement deleteReportIcon;
@@ -132,13 +138,21 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
   public WebElement successfulMsgBanner;
 
+  @FindBy(xpath = "//*[@class=\"icon-x\"]")
+  public WebElement closeBanner;
+
   @FindBy(xpath = "//div[contains(@class,'component-section-header')]/h2")
   public WebElement latestReportHeader;
 
   @FindBy(xpath = "//*[@class='close pointer']")
   public WebElement closeTab;
 
-  //*[@class="modal-body"]
+  @FindBy(xpath = "//*[@class='text-white']")
+  public WebElement moreInfoHeader;
+
+  @FindBy(xpath = "//*[@class='modal-body']")
+  public WebElement moreInfoWin;
+
   @FindBy(xpath = "//select[contains(@class, 'form-control')]")
   public WebElement scheduledReportFormControl;
 

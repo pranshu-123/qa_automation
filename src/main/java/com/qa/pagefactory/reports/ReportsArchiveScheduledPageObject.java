@@ -12,8 +12,26 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//div[contains(@class,'component-section-header')]")
   public WebElement reportArchiveHeader;
 
+  @FindBy(xpath = "//*[@class=\"select2-selection__arrow\"]")
+  public WebElement scheduleReportDropDown;
+
+  @FindBy(xpath = "//*[@class=\"select2-results__options\"]/li")
+  public List<WebElement> dropDownList;
+
+  @FindBy(xpath = "//*[@id=\"app\"]/div/div[1]/nav/ul[1]/li[4]/ul/li[2]/span")
+  public WebElement scheduledPage;
+
   @FindBy(xpath = "//div[contains(@class,'component-section-header')]")
   public WebElement scheduledReportsHeader;
+
+  @FindBy(xpath = "//*[@class=\"col-md-12\"]//tbody/tr/td[1]")
+  public List<WebElement> scheduleName;
+
+  @FindBy(xpath = "//*[@class=\"col-md-12\"]//tbody/tr/td[2]")
+  public List<WebElement> scheduleReport;
+
+  @FindBy(xpath = "//*[@class=\"col-md-12\"]//tbody/tr/td[4]")
+  public List<WebElement> scheduleActions;
 
   @FindBy(xpath = "//table/tbody/tr")
   public List<WebElement> tableRows;
@@ -29,6 +47,12 @@ public class ReportsArchiveScheduledPageObject {
 
   @FindBy(xpath = "//table/tbody/tr/td[2]/span")
   public List<WebElement> reportCnt;
+
+  @FindBy(xpath = "//table/tbody/tr/td[2]/span")
+  public List<WebElement> reportType;
+
+  @FindBy(xpath = "//table/tbody/tr/td[3]/span")
+  public List<WebElement> nextScheduledRun;
 
   @FindBy(xpath = "//*[contains(@class,'status-btn')]")
   public List<WebElement> reportStatus;
@@ -93,14 +117,14 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//*[@class='select2-selection__rendered']")
   public List<WebElement> topXtextFields;
 
-  @FindBy(xpath = "//*[@class='select2-results__options']/li[2]")
+  @FindBy(xpath = "//*[@class='select2-results__options']/li[1]")
   public WebElement topXFieldValue;
 
   @FindBy(xpath = "//*[@class='tag-checkbox']")
   public List<WebElement> checkBoxSelections;
 
   @FindBy(xpath = "//table/thead/tr/th[7]/label")
-  public WebElement cloudMappingChkBox ;
+  public WebElement cloudMappingChkBox;
 
   @FindBy(xpath = "//*[@class='tag-list']/span")
   public WebElement tagListFields;
@@ -113,6 +137,34 @@ public class ReportsArchiveScheduledPageObject {
 
   @FindBy(xpath = "//*[@class='close pointer']")
   public WebElement closeTab;
+
+  //*[@class="modal-body"]
+  @FindBy(xpath = "//select[contains(@class, 'form-control')]")
+  public WebElement scheduledReportFormControl;
+
+  @FindBy(xpath = "//select[contains(@class, 'form-control')]/option")
+  public List<WebElement> formControlOptions;
+
+  @FindBy(xpath = "//table[contains(@class, 'component-data-tables')]")
+  public WebElement formControlTable;
+
+  @FindBy(xpath = "//table[contains(@class, 'component-data-tables')]//tr//td/span[contains(@class,'icon-edit')]")
+  public WebElement iconEdit;
+
+  @FindBy(xpath = "//table[contains(@class, 'component-data-tables')]//tr//td/span[contains(@class,'icon-delete')]")
+  public WebElement iconDelete;
+
+  @FindBy(xpath = "//div[contains(@class,'component-cta')]/a/span")
+  public WebElement saveScheduleButton;
+
+  @FindBy(xpath = "//span[contains(@class,'glyphicon')]")
+  public List<WebElement> glyphiconPointers;
+
+  @FindBy(xpath = "//*[@class=\"col-md-2\"]/b")
+  public List<WebElement> scheduledReportFields;
+
+  @FindBy(xpath = "//*[@class='pointer close right']")
+  public WebElement scheduledReportcloseTab;
 
   @FindBy(xpath = "//*[@id='topx-param-tbl']/tbody/tr/td[2]")
   public List<WebElement> latestReportTableContent;

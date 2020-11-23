@@ -5,6 +5,7 @@ import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,6 +34,86 @@ public class ReportsArchiveSchedulePage {
   public ReportsArchiveSchedulePage(WebDriver driver) {
     waitExecuter = new WaitExecuter(driver);
     this.driver = driver;
+  }
+
+  /**
+   * Method to validate the Schedule report Page drop down list
+   */
+  public void validateScheduleReportDropDown(ReportsArchiveScheduledPageObject reportPageObj) {
+    waitExecuter.sleep(1000);
+    MouseActions.clickOnElement(driver, reportPageObj.scheduleReportDropDown);
+    waitExecuter.sleep(1000);
+    List<WebElement> dropDownList = reportPageObj.dropDownList;
+    Assert.assertFalse(dropDownList.isEmpty(), "There are no reports in the drop down list as it is empty");
+    boolean isContainsAllOpt = false;
+    int otherReportTotal = 0;
+    int totalReports = 0;
+    logger.info("The dropDownlist size = " + dropDownList.size());
+    for (int i = 0; i < dropDownList.size(); i++) {
+      String reportType = dropDownList.get(i).getText();
+      logger.info("reportType = " + reportType);
+      if (dropDownList.get(i).getText().contains("All")) {
+        MouseActions.clickOnElement(driver, dropDownList.get(i));
+        isContainsAllOpt = true;
+        totalReports = getReportCnt(reportPageObj, 15);
+      } else {
+        logger.info("Click on reportType: " + reportType);
+        MouseActions.clickOnElement(driver, dropDownList.get(i));
+        waitExecuter.sleep(1000);
+        otherReportTotal += getReportCnt(reportPageObj, 15);
+        logger.info("The other report cnt is " + otherReportTotal);
+      }
+      MouseActions.clickOnElement(driver, reportPageObj.scheduleReportDropDown);
+      waitExecuter.sleep(1000);
+    }
+    Assert.assertTrue(isContainsAllOpt, "There is no option 'All' in the dropdown list of size"
+        + dropDownList.size() + " for Scheduled reports");
+    logger.info("Total Report Cnt = " + totalReports + "\n Other Report Cnt = " + otherReportTotal);
+    Assert.assertEquals(totalReports, otherReportTotal, "All report types are not present in the dropdown list");
+  }
+
+  public int getReportCnt(ReportsArchiveScheduledPageObject reportPageObj, Integer rowCnt) {
+    int totalCnt = 0;
+    List<WebElement> rowList = null;
+    List<WebElement> reportTypeList = reportPageObj.reportCnt;
+    Assert.assertFalse(reportTypeList.isEmpty(), " The report type column is empty");
+    logger.info("The report type count is " + reportTypeList.size());
+    if (reportTypeList.size() > 10) {
+      String pageCntStr = reportPageObj.reportCntPerPage.getText().trim();
+      logger.info("The pageCnt is " + pageCntStr);
+      //output= Page: of 173
+      int pageCnt = Integer.parseInt(pageCntStr.split("\\s+")[2]);
+      logger.info("The integer page count is " + pageCnt);
+      //Per page there are 10 rows , multiply 10 x pageCnt - 1, click the forward caret and go tot the
+      // last page,cnt the last page row cnt and add it to the total
+      totalCnt = rowCnt * (pageCnt - 1);
+      MouseActions.clickOnElement(driver, reportPageObj.fwdCaretReportCnt);
+      waitExecuter.sleep(2000);
+      rowList = reportPageObj.tableRows;
+      totalCnt += rowList.size();
+      logger.info("The total report cnt is " + totalCnt);
+    } else {
+      rowList = reportPageObj.tableRows;
+      totalCnt = rowList.size();
+    }
+    logger.info("The total number of reports are  " + totalCnt);
+    MouseActions.clickOnElement(driver, reportPageObj.backwardCaretReportCnt);
+    waitExecuter.sleep(2000);
+    return totalCnt;
+  }
+
+  /**
+   * Method to validate the Schedule report Page
+   */
+  public void validateScheduleReportPage(ReportsArchiveScheduledPageObject reportPageObj) {
+    List<WebElement> scheduleNameList = reportPageObj.scheduleName;
+    Assert.assertFalse(scheduleNameList.isEmpty(), "There are no schedule report name");
+    List<WebElement> scheduleReportList = reportPageObj.scheduleReport;
+    Assert.assertFalse(scheduleReportList.isEmpty(), "There are no schedule report");
+    List<WebElement> nextScheduleRunList = reportPageObj.nextScheduledRun;
+    Assert.assertFalse(nextScheduleRunList.isEmpty(), "There are no reports scheduled for next run");
+    List<WebElement> scheduleActionList = reportPageObj.scheduleActions;
+    Assert.assertFalse(scheduleActionList.isEmpty(), "There are no schedule actions");
   }
 
   /**
@@ -114,9 +195,10 @@ public class ReportsArchiveSchedulePage {
         }
         MouseActions.clickOnElement(driver, reportPageObj.backwardCaretReportCnt);
         waitExecuter.sleep(2000);
-        if (colName.equals("Name"))
-          sortByReportName(reportPageObj, expectedReportNameArr, reportAsceArr, reportDscArr, colList);
-        else if (colName.equals("Status"))
+        if (colName.equals("Name")) {
+          WebElement sortingIcon = reportPageObj.sortingReportNameIcon;
+          sortByReportName(reportPageObj, expectedReportNameArr, reportAsceArr, reportDscArr, colList, sortingIcon);
+        } else if (colName.equals("Status"))
           sortByStatus(reportPageObj, expectedReportNameArr, reportAsceArr, reportDscArr, colList);
         else {
           sortByCreatedCnt(reportPageObj, expectedReportNameArr, reportAsceArr, reportDscArr, colList);
@@ -130,9 +212,10 @@ public class ReportsArchiveSchedulePage {
         for (int j = 0; j < colList.size(); j++) {
           expectedReportNameArr.add(colList.get(j).getText().trim());
         }
-        if (colName.equals("Name"))
-          sortByReportName(reportPageObj, expectedReportNameArr, reportAsceArr, reportDscArr, colList);
-        else if (colName.equals("Status"))
+        if (colName.equals("Name")) {
+          WebElement sortingIcon = reportPageObj.sortingReportNameIcon;
+          sortByReportName(reportPageObj, expectedReportNameArr, reportAsceArr, reportDscArr, colList, sortingIcon);
+        } else if (colName.equals("Status"))
           sortByStatus(reportPageObj, expectedReportNameArr, reportAsceArr, reportDscArr, colList);
         else
           sortByCreatedCnt(reportPageObj, expectedReportNameArr, reportAsceArr, reportDscArr, colList);
@@ -151,6 +234,8 @@ public class ReportsArchiveSchedulePage {
     ArrayList<String> expectedReportNameArr = new ArrayList<>(), reportAsceArr = new ArrayList<>(), reportDscArr = new ArrayList<>();
     List<WebElement> reportNameList = reportPageObj.reportNames;
     List<WebElement> reportCntList = reportPageObj.reportCnt;
+    WebElement sortingIcon = reportPageObj.sortingReportNameIcon;
+    List<WebElement> sortByReportName = reportPageObj.reportNames;
     Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed , expected 9 reports");
     if (perReport) {
       validateSortForDiffReportCol(reportNameList, reportCntList, reportPageObj, "Name");
@@ -158,24 +243,58 @@ public class ReportsArchiveSchedulePage {
       for (int i = 0; i < reportNameList.size(); i++) {
         expectedReportNameArr.add(reportNameList.get(i).getText());
       }
-      sortByReportName(reportPageObj, expectedReportNameArr, reportAsceArr, reportDscArr, reportNameList);
+      sortByReportName(reportPageObj, expectedReportNameArr, reportAsceArr, reportDscArr, reportNameList,
+          sortingIcon);
     }
+  }
+
+  /**
+   * Method to validate the sorting option on Report Type for Scheduled Page
+   */
+  public void validateSortingOptionReportType(ReportsArchiveScheduledPageObject reportPageObj) {
+    ArrayList<String> expectedReportNameArr = new ArrayList<>(), reportAsceArr = new ArrayList<>(), reportDscArr = new ArrayList<>();
+    List<WebElement> reportTypeList = reportPageObj.reportType;
+    WebElement sortingIcon = reportPageObj.sortingReportCntIcon;
+    List<WebElement> sortByReportType = reportPageObj.reportType;
+    Assert.assertFalse(reportTypeList.isEmpty(), "There are no reports listed");
+    for (int i = 0; i < reportTypeList.size(); i++) {
+      expectedReportNameArr.add(reportTypeList.get(i).getText());
+    }
+    sortByReportName(reportPageObj, expectedReportNameArr, reportAsceArr, reportDscArr, reportTypeList,
+        sortingIcon);
+  }
+
+  /**
+   * Method to validate the sorting option on Next Scheduled Run for Scheduled Page
+   */
+  public void validateSortingOptionScheduledRun(ReportsArchiveScheduledPageObject reportPageObj) {
+    ArrayList<String> expectedReportNameArr = new ArrayList<>(), reportAsceArr = new ArrayList<>(), reportDscArr = new ArrayList<>();
+    List<WebElement> nextScheduledRunList = reportPageObj.nextScheduledRun;
+    WebElement sortingIcon = reportPageObj.sortingStatusIcon;
+    List<WebElement> sortByNextScheduledRun = reportPageObj.reportType;
+    Assert.assertFalse(nextScheduledRunList.isEmpty(), "There are no reports scheduled for net run");
+    for (int i = 0; i < nextScheduledRunList.size(); i++) {
+      expectedReportNameArr.add(nextScheduledRunList.get(i).getText());
+    }
+    sortByReportName(reportPageObj, expectedReportNameArr, reportAsceArr, reportDscArr, nextScheduledRunList, sortingIcon);
   }
 
   /**
    * Method to sort by Report name column
    */
   public void sortByReportName(ReportsArchiveScheduledPageObject reportPageObj, ArrayList<String> expectedReportNameArr,
-                               ArrayList<String> reportAsceArr, ArrayList<String> reportDscArr, List<WebElement> reportNameList) {
+                               ArrayList<String> reportAsceArr, ArrayList<String> reportDscArr,
+                               List<WebElement> reportNameList, WebElement sortingIcon) {
     //Sort the created arraylist in ascending order
     Collections.sort(expectedReportNameArr);
     ArrayList<String> newExpectedReportNameArr = new ArrayList<String>();
-    WebElement sortingIcon = reportPageObj.sortingReportNameIcon;
     MouseActions.clickOnElement(driver, sortingIcon);
-    List<WebElement> sortedReportNameList1 = reportPageObj.reportNames;
     Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed");
-    for (int s = 0; s < sortedReportNameList1.size(); s++) {
-      reportAsceArr.add(sortedReportNameList1.get(s).getText());
+    reportAsceArr.clear();
+    reportDscArr.clear();
+    for (int s = 0; s < reportNameList.size(); s++) {
+      reportAsceArr.add(reportNameList.get(s).getText());
+      logger.info("The ascending list is " + reportNameList.get(s).getText());
     }
     // Click again to reverse sort;
     MouseActions.clickOnElement(driver, sortingIcon);
@@ -183,9 +302,11 @@ public class ReportsArchiveSchedulePage {
     Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed ");
     for (int s = 0; s < sortedReportNameList2.size(); s++) {
       reportDscArr.add(sortedReportNameList2.get(s).getText());
+      logger.info("The descending list is " + sortedReportNameList2.get(s).getText());
     }
     for (int i = 0; i < reportDscArr.size(); i++) {
       newExpectedReportNameArr.add(expectedReportNameArr.get(i));
+      logger.info("The Actual list is " + expectedReportNameArr.get(i));
     }
     Assert.assertTrue(newExpectedReportNameArr.equals(reportAsceArr) || newExpectedReportNameArr.equals(reportDscArr),
         "The sorting for reportName is not working");
@@ -489,7 +610,7 @@ public class ReportsArchiveSchedulePage {
           MouseActions.clickOnElement(driver, reportPageObj.cloudMappingChkBox);
           waitExecuter.sleep(1000);
           MouseActions.clickOnElement(driver, reportPageObj.reportCreationRunButton);
-          waitExecuter.sleep(30000);
+          waitExecuter.sleep(40000);
           driver.navigate().refresh();
           status = reportStatusList.get(i).getText().trim();
           afterReportCnt = Integer.parseInt(reportCntList.get(i).getText().trim());
@@ -503,17 +624,14 @@ public class ReportsArchiveSchedulePage {
           MouseActions.clickOnElement(driver, newReportActionList.get(i));
           waitExecuter.sleep(2000);
           MouseActions.clickOnElement(driver, reportPageObj.reportCreationRunButton);
-          waitExecuter.sleep(30000);
+          waitExecuter.sleep(40000);
           status = reportStatusList.get(i).getText().trim();
           driver.navigate().refresh();
           afterReportCnt = Integer.parseInt(reportCntList.get(i).getText().trim());
           logger.info("Before cnt = " + beforeReportCnt + " After cnt = " + afterReportCnt);
       }
       Assert.assertEquals(expectedAfterCnt, afterReportCnt, " The report cnt do not match for report Name = " +
-            reportName + " with status = " + status + " \n Expected = " + expectedAfterCnt + " Actual = " + afterReportCnt);
-//      else
-//        Assert.assertEquals(beforeReportCnt, afterReportCnt, " The report cnt do not match for report Name = " +
-//            reportName + " with status = " + status + " \n Expected = " + beforeReportCnt + " Actual = " + afterReportCnt);
+          reportName + " with status = " + status + " \n Expected = " + expectedAfterCnt + " Actual = " + afterReportCnt);
     }
   }
 
@@ -545,7 +663,7 @@ public class ReportsArchiveSchedulePage {
         waitExecuter.sleep(1000);
         Alert confirmationAlert = driver.switchTo().alert();
         String alertText = confirmationAlert.getText();
-        System.out.println("Alert text is " + alertText);
+        logger.info("Alert text is " + alertText);
         confirmationAlert.accept();
         waitExecuter.sleep(3000);
         Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Removed successfully",
@@ -553,9 +671,9 @@ public class ReportsArchiveSchedulePage {
         MouseActions.clickOnElement(driver, reportPageObj.goBackButton);
         waitExecuter.sleep(2000);
         int reportCntAfterDelete = Integer.parseInt(reportCntList.get(i).getText().trim());
-        logger.info("Before Delete report count = "+ reportCnt + "\n After delete report count is "+ reportCntAfterDelete);
-        Assert.assertEquals(reportCntAfterDelete, reportCnt - 1, " Report " +reportName+ " had "+ reportCnt+
-            " reports before deletion and after deletion has "+reportCntAfterDelete);
+        logger.info("Before Delete report count = " + reportCnt + "\n After delete report count is " + reportCntAfterDelete);
+        Assert.assertEquals(reportCntAfterDelete, reportCnt - 1, " Report " + reportName + " had " + reportCnt +
+            " reports before deletion and after deletion has " + reportCntAfterDelete);
       }
     }
   }

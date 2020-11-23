@@ -24,6 +24,7 @@ public @interface Marker {
   @interface AppDetailsMr {}
   @interface ReportArchive {}
   @interface InefficientApps {}
+  @interface ReportsScheduled{}
   @interface YarnChargeback {}
   @interface YarnResources {}
   @interface ClusterJobs {}

@@ -16,4 +16,11 @@ public class PageConstants {
         public static String[] STATUSTYPE = {"Killed", "Failed", "Running", "Success", "Pending", "Unknown", "Waiting"};
         public static String RUNNING = "running";
     }
+
+    public static class TuningScheduleRun {
+        public static String[] SCHEDULE_RUN = {"Daily","Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
+                "Friday","Saturday","Every 2 Weeks","Every Month"};
+        public static String[] SCHEDULE_CLUSTERID = {"tnode28-HDP315-TLS-Kerb-Ranger", "tnode3-CDH633-TLS-Kerb-Sentry",
+                "tnode40-CDH5162"};
+    }
 }

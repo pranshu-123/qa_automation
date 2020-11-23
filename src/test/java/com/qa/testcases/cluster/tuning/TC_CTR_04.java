@@ -2,27 +2,29 @@ package com.qa.testcases.cluster.tuning;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.constants.PageConstants;
+import com.qa.enums.UserAction;
+import com.qa.pagefactory.CommonPageObject;
 import com.qa.pagefactory.TopPanelPageObject;
-import com.qa.scripts.DatePicker;
 import com.qa.scripts.clusters.Tuning;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+import java.util.List;
 import java.util.logging.Logger;
-
 
 @Marker.Tuning
 @Marker.All
-public class TC_CTR_02 extends BaseClass {
-    private static final Logger LOGGER = Logger.getLogger(TC_CTR_02.class.getName());
+public class TC_CTR_04 extends BaseClass {
+    private static final Logger LOGGER = Logger.getLogger(TC_CTR_04.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void validateTuningDatePickerList(String clusterId) {
-        test = extent.startTest("TC_CTR_02.validateTuningDatePickerList: "+ clusterId,
-                "Verify datepicker list");
+        test = extent.startTest("TC_CTR_04.validateTuningDatePickerList: "+ clusterId,
+                "Verify cluster filter in UI");
         test.assignCategory(" Cluster - Tuning ");
         LOGGER.info("Passed Parameter Is : " + clusterId);
 
@@ -42,15 +44,24 @@ public class TC_CTR_02 extends BaseClass {
         LOGGER.info("Clicked on Run button");
         test.log(LogStatus.INFO,"Clicked on Run button");
 
-        DatePicker datePicker = new DatePicker(driver);
-        datePicker.clickOnDatePicker();
-        String[] expectedDateOptions = {"Last 7 Days", "Last 30 Days", "Last 60 Days", "Last 90 Days", "Custom Range"};
-
-        for (String expectedDateOption : expectedDateOptions) {
-            Assert.assertTrue(datePicker.getDatePickerOptions().contains(expectedDateOption),
-                    "Date list does not contain: " + expectedDateOption);
-            test.log(LogStatus.PASS, "Date list contains option: " + expectedDateOption);
+        UserActions userActions = new UserActions(driver);
+        CommonPageObject commonPageObject = new CommonPageObject(driver);
+        userActions.performActionWithPolling(commonPageObject.clusterDropdown, UserAction.CLICK);
+        String[] expectedClusterOptions = PageConstants.TuningScheduleRun.SCHEDULE_CLUSTERID;
+        List<String> allClusters = null;
+        int clusterCount = commonPageObject.clustersList.size();
+        if(clusterCount > 0){
+            //Get all clusters from UI
+            allClusters = tuning.getClusterOptions(commonPageObject);
+            for(String expectedCluster: expectedClusterOptions){
+                Assert.assertTrue(allClusters.contains(expectedCluster),
+                        "Cluster list does not contain: " + expectedCluster);
+                test.log(LogStatus.PASS, "Cluster list contains option: " + expectedCluster);
+            }
+        }else{
+            Assert.assertTrue(false, "Clusters not available.");
         }
-        datePicker.clickOnDatePicker();
+
     }
+
 }

@@ -20,7 +20,6 @@ public class ActionPerformer {
     actions.moveToElement(element, xOffset, yOffset).build().perform();
   }
 
-  //bk
   public void moveToTheElementByOffsetAndClick(WebElement element,
                                        int xOffset, int yOffset) {
     actions.moveToElement(element, xOffset, yOffset).click().perform();

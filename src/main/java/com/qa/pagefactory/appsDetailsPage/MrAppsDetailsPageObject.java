@@ -116,6 +116,30 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@class='link-item']")
     public WebElement programSourceLinkText;
 
+    @FindBy(xpath = "//*[@id=\"tezllap-container\"]/div[1]/div[2]/h4/span[1]/text()")
+    public WebElement startTime;
+
+    @FindBy(xpath = "//*[@id=\"tezllap-container\"]/div[1]/div[2]/h4/span[2]/text()")
+    public WebElement EndTime;
+
+    @FindBy(xpath = "//*[@id=\"SummaryDetails\"]/div/div[1]/div[1]/div/h3")
+    public WebElement Duration;
+
+    @FindBy(xpath = "//*[@id=\"SummaryDetails\"]/div/div[2]/div[1]/div/h3")
+    public WebElement DataIO;
+
+    @FindBy(xpath = "//*[@id=\"highcharts-vjvb3sy-64\"]/svg/rect[1]")
+    public WebElement Dags;
+
+    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[1]/span[1]")
+    public WebElement Owner;
+
+    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[1]/span[2]")
+    public WebElement Cluster;
+
+    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[1]/span[3]")
+    public WebElement Queue;
+
     // Logs Tab xpaths
     @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[2]/div/div[2]/div[3]/div[1]/section/div/span")
     public List<WebElement> logElementCollapsable;

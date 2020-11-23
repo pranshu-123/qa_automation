@@ -50,7 +50,9 @@ public class BaseClass {
     @BeforeSuite
     public void setup() {
         LOGGER.info("Update config based on user input");
-        UnravelConfigUtils.updateConfig();
+//        UnravelConfigUtils.updateConfig();
+        System.setProperty(ConfigConstants.SystemConfig.IS_MULTI_CLUSTER, "true");
+        System.setProperty(ConfigConstants.SystemConfig.HEADLESS, "false");
         LOGGER.info("Starting browser");
         DriverManager driverManager = new DriverManager();
         Properties prop = ConfigReader.readBaseConfig();
@@ -112,8 +114,8 @@ public class BaseClass {
                     LOGGER.info(method.getName() + " is failed due to code issue");
                 }
                 String screenshotImg = ScreenshotHelper.takeScreenshotOfPage(driver);
-                String s3BucketScreenshot = s3BucketUtils.uploadFileToS3Bucket(screenshotImg);
-                test.log(LogStatus.FAIL, test.addScreenCapture(s3BucketScreenshot));
+                //String s3BucketScreenshot = s3BucketUtils.uploadFileToS3Bucket(screenshotImg);
+                test.log(LogStatus.FAIL, test.addScreenCapture(screenshotImg));
             }
             Log.endTestCase(method.getDeclaringClass().getName() + " - " + method.getName());
         } catch (Exception e) {
@@ -160,7 +162,7 @@ public class BaseClass {
     @DataProvider(name = "clusterid-data-provider")
     public Iterator<Object[]> getClusterIds(Method method) {
         if (System.getProperty(ConfigConstants.SystemConfig.IS_MULTI_CLUSTER).trim()
-                .toLowerCase().equals("true")) {
+                .toLowerCase().equals("false")) {
             LOGGER.info("Getting multiple cluster Ids");
             return DataProviderClass.getClusterIdsForClusterType(method);
         } else {

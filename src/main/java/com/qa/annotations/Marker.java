@@ -23,6 +23,7 @@ public @interface Marker {
   @interface AppDetailsTez {}
   @interface ReportArchive {}
   @interface InefficientApps {}
+  @interface ReportsScheduled{}
   @interface YarnChargeback {}
   @interface YarnResources {}
   @interface ClusterJobs {}

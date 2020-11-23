@@ -28,7 +28,7 @@ public class TC_spark_235 extends BaseClass {
         test.assignCategory(" Apps Details-Spark");
         Log.startTestCase("TC_spark_235_verifyLogsTab");
         SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);
-        appsDetailsPage.commonSetupCodeForSumarryTabValidation(test, clusterId, "Logs", logger);
+        appsDetailsPage.commonSetupCodeForSumarryTabValidation(test, clusterId, "Logs", logger, false);
         test.log(LogStatus.PASS, "Verified the Logs tab successfully");
     }
 }

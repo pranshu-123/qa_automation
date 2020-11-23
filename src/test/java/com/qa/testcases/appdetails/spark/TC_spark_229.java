@@ -26,7 +26,7 @@ public class TC_spark_229 extends BaseClass {
         test.assignCategory(" Apps Details-Spark");
         Log.startTestCase("TC_spark_229_verifyAnalysisTab");
         SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);
-        appsDetailsPage.commonSetupCodeForSumarryTabValidation(test, clusterId, "Analysis", logger);
+        appsDetailsPage.commonSetupCodeForSumarryTabValidation(test, clusterId, "Analysis", logger, false);
         test.log(LogStatus.PASS, "Verified the Analysis tab successfully");
     }
 }

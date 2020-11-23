@@ -9,6 +9,7 @@ import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -160,13 +161,19 @@ public class SparkAppsDetailsPage {
    * Method to validate AppSummary Errors tab.
    */
   public void validateErrorsTab(SparkAppsDetailsPageObject sparkAppPageObj) {
-    String[] expectedErrorCategory = {"driver", "executor-1", "executor-2", "rm-diagnostics"};
+    String[] expectedErrorCategory = {"driver", "executor-", "rm-diagnostics"};
     List<WebElement> errorTypeList = sparkAppPageObj.errorCategories;
     verifyAssertFalse(errorTypeList.isEmpty(), sparkAppPageObj, " Errors tab is not populated");
     for (int e = 0; e < errorTypeList.size(); e++) {
       String errorType = errorTypeList.get(e).getText();
+      String newErrorType = "";
       logger.info("Error Type is " + errorType);
-      verifyAssertTrue(Arrays.asList(expectedErrorCategory).contains(errorType), sparkAppPageObj,
+      if (errorType.contains("executor-"))
+        newErrorType = "executor-";
+      else
+        newErrorType = errorType;
+      logger.info("New Error Type is " + errorType);
+      verifyAssertTrue(Arrays.asList(expectedErrorCategory).contains(newErrorType), sparkAppPageObj,
           " The UI error types displayed does not match with the Expected error types ");
     }
     List<WebElement> errorCollapsableList = sparkAppPageObj.errorCollapse;
@@ -394,7 +401,7 @@ public class SparkAppsDetailsPage {
             MouseActions.clickOnElement(driver, appsTabList.get(i));
             waitExecuter.sleep(3000);
             List<WebElement> programDataList = sparkAppPageObj.programTabData;
-            verifyAssertFalse(programDataList.isEmpty(), sparkAppPageObj, sparkAppPageObj.programDataNotFound.getText());
+            verifyAssertFalse(programDataList.isEmpty(), sparkAppPageObj, "Programs tab not populated");
             break;
           case "Timings":
             MouseActions.clickOnElement(driver, appsTabList.get(i));
@@ -425,7 +432,7 @@ public class SparkAppsDetailsPage {
       WebElement backButton = sparkAppPageObj.backButton;
       action.moveToElement(backButton).click().build().perform();
       waitExecuter.sleep(1000);
-    } catch (NoSuchElementException | JavascriptException ex) {
+    } catch (NoSuchElementException | ElementNotInteractableException | JavascriptException ex) {
       System.out.println("The element is not present for stage " + legendName);
     }
   }
@@ -825,7 +832,8 @@ public class SparkAppsDetailsPage {
    * Get Job count of selected App click on it and go to apps details page
    * Verify specific summary tabs.
    * */
-  public void commonSetupCodeForSumarryTabValidation(ExtentTest test, String clusterId, String tabName, Logger logger) {
+  public void commonSetupCodeForSumarryTabValidation(ExtentTest test, String clusterId, String tabName, Logger logger,
+                                                     Boolean isFailedApp) {
     // Initialize all classes objects
     test.log(LogStatus.INFO, "Initialize all class objects");
 
@@ -846,16 +854,27 @@ public class SparkAppsDetailsPage {
     test.log(LogStatus.INFO, "Verify that the left pane has spark check box and the apps number");
     logger.info("Select individual app and assert that table contain its data");
 
-    appsDetailsPage.clickOnlyLink("Spark");
-    applicationsPageObject.expandStatus.click();
-    int appCount = appsDetailsPage.clickOnlyLink("Success");
-    //Clicking on the Spark app must go to apps detail page
-    if (appCount > 0) {
-      String headerAppId = appsDetailsPage.verifyAppId(sparkAppPageObj, applicationsPageObject);
-      test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);
-      appsDetailsPage.verifyAppSummaryTabs(sparkAppPageObj, tabName, test);
-      //Close apps details page
-      MouseActions.clickOnElement(driver, sparkAppPageObj.closeAppsPageTab);
+    int totalSparkAppCnt = appsDetailsPage.clickOnlyLink("Spark");
+    waitExecuter.sleep(2000);
+    if (totalSparkAppCnt > 0) {
+      applicationsPageObject.expandStatus.click();
+      int appCount = 0;
+      if (isFailedApp)
+        appCount = appsDetailsPage.clickOnlyLink("Failed");
+      else
+        appCount = appsDetailsPage.clickOnlyLink("Success");
+      //Clicking on the Spark app must go to apps detail page
+      if (appCount > 0) {
+        String headerAppId = appsDetailsPage.verifyAppId(sparkAppPageObj, applicationsPageObject);
+        test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);
+        appsDetailsPage.verifyAppSummaryTabs(sparkAppPageObj, tabName, test);
+        //Close apps details page
+        MouseActions.clickOnElement(driver, sparkAppPageObj.closeAppsPageTab);
+      } else {
+        test.log(LogStatus.SKIP, "No Spark Application present");
+        logger.info("No Spark Application present in the " + clusterId + " cluster for the time span " +
+            "of 90 days");
+      }
     } else {
       test.log(LogStatus.SKIP, "No Spark Application present");
       logger.info("No Spark Application present in the " + clusterId + " cluster for the time span " +

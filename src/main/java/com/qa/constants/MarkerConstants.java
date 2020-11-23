@@ -33,6 +33,7 @@ public class MarkerConstants {
   public static final String USER_REPORTS = "user_reports";
   public static final String MANAGE = "manage";
   public static final String REPORT_ARCHIEVE = "report_archieve";
+  public static final String SCHEDULED = "scheduled";
   public static final String APP_DETAILS_HIVE = "app_details_hive";
 
   /**
@@ -63,6 +64,7 @@ public class MarkerConstants {
     map.put(USER_REPORTS, Marker.UserReports.class);
     map.put(MANAGE, Marker.Manage.class);
     map.put(REPORT_ARCHIEVE, Marker.ReportArchive.class);
+    map.put(SCHEDULED, Marker.Scheduled.class);
     map.put(APP_DETAILS_HIVE, Marker.AppDetailsHive.class);
     return Collections.unmodifiableMap(map);
   }

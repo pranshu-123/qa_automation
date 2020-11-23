@@ -29,7 +29,7 @@ public class TC_spark_240 extends BaseClass {
         test.assignCategory(" Apps Details-Spark");
         Log.startTestCase("TC_spark_240_verifyTimingsTab");
         SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);
-        appsDetailsPage.commonSetupCodeForSumarryTabValidation(test, clusterId, "Timings", logger);
+        appsDetailsPage.commonSetupCodeForSumarryTabValidation(test, clusterId, "Timings", logger, false);
         test.log(LogStatus.PASS, "Verified the Timings tab successfully");
     }
 }

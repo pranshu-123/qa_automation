@@ -33,7 +33,7 @@ public class TC_spark_230 extends BaseClass {
         test.assignCategory(" Apps Details-Spark");
         Log.startTestCase("TC_spark_230_verifyResourcesTab");
         SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);
-        appsDetailsPage.commonSetupCodeForSumarryTabValidation(test, clusterId, "Resources", logger);
+        appsDetailsPage.commonSetupCodeForSumarryTabValidation(test, clusterId, "Resources", logger, false);
         test.log(LogStatus.PASS, "Verified the Resources tab successfully");
     }
 }

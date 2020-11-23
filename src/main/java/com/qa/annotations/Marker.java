@@ -22,7 +22,7 @@ public @interface Marker {
   @interface AppDetailsSpark {}
   @interface ReportArchive {}
   @interface InefficientApps {}
-  @interface Scheduled{}
+  @interface ReportsScheduled{}
   @interface YarnChargeback {}
   @interface YarnResources {}
   @interface ClusterJobs {}

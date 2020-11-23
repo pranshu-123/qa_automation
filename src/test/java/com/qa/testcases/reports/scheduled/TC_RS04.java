@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
-@Marker.Scheduled
+@Marker.ReportsScheduled
 @Marker.All
 public class TC_RS04 extends BaseClass {
   /**

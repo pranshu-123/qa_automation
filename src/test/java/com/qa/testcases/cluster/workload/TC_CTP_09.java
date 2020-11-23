@@ -52,23 +52,22 @@ public class TC_CTP_09 extends BaseClass {
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.stream()
                 .filter(WebElement::isDisplayed).findFirst().get().getText());
 
         workload.clickOnMonth();
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
 
         test.log(LogStatus.PASS, "Verify current month selected :"
                 + workloadPageObject.currentmonthHeader.getText());
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
 
         if(workload.clickOnDate()) {
             waitExecuter.sleep(3000);
             test.log(LogStatus.PASS, "Verify current Date selected");
-            waitExecuter.sleep(3000);
         }
          else{
             Assert.assertEquals(false,"Test Failed current Date not selected");

@@ -50,19 +50,19 @@ public class TC_CTP_13 extends BaseClass {
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.stream()
                 .filter(WebElement::isDisplayed).findFirst().get().getText());
 
         workload.clickOnMonth();
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
         test.log(LogStatus.PASS, "Verify View By Month");
 
         test.log(LogStatus.PASS, "Verify current month selected :"
                 + workloadPageObject.currentmonthHeader.getText());
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
         int scrollY = 370;
         JavaScriptExecuter.scrollViewWithYAxis(driver, scrollY);
         scrollY = scrollY + datePicker.getDatePickerYPosition();
@@ -90,6 +90,6 @@ public class TC_CTP_13 extends BaseClass {
                 "Validation failed for header column names from workload Jobs Table");
         test.log(LogStatus.PASS,
                 "Verified Column names in workload Jobs Table successfully on Yarn chargeback page");
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
     }
 }

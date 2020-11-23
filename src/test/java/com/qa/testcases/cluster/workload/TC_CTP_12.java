@@ -73,7 +73,6 @@ public class TC_CTP_12 extends BaseClass {
         workload.clickOnDate();
         waitExecuter.sleep(3000);
         test.log(LogStatus.PASS, "Verify current Date selected");
-        waitExecuter.sleep(1000);
 
         //Checking workload Jobs Table Records populated
         if(workloadPageObject.workloadJobsTableRecords.size() > 0)

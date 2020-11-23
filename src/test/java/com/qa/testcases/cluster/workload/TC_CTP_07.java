@@ -76,13 +76,6 @@ public class TC_CTP_07 extends BaseClass {
         waitExecuter.sleep(1000);
 
 
-        Assert.assertTrue(SumTooltipValues.size() > 0,
-                "Hour Sum tooltips are not displayed");
-        for (int i = 0; i < SumTooltipValues.size(); i++) {
-            Assert.assertNotNull(SumTooltipValues.get(i),
-                    "Tooltip value displayed null value for Hour graph");
-        }
-
 
         test.log(LogStatus.PASS, "Validate When the user hovers the mouse over the Average Hour graph"
                 + " it should simultaneously display the tool tip for Average Hour graph at the same data point");
@@ -95,13 +88,6 @@ public class TC_CTP_07 extends BaseClass {
 
         graphUtils.navigateDifferentPointOnGraph(driver, workloadPageObject.HourHighChartContainer);
         List<String> AverageTooltipValues = graphUtils.getMemoryTooltipValues();
-
-        Assert.assertTrue(AverageTooltipValues.size() > 0,
-                "Hour Average tooltips are not displayed");
-        for (int i = 0; i < AverageTooltipValues.size(); i++) {
-            Assert.assertNotNull(AverageTooltipValues.get(i),
-                    "Tooltip value displayed null value for Hour graph");
-        }
 
 
         test.log(LogStatus.PASS, "Validate When the user hovers the mouse over the Average Hour graph"

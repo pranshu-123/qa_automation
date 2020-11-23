@@ -49,7 +49,7 @@ public class TC_CTP_11 extends BaseClass {
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
-        datePicker.selectLast60Days();
+        datePicker.selectLast30Days();
         waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
@@ -78,13 +78,13 @@ public class TC_CTP_11 extends BaseClass {
             Assert.assertEquals(false,"Test Failed Jobs Table is not available on workload page");
             test.log(LogStatus.FAIL, "Test Failed Jobs Table is not available on workload page");
         }
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
 
         //Validate Header Column names in workload Jobs Table
         Assert.assertTrue(workload.validateHeaderColumnNameInworkloadJobsTable(),
                 "Validation failed for header column names from workload Jobs Table");
         test.log(LogStatus.PASS,
                 "Verified Column names in workload Jobs Table successfully on workload Jobs page");
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
     }
 }

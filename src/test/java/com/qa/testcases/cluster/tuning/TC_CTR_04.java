@@ -2,6 +2,7 @@ package com.qa.testcases.cluster.tuning;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.constants.PageConstants;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.CommonPageObject;
 import com.qa.pagefactory.TopPanelPageObject;
@@ -12,7 +13,6 @@ import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -47,9 +47,10 @@ public class TC_CTR_04 extends BaseClass {
         UserActions userActions = new UserActions(driver);
         CommonPageObject commonPageObject = new CommonPageObject(driver);
         userActions.performActionWithPolling(commonPageObject.clusterDropdown, UserAction.CLICK);
-        String[] expectedClusterOptions = {"tnode28-HDP315-TLS-Kerb-Ranger", "tnode3-CDH633-TLS-Kerb-Sentry", "tnode40-CDH5162"};
+        String[] expectedClusterOptions = PageConstants.TuningScheduleRun.SCHEDULE_CLUSTERID;
         List<String> allClusters = null;
-        if(commonPageObject.clustersList.size() > 0){
+        int clusterCount = commonPageObject.clustersList.size();
+        if(clusterCount > 0){
             //Get all clusters from UI
             allClusters = tuning.getClusterOptions(commonPageObject);
             for(String expectedCluster: expectedClusterOptions){

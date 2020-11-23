@@ -20,5 +20,7 @@ public class PageConstants {
     public static class TuningScheduleRun {
         public static String[] SCHEDULE_RUN = {"Daily","Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
                 "Friday","Saturday","Every 2 Weeks","Every Month"};
+        public static String[] SCHEDULE_CLUSTERID = {"tnode28-HDP315-TLS-Kerb-Ranger", "tnode3-CDH633-TLS-Kerb-Sentry",
+                "tnode40-CDH5162"};
     }
 }

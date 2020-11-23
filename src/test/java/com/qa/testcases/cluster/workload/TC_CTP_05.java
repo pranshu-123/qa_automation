@@ -103,7 +103,6 @@ public class TC_CTP_05 extends BaseClass {
         test.log(LogStatus.PASS, "Verify View By Hour/Day");
         }
         else{
-            Assert.assertEquals(false,"Test Failed the Group by dept table");
             test.log(LogStatus.FAIL, "Test Failed the Group by dept table");
         }
 

@@ -64,7 +64,7 @@ public class WorkloadPageObject {
     @FindBy(xpath = "(//div[contains(@class,'highcharts-container')])[1]")
     public WebElement HourHighChartContainer;
 
-    @FindBy(xpath = "//*[@id=\"radio-btn-opt\"]/span[2]")
+    @FindBy(xpath = "//*[name()='rect' and contains(@class,'r5 hover_c')]")
     public WebElement viewByAverage;
 
     @FindBy(xpath = "//*[@id=\"heat-cont\"]")

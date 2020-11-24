@@ -3,8 +3,10 @@ package com.qa.scripts.reports;
 import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
+import com.qa.scripts.clusters.Tuning;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.relevantcodes.extentreports.LogStatus;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
@@ -34,6 +36,61 @@ public class ReportsArchiveSchedulePage {
   public ReportsArchiveSchedulePage(WebDriver driver) {
     waitExecuter = new WaitExecuter(driver);
     this.driver = driver;
+  }
+
+  /**
+   * Method to validate the Schedule reports Edit Action
+   */
+  public void validateScheduledReportEditAction(ReportsArchiveScheduledPageObject reportPageObj) {
+    List<WebElement> reportNameList = reportPageObj.scheduleReport;
+    String reportName = reportNameList.get(0).getText();
+    logger.info("The reportType is " + reportName);
+    Tuning tuning = new Tuning(driver);
+    MouseActions.clickOnElement(driver, reportPageObj.editReportIcon);
+    waitExecuter.sleep(2000);
+    tuning.verifyScheduleToRun();
+    if (reportName.equals("User Report"))
+      MouseActions.clickOnElement(driver, reportPageObj.saveScheduleButton);
+    else
+      MouseActions.clickOnElement(driver, reportPageObj.reportCreationRunButton);
+  }
+
+  /**
+   * Method to validate the Schedule reports Delete Action
+   */
+  public void validateScheduledReportDeleteAction(ReportsArchiveScheduledPageObject reportPageObj) {
+    List<WebElement> reportNameList = reportPageObj.scheduleReport;
+    String reportName = reportNameList.get(0).getText();
+    String expectedBannerMsg = reportName + " report removed successfully.";
+    logger.info("Expected Banner msg is " + expectedBannerMsg);
+    int beforeScheduledReportCnt = getReportCnt(reportPageObj, 15);
+    MouseActions.clickOnElement(driver, reportPageObj.deleteReportIcon);
+    waitExecuter.sleep(2000);
+    String bannerMsg = reportPageObj.successfulMsgBanner.getText();
+    logger.info("Banner Msg after deleting the scheduled report is " + bannerMsg);
+    MouseActions.clickOnElement(driver, reportPageObj.closeBanner);
+    Assert.assertEquals(bannerMsg, expectedBannerMsg, " The bannerMsg is not equal to the expected " +
+        "banner msg Expected: [" + expectedBannerMsg + "] Actual: [" + bannerMsg + "]");
+    int afterScheduledReportCnt = getReportCnt(reportPageObj, 15);
+    logger.info("The Scheduled report count  before deletion: " + beforeScheduledReportCnt + " " +
+        "after deletion is " + afterScheduledReportCnt);
+    Assert.assertEquals(beforeScheduledReportCnt - 1, afterScheduledReportCnt, "The count of scheduled " +
+        "reports is not 1 less than the original count after successfull deletion of the scheduled report");
+  }
+
+  /**
+   * Method to validate the Schedule reports More Info Action
+   */
+  public void validateScheduledReportMoreInfoAction(ReportsArchiveScheduledPageObject reportPageObj) {
+    MouseActions.clickOnElement(driver, reportPageObj.viewReportIcon);
+    String expectedHeader = "Scheduled Info";
+    waitExecuter.sleep(1000);
+    Assert.assertTrue(reportPageObj.moreInfoWin.isDisplayed(), "The pop up window with all the details " +
+        "(parameters) of the report is not displayed");
+    String header = reportPageObj.moreInfoHeader.getText();
+    Assert.assertEquals(expectedHeader, header, " The header displayed in the pop up window is incorrect\n" +
+        "Expected: " + expectedHeader + " but Actual is " + header);
+    Assert.assertFalse(reportPageObj.moreInfoTableRows.isEmpty(), "No data displayed in the mre info pop up window.");
   }
 
   /**

@@ -41,17 +41,17 @@ public class TC_CTP_05 extends BaseClass {
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         datePicker.selectLast7Days();
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.stream()
                 .filter(WebElement::isDisplayed).findFirst().get().getText());
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
 
         workload.clickOnMonth();
         test.log(LogStatus.PASS, "Verify View By Month");
 
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
 
         test.log(LogStatus.PASS, "Verify current month selected :"
                 + workloadPageObject.currentmonthHeader.getText());
@@ -59,12 +59,12 @@ public class TC_CTP_05 extends BaseClass {
 
         datePicker.clickOnDatePicker();
         datePicker.selectLast14Days();
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.stream()
                 .filter(WebElement::isDisplayed).findFirst().get().getText());
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
 
         workload.clickOnDay();
         test.log(LogStatus.PASS, "Verify View By Day ");
@@ -73,38 +73,36 @@ public class TC_CTP_05 extends BaseClass {
 
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.stream()
                 .filter(WebElement::isDisplayed).findFirst().get().getText());
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
 
         workload.clickOnHour();
         test.log(LogStatus.PASS, "Verify View By Hour ");
 
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
 
 
         datePicker.clickOnDatePicker();
         datePicker.selectLast60Days();
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.stream()
                 .filter(WebElement::isDisplayed).findFirst().get().getText());
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
 
         if (workload.clickOnHourDay())
         {
             test.log(LogStatus.PASS, "verify the Group by dept table");
 
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
         test.log(LogStatus.PASS, "Verify View By Hour/Day");
-        waitExecuter.sleep(1000);
         }
         else{
-            Assert.assertEquals(false,"Test Failed the Group by dept table");
             test.log(LogStatus.FAIL, "Test Failed the Group by dept table");
         }
 

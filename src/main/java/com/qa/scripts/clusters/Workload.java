@@ -5,8 +5,10 @@ import com.qa.pagefactory.clusters.WorkloadPageObject;
 import com.qa.utils.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -135,14 +137,7 @@ public class Workload {
     /* Get Hour dropdown cluster workload */
     public boolean clickOnHourDay() {
         try {
-          /*  LOGGER.info("Click on HourDay dropdown");
-            WebElement HourDay = (workloadPageObject.viewByHourDay);
-            LOGGER.info("X coordinate: " + HourDay.getLocation().getX()
-                    + ", Y coordinate: " + HourDay.getLocation().getY());
-            Actions actions = new Actions(driver);
-            actions.moveByOffset(HourDay.getLocation().getX() + 3, HourDay.
-                    getLocation().getY() + 1);
-            actions.perform();*/
+            WebDriverWait wait = new WebDriverWait(driver, 40);
             WebElement Hour = (workloadPageObject.viewByHourDay);
             Actions actions = new Actions(driver);
             actions.moveToElement(Hour)
@@ -180,12 +175,14 @@ public class Workload {
     public void clickOnSum() {
         try {
             LOGGER.info("Click on Sum in Hour page");
+            WebDriverWait wait = new WebDriverWait(driver, 40);
             WebElement Sum = (workloadPageObject.viewBySum);
             Actions actions = new Actions(driver);
             actions.moveToElement(Sum)
                     .contextClick()
                     .doubleClick(workloadPageObject.viewBySum)
                     .perform();
+            wait.pollingEvery(Duration.ofMillis(10));
         } catch (NoSuchElementException e) {
             LOGGER.severe("Class Workload | Method clickOnSum | Exception desc" + e.getMessage());
             throw (e);
@@ -196,12 +193,14 @@ public class Workload {
     public void clickOnAverage() {
         try {
             LOGGER.info("Click on Sum in Hour page");
+            WebDriverWait wait = new WebDriverWait(driver, 40);
             WebElement Sum = (workloadPageObject.viewByAverage);
             Actions actions = new Actions(driver);
             actions.moveToElement(Sum)
                     .contextClick()
                     .doubleClick(workloadPageObject.viewByAverage)
                     .perform();
+            wait.pollingEvery(Duration.ofMillis(10));
         } catch (NoSuchElementException e) {
             LOGGER.severe("Class Workload | Method clickOnAverage | Exception desc" + e.getMessage());
             throw (e);
@@ -218,12 +217,10 @@ public class Workload {
     /*Method to click on Date */
     public boolean clickOnDate() {
         try {
-            WebElement ClickDate = (workloadPageObject.viewByAverage);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(ClickDate)
-                    .contextClick()
-                    .doubleClick(workloadPageObject.viewByAverage)
-                    .perform();
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+            wait.pollingEvery(Duration.ofMillis(10));
+            Actions builder = new Actions(driver);
+            builder.doubleClick(workloadPageObject.viewByAverage).perform();
 
         } catch (NoSuchElementException e) {
             LOGGER.severe("Class Workload | Method clickOnAverage | Exception desc" + e.getMessage());
@@ -235,7 +232,8 @@ public class Workload {
 
     /*Method to click on List Date */
     public void selectDateRange(String date){
-        waitExecuter.sleep(1000);
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.pollingEvery(Duration.ofMillis(10));
         int allDateCount = workloadPageObject.tspanCal.size();
         System.out.println("Scope count: "+ allDateCount);
         for(int i=0; i<allDateCount-1 ; i++){

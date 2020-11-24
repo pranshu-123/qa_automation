@@ -39,14 +39,14 @@ public class TC_CTP_06 extends BaseClass {
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.stream()
                 .filter(WebElement::isDisplayed).findFirst().get().getText());
 
         workload.clickOnMonth();
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
         test.log(LogStatus.PASS, "Verify View By Month");
 
         test.log(LogStatus.PASS, "Verify current month selected :"
@@ -54,14 +54,14 @@ public class TC_CTP_06 extends BaseClass {
 
         datePicker.clickOnDatePicker();
         datePicker.selectLast14Days();
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.stream()
                 .filter(WebElement::isDisplayed).findFirst().get().getText());
 
         workload.clickOnDay();
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
         test.log(LogStatus.PASS, "Verify View By Day ");
 
 
@@ -78,7 +78,7 @@ public class TC_CTP_06 extends BaseClass {
 
         datePicker.clickOnDatePicker();
         datePicker.selectLast60Days();
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.stream()

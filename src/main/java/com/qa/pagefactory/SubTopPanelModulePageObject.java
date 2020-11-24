@@ -47,6 +47,9 @@ public class SubTopPanelModulePageObject {
     @FindBy(xpath = "//li[contains(@class,'active')]//span[contains(text(),'Pipelines')]")
     public WebElement pipelinesTab;
 
+    @FindBy(id = "support-li")
+    public WebElement supportList;
+
     /**
      * @param driver The driver that will be used to look up the elements
      */

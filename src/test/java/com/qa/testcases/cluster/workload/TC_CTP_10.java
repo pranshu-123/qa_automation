@@ -58,12 +58,12 @@ public class TC_CTP_10 extends BaseClass {
                 .filter(WebElement::isDisplayed).findFirst().get().getText());
 
         workload.clickOnMonth();
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
         test.log(LogStatus.PASS, "Verify View By Month");
 
         test.log(LogStatus.PASS, "Verify current month selected :"
                 + workloadPageObject.currentmonthHeader.getText());
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
         int scrollY = 370;
         JavaScriptExecuter.scrollViewWithYAxis(driver, scrollY);
         scrollY = scrollY + datePicker.getDatePickerYPosition();
@@ -80,7 +80,7 @@ public class TC_CTP_10 extends BaseClass {
             Assert.assertEquals(false,"est Failed Jobs Table is not available on workload page");
             test.log(LogStatus.FAIL, "Test Failed Jobs Table is not available on workload page");
         }
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
         test.log(LogStatus.PASS,
                 "Verified workload Jobs Table is available on workload chargeback page");
         workload.navigateTextClickCheckworkloadTbl(driver, workloadPageObject.workloadHighheatcont);

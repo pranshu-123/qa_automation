@@ -16,8 +16,8 @@ import java.util.logging.Logger;
 public class TC_QU_07 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_QU_07.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
-    public void validateSendingInvalidQueueName(String clusterId) {
+    @Test
+    public void validateSendingInvalidQueueName() {
         test = extent.startTest("TC_QU_07.validateSendingInvalidQueueName",
                 "Verify on sending invalid queue name a proper message is displayed");
         test.assignCategory("Jobs - Queue Analysis");

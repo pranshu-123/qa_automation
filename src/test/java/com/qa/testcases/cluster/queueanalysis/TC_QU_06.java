@@ -18,8 +18,8 @@ import java.util.logging.Logger;
 public class TC_QU_06 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_QU_06.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
-    public void validateSixthQueueAdditionInSearchBox(String clusterId) {
+    @Test
+    public void validateSixthQueueAdditionInSearchBox() {
         test = extent.startTest("TC_QU_06.validateSixthQueueAdditionInSearchBox",
                 "The UI should not allow the user to enter sixth queue and should display the message - \"You can only select 5 queues\"");
         test.assignCategory("Jobs - Queue Analysis");
@@ -59,10 +59,15 @@ public class TC_QU_06 extends BaseClass {
                 selectedQueueList.add(qaPageObject.queueOptions.get(0).getText().trim());
                 LOGGER.info("Selected queue names: " + selectedQueueList);
                 test.log(LogStatus.INFO, "Selected queue names: " + selectedQueueList);
+                Assert.assertTrue(selectedQueueList.contains("You can only select 5 Queues"),
+                        "On selecting 6th queue in search box expected message is not displayed");
+                test.log(LogStatus.PASS, "Verified the message on selecting 6th queue.");
             }
-            Assert.assertTrue(selectedQueueList.contains("You can only select 5 Queues"),
-                    "On selecting 6th queue in search box expected message is not displayed");
-            test.log(LogStatus.PASS, "Verified the message on selecting 6th queue.");
+            if(numberOfQueue < 5 && numberOfQueue > 0){
+                Assert.assertTrue(numberOfQueue < 5, "Number of queue is less than 5");
+                LOGGER.info("Queue names in list is less than 5 thus cannot validate test case");
+                test.log(LogStatus.SKIP, "Queue names in list is less than 5 thus cannot validate test case");
+            }
         } else
             Assert.assertNull(qaPageObject.getQueueNameFromTable.get(0).getText(),
                     "The dropdown does not show any queue, but table contains rows");

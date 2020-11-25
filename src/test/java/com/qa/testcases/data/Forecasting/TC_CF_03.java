@@ -1,5 +1,6 @@
 package com.qa.testcases.data.Forecasting;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.DatePickerPageObject;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
@@ -14,10 +15,11 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
-
 import java.util.List;
 import java.util.logging.Logger;
 
+@Marker.DataForecasting
+@Marker.All
 public class TC_CF_03 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_CF_03.class.getName());
 

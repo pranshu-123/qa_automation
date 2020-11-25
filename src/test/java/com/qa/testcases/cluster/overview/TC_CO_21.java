@@ -12,23 +12,23 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import java.util.logging.Logger;
 
 @Marker.ClusterOverview
 @Marker.All
-public class TC_CO_20 extends BaseClass {
+public class TC_CO_21 extends BaseClass {
 
     /**
-     * Validate download of Nodes graph as PNG file.
+     * Validate download of Nodes graph as JPEG file.
      */
-    private static final Logger LOGGER = Logger.getLogger(TC_CO_20.class.getName());
+
+    private static final Logger LOGGER = Logger.getLogger(TC_CO_21.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TC_CO_20_ValidateNodesGraphDownloadAsPNG(String clusterId) {
+    public void ValidateNodesGraphDownloadAsJPEG(String clusterId) {
 
-        test = extent.startTest("TC_CO_20_ValidateNodesGraphDownloadAsPNG: " + clusterId,
-                "Validate download of Nodes graph as PNG file.");
+        test = extent.startTest("TC_CO_21.ValidateNodesGraphDownloadAsJPEG: " + clusterId,
+                "Validate download of Nodes graph as JPEG file.");
         test.assignCategory(" Cluster Overview");
 
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
@@ -36,6 +36,7 @@ public class TC_CO_20 extends BaseClass {
 
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
+        LOGGER.info("Select cluster: "+clusterId);
 
         HomePageObject homePageObject = new HomePageObject(driver);
         WaitExecuter executer = new WaitExecuter(driver);
@@ -45,13 +46,18 @@ public class TC_CO_20 extends BaseClass {
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();
+        LOGGER.info("Select date picker for 30 days.");
 
         homePage.clickOnNodesGraphDownloadMenu();
-        homePage.nodesGraphDownloadPNG();
-        Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("Nodes.png"), "File is not downloaded " +
+        LOGGER.info("Clicked on Nodes Graph download menu ... ");
+
+        homePage.nodesGraphDownloadJPEG();
+        LOGGER.info("Download JPEG file");
+
+        Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("Nodes.jpeg"), "File is not downloaded " +
                 "or size of file is zero bytes.");
-        test.log(LogStatus.PASS, "Successfully downloaded Nodes graph as PNG file.");
-        LOGGER.info("Successfully downloaded Nodes graph as PNG file.");
+        test.log(LogStatus.PASS, "Successfully downloaded Nodes graph as JPEG file.");
+        LOGGER.info("Successfully downloaded Nodes graph as JPEG file.");
     }
 
 }

@@ -51,7 +51,7 @@ public class TC_CO_21 extends BaseClass {
         homePage.clickOnNodesGraphDownloadMenu();
         LOGGER.info("Clicked on Nodes Graph download menu ... ");
 
-        homePage.nodesGraphDownloadJPEG();
+        homePage.downloadNodesGraphAsFile("Download JPEG");
         LOGGER.info("Download JPEG file");
 
         Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("Nodes.jpeg"), "File is not downloaded " +

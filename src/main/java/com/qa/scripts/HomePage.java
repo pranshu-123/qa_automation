@@ -144,26 +144,12 @@ public class HomePage {
     homePageObject.nodesGraphDownloadMenu.click();
   }
 
-  public void nodesGraphDownloadPNG(){
+  public void downloadNodesGraphAsFile(String asFile){
     waitExecuter.sleep(3000);
     int graphDownloadMenuCount = homePageObject.listnodesGraphDownloadMenu.size();
     if( graphDownloadMenuCount > 0){
       for(int i=0; i<graphDownloadMenuCount; i++){
-        if(homePageObject.listnodesGraphDownloadMenu.get(i).getText().equals("Download PNG")){
-          System.out.println("Download file found now click on it");
-          homePageObject.listnodesGraphDownloadMenu.get(i).click();
-          waitExecuter.sleep(15000);
-        }
-      }
-    }
-  }
-
-  public void nodesGraphDownloadJPEG(){
-    waitExecuter.sleep(3000);
-    int graphDownloadMenuCount = homePageObject.listnodesGraphDownloadMenu.size();
-    if( graphDownloadMenuCount > 0){
-      for(int i=0; i<graphDownloadMenuCount; i++){
-        if(homePageObject.listnodesGraphDownloadMenu.get(i).getText().equals("Download JPEG")){
+        if(homePageObject.listnodesGraphDownloadMenu.get(i).getText().equals(asFile)){
           System.out.println("Download file found now click on it");
           homePageObject.listnodesGraphDownloadMenu.get(i).click();
           waitExecuter.sleep(15000);

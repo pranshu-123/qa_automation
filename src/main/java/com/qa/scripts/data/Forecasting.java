@@ -6,12 +6,17 @@ import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
 public class Forecasting {
 
     private WaitExecuter waitExecuter;
     private WebDriver driver;
     ForecastingPageObject forecastingPageObject;
+    private static final Logger LOGGER = Logger.getLogger(Forecasting.class.getName());
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -61,5 +66,25 @@ public class Forecasting {
         }
         return null;
     }
+
+    public void clickOnHistoryDateRange(){
+        MouseActions.clickOnElement(driver, forecastingPageObject.historyDateRangeDropDown);
+    }
+
+    public List<String> getAllHistoryRanges(){
+
+        clickOnHistoryDateRange();
+        int dateRangeCount = forecastingPageObject.listDateRange.size();
+        if(dateRangeCount > 0){
+            List<String> dateRange = new ArrayList<String>();
+            for(WebElement e : forecastingPageObject.listDateRange){
+                dateRange.add(e.getText());
+            }
+            LOGGER.info("All History Date ranges from UI are: "+dateRange);
+            return dateRange;
+        }
+        return null;
+    }
+
 
 }

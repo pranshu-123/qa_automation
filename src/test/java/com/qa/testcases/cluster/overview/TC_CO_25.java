@@ -2,7 +2,6 @@ package com.qa.testcases.cluster.overview;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.HomePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
@@ -12,23 +11,23 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import java.util.logging.Logger;
 
 @Marker.ClusterOverview
 @Marker.All
-public class TC_CO_20 extends BaseClass {
+public class TC_CO_25 extends BaseClass {
 
     /**
-     * Validate download of Nodes graph as PNG file.
+     * Verify Nodes graph 'Download XLS'
      */
-    private static final Logger LOGGER = Logger.getLogger(TC_CO_20.class.getName());
+
+    private static final Logger LOGGER = Logger.getLogger(TC_CO_25.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TC_CO_20_ValidateNodesGraphDownloadAsPNG(String clusterId) {
+    public void ValidateNodesGraphDownloadAsXLS(String clusterId) {
 
-        test = extent.startTest("TC_CO_20_ValidateNodesGraphDownloadAsPNG: " + clusterId,
-                "Validate download of Nodes graph as PNG file.");
+        test = extent.startTest("TC_CO_25.ValidateNodesGraphDownloadAsXLS: " + clusterId,
+                "Validate download of Nodes graph as XLS file.");
         test.assignCategory(" Cluster Overview");
 
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
@@ -50,13 +49,13 @@ public class TC_CO_20 extends BaseClass {
         homePage.clickOnNodesGraphDownloadMenu();
         LOGGER.info("Clicked on Nodes Graph download menu ... ");
 
-        homePage.downloadNodesGraphAsFile("Download PNG");
-        LOGGER.info("Download PNG file");
+        homePage.downloadNodesGraphAsFile("Download XLS");
+        LOGGER.info("Download XLS file");
 
-        Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("Nodes.png"), "File is not downloaded " +
+        Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("Nodes.xls"), "File is not downloaded " +
                 "or size of file is zero bytes.");
-        test.log(LogStatus.PASS, "Successfully downloaded Nodes graph as PNG file.");
-        LOGGER.info("Successfully downloaded Nodes graph as PNG file.");
+        test.log(LogStatus.PASS, "Successfully downloaded Nodes graph as XLS file.");
+        LOGGER.info("Successfully downloaded Nodes graph as XLS file.");
     }
 
 }

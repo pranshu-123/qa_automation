@@ -12,23 +12,23 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import java.util.logging.Logger;
 
 @Marker.ClusterOverview
 @Marker.All
-public class TC_CO_20 extends BaseClass {
+public class TC_CO_23 extends BaseClass {
 
     /**
-     * Validate download of Nodes graph as PNG file.
+     * Verify Nodes graph 'Download SVG'
      */
-    private static final Logger LOGGER = Logger.getLogger(TC_CO_20.class.getName());
+
+    private static final Logger LOGGER = Logger.getLogger(TC_CO_23.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TC_CO_20_ValidateNodesGraphDownloadAsPNG(String clusterId) {
+    public void ValidateNodesGraphDownloadAsSVG(String clusterId) {
 
-        test = extent.startTest("TC_CO_20_ValidateNodesGraphDownloadAsPNG: " + clusterId,
-                "Validate download of Nodes graph as PNG file.");
+        test = extent.startTest("TC_CO_23.ValidateNodesGraphDownloadAsSVG: " + clusterId,
+                "Validate download of Nodes graph as SVG file.");
         test.assignCategory(" Cluster Overview");
 
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
@@ -50,13 +50,13 @@ public class TC_CO_20 extends BaseClass {
         homePage.clickOnNodesGraphDownloadMenu();
         LOGGER.info("Clicked on Nodes Graph download menu ... ");
 
-        homePage.downloadNodesGraphAsFile("Download PNG");
-        LOGGER.info("Download PNG file");
+        homePage.downloadNodesGraphAsFile("Download SVG");
+        LOGGER.info("Download SVG file");
 
-        Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("Nodes.png"), "File is not downloaded " +
+        Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("Nodes.svg"), "File is not downloaded " +
                 "or size of file is zero bytes.");
-        test.log(LogStatus.PASS, "Successfully downloaded Nodes graph as PNG file.");
-        LOGGER.info("Successfully downloaded Nodes graph as PNG file.");
+        test.log(LogStatus.PASS, "Successfully downloaded Nodes graph as SVG file.");
+        LOGGER.info("Successfully downloaded Nodes graph as SVG file.");
     }
 
 }

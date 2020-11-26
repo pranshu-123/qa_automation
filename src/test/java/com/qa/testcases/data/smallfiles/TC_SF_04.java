@@ -12,6 +12,7 @@ import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
@@ -21,9 +22,9 @@ import java.util.logging.Logger;
 public class TC_SF_04 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_SF_04.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
-    public void validateUIlistsalltheclusters(String clusterId) {
-        test = extent.startTest("TC_SF_04.validateUIlistsalltheclusters: " + clusterId, "Verify User is able " +
+    @Test()
+    public void validateUIlistsalltheclusters() {
+        test = extent.startTest("TC_SF_04.validateUIlistsalltheclusters: " , "Verify User is able " +
                 "Verify UI should display all the clusters connected to the Unravel Core node");
         test.assignCategory("Data- Small Files and File reports");
         Log.startTestCase("TC_SF_04.validateUIlistsalltheclusters");
@@ -54,41 +55,15 @@ public class TC_SF_04 extends BaseClass {
         test.log(LogStatus.INFO, "Clicked on Run Button");
 
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
+        homePage.clickOnClusterDropDown();
 
-        String minimumFileSize = "256";
-        smallfiles.minimumFileSize(minimumFileSize);
-        LOGGER.info("Set minimum FileSize as: " + minimumFileSize);
-        test.log(LogStatus.INFO, "Set minimum FileSize as: " + minimumFileSize);
+        //click on cluster search field
 
-        String maximumFileSize = "512";
-        smallfiles.maximumFileSize(maximumFileSize);
-        LOGGER.info("Set maximum FileSize as: " + maximumFileSize);
-        test.log(LogStatus.INFO, "Set maximum FileSize as: " + maximumFileSize);
+        Assert.assertTrue(smallfiles.getClustersList().size() > 0, "No cluster is displayed.");
+        test.log(LogStatus.PASS, "Cluster is displayed in dropdown.");
+        test.log(LogStatus.INFO, "All clusterId count: "+smallfilesPageObject.clusterList.size());
 
-        String minimumSmallFile = "1";
-        smallfiles.minimumSmallFile(minimumSmallFile);
-        LOGGER.info("Set minimum SmallFile as: " + minimumSmallFile);
-        test.log(LogStatus.INFO, "Set minimum Small File as: " + minimumSmallFile);
 
-        String directoriesToShow = "10";
-        smallfiles.directoriesToShow(directoriesToShow);
-        LOGGER.info("Set minimum SmallFile as: " + directoriesToShow);
-        test.log(LogStatus.INFO, "Set minimum Small File as: " + directoriesToShow);
 
-        smallfiles.clickOnModalRunButton();
-        waitExecuter.sleep(3000);
-        LOGGER.info("Clicked on Modal Run Button");
-        test.log(LogStatus.INFO, "Clicked on Modal Run Button");
-
-        try {
-            waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
-                    "Small file Report completed successfully.");
-            waitExecuter.sleep(3000);
-            test.log(LogStatus.PASS, "Verified smallfiles report is loaded properly.");
-            LOGGER.info("Verified smallfiles report is loaded properly");
-        } catch (TimeoutException te) {
-            throw new AssertionError("smallfiles Report not completed successfully.");
         }
-    }
 }

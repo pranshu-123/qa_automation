@@ -7,6 +7,9 @@ import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class Smallfiles {
 
@@ -33,6 +36,10 @@ public class Smallfiles {
             waitExecuter.waitUntilElementClickable(smallfilesPageObject.confirmationMessageElementClose.get(0));
             JavaScriptExecuter.clickOnElement(driver, smallfilesPageObject.confirmationMessageElementClose.get(0));
         }
+    }
+
+    public List<WebElement> getClustersList() {
+        return smallfilesPageObject.clusterList;
     }
 
     /**

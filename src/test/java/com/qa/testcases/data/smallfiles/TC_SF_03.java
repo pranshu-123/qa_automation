@@ -56,28 +56,23 @@ public class TC_SF_03 extends BaseClass {
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
 
-        //click on cluster search field
-        smallfilesPageObject.clusterIdsearchfield.click();
-        System.out.println("All clusterId size: " + smallfilesPageObject.clusterIdsList.size());
-        test.log(LogStatus.INFO, "All clusterId count: " + smallfilesPageObject.clusterIdsList.size());
-        test.log(LogStatus.PASS, "Validated cluster filter in UI");
 
-        String minimumFileSize = "6";
+        String minimumFileSize = "256";
         smallfiles.minimumFileSize(minimumFileSize);
         LOGGER.info("Set minimum FileSize as: " + minimumFileSize);
         test.log(LogStatus.INFO, "Set minimum FileSize as: " + minimumFileSize);
 
-        String maximumFileSize = "6";
+        String maximumFileSize = "512";
         smallfiles.maximumFileSize(maximumFileSize);
         LOGGER.info("Set maximum FileSize as: " + maximumFileSize);
         test.log(LogStatus.INFO, "Set maximum FileSize as: " + maximumFileSize);
 
-        String minimumSmallFile = "6";
+        String minimumSmallFile = "1";
         smallfiles.minimumSmallFile(minimumSmallFile);
         LOGGER.info("Set minimum SmallFile as: " + minimumSmallFile);
         test.log(LogStatus.INFO, "Set minimum Small File as: " + minimumSmallFile);
 
-        String directoriesToShow = "6";
+        String directoriesToShow = "10";
         smallfiles.directoriesToShow(directoriesToShow);
         LOGGER.info("Set minimum SmallFile as: " + directoriesToShow);
         test.log(LogStatus.INFO, "Set minimum Small File as: " + directoriesToShow);

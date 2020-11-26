@@ -28,6 +28,9 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
     public WebElement confirmationMessageElement;
 
+    @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
+    public WebElement verifyAbsoluteSize;
+
     @FindBy(xpath = "//h2[@class='text-white']/div")
     public WebElement modalCancelButton;
 
@@ -37,14 +40,20 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//span[@class='select2-results']/ul/li")
     public List<WebElement> clusterIdsList;
 
+    @FindBy(xpath="//ul[contains(concat(' ', @class, ' '), 'select2-results__options')]/li")
+    public List<WebElement> clusterList;
+
     @FindBy(xpath = "(//input[contains(@type,'text')])[2]")
     public WebElement minFileSize;
 
     @FindBy(xpath = "(//input[contains(@type,'text')])[3]")
     public WebElement maxiFileSize;
 
-    @FindBy(css = ".select2-search__field")
+    @FindBy(xpath = "//*[@id=\"select2-h9li-container\"]")
     public WebElement clusterIdsearchfield;
+
+    @FindBy(css = "//div[@class='close pointer']")
+    public WebElement closeAppsPageTab;
 
     @FindBy(xpath = "(//input[contains(@type,'text')])[4]")
     public WebElement minimumSmallFile;

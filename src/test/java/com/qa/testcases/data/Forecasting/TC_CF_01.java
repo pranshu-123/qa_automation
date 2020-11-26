@@ -21,8 +21,8 @@ public class TC_CF_01 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void validateForecastingReportGenerated(String clusterId) {
-        test = extent.startTest("TC_CF_01.validateForecastingReportGenerated: "+ clusterId, "Verify User is able " +
-                "to trigger a new report or cancel the selection");
+        test = extent.startTest("TC_CF_01.validateForecastingReportGenerated: "+ clusterId,
+                "Verify User is able to trigger a new report or cancel the selection");
         test.assignCategory(" Data - Forecasting ");
         LOGGER.info("Passed Parameter Is : " + clusterId);
 

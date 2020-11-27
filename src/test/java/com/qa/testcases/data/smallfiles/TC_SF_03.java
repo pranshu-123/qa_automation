@@ -31,8 +31,9 @@ public class TC_SF_03 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         waitExecuter.waitUntilElementPresent(topPanelComponentPageObject.data);
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilPageFullyLoaded();
         MouseActions.clickOnElement(driver, topPanelComponentPageObject.data);
+        waitExecuter.sleep(2000);
         LOGGER.info("Clicked on Data Tab");
         test.log(LogStatus.INFO, "Clicked on Data Tab");
 

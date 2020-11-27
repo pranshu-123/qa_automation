@@ -14,22 +14,24 @@ import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
-import org.openqa.selenium.Keys;
+
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Marker.AppDetailsHive
 @Marker.All
-public class TC_HIVE_44 extends BaseClass {
-    private static final Logger LOGGER = Logger.getLogger(TC_HIVE_44.class.getName());
+public class TC_HIVE_62 extends BaseClass {
+    private static final Logger LOGGER = Logger.getLogger(TC_HIVE_62.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void VerifyCopyAppIdFunctionality(String clusterId) {
-        test = extent.startTest("TC_HIVE_44.VerifyCopyAppIdFunctionality",
-                "Verify that on hovering over app, we can copy the application id by clicking on '+' icon.");
+    public void VerifyAppDetailsRightHeader(String clusterId) {
+        test = extent.startTest("TC_HIVE_62.VerifyAppDetailsRightHeader",
+                "Verify that when Hive app should contain KPIs Owner, Cluster and Quene Name.");
         test.assignCategory("App Details - Hive");
         test.log(LogStatus.INFO, "Login to the application");
 
@@ -59,79 +61,79 @@ public class TC_HIVE_44 extends BaseClass {
         waitExecuter.sleep(1000);
         datePicker.selectLast30Days();
         waitExecuter.sleep(2000);
+
         // Select cluster
         test.log(LogStatus.INFO, "Select clusterid : " + clusterId);
         LOGGER.info("Select clusterId : " + clusterId);
         allApps.selectCluster(clusterId);
         waitExecuter.sleep(3000);
-        // Select 'Only' hive type and get its jobs count
-        test.log(LogStatus.INFO, "Select 'Only' hive from app types and get its jobs count");
-        LOGGER.info("Select 'Only' hive from app types and get its jobs count");
+        // Select only Hive apps and check if app counts is 0 or greater than that
+        test.log(LogStatus.INFO, "Select only hive apps and check if app counts is 0 or greater than that");
+        LOGGER.info("Select only hive apps and check if app counts is 0 or greater than that");
         sparkApp.clickOnlyLink("Hive");
-        int hiveAppCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
-                .replaceAll("[^\\dA-Za-z ]", "").trim());
-        if (hiveAppCount > 0) {
-            // Hive on to the first row
-            test.log(LogStatus.INFO, "Hive on to the first row");
-            LOGGER.info("Hive on to the first row");
+
+        applicationsPageObject.expandStatus.click();
+        int appCount = sparkApp.clickOnlyLink("Success");
+
+        if (appCount > 0) {
+            // Get Hive app id from the first row
+            test.log(LogStatus.INFO, "Get Hive app id from the first row");
+            LOGGER.info("Get Hive app id from the first row");
             WebElement name = applicationsPageObject.getAppNameFromTable;
             actions.moveToElement(name).perform();
             waitExecuter.sleep(1000);
             actions.moveToElement(applicationsPageObject.copyAppName).perform();
             waitExecuter.sleep(1000);
             applicationsPageObject.copyAppName.click();
-            Assert.assertTrue(applicationsPageObject.successBanner.isDisplayed(), "App id is not copied");
-            test.log(LogStatus.PASS, "On clicking on + app id got copied");
-            waitExecuter.sleep(1000);
-            applicationsPageObject.globalSearchBox.click();
-            waitExecuter.sleep(1000);
+            String appId = null;
             try {
                 String data = (String) Toolkit.getDefaultToolkit().getSystemClipboard()
                         .getData(DataFlavor.stringFlavor);
                 String[] getCopiedText = data.split(":");
-                LOGGER.info("Search by ID - " + getCopiedText[2]);
-                applicationsPageObject.globalSearchBox.clear();
-                waitExecuter.sleep(1000);
-                applicationsPageObject.globalSearchBox.sendKeys(getCopiedText[2]);
-                waitExecuter.sleep(1000);
-                applicationsPageObject.globalSearchBox.sendKeys(Keys.ENTER);
-                waitExecuter.sleep(1000);
+                // Click on first app in table to navigate to app details page
+                test.log(LogStatus.INFO, "Click on first app in table to navigate to app details page");
+                LOGGER.info("Click on first app in table to navigate to app details page");
+                applicationsPageObject.getStatusFromTable.click();
+                waitExecuter.waitUntilElementPresent(applicationsPageObject.loader);
+                appId = getCopiedText[2];
             } catch (HeadlessException | UnsupportedFlavorException | IOException e) {
-                // TODO Auto-generated catch block
+                driver.navigate().back();
+                waitExecuter.sleep(5000);
+                allApps.reset();
                 e.printStackTrace();
             }
-            waitExecuter.sleep(2000);
-            /*
-             * Validate that on copying the ID on globalsearch, only that row appears in
-             * table
-             */
-            test.log(LogStatus.INFO, "Validate that on copying the ID on globalsearch, only that row appears in table");
-            LOGGER.info("Validate that on copying the ID on globalsearch, only that row appears in table");
-            String value = applicationsPageObject.globalSearchBox.getAttribute("value");
-            Assert.assertTrue(applicationsPageObject.getStatusColumnFromTable.size() == 1,
-                    "On searching by ID the table contains more than 1 row. " + value);
-            test.log(LogStatus.PASS, "On searching by ID the table contains 1 row.");
+            // Assert that Owner, Queue and Cluster is displayed
+            test.log(LogStatus.INFO, "Assert that Owner, Queue and Cluster is displayed");
+            LOGGER.info("Assert that Owner, Queue and Cluster is displayed");
+            List<String> ownerClusterQueueName = new ArrayList<>();
+            for (int i = 0; i < applicationsPageObject.getOwnerClusterQueueName.size(); i++) {
+                ownerClusterQueueName.add(applicationsPageObject.getOwnerClusterQueueName.get(i).getText().trim());
+                LOGGER.info("Right header for hive app loaded successfully- "
+                        + ownerClusterQueueName);
+            }
+            waitExecuter.sleep(3000);
+            Assert.assertNotNull(ownerClusterQueueName,
+                    "Right header didn't load for app id- " + appId);
+            test.log(LogStatus.PASS, "Owner, cluster and Queue Name loaded successfully for app id- " + appId);
             waitExecuter.sleep(1000);
+            // Navigate back to parent page and click on reset
+            test.log(LogStatus.INFO, "Navigate back to parent page and click on reset");
+            LOGGER.info("Navigate back to parent page and click on reset");
             driver.navigate().back();
-            waitExecuter.sleep(1000);
-            driver.navigate().refresh();
-            // Reset the application filter
-            test.log(LogStatus.INFO, "Reset the application filter");
+            waitExecuter.sleep(5000);
             allApps.reset();
+            driver.navigate().refresh();
         } else {
             Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
                     "The clusterId does not have any application under it and also does not display 'No Data Available' for it"
                             + clusterId);
-            test.log(LogStatus.SKIP, "The clusterId does not have any application under it.");
+            test.log(LogStatus.SKIP, "The clusterId does not have application as per the filter applied under it.");
             waitExecuter.sleep(1000);
-            driver.navigate().back();
-            waitExecuter.sleep(1000);
-            driver.navigate().refresh();
-            // Reset the application filter
-            test.log(LogStatus.INFO, "Reset the application filter");
+            // Click on reset if there are no hive apps
+            test.log(LogStatus.INFO, "Click on reset if there are no hive apps");
+            LOGGER.info("Click on reset if there are no hive apps");
             allApps.reset();
-            throw new SkipException("The clusterId does not have any application under it");
+            throw new SkipException("The clusterId does not have any application under it.");
         }
-
     }
 }

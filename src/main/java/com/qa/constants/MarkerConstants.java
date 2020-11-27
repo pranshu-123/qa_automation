@@ -38,6 +38,7 @@ public class MarkerConstants {
   public static final String REPORTS_SCHEDULED = "reports_scheduled";
   public static final String APP_DETAILS_HIVE = "app_details_hive";
   public static final String DATA_FORECASTING = "data_forecasting";
+  public static final String DATA_SMALLFILES = "data_smallfiles";
   public static final String CLUSTER_TUNING = "cluster_tuning";
 
   /**
@@ -73,6 +74,7 @@ public class MarkerConstants {
     map.put(REPORTS_SCHEDULED, Marker.ReportsScheduled.class);
     map.put(APP_DETAILS_HIVE, Marker.AppDetailsHive.class);
     map.put(DATA_FORECASTING, Marker.DataForecasting.class);
+    map.put(DATA_FORECASTING, Marker.DataSmallFiles.class);
     map.put(CLUSTER_TUNING, Marker.Tuning.class);
     return Collections.unmodifiableMap(map);
   }

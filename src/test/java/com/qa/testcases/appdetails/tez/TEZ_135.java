@@ -18,7 +18,7 @@ public class TEZ_135 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TEZ_135_verifytheDags(String clusterId) {
         test = extent.startTest("TEZ_135_verifytheDags: " + clusterId,
-                "Verify Verify if the dags are present in the left pane and value should be populated");
+                "Verify if the dags are present in the left pane and value should be populated");
         test.assignCategory(" Apps Details-Tez");
         Log.startTestCase("TEZ_135_verifytheDags");
         TezAppsDetailsPage tezDetailsPage = new TezAppsDetailsPage(driver);

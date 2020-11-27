@@ -34,5 +34,6 @@ public @interface Marker {
   @interface Manage {}
   @interface AppDetailsHive {}
   @interface DataForecasting {}
+  @interface DataSmallFiles {}
   @interface Tuning {}
 }

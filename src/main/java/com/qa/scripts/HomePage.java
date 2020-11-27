@@ -5,6 +5,7 @@ import com.qa.pagefactory.CommonPageObject;
 import com.qa.pagefactory.HomePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.utils.JavaScriptExecuter;
+import com.qa.utils.MouseActions;
 import com.qa.utils.actions.UserActions;
 import com.qa.utils.WaitExecuter;
 import org.openqa.selenium.WebDriver;
@@ -144,6 +145,11 @@ public class HomePage {
     homePageObject.nodesGraphDownloadMenu.click();
   }
 
+  public void clickOnVCoresGraphDownloadMenu(){
+    waitExecuter.sleep(3000);
+    MouseActions.clickOnElement(driver, homePageObject.vcoresGraphDownloadMenu);
+  }
+
   public void downloadNodesGraphAsFile(String asFile){
     waitExecuter.sleep(3000);
     int graphDownloadMenuCount = homePageObject.listnodesGraphDownloadMenu.size();
@@ -157,6 +163,21 @@ public class HomePage {
       }
     }
   }
+
+  public void downloadVCoresGraphAsFile(String asFile){
+    waitExecuter.sleep(3000);
+    int graphDownloadMenuCount = homePageObject.listvcoresGraphDownloadMenu.size();
+    if( graphDownloadMenuCount > 0){
+      for(int i=0; i<graphDownloadMenuCount; i++){
+        if(homePageObject.listvcoresGraphDownloadMenu.get(i).getText().equals(asFile)){
+          System.out.println("Download file found now click on it");
+          homePageObject.listvcoresGraphDownloadMenu.get(i).click();
+          waitExecuter.sleep(15000);
+        }
+      }
+    }
+  }
+
 
   public void navigateToHomePage() {
     userActions.performActionWithPolling(topPanel.unravelLogo, UserAction.CLICK);

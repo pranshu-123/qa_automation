@@ -24,7 +24,7 @@ public class TC_SF_01 extends BaseClass {
     public void validatesmallFilereports(String clusterId) {
         test = extent.startTest("TC_SF_01.validatesmallFilereports: " + clusterId, "Verify User is able " +
                 "Verify UI should open a mini Winodw for the user to enter all the parameters for small files");
-        test.assignCategory(" Data - Forecasting ");
+        test.assignCategory("Data- Small Files and File reports");
         LOGGER.info("Passed Parameter Is : " + clusterId);
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);

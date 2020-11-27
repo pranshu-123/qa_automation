@@ -150,6 +150,16 @@ public class HomePage {
     MouseActions.clickOnElement(driver, homePageObject.vcoresGraphDownloadMenu);
   }
 
+  public void clickOnMemoryGraphDownloadMenu(){
+    waitExecuter.sleep(3000);
+    MouseActions.clickOnElement(driver, homePageObject.memoryGraphDownloadMenu);
+  }
+
+  public void clickOnRunningGraphDownloadMenu(){
+    waitExecuter.sleep(3000);
+    MouseActions.clickOnElement(driver, homePageObject.runningGraphDownloadMenu);
+  }
+
   public void downloadNodesGraphAsFile(String asFile){
     waitExecuter.sleep(3000);
     int graphDownloadMenuCount = homePageObject.listnodesGraphDownloadMenu.size();
@@ -178,6 +188,33 @@ public class HomePage {
     }
   }
 
+  public void downloadMemoryGraphAsFile(String asFile){
+    waitExecuter.sleep(3000);
+    int graphDownloadMenuCount = homePageObject.listmemoryGraphDownloadMenu.size();
+    if( graphDownloadMenuCount > 0){
+      for(int i=0; i<graphDownloadMenuCount; i++){
+        if(homePageObject.listmemoryGraphDownloadMenu.get(i).getText().equals(asFile)){
+          System.out.println("Download file found now click on it");
+          homePageObject.listmemoryGraphDownloadMenu.get(i).click();
+          waitExecuter.sleep(15000);
+        }
+      }
+    }
+  }
+
+  public void downloadRunningGraphAsFile(String asFile){
+    waitExecuter.sleep(3000);
+    int graphDownloadMenuCount = homePageObject.listrunningGraphDownloadMenu.size();
+    if( graphDownloadMenuCount > 0){
+      for(int i=0; i<graphDownloadMenuCount; i++){
+        if(homePageObject.listrunningGraphDownloadMenu.get(i).getText().equals(asFile)){
+          System.out.println("Download file found now click on it");
+          homePageObject.listrunningGraphDownloadMenu.get(i).click();
+          waitExecuter.sleep(15000);
+        }
+      }
+    }
+  }
 
   public void navigateToHomePage() {
     userActions.performActionWithPolling(topPanel.unravelLogo, UserAction.CLICK);

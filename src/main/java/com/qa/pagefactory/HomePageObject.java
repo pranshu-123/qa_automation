@@ -98,14 +98,26 @@ public class HomePageObject {
   @FindBy(xpath ="//h4[contains(text(),'Memory')]/following-sibling::div/span/div/span/a")
   public WebElement memoryGraphDownloadMenu;
 
+  @FindBy(xpath = "//h4[contains(text(),'Memory')]/following-sibling::div/span/div/ul/li")
+  public List<WebElement> listmemoryGraphDownloadMenu;
+
   @FindBy(xpath ="//h4[contains(text(),'Running')]/following-sibling::div/span/div/span/a")
   public WebElement runningGraphDownloadMenu;
+
+  @FindBy(xpath = "//h4[contains(text(),'Running')]/following-sibling::div/span/div/ul/li")
+  public List<WebElement> listrunningGraphDownloadMenu;
 
   @FindBy(xpath ="//h4[contains(text(),'By Status')]/following-sibling::div/span/div/span/a")
   public WebElement bystatusGraphDownloadMenu;
 
+  @FindBy(xpath = "//h4[contains(text(),'By Status')]/following-sibling::div/span/div/ul/li")
+  public List<WebElement> listbystatusGraphDownloadMenu;
+
   @FindBy(xpath ="//h4[contains(text(),'Inefficient Events')]/following-sibling::div/span/div/span/a")
   public WebElement inefficienteventsGraphDownloadMenu;
+
+  @FindBy(xpath = "//h4[contains(text(),'Inefficient Events')]/following-sibling::div/span/div/ul/li")
+  public List<WebElement> listinefficienteventsGraphDownloadMenu;
 
   /**
    * @param driver The driver that will be used to look up the elements

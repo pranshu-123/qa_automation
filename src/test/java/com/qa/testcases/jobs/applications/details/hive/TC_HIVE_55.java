@@ -96,7 +96,7 @@ public class TC_HIVE_55 extends BaseClass {
                 LOGGER.info("Assert that App details page opens");
                 Assert.assertTrue(applicationsPageObject.appSummary.isDisplayed(),
                         "Application Summary page is not opened for id- " + getCopiedText[2]);
-				test.log(LogStatus.PASS,"App details page is launched successfully");
+                test.log(LogStatus.PASS, "App details page is launched successfully");
                 waitExecuter.sleep(1000);
                 // Navigate back to parent page and click on reset
                 test.log(LogStatus.INFO, "Navigate back to parent page and click on reset");

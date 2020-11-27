@@ -46,7 +46,6 @@ public class TC_HIVE_60 extends BaseClass {
         DatePicker datePicker = new DatePicker(driver);
         Actions actions = new Actions(driver);
         SparkAppsDetailsPage sparkApp = new SparkAppsDetailsPage(driver);
-        // JavaScriptExecuter executor = (JavaScriptExecuter) driver;
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         LOGGER.info("Navigate to jobs tab from header");

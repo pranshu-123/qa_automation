@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+
 @Marker.AppDetailsHive
 @Marker.All
 public class TC_HIVE_59_Tez extends BaseClass {
@@ -44,7 +45,6 @@ public class TC_HIVE_59_Tez extends BaseClass {
         DatePicker datePicker = new DatePicker(driver);
         Actions actions = new Actions(driver);
         SparkAppsDetailsPage sparkApp = new SparkAppsDetailsPage(driver);
-        // JavaScriptExecuter executor = (JavaScriptExecuter) driver;
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         LOGGER.info("Navigate to jobs tab from header");

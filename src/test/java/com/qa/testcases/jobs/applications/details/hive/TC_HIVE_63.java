@@ -113,7 +113,7 @@ public class TC_HIVE_63 extends BaseClass {
                 waitExecuter.sleep(3000);
             }
             Assert.assertNotNull(tabsName, "Tabs are not present for hive apps " + appId);
-			test.log(LogStatus.PASS,"All tabs expected for hive apps loaded successfully");
+            test.log(LogStatus.PASS, "All tabs expected for hive apps loaded successfully");
             waitExecuter.sleep(1000);
             // Navigate back to parent page and click on reset
             test.log(LogStatus.INFO, "Navigate back to parent page and click on reset");

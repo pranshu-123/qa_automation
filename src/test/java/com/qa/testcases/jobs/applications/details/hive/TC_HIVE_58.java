@@ -1,5 +1,6 @@
 package com.qa.testcases.jobs.applications.details.hive;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
@@ -22,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+@Marker.AppDetailsHive
+@Marker.All
 public class TC_HIVE_58 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_HIVE_58.class.getName());
 

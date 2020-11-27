@@ -28,7 +28,7 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
     public WebElement confirmationMessageElement;
 
-    @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
+    @FindBy(xpath = "//*[@id=\"app\"]/div/div[1]/div[2]/div/div[4]/div/div[1]/div/div[1]")
     public WebElement verifyAbsoluteSize;
 
     @FindBy(xpath = "//h2[@class='text-white']/div")

@@ -15,19 +15,19 @@ import java.util.logging.Logger;
 
 @Marker.ClusterOverview
 @Marker.All
-public class TC_CO_30 extends BaseClass {
+public class TC_CO_27 extends BaseClass {
 
     /**
-     * Verify VCores graph 'Download CSV'
+     * Verify VCores graph 'Download JPEG'
      */
 
-    private static final Logger LOGGER = Logger.getLogger(TC_CO_30.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TC_CO_27.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void ValidateVCoresGraphDownloadAsCSV(String clusterId) {
+    public void ValidateVCoresGraphDownloadAsJPEG(String clusterId) {
 
-        test = extent.startTest("TC_CO_30.ValidateVCoresGraphDownloadAsCSV: " + clusterId,
-                "Validate download of VCores graph as CSV file.");
+        test = extent.startTest("TC_CO_27.ValidateVCoresGraphDownloadAsJPEG: " + clusterId,
+                "Validate download of VCores graph as JPEG file.");
         test.assignCategory(" Cluster Overview");
 
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
@@ -49,13 +49,13 @@ public class TC_CO_30 extends BaseClass {
         homePage.clickOnVCoresGraphDownloadMenu();
         LOGGER.info("Clicked on VCores Graph download menu ... ");
 
-        homePage.downloadVCoresGraphAsFile("Download CSV");
-        LOGGER.info("Download CSV file");
+        homePage.downloadVCoresGraphAsFile("Download JPEG");
+        LOGGER.info("Download JPEG file");
 
-        Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("VCores.csv"), "File is not downloaded " +
+        Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("VCores.jpeg"), "File is not downloaded " +
                 "or size of file is zero bytes.");
-        test.log(LogStatus.PASS, "Successfully downloaded VCores graph as CSV file.");
-        LOGGER.info("Successfully downloaded VCores graph as CSV file.");
+        test.log(LogStatus.PASS, "Successfully downloaded VCores graph as JPEG file.");
+        LOGGER.info("Successfully downloaded VCores graph as JPEG file.");
     }
 
 }

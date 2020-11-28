@@ -44,17 +44,38 @@ public class KafkaPageObject {
   @FindBy(xpath = "//div[@class='container-fluid']//div[contains(@class,'dashboard-module')]//div[@class='footer']//span")
   public List<WebElement> kafkaMetricsFooter;
 
+  @FindBy(xpath = "//*[@id='app']//div[3]/h2")
+  public WebElement metricsTitle;
+
   @FindBy(xpath = "//div[@class='col-md-2']/input")
   public WebElement topicSearchBox;
 
-  @FindBy(xpath = "//table[@class='component-data-tables']/thead/tr/th")
-  public List<WebElement> topicTableHeader;
+  @FindBy(xpath = "//div[@class='filterclass']/input")
+  public WebElement brokerSearchBox;
 
-  @FindBy(xpath = "//tbody/tr")
+  @FindBy(xpath = "//table[@class='component-data-tables']/thead/tr/th/span")
+  public List<WebElement> topicTableCol;
+
+   @FindBy(xpath = "//tbody/tr")
   public List<WebElement> topicTableRows;
 
-  @FindBy(xpath = " //tbody/tr/td")
+  @FindBy(xpath = "//tbody/tr/td")
   public List<WebElement> topicTableRowData;
+
+  @FindBy(xpath = "//*[contains(@id,'column-')]/span")
+  public List<WebElement> brokerCol;
+
+  @FindBy(xpath = "//tbody[@id='undefined-body']/tr")
+  public List<WebElement> brokerRows;
+
+  @FindBy(xpath = "//*[@class='component-dashboard']")
+  public WebElement componentDashboard;
+
+  @FindBy(xpath = "//*[@class=\"container-fluid\"]/h2")
+  public WebElement latestMetricsInfo;
+
+  @FindBy(xpath = "//*[@id='undefined-body']//td[@class='active-td']")
+  public List<WebElement> selectedRowColor;
 
   public KafkaPageObject(WebDriver driver) {
     PageFactory.initElements(driver, this);

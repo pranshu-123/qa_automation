@@ -35,4 +35,5 @@ public @interface Marker {
   @interface AppDetailsHive {}
   @interface DataForecasting {}
   @interface Tuning {}
+  @interface KafkaExternal {}
 }

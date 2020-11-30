@@ -207,9 +207,6 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//span[(text()='User')]//following-sibling::a[contains(@class,'sorting')]")
     public WebElement sortByUser;
 
-    @FindBy(xpath = "//*[contains(@class,'nprogress-busy')]")
-    public WebElement loader;
-
     @FindBy(id = "runningAppList")
     public WebElement runningAppTab;
 
@@ -296,6 +293,46 @@ public class ApplicationsPageObject {
 
     @FindBy(xpath = "//table[@id='allApps']/tbody")
     public WebElement allAppsTable;
+
+    @FindBy(xpath = "//h4[@class='job-times']/span/b")
+    public List<WebElement> getJobTimesHeading;
+
+    @FindBy(xpath = "//h4[@class='job-times']/span")
+    public List<WebElement> getJobTimes;
+
+
+    @FindBy(xpath = "//span[contains(@class,'module-status')]")
+    public WebElement hiveChildApp;
+
+    @FindBy(className  = "nprogress-busy")
+    public WebElement loader;
+
+    @FindBy(xpath = "//div[contains(@class,'justify-content-start')]//h5")
+    public List<WebElement> getAllKPIHeading;
+
+    @FindBy(xpath = "//div[contains(@class,'justify-content-start')]//h3")
+    public List<WebElement> getAllKPIHeadingValues;
+
+    @FindBy(xpath = "//div[@class='right']/span")
+    public List<WebElement> getOwnerClusterQueueName;
+
+    @FindBy(xpath = "//div[@class='component-tabs-primary']//li/a")
+    public List<WebElement> appDetailsTabs;
+
+    @FindBy (xpath ="(//tbody[@id = 'allApps-body']/tr/td[12]//span)[2][@class='tez']")
+    public List<WebElement> checkTezInParentApp;
+
+    @FindBy(xpath = "//div[@id = 'scrollableMenu']//li/a")
+    public List<WebElement> hiveTezAppDetailsTab;
+
+    @FindBy(xpath = "//div[contains(@class,'component-tabs-secondary')]//li//a")
+    public List<WebElement> mrHiveLeftPaneHeaders;
+
+    @FindBy(xpath = "(//div[contains(@class,'component-section-header')]/h2/span)[1]")
+    public WebElement hiveTezChildApp;
+
+    @FindBy(xpath = "//div[contains(@class,'component-tabs-secondary')]//span/a")
+    public WebElement tezDagsDisplayed;
 
     /**
      * @param driver The driver that will be used to look up the elements

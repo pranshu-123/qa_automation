@@ -133,7 +133,6 @@ public class HomePage {
     if (clusterSize > 0) {
       for (int i = 0; i < clusterList.size(); i++) {
         String clusterNames = clusterList.get(i).getText();
-        //System.out.println("Cluster name: "+ clusterNames);
         listOfClusters.add(clusterNames);
       }
     }
@@ -176,7 +175,6 @@ public class HomePage {
     if( graphDownloadMenuCount > 0){
       for(int i=0; i<graphDownloadMenuCount; i++){
         if(homePageObject.listnodesGraphDownloadMenu.get(i).getText().equals(asFile)){
-          System.out.println("Download file found now click on it");
           homePageObject.listnodesGraphDownloadMenu.get(i).click();
           waitExecuter.sleep(15000);
         }
@@ -190,7 +188,6 @@ public class HomePage {
     if( graphDownloadMenuCount > 0){
       for(int i=0; i<graphDownloadMenuCount; i++){
         if(homePageObject.listvcoresGraphDownloadMenu.get(i).getText().equals(asFile)){
-          System.out.println("Download file found now click on it");
           homePageObject.listvcoresGraphDownloadMenu.get(i).click();
           waitExecuter.sleep(15000);
         }
@@ -204,7 +201,6 @@ public class HomePage {
     if( graphDownloadMenuCount > 0){
       for(int i=0; i<graphDownloadMenuCount; i++){
         if(homePageObject.listmemoryGraphDownloadMenu.get(i).getText().equals(asFile)){
-          System.out.println("Download file found now click on it");
           homePageObject.listmemoryGraphDownloadMenu.get(i).click();
           waitExecuter.sleep(15000);
         }
@@ -218,7 +214,6 @@ public class HomePage {
     if( graphDownloadMenuCount > 0){
       for(int i=0; i<graphDownloadMenuCount; i++){
         if(homePageObject.listrunningGraphDownloadMenu.get(i).getText().equals(asFile)){
-          System.out.println("Download file found now click on it");
           homePageObject.listrunningGraphDownloadMenu.get(i).click();
           waitExecuter.sleep(15000);
         }
@@ -232,7 +227,6 @@ public class HomePage {
     if( graphDownloadMenuCount > 0){
       for(int i=0; i<graphDownloadMenuCount; i++){
         if(homePageObject.listbystatusGraphDownloadMenu.get(i).getText().equals(asFile)){
-          System.out.println("Download file found now click on it");
           homePageObject.listbystatusGraphDownloadMenu.get(i).click();
           waitExecuter.sleep(15000);
         }
@@ -246,7 +240,6 @@ public class HomePage {
     if( graphDownloadMenuCount > 0){
       for(int i=0; i<graphDownloadMenuCount; i++){
         if(homePageObject.listinefficienteventsGraphDownloadMenu.get(i).getText().equals(asFile)){
-          System.out.println("Download file found now click on it");
           homePageObject.listinefficienteventsGraphDownloadMenu.get(i).click();
           waitExecuter.sleep(15000);
         }

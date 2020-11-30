@@ -36,7 +36,7 @@ public class TC_KAFKA_23 extends BaseClass {
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
     kafkaPage.verifyClusterDropDown(kafkaPageObject);
-    kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject, "# Under Replicated Partitions");
+    kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject, "# Under Replicated Partitions", "kafkaGraph4");
     test.log(LogStatus.PASS, "Verified '# Under Replicated Partitions' KPI information name ,values and graphs " +
         "successfully ");
   }

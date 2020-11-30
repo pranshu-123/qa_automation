@@ -36,7 +36,8 @@ public class TC_KAFKA_25 extends BaseClass {
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
     kafkaPage.verifyClusterDropDown(kafkaPageObject);
-    kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject, "Request Handler Idle Ratio Average per Minute");
+    kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject, "Request Handler Idle Ratio Average per Minute",
+        "kafkaGraph6");
     test.log(LogStatus.PASS, "Verified 'Request Handler Idle Ratio Average per Minute' KPI information name" +
         " ,values and graphs successfully ");
   }

@@ -36,7 +36,7 @@ public class TC_KAFKA_21 extends BaseClass {
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
     kafkaPage.verifyClusterDropDown(kafkaPageObject);
-    kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject, "Messages In per Second");
+    kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject, "Messages In per Second", "kafkaGraph2");
     test.log(LogStatus.PASS, "Verified 'Messages In per Second' KPI information name ,values and graphs successfully ");
   }
 }

@@ -36,7 +36,7 @@ public class TC_KAFKA_34 extends BaseClass {
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
     kafkaPage.verifyClusterDropDown(kafkaPageObject);
-    kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject, "Fetch Purgatory Size");
+    kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject, "Fetch Purgatory Size", "kafkaGraph15");
     test.log(LogStatus.PASS, "Verified 'Fetch Purgatory Size' KPI information name" +
         " ,values and graphs successfully ");
   }

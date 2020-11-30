@@ -1,5 +1,6 @@
 package com.qa.scripts.clusters.kafka;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.qa.pagefactory.clusters.KafkaPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.utils.MouseActions;
@@ -9,7 +10,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -17,7 +20,12 @@ public class KafkaPage {
   private WaitExecuter waitExecuter;
   private WebDriver driver;
   private DatePicker datePicker;
+  String xAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]" +
+      "//*[name()='g' and contains(@class,'highcharts-yaxis-labels')]/*[name()='text']/*[name()='tspan']";
+  String yAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]" +
+      "//*[name()='g' and contains(@class,'highcharts-yaxis-labels')]/*[name()='text']/*[name()='tspan']";
 
+  ////*[@id='kafkaGraph0']
   Logger logger = Logger.getLogger(KafkaPage.class.getName());
 
   /**
@@ -60,6 +68,7 @@ public class KafkaPage {
    */
   public String verifyClusterDropDown(KafkaPageObject kafkaPageObject) {
     waitExecuter.waitUntilElementClickable(kafkaPageObject.kafkaClusterDropDown);
+    waitExecuter.sleep(2000);
     MouseActions.clickOnElement(driver, kafkaPageObject.kafkaClusterDropDown);
     waitExecuter.sleep(2000);
     List<WebElement> kafkaClusterList = kafkaPageObject.kafkaClusters;
@@ -104,15 +113,17 @@ public class KafkaPage {
   /***
    * Method to verify the Kafka Metrics KPI Graphs of a connected kafka cluster
    */
-  public void verifyKafkaKPIGraphs(KafkaPageObject kafkaPageObject, String expectedMetricsName) {
+  public void verifyKafkaKPIGraphs(KafkaPageObject kafkaPageObject, String expectedMetricsName, String graphId) {
     List<WebElement> metricsKpiList = kafkaPageObject.kafkaMetrics;
     List<WebElement> metricsKpiHeaderList = kafkaPageObject.kafkaMetricsHeader;
     List<WebElement> metricsKpiFooterList = kafkaPageObject.kafkaMetricsFooter;
     List<WebElement> metricsKpiGraphList = kafkaPageObject.kafkaMetricsGraph;
     Assert.assertFalse(metricsKpiList.isEmpty(), "Metrics for kafka cluster is empty");
+    String xAxisPath = "//*[@id='" + graphId + "']" + xAxis;
+    String yAxisPath = "//*[@id='" + graphId + "']" + yAxis;
     for (int i = 0; i < metricsKpiList.size(); i++) {
       String metricsName = metricsKpiHeaderList.get(i).getText();
-      logger.info("Metrics Name: " + metricsName);
+      logger.info("Metrics Name: " + metricsName + " Expected Name: "+ expectedMetricsName);
       if (metricsName.equals(expectedMetricsName)) {
         Assert.assertFalse(metricsName.isEmpty(), " Metrics Name not displayed");
         logger.info("Metrics Name: [" + metricsName + "] displayed in the header");
@@ -120,9 +131,26 @@ public class KafkaPage {
         logger.info("The graph for Metrics : [" + metricsName + "] is displayed");
         Assert.assertTrue(metricsKpiFooterList.get(i).isDisplayed(), "The footer for metrics " + metricsName + " is not displayed");
         logger.info("The footer for Metrics : [" + metricsName + "] is displayed");
+        verifyAxis(xAxisPath,"X-Axis");
+        verifyAxis(yAxisPath,"Y-Axis");
       }
     }
   }
+
+  public void verifyAxis(String axisPath, String axisName) {
+    List<WebElement> axisPathList = driver.findElements(By.xpath(axisPath));
+    Assert.assertFalse(axisPathList.isEmpty(), "No points plotted on the "+axisName);
+    HashSet<String> axisValSet = new HashSet<>();
+    ArrayList<String> axisValArr = new ArrayList<>();
+    for (int i = 0; i < axisPathList.size(); i++) {
+      axisValArr.add(axisPathList.get(i).getText());
+      axisValSet.add(axisPathList.get(i).getText());
+    }
+    logger.info("Expected X-Axis: "+ axisValSet + "\n Actual X-Axis: "+ axisValArr);
+    Assert.assertEquals(axisValSet.size(),axisValArr.size(),"Duplicate values present in the "+axisName+"\n" +
+        "Expected : "+ axisValSet+ " Actual : "+ axisValArr);
+  }
+
 
   /***
    * Method to verify the info msg for kafka metrics.
@@ -142,12 +170,15 @@ public class KafkaPage {
     List<WebElement> rowDataList = kafkaPageObject.topicTableRowData;
     Assert.assertFalse(colList.isEmpty(), "No columns for topic table");
     Assert.assertFalse(rowList.isEmpty(), "No data found for the topic tables ");
-    for (int row = 1; row <= rowList.size(); row++) {
-      for (int col = 1; col <= colList.size(); col++) {
+    for (int row = 0; row < rowList.size(); row++) {
+      for (int col = 0; col < colList.size(); col++) {
         String colName = colList.get(col).getText();
         logger.info("The colName is: " + colName);
-        WebElement rowData = driver.findElement(By.xpath("//tbody/tr[" + row + "]/td[" + col + "]"));
+        WebElement rowData = driver.findElement(By.xpath("//tbody/tr[" + (row + 1) + "]/td[" + (col + 1) + "]"));
         Assert.assertTrue(rowData.isDisplayed(), "No data under column: " + colName);
+        //Check if data has only special charaters
+        boolean onlySpecialChars = rowData.getText().matches("[^a-zA-Z0-9]+");
+        Assert.assertFalse(onlySpecialChars, "Expected value for column "+ colName + " But got: "+ rowData.getText());
         logger.info("Row data for column: " + colName + "\n " + rowData.getText());
       }
     }
@@ -167,6 +198,9 @@ public class KafkaPage {
       for (int row = 1; row <= brokerRowList.size(); row++) {
         WebElement rowData = driver.findElement(By.xpath("//tbody[@id='undefined-body']/tr/td[" + (col + 1) + "]/span"));
         Assert.assertTrue(rowData.isDisplayed(), "No data under column: " + colName);
+        //Check if data has only special charaters
+        boolean onlySpecialChars = rowData.getText().matches("[^a-zA-Z0-9]+");
+        Assert.assertFalse(onlySpecialChars, "Expected value for column "+ colName + " But got: "+ rowData.getText());
         logger.info("Row data for column: " + colName + "\n " + rowData.getText());
       }
     }

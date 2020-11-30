@@ -36,7 +36,8 @@ public class TC_KAFKA_30 extends BaseClass {
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
     kafkaPage.verifyClusterDropDown(kafkaPageObject);
-    kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject, "Produce Total Time, 99th Percentile");
+    kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject, "Produce Total Time, 99th Percentile",
+        "kafkaGraph11");
     test.log(LogStatus.PASS, "Verified 'Produce Total Time, 99th Percentile' KPI information name" +
         " ,values and graphs successfully ");
   }

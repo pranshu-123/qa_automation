@@ -36,7 +36,7 @@ public class TC_KAFKA_22 extends BaseClass {
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
     kafkaPage.verifyClusterDropDown(kafkaPageObject);
-    kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject, "Total Fetch Requests per Second");
+    kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject, "Total Fetch Requests per Second", "kafkaGraph3");
     test.log(LogStatus.PASS, "Verified 'Total Fetch Requests per Second' KPI information name ,values and graphs " +
         "successfully ");
   }

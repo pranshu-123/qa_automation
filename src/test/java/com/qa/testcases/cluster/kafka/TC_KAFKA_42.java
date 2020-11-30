@@ -5,7 +5,6 @@ import com.qa.base.BaseClass;
 import com.qa.pagefactory.clusters.KafkaPageObject;
 import com.qa.scripts.clusters.kafka.KafkaPage;
 import com.qa.utils.Log;
-import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;

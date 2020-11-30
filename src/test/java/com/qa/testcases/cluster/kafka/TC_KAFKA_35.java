@@ -36,7 +36,8 @@ public class TC_KAFKA_35 extends BaseClass {
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
     kafkaPage.verifyClusterDropDown(kafkaPageObject);
-    kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject, "Log Flush Latency, 99th Percentile");
+    kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject, "Log Flush Latency, 99th Percentile",
+        "kafkaGraph16");
     test.log(LogStatus.PASS, "Verified 'Log Flush Latency, 99th Percentile' KPI information name" +
         " ,values and graphs successfully ");
   }

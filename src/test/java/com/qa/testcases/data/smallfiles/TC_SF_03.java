@@ -57,26 +57,8 @@ public class TC_SF_03 extends BaseClass {
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
 
-
-        String minimumFileSize = "256";
-        smallfiles.minimumFileSize(minimumFileSize);
-        LOGGER.info("Set minimum FileSize as: " + minimumFileSize);
-        test.log(LogStatus.INFO, "Set minimum FileSize as: " + minimumFileSize);
-
-        String maximumFileSize = "512";
-        smallfiles.maximumFileSize(maximumFileSize);
-        LOGGER.info("Set maximum FileSize as: " + maximumFileSize);
-        test.log(LogStatus.INFO, "Set maximum FileSize as: " + maximumFileSize);
-
-        String minimumSmallFile = "1";
-        smallfiles.minimumSmallFile(minimumSmallFile);
-        LOGGER.info("Set minimum SmallFile as: " + minimumSmallFile);
-        test.log(LogStatus.INFO, "Set minimum Small File as: " + minimumSmallFile);
-
-        String directoriesToShow = "10";
-        smallfiles.directoriesToShow(directoriesToShow);
-        LOGGER.info("Set minimum SmallFile as: " + directoriesToShow);
-        test.log(LogStatus.INFO, "Set minimum Small File as: " + directoriesToShow);
+        smallfiles.navigateToSmallFileReport(smallfilesPageObject,test,"256","512"
+                ,"1","10");
 
         smallfiles.clickOnModalRunButton();
         waitExecuter.sleep(3000);

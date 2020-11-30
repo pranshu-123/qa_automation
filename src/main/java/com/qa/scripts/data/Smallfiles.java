@@ -67,17 +67,6 @@ public class Smallfiles {
         MouseActions.clickOnElement(driver, smallfilesPageObject.modalRunButton);
     }
 
-    public void minimumFileSize(String FileSize) {
-        smallfilesPageObject.minFileSize.sendKeys(FileSize);
-    }
-
-    public void maximumFileSize(String FileSize) {
-        smallfilesPageObject.maxiFileSize.sendKeys(FileSize);
-    }
-
-    public void minimumSmallFile(String FileSize) {
-        smallfilesPageObject.minimumSmallFile.sendKeys(FileSize);
-    }
 
     public void clickonminParent(String FileSize) {
         smallfilesPageObject.onminParentDirectory.sendKeys(FileSize);
@@ -87,29 +76,30 @@ public class Smallfiles {
         smallfilesPageObject.maxParentDirectory.sendKeys(FileSize);
     }
 
-    public void directoriesToShow(String FileSize) {
-        smallfilesPageObject.directoriestoShow.sendKeys(FileSize);
-    }
     /**
      * Common steps to validate minimumFileSize,maximumFileSize,minimumSmallFile,directoriesToShow
      */
-    public void navigateToSmallFileReport(Smallfiles smallfiles,String minimumFileSize,String maximumFileSize,
+    public void navigateToSmallFileReport(SmallfilesPageObject smallfilesPageObject,ExtentTest test,String minimumFileSize,String maximumFileSize,
                                           String minimumSmallFile,String directoriesToShow) {
 
-        smallfiles.minimumFileSize(minimumFileSize);
+        smallfilesPageObject.minFileSize.sendKeys(minimumFileSize);
         logger.info("Set minimum FileSize as: " + minimumFileSize);
+        test.log(LogStatus.INFO, "Set minimum FileSize as: " + minimumFileSize);
 
-        smallfiles.maximumFileSize(maximumFileSize);
+
+        smallfilesPageObject.maxiFileSize.sendKeys(maximumFileSize);
         logger.info("Set maximum FileSize as: " + maximumFileSize);
+        test.log(LogStatus.INFO, "Set minimum FileSize as: " + maximumFileSize);
 
-        smallfiles.minimumSmallFile(minimumSmallFile);
+        smallfilesPageObject.minimumSmallFile.sendKeys(minimumSmallFile);
         logger.info("Set minimum SmallFile as: " + minimumSmallFile);
+        test.log(LogStatus.INFO, "Set minimum FileSize as: " + minimumSmallFile);
 
-        smallfiles.directoriesToShow(directoriesToShow);
+
+        smallfilesPageObject.directoriestoShow.sendKeys(directoriesToShow);
         logger.info("Set minimum SmallFile as: " + directoriesToShow);
-
+        test.log(LogStatus.INFO, "Set minimum FileSize as: " + directoriesToShow);
     }
-
     /**
      * Method to click on 'advancedOptions'
      */

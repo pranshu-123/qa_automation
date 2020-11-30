@@ -5,6 +5,7 @@ import com.qa.pagefactory.CommonPageObject;
 import com.qa.pagefactory.HomePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.utils.JavaScriptExecuter;
+import com.qa.utils.MouseActions;
 import com.qa.utils.actions.UserActions;
 import com.qa.utils.WaitExecuter;
 import org.openqa.selenium.WebDriver;
@@ -132,7 +133,6 @@ public class HomePage {
     if (clusterSize > 0) {
       for (int i = 0; i < clusterList.size(); i++) {
         String clusterNames = clusterList.get(i).getText();
-        //System.out.println("Cluster name: "+ clusterNames);
         listOfClusters.add(clusterNames);
       }
     }
@@ -144,14 +144,103 @@ public class HomePage {
     homePageObject.nodesGraphDownloadMenu.click();
   }
 
+  public void clickOnVCoresGraphDownloadMenu(){
+    waitExecuter.sleep(3000);
+    MouseActions.clickOnElement(driver, homePageObject.vcoresGraphDownloadMenu);
+  }
+
+  public void clickOnMemoryGraphDownloadMenu(){
+    waitExecuter.sleep(3000);
+    MouseActions.clickOnElement(driver, homePageObject.memoryGraphDownloadMenu);
+  }
+
+  public void clickOnRunningGraphDownloadMenu(){
+    waitExecuter.sleep(3000);
+    MouseActions.clickOnElement(driver, homePageObject.runningGraphDownloadMenu);
+  }
+
+  public void clickOnByStatusGraphDownloadMenu(){
+    waitExecuter.sleep(3000);
+    MouseActions.clickOnElement(driver, homePageObject.bystatusGraphDownloadMenu);
+  }
+
+  public void clickOnInefficientEventsGraphDownloadMenu(){
+    waitExecuter.sleep(3000);
+    MouseActions.clickOnElement(driver, homePageObject.inefficienteventsGraphDownloadMenu);
+  }
+
   public void downloadNodesGraphAsFile(String asFile){
     waitExecuter.sleep(3000);
     int graphDownloadMenuCount = homePageObject.listnodesGraphDownloadMenu.size();
     if( graphDownloadMenuCount > 0){
       for(int i=0; i<graphDownloadMenuCount; i++){
         if(homePageObject.listnodesGraphDownloadMenu.get(i).getText().equals(asFile)){
-          System.out.println("Download file found now click on it");
           homePageObject.listnodesGraphDownloadMenu.get(i).click();
+          waitExecuter.sleep(15000);
+        }
+      }
+    }
+  }
+
+  public void downloadVCoresGraphAsFile(String asFile){
+    waitExecuter.sleep(3000);
+    int graphDownloadMenuCount = homePageObject.listvcoresGraphDownloadMenu.size();
+    if( graphDownloadMenuCount > 0){
+      for(int i=0; i<graphDownloadMenuCount; i++){
+        if(homePageObject.listvcoresGraphDownloadMenu.get(i).getText().equals(asFile)){
+          homePageObject.listvcoresGraphDownloadMenu.get(i).click();
+          waitExecuter.sleep(15000);
+        }
+      }
+    }
+  }
+
+  public void downloadMemoryGraphAsFile(String asFile){
+    waitExecuter.sleep(3000);
+    int graphDownloadMenuCount = homePageObject.listmemoryGraphDownloadMenu.size();
+    if( graphDownloadMenuCount > 0){
+      for(int i=0; i<graphDownloadMenuCount; i++){
+        if(homePageObject.listmemoryGraphDownloadMenu.get(i).getText().equals(asFile)){
+          homePageObject.listmemoryGraphDownloadMenu.get(i).click();
+          waitExecuter.sleep(15000);
+        }
+      }
+    }
+  }
+
+  public void downloadRunningGraphAsFile(String asFile){
+    waitExecuter.sleep(3000);
+    int graphDownloadMenuCount = homePageObject.listrunningGraphDownloadMenu.size();
+    if( graphDownloadMenuCount > 0){
+      for(int i=0; i<graphDownloadMenuCount; i++){
+        if(homePageObject.listrunningGraphDownloadMenu.get(i).getText().equals(asFile)){
+          homePageObject.listrunningGraphDownloadMenu.get(i).click();
+          waitExecuter.sleep(15000);
+        }
+      }
+    }
+  }
+
+  public void downloadByStatusGraphAsFile(String asFile){
+    waitExecuter.sleep(3000);
+    int graphDownloadMenuCount = homePageObject.listbystatusGraphDownloadMenu.size();
+    if( graphDownloadMenuCount > 0){
+      for(int i=0; i<graphDownloadMenuCount; i++){
+        if(homePageObject.listbystatusGraphDownloadMenu.get(i).getText().equals(asFile)){
+          homePageObject.listbystatusGraphDownloadMenu.get(i).click();
+          waitExecuter.sleep(15000);
+        }
+      }
+    }
+  }
+
+  public void downloadInefficientEventsGraphAsFile(String asFile){
+    waitExecuter.sleep(3000);
+    int graphDownloadMenuCount = homePageObject.listinefficienteventsGraphDownloadMenu.size();
+    if( graphDownloadMenuCount > 0){
+      for(int i=0; i<graphDownloadMenuCount; i++){
+        if(homePageObject.listinefficienteventsGraphDownloadMenu.get(i).getText().equals(asFile)){
+          homePageObject.listinefficienteventsGraphDownloadMenu.get(i).click();
           waitExecuter.sleep(15000);
         }
       }

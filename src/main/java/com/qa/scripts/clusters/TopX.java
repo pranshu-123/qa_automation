@@ -8,6 +8,7 @@ import com.qa.utils.WaitExecuter;
 import java.util.List;
 
 import com.qa.utils.actions.UserActions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -97,4 +98,82 @@ public class TopX {
   public WebElement getConfirmationMessage() {
     return topXPageObject.confirmationMessageElement;
   }
+
+    /**
+     * Click on user Filter on TopX page
+     */
+    public void clickOnUserFilter() {
+        actions.performActionWithPolling(topXPageObject.usersSelectTextField, UserAction.CLICK);
+    }
+
+    /**
+     * Click on Real User Filter on TopX page
+     */
+    public void clickOnRealUserFilter() {
+        actions.performActionWithPolling(topXPageObject.realUsersSelectTextField, UserAction.CLICK);
+    }
+
+    /**
+     * Click on Queue Filter on TopX page
+     */
+    public void clickOnQueueFilter() {
+        actions.performActionWithPolling(topXPageObject.queuesSelectTextField, UserAction.CLICK);
+    }
+
+    /**
+     * Get users list from users filter
+     */
+    public List<WebElement> getUsersList() {
+        return topXPageObject.usersList;
+    }
+
+    /**
+     * Get users list from users filter
+     */
+    public List<WebElement> getFilterDropDowns() {
+        return topXPageObject.topXFilterDropDown;
+    }
+
+    /**
+     * Get input parameters row list
+     */
+    public List<WebElement> getInputParamsRowList() {
+        return topXPageObject.inputParamsRowList;
+    }
+
+    /**
+     * Returns the list of checkbox present on tags page
+     */
+    public List<WebElement> getTagsCheckbox() {
+        return topXPageObject.tagsCheckbox;
+    }
+
+    /**
+     * Returns the last element of input textbox of tags section
+     */
+    public WebElement getLastInputTextboxField() {
+        return topXPageObject.tagsLastInputTextboxField;
+    }
+
+    /**
+     * Click on tags checkbox if not selected
+     * @param checkbox
+     */
+    public void selectTagsCheckbox(WebElement checkbox) {
+        List<WebElement> checkboxFooters = checkbox.findElements(topXPageObject.tagsFooter);
+        if (checkboxFooters.size() == 0) {
+            actions.performActionWithPolling(checkbox, UserAction.CLICK);
+        }
+    }
+
+    /**
+     * This method clear the filter present on impala page
+     */
+    public void clearFilter() {
+        final List<WebElement> filterItems = topXPageObject.filterRemoveElements;
+        while (filterItems.size() != 0) {
+            JavaScriptExecuter.clickOnElement(driver, filterItems.get(0));
+            waitExecuter.waitUntilPageFullyLoaded();
+        }
+    }
 }

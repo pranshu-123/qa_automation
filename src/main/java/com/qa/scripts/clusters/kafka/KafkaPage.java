@@ -1,6 +1,5 @@
 package com.qa.scripts.clusters.kafka;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.qa.pagefactory.clusters.KafkaPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.utils.MouseActions;
@@ -25,7 +24,6 @@ public class KafkaPage {
   String yAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]" +
       "//*[name()='g' and contains(@class,'highcharts-yaxis-labels')]/*[name()='text']/*[name()='tspan']";
 
-  ////*[@id='kafkaGraph0']
   Logger logger = Logger.getLogger(KafkaPage.class.getName());
 
   /**

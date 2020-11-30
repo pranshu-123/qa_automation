@@ -55,38 +55,10 @@ public class TC_SF_08 extends BaseClass {
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
 
-        String minimumFileSize = "256";
-        smallfiles.minimumFileSize(minimumFileSize);
-        LOGGER.info("Set minimum FileSize as: " + minimumFileSize);
-        test.log(LogStatus.INFO, "Set minimum FileSize as: " + minimumFileSize);
+        smallfiles.navigateToSmallFileReport(smallfiles,"256","512"
+                ,"1","10");
 
-        String maximumFileSize = "512";
-        smallfiles.maximumFileSize(maximumFileSize);
-        LOGGER.info("Set maximum FileSize as: " + maximumFileSize);
-        test.log(LogStatus.INFO, "Set maximum FileSize as: " + maximumFileSize);
-
-        String minimumSmallFile = "1";
-        smallfiles.minimumSmallFile(minimumSmallFile);
-        LOGGER.info("Set minimum SmallFile as: " + minimumSmallFile);
-        test.log(LogStatus.INFO, "Set minimum Small File as: " + minimumSmallFile);
-
-        String directoriesToShow = "6";
-        smallfiles.directoriesToShow(directoriesToShow);
-        LOGGER.info("Set minimum SmallFile as: " + directoriesToShow);
-        test.log(LogStatus.INFO, "Set minimum Small File as: " + directoriesToShow);
-
-        smallfiles.clickOnadvancedOptions();
-        waitExecuter.sleep(3000);
-
-        String onminParentDirectory = "3";
-        smallfiles.clickonminParent(onminParentDirectory);
-        LOGGER.info("Set Min Parent Directory Depth as: " + onminParentDirectory);
-        test.log(LogStatus.INFO, "Set minimum Small File as: " + onminParentDirectory);
-
-        String onmaxParentDirectory = "5";
-        smallfiles.clickonmaxParent(onmaxParentDirectory);
-        LOGGER.info("Set Max Parent Directory Depth as: " + onmaxParentDirectory);
-        test.log(LogStatus.INFO, "Set minimum Small File as: " + onmaxParentDirectory);
+        test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files");
 
 
         smallfiles.clickOnModalRunButton();

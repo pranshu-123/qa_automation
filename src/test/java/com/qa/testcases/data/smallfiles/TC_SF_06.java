@@ -1,5 +1,6 @@
 package com.qa.testcases.data.smallfiles;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
@@ -15,6 +16,8 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
+@Marker.DataSmallFiles
+@Marker.All
 public class TC_SF_06 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_SF_06.class.getName());
 
@@ -53,25 +56,10 @@ public class TC_SF_06 extends BaseClass {
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
 
-        String minimumFileSize = "256";
-        smallfiles.minimumFileSize(minimumFileSize);
-        LOGGER.info("Set minimum FileSize as: " + minimumFileSize);
-        test.log(LogStatus.INFO, "Set minimum FileSize as: " + minimumFileSize);
+        smallfiles.navigateToSmallFileReport(smallfiles,"256","512"
+                                                      ,"1","10");
 
-        String maximumFileSize = "512";
-        smallfiles.maximumFileSize(maximumFileSize);
-        LOGGER.info("Set maximum FileSize as: " + maximumFileSize);
-        test.log(LogStatus.INFO, "Set maximum FileSize as: " + maximumFileSize);
-
-        String minimumSmallFile = "1";
-        smallfiles.minimumSmallFile(minimumSmallFile);
-        LOGGER.info("Set minimum SmallFile as: " + minimumSmallFile);
-        test.log(LogStatus.INFO, "Set minimum Small File as: " + minimumSmallFile);
-
-        String directoriesToShow = "10";
-        smallfiles.directoriesToShow(directoriesToShow);
-        LOGGER.info("Set minimum SmallFile as: " + directoriesToShow);
-        test.log(LogStatus.INFO, "Set minimum Small File as: " + directoriesToShow);
+        test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files");
 
         smallfiles.clickOnModalRunButton();
         waitExecuter.sleep(3000);

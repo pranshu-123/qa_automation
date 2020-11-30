@@ -55,43 +55,19 @@ public class TC_SF_07 extends BaseClass {
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
 
-        String minimumFileSize = "256";
-        smallfiles.minimumFileSize(minimumFileSize);
-        LOGGER.info("Set minimum FileSize as: " + minimumFileSize);
-        test.log(LogStatus.INFO, "Set minimum FileSize as: " + minimumFileSize);
+        smallfiles.navigateToSmallFileReport(smallfiles,"256","512"
+                ,"1","10");
 
-        String maximumFileSize = "512";
-        smallfiles.maximumFileSize(maximumFileSize);
-        LOGGER.info("Set maximum FileSize as: " + maximumFileSize);
-        test.log(LogStatus.INFO, "Set maximum FileSize as: " + maximumFileSize);
+        test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files");
 
-        String minimumSmallFile = "1";
-        smallfiles.minimumSmallFile(minimumSmallFile);
-        LOGGER.info("Set minimum SmallFile as: " + minimumSmallFile);
-        test.log(LogStatus.INFO, "Set minimum Small File as: " + minimumSmallFile);
-
-        String directoriesToShow = "6";
-        smallfiles.directoriesToShow(directoriesToShow);
-        LOGGER.info("Set minimum SmallFile as: " + directoriesToShow);
-        test.log(LogStatus.INFO, "Set minimum Small File as: " + directoriesToShow);
-
-        smallfiles.clickOnModalRunButton();
+        //Close apps details page
+        MouseActions.clickOnElement(driver, smallfilesPageObject.closebutton);
         waitExecuter.sleep(3000);
-        LOGGER.info("Clicked on Modal Run Button");
-        test.log(LogStatus.INFO, "Clicked on Modal Run Button");
+
 
         String heading = smallfilesPageObject.verifyAbsoluteSize.getText();
         test.log(LogStatus.PASS, "Verified the absolute size  poulated :"+heading);
 
-        try {
-            waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
-                    "Small file Report completed successfully.");
-            waitExecuter.sleep(3000);
-            test.log(LogStatus.PASS, "Verified smallfiles report is loaded properly.");
-            LOGGER.info("Verified smallfiles report is loaded properly");
-        } catch (TimeoutException te) {
-            throw new AssertionError("smallfiles Report not completed successfully.");
-        }
     }
 }
 

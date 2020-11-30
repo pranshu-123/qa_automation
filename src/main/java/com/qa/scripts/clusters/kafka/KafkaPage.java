@@ -92,10 +92,6 @@ public class KafkaPage {
    * Method to verify the Kafka Metrics KPI Graphs of a connected kafka cluster
    */
   public void verifyKafkaKPIGraphs(KafkaPageObject kafkaPageObject, String expectedMetricsName) {
-    String[] metricsNameList = {"Bytes In per Second", "Bytes Out per Second", "Messages In per Second", "Total Fetch Requests per Second",
-        "# Under Replicated Partitions", "# Active Controller Trend", "Request Handler Idle Ratio Average per Minute", "# Partition Count",
-        "# Leader Partition Count", "# Offline Partition Count", "Fetch Total Time, 99th Percentile", "Produce Total Time, 99th Percentile",
-        "# Fetch Requests per Sec", "# Produce Requests per Sec", "Produce Purgatory Size"};
     List<WebElement> metricsKpiList = kafkaPageObject.kafkaMetrics;
     List<WebElement> metricsKpiHeaderList = kafkaPageObject.kafkaMetricsHeader;
     List<WebElement> metricsKpiFooterList = kafkaPageObject.kafkaMetricsFooter;

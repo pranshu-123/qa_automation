@@ -40,7 +40,7 @@ public class TC_CF_03 extends BaseClass {
         Forecasting forecasting = new Forecasting(driver);
 
         waitExecuter.waitUntilElementPresent(topPanelComponentPageObject.data);
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilPageFullyLoaded();
         MouseActions.clickOnElement(driver, topPanelComponentPageObject.data);
         LOGGER.info("Clicked on Data Tab");
         test.log(LogStatus.INFO, "Clicked on Data Tab");

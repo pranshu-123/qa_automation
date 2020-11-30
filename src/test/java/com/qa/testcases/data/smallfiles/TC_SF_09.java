@@ -12,22 +12,20 @@ import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
-
 import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
-
 @Marker.DataSmallFiles
 @Marker.All
-public class TC_SF_05 extends BaseClass {
-    private static final Logger LOGGER = Logger.getLogger(TC_SF_05.class.getName());
+public class TC_SF_09 extends BaseClass {
+    private static final Logger LOGGER = Logger.getLogger(TC_SF_09.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateAbsolutesmallfilesizereport(String clusterId) {
-        test = extent.startTest("TC_SF_05.validateAbsolutesmallfilesizereport: " + clusterId, "Verify User is able " +
-                "Verify Unravel should successfully generate Absolute \"Small File Size Report\"");
+    public void validatenumberofsmallfilesfromselectedcluster(String clusterId) {
+        test = extent.startTest("TC_SF_09.validatenumberofsmallfilesfromselectedcluster: " + clusterId, "Verify User is able " +
+                "Verify The report should display the small file report for files in cluster1");
         test.assignCategory("Data- Small Files and File reports");
-        Log.startTestCase("TC_SF_05.validateAbsolutesmallfilesizereport");
+        Log.startTestCase("TC_SF_09.validatenumberofsmallfilesfromselectedcluster");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
@@ -57,8 +55,23 @@ public class TC_SF_05 extends BaseClass {
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
 
-        smallfiles.navigateToSmallFileReport(smallfilesPageObject,test,"256","512"
-                ,"1","6");
+        smallfiles.navigateToSmallFileReport(smallfilesPageObject,test,"0","512"
+                ,"1","10");
+        test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files");
+
+        smallfiles.clickOnadvancedOptions();
+        waitExecuter.sleep(3000);
+
+        String onminParentDirectory = "3";
+        smallfiles.clickonminParent(onminParentDirectory);
+        LOGGER.info("Set Min Parent Directory Depth as: " + onminParentDirectory);
+        test.log(LogStatus.INFO, "Set minimum Small File as: " + onminParentDirectory);
+
+        String onmaxParentDirectory = "5";
+        smallfiles.clickonmaxParent(onmaxParentDirectory);
+        LOGGER.info("Set Max Parent Directory Depth as: " + onmaxParentDirectory);
+        test.log(LogStatus.INFO, "Set minimum Small File as: " + onmaxParentDirectory);
+
 
         smallfiles.clickOnModalRunButton();
         waitExecuter.sleep(3000);
@@ -79,3 +92,5 @@ public class TC_SF_05 extends BaseClass {
         }
     }
 }
+
+

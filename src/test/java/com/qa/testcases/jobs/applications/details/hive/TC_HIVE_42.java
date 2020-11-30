@@ -24,8 +24,8 @@ import java.util.logging.Logger;
 public class TC_HIVE_42 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_HIVE_42.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
-    public void VerifyFilterByStatus(String clusterId) {
+    @Test
+    public void VerifyFilterByStatus() {
         test = extent.startTest("TC_HIVE_42.VerifyFilterByStatus",
                 "Verify that All the hive apps with different status must be listed in the jobs page (Killed, Failed, running, success, unknown).");
         test.assignCategory("App Details - Hive");
@@ -55,18 +55,12 @@ public class TC_HIVE_42 extends BaseClass {
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(1000);
         datePicker.selectLast30Days();
-        waitExecuter.sleep(2000);
-        // Select cluster
-        test.log(LogStatus.INFO, "Select clusterid : " + clusterId);
-        LOGGER.info("Select clusterId : " + clusterId);
-        allApps.selectCluster(clusterId);
         waitExecuter.sleep(3000);
         // Select 'Only' hive type and get its jobs count
         test.log(LogStatus.INFO, "Select 'Only' hive from app types and get its jobs count");
         LOGGER.info("Select 'Only' hive from app types and get its jobs count");
         sparkApp.clickOnlyLink("Hive");
-        int hiveAppCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
-                .replaceAll("[^\\dA-Za-z ]", "").trim());
+
         // Expand status filter on left pane
         test.log(LogStatus.INFO, "Expand status filter on left pane");
         LOGGER.info("Expand status filter on left pane");
@@ -107,7 +101,8 @@ public class TC_HIVE_42 extends BaseClass {
             waitExecuter.sleep(2000);
             clickOnIndividualStatus.get(i).click();
             waitExecuter.sleep(2000);
-            int appCount = Integer.parseInt(applicationsPageObject.statusJobCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
+            int appCount = Integer
+                    .parseInt(applicationsPageObject.statusJobCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
             LOGGER.info("Status app count- " + appCount);
             waitExecuter.sleep(2000);
             int totalCount = Integer
@@ -125,13 +120,11 @@ public class TC_HIVE_42 extends BaseClass {
                 Assert.assertEquals(getStatusTypeFromTable.toLowerCase(),
                         statusTypes.get(i).getText().trim().toLowerCase(),
                         "The Jobs displayed in tables contains application other than that of selected App Type");
-                test.log(LogStatus.PASS, "The Jobs displayed in tables contains application of selected App Type: "+getStatusTypeFromTable);
+                test.log(LogStatus.PASS, "The Jobs displayed in tables contains application of selected App Type");
                 waitExecuter.sleep(1000);
             } else {
                 Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
-                        "The clusterId does not have any application under it and also does not display 'No Data Available' for it"
-                                + clusterId);
-                test.log(LogStatus.SKIP, "The clusterId does not have any application under it.");
+                        "The cluster does not have any application under it and also does not display 'No Data Available' for it");
             }
             waitExecuter.sleep(1000);
             clickOnIndividualStatus.get(i).click();

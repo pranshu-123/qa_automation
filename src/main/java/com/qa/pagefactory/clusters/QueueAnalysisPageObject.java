@@ -39,8 +39,7 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "//ul[(@class='select2-results__options')]/li")
     public List<WebElement> queueOptions;
 
-    @FindBy(xpath = "//table/tbody/tr/td[1]")
-    public List<WebElement> getQueueNameFromTable;
+
 
     @FindBy(xpath = "(//a[contains(@class,'icon-sort')])[1]")
     public WebElement sortByQueueName;
@@ -59,6 +58,15 @@ public class QueueAnalysisPageObject {
 
     @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-up')]")
     public WebElement sortUp;
+
+    @FindBy(xpath = "//table[contains(@class,'component-data-tables')]/tbody/tr[@class='cursor-pointer']/td[1]")
+    public List<WebElement> getQueueNameFromTable;
+
+    @FindBy(xpath = "//div[@class='dashboard-row']/div")
+    public List<WebElement> queueGraph;
+
+    @FindBy(xpath = "//table[contains(@class,'component-data-tables')]//td/p")
+    public WebElement whenNoQueuePresent;
 
     public QueueAnalysisPageObject(WebDriver driver) {
         PageFactory.initElements(driver, this);

@@ -11,7 +11,6 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
@@ -28,7 +27,7 @@ public class TC_HIVE_37 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void verifyHiveAppsInAppTable(String clusterId) {
         test = extent.startTest("TC_HIVE_37.verifyHiveAppsInAppTable",
-            "Verify that In the UI Hive apps should be visible along with other apps on UI, in App list page");
+                "Verify that In the UI Hive apps should be visible along with other apps on UI, in App list page");
         test.assignCategory("App Details - Hive");
         test.log(LogStatus.INFO, "Login to the application");
 
@@ -67,15 +66,12 @@ public class TC_HIVE_37 extends BaseClass {
         applicationsPageObject.globalSearchBox.click();
         applicationsPageObject.globalSearchBox.clear();
         applicationsPageObject.globalSearchBox.sendKeys("hive");
-        applicationsPageObject.searchIcon.click();
-        Actions action = new Actions(driver);
-        action.sendKeys(Keys.ENTER).build().perform();
+        applicationsPageObject.globalSearchBox.sendKeys(Keys.ENTER);
         waitExecuter.sleep(3000);
         List<WebElement> typesInPage = applicationsPageObject.getTypesColumnFromTable;
         List<String> nameOfTypesInPage = new ArrayList<>();
-        int appCount = Integer
-            .parseInt(applicationsPageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
-        if(appCount>0) {
+        int tableData = applicationsPageObject.getTableData.size();
+        if (tableData > 0) {
             for (int j = 0; j < 2; j++) {
                 // Sort By Asc and Desc order of App Type in table
                 test.log(LogStatus.INFO, "Sort By Asc and Desc order of App Type in table");
@@ -92,19 +88,18 @@ public class TC_HIVE_37 extends BaseClass {
             LOGGER.info("Assert that after searching on global search with hive, hive type apps are listed");
             Assert.assertTrue(nameOfTypesInPage.contains(PageConstants.AppTypes.HIVE), "Table does not contain app type 'Hive'.");
             test.log(LogStatus.PASS, "Table contains app type 'Hive'.");
+
             //Reset set filters
+            driver.navigate().back();
             test.log(LogStatus.INFO, "Reset set filters ");
             LOGGER.info("Reset set filters ");
-            //tnode6
             waitExecuter.sleep(2000);
-            driver.navigate().back();
-            //applicationsPageObject.resetButton.click();
+            applicationsPageObject.resetButton.click();
             waitExecuter.sleep(2000);
-        }
-        else {
+        } else {
             Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
-                "The clusterId does not have any application under it and also does not display 'No Data Available' for it"
-                    + clusterId);
+                    "The clusterId does not have any application under it and also does not display 'No Data Available' for it"
+                            + clusterId);
             test.log(LogStatus.SKIP, "The clusterId does not have any application under it.");
             waitExecuter.sleep(1000);
             driver.navigate().refresh();

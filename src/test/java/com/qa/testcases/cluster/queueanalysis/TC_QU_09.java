@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 public class TC_QU_09 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_QU_09.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test
     public void validateSortByJobsRunning() {
         test = extent.startTest("TC_QU_09.validateSortByJobsRunning",
                 "Verify sorting up and down in Jobs Running");

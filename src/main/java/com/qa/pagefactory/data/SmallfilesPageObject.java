@@ -28,6 +28,9 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
     public WebElement confirmationMessageElement;
 
+    @FindBy(xpath = "//section[contains(@class,'component-message-banner bg-success icon-success')]")
+    public WebElement headerMessageElement;
+
     @FindBy(xpath = "//*[@id=\"app\"]/div/div[1]/div[2]/div/div[4]/div/div[1]/div/div[1]")
     public WebElement verifyAbsoluteSize;
 
@@ -69,6 +72,10 @@ public class SmallfilesPageObject {
 
     @FindBy(xpath = "//div[@class='panel-body']/div[2]/p/b")
     public WebElement previousReportData;
+
+    @FindBy(xpath = "//div[contains(@class,'close pointer')]")
+    public WebElement closebutton;
+
 
     /**
      * @param driver The driver that will be used to look up the elements

@@ -1,17 +1,27 @@
 package com.qa.scripts.data;
 
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.data.ForecastingPageObject;
 import com.qa.pagefactory.data.SmallfilesPageObject;
+import com.qa.pagefactory.jobs.ApplicationsPageObject;
+import com.qa.scripts.DatePicker;
+import com.qa.scripts.appdetails.SparkAppsDetailsPage;
+import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 public class Smallfiles {
+
+    Logger logger = Logger.getLogger(SparkAppsDetailsPage.class.getName());
 
     SmallfilesPageObject smallfilesPageObject;
     private WaitExecuter waitExecuter;
@@ -79,6 +89,25 @@ public class Smallfiles {
 
     public void directoriesToShow(String FileSize) {
         smallfilesPageObject.directoriestoShow.sendKeys(FileSize);
+    }
+    /**
+     * Common steps to validate minimumFileSize,maximumFileSize,minimumSmallFile,directoriesToShow
+     */
+    public void navigateToSmallFileReport(Smallfiles smallfiles,String minimumFileSize,String maximumFileSize,
+                                          String minimumSmallFile,String directoriesToShow) {
+
+        smallfiles.minimumFileSize(minimumFileSize);
+        logger.info("Set minimum FileSize as: " + minimumFileSize);
+
+        smallfiles.maximumFileSize(maximumFileSize);
+        logger.info("Set maximum FileSize as: " + maximumFileSize);
+
+        smallfiles.minimumSmallFile(minimumSmallFile);
+        logger.info("Set minimum SmallFile as: " + minimumSmallFile);
+
+        smallfiles.directoriesToShow(directoriesToShow);
+        logger.info("Set minimum SmallFile as: " + directoriesToShow);
+
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.qa.scripts.clusters.kafka;
 
 import com.qa.pagefactory.clusters.KafkaPageObject;
+import com.qa.scripts.DatePicker;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import org.openqa.selenium.By;
@@ -15,6 +16,7 @@ import java.util.logging.Logger;
 public class KafkaPage {
   private WaitExecuter waitExecuter;
   private WebDriver driver;
+  private DatePicker datePicker;
 
   Logger logger = Logger.getLogger(KafkaPage.class.getName());
 
@@ -25,6 +27,7 @@ public class KafkaPage {
    */
   public KafkaPage(WebDriver driver) {
     waitExecuter = new WaitExecuter(driver);
+    datePicker = new DatePicker(driver);
     this.driver = driver;
   }
 
@@ -56,12 +59,20 @@ public class KafkaPage {
    * Method to verify the kafka cluster dropdown
    */
   public String verifyClusterDropDown(KafkaPageObject kafkaPageObject) {
+    waitExecuter.waitUntilElementClickable(kafkaPageObject.kafkaClusterDropDown);
     MouseActions.clickOnElement(driver, kafkaPageObject.kafkaClusterDropDown);
     waitExecuter.sleep(2000);
     List<WebElement> kafkaClusterList = kafkaPageObject.kafkaClusters;
     Assert.assertFalse(kafkaClusterList.isEmpty(), "The drop down list for kafka cluster is empty");
     String clustername = kafkaClusterList.get(0).getText();
     MouseActions.clickOnElement(driver, kafkaClusterList.get(0));
+
+    datePicker.clickOnDatePicker();
+    waitExecuter.sleep(1000);
+    datePicker.selectLast7Days();
+    waitExecuter.sleep(3000);
+    waitExecuter.waitUntilPageFullyLoaded();
+
     return clustername;
   }
 
@@ -84,7 +95,9 @@ public class KafkaPage {
       logger.info("KPI Name: " + kpiName + "\n KPI Value: " + kpiValue);
       Assert.assertTrue(Arrays.asList(expectedKPIList).contains(kpiName), "The kpi: [" + kpiName + "] " +
           "is not displayed in the UI");
-      Assert.assertFalse(kpiValue.isEmpty(), "No values for kpi " + kpiName + "displayed");
+      boolean containsAlphaNumericVal = kpiValue.matches("[A-Za-z0-9]+");
+      Assert.assertFalse(kpiValue.isEmpty() || !containsAlphaNumericVal, "No values for kpi " + kpiName +
+          "displayed \n Expected: AlphaNumeric value Actual: [" + kpiValue + "]");
     }
   }
 

@@ -27,7 +27,6 @@ public class TC_KAFKA_05 extends BaseClass {
     Log.startTestCase("TC_KAFKA_05_verifyKafkaClustersDropDown");
 
     // Initialize all classes objects
-    test.log(LogStatus.INFO, "Initialize all class objects");
     LOGGER.info("Initialize all class objects");
     KafkaPage kafkaPage = new KafkaPage(driver);
     KafkaPageObject kafkaPageObject = new KafkaPageObject(driver);

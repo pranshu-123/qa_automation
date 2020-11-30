@@ -27,7 +27,6 @@ public class TC_KAFKA_06 extends BaseClass {
     Log.startTestCase("TC_KAFKA_06_verifyKafkaClusterKPI");
 
     // Initialize all classes objects
-    test.log(LogStatus.INFO, "Initialize all class objects");
     LOGGER.info("Initialize all class objects");
     KafkaPage kafkaPage = new KafkaPage(driver);
     KafkaPageObject kafkaPageObject = new KafkaPageObject(driver);
@@ -37,7 +36,7 @@ public class TC_KAFKA_06 extends BaseClass {
     MouseActions.clickOnElement(driver, kafkaPageObject.kafkaTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
-   // kafkaPage.verifyClusterDropDown(kafkaPageObject);
+    // kafkaPage.verifyClusterDropDown(kafkaPageObject);
     kafkaPage.verifyKafkaClusterKPIs(kafkaPageObject, "");
     test.log(LogStatus.PASS, "Verified connected Kafka cluster details successfully ");
   }

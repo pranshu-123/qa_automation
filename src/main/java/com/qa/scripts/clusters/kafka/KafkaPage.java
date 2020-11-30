@@ -1,8 +1,6 @@
 package com.qa.scripts.clusters.kafka;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.qa.pagefactory.clusters.KafkaPageObject;
-import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import org.openqa.selenium.By;

@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.kafka;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.clusters.KafkaPageObject;
 import com.qa.scripts.clusters.kafka.KafkaPage;
@@ -9,6 +10,8 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
+@Marker.KafkaExternal
+@Marker.All
 public class TC_KAFKA_46 extends BaseClass {
 
   private static final Logger LOGGER = Logger.getLogger(com.qa.testcases.cluster.kafka.TC_KAFKA_46.class.getName());

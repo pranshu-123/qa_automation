@@ -160,6 +160,16 @@ public class HomePage {
     MouseActions.clickOnElement(driver, homePageObject.runningGraphDownloadMenu);
   }
 
+  public void clickOnByStatusGraphDownloadMenu(){
+    waitExecuter.sleep(3000);
+    MouseActions.clickOnElement(driver, homePageObject.bystatusGraphDownloadMenu);
+  }
+
+  public void clickOnInefficientEventsGraphDownloadMenu(){
+    waitExecuter.sleep(3000);
+    MouseActions.clickOnElement(driver, homePageObject.inefficienteventsGraphDownloadMenu);
+  }
+
   public void downloadNodesGraphAsFile(String asFile){
     waitExecuter.sleep(3000);
     int graphDownloadMenuCount = homePageObject.listnodesGraphDownloadMenu.size();
@@ -210,6 +220,34 @@ public class HomePage {
         if(homePageObject.listrunningGraphDownloadMenu.get(i).getText().equals(asFile)){
           System.out.println("Download file found now click on it");
           homePageObject.listrunningGraphDownloadMenu.get(i).click();
+          waitExecuter.sleep(15000);
+        }
+      }
+    }
+  }
+
+  public void downloadByStatusGraphAsFile(String asFile){
+    waitExecuter.sleep(3000);
+    int graphDownloadMenuCount = homePageObject.listbystatusGraphDownloadMenu.size();
+    if( graphDownloadMenuCount > 0){
+      for(int i=0; i<graphDownloadMenuCount; i++){
+        if(homePageObject.listbystatusGraphDownloadMenu.get(i).getText().equals(asFile)){
+          System.out.println("Download file found now click on it");
+          homePageObject.listbystatusGraphDownloadMenu.get(i).click();
+          waitExecuter.sleep(15000);
+        }
+      }
+    }
+  }
+
+  public void downloadInefficientEventsGraphAsFile(String asFile){
+    waitExecuter.sleep(3000);
+    int graphDownloadMenuCount = homePageObject.listinefficienteventsGraphDownloadMenu.size();
+    if( graphDownloadMenuCount > 0){
+      for(int i=0; i<graphDownloadMenuCount; i++){
+        if(homePageObject.listinefficienteventsGraphDownloadMenu.get(i).getText().equals(asFile)){
+          System.out.println("Download file found now click on it");
+          homePageObject.listinefficienteventsGraphDownloadMenu.get(i).click();
           waitExecuter.sleep(15000);
         }
       }

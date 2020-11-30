@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 public class TC_QU_10 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_QU_10.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test
     public void validateSortByVcoresAllocated() {
         test = extent.startTest("TC_QU_10.validateSortByVcoresAllocated",
                 "Verify sorting up and down in Vcores Allocated");

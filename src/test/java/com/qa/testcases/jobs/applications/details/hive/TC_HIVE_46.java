@@ -53,110 +53,109 @@ public class TC_HIVE_46 extends BaseClass {
         LOGGER.info("Select clusterId : " + clusterId);
         allApps.selectCluster(clusterId);
         waitExecuter.sleep(3000);
-        
+
         int appCount = Integer
                 .parseInt(applicationsPageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
 
         if (appCount > 0) {
-        // Sort Up by Status
-        test.log(LogStatus.INFO, "Sort Up by Status");
-        LOGGER.info("Sort up by Status");
-        applicationsPageObject.sortStatus.click();
-        waitExecuter.sleep(2000);
-        Assert.assertTrue(applicationsPageObject.sortUp.isDisplayed(), "Sort up is not working");
-        // Sort down by Status
-        test.log(LogStatus.INFO, "Sort down by status");
-        LOGGER.info("Sort down by status");
-        applicationsPageObject.sortStatus.click();
-        waitExecuter.sleep(2000);
-        Assert.assertTrue(applicationsPageObject.sortDown.isDisplayed(), "Sort down is not working");
-        test.log(LogStatus.PASS, "Verified sorting on Status.");
-        // Sort Up by User
-        test.log(LogStatus.INFO, "Sort Up by user");
-        LOGGER.info("Sort up by User");
-        applicationsPageObject.sortByUser.click();
-        waitExecuter.sleep(2000);
-        Assert.assertTrue(applicationsPageObject.sortUp.isDisplayed(), "Sort up is not working");
-        // Sort down by User
-        test.log(LogStatus.INFO, "Sort down by user");
-        LOGGER.info("Sort down by user");
-        applicationsPageObject.sortByUser.click();
-        waitExecuter.sleep(2000);
-        Assert.assertTrue(applicationsPageObject.sortDown.isDisplayed(), "Sort down is not working");
-        test.log(LogStatus.PASS, "Verified sorting on Status.");
-        // Sort Up by ClusterId
-        test.log(LogStatus.INFO, "Sort Up by ClusterId");
-        LOGGER.info("Sort up by ClusterId");
-        applicationsPageObject.sortByClusterId.click();
-        waitExecuter.sleep(2000);
-        Assert.assertTrue(applicationsPageObject.sortUp.isDisplayed(), "Sort up is not working");
-        // Sort down by ClusterId
-        test.log(LogStatus.INFO, "Sort down by ClusterId");
-        LOGGER.info("Sort down by ClusterId");
-        applicationsPageObject.sortByClusterId.click();
-        waitExecuter.sleep(2000);
-        Assert.assertTrue(applicationsPageObject.sortDown.isDisplayed(), "Sort down is not working");
-        test.log(LogStatus.PASS, "Verified sorting on ClusterId.");
-        // Sort Up by Start Time
-        test.log(LogStatus.INFO, "Sort Up by Start Time");
-        LOGGER.info("Sort up by Start Time");
-        applicationsPageObject.sortByStartTime.click();
-        waitExecuter.sleep(2000);
-        Assert.assertTrue(applicationsPageObject.sortUp.isDisplayed(), "Sort up is not working");
-        // Sort down by Start Time
-        test.log(LogStatus.INFO, "Sort down by Start Time");
-        LOGGER.info("Sort down by Start Time");
-        applicationsPageObject.sortByStartTime.click();
-        waitExecuter.sleep(2000);
-        Assert.assertTrue(applicationsPageObject.sortDown.isDisplayed(), "Sort down is not working");
-        test.log(LogStatus.PASS, "Verified sorting on Start Time.");
-        // Sort Up by Duration
-        test.log(LogStatus.INFO, "Sort Up by Duration");
-        LOGGER.info("Sort up by Duration");
-        applicationsPageObject.sortByDuration.click();
-        waitExecuter.sleep(2000);
-        Assert.assertTrue(applicationsPageObject.sortUp.isDisplayed(), "Sort up is not working");
-        // Sort down by Duration
-        test.log(LogStatus.INFO, "Sort down by Duration");
-        LOGGER.info("Sort down by Duration");
-        applicationsPageObject.sortByDuration.click();
-        waitExecuter.sleep(2000);
-        Assert.assertTrue(applicationsPageObject.sortDown.isDisplayed(), "Sort down is not working");
-        test.log(LogStatus.PASS, "Verified sorting on Duration.");
-        // Sort Up by Read
-        test.log(LogStatus.INFO, "Sort Up by Read");
-        LOGGER.info("Sort up by Read");
-        applicationsPageObject.sortByRead.click();
-        waitExecuter.sleep(2000);
-        Assert.assertTrue(applicationsPageObject.sortUp.isDisplayed(), "Sort up is not working");
-        // Sort down by Read
-        test.log(LogStatus.INFO, "Sort down by Read");
-        LOGGER.info("Sort down by Read");
-        applicationsPageObject.sortByRead.click();
-        waitExecuter.sleep(2000);
-        Assert.assertTrue(applicationsPageObject.sortDown.isDisplayed(), "Sort down is not working");
-        test.log(LogStatus.PASS, "Verified sorting on Read.");
-        // Sort Up by Write
-        test.log(LogStatus.INFO, "Sort Up by Write");
-        LOGGER.info("Sort up by Write");
-        applicationsPageObject.sortByWrite.click();
-        waitExecuter.sleep(2000);
-        Assert.assertTrue(applicationsPageObject.sortUp.isDisplayed(), "Sort up is not working");
-        // Sort down by Write
-        test.log(LogStatus.INFO, "Sort down by Write");
-        LOGGER.info("Sort down by Write");
-        applicationsPageObject.sortByWrite.click();
-        waitExecuter.sleep(2000);
-        Assert.assertTrue(applicationsPageObject.sortDown.isDisplayed(), "Sort down is not working");
-        test.log(LogStatus.PASS, "Verified sorting on Write.");
-        // Refresh the page and reload to original state
-        test.log(LogStatus.INFO, "Refresh the page and reload to original state");
-        LOGGER.info("Refresh the page and reload to original state");
-        waitExecuter.sleep(1000);
-        driver.navigate().refresh();
-        waitExecuter.sleep(3000);
-        }
-        else {
+            // Sort Up by Status
+            test.log(LogStatus.INFO, "Sort Up by Status");
+            LOGGER.info("Sort up by Status");
+            applicationsPageObject.sortStatus.click();
+            waitExecuter.sleep(2000);
+            Assert.assertTrue(applicationsPageObject.sortUp.isDisplayed(), "Sort up is not working");
+            // Sort down by Status
+            test.log(LogStatus.INFO, "Sort down by status");
+            LOGGER.info("Sort down by status");
+            applicationsPageObject.sortStatus.click();
+            waitExecuter.sleep(2000);
+            Assert.assertTrue(applicationsPageObject.sortDown.isDisplayed(), "Sort down is not working");
+            test.log(LogStatus.PASS, "Verified sorting on Status.");
+            // Sort Up by User
+            test.log(LogStatus.INFO, "Sort Up by user");
+            LOGGER.info("Sort up by User");
+            applicationsPageObject.sortByUser.click();
+            waitExecuter.sleep(2000);
+            Assert.assertTrue(applicationsPageObject.sortUp.isDisplayed(), "Sort up is not working");
+            // Sort down by User
+            test.log(LogStatus.INFO, "Sort down by user");
+            LOGGER.info("Sort down by user");
+            applicationsPageObject.sortByUser.click();
+            waitExecuter.sleep(2000);
+            Assert.assertTrue(applicationsPageObject.sortDown.isDisplayed(), "Sort down is not working");
+            test.log(LogStatus.PASS, "Verified sorting on Status.");
+            // Sort Up by ClusterId
+            test.log(LogStatus.INFO, "Sort Up by ClusterId");
+            LOGGER.info("Sort up by ClusterId");
+            applicationsPageObject.sortByClusterId.click();
+            waitExecuter.sleep(2000);
+            Assert.assertTrue(applicationsPageObject.sortUp.isDisplayed(), "Sort up is not working");
+            // Sort down by ClusterId
+            test.log(LogStatus.INFO, "Sort down by ClusterId");
+            LOGGER.info("Sort down by ClusterId");
+            applicationsPageObject.sortByClusterId.click();
+            waitExecuter.sleep(2000);
+            Assert.assertTrue(applicationsPageObject.sortDown.isDisplayed(), "Sort down is not working");
+            test.log(LogStatus.PASS, "Verified sorting on ClusterId.");
+            // Sort Up by Start Time
+            test.log(LogStatus.INFO, "Sort Up by Start Time");
+            LOGGER.info("Sort up by Start Time");
+            applicationsPageObject.sortByStartTime.click();
+            waitExecuter.sleep(2000);
+            Assert.assertTrue(applicationsPageObject.sortUp.isDisplayed(), "Sort up is not working");
+            // Sort down by Start Time
+            test.log(LogStatus.INFO, "Sort down by Start Time");
+            LOGGER.info("Sort down by Start Time");
+            applicationsPageObject.sortByStartTime.click();
+            waitExecuter.sleep(2000);
+            Assert.assertTrue(applicationsPageObject.sortDown.isDisplayed(), "Sort down is not working");
+            test.log(LogStatus.PASS, "Verified sorting on Start Time.");
+            // Sort Up by Duration
+            test.log(LogStatus.INFO, "Sort Up by Duration");
+            LOGGER.info("Sort up by Duration");
+            applicationsPageObject.sortByDuration.click();
+            waitExecuter.sleep(2000);
+            Assert.assertTrue(applicationsPageObject.sortUp.isDisplayed(), "Sort up is not working");
+            // Sort down by Duration
+            test.log(LogStatus.INFO, "Sort down by Duration");
+            LOGGER.info("Sort down by Duration");
+            applicationsPageObject.sortByDuration.click();
+            waitExecuter.sleep(2000);
+            Assert.assertTrue(applicationsPageObject.sortDown.isDisplayed(), "Sort down is not working");
+            test.log(LogStatus.PASS, "Verified sorting on Duration.");
+            // Sort Up by Read
+            test.log(LogStatus.INFO, "Sort Up by Read");
+            LOGGER.info("Sort up by Read");
+            applicationsPageObject.sortByRead.click();
+            waitExecuter.sleep(2000);
+            Assert.assertTrue(applicationsPageObject.sortUp.isDisplayed(), "Sort up is not working");
+            // Sort down by Read
+            test.log(LogStatus.INFO, "Sort down by Read");
+            LOGGER.info("Sort down by Read");
+            applicationsPageObject.sortByRead.click();
+            waitExecuter.sleep(2000);
+            Assert.assertTrue(applicationsPageObject.sortDown.isDisplayed(), "Sort down is not working");
+            test.log(LogStatus.PASS, "Verified sorting on Read.");
+            // Sort Up by Write
+            test.log(LogStatus.INFO, "Sort Up by Write");
+            LOGGER.info("Sort up by Write");
+            applicationsPageObject.sortByWrite.click();
+            waitExecuter.sleep(2000);
+            Assert.assertTrue(applicationsPageObject.sortUp.isDisplayed(), "Sort up is not working");
+            // Sort down by Write
+            test.log(LogStatus.INFO, "Sort down by Write");
+            LOGGER.info("Sort down by Write");
+            applicationsPageObject.sortByWrite.click();
+            waitExecuter.sleep(2000);
+            Assert.assertTrue(applicationsPageObject.sortDown.isDisplayed(), "Sort down is not working");
+            test.log(LogStatus.PASS, "Verified sorting on Write.");
+            // Refresh the page and reload to original state
+            test.log(LogStatus.INFO, "Refresh the page and reload to original state");
+            LOGGER.info("Refresh the page and reload to original state");
+            waitExecuter.sleep(1000);
+            driver.navigate().refresh();
+            waitExecuter.sleep(3000);
+        } else {
             Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
                     "The clusterId does not have any application under it and also does not display 'No Data Available' for it"
                             + clusterId);

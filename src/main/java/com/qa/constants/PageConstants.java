@@ -23,4 +23,7 @@ public class PageConstants {
         public static String[] SCHEDULE_CLUSTERID = {"tnode28-HDP315-TLS-Kerb-Ranger", "tnode3-CDH633-TLS-Kerb-Sentry",
                 "tnode40-CDH5162"};
     }
+    public static class MRHiveKPIs {
+        public static String[] KPIS = {"duration", "data i/o", "start time", "end time"};
+    }
 }

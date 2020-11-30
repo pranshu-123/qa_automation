@@ -9,6 +9,7 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.touch.SingleTapAction;
@@ -149,13 +150,13 @@ public class ReportsArchiveSchedulePage {
       rowList = reportPageObj.tableRows;
       totalCnt += rowList.size();
       logger.info("The total report cnt is " + totalCnt);
+      MouseActions.clickOnElement(driver, reportPageObj.backwardCaretReportCnt);
+      waitExecuter.sleep(2000);
     } else {
       rowList = reportPageObj.tableRows;
       totalCnt = rowList.size();
     }
     logger.info("The total number of reports are  " + totalCnt);
-    MouseActions.clickOnElement(driver, reportPageObj.backwardCaretReportCnt);
-    waitExecuter.sleep(2000);
     return totalCnt;
   }
 
@@ -208,13 +209,41 @@ public class ReportsArchiveSchedulePage {
    * Method to validate the search option on the Report Archive Page
    */
   public void validateSearchOption(ReportsArchiveScheduledPageObject reportPageObj) {
-    // reportPageObj.reportSearchBox.clear();
     reportPageObj.reportSearchBox.sendKeys("File");
     waitExecuter.sleep(1000);
     List<WebElement> reportNameList = reportPageObj.reportNames;
     Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed");
     Assert.assertEquals(reportNameList.size(), 2, "Expected the search result to output 2 records " +
         ",but actual is " + reportNameList.size());
+  }
+
+  public ArrayList<String> populateExpectedScheduledReportArr(ReportsArchiveScheduledPageObject reportPageObj,
+                                                              List<WebElement> reportNameList) {
+    ArrayList<String> expectedReportNameArr = new ArrayList<String>();
+    int reportCnt = reportNameList.size();
+    List<WebElement> isPagination = driver.findElements(By.xpath("//div[2]//nav/p[@class='pointer']"));
+    if (!isPagination.isEmpty()) {
+      String pageCntStr = reportPageObj.reportCntPerPage.getText().trim();
+      int pageCnt = Integer.parseInt(pageCntStr.split("\\s+")[2]);
+      for (int p = 1; p <= pageCnt; p++) {
+        List<WebElement> perReportList = null;
+        perReportList = reportNameList;
+        for (int r = 0; r < perReportList.size(); r++) {
+          expectedReportNameArr.add(perReportList.get(r).getText());
+        }
+        waitExecuter.sleep(2000);
+        if (p != pageCnt)
+          MouseActions.clickOnElement(driver, reportPageObj.rightCaretReportCnt);
+        waitExecuter.sleep(1000);
+      }
+      MouseActions.clickOnElement(driver, reportPageObj.backwardCaretReportCnt);
+      waitExecuter.sleep(2000);
+    } else {
+      for (int j = 0; j < reportCnt; j++) {
+        expectedReportNameArr.add(reportNameList.get(j).getText().trim());
+      }
+    }
+    return expectedReportNameArr;
   }
 
   /**
@@ -228,7 +257,8 @@ public class ReportsArchiveSchedulePage {
 
     for (int i = 0; i < colList.size(); i++) {
       int reportCnt = Integer.parseInt(reportCntList.get(i).getText().trim());
-      logger.info("ReportCnt is " + reportCnt);
+      String reportStatus = reportPageObj.reportStatus.get(i).getText();
+      logger.info("ReportCnt is " + reportCnt + " Report status = " + reportStatus);
       if (reportCnt < 50 && reportCnt > 10) {
         MouseActions.clickOnElement(driver, colList.get(i));
         String pageCntStr = reportPageObj.reportCntPerPage.getText().trim();
@@ -259,27 +289,29 @@ public class ReportsArchiveSchedulePage {
           sortByStatus(reportPageObj, expectedReportNameArr, reportAsceArr, reportDscArr, colList);
         else {
           sortByCreatedCnt(reportPageObj, expectedReportNameArr, reportAsceArr, reportDscArr, colList);
-          // sortByReportCnt(reportPageObj, expectedReportCntArr, reportCntAsceArr, reportCntDscArr, colList);
         }
-        MouseActions.clickOnElement(driver, reportPageObj.goBackButton);
+        MouseActions.clickOnElement(driver, reportPageObj.goBackLink);
         logger.info("Clicked the Go Back Button");
         waitExecuter.sleep(3000);
       } else if (reportCnt <= 10) {
-        MouseActions.clickOnElement(driver, colList.get(i));
-        for (int j = 0; j < colList.size(); j++) {
-          expectedReportNameArr.add(colList.get(j).getText().trim());
+        if (reportCnt == 0 && reportStatus.equals("NO REPORT"))
+          logger.info("No reports generated");
+        else {
+          MouseActions.clickOnElement(driver, colList.get(i));
+          for (int j = 0; j < colList.size(); j++) {
+            expectedReportNameArr.add(colList.get(j).getText().trim());
+          }
+          if (colName.equals("Name")) {
+            WebElement sortingIcon = reportPageObj.sortingReportNameIcon;
+            sortByReportName(reportPageObj, expectedReportNameArr, reportAsceArr, reportDscArr, colList, sortingIcon);
+          } else if (colName.equals("Status"))
+            sortByStatus(reportPageObj, expectedReportNameArr, reportAsceArr, reportDscArr, colList);
+          else
+            sortByCreatedCnt(reportPageObj, expectedReportNameArr, reportAsceArr, reportDscArr, colList);
+          MouseActions.clickOnElement(driver, reportPageObj.goBackLink);
+          logger.info("Clicked the Go Back Button");
+          waitExecuter.sleep(3000);
         }
-        if (colName.equals("Name")) {
-          WebElement sortingIcon = reportPageObj.sortingReportNameIcon;
-          sortByReportName(reportPageObj, expectedReportNameArr, reportAsceArr, reportDscArr, colList, sortingIcon);
-        } else if (colName.equals("Status"))
-          sortByStatus(reportPageObj, expectedReportNameArr, reportAsceArr, reportDscArr, colList);
-        else
-          sortByCreatedCnt(reportPageObj, expectedReportNameArr, reportAsceArr, reportDscArr, colList);
-        // sortByReportCnt(reportPageObj, expectedReportNameArr, reportAsceArr, reportDscArr, colList);
-        MouseActions.clickOnElement(driver, reportPageObj.goBackButton);
-        logger.info("Clicked the Go Back Button");
-        waitExecuter.sleep(3000);
       }
     }
   }
@@ -292,7 +324,6 @@ public class ReportsArchiveSchedulePage {
     List<WebElement> reportNameList = reportPageObj.reportNames;
     List<WebElement> reportCntList = reportPageObj.reportCnt;
     WebElement sortingIcon = reportPageObj.sortingReportNameIcon;
-    List<WebElement> sortByReportName = reportPageObj.reportNames;
     Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed , expected 9 reports");
     if (perReport) {
       validateSortForDiffReportCol(reportNameList, reportCntList, reportPageObj, "Name");
@@ -306,6 +337,20 @@ public class ReportsArchiveSchedulePage {
   }
 
   /**
+   * Method to validate the sorting option on the Scheduled Report Page
+   */
+  public void validateSortingOptionScheduledReportName(ReportsArchiveScheduledPageObject reportPageObj) {
+    ArrayList<String> expectedReportNameArr = new ArrayList<>(), reportAsceArr = new ArrayList<>(), reportDscArr = new ArrayList<>();
+    List<WebElement> reportNameList = reportPageObj.reportNames;
+    WebElement sortingIcon = reportPageObj.sortingReportNameIcon;
+    Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed , expected 9 reports");
+    expectedReportNameArr = populateExpectedScheduledReportArr(reportPageObj, reportNameList);
+    sortByReportName(reportPageObj, expectedReportNameArr, reportAsceArr, reportDscArr, reportNameList,
+        sortingIcon);
+
+  }
+
+  /**
    * Method to validate the sorting option on Report Type for Scheduled Page
    */
   public void validateSortingOptionReportType(ReportsArchiveScheduledPageObject reportPageObj) {
@@ -314,9 +359,7 @@ public class ReportsArchiveSchedulePage {
     WebElement sortingIcon = reportPageObj.sortingReportCntIcon;
     List<WebElement> sortByReportType = reportPageObj.reportType;
     Assert.assertFalse(reportTypeList.isEmpty(), "There are no reports listed");
-    for (int i = 0; i < reportTypeList.size(); i++) {
-      expectedReportNameArr.add(reportTypeList.get(i).getText());
-    }
+    expectedReportNameArr = populateExpectedScheduledReportArr(reportPageObj, reportTypeList);
     sortByReportName(reportPageObj, expectedReportNameArr, reportAsceArr, reportDscArr, reportTypeList,
         sortingIcon);
   }
@@ -330,9 +373,7 @@ public class ReportsArchiveSchedulePage {
     WebElement sortingIcon = reportPageObj.sortingStatusIcon;
     List<WebElement> sortByNextScheduledRun = reportPageObj.reportType;
     Assert.assertFalse(nextScheduledRunList.isEmpty(), "There are no reports scheduled for net run");
-    for (int i = 0; i < nextScheduledRunList.size(); i++) {
-      expectedReportNameArr.add(nextScheduledRunList.get(i).getText());
-    }
+    expectedReportNameArr = populateExpectedScheduledReportArr(reportPageObj, nextScheduledRunList);
     sortByReportName(reportPageObj, expectedReportNameArr, reportAsceArr, reportDscArr, nextScheduledRunList, sortingIcon);
   }
 
@@ -346,6 +387,7 @@ public class ReportsArchiveSchedulePage {
     Collections.sort(expectedReportNameArr);
     ArrayList<String> newExpectedReportNameArr = new ArrayList<String>();
     MouseActions.clickOnElement(driver, sortingIcon);
+
     Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed");
     reportAsceArr.clear();
     reportDscArr.clear();
@@ -355,18 +397,18 @@ public class ReportsArchiveSchedulePage {
     }
     // Click again to reverse sort;
     MouseActions.clickOnElement(driver, sortingIcon);
-    List<WebElement> sortedReportNameList2 = reportPageObj.reportNames;
+    waitExecuter.sleep(1000);
     Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed ");
-    for (int s = 0; s < sortedReportNameList2.size(); s++) {
-      reportDscArr.add(sortedReportNameList2.get(s).getText());
-      logger.info("The descending list is " + sortedReportNameList2.get(s).getText());
+    for (int s = 0; s < reportNameList.size(); s++) {
+      reportDscArr.add(reportNameList.get(s).getText());
+      logger.info("The descending list is " + reportNameList.get(s).getText());
     }
     for (int i = 0; i < reportDscArr.size(); i++) {
       newExpectedReportNameArr.add(expectedReportNameArr.get(i));
-      logger.info("The Actual list is " + expectedReportNameArr.get(i));
     }
+    logger.info("The Expected list is " + newExpectedReportNameArr);
     Assert.assertTrue(newExpectedReportNameArr.equals(reportAsceArr) || newExpectedReportNameArr.equals(reportDscArr),
-        "The sorting for reportName is not working");
+        "The sorting for reportName is not correct \nExpected list is " + newExpectedReportNameArr);
     expectedReportNameArr.clear();
     newExpectedReportNameArr.clear();
     reportAsceArr.clear();
@@ -558,7 +600,7 @@ public class ReportsArchiveSchedulePage {
         }
         Assert.assertEquals(totalCnt, reportCnt, "The number of reports generated for " + reportName + " " +
             "donot match to the count displayed in the Reports tab\n Expected = " + reportCnt + " Actual = " + totalCnt);
-        MouseActions.clickOnElement(driver, reportPageObj.goBackButton);
+        MouseActions.clickOnElement(driver, reportPageObj.goBackLink);
       } else {
         MouseActions.clickOnElement(driver, reportCntList.get(i));
         waitExecuter.sleep(2000);
@@ -566,7 +608,7 @@ public class ReportsArchiveSchedulePage {
         String expectedMsg = "No data to display";
         Assert.assertTrue(msg.contains(expectedMsg), "Proper msg not displayed \n Expected = " + expectedMsg +
             " Actual = " + msg);
-        MouseActions.clickOnElement(driver, reportPageObj.goBackButton);
+        MouseActions.clickOnElement(driver, reportPageObj.goBackLink);
       }
     }
   }
@@ -586,7 +628,11 @@ public class ReportsArchiveSchedulePage {
       waitExecuter.sleep(2000);
       String actualHeader = reportPageObj.latestReportHeader.getText();
       logger.info("The header is " + actualHeader);
-      String expectedHeader = "LATEST SUCCESSFUL " + reportName.toUpperCase() + " REPORT";
+      String expectedHeader;
+      if (reportName.equals("Small File Report") || reportName.equals("File Reports"))
+        expectedHeader = "LATEST SUCCESSFUL " + reportName.toUpperCase();
+      else
+        expectedHeader = "LATEST SUCCESSFUL " + reportName.toUpperCase() + " REPORT";
       if (status.equals("SUCCESS")) {
         Assert.assertEquals(expectedHeader, actualHeader, " The latest report donot match for = " +
             reportName + " with status = " + status + " \n Expected = " + expectedHeader + " Actual = " + actualHeader);
@@ -656,7 +702,9 @@ public class ReportsArchiveSchedulePage {
           }
           MouseActions.clickOnElement(driver, reportPageObj.reportCreationRunButton);
           waitExecuter.sleep(30000);
+          waitExecuter.waitUntilPageFullyLoaded();
           driver.navigate().refresh();
+          waitExecuter.waitUntilPageFullyLoaded();
           status = reportStatusList.get(i).getText().trim();
           afterReportCnt = Integer.parseInt(reportCntList.get(i).getText().trim());
           logger.info("Before cnt = " + beforeReportCnt + " After cnt = " + afterReportCnt);
@@ -664,11 +712,14 @@ public class ReportsArchiveSchedulePage {
         case "Cloud Mapping Per Host":
           MouseActions.clickOnElement(driver, newReportActionList.get(i));
           waitExecuter.sleep(25000);
+          waitExecuter.waitUntilPageFullyLoaded();
           MouseActions.clickOnElement(driver, reportPageObj.cloudMappingChkBox);
           waitExecuter.sleep(1000);
           MouseActions.clickOnElement(driver, reportPageObj.reportCreationRunButton);
           waitExecuter.sleep(40000);
+          waitExecuter.waitUntilPageFullyLoaded();
           driver.navigate().refresh();
+          waitExecuter.waitUntilPageFullyLoaded();
           status = reportStatusList.get(i).getText().trim();
           afterReportCnt = Integer.parseInt(reportCntList.get(i).getText().trim());
           logger.info("Before cnt = " + beforeReportCnt + " After cnt = " + afterReportCnt);
@@ -725,7 +776,7 @@ public class ReportsArchiveSchedulePage {
         waitExecuter.sleep(3000);
         Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Removed successfully",
             " Report not removed");
-        MouseActions.clickOnElement(driver, reportPageObj.goBackButton);
+        MouseActions.clickOnElement(driver, reportPageObj.goBackLink);
         waitExecuter.sleep(2000);
         int reportCntAfterDelete = Integer.parseInt(reportCntList.get(i).getText().trim());
         logger.info("Before Delete report count = " + reportCnt + "\n After delete report count is " + reportCntAfterDelete);

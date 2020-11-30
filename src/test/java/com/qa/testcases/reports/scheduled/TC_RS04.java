@@ -43,7 +43,7 @@ public class TC_RS04 extends BaseClass {
     waitExecuter.waitUntilElementClickable(reportPageObj.scheduledPage);
     MouseActions.clickOnElement(driver, reportPageObj.scheduledPage);
     waitExecuter.sleep(1000);
-    reportsPage.validateSortingOptionReportName(reportPageObj, false);
+    reportsPage.validateSortingOptionScheduledReportName(reportPageObj);
     reportsPage.validateSortingOptionReportType(reportPageObj);
     reportsPage.validateSortingOptionScheduledRun(reportPageObj);
     test.log(LogStatus.PASS, "Validated that Sorting works fine on Name, Report and Next Scheduled " +

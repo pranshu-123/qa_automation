@@ -39,8 +39,11 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//*[@class='clearfix']//td/p")
   public WebElement noDataToDisplay;
 
-  @FindBy(xpath = " //div[contains(@class,'component-cta')]")
-  public WebElement goBackButton;
+//  @FindBy(xpath = " //div[contains(@class,'component-cta')]")
+//  public WebElement goBackButton;
+
+  @FindBy(xpath = "//span[contains(text(),'Archives')]")
+  public WebElement goBackLink;
 
   @FindBy(xpath = "//table/tbody/tr/td[1]/span")
   public List<WebElement> reportNames;

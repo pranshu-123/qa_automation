@@ -36,4 +36,5 @@ public @interface Marker {
   @interface DataForecasting {}
   @interface DataSmallFiles {}
   @interface Tuning {}
+  @interface KafkaExternal {}
 }

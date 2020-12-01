@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.topx;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.TopPanelPageObject;
@@ -17,9 +18,11 @@ import org.testng.annotations.Test;
 /**
  * @author Ankur Jaiswal
  */
+@Marker.All
+@Marker.TopX
 public class TC_CTX_28 extends BaseClass {
 
-    private final LoggingUtils LOGGER = new LoggingUtils(TC_CTX_26.class);
+    private final LoggingUtils LOGGER = new LoggingUtils(TC_CTX_28.class);
 
     /**
      * Verify Queues filter in new report page

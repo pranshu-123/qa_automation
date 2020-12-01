@@ -629,7 +629,7 @@ public class ReportsArchiveSchedulePage {
       String actualHeader = reportPageObj.latestReportHeader.getText();
       logger.info("The header is " + actualHeader);
       String expectedHeader;
-      if (reportName.equals("Small File Report") || reportName.equals("File Reports"))
+      if (reportName.equals("Small Files Report") || reportName.equals("File Reports"))
         expectedHeader = "LATEST SUCCESSFUL " + reportName.toUpperCase();
       else
         expectedHeader = "LATEST SUCCESSFUL " + reportName.toUpperCase() + " REPORT";

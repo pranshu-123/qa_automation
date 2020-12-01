@@ -20,7 +20,7 @@ public class KafkaPage {
   private WebDriver driver;
   private DatePicker datePicker;
   String xAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]" +
-      "//*[name()='g' and contains(@class,'highcharts-yaxis-labels')]/*[name()='text']/*[name()='tspan']";
+      "//*[name()='g' and contains(@class,'highcharts-xaxis-labels')]/*[name()='text']/*[name()='tspan']";
   String yAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]" +
       "//*[name()='g' and contains(@class,'highcharts-yaxis-labels')]/*[name()='text']/*[name()='tspan']";
 
@@ -46,6 +46,19 @@ public class KafkaPage {
     waitExecuter.sleep(2000);
     verifyClusterDropDown(kafkaPageObject);
     MouseActions.clickOnElement(driver, kafkaPageObject.brokerTab);
+    waitExecuter.waitUntilPageFullyLoaded();
+    waitExecuter.sleep(2000);
+  }
+
+  /***
+   * Method to Navigate to Kafka tab and then to Topic tab
+   */
+  public void navigateToTopicTab(KafkaPageObject kafkaPageObject) {
+    MouseActions.clickOnElement(driver, kafkaPageObject.kafkaTab);
+    waitExecuter.waitUntilPageFullyLoaded();
+    waitExecuter.sleep(2000);
+    verifyClusterDropDown(kafkaPageObject);
+    MouseActions.clickOnElement(driver, kafkaPageObject.topicTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
   }
@@ -121,7 +134,7 @@ public class KafkaPage {
     String yAxisPath = "//*[@id='" + graphId + "']" + yAxis;
     for (int i = 0; i < metricsKpiList.size(); i++) {
       String metricsName = metricsKpiHeaderList.get(i).getText();
-      logger.info("Metrics Name: " + metricsName + " Expected Name: "+ expectedMetricsName);
+      logger.info("Metrics Name: " + metricsName + " Expected Name: " + expectedMetricsName);
       if (metricsName.equals(expectedMetricsName)) {
         Assert.assertFalse(metricsName.isEmpty(), " Metrics Name not displayed");
         logger.info("Metrics Name: [" + metricsName + "] displayed in the header");
@@ -129,24 +142,24 @@ public class KafkaPage {
         logger.info("The graph for Metrics : [" + metricsName + "] is displayed");
         Assert.assertTrue(metricsKpiFooterList.get(i).isDisplayed(), "The footer for metrics " + metricsName + " is not displayed");
         logger.info("The footer for Metrics : [" + metricsName + "] is displayed");
-        verifyAxis(xAxisPath,"X-Axis");
-        verifyAxis(yAxisPath,"Y-Axis");
+        verifyAxis(xAxisPath, "X-Axis");
+        verifyAxis(yAxisPath, "Y-Axis");
       }
     }
   }
 
   public void verifyAxis(String axisPath, String axisName) {
     List<WebElement> axisPathList = driver.findElements(By.xpath(axisPath));
-    Assert.assertFalse(axisPathList.isEmpty(), "No points plotted on the "+axisName);
+    Assert.assertFalse(axisPathList.isEmpty(), "No points plotted on the " + axisName);
     HashSet<String> axisValSet = new HashSet<>();
     ArrayList<String> axisValArr = new ArrayList<>();
     for (int i = 0; i < axisPathList.size(); i++) {
       axisValArr.add(axisPathList.get(i).getText());
       axisValSet.add(axisPathList.get(i).getText());
     }
-    logger.info("Expected X-Axis: "+ axisValSet + "\n Actual X-Axis: "+ axisValArr);
-    Assert.assertEquals(axisValSet.size(),axisValArr.size(),"Duplicate values present in the "+axisName+"\n" +
-        "Expected : "+ axisValSet+ " Actual : "+ axisValArr);
+    logger.info("Expected " + axisName + " : " + axisValSet + "\n Actual " + axisName + " : " + axisValArr);
+    Assert.assertEquals(axisValSet.size(), axisValArr.size(), "Duplicate values present in the " + axisName + "\n" +
+        "Expected : " + axisValSet + " Actual : " + axisValArr);
   }
 
 
@@ -176,7 +189,7 @@ public class KafkaPage {
         Assert.assertTrue(rowData.isDisplayed(), "No data under column: " + colName);
         //Check if data has only special charaters
         boolean onlySpecialChars = rowData.getText().matches("[^a-zA-Z0-9]+");
-        Assert.assertFalse(onlySpecialChars, "Expected value for column "+ colName + " But got: "+ rowData.getText());
+        Assert.assertFalse(onlySpecialChars, "Expected value for column " + colName + " But got: " + rowData.getText());
         logger.info("Row data for column: " + colName + "\n " + rowData.getText());
       }
     }
@@ -194,11 +207,11 @@ public class KafkaPage {
       String colName = brokerColList.get(col).getText();
       logger.info("The Broker colName is: " + colName);
       for (int row = 1; row <= brokerRowList.size(); row++) {
-        WebElement rowData = driver.findElement(By.xpath("//tbody[@id='undefined-body']/tr/td[" + (col + 1) + "]/span"));
+        WebElement rowData = driver.findElement(By.xpath("//tbody[@id='undefined-body']/tr[" + row + "]/td[" + (col + 1) + "]/span"));
         Assert.assertTrue(rowData.isDisplayed(), "No data under column: " + colName);
         //Check if data has only special charaters
         boolean onlySpecialChars = rowData.getText().matches("[^a-zA-Z0-9]+");
-        Assert.assertFalse(onlySpecialChars, "Expected value for column "+ colName + " But got: "+ rowData.getText());
+        Assert.assertFalse(onlySpecialChars, "Expected value for column " + colName + " But got: " + rowData.getText());
         logger.info("Row data for column: " + colName + "\n " + rowData.getText());
       }
     }
@@ -214,10 +227,46 @@ public class KafkaPage {
     for (int row = 0; row < brokerRowList.size(); row++) {
       MouseActions.clickOnElement(driver, brokerRowList.get(row));
       waitExecuter.sleep(2000);
-      List<WebElement> activeRowsList = kafkaPageObject.selectedRowColor;
+      List<WebElement> activeRowsList = kafkaPageObject.selectedBrokerRowColor;
       Assert.assertFalse(activeRowsList.isEmpty(), "Color of the selected rows have not changed");
       Assert.assertEquals(activeRowsList.size(), brokerColList.size() + 1, "Color for all the columns of a selected" +
           " row has not changed ");
+    }
+  }
+
+  /***
+   * Method to verify selected Topic record color.
+   */
+  public void verifySelectedTopicRecordColor(KafkaPageObject kafkaPageObject) {
+    List<WebElement> topicColList = kafkaPageObject.brokerCol;
+    List<WebElement> topicRowList = kafkaPageObject.topicMetricRows;
+    Assert.assertFalse(topicRowList.isEmpty(), "No data displayed for broker metrics table");
+    for (int row = 0; row < topicRowList.size(); row++) {
+      MouseActions.clickOnElement(driver, topicRowList.get(row));
+      waitExecuter.sleep(2000);
+      List<WebElement> activeRowsList = kafkaPageObject.selectedTopicRowColor;
+      Assert.assertFalse(activeRowsList.isEmpty(), "Color of the selected rows have not changed");
+      Assert.assertEquals(activeRowsList.size(), topicColList.size() + 1, "Color for all the columns of a selected" +
+          " row has not changed ");
+    }
+  }
+
+  public void verifyTopicMetrics(KafkaPageObject kafkaPageObject) {
+    List<WebElement> topicColList = kafkaPageObject.brokerCol;
+    Assert.assertFalse(topicColList.isEmpty(), " No columns displayed for topic metrics");
+    List<WebElement> topicRowList = kafkaPageObject.topicMetricRows;
+    Assert.assertFalse(topicRowList.isEmpty(), "No data displayed for topic metrics table");
+    for (int col = 0; col < topicColList.size(); col++) {
+      String colName = topicColList.get(col).getText();
+      logger.info("The Topic colName is: " + colName);
+      for (int row = 1; row <= topicRowList.size(); row++) {
+        WebElement rowData = driver.findElement(By.xpath("//tbody[@id='kafkaTopicList-body']/tr[" + row + "]/td[" + (col + 1) + "]/span"));
+        Assert.assertTrue(rowData.isDisplayed(), "No data under column: " + colName);
+        //Check if data has only special charaters
+        boolean onlySpecialChars = rowData.getText().matches("[^a-zA-Z0-9]+");
+        Assert.assertFalse(onlySpecialChars, "Expected value for column " + colName + " But got: " + rowData.getText());
+        logger.info("Row data for column: " + colName + "\n " + rowData.getText());
+      }
     }
   }
 }

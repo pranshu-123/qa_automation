@@ -15,6 +15,9 @@ public class KafkaPageObject {
   @FindBy(xpath = "//div[@class='component-tabs-secondary']//a[contains(text(),'Broker')]")
   public WebElement brokerTab;
 
+  @FindBy(xpath = "//div[@class='component-tabs-secondary']//a[contains(text(),'Topic')]")
+  public WebElement topicTab;
+
   @FindBy(xpath = "(//span[contains(@class,'select2-selection__rendered')])")
   public WebElement kafkaClusterDropDown;
 
@@ -69,14 +72,21 @@ public class KafkaPageObject {
   @FindBy(xpath = "//tbody[@id='undefined-body']/tr")
   public List<WebElement> brokerRows;
 
+  @FindBy(xpath = "//tbody[@id='kafkaTopicList-body']/tr")
+  public List<WebElement> topicMetricRows;
+
   @FindBy(xpath = "//*[@class='component-dashboard']")
   public WebElement componentDashboard;
 
-  @FindBy(xpath = "//*[@class=\"container-fluid\"]/h2")
+  @FindBy(xpath = "//*[@class='container-fluid']/h2")
   public WebElement latestMetricsInfo;
 
   @FindBy(xpath = "//*[@id='undefined-body']//td[@class='active-td']")
-  public List<WebElement> selectedRowColor;
+  public List<WebElement> selectedBrokerRowColor;
+
+  @FindBy(xpath = "//*[@id='kafkaTopicList-body']//td[@class='active-td']")
+  public List<WebElement> selectedTopicRowColor;
+
 
   public KafkaPageObject(WebDriver driver) {
     PageFactory.initElements(driver, this);

@@ -40,7 +40,6 @@ public class QueueAnalysisPageObject {
     public List<WebElement> queueOptions;
 
 
-
     @FindBy(xpath = "(//a[contains(@class,'icon-sort')])[1]")
     public WebElement sortByQueueName;
 
@@ -67,6 +66,30 @@ public class QueueAnalysisPageObject {
 
     @FindBy(xpath = "//table[contains(@class,'component-data-tables')]//td/p")
     public WebElement whenNoQueuePresent;
+
+    @FindBy(xpath = "(//div[contains(@class,'highcharts-container')])[1]")
+    public WebElement jobsGraph;
+
+    @FindBy(xpath = "(//div[contains(@class,'highcharts-container')])[2]")
+    public WebElement vcoresGraph;
+
+    @FindBy(xpath = "(//div[contains(@class,'highcharts-container')])[3]")
+    public WebElement memoryGraph;
+
+    @FindBy(xpath = "(.//*[local-name() = 'svg']/*[local-name() = 'g'])[10]/*[local-name() = 'text']")
+    public WebElement jobsToolTip;
+
+    @FindBy(xpath = "(.//*[local-name() = 'svg']/*[local-name() = 'g'])[20]/*[local-name() = 'text']")
+    public WebElement vcoresToolTip;
+
+    @FindBy(xpath = "(.//*[local-name() = 'svg']/*[local-name() = 'g'])[30]/*[local-name() = 'text']")
+    public WebElement memoryToolTip;
+
+    @FindBy(xpath = "//b[@class='blink']")
+    public WebElement loading;
+
+    @FindBy(xpath = "//div[contains(@class,'component-section-header')]/h1")
+    public WebElement yarnResources;
 
     public QueueAnalysisPageObject(WebDriver driver) {
         PageFactory.initElements(driver, this);

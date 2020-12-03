@@ -54,8 +54,29 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[2]")
     public WebElement closeAppsPageTab;
 
+    @FindBy(xpath = "//*[@class='highcharts-legend']/*[name()='g']//*[name()='g']//*[name()='tspan']")
+    public List<WebElement> ATlegendNames;
+
+    @FindBy(xpath = "//*[@class='highcharts-legend']/*[name()='g']//*[name()='g']//*[name()='tspan']")
+    public List<WebElement> driverLegendNames;
+
     @FindBy(xpath = "//a[@href='#/clusters/overview']")
     public WebElement homeTab;
+
+    @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/p")
+    public WebElement configPropNum;
+
+    @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/div[2]/span")
+    public List<WebElement> configKeywords;
+
+    @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/span/div/a/span")
+    public WebElement resetButton;
+
+    @FindBy(xpath = " //*[@id='appConfiguration']//tbody/tr/td/p")
+    public List<WebElement> configPropKey;
+
+    @FindBy(xpath = " //*[@id='appConfiguration']//tbody/tr/td/span")
+    public List<WebElement> configPropValue;
 
 
     @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[1]/div/div[1]/div[2]/h4/span")
@@ -116,10 +137,10 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@class='link-item']")
     public WebElement programSourceLinkText;
 
-    @FindBy(xpath = "//*[@id=\"tezllap-container\"]/div[1]/div[2]/h4/span[1]/text()")
+    @FindBy(xpath = "//*[@id=\"SummaryDetails\"]/div/div[3]/div/div/h3")
     public WebElement startTime;
 
-    @FindBy(xpath = "//*[@id=\"tezllap-container\"]/div[1]/div[2]/h4/span[2]/text()")
+    @FindBy(xpath = "//*[@id=\"SummaryDetails\"]/div/div[4]/div/div/h3")
     public WebElement EndTime;
 
     @FindBy(xpath = "//*[@id=\"SummaryDetails\"]/div/div[1]/div[1]/div/h3")

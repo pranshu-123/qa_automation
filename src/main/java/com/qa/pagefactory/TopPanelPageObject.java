@@ -91,6 +91,10 @@ public class TopPanelPageObject {
 
   @FindBy(xpath = "//h4/span[contains(text(), 'Jobs')]")
   public WebElement jobsTab;
+
+  @FindBy(xpath = "//span[contains(@class,'icon-cloud')]")
+  public WebElement migrationTab;
+
   /**
    * @param driver The driver that will be used to look up the elements
    */

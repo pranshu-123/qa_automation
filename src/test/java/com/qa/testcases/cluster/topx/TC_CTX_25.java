@@ -29,7 +29,6 @@ public class TC_CTX_25 extends BaseClass {
       test.assignCategory(" Cluster - Top X");
       WaitExecuter waitExecuter = new WaitExecuter(driver);
       TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-
       waitExecuter.waitUntilElementPresent(topPanelPageObject.topXTab);
       waitExecuter.waitUntilPageFullyLoaded();
       waitExecuter.waitUntilElementClickable(topPanelPageObject.topXTab);

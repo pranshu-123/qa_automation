@@ -1,16 +1,16 @@
 package com.qa.scripts.clusters;
 
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.CommonPageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.clusters.QueueAnalysisPageObject;
 import com.qa.utils.ActionPerformer;
-import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.NoSuchWindowException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.qa.utils.actions.UserActions;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,11 +28,11 @@ public class QueueAnalysis {
     private final WaitExecuter waitExecuter;
     private final QueueAnalysisPageObject queueAnalysisPageObject;
     private final TopPanelPageObject topPanelPageObject;
-    private final QueueAnalysisPageObject qaPageObject;
     private final List<String> memoryTooltipValues;
     private final List<String> jobsTooltipValues;
     private final List<String> vcoresTooltipValues;
     private CommonPageObject commonPageObject;
+    private final UserActions userAction;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -44,10 +44,10 @@ public class QueueAnalysis {
         waitExecuter = new WaitExecuter(driver);
         queueAnalysisPageObject = new QueueAnalysisPageObject(driver);
         topPanelPageObject = new TopPanelPageObject(driver);
-        qaPageObject = new QueueAnalysisPageObject(driver);
         memoryTooltipValues = new ArrayList<String>();
         jobsTooltipValues = new ArrayList<String>();
         vcoresTooltipValues = new ArrayList<String>();
+        userAction = new UserActions(driver);
     }
 
     /*
@@ -57,7 +57,8 @@ public class QueueAnalysis {
     public void closeConfirmationMessageNotification() {
         if (queueAnalysisPageObject.confirmationMessageElementClose.size() > 0) {
             waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.confirmationMessageElementClose.get(0));
-            JavaScriptExecuter.clickOnElement(driver, queueAnalysisPageObject.confirmationMessageElementClose.get(0));
+            userAction.performActionWithPolling(queueAnalysisPageObject.confirmationMessageElementClose.get(0),
+                    UserAction.CLICK);
         }
     }
 
@@ -81,17 +82,16 @@ public class QueueAnalysis {
         waitExecuter.sleep(4000);
         // Click on Queue Analysis tab
         LOGGER.info("Clicked on Queue Analysis tab");
-        topPanelPageObject.queueAnalysisTab.click();
-        waitExecuter.sleep(3000);
+        userAction.performActionWithPolling(topPanelPageObject.queueAnalysisTab, UserAction.CLICK);
         // Validate Queue Analysis tab loaded successfully
         LOGGER.info("Validate Queue Analysis tab loaded successfully");
-        waitExecuter.waitUntilElementPresent(qaPageObject.queueAnalysisHeading);
+        waitExecuter.waitUntilElementPresent(queueAnalysisPageObject.queueAnalysisHeading);
         waitExecuter.waitUntilPageFullyLoaded();
     }
 
     /**
      * This methods returns the query tooltip values displayed at different
-     * coordinates of memory/query graph
+     * coordinates of memory/Vcores/Job graph
      *
      * @return List of tooltip values
      */
@@ -107,6 +107,7 @@ public class QueueAnalysis {
         return vcoresTooltipValues;
     }
 
+    /*This method is to navigate on different coordinates of  Queue graphs */
     public void navigateDifferentPointOnGraph(WebDriver driver, WebElement graphElement) {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         int width = graphElement.getSize().getWidth();
@@ -153,8 +154,8 @@ public class QueueAnalysis {
     public void closeConfirmationBoxAndClickQueue() {
         closeConfirmationMessageNotification();
         waitExecuter.sleep(2000);
-        qaPageObject.getQueueNameFromTable.get(0).click();
-        waitExecuter.waitUntilElementPresent(qaPageObject.loading);
+        queueAnalysisPageObject.getQueueNameFromTable.get(0).click();
+        waitExecuter.waitUntilElementPresent(queueAnalysisPageObject.loading);
         waitExecuter.sleep(3000);
     }
 
@@ -163,7 +164,7 @@ public class QueueAnalysis {
         List<String> expectedMemoryToolTip = Arrays.asList("pendingb", "steadyfairshareb", "availablegb", "allocatedb",
                 "reservedb", "fairshareb");
         waitExecuter.sleep(1000);
-        navigateDifferentPointOnGraph(driver, qaPageObject.memoryGraph);
+        navigateDifferentPointOnGraph(driver, queueAnalysisPageObject.memoryGraph);
         LOGGER.info("Expected tool tip values- " + expectedMemoryToolTip);
         return expectedMemoryToolTip;
     }
@@ -187,7 +188,7 @@ public class QueueAnalysis {
         List<String> expectedVcoresToolTip = Arrays.asList("reserved", "fairshare", "pending", "steadyfairshare",
                 "available", "allocated");
         waitExecuter.sleep(1000);
-        navigateDifferentPointOnGraph(driver, qaPageObject.vcoresGraph);
+        navigateDifferentPointOnGraph(driver, queueAnalysisPageObject.vcoresGraph);
         LOGGER.info("Expected tool tip values- " + expectedVcoresToolTip);
         return expectedVcoresToolTip;
     }
@@ -211,7 +212,7 @@ public class QueueAnalysis {
         List<String> expectedJobsToolTip = Arrays.asList("failed", "killed", "running", "completed", "pending",
                 "submitted");
         waitExecuter.sleep(1000);
-        navigateDifferentPointOnGraph(driver, qaPageObject.jobsGraph);
+        navigateDifferentPointOnGraph(driver, queueAnalysisPageObject.jobsGraph);
         LOGGER.info("Expected tool tip values- " + expectedJobsToolTip);
         return expectedJobsToolTip;
     }
@@ -262,5 +263,125 @@ public class QueueAnalysis {
         } catch (NoSuchWindowException e) {
             driver.close();
         }
+    }
+
+    /* Click on schedule button */
+    public void clickOnScheduleButton() {
+        try {
+            MouseActions.clickOnElement(driver, queueAnalysisPageObject.scheduleButton);
+        } catch (TimeoutException te) {
+            MouseActions.clickOnElement(driver, queueAnalysisPageObject.scheduleButton);
+        }
+    }
+
+    /* Click on schedule button and assign multiple e-mails */
+    public void scheduleWithMultiEmail(String name, List<String> multiEmail) {
+        waitExecuter.waitUntilElementPresent(queueAnalysisPageObject.scheduleName);
+        userAction.performActionWithPolling(queueAnalysisPageObject.scheduleName, UserAction.SEND_KEYS, name);
+        for (String email : multiEmail) {
+            userAction.performActionWithPolling(queueAnalysisPageObject.email, UserAction.SEND_KEYS, email);
+            waitExecuter.waitUntilElementPresent(queueAnalysisPageObject.addEmail);
+            MouseActions.clickOnElement(driver, queueAnalysisPageObject.addEmail);
+        }
+    }
+
+    /* Click on schedule button of Modal window */
+    public void clickOnModalScheduleButton() {
+        try {
+            MouseActions.clickOnElement(driver, queueAnalysisPageObject.modalScheduleButton);
+        } catch (TimeoutException te) {
+            MouseActions.clickOnElement(driver, queueAnalysisPageObject.modalScheduleButton);
+        }
+    }
+
+    /* Validate success message on report creation */
+    public void verifyScheduleSuccessMsg(String successMsg) {
+        waitExecuter.waitUntilElementPresent(queueAnalysisPageObject.scheduleSuccessMsg);
+        Assert.assertEquals(queueAnalysisPageObject.scheduleSuccessMsg.getText(), successMsg,
+                "The Schedule success " + "message mismatch");
+    }
+
+    /* Select day from drop-down */
+    public void selectByDays(String dayToRun) {
+        waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.scheduleDays);
+        Select scheduleTorunDropDown = new Select(queueAnalysisPageObject.scheduleDays);
+        scheduleTorunDropDown.selectByVisibleText(dayToRun);
+
+    }
+
+    /* Select hour from drop-down */
+    public void selectByHour(String hour) {
+        waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.hoursDropdown);
+        Select scheduleTorunDropDown = new Select(queueAnalysisPageObject.hoursDropdown);
+        scheduleTorunDropDown.selectByVisibleText(hour);
+
+    }
+
+    /* Select minute from drop-down */
+    public void selectByMin(String min) {
+        waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.minutesDropdown);
+        Select scheduleTorunDropDown = new Select(queueAnalysisPageObject.minutesDropdown);
+        scheduleTorunDropDown.selectByVisibleText(min);
+
+    }
+
+    /* Define day and Time to select from drop-down */
+    public void selectDayTime(String day, String hour, String min) {
+        selectByDays(day);
+        queueAnalysisPageObject.displayTime.click();
+        selectByHour(hour);
+        selectByMin(min);
+    }
+
+    /* Search by queue name in queue table */
+    public void searchQueueName(String queueName) {
+        userAction.performActionWithPolling(queueAnalysisPageObject.queueSearchBox, UserAction.CLICK);
+        userAction.performActionWithPolling(queueAnalysisPageObject.queueSearchBox, UserAction.SEND_KEYS, queueName);
+
+    }
+
+    /* This method is to Select cluster for schedule and run reports */
+    public void selectCluster(String clusterId) {
+        waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.clusterDropdown);
+        userAction.performActionWithPolling(queueAnalysisPageObject.clusterDropdown, UserAction.CLICK);
+        userAction.performActionWithPolling(queueAnalysisPageObject.clusterSearchbox, UserAction.CLICK);
+        userAction.performActionWithPolling(queueAnalysisPageObject.clusterSearchbox, UserAction.SEND_KEYS, clusterId);
+        userAction.performActionWithPolling(queueAnalysisPageObject.select1stClusterOption, UserAction.CLICK);
+        waitExecuter.sleep(1000);
+    }
+
+    /* This method is to Click on run button to open Run Report modal window */
+    public void openReportRunButton() {
+        // Click on Run button to open report page
+        LOGGER.info("Click on Run button to open report page");
+        userAction.performActionWithPolling(queueAnalysisPageObject.runButton, UserAction.CLICK);
+        waitExecuter.sleep(1000);
+    }
+
+    /*This method is to click on Run button of Modal window */
+    public void modalRunButton() {
+        LOGGER.info("Click on Run button of modal window");
+        userAction.performActionWithPolling(queueAnalysisPageObject.modalRunButton, UserAction.CLICK);
+        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilElementPresent(queueAnalysisPageObject.runButton);
+        waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.runButton);
+    }
+
+    /* This method is used to assign start date and end date for custom range */
+    public void assignCustomDate(String startDate, String endDate) {
+        LOGGER.info("Click on custom range");
+        userAction.performActionWithPolling(queueAnalysisPageObject.dateRange, UserAction.CLICK);
+        LOGGER.info("Set start and end date");
+        userAction.performActionWithPolling(queueAnalysisPageObject.customRange, UserAction.CLICK);
+        userAction.performActionWithPolling(queueAnalysisPageObject.startDate, UserAction.CLICK);
+        queueAnalysisPageObject.startDate.clear();
+        waitExecuter.sleep(1000);
+        userAction.performActionWithPolling(queueAnalysisPageObject.startDate, UserAction.SEND_KEYS, startDate);
+        userAction.performActionWithPolling(queueAnalysisPageObject.endDate, UserAction.CLICK);
+        queueAnalysisPageObject.endDate.clear();
+        waitExecuter.sleep(1000);
+        userAction.performActionWithPolling(queueAnalysisPageObject.endDate, UserAction.SEND_KEYS, endDate);
+        LOGGER.info("Click on apply button");
+        userAction.performActionWithPolling(queueAnalysisPageObject.applyButton, UserAction.CLICK);
     }
 }

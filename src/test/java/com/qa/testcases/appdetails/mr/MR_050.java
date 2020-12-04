@@ -14,11 +14,11 @@ public class MR_050 extends BaseClass {
 
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_050_verifytheclusterlistedbasedonthefilter(String clusterId) {
-        test = extent.startTest("MR_050_verifytheclusterlistedbasedonthefilter: " + clusterId,
+    public void MR_050_verifyClusterFilter(String clusterId) {
+        test = extent.startTest("MR_050_verifyClusterFilter: " + clusterId,
                 "Verify User must be able to filter by the cluster  and apps must be listed based on the filter");
         test.assignCategory(" Apps Details-Mr");
-        Log.startTestCase("MR_050_verifytheclusterlistedbasedonthefilter");
+        Log.startTestCase("MR_050_verifyClusterFilter");
 
         MrAppsDetailsPage mrDetailsPage = new MrAppsDetailsPage(driver);
         mrDetailsPage.commonSetupCodeForSumarryTabValidation(test, clusterId, "Analysis",logger, false);

@@ -26,11 +26,11 @@ public class MR_047 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mr.MR_047.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_047_verifyJobsummarymustbedefined(String clusterId) {
-        test = extent.startTest("MR_047_verifyJobsummarymustbedefined: " + clusterId,
+    public void MR_047_verifyMRJobsSummary(String clusterId) {
+        test = extent.startTest("MR_047_verifyMRJobsSummary: " + clusterId,
                 "Verify job summary must be defined based the actual state of the apps");
         test.assignCategory(" Apps Details-Mr");
-        Log.startTestCase("MR_047_verifyJobsummarymustbedefined");
+        Log.startTestCase("MR_047_verifyMRJobsSummary");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

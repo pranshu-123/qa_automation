@@ -21,11 +21,11 @@ public class MR_048 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mr.MR_048.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_048_verifyAppshouldhaveKPIdefined(String clusterId) {
-        test = extent.startTest("MR_048_verifyAppshouldhaveKPIdefined: " + clusterId,
+    public void MR_048_verifyMRAppsKPIs(String clusterId) {
+        test = extent.startTest("MR_048_verifyMRAppsKPIs: " + clusterId,
                 "Verify KPI for MR must be listed andf all the values should be populated");
         test.assignCategory(" Apps Details-Mr");
-        Log.startTestCase("MR_048_verifyAppshouldhaveKPIdefined");
+        Log.startTestCase("MR_048_verifyMRAppsKPIs");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

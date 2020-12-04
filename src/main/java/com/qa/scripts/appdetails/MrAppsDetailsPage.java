@@ -391,7 +391,7 @@ public class MrAppsDetailsPage {
      * Method to validate AppSummary Resource tab.
      */
     public void validateResourcesTab(MrAppsDetailsPageObject mrApps) {
-        String[] expectedGraphTitle = {"Task Attempts", "Containers", "Vcores", "Memory", "Metrics"};
+        String[] expectedGraphTitle = {"Task Attempts(MAP)","Task Attempts(Reduce)", "Containers", "Vcores", "Memory", "Metrics"};
         List<WebElement> graphTitleList = mrApps.resourcesGraphTitle;
         verifyAssertFalse(graphTitleList.isEmpty(), mrApps, "No title displayed");
         List<WebElement> allGraphsList = mrApps.resourcesAllGraphs;
@@ -403,7 +403,12 @@ public class MrAppsDetailsPage {
                     " Graph title doesnot match with the titles in the UI");
             verifyAssertTrue(allGraphsList.get(t).isDisplayed(), mrApps, " All Graphs are not displayed");
             switch (graphTitle) {
-                case "Task Attempts":
+                case "Task Attempts(MAP)":
+                    logger.info("Validating the Graph " + graphTitle);
+                    validateTaskAttemptTab(mrApps);
+                    //Assert.assertSame(totalTaskCnt, pieChartInternalVal, "The Values are not same");
+                    break;
+                case "Task Attempts(Reduce)":
                     logger.info("Validating the Graph " + graphTitle);
                     validateTaskAttemptTab(mrApps);
                     //Assert.assertSame(totalTaskCnt, pieChartInternalVal, "The Values are not same");

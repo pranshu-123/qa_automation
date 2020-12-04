@@ -91,6 +91,76 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "//div[contains(@class,'component-section-header')]/h1")
     public WebElement yarnResources;
 
+
+    @FindBy(xpath = "//span[contains(text(),'Schedule')]/parent::a")
+    public WebElement scheduleButton;
+
+    @FindBy(xpath = "(//form[@name='taskrunnerForm']/div/div[3]/b[contains(text(), 'Schedule Name')]/parent::div/p/input)[1]")
+    public WebElement scheduleName;
+
+    @FindBy(xpath = "//input[@type='email']")
+    public WebElement email;
+
+    @FindBy(xpath = "//input[@type='email']/following-sibling::span")
+    public WebElement addEmail;
+
+    @FindBy(xpath = "(//span[contains(text(),'Schedule')])[2]/parent::a")
+    public WebElement modalScheduleButton;
+
+    @FindBy(xpath = "//div[@class='task-runner-ht']/section/span[1]")
+    public WebElement scheduleSuccessMsg;
+
+    @FindBy(xpath = "//select[contains(@class,'schedule-days')]")
+    public WebElement scheduleDays;
+
+    @FindBy(xpath = "//input[@class='display-time']")
+    public WebElement displayTime;
+
+    @FindBy(xpath = "//input[@class='display-time']/following::select[@class='hours']")
+    public WebElement hoursDropdown;
+
+    @FindBy(xpath = "//input[@class='display-time']/following::select[@class='minutes']")
+    public WebElement minutesDropdown;
+
+    @FindBy(xpath = "//div[@class='close pointer']")
+    public WebElement close;
+
+    @FindBy(xpath = "//h3/b[text()='Queue Analysis']")
+    public WebElement QAHeading;
+
+    @FindBy(xpath = "//span[@class='select2-results']//li")
+    public WebElement invalidQueueMessage;
+
+    @FindBy(xpath = "//span[contains(@class,'select2-selection--single')]")
+    public WebElement clusterDropdown;
+
+    @FindBy(xpath = "//span[contains(@class,'select2-search--dropdown')]/input")
+    public WebElement clusterSearchbox;
+
+    @FindBy(xpath = "//ul[contains(@class,'select2-results__options')]/li[1]")
+    public WebElement select1stClusterOption;
+
+    @FindBy(xpath = "//p[@class='pointer']")
+    public List<WebElement> pagination;
+
+    @FindBy(className = "component-date-picker")
+    public WebElement dateRange;
+
+    @FindBy(xpath = "//div[@class='ranges']//li[text()='Custom Range']")
+    public WebElement customRange;
+
+    @FindBy(xpath = "(//div[@class='daterangepicker_input']/input[@name='daterangepicker_start'])[last()]")
+    public WebElement startDate;
+
+    @FindBy(xpath = "(//div[@class='daterangepicker_input']/input[@name='daterangepicker_end'])[last()]")
+    public WebElement endDate;
+
+    @FindBy(xpath = "//button[contains(@class,'applyBtn')][not(contains(@disabled,'disabled'))][last()]")
+    public WebElement applyButton;
+
+    @FindBy(xpath = "//span[@class='text-fatal']")
+    public WebElement invalidDateRangeMessage;
+
     public QueueAnalysisPageObject(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }

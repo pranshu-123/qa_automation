@@ -61,40 +61,40 @@ public class TC_RRA02 extends BaseClass {
     waitExecuter.sleep(3000);
 
     Assert.assertTrue(calendarRanges.contains(DatePickerConstants.DatePicker.LAST_1_HOUR),
-        "Last 1 Hour is not presemt in datepicker filter ");
+        "Last 1 Hour is not present in datepicker filter ");
     test.log(LogStatus.PASS, "Verified 'Last 1 hour' option in date picker filter.");
     Assert.assertTrue(calendarRanges.contains(DatePickerConstants.DatePicker.LAST_2_HOUR),
-        "Last 2 Hour is not presemt in datepicker filter");
+        "Last 2 Hour is not present in datepicker filter");
     test.log(LogStatus.PASS, "Verified 'Last 2 hour' option in date picker filter.");
     Assert.assertTrue(calendarRanges.contains(DatePickerConstants.DatePicker.LAST_6_HOUR),
-        "Last 6 Hour is not presemt in datepicker filter");
+        "Last 6 Hour is not present in datepicker filter");
     test.log(LogStatus.PASS, "Verified 'Last 6 hour' option in date picker filter.");
     Assert.assertTrue(calendarRanges.contains(DatePickerConstants.DatePicker.LAST_12_HOUR),
-        "Last 12 Hour is not presemt in datepicker filter");
+        "Last 12 Hour is not present in datepicker filter");
     test.log(LogStatus.PASS, "Verified 'Last 12 hour' option in date picker filter.");
     Assert.assertTrue(calendarRanges.contains(DatePickerConstants.DatePicker.TODAY),
-        "Today is not presemt in datepicker filter");
+        "Today is not present in datepicker filter");
     test.log(LogStatus.PASS, "Verified 'Today' option in date picker filter.");
     Assert.assertTrue(calendarRanges.contains(DatePickerConstants.DatePicker.YESTERDAY),
-        "Yesterday is not presemt in datepicker filter");
+        "Yesterday is not present in datepicker filter");
     test.log(LogStatus.PASS, "Verified 'Yesterday' option in date picker filter.");
     Assert.assertTrue(calendarRanges.contains(DatePickerConstants.DatePicker.LAST_7_DAYS),
-        "Last 7 Day is not presemt in datepicker filter");
+        "Last 7 Day is not present in datepicker filter");
     test.log(LogStatus.PASS, "Verified 'Last 7 days' option in date picker filter.");
     Assert.assertTrue(calendarRanges.contains(DatePickerConstants.DatePicker.LAST_30_DAYS),
-        "Last 30 Days is not presemt in datepicker filter");
+        "Last 30 Days is not present in datepicker filter");
     test.log(LogStatus.PASS, "Verified 'Last 30 days' option in date picker filter.");
     Assert.assertTrue(calendarRanges.contains(DatePickerConstants.DatePicker.LAST_90_DAYS),
-        "Last 90 days is not presemt in datepicker filter");
+        "Last 90 days is not present in datepicker filter");
     test.log(LogStatus.PASS, "Verified 'Last 90 days' option in date picker filter.");
     Assert.assertTrue(calendarRanges.contains(DatePickerConstants.DatePicker.LAST_MONTH),
-        "Last Month is not presemt in datepicker filter");
+        "Last Month is not present in datepicker filter");
     test.log(LogStatus.PASS, "Verified 'Last Month' option in date picker filter.");
     Assert.assertTrue(calendarRanges.contains(DatePickerConstants.DatePicker.THIS_MONTH),
-        "This Month is not presemt in datepicker filter");
+        "This Month is not present in datepicker filter");
     test.log(LogStatus.PASS, "Verified 'This Month' option in date picker filter.");
     Assert.assertTrue(calendarRanges.contains(DatePickerConstants.DatePicker.CUSTOM_RANGE),
-        "Custom Range is not presemt in datepicker filter");
+        "Custom Range is not present in datepicker filter");
     test.log(LogStatus.PASS, "Verified 'Custom Range' option in date picker filter.");
   }
 }

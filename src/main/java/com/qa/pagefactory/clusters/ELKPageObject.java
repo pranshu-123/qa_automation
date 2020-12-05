@@ -41,6 +41,12 @@ public class ELKPageObject {
   @FindBy(xpath = "//tbody[@id='elasticSearchIndexTable-body']/tr")
   public List<WebElement> IndicesRows;
 
+  @FindBy(xpath = "//tbody[@id='elasticSearchIndexTable-body']/tr[1]/td[1]/span")
+  public WebElement IndicesName;
+
+  @FindBy(xpath = "//*[@class='search']")
+  public WebElement IndicesSearchBox;
+
   @FindBy(xpath = "//div[contains(@class,'component-score-improvement-module')]//" +
       "div[contains(@class, 'col score-improvement-box') and //div[@class='col']]//span")
   public List<WebElement> ESKpiNames;
@@ -52,11 +58,21 @@ public class ELKPageObject {
   @FindBy(xpath = "//div[@class='container-fluid']//div[contains(@class,'dashboard-module')]//div[@class='footer']/label")
   public List<WebElement> ESMetricsFooter;
 
-  @FindBy(xpath = "//div[@class='col-md-6']//div[contains(@class,'dashboard-module')]//div[@class='header']/h4")
+  @FindBy(xpath = "//div[@id='elastic-index-details']//div[@class='col-md-6']")
+  public List<WebElement> IndicesMetric;
+
+  @FindBy(xpath = "//div[@id='elastic-index-details']//div[contains(@class,'dashboard-module')]//div[@class='header']/h4")
   public List<WebElement> IndiceMetricsHeader;
 
-  @FindBy(xpath = "//div[@class='col-md-6']//div[contains(@class,'dashboard-module')]//div[@class='footer']")
+  @FindBy(xpath = "//div[@id='elastic-index-details']//div[contains(@class,'dashboard-module')]//div[@class='footer']/label")
   public List<WebElement> IndiceMetricsFooter;
+
+  @FindBy(xpath = "//div[@id='elastic-index-details']//div[contains(@class,'dashboard-module')]//" +
+      "div[@class='content']//*[name()='g' and @class='highcharts-series-group']")
+  public List<WebElement> IndiceMetricsGraph;
+
+
+
 
   public ELKPageObject(WebDriver driver) {
     PageFactory.initElements(driver, this);

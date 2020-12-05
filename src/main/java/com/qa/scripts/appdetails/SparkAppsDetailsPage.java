@@ -140,10 +140,10 @@ public class SparkAppsDetailsPage {
                 " metric is not listed in the drop down box");
             //click on the dropdown list element and validate the graph
             MouseActions.clickOnElement(driver, dropDownList.get(d));
-            List<WebElement> resourcesMetricsPlotGraphList = sparkAppPageObj.resourcesMetricsPlotGraph;
+            List<WebElement> resourcesMetricsLineGraphList = sparkAppPageObj.resourcesMetricsLineGraph;
             List<WebElement> metricLegendList = sparkAppPageObj.resourcesMetricsPlotGraphLegend;
-            Assert.assertEquals(resourcesMetricsPlotGraphList.size(), metricLegendList.size(),
-                "The number of executors in the legend do not match to the ones plotted in the graph");
+            Assert.assertEquals(resourcesMetricsLineGraphList.size(), metricLegendList.size(),
+                "The number of executors in the legend do not match to the ones plotted in the graph for metrics "+ metric);
             MouseActions.clickOnElement(driver, metricDropDown);
           }
         case "Vcores":

@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.elk;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.clusters.ELKPageObject;
 import com.qa.scripts.clusters.elk.ELKPage;
@@ -11,6 +12,8 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
+@Marker.All
+@Marker.ELK
 public class TC_ELK_23 extends BaseClass {
 
   private static final java.util.logging.Logger LOGGER = Logger.getLogger(com.qa.testcases.cluster.elk.TC_ELK_23.class.getName());

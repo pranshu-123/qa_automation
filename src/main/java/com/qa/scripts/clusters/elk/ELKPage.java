@@ -22,6 +22,10 @@ public class ELKPage {
   private WaitExecuter waitExecuter;
   private WebDriver driver;
   private DatePicker datePicker;
+  String xAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]" +
+      "//*[name()='g' and contains(@class,'highcharts-xaxis-labels')]/*[name()='text']/*[name()='tspan']";
+  String yAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]" +
+      "//*[name()='g' and contains(@class,'highcharts-yaxis-labels')]/*[name()='text']";
 
   Logger logger = Logger.getLogger(ELKPage.class.getName());
 
@@ -133,6 +137,26 @@ public class ELKPage {
   }
 
   /***
+   * Method to verify the kpis of Elastic Search Cluster
+   */
+  public void verifyESKPIColors(ELKPageObject elkPageObject) {
+    List<WebElement> kpiList = elkPageObject.ESKpiNames;
+    List<WebElement> kpiValueList = elkPageObject.ESKpiValues;
+    Assert.assertFalse(kpiList.isEmpty() || kpiValueList.isEmpty(), "Elastic Search cluster kpi list is empty");
+    for (int i = 0; i < kpiList.size(); i++) {
+      String kpiName = kpiList.get(i).getText();
+      if (kpiName.equals("Status")) {
+        String kpiValue = kpiValueList.get(i).getText();
+        logger.info("KPI Name: " + kpiName + "\n KPI Value: " + kpiValue);
+        boolean onlySpecialChars = kpiValue.matches("[^a-zA-Z0-9]+");
+        Assert.assertFalse(kpiValue.isEmpty() || onlySpecialChars, "No values for kpi " + kpiName +
+            "displayed \n Expected: AlphaNumeric value Actual: [" + kpiValue + "]");
+        Assert.assertEquals(kpiValue, "Green", "Expected value: Green  Actual value: " + kpiValue);
+      }
+    }
+  }
+
+  /***
    * Method to verify Elastic Search node table data
    */
   public void verifyESNodeTable(ELKPageObject elkPageObject) {
@@ -195,7 +219,73 @@ public class ELKPage {
   /***
    * Method to verify ES indices specific metrics graph.
    */
-  public void verifyPerIndicesMetricsGraph() {
+  public void verifyPerIndicesMetricsGraph(ELKPageObject elkPageObject) {
+    List<WebElement> indicesList = elkPageObject.IndicesRows;
+    Assert.assertFalse(indicesList.isEmpty(), "No indices listed in the Indices table");
+    for (int i = 0; i < indicesList.size(); i++) {
+      MouseActions.clickOnElement(driver, indicesList.get(i));
+      waitExecuter.waitUntilPageFullyLoaded();
+      waitExecuter.sleep(2000);
+      List<WebElement> metricsKpiList = elkPageObject.IndicesMetric;
+      List<WebElement> metricsKpiHeaderList = elkPageObject.IndiceMetricsHeader;
+      List<WebElement> metricsKpiFooterList = elkPageObject.IndiceMetricsFooter;
+      List<WebElement> metricsKpiGraphList = elkPageObject.IndiceMetricsGraph;
+      Assert.assertFalse(metricsKpiList.isEmpty(), "Metrics for cluster is empty");
+      verifyGraph(metricsKpiList, metricsKpiHeaderList, metricsKpiFooterList, metricsKpiGraphList);
+    }
+  }
 
+  public void verifyIndicesSearchOption(ELKPageObject elkPageObject){
+    String searchString = elkPageObject.IndicesName.getText();
+    logger.info("The search string is "+ searchString);
+    elkPageObject.IndicesSearchBox.sendKeys(searchString);
+    waitExecuter.sleep(1000);
+    List<WebElement> indicesRowList = elkPageObject.IndicesRows;
+    Assert.assertFalse(indicesRowList.isEmpty(), "There are no rows matching to string "+ searchString);
+  }
+
+  /***
+   * Method to verify ES cluster node metrics graph.
+   */
+  public void verifyNodeGraphs(KafkaPageObject kafkaPageObject) {
+    List<WebElement> metricsKpiList = kafkaPageObject.kafkaMetrics;
+    List<WebElement> metricsKpiHeaderList = kafkaPageObject.kafkaMetricsHeader;
+    List<WebElement> metricsKpiFooterList = kafkaPageObject.kafkaMetricsFooter;
+    List<WebElement> metricsKpiGraphList = kafkaPageObject.kafkaMetricsGraph;
+    Assert.assertFalse(metricsKpiList.isEmpty(), "Metrics for cluster is empty");
+    verifyGraph(metricsKpiList, metricsKpiHeaderList, metricsKpiFooterList, metricsKpiGraphList);
+  }
+
+  public void verifyGraph(List<WebElement> metricsKpiList, List<WebElement> metricsKpiHeaderList,
+                          List<WebElement> metricsKpiFooterList, List<WebElement> metricsKpiGraphList){
+    KafkaPage kafkaPage = new KafkaPage(driver);
+    for (int i = 0; i < metricsKpiList.size(); i++) {
+      String graphId = "elasticsearchGraph" + i;
+      String xAxisPath = "//*[@id='" + graphId + "']" + xAxis;
+      String yAxisPath = "//*[@id='" + graphId + "']" + yAxis;
+      String metricsName = metricsKpiHeaderList.get(i).getText();
+      Assert.assertFalse(metricsName.isEmpty(), " Metrics Name not displayed");
+      logger.info("Metrics Name: [" + metricsName + "] displayed in the header");
+      Assert.assertTrue(metricsKpiGraphList.get(i).isDisplayed(), "The graph for metrics " + metricsName + " is not displayed");
+      logger.info("The graph for Metrics : [" + metricsName + "] is displayed");
+      Assert.assertTrue(metricsKpiFooterList.get(i).isDisplayed(), "The footer for metrics " + metricsName + " is not displayed");
+      logger.info("The footer for Metrics : [" + metricsName + "] is displayed");
+      kafkaPage.verifyAxis(xAxisPath, "X-Axis");
+      kafkaPage.verifyAxis(yAxisPath, "Y-Axis");
+    }
+  }
+
+  /***
+   * Method to verify ES node specific metrics graph.
+   */
+  public void verifyNodeSpecificGraphs(ELKPageObject elkPageObject, KafkaPageObject kafkaPageObject) {
+    List<WebElement> nodeList = elkPageObject.ESRows;
+    Assert.assertFalse(nodeList.isEmpty(), "No nodes listed for Elastic Search Cluster");
+    for (int i = 0; i < nodeList.size(); i++) {
+      MouseActions.clickOnElement(driver, nodeList.get(i));
+      waitExecuter.waitUntilPageFullyLoaded();
+      waitExecuter.sleep(2000);
+      verifyNodeGraphs(kafkaPageObject);
+    }
   }
 }

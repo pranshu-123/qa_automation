@@ -37,4 +37,5 @@ public @interface Marker {
   @interface DataSmallFiles {}
   @interface Tuning {}
   @interface KafkaExternal {}
+  @interface ELK {}
 }

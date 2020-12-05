@@ -14,9 +14,9 @@ public class MR_050 extends BaseClass {
 
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_050_verifyClusterFilter(String clusterId) {
+    public void MR_050_verifyAnalysisTab(String clusterId) {
         test = extent.startTest("MR_050_verifyClusterFilter: " + clusterId,
-                "Verify User must be able to filter by the cluster  and apps must be listed based on the filter");
+                "Verify Collapsable tabs on Recommendations and effeciency must be listed");
         test.assignCategory(" Apps Details-Mr");
         Log.startTestCase("MR_050_verifyClusterFilter");
 

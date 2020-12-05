@@ -22,11 +22,10 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class MrAppsDetailsPage {
-    Logger logger = Logger.getLogger(SparkAppsDetailsPage.class.getName());
     private static Boolean isDignosticWin = false;
+    Logger logger = Logger.getLogger(SparkAppsDetailsPage.class.getName());
     private WaitExecuter waitExecuter;
     private WebDriver driver;
-
 
 
     /**
@@ -43,6 +42,62 @@ public class MrAppsDetailsPage {
      * Method to validate the tasks attempt tab in Resources and stages tab.
      */
     public void validateTaskAttemptTab(MrAppsDetailsPageObject mrApps) {
+        List<WebElement> footerNameList = mrApps.taskAttFooterName;
+        Assert.assertFalse(footerNameList.isEmpty(),
+                "SUCCESS/FAILED Attempts not displayed");
+        List<WebElement> footerValList = mrApps.taskAttFooterVal;
+        Assert.assertFalse(footerValList.isEmpty(), "SUCCESS/FAILED Attempts values " +
+                "not displayed");
+        String pValStr = mrApps.resourcesPieChartInternalVal.getText();
+        String regex = "((?<=[a-zA-Z])(?=[0-9]))|((?<=[0-9])(?=[a-zA-Z]))";
+        int pieChartInternalVal = Integer.parseInt(Arrays.asList(pValStr.split(regex)).get(0));
+        logger.info("The value displayed inside the Pie Chart is " +
+                pieChartInternalVal);
+        int totalTaskCnt = 0;
+        for (int f = 0; f < footerNameList.size(); f++) {
+            String footerName = footerNameList.get(f).getText();
+            String footerValStr = footerValList.get(f).getText();
+            int footerVal = Integer.parseInt(footerValStr.replaceAll("[^\\dA-Za-z ]",
+                    "").trim());
+            totalTaskCnt += footerVal;
+            logger.info("FooterName = " + footerName + " Value = " + footerVal);
+        }
+        logger.info("Total Task Attempts = " + totalTaskCnt + " pie chart val = " +
+                pieChartInternalVal);
+    }
+
+    /**
+     * Method to validate the tasks attempt tab Map tab.
+     */
+    public void validateTaskAttemptMapTab(MrAppsDetailsPageObject mrApps) {
+        List<WebElement> footerNameList = mrApps.taskAttFooterName;
+        Assert.assertFalse(footerNameList.isEmpty(),
+                "SUCCESS/FAILED Attempts not displayed");
+        List<WebElement> footerValList = mrApps.taskAttFooterVal;
+        Assert.assertFalse(footerValList.isEmpty(), "SUCCESS/FAILED Attempts values " +
+                "not displayed");
+        String pValStr = mrApps.resourcesPieChartInternalVal.getText();
+        String regex = "((?<=[a-zA-Z])(?=[0-9]))|((?<=[0-9])(?=[a-zA-Z]))";
+        int pieChartInternalVal = Integer.parseInt(Arrays.asList(pValStr.split(regex)).get(0));
+        logger.info("The value displayed inside the Pie Chart is " +
+                pieChartInternalVal);
+        int totalTaskCnt = 0;
+        for (int f = 0; f < footerNameList.size(); f++) {
+            String footerName = footerNameList.get(f).getText();
+            String footerValStr = footerValList.get(f).getText();
+            int footerVal = Integer.parseInt(footerValStr.replaceAll("[^\\dA-Za-z ]",
+                    "").trim());
+            totalTaskCnt += footerVal;
+            logger.info("FooterName = " + footerName + " Value = " + footerVal);
+        }
+        logger.info("Total Task Attempts = " + totalTaskCnt + " pie chart val = " +
+                pieChartInternalVal);
+    }
+
+    /**
+     * Method to validate the tasks attempt Reduce tab.
+     */
+    public void validateTaskAttemptRedcueTab(MrAppsDetailsPageObject mrApps) {
         List<WebElement> footerNameList = mrApps.taskAttFooterName;
         Assert.assertFalse(footerNameList.isEmpty(),
                 "SUCCESS/FAILED Attempts not displayed");
@@ -106,7 +161,7 @@ public class MrAppsDetailsPage {
         test.log(LogStatus.PASS, "Tez Status  is displayed in the Header: " + startTime);
         String endTime = mrApps.EndTime.getText();
         test.log(LogStatus.PASS, "Tez Status  is displayed in the Header: " + endTime);
-        logger.info("Duration = " + duration +  "starttime = " + startTime + " EndTime = " + endTime + " DataIO = " + dataIO);
+        logger.info("Duration = " + duration + "starttime = " + startTime + " EndTime = " + endTime + " DataIO = " + dataIO);
         Assert.assertNotSame("", startTime, "Value for startTime missing");
         Assert.assertNotSame("", endTime, "Value for duration missing");
         Assert.assertNotSame("", duration, "Value for duration missing");
@@ -359,7 +414,7 @@ public class MrAppsDetailsPage {
     /**
      * Method to validate AppSummary Analysis tab.
      */
-    public void validateAnalysisTab( MrAppsDetailsPageObject mrApps) {
+    public void validateAnalysisTab(MrAppsDetailsPageObject mrApps) {
         ArrayList<String> efficiency = new ArrayList<>();
         ArrayList<String> recommendation = new ArrayList<>();
         List<WebElement> insightType = mrApps.insightsType;
@@ -391,7 +446,7 @@ public class MrAppsDetailsPage {
      * Method to validate AppSummary Resource tab.
      */
     public void validateResourcesTab(MrAppsDetailsPageObject mrApps) {
-        String[] expectedGraphTitle = {"Task Attempts(MAP)","Task Attempts(Reduce)", "Containers", "Vcores", "Memory", "Metrics"};
+        String[] expectedGraphTitle = {"Task Attempts(MAP)", "Task Attempts(Reduce)", "Containers", "Vcores", "Memory", "Metrics"};
         List<WebElement> graphTitleList = mrApps.resourcesGraphTitle;
         verifyAssertFalse(graphTitleList.isEmpty(), mrApps, "No title displayed");
         List<WebElement> allGraphsList = mrApps.resourcesAllGraphs;
@@ -405,12 +460,12 @@ public class MrAppsDetailsPage {
             switch (graphTitle) {
                 case "Task Attempts(MAP)":
                     logger.info("Validating the Graph " + graphTitle);
-                    validateTaskAttemptTab(mrApps);
+                    validateTaskAttemptMapTab(mrApps);
                     //Assert.assertSame(totalTaskCnt, pieChartInternalVal, "The Values are not same");
                     break;
                 case "Task Attempts(Reduce)":
                     logger.info("Validating the Graph " + graphTitle);
-                    validateTaskAttemptTab(mrApps);
+                    validateTaskAttemptRedcueTab(mrApps);
                     //Assert.assertSame(totalTaskCnt, pieChartInternalVal, "The Values are not same");
                     break;
                 case "Containers":
@@ -450,7 +505,7 @@ public class MrAppsDetailsPage {
     /**
      * Method to validate AppSummary Errors tab.
      */
-    public void validateErrorsTab( MrAppsDetailsPageObject mrApps) {
+    public void validateErrorsTab(MrAppsDetailsPageObject mrApps) {
         String[] expectedErrorCategory = {"driver", "executor-", "rm-diagnostics"};
         List<WebElement> errorTypeList = mrApps.errorCategories;
         verifyAssertFalse(errorTypeList.isEmpty(), mrApps, " Errors tab is not populated");
@@ -490,7 +545,7 @@ public class MrAppsDetailsPage {
         }
     }
 
-    public void validateConfigurationTab( MrAppsDetailsPageObject mrApps) {
+    public void validateConfigurationTab(MrAppsDetailsPageObject mrApps) {
         String[] expectedKeyWords = {"METADATA", "MEMORY", "DRIVER", "EXECUTOR", "LIMIT", "RESOURCES", "CPU", "NET",
                 "YARN", "DEPLOY"};
         List<WebElement> keyWordsList = mrApps.configKeywords;
@@ -528,7 +583,7 @@ public class MrAppsDetailsPage {
                 "to default");
     }
 
-    public void validateLogsTab( MrAppsDetailsPageObject mrApps) {
+    public void validateLogsTab(MrAppsDetailsPageObject mrApps) {
         List<WebElement> executorNameList = mrApps.logExecutorNames;
         verifyAssertFalse(executorNameList.isEmpty(), mrApps, " No executors listed in the Logs Tab");
         List<WebElement> logCollapsableList = mrApps.logElementCollapsable;
@@ -551,7 +606,7 @@ public class MrAppsDetailsPage {
         }
     }
 
-    public String validateTagsTab( MrAppsDetailsPageObject mrApps) {
+    public String validateTagsTab(MrAppsDetailsPageObject mrApps) {
         List<WebElement> tagTableHeader = mrApps.tagTableHeader;
         verifyAssertFalse(tagTableHeader.isEmpty(), mrApps, " Tags header is not populated");
         List<WebElement> tagKeyList = mrApps.tagKey;
@@ -570,7 +625,7 @@ public class MrAppsDetailsPage {
         return tagValue;
     }
 
-    public void validateTimingTab( MrAppsDetailsPageObject mrApps) {
+    public void validateTimingTab(MrAppsDetailsPageObject mrApps) {
         Actions action = new Actions(driver);
         List<WebElement> subTabList = mrApps.timingsSubTabs;
         Assert.assertFalse(subTabList.isEmpty(), "No sub tabs available");
@@ -643,7 +698,7 @@ public class MrAppsDetailsPage {
     /**
      * Method to verify the summary tabs in the right pane of the App Details page
      */
-    public String verifyAppSummaryTabs( MrAppsDetailsPageObject mrApps, String verifyTabName, ExtentTest test) {
+    public String verifyAppSummaryTabs(MrAppsDetailsPageObject mrApps, String verifyTabName, ExtentTest test) {
         List<WebElement> appsTabList = mrApps.appSummaryTabs;
         verifyAssertFalse(appsTabList.isEmpty(), mrApps, "No Tabs loaded");
         String tabName = "";
@@ -699,6 +754,61 @@ public class MrAppsDetailsPage {
         return "";
     }
 
+    /**
+     * Method to verify the summary tabs in the right pane of the App Details page
+     */
+    public String verifyAllDataTabs(MrAppsDetailsPageObject mrApps, String verifyTabName, ExtentTest test) {
+        List<WebElement> appsTabList = mrApps.appSummaryTabs;
+        verifyAssertFalse(appsTabList.isEmpty(), mrApps, "No Tabs loaded");
+        String tabName = "";
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.pollingEvery(Duration.ofMillis(10));
+
+        for (int i = 0; i < appsTabList.size(); i++) {
+            tabName = appsTabList.get(i).getText();
+            logger.info("Validating tab " + tabName);
+            if (tabName.equals(verifyTabName)) {
+                switch (verifyTabName) {
+                    case "Analysis":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        test.log(LogStatus.PASS, "Analysis tab is populated");
+                        break;
+                    case "Resources":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        waitExecuter.sleep(3000);
+                        test.log(LogStatus.PASS, "Resources tab is populated");
+                        break;
+                    case "Errors":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        waitExecuter.sleep(3000);
+                        test.log(LogStatus.PASS, "Errors tab is populated");
+                        break;
+                    case "Logs":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        waitExecuter.sleep(3000);
+                        test.log(LogStatus.PASS, "Logs tab is populated");
+                        break;
+                    case "Tags":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        waitExecuter.sleep(3000);
+                        test.log(LogStatus.PASS, "Tags tab is populated");
+                        break;
+                    case "Metrics":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        waitExecuter.sleep(3000);
+                        test.log(LogStatus.PASS, "Metrics tab is populated");
+                        break;
+                    case "Configuration":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        waitExecuter.sleep(3000);
+                        test.log(LogStatus.PASS, "Configuration tab is populated");
+                }
+                break;
+            }
+        }
+        return "";
+    }
+
     /***
      * Common actions listed in one method that does the following:
      * Navigate to Jobs tab from header
@@ -728,9 +838,9 @@ public class MrAppsDetailsPage {
         test.log(LogStatus.INFO, "Verify that the left pane has Map reduce check box and the apps number");
         logger.info("Select individual app and assert that table contain its data");
 
-        int totalSparkAppCnt = mrDetailsPage.clickOnlyLink("Map Reduce");
+        int totalMapReduceAppCnt = mrDetailsPage.clickOnlyLink("Map Reduce");
         waitExecuter.sleep(2000);
-        if (totalSparkAppCnt > 0) {
+        if (totalMapReduceAppCnt > 0) {
             applicationsPageObject.expandStatus.click();
             int appCount = 0;
             if (isFailedApp)
@@ -740,7 +850,7 @@ public class MrAppsDetailsPage {
             //Clicking on the Spark app must go to apps detail page
             if (appCount > 0) {
                 String headerAppId = mrDetailsPage.verifyAppId(mrApps, applicationsPageObject);
-                test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);
+                test.log(LogStatus.PASS, "Map Reduce Application Id is displayed in the Header: " + headerAppId);
                 mrDetailsPage.verifyAppSummaryTabs(mrApps, tabName, test);
                 //Close apps details page
                 MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);
@@ -750,11 +860,12 @@ public class MrAppsDetailsPage {
                         "of 90 days");
             }
         } else {
-            test.log(LogStatus.SKIP, "No Spark Application present");
+            test.log(LogStatus.SKIP, "No MapReduce Application present");
             logger.info("No Map Reduce Application present in the " + clusterId + " cluster for the time span " +
                     "of 90 days");
         }
     }
+
 
     /**
      * Common steps to navigate to the Jobs page from header.

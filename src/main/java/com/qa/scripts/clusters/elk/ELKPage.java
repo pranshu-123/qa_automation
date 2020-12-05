@@ -256,6 +256,9 @@ public class ELKPage {
     verifyGraph(metricsKpiList, metricsKpiHeaderList, metricsKpiFooterList, metricsKpiGraphList);
   }
 
+  /***
+   * Generic graph validation method for ELK.
+   */
   public void verifyGraph(List<WebElement> metricsKpiList, List<WebElement> metricsKpiHeaderList,
                           List<WebElement> metricsKpiFooterList, List<WebElement> metricsKpiGraphList){
     KafkaPage kafkaPage = new KafkaPage(driver);

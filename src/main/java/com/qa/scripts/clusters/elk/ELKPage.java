@@ -235,13 +235,13 @@ public class ELKPage {
     }
   }
 
-  public void verifyIndicesSearchOption(ELKPageObject elkPageObject){
+  public void verifyIndicesSearchOption(ELKPageObject elkPageObject) {
     String searchString = elkPageObject.IndicesName.getText();
-    logger.info("The search string is "+ searchString);
+    logger.info("The search string is " + searchString);
     elkPageObject.IndicesSearchBox.sendKeys(searchString);
     waitExecuter.sleep(1000);
     List<WebElement> indicesRowList = elkPageObject.IndicesRows;
-    Assert.assertFalse(indicesRowList.isEmpty(), "There are no rows matching to string "+ searchString);
+    Assert.assertFalse(indicesRowList.isEmpty(), "There are no rows matching to string " + searchString);
   }
 
   /***
@@ -260,7 +260,7 @@ public class ELKPage {
    * Generic graph validation method for ELK.
    */
   public void verifyGraph(List<WebElement> metricsKpiList, List<WebElement> metricsKpiHeaderList,
-                          List<WebElement> metricsKpiFooterList, List<WebElement> metricsKpiGraphList){
+                          List<WebElement> metricsKpiFooterList, List<WebElement> metricsKpiGraphList) {
     KafkaPage kafkaPage = new KafkaPage(driver);
     for (int i = 0; i < metricsKpiList.size(); i++) {
       String graphId = "elasticsearchGraph" + i;

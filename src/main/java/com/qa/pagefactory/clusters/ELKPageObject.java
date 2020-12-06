@@ -71,9 +71,6 @@ public class ELKPageObject {
       "div[@class='content']//*[name()='g' and @class='highcharts-series-group']")
   public List<WebElement> IndiceMetricsGraph;
 
-
-
-
   public ELKPageObject(WebDriver driver) {
     PageFactory.initElements(driver, this);
   }

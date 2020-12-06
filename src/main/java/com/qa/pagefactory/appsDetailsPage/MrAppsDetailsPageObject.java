@@ -225,14 +225,23 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@class=\"highcharts-series-group\"]")
     public List<WebElement> resourcesAllGraphs;
 
-    @FindBy(xpath = "//*[@id='taskattempts']//*[div and @class='footer']/div/*/span[1]")
-    public List<WebElement> taskAttFooterName;
+    @FindBy(xpath = "//div[@id='taskattemptmap']//div[@class='footer']//div//span[contains(text(),'SUCCESS')]")
+    public List<WebElement> taskAttMFooterName;
 
-    @FindBy(xpath = "//*[@id='taskattempts']//*[div and @class='footer']/div/*/span[2]")
-    public List<WebElement> taskAttFooterVal;
+    @FindBy(xpath = "//div[@id='taskattemptmap']//div[@class='footer']//div//span[contains(text(),'SUCCESS')]")
+    public List<WebElement> taskAttRFooterName;
 
-    @FindBy(xpath = "//*[@id=\"taskattempts\"]//*[name()='svg']/*[name()='text' and @class='highcharts-subtitle']/*")
-    public WebElement resourcesPieChartInternalVal;
+    @FindBy(xpath = "//*[@id=\"taskattemptmap\"]/div[3]/div/label/span[2]")
+    public List<WebElement> taskAttMFooterVal;
+
+    @FindBy(xpath = "//*[@id=\"taskattemptreduce\"]/div[3]/div/label/span[2]")
+    public List<WebElement> taskAttRFooterVal;
+
+    @FindBy(xpath = "//div[@id='highcharts-c3y2yxt-817']//*[local-name()='svg']//*[name()='text'][2]")
+    public WebElement resourcesRPieChartInternalVal;
+
+    @FindBy(xpath = "//div[@id='highcharts-c3y2yxt-813']//*[local-name()='svg']//*[name()='text'][2]")
+    public WebElement resourcesMPieChartInternalVal;
 
     @FindBy(xpath = "//*[@class='col-md-12 no-left-gutter no-right-gutter']//*[@role='presentation'][1]")
     public WebElement resourcesMetricsDropDown;

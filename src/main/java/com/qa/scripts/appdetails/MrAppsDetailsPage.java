@@ -41,14 +41,14 @@ public class MrAppsDetailsPage {
     /**
      * Method to validate the tasks attempt tab in Resources and stages tab.
      */
-    public void validateTaskAttemptTab(MrAppsDetailsPageObject mrApps) {
-        List<WebElement> footerNameList = mrApps.taskAttFooterName;
+    public void validateTaskAttempRtTab(MrAppsDetailsPageObject mrApps) {
+        List<WebElement> footerNameList = mrApps.taskAttRFooterName;
         Assert.assertFalse(footerNameList.isEmpty(),
                 "SUCCESS/FAILED Attempts not displayed");
-        List<WebElement> footerValList = mrApps.taskAttFooterVal;
+        List<WebElement> footerValList = mrApps.taskAttRFooterVal;
         Assert.assertFalse(footerValList.isEmpty(), "SUCCESS/FAILED Attempts values " +
                 "not displayed");
-        String pValStr = mrApps.resourcesPieChartInternalVal.getText();
+        String pValStr = mrApps.resourcesRPieChartInternalVal.getText();
         String regex = "((?<=[a-zA-Z])(?=[0-9]))|((?<=[0-9])(?=[a-zA-Z]))";
         int pieChartInternalVal = Integer.parseInt(Arrays.asList(pValStr.split(regex)).get(0));
         logger.info("The value displayed inside the Pie Chart is " +
@@ -69,42 +69,14 @@ public class MrAppsDetailsPage {
     /**
      * Method to validate the tasks attempt tab Map tab.
      */
-    public void validateTaskAttemptMapTab(MrAppsDetailsPageObject mrApps) {
-        List<WebElement> footerNameList = mrApps.taskAttFooterName;
+    public void validateTaskAttemptMTab(MrAppsDetailsPageObject mrApps) {
+        List<WebElement> footerNameList = mrApps.taskAttMFooterName;
         Assert.assertFalse(footerNameList.isEmpty(),
                 "SUCCESS/FAILED Attempts not displayed");
-        List<WebElement> footerValList = mrApps.taskAttFooterVal;
+        List<WebElement> footerValList = mrApps.taskAttMFooterVal;
         Assert.assertFalse(footerValList.isEmpty(), "SUCCESS/FAILED Attempts values " +
                 "not displayed");
-        String pValStr = mrApps.resourcesPieChartInternalVal.getText();
-        String regex = "((?<=[a-zA-Z])(?=[0-9]))|((?<=[0-9])(?=[a-zA-Z]))";
-        int pieChartInternalVal = Integer.parseInt(Arrays.asList(pValStr.split(regex)).get(0));
-        logger.info("The value displayed inside the Pie Chart is " +
-                pieChartInternalVal);
-        int totalTaskCnt = 0;
-        for (int f = 0; f < footerNameList.size(); f++) {
-            String footerName = footerNameList.get(f).getText();
-            String footerValStr = footerValList.get(f).getText();
-            int footerVal = Integer.parseInt(footerValStr.replaceAll("[^\\dA-Za-z ]",
-                    "").trim());
-            totalTaskCnt += footerVal;
-            logger.info("FooterName = " + footerName + " Value = " + footerVal);
-        }
-        logger.info("Total Task Attempts = " + totalTaskCnt + " pie chart val = " +
-                pieChartInternalVal);
-    }
-
-    /**
-     * Method to validate the tasks attempt Reduce tab.
-     */
-    public void validateTaskAttemptRedcueTab(MrAppsDetailsPageObject mrApps) {
-        List<WebElement> footerNameList = mrApps.taskAttFooterName;
-        Assert.assertFalse(footerNameList.isEmpty(),
-                "SUCCESS/FAILED Attempts not displayed");
-        List<WebElement> footerValList = mrApps.taskAttFooterVal;
-        Assert.assertFalse(footerValList.isEmpty(), "SUCCESS/FAILED Attempts values " +
-                "not displayed");
-        String pValStr = mrApps.resourcesPieChartInternalVal.getText();
+        String pValStr = mrApps.resourcesMPieChartInternalVal.getText();
         String regex = "((?<=[a-zA-Z])(?=[0-9]))|((?<=[0-9])(?=[a-zA-Z]))";
         int pieChartInternalVal = Integer.parseInt(Arrays.asList(pValStr.split(regex)).get(0));
         logger.info("The value displayed inside the Pie Chart is " +
@@ -189,7 +161,8 @@ public class MrAppsDetailsPage {
                         logger.info("Validating the stage tab Taskattempt");
                         MouseActions.clickOnElement(driver, stageTabsList.get(t));
                         waitExecuter.sleep(1000);
-                        validateTaskAttemptTab(mrApps);
+                        validateTaskAttempRtTab(mrApps);
+                        validateTaskAttemptMTab(mrApps);
                         break;
                     case "Program":
                         logger.info("Validating the stage tab Program");
@@ -460,12 +433,12 @@ public class MrAppsDetailsPage {
             switch (graphTitle) {
                 case "Task Attempts(MAP)":
                     logger.info("Validating the Graph " + graphTitle);
-                    validateTaskAttemptMapTab(mrApps);
+                    validateTaskAttemptMTab(mrApps);
                     //Assert.assertSame(totalTaskCnt, pieChartInternalVal, "The Values are not same");
                     break;
                 case "Task Attempts(Reduce)":
                     logger.info("Validating the Graph " + graphTitle);
-                    validateTaskAttemptRedcueTab(mrApps);
+                    validateTaskAttempRtTab(mrApps);
                     //Assert.assertSame(totalTaskCnt, pieChartInternalVal, "The Values are not same");
                     break;
                 case "Containers":

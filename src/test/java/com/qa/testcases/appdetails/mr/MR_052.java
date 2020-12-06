@@ -22,7 +22,7 @@ public class MR_052 extends BaseClass {
         @Test(dataProvider = "clusterid-data-provider")
         public void MR_052_verifyGraphsTabs(String clusterId) {
             test = extent.startTest("MR_052_verifyGraphsTabs: " + clusterId,
-                    "Verify there are 2 tabs,Task Attempt (Map),Task Attempt(Reduce) and Graphs are doughnut charts and charts are available");
+                    "Verify the Graphs are doughnut charts and charts are available ");
             test.assignCategory(" Apps Details-Mr");
             Log.startTestCase("MR_052_verifyGraphsTabs");
 

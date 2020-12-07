@@ -413,70 +413,6 @@ public class MrAppsDetailsPage {
                     " icon for insights.\n" + ex.getMessage());
         }
     }
-
-    /**
-     * Method to validate AppSummary Resource tab.
-     */
-    public void validateResourcesTab(MrAppsDetailsPageObject mrApps) {
-        String[] expectedGraphTitle = {"Task Attempts(MAP)", "Task Attempts(Reduce)", "Containers", "Vcores", "Memory", "Metrics"};
-        List<WebElement> graphTitleList = mrApps.resourcesGraphTitle;
-        verifyAssertFalse(graphTitleList.isEmpty(), mrApps, "No title displayed");
-        List<WebElement> allGraphsList = mrApps.resourcesAllGraphs;
-        verifyAssertFalse(allGraphsList.isEmpty(), mrApps, "No graphs displayed");
-        for (int t = 0; t < graphTitleList.size(); t++) {
-            String graphTitle = graphTitleList.get(t).getText();
-            logger.info("Graph title is " + graphTitle);
-            verifyAssertTrue(Arrays.asList(expectedGraphTitle).contains(graphTitle), mrApps, " The expected" +
-                    " Graph title doesnot match with the titles in the UI");
-            verifyAssertTrue(allGraphsList.get(t).isDisplayed(), mrApps, " All Graphs are not displayed");
-            switch (graphTitle) {
-                case "Task Attempts(MAP)":
-                    logger.info("Validating the Graph " + graphTitle);
-                    validateTaskAttemptMTab(mrApps);
-                    //Assert.assertSame(totalTaskCnt, pieChartInternalVal, "The Values are not same");
-                    break;
-                case "Task Attempts(Reduce)":
-                    logger.info("Validating the Graph " + graphTitle);
-                    validateTaskAttempRtTab(mrApps);
-                    //Assert.assertSame(totalTaskCnt, pieChartInternalVal, "The Values are not same");
-                    break;
-                case "Containers":
-                    logger.info("Validating the Graph " + graphTitle);
-                    break;
-                case "Metrics":
-                    logger.info("Validating the Graph " + graphTitle);
-                    WebElement metricDropDown = mrApps.resourcesMetricsDropDown;
-                    MouseActions.clickOnElement(driver, metricDropDown);
-                    List<WebElement> dropDownList = mrApps.resourcesMetricsDropDownData;
-                    waitExecuter.sleep(2000);
-                    verifyAssertFalse(dropDownList.isEmpty(), mrApps, " No contents listed in the dropdown");
-                    String[] expectetContents = {"availableMemory", "vmRss", "systemCpuLoad",
-                            "processCpuLoad", "gcLoad", "maxHeap", "usedHeap"};
-                    for (int d = 0; d < dropDownList.size(); d++) {
-                        String metric = dropDownList.get(d).getText();
-                        logger.info("The metric is " + metric);
-                        verifyAssertTrue(Arrays.asList(expectetContents).contains(metric), mrApps, " The expected" +
-                                " metric is not listed in the drop down box");
-                        //click on the dropdown list element and validate the graph
-                        MouseActions.clickOnElement(driver, dropDownList.get(d));
-                        List<WebElement> resourcesMetricsPlotGraphList = mrApps.resourcesMetricsPlotGraph;
-                        List<WebElement> metricLegendList = mrApps.resourcesMetricsPlotGraphLegend;
-                        Assert.assertEquals(resourcesMetricsPlotGraphList.size(), metricLegendList.size(),
-                                "The number of executors in the legend do not match to the ones plotted in the graph");
-                        MouseActions.clickOnElement(driver, metricDropDown);
-                    }
-                case "Vcores":
-                    logger.info("Validating the Graph " + graphTitle);
-                case "Memory":
-                    logger.info("Validating the Graph " + graphTitle);
-                    break;
-
-            }
-            verifyAssertTrue(allGraphsList.get(0).isDisplayed(), mrApps, " No graph is displayed for "
-                    + graphTitle);
-        }
-    }
-
     /**
      * Method to validate AppSummary Errors tab.
      */
@@ -680,7 +616,7 @@ public class MrAppsDetailsPage {
                     case "Resources":
                         MouseActions.clickOnElement(driver, appsTabList.get(i));
                         waitExecuter.sleep(3000);
-                        validateResourcesTab(mrApps);
+                        //validateResourcesTab(mrApps);
                         break;
                     case "Errors":
                         MouseActions.clickOnElement(driver, appsTabList.get(i));

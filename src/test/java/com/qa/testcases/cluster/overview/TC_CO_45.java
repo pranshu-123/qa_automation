@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.overview;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.scripts.DatePicker;
@@ -13,6 +14,8 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
+@Marker.ClusterOverview
+@Marker.All
 public class TC_CO_45 extends BaseClass {
 
     /**

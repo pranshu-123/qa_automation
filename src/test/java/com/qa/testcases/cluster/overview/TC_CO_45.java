@@ -16,19 +16,19 @@ import java.util.logging.Logger;
 
 @Marker.ClusterOverview
 @Marker.All
-public class TC_CO_44 extends BaseClass {
+public class TC_CO_45 extends BaseClass {
 
     /**
-     * Verify By Status graph 'Download PNG'
+     * Verify By Status graph 'Download JPEG'
      */
 
-    private static final Logger LOGGER = Logger.getLogger(TC_CO_44.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TC_CO_45.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void ValidateByStatusGraphDownloadAsPNG(String clusterId) {
+    public void validateByStatusGraphDownloadAsJPEG(String clusterId) {
 
-        test = extent.startTest("TC_CO_44.validateByStatusGraphDownloadAsPNG: " + clusterId,
-                "Validate download of By Status graph as PNG file.");
+        test = extent.startTest("TC_CO_45.validateByStatusGraphDownloadAsJPEG: " + clusterId,
+                "Validate download of By Status graph as JPEG file.");
         test.assignCategory(" Cluster Overview ");
 
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
@@ -50,13 +50,13 @@ public class TC_CO_44 extends BaseClass {
         homePage.clickOnByStatusGraphDownloadMenu();
         LOGGER.info("Clicked on By Status Graph download menu ... ");
 
-        homePage.downloadByStatusGraphAsFile("Download PNG");
-        LOGGER.info("Download PNG file");
+        homePage.downloadByStatusGraphAsFile("Download JPEG");
+        LOGGER.info("Download JPEG file");
 
-        Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("Jobs.png"), "File is not downloaded " +
+        Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("Jobs.jpeg"), "File is not downloaded " +
                 "or size of file is zero bytes.");
-        test.log(LogStatus.PASS, "Successfully downloaded By Status graph as PNG file.");
-        LOGGER.info("Successfully downloaded By Status graph as PNG file.");
+        test.log(LogStatus.PASS, "Successfully downloaded By Status graph as JPEG file.");
+        LOGGER.info("Successfully downloaded By Status graph as JPEG file.");
     }
 
 }

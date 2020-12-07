@@ -15,13 +15,13 @@ import org.testng.annotations.Test;
 import java.util.logging.Logger;
 
 @Marker.All
-@Marker.ELK
+@Marker.ClusterELK
 public class TC_ELK_28 extends BaseClass {
 
   private static final java.util.logging.Logger LOGGER = Logger.getLogger(com.qa.testcases.cluster.elk.TC_ELK_28.class.getName());
 
   @Test(dataProvider = "clusterid-data-provider")
-  public void TC_ELK_28_verifyIndicesTableSearchOption(String clusterId) {
+  public void verifyIndicesTableSearchOption(String clusterId) {
     test = extent.startTest("TC_ELK_28_verifyIndicesTableSearchOption: " + clusterId,
         "Validate search and sorting in Elasticsearch indices table.");
     test.assignCategory(" ELK ");

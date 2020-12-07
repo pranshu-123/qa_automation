@@ -15,13 +15,13 @@ import org.testng.annotations.Test;
 import java.util.logging.Logger;
 
 @Marker.All
-@Marker.ELK
+@Marker.ClusterELK
 public class TC_ELK_27 extends BaseClass {
 
   private static final java.util.logging.Logger LOGGER = Logger.getLogger(com.qa.testcases.cluster.elk.TC_ELK_27.class.getName());
 
   @Test(dataProvider = "clusterid-data-provider")
-  public void TC_ELK_27_verifyESNodeSpecificGraphs(String clusterId) {
+  public void verifyESNodeSpecificGraphs(String clusterId) {
     test = extent.startTest("TC_ELK_27_verifyESNodeSpecificGraphs: " + clusterId,
         "Validate ES cluster metrics node specific graph");
     test.assignCategory(" ELK ");

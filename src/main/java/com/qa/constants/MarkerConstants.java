@@ -41,7 +41,7 @@ public class MarkerConstants {
   public static final String DATA_SMALLFILES = "data_smallfiles";
   public static final String CLUSTER_TUNING = "cluster_tuning";
   public static final String KAFKA_EXTERNAL = "kafka_external";
-  public static final String ELK = "elk";
+  public static final String CLUSTER_ELK = "cluster_elk";
 
   /**
    * This method will generate the reference of Marker Interface with
@@ -79,7 +79,7 @@ public class MarkerConstants {
     map.put(DATA_FORECASTING, Marker.DataSmallFiles.class);
     map.put(CLUSTER_TUNING, Marker.Tuning.class);
     map.put(KAFKA_EXTERNAL, Marker.KafkaExternal.class);
-    map.put(ELK, Marker.ELK.class);
+    map.put(CLUSTER_ELK, Marker.ClusterELK.class);
     return Collections.unmodifiableMap(map);
   }
 }

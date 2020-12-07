@@ -219,7 +219,7 @@ public class MrAppsDetailsPageObject {
     public WebElement DAGData;
 
     //Resources Tab xpath
-    @FindBy(xpath = "//*[@id='app']/div/div/div[2]/div[2]/div/div[2]/div[3]/div//h4")
+    @FindBy(xpath = "//*[@id='app']/div/div/div[2]/div/div/div[2]/div[3]//div[1]/div[1]//div[1]/h4")
     public List<WebElement> resourcesGraphTitle;
 
     @FindBy(xpath = "//*[@class=\"highcharts-series-group\"]")

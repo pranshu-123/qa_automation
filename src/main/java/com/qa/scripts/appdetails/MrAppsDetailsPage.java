@@ -2,7 +2,6 @@ package com.qa.scripts.appdetails;
 
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.MrAppsDetailsPageObject;
-import com.qa.pagefactory.appsDetailsPage.SparkAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.jobs.applications.AllApps;
@@ -442,6 +441,8 @@ public class MrAppsDetailsPage {
                     //Assert.assertSame(totalTaskCnt, pieChartInternalVal, "The Values are not same");
                     break;
                 case "Containers":
+                    logger.info("Validating the Graph " + graphTitle);
+                    break;
                 case "Metrics":
                     logger.info("Validating the Graph " + graphTitle);
                     WebElement metricDropDown = mrApps.resourcesMetricsDropDown;
@@ -465,6 +466,7 @@ public class MrAppsDetailsPage {
                         MouseActions.clickOnElement(driver, metricDropDown);
                     }
                 case "Vcores":
+                    logger.info("Validating the Graph " + graphTitle);
                 case "Memory":
                     logger.info("Validating the Graph " + graphTitle);
                     break;
@@ -501,18 +503,6 @@ public class MrAppsDetailsPage {
         //TODO check for specific error string in the content list.
         boolean foundErrorMsg = false;
         String msg = "";
-//    for (int c = 0; c < errorContentList.size(); c++) {
-//      String expectedErrorString = "Exception";
-//      String actualErrorString = errorContentList.get(c).getText();
-//      if (actualErrorString.contains(expectedErrorString)) {
-//        foundErrorMsg = true;
-//        msg = "Found the expected error message in the Errors Tab " +
-//            "Expected = " + expectedErrorString + "Actual Error Message = " + actualErrorString;
-//        break;
-//      }
-//    }
-//    verifyAssertTrue(foundErrorMsg, Map reduceAppPageObj, " Expected Error message not present in the Error tab");
-//    logger.info(msg);
         for (int c = 0; c < errorCollapsableList.size(); c++) {
             MouseActions.clickOnElement(driver, errorCollapsableList.get(c));
         }

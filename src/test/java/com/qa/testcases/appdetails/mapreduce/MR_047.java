@@ -1,4 +1,4 @@
-package com.qa.testcases.appdetails.mr;
+package com.qa.testcases.appdetails.mapreduce;
 
 import com.qa.base.BaseClass;
 import com.qa.constants.PageConstants;
@@ -23,7 +23,7 @@ import java.util.List;
 
 public class MR_047 extends BaseClass {
 
-    Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mr.MR_047.class);
+    Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mapreduce.MR_047.class);
 
     @Test(dataProvider = "clusterid-data-provider")
     public void MR_047_verifyMRJobsSummary(String clusterId) {

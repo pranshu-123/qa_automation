@@ -1,4 +1,4 @@
-package com.qa.testcases.appdetails.mr;
+package com.qa.testcases.appdetails.mapreduce;
 
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 
 public class MR_007 extends BaseClass {
 
-    Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mr.MR_006.class);
+    Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mapreduce.MR_006.class);
 
     @Test(dataProvider = "clusterid-data-provider")
     public void MR_007_verifyApplicationStatus(String clusterId) {

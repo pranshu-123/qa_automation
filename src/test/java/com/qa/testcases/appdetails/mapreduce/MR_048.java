@@ -1,4 +1,4 @@
-package com.qa.testcases.appdetails.mr;
+package com.qa.testcases.appdetails.mapreduce;
 
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
@@ -13,12 +13,11 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class MR_048 extends BaseClass {
 
-    Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mr.MR_048.class);
+    Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mapreduce.MR_048.class);
 
     @Test(dataProvider = "clusterid-data-provider")
     public void MR_048_verifyMRAppsKPIs(String clusterId) {

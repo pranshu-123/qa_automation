@@ -610,6 +610,7 @@ public class MrAppsDetailsPage {
             if (tabName.equals(verifyTabName)) {
                 switch (verifyTabName) {
                     case "Analysis":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
                         validateAnalysisTab(mrApps);
                         test.log(LogStatus.PASS, "Analysis tab is populated");
                         break;

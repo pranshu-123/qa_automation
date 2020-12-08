@@ -1,9 +1,7 @@
-package com.qa.testcases.appdetails.mr;
+package com.qa.testcases.appdetails.mapreduce;
 
 import com.qa.base.BaseClass;
 import com.qa.scripts.appdetails.MrAppsDetailsPage;
-import com.qa.testcases.appdetails.spark.TC_spark_222;
-import com.qa.testcases.appdetails.spark.TC_spark_230;
 import com.qa.utils.Log;
 import com.relevantcodes.extentreports.LogStatus;
 import java.util.logging.Logger;

@@ -20,7 +20,8 @@ public class DataProviderClass {
         /* @TODO - Need to remove hard coded values from cluster Ids this should be parameterized
            or it should be pulled from APIs. */
         UnravelConfigYamlReader unravelConfigYamlReader = new UnravelConfigYamlReader();
-        if (method.getDeclaringClass().getPackage().getName().contains("impala")) {
+        if (method.getDeclaringClass().getPackage().getName().contains("impala")
+                || method.getDeclaringClass().getPackage().getName().contains("mapreduce") ) {
             return unravelConfigYamlReader.getClusterList(true);
         } else {
             return unravelConfigYamlReader.getClusterList(false);

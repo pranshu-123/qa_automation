@@ -1,5 +1,9 @@
 package com.qa.enums.appdetails.impala;
 
+/**
+ * @author Ankur Jaiswal
+ * List of Operators table columns displayed for impala app details
+ */
 public enum OperatorDetails {
     TYPE("type") {
         @Override

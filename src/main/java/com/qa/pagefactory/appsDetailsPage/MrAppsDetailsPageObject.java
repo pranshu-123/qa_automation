@@ -54,8 +54,29 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[2]")
     public WebElement closeAppsPageTab;
 
+    @FindBy(xpath = "//*[@class='highcharts-legend']/*[name()='g']//*[name()='g']//*[name()='tspan']")
+    public List<WebElement> ATlegendNames;
+
+    @FindBy(xpath = "//*[@class='highcharts-legend']/*[name()='g']//*[name()='g']//*[name()='tspan']")
+    public List<WebElement> driverLegendNames;
+
     @FindBy(xpath = "//a[@href='#/clusters/overview']")
     public WebElement homeTab;
+
+    @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/p")
+    public WebElement configPropNum;
+
+    @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/div[2]/span")
+    public List<WebElement> configKeywords;
+
+    @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/span/div/a/span")
+    public WebElement resetButton;
+
+    @FindBy(xpath = " //*[@id='appConfiguration']//tbody/tr/td/p")
+    public List<WebElement> configPropKey;
+
+    @FindBy(xpath = " //*[@id='appConfiguration']//tbody/tr/td/span")
+    public List<WebElement> configPropValue;
 
 
     @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[1]/div/div[1]/div[2]/h4/span")
@@ -116,10 +137,10 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@class='link-item']")
     public WebElement programSourceLinkText;
 
-    @FindBy(xpath = "//*[@id=\"tezllap-container\"]/div[1]/div[2]/h4/span[1]/text()")
+    @FindBy(xpath = "//*[@id=\"SummaryDetails\"]/div/div[3]/div/div/h3")
     public WebElement startTime;
 
-    @FindBy(xpath = "//*[@id=\"tezllap-container\"]/div[1]/div[2]/h4/span[2]/text()")
+    @FindBy(xpath = "//*[@id=\"SummaryDetails\"]/div/div[4]/div/div/h3")
     public WebElement EndTime;
 
     @FindBy(xpath = "//*[@id=\"SummaryDetails\"]/div/div[1]/div[1]/div/h3")
@@ -198,20 +219,29 @@ public class MrAppsDetailsPageObject {
     public WebElement DAGData;
 
     //Resources Tab xpath
-    @FindBy(xpath = "//*[@id='app']/div/div/div[2]/div[2]/div/div[2]/div[3]/div//h4")
+    @FindBy(xpath = "//*[@id='app']/div/div/div[2]/div/div/div[2]/div[3]//div[1]/div[1]//div[1]/h4")
     public List<WebElement> resourcesGraphTitle;
 
     @FindBy(xpath = "//*[@class=\"highcharts-series-group\"]")
     public List<WebElement> resourcesAllGraphs;
 
-    @FindBy(xpath = "//*[@id='taskattempts']//*[div and @class='footer']/div/*/span[1]")
-    public List<WebElement> taskAttFooterName;
+    @FindBy(xpath = "//div[@id='taskattemptmap']//div[@class='footer']//div//span[contains(text(),'SUCCESS')]")
+    public List<WebElement> taskAttMFooterName;
 
-    @FindBy(xpath = "//*[@id='taskattempts']//*[div and @class='footer']/div/*/span[2]")
-    public List<WebElement> taskAttFooterVal;
+    @FindBy(xpath = "//div[@id='taskattemptmap']//div[@class='footer']//div//span[contains(text(),'SUCCESS')]")
+    public List<WebElement> taskAttRFooterName;
 
-    @FindBy(xpath = "//*[@id=\"taskattempts\"]//*[name()='svg']/*[name()='text' and @class='highcharts-subtitle']/*")
-    public WebElement resourcesPieChartInternalVal;
+    @FindBy(xpath = "//*[@id=\"taskattemptmap\"]/div[3]/div/label/span[2]")
+    public List<WebElement> taskAttMFooterVal;
+
+    @FindBy(xpath = "//*[@id=\"taskattemptreduce\"]/div[3]/div/label/span[2]")
+    public List<WebElement> taskAttRFooterVal;
+
+    @FindBy(xpath = "//div[@id='highcharts-c3y2yxt-817']//*[local-name()='svg']//*[name()='text'][2]")
+    public WebElement resourcesRPieChartInternalVal;
+
+    @FindBy(xpath = "//div[@id='highcharts-c3y2yxt-813']//*[local-name()='svg']//*[name()='text'][2]")
+    public WebElement resourcesMPieChartInternalVal;
 
     @FindBy(xpath = "//*[@class='col-md-12 no-left-gutter no-right-gutter']//*[@role='presentation'][1]")
     public WebElement resourcesMetricsDropDown;

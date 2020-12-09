@@ -1,5 +1,6 @@
-package com.qa.testcases.appdetails.mr;
+package com.qa.testcases.appdetails.mapreduce;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.MrAppsDetailsPageObject;
@@ -8,23 +9,24 @@ import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.MrAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
-import com.qa.utils.MouseActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class MR_007 extends BaseClass {
+@Marker.AppDetailsMr
+@Marker.All
+public class MR_006 extends BaseClass {
 
-    Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mr.MR_006.class);
+    Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mapreduce.MR_006.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_007_verifyApplicationStatus(String clusterId) {
-        test = extent.startTest("MR_007_VerifyApplicationStatus: " + clusterId,
-                "Verify App status must be defined compared to yarn status");
+    public void MR_006_verifyApplicationType(String clusterId) {
+        test = extent.startTest("MR_006_applicationType: " + clusterId,
+                "Verify App type must be present");
         test.assignCategory(" Apps Details-Mr");
-        Log.startTestCase("MR_007_VerifyApplicationStatus");
+        Log.startTestCase("MR_006_applicationType");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -46,25 +48,10 @@ public class MR_007 extends BaseClass {
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
-        Assert.assertEquals(appCount, totalCount, "The tez app count of TezApp is not equal to " +
+        Assert.assertEquals(appCount, totalCount, "The map reduce app count of Map ReduceApp is not equal to " +
                 "the total count of heading.");
-        test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
+        test.log(LogStatus.PASS, "The left pane has map reduce check box and the app counts match to that " +
                 "displayed in the header");
 
-        /*
-         * Validate that status types are --
-         */
-        if (appCount > 0) {
-            String statusValue = mrDetailsPage.verifyAppStatus(mrApps);
-            test.log(LogStatus.PASS, "Tez status Value is displayed in the Table: " + statusValue);
-
-        } else {
-            test.log(LogStatus.SKIP, "No Tez Application present");
-            logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +
-                    "of 90 days");
-            //Close apps details page
-            MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);
-        }
     }
-
 }

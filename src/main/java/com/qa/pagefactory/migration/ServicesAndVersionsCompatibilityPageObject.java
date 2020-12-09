@@ -18,6 +18,9 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//a[@class='icon-x']")
     public WebElement closeMsgBanner;
 
+    @FindBy(xpath = "//span[contains(text(), 'Run')]//parent::a")
+    public WebElement runBtn;
+
     @FindBy(xpath = "//span[contains(text(), 'Run New')]//parent::a")
     public WebElement runNewBtn;
 
@@ -35,6 +38,9 @@ public class ServicesAndVersionsCompatibilityPageObject {
 
     @FindBy(xpath = "//div[contains(@class,'component-section-header')]/span/a")
     public WebElement runModalBtn;
+
+    @FindBy(xpath = "//section[contains(@class, 'component-message-banner')]/div")
+    public WebElement confirmationMessageElement;
 
 
     /**

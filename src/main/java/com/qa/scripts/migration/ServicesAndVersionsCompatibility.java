@@ -53,6 +53,11 @@ public class ServicesAndVersionsCompatibility {
         MouseActions.clickOnElement(driver, servicesAndVersionsCompatibilityPageObject.closeMsgBanner);
     }
 
+    public void clickOnRunButton(){
+        waitExecuter.sleep(2000);
+        MouseActions.clickOnElement(driver, servicesAndVersionsCompatibilityPageObject.runBtn);
+    }
+
     public void clickOnRunNewButton(){
         waitExecuter.sleep(2000);
         MouseActions.clickOnElement(driver, servicesAndVersionsCompatibilityPageObject.runNewBtn);
@@ -65,8 +70,9 @@ public class ServicesAndVersionsCompatibility {
         servicesAndVersionsCompatibilityPageObject.cloudProductSearchFirstField.click();
     }
 
-    public void clickOnRunButton(){
+    public void clickOnRunModalButton(){
         waitExecuter.sleep(2000);
         MouseActions.clickOnElement(driver, servicesAndVersionsCompatibilityPageObject.runModalBtn);
     }
+
 }

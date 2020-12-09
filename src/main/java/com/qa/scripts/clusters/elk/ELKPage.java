@@ -1,5 +1,6 @@
 package com.qa.scripts.clusters.elk;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.qa.constants.DatePickerConstants;
 import com.qa.pagefactory.clusters.ELKPageObject;
 import com.qa.pagefactory.clusters.KafkaPageObject;
@@ -10,6 +11,7 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -26,6 +28,7 @@ public class ELKPage {
       "//*[name()='g' and contains(@class,'highcharts-xaxis-labels')]/*[name()='text']/*[name()='tspan']";
   String yAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]" +
       "//*[name()='g' and contains(@class,'highcharts-yaxis-labels')]/*[name()='text']";
+  String tablePath = "//div[contains(@class,'nodes-table-row')]/div[1]//table[@class='component-data-tables']//tbody";
 
   Logger logger = Logger.getLogger(ELKPage.class.getName());
 
@@ -108,7 +111,7 @@ public class ELKPage {
 
     datePicker.clickOnDatePicker();
     waitExecuter.sleep(1000);
-    datePicker.selectLast7Days();
+    datePicker.selectLast30Days();
     waitExecuter.sleep(3000);
     waitExecuter.waitUntilPageFullyLoaded();
 
@@ -191,6 +194,22 @@ public class ELKPage {
     MouseActions.clickOnElement(driver, elkPageObject.indicesTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
+  }
+
+  public void navigateToPipilineTab(ELKPageObject elkPageObject) {
+    MouseActions.clickOnElement(driver, elkPageObject.logstashTab);
+    waitExecuter.waitUntilPageFullyLoaded();
+    waitExecuter.sleep(2000);
+
+    MouseActions.clickOnElement(driver, elkPageObject.pipelineTab);
+    waitExecuter.waitUntilPageFullyLoaded();
+    waitExecuter.sleep(2000);
+
+    datePicker.clickOnDatePicker();
+    waitExecuter.sleep(1000);
+    datePicker.selectLast30Days();
+    waitExecuter.sleep(3000);
+    waitExecuter.waitUntilPageFullyLoaded();
   }
 
   /***
@@ -290,5 +309,216 @@ public class ELKPage {
       waitExecuter.sleep(2000);
       verifyNodeGraphs(kafkaPageObject);
     }
+  }
+
+  /***
+   * Method to verify logstash pipeline and verify all elements exists.
+   */
+  public void verifyLogstashPipeline(ELKPageObject elkPageObject) {
+    WebElement kpiBox = elkPageObject.logstashKpiBox;
+    WebElement tableRow = elkPageObject.tableRowBox;
+    WebElement overview = elkPageObject.overViewBox;
+    WebElement nodePipelineList = elkPageObject.nodePipeline;
+    Assert.assertTrue(kpiBox.isDisplayed() && tableRow.isDisplayed() && overview.isDisplayed() &&
+        nodePipelineList.isDisplayed(), " All elements not displayed in the UI");
+  }
+
+  /***
+   * Method to verify logstash KPis and its value.
+   */
+  public void verifyLogstashKPIs(ELKPageObject elkPageObject, String expectedKpi) {
+    List<WebElement> kpiList = elkPageObject.logstashKpis;
+    List<WebElement> kpiNames = elkPageObject.logstashKpiName;
+    List<WebElement> kpiValues = elkPageObject.logstashKpiValue;
+    List<WebElement> nodeList = elkPageObject.logstashTableRows;
+    Assert.assertFalse(kpiList.isEmpty(), "No Kpis listed for logstash");
+    Assert.assertFalse(nodeList.isEmpty(), "No nodes are displayed ");
+    for (int i = 0; i < kpiList.size(); i++) {
+      String kpiName = kpiNames.get(i).getText().trim();
+      if (kpiName.equals(expectedKpi)) {
+        String kpiValue = kpiValues.get(i).getText().trim();
+        boolean onlySpecialChars = kpiValue.matches("[^a-zA-Z0-9]+");
+        Assert.assertFalse(kpiValue.isEmpty() || onlySpecialChars, "No values for kpi " + kpiName +
+            "displayed \n Expected: AlphaNumeric value Actual: [" + kpiValue + "]");
+        if (kpiName.equals("Events Received") || kpiName.equals("Events Emitted")) {
+          int colId;
+          if (kpiName.equals("Events Received"))
+            colId = 3;
+          else
+            colId = 4;
+          int expectedEventData = getAvgEventData(elkPageObject, colId);
+          int actualEventData = Integer.parseInt(kpiValue);
+          logger.info("Expected event data: " + expectedEventData + " Actual Event data: " + actualEventData);
+          Assert.assertEquals(expectedEventData, actualEventData, "The average number of events flowing into " +
+              "all nodes over the selected time range is not equal\n Expected: " + expectedEventData + " Actual: " + actualEventData);
+        } else if (kpiName.equals("Memory")) {
+          int expectedMemoryData = getSumOfMemory(elkPageObject, 2);
+          String regex = "((?<=[a-zA-Z])(?=[0-9]))|((?<=[0-9])(?=[a-zA-Z]))";
+          String onlyMemoryVal = kpiValue.split("/")[0].trim().split(regex)[0];
+          int actualMemoryData = Integer.parseInt(onlyMemoryVal);
+          logger.info("Expected event data: " + expectedMemoryData + " Actual Event data: " + actualMemoryData);
+          Assert.assertEquals(expectedMemoryData, actualMemoryData, " The sum of the JVM Heap Used Column of the " +
+              "nodes table is not equal to the Memory KPI value \n Expected: " + expectedMemoryData +
+              " Actual: " + actualMemoryData);
+        }
+      }
+    }
+  }
+
+  /***
+   * Method to validate logstash metrics JVM heap used, events received, events emited and events filtered
+   */
+  public void verifyLogstashNodesTableData(ELKPageObject elkPageObject) {
+    List<WebElement> rowList = elkPageObject.logstashTableRows;
+    List<WebElement> colList = elkPageObject.logstashNodeColData;
+    Assert.assertFalse(rowList.isEmpty(), "No data in the nodes table");
+    for (int row = 0; row < rowList.size(); row++) {
+      for (int col = 0; col < colList.size(); col++) {
+        String colName = colList.get(col).getText();
+        WebElement rowData = driver.findElement(By.xpath("//table[@class='component-data-tables']//tbody" +
+            "/tr[" + (row + 1) + "]/td[" + (col + 1) + "]/span"));
+        Assert.assertTrue(rowData.isDisplayed(), "No data under column: " + colName);
+        //Check if data has only special charaters
+        boolean onlySpecialChars = rowData.getText().matches("[^a-zA-Z0-9]+");
+        Assert.assertFalse(onlySpecialChars, "Expected some alpha numeric value for column " + colName +
+            " But got: " + rowData.getText());
+        logger.info("Row data for column: " + colName + "\n " + rowData.getText());
+      }
+    }
+  }
+
+  /***
+   * Method to validate logstash metrics graph .
+   */
+  public void verifyLogstashGraph(ELKPageObject elkPageObject) {
+    List<WebElement> metricsList = elkPageObject.logstashMetricsList;
+    List<WebElement> headerList = elkPageObject.logstashGraphHeader;
+    List<WebElement> footerList = elkPageObject.logstashGraphFooter;
+    List<WebElement> graphList = elkPageObject.logstashGraph;
+
+    for (int i = 0; i < metricsList.size(); i++) {
+      String metricsName = headerList.get(i).getText();
+      Assert.assertFalse(metricsName.isEmpty(), " Metrics Name not displayed");
+      logger.info("Metrics Name: [" + metricsName + "] displayed in the header");
+      Assert.assertTrue(graphList.get(i).isDisplayed(), "The graph for metrics " + metricsName + " is not displayed");
+      logger.info("The graph for Metrics : [" + metricsName + "] is displayed");
+      Assert.assertTrue(footerList.get(i).isDisplayed(), "The footer for metrics " + metricsName + " is not displayed");
+      logger.info("The footer for Metrics : [" + metricsName + "] is displayed");
+    }
+  }
+
+  public void verifyPerNodeMetricsGraph(ELKPageObject elkPageObject) {
+    List<WebElement> rowList = elkPageObject.logstashTableRows;
+    for (int row = 0; row < rowList.size(); row++) {
+      WebElement rowData = driver.findElement(By.xpath(tablePath + "/tr[" + (row + 1) + "]/td[" + 1 + "]/span"));
+      MouseActions.clickOnElement(driver, rowData);
+      verifyLogstashGraph(elkPageObject);
+    }
+  }
+
+  /***
+   * Method to validate that all the pipelines are listed  under pipeline tab.
+   */
+  public void verifyPipelineTab(ELKPageObject elkPageObject) {
+    List<WebElement> rowList = elkPageObject.pipelineTableRows;
+    List<WebElement> kpiList = elkPageObject.logstashKpis;
+    List<WebElement> kpiNames = elkPageObject.logstashKpiName;
+    List<WebElement> kpiValues = elkPageObject.logstashKpiValue;
+    int expectedPipelineCnt = 0;
+    int actualPipilineCnt = rowList.size();
+    for (int i = 0; i < kpiList.size(); i++) {
+      if (kpiNames.get(i).getText().equals("Pipelines")) {
+        expectedPipelineCnt = Integer.parseInt(kpiValues.get(i).getText().trim());
+      }
+    }
+    logger.info("The expected pipeline count: " + expectedPipelineCnt + " Actual pipeline count: " + actualPipilineCnt);
+    Assert.assertEquals(expectedPipelineCnt, actualPipilineCnt, "The pipelines are missing \n Expected pipelineCnt: "
+        + expectedPipelineCnt + " Actual pipelineCnt: " + actualPipilineCnt);
+  }
+
+  public void verifyPipelineTable(ELKPageObject elkPageObject) {
+    verifyLogstashNodesTableData(elkPageObject);
+  }
+
+  public void verifyAssociatedPipelineNodeList(ELKPageObject elkPageObject) {
+    List<WebElement> rowList = elkPageObject.pipelineTableRows;
+    for (int row = 0; row < rowList.size(); row++) {
+      WebElement nodes = driver.findElement(By.xpath(tablePath + "/tr[" + (row + 1) + "]/td[" + 5 + "]/span"));
+      int asssociatedNodeCnt = Integer.parseInt(nodes.getText().trim());
+      String pipelineName = driver.findElement(By.xpath(tablePath + "/tr[" + (row + 1) + "]/td[" + 1 + "]/span")).getText();
+      logger.info("Pipeline " + pipelineName + " has " + asssociatedNodeCnt + " node associated with it");
+      Assert.assertTrue(asssociatedNodeCnt > 0, "No nodes associated with pipeline " + pipelineName);
+      MouseActions.clickOnElement(driver, nodes);
+      waitExecuter.sleep(1000);
+      List<WebElement> nodeRowList = elkPageObject.associatedNodeTableRows;
+      Assert.assertFalse(nodeRowList.isEmpty(), "No rows displayed for the associated nodes in the table");
+      logger.info("No. associated nodes: " + asssociatedNodeCnt + " Entry in node table: " + nodeRowList.size());
+      Assert.assertEquals(asssociatedNodeCnt, nodeRowList.size(), " The number of nodes in the pipeline table is" +
+          " not equal to the nodes displayed in the associated nodes tables.");
+    }
+  }
+
+  public void verifyPipelineSpecificKPIs(ELKPageObject elkPageObject) {
+    List<WebElement> rowList = elkPageObject.pipelineTableRows;
+
+    for (int row = 0; row < rowList.size(); row++) {
+      WebElement pipelineName = driver.findElement(By.xpath(tablePath + "/tr[" + (row + 1) + "]/td[" + 1 + "]/span"));
+      MouseActions.clickOnElement(driver, pipelineName);
+      waitExecuter.sleep(2000);
+      List<WebElement> kpiList = elkPageObject.pipelineKpiList;
+      Assert.assertFalse(kpiList.isEmpty(), "No kpis listed for pipleline " + pipelineName);
+      List<WebElement> kpiNames = elkPageObject.perPipelineKpiName;
+      List<WebElement> kpiValues = elkPageObject.perPipelineKpiValue;
+      for (int i = 0; i < kpiList.size(); i++) {
+        String kpiValue = kpiValues.get(i).getText().trim();
+        String kpiName = kpiNames.get(i).getText().trim();
+        boolean onlySpecialChars = kpiValue.matches("[^a-zA-Z0-9]+");
+        logger.info("Pipeline " + pipelineName.getText() + " has the following kpis \n" +
+            "Kpi Name: [" + kpiName + "] Kpi Vale: [" + kpiValue + "]");
+        Assert.assertFalse(kpiValue.isEmpty() || onlySpecialChars, "No values for kpi " + kpiName +
+            "displayed \n Expected: AlphaNumeric value Actual: [" + kpiValue + "]");
+      }
+    }
+  }
+
+  public void verifyPipelineMetricGraphs(ELKPageObject elkPageObject) {
+    verifyLogstashGraph(elkPageObject);
+  }
+
+  /***
+   * Method to get average number of events flowing out of all nodes .
+   */
+  public int getAvgEventData(ELKPageObject elkPageObject, int colId) {
+    List<WebElement> rowList = elkPageObject.logstashTableRows;
+    int numNodes = rowList.size();
+    int eventsCnt = 0;
+    for (int row = 0; row < rowList.size(); row++) {
+      WebElement rowData = driver.findElement(By.xpath(tablePath + "/tr[" + (row + 1) + "]/td[" + colId + "]/span"));
+      //Check if data has only special charaters
+      boolean onlySpecialChars = rowData.getText().matches("[^a-zA-Z0-9]+");
+      Assert.assertFalse(onlySpecialChars, "Expected some alpha numeric value  But got: " + rowData.getText());
+      eventsCnt += Integer.parseInt(rowData.getText().trim());
+    }
+    logger.info("Sum of eventdata= " + eventsCnt + " Number of nodes = " + numNodes);
+    return (eventsCnt / numNodes);
+  }
+
+  /**
+   * Method to get the sum of the JVM Heap Used Column from nodes table.
+   */
+  public int getSumOfMemory(ELKPageObject elkPageObject, int colId) {
+    int memorySum = 0;
+    List<WebElement> rowList = elkPageObject.logstashTableRows;
+    for (int row = 0; row < rowList.size(); row++) {
+      WebElement rowData = driver.findElement(By.xpath(tablePath + "/tr[" + (row + 1) + "]/td[" + colId + "]/span"));
+      //Check if data has only special charaters
+      boolean onlySpecialChars = rowData.getText().matches("[^a-zA-Z0-9]+");
+      Assert.assertFalse(onlySpecialChars, "Expected some alpha numeric value  But got: " + rowData.getText());
+      String onlyMemValue = rowData.getText().trim().split("\\s")[0].trim();
+      logger.info("Memory used = " + onlyMemValue);
+      memorySum += Integer.parseInt(onlyMemValue);
+    }
+    logger.info("Sum of memory used = " + memorySum);
+    return memorySum;
   }
 }

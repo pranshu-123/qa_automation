@@ -20,9 +20,9 @@ public class KafkaPage {
   private WebDriver driver;
   private DatePicker datePicker;
   String xAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]" +
-      "//*[name()='g' and contains(@class,'highcharts-xaxis-labels')]/*[name()='text']/*[name()='tspan']";
+      "//*[name()='g' and contains(@class,'highcharts-xaxis-labels')]/*[name()='text']";
   String yAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]" +
-      "//*[name()='g' and contains(@class,'highcharts-yaxis-labels')]/*[name()='text']/*[name()='tspan']";
+      "//*[name()='g' and contains(@class,'highcharts-yaxis-labels')]/*[name()='text']";
 
   Logger logger = Logger.getLogger(KafkaPage.class.getName());
 
@@ -115,10 +115,10 @@ public class KafkaPage {
       logger.info("KPI Name: " + kpiName + "\n KPI Value: " + kpiValue);
       Assert.assertTrue(Arrays.asList(expectedKPIList).contains(kpiName), "The kpi: [" + kpiName + "] " +
           "is not displayed in the UI");
-      boolean containsAlphaNumericVal = kpiValue.matches("[A-Za-z0-9]+");
-      Assert.assertFalse(kpiValue.isEmpty() || !containsAlphaNumericVal, "No values for kpi " + kpiName +
-          "displayed \n Expected: AlphaNumeric value Actual: [" + kpiValue + "]");
-    }
+      //Check if data has only special charaters
+      boolean onlySpecialChars = kpiValue.matches("[^a-zA-Z0-9]+");
+      Assert.assertFalse(kpiValue.isEmpty() || onlySpecialChars, "Expected: AlphaNumeric value for " + kpiName + " Actual: " + kpiValue);
+      }
   }
 
   /***

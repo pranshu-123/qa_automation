@@ -123,7 +123,6 @@ public class SparkAppsDetailsPage {
           validateTaskAttemptTab(sparkAppPageObj);
           //Assert.assertSame(totalTaskCnt, pieChartInternalVal, "The Values are not same");
           break;
-        case "Containers":
         case "Metrics":
           logger.info("Validating the Graph " + graphTitle);
           WebElement metricDropDown = sparkAppPageObj.resourcesMetricsDropDown;
@@ -146,6 +145,7 @@ public class SparkAppsDetailsPage {
                 "The number of executors in the legend do not match to the ones plotted in the graph for metrics "+ metric);
             MouseActions.clickOnElement(driver, metricDropDown);
           }
+        case "Containers":
         case "Vcores":
         case "Memory":
           logger.info("Validating the Graph " + graphTitle);

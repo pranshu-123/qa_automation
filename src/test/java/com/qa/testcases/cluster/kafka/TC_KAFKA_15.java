@@ -37,7 +37,7 @@ public class TC_KAFKA_15 extends BaseClass {
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
     kafkaPage.verifyClusterDropDown(kafkaPageObject);
-    kafkaPage.verifyKafkaClusterKPIs(kafkaPageObject, "# Active Controller Trend");
+    kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject, "# Active Controller Trend", "kafkaGraph5");
     test.log(LogStatus.PASS, "Verified '# Active Controller Trend' KPI information name ,values and graphs successfully ");
   }
 }

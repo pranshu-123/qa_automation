@@ -6,6 +6,7 @@ import com.qa.scripts.migration.ServicesAndVersionsCompatibility;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
@@ -15,9 +16,9 @@ public class TC_MP_SC_01 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_MP_SC_01.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void ValidateVCoresGraphDownloadAsXLS(String clusterId) {
+    public void validateServicesAndCompatibilityReport(String clusterId) {
 
-        test = extent.startTest("TC_CO_31.ValidateVCoresGraphDownloadAsXLS: " + clusterId,
+        test = extent.startTest("TC_MP_SC_01.validateServicesAndCompatibilityReport: " + clusterId,
                 "Access to Services & Compatibility report.");
         test.assignCategory(" Migration - Services And Versions Compatibility ");
 
@@ -32,6 +33,8 @@ public class TC_MP_SC_01 extends BaseClass {
         servicesAndVersionsCompatibility.closeMessageBanner();
         servicesAndVersionsCompatibility.clickOnRunButton();
         String cloudProductName = "Google Dataproc";
+        Assert.assertTrue(servicesAndVersionsCompatibility.checkCloudProductsAvailable(), "Cloud Product: " +
+                "No results found");
         servicesAndVersionsCompatibility.selectCloudProduct(cloudProductName);
         servicesAndVersionsCompatibility.clickOnRunModalButton();
 

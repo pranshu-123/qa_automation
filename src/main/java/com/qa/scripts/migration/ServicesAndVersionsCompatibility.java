@@ -70,6 +70,15 @@ public class ServicesAndVersionsCompatibility {
         servicesAndVersionsCompatibilityPageObject.cloudProductSearchFirstField.click();
     }
 
+    public boolean checkCloudProductsAvailable(){
+        waitExecuter.sleep(2000);
+        MouseActions.clickOnElement(driver, servicesAndVersionsCompatibilityPageObject.cloudProductDropDown);
+        if(servicesAndVersionsCompatibilityPageObject.noCloudProductResult.isDisplayed()){
+            return false;
+        }
+        return true;
+    }
+
     public void clickOnRunModalButton(){
         waitExecuter.sleep(2000);
         MouseActions.clickOnElement(driver, servicesAndVersionsCompatibilityPageObject.runModalBtn);

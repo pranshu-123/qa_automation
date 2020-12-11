@@ -42,6 +42,8 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//section[contains(@class, 'component-message-banner')]/div")
     public WebElement confirmationMessageElement;
 
+    @FindBy(xpath = "//span[@class='select2-results']/ul/li[contains(text(), 'No results found')]")
+    public WebElement noCloudProductResult;
 
     /**
      * @param driver The driver that will be used to look up the elements

@@ -16,19 +16,19 @@ import java.util.logging.Logger;
 
 @Marker.ClusterOverview
 @Marker.All
-public class TC_CO_50 extends BaseClass {
+public class TC_CO_54 extends BaseClass {
 
     /**
-     * Verify Inefficient Events graph 'Download PNG'
+     * Verify Inefficient Events graph 'Download CSV'
      */
 
-    private static final Logger LOGGER = Logger.getLogger(TC_CO_50.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TC_CO_54.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateInefficientEventsGraphDownloadAsPNG(String clusterId) {
+    public void validateInefficientEventsGraphDownloadAsCSV(String clusterId) {
 
-        test = extent.startTest("TC_CO_50.validateInefficientEventsGraphDownloadAsPNG: " + clusterId,
-                "Validate download of Inefficient Events graph as PNG file.");
+        test = extent.startTest("TC_CO_54.validateInefficientEventsGraphDownloadAsCSV: " + clusterId,
+                "Validate download of Inefficient Events graph as CSV file.");
         test.assignCategory(" Cluster Overview");
 
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
@@ -50,13 +50,13 @@ public class TC_CO_50 extends BaseClass {
         homePage.clickOnInefficientEventsGraphDownloadMenu();
         LOGGER.info("Clicked on Inefficient Events Graph download menu ... ");
 
-        homePage.downloadInefficientEventsGraphAsFile("Download PNG");
-        LOGGER.info("Download PNG file");
+        homePage.downloadInefficientEventsGraphAsFile("Download CSV");
+        LOGGER.info("Download CSV file");
 
-        Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("Jobs.png"), "File is not downloaded " +
+        Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("Jobs.csv"), "File is not downloaded " +
                 "or size of file is zero bytes.");
-        test.log(LogStatus.PASS, "Successfully downloaded Inefficient Events graph as PNG file.");
-        LOGGER.info("Successfully downloaded Inefficient Events graph as PNG file.");
+        test.log(LogStatus.PASS, "Successfully downloaded Inefficient Events graph as CSV file.");
+        LOGGER.info("Successfully downloaded Inefficient Events graph as CSV file.");
     }
 
 }

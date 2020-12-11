@@ -238,10 +238,7 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "//*[@class='select2-results']//ul/li/ul/li")
   public List<WebElement> resourcesMetricsDropDownData;
 
-  @FindBy(xpath = "//*[@class=\"highcharts-series-group\"]//*[name()='path'][2]")
-  public List<WebElement> resourcesMetricsPlotGraph;
-
-  @FindBy(xpath = "//*[@class='highcharts-series-group']//*[name()='path' and @class='highcharts-tracker-line']")
+  @FindBy(xpath = "//*[@chart-options='getappResourceUseageOptions']//*[name()='path' and @class='highcharts-tracker-line']")
   public List<WebElement> resourcesMetricsLineGraph;
 
   @FindBy(xpath = "//*[@class=\"legendclass\"]//span")

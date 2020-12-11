@@ -37,7 +37,7 @@ public class TC_KAFKA_17 extends BaseClass {
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
     kafkaPage.verifyClusterDropDown(kafkaPageObject);
-    kafkaPage.verifyKafkaClusterKPIs(kafkaPageObject, "Bytes Out per Second");
+    kafkaPage.verifyKafkaClusterKPIs(kafkaPageObject, "Bytes Out per Sec");
     test.log(LogStatus.PASS, "Verified 'Bytes Out per Second' KPI information name ,values and graphs successfully ");
   }
 }

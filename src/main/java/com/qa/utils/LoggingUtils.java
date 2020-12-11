@@ -32,6 +32,11 @@ public class LoggingUtils {
         }
     }
 
+    /**
+     * This method will add error in logging and extent report
+     * @param test - log to add into the extent report
+     * @param message - Message to be added for logging
+     */
     public void error(String message, @Nullable ExtentTest test) {
         logger.error(message);
         if (test != null) {
@@ -39,10 +44,27 @@ public class LoggingUtils {
         }
     }
 
+    /**
+     * This method will add warning in logging and extent report
+     * @param test - log to add into the extent report
+     * @param message - Message to be added for logging
+     */
     public void warning(String message, @Nullable ExtentTest test) {
         logger.warn(message);
         if (test != null) {
             test.log(LogStatus.WARNING, message);
+        }
+    }
+
+    /**
+     * This method will add info in logging and pass in extent report
+     * @param test - log to add into the extent report
+     * @param message - Message to be added for logging
+     */
+    public void pass(String message, @Nullable ExtentTest test) {
+        logger.info(message);
+        if (test != null) {
+            test.log(LogStatus.PASS, message);
         }
     }
 }

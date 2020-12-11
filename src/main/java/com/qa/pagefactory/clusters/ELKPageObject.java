@@ -15,13 +15,12 @@ public class ELKPageObject {
   @FindBy(xpath = "//a[contains(text(),'Indices')]")
   public WebElement indicesTab;
 
+  @FindBy(xpath = "//a[contains(text(),'Pipelines')]")
+  public WebElement pipelineTab;
+
   @FindBy(xpath = "//li[contains(@class,'active')]/ul[contains(@class,'sub-menu')]//li/span[contains(text()," +
       "'Logstash')]")
   public WebElement logstashTab;
-
-  @FindBy(xpath = "//li[contains(@class,'active')]/ul[contains(@class,'sub-menu')]//li/span[contains(text()," +
-      "'Kibana')]")
-  public WebElement kibanaTab;
 
   @FindBy(xpath = "(//span[contains(@class,'select2-selection__rendered')])")
   public WebElement clusterDropDown;
@@ -55,9 +54,6 @@ public class ELKPageObject {
       "'col score-improvement-box') and //div[@class='col']]//h2")
   public List<WebElement> ESKpiValues;
 
-  @FindBy(xpath = "//div[@class='container-fluid']//div[contains(@class,'dashboard-module')]//div[@class='footer']/label")
-  public List<WebElement> ESMetricsFooter;
-
   @FindBy(xpath = "//div[@id='elastic-index-details']//div[@class='col-md-6']")
   public List<WebElement> IndicesMetric;
 
@@ -70,6 +66,72 @@ public class ELKPageObject {
   @FindBy(xpath = "//div[@id='elastic-index-details']//div[contains(@class,'dashboard-module')]//" +
       "div[@class='content']//*[name()='g' and @class='highcharts-series-group']")
   public List<WebElement> IndiceMetricsGraph;
+
+  //Logstash xpath:
+  @FindBy(xpath = "//div[contains(@class,'kpi-parent')]")
+  public List<WebElement> logstashKpis;
+
+  @FindBy(xpath = "//div[contains(@class,'kpi-parent')]//div[@class='col']/span")
+  public List<WebElement> logstashKpiName;
+
+  @FindBy(xpath = "//div[contains(@class,'kpi-parent')]//div[@class='col']/h2")
+  public List<WebElement> logstashKpiValue;
+
+  @FindBy(xpath = "//div[contains(@class,'logstash-graph')]/div[@class='header']/h4")
+  public List<WebElement> logstashGraphHeader;
+
+  @FindBy(xpath = "//div[contains(@class,'logstash-graph')]/div[@class='footer']//label")
+  public List<WebElement> logstashGraphFooter;
+
+  @FindBy(xpath = "//div[contains(@class,'logstash-graph')]//div[@class='content']//*[name()='g' and " +
+      "@class='highcharts-series-group']")
+  public List<WebElement> logstashGraph;
+
+  @FindBy(xpath = "//div[contains(@class,'logstash-graph')]//*[name()='svg' and contains(@class,'highcharts-root')]" +
+      "//*[name()='g' and contains(@class,'highcharts-yaxis-labels')]/*[name()='text']")
+  public List<WebElement> yAxisPath;
+
+  @FindBy(xpath = "//div[contains(@class,'logstash-graph')]//*[name()='svg' and contains(@class,'highcharts-root')]" +
+      "//*[name()='g' and contains(@class,'highcharts-xaxis-labels')]/*[name()='text']")
+  public List<WebElement> xAxisPath;
+
+  @FindBy(xpath = "//div[contains(@class,'component-score-improvement-module container-fluid')]")
+  public WebElement logstashKpiBox;
+
+  @FindBy(xpath = "//div[contains(@class,'nodes-table-row')]")
+  public WebElement tableRowBox;
+
+  @FindBy(xpath = "//div[contains(@class,'component-dashboard')]")
+  public WebElement overViewBox;
+
+  @FindBy(xpath = "//div[contains(@class,'component-tabs-secondary')]/ul")
+  public WebElement nodePipeline;
+
+  @FindBy(xpath = "//table[@class='component-data-tables']//tbody/tr")
+  public List<WebElement> logstashTableRows;
+
+  @FindBy(xpath = "//div[contains(@class,'nodes-table-row')]/div[1]//table[@class='component-data-tables']//tbody/tr")
+  public List<WebElement> pipelineTableRows;
+
+  @FindBy(xpath = "//table[@class='component-data-tables']//tbody/tr/td")
+  public List<WebElement> logstashNodeColData;
+
+  @FindBy(xpath = "//div[contains(@class,'logstash-graph')]")
+  public List<WebElement> logstashMetricsList;
+
+  @FindBy(xpath = "//div[contains(@class,'pipeline-node-list')]//table[@class='component-data-tables']//tbody/tr")
+  public List<WebElement> associatedNodeTableRows;
+
+  @FindBy(xpath = "//div[contains(@class,'component-dashboard')]//div[contains(@class,'score-improvement-bo')]")
+  public List<WebElement> pipelineKpiList;
+
+  @FindBy(xpath = "//div[contains(@class,'component-dashboard')]//div[contains(@class,'score-improvement-bo')]//" +
+      "div[@class='col']/h2")
+  public List<WebElement> perPipelineKpiValue;
+
+  @FindBy(xpath = "//div[contains(@class,'component-dashboard')]//div[contains(@class,'score-improvement-bo')]//" +
+      "div[@class='col']/span")
+  public List<WebElement> perPipelineKpiName;
 
   public ELKPageObject(WebDriver driver) {
     PageFactory.initElements(driver, this);

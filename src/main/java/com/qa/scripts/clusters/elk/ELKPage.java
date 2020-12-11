@@ -352,10 +352,14 @@ public class ELKPage {
           Assert.assertEquals(expectedEventData, actualEventData, "The average number of events flowing into " +
               "all nodes over the selected time range is not equal\n Expected: " + expectedEventData + " Actual: " + actualEventData);
         } else if (kpiName.equals("Memory")) {
-          int expectedMemoryData = getSumOfMemory(elkPageObject, 2);
+          float expectedMemoryData = getSumOfMemory(elkPageObject, 2);
           String regex = "((?<=[a-zA-Z])(?=[0-9]))|((?<=[0-9])(?=[a-zA-Z]))";
           String onlyMemoryVal = kpiValue.split("/")[0].trim().split(regex)[0];
-          int actualMemoryData = Integer.parseInt(onlyMemoryVal);
+          float actualMemoryData = 0L;
+          if (onlyMemoryVal.contains("."))
+            actualMemoryData += Float.parseFloat(onlyMemoryVal);
+          else
+            actualMemoryData += Integer.parseInt(onlyMemoryVal);
           logger.info("Expected event data: " + expectedMemoryData + " Actual Event data: " + actualMemoryData);
           Assert.assertEquals(expectedMemoryData, actualMemoryData, " The sum of the JVM Heap Used Column of the " +
               "nodes table is not equal to the Memory KPI value \n Expected: " + expectedMemoryData +
@@ -506,8 +510,8 @@ public class ELKPage {
   /**
    * Method to get the sum of the JVM Heap Used Column from nodes table.
    */
-  public int getSumOfMemory(ELKPageObject elkPageObject, int colId) {
-    int memorySum = 0;
+  public float getSumOfMemory(ELKPageObject elkPageObject, int colId) {
+    float memorySum = 0L;
     List<WebElement> rowList = elkPageObject.logstashTableRows;
     for (int row = 0; row < rowList.size(); row++) {
       WebElement rowData = driver.findElement(By.xpath(tablePath + "/tr[" + (row + 1) + "]/td[" + colId + "]/span"));
@@ -516,7 +520,10 @@ public class ELKPage {
       Assert.assertFalse(onlySpecialChars, "Expected some alpha numeric value  But got: " + rowData.getText());
       String onlyMemValue = rowData.getText().trim().split("\\s")[0].trim();
       logger.info("Memory used = " + onlyMemValue);
-      memorySum += Integer.parseInt(onlyMemValue);
+      if (onlyMemValue.contains("."))
+        memorySum += Float.parseFloat(onlyMemValue);
+      else
+        memorySum += Integer.parseInt(onlyMemValue);
     }
     logger.info("Sum of memory used = " + memorySum);
     return memorySum;

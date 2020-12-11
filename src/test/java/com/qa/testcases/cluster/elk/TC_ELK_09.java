@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.elk;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.clusters.ELKPageObject;
 import com.qa.scripts.DatePicker;
@@ -13,13 +14,15 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
+@Marker.All
+@Marker.ClusterELK
 public class TC_ELK_09 extends BaseClass {
 
   private static final java.util.logging.Logger LOGGER = Logger.getLogger(TC_ELK_09.class.getName());
 
   @Test(dataProvider = "clusterid-data-provider")
   public void verifyLogstashMetricsGraph(String clusterId) {
-    test = extent.startTest("verifyLogstashPipeline: " + clusterId,
+    test = extent.startTest("verifyLogstashMetricsGraph: " + clusterId,
         "Validate logstash metrics graph ");
     test.assignCategory(" ELK ");
     Log.startTestCase("verifyLogstashMetricsGraph");

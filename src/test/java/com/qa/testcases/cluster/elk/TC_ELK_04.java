@@ -22,7 +22,7 @@ public class TC_ELK_04 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider")
   public void verifyEventsReceivedKPI(String clusterId) {
-    test = extent.startTest("verifyLogstashPipeline: " + clusterId,
+    test = extent.startTest("verifyEventsReceivedKPI: " + clusterId,
         "Validate Events Received KPI.");
     test.assignCategory(" ELK ");
     Log.startTestCase("verifyEventsReceivedKPI");

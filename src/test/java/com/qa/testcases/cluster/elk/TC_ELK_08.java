@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.elk;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.clusters.ELKPageObject;
 import com.qa.scripts.DatePicker;
@@ -13,16 +14,18 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
+@Marker.All
+@Marker.ClusterELK
 public class TC_ELK_08 extends BaseClass {
 
   private static final java.util.logging.Logger LOGGER = Logger.getLogger(TC_ELK_08.class.getName());
 
   @Test(dataProvider = "clusterid-data-provider")
-  public void verifyMemoryKPI(String clusterId) {
-    test = extent.startTest("verifyLogstashPipeline: " + clusterId,
+  public void verifyLogstashMetrics(String clusterId) {
+    test = extent.startTest("verifyLogstashMetrics: " + clusterId,
         "Validate logstash metrics JVM heap used, events received, events emited and events filtered. ");
     test.assignCategory(" ELK ");
-    Log.startTestCase("verifyMemoryKPI");
+    Log.startTestCase("verifyLogstashMetrics");
 
     // Initialize all classes objects
     test.log(LogStatus.INFO, "Initialize all class objects");
@@ -31,7 +34,6 @@ public class TC_ELK_08 extends BaseClass {
     ELKPageObject elkPageObj = new ELKPageObject(driver);
     DatePicker datePicker = new DatePicker(driver);
     WaitExecuter waitExecuter = new WaitExecuter(driver);
-    AllApps allApps = new AllApps(driver);
 
     // Navigate to ES tab from header
     MouseActions.clickOnElement(driver, elkPageObj.logstashTab);

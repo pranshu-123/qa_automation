@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 import java.util.logging.Logger;
 
 public class TC_SF_29 extends BaseClass {
-    private static final Logger LOGGER = Logger.getLogger(TC_SF_09.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TC_SF_29.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void VerifySortByMaxFileSize(String clusterId) {

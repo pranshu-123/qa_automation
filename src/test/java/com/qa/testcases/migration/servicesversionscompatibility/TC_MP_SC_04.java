@@ -14,15 +14,15 @@ import java.util.logging.Logger;
 
 @Marker.All
 @Marker.MigrationServices
-public class TC_MP_SC_03 extends BaseClass {
+public class TC_MP_SC_04 extends BaseClass {
 
-    private static final Logger LOGGER = Logger.getLogger(TC_MP_SC_03.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TC_MP_SC_04.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateServicesAndCompatibilityReportForGoogleDataproc(String clusterId) {
+    public void validateServicesAndCompatibilityReportForAmazonEMR(String clusterId) {
 
-        test = extent.startTest("validateServicesAndCompatibilityReportForGoogleDataproc: " + clusterId,
-                "Verify the user is able to run a report for Google Dataproc providers.");
+        test = extent.startTest("validateServicesAndCompatibilityReportForAmazonEMR: " + clusterId,
+                "Verify User can run a report for 'Amazon EMR' ");
         test.assignCategory(" Migration - Services And Versions Compatibility ");
 
         //Initialize object
@@ -35,7 +35,7 @@ public class TC_MP_SC_03 extends BaseClass {
         servicesAndVersionsCompatibility.clickOnServicesAndVersionMigrationTab();
         servicesAndVersionsCompatibility.closeMessageBanner();
         servicesAndVersionsCompatibility.clickOnRunButton();
-        String cloudProductName = "Google Dataproc";
+        String cloudProductName = "Amazon EMR";
         Assert.assertTrue(servicesAndVersionsCompatibility.checkCloudProductsAvailable(), "Cloud Product: " +
                 "No results found");
         servicesAndVersionsCompatibility.selectCloudProduct(cloudProductName);
@@ -44,11 +44,11 @@ public class TC_MP_SC_03 extends BaseClass {
         try {
             waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.confirmationMessageElement,
                     "Services and Versions Compatibility completed successfully.");
-            test.log(LogStatus.PASS, "Verified Services and Versions Compatibility report is loaded properly" +
-                    " for Google Dataproc.");
+            test.log(LogStatus.PASS, "Verified Services and Versions Compatibility report is loaded properly " +
+                    "for Amazon EMR.");
         } catch (TimeoutException te) {
             throw new AssertionError("Services and Versions Compatibility Report not completed successfully" +
-                    " for Google Dataproc.");
+                    " for Amazon EMR.");
         }
 
     }

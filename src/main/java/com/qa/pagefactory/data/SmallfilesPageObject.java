@@ -52,6 +52,30 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "(//input[contains(@type,'text')])[3]")
     public WebElement maxiFileSize;
 
+    @FindBy(xpath = "//span[normalize-space()='Path']")
+    public WebElement sortPath;
+
+    @FindBy(xpath = "//span[normalize-space()='Files']")
+    public WebElement sortFiles;
+
+    @FindBy(xpath = "//span[normalize-space()='Avg File Size']")
+    public WebElement sortAvgFileSize;
+
+    @FindBy(xpath = "//span[normalize-space()='Total File Size']")
+    public WebElement sortTotalFileSize;
+
+    @FindBy(xpath = "//span[normalize-space()='Min File Size']")
+    public WebElement sortMinFileSize;
+
+    @FindBy(xpath = "//span[normalize-space()='Max File Size']")
+    public WebElement sortMaxFileSize;
+
+    @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-down')]")
+    public WebElement sortDown;
+
+    @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-up')]")
+    public WebElement sortUp;
+
     @FindBy(xpath = "//*[@id=\"select2-h9li-container\"]")
     public WebElement clusterIdsearchfield;
 

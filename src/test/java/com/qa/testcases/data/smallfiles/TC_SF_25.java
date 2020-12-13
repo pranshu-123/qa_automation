@@ -34,23 +34,19 @@ public class TC_SF_25 extends BaseClass {
         test.log(LogStatus.INFO, "Clicked on Data Tab");
 
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-        waitExecuter.waitUntilElementPresent(topPanelPageObject.fileReportsTab);
+        waitExecuter.waitUntilElementPresent(topPanelPageObject.smallFilesTab);
         waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.waitUntilElementClickable(topPanelPageObject.fileReportsTab);
+        waitExecuter.waitUntilElementClickable(topPanelPageObject.smallFilesTab);
         waitExecuter.sleep(3000);
-        MouseActions.clickOnElement(driver, topPanelPageObject.fileReportsTab);
-        LOGGER.info("Clicked on file Reports Tab");
-        test.log(LogStatus.INFO, "Clicked on file ReportsTab Tab");
+        MouseActions.clickOnElement(driver, topPanelPageObject.smallFilesTab);
+        LOGGER.info("Clicked on small FilesTab Tab");
+        test.log(LogStatus.INFO, "Clicked on small FilesTab Tab");
 
         SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
 
         Smallfiles smallfiles = new Smallfiles(driver);
         smallfiles.closeConfirmationMessageNotification();
-        waitExecuter.sleep(3000);
 
-
-        HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
 
         // Sort Up by Files
         test.log(LogStatus.INFO, "Ascending order by files");

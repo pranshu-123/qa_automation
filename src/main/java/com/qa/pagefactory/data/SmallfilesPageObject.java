@@ -79,8 +79,10 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//*[@id=\"select2-h9li-container\"]")
     public WebElement clusterIdsearchfield;
 
-    @FindBy(className = "select2-search__field")
-    public WebElement queueSearchBox;
+    @FindBy(xpath = "//input[contains(@type,'search')]")
+    public WebElement reportSearchBox;
+
+
 
     @FindBy(xpath = "//ul[(@class='select2-results__options')]/li")
     public List<WebElement> queueOptions;

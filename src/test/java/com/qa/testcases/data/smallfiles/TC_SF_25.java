@@ -33,13 +33,13 @@ public class TC_SF_25 extends BaseClass {
         test.log(LogStatus.INFO, "Clicked on Data Tab");
 
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-        waitExecuter.waitUntilElementPresent(topPanelPageObject.smallFilesTab);
+        waitExecuter.waitUntilElementPresent(topPanelPageObject.fileReportsTab);
         waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.waitUntilElementClickable(topPanelPageObject.smallFilesTab);
+        waitExecuter.waitUntilElementClickable(topPanelPageObject.fileReportsTab);
         waitExecuter.sleep(3000);
-        MouseActions.clickOnElement(driver, topPanelPageObject.smallFilesTab);
-        LOGGER.info("Clicked on small FilesTab Tab");
-        test.log(LogStatus.INFO, "Clicked on small FilesTab Tab");
+        MouseActions.clickOnElement(driver, topPanelPageObject.fileReportsTab);
+        LOGGER.info("Clicked on file Reports Tab");
+        test.log(LogStatus.INFO, "Clicked on file ReportsTab Tab");
 
         SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
 

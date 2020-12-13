@@ -14,15 +14,15 @@ import java.util.logging.Logger;
 
 @Marker.All
 @Marker.MigrationServices
-public class TC_MP_SC_01 extends BaseClass {
+public class TC_MP_SC_03 extends BaseClass {
 
-    private static final Logger LOGGER = Logger.getLogger(TC_MP_SC_01.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TC_MP_SC_03.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateServicesAndCompatibilityReport(String clusterId) {
+    public void validateServicesAndCompatibilityReportForGoogle(String clusterId) {
 
-        test = extent.startTest("TC_MP_SC_01.validateServicesAndCompatibilityReport: " + clusterId,
-                "Access to Services & Compatibility report.");
+        test = extent.startTest("validateServicesAndCompatibilityReportForGoogle: " + clusterId,
+                "Verify the user is able to run a report for Google cloud providers.");
         test.assignCategory(" Migration - Services And Versions Compatibility ");
 
         //Initialize object
@@ -44,9 +44,9 @@ public class TC_MP_SC_01 extends BaseClass {
         try {
             waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.confirmationMessageElement,
                     "Services and Versions Compatibility completed successfully.");
-            test.log(LogStatus.PASS, "Verified Services and Versions Compatibility report is loaded properly.");
+            test.log(LogStatus.PASS, "Verified Services and Versions Compatibility report is loaded properly for Google provdier.");
         } catch (TimeoutException te) {
-            throw new AssertionError("Services and Versions Compatibility Report not completed successfully.");
+            throw new AssertionError("Services and Versions Compatibility Report not completed successfully for Google provider.");
         }
 
     }

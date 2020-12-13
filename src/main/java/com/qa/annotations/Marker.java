@@ -38,4 +38,5 @@ public @interface Marker {
   @interface Tuning {}
   @interface KafkaExternal {}
   @interface ClusterELK {}
+  @interface MigrationServices{}
 }

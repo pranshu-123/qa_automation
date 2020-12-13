@@ -4,6 +4,7 @@ import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.data.SmallfilesPageObject;
+import com.qa.scripts.HomePage;
 import com.qa.scripts.data.Smallfiles;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
@@ -45,6 +46,11 @@ public class TC_SF_24 extends BaseClass {
 
         Smallfiles smallfiles = new Smallfiles(driver);
         smallfiles.closeConfirmationMessageNotification();
+        waitExecuter.sleep(3000);
+
+
+        HomePage homePage = new HomePage(driver);
+        homePage.selectMultiClusterId(clusterId);
 
         // Sort Up by Path
         test.log(LogStatus.INFO, "Ascending order by Path");

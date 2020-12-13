@@ -22,7 +22,7 @@ public class TC_SF_28 extends BaseClass {
         test = extent.startTest("TC_SF_28.VerifySortByMinFileSize: " + clusterId, "Verify User is able " +
                 "Verify The user is able sort based on Min File Size column for Small File Reports");
         test.assignCategory("Data- Small Files and File reports");
-        Log.startTestCase("TC_SF_28.validatenumberofsmallfilesfromselectedcluster");
+        Log.startTestCase("TC_SF_28.VerifySortByMinFileSize");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);

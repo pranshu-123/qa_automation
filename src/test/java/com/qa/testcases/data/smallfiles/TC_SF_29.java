@@ -19,10 +19,10 @@ public class TC_SF_29 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void VerifySortByMaxFileSize(String clusterId) {
-        test = extent.startTest("TC_SF_09.validatenumberofsmallfilesfromselectedcluster: " + clusterId, "Verify User is able " +
+        test = extent.startTest("TC_SF_29.VerifySortByMaxFileSize: " + clusterId, "Verify User is able " +
                 "Verify The user is able sort based on Max File Size column for Small File Reports");
         test.assignCategory("Data- Small Files and File reports");
-        Log.startTestCase("TC_SF_09.validatenumberofsmallfilesfromselectedcluster");
+        Log.startTestCase("TC_SF_29.VerifySortByMaxFileSize");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);

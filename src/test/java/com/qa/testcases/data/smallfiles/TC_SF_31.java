@@ -45,15 +45,6 @@ public class TC_SF_31 extends BaseClass {
 
         SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
 
-        Smallfiles smallfiles = new Smallfiles(driver);
-        smallfiles.closeConfirmationMessageNotification();
-
-        //Select the cluster
-        LOGGER.info("Selecting the cluster");
-        HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
-
-
         // Click on small file search
         test.log(LogStatus.INFO, "Click on queue search box and search for path");
         LOGGER.info("Click on queue search box and search for path");

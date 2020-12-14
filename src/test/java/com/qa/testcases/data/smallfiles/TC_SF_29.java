@@ -1,5 +1,6 @@
 package com.qa.testcases.data.smallfiles;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
@@ -15,12 +16,14 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
+@Marker.DataSmallFiles
+@Marker.All
 public class TC_SF_29 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_SF_29.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void VerifySortByMaxFileSize(String clusterId) {
-        test = extent.startTest("TC_SF_29.VerifySortByMaxFileSize: " + clusterId, "Verify User is able " +
+        test = extent.startTest("TC_SF_29.VerifySortByMaxFileSize: " + clusterId,
                 "Verify The user is able sort based on Max File Size column for Small File Reports");
         test.assignCategory("Data- Small Files and File reports");
         Log.startTestCase("TC_SF_29.VerifySortByMaxFileSize");

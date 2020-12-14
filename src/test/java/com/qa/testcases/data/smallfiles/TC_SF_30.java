@@ -1,5 +1,6 @@
 package com.qa.testcases.data.smallfiles;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
@@ -16,12 +17,14 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
+@Marker.DataSmallFiles
+@Marker.All
 public class TC_SF_30 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_SF_30.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void VerifyFilePath(String clusterId) {
-        test = extent.startTest("TC_SF_30.VerifyFilePath: " + clusterId, "Verify User is able " +
+        test = extent.startTest("TC_SF_30.VerifyFilePath: " + clusterId,
                 "Verify user is able search a particular file path");
         test.assignCategory("Data- Small Files and File reports");
         Log.startTestCase("TC_SF_30.VerifyFilePath");
@@ -42,7 +45,7 @@ public class TC_SF_30 extends BaseClass {
         MouseActions.clickOnElement(driver, topPanelPageObject.smallFilesTab);
         LOGGER.info("Clicked on small FilesTab Tab");
         test.log(LogStatus.INFO, "Clicked on small FilesTab Tab");
-        ;
+
 
         SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
 

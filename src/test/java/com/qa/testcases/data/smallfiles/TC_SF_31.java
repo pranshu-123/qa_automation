@@ -1,5 +1,6 @@
 package com.qa.testcases.data.smallfiles;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
@@ -16,12 +17,14 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
+@Marker.DataSmallFiles
+@Marker.All
 public class TC_SF_31 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_SF_31.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void VerifyNumberOfFiles(String clusterId) {
-        test = extent.startTest("TC_SF_31.VerifyNumberOfFiles: " + clusterId, "Verify User is able " +
+        test = extent.startTest("TC_SF_31.VerifyNumberOfFiles: " + clusterId,
                 "Verify user is able search a particular number of files");
         test.assignCategory("Data- Small Files and File reports");
         Log.startTestCase("TC_SF_31.VerifyNumberOfFiles");
@@ -59,8 +62,6 @@ public class TC_SF_31 extends BaseClass {
             Assert.assertTrue(smallfilesPageObject.whenNoDataDisplay.isDisplayed());
             test.log(LogStatus.FAIL, "There is no data display in the table");
         }
-
-
 
 
     }

@@ -1,5 +1,6 @@
 package com.qa.testcases.data.smallfiles;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
@@ -15,12 +16,14 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
+@Marker.DataSmallFiles
+@Marker.All
 public class TC_SF_25 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_SF_25.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void VerifySortByFiles(String clusterId) {
-        test = extent.startTest("TC_SF_25.VerifySortByFiles: " + clusterId, "Verify User is able " +
+        test = extent.startTest("TC_SF_25.VerifySortByFiles: " + clusterId,
                 "Verify The user is able sort based on number of Files column for Small File Reports");
         test.assignCategory("Data- Small Files and File reports");
         Log.startTestCase("TC_SF_25.VerifySortByFiles");
@@ -47,7 +50,6 @@ public class TC_SF_25 extends BaseClass {
         Smallfiles smallfiles = new Smallfiles(driver);
         smallfiles.closeConfirmationMessageNotification();
 
-
         // Sort Up by Files
         test.log(LogStatus.INFO, "Ascending order by files");
         LOGGER.info("Ascending order by files");
@@ -61,6 +63,5 @@ public class TC_SF_25 extends BaseClass {
         waitExecuter.sleep(2000);
         Assert.assertTrue(smallfilesPageObject.sortDown.isDisplayed(), "Descending order is not working");
         test.log(LogStatus.PASS, "Verified sorting on files.");
-
     }
 }

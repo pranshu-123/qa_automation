@@ -36,8 +36,6 @@ public class TC_MP_SC_03 extends BaseClass {
         servicesAndVersionsCompatibility.closeMessageBanner();
         servicesAndVersionsCompatibility.clickOnRunButton();
         String cloudProductName = "Google Dataproc";
-        Assert.assertTrue(servicesAndVersionsCompatibility.checkCloudProductsAvailable(), "Cloud Product: " +
-                "No results found");
         servicesAndVersionsCompatibility.selectCloudProduct(cloudProductName);
         servicesAndVersionsCompatibility.clickOnRunModalButton();
 

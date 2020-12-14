@@ -36,8 +36,6 @@ public class TC_MP_SC_05 extends BaseClass {
         servicesAndVersionsCompatibility.closeMessageBanner();
         servicesAndVersionsCompatibility.clickOnRunButton();
         String cloudProductName = "Azure HDI";
-        Assert.assertTrue(servicesAndVersionsCompatibility.checkCloudProductsAvailable(), "Cloud Product: " +
-                "No results found");
         servicesAndVersionsCompatibility.selectCloudProduct(cloudProductName);
         servicesAndVersionsCompatibility.clickOnRunModalButton();
 

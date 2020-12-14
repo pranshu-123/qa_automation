@@ -36,8 +36,6 @@ public class TC_MP_SC_04 extends BaseClass {
         servicesAndVersionsCompatibility.closeMessageBanner();
         servicesAndVersionsCompatibility.clickOnRunButton();
         String cloudProductName = "Amazon EMR";
-        Assert.assertTrue(servicesAndVersionsCompatibility.checkCloudProductsAvailable(), "Cloud Product: " +
-                "No results found");
         servicesAndVersionsCompatibility.selectCloudProduct(cloudProductName);
         servicesAndVersionsCompatibility.clickOnRunModalButton();
 

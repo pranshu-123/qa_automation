@@ -82,7 +82,14 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//input[contains(@type,'search')]")
     public WebElement reportSearchBox;
 
+    @FindBy(xpath = "//table[contains(@class,'component-data-tables')]/tbody/tr/td[1]")
+    public List<WebElement> getPathNameFromTable;
 
+    @FindBy(xpath = "//table[contains(@class,'component-data-tables')]/tbody/tr/td[2]")
+    public List<WebElement> getFileNameFromTable;
+
+    @FindBy(xpath = "//table[contains(@class,'component-data-tables')]//td/p")
+    public WebElement whenNoDataDisplay;
 
     @FindBy(xpath = "//ul[(@class='select2-results__options')]/li")
     public List<WebElement> queueOptions;

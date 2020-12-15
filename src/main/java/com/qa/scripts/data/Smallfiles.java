@@ -1,11 +1,13 @@
 package com.qa.scripts.data;
 
 import com.qa.pagefactory.SubTopPanelModulePageObject;
+import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.data.ForecastingPageObject;
 import com.qa.pagefactory.data.SmallfilesPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
+import com.qa.scripts.appdetails.TezAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
@@ -21,8 +23,7 @@ import java.util.logging.Logger;
 
 public class Smallfiles {
 
-    Logger logger = Logger.getLogger(SparkAppsDetailsPage.class.getName());
-
+    private static final java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger(Smallfiles.class.getName());
     SmallfilesPageObject smallfilesPageObject;
     private WaitExecuter waitExecuter;
     private WebDriver driver;
@@ -79,27 +80,28 @@ public class Smallfiles {
     /**
      * Common steps to validate minimumFileSize,maximumFileSize,minimumSmallFile,directoriesToShow
      */
-    public void navigateToSmallFileReport(SmallfilesPageObject smallfilesPageObject,ExtentTest test,String minimumFileSize,String maximumFileSize,
-                                          String minimumSmallFile,String directoriesToShow) {
+    public void navigateToSmallFileReport(SmallfilesPageObject smallfilesPageObject, ExtentTest test, String minimumFileSize, String maximumFileSize,
+                                          String minimumSmallFile, String directoriesToShow) {
 
         smallfilesPageObject.minFileSize.sendKeys(minimumFileSize);
-        logger.info("Set minimum FileSize as: " + minimumFileSize);
+        LOGGER.info("Set minimum FileSize as: " + minimumFileSize);
         test.log(LogStatus.INFO, "Set minimum FileSize as: " + minimumFileSize);
 
 
         smallfilesPageObject.maxiFileSize.sendKeys(maximumFileSize);
-        logger.info("Set maximum FileSize as: " + maximumFileSize);
+        LOGGER.info("Set maximum FileSize as: " + maximumFileSize);
         test.log(LogStatus.INFO, "Set minimum FileSize as: " + maximumFileSize);
 
         smallfilesPageObject.minimumSmallFile.sendKeys(minimumSmallFile);
-        logger.info("Set minimum SmallFile as: " + minimumSmallFile);
+        LOGGER.info("Set minimum SmallFile as: " + minimumSmallFile);
         test.log(LogStatus.INFO, "Set minimum FileSize as: " + minimumSmallFile);
 
 
         smallfilesPageObject.directoriestoShow.sendKeys(directoriesToShow);
-        logger.info("Set minimum SmallFile as: " + directoriesToShow);
+        LOGGER.info("Set minimum SmallFile as: " + directoriesToShow);
         test.log(LogStatus.INFO, "Set minimum FileSize as: " + directoriesToShow);
     }
+
     /**
      * Method to click on 'advancedOptions'
      */
@@ -111,4 +113,27 @@ public class Smallfiles {
         }
     }
 
+    /***
+     * verify common Panel data and smallFilesTab
+     * */
+    public void commonPanelTabValidation(ExtentTest test, Logger logger) {
+
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
+        waitExecuter.waitUntilElementPresent(topPanelComponentPageObject.data);
+        waitExecuter.sleep(2000);
+        MouseActions.clickOnElement(driver, topPanelComponentPageObject.data);
+        logger.info("Clicked on Data Tab");
+        test.log(LogStatus.INFO, "Clicked on Data Tab");
+
+        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
+        waitExecuter.waitUntilElementPresent(topPanelPageObject.smallFilesTab);
+        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilElementClickable(topPanelPageObject.smallFilesTab);
+        waitExecuter.sleep(3000);
+        MouseActions.clickOnElement(driver, topPanelPageObject.smallFilesTab);
+        logger.info("Clicked on small FilesTab Tab");
+        test.log(LogStatus.INFO, "Clicked on small FilesTab Tab");
+
+    }
 }

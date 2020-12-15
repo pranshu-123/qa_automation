@@ -1,4 +1,4 @@
-package com.qa.testcases.reports;
+package com.qa.testcases.reports.archived;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
@@ -19,7 +19,7 @@ public class TC_RRA01 extends BaseClass {
    * With default parameters, all the reports with latest report status should be displayed
    */
 
-  private static final Logger LOGGER = Logger.getLogger(com.qa.testcases.reports.TC_RRA01.class.getName());
+  private static final Logger LOGGER = Logger.getLogger(com.qa.testcases.reports.archived.TC_RRA01.class.getName());
 
   @Test(dataProvider = "clusterid-data-provider")
   public void TC_RRA01_verifyReportArchivePage(String clusterId) {

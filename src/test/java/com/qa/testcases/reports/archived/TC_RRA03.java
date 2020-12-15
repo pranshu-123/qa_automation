@@ -1,4 +1,4 @@
-package com.qa.testcases.reports;
+package com.qa.testcases.reports.archived;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
@@ -25,7 +25,7 @@ public class TC_RRA03 extends BaseClass {
    * between selected date range
    */
 
-  Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.TC_RRA03.class);
+  Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.archived.TC_RRA03.class);
 
   @Test(dataProvider = "clusterid-data-provider")
   public void TC_RRA03_verifyReportsForDiffDateRange(String clusterId) {

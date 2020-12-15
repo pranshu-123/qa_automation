@@ -44,6 +44,7 @@ public class TC_MP_SC_04 extends BaseClass {
                     "Services and Versions Compatibility completed successfully.");
             test.log(LogStatus.PASS, "Verified Services and Versions Compatibility report is loaded properly " +
                     "for Amazon EMR.");
+            servicesAndVersionsCompatibility.validateLatestReport();
         } catch (TimeoutException te) {
             throw new AssertionError("Services and Versions Compatibility Report not completed successfully" +
                     " for Amazon EMR.");

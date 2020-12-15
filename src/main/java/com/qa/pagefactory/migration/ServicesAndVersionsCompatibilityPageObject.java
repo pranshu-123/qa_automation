@@ -45,6 +45,9 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//span[@class='select2-results']/ul/li[contains(text(), 'No results found')]")
     public WebElement noCloudProductResult;
 
+    @FindBy(xpath = "//h3/b")
+    public List<WebElement> latestReportList;
+
     /**
      * @param driver The driver that will be used to look up the elements
      */

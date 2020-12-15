@@ -48,6 +48,9 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//h3/b")
     public List<WebElement> latestReportList;
 
+    @FindBy(xpath = "//div[@class='version-comp-inner']/div[2]/div/p[contains(@class, 'pd')]")
+    public List<WebElement> legendList;
+
     /**
      * @param driver The driver that will be used to look up the elements
      */

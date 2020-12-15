@@ -97,6 +97,64 @@ public class ServicesAndVersionsCompatibility {
 
         Assert.assertFalse(reportCreated.isEmpty(), "Report Created time not displayed");
         logger.info("Report Created time: [" + reportCreated + "] displayed in the header");
+
+        List<WebElement> legendsList = servicesAndVersionsCompatibilityPageObject.legendList;
+        Assert.assertFalse(legendsList.isEmpty(), "No Legends available in report generated.");
+
+        String legend1 = legendsList.get(0).getText().trim();
+        String legend2 = legendsList.get(1).getText().trim();
+        String legend3 = legendsList.get(2).getText().trim();
+        String legend4 = legendsList.get(3).getText().trim();
+
+        Assert.assertFalse(legend1.isEmpty(), "Legend1: 'Services and Versions are Compatible' not displayed");
+        Assert.assertEquals(legend1.trim(), "Services and Versions are Compatible" , "Legend1" +
+                " value mismatch");
+        logger.info("Legend1 name: [" + legend1 + "] displayed in the header");
+
+        System.out.print("Legend2: "+legend2.trim());
+        Assert.assertFalse(legend2.isEmpty(), "Legend2: 'Services and Versions are not Compatible' not displayed");
+        Assert.assertEquals(legend2.trim(), "Services and Versions are not Compatible" , "Legend2" +
+                " value mismatch");
+        logger.info("Legend2 name: [" + legend2 + "] displayed in the header");
+
+        System.out.print("Legend3: "+legend3.trim());
+        Assert.assertFalse(legend3.isEmpty(), "Legend3: 'Service is available in Source, but missing in Target'" +
+                " not displayed");
+        Assert.assertEquals(legend3.trim(), "Service is available in Source, but missing in Target" ,
+                "Legend3 value mismatch");
+        logger.info("Legend3 name: [" + legend3 + "] displayed in the header");
+
+        System.out.print("Legend4: "+legend4.trim());
+        Assert.assertFalse(legend4.isEmpty(), "Legend4: 'Service is missing in Source, but available in Target'" +
+                " not displayed");
+        Assert.assertEquals(legend4.trim(), "Service is missing in Source, but available in Target" ,
+                "Legend4 value mismatch");
+        logger.info("Legend4 name: [" + legend4 + "] displayed in the header");
+
+    }
+
+    //This method is for validating all the cloud product from drop down
+    public void getCloudProducts(){
+        MouseActions.clickOnElement(driver, servicesAndVersionsCompatibilityPageObject.cloudProductDropDown);
+        List<WebElement> cloudProductLists = servicesAndVersionsCompatibilityPageObject.cloudProductList;
+        Assert.assertFalse(cloudProductLists.isEmpty(), "Cloud Products not displayed");
+
+        String cloudGoogle = cloudProductLists.get(0).getText().trim();
+        String cloudAmazon = cloudProductLists.get(1).getText().trim();
+        String cloudAzure = cloudProductLists.get(2).getText().trim();
+
+        Assert.assertFalse(cloudGoogle.isEmpty(), "Google Cloud product not displayed");
+        Assert.assertEquals(cloudGoogle.trim(), "Google Dataproc", "Google Dataproc value mismatch");
+        logger.info("Google Cloud product Name: [" + cloudGoogle + "] displayed.");
+
+        Assert.assertFalse(cloudAmazon.isEmpty(), "Amazon Cloud Product not displayed");
+        Assert.assertEquals(cloudAmazon.trim(), "Amazon EMR", "Amazon EMR value mismatch");
+        logger.info("Amazon Cloud product: [" + cloudAmazon + "] displayed.");
+
+        Assert.assertFalse(cloudAzure.isEmpty(), "Azure Cloud Product not displayed");
+        Assert.assertEquals(cloudAzure.trim(), "Azure HDInsight", "Amazon EMR value mismatch");
+        logger.info("Azure Cloud product: [" + cloudAzure + "] displayed.");
+
     }
 
 }

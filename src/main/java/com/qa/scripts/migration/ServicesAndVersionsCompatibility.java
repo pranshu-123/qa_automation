@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -148,6 +149,19 @@ public class ServicesAndVersionsCompatibility {
         Assert.assertEquals(cloudAzure.trim(), "Azure HDInsight", "Amazon EMR value mismatch");
         logger.info("Azure Cloud product: [" + cloudAzure + "] displayed.");
 
+    }
+
+    public List<String> getPlatforms(){
+        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.reportTable);
+        waitExecuter.waitUntilPageFullyLoaded();
+        List <WebElement> platformsList = servicesAndVersionsCompatibilityPageObject.platformList;
+        Assert.assertFalse(platformsList.isEmpty(),"Platform are not present in reports.");
+        List<String> allPlatform = new ArrayList<>();
+        for(WebElement e: platformsList) {
+            allPlatform.add(e.getText().trim());
+        }
+        logger.info("All platforms : " + allPlatform + " displayed.");
+        return allPlatform;
     }
 
 }

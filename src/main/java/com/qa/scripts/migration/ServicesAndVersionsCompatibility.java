@@ -42,41 +42,34 @@ public class ServicesAndVersionsCompatibility {
         waitExecuter.waitUntilElementPresent(topPanelPageObject.migrationTab);
         waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.waitUntilElementClickable(topPanelPageObject.migrationTab);
-        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilPageFullyLoaded();
         MouseActions.clickOnElement(driver, topPanelPageObject.migrationTab);
         waitExecuter.waitUntilElementPresent(subTopPanelModulePageObject.servicesVersionMigrationTab);
-
     }
 
     public void clickOnServicesAndVersionMigrationTab(){
-        waitExecuter.sleep(2000);
         MouseActions.clickOnElement(driver, subTopPanelModulePageObject.servicesVersionMigrationTab);
     }
 
     public void closeMessageBanner(){
-        waitExecuter.sleep(2000);
         MouseActions.clickOnElement(driver, servicesAndVersionsCompatibilityPageObject.closeMsgBanner);
     }
 
     public void clickOnRunButton(){
-        waitExecuter.sleep(2000);
         MouseActions.clickOnElement(driver, servicesAndVersionsCompatibilityPageObject.runBtn);
     }
 
     public void clickOnRunNewButton(){
-        waitExecuter.sleep(2000);
         MouseActions.clickOnElement(driver, servicesAndVersionsCompatibilityPageObject.runNewBtn);
     }
 
     public void selectCloudProduct(String cloudProductName){
-        waitExecuter.sleep(2000);
         MouseActions.clickOnElement(driver, servicesAndVersionsCompatibilityPageObject.cloudProductDropDown);
         servicesAndVersionsCompatibilityPageObject.cloudProductSearchBox.sendKeys(cloudProductName);
         servicesAndVersionsCompatibilityPageObject.cloudProductSearchFirstField.click();
     }
 
     public void clickOnRunModalButton(){
-        waitExecuter.sleep(2000);
         MouseActions.clickOnElement(driver, servicesAndVersionsCompatibilityPageObject.runModalBtn);
     }
 

@@ -26,9 +26,6 @@ public class SubTopPanelModulePageObject {
     @FindBy(xpath = "//span[contains(@class,'icon-reports')]")
     public WebElement reports;
 
-    @FindBy(xpath = "//span[contains(@class,'icon-cloud')]")
-    public WebElement migration;
-
     @FindBy(xpath = "//span[contains(@class,'icon-alerts')]")
     public WebElement alerts;
 
@@ -49,6 +46,9 @@ public class SubTopPanelModulePageObject {
 
     @FindBy(id = "support-li")
     public WebElement supportList;
+
+    @FindBy(xpath = "//span[contains(@class, 'icon-cloud')]/parent::h4/following-sibling::ul/li/span[contains(text(), 'Services And Versions Compatibility')]")
+    public WebElement servicesVersionMigrationTab;
 
     /**
      * @param driver The driver that will be used to look up the elements

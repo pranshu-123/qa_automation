@@ -201,13 +201,15 @@ public class ServicesAndVersionsCompatibility {
                 String path = "//tbody/tr[" + row + 1 + "]/td[" + col + 2 + "]";
                 WebElement e = driver.findElement(By.xpath(path));
                 if (!e.getText().isEmpty()) {
-                    String dataName = e.getText().trim();
-                    String majorVersionCloud = getMajorVersion(dataName);
+                    String testClusterServiceName = e.getText().trim();
+                    String majorVersionCloud = getMajorVersion(testClusterServiceName);
 
-                    String serviceName = hdpServicesList.get(col);
-                    String majorVersionHDP = getMajorVersion(serviceName);
-                    Assert.assertTrue(majorVersionHDP.equals(majorVersionCloud), "Major version of test cluster" +
-                            "differs with major version of cloud platform.");
+                    String cloudClusterServiceName = hdpServicesList.get(col);
+                    String majorVersionHDP = getMajorVersion(cloudClusterServiceName);
+                    Assert.assertTrue(majorVersionHDP.equals(majorVersionCloud), "Major version of " +
+                            "test cluster service: "+testClusterServiceName +  "differs with major version of " +
+                            "cloud platform: "+ cloudClusterServiceName);
+                    //Now check for green
                 }
             }
         }

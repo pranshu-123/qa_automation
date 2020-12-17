@@ -57,6 +57,15 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//div[@class='ab']/div")
     public List<WebElement> platformList;
 
+    @FindBy(xpath = "(//thead/tr)[2]/th")
+    public List<WebElement> hdpHeaderList;
+
+    @FindBy(xpath = "//tbody/tr")
+    public List<WebElement> rowsList;
+
+    @FindBy(xpath = "//tbody/tr[1]/td")
+    public List<WebElement> colList;
+
 
     /**
      * @param driver The driver that will be used to look up the elements

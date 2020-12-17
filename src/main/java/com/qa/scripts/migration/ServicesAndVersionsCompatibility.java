@@ -5,6 +5,7 @@ import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.migration.ServicesAndVersionsCompatibilityPageObject;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -163,5 +164,54 @@ public class ServicesAndVersionsCompatibility {
         logger.info("All platforms : " + allPlatform + " displayed.");
         return allPlatform;
     }
+
+    public List<String> getHDPServicesList(){
+        List<WebElement> hdpHeaderList = servicesAndVersionsCompatibilityPageObject.hdpHeaderList;
+        Assert.assertFalse(hdpHeaderList.isEmpty(), "No table generated");
+        List<String> hdpServicesList = new ArrayList<>();
+        String onPremInfra = hdpHeaderList.get(0).getText();
+        System.out.println("Local Infra: "+onPremInfra);
+        for(int i=1; i<hdpHeaderList.size(); i++){
+            if(!hdpHeaderList.get(i).getText().isEmpty()){
+                hdpServicesList.add(hdpHeaderList.get(i).getText());
+            }
+        }
+        System.out.println("All localInfra services list are: "+hdpServicesList);
+        return hdpServicesList;
+    }
+
+    public String getMajorVersion(String name){
+        String[] arr = name.split(" ");
+        String[] arrVersion = arr[1].split("\\.");
+        return arrVersion[0];
+    }
+
+
+    public void verifyServicesAndVersionsAreCompatible() {
+        List<String> hdpServicesList = getHDPServicesList();
+        int totalHDPServicesCount = hdpServicesList.size();
+
+        List<WebElement> rowsList = servicesAndVersionsCompatibilityPageObject.rowsList;
+        Assert.assertFalse(rowsList.isEmpty(), "No Platform services data available");
+        List<WebElement> colsList = servicesAndVersionsCompatibilityPageObject.colList;
+        Assert.assertFalse(colsList.isEmpty(), "No Platform services data available");
+
+        for (int row = 0; row < rowsList.size(); row++) {
+            for (int col = 0; col < colsList.size(); col++) {
+                String path = "//tbody/tr[" + row + 1 + "]/td[" + col + 2 + "]";
+                WebElement e = driver.findElement(By.xpath(path));
+                if (!e.getText().isEmpty()) {
+                    String dataName = e.getText().trim();
+                    String majorVersionCloud = getMajorVersion(dataName);
+
+                    String serviceName = hdpServicesList.get(col);
+                    String majorVersionHDP = getMajorVersion(serviceName);
+                    Assert.assertTrue(majorVersionHDP.equals(majorVersionCloud), "Major version of test cluster" +
+                            "differs with major version of cloud platform.");
+                }
+            }
+        }
+    }
+
 
 }

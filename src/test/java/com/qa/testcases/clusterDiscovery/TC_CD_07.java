@@ -23,7 +23,7 @@ public class TC_CD_07 extends BaseClass {
     public void validateByUserInPie() {
         test = extent.startTest("TC_CD_07.validateByUserInPie",
                 "Verify that Unravel UI pie chart By user should contain user name");
-        test.assignCategory("Jobs - Cluster Discovery");
+        test.assignCategory("Migration - Cluster Discovery");
         test.log(LogStatus.INFO, "Login to the userlication");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

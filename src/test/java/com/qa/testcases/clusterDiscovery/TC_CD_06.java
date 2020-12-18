@@ -24,7 +24,7 @@ public class TC_CD_06 extends BaseClass {
     public void validateAppNamesInPie() {
         test = extent.startTest("TC_CD_06.validateAppNamesInPie",
                 "Verify that Unravel UI should not contain app names of impala, pig, cascading");
-        test.assignCategory("Jobs - Cluster Discovery");
+        test.assignCategory("Migration - Cluster Discovery");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

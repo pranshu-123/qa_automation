@@ -21,7 +21,7 @@ public class TC_CD_11 extends BaseClass {
     public void validateJSONDownload() {
         test = extent.startTest("TC_CD_11.validateJSONDownload",
                 "Verify that Unravel UI is able to download JSON in cluster discovery.");
-        test.assignCategory("Jobs - Cluster Discovery");
+        test.assignCategory("Migration - Cluster Discovery");
         test.log(LogStatus.INFO, "Login to the queuelication");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

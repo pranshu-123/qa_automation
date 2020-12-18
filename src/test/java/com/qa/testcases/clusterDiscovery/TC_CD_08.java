@@ -23,7 +23,7 @@ public class TC_CD_08 extends BaseClass {
     public void validateByqueueInPie() {
         test = extent.startTest("TC_CD_08.validateByqueueInPie",
                 "Verify that Unravel UI pie chart By queue should contain queue name");
-        test.assignCategory("Jobs - Cluster Discovery");
+        test.assignCategory("Migration - Cluster Discovery");
         test.log(LogStatus.INFO, "Login to the queuelication");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

@@ -25,7 +25,7 @@ public class TC_CD_02 extends BaseClass {
         test = extent.startTest("TC_QU_02.validateReportWithDatePickerOptions",
                 "Verify that Unravel UI should generate a Cluster Discovery report successfully "
                         + "for all date picker option.");
-        test.assignCategory("Jobs - Cluster Discovery");
+        test.assignCategory("Migration - Cluster Discovery");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

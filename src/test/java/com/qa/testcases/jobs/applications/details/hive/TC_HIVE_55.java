@@ -17,7 +17,6 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
-@Marker.Only
 @Marker.AppDetailsHive
 @Marker.All
 public class TC_HIVE_55 extends BaseClass {

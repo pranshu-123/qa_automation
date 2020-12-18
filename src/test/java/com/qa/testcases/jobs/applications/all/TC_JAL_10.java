@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  * @author - Ojasvi Pandey
  */
 
-@Marker.Only
+
 @Marker.AllApps
 @Marker.All
 public class TC_JAL_10 extends BaseClass {
@@ -40,7 +40,7 @@ public class TC_JAL_10 extends BaseClass {
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         UserActions userAction = new UserActions(driver);
         AllApps allApps = new AllApps(driver);
-        
+
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         test.log(LogStatus.INFO, "Select last 7 days");

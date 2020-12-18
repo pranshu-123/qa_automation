@@ -20,7 +20,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
-@Marker.Only
 @Marker.AppDetailsHive
 @Marker.All
 public class TC_HIVE_60 extends BaseClass {

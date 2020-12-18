@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+@Marker.Only
 @Marker.AppDetailsHive
 @Marker.All
 public class TC_HIVE_51 extends BaseClass {
@@ -67,8 +68,9 @@ public class TC_HIVE_51 extends BaseClass {
                 .replaceAll("[^\\dA-Za-z ]", "").trim());
         List<Integer> list = new ArrayList<>();
         if (appCount > 0) {
+            sort:
             for (int i = 0; i < 2; i++) {
-                //Sort by parent app
+                // Sort by parent app
                 test.log(LogStatus.INFO, "Sort by parent app");
                 LOGGER.info("Sort by parent app");
                 applicationsPageObject.sortByParentApp.click();
@@ -76,24 +78,31 @@ public class TC_HIVE_51 extends BaseClass {
                 list.add(applicationsPageObject.checkHiveInParentApp.size());
                 LOGGER.info("Size of hive apps: " + applicationsPageObject.checkHiveInParentApp.size());
                 waitExecuter.sleep(1000);
+
+                for (int value : list) {
+                    // Assert that hive tag is present in parent app
+                    test.log(LogStatus.INFO, "Assert that hive tag is present in parent app");
+                    LOGGER.info("Assert that hive tag is present in parent app");
+                    if (value > 0) {
+                        Assert.assertTrue(value > 0, "There is no Hive as Parent App in MR jobs");
+                        test.log(LogStatus.PASS, "Hive is present as Parent App in MR jobs");
+                        break sort;
+                    } else
+                        test.log(LogStatus.SKIP, "There is no Hive as Parent App in MR jobs");
+
+                }
             }
-            for (int value : list) {
-                //Assert that hive tag is present in parent app
-                test.log(LogStatus.INFO, "Assert that hive tag is present in parent app");
-                LOGGER.info("Assert that hive tag is present in parent app");
-                Assert.assertTrue(value > 0, "There is no Hive as Parent App in MR jobs");
-                //Click on reset
-                test.log(LogStatus.INFO, "Click on reset");
-                LOGGER.info("Click on reset");
-                allApps.reset();
-            }
+            // Click on reset
+            test.log(LogStatus.INFO, "Click on reset");
+            LOGGER.info("Click on reset");
+            allApps.reset();
         } else {
             Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
                     "The clusterId does not have any application under it and also does not display 'No Data Available' for it"
                             + clusterId);
             test.log(LogStatus.SKIP, "The clusterId does not have any application under it.");
             waitExecuter.sleep(1000);
-            //Click on reset if there are no hive apps
+            // Click on reset if there are no hive apps
             test.log(LogStatus.INFO, "Click on reset if there are no hive apps");
             LOGGER.info("Click on reset if there are no hive apps");
             allApps.reset();

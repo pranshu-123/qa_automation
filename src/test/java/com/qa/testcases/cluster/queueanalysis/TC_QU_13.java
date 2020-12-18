@@ -1,7 +1,6 @@
 package com.qa.testcases.cluster.queueanalysis;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -15,6 +14,7 @@ import com.qa.scripts.clusters.QueueAnalysis;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 
+@Marker.Only
 @Marker.QueueAnalysis
 @Marker.All
 public class TC_QU_13 extends BaseClass {
@@ -52,9 +52,10 @@ public class TC_QU_13 extends BaseClass {
 		LOGGER.info("Expected list of graphs- "+expectedListOfGraph);
 		test.log(LogStatus.PASS, "Expected list of graphs- "+expectedListOfGraph);
 		qaPageObject.getQueueNameFromTable.get(0).click();
-		waitExecuter.sleep(5000);
-        for (int i = 0; i < qaPageObject.getQueueNameFromTable.size() ;i++) {       		
-        		graphNamesOFQueue.add((qaPageObject.queueGraph.get(i).getAttribute("id").toString().trim().toLowerCase()));       		
+		waitExecuter.waitUntilElementPresent(qaPageObject.loading);
+        for (int i = 0; i < 3 ;i++) {       		
+        		graphNamesOFQueue.add((qaPageObject.queueGraph.get(i).getAttribute("id").toString().trim().toLowerCase()));
+        		waitExecuter.sleep(1000);
         	}
         LOGGER.info("Graphs loaded for selected queue for- "+graphNamesOFQueue);
         test.log(LogStatus.PASS, "Graphs loaded for selected queue for- "+graphNamesOFQueue);

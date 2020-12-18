@@ -15,14 +15,11 @@ import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
 
-import java.awt.*;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+@Marker.Only
 @Marker.AppDetailsHive
 @Marker.All
 public class TC_HIVE_63 extends BaseClass {
@@ -85,23 +82,13 @@ public class TC_HIVE_63 extends BaseClass {
             actions.moveToElement(applicationsPageObject.copyAppName).perform();
             waitExecuter.sleep(1000);
             applicationsPageObject.copyAppName.click();
-            String appId = null;
-            try {
-                String data = (String) Toolkit.getDefaultToolkit().getSystemClipboard()
-                        .getData(DataFlavor.stringFlavor);
-                String[] getCopiedText = data.split(":");
-                // Click on first app in table to navigate to app details page
-                test.log(LogStatus.INFO, "Click on first app in table to navigate to app details page");
-                LOGGER.info("Click on first app in table to navigate to app details page");
-                applicationsPageObject.getStatusFromTable.click();
-                waitExecuter.waitUntilElementPresent(applicationsPageObject.loader);
-                appId = getCopiedText[2];
-            } catch (HeadlessException | UnsupportedFlavorException | IOException e) {
-                driver.navigate().back();
-                waitExecuter.sleep(5000);
-                allApps.reset();
-                e.printStackTrace();
-            }
+
+            // Click on first app in table to navigate to app details page
+            test.log(LogStatus.INFO, "Click on first app in table to navigate to app details page");
+            LOGGER.info("Click on first app in table to navigate to app details page");
+            applicationsPageObject.getStatusFromTable.click();
+            waitExecuter.waitUntilElementPresent(applicationsPageObject.loader);
+
             // Assert that Owner, Queue and Cluster is displayed
             test.log(LogStatus.INFO, "Assert that all tabs are clickable");
             LOGGER.info("Assert that all tabs are clickable");
@@ -112,7 +99,7 @@ public class TC_HIVE_63 extends BaseClass {
                 //waitExecuter.waitUntilElementPresent(applicationsPageObject.loader);
                 waitExecuter.sleep(3000);
             }
-            Assert.assertNotNull(tabsName, "Tabs are not present for hive apps " + appId);
+            Assert.assertNotNull(tabsName, "Tabs are not present for hive apps. ");
             test.log(LogStatus.PASS, "All tabs expected for hive apps loaded successfully");
             waitExecuter.sleep(1000);
             // Navigate back to parent page and click on reset
@@ -121,7 +108,6 @@ public class TC_HIVE_63 extends BaseClass {
             driver.navigate().back();
             waitExecuter.sleep(5000);
             allApps.reset();
-            driver.navigate().refresh();
         } else {
             Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
                     "The clusterId does not have any application under it and also does not display 'No Data Available' for it"

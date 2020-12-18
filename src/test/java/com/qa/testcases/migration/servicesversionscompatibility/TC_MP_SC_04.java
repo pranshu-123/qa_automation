@@ -23,7 +23,7 @@ public class TC_MP_SC_04 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void validateServicesAndCompatibilityReportForAmazonEMR(String clusterId) {
 
-        test = extent.startTest("validateServicesAndCompatibilityReportForAmazonEMR: " + clusterId,
+        test = extent.startTest("TC_MP_SC_04.validateServicesAndCompatibilityReportForAmazonEMR: " + clusterId,
                 "Verify User can run a report for 'Amazon EMR' ");
         test.assignCategory(" Migration - Services And Versions Compatibility ");
 

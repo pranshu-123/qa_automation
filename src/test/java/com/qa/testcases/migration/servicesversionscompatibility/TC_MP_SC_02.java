@@ -18,7 +18,7 @@ public class TC_MP_SC_02 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void validateServicesAndCompatibilityReportForAzureHDI(String clusterId) {
 
-        test = extent.startTest("validateServicesAndCompatibilityReportForAzureHDI: " + clusterId,
+        test = extent.startTest("TC_MP_SC_02.validateServicesAndCompatibilityReportForAzureHDI: " + clusterId,
                 "Access to all supported cloud providers ");
         test.assignCategory(" Migration - Services And Versions Compatibility ");
 

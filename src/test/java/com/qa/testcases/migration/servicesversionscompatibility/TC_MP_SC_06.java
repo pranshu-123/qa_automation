@@ -23,7 +23,7 @@ public class TC_MP_SC_06 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void validateServicesAndVersionsAreCompatibleForGoogle(String clusterId) {
 
-        test = extent.startTest("validateServicesAndVersionsAreCompatibleForGoogle: " + clusterId,
+        test = extent.startTest("TC_MP_SC_06.validateServicesAndVersionsAreCompatibleForGoogle: " + clusterId,
                 "Services and Versions are Compatible - Google DataProc ");
         test.assignCategory(" Migration - Services And Versions Compatibility ");
 

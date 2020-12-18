@@ -48,7 +48,7 @@ public class CloudMigrationPerHostPage {
   }
 
   /**
-   * Method to validate the search option on the Report Archive Page
+   * Method to enter text in search option field
    */
   public void getSearchOptValue(String vmType) {
     cmpPageObj.searchField.sendKeys(vmType);
@@ -96,7 +96,8 @@ public class CloudMigrationPerHostPage {
   public void runNewReport() {
     try {
       userAction.performActionWithPolling(cmpPageObj.runButton, UserAction.CLICK);
-      waitExecuter.waitUntilElementPresent(cmpPageObj.checkBox);
+      List<WebElement> cloudProDD = cmpPageObj.cloudProductDropDown;
+      waitExecuter.waitUntilElementClickable(cloudProDD.get(0));
     } catch (TimeoutException ex) {
       throw new AssertionError("New Report Page loading timedout");
     }
@@ -143,9 +144,10 @@ public class CloudMigrationPerHostPage {
         logger.info("The vm list lenght is " + emrVMList.size());
         for (WebElement webElement : emrVMList) {
           String val = webElement.getText();
-          if (!Character.isUpperCase(val.charAt(0)))
+          if (!Character.isUpperCase(val.charAt(0))) {
             logger.info("The vm type is " + val);
-          vmList.add(val);
+            vmList.add(val);
+          }
         }
       }
     }
@@ -196,52 +198,69 @@ public class CloudMigrationPerHostPage {
 
   /**
    * Method to get the page count when pagination is enabled
-   * :param part: integer value in 1 or 2 , to get the first or second part after split()
+   * :param part: integer value in 0 or 1 , to get the first or second part after split()
    */
   public int getPageCnt(int part) {
-    String pageCntStr = cmpPageObj.paginationCnt.getText().trim();
+    String pageCntStr = cmpPageObj.paginationCnt.getText();
     logger.info("The pageCnt is " + pageCntStr);
     //output= 1   of 173
     int pageCnt = Integer.parseInt(pageCntStr.split("\\s+")[part]);
     logger.info("The integer page count is " + pageCnt);
     return pageCnt;
   }
-
-  public void selectOptions(List<WebElement> dropDownList, String expectedVal) {
-    for (WebElement webElement : dropDownList) {
-      if (webElement.getText().equals(expectedVal)) {
-        MouseActions.clickOnElement(driver, webElement);
-      }
-    }
-  }
+//
+//  public void selectOptions(List<WebElement> dropDownList, String expectedVal) {
+//    for (WebElement webElement : dropDownList) {
+//      if (webElement.getText().equals(expectedVal)) {
+//        MouseActions.clickOnElement(driver, webElement);
+//      }
+//    }
+//  }
 
   public void verifyEMRVMTypes(String region, String cloudProvider) {
     String currentUrl = driver.getCurrentUrl();
     logger.info("The current url is " + currentUrl);
     ArrayList<String> expectedVMList;
+    runNewReport();
+    List<WebElement> cloudProDD = cmpPageObj.cloudProductDropDown;
+    MouseActions.clickOnElement(driver, cloudProDD.get(0));
+//    List<WebElement> dropDownList = cmpPageObj.dropDownValues;
+//    waitExecuter.waitUntilPageFullyLoaded();
+    getOptions(cloudProvider);
+    WebElement regionDropDown = cmpPageObj.regionDropDown;
+    MouseActions.clickOnElement(driver, regionDropDown);
+//    List<WebElement> regionDropDownList = cmpPageObj.regionsList;
+//    waitExecuter.waitUntilPageFullyLoaded();
+//    selectOptions(regionDropDownList, region);
+    getOptions(region);
+    waitExecuter.waitUntilPageFullyLoaded();
+    ArrayList<String> UI_VMList;
+    //Get UI vm list
+    UI_VMList = getUIVMList(region, cloudProvider);
+    MouseActions.clickOnElement(driver, cmpPageObj.closeNewReportWin);
+    //Get CloudProvider vm list
     expectedVMList = getCloudProviderVMList(region, cloudProvider);
     driver.navigate().to(currentUrl);
     waitExecuter.waitUntilPageFullyLoaded();
-    runNewReport();
-    WebElement cloudDropDown = cmpPageObj.cloudProductDropDown;
-    MouseActions.clickOnElement(driver, cloudDropDown);
-    List<WebElement> dropDownList = cmpPageObj.dropDownValues;
-    selectOptions(dropDownList, cloudProvider);
-    WebElement regionDropDown = cmpPageObj.regionDropDown;
-    MouseActions.clickOnElement(driver, regionDropDown);
-    List<WebElement> regionDropDownList = cmpPageObj.regionsList;
-    selectOptions(regionDropDownList, region);
-    waitExecuter.waitUntilPageFullyLoaded();
-    validateVMTypes(expectedVMList, cloudProvider, region);
+    logger.info("The expected vmTypeList is : " + expectedVMList);
+    logger.info("The Actual vmTypeList is : " + UI_VMList);
+    //Validate
+    for (String UI_vmType : UI_VMList) {
+      Assert.assertTrue(expectedVMList.contains(UI_vmType), "VM " + UI_vmType + " displayed in the UI is not" +
+          " present in the expected list of vms");
+    }
+    //remove all elements from expected list
+    expectedVMList.removeAll(UI_VMList);
+    logger.info("The missing vmTypes are " + expectedVMList);
   }
 
-  public void validateVMTypes(ArrayList<String> expectedVMList, String cloudProvider, String region) {
+  public ArrayList<String> getUIVMList(String region, String cloudProvider) {
     ArrayList<String> UI_VMList = new ArrayList<>();
-    int pageCnt = getPageCnt(2);
+    int pageCnt = getPageCnt(1);
     logger.info("PageCnt is " + pageCnt);
     if (pageCnt > 1) {
       for (int i = 0; i < pageCnt; i++) {
-        int incrementalPgCnt = getPageCnt(1);
+        int incrementalPgCnt = getPageCnt(0);
         List<WebElement> vmTypeList = cmpPageObj.vmTypeTableRows;
         Assert.assertFalse(vmTypeList.isEmpty(), " No vms listed in the table for " + cloudProvider +
             " in region " + region);
@@ -263,15 +282,6 @@ public class CloudMigrationPerHostPage {
         UI_VMList.add(vmType);
       }
     }
-    MouseActions.clickOnElement(driver, cmpPageObj.closeNewReportWin);
-    logger.info("The expected vmTypeList is : " + expectedVMList);
-    logger.info("The Actual vmTypeList is : " + UI_VMList);
-    for (String UI_vmType : UI_VMList) {
-      Assert.assertTrue(expectedVMList.contains(UI_vmType), "VM " + UI_vmType + " displayed in the UI is not" +
-          " present in the expected list of vms");
-    }
-    //remove all elements from expected list
-    expectedVMList.removeAll(UI_VMList);
-    logger.info("The missing vmTypes are " + expectedVMList);
+    return UI_VMList;
   }
 }

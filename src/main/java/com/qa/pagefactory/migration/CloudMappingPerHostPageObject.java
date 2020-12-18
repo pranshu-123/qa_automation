@@ -26,8 +26,8 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//span[@class='select2-selection__arrow']")
   public List<WebElement> dropDownBtn;
 
-  @FindBy(xpath = "//div[@data-select2-id='44']//span[contains(@class,'select2-selection__arrow')]")
-  public WebElement cloudProductDropDown;
+  @FindBy(xpath = "//div[@class='col-md-4']//span[contains(@class,'select2-selection__arrow')]")
+  public List<WebElement> cloudProductDropDown;
 
   @FindBy(xpath = "//div[contains(@class,'col-md-4 boot-icons')]//span[contains(@class,'select2-selection__arrow')]")
   public WebElement regionDropDown;
@@ -50,7 +50,7 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//div[@class='table-container']//tbody/tr/td[1]")
   public List<WebElement> vmTypeTableRows;
 
-  @FindBy(xpath = "//div[@class='table-container']//nav/p[@class='pointer']//input")
+  @FindBy(xpath = "//div[@class='table-container']//nav/p[@class='pointer']")
   public WebElement paginationCnt;
 
   @FindBy(xpath = "//div[@class='table-container']//a[@class='disabled']//*[name()='svg' and @data-icon='caret-right']")

@@ -50,6 +50,9 @@ public class SubTopPanelModulePageObject {
     @FindBy(xpath = "//span[contains(@class, 'icon-cloud')]/parent::h4/following-sibling::ul/li/span[contains(text(), 'Services And Versions Compatibility')]")
     public WebElement servicesVersionMigrationTab;
 
+    @FindBy (xpath = "//li[contains(@class,'active')]//ul[@class='sub-menu']//span[text()='Cluster Discovery']")
+    public WebElement clusterDiscoveryTab;
+
     /**
      * @param driver The driver that will be used to look up the elements
      */

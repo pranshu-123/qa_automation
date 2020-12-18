@@ -1002,7 +1002,7 @@ public class TezAppsDetailsPage {
      * Get Job count of selected App click on it and go to apps details page
      * Verify specific summary tabs.
      * */
-    public void commonTabValidation(ExtentTest test, String clusterId, String tabName, Logger logger) {
+    public void commonTabValidation(ExtentTest test, String clusterId, String tabName, Logger logger,Boolean isFailedApp) {
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
 
@@ -1023,20 +1023,29 @@ public class TezAppsDetailsPage {
         test.log(LogStatus.INFO, "Verify that the left pane has Tez check box and the apps number");
         logger.info("Select individual app and assert that table contain its data");
 
-        tezDetailsPage.clickOnlyLink("Tez");
-        applicationsPageObject.expandStatus.click();
-        int appCount = tezDetailsPage.clickOnlyLink("Success");
-        //Clicking on the Tez app must go to apps detail page
-        if (appCount > 0) {
-            String headerAppId = tezDetailsPage.verifyAppId(tezApps, applicationsPageObject);
-            test.log(LogStatus.PASS, "Tez Application Id is displayed in the Header: " + headerAppId);
-            tezDetailsPage.verifyAppSummaryTabs(tezApps, tabName, test);
-            //Close apps details page
-            MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
-            waitExecuter.sleep(3000);
+        int totalTezAppCnt=tezDetailsPage.clickOnlyLink("Tez");
+        if (totalTezAppCnt > 0) {
+            applicationsPageObject.expandStatus.click();
+            int appCount = 0;
+            if (isFailedApp)
+                appCount = tezDetailsPage.clickOnlyLink("Failed");
+            else
+                appCount = tezDetailsPage.clickOnlyLink("Success");
+            //Clicking on the Spark app must go to apps detail page
+            if (appCount > 0) {
+                String headerAppId = tezDetailsPage.verifyAppId(tezApps, applicationsPageObject);
+                test.log(LogStatus.PASS, "Tez Application Id is displayed in the Header: " + headerAppId);
+                tezDetailsPage.verifyAppSummaryTabs(tezApps, tabName, test);
+                //Close apps details page
+                MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
+            } else {
+                test.log(LogStatus.SKIP, "No Tez Application present");
+                logger.info("No Tez Application present in the " + clusterId + " cluster for the time span " +
+                        "of 90 days");
+            }
         } else {
             test.log(LogStatus.SKIP, "No Tez Application present");
-            logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +
+            logger.info("No Tez Application present in the " + clusterId + " cluster for the time span " +
                     "of 90 days");
         }
     }

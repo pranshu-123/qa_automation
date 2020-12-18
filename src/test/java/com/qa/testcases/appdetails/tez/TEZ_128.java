@@ -24,7 +24,7 @@ public class TEZ_128 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         TezAppsDetailsPage tezDetailsPage = new TezAppsDetailsPage(driver);
 
-        tezDetailsPage.commonTabValidation(test, clusterId, "Analysis", logger);
+        tezDetailsPage.commonTabValidation(test, clusterId, "Analysis", logger,false);
         waitExecuter.sleep(2000);
         test.log(LogStatus.PASS, "Verified the Analysis tab successfully");
         }

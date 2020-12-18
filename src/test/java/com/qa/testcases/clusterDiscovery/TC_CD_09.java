@@ -60,7 +60,8 @@ public class TC_CD_09 extends BaseClass {
         try {
             waitExecuter.waitUntilTextToBeInWebElement(cdPageObject.fatalMessage,
                     "Please Make Sure Date Range More than 2 Days");
-            test.log(LogStatus.PASS, "Verified Cluster Discovery report is loaded properly.");
+            test.log(LogStatus.PASS, "Verified Cluster Discovery report throws error " +
+                    "when report is generated for less than 2 days.");
         } catch (TimeoutException te) {
             throw new AssertionError("Cluster Discovery Report not completed successfully.");
         }

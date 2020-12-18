@@ -23,7 +23,8 @@ public class TC_CD_03 extends BaseClass {
 
     @Test
     public void validateAppTypesCount() {
-        test = extent.startTest("TC_CD_03.validateAppTypesCount", "Verify that Cluster Discovery app count");
+        test = extent.startTest("TC_CD_03.validateAppTypesCount", "Verify Cluster " +
+                "Discovery app count from pie chart");
         test.assignCategory("Migration - Cluster Discovery");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
@@ -66,6 +67,7 @@ public class TC_CD_03 extends BaseClass {
 
         try {
             // Get By App type count from pie chart
+            waitExecuter.sleep(1000);
             waitExecuter.waitUntilElementPresent(cdPageObject.getByAppTypePieCount);
             int totalApps = Integer.parseInt(cdPageObject.getByAppTypePieCount.getText());
             LOGGER.info("Total apps in cluster discovery pie chart- " + totalApps);

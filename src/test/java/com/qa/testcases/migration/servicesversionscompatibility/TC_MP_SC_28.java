@@ -1,6 +1,5 @@
 package com.qa.testcases.migration.servicesversionscompatibility;
 
-import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
@@ -13,19 +12,17 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
-@Marker.All
-@Marker.MigrationServices
-public class TC_MP_SC_26 extends BaseClass {
+public class TC_MP_SC_28 extends BaseClass {
 
-    private static final Logger logger = Logger.getLogger(TC_MP_SC_26.class.getName());
+    private static final Logger logger = Logger.getLogger(TC_MP_SC_28.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateReportsArchivedForServicesAndVersions(String clusterId) {
+    public void validateReportsArchivedDelete(String clusterId) {
 
-        test = extent.startTest("TC_MP_SC_26.validateReportsArchivedForServicesAndVersions: " + clusterId,
-                "Reports Archived : Services and Versions are Compatible ");
+        test = extent.startTest("TC_MP_SC_28.validateReportsArchivedDelete: " + clusterId,
+                "Reports Archived Validate the Delete action: Services and Versions are Compatible ");
         test.assignCategory(" Migration - Services And Versions Compatibility ");
-        Log.startTestCase("TC_MP_SC_26.validateReportsArchivedForServicesAndVersions");
+        Log.startTestCase("TC_MP_SC_28.validateReportsArchivedDelete");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -40,10 +37,9 @@ public class TC_MP_SC_26 extends BaseClass {
         MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
         waitExecuter.waitUntilPageFullyLoaded();
         String reportName = "Services and Versions Compatibility";
-        servicesAndVersionsCompatibility.verifyReportsArchived(reportPageObj, reportName, "checkReport");
-        logger.info("Clicked on Services and Versions Compatibility counts");
-        test.log(LogStatus.PASS, "Verified Reports Archived for Services and Versions are Compatible");
+        servicesAndVersionsCompatibility.verifyReportsArchived(reportPageObj, reportName, "deleteReport");
+        logger.info("Clicked on Services and Versions Compatibility counts and delete.");
+        test.log(LogStatus.PASS, "Verified Reports Archived for Services and Versions is deletable.");
 
     }
-
 }

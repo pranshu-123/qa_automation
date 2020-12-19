@@ -6,6 +6,7 @@ import com.qa.pagefactory.migration.ServicesAndVersionsCompatibilityPageObject;
 import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -266,9 +267,29 @@ public class ServicesAndVersionsCompatibility {
                                 " No downloaded successfully message received.");
                         break;
                     case "deleteReport":
-
+                        MouseActions.clickOnElement(driver, reportCntList.get(i));
+                        waitExecuter.sleep(1000);
+                        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.archiveReportSVCHeader);
+                        MouseActions.clickOnElement(driver, reportPageObj.deleteReportIcon);
+                        waitExecuter.sleep(1000);
+                        Alert confirmationAlert = driver.switchTo().alert();
+                        String alertText = confirmationAlert.getText();
+                        logger.info("Alert text is " + alertText);
+                        confirmationAlert.accept();
+                        waitExecuter.sleep(3000);
+                        Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Removed successfully",
+                                " Report not removed");
+                        break;
                     case "viewReport":
-
+                        MouseActions.clickOnElement(driver, reportCntList.get(i));
+                        waitExecuter.sleep(1000);
+                        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.archiveReportSVCHeader);
+                        MouseActions.clickOnElement(driver, reportPageObj.viewReportIcon);
+                        waitExecuter.sleep(1000);
+                        Assert.assertTrue(reportPageObj.viewReportDialogWin.isDisplayed(), "Report  view not present.");
+                        MouseActions.clickOnElement(driver, reportPageObj.closeTab);
+                        waitExecuter.sleep(1000);
+                        break;
                 }
                 break;
             }

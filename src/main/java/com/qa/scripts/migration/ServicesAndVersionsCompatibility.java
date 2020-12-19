@@ -237,7 +237,7 @@ public class ServicesAndVersionsCompatibility {
         }
     }
 
-    public void verifyReportsArchived(ReportsArchiveScheduledPageObject reportPageObj, String name) {
+    public void verifyReportsArchived(ReportsArchiveScheduledPageObject reportPageObj, String name, String reportAction) {
         List<WebElement> reportNameList = reportPageObj.reportNames;
         List<WebElement> reportCntList = reportPageObj.reportCnt;
         Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed.");
@@ -248,11 +248,28 @@ public class ServicesAndVersionsCompatibility {
             String reportName = reportNameList.get(i).getText().trim();
             logger.info("The report name is " + reportName);
             if(reportName.equals(name) && reportCnt > 0){
-                MouseActions.clickOnElement(driver, reportCntList.get(i));
-                waitExecuter.sleep(1000);
-                waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.archiveReportSVCHeader);
-                List<WebElement> reportTblRows = reportPageObj.tableRows;
-                Assert.assertFalse(reportTblRows.isEmpty(), "No reports archived.");
+                switch (reportAction) {
+                    case "checkReport":
+                        MouseActions.clickOnElement(driver, reportCntList.get(i));
+                        waitExecuter.sleep(1000);
+                        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.archiveReportSVCHeader);
+                        List<WebElement> reportTblRows = reportPageObj.tableRows;
+                        Assert.assertFalse(reportTblRows.isEmpty(), "No reports archived.");
+                        break;
+                    case "downloadReport":
+                        MouseActions.clickOnElement(driver, reportCntList.get(i));
+                        waitExecuter.sleep(1000);
+                        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.archiveReportSVCHeader);
+                        MouseActions.clickOnElement(driver, reportPageObj.downloadReportIcon);
+                        waitExecuter.sleep(1000);
+                        Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Downloaded successfully",
+                                " No downloaded successfully message received.");
+                        break;
+                    case "deleteReport":
+
+                    case "viewReport":
+
+                }
                 break;
             }
         }

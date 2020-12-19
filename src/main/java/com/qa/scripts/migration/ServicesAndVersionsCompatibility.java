@@ -238,6 +238,9 @@ public class ServicesAndVersionsCompatibility {
         }
     }
 
+    /**
+     * Method to validate report, download, delete, view report from actions tab
+     */
     public void verifyReportsArchived(ReportsArchiveScheduledPageObject reportPageObj, String name, String reportAction) {
         List<WebElement> reportNameList = reportPageObj.reportNames;
         List<WebElement> reportCntList = reportPageObj.reportCnt;

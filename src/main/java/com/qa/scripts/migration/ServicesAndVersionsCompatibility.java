@@ -207,7 +207,7 @@ public class ServicesAndVersionsCompatibility {
         for (int col = 0; col < totalHDPServicesCount-1; col++) {
             for (int row = 0; row < rowsList.size(); row++) {
                 String path = "//tbody/tr[" + (row + 1) + "]/td[" + (col + 2) + "]";
-          //      System.out.println(path);
+                //System.out.println(path);
                 WebElement e = driver.findElement(By.xpath(path));
                 if (!e.getText().isEmpty()) {
                     String cloudClusterServiceName = e.getText().trim();
@@ -219,7 +219,7 @@ public class ServicesAndVersionsCompatibility {
                     if(majorVersionHDP.equals(majorVersionCloud)){
                         //Now check for green //risk-0
                         String classAttributeName = e.getAttribute("class");
-            //            System.out.println("Element class attribute name: "+classAttributeName);
+                        //System.out.println("Element class attribute name: "+classAttributeName);
                         Assert.assertTrue(classAttributeName.equals("risk-0"),"Platforms service in the box is not" +
                                 " marked in Green ");
 
@@ -292,6 +292,39 @@ public class ServicesAndVersionsCompatibility {
                         Assert.assertTrue(reportPageObj.viewReportDialogWin.isDisplayed(), "Report  view not present.");
                         MouseActions.clickOnElement(driver, reportPageObj.closeTab);
                         waitExecuter.sleep(1000);
+                        break;
+                    case "searchReportByDate":
+                        MouseActions.clickOnElement(driver, reportCntList.get(i));
+                        waitExecuter.sleep(1000);
+                        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.archiveReportSVCHeader);
+                        reportPageObj.reportSearchBox.sendKeys("12/18/2020 21:18:03");
+                        waitExecuter.sleep(1000);
+                        List<WebElement> searchDateReportNameList = reportPageObj.reportNames;
+                        Assert.assertFalse(searchDateReportNameList.isEmpty(), "There are no reports listed");
+                        Assert.assertEquals(searchDateReportNameList.size(), 1, "Expected the search result to output 1 records " +
+                                ",but actual is " + searchDateReportNameList.size());
+                        break;
+                    case "searchReportByStatus":
+                        MouseActions.clickOnElement(driver, reportCntList.get(i));
+                        waitExecuter.sleep(1000);
+                        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.archiveReportSVCHeader);
+                        reportPageObj.reportSearchBox.sendKeys("fail");
+                        waitExecuter.sleep(1000);
+                        List<WebElement> searchStatusReportNameList = reportPageObj.reportNames;
+                        Assert.assertFalse(searchStatusReportNameList.isEmpty(), "There are no reports listed");
+                        Assert.assertEquals(searchStatusReportNameList.size(), 6, "Expected the search result to output 6 records " +
+                                ",but actual is " + searchStatusReportNameList.size());
+                        break;
+                    case "searchReportByName":
+                        MouseActions.clickOnElement(driver, reportCntList.get(i));
+                        waitExecuter.sleep(1000);
+                        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.archiveReportSVCHeader);
+                        reportPageObj.reportSearchBox.sendKeys("Services and Versions Compatibility-140297191996775");
+                        waitExecuter.sleep(1000);
+                        List<WebElement> searchNameReportNameList = reportPageObj.reportNames;
+                        Assert.assertFalse(searchNameReportNameList.isEmpty(), "There are no reports listed");
+                        Assert.assertEquals(searchNameReportNameList.size(), 1, "Expected the search result to output 1 records " +
+                                ",but actual is " + searchNameReportNameList.size());
                         break;
                 }
                 break;

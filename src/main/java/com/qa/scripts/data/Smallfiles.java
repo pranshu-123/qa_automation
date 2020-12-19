@@ -70,11 +70,14 @@ public class Smallfiles {
 
 
     public void clickonminParent(String FileSize) {
+        smallfilesPageObject.maxParentDirectory.clear();
         smallfilesPageObject.onminParentDirectory.sendKeys(FileSize);
     }
 
     public void clickonmaxParent(String FileSize) {
+        smallfilesPageObject.maxParentDirectory.clear();
         smallfilesPageObject.maxParentDirectory.sendKeys(FileSize);
+        waitExecuter.sleep(2000);
     }
 
     /**

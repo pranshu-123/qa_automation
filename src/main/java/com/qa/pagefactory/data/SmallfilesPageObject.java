@@ -91,10 +91,10 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "(//input[contains(@type,'text')])[5]")
     public WebElement directoriestoShow;
 
-    @FindBy(xpath = "(//input[contains(@type,'text')])[5]")
+    @FindBy(xpath = "//input[@num_files_threshold]")
     public WebElement onminParentDirectory;
 
-    @FindBy(xpath = "(//input[contains(@type,'text')])[5]")
+    @FindBy(xpath = "(//input[@type='text'])[7]")
     public WebElement maxParentDirectory;
 
     @FindBy(xpath = "//div[@class='panel-body']/div[2]/p/b")

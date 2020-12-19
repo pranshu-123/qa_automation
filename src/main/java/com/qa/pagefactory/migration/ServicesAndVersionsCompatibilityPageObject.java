@@ -66,6 +66,8 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//tbody/tr[1]/td")
     public List<WebElement> colList;
 
+    @FindBy(xpath = "//div[@id='breadcrumb']/span[2]/span")
+    public WebElement archiveReportSVCHeader;
 
     /**
      * @param driver The driver that will be used to look up the elements

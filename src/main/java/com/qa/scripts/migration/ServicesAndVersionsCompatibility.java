@@ -3,6 +3,7 @@ package com.qa.scripts.migration;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.migration.ServicesAndVersionsCompatibilityPageObject;
+import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import org.openqa.selenium.By;
@@ -77,6 +78,8 @@ public class ServicesAndVersionsCompatibility {
 
     //Validate the latest report generated
     public void validateLatestReport(){
+        waitExecuter.sleep(3000);
+
         List<WebElement> reportList = servicesAndVersionsCompatibilityPageObject.latestReportList;
         Assert.assertFalse(reportList.isEmpty(), "No latest report generated.");
 
@@ -190,27 +193,67 @@ public class ServicesAndVersionsCompatibility {
     public void verifyServicesAndVersionsAreCompatible() {
         List<String> hdpServicesList = getHDPServicesList();
         int totalHDPServicesCount = hdpServicesList.size();
+        //System.out.println("HDP serviceslist: "+totalHDPServicesCount);
 
         List<WebElement> rowsList = servicesAndVersionsCompatibilityPageObject.rowsList;
+        //System.out.println("Size of rowsList: "+rowsList.size());
         Assert.assertFalse(rowsList.isEmpty(), "No Platform services data available");
         List<WebElement> colsList = servicesAndVersionsCompatibilityPageObject.colList;
+        System.out.println("Size of columnlist: "+colsList.size());
         Assert.assertFalse(colsList.isEmpty(), "No Platform services data available");
 
-        for (int row = 0; row < rowsList.size(); row++) {
-            for (int col = 0; col < colsList.size(); col++) {
-                String path = "//tbody/tr[" + row + 1 + "]/td[" + col + 2 + "]";
+        //for (int col = 0; col < colsList.size()-1; col++) {
+        for (int col = 0; col < totalHDPServicesCount-1; col++) {
+            for (int row = 0; row < rowsList.size(); row++) {
+                String path = "//tbody/tr[" + (row + 1) + "]/td[" + (col + 2) + "]";
+          //      System.out.println(path);
                 WebElement e = driver.findElement(By.xpath(path));
                 if (!e.getText().isEmpty()) {
-                    String testClusterServiceName = e.getText().trim();
-                    String majorVersionCloud = getMajorVersion(testClusterServiceName);
+                    String cloudClusterServiceName = e.getText().trim();
+                    String majorVersionCloud = getMajorVersion(cloudClusterServiceName);
 
-                    String cloudClusterServiceName = hdpServicesList.get(col);
-                    String majorVersionHDP = getMajorVersion(cloudClusterServiceName);
-                    Assert.assertTrue(majorVersionHDP.equals(majorVersionCloud), "Major version of " +
-                            "test cluster service: "+testClusterServiceName +  "differs with major version of " +
-                            "cloud platform: "+ cloudClusterServiceName);
-                    //Now check for green
+                    String testClusterServiceName = hdpServicesList.get(col);
+                    String majorVersionHDP = getMajorVersion(testClusterServiceName);
+
+                    if(majorVersionHDP.equals(majorVersionCloud)){
+                        //Now check for green //risk-0
+                        String classAttributeName = e.getAttribute("class");
+            //            System.out.println("Element class attribute name: "+classAttributeName);
+                        Assert.assertTrue(classAttributeName.equals("risk-0"),"Platforms service in the box is not" +
+                                " marked in Green ");
+
+                    }
+                    /*else{
+                        //Now check for orange //risk-2
+                        logger.info("Major version of test cluster service: "+testClusterServiceName +
+                                " differs with major version of cloud platform: "+ cloudClusterServiceName);
+                        String classAttributeName = e.getAttribute("class");
+                        Assert.assertTrue(classAttributeName.equals("risk-2"),"Platforms service in the box is not" +
+                                " marked in Orange ");
+                    }*/
+
                 }
+            }
+        }
+    }
+
+    public void verifyReportsArchived(ReportsArchiveScheduledPageObject reportPageObj, String name) {
+        List<WebElement> reportNameList = reportPageObj.reportNames;
+        List<WebElement> reportCntList = reportPageObj.reportCnt;
+        Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed.");
+
+        for (int i = 0; i < reportNameList.size(); i++) {
+            int reportCnt = Integer.parseInt(reportCntList.get(i).getText().trim());
+            logger.info("ReportCnt is " + reportCnt);
+            String reportName = reportNameList.get(i).getText().trim();
+            logger.info("The report name is " + reportName);
+            if(reportName.equals(name) && reportCnt > 0){
+                MouseActions.clickOnElement(driver, reportCntList.get(i));
+                waitExecuter.sleep(1000);
+                waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.archiveReportSVCHeader);
+                List<WebElement> reportTblRows = reportPageObj.tableRows;
+                Assert.assertFalse(reportTblRows.isEmpty(), "No reports archived.");
+                break;
             }
         }
     }

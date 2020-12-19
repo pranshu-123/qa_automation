@@ -43,6 +43,7 @@ public class TC_MP_SC_06 extends BaseClass {
         LOGGER.info("Clicked on Run button");
         String cloudProductName = "Google Dataproc";
         servicesAndVersionsCompatibility.selectCloudProduct(cloudProductName);
+        LOGGER.info("Selected platform : "+cloudProductName+" from the drop down.");
         servicesAndVersionsCompatibility.clickOnRunModalButton();
         List<String> expectedPlatforms = Arrays.asList("Dataproc 2.0.0-Preview", "Dataproc 1.5.13",
                 "Dataproc 1.5.12", "Dataproc 1.5.11");

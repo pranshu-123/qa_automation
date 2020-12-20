@@ -319,6 +319,7 @@ public class ServicesAndVersionsCompatibility {
                         MouseActions.clickOnElement(driver, reportCntList.get(i));
                         waitExecuter.sleep(1000);
                         waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.archiveReportSVCHeader);
+                        //Give any name which shows in the UI
                         reportPageObj.reportSearchBox.sendKeys("Services and Versions Compatibility-140297191996775");
                         waitExecuter.sleep(1000);
                         List<WebElement> searchNameReportNameList = reportPageObj.reportNames;

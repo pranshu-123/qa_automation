@@ -1,5 +1,6 @@
 package com.qa.testcases.migration.servicesversionscompatibility;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
@@ -12,6 +13,8 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
+@Marker.All
+@Marker.MigrationServices
 public class TC_MP_SC_29 extends BaseClass {
 
     private static final Logger logger = Logger.getLogger(TC_MP_SC_29.class.getName());

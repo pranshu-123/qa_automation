@@ -15,17 +15,17 @@ import java.util.logging.Logger;
 
 @Marker.All
 @Marker.MigrationServices
-public class TC_MP_SC_28 extends BaseClass {
+public class TC_MP_SC_31 extends BaseClass {
 
-    private static final Logger logger = Logger.getLogger(TC_MP_SC_28.class.getName());
+    private static final Logger logger = Logger.getLogger(TC_MP_SC_31.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateReportsArchivedDelete(String clusterId) {
+    public void validateReportsArchivedSearchByStatus(String clusterId) {
 
-        test = extent.startTest("TC_MP_SC_28.validateReportsArchivedDelete: " + clusterId,
-                "Reports Archived Validate the Delete action: Services and Versions are Compatible ");
+        test = extent.startTest("TC_MP_SC_31.validateReportsArchivedSearchByStatus: " + clusterId,
+                "Reports Archived Validate Search By Status: Services and Versions are Compatible ");
         test.assignCategory(" Migration - Services And Versions Compatibility ");
-        Log.startTestCase("TC_MP_SC_28.validateReportsArchivedDelete");
+        Log.startTestCase("TC_MP_SC_31.validateReportsArchivedSearchByStatus");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -40,9 +40,9 @@ public class TC_MP_SC_28 extends BaseClass {
         MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
         waitExecuter.waitUntilPageFullyLoaded();
         String reportName = "Services and Versions Compatibility";
-        servicesAndVersionsCompatibility.verifyReportsArchived(reportPageObj, reportName, "deleteReport");
-        logger.info("Clicked on Services and Versions Compatibility counts and delete.");
-        test.log(LogStatus.PASS, "Verified Reports Archived for Services and Versions is deletable.");
+        servicesAndVersionsCompatibility.verifyReportsArchived(reportPageObj, reportName, "searchReportByStatus");
+        logger.info("Clicked on Services and Versions Compatibility counts and search by status.");
+        test.log(LogStatus.PASS, "Verified Reports Archived for Services and Versions search by status.");
 
     }
 }

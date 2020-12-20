@@ -4,10 +4,8 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.CommonPageObject;
-import com.qa.pagefactory.DatePickerPageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.clusters.TuningPageObject;
-import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.clusters.Tuning;
 import com.qa.utils.MouseActions;
@@ -15,7 +13,6 @@ import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;

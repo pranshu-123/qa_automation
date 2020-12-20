@@ -94,4 +94,18 @@ public class DateUtils {
 		long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
 		return diff;
 	}
+
+	/**
+	 * Get day difference from today
+	 * @param days - Number of days, Negative for past days
+	 * @return - date
+	 */
+	public static String getDateWithDayDifference(Integer days) {
+		cal = Calendar.getInstance();
+		dateFormatter = new SimpleDateFormat("MM/dd/yyyy");
+		cal.add(Calendar.DATE, days);
+		String pastDate = dateFormatter.format(cal.getTime());
+		return pastDate;
+	}
+
 }

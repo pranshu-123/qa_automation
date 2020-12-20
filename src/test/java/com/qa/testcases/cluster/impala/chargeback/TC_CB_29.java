@@ -2,6 +2,7 @@ package com.qa.testcases.cluster.impala.chargeback;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.chargeback.GroupByOptions;
 import com.qa.pagefactory.clusters.ChargebackImpalaPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
@@ -55,7 +56,7 @@ public class TC_CB_29 extends BaseClass {
         waitExecuter.sleep(1000);
         chargebackImpalaPageObject.groupBySearchBox.click();
         waitExecuter.sleep(1000);
-        chargebackImpala.selectgroupby();
+        chargebackImpala.selectGroupBy(GroupByOptions.REAL_USER);
 
         test.log(LogStatus.PASS, "Jobs count displayed.");
         System.out.println("Jobs count displayed");

@@ -1,6 +1,7 @@
 package com.qa.utils;
 
 import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -25,6 +26,8 @@ public class MouseActions {
             executer.waitUntilElementPresent(element);
             element.click();
         } catch (ElementClickInterceptedException clickInterceptedException) {
+            JavaScriptExecuter.clickOnElement(driver, element);
+        } catch (ElementNotInteractableException notInteractableException) {
             JavaScriptExecuter.clickOnElement(driver, element);
         }
         executer.sleep(2000);

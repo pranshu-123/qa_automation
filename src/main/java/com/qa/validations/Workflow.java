@@ -1,7 +1,6 @@
 package com.qa.validations;
 
 import com.qa.enums.WorkflowEnums;
-import com.qa.utils.WaitExecuter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;

@@ -43,17 +43,7 @@ public class TC_SF_13 extends BaseClass {
 
         smallfiles.clickOnadvancedOptions();
 
-        String onminParentDirectory = "3";
-        smallfiles.clickonminParent(onminParentDirectory);
-        logger.info("Set Min Parent Directory Depth as: " + onminParentDirectory);
-        test.log(LogStatus.INFO, "Set minimum Small File as: " + onminParentDirectory);
-
-        String onmaxParentDirectory = "5";
-        smallfiles.clickonmaxParent(onmaxParentDirectory);
-        logger.info("Set Max Parent Directory Depth as: " + onmaxParentDirectory);
-        test.log(LogStatus.INFO, "Set minimum Small File as: " + onmaxParentDirectory);
-
-
+        smallfiles.navigateToAdvancedOptions(smallfilesPageObject, test, "3", "5");
         smallfiles.clickOnModalRunButton();
         logger.info("Clicked on Modal Run Button");
         test.log(LogStatus.INFO, "Clicked on Modal Run Button");

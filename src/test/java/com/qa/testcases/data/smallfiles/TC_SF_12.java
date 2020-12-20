@@ -42,18 +42,7 @@ public class TC_SF_12 extends BaseClass {
         test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files");
 
         smallfiles.clickOnadvancedOptions();
-
-        String onminParentDirectory = "3";
-        smallfiles.clickonminParent(onminParentDirectory);
-        logger.info("Set Min Parent Directory Depth as: " + onminParentDirectory);
-        test.log(LogStatus.INFO, "Set minimum Small File as: " + onminParentDirectory);
-
-        String onmaxParentDirectory = "5";
-        smallfiles.clickonmaxParent(onmaxParentDirectory);
-        logger.info("Set Max Parent Directory Depth as: " + onmaxParentDirectory);
-        test.log(LogStatus.INFO, "Set minimum Small File as: " + onmaxParentDirectory);
-
-
+        smallfiles.navigateToAdvancedOptions(smallfilesPageObject, test, "3", "5");
         smallfiles.clickOnModalRunButton();
         logger.info("Clicked on Modal Run Button");
         test.log(LogStatus.INFO, "Clicked on Modal Run Button");
@@ -66,7 +55,7 @@ public class TC_SF_12 extends BaseClass {
         } catch (TimeoutException te) {
             throw new AssertionError("smallfiles Report not completed successfully.");
         }
-        homePage.selectMultiClusterId(clusterId);
+
     }
 }
 

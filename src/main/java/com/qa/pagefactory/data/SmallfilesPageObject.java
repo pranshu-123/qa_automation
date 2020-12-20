@@ -70,6 +70,24 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//input[contains(@type,'search')]")
     public WebElement reportSearchBox;
 
+    @FindBy(xpath = "//*[@class=\"col-md-12\"]//tbody/tr/td[1]")
+    public List<WebElement> pathName;
+
+    @FindBy(xpath = "//*[@class=\"col-md-12\"]//tbody/tr/td[2]")
+    public List<WebElement> fileName;
+
+    @FindBy(xpath = "//table/tbody/tr/td[3]/span")
+    public List<WebElement> avgFileSize;
+
+    @FindBy(xpath = "//table/tbody/tr/td[4]/span")
+    public List<WebElement> totalFileSize;
+
+    @FindBy(xpath = "//table/tbody/tr/td[5]/span")
+    public List<WebElement> minFileSizeName;
+
+    @FindBy(xpath = "//table/tbody/tr/td[5]/span")
+    public List<WebElement> maxFileSize ;
+
     @FindBy(xpath = "//table[contains(@class,'component-data-tables')]/tbody/tr/td[1]")
     public List<WebElement> getPathNameFromTable;
 
@@ -94,7 +112,7 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//input[@num_files_threshold]")
     public WebElement onminParentDirectory;
 
-    @FindBy(xpath = "(//input[@type='text'])[7]")
+    @FindBy(xpath = "(//input[contains(@type,'text')])[7]")
     public WebElement maxParentDirectory;
 
     @FindBy(xpath = "//div[@class='panel-body']/div[2]/p/b")

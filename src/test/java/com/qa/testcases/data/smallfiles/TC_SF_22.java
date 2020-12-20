@@ -6,6 +6,7 @@ import com.qa.pagefactory.data.SmallfilesPageObject;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.data.Smallfiles;
 import com.qa.utils.Log;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
@@ -43,16 +44,7 @@ public class TC_SF_22 extends BaseClass {
 
         smallfiles.clickOnadvancedOptions();
 
-        String onminParentDirectory = "3";
-        smallfiles.clickonminParent(onminParentDirectory);
-        logger.info("Set Min Parent Directory Depth as: " + onminParentDirectory);
-        test.log(LogStatus.INFO, "Set minimum Small File as: " + onminParentDirectory);
-
-        String onmaxParentDirectory = "6";
-        smallfiles.clickonmaxParent(onmaxParentDirectory);
-        logger.info("Set Max Parent Directory Depth as: " + onmaxParentDirectory);
-        test.log(LogStatus.INFO, "Set minimum Small File as: " + onmaxParentDirectory);
-
+        smallfiles.navigateToAdvancedOptions(smallfilesPageObject, test, "3", "6");
 
         smallfiles.clickOnModalRunButton();
         logger.info("Clicked on Modal Run Button");
@@ -69,5 +61,6 @@ public class TC_SF_22 extends BaseClass {
         } catch (TimeoutException te) {
             throw new AssertionError("smallfiles Report not completed successfully.");
         }
+
     }
 }

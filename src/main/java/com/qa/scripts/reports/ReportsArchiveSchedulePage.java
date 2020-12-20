@@ -133,7 +133,7 @@ public class ReportsArchiveSchedulePage {
     List<WebElement> reportTypeList = reportPageObj.reportCnt;
     Assert.assertFalse(reportTypeList.isEmpty(), " The report type column is empty");
     logger.info("The report type count is " + reportTypeList.size());
-    if (reportTypeList.size() > 10) {
+    if (reportTypeList.size() > rowCnt) {
       String pageCntStr = reportPageObj.reportCntPerPage.getText().trim();
       logger.info("The pageCnt is " + pageCntStr);
       //output= Page: of 173
@@ -378,7 +378,7 @@ public class ReportsArchiveSchedulePage {
    */
   public void sortByScheduledRun(ArrayList<String> expectedReportNameArr,
                                  ArrayList<String> reportAsceArr, ArrayList<String> reportDscArr,
-                                 List<WebElement> reportNameList, WebElement sortingIcon){
+                                 List<WebElement> reportNameList, WebElement sortingIcon) {
     //Create a key,value pair of converted epoch time and timestamp value respectively
     ArrayList<Long> epochTime = new ArrayList<>();
     HashMap<Long, String> epochTimeStampMap = new HashMap<>();
@@ -389,11 +389,10 @@ public class ReportsArchiveSchedulePage {
         epochTime.add(epoch);
         epochTimeStampMap.put(epoch, timeStampVal);
       }
+    } catch (java.text.ParseException ex) {
+      logger.info("Got parsing exception " + ex.getMessage());
     }
-    catch (java.text.ParseException ex) {
-      logger.info("Got parsing exception "+ ex.getMessage());
-    }
-   //Sort the coverted epoch time
+    //Sort the coverted epoch time
     Collections.sort(epochTime);
     ArrayList<String> newExpectedReportNameArr = new ArrayList<>();
     MouseActions.clickOnElement(driver, sortingIcon);
@@ -673,7 +672,8 @@ public class ReportsArchiveSchedulePage {
       logger.info("The report is " + reportName);
       String status = reportStatusList.get(i).getText();
       MouseActions.clickOnElement(driver, latestReportActionList.get(i));
-      waitExecuter.sleep(2000);
+      waitExecuter.waitUntilNumberOfWindowsToBe(1);
+      waitExecuter.waitUntilPageFullyLoaded();
       String actualHeader = reportPageObj.latestReportHeader.getText();
       logger.info("The header is " + actualHeader);
       String expectedHeader;
@@ -795,6 +795,44 @@ public class ReportsArchiveSchedulePage {
       Assert.assertEquals(expectedAfterCnt, afterReportCnt, " The report cnt do not match for report Name = " +
           reportName + " with status = " + status + " \n Expected = " + expectedAfterCnt + " Actual = " + afterReportCnt);
     }
+  }
+
+  /**
+   * Method to validate schedule reports option from actions tab
+   */
+  public void validateScheduleReportOption(ReportsArchiveScheduledPageObject reportPageObj) {
+    Random rnd = new Random();
+    List<WebElement> scheduleReportIconList = reportPageObj.scheduleReportIcon;
+    MouseActions.clickOnElement(driver, scheduleReportIconList.get(2));
+    waitExecuter.waitUntilNumberOfWindowsToBe(1);
+    waitExecuter.waitUntilPageFullyLoaded();
+    String scheduledReportName = "scheduleReport_" + rnd.nextInt(1000);
+    reportPageObj.scheduleReportName.sendKeys(scheduledReportName);
+    MouseActions.clickOnElement(driver, reportPageObj.scheduleToRunDropDown);
+    waitExecuter.waitUntilPageFullyLoaded();
+    MouseActions.clickOnElement(driver, reportPageObj.everyMonthOption);
+    waitExecuter.waitUntilPageFullyLoaded();
+    MouseActions.clickOnElement(driver, reportPageObj.scheduleButton);
+    waitExecuter.waitUntilElementClickable(reportPageObj.scheduledPage);
+    MouseActions.clickOnElement(driver, reportPageObj.scheduledPage);
+    waitExecuter.waitUntilElementClickable(reportPageObj.scheduleReportSearchBox);
+    reportPageObj.scheduleReportSearchBox.sendKeys(scheduledReportName);
+    waitExecuter.waitUntilPageFullyLoaded();
+    List<WebElement> scheduleReportNames = reportPageObj.scheduleName;
+    Assert.assertFalse(scheduleReportNames.isEmpty(), "Report with name " + scheduledReportName + " has not been scheduled");
+    waitExecuter.waitUntilPageFullyLoaded();
+    boolean scheduledReportPresent = false;
+    for (int i = 0; i < scheduleReportNames.size(); i++) {
+      String UI_scheduleReportName = scheduleReportNames.get(i).getText();
+      logger.info("The UI_scheduleReportName is: "+ UI_scheduleReportName);
+      if (UI_scheduleReportName.equals(scheduledReportName)) {
+        scheduledReportPresent = true;
+        break;
+      }
+    }
+    logger.info("scheduledReportPresent = "+ scheduledReportPresent);
+    Assert.assertTrue(scheduledReportPresent,"The report "+ scheduledReportName + " is not present in the list of" +
+        " scheduled reports in the UI");
   }
 
   /**

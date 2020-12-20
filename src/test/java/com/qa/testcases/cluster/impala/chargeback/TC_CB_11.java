@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.impala.chargeback;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.enums.chargeback.GroupByOptions;
 import com.qa.scripts.DatePicker;
@@ -12,6 +13,8 @@ import org.testng.annotations.Test;
 /**
  * @author Ankur Jaiswal
  */
+@Marker.All
+@Marker.ImpalaChargeback
 public class TC_CB_11 extends BaseClass {
     private final LoggingUtils LOGGER = new LoggingUtils(TC_CB_11.class);
 

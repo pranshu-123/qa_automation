@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.impala.chargeback;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
@@ -17,6 +18,8 @@ import java.util.Locale;
 /**
  * @author Ankur Jaiswal
  */
+@Marker.All
+@Marker.ImpalaChargeback
 public class TC_CB_08 extends BaseClass {
     private final LoggingUtils LOGGER = new LoggingUtils(TC_CB_08.class);
 

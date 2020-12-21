@@ -39,8 +39,6 @@ public class TC_SF_34 extends BaseClass {
         if (smallfilesPageObject.minFileSizeName.size() > 0) {
             List<WebElement> minFileSizeName = smallfilesPageObject.pathName;
             Assert.assertFalse(minFileSizeName.isEmpty(), "There are no schedule report path");
-            Assert.assertEquals(minFileSizeName.size(), "Expected the search result to output records " +
-                    ",but actual is " + minFileSizeName.size());
             test.log(LogStatus.PASS, "File display in the table- " + minFileSizeName);
         } else {
             Assert.assertTrue(smallfilesPageObject.whenNoDataDisplay.isDisplayed());

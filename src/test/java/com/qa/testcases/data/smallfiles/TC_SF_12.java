@@ -20,8 +20,8 @@ public class TC_SF_12 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void verifySmallFile(String clusterId) {
-        test = extent.startTest("TC_SF_12.verifySmallFileSize: " + clusterId, "Verify User is able " +
-                "minmum of 10 number of files with Average file size between 512 - 1024 bytes.");
+        test = extent.startTest("TC_SF_12.verifySmallFileSize: " + clusterId,
+                "Verify User is able to minmum of 10 number of files with Average file size between 512 - 1024 bytes.");
         test.assignCategory("Data- Small Files and File reports");
         Log.startTestCase("TC_SF_12.verifySmallFileSize");
 

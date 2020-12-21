@@ -21,8 +21,8 @@ public class TC_SF_11 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void verifyAverageFileSize(String clusterId) {
-        test = extent.startTest("TC_SF_11.verifyAverageFileSize: " + clusterId, "Verify User is able " +
-                "A report with use having average file size flag, will list this directory as having 3 files.");
+        test = extent.startTest("TC_SF_11.verifyAverageFileSize: " + clusterId,
+                "Verify User is able to report with use having average file size flag, will list this directory as having 3 files.");
         test.assignCategory("Data- Small Files and File reports");
         Log.startTestCase("TC_SF_11.verifyAverageFileSize");
 

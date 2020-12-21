@@ -1,6 +1,8 @@
 package com.qa.scripts.data;
 
+import com.qa.constants.PageConstants;
 import com.qa.enums.UserAction;
+import com.qa.pagefactory.CommonPageObject;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.data.SmallfilesPageObject;
@@ -15,10 +17,13 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -71,16 +76,37 @@ public class Smallfiles {
      */
     public void clickOnScheduleButton() {
         try {
-            MouseActions.clickOnElement(driver, smallfilesPageObject.runButton);
+            MouseActions.clickOnElement(driver, smallfilesPageObject.SheduleButton);
         } catch (TimeoutException te) {
-            MouseActions.clickOnElement(driver, smallfilesPageObject.runNowButton);
+            MouseActions.clickOnElement(driver, smallfilesPageObject.SheduleButton);
         }
+    }
+
+
+    public List<String> getClusterOptions(SmallfilesPageObject smallfilesPageObject) {
+        List<String> list = new ArrayList<>();
+        for (WebElement element : smallfilesPageObject.clustersList) {
+            list.add(element.getText());
+        }
+        return list;
     }
 
     public void clickOnModalRunButton() {
         MouseActions.clickOnElement(driver, smallfilesPageObject.modalRunButton);
     }
 
+    public void clickOnModalScheduleButton() {
+        MouseActions.clickOnElement(driver,
+                smallfilesPageObject.runSheduleButton);
+
+    }
+
+    public static class TuningScheduleRun {
+        public static String[] SCHEDULE_RUN = {"Daily","Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
+                "Friday","Saturday","Every 2 Weeks","Every Month"};
+        public static String[] SCHEDULE_CLUSTERID = {"tnode28-HDP315-TLS-Kerb-Ranger", "tnode3-CDH633-TLS-Kerb-Sentry",
+                "tnode40-CDH5162"};
+    }
 
     /**
      * Method to validate the Small File report Page
@@ -150,15 +176,32 @@ public class Smallfiles {
      * Common steps to validate schedule name,daily,email
      */
     public void scheduleAdvancedOptions(SmallfilesPageObject smallfilesPageObject, ExtentTest test, String scheduleName, String email) {
-        actions.performActionWithPolling(smallfilesPageObject.scheduleNameTextbox, UserAction.CLICK);
-        actions.performActionWithPolling(smallfilesPageObject.scheduleNameTextbox,
-                UserAction.SEND_KEYS, scheduleName);
 
-        actions.performActionWithPolling(smallfilesPageObject.emailNotification, UserAction.CLICK);
-        actions.performActionWithPolling(smallfilesPageObject.emailNotification, UserAction.SEND_KEYS,
-                email);
+        smallfilesPageObject.scheduleNameTextbox.sendKeys(scheduleName);
+        LOGGER.info("Set directories To Show as: " + scheduleName);
+        test.log(LogStatus.INFO, "Set directories To Show as: " + scheduleName);
 
+        smallfilesPageObject.emailNotification.sendKeys(email);
+        LOGGER.info("Set directories To Show as: " + email);
+        test.log(LogStatus.INFO, "Set directories To Show as: " + email);
+    }
 
+    /**
+     * Method to validate the sorting option on Next Scheduled Run for Scheduled Page
+     */
+    public void verifyScheduleToRun(){
+        List<String> expectedSchedule = new ArrayList<>(Arrays.asList(TuningScheduleRun.SCHEDULE_RUN));
+        waitExecuter.waitUntilElementPresent(smallfilesPageObject.scheduleToRun);
+        Select scheduleTorunDropDown = new Select(smallfilesPageObject.scheduleToRun);
+        List <WebElement> elementScheduleTorunDropDown = scheduleTorunDropDown.getOptions();
+        if(elementScheduleTorunDropDown.size() > 0 ){
+            for(int i=0; i<elementScheduleTorunDropDown.size(); i++){
+                WebElement e = elementScheduleTorunDropDown.get(i);
+                e.click();
+                LOGGER.info("Schedule date: "+ e.getText());
+                Assert.assertEquals(e.getText().trim(), expectedSchedule.get(i), "Mismatch in schedule run date.");
+            }
+        }
     }
 
     /**

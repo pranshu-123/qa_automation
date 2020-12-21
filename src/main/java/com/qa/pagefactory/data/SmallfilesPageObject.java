@@ -19,6 +19,9 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//span[contains(text(),'Schedule')]")
     public WebElement SheduleButton;
 
+    @FindBy(xpath = "//span[contains(@class,'pointer cta-primary')]//span[contains(text(),'Schedule')]")
+    public WebElement runSheduleButton;
+
     @FindBy(xpath = "//span[contains(text(),'Run New')]/parent::a")
     public WebElement runNowButton;
 
@@ -73,8 +76,17 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//input[contains(@type,'search')]")
     public WebElement reportSearchBox;
 
+    @FindBy(xpath = "//select[contains(@class,'schedule-days')]")
+    public WebElement scheduleToRun;
+
     @FindBy(xpath = "//*[@class=\"col-md-12\"]//tbody/tr/td[1]")
     public List<WebElement> pathName;
+
+    @FindBy(xpath = "//span[contains(@class,'select2-selection__arrow')]")
+    public WebElement clusterDropdown;
+
+    @FindBy(xpath = "//li[contains(@class,'select2-results__option')]")
+    public List<WebElement> clustersList;
 
     @FindBy(xpath = "//*[@class=\"col-md-12\"]//tbody/tr/td[2]")
     public List<WebElement> fileName;

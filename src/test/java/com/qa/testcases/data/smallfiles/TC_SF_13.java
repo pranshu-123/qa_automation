@@ -21,7 +21,7 @@ public class TC_SF_13 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void verifyNumberOfDirectories(String clusterId) {
         test = extent.startTest("TC_SF_13.verifyNumberOfDirectories: " + clusterId, "Verify User is able " +
-                "with Average File Size between  512-1024 bytes the UI should list only 10 directories.");
+                "Verify User check with Average File Size between  512-1024 bytes the UI should list only 10 directories.");
         test.assignCategory("Data- Small Files and File reports");
         Log.startTestCase("TC_SF_13.verifyNumberOfDirectories");
 

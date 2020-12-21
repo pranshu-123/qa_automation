@@ -40,8 +40,6 @@ public class TC_SF_33 extends BaseClass {
         if (smallfilesPageObject.totalFileSize.size() > 0) {
             List<WebElement> totalFileSize = smallfilesPageObject.totalFileSize;
             Assert.assertFalse(totalFileSize.isEmpty(), "There are no schedule report path");
-            Assert.assertEquals(totalFileSize.size(), "Expected the search result to output records " +
-                    ",but actual is " + totalFileSize.size());
             test.log(LogStatus.PASS, "File display in the table- " + totalFileSize);
         } else {
             Assert.assertTrue(smallfilesPageObject.whenNoDataDisplay.isDisplayed());

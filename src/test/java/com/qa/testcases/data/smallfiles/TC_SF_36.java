@@ -2,15 +2,22 @@ package com.qa.testcases.data.smallfiles;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.constants.PageConstants;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.data.SmallfilesPageObject;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.data.Smallfiles;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.List;
 import java.util.logging.Logger;
 @Marker.DataSmallFiles
 @Marker.All
@@ -33,22 +40,21 @@ public class TC_SF_36 extends BaseClass {
         smallfiles.clickOnScheduleButton();
         logger.info("Clicked on Shedule Button");
         test.log(LogStatus.INFO, "Clicked on Shedule Button");
+        UserActions userActions = new UserActions(driver);
 
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
 
-        smallfiles.navigateToSmallFileReport(smallfilesPageObject, test, "512",
-                "1024", "10", "10");
+
+        smallfiles.navigateToSmallFileReport(smallfilesPageObject, test, "256",
+                "512", "10", "100");
         test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files");
-
-        smallfiles.clickOnadvancedOptions();
-
-        smallfiles.clickOnModalRunButton();
-        logger.info("Clicked on Modal Run Button");
-        test.log(LogStatus.INFO, "Clicked on Modal Run Button");
 
         smallfiles.scheduleAdvancedOptions(smallfilesPageObject,test,"Queue_An_Test","sray@unraveldata.com");
         test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files Advanced Options");
+        smallfiles.clickOnModalScheduleButton();
+        logger.info("Clicked on Modal Schedule Button");
+        test.log(LogStatus.INFO, "Clicked on Modal Schedule Button");
 
         try {
             waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,

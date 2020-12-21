@@ -7,6 +7,7 @@ import com.qa.scripts.data.Smallfiles;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -39,8 +40,6 @@ public class TC_SF_32 extends BaseClass {
         if (smallfilesPageObject.avgFileSize.size() > 0) {
             List<WebElement> avgFileSize = smallfilesPageObject.fileName;
             Assert.assertFalse(avgFileSize.isEmpty(), "There are no schedule report path");
-            Assert.assertEquals(avgFileSize.size(), "Expected the search result to output records " +
-                    ",but actual is " + avgFileSize.size());
             test.log(LogStatus.PASS, "File display in the table- " + avgFileSize);
         } else {
             Assert.assertTrue(smallfilesPageObject.whenNoDataDisplay.isDisplayed());

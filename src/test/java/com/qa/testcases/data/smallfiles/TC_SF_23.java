@@ -21,8 +21,7 @@ public class TC_SF_23 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void verifyMaxParameters(String clusterId) {
-        test = extent.startTest("TC_SF_23.verifyMaxParameters: " + clusterId, "Verify User is able " +
-                "successfully run Small Files report and display the report in the UI.");
+        test = extent.startTest("TC_SF_23.verifyMaxParameters: " + clusterId, "Verify the user successfully run Small Files report and display the report in the UI.");
         test.assignCategory("Data- Small Files and File reports");
         Log.startTestCase("TC_SF_23.verifyMaxParameters");
 

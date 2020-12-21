@@ -21,8 +21,7 @@ public class TC_SF_22 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void verifySmallFileReport(String clusterId) {
-        test = extent.startTest("TC_SF_22.verifySmallFileReport: " + clusterId, "Verify User is able " +
-                "Unravel UI should display 10000 directories in the report.");
+        test = extent.startTest("TC_SF_22.verifySmallFileReport: " + clusterId, "Verify the User Unravel UI should display 10000 directories in the report.");
         test.assignCategory("Data- Small Files and File reports");
         Log.startTestCase("TC_SF_22.verifySmallFileReport");
 

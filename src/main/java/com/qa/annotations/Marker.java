@@ -39,4 +39,6 @@ public @interface Marker {
   @interface KafkaExternal {}
   @interface ClusterELK {}
   @interface MigrationServices{}
+  @interface Only{}
+  @interface MigrationClusterDiscovery {}
 }

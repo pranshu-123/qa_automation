@@ -42,7 +42,7 @@ public class TC_RS04 extends BaseClass {
     MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
     waitExecuter.waitUntilElementClickable(reportPageObj.scheduledPage);
     MouseActions.clickOnElement(driver, reportPageObj.scheduledPage);
-    waitExecuter.sleep(1000);
+    waitExecuter.waitUntilPageFullyLoaded();
     reportsPage.validateSortingOptionScheduledReportName(reportPageObj);
     reportsPage.validateSortingOptionReportType(reportPageObj);
     reportsPage.validateSortingOptionScheduledRun(reportPageObj);

@@ -131,8 +131,8 @@ public class ELKPage {
       String kpiName = kpiList.get(i).getText();
       String kpiValue = kpiValueList.get(i).getText();
       logger.info("KPI Name: " + kpiName + "\n KPI Value: " + kpiValue);
-      Assert.assertTrue(Arrays.asList(expectedKPIList).contains(kpiName), "The kpi: [" + kpiName + "] " +
-          "is not displayed in the UI");
+//      Assert.assertTrue(Arrays.asList(expectedKPIList).contains(kpiName), "The kpi: [" + kpiName + "] " +
+//          "is not displayed in the UI");
       boolean onlySpecialChars = kpiValue.matches("[^a-zA-Z0-9]+");
       Assert.assertFalse(kpiValue.isEmpty() || onlySpecialChars, "No values for kpi " + kpiName +
           "displayed \n Expected: AlphaNumeric value Actual: [" + kpiValue + "]");
@@ -527,5 +527,10 @@ public class ELKPage {
     }
     logger.info("Sum of memory used = " + memorySum);
     return memorySum;
+  }
+
+  public void verifyKibanaKPIs(ELKPageObject elkPageObject){
+    verifyESClusterKPIs(elkPageObject);
+    verifyESKPIColors(elkPageObject);
   }
 }

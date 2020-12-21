@@ -43,7 +43,6 @@ public class TC_RRA03 extends BaseClass {
     ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);
     DatePicker datePicker = new DatePicker(driver);
     WaitExecuter waitExecuter = new WaitExecuter(driver);
-    AllApps allApps = new AllApps(driver);
 
     // Navigate to Reports tab from header
     test.log(LogStatus.INFO, "Navigate to reports tab from header ");

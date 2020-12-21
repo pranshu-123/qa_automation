@@ -63,6 +63,9 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "(//*[@class='col-md-2']//input)")
   public WebElement reportSearchBox;
 
+  @FindBy(xpath = "(//*[contains(@class,'col-md-2')]//input)")
+  public WebElement scheduleReportSearchBox;
+
   @FindBy(xpath = "//a[contains(@class,'icon-sort')]")
   public List<WebElement> sortingIcon;
 
@@ -104,6 +107,15 @@ public class ReportsArchiveScheduledPageObject {
 
   @FindBy(xpath = "(//*[@class='icon-calendar is-enabled'])")
   public List<WebElement> scheduleReportIcon;
+
+  @FindBy(xpath = "//*[@id='app']//div[3]/p[1]/input")
+  public WebElement scheduleReportName;
+
+  @FindBy(xpath = "//*[@id='app']//p[3]/select")
+  public WebElement scheduleToRunDropDown;
+
+  @FindBy(xpath = "//*[@id='app']//p[3]/select/option[10]")
+  public WebElement everyMonthOption;
 
   @FindBy(xpath = "(//*[@class='icon-expand is-enabled'])")
   public List<WebElement> latestReportIcon;
@@ -173,6 +185,9 @@ public class ReportsArchiveScheduledPageObject {
 
   @FindBy(xpath = "//div[contains(@class,'component-cta')]/a/span")
   public WebElement saveScheduleButton;
+
+  @FindBy(xpath = "//div[contains(@class,'component-section-header')]/span/a")
+  public WebElement scheduleButton;
 
   @FindBy(xpath = "//span[contains(@class,'glyphicon')]")
   public List<WebElement> glyphiconPointers;

@@ -316,7 +316,7 @@ public class ServicesAndVersionsCompatibility {
                         Assert.assertFalse(searchNameReportNameList.isEmpty(), "There are no reports listed");
                         Assert.assertEquals(searchNameReportNameList.size(), 1, "Expected the search result to output 1 records " +
                                 ",but actual is " + searchNameReportNameList.size());
-                        logger.info("Serached report by name as :" + searchReportName);
+                        logger.info("Searched report by name as :" + searchReportName);
                         break;
                 }
                 break;

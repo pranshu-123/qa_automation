@@ -16,15 +16,15 @@ import java.util.logging.Logger;
 
 @Marker.All
 @Marker.MigrationServices
-public class TC_MP_SC_04 extends BaseClass {
+public class TC_MP_SC_06 extends BaseClass {
 
-    private static final Logger LOGGER = Logger.getLogger(TC_MP_SC_04.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TC_MP_SC_06.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateServicesAndCompatibilityReportForAmazonEMR(String clusterId) {
+    public void validateServicesAndVersionsAreCompatibleForGoogle(String clusterId) {
 
-        test = extent.startTest("TC_MP_SC_04.validateServicesAndCompatibilityReportForAmazonEMR: " + clusterId,
-                "Verify User can run a report for 'Amazon EMR' ");
+        test = extent.startTest("TC_MP_SC_06.validateServicesAndVersionsAreCompatibleForGoogle: " + clusterId,
+                "Services and Versions are Compatible - Google DataProc ");
         test.assignCategory(" Migration - Services And Versions Compatibility ");
 
         //Initialize object
@@ -34,25 +34,32 @@ public class TC_MP_SC_04 extends BaseClass {
                 new ServicesAndVersionsCompatibilityPageObject(driver);
 
         servicesAndVersionsCompatibility.setupServicesAndVersionsCompatibilityPage();
+        LOGGER.info("Clicked on Migration and accessing Services And Versions Compatibility page ");
         servicesAndVersionsCompatibility.clickOnServicesAndVersionMigrationTab();
+        LOGGER.info("Clicked on Services And Versions Compatibility tab");
         servicesAndVersionsCompatibility.closeMessageBanner();
+        LOGGER.info("Clicked on close banner");
         servicesAndVersionsCompatibility.clickOnRunButton();
-        String cloudProductName = "Amazon EMR";
+        LOGGER.info("Clicked on Run button");
+        String cloudProductName = "Google Dataproc";
         servicesAndVersionsCompatibility.selectCloudProduct(cloudProductName);
+        LOGGER.info("Selected platform : "+cloudProductName+" from the drop down.");
         servicesAndVersionsCompatibility.clickOnRunModalButton();
-        List<String> expectedPlatforms = Arrays.asList("EMR 6.1.0", "EMR 6.0.0", "EMR 5.31.0", "EMR 5.30.1");
+        List<String> expectedPlatforms = Arrays.asList("Dataproc 2.0.0-Preview", "Dataproc 1.5.13",
+                "Dataproc 1.5.12", "Dataproc 1.5.11");
 
         try {
             waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.confirmationMessageElement,
                     "Services and Versions Compatibility completed successfully.");
             servicesAndVersionsCompatibility.validateLatestReport();
             Assert.assertTrue(expectedPlatforms.equals(servicesAndVersionsCompatibility.getPlatforms()));
-            test.log(LogStatus.PASS, "Verified Services and Versions Compatibility report is loaded properly " +
-                    "for Amazon EMR.");
+            servicesAndVersionsCompatibility.verifyServicesAndVersionsAreCompatible();
+            test.log(LogStatus.PASS, "Verified Services and Versions are Compatible" +
+                    " for Google Dataproc.");
 
         } catch (TimeoutException te) {
             throw new AssertionError("Services and Versions Compatibility Report not completed successfully" +
-                    " for Amazon EMR.");
+                    " for Google Dataproc.");
         }
 
     }

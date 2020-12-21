@@ -51,6 +51,30 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//div[@class='version-comp-inner']/div[2]/div/p[contains(@class, 'pd')]")
     public List<WebElement> legendList;
 
+    @FindBy(xpath = "(//table[contains(@class, 'component-data-tables')])[2]")
+    public WebElement reportTable;
+
+    @FindBy(xpath = "//div[@class='ab']/div")
+    public List<WebElement> platformList;
+
+    @FindBy(xpath = "(//thead/tr)[2]/th")
+    public List<WebElement> hdpHeaderList;
+
+    @FindBy(xpath = "//tbody/tr")
+    public List<WebElement> rowsList;
+
+    @FindBy(xpath = "//tbody/tr[1]/td")
+    public List<WebElement> colList;
+
+    @FindBy(xpath = "//div[@id='breadcrumb']/span[2]/span")
+    public WebElement archiveReportSVCHeader;
+
+    @FindBy(xpath = "//tbody/tr[1]/td[2]")
+    public WebElement archiveReportDate;
+
+    @FindBy(xpath = "//tbody/tr[1]/td[1]")
+    public WebElement archiveReportName;
+
     /**
      * @param driver The driver that will be used to look up the elements
      */

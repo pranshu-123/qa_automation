@@ -16,6 +16,9 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//span[contains(text(),'Run')]/parent::a")
     public WebElement runButton;
 
+    @FindBy(xpath = "//span[contains(text(),'Schedule')]")
+    public WebElement SheduleButton;
+
     @FindBy(xpath = "//span[contains(text(),'Run New')]/parent::a")
     public WebElement runNowButton;
 
@@ -114,6 +117,12 @@ public class SmallfilesPageObject {
 
     @FindBy(xpath = "(//input[contains(@type,'text')])[7]")
     public WebElement maxParentDirectory;
+
+    @FindBy(xpath = "//div/b[text()='Schedule Name']//following::p/input")
+    public WebElement scheduleNameTextbox;
+
+    @FindBy(xpath ="//p[@class='element-inline']/input")
+    public WebElement emailNotification;
 
     @FindBy(xpath = "//div[@class='panel-body']/div[2]/p/b")
     public WebElement previousReportData;

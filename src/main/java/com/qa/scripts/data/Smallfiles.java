@@ -1,5 +1,6 @@
 package com.qa.scripts.data;
 
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.data.SmallfilesPageObject;
@@ -7,6 +8,7 @@ import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.Keys;
@@ -26,6 +28,7 @@ public class Smallfiles {
     SmallfilesPageObject smallfilesPageObject;
     private WaitExecuter waitExecuter;
     private WebDriver driver;
+    private UserActions actions;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -56,6 +59,17 @@ public class Smallfiles {
      * Method to click on 'RunButton'
      */
     public void clickOnRunButton() {
+        try {
+            MouseActions.clickOnElement(driver, smallfilesPageObject.runButton);
+        } catch (TimeoutException te) {
+            MouseActions.clickOnElement(driver, smallfilesPageObject.runNowButton);
+        }
+    }
+
+    /**
+     * Method to click on 'SheduleButton'
+     */
+    public void clickOnScheduleButton() {
         try {
             MouseActions.clickOnElement(driver, smallfilesPageObject.runButton);
         } catch (TimeoutException te) {
@@ -111,6 +125,7 @@ public class Smallfiles {
         test.log(LogStatus.INFO, "Set directories To Show as: " + directoriesToShow);
     }
 
+
     /**
      * Common steps to validate minimumFileSize,maximumFileSize,minimumSmallFile,directoriesToShow
      */
@@ -128,6 +143,21 @@ public class Smallfiles {
         smallfilesPageObject.maxParentDirectory.sendKeys(maxParentDirectory);
         LOGGER.info("Set Max Parent Directory Depth as: " + maxParentDirectory);
         test.log(LogStatus.INFO, "Set Max Parent Directory Depth as: " + maxParentDirectory);
+
+    }
+
+    /**
+     * Common steps to validate schedule name,daily,email
+     */
+    public void scheduleAdvancedOptions(SmallfilesPageObject smallfilesPageObject, ExtentTest test, String scheduleName, String email) {
+        actions.performActionWithPolling(smallfilesPageObject.scheduleNameTextbox, UserAction.CLICK);
+        actions.performActionWithPolling(smallfilesPageObject.scheduleNameTextbox,
+                UserAction.SEND_KEYS, scheduleName);
+
+        actions.performActionWithPolling(smallfilesPageObject.emailNotification, UserAction.CLICK);
+        actions.performActionWithPolling(smallfilesPageObject.emailNotification, UserAction.SEND_KEYS,
+                email);
+
 
     }
 

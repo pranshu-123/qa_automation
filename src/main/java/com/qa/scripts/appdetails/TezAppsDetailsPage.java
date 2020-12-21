@@ -1031,7 +1031,7 @@ public class TezAppsDetailsPage {
                 appCount = tezDetailsPage.clickOnlyLink("Failed");
             else
                 appCount = tezDetailsPage.clickOnlyLink("Success");
-            //Clicking on the Spark app must go to apps detail page
+            //Clicking on the Tez app must go to apps detail page
             if (appCount > 0) {
                 String headerAppId = tezDetailsPage.verifyAppId(tezApps, applicationsPageObject);
                 test.log(LogStatus.PASS, "Tez Application Id is displayed in the Header: " + headerAppId);

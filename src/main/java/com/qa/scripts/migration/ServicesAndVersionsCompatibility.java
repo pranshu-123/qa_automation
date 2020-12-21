@@ -285,11 +285,11 @@ public class ServicesAndVersionsCompatibility {
                         MouseActions.clickOnElement(driver, reportCntList.get(i));
                         waitExecuter.waitUntilPageFullyLoaded();
                         waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.archiveReportSVCHeader);
-                        String date = "12/18/2020 21:18:03";
+                        String date = "12/17/2020";
                         reportPageObj.reportSearchBox.sendKeys(date);
                         List<WebElement> searchDateReportNameList = reportPageObj.reportNames;
                         Assert.assertFalse(searchDateReportNameList.isEmpty(), "There are no reports listed");
-                        Assert.assertEquals(searchDateReportNameList.size(), 1, "Expected the search result to output 1 records " +
+                        Assert.assertEquals(searchDateReportNameList.size(), 2, "Expected the search result to output 2 records " +
                                 ",but actual is " + searchDateReportNameList.size());
                         logger.info("Search report by date: " + date);
                         break;

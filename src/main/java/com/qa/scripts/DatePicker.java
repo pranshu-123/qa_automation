@@ -3,7 +3,6 @@ package com.qa.scripts;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.DatePickerPageObject;
 import com.qa.utils.DateUtils;
-import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.WaitExecuter;
 
 import java.text.ParseException;
@@ -204,6 +203,14 @@ public class DatePicker {
         setStartDate(DateUtils.getPastDate(minusDays));
         waitExecuter.sleep(2000);
         setEndDate(DateUtils.getCurrentDate());
+    }
+
+    /**
+     * Select Current date as start/past date and End date as future date
+     */
+    public void setStartAndEndDateWithDaysDifference(Integer startDayDifferenceFromToday, Integer endDayFromToday) {
+        setStartDate(DateUtils.getDateWithDayDifference(startDayDifferenceFromToday));
+        setEndDate(DateUtils.getDateWithDayDifference(endDayFromToday));
     }
 
     /**

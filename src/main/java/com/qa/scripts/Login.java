@@ -5,14 +5,11 @@ import com.qa.enums.UserAction;
 import com.qa.io.ConfigReader;
 import com.qa.pagefactory.HomePageObject;
 import com.qa.pagefactory.LoginPageObject;
-import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.RetryExecuter;
 import com.qa.utils.actions.UserActions;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 
-import java.util.ArrayList;
 import java.util.Properties;
 import java.util.function.Supplier;
 

@@ -10,6 +10,8 @@ import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Marker.All
@@ -21,7 +23,7 @@ public class TC_MP_SC_03 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void validateServicesAndCompatibilityReportForGoogleDataproc(String clusterId) {
 
-        test = extent.startTest("validateServicesAndCompatibilityReportForGoogleDataproc: " + clusterId,
+        test = extent.startTest("TC_MP_SC_03.validateServicesAndCompatibilityReportForGoogleDataproc: " + clusterId,
                 "Verify the user is able to run a report for Google Dataproc providers.");
         test.assignCategory(" Migration - Services And Versions Compatibility ");
 
@@ -38,13 +40,17 @@ public class TC_MP_SC_03 extends BaseClass {
         String cloudProductName = "Google Dataproc";
         servicesAndVersionsCompatibility.selectCloudProduct(cloudProductName);
         servicesAndVersionsCompatibility.clickOnRunModalButton();
+        List<String> expectedPlatforms = Arrays.asList("Dataproc 2.0.0-Preview", "Dataproc 1.5.13",
+                "Dataproc 1.5.12", "Dataproc 1.5.11");
 
         try {
             waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.confirmationMessageElement,
                     "Services and Versions Compatibility completed successfully.");
+            servicesAndVersionsCompatibility.validateLatestReport();
+            Assert.assertTrue(expectedPlatforms.equals(servicesAndVersionsCompatibility.getPlatforms()));
             test.log(LogStatus.PASS, "Verified Services and Versions Compatibility report is loaded properly" +
                     " for Google Dataproc.");
-            servicesAndVersionsCompatibility.validateLatestReport();
+
         } catch (TimeoutException te) {
             throw new AssertionError("Services and Versions Compatibility Report not completed successfully" +
                     " for Google Dataproc.");

@@ -2,9 +2,7 @@ package com.qa.testcases.jobs.applications.all;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
-import com.qa.scripts.DatePicker;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
@@ -37,12 +35,10 @@ public class TC_JAL_16 extends BaseClass {
         test.log(LogStatus.INFO, "Initialize all class objects");
         LOGGER.info("Initialize all class objects");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        SubTopPanelModulePageObject subTopPanelModulePageObject = new SubTopPanelModulePageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
-        DatePicker datePicker = new DatePicker(driver);
         AllApps allApps = new AllApps(driver);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
-        // Navigate to Jobs tab from header select cluster and clisk on last 7 days
+        // Navigate to Jobs tab from header select cluster and click on last 7 days
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         test.log(LogStatus.INFO, "Select last 7 days");
         test.log(LogStatus.INFO, "Select clusterId : " + clusterId);
@@ -52,15 +48,20 @@ public class TC_JAL_16 extends BaseClass {
         LOGGER.info("Scroll to view Tags filter.");
         executor.executeScript("arguments[0].scrollIntoView();", applicationsPageObject.userSearchBox);
         waitExecuter.sleep(2000);
-        List<String> existingTagTypes = new ArrayList<>(
+        List<String> expectedTagTypes = new ArrayList<>(
                 Arrays.asList("dept", "project", "realuser", "dbs", "inputtables", "outputtables"));
+
         List<WebElement> tagTypesFromUI = applicationsPageObject.getTagTypes;
         List<String> tagTypesInString = new ArrayList<>();
         for (int i = 0; i < tagTypesFromUI.size(); i++) {
             tagTypesInString.add(tagTypesFromUI.get(i).getText().trim().toLowerCase());
         }
-        Assert.assertTrue(tagTypesInString.equals(existingTagTypes),
-                "The elements of tags does not match the expected list " + tagTypesInString);
+        test.log(LogStatus.INFO, "Expected tags- " + expectedTagTypes);
+        LOGGER.info("Expected tags- " + expectedTagTypes);
+        test.log(LogStatus.INFO, "Actual tags- " + tagTypesInString);
+        LOGGER.info("Actual tags- " + tagTypesInString);
+        Assert.assertTrue(tagTypesInString.retainAll(expectedTagTypes),
+                "The elements of tags does not match the expected list- " + tagTypesInString);
         test.log(LogStatus.PASS, "The elements of tags match the expected list: " + tagTypesInString);
 
     }

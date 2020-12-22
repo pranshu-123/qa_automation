@@ -22,6 +22,10 @@ public class ELKPageObject {
       "'Logstash')]")
   public WebElement logstashTab;
 
+  @FindBy(xpath = "//li[contains(@class,'active')]/ul[contains(@class,'sub-menu')]//li/span[contains(text()," +
+      "'Kibana')]")
+  public WebElement kibanaTab;
+
   @FindBy(xpath = "(//span[contains(@class,'select2-selection__rendered')])")
   public WebElement clusterDropDown;
 

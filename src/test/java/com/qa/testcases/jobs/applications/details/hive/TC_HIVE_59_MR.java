@@ -16,10 +16,6 @@ import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
 
-import java.awt.*;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -98,47 +94,37 @@ public class TC_HIVE_59_MR extends BaseClass {
                             actions.moveToElement(applicationsPageObject.copyAppName).perform();
                             waitExecuter.sleep(1000);
                             applicationsPageObject.copyAppName.click();
-                            try {
-                                String data = (String) Toolkit.getDefaultToolkit().getSystemClipboard()
-                                        .getData(DataFlavor.stringFlavor);
-                                String[] getCopiedText = data.split(":");
-                                String appId = getCopiedText[2];
-                                // Click on first app in table to navigate to app details page
-                                test.log(LogStatus.INFO, "Click on first app in table to navigate to app details page");
-                                LOGGER.info("Click on first app in table to navigate to app details page");
-                                applicationsPageObject.getStatusFromTable.click();
-                                waitExecuter.waitUntilElementPresent(applicationsPageObject.loader);
-                                waitExecuter.sleep(2000);
-                                List<String> KPIS = new ArrayList<>(
-                                        Arrays.asList("duration", "data i/o", "start time", "end time"));
-                                List<String> KPIheading = new ArrayList<String>();
-                                List<String> KPIheadingValues = new ArrayList<String>();
-                                for (int j = 0; j < applicationsPageObject.getAllKPIHeading.size(); j++) {
-                                    KPIheading
-                                            .add(applicationsPageObject.getAllKPIHeading.get(j).getText().trim().toLowerCase());
-                                    KPIheadingValues.add(applicationsPageObject.getAllKPIHeadingValues.get(j).getText().trim());
-                                }
 
-                                LOGGER.info("Present KPI headings- " + KPIheading);
-                                LOGGER.info("Expected KPI headings- " + PageConstants.MRHiveKPIs.KPIS.toString());
-                                Assert.assertNotNull(KPIheadingValues, "The KPIS value is null");
-                                Assert.assertTrue(KPIheading.containsAll(KPIS),
-                                        "The KPI didn't Load for app Id - " + appId);
-                                test.log(LogStatus.PASS, "KPI's load successfully for MR having Hive as parent app");
-
-                                // Navigate back to parent page and click on reset
-                                test.log(LogStatus.INFO, "Navigate back to parent page and click on reset");
-                                LOGGER.info("Navigate back to parent page and click on reset");
-                                driver.navigate().back();
-                                waitExecuter.sleep(5000);
-                                allApps.reset();
-                                driver.navigate().refresh();
-                            } catch (HeadlessException | UnsupportedFlavorException | IOException | AssertionError e) {
-                                driver.navigate().back();
-                                waitExecuter.sleep(5000);
-                                allApps.reset();
-                                e.printStackTrace();
+                            // Click on first app in table to navigate to app details page
+                            test.log(LogStatus.INFO, "Click on first app in table to navigate to app details page");
+                            LOGGER.info("Click on first app in table to navigate to app details page");
+                            applicationsPageObject.getStatusFromTable.click();
+                            waitExecuter.waitUntilElementPresent(applicationsPageObject.loader);
+                            waitExecuter.sleep(2000);
+                            List<String> KPIS = new ArrayList<>(
+                                    Arrays.asList("duration", "data i/o", "start time", "end time"));
+                            List<String> KPIheading = new ArrayList<String>();
+                            List<String> KPIheadingValues = new ArrayList<String>();
+                            for (int j = 0; j < applicationsPageObject.getAllKPIHeading.size(); j++) {
+                                KPIheading
+                                        .add(applicationsPageObject.getAllKPIHeading.get(j).getText().trim().toLowerCase());
+                                KPIheadingValues.add(applicationsPageObject.getAllKPIHeadingValues.get(j).getText().trim());
                             }
+
+                            LOGGER.info("Present KPI headings- " + KPIheading);
+                            LOGGER.info("Expected KPI headings- " + PageConstants.MRHiveKPIs.KPIS.toString());
+                            Assert.assertNotNull(KPIheadingValues, "The KPIS value is null");
+                            Assert.assertTrue(KPIheading.containsAll(KPIS),
+                                    "The KPI didn't Load for app Id. ");
+                            test.log(LogStatus.PASS, "KPI's load successfully for MR having Hive as parent app");
+
+                            // Navigate back to parent page and click on reset
+                            test.log(LogStatus.INFO, "Navigate back to parent page and click on reset");
+                            LOGGER.info("Navigate back to parent page and click on reset");
+                            driver.navigate().back();
+                            waitExecuter.sleep(5000);
+                            allApps.reset();
+
                         } else {
                             test.log(LogStatus.SKIP,
                                     "The clusterId does not have application of MR with HIVE as parent app");

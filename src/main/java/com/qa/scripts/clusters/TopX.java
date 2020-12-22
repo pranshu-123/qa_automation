@@ -8,7 +8,6 @@ import com.qa.utils.WaitExecuter;
 import java.util.List;
 
 import com.qa.utils.actions.UserActions;
-import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

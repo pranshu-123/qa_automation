@@ -85,6 +85,36 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "//div/button[@class='applybtn']")
     public WebElement applyButton;
 
+    @FindBy(xpath = "//li[contains(text(),'User')][1]")
+    public WebElement groupByUserOption;
+
+    @FindBy(xpath = "//li[contains(text(),'Queue')][1]")
+    public WebElement groupByQueueOption;
+
+    @FindBy(xpath = "//li[contains(text(),'dept')]")
+    public WebElement groupByDeptOption;
+
+    @FindBy(xpath = "//li[contains(text(),'project')]")
+    public WebElement groupByProjectOption;
+
+    @FindBy(xpath = "//li[contains(text(),'realUser')]")
+    public WebElement groupByrealUserOption;
+
+    @FindBy(xpath = "//li[contains(text(),'dbs')]")
+    public WebElement groupByDBSOption;
+
+    @FindBy(xpath = "//li[contains(text(),'inputTables')]")
+    public WebElement groupByInputTablesOption;
+
+    @FindBy(xpath = "//li[contains(text(),'priority')]")
+    public WebElement groupByPriorityOption;
+
+    @FindBy(xpath = "//li[contains(text(),'team')]")
+    public WebElement groupByTeamOption;
+
+    @FindBy(xpath = "//span[contains(@class,'select2-selection__choice__remove')]")
+    public List<WebElement> closeGroupByOptionButton;
+
     @FindBy(xpath = "//li[contains(text(),'Real User')]")
     public WebElement realUser;
 
@@ -162,6 +192,22 @@ public class ChargebackImpalaPageObject {
 
     @FindBy(xpath = "//button[@class='btn-csv']")
     public WebElement downloadCSV;
+
+    @FindBy(xpath = "//div[contains(@class,'highcharts-container')]")
+    public List<WebElement> impalaChargebackPieCharts;
+
+    // No Data Page Objects
+    @FindBy(xpath = "//div[contains(@class,'cbnodata')]")
+    public WebElement impalaChargebackGroupByNoData;
+
+    @FindBy(xpath = "//div[@ntableid='finishedImpalaJobsTable']")
+    public WebElement impalaChargebackTableNoData;
+
+    @FindBy(xpath = "(//div[@id=\"searchBox\"])[1]/child::div")
+    public List<WebElement> pieChartGroupBySearchBoxs;
+
+    @FindBy(xpath = "//table[@id='chargeback-table']//thead/tr/th")
+    public List<WebElement> groupByResultsTableHeadings;
 
     public ChargebackImpalaPageObject(WebDriver driver) {
         PageFactory.initElements(driver, this);

@@ -15,11 +15,8 @@ import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
 
-import java.awt.*;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.IOException;
 import java.util.logging.Logger;
+
 
 @Marker.AppDetailsHive
 @Marker.All
@@ -81,31 +78,26 @@ public class TC_HIVE_54 extends BaseClass {
             actions.moveToElement(applicationsPageObject.copyAppName).perform();
             waitExecuter.sleep(1000);
             applicationsPageObject.copyAppName.click();
-            try {
-                String data = (String) Toolkit.getDefaultToolkit().getSystemClipboard()
-                        .getData(DataFlavor.stringFlavor);
-                String[] getCopiedText = data.split(":");
-                //Click on first app in table to navigate to app details page
-                test.log(LogStatus.INFO, "Click on first app in table to navigate to app details page");
-                LOGGER.info("Click on first app in table to navigate to app details page");
-                applicationsPageObject.getStatusFromTable.click();
-                waitExecuter.sleep(1000);
-                //Assert that App details page opens
-                test.log(LogStatus.INFO, "Assert that App details page opens");
-                LOGGER.info("Assert that App details page opens");
-                Assert.assertTrue(applicationsPageObject.appSummary.isDisplayed(),
-                        "Application Summary page is not opened for id- " + getCopiedText[2]);
-                waitExecuter.sleep(1000);
-                //Navigate back to parent page and click on reset
-                test.log(LogStatus.INFO, "Navigate back to parent page and click on reset");
-                LOGGER.info("Navigate back to parent page and click on reset");
-                driver.navigate().back();
-                waitExecuter.sleep(5000);
-                allApps.reset();
-            } catch (HeadlessException | UnsupportedFlavorException | IOException e) {
-                allApps.reset();
-                e.printStackTrace();
-            }
+
+            //Click on first app in table to navigate to app details page
+            test.log(LogStatus.INFO, "Click on first app in table to navigate to app details page");
+            LOGGER.info("Click on first app in table to navigate to app details page");
+            applicationsPageObject.getStatusFromTable.click();
+            waitExecuter.sleep(1000);
+            //Assert that App details page opens
+            test.log(LogStatus.INFO, "Assert that App details page opens");
+            LOGGER.info("Assert that App details page opens");
+            Assert.assertTrue(applicationsPageObject.appSummary.isDisplayed(),
+                    "Application Summary page didn't load. ");
+            test.log(LogStatus.PASS, "Application Summary page loaded successfully.");
+            waitExecuter.sleep(1000);
+            //Navigate back to parent page and click on reset
+            test.log(LogStatus.INFO, "Navigate back to parent page and click on reset");
+            LOGGER.info("Navigate back to parent page and click on reset");
+            driver.navigate().back();
+            waitExecuter.sleep(5000);
+            allApps.reset();
+
         } else {
             Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
                     "The clusterId does not have any application under it and also does not display 'No Data Available' for it"

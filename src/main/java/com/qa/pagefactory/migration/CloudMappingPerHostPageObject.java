@@ -29,7 +29,7 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//div[@class='col-md-4']//span[contains(@class,'select2-selection__arrow')]")
   public List<WebElement> cloudProductDropDown;
 
-  @FindBy(xpath = "//div[contains(@class,'col-md-4 boot-icons')]//span[contains(@class,'select2-selection__arrow')]")
+  @FindBy(xpath = "//div[contains(@class,'col-md-4 boot-icons')]//span[contains(@class,'select2-selection__rendered')]")
   public WebElement regionDropDown;
 
   @FindBy(xpath = "//ul[@class='select2-results__options']/li")
@@ -52,6 +52,9 @@ public class CloudMappingPerHostPageObject {
 
   @FindBy(xpath = "//div[@class='table-container']//nav/p[@class='pointer']")
   public WebElement paginationCnt;
+
+  @FindBy(xpath ="//div[@class='table-container']//nav/p[@class='pointer']//input")
+  public WebElement incrementalPageCnt;
 
   @FindBy(xpath = "//div[@class='table-container']//a[@class='disabled']//*[name()='svg' and @data-icon='caret-right']")
   public WebElement disabledForwardCaret;
@@ -94,11 +97,10 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//ul[contains(@class,'lb-dropdown-label js-open')]/li")
   public List<WebElement> regionsList;
 
-
   @FindBy(xpath = "//*[@id='element-a842d544-ca56-4cb2-a1bb-7bb9f83a50cd']/table/tbody/tr/td[1]")
   public List<WebElement> emrVMList;
 
-  @FindBy(xpath = "//*[@id='element-ebfd025d-127e-4c9e-8969-0acb9addbcaa']//tbody/tr/td[1]")
+  @FindBy(xpath = "//*[@id='element-ebfd025d-127e-4c9e-8969-0acb9addbcaa']/div[2]/div[3]/table/tbody/tr/td[1]")
   public List<WebElement> ec2VMList;
 
 

@@ -28,13 +28,15 @@ public class TC_CMP_01 extends BaseClass {
     LOGGER.info("Initialize all class objects");
     SubTopPanelModulePageObject subPanelPageObj = new SubTopPanelModulePageObject(driver);
     CloudMigrationPerHostPage cloudMappingPage = new CloudMigrationPerHostPage(driver);
-    CloudMappingPerHostPageObject cloudMappingPageObj = new CloudMappingPerHostPageObject(driver);
+    CloudMappingPerHostPageObject cmPageObj = new CloudMappingPerHostPageObject(driver);
     WaitExecuter waitExecuter = new WaitExecuter(driver);
 
     // Navigate to Reports tab from header
     MouseActions.clickOnElement(driver, subPanelPageObj.migration);
     waitExecuter.waitUntilPageFullyLoaded();
-    MouseActions.clickOnElement(driver, cloudMappingPageObj.cloudMappingPerHostTab);
+    waitExecuter.waitUntilElementClickable(cmPageObj.cloudMappingPerHostTab);
+    MouseActions.clickOnElement(driver, cmPageObj.cloudMappingPerHostTab);
+    waitExecuter.waitUntilElementClickable(cmPageObj.runButton);
     waitExecuter.waitUntilPageFullyLoaded();
     String[] expectedValList = {"Amazon EMR", "Asia Pacific (Mumbai)", "Local attached storage"};
     cloudMappingPage.verifyCloudMappingPerHostReports(expectedValList, "i3.16xlarge");

@@ -4,12 +4,12 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.migration.CloudMappingPerHostPageObject;
 import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
+import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.Mouse;
 import org.testng.Assert;
 
@@ -40,9 +40,14 @@ public class CloudMigrationPerHostPage {
 
   public void getOptions(String expectedVal) {
     List<WebElement> optionList = cmpPageObj.dropDownValues;
+    Assert.assertFalse(optionList.isEmpty(), " No options are displayed");
     for (int j = 0; j < optionList.size(); j++) {
-      if (optionList.get(j).getText().equals(expectedVal)) {
+      String actualCloudProvider = optionList.get(j).getText();
+      logger.info("Actual value: " + actualCloudProvider + " Expected value: " + expectedVal);
+      if (actualCloudProvider.equals(expectedVal)) {
         MouseActions.clickOnElement(driver, optionList.get(j));
+        waitExecuter.waitUntilElementClickable(cmpPageObj.checkBox);
+        break;
       }
     }
   }
@@ -96,6 +101,7 @@ public class CloudMigrationPerHostPage {
   public void runNewReport() {
     try {
       userAction.performActionWithPolling(cmpPageObj.runButton, UserAction.CLICK);
+      //MouseActions.clickOnElement(driver, cmpPageObj.runButton);
       List<WebElement> cloudProDD = cmpPageObj.cloudProductDropDown;
       waitExecuter.waitUntilElementClickable(cloudProDD.get(0));
     } catch (TimeoutException ex) {
@@ -104,6 +110,7 @@ public class CloudMigrationPerHostPage {
   }
 
   public void verifyCloudMappingPerHostReports(String[] expectedList, String vmType) {
+    waitExecuter.sleep(2000);
     runNewReport();
     List<WebElement> dropDownList = cmpPageObj.dropDownBtn;
     for (int i = 0; i < dropDownList.size(); i++) {
@@ -128,13 +135,12 @@ public class CloudMigrationPerHostPage {
     verifyTotalCost();
   }
 
-  public ArrayList<String> getEMRVMList(String region) {
-    String url = "https://aws.amazon.com/emr/pricing/?nc=sn&loc=4";
+  public ArrayList<String> getEMRVMList(String region, String url) {
+    WebElement regions = cmpPageObj.emrRegionsDropDown;
+    List<WebElement> regionList = cmpPageObj.regionsList;
     driver.navigate().to(url);
     waitExecuter.waitUntilPageFullyLoaded();
-    WebElement regions = cmpPageObj.emrRegionsDropDown;
     MouseActions.clickOnElement(driver, regions);
-    List<WebElement> regionList = cmpPageObj.regionsList;
     ArrayList<String> vmList = new ArrayList<>();
     for (int i = 0; i < regionList.size(); i++) {
       if (regionList.get(i).getText().equals(region)) {
@@ -154,8 +160,30 @@ public class CloudMigrationPerHostPage {
     return vmList;
   }
 
-  public ArrayList<String> getEC2VMList(String region) {
+  public ArrayList<String> getEC2VMList(String region, String url) {
+    driver.navigate().to(url);
+    WebElement regions = cmpPageObj.ec2RegionsDropDown;
+    waitExecuter.waitUntilPageFullyLoaded();
+    MouseActions.clickOnElement(driver, regions);
+    List<WebElement> regionList = cmpPageObj.regionsList;
     ArrayList<String> vmList = new ArrayList<>();
+    for (int i = 0; i < regionList.size(); i++) {
+      if (regionList.get(i).getText().equals(region)) {
+        MouseActions.clickOnElement(driver, regionList.get(i));
+        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.sleep(5000);
+        //vm type is coming empty dont knw y
+        List<WebElement> ec2VMList = cmpPageObj.ec2VMList;
+        logger.info("The vm list lenght is " + ec2VMList.size());
+        for (WebElement webElement : ec2VMList) {
+          String val = webElement.getText();
+          if (!Character.isUpperCase(val.charAt(0))) {
+            logger.info("The vm type is " + val);
+            vmList.add(val);
+          }
+        }
+      }
+    }
     return vmList;
   }
 
@@ -176,12 +204,15 @@ public class CloudMigrationPerHostPage {
 
   public ArrayList<String> getCloudProviderVMList(String region, String cloudProvider) {
     ArrayList<String> vmList = new ArrayList<String>();
+    String url = null;
     switch (cloudProvider) {
       case "Amazon EMR":
-        vmList = getEMRVMList(region);
+        url = "https://aws.amazon.com/emr/pricing/?nc=sn&loc=4";
+        vmList = getEMRVMList(region, url);
         break;
       case "Amazon EC2 (IaaS)":
-        vmList = getEC2VMList(region);
+        url = "https://aws.amazon.com/ec2/pricing/on-demand/";
+        vmList = getEC2VMList(region, url);
         break;
       case "Azure (IaaS)":
         vmList = getAzureVMList(region);
@@ -204,40 +235,30 @@ public class CloudMigrationPerHostPage {
     String pageCntStr = cmpPageObj.paginationCnt.getText();
     logger.info("The pageCnt is " + pageCntStr);
     //output= 1   of 173
-    int pageCnt = Integer.parseInt(pageCntStr.split("\\s+")[part]);
+    int pageCnt = Integer.parseInt(pageCntStr.trim().split("\\s+")[part]);
     logger.info("The integer page count is " + pageCnt);
     return pageCnt;
   }
-//
-//  public void selectOptions(List<WebElement> dropDownList, String expectedVal) {
-//    for (WebElement webElement : dropDownList) {
-//      if (webElement.getText().equals(expectedVal)) {
-//        MouseActions.clickOnElement(driver, webElement);
-//      }
-//    }
-//  }
 
   public void verifyEMRVMTypes(String region, String cloudProvider) {
+    waitExecuter.sleep(2000);
+    Actions action = new Actions(driver);
     String currentUrl = driver.getCurrentUrl();
     logger.info("The current url is " + currentUrl);
     ArrayList<String> expectedVMList;
     runNewReport();
+   // waitExecuter.waitUntilPageFullyLoaded();
     List<WebElement> cloudProDD = cmpPageObj.cloudProductDropDown;
-    MouseActions.clickOnElement(driver, cloudProDD.get(0));
-//    List<WebElement> dropDownList = cmpPageObj.dropDownValues;
-//    waitExecuter.waitUntilPageFullyLoaded();
+    waitExecuter.sleep(2000);
+   // action.moveToElement(cloudProDD.get(0)).perform();
+    userAction.performActionWithPolling(cloudProDD.get(0), UserAction.CLICK);
     getOptions(cloudProvider);
-    WebElement regionDropDown = cmpPageObj.regionDropDown;
-    MouseActions.clickOnElement(driver, regionDropDown);
-//    List<WebElement> regionDropDownList = cmpPageObj.regionsList;
-//    waitExecuter.waitUntilPageFullyLoaded();
-//    selectOptions(regionDropDownList, region);
-    getOptions(region);
+    waitExecuter.waitUntilElementClickable(cmpPageObj.checkBox);
     waitExecuter.waitUntilPageFullyLoaded();
+    waitExecuter.sleep(10000);
     ArrayList<String> UI_VMList;
     //Get UI vm list
     UI_VMList = getUIVMList(region, cloudProvider);
-    MouseActions.clickOnElement(driver, cmpPageObj.closeNewReportWin);
     //Get CloudProvider vm list
     expectedVMList = getCloudProviderVMList(region, cloudProvider);
     driver.navigate().to(currentUrl);
@@ -255,33 +276,36 @@ public class CloudMigrationPerHostPage {
   }
 
   public ArrayList<String> getUIVMList(String region, String cloudProvider) {
+    waitExecuter.sleep(5000);
     ArrayList<String> UI_VMList = new ArrayList<>();
-    int pageCnt = getPageCnt(1);
+    logger.info("Doc ready");
+    Actions action = new Actions(driver);
+    int pageCnt = getPageCnt(2);
     logger.info("PageCnt is " + pageCnt);
-    if (pageCnt > 1) {
-      for (int i = 0; i < pageCnt; i++) {
-        int incrementalPgCnt = getPageCnt(0);
-        List<WebElement> vmTypeList = cmpPageObj.vmTypeTableRows;
-        Assert.assertFalse(vmTypeList.isEmpty(), " No vms listed in the table for " + cloudProvider +
-            " in region " + region);
-        for (WebElement webElement : vmTypeList) {
-          String vmType = webElement.getText();
-          UI_VMList.add(vmType);
-        }
-        if (incrementalPgCnt == pageCnt)
-          MouseActions.clickOnElement(driver, cmpPageObj.closeNewReportWin);
-        else
-          MouseActions.clickOnElement(driver, cmpPageObj.forwardCaret);
-      }
-    } else {
-      List<WebElement> vmTypeList = cmpPageObj.vmTypeTableRows;
-      Assert.assertFalse(vmTypeList.isEmpty(), " No vms listed in the table for " + cloudProvider +
-          " in region " + region);
-      for (WebElement webElement : vmTypeList) {
-        String vmType = webElement.getText();
-        UI_VMList.add(vmType);
-      }
-    }
+//    if (pageCnt > 1) {
+//      for (int i = 1; i <= pageCnt; i++) {
+//        List<WebElement> vmTypeList = cmpPageObj.vmTypeTableRows;
+//        Assert.assertFalse(vmTypeList.isEmpty(), " No vms listed in the table for " + cloudProvider +
+//            " in region " + region);
+//        for (WebElement webElement : vmTypeList) {
+//          String vmType = webElement.getText();
+//          UI_VMList.add(vmType);
+//        }
+//        logger.info("SPPP: Value of i is " + i);
+//        if (i == pageCnt)
+//          action.moveToElement(cmpPageObj.closeNewReportWin).click().build().perform();
+//         else
+//          userAction.performActionWithPolling(cmpPageObj.forwardCaret, UserAction.CLICK);
+//      }
+//    } else {
+//      List<WebElement> vmTypeList = cmpPageObj.vmTypeTableRows;
+//      Assert.assertFalse(vmTypeList.isEmpty(), " No vms listed in the table for " + cloudProvider +
+//          " in region " + region);
+//      for (WebElement webElement : vmTypeList) {
+//        String vmType = webElement.getText();
+//        UI_VMList.add(vmType);
+//      }
+//    }
     return UI_VMList;
   }
 }

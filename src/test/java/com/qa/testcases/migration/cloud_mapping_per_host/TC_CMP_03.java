@@ -12,15 +12,15 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
-public class TC_CMP_02 extends BaseClass {
-  private static final Logger LOGGER = Logger.getLogger(com.qa.testcases.migration.cloud_mapping_per_host.TC_CMP_02.class.getName());
+public class TC_CMP_03 extends BaseClass {
+  private static final Logger LOGGER = Logger.getLogger(com.qa.testcases.migration.cloud_mapping_per_host.TC_CMP_03.class.getName());
 
   @Test(dataProvider = "clusterid-data-provider")
-  public void verifyVMTypesForEMR(String clusterId) {
-    test = extent.startTest("verifyVMTypesForEMR: " + clusterId,
-        "Verify Unravel UI displays the right VM types for EMR.");
+  public void verifyVMTypesForEC2(String clusterId) {
+    test = extent.startTest("verifyVMTypesForEC2: " + clusterId,
+        "Verify Unravel UI displays the right VM types for EC2.");
     test.assignCategory(" Migration/Cloud Mappig Per Host ");
-    Log.startTestCase("verifyVMTypesForEMR");
+    Log.startTestCase("verifyVMTypesForEC2");
 
     // Initialize all classes objects
     test.log(LogStatus.INFO, "Initialize all class objects");
@@ -38,7 +38,7 @@ public class TC_CMP_02 extends BaseClass {
     waitExecuter.waitUntilElementClickable(cmPageObj.runButton);
     waitExecuter.waitUntilPageFullyLoaded();
 
-    cloudMappingPage.verifyEMRVMTypes("AWS GovCloud (US-West)", "Amazon EMR");
-    test.log(LogStatus.PASS, "Validated Unravel UI displays the right VM types for EMR successfully ");
+    cloudMappingPage.verifyEMRVMTypes("Asia Pacific (Seoul)", "Amazon EC2 (IaaS)");
+    test.log(LogStatus.PASS, "Validated Unravel UI displays the right VM types for EC2 successfully ");
   }
 }

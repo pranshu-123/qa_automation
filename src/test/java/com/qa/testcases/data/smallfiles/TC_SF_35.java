@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 @Marker.DataSmallFiles
 @Marker.All
 public class TC_SF_35 extends BaseClass {
-    Logger logger = Logger.getLogger(TC_SF_34.class.getName());
+    Logger logger = Logger.getLogger(TC_SF_35.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void verifyMaxFileSize(String clusterId) {

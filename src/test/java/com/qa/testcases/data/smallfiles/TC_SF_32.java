@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 @Marker.DataSmallFiles
 @Marker.All
 public class TC_SF_32 extends BaseClass {
-    Logger logger = Logger.getLogger(TC_SF_31.class.getName());
+    Logger logger = Logger.getLogger(TC_SF_32.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void verifyAvgFileSize(String clusterId) {

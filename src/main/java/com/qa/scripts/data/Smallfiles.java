@@ -7,6 +7,7 @@ import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.data.SmallfilesPageObject;
 import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
+import com.qa.scripts.Schedule;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
@@ -17,6 +18,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -101,13 +103,6 @@ public class Smallfiles {
 
     }
 
-    public static class TuningScheduleRun {
-        public static String[] SCHEDULE_RUN = {"Daily","Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
-                "Friday","Saturday","Every 2 Weeks","Every Month"};
-        public static String[] SCHEDULE_CLUSTERID = {"tnode28-HDP315-TLS-Kerb-Ranger", "tnode3-CDH633-TLS-Kerb-Sentry",
-                "tnode40-CDH5162"};
-    }
-
     /**
      * Method to validate the Small File report Page
      */
@@ -151,7 +146,6 @@ public class Smallfiles {
         test.log(LogStatus.INFO, "Set directories To Show as: " + directoriesToShow);
     }
 
-
     /**
      * Common steps to validate minimumFileSize,maximumFileSize,minimumSmallFile,directoriesToShow
      */
@@ -184,25 +178,13 @@ public class Smallfiles {
         smallfilesPageObject.emailNotification.sendKeys(email);
         LOGGER.info("Set directories To Show as: " + email);
         test.log(LogStatus.INFO, "Set directories To Show as: " + email);
+
+
+        smallfilesPageObject.Daily.stream()
+                .filter(WebElement::isDisplayed).findFirst().get().click();
+
     }
 
-    /**
-     * Method to validate the sorting option on Next Scheduled Run for Scheduled Page
-     */
-    public void verifyScheduleToRun(){
-        List<String> expectedSchedule = new ArrayList<>(Arrays.asList(TuningScheduleRun.SCHEDULE_RUN));
-        waitExecuter.waitUntilElementPresent(smallfilesPageObject.scheduleToRun);
-        Select scheduleTorunDropDown = new Select(smallfilesPageObject.scheduleToRun);
-        List <WebElement> elementScheduleTorunDropDown = scheduleTorunDropDown.getOptions();
-        if(elementScheduleTorunDropDown.size() > 0 ){
-            for(int i=0; i<elementScheduleTorunDropDown.size(); i++){
-                WebElement e = elementScheduleTorunDropDown.get(i);
-                e.click();
-                LOGGER.info("Schedule date: "+ e.getText());
-                Assert.assertEquals(e.getText().trim(), expectedSchedule.get(i), "Mismatch in schedule run date.");
-            }
-        }
-    }
 
     /**
      * Method to click on 'advancedOptions'
@@ -214,6 +196,7 @@ public class Smallfiles {
             MouseActions.clickOnElement(driver, smallfilesPageObject.advancedOptions);
         }
     }
+
 
     /***
      * verify common Panel data and smallFilesTab

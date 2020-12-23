@@ -61,11 +61,10 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//a[@href='#/clusters/overview']")
     public WebElement homeTab;
 
-
     @FindBy(xpath = "//p[contains(@class,'float-right')]/b")
     public WebElement getTotalAppCount;
 
-    @FindBy(xpath = "(//div[@id='scrollableMenu'])/ul/li/a")
+    @FindBy(xpath = "(//div[@class='component-tabs-primary'])/ul/li/a")
     public List<WebElement> appSummaryTabs;
 
     @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[2]/div/div[2]/div[3]/div/div/section/div[1]/span[1]")

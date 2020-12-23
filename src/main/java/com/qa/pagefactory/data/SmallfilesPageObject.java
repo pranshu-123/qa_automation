@@ -16,6 +16,12 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//span[contains(text(),'Run')]/parent::a")
     public WebElement runButton;
 
+    @FindBy(xpath = "//span[contains(text(),'Schedule')]")
+    public WebElement SheduleButton;
+
+    @FindBy(xpath = "//span[contains(@class,'pointer cta-primary')]//span[contains(text(),'Schedule')]")
+    public WebElement runSheduleButton;
+
     @FindBy(xpath = "//span[contains(text(),'Run New')]/parent::a")
     public WebElement runNowButton;
 
@@ -33,6 +39,9 @@ public class SmallfilesPageObject {
 
     @FindBy(xpath = "//h4[normalize-space()='Advanced Options']")
     public WebElement advancedOptions;
+
+    @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select/option[1]")
+    public  List<WebElement> Daily;
 
     @FindBy(xpath = "//ul[contains(concat(' ', @class, ' '), 'select2-results__options')]/li")
     public List<WebElement> clusterList;
@@ -70,6 +79,33 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//input[contains(@type,'search')]")
     public WebElement reportSearchBox;
 
+    @FindBy(xpath = "//select[contains(@class,'schedule-days')]")
+    public WebElement scheduleToRun;
+
+    @FindBy(xpath = "//*[@class=\"col-md-12\"]//tbody/tr/td[1]")
+    public List<WebElement> pathName;
+
+    @FindBy(xpath = "//span[contains(@class,'select2-selection__arrow')]")
+    public WebElement clusterDropdown;
+
+    @FindBy(xpath = "//li[contains(@class,'select2-results__option')]")
+    public List<WebElement> clustersList;
+
+    @FindBy(xpath = "//*[@class=\"col-md-12\"]//tbody/tr/td[2]")
+    public List<WebElement> fileName;
+
+    @FindBy(xpath = "//table/tbody/tr/td[3]/span")
+    public List<WebElement> avgFileSize;
+
+    @FindBy(xpath = "//table/tbody/tr/td[4]/span")
+    public List<WebElement> totalFileSize;
+
+    @FindBy(xpath = "//table/tbody/tr/td[5]/span")
+    public List<WebElement> minFileSizeName;
+
+    @FindBy(xpath = "//table/tbody/tr/td[5]/span")
+    public List<WebElement> maxFileSize ;
+
     @FindBy(xpath = "//table[contains(@class,'component-data-tables')]/tbody/tr/td[1]")
     public List<WebElement> getPathNameFromTable;
 
@@ -91,11 +127,17 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "(//input[contains(@type,'text')])[5]")
     public WebElement directoriestoShow;
 
-    @FindBy(xpath = "(//input[contains(@type,'text')])[5]")
+    @FindBy(xpath = "//input[@num_files_threshold]")
     public WebElement onminParentDirectory;
 
-    @FindBy(xpath = "(//input[contains(@type,'text')])[5]")
+    @FindBy(xpath = "(//input[contains(@type,'text')])[7]")
     public WebElement maxParentDirectory;
+
+    @FindBy(xpath = "//div/b[text()='Schedule Name']//following::p/input")
+    public WebElement scheduleNameTextbox;
+
+    @FindBy(xpath ="//p[@class='element-inline']/input")
+    public WebElement emailNotification;
 
     @FindBy(xpath = "//div[@class='panel-body']/div[2]/p/b")
     public WebElement previousReportData;
@@ -103,10 +145,58 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//div[contains(@class,'close pointer')]")
     public WebElement closebutton;
 
+    @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select/option[2]")
+    public List<WebElement> Sunday;
+
+    @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select/option[3]")
+    public List<WebElement> Monday;
+
+    @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select/option[4]")
+    public List<WebElement> Tuesday;
+
+    @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select/option[5]")
+    public List<WebElement> Wednesday;
+
+    @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select/option[6]")
+    public List<WebElement> Thursday;
+
+    @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select/option[7]")
+    public List<WebElement> Friday;
+
+    @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select/option[8]")
+    public List<WebElement> Saturday;
+
+    @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select/option[9]")
+    public List<WebElement> Everytwoweeks;
+
+    @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select/option[10]")
+    public List<WebElement> Everymonths;
+
+    @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[3]/span/input")
+    public WebElement timepicker;
+
+    @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[3]/span/div[2]")
+    public List<WebElement> timepickerdropdown;
+
+    @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div[2]/div[3]/div[3]/div[3]/span/div[2]/div/select[1]")
+    public List<WebElement> hoursRange;
+
+    @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[3]/span/div[2]/div/select[1]/option[25]")
+    public List<WebElement> twentythreehours;
+
+    @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div[2]/div[3]/div[3]/div[3]/span/div[2]/div/select[2]")
+    public List<WebElement> minutes;
+
+    @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[3]/span/div[2]/div/select[2]/option[61]")
+    public List<WebElement> Fiftynine;
+
+
     /**
      * @param driver The driver that will be used to look up the elements
      */
     public SmallfilesPageObject(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
+
+
 }

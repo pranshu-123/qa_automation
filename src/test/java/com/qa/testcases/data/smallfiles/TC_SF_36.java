@@ -12,12 +12,7 @@ import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.List;
 import java.util.logging.Logger;
 @Marker.DataSmallFiles
 @Marker.All
@@ -27,8 +22,8 @@ public class TC_SF_36 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void verifyScheduleReport(String clusterId) {
-        test = extent.startTest("TC_SF_36.verifyScheduleReport: " + clusterId, "Verify User is able " +
-                "wUnravel should send email notifications to all the email address saved in the scheduled report daily.");
+        test = extent.startTest("TC_SF_36.verifyScheduleReport: " + clusterId,
+                "Verify Unravel should send email notifications to all the email address saved in the scheduled report daily.");
         test.assignCategory("Data- Small Files and File reports");
         Log.startTestCase("TC_SF_36.verifyScheduleReport");
 

@@ -10,12 +10,12 @@ import com.qa.pagefactory.migration.ClusterDiscoveryPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import com.qa.utils.MouseActions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,16 +87,6 @@ public class ClusterDiscovery {
         userAction.performActionWithPolling(commonPageObject.clusterSearchFirstField,
                 UserAction.CLICK);
         waitExecuter.sleep(4000);
-
-//        LOGGER.info("Select Cluster: " + clusterId);
-//        allApps.removeClusterIfPresent();
-//        applicationsPageObject.clusterSearchBox.click();
-//        waitExecuter.sleep(1000);
-//        LOGGER.info("Search for cluster: " + clusterId);
-//        applicationsPageObject.clusterSearchBox.sendKeys(clusterId);
-//        waitExecuter.sleep(1000);
-//        applicationsPageObject.select1stCluster.click();
-//        waitExecuter.sleep(4000);
     }
 
     /* Navigate to Cluster Discovery Tab */

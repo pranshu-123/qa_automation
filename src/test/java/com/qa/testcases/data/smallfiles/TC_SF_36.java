@@ -53,6 +53,7 @@ public class TC_SF_36 extends BaseClass {
         smallfiles.scheduleAdvancedOptions(smallfilesPageObject,test,"Queue_An_Test","sray@unraveldata.com");
         test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files Advanced Options");
         smallfiles.clickOnModalScheduleButton();
+        waitExecuter.waitUntilPageFullyLoaded();
         logger.info("Clicked on Modal Schedule Button");
         test.log(LogStatus.INFO, "Clicked on Modal Schedule Button");
 

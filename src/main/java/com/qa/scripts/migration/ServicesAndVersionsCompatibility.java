@@ -215,7 +215,7 @@ public class ServicesAndVersionsCompatibility {
                         String classAttributeName = e.getAttribute("class");
                         logger.info("Element class attribute name: " + classAttributeName);
                         Assert.assertTrue(classAttributeName.equals("risk-0"), "Platforms service in the box is not" +
-                                " marked in Green ");
+                                " marked in Green for element: "+e.getText());
 
                     }
                 }
@@ -302,6 +302,7 @@ public class ServicesAndVersionsCompatibility {
                         waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.archiveReportSVCHeader);
                         String status = "fail";
                         reportPageObj.reportSearchBox.sendKeys(status);
+                        waitExecuter.waitUntilElementPresent(reportPageObj.sortingReportNameIcon);
                         List<WebElement> searchStatusReportNameList = reportPageObj.reportNames;
                         Assert.assertFalse(searchStatusReportNameList.isEmpty(), "There are no reports listed");
                         Assert.assertEquals(searchStatusReportNameList.size() > 0, "Expected search " +
@@ -315,6 +316,7 @@ public class ServicesAndVersionsCompatibility {
                         //Give any name which shows in the UI
                         String searchReportName = servicesAndVersionsCompatibilityPageObject.archiveReportName.getText().trim();
                         reportPageObj.reportSearchBox.sendKeys(searchReportName);
+                        waitExecuter.waitUntilElementPresent(reportPageObj.sortingReportNameIcon);
                         List<WebElement> searchNameReportNameList = reportPageObj.reportNames;
                         Assert.assertFalse(searchNameReportNameList.isEmpty(), "There are no reports listed");
                         Assert.assertEquals(searchNameReportNameList.size() > 0, "Expected search " +

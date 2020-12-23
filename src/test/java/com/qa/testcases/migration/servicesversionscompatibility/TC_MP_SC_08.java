@@ -16,15 +16,15 @@ import java.util.logging.Logger;
 
 @Marker.All
 @Marker.MigrationServices
-public class TC_MP_SC_06 extends BaseClass {
+public class TC_MP_SC_08  extends BaseClass {
 
-    private static final Logger LOGGER = Logger.getLogger(TC_MP_SC_06.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TC_MP_SC_08.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateServicesAndVersionsAreCompatibleForGoogle(String clusterId) {
+    public void validateServicesAndVersionsAreCompatibleForAzureHDI(String clusterId) {
 
-        test = extent.startTest("TC_MP_SC_06.validateServicesAndVersionsAreCompatibleForGoogle: " + clusterId,
-                "Validate \"Services and Versions are Compatible\" legend for cloud provider - \"Google data proc\" ");
+        test = extent.startTest("TC_MP_SC_08.validateServicesAndVersionsAreCompatibleForAzureHDI: " + clusterId,
+                "Validate \"Services and Versions are Compatible\" legend for cloud provider - \"Azure HDI\"");
         test.assignCategory(" Migration - Services And Versions Compatibility ");
 
         //Initialize object
@@ -41,12 +41,11 @@ public class TC_MP_SC_06 extends BaseClass {
         LOGGER.info("Clicked on close banner");
         servicesAndVersionsCompatibility.clickOnRunButton();
         LOGGER.info("Clicked on Run button");
-        String cloudProductName = "Google Dataproc";
+        String cloudProductName = "Azure HDI";
         servicesAndVersionsCompatibility.selectCloudProduct(cloudProductName);
         LOGGER.info("Selected platform : "+cloudProductName+" from the drop down.");
         servicesAndVersionsCompatibility.clickOnRunModalButton();
-        List<String> expectedPlatforms = Arrays.asList("Dataproc 2.0.0-Preview", "Dataproc 1.5.13",
-                "Dataproc 1.5.12", "Dataproc 1.5.11");
+        List<String> expectedPlatforms = Arrays.asList("HDInsight 4.0", "HDInsight 3.6");
 
         try {
             waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.confirmationMessageElement,
@@ -55,11 +54,11 @@ public class TC_MP_SC_06 extends BaseClass {
             Assert.assertTrue(expectedPlatforms.equals(servicesAndVersionsCompatibility.getPlatforms()));
             servicesAndVersionsCompatibility.verifyServicesAndVersionsAreCompatible();
             test.log(LogStatus.PASS, "Verified Services and Versions are Compatible" +
-                    " for Google Dataproc.");
+                    " for Azure HDI.");
 
         } catch (TimeoutException te) {
             throw new AssertionError("Services and Versions Compatibility Report not completed successfully" +
-                    " for Google Dataproc.");
+                    " for Azure HDI.");
         }
 
     }

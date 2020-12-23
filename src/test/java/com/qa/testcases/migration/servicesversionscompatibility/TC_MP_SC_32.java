@@ -17,15 +17,15 @@ import java.util.logging.Logger;
 @Marker.MigrationServices
 public class TC_MP_SC_32 extends BaseClass {
 
-    private static final Logger logger = Logger.getLogger(TC_MP_SC_31.class.getName());
+    private static final Logger logger = Logger.getLogger(TC_MP_SC_32.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void validateReportsArchivedSearchByReportName(String clusterId) {
 
-        test = extent.startTest("TC_MP_SC_31.validateReportsArchivedSearchByReportName: " + clusterId,
+        test = extent.startTest("TC_MP_SC_32.validateReportsArchivedSearchByReportName: " + clusterId,
                 "Reports Archived Validate Search By Report Name: Services and Versions are Compatible ");
         test.assignCategory(" Migration - Services And Versions Compatibility ");
-        Log.startTestCase("TC_MP_SC_31.validateReportsArchivedSearchByReportName");
+        Log.startTestCase("TC_MP_SC_32.validateReportsArchivedSearchByReportName");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

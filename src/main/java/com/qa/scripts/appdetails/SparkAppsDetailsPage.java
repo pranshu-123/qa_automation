@@ -243,6 +243,7 @@ public class SparkAppsDetailsPage {
     verifyAssertFalse(executorNameList.isEmpty(), sparkAppPageObj, " No executors listed in the Logs Tab");
     List<WebElement> logCollapsableList = sparkAppPageObj.logElementCollapsable;
     verifyAssertFalse(logCollapsableList.isEmpty(), sparkAppPageObj, " No executors listed in the Logs Tab");
+    JavascriptExecutor executor = (JavascriptExecutor) driver;
     try {
       int cnt = 0;
       for (int c = 0; c < logCollapsableList.size(); c++) {
@@ -251,7 +252,15 @@ public class SparkAppsDetailsPage {
         waitExecuter.sleep(5000);
         WebElement contents = sparkAppPageObj.logExecutorContents;
         verifyAssertTrue(contents.isDisplayed(), sparkAppPageObj, " No logs found");
-        WebElement showFullLogs = sparkAppPageObj.showFullLogLink;
+        MouseActions.clickOnElement(driver, sparkAppPageObj.showFullLogLink);
+        waitExecuter.waitUntilNumberOfWindowsToBe(1);
+        List<WebElement> logLinesList = sparkAppPageObj.logScrollable;
+        int scrollableLines = (logLinesList.size()/2);
+        logger.info("Scrollable line is "+ scrollableLines);
+        WebElement scrollableElement = driver.findElement(By.xpath("//div[@class='modal-body']//p/br["+scrollableLines+"]"));
+        executor.executeScript("arguments[0].scrollIntoView(true);", scrollableElement);
+        MouseActions.clickOnElement(driver, sparkAppPageObj.loadWinClose);
+        waitExecuter.waitUntilPageFullyLoaded();
         logCollapsableList.get(c).click();
         cnt += 1;
       }
@@ -903,7 +912,7 @@ public class SparkAppsDetailsPage {
         logger.info("The LoadDignostics window header is " + winHeader);
         verifyAssertTrue(winHeader.contains(expectedStr), sparkAppPageObj, " Expected Header String is not " +
             "displayed\n Expected = " + expectedStr + " Actual = " + winHeader);
-        MouseActions.clickOnElement(driver, sparkAppPageObj.loadDiagnosticWinClose);
+        MouseActions.clickOnElement(driver, sparkAppPageObj.loadWinClose);
         MouseActions.clickOnElement(driver, actionMenu);
       }
     }
@@ -918,7 +927,7 @@ public class SparkAppsDetailsPage {
     } catch (Throwable e) {
       //Close apps details page
       if (isDignosticWin)
-        MouseActions.clickOnElement(driver, sparkAppPageObj.loadDiagnosticWinClose);
+        MouseActions.clickOnElement(driver, sparkAppPageObj.loadWinClose);
       else
         MouseActions.clickOnElement(driver, sparkAppPageObj.closeAppsPageTab);
       throw new AssertionError(msg + e.getMessage());
@@ -931,7 +940,7 @@ public class SparkAppsDetailsPage {
     } catch (Throwable e) {
       //Close apps details page
       if (isDignosticWin) {
-        MouseActions.clickOnElement(driver, sparkAppPageObj.loadDiagnosticWinClose);
+        MouseActions.clickOnElement(driver, sparkAppPageObj.loadWinClose);
         waitExecuter.sleep(1000);
         MouseActions.clickOnElement(driver, sparkAppPageObj.closeAppsPageTab);
       } else

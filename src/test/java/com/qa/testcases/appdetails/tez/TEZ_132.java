@@ -22,7 +22,7 @@ public class TEZ_132 extends BaseClass {
         Log.startTestCase("TEZ_132_VerifyTheConfiguration");
         TezAppsDetailsPage tezDetailsPage = new TezAppsDetailsPage(driver);
 
-        tezDetailsPage.commonTabValidation(test, clusterId, "Configuration", logger);
+        tezDetailsPage.commonTabValidation(test, clusterId, "Configuration..", logger,false);
         test.log(LogStatus.PASS, "Verified the configuration tab successfully");
 
     }

@@ -60,21 +60,8 @@ public class TC_SF_09 extends BaseClass {
         test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files");
 
         smallfiles.clickOnadvancedOptions();
-        waitExecuter.sleep(3000);
-
-        String onminParentDirectory = "3";
-        smallfiles.clickonminParent(onminParentDirectory);
-        LOGGER.info("Set Min Parent Directory Depth as: " + onminParentDirectory);
-        test.log(LogStatus.INFO, "Set minimum Small File as: " + onminParentDirectory);
-
-        String onmaxParentDirectory = "5";
-        smallfiles.clickonmaxParent(onmaxParentDirectory);
-        LOGGER.info("Set Max Parent Directory Depth as: " + onmaxParentDirectory);
-        test.log(LogStatus.INFO, "Set minimum Small File as: " + onmaxParentDirectory);
-
-
+        smallfiles.navigateToAdvancedOptions(smallfilesPageObject, test, "3", "5");
         smallfiles.clickOnModalRunButton();
-        waitExecuter.sleep(3000);
         LOGGER.info("Clicked on Modal Run Button");
         test.log(LogStatus.INFO, "Clicked on Modal Run Button");
 

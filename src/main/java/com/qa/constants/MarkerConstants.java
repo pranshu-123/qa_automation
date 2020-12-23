@@ -85,9 +85,9 @@ public class MarkerConstants {
         map.put(CLUSTER_TUNING, Marker.Tuning.class);
         map.put(KAFKA_EXTERNAL, Marker.KafkaExternal.class);
         map.put(CLUSTER_ELK, Marker.ClusterELK.class);
-        map.put(ONLY, Marker.Only.class);
         map.put(MIGRATION_SERVICESANDVERSIONS, Marker.MigrationServices.class);
         map.put(MIGRATION_CLUSTER_DISCOVERY, Marker.MigrationClusterDiscovery.class);
+        map.put(ONLY, Marker.Only.class);
         return Collections.unmodifiableMap(map);
     }
 }

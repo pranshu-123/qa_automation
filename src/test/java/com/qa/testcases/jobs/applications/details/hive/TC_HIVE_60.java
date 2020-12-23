@@ -15,10 +15,6 @@ import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
 
-import java.awt.*;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -97,45 +93,37 @@ public class TC_HIVE_60 extends BaseClass {
                             applicationsPageObject.copyAppName.click();
                             List<String> expectedTabs = Arrays.asList("table", "gantt chart");
                             List<String> actualTabs = new ArrayList<>();
-                            try {
-                                String data = (String) Toolkit.getDefaultToolkit().getSystemClipboard()
-                                        .getData(DataFlavor.stringFlavor);
-                                String[] getCopiedText = data.split(":");
-                                // Click on first app in table to navigate to app details page
-                                test.log(LogStatus.INFO, "Click on first app in table to navigate to app details page");
-                                LOGGER.info("Click on first app in table to navigate to app details page");
-                                applicationsPageObject.checkHiveInParentApp.get(0).click();
-                                waitExecuter.waitUntilElementPresent(applicationsPageObject.loader);
-                                waitExecuter.sleep(3000);
-                                Assert.assertEquals(applicationsPageObject.mrHiveLeftPaneHeaders.size(), 2,
-                                        "Expected tabs in MR apps having Hive as parent app is 2 but found- "
-                                                + applicationsPageObject.hiveTezAppDetailsTab.size());
-                                LOGGER.info("Number of tabs expected matched i.e 2");
-                                test.log(LogStatus.PASS, "Number of tabs expected matched i.e 2");
-                                for (int j = 0; j < applicationsPageObject.mrHiveLeftPaneHeaders.size(); j++) {
-                                    actualTabs.add(applicationsPageObject.mrHiveLeftPaneHeaders.get(j)
-                                            .getText().trim().toLowerCase());
-                                }
-                                waitExecuter.sleep(3000);
-                                LOGGER.info("Expected tabs- " + expectedTabs);
-                                test.log(LogStatus.INFO, "Expected tabs- " + expectedTabs);
-                                LOGGER.info("Actual tabs- " + actualTabs);
-                                test.log(LogStatus.INFO, "Actual tabs- " + actualTabs);
-                                Assert.assertTrue(actualTabs.containsAll(expectedTabs),
-                                        "All expected tabs are not loaded");
-                                test.log(LogStatus.PASS, "Actual tabs matched expected tabs");
-                                // Navigate back to parent page and click on reset
-                                test.log(LogStatus.INFO, "Navigate back to parent page and click on reset");
-                                LOGGER.info("Navigate back to parent page and click on reset");
-                                driver.navigate().back();
-                                waitExecuter.sleep(5000);
-                                allApps.reset();
-                            } catch (HeadlessException | UnsupportedFlavorException | IOException | AssertionError e) {
-                                driver.navigate().back();
-                                waitExecuter.sleep(5000);
-                                allApps.reset();
-                                e.printStackTrace();
+
+                            // Click on first app in table to navigate to app details page
+                            test.log(LogStatus.INFO, "Click on first app in table to navigate to app details page");
+                            LOGGER.info("Click on first app in table to navigate to app details page");
+                            applicationsPageObject.checkHiveInParentApp.get(0).click();
+                            waitExecuter.waitUntilElementPresent(applicationsPageObject.loader);
+                            waitExecuter.sleep(3000);
+                            Assert.assertEquals(applicationsPageObject.mrHiveLeftPaneHeaders.size(), 2,
+                                    "Expected tabs in MR apps having Hive as parent app is 2 but found- "
+                                            + applicationsPageObject.hiveTezAppDetailsTab.size());
+                            LOGGER.info("Number of tabs expected matched i.e 2");
+                            test.log(LogStatus.PASS, "Number of tabs expected matched i.e 2");
+                            for (int j = 0; j < applicationsPageObject.mrHiveLeftPaneHeaders.size(); j++) {
+                                actualTabs.add(applicationsPageObject.mrHiveLeftPaneHeaders.get(j)
+                                        .getText().trim().toLowerCase());
                             }
+                            waitExecuter.sleep(3000);
+                            LOGGER.info("Expected tabs- " + expectedTabs);
+                            test.log(LogStatus.INFO, "Expected tabs- " + expectedTabs);
+                            LOGGER.info("Actual tabs- " + actualTabs);
+                            test.log(LogStatus.INFO, "Actual tabs- " + actualTabs);
+                            Assert.assertTrue(actualTabs.containsAll(expectedTabs),
+                                    "All expected tabs are not loaded");
+                            test.log(LogStatus.PASS, "Actual tabs matched expected tabs");
+                            // Navigate back to parent page and click on reset
+                            test.log(LogStatus.INFO, "Navigate back to parent page and click on reset");
+                            LOGGER.info("Navigate back to parent page and click on reset");
+                            driver.navigate().back();
+                            waitExecuter.sleep(5000);
+                            allApps.reset();
+
                         } else {
                             test.log(LogStatus.SKIP,
                                     "The clusterId does not have application of MR with HIVE as parent app");

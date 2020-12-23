@@ -9,10 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Logger;
 
 public class KafkaPage {
@@ -118,7 +115,7 @@ public class KafkaPage {
       //Check if data has only special charaters
       boolean onlySpecialChars = kpiValue.matches("[^a-zA-Z0-9]+");
       Assert.assertFalse(kpiValue.isEmpty() || onlySpecialChars, "Expected: AlphaNumeric value for " + kpiName + " Actual: " + kpiValue);
-      }
+    }
   }
 
   /***
@@ -178,7 +175,6 @@ public class KafkaPage {
   public void verifyTopicRecords(KafkaPageObject kafkaPageObject) {
     List<WebElement> colList = kafkaPageObject.topicTableCol;
     List<WebElement> rowList = kafkaPageObject.topicTableRowData;
-    List<WebElement> rowDataList = kafkaPageObject.topicTableRowData;
     Assert.assertFalse(colList.isEmpty(), "No columns for topic table");
     Assert.assertFalse(rowList.isEmpty(), "No data found for the topic tables ");
     for (int row = 0; row < rowList.size(); row++) {
@@ -267,6 +263,82 @@ public class KafkaPage {
         Assert.assertFalse(onlySpecialChars, "Expected value for column " + colName + " But got: " + rowData.getText());
         logger.info("Row data for column: " + colName + "\n " + rowData.getText());
       }
+    }
+  }
+
+  /**
+   * Method to verify column sorting options for Broker Metric table
+   */
+  public void verifyBrokerMetricsColSort(KafkaPageObject kafkaPageObject) {
+    List<WebElement> brokerColList = kafkaPageObject.brokerCol;
+    Assert.assertFalse(brokerColList.isEmpty(), " No columns displayed for broker metrics");
+    List<WebElement> brokerRowList = kafkaPageObject.brokerRows;
+    String[] colStr = {"Broker", "Bytes In Per Sec", "Bytes Out Per Sec"};
+    //String[] intStr = {"Messages In Per Sec", "Total Fetch Requests Per Sec", "Active Controller Count"};
+    Assert.assertFalse(brokerRowList.isEmpty(), "No data displayed for broker metrics table");
+    for (int col = 0; col < brokerColList.size(); col++) {
+      ArrayList<String> strArr = new ArrayList<>();
+      ArrayList<Integer> intArr = new ArrayList<>();
+      ArrayList<String> expectedStrArr = new ArrayList<>();
+      ArrayList<Integer> expectedIntArr = new ArrayList<>();
+      String colName = brokerColList.get(col).getText();
+      logger.info("The Broker colName is: " + colName);
+      if (Arrays.asList(colStr).contains(colName)) {
+        expectedStrArr = sortBrokerStrCol(brokerRowList, col);
+        Collections.sort(expectedStrArr);
+      } else {
+        expectedIntArr = sortBrokerIntCol(brokerRowList, col);
+        Collections.sort(expectedIntArr);
+      }
+      MouseActions.clickOnElement(driver, kafkaPageObject.brokerColSortingIcon.get(col));
+      waitExecuter.waitUntilPageFullyLoaded();
+      if (Arrays.asList(colStr).contains(colName)) {
+        strArr = sortBrokerStrCol(brokerRowList, col);
+        logger.info("Actual sorted value is: " + strArr + "\n Expected sorted value is " + expectedStrArr);
+        Assert.assertEquals(strArr, expectedStrArr);
+      } else {
+        intArr = sortBrokerIntCol(brokerRowList, col);
+        logger.info("Actual sorted value is: " + intArr + "\n Expected sorted value is " + expectedIntArr);
+        Assert.assertEquals(intArr, expectedIntArr);
+      }
+      strArr.clear();
+      intArr.clear();
+      expectedStrArr.clear();
+      expectedIntArr.clear();
+    }
+  }
+
+  public ArrayList<Integer> sortBrokerIntCol(List<WebElement> brokerRowList, int col) {
+    ArrayList<Integer> intArr = new ArrayList<>();
+    for (int row = 0; row < brokerRowList.size(); row++) {
+      WebElement rowData = driver.findElement(By.xpath("//tbody[@id='undefined-body']/" +
+          "tr[" + (row + 1) + "]/td[" + (col + 1) + "]/span"));
+      int rowVal = Integer.parseInt(rowData.getText());
+      intArr.add(rowVal);
+    }
+    return intArr;
+  }
+
+  public ArrayList<String> sortBrokerStrCol(List<WebElement> brokerRowList, int col) {
+    ArrayList<String> strArr = new ArrayList<>();
+    for (int row = 0; row < brokerRowList.size(); row++) {
+      WebElement rowData = driver.findElement(By.xpath("//tbody[@id='undefined-body']/" +
+          "tr[" + (row + 1) + "]/td[" + (col + 1) + "]/span"));
+      strArr.add(rowData.getText());
+    }
+    return strArr;
+  }
+
+  public void verifyTopicRecordPerBroker(KafkaPageObject kafkaPageObject) {
+    List<WebElement> brokerColList = kafkaPageObject.brokerCol;
+    Assert.assertFalse(brokerColList.isEmpty(), " No columns displayed for broker metrics");
+    List<WebElement> brokerRowList = kafkaPageObject.brokerRows;
+    Assert.assertFalse(brokerRowList.isEmpty(), "No data displayed for broker metrics table");
+    for (int row = 1; row <= brokerRowList.size(); row++) {
+      WebElement rowData = driver.findElement(By.xpath("//tbody[@id='undefined-body']/tr[" + row + "]/td[" + 1 + "]/span"));
+      MouseActions.clickOnElement(driver, rowData);
+      waitExecuter.waitUntilPageFullyLoaded();
+      verifyTopicRecords(kafkaPageObject);
     }
   }
 }

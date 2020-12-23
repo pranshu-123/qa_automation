@@ -2,6 +2,7 @@ package com.qa.testcases.cluster.impala.chargeback;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.chargeback.GroupByOptions;
 import com.qa.pagefactory.clusters.ChargebackImpalaPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
@@ -57,13 +58,7 @@ public class TC_CB_33 extends BaseClass {
         waitExecuter.sleep(1000);
         chargebackImpalaPageObject.groupBySearchBox.click();
         waitExecuter.sleep(3000);
-        if (!chargebackImpala.selectgroupby())
-        {
-            test.log(LogStatus.PASS, "verify the user clicks on each row the User is further group by realUser");
-        }
-        else{
-            test.log(LogStatus.FAIL, "Test Failed further group by realUser");
-        }
+        test.log(LogStatus.PASS, "verify the user clicks on each row the User is further group by realUser");
         if (!chargebackImpala.selecttable())
         {
             test.log(LogStatus.PASS, "verify grouped by User table");

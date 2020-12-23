@@ -63,7 +63,7 @@ public class KafkaPageObject {
    @FindBy(xpath = "//tbody/tr")
   public List<WebElement> topicTableRows;
 
-  @FindBy(xpath = "//tbody/tr/td")
+  @FindBy(xpath = "//table[@class='component-data-tables']//tbody/tr")
   public List<WebElement> topicTableRowData;
 
   @FindBy(xpath = "//*[contains(@id,'column-')]/span")
@@ -71,6 +71,12 @@ public class KafkaPageObject {
 
   @FindBy(xpath = "//tbody[@id='undefined-body']/tr")
   public List<WebElement> brokerRows;
+
+  @FindBy(xpath = "//a[contains(@class,'sorting icon-sort')]")
+  public List<WebElement> brokerColSortingIcon;
+
+  @FindBy(xpath = "//div[@id='topContainer-undefined']//tr/th/span")
+  public List<WebElement> brokerMetricsHeader;
 
   @FindBy(xpath = "//tbody[@id='kafkaTopicList-body']/tr")
   public List<WebElement> topicMetricRows;

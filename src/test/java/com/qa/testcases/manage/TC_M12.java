@@ -29,6 +29,8 @@ public class TC_M12 extends BaseClass {
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         SubTopPanelModulePageObject subTopPanelModulePageObject = new SubTopPanelModulePageObject(driver);
+        ManagePageObject managePageObject = new ManagePageObject(driver);
+
         // Navigate to Manage tab from header
         waitExecuter.waitUntilElementPresent(subTopPanelModulePageObject.gear);
         waitExecuter.waitUntilPageFullyLoaded();
@@ -44,15 +46,14 @@ public class TC_M12 extends BaseClass {
         test.log(LogStatus.INFO, "Verified Manage Page is loaded successfully.");
 
         //Click on Monitoring tab and validate header
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementPresent(managePageObject.monitoringTab);
         manage.clickMonitoringTab();
         waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.INFO, "Clicked on Monitoring Tab.");
-        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilElementPresent(managePageObject.monitoringHeader);
         Assert.assertTrue(manage.validateMonitoringHeader(), "Monitoring Header is not present.");
         test.log(LogStatus.INFO, "Verified Monitoring Tab.");
 
-        ManagePageObject managePageObject = new ManagePageObject(driver);
         try{
             waitExecuter.waitUntilTextToBeInWebElement(managePageObject.monitoringDBPerformanceTab, "DB Performance");
             test.log(LogStatus.INFO, "Verified DB Performance is loaded properly.");

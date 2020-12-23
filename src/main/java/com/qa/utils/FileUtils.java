@@ -78,7 +78,6 @@ public class FileUtils {
 
     /* Check the file is present in downloaded folder */
     public static void isFileDownloadedInUUIDFolder() {
-
         if (downloadFolder.exists()) {
             File listOfFiles[] = downloadFolder.listFiles();
             Assert.assertTrue(listOfFiles.length > 0);
@@ -102,6 +101,12 @@ public class FileUtils {
                 }
                 downloadFolder.delete();
             }
+        }
+    }
+
+    public static void deleteFilesFromFolder(String folder) {
+        for (File file : new File(folder).listFiles()) {
+            file.delete();
         }
     }
 

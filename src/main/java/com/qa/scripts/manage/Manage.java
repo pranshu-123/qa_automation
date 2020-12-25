@@ -226,10 +226,12 @@ public class Manage {
     }
 
     public void clickOnDownloadSupportBundle(){
-        waitExecuter.sleep(1000);
-        managePageObject.downloadSupportBundleBtn.click();
-        waitExecuter.sleep(5000);
+        UserActions actions = new UserActions(driver);
+        waitExecuter.waitUntilElementClickable(managePageObject.downloadSupportBundleBtn);
+        actions.performActionWithPolling(managePageObject.downloadSupportBundleBtn, UserAction.CLICK);
+        waitExecuter.sleep(10000);
         waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilElementClickable(managePageObject.downloadSupportBundleBtn);
     }
 
     public void clickMonitoringTab(){

@@ -54,13 +54,12 @@ public class TC_M09 extends BaseClass {
         test.log(LogStatus.INFO, "Verified Run Diagnostics Tab.");
         logger.info("Verified Run Diagnostics Tab.");
 
-        waitExecuter.sleep(12000);
         waitExecuter.waitUntilPageFullyLoaded();
         manage.clickOnDownloadSupportBundle();
         test.log(LogStatus.INFO, "Clicked on Download Support Bundle button.");
         logger.info("Clicked on Download Support Bundle button.");
 
-        waitExecuter.sleep(2000);
+        waitExecuter.sleep(12000);
         Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("diagnostics.txt"), "Not able to " +
                 "Download Support Bundle.");
         test.log(LogStatus.PASS,"Verified Run Diagnostics page and Download Support Bundle");

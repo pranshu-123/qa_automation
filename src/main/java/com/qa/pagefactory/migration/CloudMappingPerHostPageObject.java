@@ -50,6 +50,9 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//div[@class='table-container']//tbody/tr/td[1]")
   public List<WebElement> vmTypeTableRows;
 
+  @FindBy(xpath = "//div[@class='table-container']//tbody/tr/td[5]")
+  public List<WebElement> vmCostTableRows;
+
   @FindBy(xpath = "//div[@class='table-container']//nav/p[@class='pointer']")
   public WebElement paginationCnt;
 
@@ -94,15 +97,23 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//*[@id='element-ebfd025d-127e-4c9e-8969-0acb9addbcaa']//ul")
   public WebElement ec2RegionsDropDown;
 
+  @FindBy(xpath = "//*[@id='region-selector']")
+  public WebElement hdiRegionSelector;
+
   @FindBy(xpath = "//ul[contains(@class,'lb-dropdown-label js-open')]/li")
   public List<WebElement> regionsList;
+
+  @FindBy(xpath = "//*[@id='region-selector']/optgroup[contains(@label,'France')]/option[1]")
+  public WebElement hdiRegionsList;
 
   @FindBy(xpath = "//*[@id='element-a842d544-ca56-4cb2-a1bb-7bb9f83a50cd']/table/tbody/tr/td[1]")
   public List<WebElement> emrVMList;
 
-  @FindBy(xpath = "//*[@id='element-ebfd025d-127e-4c9e-8969-0acb9addbcaa']/div[2]/div[3]/table/tbody/tr/td[1]")
+  @FindBy(xpath = "//*[@id='element-ebfd025d-127e-4c9e-8969-0acb9addbcaa']/div[2]/div[2]/table/tbody/tr/td[1]")
   public List<WebElement> ec2VMList;
 
+  @FindBy(xpath = "//*[@id='main']/section[4]/div/div/table/tbody/tr/td[1]")
+  public List<WebElement> hdiVMList;
 
   /**
    * @param driver The driver that will be used to look up the elements

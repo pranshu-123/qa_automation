@@ -15,6 +15,7 @@ import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -240,6 +241,45 @@ public class CloudMigrationPerHostPage {
     return pageCnt;
   }
 
+  /**
+   * Method to click the cloud provider and corresponding region
+   */
+  public void clickCloudProvideAndRegion(String[] expectedList){//String cloudProvider, String region){
+//    List<WebElement> cloudProDD = cmpPageObj.cloudProductDropDown;
+//    waitExecuter.sleep(2000);
+//    userAction.performActionWithPolling(cloudProDD.get(0), UserAction.CLICK);
+//    getOptions(cloudProvider);
+//    waitExecuter.waitUntilElementClickable(cmpPageObj.checkBox);
+//    waitExecuter.waitUntilPageFullyLoaded();
+//    userAction.performActionWithPolling(cmpPageObj.regionDropDown, UserAction.CLICK);
+//    getOptions(region);
+    List<WebElement> dropDownList = cmpPageObj.dropDownBtn;
+    for (int i = 0; i < dropDownList.size() - 1; i++) {
+      MouseActions.clickOnElement(driver, dropDownList.get(i));
+      logger.info("Parameters are: " + expectedList[i]);
+      getOptions(expectedList[i]);
+    }
+  }
+
+  public void verifyCostChangeForDiffRegions(String cloudProvider, String region1, String region2 ){
+    waitExecuter.sleep(2000);
+    runNewReport();
+   // clickCloudProvideAndRegion(cloudProvider, region1);
+    String[] val = {"Amazon EMR", "Asia Pacific (Mumbai)"};
+    clickCloudProvideAndRegion(val);
+    HashMap<String, String> vmTypeCost = getUIVMList(region1, cloudProvider);
+    logger.info("The vmTypeCost map for region "+ region1 + " is "+ vmTypeCost);
+    waitExecuter.waitUntilElementClickable(cmpPageObj.runButton);
+    waitExecuter.waitUntilPageFullyLoaded();
+    runNewReport();
+    String[] val1 = {"Amazon EMR", "South America (Sao Paulo)"};
+    // clickCloudProvideAndRegion(cloudProvider, region2);
+    clickCloudProvideAndRegion(val1);
+    HashMap<String, String> vmTypeCost2 = getUIVMList(region2, cloudProvider);
+    logger.info("The vmTypeCost map for region "+ region2 + " is "+ vmTypeCost2);
+    Assert.assertNotEquals(vmTypeCost2, vmTypeCost, "The cost/hour for different region doesnot change");
+  }
+
   public void verifyEMRVMTypes(String region, String cloudProvider) {
     waitExecuter.sleep(2000);
     Actions action = new Actions(driver);
@@ -256,56 +296,63 @@ public class CloudMigrationPerHostPage {
     waitExecuter.waitUntilElementClickable(cmpPageObj.checkBox);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(10000);
-    ArrayList<String> UI_VMList;
+    HashMap<String, String> UIHashMap;
     //Get UI vm list
-    UI_VMList = getUIVMList(region, cloudProvider);
+    UIHashMap = getUIVMList(region, cloudProvider);
     //Get CloudProvider vm list
     expectedVMList = getCloudProviderVMList(region, cloudProvider);
     driver.navigate().to(currentUrl);
     waitExecuter.waitUntilPageFullyLoaded();
     logger.info("The expected vmTypeList is : " + expectedVMList);
-    logger.info("The Actual vmTypeList is : " + UI_VMList);
+    logger.info("The Actual vmTypeList is : " + UIHashMap.keySet());
     //Validate
-    for (String UI_vmType : UI_VMList) {
+    for (String UI_vmType : UIHashMap.keySet()) {
       Assert.assertTrue(expectedVMList.contains(UI_vmType), "VM " + UI_vmType + " displayed in the UI is not" +
           " present in the expected list of vms");
     }
     //remove all elements from expected list
-    expectedVMList.removeAll(UI_VMList);
+    expectedVMList.removeAll(UIHashMap.keySet());
     logger.info("The missing vmTypes are " + expectedVMList);
   }
 
-  public ArrayList<String> getUIVMList(String region, String cloudProvider) {
+  public HashMap<String,String> getUIVMList(String region, String cloudProvider) {
     waitExecuter.sleep(5000);
     ArrayList<String> UI_VMList = new ArrayList<>();
     logger.info("Doc ready");
     Actions action = new Actions(driver);
     int pageCnt = getPageCnt(2);
     logger.info("PageCnt is " + pageCnt);
-//    if (pageCnt > 1) {
-//      for (int i = 1; i <= pageCnt; i++) {
-//        List<WebElement> vmTypeList = cmpPageObj.vmTypeTableRows;
-//        Assert.assertFalse(vmTypeList.isEmpty(), " No vms listed in the table for " + cloudProvider +
-//            " in region " + region);
-//        for (WebElement webElement : vmTypeList) {
-//          String vmType = webElement.getText();
-//          UI_VMList.add(vmType);
-//        }
-//        logger.info("SPPP: Value of i is " + i);
-//        if (i == pageCnt)
-//          action.moveToElement(cmpPageObj.closeNewReportWin).click().build().perform();
-//         else
-//          userAction.performActionWithPolling(cmpPageObj.forwardCaret, UserAction.CLICK);
-//      }
-//    } else {
-//      List<WebElement> vmTypeList = cmpPageObj.vmTypeTableRows;
-//      Assert.assertFalse(vmTypeList.isEmpty(), " No vms listed in the table for " + cloudProvider +
-//          " in region " + region);
-//      for (WebElement webElement : vmTypeList) {
-//        String vmType = webElement.getText();
-//        UI_VMList.add(vmType);
-//      }
-//    }
-    return UI_VMList;
+    HashMap<String,String> vmTypeCost = new HashMap<>();
+    if (pageCnt > 1) {
+      for (int i = 1; i <= pageCnt; i++) {
+        List<WebElement> vmTypeList = cmpPageObj.vmTypeTableRows;
+        List<WebElement> costList = cmpPageObj.vmCostTableRows;
+        Assert.assertFalse(vmTypeList.isEmpty() || costList.isEmpty(), " No vms listed in the table for " + cloudProvider +
+            " in region " + region);
+        for (int v=0;v<vmTypeList.size(); v++) {
+          String vmType = vmTypeList.get(v).getText();
+          String cost =  costList.get(v).getText();
+         // UI_VMList.add(vmType);
+          vmTypeCost.put(vmType, cost);
+        }
+        logger.info("SPPP: Value of i is " + i);
+        if (i == pageCnt)
+          action.moveToElement(cmpPageObj.closeNewReportWin).click().build().perform();
+         else
+          userAction.performActionWithPolling(cmpPageObj.forwardCaret, UserAction.CLICK);
+      }
+    } else {
+      List<WebElement> vmTypeList = cmpPageObj.vmTypeTableRows;
+      List<WebElement> costList = cmpPageObj.vmCostTableRows;
+      Assert.assertFalse(vmTypeList.isEmpty(), " No vms listed in the table for " + cloudProvider +
+          " in region " + region);
+      for (int v=0;v<vmTypeList.size(); v++) {
+        String vmType = vmTypeList.get(v).getText();
+        String cost =  costList.get(v).getText();
+        // UI_VMList.add(vmType);
+        vmTypeCost.put(vmType, cost);
+      }
+    }
+    return vmTypeCost;
   }
 }

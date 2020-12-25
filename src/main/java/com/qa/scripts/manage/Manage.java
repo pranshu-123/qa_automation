@@ -1,9 +1,11 @@
 package com.qa.scripts.manage;
 
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.manage.ManagePageObject;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -31,7 +33,6 @@ public class Manage {
     }
 
     public String validateDaemonHeader(){
-        System.out.println("Daemons Header found:"+managePageObject.daemonsHeader.getText());
         logger.info("Daemons Header found:"+managePageObject.daemonsHeader.getText());
         waitExecuter.sleep(2000);
         return managePageObject.daemonsHeader.getText();
@@ -39,7 +40,6 @@ public class Manage {
 
     public boolean validateDaemonsCountInTbl(){
         int dameonsCount = managePageObject.listDaemons.size();
-        System.out.println("Count of Daemons :"+dameonsCount);
         logger.info("Count of Daemons :"+dameonsCount);
         if(dameonsCount > 0){
             return true;
@@ -48,7 +48,6 @@ public class Manage {
     }
 
     public Boolean validateAllTabsPresent(){
-        System.out.println("Number of tabs on manage: "+managePageObject.allManageTabList.size());
         logger.info("Number of tabs on manage: "+managePageObject.allManageTabList.size());
         List<String> allTabsOnManagePage = new ArrayList<String>();
         for(int i=0; i<managePageObject.allManageTabList.size(); i++){
@@ -67,7 +66,6 @@ public class Manage {
 
     public void clickOnIconSort(){
         int countOfIconSort = managePageObject.iconSort.size();
-        System.out.println("Number of total icon sort :"+ countOfIconSort);
         logger.info("Number of total icon sort :"+ countOfIconSort);
         if(countOfIconSort > 0 ){
             for(int i=0; i<countOfIconSort-1 ;i++){
@@ -99,7 +97,6 @@ public class Manage {
                 waitExecuter.sleep(1000);
             }
         }else{
-            System.out.println("No View link displayed.");
             logger.info("No View link displayed.");
             BaseClass.test.log(LogStatus.INFO,"No View link displayed.");
         }
@@ -111,7 +108,6 @@ public class Manage {
         if(viewTblRowsCount >0){
             return true;
         }else{
-            System.out.println("View Inner Table is not displayed for log level: "+ logLevel);
             logger.info("View Inner Table is not displayed for log level: "+ logLevel);
             BaseClass.test.log(LogStatus.INFO,"View Inner Table is not displayed for log level: "+ logLevel);
         }
@@ -126,7 +122,6 @@ public class Manage {
 
     public boolean validateStatsHeader(){
         waitExecuter.sleep(3000);
-        System.out.println("Stats Headers found: "+managePageObject.statsHeader.getText());
         logger.info("Stats Headers found: "+managePageObject.statsHeader.getText());
         return managePageObject.statsHeader.getText().equals("Stats");
     }
@@ -151,16 +146,13 @@ public class Manage {
 
         if(managePageObject.elasticSearchStatus.isDisplayed()) {
             waitExecuter.sleep(1000);
-            System.out.println("Status Value: " + managePageObject.elasticSearchStatusValue.getText());
             logger.info("Status Value: " + managePageObject.elasticSearchStatusValue.getText());
 
             if (managePageObject.elasticSearchTotalSize.isDisplayed()) {
                 waitExecuter.sleep(1000);
-                System.out.println("TotalSize Value: " + managePageObject.elasticSearchTotalSizeValue.getText());
                 logger.info("TotalSize Value: " + managePageObject.elasticSearchTotalSizeValue.getText());
                 if (managePageObject.elasticSearchNumOfIndexes.isDisplayed()) {
                     waitExecuter.sleep(1000);
-                    System.out.println("NumOfIndexes Value: " + managePageObject.elasticSearchNumOfIndexesValue.getText());
                     logger.info("NumOfIndexes Value: " + managePageObject.elasticSearchNumOfIndexesValue.getText());
                     return true;
                 }
@@ -178,7 +170,6 @@ public class Manage {
     public boolean verifySensorHeartbeatDetails(){
         waitExecuter.sleep(2000);
         int sensorHeartbeatTblRowCount = managePageObject.sensorHeartbeatTblRows.size();
-        System.out.println("SensorHeartbeat table row count: "+sensorHeartbeatTblRowCount);
         logger.info("SensorHeartbeat table row count: "+sensorHeartbeatTblRowCount);
 
         if(sensorHeartbeatTblRowCount > 0){
@@ -193,16 +184,16 @@ public class Manage {
         waitExecuter.sleep(3000);
     }
     public boolean validateRunDiagnosticsHeader(){
-        waitExecuter.sleep(3000);
-        System.out.println("RunDiagnostics Headers found: "+managePageObject.runDiagnosticsHeader.getText());
+        waitExecuter.waitUntilElementPresent(managePageObject.loadLatestDiagnosticsBtn);
         logger.info("RunDiagnostics Headers found: "+managePageObject.runDiagnosticsHeader.getText());
         return managePageObject.runDiagnosticsHeader.getText().equals("Diagnostic");
     }
 
     public void clickOnLoadLatestDiagnostics(){
-        waitExecuter.sleep(1000);
+        UserActions actions = new UserActions(driver);
+        waitExecuter.waitUntilElementClickable(managePageObject.loadLatestDiagnosticsBtn);
         try{
-            MouseActions.clickOnElement(driver,managePageObject.loadLatestDiagnosticsBtn);
+            actions.performActionWithPolling(managePageObject.loadLatestDiagnosticsBtn, UserAction.CLICK);
         }catch (TimeoutException te){
             MouseActions.clickOnElement(driver,managePageObject.loadLatestDiagnosticsBtn);
         }
@@ -223,12 +214,11 @@ public class Manage {
     public boolean verifyLoadLatestDiagnosticsHeaderAndTimeStamp(){
         waitExecuter.sleep(12000);
         String runDiagnoHeader = managePageObject.latestDiagnosticsContentHeader.getText();
-        System.out.println("Latest Diagnostics Content Header found: "+runDiagnoHeader);
+        runDiagnoHeader = runDiagnoHeader.substring(0,15);
         logger.info("Latest Diagnostics Content Header found: "+runDiagnoHeader);
 
         if(runDiagnoHeader.equals("Diagnostics Log")){
             String runDiagnoHeaderTS = managePageObject.latestDiagnosticsContentHeaderTimeStamp.getText();
-            System.out.println("Latest Diagnostics Content Header TimeStamp found: "+runDiagnoHeaderTS);
             logger.info("Latest Diagnostics Content Header TimeStamp found: "+runDiagnoHeaderTS);
             return true;
         }

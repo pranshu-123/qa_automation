@@ -235,16 +235,16 @@ public class Manage {
     }
 
     public void clickMonitoringTab(){
-        waitExecuter.sleep(1000);
-        managePageObject.monitoringTab.click();
-        waitExecuter.sleep(3000);
+        UserActions actions = new UserActions(driver);
+        waitExecuter.waitUntilElementClickable(managePageObject.monitoringTab);
+        actions.performActionWithPolling(managePageObject.monitoringTab,UserAction.CLICK);
+        waitExecuter.waitUntilElementPresent(managePageObject.monitoringHeader);
     }
 
     public boolean validateMonitoringHeader(){
         waitExecuter.sleep(2000);
         if(managePageObject.monitoringHeader.isDisplayed()){
             if(managePageObject.monitoringHeader.getText().equals("Monitoring")){
-                System.out.println("Monitoring Headers found: "+managePageObject.monitoringHeader.getText());
                 logger.info("Monitoring Headers found: "+managePageObject.monitoringHeader.getText());
                 return true;
             }

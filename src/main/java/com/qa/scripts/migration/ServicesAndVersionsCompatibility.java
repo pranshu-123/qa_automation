@@ -305,7 +305,7 @@ public class ServicesAndVersionsCompatibility {
                         waitExecuter.waitUntilElementPresent(reportPageObj.sortingReportNameIcon);
                         List<WebElement> searchStatusReportNameList = reportPageObj.reportNames;
                         Assert.assertFalse(searchStatusReportNameList.isEmpty(), "There are no reports listed");
-                        Assert.assertEquals(searchStatusReportNameList.size() > 0, "Expected search " +
+                        Assert.assertTrue(searchStatusReportNameList.size() > 0, "Expected search " +
                                 "result not populated data by status .");
                         logger.info("Searched report for status as: " + status);
                         break;
@@ -319,7 +319,7 @@ public class ServicesAndVersionsCompatibility {
                         waitExecuter.waitUntilElementPresent(reportPageObj.sortingReportNameIcon);
                         List<WebElement> searchNameReportNameList = reportPageObj.reportNames;
                         Assert.assertFalse(searchNameReportNameList.isEmpty(), "There are no reports listed");
-                        Assert.assertEquals(searchNameReportNameList.size() > 0, "Expected search " +
+                        Assert.assertTrue(searchNameReportNameList.size() > 0, "Expected search " +
                                 "result not populated data by report name.");
                         logger.info("Searched report by name as :" + searchReportName);
                         break;

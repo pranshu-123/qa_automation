@@ -16,13 +16,13 @@ import java.util.List;
 
 @Marker.DataFileReports
 @Marker.All
-public class TC_FR_03 extends BaseClass {
+public class TC_FR_05 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider")
-  public void validateClusterListForMediumFiles(String clusterId) {
-    test = extent.startTest("validateClusterListForMediumFiles " + clusterId,
+  public void validateClusterListForEmptyFiles(String clusterId) {
+    test = extent.startTest("validateClusterListForTinyFiles " + clusterId,
         "Validate the user is able to list all the clusters listed for the cluster environment when" +
-            " Medium Files is selcted");
+            " 'Empty' Files is selected");
     test.assignCategory(" Data - FileReports ");
 
     WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -44,7 +44,7 @@ public class TC_FR_03 extends BaseClass {
     waitExecuter.waitUntilElementClickable(topPanelObj.fileReportsTab);
     MouseActions.clickOnElement(driver, topPanelObj.fileReportsTab);
     test.log(LogStatus.INFO, "Clicked on FileReports Tab");
-    MouseActions.clickOnElement(driver, fileReportsPageObject.mediumFile);
+    MouseActions.clickOnElement(driver, fileReportsPageObject.emptyFile);
     filereports.verifyClusterList(expectedClusterList);
   }
 }

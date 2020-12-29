@@ -15,15 +15,15 @@ import java.util.logging.Logger;
 
 @Marker.All
 @Marker.MigrationServices
-public class TC_MP_SC_18 extends BaseClass {
+public class TC_MP_SC_19 extends BaseClass {
 
-    private static final Logger LOGGER = Logger.getLogger(TC_MP_SC_18.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TC_MP_SC_19.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateScheduleReportOnDailyBasisForGoogleDataProc(String clusterId) {
+    public void validateScheduleReportOnDailyBasisForAmazonEMR(String clusterId) {
 
-        test = extent.startTest("TC_MP_SC_18.validateScheduleReportOnDailyBasisForGoogleDataProc: " + clusterId,
-                " Validate scheduling a report on a daily basis Cloud Provider - Google Data Proc");
+        test = extent.startTest("TC_MP_SC_19.validateScheduleReportOnDailyBasisForAmazonEMR: " + clusterId,
+                " Validate scheduling a report on a daily basis Cloud Provider - Amazon EMR");
         test.assignCategory(" Migration - Services And Versions Compatibility ");
 
         //Initialize object
@@ -40,8 +40,8 @@ public class TC_MP_SC_18 extends BaseClass {
         servicesAndVersionsCompatibility.closeMessageBanner();
         LOGGER.info("Clicked on close banner");
 
-        String cloudProductName = "Google Dataproc";
-        String scheduleName = "Serv_Com_An_Test1_Google";
+        String cloudProductName = "Amazon EMR";
+        String scheduleName = "Serv_Com_An_Test1_Amazon";
         String schedule_to_Run = "Daily";
         String scheduleTime = "10:30";
         String notification = "bkumar@unraveldata.com";
@@ -59,7 +59,8 @@ public class TC_MP_SC_18 extends BaseClass {
                 UserAction.CLICK);
         Assert.assertTrue(servicesAndVersionsCompatibilityPageObject.scheduleMsg.isDisplayed(),"Not able to " +
                 "schedule report");
-        test.log(LogStatus.PASS, "Verified schedule report on daily basis is scheduled for Google Dataproc.");
+        test.log(LogStatus.PASS, "Verified schedule report on daily basis is scheduled for Amazon EMR.");
 
     }
 }
+

@@ -3,6 +3,7 @@ package com.qa.testcases.manage;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
+import com.qa.pagefactory.manage.ManagePageObject;
 import com.qa.scripts.manage.Manage;
 import com.qa.utils.FileUtils;
 import com.qa.utils.MouseActions;
@@ -28,6 +29,7 @@ public class TC_M09 extends BaseClass {
         test.assignCategory(" Manage ");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
+        ManagePageObject managePageObject = new ManagePageObject(driver);
         SubTopPanelModulePageObject subTopPanelModulePageObject = new SubTopPanelModulePageObject(driver);
         // Navigate to Manage tab from header
         waitExecuter.waitUntilElementPresent(subTopPanelModulePageObject.gear);
@@ -59,7 +61,7 @@ public class TC_M09 extends BaseClass {
         test.log(LogStatus.INFO, "Clicked on Download Support Bundle button.");
         logger.info("Clicked on Download Support Bundle button.");
 
-        waitExecuter.sleep(12000);
+        waitExecuter.waitUntilElementClickable(managePageObject.downloadSupportBundleBtn);
         Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("diagnostics.txt"), "Not able to " +
                 "Download Support Bundle.");
         test.log(LogStatus.PASS,"Verified Run Diagnostics page and Download Support Bundle");

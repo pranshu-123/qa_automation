@@ -39,6 +39,7 @@ public class MarkerConstants {
     public static final String APP_DETAILS_HIVE = "app_details_hive";
     public static final String DATA_FORECASTING = "data_forecasting";
     public static final String DATA_SMALLFILES = "data_smallfiles";
+    public static final String DATA_FILEREPORTS = "data_filereports";
     public static final String CLUSTER_TUNING = "cluster_tuning";
     public static final String KAFKA_EXTERNAL = "kafka_external";
     public static final String CLUSTER_ELK = "cluster_elk";
@@ -82,6 +83,7 @@ public class MarkerConstants {
         map.put(APP_DETAILS_HIVE, Marker.AppDetailsHive.class);
         map.put(DATA_FORECASTING, Marker.DataForecasting.class);
         map.put(DATA_SMALLFILES, Marker.DataSmallFiles.class);
+        map.put(DATA_FILEREPORTS, Marker.DataFileReports.class);
         map.put(CLUSTER_TUNING, Marker.Tuning.class);
         map.put(KAFKA_EXTERNAL, Marker.KafkaExternal.class);
         map.put(CLUSTER_ELK, Marker.ClusterELK.class);

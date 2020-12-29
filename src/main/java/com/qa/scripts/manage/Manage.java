@@ -229,7 +229,6 @@ public class Manage {
         UserActions actions = new UserActions(driver);
         waitExecuter.waitUntilElementClickable(managePageObject.downloadSupportBundleBtn);
         actions.performActionWithPolling(managePageObject.downloadSupportBundleBtn, UserAction.CLICK);
-        waitExecuter.sleep(10000);
         waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.waitUntilElementClickable(managePageObject.downloadSupportBundleBtn);
     }

@@ -1,15 +1,15 @@
 package com.qa.scripts.migration;
 
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.migration.ServicesAndVersionsCompatibilityPageObject;
 import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.qa.utils.actions.UserActions;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.util.ArrayList;
@@ -27,6 +27,7 @@ public class ServicesAndVersionsCompatibility {
     private WaitExecuter waitExecuter;
     private ServicesAndVersionsCompatibilityPageObject servicesAndVersionsCompatibilityPageObject;
     private SubTopPanelModulePageObject subTopPanelModulePageObject;
+    private UserActions actions;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -38,6 +39,7 @@ public class ServicesAndVersionsCompatibility {
         waitExecuter = new WaitExecuter(driver);
         servicesAndVersionsCompatibilityPageObject = new ServicesAndVersionsCompatibilityPageObject(driver);
         subTopPanelModulePageObject = new SubTopPanelModulePageObject(driver);
+        actions = new UserActions(driver);
     }
 
     public void setupServicesAndVersionsCompatibilityPage() {
@@ -329,5 +331,45 @@ public class ServicesAndVersionsCompatibility {
         }
     }
 
+
+    public void setScheduleCloudName(String cloudName){
+        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.scheduleCloudDropDown);
+        selectCloudProduct(cloudName);
+    }
+
+    public void setScheduleName(String scheduleName){
+        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.scheduleName);
+        actions.performActionWithPolling(servicesAndVersionsCompatibilityPageObject.scheduleName,
+                UserAction.SEND_KEYS, scheduleName);
+    }
+
+    public void setScheduleToRun(String scheduleToRun){
+        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.scheduleToRun);
+        Select drpScheduleToRun = new Select(servicesAndVersionsCompatibilityPageObject.scheduleToRun);
+        drpScheduleToRun.selectByVisibleText(scheduleToRun);
+    }
+
+    public void setScheduleTime(String scheduleTime){
+        String[] arrTime = scheduleTime.split(":");
+        String hours =  arrTime[0];
+        String minutes =  arrTime[1];
+
+        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.scheduleTime);
+        actions.performActionWithPolling(servicesAndVersionsCompatibilityPageObject.scheduleTime, UserAction.CLICK);
+
+        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.scheduleTimeHours);
+        Select hrDrpDown = new Select(servicesAndVersionsCompatibilityPageObject.scheduleTimeHours);
+        hrDrpDown.selectByVisibleText(hours);
+
+        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.scheduleTimeMinutes);
+        Select minsDrpDown = new Select(servicesAndVersionsCompatibilityPageObject.scheduleTimeMinutes);
+        minsDrpDown.selectByVisibleText(minutes);
+    }
+
+    public void setScheduleNotification(String notification){
+        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.scheduleNotification);
+        actions.performActionWithPolling(servicesAndVersionsCompatibilityPageObject.scheduleNotification,
+                UserAction.SEND_KEYS, notification);
+    }
 
 }

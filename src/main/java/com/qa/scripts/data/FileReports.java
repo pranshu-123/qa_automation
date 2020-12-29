@@ -191,7 +191,7 @@ public class FileReports {
     waitExecuter.waitUntilPageFullyLoaded();
     descendingFileCntArr = getFileCnt(tableRowList, fileType);
     Assert.assertEquals(ascendingFileCntArr.size(), descendingFileCntArr.size(), " Ascending sort and Descending sort" +
-        " array size donot match");
+        " array size do not match");
     Collections.sort(expectedFileCntArr);
     ArrayList<Integer> newExpectedFileCnt = new ArrayList<>();
     LOGGER.info("The size of ascending arr is " + ascendingFileCntArr.size() +
@@ -203,6 +203,6 @@ public class FileReports {
         "Descending Sort fileCnt is " + descendingFileCntArr + "\n" +
         "Expected Sort fileCnt is " + newExpectedFileCnt);
     Assert.assertTrue(expectedFileCntArr.equals(ascendingFileCntArr) ||
-        expectedFileCntArr.equals(descendingFileCntArr), "The expected array donot match");
+        expectedFileCntArr.equals(descendingFileCntArr), "The expected array do not match");
   }
 }

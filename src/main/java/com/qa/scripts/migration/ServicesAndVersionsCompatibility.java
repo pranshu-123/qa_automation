@@ -191,7 +191,7 @@ public class ServicesAndVersionsCompatibility {
         return arrVersion[0];
     }
 
-
+    //Check for Services and Versions are Compatible
     public void verifyServicesAndVersionsAreCompatible() {
         List<String> hdpServicesList = getHDPServicesList();
         int totalHDPServicesCount = hdpServicesList.size();
@@ -208,17 +208,55 @@ public class ServicesAndVersionsCompatibility {
                 if (!e.getText().isEmpty()) {
                     String cloudClusterServiceName = e.getText().trim();
                     String majorVersionCloud = getMajorVersion(cloudClusterServiceName);
+                    int majorVersionCloudNum = Integer.parseInt(majorVersionCloud);
 
                     String testClusterServiceName = hdpServicesList.get(col);
                     String majorVersionHDP = getMajorVersion(testClusterServiceName);
+                    int majorVersionHDPNum = Integer.parseInt(majorVersionHDP);
 
-                    if (majorVersionHDP.equals(majorVersionCloud)) {
+                    if (majorVersionCloudNum >= majorVersionHDPNum ) {
                         //Now check for green //risk-0
                         String classAttributeName = e.getAttribute("class");
                         logger.info("Element class attribute name: " + classAttributeName);
+                        //check for class attribute name as 'risk-0' which is for Green color.
                         Assert.assertTrue(classAttributeName.equals("risk-0"), "Platforms service in the box is not" +
                                 " marked in Green for element: "+e.getText());
+                    }
+                }
+            }
+        }
+    }
 
+    //Check for Services and Versions are not Compatible
+    public void verifyServicesAndVersionsAreNotCompatible() {
+        List<String> hdpServicesList = getHDPServicesList();
+        int totalHDPServicesCount = hdpServicesList.size();
+        List<WebElement> rowsList = servicesAndVersionsCompatibilityPageObject.rowsList;
+        Assert.assertFalse(rowsList.isEmpty(), "No Platform services data available");
+        List<WebElement> colsList = servicesAndVersionsCompatibilityPageObject.colList;
+        logger.info("Size of columnlist: " + colsList.size());
+        Assert.assertFalse(colsList.isEmpty(), "No Platform services data available");
+
+        for (int col = 0; col < totalHDPServicesCount - 1; col++) {
+            for (int row = 0; row < rowsList.size(); row++) {
+                String path = "//tbody/tr[" + (row + 1) + "]/td[" + (col + 2) + "]";
+                WebElement e = driver.findElement(By.xpath(path));
+                if (!e.getText().isEmpty()) {
+                    String cloudClusterServiceName = e.getText().trim();
+                    String majorVersionCloud = getMajorVersion(cloudClusterServiceName);
+                    int majorVersionCloudNum = Integer.parseInt(majorVersionCloud);
+
+                    String testClusterServiceName = hdpServicesList.get(col);
+                    String majorVersionHDP = getMajorVersion(testClusterServiceName);
+                    int majorVersionHDPNum = Integer.parseInt(majorVersionHDP);
+
+                    if (majorVersionCloudNum < majorVersionHDPNum ) {
+                        //Now check for green //risk-2
+                        String classAttributeName = e.getAttribute("class");
+                        logger.info("Element class attribute name: " + classAttributeName);
+                        //check for class attribute name as 'risk-2' which is for Orange color.
+                        Assert.assertTrue(classAttributeName.equals("risk-2"), "Platforms service in the box is not" +
+                                " marked in Orange for element: "+e.getText());
                     }
                 }
             }

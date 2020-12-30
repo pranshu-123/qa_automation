@@ -1,15 +1,15 @@
 package com.qa.scripts.migration;
 
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.migration.ServicesAndVersionsCompatibilityPageObject;
 import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.qa.utils.actions.UserActions;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.util.ArrayList;
@@ -27,6 +27,7 @@ public class ServicesAndVersionsCompatibility {
     private WaitExecuter waitExecuter;
     private ServicesAndVersionsCompatibilityPageObject servicesAndVersionsCompatibilityPageObject;
     private SubTopPanelModulePageObject subTopPanelModulePageObject;
+    private UserActions actions;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -38,6 +39,7 @@ public class ServicesAndVersionsCompatibility {
         waitExecuter = new WaitExecuter(driver);
         servicesAndVersionsCompatibilityPageObject = new ServicesAndVersionsCompatibilityPageObject(driver);
         subTopPanelModulePageObject = new SubTopPanelModulePageObject(driver);
+        actions = new UserActions(driver);
     }
 
     public void setupServicesAndVersionsCompatibilityPage() {
@@ -189,7 +191,7 @@ public class ServicesAndVersionsCompatibility {
         return arrVersion[0];
     }
 
-
+    //Check for Services and Versions are Compatible
     public void verifyServicesAndVersionsAreCompatible() {
         List<String> hdpServicesList = getHDPServicesList();
         int totalHDPServicesCount = hdpServicesList.size();
@@ -206,17 +208,55 @@ public class ServicesAndVersionsCompatibility {
                 if (!e.getText().isEmpty()) {
                     String cloudClusterServiceName = e.getText().trim();
                     String majorVersionCloud = getMajorVersion(cloudClusterServiceName);
+                    int majorVersionCloudNum = Integer.parseInt(majorVersionCloud);
 
                     String testClusterServiceName = hdpServicesList.get(col);
                     String majorVersionHDP = getMajorVersion(testClusterServiceName);
+                    int majorVersionHDPNum = Integer.parseInt(majorVersionHDP);
 
-                    if (majorVersionHDP.equals(majorVersionCloud)) {
+                    if (majorVersionCloudNum >= majorVersionHDPNum ) {
                         //Now check for green //risk-0
                         String classAttributeName = e.getAttribute("class");
                         logger.info("Element class attribute name: " + classAttributeName);
+                        //check for class attribute name as 'risk-0' which is for Green color.
                         Assert.assertTrue(classAttributeName.equals("risk-0"), "Platforms service in the box is not" +
                                 " marked in Green for element: "+e.getText());
+                    }
+                }
+            }
+        }
+    }
 
+    //Check for Services and Versions are not Compatible
+    public void verifyServicesAndVersionsAreNotCompatible() {
+        List<String> hdpServicesList = getHDPServicesList();
+        int totalHDPServicesCount = hdpServicesList.size();
+        List<WebElement> rowsList = servicesAndVersionsCompatibilityPageObject.rowsList;
+        Assert.assertFalse(rowsList.isEmpty(), "No Platform services data available");
+        List<WebElement> colsList = servicesAndVersionsCompatibilityPageObject.colList;
+        logger.info("Size of columnlist: " + colsList.size());
+        Assert.assertFalse(colsList.isEmpty(), "No Platform services data available");
+
+        for (int col = 0; col < totalHDPServicesCount - 1; col++) {
+            for (int row = 0; row < rowsList.size(); row++) {
+                String path = "//tbody/tr[" + (row + 1) + "]/td[" + (col + 2) + "]";
+                WebElement e = driver.findElement(By.xpath(path));
+                if (!e.getText().isEmpty()) {
+                    String cloudClusterServiceName = e.getText().trim();
+                    String majorVersionCloud = getMajorVersion(cloudClusterServiceName);
+                    int majorVersionCloudNum = Integer.parseInt(majorVersionCloud);
+
+                    String testClusterServiceName = hdpServicesList.get(col);
+                    String majorVersionHDP = getMajorVersion(testClusterServiceName);
+                    int majorVersionHDPNum = Integer.parseInt(majorVersionHDP);
+
+                    if (majorVersionCloudNum < majorVersionHDPNum ) {
+                        //Now check for green //risk-2
+                        String classAttributeName = e.getAttribute("class");
+                        logger.info("Element class attribute name: " + classAttributeName);
+                        //check for class attribute name as 'risk-2' which is for Orange color.
+                        Assert.assertTrue(classAttributeName.equals("risk-2"), "Platforms service in the box is not" +
+                                " marked in Orange for element: "+e.getText());
                     }
                 }
             }
@@ -329,5 +369,45 @@ public class ServicesAndVersionsCompatibility {
         }
     }
 
+
+    public void setScheduleCloudName(String cloudName){
+        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.scheduleCloudDropDown);
+        selectCloudProduct(cloudName);
+    }
+
+    public void setScheduleName(String scheduleName){
+        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.scheduleName);
+        actions.performActionWithPolling(servicesAndVersionsCompatibilityPageObject.scheduleName,
+                UserAction.SEND_KEYS, scheduleName);
+    }
+
+    public void setScheduleToRun(String scheduleToRun){
+        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.scheduleToRun);
+        Select drpScheduleToRun = new Select(servicesAndVersionsCompatibilityPageObject.scheduleToRun);
+        drpScheduleToRun.selectByVisibleText(scheduleToRun);
+    }
+
+    public void setScheduleTime(String scheduleTime){
+        String[] arrTime = scheduleTime.split(":");
+        String hours =  arrTime[0];
+        String minutes =  arrTime[1];
+
+        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.scheduleTime);
+        actions.performActionWithPolling(servicesAndVersionsCompatibilityPageObject.scheduleTime, UserAction.CLICK);
+
+        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.scheduleTimeHours);
+        Select hrDrpDown = new Select(servicesAndVersionsCompatibilityPageObject.scheduleTimeHours);
+        hrDrpDown.selectByVisibleText(hours);
+
+        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.scheduleTimeMinutes);
+        Select minsDrpDown = new Select(servicesAndVersionsCompatibilityPageObject.scheduleTimeMinutes);
+        minsDrpDown.selectByVisibleText(minutes);
+    }
+
+    public void setScheduleNotification(String notification){
+        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.scheduleNotification);
+        actions.performActionWithPolling(servicesAndVersionsCompatibilityPageObject.scheduleNotification,
+                UserAction.SEND_KEYS, notification);
+    }
 
 }

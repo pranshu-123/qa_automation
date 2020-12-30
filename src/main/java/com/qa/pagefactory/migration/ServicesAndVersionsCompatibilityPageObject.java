@@ -75,6 +75,38 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//tbody/tr[1]/td[1]")
     public WebElement archiveReportName;
 
+    @FindBy(xpath = "//span[contains(text(), 'Schedule')]//parent::a")
+    public WebElement scheduleBtn;
+
+    @FindBy(xpath = "//*[@class='select2-selection__rendered']")
+    public WebElement scheduleCloudDropDown;
+
+    @FindBy(xpath = "(//div/b[contains(text(), 'Schedule Name')]//following-sibling::p/input)[1]")
+    public WebElement scheduleName;
+
+    @FindBy(xpath = "//select[contains(@class, 'schedule-days')]")
+    public WebElement scheduleToRun;
+
+    @FindBy(xpath = "//p[@class='element-inline']/input")
+    public WebElement scheduleNotification;
+
+    @FindBy(xpath = "(//section[contains(@class, 'icon-success')]/span)[1]")
+    public WebElement scheduleMsg;
+
+    @FindBy(xpath = "//span[contains(@class, 'cta-primary')]/a")
+    public WebElement scheduleRunBtn;
+
+    @FindBy(xpath = "//input[@class = 'display-time']")
+    public WebElement scheduleTime;
+
+    @FindBy(xpath = "//select[@class='hours']")
+    public WebElement scheduleTimeHours;
+
+    @FindBy(xpath = "//select[@class='minutes']")
+    public WebElement scheduleTimeMinutes;
+
+
+
     /**
      * @param driver The driver that will be used to look up the elements
      */

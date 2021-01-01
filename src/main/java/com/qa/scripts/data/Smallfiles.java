@@ -35,7 +35,7 @@ public class Smallfiles {
     SmallfilesPageObject smallfilesPageObject;
     private WaitExecuter waitExecuter;
     private WebDriver driver;
-    private UserActions actions;
+    private final UserActions userAction;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -46,6 +46,7 @@ public class Smallfiles {
         waitExecuter = new WaitExecuter(driver);
         this.driver = driver;
         smallfilesPageObject = new SmallfilesPageObject(driver);
+        userAction = new UserActions(driver);
     }
 
     /**
@@ -97,11 +98,24 @@ public class Smallfiles {
         MouseActions.clickOnElement(driver, smallfilesPageObject.modalRunButton);
     }
 
-    public void clickOnModalScheduleButton() {
-        MouseActions.clickOnElement(driver,
-                smallfilesPageObject.runSheduleButton);
-
+    /**
+     * Method to validate the  Schedule Button
+     */
+    public void clickOnModalScheduleButton(){
+        try {
+            MouseActions.clickOnElement(driver, smallfilesPageObject.runSheduleButton);
+        } catch (TimeoutException te) {
+            MouseActions.clickOnElement(driver, smallfilesPageObject.runSheduleButton);
+        }
     }
+
+    /* Validate success message on report creation */
+    public void verifyScheduleSuccessMsg(String successMsg) {
+        waitExecuter.waitUntilElementPresent(smallfilesPageObject.confirmationMessageElement);
+        Assert.assertEquals(smallfilesPageObject.confirmationMessageElement.getText(), successMsg,
+                "The Schedule success " + "message mismatch");
+    }
+
 
     /**
      * Method to validate the Small File report Page
@@ -166,10 +180,52 @@ public class Smallfiles {
 
     }
 
+    /* Select hour from drop-down */
+    public void selectByHour(String hour) {
+        waitExecuter.waitUntilElementClickable(smallfilesPageObject.hoursDropdown);
+        Select scheduleTorunDropDown = new Select(smallfilesPageObject.hoursDropdown);
+        scheduleTorunDropDown.selectByVisibleText(hour);
+
+    }
+
+    /* Select minute from drop-down */
+    public void selectByMin(String min) {
+        waitExecuter.waitUntilElementClickable(smallfilesPageObject.minutesDropdown);
+        Select scheduleTorunDropDown = new Select(smallfilesPageObject.minutesDropdown);
+        scheduleTorunDropDown.selectByVisibleText(min);
+
+    }
+
+    /* Select day from drop-down */
+    public void selectByDays(String dayToRun) {
+        waitExecuter.waitUntilElementClickable(smallfilesPageObject.scheduleDays);
+        Select scheduleTorunDropDown = new Select(smallfilesPageObject.scheduleDays);
+        scheduleTorunDropDown.selectByVisibleText(dayToRun);
+
+    }
+    /* Define day and Time to select from drop-down */
+    public void selectDayTime(String day, String hour, String min) {
+        selectByDays(day);
+        smallfilesPageObject.displayTime.click();
+        selectByHour(hour);
+        selectByMin(min);
+    }
+
+    /* This method is to Select cluster for schedule and run reports */
+    public void selectCluster(String clusterId) {
+        waitExecuter.waitUntilElementClickable(smallfilesPageObject.clusterDropdown);
+        userAction.performActionWithPolling(smallfilesPageObject.clusterDropdown, UserAction.CLICK);
+        userAction.performActionWithPolling(smallfilesPageObject.clusterSearchbox, UserAction.CLICK);
+        userAction.performActionWithPolling(smallfilesPageObject.clusterSearchbox, UserAction.SEND_KEYS, clusterId);
+        userAction.performActionWithPolling(smallfilesPageObject.select2stClusterOption, UserAction.CLICK);
+    }
+
+
     /**
      * Common steps to validate schedule name,daily,email
      */
-    public void scheduleAdvancedOptions(SmallfilesPageObject smallfilesPageObject, ExtentTest test, String scheduleName, String email) {
+    public void scheduleAdvancedOptions(SmallfilesPageObject smallfilesPageObject, ExtentTest test,
+                                        String scheduleName, String email) {
 
         smallfilesPageObject.scheduleNameTextbox.sendKeys(scheduleName);
         LOGGER.info("Set directories To Show as: " + scheduleName);
@@ -178,13 +234,7 @@ public class Smallfiles {
         smallfilesPageObject.emailNotification.sendKeys(email);
         LOGGER.info("Set directories To Show as: " + email);
         test.log(LogStatus.INFO, "Set directories To Show as: " + email);
-
-
-        smallfilesPageObject.Daily.stream()
-                .filter(WebElement::isDisplayed).findFirst().get().click();
-
     }
-
 
     /**
      * Method to click on 'advancedOptions'

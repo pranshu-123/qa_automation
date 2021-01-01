@@ -21,7 +21,7 @@ public class TC_SF_40 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void verifyScheduleSpecialCharecters(String clusterId) {
-        test = extent.startTest("TC_SF_40.verifyScheduleSpecialCharecters: " + clusterId,
+        test = extent.startTest("TC_SF_40.verifyScheduleSpecialCharecters: ",
                 "Verify Unravel should be able to schedule a Queue Analysis report with Scedule Name having special charecters.");
         test.assignCategory("Data- Small Files and File reports");
         Log.startTestCase("TC_SF_40.verifyScheduleSpecialCharecters");
@@ -34,8 +34,8 @@ public class TC_SF_40 extends BaseClass {
         smallfiles.clickOnScheduleButton();
         logger.info("Clicked on Shedule Button");
         test.log(LogStatus.INFO, "Clicked on Shedule Button");
-        UserActions userActions = new UserActions(driver);
 
+        // Select cluster
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
 
@@ -44,23 +44,20 @@ public class TC_SF_40 extends BaseClass {
                 "512", "10", "100");
         test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files");
 
-        smallfiles.scheduleAdvancedOptions(smallfilesPageObject,test,"!@$@$@#$@#%@%","sray@unraveldata.com");
-        test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files Advanced Options");
+        smallfiles.scheduleAdvancedOptions(smallfilesPageObject, test, "!@$@$@#$@#%@%",
+                "test@gmail.com");
+        // Define day of the week and time
+        test.log(LogStatus.INFO, "Define day of the week as- Daily and time as- 10:30");
+        logger.info("Define day of the week as- Daily and time as- 10:30");
+        smallfiles.selectDayTime("Daily", "10", "30");
         smallfiles.clickOnModalScheduleButton();
         waitExecuter.waitUntilPageFullyLoaded();
         logger.info("Clicked on Modal Schedule Button");
         test.log(LogStatus.INFO, "Clicked on Modal Schedule Button");
 
-        try {
-            waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
-                    "Small file Report completed successfully.");
-            test.log(LogStatus.PASS, "Verified smallfiles report is loaded properly.");
-            logger.info("Verified smallfiles report is loaded properly");
-        } catch (TimeoutException te) {
-            throw new AssertionError("smallfiles Report not completed successfully.");
-        }
-
-        smallfiles.validateReportPage(smallfilesPageObject);
-        test.log(LogStatus.PASS, "Validated Reports page successfully");
+        logger.info("Clicked on modal Schedule Button");
+        test.log(LogStatus.INFO, "Clicked on modal Schedule Button");
+        String scheduleSuccessMsg = "The report has been scheduled successfully.";
+        smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
     }
 }

@@ -35,6 +35,7 @@ public class TC_SF_37 extends BaseClass {
         logger.info("Clicked on Shedule Button");
         test.log(LogStatus.INFO, "Clicked on Shedule Button");
 
+        // Select cluster
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
 
@@ -43,22 +44,20 @@ public class TC_SF_37 extends BaseClass {
                 "512", "10", "100");
         test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files");
 
-        smallfiles.scheduleAdvancedOptions(smallfilesPageObject, test, "Queue_An_Test", "sray@unraveldata.com");
+        smallfiles.scheduleAdvancedOptions(smallfilesPageObject, test, "Queue_An_Test2",
+                "test@gmail.com");
         test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files Advanced Options");
+        // Define day of the week and time
+        test.log(LogStatus.INFO, "Define day of the week as- Thursday and time as- 17:30");
+        logger.info("Define day of the week as- Thursday and time as- 17:30");
+        smallfiles.selectDayTime("Thursday", "17", "30");
         smallfiles.clickOnModalScheduleButton();
         logger.info("Clicked on Modal Schedule Button");
         test.log(LogStatus.INFO, "Clicked on Modal Schedule Button");
 
-        try {
-            waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
-                    "Small file Report completed successfully.");
-            test.log(LogStatus.PASS, "Verified smallfiles report is loaded properly.");
-            logger.info("Verified smallfiles report is loaded properly");
-        } catch (TimeoutException te) {
-            throw new AssertionError("smallfiles Report not completed successfully.");
-        }
-
-        smallfiles.validateReportPage(smallfilesPageObject);
-        test.log(LogStatus.PASS, "Validated Reports page successfully");
+        logger.info("Clicked on modal Schedule Button");
+        test.log(LogStatus.INFO, "Clicked on modal Schedule Button");
+        String scheduleSuccessMsg = "The report has been scheduled successfully.";
+        smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
     }
 }

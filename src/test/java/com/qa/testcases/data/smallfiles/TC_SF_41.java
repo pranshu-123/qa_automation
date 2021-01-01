@@ -6,6 +6,7 @@ import com.qa.pagefactory.data.SmallfilesPageObject;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.data.Smallfiles;
 import com.qa.utils.Log;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
@@ -21,12 +22,11 @@ public class TC_SF_41 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void verifyScheduleSpecialCharecters(String clusterId) {
-        test = extent.startTest("TC_SF_41.verifyScheduleSpecialCharecters: " + clusterId,
+        test = extent.startTest("TC_SF_41.verifyScheduleSpecialCharecters: "+ clusterId,
                 "Verify user clicks on Cancel button the Mini Window to schedule report should close and the UI should display the previously generated report.");
         test.assignCategory("Data- Small Files and File reports");
         Log.startTestCase("TC_SF_41.verifyScheduleSpecialCharecters");
 
-        WaitExecuter waitExecuter = new WaitExecuter(driver);
         SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
         Smallfiles smallfiles = new Smallfiles(driver);
         smallfiles.commonPanelTabValidation(test, logger);
@@ -34,8 +34,8 @@ public class TC_SF_41 extends BaseClass {
         smallfiles.clickOnScheduleButton();
         logger.info("Clicked on Shedule Button");
         test.log(LogStatus.INFO, "Clicked on Shedule Button");
-        UserActions userActions = new UserActions(driver);
 
+        // Select cluster
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
 
@@ -44,23 +44,17 @@ public class TC_SF_41 extends BaseClass {
                 "512", "10", "100");
         test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files");
 
-        smallfiles.scheduleAdvancedOptions(smallfilesPageObject,test,"Queue_An_Test","sray@unraveldata.com");
-        test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files Advanced Options");
-        smallfiles.clickOnModalScheduleButton();
-        waitExecuter.waitUntilPageFullyLoaded();
-        logger.info("Clicked on Modal Schedule Button");
-        test.log(LogStatus.INFO, "Clicked on Modal Schedule Button");
+        smallfiles.scheduleAdvancedOptions(smallfilesPageObject, test, "Queue_An_Test",
+                "sray@unraveldata.com");
+        // Define day of the week and time
+        test.log(LogStatus.INFO, "Define day of the week as- Daily and time as- 10:30");
+        logger.info("Define day of the week as- Daily and time as- 10:30");
+        smallfiles.selectDayTime("Daily", "10", "30");
+        //Close apps details page
+        MouseActions.clickOnElement(driver, smallfilesPageObject.homeTab);
 
-        try {
-            waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
-                    "Small file Report completed successfully.");
-            test.log(LogStatus.PASS, "Verified smallfiles report is loaded properly.");
-            logger.info("Verified smallfiles report is loaded properly");
-        } catch (TimeoutException te) {
-            throw new AssertionError("smallfiles Report not completed successfully.");
-        }
-
-        smallfiles.validateReportPage(smallfilesPageObject);
-        test.log(LogStatus.PASS, "Validated Reports page successfully");
     }
 }
+
+
+

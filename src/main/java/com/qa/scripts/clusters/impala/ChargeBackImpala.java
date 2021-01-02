@@ -2,11 +2,10 @@ package com.qa.scripts.clusters.impala;
 
 import com.qa.enums.UserAction;
 import com.qa.enums.chargeback.GroupByOptions;
+import com.qa.enums.chargeback.ImpalaJobTableColumn;
 import com.qa.pagefactory.clusters.ChargebackImpalaPageObject;
-import com.qa.utils.JavaScriptExecuter;
-import com.qa.utils.MouseActions;
-import com.qa.utils.TestUtils;
-import com.qa.utils.WaitExecuter;
+import com.qa.pagefactory.jobs.ApplicationsPageObject;
+import com.qa.utils.*;
 
 import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.By;
@@ -15,10 +14,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import static org.testng.Assert.assertEquals;
 
@@ -30,6 +28,7 @@ public class ChargeBackImpala {
     private WaitExecuter waitExecuter;
     private WebDriver driver;
     private ChargebackImpalaPageObject chargebackImpalaPageObject;
+    private ApplicationsPageObject applicationsPageObject;
     private static final Logger LOGGER = Logger.getLogger(ChargeBackImpala.class.getName());
     private UserActions userActions;
     /**
@@ -41,6 +40,7 @@ public class ChargeBackImpala {
         waitExecuter = new WaitExecuter(driver);
         this.driver = driver;
         chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
+        applicationsPageObject = new ApplicationsPageObject(driver);
         userActions = new UserActions(driver);
     }
 
@@ -698,4 +698,94 @@ public class ChargeBackImpala {
         chargebackImpalaPageObject.groupBySearchBox.click();
     }
 
+    /**
+     * Click on the table heading of impala job table
+     * @param impalaJobTableColumn - Impala Job Table
+     */
+    public void clickOnTableHeading(ImpalaJobTableColumn impalaJobTableColumn) {
+        WebElement headingToBeClicked =
+            chargebackImpalaPageObject.impalaJobsTable.findElement(By.xpath("//th["+ (impalaJobTableColumn.index + 1) +
+                "]/a"));
+        userActions.performActionWithPolling(headingToBeClicked, UserAction.CLICK);
+        waitExecuter.sleep(2000);
+    }
+
+    /**
+     * Validate whether data is sorted of impala table column
+     * @param impalaJobTableColumn  - Table Column to be clicked
+     * @param isReversed - Descending Order
+     * @return true if data is sorted.
+     */
+    public boolean isDataSorted(ImpalaJobTableColumn impalaJobTableColumn, Boolean isReversed) {
+        List<String> actualDataString = new ArrayList<>();
+        List<WebElement> tableRows = chargebackImpalaPageObject.impalaJobsTableRecords;
+        for (WebElement row : tableRows) {
+            actualDataString.add(row.findElement(By.xpath("td[" + (impalaJobTableColumn.index + 1) + "]")).getText());
+            actualDataString = actualDataString.stream().map(data -> Arrays.asList(data.split("\n"))
+                .stream().reduce((first, second) -> second).get()).collect(Collectors.toList());
+        }
+        if (clickOnLastOfPaginationIfExists()) {
+            tableRows = chargebackImpalaPageObject.impalaJobsTableRecords;
+            for (WebElement row : tableRows) {
+                actualDataString.add(row.findElement(By.xpath("td[" + (impalaJobTableColumn.index + 1) + "]")).getText());
+                actualDataString = actualDataString.stream().map(data -> Arrays.asList(data.split("\n"))
+                    .stream().reduce((first, second) -> second).get()).collect(Collectors.toList());
+            }
+        }
+        if (impalaJobTableColumn == ImpalaJobTableColumn.START_TIME || impalaJobTableColumn == ImpalaJobTableColumn.FINISHED_TIME) {
+            List<Date> actualDates = actualDataString.stream().map(data ->
+                DateUtils.getDateWithDateString(data)).collect(Collectors.toList());
+            List<Date> sortedList = new ArrayList(actualDates);
+            if (isReversed) {
+                sortedList.sort(Comparator.reverseOrder());
+            } else {
+                sortedList.sort(Comparator.naturalOrder());
+            }
+            if (actualDates.equals(sortedList)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if(impalaJobTableColumn == ImpalaJobTableColumn.MEMORY_MB_SECONDS ||
+            impalaJobTableColumn == ImpalaJobTableColumn.TOTAL_PROCESSING_TIME_SECONDS) {
+            List<Integer> actualTime = actualDataString.stream().map(data ->
+                convertTimeToSeconds(data)).collect(Collectors.toList());
+            List<Date> sortedList = new ArrayList(actualTime);
+            if (isReversed) {
+                sortedList.sort(Comparator.reverseOrder());
+            } else {
+                sortedList.sort(Comparator.naturalOrder());
+            }
+            if (actualTime.equals(sortedList)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            List<String> sortedList = new ArrayList(actualDataString);
+            if (isReversed) {
+                sortedList.sort(Comparator.reverseOrder());
+            } else {
+                sortedList.sort(Comparator.naturalOrder());
+            }
+            if (actualDataString.equals(sortedList)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    /**
+     * Click on the last pagination
+     * @return - true if pagination is present
+     */
+    public Boolean clickOnLastOfPaginationIfExists() {
+        Boolean isPaginationExist = false;
+        if (applicationsPageObject.isPaginationPresent.isDisplayed()) {
+            userActions.performActionWithPolling(applicationsPageObject.lastPage, UserAction.CLICK);
+            isPaginationExist = true;
+        }
+        return isPaginationExist;
+    }
 }

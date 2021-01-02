@@ -46,6 +46,7 @@ public class MarkerConstants {
     public static final String MIGRATION_SERVICESANDVERSIONS = "migration_services";
     public static final String MIGRATION_CLUSTER_DISCOVERY = "cluster_discovery";
     public static final String ONLY = "only";
+    public static final String WORKLOAD_FIT = "workload_fit";
     public static final Map<String, Class<? extends Annotation>> MARKER_MAPPING = initMap();
 
     /**
@@ -90,6 +91,7 @@ public class MarkerConstants {
         map.put(MIGRATION_SERVICESANDVERSIONS, Marker.MigrationServices.class);
         map.put(MIGRATION_CLUSTER_DISCOVERY, Marker.MigrationClusterDiscovery.class);
         map.put(ONLY, Marker.Only.class);
+        map.put(WORKLOAD_FIT, Marker.WorkloadFit.class);
         return Collections.unmodifiableMap(map);
     }
 }

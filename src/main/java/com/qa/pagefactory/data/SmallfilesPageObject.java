@@ -16,8 +16,20 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//span[contains(text(),'Run')]/parent::a")
     public WebElement runButton;
 
+    @FindBy(xpath = "//a[@href='#/clusters/overview']")
+    public WebElement homeTab;
+
     @FindBy(xpath = "//span[contains(text(),'Schedule')]")
     public WebElement SheduleButton;
+
+    @FindBy(xpath = "//input[@class='display-time']")
+    public WebElement clickTime;
+
+    @FindBy(xpath = "//input[@class='display-time']/following::select[@class='hours']")
+    public WebElement hoursDropdown;
+
+    @FindBy(xpath = "//input[@class='display-time']/following::select[@class='minutes']")
+    public WebElement minutesDropdown;
 
     @FindBy(xpath = "//span[contains(@class,'pointer cta-primary')]//span[contains(text(),'Schedule')]")
     public WebElement runSheduleButton;
@@ -28,7 +40,22 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "(//span[contains(text(),'Run')])[2]/parent::a")
     public WebElement modalRunButton;
 
-    @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
+    @FindBy(xpath = "//select[contains(@class,'schedule-days')]")
+    public WebElement scheduleDays;
+
+    @FindBy(xpath = "//input[@class='display-time']")
+    public WebElement displayTime;
+
+    @FindBy(xpath = "//span[contains(@class,'select2-selection--single')]")
+    public WebElement clusterDropdown;
+
+    @FindBy(xpath = "//span[contains(@class,'select2-search--dropdown')]/input")
+    public WebElement clusterSearchbox;
+
+    @FindBy(xpath = "//ul[contains(@class,'select2-results__options')]/li[2]")
+    public WebElement select2stClusterOption;
+
+    @FindBy(xpath = "//div[@class='task-runner-ht']/section/span[1]")
     public WebElement confirmationMessageElement;
 
     @FindBy(xpath = "//section[contains(@class,'component-message-banner bg-success icon-success')]")
@@ -85,9 +112,6 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//*[@class=\"col-md-12\"]//tbody/tr/td[1]")
     public List<WebElement> pathName;
 
-    @FindBy(xpath = "//span[contains(@class,'select2-selection__arrow')]")
-    public WebElement clusterDropdown;
-
     @FindBy(xpath = "//li[contains(@class,'select2-results__option')]")
     public List<WebElement> clustersList;
 
@@ -118,7 +142,7 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//ul[(@class='select2-results__options')]/li")
     public List<WebElement> queueOptions;
 
-    @FindBy(css = "//div[@class='close pointer']")
+    @FindBy(css = "//div[@class=\"close pointer\"]")
     public WebElement closeAppsPageTab;
 
     @FindBy(xpath = "(//input[contains(@type,'text')])[4]")

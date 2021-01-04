@@ -35,7 +35,13 @@ public @interface Marker {
   @interface AppDetailsHive {}
   @interface DataForecasting {}
   @interface DataSmallFiles {}
+  @interface DataFileReports {}
   @interface Tuning {}
   @interface KafkaExternal {}
   @interface ClusterELK {}
+  @interface MigrationServices{}
+  @interface Only{}
+  @interface MigrationClusterDiscovery {}
+  @interface WorkloadFit {}
+
 }

@@ -280,8 +280,10 @@ public class SparkAppsDetailsPageObject {
   public WebElement loadDiagnosticWinHeader;
 
   @FindBy(xpath = "//*[@class='close pointer']")
-  public WebElement loadDiagnosticWinClose;
+  public WebElement loadWinClose;
 
+  @FindBy(xpath ="//div[@class='modal-body']//p/br")
+  public List<WebElement> logScrollable;
 
   /**
    * @param driver The driver that will be used to look up the elements

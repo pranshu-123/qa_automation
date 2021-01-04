@@ -47,10 +47,10 @@ public class TC_M11 extends BaseClass {
         test.log(LogStatus.INFO, "Verified Manage Page is loaded successfully.");
 
         //Click on Monitoring tab and validate header
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementPresent(managePageObject.monitoringTab);
         manage.clickMonitoringTab();
         test.log(LogStatus.INFO, "Clicked on Monitoring Tab.");
-        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilElementPresent(managePageObject.monitoringHeader);
         Assert.assertTrue(manage.validateMonitoringHeader(), "Monitoring Header is not present.");
         test.log(LogStatus.INFO, "Verified Monitoring Tab.");
         logger.info("Verified Monitoring Tab.");

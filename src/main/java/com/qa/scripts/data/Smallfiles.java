@@ -1,31 +1,41 @@
 package com.qa.scripts.data;
 
+import com.qa.constants.PageConstants;
+import com.qa.enums.UserAction;
+import com.qa.pagefactory.CommonPageObject;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
-import com.qa.pagefactory.data.ForecastingPageObject;
+import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.data.SmallfilesPageObject;
-import com.qa.pagefactory.jobs.ApplicationsPageObject;
-import com.qa.scripts.DatePicker;
-import com.qa.scripts.appdetails.SparkAppsDetailsPage;
-import com.qa.scripts.jobs.applications.AllApps;
+import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
+import com.qa.scripts.Schedule;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
 public class Smallfiles {
 
-    Logger logger = Logger.getLogger(SparkAppsDetailsPage.class.getName());
-
+    private static final java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger(Smallfiles.class.getName());
     SmallfilesPageObject smallfilesPageObject;
     private WaitExecuter waitExecuter;
     private WebDriver driver;
+    private final UserActions userAction;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -36,6 +46,7 @@ public class Smallfiles {
         waitExecuter = new WaitExecuter(driver);
         this.driver = driver;
         smallfilesPageObject = new SmallfilesPageObject(driver);
+        userAction = new UserActions(driver);
     }
 
     /**
@@ -63,43 +74,168 @@ public class Smallfiles {
         }
     }
 
+    /**
+     * Method to click on 'SheduleButton'
+     */
+    public void clickOnScheduleButton() {
+        try {
+            MouseActions.clickOnElement(driver, smallfilesPageObject.SheduleButton);
+        } catch (TimeoutException te) {
+            MouseActions.clickOnElement(driver, smallfilesPageObject.SheduleButton);
+        }
+    }
+
+
+    public List<String> getClusterOptions(SmallfilesPageObject smallfilesPageObject) {
+        List<String> list = new ArrayList<>();
+        for (WebElement element : smallfilesPageObject.clustersList) {
+            list.add(element.getText());
+        }
+        return list;
+    }
+
     public void clickOnModalRunButton() {
         MouseActions.clickOnElement(driver, smallfilesPageObject.modalRunButton);
     }
 
-
-    public void clickonminParent(String FileSize) {
-        smallfilesPageObject.onminParentDirectory.sendKeys(FileSize);
+    /**
+     * Method to validate the  Schedule Button
+     */
+    public void clickOnModalScheduleButton(){
+        try {
+            MouseActions.clickOnElement(driver, smallfilesPageObject.runSheduleButton);
+        } catch (TimeoutException te) {
+            MouseActions.clickOnElement(driver, smallfilesPageObject.runSheduleButton);
+        }
     }
 
-    public void clickonmaxParent(String FileSize) {
-        smallfilesPageObject.maxParentDirectory.sendKeys(FileSize);
+    /* Validate success message on report creation */
+    public void verifyScheduleSuccessMsg(String successMsg) {
+        waitExecuter.waitUntilElementPresent(smallfilesPageObject.confirmationMessageElement);
+        Assert.assertEquals(smallfilesPageObject.confirmationMessageElement.getText(), successMsg,
+                "The Schedule success " + "message mismatch");
+    }
+
+
+    /**
+     * Method to validate the Small File report Page
+     */
+    public void validateReportPage(SmallfilesPageObject smallfilesPageObject) {
+        List<WebElement> runPathList = smallfilesPageObject.pathName;
+        Assert.assertFalse(runPathList.isEmpty(), "There are no schedule report path");
+        List<WebElement> runFileList = smallfilesPageObject.fileName;
+        Assert.assertFalse(runFileList.isEmpty(), "There are no schedule report file");
+        List<WebElement> runAvgFileSizeList = smallfilesPageObject.avgFileSize;
+        Assert.assertFalse(runAvgFileSizeList.isEmpty(), "There are no reports scheduled report Avg File Size");
+        List<WebElement> runTotalFileSize = smallfilesPageObject.totalFileSize;
+        Assert.assertFalse(runTotalFileSize.isEmpty(), "There are no schedule scheduled report Total File Size");
+        List<WebElement> runMinFileSize = smallfilesPageObject.minFileSizeName;
+        Assert.assertFalse(runMinFileSize.isEmpty(), "There are no schedule scheduled report Min File Size");
+        List<WebElement> runMaxFileSize = smallfilesPageObject.maxFileSize;
+        Assert.assertFalse(runMaxFileSize.isEmpty(), "There are no schedule scheduled report Max File Size");
     }
 
     /**
      * Common steps to validate minimumFileSize,maximumFileSize,minimumSmallFile,directoriesToShow
      */
-    public void navigateToSmallFileReport(SmallfilesPageObject smallfilesPageObject,ExtentTest test,String minimumFileSize,String maximumFileSize,
-                                          String minimumSmallFile,String directoriesToShow) {
+    public void navigateToSmallFileReport(SmallfilesPageObject smallfilesPageObject, ExtentTest test, String minimumFileSize, String maximumFileSize,
+                                          String minimumSmallFile, String directoriesToShow) {
 
         smallfilesPageObject.minFileSize.sendKeys(minimumFileSize);
-        logger.info("Set minimum FileSize as: " + minimumFileSize);
+        LOGGER.info("Set minimum FileSize as: " + minimumFileSize);
         test.log(LogStatus.INFO, "Set minimum FileSize as: " + minimumFileSize);
 
 
         smallfilesPageObject.maxiFileSize.sendKeys(maximumFileSize);
-        logger.info("Set maximum FileSize as: " + maximumFileSize);
-        test.log(LogStatus.INFO, "Set minimum FileSize as: " + maximumFileSize);
+        LOGGER.info("Set maximum FileSize as: " + maximumFileSize);
+        test.log(LogStatus.INFO, "Set maximum FileSize as: " + maximumFileSize);
 
         smallfilesPageObject.minimumSmallFile.sendKeys(minimumSmallFile);
-        logger.info("Set minimum SmallFile as: " + minimumSmallFile);
-        test.log(LogStatus.INFO, "Set minimum FileSize as: " + minimumSmallFile);
+        LOGGER.info("Set minimum SmallFile as: " + minimumSmallFile);
+        test.log(LogStatus.INFO, "Set minimum SmallFile as: " + minimumSmallFile);
 
 
         smallfilesPageObject.directoriestoShow.sendKeys(directoriesToShow);
-        logger.info("Set minimum SmallFile as: " + directoriesToShow);
-        test.log(LogStatus.INFO, "Set minimum FileSize as: " + directoriesToShow);
+        LOGGER.info("Set directories To Show as: " + directoriesToShow);
+        test.log(LogStatus.INFO, "Set directories To Show as: " + directoriesToShow);
     }
+
+    /**
+     * Common steps to validate minimumFileSize,maximumFileSize,minimumSmallFile,directoriesToShow
+     */
+    public void navigateToAdvancedOptions(SmallfilesPageObject smallfilesPageObject, ExtentTest test, String onminParentDirectory, String maxParentDirectory) {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.pollingEvery(Duration.ofMillis(10));
+        smallfilesPageObject.onminParentDirectory.sendKeys(Keys.CONTROL + "a");
+        smallfilesPageObject.onminParentDirectory.sendKeys(Keys.DELETE);
+        smallfilesPageObject.onminParentDirectory.sendKeys(onminParentDirectory);
+        LOGGER.info("Set Min Parent Directory Depth as: " + onminParentDirectory);
+        test.log(LogStatus.INFO, "Set Min Parent Directory Depth as: " + onminParentDirectory);
+
+        smallfilesPageObject.maxParentDirectory.sendKeys(Keys.CONTROL + "a");
+        smallfilesPageObject.maxParentDirectory.sendKeys(Keys.DELETE);
+        smallfilesPageObject.maxParentDirectory.sendKeys(maxParentDirectory);
+        LOGGER.info("Set Max Parent Directory Depth as: " + maxParentDirectory);
+        test.log(LogStatus.INFO, "Set Max Parent Directory Depth as: " + maxParentDirectory);
+
+    }
+
+    /* Select hour from drop-down */
+    public void selectByHour(String hour) {
+        waitExecuter.waitUntilElementClickable(smallfilesPageObject.hoursDropdown);
+        Select scheduleTorunDropDown = new Select(smallfilesPageObject.hoursDropdown);
+        scheduleTorunDropDown.selectByVisibleText(hour);
+
+    }
+
+    /* Select minute from drop-down */
+    public void selectByMin(String min) {
+        waitExecuter.waitUntilElementClickable(smallfilesPageObject.minutesDropdown);
+        Select scheduleTorunDropDown = new Select(smallfilesPageObject.minutesDropdown);
+        scheduleTorunDropDown.selectByVisibleText(min);
+
+    }
+
+    /* Select day from drop-down */
+    public void selectByDays(String dayToRun) {
+        waitExecuter.waitUntilElementClickable(smallfilesPageObject.scheduleDays);
+        Select scheduleTorunDropDown = new Select(smallfilesPageObject.scheduleDays);
+        scheduleTorunDropDown.selectByVisibleText(dayToRun);
+
+    }
+    /* Define day and Time to select from drop-down */
+    public void selectDayTime(String day, String hour, String min) {
+        selectByDays(day);
+        smallfilesPageObject.displayTime.click();
+        selectByHour(hour);
+        selectByMin(min);
+    }
+
+    /* This method is to Select cluster for schedule and run reports */
+    public void selectCluster(String clusterId) {
+        waitExecuter.waitUntilElementClickable(smallfilesPageObject.clusterDropdown);
+        userAction.performActionWithPolling(smallfilesPageObject.clusterDropdown, UserAction.CLICK);
+        userAction.performActionWithPolling(smallfilesPageObject.clusterSearchbox, UserAction.CLICK);
+        userAction.performActionWithPolling(smallfilesPageObject.clusterSearchbox, UserAction.SEND_KEYS, clusterId);
+        userAction.performActionWithPolling(smallfilesPageObject.select2stClusterOption, UserAction.CLICK);
+    }
+
+
+    /**
+     * Common steps to validate schedule name,daily,email
+     */
+    public void scheduleAdvancedOptions(SmallfilesPageObject smallfilesPageObject, ExtentTest test,
+                                        String scheduleName, String email) {
+
+        smallfilesPageObject.scheduleNameTextbox.sendKeys(scheduleName);
+        LOGGER.info("Set directories To Show as: " + scheduleName);
+        test.log(LogStatus.INFO, "Set directories To Show as: " + scheduleName);
+
+        smallfilesPageObject.emailNotification.sendKeys(email);
+        LOGGER.info("Set directories To Show as: " + email);
+        test.log(LogStatus.INFO, "Set directories To Show as: " + email);
+    }
+
     /**
      * Method to click on 'advancedOptions'
      */
@@ -111,4 +247,28 @@ public class Smallfiles {
         }
     }
 
+
+    /***
+     * verify common Panel data and smallFilesTab
+     * */
+    public void commonPanelTabValidation(ExtentTest test, Logger logger) {
+
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
+        waitExecuter.waitUntilElementPresent(topPanelComponentPageObject.data);
+        waitExecuter.sleep(2000);
+        MouseActions.clickOnElement(driver, topPanelComponentPageObject.data);
+        logger.info("Clicked on Data Tab");
+        test.log(LogStatus.INFO, "Clicked on Data Tab");
+
+        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
+        waitExecuter.waitUntilElementPresent(topPanelPageObject.smallFilesTab);
+        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilElementClickable(topPanelPageObject.smallFilesTab);
+        waitExecuter.sleep(3000);
+        MouseActions.clickOnElement(driver, topPanelPageObject.smallFilesTab);
+        logger.info("Clicked on small FilesTab Tab");
+        test.log(LogStatus.INFO, "Clicked on small FilesTab Tab");
+
+    }
 }

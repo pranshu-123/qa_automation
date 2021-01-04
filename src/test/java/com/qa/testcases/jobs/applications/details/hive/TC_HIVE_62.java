@@ -15,10 +15,6 @@ import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
 
-import java.awt.*;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -85,23 +81,14 @@ public class TC_HIVE_62 extends BaseClass {
             actions.moveToElement(applicationsPageObject.copyAppName).perform();
             waitExecuter.sleep(1000);
             applicationsPageObject.copyAppName.click();
-            String appId = null;
-            try {
-                String data = (String) Toolkit.getDefaultToolkit().getSystemClipboard()
-                        .getData(DataFlavor.stringFlavor);
-                String[] getCopiedText = data.split(":");
-                // Click on first app in table to navigate to app details page
-                test.log(LogStatus.INFO, "Click on first app in table to navigate to app details page");
-                LOGGER.info("Click on first app in table to navigate to app details page");
-                applicationsPageObject.getStatusFromTable.click();
-                waitExecuter.waitUntilElementPresent(applicationsPageObject.loader);
-                appId = getCopiedText[2];
-            } catch (HeadlessException | UnsupportedFlavorException | IOException e) {
-                driver.navigate().back();
-                waitExecuter.sleep(5000);
-                allApps.reset();
-                e.printStackTrace();
-            }
+
+            // Click on first app in table to navigate to app details page
+            test.log(LogStatus.INFO, "Click on first app in table to navigate to app details page");
+            LOGGER.info("Click on first app in table to navigate to app details page");
+            applicationsPageObject.getStatusFromTable.click();
+            waitExecuter.waitUntilElementPresent(applicationsPageObject.loader);
+
+
             // Assert that Owner, Queue and Cluster is displayed
             test.log(LogStatus.INFO, "Assert that Owner, Queue and Cluster is displayed");
             LOGGER.info("Assert that Owner, Queue and Cluster is displayed");
@@ -113,8 +100,8 @@ public class TC_HIVE_62 extends BaseClass {
             }
             waitExecuter.sleep(3000);
             Assert.assertNotNull(ownerClusterQueueName,
-                    "Right header didn't load for app id- " + appId);
-            test.log(LogStatus.PASS, "Owner, cluster and Queue Name loaded successfully for app id- " + appId);
+                    "Right header didn't load for app id. ");
+            test.log(LogStatus.PASS, "Owner, cluster and Queue Name loaded successfully for app id. ");
             waitExecuter.sleep(1000);
             // Navigate back to parent page and click on reset
             test.log(LogStatus.INFO, "Navigate back to parent page and click on reset");
@@ -122,7 +109,6 @@ public class TC_HIVE_62 extends BaseClass {
             driver.navigate().back();
             waitExecuter.sleep(5000);
             allApps.reset();
-            driver.navigate().refresh();
         } else {
             Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
                     "The clusterId does not have any application under it and also does not display 'No Data Available' for it"

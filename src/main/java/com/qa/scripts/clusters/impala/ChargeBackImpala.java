@@ -1,14 +1,19 @@
 package com.qa.scripts.clusters.impala;
 
+import com.qa.enums.UserAction;
+import com.qa.enums.chargeback.GroupByOptions;
 import com.qa.pagefactory.clusters.ChargebackImpalaPageObject;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.TestUtils;
 import com.qa.utils.WaitExecuter;
 
+import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,7 +31,7 @@ public class ChargeBackImpala {
     private WebDriver driver;
     private ChargebackImpalaPageObject chargebackImpalaPageObject;
     private static final Logger LOGGER = Logger.getLogger(ChargeBackImpala.class.getName());
-
+    private UserActions userActions;
     /**
      * Constructer to initialize wait, driver and necessary objects
      *
@@ -36,6 +41,7 @@ public class ChargeBackImpala {
         waitExecuter = new WaitExecuter(driver);
         this.driver = driver;
         chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
+        userActions = new UserActions(driver);
     }
 
     /**
@@ -92,6 +98,25 @@ public class ChargeBackImpala {
         return clusterSize;
     }
 
+    /**
+     * Get no data webelements from impala chargeback page
+     */
+    public List<WebElement> getNoDataElementsImpalaChargeBack() {
+        List<WebElement> noDataWebElements = new ArrayList<>();
+        for (WebElement element : chargebackImpalaPageObject.impalaChargebackPieCharts) {
+            if (element.getText().trim().equalsIgnoreCase("No Data Available.")) {
+                noDataWebElements.add(element);
+            }
+        }
+        try {
+            noDataWebElements.add(chargebackImpalaPageObject.impalaChargebackGroupByNoData);
+            noDataWebElements.add(chargebackImpalaPageObject.impalaChargebackTableNoData);
+        } catch (NoSuchElementException exception) {
+            Assert.assertFalse(true, "Data is displayed for impala.");
+        }
+        return noDataWebElements;
+    }
+
     /* Validate groupBy options */
     public Boolean validateGroupByOptions() {
         // Get the list of webelements of groupby options
@@ -140,12 +165,92 @@ public class ChargeBackImpala {
         return listOfUsers;
     }
 
+    /**
+     * Select group by options
+     * @param groupBy - group by option to select
+     */
+    public void selectGroupBy(GroupByOptions groupBy) {
+        closeGroupByOptionsExcept(groupBy);
+        switch (groupBy) {
+            case USER:
+                userActions.performActionWithPolling(chargebackImpalaPageObject.groupByUserOption, UserAction.CLICK);
+                break;
+            case QUEUE:
+                userActions.performActionWithPolling(chargebackImpalaPageObject.groupByQueueOption, UserAction.CLICK);
+                break;
+            case REAL_USER:
+                userActions.performActionWithPolling(chargebackImpalaPageObject.realUser, UserAction.CLICK);
+                break;
+            case DEPT:
+                userActions.performActionWithPolling(chargebackImpalaPageObject.groupByDeptOption, UserAction.CLICK);
+                break;
+            case PROJECT:
+                userActions.performActionWithPolling(chargebackImpalaPageObject.groupByProjectOption, UserAction.CLICK);
+                break;
+            case PRIORITY:
+                userActions.performActionWithPolling(chargebackImpalaPageObject.groupByPriorityOption, UserAction.CLICK);
+                break;
+            case TEAM:
+                userActions.performActionWithPolling(chargebackImpalaPageObject.groupByTeamOption, UserAction.CLICK);
+                break;
+            case REALUSER:
+                userActions.performActionWithPolling(chargebackImpalaPageObject.groupByrealUserOption, UserAction.CLICK);
+                break;
+            case DBS:
+                userActions.performActionWithPolling(chargebackImpalaPageObject.groupByDBSOption, UserAction.CLICK);
+                break;
+            case INPUT_TABLES:
+                userActions.performActionWithPolling(chargebackImpalaPageObject.groupByInputTablesOption, UserAction.CLICK);
+                break;
+        }
+    }
 
-    public boolean selectgroupby() {
-        waitExecuter.waitUntilElementPresent(chargebackImpalaPageObject.realUser);
-        chargebackImpalaPageObject.realUser.click();
-        waitExecuter.sleep(3000);
-        return false;
+    /**
+     * Close group by options
+     */
+    public void closeGroupByOptionsExcept(GroupByOptions groupByOption) {
+        for (WebElement element : chargebackImpalaPageObject.closeGroupByOptionButton) {
+            if (!element.findElement(By.xpath("//parent::li")).getText().contains(groupByOption.value)) {
+                userActions.performActionWithPolling(element, UserAction.CLICK);
+            }
+        }
+    }
+
+    /**
+     * Validate whether group by displayed for pie charts
+     */
+    public void validateGroupByPieCharts() {
+        for (WebElement element : chargebackImpalaPageObject.pieChartGroupBySearchBoxs) {
+            Boolean isGroupingDisplayed = false;
+            for (WebElement groupByOptionDivPieChart : element.findElements(By.xpath("//child::div"))) {
+                if(!groupByOptionDivPieChart.getText().equalsIgnoreCase("")) {
+                    isGroupingDisplayed = true;
+                }
+            }
+            Assert.assertTrue(isGroupingDisplayed, "Group by option not displayed for pie chart");
+        }
+    }
+
+    /**
+     * Validate whether group by included in showing group By tables
+     * @param groupByOption - Group by option
+     */
+    public void validateGroupByTableResults(GroupByOptions groupByOption) {
+        Boolean isGroupByHeadingDisplayed = false;
+        for (WebElement element : chargebackImpalaPageObject.groupByResultsTableHeadings) {
+            if (element.getText().equalsIgnoreCase(groupByOption.value)) {
+                isGroupByHeadingDisplayed = true;
+            }
+        }
+        Assert.assertTrue(isGroupByHeadingDisplayed, "Group By heading is not displayed in group by table.");
+    }
+
+    /**
+     * Get list of finished impala jobs
+     * @return
+     */
+    public List<WebElement> getFinishedJobsImpala() {
+        return chargebackImpalaPageObject.impalaJobsTableRecords;
     }
 
     public boolean selecttable() {

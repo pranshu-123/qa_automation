@@ -14,14 +14,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.touch.SingleTapAction;
 
+import java.security.Timestamp;
+import java.util.*;
 import java.util.logging.Logger;
 
 import org.testng.Assert;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 public class ReportsArchiveSchedulePage {
   private WaitExecuter waitExecuter;
@@ -98,9 +95,9 @@ public class ReportsArchiveSchedulePage {
    * Method to validate the Schedule report Page drop down list
    */
   public void validateScheduleReportDropDown(ReportsArchiveScheduledPageObject reportPageObj) {
-    waitExecuter.sleep(1000);
+    waitExecuter.waitUntilPageFullyLoaded();
     MouseActions.clickOnElement(driver, reportPageObj.scheduleReportDropDown);
-    waitExecuter.sleep(1000);
+    waitExecuter.waitUntilPageFullyLoaded();
     List<WebElement> dropDownList = reportPageObj.dropDownList;
     Assert.assertFalse(dropDownList.isEmpty(), "There are no reports in the drop down list as it is empty");
     boolean isContainsAllOpt = false;
@@ -117,12 +114,12 @@ public class ReportsArchiveSchedulePage {
       } else {
         logger.info("Click on reportType: " + reportType);
         MouseActions.clickOnElement(driver, dropDownList.get(i));
-        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilPageFullyLoaded();
         otherReportTotal += getReportCnt(reportPageObj, 15);
         logger.info("The other report cnt is " + otherReportTotal);
       }
       MouseActions.clickOnElement(driver, reportPageObj.scheduleReportDropDown);
-      waitExecuter.sleep(1000);
+      waitExecuter.waitUntilPageFullyLoaded();
     }
     Assert.assertTrue(isContainsAllOpt, "There is no option 'All' in the dropdown list of size"
         + dropDownList.size() + " for Scheduled reports");
@@ -136,7 +133,7 @@ public class ReportsArchiveSchedulePage {
     List<WebElement> reportTypeList = reportPageObj.reportCnt;
     Assert.assertFalse(reportTypeList.isEmpty(), " The report type column is empty");
     logger.info("The report type count is " + reportTypeList.size());
-    if (reportTypeList.size() > 10) {
+    if (reportTypeList.size() > rowCnt) {
       String pageCntStr = reportPageObj.reportCntPerPage.getText().trim();
       logger.info("The pageCnt is " + pageCntStr);
       //output= Page: of 173
@@ -371,10 +368,61 @@ public class ReportsArchiveSchedulePage {
     ArrayList<String> expectedReportNameArr = new ArrayList<>(), reportAsceArr = new ArrayList<>(), reportDscArr = new ArrayList<>();
     List<WebElement> nextScheduledRunList = reportPageObj.nextScheduledRun;
     WebElement sortingIcon = reportPageObj.sortingStatusIcon;
-    List<WebElement> sortByNextScheduledRun = reportPageObj.reportType;
     Assert.assertFalse(nextScheduledRunList.isEmpty(), "There are no reports scheduled for net run");
     expectedReportNameArr = populateExpectedScheduledReportArr(reportPageObj, nextScheduledRunList);
-    sortByReportName(reportPageObj, expectedReportNameArr, reportAsceArr, reportDscArr, nextScheduledRunList, sortingIcon);
+    sortByScheduledRun(expectedReportNameArr, reportAsceArr, reportDscArr, nextScheduledRunList, sortingIcon);
+  }
+
+  /**
+   * Method to validate sorting on Next Scheduled Run for Scheduled Page
+   */
+  public void sortByScheduledRun(ArrayList<String> expectedReportNameArr,
+                                 ArrayList<String> reportAsceArr, ArrayList<String> reportDscArr,
+                                 List<WebElement> reportNameList, WebElement sortingIcon) {
+    //Create a key,value pair of converted epoch time and timestamp value respectively
+    ArrayList<Long> epochTime = new ArrayList<>();
+    HashMap<Long, String> epochTimeStampMap = new HashMap<>();
+    try {
+      for (int i = 0; i < expectedReportNameArr.size(); i++) {
+        String timeStampVal = expectedReportNameArr.get(i);
+        long epoch = new java.text.SimpleDateFormat("MM/dd/yyyy HH:mm:ss").parse(timeStampVal).getTime() / 1000;
+        epochTime.add(epoch);
+        epochTimeStampMap.put(epoch, timeStampVal);
+      }
+    } catch (java.text.ParseException ex) {
+      logger.info("Got parsing exception " + ex.getMessage());
+    }
+    //Sort the coverted epoch time
+    Collections.sort(epochTime);
+    ArrayList<String> newExpectedReportNameArr = new ArrayList<>();
+    MouseActions.clickOnElement(driver, sortingIcon);
+    Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed");
+    reportAsceArr.clear();
+    reportDscArr.clear();
+
+    for (int s = 0; s < reportNameList.size(); s++) {
+      reportAsceArr.add(reportNameList.get(s).getText());
+      logger.info("The ascending list is " + reportNameList.get(s).getText());
+    }
+    // Click again to reverse sort;
+    MouseActions.clickOnElement(driver, sortingIcon);
+    waitExecuter.sleep(1000);
+    Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed ");
+    for (int s = 0; s < reportNameList.size(); s++) {
+      reportDscArr.add(reportNameList.get(s).getText());
+      logger.info("The descending list is " + reportNameList.get(s).getText());
+    }
+    //Put the timestamp corresponding to the sorted epoch time from hash map into an Array for validation
+    for (int i = 0; i < reportDscArr.size(); i++) {
+      newExpectedReportNameArr.add(epochTimeStampMap.get(epochTime.get(i)));
+    }
+    logger.info("The Expected list is " + newExpectedReportNameArr);
+    Assert.assertTrue(newExpectedReportNameArr.equals(reportAsceArr) || newExpectedReportNameArr.equals(reportDscArr),
+        "The sorting for scheduled run is not correct \nExpected list is " + newExpectedReportNameArr);
+    expectedReportNameArr.clear();
+    newExpectedReportNameArr.clear();
+    reportAsceArr.clear();
+    reportDscArr.clear();
   }
 
   /**
@@ -387,7 +435,6 @@ public class ReportsArchiveSchedulePage {
     Collections.sort(expectedReportNameArr);
     ArrayList<String> newExpectedReportNameArr = new ArrayList<String>();
     MouseActions.clickOnElement(driver, sortingIcon);
-
     Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed");
     reportAsceArr.clear();
     reportDscArr.clear();
@@ -625,7 +672,8 @@ public class ReportsArchiveSchedulePage {
       logger.info("The report is " + reportName);
       String status = reportStatusList.get(i).getText();
       MouseActions.clickOnElement(driver, latestReportActionList.get(i));
-      waitExecuter.sleep(2000);
+      waitExecuter.waitUntilNumberOfWindowsToBe(1);
+      waitExecuter.waitUntilPageFullyLoaded();
       String actualHeader = reportPageObj.latestReportHeader.getText();
       logger.info("The header is " + actualHeader);
       String expectedHeader;
@@ -677,6 +725,8 @@ public class ReportsArchiveSchedulePage {
           MouseActions.clickOnElement(driver, reportPageObj.reportCreationRunButton);
           waitExecuter.sleep(30000);
           driver.navigate().refresh();
+          waitExecuter.waitUntilPageFullyLoaded();
+          waitExecuter.waitUntilElementClickable(reportPageObj.reportSearchBox);
           status = reportStatusList.get(i).getText().trim();
           afterReportCnt = Integer.parseInt(reportCntList.get(i).getText().trim());
           logger.info("Before cnt = " + beforeReportCnt + " After cnt = " + afterReportCnt);
@@ -705,6 +755,7 @@ public class ReportsArchiveSchedulePage {
           waitExecuter.waitUntilPageFullyLoaded();
           driver.navigate().refresh();
           waitExecuter.waitUntilPageFullyLoaded();
+          waitExecuter.waitUntilElementClickable(reportPageObj.reportSearchBox);
           status = reportStatusList.get(i).getText().trim();
           afterReportCnt = Integer.parseInt(reportCntList.get(i).getText().trim());
           logger.info("Before cnt = " + beforeReportCnt + " After cnt = " + afterReportCnt);
@@ -720,6 +771,7 @@ public class ReportsArchiveSchedulePage {
           waitExecuter.waitUntilPageFullyLoaded();
           driver.navigate().refresh();
           waitExecuter.waitUntilPageFullyLoaded();
+          waitExecuter.waitUntilElementClickable(reportPageObj.reportSearchBox);
           status = reportStatusList.get(i).getText().trim();
           afterReportCnt = Integer.parseInt(reportCntList.get(i).getText().trim());
           logger.info("Before cnt = " + beforeReportCnt + " After cnt = " + afterReportCnt);
@@ -735,12 +787,52 @@ public class ReportsArchiveSchedulePage {
           waitExecuter.sleep(40000);
           status = reportStatusList.get(i).getText().trim();
           driver.navigate().refresh();
+          waitExecuter.waitUntilPageFullyLoaded();
+          waitExecuter.waitUntilElementClickable(reportPageObj.reportSearchBox);
           afterReportCnt = Integer.parseInt(reportCntList.get(i).getText().trim());
           logger.info("Before cnt = " + beforeReportCnt + " After cnt = " + afterReportCnt);
       }
       Assert.assertEquals(expectedAfterCnt, afterReportCnt, " The report cnt do not match for report Name = " +
           reportName + " with status = " + status + " \n Expected = " + expectedAfterCnt + " Actual = " + afterReportCnt);
     }
+  }
+
+  /**
+   * Method to validate schedule reports option from actions tab
+   */
+  public void validateScheduleReportOption(ReportsArchiveScheduledPageObject reportPageObj) {
+    Random rnd = new Random();
+    List<WebElement> scheduleReportIconList = reportPageObj.scheduleReportIcon;
+    MouseActions.clickOnElement(driver, scheduleReportIconList.get(2));
+    waitExecuter.waitUntilNumberOfWindowsToBe(1);
+    waitExecuter.waitUntilPageFullyLoaded();
+    String scheduledReportName = "scheduleReport_" + rnd.nextInt(1000);
+    reportPageObj.scheduleReportName.sendKeys(scheduledReportName);
+    MouseActions.clickOnElement(driver, reportPageObj.scheduleToRunDropDown);
+    waitExecuter.waitUntilPageFullyLoaded();
+    MouseActions.clickOnElement(driver, reportPageObj.everyMonthOption);
+    waitExecuter.waitUntilPageFullyLoaded();
+    MouseActions.clickOnElement(driver, reportPageObj.scheduleButton);
+    waitExecuter.waitUntilElementClickable(reportPageObj.scheduledPage);
+    MouseActions.clickOnElement(driver, reportPageObj.scheduledPage);
+    waitExecuter.waitUntilElementClickable(reportPageObj.scheduleReportSearchBox);
+    reportPageObj.scheduleReportSearchBox.sendKeys(scheduledReportName);
+    waitExecuter.waitUntilPageFullyLoaded();
+    List<WebElement> scheduleReportNames = reportPageObj.scheduleName;
+    Assert.assertFalse(scheduleReportNames.isEmpty(), "Report with name " + scheduledReportName + " has not been scheduled");
+    waitExecuter.waitUntilPageFullyLoaded();
+    boolean scheduledReportPresent = false;
+    for (int i = 0; i < scheduleReportNames.size(); i++) {
+      String UI_scheduleReportName = scheduleReportNames.get(i).getText();
+      logger.info("The UI_scheduleReportName is: "+ UI_scheduleReportName);
+      if (UI_scheduleReportName.equals(scheduledReportName)) {
+        scheduledReportPresent = true;
+        break;
+      }
+    }
+    logger.info("scheduledReportPresent = "+ scheduledReportPresent);
+    Assert.assertTrue(scheduledReportPresent,"The report "+ scheduledReportName + " is not present in the list of" +
+        " scheduled reports in the UI");
   }
 
   /**
@@ -755,20 +847,19 @@ public class ReportsArchiveSchedulePage {
       logger.info("ReportCnt is " + reportCnt);
       if (reportCnt > 0) {
         MouseActions.clickOnElement(driver, reportCntList.get(i));
-        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilElementClickable(reportPageObj.reportSearchBox);
         MouseActions.clickOnElement(driver, reportPageObj.downloadReportIcon);
-        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilPageFullyLoaded();
         Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Downloaded successfully",
             " No downloaded successfully message received.");
 
         MouseActions.clickOnElement(driver, reportPageObj.viewReportIcon);
-        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilPageFullyLoaded();
         Assert.assertTrue(reportPageObj.viewReportDialogWin.isDisplayed(), "Report  view not present.");
         MouseActions.clickOnElement(driver, reportPageObj.closeTab);
-        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilPageFullyLoaded();
 
         MouseActions.clickOnElement(driver, reportPageObj.deleteReportIcon);
-        waitExecuter.sleep(1000);
         Alert confirmationAlert = driver.switchTo().alert();
         String alertText = confirmationAlert.getText();
         logger.info("Alert text is " + alertText);
@@ -777,6 +868,7 @@ public class ReportsArchiveSchedulePage {
         Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Removed successfully",
             " Report not removed");
         MouseActions.clickOnElement(driver, reportPageObj.goBackLink);
+        waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.sleep(2000);
         int reportCntAfterDelete = Integer.parseInt(reportCntList.get(i).getText().trim());
         logger.info("Before Delete report count = " + reportCnt + "\n After delete report count is " + reportCntAfterDelete);

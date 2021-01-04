@@ -15,10 +15,6 @@ import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
 
-import java.awt.*;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -85,42 +81,33 @@ public class TC_HIVE_56 extends BaseClass {
             actions.moveToElement(applicationsPageObject.copyAppName).perform();
             waitExecuter.sleep(1000);
             applicationsPageObject.copyAppName.click();
-            try {
-                String data = (String) Toolkit.getDefaultToolkit().getSystemClipboard()
-                        .getData(DataFlavor.stringFlavor);
-                String[] getCopiedText = data.split(":");
-                // Click on first app in table to navigate to app details page
-                test.log(LogStatus.INFO, "Click on first app in table to navigate to app details page");
-                LOGGER.info("Click on first app in table to navigate to app details page");
-                applicationsPageObject.getStatusFromTable.click();
-                waitExecuter.sleep(1000);
-                // Assert that Start, End Date, Duration and Database is displayed
-                test.log(LogStatus.INFO, "Assert that Start, End Date, Duration and Database is displayed");
-                LOGGER.info("Assert that Start, End Date, Duration and Database is displayed");
-                List<String> duration = new ArrayList<>();
-                for (int i = 0; i < applicationsPageObject.getJobTimesHeading.size(); i++) {
-                    duration.add(applicationsPageObject.getJobTimes.get(i).getText().trim());
-                    LOGGER.info("KPI for MR app loaded successfully- "
-                            + applicationsPageObject.getJobTimes.get(i).getText().trim());
-                }
-                waitExecuter.sleep(3000);
-                Assert.assertNotNull(duration,
-                        "KPI didn't load for app id- " + getCopiedText[2]);
-                test.log(LogStatus.PASS, "KPI loads successfully");
-                waitExecuter.sleep(1000);
-                // Navigate back to parent page and click on reset
-                test.log(LogStatus.INFO, "Navigate back to parent page and click on reset");
-                LOGGER.info("Navigate back to parent page and click on reset");
-                driver.navigate().back();
-                waitExecuter.sleep(5000);
-                allApps.reset();
-                driver.navigate().refresh();
-            } catch (HeadlessException | UnsupportedFlavorException | IOException e) {
-                driver.navigate().back();
-                waitExecuter.sleep(5000);
-                allApps.reset();
-                e.printStackTrace();
+
+            // Click on first app in table to navigate to app details page
+            test.log(LogStatus.INFO, "Click on first app in table to navigate to app details page");
+            LOGGER.info("Click on first app in table to navigate to app details page");
+            applicationsPageObject.getStatusFromTable.click();
+            waitExecuter.sleep(1000);
+            // Assert that Start, End Date, Duration and Database is displayed
+            test.log(LogStatus.INFO, "Assert that Start, End Date, Duration and Database is displayed");
+            LOGGER.info("Assert that Start, End Date, Duration and Database is displayed");
+            List<String> duration = new ArrayList<>();
+            for (int i = 0; i < applicationsPageObject.getJobTimesHeading.size(); i++) {
+                duration.add(applicationsPageObject.getJobTimes.get(i).getText().trim());
+                LOGGER.info("KPI for MR app loaded successfully- "
+                        + applicationsPageObject.getJobTimes.get(i).getText().trim());
             }
+            waitExecuter.sleep(3000);
+            Assert.assertNotNull(duration,
+                    "KPI didn't load for app id ");
+            test.log(LogStatus.PASS, "KPI loads successfully");
+            waitExecuter.sleep(1000);
+            // Navigate back to parent page and click on reset
+            test.log(LogStatus.INFO, "Navigate back to parent page and click on reset");
+            LOGGER.info("Navigate back to parent page and click on reset");
+            driver.navigate().back();
+            waitExecuter.sleep(5000);
+            allApps.reset();
+
         } else {
             Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
                     "The clusterId does not have any application under it and also does not display 'No Data Available' for it"

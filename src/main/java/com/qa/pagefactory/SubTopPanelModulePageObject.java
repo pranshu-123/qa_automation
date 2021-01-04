@@ -26,21 +26,18 @@ public class SubTopPanelModulePageObject {
     @FindBy(xpath = "//span[contains(@class,'icon-reports')]")
     public WebElement reports;
 
-    @FindBy(xpath = "//span[contains(@class,'icon-cloud')]")
-    public WebElement migration;
-
     @FindBy(xpath = "//span[contains(@class,'icon-alerts')]")
     public WebElement alerts;
 
     @FindBy(xpath = "//span[contains(@class,'icon-gear')]")
     public WebElement gear;
-    
+
     @FindBy(xpath = "//li/a[text()='About']")
     public WebElement aboutInfo;
-    
+
     @FindBy(xpath = "//div[@class='modal-body']//div[2]")
     public WebElement versionInfo;
-    
+
     @FindBy(xpath = "//div[@class='close pointer']")
     public WebElement closeAboutWindow;
 
@@ -50,11 +47,20 @@ public class SubTopPanelModulePageObject {
     @FindBy(id = "support-li")
     public WebElement supportList;
 
+    @FindBy(xpath = "//span[contains(@class, 'icon-cloud')]/parent::h4/following-sibling::ul/li/span[contains(text(), 'Services And Versions Compatibility')]")
+    public WebElement servicesVersionMigrationTab;
+
+    @FindBy(xpath = "//li[contains(@class,'active')]//ul[@class='sub-menu']//span[text()='Cluster Discovery']")
+    public WebElement clusterDiscoveryTab;
+
+    @FindBy(xpath = "//li[contains(@class,'active')]//ul[@class='sub-menu']//span[text()='Workload Fit']")
+    public WebElement WorkloadFitTab;
+
     /**
      * @param driver The driver that will be used to look up the elements
      */
     public SubTopPanelModulePageObject(WebDriver driver) {
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
     }
 
 }

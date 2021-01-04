@@ -24,7 +24,7 @@ public class TEZ_131 extends BaseClass {
         Log.startTestCase("TEZ_131_VerifyTheTags");
         TezAppsDetailsPageObject tezApps = new TezAppsDetailsPageObject(driver);
         TezAppsDetailsPage appsDetailsPage = new TezAppsDetailsPage(driver);
-        appsDetailsPage.commonTabValidation(test, clusterId, "Tags", logger);
+        appsDetailsPage.commonTabValidation(test, clusterId, "Tags",logger,false);
         test.log(LogStatus.PASS, "Verified the Tags tab successfully");
 
         //Close apps details page

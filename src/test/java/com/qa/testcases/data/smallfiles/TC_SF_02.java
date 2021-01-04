@@ -62,15 +62,7 @@ public class TC_SF_02 extends BaseClass {
         smallfiles.clickOnadvancedOptions();
         waitExecuter.sleep(3000);
 
-        String onminParentDirectory = "3";
-        smallfiles.clickonminParent(onminParentDirectory);
-        LOGGER.info("Set Min Parent Directory Depth as: " + onminParentDirectory);
-        test.log(LogStatus.INFO, "Set minimum Small File as: " + onminParentDirectory);
-
-        String onmaxParentDirectory = "5";
-        smallfiles.clickonmaxParent(onmaxParentDirectory);
-        LOGGER.info("Set Max Parent Directory Depth as: " + onmaxParentDirectory);
-        test.log(LogStatus.INFO, "Set minimum Small File as: " + onmaxParentDirectory);
+        smallfiles.navigateToAdvancedOptions(smallfilesPageObject, test, "3", "5");
 
         smallfiles.clickOnModalRunButton();
         waitExecuter.sleep(3000);

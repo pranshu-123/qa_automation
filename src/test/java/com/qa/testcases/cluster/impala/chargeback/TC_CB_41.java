@@ -1,17 +1,19 @@
 package com.qa.testcases.cluster.impala.chargeback;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.enums.chargeback.ImpalaJobTableColumn;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.clusters.impala.ChargeBackImpala;
 import com.qa.utils.LoggingUtils;
-import com.qa.utils.WaitExecuter;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
  * @author Ankur Jaiswal
  */
+@Marker.All
+@Marker.ImpalaChargeback
 public class TC_CB_41 extends BaseClass {
     private final LoggingUtils LOGGER = new LoggingUtils(TC_CB_41.class);
     /**

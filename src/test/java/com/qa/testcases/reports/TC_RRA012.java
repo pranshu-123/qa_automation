@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
 public class TC_RRA012 extends BaseClass {
-  Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.TC_RRA011.class);
+  Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.TC_RRA012.class);
 
   @Test(dataProvider = "clusterid-data-provider")
   public void verifyScheduleReportOption(String clusterId) {

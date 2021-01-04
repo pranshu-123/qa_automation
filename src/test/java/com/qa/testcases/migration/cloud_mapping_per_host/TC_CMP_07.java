@@ -2,6 +2,7 @@ package com.qa.testcases.migration.cloud_mapping_per_host;
 
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
+import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.migration.CloudMappingPerHostPageObject;
 import com.qa.scripts.migration.CloudMigrationPerHostPage;
 import com.qa.utils.Log;
@@ -25,13 +26,13 @@ public class TC_CMP_07 extends BaseClass {
     // Initialize all classes objects
     test.log(LogStatus.INFO, "Initialize all class objects");
     LOGGER.info("Initialize all class objects");
-    SubTopPanelModulePageObject subPanelPageObj = new SubTopPanelModulePageObject(driver);
+    TopPanelPageObject topPanelPageObj = new TopPanelPageObject(driver);
     CloudMigrationPerHostPage cloudMappingPage = new CloudMigrationPerHostPage(driver);
     CloudMappingPerHostPageObject cmPageObj = new CloudMappingPerHostPageObject(driver);
     WaitExecuter waitExecuter = new WaitExecuter(driver);
 
     // Navigate to Reports tab from header
-    MouseActions.clickOnElement(driver, subPanelPageObj.migration);
+    MouseActions.clickOnElement(driver, topPanelPageObj.migrationTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.waitUntilElementClickable(cmPageObj.cloudMappingPerHostTab);
     MouseActions.clickOnElement(driver, cmPageObj.cloudMappingPerHostTab);

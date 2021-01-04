@@ -1,4 +1,4 @@
-package com.qa.testcases.reports;
+package com.qa.testcases.reports.archived;
 
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
 public class TC_RRA012 extends BaseClass {
-  Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.TC_RRA012.class);
+  Logger logger = LoggerFactory.getLogger(TC_RRA012.class);
 
   @Test(dataProvider = "clusterid-data-provider")
   public void verifyScheduleReportOption(String clusterId) {

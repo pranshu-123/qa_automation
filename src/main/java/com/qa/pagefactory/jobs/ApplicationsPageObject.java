@@ -30,7 +30,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//div[contains(@class,'opensleft')]/div[3]/div/button[1]")
     public WebElement applyBtn;
 
-    @FindBy(xpath = "//div[contains(@class,'component-section-header')]/h1[text()='Jobs']")
+        @FindBy(xpath = "//div[contains(@class,'component-section-header')]/h1[text()='Jobs']")
     public WebElement jobsPageHeader;
 
     @FindBy(xpath = "//div[contains(@class,'ranges')]//li")

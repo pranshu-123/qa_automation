@@ -16,23 +16,23 @@ import org.testng.annotations.Test;
 @Marker.All
 @Marker.ImpalaChargeback
 public class TC_CB_01 extends BaseClass {
-  /**
-   * Verify User is able to access Impala chargeback page
-   */
-  @Test(dataProvider = "clusterid-data-provider")
-  public void TC_CB_01_VerifyImpalaChargeBackPage(String clusterId) {
-    test = extent.startTest("TC_CB_01_VerifyImpalaChargeBackPage: "+clusterId,"Verify User is able to access Impala chrageback page");
-    test.assignCategory(" Cluster - Impala Chargeback");
+    /**
+     * Verify User is able to access Impala chargeback page
+     */
+    @Test(dataProvider = "clusterid-data-provider")
+    public void TC_CB_01_VerifyImpalaChargeBackPage(String clusterId) {
+        test = extent.startTest("TC_CB_01_VerifyImpalaChargeBackPage: " + clusterId, "Verify User is able to access Impala chrageback page");
+        test.assignCategory(" Cluster - Impala Chargeback");
 
-    ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
-    chargeBackImpala.selectImpalaChargeback();
+        ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
+        chargeBackImpala.selectImpalaChargeback();
 
-    Assert.assertTrue(driver.getCurrentUrl().contains("clusters/chargeback"), "User is not " +
-      "directed to the cluster chargeback page.");
-    test.log(LogStatus.PASS, "User is redirected to to cluster chargeback page");
+        Assert.assertTrue(driver.getCurrentUrl().contains("clusters/chargeback"), "User is not " +
+            "directed to the cluster chargeback page.");
+        test.log(LogStatus.PASS, "User is redirected to to cluster chargeback page");
 
-    Assert.assertEquals(chargeBackImpala.getHeading(), PageConstants.Clusters.CHARGEBACK_IMPALA_HEADING,
-      "Chargeback Impala is not displayed as page heading.");
-    test.log(LogStatus.PASS, "Chargeback Impala is displayed as page heading.");
-  }
+        Assert.assertEquals(chargeBackImpala.getHeading(), PageConstants.Clusters.CHARGEBACK_IMPALA_HEADING,
+            "Chargeback Impala is not displayed as page heading.");
+        test.log(LogStatus.PASS, "Chargeback Impala is displayed as page heading.");
+    }
 }

@@ -1,4 +1,5 @@
 package com.qa.testcases.cluster.impala.chargeback;
+
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.clusters.ChargebackImpalaPageObject;
@@ -24,9 +25,9 @@ public class TC_CB_03 extends BaseClass {
     private DatePicker picker;
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TC_CB_03_Verifytheusercanselectacluster (String clusterId) {
+    public void TC_CB_03_Verifytheusercanselectacluster(String clusterId) {
 
-        test = extent.startTest("TC_CB_03_Verifytheusercanselectacluster "+clusterId, "Verify the user can select a cluster ");
+        test = extent.startTest("TC_CB_03_Verifytheusercanselectacluster " + clusterId, "Verify the user can select a cluster ");
         test.assignCategory(" Cluster - Impala Chargeback");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -58,27 +59,27 @@ public class TC_CB_03 extends BaseClass {
         waitExecuter.sleep(1000);
         String memoryHourInSeconds = chargebackImpala.getMemoryGraphHeader();
         Assert.assertTrue(chargebackImpala.getMemoryGraphHeader().matches(memoryHourInSeconds),
-                "verify the total memory in graph heading");
+            "verify the total memory in graph heading");
         test.log(LogStatus.PASS, "verify the total memory in graph heading");
 
         String cpuHours = chargebackImpala.getCpuGraphHeader();
         Assert.assertTrue(chargebackImpala.getCpuGraphHeader().matches(cpuHours),
-                "verify the total CPU hours in graph heading");
+            "verify the total CPU hours in graph heading");
         test.log(LogStatus.PASS, "verify the total CPU hours in graph heading");
 
         String donutchart = chargebackImpala.getdonutchartHeader();
         Assert.assertTrue(chargebackImpala.getdonutchartHeader().matches(donutchart),
-                "verify the total Jobs donut chart in graph heading");
+            "verify the total Jobs donut chart in graph heading");
         test.log(LogStatus.PASS, "verify the total Jobs donut chart in graph heading");
 
         String impalaqueriestable = chargebackImpala.getImpalatableHeader();
         Assert.assertTrue(chargebackImpala.getImpalatableHeader().matches(impalaqueriestable),
-                "verify the total Jobs donut chart in graph heading");
+            "verify the total Jobs donut chart in graph heading");
         test.log(LogStatus.PASS, "verify the total Impala queries table in graph heading");
 
         String chargebacktable = chargebackImpala.getchargebacktableHeader();
         Assert.assertTrue(chargebackImpala.getchargebacktableHeader().matches(chargebacktable),
-                "verify the total Chargeback table grouped by user chart in graph heading");
+            "verify the total Chargeback table grouped by user chart in graph heading");
         test.log(LogStatus.PASS, "verify the total Chargeback table grouped by user chart in graph heading");
 
 

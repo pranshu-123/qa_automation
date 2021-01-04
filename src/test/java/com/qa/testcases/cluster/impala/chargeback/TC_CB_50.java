@@ -17,13 +17,14 @@ import org.testng.annotations.Test;
 @Marker.ImpalaChargeback
 public class TC_CB_50 extends BaseClass {
     private final LoggingUtils LOGGER = new LoggingUtils(TC_CB_50.class);
+
     /**
      * Validate table sorting - By Total Processing Time Seconds
      */
     @Test
     public void validateSortByTotalProcessingTimeSeconds() {
         test =
-            extent.startTest("TC_CB_50.validateSortByTotalProcessingTimeSeconds","Validate table sorting - By Total Processing Time Seconds");
+            extent.startTest("TC_CB_50.validateSortByTotalProcessingTimeSeconds", "Validate table sorting - By Total Processing Time Seconds");
         test.assignCategory(" Cluster - Impala Chargeback");
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
         chargeBackImpala.selectImpalaChargeback();

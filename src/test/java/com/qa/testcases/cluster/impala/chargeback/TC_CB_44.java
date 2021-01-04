@@ -17,13 +17,14 @@ import org.testng.annotations.Test;
 @Marker.ImpalaChargeback
 public class TC_CB_44 extends BaseClass {
     private final LoggingUtils LOGGER = new LoggingUtils(TC_CB_44.class);
+
     /**
      * Validate table sorting - By Real User
      */
     @Test
     public void validateSortByRealUser() {
         test =
-            extent.startTest("TC_CB_44.validateSortByRealUser","Validate table sorting - By Real User");
+            extent.startTest("TC_CB_44.validateSortByRealUser", "Validate table sorting - By Real User");
         test.assignCategory(" Cluster - Impala Chargeback");
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
         chargeBackImpala.selectImpalaChargeback();

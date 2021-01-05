@@ -263,6 +263,34 @@ public class ServicesAndVersionsCompatibility {
         }
     }
 
+
+    //Check for Services and Versions are not Compatible
+    public void verifyServicesAndVersionsAreAvailableInSourceButMissingInTarget() {
+        List<String> hdpServicesList = getHDPServicesList();
+        int totalHDPServicesCount = hdpServicesList.size();
+        List<WebElement> rowsList = servicesAndVersionsCompatibilityPageObject.rowsList;
+        Assert.assertFalse(rowsList.isEmpty(), "No Platform services data available");
+        List<WebElement> colsList = servicesAndVersionsCompatibilityPageObject.colList;
+        logger.info("Size of columnlist: " + colsList.size());
+        Assert.assertFalse(colsList.isEmpty(), "No Platform services data available");
+
+        for (int col = 0; col < totalHDPServicesCount - 1; col++) {
+            for (int row = 0; row < rowsList.size(); row++) {
+                String path = "//tbody/tr[" + (row + 1) + "]/td[" + (col + 2) + "]";
+                WebElement e = driver.findElement(By.xpath(path));
+                if (e.getText().isEmpty()) {
+                        //Now check for brown //risk-3
+                        String classAttributeName = e.getAttribute("class");
+                        logger.info("Element class attribute name: " + classAttributeName);
+                        //check for class attribute name as 'risk-3' which is for Orange color.
+                        Assert.assertTrue(classAttributeName.equals("risk-3"), "Platforms service in the box is not" +
+                                " marked in Brown for element: "+e.getText());
+                }
+            }
+        }
+    }
+
+
     /**
      * Method to validate report, download, delete, view report from actions tab
      */

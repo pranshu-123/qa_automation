@@ -17,16 +17,16 @@ import java.util.logging.Logger;
 
 @Marker.All
 @Marker.MigrationServices
-public class TC_MP_SC_12 extends BaseClass {
+public class TC_MP_SC_14 extends BaseClass {
 
-    private static final Logger LOGGER = Logger.getLogger(TC_MP_SC_12.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TC_MP_SC_14.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateMSVAreAvailableInSrcButMissingInTargetForGoogleDataProc(String clusterId) {
+    public void validateMSVAreAvailableInSrcButMissingInTargetForAzureHDI(String clusterId) {
 
-        test = extent.startTest("TC_MP_SC_12.validateMSVAreAvailableInSrcButMissingInTargetForGoogleDataProc: " + clusterId,
+        test = extent.startTest("TC_MP_SC_14.validateMSVAreAvailableInSrcButMissingInTargetForAzureHDI: " + clusterId,
                 "Validate \"Service available in Source, but missing in Target\" legend for cloud provider -" +
-                        " \"Google data proc\" ");
+                        " \"Azure HDI\" ");
         test.assignCategory(" Migration - Services And Versions Compatibility ");
 
         //Initialize object
@@ -43,11 +43,11 @@ public class TC_MP_SC_12 extends BaseClass {
         LOGGER.info("Clicked on close banner");
         servicesAndVersionsCompatibility.clickOnRunButton();
         LOGGER.info("Clicked on Run button");
-        String cloudProductName = "Google Dataproc";
+        String cloudProductName = "Azure HDI";
         servicesAndVersionsCompatibility.selectCloudProduct(cloudProductName);
         LOGGER.info("Selected platform : "+cloudProductName+" from the drop down.");
         servicesAndVersionsCompatibility.clickOnRunModalButton();
-        List<String> expectedPlatforms = Arrays.asList(PageConstants.MigrationAndServices.Google_Dataproc);
+        List<String> expectedPlatforms = Arrays.asList(PageConstants.MigrationAndServices.Azure_HDI);
 
         try {
             waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.confirmationMessageElement,
@@ -56,10 +56,10 @@ public class TC_MP_SC_12 extends BaseClass {
             Assert.assertTrue(expectedPlatforms.equals(servicesAndVersionsCompatibility.getPlatforms()));
             servicesAndVersionsCompatibility.verifyServicesAndVersionsAreAvailableInSourceButMissingInTarget();
             test.log(LogStatus.PASS, "Verified Services and Versions are available in Source, " +
-                    "but missing in Target legend for cloud provider Google Dataproc.");
+                    "but missing in Target legend for cloud provider Azure HDI.");
         } catch (TimeoutException te) {
             throw new AssertionError("Services and Versions Compatibility Report not completed successfully" +
-                    " for Google Dataproc.");
+                    " for Azure HDI.");
         }
 
     }

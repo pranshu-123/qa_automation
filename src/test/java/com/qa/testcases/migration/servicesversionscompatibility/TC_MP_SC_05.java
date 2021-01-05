@@ -2,6 +2,7 @@ package com.qa.testcases.migration.servicesversionscompatibility;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.constants.PageConstants;
 import com.qa.pagefactory.migration.ServicesAndVersionsCompatibilityPageObject;
 import com.qa.scripts.migration.ServicesAndVersionsCompatibility;
 import com.qa.utils.WaitExecuter;
@@ -46,7 +47,7 @@ public class TC_MP_SC_05 extends BaseClass {
         LOGGER.info("Clicked on cloud product drop down and selected Azure HDI cloud providers");
         servicesAndVersionsCompatibility.clickOnRunModalButton();
         LOGGER.info("Clicked on Run Modal button");
-        List<String> expectedPlatforms = Arrays.asList("HDInsight 4.0", "HDInsight 3.6");
+        List<String> expectedPlatforms = Arrays.asList(PageConstants.MigrationAndServices.Azure_HDI);
 
         try {
             waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.confirmationMessageElement,

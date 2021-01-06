@@ -33,6 +33,9 @@ public class CommonPageObject {
   @FindBy(xpath = "//div[contains(@class,'close pointer')]")
   public List<WebElement> closeModalButton;
 
+  @FindBy(xpath = "//div[contains(@class,'close')]")
+  public List<WebElement> closeAppModalButton;
+
   public CommonPageObject(WebDriver driver) {
     PageFactory.initElements(driver,this);
   }

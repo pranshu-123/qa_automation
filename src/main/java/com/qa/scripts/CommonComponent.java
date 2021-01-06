@@ -19,5 +19,8 @@ public class CommonComponent {
     if (commonPageObject.closeModalButton.size() > 0) {
       MouseActions.clickOnElement(driver, commonPageObject.closeModalButton.get(0));
     }
+    else if(commonPageObject.closeAppModalButton.size() > 0){
+      MouseActions.clickOnElement(driver, commonPageObject.closeAppModalButton.get(0));
+    }
   }
 }

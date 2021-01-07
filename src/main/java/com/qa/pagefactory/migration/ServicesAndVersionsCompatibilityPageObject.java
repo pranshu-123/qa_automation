@@ -105,7 +105,8 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//select[@class='minutes']")
     public WebElement scheduleTimeMinutes;
 
-
+    @FindBy(xpath = "//table[contains(@class, 'component-data-tables')]/tbody")
+    public WebElement tableBodyElement;
 
     /**
      * @param driver The driver that will be used to look up the elements

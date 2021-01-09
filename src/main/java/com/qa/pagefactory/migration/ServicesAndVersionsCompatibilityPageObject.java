@@ -108,6 +108,9 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//table[contains(@class, 'component-data-tables')]/tbody")
     public WebElement tableBodyElement;
 
+    @FindBy(xpath="//tbody/tr/td[contains(@class,'risk-default')]")
+    public List<WebElement> missingSrcHeaderElement;
+
     /**
      * @param driver The driver that will be used to look up the elements
      */

@@ -317,33 +317,16 @@ public class ServicesAndVersionsCompatibility {
     public void verifyServicesAndVersionsAreMissingInSourceButAvailableInTarget() {
         scrollToRight(driver, servicesAndVersionsCompatibilityPageObject.tableBodyElement);
         waitExecuter.sleep(3000);
-        List<String> hdpServicesList = getEmptyHDPServicesList();
-        int totalHDPServicesCount = hdpServicesList.size();
-        List<WebElement> rowsList = servicesAndVersionsCompatibilityPageObject.rowsList;
-        Assert.assertFalse(rowsList.isEmpty(), "No Platform services data available");
-        List<WebElement> colsList = servicesAndVersionsCompatibilityPageObject.colList;
-        logger.info("Size of columnlist: " + colsList.size());
-        Assert.assertFalse(colsList.isEmpty(), "No Platform services data available");
-
-        String headerPath = "(//thead/tr)[2]/th";
-        for (int col = 0; col < totalHDPServicesCount - 1; col++) {
-            WebElement he = driver.findElement(By.xpath(headerPath));
-            for (int row = 0; row < rowsList.size(); row++) {
-                String path = "//tbody/tr[" + (row + 1) + "]/td[" + (col + 2) + "]";
-                WebElement e = driver.findElement(By.xpath(path));
-                if(he.getText().isEmpty()){
-                    //Now check for Black //risk-default
-                    String classAttributeName = e.getAttribute("class");
-                    logger.info("Element class attribute name: " + classAttributeName);
-                    //check for class attribute name as 'risk-default' which is for Black color.
-                    Assert.assertTrue(classAttributeName.equals("risk-default"), "Platforms service in the box is not" +
-                            " marked in Brown for element: "+e.getText());
-                }
-//                if (e.getText().isEmpty()) {
-//
-//                }
+        List<WebElement> missingSrcHeaderlist = servicesAndVersionsCompatibilityPageObject.missingSrcHeaderElement;
+        Assert.assertFalse(missingSrcHeaderlist.isEmpty(), "No missing source headers generated");
+        logger.info("Total missing src header elements found: "+ missingSrcHeaderlist.size());
+        List<String> missingSrcHeaderElementsList = new ArrayList<>();
+        for(int i=0; i< missingSrcHeaderlist.size(); i++){
+            if(!missingSrcHeaderlist.get(i).getText().isEmpty()){
+                missingSrcHeaderElementsList.add(missingSrcHeaderlist.get(i).getText());
             }
         }
+        logger.info("All missing source header elements: "+missingSrcHeaderElementsList);
     }
 
     /**

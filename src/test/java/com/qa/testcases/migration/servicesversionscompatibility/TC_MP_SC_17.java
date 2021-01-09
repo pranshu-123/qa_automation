@@ -18,16 +18,16 @@ import java.util.logging.Logger;
 
 @Marker.All
 @Marker.MigrationServices
-public class TC_MP_SC_15 extends BaseClass {
+public class TC_MP_SC_17 extends BaseClass {
 
-    private static final Logger LOGGER = Logger.getLogger(TC_MP_SC_15.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TC_MP_SC_17.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateMSVAreMissingInSrcButAvailableInTargetForGoogleDataProc(String clusterId) {
+    public void validateMSVAreMissingInSrcButAvailableInTargetForAzureHDI(String clusterId) {
 
-        test = extent.startTest("TC_MP_SC_15.validateMSVAreMissingInSrcButAvailableInTargetForGoogleDataProc: "
-                        + clusterId, " Validate \"Service missing in Source, but available in Target\" legend " +
-                "for cloud provider - \"Google data proc\" ");
+        test = extent.startTest("TC_MP_SC_17.validateMSVAreMissingInSrcButAvailableInTargetForAzureHDI: "
+                + clusterId, " Validate \"Service missing in Source, but available in Target\" legend " +
+                "for cloud provider - \"Azure HDI\" ");
         test.assignCategory(" Migration - Services And Versions Compatibility ");
 
         //Initialize object
@@ -44,11 +44,11 @@ public class TC_MP_SC_15 extends BaseClass {
         LOGGER.info("Clicked on close banner");
         servicesAndVersionsCompatibility.clickOnRunButton();
         LOGGER.info("Clicked on Run button");
-        String cloudProductName = "Google Dataproc";
+        String cloudProductName = "Azure HDI";
         servicesAndVersionsCompatibility.selectCloudProduct(cloudProductName);
         LOGGER.info("Selected platform : "+cloudProductName+" from the drop down.");
         servicesAndVersionsCompatibility.clickOnRunModalButton();
-        List<String> expectedPlatforms = Arrays.asList(PageConstants.MigrationAndServices.Google_Dataproc);
+        List<String> expectedPlatforms = Arrays.asList(PageConstants.MigrationAndServices.Azure_HDI);
 
         try {
             waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.confirmationMessageElement,
@@ -58,16 +58,17 @@ public class TC_MP_SC_15 extends BaseClass {
             List<WebElement> reportList = servicesAndVersionsCompatibilityPageObject.latestReportList;
             Assert.assertFalse(reportList.isEmpty(), "No latest report generated.");
             //Validating the report generated is latest report.
-            waitExecuter.waitUntilTextToBeInWebElement(reportList.get(1),"Google Dataproc");
-            LOGGER.info("Verified report for Google Dataproc.");
+            waitExecuter.waitUntilTextToBeInWebElement(reportList.get(1),"Azure HDInsight");
+            LOGGER.info("Verified report for Azure HDInsight.");
             servicesAndVersionsCompatibility.validateLatestReport();
             Assert.assertTrue(expectedPlatforms.equals(servicesAndVersionsCompatibility.getPlatforms()));
+            LOGGER.info("Verified platforms of Azure HDInsight.");
             servicesAndVersionsCompatibility.verifyServicesAndVersionsAreMissingInSourceButAvailableInTarget();
             test.log(LogStatus.PASS, "Verified Services and Versions are missing in Source, " +
-                    "but available in Target legend for cloud provider Google Dataproc.");
+                    "but available in Target legend for cloud provider Azure HDI.");
         } catch (TimeoutException te) {
             throw new AssertionError("Services and Versions Compatibility Report not completed successfully" +
-                    " for Google Dataproc.");
+                    " for Azure HDI.");
         }
 
     }

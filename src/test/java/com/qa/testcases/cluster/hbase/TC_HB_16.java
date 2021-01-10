@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.hbase;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.clusters.HBasePageObject;
 import com.qa.scripts.clusters.HBasePage;
@@ -13,6 +14,8 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
+@Marker.ClusterHBase
+@Marker.All
 public class TC_HB_16 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_HB_16.class.getName());

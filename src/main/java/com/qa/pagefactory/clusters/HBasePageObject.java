@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class HBasePageObject {
 
     public HBasePageObject(WebDriver driver){ PageFactory.initElements(driver, this);}
@@ -14,5 +16,11 @@ public class HBasePageObject {
 
     @FindBy(xpath = "//h1[contains(text(), 'HBase')]")
     public WebElement hbaseHeader;
+
+    @FindBy(xpath = "(//span[contains(@class,'select2-selection__rendered')])")
+    public WebElement hBaseClusterDropDown;
+
+    @FindBy(xpath = "//*[@class='select2-results__options']//li")
+    public List<WebElement> hBaseClusters;
 
 }

@@ -23,4 +23,10 @@ public class HBasePageObject {
     @FindBy(xpath = "//*[@class='select2-results__options']//li")
     public List<WebElement> hBaseClusters;
 
+    @FindBy(xpath = "//*[@class='row no-gutters']//div[@class='col']/span")
+    public List<WebElement> hBaseClusterKPIs;
+
+    @FindBy(xpath = "//*[@class='row no-gutters']//div[@class='col-4']/h2")
+    public List<WebElement> hBaseClusterKPIValues;
+
 }

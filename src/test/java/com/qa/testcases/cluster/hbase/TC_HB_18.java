@@ -8,24 +8,21 @@ import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
-import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.List;
 import java.util.logging.Logger;
 
 @Marker.ClusterHBase
 @Marker.All
-public class TC_HB_17 extends BaseClass {
+public class TC_HB_18 extends BaseClass {
 
-    private static final Logger LOGGER = Logger.getLogger(TC_HB_17.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TC_HB_18.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void verifyHBaseClusters(String clusterId) {
-        test = extent.startTest("TC_HB_17.verifyHBaseClusters",
-                "Navigate to Clusters UI.");
+    public void verifyHBaseClustersMetrics(String clusterId) {
+        test = extent.startTest("TC_HB_18.verifyHBaseClustersMetrics",
+                "Verify summary of clusters metrics.");
         test.assignCategory(" Cluster - HBasePage ");
-        Log.startTestCase("TC_HB_17.verifyHBaseClusters");
+        Log.startTestCase("TC_HB_18.verifyHBaseClustersMetrics");
 
         // Initialize all classes objects
         LOGGER.info("Initialize all class objects");
@@ -40,10 +37,10 @@ public class TC_HB_17 extends BaseClass {
         waitExecuter.waitUntilElementPresent(hBasePageObject.hbaseHeader);
         LOGGER.info("HBase headers found: "+ hbase.getHBaseHeader());
 
-         List<String> hBaseClusters = hbase.getAllHBaseClusters();
-         LOGGER.info("HBase clusters found are: "+ hBaseClusters);
-         Assert.assertFalse(hBaseClusters.isEmpty(), "HBase clusters not available");
-        test.log(LogStatus.PASS, "Verified HBase clusters in Unravel UI.");
+        String hBaseClusterName = "HDPab722";
+        hbase.verifyHBaseClustersMetrics(hBaseClusterName);
+        LOGGER.info("HBase clusters metrics verified");
+        test.log(LogStatus.PASS, "Verified HBase clusters metrics in Unravel UI.");
 
     }
 }

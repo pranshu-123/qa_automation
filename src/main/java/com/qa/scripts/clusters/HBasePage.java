@@ -30,12 +30,14 @@ public class HBasePage {
         datePicker = new DatePicker(driver);
     }
 
+    //Method to get HBase header
     public String getHBaseHeader(){
         waitExecuter.waitUntilElementPresent(hBasePageObject.hbaseHeader);
         waitExecuter.waitUntilPageFullyLoaded();
         return hBasePageObject.hbaseHeader.getText().trim();
     }
 
+    //Method to get all the HBase clusters list
     public List<String> getAllHBaseClusters(){
         waitExecuter.waitUntilElementClickable(hBasePageObject.hBaseClusterDropDown);
         MouseActions.clickOnElement(driver, hBasePageObject.hBaseClusterDropDown);
@@ -49,6 +51,7 @@ public class HBasePage {
         return hBaseClusterList;
     }
 
+    //Method to select hbase cluster from drop down
     public void selectHBaseCluster(String hBaseClusterName){
         waitExecuter.waitUntilElementClickable(hBasePageObject.hBaseClusterDropDown);
         MouseActions.clickOnElement(driver, hBasePageObject.hBaseClusterDropDown);
@@ -62,8 +65,8 @@ public class HBasePage {
         }
     }
 
+    // Method to verify the HBase cluster Metrics
     public void verifyHBaseClustersMetrics(String hBaseClusterName){
-
         selectHBaseCluster(hBaseClusterName);
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(1000);

@@ -26,4 +26,11 @@ public class PageConstants {
     public static class MRHiveKPIs {
         public static String[] KPIS = {"duration", "data i/o", "start time", "end time"};
     }
+
+    public static class MigrationAndServices{
+        public static String[] Google_Dataproc = {"Dataproc 2.0.0-Preview", "Dataproc 1.5.13",
+                "Dataproc 1.5.12", "Dataproc 1.5.11"};
+        public static String[] Amazon_EMR = {"EMR 6.1.0", "EMR 6.0.0", "EMR 5.31.0", "EMR 5.30.1"};
+        public static String[] Azure_HDI = {"HDInsight 4.0", "HDInsight 3.6"};
+    }
 }

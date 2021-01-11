@@ -17,15 +17,16 @@ import java.util.logging.Logger;
 
 @Marker.All
 @Marker.MigrationServices
-public class TC_MP_SC_08  extends BaseClass {
+public class TC_MP_SC_13 extends BaseClass {
 
-    private static final Logger LOGGER = Logger.getLogger(TC_MP_SC_08.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TC_MP_SC_13.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateServicesAndVersionsAreCompatibleForAzureHDI(String clusterId) {
+    public void validateMSVAreAvailableInSrcButMissingInTargetForAmazonEMR(String clusterId) {
 
-        test = extent.startTest("TC_MP_SC_08.validateServicesAndVersionsAreCompatibleForAzureHDI: " + clusterId,
-                "Validate \"Services and Versions are Compatible\" legend for cloud provider - \"Azure HDI\"");
+        test = extent.startTest("TC_MP_SC_13.validateMSVAreAvailableInSrcButMissingInTargetForAmazonEMR: " + clusterId,
+                "Validate \"Service available in Source, but missing in Target\" legend for cloud provider -" +
+                        " \"Amazon EMR\" ");
         test.assignCategory(" Migration - Services And Versions Compatibility ");
 
         //Initialize object
@@ -42,24 +43,23 @@ public class TC_MP_SC_08  extends BaseClass {
         LOGGER.info("Clicked on close banner");
         servicesAndVersionsCompatibility.clickOnRunButton();
         LOGGER.info("Clicked on Run button");
-        String cloudProductName = "Azure HDI";
+        String cloudProductName = "Amazon EMR";
         servicesAndVersionsCompatibility.selectCloudProduct(cloudProductName);
         LOGGER.info("Selected platform : "+cloudProductName+" from the drop down.");
         servicesAndVersionsCompatibility.clickOnRunModalButton();
-        List<String> expectedPlatforms = Arrays.asList(PageConstants.MigrationAndServices.Azure_HDI);
+        List<String> expectedPlatforms = Arrays.asList(PageConstants.MigrationAndServices.Amazon_EMR);
 
         try {
             waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.confirmationMessageElement,
                     "Services and Versions Compatibility completed successfully.");
             servicesAndVersionsCompatibility.validateLatestReport();
             Assert.assertTrue(expectedPlatforms.equals(servicesAndVersionsCompatibility.getPlatforms()));
-            servicesAndVersionsCompatibility.verifyServicesAndVersionsAreCompatible();
-            test.log(LogStatus.PASS, "Verified Services and Versions are Compatible" +
-                    " for Azure HDI.");
-
+            servicesAndVersionsCompatibility.verifyServicesAndVersionsAreAvailableInSourceButMissingInTarget();
+            test.log(LogStatus.PASS, "Verified Services and Versions are available in Source, " +
+                    "but missing in Target legend for cloud provider Amazon EMR.");
         } catch (TimeoutException te) {
             throw new AssertionError("Services and Versions Compatibility Report not completed successfully" +
-                    " for Azure HDI.");
+                    " for Amazon EMR.");
         }
 
     }

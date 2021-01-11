@@ -21,6 +21,7 @@ public @interface Marker {
   @interface AppDetailsImpala {}
   @interface AppDetailsSpark {}
   @interface AppDetailsTez {}
+  @interface AppDetailsTezLlap {}
   @interface AppDetailsMr {}
   @interface ReportArchive {}
   @interface InefficientApps {}

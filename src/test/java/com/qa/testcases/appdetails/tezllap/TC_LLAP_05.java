@@ -47,7 +47,7 @@ public class TC_LLAP_05 extends BaseClass {
 
         int Appname=TezLlapApps.clickOnlyLink("Tez");
         applicationsPageObject.expandStatus.click();
-        int appCount = TezLlapApps.clickOnlyLink("Success");
+        int appCount = TezLlapApps.clickOnlyLink("Failed");
         test.log(LogStatus.PASS, "Selected "+ appCount + " as option in Group By filter, yarn chargeback page");
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());

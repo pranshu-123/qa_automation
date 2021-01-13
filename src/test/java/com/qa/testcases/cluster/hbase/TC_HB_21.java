@@ -7,6 +7,8 @@ import com.qa.scripts.clusters.HBasePage;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.relevantcodes.extentreports.LogStatus;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
@@ -39,6 +41,7 @@ public class TC_HB_21 extends BaseClass {
 
         String hBaseClusterName = "HDPab722";
         hbase.selectHBaseCluster(hBaseClusterName);
-
+        Assert.assertTrue(hbase.verifyMetricsToolTips(), "Tooltips on HBase cluster KPI's not found.");
+        test.log(LogStatus.PASS, "Verify tool tip presence for HBase cluster metrics tab.");
     }
 }

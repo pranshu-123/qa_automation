@@ -23,6 +23,9 @@ public class HBasePageObject {
     @FindBy(xpath = "//*[@class='select2-results__options']//li")
     public List<WebElement> hBaseClusters;
 
+    @FindBy(xpath="//div[contains(@class, 'bg-success')]")
+    public List<WebElement> hBaseKPIs;
+
     @FindBy(xpath = "//*[@class='row no-gutters']//div[@class='col']/span")
     public List<WebElement> hBaseClusterKPIs;
 

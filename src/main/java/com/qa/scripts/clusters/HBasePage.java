@@ -7,6 +7,7 @@ import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 
 import java.util.ArrayList;
@@ -65,14 +66,49 @@ public class HBasePage {
         }
     }
 
-    // Method to verify the HBase cluster Metrics
-    public void verifyHBaseClustersMetrics(String hBaseClusterName){
-        selectHBaseCluster(hBaseClusterName);
+    public void selectDateAsLast30Days(){
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(1000);
         datePicker.selectLast30Days();
         waitExecuter.sleep(3000);
         waitExecuter.waitUntilPageFullyLoaded();
+    }
+
+    //Method is to verify the presence of tool tip for HBase cluster KPI's
+    public boolean verifyMetricsToolTips(){
+        List<WebElement> hBaseKPIList = hBasePageObject.hBaseKPIs;
+        Assert.assertFalse(hBaseKPIList.isEmpty(),"HBase cluster KPIs not found.");
+        List<String> toolTipList = new ArrayList<>();
+
+        Actions builder = new Actions(driver);
+        for(int i=0; i< hBaseKPIList.size(); i++){
+            builder.moveToElement(hBaseKPIList.get(i)).build().perform();
+            try{
+                String toolTip = hBaseKPIList.get(i).getAttribute("aria-describedby");
+                logger.info("ToolTips: "+ toolTip);
+                waitExecuter.sleep(1000);
+                if(toolTip.length() > 0){
+                    logger.info("ToolTips: "+ toolTip);
+                    toolTipList.add(toolTip);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+                return false;
+            }
+
+        }
+        //Check for tooltips and total 7 KPI's in HBase
+        if(toolTipList.size() == 7){
+            return true;
+        }
+        return false;
+    }
+
+    // Method to verify the HBase cluster Metrics
+    public void verifyHBaseClustersMetrics(String hBaseClusterName){
+        selectHBaseCluster(hBaseClusterName);
+        selectDateAsLast30Days();
+
         List<WebElement> hBaseKPIList = hBasePageObject.hBaseClusterKPIs;
         List<WebElement> hBaseKPIValueList = hBasePageObject.hBaseClusterKPIValues;
 

@@ -95,6 +95,7 @@ public class Login {
     }
 
     public Boolean doLogout() {
+        LOGGER.info("Logout from application", null);
         userActions.performActionWithPolling(loginObj.logoutButton, UserAction.CLICK);
         return true;
     }

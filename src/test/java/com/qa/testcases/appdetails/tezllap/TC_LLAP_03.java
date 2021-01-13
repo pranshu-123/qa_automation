@@ -34,18 +34,18 @@ public class TC_LLAP_03 extends BaseClass {
         logger.info("Initialize all class objects");
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
-        TezLlapAppsDetailsPageObject TezLlapPage = new TezLlapAppsDetailsPageObject(driver);
-        TezLlapAppsDetailsPage TezLlapApps = new TezLlapAppsDetailsPage(driver);
+        TezLlapAppsDetailsPageObject tezLlapPage = new TezLlapAppsDetailsPageObject(driver);
+        TezLlapAppsDetailsPage tezLlapApps = new TezLlapAppsDetailsPage(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         DatePicker datePicker = new DatePicker(driver);
         AllApps allApps = new AllApps(driver);
 
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-        TezLlapApps.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
+        tezLlapApps.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
         test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
 
-        int Appname=TezLlapApps.clickOnlyLink("Tez");
+        int Appname=tezLlapApps.clickOnlyLink("Tez");
         waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Selected "+ Appname + " as option in Group By filter, yarn chargeback page");
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().

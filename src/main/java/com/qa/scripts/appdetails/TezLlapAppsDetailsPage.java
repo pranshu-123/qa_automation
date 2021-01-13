@@ -16,9 +16,11 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.testng.Assert;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class TezLlapAppsDetailsPage {
     private WaitExecuter waitExecuter;
     private WebDriver driver;
     private UserActions actions;
-    private TezLlapAppsDetailsPageObject TezLlapApps;
+    private TezLlapAppsDetailsPageObject tezLlapPage;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -47,15 +49,15 @@ public class TezLlapAppsDetailsPage {
      *
      * @return
      */
-    public void validateHeaderTab(TezLlapAppsDetailsPageObject TezLlapApps, ExtentTest test) {
-        String startTime = TezLlapApps.startTime.getText();
-        waitExecuter.sleep(2000);
+    public void validateHeaderTab(TezLlapAppsDetailsPageObject tezLlapPage, ExtentTest test) {
+        String startTime = tezLlapPage.startTime.getText();
+        waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Startime is displayed in the Header: " + startTime);
-        String endTime = TezLlapApps.EndTime.getText();
-        waitExecuter.sleep(2000);
+        String endTime = tezLlapPage.EndTime.getText();
+        waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Endtime is displayed in the Header: " + endTime);
-        String duration = TezLlapApps.Duration.getText();
-        waitExecuter.sleep(2000);
+        String duration = tezLlapPage.Duration.getText();
+        waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Duration is displayed in the Header: " + duration);
         LOGGER.info("Duration = " + duration + " JobId = " + " starttime = " + startTime + " EndTime = " + endTime + " DataIO = ");
         Assert.assertNotSame("", startTime, "Value for startTime missing");
@@ -65,14 +67,14 @@ public class TezLlapAppsDetailsPage {
     }
 
     public void clickOnGroupBySearchBox() {
-        JavaScriptExecuter.clickOnElement(driver, TezLlapApps.queueBySearchBox);
+        JavaScriptExecuter.clickOnElement(driver, tezLlapPage.queueBySearchBox);
     }
 
 
 
     public void selectOptionsInGroupBy(String optionName) {
         // Get the list of webelements of queue options
-        List<WebElement> listOfWebElemnts = TezLlapApps.listOfGroupByOptions;
+        List<WebElement> listOfWebElemnts = tezLlapPage.listOfGroupByOptions;
         // Iterate Webelement list to get the value of each element
         for (int i = 0; i < listOfWebElemnts.size(); i++) {
             System.out.println(listOfWebElemnts.get(i).getText());
@@ -88,12 +90,12 @@ public class TezLlapAppsDetailsPage {
      *
      * @return
      */
-    public void validateTopRightTab(TezLlapAppsDetailsPageObject TezLlapApps, ExtentTest test) {
-        String Owner = TezLlapApps.Owner.getText();
+    public void validateTopRightTab(TezLlapAppsDetailsPageObject tezLlapPage, ExtentTest test) {
+        String Owner = tezLlapPage.Owner.getText();
         test.log(LogStatus.PASS, "Owner  is displayed in the Header: " + Owner);
-        String Cluster = TezLlapApps.Cluster.getText();
+        String Cluster = tezLlapPage.Cluster.getText();
         test.log(LogStatus.PASS, "Cluster  is displayed in the Header: " + Cluster);
-        String Queue = TezLlapApps.Queue.getText();
+        String Queue = tezLlapPage.Queue.getText();
         test.log(LogStatus.PASS, "Queue  is displayed in the Header: " + Queue);
         LOGGER.info("Owner = " + Owner + " Cluster = " + Cluster + " starttime = " + Queue + " Queue");
         Assert.assertNotSame("", Owner, "Value for Owner missing");
@@ -111,7 +113,6 @@ public class TezLlapAppsDetailsPage {
         String appId = TezLlapApps.getAppId.getText().trim();
         LOGGER.info("Tez application Id is " + appId);
         appPageObj.getTypeFromTable.click();
-        waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();
         String headerAppId = TezLlapApps.getHeaderAppId.getText().trim();
         Assert.assertNotSame("", headerAppId, "Tez Application Id is not displayed in the Header");
@@ -123,9 +124,9 @@ public class TezLlapAppsDetailsPage {
      * Method to click the first app in jobs table , navigate to the details page.
      * and verify app Id .
      */
-    public String verifyAppStatus(TezAppsDetailsPageObject tezApps) {
-        String Status = tezApps.Status.getText();
-        waitExecuter.sleep(3000);
+    public String verifyAppStatus(TezLlapAppsDetailsPageObject tezLlapPage) {
+        String Status = tezLlapPage.status.getText();
+        waitExecuter.waitUntilPageFullyLoaded();
         LOGGER.info("Tez application Id is " + Status);
         Assert.assertNotSame("", Status, "Tez Application Id is not displayed in the Header");
         return Status;
@@ -136,137 +137,40 @@ public class TezLlapAppsDetailsPage {
      * Method to click the first app in jobs table , navigate to the details page.
      * and verify app Id .
      */
-    public String verifyStatus(TezLlapAppsDetailsPageObject TezLlapApps, ApplicationsPageObject appPageObj) {
-        String statusTable = TezLlapApps.Status.getText();
+    public String verifyStatus(TezLlapAppsDetailsPageObject tezLlapPage, ApplicationsPageObject appPageObj) {
+        String statusTable = tezLlapPage.status.getText();
         LOGGER.info("Tez application Id is " + statusTable);
         appPageObj.getTypeFromTable.click();
-        waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();
-        String status = TezLlapApps.appStatus.getText();
+        String status = tezLlapPage.appStatus.getText();
         Assert.assertNotSame("", status, "Tez Status is not displayed in the Header");
         return status;
     }
 
     /**
      * Method to click the first app in jobs table , navigate to the details page.
-     * and verify  Status .
+     * and verify  start time .
      */
-    public String verifyusername(TezLlapAppsDetailsPageObject TezLlapApps) {
-        String typeValue = TezLlapApps.getUsername.getText();
-        LOGGER.info("Tez Status is " + typeValue);
-        waitExecuter.sleep(5000);
+    public String verifyStartTime(TezLlapAppsDetailsPageObject tezLlapPage) {
+        String typeStartTime = tezLlapPage.getstartTime.getText();
+        LOGGER.info("Tez Status is " + typeStartTime);
         waitExecuter.waitUntilPageFullyLoaded();
-        Assert.assertNotSame("", typeValue, "Tez User name is not displayed in the Table");
-        return typeValue;
-    }
-
-
-    /**
-     * Method to click the first app in jobs table , navigate to the details page.
-     * and verify  Appname .
-     */
-    public String verifyAppname(TezLlapAppsDetailsPageObject TezLlapApps) {
-        WebElement Appname = TezLlapApps.getAppname;
-        Actions toolAct = new Actions(driver);
-        toolAct.moveToElement(Appname).build().perform();
-        WebElement AppnametoolTip = driver.findElement(By.xpath("//*[@id=\"allApps-body\"]/tr[1]/td[4]"));
-        waitExecuter.sleep(3000);
-        String AppnameText = AppnametoolTip.getText().trim();
-        System.out.println(AppnameText);
-        waitExecuter.sleep(5000);
-        waitExecuter.waitUntilPageFullyLoaded();
-        Assert.assertNotSame("", Appname, "Tez App name is not displayed in the Table");
-        return AppnameText;
-    }
-
-    /**
-     * Method to click the first app in jobs table , navigate to the details page.
-     * and verify  Appid .
-     */
-    public String verifyappId(TezLlapAppsDetailsPageObject TezLlapApps) {
-        WebElement Appid = TezLlapApps.getAppid;
-        Actions toolAct = new Actions(driver);
-        toolAct.moveToElement(Appid).build().perform();
-        WebElement AppnametoolTip = driver.findElement(By.xpath("//*[@id=\"allApps-body\"]/tr[1]/td[4]/div"));
-        waitExecuter.sleep(3000);
-        String AppIdText = AppnametoolTip.getText().trim();
-        LOGGER.info("Tez Status is " + Appid);
-        waitExecuter.sleep(5000);
-        waitExecuter.waitUntilPageFullyLoaded();
-        Assert.assertNotSame("", Appid, "Tez App id name is not displayed in the Table");
-        return AppIdText;
-    }
-
-    /**
-     * Method to click the first app in jobs table , navigate to the details page.
-     * and verify  clusterId .
-     */
-    public String verifyclusterId(TezLlapAppsDetailsPageObject TezLlapApps) {
-        WebElement Appid = TezLlapApps.getClusterId;
-        Actions toolAct = new Actions(driver);
-        toolAct.moveToElement(Appid).build().perform();
-        WebElement AppnametoolTip = TezLlapApps.getClusterId;
-        waitExecuter.sleep(3000);
-        String AppIdText = AppnametoolTip.getText().trim();
-        LOGGER.info("Tez Status is " + Appid);
-        waitExecuter.sleep(5000);
-        waitExecuter.waitUntilPageFullyLoaded();
-        Assert.assertNotSame("", Appid, "Tez App id name is not displayed in the Table");
-        return AppIdText;
-    }
-
-    /**
-     * Method to click the first app in jobs table , navigate to the details page.
-     * and verify  starttime .
-     */
-    public String verifystarttime(TezLlapAppsDetailsPageObject TezLlapApps) {
-        String typetarttime = TezLlapApps.getstartTime.getText();
-        LOGGER.info("Tez Status is " + typetarttime);
-        waitExecuter.sleep(5000);
-        waitExecuter.waitUntilPageFullyLoaded();
-        Assert.assertNotSame("", typetarttime, "Tez User name is not displayed in the Table");
-        return typetarttime;
+        Assert.assertNotSame("", typeStartTime, "Tez Start Time is not displayed in the Table");
+        return typeStartTime;
     }
 
     /**
      * Method to click the first app in jobs table , navigate to the details page.
      * and verify  duration .
      */
-    public String verifyduration(TezLlapAppsDetailsPageObject TezLlapApps) {
-        String typetarttime = TezLlapApps.getduration.getText();
-        LOGGER.info("Tez Status is " + typetarttime);
-        waitExecuter.sleep(5000);
+    public String verifyDuration(TezLlapAppsDetailsPageObject tezLlapPage) {
+        String typeDuration = tezLlapPage.getduration.getText();
+        LOGGER.info("Tez Status is " + typeDuration);
         waitExecuter.waitUntilPageFullyLoaded();
-        Assert.assertNotSame("", typetarttime, "Tez User name is not displayed in the Table");
-        return typetarttime;
+        Assert.assertNotSame("", typeDuration, "TezLlap duration is not displayed in the Table");
+        return typeDuration;
     }
 
-
-    /**
-     * Method to click the first app in jobs table , navigate to the details page.
-     * and verify  Read IO .
-     */
-    public String verifyRead(TezLlapAppsDetailsPageObject TezLlapApps) {
-        String ReadIO = TezLlapApps.getRead.getText();
-        LOGGER.info("Tez Status is " + ReadIO);
-        waitExecuter.sleep(5000);
-        waitExecuter.waitUntilPageFullyLoaded();
-        Assert.assertNotSame("", ReadIO, "Tez User name is not displayed in the Table");
-        return ReadIO;
-    }
-
-    /**
-     * Method to click the first app in jobs table , navigate to the details page.
-     * and verify  Write .
-     */
-    public String verifyWrite(TezLlapAppsDetailsPageObject TezLlapApps) {
-        String WriteIO = TezLlapApps.getWrite.getText();
-        LOGGER.info("Tez Status is " + WriteIO);
-        waitExecuter.sleep(5000);
-        waitExecuter.waitUntilPageFullyLoaded();
-        Assert.assertNotSame("", WriteIO, "Tez User name is not displayed in the Table");
-        return WriteIO;
-    }
 
     /**
      * Common steps to navigate to the Jobs page from header.
@@ -291,7 +195,6 @@ public class TezLlapAppsDetailsPage {
         LOGGER.info("Select Cluster: " + clusterId);
         allApps.selectCluster(clusterId);
         waitExecuter.sleep(3000);
-
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(1000);
         datePicker.selectLast90Days();
@@ -306,6 +209,7 @@ public class TezLlapAppsDetailsPage {
      * @param types Types can be appType | status Type
      */
     public int clickOnlyLink(String types) {
+        WebDriverWait wait = new WebDriverWait(driver, 60);
         Actions action = new Actions(driver);
         WebElement we = driver.findElement(By.xpath("(//label[contains(@class,'checkbox')])/span[contains(text(),'" + types + "')]"));
         action.moveToElement(we).moveToElement(driver.findElement(By.xpath("(//label[contains(@class,'checkbox')])" +
@@ -314,25 +218,26 @@ public class TezLlapAppsDetailsPage {
                 "/span[contains(text(),'" + types + "')]/following-sibling::span[1]"));
         int appCount = Integer.parseInt(ele.getText().replaceAll("[^\\dA-Za-z ]",
                 "").trim());
-        waitExecuter.sleep(3000);
+        wait.pollingEvery(Duration.ofMillis(20));
+        waitExecuter.waitUntilPageFullyLoaded();
         return appCount;
     }
 
     /* Select cluster from list */
     public void selectQueue(String queueName) {
-        TezLlapApps.queueSearchBox.click();
-        waitExecuter.sleep(5000);
+        tezLlapPage.queueSearchBox.click();
+        waitExecuter.waitUntilPageFullyLoaded();
         LOGGER.info("Search for Queue: " + queueName);
-        TezLlapApps.queueSearchBox.sendKeys(queueName);
-        waitExecuter.sleep(5000);
-        TezLlapApps.select1stQueue.click();
-        waitExecuter.sleep(4000);
+        tezLlapPage.queueSearchBox.sendKeys(queueName);
+        waitExecuter.waitUntilPageFullyLoaded();
+        tezLlapPage.select1stQueue.click();
+        waitExecuter.waitUntilPageFullyLoaded();
     }
 
 
     /* Get all app types that have run in unravel UI */
     public List<String> getAllApplicationQueue() {
-        List<WebElement> appTypes = TezLlapApps.getApplicationQueue;
+        List<WebElement> appTypes = tezLlapPage.getApplicationQueue;
         List<String> nameOfAppTypes = new ArrayList<>();
         for (WebElement appType : appTypes) {
             nameOfAppTypes.add(appType.getText().trim());
@@ -421,11 +326,11 @@ public class TezLlapAppsDetailsPage {
      * (Duration, Start time, end time, job count, stages count)
      * 2. Owner, cluster, queue must be populated on the top right
      */
-    public String verifyRightPaneKpis(TezLlapAppsDetailsPageObject TezLlapApps) {
-        List<WebElement> kpiList = TezLlapApps.rightPaneKpis;
+    public String verifyRightPaneKpis(TezLlapAppsDetailsPageObject tezLlapPage) {
+        List<WebElement> kpiList = tezLlapPage.rightPaneKpis;
         validateLeftPaneKpis(kpiList);
-        List<WebElement> appKpis = TezLlapApps.rightPaneAppKpis;
-        List<WebElement> appKpiVal = TezLlapApps.rightPaneAppKpiVal;
+        List<WebElement> appKpis = tezLlapPage.rightPaneAppKpis;
+        List<WebElement> appKpiVal = tezLlapPage.rightPaneAppKpiVal;
         Assert.assertFalse(appKpis.isEmpty(), "No application kpis are listed in the right pane");
         Assert.assertFalse(appKpiVal.isEmpty(), "Application kpi values are empty");
         String appDuration = "0";
@@ -438,37 +343,4 @@ public class TezLlapAppsDetailsPage {
         LOGGER.info("The application duration is " + appDuration);
         return appDuration;
     }
-
-
-    public void verifyAssertFalse(Boolean condition, TezLlapAppsDetailsPageObject TezLlapApps, String msg) {
-        String appDuration = "0";
-        try {
-            appDuration = verifyRightPaneKpis(TezLlapApps);
-            Assert.assertFalse(condition, msg);
-        } catch (Throwable e) {
-            //Close apps details page
-            if (isDignosticWin)
-                MouseActions.clickOnElement(driver, TezLlapApps.loadDiagnosticWinClose);
-            else
-                MouseActions.clickOnElement(driver, TezLlapApps.closeAppsPageTab);
-            throw new AssertionError(msg + e.getMessage());
-        }
-    }
-
-    public void verifyAssertTrue(Boolean condition, TezLlapAppsDetailsPageObject TezLlapApps, String msg) {
-        try {
-            Assert.assertTrue(condition, msg);
-        } catch (Throwable e) {
-            //Close apps details page
-            if (isDignosticWin) {
-                MouseActions.clickOnElement(driver, TezLlapApps.loadDiagnosticWinClose);
-                waitExecuter.sleep(1000);
-                MouseActions.clickOnElement(driver, TezLlapApps.closeAppsPageTab);
-            } else
-                MouseActions.clickOnElement(driver, TezLlapApps.closeAppsPageTab);
-            throw new AssertionError(msg + e.getMessage());
-        }
-    }
-
-
 }

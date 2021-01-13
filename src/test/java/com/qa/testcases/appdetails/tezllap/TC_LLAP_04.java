@@ -42,33 +42,33 @@ public class TC_LLAP_04 extends BaseClass {
         logger.info("Initialize all class objects");
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
-        TezLlapAppsDetailsPageObject TezLlapPage = new TezLlapAppsDetailsPageObject(driver);
-        TezLlapAppsDetailsPage TezLlapApps = new TezLlapAppsDetailsPage(driver);
+        TezLlapAppsDetailsPageObject tezLlapPage = new TezLlapAppsDetailsPageObject(driver);
+        TezLlapAppsDetailsPage tezLlapApps = new TezLlapAppsDetailsPage(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         DatePicker datePicker = new DatePicker(driver);
         AllApps allApps = new AllApps(driver);
 
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-        TezLlapApps.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
+        tezLlapApps.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
         test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
-        int Appname = TezLlapApps.clickOnlyLink("Tez");
+        int appCount = tezLlapApps.clickOnlyLink("Tez");
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
-        logger.info("AppCount is " + Appname + " total count is " + totalCount);
+        logger.info("AppCount is " + appCount + " total count is " + totalCount);
 
-        Assert.assertEquals(Appname, totalCount, "The tez app count of tezApp is not equal to " +
+        Assert.assertEquals(appCount, totalCount, "The tez app count of tezApp is not equal to " +
                 "the total count of heading.");
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 
         applicationsPageObject.expandStatus.click();
-        int successCount = TezLlapApps.clickOnlyLink("Success");
+        int successCount = tezLlapApps.clickOnlyLink("Success");
         test.log(LogStatus.PASS, "Selected " + successCount + " as Status, In Applications page");
 
-        List<WebElement> typesInPage = TezLlapPage.getTypesColumnFromTable;
+        List<WebElement> typesInPage = tezLlapPage.getTypesColumnFromTable;
         List<String> nameOfTypesInPage = new ArrayList<>();
-        int tableData = TezLlapPage.getTableData.size();
+        int tableData = tezLlapPage.getTableData.size();
         if (tableData > 0) {
             for (int i = 0; i < typesInPage.size(); i++) {
                 nameOfTypesInPage.add(typesInPage.get(i).getText().trim().toLowerCase());
@@ -83,13 +83,13 @@ public class TC_LLAP_04 extends BaseClass {
         /*
          * Validate that status types  success are --
          */
-        if (successCount > 0) {
-            String getStatusTypeFromTable = TezLlapPage.getStatusFromTable.getText();
+        if (appCount > 0) {
+            String getStatusTypeFromTable = tezLlapPage.getStatusFromTable.getText();
             Assert.assertEquals(getStatusTypeFromTable.toLowerCase(),
                     "The Jobs displayed in tables contains application other than that of selected App Type");
             test.log(LogStatus.PASS, "The Jobs displayed in tables contains application of selected App Type");
         } else {
-            Assert.assertTrue(TezLlapPage.whenNoApplicationPresent.isDisplayed(),
+            Assert.assertTrue(tezLlapPage.whenNoApplicationPresent.isDisplayed(),
                     "The cluster does not have any application under it and also does not display 'No Data Available' for it");
         }
 

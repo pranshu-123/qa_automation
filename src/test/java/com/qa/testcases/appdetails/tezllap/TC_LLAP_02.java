@@ -4,13 +4,11 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.constants.PageConstants;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
-import com.qa.pagefactory.appsDetailsPage.TezAppsDetailsPageObject;
 import com.qa.pagefactory.appsDetailsPage.TezLlapAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.TezLlapAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
-import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
@@ -42,18 +40,18 @@ public class TC_LLAP_02 extends BaseClass {
         logger.info("Initialize all class objects");
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
-        TezLlapAppsDetailsPageObject TezLlapPage = new TezLlapAppsDetailsPageObject(driver);
-        TezLlapAppsDetailsPage TezLlapApps = new TezLlapAppsDetailsPage(driver);
+        TezLlapAppsDetailsPageObject tezLlapPage = new TezLlapAppsDetailsPageObject(driver);
+        TezLlapAppsDetailsPage tezLlapApps = new TezLlapAppsDetailsPage(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         DatePicker datePicker = new DatePicker(driver);
         AllApps allApps = new AllApps(driver);
 
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-        TezLlapApps.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
+        tezLlapApps.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
         test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
 
-        int appCount = TezLlapApps.clickOnlyLink("Tez");
+        int appCount = tezLlapApps.clickOnlyLink("Tez");
 
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
@@ -63,9 +61,9 @@ public class TC_LLAP_02 extends BaseClass {
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 
-        List<WebElement> typesInPage = TezLlapPage.getTypesColumnFromTable;
+        List<WebElement> typesInPage = tezLlapPage.getTypesColumnFromTable;
         List<String> nameOfTypesInPage = new ArrayList<>();
-        int tableData = TezLlapPage.getTableData.size();
+        int tableData = tezLlapPage.getTableData.size();
         if (tableData > 0) {
             for (int i = 0; i < typesInPage.size(); i++) {
                 nameOfTypesInPage.add(typesInPage.get(i).getText().trim().toLowerCase());
@@ -80,10 +78,10 @@ public class TC_LLAP_02 extends BaseClass {
          * Validate the start time types are --
          */
         if (appCount > 0) {
-            String starttime = TezLlapApps.verifystarttime(TezLlapPage);
+            String starttime = tezLlapApps.verifyStartTime(tezLlapPage);
             test.log(LogStatus.PASS, "Start time is displayed in the Tez Table: " + starttime);
 
-            String duration = TezLlapApps.verifyduration(TezLlapPage);
+            String duration = tezLlapApps.verifyDuration(tezLlapPage);
             test.log(LogStatus.PASS, "Duration is displayed in the Tez Table: " + duration);
 
         } else {
@@ -91,7 +89,7 @@ public class TC_LLAP_02 extends BaseClass {
             logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +
                     "of 90 days");
             //Close apps details page
-            MouseActions.clickOnElement(driver, TezLlapPage.homeTab);
+            MouseActions.clickOnElement(driver, tezLlapPage.homeTab);
 
         }
 

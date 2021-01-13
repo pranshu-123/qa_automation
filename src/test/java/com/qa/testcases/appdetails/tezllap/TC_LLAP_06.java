@@ -23,16 +23,16 @@ import java.util.List;
 
 @Marker.AppDetailsTezLlap
 @Marker.All
-public class TC_LLAP_05 extends BaseClass {
+public class TC_LLAP_06 extends BaseClass {
 
-    Logger logger = LoggerFactory.getLogger(TC_LLAP_05.class);
+    Logger logger = LoggerFactory.getLogger(TC_LLAP_06.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TC_LLAP_05_verifyStatusFailed(String clusterId) {
-        test = extent.startTest("TC_LLAP_05_verifyStatusSuccess: " + clusterId,
-                "Verify the application \"Status\" displayed in the Application Tab should be - \"Failed\"");
+    public void TC_LLAP_06_verifyStatusKilled(String clusterId) {
+        test = extent.startTest("TC_LLAP_06_verifyStatusKilled: " + clusterId,
+                "Verify the application \"Status\" displayed in the Application Tab should be - \"Killed\"");
         test.assignCategory(" Apps Details-TezLlap");
-        Log.startTestCase("TC_LLAP_05_verifyStatusSuccess");
+        Log.startTestCase("TC_LLAP_06_verifyStatusKilled");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -50,10 +50,10 @@ public class TC_LLAP_05 extends BaseClass {
                 applicationsPageObject, clusterId);
         test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
 
-        int appCount = tezLlapApps.clickOnlyLink("Tez");
+        int appCount=tezLlapApps.clickOnlyLink("Tez");
         applicationsPageObject.expandStatus.click();
-        int failedCount = tezLlapApps.clickOnlyLink("Failed");
-        test.log(LogStatus.PASS, "Selected " + appCount + " as option in Group By filter, yarn chargeback page");
+        int failedCount = tezLlapApps.clickOnlyLink("Killed");
+        test.log(LogStatus.PASS, "Selected "+ appCount + " as option in Group By filter, yarn chargeback page");
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
@@ -91,3 +91,4 @@ public class TC_LLAP_05 extends BaseClass {
         }
     }
 }
+

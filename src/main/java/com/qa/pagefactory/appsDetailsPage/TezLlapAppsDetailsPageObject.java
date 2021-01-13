@@ -83,10 +83,10 @@ public class TezLlapAppsDetailsPageObject {
     public WebElement NoConfigruationDataAvailable;
 
     @FindBy(xpath = "//a[normalize-space()='Configuration']")
-    public WebElement Configtab;
+    public WebElement configtab;
 
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[2]")
-    public WebElement Status;
+    public WebElement status;
 
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[3]")
     public WebElement getUsername;

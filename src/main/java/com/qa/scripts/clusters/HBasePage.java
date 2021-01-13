@@ -83,6 +83,7 @@ public class HBasePage {
         Actions builder = new Actions(driver);
         for(int i=0; i< hBaseKPIList.size(); i++){
             builder.moveToElement(hBaseKPIList.get(i)).build().perform();
+            waitExecuter.sleep(1000);
             try{
                 String toolTip = hBaseKPIList.get(i).getAttribute("aria-describedby");
                 logger.info("ToolTips: "+ toolTip);

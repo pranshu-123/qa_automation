@@ -2,6 +2,7 @@ package com.qa.testcases.migration.servicesversionscompatibility;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.constants.PageConstants;
 import com.qa.pagefactory.migration.ServicesAndVersionsCompatibilityPageObject;
 import com.qa.scripts.migration.ServicesAndVersionsCompatibility;
 import com.qa.utils.WaitExecuter;
@@ -45,8 +46,7 @@ public class TC_MP_SC_10 extends BaseClass {
         servicesAndVersionsCompatibility.selectCloudProduct(cloudProductName);
         LOGGER.info("Selected platform : "+cloudProductName+" from the drop down.");
         servicesAndVersionsCompatibility.clickOnRunModalButton();
-        List<String> expectedPlatforms = Arrays.asList("EMR 6.1.0", "EMR 6.0.0",
-                "EMR 5.31.0", "EMR 5.30.1");
+        List<String> expectedPlatforms = Arrays.asList(PageConstants.MigrationAndServices.Amazon_EMR);
 
         try {
             waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.confirmationMessageElement,

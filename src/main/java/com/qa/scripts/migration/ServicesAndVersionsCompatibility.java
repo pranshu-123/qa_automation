@@ -185,6 +185,22 @@ public class ServicesAndVersionsCompatibility {
         return hdpServicesList;
     }
 
+    //Get Empty HDP source service list
+    public List<String> getEmptyHDPServicesList() {
+        List<WebElement> hdpHeaderList = servicesAndVersionsCompatibilityPageObject.hdpHeaderList;
+        Assert.assertFalse(hdpHeaderList.isEmpty(), "No table generated");
+        List<String> hdpEmptyServicesList = new ArrayList<>();
+        String onPremInfra = hdpHeaderList.get(0).getText();
+        logger.info("Local Infra: " + onPremInfra);
+        for (int i = 1; i < hdpHeaderList.size(); i++) {
+            if (hdpHeaderList.get(i).getText().isEmpty()) {
+                hdpEmptyServicesList.add("");
+            }
+        }
+        logger.info("Total count of source services list which are empty are: " + hdpEmptyServicesList.size());
+        return hdpEmptyServicesList;
+    }
+
     public String getMajorVersion(String name) {
         String[] arr = name.split(" ");
         String[] arrVersion = arr[1].split("\\.");
@@ -261,6 +277,56 @@ public class ServicesAndVersionsCompatibility {
                 }
             }
         }
+    }
+
+
+    //Check for Services and Versions are available in source but missing in target
+    public void verifyServicesAndVersionsAreAvailableInSourceButMissingInTarget() {
+        List<String> hdpServicesList = getHDPServicesList();
+        int totalHDPServicesCount = hdpServicesList.size();
+        List<WebElement> rowsList = servicesAndVersionsCompatibilityPageObject.rowsList;
+        Assert.assertFalse(rowsList.isEmpty(), "No Platform services data available");
+        List<WebElement> colsList = servicesAndVersionsCompatibilityPageObject.colList;
+        logger.info("Size of columnlist: " + colsList.size());
+        Assert.assertFalse(colsList.isEmpty(), "No Platform services data available");
+
+        for (int col = 0; col < totalHDPServicesCount - 1; col++) {
+            for (int row = 0; row < rowsList.size(); row++) {
+                String path = "//tbody/tr[" + (row + 1) + "]/td[" + (col + 2) + "]";
+                WebElement e = driver.findElement(By.xpath(path));
+                if (e.getText().isEmpty()) {
+                        //Now check for brown //risk-3
+                        String classAttributeName = e.getAttribute("class");
+                        logger.info("Element class attribute name: " + classAttributeName);
+                        //check for class attribute name as 'risk-3' which is for Orange color.
+                        Assert.assertTrue(classAttributeName.equals("risk-3"), "Platforms service in the box is not" +
+                                " marked in Brown for element: "+e.getText());
+                }
+            }
+        }
+    }
+
+    //scroll window horizontally to the right
+    public void scrollToRight(WebDriver driver, WebElement element){
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].scrollLeft = arguments[0].offsetWidth + 500", element);
+
+    }
+
+    //Check for Services and Versions are missing in source but available in target
+    public void verifyServicesAndVersionsAreMissingInSourceButAvailableInTarget() {
+        scrollToRight(driver, servicesAndVersionsCompatibilityPageObject.tableBodyElement);
+        waitExecuter.sleep(3000);
+        List<WebElement> missingSrcHeaderlist = servicesAndVersionsCompatibilityPageObject.missingSrcHeaderElement;
+        Assert.assertFalse(missingSrcHeaderlist.isEmpty(), "No missing source headers generated");
+        logger.info("Total missing src header elements found: "+ missingSrcHeaderlist.size());
+        List<String> missingSrcHeaderElementsList = new ArrayList<>();
+        for(int i=0; i< missingSrcHeaderlist.size(); i++){
+            if(!missingSrcHeaderlist.get(i).getText().isEmpty()){
+                missingSrcHeaderElementsList.add(missingSrcHeaderlist.get(i).getText());
+            }
+        }
+        logger.info("All missing source header elements: "+missingSrcHeaderElementsList);
     }
 
     /**

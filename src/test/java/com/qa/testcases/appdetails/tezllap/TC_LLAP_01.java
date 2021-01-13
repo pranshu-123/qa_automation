@@ -2,6 +2,7 @@ package com.qa.testcases.appdetails.tezllap;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.constants.PageConstants;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.TezAppsDetailsPageObject;
 import com.qa.pagefactory.appsDetailsPage.TezLlapAppsDetailsPageObject;
@@ -15,10 +16,16 @@ import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Marker.AppDetailsTezLlap
@@ -50,9 +57,7 @@ public class TC_LLAP_01 extends BaseClass {
                 applicationsPageObject, clusterId);
         test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
 
-        int Appname=TezLlapApps.clickOnlyLink("Tez");
-        waitExecuter.waitUntilPageFullyLoaded();
-        test.log(LogStatus.PASS, "Selected "+ Appname + " as option in Group By filter, yarn chargeback page");
+        int Appname = TezLlapApps.clickOnlyLink("Tez");
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + Appname + " total count is " + totalCount);
@@ -62,22 +67,7 @@ public class TC_LLAP_01 extends BaseClass {
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 
-        waitExecuter.waitUntilPageFullyLoaded();
-        int scrollY = 370;
-        JavaScriptExecuter.scrollViewWithYAxis(driver,scrollY);
-        scrollY = scrollY + datePicker.getDatePickerYPosition();
-        TezLlapApps.queueName();
-        String optionName = "llap";
-        TezLlapApps.selectOptionsInGroupBy(optionName);
-
-        test.log(LogStatus.INFO, "Assert if in all application Tez LLAP application are present");
-        logger.info("Assert if in all application TEZ application are present");
-        Assert.assertTrue(TezLlapApps.getAllApplicationQueue().contains("llap"),
-                "The list of applications does not contains 'llap' apps");
-        test.log(LogStatus.PASS, "Verified that in all application Tez LLAP application are present.");
-
 
     }
-
 
 }

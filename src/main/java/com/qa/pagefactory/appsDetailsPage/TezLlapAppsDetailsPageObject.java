@@ -9,14 +9,60 @@ import java.util.List;
 
 public class TezLlapAppsDetailsPageObject {
 
-    @FindBy(xpath = "//span[@class='select2-dropdown select2-dropdown--below']/ul/li")
+    @FindBy(xpath = "//span[@class='select2-results']/ul/li")
+    public List<WebElement> clickQueueBox;
+
+    @FindBy(xpath = "//*[@id=\"app-filter-panel\"]/div[2]/div/span/span[1]/span/ul")
+    public WebElement filterInput;
+
+    @FindBy(xpath = "(//*[@class=\"select2-selection__rendered\"])[4]")
+    public WebElement queuesDropdown;
+
+    @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')]//input)[3]")
+    public WebElement queueSearchBox;
+
+    @FindBy(xpath = "//ul[contains(@class,'select2-results__options')]/li[5]")
+    public WebElement select1stQueue;
+
+    @FindBy(xpath = "//span[contains(@class,'select2-selection__choice__remove')]")
+    public WebElement removeCluster;
+
+    @FindBy(xpath = "//span[contains(@class, 'select2-results')]/ul/li")
     public List<WebElement> listOfGroupByOptions;
 
-    @FindBy(xpath = "//a[normalize-space()='Queue']")
-    public WebElement clickQueueBox;
+    @FindBy(xpath = "//span[contains(@class,'select2-results')]/ul/li")
+    public List<WebElement> filterElements;
 
-    @FindBy(xpath = "(//td[@class='text-left text-left'][contains(.,'llap')])[1]")
+    @FindBy(xpath = "//ul[contains(@class,'select2-results__options')]/li")
+    public List<WebElement> dropdownOptions;
+
+    @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')]//input)[3]")
+    public WebElement readUsersDropdown;
+
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[8]")
     public List<WebElement> getApplicationQueue;
+
+    @FindBy(xpath = "//tbody/tr")
+    public List<WebElement> getTableData;
+
+    @FindBy(xpath = "(//div[contains(@class,'check-items-container')])[2]//span[1]")
+    public List<WebElement> getStatusTypes;
+
+    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[2]")
+    public WebElement getStatusFromTable;
+
+    @FindBy(xpath = "//h3[contains(text(),'No Data Available')]")
+    public WebElement whenNoApplicationPresent;
+
+    @FindBy(xpath = "//span[(text()='Queue')]//following-sibling::a[contains(@class,'sorting')]")
+    public WebElement sortByType;
+
+    @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[8]")
+    public List<WebElement> getTypesColumnFromTable;
+
+
+    @FindBy(xpath = "//input[contains(@class,'select2-search__field')]")
+    public WebElement globalSearchBox;
 
     @FindBy(xpath = "(//span[contains(@class,'select2-selection select2-selection--multiple')])[3]")
     public WebElement queueBySearchBox;

@@ -25,6 +25,7 @@ public class MarkerConstants {
     public static final String APP_DETAILS_IMPALA = "app_details_impala";
     public static final String APP_DETAILS_SPARK = "app_details_spark";
     public static final String APP_DETAILS_TEZ = "app_details_tez";
+    public static final String APP_DETAILS_TEZLLAP = "app_details_tezllap";
     public static final String APP_DETAILS_MR = "app_details_mr";
     public static final String INEFFICIENT_APPS = "inefficient_apps";
     public static final String YARN_CHARGEBACK = "yarn_chargeback";

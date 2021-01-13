@@ -26,4 +26,8 @@ public class PageConstants {
     public static class MRHiveKPIs {
         public static String[] KPIS = {"duration", "data i/o", "start time", "end time"};
     }
+
+    public static class AppQueue {
+        public static String LLAP = "llap";
+    }
 }

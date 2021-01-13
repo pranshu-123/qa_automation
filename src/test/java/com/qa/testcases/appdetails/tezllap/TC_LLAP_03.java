@@ -57,14 +57,6 @@ public class TC_LLAP_03 extends BaseClass {
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 
-        waitExecuter.waitUntilPageFullyLoaded();
-        int scrollY = 370;
-        JavaScriptExecuter.scrollViewWithYAxis(driver,scrollY);
-        scrollY = scrollY + datePicker.getDatePickerYPosition();
-        TezLlapApps.queueName();
-        String optionName = "llap";
-        TezLlapApps.selectOptionsInGroupBy(optionName);
-
 
         test.log(LogStatus.INFO, "Assert if in all application Tez application are present");
         logger.info("Assert if in all application TEZ application are present");

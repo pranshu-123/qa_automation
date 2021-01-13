@@ -1,5 +1,6 @@
 package com.qa.scripts.appdetails;
 
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.TezAppsDetailsPageObject;
 import com.qa.pagefactory.appsDetailsPage.TezLlapAppsDetailsPageObject;
@@ -9,17 +10,16 @@ import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.testng.Assert;
 
-import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TezLlapAppsDetailsPage {
@@ -28,6 +28,7 @@ public class TezLlapAppsDetailsPage {
     private static Boolean isDignosticWin = false;
     private WaitExecuter waitExecuter;
     private WebDriver driver;
+    private UserActions actions;
     private TezLlapAppsDetailsPageObject TezLlapApps;
 
     /**
@@ -67,21 +68,7 @@ public class TezLlapAppsDetailsPage {
         JavaScriptExecuter.clickOnElement(driver, TezLlapApps.queueBySearchBox);
     }
 
-    /* Get Day dropdown cluster workload */
-    public void queueName() {
-        try {
-            WebDriverWait wait = new WebDriverWait(driver, 40);
-            WebElement Hour = (TezLlapApps.queueBySearchBox);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(Hour)
-                    .contextClick()
-                    .doubleClick(TezLlapApps.queueBySearchBox)
-                    .perform();
-        } catch (NoSuchElementException e) {
-            LOGGER.severe("Class Workload | Method clickOnDay | Exception desc" + e.getMessage());
-            throw (e);
-        }
-    }
+
 
     public void selectOptionsInGroupBy(String optionName) {
         // Get the list of webelements of queue options
@@ -330,6 +317,18 @@ public class TezLlapAppsDetailsPage {
         waitExecuter.sleep(3000);
         return appCount;
     }
+
+    /* Select cluster from list */
+    public void selectQueue(String queueName) {
+        TezLlapApps.queueSearchBox.click();
+        waitExecuter.sleep(5000);
+        LOGGER.info("Search for Queue: " + queueName);
+        TezLlapApps.queueSearchBox.sendKeys(queueName);
+        waitExecuter.sleep(5000);
+        TezLlapApps.select1stQueue.click();
+        waitExecuter.sleep(4000);
+    }
+
 
     /* Get all app types that have run in unravel UI */
     public List<String> getAllApplicationQueue() {

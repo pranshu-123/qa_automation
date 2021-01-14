@@ -1,20 +1,21 @@
 package com.qa.scripts.migration;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.qa.enums.migration.CloudProduct;
 import com.qa.enums.UserAction;
+import com.qa.enums.migration.MigrationCloudMappingTable;
+import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.migration.CloudMappingPerHostPageObject;
-import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
-import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.Mouse;
 import org.testng.Assert;
 
+import java.time.Clock;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
@@ -24,17 +25,18 @@ public class CloudMigrationPerHostPage {
   private WebDriver driver;
   private final UserActions userAction;
   private CloudMappingPerHostPageObject cmpPageObj;
-
+  private TopPanelPageObject topPanelPageObject;
   Logger logger = Logger.getLogger(CloudMigrationPerHostPage.class.getName());
 
   /**
    * Constructor to initialize wait, driver and necessary objects
-   *
    * @param driver - WebDriver instance
    */
   public CloudMigrationPerHostPage(WebDriver driver) {
     waitExecuter = new WaitExecuter(driver);
     cmpPageObj = new CloudMappingPerHostPageObject(driver);
+    topPanelPageObject = new TopPanelPageObject(driver);
+
     this.driver = driver;
     userAction = new UserActions(driver);
   }
@@ -354,5 +356,63 @@ public class CloudMigrationPerHostPage {
       }
     }
     return vmTypeCost;
+  }
+
+  /**
+   * Navigate to cloud mapping per host
+   */
+  public void navigateToCloudMappingPerHost() {
+    userAction.performActionWithPolling(topPanelPageObject.migrationTab, UserAction.CLICK);
+    userAction.performActionWithPolling(cmpPageObj.cloudMappingPerHostTab, UserAction.CLICK);
+  }
+
+  /**
+   * Click on run button
+   */
+  public void clickOnRunButton() {
+    userAction.performActionWithPolling(cmpPageObj.runButton, UserAction.CLICK);
+  }
+
+  /**
+   * Wait until loader is present
+   */
+  public void waitTillLoaderPresent() {
+    Clock clock = Clock.systemDefaultZone();
+    final Duration MAX_POLLING_TIME = Duration.ofMillis(120000);
+    Instant end = clock.instant().plus(MAX_POLLING_TIME);
+    while (true) {
+      if (cmpPageObj.loaderElement.size() == 0) {
+        break;
+      } else if (end.isBefore(clock.instant())) {
+        throw new TimeoutException("Page is not loaded. Loader is still running");
+      }
+    }
+  }
+
+  /**
+   * Select specific Cloud product
+   * @param cloudProduct
+   */
+  public void selectCloudProduct(CloudProduct cloudProduct) {
+    userAction.performActionWithPolling(cmpPageObj.cloudProductServiceDropdownIcon, UserAction.CLICK);
+    List<WebElement> cloudProDD = cmpPageObj.dropDownValues;
+    for (WebElement cloudItem : cloudProDD) {
+      if (cloudItem.getText().trim().equalsIgnoreCase(cloudProduct.getValue())) {
+        userAction.performActionWithPolling(cloudItem, UserAction.CLICK);
+        break;
+      }
+    }
+  }
+
+  /**
+   * Verify cloud mapping table column
+   * @param table
+   */
+  public void verifyCloudMappingHostTableColumn(MigrationCloudMappingTable table) {
+    List<WebElement> tableRows = cmpPageObj.tableRows;
+    for (WebElement row : tableRows) {
+      String colValue = row.findElement(By.xpath("td[" + table.getIndex() + "]")).getText();
+      Assert.assertNotEquals(colValue.trim(), "");
+    }
   }
 }

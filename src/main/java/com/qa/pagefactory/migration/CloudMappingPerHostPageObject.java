@@ -115,6 +115,14 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//*[@id='main']/section[4]/div/div/table/tbody/tr/td[1]")
   public List<WebElement> hdiVMList;
 
+  @FindBy(xpath = "//div[contains(@class,'spinner')]")
+  public List<WebElement> loaderElement;
+
+  @FindBy(xpath = "//label[contains(text(),'Cloud Product/Service')]/parent::div//span[contains(@class,'select2-selection__arrow')]")
+  public WebElement cloudProductServiceDropdownIcon;
+
+  @FindBy(xpath = "//div[@class='table-container']//tbody/tr/")
+  public List<WebElement> tableRows;
   /**
    * @param driver The driver that will be used to look up the elements
    */

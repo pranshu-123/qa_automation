@@ -2,7 +2,6 @@ package com.qa.testcases.appdetails.tezllap;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.constants.PageConstants;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.TezLlapAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
@@ -18,7 +17,6 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Marker.AppDetailsTezLlap
@@ -50,10 +48,10 @@ public class TC_LLAP_06 extends BaseClass {
                 applicationsPageObject, clusterId);
         test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
 
-        int appCount=tezLlapApps.clickOnlyLink("Tez");
+        int appCount = tezLlapApps.clickOnlyLink("Tez");
         applicationsPageObject.expandStatus.click();
         int failedCount = tezLlapApps.clickOnlyLink("Killed");
-        test.log(LogStatus.PASS, "Selected "+ appCount + " as option in Group By filter, yarn chargeback page");
+        test.log(LogStatus.PASS, "Selected " + appCount + " as option in Group By filter, yarn chargeback page");
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
@@ -64,7 +62,7 @@ public class TC_LLAP_06 extends BaseClass {
                 "displayed in the header");
 
 
-        // Get 1st queuename from table for tez apps
+        //  Get llap queuename from table for tez apps
         String upTo10CharQueueName = "llap";
         logger.info("Queue name should be filtered by- " + upTo10CharQueueName);
         waitExecuter.waitUntilPageFullyLoaded();

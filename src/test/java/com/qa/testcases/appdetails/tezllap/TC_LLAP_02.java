@@ -2,7 +2,6 @@ package com.qa.testcases.appdetails.tezllap;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.constants.PageConstants;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.TezLlapAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
@@ -19,7 +18,6 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Marker.AppDetailsTezLlap
@@ -61,7 +59,7 @@ public class TC_LLAP_02 extends BaseClass {
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 
-        // Get 1st queuename from table for tez apps
+        // Get llap queuename from table for tez apps
         String upTo10CharQueueName = "llap";
         logger.info("Queue name should be filtered by- " + upTo10CharQueueName);
         waitExecuter.waitUntilPageFullyLoaded();
@@ -95,13 +93,14 @@ public class TC_LLAP_02 extends BaseClass {
             test.log(LogStatus.PASS, "Duration is displayed in the Tez Table: " + duration);
 
         } else {
-            test.log(LogStatus.SKIP, "No Tez Application present");
-            logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +
+            test.log(LogStatus.SKIP, "No Tez/Llap Application present");
+            logger.error("No Tez/Llap Application present in the " + clusterId + " cluster for the time span " +
                     "of 90 days");
-            //Close apps details page
-            MouseActions.clickOnElement(driver, tezLlapPage.homeTab);
-
         }
+        //Close apps details page
+        MouseActions.clickOnElement(driver, tezLlapPage.homeTab);
 
     }
+
 }
+

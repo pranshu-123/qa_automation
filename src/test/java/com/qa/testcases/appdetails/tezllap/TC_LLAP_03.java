@@ -8,7 +8,6 @@ import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.TezLlapAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
-import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
@@ -49,9 +48,9 @@ public class TC_LLAP_03 extends BaseClass {
                 applicationsPageObject, clusterId);
         test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
 
-        int Appname=tezLlapApps.clickOnlyLink("Tez");
+        int Appname = tezLlapApps.clickOnlyLink("Tez");
         waitExecuter.waitUntilPageFullyLoaded();
-        test.log(LogStatus.PASS, "Selected "+ Appname + " as option in Group By filter, yarn chargeback page");
+        test.log(LogStatus.PASS, "Selected " + Appname + " as option in Group By filter, yarn chargeback page");
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + Appname + " total count is " + totalCount);
@@ -61,7 +60,7 @@ public class TC_LLAP_03 extends BaseClass {
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 
-        // Get 1st queuename from table for tez apps
+        // Get llap queuename from table for tez apps
         String upTo10CharQueueName = "llap";
         logger.info("Queue name should be filtered by- " + upTo10CharQueueName);
         waitExecuter.waitUntilPageFullyLoaded();

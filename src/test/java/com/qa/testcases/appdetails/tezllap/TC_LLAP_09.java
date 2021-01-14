@@ -1,6 +1,5 @@
 package com.qa.testcases.appdetails.tezllap;
 
-import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.TezLlapAppsDetailsPageObject;
@@ -19,18 +18,16 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-@Marker.AppDetailsTezLlap
-@Marker.All
-public class TC_LLAP_05 extends BaseClass {
+public class TC_LLAP_09 extends BaseClass {
 
-    Logger logger = LoggerFactory.getLogger(TC_LLAP_05.class);
+    Logger logger = LoggerFactory.getLogger(TC_LLAP_09.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TC_LLAP_05_verifyStatusFailed(String clusterId) {
-        test = extent.startTest("TC_LLAP_05_verifyStatusSuccess: " + clusterId,
-                "Verify the application \"Status\" displayed in the Application Tab should be - \"Failed\"");
+    public void TC_LLAP_09_verifyClusterID(String clusterId) {
+        test = extent.startTest("TC_LLAP_09_verifyClusterID: " + clusterId,
+                "Verify Unravel UI should display the Cluster ID mentioned in Unravel properties");
         test.assignCategory(" Apps Details-TezLlap");
-        Log.startTestCase("TC_LLAP_05_verifyStatusSuccess");
+        Log.startTestCase("TC_LLAP_09_verifyClusterID");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -49,8 +46,6 @@ public class TC_LLAP_05 extends BaseClass {
         test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
 
         int appCount = tezLlapApps.clickOnlyLink("Tez");
-        applicationsPageObject.expandStatus.click();
-        int failedCount = tezLlapApps.clickOnlyLink("Failed");
         test.log(LogStatus.PASS, "Selected " + appCount + " as option in Group By filter, yarn chargeback page");
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
@@ -61,7 +56,8 @@ public class TC_LLAP_05 extends BaseClass {
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 
-        // Get llap queuename from table for tez apps
+
+        // Get llap username from table for tez apps
         String upTo10CharQueueName = "llap";
         logger.info("Queue name should be filtered by- " + upTo10CharQueueName);
         waitExecuter.waitUntilPageFullyLoaded();
@@ -84,16 +80,10 @@ public class TC_LLAP_05 extends BaseClass {
                 }
         }
 
-
-        /*
-         * Validate that status types faild are --
-         */
-        if (appCount > 0) {
-            String statusValue = tezLlapApps.verifyAppStatus(tezLlapPage);
-            test.log(LogStatus.PASS, "Tez status Value is displayed in the Table: " + statusValue);
-        } else {
-            Assert.assertTrue(tezLlapPage.whenNoApplicationPresent.isDisplayed(),
-                    "The cluster does not have any application under it and also does not display 'No Data Available' for it");
-        }
+        //click on cluster search field
+        applicationsPageObject.clusterIdsearchfield.click();
+        System.out.println("All clusterId size: " + applicationsPageObject.clusterIdsList.size());
+        test.log(LogStatus.INFO, "All clusterId count: " + applicationsPageObject.clusterIdsList.size());
+        test.log(LogStatus.PASS, "Validated cluster filter in UI");
     }
 }

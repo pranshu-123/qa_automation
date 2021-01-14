@@ -59,7 +59,7 @@ public class TC_LLAP_01 extends BaseClass {
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 
-        // Get 1st queuename from table for tez apps
+        // Get llap queuename from table for tez apps
         String upTo10CharQueueName = "llap";
         logger.info("Queue name should be filtered by- " + upTo10CharQueueName);
         waitExecuter.waitUntilPageFullyLoaded();
@@ -80,6 +80,10 @@ public class TC_LLAP_01 extends BaseClass {
                         break;
                     }
                 }
+        } else {
+            test.log(LogStatus.SKIP, "No Tez/Llap Application present");
+            logger.error("No Tez/Llap Application present in the " + clusterId + " cluster for the time span " +
+                    "of 90 days");
         }
 
 

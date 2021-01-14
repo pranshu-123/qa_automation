@@ -21,6 +21,13 @@ public class TezLlapAppsDetailsPageObject {
     @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')]//input)[3]")
     public WebElement queueSearchBox;
 
+    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[3]")
+    public WebElement getUsernameFromTable;
+
+    @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')])[2]//input")
+    public WebElement userSearchBox;
+
+
     @FindBy(xpath = "(//ul[contains(@class,'select2-results')])/li")
     public List<WebElement> getNamesFromDropDown;
 

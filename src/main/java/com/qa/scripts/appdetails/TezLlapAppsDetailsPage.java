@@ -2,6 +2,7 @@ package com.qa.scripts.appdetails;
 
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
+import com.qa.pagefactory.appsDetailsPage.MrAppsDetailsPageObject;
 import com.qa.pagefactory.appsDetailsPage.TezAppsDetailsPageObject;
 import com.qa.pagefactory.appsDetailsPage.TezLlapAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
@@ -116,19 +117,59 @@ public class TezLlapAppsDetailsPage {
 
     }
 
+    /**
+     * Method to click the first app in jobs table , navigate to the details page.
+     * and verify  clusterId .
+     */
+    public String verifyclusterId(MrAppsDetailsPageObject mrApps) {
+        WebElement Appid = mrApps.getClusterId;
+        Actions toolAct = new Actions(driver);
+        toolAct.moveToElement(Appid).build().perform();
+        WebElement AppnametoolTip = mrApps.getClusterId;
+        waitExecuter.sleep(3000);
+        String AppIdText = AppnametoolTip.getText().trim();
+        LOGGER.info("Tez Status is " + Appid);
+        waitExecuter.sleep(5000);
+        waitExecuter.waitUntilPageFullyLoaded();
+        Assert.assertNotSame("", Appid, "Tez App id name is not displayed in the Table");
+        return AppIdText;
+    }
+
 
     /**
      * Method to click the first app in jobs table , navigate to the details page.
-     * and verify app Id .
+     * and verify  Appname .
      */
-    public String verifyAppId(TezLlapAppsDetailsPageObject TezLlapApps, ApplicationsPageObject appPageObj) {
-        String appId = TezLlapApps.getAppId.getText().trim();
-        LOGGER.info("Tez application Id is " + appId);
-        appPageObj.getTypeFromTable.click();
+    public String verifyAppname(TezLlapAppsDetailsPageObject tezLlapPage) {
+        WebElement Appname = tezLlapPage.getAppname;
+        Actions toolAct = new Actions(driver);
+        toolAct.moveToElement(Appname).build().perform();
+        WebElement AppnametoolTip = driver.findElement(By.xpath("//*[@id=\"allApps-body\"]/tr[1]/td[4]"));
+        waitExecuter.sleep(3000);
+        String AppnameText = AppnametoolTip.getText().trim();
+        System.out.println(AppnameText);
+        waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();
-        String headerAppId = TezLlapApps.getHeaderAppId.getText().trim();
-        Assert.assertNotSame("", headerAppId, "Tez Application Id is not displayed in the Header");
-        return headerAppId;
+        Assert.assertNotSame("", Appname, "Tez App name is not displayed in the Table");
+        return AppnameText;
+    }
+
+    /**
+     * Method to click the first app in jobs table , navigate to the details page.
+     * and verify  Appid .
+     */
+    public String verifyappId(TezLlapAppsDetailsPageObject tezLlapPage) {
+        WebElement Appid = tezLlapPage.getAppid;
+        Actions toolAct = new Actions(driver);
+        toolAct.moveToElement(Appid).build().perform();
+        WebElement AppnametoolTip = driver.findElement(By.xpath("//*[@id=\"allApps-body\"]/tr[1]/td[4]/div"));
+        waitExecuter.sleep(3000);
+        String AppIdText = AppnametoolTip.getText().trim();
+        LOGGER.info("Tez Status is " + Appid);
+        waitExecuter.sleep(5000);
+        waitExecuter.waitUntilPageFullyLoaded();
+        Assert.assertNotSame("", Appid, "Tez App id name is not displayed in the Table");
+        return AppIdText;
     }
 
     /**
@@ -179,12 +220,14 @@ public class TezLlapAppsDetailsPage {
      */
     public void navigateToJobsTabFromHeader(SubTopPanelModulePageObject topPanelObj, AllApps allApps,
                                             DatePicker datePicker, ApplicationsPageObject appPageObj, String clusterId) {
+        // Navigate to Jobs tab from header
         LOGGER.info("Navigate to jobs tab from header");
-        waitExecuter.sleep(3000);
         waitExecuter.waitUntilElementClickable(topPanelObj.jobs);
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(2000);
         topPanelObj.jobs.click();
+        waitExecuter.sleep(2000);
         waitExecuter.waitUntilElementPresent(appPageObj.jobsPageHeader);
+        waitExecuter.waitUntilPageFullyLoaded();
 
         //Select cluster
         LOGGER.info("Select Cluster: " + clusterId);

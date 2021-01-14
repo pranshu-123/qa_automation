@@ -2,27 +2,21 @@ package com.qa.testcases.appdetails.tezllap;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.constants.PageConstants;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.TezLlapAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.TezLlapAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
-import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.Log;
-import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
-import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Marker.AppDetailsTezLlap
@@ -67,7 +61,7 @@ public class TC_LLAP_04 extends BaseClass {
         int successCount = tezLlapApps.clickOnlyLink("Success");
         test.log(LogStatus.PASS, "Selected " + successCount + " as Status, In Applications page");
 
-        // Get 1st queuename from table for tez apps
+        // Get llap queuename from table for tez apps
         String upTo10CharQueueName = "llap";
         logger.info("Queue name should be filtered by- " + upTo10CharQueueName);
         waitExecuter.waitUntilPageFullyLoaded();

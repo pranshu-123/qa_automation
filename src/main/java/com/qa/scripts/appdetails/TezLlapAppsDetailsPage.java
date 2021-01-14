@@ -84,6 +84,18 @@ public class TezLlapAppsDetailsPage {
         }
     }
 
+    /**
+     * Method to click the first app in jobs table , navigate to the details page.
+     * and verify status .
+     */
+    public String verifyAppStatus(TezLlapAppsDetailsPageObject tezLlapPage) {
+        String Status = tezLlapPage.Status.getText();
+        waitExecuter.sleep(3000);
+        LOGGER.info("Tez application status is " + Status);
+        Assert.assertNotSame("", Status, "Tez application status is not displayed in the Header");
+        return Status;
+    }
+
 
     /**
      * Method to validate  top right of the app details page.
@@ -118,20 +130,6 @@ public class TezLlapAppsDetailsPage {
         Assert.assertNotSame("", headerAppId, "Tez Application Id is not displayed in the Header");
         return headerAppId;
     }
-
-
-    /**
-     * Method to click the first app in jobs table , navigate to the details page.
-     * and verify app Id .
-     */
-    public String verifyAppStatus(TezLlapAppsDetailsPageObject tezLlapPage) {
-        String Status = tezLlapPage.status.getText();
-        waitExecuter.waitUntilPageFullyLoaded();
-        LOGGER.info("Tez application Id is " + Status);
-        Assert.assertNotSame("", Status, "Tez Application Id is not displayed in the Header");
-        return Status;
-    }
-
 
     /**
      * Method to click the first app in jobs table , navigate to the details page.

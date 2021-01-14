@@ -88,13 +88,11 @@ public class TC_LLAP_05 extends BaseClass {
 
 
         /*
-         * Validate that status types  success are --
+         * Validate that status types faild are --
          */
         if (appCount > 0) {
-            String getStatusTypeFromTable = tezLlapPage.getStatusFromTable.getText();
-            Assert.assertEquals(getStatusTypeFromTable.toLowerCase(),
-                    "failed");
-            test.log(LogStatus.PASS, "The Jobs displayed the status Failed");
+            String statusValue = tezLlapApps.verifyAppStatus(tezLlapPage);
+            test.log(LogStatus.PASS, "Tez status Value is displayed in the Table: " + statusValue);
         } else {
             Assert.assertTrue(tezLlapPage.whenNoApplicationPresent.isDisplayed(),
                     "The cluster does not have any application under it and also does not display 'No Data Available' for it");

@@ -199,6 +199,8 @@ public class TezLlapAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[1]/span[3]")
     public WebElement Queue;
 
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[2]")
+    public WebElement Status;
 
     @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[1]/div/div[2]/div/div/div/div[1]/div/p/b")
     public List<WebElement> ganttChartHeaders;

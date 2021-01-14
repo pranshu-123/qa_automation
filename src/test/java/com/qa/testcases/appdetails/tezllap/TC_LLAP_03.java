@@ -12,10 +12,14 @@ import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.List;
+
 @Marker.AppDetailsTezLlap
 @Marker.All
 public class TC_LLAP_03 extends BaseClass {
@@ -56,6 +60,29 @@ public class TC_LLAP_03 extends BaseClass {
                 "the total count of heading.");
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
+
+        // Get 1st queuename from table for tez apps
+        String upTo10CharQueueName = "llap";
+        logger.info("Queue name should be filtered by- " + upTo10CharQueueName);
+        waitExecuter.waitUntilPageFullyLoaded();
+        if (!upTo10CharQueueName.trim().isEmpty() || !upTo10CharQueueName.trim().equals("-")) {
+            tezLlapPage.queueSearchBox.click();
+            waitExecuter.waitUntilPageFullyLoaded();
+            tezLlapPage.queueSearchBox.sendKeys(upTo10CharQueueName);
+            waitExecuter.waitUntilPageFullyLoaded();
+            List<WebElement> queueList = tezLlapPage.getNamesFromDropDown;
+            String queuenameSelected = "llap";
+            if (!upTo10CharQueueName.isEmpty() || !upTo10CharQueueName.equals("_"))
+                for (int i = 0; i < queueList.size(); i++) {
+                    if (queueList.get(i).getText().equals(upTo10CharQueueName)) {
+                        queuenameSelected = queueList.get(i).getText();
+                        logger.info("Selected username from dropdown " + queuenameSelected);
+                        queueList.get(i).click();
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        break;
+                    }
+                }
+        }
 
 
         test.log(LogStatus.INFO, "Assert if in all application Tez application are present");

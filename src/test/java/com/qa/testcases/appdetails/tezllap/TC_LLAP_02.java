@@ -61,18 +61,28 @@ public class TC_LLAP_02 extends BaseClass {
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 
-        List<WebElement> typesInPage = tezLlapPage.getTypesColumnFromTable;
-        List<String> nameOfTypesInPage = new ArrayList<>();
-        int tableData = tezLlapPage.getTableData.size();
-        if (tableData > 0) {
-            for (int i = 0; i < typesInPage.size(); i++) {
-                nameOfTypesInPage.add(typesInPage.get(i).getText().trim().toLowerCase());
-            }
+        // Get 1st queuename from table for tez apps
+        String upTo10CharQueueName = "llap";
+        logger.info("Queue name should be filtered by- " + upTo10CharQueueName);
+        waitExecuter.waitUntilPageFullyLoaded();
+        if (!upTo10CharQueueName.trim().isEmpty() || !upTo10CharQueueName.trim().equals("-")) {
+            tezLlapPage.queueSearchBox.click();
             waitExecuter.waitUntilPageFullyLoaded();
+            tezLlapPage.queueSearchBox.sendKeys(upTo10CharQueueName);
+            waitExecuter.waitUntilPageFullyLoaded();
+            List<WebElement> queueList = tezLlapPage.getNamesFromDropDown;
+            String queuenameSelected = "llap";
+            if (!upTo10CharQueueName.isEmpty() || !upTo10CharQueueName.equals("_"))
+                for (int i = 0; i < queueList.size(); i++) {
+                    if (queueList.get(i).getText().equals(upTo10CharQueueName)) {
+                        queuenameSelected = queueList.get(i).getText();
+                        logger.info("Selected username from dropdown " + queuenameSelected);
+                        queueList.get(i).click();
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        break;
+                    }
+                }
         }
-        // listed
-        Assert.assertTrue(nameOfTypesInPage.contains(PageConstants.AppQueue.LLAP), "Table does not contain app Queue 'llap'.");
-        test.log(LogStatus.PASS, "Table contains app Queue 'llap'.");
 
         /*
          * Validate the start time types are --

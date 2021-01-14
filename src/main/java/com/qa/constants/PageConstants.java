@@ -33,4 +33,15 @@ public class PageConstants {
         public static String[] Amazon_EMR = {"EMR 6.1.0", "EMR 6.0.0", "EMR 5.31.0", "EMR 5.30.1"};
         public static String[] Azure_HDI = {"HDInsight 4.0", "HDInsight 3.6"};
     }
+
+    /*Workflow name for each application*/
+    public static class WorkflowName {
+        public static String OOZIE_MR_WF = "oozie_map-reduce_wf";
+        public static String OOZIE_HIVE_WF = "oozie_hive_wf";
+        public static String OOZIE_HIVE2_WF = "oozie_hive2_wf";
+        public static String OOZIE_SPARK_WF = "oozie_spark_wf";
+        public static String HIVE_TAGGED = "Tagged_HiveWorkflow";
+        public static String IMPALA_TAGGED = "Tagged_ImpalaWorkflow";
+        public static String SPARK_TAGGED = "Tagged_SparkWorkflow";
+    }
 }

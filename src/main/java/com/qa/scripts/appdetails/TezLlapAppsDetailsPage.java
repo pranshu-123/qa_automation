@@ -186,20 +186,19 @@ public class TezLlapAppsDetailsPage {
         waitExecuter.waitUntilElementClickable(topPanelObj.jobs);
         waitExecuter.sleep(1000);
         topPanelObj.jobs.click();
-        waitExecuter.sleep(3000);
         waitExecuter.waitUntilElementPresent(appPageObj.jobsPageHeader);
-        waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.sleep(2000);
 
         //Select cluster
         LOGGER.info("Select Cluster: " + clusterId);
         allApps.selectCluster(clusterId);
         waitExecuter.sleep(3000);
+
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(1000);
         datePicker.selectLast90Days();
         waitExecuter.sleep(3000);
         waitExecuter.waitUntilPageFullyLoaded();
+
     }
 
 
@@ -219,21 +218,9 @@ public class TezLlapAppsDetailsPage {
         int appCount = Integer.parseInt(ele.getText().replaceAll("[^\\dA-Za-z ]",
                 "").trim());
         wait.pollingEvery(Duration.ofMillis(20));
-        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.sleep(3000);
         return appCount;
     }
-
-    /* Select cluster from list */
-    public void selectQueue(String queueName) {
-        tezLlapPage.queueSearchBox.click();
-        waitExecuter.waitUntilPageFullyLoaded();
-        LOGGER.info("Search for Queue: " + queueName);
-        tezLlapPage.queueSearchBox.sendKeys(queueName);
-        waitExecuter.waitUntilPageFullyLoaded();
-        tezLlapPage.select1stQueue.click();
-        waitExecuter.waitUntilPageFullyLoaded();
-    }
-
 
     /* Get all app types that have run in unravel UI */
     public List<String> getAllApplicationQueue() {

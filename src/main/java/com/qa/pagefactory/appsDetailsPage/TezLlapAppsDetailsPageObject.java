@@ -21,11 +21,11 @@ public class TezLlapAppsDetailsPageObject {
     @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')]//input)[3]")
     public WebElement queueSearchBox;
 
-    @FindBy(xpath = "//ul[contains(@class,'select2-results__options')]/li[5]")
-    public WebElement select1stQueue;
+    @FindBy(xpath = "(//ul[contains(@class,'select2-results')])/li")
+    public List<WebElement> getNamesFromDropDown;
 
-    @FindBy(xpath = "//span[contains(@class,'select2-selection__choice__remove')]")
-    public WebElement removeCluster;
+    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[8]")
+    public WebElement getQueueNameTable;
 
     @FindBy(xpath = "//span[contains(@class, 'select2-results')]/ul/li")
     public List<WebElement> listOfGroupByOptions;

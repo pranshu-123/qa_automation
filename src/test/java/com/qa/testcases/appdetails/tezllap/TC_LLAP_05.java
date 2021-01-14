@@ -63,18 +63,28 @@ public class TC_LLAP_05 extends BaseClass {
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 
-        List<WebElement> typesInPage = tezLlapPage.getTypesColumnFromTable;
-        List<String> nameOfTypesInPage = new ArrayList<>();
-        int tableData = tezLlapPage.getTableData.size();
-        if (tableData > 0) {
-            for (int i = 0; i < typesInPage.size(); i++) {
-                nameOfTypesInPage.add(typesInPage.get(i).getText().trim().toLowerCase());
-            }
+        // Get 1st queuename from table for tez apps
+        String upTo10CharQueueName = "llap";
+        logger.info("Queue name should be filtered by- " + upTo10CharQueueName);
+        waitExecuter.waitUntilPageFullyLoaded();
+        if (!upTo10CharQueueName.trim().isEmpty() || !upTo10CharQueueName.trim().equals("-")) {
+            tezLlapPage.queueSearchBox.click();
             waitExecuter.waitUntilPageFullyLoaded();
+            tezLlapPage.queueSearchBox.sendKeys(upTo10CharQueueName);
+            waitExecuter.waitUntilPageFullyLoaded();
+            List<WebElement> queueList = tezLlapPage.getNamesFromDropDown;
+            String queuenameSelected = "llap";
+            if (!upTo10CharQueueName.isEmpty() || !upTo10CharQueueName.equals("_"))
+                for (int i = 0; i < queueList.size(); i++) {
+                    if (queueList.get(i).getText().equals(upTo10CharQueueName)) {
+                        queuenameSelected = queueList.get(i).getText();
+                        logger.info("Selected username from dropdown " + queuenameSelected);
+                        queueList.get(i).click();
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        break;
+                    }
+                }
         }
-        // listed
-        Assert.assertTrue(nameOfTypesInPage.contains(PageConstants.AppQueue.LLAP), "Table does not contain app Queue 'llap'.");
-        test.log(LogStatus.PASS, "Table contains app Queue 'llap'.");
 
 
         /*
@@ -83,8 +93,8 @@ public class TC_LLAP_05 extends BaseClass {
         if (appCount > 0) {
             String getStatusTypeFromTable = tezLlapPage.getStatusFromTable.getText();
             Assert.assertEquals(getStatusTypeFromTable.toLowerCase(),
-                    "The Jobs displayed in tables contains application other than that of selected App Type");
-            test.log(LogStatus.PASS, "The Jobs displayed in tables contains application of selected App Type");
+                    "failed");
+            test.log(LogStatus.PASS, "The Jobs displayed the status Failed");
         } else {
             Assert.assertTrue(tezLlapPage.whenNoApplicationPresent.isDisplayed(),
                     "The cluster does not have any application under it and also does not display 'No Data Available' for it");

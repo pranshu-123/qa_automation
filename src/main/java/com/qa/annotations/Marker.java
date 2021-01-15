@@ -31,6 +31,7 @@ public @interface Marker {
   @interface ClusterJobs {}
   @interface ClusterUserReports {}
   @interface ClusterWorkload {}
+  @interface ClusterHBase {}
   @interface UserReports {}
   @interface Manage {}
   @interface AppDetailsHive {}

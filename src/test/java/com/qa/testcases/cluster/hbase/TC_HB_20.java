@@ -8,6 +8,7 @@ import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -36,20 +37,31 @@ public class TC_HB_20 extends BaseClass {
         //Navigate to HBase tab
         waitExecuter.waitUntilElementClickable(hBasePageObject.hbaseTab);
         MouseActions.clickOnElement(driver,hBasePageObject.hbaseTab);
-        LOGGER.info("Clicked on HBase header");
+        LOGGER.info("Clicked on HBase Tab");
         waitExecuter.waitUntilElementPresent(hBasePageObject.hbaseHeader);
         LOGGER.info("HBase headers found: "+ hbase.getHBaseHeader());
 
-        String hBaseClusterName = "HDPab722";
-        hbase.selectHBaseCluster(hBaseClusterName);
-        String hBaseNameActual = hbase.getHBaseHeader();
-        String hBaseNameExpected = "HBase (HDPab722)";
-        LOGGER.info("Cluster name found with cluster details: "+hBaseNameActual);
-        Assert.assertTrue(hBaseNameActual.contains(hBaseClusterName), "HBase actual header do not contains " +
-                "hbase cluster name");
-        Assert.assertEquals(hBaseNameActual, hBaseNameExpected, "Not matched actual HBase name:"+hBaseNameActual
-                +" with expected: "+ hBaseNameExpected);
+        List<WebElement> allHbaseClusterListElement = hbase.getHBaseClustersElements();
+
+        for(int i=0; i<allHbaseClusterListElement.size(); i++){
+            String hBaseClusterName = allHbaseClusterListElement.get(i).getText();
+            hbase.selectDateAsLast30Days();
+            LOGGER.info("Select date picker for 30 days.");
+            hbase.selectHBaseCluster(hBaseClusterName.trim());
+            String hBaseNameActual = hbase.getHBaseHeader();
+            String hBaseNameExpected = "HBase ("+hBaseClusterName+")";
+            LOGGER.info("Cluster name found with cluster details: "+hBaseNameActual);
+            Assert.assertTrue(hBaseNameActual.contains(hBaseClusterName), "HBase actual header do not contains " +
+                    "hbase cluster name");
+            Assert.assertEquals(hBaseNameActual, hBaseNameExpected, "Not matched actual HBase name:"+hBaseNameActual
+                    +" with expected: "+ hBaseNameExpected);
+        }
+
         test.log(LogStatus.PASS, "Verified Cluster name should be listed as tab with cluster details.");
 
     }
 }
+
+
+
+

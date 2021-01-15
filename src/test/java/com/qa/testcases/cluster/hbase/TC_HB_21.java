@@ -35,12 +35,11 @@ public class TC_HB_21 extends BaseClass {
         //Navigate to HBase tab
         waitExecuter.waitUntilElementClickable(hBasePageObject.hbaseTab);
         MouseActions.clickOnElement(driver, hBasePageObject.hbaseTab);
-        LOGGER.info("Clicked on HBase header");
+        LOGGER.info("Clicked on HBase Tab");
         waitExecuter.waitUntilElementPresent(hBasePageObject.hbaseHeader);
         LOGGER.info("HBase headers found: " + hbase.getHBaseHeader());
 
-        String hBaseClusterName = "HDPab722";
-        hbase.selectHBaseCluster(hBaseClusterName);
+        hbase.selectHBaseDefaultCluster();
         Assert.assertTrue(hbase.verifyMetricsToolTips(), "Tooltips on HBase cluster KPI's not found.");
         test.log(LogStatus.PASS, "Verify tool tip presence for HBase cluster metrics tab.");
     }

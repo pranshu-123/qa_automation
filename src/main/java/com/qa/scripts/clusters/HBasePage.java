@@ -1,6 +1,7 @@
 package com.qa.scripts.clusters;
 
 import com.qa.pagefactory.clusters.HBasePageObject;
+import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
@@ -52,18 +53,36 @@ public class HBasePage {
         return hBaseClusterList;
     }
 
-    //Method to select hbase cluster from drop down
-    public void selectHBaseCluster(String hBaseClusterName){
+
+    public List<WebElement> getHBaseClustersElements(){
         waitExecuter.waitUntilElementClickable(hBasePageObject.hBaseClusterDropDown);
         MouseActions.clickOnElement(driver, hBasePageObject.hBaseClusterDropDown);
         waitExecuter.waitUntilPageFullyLoaded();
         List<WebElement> hBaseClusterElementList = hBasePageObject.hBaseClusters;
         Assert.assertFalse(hBaseClusterElementList.isEmpty(), "HBase clusters not found");
-        for(int i=0 ; i< hBaseClusterElementList.size() ; i++){
-            if(hBaseClusterElementList.get(i).getText().equals(hBaseClusterName)){
-                hBaseClusterElementList.get(i).click();
-            }
-        }
+        return hBaseClusterElementList;
+    }
+
+    //Method to select hbase cluster from drop down
+    public void selectHBaseCluster(String hBaseClusterName){
+        waitExecuter.waitUntilElementClickable(hBasePageObject.hBaseClusterDropDown);
+        MouseActions.clickOnElement(driver, hBasePageObject.hBaseClusterDropDown);
+        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.sleep(2000);
+        ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
+        applicationsPageObject.clusterIdsearchfield.sendKeys(hBaseClusterName);
+        waitExecuter.sleep(1000);
+        applicationsPageObject.select1stCluster.click();
+    }
+
+    public void selectHBaseDefaultCluster(){
+        waitExecuter.waitUntilElementClickable(hBasePageObject.hBaseClusterDropDown);
+        MouseActions.clickOnElement(driver, hBasePageObject.hBaseClusterDropDown);
+        waitExecuter.waitUntilPageFullyLoaded();
+        List<WebElement> hBaseClusterElementList = hBasePageObject.hBaseClusters;
+        Assert.assertFalse(hBaseClusterElementList.isEmpty(), "HBase clusters not found");
+        String hBaseClusterName = hBaseClusterElementList.get(0).getText();
+        MouseActions.clickOnElement(driver, hBaseClusterElementList.get(0));
     }
 
     public void selectDateAsLast30Days(){
@@ -106,8 +125,8 @@ public class HBasePage {
     }
 
     // Method to verify the HBase cluster Metrics
-    public void verifyHBaseClustersMetrics(String hBaseClusterName){
-        selectHBaseCluster(hBaseClusterName);
+    public void verifyHBaseClustersMetrics(){
+        selectHBaseDefaultCluster();
         selectDateAsLast30Days();
 
         List<WebElement> hBaseKPIList = hBasePageObject.hBaseClusterKPIs;

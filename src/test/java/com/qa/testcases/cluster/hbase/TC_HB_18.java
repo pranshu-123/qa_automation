@@ -33,12 +33,11 @@ public class TC_HB_18 extends BaseClass {
         //Navigate to HBase tab
         waitExecuter.waitUntilElementClickable(hBasePageObject.hbaseTab);
         MouseActions.clickOnElement(driver,hBasePageObject.hbaseTab);
-        LOGGER.info("Clicked on HBase header");
+        LOGGER.info("Clicked on HBase Tab");
         waitExecuter.waitUntilElementPresent(hBasePageObject.hbaseHeader);
         LOGGER.info("HBase headers found: "+ hbase.getHBaseHeader());
 
-        String hBaseClusterName = "HDPab722";
-        hbase.verifyHBaseClustersMetrics(hBaseClusterName);
+        hbase.verifyHBaseClustersMetrics();
         LOGGER.info("HBase clusters metrics verified");
         test.log(LogStatus.PASS, "Verified HBase clusters metrics in Unravel UI.");
 

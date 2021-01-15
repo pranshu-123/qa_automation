@@ -36,7 +36,7 @@ public class TC_HB_17 extends BaseClass {
         //Navigate to HBase tab
         waitExecuter.waitUntilElementClickable(hBasePageObject.hbaseTab);
         MouseActions.clickOnElement(driver,hBasePageObject.hbaseTab);
-        LOGGER.info("Clicked on HBase header");
+        LOGGER.info("Clicked on HBase Tab");
         waitExecuter.waitUntilElementPresent(hBasePageObject.hbaseHeader);
         LOGGER.info("HBase headers found: "+ hbase.getHBaseHeader());
 

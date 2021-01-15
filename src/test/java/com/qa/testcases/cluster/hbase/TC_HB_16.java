@@ -36,9 +36,9 @@ public class TC_HB_16 extends BaseClass {
         //Navigate to HBase tab
         waitExecuter.waitUntilElementClickable(hBasePageObject.hbaseTab);
         MouseActions.clickOnElement(driver,hBasePageObject.hbaseTab);
-        LOGGER.info("Clicked on HBase header");
+        LOGGER.info("Clicked on HBase Tab");
         LOGGER.info("HBase headers found: "+ hbase.getHBaseHeader());
-        Assert.assertTrue(hbase.getHBaseHeader().equals("HBase (HDPab722)"), "HBase header mismatch.");
+        Assert.assertTrue(hbase.getHBaseHeader().length() > 0, "HBase header not found.");
         test.log(LogStatus.PASS, "Verified HBase tab in Unravel UI.");
 
     }

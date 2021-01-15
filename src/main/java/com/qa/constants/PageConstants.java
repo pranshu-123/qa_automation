@@ -33,4 +33,8 @@ public class PageConstants {
         public static String[] Amazon_EMR = {"EMR 6.1.0", "EMR 6.0.0", "EMR 5.31.0", "EMR 5.30.1"};
         public static String[] Azure_HDI = {"HDInsight 4.0", "HDInsight 3.6"};
     }
+
+    public static class AppQueue {
+        public static String LLAP = "llap";
+    }
 }

@@ -48,7 +48,6 @@ public class TC_LLAP_07 extends BaseClass {
         test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
 
         int appCount = tezLlapApps.clickOnlyLink("Tez");
-        test.log(LogStatus.PASS, "Selected " + appCount + " as option in Group By filter, yarn chargeback page");
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);

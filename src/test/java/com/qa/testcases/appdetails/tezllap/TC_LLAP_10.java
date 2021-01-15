@@ -18,16 +18,16 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class TC_LLAP_08 extends BaseClass {
+public class TC_LLAP_10 extends BaseClass {
 
-    Logger logger = LoggerFactory.getLogger(TC_LLAP_08.class);
+    Logger logger = LoggerFactory.getLogger(TC_LLAP_10.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TC_LLAP_08_verifyApplicationNameID(String clusterId) {
-        test = extent.startTest("TC_LLAP_08_verifyApplicationNameID: " + clusterId,
-                "Verify Application Name/ID of the LLAP application");
+    public void TC_LLAP_10_verifyQueue(String clusterId) {
+        test = extent.startTest("TC_LLAP_10_verifyQueue: " + clusterId,
+                "Verify \"Queue\" of the LLAP application ");
         test.assignCategory(" Apps Details-TezLlap");
-        Log.startTestCase("TC_LLAP_08_verifyApplicationNameID");
+        Log.startTestCase("TC_LLAP_10_verifyQueue");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -55,7 +55,6 @@ public class TC_LLAP_08 extends BaseClass {
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 
-
         // Get llap username from table for tez apps
         String upTo10CharQueueName = "llap";
         logger.info("Queue name should be filtered by- " + upTo10CharQueueName);
@@ -78,16 +77,8 @@ public class TC_LLAP_08 extends BaseClass {
                     }
                 }
         }
-
-        /*
-         * Validate Application Name/ID are --
-         */
-        if (appCount > 0) {
-            String Appname = tezLlapApps.verifyAppname(tezLlapPage);
-            test.log(LogStatus.PASS, "Tez App name is displayed in the Table: " + Appname);
-
-            String AppId = tezLlapApps.verifyappId(tezLlapPage);
-            test.log(LogStatus.PASS, "Tez App Id is displayed in the Table: " + AppId);
-        }
+        String filterByQueue = applicationsPageObject.getQueueNameTable.getText().trim();
+        logger.info("Queue name should be filtered by- " + filterByQueue);
+        test.log(LogStatus.PASS, "Queue name should be filtered by- " + filterByQueue);
     }
 }

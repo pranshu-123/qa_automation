@@ -249,7 +249,6 @@ public class TezLlapAppsDetailsPage {
      * @param types Types can be appType | status Type
      */
     public int clickOnlyLink(String types) {
-        WebDriverWait wait = new WebDriverWait(driver, 60);
         Actions action = new Actions(driver);
         WebElement we = driver.findElement(By.xpath("(//label[contains(@class,'checkbox')])/span[contains(text(),'" + types + "')]"));
         action.moveToElement(we).moveToElement(driver.findElement(By.xpath("(//label[contains(@class,'checkbox')])" +
@@ -258,8 +257,8 @@ public class TezLlapAppsDetailsPage {
                 "/span[contains(text(),'" + types + "')]/following-sibling::span[1]"));
         int appCount = Integer.parseInt(ele.getText().replaceAll("[^\\dA-Za-z ]",
                 "").trim());
-        wait.pollingEvery(Duration.ofMillis(20));
         waitExecuter.sleep(3000);
+        waitExecuter.waitUntilPageFullyLoaded();
         return appCount;
     }
 

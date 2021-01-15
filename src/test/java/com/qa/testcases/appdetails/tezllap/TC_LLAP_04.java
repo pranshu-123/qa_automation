@@ -11,6 +11,7 @@ import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +52,6 @@ public class TC_LLAP_04 extends BaseClass {
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
-
         Assert.assertEquals(appCount, totalCount, "The tez app count of tezApp is not equal to " +
                 "the total count of heading.");
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
@@ -59,7 +59,7 @@ public class TC_LLAP_04 extends BaseClass {
 
         applicationsPageObject.expandStatus.click();
         int successCount = tezLlapApps.clickOnlyLink("Success");
-        test.log(LogStatus.PASS, "Selected " + successCount + " as Status, In Applications page");
+        test.log(LogStatus.PASS, "Selected success Count is  " + successCount + " as Status, In Applications page");
 
         // Get llap queuename from table for tez apps
         String upTo10CharQueueName = "llap";
@@ -86,12 +86,16 @@ public class TC_LLAP_04 extends BaseClass {
         /*
          * Validate that status types  success are --
          */
+        try {
         if (appCount > 0) {
             String statusValue = tezLlapApps.verifyAppStatus(tezLlapPage);
             test.log(LogStatus.PASS, "Tez status Value is displayed in the Table: " + statusValue);
         } else {
-            Assert.assertTrue(tezLlapPage.whenNoApplicationPresent.isDisplayed(),
-                    "The cluster does not have any application under it and also does not display 'No Data Available' for it");
+                waitExecuter.waitUntilElementPresent(applicationsPageObject.whenNoApplicationPresent);
+            }
+        }
+        catch (NoSuchElementException te) {
+            throw new AssertionError("After de-selecting all status 'No Data Available' is not displayed.");
         }
 
     }

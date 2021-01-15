@@ -49,7 +49,7 @@ public class TC_LLAP_10 extends BaseClass {
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
-
+        test.log(LogStatus.PASS, "AppCount is " + appCount + " total count is " + totalCount);
         Assert.assertEquals(appCount, totalCount, "The tez app count of tezApp is not equal to " +
                 "the total count of heading.");
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
@@ -65,20 +65,26 @@ public class TC_LLAP_10 extends BaseClass {
             tezLlapPage.queueSearchBox.sendKeys(upTo10CharQueueName);
             waitExecuter.waitUntilPageFullyLoaded();
             List<WebElement> queueList = tezLlapPage.getNamesFromDropDown;
-            String queuenameSelected = "llap";
+            String queuenameSelected = null;
             if (!upTo10CharQueueName.isEmpty() || !upTo10CharQueueName.equals("_"))
                 for (int i = 0; i < queueList.size(); i++) {
                     if (queueList.get(i).getText().equals(upTo10CharQueueName)) {
                         queuenameSelected = queueList.get(i).getText();
                         logger.info("Selected username from dropdown " + queuenameSelected);
+                        test.log(LogStatus.PASS, "Queue name should be filtered by- " + queuenameSelected);
                         queueList.get(i).click();
                         waitExecuter.waitUntilPageFullyLoaded();
                         break;
                     }
+
                 }
+
+
+
+        } else {
+            test.log(LogStatus.SKIP, "No Tez/Llap Application present");
+            logger.error("No Tez/Llap Application present in the " + clusterId + " cluster for the time span " +
+                    "of 90 days");
         }
-        String filterByQueue = applicationsPageObject.getQueueNameTable.getText().trim();
-        logger.info("Queue name should be filtered by- " + filterByQueue);
-        test.log(LogStatus.PASS, "Queue name should be filtered by- " + filterByQueue);
     }
 }

@@ -68,7 +68,7 @@ public class TC_LLAP_03 extends BaseClass {
             tezLlapPage.queueSearchBox.sendKeys(upTo10CharQueueName);
             waitExecuter.waitUntilPageFullyLoaded();
             List<WebElement> queueList = tezLlapPage.getNamesFromDropDown;
-            String queuenameSelected = "llap";
+            String queuenameSelected = null;
             if (!upTo10CharQueueName.isEmpty() || !upTo10CharQueueName.equals("_"))
                 for (int i = 0; i < queueList.size(); i++) {
                     if (queueList.get(i).getText().equals(upTo10CharQueueName)) {

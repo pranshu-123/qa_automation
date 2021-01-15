@@ -53,6 +53,7 @@ public class TC_LLAP_02 extends BaseClass {
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
+        test.log(LogStatus.PASS, "AppCount is " + appCount + " total count is " + totalCount);
         Assert.assertEquals(appCount, totalCount, "The tez app count of TezApp is not equal to " +
                 "the total count of heading.");
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
@@ -68,7 +69,7 @@ public class TC_LLAP_02 extends BaseClass {
             tezLlapPage.queueSearchBox.sendKeys(upTo10CharQueueName);
             waitExecuter.waitUntilPageFullyLoaded();
             List<WebElement> queueList = tezLlapPage.getNamesFromDropDown;
-            String queuenameSelected = "llap";
+            String queuenameSelected = null;
             if (!upTo10CharQueueName.isEmpty() || !upTo10CharQueueName.equals("_"))
                 for (int i = 0; i < queueList.size(); i++) {
                     if (queueList.get(i).getText().equals(upTo10CharQueueName)) {

@@ -18,6 +18,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Logger;
 
 public class CloudMigrationPerHostPage {
@@ -381,10 +382,17 @@ public class CloudMigrationPerHostPage {
     final Duration MAX_POLLING_TIME = Duration.ofMillis(120000);
     Instant end = clock.instant().plus(MAX_POLLING_TIME);
     while (true) {
-      if (cmpPageObj.loaderElement.size() == 0) {
-        break;
-      } else if (end.isBefore(clock.instant())) {
-        throw new TimeoutException("Page is not loaded. Loader is still running");
+      try {
+        if (cmpPageObj.loaderElement.size() == 0) {
+          return;
+        } else if (cmpPageObj.loaderElement.size() > 0 &&
+            !cmpPageObj.loaderElement.get(0).isDisplayed()) {
+          return;
+        } else if (end.isBefore(clock.instant())) {
+          throw new TimeoutException("Page is not loaded. Loader is still running");
+        }
+      } catch (StaleElementReferenceException exception) {
+        return;
       }
     }
   }
@@ -411,8 +419,65 @@ public class CloudMigrationPerHostPage {
   public void verifyCloudMappingHostTableColumn(MigrationCloudMappingTable table) {
     List<WebElement> tableRows = cmpPageObj.tableRows;
     for (WebElement row : tableRows) {
-      String colValue = row.findElement(By.xpath("td[" + table.getIndex() + "]")).getText();
+      String colValue = row.findElement(By.xpath("td[" + table.getIndex() + 1 + "]")).getText();
       Assert.assertNotEquals(colValue.trim(), "");
     }
+  }
+
+  /**
+   * Select Region from the dropdown if null
+   * passed then select any region from the dropdown
+   * @param region - Region to be passed if any the pass null
+   */
+  public void selectRegion(String region) {
+    userAction.performActionWithPolling(cmpPageObj.regionDropDown, UserAction.CLICK);
+    if (region == null) {
+      Random random = new Random();
+      WebElement random_region = cmpPageObj.regionsList.get
+          (random.nextInt(cmpPageObj.regionsList.size()));
+      userAction.performActionWithPolling(random_region, UserAction.CLICK);
+    } else {
+      for (WebElement reg : cmpPageObj.regionsList) {
+        if (reg.getText().trim().equalsIgnoreCase(region)) {
+          userAction.performActionWithPolling(reg, UserAction.CLICK);
+        }
+      }
+    }
+  }
+
+  /**
+   * Select Region from the dropdown if null
+   * passed then select any region from the dropdown
+   * @param storage - Region to be passed if any the pass null
+   */
+  public void selectStorage(String storage) {
+    userAction.performActionWithPolling(cmpPageObj.storageTypeDropdown, UserAction.CLICK);
+    if (storage == null) {
+      Random random = new Random();
+      WebElement random_region = cmpPageObj.dropDownValues.get
+          (random.nextInt(cmpPageObj.dropDownValues.size()));
+      userAction.performActionWithPolling(random_region, UserAction.CLICK);
+    } else {
+      for (WebElement storageType : cmpPageObj.dropDownValues) {
+        if (storageType.getText().trim().equalsIgnoreCase(storage)) {
+          userAction.performActionWithPolling(storageType, UserAction.CLICK);
+        }
+      }
+    }
+  }
+
+  /**
+   * Get the values for specific column from the table
+   * @param column - Column which we want to get values for all rows
+   * @return - List of values as String
+   */
+  public List<String> getColumnValuesFromTable(MigrationCloudMappingTable column) {
+    List<String> columnValues = new ArrayList<>();
+    List<WebElement> tableRows = cmpPageObj.tableRows;
+    for (WebElement row : tableRows) {
+      String colValue = row.findElement(By.xpath("td[" + (column.getIndex() + 1) + "]")).getText();
+      columnValues.add(colValue);
+    }
+    return columnValues;
   }
 }

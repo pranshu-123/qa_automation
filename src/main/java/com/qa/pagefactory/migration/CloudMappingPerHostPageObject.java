@@ -100,7 +100,7 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//*[@id='region-selector']")
   public WebElement hdiRegionSelector;
 
-  @FindBy(xpath = "//ul[contains(@class,'lb-dropdown-label js-open')]/li")
+  @FindBy(xpath = "//ul[contains(@class,'select2-results__option')]/li")
   public List<WebElement> regionsList;
 
   @FindBy(xpath = "//*[@id='region-selector']/optgroup[contains(@label,'France')]/option[1]")
@@ -121,8 +121,12 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//label[contains(text(),'Cloud Product/Service')]/parent::div//span[contains(@class,'select2-selection__arrow')]")
   public WebElement cloudProductServiceDropdownIcon;
 
-  @FindBy(xpath = "//div[@class='table-container']//tbody/tr/")
+  @FindBy(xpath = "//div[@class='table-container']//tbody/tr")
   public List<WebElement> tableRows;
+
+  @FindBy(xpath = "//label[contains(text(),'Storage Type')]/parent::div//span[contains(@class,'select2-selection__rendered')]")
+  public WebElement storageTypeDropdown;
+
   /**
    * @param driver The driver that will be used to look up the elements
    */

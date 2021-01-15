@@ -7,7 +7,6 @@ import com.qa.utils.LoggingUtils;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import java.util.List;
 
 /**

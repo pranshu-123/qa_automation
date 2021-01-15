@@ -379,7 +379,7 @@ public class CloudMigrationPerHostPage {
    */
   public void waitTillLoaderPresent() {
     Clock clock = Clock.systemDefaultZone();
-    final Duration MAX_POLLING_TIME = Duration.ofMillis(120000);
+    final Duration MAX_POLLING_TIME = Duration.ofMillis(180000);
     Instant end = clock.instant().plus(MAX_POLLING_TIME);
     while (true) {
       try {
@@ -440,6 +440,7 @@ public class CloudMigrationPerHostPage {
       for (WebElement reg : cmpPageObj.regionsList) {
         if (reg.getText().trim().equalsIgnoreCase(region)) {
           userAction.performActionWithPolling(reg, UserAction.CLICK);
+          break;
         }
       }
     }
@@ -461,6 +462,7 @@ public class CloudMigrationPerHostPage {
       for (WebElement storageType : cmpPageObj.dropDownValues) {
         if (storageType.getText().trim().equalsIgnoreCase(storage)) {
           userAction.performActionWithPolling(storageType, UserAction.CLICK);
+          break;
         }
       }
     }

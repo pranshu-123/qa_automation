@@ -18,16 +18,17 @@ public class PageConstants {
     }
 
     public static class TuningScheduleRun {
-        public static String[] SCHEDULE_RUN = {"Daily","Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
-                "Friday","Saturday","Every 2 Weeks","Every Month"};
+        public static String[] SCHEDULE_RUN = {"Daily", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
+                "Friday", "Saturday", "Every 2 Weeks", "Every Month"};
         public static String[] SCHEDULE_CLUSTERID = {"tnode28-HDP315-TLS-Kerb-Ranger", "tnode3-CDH633-TLS-Kerb-Sentry",
                 "tnode40-CDH5162"};
     }
+
     public static class MRHiveKPIs {
         public static String[] KPIS = {"duration", "data i/o", "start time", "end time"};
     }
 
-    public static class MigrationAndServices{
+    public static class MigrationAndServices {
         public static String[] Google_Dataproc = {"Dataproc 2.0.0-Preview", "Dataproc 1.5.13",
                 "Dataproc 1.5.12", "Dataproc 1.5.11"};
         public static String[] Amazon_EMR = {"EMR 6.1.0", "EMR 6.0.0", "EMR 5.31.0", "EMR 5.30.1"};
@@ -43,5 +44,9 @@ public class PageConstants {
         public static String HIVE_TAGGED = "Tagged_HiveWorkflow";
         public static String IMPALA_TAGGED = "Tagged_ImpalaWorkflow";
         public static String SPARK_TAGGED = "Tagged_SparkWorkflow";
+    }
+
+    public static class AppQueue {
+        public static String LLAP = "llap";
     }
 }

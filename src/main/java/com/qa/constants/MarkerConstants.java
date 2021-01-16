@@ -25,6 +25,7 @@ public class MarkerConstants {
     public static final String APP_DETAILS_IMPALA = "app_details_impala";
     public static final String APP_DETAILS_SPARK = "app_details_spark";
     public static final String APP_DETAILS_TEZ = "app_details_tez";
+    public static final String APP_DETAILS_TEZLLAP = "app_details_tezllap";
     public static final String APP_DETAILS_MR = "app_details_mr";
     public static final String INEFFICIENT_APPS = "inefficient_apps";
     public static final String YARN_CHARGEBACK = "yarn_chargeback";
@@ -32,6 +33,7 @@ public class MarkerConstants {
     public static final String CLUSTER_JOBS = "cluster_jobs";
     public static final String CLUSTER_USER_REPORTS = "cluster_user_report";
     public static final String CLUSTER_WORKLOAD = "cluster_workload";
+    public static final String CLUSTER_HBASE = "cluster_hbase";
     public static final String USER_REPORTS = "user_reports";
     public static final String MANAGE = "manage";
     public static final String REPORT_ARCHIEVE = "report_archieve";
@@ -78,6 +80,7 @@ public class MarkerConstants {
         map.put(CLUSTER_JOBS, Marker.ClusterJobs.class);
         map.put(CLUSTER_USER_REPORTS, Marker.ClusterUserReports.class);
         map.put(CLUSTER_WORKLOAD, Marker.ClusterWorkload.class);
+        map.put(CLUSTER_HBASE, Marker.ClusterHBase.class);
         map.put(USER_REPORTS, Marker.UserReports.class);
         map.put(MANAGE, Marker.Manage.class);
         map.put(REPORT_ARCHIEVE, Marker.ReportArchive.class);

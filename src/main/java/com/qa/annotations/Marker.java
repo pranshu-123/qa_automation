@@ -21,6 +21,7 @@ public @interface Marker {
   @interface AppDetailsImpala {}
   @interface AppDetailsSpark {}
   @interface AppDetailsTez {}
+  @interface AppDetailsTezLlap {}
   @interface AppDetailsMr {}
   @interface ReportArchive {}
   @interface InefficientApps {}
@@ -30,6 +31,7 @@ public @interface Marker {
   @interface ClusterJobs {}
   @interface ClusterUserReports {}
   @interface ClusterWorkload {}
+  @interface ClusterHBase {}
   @interface UserReports {}
   @interface Manage {}
   @interface AppDetailsHive {}

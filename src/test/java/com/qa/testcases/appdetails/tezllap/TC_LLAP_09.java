@@ -1,5 +1,6 @@
 package com.qa.testcases.appdetails.tezllap;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.TezLlapAppsDetailsPageObject;
@@ -17,7 +18,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
-
+@Marker.AppDetailsTezLlap
+@Marker.All
 public class TC_LLAP_09 extends BaseClass {
 
     Logger logger = LoggerFactory.getLogger(TC_LLAP_09.class);

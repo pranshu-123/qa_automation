@@ -20,16 +20,16 @@ import org.testng.annotations.Test;
 import java.util.List;
 @Marker.AppDetailsTezLlap
 @Marker.All
-public class TC_LLAP_08 extends BaseClass {
+public class TC_LLAP_15 extends BaseClass {
 
-    Logger logger = LoggerFactory.getLogger(TC_LLAP_08.class);
+    Logger logger = LoggerFactory.getLogger(TC_LLAP_15.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TC_LLAP_08_verifyApplicationNameID(String clusterId) {
-        test = extent.startTest("TC_LLAP_08_verifyApplicationNameID: " + clusterId,
-                "Verify Application Name/ID of the LLAP application");
+    public void TC_LLAP_15_verifyStatusKilled(String clusterId) {
+        test = extent.startTest("TC_LLAP_15_verifyStatusKilled: " + clusterId,
+                "Verify the application \"Status\" displayed in the Application Tab should be - \"Killed\"");
         test.assignCategory(" Apps Details-TezLlap");
-        Log.startTestCase("TC_LLAP_08_verifyApplicationNameID");
+        Log.startTestCase("TC_LLAP_15_verifyStatusKilled");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -47,18 +47,22 @@ public class TC_LLAP_08 extends BaseClass {
                 applicationsPageObject, clusterId);
         test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
 
-        int appCount = tezLlapApps.clickOnlyLink("Tez");
+        int appCount = tezLlapApps.clickOnlyLink("Hive");
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
-        test.log(LogStatus.PASS, "AppCount is " + appCount + " total count is " + totalCount);
-        Assert.assertEquals(appCount, totalCount, "The tez app count of tezApp is not equal to " +
+
+        Assert.assertEquals(appCount, totalCount, "The Hive app count of tezllapp is not equal to " +
                 "the total count of heading.");
-        test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
+        test.log(LogStatus.PASS, "The left pane has Hive check box and the app counts match to that " +
                 "displayed in the header");
 
+        applicationsPageObject.expandStatus.click();
+        int killedCount = tezLlapApps.clickOnlyLink("Killed");
+        test.log(LogStatus.PASS, "Selected killed Count is  " + killedCount + " as Status, In Applications page");
 
-        // Get llap username from table for tez apps
+
+        //  Get llap queuename from table for tez apps
         String upTo10CharQueueName = "llap";
         logger.info("Queue name should be filtered by- " + upTo10CharQueueName);
         waitExecuter.waitUntilPageFullyLoaded();
@@ -82,14 +86,17 @@ public class TC_LLAP_08 extends BaseClass {
         }
 
         /*
-         * Validate Application Name/ID are --
+         * Validate that status types killed are --
          */
         if (appCount > 0) {
-            String Appname = tezLlapApps.verifyAppname(tezLlapPage);
-            test.log(LogStatus.PASS, "Tez App name is displayed in the Table: " + Appname);
-
-            String AppId = tezLlapApps.verifyappId(tezLlapPage);
-            test.log(LogStatus.PASS, "Tez App Id is displayed in the Table: " + AppId);
+            String statusValue = tezLlapApps.verifyAppStatus(tezLlapPage);
+            test.log(LogStatus.PASS, "Hive Tezllap status Value is displayed in the Table: " + statusValue);
+        } else {
+            Assert.assertTrue(tezLlapPage.whenNoApplicationPresent.isDisplayed(),
+                    "The cluster does not have any application under it and also does not display 'No Data Available' for it");
+            test.log(LogStatus.SKIP, "No Hive Tezllap Application present");
         }
     }
 }
+
+

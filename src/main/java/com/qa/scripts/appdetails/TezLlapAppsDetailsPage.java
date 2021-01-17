@@ -210,6 +210,32 @@ public class TezLlapAppsDetailsPage {
         return typeDuration;
     }
 
+    /**
+     * Method to click the first app in jobs table , navigate to the details page.
+     * and verify  Read IO .
+     */
+    public String verifyRead(TezLlapAppsDetailsPageObject tezLlapPage) {
+        String ReadIO = tezLlapPage.getRead.getText();
+        LOGGER.info("Tez Status is " + ReadIO);
+        waitExecuter.sleep(5000);
+        waitExecuter.waitUntilPageFullyLoaded();
+        Assert.assertNotSame("", ReadIO, "Tez User name is not displayed in the Table");
+        return ReadIO;
+    }
+
+    /**
+     * Method to click the first app in jobs table , navigate to the details page.
+     * and verify  Write .
+     */
+    public String verifyWrite(TezLlapAppsDetailsPageObject tezLlapPage) {
+        String WriteIO = tezLlapPage.getWrite.getText();
+        LOGGER.info("Tez Status is " + WriteIO);
+        waitExecuter.sleep(5000);
+        waitExecuter.waitUntilPageFullyLoaded();
+        Assert.assertNotSame("", WriteIO, "Tez User name is not displayed in the Table");
+        return WriteIO;
+    }
+
 
     /**
      * Common steps to navigate to the Jobs page from header.

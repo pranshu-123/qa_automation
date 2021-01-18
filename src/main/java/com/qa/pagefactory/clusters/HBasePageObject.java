@@ -35,4 +35,10 @@ public class HBasePageObject {
     @FindBy(xpath = "//div[contains(@class,'kpi-container')]/div/ul/li/span/a")
     public List<WebElement> hBaseKpiContainers;
 
+    @FindBy(xpath= "//table[@id='hbaseRegionsDataTble']/tbody/tr")
+    public List<WebElement> regionServerTblRows;
+
+    @FindBy(xpath="//table[@id='hbaseRegionsDataTble']")
+    public WebElement hbaseRegionsDataTble;
+
 }

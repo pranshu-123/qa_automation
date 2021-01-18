@@ -166,4 +166,17 @@ public class HBasePage {
         Assert.assertTrue(regionMetricsChartsTablesList.size() >0 , "Region Metrics Charts And Tables not found.");
         logger.info(""+regionMetricsChartsTablesList);
     }
+
+    public void verifyRegionServer(){
+        List<WebElement> hBaseKpiContainersList = hBasePageObject.hBaseKpiContainers;
+        Assert.assertFalse(hBaseKpiContainersList.isEmpty(), "Region Metrics Charts And Tables not found.");
+
+        for(int i=0; i<hBaseKpiContainersList.size() ; i++){
+            if(hBaseKpiContainersList.get(i).getText().equals("Region Server")){
+                MouseActions.clickOnElement(driver, hBaseKpiContainersList.get(i));
+            }
+        }
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hbaseRegionsDataTble);
+        Assert.assertTrue(hBasePageObject.regionServerTblRows.size() > 0, "No data in region server table.");
+    }
 }

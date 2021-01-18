@@ -179,4 +179,35 @@ public class HBasePage {
         waitExecuter.waitUntilElementPresent(hBasePageObject.hbaseRegionsDataTble);
         Assert.assertTrue(hBasePageObject.regionServerTblRows.size() > 0, "No data in region server table.");
     }
+
+    public void verifyRegionServerHealth(){
+        List<WebElement> hBaseRegionSvrHealth = hBasePageObject.hBaseRegionSvrHealth;
+        Assert.assertFalse(hBaseRegionSvrHealth.isEmpty(), "No Health check column found.");
+
+        if(hBaseRegionSvrHealth.get(0).getText().equals("Good")){
+            hBaseRegionSvrHealth.get(0).click();
+        }
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseSvrHealthHeader);
+        Assert.assertTrue(hBasePageObject.hBaseSvrHealthHeader.getText().equals("Server Health and Context"),
+                "'Server Health and Context' header not found");
+
+    }
+
+    public void verifyRegionServerKPIs(){
+        verifyRegionServer();
+        verifyRegionServerHealth();
+
+        List<WebElement> regionSvrKpis = hBasePageObject.regionSvrKpis;
+        Assert.assertFalse(regionSvrKpis.isEmpty(), "HBase region server kpi list is empty");
+        String[] expectedKPIList = {"REQUEST", "STORE FILES", "COMPACT QUEUE LENGTH", "REGION COUNT",
+                "SLOW DELETE", "SLOW GET", "SLOW PUT", "SLOW INCREMENT","SLOW APPEND"};
+
+        for(int i=0; i<regionSvrKpis.size(); i++){
+            String kpiName = regionSvrKpis.get(i).getText();
+            if(kpiName.length()>0){
+                Assert.assertTrue(Arrays.asList(expectedKPIList).contains(kpiName));
+            }
+        }
+    }
+
 }

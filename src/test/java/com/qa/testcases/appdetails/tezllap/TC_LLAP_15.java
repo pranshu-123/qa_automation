@@ -27,7 +27,7 @@ public class TC_LLAP_15 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_LLAP_15_verifyStatusKilled(String clusterId) {
         test = extent.startTest("TC_LLAP_15_verifyStatusKilled: " + clusterId,
-                "Verify the application \"Status\" displayed in the Application Tab should be - \"Killed\"");
+                "Verify the \"Status\" of a killed Hive application");
         test.assignCategory(" Apps Details-TezLlap");
         Log.startTestCase("TC_LLAP_15_verifyStatusKilled");
 

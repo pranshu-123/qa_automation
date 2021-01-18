@@ -23,14 +23,14 @@ import java.util.List;
 @Marker.All
 public class TC_LLAP_16  extends BaseClass {
 
-    Logger logger = LoggerFactory.getLogger(TC_LLAP_07.class);
+    Logger logger = LoggerFactory.getLogger(TC_LLAP_16.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TC_LLAP_07_verifyUser(String clusterId) {
-        test = extent.startTest("TC_LLAP_07_verifyUser: " + clusterId,
-                "Verify User of the LLAP application");
+    public void TC_LLAP_16_verifyUser(String clusterId) {
+        test = extent.startTest("TC_LLAP_16_verifyUser: " + clusterId,
+                "Verify the \"User\" of the Hive application");
         test.assignCategory(" Apps Details-TezLlap");
-        Log.startTestCase("TC_LLAP_07_verifyUser");
+        Log.startTestCase("TC_LLAP_16_verifyUser");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

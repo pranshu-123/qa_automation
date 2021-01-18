@@ -28,7 +28,7 @@ public class TC_LLAP_13 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_LLAP_13_verifyStatusSuccess(String clusterId) {
         test = extent.startTest("TC_LLAP_13_verifyStatusSuccess: " + clusterId,
-                "Verify the application \"Status\" displayed in the Application Tab should be - \"Success\"");
+                "Verify the \"Status\" of a successful Hive application");
         test.assignCategory(" Apps Details-TezLlap");
         Log.startTestCase("TC_LLAP_13_verifyStatusSuccess");
 

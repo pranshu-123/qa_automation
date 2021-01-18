@@ -32,4 +32,7 @@ public class HBasePageObject {
     @FindBy(xpath = "//*[@class='row no-gutters']//div[@class='col-4']/h2")
     public List<WebElement> hBaseClusterKPIValues;
 
+    @FindBy(xpath = "//div[contains(@class,'kpi-container')]/div/ul/li/span/a")
+    public List<WebElement> hBaseKpiContainers;
+
 }

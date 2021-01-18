@@ -53,7 +53,6 @@ public class HBasePage {
         return hBaseClusterList;
     }
 
-
     public List<WebElement> getHBaseClustersElements(){
         waitExecuter.waitUntilElementClickable(hBasePageObject.hBaseClusterDropDown);
         MouseActions.clickOnElement(driver, hBasePageObject.hBaseClusterDropDown);
@@ -153,5 +152,18 @@ public class HBasePage {
             Assert.assertFalse(true, "HBase KPIs count mismatch.");
         }
 
+    }
+
+
+    public void verifyRegionMetricsChartsAndTables(){
+        List<WebElement> hBaseKpiContainersList = hBasePageObject.hBaseKpiContainers;
+        Assert.assertFalse(hBaseKpiContainersList.isEmpty(), "Region Metrics Charts And Tables not found.");
+        List<String> regionMetricsChartsTablesList = new ArrayList<>();
+
+        for(int i=0; i<hBaseKpiContainersList.size() ; i++){
+            regionMetricsChartsTablesList.add(hBaseKpiContainersList.get(i).getText());
+        }
+        Assert.assertTrue(regionMetricsChartsTablesList.size() >0 , "Region Metrics Charts And Tables not found.");
+        logger.info(""+regionMetricsChartsTablesList);
     }
 }

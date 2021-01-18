@@ -20,16 +20,16 @@ import org.testng.annotations.Test;
 import java.util.List;
 @Marker.AppDetailsTezLlap
 @Marker.All
-public class TC_LLAP_08 extends BaseClass {
+public class TC_LLAP_11 extends BaseClass {
 
-    Logger logger = LoggerFactory.getLogger(TC_LLAP_08.class);
+    Logger logger = LoggerFactory.getLogger(TC_LLAP_11.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TC_LLAP_08_verifyApplicationNameID(String clusterId) {
-        test = extent.startTest("TC_LLAP_08_verifyApplicationNameID: " + clusterId,
-                "Verify Application Name/ID of the LLAP application");
+    public void TC_LLAP_11_verifyDataIO(String clusterId) {
+        test = extent.startTest("TC_LLAP_11_verifyDataIO: " + clusterId,
+                "Verify \"Read\" and \"write\" bytes of the LLAP application ");
         test.assignCategory(" Apps Details-TezLlap");
-        Log.startTestCase("TC_LLAP_08_verifyApplicationNameID");
+        Log.startTestCase("TC_LLAP_11_verifyDataIO");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -82,14 +82,20 @@ public class TC_LLAP_08 extends BaseClass {
         }
 
         /*
-         * Validate Application Name/ID are --
+         * Validate the Read/Write IO are --
          */
         if (appCount > 0) {
-            String Appname = tezLlapApps.verifyAppname(tezLlapPage);
-            test.log(LogStatus.PASS, "Tez App name is displayed in the Table: " + Appname);
+            String Read = tezLlapApps.verifyRead(tezLlapPage);
+            test.log(LogStatus.PASS, "Read IO is displayed in the Tez Table: " + Read);
 
-            String AppId = tezLlapApps.verifyappId(tezLlapPage);
-            test.log(LogStatus.PASS, "Tez App Id is displayed in the Table: " + AppId);
+            String Write = tezLlapApps.verifyWrite(tezLlapPage);
+            test.log(LogStatus.PASS, "Write IO is displayed in the Tez Table: " + Write);
+
+        } else {
+            test.log(LogStatus.SKIP, "No Tez Application present");
+            logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +
+                    "of 90 days");
+
         }
     }
 }

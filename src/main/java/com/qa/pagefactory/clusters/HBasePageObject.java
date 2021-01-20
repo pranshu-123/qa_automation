@@ -53,7 +53,19 @@ public class HBasePageObject {
     @FindBy(xpath="//div[contains(@class,'kpi-content')]/div")
     public List<WebElement> regionSvrKpiContent;
 
+    @FindBy(xpath = "//div[@class='container-fluid']//div[contains(@class,'dashboard-module')]")
+    public List<WebElement> hBaseMetrics;
 
+    @FindBy(xpath = "//div[@class='container-fluid']//div[contains(@class,'dashboard-module')]//div[@class='header']/h4")
+    public List<WebElement> hBaseMetricsHeader;
 
+    @FindBy(xpath = "//div[@class='container-fluid']//div[contains(@class,'dashboard-module')]" +
+            "//div[@class='content']//*[name()='g' and @class='highcharts-series-group']")
+    public List<WebElement> hBaseMetricsGraph;
 
+    @FindBy(xpath = "//div[@class='container-fluid']//div[contains(@class,'dashboard-module')]//div[@class='footer']//span")
+    public List<WebElement> hBaseaMetricsFooter;
+
+    @FindBy(xpath="//*[@class='g-two-container']/div/div/h2")
+    public WebElement hBaseMetricsTitle;
 }

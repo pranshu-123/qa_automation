@@ -39,6 +39,13 @@ public class HBasePage {
         return hBasePageObject.hbaseHeader.getText().trim();
     }
 
+    //Verify HBase cluster metrics title
+    public String verifyHBaseClusterMetricsTitle(){
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseMetricsTitle);
+        String hBaseMetricsTitleText = hBasePageObject.hBaseMetricsTitle.getText();
+        return hBaseMetricsTitleText;
+    }
+
     //Method to get all the HBase clusters list
     public List<String> getAllHBaseClusters(){
         waitExecuter.waitUntilElementClickable(hBasePageObject.hBaseClusterDropDown);
@@ -151,9 +158,52 @@ public class HBasePage {
         }else{
             Assert.assertFalse(true, "HBase KPIs count mismatch.");
         }
-
     }
 
+    /***
+     * Method to verify the hBase cluster dropdown
+     * @return String
+     */
+    public String verifyClusterDropDown(HBasePageObject hBasePageObject){
+        waitExecuter.waitUntilElementClickable(hBasePageObject.hBaseClusterDropDown);
+        waitExecuter.sleep(2000);
+        MouseActions.clickOnElement(driver, hBasePageObject.hBaseClusterDropDown);
+        waitExecuter.sleep(2000);
+        List<WebElement> hBaseClusterList = hBasePageObject.hBaseClusters;
+        Assert.assertFalse(hBaseClusterList.isEmpty(), "The drop down list for kafka cluster is empty");
+        String clustername = hBaseClusterList.get(0).getText();
+        MouseActions.clickOnElement(driver, hBaseClusterList.get(0));
+
+        datePicker.clickOnDatePicker();
+        waitExecuter.sleep(1000);
+        datePicker.selectLast30Days();
+        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilPageFullyLoaded();
+
+        return clustername;
+    }
+    /***
+     * Method to verify the kpis of a connected hbase cluster
+     */
+    public void verifyHbaseClusterKPIs(HBasePageObject hBasePageObject, String[] expectedHBaseKPIs){
+        List<WebElement> hBaseKPIList = hBasePageObject.hBaseClusterKPIs;
+        List<WebElement> hBaseKPIValueList = hBasePageObject.hBaseClusterKPIValues;
+
+        Assert.assertFalse(hBaseKPIList.isEmpty() || hBaseKPIValueList.isEmpty(), "HBase cluster KPIs" +
+                " not found.");
+        System.out.println("size of list: "+hBaseKPIList.size());
+        for (int i = 0; i < hBaseKPIList.size(); i++) {
+            String kpiName = hBaseKPIList.get(i).getText();
+            String kpiValue = hBaseKPIValueList.get(i).getText();
+            logger.info("KPI Name: " + kpiName + "\n KPI Value: " + kpiValue);
+            Assert.assertTrue(Arrays.asList(expectedHBaseKPIs).contains(kpiName), "The kpi: [" + kpiName + "] " +
+                    "is not displayed in the UI");
+            //Check if data has only special characters
+            boolean onlySpecialChars = kpiValue.matches("[^a-zA-Z0-9]+");
+            Assert.assertFalse(kpiValue.isEmpty() || onlySpecialChars, "Expected: AlphaNumeric " +
+                    "value for " + kpiName + " Actual: " + kpiValue);
+        }
+    }
 
     public void verifyRegionMetricsChartsAndTables(){
         List<WebElement> hBaseKpiContainersList = hBasePageObject.hBaseKpiContainers;
@@ -209,5 +259,8 @@ public class HBasePage {
             }
         }
     }
+
+
+
 
 }

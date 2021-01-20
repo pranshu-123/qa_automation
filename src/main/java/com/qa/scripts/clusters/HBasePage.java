@@ -6,6 +6,7 @@ import com.qa.scripts.DatePicker;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -13,6 +14,7 @@ import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -23,6 +25,9 @@ public class HBasePage {
     private UserActions actions;
     private DatePicker datePicker;
     private Logger logger = Logger.getLogger(HBasePage.class.getName());
+
+    String xAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]//*[name()='g' and contains(@class,'highcharts-xaxis-labels')]/*[name()='text']";
+    String yAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]//*[name()='g' and contains(@class,'highcharts-yaxis-labels')]/*[name()='text']";
 
     public HBasePage(WebDriver driver){
         this.driver = driver;
@@ -170,7 +175,7 @@ public class HBasePage {
         MouseActions.clickOnElement(driver, hBasePageObject.hBaseClusterDropDown);
         waitExecuter.sleep(2000);
         List<WebElement> hBaseClusterList = hBasePageObject.hBaseClusters;
-        Assert.assertFalse(hBaseClusterList.isEmpty(), "The drop down list for kafka cluster is empty");
+        Assert.assertFalse(hBaseClusterList.isEmpty(), "The drop down list for hbase cluster is empty");
         String clustername = hBaseClusterList.get(0).getText();
         MouseActions.clickOnElement(driver, hBaseClusterList.get(0));
 
@@ -182,6 +187,7 @@ public class HBasePage {
 
         return clustername;
     }
+
     /***
      * Method to verify the kpis of a connected hbase cluster
      */
@@ -203,6 +209,49 @@ public class HBasePage {
             Assert.assertFalse(kpiValue.isEmpty() || onlySpecialChars, "Expected: AlphaNumeric " +
                     "value for " + kpiName + " Actual: " + kpiValue);
         }
+    }
+
+    /***
+     * Method to verify the HBase Metrics KPI Graphs of a connected hbase cluster
+     */
+    public void verifyHBaseKPIGraphs(HBasePageObject hBasePageObject,String expectedMetricsName, String graphId){
+        List<WebElement> metricsKpiList = hBasePageObject.hBaseMetrics;
+        List<WebElement> metricsKpiHeaderList = hBasePageObject.hBaseMetricsHeader;
+        List<WebElement> metricsKpiFooterList = hBasePageObject.hBaseMetricsFooter;
+        List<WebElement> metricsKpiGraphList = hBasePageObject.hBaseMetricsGraph;
+        Assert.assertFalse(metricsKpiList.isEmpty(), "Metrics for hbase cluster is empty");
+        String xAxisPath = "//*[@id='" + graphId + "']" + xAxis;
+        String yAxisPath = "//*[@id='" + graphId + "']" + yAxis;
+
+        for (int i = 0; i < metricsKpiList.size(); i++) {
+            String metricsName = metricsKpiHeaderList.get(i).getText();
+            logger.info("Metrics Name: " + metricsName + " Expected Name: " + expectedMetricsName);
+            if (metricsName.equals(expectedMetricsName)) {
+                Assert.assertFalse(metricsName.isEmpty(), " Metrics Name not displayed");
+                logger.info("Metrics Name: [" + metricsName + "] displayed in the header");
+                waitExecuter.waitUntilElementPresent(metricsKpiGraphList.get(i));
+                Assert.assertTrue(metricsKpiGraphList.get(i).isDisplayed(), "The graph for metrics " + metricsName + " is not displayed");
+                logger.info("The graph for Metrics : [" + metricsName + "] is displayed");
+                Assert.assertTrue(metricsKpiFooterList.get(i).isDisplayed(), "The footer for metrics " + metricsName + " is not displayed");
+                logger.info("The footer for Metrics : [" + metricsName + "] is displayed");
+                verifyAxis(xAxisPath, "X-Axis");
+                verifyAxis(yAxisPath, "Y-Axis");
+            }
+        }
+    }
+
+    public void verifyAxis(String axisPath, String axisName) {
+        List<WebElement> axisPathList = driver.findElements(By.xpath(axisPath));
+        Assert.assertFalse(axisPathList.isEmpty(), "No points plotted on the " + axisName);
+        HashSet<String> axisValSet = new HashSet<>();
+        ArrayList<String> axisValArr = new ArrayList<>();
+        for (int i = 0; i < axisPathList.size(); i++) {
+            axisValArr.add(axisPathList.get(i).getText());
+            axisValSet.add(axisPathList.get(i).getText());
+        }
+        logger.info("Expected " + axisName + " : " + axisValSet + "\n Actual " + axisName + " : " + axisValArr);
+        Assert.assertEquals(axisValSet.size(), axisValArr.size(), "Duplicate values present in the " + axisName + "\n" +
+                "Expected : " + axisValSet + " Actual : " + axisValArr);
     }
 
     public void verifyRegionMetricsChartsAndTables(){

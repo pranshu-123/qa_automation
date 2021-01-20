@@ -64,7 +64,7 @@ public class HBasePageObject {
     public List<WebElement> hBaseMetricsGraph;
 
     @FindBy(xpath = "//div[@class='container-fluid']//div[contains(@class,'dashboard-module')]//div[@class='footer']//span")
-    public List<WebElement> hBaseaMetricsFooter;
+    public List<WebElement> hBaseMetricsFooter;
 
     @FindBy(xpath="//*[@class='g-two-container']/div/div/h2")
     public WebElement hBaseMetricsTitle;

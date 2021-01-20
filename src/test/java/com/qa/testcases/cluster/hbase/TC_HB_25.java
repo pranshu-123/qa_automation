@@ -10,8 +10,6 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.logging.Logger;
 
 @Marker.ClusterHBase
@@ -42,9 +40,18 @@ public class TC_HB_25 extends BaseClass {
         LOGGER.info("HBase Cluster Metrics headers found: " +hBase.verifyHBaseClusterMetricsTitle());
         test.log(LogStatus.INFO, "HBase Cluster Metrics headers found: " +hBase.verifyHBaseClusterMetricsTitle());
 
+        //Verify all Hbase cluster KPIs
         String[] expectedHBaseKPIs = {"Live Region Servers","Dead Region Servers", "Cluster Requests",
                 "Average Load", "RIT Count", "RIT Over Threshold","RIT Oldest Age"};
         hBase.verifyHbaseClusterKPIs(hBasePageObject, expectedHBaseKPIs);
+
+        //Verify all Hbase cluster graph metric
+        String[] expectedHBaseGraphMetrics = {"Total Read Request Count","Total Write Request Count","Total Store File Size",
+        "Total Percent Files Local"};
+        String[] hbaseGraph = {"hbaseGraph0","hbaseGraph1","hbaseGraph2","hbaseGraph3"};
+        for(int i=0 ; i<4; i++){
+            hBase.verifyHBaseKPIGraphs(hBasePageObject,expectedHBaseGraphMetrics[i], hbaseGraph[i]);
+        }
 
         test.log(LogStatus.PASS, "Verified all KPIs information with name and values successfully");
     }

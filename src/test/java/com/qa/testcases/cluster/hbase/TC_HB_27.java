@@ -40,9 +40,22 @@ public class TC_HB_27 extends BaseClass {
         waitExecuter.waitUntilElementPresent(hBasePageObject.hbaseHeader);
         LOGGER.info("HBase headers found: " + hbase.getHBaseHeader());
 
+        //verify tab for metrics, region server and tables
         hbase.verifyRegionMetricsChartsAndTables();
-        LOGGER.info("HBase Region Metrics Charts And Tables found.");
-        test.log(LogStatus.PASS, "Verified metrics, region server and tables on HBase.");
+        LOGGER.info("HBase Region Server Metrics And Tables found.");
+
+        //Verify hbase region server tab
+        hbase.verifyRegionServer();
+
+        //Verify all Hbase cluster graph metric
+        String[] expectedHBaseGraphMetrics = {"Total Read Request Count","Total Write Request Count","Total Store File Size",
+                "Total Percent Files Local"};
+        String[] hbaseGraph = {"hbaseGraph0","hbaseGraph1","hbaseGraph2","hbaseGraph3"};
+        for(int i=0 ; i<4; i++){
+            hbase.verifyHBaseKPIGraphs(hBasePageObject,expectedHBaseGraphMetrics[i], hbaseGraph[i]);
+        }
+        LOGGER.info("HBase Region Server graph charts found.");
+        test.log(LogStatus.PASS, "Verified region server metrics, graph charts and tables on HBase.");
 
 
     }

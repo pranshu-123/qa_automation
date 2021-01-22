@@ -1,11 +1,13 @@
 package com.qa.scripts;
 
+import com.qa.base.BaseClass;
 import com.qa.constants.ConfigConstants;
 import com.qa.enums.UserAction;
 import com.qa.io.ConfigReader;
 import com.qa.pagefactory.HomePageObject;
 import com.qa.pagefactory.LoginPageObject;
 import com.qa.utils.LoggingUtils;
+import com.qa.utils.ScreenshotHelper;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.RetryExecuter;
 import com.qa.utils.actions.UserActions;
@@ -62,6 +64,8 @@ public class Login {
         } catch (RuntimeException runtimeException) {
             LOGGER.info("Login to the application failed. \n" + runtimeException.getStackTrace()
                 ,null);
+            String screenshotImg = ScreenshotHelper.takeScreenshotOfPage(driver);
+            LOGGER.info("Screenshot captured: " + screenshotImg, null);
             try {
                 if (homePageObject.unravelLogo.isDisplayed()) {
                     LOGGER.info("Login failed because user was already logged in. Doing logout then login"

@@ -1,6 +1,5 @@
 package com.qa.scripts.appdetails;
 
-import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.MrAppsDetailsPageObject;
 import com.qa.pagefactory.appsDetailsPage.TezAppsDetailsPageObject;
@@ -14,23 +13,22 @@ import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.testng.Assert;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TezLlapAppsDetailsPage {
 
     private static final java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger(TezAppsDetailsPage.class.getName());
-    private static Boolean isDignosticWin = false;
-    private WaitExecuter waitExecuter;
-    private WebDriver driver;
+    private static final Boolean isDignosticWin = false;
+    private final WaitExecuter waitExecuter;
+    private final WebDriver driver;
     private UserActions actions;
     private TezLlapAppsDetailsPageObject tezLlapPage;
 
@@ -70,7 +68,6 @@ public class TezLlapAppsDetailsPage {
     public void clickOnGroupBySearchBox() {
         JavaScriptExecuter.clickOnElement(driver, tezLlapPage.queueBySearchBox);
     }
-
 
 
     public void selectOptionsInGroupBy(String optionName) {
@@ -225,6 +222,51 @@ public class TezLlapAppsDetailsPage {
 
     /**
      * Method to click the first app in jobs table , navigate to the details page.
+     * and verify  Parent App
+     */
+    public String verifyParentApp(TezLlapAppsDetailsPageObject tezLlapPage) {
+        String ParentApp = tezLlapPage.getParentApp.getText();
+        LOGGER.info("Hive-Tez LLAP Status is " + ParentApp);
+        waitExecuter.sleep(5000);
+        waitExecuter.waitUntilPageFullyLoaded();
+        Assert.assertNotSame("", ParentApp, "Hive-Tez LLAP Parent App is not displayed in the Table");
+        return ParentApp;
+    }
+
+
+    /***
+     * Common Queue dropdown:
+     * * */
+    public void commonQueueValidation(ExtentTest test, Logger logger, String upTo10CharQueueName) {
+
+        // Get llap username from table for tez apps
+        logger.info("Queue name should be filtered by- " + upTo10CharQueueName);
+        waitExecuter.waitUntilPageFullyLoaded();
+        if (!upTo10CharQueueName.trim().isEmpty() || !upTo10CharQueueName.trim().equals("-")) {
+            tezLlapPage.queueSearchBox.click();
+            waitExecuter.waitUntilPageFullyLoaded();
+            tezLlapPage.queueSearchBox.sendKeys(upTo10CharQueueName);
+            waitExecuter.waitUntilPageFullyLoaded();
+            List<WebElement> queueList = tezLlapPage.getNamesFromDropDown;
+            String queuenameSelected = null;
+            if (!upTo10CharQueueName.isEmpty() || !upTo10CharQueueName.equals("_"))
+                for (int i = 0; i < queueList.size(); i++) {
+                    if (queueList.get(i).getText().equals(upTo10CharQueueName)) {
+                        queuenameSelected = queueList.get(i).getText();
+                        logger.info("Selected username from dropdown " + queuenameSelected);
+                        test.log(LogStatus.PASS, "Queue name should be filtered by- " + queuenameSelected);
+                        queueList.get(i).click();
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        break;
+                    }
+
+                }
+        }
+    }
+
+
+    /**
+     * Method to click the first app in jobs table , navigate to the details page.
      * and verify  Write .
      */
     public String verifyWrite(TezLlapAppsDetailsPageObject tezLlapPage) {
@@ -249,10 +291,10 @@ public class TezLlapAppsDetailsPage {
         // Navigate to Jobs tab from header
         LOGGER.info("Navigate to jobs tab from header");
         waitExecuter.waitUntilElementClickable(topPanelObj.jobs);
-        waitExecuter.sleep(2000);
+        waitExecuter.sleep(3000);
         topPanelObj.jobs.click();
-        waitExecuter.sleep(2000);
         waitExecuter.waitUntilElementPresent(appPageObj.jobsPageHeader);
+        waitExecuter.sleep(3000);
         waitExecuter.waitUntilPageFullyLoaded();
 
         //Select cluster
@@ -353,6 +395,7 @@ public class TezLlapAppsDetailsPage {
                     "of 90 days");
         }
     }
+
 
     /**
      * Verify that Left pane must be opened and should have KPIs listed

@@ -110,6 +110,9 @@ public class TezLlapAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[9]")
     public WebElement getRead;
 
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[9]")
+    public WebElement getParentApp;
+
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[10]")
     public WebElement getWrite;
 

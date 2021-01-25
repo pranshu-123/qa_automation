@@ -279,6 +279,40 @@ public class HBasePage {
         Assert.assertTrue(hBasePageObject.regionServerTblRows.size() > 0, "No data in region server table.");
     }
 
+    public void verifyRegionSeverNames(){
+        List<WebElement> hBaseRegionSvrNames = hBasePageObject.hBaseRegionSvrName;
+        Assert.assertFalse(hBaseRegionSvrNames.isEmpty(), "No Region server name found.");
+
+        List<String> regionSeverNamesList = new ArrayList<>();
+        for(int i=0; i<hBaseRegionSvrNames.size() ; i++){
+            regionSeverNamesList.add(hBaseRegionSvrNames.get(i).getText());
+        }
+        Assert.assertTrue(regionSeverNamesList.size() >0, "No Region server name found");
+        logger.info("All Region Server Names: "+ regionSeverNamesList);
+    }
+
+    public void verifyTableNamesInRegionServer(){
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseFirstRegionSvr);
+        String regionName = hBasePageObject.hBaseFirstRegionSvr.getText();
+        MouseActions.clickOnElement(driver,hBasePageObject.hBaseFirstRegionSvr);
+
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseRegionSvrTable);
+        List<WebElement> hBaseRegionSvrTableNames = hBasePageObject.hBaseRegionSvrTableNames;
+        Assert.assertFalse(hBaseRegionSvrTableNames.isEmpty(), "No Tables found for region server.");
+
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseRegionSvrTableHeaderName);
+        String regionSvrTableName = hBasePageObject.hBaseRegionSvrTableHeaderName.getText();
+        logger.info("Region server Table header name: "+ regionSvrTableName);
+
+        List<String> regionSvrTableNames = new ArrayList<>();
+        for(int i=0; i<hBaseRegionSvrTableNames.size(); i++){
+            regionSvrTableNames.add(hBaseRegionSvrTableNames.get(i).getText());
+        }
+        Assert.assertTrue(regionSvrTableNames.size()> 0, "No Tables found for region server.");
+        logger.info("All table names in region server: "+ regionName +" are - "+ regionSvrTableNames);
+    }
+
+
     public void verifyRegionServerHealth(){
         List<WebElement> hBaseRegionSvrHealth = hBasePageObject.hBaseRegionSvrHealth;
         Assert.assertFalse(hBaseRegionSvrHealth.isEmpty(), "No Health check column found.");

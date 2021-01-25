@@ -14,16 +14,16 @@ import java.util.logging.Logger;
 
 @Marker.ClusterHBase
 @Marker.All
-public class TC_HB_39 extends BaseClass {
+public class TC_HB_42 extends BaseClass {
 
-    private static final Logger LOGGER = Logger.getLogger(TC_HB_39.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TC_HB_42.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void verifyPercentFilesLocalAndGraph (String clusterId) {
-        test = extent.startTest("TC_HB_39.verifyPercentFilesLocalAndGraph",
-                "Verify percentFilesLocal metrics and graph.");
+    public void verifyTablesInARegionServer (String clusterId) {
+        test = extent.startTest("TC_HB_42.verifyTablesInARegionServer",
+                "Verify all column values in table metrics.");
         test.assignCategory(" Cluster - HBasePage ");
-        Log.startTestCase("TC_HB_39.verifyPercentFilesLocalAndGraph");
+        Log.startTestCase("TC_HB_42.verifyTablesInARegionServer");
 
         // Initialize all classes objects
         LOGGER.info("Initialize all class objects");
@@ -38,23 +38,19 @@ public class TC_HB_39 extends BaseClass {
         waitExecuter.waitUntilElementPresent(hBasePageObject.hbaseHeader);
         LOGGER.info("HBase headers found: " + hbase.getHBaseHeader());
 
-        //verify tab for metrics, region server and tables
-        hbase.verifyRegionMetricsChartsAndTables();
-        LOGGER.info("HBase Region Server Metrics And Tables found.");
-
         //Click on 'Region Server' and verify hbase region server tab
         hbase.verifyRegionServer();
 
-        //Verify Hbase cluster graph metric
-        String expectedHBaseGraphMetrics = "Total Percent Files Local";
-        String hbaseGraph = "hbaseGraph3";
-        hbase.verifyHBaseKPIGraphs(hBasePageObject,expectedHBaseGraphMetrics, hbaseGraph);
+        //Verify region server names
+        hbase.verifyRegionSeverNames();
+        LOGGER.info("Verified HBase region server names.");
+        test.log(LogStatus.PASS, "Verified HBase region server names.");
 
-        LOGGER.info("HBase percentFilesLocal metrics and graph found.");
-        test.log(LogStatus.PASS, "Verified region server percentFilesLocal metrics and graph on HBase.");
+        //Verify Tables in a region server
+        hbase.verifyTableNamesInRegionServer();
+        LOGGER.info("Verified all table name of a HBase region server.");
+        test.log(LogStatus.PASS, "Verified table names of a HBase region server.");
 
 
     }
 }
-
-

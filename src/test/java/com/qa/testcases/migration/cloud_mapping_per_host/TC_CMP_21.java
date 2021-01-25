@@ -1,5 +1,6 @@
 package com.qa.testcases.migration.cloud_mapping_per_host;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.constants.CloudMappingHostConstants;
 import com.qa.enums.UserAction;
@@ -22,6 +23,8 @@ import java.util.Map;
 /**
  * @author Ankur Jaiswal
  */
+@Marker.CloudMappingPerHost
+@Marker.All
 public class TC_CMP_21 extends BaseClass {
     private final static LoggingUtils LOGGER = new LoggingUtils(TC_CMP_21.class);
 

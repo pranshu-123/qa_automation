@@ -43,5 +43,5 @@ public @interface Marker {
   @interface Only{}
   @interface MigrationClusterDiscovery {}
   @interface WorkloadFit {}
-
+  @interface CloudMappingPerHost {}
 }

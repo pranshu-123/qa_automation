@@ -1,5 +1,6 @@
 package com.qa.testcases.migration.cloud_mapping_per_host;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
@@ -13,6 +14,8 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
+@Marker.CloudMappingPerHost
+@Marker.All
 public class TC_CMP_02 extends BaseClass {
   private static final Logger LOGGER = Logger.getLogger(com.qa.testcases.migration.cloud_mapping_per_host.TC_CMP_02.class.getName());
 
@@ -20,7 +23,7 @@ public class TC_CMP_02 extends BaseClass {
   public void verifyVMTypesForEMR(String clusterId) {
     test = extent.startTest("verifyVMTypesForEMR: " + clusterId,
         "Verify Unravel UI displays the right VM types for EMR.");
-    test.assignCategory(" Migration/Cloud Mappig Per Host ");
+    test.assignCategory("Migration/Cloud Mapping Per Host");
     Log.startTestCase("verifyVMTypesForEMR");
 
     // Initialize all classes objects

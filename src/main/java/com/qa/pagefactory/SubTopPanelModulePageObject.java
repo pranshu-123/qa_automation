@@ -56,6 +56,15 @@ public class SubTopPanelModulePageObject {
     @FindBy(xpath = "//li[contains(@class,'active')]//ul[@class='sub-menu']//span[text()='Workload Fit']")
     public WebElement WorkloadFitTab;
 
+    @FindBy(xpath = "(//ul[@class='sub-menu']/li/span[text()='Pipelines'])[2]")
+    public WebElement jobsPipelinesTab;
+
+    @FindBy(xpath = "(//span[contains(@class,'icon-jobs')]//following::li/span[text()='Applications'])[1]")
+    public WebElement applicationTab;
+
+    @FindBy(id = "apps-global-search-filter")
+    public WebElement globalSearch;
+
     /**
      * @param driver The driver that will be used to look up the elements
      */

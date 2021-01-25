@@ -1,7 +1,9 @@
 package com.qa.scripts;
 
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.CommonPageObject;
 import com.qa.utils.MouseActions;
+import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -16,8 +18,12 @@ public class CommonComponent {
    */
   public static void closeModalIfExists(WebDriver driver) {
     CommonPageObject commonPageObject = new CommonPageObject(driver);
+    UserActions actions = new UserActions(driver);
     if (commonPageObject.closeModalButton.size() > 0) {
-      MouseActions.clickOnElement(driver, commonPageObject.closeModalButton.get(0));
+      actions.performActionWithPolling(commonPageObject.closeModalButton.get(0), UserAction.CLICK);
+    }
+    else if(commonPageObject.closeAppModalButton.size() > 0) {
+      actions.performActionWithPolling(commonPageObject.closeAppModalButton.get(0), UserAction.CLICK);
     }
   }
 }

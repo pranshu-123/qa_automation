@@ -108,4 +108,19 @@ public class DateUtils {
 		return pastDate;
 	}
 
+	/**
+	 * Convert the date string into date format
+	 * @param dateStr - Date String to pass
+	 * @return - Return the converted date
+	 */
+	public static Date getDateWithDateString(String dateStr) {
+		Date convertedDate = null;
+		dateFormatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+		try {
+			convertedDate = dateFormatter.parse(dateStr);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return convertedDate;
+	}
 }

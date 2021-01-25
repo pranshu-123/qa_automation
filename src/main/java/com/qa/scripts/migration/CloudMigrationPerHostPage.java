@@ -1,8 +1,10 @@
 package com.qa.scripts.migration;
 
+import com.qa.constants.CloudMappingHostConstants;
 import com.qa.enums.migration.CloudProduct;
 import com.qa.enums.UserAction;
-import com.qa.enums.migration.MigrationCloudMappingTable;
+import com.qa.enums.migration.MigrationCloudMappingModalTable;
+import com.qa.enums.migration.MigrationCloudMappingHostDetailsTable;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.migration.CloudMappingPerHostPageObject;
 import com.qa.utils.MouseActions;
@@ -15,11 +17,9 @@ import org.testng.Assert;
 import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.logging.Logger;
+import java.util.stream.IntStream;
 
 public class CloudMigrationPerHostPage {
   private WaitExecuter waitExecuter;
@@ -382,11 +382,12 @@ public class CloudMigrationPerHostPage {
     final Duration MAX_POLLING_TIME = Duration.ofMillis(180000);
     Instant end = clock.instant().plus(MAX_POLLING_TIME);
     while (true) {
+      List<WebElement> loaderElement = cmpPageObj.loaderElement;
       try {
-        if (cmpPageObj.loaderElement.size() == 0) {
+        if (loaderElement.size() == 0) {
           return;
-        } else if (cmpPageObj.loaderElement.size() > 0 &&
-            !cmpPageObj.loaderElement.get(0).isDisplayed()) {
+        } else if ((loaderElement.size() > 0 &&
+            !loaderElement.get(0).isDisplayed())) {
           return;
         } else if (end.isBefore(clock.instant())) {
           throw new TimeoutException("Page is not loaded. Loader is still running");
@@ -416,7 +417,7 @@ public class CloudMigrationPerHostPage {
    * Verify cloud mapping table column
    * @param table
    */
-  public void verifyCloudMappingHostTableColumn(MigrationCloudMappingTable table) {
+  public void verifyCloudMappingHostTableColumn(MigrationCloudMappingModalTable table) {
     List<WebElement> tableRows = cmpPageObj.tableRows;
     for (WebElement row : tableRows) {
       String colValue = row.findElement(By.xpath("td[" + table.getIndex() + 1 + "]")).getText();
@@ -473,7 +474,7 @@ public class CloudMigrationPerHostPage {
    * @param column - Column which we want to get values for all rows
    * @return - List of values as String
    */
-  public List<String> getColumnValuesFromTable(MigrationCloudMappingTable column) {
+  public List<String> getColumnValuesFromModalTable(MigrationCloudMappingModalTable column) {
     List<String> columnValues = new ArrayList<>();
     List<WebElement> tableRows = cmpPageObj.tableRows;
     for (WebElement row : tableRows) {
@@ -481,5 +482,126 @@ public class CloudMigrationPerHostPage {
       columnValues.add(colValue);
     }
     return columnValues;
+  }
+
+  /**
+   * Check uncheck table
+   */
+  public void checkUncheckColumn(Boolean uncheck) {
+      WebElement tableHeadings = cmpPageObj.tableHeadings;
+      WebElement rowCheckbox =
+            tableHeadings.findElement(By.xpath("th[" + (MigrationCloudMappingModalTable.CHECKBOX.getIndex() + 1) +
+            "]")).findElement(By.xpath("label/span[@class='checkmark']"));
+      if (uncheck) {
+          while (cmpPageObj.activeCheckBoxes.size() != 0) {
+              userAction.performActionWithPolling(rowCheckbox, UserAction.CLICK);
+          }
+      } else {
+          while (cmpPageObj.activeCheckBoxes.size() == 0) {
+              userAction.performActionWithPolling(rowCheckbox, UserAction.CLICK);
+          }
+      }
+  }
+  /**
+   * Get list of checkbox
+   */
+  public List<WebElement> getCheckboxListForTable() {
+    List<WebElement> checkboxList = new ArrayList<>();
+    List<WebElement> tableRows = cmpPageObj.tableRows;
+    for (WebElement row : tableRows) {
+      WebElement rowCheckbox = row.findElement(By.xpath("td[" + (MigrationCloudMappingModalTable.CHECKBOX.getIndex() + 1) +
+          "]")).findElement(By.xpath("label/span[@class='checkmark']"));
+      checkboxList.add(rowCheckbox);
+    }
+    return checkboxList;
+  }
+
+  /**
+   * Get confimation message element
+   */
+  public WebElement getConfirmationMessage() {
+    return cmpPageObj.confirmationMessageElement;
+  }
+
+    /**
+     * Get the values from cloud mapping per host tables
+     */
+
+    public List getDataFromCloudMappingTable(MigrationCloudMappingHostDetailsTable tableColumn) {
+        List values = new ArrayList();
+        List<WebElement> tableRows = cmpPageObj.cloudMappingHostDetailsTableRows;
+        for (WebElement row : tableRows) {
+            WebElement columnElement = row.findElement(By.xpath("td[" + (tableColumn.getIndex() + 1) + "]"));
+            switch (tableColumn) {
+                case HOST:
+                    values.add(columnElement.getText());
+                    break;
+                case HOST_ROLES:
+                    List<String> hostRoles = new ArrayList<>();
+                    for (WebElement hostRole : columnElement.findElements(By.xpath("ul/li"))) {
+                        hostRoles.add(hostRole.getText());
+                    }
+                    values.add(hostRoles);
+                    break;
+                case ACTUAL_USAGE:
+                    List<WebElement> usages = columnElement.findElements(By.xpath("table/tr"));
+                    Map<String, String> details = new HashMap<>();
+                    for (WebElement usage : usages) {
+                        details.put(usage.findElements(By.tagName("td")).get(0).getText(),
+                            usage.findElements(By.tagName("td")).get(1).getText());
+                    }
+                    values.add(details);
+                    break;
+                case CAPACITY:
+                    List<WebElement> capacities = columnElement.findElements(By.xpath("table/tr"));
+                    Map<String, String> capacityDetails = new HashMap<>();
+                    for (WebElement capacity : capacities) {
+                      capacityDetails.put(capacity.findElements(By.tagName("td")).get(0).getText(),
+                          capacity.findElements(By.tagName("td")).get(1).getText());
+                    }
+                    values.add(capacityDetails);
+                    break;
+                case RECOMMENDATION:
+                    List<WebElement> recommendations = columnElement.findElements(By.xpath("table/tr"));
+                    Map<String, Object> recommendationDetails = new HashMap<>();
+                    for (int i=0; i<recommendations.size(); i++) {
+                        WebElement recommendation = recommendations.get(i);
+                        WebElement tableDataElement = recommendation.findElements(By.tagName("td")).get(0);
+                        if (i == recommendations.size()-1) {
+                            Map<String, String> innerTableDetails = new HashMap<>();
+                            List<WebElement> tableHeadings = tableDataElement.findElements(By.xpath("table/thead/tr/th"));
+                            List<WebElement> tableData = tableDataElement.findElements(By.xpath("table/tbody/tr/td"));
+                            for (int j=0; j<tableHeadings.size(); j++) {
+                                innerTableDetails.put(tableHeadings.get(j).getText(), tableData.get(j).getText());
+                            }
+                            recommendationDetails.put(CloudMappingHostConstants.HostDetails.RecommendedUsages.DETAILS,
+                                innerTableDetails);
+                        } else {
+                            recommendationDetails.put(recommendation.findElements(By.tagName("td")).get(0).getText(),
+                                recommendation.findElements(By.tagName("td")).get(1).getText());
+                        }
+                    }
+                    values.add(recommendationDetails);
+                    break;
+                case TOTAL_COST:
+                    values.add(columnElement.getText());
+                    break;
+            }
+        }
+        return values;
+    }
+
+  /**
+   * Get total hourly cost value
+   */
+  public Double getTotoalHourlyCostValue() {
+      return Double.parseDouble(cmpPageObj.totalHourlyCostValue.getText().replace("$", ""));
+  }
+
+  /**
+   * Click on COST REDUCTION tab
+   */
+  public void clickOnCostReductionTab() {
+      userAction.performActionWithPolling(cmpPageObj.costReductionTab, UserAction.CLICK);
   }
 }

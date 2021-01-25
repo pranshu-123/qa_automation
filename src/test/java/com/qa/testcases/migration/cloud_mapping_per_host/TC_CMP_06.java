@@ -2,7 +2,7 @@ package com.qa.testcases.migration.cloud_mapping_per_host;
 
 import com.qa.base.BaseClass;
 import com.qa.enums.migration.CloudProduct;
-import com.qa.enums.migration.MigrationCloudMappingTable;
+import com.qa.enums.migration.MigrationCloudMappingModalTable;
 import com.qa.scripts.migration.CloudMigrationPerHostPage;
 import com.qa.utils.LoggingUtils;
 import org.testng.annotations.Test;
@@ -28,7 +28,7 @@ public class TC_CMP_06 extends BaseClass {
         LOGGER.info("Select HDI as cloud product", test);
         cloudMigrationPerHostPage.selectCloudProduct(CloudProduct.AZURE_HD_INSIGHT);
         cloudMigrationPerHostPage.waitTillLoaderPresent();
-        cloudMigrationPerHostPage.verifyCloudMappingHostTableColumn(MigrationCloudMappingTable.VM_TYPE);
+        cloudMigrationPerHostPage.verifyCloudMappingHostTableColumn(MigrationCloudMappingModalTable.VM_TYPE);
         LOGGER.pass("Verified VM types", test);
     }
 }

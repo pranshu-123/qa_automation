@@ -11,7 +11,7 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//li[contains(@class,'router-link-exact-active')]//span[contains(text(),'Cloud Mapping Per Host')]")
   public WebElement cloudMappingPerHostTab;
 
-  @FindBy(xpath = "//div[contains(@class,'component-cta')]//span[contains(text(),'Run')]")
+  @FindBy(xpath = "(//span[contains(text(),'Run')]/parent::a)[last()]")
   public WebElement runButton;
 
   @FindBy(xpath = "//div[contains(@class,'component-section-header')]//span[contains(text(),'Run')]")
@@ -124,8 +124,26 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//div[@class='table-container']//tbody/tr")
   public List<WebElement> tableRows;
 
+  @FindBy(xpath = "//div[@class='table-container']//thead/tr")
+  public WebElement tableHeadings;
+
+  @FindBy(xpath = "//label[contains(@class,'checkbox active')]")
+  public List<WebElement> activeCheckBoxes;
+
   @FindBy(xpath = "//label[contains(text(),'Storage Type')]/parent::div//span[contains(@class,'select2-selection__rendered')]")
   public WebElement storageTypeDropdown;
+
+  @FindBy(xpath = "(//table[@class='component-data-tables'])[2]/tbody/tr")
+  public List<WebElement> cloudMappingHostDetailsTableRows;
+
+  @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
+  public WebElement confirmationMessageElement;
+
+  @FindBy(xpath = "//span[contains(text(), 'Total Hourly Cost :')]/parent::div/following-sibling::b")
+  public WebElement totalHourlyCostValue;
+
+  @FindBy(xpath = "//span[contains(text(),'COST REDUCTION')]")
+  public WebElement costReductionTab;
 
   /**
    * @param driver The driver that will be used to look up the elements

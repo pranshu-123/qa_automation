@@ -1,7 +1,7 @@
 package com.qa.testcases.migration.cloud_mapping_per_host;
 
 import com.qa.base.BaseClass;
-import com.qa.enums.migration.MigrationCloudMappingTable;
+import com.qa.enums.migration.MigrationCloudMappingModalTable;
 import com.qa.scripts.migration.CloudMigrationPerHostPage;
 import com.qa.utils.LoggingUtils;
 import com.relevantcodes.extentreports.LogStatus;
@@ -32,11 +32,11 @@ public class TC_CMP_08 extends BaseClass {
         LOGGER.info("Select first storage.", test);
         cloudMigrationPerHostPage.selectStorage("Object storage");
         cloudMigrationPerHostPage.waitTillLoaderPresent();
-        List<String> value1 = cloudMigrationPerHostPage.getColumnValuesFromTable(MigrationCloudMappingTable.COST);
+        List<String> value1 = cloudMigrationPerHostPage.getColumnValuesFromModalTable(MigrationCloudMappingModalTable.COST);
         LOGGER.info("Select second storage.", test);
         cloudMigrationPerHostPage.selectStorage("Local attached storage");
         cloudMigrationPerHostPage.waitTillLoaderPresent();
-        List<String> value2 = cloudMigrationPerHostPage.getColumnValuesFromTable(MigrationCloudMappingTable.COST);
+        List<String> value2 = cloudMigrationPerHostPage.getColumnValuesFromModalTable(MigrationCloudMappingModalTable.COST);
         Assert.assertNotEquals(value1, value2, "Cost/Hour is same for different storage.");
         test.log(LogStatus.PASS, "Validated the cost/hour changes according to different storage successfully.");
     }

@@ -119,6 +119,7 @@ public class JobsWorkflow {
             LOGGER.info("Close the workflow details page.");
             userActions.performActionWithPolling(workflow.close, UserAction.CLICK);
             waitExecutor.waitUntilElementClickable(workflow.globalSearch);
+            break;
         }
         return WFLIds;
     }
@@ -142,6 +143,7 @@ public class JobsWorkflow {
             waitExecutor.waitUntilElementClickable(workflow.close);
             userActions.performActionWithPolling(workflow.close, UserAction.CLICK);
             waitExecutor.waitUntilElementClickable(workflow.globalSearch);
+            break;
         }
     }
 

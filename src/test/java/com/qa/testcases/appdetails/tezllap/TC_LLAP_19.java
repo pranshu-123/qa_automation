@@ -73,6 +73,8 @@ public class TC_LLAP_19 extends BaseClass {
                     if (queueList.get(i).getText().equals(upTo10CharQueueName)) {
                         queuenameSelected = queueList.get(i).getText();
                         logger.info("Selected username from dropdown " + queuenameSelected);
+                        Assert.assertEquals(upTo10CharQueueName, queuenameSelected, "Queue name should be filtered by " +
+                                "the total count in the dropdown.");
                         test.log(LogStatus.PASS, "Queue name should be filtered by- " + queuenameSelected);
                         queueList.get(i).click();
                         waitExecuter.waitUntilPageFullyLoaded();

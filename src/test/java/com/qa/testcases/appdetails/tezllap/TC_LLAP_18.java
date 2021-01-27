@@ -83,7 +83,6 @@ public class TC_LLAP_18 extends BaseClass {
 
         //click on cluster search field
         applicationsPageObject.clusterIdsearchfield.click();
-        System.out.println("All clusterId size: " + applicationsPageObject.clusterIdsList.size());
         test.log(LogStatus.INFO, "All clusterId count: " + applicationsPageObject.clusterIdsList.size());
         test.log(LogStatus.PASS, "Validated cluster filter in UI");
     }

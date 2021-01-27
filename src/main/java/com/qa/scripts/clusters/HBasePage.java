@@ -197,7 +197,7 @@ public class HBasePage {
 
         Assert.assertFalse(hBaseKPIList.isEmpty() || hBaseKPIValueList.isEmpty(), "HBase cluster KPIs" +
                 " not found.");
-        System.out.println("size of list: "+hBaseKPIList.size());
+
         for (int i = 0; i < hBaseKPIList.size(); i++) {
             String kpiName = hBaseKPIList.get(i).getText();
             String kpiValue = hBaseKPIValueList.get(i).getText();

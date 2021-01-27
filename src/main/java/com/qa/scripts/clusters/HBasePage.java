@@ -6,6 +6,7 @@ import com.qa.scripts.DatePicker;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -13,6 +14,7 @@ import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -23,6 +25,9 @@ public class HBasePage {
     private UserActions actions;
     private DatePicker datePicker;
     private Logger logger = Logger.getLogger(HBasePage.class.getName());
+
+    String xAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]//*[name()='g' and contains(@class,'highcharts-xaxis-labels')]/*[name()='text']";
+    String yAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]//*[name()='g' and contains(@class,'highcharts-yaxis-labels')]/*[name()='text']";
 
     public HBasePage(WebDriver driver){
         this.driver = driver;
@@ -37,6 +42,13 @@ public class HBasePage {
         waitExecuter.waitUntilElementPresent(hBasePageObject.hbaseHeader);
         waitExecuter.waitUntilPageFullyLoaded();
         return hBasePageObject.hbaseHeader.getText().trim();
+    }
+
+    //Verify HBase cluster metrics title
+    public String verifyHBaseClusterMetricsTitle(){
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseMetricsTitle);
+        String hBaseMetricsTitleText = hBasePageObject.hBaseMetricsTitle.getText();
+        return hBaseMetricsTitleText;
     }
 
     //Method to get all the HBase clusters list
@@ -151,9 +163,96 @@ public class HBasePage {
         }else{
             Assert.assertFalse(true, "HBase KPIs count mismatch.");
         }
-
     }
 
+    /***
+     * Method to verify the hBase cluster dropdown
+     * @return String
+     */
+    public String verifyClusterDropDown(HBasePageObject hBasePageObject){
+        waitExecuter.waitUntilElementClickable(hBasePageObject.hBaseClusterDropDown);
+        waitExecuter.sleep(2000);
+        MouseActions.clickOnElement(driver, hBasePageObject.hBaseClusterDropDown);
+        waitExecuter.sleep(2000);
+        List<WebElement> hBaseClusterList = hBasePageObject.hBaseClusters;
+        Assert.assertFalse(hBaseClusterList.isEmpty(), "The drop down list for hbase cluster is empty");
+        String clustername = hBaseClusterList.get(0).getText();
+        MouseActions.clickOnElement(driver, hBaseClusterList.get(0));
+
+        datePicker.clickOnDatePicker();
+        waitExecuter.sleep(1000);
+        datePicker.selectLast30Days();
+        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilPageFullyLoaded();
+
+        return clustername;
+    }
+
+    /***
+     * Method to verify the kpis of a connected hbase cluster
+     */
+    public void verifyHbaseClusterKPIs(HBasePageObject hBasePageObject, String[] expectedHBaseKPIs){
+        List<WebElement> hBaseKPIList = hBasePageObject.hBaseClusterKPIs;
+        List<WebElement> hBaseKPIValueList = hBasePageObject.hBaseClusterKPIValues;
+
+        Assert.assertFalse(hBaseKPIList.isEmpty() || hBaseKPIValueList.isEmpty(), "HBase cluster KPIs" +
+                " not found.");
+
+        for (int i = 0; i < hBaseKPIList.size(); i++) {
+            String kpiName = hBaseKPIList.get(i).getText();
+            String kpiValue = hBaseKPIValueList.get(i).getText();
+            logger.info("KPI Name: " + kpiName + "\n KPI Value: " + kpiValue);
+            Assert.assertTrue(Arrays.asList(expectedHBaseKPIs).contains(kpiName), "The kpi: [" + kpiName + "] " +
+                    "is not displayed in the UI");
+            //Check if data has only special characters
+            boolean onlySpecialChars = kpiValue.matches("[^a-zA-Z0-9]+");
+            Assert.assertFalse(kpiValue.isEmpty() || onlySpecialChars, "Expected: AlphaNumeric " +
+                    "value for " + kpiName + " Actual: " + kpiValue);
+        }
+    }
+
+    /***
+     * Method to verify the HBase Metrics KPI Graphs of a connected hbase cluster
+     */
+    public void verifyHBaseKPIGraphs(HBasePageObject hBasePageObject,String expectedMetricsName, String graphId){
+        List<WebElement> metricsKpiList = hBasePageObject.hBaseMetrics;
+        List<WebElement> metricsKpiHeaderList = hBasePageObject.hBaseMetricsHeader;
+        List<WebElement> metricsKpiFooterList = hBasePageObject.hBaseMetricsFooter;
+        List<WebElement> metricsKpiGraphList = hBasePageObject.hBaseMetricsGraph;
+        Assert.assertFalse(metricsKpiList.isEmpty(), "Metrics for hbase cluster is empty");
+        String xAxisPath = "//*[@id='" + graphId + "']" + xAxis;
+        String yAxisPath = "//*[@id='" + graphId + "']" + yAxis;
+
+        for (int i = 0; i < metricsKpiList.size(); i++) {
+            String metricsName = metricsKpiHeaderList.get(i).getText();
+            logger.info("Metrics Name: " + metricsName + " Expected Name: " + expectedMetricsName);
+            if (metricsName.equals(expectedMetricsName)) {
+                Assert.assertFalse(metricsName.isEmpty(), " Metrics Name not displayed");
+                logger.info("Metrics Name: [" + metricsName + "] displayed in the header");
+                waitExecuter.waitUntilElementPresent(metricsKpiGraphList.get(i));
+                Assert.assertTrue(metricsKpiGraphList.get(i).isDisplayed(), "The graph for metrics " + metricsName + " is not displayed");
+                logger.info("The graph for Metrics : [" + metricsName + "] is displayed");
+                Assert.assertTrue(metricsKpiFooterList.get(i).isDisplayed(), "The footer for metrics " + metricsName + " is not displayed");
+                logger.info("The footer for Metrics : [" + metricsName + "] is displayed");
+                verifyAxis(xAxisPath, "X-Axis");
+                verifyAxis(yAxisPath, "Y-Axis");
+            }
+        }
+    }
+
+    public void verifyAxis(String axisPath, String axisName) {
+        List<WebElement> axisPathList = driver.findElements(By.xpath(axisPath));
+        Assert.assertFalse(axisPathList.isEmpty(), "No points plotted on the " + axisName);
+        HashSet<String> axisValSet = new HashSet<>();
+        ArrayList<String> axisValArr = new ArrayList<>();
+        for (int i = 0; i < axisPathList.size(); i++) {
+            axisValArr.add(axisPathList.get(i).getText());
+            axisValSet.add(axisPathList.get(i).getText());
+        }
+        logger.info("Expected " + axisName + " : " + axisValSet + "\n Actual " + axisName + " : " + axisValArr);
+        Assert.assertEquals(axisValSet.size(), axisValArr.size(), "Duplicate values present in the " + axisName + "\n" +
+                "Expected : " + axisValSet + " Actual : " + axisValArr);
+    }
 
     public void verifyRegionMetricsChartsAndTables(){
         List<WebElement> hBaseKpiContainersList = hBasePageObject.hBaseKpiContainers;
@@ -179,6 +278,40 @@ public class HBasePage {
         waitExecuter.waitUntilElementPresent(hBasePageObject.hbaseRegionsDataTble);
         Assert.assertTrue(hBasePageObject.regionServerTblRows.size() > 0, "No data in region server table.");
     }
+
+    public void verifyRegionSeverNames(){
+        List<WebElement> hBaseRegionSvrNames = hBasePageObject.hBaseRegionSvrName;
+        Assert.assertFalse(hBaseRegionSvrNames.isEmpty(), "No Region server name found.");
+
+        List<String> regionSeverNamesList = new ArrayList<>();
+        for(int i=0; i<hBaseRegionSvrNames.size() ; i++){
+            regionSeverNamesList.add(hBaseRegionSvrNames.get(i).getText());
+        }
+        Assert.assertTrue(regionSeverNamesList.size() >0, "No Region server name found");
+        logger.info("All Region Server Names: "+ regionSeverNamesList);
+    }
+
+    public void verifyTableNamesInRegionServer(){
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseFirstRegionSvr);
+        String regionName = hBasePageObject.hBaseFirstRegionSvr.getText();
+        MouseActions.clickOnElement(driver,hBasePageObject.hBaseFirstRegionSvr);
+
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseRegionSvrTable);
+        List<WebElement> hBaseRegionSvrTableNames = hBasePageObject.hBaseRegionSvrTableNames;
+        Assert.assertFalse(hBaseRegionSvrTableNames.isEmpty(), "No Tables found for region server.");
+
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseRegionSvrTableHeaderName);
+        String regionSvrTableName = hBasePageObject.hBaseRegionSvrTableHeaderName.getText();
+        logger.info("Region server Table header name: "+ regionSvrTableName);
+
+        List<String> regionSvrTableNames = new ArrayList<>();
+        for(int i=0; i<hBaseRegionSvrTableNames.size(); i++){
+            regionSvrTableNames.add(hBaseRegionSvrTableNames.get(i).getText());
+        }
+        Assert.assertTrue(regionSvrTableNames.size()> 0, "No Tables found for region server.");
+        logger.info("All table names in region server: "+ regionName +" are - "+ regionSvrTableNames);
+    }
+
 
     public void verifyRegionServerHealth(){
         List<WebElement> hBaseRegionSvrHealth = hBasePageObject.hBaseRegionSvrHealth;
@@ -209,5 +342,8 @@ public class HBasePage {
             }
         }
     }
+
+
+
 
 }

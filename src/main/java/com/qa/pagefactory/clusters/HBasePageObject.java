@@ -53,7 +53,36 @@ public class HBasePageObject {
     @FindBy(xpath="//div[contains(@class,'kpi-content')]/div")
     public List<WebElement> regionSvrKpiContent;
 
+    @FindBy(xpath = "//div[@class='container-fluid']//div[contains(@class,'dashboard-module')]")
+    public List<WebElement> hBaseMetrics;
 
+    @FindBy(xpath = "//div[@class='container-fluid']//div[contains(@class,'dashboard-module')]//div[@class='header']/h4")
+    public List<WebElement> hBaseMetricsHeader;
+
+    @FindBy(xpath = "//div[@class='container-fluid']//div[contains(@class,'dashboard-module')]" +
+            "//div[@class='content']//*[name()='g' and @class='highcharts-series-group']")
+    public List<WebElement> hBaseMetricsGraph;
+
+    @FindBy(xpath = "//div[@class='container-fluid']//div[contains(@class,'dashboard-module')]//div[@class='footer']//span")
+    public List<WebElement> hBaseMetricsFooter;
+
+    @FindBy(xpath="//*[@class='g-two-container']/div/div/h2")
+    public WebElement hBaseMetricsTitle;
+
+    @FindBy(xpath="//table[@id='hbaseRegionsDataTble']/tbody/tr/td[1]")
+    public List<WebElement> hBaseRegionSvrName;
+
+    @FindBy(xpath="//table[@id='hbaseRegionsDataTble']/tbody/tr[1]/td[1]")
+    public  WebElement hBaseFirstRegionSvr;
+
+    @FindBy(xpath="//table[@id='null-region']")
+    public WebElement hBaseRegionSvrTable;
+
+    @FindBy(xpath="//table[@id='null-region']/tbody/tr/td[1]")
+    public List<WebElement> hBaseRegionSvrTableNames;
+
+    @FindBy(xpath="//div[@class='g-col-one']/h3")
+    public WebElement hBaseRegionSvrTableHeaderName;
 
 
 }

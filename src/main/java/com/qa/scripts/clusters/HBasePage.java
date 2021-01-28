@@ -312,6 +312,30 @@ public class HBasePage {
         logger.info("All table names in region server: "+ regionName +" are - "+ regionSvrTableNames);
     }
 
+    public void clickOnTableName(){
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseFirstRegionSvr);
+        String regionName = hBasePageObject.hBaseFirstRegionSvr.getText();
+        MouseActions.clickOnElement(driver,hBasePageObject.hBaseFirstRegionSvr);
+
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseRegionSvrTable);
+        List<WebElement> hBaseRegionSvrTableNames = hBasePageObject.hBaseRegionSvrTableNames;
+        Assert.assertFalse(hBaseRegionSvrTableNames.isEmpty(), "No Tables found for region server.");
+
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseRegionSvrTableHeaderName);
+        String regionSvrTableName = hBasePageObject.hBaseRegionSvrTableHeaderName.getText();
+        logger.info("Region server Table header name: "+ regionSvrTableName);
+
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseFirstRegionSvrTable);
+        String tableName = hBasePageObject.hBaseFirstRegionSvrTable.getText();
+        MouseActions.clickOnElement(driver, hBasePageObject.hBaseFirstRegionSvrTable);
+
+        logger.info("Clicked on table name: "+ tableName);
+
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseTableTab);
+        String hBaseTblTabText = hBasePageObject.hBaseTableTab.getText();
+        Assert.assertTrue(hBaseTblTabText.equals("Tables"),"HBase Table Tab not found");
+
+    }
 
     public void verifyRegionServerHealth(){
         List<WebElement> hBaseRegionSvrHealth = hBasePageObject.hBaseRegionSvrHealth;

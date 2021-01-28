@@ -84,5 +84,11 @@ public class HBasePageObject {
     @FindBy(xpath="//div[@class='g-col-one']/h3")
     public WebElement hBaseRegionSvrTableHeaderName;
 
+    @FindBy(xpath = "//table[@id='null-region']/tbody/tr[1]/td[1]")
+    public WebElement hBaseFirstRegionSvrTable;
+
+    @FindBy(xpath = "//a[@class='active']")
+    public WebElement hBaseTableTab;
+
 
 }

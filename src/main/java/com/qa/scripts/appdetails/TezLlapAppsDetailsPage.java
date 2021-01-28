@@ -17,6 +17,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.testng.Assert;
 
@@ -118,17 +119,15 @@ public class TezLlapAppsDetailsPage {
      * Method to click the first app in jobs table , navigate to the details page.
      * and verify  clusterId .
      */
-    public String verifyclusterId(MrAppsDetailsPageObject mrApps) {
-        WebElement Appid = mrApps.getClusterId;
+    public String verifyclusterId(TezLlapAppsDetailsPageObject tezLlapPage) {
+        WebElement Appid = tezLlapPage.getClusterId;
         Actions toolAct = new Actions(driver);
         toolAct.moveToElement(Appid).build().perform();
-        WebElement AppnametoolTip = mrApps.getClusterId;
-        waitExecuter.sleep(3000);
+        WebElement AppnametoolTip = tezLlapPage.getClusterId;
         String AppIdText = AppnametoolTip.getText().trim();
-        LOGGER.info("Tez Status is " + Appid);
-        waitExecuter.sleep(5000);
+        LOGGER.info("Tez llap Status is " + Appid);
         waitExecuter.waitUntilPageFullyLoaded();
-        Assert.assertNotSame("", Appid, "Tez App id name is not displayed in the Table");
+        Assert.assertNotSame("", Appid, "Tezllap App id name is not displayed in the Table");
         return AppIdText;
     }
 

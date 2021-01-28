@@ -3,29 +3,27 @@ package com.qa.testcases.cluster.hbase;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.clusters.HBasePageObject;
-import com.qa.scripts.DatePicker;
 import com.qa.scripts.clusters.HBasePage;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
 @Marker.ClusterHBase
 @Marker.All
-public class TC_HB_27 extends BaseClass {
+public class TC_HB_37 extends BaseClass {
 
-    private static final Logger LOGGER = Logger.getLogger(TC_HB_27.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TC_HB_37.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void verifyMetricsAndChartsFromHBaseTab(String clusterId) {
-        test = extent.startTest("TC_HB_27.verifyMetricsAndChartsFromHBaseTab",
-                "Verify Region Server metrics, Region Server Charts, Table metrics.");
+    public void verifyWriteRequestCountAndGraph (String clusterId) {
+        test = extent.startTest("TC_HB_37.verifyWriteRequestCountAndGraph",
+                "Verify writeRequestCount metrics and graph.");
         test.assignCategory(" Cluster - HBasePage ");
-        Log.startTestCase("TC_HB_27.verifyMetricsAndChartsFromHBaseTab");
+        Log.startTestCase("TC_HB_37.verifyWriteRequestCountAndGraph");
 
         // Initialize all classes objects
         LOGGER.info("Initialize all class objects");
@@ -47,15 +45,13 @@ public class TC_HB_27 extends BaseClass {
         //Verify hbase region server tab
         hbase.verifyRegionServer();
 
-        //Verify all Hbase cluster graph metric
-        String[] expectedHBaseGraphMetrics = {"Total Read Request Count","Total Write Request Count","Total Store File Size",
-                "Total Percent Files Local"};
-        String[] hbaseGraph = {"hbaseGraph0","hbaseGraph1","hbaseGraph2","hbaseGraph3"};
-        for(int i=0 ; i<4; i++){
-            hbase.verifyHBaseKPIGraphs(hBasePageObject,expectedHBaseGraphMetrics[i], hbaseGraph[i]);
-        }
-        LOGGER.info("HBase Region Server graph charts found.");
-        test.log(LogStatus.PASS, "Verified region server metrics, graph charts and tables on HBase.");
+        //Verify Hbase cluster graph metric
+        String expectedHBaseGraphMetrics = "Total Write Request Count";
+        String hbaseGraph = "hbaseGraph1";
+        hbase.verifyHBaseKPIGraphs(hBasePageObject,expectedHBaseGraphMetrics, hbaseGraph);
+
+        LOGGER.info("HBase Region Server writeRequestCount metrics and graph charts found.");
+        test.log(LogStatus.PASS, "Verified region server writeRequestCount metrics and graph on HBase.");
 
 
     }

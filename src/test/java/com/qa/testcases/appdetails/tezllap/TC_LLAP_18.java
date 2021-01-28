@@ -9,6 +9,7 @@ import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.TezLlapAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebElement;
@@ -81,10 +82,20 @@ public class TC_LLAP_18 extends BaseClass {
                 }
         }
 
-        //click on cluster search field
-        applicationsPageObject.clusterIdsearchfield.click();
-        test.log(LogStatus.INFO, "All clusterId count: " + applicationsPageObject.clusterIdsList.size());
-        test.log(LogStatus.PASS, "Validated cluster filter in UI");
+        /*
+         * Validate the start time types are --
+         */
+        if (appCount > 0) {
+            String clusterid = tezLlapApps.verifyclusterId(tezLlapPage);
+            test.log(LogStatus.PASS, "Cluster Id is displayed in the Hive-Tezllap Table: " + clusterid);
+
+
+        } else {
+            test.log(LogStatus.SKIP, "No Hive-Tezllap Application present");
+            logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +
+                    "of 90 days");
+            //Close apps details page
+            MouseActions.clickOnElement(driver, tezLlapPage.closeAppsPageTab);
+        }
     }
 }
-

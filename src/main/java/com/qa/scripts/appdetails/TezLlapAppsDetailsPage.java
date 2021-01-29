@@ -236,11 +236,12 @@ public class TezLlapAppsDetailsPage {
      * Method to click the first app in jobs table , navigate to the details page.
      * and verify  Parent App
      */
-    public String verifyQueueName(TezLlapAppsDetailsPageObject tezLlapPage) {
-        String QueueName = tezLlapPage.getQueue.getText();
-        LOGGER.info("Hive-Tez LLAP Status is " + QueueName);
+    public int verifyQueueName(TezLlapAppsDetailsPageObject tezLlapPage) {
+        String queueNameselected = tezLlapPage.getQueue.getText();
+        LOGGER.info("Hive-Tez LLAP Status is " + queueNameselected);
         waitExecuter.waitUntilPageFullyLoaded();
-        Assert.assertNotSame("", QueueName, "Hive-Tez LLAP Parent App is not displayed in the Table");
+        Assert.assertNotSame("", queueNameselected, "Hive-Tez LLAP Parent App is not displayed in the Table");
+        int QueueName = Integer.parseInt(queueNameselected);
         return QueueName;
     }
 

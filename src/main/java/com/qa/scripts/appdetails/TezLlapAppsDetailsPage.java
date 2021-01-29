@@ -232,6 +232,18 @@ public class TezLlapAppsDetailsPage {
         return ParentApp;
     }
 
+    /**
+     * Method to click the first app in jobs table , navigate to the details page.
+     * and verify  Parent App
+     */
+    public String verifyQueueName(TezLlapAppsDetailsPageObject tezLlapPage) {
+        String QueueName = tezLlapPage.getQueue.getText();
+        LOGGER.info("Hive-Tez LLAP Status is " + QueueName);
+        waitExecuter.waitUntilPageFullyLoaded();
+        Assert.assertNotSame("", QueueName, "Hive-Tez LLAP Parent App is not displayed in the Table");
+        return QueueName;
+    }
+
 
     /***
      * Common Queue dropdown:

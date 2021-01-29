@@ -58,23 +58,23 @@ public class TC_LLAP_19 extends BaseClass {
                 "displayed in the header");
 
         // Get llap username from table for tez apps
-        String upTo10CharQueueName = "llap";
-        logger.info("Queue name should be filtered by- " + upTo10CharQueueName);
+        String QueueName = "llap";
+        logger.info("Queue name should be filtered by- " + QueueName);
         waitExecuter.waitUntilPageFullyLoaded();
-        if (!upTo10CharQueueName.trim().isEmpty() || !upTo10CharQueueName.trim().equals("-")) {
+        if (!QueueName.trim().isEmpty() || !QueueName.trim().equals("-")) {
             tezLlapPage.queueSearchBox.click();
             waitExecuter.waitUntilPageFullyLoaded();
-            tezLlapPage.queueSearchBox.sendKeys(upTo10CharQueueName);
+            tezLlapPage.queueSearchBox.sendKeys(QueueName);
             waitExecuter.waitUntilPageFullyLoaded();
             List<WebElement> queueList = tezLlapPage.getNamesFromDropDown;
             String queuenameSelected = null;
-            if (!upTo10CharQueueName.isEmpty() || !upTo10CharQueueName.equals("_"))
+            if (!QueueName.isEmpty() || !QueueName.equals("_"))
                 for (int i = 0; i < queueList.size(); i++) {
-                    if (queueList.get(i).getText().equals(upTo10CharQueueName)) {
+                    if (queueList.get(i).getText().equals(QueueName)) {
                         queuenameSelected = queueList.get(i).getText();
                         logger.info("Selected username from dropdown " + queuenameSelected);
-                        Assert.assertEquals(upTo10CharQueueName, queuenameSelected, "Queue name should be filtered by " +
-                                "the total count in the dropdown.");
+                        Assert.assertTrue(queuenameSelected.matches("llap"), "Queue name should be filtered by " +
+                                " not displayed.");
                         test.log(LogStatus.PASS, "Queue name should be filtered by- " + queuenameSelected);
                         queueList.get(i).click();
                         waitExecuter.waitUntilPageFullyLoaded();

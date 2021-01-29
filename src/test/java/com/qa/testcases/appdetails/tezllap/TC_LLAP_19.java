@@ -73,8 +73,6 @@ public class TC_LLAP_19 extends BaseClass {
                     if (queueList.get(i).getText().equals(QueueName)) {
                         queuenameSelected = queueList.get(i).getText();
                         logger.info("Selected username from dropdown " + queuenameSelected);
-                        Assert.assertTrue(queuenameSelected.matches("llap"), "Queue name should be filtered by " +
-                                " not displayed.");
                         test.log(LogStatus.PASS, "Queue name should be filtered by- " + queuenameSelected);
                         queueList.get(i).click();
                         waitExecuter.waitUntilPageFullyLoaded();
@@ -84,10 +82,18 @@ public class TC_LLAP_19 extends BaseClass {
                 }
 
 
-        } else {
-            test.log(LogStatus.SKIP, "No Hive Tez/Llap Application present");
-            logger.error("No Hive Tez/Llap Application present in the " + clusterId + " cluster for the time span " +
-                    "of 90 days");
+
+            int appQueuename = tezLlapApps.verifyQueueName(tezLlapPage);
+            if (appQueuename > 0) {
+                Assert.assertEquals(appQueuename, queuenameSelected, "Queue name should be filtered by " +
+                        " displayed in the dropdown");
+
+            } else {
+                waitExecuter.waitUntilElementPresent(applicationsPageObject.whenNoApplicationPresent);
+                test.log(LogStatus.SKIP, "No Hive-Tez LLAP Application present");
+                logger.error("No Hive-Tez LLAP Application present in the " + clusterId + " cluster for the time span " +
+                        "of 90 days");
+            }
         }
     }
 }

@@ -82,16 +82,18 @@ public class TC_LLAP_19 extends BaseClass {
                 }
 
 
-
-            int appQueuename = tezLlapApps.verifyQueueName(tezLlapPage);
-            if (appQueuename > 0) {
-                Assert.assertEquals(appQueuename, queuenameSelected, "Queue name should be filtered by " +
-                        " displayed in the dropdown");
+            /*
+             * Validate the QueueName --
+             */
+            if (appCount > 0) {
+                String queuename = tezLlapApps.verifyQueueName(tezLlapPage);
+                Assert.assertEquals(queuename, queuenameSelected, "Hive tezllap should not be llap" +
+                        " displayed.");
 
             } else {
                 waitExecuter.waitUntilElementPresent(applicationsPageObject.whenNoApplicationPresent);
-                test.log(LogStatus.SKIP, "No Hive-Tez LLAP Application present");
-                logger.error("No Hive-Tez LLAP Application present in the " + clusterId + " cluster for the time span " +
+                test.log(LogStatus.SKIP, "No Hive-Tezllap Application present");
+                logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +
                         "of 90 days");
             }
         }

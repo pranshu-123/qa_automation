@@ -1,4 +1,4 @@
-package com.qa.testcases.reports;
+package com.qa.testcases.reports.archived;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
@@ -21,7 +21,7 @@ public class TC_RRA09 extends BaseClass {
    * Verify Select download, view report and remove options from actions for a particular report
    */
 
-  Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.TC_RRA09.class);
+  Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.archived.TC_RRA09.class);
 
   @Test(dataProvider = "clusterid-data-provider")
   public void TC_RRA09_verifyReportAction(String clusterId) {

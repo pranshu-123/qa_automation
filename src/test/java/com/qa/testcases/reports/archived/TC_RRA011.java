@@ -1,9 +1,12 @@
-package com.qa.testcases.reports;
+package com.qa.testcases.reports.archived;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.constants.DatePickerConstants;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
+import com.qa.scripts.DatePicker;
+import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.scripts.reports.ReportsArchiveSchedulePage;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
@@ -11,24 +14,27 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 @Marker.ReportArchive
 @Marker.All
-public class TC_RRA07 extends BaseClass {
+public class TC_RRA011 extends BaseClass {
   /**
-   * Verify sorting option in Report Archive page :
-   * Verify Sorting should work fine on Name, Created and Status tabs for a particular report
+   * Verify reports tab in Report Archive page :
+   * Verify new report option from actions tab
    */
 
-  Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.TC_RRA07.class);
+  Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.archived.TC_RRA011.class);
 
   @Test(dataProvider = "clusterid-data-provider")
-  public void TC_RRA07_verifyReportPageSortingOption(String clusterId) {
-    test = extent.startTest("TC_RRA07_verifyReportPageSortingOption: " + clusterId,
-        "Verify Sorting should work fine on Name, Created and Status tabs for a particular reportI");
+  public void TC_RRA011_verifyNewReportOption(String clusterId) {
+    test = extent.startTest("TC_RRA011_verifyNewReportOption: " + clusterId,
+        "Verify new report option from actions tab");
     test.assignCategory(" Report Archive");
-    Log.startTestCase("TC_RRA07_verifyReportPageSortingOption");
+    Log.startTestCase("TC_RRA011_verifyNewReportOption");
 
     // Initialize all classes objects
     test.log(LogStatus.INFO, "Initialize all class objects");
@@ -39,14 +45,10 @@ public class TC_RRA07 extends BaseClass {
     WaitExecuter waitExecuter = new WaitExecuter(driver);
 
     // Navigate to Reports tab from header
-    test.log(LogStatus.INFO, "Navigate to reports tab from header and vVerify Sorting should work fine " +
-        "on Name, Created and Status tabs for a particular report");
+    test.log(LogStatus.INFO, "Navigate to reports tab from header and Verify new report option from actions tab");
     MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
     waitExecuter.sleep(2000);
-    reportsPage.validateSortingOptionReportName(reportPageObj, true);
-    reportsPage.validateSortingOptionStatus(reportPageObj, true);
-    reportsPage.validateSortingOptionReportCnt(reportPageObj, true);
-    test.log(LogStatus.PASS, "The sorting option has been validated successfully for Name," +
-        " Created and Status tabs for particular report");
+    reportsPage.validateNewReportAction(reportPageObj);
+    test.log(LogStatus.PASS, "Verified new report option from actions tab successfully");
   }
 }

@@ -380,6 +380,12 @@ public class HBasePage {
     }
 
 
+    public void verifyTablesTabElements(){
+        waitExecuter.waitUntilElementPresent(hBasePageObject.tablesTab);
+        MouseActions.clickOnElement(driver,hBasePageObject.tablesTab);
+        waitExecuter.waitUntilElementPresent(hBasePageObject.tablesTabTbl);
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseTableHostTbl);
+    }
 
 
 }

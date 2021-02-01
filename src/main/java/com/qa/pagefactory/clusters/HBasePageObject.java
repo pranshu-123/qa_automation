@@ -102,5 +102,12 @@ public class HBasePageObject {
     @FindBy(xpath="//table[@id='hbaseTableHostDataTAble']/tbody/tr[1]/td[2]")
     public WebElement getHbaseTableHostFirstRowRegionSvrName;
 
+    @FindBy(xpath="//a[contains(text(), 'Tables')]")
+    public WebElement tablesTab;
+
+    @FindBy(xpath="//table[@id='null-table']")
+    public WebElement tablesTabTbl;
+
+
 
 }

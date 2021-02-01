@@ -46,8 +46,14 @@ public class TezLlapAppsDetailsPageObject {
     @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')]//input)[3]")
     public WebElement readUsersDropdown;
 
+    @FindBy(xpath = "(//span[contains(@class,'select2-selection__rendered')])")
+    public WebElement tezllapClusterDropDown;
+
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[8]")
     public List<WebElement> getApplicationQueue;
+
+    @FindBy(xpath = "//*[@class='select2-results__options']//li")
+    public List<WebElement> tezllapClusters;
 
     @FindBy(xpath = "//tbody/tr")
     public List<WebElement> getTableData;
@@ -109,6 +115,12 @@ public class TezLlapAppsDetailsPageObject {
 
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[9]")
     public WebElement getRead;
+
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[9]")
+    public WebElement getParentApp;
+
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[8]")
+    public WebElement getQueue;
 
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[10]")
     public WebElement getWrite;

@@ -1,4 +1,4 @@
-package com.qa.testcases.reports;
+package com.qa.testcases.reports.archived;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
@@ -21,21 +21,21 @@ import java.util.List;
 
 @Marker.ReportArchive
 @Marker.All
-public class TC_RRA06 extends BaseClass {
+public class TC_RRA04 extends BaseClass {
   /**
-   * Verify reports tab in Report Archive page :
-   * This will open new page with  all the reports list, count and list should match here
+   * Verify search option in Report Archive page :
+   * should list all the reports which matches with search box
    */
 
-  Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.TC_RRA06.class);
+  Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.archived.TC_RRA04.class);
 
   @Test(dataProvider = "clusterid-data-provider")
-  public void TC_RRA06_verifyReportArchiveReportTab(String clusterId) {
-    test = extent.startTest("TC_RRA06_verifyReportArchiveReportTab: " + clusterId,
-        "Verify reports tab in Report Archive page :\n" +
-            "This will open new page with  all the reports list, count and list should match here");
+  public void TC_RRA04_verifyReportArchiveSearchOption(String clusterId) {
+    test = extent.startTest("TC_RRA04_verifyReportArchiveSearchOption: " + clusterId,
+        "Verify search option in Report Archive page :\n" +
+            "should list all the reports which matches with search box");
     test.assignCategory(" Report Archive");
-    Log.startTestCase("TC_RRA06_verifyReportArchiveReportTab");
+    Log.startTestCase("TC_RRA04_verifyReportArchiveSearchOption");
 
     // Initialize all classes objects
     test.log(LogStatus.INFO, "Initialize all class objects");
@@ -46,10 +46,10 @@ public class TC_RRA06 extends BaseClass {
     WaitExecuter waitExecuter = new WaitExecuter(driver);
 
     // Navigate to Reports tab from header
-    test.log(LogStatus.INFO, "Navigate to reports tab from header and validate the Report tab");
+    test.log(LogStatus.INFO, "Navigate to reports tab from header and validate the search option");
     MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
     waitExecuter.sleep(2000);
-    reportsPage.validateReportCnt(reportPageObj);
-    test.log(LogStatus.PASS, "Validated the report tab successfully");
+    reportsPage.validateSearchOption(reportPageObj);
+    test.log(LogStatus.PASS, "The search option has been validated successfully");
   }
 }

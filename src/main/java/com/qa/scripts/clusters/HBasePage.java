@@ -138,7 +138,6 @@ public class HBasePage {
     // Method to verify the HBase cluster Metrics
     public void verifyHBaseClustersMetrics(){
         selectHBaseDefaultCluster();
-        selectDateAsLast30Days();
 
         List<WebElement> hBaseKPIList = hBasePageObject.hBaseClusterKPIs;
         List<WebElement> hBaseKPIValueList = hBasePageObject.hBaseClusterKPIValues;
@@ -348,6 +347,19 @@ public class HBasePage {
         Assert.assertTrue(hBasePageObject.hBaseSvrHealthHeader.getText().equals("Server Health and Context"),
                 "'Server Health and Context' header not found");
 
+    }
+
+    public void verifyTblRegionUIWithinRegionServer(){
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseTableHostTbl);
+        List<WebElement> hBaseTableHostTblRowsList = hBasePageObject.hBaseTableHostTblRows;
+        Assert.assertFalse(hBaseTableHostTblRowsList.isEmpty(), "HBase Table Host Table Rows not generated.");
+
+        waitExecuter.waitUntilElementPresent(hBasePageObject.getHbaseTableHostFirstRowRegionName);
+        String regionName = hBasePageObject.getHbaseTableHostFirstRowRegionName.getText();
+        waitExecuter.waitUntilElementPresent(hBasePageObject.getHbaseTableHostFirstRowRegionSvrName);
+        String regionSvrName = hBasePageObject.getHbaseTableHostFirstRowRegionSvrName.getText();
+
+        logger.info("Region name: "+regionName + ", Region server name: "+regionSvrName  );
     }
 
     public void verifyRegionServerKPIs(){

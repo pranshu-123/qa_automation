@@ -14,16 +14,16 @@ import java.util.logging.Logger;
 
 @Marker.ClusterHBase
 @Marker.All
-public class TC_HB_42 extends BaseClass {
+public class TC_HB_47 extends BaseClass {
 
-    private static final Logger LOGGER = Logger.getLogger(TC_HB_42.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TC_HB_47.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void verifyTablesInARegionServer (String clusterId) {
-        test = extent.startTest("TC_HB_42.verifyTablesInARegionServer",
-                "Verify all column values in table metrics.");
+    public void verifyTableRegionUIWithinRegionServer (String clusterId) {
+        test = extent.startTest("TC_HB_47.verifyTableRegionUIWithinRegionServer",
+                "Navigate to Table Region UI within Region Server.");
         test.assignCategory(" Cluster - HBasePage ");
-        Log.startTestCase("TC_HB_42.verifyTablesInARegionServer");
+        Log.startTestCase("TC_HB_47.verifyTableRegionUIWithinRegionServer");
 
         // Initialize all classes objects
         LOGGER.info("Initialize all class objects");
@@ -41,17 +41,13 @@ public class TC_HB_42 extends BaseClass {
 
         //Click on 'Region Server' and verify hbase region server tab
         hbase.verifyRegionServer();
+        LOGGER.info("Clicked on HBase region server.");
+        //Click on Table
+        hbase.clickOnTableName();
+        LOGGER.info("Clicked on HBase region server table name.");
 
-        //Verify region server names
-        hbase.verifyRegionSeverNames();
-        LOGGER.info("Verified HBase region server names.");
-        test.log(LogStatus.PASS, "Verified HBase region server names.");
-
-        //Verify Tables in a region server
-        hbase.verifyTableNamesInRegionServer();
-        LOGGER.info("Verified all table name of a HBase region server.");
-        test.log(LogStatus.PASS, "Verified table names of a HBase region server.");
-
+        hbase.verifyTblRegionUIWithinRegionServer();
+        test.log(LogStatus.PASS, "Verified Table Region UI within Region Server.");
 
     }
 }

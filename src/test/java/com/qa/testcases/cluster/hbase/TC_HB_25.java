@@ -35,6 +35,7 @@ public class TC_HB_25 extends BaseClass {
         waitExecuter.waitUntilElementClickable(hBasePageObject.hbaseTab);
         MouseActions.clickOnElement(driver, hBasePageObject.hbaseTab);
         LOGGER.info("Clicked on HBase Tab");
+        hBase.selectDateAsLast30Days();
         waitExecuter.waitUntilElementPresent(hBasePageObject.hbaseHeader);
         LOGGER.info("HBase headers found: " + hBase.getHBaseHeader());
         LOGGER.info("HBase Cluster Metrics headers found: " +hBase.verifyHBaseClusterMetricsTitle());

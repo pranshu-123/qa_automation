@@ -90,5 +90,17 @@ public class HBasePageObject {
     @FindBy(xpath = "//a[@class='active']")
     public WebElement hBaseTableTab;
 
+    @FindBy(xpath = "//table[@id='hbaseTableHostDataTAble']")
+    public WebElement hBaseTableHostTbl;
+
+    @FindBy(xpath ="//table[@id='hbaseTableHostDataTAble']/tbody/tr")
+    public List<WebElement> hBaseTableHostTblRows;
+
+    @FindBy(xpath="//table[@id='hbaseTableHostDataTAble']/tbody/tr[1]/td[1]")
+    public WebElement getHbaseTableHostFirstRowRegionName;
+
+    @FindBy(xpath="//table[@id='hbaseTableHostDataTAble']/tbody/tr[1]/td[2]")
+    public WebElement getHbaseTableHostFirstRowRegionSvrName;
+
 
 }

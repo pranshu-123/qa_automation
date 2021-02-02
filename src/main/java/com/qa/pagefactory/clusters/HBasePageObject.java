@@ -108,6 +108,10 @@ public class HBasePageObject {
     @FindBy(xpath="//table[@id='null-table']")
     public WebElement tablesTabTbl;
 
+    @FindBy(xpath = "//table[@id='null-table']/tbody/tr[1]/td[1]")
+    public WebElement hBaseFirstTableElement;
 
+    @FindBy(xpath="//div[@class='g-col-one']/div/div/following-sibling::h3")
+    public WebElement regionTableName;
 
 }

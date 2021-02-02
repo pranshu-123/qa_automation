@@ -387,5 +387,18 @@ public class HBasePage {
         waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseTableHostTbl);
     }
 
+    public void verifyTableAndRegion(){
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseFirstTableElement);
+        String tableName = hBasePageObject.hBaseFirstTableElement.getText();
+        MouseActions.clickOnElement(driver, hBasePageObject.hBaseFirstTableElement);
+
+        logger.info("Clicked on table name: "+ tableName);
+        waitExecuter.waitUntilElementPresent(hBasePageObject.regionTableName);
+        String regionTableName = hBasePageObject.regionTableName.getText();
+        logger.info("Region table name: "+ regionTableName);
+        //Verify Region name and Region Svr name
+        verifyTblRegionUIWithinRegionServer();
+    }
+
 
 }

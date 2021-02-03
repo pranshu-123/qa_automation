@@ -1,5 +1,6 @@
 package com.qa.testcases.appdetails.tezllap;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.TezLlapAppsDetailsPageObject;
@@ -19,7 +20,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
-
+@Marker.AppDetailsTezLlap
+@Marker.All
 public class TC_LLAP_25 extends BaseClass {
 
     Logger logger = LoggerFactory.getLogger(TC_LLAP_25.class);
@@ -62,7 +64,6 @@ public class TC_LLAP_25 extends BaseClass {
         String filterByQueue = applicationsPageObject.getQueueNameTable.getText().trim();
         String upTo10CharQueueName = StringUtils.left(filterByQueue, 10);
         logger.info("Queue name should be filtered by- " + upTo10CharQueueName);
-        test.log(LogStatus.PASS, "Queue name should be filtered by- " + upTo10CharQueueName);
         waitExecuter.waitUntilPageFullyLoaded();
         if (!upTo10CharQueueName.trim().isEmpty() || !upTo10CharQueueName.trim().equals("-")) {
             tezLlapPage.queueSearchBox.click();
@@ -73,7 +74,6 @@ public class TC_LLAP_25 extends BaseClass {
             String queuenameSelected = null;
             if (!upTo10CharQueueName.isEmpty() || !upTo10CharQueueName.equals("_"))
                 for (int i = 0; i < queueList.size(); i++) {
-
                     if (queueList.get(i).getText().equals(upTo10CharQueueName)) {
                         queuenameSelected = queueList.get(i).getText();
                         logger.info("Selected username from dropdown " + queuenameSelected);
@@ -82,11 +82,17 @@ public class TC_LLAP_25 extends BaseClass {
                         break;
                     }
                 }
-            else {
-                test.log(LogStatus.SKIP, "No Tez/Llap Application present");
-                logger.error("No Tez/Llap Application present in the " + clusterId + " cluster for the time span " +
-                        "of 90 days");
+            /*
+             * Validate the QueueName --
+             */
+            if (appCount > 0) {
+                String expectedQueuename = tezLlapApps.verifyQueueName(tezLlapPage);
+                Assert.assertEquals(expectedQueuename,queuenameSelected, "Hive tezllap should not be llap" +
+                        " displayed.");
+
+            } else {
+                waitExecuter.waitUntilElementPresent(applicationsPageObject.whenNoApplicationPresent);
+            }
             }
         }
     }
-}

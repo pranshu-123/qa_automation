@@ -10,6 +10,7 @@ import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.MrAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebElement;
@@ -23,16 +24,16 @@ import java.util.Arrays;
 import java.util.List;
 @Marker.AppDetailsMr
 @Marker.All
-public class MR_047 extends BaseClass {
+public class MR_042 extends BaseClass {
 
-    Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mapreduce.MR_047.class);
+    Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mapreduce.MR_042.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_047_verifyMRJobsSummary(String clusterId) {
-        test = extent.startTest("MR_047_verifyMRJobsSummary: " + clusterId,
-                "Verify job summary must be defined based the actual state of the apps");
+    public void MR_042_verifyClusterIdFilterByStatus(String clusterId) {
+        test = extent.startTest("MR_042_verifyClusterIdFilterByStatus: " + clusterId,
+                "Verify  mrapps should have Cluster IDs for all the states of application (Running, Success, Uknown, Killed, pending");
         test.assignCategory(" Apps Details-Mr");
-        Log.startTestCase("MR_047_verifyMRJobsSummary");
+        Log.startTestCase("MR_042_verifyClusterIdFilterByStatus");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -48,9 +49,11 @@ public class MR_047 extends BaseClass {
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         mrDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
+        test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
 
-        test.log(LogStatus.INFO, "Verify that the left pane has map reduce check box and the apps number");
         mrDetailsPage.clickOnlyLink("Map Reduce");
+        int tezAppCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
+                .replaceAll("[^\\dA-Za-z ]", "").trim());
         // Expand status filter on left pane
         test.log(LogStatus.INFO, "Expand status filter on left pane");
         logger.info("Expand status filter on left pane");
@@ -61,7 +64,6 @@ public class MR_047 extends BaseClass {
         logger.info("To apply status filter - De-select all status types");
         allApps.deselectAllStatusTypes();
         waitExecuter.sleep(2000);
-
         /*
          * Validate that status types are --
          * "Killed","Failed","Running","Success","Pending","Unknown", "Waiting"
@@ -109,8 +111,11 @@ public class MR_047 extends BaseClass {
                 Assert.assertEquals(getStatusTypeFromTable.toLowerCase(),
                         statusTypes.get(i).getText().trim().toLowerCase(),
                         "The Jobs displayed in tables contains application other than that of selected App Type");
-                test.log(LogStatus.PASS, "The Jobs displayed in tables contains application of selected App Type: " + getStatusTypeFromTable);
+                test.log(LogStatus.PASS, "The Jobs displayed in tables contains application of selected App Type: "+getStatusTypeFromTable);
                 waitExecuter.sleep(1000);
+                String clusterid = mrDetailsPage.verifyclusterId(mrApps);
+                test.log(LogStatus.PASS, "Cluster Id is displayed in the Mr-Apps Table: " + clusterid);
+
             } else {
                 Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
                         "The clusterId does not have any application under it and also does not display 'No Data Available' for it"
@@ -126,4 +131,5 @@ public class MR_047 extends BaseClass {
         waitExecuter.sleep(3000);
     }
 }
+
 

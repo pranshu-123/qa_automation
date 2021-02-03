@@ -88,7 +88,7 @@ public class TC_LLAP_08 extends BaseClass {
             String Appname = tezLlapApps.verifyAppname(tezLlapPage);
             test.log(LogStatus.PASS, "Tez App name is displayed in the Table: " + Appname);
 
-            String AppId = tezLlapApps.verifyappId(tezLlapPage);
+            String AppId = tezLlapApps.verifyappId(tezLlapPage, applicationsPageObject);
             test.log(LogStatus.PASS, "Tez App Id is displayed in the Table: " + AppId);
         }
     }

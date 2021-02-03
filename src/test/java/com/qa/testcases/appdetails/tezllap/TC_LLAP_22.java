@@ -19,19 +19,18 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.qa.base.BaseClass.extent;
 @Marker.AppDetailsTezLlap
 @Marker.All
-public class TC_LLAP_21 extends BaseClass {
+public class TC_LLAP_22 extends BaseClass {
 
-    Logger logger = LoggerFactory.getLogger(TC_LLAP_21.class);
+    Logger logger = LoggerFactory.getLogger(TC_LLAP_22.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TC_LLAP_21_verifyParentApp(String clusterId) {
-        test = extent.startTest("TC_LLAP_21_verifyParentApp: " + clusterId,
-                "Verify the \"Parent App\" of the hive application");
+    public void TC_LLAP_22_verifyWorkflow(String clusterId) {
+        test = extent.startTest("TC_LLAP_22_verifyWorkflow: " + clusterId,
+                "Validate Tez LLAP app part of a workflow");
         test.assignCategory(" Apps Details-TezLlap");
-        Log.startTestCase("TC_LLAP_21_verifyParentApp");
+        Log.startTestCase("TC_LLAP_22_verifyWorkflow");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -49,15 +48,9 @@ public class TC_LLAP_21 extends BaseClass {
                 applicationsPageObject, clusterId);
         test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
 
-        int appCount = tezLlapApps.clickOnlyLink("Hive");
-        int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
-                replaceAll("[^\\dA-Za-z ]", "").trim());
-        logger.info("AppCount is " + appCount + " total count is " + totalCount);
-        test.log(LogStatus.PASS, "AppCount is " + appCount + " total count is " + totalCount);
-        Assert.assertEquals(appCount, totalCount, "The Hive tez app count of tezApp is not equal to " +
-                "the total count of heading.");
-        test.log(LogStatus.PASS, "The left pane has Hive tez check box and the app counts match to that " +
-                "displayed in the header");
+        tezLlapApps.clickOnlyLink("Hive");
+        applicationsPageObject.expandStatus.click();
+        int appCount = tezLlapApps.clickOnlyLink("Success");
 
         // Get llap username from table for tez apps
         String upTo10CharQueueName = "llap";
@@ -87,8 +80,8 @@ public class TC_LLAP_21 extends BaseClass {
              * Validate the Read/Write IO are --
              */
             if (appCount > 0) {
-                String ParentApp = tezLlapApps.verifyParentApp(tezLlapPage);
-                test.log(LogStatus.PASS, "Parent App is displayed in the Hive-Tez LLAP Table: " + ParentApp);
+                String headerAppId = tezLlapApps.verifyappId(tezLlapPage, applicationsPageObject);
+                test.log(LogStatus.PASS, "Tez Application Id is displayed in the Header: " + headerAppId);
 
 
             } else {

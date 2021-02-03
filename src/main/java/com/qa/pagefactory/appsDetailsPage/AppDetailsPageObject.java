@@ -18,7 +18,7 @@ public class AppDetailsPageObject {
     @FindBy(xpath = "//h3[contains(@class,'expandable-header')]/following-sibling::div[contains(@class,'filter-items')]//label//span[contains(@class,'show-only')]")
     public List<WebElement> applicationTypeShowOnly;
 
-    @FindBy(id="allApps")
+    @FindBy(id = "allApps")
     public WebElement allAppsTable;
 
     @FindBy(xpath = "//div[contains(@class,'close')]")
@@ -71,6 +71,90 @@ public class AppDetailsPageObject {
 
     @FindBy(xpath = "//div[contains(@class,'gantt-timeline')]/div[1]")
     public List<WebElement> ganttChartIds;
+
+    @FindBy(xpath = "//div[@class='fragment-dag-new']//*[local-name() = 'svg']//*[local-name() = 'g']//*[local-name() = 'text']//*[local-name() = 'tspan' and contains(text(),'$Fragment')]")
+    public List<WebElement> getFragmentsFromQueryPlan;
+
+    @FindBy(xpath = "//div[@class='fragment-dag-new']//*[local-name() = 'svg']//*[local-name() = 'g' and contains(@class,'label')]//div/span")
+    public List<WebElement> getOperatorsFromQueryPlan;
+
+    @FindBy(xpath = "//table[@id='allApps']/tbody/tr")
+    public List<WebElement> getImpalaJobs;
+
+    @FindBy(xpath = "//ul[@class='col-md-12']//a[text() = 'Fragments']")
+    public WebElement impalaFragmentTab;
+
+    @FindBy(xpath = "//ul[@class='col-md-12']//a[text() = 'Operators']")
+    public WebElement impalaOperatorsTab;
+
+    @FindBy(xpath = "//div[@class='component-tabs-primary']//li/a[normalize-space(text()) = 'Query Plan']")
+    public WebElement impalaQueryPlanTab;
+
+    @FindBy(xpath = "//div[@class='component-tabs-secondary']//li//a[normalize-space(text()) = 'Fragment View']")
+    public WebElement queryPlanFragmentTab;
+
+    @FindBy(xpath = "//div[@class='component-tabs-secondary']//li//a[normalize-space(text()) = 'Operator View']")
+    public WebElement queryPlanOperatorTab;
+
+    @FindBy(xpath = "//table[@id='appNavigation']/tbody/tr")
+    public List<WebElement> getFragmentIdRows;
+
+    @FindBy(xpath = "//table[@id='impalaOperatorList']/tbody/tr")
+    public List<WebElement> getOperatorTypesRow;
+
+    @FindBy(xpath = "//div[@class='filter-section']//a[text()='Status']")
+    public WebElement statusToggleLeftpane;
+
+    @FindBy(id = "reset")
+    public WebElement resetButton;
+
+    @FindBy(xpath = "(//div[@class='filter-section'])[3]//label")
+    public List<WebElement> statusList;
+
+    @FindBy(xpath = "(//table[@id='allApps']/tbody/tr/td)[3]")
+    public WebElement firstRow;
+
+    @FindBy(className = "close")
+    public List<WebElement> closeIcon;
+
+    @FindBy(xpath = "//table[@id='appTagsTable']/tbody/tr/td[1]")
+    public List<WebElement> getTagNames;
+
+    @FindBy(xpath = "//table[@id='appTagsTable']/tbody/tr/td[2]")
+    public List<WebElement> getTagDescription;
+
+    @FindBy(xpath = "//div[@class='component-tabs-primary']//li/a[normalize-space(text()) = 'Tags']")
+    public WebElement impalaTagsTab;
+
+    @FindBy(xpath = "(//table[@id='allApps']//tbody/tr)[1]/td")
+    public List<WebElement> getTableValuesOfImpalaApp;
+
+    @FindBy(xpath = "//b[@class='dropbtn pointer']/span")
+    public WebElement chargebackDropdown;
+
+    @FindBy(xpath = "//div[contains(@class,'dropdown-content')]/a[text()='Impala']")
+    public WebElement impalaChargeback;
+
+    @FindBy(className = "select2-selection__arrow")
+    public WebElement impalaClusterDrodown;
+
+    @FindBy(xpath = "//span[contains(@class,'select2-dropdown')]//input")
+    public WebElement clusterSearchBox;
+
+    @FindBy(xpath = "//li[contains(@class,'select2-results__option')]")
+    public WebElement select1stOption;
+
+    @FindBy(xpath = "(//div[@class='col-md-4'])[1]//h4/span")
+    public WebElement impalaChargebackJobCount;
+
+    @FindBy(xpath = "//div[@class='opnode']")
+    public List<WebElement> operatorViewOpCount;
+
+    @FindBy(id = "runningAppList")
+    public WebElement runningAppsTab;
+
+    @FindBy(xpath = "//table[contains(@class,'component-data-tables')]//p[normalize-space(text())='No Fragments Data Available']")
+    public List<WebElement> noFragments;
 
     /**
      * @param driver The driver that will be used to look up the elements

@@ -1,4 +1,4 @@
-package com.qa.testcases.reports;
+package com.qa.testcases.reports.archived;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
@@ -27,7 +27,7 @@ public class TC_RRA02 extends BaseClass {
    * Verify datepicker list and Popup should list all the combination of daterange
    */
 
-  Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.TC_RRA02.class);
+  Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.archived.TC_RRA02.class);
 
 
   @Test(dataProvider = "clusterid-data-provider")

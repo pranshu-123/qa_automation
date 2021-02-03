@@ -1,9 +1,12 @@
-package com.qa.testcases.reports;
+package com.qa.testcases.reports.archived;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.constants.DatePickerConstants;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
+import com.qa.scripts.DatePicker;
+import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.scripts.reports.ReportsArchiveSchedulePage;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
@@ -11,25 +14,27 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 @Marker.ReportArchive
 @Marker.All
-public class TC_RRA08 extends BaseClass {
+public class TC_RRA05 extends BaseClass {
   /**
-   * Verify search option in Report Archive page :
-   * should list all the reports which matches with search box
+   * Verify sorting option in Report Archive page :
+   * Sorting should work fine on Name, Reports and Status tabs
    */
 
-  Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.TC_RRA08.class);
+  Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.archived.TC_RRA05.class);
 
   @Test(dataProvider = "clusterid-data-provider")
-  public void TC_RRA08_verifyReportArchiveSearchOption(String clusterId) {
-    test = extent.startTest("TC_RRA08_verifyReportArchiveSearchOption: " + clusterId,
-        "Verify search option in Report Archive page :\n" +
-            " should list all the reports which matches with search box");
+  public void TC_RRA05_verifyReportArchiveSortingOption(String clusterId) {
+    test = extent.startTest("TC_RRA05_verifyReportArchiveSortingOption: " + clusterId,
+        "Verify Sorting should work fine on Name, Reports and Status tabs");
     test.assignCategory(" Report Archive");
-    Log.startTestCase("TC_RRA08_verifyReportArchiveSearchOption");
+    Log.startTestCase("TC_RRA05_verifyReportArchiveSortingOption");
 
     // Initialize all classes objects
     test.log(LogStatus.INFO, "Initialize all class objects");
@@ -40,10 +45,13 @@ public class TC_RRA08 extends BaseClass {
     WaitExecuter waitExecuter = new WaitExecuter(driver);
 
     // Navigate to Reports tab from header
-    test.log(LogStatus.INFO, "Navigate to reports tab from header and Verify search option perReport");
+    test.log(LogStatus.INFO, "Navigate to reports tab from header and validate the sorting options on " +
+        "Name, Reports and Status tabs");
     MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
     waitExecuter.sleep(2000);
-    reportsPage.validateSearchOption(reportPageObj);
-    test.log(LogStatus.PASS, "The search option has been validated successfully");
+    reportsPage.validateSortingOptionReportName(reportPageObj, false);
+    reportsPage.validateSortingOptionReportCnt(reportPageObj, false);
+    reportsPage.validateSortingOptionStatus(reportPageObj, false);
+    test.log(LogStatus.PASS, "The sorting option has been validated successfully for Name, Reports and Status tabs");
   }
 }

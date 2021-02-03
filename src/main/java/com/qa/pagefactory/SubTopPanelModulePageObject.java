@@ -65,6 +65,9 @@ public class SubTopPanelModulePageObject {
     @FindBy(id = "apps-global-search-filter")
     public WebElement globalSearch;
 
+    @FindBy(xpath = "(//ul[@class='sub-menu']//span[text()='Chargeback'])[1]")
+    public WebElement chargeback;
+
     /**
      * @param driver The driver that will be used to look up the elements
      */

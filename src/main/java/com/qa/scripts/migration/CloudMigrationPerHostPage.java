@@ -7,9 +7,11 @@ import com.qa.enums.migration.MigrationCloudMappingModalTable;
 import com.qa.enums.migration.MigrationCloudMappingHostDetailsTable;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.migration.CloudMappingPerHostPageObject;
+import com.qa.utils.LoggingUtils;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
+import com.relevantcodes.extentreports.ExtentTest;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
@@ -19,6 +21,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class CloudMigrationPerHostPage {
@@ -27,6 +30,7 @@ public class CloudMigrationPerHostPage {
   private final UserActions userAction;
   private CloudMappingPerHostPageObject cmpPageObj;
   private TopPanelPageObject topPanelPageObject;
+  private static final LoggingUtils LOGGER = new LoggingUtils(CloudMigrationPerHostPage.class);
   Logger logger = Logger.getLogger(CloudMigrationPerHostPage.class.getName());
 
   /**
@@ -236,12 +240,12 @@ public class CloudMigrationPerHostPage {
    * :param part: integer value in 0 or 1 , to get the first or second part after split()
    */
   public int getPageCnt(int part) {
-    String pageCntStr = cmpPageObj.paginationCnt.getText();
-    logger.info("The pageCnt is " + pageCntStr);
-    //output= 1   of 173
-    int pageCnt = Integer.parseInt(pageCntStr.trim().split("\\s+")[part]);
-    logger.info("The integer page count is " + pageCnt);
-    return pageCnt;
+      String pageCntStr = cmpPageObj.paginationCnt.getText();
+      logger.info("The pageCnt is " + pageCntStr);
+      //output= 1   of 173
+      int pageCnt = Integer.parseInt(pageCntStr.trim().split("\\s+")[part]);
+      logger.info("The integer page count is " + pageCnt);
+      return pageCnt;
   }
 
   /**
@@ -386,9 +390,14 @@ public class CloudMigrationPerHostPage {
       try {
         if (loaderElement.size() == 0) {
           return;
-        } else if ((loaderElement.size() > 0 &&
-            !loaderElement.get(0).isDisplayed())) {
-          return;
+        } else if (loaderElement.size() > 0) {
+          try {
+            if (!loaderElement.get(0).isDisplayed()) {
+              return;
+            }
+          } catch (IndexOutOfBoundsException outOfBoundsException) {
+
+          }
         } else if (end.isBefore(clock.instant())) {
           throw new TimeoutException("Page is not loaded. Loader is still running");
         }
@@ -467,6 +476,14 @@ public class CloudMigrationPerHostPage {
         }
       }
     }
+  }
+
+  /**
+   * Get the list of storage type
+   */
+  public List<String> getStorageList() {
+    userAction.performActionWithPolling(cmpPageObj.storageTypeDropdown, UserAction.CLICK);
+    return cmpPageObj.dropDownValues.stream().map(dropDown -> dropDown.getText()).collect(Collectors.toList());
   }
 
   /**
@@ -603,5 +620,160 @@ public class CloudMigrationPerHostPage {
    */
   public void clickOnCostReductionTab() {
       userAction.performActionWithPolling(cmpPageObj.costReductionTab, UserAction.CLICK);
+  }
+
+  /**
+   * Click on LIFT AND SHIFT tab
+   */
+  public void clickOnLiftAndShiftTab() {
+    userAction.performActionWithPolling(cmpPageObj.liftAndShiftTab, UserAction.CLICK);
+  }
+
+  /**
+   * Get the values for specific column from the table
+   * @return - List of values as String
+   */
+  public Map<String,List> getInstanceValuesFromModalTable() {
+    Map<String,List> allInstances = new HashMap();
+    for (int i=1; i<getPageCnt(2); i++) {
+      userAction.performActionWithPolling(cmpPageObj.forwardCaret, UserAction.CLICK);
+      List<WebElement> tableRows = cmpPageObj.tableRows;
+      for (WebElement row : tableRows) {
+        List instanceDetails = new ArrayList();
+        Arrays.asList(MigrationCloudMappingModalTable.CORES,MigrationCloudMappingModalTable.MEMORY,
+            MigrationCloudMappingModalTable.DISK,MigrationCloudMappingModalTable.COST).stream()
+            .forEach(data -> {
+              if (data == MigrationCloudMappingModalTable.MEMORY) {
+                instanceDetails.add(convertMemoryToMB(row.findElement(By.xpath("td[" + (data.getIndex() + 1) + "]")).getText()));
+              } else if (data == MigrationCloudMappingModalTable.COST) {
+                instanceDetails.add(Double.valueOf(row.findElement(By.xpath("td[" + (data.getIndex() + 1) + "]")).getText().replace(
+                    "$", "")));
+              } else {
+                instanceDetails.add(row.findElement(By.xpath("td[" + (data.getIndex() + 1) + "]")).getText());
+              }
+            });
+        allInstances.put(row.findElement(By.xpath("td[" + (MigrationCloudMappingModalTable.VM_TYPE.getIndex() + 1) + "]")).getText(), instanceDetails);
+      }
+    }
+    return allInstances;
+  }
+
+  public Map.Entry<String,List> getCheapestBasedOnCapacity(Map<String,List> allInstances, Double cores, Double memory) {
+    allInstances =
+        allInstances.entrySet().stream().filter(kv -> (Double.parseDouble(kv.getValue().get(0).toString()) >= cores) &&
+        (Double.parseDouble(kv.getValue().get(1).toString()) > memory)).sorted(Comparator.comparing(e -> Double.valueOf(e.getValue().get(3).toString())))
+        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));;
+    Map.Entry<String,List> entry = allInstances.entrySet().iterator().next();
+    return entry;
+  }
+
+  public List<Map.Entry> getCheapestInstance(List capacityUsages, Map<String,List> instanceValuesFromModalTable) {
+    List<Map.Entry> cheapestInstances = new ArrayList<>();
+    for (Object capacityInfo : capacityUsages) {
+      Map<String, Object> capacity = (Map<String, Object>) capacityInfo;
+      Double onPremCoresCapacity =
+          Double.valueOf(capacity.get(CloudMappingHostConstants.HostDetails.CapacityUsages.CORES).toString());
+      Double onPremMemoryCapacity = convertMemoryToMB(capacity.get(
+          CloudMappingHostConstants.HostDetails.CapacityUsages.MEMORY).toString());
+      Map.Entry cheapestInstance = getCheapestBasedOnCapacity(instanceValuesFromModalTable,
+          onPremCoresCapacity, onPremMemoryCapacity);
+      cheapestInstances.add(cheapestInstance);
+    }
+    return cheapestInstances;
+  }
+
+  /**
+   * Convert memory values into MB
+   * @param memory - memory values
+   * @return - String memory in MB
+   */
+  public Double convertMemoryToMB(String memory) {
+    String digits = memory.replaceAll("[^0-9.]", "");
+    if (memory.contains("TB")) {
+      return Double.parseDouble(digits) * 1024 * 1024;
+    } else if (memory.contains("GB")) {
+      return Double.parseDouble(digits) * 1024;
+    } else {
+      return Double.parseDouble(digits);
+    }
+  }
+
+  /**
+   * Validate whether cheapest instance displayed in recommendation
+   * when multiple instance was selected during run
+   * @param test - ExtentTest instance to log into report
+   */
+  public void validateCheapestIsDisplayedInRecommendation(ExtentTest test) {
+    LOGGER.info("Select first storage.", test);
+    selectStorage("Object storage");
+    waitTillLoaderPresent();
+    checkUncheckColumn(false);
+    Map<String,List> instanceValuesFromModalTable = getInstanceValuesFromModalTable();
+    clickOnRunButton();
+    try {
+      waitExecuter.waitUntilTextToBeInWebElement(getConfirmationMessage(),
+          "Cloud Mapping Per Host completed successfully.");
+    } catch (TimeoutException te) {
+      Assert.assertTrue(false, "Cloud Mapping Per Host is not completed");
+    }
+    waitTillLoaderPresent();
+    waitExecuter.sleep(10000);
+
+    LOGGER.info("Validate recommended for lift and shift.", test);
+
+    List recommendedUsages = getDataFromCloudMappingTable(
+        MigrationCloudMappingHostDetailsTable.RECOMMENDATION);
+    List actualRecommendedInstanceNames =
+        (List) recommendedUsages.stream().filter(data -> data instanceof Map).map(data -> ((Map) data)
+            .get(CloudMappingHostConstants.HostDetails.RecommendedUsages.TYPE)).collect(Collectors.toList());
+
+    List capacityUsages = getDataFromCloudMappingTable(
+        MigrationCloudMappingHostDetailsTable.CAPACITY);
+    List<Map.Entry> cheapestInstances = getCheapestInstance(capacityUsages, instanceValuesFromModalTable);
+
+    for (int i=0; i<actualRecommendedInstanceNames.size(); i++) {
+      Assert.assertEquals(actualRecommendedInstanceNames.get(i).toString(), cheapestInstances.get(i).getKey());
+      LOGGER.pass("Expected instance is matching for: " + cheapestInstances.get(i).getKey(), test);
+    }
+
+    clickOnCostReductionTab();
+    waitExecuter.sleep(5000);
+    LOGGER.info("Validate recommended for Cost Reduction.", test);
+    recommendedUsages = getDataFromCloudMappingTable(
+        MigrationCloudMappingHostDetailsTable.RECOMMENDATION);
+    actualRecommendedInstanceNames =
+        (List) recommendedUsages.stream().filter(data -> data instanceof Map).map(data -> ((Map) data)
+            .get(CloudMappingHostConstants.HostDetails.RecommendedUsages.TYPE)).collect(Collectors.toList());
+    List actualUsages = getDataFromCloudMappingTable(
+        MigrationCloudMappingHostDetailsTable.ACTUAL_USAGE);
+    cheapestInstances = getCheapestInstance(actualUsages, instanceValuesFromModalTable);
+
+    for (int i=0; i<actualRecommendedInstanceNames.size(); i++) {
+      Assert.assertEquals(actualRecommendedInstanceNames.get(i).toString(), cheapestInstances.get(i).getKey());
+      LOGGER.pass("Expected instance is matching for: " + cheapestInstances.get(i).getKey(), test);
+    }
+  }
+
+  /**
+   * Verify Total Hourly cost is less for cost reduction is less
+   * than what is displayed for lift and shift
+   * @param test
+   */
+  public void verifyTotalHoulyCost(ExtentTest test) {
+    clickOnLiftAndShiftTab();
+    Double liftAndShiftTotalHourlyCost = getTotoalHourlyCostValue();
+    clickOnCostReductionTab();
+    waitExecuter.sleep(1000);
+    Double costReductionTotalHourlyCost = getTotoalHourlyCostValue();
+    Assert.assertTrue(costReductionTotalHourlyCost <= liftAndShiftTotalHourlyCost,
+        "The Total Hourly Cost not equal to or less than what is displayed for Lift and Shift.");
+    LOGGER.pass("The Total Hourly Cost is equal to or less than what is displayed for Lift and Shift.", test);
+  }
+
+  /**
+   * Get Storage Name value
+   */
+  public String getStorageName() {
+    return cmpPageObj.storageNameLabel.getText().split(":")[1].trim();
   }
 }

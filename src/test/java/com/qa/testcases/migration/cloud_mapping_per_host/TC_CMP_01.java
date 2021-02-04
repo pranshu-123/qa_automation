@@ -41,7 +41,7 @@ public class TC_CMP_01 extends BaseClass {
     waitExecuter.waitUntilElementClickable(cmPageObj.cloudMappingPerHostTab);
     MouseActions.clickOnElement(driver, cmPageObj.cloudMappingPerHostTab);
     waitExecuter.waitUntilElementClickable(cmPageObj.runButton);
-    waitExecuter.waitUntilPageFullyLoaded();
+    cloudMappingPage.waitTillLoaderPresent();
     String[] expectedValList = {"Amazon EMR", "Asia Pacific (Mumbai)", "Local attached storage"};
     cloudMappingPage.verifyCloudMappingPerHostReports(expectedValList, "i3.16xlarge");
     test.log(LogStatus.PASS, "Validated that all the reports with report status are present ");

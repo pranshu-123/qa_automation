@@ -356,8 +356,11 @@ public class HBasePage {
 
         waitExecuter.waitUntilElementPresent(hBasePageObject.getHbaseTableHostFirstRowRegionName);
         String regionName = hBasePageObject.getHbaseTableHostFirstRowRegionName.getText();
+        Assert.assertFalse(regionName.isEmpty(),"Region name is empty.");
+
         waitExecuter.waitUntilElementPresent(hBasePageObject.getHbaseTableHostFirstRowRegionSvrName);
         String regionSvrName = hBasePageObject.getHbaseTableHostFirstRowRegionSvrName.getText();
+        Assert.assertFalse(regionSvrName.isEmpty(),"Region server name is empty.");
 
         logger.info("Region name: "+regionName + ", Region server name: "+regionSvrName  );
     }

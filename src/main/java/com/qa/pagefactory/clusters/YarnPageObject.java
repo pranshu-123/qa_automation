@@ -1,5 +1,6 @@
 package com.qa.pagefactory.clusters;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -90,6 +91,13 @@ public class YarnPageObject {
     @FindBy(xpath="//div[@id='Memory-Application']//div[3]//label/span[1]")
     public List<WebElement> memoryApplicationChkBoxList;
 
+    @FindBy(xpath="//span[@id='VCoreTS']/div/div")
+    public WebElement vCoresGraph;
+
+    public By graphGContents = By.cssSelector("svg > g.highcharts-series-group");
+
+    @FindBy(xpath="//*[@id='VCore-Application']//*[name()='svg']//*[local-name()='rect' and @class='highcharts-background']")
+    public WebElement vCoresAppGraph;
 
     public YarnPageObject(WebDriver driver) {
         PageFactory.initElements(driver, this);

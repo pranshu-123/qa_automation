@@ -55,4 +55,14 @@ public class GraphColorConstants {
   public static class ImpalaQueriesGraph {
     public static final String FIRST_USER_COLOR = "29,186,175";
   }
+
+  public static class YarnResourcesGraph{
+    public static final String TOTAL_AVAILABLE_COLOR = "250,108,53";
+    public static final String TOTAL_ALLOCATED_COLOR = "28,204,235";
+    public static final String YARN_SERVICE_COLOR= "29,186,175";
+    public static final String SPARK_COLOR= "187,70,139";
+    public static final String TEZ_COLOR= "28,204,235";
+    public static final String MAPREDUCE_COLOR= "83,62,120";
+  }
+
 }

@@ -14,16 +14,16 @@ import java.util.logging.Logger;
 
 @Marker.ClusterHBase
 @Marker.All
-public class TC_HB_42 extends BaseClass {
+public class TC_HB_50 extends BaseClass {
 
-    private static final Logger LOGGER = Logger.getLogger(TC_HB_42.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TC_HB_50.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void verifyTablesInARegionServer (String clusterId) {
-        test = extent.startTest("TC_HB_42.verifyTablesInARegionServer",
-                "Verify all column values in table metrics.");
+    public void verifyTablesRegionCountMetrics(String clusterId) {
+        test = extent.startTest("TC_HB_50.verifyTablesRegionCountMetrics",
+                "Verify regionCount metrics data and graph.");
         test.assignCategory(" Cluster - HBasePage ");
-        Log.startTestCase("TC_HB_42.verifyTablesInARegionServer");
+        Log.startTestCase("TC_HB_50.verifyTablesRegionCountMetrics");
 
         // Initialize all classes objects
         LOGGER.info("Initialize all class objects");
@@ -39,19 +39,19 @@ public class TC_HB_42 extends BaseClass {
         waitExecuter.waitUntilElementPresent(hBasePageObject.hbaseHeader);
         LOGGER.info("HBase headers found: " + hbase.getHBaseHeader());
 
-        //Click on 'Region Server' and verify hbase region server tab
-        hbase.verifyRegionServer();
+        //Verify Hbase Tables tab elements tables
+        hbase.verifyTablesTabElements();
 
-        //Verify region server names
-        hbase.verifyRegionSeverNames();
-        LOGGER.info("Verified HBase region server names.");
-        test.log(LogStatus.PASS, "Verified HBase region server names.");
+        //Verify Hbase Tables graph metric
+        String expectedHBaseGraphMetrics = "Region Count";
+        String hbaseGraph = "hbaseGraphundefined";
+        hbase.verifyHBaseKPIGraphs(hBasePageObject,expectedHBaseGraphMetrics, hbaseGraph);
 
-        //Verify Tables in a region server
-        hbase.verifyTableNamesInRegionServer();
-        LOGGER.info("Verified all table name of a HBase region server.");
-        test.log(LogStatus.PASS, "Verified table names of a HBase region server.");
+        LOGGER.info("HBase Tables regionCount metrics data and graph charts found.");
+        test.log(LogStatus.PASS, "Verified regionCount metrics data and graph.");
+
 
 
     }
+
 }

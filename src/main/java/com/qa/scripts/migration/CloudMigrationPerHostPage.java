@@ -252,15 +252,7 @@ public class CloudMigrationPerHostPage {
     /**
      * Method to click the cloud provider and corresponding region
      */
-    public void clickCloudProvideAndRegion(String[] expectedList) {//String cloudProvider, String region){
-//    List<WebElement> cloudProDD = cmpPageObj.cloudProductDropDown;
-//    waitExecuter.sleep(2000);
-//    userAction.performActionWithPolling(cloudProDD.get(0), UserAction.CLICK);
-//    getOptions(cloudProvider);
-//    waitExecuter.waitUntilElementClickable(cmpPageObj.checkBox);
-//    waitExecuter.waitUntilPageFullyLoaded();
-//    userAction.performActionWithPolling(cmpPageObj.regionDropDown, UserAction.CLICK);
-//    getOptions(region);
+    public void clickCloudProvideAndRegion(String[] expectedList) {
         List<WebElement> dropDownList = cmpPageObj.dropDownBtn;
         for (int i = 0; i < dropDownList.size() - 1; i++) {
             MouseActions.clickOnElement(driver, dropDownList.get(i));
@@ -272,7 +264,6 @@ public class CloudMigrationPerHostPage {
     public void verifyCostChangeForDiffRegions(String cloudProvider, String region1, String region2) {
         waitExecuter.sleep(2000);
         runNewReport();
-        // clickCloudProvideAndRegion(cloudProvider, region1);
         String[] val = {"Amazon EMR", "Asia Pacific (Mumbai)"};
         clickCloudProvideAndRegion(val);
         HashMap<String, String> vmTypeCost = getUIVMList(region1, cloudProvider);
@@ -281,7 +272,6 @@ public class CloudMigrationPerHostPage {
         waitExecuter.waitUntilPageFullyLoaded();
         runNewReport();
         String[] val1 = {"Amazon EMR", "South America (Sao Paulo)"};
-        // clickCloudProvideAndRegion(cloudProvider, region2);
         clickCloudProvideAndRegion(val1);
         HashMap<String, String> vmTypeCost2 = getUIVMList(region2, cloudProvider);
         logger.info("The vmTypeCost map for region " + region2 + " is " + vmTypeCost2);
@@ -295,10 +285,8 @@ public class CloudMigrationPerHostPage {
         logger.info("The current url is " + currentUrl);
         ArrayList<String> expectedVMList;
         runNewReport();
-        // waitExecuter.waitUntilPageFullyLoaded();
         List<WebElement> cloudProDD = cmpPageObj.cloudProductDropDown;
         waitExecuter.sleep(2000);
-        // action.moveToElement(cloudProDD.get(0)).perform();
         userAction.performActionWithPolling(cloudProDD.get(0), UserAction.CLICK);
         getOptions(cloudProvider);
         waitExecuter.waitUntilElementClickable(cmpPageObj.checkBox);

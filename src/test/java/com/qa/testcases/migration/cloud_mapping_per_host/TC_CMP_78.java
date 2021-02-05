@@ -39,7 +39,7 @@ public class TC_CMP_78 extends BaseClass {
         cloudMigrationPerHostPage.waitTillLoaderPresent();
         List<String> expectedStorageObject = Arrays.asList(CloudStorageType.OBJECT_STORAGE.getValue(),
                 CloudStorageType.LOCAL_ATTACHED_STORAGE.getValue());
-        Assert.assertEquals(cloudMigrationPerHostPage.getStorageList(), expectedStorageObject, "Incorrect correct cloud storage " +
+        Assert.assertEquals(cloudMigrationPerHostPage.getStorageList(), expectedStorageObject, "Incorrect cloud storage " +
                 "types are displayed");
         LOGGER.pass("Verified correct cloud storage types are displayed", test);
     }

@@ -1,5 +1,6 @@
 package com.qa.testcases.migration.cloud_mapping_per_host;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.enums.migration.CloudProduct;
 import com.qa.scripts.migration.CloudMigrationPerHostPage;
@@ -8,6 +9,8 @@ import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import org.testng.annotations.Test;
 
+@Marker.CloudMappingPerHost
+@Marker.All
 public class TC_CMP_26 extends BaseClass {
     private static final LoggingUtils LOGGER = new LoggingUtils(TC_CMP_26.class);
 

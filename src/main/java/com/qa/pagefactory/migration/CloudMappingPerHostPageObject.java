@@ -145,6 +145,12 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//span[contains(text(),'COST REDUCTION')]")
   public WebElement costReductionTab;
 
+  @FindBy(xpath = "//span[contains(text(),'LIFT AND SHIFT')]")
+  public WebElement liftAndShiftTab;
+
+  @FindBy(xpath = "//label[contains(text(), 'Storage Name')]")
+  public WebElement storageNameLabel;
+
   /**
    * @param driver The driver that will be used to look up the elements
    */

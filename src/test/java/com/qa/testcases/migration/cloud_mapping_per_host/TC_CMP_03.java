@@ -40,8 +40,7 @@ public class TC_CMP_03 extends BaseClass {
     waitExecuter.waitUntilElementClickable(cmPageObj.cloudMappingPerHostTab);
     MouseActions.clickOnElement(driver, cmPageObj.cloudMappingPerHostTab);
     waitExecuter.waitUntilElementClickable(cmPageObj.runButton);
-    waitExecuter.waitUntilPageFullyLoaded();
-
+    cloudMappingPage.waitTillLoaderPresent();
     cloudMappingPage.verifyEMRVMTypes("Asia Pacific (Seoul)", "Amazon EC2 (IaaS)");
     test.log(LogStatus.PASS, "Validated Unravel UI displays the right VM types for EC2 successfully ");
   }

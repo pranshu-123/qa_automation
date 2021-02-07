@@ -1,6 +1,7 @@
 package com.qa.scripts.clusters;
 
 import com.qa.enums.UserAction;
+import com.qa.enums.hbase.HbaseRegionSvrTableColumn;
 import com.qa.enums.hbase.HbaseTablesColumn;
 import com.qa.pagefactory.clusters.HBasePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
@@ -265,6 +266,7 @@ public class HBasePage {
         logger.info(""+regionMetricsChartsTablesList);
     }
 
+    //verify Region server tab and click on it and also check region data table
     public void verifyRegionServer(){
         List<WebElement> hBaseKpiContainersList = hBasePageObject.hBaseKpiContainers;
         Assert.assertFalse(hBaseKpiContainersList.isEmpty(), "Region Metrics Charts And Tables not found.");
@@ -404,6 +406,127 @@ public class HBasePage {
     }
 
     /**
+     * Click on the Region Server table heading
+     * @param hbaseRegionSvrTableColumn - Hbase Region Server Tables
+     */
+    public void clickOnRegionSvrTable(HbaseRegionSvrTableColumn hbaseRegionSvrTableColumn){
+        WebElement headingToBeClicked = hBasePageObject.hbaseRegionsDataTble.findElement(By.xpath("//th["+
+                (hbaseRegionSvrTableColumn.index + 1) + "]/a"));
+        MouseActions.clickOnElement(driver, headingToBeClicked);
+        waitExecuter.sleep(2000);
+    }
+
+    public void sortColumnsInRegionSvrTableMetrics(){
+
+        clickOnRegionSvrTable(HbaseRegionSvrTableColumn.REGION_SERVER_NAME);
+        logger.info("Click on Region Server Name column.");
+        Boolean isDataSortedForRegionSvrName = isRegionSvrTablesDataSorted(HbaseRegionSvrTableColumn.REGION_SERVER_NAME,
+                false);
+        Assert.assertTrue(isDataSortedForRegionSvrName, "Region Server Name Data is not sorted.");
+        waitExecuter.sleep(2000);
+
+        clickOnRegionSvrTable(HbaseRegionSvrTableColumn.READ_REQUEST_COUNT);
+        logger.info("Click on Region Server Read Request Count column.");
+        Boolean isDataSortedForRegionSvrReadReqCnt = isRegionSvrTablesDataSorted(
+                HbaseRegionSvrTableColumn.READ_REQUEST_COUNT,true);
+        Assert.assertTrue(isDataSortedForRegionSvrReadReqCnt, "Region Server Read Request Count Data is not sorted.");
+        waitExecuter.sleep(2000);
+
+        clickOnRegionSvrTable(HbaseRegionSvrTableColumn.WRITE_REQUEST_COUNT);
+        logger.info("Click on Region Server Read Request Count column.");
+        Boolean isDataSortedForRegionSvrWriteReqCnt = isRegionSvrTablesDataSorted(
+                HbaseRegionSvrTableColumn.WRITE_REQUEST_COUNT,true);
+        Assert.assertTrue(isDataSortedForRegionSvrReadReqCnt, "Region Server Read Request Count Data is not sorted.");
+        waitExecuter.sleep(2000);
+
+        clickOnRegionSvrTable(HbaseRegionSvrTableColumn.STORE_FILE_SIZE);
+        logger.info("Click on Region Server store file size column.");
+        Boolean isDataSortedForRegionSvrStoreFileSize = isRegionSvrTablesDataSorted(
+                HbaseRegionSvrTableColumn.STORE_FILE_SIZE, true);
+        Assert.assertTrue(isDataSortedForRegionSvrStoreFileSize, "Region Server store file size Data is not sorted.");
+        waitExecuter.sleep(2000);
+
+        clickOnRegionSvrTable(HbaseRegionSvrTableColumn.REGION_COUNT);
+        logger.info("Click on Region Server 'Region Count' column.");
+        Boolean isDataSortedForRegionSvrRegionCnt = isRegionSvrTablesDataSorted(
+                HbaseRegionSvrTableColumn.REGION_COUNT,true);
+        Assert.assertTrue(isDataSortedForRegionSvrRegionCnt, "Region Server Read Request Count Data is not sorted.");
+        waitExecuter.sleep(2000);
+    }
+
+    /**
+     * Validate whether data is sorted of hbase region server table column
+     * @param hbaseRegionSvrTableColumn  - Region Server Table Column to be clicked
+     * @param isReversed - Descending Order
+     * @return true if data is sorted.
+     */
+    public Boolean isRegionSvrTablesDataSorted(HbaseRegionSvrTableColumn hbaseRegionSvrTableColumn, Boolean isReversed){
+
+        List<String> actualDataString = new ArrayList<>();
+        List<WebElement> tableRows = hBasePageObject.hBaseRegionSvrTableRecords;
+        for(WebElement row: tableRows){
+            //table[@id='hbaseRegionsDataTble']/tbody/tr/td[1]
+            actualDataString.add(row.findElement(By.xpath("td["+ (hbaseRegionSvrTableColumn.index + 1) +
+                    "]")).getText().trim());
+            actualDataString = actualDataString.stream().map(data -> Arrays.asList(data.split("\n"))
+                    .stream().reduce((first, second) -> second).get()).collect(Collectors.toList());
+        }
+        //System.out.println("actualDataString: "+actualDataString);
+
+        if(hbaseRegionSvrTableColumn == HbaseRegionSvrTableColumn.READ_REQUEST_COUNT ||
+                hbaseRegionSvrTableColumn == HbaseRegionSvrTableColumn.WRITE_REQUEST_COUNT ||
+                hbaseRegionSvrTableColumn == HbaseRegionSvrTableColumn.REGION_COUNT){
+
+            List<Integer> actualDataInteger = actualDataString.stream().map(data ->
+                    convertToInteger(data)).collect(Collectors.toList());
+            //System.out.println("actualDataInteger: "+actualDataInteger);
+            List<String> sortedList = new ArrayList(actualDataInteger);
+            if (isReversed) {
+                sortedList.sort(Comparator.reverseOrder());
+            } else {
+                sortedList.sort(Comparator.naturalOrder());
+            }
+            if (actualDataInteger.equals(sortedList)) {
+                return true;
+            } else {
+                return false;
+            }
+
+        }else if(hbaseRegionSvrTableColumn == HbaseRegionSvrTableColumn.STORE_FILE_SIZE){
+
+            List<Double> actualDataDouble = actualDataString.stream().map(data ->
+                    convertToDouble(data)).collect(Collectors.toList());
+            //System.out.println("actualDataDouble: "+actualDataDouble);
+            List<String> sortedList = new ArrayList(actualDataDouble);
+            if (isReversed) {
+                sortedList.sort(Comparator.reverseOrder());
+            } else {
+                sortedList.sort(Comparator.naturalOrder());
+            }
+            if (actualDataDouble.equals(sortedList)) {
+                return true;
+            } else {
+                return false;
+            }
+
+        }else {
+
+            List<String> sortedList = new ArrayList(actualDataString);
+            if (isReversed) {
+                sortedList.sort(Comparator.reverseOrder());
+            } else {
+                sortedList.sort(Comparator.naturalOrder());
+            }
+            if (actualDataString.equals(sortedList)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+    }
+
+    /**
      * Click on the table heading of hbase tables
      * @param hbaseTablesColumn - Hbase Tables
      */
@@ -418,43 +541,51 @@ public class HBasePage {
     public void sortColumnsInTableMetrics(){
         clickOnTableHeading(HbaseTablesColumn.TABLE_NAME);
         logger.info("Click on Table Name column.");
-        Boolean isDataSortedForTblName = isDataSorted(HbaseTablesColumn.TABLE_NAME, false);
+        Boolean isDataSortedForTblName = isTablesDataSorted(HbaseTablesColumn.TABLE_NAME, false);
         Assert.assertTrue(isDataSortedForTblName, "Data is not sorted.");
         waitExecuter.sleep(2000);
         clickOnTableHeading(HbaseTablesColumn.TABLE_SIZE);
         logger.info("Click on Table Name column.");
-        Boolean isDataSortedForTblSize = isDataSorted(HbaseTablesColumn.TABLE_SIZE, true);
+        Boolean isDataSortedForTblSize = isTablesDataSorted(HbaseTablesColumn.TABLE_SIZE, true);
         Assert.assertTrue(isDataSortedForTblSize, "Data is not sorted.");
         waitExecuter.sleep(2000);
         clickOnTableHeading(HbaseTablesColumn.REGION_COUNT);
         logger.info("Click on Table Name column.");
-        Boolean isDataSortedForRegionCnt = isDataSorted(HbaseTablesColumn.REGION_COUNT, true);
+        Boolean isDataSortedForRegionCnt = isTablesDataSorted(HbaseTablesColumn.REGION_COUNT, true);
         Assert.assertTrue(isDataSortedForRegionCnt, "Data is not sorted.");
         waitExecuter.sleep(2000);
         clickOnTableHeading(HbaseTablesColumn.READ_REQUEST_COUNT);
         logger.info("Click on Table Name column.");
-        Boolean isDataSortedForReadReqCnt = isDataSorted(HbaseTablesColumn.READ_REQUEST_COUNT, true);
+        Boolean isDataSortedForReadReqCnt = isTablesDataSorted(HbaseTablesColumn.READ_REQUEST_COUNT, true);
         Assert.assertTrue(isDataSortedForReadReqCnt, "Data is not sorted.");
         waitExecuter.sleep(2000);
         clickOnTableHeading(HbaseTablesColumn.WRITE_REQUEST_COUNT);
         logger.info("Click on Table Name column.");
-        Boolean isDataSortedForWriteReqCnt = isDataSorted(HbaseTablesColumn.WRITE_REQUEST_COUNT, true);
+        Boolean isDataSortedForWriteReqCnt = isTablesDataSorted(HbaseTablesColumn.WRITE_REQUEST_COUNT, true);
         Assert.assertTrue(isDataSortedForWriteReqCnt, "Data is not sorted.");
     }
 
+    //convert String data to integer
     public int convertToInteger(String data){
 
         String[] newData = data.split(" ");
         return Integer.parseInt(newData[0]);
     }
 
+    //convert String data to double
+    public double convertToDouble(String data){
+
+        String[] newData = data.split(" ");
+        return Double.parseDouble(newData[0]);
+    }
+
     /**
-     * Validate whether data is sorted of habse table column
+     * Validate whether data is sorted of hbase table column
      * @param hbaseTablesColumn  - Table Column to be clicked
      * @param isReversed - Descending Order
      * @return true if data is sorted.
      */
-    public boolean isDataSorted(HbaseTablesColumn hbaseTablesColumn, Boolean isReversed){
+    public boolean isTablesDataSorted(HbaseTablesColumn hbaseTablesColumn, Boolean isReversed){
 
         List<String> actualDataString = new ArrayList<>();
         List<WebElement> tableRows = hBasePageObject.tablesTabTblRecords;
@@ -463,7 +594,7 @@ public class HBasePage {
             actualDataString = actualDataString.stream().map(data -> Arrays.asList(data.split("\n"))
                     .stream().reduce((first, second) -> second).get()).collect(Collectors.toList());
         }
-        System.out.println("actualDataString: "+actualDataString);
+        //System.out.println("actualDataString: "+actualDataString);
 
         if(hbaseTablesColumn == HbaseTablesColumn.TABLE_SIZE ||
                 hbaseTablesColumn == HbaseTablesColumn.REGION_COUNT ||
@@ -473,7 +604,7 @@ public class HBasePage {
 
             List<Integer> actualDataInteger = actualDataString.stream().map(data ->
                     convertToInteger(data)).collect(Collectors.toList());
-            System.out.println("actualDataInteger: "+actualDataInteger);
+            //System.out.println("actualDataInteger: "+actualDataInteger);
             List<String> sortedList = new ArrayList(actualDataInteger);
             if (isReversed) {
                 sortedList.sort(Comparator.reverseOrder());
@@ -493,8 +624,6 @@ public class HBasePage {
             } else {
                 sortedList.sort(Comparator.naturalOrder());
             }
-            System.out.println("actualDataString: "+actualDataString);
-            System.out.println("sortedList: "+sortedList);
 
             if (actualDataString.equals(sortedList)) {
                 return true;

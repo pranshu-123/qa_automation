@@ -634,4 +634,18 @@ public class HBasePage {
         }
 
     }
+
+
+    public List<String> getTableNamesFromTablesTab(HbaseTablesColumn hbaseTablesColumn){
+
+        List<String> tableNames = new ArrayList<>();
+        List<WebElement> tableRows = hBasePageObject.tablesTabTblRecords;
+        for (WebElement row : tableRows) {
+            tableNames.add(row.findElement(By.xpath("td[" + (hbaseTablesColumn.index + 1) + "]")).getText().trim());
+            tableNames = tableNames.stream().map(data -> Arrays.asList(data.split("\n"))
+                    .stream().reduce((first, second) -> second).get()).collect(Collectors.toList());
+        }
+
+        return tableNames;
+    }
 }

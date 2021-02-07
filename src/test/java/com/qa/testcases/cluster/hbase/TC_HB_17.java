@@ -41,9 +41,9 @@ public class TC_HB_17 extends BaseClass {
         waitExecuter.waitUntilElementPresent(hBasePageObject.hbaseHeader);
         LOGGER.info("HBase headers found: "+ hbase.getHBaseHeader());
 
-         List<String> hBaseClusters = hbase.getAllHBaseClusters();
-         LOGGER.info("HBase clusters found are: "+ hBaseClusters);
-         Assert.assertFalse(hBaseClusters.isEmpty(), "HBase clusters not available");
+        List<String> hBaseClusters = hbase.getAllHBaseClusters();
+        LOGGER.info("HBase clusters found are: "+ hBaseClusters);
+        Assert.assertFalse(hBaseClusters.isEmpty(), "HBase clusters not available");
         test.log(LogStatus.PASS, "Verified HBase clusters in Unravel UI.");
 
     }

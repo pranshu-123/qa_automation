@@ -20,14 +20,14 @@ import java.util.logging.Logger;
 @Marker.All
 public class MR_052_PART2 extends BaseClass {
 
-    java.util.logging.Logger logger = Logger.getLogger(MR_052_PART1.class.getName());
+    java.util.logging.Logger logger = Logger.getLogger(MR_052_PART2.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_052_PART1_verifyfailedStatus(String clusterId) {
-        test = extent.startTest("MR_052_PART1_verifyfailedStatus: " + clusterId,
-                "Verify KPI for MR must be listed andf all the values should be populated");
+    public void MR_052_PART1_verifyStatus(String clusterId) {
+        test = extent.startTest("MR_052_PART1_verifyStatus: " + clusterId,
+                "Verify there are 2 tabs , Task Attempt (Map), Task Attempt(Reduce)");
         test.assignCategory(" Apps Details-Mr");
-        Log.startTestCase("MR_052_PART1_verifyfailedStatus");
+        Log.startTestCase("MR_052_PART1_verifyStatus");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -55,7 +55,7 @@ public class MR_052_PART2 extends BaseClass {
                 waitExecuter.waitUntilPageFullyLoaded();
                 MouseActions.clickOnElement(driver, mrApps.resourcesTab);
                 waitExecuter.waitUntilPageFullyLoaded();
-                mrDetailsPage.validateMapandReducTab(mrApps, test);
+                mrDetailsPage.validateResourcesTab(mrApps);
 
                 //Close apps details page
                 MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);

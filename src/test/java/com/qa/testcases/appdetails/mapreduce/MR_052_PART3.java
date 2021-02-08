@@ -20,12 +20,12 @@ import java.util.logging.Logger;
 @Marker.All
 public class MR_052_PART3 extends BaseClass {
 
-    java.util.logging.Logger logger = Logger.getLogger(MR_052_PART1.class.getName());
+    java.util.logging.Logger logger = Logger.getLogger(MR_052_PART3.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void MR_052_PART1_verifykilledStatus(String clusterId) {
         test = extent.startTest("MR_052_PART1_verifykilledStatus: " + clusterId,
-                "Verify KPI for MR must be listed andf all the values should be populated");
+                "Verify there are 2 tabs , Task Attempt (Map), Task Attempt(Reduce)");
         test.assignCategory(" Apps Details-Mr");
         Log.startTestCase("MR_052_PART1_verifykilledStatus");
 
@@ -55,7 +55,7 @@ public class MR_052_PART3 extends BaseClass {
                 waitExecuter.waitUntilPageFullyLoaded();
                 MouseActions.clickOnElement(driver, mrApps.resourcesTab);
                 waitExecuter.waitUntilPageFullyLoaded();
-                mrDetailsPage.validateMapandReducTab(mrApps, test);
+                mrDetailsPage.validateResourcesTab(mrApps);
 
                 //Close apps details page
                 MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);

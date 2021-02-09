@@ -47,7 +47,7 @@ public class TC_HB_71  extends BaseClass {
 
         boolean flag = false;
         for (String clusterName : hBaseClusters) {
-            if (clusterName.contains("CDH")) {
+            if (clusterName.contains("CM")) {
                 flag =  true;
                 Assert.assertTrue(true, "Multicluster setup with CDH cluster not found.");
                 LOGGER.info("Verified Multicluster setup with one CDH cluster."+clusterName);

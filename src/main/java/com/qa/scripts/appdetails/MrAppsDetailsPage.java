@@ -2,6 +2,9 @@ package com.qa.scripts.appdetails;
 
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.MrAppsDetailsPageObject;
+import com.qa.pagefactory.appsDetailsPage.TezAppsDetailsPageObject;
+import com.qa.pagefactory.clusters.ELKPageObject;
+import com.qa.pagefactory.clusters.HBasePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.jobs.applications.AllApps;
@@ -17,14 +20,20 @@ import org.testng.Assert;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Logger;
+
+import static org.testng.Assert.assertTrue;
 
 public class MrAppsDetailsPage {
     private static Boolean isDignosticWin = false;
     Logger logger = Logger.getLogger(SparkAppsDetailsPage.class.getName());
     private WaitExecuter waitExecuter;
     private WebDriver driver;
+
+    String xAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]//*[name()='g' and contains(@class,'highcharts-xaxis-labels')]/*[name()='text']";
+    String yAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]//*[name()='g' and contains(@class,'highcharts-yaxis-labels')]/*[name()='text']";
 
 
     /**
@@ -140,6 +149,27 @@ public class MrAppsDetailsPage {
     }
 
 
+    /***
+     * Method to validate logstash metrics graph .
+     */
+    public void verifyResourceGraph(ELKPageObject elkPageObject) {
+        List<WebElement> metricsList = elkPageObject.logstashMetricsList;
+        List<WebElement> headerList = elkPageObject.logstashGraphHeader;
+        List<WebElement> footerList = elkPageObject.logstashGraphFooter;
+        List<WebElement> graphList = elkPageObject.logstashGraph;
+
+        for (int i = 0; i < metricsList.size(); i++) {
+            String metricsName = headerList.get(i).getText();
+            Assert.assertFalse(metricsName.isEmpty(), " Metrics Name not displayed");
+            logger.info("Metrics Name: [" + metricsName + "] displayed in the header");
+            Assert.assertTrue(graphList.get(i).isDisplayed(), "The graph for metrics " + metricsName + " is not displayed");
+            logger.info("The graph for Metrics : [" + metricsName + "] is displayed");
+            Assert.assertTrue(footerList.get(i).isDisplayed(), "The footer for metrics " + metricsName + " is not displayed");
+            logger.info("The footer for Metrics : [" + metricsName + "] is displayed");
+        }
+    }
+
+
     /**
      * Method to validate the tabs for each job stage.
      */
@@ -156,7 +186,7 @@ public class MrAppsDetailsPage {
             for (int t = 0; t < stageTabsList.size(); t++) {
                 String tabName = stageTabsList.get(t).getText();
                 switch (tabName) {
-                    case "Taskattempt":
+                    case "Resources":
                         logger.info("Validating the stage tab Taskattempt");
                         MouseActions.clickOnElement(driver, stageTabsList.get(t));
                         waitExecuter.sleep(1000);
@@ -209,7 +239,7 @@ public class MrAppsDetailsPage {
                         for (int s = 0; s < subTabList.size(); s++) {
                             String subTask = subTabList.get(s).getText();
                             logger.info("The subTask is " + subTask);
-                            Assert.assertTrue(Arrays.asList(expectedSubTabs).contains(subTask),
+                            assertTrue(Arrays.asList(expectedSubTabs).contains(subTask),
                                     "Subtask names displayed on the UI does not match with the expected list");
                         }
                         break;
@@ -230,7 +260,7 @@ public class MrAppsDetailsPage {
                         for (int s = 0; s < stageTimingHeaderList.size(); s++) {
                             String stageTimingHeader = stageTimingHeaderList.get(s).getText();
                             logger.info("The stageTimingHeader is " + stageTimingHeader);
-                            Assert.assertTrue(Arrays.asList(expectedTimingHeaders).contains(stageTimingHeader),
+                            assertTrue(Arrays.asList(expectedTimingHeaders).contains(stageTimingHeader),
                                     "Stage Timing header names displayed on the UI does not match with " +
                                             "the expected list");
                         }
@@ -413,6 +443,7 @@ public class MrAppsDetailsPage {
                     " icon for insights.\n" + ex.getMessage());
         }
     }
+
     /**
      * Method to validate AppSummary Errors tab.
      */
@@ -595,6 +626,231 @@ public class MrAppsDetailsPage {
     }
 
     /**
+     * Method to validate the tasks attempt Map tab in Resources and stages tab.
+     */
+    public void validateTaskAttemptMapTab(MrAppsDetailsPageObject mrApps) {
+        List<WebElement> footerNameList = mrApps.taskAttFooterName;
+        List<WebElement> footerValList = mrApps.taskAttFooterVal;
+        String pValStr = mrApps.resourcesPieChartInternalVal.getText();
+        String regex = "((?<=[a-zA-Z])(?=[0-9]))|((?<=[0-9])(?=[a-zA-Z]))";
+        int pieChartInternalVal = Integer.parseInt(Arrays.asList(pValStr.split(regex)).get(0));
+        logger.info("The value displayed inside the Pie Chart is " +
+                pieChartInternalVal);
+        int totalTaskCnt = 0;
+        for (int f = 0; f < footerNameList.size(); f++) {
+            String footerName = footerNameList.get(f).getText();
+            String footerValStr = footerValList.get(f).getText();
+            int footerVal = Integer.parseInt(footerValStr.replaceAll("[^\\dA-Za-z ]",
+                    "").trim());
+            totalTaskCnt += footerVal;
+            logger.info("FooterName = " + footerName + " Value = " + footerVal);
+        }
+        logger.info("Total Task Attempts = " + totalTaskCnt + " pie chart val = " +
+                pieChartInternalVal);
+    }
+
+    /**
+     * Method to validate the tasks attempt Reduce tab in Resources and stages tab.
+     */
+    public void validateTaskAttemptReduceTab(MrAppsDetailsPageObject mrApps) {
+        List<WebElement> footerNameList = mrApps.taskAttReduceFooterName;
+        Assert.assertFalse(footerNameList.isEmpty(),
+                "SUCCESS Attempts not displayed");
+        List<WebElement> footerValList = mrApps.taskAttReduceFooterVal;
+        Assert.assertFalse(footerValList.isEmpty(), "SUCCESS Attempts values " +
+                "not displayed");
+        String pValStr = mrApps.resourcesReducePieChartInternalVal.getText();
+        String regex = "((?<=[a-zA-Z])(?=[0-9]))|((?<=[0-9])(?=[a-zA-Z]))";
+        int pieChartInternalVal = Integer.parseInt(Arrays.asList(pValStr.split(regex)).get(0));
+        logger.info("The value displayed inside the Pie Chart is " +
+                pieChartInternalVal);
+        int totalTaskCnt = 0;
+        for (int f = 0; f < footerNameList.size(); f++) {
+            String footerName = footerNameList.get(f).getText();
+            String footerValStr = footerValList.get(f).getText();
+            int footerVal = Integer.parseInt(footerValStr.replaceAll("[^\\dA-Za-z ]",
+                    "").trim());
+            totalTaskCnt += footerVal;
+            logger.info("FooterName = " + footerName + " Value = " + footerVal);
+        }
+        logger.info("Total Task Attempts = " + totalTaskCnt + " pie chart val = " +
+                pieChartInternalVal);
+    }
+
+    /**
+     * Method to validate AppSummary Resource tab.
+     */
+    public void validateResourcesTab(MrAppsDetailsPageObject mrApps) {
+        String[] expectedGraphTitle = {"Task Attempt (MAP)","Task Attempt (REDUCE)","Attempts","Containers","Vcores","Memory","Metrics"};
+        List<WebElement> graphTitleList = mrApps.resourcesGraphTitle;
+        verifyAssertFalse(graphTitleList.isEmpty(), mrApps, "No title displayed");
+        List<WebElement> allGraphsList = mrApps.resourcesAllGraphs;
+        verifyAssertFalse(allGraphsList.isEmpty(), mrApps, "No graphs displayed");
+        Assert.assertFalse(graphTitleList.isEmpty(), "Metrics for map reduce graphs is empty");
+        for (int t = 0; t < graphTitleList.size(); t++) {
+            String graphTitle = graphTitleList.get(t).getText();
+            logger.info("Graph title is " + graphTitle);
+            verifyAssertTrue(Arrays.asList(expectedGraphTitle).contains(graphTitle), mrApps, " The expected" +
+                    " Graph title doesnot match with the titles in the UI");
+            verifyAssertTrue(allGraphsList.get(t).isDisplayed(), mrApps, " All Graphs are not displayed");
+            switch (graphTitle) {
+                case "Task Attempts":
+                    logger.info("Validating the Graph " + graphTitle);
+                    validateTaskAttemptMapTab(mrApps);
+                    validateTaskAttemptReduceTab(mrApps);
+                    break;
+                case "Containers":
+                case "Metrics":
+                    logger.info("Validating the Graph " + graphTitle);
+                    WebElement metricDropDown = mrApps.resourcesMetricsDropDown;
+                    MouseActions.clickOnElement(driver, metricDropDown);
+                    List<WebElement> dropDownList = mrApps.resourcesMetricsDropDownData;
+                    waitExecuter.sleep(2000);
+                    verifyAssertFalse(dropDownList.isEmpty(), mrApps, " No contents listed in the dropdown");
+                    String[] expectetContents = {"availableMemory", "vmRss", "systemCpuLoad",
+                            "processCpuLoad", "gcLoad", "maxHeap", "usedHeap"};
+                    for (int d = 0; d < dropDownList.size(); d++) {
+                        String metric = dropDownList.get(d).getText();
+                        logger.info("The metric is " + metric);
+                        verifyAssertTrue(Arrays.asList(expectetContents).contains(metric), mrApps, " The expected" +
+                                " metric is not listed in the drop down box");
+                        //click on the dropdown list element and validate the graph
+                        MouseActions.clickOnElement(driver, dropDownList.get(d));
+                        List<WebElement> resourcesMetricsPlotGraphList = mrApps.resourcesMetricsPlotGraph;
+                        List<WebElement> metricLegendList = mrApps.resourcesMetricsPlotGraphLegend;
+                        Assert.assertEquals(resourcesMetricsPlotGraphList.size(), metricLegendList.size(),
+                                "The number of executors in the legend do not match to the ones plotted in the graph");
+                        MouseActions.clickOnElement(driver, metricDropDown);
+                    }
+                case "Vcores":
+                case "Memory":
+                    logger.info("Validating the Graph " + graphTitle);
+                    break;
+
+            }
+            verifyAssertTrue(allGraphsList.get(0).isDisplayed(), mrApps, " No graph is displayed for "
+                    + graphTitle);
+        }
+    }
+
+    /***
+     * Method to verify the HBase Metrics KPI Graphs of a connected hbase cluster
+     */
+    public void verifyContainersKPIGraphs(MrAppsDetailsPageObject mrApps,String expectedMetricsName, String graphId){
+        List<WebElement> ContainersKpiHeaderList = mrApps.containerMetricsHeader;
+        List<WebElement> allGraphsList = mrApps.resourcesAllGraphs;
+        List<WebElement> graphTitleList = mrApps.resourcesGraphTitle;
+        Assert.assertFalse(ContainersKpiHeaderList.isEmpty(), "Metrics for mrapps cluster is empty");
+        String xAxisPath = "//*[@id='" + graphId + "']" + xAxis;
+        String yAxisPath = "//*[@id='" + graphId + "']" + yAxis;
+        for (int i = 0; i < graphTitleList.size(); i++) {
+            String metricsName = ContainersKpiHeaderList.get(i).getText();
+            logger.info("Metrics Name: " + metricsName + " Expected Name: " + expectedMetricsName);
+            if (metricsName.equals(expectedMetricsName)) {
+                Assert.assertFalse(metricsName.isEmpty(), " Metrics Name not displayed");
+                logger.info("Metrics Name: [" + metricsName + "] displayed in the header");
+                waitExecuter.waitUntilElementPresent(allGraphsList.get(i));
+                Assert.assertTrue(allGraphsList.get(i).isDisplayed(), "The graph for metrics " + metricsName + " is not displayed");
+                logger.info("The graph for Metrics : [" + metricsName + "] is displayed");
+                verifyAxis(xAxisPath, "X-Axis");
+                verifyAxis(yAxisPath, "Y-Axis");
+
+            } else {
+                verifyAssertTrue(allGraphsList.get(0).isDisplayed(), mrApps, " No graph is displayed for "
+                        + metricsName);
+            }
+        }
+    }
+
+
+
+    /***
+     * Method to verify the Metrics KPI Graphs of a connected hbase cluster
+     */
+    public void verifyMetricsKPIGraphs(MrAppsDetailsPageObject mrApps) {
+        String[] expectedGraphTitle = {"Metrics"};
+        List<WebElement> graphTitleList = mrApps.resourcesGraphTitle;
+        verifyAssertFalse(graphTitleList.isEmpty(), mrApps, "No title displayed");
+        List<WebElement> allGraphsList = mrApps.resourcesAllGraphs;
+        verifyAssertFalse(allGraphsList.isEmpty(), mrApps, "No graphs displayed");
+        Assert.assertFalse(graphTitleList.isEmpty(), "Metrics for map reduce graphs is empty");
+        for (int t = 0; t < graphTitleList.size(); t++) {
+            String graphTitle = graphTitleList.get(t).getText();
+            logger.info("Graph title is " + graphTitle);
+            verifyAssertTrue(Arrays.asList(expectedGraphTitle).contains(graphTitle), mrApps, " The expected" +
+                    " Graph title doesnot match with the titles in the UI");
+            verifyAssertTrue(allGraphsList.get(t).isDisplayed(), mrApps, " All Graphs are not displayed");
+            switch (graphTitle) {
+                case "Metrics":
+        logger.info("Validating the Graph " + graphTitle);
+        WebElement metricDropDown = mrApps.resourcesMetricsDropDown;
+        MouseActions.clickOnElement(driver, metricDropDown);
+        List<WebElement> dropDownList = mrApps.resourcesMetricsDropDownData;
+        waitExecuter.sleep(2000);
+        verifyAssertFalse(dropDownList.isEmpty(), mrApps, " No contents listed in the dropdown");
+        String[] expectetContents = {"availableMemory", "vmRss", "systemCpuLoad",
+                "processCpuLoad", "gcLoad", "maxHeap", "usedHeap"};
+        for (int d = 0; d < dropDownList.size(); d++) {
+            String metric = dropDownList.get(d).getText();
+            logger.info("The metric is " + metric);
+            verifyAssertTrue(Arrays.asList(expectetContents).contains(metric), mrApps, " The expected" +
+                    " metric is not listed in the drop down box");
+            //click on the dropdown list element and validate the graph
+            MouseActions.clickOnElement(driver, dropDownList.get(d));
+            List<WebElement> resourcesMetricsPlotGraphList = mrApps.resourcesMetricsPlotGraph;
+            List<WebElement> metricLegendList = mrApps.resourcesMetricsPlotGraphLegend;
+            Assert.assertEquals(resourcesMetricsPlotGraphList.size(), metricLegendList.size(),
+                    "The number of executors in the legend do not match to the ones plotted in the graph");
+            MouseActions.clickOnElement(driver, metricDropDown);
+        }
+            }
+            verifyAssertTrue(allGraphsList.get(0).isDisplayed(), mrApps, " No graph is displayed for "
+                    + graphTitle);
+        }
+    }
+
+    public void verifyAxis(String axisPath, String axisName) {
+        List<WebElement> axisPathList = driver.findElements(By.xpath(axisPath));
+        Assert.assertFalse(axisPathList.isEmpty(), "No points plotted on the " + axisName);
+        HashSet<String> axisValSet = new HashSet<>();
+        ArrayList<String> axisValArr = new ArrayList<>();
+        for (int i = 0; i < axisPathList.size(); i++) {
+            axisValArr.add(axisPathList.get(i).getText());
+            axisValSet.add(axisPathList.get(i).getText());
+        }
+        logger.info("Expected " + axisName + " : " + axisValSet + "\n Actual " + axisName + " : " + axisValArr);
+        Assert.assertEquals(axisValSet.size(), axisValArr.size(), "Duplicate values present in the " + axisName + "\n" +
+                "Expected : " + axisValSet + " Actual : " + axisValArr);
+    }
+
+    /**
+     * Method to validate AppSummary Resource tab.
+     */
+    public void validateMapandReducTab(MrAppsDetailsPageObject mrApps,ExtentTest test) {
+        String[] expectedGraphTitle = {"Task Attempt (MAP)","Task Attempt (REDUCE)"};
+        waitExecuter.waitUntilPageFullyLoaded();
+        List<WebElement> graphTitleList = mrApps.resourcesGraphTitle;
+        List<WebElement> allGraphsList = mrApps.resourcesAllGraphs;
+        for (int t = 0; t < graphTitleList.size(); t++) {
+            String graphTitle = graphTitleList.get(t).getText();
+            logger.info("Graph title is " + graphTitle);
+            switch (graphTitle) {
+                case "Task Attempt (MAP)":
+                    logger.info("Validating the Graph " + graphTitle);
+                    validateTaskAttemptMapTab(mrApps);
+                    break;
+                case "Task Attempt (REDUCE)":
+                    logger.info("Validating the Graph " + graphTitle);
+                    validateTaskAttemptReduceTab(mrApps);
+                    break;
+
+            }
+            verifyAssertTrue(allGraphsList.get(0).isDisplayed(), mrApps, " No graph is displayed for "
+                    + graphTitle);
+        }
+    }
+
+    /**
      * Method to verify the summary tabs in the right pane of the App Details page
      */
     public String verifyAppSummaryTabs(MrAppsDetailsPageObject mrApps, String verifyTabName, ExtentTest test) {
@@ -617,7 +873,7 @@ public class MrAppsDetailsPage {
                     case "Resources":
                         MouseActions.clickOnElement(driver, appsTabList.get(i));
                         waitExecuter.sleep(3000);
-                        //validateResourcesTab(mrApps);
+                        validateTaskAttemptMapTab(mrApps);
                         break;
                     case "Errors":
                         MouseActions.clickOnElement(driver, appsTabList.get(i));
@@ -768,6 +1024,44 @@ public class MrAppsDetailsPage {
 
 
     /**
+     * Method to validate Analysis tab color code.
+     */
+    public void analysisColorCode(MrAppsDetailsPageObject mrApps) {
+        ArrayList<String> efficiency = new ArrayList<>();
+        ArrayList<String> recommendation = new ArrayList<>();
+        List<WebElement> insightType = mrApps.insightsType;
+        verifyAssertFalse(insightType.isEmpty(), mrApps, "No Insights generated");
+        for (int j = 0; j < insightType.size(); j++) {
+            String insights = insightType.get(j).getText();
+            logger.info("Insight generated are " + insights);
+            if (insights.equals("EFFICIENCY")) {
+                // Store it in efficiency array
+                efficiency.add(insights);
+                String efficiencycolorCode = mrApps.colorCode.getAttribute("class");
+                String[] arrColor = efficiencycolorCode.split("#");
+                assertTrue(arrColor[1].equals("d54451"));
+            } else {
+                //Store it in recommendation array
+                recommendation.add(insights);
+                String recommendationcolorCode = mrApps.colorCode.getAttribute("class");
+                String[] recColor = recommendationcolorCode.split("#");
+                assertTrue(recColor[1].equals("ffb900"));
+            }
+        }
+        verifyAssertFalse((efficiency.isEmpty() && recommendation.isEmpty()), mrApps, "No insights generated");
+        List<WebElement> collapsableList = mrApps.analysisCollapse;
+        try {
+            for (int c = 0; c < collapsableList.size(); c++) {
+                collapsableList.get(c).click();
+            }
+        } catch (Exception ex) {
+            throw new AssertionError("Caught exception while clicking the collapsable" +
+                    " icon for insights.\n" + ex.getMessage());
+        }
+    }
+
+
+    /**
      * Common steps to navigate to the Jobs page from header.
      * Clicks on jobs tab
      * Selects a specific cluster
@@ -834,7 +1128,7 @@ public class MrAppsDetailsPage {
 
     public void verifyAssertTrue(Boolean condition, MrAppsDetailsPageObject mrApps, String msg) {
         try {
-            Assert.assertTrue(condition, msg);
+            assertTrue(condition, msg);
         } catch (Throwable e) {
             //Close apps details page
             if (isDignosticWin) {
@@ -846,5 +1140,4 @@ public class MrAppsDetailsPage {
             throw new AssertionError(msg + e.getMessage());
         }
     }
-
 }

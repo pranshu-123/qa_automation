@@ -24,7 +24,7 @@ public class MR_058 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void MR_058_verifyMetricsGraphs(String clusterId) {
         test = extent.startTest("MR_058_verifyMetricsGraphs: " + clusterId,
-                "Verify Verify the Metrics Graphs are present \n" + "OS Memory");
+                "Verify the Metrics Graphs are present \n" + "OS Memory");
         test.assignCategory(" Apps Details-Mr");
         Log.startTestCase("MR_058_verifyMetricsGraphs");
 
@@ -56,13 +56,7 @@ public class MR_058 extends BaseClass {
                 waitExecuter.waitUntilPageFullyLoaded();
                 MouseActions.clickOnElement(driver, mrApps.resourcesTab);
                 waitExecuter.waitUntilPageFullyLoaded();
-                //Verify Resource graph
-                String[] expectedMetricGraph = {"Metrics"};
-                String[] resourceGraph = {"ResourceGraph7"};
-                for(int i=0 ; i<1; i++){
-                    mrDetailsPage.verifyMetricsKPIGraphs(mrApps,expectedMetricGraph[i], resourceGraph[i]);
-                }
-                test.log(LogStatus.PASS, "Verified all KPIs information with name and values successfully");
+                mrDetailsPage.verifyMetricsKPIGraphs(mrApps);
 
                 //Close apps details page
                 MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);

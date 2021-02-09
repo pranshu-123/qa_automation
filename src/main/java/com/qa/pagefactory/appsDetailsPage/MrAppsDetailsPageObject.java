@@ -14,11 +14,38 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[5]")
     public WebElement getClusterId;
 
+    @FindBy(xpath = "//a[normalize-space()='Analysis']")
+    public WebElement analysisTab;
+
+    @FindBy(xpath = "//a[normalize-space()='Resources']")
+    public WebElement resourcesTab;
+
+    @FindBy(xpath = "//*[@id='taskattemptmap']//*[div and @class='footer']/div/*/span[1]")
+    public List<WebElement> taskAttFooterName;
+
+    @FindBy(xpath = "//*[@id='taskattemptmap']//*[div and @class='footer']/div/*/span[2]")
+    public List<WebElement> taskAttFooterVal;
+
+    @FindBy(xpath = "//*[@id=\"taskattemptmap\"]//*[name()='svg']/*[name()='text' and @class='highcharts-subtitle']/*")
+    public WebElement resourcesPieChartInternalVal;
+
+    @FindBy(xpath = "//*[@id='taskattemptreduce']//*[div and @class='footer']/div/*/span[1]")
+    public List<WebElement> taskAttReduceFooterName;
+
+    @FindBy(xpath = "//*[@id='taskattemptmap']//*[div and @class='footer']/div/*/span[2]")
+    public List<WebElement> taskAttReduceFooterVal;
+
+    @FindBy(xpath = "//*[@id=\"taskattemptmap\"]//*[name()='svg']/*[name()='text' and @class='highcharts-subtitle']/*")
+    public WebElement resourcesReducePieChartInternalVal;
+
     @FindBy(xpath = "(//thead[@id='sparkStageNavigation-head'])/tr/th")
     public List<WebElement> stageHeaders;
 
     @FindBy(xpath = "//span[@class=\"success badge\" and @style=\"margin-top: 16px; margin-left: 10px;\" and text()=\"Success\"]")
     public WebElement appStatus;
+
+    @FindBy(xpath = "//span[@class='badge warning']")
+    public WebElement colorCode;
 
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[2]")
     public WebElement Status;
@@ -245,6 +272,15 @@ public class MrAppsDetailsPageObject {
 
     @FindBy(xpath = "//*[@class='col-md-12 no-left-gutter no-right-gutter']//*[@role='presentation'][1]")
     public WebElement resourcesMetricsDropDown;
+
+    @FindBy(xpath = " //h4[normalize-space()='Containers']")
+    public List<WebElement> containerMetricsHeader;
+
+    @FindBy(xpath = "//div[@class='container-fluid']//div[contains(@class,'dashboard-module')]" +
+            "//div[@class='content']//*[name()='g' and @class='highcharts-series-group']")
+    public List<WebElement> containerGraph;
+
+
 
     @FindBy(xpath = "//*[@class='select2-results']//ul/li/ul/li")
     public List<WebElement> resourcesMetricsDropDownData;

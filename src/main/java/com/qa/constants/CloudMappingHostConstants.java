@@ -19,7 +19,7 @@ public class CloudMappingHostConstants {
         }
 
         public static class RecommendedUsages {
-            public static final String TYPE = "Cluster";
+            public static final String TYPE = "Type";
             public static final String CORES = "Cores";
             public static final String MEMORY = "Memory";
             public static final String STORAGE_INCLUDED_WITH_VM = "Storage Included With VM";

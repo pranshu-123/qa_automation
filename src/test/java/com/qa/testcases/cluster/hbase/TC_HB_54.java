@@ -14,16 +14,16 @@ import java.util.logging.Logger;
 
 @Marker.ClusterHBase
 @Marker.All
-public class TC_HB_42 extends BaseClass {
+public class TC_HB_54 extends BaseClass {
 
-    private static final Logger LOGGER = Logger.getLogger(TC_HB_42.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TC_HB_54.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void verifyTablesInARegionServer (String clusterId) {
-        test = extent.startTest("TC_HB_42.verifyTablesInARegionServer",
-                "Verify all column values in table metrics.");
+    public void verifyTableAndRegionTab(String clusterId) {
+        test = extent.startTest("TC_HB_54.verifyTableAndRegionTab",
+                "Table and region tab should be on table details page.");
         test.assignCategory(" Cluster - HBasePage ");
-        Log.startTestCase("TC_HB_42.verifyTablesInARegionServer");
+        Log.startTestCase("TC_HB_54.verifyTableAndRegionTab");
 
         // Initialize all classes objects
         LOGGER.info("Initialize all class objects");
@@ -39,18 +39,12 @@ public class TC_HB_42 extends BaseClass {
         waitExecuter.waitUntilElementPresent(hBasePageObject.hbaseHeader);
         LOGGER.info("HBase headers found: " + hbase.getHBaseHeader());
 
-        //Click on 'Region Server' and verify hbase region server tab
-        hbase.verifyRegionServer();
-
-        //Verify region server names
-        hbase.verifyRegionSeverNames();
-        LOGGER.info("Verified HBase region server names.");
-        test.log(LogStatus.PASS, "Verified HBase region server names.");
-
-        //Verify Tables in a region server
-        hbase.verifyTableNamesInRegionServer();
-        LOGGER.info("Verified all table name of a HBase region server.");
-        test.log(LogStatus.PASS, "Verified table names of a HBase region server.");
+        //verify Hbase Tables tab elements tables
+        hbase.verifyTablesTabElements();
+        //verify Table and Region
+        hbase.verifyTableAndRegion();
+        LOGGER.info("Verified Table and region on table details page.");
+        test.log(LogStatus.PASS, "Verified Table and region on table details page.");
 
 
     }

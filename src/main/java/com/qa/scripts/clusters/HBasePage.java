@@ -138,7 +138,6 @@ public class HBasePage {
     // Method to verify the HBase cluster Metrics
     public void verifyHBaseClustersMetrics(){
         selectHBaseDefaultCluster();
-        selectDateAsLast30Days();
 
         List<WebElement> hBaseKPIList = hBasePageObject.hBaseClusterKPIs;
         List<WebElement> hBaseKPIValueList = hBasePageObject.hBaseClusterKPIValues;
@@ -312,6 +311,30 @@ public class HBasePage {
         logger.info("All table names in region server: "+ regionName +" are - "+ regionSvrTableNames);
     }
 
+    public void clickOnTableName(){
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseFirstRegionSvr);
+        String regionName = hBasePageObject.hBaseFirstRegionSvr.getText();
+        MouseActions.clickOnElement(driver,hBasePageObject.hBaseFirstRegionSvr);
+
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseRegionSvrTable);
+        List<WebElement> hBaseRegionSvrTableNames = hBasePageObject.hBaseRegionSvrTableNames;
+        Assert.assertFalse(hBaseRegionSvrTableNames.isEmpty(), "No Tables found for region server.");
+
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseRegionSvrTableHeaderName);
+        String regionSvrTableName = hBasePageObject.hBaseRegionSvrTableHeaderName.getText();
+        logger.info("Region server Table header name: "+ regionSvrTableName);
+
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseFirstRegionSvrTable);
+        String tableName = hBasePageObject.hBaseFirstRegionSvrTable.getText();
+        MouseActions.clickOnElement(driver, hBasePageObject.hBaseFirstRegionSvrTable);
+
+        logger.info("Clicked on table name: "+ tableName);
+
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseTableTab);
+        String hBaseTblTabText = hBasePageObject.hBaseTableTab.getText();
+        Assert.assertTrue(hBaseTblTabText.equals("Tables"),"HBase Table Tab not found");
+
+    }
 
     public void verifyRegionServerHealth(){
         List<WebElement> hBaseRegionSvrHealth = hBasePageObject.hBaseRegionSvrHealth;
@@ -324,6 +347,22 @@ public class HBasePage {
         Assert.assertTrue(hBasePageObject.hBaseSvrHealthHeader.getText().equals("Server Health and Context"),
                 "'Server Health and Context' header not found");
 
+    }
+
+    public void verifyTblRegionUIWithinRegionServer(){
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseTableHostTbl);
+        List<WebElement> hBaseTableHostTblRowsList = hBasePageObject.hBaseTableHostTblRows;
+        Assert.assertFalse(hBaseTableHostTblRowsList.isEmpty(), "HBase Table Host Table Rows not generated.");
+
+        waitExecuter.waitUntilElementPresent(hBasePageObject.getHbaseTableHostFirstRowRegionName);
+        String regionName = hBasePageObject.getHbaseTableHostFirstRowRegionName.getText();
+        Assert.assertFalse(regionName.isEmpty(),"Region name is empty.");
+
+        waitExecuter.waitUntilElementPresent(hBasePageObject.getHbaseTableHostFirstRowRegionSvrName);
+        String regionSvrName = hBasePageObject.getHbaseTableHostFirstRowRegionSvrName.getText();
+        Assert.assertFalse(regionSvrName.isEmpty(),"Region server name is empty.");
+
+        logger.info("Region name: "+regionName + ", Region server name: "+regionSvrName  );
     }
 
     public void verifyRegionServerKPIs(){
@@ -344,6 +383,25 @@ public class HBasePage {
     }
 
 
+    public void verifyTablesTabElements(){
+        waitExecuter.waitUntilElementPresent(hBasePageObject.tablesTab);
+        MouseActions.clickOnElement(driver,hBasePageObject.tablesTab);
+        waitExecuter.waitUntilElementPresent(hBasePageObject.tablesTabTbl);
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseTableHostTbl);
+    }
+
+    public void verifyTableAndRegion(){
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseFirstTableElement);
+        String tableName = hBasePageObject.hBaseFirstTableElement.getText();
+        MouseActions.clickOnElement(driver, hBasePageObject.hBaseFirstTableElement);
+
+        logger.info("Clicked on table name: "+ tableName);
+        waitExecuter.waitUntilElementPresent(hBasePageObject.regionTableName);
+        String regionTableName = hBasePageObject.regionTableName.getText();
+        logger.info("Region table name: "+ regionTableName);
+        //Verify Region name and Region Svr name
+        verifyTblRegionUIWithinRegionServer();
+    }
 
 
 }

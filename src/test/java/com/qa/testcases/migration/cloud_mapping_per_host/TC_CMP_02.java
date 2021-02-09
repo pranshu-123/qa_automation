@@ -40,8 +40,7 @@ public class TC_CMP_02 extends BaseClass {
     waitExecuter.waitUntilElementClickable(cmPageObj.cloudMappingPerHostTab);
     MouseActions.clickOnElement(driver, cmPageObj.cloudMappingPerHostTab);
     waitExecuter.waitUntilElementClickable(cmPageObj.runButton);
-    waitExecuter.waitUntilPageFullyLoaded();
-
+    cloudMappingPage.waitTillLoaderPresent();
     cloudMappingPage.verifyEMRVMTypes("AWS GovCloud (US-West)", "Amazon EMR");
     test.log(LogStatus.PASS, "Validated Unravel UI displays the right VM types for EMR successfully ");
   }

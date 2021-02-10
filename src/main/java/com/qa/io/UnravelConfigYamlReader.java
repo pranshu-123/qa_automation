@@ -64,6 +64,27 @@ public class UnravelConfigYamlReader implements YamlReader {
     }
 
     /**
+     * Return the list of clusters from yaml file
+     * @param appName - appName then return the appName clusters
+     * @return Iterator<Object[]> Iterator of clusters array
+     */
+    public Iterator<Object[]> getClusterList(String appName) {
+        Map<String, Object> unravelConfig = readYamlFile(FileConstants.getUnravelConfigYaml());
+        Map<String, Object> unravelNode =
+                (Map<String,Object>)unravelConfig.get(ConfigConstants.UnravelYamlConfig.UNRAVEL);
+        String clusters = "";
+        if (appName.contains("impala")) {
+            clusters = (String) unravelNode.get(ConfigConstants.UnravelYamlConfig.IMPALA_CLUSTERS);
+        } else if (appName.contains("hbase")){
+            clusters = (String) unravelNode.get(ConfigConstants.UnravelYamlConfig.HBASE_CLUSTERS);
+        } else {
+            clusters = (String) unravelNode.get(ConfigConstants.UnravelYamlConfig.CLUSTERS);
+        }
+        return Arrays.stream(clusters.split(",")).map(cluster -> new Object[]{cluster.trim()})
+                .collect(Collectors.toList()).iterator();
+    }
+
+    /**
      * Return AWS details from unravel_config.yml in k,v pair
      */
     public Map<String,Object> getAWSDetails() {

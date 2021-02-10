@@ -156,6 +156,42 @@ public class AppDetailsPageObject {
     @FindBy(xpath = "//table[contains(@class,'component-data-tables')]//p[normalize-space(text())='No Fragments Data Available']")
     public List<WebElement> noFragments;
 
+    @FindBy(id = "inefficientApps")
+    public WebElement inefficientAppsTab;
+
+    @FindBy(xpath = "//div[@class='filter-section']//a[text()='Application Events']")
+    public WebElement eventToggleLeftPane;
+
+    @FindBy(xpath = "(//h3[contains(@class,'expandable-header')])[2]/following-sibling::div[contains(@class,'filter-items')]//label")
+    public List<WebElement> eventTypeLabels;
+
+    @FindBy(xpath = "(//h3[contains(@class,'expandable-header')])[2]/following-sibling::div[contains(@class,'filter-items')]//label//span[contains(@class,'show-only')]")
+    public List<WebElement> eventTypeShowOnly;
+
+    @FindBy(xpath = "//div[@class='component-tabs-primary']//li/a[normalize-space(text()) = 'Analysis']")
+    public WebElement impalaAnalysisTab;
+
+    @FindBy(xpath = "//div[@class='status-title']//span[@class='title']")
+    public List<WebElement> getEfficiencyTitleString;
+
+    @FindBy(xpath = "//table[@id='inefficientApps']/tbody/tr")
+    public List<WebElement> getImpalaInefficientJobs;
+
+    @FindBy(xpath = "(//table[@id='inefficientApps']/tbody/tr/td)[3]")
+    public WebElement firstInefficientRow;
+
+    @FindBy(id = "apps-global-search-filter")
+    public WebElement globalSearchBox;
+
+    @FindBy(xpath = "//span[@class='globalSearchIcon']")
+    public WebElement searchIcon;
+
+    @FindBy(xpath ="(//table[@id='allApps']/tbody//td)[3]")
+    public List<WebElement> clickFirstApp;
+
+    @FindBy(xpath = "//span[contains(@class,'icon-flipped')]")
+    public WebElement flippedButton;
+
     /**
      * @param driver The driver that will be used to look up the elements
      */

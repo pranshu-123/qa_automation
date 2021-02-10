@@ -52,9 +52,10 @@ public class IM_IN_06 extends BaseClass {
                 appDetailsPage.clickOnFirstInefficientJob();
                 List<String> titles = appDetailsPage.getEfficiencyTags();
                 loggingUtils.info("Titles on page - " + titles, test);
+                loggingUtils.info("Expected Title on page - " + PageConstants.EventTypes.SqlTooManyPartitionsEvent, test);
                 appDetailsPage.close();
                 Assert.assertTrue(titles.contains(PageConstants.EventTypes.SqlTooManyPartitionsEvent),
-                        "Does not contain title as expected in analysis tab");
+                        "Does not contain title as expected in analysis tab- "+PageConstants.EventTypes.SqlTooManyPartitionsEvent);
                 test.log(LogStatus.PASS, "SqlTooManyPartitionsEvent verified ");
             } else {
                 loggingUtils.info("There are no successful apps for impala for selected cluster", test);

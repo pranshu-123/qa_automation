@@ -53,7 +53,7 @@ public class IM_IN_05 extends BaseClass {
                 loggingUtils.info("Expected title- " + PageConstants.EventTypes.ImpalaTablesMissingStatsEvent, test);
                 appDetailsPage.close();
                 Assert.assertTrue(titles.contains(PageConstants.EventTypes.ImpalaTablesMissingStatsEvent),
-                        "Does not contain title as expected in analysis tab");
+                        "Does not contain title as expected in analysis tab- "+PageConstants.EventTypes.ImpalaTablesMissingStatsEvent);
                 test.log(LogStatus.PASS, "ImpalaTablesMissingStatsEvent verified ");
             } else {
                 loggingUtils.info("There are no successful apps for impala for selected cluster", test);

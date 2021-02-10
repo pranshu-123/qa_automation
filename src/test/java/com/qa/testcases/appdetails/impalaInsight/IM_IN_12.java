@@ -53,9 +53,10 @@ public class IM_IN_12 extends BaseClass {
                 appDetailsPage.clickOnFirstInefficientJob();
                 List<String> titles = appDetailsPage.getEfficiencyTags();
                 loggingUtils.info("Titles on page - " + titles, test);
+                loggingUtils.info("Expected Titles on page - " + PageConstants.EventTypes.ImpalaNonColumnarTablesEvent, test);
                 appDetailsPage.close();
                 Assert.assertTrue(titles.contains(PageConstants.EventTypes.ImpalaNonColumnarTablesEvent),
-                        "Does not contain title as expected in analysis tab");
+                        "Does not contain title as expected in analysis tab- "+PageConstants.EventTypes.ImpalaNonColumnarTablesEvent);
                 test.log(LogStatus.PASS, "ImpalaNonColumnarTablesEvent verified ");
             } else {
                 loggingUtils.info("There are no successful apps for impala for selected cluster", test);

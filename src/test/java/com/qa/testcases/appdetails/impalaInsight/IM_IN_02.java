@@ -52,9 +52,10 @@ public class IM_IN_02 extends BaseClass {
                 appDetailsPage.clickOnFirstInefficientJob();
                 List<String> titles = appDetailsPage.getEfficiencyTags();
                 loggingUtils.info("Titles on page - " + titles, test);
+                loggingUtils.info("Expected title - " + PageConstants.EventTypes.ImpalaTimeBreakdownEvent, test);
                 appDetailsPage.close();
                 Assert.assertTrue(titles.contains(PageConstants.EventTypes.ImpalaTimeBreakdownEvent),
-                        "Does not contain title as expected in analysis tab");
+                        "Does not contain title as expected in analysis tab- " + PageConstants.EventTypes.ImpalaTimeBreakdownEvent);
                 test.log(LogStatus.PASS, "ImpalaTimeBreakdownEvent verified ");
             } else {
                 loggingUtils.info("There are no successful apps for impala for selected cluster", test);

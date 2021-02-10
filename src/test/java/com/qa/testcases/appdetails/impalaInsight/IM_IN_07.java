@@ -52,9 +52,10 @@ public class IM_IN_07 extends BaseClass {
                 appDetailsPage.clickOnFirstInefficientJob();
                 List<String> titles = appDetailsPage.getEfficiencyTags();
                 loggingUtils.info("Titles on page - " + titles, test);
+                loggingUtils.info("Expected Titles on page - " + PageConstants.EventTypes.SqlTooManyJoinsEvent, test);
                 appDetailsPage.close();
                 Assert.assertTrue(titles.contains(PageConstants.EventTypes.SqlTooManyJoinsEvent),
-                        "Does not contain title as expected in analysis tab");
+                        "Does not contain title as expected in analysis tab- "+PageConstants.EventTypes.SqlTooManyJoinsEvent);
                 test.log(LogStatus.PASS, "SqlTooManyJoinsEvent verified ");
             } else {
                 loggingUtils.info("There are no successful apps for impala for selected cluster", test);

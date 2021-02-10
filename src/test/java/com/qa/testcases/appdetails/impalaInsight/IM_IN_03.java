@@ -50,9 +50,10 @@ public class IM_IN_03 extends BaseClass {
                 appDetailsPage.searchByAppID(PageConstants.appId.appIdForImpala);
                 List<String> titles = appDetailsPage.getEfficiencyTags();
                 loggingUtils.info("Titles on page - " + titles, test);
+                loggingUtils.info("Expected title on page - " + PageConstants.EventTypes.SQLNonPartitionedTableEvent, test);
                 appDetailsPage.close();
                 Assert.assertTrue(titles.contains(PageConstants.EventTypes.SQLNonPartitionedTableEvent),
-                        "Does not contain title as expected in analysis tab");
+                        "Does not contain title as expected in analysis tab- "+PageConstants.EventTypes.SQLNonPartitionedTableEvent);
                 test.log(LogStatus.PASS, "SQLNonPartitionedTableEvent verified ");
             } else {
                 loggingUtils.info("There are no successful apps for impala for selected cluster", test);

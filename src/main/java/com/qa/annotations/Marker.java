@@ -47,4 +47,5 @@ public @interface Marker {
   @interface WorkloadFit {}
   @interface CloudMappingPerHost {}
   @interface JobsWorkflow {}
+  @interface ImpalaInsights {}
 }

@@ -2,6 +2,7 @@ package com.qa.scripts.appdetails;
 
 import com.qa.enums.AppDetailsApplicationType;
 import com.qa.enums.ApplicationEnum;
+import com.qa.enums.ImpalaEventTypes;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
@@ -62,7 +63,9 @@ public class AppDetailsPage {
         int appCount = 0;
         for (int i = 0; i < appDetailsPageObject.applicationTypeLabels.size(); i++) {
             if (appDetailsPageObject.applicationTypeLabels.get(i).getText().contains(applicationType.getValue())) {
+                wait.sleep(3000);
                 String applicationAppText = appDetailsPageObject.applicationTypeLabels.get(i).getText();
+                logger.info(applicationAppText);
                 String[] appDetails = applicationAppText.split("\\(");
                 logger.info("App details count- " + appDetails[1]);
                 appCount = Integer.parseInt(appDetails[1].replaceAll("[^0-9]", "").trim());
@@ -346,7 +349,7 @@ public class AppDetailsPage {
         if (appDetailsPageObject.closeIcon.size() > 0) {
             wait.waitUntilElementClickable(appDetailsPageObject.closeIcon.get(0));
             userActions.performActionWithPolling(appDetailsPageObject.closeIcon.get(0), UserAction.CLICK);
-            wait.waitUntilElementClickable(applicationsPageObject.resetButton);
+            wait.waitUntilElementClickable(applicationsPageObject.globalSearchBox);
         }
     }
 
@@ -434,4 +437,61 @@ public class AppDetailsPage {
 
     }
 
+    /* Move to Inefficient apps */
+    public void navigateToInefficientApps() {
+        wait.waitUntilElementClickable(appDetailsPageObject.inefficientAppsTab);
+        userActions.performActionWithPolling(appDetailsPageObject.inefficientAppsTab, UserAction.CLICK);
+        wait.waitUntilElementClickable(appDetailsPageObject.eventToggleLeftPane);
+    }
+
+    /* Select filter in UI */
+    public void selectEventFilter(ImpalaEventTypes eventType) {
+        wait.waitUntilElementClickable(appDetailsPageObject.eventToggleLeftPane);
+        userActions.performActionWithPolling(appDetailsPageObject.eventToggleLeftPane, UserAction.CLICK);
+        for (int i = 0; i < appDetailsPageObject.eventTypeLabels.size(); i++) {
+            if (appDetailsPageObject.eventTypeLabels.get(i).getAttribute("content").contains(eventType.getValue())) {
+                ActionPerformer actionPerformer = new ActionPerformer(driver);
+                actionPerformer.moveToTheElement(appDetailsPageObject.eventTypeLabels.get(i));
+                userActions.performActionWithPolling(appDetailsPageObject.eventTypeShowOnly.get(i),
+                        UserAction.CLICK);
+            }
+        }
+    }
+
+    /* Get all efficiency tags from app details */
+    public List<String> getEfficiencyTags() {
+        wait.waitUntilElementClickable(appDetailsPageObject.impalaAnalysisTab);
+        userActions.performActionWithPolling(appDetailsPageObject.impalaAnalysisTab, UserAction.CLICK);
+        List<WebElement> efficiencyTags = appDetailsPageObject.getEfficiencyTitleString;
+        List<String> efficiencyTitleString = new ArrayList<>();
+        for (WebElement tags : efficiencyTags) {
+            efficiencyTitleString.add(tags.getText().trim());
+        }
+        wait.sleep(1000);
+        return efficiencyTitleString;
+    }
+
+    /* Click on the first impala job in in-efficient tab */
+    public void clickOnFirstInefficientJob() {
+        if (appDetailsPageObject.getImpalaInefficientJobs.size() > 0) {
+            wait.waitUntilElementClickable(appDetailsPageObject.firstInefficientRow);
+            userActions.performActionWithPolling(appDetailsPageObject.firstInefficientRow, UserAction.CLICK);
+            wait.waitUntilElementClickable(appDetailsPageObject.impalaAnalysisTab);
+        }
+    }
+
+    /*Search for the app Id*/
+    public void searchByAppID(String app) {
+        wait.waitUntilElementClickable(appDetailsPageObject.globalSearchBox);
+        userActions.performActionWithPolling(appDetailsPageObject.globalSearchBox, UserAction.CLICK);
+        userActions.performActionWithPolling(appDetailsPageObject.globalSearchBox, UserAction.SEND_KEYS, app);
+        appDetailsPageObject.globalSearchBox.sendKeys(Keys.RETURN);
+        wait.waitUntilElementClickable(appDetailsPageObject.globalSearchBox);
+        if (appDetailsPageObject.clickFirstApp.size() > 0) {
+            wait.waitUntilElementClickable(appDetailsPageObject.clickFirstApp.get(0));
+            userActions.performActionWithPolling(appDetailsPageObject.clickFirstApp.get(0), UserAction.CLICK);
+            wait.waitUntilElementClickable(appDetailsPageObject.flippedButton);
+        } else
+            logger.info("There are no application by name- " + app);
+    }
 }

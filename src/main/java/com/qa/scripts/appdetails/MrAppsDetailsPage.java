@@ -476,8 +476,6 @@ public class MrAppsDetailsPage {
     }
 
     public void validateConfigurationTab(MrAppsDetailsPageObject mrApps) {
-        String[] expectedKeyWords = {"METADATA", "MEMORY", "DRIVER", "EXECUTOR", "LIMIT", "RESOURCES", "CPU", "NET",
-                "YARN", "DEPLOY"};
         List<WebElement> keyWordsList = mrApps.configKeywords;
         verifyAssertFalse(keyWordsList.isEmpty(), mrApps, " Keywords not found");
         String beforeResetProp = mrApps.configPropNum.getText();
@@ -497,12 +495,36 @@ public class MrAppsDetailsPage {
         for (int k = 0; k < keyWordsList.size(); k++) {
             String keyword = keyWordsList.get(k).getText();
             logger.info("Keyword Type is " + keyword);
-            verifyAssertTrue(Arrays.asList(expectedKeyWords).contains(keyword), mrApps,
-                    " Keywords displayed on the UI: [" + keyword + "] doesnot match with the expected keywords" +
-                            Arrays.toString(expectedKeyWords));
             MouseActions.clickOnElement(driver, keyWordsList.get(k));
             waitExecuter.sleep(2000);
         }
+        //Check RESET buttons sets default props
+        MouseActions.clickOnElement(driver, mrApps.resetButton);
+        waitExecuter.sleep(3000);
+        String afterResetProp = mrApps.configPropNum.getText();
+        logger.info("No. of Properties displayed by default " + beforeResetProp + "\n " +
+                "No. of Properties displayed after RESET " + afterResetProp);
+        Assert.assertEquals(afterResetProp, beforeResetProp, "The properties have not been reset " +
+                "to default");
+    }
+
+    public void validateConfigurationSearchTab(MrAppsDetailsPageObject mrApps) {
+        logger.info("Click on queue search box and search for path");
+        mrApps.SearchProp.click();
+        mrApps.SearchProp.sendKeys("mapreduce.jobhistory.jhist.format");
+        String beforeResetProp = mrApps.configPropNum.getText();
+        int propNum = Integer.parseInt(beforeResetProp.split("\\s+")[0]);
+        logger.info("Number of properties displayed by default are  " + propNum);
+
+        //Verify if property key value is present:
+        List<WebElement> propKeyList = mrApps.configPropKey;
+        List<WebElement> propValueList = mrApps.configPropValue;
+        logger.info("PropKey size = " + propKeyList.size() + " propVal size = " +
+                propValueList.size());
+        verifyAssertFalse((propKeyList.isEmpty() && propValueList.isEmpty()), mrApps, " Key/Value is empty");
+        Assert.assertEquals(propKeyList.size(), propValueList.size(), "One of the key/Value " +
+                "is missing");
+
         //Check RESET buttons sets default props
         MouseActions.clickOnElement(driver, mrApps.resetButton);
         waitExecuter.sleep(3000);
@@ -899,10 +921,11 @@ public class MrAppsDetailsPage {
                         List<WebElement> programDataList = mrApps.programTabData;
                         verifyAssertFalse(programDataList.isEmpty(), mrApps, "Programs tab not populated");
                         break;
-                    case "Configuration":
+                    case "Configuratio...":
                         MouseActions.clickOnElement(driver, appsTabList.get(i));
-                        waitExecuter.sleep(3000);
-                        validateTimingTab(mrApps);
+                        waitExecuter.sleep(10000);
+                        validateConfigurationTab(mrApps);
+                        break;
                 }
                 break;
             }

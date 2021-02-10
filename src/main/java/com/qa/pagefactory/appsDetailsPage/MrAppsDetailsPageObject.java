@@ -20,6 +20,9 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//a[normalize-space()='Resources']")
     public WebElement resourcesTab;
 
+    @FindBy(xpath = "//a[normalize-space()='Configuratio...']")
+    public WebElement ConfigurationTab;
+
     @FindBy(xpath = "//*[@id='taskattemptmap']//*[div and @class='footer']/div/*/span[1]")
     public List<WebElement> taskAttFooterName;
 
@@ -92,6 +95,9 @@ public class MrAppsDetailsPageObject {
 
     @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/p")
     public WebElement configPropNum;
+
+    @FindBy(xpath = "//input[@placeholder='Search']")
+    public WebElement SearchProp;
 
     @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/div[2]/span")
     public List<WebElement> configKeywords;

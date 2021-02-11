@@ -77,7 +77,7 @@ public class TC_LLAP_22 extends BaseClass {
                 }
 
             /*
-             * Validate the Read/Write IO are --
+             * Validate the AppID are --
              */
             if (appCount > 0) {
                 String headerAppId = tezLlapApps.verifyappId(tezLlapPage, applicationsPageObject);

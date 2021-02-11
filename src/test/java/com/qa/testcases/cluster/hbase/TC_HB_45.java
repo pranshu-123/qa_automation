@@ -38,29 +38,19 @@ public class TC_HB_45 extends BaseClass {
         MouseActions.clickOnElement(driver, hBasePageObject.hbaseTab);
         LOGGER.info("Clicked on HBase Tab");
         hbase.selectDateAsLast30Days();
+
+        LOGGER.info("HBase cluster using : "+ clusterId);
+        hbase.selectHBaseCluster(clusterId);
         waitExecuter.waitUntilElementPresent(hBasePageObject.hbaseHeader);
         LOGGER.info("HBase headers found: " + hbase.getHBaseHeader());
+        test.log(LogStatus.INFO, "Verified HBase cluster setup with :"+ clusterId);
 
-//        List<String> hBaseClusters = hbase.getAllHBaseClusters();
-//        LOGGER.info("HBase clusters found are: "+ hBaseClusters);
-//        Assert.assertFalse(hBaseClusters.isEmpty(), "HBase clusters not available");
-
-        System.out.println("Name of cluster: "+ clusterId);
-
-//        //boolean flag = false;
-//        for (String clusterName : hBaseClusters) {
-//          //  if (clusterName.contains("CM")) {
-//         //       flag =  true;
-//                Assert.assertTrue(true, "Multicluster setup with CDH cluster not found.");
-//                LOGGER.info("Verified Multicluster setup with one CDH cluster."+clusterName);
-//                waitExecuter.waitUntilElementClickable(hBasePageObject.hBaseClusterDropDown);
-//                MouseActions.clickOnElement(driver, hBasePageObject.hBaseClusterDropDown);
-//                hbase.selectHBaseCluster(clusterName);
-//                LOGGER.info("HBase headers found: "+ hbase.getHBaseHeader());
-//                test.log(LogStatus.PASS, "Verified Multicluster setup with one CDH cluster.");
-//
-//            //}
-//        }
+        //verify and click on region server tab
+        hbase.verifyRegionServer();
+        //verify alerts in region server
+        hbase.verifyAlertsInRegionServerHealth();
+        LOGGER.info("Verified alerts for region server in UI.");
+        test.log(LogStatus.PASS, "Verified alerts for region server in UI.");
 
     }
 }

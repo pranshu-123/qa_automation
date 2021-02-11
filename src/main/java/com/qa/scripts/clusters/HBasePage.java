@@ -337,6 +337,26 @@ public class HBasePage {
         Assert.assertTrue(hBaseTblTabText.equals("Tables"),"HBase Table Tab not found");
 
     }
+    public void verifyAlertsInRegionServerHealth(){
+        List<WebElement> hBaseRegionSvrHealth = hBasePageObject.hBaseRegionSvrHealth;
+        Assert.assertFalse(hBaseRegionSvrHealth.isEmpty(), "No Health check column found.");
+
+        for(WebElement e: hBaseRegionSvrHealth){
+            if(e.getText().equalsIgnoreCase("Bad")){
+                logger.info("Found Bad health");
+                Actions toolAct = new Actions(driver);
+                toolAct.moveToElement(e).build().perform();
+                //WebElement toolTip = mrApps.getClusterId;
+                String toolTipText = e.getAttribute("aria-describedby");
+                logger.info("toolTipText of Bad Health button is " + toolTipText);
+                Assert.assertTrue(toolTipText.length()>0, " Tool tip text is not found.");
+            }
+        }
+
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseSvrHealthHeader);
+        Assert.assertTrue(hBasePageObject.hBaseSvrHealthHeader.getText().equals("Server Health and Context"),
+                "'Server Health and Context' header not found");
+    }
 
     public void verifyRegionServerHealth(){
         List<WebElement> hBaseRegionSvrHealth = hBasePageObject.hBaseRegionSvrHealth;

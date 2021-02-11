@@ -154,7 +154,7 @@ public class TezLlapAppsDetailsPage {
      * Method to click the first app in jobs table , navigate to the details page.
      * and verify  Appid .
      */
-    public String verifyappId(TezLlapAppsDetailsPageObject tezLlapPage) {
+    public String verifyappId(TezLlapAppsDetailsPageObject tezLlapPage,ApplicationsPageObject appPageObj) {
         WebElement Appid = tezLlapPage.getAppid;
         Actions toolAct = new Actions(driver);
         toolAct.moveToElement(Appid).build().perform();
@@ -351,6 +351,11 @@ public class TezLlapAppsDetailsPage {
         return nameOfAppTypes;
     }
 
+    /**
+     * Method to click the first app in jobs table , navigate to the details page.
+     * and verify  Appid .
+     */
+
 
     /***
      * Common actions listed in one method that does the following:
@@ -366,35 +371,34 @@ public class TezLlapAppsDetailsPage {
         logger.info("Initialize all class objects");
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
-        TezAppsDetailsPageObject tezApps = new TezAppsDetailsPageObject(driver);
-        TezAppsDetailsPage tezDetailsPage = new TezAppsDetailsPage(driver);
+        TezLlapAppsDetailsPageObject tezLlapPage = new TezLlapAppsDetailsPageObject(driver);
+        TezLlapAppsDetailsPage tezLlapApps = new TezLlapAppsDetailsPage(driver);
         DatePicker datePicker = new DatePicker(driver);
         AllApps allApps = new AllApps(driver);
 
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-        tezDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
+        tezLlapApps.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
 
         //Verify that the left pane has Tez check box and the apps number
         test.log(LogStatus.INFO, "Verify that the left pane has Tez check box and the apps number");
         logger.info("Select individual app and assert that table contain its data");
 
-        int totalTezAppCnt = tezDetailsPage.clickOnlyLink("Tez");
+        int totalTezAppCnt = tezLlapApps.clickOnlyLink("Tez");
         if (totalTezAppCnt > 0) {
             applicationsPageObject.expandStatus.click();
             int appCount = 0;
             if (isFailedApp)
-                appCount = tezDetailsPage.clickOnlyLink("Failed");
+                appCount = tezLlapApps.clickOnlyLink("Failed");
             else
-                appCount = tezDetailsPage.clickOnlyLink("Success");
+                appCount = tezLlapApps.clickOnlyLink("Success");
             //Clicking on the Tez app must go to apps detail page
             if (appCount > 0) {
-                String headerAppId = tezDetailsPage.verifyAppId(tezApps, applicationsPageObject);
+                String headerAppId = tezLlapApps.verifyappId(tezLlapPage, applicationsPageObject);
                 test.log(LogStatus.PASS, "Tez Application Id is displayed in the Header: " + headerAppId);
-                tezDetailsPage.verifyAppSummaryTabs(tezApps, tabName, test);
                 //Close apps details page
-                MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
+                MouseActions.clickOnElement(driver, tezLlapPage.closeAppsPageTab);
             } else {
                 test.log(LogStatus.SKIP, "No Tez Application present");
                 logger.info("No Tez Application present in the " + clusterId + " cluster for the time span " +

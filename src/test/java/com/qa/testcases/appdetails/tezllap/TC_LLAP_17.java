@@ -88,7 +88,7 @@ public class TC_LLAP_17 extends BaseClass {
             String Appname = tezLlapApps.verifyAppname(tezLlapPage);
             test.log(LogStatus.PASS, "Hive App name is displayed in the Table: " + Appname);
 
-            String AppId = tezLlapApps.verifyappId(tezLlapPage);
+            String AppId = tezLlapApps.verifyappId(tezLlapPage, applicationsPageObject);
             test.log(LogStatus.PASS, "Hive App Id is displayed in the Table: " + AppId);
         }
     }

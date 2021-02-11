@@ -1,12 +1,14 @@
 package com.qa.testcases.appdetails.mapreduce;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.scripts.appdetails.MrAppsDetailsPage;
 import com.qa.utils.Log;
 import com.relevantcodes.extentreports.LogStatus;
 import java.util.logging.Logger;
 import org.testng.annotations.Test;
-
+@Marker.AppDetailsMr
+@Marker.All
 public class MR_050 extends BaseClass {
     Logger logger = Logger.getLogger(MR_050.class.getName());
 

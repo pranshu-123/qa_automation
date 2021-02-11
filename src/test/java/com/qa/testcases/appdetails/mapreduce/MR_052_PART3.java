@@ -12,21 +12,22 @@ import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
+
+import java.util.logging.Logger;
+
 @Marker.AppDetailsMr
 @Marker.All
-public class MR_048 extends BaseClass {
+public class MR_052_PART3 extends BaseClass {
 
-    Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mapreduce.MR_048.class);
+    java.util.logging.Logger logger = Logger.getLogger(MR_052_PART3.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_048_verifyMRAppsKPIs(String clusterId) {
-        test = extent.startTest("MR_048_verifyMRAppsKPIs: " + clusterId,
-                "Verify KPI for MR must be listed andf all the values should be populated");
+    public void MR_052_PART1_verifykilledStatus(String clusterId) {
+        test = extent.startTest("MR_052_PART1_verifykilledStatus: " + clusterId,
+                "Verify there are 2 tabs , Task Attempt (Map), Task Attempt(Reduce)");
         test.assignCategory(" Apps Details-Mr");
-        Log.startTestCase("MR_048_verifyMRAppsKPIs");
+        Log.startTestCase("MR_052_PART1_verifykilledStatus");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -44,24 +45,26 @@ public class MR_048 extends BaseClass {
                 applicationsPageObject, clusterId);
 
         test.log(LogStatus.INFO, "Verify that the left pane has map reduce check box and the apps number");
-        mrDetailsPage.clickOnlyLink("Map Reduce");
-        applicationsPageObject.expandStatus.click();
-        int appCount = mrDetailsPage.clickOnlyLink("Success");
-        //Verify app details page
-        if (appCount > 0) {
-            String headerAppId = mrDetailsPage.verifyAppId(mrApps, applicationsPageObject);
-            test.log(LogStatus.PASS, "Tez Application Id is displayed in the Header: " + headerAppId);
-            mrDetailsPage.validateHeaderTab(mrApps,test);
-        waitExecuter.sleep(4000);
-        //Close apps details page
-        MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);
-        waitExecuter.sleep(3000);
+        int totalMapReduceAppCnt = mrDetailsPage.clickOnlyLink("Map Reduce");
+        if (totalMapReduceAppCnt > 0) {
+            applicationsPageObject.expandStatus.click();
+            int appCount = mrDetailsPage.clickOnlyLink("Killed");
+            if (appCount > 0) {
+                String headerAppId = mrDetailsPage.verifyAppId(mrApps, applicationsPageObject);
+                test.log(LogStatus.PASS, "Map Reduce Application Id is displayed in the Header: " + headerAppId);
+                waitExecuter.waitUntilPageFullyLoaded();
+                MouseActions.clickOnElement(driver, mrApps.resourcesTab);
+                waitExecuter.waitUntilPageFullyLoaded();
+                mrDetailsPage.validateResourcesTab(mrApps);
 
-    } else {
-        test.log(LogStatus.SKIP, "No Map Reduce Application present");
-        logger.error("No Map Reduce Application present in the " + clusterId + " cluster for the time span " +
-                "of 90 days");
+                //Close apps details page
+                MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);
+
+            } else {
+                test.log(LogStatus.SKIP, "No Map Reduce Application present");
+                logger.info("No Map Reduce Application present in the " + clusterId + " cluster for the time span " +
+                        "of 90 days");
+            }
+        }
     }
-
-}
 }

@@ -697,7 +697,6 @@ public class HBasePage {
 
     }
 
-
     public List<String> getTableNamesFromTablesTab(HbaseTablesColumn hbaseTablesColumn){
 
         List<String> tableNames = new ArrayList<>();
@@ -709,5 +708,39 @@ public class HBasePage {
         }
 
         return tableNames;
+    }
+
+    //Method is to verify the presence of tool tip for HBase tables Region KPI's
+    public boolean verifyRegionMetricsToolTips(){
+        List<WebElement> hBaseRegionKPIList = hBasePageObject.regionKpiContent;
+        Assert.assertFalse(hBaseRegionKPIList.isEmpty(),"HBase Region KPIs not found.");
+
+        List<String> toolTipList = new ArrayList<>();
+
+        Actions builder = new Actions(driver);
+        for(int i=0; i< hBaseRegionKPIList.size() -1 ; i++){
+            builder.moveToElement(hBaseRegionKPIList.get(i)).build().perform();
+            waitExecuter.sleep(1000);
+            try{
+                logger.info("Text: "+hBaseRegionKPIList.get(i).getText());
+                String toolTip = hBaseRegionKPIList.get(i).getAttribute("aria-describedby");
+                logger.info("ToolTips: "+ toolTip);
+                waitExecuter.sleep(1000);
+                if(toolTip.length() > 0){
+                    logger.info("ToolTips: "+ toolTip);
+                    toolTipList.add(toolTip);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+                return false;
+            }
+
+        }
+
+        //Check for tooltips and total 6 KPI's in HBase tables region
+        if(toolTipList.size() == 6){
+            return true;
+        }
+        return false;
     }
 }

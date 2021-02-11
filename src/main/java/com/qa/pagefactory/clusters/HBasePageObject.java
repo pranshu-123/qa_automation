@@ -120,4 +120,7 @@ public class HBasePageObject {
     @FindBy(xpath="//div[@class='g-col-one']/div/div/following-sibling::h3")
     public WebElement regionTableName;
 
+    @FindBy(xpath="//div[contains(@class, 'kpi-content')]/div")
+    public List<WebElement> regionKpiContent;
+
 }

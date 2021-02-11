@@ -425,6 +425,48 @@ public class HBasePage {
         verifyTblRegionUIWithinRegionServer();
     }
 
+    public void verifyRegionTabColumns(){
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseTableHostTbl);
+        List<WebElement> hBaseTableHostTblRowsList = hBasePageObject.hBaseTableHostTblRows;
+        Assert.assertFalse(hBaseTableHostTblRowsList.isEmpty(), "HBase Table Host Table Rows not generated.");
+
+        List<String> regionNameList = new ArrayList<>();
+        List<String> regionSvrNameList = new ArrayList<>();
+        List<String> storeFileSizeList = new ArrayList<>();
+        List<String> readReqCntList = new ArrayList<>();
+        List<String> writeReqCntList = new ArrayList<>();
+        List<String> healthList = new ArrayList<>();
+
+        for(int i=0; i<hBaseTableHostTblRowsList.size(); i++){
+            WebElement row = hBaseTableHostTblRowsList.get(i);
+            regionNameList.add(row.findElement(By.xpath("td[" + 1 + "]")).getText().trim());
+            regionSvrNameList.add(row.findElement(By.xpath("td[" + 2 + "]")).getText().trim());
+            storeFileSizeList.add(row.findElement(By.xpath("td[" + 3 + "]")).getText().trim());
+            readReqCntList.add(row.findElement(By.xpath("td[" + 4 + "]")).getText().trim());
+            writeReqCntList.add(row.findElement(By.xpath("td[" + 5 + "]")).getText().trim());
+            healthList.add(row.findElement(By.xpath("td[" + 6 + "]")).getText().trim());
+        }
+        Assert.assertFalse(regionNameList.isEmpty(), "Region name not found in region table");
+        logger.info("Region name data: "+ regionNameList);
+
+        Assert.assertFalse(regionSvrNameList.isEmpty(), "Region server name not found in region table");
+        logger.info("Region Svr name data: "+ regionSvrNameList);
+
+        Assert.assertFalse(storeFileSizeList.isEmpty(), "Region store file size not found in region table");
+        logger.info("Region store file size data: "+ storeFileSizeList);
+
+        Assert.assertFalse(readReqCntList.isEmpty(), "Region read request count not found in region table");
+        logger.info("Region read request count data: "+ readReqCntList);
+
+        Assert.assertFalse(writeReqCntList.isEmpty(), "Region write request count not found in region table");
+        logger.info("Region write request count data: "+ writeReqCntList);
+
+        Assert.assertFalse(healthList.isEmpty(), "Region health not found in region table");
+        logger.info("Region health data: "+ healthList);
+
+    }
+
+
     /**
      * Click on the Region Server table heading
      * @param hbaseRegionSvrTableColumn - Hbase Region Server Tables

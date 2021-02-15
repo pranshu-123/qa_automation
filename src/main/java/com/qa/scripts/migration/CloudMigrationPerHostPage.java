@@ -3,6 +3,7 @@ package com.qa.scripts.migration;
 import com.qa.constants.CloudMappingHostConstants;
 import com.qa.enums.migration.CloudProduct;
 import com.qa.enums.UserAction;
+import com.qa.enums.migration.InstanceSummaryTableColumn;
 import com.qa.enums.migration.MigrationCloudMappingModalTable;
 import com.qa.enums.migration.MigrationCloudMappingHostDetailsTable;
 import com.qa.pagefactory.TopPanelPageObject;
@@ -413,6 +414,20 @@ public class CloudMigrationPerHostPage {
     }
 
     /**
+     * Get the cloud product value selected in dropdown
+     */
+    public String getCloudProvider() {
+        return cmpPageObj.cloudProductOrServiceValue.getText();
+    }
+
+    /**
+     * Get the region value selected in dropdown
+     */
+    public String getRegion() {
+        return cmpPageObj.regionDropDownValue.getText();
+    }
+
+    /**
      * Verify cloud mapping table column
      *
      * @param table
@@ -529,6 +544,30 @@ public class CloudMigrationPerHostPage {
     }
 
     /**
+     * Return the list of custom costs
+     */
+    public List<WebElement> getCustomCosts() {
+        List<WebElement> checkboxList = new ArrayList<>();
+        List<WebElement> tableRows = cmpPageObj.tableRows;
+        for (WebElement row : tableRows) {
+            WebElement rowCustomCost =
+                    row.findElement(By.xpath("td[" + (MigrationCloudMappingModalTable.CUSTOM_COST.getIndex() + 1) +
+                    "]"));
+            checkboxList.add(rowCustomCost);
+        }
+        return checkboxList;
+    }
+
+    /**
+     * Set the custom cost value for the field
+     * @param element - WebElement whose value to be set
+     * @param value - value to set
+     */
+    public void setCustomCost(WebElement element, String value) {
+        element.sendKeys(value);
+    }
+
+    /**
      * Get confimation message element
      */
     public WebElement getConfirmationMessage() {
@@ -611,6 +650,13 @@ public class CloudMigrationPerHostPage {
     }
 
     /**
+     * Get total attached storage cost value
+     */
+    public Double getTotalLocalAttachedStorageValue() {
+        return Double.parseDouble(cmpPageObj.totalAttachedStorageCostValue.getText().replace("$", ""));
+    }
+
+    /**
      * Click on COST REDUCTION tab
      */
     public void clickOnCostReductionTab() {
@@ -625,13 +671,30 @@ public class CloudMigrationPerHostPage {
     }
 
     /**
+     * Get the values of specific columns from instance summary table
+     * displayed in cloud mapping per host page.
+     * @param column - Column to get values
+     * @return - List of values for that column
+     */
+    public List<String> getSummaryReportDetails(InstanceSummaryTableColumn column) {
+        List<String> values = new ArrayList<>();
+        List<WebElement> rows = cmpPageObj.instanceSummaryRows;
+        for (WebElement row : rows) {
+            values.add(row.findElement(By.xpath("td["+ (column.getIndex() + 1) +"]")).getText());
+        }
+        return values;
+    }
+
+    /**
      * Get the values for specific column from the table
-     *
+     * param isForAllInstances - true is you want instances displayed for all pagination and
+     * false if you want for current page.
      * @return - List of values as String
      */
-    public Map<String, List> getInstanceValuesFromModalTable() {
+    public Map<String, List> getInstanceValuesFromModalTable(boolean isForAllInstances) {
         Map<String, List> allInstances = new HashMap();
-        for (int i = 1; i < getPageCnt(2); i++) {
+        int pageCount = isForAllInstances ? getPageCnt(2) : 1;
+        for (int i = 1; i < pageCount; i++) {
             userAction.performActionWithPolling(cmpPageObj.forwardCaret, UserAction.CLICK);
             List<WebElement> tableRows = cmpPageObj.tableRows;
             for (WebElement row : tableRows) {
@@ -707,7 +770,7 @@ public class CloudMigrationPerHostPage {
         selectStorage("Object storage");
         waitTillLoaderPresent();
         checkUncheckColumn(false);
-        Map<String, List> instanceValuesFromModalTable = getInstanceValuesFromModalTable();
+        Map<String, List> instanceValuesFromModalTable = getInstanceValuesFromModalTable(true);
         clickOnRunButton();
         try {
             waitExecuter.waitUntilTextToBeInWebElement(getConfirmationMessage(),
@@ -775,5 +838,12 @@ public class CloudMigrationPerHostPage {
      */
     public String getStorageName() {
         return cmpPageObj.storageNameLabel.getText().split(":")[1].trim();
+    }
+
+    /**
+     * Get cloud product and services name
+     */
+    public String getCloudProductAndServicesOnReportPage() {
+        return cmpPageObj.cloudProductServicesLabel.getText().split(":")[1].trim();
     }
 }

@@ -26,6 +26,9 @@ public class CloudMappingHostConstants {
             public static final String VM_COST_PER_HOUR = "VM Cost ($/Hour)";
             public static final String DETAILS = "Details";
             public static final String COST_PER_HOUR = "Cost($/hour)";
+            public static final String DESC = "Desc.";
+            public static final String NAME = "Name";
+            public static final String SIZE = "Details";
         }
     }
 }

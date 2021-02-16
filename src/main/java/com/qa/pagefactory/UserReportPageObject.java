@@ -78,7 +78,7 @@ public class UserReportPageObject {
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select")
     public List<WebElement> rundropdown;
 
-    @FindBy(xpath = "(//*[@class=\"select2-selection__rendered\"])[3]")
+    @FindBy(xpath = "//ul[contains(@class,'select2-results__options')]/li")
     public List<WebElement> readUsersDropdown;
 
 

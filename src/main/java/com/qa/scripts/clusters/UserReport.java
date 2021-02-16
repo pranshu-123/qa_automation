@@ -79,24 +79,30 @@ public class UserReport {
 
     /**
      * Method to Click on RealUser
+     * @return
      */
-    public void selectRealUser() {
-        userReportPageObject.readUsersDropdown.stream()
-                .filter(WebElement::isDisplayed).findFirst().get().click();
+    public boolean selectRealUser() {
+        List<WebElement> listOfUser =userReportPageObject.readUsersDropdown;
+        userReportPageObject.queuesDropdown.click();
+        waitExecuter.sleep(1000);
+        listOfUser.get(0).click();
         waitExecuter.sleep(1000);
 
+        return false;
     }
 
 
     /**
      * Method to Click on Queue
+     * @return
      */
-    public void selectQueue() {
+    public boolean selectQueue() {
         List<WebElement> listOfQueue = userReportPageObject.dropdownOptions;
         userReportPageObject.queuesDropdown.click();
         waitExecuter.sleep(1000);
         listOfQueue.get(0).click();
         waitExecuter.sleep(1000);
+        return false;
     }
 
     /**

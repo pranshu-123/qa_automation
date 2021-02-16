@@ -50,7 +50,8 @@ public class TC_SF_39 extends BaseClass {
         // Define day of the week and time
         test.log(LogStatus.INFO, "Define day of the week as- Every month and time as- 00:00");
         logger.info("Define day of the week as- Every month and time as- 00:00");
-        smallfiles.selectDayTime("Every month", "00", "00");
+        smallfiles.selectDayTime("Daily", "11", "30");
+        waitExecuter.waitUntilPageFullyLoaded();
         smallfiles.clickOnModalScheduleButton();
         waitExecuter.waitUntilPageFullyLoaded();
         logger.info("Clicked on Modal Schedule Button");

@@ -47,19 +47,18 @@ public class TC_LLAP_05 extends BaseClass {
         tezLlapApps.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
         test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
-
         int appCount = tezLlapApps.clickOnlyLink("Tez");
-        applicationsPageObject.expandStatus.click();
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
-        test.log(LogStatus.PASS, "AppCount is " + appCount + " total count is " + totalCount);
         Assert.assertEquals(appCount, totalCount, "The tez app count of tezApp is not equal to " +
                 "the total count of heading.");
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
-        int failedCount = tezLlapApps.clickOnlyLink("Failed");
-        test.log(LogStatus.PASS, "Selected failed Count is  " + failedCount + "  as Status, In Applications page");
+
+        applicationsPageObject.expandStatus.click();
+        int successCount = tezLlapApps.clickOnlyLink("Success");
+        test.log(LogStatus.PASS, "Selected success Count is  " + successCount + " as Status, In Applications page");
 
         // Get llap queuename from table for tez apps
         String upTo10CharQueueName = "llap";

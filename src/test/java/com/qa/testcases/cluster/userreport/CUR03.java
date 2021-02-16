@@ -71,8 +71,18 @@ public class CUR03 extends BaseClass {
         } catch (TimeoutException te) {
             Assert.assertTrue(false, "Unable to clicked on setTopXNumber.");
         }
-        userReport.selectRealUser();
-        userReport.selectQueue();
+        if (!userReport.selectRealUser()) {
+            test.log(LogStatus.PASS, "Verify select dropdown in Group by RealUser");
+        } else {
+            test.log(LogStatus.FAIL, "Test Failed select dropdown in Group by RealUser");
+        }
+        waitExecuter.waitUntilPageFullyLoaded();
+        if (!userReport.selectQueue()) {
+            test.log(LogStatus.PASS, "Verify select dropdown in Group by Queue");
+        } else {
+            test.log(LogStatus.FAIL, "Test Failed select dropdown in Group by Queue");
+        }
+        waitExecuter.waitUntilPageFullyLoaded();
 
         userReport.assignEmail("sray@unraveldata.com");
         waitExecuter.sleep(1000);

@@ -9,7 +9,6 @@ import com.qa.scripts.clusters.UserReport;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
-
 import org.openqa.selenium.TimeoutException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +26,7 @@ public class CUR01 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void CUR01_VerifyScheduleUserReport(String clusterId) {
-        test = extent.startTest("CUR01.VerifyScheduleUserReport"+ clusterId,
+        test = extent.startTest("CUR01.VerifyScheduleUserReport" + clusterId,
                 "Verify schedule user report is working fine");
         test.assignCategory("Cluster - User Report");
         Log.startTestCase("CUR01_Verifyscheduleuserreport");
@@ -48,36 +47,42 @@ public class CUR01 extends BaseClass {
         waitExecuter.sleep(3000);
         topPanelPageObject.topXTab.click();
 
-
-        waitExecuter.waitUntilElementClickable(userReportPageObject.scheduleuserreportButton);
-        userReport.clicksheduleusereport();
-        test.log(LogStatus.PASS, "Verified user click on schedule user report");
-
-
-        userReport.schedule("Testschedule58");
-        waitExecuter.sleep(1000);
-        test.log(LogStatus.PASS, "Successfully add Schedule Name");
-
-        schedule.clickOnSchedule();
-        waitExecuter.sleep(1000);
-
-        schedule.selectDaily();
-        waitExecuter.sleep(2000);
-
-
         try {
+            waitExecuter.waitUntilElementClickable(userReportPageObject.scheduleuserreportButton);
+            userReport.clicksheduleusereport();
+            test.log(LogStatus.PASS, "Verified user click on schedule user report");
+
+            userReport.schedule("Testschedule58");
+            waitExecuter.sleep(1000);
+            test.log(LogStatus.PASS, "Successfully add Schedule Name");
+
+            schedule.clickOnSchedule();
+            waitExecuter.sleep(1000);
+
+            schedule.selectDaily();
+            waitExecuter.sleep(2000);
+
+
             userReportPageObject.addconfiguration.click();
             test.log(LogStatus.PASS, "Successfully clicked on add configuration.");
 
-        } catch (TimeoutException te) {
-            Assert.assertTrue(false, "Unable to clicked on add configuration.");
-        }
-
         userReport.setTopXNumber("30");
         waitExecuter.sleep(1000);
+
         userReport.selectRealUser();
-        userReport.selectQueue();
-        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilPageFullyLoaded();
+        if (!userReport.selectRealUser()) {
+                test.log(LogStatus.PASS, "Verify select dropdown in Group by RealUser");
+            } else {
+                test.log(LogStatus.FAIL, "Test Failed select dropdown in Group by RealUser");
+            }
+        waitExecuter.waitUntilPageFullyLoaded();
+        if (!userReport.selectQueue()) {
+                test.log(LogStatus.PASS, "Verify select dropdown in Group by Queue");
+        } else {
+                test.log(LogStatus.FAIL, "Test Failed select dropdown in Group by Queue");
+        }
+            waitExecuter.waitUntilPageFullyLoaded();
 
         userReport.assignEmail("sray@unraveldata.com");
         waitExecuter.sleep(1000);
@@ -90,7 +95,10 @@ public class CUR01 extends BaseClass {
         userReportPageObject.saveschedule.click();
         waitExecuter.sleep(3000);
         test.log(LogStatus.PASS, "Successfully clicked save sheduele.");
-
+        } catch (TimeoutException te) {
+            Assert.assertTrue(false, "Unable to clicked on add configuration.");
+        }
         Log.endTestCase("CUR01_Verifyscheduleuserreport");
+
     }
 }

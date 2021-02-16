@@ -70,9 +70,18 @@ public class CUR02 extends BaseClass {
 
         userReport.setTopXNumber("30");
         waitExecuter.sleep(1000);
-        userReport.selectRealUser();
-        userReport.selectQueue();
-        waitExecuter.sleep(1000);
+        if (!userReport.selectRealUser()) {
+            test.log(LogStatus.PASS, "Verify select dropdown in Group by RealUser");
+        } else {
+            test.log(LogStatus.FAIL, "Test Failed select dropdown in Group by RealUser");
+        }
+        waitExecuter.waitUntilPageFullyLoaded();
+        if (!userReport.selectQueue()) {
+            test.log(LogStatus.PASS, "Verify select dropdown in Group by Queue");
+        } else {
+            test.log(LogStatus.FAIL, "Test Failed select dropdown in Group by Queue");
+        }
+        waitExecuter.waitUntilPageFullyLoaded();
 
         userReport.assignEmail("sray@unraveldata.com");
         waitExecuter.sleep(1000);

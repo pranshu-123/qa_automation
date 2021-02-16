@@ -346,7 +346,6 @@ public class HBasePage {
                 logger.info("Found Bad health");
                 Actions toolAct = new Actions(driver);
                 toolAct.moveToElement(e).build().perform();
-                //WebElement toolTip = mrApps.getClusterId;
                 String toolTipText = e.getAttribute("aria-describedby");
                 logger.info("toolTipText of Bad Health button is " + toolTipText);
                 Assert.assertTrue(toolTipText.length()>0, " Tool tip text is not found.");
@@ -495,10 +494,10 @@ public class HBasePage {
         waitExecuter.sleep(2000);
 
         clickOnRegionSvrTable(HbaseRegionSvrTableColumn.WRITE_REQUEST_COUNT);
-        logger.info("Click on Region Server Read Request Count column.");
+        logger.info("Click on Region Server Write Request Count column.");
         Boolean isDataSortedForRegionSvrWriteReqCnt = isRegionSvrTablesDataSorted(
                 HbaseRegionSvrTableColumn.WRITE_REQUEST_COUNT,true);
-        Assert.assertTrue(isDataSortedForRegionSvrReadReqCnt, "Region Server Read Request Count Data is not sorted.");
+        Assert.assertTrue(isDataSortedForRegionSvrReadReqCnt, "Region Server Write Request Count Data is not sorted.");
         waitExecuter.sleep(2000);
 
         clickOnRegionSvrTable(HbaseRegionSvrTableColumn.STORE_FILE_SIZE);
@@ -533,7 +532,6 @@ public class HBasePage {
             actualDataString = actualDataString.stream().map(data -> Arrays.asList(data.split("\n"))
                     .stream().reduce((first, second) -> second).get()).collect(Collectors.toList());
         }
-        //System.out.println("actualDataString: "+actualDataString);
 
         if(hbaseRegionSvrTableColumn == HbaseRegionSvrTableColumn.READ_REQUEST_COUNT ||
                 hbaseRegionSvrTableColumn == HbaseRegionSvrTableColumn.WRITE_REQUEST_COUNT ||
@@ -541,7 +539,7 @@ public class HBasePage {
 
             List<Integer> actualDataInteger = actualDataString.stream().map(data ->
                     convertToInteger(data)).collect(Collectors.toList());
-            //System.out.println("actualDataInteger: "+actualDataInteger);
+
             List<String> sortedList = new ArrayList(actualDataInteger);
             if (isReversed) {
                 sortedList.sort(Comparator.reverseOrder());
@@ -558,7 +556,7 @@ public class HBasePage {
 
             List<Double> actualDataDouble = actualDataString.stream().map(data ->
                     convertToDouble(data)).collect(Collectors.toList());
-            //System.out.println("actualDataDouble: "+actualDataDouble);
+
             List<String> sortedList = new ArrayList(actualDataDouble);
             if (isReversed) {
                 sortedList.sort(Comparator.reverseOrder());
@@ -656,7 +654,6 @@ public class HBasePage {
             actualDataString = actualDataString.stream().map(data -> Arrays.asList(data.split("\n"))
                     .stream().reduce((first, second) -> second).get()).collect(Collectors.toList());
         }
-        //System.out.println("actualDataString: "+actualDataString);
 
         if(hbaseTablesColumn == HbaseTablesColumn.TABLE_SIZE ||
                 hbaseTablesColumn == HbaseTablesColumn.REGION_COUNT ||
@@ -666,7 +663,6 @@ public class HBasePage {
 
             List<Integer> actualDataInteger = actualDataString.stream().map(data ->
                     convertToInteger(data)).collect(Collectors.toList());
-            //System.out.println("actualDataInteger: "+actualDataInteger);
             List<String> sortedList = new ArrayList(actualDataInteger);
             if (isReversed) {
                 sortedList.sort(Comparator.reverseOrder());

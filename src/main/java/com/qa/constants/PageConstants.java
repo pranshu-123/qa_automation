@@ -53,4 +53,26 @@ public class PageConstants {
     public static class AppQueue {
         public static String LLAP = "llap";
     }
+
+    /* Impala event types name */
+    public static class EventTypes {
+        public static String SqlSlowOperatorEvent = "Slow Operator Analysis";
+        public static String ImpalaTimeBreakdownEvent = "Time Breakdown Analysis";
+        public static String SQLNonPartitionedTableEvent = "Large non partitioned tables detected";
+        public static String SqlUnderestimatedCountOfRowsEvent = "Stale table statistics";
+        public static String ImpalaTablesMissingStatsEvent = "Missing Statistics";
+        public static String ImpalaNonColumnarTablesEvent = "Inefficient Storage Format";
+        public static String SqlTooManyJoinsEvent = "Query contains too many joins";
+        public static String SqlNoFilterEvent = "No Filter";
+        public static String ImpalaTimeSkewEvent = "Time skew analysis";
+        public static String SqlTooManyPartitionsEvent = "Table has too many partitions";
+        public static String ImpalaFailureEvent = "Impala query failure";
+        public static String SqlNonPrunedPartitionsEvent = "No partitions were pruned";
+
+    }
+
+    /*Impala application Id*/
+    public static class appId {
+        public static String appIdForImpala = "bd4a44f2cfb21466:e787e01e00000000";
+    }
 }

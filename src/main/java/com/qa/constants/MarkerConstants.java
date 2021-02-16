@@ -51,6 +51,7 @@ public class MarkerConstants {
     public static final String WORKLOAD_FIT = "workload_fit";
     public static final String CLOUD_MAPPING_PER_HOST = "cloud_mapping_per_host";
     public static final String JOBS_WORKFLOW = "jobs_workflow";
+    public static final String IMPALA_INSIGHTS = "impala_insights";
     public static final Map<String, Class<? extends Annotation>> MARKER_MAPPING = initMap();
 
     /**
@@ -99,6 +100,7 @@ public class MarkerConstants {
         map.put(WORKLOAD_FIT, Marker.WorkloadFit.class);
         map.put(CLOUD_MAPPING_PER_HOST, Marker.CloudMappingPerHost.class);
         map.put(JOBS_WORKFLOW, Marker.JobsWorkflow.class);
+        map.put(IMPALA_INSIGHTS, Marker.ImpalaInsights.class);
         return Collections.unmodifiableMap(map);
     }
 }

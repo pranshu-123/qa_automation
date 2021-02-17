@@ -8,24 +8,23 @@ import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 @Marker.ClusterHBase
 @Marker.All
-public class TC_HB_17 extends BaseClass {
 
-    private static final Logger LOGGER = Logger.getLogger(TC_HB_17.class.getName());
+public class TC_HB_56 extends BaseClass {
+
+    private static final Logger LOGGER = Logger.getLogger(TC_HB_56.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void verifyHBaseClusters(String clusterId) {
-        test = extent.startTest("TC_HB_17.verifyHBaseClusters",
-                "Navigate to Clusters UI.");
+    public void verifyMetricsAndGraphRegionTab(String clusterId) {
+        test = extent.startTest("TC_HB_56.verifyMetricsAndGraphRegionTab",
+                "Verify All metrics and graphs under region tab.");
         test.assignCategory(" Cluster - HBasePage ");
-        Log.startTestCase("TC_HB_17.verifyHBaseClusters");
+        Log.startTestCase("TC_HB_56.verifyMetricsAndGraphRegionTab");
 
         // Initialize all classes objects
         LOGGER.info("Initialize all class objects");
@@ -35,16 +34,20 @@ public class TC_HB_17 extends BaseClass {
 
         //Navigate to HBase tab
         waitExecuter.waitUntilElementClickable(hBasePageObject.hbaseTab);
-        MouseActions.clickOnElement(driver,hBasePageObject.hbaseTab);
+        MouseActions.clickOnElement(driver, hBasePageObject.hbaseTab);
         LOGGER.info("Clicked on HBase Tab");
         hbase.selectDateAsLast30Days();
         waitExecuter.waitUntilElementPresent(hBasePageObject.hbaseHeader);
-        LOGGER.info("HBase headers found: "+ hbase.getHBaseHeader());
+        LOGGER.info("HBase headers found: " + hbase.getHBaseHeader());
 
-        List<String> hBaseClusters = hbase.getAllHBaseClusters();
-        LOGGER.info("HBase clusters found are: "+ hBaseClusters);
-        Assert.assertFalse(hBaseClusters.isEmpty(), "HBase clusters not available");
-        test.log(LogStatus.PASS, "Verified HBase clusters in Unravel UI.");
+        //verify Hbase Tables tab elements tables
+        hbase.verifyTablesTabElements();
+        //verify Table and Region
+        hbase.verifyTableAndRegion();
 
+        //verify all the table column
+        hbase.verifyRegionTabColumns();
+        LOGGER.info("Verified All metrics and graphs under region tab.");
+        test.log(LogStatus.PASS, "Verified All metrics and graphs under region tab.");
     }
 }

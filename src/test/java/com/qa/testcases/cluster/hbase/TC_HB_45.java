@@ -16,16 +16,16 @@ import java.util.logging.Logger;
 
 @Marker.ClusterHBase
 @Marker.All
-public class TC_HB_17 extends BaseClass {
+public class TC_HB_45 extends BaseClass {
 
-    private static final Logger LOGGER = Logger.getLogger(TC_HB_17.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TC_HB_45.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void verifyHBaseClusters(String clusterId) {
-        test = extent.startTest("TC_HB_17.verifyHBaseClusters",
-                "Navigate to Clusters UI.");
+    public void verifyAlertsForRegionSvrUI(String clusterId) {
+        test = extent.startTest("TC_HB_45.verifyAlertsForRegionSvrUI",
+                "Verify alerts for region server in UI.");
         test.assignCategory(" Cluster - HBasePage ");
-        Log.startTestCase("TC_HB_17.verifyHBaseClusters");
+        Log.startTestCase("TC_HB_45.verifyAlertsForRegionSvrUI");
 
         // Initialize all classes objects
         LOGGER.info("Initialize all class objects");
@@ -35,16 +35,22 @@ public class TC_HB_17 extends BaseClass {
 
         //Navigate to HBase tab
         waitExecuter.waitUntilElementClickable(hBasePageObject.hbaseTab);
-        MouseActions.clickOnElement(driver,hBasePageObject.hbaseTab);
+        MouseActions.clickOnElement(driver, hBasePageObject.hbaseTab);
         LOGGER.info("Clicked on HBase Tab");
         hbase.selectDateAsLast30Days();
-        waitExecuter.waitUntilElementPresent(hBasePageObject.hbaseHeader);
-        LOGGER.info("HBase headers found: "+ hbase.getHBaseHeader());
 
-        List<String> hBaseClusters = hbase.getAllHBaseClusters();
-        LOGGER.info("HBase clusters found are: "+ hBaseClusters);
-        Assert.assertFalse(hBaseClusters.isEmpty(), "HBase clusters not available");
-        test.log(LogStatus.PASS, "Verified HBase clusters in Unravel UI.");
+        LOGGER.info("HBase cluster using : "+ clusterId);
+        hbase.selectHBaseCluster(clusterId);
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hbaseHeader);
+        LOGGER.info("HBase headers found: " + hbase.getHBaseHeader());
+        test.log(LogStatus.INFO, "Verified HBase cluster setup with :"+ clusterId);
+
+        //verify and click on region server tab
+        hbase.verifyRegionServer();
+        //verify alerts in region server
+        hbase.verifyAlertsInRegionServerHealth();
+        LOGGER.info("Verified alerts for region server in UI.");
+        test.log(LogStatus.PASS, "Verified alerts for region server in UI.");
 
     }
 }

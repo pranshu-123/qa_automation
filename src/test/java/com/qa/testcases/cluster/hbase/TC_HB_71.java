@@ -16,16 +16,16 @@ import java.util.logging.Logger;
 
 @Marker.ClusterHBase
 @Marker.All
-public class TC_HB_17 extends BaseClass {
+public class TC_HB_71  extends BaseClass {
 
-    private static final Logger LOGGER = Logger.getLogger(TC_HB_17.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TC_HB_71.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void verifyHBaseClusters(String clusterId) {
-        test = extent.startTest("TC_HB_17.verifyHBaseClusters",
-                "Navigate to Clusters UI.");
+    public void verifyHBaseMultiClusterWithCDH(String clusterId) {
+        test = extent.startTest("TC_HB_71.verifyHBaseMultiClusterWithCDH",
+                "Verify Multicluster setup with one CDH cluster.");
         test.assignCategory(" Cluster - HBasePage ");
-        Log.startTestCase("TC_HB_17.verifyHBaseClusters");
+        Log.startTestCase("TC_HB_71.verifyHBaseMultiClusterWithCDH");
 
         // Initialize all classes objects
         LOGGER.info("Initialize all class objects");
@@ -44,7 +44,23 @@ public class TC_HB_17 extends BaseClass {
         List<String> hBaseClusters = hbase.getAllHBaseClusters();
         LOGGER.info("HBase clusters found are: "+ hBaseClusters);
         Assert.assertFalse(hBaseClusters.isEmpty(), "HBase clusters not available");
-        test.log(LogStatus.PASS, "Verified HBase clusters in Unravel UI.");
 
+        boolean flag = false;
+        for (String clusterName : hBaseClusters) {
+            if (clusterName.contains("CM")) {
+                flag =  true;
+                Assert.assertTrue(true, "Multicluster setup with CDH cluster not found.");
+                LOGGER.info("Verified Multicluster setup with one CDH cluster."+clusterName);
+                waitExecuter.waitUntilElementClickable(hBasePageObject.hBaseClusterDropDown);
+                MouseActions.clickOnElement(driver, hBasePageObject.hBaseClusterDropDown);
+                hbase.selectHBaseCluster(clusterName);
+                LOGGER.info("HBase headers found: "+ hbase.getHBaseHeader());
+                test.log(LogStatus.PASS, "Verified Multicluster setup with one CDH cluster.");
+            }
+        }
+
+        if(flag == false){
+            Assert.assertTrue(false, "Multicluster setup with CDH cluster not found.");
+        }
     }
 }

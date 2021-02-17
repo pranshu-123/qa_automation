@@ -1,5 +1,8 @@
 package com.qa.scripts.clusters;
 
+import com.qa.enums.UserAction;
+import com.qa.enums.hbase.HbaseRegionSvrTableColumn;
+import com.qa.enums.hbase.HbaseTablesColumn;
 import com.qa.pagefactory.clusters.HBasePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
@@ -12,11 +15,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class HBasePage {
     private WebDriver driver;
@@ -265,6 +266,7 @@ public class HBasePage {
         logger.info(""+regionMetricsChartsTablesList);
     }
 
+    //verify Region server tab and click on it and also check region data table
     public void verifyRegionServer(){
         List<WebElement> hBaseKpiContainersList = hBasePageObject.hBaseKpiContainers;
         Assert.assertFalse(hBaseKpiContainersList.isEmpty(), "Region Metrics Charts And Tables not found.");
@@ -335,6 +337,25 @@ public class HBasePage {
         Assert.assertTrue(hBaseTblTabText.equals("Tables"),"HBase Table Tab not found");
 
     }
+    public void verifyAlertsInRegionServerHealth(){
+        List<WebElement> hBaseRegionSvrHealth = hBasePageObject.hBaseRegionSvrHealth;
+        Assert.assertFalse(hBaseRegionSvrHealth.isEmpty(), "No Health check column found.");
+
+        for(WebElement e: hBaseRegionSvrHealth){
+            if(e.getText().equalsIgnoreCase("Bad")){
+                logger.info("Found Bad health");
+                Actions toolAct = new Actions(driver);
+                toolAct.moveToElement(e).build().perform();
+                String toolTipText = e.getAttribute("aria-describedby");
+                logger.info("toolTipText of Bad Health button is " + toolTipText);
+                Assert.assertTrue(toolTipText.length()>0, " Tool tip text is not found.");
+            }
+        }
+
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseSvrHealthHeader);
+        Assert.assertTrue(hBasePageObject.hBaseSvrHealthHeader.getText().equals("Server Health and Context"),
+                "'Server Health and Context' header not found");
+    }
 
     public void verifyRegionServerHealth(){
         List<WebElement> hBaseRegionSvrHealth = hBasePageObject.hBaseRegionSvrHealth;
@@ -403,5 +424,319 @@ public class HBasePage {
         verifyTblRegionUIWithinRegionServer();
     }
 
+    public void verifyRegionTabColumns(){
+        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseTableHostTbl);
+        List<WebElement> hBaseTableHostTblRowsList = hBasePageObject.hBaseTableHostTblRows;
+        Assert.assertFalse(hBaseTableHostTblRowsList.isEmpty(), "HBase Table Host Table Rows not generated.");
 
+        List<String> regionNameList = new ArrayList<>();
+        List<String> regionSvrNameList = new ArrayList<>();
+        List<String> storeFileSizeList = new ArrayList<>();
+        List<String> readReqCntList = new ArrayList<>();
+        List<String> writeReqCntList = new ArrayList<>();
+        List<String> healthList = new ArrayList<>();
+
+        for(int i=0; i<hBaseTableHostTblRowsList.size(); i++){
+            WebElement row = hBaseTableHostTblRowsList.get(i);
+            regionNameList.add(row.findElement(By.xpath("td[" + 1 + "]")).getText().trim());
+            regionSvrNameList.add(row.findElement(By.xpath("td[" + 2 + "]")).getText().trim());
+            storeFileSizeList.add(row.findElement(By.xpath("td[" + 3 + "]")).getText().trim());
+            readReqCntList.add(row.findElement(By.xpath("td[" + 4 + "]")).getText().trim());
+            writeReqCntList.add(row.findElement(By.xpath("td[" + 5 + "]")).getText().trim());
+            healthList.add(row.findElement(By.xpath("td[" + 6 + "]")).getText().trim());
+        }
+        Assert.assertFalse(regionNameList.isEmpty(), "Region name not found in region table");
+        logger.info("Region name data: "+ regionNameList);
+
+        Assert.assertFalse(regionSvrNameList.isEmpty(), "Region server name not found in region table");
+        logger.info("Region Svr name data: "+ regionSvrNameList);
+
+        Assert.assertFalse(storeFileSizeList.isEmpty(), "Region store file size not found in region table");
+        logger.info("Region store file size data: "+ storeFileSizeList);
+
+        Assert.assertFalse(readReqCntList.isEmpty(), "Region read request count not found in region table");
+        logger.info("Region read request count data: "+ readReqCntList);
+
+        Assert.assertFalse(writeReqCntList.isEmpty(), "Region write request count not found in region table");
+        logger.info("Region write request count data: "+ writeReqCntList);
+
+        Assert.assertFalse(healthList.isEmpty(), "Region health not found in region table");
+        logger.info("Region health data: "+ healthList);
+
+    }
+
+
+    /**
+     * Click on the Region Server table heading
+     * @param hbaseRegionSvrTableColumn - Hbase Region Server Tables
+     */
+    public void clickOnRegionSvrTable(HbaseRegionSvrTableColumn hbaseRegionSvrTableColumn){
+        WebElement headingToBeClicked = hBasePageObject.hbaseRegionsDataTble.findElement(By.xpath("//th["+
+                (hbaseRegionSvrTableColumn.index + 1) + "]/a"));
+        MouseActions.clickOnElement(driver, headingToBeClicked);
+        waitExecuter.sleep(2000);
+    }
+
+    public void sortColumnsInRegionSvrTableMetrics(){
+
+        clickOnRegionSvrTable(HbaseRegionSvrTableColumn.REGION_SERVER_NAME);
+        logger.info("Click on Region Server Name column.");
+        Boolean isDataSortedForRegionSvrName = isRegionSvrTablesDataSorted(HbaseRegionSvrTableColumn.REGION_SERVER_NAME,
+                false);
+        Assert.assertTrue(isDataSortedForRegionSvrName, "Region Server Name Data is not sorted.");
+        waitExecuter.sleep(2000);
+
+        clickOnRegionSvrTable(HbaseRegionSvrTableColumn.READ_REQUEST_COUNT);
+        logger.info("Click on Region Server Read Request Count column.");
+        Boolean isDataSortedForRegionSvrReadReqCnt = isRegionSvrTablesDataSorted(
+                HbaseRegionSvrTableColumn.READ_REQUEST_COUNT,true);
+        Assert.assertTrue(isDataSortedForRegionSvrReadReqCnt, "Region Server Read Request Count Data is not sorted.");
+        waitExecuter.sleep(2000);
+
+        clickOnRegionSvrTable(HbaseRegionSvrTableColumn.WRITE_REQUEST_COUNT);
+        logger.info("Click on Region Server Write Request Count column.");
+        Boolean isDataSortedForRegionSvrWriteReqCnt = isRegionSvrTablesDataSorted(
+                HbaseRegionSvrTableColumn.WRITE_REQUEST_COUNT,true);
+        Assert.assertTrue(isDataSortedForRegionSvrReadReqCnt, "Region Server Write Request Count Data is not sorted.");
+        waitExecuter.sleep(2000);
+
+        clickOnRegionSvrTable(HbaseRegionSvrTableColumn.STORE_FILE_SIZE);
+        logger.info("Click on Region Server store file size column.");
+        Boolean isDataSortedForRegionSvrStoreFileSize = isRegionSvrTablesDataSorted(
+                HbaseRegionSvrTableColumn.STORE_FILE_SIZE, true);
+        Assert.assertTrue(isDataSortedForRegionSvrStoreFileSize, "Region Server store file size Data is not sorted.");
+        waitExecuter.sleep(2000);
+
+        clickOnRegionSvrTable(HbaseRegionSvrTableColumn.REGION_COUNT);
+        logger.info("Click on Region Server 'Region Count' column.");
+        Boolean isDataSortedForRegionSvrRegionCnt = isRegionSvrTablesDataSorted(
+                HbaseRegionSvrTableColumn.REGION_COUNT,true);
+        Assert.assertTrue(isDataSortedForRegionSvrRegionCnt, "Region Server Read Request Count Data is not sorted.");
+        waitExecuter.sleep(2000);
+    }
+
+    /**
+     * Validate whether data is sorted of hbase region server table column
+     * @param hbaseRegionSvrTableColumn  - Region Server Table Column to be clicked
+     * @param isReversed - Descending Order
+     * @return true if data is sorted.
+     */
+    public Boolean isRegionSvrTablesDataSorted(HbaseRegionSvrTableColumn hbaseRegionSvrTableColumn, Boolean isReversed){
+
+        List<String> actualDataString = new ArrayList<>();
+        List<WebElement> tableRows = hBasePageObject.hBaseRegionSvrTableRecords;
+        for(WebElement row: tableRows){
+            //table[@id='hbaseRegionsDataTble']/tbody/tr/td[1]
+            actualDataString.add(row.findElement(By.xpath("td["+ (hbaseRegionSvrTableColumn.index + 1) +
+                    "]")).getText().trim());
+            actualDataString = actualDataString.stream().map(data -> Arrays.asList(data.split("\n"))
+                    .stream().reduce((first, second) -> second).get()).collect(Collectors.toList());
+        }
+
+        if(hbaseRegionSvrTableColumn == HbaseRegionSvrTableColumn.READ_REQUEST_COUNT ||
+                hbaseRegionSvrTableColumn == HbaseRegionSvrTableColumn.WRITE_REQUEST_COUNT ||
+                hbaseRegionSvrTableColumn == HbaseRegionSvrTableColumn.REGION_COUNT){
+
+            List<Integer> actualDataInteger = actualDataString.stream().map(data ->
+                    convertToInteger(data)).collect(Collectors.toList());
+
+            List<String> sortedList = new ArrayList(actualDataInteger);
+            if (isReversed) {
+                sortedList.sort(Comparator.reverseOrder());
+            } else {
+                sortedList.sort(Comparator.naturalOrder());
+            }
+            if (actualDataInteger.equals(sortedList)) {
+                return true;
+            } else {
+                return false;
+            }
+
+        }else if(hbaseRegionSvrTableColumn == HbaseRegionSvrTableColumn.STORE_FILE_SIZE){
+
+            List<Double> actualDataDouble = actualDataString.stream().map(data ->
+                    convertToDouble(data)).collect(Collectors.toList());
+
+            List<String> sortedList = new ArrayList(actualDataDouble);
+            if (isReversed) {
+                sortedList.sort(Comparator.reverseOrder());
+            } else {
+                sortedList.sort(Comparator.naturalOrder());
+            }
+            if (actualDataDouble.equals(sortedList)) {
+                return true;
+            } else {
+                return false;
+            }
+
+        }else {
+
+            List<String> sortedList = new ArrayList(actualDataString);
+            if (isReversed) {
+                sortedList.sort(Comparator.reverseOrder());
+            } else {
+                sortedList.sort(Comparator.naturalOrder());
+            }
+            if (actualDataString.equals(sortedList)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+    }
+
+    /**
+     * Click on the table heading of hbase tables
+     * @param hbaseTablesColumn - Hbase Tables
+     */
+    public void clickOnTableHeading(HbaseTablesColumn hbaseTablesColumn){
+        WebElement headingToBeClicked =
+                hBasePageObject.tablesTabTbl.findElement(By.xpath("//th["+ (hbaseTablesColumn.index + 1) +
+                        "]/a"));
+        actions.performActionWithPolling(headingToBeClicked, UserAction.CLICK);
+        waitExecuter.sleep(2000);
+    }
+
+    public void sortColumnsInTableMetrics(){
+        clickOnTableHeading(HbaseTablesColumn.TABLE_NAME);
+        logger.info("Click on Table Name column.");
+        Boolean isDataSortedForTblName = isTablesDataSorted(HbaseTablesColumn.TABLE_NAME, false);
+        Assert.assertTrue(isDataSortedForTblName, "Data is not sorted.");
+        waitExecuter.sleep(2000);
+        clickOnTableHeading(HbaseTablesColumn.TABLE_SIZE);
+        logger.info("Click on Table Name column.");
+        Boolean isDataSortedForTblSize = isTablesDataSorted(HbaseTablesColumn.TABLE_SIZE, true);
+        Assert.assertTrue(isDataSortedForTblSize, "Data is not sorted.");
+        waitExecuter.sleep(2000);
+        clickOnTableHeading(HbaseTablesColumn.REGION_COUNT);
+        logger.info("Click on Table Name column.");
+        Boolean isDataSortedForRegionCnt = isTablesDataSorted(HbaseTablesColumn.REGION_COUNT, true);
+        Assert.assertTrue(isDataSortedForRegionCnt, "Data is not sorted.");
+        waitExecuter.sleep(2000);
+        clickOnTableHeading(HbaseTablesColumn.READ_REQUEST_COUNT);
+        logger.info("Click on Table Name column.");
+        Boolean isDataSortedForReadReqCnt = isTablesDataSorted(HbaseTablesColumn.READ_REQUEST_COUNT, true);
+        Assert.assertTrue(isDataSortedForReadReqCnt, "Data is not sorted.");
+        waitExecuter.sleep(2000);
+        clickOnTableHeading(HbaseTablesColumn.WRITE_REQUEST_COUNT);
+        logger.info("Click on Table Name column.");
+        Boolean isDataSortedForWriteReqCnt = isTablesDataSorted(HbaseTablesColumn.WRITE_REQUEST_COUNT, true);
+        Assert.assertTrue(isDataSortedForWriteReqCnt, "Data is not sorted.");
+    }
+
+    //convert String data to integer
+    public int convertToInteger(String data){
+
+        String[] newData = data.split(" ");
+        return Integer.parseInt(newData[0]);
+    }
+
+    //convert String data to double
+    public double convertToDouble(String data){
+
+        String[] newData = data.split(" ");
+        return Double.parseDouble(newData[0]);
+    }
+
+    /**
+     * Validate whether data is sorted of hbase table column
+     * @param hbaseTablesColumn  - Table Column to be clicked
+     * @param isReversed - Descending Order
+     * @return true if data is sorted.
+     */
+    public boolean isTablesDataSorted(HbaseTablesColumn hbaseTablesColumn, Boolean isReversed){
+
+        List<String> actualDataString = new ArrayList<>();
+        List<WebElement> tableRows = hBasePageObject.tablesTabTblRecords;
+        for (WebElement row : tableRows) {
+            actualDataString.add(row.findElement(By.xpath("td[" + (hbaseTablesColumn.index + 1) + "]")).getText().trim());
+            actualDataString = actualDataString.stream().map(data -> Arrays.asList(data.split("\n"))
+                    .stream().reduce((first, second) -> second).get()).collect(Collectors.toList());
+        }
+
+        if(hbaseTablesColumn == HbaseTablesColumn.TABLE_SIZE ||
+                hbaseTablesColumn == HbaseTablesColumn.REGION_COUNT ||
+                hbaseTablesColumn == HbaseTablesColumn.READ_REQUEST_COUNT ||
+                hbaseTablesColumn == HbaseTablesColumn.WRITE_REQUEST_COUNT )
+        {
+
+            List<Integer> actualDataInteger = actualDataString.stream().map(data ->
+                    convertToInteger(data)).collect(Collectors.toList());
+            List<String> sortedList = new ArrayList(actualDataInteger);
+            if (isReversed) {
+                sortedList.sort(Comparator.reverseOrder());
+            } else {
+                sortedList.sort(Comparator.naturalOrder());
+            }
+            if (actualDataInteger.equals(sortedList)) {
+                return true;
+            } else {
+                return false;
+            }
+
+        }else{
+            List<String> sortedList = new ArrayList(actualDataString);
+            if (isReversed) {
+                sortedList.sort(Comparator.reverseOrder());
+            } else {
+                sortedList.sort(Comparator.naturalOrder());
+            }
+
+            if (actualDataString.equals(sortedList)) {
+                return true;
+            } else {
+                return false;
+            }
+
+        }
+
+    }
+
+    public List<String> getTableNamesFromTablesTab(HbaseTablesColumn hbaseTablesColumn){
+
+        List<String> tableNames = new ArrayList<>();
+        List<WebElement> tableRows = hBasePageObject.tablesTabTblRecords;
+        for (WebElement row : tableRows) {
+            tableNames.add(row.findElement(By.xpath("td[" + (hbaseTablesColumn.index + 1) + "]")).getText().trim());
+            tableNames = tableNames.stream().map(data -> Arrays.asList(data.split("\n"))
+                    .stream().reduce((first, second) -> second).get()).collect(Collectors.toList());
+        }
+
+        return tableNames;
+    }
+
+    //Method is to verify the presence of tool tip for HBase tables Region KPI's
+    public boolean verifyRegionMetricsToolTips(){
+        List<WebElement> hBaseRegionKPIList = hBasePageObject.regionKpiContent;
+        Assert.assertFalse(hBaseRegionKPIList.isEmpty(),"HBase Region KPIs not found.");
+
+        List<String> toolTipList = new ArrayList<>();
+
+        Actions builder = new Actions(driver);
+        for(int i=0; i< hBaseRegionKPIList.size() -1 ; i++){
+            builder.moveToElement(hBaseRegionKPIList.get(i)).build().perform();
+            waitExecuter.sleep(1000);
+            try{
+                logger.info("Text: "+hBaseRegionKPIList.get(i).getText());
+                String toolTip = hBaseRegionKPIList.get(i).getAttribute("aria-describedby");
+                logger.info("ToolTips: "+ toolTip);
+                waitExecuter.sleep(1000);
+                if(toolTip.length() > 0){
+                    logger.info("ToolTips: "+ toolTip);
+                    toolTipList.add(toolTip);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+                return false;
+            }
+
+        }
+
+        //Check for tooltips and total 6 KPI's in HBase tables region
+        if(toolTipList.size() == 6){
+            return true;
+        }
+        return false;
+    }
 }

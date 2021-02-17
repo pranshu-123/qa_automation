@@ -23,8 +23,15 @@ public class DataProviderClass {
         if (method.getDeclaringClass().getPackage().getName().contains("impala")
                 || method.getDeclaringClass().getPackage().getName().contains("mapreduce") ) {
             return unravelConfigYamlReader.getClusterList(true);
-        } else {
+        } else if(method.getDeclaringClass().getPackage().getName().contains("hbase")) {
+            return unravelConfigYamlReader.getClusterList("hbase");
+        }
+        else {
             return unravelConfigYamlReader.getClusterList(false);
         }
     }
 }
+
+
+//return unravelConfigYamlReader.getClusterList(true);
+//return unravelConfigYamlReader.getClusterList(true, "hbase");

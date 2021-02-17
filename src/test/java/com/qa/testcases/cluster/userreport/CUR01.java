@@ -39,12 +39,12 @@ public class CUR01 extends BaseClass {
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
         UserReport userReport = new UserReport(driver);
         userReport.selectClusterstab();
-        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilPageFullyLoaded();
 
         waitExecuter.waitUntilElementPresent(topPanelPageObject.topXTab);
         waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.waitUntilElementClickable(topPanelPageObject.topXTab);
-        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilPageFullyLoaded();
         topPanelPageObject.topXTab.click();
 
         try {
@@ -53,48 +53,48 @@ public class CUR01 extends BaseClass {
             test.log(LogStatus.PASS, "Verified user click on schedule user report");
 
             userReport.schedule("Testschedule58");
-            waitExecuter.sleep(1000);
+            waitExecuter.waitUntilPageFullyLoaded();
             test.log(LogStatus.PASS, "Successfully add Schedule Name");
 
             schedule.clickOnSchedule();
-            waitExecuter.sleep(1000);
+            waitExecuter.waitUntilPageFullyLoaded();
 
             schedule.selectDaily();
-            waitExecuter.sleep(2000);
+            waitExecuter.waitUntilPageFullyLoaded();
 
 
             userReportPageObject.addconfiguration.click();
             test.log(LogStatus.PASS, "Successfully clicked on add configuration.");
 
-        userReport.setTopXNumber("30");
-        waitExecuter.sleep(1000);
+            userReport.setTopXNumber("30");
+            waitExecuter.waitUntilPageFullyLoaded();
 
-        userReport.selectRealUser();
-        waitExecuter.waitUntilPageFullyLoaded();
-        if (!userReport.selectRealUser()) {
+            userReport.selectRealUser();
+            waitExecuter.waitUntilPageFullyLoaded();
+            if (!userReport.selectRealUser()) {
                 test.log(LogStatus.PASS, "Verify select dropdown in Group by RealUser");
             } else {
                 test.log(LogStatus.FAIL, "Test Failed select dropdown in Group by RealUser");
             }
-        waitExecuter.waitUntilPageFullyLoaded();
-        if (!userReport.selectQueue()) {
+            waitExecuter.waitUntilPageFullyLoaded();
+            if (!userReport.selectQueue()) {
                 test.log(LogStatus.PASS, "Verify select dropdown in Group by Queue");
-        } else {
+            } else {
                 test.log(LogStatus.FAIL, "Test Failed select dropdown in Group by Queue");
-        }
+            }
             waitExecuter.waitUntilPageFullyLoaded();
 
-        userReport.assignEmail("sray@unraveldata.com");
-        waitExecuter.sleep(1000);
+            userReport.assignEmail("sray@unraveldata.com");
+            waitExecuter.waitUntilPageFullyLoaded();
 
-        waitExecuter.waitUntilElementPresent(userReportPageObject.addbutton);
-        userReport.clickOnaddButton();
-        waitExecuter.sleep(1000);
-        test.log(LogStatus.PASS, "Successfully added Topx parameter");
+            waitExecuter.waitUntilElementPresent(userReportPageObject.addbutton);
+            userReport.clickOnaddButton();
+            waitExecuter.waitUntilPageFullyLoaded();
+            test.log(LogStatus.PASS, "Successfully added Topx parameter");
 
-        userReportPageObject.saveschedule.click();
-        waitExecuter.sleep(3000);
-        test.log(LogStatus.PASS, "Successfully clicked save sheduele.");
+            userReportPageObject.saveschedule.click();
+            waitExecuter.waitUntilPageFullyLoaded();
+            test.log(LogStatus.PASS, "Successfully clicked save sheduele.");
         } catch (TimeoutException te) {
             Assert.assertTrue(false, "Unable to clicked on add configuration.");
         }

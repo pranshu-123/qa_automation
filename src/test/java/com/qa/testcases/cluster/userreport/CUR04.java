@@ -34,21 +34,20 @@ public class CUR04 extends BaseClass {
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
         UserReport userReport = new UserReport(driver);
         userReport.selectClusterstab();
-        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilPageFullyLoaded();
 
         waitExecuter.waitUntilElementPresent(topPanelPageObject.topXTab);
         waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.waitUntilElementClickable(topPanelPageObject.topXTab);
-        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilPageFullyLoaded();
         topPanelPageObject.topXTab.click();
 
         waitExecuter.waitUntilElementClickable(userReportPageObject.scheduleuserreportButton);
         userReport.clicksheduleusereport();
         test.log(LogStatus.PASS, "Verified user click on schedule user report");
 
-
         userReport.addschedule();
-        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilPageFullyLoaded();
 
         //select 'schedule-days  '
         schedule.scheduletorun(schedule);
@@ -63,7 +62,7 @@ public class CUR04 extends BaseClass {
         }
 
         userReport.setTopXNumber("30");
-        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilPageFullyLoaded();
         if (!userReport.selectRealUser()) {
             test.log(LogStatus.PASS, "Verify select dropdown in Group by RealUser");
         } else {
@@ -78,13 +77,11 @@ public class CUR04 extends BaseClass {
         waitExecuter.waitUntilPageFullyLoaded();
 
         userReport.assignEmail("sray@unraveldata.com");
-        waitExecuter.sleep(1000);
-
+        waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.waitUntilElementPresent(userReportPageObject.addbutton);
         userReport.clickOnaddButton();
-        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Successfully added Topx parameter");
-
         Log.endTestCase("CUR04_VerifyAddconfigurationtab");
 
             }

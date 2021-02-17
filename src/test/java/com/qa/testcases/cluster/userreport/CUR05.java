@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 @Marker.All
 @Marker.UserReports
 public class CUR05 extends BaseClass {
@@ -21,7 +22,7 @@ public class CUR05 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void CUR05_VerifyTopXParameterPage(String clusterId) {
-        test = extent.startTest("CUR05_VerifyTopXParameterPage"+clusterId,
+        test = extent.startTest("CUR05_VerifyTopXParameterPage" + clusterId,
                 "Verify  the mandatory fields and should add the configirations to the list");
         test.assignCategory(" Cluster - User Report");
         Log.startTestCase("CUR05_VerifytopXparameterpage");
@@ -34,12 +35,11 @@ public class CUR05 extends BaseClass {
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
         UserReport userReport = new UserReport(driver);
         userReport.selectClusterstab();
-        waitExecuter.sleep(1000);
-
+        waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.waitUntilElementPresent(topPanelPageObject.topXTab);
         waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.waitUntilElementClickable(topPanelPageObject.topXTab);
-        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilPageFullyLoaded();
         topPanelPageObject.topXTab.click();
 
 
@@ -47,13 +47,11 @@ public class CUR05 extends BaseClass {
         userReport.clicksheduleusereport();
         test.log(LogStatus.PASS, "Verified user click on schedule user report");
 
-
         userReport.addschedule();
-        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilPageFullyLoaded();
         //select 'schedule-days  '
         schedule.scheduletorun(schedule);
-
-        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilPageFullyLoaded();
         try {
             userReportPageObject.addconfiguration.click();
             waitExecuter.sleep(1000);
@@ -62,11 +60,11 @@ public class CUR05 extends BaseClass {
         } catch (TimeoutException te) {
             Assert.assertTrue(false, "Unable to clicked on add configuration.");
         }
-        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Successfully clicked on add configuration page.");
 
         userReport.setTopXNumber("30");
-        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilPageFullyLoaded();
         if (!userReport.selectRealUser()) {
             test.log(LogStatus.PASS, "Verify select dropdown in Group by RealUser");
         } else {
@@ -81,18 +79,14 @@ public class CUR05 extends BaseClass {
         waitExecuter.waitUntilPageFullyLoaded();
 
         userReport.assignEmail("sray@unraveldata.com");
-        waitExecuter.sleep(1000);
-
+        waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.waitUntilElementPresent(userReportPageObject.addbutton);
         userReport.clickOnaddButton();
-        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Successfully added Topx parameter");
-
         userReport.clicksaveschedule();
-        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Successfully clicked save sheduele.");
-
-
         Log.startTestCase("CUR05_VerifytopXparameterpage");
     }
 }

@@ -19,7 +19,7 @@ import java.util.Map;
 @Marker.All
 public class TC_CMP_91 extends BaseClass {
 
-    private final static LoggingUtils LOGGER = new LoggingUtils(TC_CMP_90.class);
+    private final static LoggingUtils LOGGER = new LoggingUtils(TC_CMP_91.class);
 
     /**
      * Validate the capcity column displays the Cluster Display name (Not Cluster ID), cores, memory, disk.

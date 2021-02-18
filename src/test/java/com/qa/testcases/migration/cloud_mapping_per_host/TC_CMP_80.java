@@ -10,20 +10,18 @@ import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 /**
  * @author Ankur Jaiswal
  */
-
 @Marker.CloudMappingPerHost
 @Marker.All
-public class TC_CMP_79 extends BaseClass {
-    private static final LoggingUtils LOGGER = new LoggingUtils(TC_CMP_79.class);
-    /**
-     * Verify storage name based on Cloud Provider/ Object Storage
-     */
+public class TC_CMP_80 extends BaseClass {
+    private final static LoggingUtils LOGGER = new LoggingUtils(TC_CMP_80.class);
+
     @Test
-    public void verifyStorageNameBasedOnObjectStorage() {
-        test = extent.startTest("TC_CMP_79.verifyStorageNameBasedOnObjectStorage", "Verify storage name based on Cloud Provider/ Object Storage");
+    public void verifyStorageNameBasedOnLocalStorage() {
+        test = extent.startTest("TC_CMP_80.verifyStorageNameBasedOnLocalStorage", "Verify storage name based on Cloud Provider/ Local Attached Storage");
         test.assignCategory("Migration/Cloud Mapping Per Host");
 
         CloudMigrationPerHostPage cloudMigrationPerHostPage = new CloudMigrationPerHostPage(driver);
@@ -38,12 +36,12 @@ public class TC_CMP_79 extends BaseClass {
 
         cloudMigrationPerHostPage.selectCloudProduct(CloudProduct.AMAZON_EMR);
         cloudMigrationPerHostPage.waitTillLoaderPresent();
-        cloudMigrationPerHostPage.selectStorage(CloudStorageType.OBJECT_STORAGE.getValue());
+        cloudMigrationPerHostPage.selectStorage(CloudStorageType.LOCAL_ATTACHED_STORAGE.getValue());
         String storage1 = cloudMigrationPerHostPage.getStorageName();
         cloudMigrationPerHostPage.selectCloudProduct(CloudProduct.GOOGLE_COMPUTE_ENGINE);
         cloudMigrationPerHostPage.waitTillLoaderPresent();
         String storage2 = cloudMigrationPerHostPage.getStorageName();
-        Assert.assertNotEquals(storage1, storage2, "Incorrect storage names are displayed");
-        LOGGER.pass("Verified correct storage names are displayed", test);
+        Assert.assertNotEquals(storage1, storage2, "Incorrect storage name are displayed");
+        LOGGER.pass("Verified correct storage name are displayed", test);
     }
 }

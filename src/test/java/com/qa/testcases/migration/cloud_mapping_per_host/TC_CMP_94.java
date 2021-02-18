@@ -3,47 +3,52 @@ package com.qa.testcases.migration.cloud_mapping_per_host;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.enums.migration.CloudProduct;
-import com.qa.enums.migration.CloudStorageType;
 import com.qa.scripts.migration.CloudMigrationPerHostPage;
 import com.qa.utils.LoggingUtils;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 /**
  * @author Ankur Jaiswal
  */
-
 @Marker.CloudMappingPerHost
 @Marker.All
-public class TC_CMP_79 extends BaseClass {
-    private static final LoggingUtils LOGGER = new LoggingUtils(TC_CMP_79.class);
+public class TC_CMP_94 extends BaseClass {
+
+    private final static LoggingUtils LOGGER = new LoggingUtils(TC_CMP_94.class);
+
     /**
-     * Verify storage name based on Cloud Provider/ Object Storage
+     * Verify the report generated for Cloud provider - "X" displays the name of the cloud provider
      */
     @Test
-    public void verifyStorageNameBasedOnObjectStorage() {
-        test = extent.startTest("TC_CMP_79.verifyStorageNameBasedOnObjectStorage", "Verify storage name based on Cloud Provider/ Object Storage");
+    public void verifyCloudProvider() {
+        test = extent.startTest("TC_CMP_94.verifyCloudProvider", "Verify the report generated for Cloud provider - \"X\" displays the name of the cloud provider");
         test.assignCategory("Migration/Cloud Mapping Per Host");
 
         CloudMigrationPerHostPage cloudMigrationPerHostPage = new CloudMigrationPerHostPage(driver);
-        UserActions actions = new UserActions(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         LOGGER.info("Navigate to migration host page", test);
         cloudMigrationPerHostPage.navigateToCloudMappingPerHost();
-
         LOGGER.info("Click on Run button", test);
         cloudMigrationPerHostPage.clickOnRunButton();
         cloudMigrationPerHostPage.waitTillLoaderPresent();
 
+        LOGGER.info("Select amazon EMR as cloud product.", test);
         cloudMigrationPerHostPage.selectCloudProduct(CloudProduct.AMAZON_EMR);
         cloudMigrationPerHostPage.waitTillLoaderPresent();
-        cloudMigrationPerHostPage.selectStorage(CloudStorageType.OBJECT_STORAGE.getValue());
-        String storage1 = cloudMigrationPerHostPage.getStorageName();
-        cloudMigrationPerHostPage.selectCloudProduct(CloudProduct.GOOGLE_COMPUTE_ENGINE);
+
+        cloudMigrationPerHostPage.selectRegion("US East (Ohio)");
         cloudMigrationPerHostPage.waitTillLoaderPresent();
-        String storage2 = cloudMigrationPerHostPage.getStorageName();
-        Assert.assertNotEquals(storage1, storage2, "Incorrect storage names are displayed");
-        LOGGER.pass("Verified correct storage names are displayed", test);
+
+        LOGGER.info("Select first storage.", test);
+        cloudMigrationPerHostPage.selectStorage("Object storage");
+        cloudMigrationPerHostPage.clickOnRunButton();
+        cloudMigrationPerHostPage.waitTillLoaderPresent();
+        waitExecuter.sleep(5000);
+        Assert.assertEquals(cloudMigrationPerHostPage.getCloudProductAndServicesOnReportPage(),
+                CloudProduct.AMAZON_EMR.getValue());
+        LOGGER.pass("Correct cloud provider values are displayed.", test);
     }
 }

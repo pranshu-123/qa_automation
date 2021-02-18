@@ -142,6 +142,9 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//span[contains(text(), 'Total Hourly Cost :')]/parent::div/following-sibling::b")
   public WebElement totalHourlyCostValue;
 
+  @FindBy(xpath = "//div[contains(text(), 'Total Local Attached Storage Cost:')]/following-sibling::b")
+  public WebElement totalAttachedStorageCostValue;
+
   @FindBy(xpath = "//span[contains(text(),'COST REDUCTION')]")
   public WebElement costReductionTab;
 
@@ -150,6 +153,18 @@ public class CloudMappingPerHostPageObject {
 
   @FindBy(xpath = "//label[contains(text(), 'Storage Name')]")
   public WebElement storageNameLabel;
+
+  @FindBy(xpath = "//div[contains(text(),'Cloud Product/Service')]")
+  public WebElement cloudProductServicesLabel;
+
+  @FindBy(xpath = "//div[contains(text(),'Instances Summary')]/parent::div//table[contains(@class,'component-data-tables')]/tbody/tr")
+  public List<WebElement> instanceSummaryRows;
+
+  @FindBy(xpath = "//label[contains(text(),'Cloud Product/Service')]/parent::div/span")
+  public WebElement cloudProductOrServiceValue;
+
+  @FindBy(xpath = "//label[contains(text(),'Region')]/parent::div/span")
+  public WebElement regionDropDownValue;
 
   /**
    * @param driver The driver that will be used to look up the elements

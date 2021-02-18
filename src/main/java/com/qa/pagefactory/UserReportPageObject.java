@@ -72,14 +72,29 @@ public class UserReportPageObject {
     @FindBy(xpath = "(//*[@class=\"select2-selection__rendered\"])[4]")
     public WebElement queuesDropdown;
 
+    @FindBy(xpath = "(//*[@class=\"select2-selection__rendered\"])[4]")
+    public WebElement realUser;
+
     @FindBy(xpath = "//ul[contains(@class,'select2-results__options')]/li")
-    public List<WebElement> dropdownOptions;
+    public WebElement dropdownOptions;
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select")
     public List<WebElement> rundropdown;
 
     @FindBy(xpath = "//ul[contains(@class,'select2-results__options')]/li")
-    public List<WebElement> readUsersDropdown;
+    public List<WebElement> realUsersDropdown;
+
+    @FindBy(xpath = "//span[@class='select2 select2-container select2-container--default select2-container--focus select2-container--below']//ul[@class='select2-selection__rendered']")
+    public WebElement realUsers;
+
+    @FindBy(xpath = "//li[contains(text(),'User')]")
+    public WebElement groupByUser;
+
+    @FindBy(xpath = "//li[contains(text(),'Application Type')]")
+    public WebElement groupByAppType;
+
+    @FindBy(xpath = "//li[contains(text(),'Queue')]")
+    public WebElement groupByQueue;
 
 
     @FindBy(xpath = "(//select[@class=\"form-control input-sm schedule-days\"]")

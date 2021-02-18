@@ -39,8 +39,6 @@ public class CUR01 extends BaseClass {
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
         UserReport userReport = new UserReport(driver);
         userReport.selectClusterstab();
-        waitExecuter.waitUntilPageFullyLoaded();
-
         waitExecuter.waitUntilElementPresent(topPanelPageObject.topXTab);
         waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.waitUntilElementClickable(topPanelPageObject.topXTab);
@@ -69,7 +67,6 @@ public class CUR01 extends BaseClass {
             userReport.setTopXNumber("30");
             waitExecuter.waitUntilPageFullyLoaded();
 
-            userReport.selectRealUser();
             waitExecuter.waitUntilPageFullyLoaded();
             if (!userReport.selectRealUser()) {
                 test.log(LogStatus.PASS, "Verify select dropdown in Group by RealUser");

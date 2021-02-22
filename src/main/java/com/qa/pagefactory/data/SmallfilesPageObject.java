@@ -31,7 +31,7 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//input[@class='display-time']/following::select[@class='minutes']")
     public WebElement minutesDropdown;
 
-    @FindBy(xpath = "//span[contains(@class,'pointer cta-primary')]//span[contains(text(),'Schedule')]")
+    @FindBy(xpath = "(//span[contains(text(),'Schedule')])[2]/parent::a")
     public WebElement runSheduleButton;
 
     @FindBy(xpath = "//span[contains(text(),'Run New')]/parent::a")

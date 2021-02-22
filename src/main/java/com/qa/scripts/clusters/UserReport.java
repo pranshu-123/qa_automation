@@ -4,9 +4,11 @@ import com.qa.pagefactory.UserReportPageObject;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 import java.util.Random;
@@ -18,9 +20,9 @@ import java.util.logging.Logger;
 public class UserReport {
 
     private static final Logger LOGGER = Logger.getLogger(UserReport.class.getName());
-    private WebDriver driver;
-    private WaitExecuter waitExecuter;
-    private UserReportPageObject userReportPageObject;
+    private final WebDriver driver;
+    private final WaitExecuter waitExecuter;
+    private final UserReportPageObject userReportPageObject;
 
 
     /**
@@ -79,25 +81,45 @@ public class UserReport {
 
     /**
      * Method to Click on RealUser
+     *
+     * @return
      */
-    public void selectRealUser() {
-        userReportPageObject.readUsersDropdown.stream()
-                .filter(WebElement::isDisplayed).findFirst().get().click();
-        waitExecuter.sleep(1000);
+    public boolean selectRealUser() {
+        try {
+            List<WebElement> listOfUser = userReportPageObject.realUsersDropdown;
+            waitExecuter.waitUntilPageFullyLoaded();
+            if (listOfUser.size() > 0) {
+                listOfUser.get(0).click();
+                return true;
+            } else
+                return false;
+        } catch (
+                NoSuchElementException e) {
+            return false;
+        }
 
     }
-
 
     /**
      * Method to Click on Queue
+     *
+     * @return
      */
-    public void selectQueue() {
-        List<WebElement> listOfQueue = userReportPageObject.dropdownOptions;
-        userReportPageObject.queuesDropdown.click();
-        waitExecuter.sleep(1000);
-        listOfQueue.get(0).click();
-        waitExecuter.sleep(1000);
+    public boolean selectQueue() {
+        try {
+            Select select = new Select(userReportPageObject.dropdownOptions);
+            List<WebElement> listOfQueue = select.getOptions();
+            waitExecuter.waitUntilPageFullyLoaded();
+            if (listOfQueue.size() > 0) {
+                listOfQueue.get(0).click();
+                return true;
+            } else
+                return false;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
+
 
     /**
      * Method to Click on Email

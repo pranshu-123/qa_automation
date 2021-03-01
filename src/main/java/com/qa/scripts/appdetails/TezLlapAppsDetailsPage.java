@@ -1,8 +1,6 @@
 package com.qa.scripts.appdetails;
 
 import com.qa.pagefactory.SubTopPanelModulePageObject;
-import com.qa.pagefactory.appsDetailsPage.MrAppsDetailsPageObject;
-import com.qa.pagefactory.appsDetailsPage.TezAppsDetailsPageObject;
 import com.qa.pagefactory.appsDetailsPage.TezLlapAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
@@ -17,7 +15,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.testng.Assert;
 
@@ -89,7 +86,7 @@ public class TezLlapAppsDetailsPage {
      */
     public String verifyAppStatus(TezLlapAppsDetailsPageObject tezLlapPage) {
         String Status = tezLlapPage.Status.getText();
-        waitExecuter.sleep(3000);
+        waitExecuter.sleep(5000);
         LOGGER.info("Tez application status is " + Status);
         Assert.assertNotSame("", Status, "Tez application status is not displayed in the Header");
         return Status;
@@ -154,7 +151,7 @@ public class TezLlapAppsDetailsPage {
      * Method to click the first app in jobs table , navigate to the details page.
      * and verify  Appid .
      */
-    public String verifyappId(TezLlapAppsDetailsPageObject tezLlapPage,ApplicationsPageObject appPageObj) {
+    public String verifyappId(TezLlapAppsDetailsPageObject tezLlapPage, ApplicationsPageObject appPageObj) {
         WebElement Appid = tezLlapPage.getAppid;
         Actions toolAct = new Actions(driver);
         toolAct.moveToElement(Appid).build().perform();

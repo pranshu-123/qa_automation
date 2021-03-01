@@ -59,7 +59,7 @@ public class YR_013 extends BaseClass {
         test.log(LogStatus.INFO, "Selected Application Type, from dropdown.");
 
         //Check for Apps color
-        File screenshot = ScreenshotHelper.takeScreenshotOfElement(driver,yarnPageObject.vCoresAppGraph,0);
+        File screenshot = ScreenshotHelper.takeScreenshotOfElement(driver,yarnPageObject.vCoresAppGraph,100);
         ScreenshotHelper.saveFileToLocation(screenshot, DirectoryConstants.getScreenshotDir() + screenshot.getName());
         test.log(LogStatus.INFO, test.addScreenCapture(DirectoryConstants.getScreenshotDir() + screenshot.getName()));
 

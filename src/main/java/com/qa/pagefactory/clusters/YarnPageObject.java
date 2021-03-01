@@ -64,19 +64,19 @@ public class YarnPageObject {
     @FindBy(xpath="//span[@id='VCoreTS']//*[name()='svg']//*[local-name()='rect' and @class='highcharts-background']")
     public WebElement vcoresSVGGraph;
 
-    @FindBy(xpath="//div[contains(@class, 'dashboard-module')]/div/h4[contains(text(), 'VCores')]//following::div[5]/div/label/span[contains(text(),'Total Available')]")
+    @FindBy(xpath="//div[@id='VCoreTS']//div[@class='footer']//div[@class='container']//label[@class='checkbox alt-error']//span//span[contains(text(),'Total Available')]")
     public WebElement vcoresTotalAvailableChkBox;
 
     @FindBy(xpath="//span[@id='MemoryTS']//*[name()='svg']//*[local-name()='rect' and @class='highcharts-background']")
     public WebElement memorySVGGraph;
 
-    @FindBy(xpath="//div[contains(@class, 'dashboard-module')]/div/h4[contains(text(), 'VCores')]//following::div[5]/div/label/span[contains(text(),'Total Allocated')]")
+    @FindBy(xpath="//div[@id='VCoreTS']//div[@class='footer']//div[@class='container']//label[@class='checkbox alt-error']//span//span[contains(text(),'Total Allocated')]")
     public WebElement vcoresTotalAllocatedChkBox;
 
-    @FindBy(xpath="//div[contains(@class, 'dashboard-module')]/div/h4[contains(text(), 'Memory')]//following::div[5]/div/label/span[contains(text(),'Total Available')]")
+    @FindBy(xpath="//div[@id='MemoryTS']//div[@class='footer']//div[@class='container']//label[@class='checkbox alt-error']//span//span[contains(text(),'Total Available')]")
     public  WebElement memoryTotalAvailableChkBox;
 
-    @FindBy(xpath="//div[contains(@class, 'dashboard-module')]/div/h4[contains(text(), 'Memory')]//following::div[5]/div/label/span[contains(text(),'Total Allocated')]")
+    @FindBy(xpath="//div[@id='MemoryTS']//div[@class='footer']//div[@class='container']//label[@class='checkbox alt-error']//span//span[contains(text(),'Total Allocated')]")
     public  WebElement memoryTotalAllocatedChkBox;
 
     @FindBy(xpath="//div[@id='VCore-Application']//h4")

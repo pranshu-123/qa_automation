@@ -93,7 +93,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//p[contains(@class,'float-right')]/b")
     public WebElement getTotalAppCount;
 
-    @FindBy(id = "reset")
+    @FindBy(xpath = "//span[@id='reset']")
     public WebElement resetButton;
 
     @FindBy(xpath = "(//ul[contains(@class,'select2-results')])/li")

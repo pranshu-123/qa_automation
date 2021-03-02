@@ -57,6 +57,7 @@ public class TC_M10 extends BaseClass {
         test.log(LogStatus.INFO, "Verified Monitoring Tab.");
 
         try{
+            waitExecuter.waitUntilPageFullyLoaded();
             waitExecuter.waitUntilTextToBeInWebElement(managePageObject.partitionInfoTab, "Partition Info");
             test.log(LogStatus.PASS, "Verified Partition Tab is loaded properly.");
             Assert.assertTrue(managePageObject.partitionInfoTab.isDisplayed(),"Partition Info Tab " +

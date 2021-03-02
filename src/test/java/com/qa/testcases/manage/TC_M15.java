@@ -54,6 +54,7 @@ public class TC_M15 extends BaseClass {
         test.log(LogStatus.INFO, "Verified Monitoring Tab.");
 
         try{
+            waitExecuter.waitUntilPageFullyLoaded();
             waitExecuter.waitUntilTextToBeInWebElement(managePageObject.monitoringElasticTab, "Elastic");
             test.log(LogStatus.INFO, "Verified Elastic is loaded properly.");
         }catch (TimeoutException e){

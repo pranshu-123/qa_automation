@@ -2,11 +2,13 @@ package com.qa.testcases.manage;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.manage.ManagePageObject;
 import com.qa.scripts.manage.Manage;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -58,12 +60,13 @@ public class TC_M08 extends BaseClass {
         test.log(LogStatus.INFO, "Verified Run Diagnostics Tab.");
         logger.info("Verified Run Diagnostics Tab.");
 
-        waitExecuter.sleep(2000);
+        waitExecuter.sleep(5000);
         manage.clickOnLoadLatestDiagnostics();
         test.log(LogStatus.INFO, "Clicked on Load Latest Diagnostics Button.");
         logger.info("Clicked on Load Latest Diagnostics Button.");
 
         try{
+            waitExecuter.waitUntilPageFullyLoaded();
             waitExecuter.waitUntilTextToBeInWebElement(managePageObject.latestDiagnosticsContentHeader, "Diagnostics Log");
             test.log(LogStatus.INFO, "Verified Diagnostics Log is loaded properly.");
             Assert.assertTrue(managePageObject.latestDiagnosticsContentHeader.isDisplayed(),"Diagnostics Log " +

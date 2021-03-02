@@ -23,6 +23,7 @@ public class Manage {
     private WebDriver driver;
     private WaitExecuter waitExecuter;
     private ManagePageObject managePageObject;
+    private final UserActions userAction;
 
     private static final java.util.logging.Logger logger = Logger.getLogger(Manage.class.getName());
 
@@ -30,6 +31,7 @@ public class Manage {
         this.driver = driver;
         waitExecuter = new WaitExecuter(driver);
         managePageObject = new ManagePageObject(driver);
+        userAction = new UserActions(driver);
     }
 
     public String validateDaemonHeader(){
@@ -190,12 +192,11 @@ public class Manage {
     }
 
     public void clickOnLoadLatestDiagnostics(){
-        UserActions actions = new UserActions(driver);
         waitExecuter.waitUntilElementClickable(managePageObject.loadLatestDiagnosticsBtn);
         try{
-            actions.performActionWithPolling(managePageObject.loadLatestDiagnosticsBtn, UserAction.CLICK);
+            userAction.performActionWithPolling(managePageObject.loadLatestDiagnosticsBtn, UserAction.CLICK);
         }catch (TimeoutException te){
-            MouseActions.clickOnElement(driver,managePageObject.loadLatestDiagnosticsBtn);
+            userAction.performActionWithPolling(managePageObject.loadLatestDiagnosticsBtn, UserAction.CLICK);
         }
         waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.waitUntilElementClickable(managePageObject.loadLatestDiagnosticsBtn);

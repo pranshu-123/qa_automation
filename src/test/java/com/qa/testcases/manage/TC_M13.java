@@ -54,6 +54,7 @@ public class TC_M13 extends BaseClass {
         test.log(LogStatus.INFO, "Verified Monitoring Tab.");
 
         try{
+            waitExecuter.waitUntilPageFullyLoaded();
             waitExecuter.waitUntilTextToBeInWebElement(managePageObject.monitoringKafkaTab, "Kafka");
             test.log(LogStatus.INFO, "Verified Kafka is loaded properly.");
             Assert.assertTrue(managePageObject.monitoringKafkaTab.isDisplayed(),"Kafka Tab " +

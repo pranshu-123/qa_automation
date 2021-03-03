@@ -55,6 +55,7 @@ public class TC_M12 extends BaseClass {
         test.log(LogStatus.INFO, "Verified Monitoring Tab.");
 
         try{
+            waitExecuter.waitUntilPageFullyLoaded();
             waitExecuter.waitUntilTextToBeInWebElement(managePageObject.monitoringDBPerformanceTab, "DB Performance");
             test.log(LogStatus.INFO, "Verified DB Performance is loaded properly.");
             Assert.assertTrue(managePageObject.monitoringDBPerformanceTab.isDisplayed(),"DB Performance Tab " +

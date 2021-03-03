@@ -50,12 +50,14 @@ public class TC_M11 extends BaseClass {
         waitExecuter.waitUntilElementPresent(managePageObject.monitoringTab);
         manage.clickMonitoringTab();
         test.log(LogStatus.INFO, "Clicked on Monitoring Tab.");
+        waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.waitUntilElementPresent(managePageObject.monitoringHeader);
         Assert.assertTrue(manage.validateMonitoringHeader(), "Monitoring Header is not present.");
         test.log(LogStatus.INFO, "Verified Monitoring Tab.");
         logger.info("Verified Monitoring Tab.");
 
         try{
+            waitExecuter.waitUntilPageFullyLoaded();
             waitExecuter.waitUntilTextToBeInWebElement(managePageObject.monitoringDBStatusTab, "DB Status");
             test.log(LogStatus.INFO, "Verified DB Status is loaded properly.");
             Assert.assertTrue(managePageObject.monitoringDBStatusTab.isDisplayed(),"DB Status Tab " +

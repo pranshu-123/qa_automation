@@ -101,10 +101,10 @@ public class HomePageObject {
   @FindBy(xpath = "//h4[contains(text(),'Memory')]/following-sibling::div/span/div/ul/li")
   public List<WebElement> listmemoryGraphDownloadMenu;
 
-  @FindBy(xpath ="//h4[contains(text(),'Running')]/following-sibling::div/span/div/span/a")
+  @FindBy(xpath ="//h4[contains(text(),'By State')]/following-sibling::div/span/div/span/a")
   public WebElement runningGraphDownloadMenu;
 
-  @FindBy(xpath = "//h4[contains(text(),'Running')]/following-sibling::div/span/div/ul/li")
+  @FindBy(xpath = "//h4[contains(text(),'By State')]/following-sibling::div/span/div/ul/li")
   public List<WebElement> listrunningGraphDownloadMenu;
 
   @FindBy(xpath ="//h4[contains(text(),'By Status')]/following-sibling::div/span/div/span/a")

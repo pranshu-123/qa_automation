@@ -2,12 +2,14 @@ package com.qa.testcases.manage;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.manage.ManagePageObject;
 import com.qa.scripts.manage.Manage;
 import com.qa.utils.FileUtils;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -29,6 +31,7 @@ public class TC_M09 extends BaseClass {
         test.assignCategory(" Manage ");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
+        UserActions userActions = new UserActions(driver);
         ManagePageObject managePageObject = new ManagePageObject(driver);
         SubTopPanelModulePageObject subTopPanelModulePageObject = new SubTopPanelModulePageObject(driver);
         // Navigate to Manage tab from header
@@ -51,17 +54,18 @@ public class TC_M09 extends BaseClass {
         manage.clickRunDiagnostics();
         test.log(LogStatus.INFO, "Clicked on Run Diagnostics Tab.");
         logger.info("Clicked on Run Diagnostics Tab.");
-        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilPageFullyLoaded();
         Assert.assertTrue(manage.validateRunDiagnosticsHeader(), "Run Diagnostics Header is not present.");
         test.log(LogStatus.INFO, "Verified Run Diagnostics Tab.");
         logger.info("Verified Run Diagnostics Tab.");
 
-        waitExecuter.waitUntilPageFullyLoaded();
+
         manage.clickOnDownloadSupportBundle();
         test.log(LogStatus.INFO, "Clicked on Download Support Bundle button.");
         logger.info("Clicked on Download Support Bundle button.");
 
-        waitExecuter.waitUntilElementClickable(managePageObject.downloadSupportBundleBtn);
+        waitExecuter.waitUntilPageFullyLoaded();
+        userActions.performActionWithPolling(managePageObject.downloadSupportBundleBtn, UserAction.CLICK);
         Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("diagnostics.txt"), "Not able to " +
                 "Download Support Bundle.");
         test.log(LogStatus.PASS,"Verified Run Diagnostics page and Download Support Bundle");

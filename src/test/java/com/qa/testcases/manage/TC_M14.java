@@ -55,6 +55,7 @@ public class TC_M14 extends BaseClass {
 
 
         try{
+            waitExecuter.waitUntilPageFullyLoaded();
             waitExecuter.waitUntilTextToBeInWebElement(managePageObject.monitoringZookeeperTab, "Zookeeper");
             test.log(LogStatus.INFO, "Verified Zookeeper is loaded properly.");
             Assert.assertTrue(managePageObject.monitoringZookeeperTab.isDisplayed(),"Zookeper Tab " +

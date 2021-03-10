@@ -48,6 +48,7 @@ public class  IM_RES_17 extends BaseClass {
     executer.sleep(3000);
     impalaPageObject.groupByDropdownButton.click();
     impalaPageObject.groupByQueueList.click();
+    executer.waitUntilPageFullyLoaded();
 
     Impala impala = new Impala(driver);
     impala.clearFilter();

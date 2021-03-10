@@ -45,6 +45,7 @@ public class IM_RES_25 extends BaseClass {
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
+        executer.waitUntilPageFullyLoaded();
         executer.sleep(1000);
         datePicker.selectLast30Days();
         executer.waitUntilPageFullyLoaded();
@@ -59,7 +60,7 @@ public class IM_RES_25 extends BaseClass {
 
         int scrollY = 150;
         JavaScriptExecuter.scrollViewWithYAxis(driver,scrollY);
-//    scrollY = scrollY + datePicker.getDatePickerYPosition();
+        //    scrollY = scrollY + datePicker.getDatePickerYPosition();
         //TBD
         //1. Click on Memory Consumption at that point where Impala Queries Table should get populated.
 

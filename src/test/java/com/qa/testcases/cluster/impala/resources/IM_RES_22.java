@@ -41,7 +41,7 @@ public class IM_RES_22  extends BaseClass {
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         executer.sleep(1000);
-        datePicker.selectLast30Days();
+        datePicker.selectLast90Days();
         executer.waitUntilPageFullyLoaded();
         test.log(LogStatus.INFO, "Select Date from DatePicker.");
 
@@ -63,6 +63,7 @@ public class IM_RES_22  extends BaseClass {
 
         test.log(LogStatus.INFO, "Navigate different section in memory graph");
         GraphUtils graphUtils = new GraphUtils();
+        executer.waitUntilPageFullyLoaded();
         graphUtils.navigateDifferentPointOnGraphGetTextClickCheckImpalaTbl(driver, impalaPageObject.memoryHighChartContainer);
         test.log(LogStatus.PASS,"Successfully read the impalaQueries header text, after click on memory graph.");
 

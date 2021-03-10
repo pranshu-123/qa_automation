@@ -75,6 +75,7 @@ public class MarkerConstants {
         map.put(APP_DETAILS_IMPALA, Marker.AppDetailsImpala.class);
         map.put(APP_DETAILS_SPARK, Marker.AppDetailsSpark.class);
         map.put(APP_DETAILS_TEZ, Marker.AppDetailsTez.class);
+        map.put(APP_DETAILS_TEZLLAP, Marker.AppDetailsTezLlap.class);
         map.put(APP_DETAILS_MR, Marker.AppDetailsMr.class);
         map.put(INEFFICIENT_APPS, Marker.InefficientApps.class);
         map.put(YARN_CHARGEBACK, Marker.YarnChargeback.class);

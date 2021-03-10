@@ -42,27 +42,27 @@ public class IM_RES_25 extends BaseClass {
         homePage.selectMultiClusterId(clusterId);
         executer.waitUntilPageFullyLoaded();
         Impala impala = new Impala(driver);
+        try {
+            DatePicker datePicker = new DatePicker(driver);
+            datePicker.clickOnDatePicker();
+            executer.waitUntilPageFullyLoaded();
+            executer.sleep(1000);
+            datePicker.selectLast30Days();
+            executer.waitUntilPageFullyLoaded();
+            test.log(LogStatus.INFO, "Select Date from DatePicker.");
 
-        DatePicker datePicker = new DatePicker(driver);
-        datePicker.clickOnDatePicker();
-        executer.waitUntilPageFullyLoaded();
-        executer.sleep(1000);
-        datePicker.selectLast30Days();
-        executer.waitUntilPageFullyLoaded();
-        test.log(LogStatus.INFO, "Select Date from DatePicker.");
+            executer.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
+            executer.sleep(3000);
+            MouseActions.clickOnElement(driver, impalaPageObject.groupByDropdownButton);
+            MouseActions.clickOnElement(driver, impalaPageObject.groupByQueueList);
+            executer.waitUntilPageFullyLoaded();
+            JavaScriptExecuter.scrollViewWithYAxis(driver, -100);
 
-        executer.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
-        executer.sleep(3000);
-        MouseActions.clickOnElement(driver, impalaPageObject.groupByDropdownButton);
-        MouseActions.clickOnElement(driver, impalaPageObject.groupByQueueList);
-        executer.waitUntilPageFullyLoaded();
-        JavaScriptExecuter.scrollViewWithYAxis(driver,-100);
-
-        int scrollY = 150;
-        JavaScriptExecuter.scrollViewWithYAxis(driver,scrollY);
-        //    scrollY = scrollY + datePicker.getDatePickerYPosition();
-        //TBD
-        //1. Click on Memory Consumption at that point where Impala Queries Table should get populated.
+            int scrollY = 150;
+            JavaScriptExecuter.scrollViewWithYAxis(driver, scrollY);
+            //    scrollY = scrollY + datePicker.getDatePickerYPosition();
+            //TBD
+            //1. Click on Memory Consumption at that point where Impala Queries Table should get populated.
 
 
       /*  //Impala Queries table is populated and validate its Header columns
@@ -75,8 +75,10 @@ public class IM_RES_25 extends BaseClass {
         impala.selecttable();
         executer.sleep(1000);
         test.log(LogStatus.PASS, "verify Impala details page.");*/
+        } catch (org.openqa.selenium.StaleElementReferenceException ex) {
+            test.log(LogStatus.INFO, "Selecting the queue: " + ex + " in filter.");
+        }
     }
-
     }
 
 

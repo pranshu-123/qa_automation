@@ -1,6 +1,5 @@
 package com.qa.scripts;
 
-import com.qa.base.BaseClass;
 import com.qa.constants.ConfigConstants;
 import com.qa.enums.UserAction;
 import com.qa.io.ConfigReader;
@@ -14,8 +13,10 @@ import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
+import java.util.List;
 import java.util.Properties;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  * @author Ankur Jaiswal
@@ -67,7 +68,7 @@ public class Login {
             String screenshotImg = ScreenshotHelper.takeScreenshotOfPage(driver);
             LOGGER.info("Screenshot captured: " + screenshotImg, null);
             try {
-                if (homePageObject.unravelLogo.isDisplayed()) {
+                if (homePageObject.unravelLogoList.size() > 0) {
                     LOGGER.info("Login failed because user was already logged in. Doing logout then login"
                       , null);
                     doLogout();
@@ -93,9 +94,45 @@ public class Login {
      * Logout from the application.
      */
     public void logout() {
-        RetryExecuter<Object> retryExecuter = new RetryExecuter<>();
-        Supplier<Object> method = () -> doLogout();
-        retryExecuter.run(method);
+        if (loginObj.logoutButtonList.size() > 0) {
+            RetryExecuter<Object> retryExecuter = new RetryExecuter<>();
+            Supplier<Object> method = () -> doLogout();
+            retryExecuter.run(method);
+        } else if (loginObj.loginButtonList.size() == 0 && loginObj.logoutButtonList.size() == 0
+            && homePageObject.unravelLogoList.size() == 0) {
+            LOGGER.error("Nether login, logout or unravel logo are displayed on page" +
+                    "Seems like environment is down", null);
+             System.exit(1);
+        } else if (loginObj.loginButtonList.size() == 0 &&
+            getAllTabs().size() > 1) {
+            closeTabsIfMultipleExists(getAllTabs());
+            logout();
+        } else {
+            String screenshotImg = ScreenshotHelper.takeScreenshotOfPage(driver);
+            LOGGER.info("Logout failed. Screenshot captured: " + screenshotImg, null);
+        }
+    }
+
+    /**
+     * Close if multiple tabs present
+     */
+    private void closeTabsIfMultipleExists(List<String> tabs) {
+        if (tabs.size() > 1) {
+            for (int i = 1; i<tabs.size(); i++) {
+                driver.switchTo().window(tabs.get(i));
+                driver.close();
+            }
+        }
+    }
+
+    /**
+     * Get all tabs
+     * @return
+     */
+    private List<String> getAllTabs() {
+        List<String> windowSize = driver.getWindowHandles().stream()
+                .collect(Collectors.toList());
+        return windowSize;
     }
 
     public Boolean doLogout() {

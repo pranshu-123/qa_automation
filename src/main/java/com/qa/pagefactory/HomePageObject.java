@@ -33,6 +33,9 @@ public class HomePageObject {
   @FindBy(xpath = "//a[@href='#/clusters/overview']")
   public WebElement unravelLogo;
 
+  @FindBy(xpath = "//a[@href='#/clusters/overview']")
+  public List<WebElement> unravelLogoList;
+
   @FindBy(xpath="//span[@class='kpi-title' and contains(text(),'Nodes')]")
   public WebElement kpiNodes;
 

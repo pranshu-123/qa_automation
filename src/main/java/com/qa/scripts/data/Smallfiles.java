@@ -1,41 +1,35 @@
 package com.qa.scripts.data;
 
-import com.qa.constants.PageConstants;
 import com.qa.enums.UserAction;
-import com.qa.pagefactory.CommonPageObject;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.data.SmallfilesPageObject;
 import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
-import com.qa.scripts.Schedule;
+import com.qa.scripts.migration.ServicesAndVersionsCompatibility;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
 public class Smallfiles {
 
     private static final java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger(Smallfiles.class.getName());
-    SmallfilesPageObject smallfilesPageObject;
-    private WaitExecuter waitExecuter;
-    private WebDriver driver;
     private final UserActions userAction;
+    Logger logger = Logger.getLogger(ServicesAndVersionsCompatibility.class.getName());
+    SmallfilesPageObject smallfilesPageObject;
+    private final WaitExecuter waitExecuter;
+    private final WebDriver driver;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -101,13 +95,14 @@ public class Smallfiles {
     /**
      * Method to validate the  Schedule Button
      */
-    public void clickOnModalScheduleButton(){
+    public void clickOnModalScheduleButton() {
         try {
             MouseActions.clickOnElement(driver, smallfilesPageObject.runSheduleButton);
         } catch (TimeoutException te) {
             MouseActions.clickOnElement(driver, smallfilesPageObject.runSheduleButton);
         }
     }
+
 
     /* Validate success message on report creation */
     public void verifyScheduleSuccessMsg(String successMsg) {
@@ -116,6 +111,112 @@ public class Smallfiles {
                 "The Schedule success " + "message mismatch");
     }
 
+
+    /**
+     * Method to validate report, download, delete, view report from actions tab
+     */
+    public void verifyReportsArchived(ReportsArchiveScheduledPageObject reportPageObj, String name, String reportAction) {
+        List<WebElement> reportNameList = reportPageObj.reportNames;
+        List<WebElement> reportCntList = reportPageObj.reportCnt;
+        Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed.");
+
+        for (int i = 0; i < reportNameList.size(); i++) {
+            int reportCnt = Integer.parseInt(reportCntList.get(i).getText().trim());
+            logger.info("ReportCnt is " + reportCnt);
+            String reportName = reportNameList.get(i).getText().trim();
+            logger.info("The report name is " + reportName);
+            if (reportName.equals(name) && reportCnt > 0) {
+                switch (reportAction) {
+                    case "checkReport":
+                        logger.info("Checking report");
+                        MouseActions.clickOnElement(driver, reportCntList.get(i));
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
+                        List<WebElement> reportTblRows = reportPageObj.tableRows;
+                        Assert.assertFalse(reportTblRows.isEmpty(), "No reports archived.");
+                        break;
+                    case "downloadReport":
+                        MouseActions.clickOnElement(driver, reportCntList.get(i));
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
+                        MouseActions.clickOnElement(driver, reportPageObj.downloadReportIcon);
+                        logger.info("Downloading report");
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Downloaded successfully",
+                                " No downloaded successfully message received.");
+                        break;
+                    case "deleteReport":
+                        MouseActions.clickOnElement(driver, reportCntList.get(i));
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
+                        MouseActions.clickOnElement(driver, reportPageObj.deleteReportIcon);
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        Alert confirmationAlert = driver.switchTo().alert();
+                        String alertText = confirmationAlert.getText();
+                        logger.info("Alert text is " + alertText);
+                        confirmationAlert.accept();
+                        logger.info("Deleted report");
+                        Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Removed successfully",
+                                " Report not removed");
+                        break;
+                    case "viewReport":
+                        MouseActions.clickOnElement(driver, reportCntList.get(i));
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
+                        MouseActions.clickOnElement(driver, reportPageObj.viewReportIcon);
+                        logger.info("Viewed report");
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        Assert.assertTrue(reportPageObj.viewReportDialogWin.isDisplayed(), "Report  view not present.");
+                        MouseActions.clickOnElement(driver, reportPageObj.closeTab);
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        break;
+                    case "searchReportByDate":
+                        MouseActions.clickOnElement(driver, reportCntList.get(i));
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
+                        String dateFromElement = smallfilesPageObject.archiveReportDate.getText().trim();
+                        String[] arrDate = dateFromElement.split(" ");
+                        String date = arrDate[0];
+                        System.out.println(date);
+                        reportPageObj.reportSearchBox.sendKeys(date);
+                        List<WebElement> searchDateReportNameList = reportPageObj.reportNames;
+                        Assert.assertFalse(searchDateReportNameList.isEmpty(), "There are no reports listed");
+                        Assert.assertTrue(searchDateReportNameList.size() > 0, "Expected search " +
+                                "result not populated data by date.");
+                        logger.info("Search report by date: " + date);
+                        break;
+                    case "searchReportByStatus":
+                        MouseActions.clickOnElement(driver, reportCntList.get(i));
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
+                        String status = "fail";
+                        reportPageObj.reportSearchBox.sendKeys(status);
+                        waitExecuter.waitUntilElementPresent(reportPageObj.sortingReportNameIcon);
+                        List<WebElement> searchStatusReportNameList = reportPageObj.reportNames;
+                        Assert.assertFalse(searchStatusReportNameList.isEmpty(), "There are no reports listed");
+                        Assert.assertTrue(searchStatusReportNameList.size() > 0, "Expected search " +
+                                "result not populated data by status .");
+                        logger.info("Searched report for status as: " + status);
+                        break;
+                    case "searchReportByName":
+                        MouseActions.clickOnElement(driver, reportCntList.get(i));
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
+                        //Give any name which shows in the UI
+                        String searchReportName = smallfilesPageObject.archiveReportName.getText().trim();
+                        reportPageObj.reportSearchBox.sendKeys(searchReportName);
+                        waitExecuter.waitUntilElementPresent(reportPageObj.sortingReportNameIcon);
+                        List<WebElement> searchNameReportNameList = reportPageObj.reportNames;
+                        Assert.assertFalse(searchNameReportNameList.isEmpty(), "There are no reports listed");
+                        Assert.assertTrue(searchNameReportNameList.size() > 0, "Expected search " +
+                                "result not populated data by report name.");
+                        logger.info("Searched report by name as :" + searchReportName);
+                        break;
+                }
+                break;
+            }
+        }
+    }
 
     /**
      * Method to validate the Small File report Page
@@ -203,6 +304,7 @@ public class Smallfiles {
         scheduleTorunDropDown.selectByVisibleText(dayToRun);
 
     }
+
     /* Define day and Time to select from drop-down */
     public void selectDayTime(String day, String hour, String min) {
         selectByDays(day);

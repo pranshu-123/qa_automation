@@ -9,6 +9,8 @@ import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
@@ -31,12 +33,16 @@ public class TC_SF_44 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
 
         // Navigate to Reports tab from header
-        test.log(LogStatus.INFO, "Navigate to reports tab from header ");
-        MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
-        waitExecuter.waitUntilPageFullyLoaded();
-        String reportName = "Small File Report";
-        smallfiles.verifyReportsArchived(reportPageObj, reportName, "deleteReport");
-        logger.info("Clicked on Services and Versions Compatibility counts and delete.");
-        test.log(LogStatus.PASS, "Verified Reports Archived for Services and Versions is deletable.");
+        try {
+            test.log(LogStatus.INFO, "Navigate to reports tab from header ");
+            MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
+            waitExecuter.waitUntilPageFullyLoaded();
+            String reportName = "Small File Report";
+            smallfiles.verifyReportsArchived(reportPageObj, reportName, "deleteReport");
+            logger.info("Clicked on Services and Versions Compatibility counts and delete.");
+            test.log(LogStatus.PASS, "Verified Reports Archived for Services and Versions is deletable.");
+        } catch (TimeoutException | NoSuchElementException te) {
+            throw new AssertionError("Small File Report not completed successfully.");
+        }
     }
 }

@@ -18,26 +18,20 @@ public class LoginPageObject {
   @FindBy(name="username")
   public WebElement loginUserName;
 
-  @FindBy(name="username")
-  public List<WebElement> loginPage;
-
   @FindBy(name="password")
   public WebElement loginPassword;
+
+  @FindBy(name = "username")
+  public List<WebElement> loginButtonList;
 
   @FindBy(css = "a.icon-logout")
   public WebElement logoutButton;
 
+  @FindBy(css = "a.icon-logout")
+  public List<WebElement> logoutButtonList;
+
   @FindBy(xpath="//span[contains(text(),'Sign in')]/parent::a")
   public WebElement signInButton;
-
-  @FindBy(xpath="/html/body/div[1]/ui-view/login-form/header/div[4]/div/div/a/div")
-  public WebElement we_imgName;
-
-  @FindBy(css = ".head-logo")
-  public WebElement we_headLogo;
-
-  @FindBy(css=".lg")
-  public WebElement we_logo;
 
   /**
    * @param driver The driver that will be used to look up the elements

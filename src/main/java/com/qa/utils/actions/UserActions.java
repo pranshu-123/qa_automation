@@ -46,6 +46,7 @@ public class UserActions {
                         MouseActions.clickOnElement(driver,element);
                         break;
                     case SEND_KEYS:
+                        element.clear();
                         element.sendKeys(keys);
                         break;
                 }

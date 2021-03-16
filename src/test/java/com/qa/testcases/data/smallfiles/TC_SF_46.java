@@ -15,34 +15,34 @@ import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
-
 @Marker.DataSmallFiles
 @Marker.All
-public class TC_SF_43 extends BaseClass {
+public class TC_SF_46 extends BaseClass {
 
-    Logger logger = Logger.getLogger(TC_SF_43.class.getName());
+    Logger logger = Logger.getLogger(TC_SF_46.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateReportsArchivedDownload(String clusterId) {
-        test = extent.startTest("TC_SF_43.validateReportsArchivedDownload: " + clusterId,
-                "Verify the UI should download the File report.");
+    public void validateReportsArchivedSearchByDate(String clusterId) {
+        test = extent.startTest("TC_SF_46.validateReportsArchivedSearchByDate: " + clusterId,
+                "Verify the UI should display all reports executed on that particular date");
         test.assignCategory("Data- Small Files and File reports");
-        Log.startTestCase("TC_SF_43.validateReportsArchivedDownload");
+        Log.startTestCase("TC_SF_46.validateReportsArchivedSearchByDate");
 
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);
         SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
         Smallfiles smallfiles = new Smallfiles(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
+
+        // Navigate to Reports tab from header
         try {
-            // Navigate to Reports tab from header
             test.log(LogStatus.INFO, "Navigate to reports tab from header ");
             MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
             waitExecuter.waitUntilPageFullyLoaded();
             String reportName = "Small File Report";
-            smallfiles.verifyReportsArchived(reportPageObj, reportName, "downloadReport");
-            logger.info("Clicked on Small File Report counts and downloaded.");
-            test.log(LogStatus.PASS, "Verified Reports Small File Report is downloadable.");
+            smallfiles.verifyReportsArchived(reportPageObj, reportName, "searchReportByDate");
+            logger.info("Clicked on Small File Report counts and search by date.");
+            test.log(LogStatus.PASS, "Verified Reports Archived for Small File Report search by date.");
         } catch (TimeoutException | NoSuchElementException te) {
             throw new AssertionError("Small File Report not completed successfully.");
         }

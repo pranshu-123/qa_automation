@@ -1,5 +1,6 @@
 package com.qa.testcases.data.smallfiles;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.data.SmallfilesPageObject;
@@ -14,15 +15,16 @@ import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
-
+@Marker.DataSmallFiles
+@Marker.All
 public class TC_SF_44 extends BaseClass {
 
-    Logger logger = Logger.getLogger(TC_SF_43.class.getName());
+    Logger logger = Logger.getLogger(TC_SF_44.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void validateReportsArchivedDelete(String clusterId) {
         test = extent.startTest("TC_SF_44.validateReportsArchivedDelete: " + clusterId,
-                "Verify the Download action.");
+                "Verify the UI should delete the File report.");
         test.assignCategory("Data- Small Files and File reports");
         Log.startTestCase("TC_SF_44.validateReportsArchivedDelete");
 
@@ -39,8 +41,8 @@ public class TC_SF_44 extends BaseClass {
             waitExecuter.waitUntilPageFullyLoaded();
             String reportName = "Small File Report";
             smallfiles.verifyReportsArchived(reportPageObj, reportName, "deleteReport");
-            logger.info("Clicked on Services and Versions Compatibility counts and delete.");
-            test.log(LogStatus.PASS, "Verified Reports Archived for Services and Versions is deletable.");
+            logger.info("Clicked on Small File Report counts and delete.");
+            test.log(LogStatus.PASS, "Verified Reports Archived for Small File Report is deletable.");
         } catch (TimeoutException | NoSuchElementException te) {
             throw new AssertionError("Small File Report not completed successfully.");
         }

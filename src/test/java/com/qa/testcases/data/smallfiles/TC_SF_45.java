@@ -40,7 +40,7 @@ public class TC_SF_45 extends BaseClass {
             MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
             waitExecuter.waitUntilPageFullyLoaded();
             String reportName = "Small File Report";
-            smallfiles.verifyReportsArchived(reportPageObj, reportName, "viewReport");
+            smallfiles.verifyReportsArchived(reportName, "viewReport");
             logger.info("Clicked on Small File Report counts and View.");
             test.log(LogStatus.PASS, "Verified Reports Archived for Small File Report is viewable.");
         } catch (TimeoutException | NoSuchElementException te) {

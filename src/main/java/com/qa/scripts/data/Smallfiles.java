@@ -4,7 +4,6 @@ import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.data.SmallfilesPageObject;
-import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.scripts.migration.ServicesAndVersionsCompatibility;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
@@ -115,9 +114,9 @@ public class Smallfiles {
     /**
      * Method to validate report, download, delete, view report from actions tab
      */
-    public void verifyReportsArchived(ReportsArchiveScheduledPageObject reportPageObj, String name, String reportAction) {
-        List<WebElement> reportNameList = reportPageObj.reportNames;
-        List<WebElement> reportCntList = reportPageObj.reportCnt;
+    public void verifyReportsArchived(String name, String reportAction) {
+        List<WebElement> reportNameList = smallfilesPageObject.reportNames;
+        List<WebElement> reportCntList = smallfilesPageObject.reportCnt;
         Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed.");
 
         for (int i = 0; i < reportNameList.size(); i++) {
@@ -132,42 +131,43 @@ public class Smallfiles {
                         MouseActions.clickOnElement(driver, reportCntList.get(i));
                         waitExecuter.waitUntilPageFullyLoaded();
                         waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
-                        List<WebElement> reportTblRows = reportPageObj.tableRows;
+                        List<WebElement> reportTblRows = smallfilesPageObject.tableRows;
                         Assert.assertFalse(reportTblRows.isEmpty(), "No reports archived.");
                         break;
                     case "downloadReport":
                         MouseActions.clickOnElement(driver, reportCntList.get(i));
                         waitExecuter.waitUntilPageFullyLoaded();
                         waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
-                        MouseActions.clickOnElement(driver, reportPageObj.downloadReportIcon);
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        MouseActions.clickOnElement(driver, smallfilesPageObject.downloadReportIcon);
                         logger.info("Downloading report");
                         waitExecuter.waitUntilPageFullyLoaded();
-                        Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Downloaded successfully",
+                        Assert.assertEquals(smallfilesPageObject.successfulMsgBanner.getText(), "Downloaded successfully",
                                 " No downloaded successfully message received.");
                         break;
                     case "deleteReport":
                         MouseActions.clickOnElement(driver, reportCntList.get(i));
                         waitExecuter.waitUntilPageFullyLoaded();
                         waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
-                        MouseActions.clickOnElement(driver, reportPageObj.deleteReportIcon);
+                        MouseActions.clickOnElement(driver, smallfilesPageObject.deleteReportIcon);
                         waitExecuter.waitUntilPageFullyLoaded();
                         Alert confirmationAlert = driver.switchTo().alert();
                         String alertText = confirmationAlert.getText();
                         logger.info("Alert text is " + alertText);
                         confirmationAlert.accept();
                         logger.info("Deleted report");
-                        Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Removed successfully",
+                        Assert.assertEquals(smallfilesPageObject.successfulMsgBanner.getText(), "Removed successfully",
                                 " Report not removed");
                         break;
                     case "viewReport":
                         MouseActions.clickOnElement(driver, reportCntList.get(i));
                         waitExecuter.waitUntilPageFullyLoaded();
                         waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
-                        MouseActions.clickOnElement(driver, reportPageObj.viewReportIcon);
+                        MouseActions.clickOnElement(driver, smallfilesPageObject.viewReportIcon);
                         logger.info("Viewed report");
                         waitExecuter.waitUntilPageFullyLoaded();
-                        Assert.assertTrue(reportPageObj.viewReportDialogWin.isDisplayed(), "Report  view not present.");
-                        MouseActions.clickOnElement(driver, reportPageObj.closeTab);
+                        Assert.assertTrue(smallfilesPageObject.viewReportDialogWin.isDisplayed(), "Report  view not present.");
+                        MouseActions.clickOnElement(driver, smallfilesPageObject.closeTab);
                         waitExecuter.waitUntilPageFullyLoaded();
                         break;
                     case "searchReportByDate":
@@ -178,8 +178,8 @@ public class Smallfiles {
                         String[] arrDate = dateFromElement.split(" ");
                         String date = arrDate[0];
                         System.out.println(date);
-                        reportPageObj.reportSearchBox.sendKeys(date);
-                        List<WebElement> searchDateReportNameList = reportPageObj.reportNames;
+                        smallfilesPageObject.reportSearchBox.sendKeys(date);
+                        List<WebElement> searchDateReportNameList = smallfilesPageObject.reportNames;
                         Assert.assertFalse(searchDateReportNameList.isEmpty(), "There are no reports listed");
                         Assert.assertTrue(searchDateReportNameList.size() > 0, "Expected search " +
                                 "result not populated data by date.");
@@ -190,9 +190,9 @@ public class Smallfiles {
                         waitExecuter.waitUntilPageFullyLoaded();
                         waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
                         String status = "fail";
-                        reportPageObj.reportSearchBox.sendKeys(status);
-                        waitExecuter.waitUntilElementPresent(reportPageObj.sortingReportNameIcon);
-                        List<WebElement> searchStatusReportNameList = reportPageObj.reportNames;
+                        smallfilesPageObject.reportSearchBox.sendKeys(status);
+                        waitExecuter.waitUntilElementPresent(smallfilesPageObject.sortingReportNameIcon);
+                        List<WebElement> searchStatusReportNameList = smallfilesPageObject.reportNames;
                         Assert.assertFalse(searchStatusReportNameList.isEmpty(), "There are no reports listed");
                         Assert.assertTrue(searchStatusReportNameList.size() > 0, "Expected search " +
                                 "result not populated data by status .");
@@ -204,9 +204,9 @@ public class Smallfiles {
                         waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
                         //Give any name which shows in the UI
                         String searchReportName = smallfilesPageObject.archiveReportName.getText().trim();
-                        reportPageObj.reportSearchBox.sendKeys(searchReportName);
-                        waitExecuter.waitUntilElementPresent(reportPageObj.sortingReportNameIcon);
-                        List<WebElement> searchNameReportNameList = reportPageObj.reportNames;
+                        smallfilesPageObject.reportSearchBox.sendKeys(searchReportName);
+                        waitExecuter.waitUntilElementPresent(smallfilesPageObject.sortingReportNameIcon);
+                        List<WebElement> searchNameReportNameList = smallfilesPageObject.reportNames;
                         Assert.assertFalse(searchNameReportNameList.isEmpty(), "There are no reports listed");
                         Assert.assertTrue(searchNameReportNameList.size() > 0, "Expected search " +
                                 "result not populated data by report name.");

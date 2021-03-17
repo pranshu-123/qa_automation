@@ -220,11 +220,44 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//tbody/tr[1]/td[2]")
     public WebElement archiveReportDate;
 
+    @FindBy(xpath = "//table/thead/tr/th[1]/a")
+    public WebElement sortingReportNameIcon;
+
+    @FindBy(xpath = "//table/tbody/tr/td[1]/span")
+    public List<WebElement> reportNames;
+
+    @FindBy(xpath = "(//*[@class='icon-delete is-enabled'])[1]")
+    public WebElement deleteReportIcon;
+
+    @FindBy(xpath = "(//*[@role='dialog'])")
+    public WebElement viewReportDialogWin;
+
+    @FindBy(xpath = "//table/tbody/tr/td[2]/span")
+    public List<WebElement> reportCnt;
+
+    @FindBy(xpath = "//table/tbody/tr")
+    public List<WebElement> tableRows;
+
+    @FindBy(xpath = "//*[@class='close pointer']")
+    public WebElement closeTab;
+
+    @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
+    public WebElement successfulMsgBanner;
+
+    @FindBy(xpath = "(//*[@class='icon-expand is-enabled'])[1]")
+    public WebElement viewReportIcon;
+
+    @FindBy(xpath = "//div//span//span[@class='pointer icon-download is-enabled']")
+    public WebElement downloadReportIcon;
+
     @FindBy(xpath = "//tbody/tr[1]/td[1]")
     public WebElement archiveReportName;
 
     @FindBy(xpath = "//span[contains(text(), 'Schedule')]//parent::a")
     public WebElement scheduleBtn;
+
+    @FindBy(xpath = "//table/thead/tr/th[2]/a")
+    public WebElement sortingReportCntIcon;
 
     @FindBy(xpath = "//*[@class='select2-selection__rendered']")
     public WebElement scheduleCloudDropDown;

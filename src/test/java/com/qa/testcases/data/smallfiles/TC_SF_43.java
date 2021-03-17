@@ -39,8 +39,8 @@ public class TC_SF_43 extends BaseClass {
             test.log(LogStatus.INFO, "Navigate to reports tab from header ");
             MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
             waitExecuter.waitUntilPageFullyLoaded();
-            String reportName = "Small File Report";
-            smallfiles.verifyReportsArchived(reportPageObj, reportName, "downloadReport");
+            String reportName = "Small Files Report";
+            smallfiles.verifyReportsArchived(reportName, "downloadReport");
             logger.info("Clicked on Small File Report counts and downloaded.");
             test.log(LogStatus.PASS, "Verified Reports Small File Report is downloadable.");
         } catch (TimeoutException | NoSuchElementException te) {

@@ -39,8 +39,8 @@ public class TC_SF_44 extends BaseClass {
             test.log(LogStatus.INFO, "Navigate to reports tab from header ");
             MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
             waitExecuter.waitUntilPageFullyLoaded();
-            String reportName = "Small File Report";
-            smallfiles.verifyReportsArchived(reportPageObj, reportName, "deleteReport");
+            String reportName = "Small Files Report";
+            smallfiles.verifyReportsArchived(reportName, "deleteReport");
             logger.info("Clicked on Small File Report counts and delete.");
             test.log(LogStatus.PASS, "Verified Reports Archived for Small File Report is deletable.");
         } catch (TimeoutException | NoSuchElementException te) {

@@ -68,7 +68,7 @@ public class SmallfilesPageObject {
     public WebElement advancedOptions;
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select/option[1]")
-    public  List<WebElement> Daily;
+    public List<WebElement> Daily;
 
     @FindBy(xpath = "//ul[contains(concat(' ', @class, ' '), 'select2-results__options')]/li")
     public List<WebElement> clusterList;
@@ -128,7 +128,7 @@ public class SmallfilesPageObject {
     public List<WebElement> minFileSizeName;
 
     @FindBy(xpath = "//table/tbody/tr/td[5]/span")
-    public List<WebElement> maxFileSize ;
+    public List<WebElement> maxFileSize;
 
     @FindBy(xpath = "//table[contains(@class,'component-data-tables')]/tbody/tr/td[1]")
     public List<WebElement> getPathNameFromTable;
@@ -160,7 +160,7 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//div/b[text()='Schedule Name']//following::p/input")
     public WebElement scheduleNameTextbox;
 
-    @FindBy(xpath ="//p[@class='element-inline']/input")
+    @FindBy(xpath = "//p[@class='element-inline']/input")
     public WebElement emailNotification;
 
     @FindBy(xpath = "//div[@class='panel-body']/div[2]/p/b")
@@ -213,6 +213,78 @@ public class SmallfilesPageObject {
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[3]/span/div[2]/div/select[2]/option[61]")
     public List<WebElement> Fiftynine;
+
+    @FindBy(xpath = "//div[@id='breadcrumb']/span[2]/span")
+    public WebElement archiveReportSVCHeader;
+
+    @FindBy(xpath = "//tbody/tr[1]/td[2]")
+    public WebElement archiveReportDate;
+
+    @FindBy(xpath = "//table/thead/tr/th[1]/a")
+    public WebElement sortingReportNameIcon;
+
+    @FindBy(xpath = "//table/tbody/tr/td[1]/span")
+    public List<WebElement> reportNames;
+
+    @FindBy(xpath = "(//*[@class='icon-delete is-enabled'])[1]")
+    public WebElement deleteReportIcon;
+
+    @FindBy(xpath = "(//*[@role='dialog'])")
+    public WebElement viewReportDialogWin;
+
+    @FindBy(xpath = "//table/tbody/tr/td[2]/span")
+    public List<WebElement> reportCnt;
+
+    @FindBy(xpath = "//table/tbody/tr")
+    public List<WebElement> tableRows;
+
+    @FindBy(xpath = "//*[@class='close pointer']")
+    public WebElement closeTab;
+
+    @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
+    public WebElement successfulMsgBanner;
+
+    @FindBy(xpath = "(//*[@class='icon-expand is-enabled'])[1]")
+    public WebElement viewReportIcon;
+
+    @FindBy(xpath = "//div//span//span[@class='pointer icon-download is-enabled']")
+    public WebElement downloadReportIcon;
+
+    @FindBy(xpath = "//tbody/tr[1]/td[1]")
+    public WebElement archiveReportName;
+
+    @FindBy(xpath = "//span[contains(text(), 'Schedule')]//parent::a")
+    public WebElement scheduleBtn;
+
+    @FindBy(xpath = "//table/thead/tr/th[2]/a")
+    public WebElement sortingReportCntIcon;
+
+    @FindBy(xpath = "//*[@class='select2-selection__rendered']")
+    public WebElement scheduleCloudDropDown;
+
+    @FindBy(xpath = "(//div/b[contains(text(), 'Schedule Name')]//following-sibling::p/input)[1]")
+    public WebElement scheduleName;
+
+    @FindBy(xpath = "//select[contains(@class, 'schedule-days')]")
+    public WebElement scheduleTRun;
+
+    @FindBy(xpath = "//p[@class='element-inline']/input")
+    public WebElement scheduleNotification;
+
+    @FindBy(xpath = "(//section[contains(@class, 'icon-success')]/span)[1]")
+    public WebElement scheduleMsg;
+
+    @FindBy(xpath = "//span[contains(@class, 'cta-primary')]/a")
+    public WebElement scheduleRunBtn;
+
+    @FindBy(xpath = "//input[@class = 'display-time']")
+    public WebElement scheduleTime;
+
+    @FindBy(xpath = "//select[@class='hours']")
+    public WebElement scheduleTimeHours;
+
+    @FindBy(xpath = "//select[@class='minutes']")
+    public WebElement scheduleTimeMinutes;
 
 
     /**

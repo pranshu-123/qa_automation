@@ -7,12 +7,13 @@ import com.qa.scripts.HomePage;
 import com.qa.scripts.data.Smallfiles;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
-import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
+
 @Marker.DataSmallFiles
 @Marker.All
 public class TC_SF_40 extends BaseClass {
@@ -39,25 +40,29 @@ public class TC_SF_40 extends BaseClass {
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
 
+        try {
+            smallfiles.navigateToSmallFileReport(smallfilesPageObject, test, "256",
+                    "512", "10", "100");
+            test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files");
 
-        smallfiles.navigateToSmallFileReport(smallfilesPageObject, test, "256",
-                "512", "10", "100");
-        test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files");
+            smallfiles.scheduleAdvancedOptions(smallfilesPageObject, test, "!@$@$@#$@#%@%",
+                    "test@gmail.com");
+            // Define day of the week and time
+            test.log(LogStatus.INFO, "Define day of the week as- Daily and time as- 10:30");
+            logger.info("Define day of the week as- Daily and time as- 10:30");
+            smallfiles.selectDayTime("Daily", "10", "30");
+            smallfiles.clickOnModalScheduleButton();
+            waitExecuter.waitUntilPageFullyLoaded();
+            logger.info("Clicked on Modal Schedule Button");
+            test.log(LogStatus.INFO, "Clicked on Modal Schedule Button");
 
-        smallfiles.scheduleAdvancedOptions(smallfilesPageObject, test, "!@$@$@#$@#%@%",
-                "test@gmail.com");
-        // Define day of the week and time
-        test.log(LogStatus.INFO, "Define day of the week as- Daily and time as- 10:30");
-        logger.info("Define day of the week as- Daily and time as- 10:30");
-        smallfiles.selectDayTime("Daily", "10", "30");
-        smallfiles.clickOnModalScheduleButton();
-        waitExecuter.waitUntilPageFullyLoaded();
-        logger.info("Clicked on Modal Schedule Button");
-        test.log(LogStatus.INFO, "Clicked on Modal Schedule Button");
+            logger.info("Clicked on modal Schedule Button");
+            test.log(LogStatus.INFO, "Clicked on modal Schedule Button");
+            String scheduleSuccessMsg = "The report has been scheduled successfully.";
+            smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
 
-        logger.info("Clicked on modal Schedule Button");
-        test.log(LogStatus.INFO, "Clicked on modal Schedule Button");
-        String scheduleSuccessMsg = "The report has been scheduled successfully.";
-        smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
+        } catch (TimeoutException | NoSuchElementException | VerifyError te) {
+            throw new AssertionError("Small File Report not completed successfully.");
+        }
     }
 }

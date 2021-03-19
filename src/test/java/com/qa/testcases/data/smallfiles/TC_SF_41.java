@@ -7,13 +7,13 @@ import com.qa.scripts.HomePage;
 import com.qa.scripts.data.Smallfiles;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
-import com.qa.utils.WaitExecuter;
-import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
+
 @Marker.DataSmallFiles
 @Marker.All
 public class TC_SF_41 extends BaseClass {
@@ -22,7 +22,7 @@ public class TC_SF_41 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void verifyScheduleSpecialCharecters(String clusterId) {
-        test = extent.startTest("TC_SF_41.verifyScheduleSpecialCharecters: "+ clusterId,
+        test = extent.startTest("TC_SF_41.verifyScheduleSpecialCharecters: " + clusterId,
                 "Verify user clicks on Cancel button the Mini Window to schedule report should close and the UI should display the previously generated report.");
         test.assignCategory("Data- Small Files and File reports");
         Log.startTestCase("TC_SF_41.verifyScheduleSpecialCharecters");
@@ -39,20 +39,23 @@ public class TC_SF_41 extends BaseClass {
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
 
+        try {
+            smallfiles.navigateToSmallFileReport(smallfilesPageObject, test, "256",
+                    "512", "10", "100");
+            test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files");
 
-        smallfiles.navigateToSmallFileReport(smallfilesPageObject, test, "256",
-                "512", "10", "100");
-        test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files");
+            smallfiles.scheduleAdvancedOptions(smallfilesPageObject, test, "Queue_An_Test",
+                    "sray@unraveldata.com");
+            // Define day of the week and time
+            test.log(LogStatus.INFO, "Define day of the week as- Daily and time as- 10:30");
+            logger.info("Define day of the week as- Daily and time as- 10:30");
+            smallfiles.selectDayTime("Daily", "10", "30");
+            //Close apps details page
+            MouseActions.clickOnElement(driver, smallfilesPageObject.homeTab);
+        } catch (TimeoutException | NoSuchElementException | VerifyError te) {
+            throw new AssertionError("Small File Report not completed successfully.");
 
-        smallfiles.scheduleAdvancedOptions(smallfilesPageObject, test, "Queue_An_Test",
-                "sray@unraveldata.com");
-        // Define day of the week and time
-        test.log(LogStatus.INFO, "Define day of the week as- Daily and time as- 10:30");
-        logger.info("Define day of the week as- Daily and time as- 10:30");
-        smallfiles.selectDayTime("Daily", "10", "30");
-        //Close apps details page
-        MouseActions.clickOnElement(driver, smallfilesPageObject.homeTab);
-
+        }
     }
 }
 

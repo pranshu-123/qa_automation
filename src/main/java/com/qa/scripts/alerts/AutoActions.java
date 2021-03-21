@@ -250,6 +250,15 @@ public class AutoActions {
         return false;
     }
 
+    public boolean validateDefaultAlwaysScopeChkBox(){
+        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.alwaysChkBox);
+        if(newAutoActionPolicyPageObject.alwaysChkBox.isSelected()){
+            return true;
+        }
+        return false;
+    }
+
     public void clickScopeChkBox(String chkBoxName){
         waitExecuter.sleep(2000);
         if(chkBoxName.equals("only")){
@@ -258,6 +267,8 @@ public class AutoActions {
             MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.exceptUserChkBox);
         }else if(chkBoxName.equals("all")){
             MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.allUserChkBox);
+        }else if(chkBoxName.equals("daily")){
+            MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.dailyChkBox);
         }
         else{
             logger.info("No Check Box found with name: "+ chkBoxName);

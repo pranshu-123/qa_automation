@@ -58,6 +58,13 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//div[@class='task-runner-ht']/section/span[1]")
     public WebElement confirmationMessageElement;
 
+    @FindBy(xpath = "//span[@class='text-fatal']")
+    public WebElement confirmationMessageMinFileSizeElement;
+
+
+    @FindBy(xpath = "//span[contains(text(),'Max File Size is between')]")
+    public WebElement confirmationMessageMaxFileSizeElement;
+
     @FindBy(xpath = "//section[contains(@class,'component-message-banner bg-success icon-success')]")
     public WebElement headerMessageElement;
 
@@ -142,7 +149,7 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//ul[(@class='select2-results__options')]/li")
     public List<WebElement> queueOptions;
 
-    @FindBy(css = "//div[@class=\"close pointer\"]")
+    @FindBy(css = "//div[@class='close pointer']")
     public WebElement closeAppsPageTab;
 
     @FindBy(xpath = "(//input[contains(@type,'text')])[4]")
@@ -225,6 +232,9 @@ public class SmallfilesPageObject {
 
     @FindBy(xpath = "//table/tbody/tr/td[1]/span")
     public List<WebElement> reportNames;
+
+    @FindBy(xpath = "//table/tbody/tr/td[1]")
+    public List<WebElement> reportAll;
 
     @FindBy(xpath = "(//*[@class='icon-delete is-enabled'])[1]")
     public WebElement deleteReportIcon;

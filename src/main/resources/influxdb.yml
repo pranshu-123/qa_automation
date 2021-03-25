@@ -1,0 +1,3 @@
+influx:
+  url: http://localhost:8086
+  db: selenium_matrics

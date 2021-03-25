@@ -46,5 +46,6 @@ public class TC_FR_03 extends BaseClass {
     test.log(LogStatus.INFO, "Clicked on FileReports Tab");
     MouseActions.clickOnElement(driver, fileReportsPageObject.mediumFile);
     filereports.verifyClusterList(expectedClusterList);
+    test.log(LogStatus.PASS, "Successfully validate the Medium Files is selcted.");
   }
 }

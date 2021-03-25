@@ -25,7 +25,7 @@ public class TC_SF_02 extends BaseClass {
     public void validateAccesstoAdvancedoptions(String clusterId) {
         test = extent.startTest("TC_SF_02.validateAccesstoAdvancedoptions: " + clusterId, "Verify User is able " +
                 "Verify UI opens an extention to add advanced options");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_02.validateAccesstoAdvancedoptions");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -76,7 +76,11 @@ public class TC_SF_02 extends BaseClass {
             test.log(LogStatus.PASS, "Verified smallfiles report is loaded properly.");
             LOGGER.info("Verified smallfiles report is loaded properly");
         } catch (TimeoutException te) {
-            throw new AssertionError("smallfiles Report not completed successfully.");
+            waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
+                    "Small file Report completed successfully.");
+        }
+        catch (VerifyError te) {
+            throw new AssertionError("smallfiles Report not completed successfully."+te);
         }
     }
 }

@@ -25,7 +25,7 @@ public class TC_SF_47 extends BaseClass {
     public void validateReportsArchivedSearchByStatus(String clusterId) {
         test = extent.startTest("TC_SF_47.validateReportsArchivedSearchByStatus: " + clusterId,
                 "Verify the Download action.");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_47.validateReportsArchivedSearchByStatus");
 
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);

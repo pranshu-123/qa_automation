@@ -25,7 +25,7 @@ public class TC_SF_45 extends BaseClass {
     public void validateReportsArchivedView(String clusterId) {
         test = extent.startTest("TC_SF_45.validateReportsArchivedView: " + clusterId,
                 "Verify the UI should display the selected File report.");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_45.validateReportsArchivedView");
 
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);

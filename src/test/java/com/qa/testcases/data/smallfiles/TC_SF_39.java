@@ -25,7 +25,7 @@ public class TC_SF_39 extends BaseClass {
     public void verifySchedulingReport(String clusterId) {
         test = extent.startTest("TC_SF_39.verifySchedulingReport: " + clusterId,
                 "Verify Unravel should send email notifications to all the email address saved in the scheduled report Once in a month.");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_39.verifySchedulingReport");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);

@@ -23,7 +23,7 @@ public class TC_SF_14 extends BaseClass {
     public void validateParentDepth(String clusterId) {
         test = extent.startTest("TC_SF_14.validateParentDepth: " + clusterId,
                 " Verify User for min and max values of 1 and 2 respectively, directories like /a, /a/b only will be listed.");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_14.validateParentDepth");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -56,7 +56,10 @@ public class TC_SF_14 extends BaseClass {
             String scheduleSuccessMsg = "The report has been scheduled successfully.";
             smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
         } catch (TimeoutException te) {
-            throw new AssertionError("smallfiles Report has not been scheduled successfully.");
-        }
+            String scheduleSuccessMsg = "The report has been scheduled successfully.";
+            smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
+       } catch (VerifyError te) {
+        throw new AssertionError("smallfiles Report has not been scheduled successfully.");
+    }
     }
 }

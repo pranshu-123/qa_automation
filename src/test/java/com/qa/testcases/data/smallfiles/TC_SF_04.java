@@ -26,7 +26,7 @@ public class TC_SF_04 extends BaseClass {
     public void validateUIlistsalltheclusters() {
         test = extent.startTest("TC_SF_04.validateUIlistsalltheclusters: " , "Verify User is able " +
                 "Verify UI should display all the clusters connected to the Unravel Core node");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_04.validateUIlistsalltheclusters");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);

@@ -23,5 +23,6 @@ public class TC_FR_24 extends BaseClass {
     filereports.navidateTofileReportsTab();
     MouseActions.clickOnElement(driver, fileReportsPageObject.emptyFile);
     filereports.verifyFileSortOption("EMPTY", clusterId);
+
   }
 }

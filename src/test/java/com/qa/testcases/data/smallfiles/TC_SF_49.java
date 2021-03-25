@@ -6,12 +6,15 @@ import com.qa.pagefactory.data.SmallfilesPageObject;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.data.Smallfiles;
 import com.qa.utils.Log;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
+
 @Marker.DataSmallFiles
 @Marker.All
 public class TC_SF_49 extends BaseClass {
@@ -22,7 +25,7 @@ public class TC_SF_49 extends BaseClass {
     public void validateErrorUnsupportedValues(String clusterId) {
         test = extent.startTest("TC_SF_49.validateErrorUnsupportedValues: " + clusterId,
                 " Verify Small File report UI indicates unsupported values.");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_49.validateErrorUnsupportedValues");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -45,15 +48,20 @@ public class TC_SF_49 extends BaseClass {
 
         smallfiles.navigateToAdvancedOptions(smallfilesPageObject, test, "50", "50");
         smallfiles.clickOnModalRunButton();
-        logger.info("Clicked on Modal Run Button");
         test.log(LogStatus.INFO, "Clicked on Modal Run Button");
-
-        String heading = smallfilesPageObject.verifyAbsoluteSize.getText();
-        test.log(LogStatus.PASS, "Verified the absolute size  poulated :" + heading);
-
         try {
-            String scheduleSuccessMsg = "The report has been scheduled successfully.";
-            smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
+            if (smallfilesPageObject.errorMessageElement.size() > 0) {
+                String selectedMessage = smallfilesPageObject.errorMessageElement.stream().findFirst()
+                        .filter(WebElement::isDisplayed).get().getText();
+                test.log(LogStatus.PASS, "Path display in the table- " + selectedMessage);
+                logger.info("Clicked on Modal Run Button");
+                MouseActions.clickOnElement(driver, smallfilesPageObject.closeButton);
+                driver.switchTo().defaultContent();
+            } else {
+                String scheduleSuccessMsg = "Small file Report completed successfully.";
+                smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
+                MouseActions.clickOnElement(driver, smallfilesPageObject.closeButton);
+            }
         } catch (TimeoutException te) {
             throw new AssertionError("smallfiles Report has not been scheduled successfully.");
         }

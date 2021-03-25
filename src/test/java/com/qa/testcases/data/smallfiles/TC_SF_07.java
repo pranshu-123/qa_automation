@@ -24,7 +24,7 @@ public class TC_SF_07 extends BaseClass {
     public void validateAbsolutesmallfilesizereport(String clusterId) {
         test = extent.startTest("TC_SF_07.validateAbsolutesmallfilesizereport: " + clusterId, "Verify User is able " +
                 "Verify Unravel should successfully generate Absolute Small File Size Report");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_07.validateAbsolutesmallfilesizereport");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);

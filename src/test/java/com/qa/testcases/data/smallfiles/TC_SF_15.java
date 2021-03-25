@@ -22,7 +22,7 @@ public class TC_SF_15 extends BaseClass {
     public void verifyNumberOfDirectories(String clusterId) {
         test = extent.startTest("TC_SF_15.verifyNumberOfDirectories: " + clusterId, "Verify User is able " +
                 "Verify User flag is true a file like /a/b/c/d/e/f1 is accounted for /, /a, /a/b, /a/b/c, /a/b/c/d, /a/b/c/d/e. .");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_15.verifyNumberOfDirectories");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -55,6 +55,9 @@ public class TC_SF_15 extends BaseClass {
             String scheduleSuccessMsg = "The report has been scheduled successfully.";
             smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
         } catch (TimeoutException te) {
+            String scheduleSuccessMsg = "The report has been scheduled successfully.";
+            smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
+        } catch (VerifyError te) {
             throw new AssertionError("smallfiles Report has not been scheduled successfully.");
         }
     }

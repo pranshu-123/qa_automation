@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.pagefactory.data.FileReportsPageObject;
 import com.qa.scripts.data.FileReports;
 import com.qa.utils.MouseActions;
+import com.relevantcodes.extentreports.LogStatus;
 import org.testng.annotations.Test;
 
 @Marker.DataFileReports
@@ -23,5 +24,6 @@ public class TC_FR_30 extends BaseClass {
     filereports.navidateTofileReportsTab();
     MouseActions.clickOnElement(driver, fileReportsPageObject.mediumFile);
     filereports.verifyFileSortOption("MEDIUM", clusterId);
+    test.log(LogStatus.PASS, "Successfully validate the sort based on number of 'Files' column for Medium file reports.");
   }
 }

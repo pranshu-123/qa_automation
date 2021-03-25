@@ -24,7 +24,7 @@ public class TC_SF_40 extends BaseClass {
     public void verifyScheduleSpecialCharecters(String clusterId) {
         test = extent.startTest("TC_SF_40.verifyScheduleSpecialCharecters: ",
                 "Verify Unravel should be able to schedule a Queue Analysis report with Scedule Name having special charecters.");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_40.verifyScheduleSpecialCharecters");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);

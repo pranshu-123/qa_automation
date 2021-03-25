@@ -26,7 +26,7 @@ public class TC_SF_42 extends BaseClass {
     public void validateReportsArchived(String clusterId) {
         test = extent.startTest("TC_SF_42.validateReportsArchived: " + clusterId,
                 "Verify the archive Reports for Small File Reports should display 10+ reports.");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_42.validateReportsArchived");
 
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);

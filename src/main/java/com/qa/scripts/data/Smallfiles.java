@@ -18,6 +18,7 @@ import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -66,6 +67,26 @@ public class Smallfiles {
             MouseActions.clickOnElement(driver, smallfilesPageObject.runNowButton);
         }
     }
+
+    public ArrayList<Integer> getPatheCnt(List<WebElement> tableRowList) {
+        ArrayList<Integer> expectedFileCnt = new ArrayList<>();
+        try {
+            for (int row = 1; row <= tableRowList.size(); row++) {
+                WebElement rowData = driver.findElement
+                        (By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + row + "]/td[" + 2 + "]"));
+                Assert.assertTrue(rowData.isDisplayed(), "No data under column: File " +
+                        " for "  + " file type");
+                int fileCnt = Integer.parseInt(rowData.getText().trim());
+                LOGGER.info("The file count is " + fileCnt);
+                expectedFileCnt.add(fileCnt);
+            }
+        } catch (org.openqa.selenium.NoSuchElementException ex) {
+            WebElement noData = smallfilesPageObject.noDataText;
+            Assert.assertFalse(noData.isDisplayed(), "Data not present in the table got {'" + noData.getText() + "}' message");
+        }
+        return expectedFileCnt;
+    }
+
 
     /**
      * Method to click on 'SheduleButton'
@@ -151,7 +172,6 @@ public class Smallfiles {
                         waitExecuter.waitUntilPageFullyLoaded();
                         waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
                         MouseActions.clickOnElement(driver, smallfilesPageObject.deleteReportIcon);
-                        waitExecuter.waitUntilPageFullyLoaded();
                         Alert confirmationAlert = driver.switchTo().alert();
                         String alertText = confirmationAlert.getText();
                         logger.info("Alert text is " + alertText);

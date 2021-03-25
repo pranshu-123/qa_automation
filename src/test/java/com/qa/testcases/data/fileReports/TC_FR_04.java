@@ -46,5 +46,6 @@ public class TC_FR_04 extends BaseClass {
     test.log(LogStatus.INFO, "Clicked on FileReports Tab");
     MouseActions.clickOnElement(driver, fileReportsPageObject.tinyFile);
     filereports.verifyClusterList(expectedClusterList);
+    test.log(LogStatus.PASS, "Successfully validate the Tiny Files is selcted.");
   }
 }

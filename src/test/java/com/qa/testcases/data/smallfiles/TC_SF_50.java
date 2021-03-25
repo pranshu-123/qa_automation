@@ -22,7 +22,7 @@ public class TC_SF_50 extends BaseClass {
     public void validateErrorSmallFile(String clusterId) {
         test = extent.startTest("TC_SF_14.validateErrorSmallFile: " + clusterId,
                 " Verify Error displayed by Small file report when fsimage is not available.");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_14.validateErrorSmallFile");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -49,8 +49,7 @@ public class TC_SF_50 extends BaseClass {
             String scheduleSuccessMsg = "The report has been scheduled successfully.";
             smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
         } catch (TimeoutException te) {
-            waitExecuter.waitUntilPageFullyLoaded();
-            throw new AssertionError("smallfiles Report has not been scheduled successfully.");
+            throw new AssertionError("smallfiles Report has not been scheduled successfully."+te);
         }
     }
 }

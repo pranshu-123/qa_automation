@@ -25,7 +25,7 @@ public class TC_SF_46 extends BaseClass {
     public void validateReportsArchivedSearchByDate(String clusterId) {
         test = extent.startTest("TC_SF_46.validateReportsArchivedSearchByDate: " + clusterId,
                 "Verify the UI should display all reports executed on that particular date");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_46.validateReportsArchivedSearchByDate");
 
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);

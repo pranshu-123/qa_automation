@@ -25,7 +25,7 @@ public class TC_SF_44 extends BaseClass {
     public void validateReportsArchivedDelete(String clusterId) {
         test = extent.startTest("TC_SF_44.validateReportsArchivedDelete: " + clusterId,
                 "Verify the UI should delete the File report.");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_44.validateReportsArchivedDelete");
 
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);

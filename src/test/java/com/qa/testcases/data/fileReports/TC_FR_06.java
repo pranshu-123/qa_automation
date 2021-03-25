@@ -46,5 +46,6 @@ public class TC_FR_06 extends BaseClass {
     test.log(LogStatus.INFO, "Clicked on FileReports Tab");
     MouseActions.clickOnElement(driver, fileReportsPageObject.largeFile);
     filereports.verifyClusterList(expectedClusterList);
+    test.log(LogStatus.PASS, "Successfully validate the sort based on number of 'Files' column for Medium file reports.");
   }
 }

@@ -23,7 +23,7 @@ public class TC_SF_25 extends BaseClass {
     public void VerifySortByFiles(String clusterId) {
         test = extent.startTest("TC_SF_25.VerifySortByFiles: " + clusterId,
                 "Verify The user is able sort based on number of Files column for Small File Reports");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_25.VerifySortByFiles");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -32,19 +32,23 @@ public class TC_SF_25 extends BaseClass {
         Smallfiles smallfiles = new Smallfiles(driver);
         smallfiles.commonPanelTabValidation(test, logger);
         smallfiles.closeConfirmationMessageNotification();
-
-        // Sort Up by Files
-        test.log(LogStatus.INFO, "Ascending order by files");
-        logger.info("Ascending order by files");
-        smallfilesPageObject.sortFiles.click();
-        waitExecuter.sleep(2000);
-        Assert.assertTrue(smallfilesPageObject.sortUp.isDisplayed(), "Ascending order is not working");
-        // Sort down by Files
-        test.log(LogStatus.INFO, "Descending order by files");
-        logger.info("Descending order by files");
-        smallfilesPageObject.sortFiles.click();
-        waitExecuter.sleep(2000);
-        Assert.assertTrue(smallfilesPageObject.sortDown.isDisplayed(), "Descending order is not working");
-        test.log(LogStatus.PASS, "Verified sorting on files.");
+        try {
+            // Sort Up by Files
+            test.log(LogStatus.INFO, "Ascending order by files");
+            logger.info("Ascending order by files");
+            smallfilesPageObject.sortFiles.click();
+            waitExecuter.sleep(2000);
+            Assert.assertTrue(smallfilesPageObject.sortUp.isDisplayed(), "Ascending order is not working");
+            // Sort down by Files
+            test.log(LogStatus.INFO, "Descending order by files");
+            logger.info("Descending order by files");
+            smallfilesPageObject.sortFiles.click();
+            waitExecuter.sleep(2000);
+            Assert.assertTrue(smallfilesPageObject.sortDown.isDisplayed(), "Descending order is not working");
+            test.log(LogStatus.PASS, "Verified sorting on files.");
+        }
+        catch (Exception te) {
+                throw new AssertionError("Verified sorting on files not completed successfully."+te.getMessage());
+            }
     }
 }

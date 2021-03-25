@@ -25,6 +25,9 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//input[@class='display-time']")
     public WebElement clickTime;
 
+    @FindBy(xpath = "//div[@class='close pointer']")
+    public WebElement closeButton;
+
     @FindBy(xpath = "//input[@class='display-time']/following::select[@class='hours']")
     public WebElement hoursDropdown;
 
@@ -60,6 +63,9 @@ public class SmallfilesPageObject {
 
     @FindBy(xpath = "//span[@class='text-fatal']")
     public WebElement confirmationMessageMinFileSizeElement;
+
+    @FindBy(xpath = "//span[normalize-space()='Please, Make sure valid inputs.']")
+    public List<WebElement>  errorMessageElement;
 
 
     @FindBy(xpath = "//span[contains(text(),'Max File Size is between')]")
@@ -139,6 +145,28 @@ public class SmallfilesPageObject {
 
     @FindBy(xpath = "//table[contains(@class,'component-data-tables')]/tbody/tr/td[1]")
     public List<WebElement> getPathNameFromTable;
+
+    @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody/tr")
+    public List<WebElement> fileTableRows;
+
+    @FindBy(xpath = "//table[@class='component-data-tables']/tbody/tr[1]/td/p")
+    public WebElement noDataText;
+
+    @FindBy(xpath = "//*[@id='file-report']//div[4]/div[2]/nav/p")
+    public WebElement pagination;
+
+    @FindBy(xpath = "//*[name()='svg' and @data-icon='caret-right']")
+    public WebElement rightCaretReportCnt;
+
+    @FindBy(xpath = "//div[@class='col-md-2']/input")
+    public WebElement searchField;
+
+    @FindBy(xpath = "//*[name()='svg' and @data-icon='backward']")
+    public WebElement backwardCaretReportCnt;
+
+
+    @FindBy(xpath = "//table[@class='component-data-tables row-hover']/thead/tr/th[1]")
+    public WebElement fileColumn;
 
     @FindBy(xpath = "//table[contains(@class,'component-data-tables')]/tbody/tr/td[2]")
     public List<WebElement> getFileNameFromTable;
@@ -236,7 +264,7 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//table/tbody/tr/td[1]")
     public List<WebElement> reportAll;
 
-    @FindBy(xpath = "(//*[@class='icon-delete is-enabled'])[1]")
+    @FindBy(xpath = "(//*[@class='pointer icon-delete is-enabled'])")
     public WebElement deleteReportIcon;
 
     @FindBy(xpath = "(//*[@role='dialog'])")

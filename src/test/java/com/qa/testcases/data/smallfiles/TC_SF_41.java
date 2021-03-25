@@ -24,7 +24,7 @@ public class TC_SF_41 extends BaseClass {
     public void verifyScheduleSpecialCharecters(String clusterId) {
         test = extent.startTest("TC_SF_41.verifyScheduleSpecialCharecters: " + clusterId,
                 "Verify user clicks on Cancel button the Mini Window to schedule report should close and the UI should display the previously generated report.");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_41.verifyScheduleSpecialCharecters");
 
         SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);

@@ -7,12 +7,11 @@ import com.qa.scripts.HomePage;
 import com.qa.scripts.data.Smallfiles;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
-import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
+
 @Marker.DataSmallFiles
 @Marker.All
 public class TC_SF_37 extends BaseClass {
@@ -23,7 +22,7 @@ public class TC_SF_37 extends BaseClass {
     public void verifyScehduledReportsPage(String clusterId) {
         test = extent.startTest("TC_SF_37.verifyScheduleReport: " + clusterId,
                 "Verify Unravel should send email notifications to all the email address saved in the scheduled report daily.");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_37.verifyScheduleReport");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -38,26 +37,28 @@ public class TC_SF_37 extends BaseClass {
         // Select cluster
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
+        try {
+            smallfiles.navigateToSmallFileReport(smallfilesPageObject, test, "256",
+                    "512", "10", "100");
+            test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files");
 
+            smallfiles.scheduleAdvancedOptions(smallfilesPageObject, test, "Queue_An_Test2",
+                    "test@gmail.com");
+            test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files Advanced Options");
+            // Define day of the week and time
+            test.log(LogStatus.INFO, "Define day of the week as- Thursday and time as- 17:30");
+            logger.info("Define day of the week as- Thursday and time as- 17:30");
+            smallfiles.selectDayTime("Thursday", "17", "30");
+            smallfiles.clickOnModalScheduleButton();
+            logger.info("Clicked on Modal Schedule Button");
+            test.log(LogStatus.INFO, "Clicked on Modal Schedule Button");
 
-        smallfiles.navigateToSmallFileReport(smallfilesPageObject, test, "256",
-                "512", "10", "100");
-        test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files");
-
-        smallfiles.scheduleAdvancedOptions(smallfilesPageObject, test, "Queue_An_Test2",
-                "test@gmail.com");
-        test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files Advanced Options");
-        // Define day of the week and time
-        test.log(LogStatus.INFO, "Define day of the week as- Thursday and time as- 17:30");
-        logger.info("Define day of the week as- Thursday and time as- 17:30");
-        smallfiles.selectDayTime("Thursday", "17", "30");
-        smallfiles.clickOnModalScheduleButton();
-        logger.info("Clicked on Modal Schedule Button");
-        test.log(LogStatus.INFO, "Clicked on Modal Schedule Button");
-
-        logger.info("Clicked on modal Schedule Button");
-        test.log(LogStatus.INFO, "Clicked on modal Schedule Button");
-        String scheduleSuccessMsg = "The report has been scheduled successfully.";
-        smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
+            logger.info("Clicked on modal Schedule Button");
+            test.log(LogStatus.INFO, "Clicked on modal Schedule Button");
+            String scheduleSuccessMsg = "The report has been scheduled successfully.";
+            smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
+        } catch (Exception te) {
+            throw new AssertionError("Verified the scheduled report daily not been scheduled successfully." + te.getMessage());
+        }
     }
 }

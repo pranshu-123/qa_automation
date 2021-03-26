@@ -33,7 +33,8 @@ public class TuningPageObject {
     @FindBy(xpath = "(//form[@name='taskrunnerForm']/div/div[3]/b[contains(text(), 'Schedule Name')]/parent::div/p/input)[1]")
     public WebElement scheduleName;
 
-    @FindBy(xpath = "(//span[contains(text(),'Schedule')])[2]/parent::a")
+    //@FindBy(xpath = "(//span[contains(text(),'Schedule')])[2]/parent::a")
+    @FindBy(xpath = "//div[contains(@class, 'component-section-header')]/span/a/span")
     public WebElement modalScheduleButton;
 
     @FindBy(xpath = "//div[@class='task-runner-ht']/section/span[1]")

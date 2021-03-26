@@ -34,8 +34,10 @@ public class TEZ_129 extends BaseClass {
         test.assignCategory(" Apps Details-Tez");
         Log.startTestCase("TEZ_129_verifyTheQuery");
         TezAppsDetailsPage tezDetailsPage = new TezAppsDetailsPage(driver);
-        //TBD Query Tab  not poulated in apps detail page
-        test.log(LogStatus.SKIP, "Verified the Query Tab not poulated in apps detail page");
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        tezDetailsPage.commonTabValidation(test, clusterId, "Query", logger,false);
+        waitExecuter.sleep(2000);
+        test.log(LogStatus.SKIP, "Verified the Query tab successfully");
 
     }
 }

@@ -22,7 +22,7 @@ public class TC_SF_21 extends BaseClass {
     public void verifySpecialCharacters(String clusterId) {
         test = extent.startTest("TC_SF_21.verifySpecialCharacters: " + clusterId,
                 "Verify User generate small file report for file names that have special characters.");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_21.verifySpecialCharacters");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -55,6 +55,9 @@ public class TC_SF_21 extends BaseClass {
             String scheduleSuccessMsg = "The report has been scheduled successfully.";
             smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
         } catch (TimeoutException te) {
+            String scheduleSuccessMsg = "The report has been scheduled successfully.";
+            smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
+        } catch (VerifyError te) {
             throw new AssertionError("smallfiles Report has not been scheduled successfully.");
         }
     }

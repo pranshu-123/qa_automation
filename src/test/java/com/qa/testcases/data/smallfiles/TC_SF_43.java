@@ -26,7 +26,7 @@ public class TC_SF_43 extends BaseClass {
     public void validateReportsArchivedDownload(String clusterId) {
         test = extent.startTest("TC_SF_43.validateReportsArchivedDownload: " + clusterId,
                 "Verify the UI should download the File report.");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_43.validateReportsArchivedDownload");
 
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
@@ -44,7 +44,7 @@ public class TC_SF_43 extends BaseClass {
             logger.info("Clicked on Small File Report counts and downloaded.");
             test.log(LogStatus.PASS, "Verified Reports Small File Report is downloadable.");
         } catch (TimeoutException | NoSuchElementException te) {
-            throw new AssertionError("Small File Report not completed successfully.");
+            throw new AssertionError("Verified the  File report not been scheduled successfully.");
         }
     }
 }

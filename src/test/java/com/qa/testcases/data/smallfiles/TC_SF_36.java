@@ -24,7 +24,7 @@ public class TC_SF_36 extends BaseClass {
     public void verifyScheduleReport(String clusterId) {
         test = extent.startTest("TC_SF_36.verifyScheduleReport: " + clusterId,
                 "Verify Unravel should send email notifications to all the email address saved in the scheduled report daily.");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_36.verifyScheduleReport");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -54,10 +54,17 @@ public class TC_SF_36 extends BaseClass {
         smallfiles.selectDayTime("Daily", "10", "30");
         smallfiles.clickOnModalScheduleButton();
         waitExecuter.waitUntilPageFullyLoaded();
-
+        try{
         logger.info("Clicked on modal Schedule Button");
         test.log(LogStatus.INFO, "Clicked on modal Schedule Button");
         String scheduleSuccessMsg = "The report has been scheduled successfully.";
         smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
+        } catch (TimeoutException te) {
+            String scheduleSuccessMsg = "The report has been scheduled successfully.";
+            smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
+        }
+        catch (Exception te) {
+            throw new AssertionError("Verified the scheduled report daily not been scheduled successfully." + te.getMessage());
+        }
     }
 }

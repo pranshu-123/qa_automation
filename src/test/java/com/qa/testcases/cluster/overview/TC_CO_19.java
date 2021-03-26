@@ -48,12 +48,14 @@ public class TC_CO_19 extends BaseClass {
     //Click on first alert displayed at homepage
     try {
       MouseActions.clickOnElement(driver, homePageObject.firstAlertRow);
+      executer.waitUntilPageFullyLoaded();
     } catch (NoSuchElementException e) {
       Assert.assertTrue(false, "No Alert present.");
     }
 
     try {
       executer.waitUntilUrlContains("/clusters/resources");
+      executer.waitUntilPageFullyLoaded();
       test.log(LogStatus.PASS, "Url contains the resources path");
     } catch (TimeoutException te) {
       Assert.assertTrue(false,"Url does not contain resources path");

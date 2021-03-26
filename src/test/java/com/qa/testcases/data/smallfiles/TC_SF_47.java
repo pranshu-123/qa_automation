@@ -25,7 +25,7 @@ public class TC_SF_47 extends BaseClass {
     public void validateReportsArchivedSearchByStatus(String clusterId) {
         test = extent.startTest("TC_SF_47.validateReportsArchivedSearchByStatus: " + clusterId,
                 "Verify the Download action.");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_47.validateReportsArchivedSearchByStatus");
 
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
@@ -44,7 +44,7 @@ public class TC_SF_47 extends BaseClass {
             logger.info("Clicked on Small File Report counts and search by status.");
             test.log(LogStatus.PASS, "Verified Reports Small File Report search by status.");
         } catch (TimeoutException | NoSuchElementException |VerifyError te) {
-            throw new AssertionError("Small File Report not completed successfully.");
+            throw new AssertionError("Verified the Archived Search By Status not been scheduled successfully.");
         }
     }
 }

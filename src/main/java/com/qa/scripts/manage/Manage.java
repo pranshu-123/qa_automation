@@ -35,9 +35,10 @@ public class Manage {
     }
 
     public String validateDaemonHeader(){
-        logger.info("Daemons Header found:"+managePageObject.daemonsHeader.getText());
         waitExecuter.sleep(2000);
-        return managePageObject.daemonsHeader.getText();
+        String headers = managePageObject.daemonsHeader.getText();
+        logger.info("Daemons Header found:"+headers);
+        return headers;
     }
 
     public boolean validateDaemonsCountInTbl(){

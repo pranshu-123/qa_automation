@@ -25,7 +25,7 @@ public class TC_SF_45 extends BaseClass {
     public void validateReportsArchivedView(String clusterId) {
         test = extent.startTest("TC_SF_45.validateReportsArchivedView: " + clusterId,
                 "Verify the UI should display the selected File report.");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_45.validateReportsArchivedView");
 
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
@@ -44,7 +44,7 @@ public class TC_SF_45 extends BaseClass {
             logger.info("Clicked on Small File Report counts and View.");
             test.log(LogStatus.PASS, "Verified Reports Archived for Small File Report is viewable.");
         } catch (TimeoutException | NoSuchElementException te) {
-            throw new AssertionError("Small File Report not completed successfully.");
+            throw new AssertionError("Verified the File report not been scheduled successfully.");
         }
     }
 }

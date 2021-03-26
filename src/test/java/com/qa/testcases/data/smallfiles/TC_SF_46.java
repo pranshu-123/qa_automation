@@ -25,7 +25,7 @@ public class TC_SF_46 extends BaseClass {
     public void validateReportsArchivedSearchByDate(String clusterId) {
         test = extent.startTest("TC_SF_46.validateReportsArchivedSearchByDate: " + clusterId,
                 "Verify the UI should display all reports executed on that particular date");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_46.validateReportsArchivedSearchByDate");
 
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
@@ -44,7 +44,7 @@ public class TC_SF_46 extends BaseClass {
             logger.info("Clicked on Small File Report counts and search by date.");
             test.log(LogStatus.PASS, "Verified Reports Archived for Small File Report search by date.");
         } catch (TimeoutException | NoSuchElementException te) {
-            throw new AssertionError("Small File Report not completed successfully.");
+            throw new AssertionError("Verified the Archived Search By Date not been scheduled successfully.");
         }
     }
 }

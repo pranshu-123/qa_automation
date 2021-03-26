@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 import java.util.logging.Logger;
+
 @Marker.DataSmallFiles
 @Marker.All
 public class TC_SF_35 extends BaseClass {
@@ -22,7 +23,7 @@ public class TC_SF_35 extends BaseClass {
     public void verifyMaxFileSize(String clusterId) {
         test = extent.startTest("TC_SF_35.verifyMaxFileSize: " + clusterId,
                 "Verify the UI should display the only the rows that match the search pattern for Max File size");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_35.verifyMaxFileSize");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -30,20 +31,23 @@ public class TC_SF_35 extends BaseClass {
         Smallfiles smallfiles = new Smallfiles(driver);
         smallfiles.commonPanelTabValidation(test, logger);
         smallfiles.closeConfirmationMessageNotification();
+        try {
+            // Click on small file search
+            test.log(LogStatus.INFO, "Click on queue search box and search for path");
+            logger.info("Click on queue search box and search for path");
+            smallfilesPageObject.reportSearchBox.click();
+            smallfilesPageObject.reportSearchBox.sendKeys("/");
 
-        // Click on small file search
-        test.log(LogStatus.INFO, "Click on queue search box and search for path");
-        logger.info("Click on queue search box and search for path");
-        smallfilesPageObject.reportSearchBox.click();
-        smallfilesPageObject.reportSearchBox.sendKeys("192.23");
-
-        if (smallfilesPageObject.maxFileSize.size() > 0) {
-            List<WebElement> maxFileSize = smallfilesPageObject.pathName;
-            Assert.assertFalse(maxFileSize.isEmpty(), "There are no schedule report path");
-            test.log(LogStatus.PASS, "File display in the table- " + maxFileSize);
-        } else {
-            Assert.assertTrue(smallfilesPageObject.whenNoDataDisplay.isDisplayed());
-            test.log(LogStatus.FAIL, "There is no data display in the table");
+            if (smallfilesPageObject.maxFileSize.size() > 0) {
+                List<WebElement> maxFileSize = smallfilesPageObject.pathName;
+                Assert.assertFalse(maxFileSize.isEmpty(), "There are no schedule report path");
+                test.log(LogStatus.PASS, "File display in the table- " + maxFileSize);
+            } else {
+                Assert.assertTrue(smallfilesPageObject.whenNoDataDisplay.isDisplayed());
+                test.log(LogStatus.FAIL, "Verified  search pattern for Min File size not completed successfully");
+            }
+        } catch (Exception te) {
+            throw new AssertionError("Verified  search pattern for Min File size not completed successfully." + te.getMessage());
         }
 
     }

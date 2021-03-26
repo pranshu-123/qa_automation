@@ -123,7 +123,7 @@ public class FileReports {
     String expectedMsg = "No data to display.";
     List<WebElement> tableRows = fileReportsPageObject.fileTableRows;
     Assert.assertFalse(tableRows.isEmpty(), "Table contains no data");
-    WebElement rowData = driver.findElement(By.xpath("//table[@class='component-data-tables']/tbody/" +
+    WebElement rowData = driver.findElement(By.xpath("//table[@class='component-data-tables row-hover']/tbody/" +
         "tr[" + 1 + "]/td[" + 1 + "]"));
     String rowDataStr = rowData.getText();
     Assert.assertFalse(rowDataStr.contains(expectedMsg), "Table contains no data. Got '" + expectedMsg + "' message");
@@ -140,7 +140,7 @@ public class FileReports {
     checkTableContainsData();
 
     WebElement rowData = driver.findElement
-        (By.xpath("//table[@class='component-data-tables']/tbody/tr[" + 1 + "]/td[" + 1 + "]"));
+        (By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + 1 + "]/td[" + 1 + "]"));
     Assert.assertTrue(rowData.isDisplayed(), "No data under column: " + tableHeaderList.get(1).getText() +
         " for " + fileType + " file type");
     searchString = rowData.getText();
@@ -150,7 +150,7 @@ public class FileReports {
     waitExecuter.waitUntilPageFullyLoaded();
     for (int row = 1; row <= tableRows.size(); row++) {
       WebElement searchRowData = driver.findElement
-          (By.xpath("//table[@class='component-data-tables']/tbody/tr[" + row + "]/td[" + 1 + "]"));
+          (By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + row + "]/td[" + 1 + "]"));
       Assert.assertTrue(searchRowData.isDisplayed(), "No data under column: File " +
           " for " + fileType + " file type");
       LOGGER.info("Search String is " + searchString + " Search result is " + searchRowData.getText());

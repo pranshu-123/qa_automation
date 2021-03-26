@@ -752,7 +752,8 @@ public class SparkAppsDetailsPage {
     waitExecuter.sleep(3000);
     waitExecuter.waitUntilElementClickable(topPanelObj.jobs);
     waitExecuter.sleep(1000);
-    topPanelObj.jobs.click();
+    MouseActions.clickOnElement(driver,topPanelObj.jobs);
+    //topPanelObj.jobs.click();
     waitExecuter.sleep(3000);
     waitExecuter.waitUntilElementPresent(appPageObj.jobsPageHeader);
     waitExecuter.waitUntilPageFullyLoaded();

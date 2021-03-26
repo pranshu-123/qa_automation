@@ -42,7 +42,7 @@ public class TC_CTR_10  extends BaseClass {
         tuning.createScheduleWithNameAndMultiEmail(scheduleName, multiEmail);
         tuning.clickOnModalScheduleButton();
         test.log(LogStatus.INFO, "Clicked on modal Schedule Button");
-        String scheduleSuccessMsg = "The report has been scheduled successfully.";
+        String scheduleSuccessMsg = "THE REPORT HAS BEEN SCHEDULED SUCCESSFULLY.";
         tuning.verifyScheduleSuccessMsg(scheduleSuccessMsg);
         test.log(LogStatus.PASS, "Verified schedule with email.");
 

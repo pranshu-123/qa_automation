@@ -241,13 +241,36 @@ public class AutoActions {
         return false;
     }
 
+    public boolean validateDefaultOnlyScopeChkBox(){
+        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.onlyUserChkBox);
+        if(newAutoActionPolicyPageObject.onlyUserChkBox.isSelected()){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean validateDefaultAlwaysScopeChkBox(){
+        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.alwaysChkBox);
+        if(newAutoActionPolicyPageObject.alwaysChkBox.isSelected()){
+            return true;
+        }
+        return false;
+    }
+
     public void clickScopeChkBox(String chkBoxName){
         waitExecuter.sleep(2000);
         if(chkBoxName.equals("only")){
             MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.onlyUserChkBox);
         }else if(chkBoxName.equals("except")){
             MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.exceptUserChkBox);
-        }else{
+        }else if(chkBoxName.equals("all")){
+            MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.allUserChkBox);
+        }else if(chkBoxName.equals("daily")){
+            MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.dailyChkBox);
+        }
+        else{
             logger.info("No Check Box found with name: "+ chkBoxName);
         }
     }

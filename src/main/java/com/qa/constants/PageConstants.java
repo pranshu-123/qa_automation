@@ -37,16 +37,16 @@ public class PageConstants {
 
     /*Workflow name for each application*/
     public static class WorkflowName {
-        public static String OOZIE_MR_WF = "oozie_map-reduce_wf";
+        public static String OOZIE_MR_WF = "oozie_map_reduce_wf";
         public static String OOZIE_HIVE_WF = "oozie_hive_wf";
-        public static String OOZIE_HIVE2_WF = "oozie_hive2-wf";
+        public static String OOZIE_HIVE2_WF = "oozie_hive2_wf";
         public static String OOZIE_SPARK_WF = "oozie_spark_wf";
         public static String OOZIE_TEZ_WF = "oozie_tez";
         public static String HIVE_TAGGED = "Tagged_HiveWorkflow";
         public static String IMPALA_TAGGED = "Tagged_ImpalaWorkflow";
         public static String SPARK_TAGGED = "Tagged_SparkWorkflow";
         public static String OOZIE_HIVE_SPARK = "oozie_hive_spark";
-        public static String TAGGED_HIVE_TEZ = "tagged_hive-tez";
+        public static String TAGGED_HIVE_TEZ = "tagged_hive_tez";
 
     }
 

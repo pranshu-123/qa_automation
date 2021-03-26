@@ -6,7 +6,6 @@ import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
-
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -39,7 +38,7 @@ public class AllApps {
         action = new Actions(driver);
         subTopPanelModulePageObject = new SubTopPanelModulePageObject(driver);
         datePicker = new DatePicker(driver);
-		userAction = new UserActions(driver);
+        userAction = new UserActions(driver);
         this.driver = driver;
     }
 
@@ -60,12 +59,15 @@ public class AllApps {
     public void selectCluster(String clusterId) {
         LOGGER.info("Select Cluster: " + clusterId);
         removeClusterIfPresent();
-        applicationsPageObject.clusterSearchBox.click();
-        waitExecuter.sleep(1000);
+        userAction.performActionWithPolling(applicationsPageObject.clusterSearchBox, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.globalSearchBox);
         LOGGER.info("Search for cluster: " + clusterId);
         applicationsPageObject.clusterSearchBox.sendKeys(clusterId);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.select1stCluster);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.globalSearchBox);
         waitExecuter.sleep(1000);
-        applicationsPageObject.select1stCluster.click();
+        userAction.performActionWithPolling(applicationsPageObject.select1stCluster, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.globalSearchBox);
         waitExecuter.sleep(4000);
 
     }
@@ -75,8 +77,10 @@ public class AllApps {
         if (applicationsPageObject.removeCluster != null) {
             applicationsPageObject.clusterSearchBox.sendKeys(Keys.BACK_SPACE);
             waitExecuter.sleep(1000);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.clusterSearchBox);
             applicationsPageObject.clusterSearchBox.clear();
             waitExecuter.sleep(1000);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.clusterSearchBox);
         } else
             LOGGER.info("No cluster to remove");
     }
@@ -99,8 +103,8 @@ public class AllApps {
     public void deselectAllAppTypes() {
         List<WebElement> appTypes = applicationsPageObject.selectOneApplicationType;
         for (int i = 0; i < appTypes.size(); i++) {
-        	userAction.performActionWithPolling(appTypes.get(i), UserAction.CLICK);
-        	waitExecuter.waitUntilElementClickable(appTypes.get(i));
+            userAction.performActionWithPolling(appTypes.get(i), UserAction.CLICK);
+            waitExecuter.waitUntilElementClickable(appTypes.get(i));
         }
         // Assert if the application type is selected successfully.
         try {
@@ -114,15 +118,15 @@ public class AllApps {
     public void deselectAllStatusTypes() {
         List<WebElement> statusTypes = applicationsPageObject.selectSingleStatusType;
         for (int i = 0; i < statusTypes.size(); i++) {
-        	userAction.performActionWithPolling(statusTypes.get(i), UserAction.CLICK);
-        	waitExecuter.waitUntilElementClickable(statusTypes.get(i));
+            userAction.performActionWithPolling(statusTypes.get(i), UserAction.CLICK);
+            waitExecuter.waitUntilElementClickable(statusTypes.get(i));
         }
         try {
             waitExecuter.waitUntilElementPresent(applicationsPageObject.whenNoApplicationPresent);
         } catch (NoSuchElementException te) {
             throw new AssertionError("After de-selecting all status 'No Data Available' is not displayed.");
         }
-        
+
     }
 
     /* Slide the slider */
@@ -176,5 +180,6 @@ public class AllApps {
     public void reset() {
         LOGGER.info("Reset username filter");
         userAction.performActionWithPolling(applicationsPageObject.resetButton, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
     }
 }

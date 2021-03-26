@@ -36,6 +36,12 @@ public class CommonPageObject {
   @FindBy(xpath = "//div[contains(@class,'close')]")
   public List<WebElement> closeAppModalButton;
 
+  @FindBy(id = "apps-global-search-filter")
+  public WebElement globalSearch;
+
+  @FindBy(xpath = "//span[contains(@class,'icon-add')]")
+  public WebElement addIcon;
+
   public CommonPageObject(WebDriver driver) {
     PageFactory.initElements(driver,this);
   }

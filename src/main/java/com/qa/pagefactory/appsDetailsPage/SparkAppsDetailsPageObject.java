@@ -41,7 +41,7 @@ public class SparkAppsDetailsPageObject {
   public WebElement ifAttemptPresent;
 
   @FindBy(xpath = "//div[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0" +
-      " highcharts-tracker']/span")
+          " highcharts-tracker']/span")
   public List<WebElement> numAttempts;
 
   @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[1]/div/div[1]/div[2]/h4/span")
@@ -124,7 +124,7 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "//*[@id='app-query']/code/span")
   public List<WebElement> programTabData;
 
-  @FindBy(xpath = "//*[@class='component-data-tables']//td/p")
+  @FindBy(xpath = "//*[contains(@class,'component-data-tables')]//td/p")
   public WebElement programDataNotFound;
 
   @FindBy(xpath = "//*[@class='link-item']")
@@ -144,7 +144,7 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/div[2]/span")
   public List<WebElement> configKeywords;
 
-  @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/span/div/a/span")
+  @FindBy(id = "reset")
   public WebElement resetButton;
 
   @FindBy(xpath = " //*[@id='appConfiguration']//tbody/tr/td/p")
@@ -186,15 +186,15 @@ public class SparkAppsDetailsPageObject {
   public WebElement pieChart;
 
   @FindBy(xpath = "//*[@class='highcharts-series-group']//*[name()='path' and  contains(@class," +
-        "'highcharts-drilldown-point') and @fill='#DDDF00' or @fill='#dddf00' or @fill='rgb(221,223,0)']")
+          "'highcharts-drilldown-point') and @fill='#DDDF00' or @fill='#dddf00' or @fill='rgb(221,223,0)']")
   public WebElement processingStage;
 
   @FindBy(xpath = "//*[@class='highcharts-series-group']//*[name()='path' and  contains(@class," +
-      "'highcharts-drilldown-point') and @fill='#7cb5ec' or @fill='#7CB5EC' or @fill='rgb(124,181,236)']")
+          "'highcharts-drilldown-point') and @fill='#7cb5ec' or @fill='#7CB5EC' or @fill='rgb(124,181,236)']")
   public WebElement inputStage;
 
   @FindBy(xpath = "//*[@class='highcharts-series-group']//*[name()='path' and  contains(@class," +
-      "'highcharts-drilldown-point') and @fill='rbg(92,184,92)']")
+          "'highcharts-drilldown-point') and @fill='rbg(92,184,92)']")
   public WebElement outputStage;
 
   @FindBy(xpath ="//*[@class='highcharts-button-box']")
@@ -284,6 +284,12 @@ public class SparkAppsDetailsPageObject {
 
   @FindBy(xpath ="//div[@class='modal-body']//p/br")
   public List<WebElement> logScrollable;
+
+  @FindBy(xpath = "(//div[contains(@class,'filter-section')]//h3[contains(@class,'expandable-header')])[2]")
+  public WebElement statusHeader;
+
+
+
 
   /**
    * @param driver The driver that will be used to look up the elements

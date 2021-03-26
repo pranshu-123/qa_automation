@@ -1,6 +1,5 @@
 package com.qa.pagefactory.clusters;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -203,11 +202,50 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "//div[@ntableid='finishedImpalaJobsTable']")
     public WebElement impalaChargebackTableNoData;
 
-    @FindBy(xpath = "(//div[@id=\"searchBox\"])[1]/child::div")
+    @FindBy(xpath = "(//div[@id='searchBox'])[1]/child::div")
     public List<WebElement> pieChartGroupBySearchBoxs;
 
     @FindBy(xpath = "//table[@id='chargeback-table']//thead/tr/th")
     public List<WebElement> groupByResultsTableHeadings;
+    
+    @FindBy(xpath = "//span[contains(@class,'select2-results')]//li[contains(text(),'You can only select 2 items')]")
+    public WebElement selectOnly2Message;
+    
+    @FindBy(xpath = "//span[@class='select2-selection__choice__remove']")
+    public List<WebElement> remove1stGroupBy;
+    
+    @FindBy(xpath = "((//div[contains(@class,'highcharts-container ')]//*[local-name() = 'svg'])[1]/*[local-name() = 'g']/*[local-name() = 'text'])[1]/*[local-name() = 'tspan']")
+    public WebElement jobsNoData;
+    
+    @FindBy(xpath = "((//div[contains(@class,'highcharts-container ')]//*[local-name() = 'svg'])[2]/*[local-name() = 'g']/*[local-name() = 'text'])[1]/*[local-name() = 'tspan']")
+    public WebElement cpuNoData;
+    
+    @FindBy(xpath = "((//div[contains(@class,'highcharts-container ')]//*[local-name() = 'svg'])[1]/*[local-name() = 'g']/*[local-name() = 'text'])[1]/*[local-name() = 'tspan']")
+    public WebElement memoryNoData;
+    
+    @FindBy(xpath = "(((//div[contains(@class,'highcharts-container ')]//*[local-name() = 'svg'])[1]/*[local-name() = 'g']/*[local-name() = 'g'])[1]/*[local-name() = 'path'])[1]")
+    public WebElement jobPie;
+    
+    @FindBy(xpath = "(((//div[contains(@class,'highcharts-container ')]//*[local-name() = 'svg'])[2]/*[local-name() = 'g']/*[local-name() = 'g'])[1]/*[local-name() = 'path'])[1]")
+    public WebElement cpuHourPie;
+    
+    @FindBy(xpath = "(((//div[contains(@class,'highcharts-container ')]//*[local-name() = 'svg'])[3]/*[local-name() = 'g']/*[local-name() = 'g'])[1]/*[local-name() = 'path'])[1]")
+    public WebElement memoryHourPie;
+    
+    @FindBy(xpath = "(//div[contains(@class,'row')])[5]//h2")
+    public WebElement showingResultHeader;
+    
+    @FindBy(xpath = "(//div[@id='searchBox'])[1]/child::div")
+    public List<WebElement> pieChartGroupByOptions;
+    
+    @FindBy(xpath= "//table[@id='chargeback-table']/tbody/tr[1]/td[1]//span")
+    public List<WebElement> firstRowOfTable;
+    
+    @FindBy(xpath = "//table[contains(@id,'finishedImpalaJobsTable')]//a[contains(@class,'icon-sort-sorted-up')]")
+    public WebElement userSortUp;
+    
+    @FindBy(xpath = "//table[contains(@id,'finishedImpalaJobsTable')]//a[contains(@class,'icon-sort-sorted-down')]")
+    public WebElement userSortDown;
 
     public ChargebackImpalaPageObject(WebDriver driver) {
         PageFactory.initElements(driver, this);

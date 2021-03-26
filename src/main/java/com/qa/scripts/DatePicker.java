@@ -4,16 +4,15 @@ import com.qa.enums.UserAction;
 import com.qa.pagefactory.DatePickerPageObject;
 import com.qa.utils.DateUtils;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import com.qa.utils.actions.UserActions;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 /**
  * @author Ankur Jaiswal
@@ -23,8 +22,9 @@ import org.openqa.selenium.WebElement;
 public class DatePicker {
     public DatePickerPageObject datePickerPageObject;
     public WaitExecuter waitExecuter;
-    private WebDriver driver;
-    private UserActions userActions;
+    private final WebDriver driver;
+    private final UserActions userActions;
+
     /**
      * @param driver - WebDriver instance
      *               Constructor method initialize driver, datepicker object
@@ -40,7 +40,9 @@ public class DatePicker {
      * This method used to click on date picker to open datepicker dropdown
      */
     public void clickOnDatePicker() {
+        waitExecuter.waitUntilElementClickable(datePickerPageObject.dateRange);
         userActions.performActionWithPolling(datePickerPageObject.dateRange, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(datePickerPageObject.dateRange);
     }
 
     /**
@@ -135,24 +137,27 @@ public class DatePicker {
      * Method to select 'Last 30 Days' in data picker
      */
     public void selectLast30Days() {
-        waitExecuter.waitUntilElementPresent(datePickerPageObject.last30Days);
-        datePickerPageObject.last30Days.click();
+        waitExecuter.waitUntilElementClickable(datePickerPageObject.last30Days);
+        userActions.performActionWithPolling(datePickerPageObject.last30Days, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(datePickerPageObject.dateRange);
     }
 
     /**
      * Method to select 'Last 60 Days' in data picker
      */
     public void selectLast60Days() {
-        waitExecuter.waitUntilElementPresent(datePickerPageObject.last60Days);
-        datePickerPageObject.last60Days.click();
+        waitExecuter.waitUntilElementClickable(datePickerPageObject.last60Days);
+        userActions.performActionWithPolling(datePickerPageObject.last60Days, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(datePickerPageObject.dateRange);
     }
 
     /**
      * Method to select 'Last 90 Days' in data picker
      */
     public void selectLast90Days() {
-        waitExecuter.waitUntilElementPresent(datePickerPageObject.last90Days);
-        datePickerPageObject.last90Days.click();
+        waitExecuter.waitUntilElementClickable(datePickerPageObject.last90Days);
+        userActions.performActionWithPolling(datePickerPageObject.last90Days, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(datePickerPageObject.dateRange);
     }
 
     /**
@@ -281,10 +286,7 @@ public class DatePicker {
 
         Boolean calendarDate = datePickerPageObject.calendarDate.isDisplayed();
 
-        if (calendarDate)
-            return true;
-        else
-            return false;
+        return calendarDate;
     }
 
     /**

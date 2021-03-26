@@ -27,7 +27,7 @@ public class HomePageObject {
   @FindBy(css = "/html/body/div[1]/div/div/div/div[1]/div[1]/div/span/span[1]/span/span[1]")
   public WebElement clusterSpanSelector;
 
-  @FindBy(xpath="//*[@id='app']/div/div/div[1]/div[1]/div/select/option")
+  @FindBy(xpath="//ul[contains(concat(' ', @class, ' '), 'select2-results__options')]/li")
   public List<WebElement> clusterList;
 
   @FindBy(xpath = "//a[@href='#/clusters/overview']")

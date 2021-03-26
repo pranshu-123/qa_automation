@@ -24,6 +24,6 @@ public class TC_FR_35 extends BaseClass {
     filereports.navidateTofileReportsTab();
     MouseActions.clickOnElement(driver, fileReportsPageObject.largeFile);
     filereports.verifyFilePathSearchOption("LARGE", clusterId);
-    test.log(LogStatus.PASS, "Successfully validate the sort based on number of 'Files' column for Medium file reports.");
+    test.log(LogStatus.PASS, "Successfully validate the file path 'Large' file report.");
   }
 }

@@ -14,7 +14,7 @@ public class TC_FR_07 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider")
   public void validateMediumFileForSelectedCluster(String clusterId) {
-    test = extent.startTest("validateMediumFileForSelectedCluster " + clusterId,
+    test = extent.startTest("TC_FR_07.validateMediumFileForSelectedCluster " + clusterId,
         "Validate the UI displays Medium file reports for a selected cluster");
     test.assignCategory(" Data - FileReports ");
 
@@ -24,6 +24,6 @@ public class TC_FR_07 extends BaseClass {
     filereports.navidateTofileReportsTab();
     MouseActions.clickOnElement(driver, fileReportsPageObject.mediumFile);
     filereports.verifyFilesForSelectedCluster(clusterId, "MEDIUM");
-    test.log(LogStatus.PASS, "Successfully validate the UI displays Medium file reports for a selected cluster.");
+    test.log(LogStatus.PASS, "Successfully validate Medium file reports for a selected cluster.");
   }
 }

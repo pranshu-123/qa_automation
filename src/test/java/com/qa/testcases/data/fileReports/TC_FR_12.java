@@ -14,7 +14,7 @@ public class TC_FR_12 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider")
   public void validateFileSortForLargeFiles(String clusterId) {
-    test = extent.startTest("validateFileSortForLargeFiles " + clusterId,
+    test = extent.startTest("TC_FR_12.validateFileSortForLargeFiles " + clusterId,
         "Validate the user is able sort based on number of 'Files' column for Large file reports");
     test.assignCategory(" Data - FileReports ");
 
@@ -24,6 +24,6 @@ public class TC_FR_12 extends BaseClass {
     filereports.navidateTofileReportsTab();
     MouseActions.clickOnElement(driver, fileReportsPageObject.largeFile);
     filereports.verifyFileSortOption("LARGE", clusterId);
-    test.log(LogStatus.PASS, "Successfully validate the sort based on number of 'Files' column for Large file reports.");
+    test.log(LogStatus.PASS, "Successfully validate the 'Files' column for Large file reports.");
   }
 }

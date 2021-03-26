@@ -20,7 +20,7 @@ public class TC_FR_06 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider")
   public void validateClusterListForEmptyFiles(String clusterId) {
-    test = extent.startTest("validateClusterListForTinyFiles " + clusterId,
+    test = extent.startTest("TC_FR_06.validateClusterListForTinyFiles " + clusterId,
         "Validate the user is able to list all the clusters listed for the cluster environment when" +
             " 'Empty' Files is selected");
     test.assignCategory(" Data - FileReports ");

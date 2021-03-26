@@ -43,10 +43,10 @@ public class TC_SF_31 extends BaseClass {
                 test.log(LogStatus.PASS, "File display in the table- " + selectedFileName);
             } else {
                 Assert.assertTrue(smallfilesPageObject.whenNoDataDisplay.isDisplayed());
-                test.log(LogStatus.FAIL, "There is no data display in the table");
+                test.log(LogStatus.FAIL, "Verified search a particular number of files not completed successfully");
             }
         } catch (Exception te) {
-            throw new AssertionError("here is no data display in the table." + te.getMessage());
+            throw new AssertionError("Verified search a particular number of files not completed successfully." + te.getMessage());
         }
 
 

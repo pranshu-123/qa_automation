@@ -14,12 +14,15 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.logging.Logger;
+
 /**
  * @author Ankur Jaiswal
  */
 @Marker.ImpalaResources
 @Marker.All
 public class IM_RES_09 extends BaseClass {
+  private static final Logger LOGGER = Logger.getLogger(IM_RES_09.class.getName());
 
   @Test(dataProvider = "clusterid-data-provider")
   public void verifyDataDisplayedAsFilteredUser(String clusterId) {
@@ -35,9 +38,14 @@ public class IM_RES_09 extends BaseClass {
     JavaScriptExecuter.clickOnElement(driver, topPanelPageObject.impalaTab);
     executer.waitUntilElementPresent(impalaPageObject.getImpalaPageHeader);
 
+    //Select the cluster
+    test.log(LogStatus.INFO, "This testcase is running for cluster: "+clusterId);
+    LOGGER.info("Selecting cluster from the list " +clusterId);
     HomePage homePage = new HomePage(driver);
+    LOGGER.info("Selecting the cluster");
     homePage.selectMultiClusterId(clusterId);
     executer.waitUntilPageFullyLoaded();
+
 
     DatePicker datePicker = new DatePicker(driver);
     datePicker.clickOnDatePicker();

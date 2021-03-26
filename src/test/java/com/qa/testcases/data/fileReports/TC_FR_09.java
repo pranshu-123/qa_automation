@@ -14,7 +14,7 @@ public class TC_FR_09 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider")
   public void validateEmptyFileForSelectedCluster(String clusterId) {
-    test = extent.startTest("validateEmptyFileForSelectedCluster " + clusterId,
+    test = extent.startTest("TC_FR_09.validateEmptyFileForSelectedCluster " + clusterId,
         "Validate the UI displays Empty file reports for a selected cluster");
     test.assignCategory(" Data - FileReports ");
 
@@ -24,6 +24,6 @@ public class TC_FR_09 extends BaseClass {
     filereports.navidateTofileReportsTab();
     MouseActions.clickOnElement(driver, fileReportsPageObject.emptyFile);
     filereports.verifyFilesForSelectedCluster(clusterId, "EMPTY");
-    test.log(LogStatus.PASS, "Successfully validate the UI displays Empty file reports for a selected cluster.");
+    test.log(LogStatus.PASS, "Successfully validate the Empty file reports for a selected cluster.");
   }
 }

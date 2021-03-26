@@ -18,7 +18,7 @@ public class TC_FR_01 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider")
   public void validateDefaultLargeFileSelected(String clusterId) {
-    test = extent.startTest("validateDefaultLargeFileSelected " + clusterId,
+    test = extent.startTest("TC_FR_01.validateDefaultLargeFileSelected " + clusterId,
         "Validate the file reports page displays 'Large' file reports by default");
     test.assignCategory(" Data - FileReports ");
 

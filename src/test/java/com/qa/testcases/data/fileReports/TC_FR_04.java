@@ -20,7 +20,7 @@ public class TC_FR_04 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider")
   public void validateClusterListForTinyFiles(String clusterId) {
-    test = extent.startTest("validateClusterListForTinyFiles " + clusterId,
+    test = extent.startTest("TC_FR_04.validateClusterListForTinyFiles " + clusterId,
         "Validate the user is able to list all the clusters listed for the cluster environment when" +
             " 'Tiny' Files is selcted");
     test.assignCategory(" Data - FileReports ");
@@ -46,6 +46,6 @@ public class TC_FR_04 extends BaseClass {
     test.log(LogStatus.INFO, "Clicked on FileReports Tab");
     MouseActions.clickOnElement(driver, fileReportsPageObject.tinyFile);
     filereports.verifyClusterList(expectedClusterList);
-    test.log(LogStatus.PASS, "Successfully validate the Tiny Files is selcted.");
+    test.log(LogStatus.PASS, "Successfully validate the Tiny Files is selected.");
   }
 }

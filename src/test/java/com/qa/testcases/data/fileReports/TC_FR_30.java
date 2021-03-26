@@ -14,7 +14,7 @@ public class TC_FR_30 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider")
   public void validateFileSortForMediumFiles(String clusterId) {
-    test = extent.startTest("validateFileSortForMediumFiles " + clusterId,
+    test = extent.startTest("TC_FR_30.validateFileSortForMediumFiles " + clusterId,
         "Validate the user is able sort based on number of 'Files' column for Medium file reports");
     test.assignCategory(" Data - FileReports ");
 
@@ -24,6 +24,6 @@ public class TC_FR_30 extends BaseClass {
     filereports.navidateTofileReportsTab();
     MouseActions.clickOnElement(driver, fileReportsPageObject.mediumFile);
     filereports.verifyFileSortOption("MEDIUM", clusterId);
-    test.log(LogStatus.PASS, "Successfully validate the sort based on number of 'Files' column for Medium file reports.");
+    test.log(LogStatus.PASS, "Successfully validate the Medium file reports.");
   }
 }

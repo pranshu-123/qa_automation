@@ -14,7 +14,7 @@ public class TC_FR_10 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider")
   public void validateLargeFileForSelectedCluster(String clusterId) {
-    test = extent.startTest("validateLargeFileForSelectedCluster " + clusterId,
+    test = extent.startTest("TC_FR_10.validateLargeFileForSelectedCluster " + clusterId,
         "Validate the UI displays Large file reports for a selected cluster");
     test.assignCategory(" Data - FileReports ");
 
@@ -24,6 +24,6 @@ public class TC_FR_10 extends BaseClass {
     filereports.navidateTofileReportsTab();
     MouseActions.clickOnElement(driver, fileReportsPageObject.largeFile);
     filereports.verifyFilesForSelectedCluster(clusterId, "LARGE");
-    test.log(LogStatus.PASS, "Successfully validate the UI displays Empty file reports for a selected cluster.");
+    test.log(LogStatus.PASS, "Successfully validate the Empty file reports for a selected cluster.");
   }
 }

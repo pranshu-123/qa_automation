@@ -14,7 +14,7 @@ public class TC_FR_35 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider")
   public void validateLargeFileSearchOption(String clusterId) {
-    test = extent.startTest("validateLargeFileSearchOption " + clusterId,
+    test = extent.startTest("TC_FR_35.validateLargeFileSearchOption " + clusterId,
         "Validate user is able search a particular file path 'Large' file report");
     test.assignCategory(" Data - FileReports ");
 

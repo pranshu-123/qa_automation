@@ -45,7 +45,7 @@ public class TC_SF_28 extends BaseClass {
             test.log(LogStatus.PASS, "Verified sorting on Min File Size.");
 
         } catch (Exception te) {
-            throw new AssertionError("Verified sorting on Avg File Size not completed successfully." + te.getMessage());
+            throw new AssertionError("Verified Min File Size column for Small File Reports not completed successfully." + te.getMessage());
         }
 
     }

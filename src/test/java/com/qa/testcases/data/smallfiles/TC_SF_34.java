@@ -42,11 +42,12 @@ public class TC_SF_34 extends BaseClass {
                 test.log(LogStatus.PASS, "File display in the table- " + minFileSizeName);
             } else {
                 Assert.assertTrue(smallfilesPageObject.whenNoDataDisplay.isDisplayed());
-                test.log(LogStatus.FAIL, "There is no data display in the table");
+                test.log(LogStatus.FAIL, "Verified  search pattern for Min File size not completed successfully");
             }
         } catch (Exception te) {
-            throw new AssertionError("here is no data display in the table." + te.getMessage());
+            throw new AssertionError("Verified  search pattern for Min File size not completed successfully." + te.getMessage());
         }
+
 
     }
 }

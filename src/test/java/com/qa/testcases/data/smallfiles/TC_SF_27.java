@@ -44,7 +44,7 @@ public class TC_SF_27 extends BaseClass {
             Assert.assertTrue(smallfilesPageObject.sortDown.isDisplayed(), "Descending order is not working");
             test.log(LogStatus.PASS, "Verified sorting on Total File Size.");
         } catch (Exception te) {
-            throw new AssertionError("Verified sorting on Avg File Size not completed successfully." + te.getMessage());
+            throw new AssertionError("Verified \"sorting on Total File Size\" not completed successfully." + te.getMessage());
         }
     }
 }

@@ -45,7 +45,7 @@ public class TC_SF_29 extends BaseClass {
             Assert.assertTrue(smallfilesPageObject.sortDown.isDisplayed(), "Sort down is not working");
             test.log(LogStatus.PASS, "Verified sorting on Max File Size.");
         } catch (Exception te) {
-            throw new AssertionError("Verified sorting on Avg File Size not completed successfully." + te.getMessage());
+            throw new AssertionError("Verified sorting on Max File Size column not completed successfully." + te.getMessage());
         }
 
     }

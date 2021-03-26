@@ -42,10 +42,10 @@ public class TC_SF_32 extends BaseClass {
                 test.log(LogStatus.PASS, "File display in the table- " + avgFileSize);
             } else {
                 Assert.assertTrue(smallfilesPageObject.whenNoDataDisplay.isDisplayed());
-                test.log(LogStatus.FAIL, "There is no data display in the table");
+                test.log(LogStatus.FAIL, "Verified rows that match the search pattern for Avg File size not completed successfully");
             }
         } catch (Exception te) {
-            throw new AssertionError("here is no data display in the table." + te.getMessage());
+            throw new AssertionError("Verified rows that match the search pattern for Avg File size not completed successfully." + te.getMessage());
         }
 
     }

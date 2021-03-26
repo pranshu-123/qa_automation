@@ -14,7 +14,7 @@ public class TC_FR_08 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider")
   public void validateTinyFileForSelectedCluster(String clusterId) {
-    test = extent.startTest("validateTinyFileForSelectedCluster " + clusterId,
+    test = extent.startTest("TC_FR_08.validateTinyFileForSelectedCluster " + clusterId,
         "Validate the UI displays Tiny file reports for a selected cluster");
     test.assignCategory(" Data - FileReports ");
 

@@ -20,7 +20,7 @@ public class TC_FR_05 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider")
   public void validateClusterListForEmptyFiles(String clusterId) {
-    test = extent.startTest("validateClusterListForTinyFiles " + clusterId,
+    test = extent.startTest("TC_FR_05.validateClusterListForTinyFiles " + clusterId,
         "Validate the user is able to list all the clusters listed for the cluster environment when" +
             " 'Empty' Files is selected");
     test.assignCategory(" Data - FileReports ");
@@ -46,6 +46,6 @@ public class TC_FR_05 extends BaseClass {
     test.log(LogStatus.INFO, "Clicked on FileReports Tab");
     MouseActions.clickOnElement(driver, fileReportsPageObject.emptyFile);
     filereports.verifyClusterList(expectedClusterList);
-    test.log(LogStatus.PASS, "Successfully validate the sort based on number of 'Files' column for Medium file reports.");
+    test.log(LogStatus.PASS, "Validate 'Empty' Files is completed successfully.");
   }
 }

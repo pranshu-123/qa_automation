@@ -4,6 +4,7 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.scripts.appdetails.TezAppsDetailsPage;
 import com.qa.utils.Log;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,8 +22,9 @@ public class TEZ_133 extends BaseClass {
         test.assignCategory(" Apps Details-Tez");
         Log.startTestCase("TEZ_133_verifyDatabase");
         TezAppsDetailsPage tezDetailsPage = new TezAppsDetailsPage(driver);
-        //TBD Data base tab not poulated in apps detail page
-
-        test.log(LogStatus.SKIP, "Verified the Database tab not poulated in apps detail page");
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        tezDetailsPage.commonTabValidation(test, clusterId, "Database", logger,false);
+        waitExecuter.sleep(2000);
+        test.log(LogStatus.SKIP, "Verified the Database tab successfully");
     }
 }

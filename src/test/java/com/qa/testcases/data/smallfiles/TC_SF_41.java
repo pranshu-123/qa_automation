@@ -22,10 +22,10 @@ public class TC_SF_41 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void verifyScheduleSpecialCharecters(String clusterId) {
-        test = extent.startTest("TC_SF_41.verifyScheduleSpecialCharecters: " + clusterId,
+        test = extent.startTest("TC_SF_41.verifyScheduleSpecialCharacters: " + clusterId,
                 "Verify user clicks on Cancel button the Mini Window to schedule report should close and the UI should display the previously generated report.");
         test.assignCategory("Data- Small Files");
-        Log.startTestCase("TC_SF_41.verifyScheduleSpecialCharecters");
+        Log.startTestCase("TC_SF_41.verifyScheduleSpecialCharacters");
 
         SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
         Smallfiles smallfiles = new Smallfiles(driver);
@@ -53,7 +53,7 @@ public class TC_SF_41 extends BaseClass {
             //Close apps details page
             MouseActions.clickOnElement(driver, smallfilesPageObject.homeTab);
         } catch (TimeoutException | NoSuchElementException | VerifyError te) {
-            throw new AssertionError("Small File Report not completed successfully.");
+            throw new AssertionError("Verified Special Characters not completed successfully.");
 
         }
     }

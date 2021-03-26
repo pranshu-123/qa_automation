@@ -44,10 +44,10 @@ public class TC_SF_30 extends BaseClass {
                 test.log(LogStatus.PASS, "Path display in the table- " + selectedPathName);
             } else {
                 Assert.assertTrue(smallfilesPageObject.whenNoDataDisplay.isDisplayed());
-                test.log(LogStatus.FAIL, "There is no data display in the table");
+                test.log(LogStatus.FAIL, "Verified queue search box and search for path not completed successfully");
             }
         } catch (Exception te) {
-            throw new AssertionError("Verified sorting on Avg File Size not completed successfully." + te.getMessage());
+            throw new AssertionError("Verified queue search box and search for path not completed successfully." + te.getMessage());
         }
 
 

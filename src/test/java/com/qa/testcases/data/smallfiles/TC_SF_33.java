@@ -44,10 +44,10 @@ public class TC_SF_33 extends BaseClass {
                 test.log(LogStatus.PASS, "File display in the table- " + totalFileSize);
             } else {
                 Assert.assertTrue(smallfilesPageObject.whenNoDataDisplay.isDisplayed());
-                test.log(LogStatus.FAIL, "There is no data display in the table");
+                test.log(LogStatus.FAIL, "Verified search pattern for Total File size not completed successfully");
             }
         } catch (Exception te) {
-            throw new AssertionError("here is no data display in the table." + te.getMessage());
+            throw new AssertionError("Verified search pattern for Total File size not completed successfully." + te.getMessage());
         }
 
     }

@@ -48,7 +48,7 @@ public class TC_SF_25 extends BaseClass {
             test.log(LogStatus.PASS, "Verified sorting on files.");
         }
         catch (Exception te) {
-                throw new AssertionError("Verified sorting on files not completed successfully."+te.getMessage());
+                throw new AssertionError("Verified sort based on number of Files column not completed successfully."+te.getMessage());
             }
     }
 }

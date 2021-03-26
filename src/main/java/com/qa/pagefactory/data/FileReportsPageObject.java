@@ -41,7 +41,7 @@ public class FileReportsPageObject {
   @FindBy(xpath = "//div[@class='col-md-2']/input")
   public WebElement searchField;
 
-  @FindBy(xpath = "//table[@class='component-data-tables']/thead/tr/th")
+  @FindBy(xpath = "//table[@class='component-data-tables row-hover']/thead/tr/th")
   public List<WebElement> tableHeader;
 
   @FindBy(xpath = "//table[@class='component-data-tables row-hover']/thead/tr/th[2]")

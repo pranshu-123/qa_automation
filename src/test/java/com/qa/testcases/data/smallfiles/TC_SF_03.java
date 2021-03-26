@@ -25,7 +25,7 @@ public class TC_SF_03 extends BaseClass {
     public void validateAbsoluteandAveragefilesize(String clusterId) {
         test = extent.startTest("TC_SF_03.validateAbsoluteandAveragefilesize: " + clusterId, "Verify User is able " +
                 "Verify UI should allow the user to switch between Absolute and Avg file size");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_03.validateAbsoluteandAveragefilesize");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -72,7 +72,11 @@ public class TC_SF_03 extends BaseClass {
             test.log(LogStatus.PASS, "Verified smallfiles report is loaded properly.");
             LOGGER.info("Verified smallfiles report is loaded properly");
         } catch (TimeoutException te) {
-            throw new AssertionError("smallfiles Report not completed successfully.");
+            waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
+                    "Small file Report completed successfully.");
+        }
+        catch (VerifyError te) {
+            throw new AssertionError("smallfiles Report not completed successfully."+te);
         }
     }
 }

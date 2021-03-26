@@ -25,7 +25,7 @@ public class TC_SF_26 extends BaseClass {
     public void VerifySortByAvgFileSize(String clusterId) {
         test = extent.startTest("TC_SF_26.VerifySortByAvgFileSize: " + clusterId,
                 "Verify The user is able sort based on Avg File Size column for Small File Reports");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_26.VerifySortByAvgFileSize");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -33,7 +33,7 @@ public class TC_SF_26 extends BaseClass {
         Smallfiles smallfiles = new Smallfiles(driver);
         smallfiles.commonPanelTabValidation(test, logger);
         smallfiles.closeConfirmationMessageNotification();
-
+       try{
         // Sort Up by Avg File Size
         test.log(LogStatus.INFO, "Ascending order by Avg File Size");
         logger.info("Ascending order by Avg File Size");
@@ -47,6 +47,10 @@ public class TC_SF_26 extends BaseClass {
         waitExecuter.sleep(2000);
         Assert.assertTrue(smallfilesPageObject.sortDown.isDisplayed(), "Descending order is not working");
         test.log(LogStatus.PASS, "Verified sorting on Avg File Size.");
+    }
+          catch (Exception te) {
+            throw new AssertionError("Verified sorting on Avg File Size not completed successfully."+te.getMessage());
+        }
 
     }
 }

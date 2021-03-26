@@ -25,7 +25,7 @@ public class TC_SF_39 extends BaseClass {
     public void verifySchedulingReport(String clusterId) {
         test = extent.startTest("TC_SF_39.verifySchedulingReport: " + clusterId,
                 "Verify Unravel should send email notifications to all the email address saved in the scheduled report Once in a month.");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_39.verifySchedulingReport");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -64,7 +64,7 @@ public class TC_SF_39 extends BaseClass {
             String scheduleSuccessMsg = "The report has been scheduled successfully.";
             smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
         } catch (TimeoutException | NoSuchElementException | VerifyError te) {
-            throw new AssertionError("Small File Report not completed successfully.");
+            throw new AssertionError("Verified the scheduled report not been scheduled successfully.");
         }
     }
 }

@@ -22,7 +22,7 @@ public class TC_SF_13 extends BaseClass {
     public void verifyNumberOfDirectories(String clusterId) {
         test = extent.startTest("TC_SF_13.verifyNumberOfDirectories: " + clusterId, "Verify User is able " +
                 "Verify User check with Average File Size between  512-1024 bytes the UI should list only 10 directories.");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_13.verifyNumberOfDirectories");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -54,10 +54,15 @@ public class TC_SF_13 extends BaseClass {
         try {
             waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
                     "Small file Report completed successfully.");
+            waitExecuter.sleep(3000);
             test.log(LogStatus.PASS, "Verified smallfiles report is loaded properly.");
             logger.info("Verified smallfiles report is loaded properly");
         } catch (TimeoutException te) {
-            throw new AssertionError("smallfiles Report not completed successfully.");
+            waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
+                    "Small file Report completed successfully.");
+        }
+        catch (VerifyError te) {
+            throw new AssertionError("smallfiles Report not completed successfully."+te);
         }
     }
 }

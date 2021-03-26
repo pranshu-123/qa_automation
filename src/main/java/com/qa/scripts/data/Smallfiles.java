@@ -18,6 +18,7 @@ import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -111,6 +112,7 @@ public class Smallfiles {
     }
 
 
+
     /**
      * Method to validate report, download, delete, view report from actions tab
      */
@@ -150,7 +152,6 @@ public class Smallfiles {
                         waitExecuter.waitUntilPageFullyLoaded();
                         waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
                         MouseActions.clickOnElement(driver, smallfilesPageObject.deleteReportIcon);
-                        waitExecuter.waitUntilPageFullyLoaded();
                         Alert confirmationAlert = driver.switchTo().alert();
                         String alertText = confirmationAlert.getText();
                         logger.info("Alert text is " + alertText);
@@ -254,6 +255,34 @@ public class Smallfiles {
         smallfilesPageObject.minimumSmallFile.sendKeys(minimumSmallFile);
         LOGGER.info("Set minimum SmallFile as: " + minimumSmallFile);
         test.log(LogStatus.INFO, "Set minimum SmallFile as: " + minimumSmallFile);
+
+
+        smallfilesPageObject.directoriestoShow.sendKeys(directoriesToShow);
+        LOGGER.info("Set directories To Show as: " + directoriesToShow);
+        test.log(LogStatus.INFO, "Set directories To Show as: " + directoriesToShow);
+    }
+
+    /**
+     * Common steps to validate minimumFileSize,maximumFileSize,minimumSmallFile,directoriesToShow
+     */
+    public void navigateToSmallFileErrorReport(SmallfilesPageObject smallfilesPageObject, ExtentTest test, String minimumFileSize, String maximumFileSize,
+                                          String minimumSmallFile, String directoriesToShow) {
+
+        smallfilesPageObject.minFileSize.sendKeys(minimumFileSize);
+        waitExecuter.waitUntilElementPresent(smallfilesPageObject.confirmationMessageMinFileSizeElement);
+        Assert.assertEquals(smallfilesPageObject.confirmationMessageMinFileSizeElement.getText(),
+                "Min File Size is between 0 B and 2.00 GB");
+        test.log(LogStatus.INFO, "Set minimum FileSize as: " + smallfilesPageObject.confirmationMessageMinFileSizeElement.getText());
+
+        smallfilesPageObject.maxiFileSize.sendKeys(maximumFileSize);
+        waitExecuter.waitUntilElementPresent(smallfilesPageObject.confirmationMessageMaxFileSizeElement);
+        Assert.assertEquals(smallfilesPageObject.confirmationMessageMaxFileSizeElement.getText(),
+                "Max File Size is between 0 B and 8.00 EB");
+        test.log(LogStatus.INFO, "Set maximum FileSize as: " + smallfilesPageObject.confirmationMessageMaxFileSizeElement.getText());
+
+        smallfilesPageObject.minimumSmallFile.sendKeys(minimumSmallFile);
+        LOGGER.info("Set directories To Show as: " + minimumSmallFile);
+        test.log(LogStatus.INFO, "Set directories To Show as: " + minimumSmallFile);
 
 
         smallfilesPageObject.directoriestoShow.sendKeys(directoriesToShow);

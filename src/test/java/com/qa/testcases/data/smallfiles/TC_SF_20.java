@@ -22,7 +22,7 @@ public class TC_SF_20 extends BaseClass {
     public void verifySpecialCharacters(String clusterId) {
         test = extent.startTest("TC_SF_20.verifySpecialCharacters: " + clusterId,
                 "Verify Unravel UI should display 10000 directories in the report.");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_20.verifySpecialCharacters");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -55,6 +55,9 @@ public class TC_SF_20 extends BaseClass {
             String scheduleSuccessMsg = "The report has been scheduled successfully.";
             smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
         } catch (TimeoutException te) {
+            String scheduleSuccessMsg = "The report has been scheduled successfully.";
+            smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
+        } catch (VerifyError te) {
             throw new AssertionError("smallfiles Report has not been scheduled successfully.");
         }
     }

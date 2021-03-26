@@ -1,5 +1,6 @@
 package com.qa.testcases.data.smallfiles;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.data.SmallfilesPageObject;
@@ -14,7 +15,8 @@ import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
-
+@Marker.DataSmallFiles
+@Marker.All
 public class TC_SF_48 extends BaseClass {
 
     Logger logger = Logger.getLogger(TC_SF_48.class.getName());
@@ -23,7 +25,7 @@ public class TC_SF_48 extends BaseClass {
     public void validateReportsArchivedSearchByReportName(String clusterId) {
         test = extent.startTest("TC_SF_48.validateReportsArchivedSearchByReportName: " + clusterId,
                 "Verify the UI should display all reports with report name.");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_48.validateReportsArchivedSearchByReportName");
 
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
@@ -42,7 +44,7 @@ public class TC_SF_48 extends BaseClass {
             logger.info("Clicked on Small File Report counts and search by status.");
             test.log(LogStatus.PASS, "Verified Reports Small File Report search by status.");
         } catch (TimeoutException | NoSuchElementException |VerifyError te) {
-            throw new AssertionError("Small File Report not completed successfully.");
+            throw new AssertionError("Verified the Archived Search By ReportName not been scheduled successfully.");
         }
     }
 }

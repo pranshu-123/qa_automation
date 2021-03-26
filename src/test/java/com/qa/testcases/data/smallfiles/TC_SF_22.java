@@ -22,7 +22,7 @@ public class TC_SF_22 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void verifySmallFileReport(String clusterId) {
         test = extent.startTest("TC_SF_22.verifySmallFileReport: " + clusterId, "Verify the Unravel UI should display 10000 directories in the report.");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_22.verifySmallFileReport");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -53,12 +53,13 @@ public class TC_SF_22 extends BaseClass {
         test.log(LogStatus.PASS, "Verified the absolute size  poulated :" + heading);
 
         try {
-            waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
-                    "Small file Report completed successfully.");
-            test.log(LogStatus.PASS, "Verified smallfiles report is loaded properly.");
-            logger.info("Verified smallfiles report is loaded properly");
+            String scheduleSuccessMsg = "The report has been scheduled successfully.";
+            smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
         } catch (TimeoutException te) {
-            throw new AssertionError("smallfiles Report not completed successfully.");
+            String scheduleSuccessMsg = "The report has been scheduled successfully.";
+            smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
+        } catch (VerifyError te) {
+            throw new AssertionError("smallfiles Report has not been scheduled successfully.");
         }
 
     }

@@ -14,16 +14,16 @@ import org.testng.annotations.Test;
 import java.util.logging.Logger;
 @Marker.DataSmallFiles
 @Marker.All
-public class TC_SF_16 extends BaseClass {
+public class TC_SF_50 extends BaseClass {
 
-    Logger logger = Logger.getLogger(TC_SF_16.class.getName());
+    Logger logger = Logger.getLogger(TC_SF_50.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void verifySmallFileReport(String clusterId) {
-        test = extent.startTest("TC_SF_16.verifySmallFileReport: " + clusterId, "Verify User is able " +
-                "Verify user should successfully run Small Files report and display the report in the UI.");
+    public void validateErrorSmallFile(String clusterId) {
+        test = extent.startTest("TC_SF_14.validateErrorSmallFile: " + clusterId,
+                " Verify Error displayed by Small file report when fsimage is not available.");
         test.assignCategory("Data- Small Files");
-        Log.startTestCase("TC_SF_16.verifySmallFileReport");
+        Log.startTestCase("TC_SF_14.validateErrorSmallFile");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
@@ -37,17 +37,11 @@ public class TC_SF_16 extends BaseClass {
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
 
-        smallfiles.navigateToSmallFileReport(smallfilesPageObject, test, "0", "10"
-                , "100", "5");
+        smallfiles.navigateToSmallFileReport(smallfilesPageObject, test, "0", "2048"
+                , "100", "100");
         test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files");
 
-        smallfiles.clickOnadvancedOptions();
-
-        smallfiles.navigateToAdvancedOptions(smallfilesPageObject, test, "3", "6");
-        smallfiles.clickOnModalRunButton();
-        logger.info("Clicked on Modal Run Button");
-        test.log(LogStatus.INFO, "Clicked on Modal Run Button");
-
+        waitExecuter.waitUntilPageFullyLoaded();
         String heading = smallfilesPageObject.verifyAbsoluteSize.getText();
         test.log(LogStatus.PASS, "Verified the absolute size  poulated :" + heading);
 
@@ -55,10 +49,7 @@ public class TC_SF_16 extends BaseClass {
             String scheduleSuccessMsg = "The report has been scheduled successfully.";
             smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
         } catch (TimeoutException te) {
-            String scheduleSuccessMsg = "The report has been scheduled successfully.";
-            smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
-        } catch (VerifyError te) {
-            throw new AssertionError("smallfiles Report has not been scheduled successfully.");
+            throw new AssertionError("Verified the Error SmallFile not been scheduled successfully."+te);
         }
     }
 }

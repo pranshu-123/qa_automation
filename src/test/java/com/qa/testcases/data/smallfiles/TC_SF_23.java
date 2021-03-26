@@ -22,7 +22,7 @@ public class TC_SF_23 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void verifyMaxParameters(String clusterId) {
         test = extent.startTest("TC_SF_23.verifyMaxParameters: " + clusterId, "Verify the user successfully run Small Files report and display the report in the UI.");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_23.verifyMaxParameters");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -56,7 +56,11 @@ public class TC_SF_23 extends BaseClass {
             test.log(LogStatus.PASS, "Verified smallfiles report is loaded properly.");
             logger.info("Verified smallfiles report is loaded properly");
         } catch (TimeoutException te) {
-            throw new AssertionError("smallfiles Report not completed successfully.");
+            waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
+                    "Small file Report completed successfully.");
+        }
+        catch (Exception te) {
+            throw new AssertionError("smallfiles Report not completed successfully."+te.getMessage());
         }
 
          smallfiles.validateReportPage(smallfilesPageObject);

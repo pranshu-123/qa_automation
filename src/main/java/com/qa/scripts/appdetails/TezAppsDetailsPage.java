@@ -1,7 +1,6 @@
 package com.qa.scripts.appdetails;
 
 import com.qa.pagefactory.SubTopPanelModulePageObject;
-import com.qa.pagefactory.appsDetailsPage.SparkAppsDetailsPageObject;
 import com.qa.pagefactory.appsDetailsPage.TezAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
@@ -897,6 +896,24 @@ public class TezAppsDetailsPage {
         waitExecuter.waitUntilPageFullyLoaded();
         Assert.assertNotSame("", Appname, "Tez App name is not displayed in the Table");
         return AppnameText;
+    }
+
+    /**
+     * Method to click the first app in jobs table , navigate to the details page.
+     * and verify  Appname .
+     */
+    public String verifyDbname(TezAppsDetailsPageObject tezApps) {
+        WebElement Appname = tezApps.getAppname;
+        Actions toolAct = new Actions(driver);
+        toolAct.moveToElement(Appname).build().perform();
+        WebElement DbtoolTip = driver.findElement(By.xpath("//h5[normalize-space()='DATABASE']"));
+        waitExecuter.sleep(3000);
+        String AppDatabaseText = DbtoolTip.getText().trim();
+        System.out.println(AppDatabaseText);
+        waitExecuter.sleep(5000);
+        waitExecuter.waitUntilPageFullyLoaded();
+        Assert.assertNotSame("", Appname, "Tez Database name is not displayed in the Header");
+        return AppDatabaseText;
     }
 
     /**

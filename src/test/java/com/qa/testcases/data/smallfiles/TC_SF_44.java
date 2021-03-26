@@ -44,7 +44,7 @@ public class TC_SF_44 extends BaseClass {
             logger.info("Clicked on Small File Report counts and delete.");
             test.log(LogStatus.PASS, "Verified Reports Archived for Small File Report is deletable.");
         } catch (TimeoutException | NoSuchElementException te) {
-            throw new AssertionError("Small File Report not completed successfully.");
+            throw new AssertionError("Verified the Archived Delete not been scheduled successfully.");
         }
     }
 }

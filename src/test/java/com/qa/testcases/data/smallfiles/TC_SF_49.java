@@ -63,7 +63,7 @@ public class TC_SF_49 extends BaseClass {
                 MouseActions.clickOnElement(driver, smallfilesPageObject.closeButton);
             }
         } catch (TimeoutException te) {
-            throw new AssertionError("smallfiles Report has not been scheduled successfully.");
+            throw new AssertionError("Verified the Error Unsupported Values not been scheduled successfully.");
         }
     }
 }

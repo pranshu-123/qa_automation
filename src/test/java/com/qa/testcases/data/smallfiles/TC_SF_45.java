@@ -44,7 +44,7 @@ public class TC_SF_45 extends BaseClass {
             logger.info("Clicked on Small File Report counts and View.");
             test.log(LogStatus.PASS, "Verified Reports Archived for Small File Report is viewable.");
         } catch (TimeoutException | NoSuchElementException te) {
-            throw new AssertionError("Small File Report not completed successfully.");
+            throw new AssertionError("Verified the File report not been scheduled successfully.");
         }
     }
 }

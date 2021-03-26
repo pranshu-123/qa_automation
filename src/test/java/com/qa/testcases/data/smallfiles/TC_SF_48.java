@@ -44,7 +44,7 @@ public class TC_SF_48 extends BaseClass {
             logger.info("Clicked on Small File Report counts and search by status.");
             test.log(LogStatus.PASS, "Verified Reports Small File Report search by status.");
         } catch (TimeoutException | NoSuchElementException |VerifyError te) {
-            throw new AssertionError("Small File Report not completed successfully.");
+            throw new AssertionError("Verified the Archived Search By ReportName not been scheduled successfully.");
         }
     }
 }

@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 @Marker.All
 public class TC_SF_50 extends BaseClass {
 
-    Logger logger = Logger.getLogger(TC_SF_14.class.getName());
+    Logger logger = Logger.getLogger(TC_SF_50.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void validateErrorSmallFile(String clusterId) {
@@ -49,7 +49,7 @@ public class TC_SF_50 extends BaseClass {
             String scheduleSuccessMsg = "The report has been scheduled successfully.";
             smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
         } catch (TimeoutException te) {
-            throw new AssertionError("smallfiles Report has not been scheduled successfully."+te);
+            throw new AssertionError("Verified the Error SmallFile not been scheduled successfully."+te);
         }
     }
 }

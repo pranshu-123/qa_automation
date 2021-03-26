@@ -23,7 +23,7 @@ public class TC_SF_40 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void verifyScheduleSpecialCharecters(String clusterId) {
         test = extent.startTest("TC_SF_40.verifyScheduleSpecialCharecters: ",
-                "Verify Unravel should be able to schedule a Queue Analysis report with Scedule Name having special charecters.");
+                "Verify Unravel should be able to schedule a Queue Analysis report with Schedule Name having special characters.");
         test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_40.verifyScheduleSpecialCharecters");
 
@@ -62,7 +62,7 @@ public class TC_SF_40 extends BaseClass {
             smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
 
         } catch (TimeoutException | NoSuchElementException | VerifyError te) {
-            throw new AssertionError("Verified parameters for small files not completed successfully.");
+            throw new AssertionError("Verified the special characters not been scheduled successfully.");
         }
     }
 }

@@ -53,7 +53,7 @@ public class TC_SF_41 extends BaseClass {
             //Close apps details page
             MouseActions.clickOnElement(driver, smallfilesPageObject.homeTab);
         } catch (TimeoutException | NoSuchElementException | VerifyError te) {
-            throw new AssertionError("Verified Special Characters not completed successfully.");
+            throw new AssertionError("Verified the report not been scheduled successfully.");
 
         }
     }

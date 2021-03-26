@@ -64,7 +64,7 @@ public class TC_SF_39 extends BaseClass {
             String scheduleSuccessMsg = "The report has been scheduled successfully.";
             smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
         } catch (TimeoutException | NoSuchElementException | VerifyError te) {
-            throw new AssertionError("Verified  parameters for small files not completed successfully.");
+            throw new AssertionError("Verified the scheduled report not been scheduled successfully.");
         }
     }
 }

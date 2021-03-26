@@ -61,7 +61,7 @@ public class TC_SF_38 extends BaseClass {
             String scheduleSuccessMsg = "The report has been scheduled successfully.";
             smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
         } catch (Exception te) {
-            throw new AssertionError("Verified scheduled report not completed successfully." + te.getMessage());
+            throw new AssertionError("Verified the scheduled report not been scheduled successfully." + te.getMessage());
         }
     }
 }

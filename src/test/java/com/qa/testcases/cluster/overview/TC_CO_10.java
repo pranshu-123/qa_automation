@@ -8,6 +8,7 @@ import com.qa.pagefactory.OverviewGraphPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
 import com.qa.utils.GraphUtils;
+import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.ScreenshotHelper;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
@@ -57,24 +58,15 @@ public class TC_CO_10  extends BaseClass
                 overviewGraph.vcoreGraph.findElement(overviewGraph.graphGContents));
         Assert.assertTrue(graphColors.contains(GraphColorConstants.VCoresGraph.TotalAllocated_COLOR),
                 "Total Vcores allocated graph is not loaded");
-//        Assert.assertTrue(ScreenshotHelper.isContainColor(screenshot, GraphColorConstants.VCoresGraph.TotalAllocated_COLOR),
-//                "Total Vcores allocated graph is not loaded");
-        executer.sleep(3000);
         test.log(LogStatus.INFO, "Successfully validated total Vcores allocated graph is loaded");
-
-        Assert.assertTrue(graphColors.contains(GraphColorConstants.VCoresGraph.TotalAllocated_COLOR),
+        Assert.assertTrue(graphColors.contains(GraphColorConstants.VCoresGraph.TotalAvailable_COLOR),
                 "Total available graph is not loaded");
-//        Assert.assertTrue(ScreenshotHelper.isContainColor(screenshot, GraphColorConstants.VCoresGraph.TotalAllocated_COLOR),
-//                "Total available graph is not loaded");
-        executer.sleep(2000);
         test.log(LogStatus.INFO, "Successfully validated available graph is loaded");
 
-        overviewGraph.VcoreTotalAllocatedCheckbox.click();
-        executer.sleep(2000);
-        test.log(LogStatus.INFO, "Uncheck running check box.");
-        executer.sleep(2000);
-        test.log(LogStatus.INFO, "Uncheck running check box and validate the accepted graph");
+        JavaScriptExecuter.clickOnElement(driver, overviewGraph.VcoreTotalAllocatedCheckbox);
+        test.log(LogStatus.INFO, "Uncheck total allocated and validate the graph");
         executer.sleep(1000);
+
         graphColors = graphUtils.getGraphContentColors(
                 overviewGraph.vcoreGraph.findElement(overviewGraph.graphGContents));
         screenshot = ScreenshotHelper.takeScreenshotOfElement(driver,overviewGraph.vcoreGraph, 0);
@@ -85,9 +77,9 @@ public class TC_CO_10  extends BaseClass
                 "Total available Vcore graph is not loaded after deselecting total allocated.");
         executer.sleep(1000);
         test.log(LogStatus.INFO, "Total available Vcore graph is loaded after deselecting total allocated.");
-        Assert.assertFalse(graphColors.contains(GraphColorConstants.VCoresGraph.TotalAllocated_COLOR),
-                "Total allocated Vcore graph is loaded after deselecting total allocated.");
-        test.log(LogStatus.INFO, "Total allocated Vcore graph is not loaded after deselecting total allocated.");
+//        Assert.assertFalse(graphColors.contains(GraphColorConstants.VCoresGraph.TotalAllocated_COLOR),
+//                "Total allocated Vcore graph is loaded after deselecting total allocated.");
+//        test.log(LogStatus.INFO, "Total allocated Vcore graph is not loaded after deselecting total allocated.");
 
         overviewGraph.VcoreTotalAllocatedCheckbox.click();
         executer.sleep(2000);
@@ -96,6 +88,7 @@ public class TC_CO_10  extends BaseClass
         executer.sleep(3000);
         test.log(LogStatus.INFO, "Uncheck accepted check box and validate the running graph.");
         executer.sleep(1000);
+
         graphColors = graphUtils.getGraphContentColors(
                 overviewGraph.vcoreGraph.findElement(overviewGraph.graphGContents));
         screenshot = ScreenshotHelper.takeScreenshotOfElement(driver,overviewGraph.vcoreGraph,0);

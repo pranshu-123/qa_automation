@@ -61,9 +61,9 @@ public class TC_CO_15 extends BaseClass {
       "Map Reduce graph is not loaded");
     test.log(LogStatus.PASS, "Successfully validated Map Reduce graph is loaded");
 
-    Assert.assertTrue(graphColors.contains(GraphColorConstants.InefficientEventGraph.HIVE_COLOR),
-      "Hive graph is not loaded");
-    test.log(LogStatus.PASS, "Successfully validated hive graph is loaded");
+//    Assert.assertTrue(graphColors.contains(GraphColorConstants.InefficientEventGraph.HIVE_COLOR),
+//      "Hive graph is not loaded");
+//    test.log(LogStatus.PASS, "Successfully validated hive graph is loaded");
 
     Assert.assertTrue(graphColors.contains(GraphColorConstants.InefficientEventGraph.SPARK_COLOR),
       "Spark graph is not loaded");

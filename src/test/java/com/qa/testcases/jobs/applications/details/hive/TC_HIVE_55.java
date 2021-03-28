@@ -87,6 +87,8 @@ public class TC_HIVE_55 extends BaseClass {
             // Assert that App details page opens
             test.log(LogStatus.INFO, "Assert that App details page opens");
             LOGGER.info("Assert that App details page opens");
+            waitExecuter.waitUntilPageFullyLoaded();
+            waitExecuter.waitUntilElementPresent(applicationsPageObject.appSummary);
             Assert.assertTrue(applicationsPageObject.appSummary.isDisplayed(),
                     "Application Summary page did not load ");
             test.log(LogStatus.PASS, "App details page is launched successfully");

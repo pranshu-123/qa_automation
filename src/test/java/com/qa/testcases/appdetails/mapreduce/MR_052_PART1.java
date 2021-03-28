@@ -12,6 +12,7 @@ import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import jdk.internal.org.objectweb.asm.util.CheckClassAdapter;
 import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
@@ -56,7 +57,7 @@ public class MR_052_PART1 extends BaseClass {
                 waitExecuter.waitUntilPageFullyLoaded();
                 MouseActions.clickOnElement(driver, mrApps.resourcesTab);
                 waitExecuter.waitUntilPageFullyLoaded();
-                mrDetailsPage.validateResourcesTab(mrApps);
+                mrDetailsPage.validateResourcesTab(mrApps,"Task Attempts",test);
 
                 //Close apps details page
                 MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);

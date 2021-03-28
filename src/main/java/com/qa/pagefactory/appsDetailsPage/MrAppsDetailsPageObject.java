@@ -14,6 +14,12 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[5]")
     public WebElement getClusterId;
 
+    @FindBy(xpath = "//span[(text()='Insights')]//following-sibling::a[contains(@class,'sorting')]")
+    public WebElement sortByParentApp;
+
+    @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[11]//span[@class='icon-tuning']")
+    public List<WebElement> checkInsightsApp;
+
     @FindBy(xpath = "//a[normalize-space()='Analysis']")
     public WebElement analysisTab;
 
@@ -105,10 +111,10 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/span/div/a/span")
     public WebElement resetButton;
 
-    @FindBy(xpath = " //*[@id='appConfiguration']//tbody/tr/td/p")
+    @FindBy(xpath = "//*[@id='appConfiguration']//tbody/tr/td[1]")
     public List<WebElement> configPropKey;
 
-    @FindBy(xpath = " //*[@id='appConfiguration']//tbody/tr/td/span")
+    @FindBy(xpath = "//*[@id='appConfiguration']//tbody/tr/td[2]")
     public List<WebElement> configPropValue;
 
 
@@ -127,6 +133,18 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[2]/div/div[2]/div[3]/div/div/section/div[1]/span[2]")
     public List<WebElement> insightsType;
 
+    @FindBy(xpath = "//h3[contains(text(),'No Data Available')]")
+    public WebElement whenNoApplicationPresent;
+
+    @FindBy(xpath = "//span[contains(@class,'failed badge')]")
+    public WebElement mrSummaryApp;
+
+    @FindBy(className  = "nprogress-busy")
+    public WebElement loader;
+
+    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[2]")
+    public WebElement getStatusFromTable;
+
     // Error Tab xpath
     @FindBy(xpath = "//span [@class='icon-caret']")
     public List<WebElement> errorCollapse;
@@ -137,11 +155,24 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@class=\"error-code\"]/p")
     public List<WebElement> errorContents;
 
-    @FindBy(xpath = "//*[@id='appTagsTable']//tr/td[1]")
+    @FindBy(xpath = "//*[@id='io_metrics']//tbody/tr/td[1]")
     public List<WebElement> tagKey;
 
-    @FindBy(xpath = "//*[@id='appTagsTable']//tr/td[2]")
+    @FindBy(xpath = "//*[@id='io_metrics']//tbody/tr/td[2]")
     public List<WebElement> tagValue;
+
+    @FindBy(xpath = "//*[@id='io_metrics']//tbody/tr/td[1]")
+    public List<WebElement> metricsKey;
+
+    @FindBy(xpath = "//*[@id='io_metrics']//tbody/tr/td[2]")
+    public List<WebElement> metricsValue;
+
+    @FindBy(xpath = "//*[@id='io_metrics']//tbody/tr/td[3]")
+    public List<WebElement> metricsDescription;
+
+
+    @FindBy(xpath = "//*[@id='appTagsTable']//tr/td[2]")
+    public List<WebElement> tagDescription;
 
     @FindBy(xpath = "//*[@id='appTagsTable']/thead//th")
     public List<WebElement> tagTableHeader;

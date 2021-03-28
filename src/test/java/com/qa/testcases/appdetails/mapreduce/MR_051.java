@@ -50,15 +50,16 @@ public class MR_051 extends BaseClass {
         int appCount = 0;
         if (totalMapReduceAppCnt > 0) {
             applicationsPageObject.expandStatus.click();
-            appCount = mrDetailsPage.clickOnlyLink("Success");
+            appCount = mrDetailsPage.clickOnlyLink("Failed");
             waitExecuter.waitUntilPageFullyLoaded();
             //Clicking on the Map reduce app must go to apps detail page and verify Data Tabs must be available on UI
             if (appCount > 0) {
+                waitExecuter.waitUntilPageFullyLoaded();
                 String headerAppId = mrDetailsPage.verifyAppId(mrApps, applicationsPageObject);
                 test.log(LogStatus.PASS, "Map Reduce Application Id is displayed in the Header: " + headerAppId);
                 waitExecuter.waitUntilPageFullyLoaded();
                 MouseActions.clickOnElement(driver, mrApps.analysisTab);
-                mrDetailsPage.analysisColorCode(mrApps);
+                mrDetailsPage.analysisColorCode(mrApps,test);
                 waitExecuter.waitUntilPageFullyLoaded();
                 //Close apps details page
                 MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);

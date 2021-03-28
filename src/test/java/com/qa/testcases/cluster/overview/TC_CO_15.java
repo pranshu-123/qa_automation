@@ -84,9 +84,9 @@ public class TC_CO_15 extends BaseClass {
       "Map Reduce graph is loaded when Map Reduce checkbox is not selected.");
     test.log(LogStatus.PASS, "Successfully validated Map Reduce graph is not loaded when Map Reduce checkbox is not selected.");
 
-    Assert.assertTrue(graphColors.contains(GraphColorConstants.InefficientEventGraph.HIVE_COLOR),
-      "Hive graph is not loaded when Map Reduce checkbox is not selected.");
-    test.log(LogStatus.PASS, "Successfully validated hive graph is loaded when Map Reduce checkbox is not selected.");
+//    Assert.assertTrue(graphColors.contains(GraphColorConstants.InefficientEventGraph.HIVE_COLOR),
+//      "Hive graph is not loaded when Map Reduce checkbox is not selected.");
+//    test.log(LogStatus.PASS, "Successfully validated hive graph is loaded when Map Reduce checkbox is not selected.");
 
     Assert.assertTrue(graphColors.contains(GraphColorConstants.InefficientEventGraph.SPARK_COLOR),
       "Spark graph is not loaded when Map Reduce checkbox is not selected.");
@@ -94,7 +94,7 @@ public class TC_CO_15 extends BaseClass {
 
     // Unselect the mapreduce checkbox and validate the graph
     overviewGraph.inefficientGraphMRCheckbox.click();
-    overviewGraph.inefficientGraphHiveCheckbox.click();
+    //overviewGraph.inefficientGraphHiveCheckbox.click();
     executer.sleep(1000);
 
     graphColors = graphUtils.getGraphContentColors(
@@ -106,9 +106,9 @@ public class TC_CO_15 extends BaseClass {
       "Map Reduce graph is not loaded when Hive checkbox is not selected.");
     test.log(LogStatus.PASS, "Successfully validated Map Reduce graph is loaded when Hive checkbox is not selected.");
 
-    Assert.assertFalse(graphColors.contains(GraphColorConstants.InefficientEventGraph.HIVE_COLOR),
-      "Hive graph is loaded when Hive checkbox is not selected.");
-    test.log(LogStatus.PASS, "Successfully validated hive graph is not loaded when Hive checkbox is not selected.");
+//    Assert.assertFalse(graphColors.contains(GraphColorConstants.InefficientEventGraph.HIVE_COLOR),
+//      "Hive graph is loaded when Hive checkbox is not selected.");
+//    test.log(LogStatus.PASS, "Successfully validated hive graph is not loaded when Hive checkbox is not selected.");
 
     Assert.assertTrue(graphColors.contains(GraphColorConstants.InefficientEventGraph.SPARK_COLOR),
       "Spark graph is not loaded when Hive checkbox is not selected.");

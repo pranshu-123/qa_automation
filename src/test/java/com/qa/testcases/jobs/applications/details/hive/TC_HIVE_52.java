@@ -62,7 +62,8 @@ public class TC_HIVE_52 extends BaseClass {
 		// Select 'Only' hive type and get its jobs count
 		test.log(LogStatus.INFO, "Select 'Only' hive from app types and get its jobs count");
 		LOGGER.info("Select 'Only' hive from app types and get its jobs count");
-		sparkApp.clickOnlyLink("Tez");
+		//sparkApp.clickOnlyLink("Tez");
+		sparkApp.clickOnlyLink("Hive");
 		int appCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
 				.replaceAll("[^\\dA-Za-z ]", "").trim());
 		List<Integer> list = new ArrayList<>();
@@ -73,7 +74,7 @@ public class TC_HIVE_52 extends BaseClass {
 				LOGGER.info("Sort by parent app");
 				applicationsPageObject.sortByParentApp.click();
 				waitExecuter.sleep(1000);
-				list.add(applicationsPageObject.checkHiveInParentApp.size());
+				list.add(applicationsPageObject.checkTezInParentApp.size());
 				waitExecuter.sleep(1000);
 
 				for (int value : list) {

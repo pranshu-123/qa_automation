@@ -8,7 +8,6 @@ import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.TezAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
-import com.qa.testcases.appdetails.spark.TC_spark_219;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
@@ -17,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 @Marker.AppDetailsTez
 @Marker.All
 public class TEZ_126 extends BaseClass {
@@ -55,22 +55,26 @@ public class TEZ_126 extends BaseClass {
                 "the total count of heading.");
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
+        try {
+            //Clicking on the Tez app must go to apps detail page
+            if (appCount > 0) {
+                String headerAppId = tezDetailsPage.verifyAppId(tezApps, applicationsPageObject);
+                test.log(LogStatus.PASS, "Tez Application Id is displayed in the Header: " + headerAppId);
 
-        //Clicking on the Tez app must go to apps detail page
-        if (appCount > 0) {
-            String headerAppId = tezDetailsPage.verifyAppId(tezApps, applicationsPageObject);
-            test.log(LogStatus.PASS, "Tez Application Id is displayed in the Header: " + headerAppId);
+                /**clicking on the UI must go to apps detail page and verify the basic tabs present */
+                tezDetailsPage.validateTopRightTab(tezApps, test);
+                test.log(LogStatus.PASS, "The basic components for an application is present");
+            } else {
+                test.log(LogStatus.SKIP, "No Tez Application present");
+                logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +
+                        "of 90 days");
+            }
+            waitExecuter.sleep(3000);
+            MouseActions.clickOnElement(driver, tezApps.homeTab);
 
-            /**clicking on the UI must go to apps detail page and verify the basic tabs present */
-            tezDetailsPage.validateTopRightTab(tezApps,test);
-            test.log(LogStatus.PASS, "The basic components for an application is present");
-        } else {
-            test.log(LogStatus.SKIP, "No Tez Application present");
-            logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +
-                    "of 90 days");
+        } catch (VerifyError te) {
+            throw new AssertionError("No Tez Application present in the \" + clusterId + \" cluster for the time span \" +\n" +
+                    " \"of 90 days\"" + te);
         }
-        waitExecuter.sleep(3000);
-        MouseActions.clickOnElement(driver, tezApps.homeTab);
-
     }
 }

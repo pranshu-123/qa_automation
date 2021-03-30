@@ -230,6 +230,45 @@ public class TezAppsDetailsPage {
         return tagValue;
     }
 
+    /**
+     * Method to validate the stage table header and the data.
+     * if validateExecutorTab = true, validate each jobs execution tabs data
+     */
+    public void validateDags(int navigationRows, List<WebElement> navigationRowList,
+                             TezAppsDetailsPageObject tezApps, Boolean validateExecutorTab,
+                                          Boolean validateStageTabs) {
+        if (navigationRows > 0) {
+            String[] expectedHeader = {"Stage ID", "Start Time", "Duration", "Tasks", "Shuffle Read",
+                    "Shuffle Write", "Input", "Output"};
+            //click the jobId to sort it .
+            MouseActions.clickOnElement(driver, tezApps.singleJobHeader);
+            for (int rows = 0; rows < navigationRows; rows++) {
+                navigationRowList.get(rows).click();
+                waitExecuter.sleep(2000);
+                if (validateExecutorTab) {
+                    verifyAssertTrue(tezApps.DAGData.isDisplayed(), tezApps, " Dag data is not displayed ");
+                    LOGGER.info("Dags data is displayed ");
+                    List<WebElement> rddBlockList = tezApps.rddBlockList;
+                    verifyAssertFalse(rddBlockList.isEmpty(), tezApps, "No DAGs data");
+                    LOGGER.info("No. of RDD blocks in the flow chart is " + rddBlockList.size());
+                    for (int i = 0; i < rddBlockList.size(); i++) {
+                        verifyAssertTrue(rddBlockList.get(i).isDisplayed(), tezApps, "FlowChart doesnot have the RDD blocks displayed");
+                    }
+                    List<WebElement> rddNumberList = tezApps.rddBlockNumList;
+                    verifyAssertFalse(rddNumberList.isEmpty(), tezApps, "Rdd block numbers are present");
+                }
+                List<WebElement> stageHeaderList = tezApps.stageHeaders;
+                for (int i = 0; i < stageHeaderList.size(); i++) {
+                    Assert.assertNotSame("", stageHeaderList.get(i).getText());
+                    Assert.assertEquals(expectedHeader[i], stageHeaderList.get(i).getText(),
+                            "expected stage header do not match to the one in the UI");
+                }
+                if (validateStageTabs)
+                    validateStagesTabs(tezApps);
+            }
+        }
+    }
+
     public void validateTimingTab(TezAppsDetailsPageObject tezApps) {
         Actions action = new Actions(driver);
         List<WebElement> subTabList = tezApps.timingsSubTabs;
@@ -382,6 +421,14 @@ public class TezAppsDetailsPage {
                         validateErrorsTab(tezApps);
                         test.log(LogStatus.PASS, "Errors tab is populated");
                         break;
+                    case "Query":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        waitExecuter.sleep(3000);
+                        test.log(LogStatus.PASS, "Query tab is populated");
+                    case "Configuration":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        waitExecuter.sleep(3000);
+                        validateTimingTab(tezApps);
                     case "Tags":
                         MouseActions.clickOnElement(driver, appsTabList.get(i));
                         waitExecuter.sleep(3000);
@@ -389,11 +436,6 @@ public class TezAppsDetailsPage {
                         test.log(LogStatus.PASS, "Tags tab is populated");
                         return tagValue;
                     //  break;
-                    case "Configuration":
-                        MouseActions.clickOnElement(driver, appsTabList.get(i));
-                        waitExecuter.sleep(3000);
-                        validateTimingTab(tezApps);
-
                 }
                 break;
             }
@@ -480,12 +522,9 @@ public class TezAppsDetailsPage {
 
 
     /**
-     * Method to verify if the component tabs like navigation | Gantt chart | jobs is present
-     * and contains data if job count is > 0
-     * if validateCompData = true validate each component tab data
-     * if validateExecutorTab = true validate jobs execution tabs data.
+     * Method to verify Dags tabs
      */
-    public void verifyAppsComponent(TezAppsDetailsPageObject tezApps, Boolean validateCompData,
+    public void verifyDagsComponent(TezAppsDetailsPageObject tezApps, Boolean validateCompData,
                                     Boolean validateExecutorTab, Boolean validateStageTab) {
         List<WebElement> componentList = tezApps.component_element;
         LOGGER.info("ComponentList is " + componentList.size());
@@ -587,15 +626,18 @@ public class TezAppsDetailsPage {
      */
     public void validateTopRightTab(TezAppsDetailsPageObject tezApps, ExtentTest test) {
         String Owner = tezApps.Owner.getText();
+        waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Owner  is displayed in the Header: " + Owner);
         String Cluster = tezApps.Cluster.getText();
         test.log(LogStatus.PASS, "Cluster  is displayed in the Header: " + Cluster);
         String Queue = tezApps.Queue.getText();
+        waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Queue  is displayed in the Header: " + Queue);
         LOGGER.info("Owner = " + Owner + " Cluster = " + Cluster + " starttime = " + Queue + " Queue");
         Assert.assertNotSame("", Owner, "Value for Owner missing");
         Assert.assertNotSame("", Cluster, "Value for Cluster missing");
         Assert.assertNotSame("", Queue, "Value for Queue missing");
+        waitExecuter.waitUntilPageFullyLoaded();
 
     }
 
@@ -854,6 +896,24 @@ public class TezAppsDetailsPage {
         waitExecuter.waitUntilPageFullyLoaded();
         Assert.assertNotSame("", Appname, "Tez App name is not displayed in the Table");
         return AppnameText;
+    }
+
+    /**
+     * Method to click the first app in jobs table , navigate to the details page.
+     * and verify  Appname .
+     */
+    public String verifyDbname(TezAppsDetailsPageObject tezApps) {
+        WebElement Appname = tezApps.getAppname;
+        Actions toolAct = new Actions(driver);
+        toolAct.moveToElement(Appname).build().perform();
+        WebElement DbtoolTip = driver.findElement(By.xpath("//h5[normalize-space()='DATABASE']"));
+        waitExecuter.sleep(3000);
+        String AppDatabaseText = DbtoolTip.getText().trim();
+        System.out.println(AppDatabaseText);
+        waitExecuter.sleep(5000);
+        waitExecuter.waitUntilPageFullyLoaded();
+        Assert.assertNotSame("", Appname, "Tez Database name is not displayed in the Header");
+        return AppDatabaseText;
     }
 
     /**

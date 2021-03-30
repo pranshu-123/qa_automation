@@ -22,7 +22,7 @@ public class TC_SF_18 extends BaseClass {
     public void verifySmallFilesDirectory(String clusterId) {
         test = extent.startTest("TC_SF_18.verifySmallFilesDirectory: " + clusterId,
                 "Verify user generate small file report for directory names that have a new line.");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_18.verifySmallFilesDirectory");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -55,6 +55,9 @@ public class TC_SF_18 extends BaseClass {
             String scheduleSuccessMsg = "The report has been scheduled successfully.";
             smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
         } catch (TimeoutException te) {
+            String scheduleSuccessMsg = "The report has been scheduled successfully.";
+            smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
+        } catch (VerifyError te) {
             throw new AssertionError("smallfiles Report has not been scheduled successfully.");
         }
     }

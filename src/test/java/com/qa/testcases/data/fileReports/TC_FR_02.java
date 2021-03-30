@@ -18,7 +18,7 @@ public class TC_FR_02 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider")
   public void validateFileReportNavigation(String clusterId) {
-    test = extent.startTest("validateFileReportNavigation " + clusterId,
+    test = extent.startTest("TC_FR_02.validateFileReportNavigation " + clusterId,
         "Validate the user is able to navigate between all the File reports on the UI");
     test.assignCategory(" Data - FileReports ");
 

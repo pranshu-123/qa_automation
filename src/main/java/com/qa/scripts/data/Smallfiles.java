@@ -1,41 +1,35 @@
 package com.qa.scripts.data;
 
-import com.qa.constants.PageConstants;
 import com.qa.enums.UserAction;
-import com.qa.pagefactory.CommonPageObject;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.data.SmallfilesPageObject;
-import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
-import com.qa.scripts.Schedule;
+import com.qa.scripts.migration.ServicesAndVersionsCompatibility;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
 public class Smallfiles {
 
     private static final java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger(Smallfiles.class.getName());
-    SmallfilesPageObject smallfilesPageObject;
-    private WaitExecuter waitExecuter;
-    private WebDriver driver;
     private final UserActions userAction;
+    Logger logger = Logger.getLogger(ServicesAndVersionsCompatibility.class.getName());
+    SmallfilesPageObject smallfilesPageObject;
+    private final WaitExecuter waitExecuter;
+    private final WebDriver driver;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -101,13 +95,14 @@ public class Smallfiles {
     /**
      * Method to validate the  Schedule Button
      */
-    public void clickOnModalScheduleButton(){
+    public void clickOnModalScheduleButton() {
         try {
             MouseActions.clickOnElement(driver, smallfilesPageObject.runSheduleButton);
         } catch (TimeoutException te) {
             MouseActions.clickOnElement(driver, smallfilesPageObject.runSheduleButton);
         }
     }
+
 
     /* Validate success message on report creation */
     public void verifyScheduleSuccessMsg(String successMsg) {
@@ -116,6 +111,113 @@ public class Smallfiles {
                 "The Schedule success " + "message mismatch");
     }
 
+
+
+    /**
+     * Method to validate report, download, delete, view report from actions tab
+     */
+    public void verifyReportsArchived(String name, String reportAction) {
+        List<WebElement> reportNameList = smallfilesPageObject.reportNames;
+        List<WebElement> reportCntList = smallfilesPageObject.reportCnt;
+        Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed.");
+
+        for (int i = 0; i < reportNameList.size(); i++) {
+            int reportCnt = Integer.parseInt(reportCntList.get(i).getText().trim());
+            logger.info("ReportCnt is " + reportCnt);
+            String reportName = reportNameList.get(i).getText().trim();
+            logger.info("The report name is " + reportName);
+            if (reportName.equals(name) && reportCnt > 0) {
+                switch (reportAction) {
+                    case "checkReport":
+                        logger.info("Checking report");
+                        MouseActions.clickOnElement(driver, reportCntList.get(i));
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
+                        List<WebElement> reportTblRows = smallfilesPageObject.tableRows;
+                        Assert.assertFalse(reportTblRows.isEmpty(), "No reports archived.");
+                        break;
+                    case "downloadReport":
+                        MouseActions.clickOnElement(driver, reportCntList.get(i));
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        MouseActions.clickOnElement(driver, smallfilesPageObject.downloadReportIcon);
+                        logger.info("Downloading report");
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        Assert.assertEquals(smallfilesPageObject.successfulMsgBanner.getText(), "Downloaded successfully",
+                                " No downloaded successfully message received.");
+                        break;
+                    case "deleteReport":
+                        MouseActions.clickOnElement(driver, reportCntList.get(i));
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
+                        MouseActions.clickOnElement(driver, smallfilesPageObject.deleteReportIcon);
+                        Alert confirmationAlert = driver.switchTo().alert();
+                        String alertText = confirmationAlert.getText();
+                        logger.info("Alert text is " + alertText);
+                        confirmationAlert.accept();
+                        logger.info("Deleted report");
+                        Assert.assertEquals(smallfilesPageObject.successfulMsgBanner.getText(), "Removed successfully",
+                                " Report not removed");
+                        break;
+                    case "viewReport":
+                        MouseActions.clickOnElement(driver, reportCntList.get(i));
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
+                        MouseActions.clickOnElement(driver, smallfilesPageObject.viewReportIcon);
+                        logger.info("Viewed report");
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        Assert.assertTrue(smallfilesPageObject.viewReportDialogWin.isDisplayed(), "Report  view not present.");
+                        MouseActions.clickOnElement(driver, smallfilesPageObject.closeTab);
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        break;
+                    case "searchReportByDate":
+                        MouseActions.clickOnElement(driver, reportCntList.get(i));
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
+                        String dateFromElement = smallfilesPageObject.archiveReportDate.getText().trim();
+                        String[] arrDate = dateFromElement.split(" ");
+                        String date = arrDate[0];
+                        System.out.println(date);
+                        smallfilesPageObject.reportSearchBox.sendKeys(date);
+                        List<WebElement> searchDateReportNameList = smallfilesPageObject.reportNames;
+                        Assert.assertFalse(searchDateReportNameList.isEmpty(), "There are no reports listed");
+                        Assert.assertTrue(searchDateReportNameList.size() > 0, "Expected search " +
+                                "result not populated data by date.");
+                        logger.info("Search report by date: " + date);
+                        break;
+                    case "searchReportByStatus":
+                        MouseActions.clickOnElement(driver, reportCntList.get(i));
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
+                        String status = "fail";
+                        smallfilesPageObject.reportSearchBox.sendKeys(status);
+                        waitExecuter.waitUntilElementPresent(smallfilesPageObject.sortingReportNameIcon);
+                        List<WebElement> searchStatusReportNameList = smallfilesPageObject.reportNames;
+                        Assert.assertFalse(searchStatusReportNameList.isEmpty(), "There are no reports listed");
+                        Assert.assertTrue(searchStatusReportNameList.size() > 0, "Expected search " +
+                                "result not populated data by status .");
+                        logger.info("Searched report for status as: " + status);
+                        break;
+                    case "searchReportByName":
+                        MouseActions.clickOnElement(driver, reportCntList.get(i));
+                        waitExecuter.waitUntilPageFullyLoaded();
+                        waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
+                        //Give any name which shows in the UI
+                        String searchReportName = smallfilesPageObject.archiveReportName.getText().trim();
+                        smallfilesPageObject.reportSearchBox.sendKeys(searchReportName);
+                        waitExecuter.waitUntilElementPresent(smallfilesPageObject.sortingReportNameIcon);
+                        List<WebElement> searchNameReportNameList = smallfilesPageObject.reportNames;
+                        Assert.assertFalse(searchNameReportNameList.isEmpty(), "There are no reports listed");
+                        Assert.assertTrue(searchNameReportNameList.size() > 0, "Expected search " +
+                                "result not populated data by report name.");
+                        logger.info("Searched report by name as :" + searchReportName);
+                        break;
+                }
+                break;
+            }
+        }
+    }
 
     /**
      * Method to validate the Small File report Page
@@ -153,6 +255,34 @@ public class Smallfiles {
         smallfilesPageObject.minimumSmallFile.sendKeys(minimumSmallFile);
         LOGGER.info("Set minimum SmallFile as: " + minimumSmallFile);
         test.log(LogStatus.INFO, "Set minimum SmallFile as: " + minimumSmallFile);
+
+
+        smallfilesPageObject.directoriestoShow.sendKeys(directoriesToShow);
+        LOGGER.info("Set directories To Show as: " + directoriesToShow);
+        test.log(LogStatus.INFO, "Set directories To Show as: " + directoriesToShow);
+    }
+
+    /**
+     * Common steps to validate minimumFileSize,maximumFileSize,minimumSmallFile,directoriesToShow
+     */
+    public void navigateToSmallFileErrorReport(SmallfilesPageObject smallfilesPageObject, ExtentTest test, String minimumFileSize, String maximumFileSize,
+                                          String minimumSmallFile, String directoriesToShow) {
+
+        smallfilesPageObject.minFileSize.sendKeys(minimumFileSize);
+        waitExecuter.waitUntilElementPresent(smallfilesPageObject.confirmationMessageMinFileSizeElement);
+        Assert.assertEquals(smallfilesPageObject.confirmationMessageMinFileSizeElement.getText(),
+                "Min File Size is between 0 B and 2.00 GB");
+        test.log(LogStatus.INFO, "Set minimum FileSize as: " + smallfilesPageObject.confirmationMessageMinFileSizeElement.getText());
+
+        smallfilesPageObject.maxiFileSize.sendKeys(maximumFileSize);
+        waitExecuter.waitUntilElementPresent(smallfilesPageObject.confirmationMessageMaxFileSizeElement);
+        Assert.assertEquals(smallfilesPageObject.confirmationMessageMaxFileSizeElement.getText(),
+                "Max File Size is between 0 B and 8.00 EB");
+        test.log(LogStatus.INFO, "Set maximum FileSize as: " + smallfilesPageObject.confirmationMessageMaxFileSizeElement.getText());
+
+        smallfilesPageObject.minimumSmallFile.sendKeys(minimumSmallFile);
+        LOGGER.info("Set directories To Show as: " + minimumSmallFile);
+        test.log(LogStatus.INFO, "Set directories To Show as: " + minimumSmallFile);
 
 
         smallfilesPageObject.directoriestoShow.sendKeys(directoriesToShow);
@@ -203,6 +333,7 @@ public class Smallfiles {
         scheduleTorunDropDown.selectByVisibleText(dayToRun);
 
     }
+
     /* Define day and Time to select from drop-down */
     public void selectDayTime(String day, String hour, String min) {
         selectByDays(day);

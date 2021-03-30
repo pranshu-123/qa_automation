@@ -38,34 +38,38 @@ public class IM_RES_22  extends BaseClass {
         homePage.selectMultiClusterId(clusterId);
         executer.waitUntilPageFullyLoaded();
         //Select date
-        DatePicker datePicker = new DatePicker(driver);
-        datePicker.clickOnDatePicker();
-        executer.sleep(1000);
-        datePicker.selectLast30Days();
-        executer.waitUntilPageFullyLoaded();
-        test.log(LogStatus.INFO, "Select Date from DatePicker.");
+        try {
+            DatePicker datePicker = new DatePicker(driver);
+            datePicker.clickOnDatePicker();
+            executer.sleep(1000);
+            datePicker.selectLast90Days();
+            executer.waitUntilPageFullyLoaded();
+            test.log(LogStatus.INFO, "Select Date from DatePicker.");
 
-        Impala impala = new Impala(driver);
-        executer.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
-        executer.sleep(3000);
-        impalaPageObject.groupByDropdownButton.click();
-        impalaPageObject.groupByUserList.click();
-        executer.waitUntilPageFullyLoaded();
-        test.log(LogStatus.INFO, "Select User in Group by option.");
+            Impala impala = new Impala(driver);
+            executer.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
+            executer.sleep(3000);
+            impalaPageObject.groupByDropdownButton.click();
+            impalaPageObject.groupByUserList.click();
+            executer.waitUntilPageFullyLoaded();
+            test.log(LogStatus.INFO, "Select User in Group by option.");
 
-        // Validate of Memory graph is present for selected date range
-        Assert.assertTrue(impala.isMemoryGraphPresent(), "The memory graph is not present with expected conditions");
-        test.log(LogStatus.PASS, "Validate the Memory graph is present for selected date range.");
+            // Validate of Memory graph is present for selected date range
+            Assert.assertTrue(impala.isMemoryGraphPresent(), "The memory graph is not present with expected conditions");
+            test.log(LogStatus.PASS, "Validate the Memory graph is present for selected date range.");
 
-        //TBD
-        //1. Navigate to Memory graph and click
-        //2. Read the impalaQueries header text if it does not matches "No Impala queries" then matches tooltip text with header impala queries text
+            //TBD
+            //1. Navigate to Memory graph and click
+            //2. Read the impalaQueries header text if it does not matches "No Impala queries" then matches tooltip text with header impala queries text
 
-        test.log(LogStatus.INFO, "Navigate different section in memory graph");
-        GraphUtils graphUtils = new GraphUtils();
-        graphUtils.navigateDifferentPointOnGraphGetTextClickCheckImpalaTbl(driver, impalaPageObject.memoryHighChartContainer);
-        test.log(LogStatus.PASS,"Successfully read the impalaQueries header text, after click on memory graph.");
+            test.log(LogStatus.INFO, "Navigate different section in memory graph");
+            GraphUtils graphUtils = new GraphUtils();
+            executer.waitUntilPageFullyLoaded();
+            graphUtils.navigateDifferentPointOnGraphGetTextClickCheckImpalaTbl(driver, impalaPageObject.memoryHighChartContainer);
+            test.log(LogStatus.PASS, "Successfully read the impalaQueries header text, after click on memory graph.");
 
+        } catch (org.openqa.selenium.StaleElementReferenceException ex) {
+            test.log(LogStatus.INFO, "Selecting the queue: " + ex + " in filter.");
+        }
     }
-
 }

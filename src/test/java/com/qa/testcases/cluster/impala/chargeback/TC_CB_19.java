@@ -36,12 +36,13 @@ public class TC_CB_19 extends BaseClass {
         LOGGER.info("Selected cluster: " + clusterId, test);
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
-        datePicker.selectLast90Days();
-        LOGGER.info("Select last 90 days", test);
+        datePicker.selectLast30Days();
+        LOGGER.info("Select last 30 days", test);
         chargeBackImpala.clickOnGroupBySearchBox();
         chargeBackImpala.selectGroupBy(GroupByOptions.INPUT_TABLES);
         LOGGER.info("Click on groupBy: " + GroupByOptions.INPUT_TABLES.value, test);
-        chargeBackImpala.validateGroupByPieCharts();
+        chargeBackImpala.remove1stGroupByOption();
+        chargeBackImpala.validateJobsPieCharts();
         LOGGER.pass("Validated whether pie charts displayed group by data", test);
         chargeBackImpala.validateGroupByOptions();
         LOGGER.pass("Validated the group by options in group by table", test);

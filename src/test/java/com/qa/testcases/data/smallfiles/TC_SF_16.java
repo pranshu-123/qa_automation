@@ -22,7 +22,7 @@ public class TC_SF_16 extends BaseClass {
     public void verifySmallFileReport(String clusterId) {
         test = extent.startTest("TC_SF_16.verifySmallFileReport: " + clusterId, "Verify User is able " +
                 "Verify user should successfully run Small Files report and display the report in the UI.");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_16.verifySmallFileReport");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -55,6 +55,9 @@ public class TC_SF_16 extends BaseClass {
             String scheduleSuccessMsg = "The report has been scheduled successfully.";
             smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
         } catch (TimeoutException te) {
+            String scheduleSuccessMsg = "The report has been scheduled successfully.";
+            smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
+        } catch (VerifyError te) {
             throw new AssertionError("smallfiles Report has not been scheduled successfully.");
         }
     }

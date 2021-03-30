@@ -23,7 +23,7 @@ public class TC_SF_10 extends BaseClass {
     public void verifyAbsoluteFileSize(String clusterId) {
         test = extent.startTest("TC_SF_10.verifyAbsoluteFileSize: " + clusterId, "Verify User is able " +
                 "selected and the directory listed as having 2 files.");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_10.verifyAbsoluteFileSize");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -55,10 +55,15 @@ public class TC_SF_10 extends BaseClass {
         try {
             waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
                     "Small file Report completed successfully.");
+            waitExecuter.sleep(3000);
             test.log(LogStatus.PASS, "Verified smallfiles report is loaded properly.");
             logger.info("Verified smallfiles report is loaded properly");
         } catch (TimeoutException te) {
-            throw new AssertionError("smallfiles Report not completed successfully.");
+            waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
+                    "Small file Report completed successfully.");
+        }
+        catch (VerifyError te) {
+            throw new AssertionError("smallfiles Report not completed successfully."+te);
         }
     }
 }

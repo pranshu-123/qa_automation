@@ -10,7 +10,7 @@ import java.util.function.Supplier;
  */
 public class RetryExecuter<T> {
     private int retryCounter;
-    private static final int MAX_RETRIES = 3;
+    private static final int MAX_RETRIES = 2;
     private LoggingUtils logger = new LoggingUtils(RetryExecuter.class);
 
     /**

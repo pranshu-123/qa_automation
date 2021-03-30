@@ -24,7 +24,7 @@ public class TC_SF_08 extends BaseClass {
     public void validatesmallfilereportusingadvancedfileoptions(String clusterId) {
         test = extent.startTest("TC_SF_08.validatesmallfilereportusingadvancedfileoptions: " + clusterId, "Verify User is able " +
                 "Verify Unravel UI should close the Mini-window");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_08.validatesmallfilereportusingadvancedfileoptions");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -75,7 +75,11 @@ public class TC_SF_08 extends BaseClass {
             test.log(LogStatus.PASS, "Verified smallfiles report is loaded properly.");
             LOGGER.info("Verified smallfiles report is loaded properly");
         } catch (TimeoutException te) {
-            throw new AssertionError("smallfiles Report not completed successfully.");
+            waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
+                    "Small file Report completed successfully.");
+        }
+        catch (VerifyError te) {
+            throw new AssertionError("smallfiles Report not completed successfully."+te);
         }
     }
 }

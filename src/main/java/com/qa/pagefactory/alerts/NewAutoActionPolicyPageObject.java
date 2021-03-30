@@ -68,6 +68,12 @@ public class NewAutoActionPolicyPageObject {
     @FindBy(xpath = "//div[contains(@class,'mode-div')]/div/div/span[text()='except']/parent::div/preceding-sibling::div/label/span")
     public WebElement exceptUserChkBox;
 
+    @FindBy(xpath = "//div[contains(@class, 'mode-div')]/div/div/span[text()='always']/parent::div/preceding-sibling::div/label/span")
+    public WebElement alwaysChkBox;
+
+    @FindBy(xpath = "//div[contains(@class, 'mode-div')]/div/div/span[text()='daily']/parent::div/preceding-sibling::div/label/span")
+    public WebElement dailyChkBox;
+
     @FindBy(xpath = "(//select[contains(@class, 'component-multi-select')])[1]")
     public WebElement selectAppType;
 

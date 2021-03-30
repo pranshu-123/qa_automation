@@ -25,7 +25,7 @@ public class TC_SF_24 extends BaseClass {
     public void VerifySortByPath(String clusterId) {
         test = extent.startTest("TC_SF_24.VerifySortByPath: " + clusterId,
                 "Verify the user is able sort the UI based on Path column for Small File Reports");
-        test.assignCategory("Data- Small Files and File reports");
+        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_24.VerifySortByPath");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);

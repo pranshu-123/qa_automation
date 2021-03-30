@@ -10,6 +10,9 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.logging.Logger;
+
 /**
  * @author Birender Kumar
  */
@@ -20,6 +23,8 @@ public class TC_CO_17 extends BaseClass {
     private WaitExecuter waitExecuter;
     private DatePicker datePicker;
 
+    private static final Logger LOGGER = Logger.getLogger(TC_CO_17.class.getName());
+
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_CO_17_VerifyAlertsFunc(String clusterId) {
         test = extent.startTest("TC_CO_17_VerifyAlertsFunc: "+clusterId, "Verify alerts functionality.");
@@ -27,6 +32,7 @@ public class TC_CO_17 extends BaseClass {
 
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
+        LOGGER.info("Select cluster: "+clusterId);
 
         WaitExecuter executer = new WaitExecuter(driver);
         executer.sleep(2000);

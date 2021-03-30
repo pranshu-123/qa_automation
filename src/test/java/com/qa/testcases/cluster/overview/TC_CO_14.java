@@ -31,16 +31,18 @@ public class TC_CO_14 extends BaseClass {
         test = extent.startTest("TC_CO_14_VerifyJobsByStatusKPIGraphFilter"+clusterId, "Verify cluster by status KPI graph filter");
         test.assignCategory(" Cluster Overview");
         DatePicker datePicker = new DatePicker(driver);
-        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        WaitExecuter executer = new WaitExecuter(driver);
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
 
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
-        datePicker.clickOnDatePicker();
-        datePicker.selectLast30Days();
+        executer.sleep(5000);
+        executer.waitUntilPageFullyLoaded();
 
-        WaitExecuter executer = new WaitExecuter(driver);
-        executer.sleep(3000);
+        datePicker.clickOnDatePicker();
+        datePicker.selectLast90Days();
+        executer.sleep(2000);
+        executer.waitUntilPageFullyLoaded();
 
         // Take Screenshot and validate the graph
         OverviewGraphPageObject overviewGraph = new OverviewGraphPageObject(driver);
@@ -102,7 +104,6 @@ public class TC_CO_14 extends BaseClass {
                 "Killed Graph is loaded when killed checkbox is not selected.");
         executer.sleep(1000);
         test.log(LogStatus.PASS, "Successfully validated killed graph is loaded when killed checkbox is not selected.");
-
 
     }
 }

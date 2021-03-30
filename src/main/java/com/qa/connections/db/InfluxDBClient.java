@@ -20,9 +20,7 @@ public class InfluxDBClient {
         InfluxConfigReader configReader = new InfluxConfigReader();
         try {
             Map<String, Object> config = configReader.readYamlFile(FileConstants.getInfluxConfigYaml());
-            influxDB = InfluxDBFactory.connect(((Map)config.get("influx")).get("url").toString(),
-                ((Map)config.get("influx")).get("username").toString(),
-                ((Map)config.get("influx")).get("password").toString());
+            influxDB = InfluxDBFactory.connect(((Map)config.get("influx")).get("url").toString());
             influxDB.setDatabase(((Map)config.get("influx")).get("db").toString());
             influxDB.enableBatch(BatchOptions.DEFAULTS);
             influxDB.ping();

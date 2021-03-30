@@ -2,6 +2,7 @@ package com.qa.base;
 
 import com.qa.connections.db.InfluxDBClient;
 import com.qa.constants.ConfigConstants;
+import com.qa.constants.InfluxMetricsConstants;
 import com.qa.io.ConfigReader;
 import com.qa.utils.DateUtils;
 import com.relevantcodes.extentreports.LogStatus;
@@ -20,10 +21,10 @@ import java.util.Properties;
  * Implementation of custom listener for testng.
  */
 public class CustomListener extends BaseClass implements ITestListener {
-//    private Long START;
-//    private Long END;
+
     private static final Long EXECUTION_ID = System.currentTimeMillis();
     private InfluxDBClient influxDBClient = InfluxDBClient.getConnection();
+
     /**
      * Add skip test cases to html report
      * @param result - Result Object of test execution
@@ -36,7 +37,7 @@ public class CustomListener extends BaseClass implements ITestListener {
         extent.endTest(test);
         extent.flush();
         try {
-            influxDBClient.writeDataToInflux(dataToPush(result,
+            influxDBClient.writeDataToInflux(getDataToPushForInflux(result,
                     "SKIP"));
         } catch (UnknownHostException e) {
             e.printStackTrace();
@@ -45,13 +46,12 @@ public class CustomListener extends BaseClass implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult result) {
-//        START = System.currentTimeMillis();
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
         try {
-            influxDBClient.writeDataToInflux(dataToPush(result,
+            influxDBClient.writeDataToInflux(getDataToPushForInflux(result,
                     "PASS"));
         } catch (UnknownHostException e) {
             e.printStackTrace();
@@ -61,10 +61,10 @@ public class CustomListener extends BaseClass implements ITestListener {
     public void onTestFailure(ITestResult result) {
         try {
             if (result.getThrowable() instanceof AssertionError) {
-                influxDBClient.writeDataToInflux(dataToPush(result,
+                influxDBClient.writeDataToInflux(getDataToPushForInflux(result,
                         "FAIL"));
             } else {
-                influxDBClient.writeDataToInflux(dataToPush(result,
+                influxDBClient.writeDataToInflux(getDataToPushForInflux(result,
                         "FATAL"));
             }
         } catch (UnknownHostException e) {
@@ -79,20 +79,26 @@ public class CustomListener extends BaseClass implements ITestListener {
     public void onFinish(ITestContext context) {
     }
 
-    private Map<String, Object> dataToPush(ITestResult result,
-                                   String status) throws UnknownHostException {
+    /**
+     * Get the data to be pushed on influxDB
+     * @param result - ITestResult
+     * @param status - Execution Status
+     * @return - Map of k,v pair
+     * @throws UnknownHostException
+     */
+    private Map<String, Object> getDataToPushForInflux(ITestResult result,
+                                                       String status) throws UnknownHostException {
         Map<String, Object> data = new HashMap<>();
         Properties prop = ConfigReader.readBaseConfig();
-        data.put("test_case_id", result.getMethod().getMethodName());
-        data.put("method_name", result.getMethod().getMethodName());
-        data.put("status", status);
+        data.put(InfluxMetricsConstants.METHOD_NAME, result.getMethod().getMethodName());
+        data.put(InfluxMetricsConstants.STATUS, status);
         data.put(ConfigConstants.UnravelConfig.UNRAVEL_BUILD, prop.getProperty(ConfigConstants.UnravelConfig.UNRAVEL_BUILD));
         data.put(ConfigConstants.UnravelConfig.UNRAVEL_VERSION, prop.getProperty(ConfigConstants.UnravelConfig.UNRAVEL_VERSION));
-        data.put("batch_id", DateUtils.convertMilliSecToISO(EXECUTION_ID));
-        data.put("url", prop.getProperty(ConfigConstants.UnravelConfig.URL));
-        data.put("host", InetAddress.getLocalHost().getHostName());
-        data.put("duration", result.getEndMillis() - result.getStartMillis());
-        data.put("markers", System.getProperty(ConfigConstants.SystemConfig.MARKERS));
+        data.put(InfluxMetricsConstants.BATCH_ID, DateUtils.convertMilliSecToISO(EXECUTION_ID));
+        data.put(InfluxMetricsConstants.URL, prop.getProperty(ConfigConstants.UnravelConfig.URL));
+        data.put(InfluxMetricsConstants.HOST, InetAddress.getLocalHost().getHostName());
+        data.put(InfluxMetricsConstants.DURATION, result.getEndMillis() - result.getStartMillis());
+        data.put(InfluxMetricsConstants.MARKERS, System.getProperty(ConfigConstants.SystemConfig.MARKERS));
         return data;
     }
 }

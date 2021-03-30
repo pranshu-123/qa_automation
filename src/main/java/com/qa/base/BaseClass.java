@@ -23,6 +23,7 @@ import java.io.File;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -68,7 +69,8 @@ public class BaseClass {
                 prop.getProperty(ConfigConstants.ReportConfig.SELENIUM_VERSION));
         UnravelBuildInfo unravelBuildInfo = new UnravelBuildInfo(driver);
         unravelBuildInfo.setBuildInfo(extent);
-
+        Map buildInfo = unravelBuildInfo.getUnravelBuildInfo();
+        UnravelConfigUtils.updateBuildDetails(buildInfo);
     }
 
     /**

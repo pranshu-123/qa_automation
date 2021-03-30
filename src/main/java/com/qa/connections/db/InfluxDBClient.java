@@ -1,5 +1,6 @@
 package com.qa.connections.db;
 
+import com.qa.constants.ConfigConstants;
 import com.qa.constants.FileConstants;
 import com.qa.io.InfluxConfigReader;
 import org.influxdb.BatchOptions;
@@ -19,9 +20,12 @@ public class InfluxDBClient {
         InfluxConfigReader configReader = new InfluxConfigReader();
         try {
             Map<String, Object> config = configReader.readYamlFile(FileConstants.getInfluxConfigYaml());
-            influxDB = InfluxDBFactory.connect(((Map)config.get("influx")).get("url").toString());
+            influxDB = InfluxDBFactory.connect(((Map)config.get("influx")).get("url").toString(),
+                ((Map)config.get("influx")).get("username").toString(),
+                ((Map)config.get("influx")).get("password").toString());
             influxDB.setDatabase(((Map)config.get("influx")).get("db").toString());
             influxDB.enableBatch(BatchOptions.DEFAULTS);
+            influxDB.ping();
         } catch (FileNotFoundException exception) {
             exception.printStackTrace();
         }
@@ -35,9 +39,10 @@ public class InfluxDBClient {
     }
 
     public void writeDataToInflux(Map<String, Object> data) {
-        influxDB.write(Point.measurement("test_execution1")
+        influxDB.write(Point.measurement("test_execution")
                 .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
-                .tag("test_case_id", data.get("test_case_id").toString())
+                .tag("unravel_build", data.get(ConfigConstants.UnravelConfig.UNRAVEL_BUILD).toString())
+                .tag("unravel_version", data.get(ConfigConstants.UnravelConfig.UNRAVEL_VERSION).toString())
                 .tag("url", data.get("url").toString())
                 .tag("batch_id", data.get("batch_id").toString())
                 .addField("method_name", data.get("method_name").toString())

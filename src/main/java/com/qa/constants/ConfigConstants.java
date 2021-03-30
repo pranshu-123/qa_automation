@@ -14,6 +14,8 @@ public class ConfigConstants {
         public static final String USERNAME = "username";
         public static final String PASSWORD = "password";
         public static final String BROWSER = "browser";
+        public static final String UNRAVEL_VERSION = "Version";
+        public static final String UNRAVEL_BUILD = "Build";
     }
 
     /**

@@ -1,3 +1,5 @@
 influx:
-  url: http://localhost:8086
-  db: selenium_matrics
+  url: http://tnode151.unraveldata.com:8086
+  db: selenium_metrics
+  username: unraveladmin
+  password: unraveldata123

@@ -6,6 +6,9 @@ import com.qa.io.ConfigReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -27,6 +30,22 @@ public class UnravelConfigUtils {
             ConfigConstants.SystemConfig.PASSWORD));
         prop.setProperty(ConfigConstants.UnravelConfig.BROWSER, System.getProperty(
             ConfigConstants.SystemConfig.BROWSER));
+        try {
+            FileOutputStream out = new FileOutputStream(FileConstants.getConfigFile());
+            prop.store(out, null);
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateBuildDetails(Map buildInfo) {
+        Properties prop = ConfigReader.readBaseConfig();
+        List buildDetails = new ArrayList<String>(buildInfo.values());
+        prop.setProperty(ConfigConstants.UnravelConfig.UNRAVEL_VERSION, buildDetails.get(0).toString());
+        prop.setProperty(ConfigConstants.UnravelConfig.UNRAVEL_BUILD, buildDetails.get(1).toString());
         try {
             FileOutputStream out = new FileOutputStream(FileConstants.getConfigFile());
             prop.store(out, null);

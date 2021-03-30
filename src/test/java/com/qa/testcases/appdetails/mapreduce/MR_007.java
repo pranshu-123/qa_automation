@@ -48,9 +48,9 @@ public class MR_007 extends BaseClass {
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
-        Assert.assertEquals(appCount, totalCount, "The tez app count of TezApp is not equal to " +
+        Assert.assertEquals(appCount, totalCount, "The tez app count of map reduce is not equal to " +
                 "the total count of heading.");
-        test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
+        test.log(LogStatus.PASS, "The left pane has map reduce check box and the app counts match to that " +
                 "displayed in the header");
 
         /*
@@ -58,11 +58,11 @@ public class MR_007 extends BaseClass {
          */
         if (appCount > 0) {
             String statusValue = mrDetailsPage.verifyAppStatus(mrApps);
-            test.log(LogStatus.PASS, "Tez status Value is displayed in the Table: " + statusValue);
+            test.log(LogStatus.PASS, "Map reduce status Value is displayed in the Table: " + statusValue);
 
         } else {
-            test.log(LogStatus.SKIP, "No Tez Application present");
-            logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +
+            test.log(LogStatus.SKIP, "No Map reduce Application present");
+            logger.error("No Map reduce Application present in the " + clusterId + " cluster for the time span " +
                     "of 90 days");
             //Close apps details page
             MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);

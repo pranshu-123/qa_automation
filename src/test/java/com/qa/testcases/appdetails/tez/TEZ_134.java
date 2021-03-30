@@ -50,13 +50,11 @@ public class TEZ_134 extends BaseClass {
         int appCount = tezDetailsPage.clickOnlyLink("Success");
         //Clicking on the Tez app must go to apps detail page
         if (appCount > 0) {
-            String statusValue = tezDetailsPage.verifyStatus(tezApps, applicationsPageObject);
-            test.log(LogStatus.PASS, "Tez Status  is displayed in the Header: " + statusValue);
+            tezDetailsPage.verifyDagsComponent(tezApps, true, true, false);
+            test.log(LogStatus.SKIP, "Verified left pane in the app details page successfully");
             //Close apps details page
             MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
             waitExecuter.sleep(3000);
-
-
         } else {
             test.log(LogStatus.SKIP, "No Tez Application present");
             logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +

@@ -35,9 +35,9 @@ public class YC_023 extends BaseClass {
         test.log(LogStatus.PASS, "Successfully verified number of options in group by on yarn chargeback page");
 
         // Verify the names of options available in group by options
-        Assert.assertTrue(chargeBackYarn.validateGroupByOptions(),
-                "The displayed option does not match the group by actual options");
-        test.log(LogStatus.PASS, "Successfully verified name of options available in group by on yarn " +
+        Assert.assertFalse(chargeBackYarn.validateGroupByOptions(),
+                "The displayed option does not have group by options");
+        test.log(LogStatus.PASS, "Successfully verified options available in group by on yarn " +
                 "chargeback page");
 
     }

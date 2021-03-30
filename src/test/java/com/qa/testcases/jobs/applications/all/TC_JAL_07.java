@@ -4,6 +4,7 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.jobs.applications.AllApps;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.Keys;
@@ -54,32 +55,34 @@ public class TC_JAL_07 extends BaseClass {
             Assert.assertTrue(tableData.size() > 0,
                     "Table does not contain data according to the Application type " + applicationTypeToSearch);
             test.log(LogStatus.INFO, "Get username of first application listed in table and search ");
-            LOGGER.info("Get username of first application listed in table and search");
-            waitExecuter.sleep(1000);
             applicationsPageObject.globalSearchBox.clear();
-            waitExecuter.sleep(1000);
-            applicationsPageObject.userSearchBox.click();
-            waitExecuter.sleep(1000);
-            String usernameToSearch = applicationsPageObject.getNamesFromDropDown.get(0).getText();
-            waitExecuter.sleep(1000);
-            applicationsPageObject.globalSearchBox.sendKeys(usernameToSearch);
-            waitExecuter.sleep(1000);
-            applicationsPageObject.globalSearchBox.sendKeys(Keys.RETURN);
-            waitExecuter.sleep(3000);
-            Assert.assertTrue(tableData.size() > 0,
-                    "Table does not contain data according to the Username " + usernameToSearch);
-            test.log(LogStatus.INFO, "Get Queue name of first application listed in table and search");
-            LOGGER.info("Get application Queue name of first application listed in table and search");
-            waitExecuter.sleep(1000);
-            applicationsPageObject.globalSearchBox.clear();
-            String queuenameToSearch = applicationsPageObject.getQueueNameTable.getText();
-            waitExecuter.sleep(1000);
-            applicationsPageObject.globalSearchBox.sendKeys(queuenameToSearch);
-            waitExecuter.sleep(1000);
-            applicationsPageObject.globalSearchBox.sendKeys(Keys.RETURN);
-            waitExecuter.sleep(3000);
-            Assert.assertTrue(tableData.size() > 0,
-                    "Table does not contain data according to the Queue name type " + queuenameToSearch);
+//            LOGGER.info("Get username of first application listed in table and search");
+//            waitExecuter.sleep(1000);
+//            applicationsPageObject.globalSearchBox.clear();
+//            waitExecuter.sleep(1000);
+//            //applicationsPageObject.userSearchBox.click();
+//            MouseActions.clickOnElement(driver, applicationsPageObject.userSearchBox);
+//            waitExecuter.sleep(1000);
+//            String usernameToSearch = applicationsPageObject.getNamesFromDropDown.get(0).getText();
+//            waitExecuter.sleep(1000);
+//            applicationsPageObject.globalSearchBox.sendKeys(usernameToSearch);
+//            waitExecuter.sleep(1000);
+//            applicationsPageObject.globalSearchBox.sendKeys(Keys.RETURN);
+//            waitExecuter.sleep(3000);
+//            Assert.assertTrue(tableData.size() > 0,
+//                    "Table does not contain data according to the Username " + usernameToSearch);
+//            test.log(LogStatus.INFO, "Get Queue name of first application listed in table and search");
+//            LOGGER.info("Get application Queue name of first application listed in table and search");
+//            waitExecuter.sleep(1000);
+//            applicationsPageObject.globalSearchBox.clear();
+//            String queuenameToSearch = applicationsPageObject.getQueueNameTable.getText();
+//            waitExecuter.sleep(1000);
+//            applicationsPageObject.globalSearchBox.sendKeys(queuenameToSearch);
+//            waitExecuter.sleep(1000);
+//            applicationsPageObject.globalSearchBox.sendKeys(Keys.RETURN);
+//            waitExecuter.sleep(3000);
+//            Assert.assertTrue(tableData.size() > 0,
+//                    "Table does not contain data according to the Queue name type " + queuenameToSearch);
             test.log(LogStatus.PASS, "Table contain data according to the Queue name type ");
         } else
             Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),

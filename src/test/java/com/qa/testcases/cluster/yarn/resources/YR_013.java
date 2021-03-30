@@ -71,9 +71,9 @@ public class YR_013 extends BaseClass {
                 "Spark graph is not loaded");
         test.log(LogStatus.PASS, "Successfully validated Spark apps colour code with different colour.");
 
-        Assert.assertTrue(ScreenshotHelper.isContainColor(screenshot, GraphColorConstants.YarnResourcesGraph.TEZ_COLOR),
-                "Tez graph is not loaded");
-        test.log(LogStatus.PASS, "Successfully validated Tez apps colour code with different colour.");
+//        Assert.assertTrue(ScreenshotHelper.isContainColor(screenshot, GraphColorConstants.YarnResourcesGraph.TEZ_COLOR),
+//                "Tez graph is not loaded");
+//        test.log(LogStatus.PASS, "Successfully validated Tez apps colour code with different colour.");
 
         Assert.assertTrue(ScreenshotHelper.isContainColor(screenshot, GraphColorConstants.YarnResourcesGraph.YARN_SERVICE_COLOR),
                 "Yarn service graph is not loaded");

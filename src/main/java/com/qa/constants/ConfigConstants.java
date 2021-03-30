@@ -46,5 +46,6 @@ public class ConfigConstants {
         public static final String AWS = "aws";
         public static final String BUCKET_NAME = "bucket_name";
         public static final String HBASE_CLUSTERS = "hbase_clusters";
+        public static final String MAPREDUCE_CLUSTERS = "mapreduce_clusters";
     }
 }

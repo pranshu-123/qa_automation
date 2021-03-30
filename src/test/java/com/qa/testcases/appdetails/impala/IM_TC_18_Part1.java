@@ -41,7 +41,7 @@ public class IM_TC_18_Part1 extends BaseClass {
             appDetailsPage.navigateToJobsTab();
             allApps.selectCluster(clusterId);
             datePicker.clickOnDatePicker();
-            datePicker.selectLastOneHour();
+            datePicker.selectLast30Days();
             appDetailsPage.selectSuccessfulApplication();
             int appCount = appDetailsPage.selectOnlyApplication(AppDetailsApplicationType.IMPALA);
             loggingUtils.info("App count for impala- " + appCount, test);

@@ -20,11 +20,12 @@ public class DataProviderClass {
         /* @TODO - Need to remove hard coded values from cluster Ids this should be parameterized
            or it should be pulled from APIs. */
         UnravelConfigYamlReader unravelConfigYamlReader = new UnravelConfigYamlReader();
-        if (method.getDeclaringClass().getPackage().getName().contains("impala")
-                || method.getDeclaringClass().getPackage().getName().contains("mapreduce") ) {
+        if (method.getDeclaringClass().getPackage().getName().contains("impala")) {
             return unravelConfigYamlReader.getClusterList(true);
         } else if(method.getDeclaringClass().getPackage().getName().contains("hbase")) {
             return unravelConfigYamlReader.getClusterList("hbase");
+        }else if(method.getDeclaringClass().getPackage().getName().contains("mapreduce")) {
+            return unravelConfigYamlReader.getClusterList("mapreduce");
         }
         else {
             return unravelConfigYamlReader.getClusterList(false);

@@ -335,6 +335,22 @@ public class MrAppsDetailsPage {
      * Method to click the first app in jobs table , navigate to the details page.
      * and verify app Id .
      */
+    public String verifyJobsSummary(MrAppsDetailsPageObject mrApps) {
+        String jobSummary = mrApps.Status.getText().trim();
+        logger.info("Map Reduce job Summary is " + jobSummary);
+        mrApps.getSummaryFromTable.click();
+        waitExecuter.sleep(5000);
+        waitExecuter.waitUntilPageFullyLoaded();
+        String jobSummaryStatus = mrApps.getJobSummary.getText().trim();
+        Assert.assertNotSame("", jobSummaryStatus, "Map Reduce application page job Summary is not displayed in the Header");
+        return jobSummaryStatus;
+    }
+
+
+    /**
+     * Method to click the first app in jobs table , navigate to the details page.
+     * and verify app Id .
+     */
     public String verifyAppStatus(MrAppsDetailsPageObject mrApps) {
         String Status = mrApps.Status.getText();
         waitExecuter.sleep(3000);

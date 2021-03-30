@@ -24,7 +24,7 @@ public class MR_048 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void MR_048_verifyMRAppsKPIs(String clusterId) {
         test = extent.startTest("MR_048_verifyMRAppsKPIs: " + clusterId,
-                "Verify KPI for MR must be listed andf all the values should be populated");
+                "Verify KPI for MR must be listed and all the values should be populated");
         test.assignCategory(" Apps Details-Mr");
         Log.startTestCase("MR_048_verifyMRAppsKPIs");
 
@@ -50,9 +50,9 @@ public class MR_048 extends BaseClass {
         //Verify app details page
         if (appCount > 0) {
             String headerAppId = mrDetailsPage.verifyAppId(mrApps, applicationsPageObject);
-            test.log(LogStatus.PASS, "Tez Application Id is displayed in the Header: " + headerAppId);
-            mrDetailsPage.validateHeaderTab(mrApps,test);
-        waitExecuter.sleep(4000);
+            test.log(LogStatus.PASS, "Map Reduce Application Id is displayed in the Header: " + headerAppId);
+            mrDetailsPage.verifyRightPaneKpis(mrApps);
+            test.log(LogStatus.PASS, "All the KPIs are listed and the data is populated");
         //Close apps details page
         MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);
         waitExecuter.sleep(3000);

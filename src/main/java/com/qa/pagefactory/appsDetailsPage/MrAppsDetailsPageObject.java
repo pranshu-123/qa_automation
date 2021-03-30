@@ -11,6 +11,10 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[4]/div")
     public WebElement getAppId;
 
+    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[1]")
+    public WebElement getSummaryFromTable;
+
+
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[5]")
     public WebElement getClusterId;
 
@@ -92,6 +96,9 @@ public class MrAppsDetailsPageObject {
 
     @FindBy(xpath = "//*[@class='highcharts-legend']/*[name()='g']//*[name()='g']//*[name()='tspan']")
     public List<WebElement> ATlegendNames;
+
+    @FindBy(xpath = "//h2[@class='text-white inline-blk']")
+    public WebElement getJobSummary;
 
     @FindBy(xpath = "//*[@class='highcharts-legend']/*[name()='g']//*[name()='g']//*[name()='tspan']")
     public List<WebElement> driverLegendNames;

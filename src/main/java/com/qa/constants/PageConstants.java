@@ -71,6 +71,13 @@ public class PageConstants {
 
     }
 
+    public static class ReportsArchiveNames{
+        public static String Tuning = "Tuning";
+        public static String TopX = "Top X";
+//        public static String Tuning = "Tuning";
+//        public static String Tuning = "Tuning";
+    }
+
     /*Impala application Id*/
     public static class appId {
         public static String appIdForImpala = "bd4a44f2cfb21466:e787e01e00000000";

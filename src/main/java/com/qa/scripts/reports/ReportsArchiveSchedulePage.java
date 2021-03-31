@@ -188,6 +188,52 @@ public class ReportsArchiveSchedulePage {
   }
 
   /**
+   * Method to click the report names listed in the Report Archive Page with report name
+   */
+  public void clickOnReportName(ReportsArchiveScheduledPageObject reportPageObj,  String name) {
+    List<WebElement> reportNameList = reportPageObj.reportNames;
+    Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed , expected 9 reports");
+    for (int i = 0; i < reportNameList.size(); i++) {
+      String reportName = reportNameList.get(i).getText().trim();
+      System.out.println("reportName: "+reportName);
+      if(reportName.equals(name)){
+        logger.info("The report name is " + reportName);
+        int index = i+1;
+        String iconXpath = "//table/tbody/tr["+ index +"]/td[4]/div/span/span[contains(@class,'icon-add')]";
+        //table/tbody/tr[1]/td[4]/div/span/span[contains(@class,'icon-expand')]
+        //System.out.println("iconXpath: "+iconXpath);
+        WebElement iconElement = driver.findElement(By.xpath(iconXpath));
+        waitExecuter.waitUntilElementPresent(iconElement);
+        iconElement.click();
+        break;
+      }
+    }
+  }
+
+  /**
+   * Method to click the latest report names listed in the Report Archive Page with report name
+   */
+  public void clickOnLatestReport(ReportsArchiveScheduledPageObject reportPageObj,  String name) {
+    List<WebElement> reportNameList = reportPageObj.reportNames;
+    Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed , expected 9 reports");
+    for (int i = 0; i < reportNameList.size(); i++) {
+      String reportName = reportNameList.get(i).getText().trim();
+      System.out.println("reportName: "+reportName);
+      if(reportName.equals(name)){
+        logger.info("The report name is " + reportName);
+        int index = i+1;
+        String iconXpath = "//table/tbody/tr["+ index +"]/td[4]/div/span/span[contains(@class,'icon-expand')]";
+        //table/tbody/tr[1]/td[4]/div/span/span[contains(@class,'icon-expand')]
+        System.out.println("iconXpath: "+iconXpath);
+        WebElement iconElement = driver.findElement(By.xpath(iconXpath));
+        waitExecuter.waitUntilElementPresent(iconElement);
+        iconElement.click();
+        break;
+      }
+    }
+  }
+
+  /**
    * Method to validate the report status listed in the Report Archive Page
    */
   public void validateReportStatus(ReportsArchiveScheduledPageObject reportPageObj) {

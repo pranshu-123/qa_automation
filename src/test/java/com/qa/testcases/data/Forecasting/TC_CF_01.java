@@ -2,12 +2,14 @@ package com.qa.testcases.data.Forecasting;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.data.ForecastingPageObject;
 import com.qa.scripts.data.Forecasting;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Test;
@@ -39,6 +41,7 @@ public class TC_CF_01 extends BaseClass {
         waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.waitUntilElementClickable(topPanelPageObject.dataForecastingTab);
         waitExecuter.sleep(3000);
+        waitExecuter.waitUntilElementPresent(topPanelPageObject.dataForecastingTab);
         MouseActions.clickOnElement(driver, topPanelPageObject.dataForecastingTab);
         LOGGER.info("Clicked on Forecasting Tab");
         test.log(LogStatus.INFO, "Clicked on Forecasting Tab");
@@ -46,6 +49,7 @@ public class TC_CF_01 extends BaseClass {
         ForecastingPageObject forecastingPageObject = new ForecastingPageObject(driver);
 
         Forecasting forecasting = new Forecasting(driver);
+        UserActions userActions = new UserActions(driver);
         forecasting.closeConfirmationMessageNotification();
         forecasting.clickOnRunButton();
         LOGGER.info("Clicked on Run Button");
@@ -58,9 +62,9 @@ public class TC_CF_01 extends BaseClass {
         forecasting.clickOnModalRunButton();
         LOGGER.info("Clicked on Modal Run Button");
         test.log(LogStatus.INFO, "Clicked on Modal Run Button");
+        waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.waitUntilElementPresent(forecastingPageObject.runNowButton);
-        waitExecuter.waitUntilElementClickable(forecastingPageObject.runNowButton);
-
+        userActions.performActionWithPolling(forecastingPageObject.runNowButton, UserAction.CLICK);
         try {
             waitExecuter.waitUntilTextToBeInWebElement(forecastingPageObject.confirmationMessageElement,
                     "Capacity Forecasting completed successfully.");

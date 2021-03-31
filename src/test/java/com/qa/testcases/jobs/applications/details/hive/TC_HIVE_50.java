@@ -89,7 +89,6 @@ public class TC_HIVE_50 extends BaseClass {
             // Reset username filter to default
             test.log(LogStatus.INFO, "Reset username filter");
             allApps.reset();
-            throw new SkipException("There pagination is not present for selected duration and clusterId");
         }
 
     }

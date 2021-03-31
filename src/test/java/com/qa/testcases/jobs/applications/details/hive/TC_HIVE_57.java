@@ -134,7 +134,6 @@ public class TC_HIVE_57 extends BaseClass {
             test.log(LogStatus.INFO, "Click on reset if there are no hive apps");
             LOGGER.info("Click on reset if there are no hive apps");
             allApps.reset();
-            throw new SkipException("The clusterId does not have any application under it.");
         }
     }
 }

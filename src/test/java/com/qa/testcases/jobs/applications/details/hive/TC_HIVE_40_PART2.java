@@ -2,12 +2,14 @@ package com.qa.testcases.jobs.applications.details.hive;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -42,27 +44,28 @@ public class TC_HIVE_40_PART2 extends BaseClass {
         AllApps allApps = new AllApps(driver);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         SparkAppsDetailsPage sparkApp = new SparkAppsDetailsPage(driver);
+        UserActions userAction = new UserActions(driver);
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         LOGGER.info("Navigate to jobs tab from header");
         waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.jobs);
-        waitExecuter.sleep(4000);
-        topPanelComponentPageObject.jobs.click();
-        waitExecuter.sleep(4000);
+        userAction.performActionWithPolling(topPanelComponentPageObject.jobs, UserAction.CLICK);
+        waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
         waitExecuter.waitUntilPageFullyLoaded();
         // Select last 30 days from date picker
         test.log(LogStatus.INFO, "Select last 30 days");
         LOGGER.info("Select last 30 days");
         datePicker.clickOnDatePicker();
-        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         datePicker.selectLast30Days();
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         // Select cluster
         test.log(LogStatus.INFO, "Select clusterid : " + clusterId);
         LOGGER.info("Select clusterId : " + clusterId);
         allApps.selectCluster(clusterId);
-        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         // Select 'Only' hive type and get its jobs count
         test.log(LogStatus.INFO, "Select 'Only' hive from app types and get its jobs count");
         LOGGER.info("Select 'Only' hive from app types and get its jobs count");
@@ -70,25 +73,31 @@ public class TC_HIVE_40_PART2 extends BaseClass {
         // Scroll to view Tags filter
         test.log(LogStatus.INFO, "Scroll to view Tags filter.");
         LOGGER.info("Scroll to view Tags filter.");
-        executor.executeScript("arguments[0].scrollIntoView();", applicationsPageObject.userSearchBox);
-        waitExecuter.sleep(2000);
+        executor.executeScript("arguments[0].scrollIntoView();", applicationsPageObject.userExpandableHeader);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.tagExpandableHeader);
+        userAction.performActionWithPolling(applicationsPageObject.tagExpandableHeader, UserAction.CLICK);
         List<WebElement> checkBoxTags = applicationsPageObject.tagsCheckboxes;
         List<WebElement> tagsType = applicationsPageObject.getTagTypes;
         List<String> selectedTagType = new ArrayList<String>();
         List<String> selectedFilterUnderTag = new ArrayList<>();
         for (int i = 0; i < 2; i++) {
-            checkBoxTags.get(i).click();
-            waitExecuter.sleep(2000);
+            waitExecuter.waitUntilElementClickable(checkBoxTags.get(i));
+            userAction.performActionWithPolling(checkBoxTags.get(i),UserAction.CLICK);
+            waitExecuter.waitUntilElementClickable(checkBoxTags.get(i));
             selectedTagType.add(tagsType.get(i).getText().trim().toLowerCase());
             LOGGER.info("Selected type: " + tagsType.get(i).getText().trim().toLowerCase());
-            applicationsPageObject.tagTypeSearchbox.get(i).click();
-            waitExecuter.sleep(2000);
+
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.tagTypeSearchbox.get(i));
+            userAction.performActionWithPolling(applicationsPageObject.tagTypeSearchbox.get(i),UserAction.CLICK);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.tagTypeSearchbox.get(i));
             selectedFilterUnderTag
                     .add(applicationsPageObject.select1stOptionInTagsSearchBox.get(i).getText().trim().toLowerCase());
             LOGGER.info("Name of selected tag: "
                     + applicationsPageObject.select1stOptionInTagsSearchBox.get(i).getText().trim().toLowerCase());
-            applicationsPageObject.select1stOptionInTagsSearchBox.get(i).click();
-            waitExecuter.sleep(2000);
+
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.select1stOptionInTagsSearchBox.get(i));
+            userAction.performActionWithPolling(applicationsPageObject.select1stOptionInTagsSearchBox.get(i),UserAction.CLICK);
+
         }
         int hiveAppCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
                 .replaceAll("[^\\dA-Za-z ]", "").trim());
@@ -96,10 +105,12 @@ public class TC_HIVE_40_PART2 extends BaseClass {
             // Click on the first app in table to get efficiency
             test.log(LogStatus.INFO, "Click on the first app in table to get efficiency");
             LOGGER.info("Click on the first app in table to get efficiency");
-            applicationsPageObject.getDurationFromTable.click();
-            waitExecuter.sleep(5000);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.getDurationFromTable);
+            userAction.performActionWithPolling(applicationsPageObject.getDurationFromTable,UserAction.CLICK);
             driver.getWindowHandle();
-            applicationsPageObject.tagsTab.click();
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.tagsTab);
+            userAction.performActionWithPolling(applicationsPageObject.tagsTab,UserAction.CLICK);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.tagsTab);
             waitExecuter.sleep(1000);
             List<WebElement> getTagNamesFromTagTable = applicationsPageObject.tagsInTable;
             List<WebElement> getTagsDescriptionFromTagTable = applicationsPageObject.descriptionInTable;
@@ -109,8 +120,10 @@ public class TC_HIVE_40_PART2 extends BaseClass {
                         getTagsDescriptionFromTagTable.get(j).getText().trim().toLowerCase());
             }
             waitExecuter.sleep(1000);
-            driver.navigate().back();
-            waitExecuter.sleep(5000);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
+            userAction.performActionWithPolling(applicationsPageObject.closeIcon,UserAction.CLICK);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+            waitExecuter.sleep(1000);
             for (String tag : selectedTagType) {
 
                 Assert.assertTrue(map.containsKey(tag),
@@ -130,12 +143,9 @@ public class TC_HIVE_40_PART2 extends BaseClass {
                     "The clusterId does not have any application under it and also does not display 'No Data Available' for it"
                             + clusterId);
             test.log(LogStatus.SKIP, "The clusterId does not have any application under it.");
-            waitExecuter.sleep(1000);
             //Click on reset if there are no hive apps
-            test.log(LogStatus.INFO, "Click on reset if there are no hive apps");
             LOGGER.info("Click on reset if there are no hive apps");
             allApps.reset();
-            throw new SkipException("The clusterId does not have any application under it.");
         }
     }
 }

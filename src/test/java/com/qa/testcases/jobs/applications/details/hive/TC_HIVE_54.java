@@ -2,12 +2,14 @@ package com.qa.testcases.jobs.applications.details.hive;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -40,28 +42,29 @@ public class TC_HIVE_54 extends BaseClass {
         DatePicker datePicker = new DatePicker(driver);
         Actions actions = new Actions(driver);
         SparkAppsDetailsPage sparkApp = new SparkAppsDetailsPage(driver);
+        UserActions userAction = new UserActions(driver);
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         LOGGER.info("Navigate to jobs tab from header");
         waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.jobs);
-        waitExecuter.sleep(4000);
-        topPanelComponentPageObject.jobs.click();
-        waitExecuter.sleep(4000);
+        userAction.performActionWithPolling(topPanelComponentPageObject.jobs, UserAction.CLICK);
+        waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
         waitExecuter.waitUntilPageFullyLoaded();
         // Select last 30 days from date picker
         test.log(LogStatus.INFO, "Select last 30 days");
         LOGGER.info("Select last 30 days");
         datePicker.clickOnDatePicker();
-        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         datePicker.selectLast30Days();
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
 
         // Select cluster
         test.log(LogStatus.INFO, "Select clusterid : " + clusterId);
         LOGGER.info("Select clusterId : " + clusterId);
         allApps.selectCluster(clusterId);
-        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         // Select only Hive apps and check if app counts is 0 or greater than that
         test.log(LogStatus.INFO, "Select only hive apps and check if app counts is 0 or greater than that");
         LOGGER.info("Select only hive apps and check if app counts is 0 or greater than that");
@@ -73,29 +76,30 @@ public class TC_HIVE_54 extends BaseClass {
             test.log(LogStatus.INFO, "Get Hive app id from the first row");
             LOGGER.info("Get Hive app id from the first row");
             WebElement name = applicationsPageObject.getAppNameFromTable;
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
             actions.moveToElement(name).perform();
-            waitExecuter.sleep(1000);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
             actions.moveToElement(applicationsPageObject.copyAppName).perform();
-            waitExecuter.sleep(1000);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.copyAppName);
             applicationsPageObject.copyAppName.click();
 
             //Click on first app in table to navigate to app details page
             test.log(LogStatus.INFO, "Click on first app in table to navigate to app details page");
             LOGGER.info("Click on first app in table to navigate to app details page");
-            applicationsPageObject.getStatusFromTable.click();
-            waitExecuter.sleep(1000);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.getStatusFromTable);
+            userAction.performActionWithPolling(applicationsPageObject.getStatusFromTable, UserAction.CLICK);
             //Assert that App details page opens
             test.log(LogStatus.INFO, "Assert that App details page opens");
             LOGGER.info("Assert that App details page opens");
             Assert.assertTrue(applicationsPageObject.appSummary.isDisplayed(),
                     "Application Summary page didn't load. ");
             test.log(LogStatus.PASS, "Application Summary page loaded successfully.");
-            waitExecuter.sleep(1000);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
+            userAction.performActionWithPolling(applicationsPageObject.closeIcon, UserAction.CLICK);
             //Navigate back to parent page and click on reset
             test.log(LogStatus.INFO, "Navigate back to parent page and click on reset");
             LOGGER.info("Navigate back to parent page and click on reset");
-            driver.navigate().back();
-            waitExecuter.sleep(5000);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
             allApps.reset();
 
         } else {
@@ -103,12 +107,11 @@ public class TC_HIVE_54 extends BaseClass {
                     "The clusterId does not have any application under it and also does not display 'No Data Available' for it"
                             + clusterId);
             test.log(LogStatus.SKIP, "The clusterId does not have any application under it.");
-            waitExecuter.sleep(1000);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
             //Click on reset if there are no hive apps
             test.log(LogStatus.INFO, "Click on reset if there are no hive apps");
             LOGGER.info("Click on reset if there are no hive apps");
             allApps.reset();
-            throw new SkipException("The clusterId does not have any application under it.");
         }
     }
 }

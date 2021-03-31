@@ -123,4 +123,10 @@ public class DateUtils {
 		}
 		return convertedDate;
 	}
+
+	public static String convertMilliSecToISO(Long milliSec) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date formattedDateTime = new Date(milliSec);
+		return sdf.format(formattedDateTime);
+	}
 }

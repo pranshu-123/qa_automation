@@ -3,6 +3,7 @@ package com.qa.scripts;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import com.qa.enums.UserAction;
@@ -22,6 +23,7 @@ public class UnravelBuildInfo {
 	private static final Logger LOGGER = Logger.getLogger(UnravelBuildInfo.class.getName());
 	private UserActions actions;
 	private WebDriver driver;
+	private LinkedHashMap buildInfo;
 
 	public UnravelBuildInfo(WebDriver driver) {
 		this.driver = driver;
@@ -56,16 +58,20 @@ public class UnravelBuildInfo {
 
 	/* Method helps in setting unravel about info in extent report */
 	public void setBuildInfo(ExtentReports extent) {
-		LinkedHashMap map = new LinkedHashMap<>();
+		buildInfo = new LinkedHashMap<>();
 		WaitExecuter wait = new WaitExecuter(driver);
 		List<String> unravelDetails = getBuildInfo();
 		for (int i = 0; i < unravelDetails.size(); i++) {
 			String[] unravelBuildDetails = unravelDetails.get(i).split(":");
 			LOGGER.info("unravelBuildDetails[0] " + unravelBuildDetails[0]);
 			LOGGER.info("unravelBuildDetails[1] " + unravelBuildDetails[1]);
-			map.put(unravelBuildDetails[0].trim(), unravelBuildDetails[1].trim());
+			buildInfo.put(unravelBuildDetails[0].trim(), unravelBuildDetails[1].trim());
 		}
-		extent.addSystemInfo(map);
+		extent.addSystemInfo(buildInfo);
 		wait.sleep(1000);
+	}
+
+	public Map getUnravelBuildInfo() {
+		return buildInfo;
 	}
 }

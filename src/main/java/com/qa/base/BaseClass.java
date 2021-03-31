@@ -1,5 +1,6 @@
 package com.qa.base;
 
+import com.qa.connections.db.InfluxDBClient;
 import com.qa.constants.ConfigConstants;
 import com.qa.constants.DirectoryConstants;
 import com.qa.constants.FileConstants;
@@ -23,6 +24,7 @@ import java.io.File;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -68,7 +70,8 @@ public class BaseClass {
                 prop.getProperty(ConfigConstants.ReportConfig.SELENIUM_VERSION));
         UnravelBuildInfo unravelBuildInfo = new UnravelBuildInfo(driver);
         unravelBuildInfo.setBuildInfo(extent);
-
+        Map buildInfo = unravelBuildInfo.getUnravelBuildInfo();
+        UnravelConfigUtils.updateBuildDetails(buildInfo);
     }
 
     /**
@@ -149,6 +152,7 @@ public class BaseClass {
         LOGGER.info("Suite completed. Closing the browser.");
         FileUtils.deleteDownloadsFolderFiles();
         driver.quit();
+        InfluxDBClient.getConnection().closeInfluxConnection();
     }
 
     /**

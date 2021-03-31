@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  * read the various components like clusters etc. of the unravel config.
  */
 public class UnravelConfigYamlReader implements YamlReader {
-    private Yaml yaml = new Yaml();
+    private Yaml yaml;
     private Map<String, Object> config;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     public UnravelConfigYamlReader() {

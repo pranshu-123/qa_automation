@@ -384,6 +384,7 @@ public class SparkAppsDetailsPage {
             if (tabName.equals(verifyTabName)) {
                 switch (verifyTabName) {
                     case "Analysis":
+                       // MouseActions.clickOnElement(driver, appsTabList.get(i));
                         validateAnalysisTab(sparkAppPageObj);
                         test.log(LogStatus.PASS, "Analysis tab is populated");
                         break;

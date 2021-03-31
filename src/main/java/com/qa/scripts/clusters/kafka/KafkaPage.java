@@ -151,6 +151,7 @@ public class KafkaPage {
     HashSet<String> axisValSet = new HashSet<>();
     ArrayList<String> axisValArr = new ArrayList<>();
     for (int i = 0; i < axisPathList.size(); i++) {
+      logger.info("axis value = "+ axisPathList.get(i).getText());
       axisValArr.add(axisPathList.get(i).getText());
       axisValSet.add(axisPathList.get(i).getText());
     }

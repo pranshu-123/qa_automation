@@ -56,7 +56,8 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[2]/div/div[2]/div[3]/div/div/section/div[1]/span[1]")
   public List<WebElement> analysisCollapse;
 
-  @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[2]/div/div[2]/div[3]/div/div/section/div[1]/span[2]")
+ // @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[2]/div/div[2]/div[3]/div/div/section/div[1]/span[2]")
+  @FindBy(xpath = "//*[@id=\"default-analysis-tab\"]/div/div/section/div/span[2]")
   public List<WebElement> insightsType;
 
   // Error Tab xpath
@@ -144,7 +145,8 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/div[2]/span")
   public List<WebElement> configKeywords;
 
-  @FindBy(id = "reset")
+  //@FindBy(id = "reset")
+  @FindBy(xpath = "//*[@id=\"topContainer-appConfiguration\"]/form/div[1]/span/div/a/span")
   public WebElement resetButton;
 
   @FindBy(xpath = " //*[@id='appConfiguration']//tbody/tr/td/p")

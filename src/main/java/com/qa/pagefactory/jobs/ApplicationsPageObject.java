@@ -132,6 +132,9 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//a[contains(text(),'Status')]")
     public WebElement expandStatus;
 
+    @FindBy(xpath = "//a[contains(text(),'Queue')]")
+    public WebElement expandQueue;
+
     @FindBy(xpath = "//a[text()='Status']//following::div[contains(@class,'check-items-container')]//span[@class='checkmark']")
     public List<WebElement> selectSingleStatusType;
 

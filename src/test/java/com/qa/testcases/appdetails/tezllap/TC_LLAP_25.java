@@ -60,6 +60,13 @@ public class TC_LLAP_25 extends BaseClass {
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 
+        applicationsPageObject.expandStatus.click();
+        int statusCount = tezLlapApps.clickOnlyLink("Success");
+        test.log(LogStatus.PASS, "Selected success Count is  " + statusCount + " as Status, In Applications page");
+        waitExecuter.waitUntilPageFullyLoaded();
+        applicationsPageObject.expandQueue.click();
+        waitExecuter.waitUntilPageFullyLoaded();
+
         // Get 1st queuename from table for Tez apps
         String filterByQueue = applicationsPageObject.getQueueNameTable.getText().trim();
         String upTo10CharQueueName = StringUtils.left(filterByQueue, 10);

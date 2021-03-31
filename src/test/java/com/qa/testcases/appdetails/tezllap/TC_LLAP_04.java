@@ -58,8 +58,11 @@ public class TC_LLAP_04 extends BaseClass {
                 "displayed in the header");
 
         applicationsPageObject.expandStatus.click();
-        int successCount = tezLlapApps.clickOnlyLink("Success");
-        test.log(LogStatus.PASS, "Selected success Count is  " + successCount + " as Status, In Applications page");
+        int statusCount = tezLlapApps.clickOnlyLink("Success");
+        test.log(LogStatus.PASS, "Selected success Count is  " + statusCount + " as Status, In Applications page");
+        waitExecuter.waitUntilPageFullyLoaded();
+        applicationsPageObject.expandQueue.click();
+        waitExecuter.waitUntilPageFullyLoaded();
 
         // Get llap queuename from table for tez apps
         String upTo10CharQueueName = "llap";

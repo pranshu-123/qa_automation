@@ -31,7 +31,7 @@ public class TC_LLAP_26_PART2 extends BaseClass
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_LLAP_26_PART2_tezLLAP(String clusterId) {
         test = extent.startTest("TC_LLAP_26_PART2_tezLLAP: " + clusterId,
-                "Verify UI should display  both non-LLAP Tez apps andLLAP Tez applications ");
+                "Verify UI should display  both non-LLAP Tez apps and LLAP Tez applications ");
         test.assignCategory(" Apps Details-TezLlap");
         Log.startTestCase("TC_LLAP_26_PART2_tezLLAP");
 
@@ -61,6 +61,13 @@ public class TC_LLAP_26_PART2 extends BaseClass
                 "the total count of heading.");
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
+
+        applicationsPageObject.expandStatus.click();
+        int statusCount = tezLlapApps.clickOnlyLink("Success");
+        test.log(LogStatus.PASS, "Selected success Count is  " + statusCount + " as Status, In Applications page");
+        waitExecuter.waitUntilPageFullyLoaded();
+        applicationsPageObject.expandQueue.click();
+        waitExecuter.waitUntilPageFullyLoaded();
 
             // Get llap queuename from table for tez apps
             String upTo10CharQueueName = "llap";

@@ -58,6 +58,13 @@ public class TC_LLAP_18 extends BaseClass {
         test.log(LogStatus.PASS, "The left pane has Hive tez check box and the app counts match to that " +
                 "displayed in the header");
 
+        applicationsPageObject.expandStatus.click();
+        int statusCount = tezLlapApps.clickOnlyLink("Success");
+        test.log(LogStatus.PASS, "Selected success Count is  " + statusCount + " as Status, In Applications page");
+        waitExecuter.waitUntilPageFullyLoaded();
+        applicationsPageObject.expandQueue.click();
+        waitExecuter.waitUntilPageFullyLoaded();
+
 
         // Get llap username from table for tez apps
         String upTo10CharQueueName = "llap";

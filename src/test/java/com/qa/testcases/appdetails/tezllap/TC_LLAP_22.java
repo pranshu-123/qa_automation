@@ -48,9 +48,13 @@ public class TC_LLAP_22 extends BaseClass {
                 applicationsPageObject, clusterId);
         test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
 
-        tezLlapApps.clickOnlyLink("Hive");
+        int appCount=tezLlapApps.clickOnlyLink("Hive");
         applicationsPageObject.expandStatus.click();
-        int appCount = tezLlapApps.clickOnlyLink("Success");
+        int statusCount = tezLlapApps.clickOnlyLink("Success");
+        test.log(LogStatus.PASS, "Selected success Count is  " + statusCount + " as Status, In Applications page");
+        waitExecuter.waitUntilPageFullyLoaded();
+        applicationsPageObject.expandQueue.click();
+        waitExecuter.waitUntilPageFullyLoaded();
 
         // Get llap username from table for tez apps
         String upTo10CharQueueName = "llap";

@@ -6,6 +6,7 @@ public class FileConstants {
   public static final String CONFIG_PROPERTIES = "config.properties";
   public static final String EXTENT_REPORT = "extentReport.html";
   public static final String UNRAVEL_CONFIG_YAML = "unravel_config.yml";
+  public static final String INFLUXDB_CONFIG_YAML = "influxdb.yml";
 
   public static String getConfigFile() {
     return DirectoryConstants.getConfigDir() + CONFIG_PROPERTIES;
@@ -25,5 +26,9 @@ public class FileConstants {
    */
   public static String getUnravelConfigYaml() {
     return DirectoryConstants.getResourcesDir() + UNRAVEL_CONFIG_YAML;
+  }
+
+  public static String getInfluxConfigYaml() {
+    return DirectoryConstants.getResourcesDir() + INFLUXDB_CONFIG_YAML;
   }
 }

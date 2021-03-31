@@ -59,9 +59,9 @@ public class TC_LLAP_16  extends BaseClass {
         test.log(LogStatus.PASS, "The left pane has Hive tezllap check box and the app counts match to that " +
                 "displayed in the header");
 
-        applicationsPageObject.expandStatus.click();
+       /* applicationsPageObject.expandStatus.click();
         int statusCount = tezLlapApps.clickOnlyLink("Success");
-        test.log(LogStatus.PASS, "Selected success Count is  " + statusCount + " as Status, In Applications page");
+        test.log(LogStatus.PASS, "Selected success Count is  " + statusCount + " as Status, In Applications page");*/
         waitExecuter.waitUntilPageFullyLoaded();
         applicationsPageObject.expandQueue.click();
         waitExecuter.waitUntilPageFullyLoaded();

@@ -225,6 +225,7 @@ public class TezLlapAppsDetailsPage {
         LOGGER.info("Hive-Tez LLAP Status is " + ParentApp);
         waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();
+        tezLlapPage.getParentApp.click();
         Assert.assertNotSame("", ParentApp, "Hive-Tez LLAP Parent App is not displayed in the Table");
         return ParentApp;
     }

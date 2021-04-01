@@ -48,23 +48,24 @@ public class TC_LLAP_14 extends BaseClass {
         test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
 
         int appCount = tezLlapApps.clickOnlyLink("Hive");
-        applicationsPageObject.expandStatus.click();
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
-        test.log(LogStatus.PASS, "AppCount is " + appCount + " total count is " + totalCount);
-        Assert.assertEquals(appCount, totalCount, "The Hive app count of tezApp is not equal to " +
+
+        Assert.assertEquals(appCount, totalCount, "The Hive app count of tezllapp is not equal to " +
                 "the total count of heading.");
         test.log(LogStatus.PASS, "The left pane has Hive check box and the app counts match to that " +
                 "displayed in the header");
+
         applicationsPageObject.expandStatus.click();
+        waitExecuter.waitUntilPageFullyLoaded();
         int statusCount = tezLlapApps.clickOnlyLink("Failed");
         test.log(LogStatus.PASS, "Selected success Count is  " + statusCount + " as Status, In Applications page");
         waitExecuter.waitUntilPageFullyLoaded();
         applicationsPageObject.expandQueue.click();
         waitExecuter.waitUntilPageFullyLoaded();
 
-        // Get llap queuename from table for tez apps
+        //  Get llap queuename from table for tez apps
         String upTo10CharQueueName = "llap";
         logger.info("Queue name should be filtered by- " + upTo10CharQueueName);
         waitExecuter.waitUntilPageFullyLoaded();
@@ -87,17 +88,16 @@ public class TC_LLAP_14 extends BaseClass {
                 }
         }
 
-
         /*
-         * Validate that status types faild are --
+         * Validate that status types killed are --
          */
         if (appCount > 0) {
             String statusValue = tezLlapApps.verifyAppStatus(tezLlapPage);
-            test.log(LogStatus.PASS, "Hive-Tezllap status Value is displayed in the Table: " + statusValue);
+            test.log(LogStatus.PASS, "Hive Tezllap status Value is displayed in the Table: " + statusValue);
         } else {
             Assert.assertTrue(tezLlapPage.whenNoApplicationPresent.isDisplayed(),
                     "The cluster does not have any application under it and also does not display 'No Data Available' for it");
-            test.log(LogStatus.SKIP, "No Hive-Tezllap Application present");
+            test.log(LogStatus.SKIP, "No Hive Tezllap Application present");
         }
     }
 }

@@ -14,7 +14,6 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.SkipException;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;

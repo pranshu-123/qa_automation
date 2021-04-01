@@ -11,7 +11,6 @@ import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;

@@ -12,7 +12,6 @@ import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
-import org.testng.SkipException;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;

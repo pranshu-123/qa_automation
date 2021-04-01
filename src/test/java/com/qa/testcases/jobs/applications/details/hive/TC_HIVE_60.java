@@ -12,7 +12,6 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
-import org.testng.SkipException;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -132,8 +131,6 @@ public class TC_HIVE_60 extends BaseClass {
                             test.log(LogStatus.INFO, "Click on reset if there are no hive apps");
                             LOGGER.info("Click on reset if there are no hive apps");
                             allApps.reset();
-                            throw new SkipException(
-                                    "The clusterId does not have application of MR with HIVE as parent app.");
                         }
                         break sorting;
                     }

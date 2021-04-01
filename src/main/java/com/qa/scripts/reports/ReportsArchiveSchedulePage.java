@@ -204,6 +204,7 @@ public class ReportsArchiveSchedulePage {
         //System.out.println("iconXpath: "+iconXpath);
         WebElement iconElement = driver.findElement(By.xpath(iconXpath));
         waitExecuter.waitUntilElementPresent(iconElement);
+        waitExecuter.waitUntilElementClickable(iconElement);
         iconElement.click();
         break;
       }

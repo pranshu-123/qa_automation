@@ -26,10 +26,10 @@ public class TC_LLAP_14 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_LLAP_14_verifyStatusFailed(String clusterId) {
-        test = extent.startTest("TC_LLAP_14_verifyStatusSuccess: " + clusterId,
+        test = extent.startTest("TC_LLAP_14_verifyStatusFailed: " + clusterId,
                 "Verify the \"Status\" of a failed Hive application ");
         test.assignCategory(" Apps Details-TezLlap");
-        Log.startTestCase("TC_LLAP_14_verifyStatusSuccess");
+        Log.startTestCase("TC_LLAP_14_verifyStatusFailed");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

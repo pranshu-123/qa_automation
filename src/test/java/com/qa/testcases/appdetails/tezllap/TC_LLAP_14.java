@@ -26,10 +26,10 @@ public class TC_LLAP_14 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_LLAP_14_verifyStatusFailed(String clusterId) {
-        test = extent.startTest("TC_LLAP_14_verifyStatusSuccess: " + clusterId,
+        test = extent.startTest("TC_LLAP_14_verifyStatusFailed: " + clusterId,
                 "Verify the \"Status\" of a failed Hive application ");
         test.assignCategory(" Apps Details-TezLlap");
-        Log.startTestCase("TC_LLAP_14_verifyStatusSuccess");
+        Log.startTestCase("TC_LLAP_14_verifyStatusFailed");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -57,8 +57,12 @@ public class TC_LLAP_14 extends BaseClass {
                 "the total count of heading.");
         test.log(LogStatus.PASS, "The left pane has Hive check box and the app counts match to that " +
                 "displayed in the header");
-        int failedCount = tezLlapApps.clickOnlyLink("Failed");
-        test.log(LogStatus.PASS, "Selected failed Count is  " + failedCount + "  as Status, In Applications page");
+        applicationsPageObject.expandStatus.click();
+        int statusCount = tezLlapApps.clickOnlyLink("Failed");
+        test.log(LogStatus.PASS, "Selected success Count is  " + statusCount + " as Status, In Applications page");
+        waitExecuter.waitUntilPageFullyLoaded();
+        applicationsPageObject.expandQueue.click();
+        waitExecuter.waitUntilPageFullyLoaded();
 
         // Get llap queuename from table for tez apps
         String upTo10CharQueueName = "llap";

@@ -58,10 +58,16 @@ public class TC_LLAP_07 extends BaseClass {
                 "the total count of heading.");
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
+       /* applicationsPageObject.expandStatus.click();
+        int statusCount = tezLlapApps.clickOnlyLink("Success");
+        test.log(LogStatus.PASS, "Selected success Count is  " + statusCount + " as Status, In Applications page");*/
+        waitExecuter.waitUntilPageFullyLoaded();
+        applicationsPageObject.expandQueue.click();
+        waitExecuter.waitUntilPageFullyLoaded();
 
-        //Get llap username from table for tez apps
+       /* //Get llap username from table for tez apps
         String filterByUsername = tezLlapPage.getUsernameFromTable.getText().trim();
-        String upTo10CharUserName = "hive";
+        String upTo10CharUserName = "llap";
         waitExecuter.waitUntilPageFullyLoaded();
         logger.info("User name should be filtered by- " + upTo10CharUserName);
         // Click on user searchbox and get all usernames.
@@ -81,7 +87,7 @@ public class TC_LLAP_07 extends BaseClass {
                 waitExecuter.sleep(2000);
                 break;
             }
-        }
+        }*/
         // Get llap queuename from table for tez apps
         String upTo10CharQueueName = "llap";
         logger.info("Queue name should be filtered by- " + upTo10CharQueueName);
@@ -104,11 +110,17 @@ public class TC_LLAP_07 extends BaseClass {
                         break;
                     }
                 }
-            else {
-                test.log(LogStatus.SKIP, "No Tez/Llap Application present");
-                logger.error("No Tez/Llap Application present in the " + clusterId + " cluster for the time span " +
-                        "of 90 days");
+        }
+            /*
+             * Validate that User types are --
+             */
+            if (appCount > 0) {
+                String userValue = tezLlapApps.verifyAppStatus(tezLlapPage);
+                test.log(LogStatus.PASS, "Tez llap user Value is displayed in the Table: " + userValue);
+            } else {
+                Assert.assertTrue(tezLlapPage.whenNoApplicationPresent.isDisplayed(),
+                        "The cluster does not have any application under it and also does not display 'No Data Available' for it");
+                test.log(LogStatus.SKIP, "No Hive-Tezllap Application present");
             }
         }
     }
-}

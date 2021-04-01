@@ -215,11 +215,14 @@ public class TezLlapAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[1]/span[2]")
     public WebElement Cluster;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[1]/span[3]")
+    @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[8][@class='text-left text-left']")
     public WebElement Queue;
 
-    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[2]")
+    @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[2][@class='text-left']")
     public WebElement Status;
+
+    @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[3][@class='text-left']")
+    public WebElement user;
 
     @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[1]/div/div[2]/div/div/div/div[1]/div/p/b")
     public List<WebElement> ganttChartHeaders;

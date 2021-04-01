@@ -85,7 +85,20 @@ public class TezLlapAppsDetailsPage {
      * and verify status .
      */
     public String verifyAppStatus(TezLlapAppsDetailsPageObject tezLlapPage) {
-        String Status = tezLlapPage.Status.getText();
+        String user = tezLlapPage.Status.getText();
+        waitExecuter.sleep(5000);
+        LOGGER.info("Tez application status is " + user);
+        Assert.assertNotSame("", user, "Tez application status is not displayed in the Header");
+        return user;
+    }
+
+
+    /**
+     * Method to click the first app in jobs table , navigate to the details page.
+     * and verify status .
+     */
+    public String verifyAppUser(TezLlapAppsDetailsPageObject tezLlapPage) {
+        String Status = tezLlapPage.user.getText();
         waitExecuter.sleep(5000);
         LOGGER.info("Tez application status is " + Status);
         Assert.assertNotSame("", Status, "Tez application status is not displayed in the Header");
@@ -225,6 +238,7 @@ public class TezLlapAppsDetailsPage {
         LOGGER.info("Hive-Tez LLAP Status is " + ParentApp);
         waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();
+        tezLlapPage.getParentApp.click();
         Assert.assertNotSame("", ParentApp, "Hive-Tez LLAP Parent App is not displayed in the Table");
         return ParentApp;
     }

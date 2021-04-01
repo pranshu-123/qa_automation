@@ -83,7 +83,6 @@ public class TC_HIVE_44 extends BaseClass {
             // Reset the application filter
             test.log(LogStatus.INFO, "Reset the application filter");
             allApps.reset();
-            throw new SkipException("The clusterId does not have any application under it");
         }
 
     }

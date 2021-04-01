@@ -2,12 +2,14 @@ package com.qa.testcases.jobs.applications.details.hive;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.JavascriptExecutor;
@@ -41,27 +43,27 @@ public class TC_HIVE_40_PART1 extends BaseClass {
         AllApps allApps = new AllApps(driver);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         SparkAppsDetailsPage sparkApp = new SparkAppsDetailsPage(driver);
+        UserActions userAction = new UserActions(driver);
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         LOGGER.info("Navigate to jobs tab from header");
         waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.jobs);
-        waitExecuter.sleep(4000);
-        topPanelComponentPageObject.jobs.click();
-        waitExecuter.sleep(4000);
+        userAction.performActionWithPolling(topPanelComponentPageObject.jobs, UserAction.CLICK);
         waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         waitExecuter.waitUntilPageFullyLoaded();
         // Select last 30 days from date picker
         test.log(LogStatus.INFO, "Select last 30 days");
         LOGGER.info("Select last 30 days");
         datePicker.clickOnDatePicker();
-        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         datePicker.selectLast30Days();
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         // Select cluster
         test.log(LogStatus.INFO, "Select clusterid : " + clusterId);
         LOGGER.info("Select clusterId : " + clusterId);
         allApps.selectCluster(clusterId);
-        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         // Select 'Only' hive type and get its jobs count
         test.log(LogStatus.INFO, "Select 'Only' hive from app types and get its jobs count");
         LOGGER.info("Select 'Only' hive from app types and get its jobs count");
@@ -82,7 +84,10 @@ public class TC_HIVE_40_PART1 extends BaseClass {
             test.log(LogStatus.INFO, "Click on user searchbox and get all usernames.");
             LOGGER.info("Click on user searchbox and get all usernames.");
             executor.executeScript("arguments[0].scrollIntoView();", applicationsPageObject.userSearchBox);
-            applicationsPageObject.userSearchBox.click();
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.userExpandableHeader);
+            userAction.performActionWithPolling(applicationsPageObject.userExpandableHeader, UserAction.CLICK);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.userSearchBox);
+            userAction.performActionWithPolling(applicationsPageObject.userSearchBox, UserAction.CLICK);
             waitExecuter.sleep(2000);
             applicationsPageObject.userSearchBox.sendKeys(upTo10CharUserName);
             List<WebElement> userList = applicationsPageObject.getNamesFromDropDown;
@@ -91,13 +96,18 @@ public class TC_HIVE_40_PART1 extends BaseClass {
                 if (userList.get(i).getText().equals(filterByUsername)) {
                     usernameSelected = userList.get(i).getText();
                     LOGGER.info("Selected username from dropdown " + usernameSelected);
-                    userList.get(i).click();
+                    waitExecuter.waitUntilElementClickable(userList.get(i));
+                    userAction.performActionWithPolling(userList.get(i), UserAction.CLICK);
+                    waitExecuter.waitUntilElementClickable(applicationsPageObject.userExpandableHeader);
                     waitExecuter.sleep(2000);
                     break;
                 }
             }
             if (!upTo10CharQueueName.trim().isEmpty() || !upTo10CharQueueName.trim().equals("-")) {
-                applicationsPageObject.queueNameSearchBox.click();
+                waitExecuter.waitUntilElementClickable(applicationsPageObject.queueExpandableHeader);
+                userAction.performActionWithPolling(applicationsPageObject.queueExpandableHeader, UserAction.CLICK);
+                waitExecuter.waitUntilElementClickable(applicationsPageObject.queueNameSearchBox);
+                userAction.performActionWithPolling(applicationsPageObject.queueNameSearchBox, UserAction.CLICK);
                 waitExecuter.sleep(1000);
                 applicationsPageObject.queueNameSearchBox.sendKeys(upTo10CharQueueName);
                 waitExecuter.sleep(1000);
@@ -108,7 +118,9 @@ public class TC_HIVE_40_PART1 extends BaseClass {
                         if (queueList.get(i).getText().equals(upTo10CharQueueName)) {
                             queuenameSelected = queueList.get(i).getText();
                             LOGGER.info("Selected username from dropdown " + queuenameSelected);
-                            queueList.get(i).click();
+                            waitExecuter.waitUntilElementClickable(queueList.get(i));
+                            userAction.performActionWithPolling(queueList.get(i), UserAction.CLICK);
+                            waitExecuter.waitUntilElementClickable(applicationsPageObject.queueExpandableHeader);
                             waitExecuter.sleep(2000);
                             break;
                         }
@@ -135,11 +147,10 @@ public class TC_HIVE_40_PART1 extends BaseClass {
                 throw new SkipException("The clusterId does not have any application under it");
             }
 
-            waitExecuter.sleep(2000);
-            applicationsPageObject.userSearchBox.click();
-            waitExecuter.sleep(2000);
-            userList.get(0).click();
-            waitExecuter.sleep(2000);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.userSearchBox);
+            userAction.performActionWithPolling(applicationsPageObject.userSearchBox, UserAction.CLICK);
+            waitExecuter.waitUntilElementClickable(userList.get(0));
+            userAction.performActionWithPolling(userList.get(0), UserAction.CLICK);
             // Reset username filter to default
             test.log(LogStatus.INFO, "Reset username filter");
             allApps.reset();

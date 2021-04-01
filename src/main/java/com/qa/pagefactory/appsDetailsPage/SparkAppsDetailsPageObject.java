@@ -145,8 +145,7 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/div[2]/span")
   public List<WebElement> configKeywords;
 
-  //@FindBy(id = "reset")
-  @FindBy(xpath = "//*[@id=\"topContainer-appConfiguration\"]/form/div[1]/span/div/a/span")
+  @FindBy(id = "reset")
   public WebElement resetButton;
 
   @FindBy(xpath = " //*[@id='appConfiguration']//tbody/tr/td/p")
@@ -290,7 +289,8 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "(//div[contains(@class,'filter-section')]//h3[contains(@class,'expandable-header')])[2]")
   public WebElement statusHeader;
 
-
+ @FindBy(xpath = "//div[contains(@class,'cta-secondary')]/a/span[text()='RESET']")
+ public WebElement resetButtonAppDetails;
 
 
   /**

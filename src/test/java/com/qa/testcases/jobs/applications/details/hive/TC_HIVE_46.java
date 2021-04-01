@@ -152,16 +152,17 @@ public class TC_HIVE_46 extends BaseClass {
             // Refresh the page and reload to original state
             test.log(LogStatus.INFO, "Refresh the page and reload to original state");
             LOGGER.info("Refresh the page and reload to original state");
-            waitExecuter.sleep(1000);
-            driver.navigate().refresh();
-            waitExecuter.sleep(3000);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+            allApps.reset();
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         } else {
             Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
                     "The clusterId does not have any application under it and also does not display 'No Data Available' for it"
                             + clusterId);
             test.log(LogStatus.SKIP, "The clusterId does not have any application under it.");
-            driver.navigate().refresh();
-            waitExecuter.sleep(2000);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+            allApps.reset();
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         }
     }
 }

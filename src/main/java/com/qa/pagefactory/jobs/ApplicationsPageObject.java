@@ -334,6 +334,18 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//div[contains(@class,'component-tabs-secondary')]//span/a")
     public WebElement tezDagsDisplayed;
 
+    @FindBy(xpath = "//h3[contains(@class,'expandable-header')]//a[contains(text(),'User')]")
+    public WebElement userExpandableHeader;
+
+    @FindBy(xpath = "//h3[contains(@class,'expandable-header')]//a[contains(text(),'Queue')]")
+    public WebElement queueExpandableHeader;
+
+    @FindBy(xpath = "//h3[contains(@class,'expandable-header')]//a[contains(text(),'Tags')]")
+    public WebElement tagExpandableHeader;
+
+    @FindBy(className = "close")
+    public WebElement closeIcon;
+
     /**
      * @param driver The driver that will be used to look up the elements
      */

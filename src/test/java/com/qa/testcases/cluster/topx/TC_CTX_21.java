@@ -24,7 +24,7 @@ import org.testng.annotations.Test;
 @Marker.TopX
 public class TC_CTX_21 extends BaseClass {
 
-  Logger logger = LoggerFactory.getLogger(TC_CTX_20.class);
+  Logger logger = LoggerFactory.getLogger(TC_CTX_21.class);
 
   @Test(dataProvider = "clusterid-data-provider")
   public void verifyDatePicker(String clusterId) {
@@ -39,7 +39,7 @@ public class TC_CTX_21 extends BaseClass {
 //    waitExecuter.sleep(3000);
 //    MouseActions.clickOnElement(driver, topPanelPageObject.topXTab);
 
-    TopX topX = new TopX(driver);
+//    TopX topX = new TopX(driver);
 //    topX.closeConfirmationMessageNotification();
 //    topX.clickOnRunButton();
 
@@ -52,7 +52,8 @@ public class TC_CTX_21 extends BaseClass {
     reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.TopX);
 
     DatePicker datePicker = new DatePicker(driver);
-    datePicker.clickOnDatePicker();
+    //datePicker.clickOnDatePicker();
+    datePicker.clickOnDatePickerForTopX();
 
     String[] expectedDateOptions = {"Current Day", "Last 7 Days", "Last 30 Days", "Last 60 Days",
       "Last 90 Days", "Custom Range"};
@@ -62,6 +63,6 @@ public class TC_CTX_21 extends BaseClass {
         "Date list does not contain: " + expectedDateOption);
       test.log(LogStatus.PASS, "Date list contains option: " + expectedDateOption);
     }
-    datePicker.clickOnDatePicker();
+    datePicker.clickOnDatePickerForTopX();
   }
 }

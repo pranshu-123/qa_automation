@@ -80,7 +80,9 @@ public class CUR03 extends BaseClass {
 
         try {
             test.log(LogStatus.INFO, "Navigate to reports Schedule Report page");
+            waitExecuter.waitUntilElementPresent(topPanelComponentPageObject.reports);
             MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
+            waitExecuter.waitUntilPageFullyLoaded();
             userReport.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.TopX);
             waitExecuter.waitUntilPageFullyLoaded();
 

@@ -21,8 +21,20 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//span[(text()='Insights')]//following-sibling::a[contains(@class,'sorting')]")
     public WebElement sortByParentApp;
 
+    @FindBy(xpath = "//span[(text()='Read')]//following-sibling::a[contains(@class,'sorting')]")
+    public WebElement sortByReadApp;
+
+    @FindBy(xpath = "//span[(text()='Read')]//following-sibling::a[contains(@class,'sorting')]")
+    public WebElement sortByWriteApp;
+
     @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[11]//span[@class='icon-tuning']")
     public List<WebElement> checkInsightsApp;
+
+    @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[9][@class='text-left']")
+    public List<WebElement> checkReadApp;
+
+    @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[10][@class='text-left']")
+    public List<WebElement> checkWriteApp;
 
     @FindBy(xpath = "//a[normalize-space()='Analysis']")
     public WebElement analysisTab;

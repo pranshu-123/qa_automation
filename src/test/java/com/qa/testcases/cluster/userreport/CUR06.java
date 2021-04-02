@@ -69,15 +69,13 @@ public class CUR06 extends BaseClass {
             waitExecuter.waitUntilPageFullyLoaded();
             test.log(LogStatus.PASS, "Successfully clicked on add configuration.");*/
             test.log(LogStatus.INFO, "Navigate to reports Schedule Report page");
+            test.log(LogStatus.INFO, "Navigate to reports Schedule Report page");
+            waitExecuter.waitUntilElementPresent(topPanelComponentPageObject.reports);
             MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
+            waitExecuter.waitUntilPageFullyLoaded();
             userReport.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.TopX);
             waitExecuter.waitUntilPageFullyLoaded();
 
-        } catch (TimeoutException te) {
-            Assert.assertTrue(false, "Unable to clicked on add configuration.");
-        }
-
-        try {
             userReport.setTopXNumber("30");
             waitExecuter.waitUntilPageFullyLoaded();
             HomePage homePage = new HomePage(driver);

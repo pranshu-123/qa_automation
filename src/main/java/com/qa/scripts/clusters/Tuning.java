@@ -50,7 +50,8 @@ public class Tuning {
     }
 
     public void clickOnModalRunButton() {
-        MouseActions.clickOnElement(driver, tuningPageObject.modalRunButton);
+        //MouseActions.clickOnElement(driver, tuningPageObject.modalRunButton);
+        MouseActions.clickOnElement(driver, tuningPageObject.runButton);
     }
 
     public List<String> getClusterOptions(CommonPageObject commonPageObject) {

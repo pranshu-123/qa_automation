@@ -54,7 +54,7 @@ public class TC_JAL_10 extends BaseClass {
         // Assert app types are -- "Hive","Impala","Map Reduce","Spark","Tez"
         test.log(LogStatus.INFO, "Validate the app types present");
         LOGGER.info("Validate the app types present");
-        List<String> existingAppTypes = new ArrayList<>(Arrays.asList("Hive", "Impala", "Map Reduce", "Spark", "Tez","Presto","BigQuery"));
+        List<String> existingAppTypes = new ArrayList<>(Arrays.asList("Hive", "Impala", "Map Reduce", "Spark", "Tez"));
         List<WebElement> appTypes = applicationsPageObject.getApplicationTypes;
         List<String> listOfAppTypes = new ArrayList<>();
         waitExecuter.sleep(2000);
@@ -75,9 +75,9 @@ public class TC_JAL_10 extends BaseClass {
         List<WebElement> appJobCounts = applicationsPageObject.getEachApplicationTypeJobCounts;
         waitExecuter.sleep(2000);
         for (int i = 0; i < clickOnIndividualApp.size(); i++) {
-            waitExecuter.sleep(2000);
+            waitExecuter.waitUntilElementClickable(clickOnIndividualApp.get(i));
             userAction.performActionWithPolling(clickOnIndividualApp.get(i), UserAction.CLICK);
-            waitExecuter.sleep(2000);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
             int appCount = Integer.parseInt(appJobCounts.get(0).getText().replaceAll("[^\\dA-Za-z ]", "").trim());
             waitExecuter.sleep(1000);
             int totalCount = Integer
@@ -102,14 +102,15 @@ public class TC_JAL_10 extends BaseClass {
                 Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
                         "The clusterId does not have any application under it and also does not display 'No Data Available' for it"
                                 + clusterId);
-            waitExecuter.sleep(1000);
+            waitExecuter.waitUntilElementClickable(clickOnIndividualApp.get(i));
             userAction.performActionWithPolling(clickOnIndividualApp.get(i), UserAction.CLICK);
-            waitExecuter.sleep(2000);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         }
         // Click on show-all to view all type of applications
         test.log(LogStatus.INFO, "Click on show-all to reset the selection of app");
         LOGGER.info("Click on show-all to reset the selection of app");
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.showAll);
         userAction.performActionWithPolling(applicationsPageObject.showAll, UserAction.CLICK);
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
     }
 }

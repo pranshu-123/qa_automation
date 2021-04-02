@@ -75,7 +75,6 @@ public class TC_HIVE_43_54 extends BaseClass {
                     "The clusterId does not have any application under it and also does not display 'No Data Available' for it"
                             + clusterId);
             test.log(LogStatus.SKIP, "The clusterId does not have any running application under it.");
-            throw new SkipException("The clusterId does not have any running application under it");
         }
         // Reset set filter to default
         test.log(LogStatus.INFO, "Reset set filter");

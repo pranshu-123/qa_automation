@@ -232,7 +232,7 @@ public class SparkAppsDetailsPage {
             waitExecuter.sleep(2000);
         }
         // Check RESET buttons sets default props
-        MouseActions.clickOnElement(driver, sparkAppPageObj.resetButton);
+        MouseActions.clickOnElement(driver, sparkAppPageObj.resetButtonAppDetails);
         waitExecuter.sleep(3000);
         String afterResetProp = sparkAppPageObj.configPropNum.getText();
         logger.info("No. of Properties displayed by default " + beforeResetProp + "\n "

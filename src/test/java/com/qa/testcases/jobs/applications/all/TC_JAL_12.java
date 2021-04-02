@@ -50,9 +50,9 @@ public class TC_JAL_12 extends BaseClass {
         WebElement DurationSlider = applicationsPageObject.durationSlider;
         allApps.moveTheSlider(DurationSlider, 50);
         String SliderInputLeft = applicationsPageObject.durationSliderInputLeft.getAttribute("value");
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         String SliderInputRight = applicationsPageObject.durationSliderInputRight.getAttribute("value");
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         test.log(LogStatus.INFO, "Duration Slider From : " + SliderInputLeft + " To : " + SliderInputRight);
         LOGGER.info("Duration Slider From : " + SliderInputLeft + " To : " + SliderInputRight);
         // Convert slider min max value in seconds
@@ -64,19 +64,21 @@ public class TC_JAL_12 extends BaseClass {
         // Sort the application w.r.t min duration
         test.log(LogStatus.INFO, "Sort the application w.r.t min duration");
         LOGGER.info("Sort the application w.r.t min duration");
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.sortDuration);
         applicationsPageObject.sortDuration.click();
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         // Get min duration of first application from table and convert into seconds
         test.log(LogStatus.INFO, "Get min duration of first application from table and convert into seconds");
         LOGGER.info("Get min duration of first application from table and convert into seconds");
         String minDurationFromTable = applicationsPageObject.getDurationFromTable.getText();
         int minDurationInSec = impala.convertTimeToSeconds(minDurationFromTable);
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         // Sort the application w.r.t max duration
         test.log(LogStatus.INFO, "Sort the application w.r.t max duration");
         LOGGER.info("Sort the application w.r.t max duration");
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         applicationsPageObject.sortDuration.click();
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         // Get max duration of first application from table and convert into seconds
         test.log(LogStatus.INFO, "Get max duration of first application from table and convert into seconds");
         LOGGER.info("Get max duration of first application from table and convert into seconds");
@@ -92,12 +94,12 @@ public class TC_JAL_12 extends BaseClass {
         Assert.assertTrue(maxDurationInSec <= rightSliderInSeconds && maxDurationInSec >= leftSliderInSeconds,
                 "The max duration does not match the slider duration");
         test.log(LogStatus.PASS, "The max duration does not match the slider duration");
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         // Reset slider duration to default
         test.log(LogStatus.INFO, "Reset slider duration to default");
         LOGGER.info("Reset slider duration to default");
         applicationsPageObject.resetButton.click();
-        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
 
     }
 }

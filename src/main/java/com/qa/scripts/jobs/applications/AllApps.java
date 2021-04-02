@@ -179,6 +179,7 @@ public class AllApps {
     /* To reset the settings made in apps page */
     public void reset() {
         LOGGER.info("Reset username filter");
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         userAction.performActionWithPolling(applicationsPageObject.resetButton, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
     }

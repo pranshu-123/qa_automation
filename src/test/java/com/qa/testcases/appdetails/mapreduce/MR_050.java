@@ -89,14 +89,14 @@ public class MR_050 extends BaseClass {
                             //mrDetailsPage.validateAnalysisTab(mrApps);
                         } else {
                             test.log(LogStatus.SKIP,
-                                    "The clusterId does not have application of MR with HIVE as parent app");
+                                    "The clusterId does not have application of MR app");
                             waitExecuter.sleep(1000);
-                            // Click on reset if there are no hive apps
-                            test.log(LogStatus.INFO, "Click on reset if there are no hive apps");
-                            LOGGER.info("Click on reset if there are no hive apps");
+                            // Click on reset if there are no MR apps
+                            test.log(LogStatus.INFO, "Click on reset if there are no MR apps");
+                            LOGGER.info("Click on reset if there are no MR apps");
                             allApps.reset();
                             throw new SkipException(
-                                    "The clusterId does not have application of MR with HIVE as parent app.");
+                                    "The clusterId does not have application of MR with MR app.");
                         }
                         break sorting;
                     }
@@ -110,7 +110,7 @@ public class MR_050 extends BaseClass {
             waitExecuter.sleep(1000);
             // Click on reset if there are no hive apps
             test.log(LogStatus.INFO, "Click on reset if there are no hive apps");
-            LOGGER.info("Click on reset if there are no hive apps");
+            LOGGER.info("Click on reset if there are no MR apps");
             allApps.reset();
             throw new SkipException("The clusterId does not have any application under it.");
         }

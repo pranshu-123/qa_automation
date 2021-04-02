@@ -107,6 +107,7 @@ public class UserReport {
      */
     public void clickOnReportName(ReportsArchiveScheduledPageObject reportPageObj, String name) {
         List<WebElement> reportNameList = reportPageObj.reportNames;
+        waitExecuter.waitUntilPageFullyLoaded();
         Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed , expected 9 reports");
         for (int i = 0; i < reportNameList.size(); i++) {
             String reportName = reportNameList.get(i).getText().trim();

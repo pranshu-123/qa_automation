@@ -72,7 +72,9 @@ public class CUR07 extends BaseClass {
             waitExecuter.waitUntilPageFullyLoaded();
             test.log(LogStatus.PASS, "Successfully clicked on add configuration.");*/
             test.log(LogStatus.INFO, "Navigate to reports Schedule Report page");
+            waitExecuter.waitUntilElementPresent(topPanelComponentPageObject.reports);
             MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
+            waitExecuter.waitUntilPageFullyLoaded();
             userReport.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.TopX);
             waitExecuter.waitUntilPageFullyLoaded();
 

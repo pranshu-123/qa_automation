@@ -73,7 +73,6 @@ public class TC_HIVE_48 extends BaseClass {
         } else {
             test.log(LogStatus.SKIP, "There are no apps for selected duration and clusterId.");
             allApps.reset();
-            throw new SkipException("There are no apps for selected duration and clusterId");
         }
 
     }

@@ -45,6 +45,12 @@ public class DatePicker {
         waitExecuter.waitUntilElementClickable(datePickerPageObject.dateRange);
     }
 
+    public void clickOnDatePickerForTopX() {
+        waitExecuter.waitUntilElementClickable(datePickerPageObject.dateRangeTopx);
+        userActions.performActionWithPolling(datePickerPageObject.dateRangeTopx, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(datePickerPageObject.dateRangeTopx);
+    }
+
     /**
      * Method to select 'Last 14 Days' in data picker
      */

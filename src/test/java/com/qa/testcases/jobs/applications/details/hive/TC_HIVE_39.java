@@ -117,7 +117,6 @@ public class TC_HIVE_39 extends BaseClass {
             Assert.assertEquals(applicationsPageObject.whenNoApplicationPresent.getText(), "No Data Available",
                     "For 0 application hive 'No Data Available' is not displayed");
             test.log(LogStatus.SKIP, "Hive apps are not available for the selected duration and cluster.");
-            throw new SkipException("Hive apps are not available for the selected duration and cluster");
         }
         // Reset events to default
         test.log(LogStatus.INFO, "Reset events to default");

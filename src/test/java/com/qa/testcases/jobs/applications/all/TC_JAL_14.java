@@ -45,11 +45,13 @@ public class TC_JAL_14 extends BaseClass {
         test.log(LogStatus.INFO, "Click on user searchbox and get all usernames.");
         LOGGER.info("Click on user searchbox and get all usernames.");
         executor.executeScript("arguments[0].scrollIntoView();", applicationsPageObject.userSearchBox);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.userSearchBox);
         applicationsPageObject.userSearchBox.click();
-        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.userSearchBox);
         List<WebElement> userList = applicationsPageObject.getNamesFromDropDown;
         waitExecuter.sleep(2000);
         String usernameSelected = userList.get(0).getText();
+        waitExecuter.waitUntilElementClickable(userList.get(0));
         userList.get(0).click();
         waitExecuter.sleep(2000);
         LOGGER.info("Selected username from dropdown " + usernameSelected);
@@ -68,11 +70,11 @@ public class TC_JAL_14 extends BaseClass {
             Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
                     "The clusterId does not have any application under it and also does not display " +
                             "'No Data Available' for it");
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.userSearchBox);
         applicationsPageObject.userSearchBox.click();
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementClickable(userList.get(0));
         userList.get(0).click();
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementClickable(userList.get(0));
 
     }
 }

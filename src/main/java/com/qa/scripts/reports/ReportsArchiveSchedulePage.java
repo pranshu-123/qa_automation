@@ -190,16 +190,18 @@ public class ReportsArchiveSchedulePage {
   /**
    * Method to click the report names listed in the Report Archive Page with report name
    */
-  public void clickOnReportName(ReportsArchiveScheduledPageObject reportPageObj,  String name) {
+  public String clickOnReportName(ReportsArchiveScheduledPageObject reportPageObj,  String name) {
     List<WebElement> reportNameList = reportPageObj.reportNames;
     Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed , expected 9 reports");
+    String iconXpath = null;
+    int index = 0;
     for (int i = 0; i < reportNameList.size(); i++) {
       String reportName = reportNameList.get(i).getText().trim();
       System.out.println("reportName: "+reportName);
       if(reportName.equals(name)){
         logger.info("The report name is " + reportName);
-        int index = i+1;
-        String iconXpath = "//table/tbody/tr["+ index +"]/td[4]/div/span/span[contains(@class,'icon-add')]";
+        index = i+1;
+        iconXpath = "//table/tbody/tr["+ index +"]/td[4]/div/span/span[contains(@class,'icon-add')]";
         //table/tbody/tr[1]/td[4]/div/span/span[contains(@class,'icon-expand')]
         //System.out.println("iconXpath: "+iconXpath);
         WebElement iconElement = driver.findElement(By.xpath(iconXpath));
@@ -209,6 +211,20 @@ public class ReportsArchiveSchedulePage {
         break;
       }
     }
+
+    String statusXpath = null;
+    if(index > 0){
+      statusXpath = "//table/tbody/tr[" + index + "]/td[3]/span";
+      //statusText = getStatusText(statusXpath);
+    }
+    return statusXpath;
+  }
+
+
+  public String getStatusText(String statusXpath){
+    WebElement statusElement = driver.findElement(By.xpath(statusXpath));
+    waitExecuter.waitUntilElementPresent(statusElement);
+    return statusElement.getText();
   }
 
   /**

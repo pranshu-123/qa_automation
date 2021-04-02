@@ -1,15 +1,16 @@
 package com.qa.scripts.clusters;
 
 import com.qa.pagefactory.UserReportPageObject;
+import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
@@ -100,6 +101,31 @@ public class UserReport {
 
     }
 
+
+    /**
+     * Method to click the report names listed in the Report Archive Page with report name
+     */
+    public void clickOnReportName(ReportsArchiveScheduledPageObject reportPageObj, String name) {
+        List<WebElement> reportNameList = reportPageObj.reportNames;
+        Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed , expected 9 reports");
+        for (int i = 0; i < reportNameList.size(); i++) {
+            String reportName = reportNameList.get(i).getText().trim();
+            System.out.println("reportName: " + reportName);
+            if (reportName.equals(name)) {
+                LOGGER.info("The report name is " + reportName);
+                int index = i + 1;
+                String iconXpath = "//table/tbody/tr[" + index + "]/td[4]/div/span/span[contains(@class,'icon-calendar')]";
+                //table/tbody/tr[1]/td[4]/div/span/span[contains(@class,'icon-expand')]
+                //System.out.println("iconXpath: "+iconXpath);
+                WebElement iconElement = driver.findElement(By.xpath(iconXpath));
+                waitExecuter.waitUntilElementPresent(iconElement);
+                iconElement.click();
+                waitExecuter.waitUntilPageFullyLoaded();
+                break;
+            }
+        }
+    }
+
     /**
      * Method to Click on Queue
      *
@@ -183,6 +209,25 @@ public class UserReport {
                 .findFirst().get().sendKeys(schedulename);
         waitExecuter.sleep(1000);
     }
+
+    /**
+     * Method to validate the report names listed in the Report Archive Page
+     */
+    public void validateReportNames(UserReportPageObject userReportPageObject) {
+        List<WebElement> reportNameList = userReportPageObject.reportNames;
+        Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed , expected 9 reports");
+        String[] expectedReportNames = {"Top X"};
+        for (int i = 0; i < reportNameList.size(); i++) {
+            String reportName = reportNameList.get(i).getText().trim();
+            LOGGER.info("The report name is " + reportName);
+            Assert.assertTrue(Arrays.asList(expectedReportNames).contains(reportName),
+                    "The expected report name is not present in the UI.");
+            waitExecuter.waitUntilElementPresent(userReportPageObject.scheduleName);
+            MouseActions.clickOnElement(driver, userReportPageObject.scheduleName);
+
+        }
+    }
+
 
 
     /**

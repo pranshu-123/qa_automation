@@ -2,12 +2,19 @@ package com.qa.testcases.cluster.userreport;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.constants.PageConstants;
+import com.qa.enums.UserAction;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.UserReportPageObject;
-import com.qa.scripts.Schedule;
+import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
+import com.qa.scripts.HomePage;
 import com.qa.scripts.clusters.UserReport;
+import com.qa.scripts.reports.ReportsArchiveSchedulePage;
 import com.qa.utils.Log;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
 import org.slf4j.Logger;
@@ -31,22 +38,26 @@ public class CUR01 extends BaseClass {
         test.assignCategory("Cluster - User Report");
         Log.startTestCase("CUR01_Verifyscheduleuserreport");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-
-        test.log(LogStatus.PASS, "Passed Parameter Is : " + clusterId);
-        Log.info("Passed Parameter Is : " + clusterId);
-        UserReportPageObject userReportPageObject = new UserReportPageObject(driver);
-        Schedule schedule = new Schedule(driver);
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
+        UserActions userActions = new UserActions(driver);
         UserReport userReport = new UserReport(driver);
+       /*
         userReport.selectClusterstab();
         waitExecuter.waitUntilElementPresent(topPanelPageObject.topXTab);
         waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.waitUntilElementClickable(topPanelPageObject.topXTab);
         waitExecuter.waitUntilPageFullyLoaded();
-        topPanelPageObject.topXTab.click();
-
+        topPanelPageObject.topXTab.click();*/
+        // Initialize all classes objects
+        test.log(LogStatus.INFO, "Initialize all class objects");
+        logger.info("Initialize all class objects");
+        UserReportPageObject userReportPageObject = new UserReportPageObject(driver);
+        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
+        ReportsArchiveSchedulePage reportsPage = new ReportsArchiveSchedulePage(driver);
+        ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);
         try {
-            waitExecuter.waitUntilElementClickable(userReportPageObject.scheduleuserreportButton);
+          /*  schedule.clickOnLatestReport(reportPageObj,userReportPageObject, PageConstants.ReportsArchiveNames.TopX);
+            waitExecuter.waitUntilElementClickable(userReportPageObject.addArchiveduserreport);
             userReport.clicksheduleusereport();
             test.log(LogStatus.PASS, "Verified user click on schedule user report");
 
@@ -59,14 +70,17 @@ public class CUR01 extends BaseClass {
 
             schedule.selectDaily();
             waitExecuter.waitUntilPageFullyLoaded();
-
-
-            userReportPageObject.addconfiguration.click();
+*/          // Navigate to Reports tab from header
+            test.log(LogStatus.INFO, "Navigate to reports Schedule Report page");
+            MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
+            userReport.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.TopX);
+            /*userReportPageObject.addconfiguration.click();*/
             test.log(LogStatus.PASS, "Successfully clicked on add configuration.");
 
             userReport.setTopXNumber("30");
             waitExecuter.waitUntilPageFullyLoaded();
-
+            HomePage homePage = new HomePage(driver);
+            homePage.selectMultiClusterId(clusterId);
             waitExecuter.waitUntilPageFullyLoaded();
             if (!userReport.selectRealUser()) {
                 test.log(LogStatus.PASS, "Verify select dropdown in Group by RealUser");
@@ -84,12 +98,11 @@ public class CUR01 extends BaseClass {
             userReport.assignEmail("sray@unraveldata.com");
             waitExecuter.waitUntilPageFullyLoaded();
 
-            waitExecuter.waitUntilElementPresent(userReportPageObject.addbutton);
+            /*waitExecuter.waitUntilElementPresent(userReportPageObject.addbutton);
             userReport.clickOnaddButton();
             waitExecuter.waitUntilPageFullyLoaded();
-            test.log(LogStatus.PASS, "Successfully added Topx parameter");
-
-            userReportPageObject.saveschedule.click();
+            test.log(LogStatus.PASS, "Successfully added Topx parameter");*/
+            userActions.performActionWithPolling(userReportPageObject.saveschedule, UserAction.CLICK);
             waitExecuter.waitUntilPageFullyLoaded();
             test.log(LogStatus.PASS, "Successfully clicked save sheduele.");
         } catch (TimeoutException te) {

@@ -44,7 +44,7 @@ public class UnravelConfigYamlWriter implements YamlWriter {
                         System.getProperty(ConfigConstants.UnravelYamlConfig.HBASE_CLUSTERS));
             }
             if (System.getProperty(ConfigConstants.UnravelYamlConfig.MAPREDUCE_CLUSTERS) != null &&
-                    !System.getProperty(ConfigConstants.UnravelYamlConfig.MAPREDUCE_CLUSTERS).trim().contains("")) {
+                    !System.getProperty(ConfigConstants.UnravelYamlConfig.MAPREDUCE_CLUSTERS).trim().equals("")) {
                 unravelNode.put(ConfigConstants.UnravelYamlConfig.MAPREDUCE_CLUSTERS,
                         System.getProperty(ConfigConstants.UnravelYamlConfig.MAPREDUCE_CLUSTERS));
             }

@@ -4,9 +4,11 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.TezAppsDetailsPageObject;
+import com.qa.pagefactory.appsDetailsPage.TezLlapAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.TezAppsDetailsPage;
+import com.qa.scripts.appdetails.TezLlapAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
@@ -14,6 +16,7 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.interactions.Actions;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
@@ -44,11 +47,24 @@ public class TEZ_133 extends BaseClass {
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         tezDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
-        test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
+        test.log(LogStatus.INFO, "Verify that the left pane has Hive check box and the apps number");
         int appCount = tezDetailsPage.clickOnlyLink("Tez");
-        int tezCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
+        int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
-        test.log(LogStatus.PASS, "Verify that the left pane apps count: "+tezCount);
+        LOGGER.info("AppCount is " + appCount + " total count is " + totalCount);
+        Assert.assertEquals(appCount, totalCount, "The Hive app count of tezllapp is not equal to " +
+                "the total count of heading.");
+        test.log(LogStatus.PASS, "The left pane has Hive check box and the app counts match to that " +
+                "displayed in the header");
+
+        applicationsPageObject.expandStatus.click();
+        int statusCount = tezDetailsPage.clickOnlyLink("Success");
+        test.log(LogStatus.PASS, "Selected success Count is  " + statusCount + " as Status, In Applications page");
+        waitExecuter.waitUntilPageFullyLoaded();
+        applicationsPageObject.expandQueue.click();
+        waitExecuter.waitUntilPageFullyLoaded();
+
+
         /*
          * Validate the username types are --
          */

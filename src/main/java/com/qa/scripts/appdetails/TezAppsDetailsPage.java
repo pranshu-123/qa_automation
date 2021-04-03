@@ -903,17 +903,15 @@ public class TezAppsDetailsPage {
      * and verify  Appname .
      */
     public String verifyDbname(TezAppsDetailsPageObject tezApps) {
-        WebElement Appname = tezApps.getAppname;
-        Actions toolAct = new Actions(driver);
-        toolAct.moveToElement(Appname).build().perform();
-        WebElement DbtoolTip = driver.findElement(By.xpath("//h5[normalize-space()='DATABASE']"));
-        waitExecuter.sleep(3000);
-        String AppDatabaseText = DbtoolTip.getText().trim();
-        System.out.println(AppDatabaseText);
+        String statusTable = tezApps.Status.getText();
+        LOGGER.info("Tez application Id is " + statusTable);
+        tezApps.getTypeFromTable.click();
+        String AppSummaryDbName  = tezApps.getDbname.getText().trim();
+        LOGGER.info("Tez Status is " + AppSummaryDbName);
         waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();
-        Assert.assertNotSame("", Appname, "Tez Database name is not displayed in the Header");
-        return AppDatabaseText;
+        Assert.assertNotSame("", AppSummaryDbName, "Tez User name is not displayed in the Table");
+        return AppSummaryDbName;
     }
 
     /**
@@ -1028,9 +1026,9 @@ public class TezAppsDetailsPage {
         LOGGER.info("Select Cluster: " + clusterId);
         allApps.selectCluster(clusterId);
         waitExecuter.sleep(3000);
-
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(1000);
+        waitExecuter.waitUntilPageFullyLoaded();
         datePicker.selectLast90Days();
         waitExecuter.sleep(3000);
         waitExecuter.waitUntilPageFullyLoaded();

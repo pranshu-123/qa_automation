@@ -33,11 +33,18 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[3]")
     public WebElement getUsername;
 
+    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[1]")
+    public WebElement getTypeFromTable;
+
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[4]/span[1]")
     public WebElement getAppname;
 
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[6]")
     public WebElement getstartTime;
+
+    @FindBy(xpath = "//div[@id='SummaryDetails']//div[3]")
+    public WebElement getDbname;
+
 
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[7]")
     public WebElement getduration;

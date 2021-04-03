@@ -2,6 +2,7 @@ package com.qa.base;
 
 import com.qa.constants.ConfigConstants;
 import com.qa.constants.MarkerConstants;
+import com.qa.io.UnravelConfigYamlWriter;
 import org.reflections.Reflections;
 import org.reflections.scanners.TypeAnnotationsScanner;
 import java.net.MalformedURLException;
@@ -29,6 +30,8 @@ public class Main {
    */
   public static void main(String[] args) throws MalformedURLException, ClassNotFoundException {
     String markers = System.getProperty(ConfigConstants.SystemConfig.MARKERS);
+    UnravelConfigYamlWriter configYamlWriter = new UnravelConfigYamlWriter();
+    configYamlWriter.updateClusterDetails();
     Set<Class> classes = new TreeSet<>(Comparator.comparing(Class::getName));
     /**
      * Get the list of classes which are having provided markers

@@ -30,25 +30,21 @@ public class UnravelConfigYamlWriter implements YamlWriter {
             Map<String, Object> unravelNode =
                     (Map<String,Object>) configDetails.get(ConfigConstants.UnravelYamlConfig.UNRAVEL);
             if (System.getProperty(ConfigConstants.UnravelYamlConfig.CLUSTERS) != null
-                    && System.getProperty(ConfigConstants.UnravelYamlConfig.CLUSTERS).trim() != ""
-                    && System.getProperty(ConfigConstants.UnravelYamlConfig.CLUSTERS).trim() != "''") {
+                    && !System.getProperty(ConfigConstants.UnravelYamlConfig.CLUSTERS).trim().equals("")) {
                 unravelNode.put(ConfigConstants.UnravelYamlConfig.CLUSTERS,
                         System.getProperty(ConfigConstants.UnravelYamlConfig.CLUSTERS));
             }
             if (System.getProperty(ConfigConstants.UnravelYamlConfig.IMPALA_CLUSTERS) != null
-                    && System.getProperty(ConfigConstants.UnravelYamlConfig.IMPALA_CLUSTERS).trim() != ""
-                    && System.getProperty(ConfigConstants.UnravelYamlConfig.IMPALA_CLUSTERS).trim() != "''") {
+                    && !System.getProperty(ConfigConstants.UnravelYamlConfig.IMPALA_CLUSTERS).trim().equals("")) {
                 unravelNode.put(ConfigConstants.UnravelYamlConfig.IMPALA_CLUSTERS, System.getProperty(ConfigConstants.UnravelYamlConfig.IMPALA_CLUSTERS));
             }
             if (System.getProperty(ConfigConstants.UnravelYamlConfig.HBASE_CLUSTERS) != null
-                    && System.getProperty(ConfigConstants.UnravelYamlConfig.HBASE_CLUSTERS).trim() != "" &&
-                    System.getProperty(ConfigConstants.UnravelYamlConfig.HBASE_CLUSTERS).trim() != "''") {
+                    && !System.getProperty(ConfigConstants.UnravelYamlConfig.HBASE_CLUSTERS).trim().equals("")) {
                 unravelNode.put(ConfigConstants.UnravelYamlConfig.HBASE_CLUSTERS,
                         System.getProperty(ConfigConstants.UnravelYamlConfig.HBASE_CLUSTERS));
             }
             if (System.getProperty(ConfigConstants.UnravelYamlConfig.MAPREDUCE_CLUSTERS) != null &&
-                    System.getProperty(ConfigConstants.UnravelYamlConfig.MAPREDUCE_CLUSTERS).trim() != "" &&
-                    System.getProperty(ConfigConstants.UnravelYamlConfig.MAPREDUCE_CLUSTERS).trim() != "''") {
+                    !System.getProperty(ConfigConstants.UnravelYamlConfig.MAPREDUCE_CLUSTERS).trim().contains("")) {
                 unravelNode.put(ConfigConstants.UnravelYamlConfig.MAPREDUCE_CLUSTERS,
                         System.getProperty(ConfigConstants.UnravelYamlConfig.MAPREDUCE_CLUSTERS));
             }

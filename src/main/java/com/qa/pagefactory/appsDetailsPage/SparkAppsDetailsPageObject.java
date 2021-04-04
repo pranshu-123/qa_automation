@@ -57,7 +57,8 @@ public class SparkAppsDetailsPageObject {
   public List<WebElement> analysisCollapse;
 
  // @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[2]/div/div[2]/div[3]/div/div/section/div[1]/span[2]")
-  @FindBy(xpath = "//*[@id=\"default-analysis-tab\"]/div/div/section/div/span[2]")
+ // @FindBy(xpath = "//*[@id=\"default-analysis-tab\"]/div/div/section/div/span[2]")
+  @FindBy(xpath = "//*[@class=\"status-title\"]//*[@class=\"badge fatal\"]")
   public List<WebElement> insightsType;
 
   // Error Tab xpath
@@ -155,16 +156,20 @@ public class SparkAppsDetailsPageObject {
   public List<WebElement> configPropValue;
 
   // Logs Tab xpaths
-  @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[2]/div/div[2]/div[3]/div[1]/section/div/span")
+  //@FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[2]/div/div[2]/div[3]/div[1]/section/div/span")
+  @FindBy(xpath = "//*[@id='app']/div/div/div[2]/div[2]/div/div[2]/div[2]/div[1]/section/div/span")
   public List<WebElement> logElementCollapsable;
 
-  @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[2]/div/div[2]/div[3]/div[1]/section/div/a")
+ // @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[2]/div/div[2]/div[3]/div[1]/section/div/a")
+  @FindBy(xpath = "//*[@id='app']/div/div/div[2]/div[2]/div/div[2]/div[2]/div[1]/section/div/a/span")
   public List<WebElement> logExecutorNames;
 
-  @FindBy(xpath = "//*[@id='app']/div/div/div[2]/div[2]/div/div[2]/div[3]/div[1]/section/div/div/p[1]")
+  @FindBy(xpath = "//*[@id='app']/div/div/div[2]/div[2]/div/div[2]/div[2]/div[1]/section/div/div/p[1]")
+  //@FindBy(xpath = "//*[@id='app']/div/div/div[2]/div[2]/div/div[2]/div[3]/div[1]/section/div/div/p[1]")
   public WebElement logExecutorContents;
 
-  @FindBy(xpath = "//*[@id='app']/div/div/div[2]/div[2]/div/div[2]/div[3]/div[1]/section/div/div/p[2]/a/b")
+  //@FindBy(xpath = "//*[@id='app']/div/div/div[2]/div[2]/div/div[2]/div[3]/div[1]/section/div/div/p[2]/a/b")
+  @FindBy(xpath = "//*[@id='app']/div/div/div[2]/div[2]/div/div[2]/div[2]/div[1]/section/div/div/p[2]/a/b")
   public WebElement showFullLogLink;
 
   // Timings Tab xpath
@@ -218,7 +223,8 @@ public class SparkAppsDetailsPageObject {
   public WebElement DAGData;
 
   //Resources Tab xpath
-  @FindBy(xpath = "//*[@id='app']/div/div/div[2]/div[2]/div/div[2]/div[3]/div//h4")
+ // @FindBy(xpath = "//*[@id='app']/div/div/div[2]/div[2]/div/div[2]/div[3]/div//h4")
+  @FindBy(xpath = "//div[@class=\"component-dashboard\"]//*[@class=\"header\"]/h4")
   public List<WebElement> resourcesGraphTitle;
 
   @FindBy(xpath = "//*[@class=\"highcharts-series-group\"]")

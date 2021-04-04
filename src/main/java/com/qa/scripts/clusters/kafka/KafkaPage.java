@@ -155,9 +155,14 @@ public class KafkaPage {
       axisValArr.add(axisPathList.get(i).getText());
       axisValSet.add(axisPathList.get(i).getText());
     }
+    if (axisValSet.size() != axisValArr.size()){
+      if (!axisValArr.contains("12:00")) {
+        logger.info("Expected " + axisName + " : " + axisValSet + "\n Actual " + axisName + " : " + axisValArr);
+        Assert.assertEquals(axisValSet.size(), axisValArr.size(), "Duplicate values present in the " + axisName + "\n" +
+            "Expected : " + axisValSet + " Actual : " + axisValArr);
+      }
+    }
     logger.info("Expected " + axisName + " : " + axisValSet + "\n Actual " + axisName + " : " + axisValArr);
-    Assert.assertEquals(axisValSet.size(), axisValArr.size(), "Duplicate values present in the " + axisName + "\n" +
-        "Expected : " + axisValSet + " Actual : " + axisValArr);
   }
 
 
@@ -182,7 +187,9 @@ public class KafkaPage {
       for (int col = 0; col < colList.size(); col++) {
         String colName = colList.get(col).getText();
         logger.info("The colName is: " + colName);
-        WebElement rowData = driver.findElement(By.xpath("//tbody/tr[" + (row + 1) + "]/td[" + (col + 1) + "]"));
+       // WebElement rowData = driver.findElement(By.xpath("//tbody/tr[" + (row + 1) + "]/td[" + (col + 1) + "]"));
+        WebElement rowData = driver.findElement(By.xpath("//*[@id='custom-tbl']//table/tbody/tr[" + (row + 1) + "]" +
+            "/td[" + (col + 1) + "]"));
         Assert.assertTrue(rowData.isDisplayed(), "No data under column: " + colName);
         //Check if data has only special charaters
         boolean onlySpecialChars = rowData.getText().matches("[^a-zA-Z0-9]+");

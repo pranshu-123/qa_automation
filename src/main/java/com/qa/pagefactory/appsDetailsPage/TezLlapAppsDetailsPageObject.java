@@ -52,6 +52,9 @@ public class TezLlapAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[8]")
     public List<WebElement> getApplicationQueue;
 
+    @FindBy(xpath = "//*[@id=\"topContainer-appConfiguration\"]/form/div[1]/span/div/a/span")
+    public WebElement resetButton;
+
     @FindBy(xpath = "//*[@class='select2-results__options']//li")
     public List<WebElement> tezllapClusters;
 
@@ -265,10 +268,6 @@ public class TezLlapAppsDetailsPageObject {
 
     @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/div[2]/span")
     public List<WebElement> configKeywords;
-
-    @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/span/div/a/span")
-    public WebElement resetButton;
-
 
     // Logs Tab xpaths
     @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[2]/div/div[2]/div[3]/div[1]/section/div/span")

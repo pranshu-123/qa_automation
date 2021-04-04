@@ -66,19 +66,20 @@ public class TC_M08 extends BaseClass {
         logger.info("Clicked on Load Latest Diagnostics Button.");
 
         try{
-            waitExecuter.waitUntilPageFullyLoaded();
+            waitExecuter.waitUntilElementPresent(managePageObject.latestDiagnosticsContentHeader);
             waitExecuter.waitUntilTextToBeInWebElement(managePageObject.latestDiagnosticsContentHeader, "Diagnostics Log");
             waitExecuter.waitUntilPageFullyLoaded();
             test.log(LogStatus.INFO, "Verified Diagnostics Log is loaded properly.");
             Assert.assertTrue(managePageObject.latestDiagnosticsContentHeader.isDisplayed(),"Diagnostics Log " +
                     "content not found.");
+            waitExecuter.waitUntilPageFullyLoaded();
         }catch (Exception e){
             e.printStackTrace();
             test.log(LogStatus.INFO, "Verified Latest Diagnostics Header and Time Stamp not found.");
             logger.info("Verified Latest Diagnostics Header and Time Stamp not found. ");
             Assert.assertTrue(false, "Latest Diagnostics Header and Time Stamp not found.");
         }
-
+        waitExecuter.waitUntilPageFullyLoaded();
         Assert.assertTrue(manage.verifyLoadLatestDiagnosticsHeaderAndTimeStamp(),"Unable to get Latest " +
                 "Diagnostics Log.");
         test.log(LogStatus.INFO, "Verified Latest Diagnostics Header and Time Stamp.");

@@ -2,7 +2,10 @@ package com.qa.scripts;
 
 import com.qa.pagefactory.DatePickerPageObject;
 import com.qa.pagefactory.SchedulePageObject;
+import com.qa.pagefactory.UserReportPageObject;
+import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.scripts.clusters.Workload;
+import com.qa.scripts.reports.ReportsArchiveSchedulePage;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.WaitExecuter;
 import org.openqa.selenium.*;
@@ -18,7 +21,7 @@ import java.util.logging.Logger;
 
 public class Schedule {
 
-    private static final Logger LOGGER = Logger.getLogger(Schedule.class.getName());
+    Logger logger = Logger.getLogger(ReportsArchiveSchedulePage.class.getName());
     public SchedulePageObject schedulePageObject;
     public WaitExecuter waitExecuter;
     private WebDriver driver;
@@ -35,16 +38,41 @@ public class Schedule {
 
     public void clickOnSchedule() {
         try {
-            LOGGER.info("Click On Schedule dropdown");
+            logger.info("Click On Schedule dropdown");
             List<WebElement> ScheduleList = schedulePageObject.schedule;
             Assert.assertFalse(ScheduleList.isEmpty(), "No ScheduleList loaded ");
             waitExecuter.sleep(3000);
             schedulePageObject.schedule.stream().findFirst().get().click();
         } catch (NoSuchElementException e) {
-            LOGGER.severe("Class Schedule | Method clickOnSchedule | Exception desc" + e.getMessage());
+            logger.severe("Class Schedule | Method clickOnSchedule | Exception desc" + e.getMessage());
             throw (e);
         }
     }
+
+    /**
+     * Method to click the latest report names listed in the Report Archive Page with report name
+     */
+    public void clickOnLatestReport(ReportsArchiveScheduledPageObject reportPageObj, UserReportPageObject userReportPageObject, String name) {
+        List<WebElement> reportNameList = reportPageObj.reportNames;
+        Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed , expected 9 reports");
+        for (int i = 0; i < reportNameList.size(); i++) {
+            String reportName = reportNameList.get(i).getText().trim();
+            System.out.println("reportName: "+reportName);
+            if(reportName.equals(name)){
+                logger.info("The report name is " + reportName);
+                int index = i+1;
+                String iconXpath = "//table/tbody/tr["+ index +"]/td[4]/div/span/span[contains(@class,'icon-expand')]";
+                //table/tbody/tr[1]/td[4]/div/span/span[contains(@class,'icon-expand')]
+                System.out.println("iconXpath: "+iconXpath);
+                WebElement iconElement = userReportPageObject.addArchiveduserreport;
+                waitExecuter.waitUntilElementPresent(iconElement);
+                iconElement.click();
+                break;
+            }
+        }
+    }
+
+
 
 
     /**

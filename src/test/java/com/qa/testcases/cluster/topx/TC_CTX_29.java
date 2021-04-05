@@ -9,6 +9,7 @@ import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.scripts.clusters.TopX;
 import com.qa.scripts.reports.ReportsArchiveSchedulePage;
+import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.LoggingUtils;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
@@ -38,6 +39,7 @@ public class TC_CTX_29 extends BaseClass {
         test.assignCategory(" Cluster - Top X");
         LOGGER.info("Go to TopX page.", test);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
+        waitExecuter.waitUntilPageFullyLoaded();
 //        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
         UserActions userActions = new UserActions(driver);
 //        userActions.performActionWithPolling(topPanelPageObject.topXTab, UserAction.CLICK);
@@ -52,8 +54,8 @@ public class TC_CTX_29 extends BaseClass {
         ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);
         LOGGER.info("Click on + button", test);
         String statusXpath = reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.TopX);
-
-        for (int i=0; i<topX.getTagsCheckbox().size(); i++) {
+        int chkBoxSize = topX.getTagsCheckbox().size();
+        for (int i=0; i<chkBoxSize; i++) {
             LOGGER.info("Click on tags of category: ", test);
             topX.selectTagsCheckbox(topX.getTagsCheckbox().get(i));
             LOGGER.info("Click on tags textbox", null);

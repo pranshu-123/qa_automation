@@ -10,6 +10,7 @@ import com.qa.scripts.data.Smallfiles;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Test;
@@ -28,6 +29,7 @@ public class TC_SF_07 extends BaseClass {
         Log.startTestCase("TC_SF_07.validateAbsolutesmallfilesizereport");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
+        UserActions userActions = new UserActions(driver);
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         waitExecuter.waitUntilElementPresent(topPanelComponentPageObject.data);
         waitExecuter.sleep(2000);

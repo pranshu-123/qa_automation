@@ -7,6 +7,7 @@ import com.qa.scripts.HomePage;
 import com.qa.scripts.data.Smallfiles;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Test;
@@ -26,6 +27,7 @@ public class TC_SF_50 extends BaseClass {
         Log.startTestCase("TC_SF_14.validateErrorSmallFile");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
+        UserActions userActions = new UserActions(driver);
         SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
         Smallfiles smallfiles = new Smallfiles(driver);
         smallfiles.commonPanelTabValidation(test, logger);

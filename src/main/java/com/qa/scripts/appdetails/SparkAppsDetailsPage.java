@@ -2,6 +2,7 @@ package com.qa.scripts.appdetails;
 
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
+import com.qa.pagefactory.appsDetailsPage.AppDetailsPageObject;
 import com.qa.pagefactory.appsDetailsPage.SparkAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
@@ -33,6 +34,7 @@ public class SparkAppsDetailsPage {
     private WebDriver driver;
     private JavascriptExecutor jse;
     private UserActions userActions;
+    private AppDetailsPageObject appDetailsPageObject;
     private SparkAppsDetailsPageObject sparkPageObject;
 
     Logger logger = Logger.getLogger(SparkAppsDetailsPage.class.getName());
@@ -49,6 +51,7 @@ public class SparkAppsDetailsPage {
         jse = (JavascriptExecutor) driver;
         userActions = new UserActions(driver);
         sparkPageObject = new SparkAppsDetailsPageObject(driver);
+        appDetailsPageObject = new AppDetailsPageObject(driver);
     }
 
     /**
@@ -110,6 +113,7 @@ public class SparkAppsDetailsPage {
      */
     public void validateResourcesTab(SparkAppsDetailsPageObject sparkAppPageObj) {
         String[] expectedGraphTitle = { "Task Attempts", "Containers", "Vcores", "Memory", "Metrics" };
+        waitExecuter.waitUntilPageFullyLoaded();
         List<WebElement> graphTitleList = sparkAppPageObj.resourcesGraphTitle;
         verifyAssertFalse(graphTitleList.isEmpty(), sparkAppPageObj, "No title displayed");
         List<WebElement> allGraphsList = sparkAppPageObj.resourcesAllGraphs;
@@ -207,7 +211,7 @@ public class SparkAppsDetailsPage {
 
     public void validateConfigurationTab(SparkAppsDetailsPageObject sparkAppPageObj) {
         String[] expectedKeyWords = { "METADATA", "MEMORY", "DRIVER", "EXECUTOR", "LIMIT", "RESOURCES", "CPU", "NET",
-                "YARN", "DEPLOY" };
+                "YARN", "DEPLOY", "DYNALLOC"};
         List<WebElement> keyWordsList = sparkAppPageObj.configKeywords;
         verifyAssertFalse(keyWordsList.isEmpty(), sparkAppPageObj, " Keywords not found");
         String beforeResetProp = sparkAppPageObj.configPropNum.getText();
@@ -750,7 +754,8 @@ public class SparkAppsDetailsPage {
     public String verifyAppId(SparkAppsDetailsPageObject sparkPageObj, ApplicationsPageObject appPageObj) {
         String appId = sparkPageObj.getAppId.getText().trim();
         logger.info("Spark application Id is " + appId);
-        waitExecuter.waitUntilElementClickable(sparkPageObject.resetButton);
+        waitExecuter.waitUntilPageFullyLoaded();
+     //   waitExecuter.waitUntilElementClickable(sparkPageObject.resetButton);
         appPageObj.getTypeFromTable.click();
         waitExecuter.waitUntilElementClickable(sparkPageObject.closeAppsPageTab);
         //waitExecuter.sleep(5000);
@@ -896,6 +901,11 @@ public class SparkAppsDetailsPage {
                 appCount = appsDetailsPage.clickOnlyLink("Success");
             // Clicking on the Spark app must go to apps detail page
             if (appCount > 0) {
+                if (tabName.equals("Analysis")) {
+                    userActions.performActionWithPolling(appDetailsPageObject.globalSearchBox, UserAction.SEND_KEYS,
+                        "example1-after");
+                    appDetailsPageObject.globalSearchBox.sendKeys(Keys.RETURN);
+                }
                 String headerAppId = appsDetailsPage.verifyAppId(sparkAppPageObj, applicationsPageObject);
                 test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);
                 appsDetailsPage.verifyAppSummaryTabs(sparkAppPageObj, tabName, test);

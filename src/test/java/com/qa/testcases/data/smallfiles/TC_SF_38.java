@@ -2,6 +2,7 @@ package com.qa.testcases.data.smallfiles;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.data.SmallfilesPageObject;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.data.Smallfiles;
@@ -27,6 +28,7 @@ public class TC_SF_38 extends BaseClass {
         Log.startTestCase("TC_SF_38.verifyScheduleReport");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
+        UserActions userActions = new UserActions(driver);
         SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
         Smallfiles smallfiles = new Smallfiles(driver);
         smallfiles.commonPanelTabValidation(test, logger);
@@ -34,8 +36,6 @@ public class TC_SF_38 extends BaseClass {
         smallfiles.clickOnScheduleButton();
         logger.info("Clicked on Shedule Button");
         test.log(LogStatus.INFO, "Clicked on Shedule Button");
-        UserActions userActions = new UserActions(driver);
-
         // Select cluster
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
@@ -51,7 +51,8 @@ public class TC_SF_38 extends BaseClass {
             test.log(LogStatus.INFO, "Define day of the week as- Thursday and time as- 22:00");
             logger.info("Define day of the week as- Thursday and time as- 22:00");
             smallfiles.selectDayTime("Thursday", "22", "00");
-            smallfiles.clickOnModalScheduleButton();
+            waitExecuter.waitUntilPageFullyLoaded();
+            userActions.performActionWithPolling(smallfilesPageObject.modalRunButton, UserAction.CLICK);
             waitExecuter.waitUntilPageFullyLoaded();
             logger.info("Clicked on Modal Schedule Button");
             test.log(LogStatus.INFO, "Clicked on Modal Schedule Button");

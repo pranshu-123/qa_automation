@@ -2,6 +2,7 @@ package com.qa.testcases.data.smallfiles;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.data.SmallfilesPageObject;
@@ -10,6 +11,7 @@ import com.qa.scripts.data.Smallfiles;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Test;
@@ -46,7 +48,7 @@ public class TC_SF_02 extends BaseClass {
         test.log(LogStatus.INFO, "Clicked on small FilesTab Tab");
 
         SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
-
+        UserActions userActions = new UserActions(driver);
         Smallfiles smallfiles = new Smallfiles(driver);
         smallfiles.closeConfirmationMessageNotification();
         smallfiles.clickOnRunButton();
@@ -63,8 +65,8 @@ public class TC_SF_02 extends BaseClass {
         waitExecuter.sleep(3000);
 
         smallfiles.navigateToAdvancedOptions(smallfilesPageObject, test, "3", "5");
-
-        smallfiles.clickOnModalRunButton();
+        waitExecuter.waitUntilPageFullyLoaded();
+        userActions.performActionWithPolling(smallfilesPageObject.modalRunButton, UserAction.CLICK);
         waitExecuter.sleep(3000);
         LOGGER.info("Clicked on Modal Run Button");
         test.log(LogStatus.INFO, "Clicked on Modal Run Button");

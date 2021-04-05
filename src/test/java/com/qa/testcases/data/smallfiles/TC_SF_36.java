@@ -28,6 +28,7 @@ public class TC_SF_36 extends BaseClass {
         Log.startTestCase("TC_SF_36.verifyScheduleReport");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
+        UserActions userActions = new UserActions(driver);
         SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
         Smallfiles smallfiles = new Smallfiles(driver);
         smallfiles.commonPanelTabValidation(test, logger);
@@ -35,7 +36,6 @@ public class TC_SF_36 extends BaseClass {
         smallfiles.clickOnScheduleButton();
         logger.info("Clicked on Shedule Button");
         test.log(LogStatus.INFO, "Clicked on Shedule Button");
-        UserActions userActions = new UserActions(driver);
 
         // Select cluster
         HomePage homePage = new HomePage(driver);
@@ -52,7 +52,8 @@ public class TC_SF_36 extends BaseClass {
         test.log(LogStatus.INFO, "Define day of the week as- Daily and time as- 10:30");
         logger.info("Define day of the week as- Daily and time as- 10:30");
         smallfiles.selectDayTime("Daily", "10", "30");
-        smallfiles.clickOnModalScheduleButton();
+        waitExecuter.waitUntilPageFullyLoaded();
+        userActions.performActionWithPolling(smallfilesPageObject.modalRunButton, UserAction.CLICK);
         waitExecuter.waitUntilPageFullyLoaded();
         try{
         logger.info("Clicked on modal Schedule Button");

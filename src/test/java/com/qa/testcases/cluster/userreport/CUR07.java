@@ -98,14 +98,14 @@ public class CUR07 extends BaseClass {
 
             userReport.assignEmail("sray@unraveldata.com");
             waitExecuter.waitUntilPageFullyLoaded();
-
+/*
             waitExecuter.waitUntilElementPresent(userReportPageObject.addbutton);
             userReport.clickOnaddButton();
             waitExecuter.waitUntilPageFullyLoaded();
             test.log(LogStatus.PASS, "Successfully added Topx parameter");
             userReportPageObject.addconfiguration.click();
             waitExecuter.waitUntilPageFullyLoaded();
-            test.log(LogStatus.PASS, "Successfully clicked on add configuration page.");
+            test.log(LogStatus.PASS, "Successfully clicked on add configuration page.");*/
 
             try {
                 userReport.setTopXNumber("30");

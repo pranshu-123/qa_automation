@@ -72,7 +72,7 @@ public class TC_CTR_03 extends BaseClass {
 //            tuning.clickOnRunButton();
             LOGGER.info("Clicked on Run button");
             test.log(LogStatus.INFO,"Clicked on Run button");
-            datePicker.clickOnDatePicker();
+            datePicker.clickOnDatePickerForTopX();
 
             for (int i=0; i < expectedDateOptions.length; i++) {
                 WebElement datePickerElement = datePickerPageObject.dateRangeOptions.get(i);

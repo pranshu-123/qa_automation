@@ -59,7 +59,7 @@ public class TC_CTR_02 extends BaseClass {
         test.log(LogStatus.INFO, "Clicked on Tuning Tab + icon");
 
         DatePicker datePicker = new DatePicker(driver);
-        datePicker.clickOnDatePicker();
+        datePicker.clickOnDatePickerForTopX();
         String[] expectedDateOptions = {"Last 7 Days", "Last 30 Days", "Last 60 Days", "Last 90 Days", "Custom Range"};
 
         for (String expectedDateOption : expectedDateOptions) {
@@ -67,6 +67,6 @@ public class TC_CTR_02 extends BaseClass {
                     "Date list does not contain: " + expectedDateOption);
             test.log(LogStatus.PASS, "Date list contains option: " + expectedDateOption);
         }
-        datePicker.clickOnDatePicker();
+        datePicker.clickOnDatePickerForTopX();
     }
 }

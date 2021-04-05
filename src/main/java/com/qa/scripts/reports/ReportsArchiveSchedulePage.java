@@ -1,11 +1,13 @@
 package com.qa.scripts.reports;
 
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.scripts.clusters.Tuning;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.openqa.selenium.Alert;
@@ -23,6 +25,7 @@ import org.testng.Assert;
 public class ReportsArchiveSchedulePage {
   private WaitExecuter waitExecuter;
   private WebDriver driver;
+  UserActions userActions ;
 
   Logger logger = Logger.getLogger(ReportsArchiveSchedulePage.class.getName());
 
@@ -34,6 +37,7 @@ public class ReportsArchiveSchedulePage {
   public ReportsArchiveSchedulePage(WebDriver driver) {
     waitExecuter = new WaitExecuter(driver);
     this.driver = driver;
+    userActions = new UserActions(driver);
   }
 
   /**
@@ -207,7 +211,8 @@ public class ReportsArchiveSchedulePage {
         WebElement iconElement = driver.findElement(By.xpath(iconXpath));
         waitExecuter.waitUntilElementPresent(iconElement);
         waitExecuter.waitUntilElementClickable(iconElement);
-        iconElement.click();
+        userActions.performActionWithPolling(iconElement, UserAction.CLICK);
+        //iconElement.click();
         break;
       }
     }

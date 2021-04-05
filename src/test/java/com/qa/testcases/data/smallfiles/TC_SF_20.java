@@ -2,11 +2,13 @@ package com.qa.testcases.data.smallfiles;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.data.SmallfilesPageObject;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.data.Smallfiles;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Test;
@@ -26,6 +28,7 @@ public class TC_SF_20 extends BaseClass {
         Log.startTestCase("TC_SF_20.verifySpecialCharacters");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
+        UserActions userActions = new UserActions(driver);
         SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
         Smallfiles smallfiles = new Smallfiles(driver);
         smallfiles.commonPanelTabValidation(test, logger);
@@ -44,7 +47,8 @@ public class TC_SF_20 extends BaseClass {
         smallfiles.clickOnadvancedOptions();
 
         smallfiles.navigateToAdvancedOptions(smallfilesPageObject, test, "3", "6");
-        smallfiles.clickOnModalRunButton();
+        waitExecuter.waitUntilPageFullyLoaded();
+        userActions.performActionWithPolling(smallfilesPageObject.modalRunButton, UserAction.CLICK);
         logger.info("Clicked on Modal Run Button");
         test.log(LogStatus.INFO, "Clicked on Modal Run Button");
 

@@ -2,17 +2,23 @@ package com.qa.testcases.cluster.tuning;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.constants.PageConstants;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.CommonPageObject;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.clusters.TuningPageObject;
+import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.clusters.Tuning;
+import com.qa.scripts.reports.ReportsArchiveSchedulePage;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -32,21 +38,34 @@ public class TC_CTR_05 extends BaseClass {
         LOGGER.info("Passed Parameter Is : " + clusterId);
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-        waitExecuter.waitUntilElementPresent(topPanelPageObject.tuningTab);
+//        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
+//        waitExecuter.waitUntilElementPresent(topPanelPageObject.tuningTab);
         waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.waitUntilElementClickable(topPanelPageObject.tuningTab);
-        waitExecuter.sleep(3000);
-        MouseActions.clickOnElement(driver, topPanelPageObject.tuningTab);
-        LOGGER.info("Clicked on Tuning Tab");
-        test.log(LogStatus.INFO, "Clicked on Tuning Tab");
+//        waitExecuter.waitUntilElementClickable(topPanelPageObject.tuningTab);
+//        waitExecuter.sleep(3000);
+//        MouseActions.clickOnElement(driver, topPanelPageObject.tuningTab);
+//        LOGGER.info("Clicked on Tuning Tab");
+//        test.log(LogStatus.INFO, "Clicked on Tuning Tab");
 
         //Get all the clusters from UI and store in list and close the new report window
         Tuning tuning = new Tuning(driver);
-        tuning.closeConfirmationMessageNotification();
-        tuning.clickOnRunButton();
-        LOGGER.info("Clicked on Run button");
-        test.log(LogStatus.INFO,"Clicked on Run button");
+//        tuning.closeConfirmationMessageNotification();
+//        tuning.clickOnRunButton();
+//        LOGGER.info("Clicked on Run button");
+//        test.log(LogStatus.INFO,"Clicked on Run button");
+
+        test.log(LogStatus.INFO, "Initialize all class objects");
+        LOGGER.info("Initialize all class objects");
+        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
+        MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
+        waitExecuter.sleep(3000);
+        ReportsArchiveSchedulePage reportsPage = new ReportsArchiveSchedulePage(driver);
+        ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);
+        LOGGER.info("Click on + button");
+        String statusXpath = reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.Tuning);
+        LOGGER.info("Clicked on Tuning Tab + icon");
+        test.log(LogStatus.INFO, "Clicked on Tuning Tab + icon");
+
         UserActions userActions = new UserActions(driver);
         CommonPageObject commonPageObject = new CommonPageObject(driver);
         userActions.performActionWithPolling(commonPageObject.clusterDropdown, UserAction.CLICK);
@@ -69,11 +88,20 @@ public class TC_CTR_05 extends BaseClass {
             test.log(LogStatus.INFO, "Clicked on Run Button");
             waitExecuter.waitUntilElementPresent(tuningPageObject.runButton);
             waitExecuter.waitUntilElementClickable(tuningPageObject.runButton);
-            try {
-                waitExecuter.waitUntilTextToBeInWebElement(tuningPageObject.confirmationMessageElement,
-                        "Cluster Tuning completed successfully.");
-                test.log(LogStatus.PASS, "Verified Tuning report is completed successfully for cluster : " + clusterUI);
-            } catch (TimeoutException te) {
+//            try {
+//                waitExecuter.waitUntilTextToBeInWebElement(tuningPageObject.confirmationMessageElement,
+//                        "Cluster Tuning completed successfully.");
+//                test.log(LogStatus.PASS, "Verified Tuning report is completed successfully for cluster : " + clusterUI);
+//            } catch (TimeoutException te) {
+//                throw new AssertionError("Tuning Report not completed successfully for cluster :"+ clusterUI);
+//            }
+            WebElement statusElement = driver.findElement(By.xpath(statusXpath));
+            try{
+                waitExecuter.waitUntilElementPresent(statusElement);
+                test.log(LogStatus.PASS, "Verified Tuning report is completed with status " + statusElement.getText());
+//                waitExecuter.waitUntilTextToBeInWebElement(statusElement,
+//                        "SUCCESS");
+            }catch (TimeoutException te) {
                 throw new AssertionError("Tuning Report not completed successfully for cluster :"+ clusterUI);
             }
         }

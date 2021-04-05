@@ -2,6 +2,7 @@ package com.qa.testcases.data.smallfiles;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.data.SmallfilesPageObject;
@@ -10,6 +11,7 @@ import com.qa.scripts.data.Smallfiles;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Test;
@@ -28,6 +30,7 @@ public class TC_SF_08 extends BaseClass {
         Log.startTestCase("TC_SF_08.validatesmallfilereportusingadvancedfileoptions");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
+        UserActions userActions = new UserActions(driver);
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         waitExecuter.waitUntilElementPresent(topPanelComponentPageObject.data);
         waitExecuter.sleep(2000);
@@ -60,7 +63,7 @@ public class TC_SF_08 extends BaseClass {
         test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files");
 
 
-        smallfiles.clickOnModalRunButton();
+        userActions.performActionWithPolling(smallfilesPageObject.modalRunButton, UserAction.CLICK);
         waitExecuter.sleep(3000);
         LOGGER.info("Clicked on Modal Run Button");
         test.log(LogStatus.INFO, "Clicked on Modal Run Button");

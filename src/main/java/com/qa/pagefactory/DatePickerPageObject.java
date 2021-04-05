@@ -18,6 +18,9 @@ public class DatePickerPageObject {
     @FindBy(css = "div.component-date-picker")
     public WebElement dateRange;
 
+    @FindBy(css = "div.col-md-12 div.component-date-picker")
+    public WebElement dateRangeTopx;
+
     @FindBy(xpath = "//li[contains(text(),'Last 1 Hour')]")
     public WebElement lastOneHour;
 

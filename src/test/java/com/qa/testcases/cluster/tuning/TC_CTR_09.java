@@ -2,10 +2,15 @@ package com.qa.testcases.cluster.tuning;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.constants.PageConstants;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
+import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.scripts.clusters.Tuning;
+import com.qa.scripts.reports.ReportsArchiveSchedulePage;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.annotations.Test;
 import java.util.logging.Logger;
@@ -23,25 +28,36 @@ public class TC_CTR_09 extends BaseClass {
         LOGGER.info("Passed Parameter Is : " + clusterId);
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
+        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
+        ReportsArchiveSchedulePage reportsPage = new ReportsArchiveSchedulePage(driver);
+        ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);
+     /*   TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
         waitExecuter.waitUntilElementPresent(topPanelPageObject.tuningTab);
         waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.waitUntilElementClickable(topPanelPageObject.tuningTab);
         waitExecuter.sleep(3000);
-        MouseActions.clickOnElement(driver, topPanelPageObject.tuningTab);
+        MouseActions.clickOnElement(driver, topPanelPageObject.tuningTab);*/
         LOGGER.info("Clicked on Tuning Tab");
         test.log(LogStatus.INFO, "Clicked on Tuning Tab");
-
+        UserActions userActions = new UserActions(driver);
         Tuning tuning = new Tuning(driver);
-        tuning.clickOnScheduleButton();
-        test.log(LogStatus.INFO, "Clicked on Schedule Button");
+        waitExecuter.waitUntilElementPresent(topPanelComponentPageObject.reports);
+        MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
+        waitExecuter.waitUntilPageFullyLoaded();
+        tuning.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.Tuning);
+        waitExecuter.waitUntilPageFullyLoaded();
+        LOGGER.info("Clicked on Tuning Tab");
+        test.log(LogStatus.INFO, "Clicked on Tuning Tab");
+       /* tuning.clickOnScheduleButton();
+        test.log(LogStatus.INFO, "Clicked on Schedule Button");*/
         String scheduleName = "testScheduleWithEmail";
         String scheduleEmail = "test@email.com";
         tuning.createScheduleWithNameAndEmail(scheduleName,scheduleEmail);
+        waitExecuter.waitUntilPageFullyLoaded();
         tuning.clickOnModalScheduleButton();
-        test.log(LogStatus.INFO, "Clicked on modal Schedule Button");
+      /*  test.log(LogStatus.INFO, "Clicked on modal Schedule Button");
         String scheduleSuccessMsg = "THE REPORT HAS BEEN SCHEDULED SUCCESSFULLY.";
-        tuning.verifyScheduleSuccessMsg(scheduleSuccessMsg);
+        tuning.verifyScheduleSuccessMsg(scheduleSuccessMsg);*/
         test.log(LogStatus.PASS, "Verified schedule with email.");
 
     }

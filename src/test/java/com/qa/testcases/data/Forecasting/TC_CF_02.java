@@ -9,6 +9,7 @@ import com.qa.scripts.data.Forecasting;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -21,7 +22,7 @@ public class TC_CF_02 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void validateCanceledForecastingReport(String clusterId) {
-        test = extent.startTest("TC_CF_02.validateCanceledForecastingReport: "+ clusterId,
+        test = extent.startTest("TC_CF_02.validateCanceledForecastingReport: " + clusterId,
                 "Verify User is able to clicks on \"Cancel\" button and the Mini Window should close ");
         test.assignCategory(" Data - Forecasting ");
         LOGGER.info("Passed Parameter Is : " + clusterId);
@@ -49,29 +50,34 @@ public class TC_CF_02 extends BaseClass {
 
         //Get the previous report data generated
         String previousReportData = forecasting.getReportData();
-        LOGGER.info("Previous report generated data: "+previousReportData);
+        LOGGER.info("Previous report generated data: " + previousReportData);
         forecasting.clickOnRunButton();
         LOGGER.info("Clicked on Run Button");
         test.log(LogStatus.INFO, "Clicked on Run Button");
+        try {
+            String forecastingNoOfDays = "2";
+            forecasting.setForecastingDays(forecastingNoOfDays);
+            LOGGER.info("Set Forecasting days as: " + forecastingNoOfDays);
+            test.log(LogStatus.INFO, "Set Forecasting days as: " + forecastingNoOfDays);
+            forecasting.clickOnModalRunButton();
+            LOGGER.info("Clicked on Modal Run Button");
+            test.log(LogStatus.INFO, "Clicked on Modal Run Button");
+            waitExecuter.waitUntilElementPresent(forecastingPageObject.modalCancelButton);
+            forecasting.clickOnCancelButton();
+            test.log(LogStatus.INFO, "Clicked on CancelButton");
 
-        String forecastingNoOfDays = "2";
-        forecasting.setForecastingDays(forecastingNoOfDays);
-        LOGGER.info("Set Forecasting days as: "+ forecastingNoOfDays);
-        test.log(LogStatus.INFO, "Set Forecasting days as: "+ forecastingNoOfDays);
-        forecasting.clickOnModalRunButton();
-        LOGGER.info("Clicked on Modal Run Button");
-        test.log(LogStatus.INFO, "Clicked on Modal Run Button");
-        forecasting.clickOnCancelButton();
-        test.log(LogStatus.INFO, "Clicked on CancelButton");
+            //Get the previous report data generated
+            String reportDataAfterCancelled = forecasting.getReportData();
+            LOGGER.info("Report generated data after cancelled: " + reportDataAfterCancelled);
+            test.log(LogStatus.INFO, "Report generated data after cancelled: " + reportDataAfterCancelled);
 
-        //Get the previous report data generated
-        String reportDataAfterCancelled = forecasting.getReportData();
-        LOGGER.info("Report generated data after cancelled: "+reportDataAfterCancelled);
-        test.log(LogStatus.INFO, "Report generated data after cancelled: "+reportDataAfterCancelled);
-
-        //Validate both the report data
-        Assert.assertEquals(previousReportData, reportDataAfterCancelled);
-        test.log(LogStatus.PASS, "Verified Forecasting report after user cancelled.");
-        LOGGER.info("Verified Forecasting report after user cancelled.");
+            //Validate both the report data
+            Assert.assertEquals(previousReportData, reportDataAfterCancelled);
+            test.log(LogStatus.PASS, "Verified Forecasting report after user cancelled.");
+            LOGGER.info("Verified Forecasting report after user cancelled.");
+        } catch (VerifyError te) {
+            throw new AssertionError("Forecasting Report not completed successfully for " +
+                    " days: "+te);
+        }
     }
 }

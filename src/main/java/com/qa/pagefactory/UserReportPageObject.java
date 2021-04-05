@@ -30,14 +30,23 @@ public class UserReportPageObject {
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div[2]/div[2]/div/div/section/div")
     public List<WebElement> confirmationMessageschedule;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div/div[1]/div/div[2]/div[3]/div/div[3]/div/table/tbody/tr[1]/td[1]")
-    public List<WebElement> getUserNameFromTable;
+    @FindBy(xpath = "//*[@class=\"col-md-12\"]//tbody/tr/td[4]")
+    public WebElement getUserNameFromTable;
 
     @FindBy(xpath = "/html/body/div[1]/div/div/div[1]/div/div[2]/div/div[3]/div/div/div/div[3]/div")
     public List<WebElement> userOptions;
 
     @FindBy(xpath = "//div[@class='row']//a/span[text()='Schedule User Report']")
     public WebElement scheduleuserreportButton;
+
+    @FindBy(xpath = "//div[@id='action-2']//span//span[@class='pointer icon-calendar is-enabled']")
+    public WebElement addArchiveduserreport;
+
+    @FindBy(xpath = "//table/tbody/tr/td[1]/span")
+    public List<WebElement> reportNames;
+
+    @FindBy(xpath = "//*[@class=\"col-md-12\"]//tbody/tr/td[4]")
+    public WebElement scheduleName;
 
     @FindBy(xpath = "//span[@class=\"glyphicon glyphicon-plus-sign pointer\"]")
     public WebElement addconfiguration;
@@ -112,7 +121,7 @@ public class UserReportPageObject {
     @FindBy(xpath = "//input[@type=\"email\" and @placeholder=\"Email\"]")
     public WebElement emailNotification;
 
-    @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[9]/div/div/a/span")
+    @FindBy(xpath = "//span[contains(@class,'pointer cta-primary')]//a")
     public WebElement saveschedule;
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[1]/div[2]/input")

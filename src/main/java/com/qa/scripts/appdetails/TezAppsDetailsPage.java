@@ -20,14 +20,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.qa.base.BaseClass.test;
-
 public class TezAppsDetailsPage {
 
     private static final java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger(TezAppsDetailsPage.class.getName());
     private static Boolean isDignosticWin = false;
-    private WaitExecuter waitExecuter;
-    private WebDriver driver;
+    private final WaitExecuter waitExecuter;
+    private final WebDriver driver;
     private TezAppsDetailsPageObject tezApps;
 
     /**
@@ -236,7 +234,7 @@ public class TezAppsDetailsPage {
      */
     public void validateDags(int navigationRows, List<WebElement> navigationRowList,
                              TezAppsDetailsPageObject tezApps, Boolean validateExecutorTab,
-                                          Boolean validateStageTabs) {
+                             Boolean validateStageTabs) {
         if (navigationRows > 0) {
             String[] expectedHeader = {"Stage ID", "Start Time", "Duration", "Tasks", "Shuffle Read",
                     "Shuffle Write", "Input", "Output"};
@@ -528,17 +526,17 @@ public class TezAppsDetailsPage {
                                     Boolean validateExecutorTab, Boolean validateStageTab) {
         List<WebElement> componentList = tezApps.component_element;
         LOGGER.info("ComponentList is " + componentList.size());
-        int navigationRows = 0;
+        int DagsRows = 0;
         String tabName = "";
         for (int j = 0; j < componentList.size(); j++) {
             if (j != 3)
                 tabName = componentList.get(j).getText();
             switch (j) {
                 case 0:
-                    Assert.assertEquals(tabName, "Navigation", "Navigation tab not present");
+                    Assert.assertEquals(tabName, "Dags", "Navigation tab not present");
                     List<WebElement> navigationRowList = tezApps.DagtableRows;
-                    navigationRows = navigationRowList.size();
-                    LOGGER.info("Navigation Rows are " + navigationRows);
+                    DagsRows = navigationRowList.size();
+                    LOGGER.info("Navigation Rows are " + DagsRows);
                     if (validateCompData) {
                         List<WebElement> headerList = tezApps.navigationHeaders;
                         Assert.assertFalse(headerList.isEmpty(), "No headers for Navigation table for application");
@@ -546,18 +544,8 @@ public class TezAppsDetailsPage {
                             LOGGER.info("The header is " + headerList.get(i).getText());
                             Assert.assertNotSame("", headerList.get(i).getText());
                         }
-                        if (navigationRows > 0) {
-                            for (int rows = 1; rows <= navigationRows; rows++) {
-                                for (int col = 1; col <= headerList.size(); col++) {
-                                    String data = driver.findElement(By.xpath("//*[@id='appNavigation-body']/" +
-                                            "tr[" + rows + "]/td[" + col + "]/span")).getText();
-                                    LOGGER.info("The data is " + data);
-                                    Assert.assertNotSame("", data);
-                                }
-                            }
-                        }
                     }
-                    validateStageAndStageData(navigationRows, navigationRowList, tezApps, validateExecutorTab, validateStageTab);
+                    validateStageAndStageData(DagsRows, navigationRowList, tezApps, validateExecutorTab, validateStageTab);
                     break;
                 case 1:
                     //The component is Gantt Chart ,click it and then verify the no. rows in the table
@@ -572,24 +560,13 @@ public class TezAppsDetailsPage {
                             LOGGER.info("The header is " + headerList.get(i).getText());
                             Assert.assertNotSame("", headerList.get(i).getText());
                         }
-                        if (ganttChartTableRows.size() > 0) {
-                            for (int rows = 0; rows < ganttChartTableRows.size(); rows++) {
-                                String jobId = tezApps.ganttChartJobId.get(rows).getText();
-                                String startTime = tezApps.ganttChartStartTime.get(rows).getText();
-                                String duration = tezApps.ganttChartDuration.get(rows).getText();
-                                LOGGER.info("Duration = " + duration + " JobId = " + jobId + " starttime = " + startTime);
-                                Assert.assertNotSame("", jobId, "Value for jobId missing");
-                                Assert.assertNotSame("", startTime, "Value for startTime missing");
-                                Assert.assertNotSame("", duration, "Value for duration missing");
-                            }
-                        }
                     }
                     break;
                 case 2:
-                    Assert.assertEquals(tabName, navigationRows + " Jobs", "Jobs text not present");
+                    Assert.assertEquals(tabName, DagsRows + " Jobs", "Jobs text not present");
                     String[] jobCountArr = componentList.get(j).getText().split("\\s+");
                     int jobCnt = Integer.parseInt(jobCountArr[0]);
-                    Assert.assertEquals(jobCnt, navigationRows, "JobCnt and navigation rows donot match");
+                    Assert.assertEquals(jobCnt, DagsRows, "JobCnt and navigation rows donot match");
                     LOGGER.info("JobCount is " + jobCnt);
                     break;
             }
@@ -903,17 +880,15 @@ public class TezAppsDetailsPage {
      * and verify  Appname .
      */
     public String verifyDbname(TezAppsDetailsPageObject tezApps) {
-        WebElement Appname = tezApps.getAppname;
-        Actions toolAct = new Actions(driver);
-        toolAct.moveToElement(Appname).build().perform();
-        WebElement DbtoolTip = driver.findElement(By.xpath("//h5[normalize-space()='DATABASE']"));
-        waitExecuter.sleep(3000);
-        String AppDatabaseText = DbtoolTip.getText().trim();
-        System.out.println(AppDatabaseText);
+        String statusTable = tezApps.Status.getText();
+        LOGGER.info("Tez application Id is " + statusTable);
+        tezApps.getTypeFromTable.click();
+        String AppSummaryDbName = tezApps.getDbname.getText().trim();
+        LOGGER.info("Tez Status is " + AppSummaryDbName);
         waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();
-        Assert.assertNotSame("", Appname, "Tez Database name is not displayed in the Header");
-        return AppDatabaseText;
+        Assert.assertNotSame("", AppSummaryDbName, "Tez User name is not displayed in the Table");
+        return AppSummaryDbName;
     }
 
     /**
@@ -1028,9 +1003,9 @@ public class TezAppsDetailsPage {
         LOGGER.info("Select Cluster: " + clusterId);
         allApps.selectCluster(clusterId);
         waitExecuter.sleep(3000);
-
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(1000);
+        waitExecuter.waitUntilPageFullyLoaded();
         datePicker.selectLast90Days();
         waitExecuter.sleep(3000);
         waitExecuter.waitUntilPageFullyLoaded();
@@ -1062,7 +1037,7 @@ public class TezAppsDetailsPage {
      * Get Job count of selected App click on it and go to apps details page
      * Verify specific summary tabs.
      * */
-    public void commonTabValidation(ExtentTest test, String clusterId, String tabName, Logger logger,Boolean isFailedApp) {
+    public void commonTabValidation(ExtentTest test, String clusterId, String tabName, Logger logger, Boolean isFailedApp) {
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
 
@@ -1083,7 +1058,7 @@ public class TezAppsDetailsPage {
         test.log(LogStatus.INFO, "Verify that the left pane has Tez check box and the apps number");
         logger.info("Select individual app and assert that table contain its data");
 
-        int totalTezAppCnt=tezDetailsPage.clickOnlyLink("Tez");
+        int totalTezAppCnt = tezDetailsPage.clickOnlyLink("Tez");
         if (totalTezAppCnt > 0) {
             applicationsPageObject.expandStatus.click();
             int appCount = 0;

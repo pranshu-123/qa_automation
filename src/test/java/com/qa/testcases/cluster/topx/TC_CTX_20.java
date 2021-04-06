@@ -13,7 +13,9 @@ import com.qa.scripts.reports.ReportsArchiveSchedulePage;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
@@ -50,7 +52,7 @@ public class TC_CTX_20 extends BaseClass {
         ReportsArchiveSchedulePage reportsPage = new ReportsArchiveSchedulePage(driver);
         ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);
         logger.info("Click on + button", test);
-        reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.TopX);
+        String statusXpath = reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.TopX);
 
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
@@ -65,5 +67,15 @@ public class TC_CTX_20 extends BaseClass {
 //        } catch (TimeoutException te) {
 //            throw new AssertionError("Top X Report not completed successfully.");
 //        }
+
+        WebElement statusElement = driver.findElement(By.xpath(statusXpath));
+        try{
+            waitExecuter.waitUntilTextToBeInWebElement(statusElement,
+                    "SUCCESS");
+            test.log(LogStatus.PASS, "Verified TopX report is completed successfully");
+        }catch (TimeoutException te) {
+            throw new AssertionError("TopX report not completed successfully.");
+        }
+
     }
 }

@@ -54,7 +54,7 @@ public class TC_CTX_24 extends BaseClass {
     HomePage homePage = new HomePage(driver);
     homePage.clickOnClusterDropDown();
 
-    topX.clickOnModalRunButton();
+ //   topX.clickOnModalRunButton();
 
     Assert.assertTrue(topX.getClustersList().size() > 0, "No cluster is displayed.");
     test.log(LogStatus.PASS, "Cluster is displayed in dropdown.");

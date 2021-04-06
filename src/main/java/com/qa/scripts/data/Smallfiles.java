@@ -30,6 +30,7 @@ public class Smallfiles {
     SmallfilesPageObject smallfilesPageObject;
     private final WaitExecuter waitExecuter;
     private final WebDriver driver;
+    UserActions userActions;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -48,6 +49,7 @@ public class Smallfiles {
      */
     public void closeConfirmationMessageNotification() {
         if (smallfilesPageObject.confirmationMessageElementClose.size() > 0) {
+            waitExecuter.waitUntilPageFullyLoaded();
             waitExecuter.waitUntilElementClickable(smallfilesPageObject.confirmationMessageElementClose.get(0));
             JavaScriptExecuter.clickOnElement(driver, smallfilesPageObject.confirmationMessageElementClose.get(0));
         }
@@ -62,6 +64,7 @@ public class Smallfiles {
      */
     public void clickOnRunButton() {
         try {
+            waitExecuter.waitUntilElementPresent(smallfilesPageObject.runButton);
             MouseActions.clickOnElement(driver, smallfilesPageObject.runButton);
         } catch (TimeoutException te) {
             MouseActions.clickOnElement(driver, smallfilesPageObject.runNowButton);
@@ -89,7 +92,9 @@ public class Smallfiles {
     }
 
     public void clickOnModalRunButton() {
-        MouseActions.clickOnElement(driver, smallfilesPageObject.modalRunButton);
+        userActions.performActionWithPolling(smallfilesPageObject.modalRunButton, UserAction.CLICK);
+       /* MouseActions.clickOnElement(driver, smallfilesPageObject.modalRunButton);*/
+        waitExecuter.waitUntilPageFullyLoaded();
     }
 
     /**

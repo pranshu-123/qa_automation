@@ -8,6 +8,7 @@ import com.qa.testcases.appdetails.mapreduce.MR_050;
 import com.qa.testcases.appdetails.spark.TC_spark_239;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 
 import java.util.logging.Logger;
@@ -29,6 +30,7 @@ public class TC_SF_24 extends BaseClass {
         Log.startTestCase("TC_SF_24.VerifySortByPath");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
+        UserActions userActions = new UserActions(driver);
         SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
         Smallfiles smallfiles = new Smallfiles(driver);
         smallfiles.commonPanelTabValidation(test, logger);

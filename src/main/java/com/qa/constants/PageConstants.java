@@ -20,8 +20,7 @@ public class PageConstants {
     public static class TuningScheduleRun {
         public static String[] SCHEDULE_RUN = {"Daily", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
                 "Friday", "Saturday", "Every 2 Weeks", "Every Month"};
-        public static String[] SCHEDULE_CLUSTERID = {"tnode28-HDP315-TLS-Kerb-Ranger", "tnode3-CDH633-TLS-Kerb-Sentry",
-                "tnode40-CDH5162"};
+        public static String[] SCHEDULE_CLUSTERID = {"tnode28-HDP315-TLS-Kerb-Ranger", "tnode3-CDH633-TLS-Kerb-Sentry"};
     }
 
     public static class MRHiveKPIs {
@@ -68,6 +67,12 @@ public class PageConstants {
         public static String SqlTooManyPartitionsEvent = "Table has too many partitions";
         public static String ImpalaFailureEvent = "Impala query failure";
         public static String SqlNonPrunedPartitionsEvent = "No partitions were pruned";
+
+    }
+
+    public static class ReportsArchiveNames{
+        public static String Tuning = "Tuning";
+        public static String TopX = "Top X";
 
     }
 

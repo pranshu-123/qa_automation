@@ -42,7 +42,14 @@ public class DatePicker {
     public void clickOnDatePicker() {
         waitExecuter.waitUntilElementClickable(datePickerPageObject.dateRange);
         userActions.performActionWithPolling(datePickerPageObject.dateRange, UserAction.CLICK);
+        //userActions.performActionWithPolling(datePickerPageObject.dateRangeTopx, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(datePickerPageObject.dateRange);
+    }
+
+    public void clickOnDatePickerForTopX() {
+        waitExecuter.waitUntilElementClickable(datePickerPageObject.dateRangeTopx);
+        userActions.performActionWithPolling(datePickerPageObject.dateRangeTopx, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(datePickerPageObject.dateRangeTopx);
     }
 
     /**

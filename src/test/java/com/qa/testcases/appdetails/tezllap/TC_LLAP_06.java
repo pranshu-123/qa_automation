@@ -59,8 +59,11 @@ public class TC_LLAP_06 extends BaseClass {
                 "displayed in the header");
 
         applicationsPageObject.expandStatus.click();
-        int killedCount = tezLlapApps.clickOnlyLink("Killed");
-        test.log(LogStatus.PASS, "Selected killed Count is  " + killedCount + " as Status, In Applications page");
+        int statusCount = tezLlapApps.clickOnlyLink("Killed");
+        test.log(LogStatus.PASS, "Selected success Count is  " + statusCount + " as Status, In Applications page");
+        waitExecuter.waitUntilPageFullyLoaded();
+        applicationsPageObject.expandQueue.click();
+        waitExecuter.waitUntilPageFullyLoaded();
 
 
 

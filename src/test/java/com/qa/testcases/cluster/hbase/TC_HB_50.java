@@ -44,7 +44,7 @@ public class TC_HB_50 extends BaseClass {
 
         //Verify Hbase Tables graph metric
         String expectedHBaseGraphMetrics = "Region Count";
-        String hbaseGraph = "hbaseGraphundefined";
+        String hbaseGraph =  "hbaseGraph10"; //"hbaseGraphundefined";
         hbase.verifyHBaseKPIGraphs(hBasePageObject,expectedHBaseGraphMetrics, hbaseGraph);
 
         LOGGER.info("HBase Tables regionCount metrics data and graph charts found.");

@@ -2,6 +2,7 @@ package com.qa.testcases.data.Forecasting;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.DatePickerPageObject;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
@@ -11,6 +12,7 @@ import com.qa.scripts.data.Forecasting;
 import com.qa.utils.DateUtils;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
@@ -37,6 +39,7 @@ public class TC_CF_03 extends BaseClass {
         ForecastingPageObject forecastingPageObject = new ForecastingPageObject(driver);
         DatePickerPageObject datePickerPageObject = new DatePickerPageObject(driver);
         DatePicker datePicker = new DatePicker(driver);
+        UserActions userActions = new UserActions(driver);
         Forecasting forecasting = new Forecasting(driver);
 
         waitExecuter.waitUntilElementPresent(topPanelComponentPageObject.data);
@@ -90,7 +93,7 @@ public class TC_CF_03 extends BaseClass {
                         LOGGER.info("Clicked on Modal Run Button");
                         test.log(LogStatus.INFO, "Clicked on Modal Run Button");
                         waitExecuter.waitUntilElementPresent(forecastingPageObject.runButton);
-                        waitExecuter.waitUntilElementClickable(forecastingPageObject.runButton);
+                        userActions.performActionWithPolling(forecastingPageObject.runButton, UserAction.CLICK);
                         try {
                             waitExecuter.waitUntilTextToBeInWebElement(forecastingPageObject.confirmationMessageElement,
                                     "Capacity Forecasting completed successfully.");

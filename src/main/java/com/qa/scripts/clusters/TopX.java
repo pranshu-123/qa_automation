@@ -37,7 +37,8 @@ public class TopX {
     }
 
     public void clickOnModalRunButton() {
-        MouseActions.clickOnElement(driver, topXPageObject.modalRunButton);
+        //MouseActions.clickOnElement(driver, topXPageObject.modalRunButton);
+        MouseActions.clickOnElement(driver, topXPageObject.runButton);
     }
 
     public String getConfirmationMessageContent() {

@@ -40,6 +40,12 @@ public class WorkloadPageObject {
     @FindBy(xpath = "//a[contains(text(),'Memory Hours')]")
     public WebElement workloadDropdownMemoryHours;
 
+    @FindBy(xpath = "//a[contains(text(),'Impala')]")
+    public WebElement workloadDropdownImpala;
+
+    @FindBy(xpath = "//a[contains(text(),'Yarn')]")
+    public WebElement workloadDropdownYarn;
+
     @FindBy(xpath = "//*[@id=\"cluster-workload\"]/div[1]/div[2]/h3")
     public List<WebElement> timerangeMessageElement;
 
@@ -54,6 +60,9 @@ public class WorkloadPageObject {
 
     @FindBy(xpath = "//*[@id=\"radio-btn-opt\"]/span[3]")
     public WebElement viewByHour;
+
+    @FindBy(xpath = "//span[normalize-space()='vCore Hour']")
+    public WebElement vcoreHour;
 
     @FindBy(xpath = "//span[normalize-space()='Hour/Day']")
     public WebElement viewByHourDay;
@@ -72,6 +81,7 @@ public class WorkloadPageObject {
 
     @FindBy(xpath = "(//*[name()='svg'])[4]//*[local-name()='g']//*[local-name()='text']//*[local-name()='tspan']")
     public List<WebElement> tspanCal;
+
 
     @FindBy(xpath = "//*[@id=\"heat-cont\"]/svg/svg/svg/svg/g[28]/rect")
     public WebElement ViewByCal;

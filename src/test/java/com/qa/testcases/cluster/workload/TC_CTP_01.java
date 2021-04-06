@@ -3,6 +3,7 @@ package com.qa.testcases.cluster.workload;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelPageObject;
+import com.qa.pagefactory.clusters.WorkloadPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.clusters.Workload;
@@ -28,12 +29,11 @@ public class TC_CTP_01 extends BaseClass {
                 "Verify Cluster workload report should be generated for the select date range");
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
+        WorkloadPageObject workloadPageObject = new WorkloadPageObject(driver);
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-        waitExecuter.waitUntilElementPresent(topPanelPageObject.workloadTab);
-        waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.waitUntilElementClickable(topPanelPageObject.workloadTab);
-        waitExecuter.sleep(3000);
         MouseActions.clickOnElement(driver, topPanelPageObject.workloadTab);
+        Workload workload = new Workload(driver);
+        workload.selectByYarn();
 
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
 

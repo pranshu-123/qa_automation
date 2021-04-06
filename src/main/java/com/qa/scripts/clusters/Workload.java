@@ -2,10 +2,12 @@ package com.qa.scripts.clusters;
 
 
 import com.qa.pagefactory.clusters.WorkloadPageObject;
+import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.utils.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -95,6 +97,21 @@ public class Workload {
             actions.moveToElement(Sum)
                     .contextClick()
                     .doubleClick(workloadPageObject.viewByMonth)
+                    .perform();
+        } catch (NoSuchElementException e) {
+            LOGGER.severe("Class Workload | Method clickOnDay | Exception desc" + e.getMessage());
+            throw (e);
+        }
+    }
+
+    public void clickVCoreHour() {
+        try {
+            LOGGER.info("Click On Month dropdown");
+            WebElement Sum = (workloadPageObject.vcoreHour);
+            Actions actions = new Actions(driver);
+            actions.moveToElement(Sum)
+                    .contextClick()
+                    .doubleClick(workloadPageObject.vcoreHour)
                     .perform();
         } catch (NoSuchElementException e) {
             LOGGER.severe("Class Workload | Method clickOnDay | Exception desc" + e.getMessage());
@@ -244,6 +261,7 @@ public class Workload {
         }
     }
 
+
     /**
      * Method to Click on workload CoreHours tab
      */
@@ -362,6 +380,47 @@ public class Workload {
             // Selecting the Memory Hours
             waitExecuter.sleep(3000);
             MouseActions.clickOnElement(driver, workloadPageObject.workloadDropdownMemoryHours);
+        } catch (NoSuchElementException e) {
+            LOGGER.severe("Class Workload | Method selectByMemoryHours | Exception desc" + e.getMessage());
+            throw (e);
+        }
+    }
+
+    /**
+     * Method to Click on workload Yarn tab
+     */
+    public void selectByYarn() {
+        try {
+            LOGGER.info("Click on workload tab");
+            WaitExecuter waitExecuter = new WaitExecuter(driver);
+            // Click on workload tab
+            MouseActions.clickOnElement(driver, workloadPageObject.workloadTab);
+            // Click on workload dropdown
+            MouseActions.clickOnElement(driver, workloadPageObject.workloadDropdownOptionsButton);
+            // Selecting the Memory Hours
+            waitExecuter.sleep(3000);
+            MouseActions.clickOnElement(driver, workloadPageObject.workloadDropdownYarn);
+        } catch (NoSuchElementException e) {
+            LOGGER.severe("Class Workload | Method selectByMemoryHours | Exception desc" + e.getMessage());
+            throw (e);
+        }
+    }
+
+
+    /**
+     * Method to Click on workload Impala tab
+     */
+    public void selectByImpala() {
+        try {
+            LOGGER.info("Click on workload tab");
+            WaitExecuter waitExecuter = new WaitExecuter(driver);
+            // Click on workload tab
+            MouseActions.clickOnElement(driver, workloadPageObject.workloadTab);
+            // Click on workload dropdown
+            MouseActions.clickOnElement(driver, workloadPageObject.workloadDropdownOptionsButton);
+            // Selecting the Memory Hours
+            waitExecuter.sleep(3000);
+            MouseActions.clickOnElement(driver, workloadPageObject.workloadDropdownImpala);
         } catch (NoSuchElementException e) {
             LOGGER.severe("Class Workload | Method selectByMemoryHours | Exception desc" + e.getMessage());
             throw (e);

@@ -33,11 +33,55 @@ public class TEZ_129 extends BaseClass {
                 "Verify Query that was used to run the app must be populated");
         test.assignCategory(" Apps Details-Tez");
         Log.startTestCase("TEZ_129_verifyTheQuery");
+        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
+        ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
+        TezAppsDetailsPageObject tezApps = new TezAppsDetailsPageObject(driver);
         TezAppsDetailsPage tezDetailsPage = new TezAppsDetailsPage(driver);
+        DatePicker datePicker = new DatePicker(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        tezDetailsPage.commonTabValidation(test, clusterId, "Query", logger,false);
-        waitExecuter.sleep(2000);
-        test.log(LogStatus.SKIP, "Verified the Query tab successfully");
+        AllApps allApps = new AllApps(driver);
 
+        // Navigate to Jobs tab from header
+        test.log(LogStatus.INFO, "Navigate to jobs tab from header");
+        tezDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
+                applicationsPageObject, clusterId);
+
+
+        //Verify that the left pane has Tez check box and the apps number
+        test.log(LogStatus.INFO, "Verify that the left pane has Tez check box and the apps number");
+        logger.info("Select individual app and assert that table contain its data");
+
+        int appCount=tezDetailsPage.clickOnlyLink("Tez");
+        int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
+                replaceAll("[^\\dA-Za-z ]", "").trim());
+        logger.info("AppCount is " + appCount + " total count is " + totalCount);
+        Assert.assertEquals(appCount, totalCount, "The tez app count of TezApp is not equal to " +
+                "the total count of heading.");
+        test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
+                "displayed in the header");
+
+        applicationsPageObject.expandStatus.click();
+        appCount = tezDetailsPage.clickOnlyLink("Success");
+        waitExecuter.waitUntilPageFullyLoaded();
+        try {
+            //Clicking on the Tez app must go to apps detail page
+            if (appCount > 0) {
+                tezApps.getTypeFromTable.click();
+                waitExecuter.waitUntilPageFullyLoaded();
+                tezDetailsPage.verifyQueueTab(tezApps, true);
+                test.log(LogStatus.PASS, "Verified left pane in the app details page successfully");
+                //Close apps details page
+            } else {
+                test.log(LogStatus.SKIP, "No Tez Application present");
+                logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +
+                        "of 90 days");
+            }
+            MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
+            waitExecuter.sleep(3000);
+
+        } catch (VerifyError te) {
+            throw new AssertionError("No Tez Application present in the \" + clusterId + \" cluster for the time span \" +\n" +
+                    " \"of 90 days\"" + te);
+        }
     }
 }

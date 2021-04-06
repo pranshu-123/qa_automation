@@ -292,6 +292,7 @@ public class TezLlapAppsDetailsPage {
      * and verify  Write .
      */
     public String verifyWrite(TezLlapAppsDetailsPageObject tezLlapPage) {
+        waitExecuter.waitUntilElementPresent(tezLlapPage.getWrite);
         String WriteIO = tezLlapPage.getWrite.getText();
         LOGGER.info("Tez Status is " + WriteIO);
         waitExecuter.sleep(5000);

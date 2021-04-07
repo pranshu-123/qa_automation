@@ -54,7 +54,7 @@ public class TC_JAL_10 extends BaseClass {
         // Assert app types are -- "Hive","Impala","Map Reduce","Spark","Tez"
         test.log(LogStatus.INFO, "Validate the app types present");
         LOGGER.info("Validate the app types present");
-        List<String> existingAppTypes = new ArrayList<>(Arrays.asList("Hive", "Impala", "Map Reduce", "Spark", "Tez"));
+        List<String> existingAppTypes = new ArrayList<>(Arrays.asList("Hive", "Impala", "Map Reduce", "Spark", "Tez", "sas-grid-high"));
         List<WebElement> appTypes = applicationsPageObject.getApplicationTypes;
         List<String> listOfAppTypes = new ArrayList<>();
         waitExecuter.sleep(2000);

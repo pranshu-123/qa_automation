@@ -2,6 +2,7 @@ package com.qa.base;
 
 import com.qa.connections.db.InfluxDBClient;
 import com.qa.constants.ConfigConstants;
+import com.qa.constants.FileConstants;
 import com.qa.constants.InfluxMetricsConstants;
 import com.qa.io.ConfigReader;
 import com.qa.utils.DateUtils;
@@ -90,6 +91,8 @@ public class CustomListener extends BaseClass implements ITestListener {
                                                        String status) throws UnknownHostException {
         Map<String, Object> data = new HashMap<>();
         Properties prop = ConfigReader.readBaseConfig();
+        String markers = System.getProperty(ConfigConstants.SystemConfig.MARKERS);
+        Properties markerPillarMapping = ConfigReader.readConfig(FileConstants.getMarkerPillarMappingFile());
         data.put(InfluxMetricsConstants.METHOD_NAME, result.getMethod().getMethodName());
         data.put(InfluxMetricsConstants.STATUS, status);
         data.put(ConfigConstants.UnravelConfig.UNRAVEL_BUILD, prop.getProperty(ConfigConstants.UnravelConfig.UNRAVEL_BUILD));
@@ -98,7 +101,17 @@ public class CustomListener extends BaseClass implements ITestListener {
         data.put(InfluxMetricsConstants.URL, prop.getProperty(ConfigConstants.UnravelConfig.URL));
         data.put(InfluxMetricsConstants.HOST, InetAddress.getLocalHost().getHostName());
         data.put(InfluxMetricsConstants.DURATION, result.getEndMillis() - result.getStartMillis());
-        data.put(InfluxMetricsConstants.MARKERS, System.getProperty(ConfigConstants.SystemConfig.MARKERS));
+        data.put(InfluxMetricsConstants.MARKERS, markers);
+        if (markerPillarMapping.containsKey(markers)) {
+            if (markerPillarMapping.getProperty(markers) != null && !markerPillarMapping
+                    .getProperty(markers).trim().equals("")) {
+                data.put(InfluxMetricsConstants.PILLAR, markerPillarMapping.getProperty(markers));
+            } else {
+                data.put(InfluxMetricsConstants.PILLAR, "");
+            }
+        } else {
+            data.put(InfluxMetricsConstants.PILLAR, "");
+        }
         return data;
     }
 }

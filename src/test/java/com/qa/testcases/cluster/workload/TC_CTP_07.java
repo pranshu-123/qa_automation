@@ -60,34 +60,17 @@ public class TC_CTP_07 extends BaseClass {
         workload.clickOnHour();
         waitExecuter.sleep(1000);
 
-
-        workload.clickOnSum();
-        waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Verify Workload in selected Sum Hour :"
                 + workloadPageObject.viewBySum.getText());
 
         graphUtils.navigateDifferentPointOnGraph(driver, workloadPageObject.HourHighChartContainer);
         List<String> SumTooltipValues = graphUtils.getMemoryTooltipValues();
         waitExecuter.sleep(1000);
+        logger.info("Sum tooltip values : " +SumTooltipValues);
 
 
-
-        test.log(LogStatus.PASS, "Validate When the user hovers the mouse over the Average Hour graph"
-                + " it should simultaneously display the tool tip for Average Hour graph at the same data point");
-
-        workload.clickOnAverage();
-        waitExecuter.sleep(1000);
-        test.log(LogStatus.PASS, "Verify Workload in selected Average Hour");
-        waitExecuter.sleep(1000);
-
-
-        graphUtils.navigateDifferentPointOnGraph(driver, workloadPageObject.HourHighChartContainer);
-        List<String> AverageTooltipValues = graphUtils.getMemoryTooltipValues();
-
-
-        test.log(LogStatus.PASS, "Validate When the user hovers the mouse over the Average Hour graph"
-                + " it should simultaneously display the tool tip for Average Hour graph at the same data point");
-
-
+        test.log(LogStatus.PASS, "Validate When the user hovers the mouse over the Sum Hour graph"
+                + " it should simultaneously display the tool tip for  Sum Hour graph at the same data point");
     }
 }
+

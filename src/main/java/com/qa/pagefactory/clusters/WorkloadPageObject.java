@@ -58,7 +58,7 @@ public class WorkloadPageObject {
     @FindBy(xpath = "//span[@class=\"badge tag\" and text()=\"Day\"]")
     public WebElement viewByDay;
 
-    @FindBy(xpath = "//*[@id=\"radio-btn-opt\"]/span[3]")
+    @FindBy(xpath = "//span[normalize-space()='Hour']")
     public WebElement viewByHour;
 
     @FindBy(xpath = "//span[normalize-space()='vCore Hour']")
@@ -67,7 +67,7 @@ public class WorkloadPageObject {
     @FindBy(xpath = "//span[normalize-space()='Hour/Day']")
     public WebElement viewByHourDay;
 
-    @FindBy(xpath = "//span[@class=\"badge pending\" and text()=\"Sum\"]")
+    @FindBy(xpath = "//span[normalize-space()='Sum']")
     public WebElement viewBySum;
 
     @FindBy(xpath = "(//div[contains(@class,'highcharts-container')])[1]")

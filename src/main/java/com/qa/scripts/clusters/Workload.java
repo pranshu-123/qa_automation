@@ -1,9 +1,11 @@
 package com.qa.scripts.clusters;
 
 
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.clusters.WorkloadPageObject;
 import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.utils.*;
+import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -28,6 +30,7 @@ public class Workload {
     private WebDriver driver;
     private WaitExecuter waitExecuter;
     private WorkloadPageObject workloadPageObject;
+    UserActions userActions;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -191,15 +194,13 @@ public class Workload {
     /*Method to Click on Sum */
     public void clickOnSum() {
         try {
-            LOGGER.info("Click on Sum in Hour page");
-            WebDriverWait wait = new WebDriverWait(driver, 40);
-            WebElement Sum = (workloadPageObject.viewBySum);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(Sum)
-                    .contextClick()
-                    .doubleClick(workloadPageObject.viewBySum)
-                    .perform();
-            wait.pollingEvery(Duration.ofMillis(10));
+                LOGGER.info("Click on Hour dropdown");
+                WebElement Hour = (workloadPageObject.viewBySum);
+                Actions actions = new Actions(driver);
+                actions.moveToElement(Hour)
+                        .contextClick()
+                        .doubleClick(workloadPageObject.viewBySum)
+                        .perform();
         } catch (NoSuchElementException e) {
             LOGGER.severe("Class Workload | Method clickOnSum | Exception desc" + e.getMessage());
             throw (e);

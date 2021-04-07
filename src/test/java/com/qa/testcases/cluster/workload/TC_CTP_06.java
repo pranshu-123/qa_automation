@@ -2,11 +2,13 @@ package com.qa.testcases.cluster.workload;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.clusters.WorkloadPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.clusters.Workload;
 import com.qa.utils.DateUtils;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebElement;
@@ -27,8 +29,10 @@ public class TC_CTP_06 extends BaseClass {
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         WorkloadPageObject workloadPageObject = new WorkloadPageObject(driver);
+        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
+        MouseActions.clickOnElement(driver, topPanelPageObject.workloadTab);
         Workload workload = new Workload(driver);
-        workload.selectByMemoryHours();
+        workload.selectByImpala();
         waitExecuter.sleep(3000);
 
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);

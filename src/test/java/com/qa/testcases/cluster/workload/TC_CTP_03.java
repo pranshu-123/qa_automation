@@ -32,14 +32,10 @@ public class TC_CTP_03 extends BaseClass {
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         WorkloadPageObject workloadPageObject = new WorkloadPageObject(driver);
-        Workload workload = new Workload(driver);
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-        waitExecuter.waitUntilElementPresent(topPanelPageObject.workloadTab);
-        waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.waitUntilElementClickable(topPanelPageObject.workloadTab);
-        waitExecuter.sleep(3000);
         MouseActions.clickOnElement(driver, topPanelPageObject.workloadTab);
-
+        Workload workload = new Workload(driver);
+        workload.selectByYarn();
 
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
 

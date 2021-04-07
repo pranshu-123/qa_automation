@@ -325,7 +325,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//div[@class='component-tabs-primary']//li/a")
     public List<WebElement> appDetailsTabs;
 
-    @FindBy (xpath ="(//tbody[@id = 'allApps-body']/tr/td[12]//span)[2][@class='tez']")
+    @FindBy (xpath ="(//tbody[@id = 'allApps-body']/tr/td[12]//span)[@class='tez']")
     public List<WebElement> checkTezInParentApp;
 
     @FindBy(xpath = "//div[@id = 'scrollableMenu']//li/a")

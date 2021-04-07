@@ -33,11 +33,18 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[3]")
     public WebElement getUsername;
 
+    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[1]")
+    public WebElement getTypeFromTable;
+
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[4]/span[1]")
     public WebElement getAppname;
 
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[6]")
     public WebElement getstartTime;
+
+    @FindBy(xpath = "//div[@id='SummaryDetails']//div[3]")
+    public WebElement getDbname;
+
 
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[7]")
     public WebElement getduration;
@@ -60,6 +67,21 @@ public class TezAppsDetailsPageObject {
 
     @FindBy(xpath = "//a[@href='#/clusters/overview']")
     public WebElement homeTab;
+
+    @FindBy(xpath = "//span[(text()='Insights')]//following-sibling::a[contains(@class,'sorting')]")
+    public WebElement sortByParentApp;
+
+    @FindBy(xpath = "//span[(text()='Read')]//following-sibling::a[contains(@class,'sorting')]")
+    public WebElement sortByReadApp;
+
+    @FindBy(xpath = "//span[(text()='Write')]//following-sibling::a[contains(@class,'sorting')]")
+    public WebElement sortByWriteApp;
+
+    @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[9][@class='text-left']")
+    public List<WebElement> checkReadApp;
+
+    @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[10][@class='text-left']")
+    public List<WebElement> checkWriteApp;
 
     @FindBy(xpath = "//p[contains(@class,'float-right')]/b")
     public WebElement getTotalAppCount;
@@ -148,7 +170,7 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//tbody")
     public List<WebElement> DagtableRows;
 
-    @FindBy(xpath = "//table[@class='component-data-tables']//thead//tr")
+    @FindBy(xpath = "//body//div//th")
     public List<WebElement> navigationHeaders;
 
     @FindBy(xpath = "(//div[@id='app'])/div/div/div[1]/div[1]/span")

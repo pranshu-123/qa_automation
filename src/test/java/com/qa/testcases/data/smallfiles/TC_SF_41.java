@@ -7,6 +7,7 @@ import com.qa.scripts.HomePage;
 import com.qa.scripts.data.Smallfiles;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
@@ -31,6 +32,7 @@ public class TC_SF_41 extends BaseClass {
         Smallfiles smallfiles = new Smallfiles(driver);
         smallfiles.commonPanelTabValidation(test, logger);
         smallfiles.closeConfirmationMessageNotification();
+        UserActions userActions = new UserActions(driver);
         smallfiles.clickOnScheduleButton();
         logger.info("Clicked on Shedule Button");
         test.log(LogStatus.INFO, "Clicked on Shedule Button");

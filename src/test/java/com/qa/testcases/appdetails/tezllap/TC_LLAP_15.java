@@ -47,7 +47,7 @@ public class TC_LLAP_15 extends BaseClass {
                 applicationsPageObject, clusterId);
         test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
 
-        int appCount = tezLlapApps.clickOnlyLink("Hive");
+        int appCount = tezLlapApps.clickOnlyLink("Tez");
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
@@ -58,9 +58,12 @@ public class TC_LLAP_15 extends BaseClass {
                 "displayed in the header");
 
         applicationsPageObject.expandStatus.click();
-        int killedCount = tezLlapApps.clickOnlyLink("Killed");
-        test.log(LogStatus.PASS, "Selected killed Count is  " + killedCount + " as Status, In Applications page");
-
+        waitExecuter.waitUntilPageFullyLoaded();
+        int statusCount = tezLlapApps.clickOnlyLink("Killed");
+        test.log(LogStatus.PASS, "Selected success Count is  " + statusCount + " as Status, In Applications page");
+        waitExecuter.waitUntilPageFullyLoaded();
+        applicationsPageObject.expandQueue.click();
+        waitExecuter.waitUntilPageFullyLoaded();
 
         //  Get llap queuename from table for tez apps
         String upTo10CharQueueName = "llap";
@@ -98,5 +101,6 @@ public class TC_LLAP_15 extends BaseClass {
         }
     }
 }
+
 
 

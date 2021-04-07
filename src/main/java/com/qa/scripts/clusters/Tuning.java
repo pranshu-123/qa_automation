@@ -4,10 +4,12 @@ import com.qa.constants.PageConstants;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.CommonPageObject;
 import com.qa.pagefactory.clusters.TuningPageObject;
+import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -48,7 +50,8 @@ public class Tuning {
     }
 
     public void clickOnModalRunButton() {
-        MouseActions.clickOnElement(driver, tuningPageObject.modalRunButton);
+        //MouseActions.clickOnElement(driver, tuningPageObject.modalRunButton);
+        MouseActions.clickOnElement(driver, tuningPageObject.runButton);
     }
 
     public List<String> getClusterOptions(CommonPageObject commonPageObject) {
@@ -57,6 +60,31 @@ public class Tuning {
             list.add(element.getText());
         }
         return list;
+    }
+
+    /**
+     * Method to click the report names listed in the Report Archive Page with report name
+     */
+    public void clickOnReportName(ReportsArchiveScheduledPageObject reportPageObj, String name) {
+        List<WebElement> reportNameList = reportPageObj.reportNames;
+        waitExecuter.waitUntilPageFullyLoaded();
+        Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed , expected 9 reports");
+        for (int i = 0; i < reportNameList.size(); i++) {
+            String reportName = reportNameList.get(i).getText().trim();
+            System.out.println("reportName: " + reportName);
+            if (reportName.equals(name)) {
+                LOGGER.info("The report name is " + reportName);
+                int index = i + 1;
+                String iconXpath = "//table/tbody/tr[" + index + "]/td[4]/div/span/span[contains(@class,'icon-calendar')]";
+                //table/tbody/tr[1]/td[4]/div/span/span[contains(@class,'icon-expand')]
+                //System.out.println("iconXpath: "+iconXpath);
+                WebElement iconElement = driver.findElement(By.xpath(iconXpath));
+                waitExecuter.waitUntilElementPresent(iconElement);
+                iconElement.click();
+                waitExecuter.waitUntilPageFullyLoaded();
+                break;
+            }
+        }
     }
 
     public void closeNewReport(){
@@ -108,8 +136,10 @@ public class Tuning {
 
     public void clickOnModalScheduleButton(){
         try {
+            waitExecuter.waitUntilElementPresent(tuningPageObject.modalScheduleButton);
             MouseActions.clickOnElement(driver, tuningPageObject.modalScheduleButton);
         } catch (TimeoutException te) {
+            waitExecuter.waitUntilElementPresent(tuningPageObject.modalScheduleButton);
             MouseActions.clickOnElement(driver, tuningPageObject.modalScheduleButton);
         }
     }

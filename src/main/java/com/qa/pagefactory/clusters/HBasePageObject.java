@@ -78,16 +78,19 @@ public class HBasePageObject {
     @FindBy(xpath="//table[@id='hbaseRegionsDataTble']/tbody/tr[1]/td[1]")
     public  WebElement hBaseFirstRegionSvr;
 
-    @FindBy(xpath="//table[@id='null-region']")
+    //@FindBy(xpath="//table[@id='null-region']")
+    @FindBy(xpath="//table[@id='TableshbaseInfoTable']")
     public WebElement hBaseRegionSvrTable;
 
-    @FindBy(xpath="//table[@id='null-region']/tbody/tr/td[1]")
+    //@FindBy(xpath="//table[@id='null-region']/tbody/tr/td[1]")
+    @FindBy(xpath="//table[@id='TableshbaseInfoTable']/tbody/tr/td[1]")
     public List<WebElement> hBaseRegionSvrTableNames;
 
     @FindBy(xpath="//div[@class='g-col-one']/h3")
     public WebElement hBaseRegionSvrTableHeaderName;
 
-    @FindBy(xpath = "//table[@id='null-region']/tbody/tr[1]/td[1]")
+    //@FindBy(xpath = "//table[@id='null-region']/tbody/tr[1]/td[1]")
+    @FindBy(xpath = "//table[@id='TableshbaseInfoTable']/tbody/tr[1]/td[1]")
     public WebElement hBaseFirstRegionSvrTable;
 
     @FindBy(xpath = "//a[@class='active']")

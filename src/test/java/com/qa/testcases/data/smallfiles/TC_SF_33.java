@@ -6,6 +6,7 @@ import com.qa.pagefactory.data.SmallfilesPageObject;
 import com.qa.scripts.data.Smallfiles;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -28,6 +29,7 @@ public class TC_SF_33 extends BaseClass {
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
+        UserActions userActions = new UserActions(driver);
         Smallfiles smallfiles = new Smallfiles(driver);
         smallfiles.commonPanelTabValidation(test, logger);
         smallfiles.closeConfirmationMessageNotification();

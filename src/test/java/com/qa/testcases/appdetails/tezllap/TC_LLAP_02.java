@@ -58,6 +58,8 @@ public class TC_LLAP_02 extends BaseClass {
                 "the total count of heading.");
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
+        waitExecuter.waitUntilPageFullyLoaded();
+        applicationsPageObject.expandQueue.click();
 
         // Get llap queuename from table for tez apps
         String upTo10CharQueueName = "llap";

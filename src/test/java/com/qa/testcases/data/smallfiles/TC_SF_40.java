@@ -2,11 +2,13 @@ package com.qa.testcases.data.smallfiles;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.data.SmallfilesPageObject;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.data.Smallfiles;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
@@ -32,6 +34,7 @@ public class TC_SF_40 extends BaseClass {
         Smallfiles smallfiles = new Smallfiles(driver);
         smallfiles.commonPanelTabValidation(test, logger);
         smallfiles.closeConfirmationMessageNotification();
+        UserActions userActions = new UserActions(driver);
         smallfiles.clickOnScheduleButton();
         logger.info("Clicked on Shedule Button");
         test.log(LogStatus.INFO, "Clicked on Shedule Button");
@@ -51,7 +54,8 @@ public class TC_SF_40 extends BaseClass {
             test.log(LogStatus.INFO, "Define day of the week as- Daily and time as- 10:30");
             logger.info("Define day of the week as- Daily and time as- 10:30");
             smallfiles.selectDayTime("Daily", "10", "30");
-            smallfiles.clickOnModalScheduleButton();
+            waitExecuter.waitUntilPageFullyLoaded();
+            userActions.performActionWithPolling(smallfilesPageObject.modalRunButton, UserAction.CLICK);
             waitExecuter.waitUntilPageFullyLoaded();
             logger.info("Clicked on Modal Schedule Button");
             test.log(LogStatus.INFO, "Clicked on Modal Schedule Button");

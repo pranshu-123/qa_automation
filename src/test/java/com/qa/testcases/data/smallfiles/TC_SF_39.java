@@ -2,6 +2,7 @@ package com.qa.testcases.data.smallfiles;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.data.SmallfilesPageObject;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.data.Smallfiles;
@@ -54,7 +55,8 @@ public class TC_SF_39 extends BaseClass {
             logger.info("Define day of the week as- Every month and time as- 00:00");
             smallfiles.selectDayTime("Daily", "11", "30");
             waitExecuter.waitUntilPageFullyLoaded();
-            smallfiles.clickOnModalScheduleButton();
+            waitExecuter.waitUntilPageFullyLoaded();
+            userActions.performActionWithPolling(smallfilesPageObject.modalRunButton, UserAction.CLICK);
             waitExecuter.waitUntilPageFullyLoaded();
             logger.info("Clicked on Modal Schedule Button");
             test.log(LogStatus.INFO, "Clicked on Modal Schedule Button");

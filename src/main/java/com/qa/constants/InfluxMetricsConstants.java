@@ -15,4 +15,5 @@ public class InfluxMetricsConstants {
     public static final String STATUS = "status";
     public static final String DURATION = "duration";
     public static final String MARKERS = "markers";
+    public static final String PILLAR = "pillar";
 }

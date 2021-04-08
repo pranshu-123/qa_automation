@@ -738,7 +738,7 @@ public class MrAppsDetailsPage {
             logger.info("Graph title is " + graphTitle);
             /*verifyAssertTrue(Arrays.asList(expectedGraphTitle).contains(graphTitle), mrApps, " The expected" +
                     " Graph title doesnot match with the titles in the UI");*/
-            //verifyAssertTrue(allGraphsList.get(t).isDisplayed(), mrApps, " All Graphs are not displayed");
+          /*  verifyAssertTrue(allGraphsList.get(t).isDisplayed(), mrApps, " All Graphs are not displayed");*/
             switch (graphTitle) {
                 case "Task Attempts":
                     logger.info("Validating the Graph " + graphTitle);

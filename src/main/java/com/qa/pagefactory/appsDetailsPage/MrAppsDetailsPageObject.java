@@ -14,6 +14,8 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[1]")
     public WebElement getSummaryFromTable;
 
+    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[1]")
+    public WebElement getTypeFromTable;
 
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[5]")
     public WebElement getClusterId;
@@ -302,7 +304,7 @@ public class MrAppsDetailsPageObject {
     public WebElement DAGData;
 
     //Resources Tab xpath
-    @FindBy(xpath = "//*[@id='app']/div/div/div[2]/div/div/div[2]/div[3]//div[1]/div[1]//div[1]/h4")
+    @FindBy(xpath = "//div[@class=\"component-dashboard\"]//*[@class=\"header\"]/h4")
     public List<WebElement> resourcesGraphTitle;
 
     @FindBy(xpath = "//*[@class=\"highcharts-series-group\"]")
@@ -346,6 +348,9 @@ public class MrAppsDetailsPageObject {
 
     @FindBy(xpath = "//*[@class=\"legendclass\"]//span")
     public List<WebElement> resourcesMetricsPlotGraphLegend;
+
+    @FindBy(xpath = "//*[@chart-options='getappResourceUseageOptions']//*[name()='path' and @class='highcharts-tracker-line']")
+    public List<WebElement> resourcesMetricsLineGraph;
 
     //Detailed stage's Tab xpath
     @FindBy(xpath = "//*[@id='sparkStageNavigation-body']//tr")

@@ -21,7 +21,7 @@ public class MR_061 extends BaseClass {
         test.assignCategory(" Apps Details-Mr");
         Log.startTestCase("MR_061_verifyMetricsTab");
         MrAppsDetailsPage mrDetailsPage = new MrAppsDetailsPage(driver);
-        mrDetailsPage.commonSetupCodeForSumarryTabValidation(test, clusterId, "Metrics", logger, true);
+        mrDetailsPage.commonSetupCodeForSumarryTabValidation(test, clusterId, "Metrics", logger, false);
         test.log(LogStatus.PASS, "Verified the Metrics tab successfully");
 
     }

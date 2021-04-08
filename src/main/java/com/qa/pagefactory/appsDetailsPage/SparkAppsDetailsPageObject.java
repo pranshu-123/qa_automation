@@ -156,23 +156,19 @@ public class SparkAppsDetailsPageObject {
   public List<WebElement> configPropValue;
 
   // Logs Tab xpaths
-  //@FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[2]/div/div[2]/div[3]/div[1]/section/div/span")
-  @FindBy(xpath = "//*[@id='app']/div/div/div[2]/div[2]/div/div[2]/div[2]/div[1]/section/div/span")
+  @FindBy(xpath = "//*[@id='app']//section/div/span")
   public List<WebElement> logElementCollapsable;
 
- // @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[2]/div/div[2]/div[3]/div[1]/section/div/a")
-  @FindBy(xpath = "//*[@id='app']/div/div/div[2]/div[2]/div/div[2]/div[2]/div[1]/section/div/a/span")
+  @FindBy(xpath = "//*[@id='app']//section/div/a/span")
   public List<WebElement> logExecutorNames;
 
-  @FindBy(xpath = "//*[@id='app']/div/div/div[2]/div[2]/div/div[2]/div[2]/div[1]/section/div/div/p[1]")
-  //@FindBy(xpath = "//*[@id='app']/div/div/div[2]/div[2]/div/div[2]/div[3]/div[1]/section/div/div/p[1]")
+  @FindBy(xpath = "//*[@id='app']//section//p[1]")
   public WebElement logExecutorContents;
 
-  //@FindBy(xpath = "//*[@id='app']/div/div/div[2]/div[2]/div/div[2]/div[3]/div[1]/section/div/div/p[2]/a/b")
-  @FindBy(xpath = "//*[@id='app']/div/div/div[2]/div[2]/div/div[2]/div[2]/div[1]/section/div/div/p[2]/a/b")
+  @FindBy(xpath = "//*[@id='app']//section//p[2]/a/b")
   public WebElement showFullLogLink;
 
-  // Timings Tab xpath
+ // Timings Tab xpath
   @FindBy(xpath = "//*[@id='allApps']")
   public List<WebElement> timingsSubTabs;
 

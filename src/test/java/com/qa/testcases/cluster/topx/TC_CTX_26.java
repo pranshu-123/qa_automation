@@ -52,7 +52,7 @@ public class TC_CTX_26 extends BaseClass {
         ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);
         LOGGER.info("Click on + button", test);
         String statusXpath = reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.TopX);
-
+        waitExecuter.waitUntilPageFullyLoaded();
         topX.clickOnUserFilter();
         for (int filterDropDown=0; filterDropDown<topX.getFilterDropDowns().size(); filterDropDown++) {
             topX.clearFilter();

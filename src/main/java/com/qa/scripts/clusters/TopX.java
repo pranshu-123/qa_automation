@@ -108,6 +108,7 @@ public class TopX {
      * Click on user Filter on TopX page
      */
     public void clickOnUserFilter() {
+        waitExecuter.waitUntilElementClickable(topXPageObject.usersSelectTextField);
         actions.performActionWithPolling(topXPageObject.usersSelectTextField, UserAction.CLICK);
     }
 

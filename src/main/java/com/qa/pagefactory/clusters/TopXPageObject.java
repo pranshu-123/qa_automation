@@ -18,7 +18,8 @@ public class TopXPageObject {
     @FindBy(xpath = "(//span[contains(text(),'Run')])[2]/parent::a")
     public WebElement modalRunButton;
 
-    @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
+    //@FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
+    @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/span")
     public WebElement confirmationMessageElement;
 
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/a")
@@ -90,7 +91,8 @@ public class TopXPageObject {
     @FindBy(xpath = "//table[@id='topx-param-tbl']//tbody/tr")
     public List<WebElement> inputParamsRowList;
 
-    @FindBy(xpath = "//input[contains(@type,'checkbox')]")
+    //@FindBy(xpath = "//input[contains(@type,'checkbox')]")
+    @FindBy(xpath = "//li//input[contains(@type,'checkbox')]")
     public List<WebElement> tagsCheckbox;
 
     @FindBy(xpath = "(//div[contains(text(), 'Tags')])/following-sibling::div/descendant::input[not(contains(@type,'checkbox'))][last()]")

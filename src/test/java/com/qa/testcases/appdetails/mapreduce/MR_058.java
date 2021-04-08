@@ -29,7 +29,7 @@ public class MR_058 extends BaseClass {
         MrAppsDetailsPageObject mrApps = new MrAppsDetailsPageObject(driver);
         MrAppsDetailsPage mrDetailsPage = new MrAppsDetailsPage(driver);
 
-        mrDetailsPage.commonSetupCodeForSumarryTabValidation(test, clusterId, "Tags", logger, false);
+        mrDetailsPage.commonSetupCodeForSumarryTabValidation(test, clusterId, "Metrics", logger, false);
         test.log(LogStatus.PASS, "Verified the Tags tab successfully");
     }
 }

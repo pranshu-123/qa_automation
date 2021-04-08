@@ -76,8 +76,7 @@ public class MR_056 extends BaseClass {
                         int successAppCount = mrDetailsPage.clickOnlyLink("Success");
                         waitExecuter.sleep(2000);
                         if (successAppCount > 0) {
-                            String headerAppId = mrDetailsPage.verifyAppId(mrApps, applicationsPageObject);
-                            test.log(LogStatus.PASS, "Map Reduce Application Id is displayed in the Header: " + headerAppId);
+                            mrApps.getTypeFromTable.click();
                             waitExecuter.waitUntilPageFullyLoaded();
                             MouseActions.clickOnElement(driver, mrApps.resourcesTab);
                             waitExecuter.waitUntilPageFullyLoaded();

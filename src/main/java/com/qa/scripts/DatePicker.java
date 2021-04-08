@@ -20,10 +20,10 @@ import java.util.List;
  */
 
 public class DatePicker {
-    public DatePickerPageObject datePickerPageObject;
-    public WaitExecuter waitExecuter;
     private final WebDriver driver;
     private final UserActions userActions;
+    public DatePickerPageObject datePickerPageObject;
+    public WaitExecuter waitExecuter;
 
     /**
      * @param driver - WebDriver instance

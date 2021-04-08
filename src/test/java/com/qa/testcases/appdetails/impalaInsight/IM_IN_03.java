@@ -41,7 +41,8 @@ public class IM_IN_03 extends BaseClass {
             appDetailsPage.navigateToJobsTab();
             appDetailsPage.navigateToInefficientApps();
             datePicker.clickOnDatePicker();
-            datePicker.selectLast7Days();
+            test.log(LogStatus.PASS, "Select last 30 days.");
+            datePicker.selectLast30Days();
             loggingUtils.info("Select only impala application and get its count", test);
             int appCount = appDetailsPage.selectOnlyApplication(AppDetailsApplicationType.IMPALA);
             loggingUtils.info("App count for impala- " + appCount, test);
@@ -53,7 +54,7 @@ public class IM_IN_03 extends BaseClass {
                 loggingUtils.info("Expected title on page - " + PageConstants.EventTypes.SQLNonPartitionedTableEvent, test);
                 appDetailsPage.close();
                 Assert.assertTrue(titles.contains(PageConstants.EventTypes.SQLNonPartitionedTableEvent),
-                        "Does not contain title as expected in analysis tab- "+PageConstants.EventTypes.SQLNonPartitionedTableEvent);
+                        "Does not contain title as expected in analysis tab- " + PageConstants.EventTypes.SQLNonPartitionedTableEvent);
                 test.log(LogStatus.PASS, "SQLNonPartitionedTableEvent verified ");
             } else {
                 loggingUtils.info("There are no successful apps for impala for selected cluster", test);

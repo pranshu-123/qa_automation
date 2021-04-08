@@ -30,7 +30,8 @@ public class TopXPageObject {
     @FindBy(xpath = "//div[@class='row']//a/span[text()='Schedule']")
     public WebElement scheduleButton;
     
-    @FindBy(xpath = "(//a/span[text()='Schedule'])[2]")
+    //@FindBy(xpath = "(//a/span[text()='Schedule'])[2]")
+    @FindBy(xpath = "(//a/span[text()='Schedule'])")
     public WebElement scheduleButtonInReport;
 
     @FindBy(xpath="//div[@id='breadcrumb']/span/span")

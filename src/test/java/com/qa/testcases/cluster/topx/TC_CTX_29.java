@@ -54,7 +54,9 @@ public class TC_CTX_29 extends BaseClass {
         ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);
         LOGGER.info("Click on + button", test);
         String statusXpath = reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.TopX);
+        waitExecuter.waitUntilPageFullyLoaded();
         int chkBoxSize = topX.getTagsCheckbox().size();
+        System.out.println("chkBoxSize: "+chkBoxSize);
         for (int i=0; i<chkBoxSize; i++) {
             LOGGER.info("Click on tags of category: ", test);
             topX.selectTagsCheckbox(topX.getTagsCheckbox().get(i));
@@ -66,6 +68,8 @@ public class TC_CTX_29 extends BaseClass {
                 LOGGER.info("Click on queue filter: " + tagFilter, test);
                 userActions.performActionWithPolling(topX.getFilterDropDowns().get(filterDropDown), UserAction.CLICK);
                 topX.clickOnModalRunButton();
+                String confirmMsg = topX.getConfirmationMessageContent();
+                LOGGER.info("Message after click on Run button: "+ confirmMsg, test);
 //                try {
 //                    waitExecuter.waitUntilTextToBeInWebElement(topX.getConfirmationMessage(),
 //                            "Top X Report completed successfully.");

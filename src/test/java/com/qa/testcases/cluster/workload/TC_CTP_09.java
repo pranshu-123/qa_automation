@@ -34,15 +34,12 @@ public class TC_CTP_09 extends BaseClass {
                 "Verify This should display the job types with count executed on particulay day.");
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
+        GraphUtils graphUtils = new GraphUtils();
         WorkloadPageObject workloadPageObject = new WorkloadPageObject(driver);
-        waitExecuter.waitUntilElementPresent(topPanelPageObject.workloadTab);
-        waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.waitUntilElementClickable(topPanelPageObject.workloadTab);
-        waitExecuter.sleep(3000);
+        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
         MouseActions.clickOnElement(driver, topPanelPageObject.workloadTab);
         Workload workload = new Workload(driver);
-        GraphUtils graphUtils = new GraphUtils();
+        workload.selectByYarn();
 
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
 

@@ -101,34 +101,34 @@ public class TezLlapAppsDetailsPageObject {
     @FindBy(xpath = "//a[normalize-space()='Configuration']")
     public WebElement configtab;
 
-    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[2]")
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr/td[2]")
     public WebElement status;
 
-    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[3]")
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr/td[3]")
     public WebElement getUsername;
 
-    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[4]/span[1]")
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr/td[4]/span[1]")
     public WebElement getAppname;
 
-    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[6]")
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr/td[6]")
     public WebElement getstartTime;
 
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[7]")
     public WebElement getduration;
 
-    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[9]")
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr/td[9]")
     public WebElement getRead;
 
-    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[9]")
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr/td[12]")
     public WebElement getParentApp;
 
-    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[8]")
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr/td[8]")
     public WebElement getQueue;
 
-    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[10]")
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr/td[10]")
     public WebElement getWrite;
 
-    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[4]/div")
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr/td[4]/div")
     public WebElement getAppid;
 
 

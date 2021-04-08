@@ -47,6 +47,7 @@ public class TC_HB_45 extends BaseClass {
 
         //verify and click on region server tab
         hbase.verifyRegionServer();
+        hbase.clickOnTableName();
         //verify alerts in region server
         hbase.verifyAlertsInRegionServerHealth();
         LOGGER.info("Verified alerts for region server in UI.");

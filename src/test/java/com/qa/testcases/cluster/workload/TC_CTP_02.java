@@ -32,14 +32,9 @@ public class TC_CTP_02 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         WorkloadPageObject workloadPageObject = new WorkloadPageObject(driver);
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-        waitExecuter.waitUntilElementPresent(topPanelPageObject.workloadTab);
-        waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.waitUntilElementClickable(topPanelPageObject.workloadTab);
-        waitExecuter.sleep(3000);
         MouseActions.clickOnElement(driver, topPanelPageObject.workloadTab);
-
         Workload workload = new Workload(driver);
-
+        workload.selectByYarn();
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
 
         HomePage homePage = new HomePage(driver);

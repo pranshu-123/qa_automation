@@ -32,13 +32,10 @@ public class TC_CTP_04 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         WorkloadPageObject workloadPageObject = new WorkloadPageObject(driver);
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-        waitExecuter.waitUntilElementPresent(topPanelPageObject.workloadTab);
-        waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.waitUntilElementClickable(topPanelPageObject.workloadTab);
-        waitExecuter.sleep(3000);
         MouseActions.clickOnElement(driver, topPanelPageObject.workloadTab);
-
         Workload workload = new Workload(driver);
+        workload.selectByYarn();
+
 
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
 
@@ -65,19 +62,19 @@ public class TC_CTP_04 extends BaseClass {
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.stream()
                 .filter(WebElement::isDisplayed).findFirst().get().getText());
-
+        waitExecuter.waitUntilPageFullyLoaded();
         workload.clickOnDay();
         waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Verify View By Day");
 
-
+        waitExecuter.waitUntilPageFullyLoaded();
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();
         waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.stream()
                 .filter(WebElement::isDisplayed).findFirst().get().getText());
-
+        waitExecuter.waitUntilPageFullyLoaded();
         workload.clickOnHour();
         test.log(LogStatus.PASS, "Verify View By Hour");
 

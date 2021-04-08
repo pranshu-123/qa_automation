@@ -28,15 +28,12 @@ public class TC_CTP_08 extends BaseClass {
                 "Verify Date range displayed in workload report should be same as date range selected in date picker");
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
+        GraphUtils graphUtils = new GraphUtils();
         WorkloadPageObject workloadPageObject = new WorkloadPageObject(driver);
-        waitExecuter.waitUntilElementPresent(topPanelPageObject.workloadTab);
-        waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.waitUntilElementClickable(topPanelPageObject.workloadTab);
-        waitExecuter.sleep(3000);
+        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
         MouseActions.clickOnElement(driver, topPanelPageObject.workloadTab);
         Workload workload = new Workload(driver);
-        GraphUtils graphUtils = new GraphUtils();
+        workload.selectByYarn();
 
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
 

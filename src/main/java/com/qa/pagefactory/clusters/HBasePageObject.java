@@ -44,7 +44,8 @@ public class HBasePageObject {
     @FindBy(xpath="//table[@id='hbaseRegionsDataTble']/tbody/tr")
     public List<WebElement> hBaseRegionSvrTableRecords;
 
-    @FindBy(xpath="//table[@id='hbaseRegionsDataTble']/tbody/tr/td[6]/span")
+    //@FindBy(xpath="//table[@id='hbaseRegionsDataTble']/tbody/tr/td[6]/span")
+    @FindBy(xpath = "//table[@id='hbaseTableHostDataTAble']/tbody/tr/td[6]/span")
     public List<WebElement> hBaseRegionSvrHealth;
 
     @FindBy(xpath="//div[@class='container-fluid']/h3/a")

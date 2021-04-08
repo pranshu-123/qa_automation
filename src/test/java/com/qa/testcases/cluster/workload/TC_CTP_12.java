@@ -31,16 +31,12 @@ public class TC_CTP_12 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         HomePage homePage = new HomePage(driver);
 
-        //Initialize Workload Page Object
-        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
+        GraphUtils graphUtils = new GraphUtils();
         WorkloadPageObject workloadPageObject = new WorkloadPageObject(driver);
-        waitExecuter.waitUntilElementPresent(topPanelPageObject.workloadTab);
-        waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.waitUntilElementClickable(topPanelPageObject.workloadTab);
-        waitExecuter.sleep(3000);
+        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
         MouseActions.clickOnElement(driver, topPanelPageObject.workloadTab);
         Workload workload = new Workload(driver);
-        GraphUtils graphUtils = new GraphUtils();
+        workload.selectByYarn();
 
         // Set multi cluster
         test.log(LogStatus.INFO, "Select cluster : " + clusterId);

@@ -2,9 +2,11 @@ package com.qa.testcases.jobs.applications.all;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -19,11 +21,11 @@ import java.util.logging.Logger;
 @Marker.AllApps
 @Marker.All
 public class TC_JAL_17 extends BaseClass {
-    private static final Logger LOGGER = Logger.getLogger(TC_JAL_16.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TC_JAL_17.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void VerifyTagsDropdownOptions(String clusterId) {
-        test = extent.startTest("TC_JAL_16.VerifyTagsDropdownOptions",
+        test = extent.startTest("TC_JAL_17.VerifyTagsDropdownOptions",
                 "Verify that on expanding tags the option available are 'dept, priority, team, project, real users, dbs and inputTables'");
         test.assignCategory("Jobs - Applications");
         test.log(LogStatus.INFO, "Login to the application");
@@ -34,40 +36,50 @@ public class TC_JAL_17 extends BaseClass {
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         AllApps allApps = new AllApps(driver);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
+        UserActions userActions = new UserActions(driver);
         // Navigate to Jobs tab from header select cluster and clisk on last 7 days
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         test.log(LogStatus.INFO, "Select last 7 days");
         test.log(LogStatus.INFO, "Select clusterId : " + clusterId);
         allApps.inJobsSelectClusterAndLast7Days(clusterId);
         executor.executeScript("arguments[0].scrollIntoView();", applicationsPageObject.userSearchBox);
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.tagExpandableHeader);
+        userActions.performActionWithPolling(applicationsPageObject.tagExpandableHeader, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.tagExpandableHeader);
         List<WebElement> checkBoxTags = applicationsPageObject.tagsCheckboxes;
         List<WebElement> tagsType = applicationsPageObject.getTagTypes;
         List<String> selectedTagType = new ArrayList<String>();
         List<String> selectedFilterUnderTag = new ArrayList<>();
         for (int i = 0; i < 2; i++) {
-            checkBoxTags.get(i).click();
-            waitExecuter.sleep(2000);
+            waitExecuter.waitUntilElementClickable(checkBoxTags.get(i));
+            userActions.performActionWithPolling(checkBoxTags.get(i), UserAction.CLICK);
+            waitExecuter.waitUntilElementClickable(checkBoxTags.get(i));
             selectedTagType.add(tagsType.get(i).getText().trim().toLowerCase());
             LOGGER.info(
                     "Selected type- " + tagsType.get(i).getText().trim().toLowerCase());
-            applicationsPageObject.tagTypeSearchbox.get(i).click();
-            waitExecuter.sleep(2000);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.tagTypeSearchbox.get(i));
+            userActions.performActionWithPolling(applicationsPageObject.tagTypeSearchbox.get(i), UserAction.CLICK);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.tagExpandableHeader);
             selectedFilterUnderTag
                     .add(applicationsPageObject.select1stOptionInTagsSearchBox.get(i).getText().trim().toLowerCase());
             LOGGER.info("Name of selected tag- "
                     + applicationsPageObject.select1stOptionInTagsSearchBox.get(i).getText().trim().toLowerCase());
-            applicationsPageObject.select1stOptionInTagsSearchBox.get(i).click();
-            waitExecuter.sleep(2000);
+
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.select1stOptionInTagsSearchBox.get(i));
+            userActions.performActionWithPolling(applicationsPageObject.select1stOptionInTagsSearchBox.get(i), UserAction.CLICK);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.tagExpandableHeader);
         }
         // Click on the first app in table to get efficiency
         test.log(LogStatus.INFO, "Click on the first app in table to get efficiency");
         LOGGER.info("Click on the first app in table to get efficiency");
-        applicationsPageObject.getDurationFromTable.click();
-        waitExecuter.sleep(5000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.getDurationFromTable);
+        userActions.performActionWithPolling(applicationsPageObject.getDurationFromTable, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
+
         driver.getWindowHandle();
-        applicationsPageObject.tagsTab.click();
-        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.tagsTab);
+        userActions.performActionWithPolling(applicationsPageObject.tagsTab, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
         List<WebElement> getTagNamesFromTagTable = applicationsPageObject.tagsInTable;
         List<WebElement> getTagsDescriptionFromTagTable = applicationsPageObject.descriptionInTable;
         HashMap<String, String> map = new HashMap<>();
@@ -76,8 +88,10 @@ public class TC_JAL_17 extends BaseClass {
                     getTagsDescriptionFromTagTable.get(j).getText().trim().toLowerCase());
         }
         waitExecuter.sleep(1000);
-        driver.navigate().back();
-        waitExecuter.sleep(5000);
+
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
+        userActions.performActionWithPolling(applicationsPageObject.closeIcon, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         for (String tag : selectedTagType) {
             Assert.assertTrue(map.containsKey(tag),
                     "Table does not contain the tag selected " + map.keySet() + " ---" + selectedTagType);
@@ -89,8 +103,8 @@ public class TC_JAL_17 extends BaseClass {
             test.log(LogStatus.PASS, "Table contain the tag filter selected " + map.values());
         }
         executor.executeScript("arguments[0].scrollIntoView();", applicationsPageObject.resetButton);
-        waitExecuter.sleep(1000);
-        applicationsPageObject.resetButton.click();
-        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+        userActions.performActionWithPolling(applicationsPageObject.resetButton, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
     }
 }

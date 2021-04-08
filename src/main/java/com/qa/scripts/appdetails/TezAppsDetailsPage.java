@@ -1,6 +1,7 @@
 package com.qa.scripts.appdetails;
 
 import com.qa.pagefactory.SubTopPanelModulePageObject;
+import com.qa.pagefactory.appsDetailsPage.SparkAppsDetailsPageObject;
 import com.qa.pagefactory.appsDetailsPage.TezAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
@@ -81,7 +82,7 @@ public class TezAppsDetailsPage {
                 // Store it in efficiency array
                 efficiency.add(insights);
             } else {
-                //Store it in recommendation array
+                // Store it in recommendation array
                 recommendation.add(insights);
             }
         }
@@ -92,10 +93,11 @@ public class TezAppsDetailsPage {
                 collapsableList.get(c).click();
             }
         } catch (Exception ex) {
-            throw new AssertionError("Caught exception while clicking the collapsable" +
-                    " icon for insights.\n" + ex.getMessage());
+            throw new AssertionError(
+                    "Caught exception while clicking the collapsable" + " icon for insights.\n" + ex.getMessage());
         }
     }
+
 
 
     /**
@@ -547,9 +549,9 @@ public class TezAppsDetailsPage {
                     }
                     validateStageAndStageData(DagsRows, navigationRowList, tezApps, validateExecutorTab, validateStageTab);
                     break;
-                case 1:
+                /*case 1:
                     //The component is Gantt Chart ,click it and then verify the no. rows in the table
-                    Assert.assertEquals(tabName, "Gantt Chart", "Gantt Chart tab not present");
+                    Assert.assertEquals(tabName, "Dags", "Gantt Chart tab not present");
                     MouseActions.clickOnElement(driver, componentList.get(j));
                     List<WebElement> ganttChartTableRows = tezApps.ganttChartTable;
                     LOGGER.info("No. of rows in Gantt Chart tables are " + ganttChartTableRows.size());
@@ -561,7 +563,7 @@ public class TezAppsDetailsPage {
                             Assert.assertNotSame("", headerList.get(i).getText());
                         }
                     }
-                    break;
+                    break;*/
                 case 2:
                     Assert.assertEquals(tabName, DagsRows + " Jobs", "Jobs text not present");
                     String[] jobCountArr = componentList.get(j).getText().split("\\s+");
@@ -569,6 +571,31 @@ public class TezAppsDetailsPage {
                     Assert.assertEquals(jobCnt, DagsRows, "JobCnt and navigation rows donot match");
                     LOGGER.info("JobCount is " + jobCnt);
                     break;
+            }
+        }
+    }
+
+    /**
+     * Method to verify Dags tabs
+     */
+    public void verifyQueueTab(TezAppsDetailsPageObject tezApps, Boolean validateCompData) {
+        List<WebElement> componentList = tezApps.component_element;
+        LOGGER.info("ComponentList is " + componentList.size());
+        int DagsRows = 0;
+        String tabName = "";
+        for (int j = 0; j < componentList.size(); j++) {
+            List<WebElement> navigationRowList = tezApps.DagtableRows;
+            DagsRows = navigationRowList.size();
+            LOGGER.info("Navigation Rows are " + DagsRows);
+            if (validateCompData) {
+                List<WebElement> headerList = tezApps.navigationHeaders;
+                Assert.assertFalse(headerList.isEmpty(), "No headers for Navigation table for application");
+                for (int i = 0; i < headerList.size(); i++) {
+                    LOGGER.info("The header is " + headerList.get(i).getText());
+                    Assert.assertNotSame("", headerList.get(i).getText());
+
+
+                }
             }
         }
     }
@@ -601,13 +628,17 @@ public class TezAppsDetailsPage {
      *
      * @return
      */
-    public void validateTopRightTab(TezAppsDetailsPageObject tezApps, ExtentTest test) {
-        String Owner = tezApps.Owner.getText();
+    public String validateTopRightTab(TezAppsDetailsPageObject tezApps, ExtentTest test) {
+        tezApps.getTypeFromTable.click();
+        waitExecuter.waitUntilElementPresent(tezApps.Owner);
+        String Owner = tezApps.Owner.getText().trim();
         waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Owner  is displayed in the Header: " + Owner);
-        String Cluster = tezApps.Cluster.getText();
+        waitExecuter.waitUntilElementPresent(tezApps.Cluster);
+        String Cluster = tezApps.Cluster.getText().trim();
         test.log(LogStatus.PASS, "Cluster  is displayed in the Header: " + Cluster);
-        String Queue = tezApps.Queue.getText();
+        waitExecuter.waitUntilElementPresent(tezApps.Queue);
+        String Queue = tezApps.Queue.getText().trim();
         waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Queue  is displayed in the Header: " + Queue);
         LOGGER.info("Owner = " + Owner + " Cluster = " + Cluster + " starttime = " + Queue + " Queue");
@@ -616,6 +647,7 @@ public class TezAppsDetailsPage {
         Assert.assertNotSame("", Queue, "Value for Queue missing");
         waitExecuter.waitUntilPageFullyLoaded();
 
+        return Owner;
     }
 
 

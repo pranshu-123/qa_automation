@@ -32,18 +32,13 @@ public class TC_CTP_07 extends BaseClass {
         test = extent.startTest("TC_CTP_07.VerifySumAverageOption",
                 "Verify Cluster workload report data will be generated as sum of application count/ average as per requirement");
         test.assignCategory("Cluster - Workload");
-
-        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-        WorkloadPageObject workloadPageObject = new WorkloadPageObject(driver);
-        WaitExecuter waitExecuter = new WaitExecuter(driver);
         GraphUtils graphUtils = new GraphUtils();
-        waitExecuter.waitUntilElementPresent(topPanelPageObject.workloadTab);
-        waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.waitUntilElementClickable(topPanelPageObject.workloadTab);
-        waitExecuter.sleep(3000);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        WorkloadPageObject workloadPageObject = new WorkloadPageObject(driver);
+        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
         MouseActions.clickOnElement(driver, topPanelPageObject.workloadTab);
-
         Workload workload = new Workload(driver);
+        workload.selectByYarn();
 
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
 

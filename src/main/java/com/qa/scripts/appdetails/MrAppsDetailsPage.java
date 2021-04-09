@@ -887,7 +887,7 @@ public class MrAppsDetailsPage {
     /**
      * Method to validate AppSummary Resource tab.
      */
-    public void validateMapandReducTab(MrAppsDetailsPageObject mrApps, ExtentTest test) {
+    public void validateMapandReducTab(MrAppsDetailsPageObject mrApps,String verifyTabName, ExtentTest test) {
         String[] expectedGraphTitle = {"Task Attempt (MAP)", "Task Attempt (REDUCE)"};
         waitExecuter.waitUntilPageFullyLoaded();
         List<WebElement> graphTitleList = mrApps.resourcesGraphTitle;

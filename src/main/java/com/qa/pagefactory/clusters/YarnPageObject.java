@@ -16,7 +16,7 @@ public class YarnPageObject {
     @FindBy(xpath = "//li[contains(@class,'active')]/ul[contains(@class,'sub-menu')]//li/span[contains(text(),'Resources')]")
     public WebElement clusterResourcesTab;
 
-    @FindBy(xpath="//h1[contains(text(),'Yarn Resource Usage')]")
+    @FindBy(xpath="//h1[contains(text(),'Resource Usage')]")
     public WebElement getResourcesPageHeader;
 
     @FindBy(xpath="//label[contains(text(), 'Group By')]/following-sibling::span/span/span/span[contains(@class,'select2-selection__arrow')]")

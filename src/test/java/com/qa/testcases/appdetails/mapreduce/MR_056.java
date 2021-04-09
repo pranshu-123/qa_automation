@@ -56,17 +56,13 @@ public class MR_056 extends BaseClass {
 
         if (appCount > 0) {
             sorting:
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 1; i++) {
                 // Sort by parent app
-                test.log(LogStatus.INFO, "Sort by parent app");
-                logger.info("Sort by parent app");
+                test.log(LogStatus.INFO, "Sort by Read app");
+                logger.info("Sort by Read app");
                 mrApps.sortByReadApp.click();
                 waitExecuter.waitUntilPageFullyLoaded();
                 list.add(mrApps.checkReadApp.size());
-                waitExecuter.waitUntilPageFullyLoaded();
-                mrApps.sortByWriteApp.click();
-                waitExecuter.waitUntilPageFullyLoaded();
-                list.add(mrApps.checkWriteApp.size());
                 waitExecuter.waitUntilPageFullyLoaded();
 
                 for (int value : list) {
@@ -75,38 +71,46 @@ public class MR_056 extends BaseClass {
                         waitExecuter.sleep(2000);
                         int successAppCount = mrDetailsPage.clickOnlyLink("Success");
                         waitExecuter.sleep(2000);
+
                         if (successAppCount > 0) {
                             mrApps.getTypeFromTable.click();
                             waitExecuter.waitUntilPageFullyLoaded();
+                            waitExecuter.waitUntilElementPresent(mrApps.resourcesTab);
                             MouseActions.clickOnElement(driver, mrApps.resourcesTab);
                             waitExecuter.waitUntilPageFullyLoaded();
-                            String[] expectedGraphMetrics = {"Containers"};
-                            String[] ContainerGraph = {"ContainerGraph0"};
-                            for (int j = 0; j < 1; j++) {
-                                mrDetailsPage.verifyContainersKPIGraphs(mrApps, expectedGraphMetrics[i], ContainerGraph[i]);
-                                //Close apps details page
-                                MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);
-                            }
+                            mrDetailsPage.validateContainsTab(mrApps, test);
+                            waitExecuter.sleep(2000);
+                            test.log(LogStatus.PASS, "Verify the number of containers plotted against the time");
+                            //Close apps details page
+                            MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);
+                        } else {
+                            test.log(LogStatus.SKIP,
+                                    "The clusterId does not have application of Map Reduce as parent app");
+                            waitExecuter.sleep(1000);
+                            // Click on reset if there are no MR apps
+                            test.log(LogStatus.INFO, "Click on reset if there are no hive apps");
+                            logger.info("Click on reset if there are no Map Reduce apps");
+                            allApps.reset();
+                            throw new SkipException(
+                                    "The clusterId does not have application of Map Reduce as parent app.");
                         }
-
-
-                    } else {
-                        Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
-                                "The clusters does not have any application under it and also does not display 'No Data Available' for it"
-                        );
-                        test.log(LogStatus.SKIP, "The clusterId does not have any application under it.");
-                        waitExecuter.sleep(1000);
-                        // Click on reset if there are no hive apps
-                        test.log(LogStatus.INFO, "Click on reset if there are no Map Reduce apps");
-                        logger.info("Click on reset if there are no hive apps");
-                        allApps.reset();
-                        throw new SkipException("The clusterId does not have any application under it.");
+                        break sorting;
                     }
                 }
             }
+        } else{
+            Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
+                    "The clusters does not have any application under it and also does not display 'No Data Available' for it"
+            );
+            test.log(LogStatus.SKIP, "The clusterId does not have any application under it.");
+            waitExecuter.sleep(1000);
+            // Click on reset if there are no hive apps
+            test.log(LogStatus.INFO, "Click on reset if there are no Map Reduce apps");
+            logger.info("Click on reset if there are no hive apps");
+            allApps.reset();
+            throw new SkipException("The clusterId does not have any application under it.");
         }
     }
 }
-
 
 

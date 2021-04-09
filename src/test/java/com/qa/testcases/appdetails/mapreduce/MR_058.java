@@ -50,30 +50,65 @@ public class MR_058 extends BaseClass {
                 applicationsPageObject, clusterId);
 
         test.log(LogStatus.INFO, "Verify that the left pane has map reduce check box and the apps number");
-        int totalMapReduceAppCnt = mrDetailsPage.clickOnlyLink("Map Reduce");
-        if (totalMapReduceAppCnt > 0) {
-            applicationsPageObject.expandStatus.click();
-            int appCount = mrDetailsPage.clickOnlyLink("Success");
-            logger.info("Sort by Read/Write ap");
-            mrApps.sortByReadApp.click();
-            waitExecuter.waitUntilPageFullyLoaded();
-            //Clicking on the Map reduce app must go to apps detail page and verify Data Tabs must be available on UI
-            if (appCount > 0) {
-                String headerAppId = mrDetailsPage.verifyAppId(mrApps, applicationsPageObject);
-                test.log(LogStatus.PASS, "Map Reduce Application Id is displayed in the Header: " + headerAppId);
-                waitExecuter.waitUntilPageFullyLoaded();
-                MouseActions.clickOnElement(driver, mrApps.resourcesTab);
-                waitExecuter.waitUntilPageFullyLoaded();
-                mrDetailsPage.validateResourcesTab(mrApps,"Metrics",test);
+        mrDetailsPage.clickOnlyLink("Map Reduce");
+        int appCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
+                .replaceAll("[^\\dA-Za-z ]", "").trim());
+        List<Integer> list = new ArrayList<>();
 
-                //Close apps details page
-                MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);
+        if (appCount > 0) {
+            sorting:
+            for (int i = 0; i < 1; i++) {
+                // Sort by parent app
+                test.log(LogStatus.INFO, "Sort by Read app");
+                logger.info("Sort by Read app");
+                mrApps.sortByReadApp.click();
+                waitExecuter.waitUntilPageFullyLoaded();
+                list.add(mrApps.checkReadApp.size());
+                waitExecuter.waitUntilPageFullyLoaded();
 
-            } else {
-                test.log(LogStatus.SKIP, "No Map Reduce Application present");
-                logger.info("No Map Reduce Application present in the " + clusterId + " cluster for the time span " +
-                        "of 90 days");
+                for (int value : list) {
+                    if (value > 0) {
+                        applicationsPageObject.expandStatus.click();
+                        waitExecuter.sleep(2000);
+                        int successAppCount = mrDetailsPage.clickOnlyLink("Success");
+                        waitExecuter.sleep(2000);
+
+                        if (successAppCount > 0) {
+                            mrApps.getTypeFromTable.click();
+                            waitExecuter.waitUntilPageFullyLoaded();
+                            MouseActions.clickOnElement(driver, mrApps.resourcesTab);
+                            waitExecuter.waitUntilPageFullyLoaded();
+                            mrDetailsPage.validateResourcesTab(mrApps, "Metrics", test);
+                            test.log(LogStatus.PASS, "Verify the Metrics Graphs are present in OS Memory");
+                            //Close apps details page
+                            MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);
+                        } else {
+                            test.log(LogStatus.SKIP,
+                                    "The clusterId does not have application of Map Reduce as parent app");
+                            waitExecuter.sleep(1000);
+                            // Click on reset if there are no MR apps
+                            test.log(LogStatus.INFO, "Click on reset if there are no hive apps");
+                            logger.info("Click on reset if there are no Map Reduce apps");
+                            allApps.reset();
+                            throw new SkipException(
+                                    "The clusterId does not have application of Map Reduce as parent app.");
+                        }
+                        break sorting;
+                    }
+                }
             }
+        } else{
+            Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
+                    "The clusters does not have any application under it and also does not display 'No Data Available' for it"
+            );
+            test.log(LogStatus.SKIP, "The clusterId does not have any application under it.");
+            waitExecuter.sleep(1000);
+            // Click on reset if there are no hive apps
+            test.log(LogStatus.INFO, "Click on reset if there are no Map Reduce apps");
+            logger.info("Click on reset if there are no hive apps");
+            allApps.reset();
+            throw new SkipException("The clusterId does not have any application under it.");
         }
     }
 }
+

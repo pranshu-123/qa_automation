@@ -26,6 +26,9 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//span[(text()='Read')]//following-sibling::a[contains(@class,'sorting')]")
     public WebElement sortByReadApp;
 
+    @FindBy(xpath = "//span[(text()='Read')]//following-sibling::a[contains(@class,'sorting icon-sort icon-sort-sorted-down')]")
+    public WebElement sortApp;
+
     @FindBy(xpath = "//span[(text()='Write')]//following-sibling::a[contains(@class,'sorting')]")
     public WebElement sortByWriteApp;
 
@@ -53,8 +56,14 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id='taskattemptmap']//*[div and @class='footer']/div/*/span[2]")
     public List<WebElement> taskAttFooterVal;
 
-    @FindBy(xpath = "//*[@id=\"taskattemptmap\"]//*[name()='svg']/*[name()='text' and @class='highcharts-subtitle']/*")
+    @FindBy(xpath = "//*[@id=\"taskattempts\"]//*[name()='svg']/*[name()='text' and @class='highcharts-subtitle']/*")
     public WebElement resourcesPieChartInternalVal;
+
+    @FindBy(xpath = "//*[@id=\"taskattemptmap\"]//*[name()='svg']/*[name()='text' and @class='highcharts-subtitle']/*")
+    public WebElement resourcesChartInternalVal;
+
+    @FindBy(xpath = "//body[1]//div[1]/*[local-name()='svg'][1]/*[name()='g'][6]/*[name()='g'][1]/*[name()='rect'][1]")
+    public WebElement resourcesContainsInternalVal;
 
     @FindBy(xpath = "//*[@id='taskattemptreduce']//*[div and @class='footer']/div/*/span[1]")
     public List<WebElement> taskAttReduceFooterName;
@@ -331,7 +340,7 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@class='col-md-12 no-left-gutter no-right-gutter']//*[@role='presentation'][1]")
     public WebElement resourcesMetricsDropDown;
 
-    @FindBy(xpath = " //h4[normalize-space()='Containers']")
+    @FindBy(xpath = "//h4[normalize-space()='Containers']")
     public List<WebElement> containerMetricsHeader;
 
     @FindBy(xpath = "//div[@class='container-fluid']//div[contains(@class,'dashboard-module')]" +

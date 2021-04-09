@@ -60,6 +60,7 @@ public class InfluxDBClient {
                 .tag(InfluxMetricsConstants.STATUS, data.get(InfluxMetricsConstants.STATUS).toString())
                 .addField(InfluxMetricsConstants.DURATION, data.get(InfluxMetricsConstants.DURATION).toString())
                 .tag(InfluxMetricsConstants.MARKERS, data.get(InfluxMetricsConstants.MARKERS).toString())
+                .tag(InfluxMetricsConstants.PILLAR, data.get(InfluxMetricsConstants.PILLAR).toString())
                 .build());
     }
 

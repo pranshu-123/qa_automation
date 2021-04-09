@@ -352,21 +352,21 @@ public class HBasePage {
             }
         }
 
-        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseSvrHealthHeader);
-        Assert.assertTrue(hBasePageObject.hBaseSvrHealthHeader.getText().equals("Server Health and Context"),
-                "'Server Health and Context' header not found");
+//        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseSvrHealthHeader);
+//        Assert.assertTrue(hBasePageObject.hBaseSvrHealthHeader.getText().equals("Server Health and Context"),
+//                "'Server Health and Context' header not found");
     }
 
-    public void verifyRegionServerHealth(){
+    public String verifyRegionServerHealth(){
+        clickOnTableName();
+
         List<WebElement> hBaseRegionSvrHealth = hBasePageObject.hBaseRegionSvrHealth;
         Assert.assertFalse(hBaseRegionSvrHealth.isEmpty(), "No Health check column found.");
-
-        if(hBaseRegionSvrHealth.get(0).getText().equals("Good")){
-            hBaseRegionSvrHealth.get(0).click();
-        }
-        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseSvrHealthHeader);
-        Assert.assertTrue(hBasePageObject.hBaseSvrHealthHeader.getText().equals("Server Health and Context"),
-                "'Server Health and Context' header not found");
+        String health = hBaseRegionSvrHealth.get(0).getText();
+        return health;
+//        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseSvrHealthHeader);
+//        Assert.assertTrue(hBasePageObject.hBaseSvrHealthHeader.getText().equals("Server Health and Context"),
+//                "'Server Health and Context' header not found");
 
     }
 
@@ -387,8 +387,6 @@ public class HBasePage {
     }
 
     public void verifyRegionServerKPIs(){
-        verifyRegionServer();
-        verifyRegionServerHealth();
 
         List<WebElement> regionSvrKpis = hBasePageObject.regionSvrKpis;
         Assert.assertFalse(regionSvrKpis.isEmpty(), "HBase region server kpi list is empty");

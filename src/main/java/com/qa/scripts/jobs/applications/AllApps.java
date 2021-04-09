@@ -183,4 +183,24 @@ public class AllApps {
         userAction.performActionWithPolling(applicationsPageObject.resetButton, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
     }
+    /* Select cluster and Last 30 days */
+    public void inJobsSelectClusterAndLast30Days(String clusterId) {
+        // Navigate to Jobs tab from header
+        navigateToJobsTab();
+        // Select last 30 days from date picker
+        select30Days();
+        // Select cluster
+        LOGGER.info("Select clusterId : " + clusterId);
+        selectCluster(clusterId);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+    }
+
+    /* Select last 30 days from date range */
+    public void select30Days() {
+        LOGGER.info("Select last 30 days");
+        datePicker.clickOnDatePicker();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+        datePicker.selectLast30Days();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+    }
 }

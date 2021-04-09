@@ -42,7 +42,8 @@ public class IM_IN_02 extends BaseClass {
             appDetailsPage.navigateToJobsTab();
             appDetailsPage.navigateToInefficientApps();
             datePicker.clickOnDatePicker();
-            datePicker.selectLast7Days();
+            test.log(LogStatus.PASS, "Select last 30 days.");
+            datePicker.selectLast30Days();
             loggingUtils.info("Select only impala application and get its count", test);
             int appCount = appDetailsPage.selectOnlyApplication(AppDetailsApplicationType.IMPALA);
             loggingUtils.info("App count for impala- " + appCount, test);

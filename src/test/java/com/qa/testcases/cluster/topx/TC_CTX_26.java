@@ -54,8 +54,10 @@ public class TC_CTX_26 extends BaseClass {
         String statusXpath = reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.TopX);
         waitExecuter.waitUntilPageFullyLoaded();
         topX.clickOnUserFilter();
-        for (int filterDropDown=0; filterDropDown<topX.getFilterDropDowns().size(); filterDropDown++) {
+        int size = topX.getFilterDropDowns().size();
+        for (int filterDropDown=0; filterDropDown<size; filterDropDown++) {
             topX.clearFilter();
+            topX.setTopXNumber("30");
             waitExecuter.sleep(2000);
             String userFilter = topX.getFilterDropDowns().get(filterDropDown).getText();
             LOGGER.info("Click on user filter: " + userFilter, test);

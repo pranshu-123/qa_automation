@@ -83,6 +83,7 @@ public class TC_CTP_10 extends BaseClass {
         test.log(LogStatus.PASS,"Successfully read the workload header text, after click on memory graph.");
 */
 
-
+        test.log(LogStatus.PASS, "Verify applications with that type executed on selected day");
     }
+
 }

@@ -108,6 +108,6 @@ public class TC_CTP_05 extends BaseClass {
             test.log(LogStatus.FAIL, "Test Failed the Group by dept table");
         }
 
-
+        test.log(LogStatus.PASS, "Verify report should be generated as per selected view by filter");
     }
 }

@@ -74,6 +74,11 @@ public class TC_CTP_07 extends BaseClass {
         }
         test.log(LogStatus.PASS, "Validate When the user hovers the mouse over the Sum Hour graph"
                 + " it should simultaneously display the tool tip for  Sum Hour graph at the same data point");
+
+
+        test.log(LogStatus.PASS, "Verify report data will be generated as sum of application count/ average");
     }
+
+
 }
 

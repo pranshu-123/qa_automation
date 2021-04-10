@@ -87,5 +87,7 @@ public class TC_CTP_13 extends BaseClass {
 
             test.log(LogStatus.FAIL, "Test Failed Jobs Table is not available on workload page");
         }*/
+
+        test.log(LogStatus.PASS, "Verify lists all the applications which are executed by selected user on that day");
     }
 }

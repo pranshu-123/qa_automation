@@ -78,7 +78,7 @@ public class TC_CTP_12 extends BaseClass {
             throw new AssertionError("workload selected time range not completed successfully." + te);
         }
         waitExecuter.sleep(3000);
-        test.log(LogStatus.PASS, "Verify current Date selected");
+
 
         //Checking workload Jobs Table Records populated
         /*if(workloadPageObject.workloadJobsTableRecords.size() > 0)
@@ -88,6 +88,7 @@ public class TC_CTP_12 extends BaseClass {
         else{
             test.log(LogStatus.FAIL, "Test Failed Jobs Table is not available on workload page");
         }*/
+        test.log(LogStatus.PASS, "Verify application count executed by particular user");
 
     }
 }

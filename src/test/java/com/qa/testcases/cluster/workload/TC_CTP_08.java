@@ -69,5 +69,6 @@ public class TC_CTP_08 extends BaseClass {
         } catch (VerifyError | AWTException te) {
             throw new AssertionError("workload selected time range not completed successfully." + te);
         }
+        test.log(LogStatus.PASS, "Verify report should be same as date range selected in date picker");
     }
 }

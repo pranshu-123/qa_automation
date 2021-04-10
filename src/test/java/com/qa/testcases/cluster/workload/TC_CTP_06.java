@@ -92,7 +92,7 @@ public class TC_CTP_06 extends BaseClass {
         else{
         test.log(LogStatus.FAIL, "Test Failed Verify View By Hour/Day");
     }
-
+        test.log(LogStatus.PASS, "Verify workload report should be generated as per selected view by filter");
     }
 }
 

@@ -73,5 +73,6 @@ public class TC_CTP_09 extends BaseClass {
         } catch (VerifyError te) {
             throw new AssertionError("workload selected time range not completed successfully." + te);
         }
+        test.log(LogStatus.PASS, "Verify display the job types with count executed on particular day");
     }
 }

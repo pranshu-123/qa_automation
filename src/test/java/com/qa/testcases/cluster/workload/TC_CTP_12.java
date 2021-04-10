@@ -15,6 +15,8 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.awt.*;
+
 /**
  * @author Sarbashree Ray
  */
@@ -52,8 +54,7 @@ public class TC_CTP_12 extends BaseClass {
         waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.stream()
-                .filter(WebElement::isDisplayed).findFirst().get().getText());
+                + workloadPageObject.timerangeMessageElement.getText().trim());
 
         workload.clickOnMonth();
         waitExecuter.sleep(1000);
@@ -66,26 +67,27 @@ public class TC_CTP_12 extends BaseClass {
         JavaScriptExecuter.scrollViewWithYAxis(driver, scrollY);
         scrollY = scrollY + datePicker.getDatePickerYPosition();
         waitExecuter.sleep(3000);
-        workload.clickOnDate();
+        try {
+            test.log(LogStatus.PASS, "Verify selected date range:"
+                    + workloadPageObject.timeRange.getText());
+            waitExecuter.waitUntilPageFullyLoaded();
+            workload.clickOnDateRange(workloadPageObject);
+            waitExecuter.sleep(3000);
+            test.log(LogStatus.PASS, "Verify selected time range");
+        } catch (VerifyError | AWTException te) {
+            throw new AssertionError("workload selected time range not completed successfully." + te);
+        }
         waitExecuter.sleep(3000);
         test.log(LogStatus.PASS, "Verify current Date selected");
 
         //Checking workload Jobs Table Records populated
-        if(workloadPageObject.workloadJobsTableRecords.size() > 0)
+        /*if(workloadPageObject.workloadJobsTableRecords.size() > 0)
         {
             test.log(LogStatus.PASS, "Verified Jobs Table is available on workload page");
         }
         else{
-            Assert.assertEquals(false,"Test Failed Jobs Table is not available on workload page");
             test.log(LogStatus.FAIL, "Test Failed Jobs Table is not available on workload page");
-        }
+        }*/
 
-        //Validate Header Column names in workload Jobs Table
-        Assert.assertTrue(workload.validateHeaderColumnNameInworkloadJobsTable(),
-                "Validation failed for header column names from workload Jobs Table");
-
-        test.log(LogStatus.PASS,
-                "Verified Column names in workload Jobs Table successfully on Yarn chargeback page");
-        waitExecuter.sleep(1000);
     }
 }

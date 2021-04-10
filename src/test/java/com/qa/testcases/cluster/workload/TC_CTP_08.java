@@ -9,10 +9,13 @@ import com.qa.scripts.HomePage;
 import com.qa.scripts.clusters.Workload;
 import com.qa.utils.*;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
+
+import java.awt.*;
 
 /**
  * @author Sarbashree Ray
@@ -46,8 +49,7 @@ public class TC_CTP_08 extends BaseClass {
         waitExecuter.sleep(3000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.stream()
-                .filter(WebElement::isDisplayed).findFirst().get().getText());
+                + workloadPageObject.timerangeMessageElement.getText().trim());
 
         workload.clickOnMonth();
         waitExecuter.sleep(3000);
@@ -56,11 +58,16 @@ public class TC_CTP_08 extends BaseClass {
         test.log(LogStatus.PASS, "Verify current month selected :"
                 + workloadPageObject.currentmonthHeader.getText());
         waitExecuter.sleep(3000);
-        int scrollY = 370;
-        JavaScriptExecuter.scrollViewWithYAxis(driver, scrollY);
-        scrollY = scrollY + datePicker.getDatePickerYPosition();
-        waitExecuter.sleep(3000);
-
-
+        try {
+            waitExecuter.waitUntilElementPresent(workloadPageObject.timeRange);
+            test.log(LogStatus.PASS, "Verify Aggregated datewise Job Count in selected time range:"
+                    + workloadPageObject.timeRange.getText().trim());
+            waitExecuter.waitUntilPageFullyLoaded();
+            workload.clickOnDateRange(workloadPageObject);
+            waitExecuter.sleep(3000);
+            test.log(LogStatus.PASS, "Verify selected time range");
+        } catch (VerifyError | AWTException te) {
+            throw new AssertionError("workload selected time range not completed successfully." + te);
+        }
     }
 }

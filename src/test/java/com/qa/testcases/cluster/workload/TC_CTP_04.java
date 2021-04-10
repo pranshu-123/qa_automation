@@ -48,8 +48,7 @@ public class TC_CTP_04 extends BaseClass {
         waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.stream()
-                .filter(WebElement::isDisplayed).findFirst().get().getText());
+                + workloadPageObject.timerangeMessageElement.getText().trim());
 
         workload.clickOnMonth();
         waitExecuter.sleep(1000);
@@ -60,8 +59,7 @@ public class TC_CTP_04 extends BaseClass {
         datePicker.selectLast14Days();
         waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.stream()
-                .filter(WebElement::isDisplayed).findFirst().get().getText());
+                + workloadPageObject.timerangeMessageElement.getText().trim());
         waitExecuter.waitUntilPageFullyLoaded();
         workload.clickOnDay();
         waitExecuter.sleep(1000);
@@ -72,8 +70,7 @@ public class TC_CTP_04 extends BaseClass {
         datePicker.selectLast30Days();
         waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.stream()
-                .filter(WebElement::isDisplayed).findFirst().get().getText());
+                + workloadPageObject.timerangeMessageElement.getText().trim());
         waitExecuter.waitUntilPageFullyLoaded();
         workload.clickOnHour();
         test.log(LogStatus.PASS, "Verify View By Hour");
@@ -84,8 +81,7 @@ public class TC_CTP_04 extends BaseClass {
         waitExecuter.sleep(1000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.stream()
-                .filter(WebElement::isDisplayed).findFirst().get().getText());
+                + workloadPageObject.timerangeMessageElement.getText().trim());
         waitExecuter.sleep(1000);
 
         workload.clickOnHourDay();

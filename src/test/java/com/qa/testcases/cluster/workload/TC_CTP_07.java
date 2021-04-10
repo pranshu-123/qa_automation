@@ -52,9 +52,9 @@ public class TC_CTP_07 extends BaseClass {
         datePicker.selectLast30Days();
         waitExecuter.sleep(1000);
 
-        test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.stream()
-                .filter(WebElement::isDisplayed).findFirst().get().getText());
+        waitExecuter.waitUntilElementPresent(workloadPageObject.timeRange);
+        test.log(LogStatus.PASS, "Verify Aggregated datewise Job Count in selected time range:"
+                + workloadPageObject.timeRange.getText().trim());
         waitExecuter.sleep(1000);
 
         workload.clickOnHour();
@@ -67,8 +67,11 @@ public class TC_CTP_07 extends BaseClass {
         List<String> SumTooltipValues = graphUtils.getMemoryTooltipValues();
         waitExecuter.sleep(1000);
         logger.info("Sum tooltip values : " +SumTooltipValues);
-
-
+        for (int i = 0; i < SumTooltipValues.size(); i++) {
+            Assert.assertNotNull(SumTooltipValues.get(i), "Tooltip value displayed null value for Sum Hour graph");
+            Assert.assertNotEquals(SumTooltipValues.get(i), "",
+                    "Tooltip value displayed blank value for Sum Hour Graph");
+        }
         test.log(LogStatus.PASS, "Validate When the user hovers the mouse over the Sum Hour graph"
                 + " it should simultaneously display the tool tip for  Sum Hour graph at the same data point");
     }

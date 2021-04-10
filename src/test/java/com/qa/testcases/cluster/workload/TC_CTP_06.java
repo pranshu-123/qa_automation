@@ -46,8 +46,7 @@ public class TC_CTP_06 extends BaseClass {
         waitExecuter.sleep(3000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.stream()
-                .filter(WebElement::isDisplayed).findFirst().get().getText());
+                + workloadPageObject.timerangeMessageElement.getText().trim());
 
         workload.clickOnMonth();
         waitExecuter.sleep(3000);
@@ -61,8 +60,7 @@ public class TC_CTP_06 extends BaseClass {
         waitExecuter.sleep(3000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.stream()
-                .filter(WebElement::isDisplayed).findFirst().get().getText());
+                + workloadPageObject.timerangeMessageElement.getText().trim());
 
         workload.clickOnDay();
         waitExecuter.sleep(3000);
@@ -73,8 +71,7 @@ public class TC_CTP_06 extends BaseClass {
         datePicker.selectLast30Days();
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.stream()
-                .filter(WebElement::isDisplayed).findFirst().get().getText());
+                + workloadPageObject.timerangeMessageElement.getText().trim());
 
         workload.clickOnHour();
         test.log(LogStatus.PASS, "Verify View By Hour ");
@@ -85,8 +82,7 @@ public class TC_CTP_06 extends BaseClass {
         waitExecuter.sleep(3000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.stream()
-                .filter(WebElement::isDisplayed).findFirst().get().getText());
+                + workloadPageObject.timerangeMessageElement.getText().trim());
 
         if(workload.clickOnHourDay()){
         waitExecuter.sleep(3000);

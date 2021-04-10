@@ -47,10 +47,16 @@ public class WorkloadPageObject {
     public WebElement workloadDropdownYarn;
 
     @FindBy(xpath = "//*[@id=\"cluster-workload\"]/div[1]/div[2]/h3")
-    public List<WebElement> timerangeMessageElement;
+    public WebElement timerangeMessageElement;
 
     @FindBy(xpath = "//*[@id=\"cluster-workload\"]/div[1]/div[2]/div[4]/div/div/div[1]/div/div/div[2]/div")
     public WebElement currentmonthHeader;
+
+    @FindBy(xpath = "//*[@class='close pointer']")
+    public WebElement loadWinClose;
+
+    @FindBy(xpath = "//*[@id='app']/div/div/div[1]/div[2]")
+    public WebElement closeAppsPageTab;
 
     @FindBy(xpath = "//*[@id=\"radio-btn-opt\"]/span[1]")
     public WebElement viewByMonth;
@@ -82,6 +88,8 @@ public class WorkloadPageObject {
     @FindBy(xpath = "(//*[name()='svg'])[4]//*[local-name()='g']//*[local-name()='text']//*[local-name()='tspan']")
     public List<WebElement> tspanCal;
 
+    @FindBy(xpath = "(//*[name()='svg'])[4]//*[local-name()='g']")
+    public List<WebElement> dateRange;
 
     @FindBy(xpath = "//*[@id=\"heat-cont\"]/svg/svg/svg/svg/g[28]/rect")
     public WebElement ViewByCal;
@@ -106,6 +114,11 @@ public class WorkloadPageObject {
 
     @FindBy(xpath = "//*[@id=\"kindTable\"]/div[1]")
     public WebElement jobtableHeader;
+
+    @FindBy(xpath = "/html/body//div[2]/h3/b[3]")
+    public WebElement timeRange;
+
+
 
 
     public WorkloadPageObject(WebDriver driver) {

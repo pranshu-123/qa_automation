@@ -26,11 +26,20 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//span[(text()='Read')]//following-sibling::a[contains(@class,'sorting')]")
     public WebElement sortByReadApp;
 
+    @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-up')]")
+    public WebElement sortUp;
+
+    @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-down')]")
+    public WebElement sortDown;
+
     @FindBy(xpath = "//span[(text()='Read')]//following-sibling::a[contains(@class,'sorting icon-sort icon-sort-sorted-down')]")
     public WebElement sortApp;
 
     @FindBy(xpath = "//span[(text()='Write')]//following-sibling::a[contains(@class,'sorting')]")
     public WebElement sortByWriteApp;
+
+    @FindBy(xpath = "//span[(text()='Duration')]//following-sibling::a[contains(@class,'sorting')]")
+    public WebElement sortByDurationApp;
 
     @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[11]//span[@class='icon-tuning']")
     public List<WebElement> checkInsightsApp;
@@ -64,6 +73,16 @@ public class MrAppsDetailsPageObject {
 
     @FindBy(xpath = "//body[1]//div[1]/*[local-name()='svg'][1]/*[name()='g'][6]/*[name()='g'][1]/*[name()='rect'][1]")
     public WebElement resourcesContainsInternalVal;
+
+    @FindBy(xpath = "//div[@class='container-fluid']//div[contains(@class,'dashboard-module')]//div[@class='footer']//span")
+    public List<WebElement> kafkaMetricsFooter;
+
+    @FindBy(xpath = "//div[@class='component-dashboard']//div[contains(@class,'col-md-6')]" +
+            "//div[@class='content']//*[name()='g' and @class='highcharts-series-group']")
+    public List<WebElement> kafkaMetricsGraph;
+
+    @FindBy(xpath = "//div[@class='component-dashboard']//div[contains(@class,'col-md-6')]")
+    public List<WebElement> kafkaMetrics;
 
     @FindBy(xpath = "//*[@id='taskattemptreduce']//*[div and @class='footer']/div/*/span[1]")
     public List<WebElement> taskAttReduceFooterName;
@@ -340,7 +359,7 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@class='col-md-12 no-left-gutter no-right-gutter']//*[@role='presentation'][1]")
     public WebElement resourcesMetricsDropDown;
 
-    @FindBy(xpath = "//h4[normalize-space()='Containers']")
+    @FindBy(xpath = "//div[@class='component-dashboard']//div[contains(@class,'col-md-6')]//div[@class='header']/h4")
     public List<WebElement> containerMetricsHeader;
 
     @FindBy(xpath = "//div[@class='container-fluid']//div[contains(@class,'dashboard-module')]" +

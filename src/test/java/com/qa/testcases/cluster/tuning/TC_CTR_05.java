@@ -79,7 +79,10 @@ public class TC_CTR_05 extends BaseClass {
         HomePage homePage = new HomePage(driver);
         TuningPageObject tuningPageObject = new TuningPageObject(driver);
         for (String clusterUI : allClustersUI) {
-            tuning.clickOnRunButton();
+           /* waitExecuter.waitUntilElementPresent(tuningPageObject.runButton);
+            tuning.clickOnRunButton();*/
+            MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
+            waitExecuter.waitUntilPageFullyLoaded();
             LOGGER.info("Clicked on Run button");
             test.log(LogStatus.INFO,"Clicked on Run button");
             homePage.selectMultiClusterId(clusterUI);
@@ -101,6 +104,7 @@ public class TC_CTR_05 extends BaseClass {
                 test.log(LogStatus.PASS, "Verified Tuning report is completed with status " + statusElement.getText());
 //                waitExecuter.waitUntilTextToBeInWebElement(statusElement,
 //                        "SUCCESS");
+                waitExecuter.waitUntilPageFullyLoaded();
             }catch (TimeoutException te) {
                 throw new AssertionError("Tuning Report not completed successfully for cluster :"+ clusterUI);
             }

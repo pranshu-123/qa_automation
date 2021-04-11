@@ -3,6 +3,7 @@ package com.qa.scripts.appdetails;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.MrAppsDetailsPageObject;
 import com.qa.pagefactory.clusters.ELKPageObject;
+import com.qa.pagefactory.clusters.KafkaPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.jobs.applications.AllApps;
@@ -676,11 +677,11 @@ public class MrAppsDetailsPage {
     public void validateTaskAttemptMapTab(MrAppsDetailsPageObject mrApps) {
         List<WebElement> footerNameList = mrApps.taskAttFooterName;
         List<WebElement> footerValList = mrApps.taskAttFooterVal;
-        String pValStr = mrApps.resourcesPieChartInternalVal.getText();
+        //String pValStr = mrApps.resourcesPieChartInternalVal.getText();
         String regex = "((?<=[a-zA-Z])(?=[0-9]))|((?<=[0-9])(?=[a-zA-Z]))";
-        int pieChartInternalVal = Integer.parseInt(Arrays.asList(pValStr.split(regex)).get(0));
-        logger.info("The value displayed inside the Pie Chart is " +
-                pieChartInternalVal);
+        /*//int pieChartInternalVal = Integer.parseInt(Arrays.asList(pValStr.split(regex)).get(0));
+        //logger.info("The value displayed inside the Pie Chart is " +
+                pieChartInternalVal);*/
         int totalTaskCnt = 0;
         for (int f = 0; f < footerNameList.size(); f++) {
             String footerName = footerNameList.get(f).getText();
@@ -690,8 +691,49 @@ public class MrAppsDetailsPage {
             totalTaskCnt += footerVal;
             logger.info("FooterName = " + footerName + " Value = " + footerVal);
         }
-        logger.info("Total Task Attempts = " + totalTaskCnt + " pie chart val = " +
-                pieChartInternalVal);
+        logger.info("Total Task Attempts = " + totalTaskCnt + "");
+    }
+
+    /**
+     * Method to validate the tasks attempt Map tab in Resources and stages tab.
+     */
+    public void validateContainsGraph(MrAppsDetailsPageObject mrApps,ExtentTest test) {
+        List<WebElement> footerNameList = mrApps.taskAttFooterName;
+        List<WebElement> footerValList = mrApps.taskAttFooterVal;
+        String pValStr = mrApps.resourcesContainsInternalVal.getText();
+        test.log(LogStatus.INFO, "Graph title is " + pValStr);
+      /*  String regex = "((?<=[a-zA-Z])(?=[0-9]))|((?<=[0-9])(?=[a-zA-Z]))";
+        int pieChartInternalVal = Integer.parseInt(Arrays.asList(pValStr.split(regex)).get(0));
+        logger.info("The value displayed inside the Pie Chart is " +
+                pieChartInternalVal);*/
+
+    }
+
+    /***
+     * Method to verify the Kafka Metrics KPI Graphs of a connected kafka cluster
+     */
+    public void verifyKafkaKPIGraphs(MrAppsDetailsPageObject mrApps, String expectedMetricsName,String count) {
+        List<WebElement> metricsKpiList = mrApps.kafkaMetrics;
+        List<WebElement> metricsKpiHeaderList = mrApps.containerMetricsHeader;
+        List<WebElement> metricsKpiGraphList = mrApps.kafkaMetricsGraph;
+        Assert.assertFalse(metricsKpiList.isEmpty(), "Metrics for kafka cluster is empty");
+        String xAxisPath = "//*[@id='" + count + "']" + xAxis;
+        String yAxisPath = "//*[@id='" + count + "']" + yAxis;
+        for (int i = 0; i < metricsKpiList.size(); i++) {
+            String metricsName = metricsKpiHeaderList.get(i).getText();
+            logger.info("Metrics Name: " + metricsName + " Expected Name: " + expectedMetricsName);
+            if (metricsName.equals(expectedMetricsName)) {
+                Assert.assertFalse(metricsName.isEmpty(), " Metrics Name not displayed");
+                logger.info("Metrics Name: [" + metricsName + "] displayed in the header");
+                waitExecuter.waitUntilPageFullyLoaded();
+                Assert.assertTrue(metricsKpiGraphList.get(i).isDisplayed(), "The graph for metrics " + metricsName + " is not displayed");
+                waitExecuter.waitUntilPageFullyLoaded();
+                logger.info("The graph for Metrics : [" + metricsName + "] is displayed");
+                logger.info("The footer for Metrics : [" + metricsName + "] is displayed");
+                verifyAxis(xAxisPath, "X-Axis");
+                verifyAxis(yAxisPath, "Y-Axis");
+            }
+        }
     }
 
     /**
@@ -725,9 +767,9 @@ public class MrAppsDetailsPage {
     /**
      * Method to validate AppSummary Resource tab.
      */
-    public void validateResourcesTab(MrAppsDetailsPageObject mrApps, String verifyTabName,
+    public void validateResourcesTab(MrAppsDetailsPageObject mrApps, String metricsName,
                                      ExtentTest test) {
-        String[] expectedGraphTitle = {"Task Attempt (MAP)", "Task Attempt (REDUCE)", "Attempts", "Containers", "Vcores", "Memory", "Metrics"};
+        String[] expectedGraphTitle = {"Vcores", "Memory", "Metrics"};
         List<WebElement> graphTitleList = mrApps.resourcesGraphTitle;
         verifyAssertFalse(graphTitleList.isEmpty(), mrApps, "No title displayed");
         List<WebElement> allGraphsList = mrApps.resourcesAllGraphs;
@@ -738,33 +780,27 @@ public class MrAppsDetailsPage {
             logger.info("Graph title is " + graphTitle);
             /*verifyAssertTrue(Arrays.asList(expectedGraphTitle).contains(graphTitle), mrApps, " The expected" +
                     " Graph title doesnot match with the titles in the UI");*/
-            //verifyAssertTrue(allGraphsList.get(t).isDisplayed(), mrApps, " All Graphs are not displayed");
+          /*  verifyAssertTrue(allGraphsList.get(t).isDisplayed(), mrApps, " All Graphs are not displayed");*/
             switch (graphTitle) {
-                case "Task Attempts":
-                    logger.info("Validating the Graph " + graphTitle);
-                    validateTaskAttemptMapTab(mrApps);
-                    validateTaskAttemptReduceTab(mrApps);
-                    break;
-                case "Containers":
                 case "Metrics":
                     logger.info("Validating the Graph " + graphTitle);
                     WebElement metricDropDown = mrApps.resourcesMetricsDropDown;
                     MouseActions.clickOnElement(driver, metricDropDown);
                     List<WebElement> dropDownList = mrApps.resourcesMetricsDropDownData;
                     waitExecuter.sleep(2000);
-                    //verifyAssertFalse(dropDownList.isEmpty(), mrApps, " No contents listed in the dropdown");
+                   /* verifyAssertFalse(dropDownList.isEmpty(), mrApps, " No contents listed in the dropdown");*/
                     String[] expectetContents = {"availableMemory", "vmRss", "systemCpuLoad",
                             "processCpuLoad", "gcLoad", "maxHeap", "usedHeap"};
                     for (int d = 0; d < dropDownList.size(); d++) {
                         String metric = dropDownList.get(d).getText();
                         logger.info("The metric is " + metric);
-                        verifyAssertTrue(Arrays.asList(expectetContents).contains(metric), mrApps, " The expected" +
-                                " metric is not listed in the drop down box");
+                      /*  verifyAssertTrue(Arrays.asList(expectetContents).contains(metric), mrApps, " The expected" +
+                                " metric is not listed in the drop down box");*/
                         //click on the dropdown list element and validate the graph
                         MouseActions.clickOnElement(driver, dropDownList.get(d));
                         List<WebElement> resourcesMetricsPlotGraphList = mrApps.resourcesMetricsPlotGraph;
                         List<WebElement> metricLegendList = mrApps.resourcesMetricsPlotGraphLegend;
-                        /*Assert.assertEquals(resourcesMetricsPlotGraphList.size(), metricLegendList.size(),
+                       /* Assert.assertEquals(resourcesMetricsPlotGraphList.size(), metricLegendList.size(),
                                 "The number of executors in the legend do not match to the ones plotted in the graph");*/
                         MouseActions.clickOnElement(driver, metricDropDown);
                     }
@@ -780,7 +816,7 @@ public class MrAppsDetailsPage {
     }
 
     /***
-     * Method to verify the HBase Metrics KPI Graphs of a connected MR cluster
+     * Method to verify the MR Metrics KPI Graphs of a connected MR cluster
      */
     public void verifyContainersKPIGraphs(MrAppsDetailsPageObject mrApps, String expectedMetricsName, String graphId) {
         List<WebElement> ContainersKpiHeaderList = mrApps.containerMetricsHeader;
@@ -871,7 +907,7 @@ public class MrAppsDetailsPage {
     /**
      * Method to validate AppSummary Resource tab.
      */
-    public void validateMapandReducTab(MrAppsDetailsPageObject mrApps, ExtentTest test) {
+    public void validateMapandReducTab(MrAppsDetailsPageObject mrApps,String verifyTabName, ExtentTest test) {
         String[] expectedGraphTitle = {"Task Attempt (MAP)", "Task Attempt (REDUCE)"};
         waitExecuter.waitUntilPageFullyLoaded();
         List<WebElement> graphTitleList = mrApps.resourcesGraphTitle;
@@ -894,6 +930,30 @@ public class MrAppsDetailsPage {
                     + graphTitle);
         }
     }
+
+    /**
+     * Method to validate AppSummary Resource tab.
+     */
+    public void validateContainsTab(MrAppsDetailsPageObject mrApps, ExtentTest test) {
+        String[] expectedGraphTitle = {"Containers"};
+        waitExecuter.waitUntilPageFullyLoaded();
+        List<WebElement> graphTitleList = mrApps.resourcesGraphTitle;
+        List<WebElement> allGraphsList = mrApps.resourcesAllGraphs;
+        for (int t = 0; t < graphTitleList.size(); t++) {
+            String graphTitle = graphTitleList.get(t).getText();
+            logger.info("Graph title is " + graphTitle);
+
+                switch (graphTitle) {
+                    case "Containers":
+                        logger.info("Validating the Graph " + graphTitle);
+                        validateContainsGraph(mrApps,test);
+                        break;
+                }
+                verifyAssertTrue(allGraphsList.get(0).isDisplayed(), mrApps, " No graph is displayed for "
+                        + graphTitle);
+            }
+        }
+
 
     /**
      * Method to verify the summary tabs in the right pane of the App Details page

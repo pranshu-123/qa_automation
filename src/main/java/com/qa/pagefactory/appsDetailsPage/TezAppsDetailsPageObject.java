@@ -12,6 +12,15 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[4]/div")
     public WebElement getAppId;
 
+    @FindBy(xpath = "//span[(text()='Read')]//following-sibling::a[contains(@class,'sorting')]")
+    public WebElement sortByReadApp;
+
+    @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-up')]")
+    public WebElement sortUp;
+
+    @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-down')]")
+    public WebElement sortDown;
+
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[5]")
     public WebElement getClusterId;
 
@@ -70,9 +79,6 @@ public class TezAppsDetailsPageObject {
 
     @FindBy(xpath = "//span[(text()='Insights')]//following-sibling::a[contains(@class,'sorting')]")
     public WebElement sortByParentApp;
-
-    @FindBy(xpath = "//span[(text()='Read')]//following-sibling::a[contains(@class,'sorting')]")
-    public WebElement sortByReadApp;
 
     @FindBy(xpath = "//span[(text()='Write')]//following-sibling::a[contains(@class,'sorting')]")
     public WebElement sortByWriteApp;

@@ -45,11 +45,11 @@ public class TC_CTX_30 extends BaseClass {
 		ReportsArchiveSchedulePage reportsPage = new ReportsArchiveSchedulePage(driver);
 		ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);
 		logger.info("Click on + button", test);
-		String statusXpath = reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.TopX);
-
+		topX.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.TopX);
+		waitExecuter.waitUntilPageFullyLoaded();
 
 		//Set all properties in schedule report
-		actions.performActionWithPolling(topXPageObject.scheduleButton, UserAction.CLICK);
+		//actions.performActionWithPolling(topXPageObject.scheduleButton, UserAction.CLICK);
 		waitExecuter.waitUntilElementPresent(topXPageObject.usersDropdown);
 		topX.setTopXNumber("30");
 		topX.selectUserInScheduleReport();

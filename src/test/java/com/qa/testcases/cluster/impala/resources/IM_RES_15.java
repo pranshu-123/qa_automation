@@ -31,33 +31,31 @@ public class IM_RES_15 extends BaseClass {
         test.log(LogStatus.INFO, "Login to the application");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         Impala impala = new Impala(driver);
-        waitExecuter.sleep(5000);
-        test.log(LogStatus.INFO, "Go to impala page");
-        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-        JavaScriptExecuter.clickOnElement(driver, topPanelPageObject.impalaTab);
-        waitExecuter.sleep(3000);
+        ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);
+        //Select impala tab
+        test.log(LogStatus.INFO, "Go to resource page");
+        LOGGER.info("Select impala from dropdown");
+        impala.selectImpalaResource();
 
         // Select the cluster
         LOGGER.info("Selecting the cluster");
-
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
-        waitExecuter.sleep(1000);
-        ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         impalaPageObject.groupByDropdownButton.click();
-        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         impalaPageObject.groupByQueueList.click();
-        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         test.log(LogStatus.INFO, "Select Queue in Group by option.");
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
-        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         datePicker.selectLast30Days();
-        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         test.log(LogStatus.INFO, "Select this month in date picker");
 
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         test.log(LogStatus.INFO, "Navigate different section in memory graph");
         GraphUtils graphUtils = new GraphUtils();
         graphUtils.navigateDifferentPointOnGraph(driver, impalaPageObject.queryHighChartContainer);

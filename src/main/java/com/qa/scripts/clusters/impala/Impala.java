@@ -5,7 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
+import com.qa.enums.UserAction;
 import com.qa.utils.JavaScriptExecuter;
+import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -18,6 +20,7 @@ public class Impala {
 	private WaitExecuter waitExecuter;
 	private WebDriver driver;
 	private ImpalaPageObject impalaPageObject;
+	private UserActions userActions;
 	private static final Logger LOGGER = Logger.getLogger(Impala.class.getName());
 
 	/**
@@ -29,6 +32,7 @@ public class Impala {
 		waitExecuter = new WaitExecuter(driver);
 		this.driver = driver;
 		impalaPageObject = new ImpalaPageObject(driver);
+		userActions = new UserActions(driver);
 	}
 
 	public Boolean isMemoryGraphPresent() {
@@ -194,5 +198,26 @@ public class Impala {
 			labels.add(label.getText());
 		}
 		return labels;
+	}
+
+	/**
+	 * This method used to select impala in resource drowdown displayed at
+	 * resource page. First it click on resource tab which navigates to
+	 * resource page then it select impala.
+	 */
+	public void selectImpalaResource() {
+		WaitExecuter waitExecuter = new WaitExecuter(driver);
+		// Click on Chargeback tab
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourcesTab);
+		userActions.performActionWithPolling(impalaPageObject.resourcesTab, UserAction.CLICK);
+		// Click on chargeback dropdown
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+		userActions.performActionWithPolling(impalaPageObject.resourceUsagePointer,
+				UserAction.CLICK);
+		// Selecting the impala option
+		waitExecuter.waitUntilElementClickable(impalaPageObject.selectImpalaOption);
+		userActions.performActionWithPolling(impalaPageObject.selectImpalaOption,
+				UserAction.CLICK);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 	}
 }

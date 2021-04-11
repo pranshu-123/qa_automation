@@ -13,44 +13,48 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.logging.Logger;
+
 /**
  * @author Birender Kumar
  */
 @Marker.ImpalaResources
 @Marker.All
 public class IM_RES_24  extends BaseClass {
+    private static final Logger LOGGER = Logger.getLogger(IM_RES_24.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void verifyGroupByFilterForUserHoverMemoryGraphCompareImpalaTblToolTip(String clusterId) {
         test = extent.startTest("IM_RES_22.verifyGroupByFilterForUserHoverMemoryGraphCompareImpalaTblToolTip (" + clusterId + ")", "Verify if more than 5 hosts exist, the memory chart displays the top-5 hosts .");
         test.assignCategory(" Cluster/Impala Resources");
-        WaitExecuter executer = new WaitExecuter(driver);
-
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        Impala impala = new Impala(driver);
         ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);
-        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
 
-        // Click on Impala tab
-        executer.waitUntilElementClickable(topPanelPageObject.impalaTab);
-        JavaScriptExecuter.clickOnElement(driver, topPanelPageObject.impalaTab);
-        executer.waitUntilElementPresent(impalaPageObject.getImpalaPageHeader);
+        //Select impala tab
+        test.log(LogStatus.INFO, "Go to resource page");
+        LOGGER.info("Select impala from dropdown");
+        impala.selectImpalaResource();
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         //Select cluster id
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
-        executer.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         //Select date
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
-        executer.sleep(1000);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         datePicker.selectLast30Days();
-        executer.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         test.log(LogStatus.INFO, "Select Date from DatePicker.");
 
-        Impala impala = new Impala(driver);
-        executer.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
-        executer.sleep(3000);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         impalaPageObject.groupByDropdownButton.click();
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         impalaPageObject.groupByUserList.click();
-        executer.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         test.log(LogStatus.INFO, "Select User in Group by option.");
 
         //1. Click on Queries graph at that point where Impala Queries Table should get populated.

@@ -28,42 +28,41 @@ public class IM_RES_09 extends BaseClass {
   public void verifyDataDisplayedAsFilteredUser(String clusterId) {
     test = extent.startTest("IM_RES_09.verifyQueryGraphForUserGroup ("+clusterId+")", "Validate the \"Group By\" filter for user.");
     test.assignCategory(" Cluster/Impala Resources");
-    WaitExecuter executer = new WaitExecuter(driver);
-
+    WaitExecuter waitExecuter = new WaitExecuter(driver);
+    Impala impala = new Impala(driver);
     ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);
     TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
+    HomePage homePage = new HomePage(driver);
+    DatePicker datePicker = new DatePicker(driver);
 
-    // Click on Chargeback tab
-    executer.waitUntilElementClickable(topPanelPageObject.impalaTab);
-    JavaScriptExecuter.clickOnElement(driver, topPanelPageObject.impalaTab);
-    executer.waitUntilElementPresent(impalaPageObject.getImpalaPageHeader);
+    //Select impala tab
+    test.log(LogStatus.INFO, "Go to resource page");
+    LOGGER.info("Select impala from dropdown");
+    impala.selectImpalaResource();
 
     //Select the cluster
     test.log(LogStatus.INFO, "This testcase is running for cluster: "+clusterId);
     LOGGER.info("Selecting cluster from the list " +clusterId);
-    HomePage homePage = new HomePage(driver);
     LOGGER.info("Selecting the cluster");
     homePage.selectMultiClusterId(clusterId);
-    executer.waitUntilPageFullyLoaded();
+    waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
 
-    DatePicker datePicker = new DatePicker(driver);
+
     datePicker.clickOnDatePicker();
-    executer.sleep(1000);
+    waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
     datePicker.selectThisMonth();
-    executer.waitUntilPageFullyLoaded();
-
-    Impala impala = new Impala(driver);
+    waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
     impala.clearFilter();
-    executer.waitUntilPageFullyLoaded();
+    waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
     MouseActions.clickOnElement(driver, impalaPageObject.filterInput);
     for(int i=0; i<impalaPageObject.filterElements.size(); i++) {
       String userName = impalaPageObject.filterElements.get(i).getText();
       impalaPageObject.filterElements.get(i).click();
-      executer.waitUntilPageFullyLoaded();
+      waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         test.log(LogStatus.INFO, "Selecting the user: " + userName + " in filter.");
-      executer.sleep(2000);
+      waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
       boolean isTagPresent = false;
       for (String graphTag : impala.getQueriesGraphLabels()) {
         if (graphTag.equals(userName)) {
@@ -77,8 +76,14 @@ public class IM_RES_09 extends BaseClass {
       }
       Assert.assertTrue(isTagPresent, "Filter user not displayed for user: " + userName);
       test.log(LogStatus.PASS, "Graph displayed the user based on filter for user : " + userName);
+      waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+      waitExecuter.sleep(2000);
       impalaPageObject.filterInput.click();
+      waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
     }
+    waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+    waitExecuter.sleep(2000);
     impalaPageObject.filterInput.click();
+    waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
   }
 }

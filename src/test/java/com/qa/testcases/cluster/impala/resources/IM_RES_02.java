@@ -50,44 +50,40 @@ public class IM_RES_02 extends BaseClass {
 		homePage = new HomePage(driver);
 		impalaPageObject = new ImpalaPageObject(driver);
 
-		// Select impala tab
 		test.log(LogStatus.INFO, "Go to impala page");
 		LOGGER.info("Click on impala tab");
-		waitExecuter.waitUntilElementClickable(impalaPageObject.clusterImpalaTab);
-		JavaScriptExecuter.clickOnElement(driver, impalaPageObject.clusterImpalaTab);
-		waitExecuter.sleep(1000);
-		waitExecuter.waitUntilElementPresent(impalaPageObject.getImpalaPageHeader);
-		waitExecuter.waitUntilPageFullyLoaded();
+		// Click on Resources tab and select Impala
+		impala.selectImpalaResource();
 
 		// Select the cluster
 		test.log(LogStatus.INFO, "Selecting the cluster");
 		LOGGER.info("Selecting the cluster");
-		waitExecuter.sleep(5000);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 		homePage.selectMultiClusterId(clusterId);
-		waitExecuter.sleep(2000);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 		waitExecuter.waitUntilPageFullyLoaded();
-		waitExecuter.sleep(1000);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
 		// Select custom date
 		test.log(LogStatus.INFO, "Selecting the custom date");
 		LOGGER.info("Select the custom date from date picker");
 		picker.clickOnDatePicker();
-		waitExecuter.sleep(1000);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 		picker.selectCustomRange();
-		waitExecuter.sleep(1000);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 		// Set start date in calendar
 		LOGGER.info("Set the start date");
 		test.log(LogStatus.INFO, "Set the custom date in date picker");
 		waitExecuter.waitUntilElementClickable(impalaPageObject.customRangeStartDate);
 		impalaPageObject.customRangeStartDate.clear();
 		impalaPageObject.customRangeStartDate.sendKeys(param.impalaResourceStartDate);
-		waitExecuter.sleep(1000);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 		// Set end date in calendar
 		LOGGER.info("Set the end date");
 		waitExecuter.waitUntilElementClickable(impalaPageObject.customRangeEndDate);
 		impalaPageObject.customRangeEndDate.clear();
 		impalaPageObject.customRangeEndDate.sendKeys(param.impalaResourceEndDate);
-		waitExecuter.sleep(1000);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 		
 		// Click apply button
 		LOGGER.info("Click on apply button");
@@ -96,11 +92,11 @@ public class IM_RES_02 extends BaseClass {
 			if (impalaPageObject.applyBtnImpalaDatePicker.isDisplayed()) {
 				// waitExecuter.waitUntilElementClickable(impalaPageObject.applyBtnImpalaDatePicker);
 				JavaScriptExecuter.clickOnElement(driver, impalaPageObject.applyBtnImpalaDatePicker);
-				waitExecuter.sleep(1000);
+				waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 			}
 		} catch (NoSuchElementException exception) {
 			JavaScriptExecuter.clickOnElement(driver, impalaPageObject.applyBtn);
-			waitExecuter.sleep(1000);
+			waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 		}
 
 		// Verify if memory graph is present

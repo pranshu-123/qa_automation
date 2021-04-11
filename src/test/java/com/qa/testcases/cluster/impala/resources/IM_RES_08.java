@@ -2,12 +2,10 @@ package com.qa.testcases.cluster.impala.resources;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.clusters.ImpalaPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.clusters.impala.Impala;
-import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
@@ -28,34 +26,29 @@ public class IM_RES_08 extends BaseClass {
         test = extent.startTest("IM_RES_08.verifyGroupByFilterForUser (" + clusterId + ")",
                 "Validate the \"Group By\" filter for User.");
         test.assignCategory(" Cluster/Impala Resources");
-        WaitExecuter executer = new WaitExecuter(driver);
-
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        Impala impala = new Impala(driver);
         ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);
-        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
 
-        // Click on Impala tab
-        executer.waitUntilElementClickable(topPanelPageObject.impalaTab);
-        JavaScriptExecuter.clickOnElement(driver, topPanelPageObject.impalaTab);
-        executer.sleep(2000);
-        executer.waitUntilElementPresent(impalaPageObject.getImpalaPageHeader);
+        //Select impala tab
+        test.log(LogStatus.INFO, "Go to resource page");
+        LOGGER.info("Select impala from dropdown");
+        impala.selectImpalaResource();
         //Select cluster id
         HomePage homePage = new HomePage(driver);
         test.log(LogStatus.INFO, "Select cluster : " + clusterId);
         LOGGER.info("Select cluster : " + clusterId);
-        executer.sleep(3000);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         homePage.selectMultiClusterId(clusterId);
-        executer.sleep(2000);
-        executer.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         //Select date
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
-        executer.sleep(1000);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         datePicker.selectLast30Days();
-        executer.waitUntilPageFullyLoaded();
-
-        Impala impala = new Impala(driver);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         impala.clearFilter();
-        executer.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
         impalaPageObject.filterInput.click();
         System.out.println("Default filter elements size: "+impalaPageObject.filterElements.size());
@@ -63,9 +56,9 @@ public class IM_RES_08 extends BaseClass {
             String userName = impalaPageObject.filterElements.get(0).getText();
             System.out.println("Default filter 0th index name: "+ userName);
             impalaPageObject.filterElements.get(0).click();
-            executer.waitUntilPageFullyLoaded();
+            waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
             test.log(LogStatus.INFO, "Selecting the user: " + userName + " in filter.");
-            executer.sleep(2000);
+            waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
             boolean isTagPresent = false;
             for (String graphTag : impala.getQueriesGraphLabels()) {
                 if (graphTag.equals(userName)) {
@@ -87,9 +80,9 @@ public class IM_RES_08 extends BaseClass {
                 String userName = impalaPageObject.filterElements.get(0).getText();
                 System.out.println("Default filter 0th index name: " + userName);
                 impalaPageObject.filterElements.get(0).click();
-                executer.waitUntilPageFullyLoaded();
+                waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
                 test.log(LogStatus.INFO, "Selecting the user: " + userName + " in filter.");
-                executer.sleep(2000);
+                waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
                 boolean isTagPresent = false;
                 for (String graphTag : impala.getQueriesGraphLabels()) {
                     if (graphTag.equals(userName)) {

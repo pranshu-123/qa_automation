@@ -15,7 +15,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -74,19 +73,27 @@ public class TC_JAL_13 extends BaseClass {
         // Click on the first app in table to get efficiency
         test.log(LogStatus.INFO, "Navigate back to parent window");
         LOGGER.info("Navigate back to parent window");
-        driver.navigate().back();
-        waitExecuter.sleep(5000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
+        waitExecuter.sleep(1000);
+        applicationsPageObject.closeIcon.click();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+
         // Click on the first app in table to get efficiency
-        int countEfficiency = Collections.frequency(badgeTitleTextList, "EFFICIENCY");
+        //int countEfficiency = Collections.frequency(badgeTitleTextList, "EFFICIENCY");
+        int countEfficiency = badgeTitleTextList.size();
         test.log(LogStatus.INFO, "Count of Efficiency badges " + countEfficiency);
         LOGGER.info("Count of Efficiency badges " + countEfficiency);
         // Assert the efficiency count to events set in slider
         test.log(LogStatus.INFO, "Assert the efficiency count to events set in slider");
+        LOGGER.info("eventInputLeft- " + eventInputLeft);
+        LOGGER.info("eventInputRight- " + eventInputRight);
+        LOGGER.info("countEvents- " + countEfficiency);
         Assert.assertTrue(countEfficiency >= eventInputLeft && countEfficiency <= eventInputRight,
                 "The Efficiency count is not in between the set events");
         // Reset events to default
         test.log(LogStatus.INFO, "Reset events to default");
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         applicationsPageObject.resetButton.click();
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
     }
 }

@@ -35,59 +35,49 @@ public class IM_RES_18 extends BaseClass {
 		// Initialize all classes objects
 		test.log(LogStatus.INFO, "Initialize all class objects");
 		LOGGER.info("Initialize all class objects");
-		WaitExecuter executer = new WaitExecuter(driver);
+		WaitExecuter waitExecuter = new WaitExecuter(driver);
 		ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);
 		TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
 		HomePage homePage = new HomePage(driver);
 		Impala impala = new Impala(driver);
 		DatePicker datePicker = new DatePicker(driver);
 
-		// Click on Impala tab
-		test.log(LogStatus.INFO, "Go to impala page");
-		LOGGER.info("Clicking on Impala tab");
-		executer.waitUntilElementClickable(topPanelPageObject.impalaTab);
-		JavaScriptExecuter.clickOnElement(driver, topPanelPageObject.impalaTab);
-		executer.sleep(1000);
-		executer.waitUntilElementPresent(impalaPageObject.getImpalaPageHeader);
+		//Select impala tab
+		test.log(LogStatus.INFO, "Go to resource page");
+		LOGGER.info("Select impala from dropdown");
+		impala.selectImpalaResource();
 
 		// Select the cluster
 		test.log(LogStatus.INFO, "Select cluster : " + clusterId);
 		LOGGER.info("Select cluster : " + clusterId);
 		homePage.selectMultiClusterId(clusterId);
-		executer.waitUntilPageFullyLoaded();
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
 		// Select 30 days from date picker
 		test.log(LogStatus.INFO, "Select 30 days from date picker");
 		LOGGER.info("Select 30 days from date picker");
 		datePicker.clickOnDatePicker();
-		executer.sleep(1000);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 		datePicker.selectLast30Days();
-		executer.sleep(1000);
-		executer.waitUntilPageFullyLoaded();
-		executer.sleep(1000);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
 		// Click on group by dropdown and select queue in filter
 		test.log(LogStatus.INFO, "Click on group by dropdown and select queue in filter");
 		LOGGER.info("Click on group by dropdown and select queue in filter");
-		executer.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
-		executer.sleep(3000);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
 		impalaPageObject.groupByDropdownButton.click();
-		executer.sleep(1000);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.groupByQueueList);
 		impalaPageObject.groupByQueueList.click();
-		executer.sleep(1000);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 		impala.clearFilter();
-		executer.sleep(1000);
-		executer.waitUntilPageFullyLoaded();
-		executer.sleep(1000);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
 		for (int i = 0; i < impalaPageObject.filterElements.size(); i++) {
 			String queueName = impalaPageObject.filterElements.get(i).getText();
 			impalaPageObject.filterElements.get(i).click();
-			executer.sleep(1000);
-			executer.waitUntilPageFullyLoaded();
+			waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 			test.log(LogStatus.INFO, "Selecting the queue: " + queueName + " in filter.");
 			LOGGER.info("Selecting the queue: " + queueName + " in filter.");
-			executer.sleep(2000);
 			boolean isTagPresent = false;
 			for (String graphTag : impala.getQueriesGraphLabels()) {
 				if (graphTag.equals(queueName)) {
@@ -101,9 +91,9 @@ public class IM_RES_18 extends BaseClass {
 			Assert.assertTrue(isTagPresent, "Filter user not displayed for queue: " + queueName);
 			test.log(LogStatus.PASS, "Graph displayed the user based on filter for queue : " + queueName);
 			impalaPageObject.filterInput.click();
-			executer.sleep(1000);
+			waitExecuter.sleep(1000);
 		}
 		impalaPageObject.filterInput.click();
-		executer.sleep(1000);
+		waitExecuter.sleep(1000);
 	}
 }

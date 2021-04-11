@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.clusters.ImpalaPageObject;
 import com.qa.scripts.DatePicker;
+import com.qa.scripts.clusters.impala.Impala;
 import com.qa.utils.GraphUtils;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.WaitExecuter;
@@ -13,6 +14,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * @author Ankur Jaiswal
@@ -20,6 +22,7 @@ import java.util.List;
 @Marker.ImpalaResources
 @Marker.All
 public class IM_RES_05 extends BaseClass {
+  private static final Logger LOGGER = Logger.getLogger(IM_RES_05.class.getName());
 
   @Test
   public void verifyQueryGraphForUserGroup() {
@@ -30,19 +33,18 @@ public class IM_RES_05 extends BaseClass {
     WaitExecuter waitExecuter = new WaitExecuter(driver);
     test.log(LogStatus.INFO, "Go to impala page");
     TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-    waitExecuter.waitUntilElementPresent(topPanelPageObject.impalaTab);
-    waitExecuter.waitUntilElementClickable(topPanelPageObject.impalaTab);
-    JavaScriptExecuter.clickOnElement(driver, topPanelPageObject.impalaTab);
-
-    waitExecuter.waitUntilUrlContains("clusters/impala");
+    ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);
+    Impala impala = new Impala(driver);
     DatePicker datePicker = new DatePicker(driver);
+    //Select impala tab
+    test.log(LogStatus.INFO, "Go to resource page");
+    LOGGER.info("Select impala from dropdown");
+    impala.selectImpalaResource();
     datePicker.clickOnDatePicker();
     waitExecuter.sleep(1000);
     datePicker.selectLast30Days();
     waitExecuter.sleep(3000);
-
     test.log(LogStatus.INFO, "Select this month in date picker");
-    ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);
 
     test.log(LogStatus.INFO, "Navigate different section in memory graph");
     GraphUtils graphUtils = new GraphUtils();

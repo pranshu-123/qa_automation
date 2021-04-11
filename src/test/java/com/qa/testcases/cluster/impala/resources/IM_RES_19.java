@@ -40,38 +40,31 @@ public class IM_RES_19 extends BaseClass {
 		// Initialize all classes objects
 		test.log(LogStatus.INFO, "Initialize all class objects");
 		LOGGER.info("Initialize all class objects");
-		WaitExecuter executer = new WaitExecuter(driver);
+		WaitExecuter waitExecuter = new WaitExecuter(driver);
 		ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);
 		TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
 		HomePage homePage = new HomePage(driver);
 		DatePicker datePicker = new DatePicker(driver);
 		Impala impala = new Impala(driver);
 
-		// Click on Impala tab
-		test.log(LogStatus.INFO, "Go to impala page");
-		LOGGER.info("Clicking on Impala tab");
-		executer.waitUntilElementClickable(topPanelPageObject.impalaTab);
-		JavaScriptExecuter.clickOnElement(driver, topPanelPageObject.impalaTab);
-		executer.sleep(1000);
-		executer.waitUntilElementPresent(impalaPageObject.getImpalaPageHeader);
+		//Select impala tab
+		test.log(LogStatus.INFO, "Go to resource page");
+		LOGGER.info("Select impala from dropdown");
+		impala.selectImpalaResource();
 
 		// Select the cluster
 		test.log(LogStatus.INFO, "Select cluster : " + clusterId);
 		LOGGER.info("Select cluster : " + clusterId);
 		homePage.selectMultiClusterId(clusterId);
-		executer.sleep(1000);
-		executer.waitUntilPageFullyLoaded();
-		executer.sleep(1000);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
 		// Select 30 days from date picker
 		test.log(LogStatus.INFO, "Select 30 days from date picker");
 		LOGGER.info("Select 30 days from date picker");
 		datePicker.clickOnDatePicker();
-		executer.sleep(1000);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 		datePicker.selectLast30Days();
-		executer.sleep(1000);
-		executer.waitUntilPageFullyLoaded();
-		executer.sleep(1000);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 		JavaScriptExecuter.scrollViewWithYAxis(driver, -100);
 
 		// Navigate to Y axis
@@ -79,17 +72,17 @@ public class IM_RES_19 extends BaseClass {
 		LOGGER.info("Navigate to Y axis");
 		int scrollY = 150;
 		JavaScriptExecuter.scrollViewWithYAxis(driver, scrollY);
-		executer.sleep(2000);
+		waitExecuter.sleep(2000);
 
 		// De-selecting all the nodes
 		test.log(LogStatus.INFO, "Deselecting all node checkbox ");
 		LOGGER.info("Deselecting all nodes checkbox");
-		executer.waitUntilElementClickable(impalaPageObject.memoryFooterLabels.get(0));
-		executer.sleep(1000);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.memoryFooterLabels.get(0));
+		waitExecuter.sleep(1000);
 		List<WebElement> listOfMemoryFooterCheckbox = impalaPageObject.memoryFooterLabels;
 		for (int i = 0; i < listOfMemoryFooterCheckbox.size(); i++) {
 			listOfMemoryFooterCheckbox.get(i).click();
-			executer.sleep(1000);
+			waitExecuter.sleep(1000);
 		}
 
 		// Take the screenshot after deselecting nodes from footer of memory graph
@@ -105,12 +98,12 @@ public class IM_RES_19 extends BaseClass {
 				"Node is displayed when node checkbox is deselected.");
 		test.log(LogStatus.PASS, "Successfully validated node is not displayed when node checkbox is deselected.");
 
-		executer.sleep(2000);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
 		// Selecting one of the nodes
 		test.log(LogStatus.INFO, "Selecting first node from footer ");
 		LOGGER.info("Selecting first node from footer");
-		executer.waitUntilElementClickable(impalaPageObject.memoryFooterLabels.get(0));
+		waitExecuter.waitUntilElementClickable(impalaPageObject.memoryFooterLabels.get(0));
 		impalaPageObject.memoryFooterLabels.get(0).click();
 
 		// Take the screenshot after selecting first node from footer of memory graph

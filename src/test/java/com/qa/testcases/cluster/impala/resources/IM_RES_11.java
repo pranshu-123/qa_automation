@@ -21,7 +21,7 @@ public class IM_RES_11 extends BaseClass {
     private WaitExecuter waitExecuter;
     private DatePicker datePicker;
     private ImpalaPageObject impalaPageObject;
-    private static final Logger LOGGER = Logger.getLogger(IM_RES_10.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(IM_RES_11.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void IM_RES_11_verifyQueryGraphForQueueGroupForTwoDaysDatePickerOptions(String clusterId) {
@@ -34,25 +34,28 @@ public class IM_RES_11 extends BaseClass {
         impalaPageObject = new ImpalaPageObject(driver);
         test.log(LogStatus.INFO, "Login to the application");
 
-        test.log(LogStatus.INFO, "Go to impala page");
-        waitExecuter.waitUntilElementClickable(impalaPageObject.clusterImpalaTab);
-        JavaScriptExecuter.clickOnElement(driver, impalaPageObject.clusterImpalaTab);
-        waitExecuter.waitUntilElementPresent(impalaPageObject.getImpalaPageHeader);
+        //Select impala tab
+        test.log(LogStatus.INFO, "Go to resource page");
+        LOGGER.info("Select impala from dropdown");
+        impala.selectImpalaResource();
 
         // Select the cluster
         LOGGER.info("Selecting the cluster");
-        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
         // Select last one hour
         test.log(LogStatus.INFO, "Click on date picker");
         datePicker.clickOnDatePicker();
         test.log(LogStatus.INFO, "Select last 1 hour");
         datePicker.selectLastOneHour();
-        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         impalaPageObject.groupByDropdownButton.click();
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         impalaPageObject.groupByQueueList.click();
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         test.log(LogStatus.INFO, "Select Queue in Group by option.");
 
         // Validate of Memory graph is present for selected date range
@@ -64,9 +67,10 @@ public class IM_RES_11 extends BaseClass {
         // Select last 2 hour
         test.log(LogStatus.INFO, "Click on date picker");
         datePicker.clickOnDatePicker();
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         test.log(LogStatus.INFO, "Select Last 2 hours");
         datePicker.selectLastTwoHour();
-        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
         // Validate of Memory graph is present for selected date range
         Assert.assertTrue(impala.isMemoryGraphPresent(), "The memory graph is not present with expected conditions");

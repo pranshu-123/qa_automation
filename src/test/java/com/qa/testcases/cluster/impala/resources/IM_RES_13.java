@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.clusters.ImpalaPageObject;
 import com.qa.scripts.DatePicker;
+import com.qa.scripts.clusters.impala.Impala;
 import com.qa.utils.GraphUtils;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.WaitExecuter;
@@ -13,6 +14,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -21,6 +23,7 @@ import java.util.stream.Collectors;
 @Marker.ImpalaResources
 @Marker.All
 public class IM_RES_13 extends BaseClass {
+  private static final Logger LOGGER = Logger.getLogger(IM_RES_13.class.getName());
 
   @Test
   public void verifyQueryGraphForQueueGroup() {
@@ -29,13 +32,11 @@ public class IM_RES_13 extends BaseClass {
 
     test.log(LogStatus.INFO, "Login to the application");
     WaitExecuter waitExecuter = new WaitExecuter(driver);
-    test.log(LogStatus.INFO, "Go to impala page");
-    TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-    waitExecuter.waitUntilElementPresent(topPanelPageObject.impalaTab);
-    waitExecuter.waitUntilElementClickable(topPanelPageObject.impalaTab);
-    JavaScriptExecuter.clickOnElement(driver, topPanelPageObject.impalaTab);
-    waitExecuter.sleep(10000);
-    waitExecuter.waitUntilPageFullyLoaded();
+    Impala impala = new Impala(driver);
+    //Select impala tab
+    test.log(LogStatus.INFO, "Go to resource page");
+    LOGGER.info("Select impala from dropdown");
+    impala.selectImpalaResource();
     ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);
     impalaPageObject.groupByDropdownButton.click();
     waitExecuter.waitUntilElementPresent(impalaPageObject.groupByQueueList);

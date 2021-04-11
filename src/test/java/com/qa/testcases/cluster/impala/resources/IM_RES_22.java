@@ -13,45 +13,50 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.logging.Logger;
+
 /**
  * @author Birender Kumar
  */
 @Marker.ImpalaResources
 @Marker.All
 public class IM_RES_22  extends BaseClass {
+    private static final Logger LOGGER = Logger.getLogger(IM_RES_22.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void verifyGroupByFilterForUserHoverMemoryGraphCompareImpalaTblToolTip(String clusterId) {
         test = extent.startTest("IM_RES_22.verifyGroupByFilterForUserHoverMemoryGraphCompareImpalaTblToolTip (" + clusterId + ")", "Verify if more than 5 hosts exist, the memory chart displays the top-5 hosts .");
         test.assignCategory(" Cluster/Impala Resources");
-        WaitExecuter executer = new WaitExecuter(driver);
-
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        Impala impala = new Impala(driver);
         ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
 
-        // Click on Impala tab
-        executer.waitUntilElementClickable(topPanelPageObject.impalaTab);
-        JavaScriptExecuter.clickOnElement(driver, topPanelPageObject.impalaTab);
-        executer.waitUntilElementPresent(impalaPageObject.getImpalaPageHeader);
+        //Select impala tab
+        test.log(LogStatus.INFO, "Go to resource page");
+        LOGGER.info("Select impala from dropdown");
+        impala.selectImpalaResource();
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+
         //Select clsuter id
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
-        executer.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         //Select date
         try {
             DatePicker datePicker = new DatePicker(driver);
             datePicker.clickOnDatePicker();
-            executer.sleep(1000);
+            waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
             datePicker.selectLast90Days();
-            executer.waitUntilPageFullyLoaded();
+            waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
             test.log(LogStatus.INFO, "Select Date from DatePicker.");
 
-            Impala impala = new Impala(driver);
-            executer.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
-            executer.sleep(3000);
+            waitExecuter.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
+            waitExecuter.sleep(3000);
             impalaPageObject.groupByDropdownButton.click();
             impalaPageObject.groupByUserList.click();
-            executer.waitUntilPageFullyLoaded();
+            waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
             test.log(LogStatus.INFO, "Select User in Group by option.");
 
             // Validate of Memory graph is present for selected date range
@@ -64,7 +69,7 @@ public class IM_RES_22  extends BaseClass {
 
             test.log(LogStatus.INFO, "Navigate different section in memory graph");
             GraphUtils graphUtils = new GraphUtils();
-            executer.waitUntilPageFullyLoaded();
+            waitExecuter.waitUntilPageFullyLoaded();
             graphUtils.navigateDifferentPointOnGraphGetTextClickCheckImpalaTbl(driver, impalaPageObject.memoryHighChartContainer);
             test.log(LogStatus.PASS, "Successfully read the impalaQueries header text, after click on memory graph.");
 

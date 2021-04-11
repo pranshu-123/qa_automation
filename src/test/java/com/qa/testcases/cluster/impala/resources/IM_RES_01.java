@@ -39,10 +39,8 @@ public class IM_RES_01 extends BaseClass {
 		impala = new Impala(driver);
 		// Intialize impala page objects
 		impalaPageObject = new ImpalaPageObject(driver);
-		// Click on Chargeback tab
-		waitExecuter.waitUntilElementClickable(impalaPageObject.clusterImpalaTab);
-		JavaScriptExecuter.clickOnElement(driver, impalaPageObject.clusterImpalaTab);
-		waitExecuter.waitUntilElementPresent(impalaPageObject.getImpalaPageHeader);
+		// Click on Resources tab and select Impala
+		impala.selectImpalaResource();
 		// Select the cluster
 		LOGGER.info("Selecting the cluster");
 		waitExecuter.sleep(1000);
@@ -85,7 +83,6 @@ public class IM_RES_01 extends BaseClass {
 		Assert.assertTrue(impala.isQueryGraphPresent(), "The query graph is not present with expected conditions");
 
 		LOGGER.info("Verifying memory and query graph for last 12 hour");
-		waitExecuter.waitUntilElementPresent(impalaPageObject.getImpalaPageHeader);
 		// Select last twelve hour
 		test.log(LogStatus.INFO, "Click on date picker");
 		picker.clickOnDatePicker();

@@ -55,18 +55,19 @@ public class TC_CTX_29 extends BaseClass {
         LOGGER.info("Click on + button", test);
         String statusXpath = reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.TopX);
         waitExecuter.waitUntilPageFullyLoaded();
-        int chkBoxSize = topX.getTagsCheckbox().size();
-        System.out.println("chkBoxSize: "+chkBoxSize);
-        for (int i=0; i<chkBoxSize; i++) {
+        //int chkBoxSize = topX.getTagsCheckbox().size();
+        //System.out.println("chkBoxSize: "+chkBoxSize);
+        //for (int i=0; i<chkBoxSize; i++) {
             LOGGER.info("Click on tags of category: ", test);
-            topX.selectTagsCheckbox(topX.getTagsCheckbox().get(i));
+            topX.selectTagsCheckbox(topX.getTagsCheckbox().get(0));
             LOGGER.info("Click on tags textbox", null);
             userActions.performActionWithPolling(topX.getLastInputTextboxField(), UserAction.CLICK);
-            for (int filterDropDown=0; filterDropDown<topX.getFilterDropDowns().size(); filterDropDown++) {
+            //int sizeFilter = topX.getFilterDropDowns().size();
+            //for (int filterDropDown=0; filterDropDown< sizeFilter; filterDropDown++) {
                 waitExecuter.sleep(2000);
-                String tagFilter = topX.getFilterDropDowns().get(filterDropDown).getText();
+                String tagFilter = topX.getFilterDropDowns().get(0).getText();
                 LOGGER.info("Click on queue filter: " + tagFilter, test);
-                userActions.performActionWithPolling(topX.getFilterDropDowns().get(filterDropDown), UserAction.CLICK);
+                userActions.performActionWithPolling(topX.getFilterDropDowns().get(0), UserAction.CLICK);
                 topX.clickOnModalRunButton();
                 String confirmMsg = topX.getConfirmationMessageContent();
                 LOGGER.info("Message after click on Run button: "+ confirmMsg, test);
@@ -85,7 +86,7 @@ public class TC_CTX_29 extends BaseClass {
                 }
 
                 //topX.closeConfirmationMessageNotification();
-                waitExecuter.sleep(2000);
+                //waitExecuter.sleep(2000);
 //                for (WebElement row : topX.getInputParamsRowList()) {
 //                    if (row.findElement(By.xpath("td[1]")).getText().equalsIgnoreCase("Tags")) {
 //                        Assert.assertTrue(row.findElement(By.xpath("td[2]")).getText().contains(tagFilter),
@@ -96,8 +97,8 @@ public class TC_CTX_29 extends BaseClass {
 //                topX.clickOnRunButton();
 //                userActions.performActionWithPolling(topX.getLastInputTextboxField(), UserAction.CLICK);
 
-            }
+            //}
             test.log(LogStatus.PASS, "Verified Queues filter in new report page");
-        }
+        //}
     }
 }

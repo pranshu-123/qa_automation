@@ -59,7 +59,7 @@ public class TC_LLAP_14 extends BaseClass {
 
         applicationsPageObject.expandStatus.click();
         waitExecuter.waitUntilPageFullyLoaded();
-        int statusCount = tezLlapApps.clickOnlyLink("Failed");
+        int statusCount = tezLlapApps.clickOnlyLink("Success");
         test.log(LogStatus.PASS, "Selected success Count is  " + statusCount + " as Status, In Applications page");
         waitExecuter.waitUntilPageFullyLoaded();
         applicationsPageObject.expandQueue.click();

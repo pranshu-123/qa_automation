@@ -50,8 +50,7 @@ public class TC_CTP_05 extends BaseClass {
         waitExecuter.sleep(3000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.stream()
-                .filter(WebElement::isDisplayed).findFirst().get().getText());
+                + workloadPageObject.timerangeMessageElement.getText().trim());
         waitExecuter.sleep(3000);
 
         workload.clickOnMonth();
@@ -68,8 +67,7 @@ public class TC_CTP_05 extends BaseClass {
         waitExecuter.sleep(3000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.stream()
-                .filter(WebElement::isDisplayed).findFirst().get().getText());
+                + workloadPageObject.timerangeMessageElement.getText().trim());
         waitExecuter.sleep(3000);
 
         workload.clickOnDay();
@@ -82,8 +80,7 @@ public class TC_CTP_05 extends BaseClass {
         waitExecuter.sleep(3000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.stream()
-                .filter(WebElement::isDisplayed).findFirst().get().getText());
+                + workloadPageObject.timerangeMessageElement.getText().trim());
         waitExecuter.sleep(3000);
 
         workload.clickOnHour();
@@ -97,8 +94,7 @@ public class TC_CTP_05 extends BaseClass {
         waitExecuter.sleep(3000);
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.stream()
-                .filter(WebElement::isDisplayed).findFirst().get().getText());
+                + workloadPageObject.timerangeMessageElement.getText().trim());
         waitExecuter.sleep(3000);
 
         if (workload.clickOnHourDay())
@@ -112,6 +108,6 @@ public class TC_CTP_05 extends BaseClass {
             test.log(LogStatus.FAIL, "Test Failed the Group by dept table");
         }
 
-
+        test.log(LogStatus.PASS, "Verify report should be generated as per selected view by filter");
     }
 }

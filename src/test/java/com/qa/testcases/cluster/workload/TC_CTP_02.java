@@ -46,8 +46,7 @@ public class TC_CTP_02 extends BaseClass {
         test.log(LogStatus.PASS, "Last 7 Days field is successfully verified in date range");
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.stream()
-                .filter(WebElement::isDisplayed).findFirst().get().getText());
+                + workloadPageObject.timerangeMessageElement.getText().trim());
 
 
         datePicker.clickOnDatePicker();
@@ -56,8 +55,7 @@ public class TC_CTP_02 extends BaseClass {
         test.log(LogStatus.PASS, "Last 14 Days field is successfully verified in date range");
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.stream()
-                .filter(WebElement::isDisplayed).findFirst().get().getText());
+                + workloadPageObject.timerangeMessageElement.getText().trim());
 
 
         datePicker.clickOnDatePicker();
@@ -66,8 +64,7 @@ public class TC_CTP_02 extends BaseClass {
         test.log(LogStatus.PASS, "Last 30 Days field is successfully verified in date range");
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.stream()
-                .filter(WebElement::isDisplayed).findFirst().get().getText());
+                + workloadPageObject.timerangeMessageElement.getText().trim());
 
 
         datePicker.clickOnDatePicker();
@@ -77,8 +74,7 @@ public class TC_CTP_02 extends BaseClass {
         test.log(LogStatus.PASS, "Last 60 Days field is successfully verified in date range");
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.stream()
-                .filter(WebElement::isDisplayed).findFirst().get().getText());
+                + workloadPageObject.timerangeMessageElement.getText().trim());
 
 
         datePicker.clickOnDatePicker();
@@ -93,8 +89,7 @@ public class TC_CTP_02 extends BaseClass {
         test.log(LogStatus.PASS, "Start Date field is successfully verified in custom date range");
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
-                + workloadPageObject.timerangeMessageElement.stream()
-                .filter(WebElement::isDisplayed).findFirst().get().getText());
+                + workloadPageObject.timerangeMessageElement.getText().trim());
 
     }
 }

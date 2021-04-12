@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import com.qa.annotations.Marker;
+import com.qa.scripts.clusters.impala.Impala;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.qa.base.BaseClass;
@@ -34,45 +35,40 @@ public class IM_RES_06 extends BaseClass {
 		//Initialize all classes objects
 		test.log(LogStatus.INFO, "Initialize all class objects");
 		LOGGER.info("Initialize all class objects");
-		WaitExecuter executer = new WaitExecuter(driver);
+		WaitExecuter waitExecuter = new WaitExecuter(driver);
 		ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);
 		TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
 		DatePicker datePicker = new DatePicker(driver);
 		HomePage homePage = new HomePage(driver);
 		GraphUtils graphUtils = new GraphUtils();
+		Impala impala = new Impala(driver);
 
-		// Click on Impala tab
-		test.log(LogStatus.INFO, "Go to impala page");
-		LOGGER.info("Clicking on Impala tab");
-		executer.waitUntilElementClickable(topPanelPageObject.impalaTab);
-		JavaScriptExecuter.clickOnElement(driver, topPanelPageObject.impalaTab);
-		executer.sleep(1000);
-		executer.waitUntilElementPresent(impalaPageObject.getImpalaPageHeader);
+		//Select impala tab
+		test.log(LogStatus.INFO, "Go to resource page");
+		LOGGER.info("Select impala from dropdown");
+		impala.selectImpalaResource();
 
 		// Set multi cluster
 		test.log(LogStatus.INFO, "Select cluster : " + clusterId);
 		LOGGER.info("Select cluster : " + clusterId);
 		homePage.selectMultiClusterId(clusterId);
-		executer.sleep(1000);
-		executer.waitUntilPageFullyLoaded();
-		executer.sleep(1000);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
 		// Select last 30 days from date picker
 		test.log(LogStatus.INFO, "Select Last 30 days in date picker");
 		LOGGER.info("Select Last 30 days in date picker");
 		datePicker.clickOnDatePicker();
-		executer.sleep(1000);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 		datePicker.selectLast30Days();
-		executer.sleep(1000);
-		executer.waitUntilPageFullyLoaded();
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
 		// Navigating on different points of memory graph and collect tooltips
 		test.log(LogStatus.INFO, "Navigate different section in memory graph");
-		LOGGER.info("Navigate different section in memory graph");		
-		executer.sleep(8000);
+		LOGGER.info("Navigate different section in memory graph");
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 		graphUtils.navigateDifferentPointOnGraph(driver, impalaPageObject.memoryHighChartContainer);
 		List<String> memoryTooltipValues = graphUtils.getMemoryTooltipValues();
-		executer.sleep(1000);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 		LOGGER.info("Memory tooltip values : " +memoryTooltipValues);
 
 		// Check if tool-tip contains 'Total' and 'Allocated' as value in it

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import com.qa.annotations.Marker;
+import com.qa.scripts.clusters.impala.Impala;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.qa.base.BaseClass;
@@ -40,12 +41,12 @@ public class IM_RES_04 extends BaseClass {
 		HomePage homePage = new HomePage(driver);
 		DatePicker datePicker = new DatePicker(driver);
 		ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);
+		Impala impala = new Impala(driver);
 		
 		//Select impala tab
-		test.log(LogStatus.INFO, "Go to impala page");
-		LOGGER.info("Click on impala tab");
-		JavaScriptExecuter.clickOnElement(driver, topPanelPageObject.impalaTab);
-		waitExecuter.sleep(1000);
+		test.log(LogStatus.INFO, "Go to resource page");
+		LOGGER.info("Select impala from dropdown");
+		impala.selectImpalaResource();
 		
 		// Select the cluster
 		test.log(LogStatus.INFO, "Selecting the cluster");

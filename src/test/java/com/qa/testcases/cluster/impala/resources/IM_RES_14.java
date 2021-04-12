@@ -6,6 +6,7 @@ import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.clusters.ImpalaPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
+import com.qa.scripts.clusters.impala.Impala;
 import com.qa.utils.GraphUtils;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.WaitExecuter;
@@ -33,11 +34,11 @@ public class IM_RES_14 extends BaseClass {
 
 		test.log(LogStatus.INFO, "Login to the application");
 		WaitExecuter waitExecuter = new WaitExecuter(driver);
-		waitExecuter.sleep(5000);
-		test.log(LogStatus.INFO, "Go to impala page");
-		TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-		JavaScriptExecuter.clickOnElement(driver, topPanelPageObject.impalaTab);
-		waitExecuter.sleep(3000);
+		Impala impala = new Impala(driver);
+		//Select impala tab
+		test.log(LogStatus.INFO, "Go to resource page");
+		LOGGER.info("Select impala from dropdown");
+		impala.selectImpalaResource();
 		
 		// Select the cluster
 		LOGGER.info("Selecting the cluster");
@@ -46,17 +47,17 @@ public class IM_RES_14 extends BaseClass {
 		homePage.selectMultiClusterId(clusterId);
 		ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);
 		impalaPageObject.groupByDropdownButton.click();
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 		impalaPageObject.groupByQueueList.click();
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 		test.log(LogStatus.INFO, "Select Queue in Group by option.");
 
 		DatePicker datePicker = new DatePicker(driver);
 		datePicker.clickOnDatePicker();
-		waitExecuter.sleep(1000);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 		datePicker.selectLast30Days();
-		waitExecuter.sleep(3000);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 		test.log(LogStatus.INFO, "Select this month in date picker");
-
-		waitExecuter.sleep(2000);
 		test.log(LogStatus.INFO, "Navigate different section in memory graph");
 		GraphUtils graphUtils = new GraphUtils();
 		graphUtils.navigateDifferentPointOnGraph(driver, impalaPageObject.queryHighChartContainer);

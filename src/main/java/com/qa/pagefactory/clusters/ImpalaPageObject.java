@@ -98,7 +98,7 @@ public class ImpalaPageObject {
 	@FindBy(css = "svg > g.highcharts-axis-labels.highcharts-yaxis-labels")
 	public List<WebElement> graphYAxisLabels;
 
-	@FindBy(xpath= "//*[@id=\"app\"]/div/div[1]/div/div/div[3]/div[2]/div/h2")
+	@FindBy(xpath= "//div[contains(@id,'impala-table')]/h2")
 	public  WebElement impalaQueriesHeader;
 
 	@FindBy(xpath="//table[@id='runningImpalaQueriesTable']/thead/tr/th")
@@ -106,6 +106,15 @@ public class ImpalaPageObject {
 
 	@FindBy(xpath = "//table[@id='runningImpalaQueriesTable']/tbody/tr")
 	public List<WebElement> impalaQueriesTableRecords;
+
+	@FindBy(xpath = "(//ul[contains(@class,'sub-menu')]/li/span[contains(text(),'Resources')])[1]")
+	public WebElement resourcesTab;
+
+	@FindBy(xpath = "//b[contains(@class,'pointer')]/span")
+	public WebElement resourceUsagePointer;
+
+	@FindBy(xpath = "//div[contains(@class,'dropdown-content-display')]/a[contains(text(),'Impala')]")
+	public WebElement selectImpalaOption;
 
 	public ImpalaPageObject(WebDriver driver) {
 		PageFactory.initElements(driver, this);

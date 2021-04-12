@@ -13,53 +13,55 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.logging.Logger;
+
 /**
  * @author Ankur Jaiswal
  */
 @Marker.ImpalaResources
 @Marker.All
 public class  IM_RES_17 extends BaseClass {
+  private static final Logger LOGGER = Logger.getLogger(IM_RES_17.class.getName());
 
   @Test(dataProvider = "clusterid-data-provider")
   public void verifyDataDisplayedAsFilteredQueue(String clusterId) {
     test = extent.startTest("IM_RES_17.verifyDataDisplayedAsFilteredQueue (" + clusterId + ")", "Validate the \"Group By\" filter for Queue.");
     test.assignCategory(" Cluster/Impala Resources");
 
-    WaitExecuter executer = new WaitExecuter(driver);
+    WaitExecuter waitExecuter = new WaitExecuter(driver);
     ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);
     TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
+    Impala impala = new Impala(driver);
 
-    // Click on Impala tab
-    executer.waitUntilElementClickable(topPanelPageObject.impalaTab);
-    JavaScriptExecuter.clickOnElement(driver, topPanelPageObject.impalaTab);
-    executer.waitUntilElementPresent(impalaPageObject.getImpalaPageHeader);
-    executer.sleep(5000);
+    //Select impala tab
+    test.log(LogStatus.INFO, "Go to resource page");
+    LOGGER.info("Select impala from dropdown");
+    impala.selectImpalaResource();
     HomePage homePage = new HomePage(driver);
     homePage.selectMultiClusterId(clusterId);
-    executer.waitUntilPageFullyLoaded();
+
     try {
       DatePicker datePicker = new DatePicker(driver);
       datePicker.clickOnDatePicker();
-      executer.sleep(1000);
+      waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
       datePicker.selectThisMonth();
-      executer.waitUntilPageFullyLoaded();
+      waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
-      executer.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
-      executer.sleep(3000);
+      waitExecuter.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
+      waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
       impalaPageObject.groupByDropdownButton.click();
       impalaPageObject.groupByQueueList.click();
-      executer.waitUntilPageFullyLoaded();
+      waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
-      Impala impala = new Impala(driver);
       impala.clearFilter();
-      executer.waitUntilPageFullyLoaded();
+      waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
       for (int i = 0; i < impalaPageObject.filterElements.size(); i++) {
         String queueName = impalaPageObject.filterElements.get(i).getText();
         impalaPageObject.filterElements.get(i).click();
-        executer.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         test.log(LogStatus.INFO, "Selecting the queue: " + queueName + " in filter.");
-        executer.sleep(2000);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         boolean isTagPresent = false;
         for (String graphTag : impala.getQueriesGraphLabels()) {
           if (graphTag.equals(queueName)) {
@@ -73,8 +75,11 @@ public class  IM_RES_17 extends BaseClass {
         }
         Assert.assertTrue(isTagPresent, "Filter user not displayed for queue: " + queueName);
         test.log(LogStatus.PASS, "Graph displayed the user based on filter for queue : " + queueName);
+        waitExecuter.sleep(2000);
         impalaPageObject.filterInput.click();
+
       }
+      waitExecuter.sleep(2000);
       impalaPageObject.filterInput.click();
     }
     catch (org.openqa.selenium.StaleElementReferenceException ex)

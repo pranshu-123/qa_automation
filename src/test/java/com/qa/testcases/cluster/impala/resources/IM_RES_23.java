@@ -27,7 +27,7 @@ public class IM_RES_23 extends BaseClass {
         test = extent.startTest("IM_RES_23.verifythedatadisplayedfortheImpalaqueriesTblToolTip (" + clusterId + ")", "Verify if more than 5 hosts exist, the memory chart displays the top-5 hosts .");
         test.assignCategory(" Cluster/Impala Resources");
         test.log(LogStatus.INFO, "Login to the application");
-        WaitExecuter executer = new WaitExecuter(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         DatePicker datePicker = new DatePicker(driver);
         HomePage homePage = new HomePage(driver);
         Impala impala = new Impala(driver);
@@ -35,51 +35,38 @@ public class IM_RES_23 extends BaseClass {
         ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
 
-        // Click on Impala tab
-        executer.waitUntilElementClickable(topPanelPageObject.impalaTab);
-        JavaScriptExecuter.clickOnElement(driver, topPanelPageObject.impalaTab);
-        executer.waitUntilElementPresent(impalaPageObject.getImpalaPageHeader);
-
-        // Click on Impala tab
-        test.log(LogStatus.INFO, "Go to impala page");
-        LOGGER.info("Clicking on Impala tab");
-        executer.waitUntilElementClickable(topPanelPageObject.impalaTab);
-        JavaScriptExecuter.clickOnElement(driver, topPanelPageObject.impalaTab);
-        executer.sleep(1000);
-        executer.waitUntilElementPresent(impalaPageObject.getImpalaPageHeader);
+        //Select impala tab
+        test.log(LogStatus.INFO, "Go to resource page");
+        LOGGER.info("Select impala from dropdown");
+        impala.selectImpalaResource();
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
         // Select the cluster
         test.log(LogStatus.INFO, "Select cluster : " + clusterId);
         LOGGER.info("Select cluster : " + clusterId);
-        executer.sleep(3000);
         homePage.selectMultiClusterId(clusterId);
-        executer.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
         // Select 30 days from date picker
         test.log(LogStatus.INFO, "Select 30 days from date picker");
         LOGGER.info("Select 30 days from date picker");
         datePicker.clickOnDatePicker();
-        executer.sleep(1000);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         datePicker.selectLast30Days();
-        executer.sleep(1000);
-        executer.waitUntilPageFullyLoaded();
-        executer.sleep(1000);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
         // Click on group by dropdown and select queue in filter
         test.log(LogStatus.INFO, "Click on group by dropdown and select queue in filter");
         LOGGER.info("Click on group by dropdown and select queue in filter");
-        executer.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
-        executer.sleep(3000);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
         impalaPageObject.groupByDropdownButton.click();
-        executer.sleep(1000);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         impalaPageObject.groupByQueueList.click();
-        executer.sleep(1000);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         impala.clearFilter();
-        executer.sleep(1000);
-        executer.waitUntilPageFullyLoaded();
-        executer.sleep(1000);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+        waitExecuter.sleep(1000);
 
-        executer.sleep(2000);
         test.log(LogStatus.INFO, "Navigate different section in memory graph");
         GraphUtils graphUtils = new GraphUtils();
         graphUtils.navigateDifferentPointOnGraph(driver, impalaPageObject.queryHighChartContainer);

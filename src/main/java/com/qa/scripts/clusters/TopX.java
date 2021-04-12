@@ -2,15 +2,19 @@ package com.qa.scripts.clusters;
 
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.clusters.TopXPageObject;
+import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.qa.utils.actions.UserActions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 /**
  * @author Ankur Jaiswal
@@ -20,6 +24,7 @@ public class TopX {
     private WaitExecuter waitExecuter;
     private TopXPageObject topXPageObject;
     private UserActions actions;
+    private static final Logger LOGGER = Logger.getLogger(TopX.class.getName());
 
     public void closeConfirmationMessageNotification() {
         if (topXPageObject.confirmationMessageElementClose.size() > 0) {
@@ -48,7 +53,7 @@ public class TopX {
     public void setTopXNumber(String number) {
         waitExecuter.waitUntilElementPresent(topXPageObject.topXNumber);
         waitExecuter.sleep(1000);
-        topXPageObject.topXNumber.clear();
+//        topXPageObject.topXNumber.clear();
         JavaScriptExecuter.clearTextField(driver, topXPageObject.topXNumber);
         actions.performActionWithPolling(topXPageObject.topXNumber,
             UserAction.SEND_KEYS, number);
@@ -103,6 +108,7 @@ public class TopX {
      * Click on user Filter on TopX page
      */
     public void clickOnUserFilter() {
+        waitExecuter.waitUntilElementClickable(topXPageObject.usersSelectTextField);
         actions.performActionWithPolling(topXPageObject.usersSelectTextField, UserAction.CLICK);
     }
 
@@ -174,6 +180,31 @@ public class TopX {
         while (filterItems.size() != 0) {
             JavaScriptExecuter.clickOnElement(driver, filterItems.get(0));
             waitExecuter.waitUntilPageFullyLoaded();
+        }
+    }
+
+    /**
+     * Method to click the report names listed in the Report Archive Page with report name
+     */
+    public void clickOnReportName(ReportsArchiveScheduledPageObject reportPageObj, String name) {
+        List<WebElement> reportNameList = reportPageObj.reportNames;
+        waitExecuter.waitUntilPageFullyLoaded();
+        Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed , expected 9 reports");
+        for (int i = 0; i < reportNameList.size(); i++) {
+            String reportName = reportNameList.get(i).getText().trim();
+            System.out.println("reportName: " + reportName);
+            if (reportName.equals(name)) {
+                LOGGER.info("The report name is " + reportName);
+                int index = i + 1;
+                String iconXpath = "//table/tbody/tr[" + index + "]/td[4]/div/span/span[contains(@class,'icon-calendar')]";
+                //table/tbody/tr[1]/td[4]/div/span/span[contains(@class,'icon-expand')]
+                //System.out.println("iconXpath: "+iconXpath);
+                WebElement iconElement = driver.findElement(By.xpath(iconXpath));
+                waitExecuter.waitUntilElementPresent(iconElement);
+                iconElement.click();
+                waitExecuter.waitUntilPageFullyLoaded();
+                break;
+            }
         }
     }
 }

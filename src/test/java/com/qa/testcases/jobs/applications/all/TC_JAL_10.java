@@ -61,7 +61,8 @@ public class TC_JAL_10 extends BaseClass {
         for (int i = 0; i < appTypes.size(); i++) {
             listOfAppTypes.add(appTypes.get(i).getText().trim());
         }
-        Assert.assertTrue(listOfAppTypes.equals(existingAppTypes),
+
+        Assert.assertTrue(listOfAppTypes.containsAll(existingAppTypes),
                 "Application types displayed does not match the expected list");
         test.log(LogStatus.PASS, "Application types displayed match the expected list ");
         // Select individual app and assert that table contain its data.

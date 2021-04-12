@@ -14,6 +14,8 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[1]")
     public WebElement getSummaryFromTable;
 
+    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[1]")
+    public WebElement getTypeFromTable;
 
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[5]")
     public WebElement getClusterId;
@@ -24,8 +26,20 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//span[(text()='Read')]//following-sibling::a[contains(@class,'sorting')]")
     public WebElement sortByReadApp;
 
+    @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-up')]")
+    public WebElement sortUp;
+
+    @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-down')]")
+    public WebElement sortDown;
+
+    @FindBy(xpath = "//span[(text()='Read')]//following-sibling::a[contains(@class,'sorting icon-sort icon-sort-sorted-down')]")
+    public WebElement sortApp;
+
     @FindBy(xpath = "//span[(text()='Write')]//following-sibling::a[contains(@class,'sorting')]")
     public WebElement sortByWriteApp;
+
+    @FindBy(xpath = "//span[(text()='Duration')]//following-sibling::a[contains(@class,'sorting')]")
+    public WebElement sortByDurationApp;
 
     @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[11]//span[@class='icon-tuning']")
     public List<WebElement> checkInsightsApp;
@@ -51,8 +65,24 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id='taskattemptmap']//*[div and @class='footer']/div/*/span[2]")
     public List<WebElement> taskAttFooterVal;
 
-    @FindBy(xpath = "//*[@id=\"taskattemptmap\"]//*[name()='svg']/*[name()='text' and @class='highcharts-subtitle']/*")
+    @FindBy(xpath = "//*[@id=\"taskattempts\"]//*[name()='svg']/*[name()='text' and @class='highcharts-subtitle']/*")
     public WebElement resourcesPieChartInternalVal;
+
+    @FindBy(xpath = "//*[@id=\"taskattemptmap\"]//*[name()='svg']/*[name()='text' and @class='highcharts-subtitle']/*")
+    public WebElement resourcesChartInternalVal;
+
+    @FindBy(xpath = "//body[1]//div[1]/*[local-name()='svg'][1]/*[name()='g'][6]/*[name()='g'][1]/*[name()='rect'][1]")
+    public WebElement resourcesContainsInternalVal;
+
+    @FindBy(xpath = "//div[@class='container-fluid']//div[contains(@class,'dashboard-module')]//div[@class='footer']//span")
+    public List<WebElement> kafkaMetricsFooter;
+
+    @FindBy(xpath = "//div[@class='component-dashboard']//div[contains(@class,'col-md-6')]" +
+            "//div[@class='content']//*[name()='g' and @class='highcharts-series-group']")
+    public List<WebElement> kafkaMetricsGraph;
+
+    @FindBy(xpath = "//div[@class='component-dashboard']//div[contains(@class,'col-md-6')]")
+    public List<WebElement> kafkaMetrics;
 
     @FindBy(xpath = "//*[@id='taskattemptreduce']//*[div and @class='footer']/div/*/span[1]")
     public List<WebElement> taskAttReduceFooterName;
@@ -302,7 +332,7 @@ public class MrAppsDetailsPageObject {
     public WebElement DAGData;
 
     //Resources Tab xpath
-    @FindBy(xpath = "//*[@id='app']/div/div/div[2]/div/div/div[2]/div[3]//div[1]/div[1]//div[1]/h4")
+    @FindBy(xpath = "//div[@class=\"component-dashboard\"]//*[@class=\"header\"]/h4")
     public List<WebElement> resourcesGraphTitle;
 
     @FindBy(xpath = "//*[@class=\"highcharts-series-group\"]")
@@ -329,7 +359,7 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@class='col-md-12 no-left-gutter no-right-gutter']//*[@role='presentation'][1]")
     public WebElement resourcesMetricsDropDown;
 
-    @FindBy(xpath = " //h4[normalize-space()='Containers']")
+    @FindBy(xpath = "//div[@class='component-dashboard']//div[contains(@class,'col-md-6')]//div[@class='header']/h4")
     public List<WebElement> containerMetricsHeader;
 
     @FindBy(xpath = "//div[@class='container-fluid']//div[contains(@class,'dashboard-module')]" +
@@ -346,6 +376,9 @@ public class MrAppsDetailsPageObject {
 
     @FindBy(xpath = "//*[@class=\"legendclass\"]//span")
     public List<WebElement> resourcesMetricsPlotGraphLegend;
+
+    @FindBy(xpath = "//*[@chart-options='getappResourceUseageOptions']//*[name()='path' and @class='highcharts-tracker-line']")
+    public List<WebElement> resourcesMetricsLineGraph;
 
     //Detailed stage's Tab xpath
     @FindBy(xpath = "//*[@id='sparkStageNavigation-body']//tr")

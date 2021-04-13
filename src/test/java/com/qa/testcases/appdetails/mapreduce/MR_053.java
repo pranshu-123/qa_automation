@@ -47,9 +47,19 @@ public class MR_053 extends BaseClass {
         int totalMapReduceAppCnt = mrDetailsPage.clickOnlyLink("Map Reduce");
         int appCount = 0;
         if (totalMapReduceAppCnt > 0) {
+            mrApps.sortByReadApp.click();
+            waitExecuter.waitUntilPageFullyLoaded();
+            mrApps.sortUp.click();
+            waitExecuter.sleep(2000);
             applicationsPageObject.expandStatus.click();
             appCount = mrDetailsPage.clickOnlyLink("Success");
             waitExecuter.waitUntilPageFullyLoaded();
+            waitExecuter.sleep(2000);
+            mrApps.sortByDurationApp.click();
+            waitExecuter.waitUntilPageFullyLoaded();
+            mrApps.sortUp.click();
+            waitExecuter.sleep(2000);
+
             //Clicking on the Map reduce app must go to apps detail page and verify Data Tabs must be available on UI
             if (appCount > 0) {
                 String headerAppId = mrDetailsPage.verifyAppId(mrApps, applicationsPageObject);

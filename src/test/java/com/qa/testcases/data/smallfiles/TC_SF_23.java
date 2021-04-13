@@ -55,19 +55,18 @@ public class TC_SF_23 extends BaseClass {
         test.log(LogStatus.PASS, "Verified the absolute size  poulated :" + heading);
 
         try {
+            waitExecuter.waitUntilElementPresent(smallfilesPageObject.confirmationMessageElement);
             waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
                     "Small file Report completed successfully.");
+            waitExecuter.sleep(3000);
             test.log(LogStatus.PASS, "Verified smallfiles report is loaded properly.");
             logger.info("Verified smallfiles report is loaded properly");
         } catch (TimeoutException te) {
             waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
                     "Small file Report completed successfully.");
         }
-        catch (Exception te) {
-            throw new AssertionError("smallfiles Report not completed successfully."+te.getMessage());
+        catch (VerifyError te) {
+            throw new AssertionError("smallfiles Report not completed successfully."+te);
         }
-
-         smallfiles.validateReportPage(smallfilesPageObject);
-         test.log(LogStatus.PASS, "Validated Reports page successfully");
     }
 }

@@ -69,6 +69,7 @@ public class TC_SF_03 extends BaseClass {
         test.log(LogStatus.INFO, "Clicked on Modal Run Button");
 
         try {
+            waitExecuter.waitUntilElementPresent(smallfilesPageObject.confirmationMessageElement);
             waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
                     "Small file Report completed successfully.");
             waitExecuter.sleep(3000);

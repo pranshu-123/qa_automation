@@ -72,6 +72,7 @@ public class TC_SF_05 extends BaseClass {
         test.log(LogStatus.PASS, "Verified the absolute size  poulated :"+heading);
 
         try {
+            waitExecuter.waitUntilElementPresent(smallfilesPageObject.confirmationMessageElement);
             waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
                     "Small file Report completed successfully.");
             waitExecuter.sleep(3000);

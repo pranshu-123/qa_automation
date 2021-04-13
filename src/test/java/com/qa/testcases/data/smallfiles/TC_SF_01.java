@@ -61,7 +61,6 @@ public class TC_SF_01 extends BaseClass {
         smallfiles.navigateToSmallFileReport(smallfilesPageObject,test,"256","512"
                 ,"1","10");
         userActions.performActionWithPolling(smallfilesPageObject.modalRunButton, UserAction.CLICK);
-        /*smallfiles.clickOnModalRunButton();*/
         waitExecuter.sleep(3000);
         LOGGER.info("Clicked on Modal Run Button");
         test.log(LogStatus.INFO, "Clicked on Modal Run Button");
@@ -70,6 +69,7 @@ public class TC_SF_01 extends BaseClass {
             waitExecuter.waitUntilElementPresent(smallfilesPageObject.confirmationMessageElement);
             waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
                     "Small file Report completed successfully.");
+            waitExecuter.waitUntilPageFullyLoaded();
 
             test.log(LogStatus.PASS, "Verified smallfiles report is loaded properly.");
             LOGGER.info("Verified smallfiles report is loaded properly");

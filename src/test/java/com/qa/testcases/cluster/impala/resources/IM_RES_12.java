@@ -13,40 +13,39 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.logging.Logger;
+
 @Marker.ImpalaResources
 @Marker.All
 public class IM_RES_12 extends BaseClass {
+    private static final Logger LOGGER = Logger.getLogger(IM_RES_12.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void verifyGroupByFilterForQueue(String clusterId) {
         test = extent.startTest("IM_RES_12.verifyGroupByFilterForQueue (" + clusterId + ")", "Validate the \"Group By\" filter for Queue.");
         test.assignCategory(" Cluster/Impala Resources");
-        WaitExecuter executer = new WaitExecuter(driver);
-
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        Impala impala = new Impala(driver);
         ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-
-        // Click on Impala tab
-        executer.waitUntilElementClickable(topPanelPageObject.impalaTab);
-        JavaScriptExecuter.clickOnElement(driver, topPanelPageObject.impalaTab);
-        executer.waitUntilElementPresent(impalaPageObject.getImpalaPageHeader);
-
         HomePage homePage = new HomePage(driver);
-        executer.sleep(2000);
+        //Select impala tab
+        test.log(LogStatus.INFO, "Go to resource page");
+        LOGGER.info("Select impala from dropdown");
+        impala.selectImpalaResource();
+
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         homePage.selectMultiClusterId(clusterId);
-        executer.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
-        executer.sleep(1000);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         datePicker.selectLast30Days();
-        executer.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         test.log(LogStatus.INFO, "Select Date from DatePicker.");
-
-        Impala impala = new Impala(driver);
-        executer.sleep(3000);
         impala.selectQueueInGroupBy();
-        executer.sleep(1000);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         test.log(LogStatus.INFO, "Select Queue in Group by option.");
 
         // Validate of Memory graph is present for selected date range

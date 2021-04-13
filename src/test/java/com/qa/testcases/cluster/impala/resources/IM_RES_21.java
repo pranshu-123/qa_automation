@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * @author Ankur Jaiswal
@@ -23,6 +24,7 @@ import java.util.List;
 @Marker.ImpalaResources
 @Marker.All
 public class IM_RES_21 extends BaseClass {
+  private static final Logger LOGGER = Logger.getLogger(IM_RES_21.class.getName());
 
   @Test(dataProvider = "clusterid-data-provider")
   public void validateUserCheckbox(String clusterId) {
@@ -30,42 +32,44 @@ public class IM_RES_21 extends BaseClass {
     test.assignCategory(" Cluster/Impala Resources");
 
     JavaScriptExecuter.scrollViewWithYAxis(driver, 0);
-    WaitExecuter executer = new WaitExecuter(driver);
+    WaitExecuter waitExecuter = new WaitExecuter(driver);
     ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);
     TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
+    Impala impala = new Impala(driver);
 
-    // Click on Impala tab
-    executer.waitUntilElementClickable(topPanelPageObject.impalaTab);
-    JavaScriptExecuter.clickOnElement(driver, topPanelPageObject.impalaTab);
-    executer.waitUntilElementPresent(impalaPageObject.getImpalaPageHeader);
+    //Select impala tab
+    test.log(LogStatus.INFO, "Go to resource page");
+    LOGGER.info("Select impala from dropdown");
+    impala.selectImpalaResource();
+    waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
     HomePage homePage = new HomePage(driver);
     homePage.selectMultiClusterId(clusterId);
-    executer.waitUntilPageFullyLoaded();
+    waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
     try {
       DatePicker datePicker = new DatePicker(driver);
       datePicker.clickOnDatePicker();
-      executer.sleep(1000);
+      waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
       datePicker.selectThisMonth();
-      executer.waitUntilPageFullyLoaded();
+      waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
-      executer.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
-      executer.sleep(3000);
+      waitExecuter.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
+      waitExecuter.sleep(3000);
       MouseActions.clickOnElement(driver, impalaPageObject.groupByDropdownButton);
       MouseActions.clickOnElement(driver, impalaPageObject.groupByQueueList);
-      executer.waitUntilPageFullyLoaded();
+      waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
       JavaScriptExecuter.scrollViewWithYAxis(driver, -100);
 
       int scrollY = 150;
       JavaScriptExecuter.scrollViewWithYAxis(driver, scrollY);
 //    scrollY = scrollY + datePicker.getDatePickerYPosition();
 
-      Impala impala = new Impala(driver);
+
       String user = impala.getQueriesGraphLabels().get(0);
       test.log(LogStatus.INFO, "Deselecting the user: " + user);
-      executer.sleep(5000);
+      waitExecuter.sleep(5000);
       JavaScriptExecuter.clickOnElement(driver, impalaPageObject.queriesFooterLabels.get(0));
-      executer.sleep(2000);
+      waitExecuter.sleep(2000);
 
       GraphUtils graphUtils = new GraphUtils();
       List<String> graphColors = graphUtils.getGraphContentColors(impalaPageObject.queryHighChartContainer
@@ -79,7 +83,7 @@ public class IM_RES_21 extends BaseClass {
       test.log(LogStatus.PASS, "Successfully validated user is not displayed when user checkbox is deselected.");
 
       impalaPageObject.queriesFooterLabels.get(0).click();
-      executer.sleep(2000);
+      waitExecuter.sleep(2000);
       test.log(LogStatus.INFO, "Selecting the user: " + user);
       graphColors = graphUtils.getGraphContentColors(impalaPageObject.queryHighChartContainer
               .findElement(impalaPageObject.graphGContents));

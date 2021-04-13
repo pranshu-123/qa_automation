@@ -30,11 +30,11 @@ public class IM_RES_03 extends BaseClass {
 
     WaitExecuter executer = new WaitExecuter(driver);
     ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);
+    Impala impala = new Impala(driver);
     TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
 
-    // Click on Impala tab
-    MouseActions.clickOnElement(driver, topPanelPageObject.impalaTab);
-    executer.waitUntilElementPresent(impalaPageObject.getImpalaPageHeader);
+    // Click on Resources tab and select Impala
+    impala.selectImpalaResource();
 
     HomePage homePage = new HomePage(driver);
     homePage.selectMultiClusterId(clusterId);
@@ -46,7 +46,6 @@ public class IM_RES_03 extends BaseClass {
     datePicker.selectThisMonth();
     executer.waitUntilPageFullyLoaded();
 
-    Impala impala = new Impala(driver);
     List<String> memoryDateLabels = impala.getGraphDateLabel("memory");
     List<String> queriesDateLabels = impala.getGraphDateLabel("queries");
     Assert.assertFalse(memoryDateLabels.isEmpty() || queriesDateLabels.isEmpty(),

@@ -46,25 +46,24 @@ public class IM_RES_26 extends BaseClass {
 		datePickerPageObject = new DatePickerPageObject(driver);
 		HomePage homePage = new HomePage(driver);
 
-		// Click on Impala tab
-		test.log(LogStatus.INFO, "Go to impala page");
-		LOGGER.info("Clicking on Impala tab");
-		waitExecuter.waitUntilElementClickable(impalaPageObject.clusterImpalaTab);
-		JavaScriptExecuter.clickOnElement(driver, impalaPageObject.clusterImpalaTab);
-		waitExecuter.waitUntilElementPresent(impalaPageObject.getImpalaPageHeader);
-		waitExecuter.sleep(8000);
+		//Select impala tab
+		test.log(LogStatus.INFO, "Go to resource page");
+		LOGGER.info("Select impala from dropdown");
+		impala.selectImpalaResource();
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
 		// Select the cluster
 		test.log(LogStatus.INFO, "Select cluster : " + clusterId);
 		LOGGER.info("Select cluster : " + clusterId);		
 		homePage.selectMultiClusterId(clusterId);
-		waitExecuter.sleep(1000);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
 		// Select custom date
 		picker.clickOnDatePicker();
-		waitExecuter.sleep(3000);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 		picker.selectCustomRange();
-		waitExecuter.sleep(3000);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+
 		// Set start date in calendar
 		LOGGER.info("Set the start date");
 		waitExecuter.waitUntilElementClickable(impalaPageObject.customRangeStartDate);
@@ -79,6 +78,7 @@ public class IM_RES_26 extends BaseClass {
 		LOGGER.info("Click on apply button");
 		test.log(LogStatus.INFO, "Click on apply button");
 		impalaPageObject.applyBtn.click();
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
 		LOGGER.info("Verify Memory graph is displayed with No data to display");
 		test.log(LogStatus.INFO, "Verify Memory graph is displayed with No data to display");

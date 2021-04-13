@@ -96,13 +96,16 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//*[@class='base-modal-backdrop']//tr")
   public List<WebElement> moreInfoTableRows;
 
-  @FindBy(xpath = "(//*[@class='icon-expand is-enabled'])[1]")
+  //@FindBy(xpath = "(//*[@class='icon-expand is-enabled'])[1]")
+  @FindBy(xpath = "//span[contains(@class,'icon-expand')]")
   public WebElement viewReportIcon;
 
-  @FindBy(xpath = "(//*[@class='icon-edit is-enabled'])[1]")
+  //@FindBy(xpath = "(//*[@class='icon-edit is-enabled'])[1]")
+  @FindBy(xpath = "//span[contains(@class,'icon-edit')]")
   public WebElement editReportIcon;
 
-  @FindBy(xpath = "(//*[@class='icon-delete is-enabled'])[1]")
+  //@FindBy(xpath = "(//*[@class='icon-delete is-enabled'])[1]")
+  @FindBy(xpath="//span[contains(@class,'icon-delete')]")
   public WebElement deleteReportIcon;
 
   @FindBy(xpath = "(//*[@class='icon-calendar is-enabled'])")

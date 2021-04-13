@@ -52,14 +52,16 @@ public class TC_CTX_26 extends BaseClass {
         ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);
         LOGGER.info("Click on + button", test);
         String statusXpath = reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.TopX);
-
+        waitExecuter.waitUntilPageFullyLoaded();
         topX.clickOnUserFilter();
-        for (int filterDropDown=0; filterDropDown<topX.getFilterDropDowns().size(); filterDropDown++) {
+        //int size = topX.getFilterDropDowns().size();
+        //for (int filterDropDown=0; filterDropDown<size; filterDropDown++) {
             topX.clearFilter();
+            topX.setTopXNumber("30");
             waitExecuter.sleep(2000);
-            String userFilter = topX.getFilterDropDowns().get(filterDropDown).getText();
+            String userFilter = topX.getFilterDropDowns().get(0).getText();
             LOGGER.info("Click on user filter: " + userFilter, test);
-            userActions.performActionWithPolling(topX.getFilterDropDowns().get(filterDropDown), UserAction.CLICK);
+            userActions.performActionWithPolling(topX.getFilterDropDowns().get(0), UserAction.CLICK);
             topX.clickOnModalRunButton();
 
 //            try {
@@ -87,6 +89,6 @@ public class TC_CTX_26 extends BaseClass {
 //            topX.clickOnRunButton();
 //            topX.clickOnUserFilter();
             test.log(LogStatus.PASS, "Verified filter is displayed for user on TopX report.");
-        }
+        //}
     }
 }

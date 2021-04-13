@@ -25,37 +25,37 @@ public class IM_RES_25 extends BaseClass {
     public void verifyusertotheapplicationdetailspage(String clusterId) {
         test = extent.startTest("IM_RES_25.verifyusertotheapplicationdetailspage (" + clusterId + ")", "Verify UI should open the Impala details page.");
         test.assignCategory(" Cluster/Impala Resources");
-        WaitExecuter executer = new WaitExecuter(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         HomePage homePage = new HomePage(driver);
+        Impala impala = new Impala(driver);
 
         ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
 
-        // Click on Impala tab
-        executer.waitUntilElementClickable(topPanelPageObject.impalaTab);
-        JavaScriptExecuter.clickOnElement(driver, topPanelPageObject.impalaTab);
-        executer.waitUntilElementPresent(impalaPageObject.getImpalaPageHeader);
+        //Select impala tab
+        test.log(LogStatus.INFO, "Go to resource page");
+        LOGGER.info("Select impala from dropdown");
+        impala.selectImpalaResource();
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
         test.log(LogStatus.INFO, "Select cluster : " + clusterId);
         LOGGER.info("Select cluster : " + clusterId);
-        executer.sleep(3000);
         homePage.selectMultiClusterId(clusterId);
-        executer.waitUntilPageFullyLoaded();
-        Impala impala = new Impala(driver);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+
         try {
             DatePicker datePicker = new DatePicker(driver);
             datePicker.clickOnDatePicker();
-            executer.waitUntilPageFullyLoaded();
-            executer.sleep(1000);
+            waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
             datePicker.selectLast30Days();
-            executer.waitUntilPageFullyLoaded();
+            waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
             test.log(LogStatus.INFO, "Select Date from DatePicker.");
 
-            executer.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
-            executer.sleep(3000);
+            waitExecuter.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
+            waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
             MouseActions.clickOnElement(driver, impalaPageObject.groupByDropdownButton);
             MouseActions.clickOnElement(driver, impalaPageObject.groupByQueueList);
-            executer.waitUntilPageFullyLoaded();
+            waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
             JavaScriptExecuter.scrollViewWithYAxis(driver, -100);
 
             int scrollY = 150;

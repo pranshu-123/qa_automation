@@ -574,6 +574,49 @@ public class TezAppsDetailsPage {
             }
         }
     }
+/*
+
+    */
+/**
+     * Method to validate the stage table header and the data. if
+     * validateExecutorTab = true, validate each jobs execution tabs data
+     *//*
+
+    public void validateStageAndStageData(int navigationRows, List<WebElement> navigationRowList,
+                                          SparkAppsDetailsPageObject sparkPageObj, Boolean validateExecutorTab, Boolean validateStageTabs) {
+        if (navigationRows > 0) {
+            String[] expectedHeader = { "Stage ID", "Start Time", "Duration", "Tasks", "Shuffle Read", "Shuffle Write",
+                    "Input", "Output" };
+            // click the jobId to sort it .
+            MouseActions.clickOnElement(driver, sparkPageObj.singleJobHeader);
+            for (int rows = 0; rows < navigationRows; rows++) {
+                navigationRowList.get(rows).click();
+                waitExecuter.sleep(2000);
+                if (validateExecutorTab) {
+                    verifyAssertTrue(sparkPageObj.DAGData.isDisplayed(), sparkPageObj, " Dag data is not displayed ");
+                    logger.info("Dags data is displayed ");
+                    List<WebElement> rddBlockList = sparkPageObj.rddBlockList;
+                    verifyAssertFalse(rddBlockList.isEmpty(), sparkPageObj, "No DAGs data");
+                    logger.info("No. of RDD blocks in the flow chart is " + rddBlockList.size());
+                    for (int i = 0; i < rddBlockList.size(); i++) {
+                        verifyAssertTrue(rddBlockList.get(i).isDisplayed(), sparkPageObj,
+                                "FlowChart doesnot have the RDD blocks displayed");
+                    }
+                    List<WebElement> rddNumberList = sparkPageObj.rddBlockNumList;
+                    verifyAssertFalse(rddNumberList.isEmpty(), sparkPageObj, "Rdd block numbers are present");
+                }
+                List<WebElement> stageHeaderList = sparkPageObj.stageHeaders;
+                for (int i = 0; i < stageHeaderList.size(); i++) {
+                    Assert.assertNotSame("", stageHeaderList.get(i).getText());
+                    Assert.assertEquals(expectedHeader[i], stageHeaderList.get(i).getText(),
+                            "expected stage header do not match to the one in the UI");
+                }
+                if (validateStageTabs)
+                    validateStagesTabs();
+            }
+        }
+    }
+*/
 
     /**
      * Method to verify Dags tabs
@@ -915,6 +958,7 @@ public class TezAppsDetailsPage {
         String statusTable = tezApps.Status.getText();
         LOGGER.info("Tez application Id is " + statusTable);
         tezApps.getTypeFromTable.click();
+        waitExecuter.waitUntilPageFullyLoaded();
         String AppSummaryDbName = tezApps.getDbname.getText().trim();
         LOGGER.info("Tez Status is " + AppSummaryDbName);
         waitExecuter.sleep(5000);

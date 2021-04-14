@@ -50,6 +50,8 @@ public class TEZ_134 extends BaseClass {
         int appCount = tezDetailsPage.clickOnlyLink("Success");
         //Clicking on the Tez app must go to apps detail page
         if (appCount > 0) {
+            tezApps.getTypeFromTable.click();
+            waitExecuter.waitUntilPageFullyLoaded();
             tezDetailsPage.verifyDagsComponent(tezApps, true, true, false);
             test.log(LogStatus.SKIP, "Verified left pane in the app details page successfully");
             //Close apps details page

@@ -308,6 +308,10 @@ public class DatePicker {
     }
 
 
+    /*Select any date for start and end date through custom
+    @startDateInMinus - Define days in minus from that of current date
+    @endDateInMinus - Define days in minus from that of current date
+     */
     public void setStartAndEndDateFromCurrentDate(Integer startDateInMinus, Integer endDateInMinus) {
         waitExecuter.sleep(2000);
         setStartDate(DateUtils.getPastDate(startDateInMinus));

@@ -66,6 +66,10 @@ public class TC_SF_04 extends BaseClass {
         test.log(LogStatus.PASS, "Cluster is displayed in dropdown.");
         test.log(LogStatus.INFO, "All clusterId count: "+smallfilesPageObject.clusterList.size());
 
+        //Close apps details page
+        MouseActions.clickOnElement(driver, smallfilesPageObject.closebutton);
+        waitExecuter.sleep(3000);
+
 
 
         }

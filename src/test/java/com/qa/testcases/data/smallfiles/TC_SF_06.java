@@ -74,7 +74,7 @@ public class TC_SF_06 extends BaseClass {
             waitExecuter.waitUntilElementPresent(smallfilesPageObject.confirmationMessageElement);
             waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
                     "Small file Report completed successfully.");
-            waitExecuter.sleep(3000);
+            waitExecuter.sleep(5000);
             test.log(LogStatus.PASS, "Verified smallfiles report is loaded properly.");
             LOGGER.info("Verified smallfiles report is loaded properly");
         } catch (TimeoutException te) {

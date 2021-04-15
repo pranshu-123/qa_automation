@@ -55,13 +55,10 @@ public class TC_SF_40 extends BaseClass {
             logger.info("Define day of the week as- Daily and time as- 10:30");
             smallfiles.selectDayTime("Daily", "10", "30");
             waitExecuter.waitUntilPageFullyLoaded();
-            userActions.performActionWithPolling(smallfilesPageObject.modalRunButton, UserAction.CLICK);
+            userActions.performActionWithPolling(smallfilesPageObject.runSheduleButton, UserAction.CLICK);
+            logger.info("Clicked on Modal Shedule Button");
+            test.log(LogStatus.INFO, "Clicked on Modal Shedule Button");
             waitExecuter.waitUntilPageFullyLoaded();
-            logger.info("Clicked on Modal Schedule Button");
-            test.log(LogStatus.INFO, "Clicked on Modal Schedule Button");
-
-            logger.info("Clicked on modal Schedule Button");
-            test.log(LogStatus.INFO, "Clicked on modal Schedule Button");
             String scheduleSuccessMsg = "The report has been scheduled successfully.";
             smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
 

@@ -54,11 +54,10 @@ public class TC_SF_38 extends BaseClass {
             waitExecuter.waitUntilPageFullyLoaded();
             userActions.performActionWithPolling(smallfilesPageObject.modalRunButton, UserAction.CLICK);
             waitExecuter.waitUntilPageFullyLoaded();
-            logger.info("Clicked on Modal Schedule Button");
-            test.log(LogStatus.INFO, "Clicked on Modal Schedule Button");
-
-            logger.info("Clicked on modal Schedule Button");
-            test.log(LogStatus.INFO, "Clicked on modal Schedule Button");
+            userActions.performActionWithPolling(smallfilesPageObject.runSheduleButton, UserAction.CLICK);
+            logger.info("Clicked on Modal Shedule Button");
+            test.log(LogStatus.INFO, "Clicked on Modal Shedule Button");
+            waitExecuter.waitUntilPageFullyLoaded();
             String scheduleSuccessMsg = "The report has been scheduled successfully.";
             smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
         } catch (Exception te) {

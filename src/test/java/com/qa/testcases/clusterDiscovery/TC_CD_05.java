@@ -52,10 +52,12 @@ public class TC_CD_05 extends BaseClass {
         test.log(LogStatus.INFO, "Click on Run button to open report page");
         LOGGER.info("Click on Run button to open report page");
         QueueAction.performActionWithPolling(cdPageObject.runButton, UserAction.CLICK);
+        waitExecuter.waitUntilPageFullyLoaded();
 
         // Click on Run button of modal window
         test.log(LogStatus.INFO, "Click on Run button of modal window");
         discovery.clickRunModalButton();
+        waitExecuter.waitUntilPageFullyLoaded();
 
         try {
             waitExecuter.waitUntilTextToBeInWebElement(cdPageObject.confirmationMessageElement,
@@ -69,6 +71,7 @@ public class TC_CD_05 extends BaseClass {
             // Get By Queue type count from pie chart
             waitExecuter.waitUntilElementPresent(cdPageObject.getByQueuePieCount);
             int totalQueues = Integer.parseInt(cdPageObject.getByQueuePieCount.getText());
+            waitExecuter.waitUntilPageFullyLoaded();
             LOGGER.info("Total Queues in cluster discovery pie chart- " + totalQueues);
             test.log(LogStatus.INFO, "Total Queues in cluster discovery pie chart- " + totalQueues);
 
@@ -78,10 +81,12 @@ public class TC_CD_05 extends BaseClass {
             // Select last 30 days from date picker
             test.log(LogStatus.INFO, "Select last 30 days");
             discovery.selectLast30Days();
+            waitExecuter.waitUntilPageFullyLoaded();
 
             test.log(LogStatus.INFO, "Selecting cluster as of defined in cluster discovery page");
             LOGGER.info("Selecting cluster as of defined in cluster discovery page");
             allApps.selectCluster(clusterName);
+            waitExecuter.waitUntilPageFullyLoaded();
             // Get jobs count of hive, tez, spark and MR Queues
             test.log(LogStatus.INFO, "Get jobs count of hive, tez, spark and MR Queues");
             LOGGER.info("Get jobs count of hive, tez, spark and MR Queues");

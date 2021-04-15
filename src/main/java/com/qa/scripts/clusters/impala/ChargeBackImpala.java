@@ -235,12 +235,12 @@ public class ChargeBackImpala {
     public void validateGroupByPieCharts() {
         for (WebElement element : chargebackImpalaPageObject.pieChartGroupBySearchBoxs) {
             Boolean isGroupingDisplayed = false;
-            for (WebElement groupByOptionDivPieChart : element.findElements(By.xpath("//child::div"))) {
+            //for (WebElement groupByOptionDivPieChart : element.findElements(By.xpath("//child::div"))) {
                 waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
-                if (!groupByOptionDivPieChart.getText().equalsIgnoreCase("")) {
+                if (!element.getText().equalsIgnoreCase("")) {
                     isGroupingDisplayed = true;
                 }
-            }
+            //}
             Assert.assertTrue(isGroupingDisplayed, "Group by option not displayed for pie chart");
         }
     }

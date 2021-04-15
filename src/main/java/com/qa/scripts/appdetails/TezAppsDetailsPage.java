@@ -546,24 +546,8 @@ public class TezAppsDetailsPage {
                             LOGGER.info("The header is " + headerList.get(i).getText());
                             Assert.assertNotSame("", headerList.get(i).getText());
                         }
-                    }
-                    validateStageAndStageData(DagsRows, navigationRowList, tezApps, validateExecutorTab, validateStageTab);
+            }
                     break;
-                /*case 1:
-                    //The component is Gantt Chart ,click it and then verify the no. rows in the table
-                    Assert.assertEquals(tabName, "Dags", "Gantt Chart tab not present");
-                    MouseActions.clickOnElement(driver, componentList.get(j));
-                    List<WebElement> ganttChartTableRows = tezApps.ganttChartTable;
-                    LOGGER.info("No. of rows in Gantt Chart tables are " + ganttChartTableRows.size());
-                    if (validateCompData) {
-                        List<WebElement> headerList = tezApps.ganttChartHeaders;
-                        verifyAssertFalse(headerList.isEmpty(), tezApps, " No headers for Gantt Chart table for application");
-                        for (int i = 0; i < headerList.size(); i++) {
-                            LOGGER.info("The header is " + headerList.get(i).getText());
-                            Assert.assertNotSame("", headerList.get(i).getText());
-                        }
-                    }
-                    break;*/
                 case 2:
                     Assert.assertEquals(tabName, DagsRows + " Jobs", "Jobs text not present");
                     String[] jobCountArr = componentList.get(j).getText().split("\\s+");

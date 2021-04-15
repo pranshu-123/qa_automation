@@ -54,7 +54,7 @@ public class TC_HIVE_52 extends BaseClass {
 		LOGGER.info("Select last 30 days");
 		datePicker.clickOnDatePicker();
 		waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
-		datePicker.selectLast30Days();
+		datePicker.selectLastOneHour();
 		waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
 		// Select cluster
 		test.log(LogStatus.INFO, "Select clusterid : " + clusterId);

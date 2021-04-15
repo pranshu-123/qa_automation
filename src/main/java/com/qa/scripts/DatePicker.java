@@ -306,4 +306,12 @@ public class DatePicker {
         }
         return list;
     }
+
+
+    public void setStartAndEndDateFromCurrentDate(Integer startDateInMinus, Integer endDateInMinus) {
+        waitExecuter.sleep(2000);
+        setStartDate(DateUtils.getPastDate(startDateInMinus));
+        waitExecuter.sleep(2000);
+        setEndDate(DateUtils.getPastDate(endDateInMinus));
+    }
 }

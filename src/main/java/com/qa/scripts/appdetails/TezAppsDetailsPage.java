@@ -664,7 +664,6 @@ public class TezAppsDetailsPage {
         waitExecuter.waitUntilElementPresent(tezApps.Cluster);
         String Cluster = tezApps.Cluster.getText().trim();
         test.log(LogStatus.PASS, "Cluster  is displayed in the Header: " + Cluster);
-        waitExecuter.waitUntilElementPresent(tezApps.Queue);
         String Queue = tezApps.Queue.getText().trim();
         waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Queue  is displayed in the Header: " + Queue);

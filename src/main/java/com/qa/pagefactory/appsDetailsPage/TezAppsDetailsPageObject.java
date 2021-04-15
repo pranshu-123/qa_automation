@@ -57,7 +57,6 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//div[@id='SummaryDetails']//div[3]")
     public WebElement getDbname;
 
-
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[7]")
     public WebElement getduration;
 
@@ -74,7 +73,7 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span/span")
     public WebElement getHeaderAppId;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[2]")
+    @FindBy(css = "div[class='close']")
     public WebElement closeAppsPageTab;
 
     @FindBy(xpath = "//a[@href='#/clusters/overview']")
@@ -163,15 +162,14 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"highcharts-vjvb3sy-64\"]/svg/rect[1]")
     public WebElement Dags;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[1]/span[1]")
+    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div/span[1]")
     public WebElement Owner;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[1]/span[2]")
+    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div/span[2]")
     public WebElement Cluster;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[1]/span[3]")
+    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div/span[3]")
     public WebElement Queue;
-
 
     @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[1]/div/div[2]/div/div/div/div[1]/div/p/b")
     public List<WebElement> ganttChartHeaders;

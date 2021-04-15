@@ -3,6 +3,7 @@ package com.qa.testcases.jobs.applications.all;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
+import com.qa.scripts.DatePicker;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
@@ -28,11 +29,23 @@ public class TC_JAL_08 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         AllApps allApps = new AllApps(driver);
+        DatePicker datePicker = new DatePicker(driver);
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         test.log(LogStatus.INFO, "Select last 7 days");
         test.log(LogStatus.INFO, "Select clusterId : " + clusterId);
-        allApps.inJobsSelectClusterAndLast7Days(clusterId);
+        allApps.navigateToJobsTab();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+        datePicker.clickOnDatePicker();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+        datePicker.selectCustomRange();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+        datePicker.setStartAndEndDateFromCurrentDate(-3,-1);
+        datePicker.clickOnCustomDateApplyBtn();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+        allApps.selectCluster(clusterId);
+
+        //allApps.inJobsSelectClusterAndLast7Days(clusterId);
         // Get total app counts before applying filter
         String totalCountBeforeFilter = applicationsPageObject.getTotalAppCount.getText();
         waitExecuter.sleep(1000);

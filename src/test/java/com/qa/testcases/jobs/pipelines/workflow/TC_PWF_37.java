@@ -23,11 +23,11 @@ import com.relevantcodes.extentreports.LogStatus;
 @Marker.JobsWorkflow
 
 public class TC_PWF_37 extends BaseClass {
-	private static final Logger LOGGER = Logger.getLogger(TC_PWF_36.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(TC_PWF_37.class.getName());
 
 	@Test
 	public void verifyTaggedHiveTezWorkflowDetails() {
-		test = extent.startTest("TC_PWF_36.verifyTaggedHiveTezWorkflowDetails",
+		test = extent.startTest("TC_PWF_37.verifyTaggedHiveTezWorkflowDetails",
 				"Verify Hive-Tez tagged workflow details in Unravel UI.");
 		test.assignCategory("Workflow Page");
 		LOGGER.info("Click on Jobs Pipeline tab");

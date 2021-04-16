@@ -44,8 +44,10 @@ public class TEZ_128 extends BaseClass {
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         tezDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         test.log(LogStatus.INFO, "Verify that the left pane has Hive check box and the apps number");
         int appCount = tezDetailsPage.clickOnlyLink("Tez");
+        waitExecuter.sleep(2000);
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         LOGGER.info("AppCount is " + appCount + " total count is " + totalCount);
@@ -71,6 +73,7 @@ public class TEZ_128 extends BaseClass {
          */
         if (appCount > 0) {
             String headerAppId = tezDetailsPage.verifyAppId(tezApps, applicationsPageObject);
+                waitExecuter.sleep(1000);
             test.log(LogStatus.PASS, "Tez Application Id is displayed in the Header: " + headerAppId);
             tezDetailsPage.verifyAppSummaryTabs(tezApps, "Analysis", test);
             //Close apps details page

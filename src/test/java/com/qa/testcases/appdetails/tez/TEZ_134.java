@@ -40,13 +40,14 @@ public class TEZ_134 extends BaseClass {
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         tezDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
-
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
 
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         tezDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
         test.log(LogStatus.INFO, "Verify that the left pane has Hive check box and the apps number");
         int appCount = tezDetailsPage.clickOnlyLink("Tez");
+        waitExecuter.sleep(2000);
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
@@ -67,6 +68,7 @@ public class TEZ_134 extends BaseClass {
             tezApps.getTypeFromTable.click();
             waitExecuter.waitUntilPageFullyLoaded();
             tezDetailsPage.verifyDagsComponent(tezApps, true, false, false);
+            waitExecuter.sleep(2000);
             test.log(LogStatus.PASS, "Verified left pane in the app details page successfully");
             //Close apps details page
             MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);

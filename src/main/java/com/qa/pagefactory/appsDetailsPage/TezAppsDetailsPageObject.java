@@ -21,6 +21,9 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//span[(text()='Duration')]//following-sibling::a[contains(@class,'sorting')]")
     public WebElement sortByDurationApp;
 
+    @FindBy(id = "apps-global-search-filter")
+    public WebElement globalSearchBox;
+
     @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-down')]")
     public WebElement sortDown;
 
@@ -122,6 +125,12 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id='appTagsTable']/thead//th")
     public List<WebElement> tagTableHeader;
 
+    @FindBy(xpath = "//a[normalize-space()='Configuration']")
+    public WebElement configurationTab;
+
+    @FindBy(xpath = "//a[normalize-space()='Tags']")
+    public WebElement tagsTab;
+
     @FindBy(xpath = "//*[@id='appTagsTable']/tbody/tr")
     public List<WebElement> tagTableRows;
 
@@ -212,6 +221,15 @@ public class TezAppsDetailsPageObject {
 
     @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/div[2]/span")
     public List<WebElement> configKeywords;
+
+    @FindBy(xpath = "//div[contains(@class,'cta-secondary')]/a/span[text()='RESET']")
+    public WebElement resetButtonAppDetails;
+
+    @FindBy(xpath = " //*[@id='appConfiguration']//tbody/tr/td/p")
+    public List<WebElement> configPropKey;
+
+    @FindBy(xpath = " //*[@id='appConfiguration']//tbody/tr/td/span")
+    public List<WebElement> configPropValue;
 
     @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/span/div/a/span")
     public WebElement resetButton;

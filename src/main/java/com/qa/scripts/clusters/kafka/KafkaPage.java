@@ -190,10 +190,12 @@ public class KafkaPage {
        // WebElement rowData = driver.findElement(By.xpath("//tbody/tr[" + (row + 1) + "]/td[" + (col + 1) + "]"));
         WebElement rowData = driver.findElement(By.xpath("//*[@id='custom-tbl']//table/tbody/tr[" + (row + 1) + "]" +
             "/td[" + (col + 1) + "]"));
-        Assert.assertTrue(rowData.isDisplayed(), "No data under column: " + colName);
-        //Check if data has only special charaters
-        boolean onlySpecialChars = rowData.getText().matches("[^a-zA-Z0-9]+");
-        Assert.assertFalse(onlySpecialChars, "Expected value for column " + colName + " But got: " + rowData.getText());
+        if ((col + 1) != 2 ) {
+          Assert.assertTrue(rowData.isDisplayed(), "No data under column: " + colName);
+          //Check if data has only special charaters
+          boolean onlySpecialChars = rowData.getText().matches("[^a-zA-Z0-9]+");
+          Assert.assertFalse(onlySpecialChars, "Expected value for column " + colName + " But got: " + rowData.getText());
+        }
         logger.info("Row data for column: " + colName + "\n " + rowData.getText());
       }
     }

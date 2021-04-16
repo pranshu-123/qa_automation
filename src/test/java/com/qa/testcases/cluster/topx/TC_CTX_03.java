@@ -46,6 +46,7 @@ public class TC_CTX_03 extends BaseClass {
         ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);
         LOGGER.info("Click on + button", test);
         reportsPage.clickOnLatestReport(reportPageObj, PageConstants.ReportsArchiveNames.TopX);
+        waitExecuter.waitUntilPageFullyLoaded();
 
 //        userActions.performActionWithPolling(topPanelPageObject.topXTab, UserAction.CLICK);
 //        TopX topX = new TopX(driver);

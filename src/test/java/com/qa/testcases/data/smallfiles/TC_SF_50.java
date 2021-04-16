@@ -2,6 +2,7 @@ package com.qa.testcases.data.smallfiles;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.data.SmallfilesPageObject;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.data.Smallfiles;
@@ -43,15 +44,27 @@ public class TC_SF_50 extends BaseClass {
                 , "100", "100");
         test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files");
 
-        waitExecuter.waitUntilPageFullyLoaded();
+        userActions.performActionWithPolling(smallfilesPageObject.modalRunButton, UserAction.CLICK);
+        waitExecuter.sleep(5000);
+        logger.info("Clicked on Modal Run Button");
+        test.log(LogStatus.INFO, "Clicked on Modal Run Button");
+
         String heading = smallfilesPageObject.verifyAbsoluteSize.getText();
         test.log(LogStatus.PASS, "Verified the absolute size  poulated :" + heading);
 
         try {
-            String scheduleSuccessMsg = "The report has been scheduled successfully.";
-            smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
+            waitExecuter.waitUntilElementPresent(smallfilesPageObject.confirmationMessageElement);
+            waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
+                    "Small file Report completed successfully.");
+            waitExecuter.sleep(3000);
+            test.log(LogStatus.PASS, "Verified smallfiles report is loaded properly.");
+            logger.info("Verified smallfiles report is loaded properly");
         } catch (TimeoutException te) {
-            throw new AssertionError("Verified the Error SmallFile not been scheduled successfully."+te);
+            waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
+                    "Small file Report completed successfully.");
+        }
+        catch (VerifyError te) {
+            throw new AssertionError("smallfiles Report not completed successfully."+te);
         }
     }
 }

@@ -49,6 +49,7 @@ public class TC_SF_15 extends BaseClass {
         smallfiles.navigateToAdvancedOptions(smallfilesPageObject, test, "3", "6");
         waitExecuter.waitUntilPageFullyLoaded();
         userActions.performActionWithPolling(smallfilesPageObject.modalRunButton, UserAction.CLICK);
+        waitExecuter.sleep(8000);
         logger.info("Clicked on Modal Run Button");
         test.log(LogStatus.INFO, "Clicked on Modal Run Button");
 
@@ -56,13 +57,18 @@ public class TC_SF_15 extends BaseClass {
         test.log(LogStatus.PASS, "Verified the absolute size  poulated :" + heading);
 
         try {
-            String scheduleSuccessMsg = "The report has been scheduled successfully.";
-            smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
+            waitExecuter.waitUntilElementPresent(smallfilesPageObject.confirmationMessageElement);
+            waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
+                    "Small file Report completed successfully.");
+            waitExecuter.sleep(3000);
+            test.log(LogStatus.PASS, "Verified smallfiles report is loaded properly.");
+            logger.info("Verified smallfiles report is loaded properly");
         } catch (TimeoutException te) {
-            String scheduleSuccessMsg = "The report has been scheduled successfully.";
-            smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
-        } catch (VerifyError te) {
-            throw new AssertionError("smallfiles Report has not been scheduled successfully.");
+            waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
+                    "Small file Report completed successfully.");
+        }
+        catch (VerifyError te) {
+            throw new AssertionError("smallfiles Report not completed successfully."+te);
         }
     }
 }

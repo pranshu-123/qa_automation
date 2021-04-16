@@ -204,4 +204,20 @@ public class WorkloadFit {
             LOGGER.info("There are no options for selected duration");
         }
     }
+
+    /* Set the local storage and object storage size */
+    public void setStorage(String objectStorage, String localStorage) {
+        // Set object storage size
+        waitExecuter.waitUntilElementClickable(fitPageObject.objectStorageSize);
+        userAction.performActionWithPolling(fitPageObject.objectStorageSize, UserAction.CLICK);
+        fitPageObject.objectStorageSize.clear();
+        fitPageObject.objectStorageSize.sendKeys(objectStorage);
+
+        // Set local storage size
+        waitExecuter.waitUntilElementClickable(fitPageObject.localStorageSize);
+        userAction.performActionWithPolling(fitPageObject.localStorageSize, UserAction.CLICK);
+        fitPageObject.localStorageSize.clear();
+        fitPageObject.localStorageSize.sendKeys(localStorage);
+
+    }
 }

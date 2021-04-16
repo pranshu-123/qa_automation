@@ -133,7 +133,7 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span/span")
     public WebElement getHeaderAppId;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[2]")
+    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[3]")
     public WebElement closeAppsPageTab;
 
     @FindBy(xpath = "//*[@class='highcharts-legend']/*[name()='g']//*[name()='g']//*[name()='tspan']")

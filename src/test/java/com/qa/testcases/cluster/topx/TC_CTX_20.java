@@ -58,6 +58,7 @@ public class TC_CTX_20 extends BaseClass {
         homePage.selectMultiClusterId(clusterId);
         topX.clickOnModalRunButton();
         waitExecuter.waitUntilElementPresent(topXPageObject.archivesHeader);
+        waitExecuter.waitUntilPageFullyLoaded();
         //waitExecuter.waitUntilElementClickable(topXPageObject.runButton);
 
 //        try {

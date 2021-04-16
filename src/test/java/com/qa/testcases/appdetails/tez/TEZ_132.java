@@ -43,6 +43,7 @@ public class TEZ_132 extends BaseClass {
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         tezDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
 
 
         //Verify that the left pane has Tez check box and the apps number

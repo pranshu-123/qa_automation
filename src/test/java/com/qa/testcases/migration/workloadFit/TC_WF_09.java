@@ -63,12 +63,17 @@ public class TC_WF_09 extends BaseClass {
         fit.selectAllCheckboxTypes(fitPageObject.AllTagOfJobTypes, fitPageObject.selectAllJobTypes);
         // Click on Run button to open report page
         test.log(LogStatus.INFO, "Click on Run button to open report page");
+        fit.setStorage("1500", "1500");
         fit.clickRunForNewReport();
-
         try {
             waitExecuter.waitUntilTextToBeInWebElement(cdPageObject.confirmationMessageElement,
                     "Workload Fit report completed successfully");
             test.log(LogStatus.PASS, "Verified Workload Fit report is loaded properly.");
+        } catch (TimeoutException te) {
+            waitExecuter.waitUntilTextToBeInWebElement(cdPageObject.confirmationMessageElement,
+                    "Workload Fit report completed successfully");
+            test.log(LogStatus.PASS, "Verified Workload Fit report is loaded properly.");
+        }
             waitExecuter.sleep(2000);
             List<WebElement> getMapClusterTabs = fitPageObject.mapToClusterTabs;
             List<String> getMapClusterTabNames = new ArrayList<>();
@@ -80,8 +85,5 @@ public class TC_WF_09 extends BaseClass {
 
             Assert.assertEquals(getMapClusterTabNames.size(), 3, " The cluster tab present should be 3 but are not.");
             test.log(LogStatus.PASS, "Map to multiple cluster is present");
-        } catch (TimeoutException | NoSuchElementException te) {
-            throw new AssertionError("Workload Fit Report not completed successfully.");
-        }
     }
 }

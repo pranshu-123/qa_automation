@@ -57,6 +57,7 @@ public class TC_SF_39 extends BaseClass {
             waitExecuter.waitUntilPageFullyLoaded();
             waitExecuter.waitUntilPageFullyLoaded();
             userActions.performActionWithPolling(smallfilesPageObject.runSheduleButton, UserAction.CLICK);
+            waitExecuter.sleep(8000);
             logger.info("Clicked on Modal Shedule Button");
             test.log(LogStatus.INFO, "Clicked on Modal Shedule Button");
             waitExecuter.waitUntilPageFullyLoaded();

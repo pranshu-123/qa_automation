@@ -45,6 +45,7 @@ public class TC_SF_50 extends BaseClass {
         test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files");
 
         userActions.performActionWithPolling(smallfilesPageObject.modalRunButton, UserAction.CLICK);
+        waitExecuter.sleep(5000);
         logger.info("Clicked on Modal Run Button");
         test.log(LogStatus.INFO, "Clicked on Modal Run Button");
 

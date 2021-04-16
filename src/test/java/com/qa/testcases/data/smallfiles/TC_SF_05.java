@@ -64,7 +64,7 @@ public class TC_SF_05 extends BaseClass {
                 ,"1","6");
 
         userActions.performActionWithPolling(smallfilesPageObject.modalRunButton, UserAction.CLICK);
-        waitExecuter.sleep(5000);
+        waitExecuter.sleep(8000);
         LOGGER.info("Clicked on Modal Run Button");
         test.log(LogStatus.INFO, "Clicked on Modal Run Button");
 

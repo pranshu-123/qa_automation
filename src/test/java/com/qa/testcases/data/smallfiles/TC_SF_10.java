@@ -50,6 +50,7 @@ public class TC_SF_10 extends BaseClass {
 
         waitExecuter.waitUntilPageFullyLoaded();
         userActions.performActionWithPolling(smallfilesPageObject.modalRunButton, UserAction.CLICK);
+        waitExecuter.sleep(8000);
         logger.info("Clicked on Modal Run Button");
         test.log(LogStatus.INFO, "Clicked on Modal Run Button");
 

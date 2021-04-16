@@ -56,6 +56,7 @@ public class TC_SF_40 extends BaseClass {
             smallfiles.selectDayTime("Daily", "10", "30");
             waitExecuter.waitUntilPageFullyLoaded();
             userActions.performActionWithPolling(smallfilesPageObject.runSheduleButton, UserAction.CLICK);
+            waitExecuter.sleep(5000);
             logger.info("Clicked on Modal Shedule Button");
             test.log(LogStatus.INFO, "Clicked on Modal Shedule Button");
             waitExecuter.waitUntilPageFullyLoaded();

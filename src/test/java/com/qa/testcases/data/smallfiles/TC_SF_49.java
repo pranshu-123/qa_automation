@@ -59,6 +59,7 @@ public class TC_SF_49 extends BaseClass {
                 test.log(LogStatus.PASS, "Path display in the table- " + selectedMessage);
                 logger.info("Clicked on Modal Run Button");
                 userActions.performActionWithPolling(smallfilesPageObject.modalRunButton, UserAction.CLICK);
+                waitExecuter.sleep(5000);
             } else {
                 String scheduleSuccessMsg = "Small file Report completed successfully.";
                 smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);

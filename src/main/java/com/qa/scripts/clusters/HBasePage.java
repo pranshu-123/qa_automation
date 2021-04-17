@@ -421,7 +421,7 @@ public class HBasePage {
         waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseTableHostTbl);
     }
 
-    public void verifyTableAndRegion(){
+    public String verifyTableAndRegion(){
         waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseFirstTableElement);
         String tableName = hBasePageObject.hBaseFirstTableElement.getText();
         MouseActions.clickOnElement(driver, hBasePageObject.hBaseFirstTableElement);
@@ -431,12 +431,19 @@ public class HBasePage {
         String regionTableName = hBasePageObject.regionTableName.getText();
         logger.info("Region table name: "+ regionTableName);
         //Verify Region name and Region Svr name
-        verifyTblRegionUIWithinRegionServer(regionTableName);
+        //verifyTblRegionUIWithinRegionServer(regionTableName);
+        verifyTblRegionUIWithinRegionServer(tableName);
+        return tableName;
     }
 
-    public void verifyRegionTabColumns(){
-        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseTableHostTbl);
-        List<WebElement> hBaseTableHostTblRowsList = hBasePageObject.hBaseTableHostTblRows;
+    public void verifyRegionTabColumns(String tableName){
+        String xpathRegionsTblName =  "//table[@id='regions-"+tableName+"']";
+        WebElement regionsTblNameEle = driver.findElement(By.xpath(xpathRegionsTblName));
+        waitExecuter.waitUntilElementPresent(regionsTblNameEle);
+        //waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseTableHostTbl);
+
+        List<WebElement> hBaseTableHostTblRowsList = driver.findElements(By.xpath(xpathRegionsTblName+"/tbody/tr"));
+        //List<WebElement> hBaseTableHostTblRowsList = hBasePageObject.hBaseTableHostTblRows;
         Assert.assertFalse(hBaseTableHostTblRowsList.isEmpty(), "HBase Table Host Table Rows not generated.");
 
         List<String> regionNameList = new ArrayList<>();

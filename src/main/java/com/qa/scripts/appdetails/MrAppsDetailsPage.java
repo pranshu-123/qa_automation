@@ -327,6 +327,8 @@ public class MrAppsDetailsPage {
         waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();
         String headerAppId = mrApps.getHeaderAppId.getText().trim();
+        Assert.assertTrue(headerAppId.equals(appId),
+                "Tez Application Id is not displayed in the Header");
         Assert.assertNotSame("", headerAppId, "Tez Application Id is not displayed in the Header");
         return headerAppId;
     }

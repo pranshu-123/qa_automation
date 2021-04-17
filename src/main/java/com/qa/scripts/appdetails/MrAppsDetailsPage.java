@@ -369,7 +369,6 @@ public class MrAppsDetailsPage {
         Actions toolAct = new Actions(driver);
         toolAct.moveToElement(Appid).build().perform();
         WebElement AppnametoolTip = mrApps.getClusterId;
-        waitExecuter.sleep(3000);
         String AppIdText = AppnametoolTip.getText().trim();
         LOGGER.info("Tez Status is " + Appid);
         waitExecuter.sleep(5000);
@@ -741,6 +740,7 @@ public class MrAppsDetailsPage {
 
     }
 
+
     /**
      * Method to validate the tasks attempt Reduce tab in Resources and stages tab.
      */
@@ -769,49 +769,52 @@ public class MrAppsDetailsPage {
                 pieChartInternalVal);
     }
 
+    public void validateResourcesMetricsTab(MrAppsDetailsPageObject mrApps,
+                                     ExtentTest test) {
+        waitExecuter.waitUntilElementPresent(mrApps.resourcesMetricsDropDown);
+        WebElement metricDropDown = mrApps.resourcesMetricsDropDown;
+        MouseActions.clickOnElement(driver, metricDropDown);
+        List<WebElement> dropDownList = mrApps.resourcesMetricsDropDownData;
+        waitExecuter.sleep(2000);
+        verifyAssertFalse(dropDownList.isEmpty(), mrApps, " No contents listed in the dropdown");
+        String[] expectetContents = {"availableMemory", "vmRss", "systemCpuLoad",
+                "processCpuLoad", "gcLoad", "maxHeap", "usedHeap"};
+        for (int d = 0; d < dropDownList.size(); d++) {
+            String metric = dropDownList.get(d).getText();
+            LOGGER.info("The metric is " + metric);
+            verifyAssertTrue(Arrays.asList(expectetContents).contains(metric), mrApps, " The expected" +
+                    " metric is not listed in the drop down box");
+            //click on the dropdown list element and validate the graph
+            MouseActions.clickOnElement(driver, dropDownList.get(d));
+            List<WebElement> resourcesMetricsLineGraphList = mrApps.resourcesMetricsLineGraph;
+            List<WebElement> metricLegendList = mrApps.resourcesMetricsPlotGraphLegend;
+            Assert.assertEquals(resourcesMetricsLineGraphList.size(), metricLegendList.size(),
+                    "The number of executors in the legend do not match to the ones plotted in the graph for metrics "
+                            + metric);
+            MouseActions.clickOnElement(driver, metricDropDown);
+            waitExecuter.sleep(4000);
+        }
+    }
+
     /**
      * Method to validate AppSummary Resource tab.
      */
-    public void validateResourcesTab(MrAppsDetailsPageObject mrApps, String metricsName,
+    public void validateResourcesTab(MrAppsDetailsPageObject mrApps,String verifyTabName,
                                      ExtentTest test) {
-        String[] expectedGraphTitle = {"Vcores", "Memory", "Metrics"};
+        String[] expectedGraphTitle = {"Metrics", "Memory"};
+        waitExecuter.waitUntilPageFullyLoaded();
         List<WebElement> graphTitleList = mrApps.resourcesGraphTitle;
         verifyAssertFalse(graphTitleList.isEmpty(), mrApps, "No title displayed");
         List<WebElement> allGraphsList = mrApps.resourcesAllGraphs;
         verifyAssertFalse(allGraphsList.isEmpty(), mrApps, "No graphs displayed");
-        Assert.assertFalse(graphTitleList.isEmpty(), "Metrics for map reduce graphs is empty");
         for (int t = 0; t < graphTitleList.size(); t++) {
             String graphTitle = graphTitleList.get(t).getText();
             LOGGER.info("Graph title is " + graphTitle);
-            verifyAssertTrue(Arrays.asList(expectedGraphTitle).contains(graphTitle), mrApps, " The expected" +
-                    " Graph title doesnot match with the titles in the UI");
-            verifyAssertTrue(allGraphsList.get(t).isDisplayed(), mrApps, " All Graphs are not displayed");
             switch (graphTitle) {
                 case "Metrics":
+                    validateResourcesMetricsTab(mrApps,test);
                     LOGGER.info("Validating the Graph " + graphTitle);
-                    WebElement metricDropDown = mrApps.resourcesMetricsDropDown;
-                    MouseActions.clickOnElement(driver, metricDropDown);
-                    List<WebElement> dropDownList = mrApps.resourcesMetricsDropDownData;
-                    waitExecuter.sleep(2000);
-                    verifyAssertFalse(dropDownList.isEmpty(), mrApps, " No contents listed in the dropdown");
-                    String[] expectetContents = {"availableMemory", "vmRss", "systemCpuLoad",
-                            "processCpuLoad", "gcLoad", "maxHeap", "usedHeap"};
-                    waitExecuter.sleep(1000);
-                    for (int d = 0; d < dropDownList.size(); d++) {
-                        String metric = dropDownList.get(d).getText();
-                        LOGGER.info("The metric is " + metric);
-                        verifyAssertTrue(Arrays.asList(expectetContents).contains(metric), mrApps, " The expected" +
-                                " metric is not listed in the drop down box");
-                        //click on the dropdown list element and validate the graph
-                        MouseActions.clickOnElement(driver, dropDownList.get(d));
-                        List<WebElement> resourcesMetricsPlotGraphList = mrApps.resourcesMetricsPlotGraph;
-                        List<WebElement> metricLegendList = mrApps.resourcesMetricsPlotGraphLegend;
-                        Assert.assertEquals(resourcesMetricsPlotGraphList.size(), metricLegendList.size(),
-                                "The number of executors in the legend do not match to the ones plotted in the graph");
-                        MouseActions.clickOnElement(driver, metricDropDown);
-                        waitExecuter.sleep(4000);
-                    }
-                case "Vcores":
+                    break;
                 case "Memory":
                     LOGGER.info("Validating the Graph " + graphTitle);
                     break;
@@ -847,6 +850,14 @@ public class MrAppsDetailsPage {
         }
     }
 
+    public void sleep(long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
     /***
      * Method to verify the Metrics KPI Graphs of a connected MR cluster
@@ -1074,6 +1085,7 @@ public class MrAppsDetailsPage {
         }
         return "";
     }
+
 
     /***
      * Common actions listed in one method that does the following:

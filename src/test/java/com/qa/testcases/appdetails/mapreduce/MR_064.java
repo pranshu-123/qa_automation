@@ -57,7 +57,7 @@ public class MR_064 extends BaseClass {
                 String headerAppId = mrDetailsPage.verifyAppId(mrApps, applicationsPageObject);
                 test.log(LogStatus.PASS, "Map Reduce Application Id is displayed in the Header: " + headerAppId);
                 waitExecuter.waitUntilPageFullyLoaded();
-                MouseActions.clickOnElement(driver, mrApps.ConfigurationTab);
+                MouseActions.clickOnElement(driver, mrApps.configurationTab);
                 waitExecuter.waitUntilPageFullyLoaded();
                 mrDetailsPage.validateConfigurationSearchTab(mrApps);
                 waitExecuter.waitUntilPageFullyLoaded();

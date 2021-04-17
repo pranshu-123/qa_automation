@@ -3,7 +3,6 @@ package com.qa.scripts.appdetails;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.MrAppsDetailsPageObject;
 import com.qa.pagefactory.clusters.ELKPageObject;
-import com.qa.pagefactory.clusters.KafkaPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.jobs.applications.AllApps;
@@ -12,13 +11,15 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.*;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.logging.Logger;
 
 import static org.testng.Assert.assertTrue;
@@ -26,8 +27,6 @@ import static org.testng.Assert.assertTrue;
 public class MrAppsDetailsPage {
     private static final Boolean isDignosticWin = false;
     private static final Logger LOGGER = Logger.getLogger(MrAppsDetailsPage.class.getName());
-    String xAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]//*[name()='g' and contains(@class,'highcharts-xaxis-labels')]/*[name()='text']";
-    String yAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]//*[name()='g' and contains(@class,'highcharts-yaxis-labels')]/*[name()='text']";
     private final WaitExecuter waitExecuter;
     private final WebDriver driver;
 
@@ -481,6 +480,9 @@ public class MrAppsDetailsPage {
             else
                 newErrorType = errorType;
             LOGGER.info("New Error Type is " + errorType);
+            verifyAssertTrue(Arrays.asList(expectedErrorCategory).contains(newErrorType), mrApps,
+                    " The UI error types displayed does not match with the Expected error types ");
+            waitExecuter.sleep(1000);
         }
         List<WebElement> errorCollapsableList = mrApps.errorCollapse;
         verifyAssertFalse(errorCollapsableList.isEmpty(), mrApps, " No collapsable icon present");
@@ -542,6 +544,7 @@ public class MrAppsDetailsPage {
         String afterResetProp = mrApps.configPropNum.getText();
         LOGGER.info("No. of Properties displayed by default " + beforeResetProp + "\n " +
                 "No. of Properties displayed after RESET " + afterResetProp);
+        Assert.assertEquals(afterResetProp, beforeResetProp, "The properties have not been reset " + "to default");
     }
 
     public void validateLogsTab(MrAppsDetailsPageObject mrApps) {
@@ -586,19 +589,18 @@ public class MrAppsDetailsPage {
         return tagValue;
     }
 
-    public ArrayList<Integer> getTableCnt(List<WebElement> tableRowList, String fileType,MrAppsDetailsPageObject mrApps) {
+    public ArrayList<Integer> getTableCnt(List<WebElement> tableRowList, String fileType, MrAppsDetailsPageObject mrApps) {
         ArrayList<Integer> expectedFileCnt = new ArrayList<>();
         try {
             for (int row = 1; row <= tableRowList.size(); row++) {
-                WebElement rowData = driver.findElement
-                        (By.xpath("//table[@class='component-data-tables']/tbody/tr[" + row + "]/td[" + 2 + "]"));
+                WebElement rowData = mrApps.getDataTable;
                 Assert.assertTrue(rowData.isDisplayed(), "No data under column: File " +
                         " for " + fileType + " file type");
                 int fileCnt = Integer.parseInt(rowData.getText().trim());
                 LOGGER.info("The file count is " + fileCnt);
                 expectedFileCnt.add(fileCnt);
             }
-        } catch (org.openqa.selenium.NoSuchElementException ex) {
+        } catch (NoSuchElementException ex) {
             WebElement noData = mrApps.noDataText;
             Assert.assertFalse(noData.isDisplayed(), "Data not present in the table got {'" + noData.getText() + "}' message");
         }
@@ -716,11 +718,11 @@ public class MrAppsDetailsPage {
     /**
      * Method to validate the Contains Graph Map tab in Resources and stages tab.
      */
-    public void validateContainsGraph(MrAppsDetailsPageObject mrApps,String expectedMetricsName,
+    public void validateContainsGraph(MrAppsDetailsPageObject mrApps, String expectedMetricsName,
                                       ExtentTest test) {
-        List<WebElement> metricsKpiList = mrApps.ContainerMetrics;
+        List<WebElement> metricsKpiList = mrApps.containerMetrics;
         List<WebElement> metricsKpiHeaderList = mrApps.containerMetricsHeader;
-        List<WebElement> metricsKpiGraphList = mrApps.ContainerMetricsGraph;
+        List<WebElement> metricsKpiGraphList = mrApps.containerMetricsGraph;
         Assert.assertFalse(metricsKpiList.isEmpty(), "Contains Graph cluster is empty");
         for (int i = 0; i < metricsKpiList.size(); i++) {
             String metricsName = metricsKpiHeaderList.get(i).getText();
@@ -729,7 +731,7 @@ public class MrAppsDetailsPage {
             if (metricsName.equals(expectedMetricsName)) {
                 Assert.assertFalse(metricsName.isEmpty(), " Contains Metrics Name not displayed");
                 LOGGER.info("Contains Metrics Name: [" + metricsName + "] displayed in the header");
-                test.log(LogStatus.PASS, "Contains Metrics Name displayed in the header"+metricsName);
+                test.log(LogStatus.PASS, "Contains Metrics Name displayed in the header" + metricsName);
                 Assert.assertTrue(metricsKpiGraphList.get(i).isDisplayed(), "The graph for metrics " + metricsName + " is not displayed");
                 LOGGER.info("The graph for Metrics : [" + metricsName + "] is displayed");
                 waitExecuter.sleep(3000);
@@ -738,6 +740,7 @@ public class MrAppsDetailsPage {
         }
 
     }
+
     /**
      * Method to validate the tasks attempt Reduce tab in Resources and stages tab.
      */
@@ -827,8 +830,6 @@ public class MrAppsDetailsPage {
         List<WebElement> allGraphsList = mrApps.resourcesAllGraphs;
         List<WebElement> graphTitleList = mrApps.resourcesGraphTitle;
         Assert.assertFalse(ContainersKpiHeaderList.isEmpty(), "Metrics for mrapps cluster is empty");
-        String xAxisPath = "//*[@id='" + graphId + "']" + xAxis;
-        String yAxisPath = "//*[@id='" + graphId + "']" + yAxis;
         for (int i = 0; i < graphTitleList.size(); i++) {
             String metricsName = ContainersKpiHeaderList.get(i).getText();
             LOGGER.info("Metrics Name: " + metricsName + " Expected Name: " + verifyTabName);
@@ -838,8 +839,6 @@ public class MrAppsDetailsPage {
                 waitExecuter.waitUntilElementPresent(allGraphsList.get(i));
                 Assert.assertTrue(allGraphsList.get(i).isDisplayed(), "The graph for metrics " + metricsName + " is not displayed");
                 LOGGER.info("The graph for Metrics : [" + metricsName + "] is displayed");
-                verifyAxis(xAxisPath, "X-Axis");
-                verifyAxis(yAxisPath, "Y-Axis");
 
             } else {
                 verifyAssertTrue(allGraphsList.get(0).isDisplayed(), mrApps, " No graph is displayed for "
@@ -950,7 +949,7 @@ public class MrAppsDetailsPage {
             switch (graphTitle) {
                 case "Containers":
                     LOGGER.info("Validating the Graph " + graphTitle);
-                    validateContainsGraph(mrApps,"Containers",test);
+                    validateContainsGraph(mrApps, "Containers", test);
                     waitExecuter.sleep(3000);
                     break;
             }

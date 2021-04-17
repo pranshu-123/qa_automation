@@ -57,7 +57,7 @@ public class MrAppsDetailsPageObject {
     public WebElement resourcesTab;
 
     @FindBy(xpath = "//a[normalize-space()='Configuratio...']")
-    public WebElement ConfigurationTab;
+    public WebElement configurationTab;
 
     @FindBy(xpath = "//*[@id='taskattemptmap']//*[div and @class='footer']/div/*/span[1]")
     public List<WebElement> taskAttFooterName;
@@ -79,10 +79,10 @@ public class MrAppsDetailsPageObject {
 
     @FindBy(xpath = "//div[@class='component-dashboard']//div[contains(@class,'col-md-6')]" +
             "//div[@class='content']//*[name()='g' and @class='highcharts-series-group']")
-    public List<WebElement> ContainerMetricsGraph;
+    public List<WebElement> containerMetricsGraph;
 
     @FindBy(xpath = "//div[@class='component-dashboard']//div[contains(@class,'col-md-6')]")
-    public List<WebElement> ContainerMetrics;
+    public List<WebElement> containerMetrics;
 
     @FindBy(xpath = "//*[@id='taskattemptreduce']//*[div and @class='footer']/div/*/span[1]")
     public List<WebElement> taskAttReduceFooterName;
@@ -188,7 +188,7 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//span[contains(@class,'failed badge')]")
     public WebElement mrSummaryApp;
 
-    @FindBy(className  = "nprogress-busy")
+    @FindBy(className = "nprogress-busy")
     public WebElement loader;
 
     @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[2]")
@@ -206,6 +206,9 @@ public class MrAppsDetailsPageObject {
 
     @FindBy(xpath = "//*[@id='io_metrics']//tbody/tr/td[1]")
     public List<WebElement> tagKey;
+
+    @FindBy(xpath = "//table[@class='component-data-tables']/tbody/tr[\" + row + \"]/td[\" + 2 + \"]")
+    public WebElement getDataTable;
 
     @FindBy(xpath = "//*[@id='io_metrics']//tbody/tr/td[2]")
     public List<WebElement> tagValue;
@@ -382,7 +385,6 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//div[@class='container-fluid']//div[contains(@class,'dashboard-module')]" +
             "//div[@class='content']//*[name()='g' and @class='highcharts-series-group']")
     public List<WebElement> containerGraph;
-
 
 
     @FindBy(xpath = "//*[@class='select2-results']//ul/li/ul/li")

@@ -21,7 +21,7 @@ public class TC_ELK_25 extends BaseClass {
   private static final java.util.logging.Logger LOGGER = Logger.getLogger(com.qa.testcases.cluster.elk.TC_ELK_25.class.getName());
 
   @Test(dataProvider = "clusterid-data-provider")
-  public void verifyESNodeGraphs(String clusterId) {
+  public void TC_ELK_25_verifyESNodeGraphs(String clusterId) {
     test = extent.startTest("TC_ELK_25_verifyESNodeGraphs: " + clusterId,
         "Validate ES cluster metrics graph");
     test.assignCategory(" ELK ");

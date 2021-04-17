@@ -22,7 +22,7 @@ public class TC_ELK_24 extends BaseClass {
   private static final java.util.logging.Logger LOGGER = Logger.getLogger(com.qa.testcases.cluster.elk.TC_ELK_24.class.getName());
 
   @Test(dataProvider = "clusterid-data-provider")
-  public void verifyESNodesTable(String clusterId) {
+  public void TC_ELK_24_verifyESNodesTable(String clusterId) {
     test = extent.startTest("TC_ELK_24_verifyESNodesTable: " + clusterId,
         "Validate ES nodes table.");
     test.assignCategory(" ELK ");

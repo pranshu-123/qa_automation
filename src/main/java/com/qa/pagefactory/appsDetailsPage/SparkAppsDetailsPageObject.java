@@ -108,7 +108,8 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "(//thead[@id='appNavigation-head'])/tr/th")
   public List<WebElement> navigationHeaders;
 
-  @FindBy(xpath = "(//div[@id='app'])/div/div/div[1]/div[1]/span")
+  //@FindBy(xpath = "(//div[@id='app'])/div/div/div[1]/div[1]/span")
+  @FindBy(xpath = "//*[@id='app']//*[@class='right']/span")
   public List<WebElement> rightPaneKpis;
 
   @FindBy(xpath = "(//div[@id='SummaryDetails']/div/div)/h5")

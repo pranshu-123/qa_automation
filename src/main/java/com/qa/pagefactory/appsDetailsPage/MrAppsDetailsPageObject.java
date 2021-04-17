@@ -79,10 +79,10 @@ public class MrAppsDetailsPageObject {
 
     @FindBy(xpath = "//div[@class='component-dashboard']//div[contains(@class,'col-md-6')]" +
             "//div[@class='content']//*[name()='g' and @class='highcharts-series-group']")
-    public List<WebElement> kafkaMetricsGraph;
+    public List<WebElement> ContainerMetricsGraph;
 
     @FindBy(xpath = "//div[@class='component-dashboard']//div[contains(@class,'col-md-6')]")
-    public List<WebElement> kafkaMetrics;
+    public List<WebElement> ContainerMetrics;
 
     @FindBy(xpath = "//*[@id='taskattemptreduce']//*[div and @class='footer']/div/*/span[1]")
     public List<WebElement> taskAttReduceFooterName;
@@ -219,6 +219,23 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id='io_metrics']//tbody/tr/td[3]")
     public List<WebElement> metricsDescription;
 
+    @FindBy(xpath = "//body//div//th[7]")
+    public WebElement fileColumn;
+
+    @FindBy(xpath = "//table[@class='row-hover component-data-tables margin-bottom']/tbody/tr")
+    public List<WebElement> fileTableRows;
+
+    @FindBy(xpath = "//div[@class='col-md-10']//p[1]")
+    public WebElement pagination;
+
+    @FindBy(xpath = "//*[name()='svg' and @data-icon='caret-right']")
+    public WebElement rightCaretReportCnt;
+
+    @FindBy(xpath = "//*[name()='svg' and @data-icon='backward']")
+    public WebElement backwardCaretReportCnt;
+
+    @FindBy(xpath = "//table[@class='component-data-tables']/tbody/tr[1]/td/p")
+    public WebElement noDataText;
 
     @FindBy(xpath = "//*[@id='appTagsTable']//tr/td[2]")
     public List<WebElement> tagDescription;

@@ -12,22 +12,20 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.*;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Logger;
 
 import static org.testng.Assert.assertTrue;
 
 public class MrAppsDetailsPage {
     private static final Boolean isDignosticWin = false;
-    Logger logger = Logger.getLogger(SparkAppsDetailsPage.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(MrAppsDetailsPage.class.getName());
     String xAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]//*[name()='g' and contains(@class,'highcharts-xaxis-labels')]/*[name()='text']";
     String yAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]//*[name()='g' and contains(@class,'highcharts-yaxis-labels')]/*[name()='text']";
     private final WaitExecuter waitExecuter;
@@ -57,7 +55,7 @@ public class MrAppsDetailsPage {
         String pValStr = mrApps.resourcesRPieChartInternalVal.getText();
         String regex = "((?<=[a-zA-Z])(?=[0-9]))|((?<=[0-9])(?=[a-zA-Z]))";
         int pieChartInternalVal = Integer.parseInt(Arrays.asList(pValStr.split(regex)).get(0));
-        logger.info("The value displayed inside the Pie Chart is " +
+        LOGGER.info("The value displayed inside the Pie Chart is " +
                 pieChartInternalVal);
         int totalTaskCnt = 0;
         for (int f = 0; f < footerNameList.size(); f++) {
@@ -66,9 +64,9 @@ public class MrAppsDetailsPage {
             int footerVal = Integer.parseInt(footerValStr.replaceAll("[^\\dA-Za-z ]",
                     "").trim());
             totalTaskCnt += footerVal;
-            logger.info("FooterName = " + footerName + " Value = " + footerVal);
+            LOGGER.info("FooterName = " + footerName + " Value = " + footerVal);
         }
-        logger.info("Total Task Attempts = " + totalTaskCnt + " pie chart val = " +
+        LOGGER.info("Total Task Attempts = " + totalTaskCnt + " pie chart val = " +
                 pieChartInternalVal);
     }
 
@@ -85,7 +83,7 @@ public class MrAppsDetailsPage {
         String pValStr = mrApps.resourcesMPieChartInternalVal.getText();
         String regex = "((?<=[a-zA-Z])(?=[0-9]))|((?<=[0-9])(?=[a-zA-Z]))";
         int pieChartInternalVal = Integer.parseInt(Arrays.asList(pValStr.split(regex)).get(0));
-        logger.info("The value displayed inside the Pie Chart is " +
+        LOGGER.info("The value displayed inside the Pie Chart is " +
                 pieChartInternalVal);
         int totalTaskCnt = 0;
         for (int f = 0; f < footerNameList.size(); f++) {
@@ -94,9 +92,9 @@ public class MrAppsDetailsPage {
             int footerVal = Integer.parseInt(footerValStr.replaceAll("[^\\dA-Za-z ]",
                     "").trim());
             totalTaskCnt += footerVal;
-            logger.info("FooterName = " + footerName + " Value = " + footerVal);
+            LOGGER.info("FooterName = " + footerName + " Value = " + footerVal);
         }
-        logger.info("Total Task Attempts = " + totalTaskCnt + " pie chart val = " +
+        LOGGER.info("Total Task Attempts = " + totalTaskCnt + " pie chart val = " +
                 pieChartInternalVal);
     }
 
@@ -144,7 +142,7 @@ public class MrAppsDetailsPage {
         waitExecuter.waitUntilElementPresent(mrApps.EndTime);
         String endTime = mrApps.EndTime.getText();
         test.log(LogStatus.PASS, "Tez Status  is displayed in the Header: " + endTime);
-        logger.info("Duration = " + duration + "starttime = " + startTime + " EndTime = " + endTime + " DataIO = " + dataIO);
+        LOGGER.info("Duration = " + duration + "starttime = " + startTime + " EndTime = " + endTime + " DataIO = " + dataIO);
         Assert.assertNotSame("", startTime, "Value for startTime missing");
         Assert.assertNotSame("", endTime, "Value for duration missing");
         Assert.assertNotSame("", duration, "Value for duration missing");
@@ -164,11 +162,11 @@ public class MrAppsDetailsPage {
         for (int i = 0; i < metricsList.size(); i++) {
             String metricsName = headerList.get(i).getText();
             Assert.assertFalse(metricsName.isEmpty(), " Metrics Name not displayed");
-            logger.info("Metrics Name: [" + metricsName + "] displayed in the header");
+            LOGGER.info("Metrics Name: [" + metricsName + "] displayed in the header");
             Assert.assertTrue(graphList.get(i).isDisplayed(), "The graph for metrics " + metricsName + " is not displayed");
-            logger.info("The graph for Metrics : [" + metricsName + "] is displayed");
+            LOGGER.info("The graph for Metrics : [" + metricsName + "] is displayed");
             Assert.assertTrue(footerList.get(i).isDisplayed(), "The footer for metrics " + metricsName + " is not displayed");
-            logger.info("The footer for Metrics : [" + metricsName + "] is displayed");
+            LOGGER.info("The footer for Metrics : [" + metricsName + "] is displayed");
         }
     }
 
@@ -190,14 +188,14 @@ public class MrAppsDetailsPage {
                 String tabName = stageTabsList.get(t).getText();
                 switch (tabName) {
                     case "Resources":
-                        logger.info("Validating the stage tab Taskattempt");
+                        LOGGER.info("Validating the stage tab Taskattempt");
                         MouseActions.clickOnElement(driver, stageTabsList.get(t));
                         waitExecuter.sleep(1000);
                         validateTaskAttempRtTab(mrApps);
                         validateTaskAttemptMTab(mrApps);
                         break;
                     case "Program":
-                        logger.info("Validating the stage tab Program");
+                        LOGGER.info("Validating the stage tab Program");
                         MouseActions.clickOnElement(driver, stageTabsList.get(t));
                         waitExecuter.sleep(1000);
                         try {
@@ -206,7 +204,7 @@ public class MrAppsDetailsPage {
                             WebElement sourceText = mrApps.programSourceLinkText;
                             String sourceStr = sourceText.getText();
                             int lineNo = Integer.parseInt(sourceStr.split(":")[2].trim());
-                            logger.info("LineNo to verify in the Programs tab is " + lineNo);
+                            LOGGER.info("LineNo to verify in the Programs tab is " + lineNo);
                             MouseActions.clickOnElement(driver, mrApps.programSourceLink);
                             List<WebElement> programList = mrApps.programTabData;
                             verifyAssertFalse(programList.isEmpty(), mrApps, mrApps.programDataNotFound.getText());
@@ -219,7 +217,7 @@ public class MrAppsDetailsPage {
                         }
                         break;
                     case "Timeline":
-                        logger.info("Validating the stage tab Timeline");
+                        LOGGER.info("Validating the stage tab Timeline");
                         MouseActions.clickOnElement(driver, stageTabsList.get(i));
                         waitExecuter.sleep(1000);
                         String[] expectedHeaderList = {"ShuffleMap Input (KB)", "Shuffle Map Time(sec)", "ShuffleMap Output (KB)"
@@ -231,7 +229,7 @@ public class MrAppsDetailsPage {
                         verifyAssertFalse(barGraphList.isEmpty(), mrApps, " No bar graphs displayed");
                         for (int h = 0; h < headerlist.size(); h++) {
                             String headerName = headerlist.get(h).getText();
-                            logger.info("The header name is " + headerName);
+                            LOGGER.info("The header name is " + headerName);
                             verifyAssertTrue(Arrays.asList(expectedHeaderList).contains(headerName), mrApps,
                                     "Header names displayed on the UI does not match with the expected headerList");
                             verifyAssertTrue(barGraphList.get(h).isDisplayed(), mrApps, " The bar graph for " +
@@ -241,13 +239,13 @@ public class MrAppsDetailsPage {
                         Assert.assertFalse(subTabList.isEmpty(), "No sub tab displayed for Timeline tab");
                         for (int s = 0; s < subTabList.size(); s++) {
                             String subTask = subTabList.get(s).getText();
-                            logger.info("The subTask is " + subTask);
+                            LOGGER.info("The subTask is " + subTask);
                             assertTrue(Arrays.asList(expectedSubTabs).contains(subTask),
                                     "Subtask names displayed on the UI does not match with the expected list");
                         }
                         break;
                     case "Timings":
-                        logger.info("Validating the stage tab Timings");
+                        LOGGER.info("Validating the stage tab Timings");
                         MouseActions.clickOnElement(driver, stageTabsList.get(i));
                         waitExecuter.sleep(1000);
                         List<WebElement> stageTimingHeaderList = mrApps.stageTimingHeaders;
@@ -262,7 +260,7 @@ public class MrAppsDetailsPage {
 
                         for (int s = 0; s < stageTimingHeaderList.size(); s++) {
                             String stageTimingHeader = stageTimingHeaderList.get(s).getText();
-                            logger.info("The stageTimingHeader is " + stageTimingHeader);
+                            LOGGER.info("The stageTimingHeader is " + stageTimingHeader);
                             assertTrue(Arrays.asList(expectedTimingHeaders).contains(stageTimingHeader),
                                     "Stage Timing header names displayed on the UI does not match with " +
                                             "the expected list");
@@ -291,9 +289,9 @@ public class MrAppsDetailsPage {
             Assert.assertNotSame("", appKpis.get(i).getText(), "Kpi text is empty");
             Assert.assertNotSame("", appKpiVal.get(i).getText(), "Kpi Value is empty");
             appDuration = (appKpiVal.get(0).getText().trim());
-            logger.info("Kpi Name = " + appKpis.get(i).getText() + " Value = " + appKpiVal.get(i).getText());
+            LOGGER.info("Kpi Name = " + appKpis.get(i).getText() + " Value = " + appKpiVal.get(i).getText());
         }
-        logger.info("The application duration is " + appDuration);
+        LOGGER.info("The application duration is " + appDuration);
         return appDuration;
     }
 
@@ -304,13 +302,13 @@ public class MrAppsDetailsPage {
     public void validateLeftPaneKpis(List<WebElement> kpiList) {
         /*Assert.assertFalse(kpiList.isEmpty(), "The kpi list is empty");*/
         for (WebElement webElement : kpiList) {
-            logger.info("The leftPane kpi is " + webElement.getText());
+            LOGGER.info("The leftPane kpi is " + webElement.getText());
             String kpis = webElement.getText();
             Assert.assertNotSame("", kpis, "The kpis is empty");
             String[] kpisOut = kpis.split(": ");
             String kpiName = kpisOut[0];
             String kpiVal = kpisOut[1];
-            logger.info("Kpi name = " + kpisOut[0] + "  Kpi Value = " + kpisOut[1]);
+            LOGGER.info("Kpi name = " + kpisOut[0] + "  Kpi Value = " + kpisOut[1]);
             Assert.assertNotSame("", kpiName, "The kpi " + kpiName + " is empty");
             Assert.assertNotSame("", kpiVal, "The kpi " + kpiVal + " is empty");
         }
@@ -322,7 +320,7 @@ public class MrAppsDetailsPage {
      */
     public String verifyAppId(MrAppsDetailsPageObject mrApps, ApplicationsPageObject appPageObj) {
         String appId = mrApps.getAppId.getText().trim();
-        logger.info("Tez application Id is " + appId);
+        LOGGER.info("Tez application Id is " + appId);
         appPageObj.getTypeFromTable.click();
         waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();
@@ -340,7 +338,7 @@ public class MrAppsDetailsPage {
      */
     public String verifyJobsSummary(MrAppsDetailsPageObject mrApps) {
         String jobSummary = mrApps.Status.getText().trim();
-        logger.info("Map Reduce job Summary is " + jobSummary);
+        LOGGER.info("Map Reduce job Summary is " + jobSummary);
         mrApps.getSummaryFromTable.click();
         waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();
@@ -357,7 +355,7 @@ public class MrAppsDetailsPage {
     public String verifyAppStatus(MrAppsDetailsPageObject mrApps) {
         String Status = mrApps.Status.getText();
         waitExecuter.sleep(3000);
-        logger.info("Tez application Id is " + Status);
+        LOGGER.info("Tez application Id is " + Status);
         Assert.assertNotSame("", Status, "Tez Application Id is not displayed in the Header");
         return Status;
     }
@@ -374,7 +372,7 @@ public class MrAppsDetailsPage {
         WebElement AppnametoolTip = mrApps.getClusterId;
         waitExecuter.sleep(3000);
         String AppIdText = AppnametoolTip.getText().trim();
-        logger.info("Tez Status is " + Appid);
+        LOGGER.info("Tez Status is " + Appid);
         waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();
         Assert.assertNotSame("", Appid, "Tez App id name is not displayed in the Table");
@@ -387,7 +385,7 @@ public class MrAppsDetailsPage {
      */
     public String verifystarttime(MrAppsDetailsPageObject mrApps) {
         String typetarttime = mrApps.getstartTime.getText();
-        logger.info("Tez Status is " + typetarttime);
+        LOGGER.info("Tez Status is " + typetarttime);
         waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();
         Assert.assertNotSame("", typetarttime, "Tez User name is not displayed in the Table");
@@ -400,7 +398,7 @@ public class MrAppsDetailsPage {
      */
     public String verifyduration(MrAppsDetailsPageObject mrApps) {
         String typetarttime = mrApps.getduration.getText();
-        logger.info("Tez Status is " + typetarttime);
+        LOGGER.info("Tez Status is " + typetarttime);
         waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();
         Assert.assertNotSame("", typetarttime, "Tez User name is not displayed in the Table");
@@ -414,7 +412,7 @@ public class MrAppsDetailsPage {
      */
     public String verifyRead(MrAppsDetailsPageObject mrApps) {
         String ReadIO = mrApps.getRead.getText();
-        logger.info("Tez Status is " + ReadIO);
+        LOGGER.info("Tez Status is " + ReadIO);
         waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();
         Assert.assertNotSame("", ReadIO, "Tez User name is not displayed in the Table");
@@ -427,7 +425,7 @@ public class MrAppsDetailsPage {
      */
     public String verifyWrite(MrAppsDetailsPageObject mrApps) {
         String WriteIO = mrApps.getWrite.getText();
-        logger.info("Tez Status is " + WriteIO);
+        LOGGER.info("Tez Status is " + WriteIO);
         waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();
         Assert.assertNotSame("", WriteIO, "Tez User name is not displayed in the Table");
@@ -445,7 +443,7 @@ public class MrAppsDetailsPage {
         verifyAssertFalse(insightType.isEmpty(), mrApps, "No Insights generated");
         for (int j = 0; j < insightType.size(); j++) {
             String insights = insightType.get(j).getText();
-            logger.info("Insight generated are " + insights);
+            LOGGER.info("Insight generated are " + insights);
             if (insights.equals("EFFICIENCY")) {
                 // Store it in efficiency array
                 efficiency.add(insights);
@@ -472,16 +470,17 @@ public class MrAppsDetailsPage {
     public void validateErrorsTab(MrAppsDetailsPageObject mrApps) {
         String[] expectedErrorCategory = {"FATAL/EXCEPTION", "ERROR", "WARNING"};
         List<WebElement> errorTypeList = mrApps.errorCategories;
+        waitExecuter.sleep(4000);
         verifyAssertFalse(errorTypeList.isEmpty(), mrApps, " Errors tab is not populated");
         for (int e = 0; e < errorTypeList.size(); e++) {
             String errorType = errorTypeList.get(e).getText();
             String newErrorType = "";
-            logger.info("Error Type is " + errorType);
+            LOGGER.info("Error Type is " + errorType);
             if (errorType.contains("FATAL / EXCEPTION-"))
                 newErrorType = "FATAL / EXCEPTION-";
             else
                 newErrorType = errorType;
-            logger.info("New Error Type is " + errorType);
+            LOGGER.info("New Error Type is " + errorType);
         }
         List<WebElement> errorCollapsableList = mrApps.errorCollapse;
         verifyAssertFalse(errorCollapsableList.isEmpty(), mrApps, " No collapsable icon present");
@@ -499,12 +498,12 @@ public class MrAppsDetailsPage {
     public void validateConfigurationTab(MrAppsDetailsPageObject mrApps) {
         String beforeResetProp = mrApps.configPropNum.getText();
         int propNum = Integer.parseInt(beforeResetProp.split("\\s+")[0]);
-        logger.info("Number of properties displayed by default are  " + propNum);
+        LOGGER.info("Number of properties displayed by default are  " + propNum);
 
         //Verify if property key value is present:
         List<WebElement> propKeyList = mrApps.configPropKey;
         List<WebElement> propValueList = mrApps.configPropValue;
-        logger.info("PropKey size = " + propKeyList.size() + " propVal size = " +
+        LOGGER.info("PropKey size = " + propKeyList.size() + " propVal size = " +
                 propValueList.size());
         verifyAssertFalse((propKeyList.isEmpty() && propValueList.isEmpty()), mrApps, " Key/Value is empty");
         Assert.assertEquals(propKeyList.size(), propValueList.size(), "One of the key/Value " +
@@ -515,25 +514,23 @@ public class MrAppsDetailsPage {
         waitExecuter.sleep(3000);
         String afterResetProp = mrApps.configPropNum.getText();
         waitExecuter.waitUntilPageFullyLoaded();
-        logger.info("No. of Properties displayed by default " + beforeResetProp + "\n " +
+        LOGGER.info("No. of Properties displayed by default " + beforeResetProp + "\n " +
                 "No. of Properties displayed after RESET " + afterResetProp);
         Assert.assertEquals(afterResetProp, beforeResetProp, "The properties have not been reset " +
                 "to default");
     }
 
     public void validateConfigurationSearchTab(MrAppsDetailsPageObject mrApps) {
-        logger.info("Click on queue search box and search for path");
+        LOGGER.info("Click on queue search box and search for path");
         mrApps.SearchProp.click();
         mrApps.SearchProp.sendKeys("mapreduce.jobhistory.jhist.format");
         String beforeResetProp = mrApps.configPropNum.getText();
         int propNum = Integer.parseInt(beforeResetProp.split("\\s+")[0]);
-        logger.info("Number of properties displayed by default are  " + propNum);
-
-
+        LOGGER.info("Number of properties displayed by default are  " + propNum);
         //Verify if property key value is present:
         List<WebElement> propKeyList = mrApps.configPropKey;
         List<WebElement> propValueList = mrApps.configPropValue;
-        logger.info("PropKey size = " + propKeyList.size() + " propVal size = " +
+        LOGGER.info("PropKey size = " + propKeyList.size() + " propVal size = " +
                 propValueList.size());
         verifyAssertFalse((propKeyList.isEmpty() && propValueList.isEmpty()), mrApps, " Key/Value is empty");
         Assert.assertEquals(propKeyList.size(), propValueList.size(), "One of the key/Value " +
@@ -543,10 +540,8 @@ public class MrAppsDetailsPage {
         MouseActions.clickOnElement(driver, mrApps.resetButton);
         waitExecuter.sleep(3000);
         String afterResetProp = mrApps.configPropNum.getText();
-        logger.info("No. of Properties displayed by default " + beforeResetProp + "\n " +
+        LOGGER.info("No. of Properties displayed by default " + beforeResetProp + "\n " +
                 "No. of Properties displayed after RESET " + afterResetProp);
-        /*Assert.assertEquals(afterResetProp, beforeResetProp, "The properties have not been reset " +
-                "to default");*/
     }
 
     public void validateLogsTab(MrAppsDetailsPageObject mrApps) {
@@ -582,13 +577,32 @@ public class MrAppsDetailsPage {
         for (int k = 0; k < tagKeyList.size(); k++) {
             String key = tagKeyList.get(k).getText();
             String value = tagValueList.get(k).getText();
-            logger.info("The key value pair is " + "Key = " + key + " | Value = " + value);
+            LOGGER.info("The key value pair is " + "Key = " + key + " | Value = " + value);
             verifyAssertTrue(key.length() > 0, mrApps, "Key is not present");
             verifyAssertTrue(value.length() > 0, mrApps, "Key is not present");
             if (key.equals("JobType"))
                 tagValue = value;
         }
         return tagValue;
+    }
+
+    public ArrayList<Integer> getTableCnt(List<WebElement> tableRowList, String fileType,MrAppsDetailsPageObject mrApps) {
+        ArrayList<Integer> expectedFileCnt = new ArrayList<>();
+        try {
+            for (int row = 1; row <= tableRowList.size(); row++) {
+                WebElement rowData = driver.findElement
+                        (By.xpath("//table[@class='component-data-tables']/tbody/tr[" + row + "]/td[" + 2 + "]"));
+                Assert.assertTrue(rowData.isDisplayed(), "No data under column: File " +
+                        " for " + fileType + " file type");
+                int fileCnt = Integer.parseInt(rowData.getText().trim());
+                LOGGER.info("The file count is " + fileCnt);
+                expectedFileCnt.add(fileCnt);
+            }
+        } catch (org.openqa.selenium.NoSuchElementException ex) {
+            WebElement noData = mrApps.noDataText;
+            Assert.assertFalse(noData.isDisplayed(), "Data not present in the table got {'" + noData.getText() + "}' message");
+        }
+        return expectedFileCnt;
     }
 
 
@@ -598,7 +612,7 @@ public class MrAppsDetailsPage {
         List<WebElement> propKeyList = mrApps.metricsKey;
         List<WebElement> propValueList = mrApps.metricsValue;
         List<WebElement> propDescriptionList = mrApps.metricsDescription;
-        logger.info("PropKey size = " + propKeyList.size() + " propVal size = " +
+        LOGGER.info("PropKey size = " + propKeyList.size() + " propVal size = " +
                 propValueList.size() + "PropDescription size = " + propDescriptionList.size());
         waitExecuter.waitUntilPageFullyLoaded();
         verifyAssertFalse((propKeyList.isEmpty() && propValueList.isEmpty() && propDescriptionList.isEmpty()), mrApps, " Key/Value/Description is empty");
@@ -615,13 +629,13 @@ public class MrAppsDetailsPage {
         String[] expectedATLegendNames = {"Queue Time", "Driver Time", "Job Time"};
         for (int t = 0; t < subTabList.size(); t++) {
             String subTabName = subTabList.get(t).getText();
-            logger.info("The Timings subTab is " + subTabName);
+            LOGGER.info("The Timings subTab is " + subTabName);
             verifyAssertTrue(Arrays.asList(expectedSubTabList).contains(subTabName), mrApps,
                     " Tab list displayed in the UI doesnot match with the expected list of tabs");
             MouseActions.clickOnElement(driver, subTabList.get(t));
             waitExecuter.sleep(1000);
             String titleName = mrApps.timingsTabTitle.getText();
-            logger.info("The Timings subTabs Title is " + titleName);
+            LOGGER.info("The Timings subTabs Title is " + titleName);
             verifyAssertTrue(mrApps.pieChart.isDisplayed(), mrApps, " Piechart for Task Attempts" +
                     " is not displayed");
             if (subTabName.equals("Task Time")) {
@@ -629,7 +643,7 @@ public class MrAppsDetailsPage {
                 verifyAssertFalse(legendNameTTList.isEmpty(), mrApps, "Empty legend list");
                 for (int l = 0; l < legendNameTTList.size(); l++) {
                     String legendName = legendNameTTList.get(l).getText();
-                    logger.info("The Legends for subTab " + subTabName + " is " + legendName);
+                    LOGGER.info("The Legends for subTab " + subTabName + " is " + legendName);
                     verifyAssertTrue(Arrays.asList(expectedTTLegendNames).contains(legendName), mrApps,
                             " The legends:[" + legendName + "] displayed in the UI for Task Time doesnot match to the" +
                                     " expected list of legends: " + Arrays.toString(expectedTTLegendNames));
@@ -661,7 +675,7 @@ public class MrAppsDetailsPage {
                         verifyAssertFalse(driverLegendNameList.isEmpty(), mrApps, "Empty legend list for DRIVER TIME");
                         for (int d = 0; d < driverLegendNameList.size(); d++) {
                             String driverLegend = driverLegendNameList.get(d).getText();
-                            logger.info("The driverLegend name " + driverLegend);
+                            LOGGER.info("The driverLegend name " + driverLegend);
                             verifyAssertTrue(Arrays.asList(expectedDriverLegends).contains(driverLegend), mrApps,
                                     " The legend [" + driverLegend + "] displayed in the fUI for App Time-> Driver Time does not " +
                                             "match to the expected list of legends: " + Arrays.toString(expectedDriverLegends));
@@ -694,53 +708,36 @@ public class MrAppsDetailsPage {
             int footerVal = Integer.parseInt(footerValStr.replaceAll("[^\\dA-Za-z ]",
                     "").trim());
             totalTaskCnt += footerVal;
-            logger.info("FooterName = " + footerName + " Value = " + footerVal);
+            LOGGER.info("FooterName = " + footerName + " Value = " + footerVal);
         }
-        logger.info("Total Task Attempts = " + totalTaskCnt + "");
+        LOGGER.info("Total Task Attempts = " + totalTaskCnt + "");
     }
 
     /**
-     * Method to validate the tasks attempt Map tab in Resources and stages tab.
+     * Method to validate the Contains Graph Map tab in Resources and stages tab.
      */
-    public void validateContainsGraph(MrAppsDetailsPageObject mrApps, ExtentTest test) {
-        List<WebElement> footerNameList = mrApps.taskAttFooterName;
-        List<WebElement> footerValList = mrApps.taskAttFooterVal;
-        String pValStr = mrApps.resourcesContainsInternalVal.getText();
-        test.log(LogStatus.INFO, "Graph title is " + pValStr);
-      /*  String regex = "((?<=[a-zA-Z])(?=[0-9]))|((?<=[0-9])(?=[a-zA-Z]))";
-        int pieChartInternalVal = Integer.parseInt(Arrays.asList(pValStr.split(regex)).get(0));
-        logger.info("The value displayed inside the Pie Chart is " +
-                pieChartInternalVal);*/
-
-    }
-
-    /***
-     * Method to verify the Kafka Metrics KPI Graphs of a connected kafka cluster
-     */
-    public void verifyKafkaKPIGraphs(MrAppsDetailsPageObject mrApps, String expectedMetricsName, String count) {
-        List<WebElement> metricsKpiList = mrApps.kafkaMetrics;
+    public void validateContainsGraph(MrAppsDetailsPageObject mrApps,String expectedMetricsName,
+                                      ExtentTest test) {
+        List<WebElement> metricsKpiList = mrApps.ContainerMetrics;
         List<WebElement> metricsKpiHeaderList = mrApps.containerMetricsHeader;
-        List<WebElement> metricsKpiGraphList = mrApps.kafkaMetricsGraph;
-        Assert.assertFalse(metricsKpiList.isEmpty(), "Metrics for kafka cluster is empty");
-        String xAxisPath = "//*[@id='" + count + "']" + xAxis;
-        String yAxisPath = "//*[@id='" + count + "']" + yAxis;
+        List<WebElement> metricsKpiGraphList = mrApps.ContainerMetricsGraph;
+        Assert.assertFalse(metricsKpiList.isEmpty(), "Contains Graph cluster is empty");
         for (int i = 0; i < metricsKpiList.size(); i++) {
             String metricsName = metricsKpiHeaderList.get(i).getText();
-            logger.info("Metrics Name: " + metricsName + " Expected Name: " + expectedMetricsName);
+            waitExecuter.sleep(2000);
+            LOGGER.info("Metrics Name: " + metricsName + " Expected Name: " + expectedMetricsName);
             if (metricsName.equals(expectedMetricsName)) {
-                Assert.assertFalse(metricsName.isEmpty(), " Metrics Name not displayed");
-                logger.info("Metrics Name: [" + metricsName + "] displayed in the header");
-                waitExecuter.waitUntilPageFullyLoaded();
+                Assert.assertFalse(metricsName.isEmpty(), " Contains Metrics Name not displayed");
+                LOGGER.info("Contains Metrics Name: [" + metricsName + "] displayed in the header");
+                test.log(LogStatus.PASS, "Contains Metrics Name displayed in the header"+metricsName);
                 Assert.assertTrue(metricsKpiGraphList.get(i).isDisplayed(), "The graph for metrics " + metricsName + " is not displayed");
-                waitExecuter.waitUntilPageFullyLoaded();
-                logger.info("The graph for Metrics : [" + metricsName + "] is displayed");
-                logger.info("The footer for Metrics : [" + metricsName + "] is displayed");
-                verifyAxis(xAxisPath, "X-Axis");
-                verifyAxis(yAxisPath, "Y-Axis");
+                LOGGER.info("The graph for Metrics : [" + metricsName + "] is displayed");
+                waitExecuter.sleep(3000);
+
             }
         }
-    }
 
+    }
     /**
      * Method to validate the tasks attempt Reduce tab in Resources and stages tab.
      */
@@ -754,7 +751,7 @@ public class MrAppsDetailsPage {
         String pValStr = mrApps.resourcesReducePieChartInternalVal.getText();
         String regex = "((?<=[a-zA-Z])(?=[0-9]))|((?<=[0-9])(?=[a-zA-Z]))";
         int pieChartInternalVal = Integer.parseInt(Arrays.asList(pValStr.split(regex)).get(0));
-        logger.info("The value displayed inside the Pie Chart is " +
+        LOGGER.info("The value displayed inside the Pie Chart is " +
                 pieChartInternalVal);
         int totalTaskCnt = 0;
         for (int f = 0; f < footerNameList.size(); f++) {
@@ -763,9 +760,9 @@ public class MrAppsDetailsPage {
             int footerVal = Integer.parseInt(footerValStr.replaceAll("[^\\dA-Za-z ]",
                     "").trim());
             totalTaskCnt += footerVal;
-            logger.info("FooterName = " + footerName + " Value = " + footerVal);
+            LOGGER.info("FooterName = " + footerName + " Value = " + footerVal);
         }
-        logger.info("Total Task Attempts = " + totalTaskCnt + " pie chart val = " +
+        LOGGER.info("Total Task Attempts = " + totalTaskCnt + " pie chart val = " +
                 pieChartInternalVal);
     }
 
@@ -782,13 +779,13 @@ public class MrAppsDetailsPage {
         Assert.assertFalse(graphTitleList.isEmpty(), "Metrics for map reduce graphs is empty");
         for (int t = 0; t < graphTitleList.size(); t++) {
             String graphTitle = graphTitleList.get(t).getText();
-            logger.info("Graph title is " + graphTitle);
+            LOGGER.info("Graph title is " + graphTitle);
             verifyAssertTrue(Arrays.asList(expectedGraphTitle).contains(graphTitle), mrApps, " The expected" +
                     " Graph title doesnot match with the titles in the UI");
             verifyAssertTrue(allGraphsList.get(t).isDisplayed(), mrApps, " All Graphs are not displayed");
             switch (graphTitle) {
                 case "Metrics":
-                    logger.info("Validating the Graph " + graphTitle);
+                    LOGGER.info("Validating the Graph " + graphTitle);
                     WebElement metricDropDown = mrApps.resourcesMetricsDropDown;
                     MouseActions.clickOnElement(driver, metricDropDown);
                     List<WebElement> dropDownList = mrApps.resourcesMetricsDropDownData;
@@ -796,9 +793,10 @@ public class MrAppsDetailsPage {
                     verifyAssertFalse(dropDownList.isEmpty(), mrApps, " No contents listed in the dropdown");
                     String[] expectetContents = {"availableMemory", "vmRss", "systemCpuLoad",
                             "processCpuLoad", "gcLoad", "maxHeap", "usedHeap"};
+                    waitExecuter.sleep(1000);
                     for (int d = 0; d < dropDownList.size(); d++) {
                         String metric = dropDownList.get(d).getText();
-                        logger.info("The metric is " + metric);
+                        LOGGER.info("The metric is " + metric);
                         verifyAssertTrue(Arrays.asList(expectetContents).contains(metric), mrApps, " The expected" +
                                 " metric is not listed in the drop down box");
                         //click on the dropdown list element and validate the graph
@@ -808,10 +806,11 @@ public class MrAppsDetailsPage {
                         Assert.assertEquals(resourcesMetricsPlotGraphList.size(), metricLegendList.size(),
                                 "The number of executors in the legend do not match to the ones plotted in the graph");
                         MouseActions.clickOnElement(driver, metricDropDown);
+                        waitExecuter.sleep(4000);
                     }
                 case "Vcores":
                 case "Memory":
-                    logger.info("Validating the Graph " + graphTitle);
+                    LOGGER.info("Validating the Graph " + graphTitle);
                     break;
 
             }
@@ -823,7 +822,7 @@ public class MrAppsDetailsPage {
     /***
      * Method to verify the MR Metrics KPI Graphs of a connected MR cluster
      */
-    public void verifyContainersKPIGraphs(MrAppsDetailsPageObject mrApps, String expectedMetricsName, String graphId) {
+    public void verifyContainersKPIGraphs(MrAppsDetailsPageObject mrApps, String verifyTabName, String graphId) {
         List<WebElement> ContainersKpiHeaderList = mrApps.containerMetricsHeader;
         List<WebElement> allGraphsList = mrApps.resourcesAllGraphs;
         List<WebElement> graphTitleList = mrApps.resourcesGraphTitle;
@@ -832,13 +831,13 @@ public class MrAppsDetailsPage {
         String yAxisPath = "//*[@id='" + graphId + "']" + yAxis;
         for (int i = 0; i < graphTitleList.size(); i++) {
             String metricsName = ContainersKpiHeaderList.get(i).getText();
-            logger.info("Metrics Name: " + metricsName + " Expected Name: " + expectedMetricsName);
-            if (metricsName.equals(expectedMetricsName)) {
+            LOGGER.info("Metrics Name: " + metricsName + " Expected Name: " + verifyTabName);
+            if (metricsName.equals(verifyTabName)) {
                 Assert.assertFalse(metricsName.isEmpty(), " Metrics Name not displayed");
-                logger.info("Metrics Name: [" + metricsName + "] displayed in the header");
+                LOGGER.info("Metrics Name: [" + metricsName + "] displayed in the header");
                 waitExecuter.waitUntilElementPresent(allGraphsList.get(i));
                 Assert.assertTrue(allGraphsList.get(i).isDisplayed(), "The graph for metrics " + metricsName + " is not displayed");
-                logger.info("The graph for Metrics : [" + metricsName + "] is displayed");
+                LOGGER.info("The graph for Metrics : [" + metricsName + "] is displayed");
                 verifyAxis(xAxisPath, "X-Axis");
                 verifyAxis(yAxisPath, "Y-Axis");
 
@@ -862,13 +861,13 @@ public class MrAppsDetailsPage {
         Assert.assertFalse(graphTitleList.isEmpty(), "Metrics for map reduce graphs is empty");
         for (int t = 0; t < graphTitleList.size(); t++) {
             String graphTitle = graphTitleList.get(t).getText();
-            logger.info("Graph title is " + graphTitle);
+            LOGGER.info("Graph title is " + graphTitle);
             verifyAssertTrue(Arrays.asList(expectedGraphTitle).contains(graphTitle), mrApps, " The expected" +
                     " Graph title doesnot match with the titles in the UI");
             verifyAssertTrue(allGraphsList.get(t).isDisplayed(), mrApps, " All Graphs are not displayed");
             switch (graphTitle) {
                 case "Metrics":
-                    logger.info("Validating the Graph " + graphTitle);
+                    LOGGER.info("Validating the Graph " + graphTitle);
                     WebElement metricDropDown = mrApps.resourcesMetricsDropDown;
                     MouseActions.clickOnElement(driver, metricDropDown);
                     List<WebElement> dropDownList = mrApps.resourcesMetricsDropDownData;
@@ -878,7 +877,7 @@ public class MrAppsDetailsPage {
                             "processCpuLoad", "gcLoad", "maxHeap", "usedHeap"};
                     for (int d = 0; d < dropDownList.size(); d++) {
                         String metric = dropDownList.get(d).getText();
-                        logger.info("The metric is " + metric);
+                        LOGGER.info("The metric is " + metric);
                         verifyAssertTrue(Arrays.asList(expectetContents).contains(metric), mrApps, " The expected" +
                                 " metric is not listed in the drop down box");
                         //click on the dropdown list element and validate the graph
@@ -904,7 +903,7 @@ public class MrAppsDetailsPage {
             axisValArr.add(axisPathList.get(i).getText());
             axisValSet.add(axisPathList.get(i).getText());
         }
-        logger.info("Expected " + axisName + " : " + axisValSet + "\n Actual " + axisName + " : " + axisValArr);
+        LOGGER.info("Expected " + axisName + " : " + axisValSet + "\n Actual " + axisName + " : " + axisValArr);
         Assert.assertEquals(axisValSet.size(), axisValArr.size(), "Duplicate values present in the " + axisName + "\n" +
                 "Expected : " + axisValSet + " Actual : " + axisValArr);
     }
@@ -919,14 +918,14 @@ public class MrAppsDetailsPage {
         List<WebElement> allGraphsList = mrApps.resourcesAllGraphs;
         for (int t = 0; t < graphTitleList.size(); t++) {
             String graphTitle = graphTitleList.get(t).getText();
-            logger.info("Graph title is " + graphTitle);
+            LOGGER.info("Graph title is " + graphTitle);
             switch (graphTitle) {
                 case "Task Attempt (MAP)":
-                    logger.info("Validating the Graph " + graphTitle);
+                    LOGGER.info("Validating the Graph " + graphTitle);
                     validateTaskAttemptMapTab(mrApps);
                     break;
                 case "Task Attempt (REDUCE)":
-                    logger.info("Validating the Graph " + graphTitle);
+                    LOGGER.info("Validating the Graph " + graphTitle);
                     validateTaskAttemptReduceTab(mrApps);
                     break;
 
@@ -946,12 +945,13 @@ public class MrAppsDetailsPage {
         List<WebElement> allGraphsList = mrApps.resourcesAllGraphs;
         for (int t = 0; t < graphTitleList.size(); t++) {
             String graphTitle = graphTitleList.get(t).getText();
-            logger.info("Graph title is " + graphTitle);
+            LOGGER.info("Graph title is " + graphTitle);
 
             switch (graphTitle) {
                 case "Containers":
-                    logger.info("Validating the Graph " + graphTitle);
-                    validateContainsGraph(mrApps, test);
+                    LOGGER.info("Validating the Graph " + graphTitle);
+                    validateContainsGraph(mrApps,"Containers",test);
+                    waitExecuter.sleep(3000);
                     break;
             }
             verifyAssertTrue(allGraphsList.get(0).isDisplayed(), mrApps, " No graph is displayed for "
@@ -972,7 +972,7 @@ public class MrAppsDetailsPage {
 
         for (int i = 0; i < appsTabList.size(); i++) {
             tabName = appsTabList.get(i).getText();
-            logger.info("Validating tab " + tabName);
+            LOGGER.info("Validating tab " + tabName);
             if (tabName.equals(verifyTabName)) {
                 switch (verifyTabName) {
                     case "Analysis":
@@ -987,7 +987,7 @@ public class MrAppsDetailsPage {
                         break;
                     case "Errors":
                         MouseActions.clickOnElement(driver, appsTabList.get(i));
-                        waitExecuter.sleep(3000);
+                        waitExecuter.sleep(4000);
                         validateErrorsTab(mrApps);
                         test.log(LogStatus.PASS, "Errors tab is populated");
                         break;
@@ -1033,7 +1033,7 @@ public class MrAppsDetailsPage {
 
         for (int i = 0; i < appsTabList.size(); i++) {
             tabName = appsTabList.get(i).getText();
-            logger.info("Validating tab " + tabName);
+            LOGGER.info("Validating tab " + tabName);
             if (tabName.equals(verifyTabName)) {
                 switch (verifyTabName) {
                     case "Analysis":
@@ -1150,7 +1150,7 @@ public class MrAppsDetailsPage {
         //verifyAssertFalse(insightType.isEmpty(), mrApps, "No Insights generated");
         for (int j = 0; j < insightType.size(); j++) {
             String insights = insightType.get(j).getText();
-            logger.info("Insight generated are " + insights);
+            LOGGER.info("Insight generated are " + insights);
             if (insights.equals("EFFICIENCY")) {
                 // Store it in efficiency array
                 efficiency.add(insights);
@@ -1189,7 +1189,7 @@ public class MrAppsDetailsPage {
      */
     public void navigateToJobsTabFromHeader(SubTopPanelModulePageObject topPanelObj, AllApps allApps,
                                             DatePicker datePicker, ApplicationsPageObject appPageObj, String clusterId) {
-        logger.info("Navigate to jobs tab from header");
+        LOGGER.info("Navigate to jobs tab from header");
         waitExecuter.sleep(3000);
         waitExecuter.waitUntilElementClickable(topPanelObj.jobs);
         waitExecuter.sleep(1000);
@@ -1200,7 +1200,7 @@ public class MrAppsDetailsPage {
         waitExecuter.sleep(2000);
 
         //Select cluster
-        logger.info("Select Cluster: " + clusterId);
+        LOGGER.info("Select Cluster: " + clusterId);
         allApps.selectCluster(clusterId);
         waitExecuter.sleep(3000);
 

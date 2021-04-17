@@ -55,13 +55,6 @@ public class MR_058 extends BaseClass {
         Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
                 .replaceAll("[^\\dA-Za-z ]", "").trim());
         if (totalMapReduceAppCnt > 0) {
-            mrApps.sortByReadApp.click();
-            waitExecuter.waitUntilPageFullyLoaded();
-            mrApps.sortUp.click();
-            waitExecuter.sleep(2000);
-            applicationsPageObject.sortStatus.click();
-            waitExecuter.sleep(2000);
-            Assert.assertTrue(applicationsPageObject.sortUp.isDisplayed(), "Sort up is not working");
             applicationsPageObject.expandStatus.click();
             int appCount = mrDetailsPage.clickOnlyLink("Success");
             //Clicking on the Map reduce app must go to apps detail page and verify Data Tabs must be available on UI

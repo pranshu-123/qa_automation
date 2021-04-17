@@ -43,6 +43,7 @@ public class MR_052_PART3 extends BaseClass {
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         mrDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
 
         test.log(LogStatus.INFO, "Verify that the left pane has map reduce check box and the apps number");
         int totalMapReduceAppCnt = mrDetailsPage.clickOnlyLink("Map Reduce");
@@ -58,6 +59,7 @@ public class MR_052_PART3 extends BaseClass {
                 mrDetailsPage.validateResourcesTab(mrApps,"Task Attempts",test);
 
                 //Close apps details page
+                waitExecuter.waitUntilElementPresent(mrApps.closeAppsPageTab);
                 MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);
 
             } else {

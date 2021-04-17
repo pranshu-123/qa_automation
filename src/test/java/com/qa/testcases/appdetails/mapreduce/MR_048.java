@@ -54,6 +54,7 @@ public class MR_048 extends BaseClass {
             String headerAppId = mrDetailsPage.verifyAppId(mrApps, applicationsPageObject);
             test.log(LogStatus.PASS, "Map Reduce Application Id is displayed in the Header: " + headerAppId);
             mrDetailsPage.verifyRightPaneKpis(mrApps);
+            waitExecuter.waitUntilPageFullyLoaded();
             test.log(LogStatus.PASS, "All the KPIs are listed and the data is populated");
         //Close apps details page
         MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);

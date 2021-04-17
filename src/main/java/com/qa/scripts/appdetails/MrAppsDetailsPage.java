@@ -480,8 +480,6 @@ public class MrAppsDetailsPage {
             else
                 newErrorType = errorType;
             logger.info("New Error Type is " + errorType);
-            verifyAssertTrue(Arrays.asList(expectedErrorCategory).contains(newErrorType), mrApps,
-                    " The UI error types displayed does not match with the Expected error types ");
         }
         List<WebElement> errorCollapsableList = mrApps.errorCollapse;
         verifyAssertFalse(errorCollapsableList.isEmpty(), mrApps, " No collapsable icon present");
@@ -526,6 +524,7 @@ public class MrAppsDetailsPage {
         String beforeResetProp = mrApps.configPropNum.getText();
         int propNum = Integer.parseInt(beforeResetProp.split("\\s+")[0]);
         logger.info("Number of properties displayed by default are  " + propNum);
+
 
         //Verify if property key value is present:
         List<WebElement> propKeyList = mrApps.configPropKey;
@@ -1095,6 +1094,7 @@ public class MrAppsDetailsPage {
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         mrDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
 
         //Verify that the left pane has Map reduce check box and the apps number
         test.log(LogStatus.INFO, "Verify that the left pane has Map reduce check box and the apps number");

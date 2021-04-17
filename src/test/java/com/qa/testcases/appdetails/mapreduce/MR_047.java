@@ -64,9 +64,11 @@ public class MR_047 extends BaseClass {
         //Verify app details page
         if (appCount > 0) {
             String summaryStatus =  mrDetailsPage.verifyJobsSummary(mrApps);
+            waitExecuter.waitUntilPageFullyLoaded();
             test.log(LogStatus.PASS, "Map Reduce Jobs Summary is displayed in the application Header: " + summaryStatus);
             waitExecuter.sleep(4000);
             //Close apps details page
+            waitExecuter.waitUntilElementPresent(mrApps.closeAppsPageTab);
             MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);
             waitExecuter.sleep(3000);
 

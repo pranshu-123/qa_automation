@@ -56,6 +56,7 @@ public class MR_064 extends BaseClass {
                 MouseActions.clickOnElement(driver, mrApps.ConfigurationTab);
                 waitExecuter.waitUntilPageFullyLoaded();
                 mrDetailsPage.validateConfigurationSearchTab(mrApps);
+                waitExecuter.waitUntilPageFullyLoaded();
 
                 //Close apps details page
                 MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);

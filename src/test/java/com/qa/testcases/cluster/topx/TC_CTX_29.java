@@ -6,6 +6,7 @@ import com.qa.constants.PageConstants;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
+import com.qa.pagefactory.clusters.TopXPageObject;
 import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.scripts.clusters.TopX;
 import com.qa.scripts.reports.ReportsArchiveSchedulePage;
@@ -44,6 +45,7 @@ public class TC_CTX_29 extends BaseClass {
         UserActions userActions = new UserActions(driver);
 //        userActions.performActionWithPolling(topPanelPageObject.topXTab, UserAction.CLICK);
         TopX topX = new TopX(driver);
+        TopXPageObject topXPageObject=new TopXPageObject(driver);
 //        topX.closeConfirmationMessageNotification();
 //        topX.clickOnRunButton();
 
@@ -68,7 +70,8 @@ public class TC_CTX_29 extends BaseClass {
                 String tagFilter = topX.getFilterDropDowns().get(0).getText();
                 LOGGER.info("Click on queue filter: " + tagFilter, test);
                 userActions.performActionWithPolling(topX.getFilterDropDowns().get(0), UserAction.CLICK);
-                topX.clickOnModalRunButton();
+                userActions.performActionWithPolling(topXPageObject.runButton, UserAction.CLICK);
+                waitExecuter.waitUntilPageFullyLoaded();
                 String confirmMsg = topX.getConfirmationMessageContent();
                 LOGGER.info("Message after click on Run button: "+ confirmMsg, test);
 //                try {

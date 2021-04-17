@@ -18,6 +18,12 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-up')]")
     public WebElement sortUp;
 
+    @FindBy(xpath = "//span[(text()='Duration')]//following-sibling::a[contains(@class,'sorting')]")
+    public WebElement sortByDurationApp;
+
+    @FindBy(id = "apps-global-search-filter")
+    public WebElement globalSearchBox;
+
     @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-down')]")
     public WebElement sortDown;
 
@@ -54,7 +60,6 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//div[@id='SummaryDetails']//div[3]")
     public WebElement getDbname;
 
-
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[7]")
     public WebElement getduration;
 
@@ -71,7 +76,7 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span/span")
     public WebElement getHeaderAppId;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[2]")
+    @FindBy(css = "div[class='close']")
     public WebElement closeAppsPageTab;
 
     @FindBy(xpath = "//a[@href='#/clusters/overview']")
@@ -120,6 +125,12 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id='appTagsTable']/thead//th")
     public List<WebElement> tagTableHeader;
 
+    @FindBy(xpath = "//a[normalize-space()='Configuration']")
+    public WebElement configurationTab;
+
+    @FindBy(xpath = "//a[normalize-space()='Tags']")
+    public WebElement tagsTab;
+
     @FindBy(xpath = "//*[@id='appTagsTable']/tbody/tr")
     public List<WebElement> tagTableRows;
 
@@ -160,15 +171,14 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"highcharts-vjvb3sy-64\"]/svg/rect[1]")
     public WebElement Dags;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[1]/span[1]")
+    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div/span[1]")
     public WebElement Owner;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[1]/span[2]")
+    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div/span[2]")
     public WebElement Cluster;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[1]/span[3]")
+    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div/span[3]")
     public WebElement Queue;
-
 
     @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[1]/div/div[2]/div/div/div/div[1]/div/p/b")
     public List<WebElement> ganttChartHeaders;
@@ -211,6 +221,15 @@ public class TezAppsDetailsPageObject {
 
     @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/div[2]/span")
     public List<WebElement> configKeywords;
+
+    @FindBy(xpath = "//div[contains(@class,'cta-secondary')]/a/span[text()='RESET']")
+    public WebElement resetButtonAppDetails;
+
+    @FindBy(xpath = " //*[@id='appConfiguration']//tbody/tr/td/p")
+    public List<WebElement> configPropKey;
+
+    @FindBy(xpath = " //*[@id='appConfiguration']//tbody/tr/td/span")
+    public List<WebElement> configPropValue;
 
     @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/span/div/a/span")
     public WebElement resetButton;

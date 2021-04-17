@@ -2,6 +2,7 @@ package com.qa.testcases.data.smallfiles;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.data.SmallfilesPageObject;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.data.Smallfiles;
@@ -57,8 +58,8 @@ public class TC_SF_49 extends BaseClass {
                         .filter(WebElement::isDisplayed).get().getText();
                 test.log(LogStatus.PASS, "Path display in the table- " + selectedMessage);
                 logger.info("Clicked on Modal Run Button");
-                MouseActions.clickOnElement(driver, smallfilesPageObject.closeButton);
-                driver.switchTo().defaultContent();
+                userActions.performActionWithPolling(smallfilesPageObject.modalRunButton, UserAction.CLICK);
+                waitExecuter.sleep(5000);
             } else {
                 String scheduleSuccessMsg = "Small file Report completed successfully.";
                 smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);

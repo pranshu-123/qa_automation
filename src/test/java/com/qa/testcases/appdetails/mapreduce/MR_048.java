@@ -42,9 +42,11 @@ public class MR_048 extends BaseClass {
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         mrDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
 
         test.log(LogStatus.INFO, "Verify that the left pane has map reduce check box and the apps number");
         mrDetailsPage.clickOnlyLink("Map Reduce");
+        waitExecuter.sleep(1000);
         applicationsPageObject.expandStatus.click();
         int appCount = mrDetailsPage.clickOnlyLink("Success");
         //Verify app details page

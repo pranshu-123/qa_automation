@@ -284,8 +284,8 @@ public class MrAppsDetailsPage {
         validateLeftPaneKpis(kpiList);
         List<WebElement> appKpis = mrApps.rightPaneAppKpis;
         List<WebElement> appKpiVal = mrApps.rightPaneAppKpiVal;
-        /*Assert.assertFalse(appKpis.isEmpty(), "No application kpis are listed in the right pane");*/
-      /*  Assert.assertFalse(appKpiVal.isEmpty(), "Application kpi values are empty");*/
+        Assert.assertFalse(appKpis.isEmpty(), "No application kpis are listed in the right pane");
+        Assert.assertFalse(appKpiVal.isEmpty(), "Application kpi values are empty");
         String appDuration = "0";
         for (int i = 0; i < appKpis.size(); i++) {
             Assert.assertNotSame("", appKpis.get(i).getText(), "Kpi text is empty");
@@ -470,15 +470,15 @@ public class MrAppsDetailsPage {
      * Method to validate AppSummary Errors tab.
      */
     public void validateErrorsTab(MrAppsDetailsPageObject mrApps) {
-        String[] expectedErrorCategory = {"driver", "executor-", "rm-diagnostics"};
+        String[] expectedErrorCategory = {"FATAL/EXCEPTION", "ERROR", "WARNING"};
         List<WebElement> errorTypeList = mrApps.errorCategories;
         verifyAssertFalse(errorTypeList.isEmpty(), mrApps, " Errors tab is not populated");
         for (int e = 0; e < errorTypeList.size(); e++) {
             String errorType = errorTypeList.get(e).getText();
             String newErrorType = "";
             logger.info("Error Type is " + errorType);
-            if (errorType.contains("executor-"))
-                newErrorType = "executor-";
+            if (errorType.contains("FATAL / EXCEPTION-"))
+                newErrorType = "FATAL / EXCEPTION-";
             else
                 newErrorType = errorType;
             logger.info("New Error Type is " + errorType);
@@ -495,6 +495,7 @@ public class MrAppsDetailsPage {
         }
     }
 
+
     public void validateConfigurationTab(MrAppsDetailsPageObject mrApps) {
         String beforeResetProp = mrApps.configPropNum.getText();
         int propNum = Integer.parseInt(beforeResetProp.split("\\s+")[0]);
@@ -506,13 +507,14 @@ public class MrAppsDetailsPage {
         logger.info("PropKey size = " + propKeyList.size() + " propVal size = " +
                 propValueList.size());
         verifyAssertFalse((propKeyList.isEmpty() && propValueList.isEmpty()), mrApps, " Key/Value is empty");
-       /* Assert.assertEquals(propKeyList.size(), propValueList.size(), "One of the key/Value " +
-                "is missing");*/
+        Assert.assertEquals(propKeyList.size(), propValueList.size(), "One of the key/Value " +
+                "is missing");
 
         //Check RESET buttons sets default props
         /* MouseActions.clickOnElement(driver, mrApps.resetButton);*/
         waitExecuter.sleep(3000);
         String afterResetProp = mrApps.configPropNum.getText();
+        waitExecuter.waitUntilPageFullyLoaded();
         logger.info("No. of Properties displayed by default " + beforeResetProp + "\n " +
                 "No. of Properties displayed after RESET " + afterResetProp);
         Assert.assertEquals(afterResetProp, beforeResetProp, "The properties have not been reset " +
@@ -591,14 +593,16 @@ public class MrAppsDetailsPage {
 
 
     public void validateMetricsTab(MrAppsDetailsPageObject mrApps) {
+        waitExecuter.waitUntilPageFullyLoaded();
         //Verify if property key value is present:
         List<WebElement> propKeyList = mrApps.metricsKey;
         List<WebElement> propValueList = mrApps.metricsValue;
         List<WebElement> propDescriptionList = mrApps.metricsDescription;
         logger.info("PropKey size = " + propKeyList.size() + " propVal size = " +
                 propValueList.size() + "PropDescription size = " + propDescriptionList.size());
+        waitExecuter.waitUntilPageFullyLoaded();
         verifyAssertFalse((propKeyList.isEmpty() && propValueList.isEmpty() && propDescriptionList.isEmpty()), mrApps, " Key/Value/Description is empty");
-        Assert.assertEquals(propKeyList.size(), propValueList.size(),propDescriptionList.size(), "One of the key/Value/Description " +
+        Assert.assertEquals(propKeyList.size(), propValueList.size(), propDescriptionList.size(), "One of the key/Value/Description " +
                 "is missing");
     }
 
@@ -698,7 +702,7 @@ public class MrAppsDetailsPage {
     /**
      * Method to validate the tasks attempt Map tab in Resources and stages tab.
      */
-    public void validateContainsGraph(MrAppsDetailsPageObject mrApps,ExtentTest test) {
+    public void validateContainsGraph(MrAppsDetailsPageObject mrApps, ExtentTest test) {
         List<WebElement> footerNameList = mrApps.taskAttFooterName;
         List<WebElement> footerValList = mrApps.taskAttFooterVal;
         String pValStr = mrApps.resourcesContainsInternalVal.getText();
@@ -713,7 +717,7 @@ public class MrAppsDetailsPage {
     /***
      * Method to verify the Kafka Metrics KPI Graphs of a connected kafka cluster
      */
-    public void verifyKafkaKPIGraphs(MrAppsDetailsPageObject mrApps, String expectedMetricsName,String count) {
+    public void verifyKafkaKPIGraphs(MrAppsDetailsPageObject mrApps, String expectedMetricsName, String count) {
         List<WebElement> metricsKpiList = mrApps.kafkaMetrics;
         List<WebElement> metricsKpiHeaderList = mrApps.containerMetricsHeader;
         List<WebElement> metricsKpiGraphList = mrApps.kafkaMetricsGraph;
@@ -779,9 +783,9 @@ public class MrAppsDetailsPage {
         for (int t = 0; t < graphTitleList.size(); t++) {
             String graphTitle = graphTitleList.get(t).getText();
             logger.info("Graph title is " + graphTitle);
-            /*verifyAssertTrue(Arrays.asList(expectedGraphTitle).contains(graphTitle), mrApps, " The expected" +
-                    " Graph title doesnot match with the titles in the UI");*/
-          /*  verifyAssertTrue(allGraphsList.get(t).isDisplayed(), mrApps, " All Graphs are not displayed");*/
+            verifyAssertTrue(Arrays.asList(expectedGraphTitle).contains(graphTitle), mrApps, " The expected" +
+                    " Graph title doesnot match with the titles in the UI");
+            verifyAssertTrue(allGraphsList.get(t).isDisplayed(), mrApps, " All Graphs are not displayed");
             switch (graphTitle) {
                 case "Metrics":
                     logger.info("Validating the Graph " + graphTitle);
@@ -789,20 +793,20 @@ public class MrAppsDetailsPage {
                     MouseActions.clickOnElement(driver, metricDropDown);
                     List<WebElement> dropDownList = mrApps.resourcesMetricsDropDownData;
                     waitExecuter.sleep(2000);
-                   /* verifyAssertFalse(dropDownList.isEmpty(), mrApps, " No contents listed in the dropdown");*/
+                    verifyAssertFalse(dropDownList.isEmpty(), mrApps, " No contents listed in the dropdown");
                     String[] expectetContents = {"availableMemory", "vmRss", "systemCpuLoad",
                             "processCpuLoad", "gcLoad", "maxHeap", "usedHeap"};
                     for (int d = 0; d < dropDownList.size(); d++) {
                         String metric = dropDownList.get(d).getText();
                         logger.info("The metric is " + metric);
-                      /*  verifyAssertTrue(Arrays.asList(expectetContents).contains(metric), mrApps, " The expected" +
-                                " metric is not listed in the drop down box");*/
+                        verifyAssertTrue(Arrays.asList(expectetContents).contains(metric), mrApps, " The expected" +
+                                " metric is not listed in the drop down box");
                         //click on the dropdown list element and validate the graph
                         MouseActions.clickOnElement(driver, dropDownList.get(d));
                         List<WebElement> resourcesMetricsPlotGraphList = mrApps.resourcesMetricsPlotGraph;
                         List<WebElement> metricLegendList = mrApps.resourcesMetricsPlotGraphLegend;
-                       /* Assert.assertEquals(resourcesMetricsPlotGraphList.size(), metricLegendList.size(),
-                                "The number of executors in the legend do not match to the ones plotted in the graph");*/
+                        Assert.assertEquals(resourcesMetricsPlotGraphList.size(), metricLegendList.size(),
+                                "The number of executors in the legend do not match to the ones plotted in the graph");
                         MouseActions.clickOnElement(driver, metricDropDown);
                     }
                 case "Vcores":
@@ -908,7 +912,7 @@ public class MrAppsDetailsPage {
     /**
      * Method to validate AppSummary Resource tab.
      */
-    public void validateMapandReducTab(MrAppsDetailsPageObject mrApps,String verifyTabName, ExtentTest test) {
+    public void validateMapandReduceTab(MrAppsDetailsPageObject mrApps, String verifyTabName, ExtentTest test) {
         String[] expectedGraphTitle = {"Task Attempt (MAP)", "Task Attempt (REDUCE)"};
         waitExecuter.waitUntilPageFullyLoaded();
         List<WebElement> graphTitleList = mrApps.resourcesGraphTitle;
@@ -935,7 +939,7 @@ public class MrAppsDetailsPage {
     /**
      * Method to validate AppSummary Resource tab.
      */
-    public void validateContainsTab(MrAppsDetailsPageObject mrApps, ExtentTest test) {
+    public void validateContainsTab(MrAppsDetailsPageObject mrApps, String verifyTabName, ExtentTest test) {
         String[] expectedGraphTitle = {"Containers"};
         waitExecuter.waitUntilPageFullyLoaded();
         List<WebElement> graphTitleList = mrApps.resourcesGraphTitle;
@@ -944,16 +948,16 @@ public class MrAppsDetailsPage {
             String graphTitle = graphTitleList.get(t).getText();
             logger.info("Graph title is " + graphTitle);
 
-                switch (graphTitle) {
-                    case "Containers":
-                        logger.info("Validating the Graph " + graphTitle);
-                        validateContainsGraph(mrApps,test);
-                        break;
-                }
-                verifyAssertTrue(allGraphsList.get(0).isDisplayed(), mrApps, " No graph is displayed for "
-                        + graphTitle);
+            switch (graphTitle) {
+                case "Containers":
+                    logger.info("Validating the Graph " + graphTitle);
+                    validateContainsGraph(mrApps, test);
+                    break;
             }
+            verifyAssertTrue(allGraphsList.get(0).isDisplayed(), mrApps, " No graph is displayed for "
+                    + graphTitle);
         }
+    }
 
 
     /**
@@ -961,7 +965,7 @@ public class MrAppsDetailsPage {
      */
     public String verifyAppSummaryTabs(MrAppsDetailsPageObject mrApps, String verifyTabName, ExtentTest test) {
         List<WebElement> appsTabList = mrApps.appSummaryTabs;
-       /* verifyAssertFalse(appsTabList.isEmpty(), mrApps, "No Tabs loaded");*/
+        /* verifyAssertFalse(appsTabList.isEmpty(), mrApps, "No Tabs loaded");*/
         String tabName = "";
         WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.pollingEvery(Duration.ofMillis(10));
@@ -1111,6 +1115,11 @@ public class MrAppsDetailsPage {
                 appCount = mrDetailsPage.clickOnlyLink("Failed");
             else
                 appCount = mrDetailsPage.clickOnlyLink("Success");
+            waitExecuter.sleep(2000);
+            mrApps.sortByDurationApp.click();
+            waitExecuter.waitUntilPageFullyLoaded();
+            mrApps.sortUp.click();
+            waitExecuter.sleep(2000);
             //Clicking on the Spark app must go to apps detail page
             if (appCount > 0) {
                 String headerAppId = mrDetailsPage.verifyAppId(mrApps, applicationsPageObject);

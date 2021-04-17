@@ -61,6 +61,12 @@ public class MR_047 extends BaseClass {
         mrDetailsPage.clickOnlyLink("Map Reduce");
         applicationsPageObject.expandStatus.click();
         int appCount = mrDetailsPage.clickOnlyLink("Success");
+        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.sleep(2000);
+        mrApps.sortByDurationApp.click();
+        waitExecuter.waitUntilPageFullyLoaded();
+        mrApps.sortUp.click();
+        waitExecuter.sleep(2000);
         //Verify app details page
         if (appCount > 0) {
             String summaryStatus =  mrDetailsPage.verifyJobsSummary(mrApps);

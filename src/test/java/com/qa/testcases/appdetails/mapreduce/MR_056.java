@@ -71,7 +71,7 @@ public class MR_056 extends BaseClass {
                 waitExecuter.waitUntilPageFullyLoaded();
                 MouseActions.clickOnElement(driver, mrApps.resourcesTab);
                 waitExecuter.waitUntilPageFullyLoaded();
-                mrDetailsPage.validateMapandReducTab(mrApps,"Task Attempts",test);
+                mrDetailsPage.validateContainsTab(mrApps,"Containers",test);
                 waitExecuter.waitUntilPageFullyLoaded();
 
                 //Close apps details page

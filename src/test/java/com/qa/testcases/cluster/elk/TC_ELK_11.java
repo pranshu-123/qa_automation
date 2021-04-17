@@ -21,7 +21,7 @@ public class TC_ELK_11 extends BaseClass {
   private static final java.util.logging.Logger LOGGER = Logger.getLogger(TC_ELK_11.class.getName());
 
   @Test(dataProvider = "clusterid-data-provider")
-  public void verifyLogstashPipelineInTable(String clusterId) {
+  public void TC_ELK_11_verifyLogstashPipelineInTable(String clusterId) {
     test = extent.startTest("verifyLogstashPipelineInTable: " + clusterId,
         "Validate pipelines in table.");
     test.assignCategory(" ELK ");
@@ -32,10 +32,6 @@ public class TC_ELK_11 extends BaseClass {
     LOGGER.info("Initialize all class objects");
     ELKPage elkPage = new ELKPage(driver);
     ELKPageObject elkPageObj = new ELKPageObject(driver);
-    DatePicker datePicker = new DatePicker(driver);
-    WaitExecuter waitExecuter = new WaitExecuter(driver);
-    AllApps allApps = new AllApps(driver);
-
     // Navigate to pipeline tab from Logstash tab
     elkPage.navigateToPipilineTab(elkPageObj);
     elkPage.verifyPipelineTab(elkPageObj);

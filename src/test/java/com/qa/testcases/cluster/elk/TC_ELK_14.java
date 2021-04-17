@@ -20,7 +20,7 @@ public class TC_ELK_14 extends BaseClass {
   private static final java.util.logging.Logger LOGGER = Logger.getLogger(TC_ELK_13.class.getName());
 
   @Test(dataProvider = "clusterid-data-provider")
-  public void verifyLogstashKPIsWithAssociatedNodes(String clusterId) {
+  public void TC_ELK_14_verifyLogstashKPIsWithAssociatedNodes(String clusterId) {
     test = extent.startTest("verifyLogstashKPIsWithAssociatedNodes: " + clusterId,
         "Validate Events received , events emitted, events filtered value with associated nodes.");
     test.assignCategory(" ELK ");

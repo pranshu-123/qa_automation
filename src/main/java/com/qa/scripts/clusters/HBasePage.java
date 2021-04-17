@@ -313,7 +313,7 @@ public class HBasePage {
         logger.info("All table names in region server: "+ regionName +" are - "+ regionSvrTableNames);
     }
 
-    public void clickOnTableName(){
+    public String  clickOnTableName(){
         waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseFirstRegionSvr);
         String regionName = hBasePageObject.hBaseFirstRegionSvr.getText();
         MouseActions.clickOnElement(driver,hBasePageObject.hBaseFirstRegionSvr);
@@ -332,9 +332,10 @@ public class HBasePage {
 
         logger.info("Clicked on table name: "+ tableName);
 
-        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseTableTab);
-        String hBaseTblTabText = hBasePageObject.hBaseTableTab.getText();
-        Assert.assertTrue(hBaseTblTabText.equals("Tables"),"HBase Table Tab not found");
+        return tableName;
+//        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseTableTab);
+//        String hBaseTblTabText = hBasePageObject.hBaseTableTab.getText();
+//        Assert.assertTrue(hBaseTblTabText.equals("Tables"),"HBase Table Tab not found, actual tab found is "+ hBaseTblTabText);
 
     }
     public void verifyAlertsInRegionServerHealth(){
@@ -370,17 +371,28 @@ public class HBasePage {
 
     }
 
-    public void verifyTblRegionUIWithinRegionServer(){
-        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseTableHostTbl);
-        List<WebElement> hBaseTableHostTblRowsList = hBasePageObject.hBaseTableHostTblRows;
+    public void verifyTblRegionUIWithinRegionServer(String tblName){
+        String xpathRegionTbl = "//table[@id='regions-" + tblName+ "']";   //table[@id='null-table']
+        WebElement regionTblEle = driver.findElement(By.xpath(xpathRegionTbl));
+        waitExecuter.waitUntilElementPresent(regionTblEle);
+
+        List<WebElement> hBaseTableHostTblRowsList = driver.findElements(By.xpath(xpathRegionTbl+"/tbody/tr"));//hBasePageObject.hBaseTableHostTblRows;
         Assert.assertFalse(hBaseTableHostTblRowsList.isEmpty(), "HBase Table Host Table Rows not generated.");
 
-        waitExecuter.waitUntilElementPresent(hBasePageObject.getHbaseTableHostFirstRowRegionName);
-        String regionName = hBasePageObject.getHbaseTableHostFirstRowRegionName.getText();
+        String firstRowRegionName = xpathRegionTbl+"/tbody/tr[1]/td[1]";
+        WebElement firstRowRegionNameEle = driver.findElement(By.xpath(firstRowRegionName));
+
+        //waitExecuter.waitUntilElementPresent(hBasePageObject.getHbaseTableHostFirstRowRegionName);
+        waitExecuter.waitUntilElementPresent(firstRowRegionNameEle);
+        String regionName = firstRowRegionNameEle.getText(); //hBasePageObject.getHbaseTableHostFirstRowRegionName.getText();
         Assert.assertFalse(regionName.isEmpty(),"Region name is empty.");
 
-        waitExecuter.waitUntilElementPresent(hBasePageObject.getHbaseTableHostFirstRowRegionSvrName);
-        String regionSvrName = hBasePageObject.getHbaseTableHostFirstRowRegionSvrName.getText();
+        //table[@id='hbaseTableHostDataTAble']/tbody/tr[1]/td[2]
+        String firstRowSecondRegionName = xpathRegionTbl+"/tbody/tr[1]/td[2]";
+        WebElement firstRowSecondRegionNameEle = driver.findElement(By.xpath(firstRowSecondRegionName));
+        //waitExecuter.waitUntilElementPresent(hBasePageObject.getHbaseTableHostFirstRowRegionSvrName);
+        waitExecuter.waitUntilElementPresent(firstRowSecondRegionNameEle);
+        String regionSvrName = firstRowSecondRegionNameEle.getText(); //hBasePageObject.getHbaseTableHostFirstRowRegionSvrName.getText();
         Assert.assertFalse(regionSvrName.isEmpty(),"Region server name is empty.");
 
         logger.info("Region name: "+regionName + ", Region server name: "+regionSvrName  );
@@ -419,7 +431,7 @@ public class HBasePage {
         String regionTableName = hBasePageObject.regionTableName.getText();
         logger.info("Region table name: "+ regionTableName);
         //Verify Region name and Region Svr name
-        verifyTblRegionUIWithinRegionServer();
+        verifyTblRegionUIWithinRegionServer(regionTableName);
     }
 
     public void verifyRegionTabColumns(){

@@ -53,7 +53,7 @@ public class TC_MP_SC_05 extends BaseClass {
             waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.confirmationMessageElement,
                     "Services and Versions Compatibility completed successfully.");
             servicesAndVersionsCompatibility.validateLatestReport();
-            Assert.assertTrue(expectedPlatforms.equals(servicesAndVersionsCompatibility.getPlatforms()));
+            Assert.assertTrue(expectedPlatforms.equals(servicesAndVersionsCompatibility.getPlatforms()),"Failed due to mismatch of expected and actual platforms: "+servicesAndVersionsCompatibility.getPlatforms());
             test.log(LogStatus.PASS, "Verified Services and Versions Compatibility report is loaded properly " +
                     "for Azure HDI.");
         } catch (TimeoutException te) {

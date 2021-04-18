@@ -368,23 +368,21 @@ public class HBasePage {
         WebElement regionTblEle = driver.findElement(By.xpath(xpathRegionTbl));
         waitExecuter.waitUntilElementPresent(regionTblEle);
 
-        List<WebElement> hBaseTableHostTblRowsList = driver.findElements(By.xpath(xpathRegionTbl+"/tbody/tr"));//hBasePageObject.hBaseTableHostTblRows;
+        List<WebElement> hBaseTableHostTblRowsList = driver.findElements(By.xpath(xpathRegionTbl+"/tbody/tr"));
         Assert.assertFalse(hBaseTableHostTblRowsList.isEmpty(), "HBase Table Host Table Rows not generated.");
 
         String firstRowRegionName = xpathRegionTbl+"/tbody/tr[1]/td[1]";
         WebElement firstRowRegionNameEle = driver.findElement(By.xpath(firstRowRegionName));
 
-        //waitExecuter.waitUntilElementPresent(hBasePageObject.getHbaseTableHostFirstRowRegionName);
         waitExecuter.waitUntilElementPresent(firstRowRegionNameEle);
-        String regionName = firstRowRegionNameEle.getText(); //hBasePageObject.getHbaseTableHostFirstRowRegionName.getText();
+        String regionName = firstRowRegionNameEle.getText();
         Assert.assertFalse(regionName.isEmpty(),"Region name is empty.");
 
-        //table[@id='hbaseTableHostDataTAble']/tbody/tr[1]/td[2]
         String firstRowSecondRegionName = xpathRegionTbl+"/tbody/tr[1]/td[2]";
         WebElement firstRowSecondRegionNameEle = driver.findElement(By.xpath(firstRowSecondRegionName));
-        //waitExecuter.waitUntilElementPresent(hBasePageObject.getHbaseTableHostFirstRowRegionSvrName);
+
         waitExecuter.waitUntilElementPresent(firstRowSecondRegionNameEle);
-        String regionSvrName = firstRowSecondRegionNameEle.getText(); //hBasePageObject.getHbaseTableHostFirstRowRegionSvrName.getText();
+        String regionSvrName = firstRowSecondRegionNameEle.getText();
         Assert.assertFalse(regionSvrName.isEmpty(),"Region server name is empty.");
 
         logger.info("Region name: "+regionName + ", Region server name: "+regionSvrName  );
@@ -431,10 +429,8 @@ public class HBasePage {
         String xpathRegionsTblName =  "//table[@id='regions-"+tableName+"']";
         WebElement regionsTblNameEle = driver.findElement(By.xpath(xpathRegionsTblName));
         waitExecuter.waitUntilElementPresent(regionsTblNameEle);
-        //waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseTableHostTbl);
 
         List<WebElement> hBaseTableHostTblRowsList = driver.findElements(By.xpath(xpathRegionsTblName+"/tbody/tr"));
-        //List<WebElement> hBaseTableHostTblRowsList = hBasePageObject.hBaseTableHostTblRows;
         Assert.assertFalse(hBaseTableHostTblRowsList.isEmpty(), "HBase Table Host Table Rows not generated.");
 
         List<String> regionNameList = new ArrayList<>();

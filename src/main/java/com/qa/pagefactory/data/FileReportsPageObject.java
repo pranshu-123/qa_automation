@@ -44,13 +44,13 @@ public class FileReportsPageObject {
   @FindBy(xpath = "//table[@class='component-data-tables row-hover']/thead/tr/th")
   public List<WebElement> tableHeader;
 
-  @FindBy(xpath = "//table[@class='component-data-tables row-hover']/thead/tr/th[2]")
+  @FindBy(xpath = "//body//div//th[7]")
   public WebElement fileColumn;
 
-  @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody/tr")
+  @FindBy(xpath = "//table[@class='row-hover component-data-tables margin-bottom']/tbody/tr")
   public List<WebElement> fileTableRows;
 
-  @FindBy(xpath = "//table[@class='component-data-tables']/tbody/tr[1]/td/p")
+  @FindBy(xpath = "//h3[normalize-space()='No Data Available']")
   public WebElement noDataText;
 
   @FindBy(xpath = "//*[@id='file-report']//div[4]/div[2]/nav/p")

@@ -30,8 +30,8 @@ public class TC_MP_SC_02 extends BaseClass {
         LOGGER.info("Clicked on Migration and accessing Services And Versions Compatibility page ");
         servicesAndVersionsCompatibility.clickOnServicesAndVersionMigrationTab();
         LOGGER.info("Clicked on Services And Versions Compatibility tab");
-        servicesAndVersionsCompatibility.closeMessageBanner();
-        LOGGER.info("Clicked on close banner");
+//        servicesAndVersionsCompatibility.closeMessageBanner();
+//        LOGGER.info("Clicked on close banner");
         servicesAndVersionsCompatibility.clickOnRunButton();
         LOGGER.info("Clicked on Run button");
         servicesAndVersionsCompatibility.getCloudProducts();

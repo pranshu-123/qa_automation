@@ -10,6 +10,7 @@ import com.qa.scripts.appdetails.MrAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,14 +36,17 @@ public class MR_046 extends BaseClass {
         MrAppsDetailsPageObject mrApps = new MrAppsDetailsPageObject(driver);
         MrAppsDetailsPage mrDetailsPage = new MrAppsDetailsPage(driver);
         DatePicker datePicker = new DatePicker(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         AllApps allApps = new AllApps(driver);
 
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         mrDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
 
         test.log(LogStatus.INFO, "Verify that the left pane has map reduce check box and the apps number");
         mrDetailsPage.clickOnlyLink("Map Reduce");
+        waitExecuter.sleep(2000);
         applicationsPageObject.expandStatus.click();
         int appCount = mrDetailsPage.clickOnlyLink("Success");
         //Clicking on the Spark app must go to apps detail page
@@ -52,6 +56,7 @@ public class MR_046 extends BaseClass {
             mrDetailsPage.verifyRightPaneKpis(mrApps);
             test.log(LogStatus.PASS, "All the KPIs are listed and the data is populated");
             //Close apps details page
+            waitExecuter.waitUntilElementPresent(mrApps.closeAppsPageTab);
             MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);
         } else {
             test.log(LogStatus.SKIP, "No Spark Application present");

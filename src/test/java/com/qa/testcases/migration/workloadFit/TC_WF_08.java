@@ -7,7 +7,6 @@ import com.qa.pagefactory.migration.WorkloadFitPageObject;
 import com.qa.scripts.migration.WorkloadFit;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -64,25 +63,27 @@ public class TC_WF_08 extends BaseClass {
                 fitPageObject.selectJobFirstCheckBox);
         // Click on Run button to open report page
         test.log(LogStatus.INFO, "Click on Run button to open report page");
+        fit.setStorage("1500", "1500");
         fit.clickRunForNewReport();
-
         try {
             waitExecuter.waitUntilTextToBeInWebElement(cdPageObject.confirmationMessageElement,
                     "Workload Fit report completed successfully");
             test.log(LogStatus.PASS, "Verified Workload Fit report is loaded properly.");
-            waitExecuter.sleep(2000);
-            List<WebElement> getMapClusterTabs = fitPageObject.mapToClusterTabs;
-            List<String> getMapClusterTabNames = new ArrayList<>();
-            for (WebElement mapCluster : getMapClusterTabs) {
-                getMapClusterTabNames.add(mapCluster.getText().trim().toLowerCase());
-            }
-            LOGGER.info("Name of map to cluster tab present is - " + getMapClusterTabNames.toString());
-            test.log(LogStatus.INFO, "Name of map to cluster tab present is - " + getMapClusterTabNames.toString());
-
-            Assert.assertEquals(getMapClusterTabNames.size(), 2, " The cluster tab present should be 2 but are not.");
-            test.log(LogStatus.PASS, "Map to multiple cluster is not present");
-        } catch (TimeoutException | NoSuchElementException te) {
-            throw new AssertionError("Workload Fit Report not completed successfully.");
+        } catch (TimeoutException te) {
+            waitExecuter.waitUntilTextToBeInWebElement(cdPageObject.confirmationMessageElement,
+                    "Workload Fit report completed successfully");
+            test.log(LogStatus.PASS, "Verified Workload Fit report is loaded properly.");
         }
+        waitExecuter.sleep(2000);
+        List<WebElement> getMapClusterTabs = fitPageObject.mapToClusterTabs;
+        List<String> getMapClusterTabNames = new ArrayList<>();
+        for (WebElement mapCluster : getMapClusterTabs) {
+            getMapClusterTabNames.add(mapCluster.getText().trim().toLowerCase());
+        }
+        LOGGER.info("Name of map to cluster tab present is - " + getMapClusterTabNames.toString());
+        test.log(LogStatus.INFO, "Name of map to cluster tab present is - " + getMapClusterTabNames.toString());
+
+        Assert.assertEquals(getMapClusterTabNames.size(), 2, " The cluster tab present should be 2 but are not.");
+        test.log(LogStatus.PASS, "Map to multiple cluster is not present");
     }
 }

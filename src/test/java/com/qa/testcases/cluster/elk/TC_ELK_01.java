@@ -22,7 +22,7 @@ public class TC_ELK_01 extends BaseClass {
   private static final java.util.logging.Logger LOGGER = Logger.getLogger(com.qa.testcases.cluster.elk.TC_ELK_01.class.getName());
 
   @Test(dataProvider = "clusterid-data-provider")
-  public void verifyLogstashPipeline(String clusterId) {
+  public void TC_ELK_01_verifyLogstashPipeline(String clusterId) {
     test = extent.startTest("verifyLogstashPipeline: " + clusterId,
         "Validate logstash pipeline data in Unravel UI..");
     test.assignCategory(" ELK ");

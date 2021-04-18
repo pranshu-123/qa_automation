@@ -21,7 +21,7 @@ public class TC_ELK_05 extends BaseClass {
   private static final java.util.logging.Logger LOGGER = Logger.getLogger(com.qa.testcases.cluster.elk.TC_ELK_05.class.getName());
 
   @Test(dataProvider = "clusterid-data-provider")
-  public void verifyEventsEmittedKPI(String clusterId) {
+  public void TC_ELK_05_verifyEventsEmittedKPI(String clusterId) {
     test = extent.startTest("verifyEventsEmittedKPI: " + clusterId,
         "Validate Events Emitted KPI.");
     test.assignCategory(" ELK ");

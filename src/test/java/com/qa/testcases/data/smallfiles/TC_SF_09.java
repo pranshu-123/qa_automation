@@ -66,6 +66,7 @@ public class TC_SF_09 extends BaseClass {
         smallfiles.navigateToAdvancedOptions(smallfilesPageObject, test, "3", "5");
         waitExecuter.waitUntilPageFullyLoaded();
         userActions.performActionWithPolling(smallfilesPageObject.modalRunButton, UserAction.CLICK);
+        waitExecuter.sleep(8000);
         LOGGER.info("Clicked on Modal Run Button");
         test.log(LogStatus.INFO, "Clicked on Modal Run Button");
 
@@ -73,6 +74,7 @@ public class TC_SF_09 extends BaseClass {
         test.log(LogStatus.PASS, "Verified the absolute size  poulated :"+heading);
 
         try {
+            waitExecuter.waitUntilElementPresent(smallfilesPageObject.confirmationMessageElement);
             waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
                     "Small file Report completed successfully.");
             waitExecuter.sleep(3000);

@@ -51,19 +51,23 @@ public class TC_CD_02 extends BaseClass {
             test.log(LogStatus.INFO, "Click on Run button to open report page");
             LOGGER.info("Click on Run button to open report page");
             userAction.performActionWithPolling(discoveryPageObject.runButton, UserAction.CLICK);
+            waitExecuter.waitUntilPageFullyLoaded();
 
             //Click on date range
             test.log(LogStatus.INFO, "Click on date range");
             LOGGER.info("Click on date range");
             userAction.performActionWithPolling(datePickerPageObject.dateRange, UserAction.CLICK);
+            waitExecuter.waitUntilPageFullyLoaded();
 
             String dateRangeValue = datePickerPageObject.dateRangeOptions.get(i).getText();
             userAction.performActionWithPolling(datePickerPageObject.dateRangeOptions.get(i), UserAction.CLICK);
+            waitExecuter.waitUntilPageFullyLoaded();
 
             // Click on Run button of modal window
             test.log(LogStatus.INFO, "Click on Run button of modal window for date range- " + dateRangeValue);
             LOGGER.info("Click on Run button of modal window for date range- " + dateRangeValue);
             userAction.performActionWithPolling(discoveryPageObject.modalRunButton, UserAction.CLICK);
+            waitExecuter.waitUntilPageFullyLoaded();
 
             try {
                 waitExecuter.waitUntilTextToBeInWebElement(discoveryPageObject.confirmationMessageElement,

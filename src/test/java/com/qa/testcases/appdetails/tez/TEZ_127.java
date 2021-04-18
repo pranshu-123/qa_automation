@@ -57,6 +57,7 @@ TEZ_127 extends BaseClass {
         if (appCount > 0) {
             String statusValue = tezDetailsPage.verifyStatus(tezApps, applicationsPageObject);
             test.log(LogStatus.PASS, "Tez Status  is displayed in the Header: " + statusValue);
+            waitExecuter.waitUntilPageFullyLoaded();
             //Close apps details page
             MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
             waitExecuter.sleep(3000);

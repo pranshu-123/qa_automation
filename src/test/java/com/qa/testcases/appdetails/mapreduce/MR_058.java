@@ -58,17 +58,17 @@ public class MR_058 extends BaseClass {
             applicationsPageObject.expandStatus.click();
             int appCount = mrDetailsPage.clickOnlyLink("Success");
             //Clicking on the Map reduce app must go to apps detail page and verify Data Tabs must be available on UI
-            mrDetailsPage.sleep(2000);
+            waitExecuter.sleep(2000);
             mrApps.sortByDurationApp.click();
             waitExecuter.waitUntilPageFullyLoaded();
             mrApps.sortUp.click();
-            mrDetailsPage.sleep(2000);
+            waitExecuter.sleep(2000);
             if (appCount > 0) {
                 mrApps.getTypeFromTable.click();
                 waitExecuter.waitUntilPageFullyLoaded();
                 MouseActions.clickOnElement(driver, mrApps.resourcesTab);
 
-                mrDetailsPage.sleep(2000);
+                waitExecuter.sleep(2000);
                 mrDetailsPage.validateResourcesTab(mrApps,"Metrics",test);
                 test.log(LogStatus.PASS, "Verify the Metrics Graphs are present in OS Memory");
                 //Close apps details page

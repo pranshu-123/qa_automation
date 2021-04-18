@@ -850,15 +850,6 @@ public class MrAppsDetailsPage {
         }
     }
 
-    public void sleep(long millis) {
-        try {
-            Thread.sleep(millis);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-
     /***
      * Method to verify the Metrics KPI Graphs of a connected MR cluster
      */

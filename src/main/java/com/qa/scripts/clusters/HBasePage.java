@@ -333,10 +333,6 @@ public class HBasePage {
         logger.info("Clicked on table name: "+ tableName);
 
         return tableName;
-//        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseTableTab);
-//        String hBaseTblTabText = hBasePageObject.hBaseTableTab.getText();
-//        Assert.assertTrue(hBaseTblTabText.equals("Tables"),"HBase Table Tab not found, actual tab found is "+ hBaseTblTabText);
-
     }
     public void verifyAlertsInRegionServerHealth(){
         List<WebElement> hBaseRegionSvrHealth = hBasePageObject.hBaseRegionSvrHealth;
@@ -352,10 +348,6 @@ public class HBasePage {
                 Assert.assertTrue(toolTipText.length()>0, " Tool tip text is not found.");
             }
         }
-
-//        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseSvrHealthHeader);
-//        Assert.assertTrue(hBasePageObject.hBaseSvrHealthHeader.getText().equals("Server Health and Context"),
-//                "'Server Health and Context' header not found");
     }
 
     public String verifyRegionServerHealth(){
@@ -431,7 +423,6 @@ public class HBasePage {
         String regionTableName = hBasePageObject.regionTableName.getText();
         logger.info("Region table name: "+ regionTableName);
         //Verify Region name and Region Svr name
-        //verifyTblRegionUIWithinRegionServer(regionTableName);
         verifyTblRegionUIWithinRegionServer(tableName);
         return tableName;
     }

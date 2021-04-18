@@ -111,14 +111,19 @@ public class ELKPageObject {
   @FindBy(xpath = "//div[contains(@class,'component-tabs-secondary')]/ul")
   public WebElement nodePipeline;
 
-  @FindBy(xpath = "//table[@class='component-data-tables']//tbody/tr")
+  //@FindBy(xpath = "//table[@class='component-data-tables']//tbody/tr")
+  @FindBy(xpath = "//*[@id='custom-tbl']//table/tbody/tr")
   public List<WebElement> logstashTableRows;
 
-  @FindBy(xpath = "//div[contains(@class,'nodes-table-row')]/div[1]//table[@class='component-data-tables']//tbody/tr")
+  @FindBy(xpath = "//*[@id='custom-tbl']//table/tbody/tr")
   public List<WebElement> pipelineTableRows;
 
-  @FindBy(xpath = "//table[@class='component-data-tables']//tbody/tr/td")
+ // @FindBy(xpath = "//table[@class='component-data-tables']//tbody/tr/td")
+  @FindBy(xpath = "//*[@id='custom-tbl']//table/tbody/tr/td")
   public List<WebElement> logstashNodeColData;
+
+  @FindBy(xpath = "//*[@id='custom-tbl']//table/thead//th")
+  public List<WebElement> logstashNodeColHeader;
 
   @FindBy(xpath = "//div[contains(@class,'logstash-graph')]")
   public List<WebElement> logstashMetricsList;

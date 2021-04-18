@@ -17,7 +17,7 @@ public class TC_ELK_17 extends BaseClass {
   private static final java.util.logging.Logger LOGGER = Logger.getLogger(TC_ELK_17.class.getName());
 
   @Test(dataProvider = "clusterid-data-provider")
-  public void verifyPipelineMetricsGraphs(String clusterId) {
+  public void TC_ELK_17_verifyPipelineMetricsGraphs(String clusterId) {
     test = extent.startTest("verifyPipelineMetricGraphs: " + clusterId,
         "Validate pipeline metrics graph");
     test.assignCategory(" ELK ");

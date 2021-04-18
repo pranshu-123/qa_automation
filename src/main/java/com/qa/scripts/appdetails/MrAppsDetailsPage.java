@@ -299,7 +299,7 @@ public class MrAppsDetailsPage {
         String headerAppId = mrApps.getHeaderAppId.getText().trim();
         Assert.assertTrue(headerAppId.equals(appId),
                 "Tez Application Id is not displayed in the Header");
-        Assert.assertNotSame("", headerAppId, "Tez Application Id is not displayed in the Header");
+        Assert.assertNotSame(appId, headerAppId, "Tez Application Id is not displayed in the Header");
         return headerAppId;
     }
 
@@ -315,7 +315,7 @@ public class MrAppsDetailsPage {
         waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();
         String jobSummaryStatus = mrApps.getJobSummary.getText().trim();
-        Assert.assertNotSame("", jobSummaryStatus, "Map Reduce application page job Summary is not displayed in the Header");
+        Assert.assertNotSame(jobSummary, jobSummaryStatus, "Map Reduce application page job Summary is not displayed in the Header");
         return jobSummaryStatus;
     }
 
@@ -1124,7 +1124,7 @@ public class MrAppsDetailsPage {
         ArrayList<String> efficiency = new ArrayList<>();
         ArrayList<String> recommendation = new ArrayList<>();
         List<WebElement> insightType = mrApps.insightsType;
-        //verifyAssertFalse(insightType.isEmpty(), mrApps, "No Insights generated");
+        verifyAssertFalse(insightType.isEmpty(), mrApps, "No Insights generated");
         for (int j = 0; j < insightType.size(); j++) {
             String insights = insightType.get(j).getText();
             LOGGER.info("Insight generated are " + insights);
@@ -1134,14 +1134,14 @@ public class MrAppsDetailsPage {
                 String efficiencycolorCode = mrApps.colorCode.getAttribute("class");
                 String[] arrColor = efficiencycolorCode.split("#");
                 assertTrue(arrColor[1].equals("d54451"));
-                test.log(LogStatus.SKIP, "No Map Reduce Application present" + efficiencycolorCode);
+                test.log(LogStatus.PASS, "No Map Reduce Application present" + efficiencycolorCode);
             } else {
                 //Store it in recommendation array
                 recommendation.add(insights);
                 String recommendationcolorCode = mrApps.colorCode.getAttribute("class");
                 String[] recColor = recommendationcolorCode.split("#");
                 assertTrue(recColor[1].equals("ffb900"));
-                test.log(LogStatus.SKIP, "No Map Reduce Application present" + recommendationcolorCode);
+                test.log(LogStatus.PASS, "No Map Reduce Application present" + recommendationcolorCode);
             }
         }
         //verifyAssertFalse((efficiency.isEmpty() && recommendation.isEmpty()), mrApps, "No insights generated");

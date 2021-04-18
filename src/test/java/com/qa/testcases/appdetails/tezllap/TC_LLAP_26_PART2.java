@@ -53,6 +53,7 @@ public class TC_LLAP_26_PART2 extends BaseClass
         test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
 
         int appCount = tezLlapApps.clickOnlyLink("Tez");
+        waitExecuter.sleep(1000);
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);

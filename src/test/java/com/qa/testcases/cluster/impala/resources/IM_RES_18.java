@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.impala.resources;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.qa.annotations.Marker;
@@ -79,6 +80,9 @@ public class IM_RES_18 extends BaseClass {
 			test.log(LogStatus.INFO, "Selecting the queue: " + queueName + " in filter.");
 			LOGGER.info("Selecting the queue: " + queueName + " in filter.");
 			boolean isTagPresent = false;
+			waitExecuter.sleep(2000);
+			List<String> list = impala.getQueriesGraphLabels();
+			LOGGER.info("LABESLSSSSsssssssssss------------------ "+list);
 			for (String graphTag : impala.getQueriesGraphLabels()) {
 				if (graphTag.equals(queueName)) {
 					isTagPresent = true;
@@ -88,6 +92,7 @@ public class IM_RES_18 extends BaseClass {
 					isTagPresent = false;
 				}
 			}
+
 			Assert.assertTrue(isTagPresent, "Filter user not displayed for queue: " + queueName);
 			test.log(LogStatus.PASS, "Graph displayed the user based on filter for queue : " + queueName);
 			impalaPageObject.filterInput.click();

@@ -25,7 +25,7 @@ public class IM_RES_11 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void IM_RES_11_verifyQueryGraphForQueueGroupForTwoDaysDatePickerOptions(String clusterId) {
-        test = extent.startTest("IM_RES_10_verifyQueryGraphForQueueGroupForTwoDaysDatePickerOptions : "+clusterId,
+        test = extent.startTest("IM_RES_11_verifyQueryGraphForQueueGroupForTwoDaysDatePickerOptions : "+clusterId,
                 "Verify Query graph one by one for each of the options in date picker range");
         test.assignCategory(" Cluster/Impala Resources");
         impala = new Impala(driver);
@@ -51,7 +51,8 @@ public class IM_RES_11 extends BaseClass {
         datePicker.clickOnDatePicker();
         test.log(LogStatus.INFO, "Select last 1 hour");
         datePicker.selectLastOneHour();
-        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
+         waitExecuter.sleep(2000);
         impalaPageObject.groupByDropdownButton.click();
         waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         impalaPageObject.groupByQueueList.click();

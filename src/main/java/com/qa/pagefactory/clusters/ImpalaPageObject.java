@@ -19,8 +19,9 @@ public class ImpalaPageObject {
   @FindBy(xpath = "(//div[contains(@class,'highcharts-container')])[1]")
   public WebElement memoryHighChartContainer;
 
-//  @FindBy(xpath = "//label[contains(text(), 'Group By')]/following-sibling::span")
-  @FindBy(xpath = "//label[contains(text(), 'Group By')]/following-sibling::span/span/span/span[contains(@class,'select2-selection__arrow')]")
+  //@FindBy(xpath = "//label[contains(text(), 'Group By')]/following-sibling::span")
+  //@FindBy(xpath = "//label[contains(text(), 'Group By')]//following-sibling::span//span[contains(@class,'select2-selection__arrow')]")
+  @FindBy(xpath = "(//span[contains(@class,'select2-selection__arrow')])[2]")
   public WebElement groupByDropdownButton;
 
   @FindBy(xpath = "//li[contains(text(),'Queue')]")

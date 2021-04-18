@@ -82,7 +82,7 @@ public class IM_RES_18 extends BaseClass {
 			boolean isTagPresent = false;
 			waitExecuter.sleep(2000);
 			List<String> list = impala.getQueriesGraphLabels();
-			LOGGER.info("LABESLSSSSsssssssssss------------------ "+list);
+			LOGGER.info("Queries Graph LABELS- "+list);
 			for (String graphTag : impala.getQueriesGraphLabels()) {
 				if (graphTag.equals(queueName)) {
 					isTagPresent = true;

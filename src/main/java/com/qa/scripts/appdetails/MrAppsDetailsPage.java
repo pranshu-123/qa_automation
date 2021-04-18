@@ -122,33 +122,6 @@ public class MrAppsDetailsPage {
     }
 
 
-    /**
-     * Method to validate the header app details page and DAG.
-     *
-     * @return
-     */
-    public void validateHeaderTab(MrAppsDetailsPageObject mrApps, ExtentTest test) {
-        waitExecuter.waitUntilElementPresent(mrApps.Duration);
-        String duration = mrApps.Duration.getText();
-        test.log(LogStatus.PASS, "Tez Status  is displayed in the Header: " + duration);
-        waitExecuter.waitUntilElementPresent(mrApps.DataIO);
-        String dataIO = mrApps.DataIO.getText();
-        test.log(LogStatus.PASS, "Tez Status  is displayed in the Header: " + dataIO);
-        waitExecuter.waitUntilElementPresent(mrApps.startTime);
-        String startTime = mrApps.startTime.getText();
-        test.log(LogStatus.PASS, "Tez Status  is displayed in the Header: " + startTime);
-        waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.waitUntilElementPresent(mrApps.EndTime);
-        String endTime = mrApps.EndTime.getText();
-        test.log(LogStatus.PASS, "Tez Status  is displayed in the Header: " + endTime);
-        LOGGER.info("Duration = " + duration + "starttime = " + startTime + " EndTime = " + endTime + " DataIO = " + dataIO);
-        Assert.assertNotSame("", startTime, "Value for startTime missing");
-        Assert.assertNotSame("", endTime, "Value for duration missing");
-        Assert.assertNotSame("", duration, "Value for duration missing");
-        Assert.assertNotSame("", dataIO, "Value for duration missing");
-    }
-
-
     /***
      * Method to validate logstash metrics graph .
      */
@@ -373,6 +346,8 @@ public class MrAppsDetailsPage {
         LOGGER.info("Tez Status is " + Appid);
         waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();
+        Assert.assertTrue(Appid.equals(AppIdText),
+                "Tez Application Id is not displayed in the Header");
         Assert.assertNotSame("", Appid, "Tez App id name is not displayed in the Table");
         return AppIdText;
     }

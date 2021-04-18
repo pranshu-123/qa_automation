@@ -20,7 +20,7 @@ public class TC_ELK_13 extends BaseClass {
   private static final java.util.logging.Logger LOGGER = Logger.getLogger(TC_ELK_13.class.getName());
 
   @Test(dataProvider = "clusterid-data-provider")
-  public void verifyLogstashPipelineTableData(String clusterId) {
+  public void TC_ELK_13_verifyLogstashPipelineTableData(String clusterId) {
     test = extent.startTest("verifyLogstashPipelineTableData: " + clusterId,
         "Validate columns in pipeline table");
     test.assignCategory(" ELK ");

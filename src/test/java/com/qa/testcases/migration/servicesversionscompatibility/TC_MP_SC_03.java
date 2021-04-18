@@ -36,7 +36,7 @@ public class TC_MP_SC_03 extends BaseClass {
 
         servicesAndVersionsCompatibility.setupServicesAndVersionsCompatibilityPage();
         servicesAndVersionsCompatibility.clickOnServicesAndVersionMigrationTab();
-        servicesAndVersionsCompatibility.closeMessageBanner();
+        //servicesAndVersionsCompatibility.closeMessageBanner();
         servicesAndVersionsCompatibility.clickOnRunButton();
         String cloudProductName = "Google Dataproc";
         servicesAndVersionsCompatibility.selectCloudProduct(cloudProductName);

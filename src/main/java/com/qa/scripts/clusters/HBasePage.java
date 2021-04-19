@@ -487,7 +487,7 @@ public class HBasePage {
         clickOnRegionSvrTable(HbaseRegionSvrTableColumn.READ_REQUEST_COUNT);
         logger.info("Click on Region Server Read Request Count column.");
         Boolean isDataSortedForRegionSvrReadReqCnt = isRegionSvrTablesDataSorted(
-                HbaseRegionSvrTableColumn.READ_REQUEST_COUNT,true);
+                HbaseRegionSvrTableColumn.READ_REQUEST_COUNT,false);
         Assert.assertTrue(isDataSortedForRegionSvrReadReqCnt, "Region Server Read Request Count Data is not sorted.");
         waitExecuter.sleep(2000);
 
@@ -501,7 +501,7 @@ public class HBasePage {
         clickOnRegionSvrTable(HbaseRegionSvrTableColumn.STORE_FILE_SIZE);
         logger.info("Click on Region Server store file size column.");
         Boolean isDataSortedForRegionSvrStoreFileSize = isRegionSvrTablesDataSorted(
-                HbaseRegionSvrTableColumn.STORE_FILE_SIZE, true);
+                HbaseRegionSvrTableColumn.STORE_FILE_SIZE, false);
         Assert.assertTrue(isDataSortedForRegionSvrStoreFileSize, "Region Server store file size Data is not sorted.");
         waitExecuter.sleep(2000);
 

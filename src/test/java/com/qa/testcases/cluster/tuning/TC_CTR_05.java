@@ -41,7 +41,6 @@ public class TC_CTR_05 extends BaseClass {
         waitExecuter.waitUntilPageFullyLoaded();
         TuningPageObject tuningPageObject = new TuningPageObject(driver);
 
-        //Get all the clusters from UI and store in list and close the new report window
         Tuning tuning = new Tuning(driver);
         test.log(LogStatus.INFO, "Initialize all class objects");
         LOGGER.info("Initialize all class objects");

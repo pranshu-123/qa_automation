@@ -37,15 +37,7 @@ public class TC_CTR_03 extends BaseClass {
         LOGGER.info("Passed Parameter Is : " + clusterId);
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-//        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-//        waitExecuter.waitUntilElementPresent(topPanelPageObject.tuningTab);
         waitExecuter.waitUntilPageFullyLoaded();
-//        waitExecuter.waitUntilElementClickable(topPanelPageObject.tuningTab);
-//        waitExecuter.sleep(3000);
-//        MouseActions.clickOnElement(driver, topPanelPageObject.tuningTab);
-//        LOGGER.info("Clicked on Tuning Tab");
-//        test.log(LogStatus.INFO, "Clicked on Tuning Tab");
-
         test.log(LogStatus.INFO, "Initialize all class objects");
         LOGGER.info("Initialize all class objects");
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
@@ -53,10 +45,6 @@ public class TC_CTR_03 extends BaseClass {
         waitExecuter.sleep(3000);
         ReportsArchiveSchedulePage reportsPage = new ReportsArchiveSchedulePage(driver);
         ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);
-//        LOGGER.info("Click on + button");
-//        String statusXpath = reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.Tuning);
-//        LOGGER.info("Clicked on Tuning Tab + icon");
-//        test.log(LogStatus.INFO, "Clicked on Tuning Tab + icon");
 
         String[] expectedDateOptions = {"Last 7 Days", "Last 30 Days", "Last 60 Days", "Last 90 Days", "Custom Range"};
 
@@ -88,16 +76,7 @@ public class TC_CTR_03 extends BaseClass {
                         homePage.selectMultiClusterId(clusterId);
                         tuning.clickOnModalRunButton();
                         waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
-                        waitExecuter.sleep(5000);
-//                        waitExecuter.waitUntilElementPresent(tuningPageObject.runButton);
-//                        waitExecuter.waitUntilElementClickable(tuningPageObject.runButton);
-//                        try {
-//                            waitExecuter.waitUntilTextToBeInWebElement(tuningPageObject.confirmationMessageElement,
-//                                    "Cluster Tuning completed successfully.");
-//                            test.log(LogStatus.PASS, "Verified Tuning report is completed successfully for date: " + date);
-//                        } catch (TimeoutException te) {
-//                            throw new AssertionError("Tuning Report not completed successfully.");
-//                        }
+                        waitExecuter.sleep(50000);
                         WebElement statusElement = driver.findElement(By.xpath(statusXpath));
                         try{
                             waitExecuter.waitUntilTextToBeInWebElement(statusElement,
@@ -112,15 +91,7 @@ public class TC_CTR_03 extends BaseClass {
                         homePage.selectMultiClusterId(clusterId);
                         tuning.clickOnModalRunButton();
                         waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
-//                        waitExecuter.waitUntilElementPresent(tuningPageObject.runButton);
-//                        waitExecuter.waitUntilElementClickable(tuningPageObject.runButton);
-//                        try {
-//                            waitExecuter.waitUntilTextToBeInWebElement(tuningPageObject.confirmationMessageElement,
-//                                    "Cluster Tuning completed successfully.");
-//                            test.log(LogStatus.PASS, "Verified Tuning report is completed successfully for date: " + date);
-//                        } catch (TimeoutException te) {
-//                            throw new AssertionError("Tuning Report not completed successfully.");
-//                        }
+                        waitExecuter.sleep(50000);
                         WebElement statusElement = driver.findElement(By.xpath(statusXpath));
                         try{
                             waitExecuter.waitUntilTextToBeInWebElement(statusElement,

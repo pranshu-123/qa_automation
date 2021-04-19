@@ -43,10 +43,10 @@ public class TC_HB_56 extends BaseClass {
         //verify Hbase Tables tab elements tables
         hbase.verifyTablesTabElements();
         //verify Table and Region
-        hbase.verifyTableAndRegion();
+        String tableName = hbase.verifyTableAndRegion();
 
         //verify all the table column
-        hbase.verifyRegionTabColumns();
+        hbase.verifyRegionTabColumns(tableName);
         LOGGER.info("Verified All metrics and graphs under region tab.");
         test.log(LogStatus.PASS, "Verified All metrics and graphs under region tab.");
     }

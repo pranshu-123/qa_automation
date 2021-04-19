@@ -97,7 +97,8 @@ public class HBasePageObject {
     @FindBy(xpath = "//a[@class='active']")
     public WebElement hBaseTableTab;
 
-    @FindBy(xpath = "//table[@id='hbaseTableHostDataTAble']")
+    //@FindBy(xpath = "//table[@id='hbaseTableHostDataTAble']")
+    @FindBy(xpath= "//table[@id='null-table']")
     public WebElement hBaseTableHostTbl;
 
     @FindBy(xpath ="//table[@id='hbaseTableHostDataTAble']/tbody/tr")

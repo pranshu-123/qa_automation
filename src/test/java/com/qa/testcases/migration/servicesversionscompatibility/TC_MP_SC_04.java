@@ -36,7 +36,7 @@ public class TC_MP_SC_04 extends BaseClass {
 
         servicesAndVersionsCompatibility.setupServicesAndVersionsCompatibilityPage();
         servicesAndVersionsCompatibility.clickOnServicesAndVersionMigrationTab();
-        servicesAndVersionsCompatibility.closeMessageBanner();
+        //servicesAndVersionsCompatibility.closeMessageBanner();
         servicesAndVersionsCompatibility.clickOnRunButton();
         String cloudProductName = "Amazon EMR";
         servicesAndVersionsCompatibility.selectCloudProduct(cloudProductName);

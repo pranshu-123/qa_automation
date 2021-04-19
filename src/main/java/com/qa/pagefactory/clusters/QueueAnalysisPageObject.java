@@ -18,7 +18,7 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/a")
     public List<WebElement> confirmationMessageElementClose;
 
-    @FindBy(xpath = "(//span[contains(text(),'Run')])[2]/parent::a")
+    @FindBy(xpath = "//span[contains(text(),'Run')]")
     public WebElement modalRunButton;
 
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
@@ -160,6 +160,25 @@ public class QueueAnalysisPageObject {
 
     @FindBy(xpath = "//span[@class='text-fatal']")
     public WebElement invalidDateRangeMessage;
+
+    @FindBy(xpath = "((//table/tbody/tr)[5]/td)[4]//span[contains(@class,'icon-add')]")
+    public WebElement addIcon;
+
+    @FindBy(xpath="((//table/tbody/tr)[5]/td)[4]//span[contains(@class,'icon-expand')]")
+    public WebElement latestReportExpandIcon;
+
+    @FindBy(xpath = "((//table/tbody/tr)[5]/td)[3]//span[contains(@class,'success')]")
+    public WebElement successBanner;
+
+    @FindBy(xpath="//span[contains(@class,'component-cta')]//span")
+    public WebElement pleaseWaitTimer;
+
+    @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/span")
+    public WebElement pleaseWaitBanner;
+
+    //
+
+
 
     public QueueAnalysisPageObject(WebDriver driver) {
         PageFactory.initElements(driver, this);

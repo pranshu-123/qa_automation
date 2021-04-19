@@ -78,15 +78,15 @@ public class QueueAnalysis {
     /* Navigate to Queue Analysis Tab */
     public void navigateToQueueAnalysis() {
         LOGGER.info("Navigate to Queue Analysis tab from header");
-        waitExecuter.waitUntilElementClickable(topPanelPageObject.queueAnalysisTab);
+        waitExecuter.waitUntilElementClickable(topPanelPageObject.reportsHeader);
         waitExecuter.sleep(4000);
         // Click on Queue Analysis tab
         LOGGER.info("Clicked on Queue Analysis tab");
-        userAction.performActionWithPolling(topPanelPageObject.queueAnalysisTab, UserAction.CLICK);
+        userAction.performActionWithPolling(topPanelPageObject.reportsHeader, UserAction.CLICK);
         // Validate Queue Analysis tab loaded successfully
-        LOGGER.info("Validate Queue Analysis tab loaded successfully");
-        waitExecuter.waitUntilElementPresent(queueAnalysisPageObject.queueAnalysisHeading);
-        waitExecuter.waitUntilPageFullyLoaded();
+//        LOGGER.info("Validate Queue Analysis tab loaded successfully");
+//        waitExecuter.waitUntilElementPresent(queueAnalysisPageObject.queueAnalysisHeading);
+//        waitExecuter.waitUntilPageFullyLoaded();
     }
 
     /**

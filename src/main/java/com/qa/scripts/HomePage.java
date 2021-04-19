@@ -119,10 +119,12 @@ public class HomePage {
   //click on cluster drop down
   public void selectMultiClusterId(String clusterId) {
     CommonPageObject commonPageObject = new CommonPageObject(driver);
+    waitExecuter.waitUntilElementClickable(commonPageObject.clusterDropdown);
     userActions.performActionWithPolling(commonPageObject.clusterDropdown, UserAction.CLICK);
     userActions.performActionWithPolling(commonPageObject.clusterSearchBox, UserAction.SEND_KEYS,
         clusterId);
     userActions.performActionWithPolling(commonPageObject.clusterSearchFirstField, UserAction.CLICK);
+    waitExecuter.waitUntilElementClickable(commonPageObject.clusterDropdown);
   }
 
   /* Get the list of clusters from UI */

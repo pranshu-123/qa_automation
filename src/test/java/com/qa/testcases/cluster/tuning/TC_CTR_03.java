@@ -53,10 +53,10 @@ public class TC_CTR_03 extends BaseClass {
         waitExecuter.sleep(3000);
         ReportsArchiveSchedulePage reportsPage = new ReportsArchiveSchedulePage(driver);
         ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);
-        LOGGER.info("Click on + button");
-        String statusXpath = reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.Tuning);
-        LOGGER.info("Clicked on Tuning Tab + icon");
-        test.log(LogStatus.INFO, "Clicked on Tuning Tab + icon");
+//        LOGGER.info("Click on + button");
+//        String statusXpath = reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.Tuning);
+//        LOGGER.info("Clicked on Tuning Tab + icon");
+//        test.log(LogStatus.INFO, "Clicked on Tuning Tab + icon");
 
         String[] expectedDateOptions = {"Last 7 Days", "Last 30 Days", "Last 60 Days", "Last 90 Days", "Custom Range"};
 
@@ -67,11 +67,12 @@ public class TC_CTR_03 extends BaseClass {
 
         for (String expectedDateOption : expectedDateOptions) {
 
+            LOGGER.info("Click on + button");
+            String statusXpath = reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.Tuning);
+            LOGGER.info("Clicked on Tuning Tab + icon");
+            test.log(LogStatus.INFO, "Clicked on Tuning Tab + icon");
+
             Tuning tuning = new Tuning(driver);
-//            tuning.closeConfirmationMessageNotification();
-//            tuning.clickOnRunButton();
-            LOGGER.info("Clicked on Run button");
-            test.log(LogStatus.INFO,"Clicked on Run button");
             datePicker.clickOnDatePickerForTopX();
 
             for (int i=0; i < expectedDateOptions.length; i++) {
@@ -79,12 +80,15 @@ public class TC_CTR_03 extends BaseClass {
                 String date = datePickerElement.getText();
                 if(expectedDateOption.equalsIgnoreCase(date)){
                     if(date.equalsIgnoreCase("Custom Range")) {
+                        LOGGER.info("Checking for date range:"+ date);
                         datePickerElement.click();
                         datePicker.setStartDate(DateUtils.getFirstDateOfYear());
                         datePicker.setEndDate(DateUtils.getCurrentDate());
                         datePicker.clickOnCustomDateApplyBtn();
                         homePage.selectMultiClusterId(clusterId);
                         tuning.clickOnModalRunButton();
+                        waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
+                        waitExecuter.sleep(5000);
 //                        waitExecuter.waitUntilElementPresent(tuningPageObject.runButton);
 //                        waitExecuter.waitUntilElementClickable(tuningPageObject.runButton);
 //                        try {
@@ -103,9 +107,11 @@ public class TC_CTR_03 extends BaseClass {
                         }
                         break;
                     }else{
+                        LOGGER.info("Checking for date range:"+ date);
                         datePickerElement.click();
                         homePage.selectMultiClusterId(clusterId);
                         tuning.clickOnModalRunButton();
+                        waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
 //                        waitExecuter.waitUntilElementPresent(tuningPageObject.runButton);
 //                        waitExecuter.waitUntilElementClickable(tuningPageObject.runButton);
 //                        try {

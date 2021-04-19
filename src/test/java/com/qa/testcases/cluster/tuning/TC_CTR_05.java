@@ -61,10 +61,10 @@ public class TC_CTR_05 extends BaseClass {
         waitExecuter.sleep(3000);
         ReportsArchiveSchedulePage reportsPage = new ReportsArchiveSchedulePage(driver);
         ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);
-        LOGGER.info("Click on + button");
-        String statusXpath = reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.Tuning);
-        LOGGER.info("Clicked on Tuning Tab + icon");
-        test.log(LogStatus.INFO, "Clicked on Tuning Tab + icon");
+//        LOGGER.info("Click on + button");
+//        String statusXpath = reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.Tuning);
+//        LOGGER.info("Clicked on Tuning Tab + icon");
+//        test.log(LogStatus.INFO, "Clicked on Tuning Tab + icon");
 
         UserActions userActions = new UserActions(driver);
         CommonPageObject commonPageObject = new CommonPageObject(driver);
@@ -73,7 +73,7 @@ public class TC_CTR_05 extends BaseClass {
         if(commonPageObject.clustersList.size() > 0) {
             allClustersUI = tuning.getClusterOptions(commonPageObject);
         }
-        tuning.closeNewReport();
+        //tuning.closeNewReport();
 
         //Now traverse all cluster one by one and generate report
         HomePage homePage = new HomePage(driver);
@@ -81,8 +81,12 @@ public class TC_CTR_05 extends BaseClass {
         for (String clusterUI : allClustersUI) {
            /* waitExecuter.waitUntilElementPresent(tuningPageObject.runButton);
             tuning.clickOnRunButton();*/
-            MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
-            waitExecuter.waitUntilPageFullyLoaded();
+            //MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
+            LOGGER.info("Click on + button");
+            String statusXpath = reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.Tuning);
+            LOGGER.info("Clicked on Tuning Tab + icon");
+            test.log(LogStatus.INFO, "Clicked on Tuning Tab + icon");
+            //waitExecuter.waitUntilPageFullyLoaded();
             LOGGER.info("Clicked on Run button");
             test.log(LogStatus.INFO,"Clicked on Run button");
             homePage.selectMultiClusterId(clusterUI);
@@ -91,6 +95,7 @@ public class TC_CTR_05 extends BaseClass {
             test.log(LogStatus.INFO, "Clicked on Run Button");
             waitExecuter.waitUntilElementPresent(tuningPageObject.runButton);
             waitExecuter.waitUntilElementClickable(tuningPageObject.runButton);
+            waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
 //            try {
 //                waitExecuter.waitUntilTextToBeInWebElement(tuningPageObject.confirmationMessageElement,
 //                        "Cluster Tuning completed successfully.");
@@ -102,8 +107,8 @@ public class TC_CTR_05 extends BaseClass {
             try{
                 waitExecuter.waitUntilElementPresent(statusElement);
                 test.log(LogStatus.PASS, "Verified Tuning report is completed with status " + statusElement.getText());
-//                waitExecuter.waitUntilTextToBeInWebElement(statusElement,
-//                        "SUCCESS");
+                waitExecuter.waitUntilTextToBeInWebElement(statusElement,
+                        "SUCCESS");
                 waitExecuter.waitUntilPageFullyLoaded();
             }catch (TimeoutException te) {
                 throw new AssertionError("Tuning Report not completed successfully for cluster :"+ clusterUI);
@@ -111,6 +116,4 @@ public class TC_CTR_05 extends BaseClass {
         }
 
     }
-
-
 }

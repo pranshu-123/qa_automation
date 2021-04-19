@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import com.qa.utils.actions.UserActions;
+import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -53,7 +54,7 @@ public class TopX {
     public void setTopXNumber(String number) {
         waitExecuter.waitUntilElementPresent(topXPageObject.topXNumber);
         waitExecuter.sleep(1000);
-//        topXPageObject.topXNumber.clear();
+        topXPageObject.topXNumber.clear();
         JavaScriptExecuter.clearTextField(driver, topXPageObject.topXNumber);
         actions.performActionWithPolling(topXPageObject.topXNumber,
             UserAction.SEND_KEYS, number);
@@ -99,6 +100,19 @@ public class TopX {
   public List<WebElement> getClustersList() {
     return topXPageObject.clusterList;
   }
+
+    /**
+     * Select multi c
+     * TODO - Need to consolidate this. Multiple report are having same implementation
+     * @param clusterId
+     */
+    public void selectCluster(String clusterId) {
+        waitExecuter.waitUntilElementClickable(topXPageObject.clusterDropdown);
+        actions.performActionWithPolling(topXPageObject.clusterDropdown, UserAction.CLICK);
+        actions.performActionWithPolling(topXPageObject.clusterSearchbox, UserAction.CLICK);
+        actions.performActionWithPolling(topXPageObject.clusterSearchbox, UserAction.SEND_KEYS, clusterId);
+        actions.performActionWithPolling(topXPageObject.select1stClusterOption, UserAction.CLICK);
+    }
 
   public WebElement getConfirmationMessage() {
     return topXPageObject.confirmationMessageElement;
@@ -206,5 +220,61 @@ public class TopX {
                 break;
             }
         }
+    }
+
+    /**
+     * Close topX modal
+     */
+    public void closeModalIfExists() {
+        if (topXPageObject.closeModalButton.size() > 0) {
+            actions.performActionWithPolling(topXPageObject.closeModalButton.get(0),
+                UserAction.CLICK);
+        }
+    }
+
+    /**
+     * Get the latest executed report
+     */
+    public boolean clickOnLatestReportIfExist() {
+        if (topXPageObject.lastExecutionReportButton.size() > 0) {
+            actions.performActionWithPolling(topXPageObject.lastExecutionReportButton.get(0)
+                , UserAction.CLICK);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Check if report successfully started
+     * @return
+     */
+    public boolean checkIfReportSuccessfullyStarted() {
+        try {
+            if (getConfirmationMessageContent().equalsIgnoreCase("REPORT HAS BEEN STARTED. BUT NOT ABLE TO " +
+                "ACCESS THE STATUS.")) {
+                return false;
+            }
+        } catch (Exception exception) {
+        }
+        return true;
+    }
+
+    /**
+     * Click on the latest report
+     */
+    public boolean validateLatestReport(String key, String value) {
+        if (clickOnLatestReportIfExist()) {
+            for (WebElement row : getInputParamsRowList()) {
+                if (row.findElement(By.xpath("td[1]")).getText().equalsIgnoreCase(key)) {
+                    Assert.assertEquals(row.findElement(By.xpath("td[2]")).getText(), value,
+                        "Incorrect value is displayed");
+                    return true;
+                }
+            }
+        } else {
+            Assert.fail("Unable to click on latest report");
+        }
+        return false;
     }
 }

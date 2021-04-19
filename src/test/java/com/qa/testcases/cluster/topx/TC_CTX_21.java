@@ -32,17 +32,6 @@ public class TC_CTX_21 extends BaseClass {
     test.assignCategory(" Cluster - Top X");
     WaitExecuter waitExecuter = new WaitExecuter(driver);
 
-//    TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-//    waitExecuter.waitUntilElementPresent(topPanelPageObject.topXTab);
-//    waitExecuter.waitUntilPageFullyLoaded();
-//    waitExecuter.waitUntilElementClickable(topPanelPageObject.topXTab);
-//    waitExecuter.sleep(3000);
-//    MouseActions.clickOnElement(driver, topPanelPageObject.topXTab);
-
-//    TopX topX = new TopX(driver);
-//    topX.closeConfirmationMessageNotification();
-//    topX.clickOnRunButton();
-
     SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
     MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
     waitExecuter.sleep(3000);
@@ -52,17 +41,14 @@ public class TC_CTX_21 extends BaseClass {
     reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.TopX);
 
     DatePicker datePicker = new DatePicker(driver);
-    //datePicker.clickOnDatePicker();
     datePicker.clickOnDatePickerForTopX();
 
     String[] expectedDateOptions = {"Current Day", "Last 7 Days", "Last 30 Days", "Last 60 Days",
       "Last 90 Days", "Custom Range"};
 
-    for (String expectedDateOption : expectedDateOptions) {
-      Assert.assertTrue(datePicker.getDatePickerOptions().contains(expectedDateOption),
-        "Date list does not contain: " + expectedDateOption);
-      test.log(LogStatus.PASS, "Date list contains option: " + expectedDateOption);
-    }
+    Assert.assertEquals(datePicker.getDatePickerOptions().toArray(), expectedDateOptions,
+      "Date list does not match: ");
+    test.log(LogStatus.PASS, "Date list contains " + expectedDateOptions);
     datePicker.clickOnDatePickerForTopX();
   }
 }

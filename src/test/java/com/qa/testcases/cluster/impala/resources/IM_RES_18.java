@@ -84,21 +84,17 @@ public class IM_RES_18 extends BaseClass {
             LOGGER.info("Selecting the queue: " + queueName + " in filter.");
             boolean isTagPresent = false;
             List<String> graphTags = impala.getQueriesGraphLabels();
-            //for (String graphTag : impala.getQueriesGraphLabels()) {
-            LOGGER.info("GRAPH TAG-------------- " + graphTags);
-            LOGGER.info("QUEUE NAME-------------- " + queueName);
-            if (graphTags.contains(queueName)) {
-                isTagPresent = true;
-            } else {
-                isTagPresent = false;
-            }
-            //}
+            LOGGER.info("GRAPH TAG- " + graphTags);
+            LOGGER.info("QUEUE NAME- " + queueName);
+            isTagPresent = graphTags.contains(queueName);
             Assert.assertTrue(isTagPresent, "Filter user not displayed for queue: " + queueName);
             test.log(LogStatus.PASS, "Graph displayed the user based on filter for queue : " + queueName);
             impalaPageObject.filterInput.click();
-            waitExecuter.sleep(1000);
+            waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+            waitExecuter.sleep(3000);
         }
         impalaPageObject.filterInput.click();
-        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+        waitExecuter.sleep(3000);
     }
 }

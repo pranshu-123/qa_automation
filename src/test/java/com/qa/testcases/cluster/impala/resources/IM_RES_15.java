@@ -79,6 +79,7 @@ public class IM_RES_15 extends BaseClass {
         //Assertion checks
         test.log(LogStatus.INFO, "Check with Assertions");
         LOGGER.info("Check with Assertions");
+        LOGGER.info("NODE VALUE - " +nodeValues);
         Assert.assertTrue(nodeValues.contains("Total"), "The tootip in memory graph does not contain 'Total' keyword");
         Assert.assertTrue(nodeValues.contains("Allocated"),
                 "The tootip in memory graph does not contain 'Allocated' keyword");

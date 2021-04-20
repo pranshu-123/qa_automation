@@ -43,7 +43,7 @@ public class TC_CTX_29 extends BaseClass {
         waitExecuter.waitUntilPageFullyLoaded();
         UserActions userActions = new UserActions(driver);
         TopX topX = new TopX(driver);
-        TopXPageObject topXPageObject=new TopXPageObject(driver);
+        TopXPageObject topXPageObject = new TopXPageObject(driver);
 
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
@@ -53,39 +53,27 @@ public class TC_CTX_29 extends BaseClass {
         LOGGER.info("Click on + button", test);
         String statusXpath = reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.TopX);
         waitExecuter.waitUntilPageFullyLoaded();
-        int chkBoxSize = topX.getTagsCheckbox().size();
-        System.out.println("chkBoxSize: "+chkBoxSize);
-        //for (int i=0; i<chkBoxSize; i++) {
-            LOGGER.info("Click on tags of category: ", test);
-            topX.selectTagsCheckbox(topX.getTagsCheckbox().get(0));
-            LOGGER.info("Click on tags textbox", null);
-            userActions.performActionWithPolling(topX.getLastInputTextboxField(), UserAction.CLICK);
-            //int sizeFilter = topX.getFilterDropDowns().size();
-            //for (int filterDropDown=0; filterDropDown< sizeFilter; filterDropDown++) {
-                waitExecuter.sleep(2000);
-                String tagFilter = topX.getFilterDropDowns().get(0).getText();
-                LOGGER.info("Click on queue filter: " + tagFilter, test);
-                userActions.performActionWithPolling(topX.getFilterDropDowns().get(0), UserAction.CLICK);
-                userActions.performActionWithPolling(topXPageObject.runButton, UserAction.CLICK);
-                waitExecuter.waitUntilPageFullyLoaded();
-                String confirmMsg = topX.getConfirmationMessageContent();
-                LOGGER.info("Message after click on Run button: "+ confirmMsg, test);
-//                try {
-//                    waitExecuter.waitUntilTextToBeInWebElement(topX.getConfirmationMessage(),
-//                            "Top X Report completed successfully.");
-//                } catch (TimeoutException te) {
-//                    Assert.assertTrue(false, "TopX Report is not completed");
-//                }
-                WebElement statusElement = driver.findElement(By.xpath(statusXpath));
-                try{
-                    waitExecuter.waitUntilTextToBeInWebElement(statusElement,
-                            "SUCCESS");
-                }catch (TimeoutException te) {
-                    throw new AssertionError("Top X Report not completed successfully.");
-                }
+        topX.setTopXNumber("10");
+        LOGGER.info("Click on tags of category: ", test);
+        topX.selectTagsCheckbox(topX.getTagsCheckbox().get(0));
+        LOGGER.info("Click on tags textbox", null);
+        userActions.performActionWithPolling(topX.getLastInputTextboxField(), UserAction.CLICK);
+        waitExecuter.sleep(2000);
+        String tagFilter = topX.getFilterDropDowns().get(0).getText();
+        LOGGER.info("Click on queue filter: " + tagFilter, test);
+        userActions.performActionWithPolling(topX.getFilterDropDowns().get(0), UserAction.CLICK);
+        userActions.performActionWithPolling(topXPageObject.runButton, UserAction.CLICK);
+        waitExecuter.waitUntilPageFullyLoaded();
+        String confirmMsg = topX.getConfirmationMessageContent();
+        LOGGER.info("Message after click on Run button: " + confirmMsg, test);
 
-            //}
-            test.log(LogStatus.PASS, "Verified Queues filter in new report page");
-        //}
+        WebElement statusElement = driver.findElement(By.xpath(statusXpath));
+        try {
+            waitExecuter.waitUntilTextToBeInWebElement(statusElement,
+                "SUCCESS");
+        } catch (TimeoutException te) {
+            throw new AssertionError("Top X Report not completed successfully.");
+        }
+        test.log(LogStatus.PASS, "Verified Queues filter in new report page");
     }
 }

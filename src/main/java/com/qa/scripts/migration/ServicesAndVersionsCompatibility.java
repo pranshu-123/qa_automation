@@ -410,12 +410,13 @@ public class ServicesAndVersionsCompatibility {
                         Assert.assertTrue(searchDateReportNameList.size() > 0, "Expected search " +
                                 "result not populated data by date.");
                         logger.info("Search report by date: " + date);
+                        MouseActions.clickOnElement(driver,servicesAndVersionsCompatibilityPageObject.archives);
                         break;
                     case "searchReportByStatus":
                         MouseActions.clickOnElement(driver, reportCntList.get(i));
                         waitExecuter.waitUntilPageFullyLoaded();
                         waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.archiveReportSVCHeader);
-                        String status = "fail";
+                        String status = "success";
                         reportPageObj.reportSearchBox.sendKeys(status);
                         waitExecuter.waitUntilElementPresent(reportPageObj.sortingReportNameIcon);
                         List<WebElement> searchStatusReportNameList = reportPageObj.reportNames;
@@ -423,6 +424,7 @@ public class ServicesAndVersionsCompatibility {
                         Assert.assertTrue(searchStatusReportNameList.size() > 0, "Expected search " +
                                 "result not populated data by status .");
                         logger.info("Searched report for status as: " + status);
+                        MouseActions.clickOnElement(driver,servicesAndVersionsCompatibilityPageObject.archives);
                         break;
                     case "searchReportByName":
                         MouseActions.clickOnElement(driver, reportCntList.get(i));

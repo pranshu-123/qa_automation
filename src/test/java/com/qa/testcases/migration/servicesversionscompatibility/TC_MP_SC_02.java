@@ -2,6 +2,7 @@ package com.qa.testcases.migration.servicesversionscompatibility;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.pagefactory.migration.ServicesAndVersionsCompatibilityPageObject;
 import com.qa.scripts.migration.ServicesAndVersionsCompatibility;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
@@ -25,6 +26,8 @@ public class TC_MP_SC_02 extends BaseClass {
         //Initialize object
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         ServicesAndVersionsCompatibility servicesAndVersionsCompatibility = new ServicesAndVersionsCompatibility(driver);
+        ServicesAndVersionsCompatibilityPageObject servicesAndVersionsCompatibilityPageObject =
+                new ServicesAndVersionsCompatibilityPageObject(driver);
 
         servicesAndVersionsCompatibility.setupServicesAndVersionsCompatibilityPage();
         LOGGER.info("Clicked on Migration and accessing Services And Versions Compatibility page ");
@@ -32,7 +35,10 @@ public class TC_MP_SC_02 extends BaseClass {
         LOGGER.info("Clicked on Services And Versions Compatibility tab");
 //        servicesAndVersionsCompatibility.closeMessageBanner();
 //        LOGGER.info("Clicked on close banner");
+        waitExecuter.sleep(50000);
+        waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.runBtn, "Run");
         servicesAndVersionsCompatibility.clickOnRunButton();
+
         LOGGER.info("Clicked on Run button");
         servicesAndVersionsCompatibility.getCloudProducts();
         LOGGER.info("Clicked on cloud product drop down to get all cloud providers");

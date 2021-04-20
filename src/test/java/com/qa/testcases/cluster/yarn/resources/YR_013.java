@@ -6,6 +6,7 @@ import com.qa.constants.DirectoryConstants;
 import com.qa.constants.GraphColorConstants;
 import com.qa.pagefactory.clusters.YarnPageObject;
 import com.qa.scripts.DatePicker;
+import com.qa.scripts.Graphs;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.clusters.yarn.Yarn;
 import com.qa.utils.Log;
@@ -16,6 +17,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Marker.YarnResources
@@ -33,6 +35,7 @@ public class YR_013 extends BaseClass {
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         Yarn yarn = new Yarn(driver);
+        Graphs graphs = new Graphs(driver);
         YarnPageObject yarnPageObject = new YarnPageObject(driver);
 
         yarn.verifyYarnResourceHeaderisDisplayed();
@@ -59,27 +62,12 @@ public class YR_013 extends BaseClass {
         test.log(LogStatus.INFO, "Selected Application Type, from dropdown.");
 
         //Check for Apps color
-        File screenshot = ScreenshotHelper.takeScreenshotOfElement(driver,yarnPageObject.vCoresAppGraph,100);
+        File screenshot = ScreenshotHelper.takeScreenshotOfElement(driver, yarnPageObject.vCoresAppGraph, 100);
         ScreenshotHelper.saveFileToLocation(screenshot, DirectoryConstants.getScreenshotDir() + screenshot.getName());
         test.log(LogStatus.INFO, test.addScreenCapture(DirectoryConstants.getScreenshotDir() + screenshot.getName()));
 
-        Assert.assertTrue(ScreenshotHelper.isContainColor(screenshot, GraphColorConstants.YarnResourcesGraph.MAPREDUCE_COLOR),
-                "Mapreduce graph is not loaded");
-        test.log(LogStatus.PASS, "Successfully validated Mapreduce apps colour code with different colour.");
-
-        Assert.assertTrue(ScreenshotHelper.isContainColor(screenshot, GraphColorConstants.YarnResourcesGraph.SPARK_COLOR),
-                "Spark graph is not loaded");
-        test.log(LogStatus.PASS, "Successfully validated Spark apps colour code with different colour.");
-
-//        Assert.assertTrue(ScreenshotHelper.isContainColor(screenshot, GraphColorConstants.YarnResourcesGraph.TEZ_COLOR),
-//                "Tez graph is not loaded");
-//        test.log(LogStatus.PASS, "Successfully validated Tez apps colour code with different colour.");
-
-        Assert.assertTrue(ScreenshotHelper.isContainColor(screenshot, GraphColorConstants.YarnResourcesGraph.YARN_SERVICE_COLOR),
-                "Yarn service graph is not loaded");
-        test.log(LogStatus.PASS, "Successfully validated Yarn service apps colour code with different colour.");
-
-
-
+        //List<String> rgbValueList = graphs.getRGBValuesFromElement(yarnPageObject.vcoreGraphAppsRGBValues,":","style");
+        Assert.assertTrue(graphs.validateGraphIsGenerated(yarnPageObject.vcoreGraphAppNames, yarnPageObject.vcoreGraphAppsRGBValues,
+                yarnPageObject.hashCodeVcoreColors), "The color code of graph does not match");
     }
 }

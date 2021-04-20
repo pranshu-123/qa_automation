@@ -69,6 +69,12 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//div[@id='breadcrumb']/span[2]/span")
     public WebElement archiveReportSVCHeader;
 
+    @FindBy(xpath="//div[@id='breadcrumb']/span/span")
+    public WebElement archivesText;
+
+    @FindBy(xpath="(//div[@id='breadcrumb']/span/span)[1]")
+    public WebElement archives;
+
     @FindBy(xpath = "//tbody/tr[1]/td[2]")
     public WebElement archiveReportDate;
 

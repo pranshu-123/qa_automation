@@ -333,10 +333,12 @@ public class ServicesAndVersionsCompatibility {
      * Method to validate report, download, delete, view report from actions tab
      */
     public void verifyReportsArchived(ReportsArchiveScheduledPageObject reportPageObj, String name, String reportAction) {
+        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.archivesText);
         List<WebElement> reportNameList = reportPageObj.reportNames;
         List<WebElement> reportCntList = reportPageObj.reportCnt;
         Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed.");
 
+        waitExecuter.waitUntilPageFullyLoaded();
         for (int i = 0; i < reportNameList.size(); i++) {
             int reportCnt = Integer.parseInt(reportCntList.get(i).getText().trim());
             logger.info("ReportCnt is " + reportCnt);
@@ -351,6 +353,7 @@ public class ServicesAndVersionsCompatibility {
                         waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.archiveReportSVCHeader);
                         List<WebElement> reportTblRows = reportPageObj.tableRows;
                         Assert.assertFalse(reportTblRows.isEmpty(), "No reports archived.");
+                        MouseActions.clickOnElement(driver,servicesAndVersionsCompatibilityPageObject.archives);
                         break;
                     case "downloadReport":
                         MouseActions.clickOnElement(driver, reportCntList.get(i));
@@ -361,6 +364,7 @@ public class ServicesAndVersionsCompatibility {
                         waitExecuter.waitUntilPageFullyLoaded();
                         Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Downloaded successfully",
                                 " No downloaded successfully message received.");
+                        MouseActions.clickOnElement(driver,servicesAndVersionsCompatibilityPageObject.archives);
                         break;
                     case "deleteReport":
                         MouseActions.clickOnElement(driver, reportCntList.get(i));
@@ -375,6 +379,7 @@ public class ServicesAndVersionsCompatibility {
                         logger.info("Deleted report");
                         Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Removed successfully",
                                 " Report not removed");
+                        MouseActions.clickOnElement(driver,servicesAndVersionsCompatibilityPageObject.archives);
                         break;
                     case "viewReport":
                         MouseActions.clickOnElement(driver, reportCntList.get(i));

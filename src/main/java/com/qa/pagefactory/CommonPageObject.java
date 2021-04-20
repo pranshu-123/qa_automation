@@ -42,6 +42,9 @@ public class CommonPageObject {
   @FindBy(xpath = "//span[contains(@class,'icon-add')]")
   public WebElement addIcon;
 
+  @FindBy(xpath = "//tbody/tr/td[3]/span[contains(@class,'badge')]")
+  public List<WebElement> reportPageStatusBadge;
+
   public CommonPageObject(WebDriver driver) {
     PageFactory.initElements(driver,this);
   }

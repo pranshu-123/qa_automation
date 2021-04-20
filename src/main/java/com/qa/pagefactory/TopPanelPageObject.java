@@ -102,6 +102,9 @@ public class TopPanelPageObject {
     @FindBy(xpath = "//h4/span[contains(text(), 'Clusters')]")
     public WebElement clusterTab;
 
+    @FindBy(xpath = "//nav/ul//span[contains(text(),'Reports')]")
+    public WebElement reportsHeader;
+
     /**
      * @param driver The driver that will be used to look up the elements
      */

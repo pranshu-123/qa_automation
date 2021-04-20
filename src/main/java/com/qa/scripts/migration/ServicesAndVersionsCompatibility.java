@@ -372,10 +372,14 @@ public class ServicesAndVersionsCompatibility {
                         waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.archiveReportSVCHeader);
                         MouseActions.clickOnElement(driver, reportPageObj.deleteReportIcon);
                         waitExecuter.waitUntilPageFullyLoaded();
-                        Alert confirmationAlert = driver.switchTo().alert();
-                        String alertText = confirmationAlert.getText();
-                        logger.info("Alert text is " + alertText);
-                        confirmationAlert.accept();
+                        //Alert confirmationAlert = driver.switchTo().alert();
+                        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.deletePopText);
+                        String popText = servicesAndVersionsCompatibilityPageObject.deletePopText.getText();
+                        //String alertText = confirmationAlert.getText();
+                        logger.info("Alert text is " + popText);
+                        //confirmationAlert.accept();
+                        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.deleteOkBtn);
+                        MouseActions.clickOnElement(driver,servicesAndVersionsCompatibilityPageObject.deleteOkBtn);
                         logger.info("Deleted report");
                         Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Removed successfully",
                                 " Report not removed");

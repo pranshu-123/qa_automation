@@ -69,6 +69,12 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//div[@id='breadcrumb']/span[2]/span")
     public WebElement archiveReportSVCHeader;
 
+    @FindBy(xpath="//div[contains(@class,'popover')]/H3")
+    public WebElement deletePopText;
+
+    @FindBy(xpath="//div[contains(@class,'popover')]/div/span[contains(@class,'pending')]")
+    public WebElement deleteOkBtn;
+
     @FindBy(xpath="//div[@id='breadcrumb']/span/span")
     public WebElement archivesText;
 

@@ -53,7 +53,8 @@ public class TC_MP_SC_14 extends BaseClass {
             waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.confirmationMessageElement,
                     "Services and Versions Compatibility completed successfully.");
             servicesAndVersionsCompatibility.validateLatestReport();
-            Assert.assertTrue(expectedPlatforms.equals(servicesAndVersionsCompatibility.getPlatforms()));
+            List<String> actualPlatform = servicesAndVersionsCompatibility.getPlatforms();
+            Assert.assertTrue(expectedPlatforms.equals(actualPlatform), "Mismatch in platform, actual Platform: "+actualPlatform);
             servicesAndVersionsCompatibility.verifyServicesAndVersionsAreAvailableInSourceButMissingInTarget();
             test.log(LogStatus.PASS, "Verified Services and Versions are available in Source, " +
                     "but missing in Target legend for cloud provider Azure HDI.");

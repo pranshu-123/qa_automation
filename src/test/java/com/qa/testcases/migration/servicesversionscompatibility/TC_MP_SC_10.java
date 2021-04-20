@@ -49,8 +49,11 @@ public class TC_MP_SC_10 extends BaseClass {
         List<String> expectedPlatforms = Arrays.asList(PageConstants.MigrationAndServices.Amazon_EMR);
 
         try {
+            waitExecuter.sleep(50000);
+            waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.runBtn, "Run");
             waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.confirmationMessageElement,
                     "Services and Versions Compatibility completed successfully.");
+
             servicesAndVersionsCompatibility.validateLatestReport();
             List<String> actualPlatform = servicesAndVersionsCompatibility.getPlatforms();
             Assert.assertTrue(expectedPlatforms.equals(actualPlatform), "Mismatch in platform, actual Platform: "+actualPlatform);

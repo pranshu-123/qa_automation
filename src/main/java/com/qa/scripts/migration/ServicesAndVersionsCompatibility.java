@@ -61,6 +61,16 @@ public class ServicesAndVersionsCompatibility {
     }
 
     public void clickOnRunButton() {
+        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.runBtn);
+        String runBtnText = servicesAndVersionsCompatibilityPageObject.runBtn.getText();
+        if(runBtnText.equals("Running..")){
+            try{
+                waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.runBtn,
+                        "Run");
+            }catch (TimeoutException te) {
+                throw new AssertionError("Services and Versions Compatibility Report is still running");
+            }
+        }
         MouseActions.clickOnElement(driver, servicesAndVersionsCompatibilityPageObject.runBtn);
     }
 

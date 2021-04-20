@@ -52,7 +52,8 @@ public class TC_MP_SC_08  extends BaseClass {
             waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.confirmationMessageElement,
                     "Services and Versions Compatibility completed successfully.");
             servicesAndVersionsCompatibility.validateLatestReport();
-            Assert.assertTrue(expectedPlatforms.equals(servicesAndVersionsCompatibility.getPlatforms()));
+            List<String> actualPlatform = servicesAndVersionsCompatibility.getPlatforms();
+            Assert.assertTrue(expectedPlatforms.equals(actualPlatform), "Mismatch in platform, actual Platform: "+actualPlatform);
             servicesAndVersionsCompatibility.verifyServicesAndVersionsAreCompatible();
             test.log(LogStatus.PASS, "Verified Services and Versions are Compatible" +
                     " for Azure HDI.");

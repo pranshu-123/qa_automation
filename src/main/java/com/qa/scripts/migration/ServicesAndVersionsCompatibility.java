@@ -207,6 +207,21 @@ public class ServicesAndVersionsCompatibility {
         return arrVersion[0];
     }
 
+    public String getMinorVersion(String name) {
+        String[] arr = name.split(" ");
+        String[] arrVersion = arr[1].split("\\.");
+        return arrVersion[1];
+    }
+    public String getBuildVersion(String name) {
+        System.out.println("name: "+name);
+        String[] arr = name.split(" ");
+        String[] arrVersion = arr[1].split("\\.");
+        if(arrVersion.length > 3)
+            return arrVersion[2];
+
+        return null;
+    }
+
     //Check for Services and Versions are Compatible
     public void verifyServicesAndVersionsAreCompatible() {
         List<String> hdpServicesList = getHDPServicesList();
@@ -224,13 +239,29 @@ public class ServicesAndVersionsCompatibility {
                 if (!e.getText().isEmpty()) {
                     String cloudClusterServiceName = e.getText().trim();
                     String majorVersionCloud = getMajorVersion(cloudClusterServiceName);
+                    String minorVersionCloud = getMinorVersion(cloudClusterServiceName);
+                    String buildVersionCloud = getBuildVersion(cloudClusterServiceName);
+
                     int majorVersionCloudNum = Integer.parseInt(majorVersionCloud);
+                    int minorVersionCloudNum = Integer.parseInt(minorVersionCloud);
+                    int buildVersionCloudNum =0;
+                    if(buildVersionCloud!=null)
+                        buildVersionCloudNum = Integer.parseInt(buildVersionCloud);
+
 
                     String testClusterServiceName = hdpServicesList.get(col);
                     String majorVersionHDP = getMajorVersion(testClusterServiceName);
-                    int majorVersionHDPNum = Integer.parseInt(majorVersionHDP);
+                    String minorVersionHDP = getMinorVersion(testClusterServiceName);
+                    String buildVersionHDP = getBuildVersion(testClusterServiceName);
 
-                    if (majorVersionCloudNum >= majorVersionHDPNum ) {
+                    int majorVersionHDPNum = Integer.parseInt(majorVersionHDP);
+                    int minorVersionHDPNum = Integer.parseInt(minorVersionHDP);
+                    int buildVersionHDPNum =0;
+                    if(buildVersionHDP!=null)
+                        buildVersionHDPNum = Integer.parseInt(buildVersionHDP);
+
+                    if (majorVersionCloudNum >= majorVersionHDPNum && minorVersionCloudNum >= minorVersionHDPNum
+                    && buildVersionCloudNum > buildVersionHDPNum) {
                         //Now check for green //risk-0
                         String classAttributeName = e.getAttribute("class");
                         logger.info("Element class attribute name: " + classAttributeName);

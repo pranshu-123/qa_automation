@@ -26,7 +26,7 @@ public class IM_RES_24  extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void verifyGroupByFilterForUserHoverMemoryGraphCompareImpalaTblToolTip(String clusterId) {
-        test = extent.startTest("IM_RES_22.verifyGroupByFilterForUserHoverMemoryGraphCompareImpalaTblToolTip (" + clusterId + ")", "Verify if more than 5 hosts exist, the memory chart displays the top-5 hosts .");
+        test = extent.startTest("IM_RES_24.verifyGroupByFilterForUserHoverMemoryGraphCompareImpalaTblToolTip (" + clusterId + ")", "Verify if more than 5 hosts exist, the memory chart displays the top-5 hosts .");
         test.assignCategory(" Cluster/Impala Resources");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         Impala impala = new Impala(driver);

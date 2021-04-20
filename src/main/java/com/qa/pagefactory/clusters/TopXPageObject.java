@@ -28,8 +28,8 @@ public class TopXPageObject {
     @FindBy(xpath = "//input[contains(@type,'number')]")
     public WebElement topXNumber;
     
-    @FindBy(xpath = "//div[@class='row']//a/span[text()='Schedule']")
-    public WebElement scheduleButton;
+    @FindBy(xpath = "(//h4/span[contains(text(),'Reports')]/parent::h4/parent::li)/ul/li/span[contains(text(),'Scheduled')]")
+    public WebElement scheduledTab;
     
     //@FindBy(xpath = "(//a/span[text()='Schedule'])[2]")
     @FindBy(xpath = "(//a/span[text()='Schedule'])")
@@ -115,6 +115,12 @@ public class TopXPageObject {
 
     @FindBy(xpath = "//ul[contains(@class,'select2-results__options')]/li[1]")
     public WebElement select1stClusterOption;
+
+    @FindBy(xpath = "//table[contains(@class,'component-data-tables')]/tbody")
+    public WebElement scheduleReportTableData;
+
+    @FindBy(xpath = "(.//*[local-name() = 'svg']/*[local-name() = 'path'])[4]")
+    public WebElement lastPage;
 
     public By tagsFooter = By.xpath("(ancestor::div)[last()]/parent::div/footer");
 

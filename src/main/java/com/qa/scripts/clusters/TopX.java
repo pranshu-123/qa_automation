@@ -97,6 +97,14 @@ public class TopX {
           UserAction.SEND_KEYS, scheduleName);
   }
 
+    /**
+     * Click on Schedule Report Tab
+     * @return
+     */
+    public void clickOnScheduleButton() {
+        actions.performActionWithPolling(topXPageObject.scheduledTab, UserAction.CLICK);
+    }
+
   public List<WebElement> getClustersList() {
     return topXPageObject.clusterList;
   }
@@ -274,6 +282,32 @@ public class TopX {
             }
         } else {
             Assert.fail("Unable to click on latest report");
+        }
+        return false;
+    }
+
+    /**
+     * Click on last page of pagination
+     */
+    public void clickOnLastPageOfPagination() {
+        actions.performActionWithPolling(topXPageObject.lastPage, UserAction.CLICK);
+    }
+
+    /**
+     * Click on the latest report
+     */
+    public boolean validateIfReportIsScheduled(String reportName) {
+        clickOnLastPageOfPagination();
+        waitExecuter.sleep(1000);
+        WebElement scheduleTableData = topXPageObject.scheduleReportTableData;
+        List<WebElement> rows = scheduleTableData.findElements(By.tagName("tr"));
+        for (WebElement row : rows) {
+            String reportNameInRow = row.findElement(By.xpath("td[1]")).getText();
+            if (reportNameInRow.equals(reportName)) {
+                actions.performActionWithPolling(row.findElement(By.xpath(".//span[contains(@class,'icon-delete')]")),
+                    UserAction.CLICK);
+                return true;
+            }
         }
         return false;
     }

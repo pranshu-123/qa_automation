@@ -164,20 +164,17 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "((//table/tbody/tr)[5]/td)[4]//span[contains(@class,'icon-add')]")
     public WebElement addIcon;
 
-    @FindBy(xpath="((//table/tbody/tr)[5]/td)[4]//span[contains(@class,'icon-expand')]")
+    @FindBy(xpath = "((//table/tbody/tr)[5]/td)[4]//span[contains(@class,'icon-expand')]")
     public WebElement latestReportExpandIcon;
 
     @FindBy(xpath = "((//table/tbody/tr)[5]/td)[3]//span[contains(@class,'success')]")
     public WebElement successBanner;
 
-    @FindBy(xpath="//span[contains(@class,'component-cta')]//span")
+    @FindBy(xpath = "//span[contains(@class,'component-cta')]//span")
     public WebElement pleaseWaitTimer;
 
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/span")
     public WebElement pleaseWaitBanner;
-
-    //
-
 
 
     public QueueAnalysisPageObject(WebDriver driver) {

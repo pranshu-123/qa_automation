@@ -31,8 +31,8 @@ public class QueueAnalysis {
     private final List<String> memoryTooltipValues;
     private final List<String> jobsTooltipValues;
     private final List<String> vcoresTooltipValues;
-    private CommonPageObject commonPageObject;
     private final UserActions userAction;
+    private CommonPageObject commonPageObject;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -83,10 +83,7 @@ public class QueueAnalysis {
         // Click on Queue Analysis tab
         LOGGER.info("Clicked on Queue Analysis tab");
         userAction.performActionWithPolling(topPanelPageObject.reportsHeader, UserAction.CLICK);
-        // Validate Queue Analysis tab loaded successfully
-//        LOGGER.info("Validate Queue Analysis tab loaded successfully");
-//        waitExecuter.waitUntilElementPresent(queueAnalysisPageObject.queueAnalysisHeading);
-//        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.addIcon);
     }
 
     /**

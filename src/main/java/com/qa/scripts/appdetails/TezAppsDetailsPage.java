@@ -1090,14 +1090,14 @@ public class TezAppsDetailsPage {
     public void navigateToJobsTabFromHeader(SubTopPanelModulePageObject topPanelObj, AllApps allApps,
                                             DatePicker datePicker, ApplicationsPageObject appPageObj, String clusterId) {
         LOGGER.info("Navigate to jobs tab from header");
-        waitExecuter.sleep(3000);
         waitExecuter.waitUntilElementClickable(topPanelObj.jobs);
-        waitExecuter.sleep(1000);
-        topPanelObj.jobs.click();
+        MouseActions.clickOnElement(driver, topPanelObj.jobs);
+        waitExecuter.sleep(2000);
+        /*   topPanelObj.jobs.click();
         waitExecuter.sleep(3000);
         waitExecuter.waitUntilElementPresent(appPageObj.jobsPageHeader);
         waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.sleep(2000);
+        waitExecuter.sleep(2000);*/
 
         //Select cluster
         LOGGER.info("Select Cluster: " + clusterId);

@@ -314,11 +314,12 @@ public class TezLlapAppsDetailsPage {
         // Navigate to Jobs tab from header
         LOGGER.info("Navigate to jobs tab from header");
         waitExecuter.waitUntilElementClickable(topPanelObj.jobs);
-        waitExecuter.sleep(3000);
-        topPanelObj.jobs.click();
+        MouseActions.clickOnElement(driver, topPanelObj.jobs);
+        waitExecuter.sleep(2000);
+        /*topPanelObj.jobs.click();
         waitExecuter.waitUntilElementPresent(appPageObj.jobsPageHeader);
         waitExecuter.sleep(3000);
-        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilPageFullyLoaded();*/
 
         //Select cluster
         LOGGER.info("Select Cluster: " + clusterId);

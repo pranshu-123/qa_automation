@@ -1093,11 +1093,7 @@ public class TezAppsDetailsPage {
         waitExecuter.waitUntilElementClickable(topPanelObj.jobs);
         MouseActions.clickOnElement(driver, topPanelObj.jobs);
         waitExecuter.sleep(2000);
-        /*   topPanelObj.jobs.click();
-        waitExecuter.sleep(3000);
-        waitExecuter.waitUntilElementPresent(appPageObj.jobsPageHeader);
-        waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.sleep(2000);*/
+
 
         //Select cluster
         LOGGER.info("Select Cluster: " + clusterId);

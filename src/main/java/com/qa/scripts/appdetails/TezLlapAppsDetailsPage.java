@@ -316,10 +316,7 @@ public class TezLlapAppsDetailsPage {
         waitExecuter.waitUntilElementClickable(topPanelObj.jobs);
         MouseActions.clickOnElement(driver, topPanelObj.jobs);
         waitExecuter.sleep(2000);
-        /*topPanelObj.jobs.click();
-        waitExecuter.waitUntilElementPresent(appPageObj.jobsPageHeader);
-        waitExecuter.sleep(3000);
-        waitExecuter.waitUntilPageFullyLoaded();*/
+
 
         //Select cluster
         LOGGER.info("Select Cluster: " + clusterId);

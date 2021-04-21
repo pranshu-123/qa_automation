@@ -25,8 +25,8 @@ public class HomePage {
     private final HomePageObject homePageObject;
     private final WaitExecuter waitExecuter;
     private final WebDriver driver;
-    private final UserActions userActions;
     private CommonPageObject commonPageObject;
+    private final UserActions userActions;
 
     /**
      * Constructor which initialize all necessary things to perform action
@@ -123,10 +123,12 @@ public class HomePage {
     //click on cluster drop down
     public void selectMultiClusterId(String clusterId) {
         CommonPageObject commonPageObject = new CommonPageObject(driver);
+        waitExecuter.waitUntilElementClickable(commonPageObject.clusterDropdown);
         userActions.performActionWithPolling(commonPageObject.clusterDropdown, UserAction.CLICK);
         userActions.performActionWithPolling(commonPageObject.clusterSearchBox, UserAction.SEND_KEYS,
                 clusterId);
         userActions.performActionWithPolling(commonPageObject.clusterSearchFirstField, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(commonPageObject.clusterDropdown);
     }
 
     /* Get the list of clusters from UI */
@@ -255,10 +257,4 @@ public class HomePage {
         userActions.performActionWithPolling(topPanel.unravelLogo, UserAction.CLICK);
     }
 
-    public void navigateToReportsPage() {
-        waitExecuter.waitUntilElementClickable(topPanel.reportsTab);
-        userActions.performActionWithPolling(topPanel.reportsTab, UserAction.CLICK);
-
-
-    }
 }

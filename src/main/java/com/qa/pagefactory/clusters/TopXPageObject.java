@@ -28,8 +28,8 @@ public class TopXPageObject {
     @FindBy(xpath = "//input[contains(@type,'number')]")
     public WebElement topXNumber;
     
-    @FindBy(xpath = "//div[@class='row']//a/span[text()='Schedule']")
-    public WebElement scheduleButton;
+    @FindBy(xpath = "(//h4/span[contains(text(),'Reports')]/parent::h4/parent::li)/ul/li/span[contains(text(),'Scheduled')]")
+    public WebElement scheduledTab;
     
     //@FindBy(xpath = "(//a/span[text()='Schedule'])[2]")
     @FindBy(xpath = "(//a/span[text()='Schedule'])")
@@ -97,6 +97,30 @@ public class TopXPageObject {
 
     @FindBy(xpath = "(//div[contains(text(), 'Tags')])/following-sibling::div/descendant::input[not(contains(@type,'checkbox'))][last()]")
     public WebElement tagsLastInputTextboxField;
+
+    @FindBy(xpath = "//div[contains(@class,'close pointer')]")
+    public List<WebElement> closeModalButton;
+
+    @FindBy(xpath = "//td/span[contains(text(),'Top X')]/parent::td/following-sibling::td[3]//span[contains(@class, 'icon-expand')]")
+    public List<WebElement> lastExecutionReportButton;
+
+    @FindBy(xpath = "//span/parent::a")
+    public WebElement modalAfterRunButton;
+
+    @FindBy(xpath = "//span[contains(@class,'select2-selection--single')]")
+    public WebElement clusterDropdown;
+
+    @FindBy(xpath = "//span[contains(@class,'select2-search--dropdown')]/input")
+    public WebElement clusterSearchbox;
+
+    @FindBy(xpath = "//ul[contains(@class,'select2-results__options')]/li[1]")
+    public WebElement select1stClusterOption;
+
+    @FindBy(xpath = "//table[contains(@class,'component-data-tables')]/tbody")
+    public WebElement scheduleReportTableData;
+
+    @FindBy(xpath = "(.//*[local-name() = 'svg']/*[local-name() = 'path'])[4]")
+    public WebElement lastPage;
 
     public By tagsFooter = By.xpath("(ancestor::div)[last()]/parent::div/footer");
 

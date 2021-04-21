@@ -32,19 +32,14 @@ public class TC_QU_01 extends BaseClass {
         QueueAnalysisPageObject qaPageObject = new QueueAnalysisPageObject(driver);
         QueueAnalysis queueAnalysis = new QueueAnalysis(driver);
         // Navigate to Queue Analysis tab from header
-        test.log(LogStatus.INFO, "Navigate to Queue Analysis tab from header");
-        test.log(LogStatus.INFO, "Clicked on Queue Analysis tab");
-        test.log(LogStatus.INFO, "Validate Queue Analysis tab loaded successfully");
+        test.log(LogStatus.INFO, "Navigate to Report tab from header");
+        test.log(LogStatus.INFO, "Clicked on Queue Analysis Add icon");
         queueAnalysis.navigateToQueueAnalysis();
-        // Close confirmation box
-        test.log(LogStatus.INFO, "Closed the confirmation box");
-        LOGGER.info("Closed the confirmation box");
-        queueAnalysis.closeConfirmationMessageNotification();
         waitExecuter.sleep(1000);
-        //Click on Run button to open report page
-        test.log(LogStatus.INFO, "Click on Run button to open report page");
-        LOGGER.info("Click on Run button to open report page");
-        qaPageObject.runButton.click();
+        waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
+        qaPageObject.addIcon.click();
+        waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
+        //qaPageObject.modalRunButton.click();
         waitExecuter.sleep(1000);
         //Select ClusterId
         test.log(LogStatus.INFO, "Selecting ClusterId: " + clusterId);
@@ -53,13 +48,14 @@ public class TC_QU_01 extends BaseClass {
         //Click on Run button of modal window
         test.log(LogStatus.INFO, "Click on Run button of modal window");
         LOGGER.info("Click on Run button of modal window");
+        waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
         qaPageObject.modalRunButton.click();
-        waitExecuter.sleep(3000);
-        waitExecuter.waitUntilElementPresent(qaPageObject.runButton);
-        waitExecuter.waitUntilElementClickable(qaPageObject.runButton);
+        waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.pleaseWaitTimer,"Please Wait");
+        //waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.pleaseWaitBanner,"Please wait while the report is being generated.");
+        waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
         try {
-            waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.confirmationMessageElement,
-                    "Queue Analysis completed successfully.");
+            waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.successBanner,
+                    "SUCCESS");
             test.log(LogStatus.PASS, "Verified Queue Analysis report is loaded properly.");
         } catch (TimeoutException te) {
             throw new AssertionError("Queue Analysis Report not completed successfully.");

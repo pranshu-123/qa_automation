@@ -105,7 +105,8 @@ public class Impala {
 		final List<WebElement> filterItems = impalaPageObject.filterRemoveElements;
 		while (filterItems.size() != 0) {
 			JavaScriptExecuter.clickOnElement(driver, filterItems.get(0));
-			waitExecuter.waitUntilPageFullyLoaded();
+			waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+			waitExecuter.sleep(1000);
 		}
 	}
 

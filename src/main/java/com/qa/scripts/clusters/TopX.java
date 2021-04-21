@@ -7,6 +7,7 @@ import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 
 import com.qa.utils.actions.UserActions;
@@ -53,7 +54,7 @@ public class TopX {
     public void setTopXNumber(String number) {
         waitExecuter.waitUntilElementPresent(topXPageObject.topXNumber);
         waitExecuter.sleep(1000);
-//        topXPageObject.topXNumber.clear();
+        topXPageObject.topXNumber.clear();
         JavaScriptExecuter.clearTextField(driver, topXPageObject.topXNumber);
         actions.performActionWithPolling(topXPageObject.topXNumber,
             UserAction.SEND_KEYS, number);
@@ -96,9 +97,30 @@ public class TopX {
           UserAction.SEND_KEYS, scheduleName);
   }
 
+    /**
+     * Click on Schedule Report Tab
+     * @return
+     */
+    public void clickOnScheduleButton() {
+        actions.performActionWithPolling(topXPageObject.scheduledTab, UserAction.CLICK);
+    }
+
   public List<WebElement> getClustersList() {
     return topXPageObject.clusterList;
   }
+
+    /**
+     * Select multi c
+     * TODO - Need to consolidate this. Multiple report are having same implementation
+     * @param clusterId
+     */
+    public void selectCluster(String clusterId) {
+        waitExecuter.waitUntilElementClickable(topXPageObject.clusterDropdown);
+        actions.performActionWithPolling(topXPageObject.clusterDropdown, UserAction.CLICK);
+        actions.performActionWithPolling(topXPageObject.clusterSearchbox, UserAction.CLICK);
+        actions.performActionWithPolling(topXPageObject.clusterSearchbox, UserAction.SEND_KEYS, clusterId);
+        actions.performActionWithPolling(topXPageObject.select1stClusterOption, UserAction.CLICK);
+    }
 
   public WebElement getConfirmationMessage() {
     return topXPageObject.confirmationMessageElement;
@@ -206,5 +228,92 @@ public class TopX {
                 break;
             }
         }
+    }
+
+    /**
+     * Close topX modal
+     */
+    public void closeModalIfExists() {
+        if (topXPageObject.closeModalButton.size() > 0) {
+            actions.performActionWithPolling(topXPageObject.closeModalButton.get(0),
+                UserAction.CLICK);
+        }
+    }
+
+    /**
+     * Get the latest executed report
+     */
+    public boolean clickOnLatestReportIfExist() {
+        if (topXPageObject.lastExecutionReportButton.size() > 0) {
+            actions.performActionWithPolling(topXPageObject.lastExecutionReportButton.get(0)
+                , UserAction.CLICK);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Check if report successfully started
+     * @return
+     */
+    public boolean checkIfReportSuccessfullyStarted() {
+        try {
+            if (getConfirmationMessageContent().equalsIgnoreCase("REPORT HAS BEEN STARTED. BUT NOT ABLE TO " +
+                "ACCESS THE STATUS.")) {
+                return false;
+            }
+        } catch (Exception exception) {
+            LOGGER.warning(exception.getMessage());
+        }
+        return true;
+    }
+
+    /**
+     * Click on the latest report
+     */
+    public boolean validateLatestReport(String key, String value) {
+        if (clickOnLatestReportIfExist()) {
+            for (WebElement row : getInputParamsRowList()) {
+                if (row.findElement(By.xpath("td[1]")).getText().equalsIgnoreCase(key)) {
+                    Assert.assertEquals(row.findElement(By.xpath("td[2]")).getText(), value,
+                        "Incorrect value is displayed");
+                    return true;
+                }
+            }
+        } else {
+            Assert.fail("Unable to click on latest report");
+        }
+        return false;
+    }
+
+    /**
+     * Click on last page of pagination
+     */
+    public void clickOnLastPageOfPaginationIfExists() {
+        try {
+            actions.performActionWithPolling(topXPageObject.lastPage, UserAction.CLICK);
+        } catch (TimeoutException exception) {
+            LOGGER.info("Single page displayed. Pagination is not there.");
+        }
+    }
+
+    /**
+     * Click on the latest report
+     */
+    public boolean validateIfReportIsScheduled(String reportName) {
+        clickOnLastPageOfPaginationIfExists();
+        waitExecuter.sleep(1000);
+        WebElement scheduleTableData = topXPageObject.scheduleReportTableData;
+        List<WebElement> rows = scheduleTableData.findElements(By.tagName("tr"));
+        for (WebElement row : rows) {
+            String reportNameInRow = row.findElement(By.xpath("td[1]")).getText();
+            if (reportNameInRow.equals(reportName)) {
+                actions.performActionWithPolling(row.findElement(By.xpath(".//span[contains(@class,'icon-delete')]")),
+                    UserAction.CLICK);
+                return true;
+            }
+        }
+        return false;
     }
 }

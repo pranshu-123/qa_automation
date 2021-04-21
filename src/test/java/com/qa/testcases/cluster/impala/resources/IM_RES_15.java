@@ -41,8 +41,8 @@ public class IM_RES_15 extends BaseClass {
         LOGGER.info("Selecting the cluster");
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
-        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         impalaPageObject.groupByDropdownButton.click();
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         impalaPageObject.groupByQueueList.click();
         waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
@@ -58,7 +58,7 @@ public class IM_RES_15 extends BaseClass {
         waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         test.log(LogStatus.INFO, "Navigate different section in memory graph");
         GraphUtils graphUtils = new GraphUtils();
-        graphUtils.navigateDifferentPointOnGraph(driver, impalaPageObject.queryHighChartContainer);
+        graphUtils.navigateDifferentPointOnGraph(driver, impalaPageObject.memoryHighChartContainer);
         List<String> memoryTooltipValues = graphUtils.getMemoryTooltipValues();
 
         List<String> nodeValues = new ArrayList<String>();
@@ -79,6 +79,7 @@ public class IM_RES_15 extends BaseClass {
         //Assertion checks
         test.log(LogStatus.INFO, "Check with Assertions");
         LOGGER.info("Check with Assertions");
+        LOGGER.info("NODE VALUE - " +nodeValues);
         Assert.assertTrue(nodeValues.contains("Total"), "The tootip in memory graph does not contain 'Total' keyword");
         Assert.assertTrue(nodeValues.contains("Allocated"),
                 "The tootip in memory graph does not contain 'Allocated' keyword");

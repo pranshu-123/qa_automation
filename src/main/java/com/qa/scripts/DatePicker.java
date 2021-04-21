@@ -168,7 +168,7 @@ public class DatePicker {
     }
 
     /**
-     * Method to select 'Last 90 Days' in data picker
+     * Method to select 'Current Day' in data picker
      */
     public void selectCurrentDay() {
         waitExecuter.waitUntilElementClickable(datePickerPageObject.currentDay);

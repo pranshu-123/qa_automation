@@ -264,6 +264,7 @@ public class TopX {
                 return false;
             }
         } catch (Exception exception) {
+            LOGGER.warning(exception.getMessage());
         }
         return true;
     }

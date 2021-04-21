@@ -292,7 +292,7 @@ public class TopX {
     public void clickOnLastPageOfPaginationIfExists() {
         try {
             actions.performActionWithPolling(topXPageObject.lastPage, UserAction.CLICK);
-        } catch (NoSuchElementException exception) {
+        } catch (TimeoutException exception) {
             LOGGER.info("Single page displayed. Pagination is not there.");
         }
     }

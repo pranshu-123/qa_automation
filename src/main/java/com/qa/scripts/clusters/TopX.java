@@ -7,10 +7,10 @@ import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 
 import com.qa.utils.actions.UserActions;
-import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -289,15 +289,19 @@ public class TopX {
     /**
      * Click on last page of pagination
      */
-    public void clickOnLastPageOfPagination() {
-        actions.performActionWithPolling(topXPageObject.lastPage, UserAction.CLICK);
+    public void clickOnLastPageOfPaginationIfExists() {
+        try {
+            actions.performActionWithPolling(topXPageObject.lastPage, UserAction.CLICK);
+        } catch (NoSuchElementException exception) {
+            LOGGER.info("Single page displayed. Pagination is not there.");
+        }
     }
 
     /**
      * Click on the latest report
      */
     public boolean validateIfReportIsScheduled(String reportName) {
-        clickOnLastPageOfPagination();
+        clickOnLastPageOfPaginationIfExists();
         waitExecuter.sleep(1000);
         WebElement scheduleTableData = topXPageObject.scheduleReportTableData;
         List<WebElement> rows = scheduleTableData.findElements(By.tagName("tr"));

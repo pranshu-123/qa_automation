@@ -40,8 +40,10 @@ public class TC_CTX_03 extends BaseClass {
         test.assignCategory(" Cluster - Top X");
         LOGGER.info("Go to TopX page.", test);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         UserActions userActions = new UserActions(driver);
+        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
+        userActions.performActionWithPolling(topPanelComponentPageObject.reports, UserAction.CLICK);
+        waitExecuter.sleep(3000);
         TopX topX = new TopX(driver);
 
         waitExecuter.sleep(3000);

@@ -340,9 +340,6 @@ public class DatePicker {
             case CUSTOM_RANGE:
                 selectCustomRange();
                 break;
-            default:
-                System.out.println("Unknown Date");
-                System.exit(1);
         }
     }
 

@@ -32,7 +32,6 @@ public class TC_CTX_31 extends BaseClass {
 		waitExecuter.waitUntilPageFullyLoaded();
 		TopXPageObject topXPageObject = new TopXPageObject(driver);
 		TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-//		waitExecuter.waitUntilElementPresent(topPanelPageObject.topXTab);
 
 		SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
 		MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
@@ -44,9 +43,7 @@ public class TC_CTX_31 extends BaseClass {
 
 		waitExecuter.waitUntilPageFullyLoaded();
 		UserActions actions = new UserActions(driver);
-//		actions.performActionWithPolling(topPanelPageObject.topXTab, UserAction.CLICK);
-		TopX topX = new TopX(driver);
-//		topX.closeConfirmationMessageNotification();
+
 		actions.performActionWithPolling(topXPageObject.downloadJsonButton, UserAction.CLICK);
 		test.log(LogStatus.PASS, "Clicked on Download JSON");
         FileUtils.isFileDownloadedInUUIDFolder();

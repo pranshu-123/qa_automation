@@ -1,5 +1,6 @@
 package com.qa.scripts;
 
+import com.qa.enums.DatePickerOptions;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.DatePickerPageObject;
 import com.qa.utils.DateUtils;
@@ -167,6 +168,14 @@ public class DatePicker {
     }
 
     /**
+     * Method to select 'Current Day' in data picker
+     */
+    public void selectCurrentDay() {
+        waitExecuter.waitUntilElementClickable(datePickerPageObject.currentDay);
+        userActions.performActionWithPolling(datePickerPageObject.currentDay, UserAction.CLICK);
+    }
+
+    /**
      * Method to select 'This Month' in data picker
      */
     public void selectThisMonth() {
@@ -306,6 +315,33 @@ public class DatePicker {
         return list;
     }
 
+    /**
+     * Select date from date range
+     * @param dateOption
+     */
+    public void selectDateOptionFromDate(DatePickerOptions dateOption) {
+        waitExecuter.sleep(3000);
+        switch (dateOption) {
+            case CURRENT_DAY:
+                selectCurrentDay();
+                break;
+            case LAST_7_DAYS:
+                selectLast7Days();
+                break;
+            case LAST_30_DAYS:
+                selectLast30Days();
+                break;
+            case LAST_60_DAYS:
+                selectLast60Days();
+                break;
+            case LAST_90_DAYS:
+                selectLast90Days();
+                break;
+            case CUSTOM_RANGE:
+                selectCustomRange();
+                break;
+        }
+    }
 
     /*Select any date for start and end date through custom
     @startDateInMinus - Define days in minus from that of current date

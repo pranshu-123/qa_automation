@@ -63,7 +63,7 @@ public class TC_CTR_05 extends BaseClass {
         LOGGER.info("Clicked on Run Button");
         test.log(LogStatus.INFO, "Clicked on Run Button");
         waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
-        waitExecuter.sleep(80000);
+        waitExecuter.sleep(50000);
 
         WebElement statusElement = driver.findElement(By.xpath(statusXpath));
         try{

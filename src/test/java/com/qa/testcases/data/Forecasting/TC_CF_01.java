@@ -62,9 +62,10 @@ public class TC_CF_01 extends BaseClass {
         forecasting.clickOnModalRunButton();
         LOGGER.info("Clicked on Modal Run Button");
         test.log(LogStatus.INFO, "Clicked on Modal Run Button");
+
         waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.waitUntilElementPresent(forecastingPageObject.runNowButton);
-        userActions.performActionWithPolling(forecastingPageObject.runNowButton, UserAction.CLICK);
+        waitExecuter.waitUntilTextNotToBeInWebElement(forecastingPageObject.modalAfterRunButton, "Please Wait");
+
         try {
             waitExecuter.waitUntilTextToBeInWebElement(forecastingPageObject.confirmationMessageElement,
                     "Capacity Forecasting completed successfully.");

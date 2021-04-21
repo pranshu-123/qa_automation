@@ -7,7 +7,6 @@ import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 
 import com.qa.utils.actions.UserActions;
@@ -293,7 +292,7 @@ public class TopX {
     public void clickOnLastPageOfPaginationIfExists() {
         try {
             actions.performActionWithPolling(topXPageObject.lastPage, UserAction.CLICK);
-        } catch (TimeoutException exception) {
+        } catch (AssertionError exception) {
             LOGGER.info("Single page displayed. Pagination is not there.");
         }
     }

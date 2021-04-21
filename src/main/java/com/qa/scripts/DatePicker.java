@@ -80,7 +80,7 @@ public class DatePicker {
 
     public void clickOnCustomDateApplyBtn() {
         waitExecuter.waitUntilElementPresent(datePickerPageObject.applyBtn);
-        datePickerPageObject.applyBtn.click();
+        userActions.performActionWithPolling(datePickerPageObject.applyBtn, UserAction.CLICK);
         waitExecuter.sleep(1000);
     }
 

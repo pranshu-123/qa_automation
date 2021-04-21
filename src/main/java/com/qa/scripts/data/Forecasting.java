@@ -1,9 +1,11 @@
 package com.qa.scripts.data;
 
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.data.ForecastingPageObject;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,6 +18,7 @@ public class Forecasting {
     private WaitExecuter waitExecuter;
     private WebDriver driver;
     ForecastingPageObject forecastingPageObject;
+    private UserActions actions;
     private static final Logger LOGGER = Logger.getLogger(Forecasting.class.getName());
 
     /**
@@ -26,7 +29,9 @@ public class Forecasting {
     public Forecasting(WebDriver driver) {
         waitExecuter = new WaitExecuter(driver);
         this.driver = driver;
+        this.actions = new UserActions(driver);
         forecastingPageObject = new ForecastingPageObject(driver);
+
     }
 
     public void closeConfirmationMessageNotification() {
@@ -45,11 +50,12 @@ public class Forecasting {
     }
 
     public void clickOnModalRunButton() {
-        MouseActions.clickOnElement(driver, forecastingPageObject.modalRunButton);
+        actions.performActionWithPolling(forecastingPageObject.modalRunButton, UserAction.CLICK);
     }
 
     public void setForecastingDays(String numOfDays){
-        forecastingPageObject.numOfDaysForForecasting.sendKeys(numOfDays);
+        actions.performActionWithPolling(forecastingPageObject.numOfDaysForForecasting,
+            UserAction.SEND_KEYS, numOfDays);
     }
 
     public void clickOnCancelButton(){

@@ -95,7 +95,7 @@ public class TC_LLAP_26_PART1 extends BaseClass
                  */
                 if (appCount > 0) {
                     String expectedQueuename = tezLlapApps.verifyQueueName(tezLlapPage);
-                    test.log(LogStatus.PASS, "Parent App is displayed in the Hive-Tez LLAP Table: " + expectedQueuename);
+                    Assert.assertEquals(expectedQueuename, queuenameSelected, "Hive tezllap should not be llap");
 
                 } else {
                     waitExecuter.waitUntilElementPresent(applicationsPageObject.whenNoApplicationPresent);

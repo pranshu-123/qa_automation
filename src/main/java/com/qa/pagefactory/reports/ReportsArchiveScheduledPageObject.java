@@ -87,7 +87,8 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//span[contains(@class,'component-cta')]/a/span")
   public WebElement reportCreationRunButton;
 
-  @FindBy(xpath = "(//*[@class='icon-download is-enabled'])[1]")
+  //@FindBy(xpath = "(//*[@class='icon-download is-enabled'])[1]")
+  @FindBy(xpath="(//span[contains(@class, 'icon-download')])[1]")
   public WebElement downloadReportIcon;
 
   @FindBy(xpath = "(//*[@role='dialog'])")

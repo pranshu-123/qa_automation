@@ -52,5 +52,11 @@ public class TuningPageObject {
     @FindBy(xpath = "//input[@type='email']/following-sibling::span")
     public WebElement addEmail;
 
+    @FindBy(xpath = "//div[@id='breadcrumb']/span/span")
+    public WebElement archivesText;
+
+    @FindBy(xpath="//div[@class='close pointer']")
+    public WebElement close;
+
     public TuningPageObject(WebDriver driver){PageFactory.initElements(driver,this);}
 }

@@ -55,7 +55,12 @@ public class TC_CD_12 extends BaseClass {
             test.log(LogStatus.PASS, "Verified Cluster Discovery report is loaded properly.");
 
         } catch (TimeoutException te) {
-            throw new AssertionError("Cluster Discovery Report not completed successfully.");
+            try {
+                waitExecuter.waitUntilTextToBeInWebElement(cdPageObject.confirmationMessageElement,
+                    "Cluster Discovery completed successfully.");
+            } catch (TimeoutException te2) {
+                throw new AssertionError("Cluster Discovery Report not completed successfully.");
+            }
         }
         executor.executeScript("arguments[0].scrollIntoView();", cdPageObject.cpu_memoryHeatMap);
         Assert.assertTrue(cdPageObject.heatMapContainer.isDisplayed(), "Heat map for cpu not displayed");

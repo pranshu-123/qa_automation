@@ -39,7 +39,7 @@ public class IM_TC_07_Part1 extends BaseClass {
             appDetailsPage.navigateToJobsTab();
             allApps.selectCluster(clusterId);
             datePicker.clickOnDatePicker();
-            datePicker.selectLast90Days();
+            datePicker.selectLast30Days();
             appDetailsPage.selectSuccessfulApplication();
             int appCount = appDetailsPage.selectOnlyApplication(AppDetailsApplicationType.IMPALA);
             if (appCount > 0) {

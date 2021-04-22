@@ -89,7 +89,7 @@ public class DatePicker {
      */
     public void selectLastOneHour() {
         waitExecuter.waitUntilElementPresent(datePickerPageObject.lastOneHour);
-        datePickerPageObject.lastOneHour.click();
+        userActions.performActionWithPolling(datePickerPageObject.lastOneHour, UserAction.CLICK);
     }
 
     /**

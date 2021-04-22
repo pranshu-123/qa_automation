@@ -41,6 +41,7 @@ public class IM_TC_02 extends BaseClass {
         AllApps allApps = new AllApps(driver);
         allApps.selectCluster(clusterId);
         DatePicker datePicker = new DatePicker(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();
         AppDetailsPage appDetailsPage = new AppDetailsPage(driver);
@@ -65,6 +66,7 @@ public class IM_TC_02 extends BaseClass {
             Assert.assertNotNull(appDetailsPage.getApplicationDataIO(), "App Data IO is not displayed.");
             loggingUtils.pass("Validate whether Data IO is displayed.", test);
             appDetailsPage.closeModalbutton();
+            waitExecuter.sleep(2000);
         } catch (Throwable ex) {
             appDetailsPage.closeModalbutton();
             throw ex;

@@ -163,7 +163,6 @@ public class AllApps {
         // Select cluster
         LOGGER.info("Select clusterId : " + clusterId);
         selectCluster(clusterId);
-        waitExecuter.sleep(3000);
     }
 
     /* Get all app types that have run in unravel UI */

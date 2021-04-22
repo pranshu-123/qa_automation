@@ -48,11 +48,12 @@ public class TC_HB_69 extends BaseClass {
         List<String> tableNames = hbase.getTableNamesFromTablesTab(HbaseTablesColumn.TABLE_NAME);
         //Compare table names with table name having 'namespace', 'table', 'region'
         for (String tableName : tableNames) {
-            if (tableName.contains("namepace") || tableName.contains("table") || tableName.contains("region")) {
+            if (tableName.contains(".") || tableName.contains("table") || tableName.contains("region")) {
                 Assert.assertTrue(true, "Table name not having any of the name 'namespace', " +
                         " 'table' and 'region'");
                 LOGGER.info("Verified com.unraveldata.hbase.table.name.pattern for table (HBASE-108).");
                 test.log(LogStatus.PASS, "Verified com.unraveldata.hbase.table.name.pattern for table (HBASE-108).");
+                break;
             } else {
                 Assert.assertTrue(false, "Table name not having any of the name 'namespace', " +
                         " 'table' and 'region'");

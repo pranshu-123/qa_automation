@@ -38,79 +38,40 @@ public class TC_CTR_05 extends BaseClass {
         LOGGER.info("Passed Parameter Is : " + clusterId);
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-//        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-//        waitExecuter.waitUntilElementPresent(topPanelPageObject.tuningTab);
         waitExecuter.waitUntilPageFullyLoaded();
-//        waitExecuter.waitUntilElementClickable(topPanelPageObject.tuningTab);
-//        waitExecuter.sleep(3000);
-//        MouseActions.clickOnElement(driver, topPanelPageObject.tuningTab);
-//        LOGGER.info("Clicked on Tuning Tab");
-//        test.log(LogStatus.INFO, "Clicked on Tuning Tab");
+        TuningPageObject tuningPageObject = new TuningPageObject(driver);
 
-        //Get all the clusters from UI and store in list and close the new report window
         Tuning tuning = new Tuning(driver);
-//        tuning.closeConfirmationMessageNotification();
-//        tuning.clickOnRunButton();
-//        LOGGER.info("Clicked on Run button");
-//        test.log(LogStatus.INFO,"Clicked on Run button");
-
         test.log(LogStatus.INFO, "Initialize all class objects");
         LOGGER.info("Initialize all class objects");
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
-        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
         ReportsArchiveSchedulePage reportsPage = new ReportsArchiveSchedulePage(driver);
         ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);
+
+        HomePage homePage = new HomePage(driver);
+
         LOGGER.info("Click on + button");
         String statusXpath = reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.Tuning);
         LOGGER.info("Clicked on Tuning Tab + icon");
         test.log(LogStatus.INFO, "Clicked on Tuning Tab + icon");
+        LOGGER.info("Clicked on Cluster Id button");
+        test.log(LogStatus.INFO,"Clicked on Cluster Id button");
+        homePage.selectMultiClusterId(clusterId);
+        tuning.clickOnModalRunButton();
+        LOGGER.info("Clicked on Run Button");
+        test.log(LogStatus.INFO, "Clicked on Run Button");
+        waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
+        waitExecuter.sleep(50000);
 
-        UserActions userActions = new UserActions(driver);
-        CommonPageObject commonPageObject = new CommonPageObject(driver);
-        userActions.performActionWithPolling(commonPageObject.clusterDropdown, UserAction.CLICK);
-        List<String> allClustersUI = new ArrayList<>();
-        if(commonPageObject.clustersList.size() > 0) {
-            allClustersUI = tuning.getClusterOptions(commonPageObject);
+        WebElement statusElement = driver.findElement(By.xpath(statusXpath));
+        try{
+            waitExecuter.waitUntilTextToBeInWebElement(statusElement,
+                    "SUCCESS");
+            test.log(LogStatus.PASS, "Verified Tuning report is completed with status " + statusElement.getText());
+        }catch (TimeoutException te) {
+            throw new AssertionError("Tuning Report not completed successfully for cluster :"+ clusterId);
         }
-        tuning.closeNewReport();
-
-        //Now traverse all cluster one by one and generate report
-        HomePage homePage = new HomePage(driver);
-        TuningPageObject tuningPageObject = new TuningPageObject(driver);
-        for (String clusterUI : allClustersUI) {
-           /* waitExecuter.waitUntilElementPresent(tuningPageObject.runButton);
-            tuning.clickOnRunButton();*/
-            MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
-            waitExecuter.waitUntilPageFullyLoaded();
-            LOGGER.info("Clicked on Run button");
-            test.log(LogStatus.INFO,"Clicked on Run button");
-            homePage.selectMultiClusterId(clusterUI);
-            tuning.clickOnModalRunButton();
-            LOGGER.info("Clicked on Run Button");
-            test.log(LogStatus.INFO, "Clicked on Run Button");
-            waitExecuter.waitUntilElementPresent(tuningPageObject.runButton);
-            waitExecuter.waitUntilElementClickable(tuningPageObject.runButton);
-//            try {
-//                waitExecuter.waitUntilTextToBeInWebElement(tuningPageObject.confirmationMessageElement,
-//                        "Cluster Tuning completed successfully.");
-//                test.log(LogStatus.PASS, "Verified Tuning report is completed successfully for cluster : " + clusterUI);
-//            } catch (TimeoutException te) {
-//                throw new AssertionError("Tuning Report not completed successfully for cluster :"+ clusterUI);
-//            }
-            WebElement statusElement = driver.findElement(By.xpath(statusXpath));
-            try{
-                waitExecuter.waitUntilElementPresent(statusElement);
-                test.log(LogStatus.PASS, "Verified Tuning report is completed with status " + statusElement.getText());
-//                waitExecuter.waitUntilTextToBeInWebElement(statusElement,
-//                        "SUCCESS");
-                waitExecuter.waitUntilPageFullyLoaded();
-            }catch (TimeoutException te) {
-                throw new AssertionError("Tuning Report not completed successfully for cluster :"+ clusterUI);
-            }
-        }
-
     }
-
-
 }

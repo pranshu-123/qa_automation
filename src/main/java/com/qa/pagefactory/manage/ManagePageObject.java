@@ -16,7 +16,7 @@ public class ManagePageObject {
     public List<WebElement> allManageTabList;
 
     //@FindBy(css = "div#daemons-template h1")
-    @FindBy(xpath="//div[contains(@class, 'component-section-header')]/h1")
+    @FindBy(xpath="//li[@class='router-link-exact-active router-link-active active']//span[@class='selected'][normalize-space()='Daemons']")
     public WebElement daemonsHeader;
 
     @FindBy(xpath = "(//ul[@class='sub-menu']/li[contains(@class,'router-link-active')]/span[@class='selected'])[7]")

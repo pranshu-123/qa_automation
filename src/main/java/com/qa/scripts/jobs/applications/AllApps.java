@@ -67,7 +67,7 @@ public class AllApps {
         waitExecuter.waitUntilElementClickable(applicationsPageObject.globalSearchBox);
         waitExecuter.sleep(1000);
         userAction.performActionWithPolling(applicationsPageObject.select1stCluster, UserAction.CLICK);
-        waitExecuter.waitUntilElementClickable(applicationsPageObject.globalSearchBox);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         waitExecuter.sleep(4000);
 
     }
@@ -78,6 +78,7 @@ public class AllApps {
             applicationsPageObject.clusterSearchBox.sendKeys(Keys.BACK_SPACE);
             waitExecuter.sleep(1000);
             waitExecuter.waitUntilElementClickable(applicationsPageObject.clusterSearchBox);
+            waitExecuter.sleep(1000);
             applicationsPageObject.clusterSearchBox.clear();
             waitExecuter.sleep(1000);
             waitExecuter.waitUntilElementClickable(applicationsPageObject.clusterSearchBox);
@@ -140,8 +141,7 @@ public class AllApps {
         LOGGER.info("Navigate to jobs tab from header");
         waitExecuter.waitUntilElementClickable(subTopPanelModulePageObject.jobs);
         userAction.performActionWithPolling(subTopPanelModulePageObject.jobs, UserAction.CLICK);
-        waitExecuter.sleep(3000);
-        waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         waitExecuter.waitUntilPageFullyLoaded();
     }
 
@@ -151,7 +151,7 @@ public class AllApps {
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(1000);
         datePicker.selectLast7Days();
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
     }
 
     /* Select cluster and Last 7 days */
@@ -183,6 +183,7 @@ public class AllApps {
         userAction.performActionWithPolling(applicationsPageObject.resetButton, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
     }
+
     /* Select cluster and Last 30 days */
     public void inJobsSelectClusterAndLast30Days(String clusterId) {
         // Navigate to Jobs tab from header

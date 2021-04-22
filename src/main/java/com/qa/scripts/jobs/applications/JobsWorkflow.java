@@ -60,16 +60,16 @@ public class JobsWorkflow {
      */
     public void clickOnJobsPipelineTab() {
         userActions.performActionWithPolling(topPanelPageObject.jobsTab, UserAction.CLICK);
-        waitExecutor.waitUntilElementPresent(workflow.jobsHeading);
+        waitExecutor.waitUntilElementClickable(workflow.resetButton);
         userActions.performActionWithPolling(subTopPanelModulePageObject.jobsPipelinesTab, UserAction.CLICK);
-        waitExecutor.waitUntilElementPresent(workflow.pipelineHeader);
+        waitExecutor.waitUntilElementClickable(workflow.globalSearch);
     }
 
     /* Navigate to pipeline tab */
     public void navigateToPipelinesTab() {
         LOGGER.info("Navigating to Pipelines tab of Jobs Page.");
         userActions.performActionWithPolling(subTopPanelModulePageObject.jobsPipelinesTab, UserAction.CLICK);
-        waitExecutor.waitUntilElementPresent(workflow.pipelineHeader);
+        waitExecutor.waitUntilElementPresent(workflow.searchBoxWorkflow);
     }
 
     /* Search workflow name to select */

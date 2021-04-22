@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class TC_JAL_02 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_JAL_02.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test
     public void validateCustomRangeCalendar() {
         test = extent.startTest("TC_JAL_02.validateCustomRangeCalendar",
                 "Verify custom range click opens date-time calendar");

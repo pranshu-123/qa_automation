@@ -348,8 +348,9 @@ public class ELKPage {
           else
             colId = 4;
           logger.info("SP: KpiName = "+ kpiName + " KpiValue = "+ kpiValue);
+          String regex = "[a-zA-Z]";
           int expectedEventData = getAvgEventData(elkPageObject, colId);
-          int actualEventData = Integer.parseInt(kpiValue);
+          int actualEventData = Integer.parseInt(kpiValue.split(regex)[0]);
           logger.info("Expected event data: " + expectedEventData + " Actual Event data: " + actualEventData);
           Assert.assertEquals(expectedEventData, actualEventData, "The average number of events flowing into " +
               "all nodes over the selected time range is not equal\n Expected: " + expectedEventData + " Actual: " + actualEventData);

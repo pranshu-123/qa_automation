@@ -200,7 +200,8 @@ public class SparkAppsDetailsPageObject {
           "'highcharts-drilldown-point') and @fill='rbg(92,184,92)']")
   public WebElement outputStage;
 
-  @FindBy(xpath ="//*[@class='highcharts-button-box']")
+  //@FindBy(xpath ="//*[@class='highcharts-button-box']")
+ @FindBy(xpath = "//*[contains(@class,'highcharts-drillup-button')]")
   public WebElement backButton;
 
   @FindBy(xpath ="//*[@class='stg-link link']")

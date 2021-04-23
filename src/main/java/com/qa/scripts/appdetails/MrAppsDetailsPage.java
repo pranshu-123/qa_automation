@@ -258,8 +258,8 @@ public class MrAppsDetailsPage {
         Assert.assertFalse(appKpiVal.isEmpty(), "Application kpi values are empty");
         String appDuration = "0";
         for (int i = 0; i < appKpis.size(); i++) {
-            Assert.assertNotSame("", appKpis.get(i).getText(), "Kpi text is empty");
-            Assert.assertNotSame("", appKpiVal.get(i).getText(), "Kpi Value is empty");
+            Assert.assertNotNull(appKpis.get(i).getText(), "Kpi text is empty");
+            Assert.assertNotNull(appKpiVal.get(i).getText(), "Kpi Value is empty");
             appDuration = (appKpiVal.get(0).getText().trim());
             LOGGER.info("Kpi Name = " + appKpis.get(i).getText() + " Value = " + appKpiVal.get(i).getText());
         }
@@ -272,17 +272,16 @@ public class MrAppsDetailsPage {
      * (start, end and duration are listed and should not be empty)
      */
     public void validateLeftPaneKpis(List<WebElement> kpiList) {
-        /*Assert.assertFalse(kpiList.isEmpty(), "The kpi list is empty");*/
         for (WebElement webElement : kpiList) {
             LOGGER.info("The leftPane kpi is " + webElement.getText());
             String kpis = webElement.getText();
-            Assert.assertNotSame("", kpis, "The kpis is empty");
+            Assert.assertNotNull(kpis, "The kpis is empty");
             String[] kpisOut = kpis.split(": ");
             String kpiName = kpisOut[0];
             String kpiVal = kpisOut[1];
             LOGGER.info("Kpi name = " + kpisOut[0] + "  Kpi Value = " + kpisOut[1]);
-            Assert.assertNotSame("", kpiName, "The kpi " + kpiName + " is empty");
-            Assert.assertNotSame("", kpiVal, "The kpi " + kpiVal + " is empty");
+            Assert.assertNotNull(kpiName, "The kpi " + kpiName + " is empty");
+            Assert.assertNotNull(kpiVal, "The kpi " + kpiVal + " is empty");
         }
     }
 
@@ -297,9 +296,7 @@ public class MrAppsDetailsPage {
         waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();
         String headerAppId = mrApps.getHeaderAppId.getText().trim();
-        Assert.assertTrue(headerAppId.equals(appId),
-                "Tez Application Id is not displayed in the Header");
-        Assert.assertNotSame(appId, headerAppId, "Tez Application Id is not displayed in the Header");
+        Assert.assertEquals(appId, headerAppId, "Tez Application Id is not displayed in the Header");
         return headerAppId;
     }
 
@@ -321,14 +318,14 @@ public class MrAppsDetailsPage {
 
 
     /**
-     * Method to click the first app in jobs table , navigate to the details page.
-     * and verify app Id .
+     * Method to get the app status.
      */
-    public String verifyAppStatus(MrAppsDetailsPageObject mrApps) {
+    public String getAppStatus(MrAppsDetailsPageObject mrApps) {
         String Status = mrApps.Status.getText();
         waitExecuter.sleep(3000);
-        LOGGER.info("Tez application Id is " + Status);
-        Assert.assertNotSame("", Status, "Tez Application Id is not displayed in the Header");
+        LOGGER.info("The application Id is " + Status);
+        Assert.assertNotNull(Status, "Application Id is not displayed in the Header");
+       // Assert.assertNotSame("", Status, "Application Id is not displayed in the Header");
         return Status;
     }
 
@@ -341,68 +338,22 @@ public class MrAppsDetailsPage {
         WebElement Appid = mrApps.getClusterId;
         Actions toolAct = new Actions(driver);
         toolAct.moveToElement(Appid).build().perform();
-        WebElement AppnametoolTip = mrApps.getClusterId;
-        String AppIdText = AppnametoolTip.getText().trim();
-        LOGGER.info("Tez Status is " + Appid);
-        waitExecuter.sleep(5000);
+        WebElement AppNameToolTip = mrApps.getClusterId;
+        String AppIdText = AppNameToolTip.getText().trim();
+        LOGGER.info("Mr app id is " + Appid.getText());
         waitExecuter.waitUntilPageFullyLoaded();
-        Assert.assertTrue(Appid.equals(AppIdText),
-                "Tez Application Id is not displayed in the Header");
-        Assert.assertNotSame("", Appid, "Tez App id name is not displayed in the Table");
+        Assert.assertEquals(AppIdText, Appid.getText(), "MR Application Id is not displayed in the Header");
         return AppIdText;
     }
 
     /**
      * Method to click the first app in jobs table , navigate to the details page.
-     * and verify  starttime .
+     * and check if the table data like start time, duration, read and write is displayed or not.
      */
-    public String verifystarttime(MrAppsDetailsPageObject mrApps) {
-        String typetarttime = mrApps.getstartTime.getText();
-        LOGGER.info("Tez Status is " + typetarttime);
-        waitExecuter.sleep(5000);
-        waitExecuter.waitUntilPageFullyLoaded();
-        Assert.assertNotSame("", typetarttime, "Tez User name is not displayed in the Table");
-        return typetarttime;
-    }
-
-    /**
-     * Method to click the first app in jobs table , navigate to the details page.
-     * and verify  duration .
-     */
-    public String verifyduration(MrAppsDetailsPageObject mrApps) {
-        String typetarttime = mrApps.getduration.getText();
-        LOGGER.info("Tez Status is " + typetarttime);
-        waitExecuter.sleep(5000);
-        waitExecuter.waitUntilPageFullyLoaded();
-        Assert.assertNotSame("", typetarttime, "Tez User name is not displayed in the Table");
-        return typetarttime;
-    }
-
-
-    /**
-     * Method to click the first app in jobs table , navigate to the details page.
-     * and verify  Read IO .
-     */
-    public String verifyRead(MrAppsDetailsPageObject mrApps) {
-        String ReadIO = mrApps.getRead.getText();
-        LOGGER.info("Tez Status is " + ReadIO);
-        waitExecuter.sleep(5000);
-        waitExecuter.waitUntilPageFullyLoaded();
-        Assert.assertNotSame("", ReadIO, "Tez User name is not displayed in the Table");
-        return ReadIO;
-    }
-
-    /**
-     * Method to click the first app in jobs table , navigate to the details page.
-     * and verify  Write .
-     */
-    public String verifyWrite(MrAppsDetailsPageObject mrApps) {
-        String WriteIO = mrApps.getWrite.getText();
-        LOGGER.info("Tez Status is " + WriteIO);
-        waitExecuter.sleep(5000);
-        waitExecuter.waitUntilPageFullyLoaded();
-        Assert.assertNotSame("", WriteIO, "Tez User name is not displayed in the Table");
-        return WriteIO;
+    public void checkAppsJobTableData(String data, String colType) {
+        boolean onlySpecialChars = data.matches("[^a-zA-Z0-9]+");
+        Assert.assertFalse(data.isEmpty() || onlySpecialChars, colType + " data is not displayed in the table");
+        LOGGER.info("Data for "+ colType + " is displayed in the table");
     }
 
     /**
@@ -1172,7 +1123,6 @@ public class MrAppsDetailsPage {
         waitExecuter.sleep(1000);
         topPanelObj.jobs.click();
         waitExecuter.sleep(3000);
-        waitExecuter.waitUntilElementPresent(appPageObj.jobsPageHeader);
         waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.sleep(2000);
 

@@ -85,7 +85,7 @@ public class ManagePageObject {
     @FindBy(xpath="((//ul[@class='sub-menu']/li[contains(@class,'router-link-active')]/span[@class='selected'])[7]/parent::li/following-sibling::li/span)[3]")
     public WebElement monitoringTab;
 
-    @FindBy(xpath="//li[@class='router-link-exact-active router-link-active active']//ul[@class='sub-menu']//li//span[contains(text(),'Monitoring')]")
+    @FindBy(xpath="(//span[contains(.,'Monitoring')])[7]")
     public WebElement monitoringHeader;
 
     @FindBy(xpath="//div[@class='col-auto']/ul/li/a[contains(@class,'active')]")

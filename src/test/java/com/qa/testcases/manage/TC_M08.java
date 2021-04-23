@@ -68,11 +68,12 @@ public class TC_M08 extends BaseClass {
         try{
             waitExecuter.waitUntilElementPresent(managePageObject.latestDiagnosticsContentHeader);
             waitExecuter.waitUntilTextToBeInWebElement(managePageObject.latestDiagnosticsContentHeader, "Diagnostics Log");
-            waitExecuter.waitUntilPageFullyLoaded();
+            waitExecuter.sleep(7000);
             test.log(LogStatus.INFO, "Verified Diagnostics Log is loaded properly.");
+            waitExecuter.waitUntilElementPresent(managePageObject.latestDiagnosticsContentHeader);
             Assert.assertTrue(managePageObject.latestDiagnosticsContentHeader.isDisplayed(),"Diagnostics Log " +
                     "content not found.");
-            waitExecuter.waitUntilPageFullyLoaded();
+            waitExecuter.sleep(4000);
         }catch (Exception e){
             e.printStackTrace();
             test.log(LogStatus.INFO, "Verified Latest Diagnostics Header and Time Stamp not found.");

@@ -25,7 +25,7 @@ public class ManagePageObject {
     @FindBy(xpath="((//ul[@class='sub-menu']/li[contains(@class,'router-link-active')]/span[@class='selected'])[7]/parent::li/following-sibling::li/span)[1]")
     public WebElement statsTab;
 
-    @FindBy(xpath="//div[contains(@class,'component-section-header')]//h1")
+    @FindBy(xpath="//li[@class='active']//span[@class='selected'][normalize-space()='Stats']")
     public WebElement statsHeader;
 
     @FindBy(xpath = "(//div[@class='component-tabs-primary']//a)[1]")
@@ -37,7 +37,7 @@ public class ManagePageObject {
     @FindBy(xpath = "(//div[@class='component-tabs-primary']//a)[2]")
     public WebElement elasticSearchTab;
 
-    @FindBy(xpath = "(//div[@class='container-fluid']//label)[1]")
+    @FindBy(xpath = "//a[normalize-space()='Elasticsearch']")
     public WebElement elasticSearchStatus;
 
     @FindBy(xpath = "(//div[@class='container-fluid']//label)[1]/parent::div/following-sibling::div/input")
@@ -64,7 +64,7 @@ public class ManagePageObject {
     @FindBy(xpath="((//ul[@class='sub-menu']/li[contains(@class,'router-link-active')]/span[@class='selected'])[7]/parent::li/following-sibling::li/span)[2]")
     public WebElement runDiagnosticsTab;
 
-    @FindBy(xpath="//div[contains(@class,'component-section-header')]//h1")
+    @FindBy(xpath="//li[@class='active']//span[@class='selected'][normalize-space()='Run Diagnostics']")
     public WebElement runDiagnosticsHeader;
 
     @FindBy(xpath = "//ul[@class='diagnostic-ul']/li[contains(text(),'Load Latest Diagnostics')]")
@@ -85,7 +85,7 @@ public class ManagePageObject {
     @FindBy(xpath="((//ul[@class='sub-menu']/li[contains(@class,'router-link-active')]/span[@class='selected'])[7]/parent::li/following-sibling::li/span)[3]")
     public WebElement monitoringTab;
 
-    @FindBy(xpath="//div[contains(@class,'component-section-header')]//h1")
+    @FindBy(xpath="//li[@class='router-link-exact-active router-link-active active']//ul[@class='sub-menu']//li//span[contains(text(),'Monitoring')]")
     public WebElement monitoringHeader;
 
     @FindBy(xpath="//div[@class='col-auto']/ul/li/a[contains(@class,'active')]")

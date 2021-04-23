@@ -53,6 +53,7 @@ public class TC_M10 extends BaseClass {
         test.log(LogStatus.INFO, "Clicked on Monitoring Tab.");
         logger.info("Clicked on Monitoring Tab.");
         waitExecuter.waitUntilElementPresent(managePageObject.monitoringHeader);
+        waitExecuter.waitUntilPageFullyLoaded();
         Assert.assertTrue(manage.validateMonitoringHeader(), "Monitoring Header is not present.");
         test.log(LogStatus.INFO, "Verified Monitoring Tab.");
 

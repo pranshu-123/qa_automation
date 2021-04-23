@@ -71,6 +71,7 @@ public class TC_M08 extends BaseClass {
             waitExecuter.sleep(7000);
             test.log(LogStatus.INFO, "Verified Diagnostics Log is loaded properly.");
             waitExecuter.waitUntilElementPresent(managePageObject.latestDiagnosticsContentHeader);
+            waitExecuter.waitUntilPageFullyLoaded();
             Assert.assertTrue(managePageObject.latestDiagnosticsContentHeader.isDisplayed(),"Diagnostics Log " +
                     "content not found.");
             waitExecuter.sleep(4000);

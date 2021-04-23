@@ -10,7 +10,6 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
-import org.testng.SkipException;
 import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
@@ -71,7 +70,7 @@ public class TC_CO_16 extends BaseClass {
             Assert.assertTrue(graph.validateByTypeGraphIsGenerated(), "The color code of graph does not match");
         } catch (NoSuchElementException error) {
             // Skip test case if By Type title is not present
-            throw new SkipException("Testcase need to be skipped as By Type graph heading is not present");
+            test.log(LogStatus.SKIP, "Testcase need to be skipped as By Type graph heading is not present");
         }
     }
 }

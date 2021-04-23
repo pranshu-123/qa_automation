@@ -50,7 +50,6 @@ public class TC_HIVE_60 extends BaseClass {
         LOGGER.info("Navigate to jobs tab from header");
         waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.jobs);
         userActions.performActionWithPolling(topPanelComponentPageObject.jobs, UserAction.CLICK);
-        topPanelComponentPageObject.jobs.click();
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         // Select last 30 days from date picker
         test.log(LogStatus.INFO, "Select last 30 days");

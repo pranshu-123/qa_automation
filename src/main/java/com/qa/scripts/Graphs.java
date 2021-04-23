@@ -71,7 +71,7 @@ public class Graphs {
         return hashColorList;
     }
 
-    /* Check the By Status graph is generated */
+    /* Check the By Type graph is generated */
     public Boolean validateByTypeGraphIsGenerated() {
 
         //Get RGB value list
@@ -144,5 +144,57 @@ public class Graphs {
         LOGGER.info("Final RGB values derived- " + rgbFinalValues);
         return rgbFinalValues;
     }
+
+//    /* Check the By Status graph is generated */
+//    public Boolean validateByStatusGraphIsGenerated() {
+//
+//        //Get RGB value list
+//        List<String> rgbValueList = getRGBFromFooter(graphsPageObject.byStatusFooterNames, graphsPageObject.statusRGBColor);
+//
+//        //Get hash color list
+//        List<String> hashColorList = getHashColorFromGraph(graphsPageObject
+//                .getChildElement(graphsPageObject.parentTagOfByStatusHexcode, graphsPageObject.childTagsOfByTypeHexcode));
+//
+//        List<String> hexColorToRGBList = new ArrayList<String>();
+//        LOGGER.info("Hash code values from graph "+hashColorList);
+//        Boolean compareRGBToHashColor;
+//
+//        //Iterate to get each hashcolor and convert to RGB
+//        for (String hashColor : hashColorList) {
+//            String hexColorToRGB = convertHexcolorToRGB(hashColor);
+//            LOGGER.info("HASHCOLOR - "+hashColor+ " hexColorToRGB - "+hexColorToRGB);
+//            hexColorToRGBList.add(hexColorToRGB);
+//        }
+//        LOGGER.info("ALL HEX COLOR TO RGBS - "+hexColorToRGBList);
+//        /* Compare the #code value to rgb */
+//        compareRGBToHashColor = rgbValueList.equals(hexColorToRGBList);
+//
+//        return compareRGBToHashColor;
+//    }
+//
+//    /* Check the By Event graph is generated */
+//    public Boolean validateByEventGraphIsGenerated() {
+//
+//        //Get RGB value list
+//        List<String> rgbValueList = getRGBFromFooter(graphsPageObject.evnetsFooterNames, graphsPageObject.eventsRGBColor);
+//
+//        //Get hash color list
+//        List<String> hashColorList = getHashColorFromGraph(graphsPageObject
+//                .getChildElement(graphsPageObject.parentTagOfByEventHexcode, graphsPageObject.childTagsOfByTypeHexcode));
+//
+//        List<String> hexColorToRGBList = new ArrayList<String>();
+//        Boolean compareRGBToHashColor;
+//
+//        //Iterate to get each hashcolor and convert to RGB
+//        for (String hashColor : hashColorList) {
+//            String hexColorToRGB = convertHexcolorToRGB(hashColor);
+//            hexColorToRGBList.add(hexColorToRGB);
+//        }
+//
+//        /* Compare the #code value to rgb */
+//        compareRGBToHashColor = rgbValueList.equals(hexColorToRGBList);
+//
+//        return compareRGBToHashColor;
+//    }
 
 }

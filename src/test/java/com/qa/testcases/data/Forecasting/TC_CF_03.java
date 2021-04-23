@@ -17,6 +17,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
+
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -28,7 +29,7 @@ public class TC_CF_03 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void validateForecastingReportGeneratedForAllHistoryRange(String clusterId) {
         test = extent.startTest("TC_CF_03.validateForecastingReportGeneratedForAllHistoryRange: " + clusterId,
-                "Verify User is able to generate forecasting report for different history ranges.");
+            "Verify User is able to generate forecasting report for different history ranges.");
         test.assignCategory(" Data - Forecasting ");
         LOGGER.info("Passed Parameter Is : " + clusterId);
 
@@ -67,74 +68,48 @@ public class TC_CF_03 extends BaseClass {
         String forecastingNoOfDays = "2";
 
         int expectedDateCount = expectedDateRange.size();
-        for (String expectedDate : expectedDateRange) {
+
+        for (int i = 0; i < expectedDateCount; i++) {
             forecasting.clickOnRunButton();
             LOGGER.info("Clicked on Run Button");
             test.log(LogStatus.INFO, "Clicked on Run Button");
             datePicker.clickOnDatePicker();
-
-            for (int i = 0; i < expectedDateCount; i++) {
-                WebElement datePickerElement = datePickerPageObject.dateRangeOptions.get(i);
-                String dateUI = datePickerElement.getText();
-                if (expectedDate.equalsIgnoreCase(dateUI)) {
-                    if (expectedDate.equalsIgnoreCase("Custom Range")) {
-                        datePickerElement.click();
-                        datePicker.setStartDate(DateUtils.getFirstDateOfYear());
-                        datePicker.setEndDate(DateUtils.getCurrentDate());
-                        datePicker.clickOnCustomDateApplyBtn();
-
-                        forecasting.setForecastingDays(forecastingNoOfDays);
-                        LOGGER.info("Set Forecasting days as: " + forecastingNoOfDays
-                                + " and History date range as :" + expectedDate);
-                        test.log(LogStatus.INFO, "Set Forecasting days as: " + forecastingNoOfDays
-                                + " and History date range as :" + expectedDate);
-
-                        forecasting.clickOnModalRunButton();
-                        LOGGER.info("Clicked on Modal Run Button");
-                        test.log(LogStatus.INFO, "Clicked on Modal Run Button");
-                        waitExecuter.waitUntilElementPresent(forecastingPageObject.runButton);
-                        userActions.performActionWithPolling(forecastingPageObject.runButton, UserAction.CLICK);
-                        try {
-                            waitExecuter.waitUntilTextToBeInWebElement(forecastingPageObject.confirmationMessageElement,
-                                    "Capacity Forecasting completed successfully.");
-                            test.log(LogStatus.INFO, "Verified Forecasting report is loaded properly for date: "
-                                    + expectedDate);
-                            LOGGER.info("Verified Forecasting report is loaded properly");
-                            break;
-                        } catch (TimeoutException te) {
-                            throw new AssertionError("Forecasting Report not completed successfully for " +
-                                    "date: " + expectedDate);
-                        }
-
-                    } else {
-                        datePickerElement.click();
-
-                        forecasting.setForecastingDays(forecastingNoOfDays);
-                        LOGGER.info("Set Forecasting days as: " + forecastingNoOfDays
-                                + " and History date range as :" + expectedDate);
-                        test.log(LogStatus.INFO, "Set Forecasting days as: " + forecastingNoOfDays
-                                + " and History date range as :" + expectedDate);
-
-                        forecasting.clickOnModalRunButton();
-                        LOGGER.info("Clicked on Modal Run Button");
-                        test.log(LogStatus.INFO, "Clicked on Modal Run Button");
-                        waitExecuter.waitUntilElementPresent(forecastingPageObject.runButton);
-                        waitExecuter.waitUntilElementClickable(forecastingPageObject.runButton);
-                        try {
-                            waitExecuter.waitUntilTextToBeInWebElement(forecastingPageObject.confirmationMessageElement,
-                                    "Capacity Forecasting completed successfully.");
-                            test.log(LogStatus.INFO, "Verified Forecasting report is loaded properly for date: "
-                                    + expectedDate);
-                            LOGGER.info("Verified Forecasting report is loaded properly");
-                            break;
-                        } catch (TimeoutException te) {
-                            throw new AssertionError("Forecasting Report not completed successfully for" +
-                                    " date: " + expectedDate);
-                        }
-
-                    }
-                }
+            waitExecuter.sleep(1000);
+            WebElement datePickerElement = datePickerPageObject.dateRangeOptions.get(i);
+            String datePickerOption = datePickerElement.getText();
+            if (datePickerElement.getText().equalsIgnoreCase("Custom Range")) {
+                datePickerElement.click();
+                datePicker.setStartDate(DateUtils.getPastDate(20));
+                waitExecuter.sleep(500);
+                datePicker.setEndDate(DateUtils.getCurrentDate());
+                datePicker.clickOnCustomDateApplyBtn();
+            } else {
+                datePickerElement.click();
             }
+            waitExecuter.sleep(500);
+            forecasting.setForecastingDays(forecastingNoOfDays);
+            LOGGER.info("Set Forecasting days as: " + forecastingNoOfDays
+                + " and History date range as :" + datePickerOption);
+            test.log(LogStatus.INFO, "Set Forecasting days as: " + forecastingNoOfDays
+                + " and History date range as :" + datePickerOption);
+            forecasting.clickOnModalRunButton();
+            LOGGER.info("Clicked on Modal Run Button");
+            test.log(LogStatus.INFO, "Clicked on Modal Run Button");
+            try {
+                waitExecuter.waitUntilTextNotToBeInWebElement(forecastingPageObject.modalAfterRunButton,
+                    "Please Wait");
+                waitExecuter.waitUntilTextToBeInWebElement(forecastingPageObject.confirmationMessageElement,
+                    "Capacity Forecasting completed successfully.");
+                test.log(LogStatus.INFO, "Verified Forecasting report is loaded properly for date: "
+                    + datePickerOption);
+                LOGGER.info("Verified Forecasting report is loaded properly");
+            } catch (TimeoutException te) {
+                throw new AssertionError("Forecasting Report not completed successfully for" +
+                    " date: " + datePickerOption);
+            }
+            waitExecuter.waitUntilElementPresent(forecastingPageObject.runButton);
+            forecasting.closeConfirmationMessageNotification();
+            waitExecuter.sleep(3000);
         }
     }
 }

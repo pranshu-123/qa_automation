@@ -36,18 +36,14 @@ public class TC_CTX_29 extends BaseClass {
      */
     @Test
     public void verifyTagsFilter() {
-        test = extent.startTest("TC_CTX_29.verifyTagsFilterk", "Verify Tags in new report page");
+        test = extent.startTest("TC_CTX_29.verifyTagsFilters", "Verify Tags in new report page");
         test.assignCategory(" Cluster - Top X");
         LOGGER.info("Go to TopX page.", test);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         waitExecuter.waitUntilPageFullyLoaded();
-//        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
         UserActions userActions = new UserActions(driver);
-//        userActions.performActionWithPolling(topPanelPageObject.topXTab, UserAction.CLICK);
         TopX topX = new TopX(driver);
-        TopXPageObject topXPageObject=new TopXPageObject(driver);
-//        topX.closeConfirmationMessageNotification();
-//        topX.clickOnRunButton();
+        TopXPageObject topXPageObject = new TopXPageObject(driver);
 
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
@@ -57,51 +53,27 @@ public class TC_CTX_29 extends BaseClass {
         LOGGER.info("Click on + button", test);
         String statusXpath = reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.TopX);
         waitExecuter.waitUntilPageFullyLoaded();
-        //int chkBoxSize = topX.getTagsCheckbox().size();
-        //System.out.println("chkBoxSize: "+chkBoxSize);
-        //for (int i=0; i<chkBoxSize; i++) {
-            LOGGER.info("Click on tags of category: ", test);
-            topX.selectTagsCheckbox(topX.getTagsCheckbox().get(0));
-            LOGGER.info("Click on tags textbox", null);
-            userActions.performActionWithPolling(topX.getLastInputTextboxField(), UserAction.CLICK);
-            //int sizeFilter = topX.getFilterDropDowns().size();
-            //for (int filterDropDown=0; filterDropDown< sizeFilter; filterDropDown++) {
-                waitExecuter.sleep(2000);
-                String tagFilter = topX.getFilterDropDowns().get(0).getText();
-                LOGGER.info("Click on queue filter: " + tagFilter, test);
-                userActions.performActionWithPolling(topX.getFilterDropDowns().get(0), UserAction.CLICK);
-                userActions.performActionWithPolling(topXPageObject.runButton, UserAction.CLICK);
-                waitExecuter.waitUntilPageFullyLoaded();
-                String confirmMsg = topX.getConfirmationMessageContent();
-                LOGGER.info("Message after click on Run button: "+ confirmMsg, test);
-//                try {
-//                    waitExecuter.waitUntilTextToBeInWebElement(topX.getConfirmationMessage(),
-//                            "Top X Report completed successfully.");
-//                } catch (TimeoutException te) {
-//                    Assert.assertTrue(false, "TopX Report is not completed");
-//                }
-                WebElement statusElement = driver.findElement(By.xpath(statusXpath));
-                try{
-                    waitExecuter.waitUntilTextToBeInWebElement(statusElement,
-                            "SUCCESS");
-                }catch (TimeoutException te) {
-                    throw new AssertionError("Top X Report not completed successfully.");
-                }
+        topX.setTopXNumber("10");
+        LOGGER.info("Click on tags of category: ", test);
+        topX.selectTagsCheckbox(topX.getTagsCheckbox().get(0));
+        LOGGER.info("Click on tags textbox", null);
+        userActions.performActionWithPolling(topX.getLastInputTextboxField(), UserAction.CLICK);
+        waitExecuter.sleep(2000);
+        String tagFilter = topX.getFilterDropDowns().get(0).getText();
+        LOGGER.info("Click on queue filter: " + tagFilter, test);
+        userActions.performActionWithPolling(topX.getFilterDropDowns().get(0), UserAction.CLICK);
+        userActions.performActionWithPolling(topXPageObject.runButton, UserAction.CLICK);
+        waitExecuter.waitUntilPageFullyLoaded();
+        String confirmMsg = topX.getConfirmationMessageContent();
+        LOGGER.info("Message after click on Run button: " + confirmMsg, test);
 
-                //topX.closeConfirmationMessageNotification();
-                //waitExecuter.sleep(2000);
-//                for (WebElement row : topX.getInputParamsRowList()) {
-//                    if (row.findElement(By.xpath("td[1]")).getText().equalsIgnoreCase("Tags")) {
-//                        Assert.assertTrue(row.findElement(By.xpath("td[2]")).getText().contains(tagFilter),
-//                                "Applied filter is displayed for tag: " + tagFilter);
-//                        test.log(LogStatus.PASS, "Correct filter is displayed for queue.");
-//                    }
-//                }
-//                topX.clickOnRunButton();
-//                userActions.performActionWithPolling(topX.getLastInputTextboxField(), UserAction.CLICK);
-
-            //}
-            test.log(LogStatus.PASS, "Verified Queues filter in new report page");
-        //}
+        WebElement statusElement = driver.findElement(By.xpath(statusXpath));
+        try {
+            waitExecuter.waitUntilTextToBeInWebElement(statusElement,
+                "SUCCESS");
+        } catch (TimeoutException te) {
+            throw new AssertionError("Top X Report not completed successfully.");
+        }
+        test.log(LogStatus.PASS, "Verified Queues filter in new report page");
     }
 }

@@ -21,7 +21,7 @@ public class TC_ELK_19 extends BaseClass {
   private static final java.util.logging.Logger LOGGER = Logger.getLogger(TC_ELK_17.class.getName());
 
   @Test(dataProvider = "clusterid-data-provider")
-  public void verifyKibanaKPIs(String clusterId) {
+  public void TC_ELK_19_verifyKibanaKPIs(String clusterId) {
     test = extent.startTest("verifyKibanaKPIs: " + clusterId,
         "Validate Kibana KPI in UI.");
     test.assignCategory(" ELK ");

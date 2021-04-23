@@ -54,6 +54,9 @@ public class DatePickerPageObject {
     @FindBy(xpath = "//li[contains(text(),'Last 90 Days')]")
     public WebElement last90Days;
 
+    @FindBy(xpath = "//li[contains(text(),'Current Day')]")
+    public WebElement currentDay;
+
     @FindBy(xpath = "//li[contains(text(),'This Month')]")
     public WebElement thisMonth;
 

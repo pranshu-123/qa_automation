@@ -38,8 +38,8 @@ public class TC_MP_SC_10 extends BaseClass {
         LOGGER.info("Clicked on Migration and accessing Services And Versions Compatibility page ");
         servicesAndVersionsCompatibility.clickOnServicesAndVersionMigrationTab();
         LOGGER.info("Clicked on Services And Versions Compatibility tab");
-        servicesAndVersionsCompatibility.closeMessageBanner();
-        LOGGER.info("Clicked on close banner");
+//        servicesAndVersionsCompatibility.closeMessageBanner();
+//        LOGGER.info("Clicked on close banner");
         servicesAndVersionsCompatibility.clickOnRunButton();
         LOGGER.info("Clicked on Run button");
         String cloudProductName = "Amazon EMR";
@@ -49,10 +49,14 @@ public class TC_MP_SC_10 extends BaseClass {
         List<String> expectedPlatforms = Arrays.asList(PageConstants.MigrationAndServices.Amazon_EMR);
 
         try {
+            waitExecuter.sleep(50000);
+            waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.runBtn, "Run");
             waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.confirmationMessageElement,
                     "Services and Versions Compatibility completed successfully.");
+
             servicesAndVersionsCompatibility.validateLatestReport();
-            Assert.assertTrue(expectedPlatforms.equals(servicesAndVersionsCompatibility.getPlatforms()));
+            List<String> actualPlatform = servicesAndVersionsCompatibility.getPlatforms();
+            Assert.assertTrue(expectedPlatforms.equals(actualPlatform), "Mismatch in platform, actual Platform: "+actualPlatform);
             servicesAndVersionsCompatibility.verifyServicesAndVersionsAreNotCompatible();
             test.log(LogStatus.PASS, "Verified Services and Versions are Not Compatible" +
                     " legend for cloud provider Amazon EMR.");

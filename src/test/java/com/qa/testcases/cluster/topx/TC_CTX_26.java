@@ -39,15 +39,11 @@ public class TC_CTX_26 extends BaseClass {
         test.assignCategory(" Cluster - Top X");
         LOGGER.info("Go to TopX page.", test);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-//        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
         UserActions userActions = new UserActions(driver);
-//        userActions.performActionWithPolling(topPanelPageObject.topXTab, UserAction.CLICK);
-
         TopX topX = new TopX(driver);
 
         TopXPageObject  topXPageObject=new TopXPageObject(driver);
-//        topX.closeConfirmationMessageNotification();
-//        topX.clickOnRunButton();
+
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
         waitExecuter.sleep(3000);
@@ -56,43 +52,31 @@ public class TC_CTX_26 extends BaseClass {
         LOGGER.info("Click on + button", test);
         String statusXpath = reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.TopX);
         waitExecuter.waitUntilPageFullyLoaded();
+        topX.setTopXNumber("30");
+        waitExecuter.sleep(2000);
         topX.clickOnUserFilter();
-        //int size = topX.getFilterDropDowns().size();
-        //for (int filterDropDown=0; filterDropDown<size; filterDropDown++) {
-            topX.clearFilter();
-            topX.setTopXNumber("30");
-            waitExecuter.sleep(2000);
-            String userFilter = topX.getFilterDropDowns().get(0).getText();
-            LOGGER.info("Click on user filter: " + userFilter, test);
-            userActions.performActionWithPolling(topX.getFilterDropDowns().get(0), UserAction.CLICK);
-            userActions.performActionWithPolling(topXPageObject.runButton, UserAction.CLICK);
-            waitExecuter.waitUntilPageFullyLoaded();
+        topX.clearFilter();
+        waitExecuter.sleep(3000);
+        String userFilter = topX.getFilterDropDowns().get(0).getText();
+        LOGGER.info("Click on user filter: " + userFilter, test);
+        userActions.performActionWithPolling(topX.getFilterDropDowns().get(0), UserAction.CLICK);
+        userActions.performActionWithPolling(topXPageObject.runButton, UserAction.CLICK);
+        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilTextNotToBeInWebElement(topXPageObject.modalAfterRunButton, "Please Wait");
 
-//            try {
-//                waitExecuter.waitUntilTextToBeInWebElement(topX.getConfirmationMessage(),
-//                    "Top X Report completed successfully.");
-//            } catch (TimeoutException te) {
-//                Assert.assertTrue(false, "TopX Report is not completed");
-//            }
-            WebElement statusElement = driver.findElement(By.xpath(statusXpath));
-            try{
-                waitExecuter.waitUntilTextToBeInWebElement(statusElement,
-                        "SUCCESS");
-            }catch (TimeoutException te) {
-                throw new AssertionError("Top X Report not completed successfully.");
-            }
-            //topX.closeConfirmationMessageNotification();
-//            waitExecuter.sleep(2000);
-//            for (WebElement row : topX.getInputParamsRowList()) {
-//                if (row.findElement(By.xpath("td[1]")).getText().equalsIgnoreCase("Users")) {
-//                    Assert.assertEquals(row.findElement(By.xpath("td[2]")).getText(), userFilter,
-//                        "Incorrect filter is displayed");
-//                    test.log(LogStatus.PASS, "Correct filter is displayed for user.");
-//                }
-//            }
-//            topX.clickOnRunButton();
-//            topX.clickOnUserFilter();
-            test.log(LogStatus.PASS, "Verified filter is displayed for user on TopX report.");
-        //}
+        Boolean isSuccessFullyStarted = topX.checkIfReportSuccessfullyStarted();
+        if (!isSuccessFullyStarted) {
+            Assert.fail("Report is not started successfully.");
+        }
+        LOGGER.info("Report is started successfully for user: " + userFilter, test);
+        WebElement statusElement = driver.findElement(By.xpath(statusXpath));
+        try {
+            waitExecuter.waitUntilTextToBeInWebElement(statusElement,
+                    "SUCCESS");
+        } catch (TimeoutException te) {
+            throw new AssertionError("Top X Report not completed successfully.");
+        }
+        topX.validateLatestReport("Users", userFilter);
+        test.log(LogStatus.PASS, "Verified filter is displayed for user on TopX report.");
     }
 }

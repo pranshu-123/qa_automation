@@ -44,9 +44,11 @@ public class HBasePageObject {
     @FindBy(xpath="//table[@id='hbaseRegionsDataTble']/tbody/tr")
     public List<WebElement> hBaseRegionSvrTableRecords;
 
-    //@FindBy(xpath="//table[@id='hbaseRegionsDataTble']/tbody/tr/td[6]/span")
-    @FindBy(xpath = "//table[@id='hbaseTableHostDataTAble']/tbody/tr/td[6]/span")
+    @FindBy(xpath="//table[@id='hbaseRegionsDataTble']/tbody/tr/td[6]/span")
     public List<WebElement> hBaseRegionSvrHealth;
+
+    @FindBy(xpath="//table[@id='hbaseRegionsDataTble']/tbody/tr/td[6]//*[local-name() = 'svg']")
+    public List<WebElement> hBaseRegionSvrInsight;
 
     @FindBy(xpath="//div[@class='container-fluid']/h3/a")
     public WebElement hBaseSvrHealthHeader;
@@ -97,7 +99,8 @@ public class HBasePageObject {
     @FindBy(xpath = "//a[@class='active']")
     public WebElement hBaseTableTab;
 
-    @FindBy(xpath = "//table[@id='hbaseTableHostDataTAble']")
+    //@FindBy(xpath = "//table[@id='hbaseTableHostDataTAble']")
+    @FindBy(xpath= "//table[@id='null-table']")
     public WebElement hBaseTableHostTbl;
 
     @FindBy(xpath ="//table[@id='hbaseTableHostDataTAble']/tbody/tr")

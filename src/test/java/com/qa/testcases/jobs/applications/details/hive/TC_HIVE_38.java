@@ -2,6 +2,7 @@ package com.qa.testcases.jobs.applications.details.hive;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
@@ -9,6 +10,7 @@ import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.scripts.clusters.impala.ChargeBackImpala;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -39,15 +41,14 @@ public class TC_HIVE_38 extends BaseClass {
         AllApps allApps = new AllApps(driver);
         ChargeBackImpala impala = new ChargeBackImpala(driver);
         SparkAppsDetailsPage sparkApp = new SparkAppsDetailsPage(driver);
+        UserActions userActions = new UserActions(driver);
 
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         LOGGER.info("Navigate to jobs tab from header");
         waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.jobs);
-        waitExecuter.sleep(4000);
-        topPanelComponentPageObject.jobs.click();
-        waitExecuter.sleep(4000);
-        waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
+        userActions.performActionWithPolling(topPanelComponentPageObject.jobs, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         waitExecuter.waitUntilPageFullyLoaded();
         // Select last 30 days from date picker
         test.log(LogStatus.INFO, "Select last 30 days");
@@ -55,16 +56,17 @@ public class TC_HIVE_38 extends BaseClass {
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(1000);
         datePicker.selectLast30Days();
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         // Select cluster
         test.log(LogStatus.INFO, "Select clusterid : " + clusterId);
         LOGGER.info("Select clusterId : " + clusterId);
         allApps.selectCluster(clusterId);
-        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         // Select 'Only' hive type and get its jobs count
         test.log(LogStatus.INFO, "Select 'Only' hive from app types and get its jobs count");
         LOGGER.info("Select 'Only' hive from app types and get its jobs count");
         sparkApp.clickOnlyLink("Hive");
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         int hiveAppCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
                 .replaceAll("[^\\dA-Za-z ]", "").trim());
 
@@ -73,10 +75,12 @@ public class TC_HIVE_38 extends BaseClass {
         LOGGER.info("Slide the duration slider to get min and max value of duration");
         WebElement DurationSlider = applicationsPageObject.durationSlider;
         allApps.moveTheSlider(DurationSlider, 5);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+        waitExecuter.sleep(2000);
         String SliderInputLeft = applicationsPageObject.durationSliderInputLeft.getAttribute("value");
-        waitExecuter.sleep(2000);
+
         String SliderInputRight = applicationsPageObject.durationSliderInputRight.getAttribute("value");
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         test.log(LogStatus.INFO, "Duration Slider From : " + SliderInputLeft + " To : " + SliderInputRight);
         LOGGER.info("Duration Slider From : " + SliderInputLeft + " To : " + SliderInputRight);
         hiveAppCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()

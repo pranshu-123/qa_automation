@@ -16,6 +16,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
+
 import java.util.logging.Logger;
 
 @Marker.DataForecasting
@@ -26,7 +27,7 @@ public class TC_CF_04 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void validateForecastingReportGeneratedForDiffForecastingDays(String clusterId) {
         test = extent.startTest("TC_CF_04.validateForecastingReportGeneratedForDiffForecastingDays: " + clusterId,
-                "Verify User is able to generate forecasting report for different forecasting days.");
+            "Verify User is able to generate forecasting report for different forecasting days.");
         test.assignCategory(" Data - Forecasting ");
         LOGGER.info("Passed Parameter Is : " + clusterId);
 
@@ -62,34 +63,25 @@ public class TC_CF_04 extends BaseClass {
             test.log(LogStatus.INFO, "Clicked on Run Button");
 
             datePicker.clickOnDatePicker();
-            int dateCount = datePickerPageObject.dateRangeOptions.size();
-            for (int i = 0; i < dateCount ; i++) {
-                WebElement datePickerElement = datePickerPageObject.dateRangeOptions.get(i);
-                String dateUI = datePickerElement.getText();
-
-                if (dateUI.equalsIgnoreCase("Last 90 Days")) {
-                    datePickerElement.click();
-
-                    forecasting.setForecastingDays(days);
-                    LOGGER.info("Set Forecasting days as: " + days);
-                    test.log(LogStatus.INFO, "Set Forecasting days as: " + days);
-                    forecasting.clickOnModalRunButton();
-                    LOGGER.info("Clicked on Modal Run Button");
-                    test.log(LogStatus.INFO, "Clicked on Modal Run Button");
-                    waitExecuter.waitUntilElementPresent(forecastingPageObject.runButton);
-                    userActions.performActionWithPolling(forecastingPageObject.runButton, UserAction.CLICK);
-                    try {
-                        waitExecuter.waitUntilTextToBeInWebElement(forecastingPageObject.confirmationMessageElement,
-                                "Capacity Forecasting completed successfully.");
-                        test.log(LogStatus.INFO, "Verified Forecasting report is loaded properly for days : "
-                                + days);
-                        LOGGER.info("Verified Forecasting report is loaded properly");
-                        break;
-                    } catch (TimeoutException te) {
-                        throw new AssertionError("Forecasting Report not completed successfully for " +
-                                " days: " + days);
-                    }
-                }
+            datePicker.selectLast90Days();
+            forecasting.setForecastingDays(days);
+            LOGGER.info("Set Forecasting days as: " + days);
+            test.log(LogStatus.INFO, "Set Forecasting days as: " + days);
+            forecasting.clickOnModalRunButton();
+            LOGGER.info("Clicked on Modal Run Button");
+            test.log(LogStatus.INFO, "Clicked on Modal Run Button");
+            waitExecuter.waitUntilElementPresent(forecastingPageObject.runButton);
+            userActions.performActionWithPolling(forecastingPageObject.runButton, UserAction.CLICK);
+            try {
+                waitExecuter.waitUntilTextToBeInWebElement(forecastingPageObject.confirmationMessageElement,
+                    "Capacity Forecasting completed successfully.");
+                test.log(LogStatus.INFO, "Verified Forecasting report is loaded properly for days : "
+                    + days);
+                LOGGER.info("Verified Forecasting report is loaded properly");
+                break;
+            } catch (TimeoutException te) {
+                throw new AssertionError("Forecasting Report not completed successfully for " +
+                    " days: " + days);
             }
         }
     }

@@ -124,6 +124,7 @@ public class HomePage {
     public void selectMultiClusterId(String clusterId) {
         CommonPageObject commonPageObject = new CommonPageObject(driver);
         waitExecuter.waitUntilElementClickable(commonPageObject.clusterDropdown);
+        waitExecuter.sleep(2000);
         userActions.performActionWithPolling(commonPageObject.clusterDropdown, UserAction.CLICK);
         userActions.performActionWithPolling(commonPageObject.clusterSearchBox, UserAction.SEND_KEYS,
                 clusterId);

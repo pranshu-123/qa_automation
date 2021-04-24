@@ -3,15 +3,16 @@ package com.qa.testcases.jobs.applications.details.hive;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.constants.PageConstants;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.SkipException;
 import org.testng.annotations.Test;
 
 import java.util.HashSet;
@@ -38,14 +39,13 @@ public class TC_HIVE_43_54 extends BaseClass {
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         AllApps allApps = new AllApps(driver);
         SparkAppsDetailsPage sparkApp = new SparkAppsDetailsPage(driver);
+        UserActions userActions = new UserActions(driver);
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         LOGGER.info("Navigate to jobs tab from header");
         waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.jobs);
-        waitExecuter.sleep(4000);
-        topPanelComponentPageObject.jobs.click();
-        waitExecuter.sleep(4000);
-        waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
+        userActions.performActionWithPolling(topPanelComponentPageObject.jobs, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         waitExecuter.waitUntilPageFullyLoaded();
         applicationsPageObject.runningAppTab.click();
         waitExecuter.sleep(2000);

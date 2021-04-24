@@ -24,8 +24,8 @@ import java.util.logging.Logger;
 public class TC_HIVE_43_54 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_HIVE_43_54.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
-    public void VerifyRunningApps(String clusterId) {
+    @Test
+    public void VerifyRunningApps() {
         test = extent.startTest("TC_HIVE_43_54.VerifyRunningApps",
                 "Verify that in Running Apps only jobs with Running status are present.");
         test.assignCategory("App Details - Hive");
@@ -49,11 +49,6 @@ public class TC_HIVE_43_54 extends BaseClass {
         waitExecuter.waitUntilPageFullyLoaded();
         applicationsPageObject.runningAppTab.click();
         waitExecuter.sleep(2000);
-        // Select cluster
-        test.log(LogStatus.INFO, "Select clusterid : " + clusterId);
-        LOGGER.info("Select clusterId : " + clusterId);
-        allApps.selectCluster(clusterId);
-        waitExecuter.sleep(3000);
         // Select 'Only' hive type and get its jobs count
         test.log(LogStatus.INFO, "Select 'Only' hive from app types and get its jobs count");
         LOGGER.info("Select 'Only' hive from app types and get its jobs count");
@@ -72,8 +67,7 @@ public class TC_HIVE_43_54 extends BaseClass {
             test.log(LogStatus.PASS, "The status contains only Running apps.");
         } else {
             Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
-                    "The clusterId does not have any application under it and also does not display 'No Data Available' for it"
-                            + clusterId);
+                    "The clusterId does not have any application under it and also does not display 'No Data Available' for it");
             test.log(LogStatus.SKIP, "The clusterId does not have any running application under it.");
         }
         // Reset set filter to default

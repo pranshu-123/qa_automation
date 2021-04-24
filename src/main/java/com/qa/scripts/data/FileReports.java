@@ -44,8 +44,8 @@ public class FileReports {
   }
 
   public void verifyClusterList(List<String> expectedClusterList) {
-    WebElement clusterDD = fileReportsPageObject.clusterDropDown;
-    MouseActions.clickOnElement(driver, clusterDD);
+    WebElement clusterID = fileReportsPageObject.clusterDropDown;
+    MouseActions.clickOnElement(driver, clusterID);
     waitExecuter.waitUntilPageFullyLoaded();
     List<WebElement> clusterList = fileReportsPageObject.clusterList;
     Assert.assertFalse(clusterList.isEmpty(), "ClusterList is empty");

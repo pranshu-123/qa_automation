@@ -49,12 +49,13 @@ public class TC_WF_03 extends BaseClass {
         test.log(LogStatus.INFO, "Closed the confirmation box");
         LOGGER.info("Closed the confirmation box");
         fit.closeConfirmationMessageNotification();
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(2000);
 
         // Select last 7 days from report date range
         test.log(LogStatus.INFO, "Select last 7 days from date range.");
         LOGGER.info("Select last 7 days from date range.");
         fit.selectLast7Days();
+        waitExecuter.sleep(2000);
         // Select All Queue Types run in last 7 days
         test.log(LogStatus.INFO, "Select All Queue Types run in last 7 days.");
         LOGGER.info("Select All Queue Types run in last 7 days.");

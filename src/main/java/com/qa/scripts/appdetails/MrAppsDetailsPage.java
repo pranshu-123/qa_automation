@@ -22,6 +22,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Logger;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class MrAppsDetailsPage {
@@ -843,8 +844,8 @@ public class MrAppsDetailsPage {
         waitExecuter.waitUntilPageFullyLoaded();
         List<WebElement> graphTitleList = mrApps.resourcesGraphTitle;
         List<WebElement> allGraphsList = mrApps.resourcesAllGraphs;
-        for (int t = 0; t < graphTitleList.size(); t++) {
-            String graphTitle = graphTitleList.get(t).getText();
+        for (WebElement webElement : graphTitleList) {
+            String graphTitle = webElement.getText();
             LOGGER.info("Graph title is " + graphTitle);
             switch (graphTitle) {
                 case "Task Attempt (MAP)":
@@ -855,10 +856,9 @@ public class MrAppsDetailsPage {
                     LOGGER.info("Validating the Graph " + graphTitle);
                     validateTaskAttemptReduceTab(mrApps);
                     break;
-
             }
             verifyAssertTrue(allGraphsList.get(0).isDisplayed(), mrApps, " No graph is displayed for "
-                    + graphTitle);
+                + graphTitle);
         }
     }
 
@@ -1072,30 +1072,23 @@ public class MrAppsDetailsPage {
      * Method to validate Analysis tab color code.
      */
     public void analysisColorCode(MrAppsDetailsPageObject mrApps, ExtentTest test) {
-        ArrayList<String> efficiency = new ArrayList<>();
-        ArrayList<String> recommendation = new ArrayList<>();
         List<WebElement> insightType = mrApps.insightsType;
         verifyAssertFalse(insightType.isEmpty(), mrApps, "No Insights generated");
         for (int j = 0; j < insightType.size(); j++) {
             String insights = insightType.get(j).getText();
             LOGGER.info("Insight generated are " + insights);
             if (insights.equals("EFFICIENCY")) {
-                // Store it in efficiency array
-                efficiency.add(insights);
-                String efficiencycolorCode = mrApps.colorCode.getAttribute("class");
-                String[] arrColor = efficiencycolorCode.split("#");
-                assertTrue(arrColor[1].equals("d54451"));
-                test.log(LogStatus.PASS, "No Map Reduce Application present" + efficiencycolorCode);
+                String efficiencyColorCode = mrApps.colorCode.getAttribute("class");
+                String[] arrColor = efficiencyColorCode.split("#");
+                assertEquals(arrColor[1], "d54451", "Color code for efficiency do not match ");
+                test.log(LogStatus.PASS, "No Map Reduce Application present" + efficiencyColorCode);
             } else {
-                //Store it in recommendation array
-                recommendation.add(insights);
                 String recommendationcolorCode = mrApps.colorCode.getAttribute("class");
                 String[] recColor = recommendationcolorCode.split("#");
-                assertTrue(recColor[1].equals("ffb900"));
+                assertEquals(recColor[1], "ffb900", "Color code for recommendation do not match");
                 test.log(LogStatus.PASS, "No Map Reduce Application present" + recommendationcolorCode);
             }
         }
-        //verifyAssertFalse((efficiency.isEmpty() && recommendation.isEmpty()), mrApps, "No insights generated");
         List<WebElement> collapsableList = mrApps.analysisCollapse;
         try {
             for (int c = 0; c < collapsableList.size(); c++) {

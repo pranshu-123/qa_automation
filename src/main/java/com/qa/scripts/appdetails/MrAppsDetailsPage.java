@@ -1,5 +1,6 @@
 package com.qa.scripts.appdetails;
 
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.MrAppsDetailsPageObject;
 import com.qa.pagefactory.clusters.ELKPageObject;
@@ -8,6 +9,7 @@ import com.qa.scripts.DatePicker;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.*;
@@ -30,6 +32,7 @@ public class MrAppsDetailsPage {
     private static final Logger LOGGER = Logger.getLogger(MrAppsDetailsPage.class.getName());
     private final WaitExecuter waitExecuter;
     private final WebDriver driver;
+    private final UserActions userActions;
 
 
     /**
@@ -40,6 +43,7 @@ public class MrAppsDetailsPage {
     public MrAppsDetailsPage(WebDriver driver) {
         waitExecuter = new WaitExecuter(driver);
         this.driver = driver;
+        userActions = new UserActions(driver);
     }
 
     /**
@@ -1111,23 +1115,21 @@ public class MrAppsDetailsPage {
     public void navigateToJobsTabFromHeader(SubTopPanelModulePageObject topPanelObj, AllApps allApps,
                                             DatePicker datePicker, ApplicationsPageObject appPageObj, String clusterId) {
         LOGGER.info("Navigate to jobs tab from header");
-        waitExecuter.sleep(3000);
         waitExecuter.waitUntilElementClickable(topPanelObj.jobs);
         waitExecuter.sleep(1000);
-        topPanelObj.jobs.click();
-        waitExecuter.sleep(3000);
-        waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.sleep(2000);
+        userActions.performActionWithPolling(topPanelObj.jobs, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(appPageObj.resetButton);
+        waitExecuter.sleep(1000);
 
         //Select cluster
         LOGGER.info("Select Cluster: " + clusterId);
         allApps.selectCluster(clusterId);
-        waitExecuter.sleep(3000);
-
+        waitExecuter.waitUntilElementClickable(appPageObj.resetButton);
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(1000);
-        datePicker.selectLast90Days();
-        waitExecuter.sleep(3000);
+        datePicker.selectLast30Days();
+        waitExecuter.waitUntilElementClickable(appPageObj.resetButton);
+        waitExecuter.sleep(1000);
         waitExecuter.waitUntilPageFullyLoaded();
     }
 

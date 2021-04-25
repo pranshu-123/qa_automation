@@ -68,6 +68,7 @@ public class TC_M09 extends BaseClass {
         userActions.performActionWithPolling(managePageObject.downloadSupportBundleBtn, UserAction.CLICK);
         Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("diagnostics.txt"), "Not able to " +
                 "Download Support Bundle.");
+        waitExecuter.sleep(2000);
         test.log(LogStatus.PASS,"Verified Run Diagnostics page and Download Support Bundle");
         logger.info("Verified Run Diagnostics page and Download Support Bundle");
     }

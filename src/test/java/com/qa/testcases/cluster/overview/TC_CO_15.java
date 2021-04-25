@@ -2,17 +2,18 @@ package com.qa.testcases.cluster.overview;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.constants.DirectoryConstants;
-import com.qa.constants.GraphColorConstants;
-import com.qa.pagefactory.OverviewGraphPageObject;
+import com.qa.pagefactory.CommonPageObject;
+import com.qa.pagefactory.GraphsPageObject;
 import com.qa.scripts.DatePicker;
+import com.qa.scripts.Graphs;
 import com.qa.scripts.HomePage;
-import com.qa.utils.*;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import java.io.File;
-import java.util.List;
+
+import java.util.logging.Logger;
 
 /**
  * @author Ankur Jaiswal
@@ -20,98 +21,64 @@ import java.util.List;
 @Marker.ClusterOverview
 @Marker.All
 public class TC_CO_15 extends BaseClass {
+    private static final Logger LOGGER = Logger.getLogger(TC_CO_15.class.getName());
 
-  /**
-   * Test Case to Verify jobs 'Inefficient events' KPI graph filter
-   */
-  @Test(dataProvider = "clusterid-data-provider")
-  public void TC_CO_15_verifyInefficientGraph(String clusterId) {
-    WaitExecuter executer = new WaitExecuter(driver);
-    executer.sleep(2000);
+    /**
+     * Test Case to Verify jobs 'Inefficient events' KPI graph filter
+     */
+    @Test(dataProvider = "clusterid-data-provider")
+    public void TC_CO_15_verifyInefficientGraph(String clusterId) {
+        WaitExecuter executer = new WaitExecuter(driver);
+        executer.sleep(2000);
 
-    test = extent.startTest("TC_CO_15_verifyInefficientGraph: "+clusterId, "Verify jobs 'Inefficient events' KPI graph filter.");
-    test.assignCategory(" Cluster Overview");
+        test = extent.startTest("TC_CO_15_verifyInefficientGraph: " + clusterId, "Verify jobs 'Inefficient events' KPI graph filter.");
+        test.assignCategory(" Cluster Overview");
 
-    HomePage homePage = new HomePage(driver);
-    homePage.selectMultiClusterId(clusterId);
-    executer.sleep(2000);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        DatePicker datePicker = new DatePicker(driver);
+        Graphs graph = new Graphs(driver);
+        GraphsPageObject graphsPageObject = new GraphsPageObject(driver);
 
-    // Select this month
-    DatePicker datePicker = new DatePicker(driver);
-    datePicker.clickOnDatePicker();
-    datePicker.selectLast30Days();
+        test.log(LogStatus.INFO, "This testcase is running for cluster: " + clusterId);
+        //Select the cluster
+        LOGGER.info("Selecting cluster from the list " + clusterId);
+        HomePage homePage = new HomePage(driver);
+        CommonPageObject commonPageObject = new CommonPageObject(driver);
+        waitExecuter.waitUntilElementClickable(commonPageObject.addIcon);
+        waitExecuter.sleep(3000);
+        homePage.selectMultiClusterId(clusterId);
+        // Click on datepicker button
+        LOGGER.info("Click on date picker");
+        test.log(LogStatus.INFO, "Click on date picker");
+        waitExecuter.sleep(3000);
+        datePicker.clickOnDatePicker();
+        waitExecuter.sleep(1000);
 
-    executer.sleep(2000);
-
-    // Take Screenshot and validate the graph
-    OverviewGraphPageObject overviewGraph = new OverviewGraphPageObject(driver);
-
-    int scrollY = 300;
-    JavaScriptExecuter.scrollViewWithYAxis(driver,scrollY);
-
-    scrollY = scrollY + datePicker.getDatePickerYPosition();
-
-    File screenshot = ScreenshotHelper.takeScreenshotOfElement(driver,overviewGraph.inefficientEventsGraph,scrollY);
-    ScreenshotHelper.saveFileToLocation(screenshot, DirectoryConstants.getScreenshotDir() + screenshot.getName());
-    test.log(LogStatus.INFO, test.addScreenCapture(DirectoryConstants.getScreenshotDir() + screenshot.getName()));
-    GraphUtils graphUtils = new GraphUtils();
-    List<String> graphColors = graphUtils.getGraphContentColors(
-            overviewGraph.inefficientEventsGraph.findElement(overviewGraph.graphGContents));
-    Assert.assertTrue(graphColors.contains(GraphColorConstants.InefficientEventGraph.MAP_REDUCE_COLOR),
-      "Map Reduce graph is not loaded");
-    test.log(LogStatus.PASS, "Successfully validated Map Reduce graph is loaded");
-
-//    Assert.assertTrue(graphColors.contains(GraphColorConstants.InefficientEventGraph.HIVE_COLOR),
-//      "Hive graph is not loaded");
-//    test.log(LogStatus.PASS, "Successfully validated hive graph is loaded");
-
-    Assert.assertTrue(graphColors.contains(GraphColorConstants.InefficientEventGraph.SPARK_COLOR),
-      "Spark graph is not loaded");
-    test.log(LogStatus.PASS, "Successfully validated spark graph is loaded");
-
-    // Unselect the mapreduce checkbox and validate the graph
-    overviewGraph.inefficientGraphMRCheckbox.click();
-    executer.sleep(1000);
-
-    graphColors = graphUtils.getGraphContentColors(
-            overviewGraph.inefficientEventsGraph.findElement(overviewGraph.graphGContents));
-
-    // Take screenshot after unselecting mapreduce checkbox
-    screenshot = ScreenshotHelper.takeScreenshotOfElement(driver,overviewGraph.inefficientEventsGraph,scrollY);
-    ScreenshotHelper.saveFileToLocation(screenshot, DirectoryConstants.getScreenshotDir() + screenshot.getName());
-    test.log(LogStatus.INFO, test.addScreenCapture(DirectoryConstants.getScreenshotDir() + screenshot.getName()));
-    Assert.assertFalse(graphColors.contains(GraphColorConstants.InefficientEventGraph.MAP_REDUCE_COLOR),
-      "Map Reduce graph is loaded when Map Reduce checkbox is not selected.");
-    test.log(LogStatus.PASS, "Successfully validated Map Reduce graph is not loaded when Map Reduce checkbox is not selected.");
-
-//    Assert.assertTrue(graphColors.contains(GraphColorConstants.InefficientEventGraph.HIVE_COLOR),
-//      "Hive graph is not loaded when Map Reduce checkbox is not selected.");
-//    test.log(LogStatus.PASS, "Successfully validated hive graph is loaded when Map Reduce checkbox is not selected.");
-
-    Assert.assertTrue(graphColors.contains(GraphColorConstants.InefficientEventGraph.SPARK_COLOR),
-      "Spark graph is not loaded when Map Reduce checkbox is not selected.");
-    test.log(LogStatus.PASS, "Successfully validated spark graph is loaded when Map Reduce checkbox is not selected.");
-
-    // Unselect the mapreduce checkbox and validate the graph
-    overviewGraph.inefficientGraphMRCheckbox.click();
-    //overviewGraph.inefficientGraphHiveCheckbox.click();
-    executer.sleep(1000);
-
-    graphColors = graphUtils.getGraphContentColors(
-            overviewGraph.inefficientEventsGraph.findElement(overviewGraph.graphGContents));
-    screenshot = ScreenshotHelper.takeScreenshotOfElement(driver,overviewGraph.inefficientEventsGraph,scrollY);
-    ScreenshotHelper.saveFileToLocation(screenshot, DirectoryConstants.getScreenshotDir() + screenshot.getName());
-    test.log(LogStatus.INFO, test.addScreenCapture(DirectoryConstants.getScreenshotDir() + screenshot.getName()));
-    Assert.assertTrue(graphColors.contains(GraphColorConstants.InefficientEventGraph.MAP_REDUCE_COLOR),
-      "Map Reduce graph is not loaded when Hive checkbox is not selected.");
-    test.log(LogStatus.PASS, "Successfully validated Map Reduce graph is loaded when Hive checkbox is not selected.");
-
-//    Assert.assertFalse(graphColors.contains(GraphColorConstants.InefficientEventGraph.HIVE_COLOR),
-//      "Hive graph is loaded when Hive checkbox is not selected.");
-//    test.log(LogStatus.PASS, "Successfully validated hive graph is not loaded when Hive checkbox is not selected.");
-
-    Assert.assertTrue(graphColors.contains(GraphColorConstants.InefficientEventGraph.SPARK_COLOR),
-      "Spark graph is not loaded when Hive checkbox is not selected.");
-    test.log(LogStatus.PASS, "Successfully validated spark graph is loaded when Hive checkbox is not selected.");
-  }
+        // Click on custom range
+        LOGGER.info("Click on date picker");
+        test.log(LogStatus.INFO, "Click on date picker");
+        datePicker.selectCustomRange();
+        waitExecuter.sleep(1000);
+        /*
+         * Set Start date by substracting days from current date and end date as
+         * currentdate
+         */
+        LOGGER.info("Set current and past date");
+        test.log(LogStatus.INFO, "Set current and past date");
+        datePicker.setCurrentAndPastDate(-30);
+        waitExecuter.sleep(1000);
+        // Click on apply button of Cluster
+        LOGGER.info("Click on apply button");
+        test.log(LogStatus.INFO, "Click on apply button");
+        datePicker.clickOnCustomDateApplyBtn();
+        waitExecuter.sleep(1000);
+        try {
+            LOGGER.info("Verify By Type graph");
+            test.log(LogStatus.INFO, "Verify by type graph");
+            Assert.assertTrue(graph.validateGraphIsGenerated(graphsPageObject.evnetsFooterNames, graphsPageObject.eventsRGBColor, graphsPageObject.byEventHexcode), "The color code of graph does not match");
+        } catch (NoSuchElementException error) {
+            // Skip test case if By Type title is not present
+            test.log(LogStatus.SKIP, "Testcase need to be skipped as By Status graph heading is not present");
+        }
+    }
 }

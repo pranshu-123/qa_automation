@@ -42,7 +42,7 @@ public class TC_MP_SC_04 extends BaseClass {
         servicesAndVersionsCompatibility.selectCloudProduct(cloudProductName);
         servicesAndVersionsCompatibility.clickOnRunModalButton();
         List<String> expectedPlatforms = Arrays.asList(PageConstants.MigrationAndServices.Amazon_EMR);
-
+        LOGGER.info("Expected Platforms- "+expectedPlatforms);
         try {
             waitExecuter.sleep(50000);
             waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.runBtn, "Run");
@@ -50,6 +50,7 @@ public class TC_MP_SC_04 extends BaseClass {
                     "Services and Versions Compatibility completed successfully.");
             servicesAndVersionsCompatibility.validateLatestReport();
             List<String> actualPlatforms = servicesAndVersionsCompatibility.getPlatforms();
+            LOGGER.info("Actual Platforms- "+actualPlatforms);
             Assert.assertTrue(expectedPlatforms.equals(actualPlatforms), "Mismatch actual platforms: "+actualPlatforms);
             test.log(LogStatus.PASS, "Verified Services and Versions Compatibility report is loaded properly " +
                     "for Amazon EMR.");

@@ -81,7 +81,6 @@ public class TC_M08 extends BaseClass {
             logger.info("Verified Latest Diagnostics Header and Time Stamp not found. ");
             Assert.assertTrue(false, "Latest Diagnostics Header and Time Stamp not found.");
         }
-        waitExecuter.waitUntilPageFullyLoaded();
         Assert.assertTrue(manage.verifyLoadLatestDiagnosticsHeaderAndTimeStamp(),"Unable to get Latest " +
                 "Diagnostics Log.");
         test.log(LogStatus.INFO, "Verified Latest Diagnostics Header and Time Stamp.");

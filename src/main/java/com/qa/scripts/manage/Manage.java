@@ -220,7 +220,9 @@ public class Manage {
         logger.info("Latest Diagnostics Content Header found: "+runDiagnoHeader);
 
         if(runDiagnoHeader.equals("Diagnostics Log")){
+            waitExecuter.waitUntilElementPresent(managePageObject.latestDiagnosticsContentHeaderTimeStamp);
             String runDiagnoHeaderTS = managePageObject.latestDiagnosticsContentHeaderTimeStamp.getText();
+            waitExecuter.sleep(2000);
             logger.info("Latest Diagnostics Content Header TimeStamp found: "+runDiagnoHeaderTS);
             return true;
         }

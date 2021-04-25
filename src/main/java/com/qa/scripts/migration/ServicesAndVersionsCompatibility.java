@@ -28,6 +28,7 @@ public class ServicesAndVersionsCompatibility {
     private ServicesAndVersionsCompatibilityPageObject servicesAndVersionsCompatibilityPageObject;
     private SubTopPanelModulePageObject subTopPanelModulePageObject;
     private UserActions actions;
+    private TopPanelPageObject topPanelPageObject;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -40,20 +41,19 @@ public class ServicesAndVersionsCompatibility {
         servicesAndVersionsCompatibilityPageObject = new ServicesAndVersionsCompatibilityPageObject(driver);
         subTopPanelModulePageObject = new SubTopPanelModulePageObject(driver);
         actions = new UserActions(driver);
+        topPanelPageObject = new TopPanelPageObject(driver);
     }
 
     public void setupServicesAndVersionsCompatibilityPage() {
-        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-        waitExecuter.waitUntilElementPresent(topPanelPageObject.migrationTab);
-        waitExecuter.waitUntilPageFullyLoaded();
+
         waitExecuter.waitUntilElementClickable(topPanelPageObject.migrationTab);
-        waitExecuter.waitUntilPageFullyLoaded();
-        MouseActions.clickOnElement(driver, topPanelPageObject.migrationTab);
-        waitExecuter.waitUntilElementPresent(subTopPanelModulePageObject.servicesVersionMigrationTab);
+        actions.performActionWithPolling(topPanelPageObject.migrationTab, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(subTopPanelModulePageObject.servicesVersionMigrationTab);
     }
 
     public void clickOnServicesAndVersionMigrationTab() {
-        MouseActions.clickOnElement(driver, subTopPanelModulePageObject.servicesVersionMigrationTab);
+        actions.performActionWithPolling(subTopPanelModulePageObject.servicesVersionMigrationTab, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(servicesAndVersionsCompatibilityPageObject.runBtn);
     }
 
     public void closeMessageBanner() {

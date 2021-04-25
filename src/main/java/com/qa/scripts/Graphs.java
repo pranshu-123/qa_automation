@@ -18,9 +18,9 @@ import java.util.logging.Logger;
 public class Graphs {
 
     private static final Logger LOGGER = Logger.getLogger(Forecasting.class.getName());
+    private final WebDriver driver;
     public GraphsPageObject graphsPageObject;
     public WaitExecuter waitExecuter;
-    private final WebDriver driver;
 
     public Graphs(WebDriver driver) {
         this.driver = driver;
@@ -71,7 +71,7 @@ public class Graphs {
         return hashColorList;
     }
 
-    /* Check the By Status graph is generated */
+    /* Check the By Type graph is generated */
     public Boolean validateByTypeGraphIsGenerated() {
 
         //Get RGB value list
@@ -97,9 +97,9 @@ public class Graphs {
     }
 
     /* Generic method to validate if the graph is present
-    * @listWebelementOfAppName - App Names from footer of graph element to be passed
-    * @listWebelementOfRGB - RGB tags from footer of the graph
-    * @hashColorCodeList - Hash coding to be passed from graph element*/
+     * @listWebelementOfAppName - App Names from footer of graph element to be passed
+     * @listWebelementOfRGB - RGB tags from footer of the graph
+     * @hashColorCodeList - Hash coding to be passed from graph element*/
     public Boolean validateGraphIsGenerated(List<WebElement> listWebelementOfAppName,
                                             List<WebElement> listWebelementOfRGB, List<WebElement> hashColorCodeList) {
         //Get RGB value list
@@ -112,23 +112,23 @@ public class Graphs {
         }
         List<String> hexColorToRGBList = new ArrayList<String>();
         Boolean compareRGBToHashColor;
-        LOGGER.info("Hash code values from graph "+hashColorList);
+        LOGGER.info("Hash code values from graph " + hashColorList);
         //Iterate to get each hashcolor and convert to RGB
         for (String hashColor : hashColorList) {
             String hexColorToRGB = convertHexcolorToRGB(hashColor);
-            LOGGER.info("HASHCOLOR - "+hashColor+ " hexColorToRGB - "+hexColorToRGB);
+            LOGGER.info("HASHCOLOR - " + hashColor + " hexColorToRGB - " + hexColorToRGB);
             hexColorToRGBList.add(hexColorToRGB);
         }
-        LOGGER.info("ALL HEX COLOR TO RGBS - "+hexColorToRGBList);
+        LOGGER.info("ALL HEX COLOR TO RGBS - " + hexColorToRGBList);
         /* Compare the #code value to rgb */
         compareRGBToHashColor = rgbValueList.equals(hexColorToRGBList);
         return compareRGBToHashColor;
     }
 
     /*Return RGB values for defined elements
-    * @allRGBElementTags - RGB WebElement List
-    * @splitBy - Regex to split the data by
-    * @attributeName - Get value from defined tag*/
+     * @allRGBElementTags - RGB WebElement List
+     * @splitBy - Regex to split the data by
+     * @attributeName - Get value from defined tag*/
     public List<String> getRGBValuesFromElement(List<WebElement> allRGBElementTags, String splitBy, String attributeName) {
         List<WebElement> rgbTags = allRGBElementTags;
         List<String> getAllAttributes = new ArrayList<>();
@@ -144,5 +144,4 @@ public class Graphs {
         LOGGER.info("Final RGB values derived- " + rgbFinalValues);
         return rgbFinalValues;
     }
-
 }

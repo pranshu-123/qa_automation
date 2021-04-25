@@ -3,6 +3,7 @@ package com.qa.testcases.clusterDiscovery;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.enums.UserAction;
+import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.pagefactory.migration.ClusterDiscoveryPageObject;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.scripts.migration.ClusterDiscovery;
@@ -34,6 +35,7 @@ public class TC_CD_05 extends BaseClass {
         ClusterDiscoveryPageObject cdPageObject = new ClusterDiscoveryPageObject(driver);
         ClusterDiscovery discovery = new ClusterDiscovery(driver);
         UserActions QueueAction = new UserActions(driver);
+        ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         AllApps allApps = new AllApps(driver);
 
         // Navigate to Cluster Discovery tab from header
@@ -70,6 +72,7 @@ public class TC_CD_05 extends BaseClass {
         try {
             // Get By Queue type count from pie chart
             waitExecuter.waitUntilElementPresent(cdPageObject.getByQueuePieCount);
+
             int totalQueues = Integer.parseInt(cdPageObject.getByQueuePieCount.getText());
             waitExecuter.waitUntilPageFullyLoaded();
             LOGGER.info("Total Queues in cluster discovery pie chart- " + totalQueues);
@@ -81,11 +84,13 @@ public class TC_CD_05 extends BaseClass {
             // Select last 30 days from date picker
             test.log(LogStatus.INFO, "Select last 30 days");
             discovery.selectLast30Days();
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
             waitExecuter.waitUntilPageFullyLoaded();
 
             test.log(LogStatus.INFO, "Selecting cluster as of defined in cluster discovery page");
             LOGGER.info("Selecting cluster as of defined in cluster discovery page");
             allApps.selectCluster(clusterName);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
             waitExecuter.waitUntilPageFullyLoaded();
             // Get jobs count of hive, tez, spark and MR Queues
             test.log(LogStatus.INFO, "Get jobs count of hive, tez, spark and MR Queues");

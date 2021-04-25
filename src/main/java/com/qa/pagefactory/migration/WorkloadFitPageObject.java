@@ -105,6 +105,9 @@ public class WorkloadFitPageObject {
     @FindBy(xpath = "//div[contains(@class,'component-cta')]//span[contains(text(),'Run')]")
     public WebElement runButton;
 
+    @FindBy(xpath = "//div[contains(@class,'panel-heading')]//span[contains(@class,'glyphicon')]")
+    public WebElement dateRangePointer;
+
     public WorkloadFitPageObject(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }

@@ -30,6 +30,24 @@ public class GraphsPageObject {
 	public By childTagsOfByTypeHexcode = By
 			.xpath(".//*[local-name() = 'g']/*[local-name() = 'g']/*[local-name() = 'path']");
 
+	@FindBy(xpath = "//div[contains(@id,'JobsFinishedByStatus')] //*[name()='svg']//*[local-name()='g']//*[local-name()='g']//*[local-name()='path'][2]")
+	public List<WebElement> byStatusHexcode;
+
+	@FindBy(xpath = "//div[contains(@id,'JobsByInefficiency')] //*[name()='svg']//*[local-name()='g']//*[local-name()='g']//*[local-name()='path'][2]")
+	public List<WebElement> byEventHexcode;
+
+	@FindBy(xpath = "//div[contains(@id,'JobsFinishedByStatus')]//label/input//preceding-sibling::span")
+	public List<WebElement> byStatusFooterNames;
+
+	@FindBy(xpath = "//div[contains(@id,'JobsByInefficiency')]//label/input//preceding-sibling::span")
+	public List<WebElement> evnetsFooterNames;
+
+	@FindBy(xpath = "//div[contains(@id,'JobsByInefficiency')]//label/input//following-sibling::span")
+	public List<WebElement> eventsRGBColor;
+
+	@FindBy(xpath = "//div[contains(@id,'JobsFinishedByStatus')]//label/input//following-sibling::span")
+	public List<WebElement> statusRGBColor;
+
 	/**
 	 * @param driver
 	 *            The driver that will be used to look up the elements

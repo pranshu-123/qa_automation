@@ -26,6 +26,7 @@ public class TC_FR_24 extends BaseClass {
     filereports.navidateTofileReportsTab();
     waitExecuter.waitUntilElementPresent(fileReportsPageObject.emptyFile);
     MouseActions.clickOnElement(driver, fileReportsPageObject.emptyFile);
+    waitExecuter.waitUntilPageFullyLoaded();
     filereports.verifyFileSortOption("EMPTY", clusterId);
     waitExecuter.waitUntilPageFullyLoaded();
     test.log(LogStatus.PASS, "Successfully validate the Empty file reports.");

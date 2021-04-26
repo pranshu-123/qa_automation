@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
-/*
+/*x
  * @author - Ojasvi Pandey
  */
 
@@ -64,13 +64,15 @@ public class IM_RES_10 extends BaseClass {
         test.log(LogStatus.INFO, "Select last 1 hour");
         LOGGER.info("Select last one hour");
         datePicker.selectLastOneHour();
-        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
+        waitExecuter.sleep(2000);
 
         //Select queue in group by
         test.log(LogStatus.INFO, "Select Queue in Group by option.");
         LOGGER.info("Select Queue in Group by option.");
+        waitExecuter.sleep(2000);
         impalaPageObject.groupByDropdownButton.click();
-        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.groupByQueueList);
         impalaPageObject.groupByQueueList.click();
         waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 

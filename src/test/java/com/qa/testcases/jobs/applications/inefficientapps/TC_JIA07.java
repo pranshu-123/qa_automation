@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 @Marker.InefficientApps
 @Marker.All
 public class TC_JIA07 extends BaseClass {
@@ -54,9 +55,9 @@ public class TC_JIA07 extends BaseClass {
         inefficientApps.clickOnApplicationEvent();
         test.log(LogStatus.INFO, "Clicked on Application Event link");
 
-        Assert.assertTrue(inefficientApps.verifyFirstChkBoxOfAppTypeIsChecked(),"ApplicationType " +
+        Assert.assertTrue(inefficientApps.verifyFirstChkBoxOfAppTypeIsChecked(), "ApplicationType " +
                 "checkbox is not checked after Reset functionality fails");
-        Assert.assertTrue(inefficientApps.verifyFirstChkBoxOfAppEventIsChecked(),"ApplicationEvent " +
+        Assert.assertTrue(inefficientApps.verifyFirstChkBoxOfAppEventIsChecked(), "ApplicationEvent " +
                 "checkbox is not checked after Reset functionality fails");
         test.log(LogStatus.PASS, "Verified Reset functionality.");
 

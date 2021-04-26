@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 @Marker.InefficientApps
 @Marker.All
 public class TC_JIA09 extends BaseClass {
@@ -43,7 +44,7 @@ public class TC_JIA09 extends BaseClass {
 
         inefficientApps.clickShowAll();
         test.log(LogStatus.INFO, "Clicked on Show All");
-        Assert.assertTrue(inefficientApps.verifyFirstChkBoxOfAppTypeIsChecked(),"ApplicationType " +
+        Assert.assertTrue(inefficientApps.verifyFirstChkBoxOfAppTypeIsChecked(), "ApplicationType " +
                 "checkbox is not checked after click on Show All");
         test.log(LogStatus.PASS, "Verified application type filter and clicked on Show All");
     }

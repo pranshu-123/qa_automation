@@ -1,5 +1,6 @@
 package com.qa.scripts;
 
+import com.qa.enums.DatePickerOptions;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.DatePickerPageObject;
 import com.qa.utils.DateUtils;
@@ -42,7 +43,6 @@ public class DatePicker {
     public void clickOnDatePicker() {
         waitExecuter.waitUntilElementClickable(datePickerPageObject.dateRange);
         userActions.performActionWithPolling(datePickerPageObject.dateRange, UserAction.CLICK);
-        //userActions.performActionWithPolling(datePickerPageObject.dateRangeTopx, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(datePickerPageObject.dateRange);
     }
 
@@ -80,7 +80,7 @@ public class DatePicker {
 
     public void clickOnCustomDateApplyBtn() {
         waitExecuter.waitUntilElementPresent(datePickerPageObject.applyBtn);
-        datePickerPageObject.applyBtn.click();
+        userActions.performActionWithPolling(datePickerPageObject.applyBtn, UserAction.CLICK);
         waitExecuter.sleep(1000);
     }
 
@@ -89,7 +89,7 @@ public class DatePicker {
      */
     public void selectLastOneHour() {
         waitExecuter.waitUntilElementPresent(datePickerPageObject.lastOneHour);
-        datePickerPageObject.lastOneHour.click();
+        userActions.performActionWithPolling(datePickerPageObject.lastOneHour, UserAction.CLICK);
     }
 
     /**
@@ -165,6 +165,14 @@ public class DatePicker {
         waitExecuter.waitUntilElementClickable(datePickerPageObject.last90Days);
         userActions.performActionWithPolling(datePickerPageObject.last90Days, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(datePickerPageObject.dateRange);
+    }
+
+    /**
+     * Method to select 'Current Day' in data picker
+     */
+    public void selectCurrentDay() {
+        waitExecuter.waitUntilElementClickable(datePickerPageObject.currentDay);
+        userActions.performActionWithPolling(datePickerPageObject.currentDay, UserAction.CLICK);
     }
 
     /**
@@ -305,5 +313,44 @@ public class DatePicker {
             list.add(element.getText());
         }
         return list;
+    }
+
+    /**
+     * Select date from date range
+     * @param dateOption
+     */
+    public void selectDateOptionFromDate(DatePickerOptions dateOption) {
+        waitExecuter.sleep(3000);
+        switch (dateOption) {
+            case CURRENT_DAY:
+                selectCurrentDay();
+                break;
+            case LAST_7_DAYS:
+                selectLast7Days();
+                break;
+            case LAST_30_DAYS:
+                selectLast30Days();
+                break;
+            case LAST_60_DAYS:
+                selectLast60Days();
+                break;
+            case LAST_90_DAYS:
+                selectLast90Days();
+                break;
+            case CUSTOM_RANGE:
+                selectCustomRange();
+                break;
+        }
+    }
+
+    /*Select any date for start and end date through custom
+    @startDateInMinus - Define days in minus from that of current date
+    @endDateInMinus - Define days in minus from that of current date
+     */
+    public void setStartAndEndDateFromCurrentDate(Integer startDateInMinus, Integer endDateInMinus) {
+        waitExecuter.sleep(2000);
+        setStartDate(DateUtils.getPastDate(startDateInMinus));
+        waitExecuter.sleep(2000);
+        setEndDate(DateUtils.getPastDate(endDateInMinus));
     }
 }

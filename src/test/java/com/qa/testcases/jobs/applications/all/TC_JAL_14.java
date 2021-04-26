@@ -1,5 +1,6 @@
 package com.qa.testcases.jobs.applications.all;
 
+import bsh.StringUtil;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.enums.UserAction;
@@ -54,22 +55,24 @@ public class TC_JAL_14 extends BaseClass {
         userActions.performActionWithPolling(applicationsPageObject.userExpandableHeader, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(applicationsPageObject.userExpandableHeader);
         waitExecuter.waitUntilElementClickable(applicationsPageObject.userSearchBox);
-        applicationsPageObject.userSearchBox.click();
+        userActions.performActionWithPolling(applicationsPageObject.userSearchBox,UserAction.CLICK);
+        //applicationsPageObject.userSearchBox.sendKeys(usernameFromTable);
         waitExecuter.waitUntilElementClickable(applicationsPageObject.userSearchBox);
         List<WebElement> userList = applicationsPageObject.getNamesFromDropDown;
-        waitExecuter.sleep(2000);
+        waitExecuter.sleep(1000);
         String usernameSelected = userList.get(0).getText();
         waitExecuter.waitUntilElementClickable(userList.get(0));
         userList.get(0).click();
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+        waitExecuter.sleep(2000);
         LOGGER.info("Selected username from dropdown " + usernameSelected);
-        executor.executeScript("arguments[0].scrollIntoView();", applicationsPageObject.jobsPageHeader);
+        executor.executeScript("arguments[0].scrollIntoView();", applicationsPageObject.globalSearchBox);
         int totalCount = Integer
                 .parseInt(applicationsPageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
         if (totalCount > 0) {
             String usernameFromTable = applicationsPageObject.getUsernameFromTable.getAttribute("title");
             LOGGER.info("Username displayed in table " + usernameFromTable);
-            Assert.assertEquals(usernameFromTable, usernameSelected,
+            Assert.assertTrue(usernameSelected.contains(usernameFromTable),
                     "The application in table contains username other than that of " + usernameFromTable);
             test.log(LogStatus.PASS, "The application in table matches username: " + usernameFromTable);
         } else

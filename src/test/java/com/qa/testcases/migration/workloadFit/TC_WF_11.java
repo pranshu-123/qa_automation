@@ -7,7 +7,6 @@ import com.qa.pagefactory.migration.WorkloadFitPageObject;
 import com.qa.scripts.migration.WorkloadFit;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -64,35 +63,35 @@ public class TC_WF_11 extends BaseClass {
         fit.selectAllCheckboxTypes(fitPageObject.AllTagOfTagsTypes, fitPageObject.selectAllTagTypes);
         // Click on Run button to open report page
         test.log(LogStatus.INFO, "Click on Run button to open report page");
+        fit.setStorage("1500", "1500");
         fit.clickRunForNewReport();
-
         try {
             waitExecuter.waitUntilTextToBeInWebElement(cdPageObject.confirmationMessageElement,
                     "Workload Fit report completed successfully");
             test.log(LogStatus.PASS, "Verified Workload Fit report is loaded properly.");
-
-            List<WebElement> appNamesInQueueTypes = fitPageObject.getQueuesTypeNames;
-            List<String> appNameList = new ArrayList<>();
-            for (WebElement appName : appNamesInQueueTypes) {
-                appNameList.add(appName.getText());
-            }
-            LOGGER.info("Name of queues present are- " + appNameList.toString());
-            test.log(LogStatus.INFO, "Name of queues present are- " + appNameList.toString());
-            Assert.assertNotNull(appNameList, "There are no apps in Queue Type pie chart.");
-            test.log(LogStatus.PASS, "Verified that Queue Type pie chart contains all app type name.");
-
-            List<WebElement> appNamesInTagTypes = fitPageObject.getTagsTypeNames;
-            List<String> tagNameList = new ArrayList<>();
-            for (WebElement tagName : appNamesInTagTypes) {
-                tagNameList.add(tagName.getText());
-            }
-            LOGGER.info("Name of tags present are- " + tagNameList.toString());
-            test.log(LogStatus.INFO, "Name of tags present are- " + tagNameList.toString());
-            Assert.assertNotNull(tagNameList, "There are no apps in Job Type pie chart.");
-            test.log(LogStatus.PASS, "Verified that Job Type pie chart contains all app type name.");
-        } catch (TimeoutException | NoSuchElementException te) {
-            throw new AssertionError("Workload Fit Report not completed successfully.");
+        } catch (TimeoutException te) {
+            waitExecuter.waitUntilTextToBeInWebElement(cdPageObject.confirmationMessageElement,
+                    "Workload Fit report completed successfully");
+            test.log(LogStatus.PASS, "Verified Workload Fit report is loaded properly.");
         }
+        List<WebElement> appNamesInQueueTypes = fitPageObject.getQueuesTypeNames;
+        List<String> appNameList = new ArrayList<>();
+        for (WebElement appName : appNamesInQueueTypes) {
+            appNameList.add(appName.getText());
+        }
+        LOGGER.info("Name of queues present are- " + appNameList.toString());
+        test.log(LogStatus.INFO, "Name of queues present are- " + appNameList.toString());
+        Assert.assertNotNull(appNameList, "There are no apps in Queue Type pie chart.");
+        test.log(LogStatus.PASS, "Verified that Queue Type pie chart contains all app type name.");
 
+        List<WebElement> appNamesInTagTypes = fitPageObject.getTagsTypeNames;
+        List<String> tagNameList = new ArrayList<>();
+        for (WebElement tagName : appNamesInTagTypes) {
+            tagNameList.add(tagName.getText());
+        }
+        LOGGER.info("Name of tags present are- " + tagNameList.toString());
+        test.log(LogStatus.INFO, "Name of tags present are- " + tagNameList.toString());
+        Assert.assertNotNull(tagNameList, "There are no apps in Job Type pie chart.");
+        test.log(LogStatus.PASS, "Verified that Job Type pie chart contains all app type name.");
     }
 }

@@ -1,9 +1,11 @@
 package com.qa.scripts.jobs.applications;
 
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,9 +19,10 @@ import java.util.List;
 public class InefficientApps {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(InefficientApps.class);
-    private WaitExecuter waitExecuter;
-    private WebDriver driver;
-    private ApplicationsPageObject applicationsPageObject;
+    private final WaitExecuter waitExecuter;
+    private final WebDriver driver;
+    private final ApplicationsPageObject applicationsPageObject;
+    private final UserActions userActions;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -30,26 +33,29 @@ public class InefficientApps {
         waitExecuter = new WaitExecuter(driver);
         this.driver = driver;
         applicationsPageObject = new ApplicationsPageObject(driver);
+        userActions = new UserActions(driver);
     }
 
     /* This method will do the setup for getting inefficientApp page
-    * 1. Click on Jobs tab
-    * 2. Click on inefficientApps tab
-    * 3. Select last 30 days from date picker
-    * */
-    public void setupInefficientApps(){
+     * 1. Click on Jobs tab
+     * 2. Click on inefficientApps tab
+     * 3. Select last 30 days from date picker
+     * */
+    public void setupInefficientApps() {
         //Click on Jobs tab
         SubTopPanelModulePageObject subTopPanelModulePageObject = new SubTopPanelModulePageObject(driver);
         waitExecuter.sleep(2000);
-        subTopPanelModulePageObject.jobs.click();
-        waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
+        waitExecuter.waitUntilElementClickable(subTopPanelModulePageObject.jobs);
+        userActions.performActionWithPolling(subTopPanelModulePageObject.jobs, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         waitExecuter.waitUntilPageFullyLoaded();
         LOGGER.info("Click on Job tab");
 
         //Click on inefficientApps tab
         waitExecuter.sleep(2000);
-        applicationsPageObject.inefficientApps.click();
-        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.inefficientApps);
+        userActions.performActionWithPolling(applicationsPageObject.inefficientApps, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         LOGGER.info("Click on inefficient Apps tab");
 
         DatePicker datePicker = new DatePicker(driver);
@@ -58,6 +64,7 @@ public class InefficientApps {
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(1000);
         datePicker.selectLast30Days();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         waitExecuter.sleep(2000);
     }
 
@@ -93,12 +100,14 @@ public class InefficientApps {
     public void selectCluster(String clusterId) {
         waitExecuter.sleep(3000);
         waitExecuter.waitUntilElementClickable(applicationsPageObject.clusterSearchBox);
-        applicationsPageObject.clusterSearchBox.click();
+        userActions.performActionWithPolling(applicationsPageObject.clusterSearchBox, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         waitExecuter.sleep(1000);
         LOGGER.info("Search for cluster: " + clusterId);
         applicationsPageObject.clusterSearchBox.sendKeys(clusterId);
         waitExecuter.sleep(1000);
-        applicationsPageObject.select1stCluster.click();
+        userActions.performActionWithPolling(applicationsPageObject.select1stCluster, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         waitExecuter.sleep(1000);
     }
 
@@ -215,10 +224,7 @@ public class InefficientApps {
         waitExecuter.sleep(2000);
         int countInefficientAppsTblRow = applicationsPageObject.inefficientAppsTblRowsList.size();
         LOGGER.info("Count of Table Rows :" + countInefficientAppsTblRow);
-        if (countInefficientAppsTblRow > 0) {
-            return true;
-        }
-        return false;
+        return countInefficientAppsTblRow > 0;
     }
 
     /* Get all InefficientApp application Table row count */

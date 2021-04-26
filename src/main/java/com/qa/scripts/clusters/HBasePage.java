@@ -313,7 +313,7 @@ public class HBasePage {
         logger.info("All table names in region server: "+ regionName +" are - "+ regionSvrTableNames);
     }
 
-    public void clickOnTableName(){
+    public String  clickOnTableName(){
         waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseFirstRegionSvr);
         String regionName = hBasePageObject.hBaseFirstRegionSvr.getText();
         MouseActions.clickOnElement(driver,hBasePageObject.hBaseFirstRegionSvr);
@@ -332,29 +332,20 @@ public class HBasePage {
 
         logger.info("Clicked on table name: "+ tableName);
 
-        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseTableTab);
-        String hBaseTblTabText = hBasePageObject.hBaseTableTab.getText();
-        Assert.assertTrue(hBaseTblTabText.equals("Tables"),"HBase Table Tab not found");
-
+        return tableName;
     }
     public void verifyAlertsInRegionServerHealth(){
-        List<WebElement> hBaseRegionSvrHealth = hBasePageObject.hBaseRegionSvrHealth;
-        Assert.assertFalse(hBaseRegionSvrHealth.isEmpty(), "No Health check column found.");
+        List<WebElement> hBaseRegionSvrHealth = hBasePageObject.hBaseRegionSvrInsight;
+        Assert.assertFalse(hBaseRegionSvrHealth.isEmpty(), "No Insight found.");
 
         for(WebElement e: hBaseRegionSvrHealth){
-            if(e.getText().equalsIgnoreCase("Bad")){
-                logger.info("Found Bad health");
                 Actions toolAct = new Actions(driver);
                 toolAct.moveToElement(e).build().perform();
                 String toolTipText = e.getAttribute("aria-describedby");
-                logger.info("toolTipText of Bad Health button is " + toolTipText);
+                logger.info("toolTipText of insight button is " + toolTipText);
                 Assert.assertTrue(toolTipText.length()>0, " Tool tip text is not found.");
-            }
+                break;
         }
-
-//        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseSvrHealthHeader);
-//        Assert.assertTrue(hBasePageObject.hBaseSvrHealthHeader.getText().equals("Server Health and Context"),
-//                "'Server Health and Context' header not found");
     }
 
     public String verifyRegionServerHealth(){
@@ -370,17 +361,26 @@ public class HBasePage {
 
     }
 
-    public void verifyTblRegionUIWithinRegionServer(){
-        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseTableHostTbl);
-        List<WebElement> hBaseTableHostTblRowsList = hBasePageObject.hBaseTableHostTblRows;
+    public void verifyTblRegionUIWithinRegionServer(String tblName){
+        String xpathRegionTbl = "//table[@id='regions-" + tblName+ "']";   //table[@id='null-table']
+        WebElement regionTblEle = driver.findElement(By.xpath(xpathRegionTbl));
+        waitExecuter.waitUntilElementPresent(regionTblEle);
+
+        List<WebElement> hBaseTableHostTblRowsList = driver.findElements(By.xpath(xpathRegionTbl+"/tbody/tr"));
         Assert.assertFalse(hBaseTableHostTblRowsList.isEmpty(), "HBase Table Host Table Rows not generated.");
 
-        waitExecuter.waitUntilElementPresent(hBasePageObject.getHbaseTableHostFirstRowRegionName);
-        String regionName = hBasePageObject.getHbaseTableHostFirstRowRegionName.getText();
+        String firstRowRegionName = xpathRegionTbl+"/tbody/tr[1]/td[1]";
+        WebElement firstRowRegionNameEle = driver.findElement(By.xpath(firstRowRegionName));
+
+        waitExecuter.waitUntilElementPresent(firstRowRegionNameEle);
+        String regionName = firstRowRegionNameEle.getText();
         Assert.assertFalse(regionName.isEmpty(),"Region name is empty.");
 
-        waitExecuter.waitUntilElementPresent(hBasePageObject.getHbaseTableHostFirstRowRegionSvrName);
-        String regionSvrName = hBasePageObject.getHbaseTableHostFirstRowRegionSvrName.getText();
+        String firstRowSecondRegionName = xpathRegionTbl+"/tbody/tr[1]/td[2]";
+        WebElement firstRowSecondRegionNameEle = driver.findElement(By.xpath(firstRowSecondRegionName));
+
+        waitExecuter.waitUntilElementPresent(firstRowSecondRegionNameEle);
+        String regionSvrName = firstRowSecondRegionNameEle.getText();
         Assert.assertFalse(regionSvrName.isEmpty(),"Region server name is empty.");
 
         logger.info("Region name: "+regionName + ", Region server name: "+regionSvrName  );
@@ -409,7 +409,7 @@ public class HBasePage {
         waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseTableHostTbl);
     }
 
-    public void verifyTableAndRegion(){
+    public String verifyTableAndRegion(){
         waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseFirstTableElement);
         String tableName = hBasePageObject.hBaseFirstTableElement.getText();
         MouseActions.clickOnElement(driver, hBasePageObject.hBaseFirstTableElement);
@@ -419,12 +419,16 @@ public class HBasePage {
         String regionTableName = hBasePageObject.regionTableName.getText();
         logger.info("Region table name: "+ regionTableName);
         //Verify Region name and Region Svr name
-        verifyTblRegionUIWithinRegionServer();
+        verifyTblRegionUIWithinRegionServer(tableName);
+        return tableName;
     }
 
-    public void verifyRegionTabColumns(){
-        waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseTableHostTbl);
-        List<WebElement> hBaseTableHostTblRowsList = hBasePageObject.hBaseTableHostTblRows;
+    public void verifyRegionTabColumns(String tableName){
+        String xpathRegionsTblName =  "//table[@id='regions-"+tableName+"']";
+        WebElement regionsTblNameEle = driver.findElement(By.xpath(xpathRegionsTblName));
+        waitExecuter.waitUntilElementPresent(regionsTblNameEle);
+
+        List<WebElement> hBaseTableHostTblRowsList = driver.findElements(By.xpath(xpathRegionsTblName+"/tbody/tr"));
         Assert.assertFalse(hBaseTableHostTblRowsList.isEmpty(), "HBase Table Host Table Rows not generated.");
 
         List<String> regionNameList = new ArrayList<>();
@@ -487,7 +491,7 @@ public class HBasePage {
         clickOnRegionSvrTable(HbaseRegionSvrTableColumn.READ_REQUEST_COUNT);
         logger.info("Click on Region Server Read Request Count column.");
         Boolean isDataSortedForRegionSvrReadReqCnt = isRegionSvrTablesDataSorted(
-                HbaseRegionSvrTableColumn.READ_REQUEST_COUNT,true);
+                HbaseRegionSvrTableColumn.READ_REQUEST_COUNT,false);
         Assert.assertTrue(isDataSortedForRegionSvrReadReqCnt, "Region Server Read Request Count Data is not sorted.");
         waitExecuter.sleep(2000);
 
@@ -501,7 +505,7 @@ public class HBasePage {
         clickOnRegionSvrTable(HbaseRegionSvrTableColumn.STORE_FILE_SIZE);
         logger.info("Click on Region Server store file size column.");
         Boolean isDataSortedForRegionSvrStoreFileSize = isRegionSvrTablesDataSorted(
-                HbaseRegionSvrTableColumn.STORE_FILE_SIZE, true);
+                HbaseRegionSvrTableColumn.STORE_FILE_SIZE, false);
         Assert.assertTrue(isDataSortedForRegionSvrStoreFileSize, "Region Server store file size Data is not sorted.");
         waitExecuter.sleep(2000);
 

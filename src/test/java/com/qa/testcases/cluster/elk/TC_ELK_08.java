@@ -21,7 +21,7 @@ public class TC_ELK_08 extends BaseClass {
   private static final java.util.logging.Logger LOGGER = Logger.getLogger(TC_ELK_08.class.getName());
 
   @Test(dataProvider = "clusterid-data-provider")
-  public void verifyLogstashMetrics(String clusterId) {
+  public void TC_ELK_08_verifyLogstashMetrics(String clusterId) {
     test = extent.startTest("verifyLogstashMetrics: " + clusterId,
         "Validate logstash metrics JVM heap used, events received, events emited and events filtered. ");
     test.assignCategory(" ELK ");

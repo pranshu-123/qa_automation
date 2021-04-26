@@ -43,10 +43,10 @@ public class TC_HB_47 extends BaseClass {
         hbase.verifyRegionServer();
         LOGGER.info("Clicked on HBase region server.");
         //Click on Table
-        hbase.clickOnTableName();
+        String tblName = hbase.clickOnTableName();
         LOGGER.info("Clicked on HBase region server table name.");
 
-        hbase.verifyTblRegionUIWithinRegionServer();
+        hbase.verifyTblRegionUIWithinRegionServer(tblName);
         test.log(LogStatus.PASS, "Verified Table Region UI within Region Server.");
 
     }

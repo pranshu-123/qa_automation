@@ -46,9 +46,7 @@ public class TC_HIVE_51 extends BaseClass {
         LOGGER.info("Navigate to jobs tab from header");
         waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.jobs);
         userAction.performActionWithPolling(topPanelComponentPageObject.jobs, UserAction.CLICK);
-        waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
-        waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
         waitExecuter.waitUntilPageFullyLoaded();
         // Select last 30 days from date picker
         test.log(LogStatus.INFO, "Select last 30 days");
@@ -66,6 +64,7 @@ public class TC_HIVE_51 extends BaseClass {
         test.log(LogStatus.INFO, "Select 'Only' hive from app types and get its jobs count");
         LOGGER.info("Select 'Only' hive from app types and get its jobs count");
         sparkApp.clickOnlyLink("Map Reduce");
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         int appCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
                 .replaceAll("[^\\dA-Za-z ]", "").trim());
         List<Integer> list = new ArrayList<>();

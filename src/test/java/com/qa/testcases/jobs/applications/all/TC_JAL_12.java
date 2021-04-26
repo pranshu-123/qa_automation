@@ -48,7 +48,9 @@ public class TC_JAL_12 extends BaseClass {
         test.log(LogStatus.INFO, "Slide the duration slider to get min and max value of duration");
         LOGGER.info("Slide the duration slider to get min and max value of duration");
         WebElement DurationSlider = applicationsPageObject.durationSlider;
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         allApps.moveTheSlider(DurationSlider, 50);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         String SliderInputLeft = applicationsPageObject.durationSliderInputLeft.getAttribute("value");
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         String SliderInputRight = applicationsPageObject.durationSliderInputRight.getAttribute("value");
@@ -67,6 +69,7 @@ public class TC_JAL_12 extends BaseClass {
         waitExecuter.waitUntilElementClickable(applicationsPageObject.sortDuration);
         applicationsPageObject.sortDuration.click();
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+        waitExecuter.sleep(1000);
         // Get min duration of first application from table and convert into seconds
         test.log(LogStatus.INFO, "Get min duration of first application from table and convert into seconds");
         LOGGER.info("Get min duration of first application from table and convert into seconds");
@@ -79,6 +82,7 @@ public class TC_JAL_12 extends BaseClass {
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         applicationsPageObject.sortDuration.click();
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+        waitExecuter.sleep(1000);
         // Get max duration of first application from table and convert into seconds
         test.log(LogStatus.INFO, "Get max duration of first application from table and convert into seconds");
         LOGGER.info("Get max duration of first application from table and convert into seconds");

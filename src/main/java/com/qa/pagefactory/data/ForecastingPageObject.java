@@ -38,6 +38,9 @@ public class ForecastingPageObject {
     @FindBy(xpath = "//div[@class='ranges']/ul/li")
     public List<WebElement> listDateRange;
 
+    @FindBy(xpath = "//span/parent::a")
+    public WebElement modalAfterRunButton;
+
     /**
      * @param driver The driver that will be used to look up the elements
      */

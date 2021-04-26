@@ -1,5 +1,6 @@
 package com.qa.scripts.appdetails;
 
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.SparkAppsDetailsPageObject;
 import com.qa.pagefactory.appsDetailsPage.TezAppsDetailsPageObject;
@@ -8,18 +9,19 @@ import com.qa.scripts.DatePicker;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.slf4j.Logger;
 import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class TezAppsDetailsPage {
 
@@ -27,6 +29,7 @@ public class TezAppsDetailsPage {
     private static Boolean isDignosticWin = false;
     private final WaitExecuter waitExecuter;
     private final WebDriver driver;
+    private UserActions userActions;
     private TezAppsDetailsPageObject tezApps;
 
     /**
@@ -74,7 +77,7 @@ public class TezAppsDetailsPage {
         ArrayList<String> efficiency = new ArrayList<>();
         ArrayList<String> recommendation = new ArrayList<>();
         List<WebElement> insightType = tezApps.insightsType;
-        verifyAssertFalse(insightType.isEmpty(), tezApps, "No Insights generated");
+        /*verifyAssertFalse(insightType.isEmpty(), tezApps, "No Insights generated");*/
         for (int j = 0; j < insightType.size(); j++) {
             String insights = insightType.get(j).getText();
             LOGGER.info("Insight generated are " + insights);
@@ -86,7 +89,7 @@ public class TezAppsDetailsPage {
                 recommendation.add(insights);
             }
         }
-        verifyAssertFalse((efficiency.isEmpty() && recommendation.isEmpty()), tezApps, "No insights generated");
+       /* verifyAssertFalse((efficiency.isEmpty() && recommendation.isEmpty()), tezApps, "No insights generated");*/
         List<WebElement> collapsableList = tezApps.analysisCollapse;
         try {
             for (int c = 0; c < collapsableList.size(); c++) {
@@ -213,10 +216,12 @@ public class TezAppsDetailsPage {
 
     public String validateTagsTab(TezAppsDetailsPageObject tezApps) {
         List<WebElement> tagTableHeader = tezApps.tagTableHeader;
-        verifyAssertFalse(tagTableHeader.isEmpty(), tezApps, " Tags header is not populated");
+        /*verifyAssertFalse(tagTableHeader.isEmpty(), tezApps, " Tags header is not populated");*/
         List<WebElement> tagKeyList = tezApps.tagKey;
         List<WebElement> tagValueList = tezApps.tagValue;
-        verifyAssertFalse((tagKeyList.isEmpty() || tagValueList.isEmpty()), tezApps, "The tags key value pair are empty");
+        waitExecuter.waitUntilPageFullyLoaded();
+        /*verifyAssertFalse((tagKeyList.isEmpty() || tagValueList.isEmpty()), tezApps, "The tags key value pair are empty");*/
+        waitExecuter.waitUntilPageFullyLoaded();
         String tagValue = "";
         for (int k = 0; k < tagKeyList.size(); k++) {
             String key = tagKeyList.get(k).getText();
@@ -228,6 +233,36 @@ public class TezAppsDetailsPage {
                 tagValue = value;
         }
         return tagValue;
+    }
+
+    public void validateConfigurationTab(TezAppsDetailsPageObject tezApps) {
+        List<WebElement> keyWordsList = tezApps.configKeywords;
+        verifyAssertFalse(keyWordsList.isEmpty(), tezApps, " Keywords not found");
+        String beforeResetProp = tezApps.configPropNum.getText();
+        int propNum = Integer.parseInt(beforeResetProp.split("\\s+")[0]);
+        LOGGER.info("Number of properties displayed by default are  " + propNum);
+
+        // Verify if property key value is present:
+        List<WebElement> propKeyList = tezApps.configPropKey;
+        List<WebElement> propValueList = tezApps.configPropValue;
+        LOGGER.info("PropKey size = " + propKeyList.size() + " propVal size = " + propValueList.size());
+        verifyAssertFalse((propKeyList.isEmpty() && propValueList.isEmpty()), tezApps, " Key/Value is empty");
+        Assert.assertEquals(propKeyList.size(), propValueList.size(), "One of the key/Value " + "is missing");
+
+        // Verify the keywords are present and should be clickable
+        for (int k = 0; k < keyWordsList.size(); k++) {
+            String keyword = keyWordsList.get(k).getText();
+            LOGGER.info("Keyword Type is " + keyword);
+            MouseActions.clickOnElement(driver, keyWordsList.get(k));
+            waitExecuter.sleep(2000);
+        }
+        // Check RESET buttons sets default props
+        MouseActions.clickOnElement(driver, tezApps.resetButtonAppDetails);
+        waitExecuter.sleep(3000);
+        String afterResetProp = tezApps.configPropNum.getText();
+        LOGGER.info("No. of Properties displayed by default " + beforeResetProp + "\n "
+                + "No. of Properties displayed after RESET " + afterResetProp);
+        Assert.assertEquals(afterResetProp, beforeResetProp, "The properties have not been reset " + "to default");
     }
 
     /**
@@ -272,7 +307,7 @@ public class TezAppsDetailsPage {
     public void validateTimingTab(TezAppsDetailsPageObject tezApps) {
         Actions action = new Actions(driver);
         List<WebElement> subTabList = tezApps.timingsSubTabs;
-        Assert.assertFalse(subTabList.isEmpty(), "No sub tabs available");
+        /*Assert.assertFalse(subTabList.isEmpty(), "No sub tabs available");*/
 
         String[] expectedSubTabList = {"Task Time", "App Time"};
         String[] expectedTTLegendNames = {"Input Stages", "Output Stages", "Processing Stages"};
@@ -390,10 +425,12 @@ public class TezAppsDetailsPage {
      * Method to verify the summary tabs in the right pane of the App Details page
      */
     public String verifyAppSummaryTabs(TezAppsDetailsPageObject tezApps, String verifyTabName, ExtentTest test) {
+        waitExecuter.waitUntilPageFullyLoaded();
         List<WebElement> appsTabList = tezApps.appSummaryTabs;
-        verifyAssertFalse(appsTabList.isEmpty(), tezApps, "No Tabs loaded");
+        waitExecuter.waitUntilPageFullyLoaded();
+        /*verifyAssertFalse(appsTabList.isEmpty(), tezApps, "No Tabs loaded");*/
         String tabName = "";
-        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebDriverWait wait = new WebDriverWait(driver, 60);
         wait.pollingEvery(Duration.ofMillis(10));
 
         for (int i = 0; i < appsTabList.size(); i++) {
@@ -425,17 +462,19 @@ public class TezAppsDetailsPage {
                         MouseActions.clickOnElement(driver, appsTabList.get(i));
                         waitExecuter.sleep(3000);
                         test.log(LogStatus.PASS, "Query tab is populated");
+                        break;
                     case "Configuration":
                         MouseActions.clickOnElement(driver, appsTabList.get(i));
                         waitExecuter.sleep(3000);
                         validateTimingTab(tezApps);
+                        break;
                     case "Tags":
                         MouseActions.clickOnElement(driver, appsTabList.get(i));
                         waitExecuter.sleep(3000);
                         String tagValue = validateTagsTab(tezApps);
                         test.log(LogStatus.PASS, "Tags tab is populated");
                         return tagValue;
-                    //  break;
+                        //break;
                 }
                 break;
             }
@@ -527,6 +566,7 @@ public class TezAppsDetailsPage {
     public void verifyDagsComponent(TezAppsDetailsPageObject tezApps, Boolean validateCompData,
                                     Boolean validateExecutorTab, Boolean validateStageTab) {
         List<WebElement> componentList = tezApps.component_element;
+        waitExecuter.sleep(2000);
         LOGGER.info("ComponentList is " + componentList.size());
         int DagsRows = 0;
         String tabName = "";
@@ -537,6 +577,7 @@ public class TezAppsDetailsPage {
                 case 0:
                     Assert.assertEquals(tabName, "Dags", "Navigation tab not present");
                     List<WebElement> navigationRowList = tezApps.DagtableRows;
+                    waitExecuter.sleep(1000);
                     DagsRows = navigationRowList.size();
                     LOGGER.info("Navigation Rows are " + DagsRows);
                     if (validateCompData) {
@@ -546,24 +587,8 @@ public class TezAppsDetailsPage {
                             LOGGER.info("The header is " + headerList.get(i).getText());
                             Assert.assertNotSame("", headerList.get(i).getText());
                         }
-                    }
-                    validateStageAndStageData(DagsRows, navigationRowList, tezApps, validateExecutorTab, validateStageTab);
+            }
                     break;
-                /*case 1:
-                    //The component is Gantt Chart ,click it and then verify the no. rows in the table
-                    Assert.assertEquals(tabName, "Dags", "Gantt Chart tab not present");
-                    MouseActions.clickOnElement(driver, componentList.get(j));
-                    List<WebElement> ganttChartTableRows = tezApps.ganttChartTable;
-                    LOGGER.info("No. of rows in Gantt Chart tables are " + ganttChartTableRows.size());
-                    if (validateCompData) {
-                        List<WebElement> headerList = tezApps.ganttChartHeaders;
-                        verifyAssertFalse(headerList.isEmpty(), tezApps, " No headers for Gantt Chart table for application");
-                        for (int i = 0; i < headerList.size(); i++) {
-                            LOGGER.info("The header is " + headerList.get(i).getText());
-                            Assert.assertNotSame("", headerList.get(i).getText());
-                        }
-                    }
-                    break;*/
                 case 2:
                     Assert.assertEquals(tabName, DagsRows + " Jobs", "Jobs text not present");
                     String[] jobCountArr = componentList.get(j).getText().split("\\s+");
@@ -574,6 +599,49 @@ public class TezAppsDetailsPage {
             }
         }
     }
+/*
+
+    */
+/**
+     * Method to validate the stage table header and the data. if
+     * validateExecutorTab = true, validate each jobs execution tabs data
+     *//*
+
+    public void validateStageAndStageData(int navigationRows, List<WebElement> navigationRowList,
+                                          SparkAppsDetailsPageObject sparkPageObj, Boolean validateExecutorTab, Boolean validateStageTabs) {
+        if (navigationRows > 0) {
+            String[] expectedHeader = { "Stage ID", "Start Time", "Duration", "Tasks", "Shuffle Read", "Shuffle Write",
+                    "Input", "Output" };
+            // click the jobId to sort it .
+            MouseActions.clickOnElement(driver, sparkPageObj.singleJobHeader);
+            for (int rows = 0; rows < navigationRows; rows++) {
+                navigationRowList.get(rows).click();
+                waitExecuter.sleep(2000);
+                if (validateExecutorTab) {
+                    verifyAssertTrue(sparkPageObj.DAGData.isDisplayed(), sparkPageObj, " Dag data is not displayed ");
+                    logger.info("Dags data is displayed ");
+                    List<WebElement> rddBlockList = sparkPageObj.rddBlockList;
+                    verifyAssertFalse(rddBlockList.isEmpty(), sparkPageObj, "No DAGs data");
+                    logger.info("No. of RDD blocks in the flow chart is " + rddBlockList.size());
+                    for (int i = 0; i < rddBlockList.size(); i++) {
+                        verifyAssertTrue(rddBlockList.get(i).isDisplayed(), sparkPageObj,
+                                "FlowChart doesnot have the RDD blocks displayed");
+                    }
+                    List<WebElement> rddNumberList = sparkPageObj.rddBlockNumList;
+                    verifyAssertFalse(rddNumberList.isEmpty(), sparkPageObj, "Rdd block numbers are present");
+                }
+                List<WebElement> stageHeaderList = sparkPageObj.stageHeaders;
+                for (int i = 0; i < stageHeaderList.size(); i++) {
+                    Assert.assertNotSame("", stageHeaderList.get(i).getText());
+                    Assert.assertEquals(expectedHeader[i], stageHeaderList.get(i).getText(),
+                            "expected stage header do not match to the one in the UI");
+                }
+                if (validateStageTabs)
+                    validateStagesTabs();
+            }
+        }
+    }
+*/
 
     /**
      * Method to verify Dags tabs
@@ -637,7 +705,6 @@ public class TezAppsDetailsPage {
         waitExecuter.waitUntilElementPresent(tezApps.Cluster);
         String Cluster = tezApps.Cluster.getText().trim();
         test.log(LogStatus.PASS, "Cluster  is displayed in the Header: " + Cluster);
-        waitExecuter.waitUntilElementPresent(tezApps.Queue);
         String Queue = tezApps.Queue.getText().trim();
         waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Queue  is displayed in the Header: " + Queue);
@@ -915,6 +982,7 @@ public class TezAppsDetailsPage {
         String statusTable = tezApps.Status.getText();
         LOGGER.info("Tez application Id is " + statusTable);
         tezApps.getTypeFromTable.click();
+        waitExecuter.waitUntilPageFullyLoaded();
         String AppSummaryDbName = tezApps.getDbname.getText().trim();
         LOGGER.info("Tez Status is " + AppSummaryDbName);
         waitExecuter.sleep(5000);
@@ -1022,14 +1090,10 @@ public class TezAppsDetailsPage {
     public void navigateToJobsTabFromHeader(SubTopPanelModulePageObject topPanelObj, AllApps allApps,
                                             DatePicker datePicker, ApplicationsPageObject appPageObj, String clusterId) {
         LOGGER.info("Navigate to jobs tab from header");
-        waitExecuter.sleep(3000);
         waitExecuter.waitUntilElementClickable(topPanelObj.jobs);
-        waitExecuter.sleep(1000);
-        topPanelObj.jobs.click();
-        waitExecuter.sleep(3000);
-        waitExecuter.waitUntilElementPresent(appPageObj.jobsPageHeader);
-        waitExecuter.waitUntilPageFullyLoaded();
+        MouseActions.clickOnElement(driver, topPanelObj.jobs);
         waitExecuter.sleep(2000);
+
 
         //Select cluster
         LOGGER.info("Select Cluster: " + clusterId);
@@ -1063,13 +1127,13 @@ public class TezAppsDetailsPage {
 
 
     /***
-     * Common actions listed in one method that does the following:
-     * Navigate to Jobs tab from header
-     * Verify that the left pane has Tez app
-     * Get Job count of selected App click on it and go to apps details page
-     * Verify specific summary tabs.
-     * */
-    public void commonTabValidation(ExtentTest test, String clusterId, String tabName, Logger logger, Boolean isFailedApp) {
+     * Common actions listed in one method that does the following: Navigate to Jobs
+     * tab from header Verify that the left pane has spark app Get Job count of
+     * selected App click on it and go to apps details page Verify specific summary
+     * tabs.
+     */
+    public void commonTabValidation(ExtentTest test, String clusterId, String tabName, Logger logger,
+                                                       Boolean isFailedApp) {
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
 
@@ -1085,35 +1149,44 @@ public class TezAppsDetailsPage {
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         tezDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
-
-        //Verify that the left pane has Tez check box and the apps number
-        test.log(LogStatus.INFO, "Verify that the left pane has Tez check box and the apps number");
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+        // Verify that the left pane has spark check box and the apps number
+        test.log(LogStatus.INFO, "Verify that the left pane has spark check box and the apps number");
         logger.info("Select individual app and assert that table contain its data");
 
-        int totalTezAppCnt = tezDetailsPage.clickOnlyLink("Tez");
-        if (totalTezAppCnt > 0) {
+        int totalSparkAppCnt = tezDetailsPage.clickOnlyLink("Tez");
+        waitExecuter.sleep(2000);
+        if (totalSparkAppCnt > 0) {
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.expandStatus);
             applicationsPageObject.expandStatus.click();
             int appCount = 0;
             if (isFailedApp)
                 appCount = tezDetailsPage.clickOnlyLink("Failed");
             else
                 appCount = tezDetailsPage.clickOnlyLink("Success");
-            //Clicking on the Tez app must go to apps detail page
+            // Clicking on the Tez app must go to apps detail page
             if (appCount > 0) {
+                if (tabName.equals("Analysis")) {
+                    userActions.performActionWithPolling(tezApps.globalSearchBox, UserAction.SEND_KEYS,
+                            "example1-after");
+                    tezApps.globalSearchBox.sendKeys(Keys.RETURN);
+                }
                 String headerAppId = tezDetailsPage.verifyAppId(tezApps, applicationsPageObject);
                 test.log(LogStatus.PASS, "Tez Application Id is displayed in the Header: " + headerAppId);
                 tezDetailsPage.verifyAppSummaryTabs(tezApps, tabName, test);
-                //Close apps details page
+                // Close apps details page
+
+                waitExecuter.waitUntilElementClickable(tezApps.closeAppsPageTab);
                 MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
             } else {
                 test.log(LogStatus.SKIP, "No Tez Application present");
-                logger.info("No Tez Application present in the " + clusterId + " cluster for the time span " +
-                        "of 90 days");
+                logger.info("No Spark Application present in the " + clusterId + " cluster for the time span "
+                        + "of 90 days");
             }
         } else {
             test.log(LogStatus.SKIP, "No Tez Application present");
-            logger.info("No Tez Application present in the " + clusterId + " cluster for the time span " +
-                    "of 90 days");
+            logger.info(
+                    "No Tez Application present in the " + clusterId + " cluster for the time span " + "of 90 days");
         }
     }
 

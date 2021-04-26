@@ -50,6 +50,7 @@ public class WorkloadFit {
         if (cdPageObject.confirmationMessageElementClose.size() > 0) {
             waitExecuter.waitUntilElementClickable(cdPageObject.confirmationMessageElementClose.get(0));
             userAction.performActionWithPolling(cdPageObject.confirmationMessageElementClose.get(0), UserAction.CLICK);
+            waitExecuter.sleep(2000);
         }
     }
 
@@ -68,6 +69,8 @@ public class WorkloadFit {
         // Click on Cluster Discovery tab
         LOGGER.info("Clicked on Workload Fit tab");
         userAction.performActionWithPolling(topPanelComponentPageObject.WorkloadFitTab, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(fitPageObject.dateRangePointer);
+        waitExecuter.sleep(2000);
         // Validate Cluster Discovery tab loaded successfully
         LOGGER.info("Validate Workload Fit Discovery tab loaded successfully");
         waitExecuter.waitUntilPageFullyLoaded();
@@ -79,6 +82,7 @@ public class WorkloadFit {
         userAction.performActionWithPolling(datePickerPageObject.dateRange, UserAction.CLICK);
         userAction.performActionWithPolling(datePickerPageObject.last7Days, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(fitPageObject.generateHeatMap);
+        waitExecuter.sleep(2000);
 
     }
 
@@ -90,6 +94,7 @@ public class WorkloadFit {
 
                 if (fitPageObject.noJobSelectedErrorMessage.size() > 0) {
                     userAction.performActionWithPolling(selectAllCheckbox, UserAction.CLICK);
+                    waitExecuter.sleep(2000);
                 } else {
                     LOGGER.info("All checkbox already selected.");
                 }
@@ -106,7 +111,8 @@ public class WorkloadFit {
         try {
             LOGGER.info("Click on Run button to open report page");
             userAction.performActionWithPolling(cdPageObject.runButton, UserAction.CLICK);
-            waitExecuter.sleep(1000);
+            waitExecuter.waitUntilElementClickable(fitPageObject.generateHeatMap);
+            waitExecuter.sleep(2000);
         } catch (TimeoutException | NoSuchElementException ex) {
 
             try {
@@ -203,5 +209,23 @@ public class WorkloadFit {
         } catch (NoSuchElementException ex) {
             LOGGER.info("There are no options for selected duration");
         }
+    }
+
+    /* Set the local storage and object storage size */
+    public void setStorage(String objectStorage, String localStorage) {
+        // Set object storage size
+        waitExecuter.waitUntilElementClickable(fitPageObject.objectStorageSize);
+        userAction.performActionWithPolling(fitPageObject.objectStorageSize, UserAction.CLICK);
+        fitPageObject.objectStorageSize.clear();
+        fitPageObject.objectStorageSize.sendKeys(objectStorage);
+        waitExecuter.sleep(1000);
+
+        // Set local storage size
+        waitExecuter.waitUntilElementClickable(fitPageObject.localStorageSize);
+        userAction.performActionWithPolling(fitPageObject.localStorageSize, UserAction.CLICK);
+        fitPageObject.localStorageSize.clear();
+        fitPageObject.localStorageSize.sendKeys(localStorage);
+        waitExecuter.sleep(1000);
+
     }
 }

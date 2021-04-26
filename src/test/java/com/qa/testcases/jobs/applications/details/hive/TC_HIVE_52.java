@@ -45,16 +45,14 @@ public class TC_HIVE_52 extends BaseClass {
 		LOGGER.info("Navigate to jobs tab from header");
 		waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.jobs);
 		userAction.performActionWithPolling(topPanelComponentPageObject.jobs, UserAction.CLICK);
-		waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
 		waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
-		waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
 		waitExecuter.waitUntilPageFullyLoaded();
 		// Select last 30 days from date picker
 		test.log(LogStatus.INFO, "Select last 30 days");
 		LOGGER.info("Select last 30 days");
 		datePicker.clickOnDatePicker();
 		waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
-		datePicker.selectLast30Days();
+		datePicker.selectLastOneHour();
 		waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
 		// Select cluster
 		test.log(LogStatus.INFO, "Select clusterid : " + clusterId);

@@ -96,6 +96,18 @@ public class WorkloadFitPageObject {
     @FindBy(xpath = "//div[contains(@class,'scrollable-tab-container')]//li/a[contains(@class,'tab-margin')]")
     public List<WebElement> mapToClusterTabs;
 
+    @FindBy (xpath = "(//div[contains(@class,'run-preference')]//div[contains(@class,'col-md-12')]//input)[1]")
+    public WebElement objectStorageSize;
+
+    @FindBy (xpath = "(//div[contains(@class,'run-preference')]//div[contains(@class,'col-md-12')]//input)[2]")
+    public WebElement localStorageSize;
+
+    @FindBy(xpath = "//div[contains(@class,'component-cta')]//span[contains(text(),'Run')]")
+    public WebElement runButton;
+
+    @FindBy(xpath = "//div[contains(@class,'panel-heading')]//span[contains(@class,'glyphicon')]")
+    public WebElement dateRangePointer;
+
     public WorkloadFitPageObject(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }

@@ -5,12 +5,13 @@ import com.qa.base.BaseClass;
 import com.qa.scripts.jobs.applications.InefficientApps;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.slf4j.Logger;
 
 import java.util.List;
+
 @Marker.InefficientApps
 @Marker.All
 public class TC_JIA06 extends BaseClass {
@@ -36,7 +37,7 @@ public class TC_JIA06 extends BaseClass {
 
         //Get all the cluster Ids
         List<String> listClusterIds = inefficientApps.getAllClusterIds();
-        LOGGER.info("List all cluster Ids are: "+ listClusterIds);
+        LOGGER.info("List all cluster Ids are: " + listClusterIds);
 
         // Select cluster
         test.log(LogStatus.INFO, "Select clusterid : " + clusterId);

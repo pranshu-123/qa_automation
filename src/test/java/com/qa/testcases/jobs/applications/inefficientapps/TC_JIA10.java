@@ -53,7 +53,7 @@ public class TC_JIA10 extends BaseClass {
 
         inefficientApps.clickShowAll();
         test.log(LogStatus.INFO, "Clicked on Show All");
-        Assert.assertTrue(inefficientApps.verifyAllAppEventChkBoxIsChecked(),"Application Event " +
+        Assert.assertTrue(inefficientApps.verifyAllAppEventChkBoxIsChecked(), "Application Event " +
                 "checkbox is not checked after click on Show All");
         test.log(LogStatus.PASS, "Verified application event filter and clicked on Show All");
     }

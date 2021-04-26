@@ -34,7 +34,7 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span/span")
   public WebElement getHeaderAppId;
 
-  @FindBy(xpath = "//*[@id='app']/div/div/div[1]/div[2]")
+  @FindBy(xpath = "//*[@id='app']//*[@class='close']")
   public WebElement closeAppsPageTab;
 
   @FindBy(xpath = "//*[@id='app-prev-header']/b")
@@ -56,8 +56,6 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[2]/div/div[2]/div[3]/div/div/section/div[1]/span[1]")
   public List<WebElement> analysisCollapse;
 
- // @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[2]/div/div[2]/div[3]/div/div/section/div[1]/span[2]")
- // @FindBy(xpath = "//*[@id=\"default-analysis-tab\"]/div/div/section/div/span[2]")
   @FindBy(xpath = "//*[@class=\"status-title\"]//*[@class=\"badge fatal\"]")
   public List<WebElement> insightsType;
 
@@ -89,7 +87,6 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "(//div[@class='timeline gantt-timeline pipeline row no-gutters'])")
   public List<WebElement> ganttChartTable;
 
-  // (//div[contains(@class, 'gantt-timeline')])//div/p
   @FindBy(xpath = "(//div[@class='timeline gantt-timeline pipeline row no-gutters'])//div/p")
   public List<WebElement> ganttChartDuration;
 
@@ -108,7 +105,7 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "(//thead[@id='appNavigation-head'])/tr/th")
   public List<WebElement> navigationHeaders;
 
-  @FindBy(xpath = "(//div[@id='app'])/div/div/div[1]/div[1]/span")
+  @FindBy(xpath = "//*[@id='app']//*[@class='right']/span")
   public List<WebElement> rightPaneKpis;
 
   @FindBy(xpath = "(//div[@id='SummaryDetails']/div/div)/h5")
@@ -199,7 +196,7 @@ public class SparkAppsDetailsPageObject {
           "'highcharts-drilldown-point') and @fill='rbg(92,184,92)']")
   public WebElement outputStage;
 
-  @FindBy(xpath ="//*[@class='highcharts-button-box']")
+  @FindBy(xpath = "//*[contains(@class,'highcharts-drillup-button')]")
   public WebElement backButton;
 
   @FindBy(xpath ="//*[@class='stg-link link']")

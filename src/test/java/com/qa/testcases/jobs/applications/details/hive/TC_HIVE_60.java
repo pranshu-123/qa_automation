@@ -2,12 +2,14 @@ package com.qa.testcases.jobs.applications.details.hive;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -41,26 +43,26 @@ public class TC_HIVE_60 extends BaseClass {
         DatePicker datePicker = new DatePicker(driver);
         Actions actions = new Actions(driver);
         SparkAppsDetailsPage sparkApp = new SparkAppsDetailsPage(driver);
+        UserActions userActions = new UserActions(driver);
+
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         LOGGER.info("Navigate to jobs tab from header");
         waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.jobs);
-        waitExecuter.sleep(4000);
-        topPanelComponentPageObject.jobs.click();
-        waitExecuter.sleep(4000);
-        waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
-        waitExecuter.waitUntilPageFullyLoaded();
+        userActions.performActionWithPolling(topPanelComponentPageObject.jobs, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         // Select last 30 days from date picker
         test.log(LogStatus.INFO, "Select last 30 days");
         LOGGER.info("Select last 30 days");
         datePicker.clickOnDatePicker();
-        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         datePicker.selectLast30Days();
-        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         // Select 'Only' hive type and get its jobs count
         test.log(LogStatus.INFO, "Select 'Only' Map Reduce from app types and get its jobs count");
         LOGGER.info("Select 'Only' Map Reduce from app types and get its jobs count");
         sparkApp.clickOnlyLink("Map Reduce");
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         int appCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
                 .replaceAll("[^\\dA-Za-z ]", "").trim());
         List<Integer> list = new ArrayList<>();
@@ -70,15 +72,17 @@ public class TC_HIVE_60 extends BaseClass {
                 // Sort by parent app
                 test.log(LogStatus.INFO, "Sort by parent app");
                 LOGGER.info("Sort by parent app");
-                applicationsPageObject.sortByParentApp.click();
-                waitExecuter.sleep(1000);
+                waitExecuter.waitUntilElementClickable(applicationsPageObject.sortByParentApp);
+                userActions.performActionWithPolling(applicationsPageObject.sortByParentApp, UserAction.CLICK);
+                waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
                 list.add(applicationsPageObject.checkHiveInParentApp.size());
                 waitExecuter.sleep(1000);
 
                 for (int value : list) {
                     if (value > 0) {
-                        applicationsPageObject.expandStatus.click();
-                        waitExecuter.sleep(2000);
+                        waitExecuter.waitUntilElementClickable(applicationsPageObject.expandStatus);
+                        userActions.performActionWithPolling(applicationsPageObject.expandStatus, UserAction.CLICK);
+                        waitExecuter.sleep(1000);
                         int successAppCount = sparkApp.clickOnlyLink("Success");
                         if (successAppCount > 0) {
                             // Get MR app id from the first row
@@ -86,9 +90,9 @@ public class TC_HIVE_60 extends BaseClass {
                             LOGGER.info("Get MR app id from the first row");
                             WebElement name = applicationsPageObject.getAppNameFromTable;
                             actions.moveToElement(name).perform();
-                            waitExecuter.sleep(1000);
+                            waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
                             actions.moveToElement(applicationsPageObject.copyAppName).perform();
-                            waitExecuter.sleep(1000);
+                            waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
                             applicationsPageObject.copyAppName.click();
                             List<String> expectedTabs = Arrays.asList("table", "gantt chart");
                             List<String> actualTabs = new ArrayList<>();
@@ -96,9 +100,10 @@ public class TC_HIVE_60 extends BaseClass {
                             // Click on first app in table to navigate to app details page
                             test.log(LogStatus.INFO, "Click on first app in table to navigate to app details page");
                             LOGGER.info("Click on first app in table to navigate to app details page");
+                            waitExecuter.waitUntilElementClickable(applicationsPageObject.checkHiveInParentApp.get(0));
                             applicationsPageObject.checkHiveInParentApp.get(0).click();
                             waitExecuter.waitUntilElementPresent(applicationsPageObject.loader);
-                            waitExecuter.sleep(3000);
+                            waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
                             Assert.assertEquals(applicationsPageObject.mrHiveLeftPaneHeaders.size(), 2,
                                     "Expected tabs in MR apps having Hive as parent app is 2 but found- "
                                             + applicationsPageObject.hiveTezAppDetailsTab.size());
@@ -119,8 +124,9 @@ public class TC_HIVE_60 extends BaseClass {
                             // Navigate back to parent page and click on reset
                             test.log(LogStatus.INFO, "Navigate back to parent page and click on reset");
                             LOGGER.info("Navigate back to parent page and click on reset");
-                            driver.navigate().back();
-                            waitExecuter.sleep(5000);
+                            waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
+                            userActions.performActionWithPolling(applicationsPageObject.closeIcon, UserAction.CLICK);
+                            waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
                             allApps.reset();
 
                         } else {

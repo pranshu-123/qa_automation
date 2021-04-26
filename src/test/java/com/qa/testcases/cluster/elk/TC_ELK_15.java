@@ -20,7 +20,7 @@ public class TC_ELK_15 extends BaseClass {
   private static final java.util.logging.Logger LOGGER = Logger.getLogger(TC_ELK_15.class.getName());
 
   @Test(dataProvider = "clusterid-data-provider")
-  public void verifyPipelineNodeList(String clusterId) {
+  public void TC_ELK_15_verifyPipelineNodeList(String clusterId) {
     test = extent.startTest("verifyPipelineNodeList: " + clusterId,
         "Validate nodes listed under pipeline.");
     test.assignCategory(" ELK ");

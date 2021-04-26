@@ -61,7 +61,7 @@ public class TC_JAL_15 extends BaseClass {
         userActions.performActionWithPolling(queueNameList.get(0), UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(applicationsPageObject.queueExpandableHeader);
         LOGGER.info("Selected username from dropdown " + queuenameSelected);
-        executor.executeScript("arguments[0].scrollIntoView();", applicationsPageObject.jobsPageHeader);
+        executor.executeScript("arguments[0].scrollIntoView();", applicationsPageObject.globalSearchBox);
         int totalCount = Integer
                 .parseInt(applicationsPageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
         if (totalCount > 0) {

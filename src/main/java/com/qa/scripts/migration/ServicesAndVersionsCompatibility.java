@@ -28,6 +28,7 @@ public class ServicesAndVersionsCompatibility {
     private ServicesAndVersionsCompatibilityPageObject servicesAndVersionsCompatibilityPageObject;
     private SubTopPanelModulePageObject subTopPanelModulePageObject;
     private UserActions actions;
+    private TopPanelPageObject topPanelPageObject;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -40,20 +41,19 @@ public class ServicesAndVersionsCompatibility {
         servicesAndVersionsCompatibilityPageObject = new ServicesAndVersionsCompatibilityPageObject(driver);
         subTopPanelModulePageObject = new SubTopPanelModulePageObject(driver);
         actions = new UserActions(driver);
+        topPanelPageObject = new TopPanelPageObject(driver);
     }
 
     public void setupServicesAndVersionsCompatibilityPage() {
-        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-        waitExecuter.waitUntilElementPresent(topPanelPageObject.migrationTab);
-        waitExecuter.waitUntilPageFullyLoaded();
+
         waitExecuter.waitUntilElementClickable(topPanelPageObject.migrationTab);
-        waitExecuter.waitUntilPageFullyLoaded();
-        MouseActions.clickOnElement(driver, topPanelPageObject.migrationTab);
-        waitExecuter.waitUntilElementPresent(subTopPanelModulePageObject.servicesVersionMigrationTab);
+        actions.performActionWithPolling(topPanelPageObject.migrationTab, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(subTopPanelModulePageObject.servicesVersionMigrationTab);
     }
 
     public void clickOnServicesAndVersionMigrationTab() {
-        MouseActions.clickOnElement(driver, subTopPanelModulePageObject.servicesVersionMigrationTab);
+        actions.performActionWithPolling(subTopPanelModulePageObject.servicesVersionMigrationTab, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(servicesAndVersionsCompatibilityPageObject.runBtn);
     }
 
     public void closeMessageBanner() {
@@ -61,6 +61,16 @@ public class ServicesAndVersionsCompatibility {
     }
 
     public void clickOnRunButton() {
+        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.runBtn);
+        String runBtnText = servicesAndVersionsCompatibilityPageObject.runBtn.getText();
+        if(runBtnText.equals("Running..")){
+            try{
+                waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.runBtn,
+                        "Run");
+            }catch (TimeoutException te) {
+                throw new AssertionError("Services and Versions Compatibility Report is still running");
+            }
+        }
         MouseActions.clickOnElement(driver, servicesAndVersionsCompatibilityPageObject.runBtn);
     }
 
@@ -207,6 +217,21 @@ public class ServicesAndVersionsCompatibility {
         return arrVersion[0];
     }
 
+    public String getMinorVersion(String name) {
+        String[] arr = name.split(" ");
+        String[] arrVersion = arr[1].split("\\.");
+        return arrVersion[1];
+    }
+    public String getBuildVersion(String name) {
+        System.out.println("name: "+name);
+        String[] arr = name.split(" ");
+        String[] arrVersion = arr[1].split("\\.");
+        if(arrVersion.length > 3)
+            return arrVersion[2];
+
+        return null;
+    }
+
     //Check for Services and Versions are Compatible
     public void verifyServicesAndVersionsAreCompatible() {
         List<String> hdpServicesList = getHDPServicesList();
@@ -224,13 +249,29 @@ public class ServicesAndVersionsCompatibility {
                 if (!e.getText().isEmpty()) {
                     String cloudClusterServiceName = e.getText().trim();
                     String majorVersionCloud = getMajorVersion(cloudClusterServiceName);
+                    String minorVersionCloud = getMinorVersion(cloudClusterServiceName);
+                    String buildVersionCloud = getBuildVersion(cloudClusterServiceName);
+
                     int majorVersionCloudNum = Integer.parseInt(majorVersionCloud);
+                    int minorVersionCloudNum = Integer.parseInt(minorVersionCloud);
+                    int buildVersionCloudNum =0;
+                    if(buildVersionCloud!=null)
+                        buildVersionCloudNum = Integer.parseInt(buildVersionCloud);
+
 
                     String testClusterServiceName = hdpServicesList.get(col);
                     String majorVersionHDP = getMajorVersion(testClusterServiceName);
-                    int majorVersionHDPNum = Integer.parseInt(majorVersionHDP);
+                    String minorVersionHDP = getMinorVersion(testClusterServiceName);
+                    String buildVersionHDP = getBuildVersion(testClusterServiceName);
 
-                    if (majorVersionCloudNum >= majorVersionHDPNum ) {
+                    int majorVersionHDPNum = Integer.parseInt(majorVersionHDP);
+                    int minorVersionHDPNum = Integer.parseInt(minorVersionHDP);
+                    int buildVersionHDPNum =0;
+                    if(buildVersionHDP!=null)
+                        buildVersionHDPNum = Integer.parseInt(buildVersionHDP);
+
+                    if (majorVersionCloudNum >= majorVersionHDPNum && minorVersionCloudNum >= minorVersionHDPNum
+                    && buildVersionCloudNum > buildVersionHDPNum) {
                         //Now check for green //risk-0
                         String classAttributeName = e.getAttribute("class");
                         logger.info("Element class attribute name: " + classAttributeName);
@@ -333,10 +374,12 @@ public class ServicesAndVersionsCompatibility {
      * Method to validate report, download, delete, view report from actions tab
      */
     public void verifyReportsArchived(ReportsArchiveScheduledPageObject reportPageObj, String name, String reportAction) {
+        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.archivesText);
         List<WebElement> reportNameList = reportPageObj.reportNames;
         List<WebElement> reportCntList = reportPageObj.reportCnt;
         Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed.");
 
+        waitExecuter.waitUntilPageFullyLoaded();
         for (int i = 0; i < reportNameList.size(); i++) {
             int reportCnt = Integer.parseInt(reportCntList.get(i).getText().trim());
             logger.info("ReportCnt is " + reportCnt);
@@ -351,6 +394,7 @@ public class ServicesAndVersionsCompatibility {
                         waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.archiveReportSVCHeader);
                         List<WebElement> reportTblRows = reportPageObj.tableRows;
                         Assert.assertFalse(reportTblRows.isEmpty(), "No reports archived.");
+                        MouseActions.clickOnElement(driver,servicesAndVersionsCompatibilityPageObject.archives);
                         break;
                     case "downloadReport":
                         MouseActions.clickOnElement(driver, reportCntList.get(i));
@@ -361,6 +405,7 @@ public class ServicesAndVersionsCompatibility {
                         waitExecuter.waitUntilPageFullyLoaded();
                         Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Downloaded successfully",
                                 " No downloaded successfully message received.");
+                        MouseActions.clickOnElement(driver,servicesAndVersionsCompatibilityPageObject.archives);
                         break;
                     case "deleteReport":
                         MouseActions.clickOnElement(driver, reportCntList.get(i));
@@ -368,13 +413,18 @@ public class ServicesAndVersionsCompatibility {
                         waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.archiveReportSVCHeader);
                         MouseActions.clickOnElement(driver, reportPageObj.deleteReportIcon);
                         waitExecuter.waitUntilPageFullyLoaded();
-                        Alert confirmationAlert = driver.switchTo().alert();
-                        String alertText = confirmationAlert.getText();
-                        logger.info("Alert text is " + alertText);
-                        confirmationAlert.accept();
+                        //Alert confirmationAlert = driver.switchTo().alert();
+                        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.deletePopText);
+                        String popText = servicesAndVersionsCompatibilityPageObject.deletePopText.getText();
+                        //String alertText = confirmationAlert.getText();
+                        logger.info("Alert text is " + popText);
+                        //confirmationAlert.accept();
+                        waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.deleteOkBtn);
+                        MouseActions.clickOnElement(driver,servicesAndVersionsCompatibilityPageObject.deleteOkBtn);
                         logger.info("Deleted report");
                         Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Removed successfully",
                                 " Report not removed");
+                        MouseActions.clickOnElement(driver,servicesAndVersionsCompatibilityPageObject.archives);
                         break;
                     case "viewReport":
                         MouseActions.clickOnElement(driver, reportCntList.get(i));
@@ -401,12 +451,13 @@ public class ServicesAndVersionsCompatibility {
                         Assert.assertTrue(searchDateReportNameList.size() > 0, "Expected search " +
                                 "result not populated data by date.");
                         logger.info("Search report by date: " + date);
+                        MouseActions.clickOnElement(driver,servicesAndVersionsCompatibilityPageObject.archives);
                         break;
                     case "searchReportByStatus":
                         MouseActions.clickOnElement(driver, reportCntList.get(i));
                         waitExecuter.waitUntilPageFullyLoaded();
                         waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.archiveReportSVCHeader);
-                        String status = "fail";
+                        String status = "success";
                         reportPageObj.reportSearchBox.sendKeys(status);
                         waitExecuter.waitUntilElementPresent(reportPageObj.sortingReportNameIcon);
                         List<WebElement> searchStatusReportNameList = reportPageObj.reportNames;
@@ -414,6 +465,7 @@ public class ServicesAndVersionsCompatibility {
                         Assert.assertTrue(searchStatusReportNameList.size() > 0, "Expected search " +
                                 "result not populated data by status .");
                         logger.info("Searched report for status as: " + status);
+                        MouseActions.clickOnElement(driver,servicesAndVersionsCompatibilityPageObject.archives);
                         break;
                     case "searchReportByName":
                         MouseActions.clickOnElement(driver, reportCntList.get(i));

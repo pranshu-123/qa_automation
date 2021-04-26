@@ -7,7 +7,6 @@ import com.qa.pagefactory.migration.WorkloadFitPageObject;
 import com.qa.scripts.migration.WorkloadFit;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -50,35 +49,39 @@ public class TC_WF_03 extends BaseClass {
         test.log(LogStatus.INFO, "Closed the confirmation box");
         LOGGER.info("Closed the confirmation box");
         fit.closeConfirmationMessageNotification();
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(2000);
 
         // Select last 7 days from report date range
         test.log(LogStatus.INFO, "Select last 7 days from date range.");
         LOGGER.info("Select last 7 days from date range.");
         fit.selectLast7Days();
+        waitExecuter.sleep(2000);
         // Select All Queue Types run in last 7 days
         test.log(LogStatus.INFO, "Select All Queue Types run in last 7 days.");
         LOGGER.info("Select All Queue Types run in last 7 days.");
         fit.selectAllCheckboxTypes(fitPageObject.AllTagOfQueuesTypes, fitPageObject.selectAllQueueTypes);
         // Click on Run button to open report page
         test.log(LogStatus.INFO, "Click on Run button to open report page");
+        fit.setStorage("1500", "1500");
         fit.clickRunForNewReport();
 
         try {
             waitExecuter.waitUntilTextToBeInWebElement(cdPageObject.confirmationMessageElement,
                     "Workload Fit report completed successfully");
             test.log(LogStatus.PASS, "Verified Workload Fit report is loaded properly.");
-
-            List<WebElement> appNamesInQueueTypes = fitPageObject.getQueuesTypeNames;
-            List<String> appNameList = new ArrayList<>();
-            for (WebElement appName : appNamesInQueueTypes) {
-                appNameList.add(appName.getText());
-            }
-            Assert.assertNotNull(appNameList, "There are no apps in Queue Type pie chart.");
-            test.log(LogStatus.PASS, "Verified that Queue Type pie chart contains all app type name.");
-        } catch (TimeoutException | NoSuchElementException te) {
-            throw new AssertionError("Workload Fit Report not completed successfully.");
+        } catch (TimeoutException te) {
+            waitExecuter.waitUntilTextToBeInWebElement(cdPageObject.confirmationMessageElement,
+                    "Workload Fit report completed successfully");
+            test.log(LogStatus.PASS, "Verified Workload Fit report is loaded properly.");
         }
+
+        List<WebElement> appNamesInQueueTypes = fitPageObject.getQueuesTypeNames;
+        List<String> appNameList = new ArrayList<>();
+        for (WebElement appName : appNamesInQueueTypes) {
+            appNameList.add(appName.getText());
+        }
+        Assert.assertNotNull(appNameList, "There are no apps in Queue Type pie chart.");
+        test.log(LogStatus.PASS, "Verified that Queue Type pie chart contains all app type name.");
 
     }
 }

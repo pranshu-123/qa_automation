@@ -39,8 +39,8 @@ public class TC_MP_SC_12 extends BaseClass {
         LOGGER.info("Clicked on Migration and accessing Services And Versions Compatibility page ");
         servicesAndVersionsCompatibility.clickOnServicesAndVersionMigrationTab();
         LOGGER.info("Clicked on Services And Versions Compatibility tab");
-        servicesAndVersionsCompatibility.closeMessageBanner();
-        LOGGER.info("Clicked on close banner");
+//        servicesAndVersionsCompatibility.closeMessageBanner();
+//        LOGGER.info("Clicked on close banner");
         servicesAndVersionsCompatibility.clickOnRunButton();
         LOGGER.info("Clicked on Run button");
         String cloudProductName = "Google Dataproc";
@@ -50,6 +50,8 @@ public class TC_MP_SC_12 extends BaseClass {
         List<String> expectedPlatforms = Arrays.asList(PageConstants.MigrationAndServices.Google_Dataproc);
 
         try {
+            waitExecuter.sleep(50000);
+            waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.runBtn, "Run");
             waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.confirmationMessageElement,
                     "Services and Versions Compatibility completed successfully.");
             servicesAndVersionsCompatibility.validateLatestReport();

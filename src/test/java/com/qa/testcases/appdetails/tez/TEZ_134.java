@@ -14,6 +14,7 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 @Marker.AppDetailsTez
 @Marker.All
@@ -39,19 +40,36 @@ public class TEZ_134 extends BaseClass {
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         tezDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
 
-
-        //Verify that the left pane has Tez check box and the apps number
-        test.log(LogStatus.INFO, "Verify that the left pane has Tez check box and the apps number");
-        logger.info("Select individual app and assert that table contain its data");
-
-        tezDetailsPage.clickOnlyLink("Tez");
+        test.log(LogStatus.INFO, "Navigate to jobs tab from header");
+        tezDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
+                applicationsPageObject, clusterId);
+        test.log(LogStatus.INFO, "Verify that the left pane has Hive check box and the apps number");
+        int appCount = tezDetailsPage.clickOnlyLink("Tez");
+        waitExecuter.sleep(2000);
+        int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
+                replaceAll("[^\\dA-Za-z ]", "").trim());
+        logger.info("AppCount is " + appCount + " total count is " + totalCount);
+        Assert.assertEquals(appCount, totalCount, "The Hive app count of tezllapp is not equal to " +
+                "the total count of heading.");
+        test.log(LogStatus.PASS, "The left pane has Hive check box and the app counts match to that " +
+                "displayed in the header");
+        tezApps.sortByReadApp.click();
+        waitExecuter.waitUntilPageFullyLoaded();
+        tezApps.sortUp.click();
+        waitExecuter.sleep(2000);
         applicationsPageObject.expandStatus.click();
-        int appCount = tezDetailsPage.clickOnlyLink("Success");
+        int statusCount = tezDetailsPage.clickOnlyLink("Success");
+        test.log(LogStatus.PASS, "Selected success Count is  " + statusCount + " as Status, In Applications page");
+        waitExecuter.waitUntilPageFullyLoaded();
         //Clicking on the Tez app must go to apps detail page
         if (appCount > 0) {
-            tezDetailsPage.verifyDagsComponent(tezApps, true, true, false);
-            test.log(LogStatus.SKIP, "Verified left pane in the app details page successfully");
+            tezApps.getTypeFromTable.click();
+            waitExecuter.waitUntilPageFullyLoaded();
+            tezDetailsPage.verifyDagsComponent(tezApps, true, false, false);
+            waitExecuter.sleep(2000);
+            test.log(LogStatus.PASS, "Verified left pane in the app details page successfully");
             //Close apps details page
             MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
             waitExecuter.sleep(3000);

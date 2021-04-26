@@ -105,7 +105,7 @@ public class FileReports {
     try {
       for (int row = 1; row <= tableRowList.size(); row++) {
         WebElement rowData = driver.findElement
-            (By.xpath("//table[@class='component-data-tables']/tbody/tr[" + row + "]/td[" + 2 + "]"));
+            (By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + row + "]/td[" + 2 + "]"));
         Assert.assertTrue(rowData.isDisplayed(), "No data under column: File " +
             " for " + fileType + " file type");
         int fileCnt = Integer.parseInt(rowData.getText().trim());

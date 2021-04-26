@@ -2,12 +2,14 @@ package com.qa.testcases.jobs.applications.details.hive;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.DatePickerPageObject;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -37,14 +39,13 @@ public class TC_HIVE_35 extends BaseClass {
         DatePicker datePicker = new DatePicker(driver);
         DatePickerPageObject datePickerPageObject = new DatePickerPageObject(driver);
         SparkAppsDetailsPage sparkApp = new SparkAppsDetailsPage(driver);
+        UserActions userActions = new UserActions(driver);
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         LOGGER.info("Navigate to jobs tab from header");
         waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.jobs);
-        waitExecuter.sleep(4000);
-        topPanelComponentPageObject.jobs.click();
-        waitExecuter.sleep(4000);
-        waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
+        userActions.performActionWithPolling(topPanelComponentPageObject.jobs, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         waitExecuter.waitUntilPageFullyLoaded();
         // Select 'Only' hive type and get its jobs count
         test.log(LogStatus.INFO, "Select 'Only' hive from app types and get its jobs count");

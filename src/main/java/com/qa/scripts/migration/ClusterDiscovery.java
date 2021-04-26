@@ -109,7 +109,8 @@ public class ClusterDiscovery {
         LOGGER.info("Navigate to jobs tab from header");
         waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.jobs);
         userAction.performActionWithPolling(topPanelComponentPageObject.jobs, UserAction.CLICK);
-        waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+        waitExecuter.sleep(1000);
         waitExecuter.waitUntilPageFullyLoaded();
     }
 
@@ -173,6 +174,7 @@ public class ClusterDiscovery {
         LOGGER.info("Hive apps -- " + MRapps);
         waitExecuter.sleep(2000);
         int sparkApps = sparkApp.clickOnlyLink("Spark");
+        waitExecuter.sleep(2000);
         LOGGER.info("Hive apps -- " + sparkApps);
         int totalJobs = hiveapp + MRapps + sparkApps;
         return totalJobs;

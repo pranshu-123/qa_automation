@@ -49,7 +49,6 @@ public class TC_HIVE_40_PART1 extends BaseClass {
         LOGGER.info("Navigate to jobs tab from header");
         waitExecuter.waitUntilElementClickable(topPanelComponentPageObject.jobs);
         userAction.performActionWithPolling(topPanelComponentPageObject.jobs, UserAction.CLICK);
-        waitExecuter.waitUntilElementPresent(applicationsPageObject.jobsPageHeader);
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         waitExecuter.waitUntilPageFullyLoaded();
         // Select last 30 days from date picker
@@ -126,7 +125,7 @@ public class TC_HIVE_40_PART1 extends BaseClass {
                         }
                     }
             }
-            executor.executeScript("arguments[0].scrollIntoView();", applicationsPageObject.jobsPageHeader);
+            executor.executeScript("arguments[0].scrollIntoView();", applicationsPageObject.globalSearchBox);
             waitExecuter.sleep(2000);
             int totalCount = Integer
                     .parseInt(applicationsPageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
@@ -146,7 +145,8 @@ public class TC_HIVE_40_PART1 extends BaseClass {
                 allApps.reset();
                 throw new SkipException("The clusterId does not have any application under it");
             }
-
+            executor.executeScript("arguments[0].scrollIntoView();", applicationsPageObject.userSearchBox);
+            waitExecuter.sleep(1000);
             waitExecuter.waitUntilElementClickable(applicationsPageObject.userSearchBox);
             userAction.performActionWithPolling(applicationsPageObject.userSearchBox, UserAction.CLICK);
             waitExecuter.waitUntilElementClickable(userList.get(0));

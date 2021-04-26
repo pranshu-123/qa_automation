@@ -49,7 +49,7 @@ public class InfluxDBClient {
      * @param data - Data to be written in influx
      */
     public void writeDataToInflux(Map<String, Object> data) {
-        influxDB.write(Point.measurement("test_execution1")
+        influxDB.write(Point.measurement("test_execution")
                 .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
                 .tag(InfluxMetricsConstants.UNRAVEL_BUILD, data.get(ConfigConstants.UnravelConfig.UNRAVEL_BUILD).toString())
                 .tag(InfluxMetricsConstants.UNRAVEL_VERSION, data.get(ConfigConstants.UnravelConfig.UNRAVEL_VERSION).toString())

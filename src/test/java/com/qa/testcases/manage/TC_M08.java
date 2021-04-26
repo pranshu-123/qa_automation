@@ -68,7 +68,7 @@ public class TC_M08 extends BaseClass {
         try{
             waitExecuter.waitUntilElementPresent(managePageObject.latestDiagnosticsContentHeader);
             waitExecuter.waitUntilTextToBeInWebElement(managePageObject.latestDiagnosticsContentHeader, "Diagnostics Log");
-            waitExecuter.sleep(6000);
+            waitExecuter.sleep(7000);
             test.log(LogStatus.INFO, "Verified Diagnostics Log is loaded properly.");
             waitExecuter.waitUntilElementPresent(managePageObject.latestDiagnosticsContentHeader);
             waitExecuter.waitUntilPageFullyLoaded();

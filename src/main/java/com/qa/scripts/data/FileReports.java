@@ -44,8 +44,8 @@ public class FileReports {
   }
 
   public void verifyClusterList(List<String> expectedClusterList) {
-    WebElement clusterDD = fileReportsPageObject.clusterDropDown;
-    MouseActions.clickOnElement(driver, clusterDD);
+    WebElement clusterID = fileReportsPageObject.clusterDropDown;
+    MouseActions.clickOnElement(driver, clusterID);
     waitExecuter.waitUntilPageFullyLoaded();
     List<WebElement> clusterList = fileReportsPageObject.clusterList;
     Assert.assertFalse(clusterList.isEmpty(), "ClusterList is empty");
@@ -105,7 +105,7 @@ public class FileReports {
     try {
       for (int row = 1; row <= tableRowList.size(); row++) {
         WebElement rowData = driver.findElement
-            (By.xpath("//table[@class='component-data-tables']/tbody/tr[" + row + "]/td[" + 2 + "]"));
+            (By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + row + "]/td[" + 2 + "]"));
         Assert.assertTrue(rowData.isDisplayed(), "No data under column: File " +
             " for " + fileType + " file type");
         int fileCnt = Integer.parseInt(rowData.getText().trim());

@@ -66,7 +66,8 @@ public class AutoActions {
 
     public boolean validateNewAutoActionPolicyPageDisplayed(){
         waitExecuter.sleep(1000);
-        waitExecuter.waitUntilUrlContains("autoaction/add");
+        waitExecuter.waitUntilUrlContains("/alerts/autoaction/add");
+        waitExecuter.sleep(1000);
         waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.newAutoActionPolicyHeader);
         if(newAutoActionPolicyPageObject.newAutoActionPolicyHeader.getText().equals("New Auto Action Policy")){
             return true;

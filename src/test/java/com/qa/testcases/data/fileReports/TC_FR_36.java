@@ -28,6 +28,7 @@ public class TC_FR_36 extends BaseClass {
     waitExecuter.waitUntilElementPresent(fileReportsPageObject.mediumFile);
     MouseActions.clickOnElement(driver, fileReportsPageObject.mediumFile);
     filereports.verifyFilePathSearchOption("MEDIUM", clusterId);
+    waitExecuter.waitUntilPageFullyLoaded();
     test.log(LogStatus.PASS, "Successfully validate the search a particular file path 'Medium' file report.");
   }
 }

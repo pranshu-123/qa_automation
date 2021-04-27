@@ -95,6 +95,12 @@ public class NewAutoActionPolicyPageObject {
     @FindBy(xpath = "//span[contains(@class, 'select2-dropdown')]/span[2]/ul/li")
     public List<WebElement> listOfMetric;
 
+    @FindBy(xpath="//input[contains(@class, 'input-sm')]")
+    public WebElement emailEle;
+
+    @FindBy(xpath="//a/span[text()='Add Email']")
+    public WebElement addEmailEleBtn;
+
     /**
      * @param driver The driver that will be used to look up the elements
      */

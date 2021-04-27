@@ -1,12 +1,15 @@
 package com.qa.scripts.alerts;
 
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.alerts.AutoActionsPageObject;
 import com.qa.pagefactory.alerts.NewAutoActionPolicyPageObject;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Mouse;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
@@ -138,6 +141,13 @@ public class AutoActions {
                 actions.click();
             }
         }
+    }
+
+    public void enterEmail(String email){
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.emailEle);
+        newAutoActionPolicyPageObject.emailEle.sendKeys("abc@abc.com");
+        waitExecuter.waitUntilElementClickable(newAutoActionPolicyPageObject.addEmailEleBtn);
+        MouseActions.clickOnElement(driver,newAutoActionPolicyPageObject.addEmailEleBtn);
     }
 
     public void selectMetric(String inputMetric){

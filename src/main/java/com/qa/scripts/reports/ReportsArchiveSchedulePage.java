@@ -846,12 +846,13 @@ public class ReportsArchiveSchedulePage {
           logger.info("Before cnt = " + beforeReportCnt + " After cnt = " + afterReportCnt);
           break;
         case "Cluster Discovery":
-        case "Tuning":
         case "Capacity Forecasting":
+        case "Tuning":
         case "Queue Analysis":
         case "Services and Versions Compatibility":
           MouseActions.clickOnElement(driver, newReportActionList.get(i));
           waitExecuter.sleep(2000);
+          List<WebElement> field = reportPageObj.newReportField;
           MouseActions.clickOnElement(driver, reportPageObj.reportCreationRunButton);
           waitExecuter.sleep(40000);
           status = reportStatusList.get(i).getText().trim();
@@ -882,8 +883,10 @@ public class ReportsArchiveSchedulePage {
     MouseActions.clickOnElement(driver, reportPageObj.everyMonthOption);
     waitExecuter.waitUntilPageFullyLoaded();
     MouseActions.clickOnElement(driver, reportPageObj.scheduleButton);
+    waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.waitUntilElementClickable(reportPageObj.scheduledPage);
     MouseActions.clickOnElement(driver, reportPageObj.scheduledPage);
+    waitExecuter.sleep(6000);
     waitExecuter.waitUntilElementClickable(reportPageObj.scheduleReportSearchBox);
     reportPageObj.scheduleReportSearchBox.sendKeys(scheduledReportName);
     waitExecuter.waitUntilPageFullyLoaded();

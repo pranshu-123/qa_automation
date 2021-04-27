@@ -846,13 +846,12 @@ public class ReportsArchiveSchedulePage {
           logger.info("Before cnt = " + beforeReportCnt + " After cnt = " + afterReportCnt);
           break;
         case "Cluster Discovery":
-        case "Capacity Forecasting":
         case "Tuning":
+        case "Capacity Forecasting":
         case "Queue Analysis":
         case "Services and Versions Compatibility":
           MouseActions.clickOnElement(driver, newReportActionList.get(i));
           waitExecuter.sleep(2000);
-          List<WebElement> field = reportPageObj.newReportField;
           MouseActions.clickOnElement(driver, reportPageObj.reportCreationRunButton);
           waitExecuter.sleep(40000);
           status = reportStatusList.get(i).getText().trim();
@@ -883,10 +882,8 @@ public class ReportsArchiveSchedulePage {
     MouseActions.clickOnElement(driver, reportPageObj.everyMonthOption);
     waitExecuter.waitUntilPageFullyLoaded();
     MouseActions.clickOnElement(driver, reportPageObj.scheduleButton);
-    waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.waitUntilElementClickable(reportPageObj.scheduledPage);
     MouseActions.clickOnElement(driver, reportPageObj.scheduledPage);
-    waitExecuter.sleep(6000);
     waitExecuter.waitUntilElementClickable(reportPageObj.scheduleReportSearchBox);
     reportPageObj.scheduleReportSearchBox.sendKeys(scheduledReportName);
     waitExecuter.waitUntilPageFullyLoaded();
@@ -932,14 +929,15 @@ public class ReportsArchiveSchedulePage {
         waitExecuter.waitUntilPageFullyLoaded();
 
         MouseActions.clickOnElement(driver, reportPageObj.deleteReportIcon);
-        Alert confirmationAlert = driver.switchTo().alert();
-        String alertText = confirmationAlert.getText();
-        logger.info("Alert text is " + alertText);
-        confirmationAlert.accept();
+        waitExecuter.waitUntilElementPresent(reportPageObj.deletePopText);
+        String popText = reportPageObj.deletePopText.getText();
+        logger.info("Alert text is " + popText);
+        waitExecuter.waitUntilElementPresent(reportPageObj.deleteOkBtn);
+        MouseActions.clickOnElement(driver,reportPageObj.deleteOkBtn);
         waitExecuter.sleep(3000);
         Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Removed successfully",
             " Report not removed");
-        MouseActions.clickOnElement(driver, reportPageObj.goBackLink);
+        MouseActions.clickOnElement(driver,reportPageObj.archives);
         waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.sleep(2000);
         int reportCntAfterDelete = Integer.parseInt(reportCntList.get(i).getText().trim());

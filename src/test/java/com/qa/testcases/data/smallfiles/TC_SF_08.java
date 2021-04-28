@@ -14,6 +14,7 @@ import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
@@ -68,8 +69,12 @@ public class TC_SF_08 extends BaseClass {
         LOGGER.info("Clicked on Modal Run Button");
         test.log(LogStatus.INFO, "Clicked on Modal Run Button");
 
-        String heading = smallfilesPageObject.verifyAbsoluteSize.getText();
-        test.log(LogStatus.PASS, "Verified the absolute size  poulated :"+heading);
+        waitExecuter.waitUntilElementClickable(smallfilesPageObject.verifyReport);
+        waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.verifyReport,
+                "Currently, the Small file Report report is being generated, so no other action can be performed at this time. Please wait for the running task to complete.");
+        waitExecuter.sleep(1000);
+        Assert.assertEquals(smallfilesPageObject.verifyReport.getText(), "Currently, the Small file Report report is being generated, so no other action can be performed at this time. Please wait for the running task to complete.",
+                " Currently, the Small file Report report is not being generated..");
 
         try {
             waitExecuter.waitUntilElementPresent(smallfilesPageObject.confirmationMessageElement);
@@ -78,6 +83,10 @@ public class TC_SF_08 extends BaseClass {
             waitExecuter.sleep(3000);
             test.log(LogStatus.PASS, "Verified smallfiles report is loaded properly.");
             LOGGER.info("Verified smallfiles report is loaded properly");
+            waitExecuter.waitUntilElementPresent(smallfilesPageObject.verifyAbsoluteSize);
+            String heading = smallfilesPageObject.verifyAbsoluteSize.getText();
+            waitExecuter.sleep(3000);
+            test.log(LogStatus.PASS, "Verified the absolute size  poulated :" + heading);
         } catch (TimeoutException te) {
             waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
                     "Small file Report completed successfully.");

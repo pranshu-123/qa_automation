@@ -50,8 +50,8 @@ public class TC_SF_49 extends BaseClass {
         smallfiles.clickOnadvancedOptions();
 
         smallfiles.navigateToAdvancedOptions(smallfilesPageObject, test, "50", "50");
-        smallfiles.clickOnModalRunButton();
-        test.log(LogStatus.INFO, "Clicked on Modal Run Button");
+        userActions.performActionWithPolling(smallfilesPageObject.modalRunButton, UserAction.CLICK);
+        MouseActions.clickOnElement(driver, smallfilesPageObject.closeButton);
         try {
             if (smallfilesPageObject.errorMessageElement.size() > 0) {
                 String selectedMessage = smallfilesPageObject.errorMessageElement.stream().findFirst()
@@ -63,7 +63,6 @@ public class TC_SF_49 extends BaseClass {
             } else {
                 String scheduleSuccessMsg = "Small file Report completed successfully.";
                 smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
-                MouseActions.clickOnElement(driver, smallfilesPageObject.closeButton);
             }
         } catch (TimeoutException te) {
             throw new AssertionError("Verified the Error Unsupported Values not been scheduled successfully.");

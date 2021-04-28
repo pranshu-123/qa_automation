@@ -67,6 +67,11 @@ public class TC_SF_07 extends BaseClass {
         LOGGER.info("Clicked on Modal Run Button");
         test.log(LogStatus.INFO, "Clicked on Modal Run Button");
 
+        waitExecuter.waitUntilElementClickable(smallfilesPageObject.verifyReport);
+        String reportRun = smallfilesPageObject.verifyReport.getText();
+        waitExecuter.sleep(1000);
+        test.log(LogStatus.PASS, "Verified the absolute size  poulated :"+reportRun);
+
         try {
             waitExecuter.waitUntilElementPresent(smallfilesPageObject.confirmationMessageElement);
             waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,

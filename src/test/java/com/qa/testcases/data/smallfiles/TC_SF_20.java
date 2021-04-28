@@ -11,6 +11,7 @@ import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
@@ -54,9 +55,12 @@ public class TC_SF_20 extends BaseClass {
         test.log(LogStatus.INFO, "Clicked on Modal Run Button");
 
         waitExecuter.waitUntilElementClickable(smallfilesPageObject.verifyReport);
-        String reportRun = smallfilesPageObject.verifyReport.getText();
-        waitExecuter.sleep(1000);
-        test.log(LogStatus.PASS, "Verified the absolute size  poulated :"+reportRun);
+        waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.verifyReport,
+                "Currently, the Small file Report report is being generated");
+        waitExecuter.sleep(2000);
+        Assert.assertEquals(smallfilesPageObject.verifyReport.getText(), "Currently, the Small file Report report is being generated, so no other action can be performed at this time. Please wait for the running task to complete",
+                " Currently, the Small file Report report is not being generated..");
+        waitExecuter.sleep(2000);
 
         try {
             waitExecuter.waitUntilElementPresent(smallfilesPageObject.confirmationMessageElement);

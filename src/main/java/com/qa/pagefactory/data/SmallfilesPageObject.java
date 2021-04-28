@@ -77,7 +77,7 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner bg-success icon-success')]")
     public WebElement headerMessageElement;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div/div[1]/div[2]/div/div[4]/div/div[1]/div/div[1]")
+    @FindBy(xpath = "//div[contains(text(),'Directories containing minimum')]")
     public WebElement verifyAbsoluteSize;
 
     @FindBy(xpath = "//h4[normalize-space()='Advanced Options']")

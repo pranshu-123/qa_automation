@@ -60,8 +60,7 @@ public class TC_RRA03 extends BaseClass {
     // Click on combination of daterange
     test.log(LogStatus.INFO, "Verify reports with status between last one hour");
     datePicker.selectLastOneHour();
-    waitExecuter.waitUntilPageFullyLoaded();
-    waitExecuter.sleep(2000);
+    waitExecuter.sleep(4000);
     reportsPage.validateReportNames(reportPageObj);
     reportsPage.validateReportStatus(reportPageObj);
     test.log(LogStatus.PASS, "Verified  reports with status between last one hour successfully");
@@ -84,9 +83,10 @@ public class TC_RRA03 extends BaseClass {
     waitExecuter.sleep(1000);
     datePicker.selectLastSixHour();
     waitExecuter.waitUntilPageFullyLoaded();
-    waitExecuter.sleep(2000);
+    waitExecuter.sleep(4000);
     reportsPage.validateReportNames(reportPageObj);
     reportsPage.validateReportStatus(reportPageObj);
+    waitExecuter.sleep(1000);
     test.log(LogStatus.PASS, "Verified  reports with status between last 6 hours successfully");
 
     test.log(LogStatus.INFO, "Verify reports with status between last 12 hours");

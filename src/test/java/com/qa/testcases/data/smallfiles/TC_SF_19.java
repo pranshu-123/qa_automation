@@ -53,8 +53,10 @@ public class TC_SF_19 extends BaseClass {
         logger.info("Clicked on Modal Run Button");
         test.log(LogStatus.INFO, "Clicked on Modal Run Button");
 
-        String heading = smallfilesPageObject.verifyAbsoluteSize.getText();
-        test.log(LogStatus.PASS, "Verified the absolute size  poulated :" + heading);
+        waitExecuter.waitUntilElementClickable(smallfilesPageObject.verifyReport);
+        String reportRun = smallfilesPageObject.verifyReport.getText();
+        waitExecuter.sleep(1000);
+        test.log(LogStatus.PASS, "Verified the absolute size  poulated :"+reportRun);
 
         try {
             waitExecuter.waitUntilElementPresent(smallfilesPageObject.confirmationMessageElement);
@@ -63,6 +65,10 @@ public class TC_SF_19 extends BaseClass {
             waitExecuter.sleep(3000);
             test.log(LogStatus.PASS, "Verified smallfiles report is loaded properly.");
             logger.info("Verified smallfiles report is loaded properly");
+            waitExecuter.waitUntilElementPresent(smallfilesPageObject.verifyAbsoluteSize);
+            String heading = smallfilesPageObject.verifyAbsoluteSize.getText();
+            waitExecuter.sleep(3000);
+            test.log(LogStatus.PASS, "Verified the absolute size  poulated :" + heading);
         } catch (TimeoutException te) {
             waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
                     "Small file Report completed successfully.");

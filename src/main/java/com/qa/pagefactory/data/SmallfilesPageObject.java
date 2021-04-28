@@ -61,6 +61,9 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//div[contains(text(),'Small file Report completed successfully.')]")
     public WebElement confirmationMessageElement;
 
+    @FindBy(xpath = "//div[@class='col-md-9']//div[@class='col-md-12']")
+    public WebElement verifyReport;
+
     @FindBy(xpath = "//span[@class='text-fatal']")
     public WebElement confirmationMessageMinFileSizeElement;
 

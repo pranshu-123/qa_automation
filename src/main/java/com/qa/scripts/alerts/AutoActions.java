@@ -135,7 +135,6 @@ public class AutoActions {
 
     public void selectActions(String inputAction){
         waitExecuter.sleep(2000);
-        //Assert.assertTrue(newAutoActionPolicyPageObject.listOfActions.isEmpty(), "No list of actions present.");
         List<WebElement> webElements = newAutoActionPolicyPageObject.listOfActions;
         for(WebElement actions : webElements){
             if(actions.getText().equals(inputAction)){
@@ -144,9 +143,24 @@ public class AutoActions {
         }
     }
 
-    public void enterEmail(String email){
+    public void enterEmail(String inputAction, String email){
+        MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.actionButton);
+        waitExecuter.sleep(2000);
+        selectActions(inputAction);
         waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.emailEle);
-        newAutoActionPolicyPageObject.emailEle.sendKeys("abc@abc.com");
+        newAutoActionPolicyPageObject.emailEle.sendKeys(email.toLowerCase());
+        waitExecuter.waitUntilElementClickable(newAutoActionPolicyPageObject.addEmailEleBtn);
+        MouseActions.clickOnElement(driver,newAutoActionPolicyPageObject.addEmailEleBtn);
+    }
+
+    public void enterEmail(String inputAction, String email1, String email2){
+        MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.actionButton);
+        waitExecuter.sleep(2000);
+        selectActions(inputAction);
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.emailEle);
+        newAutoActionPolicyPageObject.emailEle.sendKeys(email1.toLowerCase());
+        waitExecuter.waitUntilElementClickable(newAutoActionPolicyPageObject.addEmailEleBtn);
+        newAutoActionPolicyPageObject.emailEle.sendKeys(email2.toLowerCase());
         waitExecuter.waitUntilElementClickable(newAutoActionPolicyPageObject.addEmailEleBtn);
         MouseActions.clickOnElement(driver,newAutoActionPolicyPageObject.addEmailEleBtn);
     }

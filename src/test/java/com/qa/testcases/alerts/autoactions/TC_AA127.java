@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
-public class TC_AA126 extends BaseClass {
+public class TC_AA127 extends BaseClass {
 
     private static final Logger logger = Logger.getLogger(TC_AA126.class.getName());
 
@@ -38,13 +38,14 @@ public class TC_AA126 extends BaseClass {
         //Close default Refine Scope cluster window on New auto action policy
         aa.closeDefaultRefineScope();
 
-        String policyName = "testPolicyEmailAction";
+        String policyName = "testPolicyOneOrMoreEmailRecipientAction";
         aa.enterNewAutoActionPolicyDetails(policyName, "User", "3");
         test.log(LogStatus.INFO, "Fill new auto action policy details, without value");
 
         String inputAction = "Email";
-        String emailId = "abc@abc.com";
-        aa.enterEmail(inputAction,emailId);
+        String emailId1 = "abc1@abc.com";
+        String emailId2 = "abc2@abc.com";
+        aa.enterEmail(inputAction,emailId1,emailId2);
 
         aa.clickOnSaveBtn();
         test.log(LogStatus.INFO,"Clicked on save button");

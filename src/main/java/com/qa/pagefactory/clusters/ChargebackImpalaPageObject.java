@@ -96,10 +96,10 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "//li[contains(text(),'project')]")
     public WebElement groupByProjectOption;
 
-    @FindBy(xpath = "//li[contains(text(),'realUser')]")
+    @FindBy(xpath = "//li[contains(text(),'RealUser')]")
     public WebElement groupByrealUserOption;
 
-    @FindBy(xpath = "//li[contains(text(),'dbs')]")
+    @FindBy(xpath = "//li[contains(text(),'DB')]")
     public WebElement groupByDBSOption;
 
     @FindBy(xpath = "//li[contains(text(),'inputTables')]")

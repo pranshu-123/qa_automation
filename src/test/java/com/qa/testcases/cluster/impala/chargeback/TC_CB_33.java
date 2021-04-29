@@ -33,9 +33,6 @@ public class TC_CB_33 extends BaseClass {
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
-
-        HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
         // Click on datepicker button
         chargebackImpala = new ChargeBackImpala(driver);
         picker = new DatePicker(driver);
@@ -44,6 +41,8 @@ public class TC_CB_33 extends BaseClass {
         // Click on Chargeback tab
         waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.clusterChargeBackTab);
         JavaScriptExecuter.clickOnElement(driver, chargebackImpalaPageObject.clusterChargeBackTab);
+
+
         // Click on chargeback dropdown
         waitExecuter.sleep(1000);
         JavaScriptExecuter.clickOnElement(driver, chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
@@ -51,7 +50,11 @@ public class TC_CB_33 extends BaseClass {
         waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownImpalaOption);
         waitExecuter.sleep(1000);
         chargebackImpalaPageObject.chargeBackDropdownImpalaOption.click();
+
+        HomePage homePage = new HomePage(driver);
+        homePage.selectMultiClusterId(clusterId);
         waitExecuter.sleep(1000);
+      
         picker.clickOnDatePicker();
         waitExecuter.sleep(1000);
         picker.selectLast30Days();

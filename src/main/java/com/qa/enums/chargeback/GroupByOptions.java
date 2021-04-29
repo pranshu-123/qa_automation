@@ -6,10 +6,10 @@ public enum GroupByOptions {
     QUEUE("queue"),
     DEPT("dept"),
     PROJECT("project"),
-    DBS("dbs"),
+    DBS("DB"),
     INPUT_TABLES("input_tables"),
     PRIORITY("priority"),
-    REALUSER("realUser"),
+    REALUSER("RealUser"),
     TEAM("team");
 
     public String value;

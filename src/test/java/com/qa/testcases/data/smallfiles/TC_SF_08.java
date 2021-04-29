@@ -72,7 +72,7 @@ public class TC_SF_08 extends BaseClass {
         waitExecuter.waitUntilElementClickable(smallfilesPageObject.verifyReport);
         waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.verifyReport,
                 "Currently, the Small file Report report is being generated, so no other action can be performed at this time. Please wait for the running task to complete.");
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(2000);
         Assert.assertEquals(smallfilesPageObject.verifyReport.getText(), "Currently, the Small file Report report is being generated, so no other action can be performed at this time. Please wait for the running task to complete.",
                 " Currently, the Small file Report report is not being generated..");
 

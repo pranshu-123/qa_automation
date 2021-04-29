@@ -47,6 +47,7 @@ public class IM_TC_02 extends BaseClass {
         AppDetailsPage appDetailsPage = new AppDetailsPage(driver);
         try {
             appDetailsPage.selectOnlyApplication(AppDetailsApplicationType.IMPALA);
+            appDetailsPage.selectSuccessfulApplication();
             actions.performActionWithPolling(appDetailsPage.getAppsDetailsAsPage().get(1), UserAction.CLICK);
             Assert.assertNotNull(appDetailsPage.getApplicationType(), "App type is null");
             Assert.assertNotEquals(appDetailsPage.getApplicationType(),

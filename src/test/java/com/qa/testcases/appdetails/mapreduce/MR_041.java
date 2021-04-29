@@ -9,6 +9,7 @@ import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.MrAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,7 @@ public class MR_041 extends BaseClass {
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         MrAppsDetailsPageObject mrApps = new MrAppsDetailsPageObject(driver);
         MrAppsDetailsPage mrDetailsPage = new MrAppsDetailsPage(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         DatePicker datePicker = new DatePicker(driver);
         AllApps allApps = new AllApps(driver);
 
@@ -43,6 +45,7 @@ public class MR_041 extends BaseClass {
 
         test.log(LogStatus.INFO, "Verify that the left pane has map reduce check box and the apps number");
         int appCount = mrDetailsPage.clickOnlyLink("Map Reduce");
+        waitExecuter.sleep(3000);
 
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());

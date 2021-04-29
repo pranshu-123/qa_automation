@@ -49,11 +49,18 @@ public class MR_048 extends BaseClass {
         waitExecuter.sleep(1000);
         applicationsPageObject.expandStatus.click();
         int appCount = mrDetailsPage.clickOnlyLink("Success");
+        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.sleep(2000);
+        mrApps.sortByDurationApp.click();
+        waitExecuter.waitUntilPageFullyLoaded();
+        mrApps.sortUp.click();
+        waitExecuter.sleep(2000);
         //Verify app details page
         if (appCount > 0) {
             String headerAppId = mrDetailsPage.verifyAppId(mrApps, applicationsPageObject);
             test.log(LogStatus.PASS, "Map Reduce Application Id is displayed in the Header: " + headerAppId);
             mrDetailsPage.verifyRightPaneKpis(mrApps);
+            waitExecuter.waitUntilPageFullyLoaded();
             test.log(LogStatus.PASS, "All the KPIs are listed and the data is populated");
         //Close apps details page
         MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);

@@ -42,8 +42,10 @@ public class MR_011 extends BaseClass {
                 applicationsPageObject, clusterId);
 
         test.log(LogStatus.INFO, "Verify that the left pane has map reduce check box and the apps number");
-        int appCount = mrDetailsPage.clickOnlyLink("Map Reduce");
 
+        mrDetailsPage.clickOnlyLink("Map Reduce");
+        applicationsPageObject.expandStatus.click();
+        int appCount = mrDetailsPage.clickOnlyLink("Success");
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
@@ -52,15 +54,14 @@ public class MR_011 extends BaseClass {
         test.log(LogStatus.PASS, "The left pane has Map Reduce check box and the app counts match to that " +
                 "displayed in the header");
 
-        /*
-         * Validate the start time types are --
-         */
         if (appCount > 0) {
-            String Read = mrDetailsPage.verifyRead(mrApps);
-            test.log(LogStatus.PASS, "Read IO is displayed in the Map Reduce Table: " + Read);
+            String readIO = mrApps.getRead.getText();
+            mrDetailsPage.checkAppsJobTableData(readIO, "Read");
+            test.log(LogStatus.PASS, "Read IO is displayed in the Map Reduce Table: " + readIO);
 
-            String Write = mrDetailsPage.verifyWrite(mrApps);
-            test.log(LogStatus.PASS, "Write IO is displayed in the Map Reduce Table: " + Write);
+            String writeIO = mrApps.getWrite.getText();
+            mrDetailsPage.checkAppsJobTableData(writeIO, "Write");
+            test.log(LogStatus.PASS, "Write IO is displayed in the Map Reduce Table: " + writeIO);
 
         } else {
             test.log(LogStatus.SKIP, "No Tez Application present");

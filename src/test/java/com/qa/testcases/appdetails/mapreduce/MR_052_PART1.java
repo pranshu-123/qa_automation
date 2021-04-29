@@ -12,6 +12,7 @@ import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
@@ -23,11 +24,11 @@ public class MR_052_PART1 extends BaseClass {
     java.util.logging.Logger logger = Logger.getLogger(MR_052_PART1.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_052_PART1_verifysuccessStatus(String clusterId) {
-        test = extent.startTest("MR_052_PART1_verifysuccessStatus: " + clusterId,
+    public void MR_052_PART1_verifySuccessStatus(String clusterId) {
+        test = extent.startTest("MR_052_PART1_verifySuccessStatus: " + clusterId,
                 "Verify there are 2 tabs , Task Attempt (Map), Task Attempt(Reduce)");
         test.assignCategory(" Apps Details-Mr");
-        Log.startTestCase("MR_052_PART1_verifysuccessStatus");
+        Log.startTestCase("MR_052_PART1_verifySuccessStatus");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -43,6 +44,7 @@ public class MR_052_PART1 extends BaseClass {
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         mrDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
 
         test.log(LogStatus.INFO, "Verify that the left pane has map reduce check box and the apps number");
         int totalMapReduceAppCnt = mrDetailsPage.clickOnlyLink("Map Reduce");
@@ -66,7 +68,8 @@ public class MR_052_PART1 extends BaseClass {
                 waitExecuter.waitUntilPageFullyLoaded();
                 MouseActions.clickOnElement(driver, mrApps.resourcesTab);
                 waitExecuter.waitUntilPageFullyLoaded();
-                mrDetailsPage.validateMapandReducTab(mrApps,"Task Attempts",test);
+                mrDetailsPage.validateMapandReduceTab(mrApps,"Task Attempts",test);
+                waitExecuter.waitUntilPageFullyLoaded();
 
                 //Close apps details page
                 MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);

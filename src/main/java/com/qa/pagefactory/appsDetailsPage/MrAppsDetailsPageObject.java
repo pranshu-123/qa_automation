@@ -57,7 +57,7 @@ public class MrAppsDetailsPageObject {
     public WebElement resourcesTab;
 
     @FindBy(xpath = "//a[normalize-space()='Configuratio...']")
-    public WebElement ConfigurationTab;
+    public WebElement configurationTab;
 
     @FindBy(xpath = "//*[@id='taskattemptmap']//*[div and @class='footer']/div/*/span[1]")
     public List<WebElement> taskAttFooterName;
@@ -79,10 +79,10 @@ public class MrAppsDetailsPageObject {
 
     @FindBy(xpath = "//div[@class='component-dashboard']//div[contains(@class,'col-md-6')]" +
             "//div[@class='content']//*[name()='g' and @class='highcharts-series-group']")
-    public List<WebElement> kafkaMetricsGraph;
+    public List<WebElement> containerMetricsGraph;
 
     @FindBy(xpath = "//div[@class='component-dashboard']//div[contains(@class,'col-md-6')]")
-    public List<WebElement> kafkaMetrics;
+    public List<WebElement> containerMetrics;
 
     @FindBy(xpath = "//*[@id='taskattemptreduce']//*[div and @class='footer']/div/*/span[1]")
     public List<WebElement> taskAttReduceFooterName;
@@ -179,7 +179,7 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[2]/div/div[2]/div[3]/div/div/section/div[1]/span[1]")
     public List<WebElement> analysisCollapse;
 
-    @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[2]/div/div[2]/div[3]/div/div/section/div[1]/span[2]")
+    @FindBy(xpath = "//section[contains(@class,'component-insights-feed')]/div/span[2]")
     public List<WebElement> insightsType;
 
     @FindBy(xpath = "//h3[contains(text(),'No Data Available')]")
@@ -188,7 +188,7 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//span[contains(@class,'failed badge')]")
     public WebElement mrSummaryApp;
 
-    @FindBy(className  = "nprogress-busy")
+    @FindBy(className = "nprogress-busy")
     public WebElement loader;
 
     @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[2]")
@@ -207,6 +207,9 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id='io_metrics']//tbody/tr/td[1]")
     public List<WebElement> tagKey;
 
+    @FindBy(xpath = "//table[@class='component-data-tables']/tbody/tr[\" + row + \"]/td[\" + 2 + \"]")
+    public WebElement getDataTable;
+
     @FindBy(xpath = "//*[@id='io_metrics']//tbody/tr/td[2]")
     public List<WebElement> tagValue;
 
@@ -219,6 +222,23 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id='io_metrics']//tbody/tr/td[3]")
     public List<WebElement> metricsDescription;
 
+    @FindBy(xpath = "//body//div//th[7]")
+    public WebElement fileColumn;
+
+    @FindBy(xpath = "//table[@class='row-hover component-data-tables margin-bottom']/tbody/tr")
+    public List<WebElement> fileTableRows;
+
+    @FindBy(xpath = "//div[@class='col-md-10']//p[1]")
+    public WebElement pagination;
+
+    @FindBy(xpath = "//*[name()='svg' and @data-icon='caret-right']")
+    public WebElement rightCaretReportCnt;
+
+    @FindBy(xpath = "//*[name()='svg' and @data-icon='backward']")
+    public WebElement backwardCaretReportCnt;
+
+    @FindBy(xpath = "//table[@class='component-data-tables']/tbody/tr[1]/td/p")
+    public WebElement noDataText;
 
     @FindBy(xpath = "//*[@id='appTagsTable']//tr/td[2]")
     public List<WebElement> tagDescription;
@@ -365,7 +385,6 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//div[@class='container-fluid']//div[contains(@class,'dashboard-module')]" +
             "//div[@class='content']//*[name()='g' and @class='highcharts-series-group']")
     public List<WebElement> containerGraph;
-
 
 
     @FindBy(xpath = "//*[@class='select2-results']//ul/li/ul/li")

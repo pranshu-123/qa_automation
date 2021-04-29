@@ -54,7 +54,7 @@ public class MR_042 extends BaseClass {
 
         // Select 'Only' hive type and get its jobs count
         test.log(LogStatus.INFO, "Select 'Only' map reduce from app types and get its jobs count");
-        LOGGER.info("Select 'Only' hive from app types and get its jobs count");
+        LOGGER.info("Select 'Only' map from app types and get its jobs count");
         mrDetailsPage.clickOnlyLink("Map Reduce");
 
         // Expand status filter on left pane
@@ -85,8 +85,7 @@ public class MR_042 extends BaseClass {
         waitExecuter.sleep(2000);
         LOGGER.info("List of status type actual - " + listOfStatusTypes);
         LOGGER.info("List of status type expected - " + existingStatusTypes);
-        Assert.assertTrue(listOfStatusTypes.equals(existingStatusTypes),
-                "Status types displayed does not match the expected status list");
+        Assert.assertEquals(existingStatusTypes, listOfStatusTypes, "Status types displayed does not match the expected status list");
         test.log(LogStatus.PASS, "Status types displayed match the expected status list");
         // Select single app and assert that table contain its data.
         test.log(LogStatus.INFO, "Select single app and assert that table contain its data.");

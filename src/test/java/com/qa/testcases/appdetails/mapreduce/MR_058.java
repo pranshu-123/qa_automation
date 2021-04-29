@@ -48,19 +48,13 @@ public class MR_058 extends BaseClass {
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         mrDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
 
         test.log(LogStatus.INFO, "Verify that the left pane has map reduce check box and the apps number");
         int totalMapReduceAppCnt=mrDetailsPage.clickOnlyLink("Map Reduce");
         Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
                 .replaceAll("[^\\dA-Za-z ]", "").trim());
         if (totalMapReduceAppCnt > 0) {
-            mrApps.sortByReadApp.click();
-            waitExecuter.waitUntilPageFullyLoaded();
-            mrApps.sortUp.click();
-            waitExecuter.sleep(2000);
-            applicationsPageObject.sortStatus.click();
-            waitExecuter.sleep(2000);
-            Assert.assertTrue(applicationsPageObject.sortUp.isDisplayed(), "Sort up is not working");
             applicationsPageObject.expandStatus.click();
             int appCount = mrDetailsPage.clickOnlyLink("Success");
             //Clicking on the Map reduce app must go to apps detail page and verify Data Tabs must be available on UI
@@ -73,10 +67,12 @@ public class MR_058 extends BaseClass {
                 mrApps.getTypeFromTable.click();
                 waitExecuter.waitUntilPageFullyLoaded();
                 MouseActions.clickOnElement(driver, mrApps.resourcesTab);
-                waitExecuter.waitUntilPageFullyLoaded();
+
+                waitExecuter.sleep(2000);
                 mrDetailsPage.validateResourcesTab(mrApps,"Metrics",test);
                 test.log(LogStatus.PASS, "Verify the Metrics Graphs are present in OS Memory");
                 //Close apps details page
+                waitExecuter.waitUntilElementPresent(mrApps.closeAppsPageTab);
                 MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);
 
             } else {

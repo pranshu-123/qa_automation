@@ -179,7 +179,7 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[2]/div/div[2]/div[3]/div/div/section/div[1]/span[1]")
     public List<WebElement> analysisCollapse;
 
-    @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[2]/div/div[2]/div[3]/div/div/section/div[1]/span[2]")
+    @FindBy(xpath = "//section[contains(@class,'component-insights-feed')]/div/span[2]")
     public List<WebElement> insightsType;
 
     @FindBy(xpath = "//h3[contains(text(),'No Data Available')]")

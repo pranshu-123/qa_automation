@@ -1082,14 +1082,15 @@ public class MrAppsDetailsPage {
             String insights = insightType.get(j).getText();
             LOGGER.info("Insight generated are " + insights);
             if (insights.equals("EFFICIENCY")) {
-                String efficiencyColorCode = mrApps.colorCode.getAttribute("class");
-                String[] arrColor = efficiencyColorCode.split("#");
-                assertEquals(arrColor[1], "d54451", "Color code for efficiency do not match ");
+                String efficiencyColorCode = insightType.get(j).getAttribute("class");
+                String[] arrColor = efficiencyColorCode.split(" ");
+                assertEquals(arrColor[1].toLowerCase(), "fatal", "Color code for efficiency do not match ");
                 test.log(LogStatus.PASS, "No Map Reduce Application present" + efficiencyColorCode);
-            } else {
-                String recommendationcolorCode = mrApps.colorCode.getAttribute("class");
-                String[] recColor = recommendationcolorCode.split("#");
-                assertEquals(recColor[1], "ffb900", "Color code for recommendation do not match");
+            } else if (insights.equals("RECOMMENDATION"))
+            {
+                String recommendationcolorCode = insightType.get(j).getAttribute("class");
+                String[] recColor = recommendationcolorCode.split(" ");
+                assertEquals(recColor[1].toLowerCase(), "warning", "Color code for recommendation do not match");
                 test.log(LogStatus.PASS, "No Map Reduce Application present" + recommendationcolorCode);
             }
         }

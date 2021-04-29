@@ -60,9 +60,9 @@ public class TC_SF_40 extends BaseClass {
             logger.info("Clicked on Modal Shedule Button");
             test.log(LogStatus.INFO, "Clicked on Modal Shedule Button");
             waitExecuter.waitUntilPageFullyLoaded();
-            String scheduleSuccessMsg = "The report has been scheduled successfully.";
+            /*String scheduleSuccessMsg = "The report has been scheduled successfully.";
             smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
-            waitExecuter.sleep(2000);
+            waitExecuter.sleep(2000);*/
 
         } catch (TimeoutException | NoSuchElementException | VerifyError te) {
             throw new AssertionError("Verified the special characters not been scheduled successfully.");

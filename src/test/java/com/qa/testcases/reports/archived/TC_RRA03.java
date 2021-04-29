@@ -114,8 +114,8 @@ public class TC_RRA03 extends BaseClass {
     test.log(LogStatus.INFO, "Verify reports with status between yesterday");
     datePicker.clickOnDatePicker();
     waitExecuter.waitUntilPageFullyLoaded();
-    waitExecuter.sleep(1000);
     datePicker.selectYesterday();
+    waitExecuter.sleep(1000);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
     reportsPage.validateReportNames(reportPageObj);

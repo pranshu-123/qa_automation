@@ -157,13 +157,17 @@ public class Smallfiles {
                         waitExecuter.waitUntilPageFullyLoaded();
                         waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
                         MouseActions.clickOnElement(driver, smallfilesPageObject.deleteReportIcon);
-                        Alert confirmationAlert = driver.switchTo().alert();
-                        String alertText = confirmationAlert.getText();
-                        logger.info("Alert text is " + alertText);
-                        confirmationAlert.accept();
+                        waitExecuter.waitUntilElementPresent(smallfilesPageObject.deletePopText);
+                        String popText = smallfilesPageObject.deletePopText.getText();
+                        //String alertText = confirmationAlert.getText();
+                        logger.info("Alert text is " + popText);
+                        //confirmationAlert.accept();
+                        waitExecuter.waitUntilElementPresent(smallfilesPageObject.deleteOkBtn);
+                        MouseActions.clickOnElement(driver,smallfilesPageObject.deleteOkBtn);
                         logger.info("Deleted report");
                         Assert.assertEquals(smallfilesPageObject.successfulMsgBanner.getText(), "Removed successfully",
                                 " Report not removed");
+                        MouseActions.clickOnElement(driver,smallfilesPageObject.archives);
                         break;
                     case "viewReport":
                         MouseActions.clickOnElement(driver, reportCntList.get(i));

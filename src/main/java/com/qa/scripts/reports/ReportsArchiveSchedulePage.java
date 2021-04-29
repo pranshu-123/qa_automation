@@ -931,14 +931,15 @@ public class ReportsArchiveSchedulePage {
         waitExecuter.waitUntilPageFullyLoaded();
 
         MouseActions.clickOnElement(driver, reportPageObj.deleteReportIcon);
-        Alert confirmationAlert = driver.switchTo().alert();
-        String alertText = confirmationAlert.getText();
-        logger.info("Alert text is " + alertText);
-        confirmationAlert.accept();
+        waitExecuter.waitUntilElementPresent(reportPageObj.deletePopText);
+        String popText = reportPageObj.deletePopText.getText();
+        logger.info("Alert text is " + popText);
+        waitExecuter.waitUntilElementPresent(reportPageObj.deleteOkBtn);
+        MouseActions.clickOnElement(driver,reportPageObj.deleteOkBtn);
         waitExecuter.sleep(3000);
         Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Removed successfully",
             " Report not removed");
-        MouseActions.clickOnElement(driver, reportPageObj.goBackLink);
+        MouseActions.clickOnElement(driver,reportPageObj.archives);
         waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.sleep(2000);
         int reportCntAfterDelete = Integer.parseInt(reportCntList.get(i).getText().trim());

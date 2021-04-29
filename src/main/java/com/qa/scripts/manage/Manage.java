@@ -187,9 +187,9 @@ public class Manage {
         waitExecuter.sleep(3000);
     }
     public boolean validateRunDiagnosticsHeader(){
-        waitExecuter.waitUntilElementPresent(managePageObject.loadLatestDiagnosticsBtn);
+        waitExecuter.waitUntilElementPresent(managePageObject.runDiagnosticsHeader);
         logger.info("RunDiagnostics Headers found: "+managePageObject.runDiagnosticsHeader.getText());
-        return managePageObject.runDiagnosticsHeader.getText().equals("Diagnostic");
+        return managePageObject.runDiagnosticsHeader.getText().equals("Run Diagnostics");
     }
 
     public void clickOnLoadLatestDiagnostics(){
@@ -220,7 +220,9 @@ public class Manage {
         logger.info("Latest Diagnostics Content Header found: "+runDiagnoHeader);
 
         if(runDiagnoHeader.equals("Diagnostics Log")){
+            waitExecuter.waitUntilElementPresent(managePageObject.latestDiagnosticsContentHeaderTimeStamp);
             String runDiagnoHeaderTS = managePageObject.latestDiagnosticsContentHeaderTimeStamp.getText();
+            waitExecuter.sleep(2000);
             logger.info("Latest Diagnostics Content Header TimeStamp found: "+runDiagnoHeaderTS);
             return true;
         }
@@ -239,7 +241,7 @@ public class Manage {
         UserActions actions = new UserActions(driver);
         waitExecuter.waitUntilElementClickable(managePageObject.monitoringTab);
         actions.performActionWithPolling(managePageObject.monitoringTab,UserAction.CLICK);
-        waitExecuter.waitUntilElementPresent(managePageObject.monitoringHeader);
+        waitExecuter.waitUntilPageFullyLoaded();
     }
 
     public boolean validateMonitoringHeader(){

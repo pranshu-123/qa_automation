@@ -26,7 +26,9 @@ public class TC_FR_30 extends BaseClass {
     filereports.navidateTofileReportsTab();
     waitExecuter.waitUntilElementPresent(fileReportsPageObject.mediumFile);
     MouseActions.clickOnElement(driver, fileReportsPageObject.mediumFile);
+    waitExecuter.waitUntilPageFullyLoaded();
     filereports.verifyFileSortOption("MEDIUM", clusterId);
+    waitExecuter.waitUntilPageFullyLoaded();
     test.log(LogStatus.PASS, "Successfully validate the Medium file reports.");
   }
 }

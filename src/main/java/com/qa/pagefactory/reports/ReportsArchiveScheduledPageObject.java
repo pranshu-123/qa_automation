@@ -78,7 +78,7 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//table/thead/tr/th[3]/a")
   public WebElement sortingStatusIcon;
 
-  @FindBy(xpath = "(//*[@class='icon-add is-enabled'])")
+  @FindBy(xpath = "(//*[@class='pointer icon-add is-enabled undefined'])")
   public List<WebElement> newReportIcon;
 
   @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
@@ -106,10 +106,19 @@ public class ReportsArchiveScheduledPageObject {
   public WebElement editReportIcon;
 
   //@FindBy(xpath = "(//*[@class='icon-delete is-enabled'])[1]")
-  @FindBy(xpath="//span[contains(@class,'icon-delete')]")
+  @FindBy(xpath="(//*[@class='pointer icon-delete is-enabled undefined'])")
   public WebElement deleteReportIcon;
 
-  @FindBy(xpath = "(//*[@class='icon-calendar is-enabled'])")
+  @FindBy(xpath="//div[contains(@class,'popover')]/H3")
+  public WebElement deletePopText;
+
+  @FindBy(xpath="(//div[@id='breadcrumb']/span/span)[1]")
+  public WebElement archives;
+
+  @FindBy(xpath="//div[contains(@class,'popover')]/div/span[contains(@class,'pending')]")
+  public WebElement deleteOkBtn;
+
+  @FindBy(xpath = "(//*[@class='pointer icon-calendar is-enabled undefined'])")
   public List<WebElement> scheduleReportIcon;
 
   @FindBy(xpath = "//*[@id='app']//div[3]/p[1]/input")
@@ -192,6 +201,9 @@ public class ReportsArchiveScheduledPageObject {
 
   @FindBy(xpath = "//div[contains(@class,'component-section-header')]/span/a")
   public WebElement scheduleButton;
+
+  @FindBy(xpath = "//span[contains(@class,'icon-reports')]")
+  public WebElement reports;
 
   @FindBy(xpath = "//span[contains(@class,'glyphicon')]")
   public List<WebElement> glyphiconPointers;

@@ -147,8 +147,8 @@ public class AutoActions {
         MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.actionButton);
         waitExecuter.sleep(2000);
         selectActions(inputAction);
-        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.emailEle);
-        newAutoActionPolicyPageObject.emailEle.sendKeys(email.toLowerCase());
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.actionEle);
+        newAutoActionPolicyPageObject.actionEle.sendKeys(email.toLowerCase());
         waitExecuter.waitUntilElementClickable(newAutoActionPolicyPageObject.addEmailEleBtn);
         MouseActions.clickOnElement(driver,newAutoActionPolicyPageObject.addEmailEleBtn);
     }
@@ -157,12 +157,33 @@ public class AutoActions {
         MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.actionButton);
         waitExecuter.sleep(2000);
         selectActions(inputAction);
-        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.emailEle);
-        newAutoActionPolicyPageObject.emailEle.sendKeys(email1.toLowerCase());
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.actionEle);
+        newAutoActionPolicyPageObject.actionEle.sendKeys(email1.toLowerCase());
         waitExecuter.waitUntilElementClickable(newAutoActionPolicyPageObject.addEmailEleBtn);
-        newAutoActionPolicyPageObject.emailEle.sendKeys(email2.toLowerCase());
+        newAutoActionPolicyPageObject.actionEle.sendKeys(email2.toLowerCase());
         waitExecuter.waitUntilElementClickable(newAutoActionPolicyPageObject.addEmailEleBtn);
         MouseActions.clickOnElement(driver,newAutoActionPolicyPageObject.addEmailEleBtn);
+    }
+
+    public void enterHttpPostUrl(String inputAction, String httpPostUrl){
+        MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.actionButton);
+        waitExecuter.sleep(2000);
+        selectActions(inputAction);
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.actionEle);
+        newAutoActionPolicyPageObject.actionEle.sendKeys(httpPostUrl.toLowerCase());
+        waitExecuter.waitUntilElementClickable(newAutoActionPolicyPageObject.addUrlBtn);
+        MouseActions.clickOnElement(driver,newAutoActionPolicyPageObject.addUrlBtn);
+    }
+
+    public boolean verifyErrorMsg(){
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.fatalMsgTextEle);
+        String fatalMsgText = newAutoActionPolicyPageObject.fatalMsgTextEle.getText();
+        String expectedErrMsgText = "error: \"\"http_post\" action is missing \"url\" or \"urls\" field\"";
+
+        if(fatalMsgText.contains(expectedErrMsgText)){
+            return true;
+        }
+        return false;
     }
 
     public void selectMetric(String inputMetric){

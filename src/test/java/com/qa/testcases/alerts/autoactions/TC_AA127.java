@@ -10,13 +10,12 @@ import java.util.logging.Logger;
 
 public class TC_AA127 extends BaseClass {
 
-    private static final Logger logger = Logger.getLogger(TC_AA126.class.getName());
+    private static final Logger logger = Logger.getLogger(TC_AA127.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateEmailAction(String clusterId) {
-        test = extent.startTest("TC_AA123.validateAlwaysTime",
-                "Verify user is able to select a specific TIME interval on a daily basis to trigger " +
-                        "auto actions when violations occur between that time interval.");
+    public void validateOneorMoreEmailAction(String clusterId) {
+        test = extent.startTest("TC_AA127.validateOneorMoreEmailAction",
+                "Select one auto action (send email) and verify the behaviour when one/more recipient(s) is(are) selected.");
         test.assignCategory(" Alerts ");
 
         AutoActions aa = new AutoActions(driver);

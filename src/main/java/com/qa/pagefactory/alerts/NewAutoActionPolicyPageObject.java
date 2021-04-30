@@ -96,11 +96,16 @@ public class NewAutoActionPolicyPageObject {
     public List<WebElement> listOfMetric;
 
     @FindBy(xpath="//input[contains(@class, 'input-sm')]")
-    public WebElement emailEle;
+    public WebElement actionEle;
 
     @FindBy(xpath="//a/span[text()='Add Email']")
     public WebElement addEmailEleBtn;
 
+    @FindBy(xpath="//a/span[text()='Add Url']")
+    public WebElement addUrlBtn;
+
+    @FindBy(xpath="//section[contains(@class,'bg-fatal')]/span")
+    public WebElement fatalMsgTextEle;
     /**
      * @param driver The driver that will be used to look up the elements
      */

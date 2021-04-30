@@ -8,14 +8,14 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
-public class TC_AA126 extends BaseClass {
+public class TC_AA129 extends BaseClass {
 
-    private static final Logger logger = Logger.getLogger(TC_AA126.class.getName());
+    private static final Logger logger = Logger.getLogger(TC_AA129.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateEmailAction(String clusterId) {
-        test = extent.startTest("TC_AA126.validateEmailAction",
-                "Select one auto action (send email) and verify the behaviour when no recipient is selected.");
+    public void validateHttpPostAction(String clusterId) {
+        test = extent.startTest("TC_AA129.validateHttpPostAction",
+                "Validate the behaviour - select HTTP Post action and save AA by adding valide URL");
         test.assignCategory(" Alerts ");
 
         AutoActions aa = new AutoActions(driver);
@@ -37,20 +37,20 @@ public class TC_AA126 extends BaseClass {
         //Close default Refine Scope cluster window on New auto action policy
         aa.closeDefaultRefineScope();
 
-        String policyName = "testPolicyEmailAction";
+        String policyName = "testPolicyhttpPostActionWithUrl";
         aa.enterNewAutoActionPolicyDetails(policyName, "User", "3");
         test.log(LogStatus.INFO, "Fill new auto action policy details, without value");
 
-        String inputAction = "Email";
-        String emailId = "abc@abc.com";
-        aa.enterEmail(inputAction,emailId);
-
+        String inputAction = "Http Post";
+        String httpPostUrl = "http://addhttpposturl.com";
+        aa.enterHttpPostUrl(inputAction,httpPostUrl);
+        test.log(LogStatus.INFO,"Clicked action HttpPostUrl");
         aa.clickOnSaveBtn();
         test.log(LogStatus.INFO,"Clicked on save button");
         Assert.assertTrue(aa.validateAutoActionAdded(policyName), "Policy: " +
                 policyName + " not found.");
-        test.log(LogStatus.PASS, "Validated Email action, on New Auto Action Policy page");
-
+        test.log(LogStatus.PASS, "Validated the select HTTP Post action and save AA by adding valide URL");
 
     }
 }
+

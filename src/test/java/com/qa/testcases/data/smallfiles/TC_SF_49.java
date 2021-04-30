@@ -35,13 +35,13 @@ public class TC_SF_49 extends BaseClass {
         SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
         Smallfiles smallfiles = new Smallfiles(driver);
         smallfiles.commonPanelTabValidation(test, logger);
-        smallfiles.closeConfirmationMessageNotification();
         smallfiles.clickOnRunButton();
         logger.info("Clicked on Run Button");
         test.log(LogStatus.INFO, "Clicked on Run Button");
 
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
+        waitExecuter.sleep(2000);
 
         smallfiles.navigateToSmallFileErrorReport(smallfilesPageObject, test, "999999999999999999999999999", "999999999999999999999999999"
                 , "100000000000000", "10000");
@@ -51,7 +51,10 @@ public class TC_SF_49 extends BaseClass {
 
         smallfiles.navigateToAdvancedOptions(smallfilesPageObject, test, "50", "50");
         userActions.performActionWithPolling(smallfilesPageObject.modalRunButton, UserAction.CLICK);
+
+        waitExecuter.waitUntilElementPresent(smallfilesPageObject.closeButton);
         MouseActions.clickOnElement(driver, smallfilesPageObject.closeButton);
+        waitExecuter.sleep(1000);
         try {
             if (smallfilesPageObject.errorMessageElement.size() > 0) {
                 String selectedMessage = smallfilesPageObject.errorMessageElement.stream().findFirst()

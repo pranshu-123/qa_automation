@@ -49,6 +49,12 @@ public class MR_046 extends BaseClass {
         waitExecuter.sleep(2000);
         applicationsPageObject.expandStatus.click();
         int appCount = mrDetailsPage.clickOnlyLink("Success");
+        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.sleep(2000);
+        mrApps.sortByDurationApp.click();
+        waitExecuter.waitUntilPageFullyLoaded();
+        mrApps.sortUp.click();
+        waitExecuter.sleep(2000);
         //Clicking on the Spark app must go to apps detail page
         if (appCount > 0) {
             String headerAppId = mrDetailsPage.verifyAppId(mrApps, applicationsPageObject);

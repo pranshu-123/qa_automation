@@ -39,19 +39,19 @@ public class TC_RRA05 extends BaseClass {
     // Initialize all classes objects
     test.log(LogStatus.INFO, "Initialize all class objects");
     logger.info("Initialize all class objects");
+    WaitExecuter waitExecuter = new WaitExecuter(driver);
     SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
     ReportsArchiveSchedulePage reportsPage = new ReportsArchiveSchedulePage(driver);
     ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);
-    WaitExecuter waitExecuter = new WaitExecuter(driver);
-
+    waitExecuter.sleep(2000);
     // Navigate to Reports tab from header
     test.log(LogStatus.INFO, "Navigate to reports tab from header and validate the sorting options on " +
         "Name, Reports and Status tabs");
     MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
     waitExecuter.sleep(2000);
-    reportsPage.validateSortingOptionReportName(reportPageObj, false);
-    reportsPage.validateSortingOptionReportCnt(reportPageObj, false);
-    reportsPage.validateSortingOptionStatus(reportPageObj, false);
+    reportsPage.validateSortingOptionReportName(reportPageObj, true);
+    reportsPage.validateSortingOptionReportCnt(reportPageObj, true);
+    reportsPage.validateSortingOptionStatus(reportPageObj, true);
     test.log(LogStatus.PASS, "The sorting option has been validated successfully for Name, Reports and Status tabs");
   }
 }

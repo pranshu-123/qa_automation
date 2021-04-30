@@ -43,6 +43,7 @@ public class MR_053 extends BaseClass {
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         mrDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
 
         int totalMapReduceAppCnt = mrDetailsPage.clickOnlyLink("Map Reduce");
         int appCount = 0;
@@ -67,9 +68,10 @@ public class MR_053 extends BaseClass {
                 waitExecuter.waitUntilPageFullyLoaded();
                 MouseActions.clickOnElement(driver, mrApps.resourcesTab);
                 waitExecuter.waitUntilPageFullyLoaded();
-                mrDetailsPage.validateMapandReducTab(mrApps,"Task Attempts",test);
+                mrDetailsPage.validateMapandReduceTab(mrApps,"Task Attempts",test);
 
                 //Close apps details page
+                waitExecuter.waitUntilElementPresent(mrApps.closeAppsPageTab);
                 MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);
             } else {
                 test.log(LogStatus.SKIP, "No Map Reduce Application present");

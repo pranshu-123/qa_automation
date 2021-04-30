@@ -2,6 +2,7 @@ package com.qa.testcases.data.smallfiles;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.data.SmallfilesPageObject;
@@ -13,6 +14,7 @@ import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
@@ -60,14 +62,36 @@ public class TC_SF_07 extends BaseClass {
         smallfiles.navigateToSmallFileReport(smallfilesPageObject,test,"256","512"
                 ,"1","10");
 
-        //Close apps details page
-        MouseActions.clickOnElement(driver, smallfilesPageObject.closebutton);
+        userActions.performActionWithPolling(smallfilesPageObject.modalRunButton, UserAction.CLICK);
         waitExecuter.sleep(3000);
+        LOGGER.info("Clicked on Modal Run Button");
+        test.log(LogStatus.INFO, "Clicked on Modal Run Button");
 
+        waitExecuter.waitUntilElementClickable(smallfilesPageObject.verifyReport);
+        waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.verifyReport,
+                "Currently, the Small file Report report is being generated");
+        waitExecuter.sleep(2000);
+        Assert.assertEquals(smallfilesPageObject.verifyReport.getText(), "Currently, the Small file Report report is being generated, so no other action can be performed at this time. Please wait for the running task to complete",
+                " Currently, the Small file Report report is not being generated..");
+        waitExecuter.sleep(2000);
 
-        String heading = smallfilesPageObject.verifyAbsoluteSize.getText();
-        test.log(LogStatus.PASS, "Verified the absolute size  poulated :"+heading);
+        try {
+            waitExecuter.waitUntilElementPresent(smallfilesPageObject.confirmationMessageElement);
+            waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
+                    "Small file Report completed successfully.");
+            Assert.assertEquals(smallfilesPageObject.confirmationMessageElement.getText(), "Small file Report completed successfully.",
+                    " Small file Report not completed successfully..");
+            waitExecuter.sleep(3000);
+            test.log(LogStatus.PASS, "Verified smallfiles report is loaded properly.");
+            LOGGER.info("Verified smallfiles report is loaded properly");
 
+            waitExecuter.waitUntilElementPresent(smallfilesPageObject.verifyAbsoluteSize);
+            String heading = smallfilesPageObject.verifyAbsoluteSize.getText();
+            test.log(LogStatus.PASS, "Verified the absolute size  poulated :"+heading);
+        }
+        catch (TimeoutException | VerifyError te) {
+            throw new AssertionError("smallfiles Report not completed successfully."+te);
+        }
     }
 }
 

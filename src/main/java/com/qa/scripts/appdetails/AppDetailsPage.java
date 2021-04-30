@@ -73,6 +73,7 @@ public class AppDetailsPage {
                 actionPerformer.moveToTheElement(appDetailsPageObject.applicationTypeLabels.get(i));
                 userActions.performActionWithPolling(appDetailsPageObject.applicationTypeShowOnly.get(i),
                         UserAction.CLICK);
+                wait.waitUntilElementClickable(applicationsPageObject.resetButton);
                 break;
             }
         }

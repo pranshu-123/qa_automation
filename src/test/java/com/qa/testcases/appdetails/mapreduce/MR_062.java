@@ -17,7 +17,7 @@ public class MR_062 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void MR_062_verifyConfigurationTab(String clusterId) {
         test = extent.startTest("MR_062_verifyConfigurationTab: " + clusterId,
-                "Verify errors should be populated in the UI");
+                "Verify the Configuration Tab should be populated in the UI");
         test.assignCategory(" Apps Details-Mr");
         Log.startTestCase("MR_062_verifyConfigurationTab");
         MrAppsDetailsPage mrDetailsPage = new MrAppsDetailsPage(driver);

@@ -57,7 +57,7 @@ public class MR_007 extends BaseClass {
          * Validate that status types are --
          */
         if (appCount > 0) {
-            String statusValue = mrDetailsPage.verifyAppStatus(mrApps);
+            String statusValue = mrDetailsPage.getAppStatus(mrApps);
             test.log(LogStatus.PASS, "Map reduce status Value is displayed in the Table: " + statusValue);
 
         } else {

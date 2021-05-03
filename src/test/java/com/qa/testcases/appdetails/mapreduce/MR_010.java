@@ -53,14 +53,13 @@ public class MR_010 extends BaseClass {
         test.log(LogStatus.PASS, "The left pane has Map Reduce check box and the app counts match to that " +
                 "displayed in the header");
 
-        /*
-         * Validate the start time types are --
-         */
         if (appCount > 0) {
-            String starttime = mrDetailsPage.verifystarttime(mrApps);
-            test.log(LogStatus.PASS, "Start time is displayed in the Map Reduce Table: " + starttime);
+            String startTime = mrApps.getstartTime.getText();
+            mrDetailsPage.checkAppsJobTableData(startTime, "Start Time");
+            test.log(LogStatus.PASS, "Start time is displayed in the Map Reduce Table: " + startTime);
 
-            String duration = mrDetailsPage.verifyduration(mrApps);
+            String duration = mrApps.getduration.getText();
+            mrDetailsPage.checkAppsJobTableData(duration, "Duration");
             test.log(LogStatus.PASS, "Duration is displayed in the Map Reduce Table: " + duration);
 
         } else {

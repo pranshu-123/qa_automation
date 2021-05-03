@@ -79,13 +79,13 @@ public class TC_HIVE_40_PART2 extends BaseClass {
         List<String> selectedFilterUnderTag = new ArrayList<>();
         for (int i = 0; i < 2; i++) {
             waitExecuter.waitUntilElementClickable(checkBoxTags.get(i));
-            userAction.performActionWithPolling(checkBoxTags.get(i),UserAction.CLICK);
+            userAction.performActionWithPolling(checkBoxTags.get(i), UserAction.CLICK);
             waitExecuter.waitUntilElementClickable(checkBoxTags.get(i));
             selectedTagType.add(tagsType.get(i).getText().trim().toLowerCase());
             LOGGER.info("Selected type: " + tagsType.get(i).getText().trim().toLowerCase());
 
             waitExecuter.waitUntilElementClickable(applicationsPageObject.tagTypeSearchbox.get(i));
-            userAction.performActionWithPolling(applicationsPageObject.tagTypeSearchbox.get(i),UserAction.CLICK);
+            userAction.performActionWithPolling(applicationsPageObject.tagTypeSearchbox.get(i), UserAction.CLICK);
             waitExecuter.waitUntilElementClickable(applicationsPageObject.tagTypeSearchbox.get(i));
             selectedFilterUnderTag
                     .add(applicationsPageObject.select1stOptionInTagsSearchBox.get(i).getText().trim().toLowerCase());
@@ -93,7 +93,7 @@ public class TC_HIVE_40_PART2 extends BaseClass {
                     + applicationsPageObject.select1stOptionInTagsSearchBox.get(i).getText().trim().toLowerCase());
 
             waitExecuter.waitUntilElementClickable(applicationsPageObject.select1stOptionInTagsSearchBox.get(i));
-            userAction.performActionWithPolling(applicationsPageObject.select1stOptionInTagsSearchBox.get(i),UserAction.CLICK);
+            userAction.performActionWithPolling(applicationsPageObject.select1stOptionInTagsSearchBox.get(i), UserAction.CLICK);
 
         }
         int hiveAppCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
@@ -103,10 +103,10 @@ public class TC_HIVE_40_PART2 extends BaseClass {
             test.log(LogStatus.INFO, "Click on the first app in table to get efficiency");
             LOGGER.info("Click on the first app in table to get efficiency");
             waitExecuter.waitUntilElementClickable(applicationsPageObject.getDurationFromTable);
-            userAction.performActionWithPolling(applicationsPageObject.getDurationFromTable,UserAction.CLICK);
+            userAction.performActionWithPolling(applicationsPageObject.getDurationFromTable, UserAction.CLICK);
             driver.getWindowHandle();
             waitExecuter.waitUntilElementClickable(applicationsPageObject.tagsTab);
-            userAction.performActionWithPolling(applicationsPageObject.tagsTab,UserAction.CLICK);
+            userAction.performActionWithPolling(applicationsPageObject.tagsTab, UserAction.CLICK);
             waitExecuter.waitUntilElementClickable(applicationsPageObject.tagsTab);
             waitExecuter.sleep(1000);
             List<WebElement> getTagNamesFromTagTable = applicationsPageObject.tagsInTable;
@@ -118,18 +118,26 @@ public class TC_HIVE_40_PART2 extends BaseClass {
             }
             waitExecuter.sleep(1000);
             waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
-            userAction.performActionWithPolling(applicationsPageObject.closeIcon,UserAction.CLICK);
+            userAction.performActionWithPolling(applicationsPageObject.closeIcon, UserAction.CLICK);
             waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
             waitExecuter.sleep(1000);
             for (String tag : selectedTagType) {
-
-                Assert.assertTrue(map.containsKey(tag),
-                        "Table does not contain the tag selected " + map.keySet() + " ---" + selectedTagType);
+                try {
+                    Assert.assertTrue(map.containsKey(tag),
+                            "Table does not contain the tag selected " + map.keySet() + " ---" + selectedTagType);
+                } catch (AssertionError error) {
+                    allApps.reset();
+                }
             }
             for (String tagFilter : selectedFilterUnderTag) {
-                Assert.assertTrue(map.containsValue(tagFilter),
-                        "Table does not contain the tag filter selected " + map.values());
-                test.log(LogStatus.PASS, "Table does contains the tag filter selected.");
+                try {
+                    Assert.assertTrue(map.containsValue(tagFilter),
+                            "Table does not contain the tag filter selected " + map.values());
+                    test.log(LogStatus.PASS, "Table does contains the tag filter selected.");
+                }
+                catch (AssertionError error){
+                    allApps.reset();
+                }
             }
             executor.executeScript("arguments[0].scrollIntoView();", applicationsPageObject.globalSearchBox);
             // Reset tags filter to default

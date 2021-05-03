@@ -49,20 +49,19 @@ public class MR_056 extends BaseClass {
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         mrDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
 
         int totalMapReduceAppCnt=mrDetailsPage.clickOnlyLink("Map Reduce");
         Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
                 .replaceAll("[^\\dA-Za-z ]", "").trim());
         if (totalMapReduceAppCnt > 0) {
-            mrApps.sortByReadApp.click();
+            applicationsPageObject.expandStatus.click();
+            int appCount = mrDetailsPage.clickOnlyLink("Success");
+            waitExecuter.sleep(2000);
+            mrApps.sortByDurationApp.click();
             waitExecuter.waitUntilPageFullyLoaded();
             mrApps.sortUp.click();
             waitExecuter.sleep(2000);
-            applicationsPageObject.sortStatus.click();
-            waitExecuter.sleep(2000);
-            Assert.assertTrue(applicationsPageObject.sortUp.isDisplayed(), "Sort up is not working");
-            applicationsPageObject.expandStatus.click();
-            int appCount = mrDetailsPage.clickOnlyLink("Success");
             //Clicking on the Map reduce app must go to apps detail page and verify Data Tabs must be available on UI
             if (appCount > 0) {
                 String headerAppId = mrDetailsPage.verifyAppId(mrApps, applicationsPageObject);
@@ -70,7 +69,8 @@ public class MR_056 extends BaseClass {
                 waitExecuter.waitUntilPageFullyLoaded();
                 MouseActions.clickOnElement(driver, mrApps.resourcesTab);
                 waitExecuter.waitUntilPageFullyLoaded();
-                mrDetailsPage.validateMapandReducTab(mrApps,"Task Attempts",test);
+                mrDetailsPage.validateContainsTab(mrApps,"Containers",test);
+                waitExecuter.waitUntilPageFullyLoaded();
 
                 //Close apps details page
                 MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);

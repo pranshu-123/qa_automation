@@ -62,6 +62,7 @@ public class MR_051 extends BaseClass {
                 mrDetailsPage.analysisColorCode(mrApps,test);
                 waitExecuter.waitUntilPageFullyLoaded();
                 //Close apps details page
+                waitExecuter.waitUntilElementPresent(mrApps.closeAppsPageTab);
                 MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);
             } else {
                 test.log(LogStatus.SKIP, "No Map Reduce Application present");

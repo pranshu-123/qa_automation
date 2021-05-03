@@ -51,10 +51,11 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//div[@class='version-comp-inner']/div[2]/div/p[contains(@class, 'pd')]")
     public List<WebElement> legendList;
 
-    @FindBy(xpath = "(//table[contains(@class, 'component-data-tables')])[2]")
+    /*@FindBy(xpath = "(//table[contains(@class, 'component-data-tables')])[2]")*/
+    @FindBy(xpath = "(//table[contains(@class, 'component-data-tables row-hover')])[1]")
     public WebElement reportTable;
 
-    @FindBy(xpath = "//div[@class='ab']/div")
+    @FindBy(xpath = "//tr[@class='plaforms']//th")
     public List<WebElement> platformList;
 
     @FindBy(xpath = "(//thead/tr)[2]/th")

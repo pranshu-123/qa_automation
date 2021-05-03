@@ -98,11 +98,23 @@ public class NewAutoActionPolicyPageObject {
     @FindBy(xpath="//input[contains(@class, 'input-sm')]")
     public WebElement actionEle;
 
+    @FindBy(xpath="//input[contains(@class, 'input-sm') and @placeholder='Add Webhook Url']")
+    public WebElement actionElePostToSlack;
+
     @FindBy(xpath="//a/span[text()='Add Email']")
     public WebElement addEmailEleBtn;
 
     @FindBy(xpath="//a/span[text()='Add Url']")
     public WebElement addUrlBtn;
+
+    @FindBy(xpath="//a/span[text()='Add Webhook Url']")
+    public WebElement addWebhookUrlBtn;
+
+    @FindBy(xpath="//div[@class='token-div']/input[@placeholder='Token']")
+    public WebElement webHookTokenEle;
+
+    @FindBy(xpath = "//input[@placeholder='Queue Name']")
+    public WebElement queueNameEle;
 
     @FindBy(xpath="//section[contains(@class,'bg-fatal')]/span")
     public WebElement fatalMsgTextEle;

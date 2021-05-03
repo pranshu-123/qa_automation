@@ -8,14 +8,14 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
-public class TC_AA128 extends BaseClass {
+public class TC_AA130 extends BaseClass {
 
-    private static final Logger logger = Logger.getLogger(TC_AA128.class.getName());
+    private static final Logger logger = Logger.getLogger(TC_AA130.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateHttpPostAction(String clusterId) {
-        test = extent.startTest("TC_AA128.validateHttpPostAction",
-                "Validate the behaviour - select HTTP Post action and save AA without adding URL");
+    public void validatePostToSlackActionWithOutUrl(String clusterId) {
+        test = extent.startTest("TC_AA130.validatePostToSlackAction",
+                "Validate behaviour of Post to Slack without adding Slack token and webhook URL");
         test.assignCategory(" Alerts ");
 
         AutoActions aa = new AutoActions(driver);
@@ -37,18 +37,19 @@ public class TC_AA128 extends BaseClass {
         //Close default Refine Scope cluster window on New auto action policy
         aa.closeDefaultRefineScope();
 
-        String policyName = "testPolicyhttpPostWithOutUrlAction";
+        String policyName = "testPolicyPostToSlackWithOutUrlAction";
         aa.enterNewAutoActionPolicyDetails(policyName, "User", "3");
         test.log(LogStatus.INFO, "Fill new auto action policy details, without value");
 
-        String inputAction = "Http Post";
-        String httpPostUrl = "";
-        aa.enterHttpPostUrl(inputAction,httpPostUrl);
-        test.log(LogStatus.INFO,"Clicked action HttpPostUrl");
+        String inputAction = "Post To Slack";
+        String postToSlackUrl = "";
+        String postToSlackToken = "";
+        aa.enterPostToSlackUrl(inputAction, postToSlackUrl, postToSlackToken);
+        test.log(LogStatus.INFO,"Clicked action Post To Slack");
         aa.clickOnSaveBtn();
         test.log(LogStatus.INFO,"Clicked on save button");
-        Assert.assertTrue(aa.verifyErrorMsg(),"Error Msg not found.");
-        test.log(LogStatus.PASS, "Validated Http Post action without adding url, on New Auto Action Policy page");
+        Assert.assertTrue(aa.verifyErrorMsgForPostToSlackAction(),"Error Msg not found.");
+        test.log(LogStatus.PASS, "Validated Post to Slack without adding Slack token and webhook URL on New Auto Action Policy page");
 
     }
 }

@@ -8,14 +8,14 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
-public class TC_AA128 extends BaseClass {
+public class TC_AA132 extends BaseClass {
 
-    private static final Logger logger = Logger.getLogger(TC_AA128.class.getName());
+    private static final Logger logger = Logger.getLogger(TC_AA132.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateHttpPostAction(String clusterId) {
-        test = extent.startTest("TC_AA128.validateHttpPostAction",
-                "Validate the behaviour - select HTTP Post action and save AA without adding URL");
+    public void validateMoveAppToQueueActionWithOutQueue(String clusterId) {
+        test = extent.startTest("TC_AA132.validateMoveAppToQueueActionWithOutQueue",
+                "Validate behaviour Move to queue without entering queue name");
         test.assignCategory(" Alerts ");
 
         AutoActions aa = new AutoActions(driver);
@@ -37,18 +37,18 @@ public class TC_AA128 extends BaseClass {
         //Close default Refine Scope cluster window on New auto action policy
         aa.closeDefaultRefineScope();
 
-        String policyName = "testPolicyhttpPostWithOutUrlAction";
+        String policyName = "testPolicyMoveAppToQueueActionWithOutQueue";
         aa.enterNewAutoActionPolicyDetails(policyName, "User", "3");
         test.log(LogStatus.INFO, "Fill new auto action policy details, without value");
 
-        String inputAction = "Http Post";
-        String httpPostUrl = "";
-        aa.enterHttpPostUrl(inputAction,httpPostUrl);
-        test.log(LogStatus.INFO,"Clicked action HttpPostUrl");
+        String inputAction = "Move App To Queue";
+        String queueName = "";
+        aa.enterMoveAppToQueueName(inputAction, queueName);
+        test.log(LogStatus.INFO,"Clicked action Post To Slack");
         aa.clickOnSaveBtn();
         test.log(LogStatus.INFO,"Clicked on save button");
-        Assert.assertTrue(aa.verifyErrorMsg(),"Error Msg not found.");
-        test.log(LogStatus.PASS, "Validated Http Post action without adding url, on New Auto Action Policy page");
+        Assert.assertTrue(aa.verifyErrorMsgForMoveAppToQueueAction(),"Error Msg not found.");
+        test.log(LogStatus.PASS, "Validated Move to queue action without entering queue name on New Auto Action Policy page");
 
     }
 }

@@ -175,6 +175,27 @@ public class AutoActions {
         MouseActions.clickOnElement(driver,newAutoActionPolicyPageObject.addUrlBtn);
     }
 
+    public void enterPostToSlackUrl(String inputAction, String postToSlackUrl, String postToSlackToken){
+        MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.actionButton);
+        waitExecuter.sleep(2000);
+        selectActions(inputAction);
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.actionElePostToSlack);
+        newAutoActionPolicyPageObject.actionElePostToSlack.sendKeys(postToSlackUrl);
+        waitExecuter.waitUntilElementClickable(newAutoActionPolicyPageObject.addWebhookUrlBtn);
+        MouseActions.clickOnElement(driver,newAutoActionPolicyPageObject.addWebhookUrlBtn);
+
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.webHookTokenEle);
+        newAutoActionPolicyPageObject.webHookTokenEle.sendKeys(postToSlackToken.toLowerCase());
+    }
+
+    public void enterMoveAppToQueueName(String inputAction, String queueName){
+        MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.actionButton);
+        waitExecuter.sleep(2000);
+        selectActions(inputAction);
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.queueNameEle);
+        newAutoActionPolicyPageObject.queueNameEle.sendKeys(queueName);
+    }
+
     public boolean verifyErrorMsg(){
         waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.fatalMsgTextEle);
         String fatalMsgText = newAutoActionPolicyPageObject.fatalMsgTextEle.getText();
@@ -185,6 +206,29 @@ public class AutoActions {
         }
         return false;
     }
+
+    public boolean verifyErrorMsgForPostToSlackAction(){
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.fatalMsgTextEle);
+        String fatalMsgText = newAutoActionPolicyPageObject.fatalMsgTextEle.getText();
+        String expectedErrMsgText = "error: \"\"post_in_slack\" action is missing \"token\" field\"";
+
+        if(fatalMsgText.contains(expectedErrMsgText)){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean verifyErrorMsgForMoveAppToQueueAction(){
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.fatalMsgTextEle);
+        String fatalMsgText = newAutoActionPolicyPageObject.fatalMsgTextEle.getText();
+        String expectedErrMsgText = "error: \"\"move_to_queue\" action is missing \"queue\" field\"";
+
+        if(fatalMsgText.contains(expectedErrMsgText)){
+            return true;
+        }
+        return false;
+    }
+
 
     public void selectMetric(String inputMetric){
         waitExecuter.sleep(2000);

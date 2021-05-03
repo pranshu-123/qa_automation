@@ -53,6 +53,7 @@ public class TC_LLAP_26_PART2 extends BaseClass
         test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
 
         int appCount = tezLlapApps.clickOnlyLink("Tez");
+        waitExecuter.sleep(1000);
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
@@ -62,9 +63,9 @@ public class TC_LLAP_26_PART2 extends BaseClass
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 
-      /*  applicationsPageObject.expandStatus.click();
+        applicationsPageObject.expandStatus.click();
         int statusCount = tezLlapApps.clickOnlyLink("Success");
-        test.log(LogStatus.PASS, "Selected success Count is  " + statusCount + " as Status, In Applications page");*/
+        test.log(LogStatus.PASS, "Selected success Count is  " + statusCount + " as Status, In Applications page");
         waitExecuter.waitUntilPageFullyLoaded();
         applicationsPageObject.expandQueue.click();
         waitExecuter.waitUntilPageFullyLoaded();

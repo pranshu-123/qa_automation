@@ -4,6 +4,7 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.scripts.appdetails.MrAppsDetailsPage;
 import com.qa.utils.Log;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.annotations.Test;
 
@@ -22,7 +23,9 @@ public class MR_060 extends BaseClass {
         test.assignCategory(" Apps Details-Mr");
         Log.startTestCase("MR_060_verifyErrorsTab");
         MrAppsDetailsPage mrDetailsPage = new MrAppsDetailsPage(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         mrDetailsPage.commonSetupCodeForSumarryTabValidation(test, clusterId, "Errors", logger, true);
+        waitExecuter.sleep(2000);
         test.log(LogStatus.PASS, "Verified the Errors tab successfully");
     }
 }

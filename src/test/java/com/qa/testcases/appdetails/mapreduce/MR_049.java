@@ -49,6 +49,12 @@ public class MR_049 extends BaseClass {
         waitExecuter.sleep(1000);
         applicationsPageObject.expandStatus.click();
         int appCount = mrDetailsPage.clickOnlyLink("Success");
+        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.sleep(2000);
+        mrApps.sortByDurationApp.click();
+        waitExecuter.waitUntilPageFullyLoaded();
+        mrApps.sortUp.click();
+        waitExecuter.sleep(2000);
 
         //Clicking on the Map reduce app must go to apps detail page and verify Data Tabs must be available on UI
         if (appCount > 0) {
@@ -61,6 +67,7 @@ public class MR_049 extends BaseClass {
             mrDetailsPage.verifyAllDataTabs(mrApps, "Tags", test);
             mrDetailsPage.verifyAllDataTabs(mrApps, "Metrics", test);
             mrDetailsPage.verifyAllDataTabs(mrApps, "Configuration", test);
+            waitExecuter.sleep(2000);
 
             //Close apps details page
             MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);

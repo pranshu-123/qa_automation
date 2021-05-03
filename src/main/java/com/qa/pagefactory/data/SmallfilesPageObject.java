@@ -34,7 +34,7 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//input[@class='display-time']/following::select[@class='minutes']")
     public WebElement minutesDropdown;
 
-    @FindBy(xpath = "(//span[contains(text(),'Schedule')])[2]/parent::a")
+    @FindBy(xpath = "//span[contains(@class,'pointer cta-primary')]//span[contains(text(),'Schedule')]")
     public WebElement runSheduleButton;
 
     @FindBy(xpath = "//span[contains(text(),'Run New')]/parent::a")
@@ -61,6 +61,9 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//div[contains(text(),'Small file Report completed successfully.')]")
     public WebElement confirmationMessageElement;
 
+    @FindBy(xpath = "//div[@class='col-md-9']//div[@class='col-md-12']")
+    public WebElement verifyReport;
+
     @FindBy(xpath = "//span[@class='text-fatal']")
     public WebElement confirmationMessageMinFileSizeElement;
 
@@ -74,7 +77,7 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner bg-success icon-success')]")
     public WebElement headerMessageElement;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div/div[1]/div[2]/div/div[4]/div/div[1]/div/div[1]")
+    @FindBy(xpath = "//div[contains(text(),'Directories containing minimum')]")
     public WebElement verifyAbsoluteSize;
 
     @FindBy(xpath = "//h4[normalize-space()='Advanced Options']")
@@ -266,6 +269,15 @@ public class SmallfilesPageObject {
 
     @FindBy(xpath = "(//*[@class='pointer icon-delete is-enabled'])")
     public WebElement deleteReportIcon;
+
+    @FindBy(xpath="//div[contains(@class,'popover')]/H3")
+    public WebElement deletePopText;
+
+    @FindBy(xpath="//div[contains(@class,'popover')]/div/span[contains(@class,'pending')]")
+    public WebElement deleteOkBtn;
+
+    @FindBy(xpath="(//div[@id='breadcrumb']/span/span)[1]")
+    public WebElement archives;
 
     @FindBy(xpath = "(//*[@role='dialog'])")
     public WebElement viewReportDialogWin;

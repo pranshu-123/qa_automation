@@ -116,6 +116,7 @@ public class ReportsArchiveSchedulePage {
         MouseActions.clickOnElement(driver, dropDownList.get(i));
         isContainsAllOpt = true;
         totalReports = getReportCnt(reportPageObj, 15);
+        logger.info("reportType = " + totalReports);
       } else {
         logger.info("Click on reportType: " + reportType);
         MouseActions.clickOnElement(driver, dropDownList.get(i));
@@ -869,9 +870,9 @@ public class ReportsArchiveSchedulePage {
         case "Queue Analysis":
         case "Services and Versions Compatibility":
           MouseActions.clickOnElement(driver, newReportActionList.get(i));
-          waitExecuter.sleep(2000);
+          waitExecuter.sleep(4000);
           MouseActions.clickOnElement(driver, reportPageObj.reportCreationRunButton);
-          waitExecuter.sleep(40000);
+          waitExecuter.sleep(4000);
           status = reportStatusList.get(i).getText().trim();
           driver.navigate().refresh();
           waitExecuter.waitUntilPageFullyLoaded();
@@ -894,6 +895,7 @@ public class ReportsArchiveSchedulePage {
     waitExecuter.waitUntilNumberOfWindowsToBe(1);
     waitExecuter.waitUntilPageFullyLoaded();
     String scheduledReportName = "scheduleReport_" + rnd.nextInt(1000);
+    waitExecuter.sleep(1000);
     reportPageObj.scheduleReportName.sendKeys(scheduledReportName);
     MouseActions.clickOnElement(driver, reportPageObj.scheduleToRunDropDown);
     waitExecuter.waitUntilPageFullyLoaded();

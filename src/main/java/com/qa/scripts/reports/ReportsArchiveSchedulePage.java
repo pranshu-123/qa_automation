@@ -263,7 +263,7 @@ public class ReportsArchiveSchedulePage {
   public void validateReportStatus(ReportsArchiveScheduledPageObject reportPageObj) {
     List<WebElement> reportStatusList = reportPageObj.reportStatus;
     Assert.assertFalse(reportStatusList.isEmpty(), "There are no status against the reports");
-    String[] expectedReportStatus = {"SUCCESS", "FAILURE", "NO REPORT"};
+    String[] expectedReportStatus = {"SUCCESS", "FAILURE", "NO REPORT","STARTED"};
     for (int i = 0; i < reportStatusList.size(); i++) {
       String reportStatus = reportStatusList.get(i).getText();
       logger.info("The report status is " + reportStatus);
@@ -846,9 +846,27 @@ public class ReportsArchiveSchedulePage {
           afterReportCnt = Integer.parseInt(reportCntList.get(i).getText().trim());
           logger.info("Before cnt = " + beforeReportCnt + " After cnt = " + afterReportCnt);
           break;
+        case "Capacity Forecasting":
+          MouseActions.clickOnElement(driver, newReportActionList.get(i));
+          waitExecuter.sleep(2000);
+          List<WebElement> fieldDays = reportPageObj.forcasting;
+          String[] valueDays = {"7"};
+          for (int f = 0; f < fieldDays.size(); f++) {
+            fieldDays.get(f).sendKeys(valueDays[f]);
+          }
+          waitExecuter.waitUntilPageFullyLoaded();
+          MouseActions.clickOnElement(driver, reportPageObj.reportCreationRunButton);
+          waitExecuter.sleep(50000);
+          waitExecuter.waitUntilPageFullyLoaded();
+          status = reportStatusList.get(i).getText().trim();
+          driver.navigate().refresh();
+          waitExecuter.waitUntilPageFullyLoaded();
+          waitExecuter.waitUntilElementClickable(reportPageObj.reportSearchBox);
+          afterReportCnt = Integer.parseInt(reportCntList.get(i).getText().trim());
+          logger.info("Before cnt = " + beforeReportCnt + " After cnt = " + afterReportCnt);
+          break;
         case "Cluster Discovery":
         case "Tuning":
-        case "Capacity Forecasting":
         case "Queue Analysis":
         case "Services and Versions Compatibility":
           MouseActions.clickOnElement(driver, newReportActionList.get(i));
@@ -941,7 +959,7 @@ public class ReportsArchiveSchedulePage {
             " Report not removed");
         MouseActions.clickOnElement(driver,reportPageObj.archives);
         waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.sleep(2000);
+        waitExecuter.sleep(5000);
         int reportCntAfterDelete = Integer.parseInt(reportCntList.get(i).getText().trim());
         logger.info("Before Delete report count = " + reportCnt + "\n After delete report count is " + reportCntAfterDelete);
         Assert.assertEquals(reportCntAfterDelete, reportCnt - 1, " Report " + reportName + " had " + reportCnt +

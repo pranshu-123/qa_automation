@@ -41,8 +41,9 @@ public class TC_RRA09 extends BaseClass {
     // Navigate to Reports tab from header
     test.log(LogStatus.INFO, "Navigate to reports tab from header and  download, view report and remove options from actions");
     MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
-    waitExecuter.sleep(2000);
+    waitExecuter.waitUntilPageFullyLoaded();
     reportsPage.validateReportActions(reportPageObj);
+    waitExecuter.sleep(2000);
     test.log(LogStatus.PASS, "Verified  download, view report and remove options from actions successfully");
   }
 }

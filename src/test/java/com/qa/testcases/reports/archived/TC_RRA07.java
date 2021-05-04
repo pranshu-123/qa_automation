@@ -44,8 +44,8 @@ public class TC_RRA07 extends BaseClass {
     MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
     waitExecuter.sleep(2000);
     reportsPage.validateSortingOptionReportName(reportPageObj, false);
-   /* reportsPage.validateSortingOptionStatus(reportPageObj, true);
-    reportsPage.validateSortingOptionReportCnt(reportPageObj, true);*/
+    /*reportsPage.validateSortingOptionStatus(reportPageObj, false);*/
+    /*reportsPage.validateSortingOptionReportCnt(reportPageObj, false);*/
     test.log(LogStatus.PASS, "The sorting option has been validated successfully for Name," +
         " Created and Status tabs for particular report");
   }

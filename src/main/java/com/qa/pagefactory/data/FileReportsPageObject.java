@@ -17,6 +17,15 @@ public class FileReportsPageObject {
   @FindBy(xpath = "//span[contains(text(),'LARGE')]")
   public WebElement largeFile;
 
+  @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-up')]")
+  public WebElement sortUp;
+
+  @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-down')]")
+  public WebElement sortDown;
+
+  @FindBy(xpath = "//span[normalize-space()='Avg File Size']")
+  public WebElement sortAvgFileSize;
+
   @FindBy(xpath = "//span[contains(text(),'LARGE') and contains(@class, 'badge pending')]")
   public WebElement selectedLargeFileOpt;
 
@@ -44,11 +53,38 @@ public class FileReportsPageObject {
   @FindBy(xpath = "//table[@class='component-data-tables row-hover']/thead/tr/th")
   public List<WebElement> tableHeader;
 
-  @FindBy(xpath = "//body//div//th[7]")
+  @FindBy(xpath = "//tbody/tr/td[2]")
   public WebElement fileColumn;
 
-  @FindBy(xpath = "//table[@class='row-hover component-data-tables margin-bottom']/tbody/tr")
+  @FindBy(xpath = "//tbody/tr/td[4]")
+  public WebElement totalFileSizeColumn;
+
+  @FindBy(xpath = "//tbody/tr/td[5]")
+  public WebElement minFileSizeColumn;
+
+  @FindBy(xpath = "//tbody/tr/td[1]")
+  public WebElement pathColumn;
+
+  @FindBy(xpath = "//tbody/tr/td[3]")
+  public WebElement avgFileSizeColumn;
+
+  @FindBy(xpath = "//tbody/tr/td[6]")
+  public WebElement maxFileSizeColumn;
+
+  @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody/tr")
   public List<WebElement> fileTableRows;
+
+  @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody/tr[" + 1 + "]/td[" + 6 + "]")
+  public WebElement maxFileSizeRowData;
+
+  @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody/tr[" + 1 + "]/td[" + 5 + "]")
+  public WebElement minFileSizeRowData;
+
+  @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody/tr[" + 1 + "]/td[" + 4 + "]")
+  public WebElement totalFileSizeRowData;
+
+  @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody/tr[" + 1 + "]/td[" + 3 + "]")
+  public WebElement avgFileSizeRowData;
 
   @FindBy(xpath = "//h3[normalize-space()='No Data Available']")
   public WebElement noDataText;

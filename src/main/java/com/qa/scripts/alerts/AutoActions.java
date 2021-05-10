@@ -85,6 +85,12 @@ public class AutoActions {
         MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.triggerConditionsBtn2);
     }
 
+    public void clickOnnJoinTxtBtn(){
+        waitExecuter.sleep(2000);
+        MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.joinTxtBtn);
+    }
+
+
     public void selectTriggerCondition(String triggerConditionAppType){
         waitExecuter.sleep(1000);
         int allTriggerCondition = newAutoActionPolicyPageObject.selectTriggerConditions.size();
@@ -148,11 +154,11 @@ public class AutoActions {
         waitExecuter.sleep(2000);
         selectTriggerCondition(triggerCondition);
         waitExecuter.sleep(2000);
-        clickOnTriggerConditionBtn2();
+        clickOnnJoinTxtBtn();
         waitExecuter.sleep(2000);
         selectORANDOptions(optionType);
         waitExecuter.sleep(2000);
-        newAutoActionPolicyPageObject.triggerConditionValue.sendKeys(triggerValue);
+        newAutoActionPolicyPageObject.triggerConditionValue2.sendKeys(triggerValue);
     }
 
     public void enterNewAutoActionPolicyDetails(String policyName, String triggerCondition, String triggerValue, String policyDescrption){

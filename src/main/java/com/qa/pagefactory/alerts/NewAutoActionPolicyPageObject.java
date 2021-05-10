@@ -32,6 +32,9 @@ public class NewAutoActionPolicyPageObject {
     @FindBy(xpath="//div[@class='container-fluid']/div[5]/div/div/b/span[1]")
     public WebElement triggerConditionsBtn2;
 
+    @FindBy(xpath="//div[contains(@class,'join-row')]/div/div/b/span[1]")
+    public WebElement joinTxtBtn;
+
     @FindBy (xpath = "(//div[contains(@class,'dropdown-content')]/a)[1]")
     public WebElement usertriggerConditions;
 
@@ -49,6 +52,9 @@ public class NewAutoActionPolicyPageObject {
 
     @FindBy (xpath = "(//li[contains(@class,'rule-li')]/div)[3]/div[4]/input")
     public WebElement triggerConditionValue;
+
+    @FindBy(xpath="(//li[contains(@class,'rule-li')])[2]/div[3]/div[4]/input")
+    public WebElement triggerConditionValue2;
 
     @FindBy (xpath = "(//div[contains(@class,'auto-footer')]/div/div/span/a)[1]")
     public WebElement saveBtn;

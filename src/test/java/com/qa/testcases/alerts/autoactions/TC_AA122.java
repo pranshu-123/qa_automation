@@ -1,5 +1,6 @@
 package com.qa.testcases.alerts.autoactions;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.scripts.alerts.AutoActions;
 import com.relevantcodes.extentreports.LogStatus;
@@ -8,6 +9,8 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
+@Marker.Alerts
+@Marker.All
 public class TC_AA122 extends BaseClass {
 
     private static final Logger logger = Logger.getLogger(TC_AA122.class.getName());

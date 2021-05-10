@@ -11,15 +11,14 @@ import java.util.logging.Logger;
 
 @Marker.Alerts
 @Marker.All
-public class TC_AA124 extends BaseClass {
+public class TC_AA129 extends BaseClass {
 
-    private static final Logger logger = Logger.getLogger(TC_AA124.class.getName());
+    private static final Logger logger = Logger.getLogger(TC_AA129.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateSpecificTime(String clusterId) {
-        test = extent.startTest("TC_AA124.validateSpecificTime",
-                "Verify user is able to select a specific TIME interval on a daily basis to trigger " +
-                        "auto actions when violations occur between that time interval.");
+    public void validateHttpPostAction(String clusterId) {
+        test = extent.startTest("TC_AA129.validateHttpPostAction",
+                "Validate the behaviour - select HTTP Post action and save AA by adding valide URL");
         test.assignCategory(" Alerts ");
 
         AutoActions aa = new AutoActions(driver);
@@ -41,27 +40,20 @@ public class TC_AA124 extends BaseClass {
         //Close default Refine Scope cluster window on New auto action policy
         aa.closeDefaultRefineScope();
 
-        String policyName = "testPolicyDailyTime";
+        String policyName = "testPolicyhttpPostActionWithUrl";
         aa.enterNewAutoActionPolicyDetails(policyName, "User", "3");
-        test.log(LogStatus.INFO,"Fill new auto action policy details, without value");
+        test.log(LogStatus.INFO, "Fill new auto action policy details, without value");
 
-        aa.clickOnRefineScope();
-        test.log(LogStatus.INFO,"Clicked on refine scope button");
-
-        String scope = "Time";
-        aa.selectRefineScope(scope);
-        test.log(LogStatus.INFO,"Selected scope");
-
-        String userScopeChkBoxName = "daily";
-        aa.clickScopeChkBox(userScopeChkBoxName);
-        test.log(LogStatus.INFO,"Clicked on scope '" + userScopeChkBoxName + "' checkbox");
-
+        String inputAction = "Http Post";
+        String httpPostUrl = "http://addhttpposturl.com";
+        aa.enterHttpPostUrl(inputAction,httpPostUrl);
+        test.log(LogStatus.INFO,"Clicked action HttpPostUrl");
         aa.clickOnSaveBtn();
         test.log(LogStatus.INFO,"Clicked on save button");
         Assert.assertTrue(aa.validateAutoActionAdded(policyName), "Policy: " +
                 policyName + " not found.");
-        test.log(LogStatus.PASS, "Validated TIME scope as Daily, on New Auto Action Policy page");
+        test.log(LogStatus.PASS, "Validated the select HTTP Post action and save AA by adding valide URL");
 
     }
-
 }
+

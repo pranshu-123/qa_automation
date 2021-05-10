@@ -26,6 +26,7 @@ public class FileReportsPageObject {
   @FindBy(xpath = "//span[normalize-space()='Avg File Size']")
   public WebElement sortAvgFileSize;
 
+
   @FindBy(xpath = "//span[contains(text(),'LARGE') and contains(@class, 'badge pending')]")
   public WebElement selectedLargeFileOpt;
 

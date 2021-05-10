@@ -10,6 +10,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import java.io.File;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -120,6 +122,47 @@ public class FileReports {
         }
         return expectedFileCnt;
     }
+
+    public ArrayList<String> getPathCnt(List<WebElement> tableRowList, String fileType) {
+        ArrayList<String> expectedFileCnt = new ArrayList<>();
+        try {
+            for (int row = 1; row <= tableRowList.size(); row++) {
+                WebElement rowData = driver.findElement
+                        (By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + row + "]/td[" + 1 + "]"));
+                Assert.assertTrue(rowData.isDisplayed(), "No data under column: File " +
+                        " for " + fileType + " file type");
+                String avgfileCnt = rowData.getText().trim();
+                 Float.parseFloat(avgfileCnt.replaceFirst(".*?([\\d.]+).*", "$1"));
+                LOGGER.info("The path count is " + avgfileCnt);
+                expectedFileCnt.add(avgfileCnt);
+            }
+        } catch (org.openqa.selenium.NoSuchElementException ex) {
+            WebElement noData = fileReportsPageObject.noDataText;
+            Assert.assertFalse(noData.isDisplayed(), "Data not present in the table got {'" + noData.getText() + "}' message");
+        }
+        return expectedFileCnt;
+    }
+
+    public ArrayList<String> getAvgFileCnt(List<WebElement> tableRowList, String fileType) {
+        ArrayList<String> expectedFileCnt = new ArrayList<>();
+        try {
+            for (int row = 1; row <= tableRowList.size(); row++) {
+                WebElement rowData = driver.findElement
+                        (By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + row + "]/td[" + 3 + "]"));
+                Assert.assertTrue(rowData.isDisplayed(), "No data under column: File " +
+                        " for " + fileType + " file type");
+                String avgfileCnt = rowData.getText().trim();
+                Float value = Float.parseFloat(avgfileCnt.replaceFirst(".*?([\\d.]+).*", "$1"));
+                LOGGER.info("The file count is " + value);
+                expectedFileCnt.add(avgfileCnt);
+            }
+        } catch (org.openqa.selenium.NoSuchElementException ex) {
+            WebElement noData = fileReportsPageObject.noDataText;
+            Assert.assertFalse(noData.isDisplayed(), "Data not present in the table got {'" + noData.getText() + "}' message");
+        }
+        return expectedFileCnt;
+    }
+
 
     public void checkTableContainsData() {
         String expectedMsg = "No data to display.";
@@ -431,18 +474,18 @@ public class FileReports {
     public void verifyPathSortOption(String fileType, String clusterID) {
         selectOnlySingleCluster(clusterID);
         List<WebElement> tableRowList = fileReportsPageObject.fileTableRows;
-        ArrayList<Integer> expectedFileCntArr = new ArrayList<>(), ascendingFileCntArr, descendingFileCntArr;
+        ArrayList<String> expectedFileCntArr = new ArrayList<>(), ascendingFileCntArr, descendingFileCntArr;
         WebElement fileCol = fileReportsPageObject.pathColumn;
         int rowCnt = tableRowList.size();
         if (rowCnt < 10) {
-            expectedFileCntArr = getFileCnt(tableRowList, fileType);
+            expectedFileCntArr = getPathCnt(tableRowList, fileType);
         } else {
             String pageCntStr = fileReportsPageObject.pagination.getText().trim();
             int pageCnt = Integer.parseInt(pageCntStr.split("\\s+")[2]);
             LOGGER.info("The pagination is " + pageCntStr + " Page Cnt is " + pageCnt);
             for (int i = 1; i <= pageCnt; i++) {
                 waitExecuter.waitUntilPageFullyLoaded();
-                expectedFileCntArr.addAll(getFileCnt(tableRowList, fileType));
+                expectedFileCntArr.addAll(getPathCnt(tableRowList, fileType));
                 if (i != pageCnt)
                     MouseActions.clickOnElement(driver, fileReportsPageObject.rightCaretReportCnt);
             }
@@ -451,14 +494,14 @@ public class FileReports {
         }
         MouseActions.clickOnElement(driver, fileCol);
         waitExecuter.waitUntilPageFullyLoaded();
-        ascendingFileCntArr = getFileCnt(tableRowList, fileType);
+        ascendingFileCntArr = getPathCnt(tableRowList, fileType);
         MouseActions.clickOnElement(driver, fileCol);
         waitExecuter.waitUntilPageFullyLoaded();
-        descendingFileCntArr = getFileCnt(tableRowList, fileType);
+        descendingFileCntArr = getPathCnt(tableRowList, fileType);
         Assert.assertEquals(ascendingFileCntArr.size(), descendingFileCntArr.size(), " Ascending sort and Descending sort" +
                 " array size do not match");
         Collections.sort(expectedFileCntArr);
-        ArrayList<Integer> newExpectedFileCnt = new ArrayList<>();
+        ArrayList<String> newExpectedFileCnt = new ArrayList<>();
         LOGGER.info("The size of ascending arr is " + ascendingFileCntArr.size() +
                 " expectedArr is " + expectedFileCntArr.size());
         for (int i = 0; i < ascendingFileCntArr.size(); i++) {
@@ -477,18 +520,18 @@ public class FileReports {
     public void verifyAvgFileSizeSortOption(String fileType, String clusterID) {
         selectOnlySingleCluster(clusterID);
         List<WebElement> tableRowList = fileReportsPageObject.fileTableRows;
-        ArrayList<Integer> expectedFileCntArr = new ArrayList<>(), ascendingFileCntArr, descendingFileCntArr;
+        ArrayList<String> expectedFileCntArr = new ArrayList<>(), ascendingFileCntArr, descendingFileCntArr;
         WebElement fileCol = fileReportsPageObject.avgFileSizeColumn;
         int rowCnt = tableRowList.size();
         if (rowCnt < 10) {
-            expectedFileCntArr = getFileCnt(tableRowList, fileType);
+            expectedFileCntArr = getAvgFileCnt(tableRowList, fileType);
         } else {
             String pageCntStr = fileReportsPageObject.pagination.getText().trim();
             int pageCnt = Integer.parseInt(pageCntStr.split("\\s+")[2]);
             LOGGER.info("The pagination is " + pageCntStr + " Page Cnt is " + pageCnt);
             for (int i = 1; i <= pageCnt; i++) {
                 waitExecuter.waitUntilPageFullyLoaded();
-                expectedFileCntArr.addAll(getFileCnt(tableRowList, fileType));
+                expectedFileCntArr.addAll(getAvgFileCnt(tableRowList, fileType));
                 if (i != pageCnt)
                     MouseActions.clickOnElement(driver, fileReportsPageObject.rightCaretReportCnt);
             }
@@ -497,24 +540,25 @@ public class FileReports {
         }
         MouseActions.clickOnElement(driver, fileCol);
         waitExecuter.waitUntilPageFullyLoaded();
-        ascendingFileCntArr = getFileCnt(tableRowList, fileType);
+        ascendingFileCntArr = getAvgFileCnt(tableRowList, fileType);
         MouseActions.clickOnElement(driver, fileCol);
         waitExecuter.waitUntilPageFullyLoaded();
-        descendingFileCntArr = getFileCnt(tableRowList, fileType);
+        descendingFileCntArr = getAvgFileCnt(tableRowList, fileType);
         Assert.assertEquals(ascendingFileCntArr.size(), descendingFileCntArr.size(), " Ascending sort and Descending sort" +
                 " array size do not match");
         Collections.sort(expectedFileCntArr);
-        ArrayList<Integer> newExpectedFileCnt = new ArrayList<>();
+        ArrayList<String> newExpectedFileCnt = new ArrayList<>();
         LOGGER.info("The size of ascending arr is " + ascendingFileCntArr.size() +
                 " expectedArr is " + expectedFileCntArr.size());
         for (int i = 0; i < ascendingFileCntArr.size(); i++) {
             newExpectedFileCnt.add(expectedFileCntArr.get(i));
+            waitExecuter.waitUntilPageFullyLoaded();
         }
         LOGGER.info("Ascending Sort fileCnt is " + ascendingFileCntArr + "\n" +
                 "Descending Sort fileCnt is " + descendingFileCntArr + "\n" +
                 "Expected Sort fileCnt is " + newExpectedFileCnt);
-        Assert.assertTrue(expectedFileCntArr.equals(ascendingFileCntArr) ||
-                expectedFileCntArr.equals(descendingFileCntArr), "The expected array do not match");
+        Assert.assertTrue(newExpectedFileCnt.equals(ascendingFileCntArr) ||
+                newExpectedFileCnt.equals(descendingFileCntArr), "The expected array do not match");
     }
 
     /**

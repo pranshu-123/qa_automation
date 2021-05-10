@@ -29,11 +29,17 @@ public class NewAutoActionPolicyPageObject {
     @FindBy (xpath = "(//div[contains(@class,'rule-row')])[2]/div/div/b/span[1]")
     public WebElement triggerConditionsBtn;
 
+    @FindBy(xpath="//div[@class='container-fluid']/div[5]/div/div/b/span[1]")
+    public WebElement triggerConditionsBtn2;
+
     @FindBy (xpath = "(//div[contains(@class,'dropdown-content')]/a)[1]")
     public WebElement usertriggerConditions;
 
     @FindBy (xpath = "(//div[contains(@class,'dropdown-content')])[1]/a")
     public List<WebElement> selectTriggerConditions;
+
+    @FindBy(xpath = "//div[contains(@class,'join-row')]/div/div/div/a")
+    public List<WebElement> getSelectORANDOptions;
 
     @FindBy (xpath="//li[contains(@class,'rule-li')]/div/div/h4")
     public WebElement selectedTriggerConditions;
@@ -115,6 +121,9 @@ public class NewAutoActionPolicyPageObject {
 
     @FindBy(xpath = "//input[@placeholder='Queue Name']")
     public WebElement queueNameEle;
+
+    @FindBy(xpath="//div[@id='killapp-div']/label[@class='checkbox']")
+    public WebElement killAppChkBoxEle;
 
     @FindBy(xpath="//section[contains(@class,'bg-fatal')]/span")
     public WebElement fatalMsgTextEle;

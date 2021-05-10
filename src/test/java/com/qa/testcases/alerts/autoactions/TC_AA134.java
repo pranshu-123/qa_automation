@@ -8,14 +8,14 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
-public class TC_AA133 extends BaseClass {
+public class TC_AA134 extends BaseClass {
 
-    private static final Logger logger = Logger.getLogger(TC_AA133.class.getName());
+    private static final Logger logger = Logger.getLogger(TC_AA134.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void validateMoveAppToQueueActionWithQueue(String clusterId) {
-        test = extent.startTest("TC_AA133.validateMoveAppToQueueActionWithQueue",
-                "Validate behaviour Move to queue without entering queue name");
+        test = extent.startTest("TC_AA134.validateMoveAppToQueueActionWithQueue",
+                "Validate behaviour Kill action by select the Kill action");
         test.assignCategory(" Alerts ");
 
         AutoActions aa = new AutoActions(driver);
@@ -37,19 +37,18 @@ public class TC_AA133 extends BaseClass {
         //Close default Refine Scope cluster window on New auto action policy
         aa.closeDefaultRefineScope();
 
-        String policyName = "testPolicyMoveAppToQueueActionWithQueue";
+        String policyName = "testPolicyKillAppAction";
         aa.enterNewAutoActionPolicyDetails(policyName, "User", "3");
         test.log(LogStatus.INFO, "Fill new auto action policy details, without value");
 
-        String inputAction = "Move App To Queue";
-        String queueName = "someQueueName";
-        aa.enterMoveAppToQueueName(inputAction, queueName);
-        test.log(LogStatus.INFO,"Clicked action Move App To Queue");
+        String inputAction = "Kill App";
+        aa.selectKillAppAction(inputAction);
+        test.log(LogStatus.INFO,"Clicked action Kill App");
         aa.clickOnSaveBtn();
         test.log(LogStatus.INFO,"Clicked on save button");
         Assert.assertTrue(aa.validateAutoActionAdded(policyName), "Policy: " +
                 policyName + " not found.");
-        test.log(LogStatus.PASS, "Validated Move to queue action without entering queue name on New Auto Action Policy page");
+        test.log(LogStatus.PASS, "Validated Kill App action on New Auto Action Policy page");
 
     }
 }

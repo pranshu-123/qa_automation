@@ -80,13 +80,32 @@ public class AutoActions {
         MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.triggerConditionsBtn);
     }
 
+    public void clickOnTriggerConditionBtn2(){
+        waitExecuter.sleep(2000);
+        MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.triggerConditionsBtn2);
+    }
 
     public void selectTriggerCondition(String triggerConditionAppType){
         waitExecuter.sleep(1000);
         int allTriggerCondition = newAutoActionPolicyPageObject.selectTriggerConditions.size();
+        System.out.println("allTriggerCondition count: "+ allTriggerCondition);
         for(int i=0; i< allTriggerCondition ; i++){
             if(newAutoActionPolicyPageObject.selectTriggerConditions.get(i).getText().equals(triggerConditionAppType)){
                 MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.selectTriggerConditions.get(i));
+                break;
+            }
+        }
+    }
+
+    public void selectORANDOptions(String optionType){
+        waitExecuter.sleep(1000);
+        int allOptions = newAutoActionPolicyPageObject.getSelectORANDOptions.size();
+        System.out.println("allOptions count:"+ allOptions);
+        for(int i=0; i< allOptions ; i++){
+            String actualOption = newAutoActionPolicyPageObject.getSelectORANDOptions.get(i).getText();
+            if(actualOption.equals(optionType)){
+                MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.getSelectORANDOptions.get(i));
+                break;
             }
         }
     }
@@ -123,6 +142,19 @@ public class AutoActions {
         newAutoActionPolicyPageObject.triggerConditionValue.sendKeys(triggerValue);
     }
 
+    public void enterRuleSetInPolicyWithOption(String triggerCondition, String triggerValue, String optionType){
+        waitExecuter.sleep(2000);
+        clickOnTriggerConditionBtn2();
+        waitExecuter.sleep(2000);
+        selectTriggerCondition(triggerCondition);
+        waitExecuter.sleep(2000);
+        clickOnTriggerConditionBtn2();
+        waitExecuter.sleep(2000);
+        selectORANDOptions(optionType);
+        waitExecuter.sleep(2000);
+        newAutoActionPolicyPageObject.triggerConditionValue.sendKeys(triggerValue);
+    }
+
     public void enterNewAutoActionPolicyDetails(String policyName, String triggerCondition, String triggerValue, String policyDescrption){
         waitExecuter.sleep(1000);
         newAutoActionPolicyPageObject.policyName.sendKeys(policyName);
@@ -131,6 +163,7 @@ public class AutoActions {
         waitExecuter.sleep(2000);
         newAutoActionPolicyPageObject.triggerConditionValue.sendKeys(triggerValue);
         newAutoActionPolicyPageObject.policyDescription.sendKeys(policyDescrption);
+
     }
 
     public void selectActions(String inputAction){
@@ -194,6 +227,13 @@ public class AutoActions {
         selectActions(inputAction);
         waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.queueNameEle);
         newAutoActionPolicyPageObject.queueNameEle.sendKeys(queueName);
+    }
+
+    public void selectKillAppAction(String inputAction){
+        MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.actionButton);
+        waitExecuter.sleep(2000);
+        selectActions(inputAction);
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.killAppChkBoxEle);
     }
 
     public boolean verifyErrorMsg(){

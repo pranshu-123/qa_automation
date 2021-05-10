@@ -24,6 +24,7 @@ public class TC_FR_12 extends BaseClass {
     FileReportsPageObject fileReportsPageObject = new FileReportsPageObject(driver);
 
     filereports.navidateTofileReportsTab();
+    waitExecuter.waitUntilElementPresent(fileReportsPageObject.largeFile);
     MouseActions.clickOnElement(driver, fileReportsPageObject.largeFile);
     waitExecuter.waitUntilPageFullyLoaded();
     filereports.verifyFileSortOption("LARGE", clusterId);

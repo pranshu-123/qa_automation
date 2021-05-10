@@ -242,39 +242,16 @@ public class AutoActions {
         waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.killAppChkBoxEle);
     }
 
-    public boolean verifyErrorMsg(){
+    public boolean verifyErrorMsg(String errorMsg){
         waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.fatalMsgTextEle);
         String fatalMsgText = newAutoActionPolicyPageObject.fatalMsgTextEle.getText();
-        String expectedErrMsgText = "error: \"\"http_post\" action is missing \"url\" or \"urls\" field\"";
+        String expectedErrMsgText = errorMsg.toString();
 
         if(fatalMsgText.contains(expectedErrMsgText)){
             return true;
         }
         return false;
     }
-
-    public boolean verifyErrorMsgForPostToSlackAction(){
-        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.fatalMsgTextEle);
-        String fatalMsgText = newAutoActionPolicyPageObject.fatalMsgTextEle.getText();
-        String expectedErrMsgText = "error: \"\"post_in_slack\" action is missing \"token\" field\"";
-
-        if(fatalMsgText.contains(expectedErrMsgText)){
-            return true;
-        }
-        return false;
-    }
-
-    public boolean verifyErrorMsgForMoveAppToQueueAction(){
-        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.fatalMsgTextEle);
-        String fatalMsgText = newAutoActionPolicyPageObject.fatalMsgTextEle.getText();
-        String expectedErrMsgText = "error: \"\"move_to_queue\" action is missing \"queue\" field\"";
-
-        if(fatalMsgText.contains(expectedErrMsgText)){
-            return true;
-        }
-        return false;
-    }
-
 
     public void selectMetric(String inputMetric){
         waitExecuter.sleep(2000);

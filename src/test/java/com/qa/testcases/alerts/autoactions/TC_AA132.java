@@ -50,7 +50,8 @@ public class TC_AA132 extends BaseClass {
         test.log(LogStatus.INFO,"Clicked action Move App To Queue");
         aa.clickOnSaveBtn();
         test.log(LogStatus.INFO,"Clicked on save button");
-        Assert.assertTrue(aa.verifyErrorMsgForMoveAppToQueueAction(),"Error Msg not found.");
+        String expectedErrMsgText = "error: \"\"move_to_queue\" action is missing \"queue\" field\"";
+        Assert.assertTrue(aa.verifyErrorMsg(expectedErrMsgText),"Error Msg not found.");
         test.log(LogStatus.PASS, "Validated Move to queue action without entering queue name on New Auto Action Policy page");
 
     }

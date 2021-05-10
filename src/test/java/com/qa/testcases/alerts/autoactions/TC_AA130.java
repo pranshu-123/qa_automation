@@ -51,7 +51,8 @@ public class TC_AA130 extends BaseClass {
         test.log(LogStatus.INFO,"Clicked action Post To Slack");
         aa.clickOnSaveBtn();
         test.log(LogStatus.INFO,"Clicked on save button");
-        Assert.assertTrue(aa.verifyErrorMsgForPostToSlackAction(),"Error Msg not found.");
+        String expectedErrMsgText = "error: \"\"post_in_slack\" action is missing \"token\" field\"";
+        Assert.assertTrue(aa.verifyErrorMsg(expectedErrMsgText),"Error Msg not found.");
         test.log(LogStatus.PASS, "Validated Post to Slack without adding Slack token and webhook URL on New Auto Action Policy page");
 
     }

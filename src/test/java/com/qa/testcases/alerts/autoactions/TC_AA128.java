@@ -50,7 +50,8 @@ public class TC_AA128 extends BaseClass {
         test.log(LogStatus.INFO,"Clicked action HttpPostUrl");
         aa.clickOnSaveBtn();
         test.log(LogStatus.INFO,"Clicked on save button");
-        Assert.assertTrue(aa.verifyErrorMsg(),"Error Msg not found.");
+        String expectedErrMsgText = "error: \"\"http_post\" action is missing \"url\" or \"urls\" field\"";
+        Assert.assertTrue(aa.verifyErrorMsg(expectedErrMsgText),"Error Msg not found.");
         test.log(LogStatus.PASS, "Validated Http Post action without adding url, on New Auto Action Policy page");
 
     }

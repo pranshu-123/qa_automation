@@ -87,6 +87,9 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//span[contains(@class,'component-cta')]/a/span")
   public WebElement reportCreationRunButton;
 
+  @FindBy(css = "div[value='[object Object]'] input[type='text']")
+  public List<WebElement> forcasting;
+
   //@FindBy(xpath = "(//*[@class='icon-download is-enabled'])[1]")
   @FindBy(xpath="(//span[contains(@class, 'icon-download')])[1]")
   public WebElement downloadReportIcon;
@@ -130,7 +133,7 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//*[@id='app']//p[3]/select/option[10]")
   public WebElement everyMonthOption;
 
-  @FindBy(xpath = "(//*[@class='icon-expand is-enabled'])")
+  @FindBy(xpath = "(//*[@class='pointer icon-expand is-enabled undefined'])")
   public List<WebElement> latestReportIcon;
 
   @FindBy(xpath = "//*[@class='col-md-12']//p/input")

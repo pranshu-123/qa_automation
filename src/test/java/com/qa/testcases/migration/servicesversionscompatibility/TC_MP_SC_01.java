@@ -40,10 +40,13 @@ public class TC_MP_SC_01 extends BaseClass {
         servicesAndVersionsCompatibility.clickOnRunModalButton();
 
         try {
+            waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.confirmationMessageElement);
             waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.confirmationMessageElement,
                     "Services and Versions Compatibility completed successfully.");
-            test.log(LogStatus.PASS, "Verified Services and Versions Compatibility report is loaded properly.");
+            waitExecuter.sleep(2000);
+            test.log(LogStatus.PASS, "Verified Services and Versions CowaitExecuter.sleep(2000);mpatibility report is loaded properly.");
             servicesAndVersionsCompatibility.validateLatestReport();
+            waitExecuter.sleep(2000);
         } catch (TimeoutException te) {
             throw new AssertionError("Services and Versions Compatibility Report not completed successfully.");
         }

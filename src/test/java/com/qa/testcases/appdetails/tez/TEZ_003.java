@@ -9,6 +9,7 @@ import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.TezAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
@@ -36,6 +37,7 @@ public class TEZ_003 extends BaseClass {
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         TezAppsDetailsPageObject tezApps = new TezAppsDetailsPageObject(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         TezAppsDetailsPage tezDetailsPage = new TezAppsDetailsPage(driver);
         DatePicker datePicker = new DatePicker(driver);
         AllApps allApps = new AllApps(driver);
@@ -52,6 +54,7 @@ public class TEZ_003 extends BaseClass {
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
         Assert.assertEquals(appCount, totalCount, "The tez app count of tezApp is not equal to " +
                 "the total count of heading.");
+        waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 

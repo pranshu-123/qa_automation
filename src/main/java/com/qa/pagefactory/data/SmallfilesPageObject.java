@@ -267,7 +267,7 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//table/tbody/tr/td[1]")
     public List<WebElement> reportAll;
 
-    @FindBy(xpath = "(//*[@class='pointer icon-delete is-enabled'])")
+    @FindBy(xpath = "(//*[@class='pointer icon-delete is-enabled undefined'])")
     public WebElement deleteReportIcon;
 
     @FindBy(xpath="//div[contains(@class,'popover')]/H3")
@@ -297,7 +297,7 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "(//*[@class='icon-expand is-enabled'])[1]")
     public WebElement viewReportIcon;
 
-    @FindBy(xpath = "//div//span//span[@class='pointer icon-download is-enabled']")
+    @FindBy(xpath = "//div//span//span[@class='pointer icon-download is-enabled undefined']")
     public WebElement downloadReportIcon;
 
     @FindBy(xpath = "//tbody/tr[1]/td[1]")

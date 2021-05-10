@@ -41,13 +41,13 @@ public class TC_SF_21 extends BaseClass {
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
 
-        smallfiles.navigateToSmallFileReport(smallfilesPageObject, test, "99999999999999999999999999", "999999999999999999999999999"
-                , "100000000000000", "10000");
+        smallfiles.navigateToSmallFileReport(smallfilesPageObject, test, "512", "1024"
+                , "100", "5");
         test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files");
 
         smallfiles.clickOnadvancedOptions();
 
-        smallfiles.navigateToAdvancedOptions(smallfilesPageObject, test, "50", "50");
+        smallfiles.navigateToAdvancedOptions(smallfilesPageObject, test, "3", "6");
         waitExecuter.waitUntilPageFullyLoaded();
         userActions.performActionWithPolling(smallfilesPageObject.modalRunButton, UserAction.CLICK);
         waitExecuter.sleep(8000);

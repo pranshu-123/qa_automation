@@ -85,10 +85,11 @@ public class ReportsArchiveSchedulePage {
    */
   public void validateScheduledReportMoreInfoAction(ReportsArchiveScheduledPageObject reportPageObj) {
     MouseActions.clickOnElement(driver, reportPageObj.viewReportIcon);
+    waitExecuter.sleep(3000);
     String expectedHeader = "Scheduled Info";
-    waitExecuter.sleep(1000);
     Assert.assertTrue(reportPageObj.moreInfoWin.isDisplayed(), "The pop up window with all the details " +
         "(parameters) of the report is not displayed");
+    waitExecuter.sleep(2000);
     String header = reportPageObj.moreInfoHeader.getText();
     Assert.assertEquals(expectedHeader, header, " The header displayed in the pop up window is incorrect\n" +
         "Expected: " + expectedHeader + " but Actual is " + header);
@@ -101,7 +102,7 @@ public class ReportsArchiveSchedulePage {
   public void validateScheduleReportDropDown(ReportsArchiveScheduledPageObject reportPageObj) {
     waitExecuter.waitUntilPageFullyLoaded();
     MouseActions.clickOnElement(driver, reportPageObj.scheduleReportDropDown);
-    waitExecuter.waitUntilPageFullyLoaded();
+    waitExecuter.sleep(2000);
     List<WebElement> dropDownList = reportPageObj.dropDownList;
     Assert.assertFalse(dropDownList.isEmpty(), "There are no reports in the drop down list as it is empty");
     boolean isContainsAllOpt = false;
@@ -113,14 +114,16 @@ public class ReportsArchiveSchedulePage {
       String reportType = dropDownList.get(i).getText();
       logger.info("reportType = " + reportType);
       if (dropDownList.get(i).getText().contains("All")) {
+        waitExecuter.sleep(2000);
         MouseActions.clickOnElement(driver, dropDownList.get(i));
+
         isContainsAllOpt = true;
         totalReports = getReportCnt(reportPageObj, 15);
         logger.info("reportType = " + totalReports);
       } else {
         logger.info("Click on reportType: " + reportType);
         MouseActions.clickOnElement(driver, dropDownList.get(i));
-        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.sleep(2000);
         otherReportTotal += getReportCnt(reportPageObj, 15);
         logger.info("The other report cnt is " + otherReportTotal);
       }
@@ -263,7 +266,7 @@ public class ReportsArchiveSchedulePage {
   public void validateReportStatus(ReportsArchiveScheduledPageObject reportPageObj) {
     List<WebElement> reportStatusList = reportPageObj.reportStatus;
     Assert.assertFalse(reportStatusList.isEmpty(), "There are no status against the reports");
-    String[] expectedReportStatus = {"SUCCESS", "FAILURE", "NO REPORT"};
+    String[] expectedReportStatus = {"SUCCESS", "FAILURE", "NO REPORT","STARTED"};
     for (int i = 0; i < reportStatusList.size(); i++) {
       String reportStatus = reportStatusList.get(i).getText();
       logger.info("The report status is " + reportStatus);
@@ -846,9 +849,27 @@ public class ReportsArchiveSchedulePage {
           afterReportCnt = Integer.parseInt(reportCntList.get(i).getText().trim());
           logger.info("Before cnt = " + beforeReportCnt + " After cnt = " + afterReportCnt);
           break;
+        case "Capacity Forecasting":
+          MouseActions.clickOnElement(driver, newReportActionList.get(i));
+          waitExecuter.sleep(2000);
+          List<WebElement> fieldDays = reportPageObj.forcasting;
+          String[] valueDays = {"7"};
+          for (int f = 0; f < fieldDays.size(); f++) {
+            fieldDays.get(f).sendKeys(valueDays[f]);
+          }
+          waitExecuter.waitUntilPageFullyLoaded();
+          MouseActions.clickOnElement(driver, reportPageObj.reportCreationRunButton);
+          waitExecuter.sleep(50000);
+          waitExecuter.waitUntilPageFullyLoaded();
+          status = reportStatusList.get(i).getText().trim();
+          driver.navigate().refresh();
+          waitExecuter.waitUntilPageFullyLoaded();
+          waitExecuter.waitUntilElementClickable(reportPageObj.reportSearchBox);
+          afterReportCnt = Integer.parseInt(reportCntList.get(i).getText().trim());
+          logger.info("Before cnt = " + beforeReportCnt + " After cnt = " + afterReportCnt);
+          break;
         case "Cluster Discovery":
         case "Tuning":
-        case "Capacity Forecasting":
         case "Queue Analysis":
         case "Services and Versions Compatibility":
           MouseActions.clickOnElement(driver, newReportActionList.get(i));
@@ -941,7 +962,7 @@ public class ReportsArchiveSchedulePage {
             " Report not removed");
         MouseActions.clickOnElement(driver,reportPageObj.archives);
         waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.sleep(2000);
+        waitExecuter.sleep(5000);
         int reportCntAfterDelete = Integer.parseInt(reportCntList.get(i).getText().trim());
         logger.info("Before Delete report count = " + reportCnt + "\n After delete report count is " + reportCntAfterDelete);
         Assert.assertEquals(reportCntAfterDelete, reportCnt - 1, " Report " + reportName + " had " + reportCnt +

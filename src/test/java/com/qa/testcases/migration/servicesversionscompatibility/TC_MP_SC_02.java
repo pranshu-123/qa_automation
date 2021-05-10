@@ -38,9 +38,11 @@ public class TC_MP_SC_02 extends BaseClass {
         waitExecuter.sleep(50000);
         waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.runBtn, "Run");
         servicesAndVersionsCompatibility.clickOnRunButton();
+        waitExecuter.sleep(2000);
 
         LOGGER.info("Clicked on Run button");
         servicesAndVersionsCompatibility.getCloudProducts();
+        waitExecuter.sleep(2000);
         LOGGER.info("Clicked on cloud product drop down to get all cloud providers");
         test.log(LogStatus.PASS, "Verified all supported cloud providers");
     }

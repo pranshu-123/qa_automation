@@ -94,7 +94,7 @@ public class AutoActions {
     public void selectTriggerCondition(String triggerConditionAppType){
         waitExecuter.sleep(1000);
         int allTriggerCondition = newAutoActionPolicyPageObject.selectTriggerConditions.size();
-        System.out.println("allTriggerCondition count: "+ allTriggerCondition);
+        logger.info("allTriggerCondition count: "+ allTriggerCondition);
         for(int i=0; i< allTriggerCondition ; i++){
             if(newAutoActionPolicyPageObject.selectTriggerConditions.get(i).getText().equals(triggerConditionAppType)){
                 MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.selectTriggerConditions.get(i));
@@ -106,7 +106,7 @@ public class AutoActions {
     public void selectORANDOptions(String optionType){
         waitExecuter.sleep(1000);
         int allOptions = newAutoActionPolicyPageObject.getSelectORANDOptions.size();
-        System.out.println("allOptions count:"+ allOptions);
+        logger.info("allOptions count:"+ allOptions);
         for(int i=0; i< allOptions ; i++){
             String actualOption = newAutoActionPolicyPageObject.getSelectORANDOptions.get(i).getText();
             if(actualOption.equals(optionType)){
@@ -359,7 +359,7 @@ public class AutoActions {
     public void selectRefineScope(String scope){
         waitExecuter.sleep(1000);
         int allScopeCount = newAutoActionPolicyPageObject.selectRefineScopeList.size();
-        System.out.println("Scope count: "+ allScopeCount);
+        logger.info("Scope count: "+ allScopeCount);
         for(int i=0; i<allScopeCount-1 ; i++){
             if(newAutoActionPolicyPageObject.selectRefineScopeList.get(i).getText().equals(scope)){
                 waitExecuter.sleep(1000);

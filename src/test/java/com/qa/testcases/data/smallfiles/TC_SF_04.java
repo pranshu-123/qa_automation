@@ -70,7 +70,5 @@ public class TC_SF_04 extends BaseClass {
         MouseActions.clickOnElement(driver, smallfilesPageObject.closebutton);
         waitExecuter.sleep(3000);
 
-
-
         }
 }

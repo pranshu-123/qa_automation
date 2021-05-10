@@ -58,8 +58,8 @@ public class TC_SF_37 extends BaseClass {
             logger.info("Clicked on Modal Shedule Button");
             test.log(LogStatus.INFO, "Clicked on Modal Shedule Button");
             waitExecuter.waitUntilPageFullyLoaded();
-            String scheduleSuccessMsg = "The report has been scheduled successfully.";
-            smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
+            /*String scheduleSuccessMsg = "The report has been scheduled successfully.";
+            smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);*/
         } catch (Exception te) {
             throw new AssertionError("Verified the scheduled report daily not been scheduled successfully." + te.getMessage());
         }

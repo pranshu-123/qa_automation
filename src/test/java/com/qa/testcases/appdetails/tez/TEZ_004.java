@@ -62,6 +62,7 @@ public class TEZ_004 extends BaseClass {
         LOGGER.info("AppCount is " + appCount + " total count is " + totalCount);
         Assert.assertEquals(appCount, totalCount, "The tez app count of TezApp is not equal to " +
                 "the total count of heading.");
+        waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 

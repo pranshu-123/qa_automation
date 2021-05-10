@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.pagefactory.data.SmallfilesPageObject;
 import com.qa.scripts.data.Smallfiles;
 import com.qa.utils.Log;
+import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebElement;
@@ -28,6 +29,7 @@ public class TC_SF_32 extends BaseClass {
 
         SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
         UserActions userActions = new UserActions(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         Smallfiles smallfiles = new Smallfiles(driver);
         smallfiles.commonPanelTabValidation(test, logger);
         smallfiles.closeConfirmationMessageNotification();
@@ -36,7 +38,8 @@ public class TC_SF_32 extends BaseClass {
             test.log(LogStatus.INFO, "Click on queue search box and search for path");
             logger.info("Click on queue search box and search for path");
             smallfilesPageObject.reportSearchBox.click();
-            smallfilesPageObject.reportSearchBox.sendKeys("/");
+            smallfilesPageObject.reportSearchBox.sendKeys("/warehouse");
+            waitExecuter.sleep(2000);
 
             if (smallfilesPageObject.avgFileSize.size() > 0) {
                 List<WebElement> avgFileSize = smallfilesPageObject.fileName;

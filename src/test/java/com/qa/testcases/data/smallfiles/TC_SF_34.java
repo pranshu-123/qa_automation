@@ -36,7 +36,7 @@ public class TC_SF_34 extends BaseClass {
             test.log(LogStatus.INFO, "Click on queue search box and search for path");
             logger.info("Click on queue search box and search for path");
             smallfilesPageObject.reportSearchBox.click();
-            smallfilesPageObject.reportSearchBox.sendKeys("/");
+            smallfilesPageObject.reportSearchBox.sendKeys("/warehouse");
 
             if (smallfilesPageObject.minFileSizeName.size() > 0) {
                 List<WebElement> minFileSizeName = smallfilesPageObject.pathName;

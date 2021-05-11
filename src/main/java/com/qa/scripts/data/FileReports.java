@@ -124,12 +124,12 @@ public class FileReports {
     }
 
 
-    public void checkTableContainsData() {
+    public void checkTableContainsData(int tablesRows,int tableCells) {
         String expectedMsg = "No data to display.";
         List<WebElement> tableRows = fileReportsPageObject.fileTableRows;
         Assert.assertFalse(tableRows.isEmpty(), "Table contains no data");
         WebElement rowData = driver.findElement(By.xpath("//table[@class='component-data-tables row-hover']/tbody/" +
-                "tr[" + 1 + "]/td[" + 1 + "]"));
+                "tr[" + tablesRows + "]/td[" + tableCells + "]"));
         String rowDataStr = rowData.getText();
         Assert.assertFalse(rowDataStr.contains(expectedMsg), "Table contains no data. Got '" + expectedMsg + "' message");
     }
@@ -137,46 +137,15 @@ public class FileReports {
     /**
      * Method to validate the search option for different file types
      */
-    public void verifyFilePathSearchOption(String fileType, String clusterID) {
-        selectOnlySingleCluster(clusterID);
-        List<WebElement> tableHeaderList = fileReportsPageObject.tableHeader;
-        List<WebElement> tableRows = fileReportsPageObject.fileTableRows;
-        String searchString = "/";
-        checkTableContainsData();
-
-        WebElement rowData = driver.findElement
-                (By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + 1 + "]/td[" + 1 + "]"));
-        Assert.assertTrue(rowData.isDisplayed(), "No data under column: " + tableHeaderList.get(1).getText() +
-                " for " + fileType + " file type");
-        searchString = rowData.getText();
-        LOGGER.info("The search string is " + searchString);
-
-        fileReportsPageObject.searchField.sendKeys(searchString);
-        waitExecuter.waitUntilPageFullyLoaded();
-        for (int row = 1; row <= tableRows.size(); row++) {
-            WebElement searchRowData = driver.findElement
-                    (By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + row + "]/td[" + 1 + "]"));
-            Assert.assertTrue(searchRowData.isDisplayed(), "No data under column: File " +
-                    " for " + fileType + " file type");
-            LOGGER.info("Search String is " + searchString + " Search result is " + searchRowData.getText());
-            Assert.assertTrue(searchRowData.getText().contains(searchString), "The search result for " + fileType + "" +
-                    " file type donot contain the search string\n Expected '" + searchString + "' to be present in '"
-                    + searchRowData.getText() + "' search result");
-        }
-    }
-
-    /**
-     * Method to validate the search option for different file types
-     */
-    public void verifyAllFileSizePathSearchOption(String fileType, String clusterID, int tablesRows, int searchRow) {
+    public void verifyAllFileSizePathSearchOption(String fileType, String clusterID, int tablesRows,int tableCells) {
         selectOnlySingleCluster(clusterID);
         List<WebElement> tableHeaderList = fileReportsPageObject.tableHeader;
         List<WebElement> tableRows = fileReportsPageObject.fileTableRows;
         String searchString ="";
-        checkTableContainsData();
+        checkTableContainsData(tablesRows,tableCells);
 
         WebElement rowData = driver.findElement(
-                By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + 1 + "]/td[" + tablesRows + "]"));
+                By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + tablesRows + "]/td[" + tableCells + "]"));
         Assert.assertTrue(rowData.isDisplayed(), "No data under column: " + tableHeaderList.get(1).getText() +
                 " for " + fileType + " file type");
         searchString = rowData.getText();
@@ -186,7 +155,7 @@ public class FileReports {
         waitExecuter.waitUntilPageFullyLoaded();
         for (int row = 1; row <= tableRows.size(); row++) {
             WebElement searchRowData = driver.findElement
-                    (By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + row + "]/td[" + searchRow + "]"));
+                    (By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + row + "]/td[" + tableCells + "]"));
             Assert.assertTrue(searchRowData.isDisplayed(), "No data under column: File " +
                     " for " + fileType + " file type");
             LOGGER.info("Search String is " + searchString + " Search result is " + searchRowData.getText());
@@ -197,13 +166,13 @@ public class FileReports {
     }
 
     /**
-     * Method to verify the sort functionality on Column 'Min File Size' for different  file types.
+     * Method to verify the sort functionality on Column 'All File Size' for different  file types.
      */
     public void verifyAllSortOption(String fileType, String clusterID, int tdValue, int colValue) {
         selectOnlySingleCluster(clusterID);
         List<WebElement> tableRowList = fileReportsPageObject.fileTableRows;
         ArrayList<String> expectedFileCntArr = new ArrayList<>(), ascendingFileCntArr, descendingFileCntArr;
-        WebElement fileCol = driver.findElement(By.xpath("//tbody/tr/td[" + colValue + "]"));
+        WebElement fileCol = driver.findElement(By.xpath("//table/thead/tr/th[" + colValue + "]"));
         int rowCnt = tableRowList.size();
         if (rowCnt < 10) {
             expectedFileCntArr = getAllFileCnt(tableRowList, fileType, tdValue);
@@ -228,8 +197,17 @@ public class FileReports {
         descendingFileCntArr = getAllFileCnt(tableRowList, fileType, tdValue);
         Assert.assertEquals(ascendingFileCntArr.size(), descendingFileCntArr.size(), " Ascending sort and Descending sort" +
                 " array size do not match");
+        Collections.sort(expectedFileCntArr);
+        ArrayList<String> newExpectedFileCnt = new ArrayList<>();
+        LOGGER.info("The size of ascending arr is " + ascendingFileCntArr.size() +
+                " expectedArr is " + expectedFileCntArr.size());
+        for (int i = 0; i < ascendingFileCntArr.size(); i++) {
+            newExpectedFileCnt.add(expectedFileCntArr.get(i));
+        }
         LOGGER.info("Ascending Sort fileCnt is " + ascendingFileCntArr + "\n" +
-                "Descending Sort fileCnt is " + descendingFileCntArr);
-        Assert.assertTrue(descendingFileCntArr.equals(ascendingFileCntArr) , "The expected array do not match");
+                "Descending Sort fileCnt is " + descendingFileCntArr + "\n" +
+                "Expected Sort fileCnt is " + newExpectedFileCnt);
+        Assert.assertTrue(expectedFileCntArr.equals(ascendingFileCntArr) ||
+                expectedFileCntArr.equals(descendingFileCntArr), "The expected array do not match");
     }
 }

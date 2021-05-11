@@ -10,7 +10,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
@@ -111,10 +113,10 @@ public class FileReports {
                         (By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + row + "]/td[" + tdValue + "]"));
                 Assert.assertTrue(rowData.isDisplayed(), "No data under column: File " +
                         " for " + fileType + " file type");
-                String avgfileCnt = rowData.getText().trim();
-                avgfileCnt.replaceAll("/", Matcher.quoteReplacement("\\/"));
-                LOGGER.info("The file count is " + avgfileCnt);
-                expectedFileCnt.add(avgfileCnt);
+                String fileCnt = rowData.getText().trim();
+                fileCnt.replaceAll("(^|\\s)\\d+(gb|mb)($|\\s)", Matcher.quoteReplacement("\\/"));
+                LOGGER.info("The path count is " + fileCnt);
+                expectedFileCnt.add(fileCnt);
             }
         } catch (org.openqa.selenium.NoSuchElementException ex) {
             WebElement noData = fileReportsPageObject.noDataText;
@@ -124,7 +126,7 @@ public class FileReports {
     }
 
 
-    public void checkTableContainsData(int tablesRows,int tableCells) {
+    public void checkTableContainsData(int tablesRows, int tableCells) {
         String expectedMsg = "No data to display.";
         List<WebElement> tableRows = fileReportsPageObject.fileTableRows;
         Assert.assertFalse(tableRows.isEmpty(), "Table contains no data");
@@ -137,12 +139,12 @@ public class FileReports {
     /**
      * Method to validate the search option for different file types
      */
-    public void verifyAllFileSizePathSearchOption(String fileType, String clusterID, int tablesRows,int tableCells) {
+    public void verifyAllFileSizePathSearchOption(String fileType, String clusterID, int tablesRows, int tableCells) {
         selectOnlySingleCluster(clusterID);
         List<WebElement> tableHeaderList = fileReportsPageObject.tableHeader;
         List<WebElement> tableRows = fileReportsPageObject.fileTableRows;
-        String searchString ="";
-        checkTableContainsData(tablesRows,tableCells);
+        String searchString = "";
+        checkTableContainsData(tablesRows, tableCells);
 
         WebElement rowData = driver.findElement(
                 By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + tablesRows + "]/td[" + tableCells + "]"));
@@ -207,7 +209,74 @@ public class FileReports {
         LOGGER.info("Ascending Sort fileCnt is " + ascendingFileCntArr + "\n" +
                 "Descending Sort fileCnt is " + descendingFileCntArr + "\n" +
                 "Expected Sort fileCnt is " + newExpectedFileCnt);
-        Assert.assertTrue(expectedFileCntArr.equals(ascendingFileCntArr) ||
-                expectedFileCntArr.equals(descendingFileCntArr), "The expected array do not match");
+        Assert.assertTrue(newExpectedFileCnt.equals(ascendingFileCntArr) ||
+                newExpectedFileCnt.equals(descendingFileCntArr), "The expected array do not match");
+    }
+
+    public ArrayList<Integer> getFileCnt(List<WebElement> tableRowList, String fileType,int tdValue) {
+        ArrayList<Integer> expectedFileCnt = new ArrayList<>();
+        try {
+            for (int row = 1; row <= tableRowList.size(); row++) {
+                WebElement rowData = driver.findElement
+                        (By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + row + "]/td[" + tdValue + "]"));
+                Assert.assertTrue(rowData.isDisplayed(), "No data under column: File " +
+                        " for " + fileType + " file type");
+                int fileCnt = Integer.parseInt(rowData.getText().trim());
+                LOGGER.info("The file count is " + fileCnt);
+                expectedFileCnt.add(fileCnt);
+            }
+        } catch (org.openqa.selenium.NoSuchElementException ex) {
+            WebElement noData = fileReportsPageObject.noDataText;
+            Assert.assertFalse(noData.isDisplayed(), "Data not present in the table got {'" + noData.getText() + "}' message");
+        }
+        return expectedFileCnt;
+    }
+
+    /**
+     * Method to verify the sort functionality on Column 'File' for different  file types.
+     */
+    public void verifyFileSortOption(String fileType, String clusterID,int tdValue, int colValue) {
+        selectOnlySingleCluster(clusterID);
+        List<WebElement> tableRowList = fileReportsPageObject.fileTableRows;
+        ArrayList<Integer> expectedFileCntArr = new ArrayList<>(), ascendingFileCntArr, descendingFileCntArr;
+        WebElement fileCol = driver.findElement(By.xpath("//table/thead/tr/th[" + colValue + "]"));
+        int rowCnt = tableRowList.size();
+        if (rowCnt < 10) {
+            expectedFileCntArr = getFileCnt(tableRowList, fileType, tdValue);
+        } else {
+            String pageCntStr = fileReportsPageObject.pagination.getText().trim();
+            int pageCnt = Integer.parseInt(pageCntStr.split("\\s+")[2]);
+            LOGGER.info("The pagination is " + pageCntStr + " Page Cnt is " + pageCnt);
+            for (int i = 1; i <= pageCnt; i++) {
+                waitExecuter.waitUntilPageFullyLoaded();
+                expectedFileCntArr.addAll(getFileCnt(tableRowList, fileType, tdValue));
+                if (i != pageCnt)
+                    MouseActions.clickOnElement(driver, fileReportsPageObject.rightCaretReportCnt);
+            }
+            MouseActions.clickOnElement(driver, fileReportsPageObject.backwardCaretReportCnt);
+            waitExecuter.waitUntilElementClickable(fileReportsPageObject.searchField);
+        }
+        MouseActions.clickOnElement(driver, fileCol);
+        waitExecuter.waitUntilPageFullyLoaded();
+        ascendingFileCntArr = getFileCnt(tableRowList, fileType, tdValue);
+        MouseActions.clickOnElement(driver, fileCol);
+        waitExecuter.waitUntilPageFullyLoaded();
+        descendingFileCntArr = getFileCnt(tableRowList, fileType, tdValue);
+        Assert.assertEquals(ascendingFileCntArr.size(), descendingFileCntArr.size(), " Ascending sort and Descending sort" +
+                " array size do not match");
+        Collections.sort(expectedFileCntArr);
+        ArrayList<Integer> newExpectedFileCnt = new ArrayList<>();
+        LOGGER.info("The size of ascending arr is " + ascendingFileCntArr.size() +
+                " expectedArr is " + expectedFileCntArr.size());
+        for (int i = 0; i < ascendingFileCntArr.size(); i++) {
+            newExpectedFileCnt.add(expectedFileCntArr.get(i));
+        }
+        LOGGER.info("Ascending Sort fileCnt is " + ascendingFileCntArr + "\n" +
+                "Descending Sort fileCnt is " + descendingFileCntArr + "\n" +
+                "Expected Sort fileCnt is " + newExpectedFileCnt);
+        Assert.assertTrue(newExpectedFileCnt.equals(ascendingFileCntArr) ||
+                newExpectedFileCnt.equals(descendingFileCntArr), "The expected array do not match");
     }
 }
+
+

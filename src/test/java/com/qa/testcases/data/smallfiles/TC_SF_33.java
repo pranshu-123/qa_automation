@@ -38,7 +38,7 @@ public class TC_SF_33 extends BaseClass {
             test.log(LogStatus.INFO, "Click on queue search box and search for path");
             logger.info("Click on queue search box and search for path");
             smallfilesPageObject.reportSearchBox.click();
-            smallfilesPageObject.reportSearchBox.sendKeys("/");
+            smallfilesPageObject.reportSearchBox.sendKeys("/warehouse");
 
             if (smallfilesPageObject.totalFileSize.size() > 0) {
                 List<WebElement> totalFileSize = smallfilesPageObject.totalFileSize;

@@ -284,10 +284,9 @@ public class Smallfiles {
         test.log(LogStatus.INFO, "Set minimum FileSize as: " + smallfilesPageObject.confirmationMessageMinFileSizeElement.getText());
 
         smallfilesPageObject.maxiFileSize.sendKeys(maximumFileSize);
-        waitExecuter.waitUntilElementPresent(smallfilesPageObject.confirmationMessageMaxFileSizeElement);
-        Assert.assertEquals(smallfilesPageObject.confirmationMessageMaxFileSizeElement.getText(),
-                "Max File Size is between 0 B and 8.00 EB");
-        test.log(LogStatus.INFO, "Set maximum FileSize as: " + smallfilesPageObject.confirmationMessageMaxFileSizeElement.getText());
+        LOGGER.info("Set directories To Show as: " + maximumFileSize);
+        test.log(LogStatus.INFO, "Set directories To Show as: " + maximumFileSize);
+
 
         smallfilesPageObject.minimumSmallFile.sendKeys(minimumSmallFile);
         LOGGER.info("Set directories To Show as: " + minimumSmallFile);

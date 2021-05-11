@@ -37,7 +37,7 @@ public class TC_SF_31 extends BaseClass {
             test.log(LogStatus.INFO, "Click on queue search box and search for path");
             logger.info("Click on queue search box and search for path");
             smallfilesPageObject.reportSearchBox.click();
-            smallfilesPageObject.reportSearchBox.sendKeys("/");
+            smallfilesPageObject.reportSearchBox.sendKeys("/warehouse");
 
             if (smallfilesPageObject.getFileNameFromTable.size() > 0) {
                 String selectedFileName = smallfilesPageObject.getFileNameFromTable.stream().findFirst()

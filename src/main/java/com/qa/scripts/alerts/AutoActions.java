@@ -1,12 +1,15 @@
 package com.qa.scripts.alerts;
 
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.alerts.AutoActionsPageObject;
 import com.qa.pagefactory.alerts.NewAutoActionPolicyPageObject;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Mouse;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
@@ -77,13 +80,38 @@ public class AutoActions {
         MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.triggerConditionsBtn);
     }
 
+    public void clickOnTriggerConditionBtn2(){
+        waitExecuter.sleep(2000);
+        MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.triggerConditionsBtn2);
+    }
+
+    public void clickOnnJoinTxtBtn(){
+        waitExecuter.sleep(2000);
+        MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.joinTxtBtn);
+    }
+
 
     public void selectTriggerCondition(String triggerConditionAppType){
         waitExecuter.sleep(1000);
         int allTriggerCondition = newAutoActionPolicyPageObject.selectTriggerConditions.size();
+        logger.info("allTriggerCondition count: "+ allTriggerCondition);
         for(int i=0; i< allTriggerCondition ; i++){
             if(newAutoActionPolicyPageObject.selectTriggerConditions.get(i).getText().equals(triggerConditionAppType)){
                 MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.selectTriggerConditions.get(i));
+                break;
+            }
+        }
+    }
+
+    public void selectORANDOptions(String optionType){
+        waitExecuter.sleep(1000);
+        int allOptions = newAutoActionPolicyPageObject.getSelectORANDOptions.size();
+        logger.info("allOptions count:"+ allOptions);
+        for(int i=0; i< allOptions ; i++){
+            String actualOption = newAutoActionPolicyPageObject.getSelectORANDOptions.get(i).getText();
+            if(actualOption.equals(optionType)){
+                MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.getSelectORANDOptions.get(i));
+                break;
             }
         }
     }
@@ -120,6 +148,19 @@ public class AutoActions {
         newAutoActionPolicyPageObject.triggerConditionValue.sendKeys(triggerValue);
     }
 
+    public void enterRuleSetInPolicyWithOption(String triggerCondition, String triggerValue, String optionType){
+        waitExecuter.sleep(2000);
+        clickOnTriggerConditionBtn2();
+        waitExecuter.sleep(2000);
+        selectTriggerCondition(triggerCondition);
+        waitExecuter.sleep(2000);
+        clickOnnJoinTxtBtn();
+        waitExecuter.sleep(2000);
+        selectORANDOptions(optionType);
+        waitExecuter.sleep(2000);
+        newAutoActionPolicyPageObject.triggerConditionValue2.sendKeys(triggerValue);
+    }
+
     public void enterNewAutoActionPolicyDetails(String policyName, String triggerCondition, String triggerValue, String policyDescrption){
         waitExecuter.sleep(1000);
         newAutoActionPolicyPageObject.policyName.sendKeys(policyName);
@@ -128,17 +169,88 @@ public class AutoActions {
         waitExecuter.sleep(2000);
         newAutoActionPolicyPageObject.triggerConditionValue.sendKeys(triggerValue);
         newAutoActionPolicyPageObject.policyDescription.sendKeys(policyDescrption);
+
     }
 
     public void selectActions(String inputAction){
         waitExecuter.sleep(2000);
-        //Assert.assertTrue(newAutoActionPolicyPageObject.listOfActions.isEmpty(), "No list of actions present.");
         List<WebElement> webElements = newAutoActionPolicyPageObject.listOfActions;
         for(WebElement actions : webElements){
             if(actions.getText().equals(inputAction)){
                 actions.click();
             }
         }
+    }
+
+    public void enterEmail(String inputAction, String email){
+        MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.actionButton);
+        waitExecuter.sleep(2000);
+        selectActions(inputAction);
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.actionEle);
+        newAutoActionPolicyPageObject.actionEle.sendKeys(email.toLowerCase());
+        waitExecuter.waitUntilElementClickable(newAutoActionPolicyPageObject.addEmailEleBtn);
+        MouseActions.clickOnElement(driver,newAutoActionPolicyPageObject.addEmailEleBtn);
+    }
+
+    public void enterEmail(String inputAction, String email1, String email2){
+        MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.actionButton);
+        waitExecuter.sleep(2000);
+        selectActions(inputAction);
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.actionEle);
+        newAutoActionPolicyPageObject.actionEle.sendKeys(email1.toLowerCase());
+        waitExecuter.waitUntilElementClickable(newAutoActionPolicyPageObject.addEmailEleBtn);
+        newAutoActionPolicyPageObject.actionEle.sendKeys(email2.toLowerCase());
+        waitExecuter.waitUntilElementClickable(newAutoActionPolicyPageObject.addEmailEleBtn);
+        MouseActions.clickOnElement(driver,newAutoActionPolicyPageObject.addEmailEleBtn);
+    }
+
+    public void enterHttpPostUrl(String inputAction, String httpPostUrl){
+        MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.actionButton);
+        waitExecuter.sleep(2000);
+        selectActions(inputAction);
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.actionEle);
+        newAutoActionPolicyPageObject.actionEle.sendKeys(httpPostUrl.toLowerCase());
+        waitExecuter.waitUntilElementClickable(newAutoActionPolicyPageObject.addUrlBtn);
+        MouseActions.clickOnElement(driver,newAutoActionPolicyPageObject.addUrlBtn);
+    }
+
+    public void enterPostToSlackUrl(String inputAction, String postToSlackUrl, String postToSlackToken){
+        MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.actionButton);
+        waitExecuter.sleep(2000);
+        selectActions(inputAction);
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.actionElePostToSlack);
+        newAutoActionPolicyPageObject.actionElePostToSlack.sendKeys(postToSlackUrl);
+        waitExecuter.waitUntilElementClickable(newAutoActionPolicyPageObject.addWebhookUrlBtn);
+        MouseActions.clickOnElement(driver,newAutoActionPolicyPageObject.addWebhookUrlBtn);
+
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.webHookTokenEle);
+        newAutoActionPolicyPageObject.webHookTokenEle.sendKeys(postToSlackToken.toLowerCase());
+    }
+
+    public void enterMoveAppToQueueName(String inputAction, String queueName){
+        MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.actionButton);
+        waitExecuter.sleep(2000);
+        selectActions(inputAction);
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.queueNameEle);
+        newAutoActionPolicyPageObject.queueNameEle.sendKeys(queueName);
+    }
+
+    public void selectKillAppAction(String inputAction){
+        MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.actionButton);
+        waitExecuter.sleep(2000);
+        selectActions(inputAction);
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.killAppChkBoxEle);
+    }
+
+    public boolean verifyErrorMsg(String errorMsg){
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.fatalMsgTextEle);
+        String fatalMsgText = newAutoActionPolicyPageObject.fatalMsgTextEle.getText();
+        String expectedErrMsgText = errorMsg.toString();
+
+        if(fatalMsgText.contains(expectedErrMsgText)){
+            return true;
+        }
+        return false;
     }
 
     public void selectMetric(String inputMetric){
@@ -224,7 +336,7 @@ public class AutoActions {
     public void selectRefineScope(String scope){
         waitExecuter.sleep(1000);
         int allScopeCount = newAutoActionPolicyPageObject.selectRefineScopeList.size();
-        System.out.println("Scope count: "+ allScopeCount);
+        logger.info("Scope count: "+ allScopeCount);
         for(int i=0; i<allScopeCount-1 ; i++){
             if(newAutoActionPolicyPageObject.selectRefineScopeList.get(i).getText().equals(scope)){
                 waitExecuter.sleep(1000);

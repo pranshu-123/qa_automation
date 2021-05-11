@@ -11,15 +11,14 @@ import java.util.logging.Logger;
 
 @Marker.Alerts
 @Marker.All
-public class TC_AA124 extends BaseClass {
+public class TC_AA131 extends BaseClass {
 
-    private static final Logger logger = Logger.getLogger(TC_AA124.class.getName());
+    private static final Logger logger = Logger.getLogger(TC_AA131.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateSpecificTime(String clusterId) {
-        test = extent.startTest("TC_AA124.validateSpecificTime",
-                "Verify user is able to select a specific TIME interval on a daily basis to trigger " +
-                        "auto actions when violations occur between that time interval.");
+    public void validatePostToSlackActionWithUrlAndToken(String clusterId) {
+        test = extent.startTest("TC_AA131.validatePostToSlackActionWithUrlAndToken",
+                "Validate behaviour Post to slack by adding valid Slack token and webhook URL");
         test.assignCategory(" Alerts ");
 
         AutoActions aa = new AutoActions(driver);
@@ -41,27 +40,21 @@ public class TC_AA124 extends BaseClass {
         //Close default Refine Scope cluster window on New auto action policy
         aa.closeDefaultRefineScope();
 
-        String policyName = "testPolicyDailyTime";
+        String policyName = "testPolicyPostToSlackActionWithUrlAndToken";
         aa.enterNewAutoActionPolicyDetails(policyName, "User", "3");
-        test.log(LogStatus.INFO,"Fill new auto action policy details, without value");
+        test.log(LogStatus.INFO, "Fill new auto action policy details, without value");
 
-        aa.clickOnRefineScope();
-        test.log(LogStatus.INFO,"Clicked on refine scope button");
-
-        String scope = "Time";
-        aa.selectRefineScope(scope);
-        test.log(LogStatus.INFO,"Selected scope");
-
-        String userScopeChkBoxName = "daily";
-        aa.clickScopeChkBox(userScopeChkBoxName);
-        test.log(LogStatus.INFO,"Clicked on scope '" + userScopeChkBoxName + "' checkbox");
-
+        String inputAction = "Post To Slack";
+        String postToSlackUrl = "http://somewebhookurl.com";
+        String postToSlackToken = "0123456789";
+        aa.enterPostToSlackUrl(inputAction, postToSlackUrl, postToSlackToken);
+        test.log(LogStatus.INFO,"Clicked action Post To Slack");
         aa.clickOnSaveBtn();
         test.log(LogStatus.INFO,"Clicked on save button");
         Assert.assertTrue(aa.validateAutoActionAdded(policyName), "Policy: " +
                 policyName + " not found.");
-        test.log(LogStatus.PASS, "Validated TIME scope as Daily, on New Auto Action Policy page");
+        test.log(LogStatus.PASS, "Validated  Post to slack by adding valid Slack token and webhook URL" +
+                " on New Auto Action Policy page");
 
     }
-
 }

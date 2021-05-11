@@ -71,10 +71,11 @@ public class TC_SF_08 extends BaseClass {
 
         waitExecuter.waitUntilElementClickable(smallfilesPageObject.verifyReport);
         waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.verifyReport,
-                "Currently, the Small file Report report is being generated, so no other action can be performed at this time. Please wait for the running task to complete.");
-        waitExecuter.sleep(1000);
-        Assert.assertEquals(smallfilesPageObject.verifyReport.getText(), "Currently, the Small file Report report is being generated, so no other action can be performed at this time. Please wait for the running task to complete.",
+                "Currently, the Small file Report report is being generated");
+        waitExecuter.sleep(2000);
+        Assert.assertEquals(smallfilesPageObject.verifyReport.getText(), "Currently, the Small file Report report is being generated, so no other action can be performed at this time. Please wait for the running task to complete",
                 " Currently, the Small file Report report is not being generated..");
+        waitExecuter.sleep(2000);
 
         try {
             waitExecuter.waitUntilElementPresent(smallfilesPageObject.confirmationMessageElement);
@@ -87,9 +88,6 @@ public class TC_SF_08 extends BaseClass {
             String heading = smallfilesPageObject.verifyAbsoluteSize.getText();
             waitExecuter.sleep(3000);
             test.log(LogStatus.PASS, "Verified the absolute size  poulated :" + heading);
-        } catch (TimeoutException te) {
-            waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
-                    "Small file Report completed successfully.");
         }
         catch (VerifyError te) {
             throw new AssertionError("smallfiles Report not completed successfully."+te);

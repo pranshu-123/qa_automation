@@ -4,8 +4,11 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.enums.chargeback.ImpalaJobTableColumn;
 import com.qa.scripts.DatePicker;
+import com.qa.scripts.HomePage;
 import com.qa.scripts.clusters.impala.ChargeBackImpala;
 import com.qa.utils.LoggingUtils;
+import com.qa.utils.WaitExecuter;
+import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -21,14 +24,22 @@ public class TC_CB_50 extends BaseClass {
     /**
      * Validate table sorting - By Total Processing Time Seconds
      */
-    @Test
-    public void validateSortByTotalProcessingTimeSeconds() {
+    @Test(dataProvider = "clusterid-data-provider")
+    public void validateSortByTotalProcessingTimeSeconds(String clusterId) {
         test =
             extent.startTest("TC_CB_50.validateSortByTotalProcessingTimeSeconds", "Validate table sorting - By Total Processing Time Seconds");
         test.assignCategory(" Cluster - Impala Chargeback");
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
         chargeBackImpala.selectImpalaChargeback();
         LOGGER.info("Click on impala chargeback", test);
+
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
+
+        HomePage homePage = new HomePage(driver);
+        homePage.selectMultiClusterId(clusterId);
+        waitExecuter.waitUntilPageFullyLoaded();
+
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         datePicker.selectLast90Days();

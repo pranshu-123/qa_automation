@@ -41,7 +41,7 @@ public class TC_SF_23 extends BaseClass {
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
 
-        smallfiles.navigateToSmallFileReport(smallfilesPageObject, test, "999999999999999999999999999", "999999999999999999999999999"
+        smallfiles.navigateToSmallFileReport(smallfilesPageObject, test, "99999", "999999"
                 , "100000000000000", "10000");
         test.log(LogStatus.PASS, "Verify the user to enter all the parameters for small files");
 

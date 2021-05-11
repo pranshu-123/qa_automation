@@ -27,7 +27,7 @@ public class TC_FR_18 extends BaseClass {
     waitExecuter.waitUntilElementPresent(fileReportsPageObject.tinyFile);
     MouseActions.clickOnElement(driver, fileReportsPageObject.tinyFile);
     waitExecuter.waitUntilPageFullyLoaded();
-    filereports.verifyFileSortOption("TINY", clusterId);
+    filereports.verifyFileSortOption("TINY", clusterId,2,2);
     waitExecuter.waitUntilPageFullyLoaded();
     test.log(LogStatus.PASS, "Successfully validate the 'Files' column for Tiny file reports.");
   }

@@ -16,7 +16,7 @@ public class TC_FR_35 extends BaseClass {
   @Test(dataProvider = "clusterid-data-provider")
   public void validateLargeFileSearchOption(String clusterId) {
     test = extent.startTest("TC_FR_35.validateLargeFileSearchOption " + clusterId,
-        "Validate user is able search a particular file path 'Large' file report");
+        "Validate the user is able sort based on \"Max File Size\" column for Medium file reports");
     test.assignCategory(" Data - FileReports ");
 
     FileReports filereports = new FileReports(driver);
@@ -24,10 +24,10 @@ public class TC_FR_35 extends BaseClass {
     FileReportsPageObject fileReportsPageObject = new FileReportsPageObject(driver);
 
     filereports.navidateTofileReportsTab();
-    waitExecuter.waitUntilElementPresent( fileReportsPageObject.largeFile);
-    MouseActions.clickOnElement(driver, fileReportsPageObject.largeFile);
-    filereports.verifyFilePathSearchOption("LARGE", clusterId);
+    waitExecuter.waitUntilElementPresent( fileReportsPageObject.mediumFile);
+    MouseActions.clickOnElement(driver, fileReportsPageObject.mediumFile);
+    filereports.verifyAllFileSizePathSearchOption("MEDIUM", clusterId,6,6);
     waitExecuter.waitUntilPageFullyLoaded();
-    test.log(LogStatus.PASS, "Successfully validate the file path 'Large' file report.");
+    test.log(LogStatus.PASS, "Successfully validate search a particular file path 'Large' file report.");
   }
 }

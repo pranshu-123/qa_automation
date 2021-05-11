@@ -17,7 +17,7 @@ public class TC_FR_36 extends BaseClass {
   @Test(dataProvider = "clusterid-data-provider")
   public void validateMediumFileSearchOption(String clusterId) {
     test = extent.startTest("TC_FR_36.validateLargeFileSearchOption " + clusterId,
-        "Validate user is able search a particular file path 'Medium' file report");
+        "Validate user is able search a particular number of files");
     test.assignCategory(" Data - FileReports ");
 
     FileReports filereports = new FileReports(driver);
@@ -27,7 +27,7 @@ public class TC_FR_36 extends BaseClass {
     filereports.navidateTofileReportsTab();
     waitExecuter.waitUntilElementPresent(fileReportsPageObject.mediumFile);
     MouseActions.clickOnElement(driver, fileReportsPageObject.mediumFile);
-    filereports.verifyFilePathSearchOption("MEDIUM", clusterId);
+    filereports.verifyAllFileSizePathSearchOption("MEDIUM", clusterId,2,2);
     waitExecuter.waitUntilPageFullyLoaded();
     test.log(LogStatus.PASS, "Successfully validate the search a particular file path 'Medium' file report.");
   }

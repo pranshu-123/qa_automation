@@ -17,6 +17,16 @@ public class FileReportsPageObject {
   @FindBy(xpath = "//span[contains(text(),'LARGE')]")
   public WebElement largeFile;
 
+  @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-up')]")
+  public WebElement sortUp;
+
+  @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-down')]")
+  public WebElement sortDown;
+
+  @FindBy(xpath = "//span[normalize-space()='Avg File Size']")
+  public WebElement sortAvgFileSize;
+
+
   @FindBy(xpath = "//span[contains(text(),'LARGE') and contains(@class, 'badge pending')]")
   public WebElement selectedLargeFileOpt;
 
@@ -44,10 +54,7 @@ public class FileReportsPageObject {
   @FindBy(xpath = "//table[@class='component-data-tables row-hover']/thead/tr/th")
   public List<WebElement> tableHeader;
 
-  @FindBy(xpath = "//body//div//th[7]")
-  public WebElement fileColumn;
-
-  @FindBy(xpath = "//table[@class='row-hover component-data-tables margin-bottom']/tbody/tr")
+  @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody/tr")
   public List<WebElement> fileTableRows;
 
   @FindBy(xpath = "//h3[normalize-space()='No Data Available']")

@@ -24,7 +24,7 @@ public class TC_FR_11 extends BaseClass {
         waitExecuter.waitUntilElementPresent(fileReportsPageObject.largeFile);
         MouseActions.clickOnElement(driver, fileReportsPageObject.largeFile);
         waitExecuter.sleep(2000);
-        filereports.verifyPathSortOption("LARGE", clusterId);
+        filereports.verifyAllSortOption("LARGE", clusterId,1,1);
         waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Successfully validate the 'Path' column for Large file reports.");
     }

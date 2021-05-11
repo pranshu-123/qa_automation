@@ -28,9 +28,9 @@ public class TC_FR_25 extends BaseClass {
         waitExecuter.waitUntilElementPresent(fileReportsPageObject.emptyFile);
         MouseActions.clickOnElement(driver, fileReportsPageObject.emptyFile);
         waitExecuter.waitUntilPageFullyLoaded();
-        filereports.verifyAvgFileSizeSortOption("EMPTY", clusterId);
+        filereports.verifyAllSortOption("EMPTY", clusterId,3,3);
         waitExecuter.waitUntilPageFullyLoaded();
-        test.log(LogStatus.PASS, "Successfully validate the 'Avg File Size' column for Tiny file reports.");
+        test.log(LogStatus.PASS, "Successfully validate the 'Avg File Size' column for empty file reports.");
 
     }
 }

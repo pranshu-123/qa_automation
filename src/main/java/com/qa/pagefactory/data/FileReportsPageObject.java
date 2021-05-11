@@ -54,38 +54,8 @@ public class FileReportsPageObject {
   @FindBy(xpath = "//table[@class='component-data-tables row-hover']/thead/tr/th")
   public List<WebElement> tableHeader;
 
-  @FindBy(xpath = "//tbody/tr/td[2]")
-  public WebElement fileColumn;
-
-  @FindBy(xpath = "//tbody/tr/td[4]")
-  public WebElement totalFileSizeColumn;
-
-  @FindBy(xpath = "//tbody/tr/td[5]")
-  public WebElement minFileSizeColumn;
-
-  @FindBy(xpath = "//tbody/tr/td[1]")
-  public WebElement pathColumn;
-
-  @FindBy(xpath = "//tbody/tr/td[3]")
-  public WebElement avgFileSizeColumn;
-
-  @FindBy(xpath = "//tbody/tr/td[6]")
-  public WebElement maxFileSizeColumn;
-
   @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody/tr")
   public List<WebElement> fileTableRows;
-
-  @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody/tr[" + 1 + "]/td[" + 6 + "]")
-  public WebElement maxFileSizeRowData;
-
-  @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody/tr[" + 1 + "]/td[" + 5 + "]")
-  public WebElement minFileSizeRowData;
-
-  @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody/tr[" + 1 + "]/td[" + 4 + "]")
-  public WebElement totalFileSizeRowData;
-
-  @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody/tr[" + 1 + "]/td[" + 3 + "]")
-  public WebElement avgFileSizeRowData;
 
   @FindBy(xpath = "//h3[normalize-space()='No Data Available']")
   public WebElement noDataText;

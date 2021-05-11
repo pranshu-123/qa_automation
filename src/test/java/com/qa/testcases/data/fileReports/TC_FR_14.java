@@ -25,9 +25,10 @@ public class TC_FR_14 extends BaseClass {
         FileReportsPageObject fileReportsPageObject = new FileReportsPageObject(driver);
 
         filereports.navidateTofileReportsTab();
+        waitExecuter.waitUntilElementPresent(fileReportsPageObject.largeFile);
         MouseActions.clickOnElement(driver, fileReportsPageObject.largeFile);
         waitExecuter.waitUntilPageFullyLoaded();
-        filereports.verifyTotalFileSizeSortOption("LARGE", clusterId);
+        filereports.verifyAllSortOption("LARGE", clusterId,4,4);
         waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Successfully validate the 'Total File Size' column for Large file reports.");
     }

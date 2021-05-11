@@ -28,9 +28,9 @@ public class TC_FR_17 extends BaseClass {
         waitExecuter.waitUntilElementPresent(fileReportsPageObject.tinyFile);
         MouseActions.clickOnElement(driver, fileReportsPageObject.tinyFile);
         waitExecuter.waitUntilPageFullyLoaded();
-        filereports.verifyPathSortOption("TINY", clusterId);
+        filereports.verifyAllSortOption("TINY", clusterId,1,1);
         waitExecuter.waitUntilPageFullyLoaded();
-        test.log(LogStatus.PASS, "Successfully validate the 'Path' column for Large file reports.");
+        test.log(LogStatus.PASS, "Successfully validate the 'Path' column for Tiny file reports.");
     }
 }
 

@@ -28,7 +28,7 @@ public class TC_FR_34 extends BaseClass {
         waitExecuter.waitUntilElementPresent(fileReportsPageObject.mediumFile);
         MouseActions.clickOnElement(driver, fileReportsPageObject.mediumFile);
         waitExecuter.waitUntilPageFullyLoaded();
-        filereports.verifyMaxFileSizeSortOption("MEDIUM", clusterId);
+        filereports.verifyAllSortOption("TINY", clusterId,6,6);
         waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Successfully validate the 'Max File Size' column for Medium file reports.");
     }

@@ -29,7 +29,7 @@ public class TC_FR_19 extends BaseClass {
         waitExecuter.waitUntilElementPresent(fileReportsPageObject.tinyFile);
         MouseActions.clickOnElement(driver, fileReportsPageObject.tinyFile);
         waitExecuter.waitUntilPageFullyLoaded();
-        filereports.verifyAvgFileSizeSortOption("TINY", clusterId);
+        filereports.verifyAllSortOption("TINY", clusterId,2,2);
         waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Successfully validate the 'Avg File Size' column for Tiny file reports.");
     }

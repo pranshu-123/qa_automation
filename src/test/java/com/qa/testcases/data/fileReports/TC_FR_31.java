@@ -28,7 +28,7 @@ public class TC_FR_31 extends BaseClass {
         waitExecuter.waitUntilElementPresent(fileReportsPageObject.mediumFile);
         MouseActions.clickOnElement(driver, fileReportsPageObject.mediumFile);
         waitExecuter.waitUntilPageFullyLoaded();
-        filereports.verifyAvgFileSizeSortOption("MEDIUM", clusterId);
+        filereports.verifyAllSortOption("MEDIUM", clusterId,3,3);
         waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Successfully validate the 'Avg File Size' column for Medium file reports.");
     }

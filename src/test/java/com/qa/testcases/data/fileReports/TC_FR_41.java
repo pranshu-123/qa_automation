@@ -15,7 +15,7 @@ public class TC_FR_41 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void validateMaxFilesizeFileSearchOption(String clusterId) {
         test = extent.startTest("TC_FR_41.validateMaxFilesizeFileSearchOption " + clusterId,
-                "Validate user is able search a perticular Max File size");
+                "Validate user is able search a particular Max File size");
         test.assignCategory(" Data - FileReports ");
 
         FileReports filereports = new FileReports(driver);
@@ -26,7 +26,7 @@ public class TC_FR_41 extends BaseClass {
         waitExecuter.waitUntilElementPresent(fileReportsPageObject.mediumFile);
         MouseActions.clickOnElement(driver, fileReportsPageObject.mediumFile);
         waitExecuter.waitUntilPageFullyLoaded();
-        filereports.verifyMaxFileSizePathSearchOption("MEDIUM", clusterId);
+        filereports.verifyAllFileSizePathSearchOption("MEDIUM", clusterId,6,6);
         waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Successfully Validate user is able to search the Max File size.");
     }

@@ -32,7 +32,7 @@ public class TC_FR_13 extends BaseClass {
         waitExecuter.waitUntilElementPresent(fileReportsPageObject.largeFile);
         MouseActions.clickOnElement(driver, fileReportsPageObject.largeFile);
         waitExecuter.waitUntilPageFullyLoaded();
-        filereports.verifyAvgFileSizeSortOption("LARGE", clusterId);
+        filereports.verifyAllSortOption("LARGE", clusterId,3,3);
         waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Successfully validate the 'Avg File Size' column for Large file reports.");
 

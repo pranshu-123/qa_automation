@@ -27,7 +27,7 @@ public class TC_FR_40 extends BaseClass {
         filereports.navidateTofileReportsTab();
         waitExecuter.waitUntilElementPresent(fileReportsPageObject.mediumFile);
         MouseActions.clickOnElement(driver, fileReportsPageObject.mediumFile);
-        filereports.verifyMaxFileSizePathSearchOption("MEDIUM", clusterId);
+        filereports.verifyAllFileSizePathSearchOption("MEDIUM", clusterId,6,6);
         waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Successfully validate user is able to search Max File size.");
     }

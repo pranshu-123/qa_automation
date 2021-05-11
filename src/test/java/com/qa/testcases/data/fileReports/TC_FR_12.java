@@ -27,7 +27,7 @@ public class TC_FR_12 extends BaseClass {
     waitExecuter.waitUntilElementPresent(fileReportsPageObject.largeFile);
     MouseActions.clickOnElement(driver, fileReportsPageObject.largeFile);
     waitExecuter.waitUntilPageFullyLoaded();
-    filereports.verifyFileSortOption("LARGE", clusterId);
+    filereports.verifyAllSortOption("LARGE", clusterId,2,2);
     waitExecuter.waitUntilPageFullyLoaded();
     test.log(LogStatus.PASS, "Successfully validate the 'Files' column for Large file reports.");
   }

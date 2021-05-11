@@ -25,9 +25,9 @@ public class TC_FR_37 extends BaseClass {
         FileReportsPageObject fileReportsPageObject = new FileReportsPageObject(driver);
 
         filereports.navidateTofileReportsTab();
-        waitExecuter.waitUntilElementPresent(fileReportsPageObject.mediumFile);
-        MouseActions.clickOnElement(driver, fileReportsPageObject.mediumFile);
-        filereports.verifyAvgFileSizePathSearchOption("MEDIUM", clusterId);
+        waitExecuter.waitUntilElementPresent(fileReportsPageObject.tinyFile);
+        MouseActions.clickOnElement(driver, fileReportsPageObject.tinyFile);
+        filereports.verifyAllFileSizePathSearchOption("TINY", clusterId,3,3);
         waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Successfully validate user is able to search Avg File size.");
     }

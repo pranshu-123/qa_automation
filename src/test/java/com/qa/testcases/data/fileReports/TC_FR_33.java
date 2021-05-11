@@ -28,7 +28,7 @@ public class TC_FR_33 extends BaseClass {
         waitExecuter.waitUntilElementPresent(fileReportsPageObject.mediumFile);
         MouseActions.clickOnElement(driver, fileReportsPageObject.mediumFile);
         waitExecuter.waitUntilPageFullyLoaded();
-        filereports.verifyMinFileSizeSortOption("MEDIUM", clusterId);
+        filereports.verifyAllSortOption("MEDIUM", clusterId,5,5);
         waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Successfully validate the 'Min File Size' column for Medium file reports.");
     }

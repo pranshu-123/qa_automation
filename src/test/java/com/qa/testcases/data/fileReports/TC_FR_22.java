@@ -28,7 +28,7 @@ public class TC_FR_22 extends BaseClass {
         waitExecuter.waitUntilElementPresent(fileReportsPageObject.tinyFile);
         MouseActions.clickOnElement(driver, fileReportsPageObject.tinyFile);
         waitExecuter.waitUntilPageFullyLoaded();
-        filereports.verifyMaxFileSizeSortOption("TINY", clusterId);
+        filereports.verifyAllSortOption("TINY", clusterId,5,5);
         waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Successfully validate the 'Max File Size' column for Tiny file reports.");
     }

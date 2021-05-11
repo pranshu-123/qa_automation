@@ -12,12 +12,12 @@ import org.testng.annotations.Test;
 @Marker.All
 public class TC_FR_29 extends BaseClass {
     /**
-     Validate the user is able sort based on "Path" column for Empty file reports
+     Validate the user is able sort the UI based on "Path" column for Medium file reports
      */
     @Test(dataProvider = "clusterid-data-provider")
     public void validatePathForEmptyFiles(String clusterId) {
         test = extent.startTest("TC_FR_29.validatePathForEmptyFiles " + clusterId,
-                "P1-Validate the user is able sort based on number of 'Path' column for Empty file reports");
+                "P1-Validate the user is able sort the UI based on \"Path\" column for Medium file reports");
         test.assignCategory(" Data - FileReports ");
 
         FileReports filereports = new FileReports(driver);
@@ -28,9 +28,9 @@ public class TC_FR_29 extends BaseClass {
         waitExecuter.waitUntilElementPresent(fileReportsPageObject.emptyFile);
         MouseActions.clickOnElement(driver, fileReportsPageObject.emptyFile);
         waitExecuter.waitUntilPageFullyLoaded();
-        filereports.verifyPathSortOption("EMPTY", clusterId);
+        filereports.verifyAllSortOption("MEDIUM", clusterId,1,1);
         waitExecuter.waitUntilPageFullyLoaded();
-        test.log(LogStatus.PASS, "Successfully validate the 'Path' column for Tiny file reports.");
+        test.log(LogStatus.PASS, "Successfully validate the 'Path' column for Medium file reports.");
 
     }
 }

@@ -28,9 +28,9 @@ public class TC_FR_28 extends BaseClass {
         waitExecuter.waitUntilElementPresent(fileReportsPageObject.emptyFile);
         MouseActions.clickOnElement(driver, fileReportsPageObject.emptyFile);
         waitExecuter.waitUntilPageFullyLoaded();
-        filereports.verifyMaxFileSizeSortOption("EMPTY", clusterId);
+        filereports.verifyAllSortOption("EMPTY", clusterId,6,6);
         waitExecuter.waitUntilPageFullyLoaded();
-        test.log(LogStatus.PASS, "Successfully validate the 'Max File Size' column for Tiny file reports.");
+        test.log(LogStatus.PASS, "Successfully validate the 'Max File Size' column for Empty file reports.");
 
     }
 }

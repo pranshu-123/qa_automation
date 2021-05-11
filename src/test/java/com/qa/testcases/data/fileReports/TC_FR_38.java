@@ -25,9 +25,9 @@ public class TC_FR_38 extends BaseClass {
         FileReportsPageObject fileReportsPageObject = new FileReportsPageObject(driver);
 
         filereports.navidateTofileReportsTab();
-        waitExecuter.waitUntilElementPresent(fileReportsPageObject.mediumFile);
-        MouseActions.clickOnElement(driver, fileReportsPageObject.mediumFile);
-        filereports.verifyTotalFileSizePathSearchOption("MEDIUM", clusterId);
+        waitExecuter.waitUntilElementPresent(fileReportsPageObject.emptyFile);
+        MouseActions.clickOnElement(driver, fileReportsPageObject.emptyFile);
+        filereports.verifyAllFileSizePathSearchOption("EMPTY", clusterId,4,4);
         waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Successfully validate user is able to search Total File size.");
     }

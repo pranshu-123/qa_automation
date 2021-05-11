@@ -28,7 +28,7 @@ public class TC_FR_32 extends BaseClass {
         waitExecuter.waitUntilElementPresent(fileReportsPageObject.mediumFile);
         MouseActions.clickOnElement(driver, fileReportsPageObject.mediumFile);
         waitExecuter.waitUntilPageFullyLoaded();
-        filereports.verifyTotalFileSizeSortOption("MEDIUM", clusterId);
+        filereports.verifyAllSortOption("MEDIUM", clusterId,4,4);
         waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Successfully validate the 'Total File Size' column for Medium file reports.");
     }

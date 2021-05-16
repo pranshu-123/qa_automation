@@ -60,7 +60,7 @@ public class TC_M08 extends BaseClass {
         test.log(LogStatus.INFO, "Verified Run Diagnostics Tab.");
         logger.info("Verified Run Diagnostics Tab.");
 
-        waitExecuter.sleep(5000);
+        waitExecuter.sleep(2000);
         manage.clickOnLoadLatestDiagnostics();
         test.log(LogStatus.INFO, "Clicked on Load Latest Diagnostics Button.");
         logger.info("Clicked on Load Latest Diagnostics Button.");
@@ -71,7 +71,7 @@ public class TC_M08 extends BaseClass {
             waitExecuter.sleep(7000);
             test.log(LogStatus.INFO, "Verified Diagnostics Log is loaded properly.");
             waitExecuter.waitUntilElementPresent(managePageObject.latestDiagnosticsContentHeader);
-            waitExecuter.waitUntilPageFullyLoaded();
+            waitExecuter.sleep(4000);
             Assert.assertTrue(managePageObject.latestDiagnosticsContentHeader.isDisplayed(),"Diagnostics Log " +
                     "content not found.");
             waitExecuter.sleep(4000);

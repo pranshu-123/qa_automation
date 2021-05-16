@@ -65,7 +65,8 @@ public class TC_CF_03 extends BaseClass {
         List<String> expectedDateRange = forecasting.getAllHistoryRanges();
         forecasting.clickOnCancelButton();
         test.log(LogStatus.INFO, "Clicked on CancelButton, after getting all history date range.");
-        String forecastingNoOfDays = "2";
+        String forecastingNoOfDays = "7";
+        waitExecuter.waitUntilPageFullyLoaded();
 
         int expectedDateCount = expectedDateRange.size();
 
@@ -80,7 +81,7 @@ public class TC_CF_03 extends BaseClass {
             if (datePickerElement.getText().equalsIgnoreCase("Custom Range")) {
                 datePickerElement.click();
                 datePicker.setStartDate(DateUtils.getPastDate(20));
-                waitExecuter.sleep(500);
+                waitExecuter.sleep(1000);
                 datePicker.setEndDate(DateUtils.getCurrentDate());
                 datePicker.clickOnCustomDateApplyBtn();
             } else {
@@ -93,6 +94,7 @@ public class TC_CF_03 extends BaseClass {
             test.log(LogStatus.INFO, "Set Forecasting days as: " + forecastingNoOfDays
                 + " and History date range as :" + datePickerOption);
             forecasting.clickOnModalRunButton();
+            waitExecuter.sleep(8000);
             LOGGER.info("Clicked on Modal Run Button");
             test.log(LogStatus.INFO, "Clicked on Modal Run Button");
             try {
@@ -100,6 +102,7 @@ public class TC_CF_03 extends BaseClass {
                     "Please Wait");
                 waitExecuter.waitUntilTextToBeInWebElement(forecastingPageObject.confirmationMessageElement,
                     "Capacity Forecasting completed successfully.");
+                waitExecuter.waitUntilPageFullyLoaded();
                 test.log(LogStatus.INFO, "Verified Forecasting report is loaded properly for date: "
                     + datePickerOption);
                 LOGGER.info("Verified Forecasting report is loaded properly");

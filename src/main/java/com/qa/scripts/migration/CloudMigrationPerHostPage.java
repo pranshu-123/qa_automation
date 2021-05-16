@@ -125,7 +125,10 @@ public class CloudMigrationPerHostPage {
         List<WebElement> dropDownList = cmpPageObj.dropDownBtn;
         for (int i = 0; i < dropDownList.size(); i++) {
             waitExecuter.waitUntilElementClickable(dropDownList.get(i));
+            waitExecuter.sleep(2000);
             MouseActions.clickOnElement(driver, dropDownList.get(i));
+            waitExecuter.waitUntilElementClickable(dropDownList.get(i));
+            waitExecuter.sleep(2000);
             logger.info("Parameters are: " + expectedList[i]);
             getOptions(expectedList[i]);
         }

@@ -124,6 +124,12 @@ public class TopXPageObject {
 
     public By tagsFooter = By.xpath("(ancestor::div)[last()]/parent::div/footer");
 
+    @FindBy(xpath="//div[@role='dialog']/div[contains(@class,'modal-sec-foot')]/span//span")
+    public WebElement footerWaitCycle;
+
+    @FindBy(xpath="(//tbody/tr/td/span[text()='Top X']//following::td[contains(@class,'boot-icons')])[1]/div//span[contains(@class,'icon-add')]")
+    public WebElement topXAddIcon;
+
     public TopXPageObject(WebDriver driver) {
         PageFactory.initElements(driver,this);
     }

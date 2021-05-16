@@ -21,7 +21,7 @@ public class TC_CMP_01 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider")
   public void verifyCloudMappingPerHostReportGeneration(String clusterId) {
-    test = extent.startTest("verifyCloudMappingPerHostReportGeneration: " + clusterId,
+    test = extent.startTest("TC_CMP_01.verifyCloudMappingPerHostReportGeneration: " + clusterId,
         "Verify the user is able to generate 'cloud mapping perhost' report to get information " +
             "on the instances used and their pricing");
     test.assignCategory("Migration/Cloud Mapping Per Host");

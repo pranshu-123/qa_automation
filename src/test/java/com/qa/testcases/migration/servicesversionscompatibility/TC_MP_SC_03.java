@@ -11,6 +11,7 @@ import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
@@ -49,7 +50,10 @@ public class TC_MP_SC_03 extends BaseClass {
             waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.confirmationMessageElement,
                     "Services and Versions Compatibility completed successfully.");
             servicesAndVersionsCompatibility.validateLatestReport();
-            Assert.assertTrue(expectedPlatforms.equals(servicesAndVersionsCompatibility.getPlatforms()));
+            List<String> actualVersionList = servicesAndVersionsCompatibility.getPlatforms();
+            LOGGER.info("Expected List- " + expectedPlatforms);
+            LOGGER.info("Actual List- " + actualVersionList);
+            Assert.assertEquals(actualVersionList,expectedPlatforms, "There is a mismatch in versions expected for Google DataProc");
             test.log(LogStatus.PASS, "Verified Services and Versions Compatibility report is loaded properly" +
                     " for Google Dataproc.");
 

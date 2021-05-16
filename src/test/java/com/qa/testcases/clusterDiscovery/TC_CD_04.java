@@ -85,8 +85,11 @@ public class TC_CD_04 extends BaseClass {
             test.log(LogStatus.INFO, "Get jobs count of hive, tez, spark and MR Users");
             LOGGER.info("Get jobs count of hive, tez, spark and MR Users");
             int totalJobs = discovery.getJobsCount();
+            LOGGER.info(String.valueOf(totalJobs));
+            LOGGER.info(String.valueOf(totalUsers));
+            LOGGER.info("-------------------------------------- "+String.valueOf(totalJobs-totalUsers));
             Assert.assertNotNull(totalUsers, "Total Users count is null");
-            Assert.assertTrue(totalJobs >= 0, "The total count expected Users is null");
+            Assert.assertTrue(totalJobs-totalUsers ==0 || totalJobs-totalUsers <= 10 || totalJobs-totalUsers <= -10, "The total count expected Users is null");
             test.log(LogStatus.PASS, "User counts and Job counts are greater than 0");
 
         } catch (NoSuchElementException ex) {

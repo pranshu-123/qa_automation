@@ -42,8 +42,8 @@ public class TopX {
     }
 
     public void clickOnModalRunButton() {
-        //MouseActions.clickOnElement(driver, topXPageObject.modalRunButton);
-        MouseActions.clickOnElement(driver, topXPageObject.runButton);
+        actions.performActionWithPolling(topXPageObject.runButton, UserAction.CLICK);
+        waitExecuter.waitUntilTextNotToBeInWebElement(topXPageObject.footerWaitCycle,"Please Wait");
     }
 
     public String getConfirmationMessageContent() {
@@ -116,9 +116,11 @@ public class TopX {
     public void selectCluster(String clusterId) {
         waitExecuter.waitUntilElementClickable(topXPageObject.clusterDropdown);
         actions.performActionWithPolling(topXPageObject.clusterDropdown, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(topXPageObject.clusterSearchbox);
         actions.performActionWithPolling(topXPageObject.clusterSearchbox, UserAction.CLICK);
         actions.performActionWithPolling(topXPageObject.clusterSearchbox, UserAction.SEND_KEYS, clusterId);
         actions.performActionWithPolling(topXPageObject.select1stClusterOption, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(topXPageObject.runButton);
     }
 
   public WebElement getConfirmationMessage() {

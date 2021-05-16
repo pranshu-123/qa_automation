@@ -38,8 +38,6 @@ public class TC_MP_SC_05 extends BaseClass {
         LOGGER.info("Clicked on Migration and accessing Services And Versions Compatibility page ");
         servicesAndVersionsCompatibility.clickOnServicesAndVersionMigrationTab();
         LOGGER.info("Clicked on Services And Versions Compatibility tab");
-//        servicesAndVersionsCompatibility.closeMessageBanner();
-//        LOGGER.info("Clicked on close banner");
         servicesAndVersionsCompatibility.clickOnRunButton();
         LOGGER.info("Clicked on Run button");
         String cloudProductName = "Azure HDI";
@@ -55,7 +53,11 @@ public class TC_MP_SC_05 extends BaseClass {
             waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.confirmationMessageElement,
                     "Services and Versions Compatibility completed successfully.");
             servicesAndVersionsCompatibility.validateLatestReport();
-            Assert.assertTrue(expectedPlatforms.equals(servicesAndVersionsCompatibility.getPlatforms()),"Failed due to mismatch of expected and actual platforms: "+servicesAndVersionsCompatibility.getPlatforms());
+            List<String> actualPlatforms = servicesAndVersionsCompatibility.getPlatforms();
+            LOGGER.info("Expected List- " + expectedPlatforms);
+            LOGGER.info("Actual Platforms- "+actualPlatforms);
+
+            Assert.assertEquals(actualPlatforms,expectedPlatforms,"Failed due to mismatch of expected and actual platforms: "+servicesAndVersionsCompatibility.getPlatforms());
             test.log(LogStatus.PASS, "Verified Services and Versions Compatibility report is loaded properly " +
                     "for Azure HDI.");
         } catch (TimeoutException te) {

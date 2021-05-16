@@ -45,15 +45,17 @@ public class ServicesAndVersionsCompatibility {
     }
 
     public void setupServicesAndVersionsCompatibilityPage() {
-
-        waitExecuter.waitUntilElementClickable(topPanelPageObject.migrationTab);
-        actions.performActionWithPolling(topPanelPageObject.migrationTab, UserAction.CLICK);
-        waitExecuter.waitUntilElementClickable(subTopPanelModulePageObject.servicesVersionMigrationTab);
+        //waitExecuter.waitUntilElementClickable(topPanelPageObject.migrationTab);
+        MouseActions.clickOnElement(driver, topPanelPageObject.migrationTab);
+        //actions.performActionWithPolling(topPanelPageObject.migrationTab, UserAction.CLICK);
+        //waitExecuter.waitUntilElementClickable(subTopPanelModulePageObject.servicesVersionMigrationTab);
     }
 
     public void clickOnServicesAndVersionMigrationTab() {
-        actions.performActionWithPolling(subTopPanelModulePageObject.servicesVersionMigrationTab, UserAction.CLICK);
-        waitExecuter.waitUntilElementClickable(servicesAndVersionsCompatibilityPageObject.runBtn);
+        //waitExecuter.waitUntilElementClickable(subTopPanelModulePageObject.servicesVersionMigrationTab);
+        MouseActions.clickOnElement(driver, subTopPanelModulePageObject.servicesVersionMigrationTab);
+        //actions.performActionWithPolling(subTopPanelModulePageObject.servicesVersionMigrationTab, UserAction.CLICK);
+        //waitExecuter.waitUntilElementClickable(servicesAndVersionsCompatibilityPageObject.runBtn);
     }
 
     public void closeMessageBanner() {
@@ -79,13 +81,18 @@ public class ServicesAndVersionsCompatibility {
     }
 
     public void selectCloudProduct(String cloudProductName) {
-        MouseActions.clickOnElement(driver, servicesAndVersionsCompatibilityPageObject.cloudProductDropDown);
+        waitExecuter.waitUntilElementClickable(servicesAndVersionsCompatibilityPageObject.cloudProductDropDown);
+        actions.performActionWithPolling(servicesAndVersionsCompatibilityPageObject.cloudProductDropDown, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(servicesAndVersionsCompatibilityPageObject.cloudProductSearchBox);
         servicesAndVersionsCompatibilityPageObject.cloudProductSearchBox.sendKeys(cloudProductName);
-        servicesAndVersionsCompatibilityPageObject.cloudProductSearchFirstField.click();
+        waitExecuter.waitUntilElementClickable(servicesAndVersionsCompatibilityPageObject.cloudProductSearchFirstField);
+        actions.performActionWithPolling(servicesAndVersionsCompatibilityPageObject.cloudProductSearchFirstField, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(servicesAndVersionsCompatibilityPageObject.runModalBtn);
     }
 
     public void clickOnRunModalButton() {
-        MouseActions.clickOnElement(driver, servicesAndVersionsCompatibilityPageObject.runModalBtn);
+        waitExecuter.waitUntilElementClickable(servicesAndVersionsCompatibilityPageObject.runModalBtn);
+        actions.performActionWithPolling(servicesAndVersionsCompatibilityPageObject.runModalBtn, UserAction.CLICK);
     }
 
     //Validate the latest report generated
@@ -173,8 +180,8 @@ public class ServicesAndVersionsCompatibility {
         List<WebElement> platformsList = servicesAndVersionsCompatibilityPageObject.platformList;
         Assert.assertFalse(platformsList.isEmpty(), "Platform are not present in reports.");
         List<String> allPlatform = new ArrayList<>();
-        for (WebElement e : platformsList) {
-            allPlatform.add(e.getText().trim());
+        for (int i=1; i<platformsList.size();i++){
+            allPlatform.add(platformsList.get(i).getText().trim());
         }
         logger.info("All platforms : " + allPlatform + " displayed.");
         return allPlatform;
@@ -219,7 +226,7 @@ public class ServicesAndVersionsCompatibility {
 
     public String getMinorVersion(String name) {
         String[] arr = name.split(" ");
-        String[] arrVersion = arr[1].split("\\.");
+        String[] arrVersion = arr[arr.length-1].split("\\.");
         return arrVersion[1];
     }
     public String getBuildVersion(String name) {
@@ -236,6 +243,7 @@ public class ServicesAndVersionsCompatibility {
     public void verifyServicesAndVersionsAreCompatible() {
         List<String> hdpServicesList = getHDPServicesList();
         int totalHDPServicesCount = hdpServicesList.size();
+        LOGGER.info("HDP_HEADER_LIST$$$$$$"+hdpServicesList);
         List<WebElement> rowsList = servicesAndVersionsCompatibilityPageObject.rowsList;
         Assert.assertFalse(rowsList.isEmpty(), "No Platform services data available");
         List<WebElement> colsList = servicesAndVersionsCompatibilityPageObject.colList;
@@ -244,10 +252,13 @@ public class ServicesAndVersionsCompatibility {
 
         for (int col = 0; col < totalHDPServicesCount - 1; col++) {
             for (int row = 0; row < rowsList.size(); row++) {
+                LOGGER.info("ROW$$$$$ "+row+ " COL$$$$ "+col);
                 String path = "//tbody/tr[" + (row + 1) + "]/td[" + (col + 2) + "]";
+                LOGGER.info("PATH$$$$$$"+path);
                 WebElement e = driver.findElement(By.xpath(path));
                 if (!e.getText().isEmpty()) {
                     String cloudClusterServiceName = e.getText().trim();
+                    LOGGER.info("cloudClusterServiceName$$$$$$"+cloudClusterServiceName);
                     String majorVersionCloud = getMajorVersion(cloudClusterServiceName);
                     String minorVersionCloud = getMinorVersion(cloudClusterServiceName);
                     String buildVersionCloud = getBuildVersion(cloudClusterServiceName);

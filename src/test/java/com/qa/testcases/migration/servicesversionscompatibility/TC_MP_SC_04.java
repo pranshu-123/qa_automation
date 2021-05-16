@@ -50,6 +50,7 @@ public class TC_MP_SC_04 extends BaseClass {
                     "Services and Versions Compatibility completed successfully.");
             servicesAndVersionsCompatibility.validateLatestReport();
             List<String> actualPlatforms = servicesAndVersionsCompatibility.getPlatforms();
+            LOGGER.info("Expected List- " + expectedPlatforms);
             LOGGER.info("Actual Platforms- "+actualPlatforms);
             Assert.assertTrue(expectedPlatforms.equals(actualPlatforms), "Mismatch actual platforms: "+actualPlatforms);
             test.log(LogStatus.PASS, "Verified Services and Versions Compatibility report is loaded properly " +

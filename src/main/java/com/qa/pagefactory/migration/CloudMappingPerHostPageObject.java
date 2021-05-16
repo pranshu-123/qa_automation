@@ -166,6 +166,12 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//label[contains(text(),'Region')]/parent::div/span")
   public WebElement regionDropDownValue;
 
+  @FindBy(xpath = "//table[contains(@class,'component-data-tables')]/tbody/tr/td[7]//input[contains(@type,'checkbox')]")
+  public WebElement nodeTypeSelection;
+
+  @FindBy(xpath = "//table[contains(@class,'component-data-tables')]/tbody/tr/td[7]//label[contains(@class,'nonactive')]")
+  public List<WebElement> checkOptionIfNonActive;
+
   /**
    * @param driver The driver that will be used to look up the elements
    */

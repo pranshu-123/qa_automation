@@ -67,7 +67,11 @@ public class CloudMigrationPerHostPage {
      */
     public void getSearchOptValue(String vmType) {
         cmpPageObj.searchField.sendKeys(vmType);
-        waitExecuter.waitUntilPageFullyLoaded();
+        if (cmpPageObj.checkOptionIfNonActive.size() > 0) {
+            waitExecuter.sleep(2000);
+            cmpPageObj.nodeTypeSelection.click();
+            waitExecuter.waitUntilPageFullyLoaded();
+        }
     }
 
     public void verifyData(List<WebElement> usageDataKey, List<WebElement> usageDataValue, int numRows) {
@@ -292,7 +296,10 @@ public class CloudMigrationPerHostPage {
         runNewReport();
         List<WebElement> cloudProDD = cmpPageObj.cloudProductDropDown;
         waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementClickable(cloudProDD.get(0));
         userAction.performActionWithPolling(cloudProDD.get(0), UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(cloudProDD.get(0));
+        waitExecuter.sleep(2000);
         getOptions(cloudProvider);
         waitExecuter.waitUntilElementClickable(cmpPageObj.checkBox);
         waitExecuter.waitUntilPageFullyLoaded();

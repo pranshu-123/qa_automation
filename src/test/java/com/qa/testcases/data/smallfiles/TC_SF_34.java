@@ -5,13 +5,12 @@ import com.qa.base.BaseClass;
 import com.qa.pagefactory.data.SmallfilesPageObject;
 import com.qa.scripts.data.Smallfiles;
 import com.qa.utils.Log;
+import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 @Marker.DataSmallFiles
@@ -27,21 +26,18 @@ public class TC_SF_34 extends BaseClass {
         Log.startTestCase("TC_SF_34.verifyMinFileSize");
 
         SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
-        UserActions userActions = new UserActions(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         Smallfiles smallfiles = new Smallfiles(driver);
         smallfiles.commonPanelTabValidation(test, logger);
         smallfiles.closeConfirmationMessageNotification();
         try {
             // Click on small file search
-            test.log(LogStatus.INFO, "Click on queue search box and search for path");
-            logger.info("Click on queue search box and search for path");
-            smallfilesPageObject.reportSearchBox.click();
-            smallfilesPageObject.reportSearchBox.sendKeys("/warehouse");
-
             if (smallfilesPageObject.minFileSizeName.size() > 0) {
-                List<WebElement> minFileSizeName = smallfilesPageObject.pathName;
-                Assert.assertFalse(minFileSizeName.isEmpty(), "There are no schedule report path");
-                test.log(LogStatus.PASS, "File display in the table- " + minFileSizeName);
+                test.log(LogStatus.INFO, "Click on queue search box and search for path");
+                logger.info("Click on queue search box and search for path");
+                smallfiles.verifyAllFileSizePathSearchOption(clusterId, 5, 5);
+                waitExecuter.waitUntilPageFullyLoaded();
+                test.log(LogStatus.PASS, "Verify the user is able to search the Min File size in the small file table");
             } else {
                 Assert.assertTrue(smallfilesPageObject.whenNoDataDisplay.isDisplayed());
                 test.log(LogStatus.FAIL, "Verified  search pattern for Min File size not completed successfully");

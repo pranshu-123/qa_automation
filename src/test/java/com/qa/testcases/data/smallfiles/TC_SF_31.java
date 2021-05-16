@@ -8,7 +8,6 @@ import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -34,15 +33,13 @@ public class TC_SF_31 extends BaseClass {
         smallfiles.closeConfirmationMessageNotification();
         try {
             // Click on small file search
-            test.log(LogStatus.INFO, "Click on queue search box and search for path");
-            logger.info("Click on queue search box and search for path");
-            smallfilesPageObject.reportSearchBox.click();
-            smallfilesPageObject.reportSearchBox.sendKeys("/warehouse");
-
             if (smallfilesPageObject.getFileNameFromTable.size() > 0) {
-                String selectedFileName = smallfilesPageObject.getFileNameFromTable.stream().findFirst()
-                        .filter(WebElement::isDisplayed).get().getText();
-                test.log(LogStatus.PASS, "File display in the table- " + selectedFileName);
+                test.log(LogStatus.INFO, "Click on queue search box and search for path");
+                logger.info("Click on queue search box and search for path");
+                smallfiles.verifyAllFileSizePathSearchOption(clusterId, 2, 2);
+                waitExecuter.waitUntilPageFullyLoaded();
+                test.log(LogStatus.PASS, "Verify the user is able to search the files in the small file table");
+
             } else {
                 Assert.assertTrue(smallfilesPageObject.whenNoDataDisplay.isDisplayed());
                 test.log(LogStatus.FAIL, "Verified search a particular number of files not completed successfully");

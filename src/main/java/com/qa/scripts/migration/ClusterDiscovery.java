@@ -168,14 +168,14 @@ public class ClusterDiscovery {
     public int getJobsCount() {
         waitExecuter.sleep(2000);
         int hiveapp = sparkApp.clickOnlyLink("Tez");
-        LOGGER.info("Hive apps -- " + hiveapp);
+        LOGGER.info("Tez apps -- " + hiveapp);
         waitExecuter.sleep(2000);
         int MRapps = sparkApp.clickOnlyLink("Map Reduce");
-        LOGGER.info("Hive apps -- " + MRapps);
+        LOGGER.info("Map Reduce -- " + MRapps);
         waitExecuter.sleep(2000);
         int sparkApps = sparkApp.clickOnlyLink("Spark");
         waitExecuter.sleep(2000);
-        LOGGER.info("Hive apps -- " + sparkApps);
+        LOGGER.info("Spark -- " + sparkApps);
         int totalJobs = hiveapp + MRapps + sparkApps;
         return totalJobs;
     }

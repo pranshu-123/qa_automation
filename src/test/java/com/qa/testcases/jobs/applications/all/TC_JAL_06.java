@@ -34,8 +34,7 @@ public class TC_JAL_06 extends BaseClass {
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         allApps.navigateToJobsTab();
-        String subStringOfSelectedClusterId = clusterId.substring(0, 19);
-        LOGGER.info("subStringOfSelectedClusterId " + subStringOfSelectedClusterId);
+
         // Select cluster
         test.log(LogStatus.INFO, "Select clusterid : " + clusterId);
         LOGGER.info("Select clusterId : " + clusterId);

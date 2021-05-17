@@ -80,6 +80,7 @@ public class TC_CTX_22 extends BaseClass {
         waitExecuter.waitUntilTextToBeInWebElement(statusElement,
             "SUCCESS");
         LOGGER.pass("Verified TopX report is completed successfully", test);
+        waitExecuter.waitUntilElementClickable(topXPageObject.topXAddIcon);
       } catch (TimeoutException te) {
         throw new AssertionError("TopX report not completed successfully.");
       }

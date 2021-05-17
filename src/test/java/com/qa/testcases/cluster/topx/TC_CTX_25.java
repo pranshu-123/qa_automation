@@ -57,6 +57,7 @@ public class TC_CTX_25 extends BaseClass {
             topX.selectCluster(clusterId);
             waitExecuter.sleep(1000);
             topX.clickOnModalRunButton();
+            waitExecuter.sleep(1000);
             WebElement statusElement = driver.findElement(By.xpath(statusXpath));
             try {
                 waitExecuter.waitUntilTextToBeInWebElement(statusElement,

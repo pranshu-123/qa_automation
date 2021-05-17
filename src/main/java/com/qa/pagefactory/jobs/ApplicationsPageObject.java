@@ -174,7 +174,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "(//div[contains(@class,'input-section')])[4]/input[2]")
     public WebElement eventsSliderInputRight;
 
-    @FindBy(xpath = "//div[@id='default-analysis-tab']//span[contains(@class,'badge')]")
+    @FindBy(xpath = "//div[@class='status-title']//following-sibling::span[contains(@class,'badge') and not(contains(@class,'module-status'))]")
     public List<WebElement> getBadgeTitle;
 
     @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')])[3]//input")

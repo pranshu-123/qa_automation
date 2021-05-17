@@ -20,7 +20,6 @@ public class PageConstants {
     public static class TuningScheduleRun {
         public static String[] SCHEDULE_RUN = {"Daily", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
                 "Friday", "Saturday", "Every 2 Weeks", "Every Month"};
-        public static String[] SCHEDULE_CLUSTERID = {"tnode28-HDP315-TLS-Kerb-Ranger", "tnode3-CDH633-TLS-Kerb-Sentry"};
     }
 
     public static class MRHiveKPIs {
@@ -28,8 +27,7 @@ public class PageConstants {
     }
 
     public static class MigrationAndServices {
-        public static String[] Google_Dataproc = {"Dataproc 2.0.0-Preview", "Dataproc 1.5.13",
-                "Dataproc 1.5.12", "Dataproc 1.5.11"};
+        public static String[] Google_Dataproc = {"Dataproc 2.0.0-Preview", "Dataproc 1.5.13", "Dataproc 1.5.12", "Dataproc 1.5.11"};
         public static String[] Amazon_EMR = {"EMR 6.2.0", "EMR 6.1.0", "EMR 6.0.0", "EMR 5.32.0"};
         public static String[] Azure_HDI = {"HDInsight 4.0", "HDInsight 3.6"};
     }
@@ -70,7 +68,7 @@ public class PageConstants {
 
     }
 
-    public static class ReportsArchiveNames{
+    public static class ReportsArchiveNames {
         public static String Tuning = "Tuning";
         public static String TopX = "Top X";
 

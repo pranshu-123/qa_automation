@@ -14,7 +14,6 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
-@Marker.CloudMappingPerHost
 @Marker.All
 public class TC_CMP_03 extends BaseClass {
   private static final Logger LOGGER = Logger.getLogger(com.qa.testcases.migration.cloud_mapping_per_host.TC_CMP_03.class.getName());

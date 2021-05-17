@@ -220,17 +220,19 @@ public class ServicesAndVersionsCompatibility {
 
     public String getMajorVersion(String name) {
         String[] arr = name.split(" ");
-        String[] arrVersion = arr[1].split("\\.");
-        return arrVersion[0];
+        String[] arrVersion = arr[arr.length-1].split("\\.");
+        String majorVersion = arrVersion[0].replaceAll("[a-zA-Z]","");
+        return majorVersion;
     }
 
     public String getMinorVersion(String name) {
         String[] arr = name.split(" ");
         String[] arrVersion = arr[arr.length-1].split("\\.");
-        return arrVersion[1];
+        String minorVersion = arrVersion[1].replaceAll("[a-zA-Z]","");
+        return minorVersion;
     }
     public String getBuildVersion(String name) {
-        System.out.println("name: "+name);
+        LOGGER.info("name: "+name);
         String[] arr = name.split(" ");
         String[] arrVersion = arr[1].split("\\.");
         if(arrVersion.length > 3)

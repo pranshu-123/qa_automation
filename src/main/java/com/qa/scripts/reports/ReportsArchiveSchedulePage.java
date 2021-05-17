@@ -100,10 +100,11 @@ public class ReportsArchiveSchedulePage {
    * Method to validate the Schedule report Page drop down list
    */
   public void validateScheduleReportDropDown(ReportsArchiveScheduledPageObject reportPageObj) {
-    waitExecuter.waitUntilPageFullyLoaded();
+    waitExecuter.waitUntilElementPresent(reportPageObj.scheduleReportDropDown);
     MouseActions.clickOnElement(driver, reportPageObj.scheduleReportDropDown);
-    waitExecuter.sleep(2000);
+    waitExecuter.sleep(1000);
     List<WebElement> dropDownList = reportPageObj.dropDownList;
+    waitExecuter.sleep(2000);
     Assert.assertFalse(dropDownList.isEmpty(), "There are no reports in the drop down list as it is empty");
     boolean isContainsAllOpt = false;
     int otherReportTotal = 0;
@@ -116,6 +117,7 @@ public class ReportsArchiveSchedulePage {
       if (dropDownList.get(i).getText().contains("All")) {
         waitExecuter.sleep(2000);
         MouseActions.clickOnElement(driver, dropDownList.get(i));
+        waitExecuter.sleep(1000);
 
         isContainsAllOpt = true;
         totalReports = getReportCnt(reportPageObj, 15);
@@ -123,7 +125,7 @@ public class ReportsArchiveSchedulePage {
       } else {
         logger.info("Click on reportType: " + reportType);
         MouseActions.clickOnElement(driver, dropDownList.get(i));
-        waitExecuter.sleep(2000);
+        waitExecuter.sleep(3000);
         otherReportTotal += getReportCnt(reportPageObj, 15);
         logger.info("The other report cnt is " + otherReportTotal);
       }
@@ -853,7 +855,7 @@ public class ReportsArchiveSchedulePage {
           MouseActions.clickOnElement(driver, newReportActionList.get(i));
           waitExecuter.sleep(2000);
           List<WebElement> fieldDays = reportPageObj.forcasting;
-          String[] valueDays = {"7"};
+          String[] valueDays = {""};
           for (int f = 0; f < fieldDays.size(); f++) {
             fieldDays.get(f).sendKeys(valueDays[f]);
           }

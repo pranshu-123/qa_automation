@@ -81,9 +81,10 @@ public class TC_CF_03 extends BaseClass {
             if (datePickerElement.getText().equalsIgnoreCase("Custom Range")) {
                 datePickerElement.click();
                 datePicker.setStartDate(DateUtils.getPastDate(20));
-                waitExecuter.sleep(1000);
+                waitExecuter.sleep(2000);
                 datePicker.setEndDate(DateUtils.getCurrentDate());
                 datePicker.clickOnCustomDateApplyBtn();
+                waitExecuter.waitUntilPageFullyLoaded();
             } else {
                 datePickerElement.click();
             }

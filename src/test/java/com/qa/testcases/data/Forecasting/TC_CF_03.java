@@ -88,14 +88,14 @@ public class TC_CF_03 extends BaseClass {
             } else {
                 datePickerElement.click();
             }
-            waitExecuter.sleep(500);
+            waitExecuter.sleep(1000);
             forecasting.setForecastingDays(forecastingNoOfDays);
             LOGGER.info("Set Forecasting days as: " + forecastingNoOfDays
                 + " and History date range as :" + datePickerOption);
             test.log(LogStatus.INFO, "Set Forecasting days as: " + forecastingNoOfDays
                 + " and History date range as :" + datePickerOption);
             forecasting.clickOnModalRunButton();
-            waitExecuter.sleep(8000);
+            waitExecuter.sleep(4000);
             LOGGER.info("Clicked on Modal Run Button");
             test.log(LogStatus.INFO, "Clicked on Modal Run Button");
             try {

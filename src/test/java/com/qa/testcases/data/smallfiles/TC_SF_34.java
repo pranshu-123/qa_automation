@@ -32,20 +32,14 @@ public class TC_SF_34 extends BaseClass {
         smallfiles.closeConfirmationMessageNotification();
         try {
             // Click on small file search
-            if (smallfilesPageObject.minFileSizeName.size() > 0) {
                 test.log(LogStatus.INFO, "Click on queue search box and search for path");
                 logger.info("Click on queue search box and search for path");
                 smallfiles.verifyAllFileSizePathSearchOption(clusterId, 5, 5);
                 waitExecuter.waitUntilPageFullyLoaded();
                 test.log(LogStatus.PASS, "Verify the user is able to search the Min File size in the small file table");
-            } else {
-                Assert.assertTrue(smallfilesPageObject.whenNoDataDisplay.isDisplayed());
-                test.log(LogStatus.FAIL, "Verified  search pattern for Min File size not completed successfully");
-            }
-        } catch (Exception te) {
-            throw new AssertionError("Verified  search pattern for Min File size not completed successfully." + te.getMessage());
+            } catch (Exception te) {
+            throw new AssertionError("Verified rows that match the search pattern for Avg File size not completed successfully." + te.getMessage());
         }
-
 
     }
 }

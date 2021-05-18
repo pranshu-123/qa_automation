@@ -31,23 +31,8 @@ public class TC_SF_31 extends BaseClass {
         Smallfiles smallfiles = new Smallfiles(driver);
         smallfiles.commonPanelTabValidation(test, logger);
         smallfiles.closeConfirmationMessageNotification();
-        try {
-            // Click on small file search
-            if (smallfilesPageObject.getFileNameFromTable.size() > 0) {
-                test.log(LogStatus.INFO, "Click on queue search box and search for path");
-                logger.info("Click on queue search box and search for path");
-                smallfiles.verifyAllFileSizePathSearchOption(clusterId, 2, 2);
-                waitExecuter.waitUntilPageFullyLoaded();
-                test.log(LogStatus.PASS, "Verify the user is able to search the files in the small file table");
-
-            } else {
-                Assert.assertTrue(smallfilesPageObject.whenNoDataDisplay.isDisplayed());
-                test.log(LogStatus.FAIL, "Verified search a particular number of files not completed successfully");
-            }
-        } catch (Exception te) {
-            throw new AssertionError("Verified search a particular number of files not completed successfully." + te.getMessage());
-        }
-
-
+        waitExecuter.waitUntilPageFullyLoaded();
+        smallfiles.verifyAllFileSizePathSearchOption(clusterId, 2, 2);
+        test.log(LogStatus.PASS, "Verify the user is able to search the Path in the small file table");
     }
 }

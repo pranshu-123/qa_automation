@@ -32,19 +32,13 @@ public class TC_SF_33 extends BaseClass {
         smallfiles.closeConfirmationMessageNotification();
         try {
             // Click on small file search
-            if (smallfilesPageObject.totalFileSize.size() > 0) {
-                test.log(LogStatus.INFO, "Click on queue search box and search for path");
-                logger.info("Click on queue search box and search for path");
-                smallfiles.verifyAllFileSizePathSearchOption(clusterId, 4, 4);
-                waitExecuter.waitUntilPageFullyLoaded();
-                test.log(LogStatus.PASS, "Verify the user is able to search the Total File size in the small file table");
-            } else {
-                Assert.assertTrue(smallfilesPageObject.whenNoDataDisplay.isDisplayed());
-                test.log(LogStatus.FAIL, "Verified search pattern for Total File size not completed successfully");
-            }
+            test.log(LogStatus.INFO, "Click on queue search box and search for path");
+            logger.info("Click on queue search box and search for path");
+            smallfiles.verifyAllFileSizePathSearchOption(clusterId, 4, 4);
+            waitExecuter.waitUntilPageFullyLoaded();
+            test.log(LogStatus.PASS, "Verify the user is able to search the Total File size in the small file table");
         } catch (Exception te) {
-            throw new AssertionError("Verified search pattern for Total File size not completed successfully." + te.getMessage());
+            throw new AssertionError("Verified rows that match the search pattern for Avg File size not completed successfully." + te.getMessage());
         }
-
     }
 }

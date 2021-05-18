@@ -33,17 +33,11 @@ public class TC_SF_32 extends BaseClass {
         smallfiles.closeConfirmationMessageNotification();
         try {
             // Click on small file search
-            if (smallfilesPageObject.avgFileSize.size() > 0) {
                 test.log(LogStatus.INFO, "Click on queue search box and search for path");
                 logger.info("Click on queue search box and search for path");
                 smallfiles.verifyAllFileSizePathSearchOption(clusterId, 3, 3);
                 waitExecuter.waitUntilPageFullyLoaded();
                 test.log(LogStatus.PASS, "Verify the user is able to search the Avg File Size in the small file table");
-
-            } else {
-                Assert.assertTrue(smallfilesPageObject.whenNoDataDisplay.isDisplayed());
-                test.log(LogStatus.FAIL, "Verified rows that match the search pattern for Avg File size not completed successfully");
-            }
         } catch (Exception te) {
             throw new AssertionError("Verified rows that match the search pattern for Avg File size not completed successfully." + te.getMessage());
         }

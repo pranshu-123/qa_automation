@@ -59,6 +59,7 @@ public class TC_CF_03 extends BaseClass {
 
         forecasting.closeConfirmationMessageNotification();
         forecasting.clickOnRunButton();
+        waitExecuter.waitUntilPageFullyLoaded();
         LOGGER.info("Clicked on Run Button");
         test.log(LogStatus.INFO, "Clicked on Run Button");
 
@@ -78,17 +79,17 @@ public class TC_CF_03 extends BaseClass {
             waitExecuter.sleep(1000);
             WebElement datePickerElement = datePickerPageObject.dateRangeOptions.get(i);
             String datePickerOption = datePickerElement.getText();
-            if (datePickerElement.getText().equalsIgnoreCase("Custom Range")) {
-                datePickerElement.click();
-                datePicker.setStartDate(DateUtils.getPastDate(20));
-                waitExecuter.sleep(2000);
-                datePicker.setEndDate(DateUtils.getCurrentDate());
-                datePicker.clickOnCustomDateApplyBtn();
-                waitExecuter.waitUntilPageFullyLoaded();
-            } else {
-                datePickerElement.click();
-            }
-            waitExecuter.sleep(1000);
+            LOGGER.info("Select custom range from date picker");
+            datePicker.selectCustomRange();
+            waitExecuter.sleep(3000);
+            /* Set Start date by substracting days from current date and end date as current date */
+            LOGGER.info("Set current date and back date");
+            datePicker.setCurrentAndPastDate(-3);
+            waitExecuter.sleep(3000);
+            // Click on apply button of calendar
+            LOGGER.info("Click on apply button of date picker custom range");
+            datePicker.clickOnCustomDateApplyBtn();
+            waitExecuter.sleep(3000);
             forecasting.setForecastingDays(forecastingNoOfDays);
             LOGGER.info("Set Forecasting days as: " + forecastingNoOfDays
                 + " and History date range as :" + datePickerOption);

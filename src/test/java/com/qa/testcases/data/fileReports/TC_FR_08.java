@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.pagefactory.data.FileReportsPageObject;
 import com.qa.scripts.data.FileReports;
 import com.qa.utils.MouseActions;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.annotations.Test;
 
@@ -19,9 +20,11 @@ public class TC_FR_08 extends BaseClass {
     test.assignCategory(" Data - FileReports ");
 
     FileReports filereports = new FileReports(driver);
+    WaitExecuter waitExecuter = new WaitExecuter(driver);
     FileReportsPageObject fileReportsPageObject = new FileReportsPageObject(driver);
 
     filereports.navidateTofileReportsTab();
+    waitExecuter.waitUntilElementPresent(fileReportsPageObject.tinyFile);
     MouseActions.clickOnElement(driver, fileReportsPageObject.tinyFile);
     filereports.verifyFilesForSelectedCluster(clusterId, "TINY");
     test.log(LogStatus.PASS, "Successfully validate the UI displays Tiny file reports for a selected cluster.");

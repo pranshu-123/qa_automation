@@ -5,6 +5,7 @@ import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.data.FileReportsPageObject;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,6 +23,7 @@ public class FileReports {
     private final WaitExecuter waitExecuter;
     private final WebDriver driver;
     FileReportsPageObject fileReportsPageObject;
+    private UserActions userActions;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -84,6 +86,7 @@ public class FileReports {
             for (int i = 0; i < clusterList.size(); i++) {
                 String clusterName = clusterList.get(i).getText();
                 LOGGER.info("Selected cluster " + clusterName);
+
                 MouseActions.clickOnElement(driver, clusterList.get(i));
                 waitExecuter.waitUntilElementClickable(fileReportsPageObject.searchField);
                 List<WebElement> tableHeaderList = fileReportsPageObject.tableHeader;
@@ -102,24 +105,25 @@ public class FileReports {
             }
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
-            LOGGER.info("Data not present in the table got " + e);
-        }
-        catch (NullPointerException e) {
+            LOGGER.info("Data not present in the table" + e);
+        } catch (NullPointerException e) {
             e.printStackTrace();
             WebElement noData = fileReportsPageObject.noDataText;
             Assert.assertFalse(noData.isDisplayed(), "Data not present in the table got {'" + noData.getText() + "}' message");
 
-       }
-  }
+        }
+    }
+
     public ArrayList<String> getAllFileCnt(List<WebElement> tableRowList, String fileType, int tdValue) {
         ArrayList<String> expectedFileCnt = new ArrayList<>();
         try {
             for (int row = 1; row <= tableRowList.size(); row++) {
                 WebElement rowData = driver.findElement
                         (By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + row + "]/td[" + tdValue + "]"));
-                waitExecuter.waitUntilPageFullyLoaded();
+                Assert.assertTrue(rowData.isDisplayed(), "No data under column: File " +
+                        " for " + fileType + " file type");
                 String fileCnt = rowData.getText().trim();
-                fileCnt.replaceAll("(^|\\s)\\d+(gb|mb)($|\\s)", Matcher.quoteReplacement("\\/"));
+                fileCnt.replaceAll("(^|\\s)\\d+(gb|mb|kb|tb|b)($|\\s)", Matcher.quoteReplacement("\\/"));
                 Assert.assertTrue(rowData.isDisplayed(), "No data under column: File " +
                         " for " + fileType + " file type");
                 LOGGER.info("The path count is " + fileCnt);
@@ -180,7 +184,9 @@ public class FileReports {
     public void verifyAllSortOption(String fileType, String clusterID, int tdValue, int colValue) {
         selectOnlySingleCluster(clusterID);
         List<WebElement> tableRowList = fileReportsPageObject.fileTableRows;
-        ArrayList<String> expectedFileCntArr = new ArrayList<>(), ascendingFileCntArr, descendingFileCntArr;
+        ArrayList<String> expectedFileCntArr = new ArrayList<>(),
+                ascendingFileCntArr, descendingFileCntArr;
+        //WebElement fileCol = driver.findElement(By.xpath("//tbody/tr/td[" + colValue + "]"));
         WebElement fileCol = driver.findElement(By.xpath("//table/thead/tr/th[" + colValue + "]"));
         int rowCnt = tableRowList.size();
         if (rowCnt < 10) {
@@ -206,7 +212,6 @@ public class FileReports {
         descendingFileCntArr = getAllFileCnt(tableRowList, fileType, tdValue);
         Assert.assertEquals(ascendingFileCntArr.size(), descendingFileCntArr.size(), " Ascending sort and Descending sort" +
                 " array size do not match");
-
         Collections.sort(expectedFileCntArr);
         ArrayList<String> newExpectedFileCnt = new ArrayList<>();
         LOGGER.info("The size of ascending arr is " + ascendingFileCntArr.size() +

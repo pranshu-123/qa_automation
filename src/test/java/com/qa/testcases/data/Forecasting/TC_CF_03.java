@@ -80,13 +80,13 @@ public class TC_CF_03 extends BaseClass {
             if (datePickerElement.getText().equalsIgnoreCase("Custom Range")) {
                 datePickerElement.click();
                 datePicker.setStartDate(DateUtils.getPastDate(20));
-                waitExecuter.sleep(500);
+                waitExecuter.waitUntilPageFullyLoaded();
                 datePicker.setEndDate(DateUtils.getCurrentDate());
                 datePicker.clickOnCustomDateApplyBtn();
             } else {
                 datePickerElement.click();
             }
-            waitExecuter.sleep(500);
+            waitExecuter.waitUntilPageFullyLoaded();
             forecasting.setForecastingDays(forecastingNoOfDays);
             LOGGER.info("Set Forecasting days as: " + forecastingNoOfDays
                 + " and History date range as :" + datePickerOption);

@@ -334,6 +334,47 @@ public class Smallfiles {
 
     }
 
+
+    public void checkTableContainsData(int tablesRows, int tableCells) {
+        String expectedMsg = "No data to display.";
+        List<WebElement> tableRows = smallfilesPageObject.fileTableRows;
+        Assert.assertFalse(tableRows.isEmpty(), "Table contains no data");
+        WebElement rowData = driver.findElement(By.xpath("//table[@class='component-data-tables row-hover']/tbody/" +
+                "tr[" + tablesRows + "]/td[" + tableCells + "]"));
+        String rowDataStr = rowData.getText();
+        Assert.assertFalse(rowDataStr.contains(expectedMsg), "Table contains no data. Got '" + expectedMsg + "' message");
+    }
+
+    /**
+     * Method to validate the search option for different file types
+     */
+    public void verifyAllFileSizePathSearchOption(String clusterID, int tablesRows, int tableCells) {
+        List<WebElement> tableHeaderList = smallfilesPageObject.searchTableHeader;
+        List<WebElement> tableRows = smallfilesPageObject.searchFileTableRows;
+        String searchString = "";
+        checkTableContainsData(tablesRows, tableCells);
+
+        WebElement rowData = driver.findElement(
+                By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + tablesRows + "]/td[" + tableCells + "]"));
+        Assert.assertTrue(rowData.isDisplayed(), "No data under column: " + tableHeaderList.get(1).getText() +
+                " for ");
+        searchString = rowData.getText();
+        LOGGER.info("The search string is " + searchString);
+
+        smallfilesPageObject.searchField.sendKeys(searchString);
+        waitExecuter.waitUntilPageFullyLoaded();
+        for (int row = 1; row <= tableRows.size(); row++) {
+            WebElement searchRowData = driver.findElement
+                    (By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + row + "]/td[" + tableCells + "]"));
+            Assert.assertTrue(searchRowData.isDisplayed(), "No data under column: File " +
+                    " for ");
+            LOGGER.info("Search String is " + searchString + " Search result is " + searchRowData.getText());
+            Assert.assertTrue(searchRowData.getText().contains(searchString), "The search result for " +
+                    " file type donot contain the search string\n Expected '" + searchString + "' to be present in '"
+                    + searchRowData.getText() + "' search result");
+        }
+    }
+
     /* Select day from drop-down */
     public void selectByDays(String dayToRun) {
         waitExecuter.waitUntilElementClickable(smallfilesPageObject.scheduleDays);

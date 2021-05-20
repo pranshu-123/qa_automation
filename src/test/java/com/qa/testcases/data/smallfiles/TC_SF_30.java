@@ -8,7 +8,6 @@ import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -32,26 +31,9 @@ public class TC_SF_30 extends BaseClass {
         Smallfiles smallfiles = new Smallfiles(driver);
         smallfiles.commonPanelTabValidation(test, logger);
         smallfiles.closeConfirmationMessageNotification();
-
-        try {
-            // Click on small file Reports search
-            test.log(LogStatus.INFO, "Click on queue search box and search for path");
-            logger.info("Click on queue search box and search for path");
-            smallfilesPageObject.reportSearchBox.click();
-            smallfilesPageObject.reportSearchBox.sendKeys("/warehouse");
-
-            if (smallfilesPageObject.getPathNameFromTable.size() > 0) {
-                String selectedPathName = smallfilesPageObject.getPathNameFromTable.stream().findFirst()
-                        .filter(WebElement::isDisplayed).get().getText();
-                test.log(LogStatus.PASS, "Path display in the table- " + selectedPathName);
-            } else {
-                Assert.assertTrue(smallfilesPageObject.whenNoDataDisplay.isDisplayed());
-                test.log(LogStatus.FAIL, "Verified queue search box and search for path not completed successfully");
-            }
-        } catch (Exception te) {
-            throw new AssertionError("Verified queue search box and search for path not completed successfully." + te.getMessage());
-        }
-
-
+        waitExecuter.waitUntilPageFullyLoaded();
+        smallfiles.verifyAllFileSizePathSearchOption(clusterId, 1, 1);
+        test.log(LogStatus.PASS, "Verify the user is able to search the Path in the small file table");
     }
+
 }

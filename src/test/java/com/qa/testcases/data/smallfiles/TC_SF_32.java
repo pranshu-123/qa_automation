@@ -8,11 +8,9 @@ import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 @Marker.DataSmallFiles
@@ -35,20 +33,11 @@ public class TC_SF_32 extends BaseClass {
         smallfiles.closeConfirmationMessageNotification();
         try {
             // Click on small file search
-            test.log(LogStatus.INFO, "Click on queue search box and search for path");
-            logger.info("Click on queue search box and search for path");
-            smallfilesPageObject.reportSearchBox.click();
-            smallfilesPageObject.reportSearchBox.sendKeys("/warehouse");
-            waitExecuter.sleep(2000);
-
-            if (smallfilesPageObject.avgFileSize.size() > 0) {
-                List<WebElement> avgFileSize = smallfilesPageObject.fileName;
-                Assert.assertFalse(avgFileSize.isEmpty(), "There are no schedule report path");
-                test.log(LogStatus.PASS, "File display in the table- " + avgFileSize);
-            } else {
-                Assert.assertTrue(smallfilesPageObject.whenNoDataDisplay.isDisplayed());
-                test.log(LogStatus.FAIL, "Verified rows that match the search pattern for Avg File size not completed successfully");
-            }
+                test.log(LogStatus.INFO, "Click on queue search box and search for path");
+                logger.info("Click on queue search box and search for path");
+                smallfiles.verifyAllFileSizePathSearchOption(clusterId, 3, 3);
+                waitExecuter.waitUntilPageFullyLoaded();
+                test.log(LogStatus.PASS, "Verify the user is able to search the Avg File Size in the small file table");
         } catch (Exception te) {
             throw new AssertionError("Verified rows that match the search pattern for Avg File size not completed successfully." + te.getMessage());
         }

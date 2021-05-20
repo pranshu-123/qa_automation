@@ -60,21 +60,21 @@ public class TC_M08 extends BaseClass {
         test.log(LogStatus.INFO, "Verified Run Diagnostics Tab.");
         logger.info("Verified Run Diagnostics Tab.");
 
-        waitExecuter.sleep(5000);
         manage.clickOnLoadLatestDiagnostics();
+        waitExecuter.sleep(3000);
         test.log(LogStatus.INFO, "Clicked on Load Latest Diagnostics Button.");
         logger.info("Clicked on Load Latest Diagnostics Button.");
 
         try{
             waitExecuter.waitUntilElementPresent(managePageObject.latestDiagnosticsContentHeader);
             waitExecuter.waitUntilTextToBeInWebElement(managePageObject.latestDiagnosticsContentHeader, "Diagnostics Log");
-            waitExecuter.sleep(7000);
+            waitExecuter.sleep(10000);
             test.log(LogStatus.INFO, "Verified Diagnostics Log is loaded properly.");
             waitExecuter.waitUntilElementPresent(managePageObject.latestDiagnosticsContentHeader);
-            waitExecuter.waitUntilPageFullyLoaded();
+            waitExecuter.sleep(4000);
             Assert.assertTrue(managePageObject.latestDiagnosticsContentHeader.isDisplayed(),"Diagnostics Log " +
                     "content not found.");
-            waitExecuter.sleep(4000);
+            waitExecuter.sleep(10000);
         }catch (Exception e){
             e.printStackTrace();
             test.log(LogStatus.INFO, "Verified Latest Diagnostics Header and Time Stamp not found.");

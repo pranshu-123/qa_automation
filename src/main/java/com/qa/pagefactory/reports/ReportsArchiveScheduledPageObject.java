@@ -94,6 +94,9 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath="(//span[contains(@class, 'icon-download')])[1]")
   public WebElement downloadReportIcon;
 
+  @FindBy(css = "div[value='[object Object]'] input[type='text']")
+  public WebElement clearFilter;
+
   @FindBy(xpath = "(//*[@role='dialog'])")
   public WebElement viewReportDialogWin;
 

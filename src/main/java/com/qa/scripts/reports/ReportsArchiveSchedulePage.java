@@ -5,15 +5,13 @@ import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.scripts.clusters.Tuning;
+import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import com.sun.org.apache.xpath.internal.operations.Bool;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.touch.SingleTapAction;
 
 import java.security.Timestamp;
@@ -115,7 +113,7 @@ public class ReportsArchiveSchedulePage {
       logger.info("reportType = " + reportType);
       if (dropDownList.get(i).getText().contains("All")) {
         waitExecuter.sleep(2000);
-        MouseActions.clickOnElement(driver, dropDownList.get(i));
+        userActions.performActionWithPolling(dropDownList.get(i), UserAction.CLICK);
 
         isContainsAllOpt = true;
         totalReports = getReportCnt(reportPageObj, 15);
@@ -781,21 +779,17 @@ public class ReportsArchiveSchedulePage {
       int expectedAfterCnt = beforeReportCnt + 1;
       int afterReportCnt = 0;
       switch (reportName) {
-        case "File Reports":
-          MouseActions.clickOnElement(driver, newReportActionList.get(i));
-          waitExecuter.sleep(1000);
-          String bannerMsg = reportPageObj.reportCreationNotSup.getText().trim();
-          logger.info("Msg = " + bannerMsg + " for Report = " + reportName + " with status = " + status);
-          break;
         case "Small Files Report":
-          MouseActions.clickOnElement(driver, newReportActionList.get(i));
+          userActions.performActionWithPolling(newReportActionList.get(i), UserAction.CLICK);
+         /* MouseActions.clickOnElement(driver, newReportActionList.get(i));*/
           waitExecuter.sleep(1000);
           List<WebElement> fieldList = reportPageObj.newReportField;
           String[] valueArr = {"10", "20", "2", "2"};
           for (int f = 0; f < fieldList.size(); f++) {
             fieldList.get(f).sendKeys(valueArr[f]);
           }
-          MouseActions.clickOnElement(driver, reportPageObj.reportCreationRunButton);
+          userActions.performActionWithPolling(reportPageObj.reportCreationRunButton, UserAction.CLICK);
+         /* MouseActions.clickOnElement(driver, reportPageObj.reportCreationRunButton);*/
           waitExecuter.sleep(30000);
           driver.navigate().refresh();
           waitExecuter.waitUntilPageFullyLoaded();
@@ -805,12 +799,14 @@ public class ReportsArchiveSchedulePage {
           logger.info("Before cnt = " + beforeReportCnt + " After cnt = " + afterReportCnt);
           break;
         case "Top X":
-          MouseActions.clickOnElement(driver, newReportActionList.get(i));
+          userActions.performActionWithPolling(newReportActionList.get(i), UserAction.CLICK);
+          /*MouseActions.clickOnElement(driver, newReportActionList.get(i));*/
           waitExecuter.sleep(1000);
           List<WebElement> fieldsList = reportPageObj.topXtextFields;
           for (int f = 0; f < fieldsList.size(); f++) {
             MouseActions.clickOnElement(driver, fieldsList.get(f));
-            MouseActions.clickOnElement(driver, reportPageObj.topXFieldValue);
+            userActions.performActionWithPolling(reportPageObj.topXFieldValue, UserAction.CLICK);
+            /*MouseActions.clickOnElement(driver, reportPageObj.topXFieldValue);*/
             waitExecuter.sleep(1000);
           }
           List<WebElement> chkboxList = reportPageObj.checkBoxSelections;
@@ -834,12 +830,15 @@ public class ReportsArchiveSchedulePage {
           logger.info("Before cnt = " + beforeReportCnt + " After cnt = " + afterReportCnt);
           break;
         case "Cloud Mapping Per Host":
-          MouseActions.clickOnElement(driver, newReportActionList.get(i));
+          userActions.performActionWithPolling(newReportActionList.get(i), UserAction.CLICK);
+          /*MouseActions.clickOnElement(driver, newReportActionList.get(i));*/
           waitExecuter.sleep(25000);
           waitExecuter.waitUntilPageFullyLoaded();
-          MouseActions.clickOnElement(driver, reportPageObj.cloudMappingChkBox);
+          userActions.performActionWithPolling(reportPageObj.cloudMappingChkBox, UserAction.CLICK);
+          /*MouseActions.clickOnElement(driver, reportPageObj.cloudMappingChkBox);*/
           waitExecuter.sleep(1000);
-          MouseActions.clickOnElement(driver, reportPageObj.reportCreationRunButton);
+          userActions.performActionWithPolling(reportPageObj.reportCreationRunButton, UserAction.CLICK);
+          /*MouseActions.clickOnElement(driver, reportPageObj.reportCreationRunButton);*/
           waitExecuter.sleep(40000);
           waitExecuter.waitUntilPageFullyLoaded();
           driver.navigate().refresh();
@@ -850,15 +849,20 @@ public class ReportsArchiveSchedulePage {
           logger.info("Before cnt = " + beforeReportCnt + " After cnt = " + afterReportCnt);
           break;
         case "Capacity Forecasting":
-          MouseActions.clickOnElement(driver, newReportActionList.get(i));
+          userActions.performActionWithPolling(newReportActionList.get(i), UserAction.CLICK);
+          /*MouseActions.clickOnElement(driver, newReportActionList.get(i));*/
           waitExecuter.sleep(2000);
           List<WebElement> fieldDays = reportPageObj.forcasting;
+          reportPageObj.clearFilter.sendKeys(Keys.CONTROL + "a");
+          reportPageObj.clearFilter.sendKeys(Keys.DELETE);
+          waitExecuter.waitUntilPageFullyLoaded();
           String[] valueDays = {"7"};
           for (int f = 0; f < fieldDays.size(); f++) {
             fieldDays.get(f).sendKeys(valueDays[f]);
           }
           waitExecuter.waitUntilPageFullyLoaded();
-          MouseActions.clickOnElement(driver, reportPageObj.reportCreationRunButton);
+          userActions.performActionWithPolling(reportPageObj.reportCreationRunButton, UserAction.CLICK);
+         /* MouseActions.clickOnElement(driver, reportPageObj.reportCreationRunButton);*/
           waitExecuter.sleep(50000);
           waitExecuter.waitUntilPageFullyLoaded();
           status = reportStatusList.get(i).getText().trim();
@@ -870,11 +874,14 @@ public class ReportsArchiveSchedulePage {
           break;
         case "Cluster Discovery":
         case "Tuning":
+        case "File Reports":
         case "Queue Analysis":
         case "Services and Versions Compatibility":
-          MouseActions.clickOnElement(driver, newReportActionList.get(i));
+          userActions.performActionWithPolling(newReportActionList.get(i), UserAction.CLICK);
+          /*MouseActions.clickOnElement(driver, newReportActionList.get(i));*/
           waitExecuter.sleep(4000);
-          MouseActions.clickOnElement(driver, reportPageObj.reportCreationRunButton);
+          userActions.performActionWithPolling(reportPageObj.reportCreationRunButton, UserAction.CLICK);
+          /*MouseActions.clickOnElement(driver, reportPageObj.reportCreationRunButton);*/
           waitExecuter.sleep(4000);
           status = reportStatusList.get(i).getText().trim();
           driver.navigate().refresh();

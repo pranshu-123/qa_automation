@@ -76,16 +76,20 @@ public class HBasePage {
     }
 
     //Method to select hbase cluster from drop down
-    public void selectHBaseCluster(String hBaseClusterName){
-        waitExecuter.waitUntilElementClickable(hBasePageObject.hBaseClusterDropDown);
-        MouseActions.clickOnElement(driver, hBasePageObject.hBaseClusterDropDown);
-        waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.sleep(2000);
-        ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
-        applicationsPageObject.clusterIdsearchfield.sendKeys(hBaseClusterName);
-        waitExecuter.sleep(1000);
-        applicationsPageObject.select1stCluster.click();
-    }
+    public void selectHBaseCluster(String clusterName){
+            WebElement clusterID = hBasePageObject.clusterDropDown;
+            MouseActions.clickOnElement(driver, clusterID);
+            waitExecuter.waitUntilPageFullyLoaded();
+            List<WebElement> clusterList = hBasePageObject.clusterList;
+            Assert.assertFalse(clusterList.isEmpty(), "ClusterList is empty");
+            for (int i = 0; i < clusterList.size(); i++) {
+                String cluster = clusterList.get(i).getText();
+                logger.info("Cluster name is " + clusterName);
+                Assert.assertTrue(clusterName.contains(clusterName), " Cluster name doesnot match to the " +
+                        "cluster name in expected Cluster list");
+            }
+        }
+
 
     public void selectHBaseDefaultCluster(){
         waitExecuter.waitUntilElementClickable(hBasePageObject.hBaseClusterDropDown);

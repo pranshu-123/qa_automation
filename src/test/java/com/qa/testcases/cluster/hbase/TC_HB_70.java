@@ -57,9 +57,9 @@ public class TC_HB_70 extends BaseClass {
                 LOGGER.info("HBase headers found: "+ hbase.getHBaseHeader());
                 test.log(LogStatus.PASS, "Verified Multicluster setup with one HDP cluster.");
             }
-        }
-        if(flag == false){
-            Assert.assertTrue(false, "Multicluster setup with HDP cluster not found.");
+            else{
+                Assert.assertTrue(false, "Multicluster setup with HDP cluster not found.");
+            }
         }
     }
 }

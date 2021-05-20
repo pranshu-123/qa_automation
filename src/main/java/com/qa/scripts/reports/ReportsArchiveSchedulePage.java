@@ -935,7 +935,7 @@ public class ReportsArchiveSchedulePage {
     List<WebElement> reportCntList = reportPageObj.reportCnt;
     for (int i = 0; i < reportNameList.size(); i++) {
       int reportCnt = Integer.parseInt(reportCntList.get(i).getText().trim());
-      String reportName = reportNameList.get(i).getText();
+      String reportName = reportNameList.get(i).getText().trim();
       logger.info("ReportCnt is " + reportCnt);
       if (reportCnt > 0) {
         MouseActions.clickOnElement(driver, reportCntList.get(i));
@@ -954,7 +954,9 @@ public class ReportsArchiveSchedulePage {
         MouseActions.clickOnElement(driver, reportPageObj.deleteReportIcon);
         waitExecuter.waitUntilElementPresent(reportPageObj.deletePopText);
         String popText = reportPageObj.deletePopText.getText();
+        waitExecuter.waitUntilPageFullyLoaded();
         logger.info("Alert text is " + popText);
+        waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.waitUntilElementPresent(reportPageObj.deleteOkBtn);
         MouseActions.clickOnElement(driver,reportPageObj.deleteOkBtn);
         waitExecuter.sleep(3000);

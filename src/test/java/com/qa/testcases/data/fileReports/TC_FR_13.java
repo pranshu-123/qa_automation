@@ -18,10 +18,10 @@ public class TC_FR_13 extends BaseClass {
     Validate the user is able sort based on "Avg File Size" column for Large file reports
      */
     private final static LoggingUtils LOGGER = new LoggingUtils(TC_FR_13.class);
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P1-Validate the user is able to sort based onAvg File Size column for Large file reports")
     public void validateSortByAvgFileSize(String clusterId) {
         test = extent.startTest("TC_FR_13.validateSortByAvgFileSize " + clusterId,
-                "P1-Validate the user is able sort based on \"Avg File Size\" column for Large file reports");
+                "P1-Validate the user is able to sort based onAvg File Size column for Large file reports");
         test.assignCategory(" Data - FileReports ");
 
         FileReports filereports = new FileReports(driver);

@@ -17,10 +17,10 @@ public class TC_FR_19 extends BaseClass {
     /**
      Validate the user is able sort based on "Avg File Size" column for Tiny file reports
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description = "P1-Validate the user is able to sort based on Avg File Size column for Tiny file reports")
     public void validateAvgFileSizeSortForTinyFiles(String clusterId) {
         test = extent.startTest("TC_FR_19.validateAvgFileSizeSortForTinyFiles " + clusterId,
-                "P1-Validate the user is able sort based on number of 'Avg File Size' column for Tiny file reports");
+                "P1-Validate the user is able to sort based on Avg File Size column for Tiny file reports");
         test.assignCategory(" Data - FileReports ");
 
         FileReports filereports = new FileReports(driver);

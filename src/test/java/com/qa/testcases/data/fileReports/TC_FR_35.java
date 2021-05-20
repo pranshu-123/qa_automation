@@ -13,10 +13,10 @@ import org.testng.annotations.Test;
 @Marker.All
 public class TC_FR_35 extends BaseClass {
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description = "P1-Validate that the user is able to search based on Max File Size column for Large file reports")
   public void validateLargeFileSearchOption(String clusterId) {
     test = extent.startTest("TC_FR_35.validateLargeFileSearchOption " + clusterId,
-        "Validate the user is able sort based on \"Max File Size\" column for Medium file reports");
+        "P1-Validate that the user is able to search based on Max File Size column for Large file reports");
     test.assignCategory(" Data - FileReports ");
 
     FileReports filereports = new FileReports(driver);

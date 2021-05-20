@@ -99,7 +99,7 @@ public class ReportsArchiveSchedulePage {
    */
   public void validateScheduleReportDropDown(ReportsArchiveScheduledPageObject reportPageObj) {
     waitExecuter.waitUntilPageFullyLoaded();
-    MouseActions.clickOnElement(driver, reportPageObj.scheduleReportDropDown);
+    userActions.performActionWithPolling(reportPageObj.scheduleReportDropDown, UserAction.CLICK);
     waitExecuter.sleep(2000);
     List<WebElement> dropDownList = reportPageObj.dropDownList;
     Assert.assertFalse(dropDownList.isEmpty(), "There are no reports in the drop down list as it is empty");
@@ -114,18 +114,18 @@ public class ReportsArchiveSchedulePage {
       if (dropDownList.get(i).getText().contains("All")) {
         waitExecuter.sleep(2000);
         userActions.performActionWithPolling(dropDownList.get(i), UserAction.CLICK);
-
         isContainsAllOpt = true;
         totalReports = getReportCnt(reportPageObj, 15);
         logger.info("reportType = " + totalReports);
+        waitExecuter.waitUntilPageFullyLoaded();
       } else {
         logger.info("Click on reportType: " + reportType);
-        MouseActions.clickOnElement(driver, dropDownList.get(i));
+        userActions.performActionWithPolling(dropDownList.get(i), UserAction.CLICK);
         waitExecuter.sleep(2000);
         otherReportTotal += getReportCnt(reportPageObj, 15);
         logger.info("The other report cnt is " + otherReportTotal);
       }
-      MouseActions.clickOnElement(driver, reportPageObj.scheduleReportDropDown);
+      userActions.performActionWithPolling(reportPageObj.scheduleReportDropDown, UserAction.CLICK);
       waitExecuter.waitUntilPageFullyLoaded();
     }
     Assert.assertTrue(isContainsAllOpt, "There is no option 'All' in the dropdown list of size"
@@ -779,6 +779,12 @@ public class ReportsArchiveSchedulePage {
       int expectedAfterCnt = beforeReportCnt + 1;
       int afterReportCnt = 0;
       switch (reportName) {
+        case "File Reports":
+          MouseActions.clickOnElement(driver, newReportActionList.get(i));
+          waitExecuter.sleep(1000);
+          String bannerMsg = reportPageObj.reportCreationNotSup.getText().trim();
+          logger.info("Msg = " + bannerMsg + " for Report = " + reportName + " with status = " + status);
+          break;
         case "Small Files Report":
           userActions.performActionWithPolling(newReportActionList.get(i), UserAction.CLICK);
          /* MouseActions.clickOnElement(driver, newReportActionList.get(i));*/
@@ -874,7 +880,6 @@ public class ReportsArchiveSchedulePage {
           break;
         case "Cluster Discovery":
         case "Tuning":
-        case "File Reports":
         case "Queue Analysis":
         case "Services and Versions Compatibility":
           userActions.performActionWithPolling(newReportActionList.get(i), UserAction.CLICK);

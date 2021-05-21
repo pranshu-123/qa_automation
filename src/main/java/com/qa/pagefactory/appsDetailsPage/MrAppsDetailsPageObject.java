@@ -437,6 +437,9 @@ public class MrAppsDetailsPageObject {
     @FindBy(css = "//*[@class='close pointer']")
     public WebElement loadDiagnosticWinClose;
 
+    @FindBy(xpath = "//h3[text()='No Errors Found.']")
+    public List<WebElement> noErrors;
+
 
     /**
      * @param driver The driver that will be used to look up the elements

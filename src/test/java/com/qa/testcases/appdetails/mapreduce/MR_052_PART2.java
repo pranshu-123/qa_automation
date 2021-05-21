@@ -23,11 +23,11 @@ public class MR_052_PART2 extends BaseClass {
     java.util.logging.Logger logger = Logger.getLogger(MR_052_PART2.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_052_PART1_verifyStatus(String clusterId) {
-        test = extent.startTest("MR_052_PART1_verifyStatus: " + clusterId,
+    public void MR_052_PART2_verifyFailedStatus(String clusterId) {
+        test = extent.startTest("MR_052_PART2_verifyFailedStatus: " + clusterId,
                 "Verify there are 2 tabs , Task Attempt (Map), Task Attempt(Reduce)");
         test.assignCategory(" Apps Details-Mr");
-        Log.startTestCase("MR_052_PART1_verifyStatus");
+        Log.startTestCase("MR_052_PART2_verifyFailedStatus");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

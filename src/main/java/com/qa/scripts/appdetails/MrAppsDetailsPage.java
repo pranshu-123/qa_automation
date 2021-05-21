@@ -330,7 +330,6 @@ public class MrAppsDetailsPage {
         waitExecuter.sleep(3000);
         LOGGER.info("The application Id is " + Status);
         Assert.assertNotNull(Status, "Application Id is not displayed in the Header");
-        // Assert.assertNotSame("", Status, "Application Id is not displayed in the Header");
         return Status;
     }
 

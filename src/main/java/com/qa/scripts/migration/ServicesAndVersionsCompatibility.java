@@ -336,7 +336,6 @@ public class ServicesAndVersionsCompatibility {
                 WebElement e = driver.findElement(By.xpath(path));
                 if (!e.getText().isEmpty()) {
                     LOGGER.info("On Cloud Service- $$$$$$ " + e.getText().trim());
-                    //String cloudClusterServiceName = e.getText().trim();
                     LOGGER.info("$$$$$$- onPremServices- " + onPremServices);
                     String majorVersionOnPrem = getMajorVersion(onPremServices);
                     int majorVersionOnPremNum = Integer.parseInt(majorVersionOnPrem);
@@ -482,7 +481,7 @@ public class ServicesAndVersionsCompatibility {
                         String dateFromElement = servicesAndVersionsCompatibilityPageObject.archiveReportDate.getText().trim();
                         String[] arrDate = dateFromElement.split(" ");
                         String date = arrDate[0];
-                        System.out.println(date);
+                        LOGGER.info(date);
                         reportPageObj.reportSearchBox.sendKeys(date);
                         List<WebElement> searchDateReportNameList = reportPageObj.reportNames;
                         Assert.assertFalse(searchDateReportNameList.isEmpty(), "There are no reports listed");

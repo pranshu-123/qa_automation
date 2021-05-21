@@ -23,7 +23,7 @@ public class MouseActions {
         logger.info("Click on the element: " + element.getText(), null);
         WaitExecuter executer = new WaitExecuter(driver);
         try {
-            executer.waitUntilElementPresent(element);
+            executer.waitUntilElementClickable(element);
             element.click();
         } catch (ElementClickInterceptedException clickInterceptedException) {
             JavaScriptExecuter.clickOnElement(driver, element);

@@ -23,12 +23,12 @@ public class ServicesAndVersionsCompatibility {
 
     private static final Logger LOGGER = Logger.getLogger(ServicesAndVersionsCompatibility.class.getName());
     Logger logger = Logger.getLogger(ServicesAndVersionsCompatibility.class.getName());
-    private WebDriver driver;
-    private WaitExecuter waitExecuter;
-    private ServicesAndVersionsCompatibilityPageObject servicesAndVersionsCompatibilityPageObject;
-    private SubTopPanelModulePageObject subTopPanelModulePageObject;
-    private UserActions actions;
-    private TopPanelPageObject topPanelPageObject;
+    private final WebDriver driver;
+    private final WaitExecuter waitExecuter;
+    private final ServicesAndVersionsCompatibilityPageObject servicesAndVersionsCompatibilityPageObject;
+    private final SubTopPanelModulePageObject subTopPanelModulePageObject;
+    private final UserActions actions;
+    private final TopPanelPageObject topPanelPageObject;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -45,17 +45,32 @@ public class ServicesAndVersionsCompatibility {
     }
 
     public void setupServicesAndVersionsCompatibilityPage() {
-        //waitExecuter.waitUntilElementClickable(topPanelPageObject.migrationTab);
-        MouseActions.clickOnElement(driver, topPanelPageObject.migrationTab);
-        //actions.performActionWithPolling(topPanelPageObject.migrationTab, UserAction.CLICK);
-        //waitExecuter.waitUntilElementClickable(subTopPanelModulePageObject.servicesVersionMigrationTab);
+        waitExecuter.waitUntilElementClickable(topPanelPageObject.migrationTab);
+        actions.performActionWithPolling(topPanelPageObject.migrationTab, UserAction.CLICK);
+        for (; ; )
+            if (servicesAndVersionsCompatibilityPageObject.toolboxCD.size() > 0) {
+                waitExecuter.sleep(2000);
+                waitExecuter.waitUntilElementClickable(servicesAndVersionsCompatibilityPageObject.toolboxCD.get(0));
+                break;
+            } else if (servicesAndVersionsCompatibilityPageObject.reportPageEmptyClusterDiscover.size() > 0) {
+                waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.reportPageEmptyClusterDiscover.get(0));
+                break;
+            }
+        waitExecuter.waitUntilElementClickable(subTopPanelModulePageObject.servicesVersionMigrationTab);
     }
 
     public void clickOnServicesAndVersionMigrationTab() {
-        //waitExecuter.waitUntilElementClickable(subTopPanelModulePageObject.servicesVersionMigrationTab);
-        MouseActions.clickOnElement(driver, subTopPanelModulePageObject.servicesVersionMigrationTab);
-        //actions.performActionWithPolling(subTopPanelModulePageObject.servicesVersionMigrationTab, UserAction.CLICK);
-        //waitExecuter.waitUntilElementClickable(servicesAndVersionsCompatibilityPageObject.runBtn);
+        waitExecuter.waitUntilElementClickable(subTopPanelModulePageObject.servicesVersionMigrationTab);
+        actions.performActionWithPolling(subTopPanelModulePageObject.servicesVersionMigrationTab, UserAction.CLICK);
+        for (; ; )
+            if (servicesAndVersionsCompatibilityPageObject.clusterProductHeader.size() > 0) {
+                waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.clusterProductHeader.get(0));
+                break;
+            } else if (servicesAndVersionsCompatibilityPageObject.reportPageEmptyVersionCompatibility.size() > 0) {
+                waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.reportPageEmptyVersionCompatibility.get(0));
+                break;
+            }
+        waitExecuter.waitUntilElementClickable(servicesAndVersionsCompatibilityPageObject.runBtn);
     }
 
     public void closeMessageBanner() {
@@ -65,11 +80,11 @@ public class ServicesAndVersionsCompatibility {
     public void clickOnRunButton() {
         waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.runBtn);
         String runBtnText = servicesAndVersionsCompatibilityPageObject.runBtn.getText();
-        if(runBtnText.equals("Running..")){
-            try{
+        if (runBtnText.equals("Running..")) {
+            try {
                 waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.runBtn,
                         "Run");
-            }catch (TimeoutException te) {
+            } catch (TimeoutException te) {
                 throw new AssertionError("Services and Versions Compatibility Report is still running");
             }
         }
@@ -180,7 +195,7 @@ public class ServicesAndVersionsCompatibility {
         List<WebElement> platformsList = servicesAndVersionsCompatibilityPageObject.platformList;
         Assert.assertFalse(platformsList.isEmpty(), "Platform are not present in reports.");
         List<String> allPlatform = new ArrayList<>();
-        for (int i=1; i<platformsList.size();i++){
+        for (int i = 1; i < platformsList.size(); i++) {
             allPlatform.add(platformsList.get(i).getText().trim());
         }
         logger.info("All platforms : " + allPlatform + " displayed.");
@@ -220,31 +235,39 @@ public class ServicesAndVersionsCompatibility {
 
     public String getMajorVersion(String name) {
         String[] arr = name.split(" ");
-        String[] arrVersion = arr[1].split("\\.");
-        return arrVersion[0];
+        String[] arrVersion = arr[arr.length - 1].split("\\.");
+        String majorVersion = arrVersion[0].replaceAll("[a-zA-Z-]", "");
+        return majorVersion;
     }
 
     public String getMinorVersion(String name) {
         String[] arr = name.split(" ");
-        String[] arrVersion = arr[arr.length-1].split("\\.");
-        return arrVersion[1];
+        try {
+            String[] arrVersion = arr[arr.length - 1].split("\\.");
+            String minorVersion = arrVersion[1].replaceAll("[a-zA-Z-]", "");
+            return minorVersion;
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            return String.valueOf(0);
+        }
     }
+
     public String getBuildVersion(String name) {
-        System.out.println("name: "+name);
+        LOGGER.info("name: " + name);
         String[] arr = name.split(" ");
         String[] arrVersion = arr[1].split("\\.");
-        if(arrVersion.length > 3)
-            return arrVersion[2];
-
-        return null;
+        if (arrVersion.length > 3)
+            return arrVersion[2].replaceAll("[a-zA-Z-]", "");
+        else
+            return null;
     }
+
 
     //Check for Services and Versions are Compatible
     public void verifyServicesAndVersionsAreCompatible() {
         List<String> hdpServicesList = getHDPServicesList();
         int totalHDPServicesCount = hdpServicesList.size();
-        LOGGER.info("HDP_HEADER_LIST$$$$$$"+hdpServicesList);
-        List<WebElement> rowsList = servicesAndVersionsCompatibilityPageObject.rowsList;
+        LOGGER.info("HDP_HEADER_LIST$$$$$$" + hdpServicesList);
+        List<WebElement> rowsList = servicesAndVersionsCompatibilityPageObject.getAllOnPremisesServices;
         Assert.assertFalse(rowsList.isEmpty(), "No Platform services data available");
         List<WebElement> colsList = servicesAndVersionsCompatibilityPageObject.colList;
         logger.info("Size of columnlist: " + colsList.size());
@@ -252,43 +275,43 @@ public class ServicesAndVersionsCompatibility {
 
         for (int col = 0; col < totalHDPServicesCount - 1; col++) {
             for (int row = 0; row < rowsList.size(); row++) {
-                LOGGER.info("ROW$$$$$ "+row+ " COL$$$$ "+col);
+
+                String onPremServices = rowsList.get(row).getText();
+                LOGGER.info("ROW$$$$$ " + row + " COL$$$$ " + col);
                 String path = "//tbody/tr[" + (row + 1) + "]/td[" + (col + 2) + "]";
-                LOGGER.info("PATH$$$$$$"+path);
+                LOGGER.info("PATH$$$$$$" + path);
                 WebElement e = driver.findElement(By.xpath(path));
                 if (!e.getText().isEmpty()) {
                     String cloudClusterServiceName = e.getText().trim();
-                    LOGGER.info("cloudClusterServiceName$$$$$$"+cloudClusterServiceName);
+                    LOGGER.info("cloudClusterServiceName$$$$$$" + cloudClusterServiceName);
                     String majorVersionCloud = getMajorVersion(cloudClusterServiceName);
                     String minorVersionCloud = getMinorVersion(cloudClusterServiceName);
                     String buildVersionCloud = getBuildVersion(cloudClusterServiceName);
 
                     int majorVersionCloudNum = Integer.parseInt(majorVersionCloud);
                     int minorVersionCloudNum = Integer.parseInt(minorVersionCloud);
-                    int buildVersionCloudNum =0;
-                    if(buildVersionCloud!=null)
+                    int buildVersionCloudNum = 0;
+                    if (buildVersionCloud != null)
                         buildVersionCloudNum = Integer.parseInt(buildVersionCloud);
 
-
-                    String testClusterServiceName = hdpServicesList.get(col);
-                    String majorVersionHDP = getMajorVersion(testClusterServiceName);
-                    String minorVersionHDP = getMinorVersion(testClusterServiceName);
-                    String buildVersionHDP = getBuildVersion(testClusterServiceName);
+                    String majorVersionHDP = getMajorVersion(onPremServices);
+                    String minorVersionHDP = getMinorVersion(onPremServices);
+                    String buildVersionHDP = getBuildVersion(onPremServices);
 
                     int majorVersionHDPNum = Integer.parseInt(majorVersionHDP);
                     int minorVersionHDPNum = Integer.parseInt(minorVersionHDP);
-                    int buildVersionHDPNum =0;
-                    if(buildVersionHDP!=null)
+                    int buildVersionHDPNum = 0;
+                    if (buildVersionHDP != null)
                         buildVersionHDPNum = Integer.parseInt(buildVersionHDP);
 
                     if (majorVersionCloudNum >= majorVersionHDPNum && minorVersionCloudNum >= minorVersionHDPNum
-                    && buildVersionCloudNum > buildVersionHDPNum) {
+                            && buildVersionCloudNum > buildVersionHDPNum) {
                         //Now check for green //risk-0
                         String classAttributeName = e.getAttribute("class");
                         logger.info("Element class attribute name: " + classAttributeName);
                         //check for class attribute name as 'risk-0' which is for Green color.
                         Assert.assertTrue(classAttributeName.equals("risk-0"), "Platforms service in the box is not" +
-                                " marked in Green for element: "+e.getText());
+                                " marked in Green for element: " + e.getText());
                     }
                 }
             }
@@ -299,7 +322,7 @@ public class ServicesAndVersionsCompatibility {
     public void verifyServicesAndVersionsAreNotCompatible() {
         List<String> hdpServicesList = getHDPServicesList();
         int totalHDPServicesCount = hdpServicesList.size();
-        List<WebElement> rowsList = servicesAndVersionsCompatibilityPageObject.rowsList;
+        List<WebElement> rowsList = servicesAndVersionsCompatibilityPageObject.getAllOnPremisesServices;
         Assert.assertFalse(rowsList.isEmpty(), "No Platform services data available");
         List<WebElement> colsList = servicesAndVersionsCompatibilityPageObject.colList;
         logger.info("Size of columnlist: " + colsList.size());
@@ -307,24 +330,27 @@ public class ServicesAndVersionsCompatibility {
 
         for (int col = 0; col < totalHDPServicesCount - 1; col++) {
             for (int row = 0; row < rowsList.size(); row++) {
+                String onPremServices = rowsList.get(row).getText();
                 String path = "//tbody/tr[" + (row + 1) + "]/td[" + (col + 2) + "]";
+                LOGGER.info("PATH$$$$$$" + path);
                 WebElement e = driver.findElement(By.xpath(path));
                 if (!e.getText().isEmpty()) {
+                    LOGGER.info("On Cloud Service- $$$$$$ " + e.getText().trim());
+                    LOGGER.info("$$$$$$- onPremServices- " + onPremServices);
+                    String majorVersionOnPrem = getMajorVersion(onPremServices);
+                    int majorVersionOnPremNum = Integer.parseInt(majorVersionOnPrem);
                     String cloudClusterServiceName = e.getText().trim();
                     String majorVersionCloud = getMajorVersion(cloudClusterServiceName);
                     int majorVersionCloudNum = Integer.parseInt(majorVersionCloud);
-
-                    String testClusterServiceName = hdpServicesList.get(col);
-                    String majorVersionHDP = getMajorVersion(testClusterServiceName);
-                    int majorVersionHDPNum = Integer.parseInt(majorVersionHDP);
-
-                    if (majorVersionCloudNum < majorVersionHDPNum ) {
+                    LOGGER.info("$$$$$$- majorVersionCloudNum- " + majorVersionCloudNum);
+                    LOGGER.info("$$$$$$- majorVersionOnPremNum- " + majorVersionOnPremNum);
+                    if (majorVersionOnPremNum > majorVersionCloudNum) {
                         //Now check for green //risk-2
                         String classAttributeName = e.getAttribute("class");
                         logger.info("Element class attribute name: " + classAttributeName);
                         //check for class attribute name as 'risk-2' which is for Orange color.
                         Assert.assertTrue(classAttributeName.equals("risk-2"), "Platforms service in the box is not" +
-                                " marked in Orange for element: "+e.getText());
+                                " marked in Orange for element: " + e.getText());
                     }
                 }
             }
@@ -336,7 +362,7 @@ public class ServicesAndVersionsCompatibility {
     public void verifyServicesAndVersionsAreAvailableInSourceButMissingInTarget() {
         List<String> hdpServicesList = getHDPServicesList();
         int totalHDPServicesCount = hdpServicesList.size();
-        List<WebElement> rowsList = servicesAndVersionsCompatibilityPageObject.rowsList;
+        List<WebElement> rowsList = servicesAndVersionsCompatibilityPageObject.getAllOnPremisesServices;
         Assert.assertFalse(rowsList.isEmpty(), "No Platform services data available");
         List<WebElement> colsList = servicesAndVersionsCompatibilityPageObject.colList;
         logger.info("Size of columnlist: " + colsList.size());
@@ -347,20 +373,20 @@ public class ServicesAndVersionsCompatibility {
                 String path = "//tbody/tr[" + (row + 1) + "]/td[" + (col + 2) + "]";
                 WebElement e = driver.findElement(By.xpath(path));
                 if (e.getText().isEmpty()) {
-                        //Now check for brown //risk-3
-                        String classAttributeName = e.getAttribute("class");
-                        logger.info("Element class attribute name: " + classAttributeName);
-                        //check for class attribute name as 'risk-3' which is for Orange color.
-                        Assert.assertTrue(classAttributeName.equals("risk-3"), "Platforms service in the box is not" +
-                                " marked in Brown for element: "+e.getText());
+                    //Now check for brown //risk-3
+                    String classAttributeName = e.getAttribute("class");
+                    logger.info("Element class attribute name: " + classAttributeName);
+                    //check for class attribute name as 'risk-3' which is for Orange color.
+                    Assert.assertTrue(classAttributeName.equals("risk-3"), "Platforms service in the box is not" +
+                            " marked in Brown for element: " + e.getText());
                 }
             }
         }
     }
 
     //scroll window horizontally to the right
-    public void scrollToRight(WebDriver driver, WebElement element){
-        JavascriptExecutor js = (JavascriptExecutor)driver;
+    public void scrollToRight(WebDriver driver, WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollLeft = arguments[0].offsetWidth + 500", element);
 
     }
@@ -371,14 +397,14 @@ public class ServicesAndVersionsCompatibility {
         waitExecuter.sleep(3000);
         List<WebElement> missingSrcHeaderlist = servicesAndVersionsCompatibilityPageObject.missingSrcHeaderElement;
         Assert.assertFalse(missingSrcHeaderlist.isEmpty(), "No missing source headers generated");
-        logger.info("Total missing src header elements found: "+ missingSrcHeaderlist.size());
+        logger.info("Total missing src header elements found: " + missingSrcHeaderlist.size());
         List<String> missingSrcHeaderElementsList = new ArrayList<>();
-        for(int i=0; i< missingSrcHeaderlist.size(); i++){
-            if(!missingSrcHeaderlist.get(i).getText().isEmpty()){
+        for (int i = 0; i < missingSrcHeaderlist.size(); i++) {
+            if (!missingSrcHeaderlist.get(i).getText().isEmpty()) {
                 missingSrcHeaderElementsList.add(missingSrcHeaderlist.get(i).getText());
             }
         }
-        logger.info("All missing source header elements: "+missingSrcHeaderElementsList);
+        logger.info("All missing source header elements: " + missingSrcHeaderElementsList);
     }
 
     /**
@@ -405,7 +431,7 @@ public class ServicesAndVersionsCompatibility {
                         waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.archiveReportSVCHeader);
                         List<WebElement> reportTblRows = reportPageObj.tableRows;
                         Assert.assertFalse(reportTblRows.isEmpty(), "No reports archived.");
-                        MouseActions.clickOnElement(driver,servicesAndVersionsCompatibilityPageObject.archives);
+                        MouseActions.clickOnElement(driver, servicesAndVersionsCompatibilityPageObject.archives);
                         break;
                     case "downloadReport":
                         MouseActions.clickOnElement(driver, reportCntList.get(i));
@@ -416,7 +442,7 @@ public class ServicesAndVersionsCompatibility {
                         waitExecuter.waitUntilPageFullyLoaded();
                         Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Downloaded successfully",
                                 " No downloaded successfully message received.");
-                        MouseActions.clickOnElement(driver,servicesAndVersionsCompatibilityPageObject.archives);
+                        MouseActions.clickOnElement(driver, servicesAndVersionsCompatibilityPageObject.archives);
                         break;
                     case "deleteReport":
                         MouseActions.clickOnElement(driver, reportCntList.get(i));
@@ -431,11 +457,11 @@ public class ServicesAndVersionsCompatibility {
                         logger.info("Alert text is " + popText);
                         //confirmationAlert.accept();
                         waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.deleteOkBtn);
-                        MouseActions.clickOnElement(driver,servicesAndVersionsCompatibilityPageObject.deleteOkBtn);
+                        MouseActions.clickOnElement(driver, servicesAndVersionsCompatibilityPageObject.deleteOkBtn);
                         logger.info("Deleted report");
                         Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Removed successfully",
                                 " Report not removed");
-                        MouseActions.clickOnElement(driver,servicesAndVersionsCompatibilityPageObject.archives);
+                        MouseActions.clickOnElement(driver, servicesAndVersionsCompatibilityPageObject.archives);
                         break;
                     case "viewReport":
                         MouseActions.clickOnElement(driver, reportCntList.get(i));
@@ -453,16 +479,16 @@ public class ServicesAndVersionsCompatibility {
                         waitExecuter.waitUntilPageFullyLoaded();
                         waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.archiveReportSVCHeader);
                         String dateFromElement = servicesAndVersionsCompatibilityPageObject.archiveReportDate.getText().trim();
-                        String [] arrDate = dateFromElement.split(" ");
+                        String[] arrDate = dateFromElement.split(" ");
                         String date = arrDate[0];
-                        System.out.println(date);
+                        LOGGER.info(date);
                         reportPageObj.reportSearchBox.sendKeys(date);
                         List<WebElement> searchDateReportNameList = reportPageObj.reportNames;
                         Assert.assertFalse(searchDateReportNameList.isEmpty(), "There are no reports listed");
                         Assert.assertTrue(searchDateReportNameList.size() > 0, "Expected search " +
                                 "result not populated data by date.");
                         logger.info("Search report by date: " + date);
-                        MouseActions.clickOnElement(driver,servicesAndVersionsCompatibilityPageObject.archives);
+                        MouseActions.clickOnElement(driver, servicesAndVersionsCompatibilityPageObject.archives);
                         break;
                     case "searchReportByStatus":
                         MouseActions.clickOnElement(driver, reportCntList.get(i));
@@ -476,7 +502,7 @@ public class ServicesAndVersionsCompatibility {
                         Assert.assertTrue(searchStatusReportNameList.size() > 0, "Expected search " +
                                 "result not populated data by status .");
                         logger.info("Searched report for status as: " + status);
-                        MouseActions.clickOnElement(driver,servicesAndVersionsCompatibilityPageObject.archives);
+                        MouseActions.clickOnElement(driver, servicesAndVersionsCompatibilityPageObject.archives);
                         break;
                     case "searchReportByName":
                         MouseActions.clickOnElement(driver, reportCntList.get(i));
@@ -499,27 +525,27 @@ public class ServicesAndVersionsCompatibility {
     }
 
 
-    public void setScheduleCloudName(String cloudName){
+    public void setScheduleCloudName(String cloudName) {
         waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.scheduleCloudDropDown);
         selectCloudProduct(cloudName);
     }
 
-    public void setScheduleName(String scheduleName){
+    public void setScheduleName(String scheduleName) {
         waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.scheduleName);
         actions.performActionWithPolling(servicesAndVersionsCompatibilityPageObject.scheduleName,
                 UserAction.SEND_KEYS, scheduleName);
     }
 
-    public void setScheduleToRun(String scheduleToRun){
+    public void setScheduleToRun(String scheduleToRun) {
         waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.scheduleToRun);
         Select drpScheduleToRun = new Select(servicesAndVersionsCompatibilityPageObject.scheduleToRun);
         drpScheduleToRun.selectByVisibleText(scheduleToRun);
     }
 
-    public void setScheduleTime(String scheduleTime){
+    public void setScheduleTime(String scheduleTime) {
         String[] arrTime = scheduleTime.split(":");
-        String hours =  arrTime[0];
-        String minutes =  arrTime[1];
+        String hours = arrTime[0];
+        String minutes = arrTime[1];
 
         waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.scheduleTime);
         actions.performActionWithPolling(servicesAndVersionsCompatibilityPageObject.scheduleTime, UserAction.CLICK);
@@ -533,7 +559,7 @@ public class ServicesAndVersionsCompatibility {
         minsDrpDown.selectByVisibleText(minutes);
     }
 
-    public void setScheduleNotification(String notification){
+    public void setScheduleNotification(String notification) {
         waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.scheduleNotification);
         actions.performActionWithPolling(servicesAndVersionsCompatibilityPageObject.scheduleNotification,
                 UserAction.SEND_KEYS, notification);

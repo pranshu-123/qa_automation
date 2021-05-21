@@ -27,13 +27,13 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//span[@class='select2-selection__arrow']")
     public WebElement cloudProductDropDown;
 
-    @FindBy(xpath ="//li[contains(@class,'select2-results__option')]")
+    @FindBy(xpath = "//li[contains(@class,'select2-results__option')]")
     public List<WebElement> cloudProductList;
 
-    @FindBy(xpath="//span[contains(@class, 'select2-search--dropdown')]/input")
+    @FindBy(xpath = "//span[contains(@class, 'select2-search--dropdown')]/input")
     public WebElement cloudProductSearchBox;
 
-    @FindBy(xpath="//span[@class='select2-results']//li")
+    @FindBy(xpath = "//span[@class='select2-results']//li")
     public WebElement cloudProductSearchFirstField;
 
     @FindBy(xpath = "//div[contains(@class,'component-section-header')]/span/a")
@@ -70,16 +70,16 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//div[@id='breadcrumb']/span[2]/span")
     public WebElement archiveReportSVCHeader;
 
-    @FindBy(xpath="//div[contains(@class,'popover')]/H3")
+    @FindBy(xpath = "//div[contains(@class,'popover')]/H3")
     public WebElement deletePopText;
 
-    @FindBy(xpath="//div[contains(@class,'popover')]/div/span[contains(@class,'pending')]")
+    @FindBy(xpath = "//div[contains(@class,'popover')]/div/span[contains(@class,'pending')]")
     public WebElement deleteOkBtn;
 
-    @FindBy(xpath="//div[@id='breadcrumb']/span/span")
+    @FindBy(xpath = "//div[@id='breadcrumb']/span/span")
     public WebElement archivesText;
 
-    @FindBy(xpath="(//div[@id='breadcrumb']/span/span)[1]")
+    @FindBy(xpath = "(//div[@id='breadcrumb']/span/span)[1]")
     public WebElement archives;
 
     @FindBy(xpath = "//tbody/tr[1]/td[2]")
@@ -121,13 +121,35 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//table[contains(@class, 'component-data-tables')]/tbody")
     public WebElement tableBodyElement;
 
-    @FindBy(xpath="//tbody/tr/td[contains(@class,'risk-default')]")
+    @FindBy(xpath = "//tbody/tr/td[contains(@class,'risk-default')]")
     public List<WebElement> missingSrcHeaderElement;
+
+    @FindBy(xpath = "//tbody/tr/td[1][normalize-space()]")
+    public List<WebElement> getAllOnPremisesServices;
+
+    @FindBy(xpath = "//span/parent::a")
+    public WebElement modalAfterRunButton;
+
+    @FindBy(xpath = "//section/div")
+    public WebElement banner;
+
+    @FindBy(xpath = "//tbody/tr/td/p[contains(text(),'No Services And Versions Compatibility')]")
+    public List<WebElement> reportPageEmptyVersionCompatibility;
+
+    @FindBy(xpath = "//tbody/tr/td/p[contains(text(),'No Cluster Discover')]")
+    public List<WebElement> reportPageEmptyClusterDiscover;
+
+    @FindBy(xpath = "//div[@id='toolbox']//span[@class='pull-right']")
+    public List<WebElement> toolboxCD;
+
+    @FindBy(xpath = "//div[@class='version-comp-inner']//h3[2][contains(text(),'Cloud Product')]")
+    public List<WebElement> clusterProductHeader;
+
 
     /**
      * @param driver The driver that will be used to look up the elements
      */
     public ServicesAndVersionsCompatibilityPageObject(WebDriver driver) {
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
     }
 }

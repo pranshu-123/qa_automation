@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
+@Marker.Only
 @Marker.All
 @Marker.MigrationClusterDiscovery
 public class TC_CD_03 extends BaseClass {

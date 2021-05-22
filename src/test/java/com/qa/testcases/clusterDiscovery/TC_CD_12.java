@@ -63,6 +63,7 @@ public class TC_CD_12 extends BaseClass {
             }
         }
         executor.executeScript("arguments[0].scrollIntoView();", cdPageObject.cpu_memoryHeatMap);
+        waitExecuter.sleep(1000);
         Assert.assertTrue(cdPageObject.heatMapContainer.isDisplayed(), "Heat map for cpu not displayed");
         test.log(LogStatus.PASS, "Heat map for CPU verified");
     }

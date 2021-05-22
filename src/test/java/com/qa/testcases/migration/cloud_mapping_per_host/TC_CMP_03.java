@@ -2,45 +2,31 @@ package com.qa.testcases.migration.cloud_mapping_per_host;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.SubTopPanelModulePageObject;
-import com.qa.pagefactory.TopPanelPageObject;
-import com.qa.pagefactory.migration.CloudMappingPerHostPageObject;
+import com.qa.enums.migration.CloudProduct;
+import com.qa.enums.migration.MigrationCloudMappingModalTable;
 import com.qa.scripts.migration.CloudMigrationPerHostPage;
-import com.qa.utils.Log;
-import com.qa.utils.MouseActions;
-import com.qa.utils.WaitExecuter;
-import com.relevantcodes.extentreports.LogStatus;
+import com.qa.utils.LoggingUtils;
 import org.testng.annotations.Test;
-
-import java.util.logging.Logger;
 
 @Marker.All
 public class TC_CMP_03 extends BaseClass {
-  private static final Logger LOGGER = Logger.getLogger(com.qa.testcases.migration.cloud_mapping_per_host.TC_CMP_03.class.getName());
+    private static final LoggingUtils LOGGER = new LoggingUtils(TC_CMP_03.class);
 
-  @Test(dataProvider = "clusterid-data-provider")
-  public void verifyVMTypesForEC2(String clusterId) {
-    test = extent.startTest("verifyVMTypesForEC2: " + clusterId,
-        "Verify Unravel UI displays the right VM types for EC2.");
-    test.assignCategory("Migration/Cloud Mapping Per Host");
-    Log.startTestCase("verifyVMTypesForEC2");
-
-    // Initialize all classes objects
-    test.log(LogStatus.INFO, "Initialize all class objects");
-    LOGGER.info("Initialize all class objects");
-    TopPanelPageObject topPanelPageObj = new TopPanelPageObject(driver);
-    CloudMigrationPerHostPage cloudMappingPage = new CloudMigrationPerHostPage(driver);
-    CloudMappingPerHostPageObject cmPageObj = new CloudMappingPerHostPageObject(driver);
-    WaitExecuter waitExecuter = new WaitExecuter(driver);
-
-    // Navigate to Reports tab from header
-    MouseActions.clickOnElement(driver, topPanelPageObj.migrationTab);
-    waitExecuter.waitUntilPageFullyLoaded();
-    waitExecuter.waitUntilElementClickable(cmPageObj.cloudMappingPerHostTab);
-    MouseActions.clickOnElement(driver, cmPageObj.cloudMappingPerHostTab);
-    waitExecuter.waitUntilElementClickable(cmPageObj.runButton);
-    cloudMappingPage.waitTillLoaderPresent();
-    cloudMappingPage.verifyEMRVMTypes("Asia Pacific (Seoul)", "Amazon EC2 (IaaS)");
-    test.log(LogStatus.PASS, "Validated Unravel UI displays the right VM types for EC2 successfully ");
-  }
+    @Test(dataProvider = "clusterid-data-provider")
+    public void verifyVMTypesForEC2(String clusterId) {
+        test = extent.startTest("TC_CMP_03.verifyVMTypesForEC2", "Verify Unravel UI displays the right VM types for " +
+                "AMAZON_EC2.");
+        test.assignCategory("Migration/Cloud Mapping Per Host");
+        CloudMigrationPerHostPage cloudMigrationPerHostPage = new CloudMigrationPerHostPage(driver);
+        LOGGER.info("Navigate to migration host page", test);
+        cloudMigrationPerHostPage.navigateToCloudMappingPerHost();
+        LOGGER.info("Click on Run button", test);
+        cloudMigrationPerHostPage.clickOnRunButton();
+        cloudMigrationPerHostPage.waitTillLoaderPresent();
+        LOGGER.info("Select azure as cloud product", test);
+        cloudMigrationPerHostPage.selectCloudProduct(CloudProduct.AMAZON_EC2);
+        cloudMigrationPerHostPage.waitTillLoaderPresent();
+        cloudMigrationPerHostPage.verifyCloudMappingHostTableColumn(MigrationCloudMappingModalTable.VM_TYPE);
+        LOGGER.pass("Verified VM types", test);
+    }
 }

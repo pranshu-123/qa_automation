@@ -117,6 +117,7 @@ public class ClusterDiscovery {
     /* Click on Run button of modal window */
     public void clickRunModalButton() {
         LOGGER.info("Click on Run button of modal window");
+        waitExecuter.waitUntilElementClickable(cdPageObject.modalRunButton);
         userAction.performActionWithPolling(cdPageObject.modalRunButton, UserAction.CLICK);
         waitExecuter.waitUntilElementPresent(cdPageObject.runButton);
         waitExecuter.waitUntilElementClickable(cdPageObject.runButton);

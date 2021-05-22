@@ -1187,4 +1187,9 @@ public class MrAppsDetailsPage {
         }
     }
 
+    public void analysisTab(MrAppsDetailsPageObject mrApps, ExtentTest test) {
+        List<WebElement> insightType = mrApps.insightsType;
+        verifyAssertTrue(insightType.isEmpty(), mrApps, "No Insights generated");
+    }
+
 }

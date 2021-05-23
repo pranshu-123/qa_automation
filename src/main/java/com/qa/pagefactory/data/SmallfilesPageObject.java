@@ -93,6 +93,13 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody/tr")
     public List<WebElement> searchFileTableRows;
 
+    @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody/tr/td")
+    public List<WebElement> searchFileTableCols;
+
+    @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody")
+    public WebElement rowData;
+
+
     @FindBy(xpath = "//ul[contains(concat(' ', @class, ' '), 'select2-results__options')]/li")
     public List<WebElement> clusterList;
 

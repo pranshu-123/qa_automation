@@ -335,16 +335,6 @@ public class Smallfiles {
     }
 
 
-    public void checkTableContainsData(int tablesRows, int tableCells) {
-        String expectedMsg = "No data to display.";
-        List<WebElement> tableRows = smallfilesPageObject.fileTableRows;
-        Assert.assertFalse(tableRows.isEmpty(), "Table contains no data");
-        WebElement rowData = driver.findElement(By.xpath("//table[@class='component-data-tables row-hover']/tbody/" +
-                "tr[" + tablesRows + "]/td[" + tableCells + "]"));
-        String rowDataStr = rowData.getText();
-        Assert.assertFalse(rowDataStr.contains(expectedMsg), "Table contains no data. Got '" + expectedMsg + "' message");
-    }
-
     /**
      * Method to validate the search option for different file types
      */
@@ -352,26 +342,23 @@ public class Smallfiles {
         List<WebElement> tableHeaderList = smallfilesPageObject.searchTableHeader;
         List<WebElement> tableRows = smallfilesPageObject.searchFileTableRows;
         String searchString = "";
-        checkTableContainsData(tablesRows, tableCells);
-
-        WebElement rowData = driver.findElement(
-                By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + tablesRows + "]/td[" + tableCells + "]"));
-        Assert.assertTrue(rowData.isDisplayed(), "No data under column: " + tableHeaderList.get(1).getText() +
-                " for ");
-        searchString = rowData.getText();
-        LOGGER.info("The search string is " + searchString);
-
-        smallfilesPageObject.searchField.sendKeys(searchString);
-        waitExecuter.waitUntilPageFullyLoaded();
-        for (int row = 1; row <= tableRows.size(); row++) {
-            WebElement searchRowData = driver.findElement
-                    (By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + row + "]/td[" + tableCells + "]"));
-            Assert.assertTrue(searchRowData.isDisplayed(), "No data under column: File " +
+        List<WebElement> rows = smallfilesPageObject.rowData.findElements(By.xpath("/tr[" + tablesRows + "]/td[" + tableCells + "]"));
+        for (WebElement row : rows) {
+            Assert.assertTrue(row.isDisplayed(), "No data under column: " + tableHeaderList.get(1).getText() +
                     " for ");
-            LOGGER.info("Search String is " + searchString + " Search result is " + searchRowData.getText());
-            Assert.assertTrue(searchRowData.getText().contains(searchString), "The search result for " +
-                    " file type donot contain the search string\n Expected '" + searchString + "' to be present in '"
-                    + searchRowData.getText() + "' search result");
+            searchString = row.getText();
+            LOGGER.info("The search string is " + searchString);
+            smallfilesPageObject.searchField.sendKeys(searchString);
+            waitExecuter.waitUntilPageFullyLoaded();
+            List<WebElement> cols = row.findElements(By.xpath("/tr[" + row + "]/td[" + tableCells + "]"));
+            for (WebElement col : cols) {
+                Assert.assertTrue(col.isDisplayed(), "No data under column: File " +
+                        " for ");
+                LOGGER.info("Search String is " + searchString + " Search result is " + col.getText());
+                Assert.assertTrue(col.getText().contains(searchString), "The search result for " +
+                        " file type donot contain the search string\n Expected '" + searchString + "' to be present in '"
+                        + col.getText() + "' search result");
+            }
         }
     }
 

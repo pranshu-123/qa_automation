@@ -48,7 +48,7 @@ public class TC_HB_20 extends BaseClass {
             String hBaseClusterName = allHbaseClusterListElement.get(i).getText();
             hbase.selectDateAsLast30Days();
             LOGGER.info("Select date picker for 30 days.");
-            hbase.selectCluster(hBaseClusterName.trim());
+            hbase.selectHBaseCluster(hBaseClusterName.trim());
             String hBaseNameActual = hbase.getHBaseHeader();
             String hBaseNameExpected = "HBase ("+hBaseClusterName+")";
             LOGGER.info("Cluster name found with cluster details: "+hBaseNameActual);

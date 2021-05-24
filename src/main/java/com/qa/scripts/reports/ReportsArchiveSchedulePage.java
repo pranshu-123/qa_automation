@@ -795,7 +795,7 @@ public class ReportsArchiveSchedulePage {
             fieldList.get(f).sendKeys(valueArr[f]);
           }
           userActions.performActionWithPolling(reportPageObj.reportCreationRunButton, UserAction.CLICK);
-          waitExecuter.sleep(30000);
+          waitExecuter.sleep(8000);
           driver.navigate().refresh();
           waitExecuter.waitUntilPageFullyLoaded();
           waitExecuter.waitUntilElementClickable(reportPageObj.reportSearchBox);
@@ -824,7 +824,7 @@ public class ReportsArchiveSchedulePage {
             waitExecuter.sleep(1000);
           }
           userActions.performActionWithPolling(reportPageObj.reportCreationRunButton, UserAction.CLICK);
-          waitExecuter.sleep(30000);
+          waitExecuter.sleep(8000);
           waitExecuter.waitUntilPageFullyLoaded();
           driver.navigate().refresh();
           waitExecuter.waitUntilPageFullyLoaded();
@@ -835,12 +835,12 @@ public class ReportsArchiveSchedulePage {
           break;
         case "Cloud Mapping Per Host":
           userActions.performActionWithPolling(newReportActionList.get(i), UserAction.CLICK);
-          waitExecuter.sleep(25000);
+          waitExecuter.sleep(5000);
           waitExecuter.waitUntilPageFullyLoaded();
           userActions.performActionWithPolling(reportPageObj.cloudMappingChkBox, UserAction.CLICK);
           waitExecuter.sleep(1000);
           userActions.performActionWithPolling(reportPageObj.reportCreationRunButton, UserAction.CLICK);
-          waitExecuter.sleep(40000);
+          waitExecuter.sleep(4000);
           waitExecuter.waitUntilPageFullyLoaded();
           driver.navigate().refresh();
           waitExecuter.waitUntilPageFullyLoaded();
@@ -862,7 +862,7 @@ public class ReportsArchiveSchedulePage {
           }
           waitExecuter.waitUntilPageFullyLoaded();
           userActions.performActionWithPolling(reportPageObj.reportCreationRunButton, UserAction.CLICK);
-          waitExecuter.sleep(50000);
+          waitExecuter.sleep(5000);
           waitExecuter.waitUntilPageFullyLoaded();
           status = reportStatusList.get(i).getText().trim();
           driver.navigate().refresh();

@@ -41,6 +41,7 @@ public class Main {
     URL testClassesURL = Paths.get("target/test-classes").toUri().toURL();
     URLClassLoader classLoader = URLClassLoader.newInstance(new URL[]{sourceClassesURL,testClassesURL});
     for (String marker : markers.split(",")) {
+      marker = marker.trim();
       Reflections reflections = new Reflections("com.qa", classLoader, new TypeAnnotationsScanner());
       Set<Class<?>> challengeClasses =
           reflections.getTypesAnnotatedWith(MarkerConstants.MARKER_MAPPING.get(marker.startsWith("!") ?

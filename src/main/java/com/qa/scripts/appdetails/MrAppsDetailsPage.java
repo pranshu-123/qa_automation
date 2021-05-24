@@ -330,7 +330,6 @@ public class MrAppsDetailsPage {
         waitExecuter.sleep(3000);
         LOGGER.info("The application Id is " + Status);
         Assert.assertNotNull(Status, "Application Id is not displayed in the Header");
-       // Assert.assertNotSame("", Status, "Application Id is not displayed in the Header");
         return Status;
     }
 
@@ -358,7 +357,7 @@ public class MrAppsDetailsPage {
     public void checkAppsJobTableData(String data, String colType) {
         boolean onlySpecialChars = data.matches("[^a-zA-Z0-9]+");
         Assert.assertFalse(data.isEmpty() || onlySpecialChars, colType + " data is not displayed in the table");
-        LOGGER.info("Data for "+ colType + " is displayed in the table");
+        LOGGER.info("Data for " + colType + " is displayed in the table");
     }
 
     /**
@@ -400,29 +399,35 @@ public class MrAppsDetailsPage {
         String[] expectedErrorCategory = {"FATAL/EXCEPTION", "ERROR", "WARNING"};
         List<WebElement> errorTypeList = mrApps.errorCategories;
         waitExecuter.sleep(4000);
-        verifyAssertFalse(errorTypeList.isEmpty(), mrApps, " Errors tab is not populated");
-        for (int e = 0; e < errorTypeList.size(); e++) {
-            String errorType = errorTypeList.get(e).getText();
-            String newErrorType = "";
-            LOGGER.info("Error Type is " + errorType);
-            if (errorType.contains("FATAL / EXCEPTION-"))
-                newErrorType = "FATAL / EXCEPTION-";
-            else
-                newErrorType = errorType;
-            LOGGER.info("New Error Type is " + errorType);
-            verifyAssertTrue(Arrays.asList(expectedErrorCategory).contains(newErrorType), mrApps,
-                    " The UI error types displayed does not match with the Expected error types ");
-            waitExecuter.sleep(1000);
-        }
-        List<WebElement> errorCollapsableList = mrApps.errorCollapse;
-        verifyAssertFalse(errorCollapsableList.isEmpty(), mrApps, " No collapsable icon present");
-        List<WebElement> errorContentList = mrApps.errorContents;
-        verifyAssertFalse(errorContentList.isEmpty(), mrApps, " No error contents in the error tab");
-        //TODO check for specific error string in the content list.
-        boolean foundErrorMsg = false;
-        String msg = "";
-        for (int c = 0; c < errorCollapsableList.size(); c++) {
-            MouseActions.clickOnElement(driver, errorCollapsableList.get(c));
+        Boolean isEmpty = errorTypeList.isEmpty();
+        if (!isEmpty) {
+            verifyAssertFalse(errorTypeList.isEmpty(), mrApps, " Errors tab is not populated");
+            for (int e = 0; e < errorTypeList.size(); e++) {
+                String errorType = errorTypeList.get(e).getText();
+                String newErrorType = "";
+                LOGGER.info("Error Type is " + errorType);
+                if (errorType.contains("FATAL / EXCEPTION-"))
+                    newErrorType = "FATAL / EXCEPTION-";
+                else
+                    newErrorType = errorType;
+                LOGGER.info("New Error Type is " + errorType);
+                verifyAssertTrue(Arrays.asList(expectedErrorCategory).contains(newErrorType), mrApps,
+                        " The UI error types displayed does not match with the Expected error types ");
+                waitExecuter.sleep(1000);
+            }
+            List<WebElement> errorCollapsableList = mrApps.errorCollapse;
+            verifyAssertFalse(errorCollapsableList.isEmpty(), mrApps, " No collapsable icon present");
+            List<WebElement> errorContentList = mrApps.errorContents;
+            verifyAssertFalse(errorContentList.isEmpty(), mrApps, " No error contents in the error tab");
+            //TODO check for specific error string in the content list.
+            boolean foundErrorMsg = false;
+            String msg = "";
+            for (int c = 0; c < errorCollapsableList.size(); c++) {
+                MouseActions.clickOnElement(driver, errorCollapsableList.get(c));
+            }
+        } else {
+            assertTrue(mrApps.noErrors.size() > 0, "No error found is not displayed on Error tab.");
+
         }
     }
 
@@ -454,9 +459,9 @@ public class MrAppsDetailsPage {
 
     public void validateConfigurationSearchTab(MrAppsDetailsPageObject mrApps) {
         LOGGER.info("Click on queue search box and search for path");
+        String beforeResetProp = mrApps.configPropNum.getText();
         mrApps.SearchProp.click();
         mrApps.SearchProp.sendKeys("mapreduce.jobhistory.jhist.format");
-        String beforeResetProp = mrApps.configPropNum.getText();
         int propNum = Integer.parseInt(beforeResetProp.split("\\s+")[0]);
         LOGGER.info("Number of properties displayed by default are  " + propNum);
         //Verify if property key value is present:
@@ -701,7 +706,7 @@ public class MrAppsDetailsPage {
     }
 
     public void validateResourcesMetricsTab(MrAppsDetailsPageObject mrApps,
-                                     ExtentTest test) {
+                                            ExtentTest test) {
         waitExecuter.waitUntilElementPresent(mrApps.resourcesMetricsDropDown);
         WebElement metricDropDown = mrApps.resourcesMetricsDropDown;
         MouseActions.clickOnElement(driver, metricDropDown);
@@ -730,7 +735,7 @@ public class MrAppsDetailsPage {
     /**
      * Method to validate AppSummary Resource tab.
      */
-    public void validateResourcesTab(MrAppsDetailsPageObject mrApps,String verifyTabName,
+    public void validateResourcesTab(MrAppsDetailsPageObject mrApps, String verifyTabName,
                                      ExtentTest test) {
         String[] expectedGraphTitle = {"Metrics", "Memory"};
         waitExecuter.waitUntilPageFullyLoaded();
@@ -743,7 +748,7 @@ public class MrAppsDetailsPage {
             LOGGER.info("Graph title is " + graphTitle);
             switch (graphTitle) {
                 case "Metrics":
-                    validateResourcesMetricsTab(mrApps,test);
+                    validateResourcesMetricsTab(mrApps, test);
                     LOGGER.info("Validating the Graph " + graphTitle);
                     break;
                 case "Memory":
@@ -862,7 +867,7 @@ public class MrAppsDetailsPage {
                     break;
             }
             verifyAssertTrue(allGraphsList.get(0).isDisplayed(), mrApps, " No graph is displayed for "
-                + graphTitle);
+                    + graphTitle);
         }
     }
 
@@ -1086,8 +1091,7 @@ public class MrAppsDetailsPage {
                 String[] arrColor = efficiencyColorCode.split(" ");
                 assertEquals(arrColor[1].toLowerCase(), "fatal", "Color code for efficiency do not match ");
                 test.log(LogStatus.PASS, "No Map Reduce Application present" + efficiencyColorCode);
-            } else if (insights.equals("RECOMMENDATION"))
-            {
+            } else if (insights.equals("RECOMMENDATION")) {
                 String recommendationcolorCode = insightType.get(j).getAttribute("class");
                 String[] recColor = recommendationcolorCode.split(" ");
                 assertEquals(recColor[1].toLowerCase(), "warning", "Color code for recommendation do not match");
@@ -1182,4 +1186,10 @@ public class MrAppsDetailsPage {
             throw new AssertionError(msg + e.getMessage());
         }
     }
+
+    public void analysisTab(MrAppsDetailsPageObject mrApps, ExtentTest test) {
+        List<WebElement> insightType = mrApps.insightsType;
+        verifyAssertTrue(insightType.isEmpty(), mrApps, "No Insights generated");
+    }
+
 }

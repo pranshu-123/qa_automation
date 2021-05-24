@@ -46,12 +46,14 @@ public class TC_MP_SC_05 extends BaseClass {
         servicesAndVersionsCompatibility.clickOnRunModalButton();
         LOGGER.info("Clicked on Run Modal button");
         List<String> expectedPlatforms = Arrays.asList(PageConstants.MigrationAndServices.Azure_HDI);
-
+        waitExecuter.waitUntilTextNotToBeInWebElement(servicesAndVersionsCompatibilityPageObject.modalAfterRunButton, "Please Wait");
+        waitExecuter.waitUntilTextNotToBeInWebElement(servicesAndVersionsCompatibilityPageObject.banner, "Services and Versions Compatibility completed successfully.");
+        waitExecuter.waitUntilElementClickable(servicesAndVersionsCompatibilityPageObject.runModalBtn);
+        waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.hdpHeaderList.get(1),"HDInsight");
         try {
-            waitExecuter.sleep(50000);
+            waitExecuter.sleep(5000);
             waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.runBtn, "Run");
-            waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.confirmationMessageElement,
-                    "Services and Versions Compatibility completed successfully.");
+
             servicesAndVersionsCompatibility.validateLatestReport();
             List<String> actualPlatforms = servicesAndVersionsCompatibility.getPlatforms();
             LOGGER.info("Expected List- " + expectedPlatforms);

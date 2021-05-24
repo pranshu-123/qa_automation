@@ -66,6 +66,7 @@ public class TC_CD_04 extends BaseClass {
 
         try {
             // Get By User type count from pie chart
+            waitExecuter.sleep(2000);
             waitExecuter.waitUntilElementPresent(cdPageObject.getByUserPieCount);
             int totalUsers = Integer.parseInt(cdPageObject.getByUserPieCount.getText());
             LOGGER.info("Total Users in cluster discovery pie chart- " + totalUsers);

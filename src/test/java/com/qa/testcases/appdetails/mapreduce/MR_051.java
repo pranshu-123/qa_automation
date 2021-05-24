@@ -50,7 +50,7 @@ public class MR_051 extends BaseClass {
         int appCount = 0;
         if (totalMapReduceAppCnt > 0) {
             applicationsPageObject.expandStatus.click();
-            appCount = mrDetailsPage.clickOnlyLink("Failed");
+            appCount = mrDetailsPage.clickOnlyLink("Success");
             waitExecuter.waitUntilPageFullyLoaded();
             //Clicking on the Map reduce app must go to apps detail page and verify Data Tabs must be available on UI
             if (appCount > 0) {

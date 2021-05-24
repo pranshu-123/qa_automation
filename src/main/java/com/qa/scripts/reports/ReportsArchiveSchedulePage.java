@@ -212,10 +212,12 @@ public class ReportsArchiveSchedulePage {
         iconXpath = "//table/tbody/tr["+ index +"]/td[4]/div/span/span[contains(@class,'icon-add')]";
         //table/tbody/tr[1]/td[4]/div/span/span[contains(@class,'icon-expand')]
         //System.out.println("iconXpath: "+iconXpath);
+        waitExecuter.sleep(2000);
         WebElement iconElement = driver.findElement(By.xpath(iconXpath));
         waitExecuter.waitUntilElementPresent(iconElement);
         waitExecuter.waitUntilElementClickable(iconElement);
         userActions.performActionWithPolling(iconElement, UserAction.CLICK);
+        waitExecuter.sleep(2000);
         //iconElement.click();
         break;
       }

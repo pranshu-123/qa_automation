@@ -51,7 +51,7 @@ public class Smallfiles {
         if (smallfilesPageObject.confirmationMessageElementClose.size() > 0) {
             waitExecuter.waitUntilPageFullyLoaded();
             waitExecuter.waitUntilElementClickable(smallfilesPageObject.confirmationMessageElementClose.get(0));
-            JavaScriptExecuter.clickOnElement(driver, smallfilesPageObject.confirmationMessageElementClose.get(0));
+            userActions.performActionWithPolling(smallfilesPageObject.confirmationMessageElementClose.get(0), UserAction.CLICK);
         }
     }
 
@@ -67,7 +67,7 @@ public class Smallfiles {
             waitExecuter.waitUntilElementPresent(smallfilesPageObject.runButton);
             userActions.performActionWithPolling(smallfilesPageObject.runButton, UserAction.CLICK);
         } catch (TimeoutException te) {
-            MouseActions.clickOnElement(driver, smallfilesPageObject.runNowButton);
+            userActions.performActionWithPolling(smallfilesPageObject.runButton, UserAction.CLICK);
         }
     }
 
@@ -78,7 +78,7 @@ public class Smallfiles {
         try {
             userActions.performActionWithPolling(smallfilesPageObject.SheduleButton, UserAction.CLICK);
         } catch (TimeoutException te) {
-            MouseActions.clickOnElement(driver, smallfilesPageObject.SheduleButton);
+            userActions.performActionWithPolling(smallfilesPageObject.SheduleButton, UserAction.CLICK);
         }
     }
 
@@ -103,7 +103,7 @@ public class Smallfiles {
         try {
             userActions.performActionWithPolling(smallfilesPageObject.runSheduleButton, UserAction.CLICK);
         } catch (TimeoutException te) {
-            MouseActions.clickOnElement(driver, smallfilesPageObject.runSheduleButton);
+            userActions.performActionWithPolling(smallfilesPageObject.runSheduleButton, UserAction.CLICK);
         }
     }
 
@@ -146,7 +146,6 @@ public class Smallfiles {
                         waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
                         waitExecuter.waitUntilPageFullyLoaded();
                         userActions.performActionWithPolling(smallfilesPageObject.downloadReportIcon, UserAction.CLICK);
-                        MouseActions.clickOnElement(driver, smallfilesPageObject.downloadReportIcon);
                         logger.info("Downloading report");
                         waitExecuter.waitUntilPageFullyLoaded();
                         Assert.assertEquals(smallfilesPageObject.successfulMsgBanner.getText(), "Downloaded successfully",
@@ -173,11 +172,11 @@ public class Smallfiles {
                         userActions.performActionWithPolling( reportCntList.get(i), UserAction.CLICK);
                         waitExecuter.waitUntilPageFullyLoaded();
                         waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
-                        MouseActions.clickOnElement(driver, smallfilesPageObject.viewReportIcon);
+                        userActions.performActionWithPolling(smallfilesPageObject.viewReportIcon, UserAction.CLICK);
                         logger.info("Viewed report");
                         waitExecuter.waitUntilPageFullyLoaded();
                         Assert.assertTrue(smallfilesPageObject.viewReportDialogWin.isDisplayed(), "Report  view not present.");
-                        MouseActions.clickOnElement(driver, smallfilesPageObject.closeTab);
+                        userActions.performActionWithPolling(smallfilesPageObject.closeTab, UserAction.CLICK);
                         waitExecuter.waitUntilPageFullyLoaded();
                         break;
                     case "searchReportByDate":

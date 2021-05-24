@@ -17,11 +17,8 @@ import java.util.logging.Logger;
 public class TC_SF_30 extends BaseClass {
     Logger logger = Logger.getLogger(TC_SF_30.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Validate that the user is able to search based on Path column for Small file table. ")
     public void VerifyFilePath(String clusterId) {
-        test = extent.startTest("TC_SF_30.VerifyFilePath: " + clusterId,
-                "Validate that the user is able to search based on Path column for Small file table.");
-        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_30.VerifyFilePath");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -35,11 +32,8 @@ public class TC_SF_30 extends BaseClass {
         test.log(LogStatus.PASS, "Verify the user is able to search the Path in the small file table");
     }
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description = "P0-Validate that the user is able to search based on Files column for Small file table.")
     public void VerifyNumberOfFiles(String clusterId) {
-        test = extent.startTest("TC_SF_31.VerifyNumberOfFiles: " + clusterId,
-                "Validate that the user is able to search based on Files column for Small file table.");
-        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_31.VerifyNumberOfFiles");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -53,11 +47,8 @@ public class TC_SF_30 extends BaseClass {
         test.log(LogStatus.PASS, "Verify the user is able to search the Files in the small file table");
     }
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Validate that the user is able to search based on Avg File Size column for Small file table. ")
     public void verifyAvgFileSize(String clusterId) {
-        test = extent.startTest("TC_SF_32.verifyAvgFileSize: " + clusterId,
-                "Validate that the user is able to search based on Avg File Size column for Small file table.");
-        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_32.verifyAvgFileSize");
 
         SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
@@ -74,11 +65,8 @@ public class TC_SF_30 extends BaseClass {
         test.log(LogStatus.PASS, "Verify the user is able to search the Avg File Size in the small file table");
     }
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Validate that the user is able to search based on Total File Siz column for Small file table.")
     public void verifyTotalFileSize(String clusterId) {
-        test = extent.startTest("TC_SF_33.verifyTotalFileSize: " + clusterId,
-                "Validate that the user is able to search based on Total File Siz column for Small file table.");
-        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_33.verifyTotalFileSize");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -96,11 +84,8 @@ public class TC_SF_30 extends BaseClass {
 
     }
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="Validate that the user is able to search based on Min File Size column for Small file table.")
     public void verifyMinFileSize(String clusterId) {
-        test = extent.startTest("TC_SF_34.verifyMinFileSize: " + clusterId,
-                "Validate that the user is able to search based on Min File Size column for Small file table.");
-        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_34.verifyMinFileSize");
 
         SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
@@ -118,11 +103,8 @@ public class TC_SF_30 extends BaseClass {
 
     }
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description = "Validate that the user is able to search based on Max File Size column for Small file table.")
     public void verifyMaxFileSize(String clusterId) {
-        test = extent.startTest("TC_SF_35.verifyMaxFileSize: " + clusterId,
-                "Validate that the user is able to search based on Max File Size column for Small file table.");
-        test.assignCategory("Data- Small Files");
         Log.startTestCase("TC_SF_35.verifyMaxFileSize");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);

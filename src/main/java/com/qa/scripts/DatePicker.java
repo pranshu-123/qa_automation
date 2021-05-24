@@ -180,7 +180,7 @@ public class DatePicker {
      */
     public void selectThisMonth() {
         waitExecuter.waitUntilElementPresent(datePickerPageObject.thisMonth);
-        datePickerPageObject.thisMonth.click();
+        userActions.performActionWithPolling(datePickerPageObject.thisMonth, UserAction.CLICK);
     }
 
     /**
@@ -188,7 +188,7 @@ public class DatePicker {
      */
     public void selectLastMonth() {
         waitExecuter.waitUntilElementPresent(datePickerPageObject.lastMonth);
-        datePickerPageObject.lastMonth.click();
+        userActions.performActionWithPolling(datePickerPageObject.lastMonth, UserAction.CLICK);
     }
 
     /**

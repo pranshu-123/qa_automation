@@ -172,7 +172,7 @@ public class TC_RRA03 extends BaseClass {
     waitExecuter.sleep(1000);
     datePicker.selectLastMonth();
     waitExecuter.waitUntilPageFullyLoaded();
-    waitExecuter.sleep(2000);
+    waitExecuter.sleep(3000);
     reportsPage.validateReportNames(reportPageObj);
     reportsPage.validateReportStatus(reportPageObj);
     test.log(LogStatus.PASS, "Verified  reports with status between last month successfully");

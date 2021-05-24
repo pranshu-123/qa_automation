@@ -71,8 +71,8 @@ public class TC_CD_05 extends BaseClass {
 
         try {
             // Get By Queue type count from pie chart
+            waitExecuter.sleep(2000);
             waitExecuter.waitUntilElementPresent(cdPageObject.getByQueuePieCount);
-
             int totalQueues = Integer.parseInt(cdPageObject.getByQueuePieCount.getText());
             waitExecuter.waitUntilPageFullyLoaded();
             LOGGER.info("Total Queues in cluster discovery pie chart- " + totalQueues);

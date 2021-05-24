@@ -79,6 +79,7 @@ public class WorkloadFit {
     /* Select last 7 days */
     public void selectLast7Days() {
         LOGGER.info("Click on date range");
+        waitExecuter.waitUntilElementClickable(datePickerPageObject.dateRange);
         userAction.performActionWithPolling(datePickerPageObject.dateRange, UserAction.CLICK);
         userAction.performActionWithPolling(datePickerPageObject.last7Days, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(fitPageObject.generateHeatMap);
@@ -90,9 +91,11 @@ public class WorkloadFit {
     public void selectAllCheckboxTypes(List<WebElement> isAllCheckboxPresent, WebElement selectAllCheckbox) {
         try {
             if (isAllCheckboxPresent.size() != 0) {
+                waitExecuter.waitUntilElementClickable(selectAllCheckbox);
                 userAction.performActionWithPolling(selectAllCheckbox, UserAction.CLICK);
 
                 if (fitPageObject.noJobSelectedErrorMessage.size() > 0) {
+                    waitExecuter.waitUntilElementClickable(selectAllCheckbox);
                     userAction.performActionWithPolling(selectAllCheckbox, UserAction.CLICK);
                     waitExecuter.sleep(2000);
                 } else {
@@ -110,6 +113,7 @@ public class WorkloadFit {
     public void clickRunForNewReport() {
         try {
             LOGGER.info("Click on Run button to open report page");
+            waitExecuter.waitUntilElementClickable(cdPageObject.runButton);
             userAction.performActionWithPolling(cdPageObject.runButton, UserAction.CLICK);
             waitExecuter.waitUntilElementClickable(fitPageObject.generateHeatMap);
             waitExecuter.sleep(2000);
@@ -173,13 +177,17 @@ public class WorkloadFit {
                                          WebElement selectFirstCheckBox) {
         try {
             if (isAllCheckboxPresent.size() != 0) {
+                waitExecuter.waitUntilElementClickable(selectAllCheckbox);
                 userAction.performActionWithPolling(selectAllCheckbox, UserAction.CLICK);
 
                 if (fitPageObject.noJobSelectedErrorMessage.size() > 0) {
+                    waitExecuter.waitUntilElementClickable(selectFirstCheckBox);
                     userAction.performActionWithPolling(selectFirstCheckBox, UserAction.CLICK);
                 } else {
                     LOGGER.info("All checkbox already selected, deselecting all checkboxes to select signle checkbox.");
+                    waitExecuter.waitUntilElementClickable(selectAllCheckbox);
                     userAction.performActionWithPolling(selectAllCheckbox, UserAction.CLICK);
+                    waitExecuter.waitUntilElementClickable(selectFirstCheckBox);
                     userAction.performActionWithPolling(selectFirstCheckBox, UserAction.CLICK);
                 }
             } else {
@@ -194,12 +202,14 @@ public class WorkloadFit {
     public void deselectAllCheckboxType(List<WebElement> isAllCheckboxPresent, WebElement selectAllCheckbox) {
         try {
             if (isAllCheckboxPresent.size() != 0) {
+                waitExecuter.waitUntilElementClickable(selectAllCheckbox);
                 userAction.performActionWithPolling(selectAllCheckbox, UserAction.CLICK);
 
                 if (fitPageObject.noJobSelectedErrorMessage.size() > 0) {
                     LOGGER.info("De-selected all checkboxes");
                 } else {
                     LOGGER.info("All checkbox already selected, deselecting all checkboxes to select signle checkbox.");
+                    waitExecuter.waitUntilElementClickable(selectAllCheckbox);
                     userAction.performActionWithPolling(selectAllCheckbox, UserAction.CLICK);
                     LOGGER.info("De-selected all checkboxes");
                 }

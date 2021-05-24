@@ -61,7 +61,10 @@ public class TC_CD_13 extends BaseClass {
             throw new AssertionError("Cluster Discovery Report not completed successfully.");
         }
         executor.executeScript("arguments[0].scrollIntoView();", cdPageObject.cpu_memoryHeatMap);
+        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilElementClickable(cdPageObject.cpuDropButton);
         userAction.performActionWithPolling(cdPageObject.cpuDropButton, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(cdPageObject.selectMemoryinDropdown);
         userAction.performActionWithPolling(cdPageObject.selectMemoryinDropdown, UserAction.CLICK);
         Assert.assertTrue(cdPageObject.heatMapContainer.isDisplayed(), "Heat map for cpu not displayed");
         test.log(LogStatus.PASS, "Heat map for Memory verified");

@@ -6,6 +6,7 @@ import com.qa.enums.UserAction;
 import com.qa.pagefactory.migration.ClusterDiscoveryPageObject;
 import com.qa.scripts.migration.ClusterDiscovery;
 import com.qa.utils.FileUtils;
+import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.annotations.Test;
@@ -30,6 +31,7 @@ public class TC_CD_11 extends BaseClass {
         ClusterDiscoveryPageObject discoveryPageObject = new ClusterDiscoveryPageObject(driver);
         ClusterDiscovery discovery = new ClusterDiscovery(driver);
         UserActions actions = new UserActions(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
 
         // Navigate to Cluster Discovery tab from header
         test.log(LogStatus.INFO, "Navigate to Cluster Discovery tab from header");
@@ -44,9 +46,11 @@ public class TC_CD_11 extends BaseClass {
         // Click on component dropdown and json download button
         test.log(LogStatus.INFO, "Click on component dropdown");
         LOGGER.info("Click on component dropdown");
+        waitExecuter.waitUntilElementClickable(discoveryPageObject.clickOnComponentDropdown);
         actions.performActionWithPolling(discoveryPageObject.clickOnComponentDropdown, UserAction.CLICK);
         test.log(LogStatus.INFO, "Click on JSON download button");
         LOGGER.info("Click on JSON download button");
+        waitExecuter.waitUntilElementClickable(discoveryPageObject.downloadJsonButton);
         actions.performActionWithPolling(discoveryPageObject.downloadJsonButton, UserAction.CLICK);
         test.log(LogStatus.PASS, "Clicked on Download JSON");
         //Assert if the downloaded file name is- clusterdiscovery.json.json

@@ -45,7 +45,6 @@ public class TC_RS04 extends BaseClass {
     userActions.performActionWithPolling(topPanelComponentPageObject.reports, UserAction.CLICK);
     waitExecuter.waitUntilElementClickable(reportPageObj.scheduledPage);
     userActions.performActionWithPolling(reportPageObj.scheduledPage, UserAction.CLICK);
-    MouseActions.clickOnElement(driver, reportPageObj.scheduledPage);
     waitExecuter.waitUntilPageFullyLoaded();
     reportsPage.validateSortingOptionScheduledReportName(reportPageObj);
     reportsPage.validateSortingOptionReportType(reportPageObj);

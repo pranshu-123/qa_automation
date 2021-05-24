@@ -43,7 +43,6 @@ public class TC_RS03 extends BaseClass {
     // Navigate to Reports tab from header
     test.log(LogStatus.INFO, "Verify Scheduled Reports page");
     userActions.performActionWithPolling(topPanelComponentPageObject.reports, UserAction.CLICK);
-    MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
     waitExecuter.waitUntilElementClickable(reportPageObj.scheduledPage);
     userActions.performActionWithPolling(reportPageObj.scheduledPage, UserAction.CLICK);
     reportsPage.validateScheduleReportDropDown(reportPageObj);

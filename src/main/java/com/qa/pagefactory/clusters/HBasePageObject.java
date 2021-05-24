@@ -26,14 +26,14 @@ public class HBasePageObject {
     @FindBy(xpath="//div[contains(@class, 'bg-success')]")
     public List<WebElement> hBaseKPIs;
 
-    @FindBy(css = "//input[@role='searchbox']")
+    @FindBy(css = "//span[contains(@class,'select2-dropdown')]//input")
     public WebElement clusterIdsearchfield;
 
     @FindBy(xpath = "//*[@class='row no-gutters']//div[@class='col']/span")
     public List<WebElement> hBaseClusterKPIs;
 
     @FindBy(xpath = "//span[@class='select2-selection__rendered']")
-    public List<WebElement> clusterDropDown;
+    public WebElement clusterDropDown;
 
     @FindBy(xpath = "//ul[@class='select2-results__options']/li")
     public List<WebElement> clusterList;

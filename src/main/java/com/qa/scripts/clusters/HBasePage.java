@@ -78,36 +78,34 @@ public class HBasePage {
         return hBaseClusterElementList;
     }
 
-    /* Check and remove cluster from searchbox */
-    public void removeClusterIfPresent() {
-        if (applicationsPageObject.removeCluster != null) {
-            applicationsPageObject.clusterSearchBox.sendKeys(Keys.BACK_SPACE);
-            waitExecuter.sleep(1000);
-            waitExecuter.waitUntilElementClickable(applicationsPageObject.clusterSearchBox);
-            waitExecuter.sleep(1000);
-            applicationsPageObject.clusterSearchBox.clear();
-            waitExecuter.sleep(1000);
-            waitExecuter.waitUntilElementClickable(applicationsPageObject.clusterSearchBox);
-        } else
-            logger.info("No cluster to remove");
+
+    public void verifyClusterList(List<String> expectedClusterList) {
+        WebElement clusterID = hBasePageObject.clusterDropDown;
+        actions.performActionWithPolling(clusterID, UserAction.CLICK);
+        waitExecuter.waitUntilPageFullyLoaded();
+        List<WebElement> clusterList = hBasePageObject.clusterList;
+        Assert.assertFalse(clusterList.isEmpty(), "ClusterList is empty");
+        for (int i = 0; i < clusterList.size(); i++) {
+            String clusterName = clusterList.get(i).getText();
+            logger.info("Cluster name is " + clusterName);
+            Assert.assertTrue(expectedClusterList.contains(clusterName), " Cluster name does not match to the " +
+                    "cluster name in expected Cluster list");
+        }
     }
 
-    //Method to select hbase cluster from drop down
-    public void selectHBaseCluster(String clusterId) {
-        removeClusterIfPresent();
-        actions.performActionWithPolling(applicationsPageObject.clusterSearchBox, UserAction.CLICK);
-        waitExecuter.waitUntilElementClickable(applicationsPageObject.globalSearchBox);
-        logger.info("Search for cluster: " + clusterId);
-        applicationsPageObject.clusterSearchBox.sendKeys(clusterId);
-        waitExecuter.waitUntilElementClickable(applicationsPageObject.select1stCluster);
-        waitExecuter.waitUntilElementClickable(applicationsPageObject.globalSearchBox);
-        waitExecuter.sleep(1000);
-        actions.performActionWithPolling(applicationsPageObject.select1stCluster, UserAction.CLICK);
-        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
-        waitExecuter.sleep(4000);
+    public void selectCluster(String clusterID) {
+        WebElement clusterDD = hBasePageObject.clusterDropDown;
+        MouseActions.clickOnElement(driver, clusterDD);
+        List<WebElement> clusterList = hBasePageObject.clusterList;
+        for (int i = 0; i < clusterList.size(); i++) {
+            String clusterName = clusterList.get(i).getText();
+            logger.info("Selected cluster " + clusterName);
+            if (clusterName.equals(clusterID)) {
+                actions.performActionWithPolling(clusterList.get(i), UserAction.CLICK);
+                break;
+            }
+        }
     }
-
-
 
     public void selectHBaseDefaultCluster(){
         waitExecuter.waitUntilElementClickable(hBasePageObject.hBaseClusterDropDown);

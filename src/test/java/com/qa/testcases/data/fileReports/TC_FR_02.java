@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 @Marker.All
 public class TC_FR_02 extends BaseClass {
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description ="P0-Validate the user can navigate between all the File reports on the UI")
   public void validateFileReportNavigation(String clusterId) {
     test = extent.startTest("TC_FR_02.validateFileReportNavigation " + clusterId,
         "Validate the user is able to navigate between all the File reports on the UI");

@@ -12,10 +12,10 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//div[contains(@class,'component-section-header')]")
   public WebElement reportArchiveHeader;
 
-  @FindBy(xpath = "//*[@class=\"select2-selection__arrow\"]")
+  @FindBy(xpath = "//*[@class='select2-selection__arrow']")
   public WebElement scheduleReportDropDown;
 
-  @FindBy(xpath = "//*[@class=\"select2-results__options\"]/li")
+  @FindBy(xpath = "//*[@class='select2-results__options']/li")
   public List<WebElement> dropDownList;
 
   @FindBy(xpath = "//*[@id=\"app\"]/div/div[1]/nav/ul[1]/li[4]/ul/li[2]/span")
@@ -33,7 +33,7 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//*[@class=\"col-md-12\"]//tbody/tr/td[4]")
   public List<WebElement> scheduleActions;
 
-  @FindBy(xpath = "//table/tbody/tr")
+  @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody/tr")
   public List<WebElement> tableRows;
 
   @FindBy(xpath = "//*[@class='clearfix']//td/p")
@@ -94,6 +94,9 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath="(//span[contains(@class, 'icon-download')])[1]")
   public WebElement downloadReportIcon;
 
+  @FindBy(css = "div[value='[object Object]'] input[type='text']")
+  public WebElement clearFilter;
+
   @FindBy(xpath = "(//*[@role='dialog'])")
   public WebElement viewReportDialogWin;
 
@@ -150,6 +153,9 @@ public class ReportsArchiveScheduledPageObject {
 
   @FindBy(xpath = "//div[2]//nav/p[@class='pointer']")
   public WebElement reportCntPerPage;
+
+  @FindBy(xpath = "//div[2]//nav/p[@class='pointer']")
+  public List<WebElement> pagination;
 
   @FindBy(xpath = "//*[@class='select2-selection__rendered']")
   public List<WebElement> topXtextFields;

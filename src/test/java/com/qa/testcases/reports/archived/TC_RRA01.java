@@ -2,11 +2,13 @@ package com.qa.testcases.reports.archived;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.scripts.reports.ReportsArchiveSchedulePage;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import java.util.logging.Logger;
 import org.testng.annotations.Test;
@@ -21,7 +23,7 @@ public class TC_RRA01 extends BaseClass {
 
   private static final Logger LOGGER = Logger.getLogger(com.qa.testcases.reports.archived.TC_RRA01.class.getName());
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description = "P0-Verify that with default parameters, all the reports with latest report status should be displayed")
   public void TC_RRA01_verifyReportArchivePage(String clusterId) {
     test = extent.startTest("TC_RRA01_verifyReportArchivePage: " + clusterId,
         "Verify that with default parameters, all the reports with latest report status should be displayed");
@@ -34,10 +36,11 @@ public class TC_RRA01 extends BaseClass {
     SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
     ReportsArchiveSchedulePage reportsPage = new ReportsArchiveSchedulePage(driver);
     ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);
+    UserActions userActions = new UserActions(driver);
 
     // Navigate to Reports tab from header
     test.log(LogStatus.INFO, "Navigate to reports tab from header and validate the reports with report status are present");
-    MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
+    userActions.performActionWithPolling(topPanelComponentPageObject.reports, UserAction.CLICK);
     reportsPage.validateReportNames(reportPageObj);
     reportsPage.validateReportStatus(reportPageObj);
     test.log(LogStatus.PASS, "Validated that all the reports with report status are present ");

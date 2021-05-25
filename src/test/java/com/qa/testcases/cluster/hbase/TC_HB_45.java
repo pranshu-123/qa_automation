@@ -2,11 +2,13 @@ package com.qa.testcases.cluster.hbase;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.clusters.HBasePageObject;
 import com.qa.scripts.clusters.HBasePage;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -32,22 +34,26 @@ public class TC_HB_45 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         HBasePage hbase = new HBasePage(driver);
         HBasePageObject hBasePageObject = new HBasePageObject(driver);
+        UserActions userActions = new UserActions(driver);
 
         //Navigate to HBase tab
         waitExecuter.waitUntilElementClickable(hBasePageObject.hbaseTab);
-        MouseActions.clickOnElement(driver, hBasePageObject.hbaseTab);
+        userActions.performActionWithPolling(hBasePageObject.hbaseTab, UserAction.CLICK);
         LOGGER.info("Clicked on HBase Tab");
         hbase.selectDateAsLast30Days();
 
         LOGGER.info("HBase cluster using : "+ clusterId);
-        hbase.selectHBaseCluster(clusterId);
+        hbase.selectCluster(clusterId);
         waitExecuter.waitUntilElementPresent(hBasePageObject.hbaseHeader);
         LOGGER.info("HBase headers found: " + hbase.getHBaseHeader());
         test.log(LogStatus.INFO, "Verified HBase cluster setup with :"+ clusterId);
 
         //verify and click on region server tab
         hbase.verifyRegionServer();
-        hbase.clickOnTableName();
+        hbase.verifyTablesTabElements();
+        userActions.performActionWithPolling(hBasePageObject.sortByTableName, UserAction.CLICK);
+        userActions.performActionWithPolling(hBasePageObject.sortUp, UserAction.CLICK);
+        userActions.performActionWithPolling( hBasePageObject.getTableName, UserAction.CLICK);
         //verify alerts in region server
         hbase.verifyAlertsInRegionServerHealth();
         LOGGER.info("Verified alerts for region server in UI.");

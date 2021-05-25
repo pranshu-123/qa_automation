@@ -8,8 +8,6 @@ import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
@@ -19,39 +17,112 @@ import java.util.logging.Logger;
 public class TC_SF_30 extends BaseClass {
     Logger logger = Logger.getLogger(TC_SF_30.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Validate that the user is able to search based on Path column for Small file table. ")
     public void VerifyFilePath(String clusterId) {
-        test = extent.startTest("TC_SF_30.VerifyFilePath: " + clusterId,
-                "Verify user is able search a particular file path");
-        test.assignCategory("Data- Small Files");
+        test = extent.startTest("TC_SF_30.VerifyFilePath: " + clusterId);
         Log.startTestCase("TC_SF_30.VerifyFilePath");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        UserActions userActions = new UserActions(driver);
+        SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
+        Smallfiles smallfiles = new Smallfiles(driver);
+        smallfiles.commonPanelTabValidation(test, logger);
+        smallfiles.closeConfirmationMessageNotification();
+        waitExecuter.waitUntilPageFullyLoaded();
+        smallfiles.verifyAllFileSizePathSearchOption(clusterId, 1, 1);
+        test.log(LogStatus.PASS, "Verify the user is able to search the Path in the small file table");
+    }
+
+    @Test(dataProvider = "clusterid-data-provider",description = "P0-Validate that the user is able to search based on Files column for Small file table.")
+    public void VerifyNumberOfFiles(String clusterId) {
+        Log.startTestCase("TC_SF_31.VerifyNumberOfFiles");
+
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+      SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
+        Smallfiles smallfiles = new Smallfiles(driver);
+        smallfiles.commonPanelTabValidation(test, logger);
+        smallfiles.closeConfirmationMessageNotification();
+        waitExecuter.waitUntilPageFullyLoaded();
+        smallfiles.verifyAllFileSizePathSearchOption(clusterId, 2, 2);
+        test.log(LogStatus.PASS, "Verify the user is able to search the Files in the small file table");
+    }
+
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Validate that the user is able to search based on Avg File Size column for Small file table. ")
+    public void verifyAvgFileSize(String clusterId) {
+        Log.startTestCase("TC_SF_32.verifyAvgFileSize");
+
+        SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        Smallfiles smallfiles = new Smallfiles(driver);
+        smallfiles.commonPanelTabValidation(test, logger);
+        smallfiles.closeConfirmationMessageNotification();
+        // Click on small file search
+        test.log(LogStatus.INFO, "Click on queue search box and search for path");
+        logger.info("Click on queue search box and search for path");
+        smallfiles.verifyAllFileSizePathSearchOption(clusterId, 3, 3);
+        waitExecuter.waitUntilPageFullyLoaded();
+        test.log(LogStatus.PASS, "Verify the user is able to search the Avg File Size in the small file table");
+    }
+
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Validate that the user is able to search based on Total File Siz column for Small file table.")
+    public void verifyTotalFileSize(String clusterId) {
+        Log.startTestCase("TC_SF_33.verifyTotalFileSize");
+
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
         Smallfiles smallfiles = new Smallfiles(driver);
         smallfiles.commonPanelTabValidation(test, logger);
         smallfiles.closeConfirmationMessageNotification();
 
-        try {
-            // Click on small file Reports search
-            test.log(LogStatus.INFO, "Click on queue search box and search for path");
-            logger.info("Click on queue search box and search for path");
-            smallfilesPageObject.reportSearchBox.click();
-            smallfilesPageObject.reportSearchBox.sendKeys("/warehouse");
+        // Click on small file search
+        test.log(LogStatus.INFO, "Click on queue search box and search for path");
+        logger.info("Click on queue search box and search for path");
+        smallfiles.verifyAllFileSizePathSearchOption(clusterId, 4, 4);
+        waitExecuter.waitUntilPageFullyLoaded();
+        test.log(LogStatus.PASS, "Verify the user is able to search the Total File size in the small file table");
 
-            if (smallfilesPageObject.getPathNameFromTable.size() > 0) {
-                String selectedPathName = smallfilesPageObject.getPathNameFromTable.stream().findFirst()
-                        .filter(WebElement::isDisplayed).get().getText();
-                test.log(LogStatus.PASS, "Path display in the table- " + selectedPathName);
-            } else {
-                Assert.assertTrue(smallfilesPageObject.whenNoDataDisplay.isDisplayed());
-                test.log(LogStatus.FAIL, "Verified queue search box and search for path not completed successfully");
-            }
-        } catch (Exception te) {
-            throw new AssertionError("Verified queue search box and search for path not completed successfully." + te.getMessage());
-        }
+    }
+
+    @Test(dataProvider = "clusterid-data-provider",description="Validate that the user is able to search based on Min File Size column for Small file table.")
+    public void verifyMinFileSize(String clusterId) {
+        Log.startTestCase("TC_SF_34.verifyMinFileSize");
+
+        SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        Smallfiles smallfiles = new Smallfiles(driver);
+        smallfiles.commonPanelTabValidation(test, logger);
+        smallfiles.closeConfirmationMessageNotification();
+        // Click on small file search
+        test.log(LogStatus.INFO, "Click on queue search box and search for path");
+        logger.info("Click on queue search box and search for path");
+        smallfiles.verifyAllFileSizePathSearchOption(clusterId, 5, 5);
+        waitExecuter.waitUntilPageFullyLoaded();
+        test.log(LogStatus.PASS, "Verify the user is able to search the Min File size in the small file table");
 
 
     }
+
+    @Test(dataProvider = "clusterid-data-provider",description = "Validate that the user is able to search based on Max File Size column for Small file table.")
+    public void verifyMaxFileSize(String clusterId) {
+        Log.startTestCase("TC_SF_35.verifyMaxFileSize");
+
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
+        Smallfiles smallfiles = new Smallfiles(driver);
+        smallfiles.commonPanelTabValidation(test, logger);
+        smallfiles.closeConfirmationMessageNotification();
+
+        // Click on small file search
+        test.log(LogStatus.INFO, "Click on queue search box and search for path");
+        logger.info("Click on queue search box and search for path");
+        smallfiles.verifyAllFileSizePathSearchOption(clusterId, 6, 6);
+        waitExecuter.waitUntilPageFullyLoaded();
+        test.log(LogStatus.PASS, "Verify the user is able to search the Max File size in the small file table");
+
+
+    }
+
+
 }
+
+
+

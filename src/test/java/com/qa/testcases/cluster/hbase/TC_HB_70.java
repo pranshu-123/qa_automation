@@ -20,10 +20,10 @@ public class TC_HB_70 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_HB_70.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify Multicluster setup with one HDP cluster.")
     public void verifyHBaseMultiClusterWithHDP(String clusterId) {
         test = extent.startTest("TC_HB_70.verifyHBaseMultiClusterWithHDP",
-                "Verify Multicluster setup with one HDP cluster.");
+                "Verify Multi cluster setup with one HDP cluster.");
         test.assignCategory(" Cluster - HBasePage ");
         Log.startTestCase("TC_HB_70.verifyHBaseMultiClusterWithHDP");
 
@@ -45,21 +45,20 @@ public class TC_HB_70 extends BaseClass {
         LOGGER.info("HBase clusters found are: "+ hBaseClusters);
         Assert.assertFalse(hBaseClusters.isEmpty(), "HBase clusters not available");
 
-        boolean flag = false;
+        boolean flag = true;
         for (String clusterName : hBaseClusters) {
             if (clusterName.contains("HDP")) {
-                flag =  true;
-                Assert.assertTrue(true, "Multicluster setup with HDP cluster not found.");
+                Assert.assertTrue(false, "Multicluster setup with HDP cluster not found.");
                 LOGGER.info("Verified Multicluster setup with one HDP cluster."+clusterName);
                 waitExecuter.waitUntilElementClickable(hBasePageObject.hBaseClusterDropDown);
                 MouseActions.clickOnElement(driver, hBasePageObject.hBaseClusterDropDown);
-                hbase.selectHBaseCluster(clusterName);
+                hbase.verifyClusterList(hBaseClusters);
                 LOGGER.info("HBase headers found: "+ hbase.getHBaseHeader());
                 test.log(LogStatus.PASS, "Verified Multicluster setup with one HDP cluster.");
             }
-        }
-        if(flag == false){
-            Assert.assertTrue(false, "Multicluster setup with HDP cluster not found.");
+            else{
+                Assert.assertTrue(false, "Multicluster setup with HDP cluster not found.");
+            }
         }
     }
 }

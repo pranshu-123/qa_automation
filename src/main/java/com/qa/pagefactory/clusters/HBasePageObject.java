@@ -26,8 +26,17 @@ public class HBasePageObject {
     @FindBy(xpath="//div[contains(@class, 'bg-success')]")
     public List<WebElement> hBaseKPIs;
 
+    @FindBy(css = "//span[contains(@class,'select2-dropdown')]//input")
+    public WebElement clusterIdsearchfield;
+
     @FindBy(xpath = "//*[@class='row no-gutters']//div[@class='col']/span")
     public List<WebElement> hBaseClusterKPIs;
+
+    @FindBy(xpath = "//span[@class='select2-selection__rendered']")
+    public WebElement clusterDropDown;
+
+    @FindBy(xpath = "//ul[@class='select2-results__options']/li")
+    public List<WebElement> clusterList;
 
     @FindBy(xpath = "//*[@class='row no-gutters']//div[@class='col-4']/h2")
     public List<WebElement> hBaseClusterKPIValues;
@@ -47,7 +56,16 @@ public class HBasePageObject {
     @FindBy(xpath="//table[@id='hbaseRegionsDataTble']/tbody/tr/td[6]/span")
     public List<WebElement> hBaseRegionSvrHealth;
 
-    @FindBy(xpath="//table[@id='hbaseRegionsDataTble']/tbody/tr/td[6]//*[local-name() = 'svg']")
+    @FindBy(xpath = "//span[(text()='Table Name')]//following-sibling::a[contains(@class,'sorting')]")
+    public WebElement sortByTableName;
+
+    @FindBy(xpath = "//a[contains(@class,'sorting icon-sort icon-sort-sorted-up')]")
+    public WebElement sortUp;
+
+    @FindBy(xpath = "//tbody[@id = 'null-table-body']/tr/td[1]")
+    public WebElement getTableName;
+
+    @FindBy(xpath="//table[1]/tbody[1]/tr/td[6]")
     public List<WebElement> hBaseRegionSvrInsight;
 
     @FindBy(xpath="//div[@class='container-fluid']/h3/a")

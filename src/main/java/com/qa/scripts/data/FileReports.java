@@ -5,14 +5,13 @@ import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.data.FileReportsPageObject;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
@@ -24,6 +23,7 @@ public class FileReports {
     private final WaitExecuter waitExecuter;
     private final WebDriver driver;
     FileReportsPageObject fileReportsPageObject;
+    private UserActions userActions;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -82,26 +82,35 @@ public class FileReports {
         MouseActions.clickOnElement(driver, clusterDD);
         List<WebElement> clusterList = fileReportsPageObject.clusterList;
         Assert.assertFalse(clusterList.isEmpty(), "ClusterList is empty");
-        for (int i = 0; i < clusterList.size(); i++) {
-            String clusterName = clusterList.get(i).getText();
-            LOGGER.info("Selected cluster " + clusterName);
-            MouseActions.clickOnElement(driver, clusterList.get(i));
-            waitExecuter.waitUntilElementClickable(fileReportsPageObject.searchField);
-            List<WebElement> tableHeaderList = fileReportsPageObject.tableHeader;
-            List<WebElement> tableRows = fileReportsPageObject.fileTableRows;
-            try {
+        try {
+            for (int i = 0; i < clusterList.size(); i++) {
+                String clusterName = clusterList.get(i).getText();
+                LOGGER.info("Selected cluster " + clusterName);
+
+                MouseActions.clickOnElement(driver, clusterList.get(i));
+                waitExecuter.waitUntilElementClickable(fileReportsPageObject.searchField);
+                List<WebElement> tableHeaderList = fileReportsPageObject.tableHeader;
+                List<WebElement> tableRows = fileReportsPageObject.fileTableRows;
                 for (int row = 1; row <= tableRows.size(); row++) {
                     for (int col = 1; col <= tableHeaderList.size(); col++) {
                         WebElement rowData = driver.findElement
-                                (By.xpath("//table[@class='component-data-tables']/tbody/tr[" + row + "]/td[" + col + "]"));
+                                (By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + row + "]/td[" + col + "]"));
+                        String fileCnt = rowData.getText().trim();
+                        fileCnt.replaceAll("(^|\\s)\\d+(gb|mb)($|\\s)", Matcher.quoteReplacement("\\/"));
+                        LOGGER.info("The path count is " + fileCnt);
                         Assert.assertTrue(rowData.isDisplayed(), "No data under column: " + tableHeaderList.get(col).getText() +
                                 " for " + fileType + " file type");
                     }
                 }
-            } catch (org.openqa.selenium.NoSuchElementException ex) {
-                WebElement noData = fileReportsPageObject.noDataText;
-                Assert.assertFalse(noData.isDisplayed(), "Data not present in the table got {'" + noData.getText() + "}' message");
             }
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+            LOGGER.info("Data not present in the table" + e);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            WebElement noData = fileReportsPageObject.noDataText;
+            Assert.assertFalse(noData.isDisplayed(), "Data not present in the table got {'" + noData.getText() + "}' message");
+
         }
     }
 
@@ -114,7 +123,9 @@ public class FileReports {
                 Assert.assertTrue(rowData.isDisplayed(), "No data under column: File " +
                         " for " + fileType + " file type");
                 String fileCnt = rowData.getText().trim();
-                fileCnt.replaceAll("(^|\\s)\\d+(gb|mb)($|\\s)", Matcher.quoteReplacement("\\/"));
+                fileCnt.replaceAll("(^|\\s)\\d+(gb|mb|kb|tb|b)($|\\s)", Matcher.quoteReplacement("\\/"));
+                Assert.assertTrue(rowData.isDisplayed(), "No data under column: File " +
+                        " for " + fileType + " file type");
                 LOGGER.info("The path count is " + fileCnt);
                 expectedFileCnt.add(fileCnt);
             }
@@ -173,7 +184,9 @@ public class FileReports {
     public void verifyAllSortOption(String fileType, String clusterID, int tdValue, int colValue) {
         selectOnlySingleCluster(clusterID);
         List<WebElement> tableRowList = fileReportsPageObject.fileTableRows;
-        ArrayList<String> expectedFileCntArr = new ArrayList<>(), ascendingFileCntArr, descendingFileCntArr;
+        ArrayList<String> expectedFileCntArr = new ArrayList<>(),
+                ascendingFileCntArr, descendingFileCntArr;
+        //WebElement fileCol = driver.findElement(By.xpath("//tbody/tr/td[" + colValue + "]"));
         WebElement fileCol = driver.findElement(By.xpath("//table/thead/tr/th[" + colValue + "]"));
         int rowCnt = tableRowList.size();
         if (rowCnt < 10) {
@@ -213,7 +226,7 @@ public class FileReports {
                 newExpectedFileCnt.equals(descendingFileCntArr), "The expected array do not match");
     }
 
-    public ArrayList<Integer> getFileCnt(List<WebElement> tableRowList, String fileType,int tdValue) {
+    public ArrayList<Integer> getFileCnt(List<WebElement> tableRowList, String fileType, int tdValue) {
         ArrayList<Integer> expectedFileCnt = new ArrayList<>();
         try {
             for (int row = 1; row <= tableRowList.size(); row++) {
@@ -235,7 +248,7 @@ public class FileReports {
     /**
      * Method to verify the sort functionality on Column 'File' for different  file types.
      */
-    public void verifyFileSortOption(String fileType, String clusterID,int tdValue, int colValue) {
+    public void verifyFileSortOption(String fileType, String clusterID, int tdValue, int colValue) {
         selectOnlySingleCluster(clusterID);
         List<WebElement> tableRowList = fileReportsPageObject.fileTableRows;
         ArrayList<Integer> expectedFileCntArr = new ArrayList<>(), ascendingFileCntArr, descendingFileCntArr;

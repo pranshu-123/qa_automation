@@ -97,7 +97,9 @@ public class DatePicker {
      */
     public void selectLastTwoHour() {
         waitExecuter.waitUntilElementPresent(datePickerPageObject.lastTwoHour);
-        datePickerPageObject.lastTwoHour.click();
+        userActions.performActionWithPolling(datePickerPageObject.lastTwoHour, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(datePickerPageObject.dateRange);
+
     }
 
     /**
@@ -105,7 +107,7 @@ public class DatePicker {
      */
     public void selectLastSixHour() {
         waitExecuter.waitUntilElementPresent(datePickerPageObject.lastSixHour);
-        datePickerPageObject.lastSixHour.click();
+        userActions.performActionWithPolling(datePickerPageObject.lastSixHour, UserAction.CLICK);
     }
 
     /**
@@ -113,7 +115,7 @@ public class DatePicker {
      */
     public void selectLast12Hour() {
         waitExecuter.waitUntilElementPresent(datePickerPageObject.last12Hour);
-        datePickerPageObject.last12Hour.click();
+        userActions.performActionWithPolling(datePickerPageObject.last12Hour, UserAction.CLICK);
     }
 
     /**
@@ -121,7 +123,7 @@ public class DatePicker {
      */
     public void selectToday() {
         waitExecuter.waitUntilElementPresent(datePickerPageObject.today);
-        datePickerPageObject.today.click();
+        userActions.performActionWithPolling(datePickerPageObject.today, UserAction.CLICK);
     }
 
     /**
@@ -129,7 +131,7 @@ public class DatePicker {
      */
     public void selectYesterday() {
         waitExecuter.waitUntilElementPresent(datePickerPageObject.yesterday);
-        datePickerPageObject.yesterday.click();
+        userActions.performActionWithPolling(datePickerPageObject.yesterday, UserAction.CLICK);
     }
 
     /**
@@ -137,7 +139,8 @@ public class DatePicker {
      */
     public void selectLast7Days() {
         waitExecuter.waitUntilElementPresent(datePickerPageObject.last7Days);
-        datePickerPageObject.last7Days.click();
+        userActions.performActionWithPolling(datePickerPageObject.last7Days, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(datePickerPageObject.dateRange);
     }
 
     /**
@@ -180,7 +183,7 @@ public class DatePicker {
      */
     public void selectThisMonth() {
         waitExecuter.waitUntilElementPresent(datePickerPageObject.thisMonth);
-        datePickerPageObject.thisMonth.click();
+        userActions.performActionWithPolling(datePickerPageObject.thisMonth, UserAction.CLICK);
     }
 
     /**
@@ -188,7 +191,7 @@ public class DatePicker {
      */
     public void selectLastMonth() {
         waitExecuter.waitUntilElementPresent(datePickerPageObject.lastMonth);
-        datePickerPageObject.lastMonth.click();
+        userActions.performActionWithPolling(datePickerPageObject.lastMonth, UserAction.CLICK);
     }
 
     /**

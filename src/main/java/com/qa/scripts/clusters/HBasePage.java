@@ -10,6 +10,7 @@ import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -24,6 +25,7 @@ public class HBasePage {
     private WaitExecuter waitExecuter;
     private HBasePageObject hBasePageObject;
     private UserActions actions;
+    private final ApplicationsPageObject applicationsPageObject;
     private DatePicker datePicker;
     private Logger logger = Logger.getLogger(HBasePage.class.getName());
 
@@ -33,6 +35,7 @@ public class HBasePage {
     public HBasePage(WebDriver driver){
         this.driver = driver;
         waitExecuter = new WaitExecuter(driver);
+        applicationsPageObject = new ApplicationsPageObject(driver);
         hBasePageObject = new HBasePageObject(driver);
         actions = new UserActions(driver);
         datePicker = new DatePicker(driver);
@@ -75,16 +78,33 @@ public class HBasePage {
         return hBaseClusterElementList;
     }
 
-    //Method to select hbase cluster from drop down
-    public void selectHBaseCluster(String hBaseClusterName){
-        waitExecuter.waitUntilElementClickable(hBasePageObject.hBaseClusterDropDown);
-        MouseActions.clickOnElement(driver, hBasePageObject.hBaseClusterDropDown);
+
+    public void verifyClusterList(List<String> expectedClusterList) {
+        WebElement clusterID = hBasePageObject.clusterDropDown;
+        actions.performActionWithPolling(clusterID, UserAction.CLICK);
         waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.sleep(2000);
-        ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
-        applicationsPageObject.clusterIdsearchfield.sendKeys(hBaseClusterName);
-        waitExecuter.sleep(1000);
-        applicationsPageObject.select1stCluster.click();
+        List<WebElement> clusterList = hBasePageObject.clusterList;
+        Assert.assertFalse(clusterList.isEmpty(), "ClusterList is empty");
+        for (int i = 0; i < clusterList.size(); i++) {
+            String clusterName = clusterList.get(i).getText();
+            logger.info("Cluster name is " + clusterName);
+            Assert.assertTrue(expectedClusterList.contains(clusterName), " Cluster name does not match to the " +
+                    "cluster name in expected Cluster list");
+        }
+    }
+
+    public void selectCluster(String clusterID) {
+        WebElement clusterDD = hBasePageObject.clusterDropDown;
+        MouseActions.clickOnElement(driver, clusterDD);
+        List<WebElement> clusterList = hBasePageObject.clusterList;
+        for (int i = 0; i < clusterList.size(); i++) {
+            String clusterName = clusterList.get(i).getText();
+            logger.info("Selected cluster " + clusterName);
+            if (clusterName.equals(clusterID)) {
+                actions.performActionWithPolling(clusterList.get(i), UserAction.CLICK);
+                break;
+            }
+        }
     }
 
     public void selectHBaseDefaultCluster(){

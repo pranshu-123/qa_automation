@@ -14,10 +14,10 @@ import org.testng.annotations.Test;
 @Marker.All
 public class TC_FR_36 extends BaseClass {
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description = "P1-Validate that the user is able to search based on files column for Medium file reports")
   public void validateMediumFileSearchOption(String clusterId) {
     test = extent.startTest("TC_FR_36.validateLargeFileSearchOption " + clusterId,
-        "Validate user is able search a particular number of files");
+        "P1-Validate that the user is able to search based on files column for Medium file reports");
     test.assignCategory(" Data - FileReports ");
 
     FileReports filereports = new FileReports(driver);

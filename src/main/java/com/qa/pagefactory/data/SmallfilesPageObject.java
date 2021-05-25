@@ -86,6 +86,20 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select/option[1]")
     public List<WebElement> Daily;
 
+
+    @FindBy(xpath = "//table[@class='component-data-tables row-hover']/thead/tr/th")
+    public List<WebElement> searchTableHeader;
+
+    @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody/tr")
+    public List<WebElement> searchFileTableRows;
+
+    @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody/tr/td")
+    public List<WebElement> searchFileTableCols;
+
+    @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody")
+    public WebElement rowData;
+
+
     @FindBy(xpath = "//ul[contains(concat(' ', @class, ' '), 'select2-results__options')]/li")
     public List<WebElement> clusterList;
 
@@ -121,6 +135,7 @@ public class SmallfilesPageObject {
 
     @FindBy(xpath = "//input[contains(@type,'search')]")
     public WebElement reportSearchBox;
+
 
     @FindBy(xpath = "//select[contains(@class,'schedule-days')]")
     public WebElement scheduleToRun;

@@ -14,10 +14,10 @@ public class TC_FR_38 extends BaseClass {
     /**
      Validate user is able to search a particular Total File size
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description = "P1-Validate that the user is able to search based on Total File size column for Empty file reports")
     public void validateTotalFileSizeSearchOption(String clusterId) {
         test = extent.startTest("TC_FR_38.validateTotalFileSizeSearchOption " + clusterId,
-                "P1-Validate user is able to search a particular Total File size");
+                "P1-Validate that the user is able to search based on Total File size column for Empty file reports");
         test.assignCategory(" Data - FileReports ");
 
         FileReports filereports = new FileReports(driver);

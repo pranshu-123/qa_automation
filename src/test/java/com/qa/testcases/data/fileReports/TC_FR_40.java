@@ -14,10 +14,10 @@ public class TC_FR_40 extends BaseClass {
     /**
      Validate user is able to search Max File size
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description = "P1-Validate that the user is able to search based on Max File size column for Medium file reports")
     public void validateMaxFileSizeSearchOption(String clusterId) {
         test = extent.startTest("TC_FR_40.validateMaxFileSizeSearchOption " + clusterId,
-                "P1-Validate user is able to search a particular Max File size");
+                "P1-Validate that the user is able to search based on Max File size column for Medium file reports");
         test.assignCategory(" Data - FileReports ");
 
         FileReports filereports = new FileReports(driver);

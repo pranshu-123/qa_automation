@@ -14,10 +14,10 @@ public class TC_FR_39 extends BaseClass {
     /**
      Validate user is able to search Min File size
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description = "P1-Validate that the user is able to search based on Min File size column for Large file reports")
     public void validateMinFileSizeSearchOption(String clusterId) {
         test = extent.startTest("TC_FR_39.validateMinFileSizeSearchOption " + clusterId,
-                "P1-Validate user is able to search Min File size");
+                "P1-Validate that the user is able to search based on Min File size column for Large file reports");
         test.assignCategory(" Data - FileReports ");
 
         FileReports filereports = new FileReports(driver);

@@ -14,10 +14,10 @@ public class TC_FR_37 extends BaseClass {
     /**
      Validate user is able to search a particular Avg File size
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description = "P1-Validate that the user is able to search based on Avg File size column for Tiny file reports")
     public void validateAvgFileSizeFileSearchOption(String clusterId) {
         test = extent.startTest("TC_FR_37.validateAvgFileSizeFileSearchOption " + clusterId,
-                "P1-Validate user is able to search a particular Avg File size");
+                "P1-Validate that the user is able to search based on Avg File size column for Tiny file reports");
         test.assignCategory(" Data - FileReports ");
 
         FileReports filereports = new FileReports(driver);

@@ -14,10 +14,10 @@ public class TC_FR_22 extends BaseClass {
     /**
      Validate the user is able sort based on "Max File Size" column for Tiny file reports
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description = "P1-Validate that the user is able to sort based on Max File Size column for Tiny file reports")
     public void validateMaxFileSizeSortForTinyFiles(String clusterId) {
         test = extent.startTest("TC_FR_22.validateMaxFileSizeSortForTinyFiles " + clusterId,
-                "P1-Validate the user is able sort based on number of 'Max File Size' column for Tiny file reports");
+                "P1-Validate that the user is able to sort based on Max File Size column for Tiny file reports");
         test.assignCategory(" Data - FileReports ");
 
         FileReports filereports = new FileReports(driver);

@@ -2,11 +2,13 @@ package com.qa.testcases.cluster.hbase;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.clusters.HBasePageObject;
 import com.qa.scripts.clusters.HBasePage;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -20,7 +22,7 @@ public class TC_HB_71  extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_HB_71.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify Multi cluster setup with one CDH cluster.")
     public void verifyHBaseMultiClusterWithCDH(String clusterId) {
         test = extent.startTest("TC_HB_71.verifyHBaseMultiClusterWithCDH",
                 "Verify Multicluster setup with one CDH cluster.");
@@ -32,35 +34,43 @@ public class TC_HB_71  extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         HBasePage hbase = new HBasePage(driver);
         HBasePageObject hBasePageObject = new HBasePageObject(driver);
+        UserActions userActions = new UserActions(driver);
 
         //Navigate to HBase tab
         waitExecuter.waitUntilElementClickable(hBasePageObject.hbaseTab);
-        MouseActions.clickOnElement(driver,hBasePageObject.hbaseTab);
+        MouseActions.clickOnElement(driver, hBasePageObject.hbaseTab);
         LOGGER.info("Clicked on HBase Tab");
         hbase.selectDateAsLast30Days();
         waitExecuter.waitUntilElementPresent(hBasePageObject.hbaseHeader);
-        LOGGER.info("HBase headers found: "+ hbase.getHBaseHeader());
+        LOGGER.info("HBase headers found: " + hbase.getHBaseHeader());
 
         List<String> hBaseClusters = hbase.getAllHBaseClusters();
-        LOGGER.info("HBase clusters found are: "+ hBaseClusters);
+        LOGGER.info("HBase clusters found are: " + hBaseClusters);
         Assert.assertFalse(hBaseClusters.isEmpty(), "HBase clusters not available");
 
         boolean flag = false;
         for (String clusterName : hBaseClusters) {
-            if (clusterName.contains("CM")) {
-                flag =  true;
+            if (clusterName.contains("HDP")) {
+                flag = false;
                 Assert.assertTrue(true, "Multicluster setup with CDH cluster not found.");
-                LOGGER.info("Verified Multicluster setup with one CDH cluster."+clusterName);
+                LOGGER.info("Verified Multicluster setup with one CDH cluster." + clusterName);
                 waitExecuter.waitUntilElementClickable(hBasePageObject.hBaseClusterDropDown);
-                MouseActions.clickOnElement(driver, hBasePageObject.hBaseClusterDropDown);
-                hbase.selectHBaseCluster(clusterName);
-                LOGGER.info("HBase headers found: "+ hbase.getHBaseHeader());
+                userActions.performActionWithPolling(hBasePageObject.hBaseClusterDropDown, UserAction.CLICK);
+                hbase.verifyClusterList(hBaseClusters);
+                LOGGER.info("HBase headers found: " + hbase.getHBaseHeader());
                 test.log(LogStatus.PASS, "Verified Multicluster setup with one CDH cluster.");
+            } else if (clusterName.contains("CDH")) {
+                flag = false;
+                Assert.assertTrue(true, "Multicluster setup with CDH cluster not found.");
+                LOGGER.info("Verified Multicluster setup with one CDH cluster." + clusterName);
+                waitExecuter.waitUntilElementClickable(hBasePageObject.hBaseClusterDropDown);
+                userActions.performActionWithPolling(hBasePageObject.hBaseClusterDropDown, UserAction.CLICK);
+                hbase.verifyClusterList(hBaseClusters);
+                LOGGER.info("HBase headers found: " + hbase.getHBaseHeader());
+                test.log(LogStatus.PASS, "Verified Multicluster setup with one CDH cluster.");
+            } else {
+                Assert.assertFalse(false, "Multicluster setup with CDH cluster not found.");
             }
-        }
-
-        if(flag == false){
-            Assert.assertTrue(false, "Multicluster setup with CDH cluster not found.");
         }
     }
 }

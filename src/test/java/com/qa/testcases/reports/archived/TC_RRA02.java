@@ -3,6 +3,7 @@ package com.qa.testcases.reports.archived;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.constants.DatePickerConstants;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.scripts.DatePicker;
@@ -11,6 +12,7 @@ import com.qa.scripts.reports.ReportsArchiveSchedulePage;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +32,7 @@ public class TC_RRA02 extends BaseClass {
   Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.archived.TC_RRA02.class);
 
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description = "P0-Verify that the date picker list and Popup should list all the combination of date range")
   public void TC_RRA02_verifyReportArchiveDatePickerList(String clusterId) {
     test = extent.startTest("TC_RRA02_verifyReportArchiveDatePickerList: " + clusterId,
         "Verify datepicker list and Popup should list all the combination of daterange");
@@ -46,10 +48,11 @@ public class TC_RRA02 extends BaseClass {
     DatePicker datePicker = new DatePicker(driver);
     WaitExecuter waitExecuter = new WaitExecuter(driver);
     AllApps allApps = new AllApps(driver);
+    UserActions userActions = new UserActions(driver);
 
     // Navigate to Reports tab from header
     test.log(LogStatus.INFO, "Navigate to reports tab from header and validate the datepicker list");
-    MouseActions.clickOnElement(driver, topPanelComponentPageObject.reports);
+    userActions.performActionWithPolling(topPanelComponentPageObject.reports, UserAction.CLICK);
     waitExecuter.sleep(3000);
 
     // Click on date picker and get list of calendar ranges

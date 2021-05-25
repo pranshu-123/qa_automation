@@ -14,10 +14,10 @@ public class TC_FR_29 extends BaseClass {
     /**
      Validate the user is able sort the UI based on "Path" column for Medium file reports
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description = "P1-Validate that the user is able to sort based on Path column for Medium file reports")
     public void validatePathForEmptyFiles(String clusterId) {
         test = extent.startTest("TC_FR_29.validatePathForEmptyFiles " + clusterId,
-                "P1-Validate the user is able sort the UI based on \"Path\" column for Medium file reports");
+                "P1-Validate that the user is able to sort based on Path column for Medium file reports");
         test.assignCategory(" Data - FileReports ");
 
         FileReports filereports = new FileReports(driver);

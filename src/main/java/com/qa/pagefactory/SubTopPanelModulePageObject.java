@@ -17,7 +17,7 @@ public class SubTopPanelModulePageObject {
     @FindBy(css = "a.logo")
     public WebElement unravelLogo;
 
-    @FindBy(xpath = "//span[@class='icon-jobs HomePage_capitalize_1Gute']")
+    @FindBy(xpath = "//span[contains(@class,'icon-jobs')]")
     public WebElement jobs;
 
     @FindBy(xpath = "//span[contains(@class,'icon-data')]")

@@ -18,11 +18,11 @@ import java.util.List;
 @Marker.All
 public class TC_FR_06 extends BaseClass {
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description ="P0-Validate the user can list all the clusters listed for the cluster environment while selecting the 'Tiny' Files")
   public void validateClusterListForEmptyFiles(String clusterId) {
     test = extent.startTest("TC_FR_06.validateClusterListForTinyFiles " + clusterId,
         "Validate the user is able to list all the clusters listed for the cluster environment when" +
-            " 'Empty' Files is selected");
+            " 'Tiny' Files is selected");
     test.assignCategory(" Data - FileReports ");
 
     WaitExecuter waitExecuter = new WaitExecuter(driver);

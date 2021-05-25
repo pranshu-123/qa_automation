@@ -64,8 +64,8 @@ public class InfluxDBUtils {
      */
     private static String getClassSpecificMarkers(Annotation[] markers) {
         for (Annotation marker : markers) {
-            if ((!(marker instanceof Marker.All) ||
-                !(marker instanceof Marker.Regression) ||
+            if ((!(marker instanceof Marker.All) &&
+                !(marker instanceof Marker.Regression) &&
                 !(marker instanceof Marker.Smoke))) {
                 Set<Map.Entry<String, Class<? extends Annotation>>> markerMapping =
                     MarkerConstants.MARKER_MAPPING.entrySet();

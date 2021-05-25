@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 @Marker.All
 public class TC_FR_07 extends BaseClass {
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description = "P0-Validate the user can list all the clusters listed for the cluster environment while selecting the 'Medium' Files")
   public void validateMediumFileForSelectedCluster(String clusterId) {
     test = extent.startTest("TC_FR_07.validateMediumFileForSelectedCluster " + clusterId,
         "Validate the UI displays Medium file reports for a selected cluster");

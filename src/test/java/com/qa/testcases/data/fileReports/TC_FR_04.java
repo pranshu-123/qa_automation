@@ -18,7 +18,7 @@ import java.util.List;
 @Marker.All
 public class TC_FR_04 extends BaseClass {
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description ="P0-Validate the user can list all the clusters listed for the cluster environment while selecting the 'Tiny' Files")
   public void validateClusterListForTinyFiles(String clusterId) {
     test = extent.startTest("TC_FR_04.validateClusterListForTinyFiles " + clusterId,
         "Validate the user is able to list all the clusters listed for the cluster environment when" +

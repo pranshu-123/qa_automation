@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 @Marker.All
 public class TC_FR_12 extends BaseClass {
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description = "P0-Validate the user is able to sort based on the number of 'Files' column for Large file reports")
   public void validateFileSortForLargeFiles(String clusterId) {
     test = extent.startTest("TC_FR_12.validateFileSortForLargeFiles " + clusterId,
         "Validate the user is able sort based on number of 'Files' column for Large file reports");

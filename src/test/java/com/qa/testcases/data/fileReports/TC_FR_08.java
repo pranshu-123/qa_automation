@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 @Marker.All
 public class TC_FR_08 extends BaseClass {
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description ="P0-Validate the UI displays Tiny file reports for a selected cluster")
   public void validateTinyFileForSelectedCluster(String clusterId) {
     test = extent.startTest("TC_FR_08.validateTinyFileForSelectedCluster " + clusterId,
         "Validate the UI displays Tiny file reports for a selected cluster");

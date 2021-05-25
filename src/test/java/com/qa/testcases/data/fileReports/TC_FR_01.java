@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 @Marker.All
 public class TC_FR_01 extends BaseClass {
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description = "P0-Validate the file reports page displays 'Large' file reports by default")
   public void validateDefaultLargeFileSelected(String clusterId) {
     test = extent.startTest("TC_FR_01.validateDefaultLargeFileSelected " + clusterId,
         "Validate the file reports page displays 'Large' file reports by default");

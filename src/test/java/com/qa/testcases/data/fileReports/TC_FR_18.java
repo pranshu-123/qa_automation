@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 @Marker.All
 public class TC_FR_18 extends BaseClass {
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description ="P0-Validate the user is able to sort based on Path column for Tiny file reports")
   public void validateFileSortForTinyFiles(String clusterId) {
     test = extent.startTest("TC_FR_18.validateFileSortForTinyFiles " + clusterId,
         "Validate the user is able sort based on number of 'Files' column for Tiny file reports");

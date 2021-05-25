@@ -154,6 +154,9 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//div[2]//nav/p[@class='pointer']")
   public WebElement reportCntPerPage;
 
+  @FindBy(xpath = "//div[2]//nav/p[@class='pointer']")
+  public List<WebElement> pagination;
+
   @FindBy(xpath = "//*[@class='select2-selection__rendered']")
   public List<WebElement> topXtextFields;
 

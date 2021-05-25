@@ -24,7 +24,7 @@ public class TC_RS01 extends BaseClass {
 
   private static final Logger LOGGER = Logger.getLogger(com.qa.testcases.reports.scheduled.TC_RS01.class.getName());
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description = "P0-Verify that the scheduled reports page")
   public void TC_RS01_verifyScheduledReportsPage(String clusterId) {
     test = extent.startTest("TC_RS01_verifyScheduledReportsPage: " + clusterId,
         "Verify Scheduled Reports page");

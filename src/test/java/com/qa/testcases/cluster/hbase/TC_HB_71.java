@@ -51,7 +51,7 @@ public class TC_HB_71  extends BaseClass {
         boolean flag = false;
         for (String clusterName : hBaseClusters) {
             if (clusterName.contains("HDP")) {
-                flag = true;
+                flag = false;
                 Assert.assertTrue(true, "Multicluster setup with CDH cluster not found.");
                 LOGGER.info("Verified Multicluster setup with one CDH cluster." + clusterName);
                 waitExecuter.waitUntilElementClickable(hBasePageObject.hBaseClusterDropDown);
@@ -60,7 +60,7 @@ public class TC_HB_71  extends BaseClass {
                 LOGGER.info("HBase headers found: " + hbase.getHBaseHeader());
                 test.log(LogStatus.PASS, "Verified Multicluster setup with one CDH cluster.");
             } else if (clusterName.contains("CDH")) {
-                flag = true;
+                flag = false;
                 Assert.assertTrue(true, "Multicluster setup with CDH cluster not found.");
                 LOGGER.info("Verified Multicluster setup with one CDH cluster." + clusterName);
                 waitExecuter.waitUntilElementClickable(hBasePageObject.hBaseClusterDropDown);

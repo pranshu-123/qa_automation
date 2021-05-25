@@ -19,10 +19,10 @@ public class TC_SF_30 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider",description="P0-Validate that the user is able to search based on Path column for Small file table. ")
     public void VerifyFilePath(String clusterId) {
+        test = extent.startTest("TC_SF_30.VerifyFilePath: " + clusterId);
         Log.startTestCase("TC_SF_30.VerifyFilePath");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        UserActions userActions = new UserActions(driver);
         SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
         Smallfiles smallfiles = new Smallfiles(driver);
         smallfiles.commonPanelTabValidation(test, logger);
@@ -37,8 +37,7 @@ public class TC_SF_30 extends BaseClass {
         Log.startTestCase("TC_SF_31.VerifyNumberOfFiles");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        UserActions userActions = new UserActions(driver);
-        SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
+      SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
         Smallfiles smallfiles = new Smallfiles(driver);
         smallfiles.commonPanelTabValidation(test, logger);
         smallfiles.closeConfirmationMessageNotification();
@@ -52,7 +51,6 @@ public class TC_SF_30 extends BaseClass {
         Log.startTestCase("TC_SF_32.verifyAvgFileSize");
 
         SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
-        UserActions userActions = new UserActions(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         Smallfiles smallfiles = new Smallfiles(driver);
         smallfiles.commonPanelTabValidation(test, logger);
@@ -110,7 +108,6 @@ public class TC_SF_30 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
         Smallfiles smallfiles = new Smallfiles(driver);
-        UserActions userActions = new UserActions(driver);
         smallfiles.commonPanelTabValidation(test, logger);
         smallfiles.closeConfirmationMessageNotification();
 

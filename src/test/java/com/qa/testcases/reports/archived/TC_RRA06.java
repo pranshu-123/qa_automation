@@ -31,7 +31,8 @@ public class TC_RRA06 extends BaseClass {
 
   Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.archived.TC_RRA06.class);
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description ="Verify reports tab in Report Archive page " +
+          "should open new page with  all the reports list, count and list should match")
   public void TC_RRA06_verifyReportArchiveReportTab(String clusterId) {
     test = extent.startTest("TC_RRA06_verifyReportArchiveReportTab: " + clusterId,
         "Verify reports tab in Report Archive page :\n" +

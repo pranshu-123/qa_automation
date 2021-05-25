@@ -24,7 +24,7 @@ public class TC_RS03 extends BaseClass {
 
   private static final Logger LOGGER = Logger.getLogger(TC_RS03.class.getName());
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description = "P0-Scheduled that the reports page report drop down should list all types of report that are available with all option")
   public void TC_RS03_verifyScheduledReportsDropDown(String clusterId) {
     test = extent.startTest("TC_RS03_verifyScheduledReportsDropDown: " + clusterId,
         "Scheduled Reports page report drop down should list all types of report that are available with all option");

@@ -24,7 +24,7 @@ public class TC_RS07 extends BaseClass {
 
   private static final Logger LOGGER = Logger.getLogger(TC_RS07.class.getName());
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description = "P0-Verify that the  More info option from Action tab,this should pop up an window with all the details (parameters) of the report")
   public void TC_RS07_verifyScheduledReportsMoreInfoAction(String clusterId) {
     test = extent.startTest("TC_RS07_verifyScheduledReportsMoreInfoAction: " + clusterId,
         "Verify More info option from Action tab,this should pop an window with all the details " +

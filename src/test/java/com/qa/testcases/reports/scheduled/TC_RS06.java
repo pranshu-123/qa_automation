@@ -24,7 +24,8 @@ public class TC_RS06 extends BaseClass {
 
   private static final Logger LOGGER = Logger.getLogger(TC_RS06.class.getName());
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description ="Verify Delete option from Action tab  should " +
+          "remove scheduled report successfully and should not delete reports already generated in Report Archives.")
   public void TC_RS06_verifyScheduledReportsDeleteAction(String clusterId) {
     test = extent.startTest("TC_RS06_verifyScheduledReportsDeleteAction: " + clusterId,
         "Verify Delete option from Action tab, this should remove scheduled report successfully. " +

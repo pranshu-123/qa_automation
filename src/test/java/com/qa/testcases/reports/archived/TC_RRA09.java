@@ -25,7 +25,7 @@ public class TC_RRA09 extends BaseClass {
 
   Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.archived.TC_RRA09.class);
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description = "Verify that the select download, view report and remove options from actions for a particular report")
   public void TC_RRA09_verifyReportAction(String clusterId) {
     test = extent.startTest("TC_RRA09_verifyReportAction: " + clusterId,
         "Verify Select download, view report and remove options from actions for a particular report");

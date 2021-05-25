@@ -32,7 +32,7 @@ public class TC_RRA02 extends BaseClass {
   Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.archived.TC_RRA02.class);
 
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description = "P0-Verify that the date picker list and Popup should list all the combination of date range")
   public void TC_RRA02_verifyReportArchiveDatePickerList(String clusterId) {
     test = extent.startTest("TC_RRA02_verifyReportArchiveDatePickerList: " + clusterId,
         "Verify datepicker list and Popup should list all the combination of daterange");

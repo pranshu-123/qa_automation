@@ -31,7 +31,7 @@ public class TC_RRA011 extends BaseClass {
 
   Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.archived.TC_RRA011.class);
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description = "Verify that the new report option from actions tab")
   public void TC_RRA011_verifyNewReportOption(String clusterId) {
     test = extent.startTest("TC_RRA011_verifyNewReportOption: " + clusterId,
         "Verify new report option from actions tab");

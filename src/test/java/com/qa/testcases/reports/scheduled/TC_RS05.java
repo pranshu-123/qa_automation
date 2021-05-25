@@ -24,7 +24,8 @@ public class TC_RS05 extends BaseClass {
 
   private static final Logger LOGGER = Logger.getLogger(TC_RS05.class.getName());
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description = "Verify Edit option from Action tab, this will open " +
+          "schedule Report page can edit the parameters of the report")
   public void TC_RS05_verifyScheduledReportsEditAction(String clusterId) {
     test = extent.startTest("TC_RS05_verifyScheduledReportsEditAction: " + clusterId,
         "Verify Edit option from Action tab, this will open Schedule Report page from where we " +

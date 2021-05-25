@@ -25,7 +25,8 @@ public class TC_RRA08 extends BaseClass {
 
   Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.archived.TC_RRA08.class);
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description = "P0-Verify search option in Report Archive page should list all " +
+          "the reports which matches with search box")
   public void TC_RRA08_verifyReportArchiveSearchOption(String clusterId) {
     test = extent.startTest("TC_RRA08_verifyReportArchiveSearchOption: " + clusterId,
         "Verify search option in Report Archive page :\n" +

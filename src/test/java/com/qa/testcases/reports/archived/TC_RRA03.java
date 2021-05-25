@@ -29,7 +29,7 @@ public class TC_RRA03 extends BaseClass {
 
   Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.archived.TC_RRA03.class);
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description = "P0-Verify that the date picker list all the reports with latest report status should show(SUCCESS, FAILURE, NO REPORT)")
   public void TC_RRA03_verifyReportsForDiffDateRange(String clusterId) {
     test = extent.startTest("TC_RRA03_verifyReportsForDiffDateRange: " + clusterId,
         "Verify datepicker list and Popup should list all the combination of daterange\n" +

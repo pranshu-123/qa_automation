@@ -25,7 +25,7 @@ public class TC_RRA07 extends BaseClass {
 
   Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.archived.TC_RRA07.class);
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description = "P0-Verify that the  sorting should work fine on Name, Created and Status tabs for a particular report")
   public void TC_RRA07_verifyReportPageSortingOption(String clusterId) {
     test = extent.startTest("TC_RRA07_verifyReportPageSortingOption: " + clusterId,
         "Verify Sorting should work fine on Name, Created and Status tabs for a particular reportI");

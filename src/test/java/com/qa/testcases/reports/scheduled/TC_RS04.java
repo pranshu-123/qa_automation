@@ -24,11 +24,11 @@ public class TC_RS04 extends BaseClass {
 
   private static final Logger LOGGER = Logger.getLogger(TC_RS04.class.getName());
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description ="Verify that the sorting should work fine on Name, Report and Next Scheduled Run column in Scheduled Reports")
   public void TC_RS04_verifyScheduledReportsSorting(String clusterId) {
     test = extent.startTest("TC_RS04_verifyScheduledReportsSorting: " + clusterId,
         "Verify that Sorting should work fine on Name, Report and Next Scheduled Run column in Scheduled Reports");
-    test.assignCategory(" Schedule ");
+    test.assignCategory("Schedule");
     Log.startTestCase("TC_RS04_verifyScheduledReportsSorting");
 
     // Initialize all classes objects

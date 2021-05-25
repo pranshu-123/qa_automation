@@ -23,7 +23,7 @@ public class TC_RRA01 extends BaseClass {
 
   private static final Logger LOGGER = Logger.getLogger(com.qa.testcases.reports.archived.TC_RRA01.class.getName());
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description = "P0-Verify that with default parameters, all the reports with latest report status should be displayed")
   public void TC_RRA01_verifyReportArchivePage(String clusterId) {
     test = extent.startTest("TC_RRA01_verifyReportArchivePage: " + clusterId,
         "Verify that with default parameters, all the reports with latest report status should be displayed");

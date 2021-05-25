@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 public class TC_RRA012 extends BaseClass {
   Logger logger = LoggerFactory.getLogger(TC_RRA012.class);
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description = "Verify that the schedule report option from actions tab")
   public void verifyScheduleReportOption(String clusterId) {
     test = extent.startTest("verifyScheduleReportOption: " + clusterId,
         "Verify schedule report option from actions tab");

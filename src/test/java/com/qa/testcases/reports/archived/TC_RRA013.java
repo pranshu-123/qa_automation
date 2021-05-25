@@ -24,7 +24,7 @@ public class TC_RRA013 extends BaseClass {
 
   Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.archived.TC_RRA013.class);
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description = "Verify that the latest report on selected date range option from actions tab")
   public void TC_RRA013_verifyLatestReportOption(String clusterId) {
     test = extent.startTest("TC_RRA013_verifyLatestReportOption: " + clusterId,
         "Verify latest report on selected date range option from actions tab");

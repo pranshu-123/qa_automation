@@ -31,11 +31,11 @@ public class TC_RRA05 extends BaseClass {
 
   Logger logger = LoggerFactory.getLogger(com.qa.testcases.reports.archived.TC_RRA05.class);
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description = "Verify that the sorting should work fine on Name, Reports and Status tabs")
   public void TC_RRA05_verifyReportArchiveSortingOption(String clusterId) {
     test = extent.startTest("TC_RRA05_verifyReportArchiveSortingOption: " + clusterId,
         "Verify Sorting should work fine on Name, Reports and Status tabs");
-    test.assignCategory(" Report Archive");
+    test.assignCategory("Report Archive");
     Log.startTestCase("TC_RRA05_verifyReportArchiveSortingOption");
 
     // Initialize all classes objects

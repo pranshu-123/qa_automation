@@ -50,8 +50,7 @@ public class Smallfiles {
     public void closeConfirmationMessageNotification() {
         if (smallfilesPageObject.confirmationMessageElementClose.size() > 0) {
             waitExecuter.waitUntilPageFullyLoaded();
-            waitExecuter.waitUntilElementClickable(smallfilesPageObject.confirmationMessageElementClose.get(0));
-            userActions.performActionWithPolling(smallfilesPageObject.confirmationMessageElementClose.get(0), UserAction.CLICK);
+            JavaScriptExecuter.clickOnElement(driver, smallfilesPageObject.confirmationMessageElementClose.get(0));
         }
     }
 
@@ -65,7 +64,7 @@ public class Smallfiles {
     public void clickOnRunButton() {
         try {
             waitExecuter.waitUntilElementPresent(smallfilesPageObject.runButton);
-            userActions.performActionWithPolling(smallfilesPageObject.runButton, UserAction.CLICK);
+            MouseActions.clickOnElement(driver, smallfilesPageObject.runButton);
         } catch (TimeoutException te) {
             userActions.performActionWithPolling(smallfilesPageObject.runButton, UserAction.CLICK);
         }
@@ -76,7 +75,7 @@ public class Smallfiles {
      */
     public void clickOnScheduleButton() {
         try {
-            userActions.performActionWithPolling(smallfilesPageObject.SheduleButton, UserAction.CLICK);
+            MouseActions.clickOnElement(driver,smallfilesPageObject.SheduleButton);
         } catch (TimeoutException te) {
             userActions.performActionWithPolling(smallfilesPageObject.SheduleButton, UserAction.CLICK);
         }
@@ -423,16 +422,16 @@ public class Smallfiles {
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         waitExecuter.waitUntilElementPresent(topPanelComponentPageObject.data);
         waitExecuter.sleep(2000);
-        userActions.performActionWithPolling(topPanelComponentPageObject.data, UserAction.CLICK);
+        MouseActions.clickOnElement(driver,topPanelComponentPageObject.data);
         logger.info("Clicked on Data Tab");
         test.log(LogStatus.INFO, "Clicked on Data Tab");
 
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
         waitExecuter.waitUntilElementPresent(topPanelPageObject.smallFilesTab);
         waitExecuter.waitUntilPageFullyLoaded();
-        userActions.performActionWithPolling(topPanelPageObject.smallFilesTab, UserAction.CLICK);
+        MouseActions.clickOnElement(driver, topPanelPageObject.smallFilesTab);
         waitExecuter.sleep(3000);
-        userActions.performActionWithPolling(topPanelPageObject.smallFilesTab, UserAction.CLICK);
+        MouseActions.clickOnElement(driver, topPanelPageObject.smallFilesTab);
         logger.info("Clicked on small FilesTab Tab");
         test.log(LogStatus.INFO, "Clicked on small FilesTab Tab");
 

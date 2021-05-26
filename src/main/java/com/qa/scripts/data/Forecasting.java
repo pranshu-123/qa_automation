@@ -50,6 +50,7 @@ public class Forecasting {
     }
 
     public void clickOnModalRunButton() {
+        waitExecuter.waitUntilElementPresent(forecastingPageObject.modalRunButton);
         actions.performActionWithPolling(forecastingPageObject.modalRunButton, UserAction.CLICK);
     }
 

@@ -782,12 +782,12 @@ public class ReportsArchiveSchedulePage {
       int expectedAfterCnt = beforeReportCnt + 1;
       int afterReportCnt = 0;
       switch (reportName) {
-        case "File Reports":
+       /* case "File Reports":
           userActions.performActionWithPolling( newReportActionList.get(i), UserAction.CLICK);
           waitExecuter.sleep(1000);
           String bannerMsg = reportPageObj.reportCreationNotSup.getText().trim();
           logger.info("Msg = " + bannerMsg + " for Report = " + reportName + " with status = " + status);
-          break;
+          break;*/
         case "Small Files Report":
           userActions.performActionWithPolling(newReportActionList.get(i), UserAction.CLICK);
           waitExecuter.sleep(1000);
@@ -821,8 +821,8 @@ public class ReportsArchiveSchedulePage {
               MouseActions.clickOnElement(driver, chkboxList.get(c));
             else
               MouseActions.clickOnElement(driver, chkboxList.get(c));
-            userActions.performActionWithPolling( reportPageObj.tagListFields, UserAction.CLICK);
-            userActions.performActionWithPolling( reportPageObj.topXFieldValue, UserAction.CLICK);
+            userActions.performActionWithPolling(reportPageObj.tagListFields, UserAction.CLICK);
+            userActions.performActionWithPolling(reportPageObj.topXFieldValue, UserAction.CLICK);
             waitExecuter.sleep(1000);
           }
           userActions.performActionWithPolling(reportPageObj.reportCreationRunButton, UserAction.CLICK);
@@ -840,7 +840,7 @@ public class ReportsArchiveSchedulePage {
           waitExecuter.sleep(5000);
           waitExecuter.waitUntilPageFullyLoaded();
           userActions.performActionWithPolling(reportPageObj.cloudMappingChkBox, UserAction.CLICK);
-          waitExecuter.sleep(1000);
+          waitExecuter.sleep(10000);
           userActions.performActionWithPolling(reportPageObj.reportCreationRunButton, UserAction.CLICK);
           waitExecuter.sleep(4000);
           waitExecuter.waitUntilPageFullyLoaded();
@@ -887,12 +887,14 @@ public class ReportsArchiveSchedulePage {
           waitExecuter.waitUntilElementClickable(reportPageObj.reportSearchBox);
           afterReportCnt = Integer.parseInt(reportCntList.get(i).getText().trim());
           logger.info("Before cnt = " + beforeReportCnt + " After cnt = " + afterReportCnt);
+          switch (reportName) {
+            case "File Reports":
+          }
+          Assert.assertEquals(expectedAfterCnt, afterReportCnt, " The report cnt do not match for report Name = " +
+                  reportName + " with status = " + status + " \n Expected = " + expectedAfterCnt + " Actual = " + afterReportCnt);
       }
-      Assert.assertEquals(expectedAfterCnt, afterReportCnt, " The report cnt do not match for report Name = " +
-          reportName + " with status = " + status + " \n Expected = " + expectedAfterCnt + " Actual = " + afterReportCnt);
     }
   }
-
   /**
    * Method to validate schedule reports option from actions tab
    */

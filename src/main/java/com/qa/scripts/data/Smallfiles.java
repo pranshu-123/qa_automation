@@ -140,7 +140,7 @@ public class Smallfiles {
                         Assert.assertFalse(reportTblRows.isEmpty(), "No reports archived.");
                         break;
                     case "downloadReport":
-                        userActions.performActionWithPolling( reportCntList.get(i), UserAction.CLICK);
+                        MouseActions.clickOnElement(driver,reportCntList.get(i));
                         waitExecuter.waitUntilPageFullyLoaded();
                         waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
                         waitExecuter.waitUntilPageFullyLoaded();
@@ -151,7 +151,7 @@ public class Smallfiles {
                                 " No downloaded successfully message received.");
                         break;
                     case "deleteReport":
-                        userActions.performActionWithPolling( reportCntList.get(i), UserAction.CLICK);
+                        MouseActions.clickOnElement(driver,reportCntList.get(i));
                         waitExecuter.waitUntilPageFullyLoaded();
                         waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
                         userActions.performActionWithPolling( smallfilesPageObject.deleteReportIcon, UserAction.CLICK);
@@ -168,7 +168,7 @@ public class Smallfiles {
                         MouseActions.clickOnElement(driver,smallfilesPageObject.archives);
                         break;
                     case "viewReport":
-                        userActions.performActionWithPolling( reportCntList.get(i), UserAction.CLICK);
+                        MouseActions.clickOnElement(driver,reportCntList.get(i));
                         waitExecuter.waitUntilPageFullyLoaded();
                         waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
                         userActions.performActionWithPolling(smallfilesPageObject.viewReportIcon, UserAction.CLICK);
@@ -179,7 +179,7 @@ public class Smallfiles {
                         waitExecuter.waitUntilPageFullyLoaded();
                         break;
                     case "searchReportByDate":
-                        userActions.performActionWithPolling( reportCntList.get(i), UserAction.CLICK);
+                        MouseActions.clickOnElement(driver,reportCntList.get(i));
                         waitExecuter.waitUntilPageFullyLoaded();
                         waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
                         String dateFromElement = smallfilesPageObject.archiveReportDate.getText().trim();
@@ -194,7 +194,7 @@ public class Smallfiles {
                         logger.info("Search report by date: " + date);
                         break;
                     case "searchReportByStatus":
-                        userActions.performActionWithPolling( reportCntList.get(i), UserAction.CLICK);
+                        MouseActions.clickOnElement(driver,reportCntList.get(i));
                         waitExecuter.waitUntilPageFullyLoaded();
                         waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
                         String status = "fail";
@@ -207,7 +207,7 @@ public class Smallfiles {
                         logger.info("Searched report for status as: " + status);
                         break;
                     case "searchReportByName":
-                        userActions.performActionWithPolling( reportCntList.get(i), UserAction.CLICK);
+                        MouseActions.clickOnElement(driver,reportCntList.get(i));
                         waitExecuter.waitUntilPageFullyLoaded();
                         waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
                         //Give any name which shows in the UI
@@ -406,7 +406,7 @@ public class Smallfiles {
      */
     public void clickOnadvancedOptions() {
         try {
-            userActions.performActionWithPolling(smallfilesPageObject.advancedOptions, UserAction.CLICK);
+            MouseActions.clickOnElement(driver,smallfilesPageObject.advancedOptions);
         } catch (TimeoutException te) {
             userActions.performActionWithPolling(smallfilesPageObject.advancedOptions, UserAction.CLICK);
         }

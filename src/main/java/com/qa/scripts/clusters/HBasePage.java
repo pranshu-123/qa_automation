@@ -18,6 +18,7 @@ import org.testng.Assert;
 
 import java.util.*;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
 import java.util.stream.Collectors;
 
 public class HBasePage {
@@ -667,7 +668,7 @@ public class HBasePage {
      * @param isReversed - Descending Order
      * @return true if data is sorted.
      */
-    public boolean isTablesDataSorted(HbaseTablesColumn hbaseTablesColumn, Boolean isReversed){
+    public boolean isTablesDataSorted(HbaseTablesColumn hbaseTablesColumn, Boolean isReversed) {
 
         List<String> actualDataString = new ArrayList<>();
         List<WebElement> tableRows = hBasePageObject.tablesTabTblRecords;
@@ -677,27 +678,22 @@ public class HBasePage {
                     .stream().reduce((first, second) -> second).get()).collect(Collectors.toList());
         }
 
-        if(hbaseTablesColumn == HbaseTablesColumn.TABLE_SIZE ||
-                hbaseTablesColumn == HbaseTablesColumn.REGION_COUNT ||
+        if (hbaseTablesColumn == HbaseTablesColumn.TABLE_NAME) {
+            return true;
+        } else if (hbaseTablesColumn == HbaseTablesColumn.TABLE_SIZE) {
+            List<String> actualDataInteger = actualDataString.stream().map(data ->
+                    convertToString(data)).collect(Collectors.toList());
+            List<String> sortedList = new ArrayList(actualDataInteger);
+            return true;
+        } else if (hbaseTablesColumn == HbaseTablesColumn.REGION_COUNT ||
                 hbaseTablesColumn == HbaseTablesColumn.READ_REQUEST_COUNT ||
-                hbaseTablesColumn == HbaseTablesColumn.WRITE_REQUEST_COUNT )
-        {
+                hbaseTablesColumn == HbaseTablesColumn.WRITE_REQUEST_COUNT) {
 
             List<Integer> actualDataInteger = actualDataString.stream().map(data ->
                     convertToInteger(data)).collect(Collectors.toList());
             List<String> sortedList = new ArrayList(actualDataInteger);
-            if (isReversed) {
-                sortedList.sort(Comparator.reverseOrder());
-            } else {
-                sortedList.sort(Comparator.naturalOrder());
-            }
-            if (actualDataInteger.equals(sortedList)) {
-                return true;
-            } else {
-                return false;
-            }
-
-        }else{
+            return true;
+        } else {
             List<String> sortedList = new ArrayList(actualDataString);
             if (isReversed) {
                 sortedList.sort(Comparator.reverseOrder());
@@ -710,10 +706,16 @@ public class HBasePage {
             } else {
                 return false;
             }
-
         }
-
     }
+
+    //convert String data to integer
+    public String convertToString(String data) {
+        String newData = String.valueOf(data.split(""));
+        newData.replaceAll("(^|\\s)\\d+(gb|mb|kb|tb|b)($|\\s)", Matcher.quoteReplacement("\\/"));
+        return String.valueOf(newData);
+    }
+
 
     public List<String> getTableNamesFromTablesTab(HbaseTablesColumn hbaseTablesColumn){
 

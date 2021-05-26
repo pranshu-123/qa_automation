@@ -396,9 +396,8 @@ public class CloudMigrationPerHostPage {
                         if (!loaderElement.get(0).isDisplayed()) {
                             return;
                         }
-                    } catch (IndexOutOfBoundsException outOfBoundsException) {
-
-                    }
+                    } catch (IndexOutOfBoundsException outOfBoundsException) {}
+                    catch (NullPointerException npe) {}
                 } else if (end.isBefore(clock.instant())) {
                     throw new TimeoutException("Page is not loaded. Loader is still running");
                 }
@@ -415,6 +414,7 @@ public class CloudMigrationPerHostPage {
      */
     public void selectCloudProduct(CloudProduct cloudProduct) {
         userAction.performActionWithPolling(cmpPageObj.cloudProductServiceDropdownIcon, UserAction.CLICK);
+        waitExecuter.sleep(2000);
         List<WebElement> cloudProDD = cmpPageObj.dropDownValues;
         for (WebElement cloudItem : cloudProDD) {
             if (cloudItem.getText().trim().equalsIgnoreCase(cloudProduct.getValue())) {
@@ -525,7 +525,8 @@ public class CloudMigrationPerHostPage {
      * Check uncheck table
      */
     public void checkUncheckColumn(Boolean uncheck) {
-        WebElement tableHeadings = cmpPageObj.tableHeadings;
+        waitExecuter.waitUntilElementPresent(cmpPageObj.modalTableHeadings);
+        WebElement tableHeadings = cmpPageObj.modalTableHeadings;
         WebElement rowCheckbox =
                 tableHeadings.findElement(By.xpath("th[" + (MigrationCloudMappingModalTable.CHECKBOX.getIndex() + 1) +
                         "]")).findElement(By.xpath("label/span[@class='checkmark']"));
@@ -545,7 +546,7 @@ public class CloudMigrationPerHostPage {
      */
     public List<WebElement> getCheckboxListForTable() {
         List<WebElement> checkboxList = new ArrayList<>();
-        List<WebElement> tableRows = cmpPageObj.tableRows;
+        List<WebElement> tableRows = cmpPageObj.modalTableRows;
         for (WebElement row : tableRows) {
             WebElement rowCheckbox = row.findElement(By.xpath("td[" + (MigrationCloudMappingModalTable.CHECKBOX.getIndex() + 1) +
                     "]")).findElement(By.xpath("label/span[@class='checkmark']"));
@@ -557,9 +558,8 @@ public class CloudMigrationPerHostPage {
     /**
      * Return the list of custom costs
      */
-    public List<WebElement> getCustomCosts() {
+    public List<WebElement> getCustomCosts(List<WebElement> tableRows) {
         List<WebElement> checkboxList = new ArrayList<>();
-        List<WebElement> tableRows = cmpPageObj.tableRows;
         for (WebElement row : tableRows) {
             WebElement rowCustomCost =
                     row.findElement(By.xpath("td[" + (MigrationCloudMappingModalTable.CUSTOM_COST.getIndex() + 1) +
@@ -575,7 +575,8 @@ public class CloudMigrationPerHostPage {
      * @param value - value to set
      */
     public void setCustomCost(WebElement element, String value) {
-        element.sendKeys(value);
+        WebElement customCostInput = element.findElement(By.tagName("input"));
+        userAction.performActionWithPolling(customCostInput, UserAction.SEND_KEYS, value);
     }
 
     /**
@@ -705,9 +706,9 @@ public class CloudMigrationPerHostPage {
     public Map<String, List> getInstanceValuesFromModalTable(boolean isForAllInstances) {
         Map<String, List> allInstances = new HashMap();
         int pageCount = isForAllInstances ? getPageCnt(2) : 1;
-        for (int i = 1; i < pageCount; i++) {
+        for (int i = 0; i < pageCount; i++) {
             userAction.performActionWithPolling(cmpPageObj.forwardCaret, UserAction.CLICK);
-            List<WebElement> tableRows = cmpPageObj.tableRows;
+            List<WebElement> tableRows = cmpPageObj.modalTableRows;
             for (WebElement row : tableRows) {
                 List instanceDetails = new ArrayList();
                 Arrays.asList(MigrationCloudMappingModalTable.CORES, MigrationCloudMappingModalTable.MEMORY,

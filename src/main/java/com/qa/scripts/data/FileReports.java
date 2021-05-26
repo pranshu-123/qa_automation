@@ -123,15 +123,20 @@ public class FileReports {
                 Assert.assertTrue(rowData.isDisplayed(), "No data under column: File " +
                         " for " + fileType + " file type");
                 String fileCnt = rowData.getText().trim();
-                fileCnt.replaceAll("(^|\\s)\\d+(gb|mb|kb|tb|b)($|\\s)", Matcher.quoteReplacement("\\/"));
+                fileCnt.replaceAll("(^|\\s)\\d+(gb|mb|kb|tb|b)($|\\s)", Matcher.quoteReplacement("/"));
                 Assert.assertTrue(rowData.isDisplayed(), "No data under column: File " +
                         " for " + fileType + " file type");
                 LOGGER.info("The path count is " + fileCnt);
                 expectedFileCnt.add(fileCnt);
             }
-        } catch (org.openqa.selenium.NoSuchElementException ex) {
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+            LOGGER.info("Data not present in the table" + e);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
             WebElement noData = fileReportsPageObject.noDataText;
             Assert.assertFalse(noData.isDisplayed(), "Data not present in the table got {'" + noData.getText() + "}' message");
+
         }
         return expectedFileCnt;
     }
@@ -225,6 +230,7 @@ public class FileReports {
         Assert.assertTrue(newExpectedFileCnt.equals(ascendingFileCntArr) ||
                 newExpectedFileCnt.equals(descendingFileCntArr), "The expected array do not match");
     }
+
 
     public ArrayList<Integer> getFileCnt(List<WebElement> tableRowList, String fileType, int tdValue) {
         ArrayList<Integer> expectedFileCnt = new ArrayList<>();

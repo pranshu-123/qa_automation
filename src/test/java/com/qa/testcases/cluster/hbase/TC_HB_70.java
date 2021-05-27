@@ -45,7 +45,6 @@ public class TC_HB_70 extends BaseClass {
         LOGGER.info("HBase clusters found are: "+ hBaseClusters);
         Assert.assertFalse(hBaseClusters.isEmpty(), "HBase clusters not available");
 
-        boolean flag = false;
         for (String clusterName : hBaseClusters) {
             if (clusterName.contains("HDP")) {
                 LOGGER.info("Verified Multicluster setup with one HDP cluster."+clusterName);

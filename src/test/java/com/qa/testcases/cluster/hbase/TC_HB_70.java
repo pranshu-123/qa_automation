@@ -48,7 +48,6 @@ public class TC_HB_70 extends BaseClass {
         boolean flag = false;
         for (String clusterName : hBaseClusters) {
             if (clusterName.contains("HDP")) {
-                Assert.assertTrue(true, "Multicluster setup with HDP cluster not found.");
                 LOGGER.info("Verified Multicluster setup with one HDP cluster."+clusterName);
                 waitExecuter.waitUntilElementClickable(hBasePageObject.hBaseClusterDropDown);
                 MouseActions.clickOnElement(driver, hBasePageObject.hBaseClusterDropDown);

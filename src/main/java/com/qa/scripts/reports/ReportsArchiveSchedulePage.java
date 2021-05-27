@@ -949,6 +949,7 @@ public class ReportsArchiveSchedulePage {
         waitExecuter.waitUntilElementClickable(reportPageObj.reportSearchBox);
         userActions.performActionWithPolling(reportPageObj.downloadReportIcon, UserAction.CLICK);
         waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilElementClickable(reportPageObj.successfulMsgBanner);
         Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Downloaded successfully",
             " No downloaded successfully message received.");
         userActions.performActionWithPolling(reportPageObj.viewReportIcon, UserAction.CLICK);
@@ -957,14 +958,13 @@ public class ReportsArchiveSchedulePage {
         userActions.performActionWithPolling(reportPageObj.closeTab, UserAction.CLICK);
         waitExecuter.waitUntilPageFullyLoaded();
         userActions.performActionWithPolling(reportPageObj.deleteReportIcon, UserAction.CLICK);
-       /* MouseActions.clickOnElement(driver, reportPageObj.deleteReportIcon);*/
         waitExecuter.waitUntilElementPresent(reportPageObj.deletePopText);
         String popText = reportPageObj.deletePopText.getText();
         waitExecuter.waitUntilPageFullyLoaded();
         logger.info("Alert text is " + popText);
         waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.waitUntilElementPresent(reportPageObj.deleteOkBtn);
-        userActions.performActionWithPolling(reportPageObj.deleteOkBtn, UserAction.CLICK);
+        MouseActions.clickOnElement(driver,reportPageObj.deleteOkBtn);
+        waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.sleep(3000);
         Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Removed successfully",
             " Report not removed");

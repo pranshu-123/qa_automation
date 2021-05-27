@@ -98,7 +98,7 @@ public class DatePicker {
     public void selectLastTwoHour() {
         waitExecuter.waitUntilElementPresent(datePickerPageObject.lastTwoHour);
         userActions.performActionWithPolling(datePickerPageObject.lastTwoHour, UserAction.CLICK);
-        waitExecuter.waitUntilElementClickable(datePickerPageObject.dateRange);
+
 
     }
 

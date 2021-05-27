@@ -114,8 +114,6 @@ public class Smallfiles {
                 "The Schedule success " + "message mismatch");
     }
 
-
-
     /**
      * Method to validate report, download, delete, view report from actions tab
      */
@@ -133,9 +131,10 @@ public class Smallfiles {
                 switch (reportAction) {
                     case "checkReport":
                         logger.info("Checking report");
-                        userActions.performActionWithPolling( reportCntList.get(i), UserAction.CLICK);
+                        MouseActions.clickOnElement(driver,reportCntList.get(i));
                         waitExecuter.waitUntilPageFullyLoaded();
                         waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
+                        waitExecuter.waitUntilPageFullyLoaded();
                         List<WebElement> reportTblRows = smallfilesPageObject.tableRows;
                         Assert.assertFalse(reportTblRows.isEmpty(), "No reports archived.");
                         break;
@@ -144,7 +143,8 @@ public class Smallfiles {
                         waitExecuter.waitUntilPageFullyLoaded();
                         waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
                         waitExecuter.waitUntilPageFullyLoaded();
-                        userActions.performActionWithPolling(smallfilesPageObject.downloadReportIcon, UserAction.CLICK);
+                        MouseActions.clickOnElement(driver,smallfilesPageObject.downloadReportIcon);
+                        waitExecuter.waitUntilPageFullyLoaded();
                         logger.info("Downloading report");
                         waitExecuter.waitUntilPageFullyLoaded();
                         Assert.assertEquals(smallfilesPageObject.successfulMsgBanner.getText(), "Downloaded successfully",
@@ -154,14 +154,14 @@ public class Smallfiles {
                         MouseActions.clickOnElement(driver,reportCntList.get(i));
                         waitExecuter.waitUntilPageFullyLoaded();
                         waitExecuter.waitUntilElementPresent(smallfilesPageObject.archiveReportSVCHeader);
-                        userActions.performActionWithPolling( smallfilesPageObject.deleteReportIcon, UserAction.CLICK);
+                        MouseActions.clickOnElement(driver,smallfilesPageObject.deleteReportIcon);
                         waitExecuter.waitUntilElementPresent(smallfilesPageObject.deletePopText);
                         String popText = smallfilesPageObject.deletePopText.getText();
                         //String alertText = confirmationAlert.getText();
                         logger.info("Alert text is " + popText);
                         //confirmationAlert.accept();
                         waitExecuter.waitUntilElementPresent(smallfilesPageObject.deleteOkBtn);
-                        userActions.performActionWithPolling(smallfilesPageObject.deleteOkBtn, UserAction.CLICK);
+                        MouseActions.clickOnElement(driver,smallfilesPageObject.deleteOkBtn);
                         logger.info("Deleted report");
                         Assert.assertEquals(smallfilesPageObject.successfulMsgBanner.getText(), "Removed successfully",
                                 " Report not removed");

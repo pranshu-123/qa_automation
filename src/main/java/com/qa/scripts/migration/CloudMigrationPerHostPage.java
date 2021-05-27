@@ -513,7 +513,7 @@ public class CloudMigrationPerHostPage {
      */
     public List<String> getColumnValuesFromModalTable(MigrationCloudMappingModalTable column) {
         List<String> columnValues = new ArrayList<>();
-        List<WebElement> tableRows = cmpPageObj.tableRows;
+        List<WebElement> tableRows = cmpPageObj.modalTableRows;
         for (WebElement row : tableRows) {
             String colValue = row.findElement(By.xpath("td[" + (column.getIndex() + 1) + "]")).getText();
             columnValues.add(colValue);

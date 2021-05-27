@@ -65,7 +65,7 @@ public class TC_CF_01 extends BaseClass {
 
         waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.waitUntilTextNotToBeInWebElement(forecastingPageObject.modalAfterRunButton, "Please Wait");
-
+        waitExecuter.waitUntilPageFullyLoaded();
         try {
             waitExecuter.waitUntilTextToBeInWebElement(forecastingPageObject.confirmationMessageElement,
                     "Capacity Forecasting completed successfully.");

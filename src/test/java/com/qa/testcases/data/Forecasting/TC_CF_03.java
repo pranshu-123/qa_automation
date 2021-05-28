@@ -78,11 +78,14 @@ public class TC_CF_03 extends BaseClass {
             WebElement datePickerElement = datePickerPageObject.dateRangeOptions.get(i);
             String datePickerOption = datePickerElement.getText();
             if (datePickerElement.getText().equalsIgnoreCase("Custom Range")) {
+                waitExecuter.waitUntilPageFullyLoaded();
                 datePickerElement.click();
                 datePicker.setStartDate(DateUtils.getPastDate(20));
                 waitExecuter.waitUntilPageFullyLoaded();
                 datePicker.setEndDate(DateUtils.getCurrentDate());
+                waitExecuter.waitUntilPageFullyLoaded();
                 datePicker.clickOnCustomDateApplyBtn();
+                waitExecuter.waitUntilPageFullyLoaded();
             } else {
                 datePickerElement.click();
             }

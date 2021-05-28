@@ -86,7 +86,7 @@ public class TC_CF_03 extends BaseClass {
                 waitExecuter.waitUntilPageFullyLoaded();
                 datePicker.clickOnCustomDateApplyBtn();
                 waitExecuter.waitUntilPageFullyLoaded();
-            } else {
+            }  else if (datePickerElement.getText().contains("Custom Range")) {
                 waitExecuter.waitUntilPageFullyLoaded();
                 datePickerElement.click();
                 datePicker.setStartDate(DateUtils.getPastDate(20));
@@ -96,6 +96,9 @@ public class TC_CF_03 extends BaseClass {
                 datePicker.clickOnCustomDateApplyBtn();
                 waitExecuter.waitUntilPageFullyLoaded();
             }
+            else{
+                    datePickerElement.click();
+                }
             waitExecuter.waitUntilPageFullyLoaded();
             forecasting.setForecastingDays(forecastingNoOfDays);
             LOGGER.info("Set Forecasting days as: " + forecastingNoOfDays

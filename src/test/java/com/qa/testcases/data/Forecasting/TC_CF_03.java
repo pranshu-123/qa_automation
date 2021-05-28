@@ -80,20 +80,11 @@ public class TC_CF_03 extends BaseClass {
             if (datePickerElement.getText().equalsIgnoreCase("Custom Range")) {
                 waitExecuter.waitUntilPageFullyLoaded();
                 datePickerElement.click();
-                datePicker.setStartDate(DateUtils.getPastDate(20));
-                waitExecuter.waitUntilPageFullyLoaded();
-                datePicker.setEndDate(DateUtils.getCurrentDate());
-                waitExecuter.waitUntilPageFullyLoaded();
+                datePicker.setCurrentAndPastDate(-30);
+                waitExecuter.sleep(1000);
+                // Click on apply button of Cluster
                 datePicker.clickOnCustomDateApplyBtn();
-                waitExecuter.waitUntilPageFullyLoaded();
-            }  else if (datePickerElement.getText().contains("Custom Range")) {
-                waitExecuter.waitUntilPageFullyLoaded();
-                datePickerElement.click();
-                datePicker.setStartDate(DateUtils.getPastDate(20));
-                waitExecuter.waitUntilPageFullyLoaded();
-                datePicker.setEndDate(DateUtils.getCurrentDate());
-                waitExecuter.waitUntilPageFullyLoaded();
-                datePicker.clickOnCustomDateApplyBtn();
+                waitExecuter.sleep(1000);
                 waitExecuter.waitUntilPageFullyLoaded();
             }
             else{

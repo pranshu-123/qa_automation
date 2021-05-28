@@ -802,6 +802,8 @@ public class CloudMigrationPerHostPage {
                 (List) recommendedUsages.stream().filter(data -> data instanceof Map).map(data -> ((Map) data)
                         .get(CloudMappingHostConstants.HostDetails.RecommendedUsages.TYPE)).collect(Collectors.toList());
 
+        waitTillLoaderPresent();
+
         List capacityUsages = getDataFromCloudMappingTable(
                 MigrationCloudMappingHostDetailsTable.CAPACITY);
         List<Map.Entry> cheapestInstances = getCheapestInstance(capacityUsages, instanceValuesFromModalTable);

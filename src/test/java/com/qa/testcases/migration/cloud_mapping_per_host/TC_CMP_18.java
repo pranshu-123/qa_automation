@@ -34,7 +34,8 @@ public class TC_CMP_18 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         LOGGER.info("Navigate to migration host page", test);
         cloudMigrationPerHostPage.navigateToCloudMappingPerHost();
-
+        waitExecuter.waitUntilPageFullyLoaded();
+        cloudMigrationPerHostPage.waitTillLoaderPresent();
         LOGGER.info("Click on Run button", test);
         cloudMigrationPerHostPage.clickOnRunButton();
         cloudMigrationPerHostPage.waitTillLoaderPresent();

@@ -191,7 +191,6 @@ public class FileReports {
         List<WebElement> tableRowList = fileReportsPageObject.fileTableRows;
         ArrayList<String> expectedFileCntArr = new ArrayList<>(),
                 ascendingFileCntArr, descendingFileCntArr;
-        //WebElement fileCol = driver.findElement(By.xpath("//tbody/tr/td[" + colValue + "]"));
         WebElement fileCol = driver.findElement(By.xpath("//table/thead/tr/th[" + colValue + "]"));
         int rowCnt = tableRowList.size();
         if (rowCnt < 10) {
@@ -220,8 +219,6 @@ public class FileReports {
         LOGGER.info("Ascending Sort fileCnt is " + ascendingFileCntArr + "\n" +
                 "Descending Sort fileCnt is " + descendingFileCntArr + "\n");
     }
-
-
     public ArrayList<Integer> getFileCnt(List<WebElement> tableRowList, String fileType, int tdValue) {
         ArrayList<Integer> expectedFileCnt = new ArrayList<>();
         try {

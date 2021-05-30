@@ -217,6 +217,8 @@ public class FileReports {
         descendingFileCntArr = getAllFileCnt(tableRowList, fileType, tdValue);
         Assert.assertEquals(ascendingFileCntArr.size(), descendingFileCntArr.size(), " Ascending sort and Descending sort" +
                 " array size do not match");
+        LOGGER.info("Ascending Sort fileCnt is " + ascendingFileCntArr + "\n" +
+                "Descending Sort fileCnt is " + descendingFileCntArr + "\n");
     }
 
 

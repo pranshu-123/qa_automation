@@ -12,10 +12,12 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
+import java.util.stream.Collectors;
 
 public class FileReports {
 
@@ -141,7 +143,6 @@ public class FileReports {
         return expectedFileCnt;
     }
 
-
     public void checkTableContainsData(int tablesRows, int tableCells) {
         String expectedMsg = "No data to display.";
         List<WebElement> tableRows = fileReportsPageObject.fileTableRows;
@@ -161,23 +162,23 @@ public class FileReports {
         List<WebElement> tableRows = fileReportsPageObject.fileTableRows;
         String searchString = "";
         checkTableContainsData(tablesRows, tableCells);
-        List<WebElement> rows = fileReportsPageObject.rowData.findElements(By.xpath("/tr[" + tablesRows + "]/td[" + tableCells + "]"));
-        for (WebElement row : rows) {
-            Assert.assertTrue(row.isDisplayed(), "No data under column: " + tableHeaderList.get(1).getText() +
-                    " for ");
-            searchString = row.getText();
-            LOGGER.info("The search string is " + searchString);
-            fileReportsPageObject.searchField.sendKeys(searchString);
-            waitExecuter.waitUntilPageFullyLoaded();
-            List<WebElement> cols = row.findElements(By.xpath("/tr[" + row + "]/td[" + tableCells + "]"));
-            for (WebElement col : cols) {
-                Assert.assertTrue(col.isDisplayed(), "No data under column: File " +
-                        " for ");
-                LOGGER.info("Search String is " + searchString + " Search result is " + col.getText());
-                Assert.assertTrue(col.getText().contains(searchString), "The search result for " +
-                        " file type donot contain the search string\n Expected '" + searchString + "' to be present in '"
-                        + col.getText() + "' search result");
-            }
+        WebElement rowData = driver.findElement(
+                By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + tablesRows + "]/td[" + tableCells + "]"));
+        Assert.assertTrue(rowData.isDisplayed(), "No data under column: " + tableHeaderList.get(1).getText() +
+                " for " + fileType + " file type");
+        searchString = rowData.getText();
+        LOGGER.info("The search string is " + searchString);
+        fileReportsPageObject.searchField.sendKeys(searchString);
+        waitExecuter.waitUntilPageFullyLoaded();
+        for (int row = 1; row <= tableRows.size(); row++) {
+            WebElement searchRowData = driver.findElement
+                    (By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + row + "]/td[" + tableCells + "]"));
+            Assert.assertTrue(searchRowData.isDisplayed(), "No data under column: File " +
+                    " for " + fileType + " file type");
+            LOGGER.info("Search String is " + searchString + " Search result is " + searchRowData.getText());
+            Assert.assertTrue(searchRowData.getText().contains(searchString), "The search result for " + fileType + "" +
+                    " file type donot contain the search string\n Expected '" + searchString + "' to be present in '"
+                    + searchRowData.getText() + "' search result");
         }
     }
 

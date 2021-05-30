@@ -95,10 +95,9 @@ public class FileReports {
                 List<WebElement> tableRows = fileReportsPageObject.fileTableRows;
                 for (int row = 1; row <= tableRows.size(); row++) {
                     for (int col = 1; col <= tableHeaderList.size(); col++) {
-                        WebElement rowData = driver.findElement
-                                (By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + row + "]/td[" + col + "]"));
+                        WebElement rowData = fileReportsPageObject.rowData.findElement(By.xpath("tr[" + row + "]/td[" + col + "]"));
                         String fileCnt = rowData.getText().trim();
-                        fileCnt.replaceAll("(^|\\s)\\d+(gb|mb)($|\\s)", Matcher.quoteReplacement("\\/"));
+                        fileCnt.replaceAll("(^|\\s)\\d+(gb|mb|kb|tb|b)($|\\s)", Matcher.quoteReplacement("\\/"));
                         LOGGER.info("The path count is " + fileCnt);
                         Assert.assertTrue(rowData.isDisplayed(), "No data under column: " + tableHeaderList.get(col).getText() +
                                 " for " + fileType + " file type");
@@ -115,13 +114,11 @@ public class FileReports {
 
         }
     }
-
     public ArrayList<String> getAllFileCnt(List<WebElement> tableRowList, String fileType, int tdValue) {
         ArrayList<String> expectedFileCnt = new ArrayList<>();
         try {
             for (int row = 1; row <= tableRowList.size(); row++) {
-                WebElement rowData = driver.findElement
-                        (By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + row + "]/td[" + tdValue + "]"));
+                WebElement rowData =fileReportsPageObject.rowData.findElement(By.xpath("tr[" + row + "]/td[" + tdValue + "]"));
                 Assert.assertTrue(rowData.isDisplayed(), "No data under column: File " +
                         " for " + fileType + " file type");
                 String fileCnt = rowData.getText().trim();
@@ -147,8 +144,7 @@ public class FileReports {
         String expectedMsg = "No data to display.";
         List<WebElement> tableRows = fileReportsPageObject.fileTableRows;
         Assert.assertFalse(tableRows.isEmpty(), "Table contains no data");
-        WebElement rowData = driver.findElement(By.xpath("//table[@class='component-data-tables row-hover']/tbody/" +
-                "tr[" + tablesRows + "]/td[" + tableCells + "]"));
+        WebElement rowData = fileReportsPageObject.rowData.findElement(By.xpath("tr[" + tablesRows + "]/td[" + tableCells + "]"));
         String rowDataStr = rowData.getText();
         Assert.assertFalse(rowDataStr.contains(expectedMsg), "Table contains no data. Got '" + expectedMsg + "' message");
     }
@@ -162,8 +158,7 @@ public class FileReports {
         List<WebElement> tableRows = fileReportsPageObject.fileTableRows;
         String searchString = "";
         checkTableContainsData(tablesRows, tableCells);
-        WebElement rowData = driver.findElement(
-                By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + tablesRows + "]/td[" + tableCells + "]"));
+        WebElement rowData = fileReportsPageObject.rowData.findElement(By.xpath("tr[" + tablesRows + "]/td[" + tableCells + "]"));
         Assert.assertTrue(rowData.isDisplayed(), "No data under column: " + tableHeaderList.get(1).getText() +
                 " for " + fileType + " file type");
         searchString = rowData.getText();
@@ -171,8 +166,7 @@ public class FileReports {
         fileReportsPageObject.searchField.sendKeys(searchString);
         waitExecuter.waitUntilPageFullyLoaded();
         for (int row = 1; row <= tableRows.size(); row++) {
-            WebElement searchRowData = driver.findElement
-                    (By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + row + "]/td[" + tableCells + "]"));
+            WebElement searchRowData = fileReportsPageObject.rowData.findElement(By.xpath("tr[" + row + "]/td[" + tableCells + "]"));
             Assert.assertTrue(searchRowData.isDisplayed(), "No data under column: File " +
                     " for " + fileType + " file type");
             LOGGER.info("Search String is " + searchString + " Search result is " + searchRowData.getText());
@@ -190,7 +184,7 @@ public class FileReports {
         List<WebElement> tableRowList = fileReportsPageObject.fileTableRows;
         ArrayList<String> expectedFileCntArr = new ArrayList<>(),
                 ascendingFileCntArr, descendingFileCntArr;
-        WebElement fileCol = driver.findElement(By.xpath("//table/thead/tr/th[" + colValue + "]"));
+        WebElement fileCol =fileReportsPageObject.colData.findElement(By.xpath("th[" + colValue + "]"));
         int rowCnt = tableRowList.size();
         if (rowCnt < 10) {
             expectedFileCntArr = getAllFileCnt(tableRowList, fileType, tdValue);
@@ -222,8 +216,7 @@ public class FileReports {
         ArrayList<Integer> expectedFileCnt = new ArrayList<>();
         try {
             for (int row = 1; row <= tableRowList.size(); row++) {
-                WebElement rowData = driver.findElement
-                        (By.xpath("//table[@class='component-data-tables row-hover']/tbody/tr[" + row + "]/td[" + tdValue + "]"));
+                WebElement rowData = fileReportsPageObject.rowData.findElement(By.xpath("tr[" + row + "]/td[" + tdValue + "]"));
                 Assert.assertTrue(rowData.isDisplayed(), "No data under column: File " +
                         " for " + fileType + " file type");
                 int fileCnt = Integer.parseInt(rowData.getText().trim());
@@ -244,7 +237,7 @@ public class FileReports {
         selectOnlySingleCluster(clusterID);
         List<WebElement> tableRowList = fileReportsPageObject.fileTableRows;
         ArrayList<Integer> expectedFileCntArr = new ArrayList<>(), ascendingFileCntArr, descendingFileCntArr;
-        WebElement fileCol = driver.findElement(By.xpath("//table/thead/tr/th[" + colValue + "]"));
+        WebElement fileCol = fileReportsPageObject.colData.findElement(By.xpath("th[" + colValue + "]"));
         int rowCnt = tableRowList.size();
         if (rowCnt < 10) {
             expectedFileCntArr = getFileCnt(tableRowList, fileType, tdValue);

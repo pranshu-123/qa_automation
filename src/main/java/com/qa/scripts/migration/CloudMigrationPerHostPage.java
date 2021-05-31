@@ -707,8 +707,6 @@ public class CloudMigrationPerHostPage {
         Map<String, List> allInstances = new HashMap();
         int pageCount = isForAllInstances ? getPageCnt(2) : 1;
         for (int i = 0; i < pageCount; i++) {
-            if (i < pageCount -1 )
-                userAction.performActionWithPolling(cmpPageObj.forwardCaret, UserAction.CLICK);
             List<WebElement> tableRows = cmpPageObj.modalTableRows;
             for (WebElement row : tableRows) {
                 List instanceDetails = new ArrayList();
@@ -726,6 +724,8 @@ public class CloudMigrationPerHostPage {
                         });
                 allInstances.put(row.findElement(By.xpath("td[" + (MigrationCloudMappingModalTable.VM_TYPE.getIndex() + 1) + "]")).getText(), instanceDetails);
             }
+            if (i < pageCount -1 )
+                userAction.performActionWithPolling(cmpPageObj.forwardCaret, UserAction.CLICK);
         }
         return allInstances;
     }

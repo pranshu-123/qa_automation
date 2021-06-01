@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -122,11 +123,9 @@ public class FileReports {
                 Assert.assertTrue(rowData.isDisplayed(), "No data under column: File " +
                         " for " + fileType + " file type");
                 String fileCnt = rowData.getText().trim();
-                fileCnt.replaceAll("(^|\\s)\\d+(gb|mb|kb|tb|b)($|\\s)", Matcher.quoteReplacement("/"));
-                Assert.assertTrue(rowData.isDisplayed(), "No data under column: File " +
-                        " for " + fileType + " file type");
+                String file= fileCnt.replaceAll("[^|\\s)\\d+(KB|MB|TB|B)($|\\s]", Matcher.quoteReplacement("/"));
                 LOGGER.info("The path count is " + fileCnt);
-                expectedFileCnt.add(fileCnt);
+                expectedFileCnt.add(file);
             }
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
@@ -138,6 +137,13 @@ public class FileReports {
 
         }
         return expectedFileCnt;
+    }
+
+    public static String fileSize(long size) {
+        if(size <= 0) return "0";
+        final String[] units = new String[] { "B", "kB", "MB", "GB", "TB" };
+        int digitGroups = (int) (Math.log10(size)/Math.log10(1024));
+        return new DecimalFormat("#,##0.#").format(size/Math.pow(1024, digitGroups)) + " " + units[digitGroups];
     }
 
     public void checkTableContainsData(int tablesRows, int tableCells) {
@@ -209,8 +215,18 @@ public class FileReports {
         descendingFileCntArr = getAllFileCnt(tableRowList, fileType, tdValue);
         Assert.assertEquals(ascendingFileCntArr.size(), descendingFileCntArr.size(), " Ascending sort and Descending sort" +
                 " array size do not match");
+        Collections.sort(expectedFileCntArr);
+        ArrayList<String> newExpectedFileCnt = new ArrayList<>();
+        LOGGER.info("The size of ascending arr is " + ascendingFileCntArr.size() +
+                " expectedArr is " + expectedFileCntArr.size());
+        for (int i = 0; i < ascendingFileCntArr.size(); i++) {
+            newExpectedFileCnt.add(expectedFileCntArr.get(i));
+        }
         LOGGER.info("Ascending Sort fileCnt is " + ascendingFileCntArr + "\n" +
-                "Descending Sort fileCnt is " + descendingFileCntArr + "\n");
+                "Descending Sort fileCnt is " + descendingFileCntArr + "\n" +
+                "Expected Sort fileCnt is " + newExpectedFileCnt);
+        Assert.assertTrue(newExpectedFileCnt.equals(ascendingFileCntArr) ||
+                newExpectedFileCnt.equals(descendingFileCntArr), "The expected array do not match");
     }
     public ArrayList<Integer> getFileCnt(List<WebElement> tableRowList, String fileType, int tdValue) {
         ArrayList<Integer> expectedFileCnt = new ArrayList<>();

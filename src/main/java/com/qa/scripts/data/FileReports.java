@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class FileReports {
@@ -123,8 +124,8 @@ public class FileReports {
                 Assert.assertTrue(rowData.isDisplayed(), "No data under column: File " +
                         " for " + fileType + " file type");
                 String fileCnt = rowData.getText().trim();
-                String file= fileCnt.replaceAll("[^|\\s)\\d+(KB|MB|TB|B)($|\\s]", Matcher.quoteReplacement("/"));
-                LOGGER.info("The path count is " + fileCnt);
+                String file= fileCnt.replaceAll("(^|\\\\s)\\\\d+(MB|KB|B)($|\\\\s)", "");
+                LOGGER.info("The path count is " + file);
                 expectedFileCnt.add(file);
             }
         } catch (IndexOutOfBoundsException e) {
@@ -139,11 +140,30 @@ public class FileReports {
         return expectedFileCnt;
     }
 
-    public static String fileSize(long size) {
-        if(size <= 0) return "0";
-        final String[] units = new String[] { "B", "kB", "MB", "GB", "TB" };
-        int digitGroups = (int) (Math.log10(size)/Math.log10(1024));
-        return new DecimalFormat("#,##0.#").format(size/Math.pow(1024, digitGroups)) + " " + units[digitGroups];
+    public static String sizeValue(long size) {
+        String sizeFormat= null;
+
+        double b = size;
+        double k = size/1024.0;
+        double m = ((size/1024.0)/1024.0);
+        double g = (((size/1024.0)/1024.0)/1024.0);
+        double t = ((((size/1024.0)/1024.0)/1024.0)/1024.0);
+
+        DecimalFormat dec = new DecimalFormat("0.00");
+
+        if ( t>1 ) {
+            sizeFormat = dec.format(t).concat(" TB");
+        } else if ( g>1 ) {
+            sizeFormat = dec.format(g).concat(" GB");
+        } else if ( m>1 ) {
+            sizeFormat = dec.format(m).concat(" MB");
+        } else if ( k>1 ) {
+            sizeFormat = dec.format(k).concat(" KB");
+        } else {
+            sizeFormat = dec.format(b).concat(" Bytes");
+        }
+
+        return sizeFormat;
     }
 
     public void checkTableContainsData(int tablesRows, int tableCells) {
@@ -219,15 +239,13 @@ public class FileReports {
         ArrayList<String> newExpectedFileCnt = new ArrayList<>();
         LOGGER.info("The size of ascending arr is " + ascendingFileCntArr.size() +
                 " expectedArr is " + expectedFileCntArr.size());
-        for (int i = 0; i < ascendingFileCntArr.size(); i++) {
-            newExpectedFileCnt.add(expectedFileCntArr.get(i));
-        }
         LOGGER.info("Ascending Sort fileCnt is " + ascendingFileCntArr + "\n" +
                 "Descending Sort fileCnt is " + descendingFileCntArr + "\n" +
                 "Expected Sort fileCnt is " + newExpectedFileCnt);
-        Assert.assertTrue(newExpectedFileCnt.equals(ascendingFileCntArr) ||
-                newExpectedFileCnt.equals(descendingFileCntArr), "The expected array do not match");
     }
+
+
+
     public ArrayList<Integer> getFileCnt(List<WebElement> tableRowList, String fileType, int tdValue) {
         ArrayList<Integer> expectedFileCnt = new ArrayList<>();
         try {

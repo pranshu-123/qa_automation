@@ -535,6 +535,7 @@ public class CloudMigrationPerHostPage {
                 userAction.performActionWithPolling(rowCheckbox, UserAction.CLICK);
             }
         } else {
+            userAction.performActionWithPolling(rowCheckbox, UserAction.CLICK);
             while (cmpPageObj.activeCheckBoxes.size() == 0) {
                 userAction.performActionWithPolling(rowCheckbox, UserAction.CLICK);
             }
@@ -733,8 +734,8 @@ public class CloudMigrationPerHostPage {
     public Map.Entry<String, List> getCheapestBasedOnCapacity(Map<String, List> allInstances, Double cores, Double memory) {
         allInstances =
                 allInstances.entrySet().stream().filter(kv -> (Double.parseDouble(kv.getValue().get(0).toString()) >= cores) &&
-                        (Double.parseDouble(kv.getValue().get(1).toString()) > memory)).sorted(Comparator.comparing(e -> Double.valueOf(e.getValue().get(3).toString())))
-                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+                    (Double.parseDouble(kv.getValue().get(1).toString()) > memory)).sorted(Comparator.comparing(e -> Double.valueOf(e.getValue().get(3).toString())))
+                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
         ;
         Map.Entry<String, List> entry = allInstances.entrySet().iterator().next();
         return entry;
@@ -757,7 +758,6 @@ public class CloudMigrationPerHostPage {
 
     /**
      * Convert memory values into MB
-     *
      * @param memory - memory values
      * @return - String memory in MB
      */
@@ -792,7 +792,7 @@ public class CloudMigrationPerHostPage {
             Assert.assertTrue(false, "Cloud Mapping Per Host is not completed");
         }
         waitTillLoaderPresent();
-        waitExecuter.sleep(10000);
+        waitExecuter.sleep(30000);
 
         LOGGER.info("Validate recommended for lift and shift.", test);
 

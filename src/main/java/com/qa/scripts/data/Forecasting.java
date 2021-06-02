@@ -61,9 +61,10 @@ public class Forecasting {
 
     public void clickOnCancelButton(){
         try{
-            MouseActions.clickOnElement(driver, forecastingPageObject.modalCancelButton);
+            actions.performActionWithPolling(forecastingPageObject.modalCancelButton, UserAction.CLICK);
+
         }catch (TimeoutException te) {
-            MouseActions.clickOnElement(driver, forecastingPageObject.modalCancelButton);
+            actions.performActionWithPolling(forecastingPageObject.modalCancelButton, UserAction.CLICK);
         }
     }
 
@@ -75,7 +76,7 @@ public class Forecasting {
     }
 
     public void clickOnHistoryDateRange(){
-        MouseActions.clickOnElement(driver, forecastingPageObject.historyDateRangeDropDown);
+        actions.performActionWithPolling(forecastingPageObject.historyDateRangeDropDown, UserAction.CLICK);
     }
 
     public List<String> getAllHistoryRanges(){

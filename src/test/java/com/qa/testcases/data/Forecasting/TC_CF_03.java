@@ -78,14 +78,18 @@ public class TC_CF_03 extends BaseClass {
             WebElement datePickerElement = datePickerPageObject.dateRangeOptions.get(i);
             String datePickerOption = datePickerElement.getText();
             if (datePickerElement.getText().equalsIgnoreCase("Custom Range")) {
-                datePickerElement.click();
-                datePicker.setStartDate(DateUtils.getPastDate(20));
                 waitExecuter.waitUntilPageFullyLoaded();
-                datePicker.setEndDate(DateUtils.getCurrentDate());
-                datePicker.clickOnCustomDateApplyBtn();
-            } else {
                 datePickerElement.click();
+                datePicker.setCurrentAndPastDate(-30);
+                waitExecuter.sleep(1000);
+                // Click on apply button of Cluster
+                datePicker.clickOnCustomDateApplyBtn();
+                waitExecuter.sleep(1000);
+                waitExecuter.waitUntilPageFullyLoaded();
             }
+            else{
+                    datePickerElement.click();
+                }
             waitExecuter.waitUntilPageFullyLoaded();
             forecasting.setForecastingDays(forecastingNoOfDays);
             LOGGER.info("Set Forecasting days as: " + forecastingNoOfDays

@@ -12,10 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -120,50 +117,46 @@ public class FileReports {
         ArrayList<String> expectedFileCnt = new ArrayList<>();
         try {
             for (int row = 1; row <= tableRowList.size(); row++) {
-                WebElement rowData =fileReportsPageObject.rowData.findElement(By.xpath("tr[" + row + "]/td[" + tdValue + "]"));
+                WebElement rowData = fileReportsPageObject.rowData.findElement(By.xpath("tr[" + row + "]/td[" + tdValue + "]"));
                 Assert.assertTrue(rowData.isDisplayed(), "No data under column: File " +
                         " for " + fileType + " file type");
                 String fileCnt = rowData.getText().trim();
-                String file= fileCnt.replaceAll("(^|\\\\s)\\\\d+(MB|KB|B)($|\\\\s)", "");
+                String file = fileCnt.replaceAll("(^|\\s)\\d+(gb|mb|kb|tb|b)($|\\s)", Matcher.quoteReplacement("/"));
+                Assert.assertTrue(rowData.isDisplayed(), "No data under column: File " +
+                        " for " + fileType + " file type");
                 LOGGER.info("The path count is " + file);
-                expectedFileCnt.add(file);
+                Pattern validSizePattern = Pattern.compile("(\\d+)([KMGT])B");
+                String[] expectedFile = {"12MB", "3KB", "1TB", "3GB"};
+                HashMap<String, Long> map = new HashMap<String, Long>();
+                for (int i = 0; i < expectedFile.length; i++) {
+                    Matcher matcher = validSizePattern.matcher(expectedFile[i]);
+                    matcher.find();
+                    long size = Long.valueOf(matcher.group(1));
+                    LOGGER.info("The size count is " + size);
+                    LOGGER.info("matcher.group(2)" + matcher.group(2));
+                    switch (matcher.group(2)) {
+                        case "K":
+                            size *= 1024;
+                            break;
+                        case "M":
+                            size *= (1024 * 1024);
+                            break;
+                        case "G":
+                            size *= (1024 * 1024 * 1024);
+                            break;
+                        case "T":
+                            size *= (1024L * 1024L * 1024L * 1024L);
+                            break;
+                    }
+                    LOGGER.info("The size count is " + size);
+                    map.put(expectedFile[i], size);
+                }
+                LOGGER.info("The map count is " + map);
             }
-        } catch (IndexOutOfBoundsException e) {
+        } catch (NumberFormatException e) {
             e.printStackTrace();
-            LOGGER.info("Data not present in the table" + e);
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-            WebElement noData = fileReportsPageObject.noDataText;
-            Assert.assertFalse(noData.isDisplayed(), "Data not present in the table got {'" + noData.getText() + "}' message");
-
         }
         return expectedFileCnt;
-    }
-
-    public static String sizeValue(long size) {
-        String sizeFormat= null;
-
-        double b = size;
-        double k = size/1024.0;
-        double m = ((size/1024.0)/1024.0);
-        double g = (((size/1024.0)/1024.0)/1024.0);
-        double t = ((((size/1024.0)/1024.0)/1024.0)/1024.0);
-
-        DecimalFormat dec = new DecimalFormat("0.00");
-
-        if ( t>1 ) {
-            sizeFormat = dec.format(t).concat(" TB");
-        } else if ( g>1 ) {
-            sizeFormat = dec.format(g).concat(" GB");
-        } else if ( m>1 ) {
-            sizeFormat = dec.format(m).concat(" MB");
-        } else if ( k>1 ) {
-            sizeFormat = dec.format(k).concat(" KB");
-        } else {
-            sizeFormat = dec.format(b).concat(" Bytes");
-        }
-
-        return sizeFormat;
     }
 
     public void checkTableContainsData(int tablesRows, int tableCells) {
@@ -239,9 +232,14 @@ public class FileReports {
         ArrayList<String> newExpectedFileCnt = new ArrayList<>();
         LOGGER.info("The size of ascending arr is " + ascendingFileCntArr.size() +
                 " expectedArr is " + expectedFileCntArr.size());
+        for (int i = 0; i < ascendingFileCntArr.size(); i++) {
+            newExpectedFileCnt.add(expectedFileCntArr.get(i));
+        }
         LOGGER.info("Ascending Sort fileCnt is " + ascendingFileCntArr + "\n" +
                 "Descending Sort fileCnt is " + descendingFileCntArr + "\n" +
                 "Expected Sort fileCnt is " + newExpectedFileCnt);
+        Assert.assertTrue(newExpectedFileCnt.equals(ascendingFileCntArr) ||
+                newExpectedFileCnt.equals(descendingFileCntArr), "The expected array do not match");
     }
 
 

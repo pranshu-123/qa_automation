@@ -8,13 +8,11 @@ import com.qa.enums.migration.MigrationCloudMappingHostDetailsTable;
 import com.qa.scripts.migration.CloudMigrationPerHostPage;
 import com.qa.utils.LoggingUtils;
 import com.qa.utils.WaitExecuter;
+import org.javatuples.Pair;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -53,26 +51,47 @@ public class TC_CMP_86 extends BaseClass {
         LOGGER.pass("Instance Details is matching", test);
 
         List<Integer> coresInSummary =
-                cloudMigrationPerHostPage.getSummaryReportDetails(InstanceSummaryTableColumn.CORES).stream().map(data -> Integer.parseInt(data)).sorted().collect(Collectors.toList());
-        Collections.sort(coresInSummary);
-        Set coresInRecommended =
-                (Set) recommendedUsages.stream().filter(data -> data instanceof Map).map(data -> (int) Double.parseDouble(((Map) data)
-                        .get(CloudMappingHostConstants.HostDetails.RecommendedUsages.CORES).toString())).collect(Collectors.toSet());
-        List coresInRecommendedList =
-                (List) coresInRecommended.stream().collect(Collectors.toList());
-        Collections.sort(coresInRecommendedList);
-        Assert.assertEquals(coresInSummary, coresInRecommendedList, "Cores is not matching");
+                cloudMigrationPerHostPage.getSummaryReportDetails(InstanceSummaryTableColumn.CORES).stream().map(data -> Integer.parseInt(data)).collect(Collectors.toList());
+        instanceInSummary =
+                cloudMigrationPerHostPage.getSummaryReportDetails(InstanceSummaryTableColumn.INSTANCE).stream().collect(Collectors.toList());
+        Map<String, Integer> hostSummary = new HashMap<>();
+        for (int i=0; i<coresInSummary.size(); i++) {
+            hostSummary.put(instanceInSummary.get(i), coresInSummary.get(i));
+        }
+
+        List coresInRecommended =
+                (List) recommendedUsages.stream().filter(data -> data instanceof Map).map(data -> Pair.with(
+                        ((Map) data).get(CloudMappingHostConstants.HostDetails.RecommendedUsages.TYPE).toString(),
+                        (int) Double.parseDouble(((Map) data)
+                        .get(CloudMappingHostConstants.HostDetails.RecommendedUsages.CORES).toString()))).collect(Collectors.toList());
+
+        for (Object typeCore : coresInRecommended) {
+            Assert.assertEquals(hostSummary.get(((Pair) typeCore).getValue0()), ((Pair) typeCore).getValue1(),
+                    "Incorrect value is displayed of cores value in summary vs recommendation for host: " + ((Pair) typeCore).getValue0());
+        }
         LOGGER.pass("Cores Details is matching", test);
 
-        List<String> memoryInSummary =
-                cloudMigrationPerHostPage.getSummaryReportDetails(InstanceSummaryTableColumn.MEMORY);
-        Collections.sort(memoryInSummary);
-        Set memoryInRecommended =
-                (Set) recommendedUsages.stream().filter(data -> data instanceof Map).map(data -> ((Map) data)
-                        .get(CloudMappingHostConstants.HostDetails.RecommendedUsages.MEMORY)).collect(Collectors.toSet());
-        List memoryInRecommendedList = (List) memoryInRecommended.stream().collect(Collectors.toList());
-        Collections.sort(memoryInRecommendedList);
-        Assert.assertEquals(memoryInSummary, memoryInRecommendedList, "Memory is not matching");
+        List<Double> memoryInSummary =
+            cloudMigrationPerHostPage.getSummaryReportDetails(InstanceSummaryTableColumn.MEMORY).stream()
+            .map(memory -> cloudMigrationPerHostPage.convertMemoryToMB(memory)).collect(Collectors.toList());
+
+
+        List<Pair> memoryInRecommended =
+            (List) recommendedUsages.stream().filter(data -> data instanceof Map).map(data -> Pair.with(
+                ((Map) data).get(CloudMappingHostConstants.HostDetails.RecommendedUsages.TYPE).toString(),
+                (int) cloudMigrationPerHostPage.convertMemoryToMB(((Map) data)
+                    .get(CloudMappingHostConstants.HostDetails.RecommendedUsages.MEMORY).toString()).doubleValue())).collect(Collectors.toList());
+
+        hostSummary.clear();
+        for (int i=0; i<coresInSummary.size(); i++) {
+            hostSummary.put(instanceInSummary.get(i), (int) memoryInSummary.get(i).doubleValue());
+        }
+
+        for (Object typeCore : memoryInRecommended) {
+            Assert.assertEquals(hostSummary.get(((Pair) typeCore).getValue0()), ((Pair) typeCore).getValue1(),
+                "Incorrect value is displayed of cores value in summary vs recommendation for host: " + ((Pair) typeCore).getValue0());
+        }
+
         LOGGER.pass("Memory Details is matching", test);
     }
 }

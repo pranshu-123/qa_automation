@@ -52,7 +52,7 @@ public class TC_CMP_83 extends BaseClass {
         cloudMigrationPerHostPage.waitTillLoaderPresent();
         waitExecuter.sleep(10000);
 
-        Assert.assertNotEquals(cloudMigrationPerHostPage.getCloudProductAndServicesOnReportPage(),
+        Assert.assertEquals(cloudMigrationPerHostPage.getCloudProductAndServicesOnReportPage(),
             CloudProduct.GOOGLE_COMPUTE_ENGINE.getValue());
         LOGGER.pass("Correct cloud product and services displayed.", test);
     }

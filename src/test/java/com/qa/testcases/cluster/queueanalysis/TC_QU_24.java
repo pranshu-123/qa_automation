@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class TC_QU_24 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_QU_24.class.getName());
 
-    @Test
+    @Test(description = "P1-Validate user is able to generate report with special chars in report name")
     public void validateSpecialCharsInName() {
         test = extent.startTest("TC_QU_24.validateSpecialCharsInName",
                 "Validate user is able to generate report with special chars in report name");
@@ -51,7 +51,7 @@ public class TC_QU_24 extends BaseClass {
         queueAnalysis.clickOnModalScheduleButton();
         LOGGER.info("Clicked on modal Schedule Button");
         test.log(LogStatus.INFO, "Clicked on modal Schedule Button");
-        String scheduleSuccessMsg = "The report has been scheduled successfully.";
+        String scheduleSuccessMsg = "the report has been scheduled successfully.";
         queueAnalysis.verifyScheduleSuccessMsg(scheduleSuccessMsg);
         test.log(LogStatus.PASS, "Verified schedule with multi email for daily.");
     }

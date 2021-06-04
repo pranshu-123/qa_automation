@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class TC_QU_23 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_QU_23.class.getName());
 
-    @Test
+    @Test(description = "P1-In Queue Analysis reports validate multiple emails for every month schedule ")
     public void validateMultiEmailEveryMonth() {
         test = extent.startTest("TC_QU_23.validateMultiEmailEveryMonth", "Validate multiple emails with Every Month schedule");
         test.assignCategory("Jobs - Queue Analysis");
@@ -50,7 +50,7 @@ public class TC_QU_23 extends BaseClass {
         queueAnalysis.clickOnModalScheduleButton();
         LOGGER.info("Clicked on modal Schedule Button");
         test.log(LogStatus.INFO, "Clicked on modal Schedule Button");
-        String scheduleSuccessMsg = "The report has been scheduled successfully.";
+        String scheduleSuccessMsg = "the report has been scheduled successfully.";
         queueAnalysis.verifyScheduleSuccessMsg(scheduleSuccessMsg);
         test.log(LogStatus.PASS, "Verified schedule with multi email for daily.");
     }

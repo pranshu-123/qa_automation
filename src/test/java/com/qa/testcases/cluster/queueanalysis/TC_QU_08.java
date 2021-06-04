@@ -6,6 +6,7 @@ import com.qa.pagefactory.clusters.QueueAnalysisPageObject;
 import com.qa.scripts.clusters.QueueAnalysis;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -33,29 +34,48 @@ public class TC_QU_08 extends BaseClass {
         test.log(LogStatus.INFO, "Clicked on Queue Analysis tab");
         test.log(LogStatus.INFO, "Validate Queue Analysis tab loaded successfully");
         queueAnalysis.navigateToQueueAnalysis();
-        // Close confirmation message box and search the queue
-        test.log(LogStatus.INFO, "Close confirmation message box and search the queue");
-        LOGGER.info("Close confirmation message box and search the queue");
-        queueAnalysis.closeConfirmationMessageNotification();
+        waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
+        qaPageObject.addIcon.click();
+        waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
         waitExecuter.sleep(1000);
-        // Sort down by queue name
-        test.log(LogStatus.INFO, "Sort down by queue name");
-        LOGGER.info("Sort down by queue name");
-        qaPageObject.sortByQueueName.click();
-        waitExecuter.sleep(1000);
-        Assert.assertTrue(qaPageObject.sortDown.isDisplayed(), "Sort down is not working");
-        // Sort up by queue name
-        test.log(LogStatus.INFO, "Sort down up queue name");
-        LOGGER.info("Sort down up queue name");
-        qaPageObject.sortByQueueName.click();
-        waitExecuter.sleep(1000);
-        Assert.assertTrue(qaPageObject.sortUp.isDisplayed(), "Sort up is not working");
-        test.log(LogStatus.PASS, "Verified sorting on queue name.");
+        //Click on Run button of modal window
+        test.log(LogStatus.INFO, "Click on Run button of modal window");
+        LOGGER.info("Click on Run button of modal window");
+        waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
+        qaPageObject.modalRunButton.click();
+        waitExecuter.waitUntilTextNotToBeInWebElement(qaPageObject.footerWaitCycle, "Please Wait");
+        waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
+        try {
+            waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.successBanner,
+                    "SUCCESS");
+            waitExecuter.waitUntilElementClickable(qaPageObject.clickOnQAReports);
+            qaPageObject.clickOnQAReports.click();
+            waitExecuter.waitUntilElementClickable(qaPageObject.select1stQAReport);
+            qaPageObject.select1stQAReport.click();
+            waitExecuter.waitUntilElementClickable(qaPageObject.queueSearchBox);
+            // Sort down by queue name
+            test.log(LogStatus.INFO, "Sort down by queue name");
+            LOGGER.info("Sort down by queue name");
+            waitExecuter.waitUntilElementClickable(qaPageObject.sortByQueueName);
+            qaPageObject.sortByQueueName.click();
+            waitExecuter.sleep(1000);
+            Assert.assertTrue(qaPageObject.sortDown.isDisplayed(), "Sort down is not working");
+            // Sort up by queue name
+            test.log(LogStatus.INFO, "Sort down up queue name");
+            LOGGER.info("Sort down up queue name");
+            waitExecuter.waitUntilElementClickable(qaPageObject.sortByQueueName);
+            qaPageObject.sortByQueueName.click();
+            waitExecuter.sleep(1000);
+            Assert.assertTrue(qaPageObject.sortUp.isDisplayed(), "Sort up is not working");
+            test.log(LogStatus.PASS, "Verified sorting on queue name.");
+        } catch (TimeoutException te) {
+            throw new AssertionError("Queue Analysis Report not completed successfully.");
+        }
         //Refresh the page and reload to original state
         test.log(LogStatus.INFO, "Refresh the page and reload to original state");
         LOGGER.info("Refresh the page and reload to original state");
         waitExecuter.sleep(1000);
         driver.navigate().refresh();
-        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
     }
 }

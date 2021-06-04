@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class TC_QU_49 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_QU_49.class.getName());
 
-    @Test
+    @Test(description = "P1-Validate message on providing invalid input in schedule report")
     public void validateInvalidInputMessage() {
         test = extent.startTest("TC_QU_49.validateInvalidInputMessage",
                 "Validate message on providing invalid input in schedule report");

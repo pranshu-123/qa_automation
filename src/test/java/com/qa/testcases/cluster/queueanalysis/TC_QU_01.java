@@ -39,7 +39,6 @@ public class TC_QU_01 extends BaseClass {
         waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
         qaPageObject.addIcon.click();
         waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
-        //qaPageObject.modalRunButton.click();
         waitExecuter.sleep(1000);
         //Select ClusterId
         test.log(LogStatus.INFO, "Selecting ClusterId: " + clusterId);
@@ -50,8 +49,7 @@ public class TC_QU_01 extends BaseClass {
         LOGGER.info("Click on Run button of modal window");
         waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
         qaPageObject.modalRunButton.click();
-        waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.pleaseWaitTimer,"Please Wait");
-        //waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.pleaseWaitBanner,"Please wait while the report is being generated.");
+        waitExecuter.waitUntilTextNotToBeInWebElement(qaPageObject.footerWaitCycle,"Please Wait");
         waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
         try {
             waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.successBanner,

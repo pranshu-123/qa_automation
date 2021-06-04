@@ -812,7 +812,6 @@ public class ReportsArchiveSchedulePage {
           for (int f = 0; f < fieldsList.size(); f++) {
             userActions.performActionWithPolling(fieldsList.get(f), UserAction.CLICK);
             userActions.performActionWithPolling(reportPageObj.topXFieldValue, UserAction.CLICK);
-            /*MouseActions.clickOnElement(driver, reportPageObj.topXFieldValue);*/
             waitExecuter.sleep(1000);
           }
           List<WebElement> chkboxList = reportPageObj.checkBoxSelections;
@@ -949,6 +948,7 @@ public class ReportsArchiveSchedulePage {
         waitExecuter.waitUntilElementClickable(reportPageObj.reportSearchBox);
         userActions.performActionWithPolling(reportPageObj.downloadReportIcon, UserAction.CLICK);
         waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.sleep(2000);
         waitExecuter.waitUntilElementClickable(reportPageObj.successfulMsgBanner);
         Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Downloaded successfully",
             " No downloaded successfully message received.");
@@ -958,19 +958,19 @@ public class ReportsArchiveSchedulePage {
         userActions.performActionWithPolling(reportPageObj.closeTab, UserAction.CLICK);
         waitExecuter.waitUntilPageFullyLoaded();
         userActions.performActionWithPolling(reportPageObj.deleteReportIcon, UserAction.CLICK);
-        waitExecuter.waitUntilElementPresent(reportPageObj.deletePopText);
+        waitExecuter.waitUntilPageFullyLoaded();
         String popText = reportPageObj.deletePopText.getText();
         waitExecuter.waitUntilPageFullyLoaded();
         logger.info("Alert text is " + popText);
         waitExecuter.waitUntilPageFullyLoaded();
-        MouseActions.clickOnElement(driver,reportPageObj.deleteOkBtn);
+        userActions.performActionWithPolling(reportPageObj.deleteOkBtn, UserAction.CLICK);
         waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.sleep(3000);
+        waitExecuter.sleep(4000);
         Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Removed successfully",
             " Report not removed");
         userActions.performActionWithPolling(reportPageObj.archives, UserAction.CLICK);
         waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.sleep(5000);
+        waitExecuter.sleep(7000);
         int reportCntAfterDelete = Integer.parseInt(reportCntList.get(i).getText().trim());
         logger.info("Before Delete report count = " + reportCnt + "\n After delete report count is " + reportCntAfterDelete);
         Assert.assertEquals(reportCntAfterDelete, reportCnt - 1, " Report " + reportName + " had " + reportCnt +

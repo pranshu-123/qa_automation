@@ -71,10 +71,10 @@ public class TC_M08 extends BaseClass {
             waitExecuter.sleep(10000);
             test.log(LogStatus.INFO, "Verified Diagnostics Log is loaded properly.");
             waitExecuter.waitUntilElementPresent(managePageObject.latestDiagnosticsContentHeader);
-            waitExecuter.sleep(4000);
+            waitExecuter.sleep(8000);
             Assert.assertTrue(managePageObject.latestDiagnosticsContentHeader.isDisplayed(),"Diagnostics Log " +
                     "content not found.");
-            waitExecuter.sleep(10000);
+            waitExecuter.sleep(9000);
         }catch (Exception e){
             e.printStackTrace();
             test.log(LogStatus.INFO, "Verified Latest Diagnostics Header and Time Stamp not found.");
@@ -86,9 +86,10 @@ public class TC_M08 extends BaseClass {
         test.log(LogStatus.INFO, "Verified Latest Diagnostics Header and Time Stamp.");
         logger.info("Verified Latest Diagnostics Header and Time Stamp.");
 
-        waitExecuter.sleep(2000);
+        waitExecuter.sleep(5000);
         Assert.assertTrue(manage.verifyLoadLatestDiagnosticsContent(), "Unable to load latest " +
                 "Diagnostics contents.");
+        waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.INFO, "Verified Load Latest Diagnostics contents.");
         test.log(LogStatus.PASS, "Verified diagnostics log with time stamp");
         logger.info("Verified diagnostics log with time stamp");

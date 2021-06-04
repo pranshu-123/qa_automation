@@ -32,14 +32,14 @@ public class TC_CMP_84 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         LOGGER.info("Navigate to migration host page", test);
         cloudMigrationPerHostPage.navigateToCloudMappingPerHost();
-
+        cloudMigrationPerHostPage.waitTillLoaderPresent();
         List totalCostUsages = cloudMigrationPerHostPage.getDataFromCloudMappingTable(
                 MigrationCloudMappingHostDetailsTable.TOTAL_COST);
         Double totalCostPerHour =
                 totalCostUsages.stream().mapToDouble(data -> Double.parseDouble(data.toString().replace("$", ""))).sum();
         Double totalHourlyCostValue = cloudMigrationPerHostPage.getTotoalHourlyCostValue();
 
-        Assert.assertEquals(TextUtils.roundNumber(totalCostPerHour, 2), TextUtils.roundNumber(totalHourlyCostValue, 2),
+        Assert.assertEquals(TextUtils.roundNumber(totalCostPerHour, 0), TextUtils.roundNumber(totalHourlyCostValue, 0),
                 "Incorrect hourly is displayed.");
         LOGGER.pass("Proper value is displayed for total hourly cost", test);
     }

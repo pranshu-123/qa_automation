@@ -57,6 +57,12 @@ public class FileReportsPageObject {
   @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody/tr")
   public List<WebElement> fileTableRows;
 
+  @FindBy(xpath = "//table/thead/tr")
+  public WebElement colData;
+
+  @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody")
+  public WebElement rowData;
+
   @FindBy(xpath = "//h3[normalize-space()='No Data Available']")
   public WebElement noDataText;
 

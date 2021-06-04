@@ -121,11 +121,17 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//label[contains(text(),'Cloud Product/Service')]/parent::div//span[contains(@class,'select2-selection__arrow')]")
   public WebElement cloudProductServiceDropdownIcon;
 
-  @FindBy(xpath = "//div[@class='table-container']//tbody/tr")
+  @FindBy(xpath = "(//div[@class='cust-row'])[5]/div/div/div/table[@class='component-data-tables']/tbody/tr")
   public List<WebElement> tableRows;
 
-  @FindBy(xpath = "//div[@class='table-container']//thead/tr")
+  @FindBy(xpath = "(//div[@class='cust-row'])[5]/div/div/div/table[@class='component-data-tables']//thead/tr")
   public WebElement tableHeadings;
+
+  @FindBy(xpath = "//div[@class='table-container']//tbody/tr")
+  public List<WebElement> modalTableRows;
+
+  @FindBy(xpath = "//div[@class='table-container']//thead/tr")
+  public WebElement modalTableHeadings;
 
   @FindBy(xpath = "//label[contains(@class,'checkbox active')]")
   public List<WebElement> activeCheckBoxes;
@@ -133,7 +139,7 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//label[contains(text(),'Storage Type')]/parent::div//span[contains(@class,'select2-selection__rendered')]")
   public WebElement storageTypeDropdown;
 
-  @FindBy(xpath = "(//table[@class='component-data-tables'])[2]/tbody/tr")
+  @FindBy(xpath = "((//table[@class='component-data-tables'])[last()]/tbody/tr)")
   public List<WebElement> cloudMappingHostDetailsTableRows;
 
   @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
@@ -160,10 +166,10 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//div[contains(text(),'Instances Summary')]/parent::div//table[contains(@class,'component-data-tables')]/tbody/tr")
   public List<WebElement> instanceSummaryRows;
 
-  @FindBy(xpath = "//label[contains(text(),'Cloud Product/Service')]/parent::div/span")
+  @FindBy(xpath = "//div[contains(text(),'Cloud Product/Service')]/b")
   public WebElement cloudProductOrServiceValue;
 
-  @FindBy(xpath = "//label[contains(text(),'Region')]/parent::div/span")
+  @FindBy(xpath = "//div[contains(text(),'Region')]/b")
   public WebElement regionDropDownValue;
 
   @FindBy(xpath = "//table[contains(@class,'component-data-tables')]/tbody/tr/td[7]//input[contains(@type,'checkbox')]")

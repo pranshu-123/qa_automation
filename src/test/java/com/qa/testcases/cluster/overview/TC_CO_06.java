@@ -26,7 +26,7 @@ import java.util.List;
 public class TC_CO_06 extends BaseClass {
     private CommonPageObject commonPageObject;
 
-    @Test()
+    @Test(description="")
     public void TC_CO_06_VerifyclusterfilterinUI() {
         test = extent.startTest("TC_CO_06_VerifyclusterfilterinUI" , "Verify cluster filter in UI ");
         test.assignCategory(" Cluster Overview");

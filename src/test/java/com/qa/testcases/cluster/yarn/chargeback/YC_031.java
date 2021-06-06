@@ -16,7 +16,7 @@ public class YC_031 extends BaseClass {
      * Verify Yarn Jobs Table on Yarn chrageback page, should contain the list of yarn jobs and the details
      */
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the yarn jobs table should contain the list of yarn jobs and the details.")
     public void YC_031_verifyYarnJobsTableOnYarnChargeBackPage(String clusterId) {
         test = extent.startTest("YC_031_verifyYarnJobsTableOnYarnChargeBackPage: " + clusterId, "Verify yarn jobs table and the details on Yarn chrageback page.");
         test.assignCategory(" Cluster - Yarn Chargeback");

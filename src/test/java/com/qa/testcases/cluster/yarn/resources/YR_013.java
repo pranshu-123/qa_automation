@@ -26,7 +26,7 @@ public class YR_013 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(YR_013.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that all the graphs should be color-coded with different color")
     public void YR_013_verifyAppsCodedWithDiffColour(String clusterId) {
         test = extent.startTest("YR_013_verifyAppsCodedWithDiffColour: " + clusterId,
                 "All the graphs shown for different apps should be colour coded with different colour.");

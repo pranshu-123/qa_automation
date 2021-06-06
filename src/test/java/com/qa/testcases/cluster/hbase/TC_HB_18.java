@@ -17,7 +17,7 @@ public class TC_HB_18 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_HB_18.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify summary of clusters metrics.")
     public void verifyHBaseClustersMetrics(String clusterId) {
         test = extent.startTest("TC_HB_18.verifyHBaseClustersMetrics",
                 "Verify summary of clusters metrics.");

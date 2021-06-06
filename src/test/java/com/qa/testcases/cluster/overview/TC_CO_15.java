@@ -26,7 +26,7 @@ public class TC_CO_15 extends BaseClass {
     /**
      * Test Case to Verify jobs 'Inefficient events' KPI graph filter
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="")
     public void TC_CO_15_verifyInefficientGraph(String clusterId) {
         WaitExecuter executer = new WaitExecuter(driver);
         executer.sleep(2000);

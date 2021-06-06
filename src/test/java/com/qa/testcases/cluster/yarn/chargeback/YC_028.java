@@ -17,7 +17,7 @@ public class YC_028 extends BaseClass {
     /**
      * Verify Group By Table, Should have mandatory columns[Job count, CPU and Memory Hours] on Yarn chrageback page
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the user must be select the total values for each type of graph.")
     public void YC_028_verifyGroupByTableForMandatoryColumnsOnYarnChargeBackPage(String clusterId) {
         test = extent.startTest("YC_028_verifyGroupByTableForMandatoryColumnsOnYarnChargeBackPage: " + clusterId, "Verify Click on groupby edit field, Yarn chrageback page.");
         test.assignCategory(" Cluster - Yarn Chargeback");

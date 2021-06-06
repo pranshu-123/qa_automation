@@ -24,7 +24,7 @@ public class TC_CO_50 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_CO_50.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="")
     public void validateInefficientEventsGraphDownloadAsPNG(String clusterId) {
 
         test = extent.startTest("TC_CO_50.validateInefficientEventsGraphDownloadAsPNG: " + clusterId,

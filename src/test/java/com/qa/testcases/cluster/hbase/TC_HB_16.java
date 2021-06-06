@@ -20,7 +20,7 @@ public class TC_HB_16 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_HB_16.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the HBase tab in the Unravel UI.")
     public void verifyHBaseTab(String clusterId) {
         test = extent.startTest("TC_HB_16.verifyHBaseTab",
                 "Verify HBase tab in Unravel UI.");

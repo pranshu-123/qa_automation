@@ -22,7 +22,7 @@ public class YR_017 extends BaseClass {
     /**
      * Verify the cluster Tab should show the list of cluster
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the cluster tab should be shown the list of cluster.")
     public void YR_017_verifyClusterTab(String clusterId) {
         test = extent.startTest("YR_017_verifyclusterTabAndEntries: " + clusterId,
                 "Verify the cluster Tab should show the list of cluster.");

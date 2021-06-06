@@ -18,7 +18,7 @@ public class TC_HB_32 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_HB_32.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify sorting for all region server metrics tab.")
     public void verifySortingOfRegionSvrTableColumnMetrics(String clusterId) {
         test = extent.startTest("TC_HB_32.verifySortingOfRegionSvrTableColumnMetrics",
                 "Verify sorting for all region server metrics tab.");

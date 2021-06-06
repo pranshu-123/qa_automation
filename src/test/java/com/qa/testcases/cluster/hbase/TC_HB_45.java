@@ -22,7 +22,7 @@ public class TC_HB_45 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_HB_45.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify alerts for the regional server on the UI.")
     public void verifyAlertsForRegionSvrUI(String clusterId) {
         test = extent.startTest("TC_HB_45.verifyAlertsForRegionSvrUI",
                 "Verify alerts for region server in UI.");

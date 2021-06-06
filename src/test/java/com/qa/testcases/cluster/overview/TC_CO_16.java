@@ -23,7 +23,7 @@ public class TC_CO_16 extends BaseClass {
     private DatePicker datePicker;
     private Graphs graph;
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="")
     public void TC_CO_16_verifyGraphKPICustomDate(String clusterId) {
         test = extent.startTest("TC_CO_16_verifyGraphKPICustomDate : " + clusterId, "Verify Custom Date KPIs under By Type Graph");
         test.assignCategory(" Cluster Overview");

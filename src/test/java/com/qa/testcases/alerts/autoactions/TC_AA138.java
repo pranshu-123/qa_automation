@@ -15,7 +15,7 @@ public class TC_AA138 extends BaseClass {
 
     private static final Logger logger = Logger.getLogger(TC_AA138.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider",description ="Verify that each function of AA by adding more than 2 RULE SET")
+    @Test(dataProvider = "clusterid-data-provider",description ="P1-Verify that each function of AA by adding more than 2 RULE SET")
     public void validate2RuleSetWithOR(String clusterId) {
         test = extent.startTest("TC_AA138.validate2RuleSetWithOR",
                 "Validate the behaviour of AA by adding more than 2 RULESETS");

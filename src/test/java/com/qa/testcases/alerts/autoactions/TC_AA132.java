@@ -15,7 +15,7 @@ public class TC_AA132 extends BaseClass {
 
     private static final Logger logger = Logger.getLogger(TC_AA132.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider",description="verify the behavior Move to queue without entering queue name")
+    @Test(dataProvider = "clusterid-data-provider",description="P1-verify the behavior Move to queue without entering queue name")
     public void validateMoveAppToQueueActionWithOutQueue(String clusterId) {
         test = extent.startTest("TC_AA132.validateMoveAppToQueueActionWithOutQueue",
                 "Validate behaviour Move to queue without entering queue name");

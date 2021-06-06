@@ -19,7 +19,7 @@ public class TC_HB_56 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_HB_56.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify that all metrics and graphics are in the Region tab.")
     public void verifyMetricsAndGraphRegionTab(String clusterId) {
         test = extent.startTest("TC_HB_56.verifyMetricsAndGraphRegionTab",
                 "Verify All metrics and graphs under region tab.");

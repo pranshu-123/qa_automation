@@ -17,7 +17,7 @@ public class YC_032 extends BaseClass {
      * Verify Yarn Jobs Table on Yarn chrageback page and table should contains all the fields By default :
      */
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the yarn jobs table should contain all the default fields on the yarn chargeback page")
     public void YC_032_verifyYarnJobsTableColumnsOnYarnChargeBackPage(String clusterId) {
         test = extent.startTest("YC_032_verifyYarnJobsTableColumnsOnYarnChargeBackPage: " + clusterId, "Verify yarn jobs table columns on Yarn chrageback page.");
         test.assignCategory(" Cluster - Yarn Chargeback");

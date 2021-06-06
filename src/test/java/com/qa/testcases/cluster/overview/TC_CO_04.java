@@ -20,7 +20,7 @@ public class TC_CO_04 extends BaseClass {
 	private DatePicker datePicker;
 	private static final Logger LOGGER = Logger.getLogger(TC_CO_04.class.getName());
 
-	@Test(dataProvider = "clusterid-data-provider")
+	@Test(dataProvider = "clusterid-data-provider",description="")
 	public void TC_CO_04_verifyCustomRangeForCurrentDate(String clusterId) {
 		test = extent.startTest("TC_CO_04_verifySettingDateInCalendar : "+clusterId, "Verify Custom Date in datepicker calendar ");
 		test.assignCategory(" Cluster Overview");

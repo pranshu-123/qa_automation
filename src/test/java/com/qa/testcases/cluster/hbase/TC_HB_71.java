@@ -22,7 +22,7 @@ public class TC_HB_71  extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_HB_71.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider",description = "Verify Multi cluster setup with one CDH cluster.")
+    @Test(dataProvider = "clusterid-data-provider",description = "P0-Verify Multi cluster setup with one CDH cluster.")
     public void verifyHBaseMultiClusterWithCDH(String clusterId) {
         test = extent.startTest("TC_HB_71.verifyHBaseMultiClusterWithCDH",
                 "Verify Multicluster setup with one CDH cluster.");
@@ -48,11 +48,8 @@ public class TC_HB_71  extends BaseClass {
         LOGGER.info("HBase clusters found are: " + hBaseClusters);
         Assert.assertFalse(hBaseClusters.isEmpty(), "HBase clusters not available");
 
-        boolean flag = false;
         for (String clusterName : hBaseClusters) {
             if (clusterName.contains("HDP")) {
-                flag = false;
-                Assert.assertTrue(true, "Multicluster setup with CDH cluster not found.");
                 LOGGER.info("Verified Multicluster setup with one CDH cluster." + clusterName);
                 waitExecuter.waitUntilElementClickable(hBasePageObject.hBaseClusterDropDown);
                 userActions.performActionWithPolling(hBasePageObject.hBaseClusterDropDown, UserAction.CLICK);
@@ -60,8 +57,6 @@ public class TC_HB_71  extends BaseClass {
                 LOGGER.info("HBase headers found: " + hbase.getHBaseHeader());
                 test.log(LogStatus.PASS, "Verified Multicluster setup with one CDH cluster.");
             } else if (clusterName.contains("CDH")) {
-                flag = false;
-                Assert.assertTrue(true, "Multicluster setup with CDH cluster not found.");
                 LOGGER.info("Verified Multicluster setup with one CDH cluster." + clusterName);
                 waitExecuter.waitUntilElementClickable(hBasePageObject.hBaseClusterDropDown);
                 userActions.performActionWithPolling(hBasePageObject.hBaseClusterDropDown, UserAction.CLICK);

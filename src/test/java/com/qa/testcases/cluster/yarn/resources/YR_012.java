@@ -18,7 +18,7 @@ public class YR_012 extends BaseClass {
     /**
      * Yarn Resource page should Shown Only yarn applications
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the yarn resource page should be shown only yarn applications")
     public void YR_012_verifyYarnResourcePageShowOnlyYarnApp(String clusterId) {
         test = extent.startTest("YR_012_verifyYarnResourcePageShowOnlyYarnApp: " + clusterId,
                 "Yarn Resource page should Shown Only yarn applications.");

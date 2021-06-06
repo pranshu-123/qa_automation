@@ -20,9 +20,9 @@ public class YC_019_020 extends BaseClass {
     /**
      * Verify User is able to access Yarn chargeback page and Verify the cluster functionality
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the user can access the Yarn chargeback page and check the functionality of the cluster.")
     public void YC_019_verifyYarnChargeBackPageAndClustersId(String clusterId) {
-        test = extent.startTest("YC_019_verifyYarnChargeBackPageAndClustersId: "+clusterId,"Verify User is able to access Yarn chrageback page and Verify the cluster functionality.");
+        test = extent.startTest("YC_019_verifyYarnChargeBackPageAndClustersId: "+clusterId,"Verify that the user can access the Yarn chargeback page and check the functionality of the cluster.");
         test.assignCategory(" Cluster - Yarn Chargeback");
 
         HomePage homePage = new HomePage(driver);

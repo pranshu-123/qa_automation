@@ -16,7 +16,7 @@ public class YC_023 extends BaseClass {
     /**
      * Verify Click on Group By editbox field on Yarn chrageback page
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the user clicks on the group by edit field, Yarn chargeback page.")
     public void YC_023_verifyYarnChargeBackPageClickOnGroupBy(String clusterId) {
         test = extent.startTest("YC_023_verifyYarnChargeBackPageClickOnGroupBy: "+clusterId, "Verify Click on groupby edit field, Yarn chrageback page.");
         test.assignCategory(" Cluster - Yarn Chargeback");

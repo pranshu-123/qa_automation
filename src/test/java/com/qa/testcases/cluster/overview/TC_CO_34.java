@@ -24,7 +24,7 @@ public class TC_CO_34 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_CO_34.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="")
     public void ValidateMemoryGraphDownloadAsPDF(String clusterId) {
 
         test = extent.startTest("TC_CO_34.ValidateMemoryGraphDownloadAsPDF: " + clusterId,

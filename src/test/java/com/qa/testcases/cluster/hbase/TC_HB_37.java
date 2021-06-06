@@ -18,7 +18,7 @@ public class TC_HB_37 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_HB_37.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify that the user can view the write request count metrics and graph")
     public void verifyWriteRequestCountAndGraph (String clusterId) {
         test = extent.startTest("TC_HB_37.verifyWriteRequestCountAndGraph",
                 "Verify writeRequestCount metrics and graph.");

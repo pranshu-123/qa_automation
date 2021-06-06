@@ -15,7 +15,7 @@ public class TC_AA131 extends BaseClass {
 
     private static final Logger logger = Logger.getLogger(TC_AA131.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="Verify Post's behavior in Slack without adding any Slack tokens or webhook URLs.")
     public void validatePostToSlackActionWithUrlAndToken(String clusterId) {
         test = extent.startTest("TC_AA131.validatePostToSlackActionWithUrlAndToken",
                 "Validate behaviour Post to slack by adding valid Slack token and webhook URL");

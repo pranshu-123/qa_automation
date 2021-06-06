@@ -16,7 +16,7 @@ public class TC_AA114 extends BaseClass {
 
     private static final Logger logger = Logger.getLogger(TC_AA114.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P1-Verify that the user is capable of selecting all queues, save the automatic action.")
     public void validateAllQueue(String clusterId) {
         test = extent.startTest("TC_AA114.validateAllQueue",
                 "Verify user is able to select all queue's, save the auto action.");

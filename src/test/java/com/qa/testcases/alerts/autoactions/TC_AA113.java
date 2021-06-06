@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 public class TC_AA113 extends BaseClass {
     private static final java.util.logging.Logger logger = Logger.getLogger(TC_AA113.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P1-Verify that the user can select, except for particular users, save the auto action.")
     public void validateExceptAsUser(String clusterId) {
         test = extent.startTest("TC_AA113.validateExceptAsUser",
                 "Verify user is able to select except particular users, save the auto action.");

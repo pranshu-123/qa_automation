@@ -15,7 +15,7 @@ public class TC_AA118  extends BaseClass {
 
     private static final Logger logger = Logger.getLogger(TC_AA118.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="Verify that the user can select only a few clusters, save the auto action.")
     public void validateOnlyCluster(String clusterId) {
         test = extent.startTest("TC_AA118.validateOnlyCluster",
                 "Verify user is able to select only a few cluster, save the auto action.");

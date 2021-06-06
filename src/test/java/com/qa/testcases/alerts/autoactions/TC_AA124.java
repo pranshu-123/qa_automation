@@ -15,7 +15,7 @@ public class TC_AA124 extends BaseClass {
 
     private static final Logger logger = Logger.getLogger(TC_AA124.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="Verify that the user can select a specific TIME interval daily to trigger auto actions when violations occur between that time interval.")
     public void validateSpecificTime(String clusterId) {
         test = extent.startTest("TC_AA124.validateSpecificTime",
                 "Verify user is able to select a specific TIME interval on a daily basis to trigger " +

@@ -15,7 +15,7 @@ public class TC_AA127 extends BaseClass {
 
     private static final Logger logger = Logger.getLogger(TC_AA127.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="Verify select an automatic action (send an e-mail) and verify the behavior when one or more recipients are selected.")
     public void validateOneorMoreEmailAction(String clusterId) {
         test = extent.startTest("TC_AA127.validateOneorMoreEmailAction",
                 "Select one auto action (send email) and verify the behaviour when one/more recipient(s) is(are) selected.");

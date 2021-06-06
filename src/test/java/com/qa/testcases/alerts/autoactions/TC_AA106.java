@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 public class TC_AA106 extends BaseClass {
     private static final java.util.logging.Logger logger = Logger.getLogger(TC_AA106.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P1-Verify that user can set a describing character and save the automatic action.")
     public void validateDescriptionNameAsSingleChars(String clusterId) {
         test = extent.startTest("TC_AA106.validateDescriptionNameAsSingleChars",
                 "Verify user can set a description character and save the auto action.");

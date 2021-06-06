@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 public class TC_AA137 extends BaseClass {
     private static final java.util.logging.Logger logger = Logger.getLogger(TC_AA137.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="Verify that UI to be able to specify which AA triggered an event for a given application.")
     public void validateAllTriggeredAA(String clusterId) {
         test = extent.startTest("TC_AA137.validateAllTriggeredAA",
                 "Validate all triggered AAs in application badge.");

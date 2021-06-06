@@ -15,7 +15,7 @@ public class TC_AA120 extends BaseClass {
 
     private static final Logger logger = Logger.getLogger(TC_AA120.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="Verify that you can select all applications, save the auto action.")
     public void validateAllApplication(String clusterId) {
         test = extent.startTest("TC_AA120.validateAllApplication",
                 "Verify user is able to select all applications, save the auto action.");

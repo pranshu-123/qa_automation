@@ -30,7 +30,7 @@ import java.util.logging.Logger;
 public class TC_AA136 extends BaseClass {
     private static final java.util.logging.Logger logger = Logger.getLogger(TC_AA136.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="Verify the details of the auto alert by hovering over the app button (bell icon).")
     public void validateAutoAlertByHoverAppBadge(String clusterId) {
         test = extent.startTest("TC_AA136.validateAutoAlertByHoverAppBadge",
                 "Validate auto alert detail by hovering over app badge(bell icon).");

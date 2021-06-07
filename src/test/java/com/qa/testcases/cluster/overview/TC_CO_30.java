@@ -23,7 +23,7 @@ public class TC_CO_30 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_CO_30.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider",description="")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the VCores graph should to be 'Download CSV.")
     public void ValidateVCoresGraphDownloadAsCSV(String clusterId) {
 
         test = extent.startTest("TC_CO_30.ValidateVCoresGraphDownloadAsCSV: " + clusterId,

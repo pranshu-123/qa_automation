@@ -25,7 +25,7 @@ import java.util.List;
 @Marker.All
 public class TC_CO_10  extends BaseClass
 {
-    @Test(dataProvider = "clusterid-data-provider",description="")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the cluster VCores KPI graph filter")
     public void TC_CO_10_VerifyclusterVCoresKPIgraphfilter(String clusterId) {
         test = extent.startTest("TC_CO_10_VerifyclusterVCoresKPIgraphfilter"+clusterId, "Verify " +
                 "cluster VCores KPI graph filter");

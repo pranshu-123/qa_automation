@@ -24,7 +24,7 @@ public class TC_CO_54 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_CO_54.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider",description="")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the Inefficient events graph should to be 'Download CSV.")
     public void validateInefficientEventsGraphDownloadAsCSV(String clusterId) {
 
         test = extent.startTest("TC_CO_54.validateInefficientEventsGraphDownloadAsCSV: " + clusterId,

@@ -24,7 +24,7 @@ public class TC_CO_22 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_CO_22.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider",description="")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the  nodes graph should to be 'Download PDF.")
     public void ValidateNodesGraphDownloadAsPDF(String clusterId) {
 
         test = extent.startTest("TC_CO_22.ValidateNodesGraphDownloadAsPDF: " + clusterId,

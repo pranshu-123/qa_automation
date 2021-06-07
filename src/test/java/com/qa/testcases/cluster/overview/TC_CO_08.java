@@ -21,7 +21,7 @@ public class TC_CO_08 extends BaseClass {
 	private DatePicker datePicker;
 	private static final Logger LOGGER = Logger.getLogger(TC_CO_08.class.getName());
 
-	@Test(dataProvider = "clusterid-data-provider",description="")
+	@Test(dataProvider = "clusterid-data-provider",description="P0-Verify cluster details KPI's for a different date or time range")
 	public void TC_CO_08_verifyClusterKPI(String clusterId) {
 		test = extent.startTest("TC_CO_08_verifyClusterKPI : " + clusterId,
 				"Verify KPIs under cluster heading for Custom Date");

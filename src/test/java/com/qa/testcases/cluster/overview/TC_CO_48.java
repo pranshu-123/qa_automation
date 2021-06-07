@@ -24,7 +24,7 @@ public class TC_CO_48 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_CO_48.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider",description="")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the Status graph should to be 'Download CSV.")
     public void validateByStatusGraphDownloadAsCSV(String clusterId) {
 
         test = extent.startTest("TC_CO_48.validateByStatusGraphDownloadAsCSV: " + clusterId,

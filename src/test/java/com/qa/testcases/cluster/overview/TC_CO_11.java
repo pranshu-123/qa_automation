@@ -26,7 +26,7 @@ import java.util.List;
 @Marker.All
 public class TC_CO_11 extends BaseClass {
 
-    @Test(dataProvider = "clusterid-data-provider",description="")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the cluster node's KPI graph should be generated for the selected filters.")
     public void TC_CO_11_verifyMemoryGraph(String clusterId) {
         // Select this month
         test = extent.startTest("TC_CO_11_verifyMemoryGraph: "+clusterId,"Verify cluster Memory KPI graph filter");

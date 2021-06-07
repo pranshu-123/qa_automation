@@ -25,7 +25,7 @@ public class TC_CO_17 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_CO_17.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider",description="")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the new add new auto action or alert")
     public void TC_CO_17_VerifyAlertsFunc(String clusterId) {
         test = extent.startTest("TC_CO_17_VerifyAlertsFunc: "+clusterId, "Verify alerts functionality.");
         test.assignCategory(" Cluster Overview");

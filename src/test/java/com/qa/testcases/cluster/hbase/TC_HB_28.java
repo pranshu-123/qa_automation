@@ -18,7 +18,7 @@ public class TC_HB_28 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_HB_28.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="Verify the user navigate to the regional server UI")
     public void verifyRegionServerUI(String clusterId) {
         test = extent.startTest("TC_HB_28.verifyRegionServerUI",
                 "Navigate to Region Server UI.");

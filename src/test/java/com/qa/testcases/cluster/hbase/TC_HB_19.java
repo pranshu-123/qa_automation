@@ -20,7 +20,7 @@ public class TC_HB_19 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_HB_19.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify all the cluster names are available in the drop-down.")
     public void verifyHBaseAllClusters(String clusterId) {
         test = extent.startTest("TC_HB_19.verifyHBaseAllClusters",
                 "Verify all the cluster names are available in drop down.");

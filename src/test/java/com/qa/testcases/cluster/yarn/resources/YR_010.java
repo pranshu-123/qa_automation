@@ -19,7 +19,7 @@ public class YR_010 extends BaseClass {
     /**
      * Verify if on top left "Group by" tab dropdown must be present, and Should contain feilds,
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0- Verify that the top-left group by tab contains a dropdown and should contain fields")
     public void YR_010_verifyYarnResourcePageForGroupByDropDownAndItFields(String clusterId) {
         test = extent.startTest("YR_010_verifyYarnResourcePageForGroupByDropDownAndItFields: " + clusterId,
                 "Verify if on top left \"Group by\" tab dropdown must be present, and Should contain fields.");

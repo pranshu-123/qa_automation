@@ -21,7 +21,7 @@ import java.io.File;
 @Marker.All
 public class TC_CO_13 extends BaseClass {
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the jobs running the KPI graph should be generated for the selected filters")
     public void TC_CO_13_VerifyJobsRunningKPIGraphFilter(String clusterId) {
         test = extent.startTest("TC_CO_13_VerifyJobsRunningKPIGraphFilter: "+clusterId, "Verify jobs 'running' KPI graph filter.");
         test.assignCategory(" Cluster Overview");

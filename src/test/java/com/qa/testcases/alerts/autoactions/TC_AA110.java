@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 public class TC_AA110 extends BaseClass {
     private static final java.util.logging.Logger logger = Logger.getLogger(TC_AA110.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P1-Verify the user is unable to save an Auto Action Template when no value is entered for the metric.")
     public void validateErrorMessageWithoutValue(String clusterId) {
         test = extent.startTest("TC_AA110.validateErrorMessageWithoutValue",
                 "Verify user is unable to save a auto action template when no value is entered for the metric.");

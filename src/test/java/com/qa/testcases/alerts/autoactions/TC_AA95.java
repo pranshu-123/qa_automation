@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class TC_AA95 extends BaseClass {
     private static final java.util.logging.Logger logger = Logger.getLogger(TC_AA95.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P1-Verify that user can define a name using alphabets and save the automatic action.")
     public void validateNameAsAlphabets(String clusterId) {
         test = extent.startTest("TC_AA95.validateNameAsAlphabets", "Verify user can set " +
                 "a name using alphabets and save the auto action.");

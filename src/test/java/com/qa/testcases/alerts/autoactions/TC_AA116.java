@@ -15,7 +15,7 @@ public class TC_AA116 extends BaseClass {
 
     private static final Logger logger = Logger.getLogger(TC_AA116.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P1-Verify that the user can select a specific queue, save the automatic action.")
     public void validateExceptQueue(String clusterId) {
         test = extent.startTest("TC_AA116.validateExceptQueue",
                 "Verify user is able to select except particular queue's, save the auto action.");

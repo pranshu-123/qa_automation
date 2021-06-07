@@ -18,7 +18,7 @@ public class TC_HB_29 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_HB_29.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify all the metrics and graphs details on the Region server page.")
     public void verifyRegionServerKPIs(String clusterId) {
         test = extent.startTest("TC_HB_29.verifyRegionServerKPIs",
                 "Verify all the metrics and graphs details on Region server page.");

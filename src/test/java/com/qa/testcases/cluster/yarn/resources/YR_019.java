@@ -20,7 +20,7 @@ public class YR_019 extends BaseClass {
     /**
      * Verify 2 sets of graphs are shown In UI with Vcores and Memory
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the two sets of charts should be displayed inside the vcore and memory UI")
     public void YR_019_verifyVcoresAndMemoryGraph(String clusterId) {
         test = extent.startTest("YR_019_verifyVcoresAndMemoryGraph: " + clusterId,
                 "Verify 2 sets of graphs are shown In UI with Vcores and Memory.");

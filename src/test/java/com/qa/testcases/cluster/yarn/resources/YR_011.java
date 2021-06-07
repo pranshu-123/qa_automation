@@ -18,7 +18,7 @@ public class YR_011 extends BaseClass {
     /**
      * Select the application Type in the dropdown (group by)
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the application type should be in the group by dropdown list.")
     public void YR_011_verifyYarnResourcePageAndSelectApplicationType(String clusterId) {
         test = extent.startTest("YR_011_verifyYarnResourcePageAndSelectApplicationType: " + clusterId,
                 "Select the application Type in the dropdown (group by)");

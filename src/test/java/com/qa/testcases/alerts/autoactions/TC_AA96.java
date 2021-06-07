@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class TC_AA96 extends BaseClass {
     private static final java.util.logging.Logger logger = Logger.getLogger(TC_AA96.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P1-Verify that user can define a name with numbers and save the automatic action..")
     public void validateNameAsNumber(String clusterId) {
         test = extent.startTest("TC_AA96.validateNameAsNumber", "Verify user can set " +
                 "a name using numbers and save the auto action.");

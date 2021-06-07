@@ -19,7 +19,7 @@ public class TC_HB_21 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_HB_21.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify tool tip for all cluster metrics tab.")
     public void verifyToolTipsHBaseClusterMetricsTab(String clusterId) {
         test = extent.startTest("TC_HB_21.verifyToolTipsHBaseClusterMetricsTab",
                 "Verify tool tip for all cluster metrics tab.");

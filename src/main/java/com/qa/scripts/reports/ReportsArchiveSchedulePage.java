@@ -189,6 +189,7 @@ public class ReportsArchiveSchedulePage {
         "Capacity Forecasting", "Cloud Mapping Per Host", "Services and Versions Compatibility", "Tuning", "Queue Analysis"};
     for (int i = 0; i < reportNameList.size(); i++) {
       String reportName = reportNameList.get(i).getText().trim();
+      waitExecuter.waitUntilPageFullyLoaded();
       logger.info("The report name is " + reportName);
       Assert.assertTrue(Arrays.asList(expectedReportNames).contains(reportName),
           "The expected report name is not present in the UI.");

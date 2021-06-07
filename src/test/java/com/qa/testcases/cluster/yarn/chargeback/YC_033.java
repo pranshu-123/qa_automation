@@ -20,7 +20,7 @@ public class YC_033 extends BaseClass {
      * Verify the columns of the Yarn Job table are editable by clicking the settings icon.
      */
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the columns of the yarn job table should be editable by clicking the settings icon")
     public void YC_033_verifyYarnJobsTableColumnsEditable(String clusterId) {
         test = extent.startTest("YC_033_verifyYarnJobsTableColumnsEditable: " + clusterId, "Verify yarn jobs table columns on Yarn chrageback page.");
         test.assignCategory(" Cluster - Yarn Chargeback");
@@ -38,6 +38,7 @@ public class YC_033 extends BaseClass {
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();
         test.log(LogStatus.PASS, "Selected 30 Days date picker for Yarn chargeback page");
+
 
         // Select Yarn Charge back
         chargeBackYarn.clickOnGroupBySearchBox();

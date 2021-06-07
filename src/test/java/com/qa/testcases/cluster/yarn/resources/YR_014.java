@@ -20,7 +20,7 @@ public class YR_014 extends BaseClass {
     /**
      * Yarn Resource page Filter tab should contain all the entries populated by default
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the filter tab should contain all the entries populated by default")
     public void YR_014_verifyFilterTabAndEntries(String clusterId) {
         test = extent.startTest("YR_014_verifyFilterTabAndEntries: " + clusterId,
                 "Filter tab should contain all the entries populated by default.");

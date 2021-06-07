@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 public class TC_AA105 extends BaseClass {
     private static final java.util.logging.Logger logger = Logger.getLogger(TC_AA105.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P1-Verify user can set a description using a combination of alphanumeric and special characters and save the auto action.")
     public void validateDescriptionNameAsAlphanumericAndSpecialChars(String clusterId) {
         test = extent.startTest("TC_AA105.validateDescriptionNameAsAlphanumericAndSpecialChars",
                 "Verify user can set a description using a combination of alphanumeric and " +

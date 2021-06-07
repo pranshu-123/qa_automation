@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class TC_AA100 extends BaseClass {
     private static final java.util.logging.Logger logger = Logger.getLogger(TC_AA100.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P1-Verify user can set a name which is 500 characters long and save the auto action.")
     public void validateNameAs500Chars(String clusterId) {
         test = extent.startTest("TC_AA100.validateNameAs500Chars", "Verify user can set " +
                 "a name which is 500 characters long and save the auto action.");

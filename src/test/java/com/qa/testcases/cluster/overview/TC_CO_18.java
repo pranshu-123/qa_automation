@@ -23,7 +23,7 @@ import org.testng.annotations.Test;
 public class TC_CO_18 extends BaseClass
 {
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify  add new auto action or alert all the policies are listed with violation count and new policies")
     public void TC_CO_18_VerifynewAddnewautoactionoralert(String clusterId) {
         test = extent.startTest("TC_CO_18_VerifynewAddnewautoactionoralert"+clusterId, "Validate Verify new Add new autoaction or alert page on clicking.");
         test.assignCategory(" Cluster Overview");

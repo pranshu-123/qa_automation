@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 public class TC_AA112 extends BaseClass {
     private static final java.util.logging.Logger logger = Logger.getLogger(TC_AA112.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P1-Verify that the user can select only particular users to register the automatic action.")
     public void validateOnlyAsUser(String clusterId) {
         test = extent.startTest("TC_AA112.validateOnlyAsUser",
                 "Verify user is able to select only particular users save the auto action.");

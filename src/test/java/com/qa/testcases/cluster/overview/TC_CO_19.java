@@ -26,7 +26,7 @@ public class TC_CO_19 extends BaseClass {
    * Validate alert row of home page is redirecting to yarn page on clicking.
    */
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description="P0-Validate that the alert row of the home page is redirecting to the yarn page on clicking.")
   public void TC_CO_19_ValidateAutoAlertOfHomePage(String clusterId) {
     test = extent.startTest("TC_CO_19_ValidateAutoAlertOfHomePage: "+clusterId, "Validate alert row of home page is redirecting to yarn page on clicking.");
     test.assignCategory(" Cluster Overview");

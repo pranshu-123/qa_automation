@@ -17,7 +17,7 @@ public class YC_027 extends BaseClass {
     /**
      * Verify Group By Table on Yarn chrageback page
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the user must be select a graph based on the group by field")
     public void YC_027_verifyGroupByTableColumnCountOnYarnChargeBackPage(String clusterId) {
         test = extent.startTest("YC_027_verifyGroupByTableColumnCountOnYarnChargeBackPage: "+clusterId, "Verify Click on groupby edit field, Yarn chrageback page.");
         test.assignCategory(" Cluster - Yarn Chargeback");

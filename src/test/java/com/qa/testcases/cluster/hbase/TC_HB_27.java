@@ -20,7 +20,7 @@ public class TC_HB_27 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_HB_27.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify regional server indicators, regional server graphs, and table indicators must be present.")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify regional server indicators, regional server graphs, and table indicators must be present.")
     public void verifyMetricsAndChartsFromHBaseTab(String clusterId) {
         test = extent.startTest("TC_HB_27.verifyMetricsAndChartsFromHBaseTab",
                 "Verify Region Server metrics, Region Server Charts, Table metrics.");

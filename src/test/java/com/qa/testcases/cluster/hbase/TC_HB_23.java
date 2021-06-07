@@ -20,7 +20,7 @@ public class TC_HB_23 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_HB_23.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify all date pickers present on the Hbase page")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify all date pickers present on the Hbase page")
     public void verifyAllDatesFromHBaseTab(String clusterId) {
         test = extent.startTest("TC_HB_23.verifyAllDatesFromHBaseTab",
                 "Verify all the date pickers.");

@@ -18,7 +18,7 @@ public class TC_HB_58 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_HB_58.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify tooltips for all metrics under the region tab.")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify tooltips for all metrics under the region tab.")
     public void verifyMetricsToolTipsInRegionTab(String clusterId) {
         test = extent.startTest("TC_HB_58.verifyMetricsToolTipsInRegionTab",
                 "Verify tool tip for all metrics under region tab.");

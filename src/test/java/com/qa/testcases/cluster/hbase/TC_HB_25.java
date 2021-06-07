@@ -18,7 +18,7 @@ public class TC_HB_25 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_HB_25.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify that the user can view the HBase cluster metrics.")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the user can view the HBase cluster metrics.")
     public void verifyHBaseClusterKPIs(String clusterId) {
         test = extent.startTest("TC_HB_25.verifyHBaseClusterKPIs",
                 "Verify the HBase cluster metrics.");

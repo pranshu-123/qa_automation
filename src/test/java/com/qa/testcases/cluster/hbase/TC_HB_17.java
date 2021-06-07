@@ -20,7 +20,7 @@ public class TC_HB_17 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_HB_17.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify that the user navigates to the Clusters UI.")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the user navigates to the Clusters UI.")
     public void verifyHBaseClusters(String clusterId) {
         test = extent.startTest("TC_HB_17.verifyHBaseClusters",
                 "Navigate to Clusters UI.");

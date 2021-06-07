@@ -18,7 +18,7 @@ public class TC_HB_42 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_HB_42.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify all column values in the table metrics.")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify all column values in the table metrics.")
     public void verifyTablesInARegionServer (String clusterId) {
         test = extent.startTest("TC_HB_42.verifyTablesInARegionServer",
                 "Verify all column values in table metrics.");

@@ -18,7 +18,7 @@ public class TC_HB_54 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_HB_54.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the table and the Region tab should appear on the table details page.")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify the table and the Region tab should appear on the table details page.")
     public void verifyTableAndRegionTab(String clusterId) {
         test = extent.startTest("TC_HB_54.verifyTableAndRegionTab",
                 "Table and region tab should be on table details page.");

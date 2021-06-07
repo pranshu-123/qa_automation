@@ -21,7 +21,7 @@ public class TC_HB_20 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_HB_20.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify that the name of the cluster must appear in a tab with the details of the cluster.")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the name of the cluster must appear in a tab with the details of the cluster.")
     public void verifyHBaseClusterNameBySelectingCluster(String clusterId) {
         test = extent.startTest("TC_HB_20.verifyHBaseClusterNameBySelectingCluster",
                 "Verify Cluster name should be listed as tab with cluster details.");

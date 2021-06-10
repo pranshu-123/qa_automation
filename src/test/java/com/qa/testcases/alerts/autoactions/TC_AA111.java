@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 public class TC_AA111 extends BaseClass {
     private static final java.util.logging.Logger logger = Logger.getLogger(TC_AA111.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P1-Verify that the user can select EVERYONE as the user, record the auto action.")
     public void validateEveryOneAsUser(String clusterId) {
         test = extent.startTest("TC_AA111.validateEveryOneAsUser",
                 "Verify user is able to select EVERYONE as user, save the auto action.");

@@ -15,7 +15,7 @@ public class TC_AA115 extends BaseClass {
 
     private static final Logger logger = Logger.getLogger(TC_AA115.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P1-Verify that the user can select only a few queues and save the auto action.")
     public void validateOnlyQueue(String clusterId) {
         test = extent.startTest("TC_AA115.validateOnlyQueue",
                 "Verify user is able to select only a few queues, save the auto action.");

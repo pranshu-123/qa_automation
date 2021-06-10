@@ -21,7 +21,7 @@ public class TC_CO_12 extends BaseClass {
 	private DatePicker datePicker;
 	private static final Logger LOGGER = Logger.getLogger(TC_CO_12.class.getName());
 
-	@Test(dataProvider = "clusterid-data-provider")
+	@Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the cluster node's KPI graph should be generated for the selected filters.")
 	public void TC_CO_12_verifyKPIJobs(String clusterId) {
 		test = extent.startTest("TC_CO_12_verifyKPIJobs : "+clusterId, "Verify Custom Date KPIs under Jobs heading ");
 		test.assignCategory(" Cluster Overview");

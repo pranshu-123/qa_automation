@@ -18,7 +18,7 @@ public class TC_HB_47 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_HB_47.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the table region within the regional server.")
     public void verifyTableRegionUIWithinRegionServer (String clusterId) {
         test = extent.startTest("TC_HB_47.verifyTableRegionUIWithinRegionServer",
                 "Navigate to Table Region UI within Region Server.");

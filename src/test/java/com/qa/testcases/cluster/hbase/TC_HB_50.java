@@ -18,7 +18,7 @@ public class TC_HB_50 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_HB_50.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify the region count metrics data and graph.")
     public void verifyTablesRegionCountMetrics(String clusterId) {
         test = extent.startTest("TC_HB_50.verifyTablesRegionCountMetrics",
                 "Verify regionCount metrics data and graph.");

@@ -21,7 +21,7 @@ public class TC_HB_68 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_HB_68.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the namespace and the table names are adequately captured and displayed in the UI")
     public void verifyPatternForNamespace(String clusterId) {
         test = extent.startTest("TC_HB_68.verifyPatternForNamespace",
                 "Verify com.unraveldata.hbase.table.name.pattern for namespace (HBASE-108).");

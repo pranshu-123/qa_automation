@@ -24,7 +24,7 @@ public class TC_CO_35  extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_CO_35.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the memory graph should to be 'Download SVG.")
     public void ValidateMemoryGraphDownloadAsSVG(String clusterId) {
 
         test = extent.startTest("TC_CO_35.ValidateMemoryGraphDownloadAsSVG: " + clusterId,

@@ -23,7 +23,7 @@ public class YC_022 extends BaseClass {
     private ChargebackYarnPageObject chargebackYarnPageObject;
     private DatePicker picker;
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify the cost edit fields on the yarn chargeback page")
     public void YC_022_Verifythecosteditfields(String clusterId) {
         test = extent.startTest("YC_021_Verifythecalender"+clusterId, "Verify the cost edit fields");
         test.assignCategory(" Cluster - Yarn Chargeback");

@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class TC_AA97 extends BaseClass {
     private static final java.util.logging.Logger logger = Logger.getLogger(TC_AA97.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P1-Verify that the user can define a name using special characters and save the auto action.")
     public void validateNameAsSpecialChar(String clusterId) {
         test = extent.startTest("TC_AA97.validateNameAsSpecialChar", "Verify user can set " +
                 "a name using special characters and save the auto action.");

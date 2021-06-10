@@ -15,7 +15,7 @@ public class TC_AA123 extends BaseClass {
 
     private static final Logger logger = Logger.getLogger(TC_AA123.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P1-Verify that the user can select TIME scope as ALWAYS and save the auto action.")
     public void validateAlwaysTime(String clusterId) {
         test = extent.startTest("TC_AA123.validateAlwaysTime",
                 "Verify user is able to select TIME scope as ALWAYS and save auto action.");

@@ -23,7 +23,7 @@ public class TC_CO_38 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_CO_38.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the running graph should to be 'Download PNG.")
     public void ValidateRunningGraphDownloadAsPNG(String clusterId) {
 
         test = extent.startTest("TC_CO_38.ValidateRunningGraphDownloadAsPNG: " + clusterId,

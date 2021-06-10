@@ -18,7 +18,7 @@ import java.util.List;
 @Marker.All
 public class TC_CO_07 extends BaseClass {
 
-  @Test()
+  @Test(description="P0-Verify that the cluster overview report has to be generated for the selected group.")
   public void TC_CO_07_verifyClusterOverviewForDifferentCluster() {
     test = extent.startTest("TC_CO_07_verifyClusterOverviewForDifferentCluster", "Verify Cluster Overview report for different clusters");
     HomePage homePage = new HomePage(driver);

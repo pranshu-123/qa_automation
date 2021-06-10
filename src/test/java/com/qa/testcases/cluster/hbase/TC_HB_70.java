@@ -20,7 +20,7 @@ public class TC_HB_70 extends BaseClass {
 
     private static final Logger LOGGER = Logger.getLogger(TC_HB_70.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider",description = "Verify Multicluster setup with one HDP cluster.")
+    @Test(dataProvider = "clusterid-data-provider",description= "P0-Verify Multicluster setup with one HDP cluster.")
     public void verifyHBaseMultiClusterWithHDP(String clusterId) {
         test = extent.startTest("TC_HB_70.verifyHBaseMultiClusterWithHDP",
                 "Verify Multi cluster setup with one HDP cluster.");

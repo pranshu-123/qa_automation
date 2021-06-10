@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 public class TC_CO_02 extends BaseClass {
 
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify the date picker filter in the UI ")
     public void TC_CO_02_verifyCombinationOfDaterange(String clusterId) {
 
         test = extent.startTest("TC_CO_02_verifyCombinationOfDaterange: "+clusterId, "Verify Custom Range in datepicker filter ");

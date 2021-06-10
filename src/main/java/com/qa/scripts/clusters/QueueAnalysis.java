@@ -174,7 +174,9 @@ public class QueueAnalysis {
         String[] memoryToolTipSplit = memoryTooltipValues.get(0).split("●");
         LOGGER.info("After splitting values are- " + Arrays.toString(memoryToolTipSplit));
         for (String value : memoryToolTipSplit) {
-            validToolTipValues.add(value.replaceAll("[^a-zA-Z_]", "").trim().toLowerCase());
+            if (!value.trim().isEmpty()) {
+                validToolTipValues.add(value.replaceAll("[^a-zA-Z_]", "").trim().toLowerCase());
+            }
         }
         LOGGER.info("Actual tool tip values- " + validToolTipValues);
         return validToolTipValues;
@@ -256,7 +258,9 @@ public class QueueAnalysis {
             for (String winHandle : driver.getWindowHandles()) {
                 driver.switchTo().window(winHandle);
             }
-            waitExecuter.sleep(3000);
+            //waitExecuter.sleep(3000);
+            waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.resourceUsagePointer);
+            userAction.performActionWithPolling(queueAnalysisPageObject.resourceUsagePointer, UserAction.CLICK);
         } catch (NoSuchWindowException e) {
             driver.close();
         }
@@ -264,11 +268,8 @@ public class QueueAnalysis {
 
     /* Click on schedule button */
     public void clickOnScheduleButton() {
-        try {
-            MouseActions.clickOnElement(driver, queueAnalysisPageObject.scheduleButton);
-        } catch (TimeoutException te) {
-            MouseActions.clickOnElement(driver, queueAnalysisPageObject.scheduleButton);
-        }
+        waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.scheduleButton);
+        userAction.performActionWithPolling(queueAnalysisPageObject.scheduleButton, UserAction.CLICK);
     }
 
     /* Click on schedule button and assign multiple e-mails */
@@ -294,7 +295,7 @@ public class QueueAnalysis {
     /* Validate success message on report creation */
     public void verifyScheduleSuccessMsg(String successMsg) {
         waitExecuter.waitUntilElementPresent(queueAnalysisPageObject.scheduleSuccessMsg);
-        Assert.assertEquals(queueAnalysisPageObject.scheduleSuccessMsg.getText(), successMsg,
+        Assert.assertEquals(queueAnalysisPageObject.scheduleSuccessMsg.getText().toLowerCase(), successMsg,
                 "The Schedule success " + "message mismatch");
     }
 
@@ -367,18 +368,64 @@ public class QueueAnalysis {
     /* This method is used to assign start date and end date for custom range */
     public void assignCustomDate(String startDate, String endDate) {
         LOGGER.info("Click on custom range");
+        waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.dateRange);
         userAction.performActionWithPolling(queueAnalysisPageObject.dateRange, UserAction.CLICK);
         LOGGER.info("Set start and end date");
         userAction.performActionWithPolling(queueAnalysisPageObject.customRange, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.startDate);
         userAction.performActionWithPolling(queueAnalysisPageObject.startDate, UserAction.CLICK);
         queueAnalysisPageObject.startDate.clear();
         waitExecuter.sleep(1000);
         userAction.performActionWithPolling(queueAnalysisPageObject.startDate, UserAction.SEND_KEYS, startDate);
-        userAction.performActionWithPolling(queueAnalysisPageObject.endDate, UserAction.CLICK);
-        queueAnalysisPageObject.endDate.clear();
-        waitExecuter.sleep(1000);
-        userAction.performActionWithPolling(queueAnalysisPageObject.endDate, UserAction.SEND_KEYS, endDate);
+        waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.applyButton);
         LOGGER.info("Click on apply button");
         userAction.performActionWithPolling(queueAnalysisPageObject.applyButton, UserAction.CLICK);
+    }
+
+    public String getPageNumber() {
+        String[] numOfPages = queueAnalysisPageObject.getNumberOfPagesOfReports.getText().split(" ");
+        LOGGER.info("Total number of pages ------------ " + numOfPages[2]);
+        queueAnalysisPageObject.enterPageNumberToNavigation.click();
+        queueAnalysisPageObject.enterPageNumberToNavigation.clear();
+        queueAnalysisPageObject.enterPageNumberToNavigation.sendKeys(numOfPages[2]);
+        queueAnalysisPageObject.enterPageNumberToNavigation.sendKeys(Keys.ENTER);
+        waitExecuter.sleep(2000);
+        return numOfPages[2];
+    }
+
+    /* From different queues of table, select 1st queue of table*/
+    public void select1stQueueFromTable() {
+        waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.getQueueList.get(0));
+        queueAnalysisPageObject.getQueueList.get(0).click();
+        waitExecuter.waitUntilElementPresent(queueAnalysisPageObject.loading);
+        //waitExecuter.sleep(2000);
+        try {
+            waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.queueGraphSearchBox.get(0));
+        } catch (StaleElementReferenceException ex) {
+            waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.queueGraphSearchBox.get(0));
+        }
+    }
+
+    /* From Reports page run a queue analysis report*/
+    public void runAQueueAnalysisReport() {
+        waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.addIcon);
+        queueAnalysisPageObject.addIcon.click();
+        waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.modalRunButton);
+        waitExecuter.sleep(1000);
+        //Click on Run button of modal window
+        LOGGER.info("Click on Run button of modal window");
+        waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.modalRunButton);
+        queueAnalysisPageObject.modalRunButton.click();
+        waitExecuter.waitUntilTextNotToBeInWebElement(queueAnalysisPageObject.footerWaitCycle, "Please Wait");
+        waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.addIcon);
+    }
+
+    /* Navigate from Reports page to Queue analysis Queue table*/
+    public void navigateToQueueTable() {
+        waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.clickOnQAReports);
+        queueAnalysisPageObject.clickOnQAReports.click();
+        waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.select1stQAReport);
+        queueAnalysisPageObject.select1stQAReport.click();
+        waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.getQueueList.get(0));
     }
 }

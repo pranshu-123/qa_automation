@@ -30,8 +30,8 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "//span[contains(@class,'text-fatal')]")
     public WebElement messageOnSelectingBeyond30days;
 
-    @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/span")
-    public WebElement invalidInputMessage;
+    @FindBy(xpath = "//section[contains(@class,'icon-fatal')]/span")
+    public List<WebElement> invalidInputMessage;
 
     @FindBy(className = "select2-search__field")
     public WebElement queueSearchBox;
@@ -40,16 +40,16 @@ public class QueueAnalysisPageObject {
     public List<WebElement> queueOptions;
 
 
-    @FindBy(xpath = "(//a[contains(@class,'icon-sort')])[1]")
+    @FindBy(xpath = "//thead//th[contains(text(),'Queue')]//a[contains(@class,'icon-sort')]")
     public WebElement sortByQueueName;
 
-    @FindBy(xpath = "(//a[contains(@class,'icon-sort')])[2]")
+    @FindBy(xpath = "//thead//th[contains(text(),'Jobs Running')]//a[contains(@class,'icon-sort')]")
     public WebElement sortByJobs;
 
-    @FindBy(xpath = "(//a[contains(@class,'icon-sort')])[3]")
+    @FindBy(xpath = "//thead//th[contains(text(),'vCore Allocated')]//a[contains(@class,'icon-sort')]")
     public WebElement sortByVcore;
 
-    @FindBy(xpath = "(//a[contains(@class,'icon-sort')])[4]")
+    @FindBy(xpath = "//thead//th[contains(text(),'Memory Allocated')]//a[contains(@class,'icon-sort')]")
     public WebElement sortByMemory;
 
     @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-down')]")
@@ -88,11 +88,11 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "//b[@class='blink']")
     public WebElement loading;
 
-    @FindBy(xpath = "//div[contains(@class,'component-section-header')]/h1")
+    @FindBy(xpath = "//div[contains(@class,'component-section-header')]//div/h1")
     public WebElement yarnResources;
 
 
-    @FindBy(xpath = "//span[contains(text(),'Schedule')]/parent::a")
+    @FindBy(xpath = "((//table/tbody/tr)[5]/td)[4]//span[contains(@class,'icon-calendar')]")
     public WebElement scheduleButton;
 
     @FindBy(xpath = "(//form[@name='taskrunnerForm']/div/div[3]/b[contains(text(), 'Schedule Name')]/parent::div/p/input)[1]")
@@ -104,7 +104,7 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "//input[@type='email']/following-sibling::span")
     public WebElement addEmail;
 
-    @FindBy(xpath = "(//span[contains(text(),'Schedule')])[2]/parent::a")
+    @FindBy(xpath = "//div[contains(@class,'modal')]//span[contains(text(),'Schedule')]")
     public WebElement modalScheduleButton;
 
     @FindBy(xpath = "//div[@class='task-runner-ht']/section/span[1]")
@@ -125,7 +125,7 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "//div[@class='close pointer']")
     public WebElement close;
 
-    @FindBy(xpath = "//h3/b[text()='Queue Analysis']")
+    @FindBy(xpath = "(//div[@id='breadcrumb']//span)[2][text()='Archives']")
     public WebElement QAHeading;
 
     @FindBy(xpath = "//span[@class='select2-results']//li")
@@ -143,13 +143,13 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "//p[@class='pointer']")
     public List<WebElement> pagination;
 
-    @FindBy(className = "component-date-picker")
+    @FindBy(xpath = "//div[contains(@class,'queue-task-runner')]//div[contains(@class,'component-date-picker')]")
     public WebElement dateRange;
 
     @FindBy(xpath = "//div[@class='ranges']//li[text()='Custom Range']")
     public WebElement customRange;
 
-    @FindBy(xpath = "(//div[@class='daterangepicker_input']/input[@name='daterangepicker_start'])[last()]")
+    @FindBy(xpath = "//div[@class='daterangepicker_input']/input[@name='daterangepicker_start' and contains(@class,'active')]")
     public WebElement startDate;
 
     @FindBy(xpath = "(//div[@class='daterangepicker_input']/input[@name='daterangepicker_end'])[last()]")
@@ -175,6 +175,36 @@ public class QueueAnalysisPageObject {
 
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/span")
     public WebElement pleaseWaitBanner;
+
+    @FindBy(xpath="//div[@role='dialog']/div[contains(@class,'modal-sec-foot')]/span//span")
+    public WebElement footerWaitCycle;
+
+    @FindBy(xpath = "//tbody/tr[5]/td/span[text()='Queue Analysis']")
+    public WebElement clickOnQAReports;
+
+    @FindBy(xpath ="//tbody/tr[1]/td[3]/span")
+    public WebElement isFirstQAReportSuccess;
+
+    @FindBy(xpath = "//tbody/tr[1]/td[1]")
+    public WebElement select1stQAReport;
+
+    @FindBy(xpath = "//tbody/tr")
+    public List<WebElement> getQueueReportList;
+
+    @FindBy(xpath = "//p[@class='pointer']")
+    public WebElement getNumberOfPagesOfReports;
+
+    @FindBy(xpath="//p[@class='pointer']//input")
+    public WebElement enterPageNumberToNavigation;
+
+    @FindBy(xpath = "//div[contains(@class,'queue-table')]//table/tbody/tr/td[1]")
+    public List<WebElement> getQueueList;
+
+    @FindBy(xpath = "//table//select/following-sibling::span//input")
+    public List<WebElement> queueGraphSearchBox;
+
+    @FindBy(xpath = "//b[contains(@class,'pointer')]/span")
+    public WebElement resourceUsagePointer;
 
 
     public QueueAnalysisPageObject(WebDriver driver) {

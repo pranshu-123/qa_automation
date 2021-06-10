@@ -6,6 +6,7 @@ import com.qa.pagefactory.clusters.QueueAnalysisPageObject;
 import com.qa.scripts.clusters.QueueAnalysis;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -33,30 +34,41 @@ public class TC_QU_09 extends BaseClass {
         test.log(LogStatus.INFO, "Clicked on Queue Analysis tab");
         test.log(LogStatus.INFO, "Validate Queue Analysis tab loaded successfully");
         queueAnalysis.navigateToQueueAnalysis();
-        // Close confirmation message box and search the queue
-        test.log(LogStatus.INFO, "Close confirmation message box and search the queue");
-        LOGGER.info("Close confirmation message box and search the queue");
-        queueAnalysis.closeConfirmationMessageNotification();
-        waitExecuter.sleep(1000);
-        // Sort down by Jobs running
-        test.log(LogStatus.INFO, "Sort down by Jobs running");
-        LOGGER.info("Sort down by Jobs running");
-        qaPageObject.sortByJobs.click();
-        waitExecuter.sleep(1000);
-        Assert.assertTrue(qaPageObject.sortDown.isDisplayed(), "Sort down is not working");
-        // Sort up by Jobs running
-        test.log(LogStatus.INFO, "Sort up by Jobs running");
-        LOGGER.info("Sort up by Jobs running");
-        qaPageObject.sortByJobs.click();
-        waitExecuter.sleep(1000);
-        Assert.assertTrue(qaPageObject.sortUp.isDisplayed(), "Sort up is not working");
-        test.log(LogStatus.PASS, "Verified sorting on Jobs running.");
+        queueAnalysis.runAQueueAnalysisReport();
+        try {
+            waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.successBanner,
+                    "SUCCESS");
+            waitExecuter.waitUntilElementClickable(qaPageObject.clickOnQAReports);
+            qaPageObject.clickOnQAReports.click();
+            waitExecuter.waitUntilElementClickable(qaPageObject.select1stQAReport);
+            qaPageObject.select1stQAReport.click();
+            waitExecuter.waitUntilElementClickable(qaPageObject.queueSearchBox);
+            // Sort down by Jobs running
+            test.log(LogStatus.INFO, "Sort down by Jobs running");
+            LOGGER.info("Sort down by Jobs running");
+            waitExecuter.waitUntilElementClickable(qaPageObject.sortByJobs);
+            qaPageObject.sortByJobs.click();
+            waitExecuter.sleep(1000);
+            waitExecuter.waitUntilElementClickable(qaPageObject.sortByJobs);
+            Assert.assertTrue(qaPageObject.sortDown.isDisplayed(), "Sort down is not working");
+            // Sort up by Jobs running
+            test.log(LogStatus.INFO, "Sort up by Jobs running");
+            LOGGER.info("Sort up by Jobs running");
+            waitExecuter.waitUntilElementClickable(qaPageObject.sortByJobs);
+            qaPageObject.sortByJobs.click();
+            waitExecuter.sleep(1000);
+            waitExecuter.waitUntilElementClickable(qaPageObject.sortByJobs);
+            Assert.assertTrue(qaPageObject.sortUp.isDisplayed(), "Sort up is not working");
+            test.log(LogStatus.PASS, "Verified sorting on Jobs running.");
+        } catch (TimeoutException te) {
+            throw new AssertionError("Queue Analysis Report not completed successfully.");
+        }
         //Refresh the page and reload to original state
         test.log(LogStatus.INFO, "Refresh the page and reload to original state");
         LOGGER.info("Refresh the page and reload to original state");
         waitExecuter.sleep(1000);
         driver.navigate().refresh();
-        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
     }
 
 }

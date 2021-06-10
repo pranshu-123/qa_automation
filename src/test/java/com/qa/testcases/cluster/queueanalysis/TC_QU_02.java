@@ -23,7 +23,8 @@ import java.util.logging.Logger;
 public class TC_QU_02 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_QU_02.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider", description = "Verify that Unravel UI should generate a Queue Analysis report successfully " +
+            "for all date picker option.")
     public void validateReportWithDatePickerOptions(String clusterId) {
         test = extent.startTest("TC_QU_02.validateReportWithDatePickerOptions",
                 "Verify that Unravel UI should generate a Queue Analysis report successfully " +
@@ -38,30 +39,26 @@ public class TC_QU_02 extends BaseClass {
         QueueAnalysisPageObject qaPageObject = new QueueAnalysisPageObject(driver);
         QueueAnalysis queueAnalysis = new QueueAnalysis(driver);
         // Navigate to Queue Analysis tab from header
-        test.log(LogStatus.INFO, "Navigate to Queue Analysis tab from header");
-        test.log(LogStatus.INFO, "Clicked on Queue Analysis tab");
-        test.log(LogStatus.INFO, "Validate Queue Analysis tab loaded successfully");
+        test.log(LogStatus.INFO, "Navigate to Report tab from header");
+        test.log(LogStatus.INFO, "Clicked on Queue Analysis Add icon");
         queueAnalysis.navigateToQueueAnalysis();
-        // Close confirmation box
-        test.log(LogStatus.INFO, "Closed the confirmation box");
-        LOGGER.info("Closed the confirmation box");
-        queueAnalysis.closeConfirmationMessageNotification();
         waitExecuter.sleep(1000);
-        //Click on Run button to open report page
-        test.log(LogStatus.INFO, "Click on Run button to open report page");
-        LOGGER.info("Click on Run button to open report page");
-        qaPageObject.runButton.click();
-        waitExecuter.sleep(1000);
-        //Select ClusterId
-        test.log(LogStatus.INFO, "Selecting ClusterId: " + clusterId);
-        LOGGER.info("Selecting ClusterId: " + clusterId);
-        queueAnalysis.selectMultiClusterId(clusterId);
-        //Click on date range
-        test.log(LogStatus.INFO, "Click on date range");
-        LOGGER.info("Click on date range");
-        datePickerPageObject.dateRange.click();
-        List<WebElement> dateRange = datePickerPageObject.dateRangeOptions;
-        for (int i = 0; i < datePickerPageObject.dateRangeOptions.size() - 1; i++) {
+        waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
+        for (int i = 0; i < 8; i++) {
+            waitExecuter.sleep(2000);
+            qaPageObject.addIcon.click();
+            waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
+            waitExecuter.sleep(1000);
+            //Select ClusterId
+            test.log(LogStatus.INFO, "Selecting ClusterId: " + clusterId);
+            LOGGER.info("Selecting ClusterId: " + clusterId);
+            queueAnalysis.selectMultiClusterId(clusterId);
+            //Click on date range
+            test.log(LogStatus.INFO, "Click on date range");
+            LOGGER.info("Click on date range");
+            qaPageObject.dateRange.click();
+            List<WebElement> dateRange = datePickerPageObject.dateRangeOptions;
+
             WebElement dateRangeOption = datePickerPageObject.dateRangeOptions.get(i);
             String dateRangeValue = dateRangeOption.getText();
             dateRangeOption.click();
@@ -69,24 +66,36 @@ public class TC_QU_02 extends BaseClass {
             test.log(LogStatus.INFO, "Click on Run button of modal window");
             LOGGER.info("Click on Run button of modal window");
             qaPageObject.modalRunButton.click();
-            if (dateRangeValue.equals("This Month") || dateRangeValue.equals("Last Month")
-                    || dateRangeValue.equals("Last 7 Days") || dateRangeValue.equals("Last 30 Days")) {
+
+            if (dateRangeValue.equals("Last 7 Days") || dateRangeValue.equals("Last 30 Days")) {
                 try {
-                    waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.confirmationMessageElement,
-                            "Queue Analysis completed successfully.");
+                    waitExecuter.waitUntilTextNotToBeInWebElement(qaPageObject.footerWaitCycle, "Please Wait");
+                    waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
+                    waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.successBanner,
+                            "SUCCESS");
                     test.log(LogStatus.PASS, "Verified Queue Analysis report is loaded properly.");
-                    waitExecuter.sleep(3000);
-                    waitExecuter.waitUntilElementPresent(qaPageObject.runButton);
-                    waitExecuter.waitUntilElementClickable(qaPageObject.runButton);
                 } catch (TimeoutException te) {
-                    throw new AssertionError("Queue Analysis Report not completed successfully.");
+                    try{
+                        waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.successBanner,
+                                "SUCCESS");
+                    }
+                    catch (TimeoutException ex){
+                        throw new AssertionError("Queue Analysis Report not completed successfully.");
+                    }
+
                 }
             } else if (dateRangeValue.equals("This Year") || dateRangeValue.equals("Last 90 Days")
                     || dateRangeValue.equals("Last 60 Days")) {
-                Assert.assertEquals(qaPageObject.invalidInputMessage.getText().trim(),
-                        "Please, Make sure valid inputs.", "Banner message display an in-correct message as "
-                                + qaPageObject.invalidInputMessage.getText());
+                Assert.assertTrue(qaPageObject.invalidInputMessage.get(0).getText().trim().contains("Please Make Sure Date Range Less than 30 Days"),
+                        "Banner message display an in-correct message as "
+                                + qaPageObject.invalidInputMessage.get(0).getText());
                 test.log(LogStatus.PASS, "Verified Queue Analysis report is loaded properly.");
+                qaPageObject.close.click();
+                waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
+            } else if (dateRangeValue.equals("Last Month")
+                    || dateRangeValue.equals("This Month")) {
+                qaPageObject.close.click();
+                waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
             }
         }
     }

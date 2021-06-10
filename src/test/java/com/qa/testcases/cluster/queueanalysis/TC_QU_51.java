@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class TC_QU_51 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_QU_51.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider", description = "P0-Validate user is able to generate schedule report for multiple clusters")
     public void validateMultiClusterInScheduleReports(String clusterId) {
         test = extent.startTest("TC_QU_51.validateMultiClusterInScheduleReports",
                 "Validate user is able to generate schedule report for multiple clusters");
@@ -61,7 +61,7 @@ public class TC_QU_51 extends BaseClass {
         queueAnalysis.clickOnModalScheduleButton();
         LOGGER.info("Clicked on modal Schedule Button");
         test.log(LogStatus.INFO, "Clicked on modal Schedule Button");
-        String scheduleSuccessMsg = "The report has been scheduled successfully.";
+        String scheduleSuccessMsg = "the report has been scheduled successfully.";
         queueAnalysis.verifyScheduleSuccessMsg(scheduleSuccessMsg);
         test.log(LogStatus.PASS, "Verified schedule with multi email for daily.");
         wait.sleep(3000);

@@ -1,5 +1,4 @@
 package com.qa.testcases.cluster.queueanalysis;
-
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.scripts.clusters.QueueAnalysis;
@@ -18,7 +17,7 @@ import java.util.logging.Logger;
 public class TC_QU_20 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_QU_20.class.getName());
 
-    @Test
+    @Test(description = "P0- In Queue Analysis reports validate multiple emails with Daily schedule")
     public void validateMultiEmailDaily() {
         test = extent.startTest("TC_QU_20.validateMultiEmailDaily", "Validate multiple emails with Daily schedule");
         test.assignCategory("Jobs - Queue Analysis");
@@ -50,7 +49,7 @@ public class TC_QU_20 extends BaseClass {
         queueAnalysis.clickOnModalScheduleButton();
         LOGGER.info("Clicked on modal Schedule Button");
         test.log(LogStatus.INFO, "Clicked on modal Schedule Button");
-        String scheduleSuccessMsg = "The report has been scheduled successfully.";
+        String scheduleSuccessMsg = "the report has been scheduled successfully.";
         queueAnalysis.verifyScheduleSuccessMsg(scheduleSuccessMsg);
         test.log(LogStatus.PASS, "Verified schedule with multi email for daily.");
     }

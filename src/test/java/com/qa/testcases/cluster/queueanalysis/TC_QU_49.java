@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class TC_QU_49 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_QU_49.class.getName());
 
-    @Test
+    @Test(description = "P1-Validate message on providing invalid input in schedule report")
     public void validateInvalidInputMessage() {
         test = extent.startTest("TC_QU_49.validateInvalidInputMessage",
                 "Validate message on providing invalid input in schedule report");
@@ -50,7 +50,7 @@ public class TC_QU_49 extends BaseClass {
         queueAnalysis.clickOnModalScheduleButton();
 
         String message = "please, make sure valid inputs.";
-        Assert.assertEquals(qaPageObject.invalidInputMessage.getText().trim().toLowerCase(), message,
+        Assert.assertEquals(qaPageObject.invalidInputMessage.get(0).getText().trim().toLowerCase(), message,
                 "On providing in invalid email, expected message was not displayed");
         test.log(LogStatus.PASS, "For Invalid input, message was displayed");
     }

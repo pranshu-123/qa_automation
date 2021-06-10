@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class TC_QU_50 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_QU_50.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider", description = "P1-Validate user is able to generate schedule report for multiple clusters for Run reports.")
     public void validateMultiClusterInRunReports(String clusterId) {
         test = extent.startTest("TC_QU_50.validateMultiClusterInRunReports",
                 "Validate user is able to generate schedule report for multiple clusters for Run reports.");
@@ -36,24 +36,23 @@ public class TC_QU_50 extends BaseClass {
         test.log(LogStatus.INFO, "Clicked on Queue Analysis tab");
         test.log(LogStatus.INFO, "Validate Queue Analysis tab loaded successfully");
         queueAnalysis.navigateToQueueAnalysis();
-        // Close confirmation box
-        test.log(LogStatus.INFO, "Closed the confirmation box");
-        LOGGER.info("Closed the confirmation box");
-        queueAnalysis.closeConfirmationMessageNotification();
+        waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
+        qaPageObject.addIcon.click();
+        waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
         waitExecuter.sleep(1000);
-
-        test.log(LogStatus.INFO, "Click on Run button to open report page");
-        queueAnalysis.openReportRunButton();
-        // Select ClusterId
+        //Select Cluster
         test.log(LogStatus.INFO, "Selecting ClusterId: " + clusterId);
         LOGGER.info("Selecting ClusterId: " + clusterId);
         queueAnalysis.selectCluster(clusterId);
         // Click on Run button of modal window
-        test.log(LogStatus.INFO, "Click on Run button of modal window");
-        queueAnalysis.modalRunButton();
+        LOGGER.info("Click on Run button of modal window");
+        waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
+        qaPageObject.modalRunButton.click();
+        waitExecuter.waitUntilTextNotToBeInWebElement(qaPageObject.footerWaitCycle, "Please Wait");
+        waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
         try {
-            waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.confirmationMessageElement,
-                    "Queue Analysis completed successfully.");
+            waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.successBanner,
+                    "SUCCESS");
             test.log(LogStatus.PASS, "Verified Queue Analysis report is loaded properly.");
         } catch (TimeoutException te) {
             throw new AssertionError("Queue Analysis Report not completed successfully.");

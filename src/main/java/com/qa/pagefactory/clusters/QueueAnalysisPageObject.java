@@ -31,7 +31,7 @@ public class QueueAnalysisPageObject {
     public WebElement messageOnSelectingBeyond30days;
 
     @FindBy(xpath = "//section[contains(@class,'icon-fatal')]/span")
-    public WebElement invalidInputMessage;
+    public List<WebElement> invalidInputMessage;
 
     @FindBy(className = "select2-search__field")
     public WebElement queueSearchBox;

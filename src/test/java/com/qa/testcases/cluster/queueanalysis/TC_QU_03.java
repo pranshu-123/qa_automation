@@ -48,9 +48,9 @@ public class TC_QU_03 extends BaseClass {
         LOGGER.info("Click on Run button of modal window");
         qaPageObject.modalRunButton.click();
 
-        Assert.assertTrue(qaPageObject.invalidInputMessage.getText().trim().contains("Please Make Sure Date Range Less than 30 Days"),
+        Assert.assertTrue(qaPageObject.invalidInputMessage.get(0).getText().trim().contains("Please Make Sure Date Range Less than 30 Days"),
                 "Banner message display an in-correct message as "
-                        + qaPageObject.invalidInputMessage.getText());
+                        + qaPageObject.invalidInputMessage.get(0).getText());
         test.log(LogStatus.PASS, "Verified Queue Analysis report is loaded properly.");
         waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
 

@@ -8,6 +8,7 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Test;
+
 import java.util.logging.Logger;
 
 /*
@@ -19,7 +20,7 @@ import java.util.logging.Logger;
 public class TC_QU_01 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_QU_01.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider", description = "Verify that Unravel UI should generate a Queue Analysis report successfully for 7 days.")
     public void validateReportExecutionOfSevenDays(String clusterId) {
         test = extent.startTest("TC_QU_01.validateReportExecutionOfSevenDays",
                 "Verify that Unravel UI should generate a Queue Analysis report successfully for 7 days.");
@@ -49,7 +50,7 @@ public class TC_QU_01 extends BaseClass {
         LOGGER.info("Click on Run button of modal window");
         waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
         qaPageObject.modalRunButton.click();
-        waitExecuter.waitUntilTextNotToBeInWebElement(qaPageObject.footerWaitCycle,"Please Wait");
+        waitExecuter.waitUntilTextNotToBeInWebElement(qaPageObject.footerWaitCycle, "Please Wait");
         waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
         try {
             waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.successBanner,

@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 public class TC_QU_25 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_QU_25.class.getName());
 
-    @Test
+    @Test(description= "P2-Validate user is able to cancel the modal window and changes does not get saved")
     public void validateCancelButton() {
         test = extent.startTest("TC_QU_25.validateCancelButton",
                 "Validate user is able to cancel the modal window and changes does not get saved");
@@ -58,6 +58,7 @@ public class TC_QU_25 extends BaseClass {
         action.sendKeys(Keys.ESCAPE).build().perform();
         WaitExecuter wait = new WaitExecuter(driver);
         wait.sleep(1000);
+        wait.waitUntilElementClickable(qaPageObject.close);
         qaPageObject.close.click();
         LOGGER.info("Clicked on modal Cancel Button");
         test.log(LogStatus.INFO, "Clicked on modal Cancel Button");

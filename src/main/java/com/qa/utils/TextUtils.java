@@ -19,4 +19,13 @@ public class TextUtils {
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }
+
+    /**
+     * Convert USD to int value
+     * @param usdValue - Value to be converted
+     * @return - Integer value
+     */
+    public static int convertUSDToInt(String usdValue) {
+        return (int) Double.parseDouble(usdValue.replaceAll("\"", "").replace("$", ""));
+    }
 }

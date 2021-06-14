@@ -6,6 +6,7 @@ import com.qa.pagefactory.clusters.QueueAnalysisPageObject;
 import com.qa.scripts.clusters.QueueAnalysis;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -36,34 +37,42 @@ public class TC_QU_13 extends BaseClass {
         test.log(LogStatus.INFO, "Clicked on Queue Analysis tab");
         test.log(LogStatus.INFO, "Validate Queue Analysis tab loaded successfully");
         queueAnalysis.navigateToQueueAnalysis();
-        // Close confirmation message box and search the queue
-        test.log(LogStatus.INFO, "Close confirmation message box and search the queue");
-        LOGGER.info("Close confirmation message box and search the queue");
-        queueAnalysis.closeConfirmationMessageNotification();
-        waitExecuter.sleep(2000);
-        List<String> expectedListOfGraph = new ArrayList<String>();
-        List<String> graphNamesOFQueue = new ArrayList<String>();
-        if (qaPageObject.getQueueNameFromTable.size() > 0) {
-            String selectedQueueName = qaPageObject.getQueueNameFromTable.get(0).getText().trim().toLowerCase();
-            expectedListOfGraph.add(selectedQueueName + "apps");
-            expectedListOfGraph.add(selectedQueueName + "vcores");
-            expectedListOfGraph.add(selectedQueueName + "mb");
-            LOGGER.info("Expected list of graphs- " + expectedListOfGraph);
-            test.log(LogStatus.PASS, "Expected list of graphs- " + expectedListOfGraph);
-            qaPageObject.getQueueNameFromTable.get(0).click();
-            waitExecuter.waitUntilElementPresent(qaPageObject.loading);
-            for (int i = 0; i < 3; i++) {
-                graphNamesOFQueue.add((qaPageObject.queueGraph.get(i).getAttribute("id").trim().toLowerCase()));
-                waitExecuter.sleep(1000);
+        queueAnalysis.runAQueueAnalysisReport();
+        try {
+            waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.successBanner,
+                    "SUCCESS");
+            queueAnalysis.navigateToQueueTable();
+            List<String> expectedListOfGraph = new ArrayList<String>();
+            List<String> graphNamesOFQueue = new ArrayList<String>();
+            if (qaPageObject.getQueueList.size() > 0) {
+                String selectedQueueName = qaPageObject.getQueueList.get(0).getText().trim().toLowerCase();
+                expectedListOfGraph.add(selectedQueueName + "apps");
+                expectedListOfGraph.add(selectedQueueName + "vcores");
+                expectedListOfGraph.add(selectedQueueName + "mb");
+                LOGGER.info("Expected list of graphs- " + expectedListOfGraph);
+                test.log(LogStatus.PASS, "Expected list of graphs- " + expectedListOfGraph);
+                queueAnalysis.select1stQueueFromTable();
+                for (int i = 0; i < 3; i++) {
+                    graphNamesOFQueue.add((qaPageObject.queueGraph.get(i).getAttribute("id").trim().toLowerCase()));
+                    waitExecuter.sleep(1000);
+                }
+                LOGGER.info("Graphs loaded for selected queue for- " + graphNamesOFQueue);
+                test.log(LogStatus.PASS, "Graphs loaded for selected queue for- " + graphNamesOFQueue);
+                Assert.assertEquals(qaPageObject.queueGraph.size(), 3, "The graph did not load properly.");
+                Assert.assertTrue(graphNamesOFQueue.equals(expectedListOfGraph), "Expected name of graph did not match the graph name present");
+                test.log(LogStatus.PASS, "All 3 graphs are visible");
+            } else {
+                Assert.assertTrue(qaPageObject.whenNoQueuePresent.isDisplayed());
+                test.log(LogStatus.SKIP, "There is no queue in table, thus cannot verify graph");
             }
-            LOGGER.info("Graphs loaded for selected queue for- " + graphNamesOFQueue);
-            test.log(LogStatus.PASS, "Graphs loaded for selected queue for- " + graphNamesOFQueue);
-            Assert.assertEquals(qaPageObject.queueGraph.size(), 3, "The graph did not load properly.");
-            Assert.assertTrue(graphNamesOFQueue.equals(expectedListOfGraph), "Expected name of graph did not match the graph name present");
-            test.log(LogStatus.PASS, "All 3 graphs are visible");
-        } else {
-            Assert.assertTrue(qaPageObject.whenNoQueuePresent.isDisplayed());
-            test.log(LogStatus.SKIP, "There is no queue in table, thus cannot verify graph");
+        } catch (TimeoutException te) {
+            throw new AssertionError("Queue Analysis Report not completed successfully.");
         }
+        //Refresh the page and reload to original state
+        test.log(LogStatus.INFO, "Refresh the page and reload to original state");
+        LOGGER.info("Refresh the page and reload to original state");
+        waitExecuter.sleep(1000);
+        driver.navigate().refresh();
+        waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
     }
 }

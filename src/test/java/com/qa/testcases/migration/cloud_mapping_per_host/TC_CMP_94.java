@@ -2,13 +2,17 @@ package com.qa.testcases.migration.cloud_mapping_per_host;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.enums.migration.CloudProduct;
 import com.qa.scripts.migration.CloudMigrationPerHostPage;
 import com.qa.utils.LoggingUtils;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 /**
  * @author Ankur Jaiswal
@@ -29,6 +33,7 @@ public class TC_CMP_94 extends BaseClass {
 
         CloudMigrationPerHostPage cloudMigrationPerHostPage = new CloudMigrationPerHostPage(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
+        UserActions actions = new UserActions(driver);
         LOGGER.info("Navigate to migration host page", test);
         cloudMigrationPerHostPage.navigateToCloudMappingPerHost();
         LOGGER.info("Click on Run button", test);
@@ -44,6 +49,14 @@ public class TC_CMP_94 extends BaseClass {
 
         LOGGER.info("Select first storage.", test);
         cloudMigrationPerHostPage.selectStorage("Object storage");
+        cloudMigrationPerHostPage.checkUncheckColumn(true);
+
+        List<WebElement> checkboxListForTable = cloudMigrationPerHostPage.getCheckboxListForTable();
+        try {
+            actions.performActionWithPolling(checkboxListForTable.get(0), UserAction.CLICK);
+        } catch (IndexOutOfBoundsException outOfBoundsException) {
+            Assert.assertTrue(false, "No data displayed in table");
+        }
         cloudMigrationPerHostPage.clickOnRunButton();
         cloudMigrationPerHostPage.waitTillLoaderPresent();
         waitExecuter.sleep(5000);

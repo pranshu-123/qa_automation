@@ -6,6 +6,7 @@ import com.qa.pagefactory.clusters.QueueAnalysisPageObject;
 import com.qa.scripts.clusters.QueueAnalysis;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -35,47 +36,61 @@ public class TC_QU_06 extends BaseClass {
         test.log(LogStatus.INFO, "Clicked on Queue Analysis tab");
         test.log(LogStatus.INFO, "Validate Queue Analysis tab loaded successfully");
         queueAnalysis.navigateToQueueAnalysis();
-        // Close confirmation message box and search the queue
-        test.log(LogStatus.INFO, "Close confirmation message box and search the queue");
-        LOGGER.info("Close confirmation message box and search the queue");
-        queueAnalysis.closeConfirmationMessageNotification();
+        waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
+        qaPageObject.addIcon.click();
+        waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
         waitExecuter.sleep(1000);
-        // Click on queue search box and search for queue name
-        test.log(LogStatus.INFO, "Click on queue search box and search for queue name");
-        LOGGER.info("Click on queue search box and search for queue name");
-        qaPageObject.queueSearchBox.click();
-        List<String> selectedQueueList = new ArrayList<>();
-        if (qaPageObject.queueOptions.size() > 0) {
-            int numberOfQueue = qaPageObject.queueOptions.size();
-            if (numberOfQueue >= 5) {
-                for (int i = 0; i < 5; i++) {
-                    String selectedQueueName = qaPageObject.queueOptions.get(i).getText();
-                    LOGGER.info("Selected Queue: " + selectedQueueName);
-                    selectedQueueList.add(selectedQueueName.trim().toLowerCase());
-                    qaPageObject.queueOptions.get(i).click();
-                    waitExecuter.sleep(1000);
-                    qaPageObject.queueSearchBox.click();
+        //Click on Run button of modal window
+        test.log(LogStatus.INFO, "Click on Run button of modal window");
+        LOGGER.info("Click on Run button of modal window");
+        waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
+        qaPageObject.modalRunButton.click();
+        waitExecuter.waitUntilTextNotToBeInWebElement(qaPageObject.footerWaitCycle, "Please Wait");
+        waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
+        try {
+            waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.successBanner,
+                    "SUCCESS");
+            waitExecuter.waitUntilElementClickable(qaPageObject.clickOnQAReports);
+            qaPageObject.clickOnQAReports.click();
+            waitExecuter.waitUntilElementClickable(qaPageObject.select1stQAReport);
+            qaPageObject.select1stQAReport.click();
+            waitExecuter.waitUntilElementClickable(qaPageObject.queueSearchBox);
+            qaPageObject.queueSearchBox.click();
+            List<String> selectedQueueList = new ArrayList<>();
+            if (qaPageObject.queueOptions.size() > 0) {
+                int numberOfQueue = qaPageObject.queueOptions.size();
+                if (numberOfQueue >= 5) {
+                    for (int i = 0; i < 5; i++) {
+                        String selectedQueueName = qaPageObject.queueOptions.get(i).getText();
+                        LOGGER.info("Selected Queue: " + selectedQueueName);
+                        selectedQueueList.add(selectedQueueName.trim().toLowerCase());
+                        qaPageObject.queueOptions.get(i).click();
+                        waitExecuter.sleep(1000);
+                        qaPageObject.queueSearchBox.click();
+                    }
+                    selectedQueueList.add(qaPageObject.queueOptions.get(0).getText().trim());
+                    LOGGER.info("Selected queue names: " + selectedQueueList);
+                    test.log(LogStatus.INFO, "Selected queue names: " + selectedQueueList);
+                    Assert.assertTrue(selectedQueueList.contains("You can only select 5 Queues"),
+                            "On selecting 6th queue in search box expected message is not displayed");
+                    test.log(LogStatus.PASS, "Verified the message on selecting 6th queue.");
                 }
-                selectedQueueList.add(qaPageObject.queueOptions.get(0).getText().trim());
-                LOGGER.info("Selected queue names: " + selectedQueueList);
-                test.log(LogStatus.INFO, "Selected queue names: " + selectedQueueList);
-                Assert.assertTrue(selectedQueueList.contains("You can only select 5 Queues"),
-                        "On selecting 6th queue in search box expected message is not displayed");
-                test.log(LogStatus.PASS, "Verified the message on selecting 6th queue.");
-            }
-            if(numberOfQueue < 5 && numberOfQueue > 0){
-                Assert.assertTrue(numberOfQueue < 5, "Number of queue is less than 5");
-                LOGGER.info("Queue names in list is less than 5 thus cannot validate test case");
-                test.log(LogStatus.SKIP, "Queue names in list is less than 5 thus cannot validate test case");
-            }
-        } else
-            Assert.assertNull(qaPageObject.getQueueNameFromTable.get(0).getText(),
-                    "The dropdown does not show any queue, but table contains rows");
+                if (numberOfQueue < 5 && numberOfQueue > 0) {
+                    Assert.assertTrue(numberOfQueue < 5, "Number of queue is less than 5");
+                    LOGGER.info("Queue names in list is less than 5 thus cannot validate test case");
+                    test.log(LogStatus.SKIP, "Queue names in list is less than 5 thus cannot validate test case");
+                }
+            } else
+                Assert.assertNull(qaPageObject.getQueueNameFromTable.get(0).getText(),
+                        "The dropdown does not show any queue, but table contains rows");
+        }catch (TimeoutException te) {
+            throw new AssertionError("Queue Analysis Report not completed successfully.");
+        }
         //Refresh the page and reload to original state
         test.log(LogStatus.INFO, "Refresh the page and reload to original state");
         LOGGER.info("Refresh the page and reload to original state");
         waitExecuter.sleep(1000);
         driver.navigate().refresh();
-        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
     }
 }

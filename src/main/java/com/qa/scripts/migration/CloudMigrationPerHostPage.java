@@ -396,9 +396,8 @@ public class CloudMigrationPerHostPage {
                         if (!loaderElement.get(0).isDisplayed()) {
                             return;
                         }
-                    } catch (IndexOutOfBoundsException outOfBoundsException) {
-
-                    }
+                    } catch (IndexOutOfBoundsException outOfBoundsException) {}
+                    catch (NullPointerException npe) {}
                 } else if (end.isBefore(clock.instant())) {
                     throw new TimeoutException("Page is not loaded. Loader is still running");
                 }
@@ -415,6 +414,7 @@ public class CloudMigrationPerHostPage {
      */
     public void selectCloudProduct(CloudProduct cloudProduct) {
         userAction.performActionWithPolling(cmpPageObj.cloudProductServiceDropdownIcon, UserAction.CLICK);
+        waitExecuter.sleep(2000);
         List<WebElement> cloudProDD = cmpPageObj.dropDownValues;
         for (WebElement cloudItem : cloudProDD) {
             if (cloudItem.getText().trim().equalsIgnoreCase(cloudProduct.getValue())) {
@@ -513,7 +513,7 @@ public class CloudMigrationPerHostPage {
      */
     public List<String> getColumnValuesFromModalTable(MigrationCloudMappingModalTable column) {
         List<String> columnValues = new ArrayList<>();
-        List<WebElement> tableRows = cmpPageObj.tableRows;
+        List<WebElement> tableRows = cmpPageObj.modalTableRows;
         for (WebElement row : tableRows) {
             String colValue = row.findElement(By.xpath("td[" + (column.getIndex() + 1) + "]")).getText();
             columnValues.add(colValue);
@@ -525,7 +525,8 @@ public class CloudMigrationPerHostPage {
      * Check uncheck table
      */
     public void checkUncheckColumn(Boolean uncheck) {
-        WebElement tableHeadings = cmpPageObj.tableHeadings;
+        waitExecuter.waitUntilElementPresent(cmpPageObj.modalTableHeadings);
+        WebElement tableHeadings = cmpPageObj.modalTableHeadings;
         WebElement rowCheckbox =
                 tableHeadings.findElement(By.xpath("th[" + (MigrationCloudMappingModalTable.CHECKBOX.getIndex() + 1) +
                         "]")).findElement(By.xpath("label/span[@class='checkmark']"));
@@ -534,6 +535,7 @@ public class CloudMigrationPerHostPage {
                 userAction.performActionWithPolling(rowCheckbox, UserAction.CLICK);
             }
         } else {
+            userAction.performActionWithPolling(rowCheckbox, UserAction.CLICK);
             while (cmpPageObj.activeCheckBoxes.size() == 0) {
                 userAction.performActionWithPolling(rowCheckbox, UserAction.CLICK);
             }
@@ -545,7 +547,7 @@ public class CloudMigrationPerHostPage {
      */
     public List<WebElement> getCheckboxListForTable() {
         List<WebElement> checkboxList = new ArrayList<>();
-        List<WebElement> tableRows = cmpPageObj.tableRows;
+        List<WebElement> tableRows = cmpPageObj.modalTableRows;
         for (WebElement row : tableRows) {
             WebElement rowCheckbox = row.findElement(By.xpath("td[" + (MigrationCloudMappingModalTable.CHECKBOX.getIndex() + 1) +
                     "]")).findElement(By.xpath("label/span[@class='checkmark']"));
@@ -557,9 +559,8 @@ public class CloudMigrationPerHostPage {
     /**
      * Return the list of custom costs
      */
-    public List<WebElement> getCustomCosts() {
+    public List<WebElement> getCustomCosts(List<WebElement> tableRows) {
         List<WebElement> checkboxList = new ArrayList<>();
-        List<WebElement> tableRows = cmpPageObj.tableRows;
         for (WebElement row : tableRows) {
             WebElement rowCustomCost =
                     row.findElement(By.xpath("td[" + (MigrationCloudMappingModalTable.CUSTOM_COST.getIndex() + 1) +
@@ -575,7 +576,8 @@ public class CloudMigrationPerHostPage {
      * @param value - value to set
      */
     public void setCustomCost(WebElement element, String value) {
-        element.sendKeys(value);
+        WebElement customCostInput = element.findElement(By.tagName("input"));
+        userAction.performActionWithPolling(customCostInput, UserAction.SEND_KEYS, value);
     }
 
     /**
@@ -705,9 +707,8 @@ public class CloudMigrationPerHostPage {
     public Map<String, List> getInstanceValuesFromModalTable(boolean isForAllInstances) {
         Map<String, List> allInstances = new HashMap();
         int pageCount = isForAllInstances ? getPageCnt(2) : 1;
-        for (int i = 1; i < pageCount; i++) {
-            userAction.performActionWithPolling(cmpPageObj.forwardCaret, UserAction.CLICK);
-            List<WebElement> tableRows = cmpPageObj.tableRows;
+        for (int i = 0; i < pageCount; i++) {
+            List<WebElement> tableRows = cmpPageObj.modalTableRows;
             for (WebElement row : tableRows) {
                 List instanceDetails = new ArrayList();
                 Arrays.asList(MigrationCloudMappingModalTable.CORES, MigrationCloudMappingModalTable.MEMORY,
@@ -724,6 +725,8 @@ public class CloudMigrationPerHostPage {
                         });
                 allInstances.put(row.findElement(By.xpath("td[" + (MigrationCloudMappingModalTable.VM_TYPE.getIndex() + 1) + "]")).getText(), instanceDetails);
             }
+            if (i < pageCount -1 )
+                userAction.performActionWithPolling(cmpPageObj.forwardCaret, UserAction.CLICK);
         }
         return allInstances;
     }
@@ -731,8 +734,8 @@ public class CloudMigrationPerHostPage {
     public Map.Entry<String, List> getCheapestBasedOnCapacity(Map<String, List> allInstances, Double cores, Double memory) {
         allInstances =
                 allInstances.entrySet().stream().filter(kv -> (Double.parseDouble(kv.getValue().get(0).toString()) >= cores) &&
-                        (Double.parseDouble(kv.getValue().get(1).toString()) > memory)).sorted(Comparator.comparing(e -> Double.valueOf(e.getValue().get(3).toString())))
-                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+                    (Double.parseDouble(kv.getValue().get(1).toString()) > memory)).sorted(Comparator.comparing(e -> Double.valueOf(e.getValue().get(3).toString())))
+                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
         ;
         Map.Entry<String, List> entry = allInstances.entrySet().iterator().next();
         return entry;
@@ -755,7 +758,6 @@ public class CloudMigrationPerHostPage {
 
     /**
      * Convert memory values into MB
-     *
      * @param memory - memory values
      * @return - String memory in MB
      */
@@ -790,7 +792,7 @@ public class CloudMigrationPerHostPage {
             Assert.assertTrue(false, "Cloud Mapping Per Host is not completed");
         }
         waitTillLoaderPresent();
-        waitExecuter.sleep(10000);
+        waitExecuter.sleep(30000);
 
         LOGGER.info("Validate recommended for lift and shift.", test);
 
@@ -799,6 +801,8 @@ public class CloudMigrationPerHostPage {
         List actualRecommendedInstanceNames =
                 (List) recommendedUsages.stream().filter(data -> data instanceof Map).map(data -> ((Map) data)
                         .get(CloudMappingHostConstants.HostDetails.RecommendedUsages.TYPE)).collect(Collectors.toList());
+
+        waitTillLoaderPresent();
 
         List capacityUsages = getDataFromCloudMappingTable(
                 MigrationCloudMappingHostDetailsTable.CAPACITY);

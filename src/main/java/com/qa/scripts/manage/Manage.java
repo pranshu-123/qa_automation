@@ -183,7 +183,7 @@ public class Manage {
 
     public void clickRunDiagnostics(){
         waitExecuter.sleep(1000);
-        managePageObject.runDiagnosticsTab.click();
+        userAction.performActionWithPolling(managePageObject.runDiagnosticsTab, UserAction.CLICK);
         waitExecuter.sleep(3000);
     }
     public boolean validateRunDiagnosticsHeader(){

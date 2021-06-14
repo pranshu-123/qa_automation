@@ -2,7 +2,9 @@ package com.qa.testcases.cluster.queueanalysis;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.pagefactory.clusters.QueueAnalysisPageObject;
 import com.qa.scripts.clusters.QueueAnalysis;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.annotations.Test;
 
@@ -18,7 +20,7 @@ import java.util.logging.Logger;
 public class TC_QU_48 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_QU_48.class.getName());
 
-    @Test
+    @Test(description = "P1-Validate user is able to generate report with special chars in schedule report name")
     public void validateSpecialCharsInName() {
         test = extent.startTest("TC_QU_48.validateSpecialCharsInName",
                 "Validate user is able to generate report with special chars in report name");
@@ -28,6 +30,8 @@ public class TC_QU_48 extends BaseClass {
         test.log(LogStatus.INFO, "Initialize all class objects");
         LOGGER.info("Initialize all class objects");
         QueueAnalysis queueAnalysis = new QueueAnalysis(driver);
+        QueueAnalysisPageObject qaPageObject = new QueueAnalysisPageObject(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         // Navigate to Queue Analysis tab from header
         test.log(LogStatus.INFO, "Navigate to Queue Analysis tab from header");
         test.log(LogStatus.INFO, "Clicked on Queue Analysis tab");
@@ -51,8 +55,9 @@ public class TC_QU_48 extends BaseClass {
         queueAnalysis.clickOnModalScheduleButton();
         LOGGER.info("Clicked on modal Schedule Button");
         test.log(LogStatus.INFO, "Clicked on modal Schedule Button");
-        String scheduleSuccessMsg = "The report has been scheduled successfully.";
+        String scheduleSuccessMsg = "the report has been scheduled successfully.";
         queueAnalysis.verifyScheduleSuccessMsg(scheduleSuccessMsg);
+        waitExecuter.waitUntilElementClickable(qaPageObject.close);
         test.log(LogStatus.PASS, "Verified schedule with multi email for daily.");
     }
 }

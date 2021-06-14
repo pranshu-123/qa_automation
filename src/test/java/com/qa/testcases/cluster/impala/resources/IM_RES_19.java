@@ -30,7 +30,7 @@ import com.relevantcodes.extentreports.LogStatus;
 public class IM_RES_19 extends BaseClass {
 	private static final Logger LOGGER = Logger.getLogger(IM_RES_19.class.getName());
 
-	@Test(dataProvider = "clusterid-data-provider")
+	@Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the Memory and Query graphs should generated for selected and deselected node")
 	public void validateUserCheckbox(String clusterId) {
 		test = extent.startTest("IM_RES_19.validateUserCheckbox (" + clusterId + ")",
 				"Validate the \"Group By\" filter for Queue.");

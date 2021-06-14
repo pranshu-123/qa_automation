@@ -24,7 +24,7 @@ public class TC_CB_51 extends BaseClass {
 	private HomePage homePage;
 	private static final Logger LOGGER = Logger.getLogger(TC_CB_51.class.getName());
 
-	@Test(dataProvider = "clusterid-data-provider")
+	@Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the Memory and CPU Cost in the Chargeback table")
 	public void TC_CB_51_VerifyTotalCPUAndMemoryHoursOfTable(String clusterId) {
 		test = extent.startTest("TC_CB_51_VerifyTotalCPUAndMemoryHoursOfTable: " + clusterId,
 				"Verify User is able to see list of clusters available");

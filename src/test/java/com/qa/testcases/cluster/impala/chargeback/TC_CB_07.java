@@ -22,7 +22,7 @@ public class TC_CB_07 extends BaseClass {
      * Verify the data displayed by Unravel UI when the user
      * selects a custom date range where Impala data is not available
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify that the date range where the UI should display “No data available.”")
     public void VerifyImpalaWithNonExistingDateRange(String clusterId) {
         test = extent.startTest("TC_CB_07.VerifyImpalaWithNonExistingDateRange", "Verify the data displayed by " +
             "Unravel UI when the user selects a custom date range where Impala data is not available.");

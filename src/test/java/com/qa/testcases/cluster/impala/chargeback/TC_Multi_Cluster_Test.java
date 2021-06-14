@@ -10,7 +10,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class TC_Multi_Cluster_Test extends BaseClass {
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the Multi Cluster test using Data Provider")
     public void verifyTC_Multi_Cluster_Test(String clusterId) {
         test = extent.startTest("TC_Multi_Cluster_Test", "Validate the Multi Cluster test using Data Provider.");
         //test.assignCategory(" Cluster - Impala Chargeback - Multi-Cluster");

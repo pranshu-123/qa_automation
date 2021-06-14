@@ -20,7 +20,7 @@ public class TC_CB_05 extends BaseClass {
     /**
      * Verify User is able to access Impala chargeback page and able to pick all the date range.
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify that the UI should display data for the all the date ranges")
     public void TC_CB_05_VerifyImpalaChargeBackDatePicker(String clusterId) {
         test = extent.startTest("TC_CB_05_VerifyImpalaChargeBackDatePicker: "+clusterId, "Verify the user can pick all the date ranges from Impala chrageback page");
         test.assignCategory(" Cluster - Impala Chargeback");

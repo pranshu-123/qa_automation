@@ -22,7 +22,7 @@ public class TC_CB_41 extends BaseClass {
     /**
      * Validate table sorting - By type
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P1-Verify that the tables should sorted by type ascending and descending order.")
     public void validateSortByType(String clusterId) {
         test =
             extent.startTest("TC_CB_41.validateSortByType","Validate table sorting - By type");

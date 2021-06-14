@@ -23,7 +23,7 @@ public class TC_CB_39 extends BaseClass {
   /**
    * Validate the user can view the app details by clicking on the application
    */
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the user can view the app details by clicking on the application")
   public void TC_CB_39_VerifyAppDetails(String clusterId) {
     test = extent.startTest("TC_CB_39_VerifyAppDetails: "+clusterId,"Validate the user can view the app details by clicking on the application");
     test.assignCategory(" Cluster - Impala Chargeback");

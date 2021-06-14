@@ -31,7 +31,7 @@ public class TC_CB_02 extends BaseClass {
     private TopPanelPageObject topPanelPageObject;
     private static final Logger LOGGER = Logger.getLogger(TC_CB_02.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the UI should list all the clusters connected to Unravel")
     public void TC_CB_02_VerifyClusterList(String clusterId) {
         test = extent.startTest("TC_CB_02_VerifyClusterList: " + clusterId,
             "Verify User is able to see list of clusters available");

@@ -23,7 +23,7 @@ public class IM_RES_11 extends BaseClass {
     private ImpalaPageObject impalaPageObject;
     private static final Logger LOGGER = Logger.getLogger(IM_RES_11.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify that the user chooses each date picker to display the memory and Queries graphs.")
     public void IM_RES_11_verifyQueryGraphForQueueGroupForTwoDaysDatePickerOptions(String clusterId) {
         test = extent.startTest("IM_RES_11_verifyQueryGraphForQueueGroupForTwoDaysDatePickerOptions : "+clusterId,
                 "Verify Query graph one by one for each of the options in date picker range");

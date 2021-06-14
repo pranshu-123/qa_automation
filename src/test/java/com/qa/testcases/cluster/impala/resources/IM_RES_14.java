@@ -26,7 +26,7 @@ import java.util.logging.Logger;
 public class IM_RES_14 extends BaseClass {
 	private static final Logger LOGGER = Logger.getLogger(IM_RES_14.class.getName());
 
-	@Test(dataProvider = "clusterid-data-provider")
+	@Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the user hovers the mouse over the Query graph should display the tooltip for Memory graph at the same data point.")
 	public void IM_RES_14_verifyTooltipOfMemoryGraphOnHoveringQueryGraph(String clusterId) {
 		test = extent.startTest("IM_RES_14.verifyTooltipOfMemoryGraphOnHoveringQueryGraph : " + clusterId,
 				"Verify on hovering on Query graph, Memory graph tool tip should be visible too.)");

@@ -26,7 +26,7 @@ public class TC_CB_09 extends BaseClass {
 	private HomePage homePage;
 	private static final Logger LOGGER = Logger.getLogger(TC_CB_09.class.getName());
 
-	@Test(dataProvider = "clusterid-data-provider")
+	@Test(dataProvider = "clusterid-data-provider",description ="P0-Verify that the Grouped by drop-down box displays all the filters.")
 	public void TC_CB_09_VerifyGroupByOptions(String clusterId) {
 		test = extent.startTest("TC_CB_09_VerifyGroupByOptions : " + clusterId,
 				"Verify group by options available in list");

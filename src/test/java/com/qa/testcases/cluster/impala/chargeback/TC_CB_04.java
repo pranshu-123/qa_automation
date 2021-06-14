@@ -25,7 +25,7 @@ public class TC_CB_04 extends BaseClass {
     /**
      * Verify the unsupported clusters are displayed
      */
-    @Test
+    @Test(description ="P0-Verify that the Chargeback report is blank for an unsupported platform like HDP.")
     public void VerifyUnsupportedCluster() {
         test = extent.startTest("TC_CB_04.VerifyUnsupportedCluster", "Verify Unsupported clusters on " +
             "Impala chrageback page");

@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 public class IM_RES_22  extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(IM_RES_22.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify that the number of queries in the table should matches the number in the tooltip of the queries chart")
     public void verifyGroupByFilterForUserHoverMemoryGraphCompareImpalaTblToolTip(String clusterId) {
         test = extent.startTest("IM_RES_22.verifyGroupByFilterForUserHoverMemoryGraphCompareImpalaTblToolTip (" + clusterId + ")", "Verify if more than 5 hosts exist, the memory chart displays the top-5 hosts .");
         test.assignCategory(" Cluster/Impala Resources");

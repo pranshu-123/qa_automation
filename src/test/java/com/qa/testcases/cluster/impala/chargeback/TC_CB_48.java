@@ -24,7 +24,7 @@ public class TC_CB_48 extends BaseClass {
     /**
      * Validate table sorting - By Queue
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P1-Verify that the tables should sorted by Queue Time ascending and descending order")
     public void validateSortByQueue(String clusterId) {
         test =
             extent.startTest("TC_CB_48.validateSortByQueue", "Validate table sorting - By Queue");

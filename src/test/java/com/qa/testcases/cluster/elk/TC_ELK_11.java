@@ -20,7 +20,7 @@ public class TC_ELK_11 extends BaseClass {
 
   private static final java.util.logging.Logger LOGGER = Logger.getLogger(TC_ELK_11.class.getName());
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description="Verify All the pipelines should be listed under the pipeline tab.")
   public void TC_ELK_11_verifyLogstashPipelineInTable(String clusterId) {
     test = extent.startTest("verifyLogstashPipelineInTable: " + clusterId,
         "Validate pipelines in table.");

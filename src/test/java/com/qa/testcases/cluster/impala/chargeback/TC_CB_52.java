@@ -30,7 +30,7 @@ public class TC_CB_52 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_CB_52.class.getName());
 
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the CPU and Memory MB hours costs for decimal numbers in the Chargeback table")
     public void TC_CB_52_VerifyValidatethecostsfordecimalnumbers(String clusterId) {
         test = extent.startTest("TC_CB_52_VerifyValidatethecostsfordecimalnumbers"+clusterId, "Verify  the costs for decimal numbers");
         test.assignCategory(" Cluster - Impala Chargeback");

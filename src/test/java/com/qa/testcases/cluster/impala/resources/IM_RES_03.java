@@ -22,7 +22,7 @@ import java.util.List;
 @Marker.All
 public class IM_RES_03 extends BaseClass {
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify that the Memory and Query graphs in sync while selecting the same date range")
   public void validateDateRangeOfBothGraph(String clusterId) {
     test = extent.startTest("IM_RES_03.validateDateRangeOfBothGraph (" + clusterId + ")",
       "Verify that the Memory and Query graphs in sync (they display the same date range and granularity)");

@@ -33,7 +33,7 @@ public class IM_RES_02 extends BaseClass {
 	private DatePickerPageObject datePickerPageObject;
 	private static final Logger LOGGER = Logger.getLogger(IM_RES_02.class.getName());
 
-	@Test(dataProvider = "clusterid-data-provider")
+	@Test(dataProvider = "clusterid-data-provider",description ="P0-Verify that the user should be able to select each date picker and display the Memory Consumption and Queries graphs ")
 	public void IM_RES_02_verifyIfGraphDisplayedForMemoryConsumptionAndQuery(String clusterId) {
 		test = extent.startTest("IM_RES_02_verifyIfGraphDisplayedForMemoryConsumptionAndQuery : " + clusterId,
 				"Verify if user is able to view graph for ");

@@ -39,7 +39,11 @@ public class TC_ELK_24 extends BaseClass {
     MouseActions.clickOnElement(driver, elkPageObj.ESTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
-
+    DatePicker datePicker = new DatePicker(driver);
+    datePicker.clickOnDatePicker();
+    waitExecuter.sleep(1000);
+    datePicker.selectLast30Days();
+    waitExecuter.waitUntilPageFullyLoaded();
     elkPage.verifyClusterDropDown(elkPageObj);
     elkPage.verifyESNodeTable(elkPageObj);
 

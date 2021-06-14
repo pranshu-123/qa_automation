@@ -46,13 +46,15 @@ public class TC_ELK_22 extends BaseClass {
     test.log(LogStatus.INFO, "Click on date picker and list of calendar ranges");
     LOGGER.info("Click on date picker and list of calendar ranges");
     datePicker.clickOnDatePicker();
-    waitExecuter.sleep(1000);
+    waitExecuter.sleep(2000);
     List<String> calendarRanges = allApps.getCalendarRanges();
-    waitExecuter.sleep(3000);
+    waitExecuter.sleep(4000);
     elkPage.verifyDateRange(calendarRanges, test);
 
     elkPage.verifyClusterDropDown(elkPageObj);
+    waitExecuter.waitUntilPageFullyLoaded();
     elkPage.verifyClusterName(elkPageObj);
+    waitExecuter.waitUntilPageFullyLoaded();
 
     test.log(LogStatus.PASS, "Verified cluster drop down , date range and cluster name in UI successfully ");
   }

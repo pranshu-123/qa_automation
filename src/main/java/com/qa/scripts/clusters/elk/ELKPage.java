@@ -2,12 +2,14 @@ package com.qa.scripts.clusters.elk;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.qa.constants.DatePickerConstants;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.clusters.ELKPageObject;
 import com.qa.pagefactory.clusters.KafkaPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.clusters.kafka.KafkaPage;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.By;
@@ -24,6 +26,7 @@ public class ELKPage {
   private WaitExecuter waitExecuter;
   private WebDriver driver;
   private DatePicker datePicker;
+  public UserActions userActions;
   String xAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]" +
       "//*[name()='g' and contains(@class,'highcharts-xaxis-labels')]/*[name()='text']/*[name()='tspan']";
   String yAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]" +
@@ -101,15 +104,13 @@ public class ELKPage {
    * Method to verify Elastic Search cluster drop down
    */
   public String verifyClusterDropDown(ELKPageObject elkPageObject) {
-    waitExecuter.waitUntilElementClickable(elkPageObject.clusterDropDown);
-    waitExecuter.sleep(2000);
+    waitExecuter.sleep(4000);
     MouseActions.clickOnElement(driver, elkPageObject.clusterDropDown);
     waitExecuter.sleep(2000);
     List<WebElement> elkClusterList = elkPageObject.ELKClusters;
     Assert.assertFalse(elkClusterList.isEmpty(), "The drop down list for kafka cluster is empty");
     String clustername = elkClusterList.get(0).getText();
     MouseActions.clickOnElement(driver, elkClusterList.get(0));
-
     datePicker.clickOnDatePicker();
     waitExecuter.sleep(1000);
     datePicker.selectLast30Days();

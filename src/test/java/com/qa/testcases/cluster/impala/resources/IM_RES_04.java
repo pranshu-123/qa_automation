@@ -26,7 +26,7 @@ import com.relevantcodes.extentreports.LogStatus;
 public class IM_RES_04 extends BaseClass {
 	private static final Logger LOGGER = Logger.getLogger(IM_RES_04.class.getName());
 
-	@Test(dataProvider = "clusterid-data-provider")
+	@Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the tool tip of the graph should display the Total Memory and Allocated Memory of all the Nodes")
 	public void IM_RES_04_verifyMemoryQueryGraphForUserGroup(String clusterId) {
 		test = extent.startTest("IM_RES_04.verifyMemoryQueryGraphForUserGroup : "+clusterId, "Verify Query graph tooltip on hovering over Memory graph.)");
 		test.assignCategory(" Cluster/Impala Resources");

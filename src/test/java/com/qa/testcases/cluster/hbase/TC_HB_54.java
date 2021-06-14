@@ -45,7 +45,5 @@ public class TC_HB_54 extends BaseClass {
         hbase.verifyTableAndRegion();
         LOGGER.info("Verified Table and region on table details page.");
         test.log(LogStatus.PASS, "Verified Table and region on table details page.");
-
-
     }
 }

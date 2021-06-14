@@ -19,7 +19,7 @@ public class TC_CB_01 extends BaseClass {
     /**
      * Verify User is able to access Impala chargeback page
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify that the user can access the Impala chargeback page")
     public void TC_CB_01_VerifyImpalaChargeBackPage(String clusterId) {
         test = extent.startTest("TC_CB_01_VerifyImpalaChargeBackPage: " + clusterId, "Verify User is able to access Impala chrageback page");
         test.assignCategory(" Cluster - Impala Chargeback");

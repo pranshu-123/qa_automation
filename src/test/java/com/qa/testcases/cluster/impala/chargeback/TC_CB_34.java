@@ -22,7 +22,7 @@ public class TC_CB_34 extends BaseClass {
 	/**
 	 * Validate the user is able to deselect the filters
 	 */
-	@Test(dataProvider = "clusterid-data-provider")
+	@Test(dataProvider = "clusterid-data-provider",description ="P0-Verify that the UI should deselect the filters as the clicks on each one of them")
 	public void TC_CB_34_verifyICB_UserAbleToDeselectFilters(String clusterId) {
 		test = extent.startTest("TC_CB_34_verifyICB_UserAbleToDeselectFilters: " + clusterId,
 				"Validate the user is able to deselect the filters.");

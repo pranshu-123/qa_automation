@@ -23,10 +23,10 @@ public class TC_CB_29 extends BaseClass {
     private ChargebackImpalaPageObject chargebackImpalaPageObject;
     private DatePicker picker;
 
-    @Test(dataProvider = "clusterid-data-provider")
-    public void TC_CB_29_Datavalidation(String clusterId) {
+    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the number of applications displayed in the chargeback report")
+    public void TC_CB_29_dataValidation(String clusterId) {
 
-        test = extent.startTest("TC_CB_29_Datavalidation " + clusterId, "Verify the number of applications displayed in the chargeback report");
+        test = extent.startTest("TC_CB_29_dataValidation " + clusterId, "Verify the number of applications displayed in the chargeback report");
         test.assignCategory(" Cluster - Impala Chargeback");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);

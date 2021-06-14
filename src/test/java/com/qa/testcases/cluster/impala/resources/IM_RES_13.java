@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class IM_RES_13 extends BaseClass {
   private static final Logger LOGGER = Logger.getLogger(IM_RES_13.class.getName());
 
-  @Test
+  @Test(description ="P0-Verify that the user hovers the mouse over the Memory graph it should display the tooltip for the Query graph at the same data point.")
   public void verifyQueryGraphForQueueGroup() {
     test = extent.startTest("IM_RES_13.verifyQueryGraphForQueueGroup", "Verify Query graph with mouse hover.)");
     test.assignCategory(" Cluster/Impala Resources");

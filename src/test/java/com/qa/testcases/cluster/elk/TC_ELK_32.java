@@ -18,7 +18,7 @@ public class TC_ELK_32 extends BaseClass {
 
   private static final java.util.logging.Logger LOGGER = Logger.getLogger(com.qa.testcases.cluster.elk.TC_ELK_32.class.getName());
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description="P0-Verify ES KPIs colors should have Blue color status. KPI should not be red.")
   public void TC_ELK_32_verifyESKPIColors(String clusterId) {
     test = extent.startTest("TC_ELK_23_verifyESKPIColors: " + clusterId,
         "Validate ES KPIs colours");

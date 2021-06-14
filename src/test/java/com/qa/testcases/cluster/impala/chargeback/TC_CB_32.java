@@ -29,7 +29,7 @@ public class TC_CB_32 extends BaseClass {
 	private HomePage homePage;
 	private static final Logger LOGGER = Logger.getLogger(TC_CB_32.class.getName());
 
-	@Test(dataProvider = "clusterid-data-provider")
+	@Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the Memory hours should match with the expected calculation")
 	public void TC_CB_32_VerifyTotalMemoryHoursToUserMemoryHours(String clusterId) {
 		test = extent.startTest("TC_CB_32_VerifyTotalMemoryHoursToUserMemoryHours : " + clusterId,
 				"Verify that the Total Memory hours displayed pie chart is equal to the sum of all the users memory hours from chargeback table");

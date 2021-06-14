@@ -28,7 +28,7 @@ import java.util.logging.Logger;
 public class IM_RES_20 extends BaseClass {
   private static final Logger LOGGER = Logger.getLogger(IM_RES_20.class.getName());
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the Group By User Memory and Query graphs should generated for selected and deselected node")
   public void validateUserCheckbox(String clusterId) {
     test = extent.startTest("IM_RES_20.validateUserCheckbox (" + clusterId + ")", "Validate the \"Group By\" filter for Queue.");
     test.assignCategory(" Cluster/Impala Resources");

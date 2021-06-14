@@ -24,7 +24,7 @@ public class TC_CB_03 extends BaseClass {
     private ChargebackImpalaPageObject chargebackImpalaPageObject;
     private DatePicker picker;
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify that the user can select a cluster")
     public void TC_CB_03_Verifytheusercanselectacluster(String clusterId) {
 
         test = extent.startTest("TC_CB_03_Verifytheusercanselectacluster " + clusterId, "Verify the user can select a cluster ");

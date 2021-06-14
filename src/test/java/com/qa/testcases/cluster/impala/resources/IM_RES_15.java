@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 @Marker.All
 public class IM_RES_15 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(IM_RES_15.class.getName());
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify that the Memory Chart should display the memory limit and allocation for each node")
     public void IM_RES_15_verifymemorylimiandallocationeachnodeMemoryChart(String clusterId) {
         test = extent.startTest("IM_RES_15.verifymemorylimiandallocationeachnodeMemoryChart : " + clusterId,
                 "Verify that the memory limit and allocation for each node are displayed by the Memory Chart.)");

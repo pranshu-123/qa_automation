@@ -27,7 +27,7 @@ import java.util.logging.Logger;
 public class IM_RES_18 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(IM_RES_18.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the UI should display the usage only the selected group of Queues")
     public void verifyDataDisplayedAsFilteredQueue(String clusterId) {
         test = extent.startTest("IM_RES_18.verifyDataDisplayedAsFilteredQueue (" + clusterId + ")",
                 "Validate the \"Group By\" filter for Queue.");

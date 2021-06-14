@@ -21,7 +21,7 @@ public class TC_ELK_22 extends BaseClass {
 
   private static final java.util.logging.Logger LOGGER = Logger.getLogger(com.qa.testcases.cluster.elk.TC_ELK_22.class.getName());
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the Cluster drops down, date range, and cluster name should be there in UI..")
   public void TC_ELK_22_verifyESTab(String clusterId) {
     test = extent.startTest("TC_ELK_22_verifyESTab: " + clusterId,
         "Validate cluster drop down , date range and cluster name in UI.");

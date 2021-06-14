@@ -20,7 +20,7 @@ public class TC_ELK_04 extends BaseClass {
 
   private static final java.util.logging.Logger LOGGER = Logger.getLogger(com.qa.testcases.cluster.elk.TC_ELK_04.class.getName());
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description ="P0-Validate that the events should be received in the KPI.")
   public void TC_ELK_04_verifyEventsReceivedKPI(String clusterId) {
     test = extent.startTest("verifyEventsReceivedKPI: " + clusterId,
         "Validate Events Received KPI.");

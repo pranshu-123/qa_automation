@@ -18,7 +18,7 @@ public class TC_ELK_31 extends BaseClass {
 
   private static final java.util.logging.Logger LOGGER = Logger.getLogger(com.qa.testcases.cluster.elk.TC_ELK_31.class.getName());
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description="P0-Validate the ES indices specific metrics graph should be loaded and match with Kibana graph.")
   public void TC_ELK_31_verifyPerIndicesMetricsGraph(String clusterId) {
     test = extent.startTest("TC_ELK_31_verifyPerIndicesMetricsGraph: " + clusterId,
         "Validate ES indices specific metrics graph.");

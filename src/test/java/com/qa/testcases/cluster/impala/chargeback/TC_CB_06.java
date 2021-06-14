@@ -25,7 +25,7 @@ public class TC_CB_06 extends BaseClass {
     /**
      * Verify the user can select custom date ranges
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify that the user can select the custom date range.")
     public void TC_CB_06_VerifyCustomDateRange(String clusterId) {
         test = extent.startTest("TC_CB_06_VerifyCustomDateRange: " + clusterId, "Verify the user can select custom date ranges");
         test.assignCategory(" Cluster - Impala Chargeback");

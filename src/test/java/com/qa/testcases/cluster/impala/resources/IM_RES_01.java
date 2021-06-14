@@ -28,7 +28,7 @@ public class IM_RES_01 extends BaseClass {
 	private Parameter param;
 	private static final Logger LOGGER = Logger.getLogger(IM_RES_01.class.getName());
 
-	@Test(dataProvider = "clusterid-data-provider")
+	@Test(dataProvider = "clusterid-data-provider",description ="P0-Verify that the user can view the graph for Memory and Query on selecting the date picker.")
 	public void IM_RES_01_verifyGraphsForDatePickerOptions(String clusterId) {
 		test = extent.startTest("IM_RES_01_verifyGraphIsDisplayedForMemoryConsumptionAndQueryForAllDatePickerOption",
 				"Verify if user is able to view graph for Memory and Query on selecting different options from date picker from 1hour to last month");

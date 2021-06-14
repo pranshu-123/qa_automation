@@ -27,7 +27,7 @@ public class TC_CB_08 extends BaseClass {
      * Verify the user is not allowed to select a furture date range
      * @param clusterId - ClusterId to select for test execution
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify that the user should not be allowed to pick a future date range")
     public void verifyUserCanSelectFutureDate(String clusterId) throws ParseException {
         test = extent.startTest("TC_CB_08.verifyUserCanSelectFutureDate", "Verify the user is not allowed to select a furture date range");
         test.assignCategory(" Cluster - Impala Chargeback");

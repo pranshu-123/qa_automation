@@ -25,7 +25,7 @@ public class TC_CB_33 extends BaseClass {
     private ChargebackImpalaPageObject chargebackImpalaPageObject;
     private DatePicker picker;
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P0-Validate that the user can further filter the chargeback contents in the Donut Chart, Chargeback table, and Impala Queries should match.")
     public void TC_CB_33_ChargebackTable(String clusterId) {
 
         test = extent.startTest("TC_CB_33_ChargebackTable " + clusterId, "Verify the user can further filter the contents in the chargeback table ");

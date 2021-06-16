@@ -29,6 +29,12 @@ public class ELKPageObject {
   @FindBy(xpath = "(//span[contains(@class,'select2-selection__rendered')])")
   public WebElement clusterDropDown;
 
+  @FindBy(xpath = "//a[normalize-space()='Nodes']")
+  public WebElement nodesTab;
+
+  @FindBy(xpath = "//a[normalize-space()='Pipelines']")
+  public WebElement pipelinesTab;
+
   @FindBy(xpath = "//*[@class='select2-results__options']//li")
   public List<WebElement> ELKClusters;
 
@@ -105,6 +111,25 @@ public class ELKPageObject {
   @FindBy(xpath = "//div[contains(@class,'nodes-table-row')]")
   public WebElement tableRowBox;
 
+  @FindBy(xpath = "//table/thead/tr/th")
+  public List<WebElement> nodesCol;
+
+  @FindBy(xpath = "//div[contains(@id,'kibanaGraph')]//div[@class='content']//*[name()='g' and " +
+          "@class='highcharts-series-group']")
+  public List<WebElement> kibanaGraph;
+
+  @FindBy(xpath = "//div[contains(@id,'kibanaGraph')]/div[@class='header']/h4")
+  public List<WebElement> kibanaGraphHeader;
+
+  @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody/tr")
+  public List<WebElement> nodesRows;
+
+  @FindBy(xpath = "//div[contains(@id,'kibanaGraph')]/div[@class='footer']//label")
+  public List<WebElement> kibanaGraphFooter;
+
+  @FindBy(xpath = "//a[contains(@class,'icon-sort')]")
+  public List<WebElement>  nodesColSortingIcon;
+
   @FindBy(xpath = "//div[contains(@class,'component-dashboard')]")
   public WebElement overViewBox;
 
@@ -127,6 +152,9 @@ public class ELKPageObject {
 
   @FindBy(xpath = "//div[contains(@class,'logstash-graph')]")
   public List<WebElement> logstashMetricsList;
+
+  @FindBy(xpath = "//div[contains(@id,'kibanaGraph')]")
+  public List<WebElement> kibanaMetricsList;
 
   @FindBy(xpath = "//div[contains(@class,'pipeline-node-list')]//table[@class='component-data-tables']//tbody/tr")
   public List<WebElement> associatedNodeTableRows;

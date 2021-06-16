@@ -19,14 +19,14 @@ import java.util.logging.Logger;
 @Marker.ClusterELK
 public class TC_ELK_20 extends BaseClass {
 
-    private static final java.util.logging.Logger LOGGER = Logger.getLogger(TC_ELK_17.class.getName());
+    private static final java.util.logging.Logger LOGGER = Logger.getLogger(TC_ELK_20.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider",description="P1-Verify the Kibana metrics graph should be loaded and match with the Kibana UI graph..")
-    public void TC_ELK_17_verifyPipelineMetricsGraphs(String clusterId) {
-        test = extent.startTest("verifyPipelineMetricGraphs: " + clusterId,
+    public void TC_ELK_20_verifyKibanaMetricsGraphs(String clusterId) {
+        test = extent.startTest("verifyKibanaMetricsGraphs: " + clusterId,
                 "Verify the Kibana metrics graph should be loaded and match with the Kibana UI graph.");
         test.assignCategory(" ELK ");
-        Log.startTestCase("verifyPipelineMetricGraphs");
+        Log.startTestCase("verifyKibanaMetricsGraphs");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -46,6 +46,6 @@ public class TC_ELK_20 extends BaseClass {
         waitExecuter.waitUntilPageFullyLoaded();
         elkPage.verifyKibanaMetricGraphs(elkPageObj);
 
-        test.log(LogStatus.PASS, "Verified pipeline metrics graph successfully ");
+        test.log(LogStatus.PASS, "Verified Kibana metrics graph successfully ");
     }
 }

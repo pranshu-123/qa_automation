@@ -17,14 +17,14 @@ import java.util.logging.Logger;
 @Marker.ClusterELK
 public class TC_ELK_07 extends BaseClass {
 
-    private static final java.util.logging.Logger LOGGER = Logger.getLogger(com.qa.testcases.cluster.elk.TC_ELK_06.class.getName());
+    private static final java.util.logging.Logger LOGGER = Logger.getLogger(com.qa.testcases.cluster.elk.TC_ELK_07.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider",description="P1-Verify search and sorting for all columns in the nodes table should appear in logstash page..")
-    public void TC_ELK_07_verifySortKPI(String clusterId) {
-        test = extent.startTest("verifyMemoryKPI: " + clusterId,
+    public void TC_ELK_07_verifyNodesSortTbl(String clusterId) {
+        test = extent.startTest("verifyNodesSortTbl: " + clusterId,
                 "Verify search and sorting for all columns in the nodes table should appear in logstash page.");
         test.assignCategory(" ELK ");
-        Log.startTestCase("verifyMemoryKPI");
+        Log.startTestCase("verifyNodesSortTbl");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

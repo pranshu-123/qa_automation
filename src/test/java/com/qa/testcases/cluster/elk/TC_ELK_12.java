@@ -17,14 +17,14 @@ import java.util.logging.Logger;
 @Marker.ClusterELK
 public class TC_ELK_12 extends BaseClass {
 
-    private static final java.util.logging.Logger LOGGER = Logger.getLogger(com.qa.testcases.cluster.elk.TC_ELK_06.class.getName());
+    private static final java.util.logging.Logger LOGGER = Logger.getLogger(com.qa.testcases.cluster.elk.TC_ELK_12.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider",description="P1-Verify that the sorting for all columns in the pipelines table should appear in logstash page.")
-    public void TC_ELK_07_verifySortKPI(String clusterId) {
-        test = extent.startTest("verifyMemoryKPI: " + clusterId,
+    public void TC_ELK_12_verifyPipelinesSortTbl(String clusterId) {
+        test = extent.startTest("verifyPipelinesSortTbl: " + clusterId,
                 "Verify that the sorting for all columns in the pipelines table should appear in logstash page.");
         test.assignCategory(" ELK ");
-        Log.startTestCase("verifyMemoryKPI");
+        Log.startTestCase("verifyPipelinesSortTbl");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -48,6 +48,6 @@ public class TC_ELK_12 extends BaseClass {
         MouseActions.clickOnElement(driver, elkPageObj.pipelinesTab);
         waitExecuter.waitUntilPageFullyLoaded();
         elkPage.clickOnNodesTblColSort(elkPageObj);
-        test.log(LogStatus.PASS, "Verify search and sorting for all columns in the nodes table.");
+        test.log(LogStatus.PASS, "Verify search and sorting for all columns in the pipelines table.");
     }
 }

@@ -18,14 +18,14 @@ import java.util.logging.Logger;
 @Marker.ClusterELK
 public class TC_ELK_18 extends BaseClass {
 
-    private static final java.util.logging.Logger LOGGER = Logger.getLogger(com.qa.testcases.cluster.elk.TC_ELK_22.class.getName());
+    private static final java.util.logging.Logger LOGGER = Logger.getLogger(com.qa.testcases.cluster.elk.TC_ELK_18.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider",description="P1-Verify that the Cluster drops down, date range, and cluster name should be loaded and matching with Kibana UI graph.")
-    public void TC_ELK_18_verifyESTab(String clusterId) {
-        test = extent.startTest("TC_ELK_18_verifyESTab: " + clusterId,
+    public void TC_ELK_18_ClusterKibanaTab(String clusterId) {
+        test = extent.startTest("TC_ELK_18_ClusterKibanaTab: " + clusterId,
                 "Validate cluster drop down , date range and cluster name should be loaded and matching with Kibana UI graph");
         test.assignCategory(" ELK ");
-        Log.startTestCase("TC_ELK_22_verifyESTab");
+        Log.startTestCase("TC_ELK_18_ClusterKibanaTab");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 public class  IM_RES_17 extends BaseClass {
   private static final Logger LOGGER = Logger.getLogger(IM_RES_17.class.getName());
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the Group By filter for queue should display the Usage.")
   public void verifyDataDisplayedAsFilteredQueue(String clusterId) {
     test = extent.startTest("IM_RES_17.verifyDataDisplayedAsFilteredQueue (" + clusterId + ")", "Validate the \"Group By\" filter for Queue.");
     test.assignCategory(" Cluster/Impala Resources");

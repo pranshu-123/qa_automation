@@ -3,6 +3,7 @@ package com.qa.testcases.cluster.elk;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.clusters.ELKPageObject;
+import com.qa.scripts.DatePicker;
 import com.qa.scripts.clusters.elk.ELKPage;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
@@ -18,7 +19,7 @@ public class TC_ELK_29 extends BaseClass {
 
   private static final java.util.logging.Logger LOGGER = Logger.getLogger(com.qa.testcases.cluster.elk.TC_ELK_29.class.getName());
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the ES indices data should be loaded and match value with ES.")
   public void TC_ELK_29_verifyESIndicesData(String clusterId) {
     test = extent.startTest("TC_ELK_29_verifyESIndicesData: " + clusterId,
         "Validate ES Indices data.");
@@ -36,6 +37,11 @@ public class TC_ELK_29 extends BaseClass {
     MouseActions.clickOnElement(driver, elkPageObj.ESTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
+    DatePicker datePicker = new DatePicker(driver);
+    datePicker.clickOnDatePicker();
+    waitExecuter.sleep(1000);
+    datePicker.selectLast30Days();
+    waitExecuter.waitUntilPageFullyLoaded();
 
     elkPage.verifyClusterDropDown(elkPageObj);
     elkPage.navigateToIndicesTab(elkPageObj);

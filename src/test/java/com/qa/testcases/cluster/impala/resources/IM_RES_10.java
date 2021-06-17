@@ -27,7 +27,7 @@ public class IM_RES_10 extends BaseClass {
     private DatePicker datePicker;
     private ImpalaPageObject impalaPageObject;
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify that the user should be able to select each date picker and display the Memory Consumption and Queries graphs ")
     public void IM_RES_10_verifyQueryGraphForQueueGroup(String clusterId) {
         test = extent.startTest("IM_RES_10_verifyQueryGraphForQueueGroupForAllDatePickerOptions : " + clusterId,
                 "Verify Query graph one by one for each of the options in date picker range");

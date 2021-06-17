@@ -24,7 +24,7 @@ public class TC_CB_45 extends BaseClass {
     /**
      * Validate table sorting - By App Name / ID
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P1-Verify that the tables should sorted by App Name / ID ascending and descending order")
     public void validateSortByAppNameAndID(String clusterId) {
         test =
             extent.startTest("TC_CB_45.validateSortByAppNameAndID", "Validate table sorting - By App Name / ID");

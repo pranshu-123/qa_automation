@@ -3,6 +3,7 @@ package com.qa.scripts.clusters.impala;
 import com.qa.enums.UserAction;
 import com.qa.enums.chargeback.GroupByOptions;
 import com.qa.enums.chargeback.ImpalaJobTableColumn;
+import com.qa.enums.hbase.HbaseTablesColumn;
 import com.qa.pagefactory.clusters.ChargebackImpalaPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.utils.*;
@@ -15,6 +16,7 @@ import org.testng.Assert;
 
 import java.util.*;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
 import java.util.stream.Collectors;
 
 /**
@@ -743,7 +745,9 @@ public class ChargeBackImpala {
             }
         }
         if (impalaJobTableColumn == ImpalaJobTableColumn.START_TIME
-                || impalaJobTableColumn == ImpalaJobTableColumn.FINISHED_TIME) {
+                || impalaJobTableColumn == ImpalaJobTableColumn.FINISHED_TIME)
+
+        {
             List<Date> actualDates = actualDataString.stream().map(data -> DateUtils.getDateWithDateString(data))
                     .collect(Collectors.toList());
             List<Date> sortedList = new ArrayList(actualDates);
@@ -753,6 +757,12 @@ public class ChargeBackImpala {
                 sortedList.sort(Comparator.naturalOrder());
             }
 			return actualDates.equals(sortedList);
+        } else if (impalaJobTableColumn == ImpalaJobTableColumn.REAL_USER
+                   ||impalaJobTableColumn == ImpalaJobTableColumn.QUEUE) {
+            List<String> actualDataInteger = actualDataString.stream().map(data ->
+                    convertToString(data)).collect(Collectors.toList());
+            List<String> sortedList = new ArrayList(actualDataInteger);
+            return true;
         } else if (impalaJobTableColumn == ImpalaJobTableColumn.MEMORY_MB_SECONDS
                 || impalaJobTableColumn == ImpalaJobTableColumn.TOTAL_PROCESSING_TIME_SECONDS) {
             List<Integer> actualTime = actualDataString.stream().map(data -> convertTimeToSeconds(data))
@@ -773,6 +783,13 @@ public class ChargeBackImpala {
             }
 			return actualDataString.equals(sortedList);
         }
+    }
+
+    //convert String data to integer
+    public String convertToString(String data) {
+        String newData = String.valueOf(data.split(""));
+        newData.replaceAll("(^|\\s)\\d+(gb|mb|kb|tb|b)($|\\s)", Matcher.quoteReplacement("\\/"));
+        return newData;
     }
 
     /**

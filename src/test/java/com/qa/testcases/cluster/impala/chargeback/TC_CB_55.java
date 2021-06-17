@@ -25,7 +25,7 @@ public class TC_CB_55 extends BaseClass {
     /**
      * Validate the data displayed in the download Chargeback page.
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the data displayed in the Download CSV above the Impala Jobs page")
     public void TC_CB_55_verifyImpalaChargeBackDownloadCSV( String clusterId) {
         test = extent.startTest("TC_CB_55_and_56_verifyImpalaChargeBackDownloadCSV: "+clusterId, "Validate the data displayed in the download Chargeback page");
         test.assignCategory(" Cluster - Impala Chargeback");

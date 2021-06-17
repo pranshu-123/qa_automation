@@ -22,14 +22,14 @@ import java.util.stream.Collectors;
 
 public class HBasePage {
     private final ApplicationsPageObject applicationsPageObject;
-    String xAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]//*[name()='g' and contains(@class,'highcharts-xaxis-labels')]/*[name()='text']";
-    String yAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]//*[name()='g' and contains(@class,'highcharts-yaxis-labels')]/*[name()='text']";
     private final WebDriver driver;
     private final WaitExecuter waitExecuter;
     private final HBasePageObject hBasePageObject;
     private final UserActions actions;
     private final DatePicker datePicker;
     private final Logger logger = Logger.getLogger(HBasePage.class.getName());
+    String xAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]//*[name()='g' and contains(@class,'highcharts-xaxis-labels')]/*[name()='text']";
+    String yAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]//*[name()='g' and contains(@class,'highcharts-yaxis-labels')]/*[name()='text']";
 
     public HBasePage(WebDriver driver) {
         this.driver = driver;
@@ -335,6 +335,7 @@ public class HBasePage {
         MouseActions.clickOnElement(driver, hBasePageObject.hBaseFirstRegionSvr);
 
         waitExecuter.waitUntilElementPresent(hBasePageObject.hBaseRegionSvrTable);
+        waitExecuter.waitUntilPageFullyLoaded();
         List<WebElement> hBaseRegionSvrTableNames = hBasePageObject.hBaseRegionSvrTableNames;
         Assert.assertFalse(hBaseRegionSvrTableNames.isEmpty(), "No Tables found for region server.");
 

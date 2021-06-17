@@ -23,10 +23,10 @@ public class TC_CB_42 extends BaseClass {
     /**
      * Validate table sorting - By user
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P1-Verify that the tables should sorted by User ascending and descending order.")
     public void validateSortByUser(String clusterId) {
         test =
-            extent.startTest("TC_CB_42.validateSortByUser","Validate table sorting - By user");
+            extent.startTest("TC_CB_42.validateSortByUser","Verify the sorting of tables By User.");
         test.assignCategory(" Cluster - Impala Chargeback");
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
         ChargebackImpalaPageObject chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);

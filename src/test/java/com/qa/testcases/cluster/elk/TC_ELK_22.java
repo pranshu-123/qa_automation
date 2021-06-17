@@ -21,12 +21,12 @@ public class TC_ELK_22 extends BaseClass {
 
   private static final java.util.logging.Logger LOGGER = Logger.getLogger(com.qa.testcases.cluster.elk.TC_ELK_22.class.getName());
 
-  @Test(dataProvider = "clusterid-data-provider")
-  public void TC_ELK_22_verifyESTab(String clusterId) {
-    test = extent.startTest("TC_ELK_22_verifyESTab: " + clusterId,
+  @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the Cluster drops down, date range, and cluster name should be there in UI..")
+  public void TC_ELK_22_verifyKibanaTab(String clusterId) {
+    test = extent.startTest("TC_ELK_22_verifyKibanaTab: " + clusterId,
         "Validate cluster drop down , date range and cluster name in UI.");
     test.assignCategory(" ELK ");
-    Log.startTestCase("TC_ELK_22_verifyESTab");
+    Log.startTestCase("TC_ELK_22_verifyKibanaTab");
 
     // Initialize all classes objects
     test.log(LogStatus.INFO, "Initialize all class objects");
@@ -46,13 +46,15 @@ public class TC_ELK_22 extends BaseClass {
     test.log(LogStatus.INFO, "Click on date picker and list of calendar ranges");
     LOGGER.info("Click on date picker and list of calendar ranges");
     datePicker.clickOnDatePicker();
-    waitExecuter.sleep(1000);
+    waitExecuter.sleep(2000);
     List<String> calendarRanges = allApps.getCalendarRanges();
-    waitExecuter.sleep(3000);
+    waitExecuter.sleep(4000);
     elkPage.verifyDateRange(calendarRanges, test);
 
     elkPage.verifyClusterDropDown(elkPageObj);
+    waitExecuter.waitUntilPageFullyLoaded();
     elkPage.verifyClusterName(elkPageObj);
+    waitExecuter.waitUntilPageFullyLoaded();
 
     test.log(LogStatus.PASS, "Verified cluster drop down , date range and cluster name in UI successfully ");
   }

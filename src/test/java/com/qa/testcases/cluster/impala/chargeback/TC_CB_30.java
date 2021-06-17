@@ -19,7 +19,7 @@ public class TC_CB_30 extends BaseClass {
     /**
      * Validate the number of applications displayed in the chargeback report for Different Date pickers.
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the number of applications on the chargeback page that should match all the filters")
     public void TC_CB_30_verifyICB_JobsCountForDifferentDatePickers( String clusterId) {
         test = extent.startTest("TC_CB_30_verifyICB_JobsCountForDifferentDatePickers: " + clusterId, "Validate the number of applications displayed in the chargeback report for Different Date pickers.");
         test.assignCategory(" Cluster - Impala Chargeback");

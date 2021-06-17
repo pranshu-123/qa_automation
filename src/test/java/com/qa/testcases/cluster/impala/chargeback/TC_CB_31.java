@@ -22,7 +22,7 @@ public class TC_CB_31 extends BaseClass {
 	private DatePicker picker;
 	private static final Logger LOGGER = Logger.getLogger(TC_CB_31.class.getName());
 	
-	@Test(dataProvider = "clusterid-data-provider")
+	@Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the CPU hours should match with the expected calculation")
 	public void TC_CB_31_VerifyTotalMemoryHoursToUserMemoryHours(String clusterId) {
 		test = extent.startTest("TC_CB_31_VerifyTotalMemoryHoursToUserMemoryHours : " + clusterId,
 				"Verify User is able to see list of clusters available");

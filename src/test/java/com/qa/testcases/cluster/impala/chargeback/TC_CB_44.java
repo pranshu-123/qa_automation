@@ -24,7 +24,7 @@ public class TC_CB_44 extends BaseClass {
     /**
      * Validate table sorting - By Real User
      */
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P1-Verify that the tables should sorted by Real User ascending and descending order")
     public void validateSortByRealUser(String clusterId) {
         test =
             extent.startTest("TC_CB_44.validateSortByRealUser", "Validate table sorting - By Real User");

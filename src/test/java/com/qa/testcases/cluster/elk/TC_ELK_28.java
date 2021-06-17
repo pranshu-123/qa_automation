@@ -4,6 +4,7 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.clusters.ELKPageObject;
 import com.qa.pagefactory.clusters.KafkaPageObject;
+import com.qa.scripts.DatePicker;
 import com.qa.scripts.clusters.elk.ELKPage;
 import com.qa.scripts.clusters.kafka.KafkaPage;
 import com.qa.utils.Log;
@@ -20,7 +21,7 @@ public class TC_ELK_28 extends BaseClass {
 
   private static final java.util.logging.Logger LOGGER = Logger.getLogger(com.qa.testcases.cluster.elk.TC_ELK_28.class.getName());
 
-  @Test(dataProvider = "clusterid-data-provider")
+  @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the search and sorting in the Elasticsearch indices table should work correctly.")
   public void TC_ELK_28_verifyIndicesTableSearchOption(String clusterId) {
     test = extent.startTest("TC_ELK_28_verifyIndicesTableSearchOption: " + clusterId,
         "Validate search and sorting in Elasticsearch indices table.");
@@ -38,6 +39,11 @@ public class TC_ELK_28 extends BaseClass {
     MouseActions.clickOnElement(driver, elkPageObj.ESTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
+    DatePicker datePicker = new DatePicker(driver);
+    datePicker.clickOnDatePicker();
+    waitExecuter.sleep(1000);
+    datePicker.selectLast30Days();
+    waitExecuter.waitUntilPageFullyLoaded();
 
     elkPage.verifyClusterDropDown(elkPageObj);
     elkPage.navigateToIndicesTab(elkPageObj);

@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 public class IM_RES_23 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(IM_RES_23.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the data displayed for the Impala queries")
     public void verifythedatadisplayedfortheImpalaqueriesTblToolTip(String clusterId) {
         test = extent.startTest("IM_RES_23.verifythedatadisplayedfortheImpalaqueriesTblToolTip (" + clusterId + ")", "Verify if more than 5 hosts exist, the memory chart displays the top-5 hosts .");
         test.assignCategory(" Cluster/Impala Resources");

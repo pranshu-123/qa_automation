@@ -2,12 +2,14 @@ package com.qa.scripts.clusters.elk;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.qa.constants.DatePickerConstants;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.clusters.ELKPageObject;
 import com.qa.pagefactory.clusters.KafkaPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.clusters.kafka.KafkaPage;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.By;
@@ -16,14 +18,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
 
 public class ELKPage {
   private WaitExecuter waitExecuter;
   private WebDriver driver;
   private DatePicker datePicker;
+  public UserActions userActions;
   String xAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]" +
       "//*[name()='g' and contains(@class,'highcharts-xaxis-labels')]/*[name()='text']/*[name()='tspan']";
   String yAxis = "//*[name()='svg' and contains(@class,'highcharts-root')]" +
@@ -48,9 +54,6 @@ public class ELKPage {
    * Method to verify Elastic Search date range
    */
   public void verifyDateRange(List<String> calendarRanges, ExtentTest test) {
-    Assert.assertTrue(calendarRanges.contains(DatePickerConstants.DatePicker.LAST_1_HOUR),
-        "Last 1 Hour is not present in datepicker filter ");
-    test.log(LogStatus.PASS, "Verified 'Last 1 hour' option in date picker filter.");
     Assert.assertTrue(calendarRanges.contains(DatePickerConstants.DatePicker.LAST_2_HOUR),
         "Last 2 Hour is not present in datepicker filter");
     test.log(LogStatus.PASS, "Verified 'Last 2 hour' option in date picker filter.");
@@ -63,6 +66,9 @@ public class ELKPage {
     Assert.assertTrue(calendarRanges.contains(DatePickerConstants.DatePicker.TODAY),
         "Today is not present in datepicker filter");
     test.log(LogStatus.PASS, "Verified 'Today' option in date picker filter.");
+    Assert.assertTrue(calendarRanges.contains(DatePickerConstants.DatePicker.LAST_1_HOUR),
+            "Last 1 Hour is not present in datepicker filter ");
+    test.log(LogStatus.PASS, "Verified 'Last 1 hour' option in date picker filter.");
     Assert.assertTrue(calendarRanges.contains(DatePickerConstants.DatePicker.YESTERDAY),
         "Yesterday is not present in datepicker filter");
     test.log(LogStatus.PASS, "Verified 'Yesterday' option in date picker filter.");
@@ -101,15 +107,13 @@ public class ELKPage {
    * Method to verify Elastic Search cluster drop down
    */
   public String verifyClusterDropDown(ELKPageObject elkPageObject) {
-    waitExecuter.waitUntilElementClickable(elkPageObject.clusterDropDown);
-    waitExecuter.sleep(2000);
+    waitExecuter.sleep(4000);
     MouseActions.clickOnElement(driver, elkPageObject.clusterDropDown);
     waitExecuter.sleep(2000);
     List<WebElement> elkClusterList = elkPageObject.ELKClusters;
     Assert.assertFalse(elkClusterList.isEmpty(), "The drop down list for kafka cluster is empty");
     String clustername = elkClusterList.get(0).getText();
     MouseActions.clickOnElement(driver, elkClusterList.get(0));
-
     datePicker.clickOnDatePicker();
     waitExecuter.sleep(1000);
     datePicker.selectLast30Days();
@@ -324,6 +328,34 @@ public class ELKPage {
         nodePipelineList.isDisplayed(), " All elements not displayed in the UI");
   }
 
+  /* Get all InefficientApp application Table row count */
+  public int getTotalCountOfNodesTblRow(ELKPageObject elkPageObject) {
+    int countInefficientAppsTblRow = elkPageObject.nodesRows.size();
+    if (countInefficientAppsTblRow > 0) {
+      return countInefficientAppsTblRow;
+    }
+    return countInefficientAppsTblRow;
+  }
+
+  /**
+   * Method to verify column sorting options for Broker Metric table
+   */
+  public void clickOnNodesTblColSort(ELKPageObject elkPageObject) {
+    int countOfHeaderToSort = elkPageObject.nodesColSortingIcon.size();
+    int countInefficientAppsTblRowBeforeClick = getTotalCountOfNodesTblRow(elkPageObject);
+    if (countOfHeaderToSort > 0) {
+      for (int i = 0; i < countOfHeaderToSort; i++) {
+        waitExecuter.sleep(2000);
+        MouseActions.clickOnElement(driver, elkPageObject.nodesColSortingIcon.get(i));
+        waitExecuter.sleep(3000);
+        int countInefficientAppsTblRow = elkPageObject.nodesRows.size();
+        Assert.assertEquals(countInefficientAppsTblRow, countInefficientAppsTblRowBeforeClick,
+                "InefficientAppTableRow count mismatch before and after sort");
+      }
+    }
+  }
+
+
   /***
    * Method to verify logstash KPis and its value.
    */
@@ -375,6 +407,26 @@ public class ELKPage {
 //              " Actual: " + actualMemoryData);
         }
       }
+    }
+  }
+
+  /***
+   * Method to validate Kibana metrics graph .
+   */
+  public void verifyKibanaGraph(ELKPageObject elkPageObject) {
+    List<WebElement> metricsList = elkPageObject.kibanaMetricsList;
+    List<WebElement> headerList = elkPageObject.kibanaGraphHeader;
+    List<WebElement> footerList = elkPageObject.kibanaGraphFooter;
+    List<WebElement> graphList = elkPageObject.kibanaGraph;
+
+    for (int i = 0; i < metricsList.size(); i++) {
+      String metricsName = headerList.get(i).getText();
+      Assert.assertFalse(metricsName.isEmpty(), " Metrics Name not displayed");
+      logger.info("Metrics Name: [" + metricsName + "] displayed in the header");
+      Assert.assertTrue(graphList.get(i).isDisplayed(), "The graph for metrics " + metricsName + " is not displayed");
+      logger.info("The graph for Metrics : [" + metricsName + "] is displayed");
+      Assert.assertTrue(footerList.get(i).isDisplayed(), "The footer for metrics " + metricsName + " is not displayed");
+      logger.info("The footer for Metrics : [" + metricsName + "] is displayed");
     }
   }
 
@@ -547,6 +599,10 @@ public class ELKPage {
     }
     logger.info("Sum of memory used = " + memorySum);
     return memorySum;
+  }
+
+  public void verifyKibanaMetricGraphs(ELKPageObject elkPageObject) {
+    verifyKibanaGraph(elkPageObject);
   }
 
   public void verifyKibanaKPIs(ELKPageObject elkPageObject){

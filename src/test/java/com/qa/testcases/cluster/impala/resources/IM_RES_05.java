@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 public class IM_RES_05 extends BaseClass {
   private static final Logger LOGGER = Logger.getLogger(IM_RES_05.class.getName());
 
-  @Test
+  @Test(description ="P0-Verify the mouse over the Query graph it should simultaneously display the tool tip for Memory graph at the same data point")
   public void verifyQueryGraphForUserGroup() {
     test = extent.startTest("IM_RES_05.verifyQueryGraphForUserGroup", "Verify Query graph with mouse hover.)");
     test.assignCategory(" Cluster/Impala Resources");

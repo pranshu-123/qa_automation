@@ -29,7 +29,7 @@ public class IM_RES_26 extends BaseClass {
 	private DatePickerPageObject datePickerPageObject;
 	private static final Logger LOGGER = Logger.getLogger(IM_RES_26.class.getName());
 
-	@Test(dataProvider = "clusterid-data-provider")
+	@Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the Memory usage graph should display the message No Data To Display")
 	public void IM_RES_26_verifyIsGraphDisplayedForMemoryConsumptionAndQuery(String clusterId) {
 		test = extent.startTest("IM_RES_26_verifyIsGraphDisplayedForMemoryConsumptionAndQuery : " + clusterId,
 				"Verify if user is able to view No data if graph is not visible");

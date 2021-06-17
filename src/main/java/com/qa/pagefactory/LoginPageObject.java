@@ -30,7 +30,7 @@ public class LoginPageObject {
   @FindBy(css = "a.icon-logout")
   public List<WebElement> logoutButtonList;
 
-  @FindBy(xpath="//span[contains(text(),'Sign in')]/parent::a")
+  @FindBy(className= "LoginPage_auth_button_15tdi")
   public WebElement signInButton;
 
   /**

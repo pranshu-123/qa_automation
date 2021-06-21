@@ -106,10 +106,10 @@ public class ImpalaPageObject {
     @FindBy(xpath = "//table[@id='runningImpalaQueriesTable']/tbody/tr")
     public List<WebElement> impalaQueriesTableRecords;
 
-    @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]/li/span[contains(text(),'Resources')])[1]")
+    @FindBy(xpath = "//li[@class='active']//ul[@class='sub-menu']//li//span[contains(text(),'Resources')]")
     public WebElement resourcesTab;
 
-    @FindBy(xpath = "//b[contains(@class,'pointer')]/span")
+    @FindBy(xpath = "//span[@class='glyphicon glyphicon-chevron-down header-ddl']")
     public WebElement resourceUsagePointer;
 
     @FindBy(xpath = "//div[contains(@class,'dropdown-content-display')]/a[contains(text(),'Impala')]")

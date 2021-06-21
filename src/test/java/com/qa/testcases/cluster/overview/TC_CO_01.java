@@ -29,7 +29,7 @@ public class TC_CO_01 extends BaseClass{
 
         Properties prop = ConfigReader.readBaseConfig();
         String url = prop.getProperty("url");
-        String expectedUrl = url+"/#/clusters/overview";
+        String expectedUrl = url+"#/clusters/overview";
         Assert.assertEquals(homePage.getHomePageUrl(),expectedUrl);
         test.log(LogStatus.PASS, "The clusters/overview page is successfully verified.");
         //Check kpi displays

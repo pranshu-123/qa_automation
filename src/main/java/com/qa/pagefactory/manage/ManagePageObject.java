@@ -16,7 +16,7 @@ public class ManagePageObject {
     public List<WebElement> allManageTabList;
 
     //@FindBy(css = "div#daemons-template h1")
-    @FindBy(xpath="//li[@class='router-link-exact-active router-link-active active']//span[@class='selected'][normalize-space()='Daemons']")
+    @FindBy(xpath="//li[@class='active']//ul[@class='sub-menu']//li//span[contains(text(),'Daemons')]")
     public WebElement daemonsHeader;
 
     @FindBy(xpath = "(//ul[@class='sub-menu']/li[contains(@class,'router-link-active')]/span[@class='selected'])[7]")
@@ -61,7 +61,7 @@ public class ManagePageObject {
     @FindBy(xpath = "//table[contains(@class,'component-data-tables')]/tbody/tr")
     public List<WebElement> sensorHeartbeatTblRows;
 
-    @FindBy(xpath="((//ul[@class='sub-menu']/li[contains(@class,'router-link-active')]/span[@class='selected'])[7]/parent::li/following-sibling::li/span)[2]")
+    @FindBy(xpath="//li[@class='active']//ul[@class='sub-menu']//li//span[contains(text(),'Run Diagnostics')]")
     public WebElement runDiagnosticsTab;
 
     @FindBy(xpath="//li[@class='active']//span[@class='selected'][normalize-space()='Run Diagnostics']")

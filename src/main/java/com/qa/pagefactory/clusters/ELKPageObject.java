@@ -8,8 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 
 public class ELKPageObject {
-  @FindBy(xpath = "//li[contains(@class,'active')]/ul[contains(@class,'sub-menu')]//li/span[contains(text()," +
-      "'Elasticsearch')]")
+  @FindBy(xpath = "//li[@class='active']//ul[@class='sub-menu']//li//span[contains(text(),'Elasticsearch')]")
   public WebElement ESTab;
 
   @FindBy(xpath = "//a[contains(text(),'Indices')]")
@@ -18,12 +17,10 @@ public class ELKPageObject {
   @FindBy(xpath = "//a[contains(text(),'Pipelines')]")
   public WebElement pipelineTab;
 
-  @FindBy(xpath = "//li[contains(@class,'active')]/ul[contains(@class,'sub-menu')]//li/span[contains(text()," +
-      "'Logstash')]")
+  @FindBy(xpath = "//li[@class='active']//ul[@class='sub-menu']//li//span[contains(text(),'Logstash')]")
   public WebElement logstashTab;
 
-  @FindBy(xpath = "//li[contains(@class,'active')]/ul[contains(@class,'sub-menu')]//li/span[contains(text()," +
-      "'Kibana')]")
+  @FindBy(xpath = "//li[@class='active']//ul[@class='sub-menu']//li//span[contains(text(),'Kibana')]")
   public WebElement kibanaTab;
 
   @FindBy(xpath = "(//span[contains(@class,'select2-selection__rendered')])")

@@ -58,7 +58,7 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//ul[contains(@class,'select2-results__options')]/li[2]")
     public WebElement select2stClusterOption;
 
-    @FindBy(xpath = "//div[contains(text(),'Small file Report completed successfully.')]")
+    @FindBy(xpath = "//div[contains(text(),'Small file Report')]")
     public WebElement confirmationMessageElement;
 
     @FindBy(xpath = "//div[@class='col-md-9']//div[@class='col-md-12']")

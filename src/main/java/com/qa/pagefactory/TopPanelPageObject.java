@@ -84,7 +84,7 @@ public class TopPanelPageObject {
     @FindBy(xpath = "//li[contains(@class,'active')]/ul[contains(@class,'sub-menu')]/li/span[contains(text(),'Tuning')]")
     public WebElement tuningTab;
 
-    @FindBy(xpath = "//ul[@class='primary-links']/li[3]/ul/li[3]/span")
+    @FindBy(xpath = "//li[@class='active']//ul[@class='sub-menu']//li//span[contains(text(),'Forecasting')]")
     public WebElement dataForecastingTab;
 
     @FindBy(xpath = "//ul[@class='primary-links']/li[3]/ul/li[4]/span")

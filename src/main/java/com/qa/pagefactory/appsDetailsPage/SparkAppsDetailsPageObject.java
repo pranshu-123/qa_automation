@@ -28,7 +28,7 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "//*[@id='app-filter-panel']/div[2]/div[2]/div/div[2]/p/label/span[2]")
   public WebElement failedAppCnt;
 
-  @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[4]/div")
+  @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[4]/a[2]")
   public WebElement getAppId;
 
   @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span/span")

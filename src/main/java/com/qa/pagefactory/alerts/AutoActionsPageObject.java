@@ -18,7 +18,7 @@ public class AutoActionsPageObject {
     @FindBy(xpath = "//span[contains(@class,'icon-alerts')]/parent::h4/following-sibling::ul/li/span")
     public WebElement autoActionsHeaderLink;
 
-    @FindBy(xpath = "//li//span[contains(text(),'Auto Actions')]")
+    @FindBy(xpath = "(//span[contains(.,'Auto Actions')])[5]")
     public  WebElement autoActionComponentHeader;
 
     @FindBy(xpath = "//div[contains(@class,'component-section-header')]/div/span[2]/a")

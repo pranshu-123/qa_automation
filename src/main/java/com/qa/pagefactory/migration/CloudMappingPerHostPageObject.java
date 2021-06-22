@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 
 public class CloudMappingPerHostPageObject {
-  @FindBy(xpath = "///li//span[contains(text(),'Cloud Mapping Per Host')]")
+  @FindBy(xpath = "(//span[contains(.,'Cloud Mapping Per Host')])[6]")
   public WebElement cloudMappingPerHostTab;
 
   @FindBy(xpath = "(//span[contains(text(),'Run')]/parent::a)[last()]")

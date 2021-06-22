@@ -65,8 +65,7 @@ public class TopPanelPageObject {
             "ul[contains(@class,'sub-menu')]//li/span[contains(text(),'Impala')]")
     public WebElement impalaTab;
 
-    @FindBy(xpath = "//li[contains(@class,'active')]/" +
-            "ul[contains(@class,'sub-menu')]//li/span[contains(text(),'Overview')]")
+    @FindBy(xpath = "//li[@class='active']//ul[@class='sub-menu']//li//a[@class='router-link-exact-active router-link-active selected']")
     public WebElement overviewTab;
 
     @FindBy(xpath = "//li[contains(@class,'active')]/" +

@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class ChargebackImpalaPageObject {
 
-    @FindBy(xpath = "//li[@class='active']//ul[@class='sub-menu']//li//span[contains(text(),'Chargeback')]")
+    @FindBy(xpath = "//ul/li//span[contains(text(),'Chargeback')]")
     public WebElement clusterChargeBackTab;
 
     @FindBy(xpath = "//span[@class='glyphicon glyphicon-chevron-down header-ddl']")

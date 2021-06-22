@@ -18,7 +18,7 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "//ul/li//span[contains(text(),'Chargeback')]")
     public WebElement clusterChargeBackTab;
 
-    @FindBy(xpath = "//span[@class='glyphicon glyphicon-chevron-down header-ddl']")
+    @FindBy(xpath = "//span[contains(@class,'glyphicon glyphicon-chevron-down')]")
     public WebElement chargeBackDropdownOptionsButton;
 
     @FindBy(xpath = "//a[contains(text(),'Impala')]")

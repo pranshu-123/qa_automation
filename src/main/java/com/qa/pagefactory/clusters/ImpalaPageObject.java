@@ -106,7 +106,7 @@ public class ImpalaPageObject {
     @FindBy(xpath = "//table[@id='runningImpalaQueriesTable']/tbody/tr")
     public List<WebElement> impalaQueriesTableRecords;
 
-    @FindBy(xpath = "//li[@class='active']//ul[@class='sub-menu']//li//span[contains(text(),'Resources')]")
+    @FindBy(xpath = "//li//span[contains(text(),'Resources')]")
     public WebElement resourcesTab;
 
     @FindBy(xpath = "//span[@class='glyphicon glyphicon-chevron-down header-ddl']")

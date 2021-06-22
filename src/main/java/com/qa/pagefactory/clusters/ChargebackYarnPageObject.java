@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 
 public class ChargebackYarnPageObject {
-    @FindBy(xpath = "//li[@class='active']//ul[@class='sub-menu']//li//span[contains(text(),'Chargeback')]")
+    @FindBy(xpath = "//li//span[contains(text(),'Chargeback')]")
     public WebElement clusterChargeBackTab;
 
     @FindBy(xpath = "//span[@class='glyphicon glyphicon-chevron-down header-ddl']")

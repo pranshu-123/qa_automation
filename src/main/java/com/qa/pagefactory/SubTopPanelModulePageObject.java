@@ -47,13 +47,13 @@ public class SubTopPanelModulePageObject {
     @FindBy(id = "support-li")
     public WebElement supportList;
 
-    @FindBy(xpath = "//span[contains(@class, 'icon-cloud')]/parent::h4/following-sibling::ul/li/span[contains(text(), 'Services And Versions Compatibility')]")
+    @FindBy(xpath = "//li[@class='active']//ul[@class='sub-menu']//li//span[contains(text(),'Services And Versions Compatibility')]")
     public WebElement servicesVersionMigrationTab;
 
     @FindBy(xpath = "//li[contains(@class,'active')]//ul[@class='sub-menu']//span[text()='Cluster Discovery']")
     public WebElement clusterDiscoveryTab;
 
-    @FindBy(xpath = "//li[contains(@class,'active')]//ul[@class='sub-menu']//span[text()='Workload Fit']")
+    @FindBy(xpath = "//li[@class='active']//ul[@class='sub-menu']//li//span[contains(text(),'Workload Fit')]")
     public WebElement WorkloadFitTab;
 
     @FindBy(xpath = "(//ul[@class='sub-menu']/li/span[text()='Pipelines'])[2]")

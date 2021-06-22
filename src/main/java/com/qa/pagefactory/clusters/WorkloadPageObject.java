@@ -18,11 +18,10 @@ public class WorkloadPageObject {
     @FindBy(xpath = "//ul[contains(concat(' ', @class, ' '), 'select2-results__options')]/li")
     public List<WebElement> clusterList;
 
-    @FindBy(xpath = "//li[contains(@class,'active')]/" +
-            "ul[contains(@class,'sub-menu')]//li/span[contains(text(),'Workload')]")
+    @FindBy(xpath = "//li[@class='active']//ul[@class='sub-menu']//li//span[contains(text(),'Workload')]")
     public WebElement workloadTab;
 
-    @FindBy(xpath = "//b[contains(@class,'dropbtn')]")
+    @FindBy(xpath = "//span[@class='glyphicon glyphicon-chevron-down header-ddl']")
     public WebElement workloadDropdownOptionsButton;
 
     @FindBy(xpath = "//a[contains(text(),'vCore Hours')]")
@@ -46,10 +45,10 @@ public class WorkloadPageObject {
     @FindBy(xpath = "//a[contains(text(),'Yarn')]")
     public WebElement workloadDropdownYarn;
 
-    @FindBy(xpath = "//*[@id=\"cluster-workload\"]/div[1]/div[2]/h3")
+    @FindBy(xpath = "//h3[contains(text(),'datewise')]")
     public WebElement timerangeMessageElement;
 
-    @FindBy(xpath = "//*[@id=\"cluster-workload\"]/div[1]/div[2]/div[4]/div/div/div[1]/div/div/div[2]/div")
+    @FindBy(xpath = "//h3[contains(text(),'datewise')]")
     public WebElement currentmonthHeader;
 
     @FindBy(xpath = "//*[@class='close pointer']")
@@ -61,7 +60,7 @@ public class WorkloadPageObject {
     @FindBy(xpath = "//*[@id=\"radio-btn-opt\"]/span[1]")
     public WebElement viewByMonth;
 
-    @FindBy(xpath = "//span[@class=\"badge tag\" and text()=\"Day\"]")
+    @FindBy(xpath = "//div[@class='col-md-6 viewby']//span[@class='badge pending']")
     public WebElement viewByDay;
 
     @FindBy(xpath = "//span[normalize-space()='Hour']")
@@ -115,7 +114,7 @@ public class WorkloadPageObject {
     @FindBy(xpath = "//*[@id=\"kindTable\"]/div[1]")
     public WebElement jobtableHeader;
 
-    @FindBy(xpath = "/html/body//div[2]/h3/b[3]")
+    @FindBy(xpath = "//b[contains(text(),'05')]")
     public WebElement timeRange;
 
 

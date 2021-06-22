@@ -18,7 +18,7 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//*[@class='select2-results__options']/li")
   public List<WebElement> dropDownList;
 
-  @FindBy(xpath = "//*[@id=\"app\"]/div/div[1]/nav/ul[1]/li[4]/ul/li[2]/span")
+  @FindBy(xpath = "//li[@class='active']//ul[@class='sub-menu']//li//span[contains(text(),'Scheduled')]")
   public WebElement scheduledPage;
 
   @FindBy(xpath = "//div[contains(@class,'component-section-header')]")

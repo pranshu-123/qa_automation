@@ -64,7 +64,7 @@ public class ManagePageObject {
     @FindBy(xpath="//li[@class='active']//ul[@class='sub-menu']//li//span[contains(text(),'Run Diagnostics')]")
     public WebElement runDiagnosticsTab;
 
-    @FindBy(xpath="//li[@class='active']//span[@class='selected'][normalize-space()='Run Diagnostics']")
+    @FindBy(xpath="//li[@class='active']//ul[@class='sub-menu']//li//span[contains(text(),'Run Diagnostics')]")
     public WebElement runDiagnosticsHeader;
 
     @FindBy(xpath = "//ul[@class='diagnostic-ul']/li[contains(text(),'Load Latest Diagnostics')]")
@@ -82,7 +82,7 @@ public class ManagePageObject {
     @FindBy(xpath="//ul[@class='diagnostic-ul']/li[2]")
     public WebElement  downloadSupportBundleBtn;
 
-    @FindBy(xpath="((//ul[@class='sub-menu']/li[contains(@class,'router-link-active')]/span[@class='selected'])[7]/parent::li/following-sibling::li/span)[3]")
+    @FindBy(xpath="//li[@class='active']//ul[@class='sub-menu']//li//span[contains(text(),'Monitoring')]")
     public WebElement monitoringTab;
 
     @FindBy(xpath="(//span[contains(.,'Monitoring')])[7]")

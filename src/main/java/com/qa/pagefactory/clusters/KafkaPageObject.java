@@ -9,7 +9,7 @@ import java.util.List;
 
 public class KafkaPageObject {
 
-  @FindBy(xpath = "//li[contains(@class,'active')]/ul[contains(@class,'sub-menu')]//li/span[contains(text(),'Kafka')]")
+  @FindBy(xpath = "//li[@class='active']/ul[@class='sub-menu']/li/a/span[contains(text(),'Kafka')]")
   public WebElement kafkaTab;
 
   @FindBy(xpath = "//div[@class='component-tabs-secondary']//a[contains(text(),'Broker')]")

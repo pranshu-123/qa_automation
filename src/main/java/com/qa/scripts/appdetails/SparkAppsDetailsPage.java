@@ -756,7 +756,8 @@ public class SparkAppsDetailsPage {
         logger.info("Spark application Id is " + appId);
         waitExecuter.waitUntilPageFullyLoaded();
      //   waitExecuter.waitUntilElementClickable(sparkPageObject.resetButton);
-        appPageObj.getTypeFromTable.click();
+       // appPageObj.getTypeFromTable.click();
+        sparkPageObj.getAppId.click();
         waitExecuter.waitUntilElementClickable(sparkPageObject.closeAppsPageTab);
         //waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();

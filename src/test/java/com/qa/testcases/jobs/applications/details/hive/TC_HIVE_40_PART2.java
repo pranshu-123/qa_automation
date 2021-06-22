@@ -102,8 +102,8 @@ public class TC_HIVE_40_PART2 extends BaseClass {
             // Click on the first app in table to get efficiency
             test.log(LogStatus.INFO, "Click on the first app in table to get efficiency");
             LOGGER.info("Click on the first app in table to get efficiency");
-            waitExecuter.waitUntilElementClickable(applicationsPageObject.getDurationFromTable);
-            userAction.performActionWithPolling(applicationsPageObject.getDurationFromTable, UserAction.CLICK);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
+            userAction.performActionWithPolling(applicationsPageObject.clickOnAppId, UserAction.CLICK);
             driver.getWindowHandle();
             waitExecuter.waitUntilElementClickable(applicationsPageObject.tagsTab);
             userAction.performActionWithPolling(applicationsPageObject.tagsTab, UserAction.CLICK);

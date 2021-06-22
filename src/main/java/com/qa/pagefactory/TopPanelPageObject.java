@@ -99,7 +99,7 @@ public class TopPanelPageObject {
     @FindBy(xpath = "//span[contains(@class,'icon-cloud')]")
     public WebElement migrationTab;
 
-    @FindBy(xpath = "//h4/span[contains(text(), 'Clusters')]")
+    @FindBy(xpath = "//span[contains(@class,'icon-cluster')]")
     public WebElement clusterTab;
 
     @FindBy(xpath = "//nav/ul//span[contains(text(),'Reports')]")

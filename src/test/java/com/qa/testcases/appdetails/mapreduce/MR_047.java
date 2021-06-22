@@ -58,7 +58,7 @@ public class MR_047 extends BaseClass {
                 applicationsPageObject, clusterId);
 
         test.log(LogStatus.INFO, "Verify that the left pane has map reduce check box and the apps number");
-        mrDetailsPage.clickOnlyLink("Map Reduce");
+        mrDetailsPage.clickOnlyLink("MapReduce");
         applicationsPageObject.expandStatus.click();
         int appCount = mrDetailsPage.clickOnlyLink("Success");
         waitExecuter.waitUntilPageFullyLoaded();

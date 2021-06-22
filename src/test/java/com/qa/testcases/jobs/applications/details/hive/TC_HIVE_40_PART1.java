@@ -126,12 +126,12 @@ public class TC_HIVE_40_PART1 extends BaseClass {
                     }
             }
             executor.executeScript("arguments[0].scrollIntoView();", applicationsPageObject.globalSearchBox);
-            waitExecuter.sleep(2000);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
             int totalCount = Integer
                     .parseInt(applicationsPageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
             waitExecuter.sleep(2000);
             if (totalCount > 0) {
-                String usernameFromTable = applicationsPageObject.getUsernameFromTable.getAttribute("title");
+                String usernameFromTable = applicationsPageObject.getUsernameFromTable.getText().trim();
                 LOGGER.info("Username displayed in table " + usernameFromTable);
                 Assert.assertEquals(usernameFromTable, usernameSelected,
                         "The application in table contains username other than that of " + usernameFromTable);

@@ -109,7 +109,7 @@ public class ImpalaPageObject {
     @FindBy(xpath = "(//span[contains(.,'Resources')])[1]")
     public WebElement resourcesTab;
 
-    @FindBy(xpath = "//span[contains(@class,'glyphicon glyphicon-chevron-down header-ddl')]")
+    @FindBy(css = "a.dropbtn.pointer")
     public WebElement resourceUsagePointer;
 
     @FindBy(xpath = "//div[contains(@class,'dropdown-content-display')]/a[contains(text(),'Impala')]")

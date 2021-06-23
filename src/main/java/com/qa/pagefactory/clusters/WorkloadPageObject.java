@@ -21,7 +21,7 @@ public class WorkloadPageObject {
     @FindBy(xpath = "(//span[contains(.,'Workload')])[1]")
     public WebElement workloadTab;
 
-    @FindBy(xpath = "//span[@class='glyphicon glyphicon-chevron-down header-ddl']")
+    @FindBy(css = "a.dropbtn.pointer")
     public WebElement workloadDropdownOptionsButton;
 
     @FindBy(xpath = "//a[contains(text(),'vCore Hours')]")
@@ -60,7 +60,7 @@ public class WorkloadPageObject {
     @FindBy(xpath = "//*[@id=\"radio-btn-opt\"]/span[1]")
     public WebElement viewByMonth;
 
-    @FindBy(xpath = "//div[@class='col-md-6 viewby']//span[@class='badge pending']")
+    @FindBy(xpath = "//a[normalize-space()='Day']")
     public WebElement viewByDay;
 
     @FindBy(xpath = "//span[normalize-space()='Hour']")

@@ -46,7 +46,7 @@ public class MR_052_PART3 extends BaseClass {
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
 
         test.log(LogStatus.INFO, "Verify that the left pane has map reduce check box and the apps number");
-        int totalMapReduceAppCnt = mrDetailsPage.clickOnlyLink("Map Reduce");
+        int totalMapReduceAppCnt = mrDetailsPage.clickOnlyLink("MapReduce");
         if (totalMapReduceAppCnt > 0) {
             applicationsPageObject.expandStatus.click();
             int appCount = mrDetailsPage.clickOnlyLink("Killed");

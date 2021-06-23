@@ -73,21 +73,20 @@ public class TC_HIVE_39 extends BaseClass {
         WebElement eventSlider = applicationsPageObject.eventsSlider;
         allApps.moveTheSlider(eventSlider, -50);
         int eventInputLeft = Integer.parseInt(applicationsPageObject.eventsSliderInputLeft.getAttribute("value"));
-        waitExecuter.sleep(2000);
         int eventInputRight = Integer.parseInt(applicationsPageObject.eventsSliderInputRight.getAttribute("value"));
         waitExecuter.sleep(2000);
         test.log(LogStatus.INFO, "Event Slider From : " + eventInputLeft + " To : " + eventInputRight);
         LOGGER.info("Event Slider From : " + eventInputLeft + " To : " + eventInputRight);
-        waitExecuter.sleep(2000);
-
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         hiveAppCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
                 .replaceAll("[^\\dA-Za-z ]", "").trim());
         if (hiveAppCount > 0) {
             // Click on the first app in table to get efficiency
             test.log(LogStatus.INFO, "Click on the first app in table to get efficiency");
             LOGGER.info("Click on the first app in table to get efficiency");
-            applicationsPageObject.getDurationFromTable.click();
-            waitExecuter.sleep(5000);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
+            applicationsPageObject.clickOnAppId.click();
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
             driver.getWindowHandle();
             // Click on the first app in table to get efficiency
             test.log(LogStatus.INFO, "Click on the first app in table to get efficiency");

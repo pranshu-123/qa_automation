@@ -42,7 +42,7 @@ public class MR_064 extends BaseClass {
         mrDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
 
-        int totalMapReduceAppCnt = mrDetailsPage.clickOnlyLink("Map Reduce");
+        int totalMapReduceAppCnt = mrDetailsPage.clickOnlyLink("MapReduce");
         int appCount = 0;
         if (totalMapReduceAppCnt > 0) {
             applicationsPageObject.expandStatus.click();

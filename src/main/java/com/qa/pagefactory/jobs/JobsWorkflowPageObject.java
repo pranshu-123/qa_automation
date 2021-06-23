@@ -39,7 +39,7 @@ public class JobsWorkflowPageObject {
     @FindBy(xpath = "//span[contains(@class,'icon-jobs')]")
     public WebElement jobsTab;
 
-    @FindBy(xpath = "(//span[contains(@class,'icon-jobs')]//following::li/span[text()='Applications'])[1]")
+    @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Applications'])[2]")
     public WebElement applicationTab;
 
     @FindBy(id = "apps-global-search-filter")

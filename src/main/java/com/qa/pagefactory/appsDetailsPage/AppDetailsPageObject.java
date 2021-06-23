@@ -129,10 +129,10 @@ public class AppDetailsPageObject {
     @FindBy(xpath = "(//table[@id='allApps']//tbody/tr)[1]/td")
     public List<WebElement> getTableValuesOfImpalaApp;
 
-    @FindBy(xpath = "//b[@class='dropbtn pointer']/span")
+    @FindBy(xpath = "//a[@class='dropbtn pointer']/span")
     public WebElement chargebackDropdown;
 
-    @FindBy(xpath = "//div[contains(@class,'dropdown-content')]/a[text()='Impala']")
+    @FindBy(xpath = "//div[contains(@class,'dropdown-content')]//a[normalize-space(text())='Impala']")
     public WebElement impalaChargeback;
 
     @FindBy(className = "select2-selection__arrow")
@@ -191,6 +191,9 @@ public class AppDetailsPageObject {
 
     @FindBy(xpath = "//span[contains(@class,'icon-flipped')]")
     public WebElement flippedButton;
+
+    @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[4]/a[2]")
+    public WebElement clickOnAppId;
 
     /**
      * @param driver The driver that will be used to look up the elements

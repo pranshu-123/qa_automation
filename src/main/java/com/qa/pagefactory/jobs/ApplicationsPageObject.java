@@ -219,7 +219,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[2]")
     public List<WebElement> getStatusColumnFromTable;
 
-    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[4]/span[2]")
+    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[4]/a[1]")
     public WebElement copyAppName;
 
     @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[4]")
@@ -351,6 +351,9 @@ public class ApplicationsPageObject {
 
     @FindBy(className = "close")
     public WebElement closeIcon;
+
+    @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[4]/a[2]")
+    public WebElement clickOnAppId;
 
     /**
      * @param driver The driver that will be used to look up the elements

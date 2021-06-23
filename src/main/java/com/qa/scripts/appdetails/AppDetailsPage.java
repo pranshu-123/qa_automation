@@ -234,8 +234,8 @@ public class AppDetailsPage {
     /* Click on the first impala success job */
     public void clickOnFirstImpalaJob() {
         if (appDetailsPageObject.getImpalaJobs.size() > 0) {
-            wait.waitUntilElementClickable(appDetailsPageObject.firstRow);
-            userActions.performActionWithPolling(appDetailsPageObject.firstRow, UserAction.CLICK);
+            wait.waitUntilElementClickable(appDetailsPageObject.clickOnAppId);
+            userActions.performActionWithPolling(appDetailsPageObject.clickOnAppId, UserAction.CLICK);
             wait.waitUntilElementClickable(appDetailsPageObject.impalaFragmentTab);
         }
     }

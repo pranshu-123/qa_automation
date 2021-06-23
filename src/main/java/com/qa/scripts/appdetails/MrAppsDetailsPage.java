@@ -1043,7 +1043,7 @@ public class MrAppsDetailsPage {
         test.log(LogStatus.INFO, "Verify that the left pane has Map reduce check box and the apps number");
         logger.info("Select individual app and assert that table contain its data");
 
-        int totalMapReduceAppCnt = mrDetailsPage.clickOnlyLink("Map Reduce");
+        int totalMapReduceAppCnt = mrDetailsPage.clickOnlyLink("MapReduce");
         waitExecuter.sleep(2000);
         if (totalMapReduceAppCnt > 0) {
             applicationsPageObject.expandStatus.click();

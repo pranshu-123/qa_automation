@@ -55,7 +55,7 @@ public class MR_042 extends BaseClass {
         // Select 'Only' hive type and get its jobs count
         test.log(LogStatus.INFO, "Select 'Only' map reduce from app types and get its jobs count");
         LOGGER.info("Select 'Only' map from app types and get its jobs count");
-        mrDetailsPage.clickOnlyLink("Map Reduce");
+        mrDetailsPage.clickOnlyLink("MapReduce");
 
         // Expand status filter on left pane
         test.log(LogStatus.INFO, "Expand status filter on left pane");

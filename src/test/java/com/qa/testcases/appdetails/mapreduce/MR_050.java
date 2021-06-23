@@ -51,7 +51,7 @@ public class MR_050 extends BaseClass {
         mrDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
 
-        mrDetailsPage.clickOnlyLink("Map Reduce");
+        mrDetailsPage.clickOnlyLink("MapReduce");
         int appCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
                 .replaceAll("[^\\dA-Za-z ]", "").trim());
         List<Integer> list = new ArrayList<>();

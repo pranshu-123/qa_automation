@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.enums.AppDetailsApplicationType;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.TopPanelPageObject;
+import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.AppDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
@@ -45,10 +46,13 @@ public class IM_TC_02 extends BaseClass {
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();
         AppDetailsPage appDetailsPage = new AppDetailsPage(driver);
+        ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         try {
             appDetailsPage.selectOnlyApplication(AppDetailsApplicationType.IMPALA);
             appDetailsPage.selectSuccessfulApplication();
-            actions.performActionWithPolling(appDetailsPage.getAppsDetailsAsPage().get(1), UserAction.CLICK);
+            //actions.performActionWithPolling(appDetailsPage.getAppsDetailsAsPage().get(1), UserAction.CLICK);
+            actions.performActionWithPolling(applicationsPageObject.clickOnAppId, UserAction.CLICK);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
             Assert.assertNotNull(appDetailsPage.getApplicationType(), "App type is null");
             Assert.assertNotEquals(appDetailsPage.getApplicationType(),
                     AppDetailsApplicationType.IMPALA.toString().toUpperCase(),

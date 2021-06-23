@@ -51,7 +51,7 @@ public class MR_056 extends BaseClass {
                 applicationsPageObject, clusterId);
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
 
-        int totalMapReduceAppCnt=mrDetailsPage.clickOnlyLink("Map Reduce");
+        int totalMapReduceAppCnt=mrDetailsPage.clickOnlyLink("MapReduce");
         Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
                 .replaceAll("[^\\dA-Za-z ]", "").trim());
         if (totalMapReduceAppCnt > 0) {

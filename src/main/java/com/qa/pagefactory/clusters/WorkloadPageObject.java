@@ -18,7 +18,7 @@ public class WorkloadPageObject {
     @FindBy(xpath = "//ul[contains(concat(' ', @class, ' '), 'select2-results__options')]/li")
     public List<WebElement> clusterList;
 
-    @FindBy(xpath = "//li[@class='active']//ul[@class='sub-menu']//li//span[contains(text(),'Workload')]")
+    @FindBy(xpath = "(//span[contains(.,'Workload')])[1]")
     public WebElement workloadTab;
 
     @FindBy(xpath = "//span[@class='glyphicon glyphicon-chevron-down header-ddl']")

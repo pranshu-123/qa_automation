@@ -50,7 +50,7 @@ public class SubTopPanelModulePageObject {
     @FindBy(xpath = "(//span[contains(.,'Services And Versions Compatibility')])[6]")
     public WebElement servicesVersionMigrationTab;
 
-    @FindBy(xpath = "//li//span[text()='Cluster Discovery']")
+    @FindBy(xpath = "(//span[contains(.,'Cluster Discovery')])[6]")
     public WebElement clusterDiscoveryTab;
 
     @FindBy(xpath = "(//span[contains(.,'Workload Fit')])[6]")

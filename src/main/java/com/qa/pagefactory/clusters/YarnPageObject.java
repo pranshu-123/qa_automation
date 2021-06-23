@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class YarnPageObject {
 
-    @FindBy(xpath = "//li//span[contains(text(),'Resources')]")
+    @FindBy(xpath = "(//span[contains(.,'Resources')])[1]")
     public WebElement clusterResourcesTab;
 
     @FindBy(xpath = "//h1[contains(text(),'Resource Usage')]")

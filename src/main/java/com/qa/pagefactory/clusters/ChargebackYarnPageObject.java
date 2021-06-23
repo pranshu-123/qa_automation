@@ -8,10 +8,10 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 
 public class ChargebackYarnPageObject {
-    @FindBy(xpath = "//li//span[contains(text(),'Chargeback')]")
+    @FindBy(xpath = "(//span[contains(.,'Chargeback')])[1]")
     public WebElement clusterChargeBackTab;
 
-    @FindBy(xpath = "//span[contains(@class,'glyphicon glyphicon-chevron-down header-ddl')]")
+    @FindBy(css = "a.dropbtn.pointer")
     public WebElement chargeBackDropdownOptionsButton;
 
     @FindBy(xpath = "//a[contains(text(),'Yarn')]")

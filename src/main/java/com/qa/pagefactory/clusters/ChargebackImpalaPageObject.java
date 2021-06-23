@@ -15,10 +15,10 @@ import java.util.List;
  */
 public class ChargebackImpalaPageObject {
 
-    @FindBy(xpath = "//ul/li//span[contains(text(),'Chargeback')]")
+    @FindBy(xpath = "(//span[contains(.,'Chargeback')])[1]")
     public WebElement clusterChargeBackTab;
 
-    @FindBy(xpath = "//span[contains(@class,'glyphicon glyphicon-chevron-down header-ddl')]")
+    @FindBy(css = "a.dropbtn.pointer")
     public WebElement chargeBackDropdownOptionsButton;
 
     @FindBy(xpath = "//a[contains(text(),'Impala')]")

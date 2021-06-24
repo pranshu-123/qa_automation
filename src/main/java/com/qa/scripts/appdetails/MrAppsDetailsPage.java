@@ -33,6 +33,7 @@ public class MrAppsDetailsPage {
     private final WaitExecuter waitExecuter;
     private final WebDriver driver;
     private final UserActions userActions;
+    private  ApplicationsPageObject applicationsPageObject;
 
 
     /**
@@ -44,6 +45,7 @@ public class MrAppsDetailsPage {
         waitExecuter = new WaitExecuter(driver);
         this.driver = driver;
         userActions = new UserActions(driver);
+        applicationsPageObject = new ApplicationsPageObject(driver);
     }
 
     /**
@@ -297,8 +299,9 @@ public class MrAppsDetailsPage {
     public String verifyAppId(MrAppsDetailsPageObject mrApps, ApplicationsPageObject appPageObj) {
         String appId = mrApps.getAppId.getText().trim();
         LOGGER.info("Tez application Id is " + appId);
-        appPageObj.getTypeFromTable.click();
-        waitExecuter.sleep(5000);
+        waitExecuter.waitUntilElementClickable(appPageObj.clickOnAppId);
+        appPageObj.clickOnAppId.click();
+        waitExecuter.waitUntilElementClickable(appPageObj.closeIcon);
         waitExecuter.waitUntilPageFullyLoaded();
         String headerAppId = mrApps.getHeaderAppId.getText().trim();
         Assert.assertEquals(appId, headerAppId, "Tez Application Id is not displayed in the Header");
@@ -313,9 +316,9 @@ public class MrAppsDetailsPage {
     public String verifyJobsSummary(MrAppsDetailsPageObject mrApps) {
         String jobSummary = mrApps.Status.getText().trim();
         LOGGER.info("Map Reduce job Summary is " + jobSummary);
-        mrApps.getSummaryFromTable.click();
-        waitExecuter.sleep(5000);
-        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
+        applicationsPageObject.clickOnAppId.click();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
         String jobSummaryStatus = mrApps.getJobSummary.getText().trim();
         Assert.assertNotSame(jobSummary, jobSummaryStatus, "Map Reduce application page job Summary is not displayed in the Header");
         return jobSummaryStatus;

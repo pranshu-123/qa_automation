@@ -86,8 +86,8 @@ public class TC_HIVE_56 extends BaseClass {
             // Click on first app in table to navigate to app details page
             test.log(LogStatus.INFO, "Click on first app in table to navigate to app details page");
             LOGGER.info("Click on first app in table to navigate to app details page");
-            waitExecuter.waitUntilElementClickable(applicationsPageObject.getStatusFromTable);
-            applicationsPageObject.getStatusFromTable.click();
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
+            applicationsPageObject.clickOnAppId.click();
             waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
             // Assert that Start, End Date, Duration and Database is displayed
             test.log(LogStatus.INFO, "Assert that Start, End Date, Duration and Database is displayed");

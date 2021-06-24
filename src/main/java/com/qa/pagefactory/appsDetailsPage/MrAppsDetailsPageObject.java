@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 
 public class MrAppsDetailsPageObject {
-    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[4]/div")
+    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[4]/a[2]")
     public WebElement getAppId;
 
     @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[1]")
@@ -56,7 +56,7 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//a[normalize-space()='Resources']")
     public WebElement resourcesTab;
 
-    @FindBy(xpath = "//a[normalize-space()='Configuratio...']")
+    @FindBy(xpath = "//a[normalize-space()='Configuration']")
     public WebElement configurationTab;
 
     @FindBy(xpath = "//*[@id='taskattemptmap']//*[div and @class='footer']/div/*/span[1]")

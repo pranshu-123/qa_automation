@@ -64,11 +64,12 @@ public class MR_058 extends BaseClass {
             mrApps.sortUp.click();
             waitExecuter.sleep(2000);
             if (appCount > 0) {
-                mrApps.getTypeFromTable.click();
+                waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
+                applicationsPageObject.clickOnAppId.click();
+                waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
                 waitExecuter.waitUntilPageFullyLoaded();
                 MouseActions.clickOnElement(driver, mrApps.resourcesTab);
 
-                waitExecuter.sleep(2000);
                 mrDetailsPage.validateResourcesTab(mrApps,"Metrics",test);
                 test.log(LogStatus.PASS, "Verify the Metrics Graphs are present in OS Memory");
                 //Close apps details page

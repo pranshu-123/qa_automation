@@ -355,6 +355,12 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[4]/a[2]")
     public WebElement clickOnAppId;
 
+    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[4]")
+    public WebElement hoverOnAppName;
+
+    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[4]/span")
+    public WebElement getToolTipValueOfAppName;
+
     /**
      * @param driver The driver that will be used to look up the elements
      */

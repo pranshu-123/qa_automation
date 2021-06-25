@@ -61,7 +61,7 @@ public class TC_HIVE_57 extends BaseClass {
         // Select 'Only' hive type and get its jobs count
         test.log(LogStatus.INFO, "Select 'Only' Map Reduce from app types and get its jobs count");
         LOGGER.info("Select 'Only' Map Reduce from app types and get its jobs count");
-        sparkApp.clickOnlyLink("Map Reduce");
+        sparkApp.clickOnlyLink("MapReduce");
         int appCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
                 .replaceAll("[^\\dA-Za-z ]", "").trim());
         List<Integer> list = new ArrayList<>();
@@ -97,7 +97,7 @@ public class TC_HIVE_57 extends BaseClass {
                             // Click on first app in table to navigate to app details page
                             test.log(LogStatus.INFO, "Click on first app in table to navigate to app details page");
                             LOGGER.info("Click on first app in table to navigate to app details page");
-                            applicationsPageObject.getStatusFromTable.click();
+                            applicationsPageObject.clickOnAppId.click();
                             waitExecuter.waitUntilElementPresent(applicationsPageObject.loader);
                             waitExecuter.sleep(2000);
                             Assert.assertTrue(applicationsPageObject.hiveChildApp.isDisplayed(),

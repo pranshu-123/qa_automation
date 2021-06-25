@@ -63,7 +63,7 @@ public class TC_HIVE_59_MR extends BaseClass {
         // Select 'Only' hive type and get its jobs count
         test.log(LogStatus.INFO, "Select 'Only' Map Reduce from app types and get its jobs count");
         LOGGER.info("Select 'Only' Map Reduce from app types and get its jobs count");
-        sparkApp.clickOnlyLink("Map Reduce");
+        sparkApp.clickOnlyLink("MapReduce");
         int appCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
                 .replaceAll("[^\\dA-Za-z ]", "").trim());
         List<Integer> list = new ArrayList<>();
@@ -99,8 +99,9 @@ public class TC_HIVE_59_MR extends BaseClass {
                             // Click on first app in table to navigate to app details page
                             test.log(LogStatus.INFO, "Click on first app in table to navigate to app details page");
                             LOGGER.info("Click on first app in table to navigate to app details page");
-                            applicationsPageObject.getStatusFromTable.click();
-                            waitExecuter.waitUntilElementPresent(applicationsPageObject.loader);
+                            waitExecuter.waitUntilElementPresent(applicationsPageObject.clickOnAppId);
+                            applicationsPageObject.clickOnAppId.click();
+                            waitExecuter.waitUntilElementPresent(applicationsPageObject.closeIcon);
                             waitExecuter.sleep(2000);
                             List<String> KPIS = new ArrayList<>(
                                     Arrays.asList("duration", "data i/o", "start time", "end time"));

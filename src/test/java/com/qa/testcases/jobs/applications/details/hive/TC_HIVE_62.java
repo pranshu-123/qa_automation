@@ -86,8 +86,9 @@ public class TC_HIVE_62 extends BaseClass {
             // Click on first app in table to navigate to app details page
             test.log(LogStatus.INFO, "Click on first app in table to navigate to app details page");
             LOGGER.info("Click on first app in table to navigate to app details page");
-            applicationsPageObject.getStatusFromTable.click();
-            waitExecuter.waitUntilElementPresent(applicationsPageObject.loader);
+            waitExecuter.waitUntilElementPresent(applicationsPageObject.clickOnAppId);
+            applicationsPageObject.clickOnAppId.click();
+            waitExecuter.waitUntilElementPresent(applicationsPageObject.closeIcon);
 
 
             // Assert that Owner, Queue and Cluster is displayed

@@ -83,7 +83,7 @@ public class TC_HIVE_55 extends BaseClass {
             test.log(LogStatus.INFO, "Click on first app in table to navigate to app details page");
             LOGGER.info("Click on first app in table to navigate to app details page");
             waitExecuter.waitUntilElementClickable(applicationsPageObject.getStatusFromTable);
-            applicationsPageObject.getStatusFromTable.click();
+            applicationsPageObject.clickOnAppId.click();
             waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
             // Assert that App details page opens
             test.log(LogStatus.INFO, "Assert that App details page opens");

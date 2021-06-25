@@ -13,13 +13,13 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/a")
     public List<WebElement> confirmationMessageElementClose;
 
-    @FindBy(xpath = "//span[contains(text(),'Run')]/parent::a")
+    @FindBy(xpath = "(//span[contains(text(),'Run')])")
     public WebElement runButton;
 
     @FindBy(xpath = "//a[@href='#/clusters/overview']")
     public WebElement homeTab;
 
-    @FindBy(xpath = "//span[contains(text(),'Schedule')]")
+    @FindBy(xpath = "(//span[contains(text(),'Schedule')])")
     public WebElement SheduleButton;
 
     @FindBy(xpath = "//input[@class='display-time']")

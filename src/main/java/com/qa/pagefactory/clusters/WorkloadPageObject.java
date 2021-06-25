@@ -45,7 +45,7 @@ public class WorkloadPageObject {
     @FindBy(xpath = "//a[contains(text(),'Yarn')]")
     public WebElement workloadDropdownYarn;
 
-    @FindBy(xpath = "//h3[contains(text(),'datewise')]")
+    @FindBy(css = "div#cluster-workload b:nth-child(3)")
     public WebElement timerangeMessageElement;
 
     @FindBy(xpath = "//h3[contains(text(),'datewise')]")
@@ -60,16 +60,16 @@ public class WorkloadPageObject {
     @FindBy(xpath = "//*[@id=\"radio-btn-opt\"]/span[1]")
     public WebElement viewByMonth;
 
-    @FindBy(xpath = "//a[normalize-space()='Day']")
+    @FindBy(xpath = "(//a[contains(text(),'Day')])[1]")
     public WebElement viewByDay;
 
-    @FindBy(xpath = "//span[normalize-space()='Hour']")
+    @FindBy(xpath = "(//a[contains(text(),'Hour')])[1]")
     public WebElement viewByHour;
 
-    @FindBy(xpath = "//span[normalize-space()='vCore Hour']")
+    @FindBy(xpath = "(//a[contains(text(),'Hour')])[3]")
     public WebElement vcoreHour;
 
-    @FindBy(xpath = "//span[normalize-space()='Hour/Day']")
+    @FindBy(xpath = "//a[contains(text(),'Hour/Day')]")
     public WebElement viewByHourDay;
 
     @FindBy(xpath = "//span[normalize-space()='Sum']")

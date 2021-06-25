@@ -61,7 +61,7 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//div[contains(text(),'Small file Report')]")
     public WebElement confirmationMessageElement;
 
-    @FindBy(xpath = "//div[@class='col-md-9']//div[@class='col-md-12']")
+    @FindBy(css = ".col-md-12.p-0")
     public WebElement verifyReport;
 
     @FindBy(xpath = "//span[@class='text-fatal']")

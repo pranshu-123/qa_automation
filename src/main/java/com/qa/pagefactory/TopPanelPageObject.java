@@ -65,7 +65,7 @@ public class TopPanelPageObject {
             "ul[contains(@class,'sub-menu')]//li/span[contains(text(),'Impala')]")
     public WebElement impalaTab;
 
-    @FindBy(xpath = "(//span[contains(.,'Overview')])[1]")
+    @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Overview'])")
     public WebElement overviewTab;
 
     @FindBy(xpath = "//li[contains(@class,'active')]/" +
@@ -76,19 +76,19 @@ public class TopPanelPageObject {
             "ul[contains(@class,'sub-menu')]//li/span[contains(text(),'Queue Analysis')]")
     public WebElement queueAnalysisTab;
 
-    @FindBy(xpath = "(//a[@href='#/clusters/clusterworkload'][contains(.,'Workload')])[1]")
+    @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Workload'])")
     public WebElement workloadTab;
 
     @FindBy(xpath = "//li[contains(@class,'active')]/ul[contains(@class,'sub-menu')]/li/span[contains(text(),'Tuning')]")
     public WebElement tuningTab;
 
-    @FindBy(xpath = "(//span[contains(.,'Forecasting')])[3]")
+    @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Forecasting'])")
     public WebElement dataForecastingTab;
 
-    @FindBy(xpath = "(//span[contains(.,'Small Files')])[3]")
+    @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Small Files'])")
     public WebElement smallFilesTab;
 
-    @FindBy(xpath = "(//span[contains(.,'File Reports')])[3]")
+    @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='File Reports'])")
     public WebElement fileReportsTab;
 
     @FindBy(xpath = "//span[contains(@class,'icon-jobs')]")

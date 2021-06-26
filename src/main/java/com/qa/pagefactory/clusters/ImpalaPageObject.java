@@ -106,7 +106,7 @@ public class ImpalaPageObject {
     @FindBy(xpath = "//table[@id='runningImpalaQueriesTable']/tbody/tr")
     public List<WebElement> impalaQueriesTableRecords;
 
-    @FindBy(xpath = "(//span[contains(.,'Resources')])[1]")
+    @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Resources'])")
     public WebElement resourcesTab;
 
     @FindBy(css = "a.dropbtn.pointer")

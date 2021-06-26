@@ -11,7 +11,7 @@ public class HBasePageObject {
 
     public HBasePageObject(WebDriver driver){ PageFactory.initElements(driver, this);}
 
-    @FindBy(xpath = "(//span[contains(.,'HBase')])[1]")
+    @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='HBase'])")
     public WebElement hbaseTab;
 
     @FindBy(xpath = "//h1[contains(text(), 'HBase')]")

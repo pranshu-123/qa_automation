@@ -88,7 +88,7 @@ public class ManagePageObject {
     @FindBy(xpath="(//span[contains(text(),'Monitoring')])")
     public WebElement monitoringHeader;
 
-    @FindBy(xpath="//div[@class='col-auto']/ul/li/a[contains(@class,'active')]")
+    @FindBy(xpath="(//a[contains(text(),'Partition Info')])")
     public WebElement partitionInfoTab;
 
     @FindBy(xpath="//table[contains(@class,'component-data-tables')]/thead/tr/th")
@@ -97,7 +97,7 @@ public class ManagePageObject {
     @FindBy(xpath="(//div[@class='pull-right'])[1]")
     public  WebElement partitionInfoTSAndDataAge;
 
-    @FindBy(xpath="(//a[contains(text(),'DB Stats')])")
+    @FindBy(xpath="(//a[contains(text(),'DB Status')])")
     public WebElement monitoringDBStatusTab ;
 
     @FindBy(xpath="//table[contains(@class,'component-data-tables')]/thead/tr/th")

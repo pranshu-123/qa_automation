@@ -61,10 +61,10 @@ public class ManagePageObject {
     @FindBy(xpath = "//table[contains(@class,'component-data-tables')]/tbody/tr")
     public List<WebElement> sensorHeartbeatTblRows;
 
-    @FindBy(xpath="(//span[contains(.,'Run Diagnostics')])[7]")
+    @FindBy(xpath="(//ul[contains(@class,'sub-menu')]//span[text()='Run Diagnostics'])")
     public WebElement runDiagnosticsTab;
 
-    @FindBy(xpath="(//a[contains(.,'Run Diagnostics')])[7]")
+    @FindBy(xpath="(//span[contains(text(),'Run Diagnostics')])")
     public WebElement runDiagnosticsHeader;
 
     @FindBy(xpath = "//ul[@class='diagnostic-ul']/li[contains(text(),'Load Latest Diagnostics')]")

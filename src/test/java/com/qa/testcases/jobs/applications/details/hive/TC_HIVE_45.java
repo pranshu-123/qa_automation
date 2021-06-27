@@ -65,17 +65,20 @@ public class TC_HIVE_45 extends BaseClass {
         test.log(LogStatus.INFO, "Select 'Only' hive from app types and get its jobs count");
         LOGGER.info("Select 'Only' hive from app types and get its jobs count");
         sparkApp.clickOnlyLink("Hive");
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         int hiveAppCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
                 .replaceAll("[^\\dA-Za-z ]", "").trim());
         if (hiveAppCount > 0) {
             // Hive on to the first row
             test.log(LogStatus.INFO, "Hive on to the first row");
             LOGGER.info("Hive on to the first row");
-            WebElement type = applicationsPageObject.getTypeFromTable;
-            actions.moveToElement(type).perform();
-            waitExecuter.sleep(1000);
-            String tooltipValue = applicationsPageObject.getTypeFromTable.getAttribute("aria-describedby");
-            waitExecuter.sleep(1000);
+            WebElement appName = applicationsPageObject.hoverOnAppName;
+            actions.moveToElement(appName).perform();
+            waitExecuter.sleep(2000);
+            WebElement tooltipValue = applicationsPageObject.getToolTipValueOfAppName;
+            String value = tooltipValue.getAttribute("aria-describedby");
+            //String tooltipValue = applicationsPageObject.getToolTipValueOfAppName.getText();
+            LOGGER.info("TOOLTIP-- "+value);
             // Validate that on hovering the row is highlighted
             test.log(LogStatus.INFO, "Validate that on hovering the row is highlighted");
             LOGGER.info("Validate that on hovering the row is highlighted");

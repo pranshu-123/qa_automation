@@ -81,9 +81,10 @@ public class MR_050 extends BaseClass {
                             // Click on first app in table to navigate to app details page
                             test.log(LogStatus.INFO, "Click on first app in table to navigate to app details page");
                             LOGGER.info("Click on first app in table to navigate to app details page");
-                            mrApps.getStatusFromTable.click();
-                            waitExecuter.waitUntilElementPresent(mrApps.loader);
-                            waitExecuter.sleep(2000);
+                            waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
+                            applicationsPageObject.clickOnAppId.click();
+                            waitExecuter.waitUntilElementPresent(applicationsPageObject.closeIcon);
+
                             Assert.assertTrue(mrApps.mrSummaryApp.isDisplayed(),
                                     "Map Reduce is not present as parent app for app id. ");
                             //mrDetailsPage.validateAnalysisTab(mrApps);

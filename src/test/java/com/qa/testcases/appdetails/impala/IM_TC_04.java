@@ -6,6 +6,7 @@ import com.qa.enums.AppDetailsApplicationType;
 import com.qa.enums.appdetails.impala.ImpalaFragmentDetails;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.TopPanelPageObject;
+import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.AppDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
@@ -42,9 +43,10 @@ public class IM_TC_04 extends BaseClass {
         datePicker.clickOnDatePicker();
         datePicker.selectLast90Days();
         AppDetailsPage appDetailsPage = new AppDetailsPage(driver);
+        ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         try {
             appDetailsPage.selectOnlyApplication(AppDetailsApplicationType.IMPALA);
-            actions.performActionWithPolling(appDetailsPage.getAppsDetailsAsPage().get(1), UserAction.CLICK);
+            actions.performActionWithPolling(applicationsPageObject.clickOnAppId, UserAction.CLICK);
             for (WebElement fragment : appDetailsPage.getImpalaFragmentRows()) {
                 Assert.assertNotNull(fragment.findElements(By.tagName("td")).get(ImpalaFragmentDetails.ID.getIndex()));
                 Assert.assertNotNull(fragment.findElements(By.tagName("td")).get(ImpalaFragmentDetails.NUM_INSTANCES.getIndex()));

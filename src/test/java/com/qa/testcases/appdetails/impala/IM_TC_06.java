@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.enums.AppDetailsApplicationType;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.TopPanelPageObject;
+import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.AppDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
@@ -23,7 +24,7 @@ import java.util.List;
 @Marker.All
 
 public class IM_TC_06 extends BaseClass {
-    private LoggingUtils loggingUtils = new LoggingUtils(IM_TC_05.class);
+    private LoggingUtils loggingUtils = new LoggingUtils(IM_TC_06.class);
 
     /**
      * Verify Gantt Chart details for impala app details."
@@ -45,9 +46,10 @@ public class IM_TC_06 extends BaseClass {
         datePicker.clickOnDatePicker();
         datePicker.selectLast90Days();
         AppDetailsPage appDetailsPage = new AppDetailsPage(driver);
+        ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         try {
             appDetailsPage.selectOnlyApplication(AppDetailsApplicationType.IMPALA);
-            actions.performActionWithPolling(appDetailsPage.getAppsDetailsAsPage().get(1), UserAction.CLICK);
+            actions.performActionWithPolling(applicationsPageObject.clickOnAppId, UserAction.CLICK);
             appDetailsPage.clickOnImpalaGanttChartTab();
             List<Integer> expectedIds = appDetailsPage.getGanttChartIdsInNumeric();
             List<Integer> actualIds = appDetailsPage.getGanttChartIdsInNumeric();

@@ -63,7 +63,7 @@ public class TC_HIVE_51 extends BaseClass {
         // Select 'Only' hive type and get its jobs count
         test.log(LogStatus.INFO, "Select 'Only' hive from app types and get its jobs count");
         LOGGER.info("Select 'Only' hive from app types and get its jobs count");
-        sparkApp.clickOnlyLink("Map Reduce");
+        sparkApp.clickOnlyLink("MapReduce");
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         int appCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
                 .replaceAll("[^\\dA-Za-z ]", "").trim());

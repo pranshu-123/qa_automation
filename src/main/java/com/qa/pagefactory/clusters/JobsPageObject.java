@@ -43,7 +43,7 @@ public class JobsPageObject {
     @FindBy(xpath = "//label[contains(text(), 'Group By')]/following-sibling::span/span/span/span[contains(@class,'select2-selection__arrow')]")
     public WebElement groupByDropdownButton;
 
-    @FindBy(xpath = "(//span[contains(.,'Jobs Trends')])[1]")
+    @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Jobs Trends'])")
     public WebElement clusterResourcesTab;
 
     @FindBy(css = "svg > g.highcharts-axis-labels.highcharts-xaxis-labels")

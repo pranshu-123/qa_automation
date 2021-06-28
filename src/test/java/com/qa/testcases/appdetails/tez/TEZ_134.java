@@ -46,8 +46,9 @@ public class TEZ_134 extends BaseClass {
         tezDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
         test.log(LogStatus.INFO, "Verify that the left pane has Hive check box and the apps number");
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         int appCount = tezDetailsPage.clickOnlyLink("Tez");
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
@@ -55,17 +56,22 @@ public class TEZ_134 extends BaseClass {
                 "the total count of heading.");
         test.log(LogStatus.PASS, "The left pane has Hive check box and the app counts match to that " +
                 "displayed in the header");
+        waitExecuter.waitUntilElementClickable(tezApps.sortByReadApp);
         tezApps.sortByReadApp.click();
         waitExecuter.waitUntilPageFullyLoaded();
         tezApps.sortUp.click();
         waitExecuter.sleep(2000);
         applicationsPageObject.expandStatus.click();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         int statusCount = tezDetailsPage.clickOnlyLink("Success");
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         test.log(LogStatus.PASS, "Selected success Count is  " + statusCount + " as Status, In Applications page");
         waitExecuter.waitUntilPageFullyLoaded();
         //Clicking on the Tez app must go to apps detail page
         if (appCount > 0) {
-            tezApps.getTypeFromTable.click();
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
+            applicationsPageObject.clickOnAppId.click();
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
             waitExecuter.waitUntilPageFullyLoaded();
             tezDetailsPage.verifyDagsComponent(tezApps, true, false, false);
             waitExecuter.sleep(2000);

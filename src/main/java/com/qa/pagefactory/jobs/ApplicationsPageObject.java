@@ -159,10 +159,10 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "(//div[contains(@class,'input-section')])[2]/input[2]")
     public WebElement durationSliderInputRight;
 
-    @FindBy(xpath = "//span[@id = 'allApps-headerspan-6']//following-sibling::a[contains(@class, 'sorting')]")
+    @FindBy(xpath = "//span[@id = 'allApps-headerspan-7']//following-sibling::a[contains(@class, 'sorting')]")
     public WebElement sortDuration;
 
-    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[7]")
+    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[8]")
     public WebElement getDurationFromTable;
 
     @FindBy(xpath = "(//div[@id='app-filter-panel']//div[@class='placeholder']//div[contains(@class,'vue-slider-ltr')])[2]")

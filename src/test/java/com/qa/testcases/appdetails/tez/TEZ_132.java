@@ -65,7 +65,9 @@ public class TEZ_132 extends BaseClass {
         try {
             //Clicking on the Tez app must go to apps detail page
             if (appCount > 0) {
-                tezApps.getTypeFromTable.click();
+                waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
+                applicationsPageObject.clickOnAppId.click();
+                waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
                 waitExecuter.waitUntilPageFullyLoaded();
                 waitExecuter.sleep(1000);
                 waitExecuter.waitUntilElementPresent(tezApps.configurationTab);

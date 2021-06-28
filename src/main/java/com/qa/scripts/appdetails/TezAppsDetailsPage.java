@@ -31,6 +31,7 @@ public class TezAppsDetailsPage {
     private final WebDriver driver;
     private UserActions userActions;
     private TezAppsDetailsPageObject tezApps;
+    private ApplicationsPageObject applicationsPageObject;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -40,6 +41,7 @@ public class TezAppsDetailsPage {
     public TezAppsDetailsPage(WebDriver driver) {
         waitExecuter = new WaitExecuter(driver);
         this.driver = driver;
+        applicationsPageObject = new ApplicationsPageObject(driver);
     }
 
     /**
@@ -697,7 +699,9 @@ public class TezAppsDetailsPage {
      * @return
      */
     public String validateTopRightTab(TezAppsDetailsPageObject tezApps, ExtentTest test) {
-        tezApps.getTypeFromTable.click();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
+        applicationsPageObject.clickOnAppId.click();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
         waitExecuter.waitUntilElementPresent(tezApps.Owner);
         String Owner = tezApps.Owner.getText().trim();
         waitExecuter.waitUntilPageFullyLoaded();
@@ -905,8 +909,9 @@ public class TezAppsDetailsPage {
     public String verifyAppId(TezAppsDetailsPageObject tezApps, ApplicationsPageObject appPageObj) {
         String appId = tezApps.getAppId.getText().trim();
         LOGGER.info("Tez application Id is " + appId);
-        appPageObj.getTypeFromTable.click();
-        waitExecuter.sleep(5000);
+        waitExecuter.waitUntilElementClickable(appPageObj.clickOnAppId);
+        appPageObj.clickOnAppId.click();
+        waitExecuter.waitUntilElementClickable(appPageObj.closeIcon);
         waitExecuter.waitUntilPageFullyLoaded();
         String headerAppId = tezApps.getHeaderAppId.getText().trim();
         Assert.assertNotSame("", headerAppId, "Tez Application Id is not displayed in the Header");
@@ -934,8 +939,9 @@ public class TezAppsDetailsPage {
     public String verifyStatus(TezAppsDetailsPageObject tezApps, ApplicationsPageObject appPageObj) {
         String statusTable = tezApps.Status.getText();
         LOGGER.info("Tez application Id is " + statusTable);
-        appPageObj.getTypeFromTable.click();
-        waitExecuter.sleep(5000);
+        waitExecuter.waitUntilElementClickable(appPageObj.clickOnAppId);
+        appPageObj.clickOnAppId.click();
+        waitExecuter.waitUntilElementClickable(appPageObj.closeIcon);
         waitExecuter.waitUntilPageFullyLoaded();
         String status = tezApps.appStatus.getText();
         Assert.assertNotSame("", status, "Tez Status is not displayed in the Header");
@@ -981,7 +987,9 @@ public class TezAppsDetailsPage {
     public String verifyDbname(TezAppsDetailsPageObject tezApps) {
         String statusTable = tezApps.Status.getText();
         LOGGER.info("Tez application Id is " + statusTable);
-        tezApps.getTypeFromTable.click();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
+        applicationsPageObject.clickOnAppId.click();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
         waitExecuter.waitUntilPageFullyLoaded();
         String AppSummaryDbName = tezApps.getDbname.getText().trim();
         LOGGER.info("Tez Status is " + AppSummaryDbName);
@@ -999,7 +1007,7 @@ public class TezAppsDetailsPage {
         WebElement Appid = tezApps.getAppid;
         Actions toolAct = new Actions(driver);
         toolAct.moveToElement(Appid).build().perform();
-        WebElement AppnametoolTip = driver.findElement(By.xpath("//*[@id=\"allApps-body\"]/tr[1]/td[4]/div"));
+        WebElement AppnametoolTip = tezApps.appNameToolTip;
         waitExecuter.sleep(3000);
         String AppIdText = AppnametoolTip.getText().trim();
         LOGGER.info("Tez Status is " + Appid);

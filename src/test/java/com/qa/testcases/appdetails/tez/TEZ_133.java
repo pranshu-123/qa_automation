@@ -58,10 +58,13 @@ public class TEZ_133 extends BaseClass {
                 "displayed in the header");
         tezApps.sortByReadApp.click();
         waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         tezApps.sortUp.click();
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         applicationsPageObject.expandStatus.click();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         int statusCount = tezDetailsPage.clickOnlyLink("Success");
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         test.log(LogStatus.PASS, "Selected success Count is  " + statusCount + " as Status, In Applications page");
         waitExecuter.waitUntilPageFullyLoaded();
 

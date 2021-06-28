@@ -78,10 +78,10 @@ public class TEZ_130 extends BaseClass {
             // Click on first app in table to navigate to app details page
             test.log(LogStatus.INFO, "Click on first app in table to navigate to app details page");
             logger.info("Click on first app in table to navigate to app details page");
-            applicationsPageObject.getStatusFromTable.click();
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
+            applicationsPageObject.clickOnAppId.click();
             waitExecuter.waitUntilElementPresent(applicationsPageObject.loader);
-            waitExecuter.sleep(3000);
-
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
             }
     }
 

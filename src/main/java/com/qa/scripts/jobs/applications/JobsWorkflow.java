@@ -59,6 +59,7 @@ public class JobsWorkflow {
      * Click on Jobs Pipeline page Actions Click On Cluster > Jobs > Pipelines
      */
     public void clickOnJobsPipelineTab() {
+        waitExecutor.waitUntilElementClickable(topPanelPageObject.jobsTab);
         userActions.performActionWithPolling(topPanelPageObject.jobsTab, UserAction.CLICK);
         waitExecutor.waitUntilElementClickable(workflow.resetButton);
         userActions.performActionWithPolling(subTopPanelModulePageObject.jobsPipelinesTab, UserAction.CLICK);

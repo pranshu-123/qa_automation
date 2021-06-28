@@ -90,6 +90,7 @@ public class TC_M08 extends BaseClass {
         Assert.assertTrue(manage.verifyLoadLatestDiagnosticsContent(), "Unable to load latest " +
                 "Diagnostics contents.");
         waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.sleep(1000);
         test.log(LogStatus.INFO, "Verified Load Latest Diagnostics contents.");
         test.log(LogStatus.PASS, "Verified diagnostics log with time stamp");
         logger.info("Verified diagnostics log with time stamp");

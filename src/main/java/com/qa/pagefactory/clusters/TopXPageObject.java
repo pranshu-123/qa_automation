@@ -9,13 +9,13 @@ import java.util.List;
 
 public class TopXPageObject {
 
-    @FindBy(xpath = "//span[contains(text(),'Run New')]/parent::a")
+    @FindBy(xpath = "//span[contains(text(),'Run New')]")
     public WebElement runNowButton;
 
-    @FindBy(xpath = "//span[contains(text(),'Run')]/parent::a")
+    @FindBy(xpath = "//span[contains(text(),'Run')]")
     public WebElement runButton;
 
-    @FindBy(xpath = "(//span[contains(text(),'Run')])[2]/parent::a")
+    @FindBy(xpath = "(//span[contains(text(),'Run')])")
     public WebElement modalRunButton;
 
     //@FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")

@@ -11,7 +11,7 @@ public class ForecastingPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/a")
     public List<WebElement> confirmationMessageElementClose;
 
-    @FindBy(xpath = "//span[contains(text(),'Run')]/parent::a")
+    @FindBy(xpath = "(//span[contains(text(),'Run')])")
     public WebElement runButton;
 
     @FindBy(xpath = "//span[contains(text(),'Run New')]/parent::a")

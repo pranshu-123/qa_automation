@@ -16,16 +16,16 @@ public class ManagePageObject {
     public List<WebElement> allManageTabList;
 
     //@FindBy(css = "div#daemons-template h1")
-    @FindBy(xpath="//li[@class='router-link-exact-active router-link-active active']//span[@class='selected'][normalize-space()='Daemons']")
+    @FindBy(xpath="//li[@class='active']//ul[@class='sub-menu']//li//span[contains(text(),'Daemons')]")
     public WebElement daemonsHeader;
 
     @FindBy(xpath = "(//ul[@class='sub-menu']/li[contains(@class,'router-link-active')]/span[@class='selected'])[7]")
     public WebElement daemonsTab;
 
-    @FindBy(xpath="((//ul[@class='sub-menu']/li[contains(@class,'router-link-active')]/span[@class='selected'])[7]/parent::li/following-sibling::li/span)[1]")
+    @FindBy(xpath="(//ul[contains(@class,'sub-menu')]//span[text()='Stats'])")
     public WebElement statsTab;
 
-    @FindBy(xpath="//li[@class='active']//span[@class='selected'][normalize-space()='Stats']")
+    @FindBy(xpath="(//span[contains(text(),'Stats')])")
     public WebElement statsHeader;
 
     @FindBy(xpath = "(//div[@class='component-tabs-primary']//a)[1]")
@@ -61,10 +61,10 @@ public class ManagePageObject {
     @FindBy(xpath = "//table[contains(@class,'component-data-tables')]/tbody/tr")
     public List<WebElement> sensorHeartbeatTblRows;
 
-    @FindBy(xpath="((//ul[@class='sub-menu']/li[contains(@class,'router-link-active')]/span[@class='selected'])[7]/parent::li/following-sibling::li/span)[2]")
+    @FindBy(xpath="(//ul[contains(@class,'sub-menu')]//span[text()='Run Diagnostics'])")
     public WebElement runDiagnosticsTab;
 
-    @FindBy(xpath="//li[@class='active']//span[@class='selected'][normalize-space()='Run Diagnostics']")
+    @FindBy(xpath="(//span[contains(text(),'Run Diagnostics')])")
     public WebElement runDiagnosticsHeader;
 
     @FindBy(xpath = "//ul[@class='diagnostic-ul']/li[contains(text(),'Load Latest Diagnostics')]")
@@ -82,13 +82,13 @@ public class ManagePageObject {
     @FindBy(xpath="//ul[@class='diagnostic-ul']/li[2]")
     public WebElement  downloadSupportBundleBtn;
 
-    @FindBy(xpath="((//ul[@class='sub-menu']/li[contains(@class,'router-link-active')]/span[@class='selected'])[7]/parent::li/following-sibling::li/span)[3]")
+    @FindBy(xpath="(//ul[contains(@class,'sub-menu')]//span[text()='Monitoring'])")
     public WebElement monitoringTab;
 
-    @FindBy(xpath="(//span[contains(.,'Monitoring')])[7]")
+    @FindBy(xpath="(//span[contains(text(),'Monitoring')])")
     public WebElement monitoringHeader;
 
-    @FindBy(xpath="//div[@class='col-auto']/ul/li/a[contains(@class,'active')]")
+    @FindBy(xpath="(//a[contains(text(),'Partition Info')])")
     public WebElement partitionInfoTab;
 
     @FindBy(xpath="//table[contains(@class,'component-data-tables')]/thead/tr/th")
@@ -97,7 +97,7 @@ public class ManagePageObject {
     @FindBy(xpath="(//div[@class='pull-right'])[1]")
     public  WebElement partitionInfoTSAndDataAge;
 
-    @FindBy(xpath="//div[@class='col-auto']/ul/li/a[contains(@class,'active')]/parent::li/following-sibling::li/a[contains(text(),'DB Status')]")
+    @FindBy(xpath="(//a[contains(text(),'DB Status')])")
     public WebElement monitoringDBStatusTab ;
 
     @FindBy(xpath="//table[contains(@class,'component-data-tables')]/thead/tr/th")

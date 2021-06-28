@@ -11,8 +11,11 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Cloud Mapping Per Host'])")
   public WebElement cloudMappingPerHostTab;
 
-  @FindBy(xpath = "(//span[contains(text(),'Run')]/parent::a)[last()]")
+  @FindBy(xpath = "//button[@class='run-btn']")
   public WebElement runButton;
+
+  @FindBy(xpath = "//span[contains(@class,'pointer cta-primary')]//span[contains(text(),'Run')]")
+  public WebElement runReportButton;
 
   @FindBy(xpath = "//div[contains(@class,'component-section-header')]//span[contains(text(),'Run')]")
   public WebElement newReportRunButton;
@@ -166,7 +169,7 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//div[contains(text(),'Instances Summary')]/parent::div//table[contains(@class,'component-data-tables')]/tbody/tr")
   public List<WebElement> instanceSummaryRows;
 
-  @FindBy(xpath = "//div[contains(text(),'Cloud Product/Service')]/b")
+  @FindBy(xpath = "//span[@id='select2-d7mn-container']")
   public WebElement cloudProductOrServiceValue;
 
   @FindBy(xpath = "//div[contains(text(),'Region')]/b")

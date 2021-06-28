@@ -47,25 +47,25 @@ public class SubTopPanelModulePageObject {
     @FindBy(id = "support-li")
     public WebElement supportList;
 
-    @FindBy(xpath = "//span[contains(@class, 'icon-cloud')]/parent::h4/following-sibling::ul/li/span[contains(text(), 'Services And Versions Compatibility')]")
+    @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Services And Versions Compatibility'])")
     public WebElement servicesVersionMigrationTab;
 
-    @FindBy(xpath = "//li[contains(@class,'active')]//ul[@class='sub-menu']//span[text()='Cluster Discovery']")
+    @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Cluster Discovery'])")
     public WebElement clusterDiscoveryTab;
 
-    @FindBy(xpath = "//li[contains(@class,'active')]//ul[@class='sub-menu']//span[text()='Workload Fit']")
+    @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Workload Fit'])")
     public WebElement WorkloadFitTab;
 
-    @FindBy(xpath = "(//ul[@class='sub-menu']//span[text()='Pipelines'])[2]")
+    @FindBy(xpath = "(//ul[@class='sub-menu']//span[text()='Pipelines'])")
     public WebElement jobsPipelinesTab;
 
-    @FindBy(xpath = "(//span[contains(@class,'icon-jobs')]//following::li/span[text()='Applications'])[1]")
+    @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Applications'])")
     public WebElement applicationTab;
 
     @FindBy(id = "apps-global-search-filter")
     public WebElement globalSearch;
 
-    @FindBy(xpath = "(//ul[@class='sub-menu']//span[text()='Chargeback'])[1]")
+    @FindBy(xpath = "(//ul[@class='sub-menu']//span[text()='Chargeback'])")
     public WebElement chargeback;
 
     /**

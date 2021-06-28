@@ -18,11 +18,10 @@ public class WorkloadPageObject {
     @FindBy(xpath = "//ul[contains(concat(' ', @class, ' '), 'select2-results__options')]/li")
     public List<WebElement> clusterList;
 
-    @FindBy(xpath = "//li[contains(@class,'active')]/" +
-            "ul[contains(@class,'sub-menu')]//li/span[contains(text(),'Workload')]")
+    @FindBy(xpath = "(//span[contains(.,'Workload')])[1]")
     public WebElement workloadTab;
 
-    @FindBy(xpath = "//b[contains(@class,'dropbtn')]")
+    @FindBy(css = "a.dropbtn.pointer")
     public WebElement workloadDropdownOptionsButton;
 
     @FindBy(xpath = "//a[contains(text(),'vCore Hours')]")
@@ -46,10 +45,10 @@ public class WorkloadPageObject {
     @FindBy(xpath = "//a[contains(text(),'Yarn')]")
     public WebElement workloadDropdownYarn;
 
-    @FindBy(xpath = "//*[@id=\"cluster-workload\"]/div[1]/div[2]/h3")
+    @FindBy(css = "div#cluster-workload b:nth-child(3)")
     public WebElement timerangeMessageElement;
 
-    @FindBy(xpath = "//*[@id=\"cluster-workload\"]/div[1]/div[2]/div[4]/div/div/div[1]/div/div/div[2]/div")
+    @FindBy(xpath = "//h3[contains(text(),'datewise')]")
     public WebElement currentmonthHeader;
 
     @FindBy(xpath = "//*[@class='close pointer']")
@@ -61,16 +60,16 @@ public class WorkloadPageObject {
     @FindBy(xpath = "//*[@id=\"radio-btn-opt\"]/span[1]")
     public WebElement viewByMonth;
 
-    @FindBy(xpath = "//span[@class=\"badge tag\" and text()=\"Day\"]")
+    @FindBy(xpath = "(//a[contains(text(),'Day')])[1]")
     public WebElement viewByDay;
 
-    @FindBy(xpath = "//span[normalize-space()='Hour']")
+    @FindBy(xpath = "(//a[contains(text(),'Hour')])[1]")
     public WebElement viewByHour;
 
-    @FindBy(xpath = "//span[normalize-space()='vCore Hour']")
+    @FindBy(xpath = "(//a[contains(text(),'Hour')])[3]")
     public WebElement vcoreHour;
 
-    @FindBy(xpath = "//span[normalize-space()='Hour/Day']")
+    @FindBy(xpath = "//a[contains(text(),'Hour/Day')]")
     public WebElement viewByHourDay;
 
     @FindBy(xpath = "//span[normalize-space()='Sum']")
@@ -115,7 +114,7 @@ public class WorkloadPageObject {
     @FindBy(xpath = "//*[@id=\"kindTable\"]/div[1]")
     public WebElement jobtableHeader;
 
-    @FindBy(xpath = "/html/body//div[2]/h3/b[3]")
+    @FindBy(xpath = "//b[contains(text(),'05')]")
     public WebElement timeRange;
 
 

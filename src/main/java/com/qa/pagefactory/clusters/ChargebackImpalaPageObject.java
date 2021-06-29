@@ -18,13 +18,28 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Chargeback'])")
     public WebElement clusterChargeBackTab;
 
-    @FindBy(css = "a.dropbtn.pointer")
+    @FindBy(xpath = "(//span[contains(@class,'select2-selection__arrow')])[1]")
     public WebElement chargeBackDropdownOptionsButton;
 
-    @FindBy(xpath = "//a[contains(text(),'Impala')]")
+    @FindBy(xpath = "//li[contains(@class,'select2-results__option')]")
+    public List<WebElement> chargeBacksList;
+
+    @FindBy(xpath="//span[@class='select2-results']//li")
+    public WebElement chargeBackSearchFirstField;
+
+    @FindBy(xpath="(//input[@class='select2-search__field'])[2]")
+    public WebElement chargeBackSearchBox;
+
+    @FindBy(xpath = "//li[@id='select2-cw6b-result-lpng-Impala']")
     public WebElement chargeBackDropdownImpalaOption;
 
-    @FindBy(tagName = "h1")
+    @FindBy(xpath = "//span[@id='select2-y4f2-container']")
+    public WebElement chargeBackDropdown;
+
+    @FindBy(xpath = "//span[@id='select2-y4f2-container']")
+    public List<WebElement> chargeBackList;
+
+    @FindBy(xpath = "//label[normalize-space()='Chargeback']")
     public WebElement chargeBackPageHeading;
 
     @FindBy(xpath = "//li[contains(@class,'select2-results__option')]")

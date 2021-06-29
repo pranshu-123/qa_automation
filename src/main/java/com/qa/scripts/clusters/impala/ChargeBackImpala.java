@@ -4,6 +4,7 @@ import com.qa.enums.UserAction;
 import com.qa.enums.chargeback.GroupByOptions;
 import com.qa.enums.chargeback.ImpalaJobTableColumn;
 import com.qa.enums.hbase.HbaseTablesColumn;
+import com.qa.pagefactory.CommonPageObject;
 import com.qa.pagefactory.clusters.ChargebackImpalaPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.utils.*;
@@ -49,20 +50,20 @@ public class ChargeBackImpala {
      * chargeback page. First it click on chargeback tab which navigates to
      * chargeback page then it select impala.
      */
-    public void selectImpalaChargeback() {
+    public void selectImpalaChargeback(String chargeBackName) {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         // Click on Chargeback tab
         waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.clusterChargeBackTab);
         userActions.performActionWithPolling(chargebackImpalaPageObject.clusterChargeBackTab, UserAction.CLICK);
-        // Click on chargeback dropdown
         waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
-        userActions.performActionWithPolling(chargebackImpalaPageObject.chargeBackDropdownOptionsButton,
-                UserAction.CLICK);
-        // Selecting the impala option
-        waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownImpalaOption);
-        userActions.performActionWithPolling(chargebackImpalaPageObject.chargeBackDropdownImpalaOption,
-                UserAction.CLICK);
+        waitExecuter.sleep(2000);
+        userActions.performActionWithPolling(chargebackImpalaPageObject.chargeBackDropdownOptionsButton, UserAction.CLICK);
+        userActions.performActionWithPolling(chargebackImpalaPageObject.chargeBackSearchBox, UserAction.SEND_KEYS,
+                chargeBackName);
+        userActions.performActionWithPolling(chargebackImpalaPageObject.chargeBackSearchFirstField, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
     }
+
 
     /**
      * This method is use to return all results grouped by user table rows.

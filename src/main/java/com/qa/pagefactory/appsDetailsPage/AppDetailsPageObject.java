@@ -177,7 +177,7 @@ public class AppDetailsPageObject {
     @FindBy(xpath = "//table[@id='inefficientApps']/tbody/tr")
     public List<WebElement> getImpalaInefficientJobs;
 
-    @FindBy(xpath = "(//table[@id='inefficientApps']/tbody/tr/td)[3]")
+    @FindBy(xpath = "(//a[@class='applist-id'])")
     public WebElement firstInefficientRow;
 
     @FindBy(id = "apps-global-search-filter")

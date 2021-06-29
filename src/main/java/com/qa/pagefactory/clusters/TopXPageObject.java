@@ -28,7 +28,7 @@ public class TopXPageObject {
     @FindBy(xpath = "//input[contains(@type,'number')]")
     public WebElement topXNumber;
     
-    @FindBy(xpath = "(//h4/span[contains(text(),'Reports')]/parent::h4/parent::li)/ul/li/span[contains(text(),'Scheduled')]")
+    @FindBy(xpath = "(//span[contains(text(),'Schedule')])")
     public WebElement scheduledTab;
     
     //@FindBy(xpath = "(//a/span[text()='Schedule'])[2]")
@@ -56,7 +56,7 @@ public class TopXPageObject {
     @FindBy(xpath ="//p[@class='element-inline']/input")
     public WebElement emailNotification;
     
-    @FindBy(xpath = "(//section[contains(@class,'component-message-banner')])[1]/span[contains(text(),'The report has been scheduled successfully.')]")
+    @FindBy(xpath = "//span[normalize-space()='The report has been scheduled successfully.']")
     public WebElement scheduleSuccessfulMessage;
     
     @FindBy(xpath = "//span[contains(@class,'icon-download')]")

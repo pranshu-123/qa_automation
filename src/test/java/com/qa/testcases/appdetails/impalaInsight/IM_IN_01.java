@@ -5,9 +5,13 @@ import com.qa.base.BaseClass;
 import com.qa.constants.PageConstants;
 import com.qa.enums.AppDetailsApplicationType;
 import com.qa.enums.ImpalaEventTypes;
+import com.qa.pagefactory.appsDetailsPage.AppDetailsPageObject;
+import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.AppDetailsPage;
+import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.utils.LoggingUtils;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
@@ -35,6 +39,10 @@ public class IM_IN_01 extends BaseClass {
         test.assignCategory("App Details - Impala");
         loggingUtils.info("Started test case: IM_IN_01.verifySlowOperatorEvents", test);
         AppDetailsPage appDetailsPage = new AppDetailsPage(driver);
+        AppDetailsPageObject appPage=new AppDetailsPageObject(driver);
+        ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);
         DatePicker datePicker = new DatePicker(driver);
 
         try {
@@ -47,9 +55,10 @@ public class IM_IN_01 extends BaseClass {
             loggingUtils.info("Select only impala application and get its count", test);
             int appCount = appDetailsPage.selectOnlyApplication(AppDetailsApplicationType.IMPALA);
             loggingUtils.info("App count for impala- " + appCount, test);
+
+            loggingUtils.info("Select event filter and navigate to first Job of the page", test);
+            appDetailsPage.selectEventFilter(ImpalaEventTypes.SqlSlowOperatorEvent);
             if (appCount > 0) {
-                loggingUtils.info("Select event filter and navigate to first Job of the page", test);
-                appDetailsPage.selectEventFilter(ImpalaEventTypes.SqlSlowOperatorEvent);
                 appDetailsPage.clickOnFirstInefficientJob();
                 List<String> titles = appDetailsPage.getEfficiencyTags();
                 loggingUtils.info("Titles on page - " + titles, test);

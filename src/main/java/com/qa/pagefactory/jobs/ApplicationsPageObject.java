@@ -51,7 +51,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//span[contains(@class,'select2-dropdown--below')]//ul/li")
     public List<WebElement> getclusterListDropdown;
 
-    @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[5]")
+    @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[6]")
     public List<WebElement> getApplicationClusterId;
 
     @FindBy(xpath = "//h3[contains(text(),'No Data Available')]")
@@ -75,7 +75,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[3]")
     public WebElement getUsernameFromTable;
 
-    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[8]")
+    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[9]")
     public WebElement getQueueNameTable;
 
     @FindBy(id = "apps-global-search-filter")
@@ -360,6 +360,9 @@ public class ApplicationsPageObject {
 
     @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[4]/span")
     public WebElement getToolTipValueOfAppName;
+
+    @FindBy(xpath = "(//h3/a[contains(text(),'Application Type')]//following::span)[1]")
+    public  WebElement showAllLink;
 
     /**
      * @param driver The driver that will be used to look up the elements

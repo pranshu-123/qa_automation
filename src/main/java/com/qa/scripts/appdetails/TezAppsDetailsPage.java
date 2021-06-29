@@ -1110,7 +1110,7 @@ public class TezAppsDetailsPage {
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(1000);
         waitExecuter.waitUntilPageFullyLoaded();
-        datePicker.selectLast90Days();
+        datePicker.selectLast30Days();
         waitExecuter.sleep(3000);
         waitExecuter.waitUntilPageFullyLoaded();
     }

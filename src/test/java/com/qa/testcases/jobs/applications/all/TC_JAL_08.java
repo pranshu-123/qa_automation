@@ -36,6 +36,8 @@ public class TC_JAL_08 extends BaseClass {
         test.log(LogStatus.INFO, "Select clusterId : " + clusterId);
         allApps.navigateToJobsTab();
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+        // Get total app counts before applying filter
+        String totalCountBeforeFilter = applicationsPageObject.getTotalAppCount.getText();
         datePicker.clickOnDatePicker();
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         datePicker.selectCustomRange();
@@ -43,11 +45,11 @@ public class TC_JAL_08 extends BaseClass {
         datePicker.setStartAndEndDateFromCurrentDate(-3,-1);
         datePicker.clickOnCustomDateApplyBtn();
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
-        allApps.selectCluster(clusterId);
+
+        //allApps.selectCluster(clusterId);
 
         //allApps.inJobsSelectClusterAndLast7Days(clusterId);
-        // Get total app counts before applying filter
-        String totalCountBeforeFilter = applicationsPageObject.getTotalAppCount.getText();
+
         waitExecuter.sleep(1000);
         test.log(LogStatus.INFO, "Get total app counts before applying filter " + totalCountBeforeFilter);
         LOGGER.info("Get total app counts before applying filter " + totalCountBeforeFilter);

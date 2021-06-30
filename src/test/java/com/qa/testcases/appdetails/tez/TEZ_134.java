@@ -2,6 +2,7 @@ package com.qa.testcases.appdetails.tez;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.TezAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
@@ -11,6 +12,7 @@ import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,17 +37,12 @@ public class TEZ_134 extends BaseClass {
         DatePicker datePicker = new DatePicker(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         AllApps allApps = new AllApps(driver);
+        UserActions userActions = new UserActions(driver);
 
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         tezDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
-        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
-
-        test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-        tezDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
-                applicationsPageObject, clusterId);
-        test.log(LogStatus.INFO, "Verify that the left pane has Hive check box and the apps number");
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         int appCount = tezDetailsPage.clickOnlyLink("Tez");
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
@@ -77,14 +74,14 @@ public class TEZ_134 extends BaseClass {
             waitExecuter.sleep(2000);
             test.log(LogStatus.PASS, "Verified left pane in the app details page successfully");
             //Close apps details page
-            MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
-            waitExecuter.sleep(3000);
+            waitExecuter.waitUntilElementClickable(tezApps.closeAppsPageTab);
+            userActions.performActionWithPolling(tezApps.closeAppsPageTab, UserAction.CLICK);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         } else {
             test.log(LogStatus.SKIP, "No Tez Application present");
             logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +
                     "of 90 days");
         }
-        waitExecuter.sleep(3000);
-        MouseActions.clickOnElement(driver, tezApps.homeTab);
+        userActions.performActionWithPolling(applicationsPageObject.resetButton, UserAction.CLICK);
     }
 }

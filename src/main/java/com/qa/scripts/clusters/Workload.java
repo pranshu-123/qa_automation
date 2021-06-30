@@ -446,10 +446,7 @@ public class Workload {
                 // Click on workload tab
                 MouseActions.clickOnElement(driver, workloadPageObject.workloadTab);
                 // Click on workload dropdown
-                MouseActions.clickOnElement(driver, workloadPageObject.workloadDropdownOptionsButton);
-                // Selecting the Memory Hours
                 waitExecuter.sleep(3000);
-                MouseActions.clickOnElement(driver, workloadPageObject.workloadDropdownYarn);
             } catch (NoSuchElementException e) {
                 LOGGER.severe("Class Workload | Method selectByMemoryHours | Exception desc" + e.getMessage());
                 throw (e);

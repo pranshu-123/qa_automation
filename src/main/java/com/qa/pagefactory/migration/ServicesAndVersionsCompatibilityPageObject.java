@@ -88,7 +88,7 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//tbody/tr[1]/td[1]")
     public WebElement archiveReportName;
 
-    @FindBy(xpath = "//span[contains(text(), 'Schedule')]//parent::a")
+    @FindBy(xpath = "//span[normalize-space()='Schedule']")
     public WebElement scheduleBtn;
 
     @FindBy(xpath = "//*[@class='select2-selection__rendered']")

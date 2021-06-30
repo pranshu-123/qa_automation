@@ -49,7 +49,7 @@ public class IM_RES_26 extends BaseClass {
 		//Select impala tab
 		test.log(LogStatus.INFO, "Go to resource page");
 		LOGGER.info("Select impala from dropdown");
-		impala.selectImpalaResource();
+		impala.selectImpalaResource("Impala");
 		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
 		// Select the cluster

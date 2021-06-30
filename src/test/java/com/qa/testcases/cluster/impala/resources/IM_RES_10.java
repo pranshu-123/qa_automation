@@ -48,7 +48,7 @@ public class IM_RES_10 extends BaseClass {
         //Select impala tab
         test.log(LogStatus.INFO, "Go to resource page");
         LOGGER.info("Select impala from dropdown");
-        impala.selectImpalaResource();
+        impala.selectImpalaResource("Impala");
 
         // Select the cluster
         test.log(LogStatus.INFO, "Select cluster : " + clusterId);

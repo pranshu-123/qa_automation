@@ -40,7 +40,7 @@ public class IM_RES_01 extends BaseClass {
 		// Intialize impala page objects
 		impalaPageObject = new ImpalaPageObject(driver);
 		// Click on Resources tab and select Impala
-		impala.selectImpalaResource();
+		impala.selectImpalaResource("Impala");
 		// Select the cluster
 		LOGGER.info("Selecting the cluster");
 		waitExecuter.sleep(1000);

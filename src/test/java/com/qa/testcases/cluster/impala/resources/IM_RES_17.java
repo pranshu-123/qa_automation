@@ -36,7 +36,7 @@ public class  IM_RES_17 extends BaseClass {
     //Select impala tab
     test.log(LogStatus.INFO, "Go to resource page");
     LOGGER.info("Select impala from dropdown");
-    impala.selectImpalaResource();
+    impala.selectImpalaResource("Impala");
     HomePage homePage = new HomePage(driver);
     homePage.selectMultiClusterId(clusterId);
 
@@ -75,7 +75,7 @@ public class  IM_RES_17 extends BaseClass {
         }
         Assert.assertTrue(isTagPresent, "Filter user not displayed for queue: " + queueName);
         test.log(LogStatus.PASS, "Graph displayed the user based on filter for queue : " + queueName);
-        waitExecuter.sleep(2000);
+        waitExecuter.sleep(3000);
         impalaPageObject.filterInput.click();
 
       }

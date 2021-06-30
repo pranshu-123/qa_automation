@@ -41,7 +41,9 @@ public class TC_CB_03 extends BaseClass {
         chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
         // Click on Chargeback tab
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
+        chargeBackImpala.selectImpalaChargebackTab();
         chargeBackImpala.selectImpalaChargeback("Yarn");
+
         waitExecuter.sleep(1000);
         picker.clickOnDatePicker();
         waitExecuter.sleep(1000);

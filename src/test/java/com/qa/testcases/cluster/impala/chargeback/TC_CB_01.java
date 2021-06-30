@@ -25,6 +25,7 @@ public class TC_CB_01 extends BaseClass {
         test.assignCategory(" Cluster - Impala Chargeback");
 
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
+        chargeBackImpala.selectImpalaChargebackTab();
         chargeBackImpala.selectImpalaChargeback("Yarn");
 
         Assert.assertTrue(driver.getCurrentUrl().contains("clusters/chargeback"), "User is not " +

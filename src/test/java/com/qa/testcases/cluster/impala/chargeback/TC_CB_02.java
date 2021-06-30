@@ -46,7 +46,9 @@ public class TC_CB_02 extends BaseClass {
         picker = new DatePickerPageObject(driver);
         chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
         topPanelPageObject = new TopPanelPageObject(driver);
+        chargeBackImpala.selectImpalaChargebackTab();
         chargeBackImpala.selectImpalaChargeback("Yarn");
+
 
         //Select last 30 days from date picker
         test.log(LogStatus.INFO, "Select last 30 days from date picker");

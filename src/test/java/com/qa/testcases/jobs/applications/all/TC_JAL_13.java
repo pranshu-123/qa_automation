@@ -58,8 +58,9 @@ public class TC_JAL_13 extends BaseClass {
         // Click on the first app in table to get efficiency
         test.log(LogStatus.INFO, "Click on the first app in table to get efficiency");
         LOGGER.info("Click on the first app in table to get efficiency");
-        applicationsPageObject.getDurationFromTable.click();
-        waitExecuter.sleep(5000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
+        applicationsPageObject.clickOnAppId.click();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
         driver.getWindowHandle();
         // Click on the first app in table to get efficiency
         test.log(LogStatus.INFO, "Click on the first app in table to get efficiency");

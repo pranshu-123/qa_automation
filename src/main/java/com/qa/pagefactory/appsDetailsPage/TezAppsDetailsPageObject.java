@@ -9,7 +9,7 @@ import java.util.List;
 
 public class TezAppsDetailsPageObject {
 
-    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[4]/div")
+    @FindBy(xpath = "//tbody[@id='allApps-body']/tr[1]/td[4]/a[2]")
     public WebElement getAppId;
 
     @FindBy(xpath = "//span[(text()='Read')]//following-sibling::a[contains(@class,'sorting')]")
@@ -69,7 +69,7 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[10]")
     public WebElement getWrite;
 
-    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[4]/div")
+    @FindBy(xpath = "//tbody[@id='allApps-body']/tr[1]/td[4]/a[2]")
     public WebElement getAppid;
 
 
@@ -171,7 +171,7 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"highcharts-vjvb3sy-64\"]/svg/rect[1]")
     public WebElement Dags;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div/span[1]")
+    @FindBy(xpath = "//*[@id='app']/div/div/div[1]/div/span[1]")
     public WebElement Owner;
 
     @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div/span[2]")
@@ -357,6 +357,9 @@ public class TezAppsDetailsPageObject {
 
     @FindBy(css = "//*[@class='close pointer']")
     public WebElement loadDiagnosticWinClose;
+
+    @FindBy(xpath = "//tbody[@id='allApps-body']/tr[1]/td[4]/span")
+    public WebElement appNameToolTip;
 
 
     /**

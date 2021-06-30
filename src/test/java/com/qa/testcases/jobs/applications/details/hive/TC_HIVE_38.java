@@ -119,6 +119,10 @@ public class TC_HIVE_38 extends BaseClass {
             // Assert the duration count to max and min values of slider
             LOGGER.info("Assert the duration count to max and min values of slider.");
             test.log(LogStatus.INFO, "Assert the duration count to max and min values of slider.");
+            LOGGER.info("Min duration in second from table ~ "+minDurationInSec);
+            LOGGER.info("Max duration in second from table ~ "+maxDurationInSec);
+            LOGGER.info("Right Slider duration in second ~ "+rightSliderInSeconds);
+            LOGGER.info("Left Slider duration in second ~ "+leftSliderInSeconds);
             Assert.assertTrue(minDurationInSec <= rightSliderInSeconds && minDurationInSec >= leftSliderInSeconds,
                     "The min duration does not does not match the slider duration");
             test.log(LogStatus.PASS, "The min duration match the slider duration.");

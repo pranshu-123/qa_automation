@@ -54,14 +54,15 @@ public class TC_JAL_10 extends BaseClass {
         // Assert app types are -- "Hive","Impala","Map Reduce","Spark","Tez"
         test.log(LogStatus.INFO, "Validate the app types present");
         LOGGER.info("Validate the app types present");
-        List<String> existingAppTypes = new ArrayList<>(Arrays.asList("Hive", "Map Reduce", "Spark", "Tez"));
+        List<String> existingAppTypes = new ArrayList<>(Arrays.asList("Hive", "MapReduce", "Spark", "Tez"));
         List<WebElement> appTypes = applicationsPageObject.getApplicationTypes;
         List<String> listOfAppTypes = new ArrayList<>();
         waitExecuter.sleep(2000);
         for (int i = 0; i < appTypes.size(); i++) {
             listOfAppTypes.add(appTypes.get(i).getText().trim());
         }
-
+        LOGGER.info("Actual list of apps- "+listOfAppTypes);
+        LOGGER.info("Expected list of apps- "+existingAppTypes);
         Assert.assertTrue(listOfAppTypes.containsAll(existingAppTypes),
                 "Application types displayed does not match the expected list");
         test.log(LogStatus.PASS, "Application types displayed match the expected list ");

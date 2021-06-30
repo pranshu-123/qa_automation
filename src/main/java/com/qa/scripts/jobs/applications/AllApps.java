@@ -75,6 +75,7 @@ public class AllApps {
     /* Check and remove cluster from searchbox */
     public void removeClusterIfPresent() {
         if (applicationsPageObject.removeCluster != null) {
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.clusterSearchBox);
             applicationsPageObject.clusterSearchBox.sendKeys(Keys.BACK_SPACE);
             waitExecuter.sleep(1000);
             waitExecuter.waitUntilElementClickable(applicationsPageObject.clusterSearchBox);

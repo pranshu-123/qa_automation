@@ -83,8 +83,6 @@ public class TEZ_128 extends BaseClass {
             test.log(LogStatus.SKIP, "No Tez Application present");
             LOGGER.severe("No Tez Application present in the " + clusterId + " cluster for the time span " +
                     "of 90 days");
-            //Close apps details page
-            MouseActions.clickOnElement(driver, tezApps.homeTab);
         }
     }
 }

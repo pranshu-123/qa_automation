@@ -12,7 +12,7 @@ public class ClusterDiscoveryPageObject {
     @FindBy(xpath = "//div[contains(@class,'component-cta')]//span[contains(text(),'Run')]")
     public WebElement runButton;
 
-    @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/a")
+    @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/a/i")
     public List<WebElement> confirmationMessageElementClose;
 
     @FindBy(xpath = "(//span[contains(text(),'Run')])[2]/parent::a")

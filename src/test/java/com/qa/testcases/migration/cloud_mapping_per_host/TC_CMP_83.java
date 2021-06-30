@@ -42,7 +42,7 @@ public class TC_CMP_83 extends BaseClass {
         cloudMigrationPerHostPage.selectCloudProduct(CloudProduct.GOOGLE_COMPUTE_ENGINE);
         cloudMigrationPerHostPage.waitTillLoaderPresent();
         cloudMigrationPerHostPage.checkUncheckColumn(false);
-        cloudMigrationPerHostPage.clickOnRunButton();
+        cloudMigrationPerHostPage.clickOnRunReportButton();
         try {
             waitExecuter.waitUntilTextToBeInWebElement(cloudMigrationPerHostPage.getConfirmationMessage(),
                 "Cloud Mapping Per Host completed successfully.");

@@ -57,9 +57,9 @@ public class TC_CMP_94 extends BaseClass {
         } catch (IndexOutOfBoundsException outOfBoundsException) {
             Assert.assertTrue(false, "No data displayed in table");
         }
-        cloudMigrationPerHostPage.clickOnRunButton();
+        cloudMigrationPerHostPage.clickOnRunReportButton();
         cloudMigrationPerHostPage.waitTillLoaderPresent();
-        waitExecuter.sleep(5000);
+        waitExecuter.sleep(8000);
         Assert.assertEquals(cloudMigrationPerHostPage.getCloudProductAndServicesOnReportPage(),
                 CloudProduct.AMAZON_EMR.getValue());
         LOGGER.pass("Correct cloud provider values are displayed.", test);

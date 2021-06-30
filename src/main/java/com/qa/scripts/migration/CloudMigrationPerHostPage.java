@@ -373,9 +373,17 @@ public class CloudMigrationPerHostPage {
     }
 
     /**
-     * Click on run button
+     * Click on run  button
      */
     public void clickOnRunButton() {
+        userAction.performActionWithPolling(cmpPageObj.runButton, UserAction.CLICK);
+    }
+
+
+    /**
+     * Click on run schedule report button
+     */
+    public void clickOnRunReportButton() {
         userAction.performActionWithPolling(cmpPageObj.runButton, UserAction.CLICK);
     }
 

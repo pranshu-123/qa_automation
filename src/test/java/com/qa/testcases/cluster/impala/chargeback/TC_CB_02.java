@@ -42,25 +42,11 @@ public class TC_CB_02 extends BaseClass {
         test.log(LogStatus.INFO, "Initialize all class objects");
         LOGGER.info("Initialize all class objects");
         waitExecuter = new WaitExecuter(driver);
-        chargebackImpala = new ChargeBackImpala(driver);
+        ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
         picker = new DatePickerPageObject(driver);
         chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
         topPanelPageObject = new TopPanelPageObject(driver);
-
-        // Click on Chargeback tab
-        test.log(LogStatus.INFO, "Click on Chargeback tab");
-        LOGGER.info("Click on Chargeback tab");
-        waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.clusterChargeBackTab);
-        JavaScriptExecuter.clickOnElement(driver, chargebackImpalaPageObject.clusterChargeBackTab);
-        waitExecuter.sleep(1000);
-
-        // Click on chargeback dropdown and select Impala
-        test.log(LogStatus.INFO, "Click on chargeback dropdown and select Impala");
-        LOGGER.info("Click on chargeback dropdown and select Impala");
-        JavaScriptExecuter.clickOnElement(driver, chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
-        waitExecuter.sleep(1000);
-        chargebackImpalaPageObject.chargeBackDropdownImpalaOption.click();
-        waitExecuter.sleep(1000);
+        chargeBackImpala.selectImpalaChargeback("Yarn");
 
         //Select last 30 days from date picker
         test.log(LogStatus.INFO, "Select last 30 days from date picker");

@@ -27,7 +27,7 @@ public class TC_CB_30 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
 
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
-        chargeBackImpala.selectImpalaChargeback();
+        chargeBackImpala.selectImpalaChargeback("Yarn");
 
         //Cluster selected
         HomePage homePage = new HomePage(driver);

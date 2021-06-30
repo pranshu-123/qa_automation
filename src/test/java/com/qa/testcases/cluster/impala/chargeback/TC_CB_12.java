@@ -28,7 +28,7 @@ public class TC_CB_12 extends BaseClass {
             " Grouped by \"Queue\"");
         test.assignCategory(" Cluster - Impala Chargeback");
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
-        chargeBackImpala.selectImpalaChargeback();
+        chargeBackImpala.selectImpalaChargeback("Yarn");
         LOGGER.info("Navigate to impala chargeback page", test);
         //Select Cluster
         HomePage homePage = new HomePage(driver);

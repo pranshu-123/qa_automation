@@ -30,7 +30,7 @@ public class TC_CB_42 extends BaseClass {
         test.assignCategory(" Cluster - Impala Chargeback");
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
         ChargebackImpalaPageObject chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
-        chargeBackImpala.selectImpalaChargeback();
+        chargeBackImpala.selectImpalaChargeback("Yarn");
         LOGGER.info("Click on impala chargeback", test);
         DatePicker datePicker = new DatePicker(driver);
 

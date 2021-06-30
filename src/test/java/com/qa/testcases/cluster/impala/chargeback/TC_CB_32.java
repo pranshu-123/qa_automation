@@ -46,20 +46,8 @@ public class TC_CB_32 extends BaseClass {
 		chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
 
 		// Click on Chargeback tab
-		test.log(LogStatus.INFO, "Click on Chargeback tab");
-		LOGGER.info("Click on Chargeback tab");
-		waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.clusterChargeBackTab);
-		JavaScriptExecuter.clickOnElement(driver, chargebackImpalaPageObject.clusterChargeBackTab);
-		waitExecuter.sleep(1000);
-
-		// Click on chargeback dropdown and select Impala
-		test.log(LogStatus.INFO, "Click on chargeback dropdown and select Impala");
-		LOGGER.info("Click on chargeback dropdown and select Impala");
-		JavaScriptExecuter.clickOnElement(driver, chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
-		waitExecuter.sleep(1000);
-		waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownImpalaOption);
-		chargebackImpalaPageObject.chargeBackDropdownImpalaOption.click();
-		waitExecuter.sleep(1000);
+		ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
+		chargeBackImpala.selectImpalaChargeback("Yarn");
 
 		// Select the cluster
 		test.log(LogStatus.INFO, "Select clusterId : " + clusterId);

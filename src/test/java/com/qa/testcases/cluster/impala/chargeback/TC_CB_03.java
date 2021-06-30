@@ -36,20 +36,12 @@ public class TC_CB_03 extends BaseClass {
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
         // Click on datepicker button
-        chargebackImpala = new ChargeBackImpala(driver);
         picker = new DatePicker(driver);
         // Intialize impala page objects
         chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
         // Click on Chargeback tab
-        waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.clusterChargeBackTab);
-        JavaScriptExecuter.clickOnElement(driver, chargebackImpalaPageObject.clusterChargeBackTab);
-        // Click on chargeback dropdown
-        waitExecuter.sleep(1000);
-        JavaScriptExecuter.clickOnElement(driver, chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
-        // Selecting Impala chargeback
-        waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownImpalaOption);
-        waitExecuter.sleep(1000);
-        chargebackImpalaPageObject.chargeBackDropdownImpalaOption.click();
+        ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
+        chargeBackImpala.selectImpalaChargeback("Yarn");
         waitExecuter.sleep(1000);
         picker.clickOnDatePicker();
         waitExecuter.sleep(1000);

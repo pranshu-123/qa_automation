@@ -4,7 +4,7 @@ public class PageConstants {
     public static String YARN_RESOURCE_HEADER = "Resource Usage";
 
     public static class Clusters {
-        public static String CHARGEBACK_IMPALA_HEADING = "Chargeback Impala";
+        public static String CHARGEBACK_IMPALA_HEADING = "Chargeback";
         public static String CHARGEBACK_YARN_HEADING = "Chargeback Yarn";
     }
 

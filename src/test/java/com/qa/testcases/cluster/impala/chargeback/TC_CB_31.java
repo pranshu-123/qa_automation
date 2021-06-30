@@ -29,19 +29,12 @@ public class TC_CB_31 extends BaseClass {
 		test.assignCategory(" Cluster - Impala Chargeback");
 
 		waitExecuter = new WaitExecuter(driver);
-		chargebackImpala = new ChargeBackImpala(driver);
 		picker = new DatePicker(driver);
 		// Intialize impala page objects
 		chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
 		// Click on Chargeback tab
-		waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.clusterChargeBackTab);
-		JavaScriptExecuter.clickOnElement(driver, chargebackImpalaPageObject.clusterChargeBackTab);
-		// Click on chargeback dropdown
-		waitExecuter.sleep(1000);
-		JavaScriptExecuter.clickOnElement(driver, chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
-		// Selecting Impala chargeback
-		waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownImpalaOption);
-		chargebackImpalaPageObject.chargeBackDropdownImpalaOption.click();
+		ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
+		chargeBackImpala.selectImpalaChargeback("Yarn");
 		// Select the cluster
 		LOGGER.info("Selecting the cluster");
 		waitExecuter.sleep(1000);

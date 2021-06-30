@@ -28,7 +28,7 @@ public class TC_CB_41 extends BaseClass {
             extent.startTest("TC_CB_41.validateSortByType","Validate table sorting - By type");
         test.assignCategory(" Cluster - Impala Chargeback");
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
-        chargeBackImpala.selectImpalaChargeback();
+        chargeBackImpala.selectImpalaChargeback("Yarn");
         LOGGER.info("Click on impala chargeback", test);
         DatePicker datePicker = new DatePicker(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);

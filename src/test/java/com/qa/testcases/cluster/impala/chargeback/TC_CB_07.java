@@ -28,7 +28,7 @@ public class TC_CB_07 extends BaseClass {
             "Unravel UI when the user selects a custom date range where Impala data is not available.");
         test.assignCategory(" Cluster - Impala Chargeback");
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
-        chargeBackImpala.selectImpalaChargeback();
+        chargeBackImpala.selectImpalaChargeback("Yarn");
         LOGGER.info("Navigate to impala chargeback page", test);
 
         //Select Cluster

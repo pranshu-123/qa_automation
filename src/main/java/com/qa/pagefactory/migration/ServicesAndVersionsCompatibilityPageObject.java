@@ -103,7 +103,7 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//p[@class='element-inline']/input")
     public WebElement scheduleNotification;
 
-    @FindBy(xpath = "(//section[contains(@class, 'icon-success')]/span)[1]")
+    @FindBy(xpath = "//div[contains(text(),'Services and Versions Compatibility')]")
     public WebElement scheduleMsg;
 
     @FindBy(xpath = "//span[normalize-space()='Schedule']")

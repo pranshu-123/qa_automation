@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.clusters.yarn.ChargeBackYarn;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -26,12 +27,19 @@ public class YC_033 extends BaseClass {
         test.assignCategory(" Cluster - Yarn Chargeback");
 
         ChargeBackYarn chargeBackYarn = new ChargeBackYarn(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         chargeBackYarn.selectYarnChargeback();
         test.log(LogStatus.PASS, "User is redirected to cluster yarn chargeback page");
 
         // ClusterId selection
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
+
+        chargeBackYarn.selectYarnChargeback();
+        waitExecuter.waitUntilPageFullyLoaded();
+
+        chargeBackYarn.selectChargeBackType("Yarn");
+        waitExecuter.waitUntilPageFullyLoaded();
 
         // Click on datepicker button
         DatePicker datePicker = new DatePicker(driver);

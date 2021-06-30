@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.constants.PageConstants;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.clusters.yarn.ChargeBackYarn;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -26,12 +27,16 @@ public class YC_019_020 extends BaseClass {
         test.assignCategory(" Cluster - Yarn Chargeback");
 
         HomePage homePage = new HomePage(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         homePage.selectMultiClusterId(clusterId);
 
         ChargeBackYarn chargeBackYarn = new ChargeBackYarn(driver);
-        chargeBackYarn.selectYarnChargeback();
+        waitExecuter.waitUntilPageFullyLoaded();
 
-        Assert.assertTrue(driver.getCurrentUrl().contains("clusters/chargeback"), "User is not " +
+        chargeBackYarn.selectChargeBackType("Yarn");
+        waitExecuter.waitUntilPageFullyLoaded();
+
+        Assert.assertTrue(driver.getCurrentUrl().contains("#clusters/chargeback"), "User is not " +
                 "directed to the cluster chargeback page.");
         test.log(LogStatus.PASS, "User is redirected to to cluster chargeback page");
 

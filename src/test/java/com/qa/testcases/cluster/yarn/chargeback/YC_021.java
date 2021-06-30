@@ -30,6 +30,10 @@ public class YC_021 extends BaseClass {
 
         ChargeBackYarn chargeBackYarn = new ChargeBackYarn(driver);
         chargeBackYarn.selectYarnChargeback();
+        waitExecuter.waitUntilPageFullyLoaded();
+
+        chargeBackYarn.selectChargeBackType("Yarn");
+        waitExecuter.waitUntilPageFullyLoaded();
 
         //click on cluster drop down
         CommonPageObject commonPageObject = new CommonPageObject(driver);

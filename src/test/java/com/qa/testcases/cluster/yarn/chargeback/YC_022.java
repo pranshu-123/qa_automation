@@ -38,18 +38,13 @@ public class YC_022 extends BaseClass {
         ChargeBackYarn = new ChargeBackYarn(driver);
         picker = new DatePicker(driver);
 
-        chargebackYarnPageObject = new ChargebackYarnPageObject(driver);
-        // Click on Chargeback tab
-        waitExecuter.waitUntilElementClickable(chargebackYarnPageObject.clusterChargeBackTab);
-        JavaScriptExecuter.clickOnElement(driver, chargebackYarnPageObject.clusterChargeBackTab);
-        Log.info("Click on Chargeback tab.");
-        // Click on chargeback dropdown
-        waitExecuter.sleep(1000);
-        JavaScriptExecuter.clickOnElement(driver, chargebackYarnPageObject.chargeBackDropdownOptionsButton);
-        Log.info("Click on chargeback dropdown.");
-        // Selecting Impala chargeback
         ChargeBackYarn chargeBackYarn = new ChargeBackYarn(driver);
         chargeBackYarn.selectYarnChargeback();
+        waitExecuter.waitUntilPageFullyLoaded();
+
+        chargeBackYarn.selectChargeBackType("Yarn");
+        waitExecuter.waitUntilPageFullyLoaded();
+
         waitExecuter.sleep(1000);
         picker.clickOnDatePicker();
         Log.info("Click on DatePicker.");

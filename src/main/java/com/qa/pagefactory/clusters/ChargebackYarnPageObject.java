@@ -14,6 +14,24 @@ public class ChargebackYarnPageObject {
     @FindBy(css = "a.dropbtn.pointer")
     public WebElement chargeBackDropdownOptionsButton;
 
+    @FindBy(xpath = "(//span[contains(@class,'select2-selection__arrow')])[1]")
+    public List<WebElement> chargeBackDropdownsButton;
+
+    @FindBy(xpath = "(//span[contains(@class,'select2-selection__arrow')])[1]")
+    public WebElement chargeBackDropdownButton;
+
+    @FindBy(xpath = "//li[contains(@class,'select2-results__option')]")
+    public List<WebElement> chargeBacksList;
+
+    @FindBy(xpath="//span[@class='select2-results']//li")
+    public WebElement chargeBackSearchFirstField;
+
+    @FindBy(xpath="(//input[@class='select2-search__field'])[2]")
+    public WebElement chargeBackSearchBox;
+
+    @FindBy(xpath="//span[@class='select2-results']//li")
+    public WebElement chargeBackField;
+
     @FindBy(xpath = "//a[contains(text(),'Yarn')]")
     public WebElement chargeBackDropdownYarnOption;
 

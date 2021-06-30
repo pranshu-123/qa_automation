@@ -32,6 +32,12 @@ public class YC_028 extends BaseClass {
         homePage.selectMultiClusterId(clusterId);
         waitExecuter.waitUntilPageFullyLoaded();
 
+        chargeBackYarn.selectYarnChargeback();
+        waitExecuter.waitUntilPageFullyLoaded();
+
+        chargeBackYarn.selectChargeBackType("Yarn");
+        waitExecuter.waitUntilPageFullyLoaded();
+
         // Click on datepicker button
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();

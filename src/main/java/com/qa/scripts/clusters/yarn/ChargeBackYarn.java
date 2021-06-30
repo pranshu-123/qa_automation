@@ -1,8 +1,12 @@
 package com.qa.scripts.clusters.yarn;
 
+import com.qa.enums.UserAction;
+import com.qa.pagefactory.CommonPageObject;
 import com.qa.pagefactory.clusters.ChargebackYarnPageObject;
 import com.qa.utils.JavaScriptExecuter;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -18,6 +22,7 @@ public class ChargeBackYarn {
     private WebDriver driver;
     private ChargebackYarnPageObject chargebackYarnPageObject;
     private static final Logger LOGGER = Logger.getLogger(ChargeBackYarn.class.getName());
+    private final UserActions userActions;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -29,6 +34,7 @@ public class ChargeBackYarn {
         waitExecuter = new WaitExecuter(driver);
         this.driver = driver;
         chargebackYarnPageObject = new ChargebackYarnPageObject(driver);
+        userActions = new UserActions(driver);
     }
 
     /**
@@ -42,14 +48,41 @@ public class ChargeBackYarn {
         waitExecuter.waitUntilElementClickable(chargebackYarnPageObject.clusterChargeBackTab);
         JavaScriptExecuter.clickOnElement(driver, chargebackYarnPageObject.clusterChargeBackTab);
         // Click on chargeback dropdown
-        waitExecuter.waitUntilElementPresent(chargebackYarnPageObject.chargeBackDropdownOptionsButton);
+       /* waitExecuter.waitUntilElementPresent(chargebackYarnPageObject.chargeBackDropdownOptionsButton);
         driver.navigate().refresh();
         waitExecuter.waitUntilElementPresent(chargebackYarnPageObject.chargeBackDropdownOptionsButton);
         JavaScriptExecuter.clickOnElement(driver, chargebackYarnPageObject.chargeBackDropdownOptionsButton);
         // Selecting the impala option
         waitExecuter.sleep(3000);
-        JavaScriptExecuter.clickOnElement(driver, chargebackYarnPageObject.chargeBackDropdownYarnOption);
+        JavaScriptExecuter.clickOnElement(driver, chargebackYarnPageObject.chargeBackDropdownYarnOption);*/
     }
+
+
+    public void selectTriggerCondition(String chargeBackType){
+        waitExecuter.sleep(1000);
+        int allTriggerCondition = chargebackYarnPageObject.chargeBackDropdownsButton.size();
+        LOGGER.info("Click on chargeback dropdown: "+ allTriggerCondition);
+        for(int i=0; i< allTriggerCondition ; i++){
+            if(chargebackYarnPageObject.chargeBackDropdownsButton.get(i).getText().equals(chargeBackType)){
+                MouseActions.clickOnElement(driver, chargebackYarnPageObject.chargeBackDropdownsButton.get(i));
+                break;
+            }
+        }
+    }
+
+    //click on cluster drop down
+    public void selectChargeBackType(String selectChargeBack) {
+        waitExecuter.waitUntilElementClickable(chargebackYarnPageObject.chargeBackDropdownButton);
+        waitExecuter.sleep(2000);
+        userActions.performActionWithPolling(chargebackYarnPageObject.chargeBackDropdownButton, UserAction.CLICK);
+        userActions.performActionWithPolling(chargebackYarnPageObject.chargeBackSearchBox, UserAction.SEND_KEYS,
+                selectChargeBack);
+        waitExecuter.waitUntilPageFullyLoaded();
+        userActions.performActionWithPolling(chargebackYarnPageObject.chargeBackField, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(chargebackYarnPageObject.chargeBackDropdownButton);
+
+    }
+
 
     /**
      * This method is use to return all results grouped by user table rows.

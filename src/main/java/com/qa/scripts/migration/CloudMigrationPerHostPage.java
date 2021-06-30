@@ -384,7 +384,7 @@ public class CloudMigrationPerHostPage {
      * Click on run schedule report button
      */
     public void clickOnRunReportButton() {
-        userAction.performActionWithPolling(cmpPageObj.runReportButton, UserAction.CLICK);
+        userAction.performActionWithPolling(cmpPageObj.runButton, UserAction.CLICK);
     }
 
     /**

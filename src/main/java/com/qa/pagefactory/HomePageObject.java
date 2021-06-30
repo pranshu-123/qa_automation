@@ -110,7 +110,7 @@ public class HomePageObject {
   @FindBy(xpath = "//h4[contains(text(),'By State')]/following-sibling::div[1]/div/ul/li/a")
   public List<WebElement> listrunningGraphDownloadMenu;
 
-  @FindBy(xpath ="//div[@graphid='JobsFinishedByStatus']//a[@class='menu']")
+  @FindBy(xpath ="//div[@graph-id='JobsFinishedByStatus']//a[@class='menu']")
   public WebElement bystatusGraphDownloadMenu;
 
   @FindBy(xpath = "//h4[contains(text(),'By Status')]/following-sibling::div[1]/div/ul/li/a")

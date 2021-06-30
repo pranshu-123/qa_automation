@@ -41,14 +41,19 @@ public class TC_CB_03 extends BaseClass {
         chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
         // Click on Chargeback tab
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
-        chargeBackImpala.selectImpalaChargeback("Yarn");
+        chargeBackImpala.selectImpalaChargeback("Impala");
+
+
 
         waitExecuter.sleep(1000);
         picker.clickOnDatePicker();
         waitExecuter.sleep(1000);
-        picker.selectLast12Hour();
+        picker.selectLast30Days();
         waitExecuter.sleep(1000);
 
+        waitExecuter.sleep(1000);
+
+        chargeBackImpala.selectImpalaChargeback("Impala");
         waitExecuter.sleep(1000);
         String memoryHourInSeconds = chargebackImpala.getMemoryGraphHeader();
         Assert.assertTrue(chargebackImpala.getMemoryGraphHeader().matches(memoryHourInSeconds),

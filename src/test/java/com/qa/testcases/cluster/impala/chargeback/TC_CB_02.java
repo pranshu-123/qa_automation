@@ -2,6 +2,7 @@ package com.qa.testcases.cluster.impala.chargeback;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.DatePickerPageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.clusters.ChargebackImpalaPageObject;
@@ -13,6 +14,7 @@ import com.qa.utils.WaitExecuter;
 
 import java.util.logging.Logger;
 
+import com.qa.utils.actions.UserActions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
@@ -44,25 +46,18 @@ public class TC_CB_02 extends BaseClass {
         waitExecuter = new WaitExecuter(driver);
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
         picker = new DatePickerPageObject(driver);
+        UserActions userActions = new UserActions(driver);
         chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
         topPanelPageObject = new TopPanelPageObject(driver);
-        chargeBackImpala.selectImpalaChargeback("Yarn");
+        chargeBackImpala.selectImpalaChargeback("Impala");
 
-
-        //Select last 30 days from date picker
-        test.log(LogStatus.INFO, "Select last 30 days from date picker");
-        LOGGER.info("Select last 30 days from date picker");
-        picker.calendarDate.click();
-        waitExecuter.sleep(1000);
-        picker.last30Days.click();
-        waitExecuter.sleep(1000);
 
         // Click on cluster dropdown
         test.log(LogStatus.INFO, "Click on cluster dropdown");
         LOGGER.info("Click on cluster dropdown");
         waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.containerDropdownArrow);
         //chargebackImpalaPageObject.containerDropdownArrow.click();
-        MouseActions.clickOnElement(driver, chargebackImpalaPageObject.containerDropdownArrow);
+        userActions.performActionWithPolling(chargebackImpalaPageObject.containerDropdownArrow, UserAction.CLICK);
         waitExecuter.sleep(1000);
 
         // Assert the cluster size is not null

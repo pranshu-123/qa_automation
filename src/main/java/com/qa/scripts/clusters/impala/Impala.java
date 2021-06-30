@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import com.qa.enums.UserAction;
 import com.qa.utils.JavaScriptExecuter;
+import com.qa.utils.MouseActions;
 import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -214,10 +215,20 @@ public class Impala {
 		// Click on chargeback dropdown
 		waitExecuter.waitUntilElementClickable(impalaPageObject.chargeBackDropdownOptionsButton);
 		waitExecuter.sleep(2000);
-		userActions.performActionWithPolling(impalaPageObject.chargeBackDropdownOptionsButton, UserAction.CLICK);
+		MouseActions.clickOnElement(driver, impalaPageObject.chargeBackDropdownOptionsButton);
 		userActions.performActionWithPolling(impalaPageObject.chargeBackSearchBox, UserAction.SEND_KEYS,
 				impalaResourceName);
+		waitExecuter.sleep(2000);
 		userActions.performActionWithPolling(impalaPageObject.chargeBackSearchFirstField, UserAction.CLICK);
 		waitExecuter.waitUntilElementClickable(impalaPageObject.chargeBackDropdownOptionsButton);
 	}
+
+
+	public void selectImpalaChargebackTab() {
+		WaitExecuter waitExecuter = new WaitExecuter(driver);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.resourcesTab);
+		userActions.performActionWithPolling(impalaPageObject.resourcesTab, UserAction.CLICK);
+
+	}
+
 }

@@ -32,7 +32,7 @@ public class TC_CB_16 extends BaseClass {
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
         ChargebackImpalaPageObject cbPageObject = new ChargebackImpalaPageObject(driver);
         WaitExecuter wait = new WaitExecuter(driver);
-        chargeBackImpala.selectImpalaChargeback("Yarn");
+        chargeBackImpala.selectImpalaChargeback("Impala");
         LOGGER.info("Navigate to impala chargeback page", test);
         //Select Cluster
         HomePage homePage = new HomePage(driver);

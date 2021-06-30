@@ -30,7 +30,8 @@ public class TC_CB_49 extends BaseClass {
             extent.startTest("TC_CB_48.validateSortByQueue", "Validate table sorting - By Memory MB seconds");
         test.assignCategory(" Cluster - Impala Chargeback");
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
-        chargeBackImpala.selectImpalaChargeback("Yarn");
+        chargeBackImpala.selectImpalaChargeback("Impala");
+
         LOGGER.info("Click on impala chargeback", test);
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);

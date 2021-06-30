@@ -42,7 +42,7 @@ public class TC_CB_09 extends BaseClass {
 		chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
 
 		// Click on Chargeback tab
-		chargeBackImpala.selectImpalaChargeback("Yarn");
+		chargeBackImpala.selectImpalaChargeback("Impala");
 		test.log(LogStatus.INFO, "Click on Chargeback tab");
 
 

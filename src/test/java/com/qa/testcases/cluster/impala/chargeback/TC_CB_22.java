@@ -31,7 +31,7 @@ public class TC_CB_22 extends BaseClass {
 		test.assignCategory(" Cluster - Impala Chargeback");
 		ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
 		ChargebackImpalaPageObject chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
-		chargeBackImpala.selectImpalaChargeback("Yarn");
+		chargeBackImpala.selectImpalaChargeback("Impala");
 		LOGGER.info("Navigate to impala chargeback page", test);
 		// Select Cluster
 		HomePage homePage = new HomePage(driver);

@@ -34,7 +34,7 @@ public class TC_CB_31 extends BaseClass {
 		chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
 		// Click on Chargeback tab
 		ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
-		chargeBackImpala.selectImpalaChargeback("Yarn");
+		chargeBackImpala.selectImpalaChargeback("Impala");
 		// Select the cluster
 		LOGGER.info("Selecting the cluster");
 		waitExecuter.sleep(1000);

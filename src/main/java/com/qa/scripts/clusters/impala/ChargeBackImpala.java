@@ -9,6 +9,7 @@ import com.qa.pagefactory.clusters.ChargebackImpalaPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.utils.*;
 import com.qa.utils.actions.UserActions;
+import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -45,6 +46,12 @@ public class ChargeBackImpala {
         userActions = new UserActions(driver);
     }
 
+ /*   public void selectImpalaChargebackTab() {
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.clusterChargeBackTab);
+        userActions.performActionWithPolling(chargebackImpalaPageObject.clusterChargeBackTab, UserAction.CLICK);
+
+    }*/
     /**
      * This method used to select impala in chargeback drowdown displayed at
      * chargeback page. First it click on chargeback tab which navigates to
@@ -52,17 +59,17 @@ public class ChargeBackImpala {
      */
     public void selectImpalaChargeback(String chargeBackName) {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        // Click on Chargeback tab
         waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.clusterChargeBackTab);
         userActions.performActionWithPolling(chargebackImpalaPageObject.clusterChargeBackTab, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
         waitExecuter.sleep(2000);
         userActions.performActionWithPolling(chargebackImpalaPageObject.chargeBackDropdownOptionsButton, UserAction.CLICK);
         userActions.performActionWithPolling(chargebackImpalaPageObject.chargeBackSearchBox, UserAction.SEND_KEYS,
-                chargeBackName);
+        chargeBackName);
+        waitExecuter.sleep(1000);
         userActions.performActionWithPolling(chargebackImpalaPageObject.chargeBackSearchFirstField, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
-    }
+     }
 
 
     /**

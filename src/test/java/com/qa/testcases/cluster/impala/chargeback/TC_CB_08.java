@@ -32,7 +32,7 @@ public class TC_CB_08 extends BaseClass {
         test = extent.startTest("TC_CB_08.verifyUserCanSelectFutureDate", "Verify the user is not allowed to select a furture date range");
         test.assignCategory(" Cluster - Impala Chargeback");
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
-        chargeBackImpala.selectImpalaChargeback("Yarn");
+        chargeBackImpala.selectImpalaChargeback("Impala");
         LOGGER.info("Navigate to impala chargeback page", test);
 
         //Select Cluster

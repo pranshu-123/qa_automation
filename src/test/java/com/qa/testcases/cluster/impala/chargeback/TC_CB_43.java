@@ -29,7 +29,7 @@ public class TC_CB_43 extends BaseClass {
             extent.startTest("TC_CB_43.validateSortByUser","Validate table sorting - By State");
         test.assignCategory(" Cluster - Impala Chargeback");
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
-        chargeBackImpala.selectImpalaChargeback("Yarn");
+        chargeBackImpala.selectImpalaChargeback("Impala");
         LOGGER.info("Click on impala chargeback", test);
         DatePicker datePicker = new DatePicker(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);

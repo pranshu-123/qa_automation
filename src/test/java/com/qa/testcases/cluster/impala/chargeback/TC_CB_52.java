@@ -48,7 +48,8 @@ public class TC_CB_52 extends BaseClass {
 
         // Click on Chargeback tab
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
-        chargeBackImpala.selectImpalaChargeback("Yarn");
+        chargeBackImpala.selectImpalaChargeback("Impala");
+
 
         // Select the cluster
         test.log(LogStatus.INFO, "Select clusterId : " + clusterId);

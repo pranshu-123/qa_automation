@@ -57,7 +57,7 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "//table[@id='finishedImpalaJobsTable']/tbody/tr/td[3]/span[1]")
     public List<WebElement> getUsersFromFinishedImpalaJobsTable;
 
-    @FindBy(xpath = "//span[contains(@class, 'select2-selection__arrow')]")
+    @FindBy(xpath = "(//span[contains(@class, 'select2-selection__arrow')])[2]")
     public WebElement containerDropdownArrow;
 
     @FindBy(xpath = "//span[contains(@class,'select2-container')]/span/span/input[contains(@class, 'select2-search__field')]")
@@ -150,7 +150,7 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "(//div[contains(@class,'dashboard-module')])[2]//h4/span")
     public WebElement CPUHoursFromGraphHeader;
 
-    @FindBy(xpath = "//div[@class='col-md-4'][3]//h4/span")
+    @FindBy(xpath = "//h4[normalize-space()='Memory']")
     public WebElement MemoryHoursFromGraphHeader;
 
     @FindBy(xpath = "//div[@class='col-md-4'][2]//h4/span")

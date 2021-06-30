@@ -32,7 +32,7 @@ public class TC_CB_06 extends BaseClass {
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
-        chargeBackImpala.selectImpalaChargeback("Yarn");
+        chargeBackImpala.selectImpalaChargeback("Impala");
 
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);

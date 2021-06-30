@@ -37,6 +37,7 @@ public class TC_CB_29 extends BaseClass {
         // Click on datepicker button
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
         picker = new DatePicker(driver);
+        chargeBackImpala.selectImpalaChargeback("Impala");
         // Intialize impala page objects
 
         waitExecuter.sleep(1000);

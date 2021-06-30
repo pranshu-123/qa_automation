@@ -46,7 +46,6 @@ public class TC_CB_02 extends BaseClass {
         picker = new DatePickerPageObject(driver);
         chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
         topPanelPageObject = new TopPanelPageObject(driver);
-        chargeBackImpala.selectImpalaChargebackTab();
         chargeBackImpala.selectImpalaChargeback("Yarn");
 
 

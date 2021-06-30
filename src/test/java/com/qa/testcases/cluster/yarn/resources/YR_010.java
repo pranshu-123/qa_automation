@@ -43,6 +43,9 @@ public class YR_010 extends BaseClass {
         Log.info("ClusterId is selected: "+clusterId);
         test.log(LogStatus.INFO, "Cluster Id selected"+clusterId);
 
+        waitExecuter.waitUntilPageFullyLoaded();
+        yarn.selectImpalaType("Yarn");
+        waitExecuter.waitUntilPageFullyLoaded();
         //Select date
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();

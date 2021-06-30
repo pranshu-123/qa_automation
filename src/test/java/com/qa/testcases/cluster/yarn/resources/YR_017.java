@@ -37,6 +37,9 @@ public class YR_017 extends BaseClass {
         YarnPageObject yarnPageObject = new YarnPageObject(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         waitExecuter.sleep(2000);
+        waitExecuter.waitUntilPageFullyLoaded();
+        yarn.selectImpalaType("Yarn");
+        waitExecuter.waitUntilPageFullyLoaded();
         CommonPageObject commonPageObject = new CommonPageObject(driver);
         MouseActions.clickOnElement(driver, commonPageObject.clusterDropdown);
         waitExecuter.sleep(2000);

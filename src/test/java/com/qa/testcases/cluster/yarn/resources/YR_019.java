@@ -40,6 +40,10 @@ public class YR_019 extends BaseClass {
         Log.info("ClusterId is selected: " + clusterId);
         test.log(LogStatus.INFO, "ClusterId is selected: " + clusterId);
 
+        waitExecuter.waitUntilPageFullyLoaded();
+        yarn.selectImpalaType("Yarn");
+        waitExecuter.waitUntilPageFullyLoaded();
+
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();

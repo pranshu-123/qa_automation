@@ -22,6 +22,24 @@ public class YarnPageObject {
     @FindBy(xpath = "//label[contains(text(), 'Group By')]/following-sibling::span/span/span/span[contains(@class,'select2-selection__arrow')]")
     public WebElement groupByDropdownButton;
 
+    @FindBy(xpath = "(//span[contains(@class,'select2-selection__arrow')])[1]")
+    public List<WebElement> chargeBackDropdownsButton;
+
+    @FindBy(xpath = "(//span[contains(@class,'select2-selection__arrow')])[1]")
+    public WebElement chargeBackDropdownButton;
+
+    @FindBy(xpath = "//li[contains(@class,'select2-results__option')]")
+    public List<WebElement> chargeBacksList;
+
+    @FindBy(xpath="//span[@class='select2-results']//li")
+    public WebElement chargeBackSearchFirstField;
+
+    @FindBy(xpath="(//input[@class='select2-search__field'])[2]")
+    public WebElement chargeBackSearchBox;
+
+    @FindBy(xpath="//span[@class='select2-results']//li")
+    public WebElement chargeBackField;
+
     @FindBy(xpath = "//ul[@class='select2-results__options']/li")
     public List<WebElement> getGroupByDropdownElements;
 

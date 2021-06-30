@@ -67,7 +67,8 @@ public class TC_CD_03 extends BaseClass {
 
         try {
             // Get By App type count from pie chart
-            waitExecuter.sleep(1000);
+            waitExecuter.sleep(2000);
+            waitExecuter.waitUntilElementClickable(cdPageObject.runButton);
             waitExecuter.waitUntilElementPresent(cdPageObject.getByAppTypePieCount);
             int totalApps = Integer.parseInt(cdPageObject.getByAppTypePieCount.getText());
             LOGGER.info("Total apps in cluster discovery pie chart- " + totalApps);
@@ -78,7 +79,7 @@ public class TC_CD_03 extends BaseClass {
             discovery.navigateToJobs();
             // Select last 30 days from date picker
             test.log(LogStatus.INFO, "Select last 30 days");
-            discovery.selectLast30Days();
+            discovery.selectLast7Days();
 
             test.log(LogStatus.INFO, "Selecting cluster as of defined in cluster discovery page");
             LOGGER.info("Selecting cluster as of defined in cluster discovery page");

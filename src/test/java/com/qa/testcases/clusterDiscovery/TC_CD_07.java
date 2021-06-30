@@ -67,6 +67,8 @@ public class TC_CD_07 extends BaseClass {
             // Get all the names of user from By user Type chart
             test.log(LogStatus.INFO, "Get all the names of user from By user Type chart.");
             LOGGER.info("Get all the names of user from By user Type chart.");
+            waitExecuter.waitUntilElementClickable(discoveryPageObject.runButton);
+            waitExecuter.sleep(2000);
             namesOfUsers = discovery.getPieChartOptions(discoveryPageObject.getByUserTypesName);
             test.log(LogStatus.INFO, "Names of user in pie chart- " + namesOfUsers);
             LOGGER.info("Names of user in pie chart- " + namesOfUsers);

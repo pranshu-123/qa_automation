@@ -18,7 +18,7 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//a[@class='icon-x']")
     public WebElement closeMsgBanner;
 
-    @FindBy(xpath = "//span[contains(text(), 'Run')]//parent::a")
+    @FindBy(xpath = "//button[@class='run-btn']")
     public WebElement runBtn;
 
     @FindBy(xpath = "//span[contains(text(), 'Run New')]//parent::a")
@@ -88,7 +88,7 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//tbody/tr[1]/td[1]")
     public WebElement archiveReportName;
 
-    @FindBy(xpath = "//span[contains(text(), 'Schedule')]//parent::a")
+    @FindBy(xpath = "//span[normalize-space()='Schedule']")
     public WebElement scheduleBtn;
 
     @FindBy(xpath = "//*[@class='select2-selection__rendered']")
@@ -103,10 +103,10 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//p[@class='element-inline']/input")
     public WebElement scheduleNotification;
 
-    @FindBy(xpath = "(//section[contains(@class, 'icon-success')]/span)[1]")
+    @FindBy(xpath = "//div[contains(text(),'Services and Versions Compatibility')]")
     public WebElement scheduleMsg;
 
-    @FindBy(xpath = "//span[contains(@class, 'cta-primary')]/a")
+    @FindBy(xpath = "//span[normalize-space()='Schedule']")
     public WebElement scheduleRunBtn;
 
     @FindBy(xpath = "//input[@class = 'display-time']")

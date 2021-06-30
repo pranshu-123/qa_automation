@@ -66,7 +66,9 @@ public class TEZ_129 extends BaseClass {
         try {
             //Clicking on the Tez app must go to apps detail page
             if (appCount > 0) {
-                tezApps.getTypeFromTable.click();
+                waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
+                applicationsPageObject.clickOnAppId.click();
+                waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
                 waitExecuter.waitUntilPageFullyLoaded();
                 tezDetailsPage.verifyQueueTab(tezApps, true);
                 test.log(LogStatus.PASS, "Verified left pane in the app details page successfully");

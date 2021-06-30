@@ -49,6 +49,7 @@ public class TEZ_131 extends BaseClass {
         logger.info("Select individual app and assert that table contain its data");
 
         int appCount=tezDetailsPage.clickOnlyLink("Tez");
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
@@ -59,11 +60,14 @@ public class TEZ_131 extends BaseClass {
 
         applicationsPageObject.expandStatus.click();
         appCount = tezDetailsPage.clickOnlyLink("Success");
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         waitExecuter.waitUntilPageFullyLoaded();
         try {
             //Clicking on the Tez app must go to apps detail page
             if (appCount > 0) {
-                tezApps.getTypeFromTable.click();
+                waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
+                applicationsPageObject.clickOnAppId.click();
+                waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
                 waitExecuter.waitUntilPageFullyLoaded();
                 waitExecuter.sleep(1000);
                 waitExecuter.waitUntilElementPresent(tezApps.tagsTab);

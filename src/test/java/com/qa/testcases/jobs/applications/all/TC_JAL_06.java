@@ -47,8 +47,8 @@ public class TC_JAL_06 extends BaseClass {
         LOGGER.info("Itterate through all the application to get the clusterId");
         for (int i = 0; i < applicationsClusterIds.size(); i++) {
             String appcClusterId = applicationsClusterIds.get(i).getText();
-            String subStringOfAppClusterId = appcClusterId.substring(0, 19);
-            addClusterIdToList.add(subStringOfAppClusterId);
+            //String subStringOfAppClusterId = appcClusterId.substring(0, 19);
+            addClusterIdToList.add(appcClusterId);
         }
         waitExecuter.sleep(1000);
         // Assert if the application are of selected clusterIds
@@ -56,7 +56,9 @@ public class TC_JAL_06 extends BaseClass {
         LOGGER.info("Assert if the application are of selected clusterIds");
         if (applicationsClusterIds.size() > 0)
             for (String appCluster : addClusterIdToList) {
-                Assert.assertTrue(appCluster.contains(clusterId.substring(0, 19)),
+                LOGGER.info("This is appCluster~ "+appCluster);
+                LOGGER.info("This is appCluster~ "+clusterId);
+                Assert.assertTrue(appCluster.contains(clusterId),
                         "Listed applications are not of selected clusterId " + clusterId);
                 test.log(LogStatus.PASS, "Listed applications are of selected clusterId  ");
             }

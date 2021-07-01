@@ -27,14 +27,17 @@ public class YC_021 extends BaseClass {
         test.log(LogStatus.PASS, "Passed Parameter Is : " + clusterId);
 
         HomePage homePage = new HomePage(driver);
+
+        ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
+        chargeBackImpala.selectImpalaChargeback("Yarn");
+        waitExecuter.sleep(2000);
         homePage.selectMultiClusterId(clusterId);
 
         ChargeBackYarn chargeBackYarn = new ChargeBackYarn(driver);
         chargeBackYarn.selectYarnChargeback();
         waitExecuter.waitUntilPageFullyLoaded();
 
-        ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
-        chargeBackImpala.selectImpalaChargeback("Yarn");
+
 
         //click on cluster drop down
         CommonPageObject commonPageObject = new CommonPageObject(driver);

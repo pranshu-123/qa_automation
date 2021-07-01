@@ -31,20 +31,22 @@ public class YC_022 extends BaseClass {
         Log.startTestCase("YC_022_Verifythecosteditfields");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        test.log(LogStatus.PASS, "Passed Parameter Is : " + clusterId);
+
+
+        ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
+        chargeBackImpala.selectImpalaChargeback("Yarn");
+        waitExecuter.sleep(2000);
 
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
         Log.info("MultiClusterId is selected.");
+        ChargeBackYarn chargeBackYarn = new ChargeBackYarn(driver);
         ChargeBackYarn = new ChargeBackYarn(driver);
         picker = new DatePicker(driver);
 
-        ChargeBackYarn chargeBackYarn = new ChargeBackYarn(driver);
         chargeBackYarn.selectYarnChargeback();
         waitExecuter.waitUntilPageFullyLoaded();
 
-        ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
-        chargeBackImpala.selectImpalaChargeback("Yarn");
 
         waitExecuter.sleep(1000);
         picker.clickOnDatePicker();

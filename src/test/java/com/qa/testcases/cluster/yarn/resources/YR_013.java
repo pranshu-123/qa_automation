@@ -8,6 +8,7 @@ import com.qa.pagefactory.clusters.YarnPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.Graphs;
 import com.qa.scripts.HomePage;
+import com.qa.scripts.clusters.impala.Impala;
 import com.qa.scripts.clusters.yarn.Yarn;
 import com.qa.utils.Log;
 import com.qa.utils.ScreenshotHelper;
@@ -37,6 +38,9 @@ public class YR_013 extends BaseClass {
         Yarn yarn = new Yarn(driver);
         Graphs graphs = new Graphs(driver);
         YarnPageObject yarnPageObject = new YarnPageObject(driver);
+        Impala impala = new Impala(driver);
+        impala.selectImpalaResource("Impala");
+        waitExecuter.sleep(2000);
 
         yarn.verifyYarnResourceHeaderisDisplayed();
         LOGGER.info("Yarn Resource Header is displayed.");
@@ -48,10 +52,6 @@ public class YR_013 extends BaseClass {
         waitExecuter.waitUntilPageFullyLoaded();
         LOGGER.info("ClusterId is selected: " + clusterId);
         test.log(LogStatus.INFO, "ClusterId is selected: " + clusterId);
-
-        waitExecuter.waitUntilPageFullyLoaded();
-        yarn.selectImpalaType("Yarn");
-        waitExecuter.waitUntilPageFullyLoaded();
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();

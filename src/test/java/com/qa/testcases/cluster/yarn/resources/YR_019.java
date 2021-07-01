@@ -4,6 +4,7 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
+import com.qa.scripts.clusters.impala.Impala;
 import com.qa.scripts.clusters.yarn.Yarn;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
@@ -29,6 +30,10 @@ public class YR_019 extends BaseClass {
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         Yarn yarn = new Yarn(driver);
+        Impala impala = new Impala(driver);
+        impala.selectImpalaResource("Impala");
+        waitExecuter.sleep(2000);
+
         yarn.verifyYarnResourceHeaderisDisplayed();
         Log.info("Yarn Resource Header is displayed.");
         test.log(LogStatus.INFO, "Yarn Resource Header is displayed.");
@@ -40,9 +45,6 @@ public class YR_019 extends BaseClass {
         Log.info("ClusterId is selected: " + clusterId);
         test.log(LogStatus.INFO, "ClusterId is selected: " + clusterId);
 
-        waitExecuter.waitUntilPageFullyLoaded();
-        yarn.selectImpalaType("Yarn");
-        waitExecuter.waitUntilPageFullyLoaded();
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();

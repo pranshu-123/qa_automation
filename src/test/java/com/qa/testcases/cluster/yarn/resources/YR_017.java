@@ -6,6 +6,7 @@ import com.qa.pagefactory.CommonPageObject;
 import com.qa.pagefactory.clusters.YarnPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
+import com.qa.scripts.clusters.impala.Impala;
 import com.qa.scripts.clusters.yarn.Yarn;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
@@ -28,6 +29,9 @@ public class YR_017 extends BaseClass {
                 "Verify the cluster Tab should show the list of cluster.");
         test.assignCategory(" Cluster - Yarn Resources");
         Log.startTestCase("YR_017_verifyClusterTab");
+
+        Impala impala = new Impala(driver);
+        impala.selectImpalaResource("Impala");
 
         Yarn yarn = new Yarn(driver);
         yarn.verifyYarnResourceHeaderisDisplayed();

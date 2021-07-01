@@ -27,9 +27,15 @@ public class YR_011 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
 
         Yarn yarn = new Yarn(driver);
+        Impala impala = new Impala(driver);
+        impala.selectImpalaResource("Impala");
+        waitExecuter.sleep(2000);
+
+
         yarn.verifyYarnResourceHeaderisDisplayed();
         Log.info("Yarn Resource Header is displayed.");
         test.log(LogStatus.INFO, "Yarn Resource Header is displayed.");
+
 
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
@@ -38,9 +44,6 @@ public class YR_011 extends BaseClass {
         Log.info("ClusterId is selected: "+clusterId);
         test.log(LogStatus.INFO, "Cluster Id selected"+clusterId);
 
-        waitExecuter.waitUntilPageFullyLoaded();
-        yarn.selectImpalaType("Yarn");
-        waitExecuter.waitUntilPageFullyLoaded();
 
 
         DatePicker datePicker = new DatePicker(driver);

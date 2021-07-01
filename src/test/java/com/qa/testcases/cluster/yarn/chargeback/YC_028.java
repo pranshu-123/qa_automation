@@ -24,17 +24,19 @@ public class YC_028 extends BaseClass {
         test.assignCategory(" Cluster - Yarn Chargeback");
 
         ChargeBackYarn chargeBackYarn = new ChargeBackYarn(driver);
-        chargeBackYarn.selectYarnChargeback();
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+
+        ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
+        chargeBackImpala.selectImpalaChargeback("Yarn");
+        waitExecuter.sleep(2000);
         test.log(LogStatus.PASS, "User is redirected to cluster yarn chargeback page");
 
         //ClusterId selection
-        WaitExecuter waitExecuter = new WaitExecuter(driver);
+
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
         waitExecuter.waitUntilPageFullyLoaded();
 
-        ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
-        chargeBackImpala.selectImpalaChargeback("Yarn");
 
         // Click on datepicker button
         DatePicker datePicker = new DatePicker(driver);

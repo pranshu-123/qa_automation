@@ -1,11 +1,11 @@
 package com.qa.constants;
 
 public class PageConstants {
-    public static String YARN_RESOURCE_HEADER = "Resource Usage";
+    public static String YARN_RESOURCE_HEADER = "Resource Type";
 
     public static class Clusters {
-        public static String CHARGEBACK_IMPALA_HEADING = "Chargeback";
-        public static String CHARGEBACK_YARN_HEADING = "Chargeback Yarn";
+        public static String CHARGEBACK_IMPALA_HEADING = "Chargeback Type";
+        public static String CHARGEBACK_YARN_HEADING = "Chargeback Type";
     }
 
     public static class AppTypes {

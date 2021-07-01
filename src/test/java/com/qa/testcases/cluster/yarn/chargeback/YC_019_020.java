@@ -40,7 +40,7 @@ public class YC_019_020 extends BaseClass {
         ChargeBackYarn chargeBackYarn = new ChargeBackYarn(driver);
         waitExecuter.waitUntilPageFullyLoaded();
 
-        Assert.assertTrue(driver.getCurrentUrl().contains("#clusters/chargeback"), "User is not " +
+        Assert.assertTrue(driver.getCurrentUrl().contains("clusters/chargeback"), "User is not " +
                 "directed to the cluster chargeback page.");
         test.log(LogStatus.PASS, "User is redirected to to cluster chargeback page");
 

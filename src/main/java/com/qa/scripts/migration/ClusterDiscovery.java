@@ -155,7 +155,7 @@ public class ClusterDiscovery {
         return nameArray;
     }
 
-    /* Select last 30 days on date picker */
+    /* Select last 7 days on date picker */
     public void selectLast7Days() {
         LOGGER.info("Select last 30 days");
         datePicker.clickOnDatePicker();

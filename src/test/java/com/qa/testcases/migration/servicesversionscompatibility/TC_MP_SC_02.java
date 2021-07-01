@@ -34,7 +34,7 @@ public class TC_MP_SC_02 extends BaseClass {
         servicesAndVersionsCompatibility.clickOnServicesAndVersionMigrationTab();
         LOGGER.info("Clicked on Services And Versions Compatibility tab");
 
-        waitExecuter.sleep(50000);
+        waitExecuter.sleep(5000);
         waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.runBtn, "Run");
         servicesAndVersionsCompatibility.clickOnRunButton();
         waitExecuter.sleep(2000);

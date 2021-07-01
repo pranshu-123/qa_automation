@@ -120,7 +120,6 @@ public class ClusterDiscovery {
         waitExecuter.waitUntilElementClickable(cdPageObject.modalRunButton);
         userAction.performActionWithPolling(cdPageObject.modalRunButton, UserAction.CLICK);
         waitExecuter.waitUntilElementPresent(cdPageObject.runButton);
-        waitExecuter.waitUntilElementClickable(cdPageObject.runButton);
     }
 
     /* Check and remove cluster from searchbox */
@@ -156,8 +155,8 @@ public class ClusterDiscovery {
         return nameArray;
     }
 
-    /* Select last 30 days on date picker */
-    public void selectLast30Days() {
+    /* Select last 7 days on date picker */
+    public void selectLast7Days() {
         LOGGER.info("Select last 30 days");
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(1000);
@@ -167,15 +166,15 @@ public class ClusterDiscovery {
 
     /*Get jobs count from jobs page of spark, MR and tez*/
     public int getJobsCount() {
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         int hiveapp = sparkApp.clickOnlyLink("Tez");
         LOGGER.info("Tez apps -- " + hiveapp);
-        waitExecuter.sleep(2000);
-        int MRapps = sparkApp.clickOnlyLink("Map Reduce");
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+        int MRapps = sparkApp.clickOnlyLink("MapReduce");
         LOGGER.info("Map Reduce -- " + MRapps);
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         int sparkApps = sparkApp.clickOnlyLink("Spark");
-        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         LOGGER.info("Spark -- " + sparkApps);
         int totalJobs = hiveapp + MRapps + sparkApps;
         return totalJobs;

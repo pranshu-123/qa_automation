@@ -109,13 +109,16 @@ public class ImpalaPageObject {
     @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Resources'])")
     public WebElement resourcesTab;
 
-    @FindBy(xpath="(//input[@class='select2-search__field'])[2]")
-    public WebElement chargeBackSearchBox;
+    @FindBy(xpath="(//span[contains(.,'Yarn')])[4]")
+    public WebElement impalaResourceType;
+
+    @FindBy(xpath="//li[contains(text(),'Impala')]")
+    public WebElement selectImpala;
 
     @FindBy(xpath="//span[@class='select2-results']//li")
     public WebElement chargeBackSearchFirstField;
 
-    @FindBy(xpath = "(//span[contains(@class,'select2-selection__arrow')])[1]")
+    @FindBy(xpath = "//span[@id='select2-6crs-container']")
     public WebElement chargeBackDropdownOptionsButton;
 
     @FindBy(xpath = "//li[contains(@class,'select2-results__option')]")

@@ -36,7 +36,7 @@ public class  IM_RES_17 extends BaseClass {
     //Select impala tab
     test.log(LogStatus.INFO, "Go to resource page");
     LOGGER.info("Select impala from dropdown");
-    impala.selectImpalaResource("Impala");
+    impala.selectImpalaResource();
     waitExecuter.sleep(2000);
     HomePage homePage = new HomePage(driver);
     homePage.selectMultiClusterId(clusterId);

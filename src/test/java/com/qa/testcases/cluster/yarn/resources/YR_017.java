@@ -31,18 +31,18 @@ public class YR_017 extends BaseClass {
         Log.startTestCase("YR_017_verifyClusterTab");
 
         Impala impala = new Impala(driver);
-        impala.selectImpalaResource("Impala");
 
         Yarn yarn = new Yarn(driver);
         yarn.verifyYarnResourceHeaderisDisplayed();
         Log.info("Yarn Resource Header is displayed.");
         test.log(LogStatus.INFO, "Yarn Resource Header is displayed.");
+        yarn.selectImpalaType();
+
 
         YarnPageObject yarnPageObject = new YarnPageObject(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         waitExecuter.sleep(2000);
         waitExecuter.waitUntilPageFullyLoaded();
-        yarn.selectImpalaType("Yarn");
         waitExecuter.waitUntilPageFullyLoaded();
         CommonPageObject commonPageObject = new CommonPageObject(driver);
         MouseActions.clickOnElement(driver, commonPageObject.clusterDropdown);

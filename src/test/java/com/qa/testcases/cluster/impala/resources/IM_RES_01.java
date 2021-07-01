@@ -40,7 +40,8 @@ public class IM_RES_01 extends BaseClass {
 		// Intialize impala page objects
 		impalaPageObject = new ImpalaPageObject(driver);
 		// Click on Resources tab and select Impala
-		impala.selectImpalaResource("Impala");
+		impala.selectImpalaResource();
+		waitExecuter.sleep(1000);
 		// Select the cluster
 		LOGGER.info("Selecting the cluster");
 		waitExecuter.sleep(2000);
@@ -51,7 +52,7 @@ public class IM_RES_01 extends BaseClass {
 		test.log(LogStatus.INFO, "Click on date picker");
 		picker.clickOnDatePicker();
 		test.log(LogStatus.INFO, "Select last 1hour from  date picker");
-		picker.selectLastOneHour();
+		picker.selectLast30Days();
 		waitExecuter.sleep(3000);
 		// Validate of Memory graph is present for selected date range
 		Assert.assertTrue(impala.isMemoryGraphPresent(), "The memory graph is not present with expected conditions");

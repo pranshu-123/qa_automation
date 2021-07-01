@@ -34,7 +34,7 @@ public class IM_RES_03 extends BaseClass {
     TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
 
     // Click on Resources tab and select Impala
-    impala.selectImpalaResource("Impala");
+    impala.selectImpalaResource();
     executer.sleep(2000);
 
     HomePage homePage = new HomePage(driver);

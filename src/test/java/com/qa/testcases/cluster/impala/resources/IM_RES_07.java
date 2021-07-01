@@ -42,7 +42,7 @@ public class IM_RES_07  extends BaseClass {
         //Select impala tab
         test.log(LogStatus.INFO, "Go to resource page");
         LOGGER.info("Select impala from dropdown");
-        impala.selectImpalaResource("Impala");
+        impala.selectImpalaResource();
         waitExecuter.sleep(2000);
         // Set multi cluster
         test.log(LogStatus.INFO, "Select cluster : " + clusterId);

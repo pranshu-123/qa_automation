@@ -57,15 +57,12 @@ public class Yarn {
     }
 
     //click on cluster drop down
-    public void selectImpalaType(String selectImpala) {
-        waitExecuter.waitUntilElementClickable(yarnPageObject.chargeBackDropdownButton);
+    public void selectImpalaType() {
+        // Click on chargeback dropdown
+        userActions.performActionWithPolling(yarnPageObject.yarnResourceType, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(yarnPageObject.selectYarn);
+        userActions.performActionWithPolling(yarnPageObject.selectYarn, UserAction.CLICK);
         waitExecuter.sleep(2000);
-        userActions.performActionWithPolling(yarnPageObject.chargeBackDropdownButton, UserAction.CLICK);
-        userActions.performActionWithPolling(yarnPageObject.chargeBackSearchBox, UserAction.SEND_KEYS,
-                selectImpala);
-        waitExecuter.waitUntilPageFullyLoaded();
-        userActions.performActionWithPolling(yarnPageObject.chargeBackField, UserAction.CLICK);
-        waitExecuter.waitUntilElementClickable(yarnPageObject.chargeBackDropdownButton);
 
     }
 

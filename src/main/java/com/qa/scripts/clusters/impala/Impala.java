@@ -202,25 +202,26 @@ public class Impala {
 		return labels;
 	}
 
+
+
 	/**
 	 * This method used to select impala in resource drowdown displayed at
 	 * resource page. First it click on resource tab which navigates to
 	 * resource page then it select impala.
 	 */
-	public void selectImpalaResource(String impalaResourceName) {
+	public void selectImpalaResource() {
 		WaitExecuter waitExecuter = new WaitExecuter(driver);
 		// Click on Chargeback tab
 		waitExecuter.waitUntilElementClickable(impalaPageObject.resourcesTab);
 		userActions.performActionWithPolling(impalaPageObject.resourcesTab, UserAction.CLICK);
 		// Click on chargeback dropdown
-		waitExecuter.waitUntilElementClickable(impalaPageObject.chargeBackDropdownOptionsButton);
+		// Click on chargeback dropdown
+		userActions.performActionWithPolling(impalaPageObject.impalaResourceType, UserAction.CLICK);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.selectImpala);
+		userActions.performActionWithPolling(impalaPageObject.selectImpala, UserAction.CLICK);
 		waitExecuter.sleep(2000);
-		userActions.performActionWithPolling(impalaPageObject.chargeBackDropdownOptionsButton, UserAction.CLICK);
-		userActions.performActionWithPolling(impalaPageObject.chargeBackSearchBox, UserAction.SEND_KEYS,
-				impalaResourceName);
-		waitExecuter.sleep(1000);
-		userActions.performActionWithPolling(impalaPageObject.chargeBackSearchFirstField, UserAction.CLICK);
-		waitExecuter.waitUntilElementClickable(impalaPageObject.chargeBackDropdownOptionsButton);
+
+
 	}
 
 

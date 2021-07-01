@@ -32,11 +32,13 @@ public class YR_014 extends BaseClass {
         Yarn yarn = new Yarn(driver);
 
         Impala impala = new Impala(driver);
-        impala.selectImpalaResource("Impala");
+
         waitExecuter.sleep(2000);
         yarn.verifyYarnResourceHeaderisDisplayed();
         Log.info("Yarn Resource Header is displayed.");
         test.log(LogStatus.INFO, "Yarn Resource Header is displayed.");
+        yarn.selectImpalaType();
+        waitExecuter.sleep(2000);
 
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);

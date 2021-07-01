@@ -35,7 +35,7 @@ public class ChargebackYarnPageObject {
     @FindBy(xpath = "//a[contains(text(),'Yarn')]")
     public WebElement chargeBackDropdownYarnOption;
 
-    @FindBy(tagName = "h1")
+    @FindBy(xpath = "//label[normalize-space()='Chargeback Type']")
     public WebElement chargeBackPageHeading;
 
     @FindBy(id = "chargebackvcore")

@@ -39,7 +39,7 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "//span[@id='select2-y4f2-container']")
     public List<WebElement> chargeBackList;
 
-    @FindBy(xpath = "//label[normalize-space()='Chargeback']")
+    @FindBy(xpath = "//label[normalize-space()='Chargeback Type']")
     public WebElement chargeBackPageHeading;
 
     @FindBy(xpath = "//li[contains(@class,'select2-results__option')]")

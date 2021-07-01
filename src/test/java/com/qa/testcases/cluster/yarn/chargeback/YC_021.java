@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.pagefactory.CommonPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
+import com.qa.scripts.clusters.impala.ChargeBackImpala;
 import com.qa.scripts.clusters.yarn.ChargeBackYarn;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
@@ -32,8 +33,8 @@ public class YC_021 extends BaseClass {
         chargeBackYarn.selectYarnChargeback();
         waitExecuter.waitUntilPageFullyLoaded();
 
-        chargeBackYarn.selectChargeBackType("Yarn");
-        waitExecuter.waitUntilPageFullyLoaded();
+        ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
+        chargeBackImpala.selectImpalaChargeback("Yarn");
 
         //click on cluster drop down
         CommonPageObject commonPageObject = new CommonPageObject(driver);

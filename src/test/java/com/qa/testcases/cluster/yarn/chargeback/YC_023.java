@@ -4,6 +4,7 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.constants.PageConstants;
 import com.qa.scripts.HomePage;
+import com.qa.scripts.clusters.impala.ChargeBackImpala;
 import com.qa.scripts.clusters.yarn.ChargeBackYarn;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
@@ -25,11 +26,8 @@ public class YC_023 extends BaseClass {
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
 
-        ChargeBackYarn chargeBackYarn = new ChargeBackYarn(driver);
-        chargeBackYarn.selectYarnChargeback();
-        waitExecuter.waitUntilPageFullyLoaded();
-
-        chargeBackYarn.selectChargeBackType("Yarn");
+        ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
+        chargeBackImpala.selectImpalaChargeback("Yarn");
         waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "User is redirected to cluster chargeback page");
 

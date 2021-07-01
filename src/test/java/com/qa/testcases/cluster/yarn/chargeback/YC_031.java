@@ -4,6 +4,7 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
+import com.qa.scripts.clusters.impala.ChargeBackImpala;
 import com.qa.scripts.clusters.yarn.ChargeBackYarn;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
@@ -30,11 +31,8 @@ public class YC_031 extends BaseClass {
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
 
-        chargeBackYarn.selectYarnChargeback();
-        waitExecuter.waitUntilPageFullyLoaded();
-
-        chargeBackYarn.selectChargeBackType("Yarn");
-        waitExecuter.waitUntilPageFullyLoaded();
+        ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
+        chargeBackImpala.selectImpalaChargeback("Yarn");
 
         // Click on datepicker button
         DatePicker datePicker = new DatePicker(driver);

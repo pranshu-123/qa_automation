@@ -54,6 +54,7 @@ public class IM_RES_02 extends BaseClass {
 		LOGGER.info("Click on impala tab");
 		// Click on Resources tab and select Impala
 		impala.selectImpalaResource("Impala");
+		waitExecuter.sleep(2000);
 
 		// Select the cluster
 		test.log(LogStatus.INFO, "Selecting the cluster");

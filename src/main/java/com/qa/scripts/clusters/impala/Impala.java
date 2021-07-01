@@ -215,10 +215,10 @@ public class Impala {
 		// Click on chargeback dropdown
 		waitExecuter.waitUntilElementClickable(impalaPageObject.chargeBackDropdownOptionsButton);
 		waitExecuter.sleep(2000);
-		MouseActions.clickOnElement(driver, impalaPageObject.chargeBackDropdownOptionsButton);
+		userActions.performActionWithPolling(impalaPageObject.chargeBackDropdownOptionsButton, UserAction.CLICK);
 		userActions.performActionWithPolling(impalaPageObject.chargeBackSearchBox, UserAction.SEND_KEYS,
 				impalaResourceName);
-		waitExecuter.sleep(2000);
+		waitExecuter.sleep(1000);
 		userActions.performActionWithPolling(impalaPageObject.chargeBackSearchFirstField, UserAction.CLICK);
 		waitExecuter.waitUntilElementClickable(impalaPageObject.chargeBackDropdownOptionsButton);
 	}

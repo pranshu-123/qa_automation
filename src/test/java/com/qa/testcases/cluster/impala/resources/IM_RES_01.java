@@ -43,7 +43,7 @@ public class IM_RES_01 extends BaseClass {
 		impala.selectImpalaResource("Impala");
 		// Select the cluster
 		LOGGER.info("Selecting the cluster");
-		waitExecuter.sleep(1000);
+		waitExecuter.sleep(2000);
 		HomePage homePage = new HomePage(driver);
 		homePage.selectMultiClusterId(clusterId);
 

@@ -88,7 +88,7 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "//b[@class='blink']")
     public WebElement loading;
 
-    @FindBy(xpath = "//div[contains(@class,'component-section-header')]//div/h1")
+    @FindBy(xpath = "//div[contains(@class,'component-section-header')]//div/div/label[contains(text(),'Resource Type')]")
     public WebElement yarnResources;
 
 
@@ -203,7 +203,7 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "//table//select/following-sibling::span//input")
     public List<WebElement> queueGraphSearchBox;
 
-    @FindBy(xpath = "//b[contains(@class,'pointer')]/span")
+    @FindBy(xpath = "(//span[contains(@class,'select2-selection__arrow')])[1]")
     public WebElement resourceUsagePointer;
 
 

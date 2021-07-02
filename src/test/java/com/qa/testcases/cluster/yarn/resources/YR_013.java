@@ -45,8 +45,6 @@ public class YR_013 extends BaseClass {
         yarn.verifyYarnResourceHeaderisDisplayed();
         LOGGER.info("Yarn Resource Header is displayed.");
         test.log(LogStatus.INFO, "Yarn Resource Header is displayed.");
-        yarn.selectImpalaType();
-        waitExecuter.sleep(2000);
 
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
@@ -54,6 +52,9 @@ public class YR_013 extends BaseClass {
         waitExecuter.waitUntilPageFullyLoaded();
         LOGGER.info("ClusterId is selected: " + clusterId);
         test.log(LogStatus.INFO, "ClusterId is selected: " + clusterId);
+
+        yarn.selectImpalaType();
+        waitExecuter.sleep(3000);
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();

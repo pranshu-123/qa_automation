@@ -48,6 +48,10 @@ public class YR_014 extends BaseClass {
         test.log(LogStatus.INFO, "ClusterId is selected: " + clusterId);
 
 
+        yarn.selectImpalaType();
+        waitExecuter.sleep(3000);
+
+
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();

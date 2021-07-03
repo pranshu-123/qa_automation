@@ -37,8 +37,7 @@ public class YR_014 extends BaseClass {
         yarn.verifyYarnResourceHeaderisDisplayed();
         Log.info("Yarn Resource Header is displayed.");
         test.log(LogStatus.INFO, "Yarn Resource Header is displayed.");
-        yarn.selectImpalaType();
-        waitExecuter.sleep(2000);
+
 
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterId(clusterId);
@@ -48,7 +47,7 @@ public class YR_014 extends BaseClass {
         test.log(LogStatus.INFO, "ClusterId is selected: " + clusterId);
 
 
-        yarn.selectImpalaType();
+        yarn.selectImpalaType("Yarn");
         waitExecuter.sleep(3000);
 
 
@@ -67,7 +66,7 @@ public class YR_014 extends BaseClass {
         System.out.println("All ApplicationType : filter elements: "+allFilterElements);
         Log.info("All ApplicationType : filter elements: "+ allFilterElements);
         test.log(LogStatus.INFO, "All ApplicationType : filter elements: "+ allFilterElements);
-        Assert.assertTrue(yarn.verifyFilterElements(), "Application Type: Filter elements MAPREDUCE, SPARK, TEZ is mismatch.");
+        Assert.assertTrue(yarn.verifyFilterElements(), "Application Type: Filter elements MAPREDUCE,MAPREDUCE_OOZIE5,SPARK, TEZ is mismatch.");
 
         yarn.clickOnGroupByDropDown();
         yarn.selectUser();

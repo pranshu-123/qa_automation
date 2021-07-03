@@ -57,13 +57,20 @@ public class Yarn {
     }
 
     //click on cluster drop down
-    public void selectImpalaType() {
-        // Click on chargeback dropdown
+    public void selectImpalaType(String impalaType) {
+        // Click on Impala chargeback dropdown
         userActions.performActionWithPolling(yarnPageObject.yarnResourceType, UserAction.CLICK);
-        waitExecuter.waitUntilElementClickable(yarnPageObject.selectYarn);
-        userActions.performActionWithPolling(yarnPageObject.selectYarn, UserAction.CLICK);
-        waitExecuter.sleep(2000);
-
+        List<WebElement> userList = yarnPageObject.selectYarn;
+        String usernameSelected = null;
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getText().equals(impalaType)) {
+                usernameSelected = userList.get(i).getText();
+                LOGGER.info("Selected username from dropdown " + usernameSelected);
+                waitExecuter.waitUntilElementClickable(userList.get(i));
+                userActions.performActionWithPolling(userList.get(i), UserAction.CLICK);
+                waitExecuter.sleep(2000);
+            }
+        }
     }
 
     /* Click on Group dropdown */

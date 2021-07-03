@@ -42,7 +42,7 @@ public class YR_011 extends BaseClass {
         Log.info("ClusterId is selected: "+clusterId);
         test.log(LogStatus.INFO, "Cluster Id selected"+clusterId);
 
-        yarn.selectImpalaType();
+        yarn.selectImpalaType("Yarn");
         waitExecuter.sleep(3000);
 
         DatePicker datePicker = new DatePicker(driver);

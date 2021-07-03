@@ -43,7 +43,7 @@ public class YR_012 extends BaseClass {
         Log.info("ClusterId is selected: " + clusterId);
         test.log(LogStatus.INFO, "ClusterId is selected: " + clusterId);
 
-        yarn.selectImpalaType();
+        yarn.selectImpalaType("Yarn");
         waitExecuter.sleep(3000);
 
 

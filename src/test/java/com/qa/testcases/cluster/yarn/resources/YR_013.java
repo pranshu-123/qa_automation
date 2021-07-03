@@ -53,7 +53,7 @@ public class YR_013 extends BaseClass {
         LOGGER.info("ClusterId is selected: " + clusterId);
         test.log(LogStatus.INFO, "ClusterId is selected: " + clusterId);
 
-        yarn.selectImpalaType();
+        yarn.selectImpalaType("Yarn");
         waitExecuter.sleep(3000);
 
         DatePicker datePicker = new DatePicker(driver);

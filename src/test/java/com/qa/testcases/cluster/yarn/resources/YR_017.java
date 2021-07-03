@@ -41,9 +41,8 @@ public class YR_017 extends BaseClass {
 
         YarnPageObject yarnPageObject = new YarnPageObject(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        waitExecuter.sleep(2000);
         waitExecuter.waitUntilPageFullyLoaded();
-        yarn.selectImpalaType();
+        yarn.selectImpalaType("Yarn");
         waitExecuter.sleep(3000);
         waitExecuter.waitUntilPageFullyLoaded();
         CommonPageObject commonPageObject = new CommonPageObject(driver);

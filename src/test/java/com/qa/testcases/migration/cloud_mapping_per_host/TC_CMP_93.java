@@ -66,7 +66,7 @@ public class TC_CMP_93 extends BaseClass {
             break;
         }
 
-        cloudMigrationPerHostPage.clickOnRunButton();
+        cloudMigrationPerHostPage.clickOnModalRunButton();
         cloudMigrationPerHostPage.waitTillLoaderPresent();
         waitExecuter.sleep(10000);
 

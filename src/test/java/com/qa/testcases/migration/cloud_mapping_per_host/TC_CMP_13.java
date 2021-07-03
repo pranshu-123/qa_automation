@@ -27,6 +27,7 @@ import java.util.Map;
  */
 @Marker.CloudMappingPerHost
 @Marker.All
+@Marker.Only
 public class TC_CMP_13 extends BaseClass {
     private final static LoggingUtils LOGGER = new LoggingUtils(TC_CMP_13.class);
 
@@ -66,7 +67,7 @@ public class TC_CMP_13 extends BaseClass {
             Assert.assertTrue(false, "No data displayed in table");
         }
         String expectedVMType = cloudMigrationPerHostPage.getColumnValuesFromModalTable(MigrationCloudMappingModalTable.VM_TYPE).get(0);
-        cloudMigrationPerHostPage.clickOnRunButton();
+        cloudMigrationPerHostPage.clickOnModalRunButton();
 
         try {
             waitExecuter.waitUntilTextToBeInWebElement(cloudMigrationPerHostPage.getConfirmationMessage(),

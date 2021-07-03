@@ -380,6 +380,13 @@ public class CloudMigrationPerHostPage {
     }
 
     /**
+     * Click on modal run button
+     */
+    public void clickOnModalRunButton() {
+        userAction.performActionWithPolling(cmpPageObj.modalRunButton, UserAction.CLICK);
+    }
+
+    /**
      * Wait until loader is present
      */
     public void waitTillLoaderPresent() {
@@ -784,7 +791,7 @@ public class CloudMigrationPerHostPage {
         waitTillLoaderPresent();
         checkUncheckColumn(false);
         Map<String, List> instanceValuesFromModalTable = getInstanceValuesFromModalTable(true);
-        clickOnRunButton();
+        clickOnModalRunButton();
         try {
             waitExecuter.waitUntilTextToBeInWebElement(getConfirmationMessage(),
                     "Cloud Mapping Per Host completed successfully.");

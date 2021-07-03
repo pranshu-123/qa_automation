@@ -63,7 +63,7 @@ public class TC_CMP_21 extends BaseClass {
             Assert.assertTrue(false, "No data displayed in table");
         }
         String expectedVMType = cloudMigrationPerHostPage.getColumnValuesFromModalTable(MigrationCloudMappingModalTable.VM_TYPE).get(0);
-        cloudMigrationPerHostPage.clickOnRunButton();
+        cloudMigrationPerHostPage.clickOnModalRunButton();
 
         try {
             waitExecuter.waitUntilTextToBeInWebElement(cloudMigrationPerHostPage.getConfirmationMessage(),

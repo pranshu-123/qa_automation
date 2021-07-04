@@ -41,6 +41,9 @@ public class IM_RES_03 extends BaseClass {
     homePage.selectMultiClusterId(clusterId);
     executer.waitUntilPageFullyLoaded();
 
+    impala.selectImpalaType("Impala");
+    executer.sleep(3000);
+
     DatePicker datePicker = new DatePicker(driver);
     datePicker.clickOnDatePicker();
     executer.sleep(1000);

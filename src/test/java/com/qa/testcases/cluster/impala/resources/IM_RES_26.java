@@ -59,6 +59,10 @@ public class IM_RES_26 extends BaseClass {
 		homePage.selectMultiClusterId(clusterId);
 		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
+		impala.selectImpalaType("Impala");
+		waitExecuter.sleep(3000);
+
+
 		// Select custom date
 		picker.clickOnDatePicker();
 		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);

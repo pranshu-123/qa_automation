@@ -54,6 +54,9 @@ public class IM_RES_04 extends BaseClass {
 		LOGGER.info("Selecting the cluster");		
 		homePage.selectMultiClusterId(clusterId);
 		waitExecuter.sleep(1000);
+
+		impala.selectImpalaType("Impala");
+		waitExecuter.sleep(3000);
 		
 		//Select last 30 days
 		test.log(LogStatus.INFO, "Select last 30 days in date picker");

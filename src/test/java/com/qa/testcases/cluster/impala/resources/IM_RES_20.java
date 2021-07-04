@@ -48,6 +48,10 @@ public class IM_RES_20 extends BaseClass {
     homePage.selectMultiClusterId(clusterId);
     waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
+    impala.selectImpalaType("Impala");
+    waitExecuter.sleep(3000);
+
+
     DatePicker datePicker = new DatePicker(driver);
     datePicker.clickOnDatePicker();
     waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);

@@ -42,6 +42,9 @@ public class IM_RES_05 extends BaseClass {
     impala.selectImpalaResource();
     waitExecuter.sleep(2000);
 
+    impala.selectImpalaType("Impala");
+    waitExecuter.sleep(3000);
+
 
     datePicker.clickOnDatePicker();
     waitExecuter.sleep(1000);

@@ -55,6 +55,9 @@ public class IM_RES_06 extends BaseClass {
 		homePage.selectMultiClusterId(clusterId);
 		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
+		impala.selectImpalaType("Impala");
+		waitExecuter.sleep(3000);
+
 		// Select last 30 days from date picker
 		test.log(LogStatus.INFO, "Select Last 30 days in date picker");
 		LOGGER.info("Select Last 30 days in date picker");

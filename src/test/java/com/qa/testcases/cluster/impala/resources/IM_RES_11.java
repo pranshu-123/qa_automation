@@ -47,6 +47,10 @@ public class IM_RES_11 extends BaseClass {
         homePage.selectMultiClusterId(clusterId);
         waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
+        impala.selectImpalaType("Impala");
+        waitExecuter.sleep(3000);
+
+
         // Select last one hour
         test.log(LogStatus.INFO, "Click on date picker");
         datePicker.clickOnDatePicker();

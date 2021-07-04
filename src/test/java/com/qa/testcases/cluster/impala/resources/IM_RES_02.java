@@ -65,6 +65,9 @@ public class IM_RES_02 extends BaseClass {
 		waitExecuter.waitUntilPageFullyLoaded();
 		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
+		impala.selectImpalaType("Impala");
+		waitExecuter.sleep(3000);
+
 		// Select custom date
 		test.log(LogStatus.INFO, "Selecting the custom date");
 		LOGGER.info("Select the custom date from date picker");

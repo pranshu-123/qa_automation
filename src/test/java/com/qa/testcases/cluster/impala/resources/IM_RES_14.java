@@ -46,6 +46,10 @@ public class IM_RES_14 extends BaseClass {
 		waitExecuter.sleep(1000);
 		HomePage homePage = new HomePage(driver);
 		homePage.selectMultiClusterId(clusterId);
+
+		impala.selectImpalaType("Impala");
+		waitExecuter.sleep(3000);
+
 		ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);
 		impalaPageObject.groupByDropdownButton.click();
 		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);

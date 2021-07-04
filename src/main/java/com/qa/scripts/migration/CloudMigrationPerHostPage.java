@@ -369,6 +369,7 @@ public class CloudMigrationPerHostPage {
      */
     public void navigateToCloudMappingPerHost() {
         userAction.performActionWithPolling(topPanelPageObject.migrationTab, UserAction.CLICK);
+        waitExecuter.sleep(5000);
         userAction.performActionWithPolling(cmpPageObj.cloudMappingPerHostTab, UserAction.CLICK);
     }
 

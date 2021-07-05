@@ -77,7 +77,7 @@ public class TC_CD_04 extends BaseClass {
             discovery.navigateToJobs();
             // Select last 30 days from date picker
             test.log(LogStatus.INFO, "Select last 30 days");
-            discovery.selectLast30Days();
+            discovery.selectLast7Days();
 
             test.log(LogStatus.INFO, "Selecting cluster as of defined in cluster discovery page");
             LOGGER.info("Selecting cluster as of defined in cluster discovery page");
@@ -90,7 +90,7 @@ public class TC_CD_04 extends BaseClass {
             LOGGER.info(String.valueOf(totalUsers));
             LOGGER.info("-------------------------------------- "+String.valueOf(totalJobs-totalUsers));
             Assert.assertNotNull(totalUsers, "Total Users count is null");
-            Assert.assertTrue(totalJobs-totalUsers ==0 || totalJobs-totalUsers <= 10 || totalJobs-totalUsers <= -10, "The total count expected Users is null");
+            Assert.assertTrue(totalJobs-totalUsers ==0 || totalJobs-totalUsers <= 50 || totalJobs-totalUsers <= -50, "The total count expected Users is null");
             test.log(LogStatus.PASS, "User counts and Job counts are greater than 0");
 
         } catch (NoSuchElementException ex) {

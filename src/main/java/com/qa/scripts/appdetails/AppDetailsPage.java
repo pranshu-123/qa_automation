@@ -71,8 +71,8 @@ public class AppDetailsPage {
                 appCount = Integer.parseInt(appDetails[1].replaceAll("[^0-9]", "").trim());
                 ActionPerformer actionPerformer = new ActionPerformer(driver);
                 actionPerformer.moveToTheElement(appDetailsPageObject.applicationTypeLabels.get(i));
-                userActions.performActionWithPolling(appDetailsPageObject.applicationTypeShowOnly.get(i),
-                        UserAction.CLICK);
+                String appId = appDetailsPageObject.applicationTypeShowOnly.getText().trim();
+                logger.info("Impala Insight application Id is " + appId);
                 wait.waitUntilElementClickable(applicationsPageObject.resetButton);
                 break;
             }
@@ -491,6 +491,7 @@ public class AppDetailsPage {
         if (appDetailsPageObject.clickFirstApp.size() > 0) {
             wait.waitUntilElementClickable(appDetailsPageObject.clickFirstApp.get(0));
             userActions.performActionWithPolling(appDetailsPageObject.clickFirstApp.get(0), UserAction.CLICK);
+            wait.waitUntilPageFullyLoaded();
             wait.waitUntilElementClickable(appDetailsPageObject.flippedButton);
         } else
             logger.info("There are no application by name- " + app);

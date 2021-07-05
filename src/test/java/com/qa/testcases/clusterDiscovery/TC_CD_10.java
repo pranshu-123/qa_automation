@@ -3,6 +3,7 @@ package com.qa.testcases.clusterDiscovery;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.DatePickerPageObject;
+import com.qa.pagefactory.clusters.QueueAnalysisPageObject;
 import com.qa.pagefactory.migration.ClusterDiscoveryPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.migration.ClusterDiscovery;
@@ -32,9 +33,7 @@ public class TC_CD_10 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         ClusterDiscoveryPageObject cdPageObject = new ClusterDiscoveryPageObject(driver);
         ClusterDiscovery discovery = new ClusterDiscovery(driver);
-        UserActions userAction = new UserActions(driver);
-        DatePickerPageObject datePickerPageObject = new DatePickerPageObject(driver);
-        DatePicker date = new DatePicker(driver);
+        QueueAnalysisPageObject qaPageObject = new QueueAnalysisPageObject(driver);
 
         // Navigate to Cluster Discovery tab from header
         test.log(LogStatus.INFO, "Navigate to Cluster Discovery tab from header");
@@ -57,10 +56,15 @@ public class TC_CD_10 extends BaseClass {
         // Click on Run button of modal window
         test.log(LogStatus.INFO, "Click on Run button of modal window");
         discovery.clickRunModalButton();
+        waitExecuter.waitUntilTextNotToBeInWebElement(qaPageObject.footerWaitCycle, "Please Wait");
+        waitExecuter.waitUntilElementClickable(cdPageObject.runButton);
         try {
             waitExecuter.waitUntilTextToBeInWebElement(cdPageObject.failedErrorMessage,
-                    "The latest report failed.Task validation failed: Cluster Discovery " +
-                            "report end date should be within the last 90 days.");
+                    "Task validation failed: Cluster Discovery report end date " +
+                            "should be within the last 90 days.");
+            LOGGER.info("ACTUAL text~~~~~~~~~~~~~~~~~~~ " + cdPageObject.failedErrorMessage.getText());
+            LOGGER.info("Expected text~~~~~~~~~~~~~~~~~~~ " + "Task validation failed: Cluster Discovery report end date " +
+                    "should be within the last 90 days.");
             test.log(LogStatus.PASS, "Verified Cluster Discovery report error message " +
                     "for report generated of before 90 days.");
         } catch (TimeoutException te) {

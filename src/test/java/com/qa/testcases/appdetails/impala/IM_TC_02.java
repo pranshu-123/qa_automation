@@ -50,7 +50,6 @@ public class IM_TC_02 extends BaseClass {
         try {
             appDetailsPage.selectOnlyApplication(AppDetailsApplicationType.IMPALA);
             appDetailsPage.selectSuccessfulApplication();
-            //actions.performActionWithPolling(appDetailsPage.getAppsDetailsAsPage().get(1), UserAction.CLICK);
             actions.performActionWithPolling(applicationsPageObject.clickOnAppId, UserAction.CLICK);
             waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
             Assert.assertNotNull(appDetailsPage.getApplicationType(), "App type is null");

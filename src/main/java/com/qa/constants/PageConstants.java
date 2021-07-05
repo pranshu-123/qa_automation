@@ -76,6 +76,6 @@ public class PageConstants {
 
     /*Impala application Id*/
     public static class appId {
-        public static String appIdForImpala = "bd4a44f2cfb21466:e787e01e00000000";
+        public static String appIdForImpala = "0149c49037160d42:115fbdc200000000";
     }
 }

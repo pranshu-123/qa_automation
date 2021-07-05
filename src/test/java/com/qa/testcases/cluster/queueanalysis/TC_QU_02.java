@@ -58,7 +58,6 @@ public class TC_QU_02 extends BaseClass {
             LOGGER.info("Click on date range");
             qaPageObject.dateRange.click();
             List<WebElement> dateRange = datePickerPageObject.dateRangeOptions;
-
             WebElement dateRangeOption = datePickerPageObject.dateRangeOptions.get(i);
             String dateRangeValue = dateRangeOption.getText();
             dateRangeOption.click();

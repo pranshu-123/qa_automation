@@ -83,7 +83,7 @@ public class TC_CD_05 extends BaseClass {
             discovery.navigateToJobs();
             // Select last 30 days from date picker
             test.log(LogStatus.INFO, "Select last 30 days");
-            discovery.selectLast30Days();
+            discovery.selectLast7Days();
             waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
             waitExecuter.waitUntilPageFullyLoaded();
 

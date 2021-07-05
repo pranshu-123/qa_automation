@@ -124,7 +124,7 @@ public class SparkAppsDetailsPage {
             verifyAssertTrue(Arrays.asList(expectedGraphTitle).contains(graphTitle), sparkAppPageObj,
                     " The expected" + " Graph title doesnot match with the titles in the UI");
             String appDuration = sparkAppPageObj.rightPaneAppKpiVal.get(0).getText();
-            logger.info("SP: appDuration = "+ appDuration);
+            logger.info("AppDuration is = "+ appDuration);
             verifyAssertTrue(allGraphsList.get(t).isDisplayed(), sparkAppPageObj, " All Graphs are not displayed," +
                 " its an expected behaviour if app duration is < 90secs.\n The app Duration is "+ appDuration);
             switch (graphTitle) {

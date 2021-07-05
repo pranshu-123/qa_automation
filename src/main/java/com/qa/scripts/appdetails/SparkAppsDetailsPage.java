@@ -904,7 +904,7 @@ public class SparkAppsDetailsPage {
             if (appCount > 0) {
                 if (tabName.equals("Analysis")) {
                     userActions.performActionWithPolling(appDetailsPageObject.globalSearchBox, UserAction.SEND_KEYS,
-                        "example1-after");
+                        "Spark Pi");
                     appDetailsPageObject.globalSearchBox.sendKeys(Keys.RETURN);
                 }
                 String headerAppId = appsDetailsPage.verifyAppId(sparkAppPageObj, applicationsPageObject);

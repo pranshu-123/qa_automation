@@ -38,7 +38,7 @@ public class TC_ELK_22 extends BaseClass {
     AllApps allApps = new AllApps(driver);
 
     // Navigate to ES tab from header
-    MouseActions.clickOnElement(driver, elkPageObj.ESTab);
+    MouseActions.clickOnElement(driver, elkPageObj.kibanaTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
 

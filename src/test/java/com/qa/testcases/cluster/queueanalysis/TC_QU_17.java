@@ -59,7 +59,7 @@ public class TC_QU_17 extends BaseClass {
                 test.log(LogStatus.INFO, "Assert that Resource tabs is loaded");
                 LOGGER.info("Assert that Resource tabs is loaded");
                 try {
-                    Assert.assertEquals(qaPageObject.yarnResources.getText().trim(), "Resource Usage",
+                    Assert.assertEquals(qaPageObject.yarnResources.getText().trim(), "Resource Type",
                             "Unable to load child browser");
                     test.log(LogStatus.PASS, "Tool tips verified of vcore graph ");
                     driver.close();

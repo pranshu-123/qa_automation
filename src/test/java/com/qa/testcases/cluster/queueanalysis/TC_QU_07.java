@@ -57,7 +57,7 @@ public class TC_QU_07 extends BaseClass {
             // Click on queue search box and search for queue name
             test.log(LogStatus.INFO, "Click on queue search box and search for queue name");
             LOGGER.info("Click on queue search box and search for queue name");
-            qaPageObject.queueSearchBox.sendKeys("InvalidQueue");
+            qaPageObject.queueSearchBox.sendKeys("Invalid Queue Name");
             String noResult = qaPageObject.queueOptions.get(0).getText();
             Assert.assertTrue(noResult.equals("No results found"),
                     "On giving invalid queue name, expected message is not displayed");

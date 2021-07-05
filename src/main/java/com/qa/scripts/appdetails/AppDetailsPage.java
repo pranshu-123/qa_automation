@@ -73,7 +73,6 @@ public class AppDetailsPage {
                 actionPerformer.moveToTheElement(appDetailsPageObject.applicationTypeLabels.get(i));
                 String appId = appDetailsPageObject.applicationTypeShowOnly.getText().trim();
                 logger.info("Impala Insight application Id is " + appId);
-                appDetailsPageObject.applicationTypeShowOnly.click();
                 wait.waitUntilElementClickable(applicationsPageObject.resetButton);
                 break;
             }

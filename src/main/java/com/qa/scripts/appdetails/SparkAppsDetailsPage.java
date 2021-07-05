@@ -123,7 +123,10 @@ public class SparkAppsDetailsPage {
             logger.info("Graph title is " + graphTitle);
             verifyAssertTrue(Arrays.asList(expectedGraphTitle).contains(graphTitle), sparkAppPageObj,
                     " The expected" + " Graph title doesnot match with the titles in the UI");
-            verifyAssertTrue(allGraphsList.get(t).isDisplayed(), sparkAppPageObj, " All Graphs are not displayed");
+            String appDuration = sparkAppPageObj.rightPaneAppKpiVal.get(0).getText();
+            logger.info("SP: appDuration = "+ appDuration);
+            verifyAssertTrue(allGraphsList.get(t).isDisplayed(), sparkAppPageObj, " All Graphs are not displayed," +
+                " its an expected behaviour if app duration is < 90secs.\n The app Duration is "+ appDuration);
             switch (graphTitle) {
                 case "Task Attempts":
                     logger.info("Validating the Graph " + graphTitle);
@@ -500,6 +503,7 @@ public class SparkAppsDetailsPage {
                 case 0:
                     Assert.assertEquals(tabName, "Navigation", "Navigation tab not present");
                     List<WebElement> navigationRowList = sparkPageObj.navigationTableRows;
+
                     navigationRows = navigationRowList.size();
                     logger.info("Navigation Rows are " + navigationRows);
                     if (validateCompData) {

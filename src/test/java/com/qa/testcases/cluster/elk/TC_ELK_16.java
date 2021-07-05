@@ -18,7 +18,7 @@ public class TC_ELK_16 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider",description="P0-Verify the metrics graphs should be loaded properly and match with Kibana..")
   public void TC_ELK_16_verifyPipelineSpecificKPI(String clusterId) {
-    test = extent.startTest("verifyPipelineSpecificKPI: " + clusterId,
+    test = extent.startTest("TC_ELK_16_verifyPipelineSpecificKPI: " + clusterId,
         "Validate pipeline specific KPI");
     test.assignCategory(" ELK ");
     Log.startTestCase("verifyPipelineSpecificKPI");

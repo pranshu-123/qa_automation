@@ -153,7 +153,7 @@ public class ELKPageObject {
   @FindBy(xpath = "//div[contains(@id,'kibanaGraph')]")
   public List<WebElement> kibanaMetricsList;
 
-  @FindBy(xpath = "//div[contains(@class,'pipeline-node-list')]//table[@class='component-data-tables']//tbody/tr")
+  @FindBy(xpath = "//div[contains(@class,'pipeline-node-list')]//table/tbody//tr")
   public List<WebElement> associatedNodeTableRows;
 
   @FindBy(xpath = "//div[contains(@class,'component-dashboard')]//div[contains(@class,'score-improvement-bo')]")

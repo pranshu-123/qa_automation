@@ -21,7 +21,7 @@ public class TC_ELK_14 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider",description="Verify that the Events received,events emitted,events filtered value should be associated with the nodes")
   public void TC_ELK_14_verifyLogstashKPIsWithAssociatedNodes(String clusterId) {
-    test = extent.startTest("verifyLogstashKPIsWithAssociatedNodes: " + clusterId,
+    test = extent.startTest("TC_ELK_14_verifyLogstashKPIsWithAssociatedNodes: " + clusterId,
         "Validate Events received , events emitted, events filtered value with associated nodes.");
     test.assignCategory(" ELK ");
     Log.startTestCase("verifyLogstashKPIsWithAssociatedNodes");

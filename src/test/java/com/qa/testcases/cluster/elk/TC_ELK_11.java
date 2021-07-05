@@ -22,7 +22,7 @@ public class TC_ELK_11 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider",description="Verify All the pipelines should be listed under the pipeline tab.")
   public void TC_ELK_11_verifyLogstashPipelineInTable(String clusterId) {
-    test = extent.startTest("verifyLogstashPipelineInTable: " + clusterId,
+    test = extent.startTest("TC_ELK_11_verifyLogstashPipelineInTable: " + clusterId,
         "Validate pipelines in table.");
     test.assignCategory(" ELK ");
     Log.startTestCase("verifyLogstashPipelineInTable");

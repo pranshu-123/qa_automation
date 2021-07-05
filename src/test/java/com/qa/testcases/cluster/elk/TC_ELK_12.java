@@ -21,7 +21,7 @@ public class TC_ELK_12 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider",description="P1-Verify that the sorting for all columns in the pipelines table should appear in logstash page.")
     public void TC_ELK_12_verifyPipelinesSortTbl(String clusterId) {
-        test = extent.startTest("verifyPipelinesSortTbl: " + clusterId,
+        test = extent.startTest("TC_ELK_12_verifyPipelinesSortTbl: " + clusterId,
                 "Verify that the sorting for all columns in the pipelines table should appear in logstash page.");
         test.assignCategory(" ELK ");
         Log.startTestCase("verifyPipelinesSortTbl");

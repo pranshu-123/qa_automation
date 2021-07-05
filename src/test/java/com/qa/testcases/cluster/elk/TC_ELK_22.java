@@ -46,7 +46,7 @@ public class TC_ELK_22 extends BaseClass {
     test.log(LogStatus.INFO, "Click on date picker and list of calendar ranges");
     LOGGER.info("Click on date picker and list of calendar ranges");
     datePicker.clickOnDatePicker();
-    waitExecuter.sleep(2000);
+    waitExecuter.sleep(6000);
     List<String> calendarRanges = allApps.getCalendarRanges();
     waitExecuter.sleep(4000);
     elkPage.verifyDateRange(calendarRanges, test);

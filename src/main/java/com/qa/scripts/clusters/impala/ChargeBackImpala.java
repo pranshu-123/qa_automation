@@ -46,30 +46,47 @@ public class ChargeBackImpala {
         userActions = new UserActions(driver);
     }
 
- /*   public void selectImpalaChargebackTab() {
-        WaitExecuter waitExecuter = new WaitExecuter(driver);
-        waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.clusterChargeBackTab);
-        userActions.performActionWithPolling(chargebackImpalaPageObject.clusterChargeBackTab, UserAction.CLICK);
-
-    }*/
     /**
      * This method used to select impala in chargeback drowdown displayed at
      * chargeback page. First it click on chargeback tab which navigates to
      * chargeback page then it select impala.
      */
-    public void selectImpalaChargeback(String chargeBackName) {
+    public void selectImpalaChargeback() {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.clusterChargeBackTab);
         userActions.performActionWithPolling(chargebackImpalaPageObject.clusterChargeBackTab, UserAction.CLICK);
-        waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
+        waitExecuter.waitUntilPageFullyLoaded();
+    }
+
+    //click on cluster drop down
+    public void selectImpalaType(String impalaType) {
+        // Click on Impala chargeback dropdown
+        userActions.performActionWithPolling(chargebackImpalaPageObject.impalaDropdownOption, UserAction.CLICK);
+        List<WebElement> userList = chargebackImpalaPageObject.selectType;
+        String selectImpala = null;
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getText().equals(impalaType)) {
+                selectImpala = userList.get(i).getText();
+                LOGGER.info("Selected Impala from dropdown " + selectImpala);
+                waitExecuter.waitUntilElementClickable(userList.get(i));
+                userActions.performActionWithPolling(userList.get(i), UserAction.CLICK);
+                waitExecuter.sleep(2000);
+                break;
+            }
+        }
+    }
+
+    //click on cluster drop down
+    public void selectMultiClusterId(String clusterId) {
+        CommonPageObject commonPageObject = new CommonPageObject(driver);
+        waitExecuter.waitUntilElementClickable(commonPageObject.impalaYarnClusterDropdown);
         waitExecuter.sleep(2000);
-        userActions.performActionWithPolling(chargebackImpalaPageObject.chargeBackDropdownOptionsButton, UserAction.CLICK);
-        userActions.performActionWithPolling(chargebackImpalaPageObject.chargeBackSearchBox, UserAction.SEND_KEYS,
-        chargeBackName);
-        waitExecuter.sleep(1000);
-        userActions.performActionWithPolling(chargebackImpalaPageObject.chargeBackSearchFirstField, UserAction.CLICK);
-        waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
-     }
+        userActions.performActionWithPolling(commonPageObject.impalaYarnClusterDropdown, UserAction.CLICK);
+        userActions.performActionWithPolling(commonPageObject.clusterSearchBox, UserAction.SEND_KEYS,
+                clusterId);
+        userActions.performActionWithPolling(commonPageObject.clusterSearchFirstField, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(commonPageObject.impalaYarnClusterDropdown);
+    }
 
 
     /**

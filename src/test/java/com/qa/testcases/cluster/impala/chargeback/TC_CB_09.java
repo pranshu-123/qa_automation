@@ -42,23 +42,25 @@ public class TC_CB_09 extends BaseClass {
 		chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
 
 		// Click on Chargeback tab
-		chargeBackImpala.selectImpalaChargeback("Impala");
+		chargeBackImpala.selectImpalaChargeback();
 		test.log(LogStatus.INFO, "Click on Chargeback tab");
 
 
-		
 		// Select the cluster
 		test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
 		LOGGER.info("Select clusterId : "+clusterId);
-		homePage.selectMultiClusterId(clusterId);
+		chargeBackImpala.selectMultiClusterId(clusterId);
 		waitExecuter.sleep(1000);
+
+		chargeBackImpala.selectImpalaType("Impala");
+		waitExecuter.sleep(2000);
 		
 		// Click on chargeback group by combobox
 		test.log(LogStatus.INFO, "Click on chargeback group by combobox");
 		LOGGER.info("Click on chargeback group by combobox");
 		waitExecuter.sleep(1000);
 		chargebackImpalaPageObject.groupBySearchBox.click();
-		waitExecuter.sleep(1000);
+		waitExecuter.sleep(2000);
 		
 		// Verify the names of options available in group by
 		test.log(LogStatus.INFO, "Verify the names of options available in group by");

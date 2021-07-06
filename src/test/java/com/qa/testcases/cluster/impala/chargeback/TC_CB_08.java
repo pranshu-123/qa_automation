@@ -7,6 +7,7 @@ import com.qa.scripts.HomePage;
 import com.qa.scripts.clusters.impala.ChargeBackImpala;
 import com.qa.utils.DateUtils;
 import com.qa.utils.LoggingUtils;
+import com.qa.utils.WaitExecuter;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.text.DateFormat;
@@ -31,14 +32,18 @@ public class TC_CB_08 extends BaseClass {
     public void verifyUserCanSelectFutureDate(String clusterId) throws ParseException {
         test = extent.startTest("TC_CB_08.verifyUserCanSelectFutureDate", "Verify the user is not allowed to select a furture date range");
         test.assignCategory(" Cluster - Impala Chargeback");
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
-        chargeBackImpala.selectImpalaChargeback("Impala");
+        chargeBackImpala.selectImpalaChargeback();
         LOGGER.info("Navigate to impala chargeback page", test);
 
         //Select Cluster
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
+        chargeBackImpala.selectMultiClusterId(clusterId);
         LOGGER.info("Selected cluster: " + clusterId, test);
+
+        chargeBackImpala.selectImpalaType("Impala");
+        waitExecuter.sleep(2000);
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();

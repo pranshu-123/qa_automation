@@ -40,10 +40,13 @@ public class TC_CB_33 extends BaseClass {
         chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
         // Click on Chargeback tab
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
-        chargeBackImpala.selectImpalaChargeback("Impala");
+        chargeBackImpala.selectImpalaChargeback();
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
+        chargeBackImpala.selectMultiClusterId(clusterId);
         waitExecuter.sleep(1000);
+
+        chargeBackImpala.selectImpalaType("Impala");
+        waitExecuter.sleep(2000);
       
         picker.clickOnDatePicker();
         waitExecuter.sleep(1000);

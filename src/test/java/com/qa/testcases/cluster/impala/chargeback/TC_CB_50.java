@@ -30,7 +30,7 @@ public class TC_CB_50 extends BaseClass {
             extent.startTest("TC_CB_50.validateSortByTotalProcessingTimeSeconds", "Validate table sorting - By Total Processing Time Seconds");
         test.assignCategory(" Cluster - Impala Chargeback");
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
-        chargeBackImpala.selectImpalaChargeback("Impala");
+        chargeBackImpala.selectImpalaChargeback();
 
         LOGGER.info("Click on impala chargeback", test);
 
@@ -38,7 +38,11 @@ public class TC_CB_50 extends BaseClass {
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
 
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
+        chargeBackImpala.selectMultiClusterId(clusterId);
+        waitExecuter.sleep(1000);
+
+        chargeBackImpala.selectImpalaType("Impala");
+        waitExecuter.sleep(2000);
         waitExecuter.waitUntilPageFullyLoaded();
 
         DatePicker datePicker = new DatePicker(driver);

@@ -30,10 +30,14 @@ public class TC_CB_39 extends BaseClass {
 
     WaitExecuter waitExecuter = new WaitExecuter(driver);
     ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
-    chargeBackImpala.selectImpalaChargeback("Impala");
+    chargeBackImpala.selectImpalaChargeback();
 
     HomePage homePage = new HomePage(driver);
-    homePage.selectMultiClusterId(clusterId);
+    chargeBackImpala.selectMultiClusterId(clusterId);
+    waitExecuter.sleep(1000);
+
+    chargeBackImpala.selectImpalaType("Impala");
+    waitExecuter.sleep(2000);
 
     CommonPageObject commonPageObject = new CommonPageObject(driver);
     MouseActions.clickOnElement(driver, commonPageObject.clusterDropdown);

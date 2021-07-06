@@ -31,14 +31,15 @@ public class TC_CB_29 extends BaseClass {
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
-
-        HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
-        // Click on datepicker button
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
         picker = new DatePicker(driver);
-        chargeBackImpala.selectImpalaChargeback("Impala");
-        // Intialize impala page objects
+        chargeBackImpala.selectImpalaChargeback();
+
+        HomePage homePage = new HomePage(driver);
+        chargeBackImpala.selectMultiClusterId(clusterId);
+
+        chargeBackImpala.selectImpalaType("Impala");
+        waitExecuter.sleep(2000);
 
         waitExecuter.sleep(1000);
         picker.clickOnDatePicker();

@@ -49,8 +49,10 @@ public class TC_CB_02 extends BaseClass {
         UserActions userActions = new UserActions(driver);
         chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
         topPanelPageObject = new TopPanelPageObject(driver);
-        chargeBackImpala.selectImpalaChargeback("Impala");
+        chargeBackImpala.selectImpalaChargeback();
 
+        chargeBackImpala.selectImpalaType("Impala");
+        waitExecuter.sleep(2000);
 
         // Click on cluster dropdown
         test.log(LogStatus.INFO, "Click on cluster dropdown");

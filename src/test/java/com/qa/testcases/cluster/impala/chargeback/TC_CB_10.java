@@ -31,12 +31,15 @@ public class TC_CB_10 extends BaseClass {
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
         ChargebackImpalaPageObject cbImpalaPageObject = new ChargebackImpalaPageObject(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        chargeBackImpala.selectImpalaChargeback("Impala");
+        chargeBackImpala.selectImpalaChargeback();
         LOGGER.info("Navigate to impala chargeback page", test);
         //Select Cluster
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
+        chargeBackImpala.selectMultiClusterId(clusterId);
         LOGGER.info("Selected cluster: " + clusterId, test);
+
+        chargeBackImpala.selectImpalaType("Impala");
+        waitExecuter.sleep(2000);
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         waitExecuter.waitUntilElementClickable(cbImpalaPageObject.chargeBackDropdownOptionsButton);

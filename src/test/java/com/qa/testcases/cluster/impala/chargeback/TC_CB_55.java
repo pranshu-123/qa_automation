@@ -33,13 +33,17 @@ public class TC_CB_55 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
 
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
-        chargeBackImpala.selectImpalaChargeback("Impala");
+        chargeBackImpala.selectImpalaChargeback();
         waitExecuter.waitUntilPageFullyLoaded();
 
 
         //Cluster selected
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
+        chargeBackImpala.selectMultiClusterId(clusterId);
+        waitExecuter.sleep(1000);
+
+        chargeBackImpala.selectImpalaType("Impala");
+        waitExecuter.sleep(2000);
 
         // Click on datepicker button
         DatePicker datePicker = new DatePicker(driver);

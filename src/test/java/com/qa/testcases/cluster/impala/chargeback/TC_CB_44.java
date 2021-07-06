@@ -30,14 +30,18 @@ public class TC_CB_44 extends BaseClass {
             extent.startTest("TC_CB_44.validateSortByRealUser", "Validate table sorting - By Real User");
         test.assignCategory(" Cluster - Impala Chargeback");
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
-        chargeBackImpala.selectImpalaChargeback("Impala");
+        chargeBackImpala.selectImpalaChargeback();
 
         LOGGER.info("Click on impala chargeback", test);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
 
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
+        chargeBackImpala.selectMultiClusterId(clusterId);
+        waitExecuter.sleep(1000);
+
+        chargeBackImpala.selectImpalaType("Impala");
+        waitExecuter.sleep(2000);
         waitExecuter.waitUntilPageFullyLoaded();
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();

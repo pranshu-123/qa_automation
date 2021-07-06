@@ -34,12 +34,16 @@ public class TC_CB_31 extends BaseClass {
 		chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
 		// Click on Chargeback tab
 		ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
-		chargeBackImpala.selectImpalaChargeback("Impala");
+		chargeBackImpala.selectImpalaChargeback();
 		// Select the cluster
 		LOGGER.info("Selecting the cluster");
 		waitExecuter.sleep(1000);
 		HomePage homePage = new HomePage(driver);
-		homePage.selectMultiClusterId(clusterId);
+		chargeBackImpala.selectMultiClusterId(clusterId);
+
+		chargeBackImpala.selectImpalaType("Impala");
+		waitExecuter.sleep(2000);
+
 		// Select last 30 days
 		picker.clickOnDatePicker();
 		waitExecuter.sleep(1000);

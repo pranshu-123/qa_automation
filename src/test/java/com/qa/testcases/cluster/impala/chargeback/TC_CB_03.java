@@ -33,28 +33,29 @@ public class TC_CB_03 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
 
-        HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
-        // Click on datepicker button
-        picker = new DatePicker(driver);
-        // Intialize impala page objects
         chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
         // Click on Chargeback tab
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
-        chargeBackImpala.selectImpalaChargeback("Impala");
+        chargeBackImpala.selectImpalaChargeback();
 
+        HomePage homePage = new HomePage(driver);
+        chargeBackImpala.selectMultiClusterId(clusterId);
+        waitExecuter.waitUntilPageFullyLoaded();
 
+        chargeBackImpala.selectImpalaType("Impala");
+        waitExecuter.sleep(2000);
+
+        // Click on datepicker button
+        picker = new DatePicker(driver);
+        // Intialize impala page objects
 
         waitExecuter.sleep(1000);
         picker.clickOnDatePicker();
         waitExecuter.sleep(1000);
         picker.selectLast30Days();
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
 
-        waitExecuter.sleep(1000);
 
-        chargeBackImpala.selectImpalaChargeback("Impala");
-        waitExecuter.sleep(1000);
         String memoryHourInSeconds = chargebackImpala.getMemoryGraphHeader();
         Assert.assertTrue(chargebackImpala.getMemoryGraphHeader().matches(memoryHourInSeconds),
             "verify the total memory in graph heading");

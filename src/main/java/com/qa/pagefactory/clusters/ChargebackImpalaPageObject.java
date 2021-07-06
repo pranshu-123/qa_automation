@@ -21,23 +21,12 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "(//span[contains(@class,'select2-selection__arrow')])[1]")
     public WebElement chargeBackDropdownOptionsButton;
 
-    @FindBy(xpath = "//li[contains(@class,'select2-results__option')]")
-    public List<WebElement> chargeBacksList;
+    @FindBy(xpath="(//span[contains(@class,'select2-selection__arrow')])[1]")
+    public WebElement impalaDropdownOption;
 
-    @FindBy(xpath="//span[@class='select2-results']//li")
-    public WebElement chargeBackSearchFirstField;
+    @FindBy(xpath="//li[contains(text(),'Impala')]")
+    public List<WebElement> selectType;
 
-    @FindBy(xpath="(//input[@class='select2-search__field'])[2]")
-    public WebElement chargeBackSearchBox;
-
-    @FindBy(xpath = "//li[@id='select2-cw6b-result-lpng-Impala']")
-    public WebElement chargeBackDropdownImpalaOption;
-
-    @FindBy(xpath = "//span[@id='select2-y4f2-container']")
-    public WebElement chargeBackDropdown;
-
-    @FindBy(xpath = "//span[@id='select2-y4f2-container']")
-    public List<WebElement> chargeBackList;
 
     @FindBy(xpath = "//label[normalize-space()='Chargeback Type']")
     public WebElement chargeBackPageHeading;
@@ -69,7 +58,7 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "//span[contains(@class, 'select2-selection--multiple')]")
     public WebElement groupBySearchBox;
 
-    @FindBy(xpath = "//span[contains(@class, 'select2-results')]/ul/li")
+    @FindBy(xpath = "//ul[@id='select2-4ye4-results']")
     public List<WebElement> listOfGroupByOptions;
 
     @FindBy(xpath = "((//div[contains(@class,'dashboard-sec')])[last()]//div[contains(@class,'pie-legend')])[2]//div/span")
@@ -150,7 +139,7 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "(//div[contains(@class,'dashboard-module')])[2]//h4/span")
     public WebElement CPUHoursFromGraphHeader;
 
-    @FindBy(xpath = "//h4[normalize-space()='Memory']")
+    @FindBy(xpath = "//div[@class='col-md-4'][3]//h4/span")
     public WebElement MemoryHoursFromGraphHeader;
 
     @FindBy(xpath = "//div[@class='col-md-4'][2]//h4/span")

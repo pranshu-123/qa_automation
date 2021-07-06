@@ -27,12 +27,27 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath="//li[contains(text(),'Impala')]")
     public List<WebElement> selectType;
 
+    @FindBy(xpath = "//li[contains(@class,'select2-results__option')]")
+    public List<WebElement> clustersList;
+
+    @FindBy(xpath = "//span[contains(@class,'select2-selection__arrow')]")
+    public WebElement clusterDropdown;
+
+    @FindBy(xpath = "(//span[contains(@class,'select2-selection__arrow')])[2]")
+    public WebElement impalaYarnClusterDropdown;
+
+    @FindBy(xpath="//span[contains(@class, 'select2-search--dropdown')]/input")
+    public WebElement clusterSearchBox;
+
+    @FindBy(xpath="//span[@class='select2-results']//li")
+    public WebElement clusterSearchFirstField;
+
+    @FindBy(xpath = "//span[contains(@class,'select2-dropdown--below')]//li")
+    public List<WebElement> listOfClusters;
 
     @FindBy(xpath = "//label[normalize-space()='Chargeback Type']")
     public WebElement chargeBackPageHeading;
 
-    @FindBy(xpath = "//li[contains(@class,'select2-results__option')]")
-    public List<WebElement> clustersList;
 
     @FindBy(xpath = "//table[@id='chargeback-table']/tbody/tr")
     public List<WebElement> resultsGroupedByTableRecords;
@@ -52,13 +67,11 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "//span[contains(@class,'select2-container')]/span/span/input[contains(@class, 'select2-search__field')]")
     public WebElement clusterDropdownSearchbox;
 
-    @FindBy(xpath = "//span[contains(@class,'select2-dropdown--below')]//li")
-    public List<WebElement> listOfClusters;
 
     @FindBy(xpath = "//span[contains(@class, 'select2-selection--multiple')]")
     public WebElement groupBySearchBox;
 
-    @FindBy(xpath = "//ul[@id='select2-4ye4-results']")
+    @FindBy(xpath = "//ul[@id='select2-r85m-results']")
     public List<WebElement> listOfGroupByOptions;
 
     @FindBy(xpath = "((//div[contains(@class,'dashboard-sec')])[last()]//div[contains(@class,'pie-legend')])[2]//div/span")
@@ -85,7 +98,7 @@ public class ChargebackImpalaPageObject {
     @FindBy(id = "chargebackmemory")
     public WebElement setChargebackMemoryPerHour;
 
-    @FindBy(xpath = "//div/button[@class='applybtn']")
+    @FindBy(xpath = "//button[@class='btn-apply margin-amount']")
     public WebElement applyButton;
 
     @FindBy(xpath = "//li[contains(text(),'User')][1]")
@@ -139,7 +152,7 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "(//div[contains(@class,'dashboard-module')])[2]//h4/span")
     public WebElement CPUHoursFromGraphHeader;
 
-    @FindBy(xpath = "//div[@class='col-md-4'][3]//h4/span")
+    @FindBy(xpath = "//div[@class='col-content']//div[3]//div[1]//div[1]//h4[1]//span[1]")
     public WebElement MemoryHoursFromGraphHeader;
 
     @FindBy(xpath = "//div[@class='col-md-4'][2]//h4/span")

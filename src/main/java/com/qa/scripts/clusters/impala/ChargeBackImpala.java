@@ -71,21 +71,19 @@ public class ChargeBackImpala {
                 waitExecuter.waitUntilElementClickable(userList.get(i));
                 userActions.performActionWithPolling(userList.get(i), UserAction.CLICK);
                 waitExecuter.sleep(2000);
-                break;
             }
         }
     }
 
     //click on cluster drop down
     public void selectMultiClusterId(String clusterId) {
-        CommonPageObject commonPageObject = new CommonPageObject(driver);
-        waitExecuter.waitUntilElementClickable(commonPageObject.impalaYarnClusterDropdown);
+        waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.impalaYarnClusterDropdown);
         waitExecuter.sleep(2000);
-        userActions.performActionWithPolling(commonPageObject.impalaYarnClusterDropdown, UserAction.CLICK);
-        userActions.performActionWithPolling(commonPageObject.clusterSearchBox, UserAction.SEND_KEYS,
+        userActions.performActionWithPolling(chargebackImpalaPageObject.impalaYarnClusterDropdown, UserAction.CLICK);
+        userActions.performActionWithPolling(chargebackImpalaPageObject.clusterSearchBox, UserAction.SEND_KEYS,
                 clusterId);
-        userActions.performActionWithPolling(commonPageObject.clusterSearchFirstField, UserAction.CLICK);
-        waitExecuter.waitUntilElementClickable(commonPageObject.impalaYarnClusterDropdown);
+        userActions.performActionWithPolling(chargebackImpalaPageObject.clusterSearchFirstField, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.impalaYarnClusterDropdown);
     }
 
 
@@ -472,7 +470,7 @@ public class ChargeBackImpala {
 
     public void clikOnDownloadCSV() {
 
-        List<WebElement> downloadCSVList = TestUtils.getWebElements(driver, "xpath", "//button[@class='btn-csv']");
+        List<WebElement> downloadCSVList = TestUtils.getWebElements(driver, "xpath", "//div[@class='dashboard-module bg-white dashboard-sec pb-2']//div[@class='header']//a[@class='menu']");
         System.out.println("List of downloadCSV file: " + downloadCSVList.size());
         waitExecuter.sleep(2000);
 

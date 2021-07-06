@@ -24,12 +24,12 @@ public class YC_023 extends BaseClass {
         test.assignCategory(" Cluster - Yarn Chargeback");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         ChargeBackYarn chargeBackYarn = new ChargeBackYarn(driver);
-        HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
+        chargeBackYarn.selectYarnChargeback();
+        waitExecuter.sleep(2000);
 
-        ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
-        chargeBackImpala.selectImpalaChargeback("Yarn");
-        waitExecuter.waitUntilPageFullyLoaded();
+        chargeBackYarn.selectMultiClusterId(clusterId);
+        chargeBackYarn.selectChargebackType("Yarn");
+        waitExecuter.sleep(2000);
         test.log(LogStatus.PASS, "User is redirected to cluster chargeback page");
 
         chargeBackYarn.clickOnGroupBySearchBox();

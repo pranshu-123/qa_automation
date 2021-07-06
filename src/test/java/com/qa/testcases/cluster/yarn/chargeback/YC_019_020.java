@@ -31,14 +31,14 @@ public class YC_019_020 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
 
 
-        ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
-        chargeBackImpala.selectImpalaChargeback("Yarn");
-        waitExecuter.sleep(2000);
-
-        homePage.selectMultiClusterId(clusterId);
-
         ChargeBackYarn chargeBackYarn = new ChargeBackYarn(driver);
         waitExecuter.waitUntilPageFullyLoaded();
+        chargeBackYarn.selectYarnChargeback();
+        waitExecuter.sleep(2000);
+
+        chargeBackYarn.selectMultiClusterId(clusterId);
+        chargeBackYarn.selectChargebackType("Yarn");
+        waitExecuter.sleep(2000);
 
         Assert.assertTrue(driver.getCurrentUrl().contains("clusters/chargeback"), "User is not " +
                 "directed to the cluster chargeback page.");

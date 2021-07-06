@@ -60,7 +60,7 @@ public class Yarn {
     public void selectImpalaType(String impalaType) {
         // Click on Impala chargeback dropdown
         userActions.performActionWithPolling(yarnPageObject.yarnResourceType, UserAction.CLICK);
-        List<WebElement> userList = yarnPageObject.selectYarn;
+        List<WebElement> userList = yarnPageObject.selectType;
         String usernameSelected = null;
         for (int i = 0; i < userList.size(); i++) {
             if (userList.get(i).getText().equals(impalaType)) {

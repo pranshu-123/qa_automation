@@ -57,6 +57,18 @@ public class ChargeBackYarn {
         JavaScriptExecuter.clickOnElement(driver, chargebackYarnPageObject.chargeBackDropdownYarnOption);*/
     }
 
+    //click on cluster drop down
+    public void selectMultiClusterId(String clusterId) {
+        waitExecuter.waitUntilElementClickable(chargebackYarnPageObject.YarnClusterDropdown);
+        waitExecuter.sleep(2000);
+        userActions.performActionWithPolling(chargebackYarnPageObject.YarnClusterDropdown, UserAction.CLICK);
+        userActions.performActionWithPolling(chargebackYarnPageObject.clusterSearchBox, UserAction.SEND_KEYS,
+                clusterId);
+        userActions.performActionWithPolling(chargebackYarnPageObject.clusterSearchFirstField, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(chargebackYarnPageObject.YarnClusterDropdown);
+    }
+
+
 
     public void selectTriggerCondition(String chargeBackType){
         waitExecuter.sleep(1000);
@@ -70,17 +82,21 @@ public class ChargeBackYarn {
         }
     }
 
-    //click on cluster drop down
-    public void selectChargeBackType(String selectChargeBack) {
-        waitExecuter.waitUntilElementClickable(chargebackYarnPageObject.chargeBackDropdownButton);
-        waitExecuter.sleep(2000);
-        userActions.performActionWithPolling(chargebackYarnPageObject.chargeBackDropdownButton, UserAction.CLICK);
-        userActions.performActionWithPolling(chargebackYarnPageObject.chargeBackSearchBox, UserAction.SEND_KEYS,
-                selectChargeBack);
-        waitExecuter.waitUntilPageFullyLoaded();
-        userActions.performActionWithPolling(chargebackYarnPageObject.chargeBackField, UserAction.CLICK);
-        waitExecuter.waitUntilElementClickable(chargebackYarnPageObject.chargeBackDropdownButton);
 
+    public void selectChargebackType(String ChargebackType) {
+        // Click on Impala chargeback dropdown
+        userActions.performActionWithPolling(chargebackYarnPageObject.yarnDropdownOption, UserAction.CLICK);
+        List<WebElement> userList = chargebackYarnPageObject.selectType;
+        String selectImpala = null;
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getText().equals(ChargebackType)) {
+                selectImpala = userList.get(i).getText();
+                LOGGER.info("Selected Impala from dropdown " + selectImpala);
+                waitExecuter.waitUntilElementClickable(userList.get(i));
+                userActions.performActionWithPolling(userList.get(i), UserAction.CLICK);
+                waitExecuter.sleep(2000);
+            }
+        }
     }
 
 

@@ -22,7 +22,7 @@ public class TC_ELK_08 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the log stash metrics all value should be loaded in unravel UI and matching with the endpoint data.")
   public void TC_ELK_08_verifyLogstashMetrics(String clusterId) {
-    test = extent.startTest("verifyLogstashMetrics: " + clusterId,
+    test = extent.startTest("TC_ELK_08_verifyLogstashMetrics: " + clusterId,
         "Validate logstash metrics JVM heap used, events received, events emited and events filtered. ");
     test.assignCategory(" ELK ");
     Log.startTestCase("verifyLogstashMetrics");

@@ -22,7 +22,7 @@ public class TC_ELK_06 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider",description="P0-Verify Memory KPI should be displayed.")
   public void TC_ELK_06_verifyMemoryKPI(String clusterId) {
-    test = extent.startTest("verifyMemoryKPI: " + clusterId,
+    test = extent.startTest("TC_ELK_06_verifyMemoryKPI: " + clusterId,
         "Validate Memory KPI.");
     test.assignCategory(" ELK ");
     Log.startTestCase("verifyMemoryKPI");

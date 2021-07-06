@@ -21,7 +21,7 @@ public class TC_ELK_15 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider",description="P0-Verified list should be associated with nodes under the pipeline")
   public void TC_ELK_15_verifyPipelineNodeList(String clusterId) {
-    test = extent.startTest("verifyPipelineNodeList: " + clusterId,
+    test = extent.startTest("TC_ELK_15_verifyPipelineNodeList: " + clusterId,
         "Validate nodes listed under pipeline.");
     test.assignCategory(" ELK ");
     Log.startTestCase("verifyPipelineNodeList");

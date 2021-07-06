@@ -6,15 +6,18 @@ import com.qa.enums.UserAction;
 import com.qa.pagefactory.DatePickerPageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.clusters.ChargebackImpalaPageObject;
+import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.clusters.impala.ChargeBackImpala;
 import com.qa.testcases.cluster.impala.resources.IM_RES_02;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.qa.utils.actions.UserActions;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.LogStatus;
@@ -49,23 +52,23 @@ public class TC_CB_02 extends BaseClass {
         UserActions userActions = new UserActions(driver);
         chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
         topPanelPageObject = new TopPanelPageObject(driver);
+        ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         chargeBackImpala.selectImpalaChargeback();
 
         chargeBackImpala.selectImpalaType("Impala");
-        waitExecuter.sleep(2000);
+        waitExecuter.sleep(3000);
 
-        // Click on cluster dropdown
-        test.log(LogStatus.INFO, "Click on cluster dropdown");
-        LOGGER.info("Click on cluster dropdown");
-        waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.containerDropdownArrow);
-        //chargebackImpalaPageObject.containerDropdownArrow.click();
-        userActions.performActionWithPolling(chargebackImpalaPageObject.containerDropdownArrow, UserAction.CLICK);
+        // Get cluster list
+        test.log(LogStatus.INFO, "Get cluster list");
+        LOGGER.info("Get cluster list");
         waitExecuter.sleep(1000);
-
-        // Assert the cluster size is not null
-        Assert.assertNotNull(chargebackImpala.getListOfClusters(chargebackImpalaPageObject.listOfClusters),
-            "There are no cluster available");
-        test.log(LogStatus.PASS, "The cluster list is not empty.");
+        applicationsPageObject.clusterSearchBox.click();
+        List<WebElement> listOfClusters = applicationsPageObject.getclusterListDropdown;
+        waitExecuter.sleep(1000);
+        //Verify that cluster list is not empty
+        Assert.assertTrue(listOfClusters.size() > 0, "Cluster list is empty");
+        test.log(LogStatus.PASS, "Verified that the cluster list is not empty. The size is: "
+                + listOfClusters.size());
 
     }
 

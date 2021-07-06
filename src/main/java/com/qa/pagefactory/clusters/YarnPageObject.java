@@ -20,10 +20,20 @@ public class YarnPageObject {
     public WebElement getResourcesPageHeader;
 
     @FindBy(xpath="(//span[contains(@class,'select2-selection__arrow')])[1]")
-    public WebElement yarnResourceType;
+    public WebElement resourceDropdownOption;
 
     @FindBy(xpath="//li[contains(text(),'Yarn')]")
     public List<WebElement> selectType;
+
+    @FindBy(xpath = "(//span[contains(@class,'select2-selection__arrow')])[2]")
+    public WebElement YarnClusterDropdown;
+
+    @FindBy(xpath="//span[contains(@class, 'select2-search--dropdown')]/input")
+    public WebElement clusterSearchBox;
+
+    @FindBy(xpath="//span[@class='select2-results']//li")
+    public WebElement clusterSearchFirstField;
+
 
     @FindBy(xpath = "//label[contains(text(), 'Group By')]/following-sibling::span/span/span/span[contains(@class,'select2-selection__arrow')]")
     public WebElement groupByDropdownButton;

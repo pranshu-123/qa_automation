@@ -36,14 +36,11 @@ public class YR_017 extends BaseClass {
         yarn.verifyYarnResourceHeaderisDisplayed();
         Log.info("Yarn Resource Header is displayed.");
         test.log(LogStatus.INFO, "Yarn Resource Header is displayed.");
-
-
-
-        YarnPageObject yarnPageObject = new YarnPageObject(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        waitExecuter.waitUntilPageFullyLoaded();
-        yarn.selectImpalaType("Yarn");
-        waitExecuter.sleep(3000);
+
+        //Select cluster id
+        yarn.selectResourceType("Yarn");
+        waitExecuter.sleep(2000);
         waitExecuter.waitUntilPageFullyLoaded();
         CommonPageObject commonPageObject = new CommonPageObject(driver);
         MouseActions.clickOnElement(driver, commonPageObject.clusterDropdown);

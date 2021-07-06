@@ -60,13 +60,14 @@ public class IM_RES_02 extends BaseClass {
 		test.log(LogStatus.INFO, "Selecting the cluster");
 		LOGGER.info("Selecting the cluster");
 		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
-		homePage.selectMultiClusterId(clusterId);
+		impala.selectMultiClusterId(clusterId);
+		LOGGER.info("Selected cluster: " + clusterId);
 		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 		waitExecuter.waitUntilPageFullyLoaded();
 		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
 		impala.selectImpalaType("Impala");
-		waitExecuter.sleep(3000);
+		waitExecuter.sleep(2000);
 
 		// Select custom date
 		test.log(LogStatus.INFO, "Selecting the custom date");

@@ -37,9 +37,7 @@ public class IM_RES_03 extends BaseClass {
     impala.selectImpalaResource();
     executer.sleep(2000);
 
-    HomePage homePage = new HomePage(driver);
-    homePage.selectMultiClusterId(clusterId);
-    executer.waitUntilPageFullyLoaded();
+    impala.selectMultiClusterId(clusterId);
 
     impala.selectImpalaType("Impala");
     executer.sleep(3000);
@@ -47,7 +45,7 @@ public class IM_RES_03 extends BaseClass {
     DatePicker datePicker = new DatePicker(driver);
     datePicker.clickOnDatePicker();
     executer.sleep(1000);
-    datePicker.selectThisMonth();
+    datePicker.selectLast90Days();
     executer.waitUntilPageFullyLoaded();
 
     List<String> memoryDateLabels = impala.getGraphDateLabel("memory");

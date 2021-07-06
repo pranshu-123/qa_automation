@@ -33,26 +33,18 @@ public class YR_010 extends BaseClass {
         //Initialize Yarn Page Object
         Yarn yarn = new Yarn(driver);
 
-        Impala impala = new Impala(driver);
-        waitExecuter.sleep(2000);
+
 
         yarn.verifyYarnResourceHeaderisDisplayed();
         Log.info("Yarn Resource Header is displayed.");
         test.log(LogStatus.INFO, "Yarn Resource Header is displayed.");
 
-
-
-
         //Select cluster id
-        HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
         waitExecuter.sleep(2000);
-        waitExecuter.waitUntilPageFullyLoaded();
-        Log.info("ClusterId is selected: "+clusterId);
-        test.log(LogStatus.INFO, "Cluster Id selected"+clusterId);
 
-        yarn.selectImpalaType("Yarn");
-        waitExecuter.sleep(3000);
+        yarn.selectMultiClusterId(clusterId);
+        yarn.selectResourceType("Yarn");
+        waitExecuter.sleep(2000);
 
         waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.waitUntilPageFullyLoaded();

@@ -56,22 +56,35 @@ public class Yarn {
         LOGGER.info("Yarn Page Header is: "+yarnPageObject.getResourcesPageHeader.getText());
     }
 
+
     //click on cluster drop down
-    public void selectImpalaType(String impalaType) {
+    public void selectResourceType(String resourceType) {
         // Click on Impala chargeback dropdown
-        userActions.performActionWithPolling(yarnPageObject.yarnResourceType, UserAction.CLICK);
+        userActions.performActionWithPolling(yarnPageObject.resourceDropdownOption, UserAction.CLICK);
         List<WebElement> userList = yarnPageObject.selectType;
-        String usernameSelected = null;
+        String selectImpala = null;
         for (int i = 0; i < userList.size(); i++) {
-            if (userList.get(i).getText().equals(impalaType)) {
-                usernameSelected = userList.get(i).getText();
-                LOGGER.info("Selected username from dropdown " + usernameSelected);
+            if (userList.get(i).getText().equals(resourceType)) {
+                selectImpala = userList.get(i).getText();
+                LOGGER.info("Selected Impala from dropdown " + selectImpala);
                 waitExecuter.waitUntilElementClickable(userList.get(i));
                 userActions.performActionWithPolling(userList.get(i), UserAction.CLICK);
                 waitExecuter.sleep(2000);
             }
         }
     }
+
+    //click on cluster drop down
+    public void selectMultiClusterId(String clusterId) {
+        waitExecuter.waitUntilElementClickable(yarnPageObject.YarnClusterDropdown);
+        waitExecuter.sleep(2000);
+        userActions.performActionWithPolling(yarnPageObject.YarnClusterDropdown, UserAction.CLICK);
+        userActions.performActionWithPolling(yarnPageObject.clusterSearchBox, UserAction.SEND_KEYS,
+                clusterId);
+        userActions.performActionWithPolling(yarnPageObject.clusterSearchFirstField, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(yarnPageObject.YarnClusterDropdown);
+    }
+
 
     /* Click on Group dropdown */
     public void clickOnGroupByDropDown(){

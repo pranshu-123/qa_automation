@@ -34,16 +34,12 @@ public class YR_011 extends BaseClass {
         Log.info("Yarn Resource Header is displayed.");
         test.log(LogStatus.INFO, "Yarn Resource Header is displayed.");
 
-
-        HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
+        //Select cluster id
         waitExecuter.sleep(2000);
-        waitExecuter.waitUntilPageFullyLoaded();
-        Log.info("ClusterId is selected: "+clusterId);
-        test.log(LogStatus.INFO, "Cluster Id selected"+clusterId);
 
-        yarn.selectImpalaType("Yarn");
-        waitExecuter.sleep(3000);
+        yarn.selectMultiClusterId(clusterId);
+        yarn.selectResourceType("Yarn");
+        waitExecuter.sleep(2000);
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();

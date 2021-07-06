@@ -38,6 +38,7 @@ public class IM_RES_13 extends BaseClass {
     LOGGER.info("Select impala from dropdown");
     impala.selectImpalaResource();
     waitExecuter.sleep(2000);
+
     impala.selectImpalaType("Impala");
     waitExecuter.sleep(3000);
 

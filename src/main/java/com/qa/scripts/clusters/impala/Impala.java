@@ -26,8 +26,8 @@ public class Impala {
 
 	/**
 	 * Constructer to initialize wait, driver and necessary objects
-	 * @param driver
-	 * - WebDriver instance
+	 *
+	 * @param driver - WebDriver instance
 	 */
 	public Impala(WebDriver driver) {
 		waitExecuter = new WaitExecuter(driver);
@@ -99,6 +99,34 @@ public class Impala {
 		return labels;
 	}
 
+	//click on cluster drop down
+	public void selectImpalaType(String resourceType) {
+		// Click on Impala chargeback dropdown
+		userActions.performActionWithPolling(impalaPageObject.impalaDropdownOption, UserAction.CLICK);
+		List<WebElement> userList = impalaPageObject.selectType;
+		String selectImpala = null;
+		for (int i = 0; i < userList.size(); i++) {
+			if (userList.get(i).getText().equals(resourceType)) {
+				selectImpala = userList.get(i).getText();
+				LOGGER.info("Selected Impala from dropdown " + selectImpala);
+				waitExecuter.waitUntilElementClickable(userList.get(i));
+				userActions.performActionWithPolling(userList.get(i), UserAction.CLICK);
+				waitExecuter.sleep(2000);
+			}
+		}
+	}
+
+	//click on cluster drop down
+	public void selectMultiClusterId(String clusterId) {
+		waitExecuter.waitUntilElementClickable(impalaPageObject.impalaYarnClusterDropdown);
+		waitExecuter.sleep(2000);
+		userActions.performActionWithPolling(impalaPageObject.impalaYarnClusterDropdown, UserAction.CLICK);
+		userActions.performActionWithPolling(impalaPageObject.clusterSearchBox, UserAction.SEND_KEYS,
+				clusterId);
+		userActions.performActionWithPolling(impalaPageObject.clusterSearchFirstField, UserAction.CLICK);
+		waitExecuter.waitUntilElementClickable(impalaPageObject.impalaYarnClusterDropdown);
+	}
+
 	/**
 	 * This method clear the filter present on impala page
 	 */
@@ -122,29 +150,29 @@ public class Impala {
 		}
 		if (graphName.equalsIgnoreCase("memory")) {
 			dateLabelElements = impalaPageObject.getChildElement(
-				impalaPageObject.graphXAxisDateLabels.get(0), By.tagName("text"));
+					impalaPageObject.graphXAxisDateLabels.get(0), By.tagName("text"));
 		} else {
 			dateLabelElements = impalaPageObject.getChildElement(
-				impalaPageObject.graphXAxisDateLabels.get(1), By.tagName("text"));
+					impalaPageObject.graphXAxisDateLabels.get(1), By.tagName("text"));
 		}
-		for (WebElement dateLabelElement: dateLabelElements) {
+		for (WebElement dateLabelElement : dateLabelElements) {
 			dateLabels.add(dateLabelElement.getText());
 		}
 		return dateLabels;
 	}
 
-	public void selectQueueInGroupBy(){
+	public void selectQueueInGroupBy() {
 		impalaPageObject.groupByDropdownButton.click();
 		waitExecuter.sleep(2000);
 		waitExecuter.waitUntilElementPresent(impalaPageObject.groupByQueueList);
 		impalaPageObject.groupByQueueList.click();
 	}
 
-	public void selectUserInGroupBy(){
+	public void selectUserInGroupBy() {
 		waitExecuter.sleep(1000);
 		try {
 			impalaPageObject.groupByDropdownButton.click();
-		}catch (StaleElementReferenceException e){
+		} catch (StaleElementReferenceException e) {
 			impalaPageObject.groupByDropdownButton.click();
 		}
 		waitExecuter.sleep(2000);
@@ -171,13 +199,13 @@ public class Impala {
 	}
 
 	//validate column name in Impala Queries Table, i.e
-	public Boolean validateHeaderColumnNameInImpalaQueriesTable(){
-		System.out.println("Size of Headers in Impala Queries Table: "+getImpalaQueriesTableHeaderColumnNames().size());
+	public Boolean validateHeaderColumnNameInImpalaQueriesTable() {
+		System.out.println("Size of Headers in Impala Queries Table: " + getImpalaQueriesTableHeaderColumnNames().size());
 		List<WebElement> listOfImpalaQueriesTableHeaderNames = getImpalaQueriesTableHeaderColumnNames();
 
 		ArrayList<String> listOfImpalaQueriesColumnNames = new ArrayList<String>();
 
-		for(int i=0; i <listOfImpalaQueriesTableHeaderNames.size()-1; i++){
+		for (int i = 0; i < listOfImpalaQueriesTableHeaderNames.size() - 1; i++) {
 			listOfImpalaQueriesColumnNames.add(listOfImpalaQueriesTableHeaderNames.get(i).getText());
 		}
 		List<String> definedImpalaQueriesColumnNames = Arrays.asList("Type", "State", "User", "App Name / ID",
@@ -193,7 +221,7 @@ public class Impala {
 	}
 
 
-		/*Get list of memory graph labels */
+	/*Get list of memory graph labels */
 	public List<String> getMemoryLabels() {
 		List<String> labels = new ArrayList<String>();
 		for (WebElement label : impalaPageObject.memoryFooterLabels) {
@@ -201,7 +229,6 @@ public class Impala {
 		}
 		return labels;
 	}
-
 
 
 	/**
@@ -214,25 +241,5 @@ public class Impala {
 		// Click on Chargeback tab
 		waitExecuter.waitUntilElementClickable(impalaPageObject.resourcesTab);
 		userActions.performActionWithPolling(impalaPageObject.resourcesTab, UserAction.CLICK);
-		// Click on chargeback dropdown
 	}
-
-
-	//click on cluster drop down
-	public void selectImpalaType(String impalaType) {
-		// Click on Impala chargeback dropdown
-		userActions.performActionWithPolling(impalaPageObject.impalaResourceType, UserAction.CLICK);
-		List<WebElement> userList = impalaPageObject.selectImpala;
-		String usernameSelected = null;
-		for (int i = 0; i < userList.size(); i++) {
-			if (userList.get(i).getText().equals(impalaType)) {
-				usernameSelected = userList.get(i).getText();
-				LOGGER.info("Selected username from dropdown " + usernameSelected);
-				waitExecuter.waitUntilElementClickable(userList.get(i));
-				userActions.performActionWithPolling(userList.get(i), UserAction.CLICK);
-				waitExecuter.sleep(2000);
-			}
-		}
-	}
-
 }

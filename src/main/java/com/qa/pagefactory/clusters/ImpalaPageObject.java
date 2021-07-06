@@ -19,7 +19,7 @@ public class ImpalaPageObject {
     @FindBy(xpath = "(//div[contains(@class,'highcharts-container')])[1]")
     public WebElement memoryHighChartContainer;
 
-    @FindBy(xpath = "(//span[contains(@class,'select2-selection__arrow')])[2]")
+    @FindBy(xpath = "(//span[contains(@class,'select2-selection__arrow')])[3]")
     public WebElement groupByDropdownButton;
 
     @FindBy(xpath = "//li[contains(text(),'Queue')]")
@@ -85,6 +85,27 @@ public class ImpalaPageObject {
     @FindBy(xpath = "//div[@id=\"queryGraph\"]//label")
     public List<WebElement> queriesFooterLabels;
 
+    @FindBy(xpath="(//span[contains(@class,'select2-selection__arrow')])[1]")
+    public WebElement impalaDropdownOption;
+
+    @FindBy(xpath = "//span[contains(@class,'select2-selection__arrow')]")
+    public WebElement clusterDropdown;
+
+    @FindBy(xpath = "(//span[contains(@class,'select2-selection__arrow')])[2]")
+    public WebElement impalaYarnClusterDropdown;
+
+    @FindBy(xpath="//span[contains(@class, 'select2-search--dropdown')]/input")
+    public WebElement clusterSearchBox;
+
+    @FindBy(xpath="//span[@class='select2-results']//li")
+    public WebElement clusterSearchFirstField;
+
+    @FindBy(xpath = "//span[contains(@class,'select2-dropdown--below')]//li")
+    public List<WebElement> listOfClusters;
+
+    @FindBy(xpath="//li[contains(text(),'Impala')]")
+    public List<WebElement> selectType;
+
     @FindBy(xpath = "//span[contains(@class,'select2-selection__choice__remove')]")
     public List<WebElement> filterRemoveElements;
 
@@ -115,7 +136,7 @@ public class ImpalaPageObject {
     @FindBy(xpath="//li[contains(text(),'Impala')]")
     public  List<WebElement> selectImpala;
 
-    @FindBy(css = "a.dropbtn.pointer")
+    @FindBy(xpath = "(//span[contains(@class,'select2-selection__arrow')])[1]")
     public WebElement resourceUsagePointer;
 
     @FindBy(xpath = "//div[contains(@class,'dropdown-content-display')]/a[contains(text(),'Impala')]")

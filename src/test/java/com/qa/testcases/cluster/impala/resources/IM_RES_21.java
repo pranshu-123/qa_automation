@@ -44,8 +44,7 @@ public class IM_RES_21 extends BaseClass {
     waitExecuter.sleep(2000);
     waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
-    HomePage homePage = new HomePage(driver);
-    homePage.selectMultiClusterId(clusterId);
+    impala.selectMultiClusterId(clusterId);
     waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
     impala.selectImpalaType("Impala");

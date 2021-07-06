@@ -23,7 +23,7 @@ public class TC_ELK_20 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider",description="P1-Verify the Kibana metrics graph should be loaded and match with the Kibana UI graph..")
     public void TC_ELK_20_verifyKibanaMetricsGraphs(String clusterId) {
-        test = extent.startTest("verifyKibanaMetricsGraphs: " + clusterId,
+        test = extent.startTest("TC_ELK_20_verifyKibanaMetricsGraphs: " + clusterId,
                 "Verify the Kibana metrics graph should be loaded and match with the Kibana UI graph.");
         test.assignCategory(" ELK ");
         Log.startTestCase("verifyKibanaMetricsGraphs");

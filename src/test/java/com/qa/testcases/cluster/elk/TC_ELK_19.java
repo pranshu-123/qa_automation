@@ -22,7 +22,7 @@ public class TC_ELK_19 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the Kibana KPIs must be loaded into the Unravel UI, and the value should match the configuration file in the Kibana UI.")
   public void TC_ELK_19_verifyKibanaKPIs(String clusterId) {
-    test = extent.startTest("verifyKibanaKPIs: " + clusterId,
+    test = extent.startTest("TC_ELK_19_verifyKibanaKPIs: " + clusterId,
         "Validate Kibana KPI in UI.");
     test.assignCategory(" ELK ");
     Log.startTestCase("verifyKibanaKPIs");

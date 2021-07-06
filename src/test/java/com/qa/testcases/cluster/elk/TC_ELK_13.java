@@ -21,7 +21,7 @@ public class TC_ELK_13 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider",description="Verify All the columns Events received, events emitted, events filtered, and the number of nodes that should be loaded in the UI.")
   public void TC_ELK_13_verifyLogstashPipelineTableData(String clusterId) {
-    test = extent.startTest("verifyLogstashPipelineTableData: " + clusterId,
+    test = extent.startTest("TC_ELK_13_verifyLogstashPipelineTableData: " + clusterId,
         "Validate columns in pipeline table");
     test.assignCategory(" ELK ");
     Log.startTestCase("verifyLogstashPipelineTableData");

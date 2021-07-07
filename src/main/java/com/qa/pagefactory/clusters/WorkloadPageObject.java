@@ -51,9 +51,6 @@ public class WorkloadPageObject {
     @FindBy(css = "body div b:nth-child(3)")
     public WebElement currentmonthHeader;
 
-    @FindBy(xpath = "(//span[contains(@class,'select2-selection__arrow')])[2]")
-    public WebElement workloadClusterDropdown;
-
     @FindBy(xpath="(//span[contains(@class,'select2-selection__arrow')])[1]")
     public WebElement workloadDropdownOption;
 

@@ -111,16 +111,6 @@ public class Workload {
         }
     }
 
-    //click on cluster drop down
-    public void selectMultiClusterId(String clusterId) {
-        MouseActions.clickOnElement(driver, workloadPageObject.workloadClusterDropdown);
-        waitExecuter.sleep(2000);
-        waitExecuter.waitUntilElementPresent(workloadPageObject.clusterSearchBox);
-        workloadPageObject.clusterSearchBox.sendKeys(clusterId);
-        workloadPageObject.clusterSearchFirstField.click();
-        waitExecuter.sleep(2000);
-    }
-
     //click on workload View By
     public void selectViewBy(String viewBy) {
         MouseActions.clickOnElement(driver, workloadPageObject.selectViewBy);

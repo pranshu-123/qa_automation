@@ -62,7 +62,7 @@ public class YR_014 extends BaseClass {
         System.out.println("All ApplicationType : filter elements: "+allFilterElements);
         Log.info("All ApplicationType : filter elements: "+ allFilterElements);
         test.log(LogStatus.INFO, "All ApplicationType : filter elements: "+ allFilterElements);
-        Assert.assertTrue(yarn.verifyFilterElements(), "Application Type: Filter elements MAPREDUCE,MAPREDUCE_OOZIE5,SPARK, TEZ is mismatch.");
+        Assert.assertTrue(yarn.verifyFilterElements(), "Application Type: Filter elements MAPREDUCE,MAPREDUCE_OOZIE5,SPARK is mismatch.");
 
         yarn.clickOnGroupByDropDown();
         yarn.selectUser();

@@ -31,26 +31,27 @@ public class TC_CTP_04 extends BaseClass {
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         WorkloadPageObject workloadPageObject = new WorkloadPageObject(driver);
-        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-        MouseActions.clickOnElement(driver, topPanelPageObject.workloadTab);
         Workload workload = new Workload(driver);
-        workload.selectByYarn();
-
+        workload.selectWorkloadTab();
+        waitExecuter.sleep(2000);
 
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
 
-        HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
+        workload.selectMultiClusterId(clusterId);
+        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilPageFullyLoaded();
+
+        workload.selectWorkloadType("Impala");
+        waitExecuter.sleep(2000);
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         datePicker.selectLast7Days();
         waitExecuter.sleep(1000);
-
+        workload.selectViewBy("Month");
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.getText().trim());
 
-        workload.clickOnMonth();
         waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Verify View By Month");
 
@@ -61,7 +62,7 @@ public class TC_CTP_04 extends BaseClass {
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.getText().trim());
         waitExecuter.waitUntilPageFullyLoaded();
-        workload.clickOnDay();
+        workload.selectViewBy("Day");
         waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Verify View By Day");
 
@@ -72,7 +73,7 @@ public class TC_CTP_04 extends BaseClass {
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.getText().trim());
         waitExecuter.waitUntilPageFullyLoaded();
-        workload.clickOnHour();
+        workload.selectViewBy("Hour");
         test.log(LogStatus.PASS, "Verify View By Hour");
 
 
@@ -84,7 +85,7 @@ public class TC_CTP_04 extends BaseClass {
                 + workloadPageObject.timerangeMessageElement.getText().trim());
         waitExecuter.sleep(1000);
 
-        workload.clickOnHourDay();
+        workload.selectViewBy("Hour/Day");
         test.log(LogStatus.PASS, "Verify View By Hour/Day");
         waitExecuter.sleep(1000);
 

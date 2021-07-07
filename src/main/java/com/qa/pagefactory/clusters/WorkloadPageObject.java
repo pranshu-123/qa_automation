@@ -18,7 +18,7 @@ public class WorkloadPageObject {
     @FindBy(xpath = "//ul[contains(concat(' ', @class, ' '), 'select2-results__options')]/li")
     public List<WebElement> clusterList;
 
-    @FindBy(xpath = "(//span[contains(.,'Workload')])[1]")
+    @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Workload'])")
     public WebElement workloadTab;
 
     @FindBy(css = "a.dropbtn.pointer")
@@ -48,8 +48,35 @@ public class WorkloadPageObject {
     @FindBy(css = "div#cluster-workload b:nth-child(3)")
     public WebElement timerangeMessageElement;
 
-    @FindBy(xpath = "//h3[contains(text(),'datewise')]")
+    @FindBy(css = "body div b:nth-child(3)")
     public WebElement currentmonthHeader;
+
+    @FindBy(xpath = "(//span[contains(@class,'select2-selection__arrow')])[2]")
+    public WebElement workloadClusterDropdown;
+
+    @FindBy(xpath="(//span[contains(@class,'select2-selection__arrow')])[1]")
+    public WebElement workloadDropdownOption;
+
+    @FindBy(xpath="//li[contains(text(),'Yarn')]")
+    public List<WebElement> selectType;
+
+    @FindBy(xpath = "//div[@class='view-by cluster-usage-header']//span[@role='presentation']")
+    public WebElement selectViewBy;
+
+    @FindBy(xpath = "//div[@class='pull-right cluster-usage-header pt-2']//span[@role='presentation']")
+    public WebElement aggregateBy;
+
+    @FindBy(xpath = "//div[@class='pull-right']//span[@role='presentation']")
+    public WebElement selectGroupBy;
+
+    @FindBy(xpath = "//span[@class='select2-results']//li")
+    public List<WebElement> selectDropdown;
+
+    @FindBy(xpath="//input[@role='searchbox']")
+    public WebElement clusterSearchBox;
+
+    @FindBy(xpath="//span[@class='select2-results']//li")
+    public WebElement clusterSearchFirstField;
 
     @FindBy(xpath = "//*[@class='close pointer']")
     public WebElement loadWinClose;
@@ -114,7 +141,7 @@ public class WorkloadPageObject {
     @FindBy(xpath = "//*[@id=\"kindTable\"]/div[1]")
     public WebElement jobtableHeader;
 
-    @FindBy(xpath = "//b[contains(text(),'05')]")
+    @FindBy(css = "body div b:nth-child(3)")
     public WebElement timeRange;
 
 

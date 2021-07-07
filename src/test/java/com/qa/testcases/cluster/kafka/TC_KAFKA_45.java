@@ -28,7 +28,7 @@ public class TC_KAFKA_45 extends BaseClass {
     KafkaPage kafkaPage = new KafkaPage(driver);
     KafkaPageObject kafkaPageObject = new KafkaPageObject(driver);
 
-    kafkaPage.navigateToBrokerTab(kafkaPageObject);
+    kafkaPage.navigateToBrokerTab(kafkaPageObject, clusterId);
     kafkaPage.verifyBrokerMetricsColSort(kafkaPageObject);
     test.log(LogStatus.PASS, "Verified sorting for all columns in broker metrics table successfully ");
   }

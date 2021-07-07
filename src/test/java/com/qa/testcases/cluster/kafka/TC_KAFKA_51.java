@@ -28,7 +28,7 @@ public class TC_KAFKA_51 extends BaseClass {
     KafkaPage kafkaPage = new KafkaPage(driver);
     KafkaPageObject kafkaPageObject = new KafkaPageObject(driver);
 
-    kafkaPage.navigateToBrokerTab(kafkaPageObject);
+    kafkaPage.navigateToBrokerTab(kafkaPageObject, clusterId);
     kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject,"# Under Replicated Partitions","kafkaGraph4");
     test.log(LogStatus.PASS, "Verified '# Under Replicated Partitions' details under broker tab for" +
         " selected broker successfully ");

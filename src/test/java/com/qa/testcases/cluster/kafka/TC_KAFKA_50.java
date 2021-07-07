@@ -28,7 +28,7 @@ public class TC_KAFKA_50 extends BaseClass {
     KafkaPage kafkaPage = new KafkaPage(driver);
     KafkaPageObject kafkaPageObject = new KafkaPageObject(driver);
 
-    kafkaPage.navigateToBrokerTab(kafkaPageObject);
+    kafkaPage.navigateToBrokerTab(kafkaPageObject, clusterId);
     kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject,"Total Fetch Requests per Second","kafkaGraph3");
     test.log(LogStatus.PASS, "Verified 'Total Fetch Requests per Second' details under broker tab for" +
         " selected broker successfully ");

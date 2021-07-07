@@ -35,7 +35,7 @@ public class TC_KAFKA_26 extends BaseClass {
     MouseActions.clickOnElement(driver, kafkaPageObject.kafkaTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
-    kafkaPage.verifyClusterDropDown(kafkaPageObject);
+    kafkaPage.verifyClusterDropDown(kafkaPageObject, clusterId);
     kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject, "# Partition Count", "kafkaGraph7");
     test.log(LogStatus.PASS, "Verified '# Partition Count' KPI information name" +
         " ,values and graphs successfully ");

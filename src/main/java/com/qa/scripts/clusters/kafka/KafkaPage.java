@@ -2,6 +2,7 @@ package com.qa.scripts.clusters.kafka;
 
 import com.qa.pagefactory.clusters.KafkaPageObject;
 import com.qa.scripts.DatePicker;
+import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import org.openqa.selenium.By;
@@ -37,11 +38,11 @@ public class KafkaPage {
   /***
    * Method to Navigate to Kafka tab and then to broker tab
    */
-  public void navigateToBrokerTab(KafkaPageObject kafkaPageObject) {
+  public void navigateToBrokerTab(KafkaPageObject kafkaPageObject, String clusterId) {
     MouseActions.clickOnElement(driver, kafkaPageObject.kafkaTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
-    verifyClusterDropDown(kafkaPageObject);
+    verifyClusterDropDown(kafkaPageObject, clusterId);
     MouseActions.clickOnElement(driver, kafkaPageObject.brokerTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
@@ -50,11 +51,11 @@ public class KafkaPage {
   /***
    * Method to Navigate to Kafka tab and then to Topic tab
    */
-  public void navigateToTopicTab(KafkaPageObject kafkaPageObject) {
+  public void navigateToTopicTab(KafkaPageObject kafkaPageObject, String clusterId) {
     MouseActions.clickOnElement(driver, kafkaPageObject.kafkaTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
-    verifyClusterDropDown(kafkaPageObject);
+    verifyClusterDropDown(kafkaPageObject, clusterId);
     MouseActions.clickOnElement(driver, kafkaPageObject.topicTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
@@ -63,8 +64,8 @@ public class KafkaPage {
   /***
    * Method to verify kafka cluster name in tab
    */
-  public void verifyClusterName(KafkaPageObject kafkaPageObject) {
-    String expectedClusterName = verifyClusterDropDown(kafkaPageObject);
+  public void verifyClusterName(KafkaPageObject kafkaPageObject, String clusterId) {
+    String expectedClusterName = verifyClusterDropDown(kafkaPageObject, clusterId);
     String clusterName = kafkaPageObject.kafkaHeaderTab.getText();
     logger.info("The cluster name in the tab is " + clusterName + " Expected Cluster name is " + expectedClusterName);
     Assert.assertTrue(clusterName.contains(expectedClusterName), " Clustername does not match\n" +
@@ -74,19 +75,28 @@ public class KafkaPage {
   /***
    * Method to verify the kafka cluster dropdown
    */
-  public String verifyClusterDropDown(KafkaPageObject kafkaPageObject) {
+  public String verifyClusterDropDown(KafkaPageObject kafkaPageObject, String clusterId) {
+    // Select cluster
     waitExecuter.waitUntilElementClickable(kafkaPageObject.kafkaClusterDropDown);
-    waitExecuter.sleep(2000);
+    waitExecuter.sleep(3000);
     MouseActions.clickOnElement(driver, kafkaPageObject.kafkaClusterDropDown);
-    waitExecuter.sleep(2000);
+    waitExecuter.sleep(3000);
     List<WebElement> kafkaClusterList = kafkaPageObject.kafkaClusters;
     Assert.assertFalse(kafkaClusterList.isEmpty(), "The drop down list for kafka cluster is empty");
+    logger.info("Select Cluster: " + clusterId);
     String clustername = kafkaClusterList.get(0).getText();
-    MouseActions.clickOnElement(driver, kafkaClusterList.get(0));
-
+    for (int i =0 ;i< kafkaClusterList.size(); i++)
+    {
+      String tempClusterName = kafkaClusterList.get(i).getText();
+      logger.info("tempClusterName = "+ tempClusterName);
+      if (tempClusterName.equals(clusterId)) {
+        MouseActions.clickOnElement(driver, kafkaClusterList.get(i));
+        break;
+      }
+    }
     datePicker.clickOnDatePicker();
     waitExecuter.sleep(1000);
-    datePicker.selectLast7Days();
+    datePicker.selectLast30Days();
     waitExecuter.sleep(3000);
     waitExecuter.waitUntilPageFullyLoaded();
 

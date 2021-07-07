@@ -28,7 +28,7 @@ public class TC_KAFKA_66 extends BaseClass {
     KafkaPage kafkaPage = new KafkaPage(driver);
     KafkaPageObject kafkaPageObject = new KafkaPageObject(driver);
 
-    kafkaPage.navigateToBrokerTab(kafkaPageObject);
+    kafkaPage.navigateToBrokerTab(kafkaPageObject, clusterId);
     kafkaPage.verifyTopicRecordPerBroker(kafkaPageObject);
     test.log(LogStatus.PASS, "Verified topic records with all details for selected broker under broker" +
         " tab successfully ");

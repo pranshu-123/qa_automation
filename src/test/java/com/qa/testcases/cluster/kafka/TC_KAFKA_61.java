@@ -28,7 +28,7 @@ public class TC_KAFKA_61 extends BaseClass {
     KafkaPage kafkaPage = new KafkaPage(driver);
     KafkaPageObject kafkaPageObject = new KafkaPageObject(driver);
 
-    kafkaPage.navigateToBrokerTab(kafkaPageObject);
+    kafkaPage.navigateToBrokerTab(kafkaPageObject, clusterId);
     kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject,"Produce Purgatory Size", "kafkaGraph14");
     test.log(LogStatus.PASS, "Verified 'Produce Purgatory Size' details under broker tab for" +
         " selected broker successfully ");

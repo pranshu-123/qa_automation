@@ -28,7 +28,7 @@ public class TC_KAFKA_73 extends BaseClass {
     KafkaPage kafkaPage = new KafkaPage(driver);
     KafkaPageObject kafkaPageObject = new KafkaPageObject(driver);
 
-    kafkaPage.navigateToTopicTab(kafkaPageObject);
+    kafkaPage.navigateToTopicTab(kafkaPageObject, clusterId);
     kafkaPage.verifySelectedTopicRecordColor(kafkaPageObject);
     test.log(LogStatus.PASS, "Verified selected topic records colour successfully ");
   }

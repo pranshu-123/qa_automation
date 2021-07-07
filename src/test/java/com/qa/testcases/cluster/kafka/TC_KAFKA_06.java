@@ -36,7 +36,7 @@ public class TC_KAFKA_06 extends BaseClass {
     MouseActions.clickOnElement(driver, kafkaPageObject.kafkaTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
-    // kafkaPage.verifyClusterDropDown(kafkaPageObject);
+    kafkaPage.verifyClusterDropDown(kafkaPageObject, clusterId);
     kafkaPage.verifyKafkaClusterKPIs(kafkaPageObject, "");
     test.log(LogStatus.PASS, "Verified connected Kafka cluster details successfully ");
   }

@@ -29,7 +29,7 @@ public class TC_KAFKA_42 extends BaseClass {
     KafkaPage kafkaPage = new KafkaPage(driver);
     KafkaPageObject kafkaPageObject = new KafkaPageObject(driver);
 
-    kafkaPage.navigateToBrokerTab(kafkaPageObject);
+    kafkaPage.navigateToBrokerTab(kafkaPageObject, clusterId);
     Assert.assertTrue(kafkaPageObject.brokerSearchBox.isDisplayed(),"The broker search box is not displayed in the UI");
     test.log(LogStatus.PASS, "Verified search box before broker metrics successfully ");
   }

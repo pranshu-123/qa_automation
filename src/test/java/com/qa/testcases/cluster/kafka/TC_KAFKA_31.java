@@ -35,7 +35,7 @@ public class TC_KAFKA_31 extends BaseClass {
     MouseActions.clickOnElement(driver, kafkaPageObject.kafkaTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
-    kafkaPage.verifyClusterDropDown(kafkaPageObject);
+    kafkaPage.verifyClusterDropDown(kafkaPageObject, clusterId);
     kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject, "# Fetch Requests per Sec", "kafkaGraph12");
     test.log(LogStatus.PASS, "Verified '# Fetch Requests per Sec' KPI information name" +
         " ,values and graphs successfully ");

@@ -36,7 +36,7 @@ public class TC_KAFKA_37 extends BaseClass {
     MouseActions.clickOnElement(driver, kafkaPageObject.kafkaTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
-    kafkaPage.verifyClusterDropDown(kafkaPageObject);
+    kafkaPage.verifyClusterDropDown(kafkaPageObject, clusterId);
     Assert.assertTrue(kafkaPageObject.topicSearchBox.isDisplayed(), "The search box is not displayed");
     test.log(LogStatus.PASS, "Verified searchbox is present successfully ");
   }

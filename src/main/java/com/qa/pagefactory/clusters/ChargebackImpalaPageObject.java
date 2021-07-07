@@ -30,17 +30,8 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "//li[contains(@class,'select2-results__option')]")
     public List<WebElement> clustersList;
 
-    @FindBy(xpath = "//span[contains(@class,'select2-selection__arrow')]")
+    @FindBy(css = ".select-cluster ~ .select2 .selection .select2-selection__arrow")
     public WebElement clusterDropdown;
-
-    @FindBy(xpath = "(//span[contains(@class,'select2-selection__arrow')])[2]")
-    public WebElement impalaYarnClusterDropdown;
-
-    @FindBy(xpath="//span[contains(@class, 'select2-search--dropdown')]/input")
-    public WebElement clusterSearchBox;
-
-    @FindBy(xpath="//span[@class='select2-results']//li")
-    public WebElement clusterSearchFirstField;
 
     @FindBy(xpath = "//span[contains(@class,'select2-dropdown--below')]//li")
     public List<WebElement> listOfClusters;
@@ -60,13 +51,6 @@ public class ChargebackImpalaPageObject {
 
     @FindBy(xpath = "//table[@id='finishedImpalaJobsTable']/tbody/tr/td[3]/span[1]")
     public List<WebElement> getUsersFromFinishedImpalaJobsTable;
-
-    @FindBy(xpath = "(//span[contains(@class, 'select2-selection__arrow')])[2]")
-    public WebElement containerDropdownArrow;
-
-    @FindBy(xpath = "//span[contains(@class,'select2-container')]/span/span/input[contains(@class, 'select2-search__field')]")
-    public WebElement clusterDropdownSearchbox;
-
 
     @FindBy(xpath = "//span[contains(@class, 'select2-selection--multiple')]")
     public WebElement groupBySearchBox;
@@ -152,7 +136,7 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "(//div[contains(@class,'dashboard-module')])[2]//h4/span")
     public WebElement CPUHoursFromGraphHeader;
 
-    @FindBy(xpath = "//div[@class='col-content']//div[3]//div[1]//div[1]//h4[1]//span[1]")
+    @FindBy(xpath = "//div[@class='col-md-4'][3]//h4/span")
     public WebElement MemoryHoursFromGraphHeader;
 
     @FindBy(xpath = "//div[@class='col-md-4'][2]//h4/span")

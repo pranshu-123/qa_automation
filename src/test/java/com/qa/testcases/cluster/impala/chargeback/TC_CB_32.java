@@ -50,9 +50,9 @@ public class TC_CB_32 extends BaseClass {
 		chargeBackImpala.selectImpalaChargeback();
 
 		// Select the cluster
-		test.log(LogStatus.INFO, "Select clusterId : " + clusterId);
-		LOGGER.info("Select clusterId : " + clusterId);
-		chargeBackImpala.selectMultiClusterId(clusterId);
+		test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
+		HomePage homePage = new HomePage(driver);
+		homePage.selectMultiClusterId(clusterId);
 		waitExecuter.sleep(1000);
 
 		chargeBackImpala.selectImpalaType("Impala");

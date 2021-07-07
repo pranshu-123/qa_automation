@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.qa.utils.WaitExecuter;
+import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -35,8 +36,9 @@ public class TC_CB_20 extends BaseClass {
         //Select Cluster
         HomePage homePage = new HomePage(driver);
         ChargebackImpalaPageObject cbPageObject = new ChargebackImpalaPageObject(driver);
-        chargeBackImpala.selectMultiClusterId(clusterId);
-        LOGGER.info("Selected cluster: " + clusterId, test);
+        // Select the cluster
+        test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
+        homePage.selectMultiClusterId(clusterId);
 
         chargeBackImpala.selectImpalaType("Impala");
         waitExecuter.sleep(2000);

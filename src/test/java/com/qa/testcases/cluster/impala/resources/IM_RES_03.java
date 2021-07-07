@@ -37,7 +37,8 @@ public class IM_RES_03 extends BaseClass {
     impala.selectImpalaResource();
     executer.sleep(2000);
 
-    impala.selectMultiClusterId(clusterId);
+    HomePage homePage = new HomePage(driver);
+    homePage.selectMultiClusterId(clusterId);
 
     impala.selectImpalaType("Impala");
     executer.sleep(3000);

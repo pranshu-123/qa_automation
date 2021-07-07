@@ -39,7 +39,10 @@ public class IM_RES_24  extends BaseClass {
         waitExecuter.sleep(2000);
         waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         //Select cluster id
-        impala.selectMultiClusterId(clusterId);
+        // Select the cluster
+        test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
+        HomePage homePage = new HomePage(driver);
+        homePage.selectMultiClusterId(clusterId);
         waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
         impala.selectImpalaType("Impala");
@@ -49,7 +52,7 @@ public class IM_RES_24  extends BaseClass {
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
-        datePicker.selectLast30Days();
+        datePicker.selectLast90Days();
         waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         test.log(LogStatus.INFO, "Select Date from DatePicker.");
 

@@ -48,11 +48,10 @@ public class IM_RES_04 extends BaseClass {
 		LOGGER.info("Select impala from dropdown");
 		impala.selectImpalaResource();
 		waitExecuter.sleep(2000);
-		
+
 		// Select the cluster
-		test.log(LogStatus.INFO, "Selecting the cluster");
-		LOGGER.info("Selecting the cluster");
-		impala.selectMultiClusterId(clusterId);
+		test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
+		homePage.selectMultiClusterId(clusterId);
 		waitExecuter.sleep(1000);
 
 		impala.selectImpalaType("Impala");

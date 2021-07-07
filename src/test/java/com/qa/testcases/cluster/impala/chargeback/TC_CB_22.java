@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.impala.chargeback;
 
+import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -36,8 +37,9 @@ public class TC_CB_22 extends BaseClass {
 		// Select Cluster
 		HomePage homePage = new HomePage(driver);
 		WaitExecuter wait = new WaitExecuter(driver);
-		chargeBackImpala.selectMultiClusterId(clusterId);
-		LOGGER.info("Selected cluster: " + clusterId, test);
+		// Select the cluster
+		test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
+		homePage.selectMultiClusterId(clusterId);
 
 		chargeBackImpala.selectImpalaType("Impala");
 		wait.sleep(2000);
@@ -45,7 +47,7 @@ public class TC_CB_22 extends BaseClass {
 		LOGGER.info("Selected cluster: " + clusterId, test);
 		DatePicker datePicker = new DatePicker(driver);
 		datePicker.clickOnDatePicker();
-		//datePicker.selectLast30Days();
+		datePicker.selectLast90Days();
 		LOGGER.info("Select last 90 days", test);
 		chargeBackImpala.clickOnGroupBySearchBox();
 		chargeBackImpala.selectGroupBy(GroupByOptions.INPUT_TABLES);

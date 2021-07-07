@@ -38,8 +38,10 @@ public class TC_CB_31 extends BaseClass {
 		// Select the cluster
 		LOGGER.info("Selecting the cluster");
 		waitExecuter.sleep(1000);
+		// Select the cluster
+		test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
 		HomePage homePage = new HomePage(driver);
-		chargeBackImpala.selectMultiClusterId(clusterId);
+		homePage.selectMultiClusterId(clusterId);
 
 		chargeBackImpala.selectImpalaType("Impala");
 		waitExecuter.sleep(2000);

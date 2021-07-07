@@ -33,7 +33,8 @@ public class TC_CB_05 extends BaseClass {
 
         //Cluster selected
         HomePage homePage = new HomePage(driver);
-        chargeBackImpala.selectMultiClusterId(clusterId);
+        homePage.selectMultiClusterId(clusterId);
+        waitExecuter.waitUntilPageFullyLoaded();
 
         chargeBackImpala.selectImpalaType("Impala");
         waitExecuter.sleep(2000);

@@ -47,28 +47,7 @@ public class ChargeBackYarn {
         // Click on Chargeback tab
         waitExecuter.waitUntilElementClickable(chargebackYarnPageObject.clusterChargeBackTab);
         JavaScriptExecuter.clickOnElement(driver, chargebackYarnPageObject.clusterChargeBackTab);
-        // Click on chargeback dropdown
-       /* waitExecuter.waitUntilElementPresent(chargebackYarnPageObject.chargeBackDropdownOptionsButton);
-        driver.navigate().refresh();
-        waitExecuter.waitUntilElementPresent(chargebackYarnPageObject.chargeBackDropdownOptionsButton);
-        JavaScriptExecuter.clickOnElement(driver, chargebackYarnPageObject.chargeBackDropdownOptionsButton);
-        // Selecting the impala option
-        waitExecuter.sleep(3000);
-        JavaScriptExecuter.clickOnElement(driver, chargebackYarnPageObject.chargeBackDropdownYarnOption);*/
     }
-
-    //click on cluster drop down
-    public void selectMultiClusterId(String clusterId) {
-        waitExecuter.waitUntilElementClickable(chargebackYarnPageObject.YarnClusterDropdown);
-        waitExecuter.sleep(2000);
-        userActions.performActionWithPolling(chargebackYarnPageObject.YarnClusterDropdown, UserAction.CLICK);
-        userActions.performActionWithPolling(chargebackYarnPageObject.clusterSearchBox, UserAction.SEND_KEYS,
-                clusterId);
-        userActions.performActionWithPolling(chargebackYarnPageObject.clusterSearchFirstField, UserAction.CLICK);
-        waitExecuter.waitUntilElementClickable(chargebackYarnPageObject.YarnClusterDropdown);
-    }
-
-
 
     public void selectTriggerCondition(String chargeBackType){
         waitExecuter.sleep(1000);

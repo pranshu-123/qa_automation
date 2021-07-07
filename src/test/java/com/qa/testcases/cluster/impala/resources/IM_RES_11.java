@@ -43,7 +43,10 @@ public class IM_RES_11 extends BaseClass {
         // Select the cluster
         LOGGER.info("Selecting the cluster");
         waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
-        impala.selectMultiClusterId(clusterId);
+        // Select the cluster
+        test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
+        HomePage homePage = new HomePage(driver);
+        homePage.selectMultiClusterId(clusterId);
         waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
         impala.selectImpalaType("Impala");

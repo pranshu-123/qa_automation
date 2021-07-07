@@ -75,18 +75,6 @@ public class ChargeBackImpala {
         }
     }
 
-    //click on cluster drop down
-    public void selectMultiClusterId(String clusterId) {
-        waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.impalaYarnClusterDropdown);
-        waitExecuter.sleep(2000);
-        userActions.performActionWithPolling(chargebackImpalaPageObject.impalaYarnClusterDropdown, UserAction.CLICK);
-        userActions.performActionWithPolling(chargebackImpalaPageObject.clusterSearchBox, UserAction.SEND_KEYS,
-                clusterId);
-        userActions.performActionWithPolling(chargebackImpalaPageObject.clusterSearchFirstField, UserAction.CLICK);
-        waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.impalaYarnClusterDropdown);
-    }
-
-
     /**
      * This method is use to return all results grouped by user table rows.
      *

@@ -30,7 +30,11 @@ public class YC_021 extends BaseClass {
         chargeBackYarn.selectYarnChargeback();
         waitExecuter.sleep(2000);
 
-        chargeBackYarn.selectMultiClusterId(clusterId);
+        // Select the cluster
+        test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
+        HomePage homePage = new HomePage(driver);
+        homePage.selectMultiClusterId(clusterId);
+        waitExecuter.sleep(1000);
         chargeBackYarn.selectChargebackType("Yarn");
         waitExecuter.sleep(2000);
 

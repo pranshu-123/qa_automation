@@ -35,10 +35,10 @@ public class TC_CB_50 extends BaseClass {
         LOGGER.info("Click on impala chargeback", test);
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
-
+        // Select the cluster
+        test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
         HomePage homePage = new HomePage(driver);
-        chargeBackImpala.selectMultiClusterId(clusterId);
+        homePage.selectMultiClusterId(clusterId);
         waitExecuter.sleep(1000);
 
         chargeBackImpala.selectImpalaType("Impala");

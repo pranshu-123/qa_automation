@@ -60,7 +60,7 @@ public class IM_RES_02 extends BaseClass {
 		test.log(LogStatus.INFO, "Selecting the cluster");
 		LOGGER.info("Selecting the cluster");
 		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
-		impala.selectMultiClusterId(clusterId);
+		homePage.selectMultiClusterId(clusterId);
 		LOGGER.info("Selected cluster: " + clusterId);
 		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 		waitExecuter.waitUntilPageFullyLoaded();

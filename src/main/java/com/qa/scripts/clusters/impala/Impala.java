@@ -116,17 +116,6 @@ public class Impala {
 		}
 	}
 
-	//click on cluster drop down
-	public void selectMultiClusterId(String clusterId) {
-		waitExecuter.waitUntilElementClickable(impalaPageObject.impalaYarnClusterDropdown);
-		waitExecuter.sleep(2000);
-		userActions.performActionWithPolling(impalaPageObject.impalaYarnClusterDropdown, UserAction.CLICK);
-		userActions.performActionWithPolling(impalaPageObject.clusterSearchBox, UserAction.SEND_KEYS,
-				clusterId);
-		userActions.performActionWithPolling(impalaPageObject.clusterSearchFirstField, UserAction.CLICK);
-		waitExecuter.waitUntilElementClickable(impalaPageObject.impalaYarnClusterDropdown);
-	}
-
 	/**
 	 * This method clear the filter present on impala page
 	 */

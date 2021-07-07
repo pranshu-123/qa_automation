@@ -37,9 +37,10 @@ public class TC_CB_55 extends BaseClass {
         waitExecuter.waitUntilPageFullyLoaded();
 
 
-        //Cluster selected
+        // Select the cluster
+        test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
         HomePage homePage = new HomePage(driver);
-        chargeBackImpala.selectMultiClusterId(clusterId);
+        homePage.selectMultiClusterId(clusterId);
         waitExecuter.sleep(1000);
 
         chargeBackImpala.selectImpalaType("Impala");

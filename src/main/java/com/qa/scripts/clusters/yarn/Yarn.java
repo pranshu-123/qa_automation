@@ -74,18 +74,6 @@ public class Yarn {
         }
     }
 
-    //click on cluster drop down
-    public void selectMultiClusterId(String clusterId) {
-        waitExecuter.waitUntilElementClickable(yarnPageObject.YarnClusterDropdown);
-        waitExecuter.sleep(2000);
-        userActions.performActionWithPolling(yarnPageObject.YarnClusterDropdown, UserAction.CLICK);
-        userActions.performActionWithPolling(yarnPageObject.clusterSearchBox, UserAction.SEND_KEYS,
-                clusterId);
-        userActions.performActionWithPolling(yarnPageObject.clusterSearchFirstField, UserAction.CLICK);
-        waitExecuter.waitUntilElementClickable(yarnPageObject.YarnClusterDropdown);
-    }
-
-
     /* Click on Group dropdown */
     public void clickOnGroupByDropDown(){
         waitExecuter.waitUntilElementPresent(yarnPageObject.groupByDropdownButton);

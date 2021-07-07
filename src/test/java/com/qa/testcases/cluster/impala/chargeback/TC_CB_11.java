@@ -9,6 +9,7 @@ import com.qa.scripts.HomePage;
 import com.qa.scripts.clusters.impala.ChargeBackImpala;
 import com.qa.utils.LoggingUtils;
 import com.qa.utils.WaitExecuter;
+import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -34,10 +35,11 @@ public class TC_CB_11 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         chargeBackImpala.selectImpalaChargeback();
         LOGGER.info("Navigate to impala chargeback page", test);
-        //Select Cluster
+        // Select the cluster
+        test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
         HomePage homePage = new HomePage(driver);
-        chargeBackImpala.selectMultiClusterId(clusterId);
-        LOGGER.info("Selected cluster: " + clusterId, test);
+        homePage.selectMultiClusterId(clusterId);
+        waitExecuter.sleep(1000);
 
         chargeBackImpala.selectImpalaType("Impala");
         waitExecuter.sleep(2000);

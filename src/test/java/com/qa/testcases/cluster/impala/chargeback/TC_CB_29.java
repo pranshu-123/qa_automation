@@ -35,8 +35,10 @@ public class TC_CB_29 extends BaseClass {
         picker = new DatePicker(driver);
         chargeBackImpala.selectImpalaChargeback();
 
+        // Select the cluster
+        test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
         HomePage homePage = new HomePage(driver);
-        chargeBackImpala.selectMultiClusterId(clusterId);
+        homePage.selectMultiClusterId(clusterId);
 
         chargeBackImpala.selectImpalaType("Impala");
         waitExecuter.sleep(2000);
@@ -44,7 +46,7 @@ public class TC_CB_29 extends BaseClass {
         waitExecuter.sleep(1000);
         picker.clickOnDatePicker();
         waitExecuter.sleep(1000);
-        picker.selectLastOneHour();
+        picker.selectLast30Days();
         waitExecuter.sleep(1000);
         chargebackImpalaPageObject.groupBySearchBox.click();
         waitExecuter.sleep(1000);

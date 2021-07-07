@@ -38,7 +38,10 @@ public class YR_019 extends BaseClass {
         test.log(LogStatus.INFO, "Yarn Resource Header is displayed.");
 
         waitExecuter.sleep(2000);
-        yarn.selectMultiClusterId(clusterId);
+        // Select the cluster
+        HomePage homePage = new HomePage(driver);
+        homePage.selectMultiClusterId(clusterId);
+        waitExecuter.sleep(1000);
         Log.info("ClusterId is selected: " + clusterId);
         test.log(LogStatus.INFO, "ClusterId is selected: " + clusterId);
         //Select cluster id

@@ -37,9 +37,10 @@ public class TC_CB_08 extends BaseClass {
         chargeBackImpala.selectImpalaChargeback();
         LOGGER.info("Navigate to impala chargeback page", test);
 
-        //Select Cluster
+        //Cluster selected
         HomePage homePage = new HomePage(driver);
-        chargeBackImpala.selectMultiClusterId(clusterId);
+        homePage.selectMultiClusterId(clusterId);
+        waitExecuter.waitUntilPageFullyLoaded();
         LOGGER.info("Selected cluster: " + clusterId, test);
 
         chargeBackImpala.selectImpalaType("Impala");

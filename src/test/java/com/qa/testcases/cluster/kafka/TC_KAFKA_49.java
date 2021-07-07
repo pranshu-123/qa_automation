@@ -28,7 +28,7 @@ public class TC_KAFKA_49 extends BaseClass {
     KafkaPage kafkaPage = new KafkaPage(driver);
     KafkaPageObject kafkaPageObject = new KafkaPageObject(driver);
 
-    kafkaPage.navigateToBrokerTab(kafkaPageObject);
+    kafkaPage.navigateToBrokerTab(kafkaPageObject, clusterId);
     kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject,"Messages In per Second","kafkaGraph2");
     test.log(LogStatus.PASS, "Verified 'Messages In per Second' details under broker tab for selected broker successfully ");
   }

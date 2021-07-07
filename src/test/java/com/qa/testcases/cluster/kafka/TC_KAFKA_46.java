@@ -28,7 +28,7 @@ public class TC_KAFKA_46 extends BaseClass {
     KafkaPage kafkaPage = new KafkaPage(driver);
     KafkaPageObject kafkaPageObject = new KafkaPageObject(driver);
 
-    kafkaPage.navigateToBrokerTab(kafkaPageObject);
+    kafkaPage.navigateToBrokerTab(kafkaPageObject, clusterId);
     kafkaPage.verifySelectedBrokerRecordColor(kafkaPageObject);
     test.log(LogStatus.PASS, "Verified selected broker records colour successfully ");
   }

@@ -35,7 +35,7 @@ public class TC_KAFKA_38 extends BaseClass {
     MouseActions.clickOnElement(driver, kafkaPageObject.kafkaTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
-    kafkaPage.verifyClusterDropDown(kafkaPageObject);
+    kafkaPage.verifyClusterDropDown(kafkaPageObject, clusterId);
     kafkaPage.verifyTopicRecords(kafkaPageObject);
     test.log(LogStatus.PASS, "Verified topic records with all details successfully ");
   }

@@ -30,7 +30,7 @@ public class TC_KAFKA_68 extends BaseClass {
     KafkaPage kafkaPage = new KafkaPage(driver);
     KafkaPageObject kafkaPageObject = new KafkaPageObject(driver);
 
-    kafkaPage.navigateToTopicTab(kafkaPageObject);
+    kafkaPage.navigateToTopicTab(kafkaPageObject, clusterId);
     Assert.assertTrue(kafkaPageObject.latestMetricsInfo.isDisplayed(), "The latest metrics info msg is not displayed");
     test.log(LogStatus.PASS, "Verified the Topic metric info msg successfully ");
   }

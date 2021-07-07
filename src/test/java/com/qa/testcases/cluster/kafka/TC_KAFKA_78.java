@@ -29,7 +29,7 @@ public class TC_KAFKA_78 extends BaseClass {
     KafkaPage kafkaPage = new KafkaPage(driver);
     KafkaPageObject kafkaPageObject = new KafkaPageObject(driver);
 
-    kafkaPage.navigateToTopicTab(kafkaPageObject);
+    kafkaPage.navigateToTopicTab(kafkaPageObject, clusterId);
     kafkaPage.verifyMetricsInfoMsg(kafkaPageObject);
     test.log(LogStatus.PASS, "Verified Average metrics info msg successfully ");
   }

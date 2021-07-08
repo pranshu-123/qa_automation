@@ -11,7 +11,7 @@ public class ChargebackYarnPageObject {
     @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Chargeback'])")
     public WebElement clusterChargeBackTab;
 
-    @FindBy(xpath = "(//span[contains(@class,'select2-selection__arrow')])[1]")
+    @FindBy(xpath = ".select-chargback-type ~ .select2 .selection .select2-selection__arrow")
     public List<WebElement> chargeBackDropdownsButton;
 
     @FindBy(css=".select-chargback-type ~ .select2 .selection .select2-selection__arrow")

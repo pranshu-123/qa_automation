@@ -171,7 +171,7 @@ public class Yarn {
 
     /* Verify filter elements */
     public boolean verifyFilterElements(){
-        List<String> defineListOfYarnApp = Arrays.asList("MAPREDUCE","SPARK","TEZ","yarn-service");
+        List<String> defineListOfYarnApp = Arrays.asList("MAPREDUCE","SPARK","MAPREDUCE_OOZIE5","TEZ","yarn-service");
         boolean boolYarnApp = defineListOfYarnApp.containsAll(listOfAllFilterElements);
         return boolYarnApp;
     }

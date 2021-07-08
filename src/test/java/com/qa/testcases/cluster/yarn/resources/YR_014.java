@@ -9,6 +9,8 @@ import com.qa.scripts.clusters.yarn.Yarn;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -21,7 +23,7 @@ public class YR_014 extends BaseClass {
     /**
      * Yarn Resource page Filter tab should contain all the entries populated by default
      */
-    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the filter tab should contain all the entries populated by default")
+    @Test(dataProvider = "clusterid-data-provider", description = "P0-Verify that the filter tab should contain all the entries populated by default")
     public void YR_014_verifyFilterTabAndEntries(String clusterId) {
         test = extent.startTest("YR_014_verifyFilterTabAndEntries: " + clusterId,
                 "Filter tab should contain all the entries populated by default.");
@@ -41,7 +43,7 @@ public class YR_014 extends BaseClass {
 
         waitExecuter.sleep(2000);
         // Select the cluster
-        test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
+        test.log(LogStatus.INFO, "Select clusterId : " + clusterId);
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterIdClusterPage(clusterId);
         //Select cluster id
@@ -55,34 +57,36 @@ public class YR_014 extends BaseClass {
         waitExecuter.waitUntilPageFullyLoaded();
         Log.info("DatePicker is selected for last30 Days");
         test.log(LogStatus.INFO, "Date is selected from DatePicker");
-
-        yarn.clickOnGroupByDropDown();
-        yarn.selectApplicationType();
-        test.log(LogStatus.INFO, "Selected Application Type, from dropdown.");
-        List<String> allFilterElements = yarn.getAllFilterElements();
-        System.out.println("All ApplicationType : filter elements: "+allFilterElements);
-        Log.info("All ApplicationType : filter elements: "+ allFilterElements);
-        test.log(LogStatus.INFO, "All ApplicationType : filter elements: "+ allFilterElements);
-        Assert.assertTrue(yarn.verifyFilterElements(), "Application Type: Filter elements MAPREDUCE,MAPREDUCE_OOZIE5,SPARK is mismatch.");
-
-        yarn.clickOnGroupByDropDown();
-        yarn.selectUser();
-        test.log(LogStatus.INFO, "Selected User, from dropdown.");
-        List<String> allDefaultFilterElementForUser = yarn.getAllDefaultSelectedFilterElements();
-        System.out.println("All User: filter default selected elements: "+allDefaultFilterElementForUser);
-        Log.info("All User: filter default selected elements: "+allDefaultFilterElementForUser);
-        test.log(LogStatus.INFO, "All User: filter default selected elements: "+allDefaultFilterElementForUser);
-
-        yarn.clickOnGroupByDropDown();
-        yarn.selectQueue();
-        test.log(LogStatus.INFO, "Selected Queue, from dropdown.");
-        List<String> allDefaultFilterElementForQueue = yarn.getAllDefaultSelectedFilterElements();
-        System.out.println("All Queue: filter default selected elements: "+ allDefaultFilterElementForQueue);
-        Log.info("All Queue: filter default selected elements: "+ allDefaultFilterElementForQueue);
-        test.log(LogStatus.INFO, "All Queue: filter default selected elements: "+ allDefaultFilterElementForQueue);
-
-        test.log(LogStatus.PASS,"Verified group by element and default filter elements on Yarn Resource Page. ");
-        Log.endTestCase("YR_014_verifyFilterTabAndEntries");
-
+        try {
+            yarn.clickOnGroupByDropDown();
+            yarn.selectApplicationType();
+            test.log(LogStatus.INFO, "Selected Application Type, from dropdown.");
+            List<String> allFilterElements = yarn.getAllFilterElements();
+            System.out.println("All ApplicationType : filter elements: " + allFilterElements);
+            Log.info("All ApplicationType : filter elements: " + allFilterElements);
+            test.log(LogStatus.INFO, "All ApplicationType : filter elements: " + allFilterElements);
+            Assert.assertTrue(yarn.verifyFilterElements(), "Application Type: Filter elements MAPREDUCE, MAPREDUCE_OOZIE5, SPARK is mismatch");
+            waitExecuter.sleep(2000);
+            yarn.clickOnGroupByDropDown();
+            yarn.selectUser();
+            test.log(LogStatus.INFO, "Selected User, from dropdown.");
+            List<String> allDefaultFilterElementForUser = yarn.getAllDefaultSelectedFilterElements();
+            System.out.println("All User: filter default selected elements: " + allDefaultFilterElementForUser);
+            Log.info("All User: filter default selected elements: " + allDefaultFilterElementForUser);
+            test.log(LogStatus.INFO, "All User: filter default selected elements: " + allDefaultFilterElementForUser);
+            waitExecuter.sleep(2000);
+            yarn.clickOnGroupByDropDown();
+            yarn.selectQueue();
+            test.log(LogStatus.INFO, "Selected Queue, from dropdown.");
+            List<String> allDefaultFilterElementForQueue = yarn.getAllDefaultSelectedFilterElements();
+            System.out.println("All Queue: filter default selected elements: " + allDefaultFilterElementForQueue);
+            Log.info("All Queue: filter default selected elements: " + allDefaultFilterElementForQueue);
+            test.log(LogStatus.INFO, "All Queue: filter default selected elements: " + allDefaultFilterElementForQueue);
+            waitExecuter.sleep(2000);
+            test.log(LogStatus.PASS, "Verified group by element and default filter elements on Yarn Resource Page. ");
+            Log.endTestCase("YR_014_verifyFilterTabAndEntries");
+        } catch (TimeoutException | NoSuchElementException te) {
+            throw new AssertionError("Verified group by element and default not filter elements on Yarn Resource Page.");
+        }
     }
 }

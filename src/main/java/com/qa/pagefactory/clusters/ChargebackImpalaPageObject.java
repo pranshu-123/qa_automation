@@ -52,7 +52,7 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "//span[contains(@class, 'select2-selection--multiple')]")
     public WebElement groupBySearchBox;
 
-    @FindBy(xpath = "//ul[@id='select2-r85m-results']")
+    @FindBy(xpath = "//span[contains(@class, 'select2-results')]/ul/li")
     public List<WebElement> listOfGroupByOptions;
 
     @FindBy(xpath = "((//div[contains(@class,'dashboard-sec')])[last()]//div[contains(@class,'pie-legend')])[2]//div/span")
@@ -145,7 +145,7 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "//*[@id=\"app\"]/div/div[1]/div/div/div[3]/div/div/div/div[1]/div[1]/div[1]/div/div[1]/h4/span")
     public WebElement impalajobs;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div/div[1]/div/div/div[3]/div/div/div/div[2]/div[1]/div[1]/h2")
+    @FindBy(css = ".pb-2 > div:nth-child(1)")
     public WebElement Chargebacktable;
 
     @FindBy(xpath = "//div[@class='col-md-4'][1]//h4/span")

@@ -85,7 +85,7 @@ public class ImpalaPageObject {
     @FindBy(xpath = "//div[@id=\"queryGraph\"]//label")
     public List<WebElement> queriesFooterLabels;
 
-    @FindBy(xpath="(//span[contains(@class,'select2-selection__arrow')])[1]")
+    @FindBy(css=".select-resource-type ~ .select2 .selection .select2-selection__arrow")
     public WebElement impalaDropdownOption;
 
     @FindBy(css = ".select-cluster ~ .select2 .selection .select2-selection__arrow")
@@ -94,7 +94,7 @@ public class ImpalaPageObject {
     @FindBy(xpath = "//span[contains(@class,'select2-dropdown--below')]//li")
     public List<WebElement> listOfClusters;
 
-    @FindBy(xpath="//li[contains(text(),'Impala')]")
+    @FindBy(xpath="//span[@class='select2-results']//li")
     public List<WebElement> selectType;
 
     @FindBy(xpath = "//span[contains(@class,'select2-selection__choice__remove')]")
@@ -127,7 +127,7 @@ public class ImpalaPageObject {
     @FindBy(xpath="//li[contains(text(),'Impala')]")
     public  List<WebElement> selectImpala;
 
-    @FindBy(css = ".select-chargback-type ~ .select2 .selection .select2-selection__arrow")
+    @FindBy(css = ".select-resource-type ~ .select2 .selection .select2-selection__arrow")
     public WebElement resourceUsagePointer;
 
     @FindBy(xpath = "//div[contains(@class,'dropdown-content-display')]/a[contains(text(),'Impala')]")

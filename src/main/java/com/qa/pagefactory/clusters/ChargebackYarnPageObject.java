@@ -11,24 +11,14 @@ public class ChargebackYarnPageObject {
     @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Chargeback'])")
     public WebElement clusterChargeBackTab;
 
-    @FindBy(css = "a.dropbtn.pointer")
-    public WebElement chargeBackDropdownOptionsButton;
-
     @FindBy(xpath = "(//span[contains(@class,'select2-selection__arrow')])[1]")
     public List<WebElement> chargeBackDropdownsButton;
 
-
-    @FindBy(xpath="(//span[contains(@class,'select2-selection__arrow')])[1]")
+    @FindBy(css=".select-chargback-type ~ .select2 .selection .select2-selection__arrow")
     public WebElement yarnDropdownOption;
 
-    @FindBy(xpath="//li[contains(text(),'Yarn')]")
-    public List<WebElement> selectType;
-
     @FindBy(xpath="//span[@class='select2-results']//li")
-    public WebElement chargeBackField;
-
-    @FindBy(xpath = "//a[contains(text(),'Yarn')]")
-    public WebElement chargeBackDropdownYarnOption;
+    public List<WebElement> selectType;
 
     @FindBy(xpath = "//label[normalize-space()='Chargeback Type']")
     public WebElement chargeBackPageHeading;

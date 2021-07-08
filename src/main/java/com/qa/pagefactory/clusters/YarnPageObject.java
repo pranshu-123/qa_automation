@@ -19,10 +19,10 @@ public class YarnPageObject {
     @FindBy(xpath = "//label[normalize-space()='Resource Type']")
     public WebElement getResourcesPageHeader;
 
-    @FindBy(xpath="(//span[contains(@class,'select2-selection__arrow')])[1]")
+    @FindBy(css=".select-resource-type ~ .select2 .selection .select2-selection__arrow")
     public WebElement resourceDropdownOption;
 
-    @FindBy(xpath="//li[contains(text(),'Yarn')]")
+    @FindBy(xpath="//span[@class='select2-results']//li")
     public List<WebElement> selectType;
 
     @FindBy(xpath = "//label[contains(text(), 'Group By')]/following-sibling::span/span/span/span[contains(@class,'select2-selection__arrow')]")

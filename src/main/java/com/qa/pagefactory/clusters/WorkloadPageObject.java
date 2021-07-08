@@ -51,16 +51,13 @@ public class WorkloadPageObject {
     @FindBy(css = "body div b:nth-child(3)")
     public WebElement currentmonthHeader;
 
-    @FindBy(xpath="(//span[contains(@class,'select2-selection__arrow')])[1]")
+    @FindBy(css=".select-workload-type ~ .select2 .selection .select2-selection__arrow")
     public WebElement workloadDropdownOption;
 
-    @FindBy(xpath="//li[contains(text(),'Yarn')]")
-    public List<WebElement> selectType;
-
-    @FindBy(xpath = "//div[@class='view-by cluster-usage-header']//span[@role='presentation']")
+    @FindBy(css = ".select-view-by~ .select2 .selection .select2-selection__arrow")
     public WebElement selectViewBy;
 
-    @FindBy(xpath = "//div[@class='pull-right cluster-usage-header pt-2']//span[@role='presentation']")
+    @FindBy(css = ".select-aggregate-by ~ .select2 .selection .select2-selection__arrow")
     public WebElement aggregateBy;
 
     @FindBy(xpath = "//div[@class='pull-right']//span[@role='presentation']")
@@ -140,9 +137,6 @@ public class WorkloadPageObject {
 
     @FindBy(css = "body div b:nth-child(3)")
     public WebElement timeRange;
-
-
-
 
     public WorkloadPageObject(WebDriver driver) {
         PageFactory.initElements(driver, this);

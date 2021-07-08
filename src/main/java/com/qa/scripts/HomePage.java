@@ -137,11 +137,11 @@ public class HomePage {
         CommonPageObject commonPageObject = new CommonPageObject(driver);
         waitExecuter.waitUntilElementClickable(commonPageObject.clusterDropdownPage);
         waitExecuter.sleep(3000);
-        userActions.performActionWithPolling(commonPageObject.clusterDropdown, UserAction.CLICK);
+        userActions.performActionWithPolling(commonPageObject.clusterDropdownPage, UserAction.CLICK);
         userActions.performActionWithPolling(commonPageObject.clusterSearchBox, UserAction.SEND_KEYS,
                 clusterId);
         userActions.performActionWithPolling(commonPageObject.clusterSearchFirstField, UserAction.CLICK);
-        waitExecuter.waitUntilElementClickable(commonPageObject.clusterDropdown);
+        waitExecuter.waitUntilElementClickable(commonPageObject.clusterDropdownPage);
     }
 
     /* Get the list of clusters from UI */

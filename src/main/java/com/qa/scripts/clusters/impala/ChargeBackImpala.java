@@ -248,7 +248,7 @@ public class ChargeBackImpala {
     public void validateGroupByPieCharts() {
         for (WebElement element : chargebackImpalaPageObject.pieChartGroupBySearchBoxs) {
             Boolean isGroupingDisplayed = false;
-                waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
+                waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.impalaDropdownOption);
                 if (!element.getText().equalsIgnoreCase("")) {
                     isGroupingDisplayed = true;
                 }
@@ -838,7 +838,7 @@ public class ChargeBackImpala {
     /* Validate if for set group by message is displayed */
     public boolean validatePieChartPresence(WebElement graphElement) {
         try {
-            waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
+            waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.impalaDropdownOption);
             graphElement.isDisplayed();
             return true;
         } catch (NoSuchElementException ex) {
@@ -849,12 +849,12 @@ public class ChargeBackImpala {
 
     /* Validate if message is present */
     public List<Boolean> validateMessageHaveGroupByValues(List<String> groupByList) {
-        waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
+        waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.impalaDropdownOption);
         String message = chargebackImpalaPageObject.showingResultHeader.getText().toLowerCase();
         LOGGER.info("Expected list of options in message- " + message);
         ArrayList<Boolean> isContainFilter = new ArrayList<Boolean>();
         for (String groupBy : groupByList) {
-            waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
+            waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.impalaDropdownOption);
             if (message.contains(groupBy)) {
                 isContainFilter.add(true);
             } else
@@ -867,7 +867,7 @@ public class ChargeBackImpala {
         if (chargebackImpalaPageObject.firstRowOfTable.size() > 0) {
             waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.firstRowOfTable.get(0));
             userActions.performActionWithPolling(chargebackImpalaPageObject.firstRowOfTable.get(0), UserAction.CLICK);
-            waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
+            waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.impalaDropdownOption);
         } else {
             LOGGER.info("No further rows to click on in table");
         }

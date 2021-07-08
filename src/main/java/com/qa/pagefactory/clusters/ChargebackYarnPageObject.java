@@ -29,7 +29,7 @@ public class ChargebackYarnPageObject {
     @FindBy(id = "chargebackmemory")
     public WebElement setChargebackMemoryPerHour;
 
-    @FindBy(xpath = "//div/button[@class='applybtn']")
+    @FindBy(css = ".btn-apply")
     public WebElement applyButton;
 
     @FindBy(xpath = "//span[contains(@class, 'select2-selection__arrow')]")

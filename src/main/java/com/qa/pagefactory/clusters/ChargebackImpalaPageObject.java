@@ -18,9 +18,6 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Chargeback'])")
     public WebElement clusterChargeBackTab;
 
-    @FindBy(xpath = "(//span[contains(@class,'select2-selection__arrow')])[1]")
-    public WebElement chargeBackDropdownOptionsButton;
-
     @FindBy(css=".select-chargback-type ~ .select2 .selection .select2-selection__arrow")
     public WebElement impalaDropdownOption;
 
@@ -82,7 +79,7 @@ public class ChargebackImpalaPageObject {
     @FindBy(id = "chargebackmemory")
     public WebElement setChargebackMemoryPerHour;
 
-    @FindBy(xpath = "//button[@class='btn-apply margin-amount']")
+    @FindBy(css = ".btn-apply")
     public WebElement applyButton;
 
     @FindBy(xpath = "//li[contains(text(),'User')][1]")

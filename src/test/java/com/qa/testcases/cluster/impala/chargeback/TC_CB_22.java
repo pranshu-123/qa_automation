@@ -52,7 +52,7 @@ public class TC_CB_22 extends BaseClass {
 		chargeBackImpala.clickOnGroupBySearchBox();
 		chargeBackImpala.selectGroupBy(GroupByOptions.INPUT_TABLES);
 		LOGGER.info("Click on groupBy: " + GroupByOptions.INPUT_TABLES.value, test);
-		wait.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
+		wait.waitUntilElementClickable(chargebackImpalaPageObject.impalaDropdownOption);
 		chargeBackImpala.clickOnGroupBySearchBox();
 		LOGGER.pass("Validated the group by options can be chosen only 2", test);
 		Assert.assertTrue(chargeBackImpala.validateGroupByMessage(),

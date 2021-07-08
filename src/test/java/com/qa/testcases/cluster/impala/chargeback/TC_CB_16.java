@@ -45,14 +45,14 @@ public class TC_CB_16 extends BaseClass {
         waitExecuter.sleep(2000);
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
-        wait.waitUntilElementClickable(cbPageObject.chargeBackDropdownOptionsButton);
+        wait.waitUntilElementClickable(cbPageObject.impalaDropdownOption);
         datePicker.selectLast90Days();
-        wait.waitUntilElementClickable(cbPageObject.chargeBackDropdownOptionsButton);
+        wait.waitUntilElementClickable(cbPageObject.impalaDropdownOption);
         LOGGER.info("Select last 90 days", test);
         chargeBackImpala.clickOnGroupBySearchBox();
-        wait.waitUntilElementClickable(cbPageObject.chargeBackDropdownOptionsButton);
+        wait.waitUntilElementClickable(cbPageObject.impalaDropdownOption);
         chargeBackImpala.selectGroupBy(GroupByOptions.PROJECT);
-        wait.waitUntilElementClickable(cbPageObject.chargeBackDropdownOptionsButton);
+        wait.waitUntilElementClickable(cbPageObject.impalaDropdownOption);
         LOGGER.info("Click on groupBy: " + GroupByOptions.PROJECT.value, test);
         chargeBackImpala.validateGroupByPieChartOption();
         LOGGER.pass("Validated whether pie charts displayed group by data", test);

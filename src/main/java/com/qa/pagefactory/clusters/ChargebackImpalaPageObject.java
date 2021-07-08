@@ -18,7 +18,7 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Chargeback'])")
     public WebElement clusterChargeBackTab;
 
-    @FindBy(css=".select-chargback-type ~ .select2 .selection .select2-selection__arrow")
+    @FindBy(css=".select-chargback-type~.select2 .selection .select2-selection__arrow")
     public WebElement impalaDropdownOption;
 
     @FindBy(xpath="//span[@class='select2-results']//li")

@@ -21,9 +21,6 @@ public class WorkloadPageObject {
     @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Workload'])")
     public WebElement workloadTab;
 
-    @FindBy(css = "a.dropbtn.pointer")
-    public WebElement workloadDropdownOptionsButton;
-
     @FindBy(xpath = "//a[contains(text(),'vCore Hours')]")
     public WebElement workloadDropdownvCoreHours;
 
@@ -51,7 +48,7 @@ public class WorkloadPageObject {
     @FindBy(css = "body div b:nth-child(3)")
     public WebElement currentmonthHeader;
 
-    @FindBy(css=".select-workload-type ~ .select2 .selection .select2-selection__arrow")
+    @FindBy(css=".select-workload-type~.select2 .selection .select2-selection__arrow")
     public WebElement workloadDropdownOption;
 
     @FindBy(css = ".select-view-by~ .select2 .selection .select2-selection__arrow")

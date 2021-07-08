@@ -44,7 +44,7 @@ public class TC_CB_10 extends BaseClass {
         waitExecuter.sleep(2000);
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
-        waitExecuter.waitUntilElementClickable(cbImpalaPageObject.chargeBackDropdownOptionsButton);
+        waitExecuter.waitUntilElementClickable(cbImpalaPageObject.impalaDropdownOption);
         datePicker.selectLast90Days();
         LOGGER.info("Select last 90 days", test);
         chargeBackImpala.clickOnGroupBySearchBox();

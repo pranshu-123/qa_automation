@@ -33,8 +33,6 @@ public class YR_010 extends BaseClass {
         //Initialize Yarn Page Object
         Yarn yarn = new Yarn(driver);
 
-
-
         yarn.verifyYarnResourceHeaderisDisplayed();
         Log.info("Yarn Resource Header is displayed.");
         test.log(LogStatus.INFO, "Yarn Resource Header is displayed.");
@@ -45,7 +43,7 @@ public class YR_010 extends BaseClass {
         // Select the cluster
         test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
         yarn.selectResourceType("Yarn");
         waitExecuter.sleep(2000);
 

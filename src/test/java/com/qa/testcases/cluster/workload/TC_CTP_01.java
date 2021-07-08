@@ -37,7 +37,7 @@ public class TC_CTP_01 extends BaseClass {
 
         //Cluster selected
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
         waitExecuter.sleep(2000);
         waitExecuter.waitUntilPageFullyLoaded();
 

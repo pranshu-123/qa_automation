@@ -45,7 +45,7 @@ public class TC_CB_33 extends BaseClass {
         homePage.selectMultiClusterId(clusterId);
         waitExecuter.sleep(1000);        // Select the cluster
         test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
-        homePage.selectMultiClusterId(clusterId);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
 
         chargeBackImpala.selectImpalaType("Impala");
         waitExecuter.sleep(2000);

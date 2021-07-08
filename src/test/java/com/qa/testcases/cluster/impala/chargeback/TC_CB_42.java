@@ -41,7 +41,7 @@ public class TC_CB_42 extends BaseClass {
         // Select the cluster
         test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
         waitExecuter.sleep(1000);
 
         chargeBackImpala.selectImpalaType("Impala");
@@ -49,14 +49,15 @@ public class TC_CB_42 extends BaseClass {
         waitExecuter.waitUntilPageFullyLoaded();
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();
-        LOGGER.info("Select last 30 days in date picker.", test);
-        chargeBackImpala.clickOnTableHeading(ImpalaJobTableColumn.USER);
-        LOGGER.info("Click on user.", test);
-        Assert.assertTrue(chargebackImpalaPageObject.userSortDown.isDisplayed(), "Data down is not working.");
         LOGGER.pass("Data is displayed in ascending order.", test);
         chargeBackImpala.clickOnTableHeading(ImpalaJobTableColumn.USER);
         LOGGER.info("Click again on user.", test);
         Assert.assertTrue(chargebackImpalaPageObject.userSortUp.isDisplayed(), "Data up is not working.");
         LOGGER.pass("Data is displayed in descending order.", test);
+        LOGGER.info("Select last 30 days in date picker.", test);
+        chargeBackImpala.clickOnTableHeading(ImpalaJobTableColumn.USER);
+        LOGGER.info("Click on user.", test);
+        Assert.assertTrue(chargebackImpalaPageObject.userSortDown.isDisplayed(), "Data down is not working.");
+        waitExecuter.sleep(2000);
     }
 }

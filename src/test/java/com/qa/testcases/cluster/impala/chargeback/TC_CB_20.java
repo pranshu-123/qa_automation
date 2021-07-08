@@ -38,7 +38,7 @@ public class TC_CB_20 extends BaseClass {
         ChargebackImpalaPageObject cbPageObject = new ChargebackImpalaPageObject(driver);
         // Select the cluster
         test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
-        homePage.selectMultiClusterId(clusterId);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
 
         chargeBackImpala.selectImpalaType("Impala");
         waitExecuter.sleep(2000);

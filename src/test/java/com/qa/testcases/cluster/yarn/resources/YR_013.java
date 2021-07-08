@@ -50,7 +50,7 @@ public class YR_013 extends BaseClass {
         // Select the cluster
         test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
         waitExecuter.sleep(1000);
         //Select cluster id
         yarn.selectResourceType("Yarn");

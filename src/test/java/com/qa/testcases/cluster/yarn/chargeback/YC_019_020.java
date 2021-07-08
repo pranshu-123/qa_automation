@@ -36,7 +36,7 @@ public class YC_019_020 extends BaseClass {
         chargeBackYarn.selectYarnChargeback();
         waitExecuter.sleep(2000);
 
-        homePage.selectMultiClusterId(clusterId);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
         chargeBackYarn.selectChargebackType("Yarn");
         waitExecuter.sleep(2000);
 

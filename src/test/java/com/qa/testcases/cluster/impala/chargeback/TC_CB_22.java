@@ -39,7 +39,7 @@ public class TC_CB_22 extends BaseClass {
 		WaitExecuter wait = new WaitExecuter(driver);
 		// Select the cluster
 		test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
-		homePage.selectMultiClusterId(clusterId);
+		homePage.selectMultiClusterIdClusterPage(clusterId);
 
 		chargeBackImpala.selectImpalaType("Impala");
 		wait.sleep(2000);

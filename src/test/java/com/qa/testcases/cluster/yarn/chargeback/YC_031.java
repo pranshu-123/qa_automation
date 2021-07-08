@@ -31,7 +31,7 @@ public class YC_031 extends BaseClass {
         // Select the cluster
         test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
         chargeBackYarn.selectChargebackType("Yarn");
         waitExecuter.sleep(2000);
 

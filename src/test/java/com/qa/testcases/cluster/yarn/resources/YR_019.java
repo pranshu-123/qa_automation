@@ -40,7 +40,7 @@ public class YR_019 extends BaseClass {
         waitExecuter.sleep(2000);
         // Select the cluster
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
         waitExecuter.sleep(1000);
         Log.info("ClusterId is selected: " + clusterId);
         test.log(LogStatus.INFO, "ClusterId is selected: " + clusterId);

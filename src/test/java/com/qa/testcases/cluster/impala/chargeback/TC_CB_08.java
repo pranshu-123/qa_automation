@@ -39,7 +39,7 @@ public class TC_CB_08 extends BaseClass {
 
         //Cluster selected
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
         waitExecuter.waitUntilPageFullyLoaded();
         LOGGER.info("Selected cluster: " + clusterId, test);
 

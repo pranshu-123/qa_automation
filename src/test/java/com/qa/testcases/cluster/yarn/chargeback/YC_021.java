@@ -9,6 +9,8 @@ import com.qa.scripts.clusters.impala.ChargeBackImpala;
 import com.qa.scripts.clusters.yarn.ChargeBackYarn;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Test;
 
 @Marker.YarnChargeback
@@ -38,11 +40,11 @@ public class YC_021 extends BaseClass {
         chargeBackYarn.selectChargebackType("Yarn");
         waitExecuter.sleep(2000);
 
-
+        try {
         //click on cluster drop down
         CommonPageObject commonPageObject = new CommonPageObject(driver);
         commonPageObject.clusterDropdown.click();
-        waitExecuter.sleep(2000);
+        waitExecuter.sleep(3000);
         System.out.println("Size of cluster in dropdown: " + commonPageObject.clustersList.size());
 
         for (int i = 0; i < commonPageObject.clustersList.size(); i++) {
@@ -146,6 +148,9 @@ public class YC_021 extends BaseClass {
             waitExecuter.sleep(1000);
 
             test.log(LogStatus.PASS, "Start Date field is successfully verified in custom date range");
+        }
+        } catch (TimeoutException | NoSuchElementException te) {
+            throw new AssertionError("Successfully not verified date range.");
         }
 
     }

@@ -11,6 +11,8 @@ import com.qa.scripts.clusters.impala.ChargeBackImpala;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -24,7 +26,7 @@ public class TC_CB_03 extends BaseClass {
     private ChargebackImpalaPageObject chargebackImpalaPageObject;
     private DatePicker picker;
 
-    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify that the user can select a cluster")
+    @Test(dataProvider = "clusterid-data-provider", description = "P0-Verify that the user can select a cluster")
     public void TC_CB_03_Verifytheusercanselectacluster(String clusterId) {
 
         test = extent.startTest("TC_CB_03_Verifytheusercanselectacluster " + clusterId, "Verify the user can select a cluster ");
@@ -54,32 +56,33 @@ public class TC_CB_03 extends BaseClass {
         picker.selectLast30Days();
         waitExecuter.sleep(3000);
 
+        try {
+            String memoryHourInSeconds = chargebackImpala.getMemoryGraphHeader();
+            Assert.assertTrue(chargebackImpala.getMemoryGraphHeader().matches(memoryHourInSeconds),
+                    "verify the total memory in graph heading");
+            test.log(LogStatus.PASS, "verify the total memory in graph heading");
 
-        String memoryHourInSeconds = chargebackImpala.getMemoryGraphHeader();
-        Assert.assertTrue(chargebackImpala.getMemoryGraphHeader().matches(memoryHourInSeconds),
-            "verify the total memory in graph heading");
-        test.log(LogStatus.PASS, "verify the total memory in graph heading");
+            String cpuHours = chargebackImpala.getCpuGraphHeader();
+            Assert.assertTrue(chargebackImpala.getCpuGraphHeader().matches(cpuHours),
+                    "verify the total CPU hours in graph heading");
+            test.log(LogStatus.PASS, "verify the total CPU hours in graph heading");
 
-        String cpuHours = chargebackImpala.getCpuGraphHeader();
-        Assert.assertTrue(chargebackImpala.getCpuGraphHeader().matches(cpuHours),
-            "verify the total CPU hours in graph heading");
-        test.log(LogStatus.PASS, "verify the total CPU hours in graph heading");
+            String donutchart = chargebackImpala.getdonutchartHeader();
+            Assert.assertTrue(chargebackImpala.getdonutchartHeader().matches(donutchart),
+                    "verify the total Jobs donut chart in graph heading");
+            test.log(LogStatus.PASS, "verify the total Jobs donut chart in graph heading");
 
-        String donutchart = chargebackImpala.getdonutchartHeader();
-        Assert.assertTrue(chargebackImpala.getdonutchartHeader().matches(donutchart),
-            "verify the total Jobs donut chart in graph heading");
-        test.log(LogStatus.PASS, "verify the total Jobs donut chart in graph heading");
+            String impalaqueriestable = chargebackImpala.getImpalatableHeader();
+            Assert.assertTrue(chargebackImpala.getImpalatableHeader().matches(impalaqueriestable),
+                    "verify the total Jobs donut chart in graph heading");
+            test.log(LogStatus.PASS, "verify the total Impala queries table in graph heading");
 
-        String impalaqueriestable = chargebackImpala.getImpalatableHeader();
-        Assert.assertTrue(chargebackImpala.getImpalatableHeader().matches(impalaqueriestable),
-            "verify the total Jobs donut chart in graph heading");
-        test.log(LogStatus.PASS, "verify the total Impala queries table in graph heading");
-
-        String chargebacktable = chargebackImpala.getchargebacktableHeader();
-        Assert.assertTrue(chargebackImpala.getchargebacktableHeader().matches(chargebacktable),
-            "verify the total Chargeback table grouped by user chart in graph heading");
-        test.log(LogStatus.PASS, "verify the total Chargeback table grouped by user chart in graph heading");
-
-
+            String chargebacktable = chargebackImpala.getchargebacktableHeader();
+            Assert.assertTrue(chargebackImpala.getchargebacktableHeader().matches(chargebacktable),
+                    "verify the total Chargeback table grouped by user chart in graph heading");
+            test.log(LogStatus.PASS, "verify the total Chargeback table grouped by user chart in graph heading");
+        } catch (NullPointerException | NoSuchElementException te) {
+            throw new AssertionError("Not verify the user can select a cluster ");
+        }
     }
 }

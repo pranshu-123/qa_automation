@@ -71,7 +71,6 @@ public class YR_014 extends BaseClass {
             yarn.selectUser();
             test.log(LogStatus.INFO, "Selected User, from dropdown.");
             List<String> allDefaultFilterElementForUser = yarn.getAllDefaultSelectedFilterElements();
-            System.out.println("All User: filter default selected elements: " + allDefaultFilterElementForUser);
             Log.info("All User: filter default selected elements: " + allDefaultFilterElementForUser);
             test.log(LogStatus.INFO, "All User: filter default selected elements: " + allDefaultFilterElementForUser);
             waitExecuter.sleep(2000);
@@ -79,7 +78,6 @@ public class YR_014 extends BaseClass {
             yarn.selectQueue();
             test.log(LogStatus.INFO, "Selected Queue, from dropdown.");
             List<String> allDefaultFilterElementForQueue = yarn.getAllDefaultSelectedFilterElements();
-            System.out.println("All Queue: filter default selected elements: " + allDefaultFilterElementForQueue);
             Log.info("All Queue: filter default selected elements: " + allDefaultFilterElementForQueue);
             test.log(LogStatus.INFO, "All Queue: filter default selected elements: " + allDefaultFilterElementForQueue);
             waitExecuter.sleep(2000);

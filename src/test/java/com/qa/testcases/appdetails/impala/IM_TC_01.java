@@ -6,6 +6,7 @@ import com.qa.enums.AppDetailsApplicationType;
 import com.qa.enums.ApplicationEnum;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.TopPanelPageObject;
+import com.qa.pagefactory.appsDetailsPage.AppDetailsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.AppDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
@@ -45,7 +46,10 @@ public class IM_TC_01 extends BaseClass {
         datePicker.clickOnDatePicker();
         datePicker.selectLast90Days();
         AppDetailsPage appDetailsPage = new AppDetailsPage(driver);
-        appDetailsPage.selectOnlyApplication(AppDetailsApplicationType.IMPALA);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        AppDetailsPageObject appDetailsPageObject = new AppDetailsPageObject(driver);
+        int appCount = appDetailsPage.clickOnlyLink("Impala");
+        waitExecuter.waitUntilElementClickable(appDetailsPageObject.resetButton);
         Boolean isOtherAppDisplayed = appDetailsPage.IsOtherApplicationTypesInTable(
             AppDetailsApplicationType.IMPALA);
         Assert.assertFalse(isOtherAppDisplayed,

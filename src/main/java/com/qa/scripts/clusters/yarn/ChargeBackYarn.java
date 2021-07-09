@@ -155,7 +155,7 @@ public class ChargeBackYarn {
         List<WebElement> listOfWebElemnts = chargebackYarnPageObject.listOfGroupByOptions;
         // Iterate Webelement list to get the value of each element
         for (int i = 0; i < listOfWebElemnts.size(); i++) {
-            System.out.println(listOfWebElemnts.get(i).getText());
+            LOGGER.info(listOfWebElemnts.get(i).getText());
             if(listOfWebElemnts.get(i).getText().contains(optionName)){
                 listOfWebElemnts.get(i).click();
                 waitExecuter.sleep(2000);
@@ -185,7 +185,7 @@ public class ChargeBackYarn {
 
     //validate column name in GroupBy Table, i.e chargeBack table
     public Boolean validateHeaderCoulmnNameInGroupByTable(){
-        System.out.println("Size of Headers in Group By Table: "+ getResultsGroupedByTableHeaderNames().size());
+        LOGGER.info("Size of Headers in Group By Table: "+ getResultsGroupedByTableHeaderNames().size());
         //Get List of groupby table column names
         List<WebElement> listOfGroupByTableColumnNames = getResultsGroupedByTableHeaderNames();
         //Empty array to add group by table coumn name
@@ -203,7 +203,7 @@ public class ChargeBackYarn {
     }
 
     public Boolean validateHeaderColumnNameInYarnJobsTable(){
-        System.out.println("Size of Headers in Yarn Jobs Table: "+getYarnJobsTableHeaderNames().size());
+        LOGGER.info("Size of Headers in Yarn Jobs Table: "+getYarnJobsTableHeaderNames().size());
         List<WebElement> listOfYarnJobsTableHeaderNames = getYarnJobsTableHeaderNames();
 
         ArrayList<String> listOfYarnJobsColumnNames = new ArrayList<String>();

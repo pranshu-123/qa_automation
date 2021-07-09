@@ -46,7 +46,6 @@ public class Impala {
 				memoryNodeListText.add(text);
 			}
 			LOGGER.info("The memory graph is being displayed for nodes: " + memoryNodeListText);
-			System.out.println("The memory graph is being displayed for nodes: " + memoryNodeListText);
 			return true;
 		}
 		if (parentMemoryNodeList.size() <= 0) {
@@ -55,7 +54,6 @@ public class Impala {
 			for (int i = 0; i < childList.size(); i++) {
 				String noDataDisplayed = childList.get(i).getText();
 				LOGGER.info("The data displayed in memory graph is: " + noDataDisplayed);
-				System.out.println("The data displayed in memory graph is: " + noDataDisplayed);
 			}
 			return true;
 		} else
@@ -72,7 +70,6 @@ public class Impala {
 				queryUserListText.add(text);
 			}
 			LOGGER.info("The query graph is being displayed for users: " + queryUserListText);
-			System.out.println("The query graph is being displayed for users: " + queryUserListText);
 			return true;
 		}
 		if (parentQueryUserList.size() <= 0) {
@@ -81,7 +78,6 @@ public class Impala {
 			for (int i = 0; i < childList.size(); i++) {
 				String noDataDisplayed = childList.get(i).getText();
 				LOGGER.info("The data displayed in query graph is: " + noDataDisplayed);
-				System.out.println("The data displayed in query graph is: " + noDataDisplayed);
 			}
 			return true;
 		}
@@ -189,7 +185,7 @@ public class Impala {
 
 	//validate column name in Impala Queries Table, i.e
 	public Boolean validateHeaderColumnNameInImpalaQueriesTable() {
-		System.out.println("Size of Headers in Impala Queries Table: " + getImpalaQueriesTableHeaderColumnNames().size());
+		LOGGER.info("Size of Headers in Impala Queries Table: " + getImpalaQueriesTableHeaderColumnNames().size());
 		List<WebElement> listOfImpalaQueriesTableHeaderNames = getImpalaQueriesTableHeaderColumnNames();
 
 		ArrayList<String> listOfImpalaQueriesColumnNames = new ArrayList<String>();

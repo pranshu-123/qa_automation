@@ -134,32 +134,32 @@ public class ChargeBackImpala {
 
     /* Validate groupBy options */
     public Boolean validateGroupByOptions() {
-        // Get the list of webelements of groupby options
+        waitExecuter.waitUntilPageFullyLoaded();
         List<WebElement> listOfWebElemnts = chargebackImpalaPageObject.listOfGroupByOptions;
         // Empty array to add displayed group by options
         ArrayList<String> listOfGroupByOptions = new ArrayList<String>();
-        // Itterate Webelement list to get the value of each element
+        // Iterate Webelement list to get the value of each element
         for (int i = 0; i < listOfWebElemnts.size(); i++) {
-            listOfGroupByOptions.add(listOfWebElemnts.get(i).getText().toLowerCase());
+            listOfGroupByOptions.add(listOfWebElemnts.get(i).getText());
         }
-        List<String> definedGroupByOption = Arrays.asList("user", "real user", "queue");
         LOGGER.info("Actual ist of options" + listOfGroupByOptions);
-        Boolean compareGroupByOptions = listOfGroupByOptions.containsAll(definedGroupByOption);
-        LOGGER.info("Expected list of options" + definedGroupByOption);
+        Boolean compareGroupByOptions = listOfGroupByOptions.isEmpty();
+        waitExecuter.waitUntilPageFullyLoaded();
         return compareGroupByOptions;
 
     }
 
     /* Get list of Users from chargeback table */
     public List<String> getUsersFromTable() {
-
+        waitExecuter.waitUntilPageFullyLoaded();
         List<WebElement> getAllUsers = chargebackImpalaPageObject.getUsersFromChargebackTable;
         List<String> listOfUsers = new ArrayList<String>();
 
         for (int i = 0; i < getAllUsers.size(); i++) {
             String indivualUser = getAllUsers.get(i).getText();
-            System.out.println("getUsersFromTable: " + indivualUser);
+            LOGGER.info("getUsersFromTable: " + indivualUser);
             listOfUsers.add(indivualUser);
+            waitExecuter.sleep(2000);
         }
         LOGGER.info("List of users from chargeback table" + listOfUsers);
         return listOfUsers;
@@ -173,7 +173,7 @@ public class ChargeBackImpala {
 
         for (int i = 0; i < getAllUsers.size(); i++) {
             String indivualUser = getAllUsers.get(i).getText();
-            System.out.println("getUsersFromImpalaJobsTable: " + indivualUser);
+            LOGGER.info("getUsersFromImpalaJobsTable: " + indivualUser);
             listOfUsers.add(indivualUser);
         }
         LOGGER.info("List of users from finished impala jobs table" + listOfUsers);
@@ -365,7 +365,6 @@ public class ChargeBackImpala {
         for (int i = 0; i < listOfHours.size(); i++) {
             String hours = listOfHours.get(i).getText().trim();
 
-            // System.out.println(hours);
             if (!hours.contains("<1s")) {
                 memoryHoursArray.add(hours);
             }
@@ -459,7 +458,7 @@ public class ChargeBackImpala {
     public void clikOnDownloadCSV() {
 
         List<WebElement> downloadCSVList = TestUtils.getWebElements(driver, "xpath", "//div[@class='dashboard-module bg-white dashboard-sec pb-2']//div[@class='header']//a[@class='menu']");
-        System.out.println("List of downloadCSV file: " + downloadCSVList.size());
+        LOGGER.info("List of downloadCSV file: " + downloadCSVList.size());
         waitExecuter.sleep(2000);
 
         for (int i = 0; i < downloadCSVList.size(); i++) {
@@ -558,7 +557,6 @@ public class ChargeBackImpala {
             LOGGER.info("Get only CPU hour cost from string" + trimmedSplitValue);
             String removeCommaFromCost = trimmedSplitValue.replaceAll(",", "");
             LOGGER.info("Remove comma from cost " + trimmedSplitValue);
-            // System.out.println(trimmedSplitValue);
             userCosts.add(Double.parseDouble(removeCommaFromCost));
         }
         LOGGER.info("List of CPU costs calculated from table" + userCosts);
@@ -601,7 +599,6 @@ public class ChargeBackImpala {
             String[] splitted = indivualcost.split(" ");
             String trimmedSplitValue = splitted[2];
             String str = trimmedSplitValue.replaceAll(",", "");
-            // System.out.println(trimmedSplitValue);
             perUserMemoryCost.add(Double.parseDouble(str));
         }
         LOGGER.info("List of memory costs calculated from table" + perUserMemoryCost);
@@ -662,12 +659,12 @@ public class ChargeBackImpala {
 
     public boolean isTotalNumberOfJobCountHeader() {
         waitExecuter.waitUntilElementPresent(chargebackImpalaPageObject.JobsFromGraphHeader);
-        System.out.println("Total Job Counts: " + getTotalJobCountFromJobsGraphHeader());
+        LOGGER.info("Total Job Counts: " + getTotalJobCountFromJobsGraphHeader());
         String strTotalJobCountHeader = getTotalJobCountFromJobsGraphHeader();
         strTotalJobCountHeader = strTotalJobCountHeader.substring(0, strTotalJobCountHeader.length() - 1);
-        System.out.println("Total Job Counts after removing last char: " + strTotalJobCountHeader);
+        LOGGER.info("Total Job Counts after removing last char: " + strTotalJobCountHeader);
         Integer intTotalJobCountHeader = Integer.parseInt(strTotalJobCountHeader);
-        System.out.println("Total Job Counts in Integer: " + intTotalJobCountHeader);
+        LOGGER.info("Total Job Counts in Integer: " + intTotalJobCountHeader);
 		return intTotalJobCountHeader != 0;
 	}
 

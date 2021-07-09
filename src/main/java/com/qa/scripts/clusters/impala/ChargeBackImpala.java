@@ -456,16 +456,33 @@ public class ChargeBackImpala {
     }
 
     public void clikOnDownloadCSV() {
-
         List<WebElement> downloadCSVList = TestUtils.getWebElements(driver, "xpath", "//div[@class='dashboard-module bg-white dashboard-sec pb-2']//div[@class='header']//a[@class='menu']");
         LOGGER.info("List of downloadCSV file: " + downloadCSVList.size());
         waitExecuter.sleep(2000);
-
         for (int i = 0; i < downloadCSVList.size(); i++) {
             downloadCSVList.get(i).click();
             waitExecuter.sleep(2000);
         }
     }
+
+    public void clikOnDownloadCSV(String asFile) {
+        waitExecuter.sleep(3000);
+        int graphDownloadMenuCount = chargebackImpalaPageObject.downloadCSVFile.size();
+        if (graphDownloadMenuCount > 0) {
+            for (int i = 0; i < graphDownloadMenuCount; i++) {
+                if (chargebackImpalaPageObject.downloadCSVFile.get(i).getText().equals(asFile)) {
+                    userActions.performActionWithPolling(chargebackImpalaPageObject.downloadCSVFile.get(i), UserAction.CLICK);
+                    waitExecuter.sleep(15000);
+                }
+            }
+        }
+    }
+
+    public void clickOnTableDownloadMenu() {
+        waitExecuter.sleep(3000);
+        MouseActions.clickOnElement(driver, chargebackImpalaPageObject.downloadFile);
+    }
+
 
     /* Get memory data list from table */
     public List<WebElement> getMemoryDataFromTable() {

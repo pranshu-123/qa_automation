@@ -157,6 +157,12 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "//div/table[@id='chargeback-table']/tbody/tr/td//span")
     public WebElement selectgroup;
 
+    @FindBy(xpath = "(//a[contains(.,'Download CSV')])")
+    public List<WebElement> downloadCSVFile;
+
+    @FindBy(xpath = "//div[@class='dashboard-module bg-white dashboard-sec pb-2']//div[@class='header']//a[@class='menu']")
+    public WebElement downloadFile;
+
     @FindBy(xpath = "//div/table[@id='chargeback-table']/tbody/tr/td//span")
     public WebElement selectQueue;
 

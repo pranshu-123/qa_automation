@@ -3,10 +3,12 @@ package com.qa.testcases.appdetails.impala;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.enums.AppDetailsApplicationType;
+import com.qa.pagefactory.appsDetailsPage.AppDetailsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.AppDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
@@ -34,6 +36,8 @@ public class IM_TC_07_Part1 extends BaseClass {
         AllApps allApps = new AllApps(driver);
         AppDetailsPage appDetailsPage = new AppDetailsPage(driver);
         DatePicker datePicker = new DatePicker(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        AppDetailsPageObject appDetailsPageObject = new AppDetailsPageObject(driver);
 
         try {
             appDetailsPage.navigateToJobsTab();
@@ -41,7 +45,8 @@ public class IM_TC_07_Part1 extends BaseClass {
             datePicker.clickOnDatePicker();
             datePicker.selectLast30Days();
             appDetailsPage.selectSuccessfulApplication();
-            int appCount = appDetailsPage.selectOnlyApplication(AppDetailsApplicationType.IMPALA);
+            int appCount = appDetailsPage.clickOnlyLink("Impala");
+            waitExecuter.waitUntilElementClickable(appDetailsPageObject.resetButton);
             if (appCount > 0) {
                 appDetailsPage.clickOnFirstImpalaJob();
                 loggingUtils.info("Clicked on the first impala application", test);

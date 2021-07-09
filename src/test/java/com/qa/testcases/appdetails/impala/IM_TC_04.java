@@ -6,6 +6,7 @@ import com.qa.enums.AppDetailsApplicationType;
 import com.qa.enums.appdetails.impala.ImpalaFragmentDetails;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.TopPanelPageObject;
+import com.qa.pagefactory.appsDetailsPage.AppDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.AppDetailsPage;
@@ -31,7 +32,8 @@ public class IM_TC_04 extends BaseClass {
     public void verifyFragmentDetails(String clusterId) {
         test = extent.startTest("IM_TC_04.verifyFragmentDetails", "Verify Fragment details.");
         test.assignCategory("App Details - Impala");
-        WaitExecuter executer = new WaitExecuter(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        AppDetailsPageObject appDetailsPageObject = new AppDetailsPageObject(driver);
         loggingUtils.info("Started test case: IM_TC_04.verifyFragmentDetails", test);
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
         UserActions actions = new UserActions(driver);
@@ -45,7 +47,8 @@ public class IM_TC_04 extends BaseClass {
         AppDetailsPage appDetailsPage = new AppDetailsPage(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         try {
-            appDetailsPage.selectOnlyApplication(AppDetailsApplicationType.IMPALA);
+            int appCount = appDetailsPage.clickOnlyLink("Impala");
+            waitExecuter.waitUntilElementClickable(appDetailsPageObject.resetButton);
             actions.performActionWithPolling(applicationsPageObject.clickOnAppId, UserAction.CLICK);
             for (WebElement fragment : appDetailsPage.getImpalaFragmentRows()) {
                 Assert.assertNotNull(fragment.findElements(By.tagName("td")).get(ImpalaFragmentDetails.ID.getIndex()));

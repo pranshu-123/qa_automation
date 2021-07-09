@@ -5,13 +5,15 @@ import com.qa.base.BaseClass;
 import com.qa.constants.PageConstants;
 import com.qa.enums.AppDetailsApplicationType;
 import com.qa.enums.ImpalaEventTypes;
+import com.qa.enums.UserAction;
+import com.qa.pagefactory.appsDetailsPage.AppDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.AppDetailsPage;
 import com.qa.utils.LoggingUtils;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -40,36 +42,35 @@ public class IM_IN_01 extends BaseClass {
         DatePicker datePicker = new DatePicker(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
+        AppDetailsPageObject appDetailsPageObject = new AppDetailsPageObject(driver);
+        UserActions userActions = new UserActions(driver);
 
-        try {
-            loggingUtils.info("Navigate to inefficient tab and select last 90 days", test);
-            appDetailsPage.navigateToJobsTab();
-            appDetailsPage.navigateToInefficientApps();
-            datePicker.clickOnDatePicker();
-            test.log(LogStatus.PASS, "Select last 30 days.");
-            datePicker.selectLast30Days();
-            loggingUtils.info("Select only impala application and get its count", test);
-            waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
-            int appCount = appDetailsPage.selectOnlyApplication(AppDetailsApplicationType.IMPALA);
-            waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
-            loggingUtils.info("App count for impala- " + appCount, test);
-            if (appCount > 0) {
-                loggingUtils.info("Select event filter and navigate to first Job of the page", test);
-                appDetailsPage.selectEventFilter(ImpalaEventTypes.SqlSlowOperatorEvent);
-                appDetailsPage.clickOnFirstInefficientJob();
-                List<String> titles = appDetailsPage.getEfficiencyTags();
-                loggingUtils.info("Titles on page - " + titles, test);
-                loggingUtils.info("Expected title- " + PageConstants.EventTypes.SqlSlowOperatorEvent, test);
-                appDetailsPage.close();
-                Assert.assertTrue(titles.contains(PageConstants.EventTypes.SqlSlowOperatorEvent),
-                        "Does not contain title as expected in analysis tab- " + PageConstants.EventTypes.SqlSlowOperatorEvent);
-                test.log(LogStatus.PASS, "SqlSlowOperatorEvent verified ");
-            } else {
-                loggingUtils.info("There are no successful apps for impala for selected cluster", test);
-                test.log(LogStatus.SKIP, "There are no successful apps for impala ");
-            }
-        } catch (NoSuchElementException ex) {
-            loggingUtils.info("Error- " + ex, test);
+        loggingUtils.info("Navigate to inefficient tab and select last 90 days", test);
+        appDetailsPage.navigateToJobsTab();
+        appDetailsPage.navigateToInefficientApps();
+        datePicker.clickOnDatePicker();
+        test.log(LogStatus.PASS, "Select last 30 days.");
+        datePicker.selectLast30Days();
+        loggingUtils.info("Select only impala application and get its count", test);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+        int appCount = appDetailsPage.clickOnlyLink("Impala");
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+        loggingUtils.info("App count for impala- " + appCount, test);
+        if (appCount > 0) {
+            loggingUtils.info("Select event filter and navigate to first Job of the page", test);
+            userActions.performActionWithPolling(appDetailsPageObject.eventToggleLeftPane, UserAction.CLICK);
+            appDetailsPage.clickOnlyLink("SqlSlow");
+            appDetailsPage.clickOnFirstInefficientJob();
+            List<String> titles = appDetailsPage.getEfficiencyTags();
+            loggingUtils.info("Titles on page - " + titles, test);
+            loggingUtils.info("Expected title- " + PageConstants.EventTypes.SqlSlowOperatorEvent, test);
+            appDetailsPage.close();
+            Assert.assertTrue(titles.contains(PageConstants.EventTypes.SqlSlowOperatorEvent),
+                    "Does not contain title as expected in analysis tab- " + PageConstants.EventTypes.SqlSlowOperatorEvent);
+            test.log(LogStatus.PASS, "SqlSlowOperatorEvent verified ");
+        } else {
+            loggingUtils.info("There are no successful apps for impala for selected cluster", test);
+            test.log(LogStatus.SKIP, "There are no successful apps for impala ");
         }
 
     }

@@ -28,7 +28,7 @@ public class TC_KAFKA_76 extends BaseClass {
     KafkaPage kafkaPage = new KafkaPage(driver);
     KafkaPageObject kafkaPageObject = new KafkaPageObject(driver);
 
-    kafkaPage.navigateToTopicTab(kafkaPageObject);
+    kafkaPage.navigateToTopicTab(kafkaPageObject, clusterId);
     kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject, "Bytes Out per Second", "kafkaGraph2");
     test.log(LogStatus.PASS, "Verified 'Bytes Out per Second' details under topic tab for selected topic successfully ");
   }

@@ -65,12 +65,7 @@ public class TC_CMP_93 extends BaseClass {
             cloudMigrationPerHostPage.setCustomCost(element, "1");
             break;
         }
-
-<<<<<<< HEAD
         cloudMigrationPerHostPage.clickOnModalRunButton();
-=======
-        cloudMigrationPerHostPage.clickOnRunReportButton();
->>>>>>> 558f742f8c49fe10dacf959cb4050206a31673f4
         cloudMigrationPerHostPage.waitTillLoaderPresent();
         waitExecuter.sleep(10000);
 

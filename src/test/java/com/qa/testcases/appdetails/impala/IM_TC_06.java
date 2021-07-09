@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.enums.AppDetailsApplicationType;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.TopPanelPageObject;
+import com.qa.pagefactory.appsDetailsPage.AppDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.AppDetailsPage;
@@ -47,8 +48,12 @@ public class IM_TC_06 extends BaseClass {
         datePicker.selectLast90Days();
         AppDetailsPage appDetailsPage = new AppDetailsPage(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        AppDetailsPageObject appDetailsPageObject = new AppDetailsPageObject(driver);
         try {
-            appDetailsPage.selectOnlyApplication(AppDetailsApplicationType.IMPALA);
+            waitExecuter.waitUntilElementClickable(appDetailsPageObject.resetButton);
+            int appCount = appDetailsPage.clickOnlyLink("Impala");
+            waitExecuter.waitUntilElementClickable(appDetailsPageObject.resetButton);
             actions.performActionWithPolling(applicationsPageObject.clickOnAppId, UserAction.CLICK);
             appDetailsPage.clickOnImpalaGanttChartTab();
             List<Integer> expectedIds = appDetailsPage.getGanttChartIdsInNumeric();

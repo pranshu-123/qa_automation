@@ -58,8 +58,7 @@ public class IM_IN_01 extends BaseClass {
         loggingUtils.info("App count for impala- " + appCount, test);
         if (appCount > 0) {
             loggingUtils.info("Select event filter and navigate to first Job of the page", test);
-            userActions.performActionWithPolling(appDetailsPageObject.eventToggleLeftPane, UserAction.CLICK);
-            appDetailsPage.clickOnlyLink("SqlSlow");
+            appDetailsPage.selectEventFilter(ImpalaEventTypes.SqlSlowOperatorEvent);
             appDetailsPage.clickOnFirstInefficientJob();
             List<String> titles = appDetailsPage.getEfficiencyTags();
             loggingUtils.info("Titles on page - " + titles, test);

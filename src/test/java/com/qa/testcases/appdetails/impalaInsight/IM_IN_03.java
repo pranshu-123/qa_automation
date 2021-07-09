@@ -58,8 +58,7 @@ public class IM_IN_03 extends BaseClass {
         loggingUtils.info("App count for impala- " + appCount, test);
         if (appCount > 0) {
             loggingUtils.info("Search for appId", test);
-            userActions.performActionWithPolling(appDetailsPageObject.eventToggleLeftPane, UserAction.CLICK);
-            appDetailsPage.clickOnlyLink("SqlNonP");
+            appDetailsPage.selectEventFilter(ImpalaEventTypes.SQLNonPartitionedTableEvent);
             appDetailsPage.clickOnFirstInefficientJob();
             List<String> titles = appDetailsPage.getEfficiencyTags();
             loggingUtils.info("Titles on page - " + titles, test);

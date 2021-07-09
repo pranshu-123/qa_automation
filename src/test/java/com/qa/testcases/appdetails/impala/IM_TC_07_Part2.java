@@ -8,6 +8,7 @@ import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.AppDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
@@ -36,14 +37,17 @@ public class IM_TC_07_Part2 extends BaseClass {
         AppDetailsPage appDetailsPage = new AppDetailsPage(driver);
         DatePicker datePicker = new DatePicker(driver);
         AppDetailsPageObject appPageObject = new AppDetailsPageObject(driver);
-
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        AppDetailsPageObject appDetailsPageObject = new AppDetailsPageObject(driver);
         try {
             appDetailsPage.navigateToJobsTab();
             allApps.selectCluster(clusterId);
             datePicker.clickOnDatePicker();
             datePicker.selectLast90Days();
+            waitExecuter.waitUntilElementClickable(appDetailsPageObject.resetButton);
+            int appCount = appDetailsPage.clickOnlyLink("Impala");
+            waitExecuter.waitUntilElementClickable(appDetailsPageObject.resetButton);
             appDetailsPage.selectSuccessfulApplication();
-            int appCount = appDetailsPage.selectOnlyApplication(AppDetailsApplicationType.IMPALA);
             parentCondition:
             if (appCount > 0) {
                 appDetailsPage.zoomOut("50");

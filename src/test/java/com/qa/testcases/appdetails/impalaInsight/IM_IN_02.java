@@ -53,14 +53,13 @@ public class IM_IN_02 extends BaseClass {
         test.log(LogStatus.PASS, "Select last 30 days.");
         datePicker.selectLast30Days();
         loggingUtils.info("Select only impala application and get its count", test);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         int appCount = appDetailsPage.clickOnlyLink("Impala");
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         loggingUtils.info("App count for impala- " + appCount, test);
         if (appCount > 0) {
             loggingUtils.info("Select event filter and navigate to first Job of the page", test);
-            userActions.performActionWithPolling(appDetailsPageObject.eventToggleLeftPane, UserAction.CLICK);
-            appDetailsPage.clickOnlyLink("ImpalaTimeBreakdownEvent");
-            appDetailsPage.selectEventFilter(ImpalaEventTypes.TimeBreakdownEvent);
+            appDetailsPage.selectEventFilter(ImpalaEventTypes.SqlNoFilterEvent);
             appDetailsPage.clickOnFirstInefficientJob();
             List<String> titles = appDetailsPage.getEfficiencyTags();
             loggingUtils.info("Titles on page - " + titles, test);

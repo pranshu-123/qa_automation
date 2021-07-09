@@ -369,6 +369,7 @@ public class CloudMigrationPerHostPage {
      */
     public void navigateToCloudMappingPerHost() {
         userAction.performActionWithPolling(topPanelPageObject.migrationTab, UserAction.CLICK);
+        waitExecuter.sleep(5000);
         userAction.performActionWithPolling(cmpPageObj.cloudMappingPerHostTab, UserAction.CLICK);
     }
 
@@ -385,6 +386,13 @@ public class CloudMigrationPerHostPage {
      */
     public void clickOnRunReportButton() {
         userAction.performActionWithPolling(cmpPageObj.runButton, UserAction.CLICK);
+    }
+
+    /**
+     * Click on modal run button
+     */
+    public void clickOnModalRunButton() {
+        userAction.performActionWithPolling(cmpPageObj.modalRunButton, UserAction.CLICK);
     }
 
     /**
@@ -792,7 +800,7 @@ public class CloudMigrationPerHostPage {
         waitTillLoaderPresent();
         checkUncheckColumn(false);
         Map<String, List> instanceValuesFromModalTable = getInstanceValuesFromModalTable(true);
-        clickOnRunButton();
+        clickOnModalRunButton();
         try {
             waitExecuter.waitUntilTextToBeInWebElement(getConfirmationMessage(),
                     "Cloud Mapping Per Host completed successfully.");

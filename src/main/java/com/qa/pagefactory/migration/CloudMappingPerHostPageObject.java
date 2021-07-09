@@ -14,6 +14,9 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//button[contains(@class,'run-btn')]")
   public WebElement runButton;
 
+  @FindBy(xpath = "(//span[contains(text(),'Run')]/parent::a)[last()]")
+  public WebElement modalRunButton;
+
   @FindBy(xpath = "//div[contains(@class,'component-section-header')]//span[contains(text(),'Run')]")
   public WebElement newReportRunButton;
 
@@ -151,10 +154,10 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//div[contains(text(), 'Total Local Attached Storage Cost:')]/following-sibling::b")
   public WebElement totalAttachedStorageCostValue;
 
-  @FindBy(xpath = "//span[contains(text(),'COST REDUCTION')]")
+  @FindBy(xpath = "//a[contains(text(),'COST REDUCTION')]")
   public WebElement costReductionTab;
 
-  @FindBy(xpath = "//span[contains(text(),'LIFT AND SHIFT')]")
+  @FindBy(xpath = "//a[contains(text(),'LIFT AND SHIFT')]")
   public WebElement liftAndShiftTab;
 
   @FindBy(xpath = "//label[contains(text(), 'Storage Name')]")

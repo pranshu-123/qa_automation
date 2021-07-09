@@ -36,7 +36,7 @@ public class TC_KAFKA_18 extends BaseClass {
     MouseActions.clickOnElement(driver, kafkaPageObject.kafkaTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
-    kafkaPage.verifyClusterDropDown(kafkaPageObject);
+    kafkaPage.verifyClusterDropDown(kafkaPageObject, clusterId);
     kafkaPage.verifyKafkaClusterKPIs(kafkaPageObject, "Messages In per Sec");
     test.log(LogStatus.PASS, "Verified 'Messages In per Second' KPI information name ,values and graphs successfully ");
   }

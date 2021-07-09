@@ -29,7 +29,7 @@ public class TC_KAFKA_71 extends BaseClass {
     KafkaPage kafkaPage = new KafkaPage(driver);
     KafkaPageObject kafkaPageObject = new KafkaPageObject(driver);
 
-    kafkaPage.navigateToTopicTab(kafkaPageObject);
+    kafkaPage.navigateToTopicTab(kafkaPageObject, clusterId);
     kafkaPage.verifyTopicMetrics(kafkaPageObject);
     test.log(LogStatus.PASS, "Verified topic records with all details in topic metrics successfully ");
   }

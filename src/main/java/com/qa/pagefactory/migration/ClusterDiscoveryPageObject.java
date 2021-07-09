@@ -12,7 +12,7 @@ public class ClusterDiscoveryPageObject {
     @FindBy(xpath = "//div[contains(@class,'component-cta')]//span[contains(text(),'Run')]")
     public WebElement runButton;
 
-    @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/a")
+    @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/a/i")
     public List<WebElement> confirmationMessageElementClose;
 
     @FindBy(xpath = "(//span[contains(text(),'Run')])[2]/parent::a")
@@ -30,7 +30,7 @@ public class ClusterDiscoveryPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/span")
     public WebElement invalidInputMessage;
 
-    @FindBy(xpath = "(//div[@class='cluster_discovery_inner']//div[@class='row'])[1]//h3/b[1]")
+    @FindBy(xpath = "(//div[@class='panel-body']//h3/b)[1]")
     public WebElement getClusterName;
 
     @FindBy(xpath = "(.//*[local-name() = 'svg']/*[local-name() = 'text']/*[local-name() = 'tspan'])[1]")
@@ -42,7 +42,7 @@ public class ClusterDiscoveryPageObject {
     @FindBy(xpath = "(.//*[local-name() = 'svg']/*[local-name() = 'text']/*[local-name() = 'tspan'])[3]")
     public WebElement getByQueuePieCount;
 
-    @FindBy(xpath = "(//div[contains(@class,'app-details')]//table//p)[1]")
+    @FindBy(xpath = "//h3[contains(@class,'no-data-msg')]")
     public WebElement noDataByAppType;
 
     @FindBy(xpath = "(//div[contains(@class,'app-details')]//table//p)[2]")
@@ -84,7 +84,7 @@ public class ClusterDiscoveryPageObject {
     @FindBy(xpath = "//span[@class='text-fatal']")
     public WebElement fatalMessage;
 
-    @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
+    @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div/span")
     public WebElement failedErrorMessage;
 
 

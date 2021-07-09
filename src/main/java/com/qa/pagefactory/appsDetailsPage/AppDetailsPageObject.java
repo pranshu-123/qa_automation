@@ -15,8 +15,8 @@ public class AppDetailsPageObject {
     @FindBy(xpath = "//h3[contains(@class,'expandable-header')]/following-sibling::div[contains(@class,'filter-items')]//label")
     public List<WebElement> applicationTypeLabels;
 
-    @FindBy(xpath = "//h3[contains(@class,'expandable-header')]/following-sibling::div[contains(@class,'filter-items')]//label//span[contains(@class,'show-only')]")
-    public List<WebElement> applicationTypeShowOnly;
+    @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[4]/a[2]")
+    public WebElement applicationTypeShowOnly;
 
     @FindBy(id = "allApps")
     public WebElement allAppsTable;
@@ -177,7 +177,7 @@ public class AppDetailsPageObject {
     @FindBy(xpath = "//table[@id='inefficientApps']/tbody/tr")
     public List<WebElement> getImpalaInefficientJobs;
 
-    @FindBy(xpath = "(//table[@id='inefficientApps']/tbody/tr/td)[3]")
+    @FindBy(xpath = "(//table[@id='inefficientApps']//tr/td[4]/a[2])[1]")
     public WebElement firstInefficientRow;
 
     @FindBy(id = "apps-global-search-filter")

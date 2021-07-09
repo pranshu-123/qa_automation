@@ -48,8 +48,9 @@ public class TEZ_135 extends BaseClass {
         //Verify that the left pane has Tez check box and the apps number
         test.log(LogStatus.INFO, "Verify that the left pane has Tez check box and the apps number");
         logger.info("Select individual app and assert that table contain its data");
-
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         int appCount=tezDetailsPage.clickOnlyLink("Tez");
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
@@ -59,12 +60,16 @@ public class TEZ_135 extends BaseClass {
                 "displayed in the header");
 
         applicationsPageObject.expandStatus.click();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         appCount = tezDetailsPage.clickOnlyLink("Success");
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         waitExecuter.waitUntilPageFullyLoaded();
         try {
             //Clicking on the Tez app must go to apps detail page
             if (appCount > 0) {
-                tezApps.getTypeFromTable.click();
+                waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
+                applicationsPageObject.clickOnAppId.click();
+                waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
                 waitExecuter.waitUntilPageFullyLoaded();
                 tezDetailsPage.verifyDagsComponent(tezApps, true, false, false);
                 test.log(LogStatus.PASS, "Verified left pane in the app details page successfully");

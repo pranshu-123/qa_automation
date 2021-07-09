@@ -18,7 +18,7 @@ public class TC_ELK_17 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider",description="P0-Verify the cluster drop-down list, date range and cluster name should be present in the UI.")
   public void TC_ELK_17_verifyPipelineMetricsGraphs(String clusterId) {
-    test = extent.startTest("verifyPipelineMetricGraphs: " + clusterId,
+    test = extent.startTest("TC_ELK_17_verifyPipelineMetricGraphs: " + clusterId,
         "Validate pipeline metrics graph");
     test.assignCategory(" ELK ");
     Log.startTestCase("verifyPipelineMetricGraphs");

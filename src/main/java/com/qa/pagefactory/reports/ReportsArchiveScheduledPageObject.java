@@ -115,6 +115,9 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath="(//*[@class='pointer icon-delete is-enabled undefined'])")
   public WebElement deleteReportIcon;
 
+  @FindBy(xpath="//span[@class='badge pending pointer']")
+  public WebElement deleteReport;
+
   @FindBy(xpath="//div[contains(@class,'popover')]/H3")
   public WebElement deletePopText;
 

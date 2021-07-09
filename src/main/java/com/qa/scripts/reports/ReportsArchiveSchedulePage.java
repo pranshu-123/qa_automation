@@ -66,6 +66,7 @@ public class ReportsArchiveSchedulePage {
     int beforeScheduledReportCnt = getReportCnt(reportPageObj, 15);
     userActions.performActionWithPolling(reportPageObj.deleteReportIcon, UserAction.CLICK);
     waitExecuter.sleep(2000);
+    userActions.performActionWithPolling(reportPageObj.deleteReport, UserAction.CLICK);
     String bannerMsg = reportPageObj.successfulMsgBanner.getText();
     logger.info("Banner Msg after deleting the scheduled report is " + bannerMsg);
     userActions.performActionWithPolling(reportPageObj.closeBanner, UserAction.CLICK);

@@ -67,6 +67,7 @@ public class TC_JAL_15 extends BaseClass {
         if (totalCount > 0) {
             String usernameFromTable = applicationsPageObject.getQueueNameTable.getText();
             LOGGER.info("Username displayed in table " + usernameFromTable);
+            LOGGER.info("queuenameSelected displayed in table " + queuenameSelected);
             Assert.assertEquals(usernameFromTable, queuenameSelected,
                     "The application in table contains username other than that of " + usernameFromTable);
             test.log(LogStatus.PASS, "The application in table contains username: " + usernameFromTable);

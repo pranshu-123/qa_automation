@@ -22,7 +22,7 @@ public class TC_ELK_10 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider",description="P0-Verify the metrics graph for log stash nodes should be match with node table..")
   public void TC_ELK_10_verifyLogstashMetricsGraphPerNode(String clusterId) {
-    test = extent.startTest("verifyLogstashMetricsGraphPerNode: " + clusterId,
+    test = extent.startTest("TC_ELK_10_verifyLogstashMetricsGraphPerNode: " + clusterId,
         "Validate logstash metrics graph per node ");
     test.assignCategory(" ELK ");
     Log.startTestCase("verifyLogstashMetricsGraphPerNode");

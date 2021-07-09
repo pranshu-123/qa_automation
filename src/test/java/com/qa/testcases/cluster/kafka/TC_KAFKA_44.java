@@ -29,7 +29,7 @@ public class TC_KAFKA_44 extends BaseClass {
     KafkaPage kafkaPage = new KafkaPage(driver);
     KafkaPageObject kafkaPageObject = new KafkaPageObject(driver);
 
-    kafkaPage.navigateToBrokerTab(kafkaPageObject);
+    kafkaPage.navigateToBrokerTab(kafkaPageObject, clusterId);
     kafkaPage.verifyBrokerMetrics(kafkaPageObject);
     test.log(LogStatus.PASS, "Verified broker records with all details in broker metrics successfully ");
   }

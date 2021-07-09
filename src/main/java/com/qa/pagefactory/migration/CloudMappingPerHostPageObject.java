@@ -11,7 +11,7 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Cloud Mapping Per Host'])")
   public WebElement cloudMappingPerHostTab;
 
-  @FindBy(xpath = "(//span[contains(text(),'Run')]/parent::button)[last()]")
+  @FindBy(xpath = "//button[contains(@class,'run-btn')]")
   public WebElement runButton;
 
   @FindBy(xpath = "(//span[contains(text(),'Run')]/parent::a)[last()]")

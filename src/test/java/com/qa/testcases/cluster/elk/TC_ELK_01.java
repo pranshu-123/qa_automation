@@ -23,7 +23,7 @@ public class TC_ELK_01 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider",description="P0-Validate that the logstash pipeline data should be in the Unravel UI.")
   public void TC_ELK_01_verifyLogstashPipeline(String clusterId) {
-    test = extent.startTest("verifyLogstashPipeline: " + clusterId,
+    test = extent.startTest("TC_ELK_01_verifyLogstashPipeline: " + clusterId,
         "Validate logstash pipeline data in Unravel UI..");
     test.assignCategory(" ELK ");
     Log.startTestCase("verifyLogstashPipeline");

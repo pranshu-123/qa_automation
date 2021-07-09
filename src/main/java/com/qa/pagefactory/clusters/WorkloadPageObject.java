@@ -63,7 +63,7 @@ public class WorkloadPageObject {
     @FindBy(xpath = "(//a[contains(text(),'Day')])[1]")
     public WebElement viewByDay;
 
-    @FindBy(xpath = "(//a[contains(text(),'Hour')])[1]")
+    @FindBy(xpath = "//a[normalize-space()='Hour']")
     public WebElement viewByHour;
 
     @FindBy(xpath = "(//a[contains(text(),'Hour')])[3]")
@@ -72,7 +72,7 @@ public class WorkloadPageObject {
     @FindBy(xpath = "//a[contains(text(),'Hour/Day')]")
     public WebElement viewByHourDay;
 
-    @FindBy(xpath = "//span[normalize-space()='Sum']")
+    @FindBy(xpath = "//div[@class='pull-right']//span[@class='badge pending']")
     public WebElement viewBySum;
 
     @FindBy(xpath = "(//div[contains(@class,'highcharts-container')])[1]")

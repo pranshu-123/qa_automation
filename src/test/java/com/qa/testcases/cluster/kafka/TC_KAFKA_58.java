@@ -28,7 +28,7 @@ public class TC_KAFKA_58 extends BaseClass {
     KafkaPage kafkaPage = new KafkaPage(driver);
     KafkaPageObject kafkaPageObject = new KafkaPageObject(driver);
 
-    kafkaPage.navigateToBrokerTab(kafkaPageObject);
+    kafkaPage.navigateToBrokerTab(kafkaPageObject, clusterId);
     kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject,"Produce Total Time, 99th Percentile",
         "kafkaGraph11");
     test.log(LogStatus.PASS, "Verified 'Produce Total Time, 99th Percentile' details under broker tab for" +

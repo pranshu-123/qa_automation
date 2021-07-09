@@ -35,7 +35,7 @@ public class TC_KAFKA_35 extends BaseClass {
     MouseActions.clickOnElement(driver, kafkaPageObject.kafkaTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
-    kafkaPage.verifyClusterDropDown(kafkaPageObject);
+    kafkaPage.verifyClusterDropDown(kafkaPageObject, clusterId);
     kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject, "Log Flush Latency, 99th Percentile",
         "kafkaGraph16");
     test.log(LogStatus.PASS, "Verified 'Log Flush Latency, 99th Percentile' KPI information name" +

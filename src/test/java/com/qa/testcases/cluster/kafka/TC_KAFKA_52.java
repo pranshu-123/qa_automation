@@ -28,7 +28,7 @@ public class TC_KAFKA_52 extends BaseClass {
     KafkaPage kafkaPage = new KafkaPage(driver);
     KafkaPageObject kafkaPageObject = new KafkaPageObject(driver);
 
-    kafkaPage.navigateToBrokerTab(kafkaPageObject);
+    kafkaPage.navigateToBrokerTab(kafkaPageObject, clusterId);
     kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject,"# Active Controller Trend","kafkaGraph5");
     test.log(LogStatus.PASS, "Verified '# Active Controller Trend' details under broker tab for" +
         " selected broker successfully ");

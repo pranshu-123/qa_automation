@@ -75,6 +75,7 @@ public class YC_021 extends BaseClass {
             waitExecuter.sleep(1000);
             datePicker.selectLastSixHour();
             waitExecuter.sleep(2000);
+            waitExecuter.waitUntilPageFullyLoaded();
 
 
             test.log(LogStatus.PASS, "lastSixHour field is successfully verified in date range");
@@ -118,6 +119,7 @@ public class YC_021 extends BaseClass {
             waitExecuter.sleep(1000);
             datePicker.selectLast90Days();
             waitExecuter.sleep(1000);
+            waitExecuter.waitUntilPageFullyLoaded();
 
             test.log(LogStatus.PASS, "Last 90 Days field is successfully verified in date range");
 
@@ -125,18 +127,21 @@ public class YC_021 extends BaseClass {
             waitExecuter.sleep(1000);
             datePicker.selectThisMonth();
             waitExecuter.sleep(1000);
+            waitExecuter.waitUntilPageFullyLoaded();
             test.log(LogStatus.PASS, "This Month field is successfully verified in date range");
 
             datePicker.clickOnDatePicker();
             waitExecuter.sleep(1000);
             datePicker.selectLastMonth();
             waitExecuter.sleep(1000);
-
+            waitExecuter.waitUntilPageFullyLoaded();
             test.log(LogStatus.PASS, "Last Month field is successfully verified in date range");
+
             datePicker.clickOnDatePicker();
             waitExecuter.sleep(1000);
             datePicker.selectCustomRange();
             waitExecuter.sleep(1000);
+            waitExecuter.waitUntilPageFullyLoaded();
 
             // Set Start date by substracting days from current date and end date as current
             // date
@@ -146,11 +151,12 @@ public class YC_021 extends BaseClass {
             // Click on apply button of calendar
             datePicker.clickOnCustomDateApplyBtn();
             waitExecuter.sleep(1000);
+            waitExecuter.waitUntilPageFullyLoaded();
 
             test.log(LogStatus.PASS, "Start Date field is successfully verified in custom date range");
         }
         } catch (TimeoutException | NoSuchElementException te) {
-            throw new AssertionError("Successfully not verified date range.");
+            throw new AssertionError("Successfully not verified date range."+te);
         }
 
     }

@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class AppDetailsPageObject {
 
-    @FindBy(xpath = "//h3[contains(@class,'expandable-header')]/following-sibling::div[contains(@class,'filter-items')]//label/span[@class='show-only']")
+    @FindBy(xpath = "//h3[contains(@class,'expandable-header')]/following-sibling::div[contains(@class,'filter-items')]//label")
     public List<WebElement> applicationTypeLabels;
 
     @FindBy(xpath = "//tbody[@id='inefficientApps-body']/tr/td[4]/a[2]")
@@ -165,7 +165,7 @@ public class AppDetailsPageObject {
     @FindBy(xpath = "(//h3[contains(@class,'expandable-header')])[2]/following-sibling::div[contains(@class,'filter-items')]//label")
     public List<WebElement> eventTypeLabels;
 
-    @FindBy(xpath = "(//h3[contains(@class,'expandable-header')])[2]/following-sibling::div[contains(@class,'filter-items')]//label//following-sibling::span[2]")
+    @FindBy(xpath = "(//h3[contains(@class,'expandable-header')])[2]/following-sibling::div[contains(@class,'filter-items')]//label//span[contains(@class,'show-only')]")
     public List<WebElement> eventTypeShowOnly;
 
     @FindBy(xpath = "//div[@class='component-tabs-primary']//li/a[normalize-space(text()) = 'Analysis']")

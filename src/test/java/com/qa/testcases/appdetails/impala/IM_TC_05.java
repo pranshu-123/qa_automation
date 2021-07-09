@@ -7,6 +7,7 @@ import com.qa.enums.appdetails.impala.ImpalaFragmentDetails;
 import com.qa.enums.UserAction;
 import com.qa.enums.appdetails.impala.OperatorDetails;
 import com.qa.pagefactory.TopPanelPageObject;
+import com.qa.pagefactory.appsDetailsPage.AppDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.AppDetailsPage;
@@ -44,6 +45,8 @@ public class IM_TC_05 extends BaseClass {
         actions.performActionWithPolling(topPanelPageObject.jobsTab, UserAction.CLICK);
         loggingUtils.info("Click on Job Tabs", test);
         AllApps allApps = new AllApps(driver);
+        AppDetailsPageObject appDetailsPageObject = new AppDetailsPageObject(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         allApps.selectCluster(clusterId);
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
@@ -51,7 +54,9 @@ public class IM_TC_05 extends BaseClass {
         AppDetailsPage appDetailsPage = new AppDetailsPage(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         try {
-            appDetailsPage.selectOnlyApplication(AppDetailsApplicationType.IMPALA);
+            waitExecuter.waitUntilElementClickable(appDetailsPageObject.resetButton);
+            appDetailsPage.clickOnlyLink("Impala");
+            waitExecuter.waitUntilElementClickable(appDetailsPageObject.resetButton);
             actions.performActionWithPolling(applicationsPageObject.clickOnAppId, UserAction.CLICK);
             appDetailsPage.clickOnImpalaOperatorsTab();
             for (WebElement fragment : appDetailsPage.getImpalaFragmentRows()) {

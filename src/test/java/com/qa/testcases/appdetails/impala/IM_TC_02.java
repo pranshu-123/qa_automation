@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.enums.AppDetailsApplicationType;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.TopPanelPageObject;
+import com.qa.pagefactory.appsDetailsPage.AppDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.AppDetailsPage;
@@ -47,8 +48,13 @@ public class IM_TC_02 extends BaseClass {
         datePicker.selectLast30Days();
         AppDetailsPage appDetailsPage = new AppDetailsPage(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
+        AppDetailsPageObject appDetailsPageObject = new AppDetailsPageObject(driver);
         try {
-            appDetailsPage.selectOnlyApplication(AppDetailsApplicationType.IMPALA);
+            waitExecuter.waitUntilElementClickable(appDetailsPageObject.resetButton);
+            appDetailsPage.clickOnlyLink("Impala");
+            waitExecuter.waitUntilElementClickable(appDetailsPageObject.resetButton);
+            //appDetailsPage.clickOnlyLink("Impala");
+            //waitExecuter.waitUntilElementClickable(appDetailsPageObject.resetButton);
             appDetailsPage.selectSuccessfulApplication();
             actions.performActionWithPolling(applicationsPageObject.clickOnAppId, UserAction.CLICK);
             waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);

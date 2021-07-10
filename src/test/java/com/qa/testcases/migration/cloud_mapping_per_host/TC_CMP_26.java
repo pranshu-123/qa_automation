@@ -33,7 +33,7 @@ public class TC_CMP_26 extends BaseClass {
         cloudMigrationPerHostPage.navigateToCloudMappingPerHost();
 
         LOGGER.info("Click on Run button", test);
-        cloudMigrationPerHostPage.clickOnRunButton();
+        cloudMigrationPerHostPage.clickOnModalRunButton();
         cloudMigrationPerHostPage.waitTillLoaderPresent();
 
         LOGGER.info("Select HDI as cloud product.", test);

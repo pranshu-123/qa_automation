@@ -458,15 +458,15 @@ public class AppDetailsPage {
         wait.waitUntilElementClickable(appDetailsPageObject.eventToggleLeftPane);
         userActions.performActionWithPolling(appDetailsPageObject.eventToggleLeftPane, UserAction.CLICK);
         for (int i = 0; i < appDetailsPageObject.eventTypeLabels.size(); i++) {
-            //if (appDetailsPageObject.eventTypeLabels.get(i).getAttribute("content").contains(eventType.getValue())) {
+            if(appDetailsPageObject.eventTypeLabels.get(i).getAttribute("content").contains(eventType.getValue())) {
                 ActionPerformer actionPerformer = new ActionPerformer(driver);
                 actionPerformer.moveToTheElement(appDetailsPageObject.eventTypeLabels.get(i));
                 waitExecuter.sleep(3000);
                 logger.info("TOOLTIPS```````````"+appDetailsPageObject.getToolTipValues.getText());
-                if(appDetailsPageObject.getToolTipValues.getText().contains(eventType.getValue())){
-                userActions.performActionWithPolling(appDetailsPageObject.eventTypeShowOnly.get(i),
-                        UserAction.CLICK);
+                    userActions.performActionWithPolling(appDetailsPageObject.eventTypeShowOnly.get(i),
+                            UserAction.CLICK);
                     waitExecuter.sleep(3000);
+
            }
         }
     }
@@ -514,6 +514,8 @@ public class AppDetailsPage {
         Actions action = new Actions(driver);
         WebElement we = driver
                 .findElement(By.xpath("(//label[contains(@class,'checkbox')])/span[contains(text(),'" + types + "')]"));
+        waitExecuter.waitUntilElementClickable(sparkPageObject.resetButton);
+        waitExecuter.sleep(3000);
         action.moveToElement(we)
                 .moveToElement(driver.findElement(By.xpath("(//label[contains(@class,'checkbox')])"
                         + "/span[contains(text(),'" + types + "')]/following-sibling::span[2]")))
@@ -521,8 +523,10 @@ public class AppDetailsPage {
         waitExecuter.waitUntilElementClickable(sparkPageObject.resetButton);
         WebElement ele = driver.findElement(By.xpath("(//label[contains(@class,'checkbox')])"
                 + "/span[contains(text(),'" + types + "')]/following-sibling::span[1]"));
+        waitExecuter.waitUntilElementClickable(sparkPageObject.resetButton);
         waitExecuter.sleep(3000);
         int appCount = Integer.parseInt(ele.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
+        waitExecuter.waitUntilElementClickable(sparkPageObject.resetButton);
         waitExecuter.sleep(3000);
         return appCount;
     }

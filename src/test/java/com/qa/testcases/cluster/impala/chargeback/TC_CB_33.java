@@ -21,7 +21,6 @@ import java.util.List;
 @Marker.ImpalaChargeback
 public class TC_CB_33 extends BaseClass {
     private WaitExecuter waitExecuter;
-    private ChargeBackImpala chargebackImpala;
     private ChargebackImpalaPageObject chargebackImpalaPageObject;
     private DatePicker picker;
 
@@ -34,18 +33,19 @@ public class TC_CB_33 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
         // Click on datepicker button
-        chargebackImpala = new ChargeBackImpala(driver);
         picker = new DatePicker(driver);
         // Intialize impala page objects
         chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
         // Click on Chargeback tab
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
         chargeBackImpala.selectImpalaChargeback();
+        // Select the cluster
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
-        waitExecuter.sleep(1000);        // Select the cluster
-        test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
         homePage.selectMultiClusterIdClusterPage(clusterId);
+        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.sleep(1000);
+        test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
+
 
         chargeBackImpala.selectImpalaType("Impala");
         waitExecuter.sleep(2000);
@@ -57,7 +57,7 @@ public class TC_CB_33 extends BaseClass {
         chargebackImpalaPageObject.groupBySearchBox.click();
         waitExecuter.sleep(3000);
         test.log(LogStatus.PASS, "verify the user clicks on each row the User is further group by realUser");
-        if (!chargebackImpala.selecttable())
+        if (!chargeBackImpala.selecttable())
         {
             test.log(LogStatus.PASS, "verify grouped by User table");
         }
@@ -65,28 +65,28 @@ public class TC_CB_33 extends BaseClass {
             test.log(LogStatus.FAIL, "Test Failed grouped by User table");
         }
 
-        if (!chargebackImpala.selectQueuetable())
+        if (!chargeBackImpala.selectQueuetable())
         {
             test.log(LogStatus.PASS, "verify the Group by Queue table");
         }
         else{
             test.log(LogStatus.FAIL, "Test Failed the Group by Queue table");
         }
-        if (!chargebackImpala.selectdepttable())
+        if (!chargeBackImpala.selectdepttable())
         {
             test.log(LogStatus.PASS, "verify the Group by dept table");
         }
         else{
             test.log(LogStatus.FAIL, "Test Failed the Group by dept table");
         }
-        if (!chargebackImpala.selectgrouptable())
+        if (!chargeBackImpala.selectgrouptable())
         {
             test.log(LogStatus.PASS, "verify the Group by group table");
         }
         else{
             test.log(LogStatus.FAIL, "Test Failed the Group by group table");
         }
-        if (!chargebackImpala.selectrealUsertable())
+        if (!chargeBackImpala.selectrealUsertable())
         {
             test.log(LogStatus.PASS, "verify the Group by realUser table");
         }
@@ -94,7 +94,7 @@ public class TC_CB_33 extends BaseClass {
             test.log(LogStatus.FAIL, "Test Failed the Group by realUser table");
         }
 
-        if(!chargebackImpala.selectdbstable())
+        if(!chargeBackImpala.selectdbstable())
         {
             test.log(LogStatus.PASS, "verify the Group by dbs table");
         }

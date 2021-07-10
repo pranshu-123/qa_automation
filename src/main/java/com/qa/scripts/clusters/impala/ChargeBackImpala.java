@@ -842,7 +842,7 @@ public class ChargeBackImpala {
     }
 
     /* Remove options from group by */
-    public void remove1stGroupByOption() {
+    public void remove1stGroupByOption()throws IndexOutOfBoundsException {
         waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.remove1stGroupBy.get(0));
         userActions.performActionWithPolling(chargebackImpalaPageObject.remove1stGroupBy.get(0), UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.remove1stGroupBy.get(0));

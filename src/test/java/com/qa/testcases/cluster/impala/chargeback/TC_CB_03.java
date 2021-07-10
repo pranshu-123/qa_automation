@@ -5,26 +5,16 @@ import com.qa.base.BaseClass;
 import com.qa.pagefactory.clusters.ChargebackImpalaPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
-
 import com.qa.scripts.clusters.impala.ChargeBackImpala;
-
-import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import static org.testng.Assert.*;
 
 @Marker.All
 @Marker.ImpalaChargeback
 public class TC_CB_03 extends BaseClass {
-    private WaitExecuter waitExecuter;
-    private ChargeBackImpala chargebackImpala;
-    private ChargebackImpalaPageObject chargebackImpalaPageObject;
-    private DatePicker picker;
+
 
     @Test(dataProvider = "clusterid-data-provider", description = "P0-Verify that the user can select a cluster")
     public void TC_CB_03_Verifytheusercanselectacluster(String clusterId) {
@@ -33,9 +23,10 @@ public class TC_CB_03 extends BaseClass {
         test.assignCategory(" Cluster - Impala Chargeback");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
+        DatePicker picker = new DatePicker(driver);
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
 
-        chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
+        ChargebackImpalaPageObject chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
         // Click on Chargeback tab
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
         chargeBackImpala.selectImpalaChargeback();
@@ -57,60 +48,37 @@ public class TC_CB_03 extends BaseClass {
         waitExecuter.sleep(3000);
         waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.impalaDropdownOption);
 
-        String getHeaderValue= chargebackImpalaPageObject.MemoryHoursFromGraphHeader.getText().trim();
-        Assert.assertTrue(chargebackImpalaPageObject.MemoryHoursFromGraphHeader.isDisplayed(),
-                "total CPU hours in graph heading not display");
-        test.log(LogStatus.PASS, "verify the total CPU hours in graph heading"+getHeaderValue);
-        if(!"".equals(getHeaderValue)){
-            test.log(LogStatus.PASS,"Verification Passed for total memory in graph heading.");
-        }else {
-            test.log(LogStatus.FAIL, "Verification Failed for total memory in graph heading.");
-        }
+        // Get CPU hours from table
+        double totalCPUHoursFromTable = chargeBackImpala.getTotalCPUHoursFromTable();
+        waitExecuter.sleep(3000);
 
-        String getCPUValue= chargebackImpalaPageObject.MemoryHoursFromGraphHeader.getText().trim();
-        Assert.assertTrue(chargebackImpalaPageObject.MemoryHoursFromGraphHeader.isDisplayed(),
-                "total CPU hours in graph heading not display");
-        test.log(LogStatus.PASS, "verify the total CPU hours in graph heading"+getCPUValue);
-        if(!"".equals(getCPUValue)){
-            test.log(LogStatus.PASS,"Verification Passed for total memory in graph heading.");
-        }else {
-            test.log(LogStatus.FAIL, "Verification Failed for total memory in graph heading.");
-        }
+        double headerValue = chargeBackImpala.getCPUHoursFromGraphHeader();
+        if (!chargebackImpalaPageObject.CPUHoursFromGraphHeader.getText().equals("0.00")) {
 
-        String cpuHours = chargebackImpalaPageObject.cpuGraphHeader.getText().trim();
-        Assert.assertTrue(chargebackImpalaPageObject.cpuGraphHeader.getText().matches(cpuHours),
-                "verify the total CPU hours in graph heading");
-        if(!"".equals(cpuHours)){
-            test.log(LogStatus.PASS,"Verification Passed for total CPU hours in graph heading.");
-        }else {
-            test.log(LogStatus.FAIL, "Verification Failed for total CPU hours in graph heading.");
-        }
+            int avgSecondDiff = chargeBackImpala.getCPUHourListFromTable().size() / 2;
+            double differenceInSeconds = headerValue - totalCPUHoursFromTable;
+            // Compare header CPU hours to total table hours
+            Assert.assertTrue(differenceInSeconds < avgSecondDiff,
+                    "The seconds difference is greater than that of average seconds exemption ");
+            test.log(LogStatus.PASS, "The seconds difference is less than the expected value.");
 
-        String donutChart = chargebackImpalaPageObject.donutchart.getText().trim();
-        Assert.assertTrue(chargebackImpalaPageObject.donutchart.getText().matches(donutChart),
+        } else
+            Assert.assertEquals(headerValue, totalCPUHoursFromTable,
+                    "Total CPU hours from table does not match header CPU hours when converted to seconds");
+        test.log(LogStatus.PASS, "Total CPU hours from table match the header value of CPU graph.");
+
+
+        String donutchart = chargeBackImpala.getdonutchartHeader();
+        String donutchartvalue = donutchart.replaceAll("[^\\d-]", "");
+        Assert.assertTrue(chargeBackImpala.getdonutchartHeader().matches(donutchart),
                 "verify the total Jobs donut chart in graph heading");
-        if(!"".equals(donutChart)){
-            test.log(LogStatus.PASS,"Verification Passed for total Jobs donut chart in graph heading.");
-        }else {
-            test.log(LogStatus.FAIL, "Verification Failed for total Jobs donut chart in graph heading.");
-        }
+        test.log(LogStatus.PASS, "verify the total Jobs donut chart in graph heading" + donutchart);
 
-        String impalaQueriesTable = chargebackImpalaPageObject.impalajobs.getText().trim();
-        Assert.assertTrue(chargebackImpalaPageObject.impalajobs.getText().matches(impalaQueriesTable),
-                "Verify the total Impala queries table in graph heading");
-        if(!"".equals(impalaQueriesTable)){
-            test.log(LogStatus.PASS,"Verification Passed for total Impala queries table in graph heading.");
-        }else {
-            test.log(LogStatus.FAIL, "Verification Failed for total Impala queries table in graph heading.");
-        }
-
-        String chargebackTable = chargebackImpalaPageObject.Chargebacktable.getText().trim();
-        Assert.assertTrue(chargebackImpalaPageObject.Chargebacktable.getText().matches(chargebackTable),
-                "Verify the total Chargeback table grouped by user chart in graph heading");
-        if(!"".equals(impalaQueriesTable)){
-            test.log(LogStatus.PASS,"Verification Passed for total Chargeback table grouped by user chart in graph heading.");
-        }else {
-            test.log(LogStatus.FAIL, "Verification Failed for total Chargeback table grouped by user chart in graph heading.");
-        }
+        String impalaqueriestable = chargeBackImpala.getImpalatableHeader();
+        String impalaqueriestablevalue = impalaqueriestable.replaceAll("[^\\d-]", "");
+        Assert.assertEquals(donutchartvalue, impalaqueriestablevalue, "Jobs Count does not matches.");
+        Assert.assertTrue(chargeBackImpala.getImpalatableHeader().matches(impalaqueriestable),
+                "verify the total Jobs donut chart in graph heading");
+        test.log(LogStatus.PASS, "verify the total Impala queries table in graph heading" + impalaqueriestable);
     }
 }

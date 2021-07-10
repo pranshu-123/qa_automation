@@ -17,7 +17,6 @@ import com.relevantcodes.extentreports.LogStatus;
 @Marker.ImpalaChargeback
 public class TC_CB_31 extends BaseClass {
 	private WaitExecuter waitExecuter;
-	private ChargeBackImpala chargebackImpala;
 	private ChargebackImpalaPageObject chargebackImpalaPageObject;
 	private DatePicker picker;
 	private static final Logger LOGGER = Logger.getLogger(TC_CB_31.class.getName());
@@ -52,13 +51,13 @@ public class TC_CB_31 extends BaseClass {
 		picker.selectLast30Days();
 
 		// Get CPU hours from table
-		double totalCPUHoursFromTable = chargebackImpala.getTotalCPUHoursFromTable();
+		double totalCPUHoursFromTable = chargeBackImpala.getTotalCPUHoursFromTable();
 
 		// Get total CPU hours from table
-		double headerValue = chargebackImpala.getCPUHoursFromGraphHeader();
+		double headerValue = chargeBackImpala.getCPUHoursFromGraphHeader();
 		if (!chargebackImpalaPageObject.CPUHoursFromGraphHeader.getText().equals("0.00")) {
 
-			int avgSecondDiff = chargebackImpala.getCPUHourListFromTable().size() / 2;
+			int avgSecondDiff = chargeBackImpala.getCPUHourListFromTable().size() / 2;
 			double differenceInSeconds = headerValue - totalCPUHoursFromTable;
 			// Compare header CPU hours to total table hours
 			Assert.assertTrue(differenceInSeconds < avgSecondDiff,

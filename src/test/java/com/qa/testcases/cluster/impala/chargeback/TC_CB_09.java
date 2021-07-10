@@ -10,6 +10,8 @@ import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import java.util.logging.Logger;
+
+import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -21,7 +23,6 @@ import org.testng.annotations.Test;
 @Marker.ImpalaChargeback
 public class TC_CB_09 extends BaseClass {
 	private WaitExecuter waitExecuter;
-	private ChargeBackImpala chargebackImpala;
 	private ChargebackImpalaPageObject chargebackImpalaPageObject;
 	private HomePage homePage;
 	private static final Logger LOGGER = Logger.getLogger(TC_CB_09.class.getName());
@@ -55,19 +56,24 @@ public class TC_CB_09 extends BaseClass {
 
 		chargeBackImpala.selectImpalaType("Impala");
 		waitExecuter.sleep(2000);
-		
+
 		// Click on chargeback group by combobox
 		test.log(LogStatus.INFO, "Click on chargeback group by combobox");
 		LOGGER.info("Click on chargeback group by combobox");
 		waitExecuter.sleep(1000);
 		chargebackImpalaPageObject.groupBySearchBox.click();
 		waitExecuter.sleep(2000);
+
 		
 		// Verify the names of options available in group by
 		test.log(LogStatus.INFO, "Verify the names of options available in group by");
 		LOGGER.info("Verify the names of options available in group by");
-		Assert.assertTrue(chargebackImpala.validateGroupByOptions(),
-				"The displayed option does not smatch the group by actual options");
+		Assert.assertFalse(chargeBackImpala.validateGroupByOptions(),
+				"The displayed option does not have group by options");
+		waitExecuter.sleep(2000);
+		test.log(LogStatus.PASS, "Successfully verified options available in group by on impala " +
+				"chargeback page");
+
 
 	}
 }

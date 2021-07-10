@@ -20,7 +20,6 @@ import java.util.List;
 @Marker.ImpalaChargeback
 public class TC_CB_29 extends BaseClass {
     private WaitExecuter waitExecuter;
-    private ChargeBackImpala chargebackImpala;
     private ChargebackImpalaPageObject chargebackImpalaPageObject;
     private DatePicker picker;
 
@@ -29,10 +28,9 @@ public class TC_CB_29 extends BaseClass {
 
         test = extent.startTest("TC_CB_29_dataValidation " + clusterId, "Verify the number of applications displayed in the chargeback report");
         test.assignCategory(" Cluster - Impala Chargeback");
-
+        ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
-        ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
         picker = new DatePicker(driver);
         chargeBackImpala.selectImpalaChargeback();
 
@@ -57,20 +55,20 @@ public class TC_CB_29 extends BaseClass {
         test.log(LogStatus.PASS, "Jobs count displayed.");
         System.out.println("Jobs count displayed");
         try {
-            String donutchart = chargebackImpala.getdonutchartHeader();
+            String donutchart = chargeBackImpala.getdonutchartHeader();
             String donutchartvalue = donutchart.replaceAll("[^\\d-]", "");
-            Assert.assertTrue(chargebackImpala.getdonutchartHeader().matches(donutchart),
+            Assert.assertTrue(chargeBackImpala.getdonutchartHeader().matches(donutchart),
                     "verify the total Jobs donut chart in graph heading");
             test.log(LogStatus.PASS, "verify the total Jobs donut chart in graph heading" + donutchart);
 
-            String impalaqueriestable = chargebackImpala.getImpalatableHeader();
+            String impalaqueriestable = chargeBackImpala.getImpalatableHeader();
             String impalaqueriestablevalue = impalaqueriestable.replaceAll("[^\\d-]", "");
             Assert.assertEquals(donutchartvalue, impalaqueriestablevalue, "Jobs Count does not matches.");
-            Assert.assertTrue(chargebackImpala.getImpalatableHeader().matches(impalaqueriestable),
+            Assert.assertTrue(chargeBackImpala.getImpalatableHeader().matches(impalaqueriestable),
                     "verify the total Jobs donut chart in graph heading");
             test.log(LogStatus.PASS, "verify the total Impala queries table in graph heading" + impalaqueriestable);
 
-            String chargebacktable = chargebackImpala.getchargebacktableHeader();
+            String chargebacktable = chargeBackImpala.getchargebacktableHeader();
             test.log(LogStatus.PASS, "verify the total Chargeback table grouped by user chart in graph heading" + chargebacktable);
         } catch (NullPointerException | NoSuchElementException te) {
             throw new AssertionError("Total Chargeback table grouped by user chart in graph heading is not verified");

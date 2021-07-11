@@ -36,7 +36,7 @@ public class YC_021 extends BaseClass {
         test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterIdClusterPage(clusterId);
-        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilPageFullyLoaded();
         chargeBackYarn.selectChargebackType("Yarn");
         waitExecuter.sleep(2000);
 
@@ -50,6 +50,7 @@ public class YC_021 extends BaseClass {
         for (int i = 0; i < commonPageObject.clustersList.size(); i++) {
             commonPageObject.clustersList.get(i).click();
             waitExecuter.sleep(2000);
+            waitExecuter.waitUntilPageFullyLoaded();
 
             // Click on datepicker button
             DatePicker datePicker = new DatePicker(driver);
@@ -59,6 +60,7 @@ public class YC_021 extends BaseClass {
             // Click on combination of daterange
             datePicker.selectLastOneHour();
             waitExecuter.sleep(1000);
+            waitExecuter.waitUntilPageFullyLoaded();
             test.log(LogStatus.PASS, "Last 1 Hour field is successfully verified in date range");
 
 
@@ -68,6 +70,7 @@ public class YC_021 extends BaseClass {
 
             datePicker.selectLastTwoHour();
             waitExecuter.sleep(2000);
+            waitExecuter.waitUntilPageFullyLoaded();
 
             test.log(LogStatus.PASS, "Last 2 Hours field is successfully verified in date range");
 
@@ -83,19 +86,22 @@ public class YC_021 extends BaseClass {
             datePicker.clickOnDatePicker();
             waitExecuter.sleep(1000);
             datePicker.selectLast12Hour();
-            waitExecuter.sleep(2000);
+            waitExecuter.sleep(1000);
+            waitExecuter.waitUntilPageFullyLoaded();
             test.log(LogStatus.PASS, "last12Hours field is successfully verified in date range");
 
             datePicker.clickOnDatePicker();
             waitExecuter.sleep(1000);
             datePicker.selectToday();
-            waitExecuter.sleep(2000);
+            waitExecuter.sleep(1000);
+            waitExecuter.waitUntilPageFullyLoaded();
             test.log(LogStatus.PASS, "today field is successfully verified in date range");
 
             datePicker.clickOnDatePicker();
             waitExecuter.sleep(1000);
             datePicker.selectYesterday();
-            waitExecuter.sleep(2000);
+            waitExecuter.sleep(1000);
+            waitExecuter.waitUntilPageFullyLoaded();
 
 
             test.log(LogStatus.PASS, "yesterday field is successfully verified in date range");
@@ -103,6 +109,7 @@ public class YC_021 extends BaseClass {
             waitExecuter.sleep(1000);
             datePicker.selectLast7Days();
             waitExecuter.sleep(2000);
+            waitExecuter.waitUntilPageFullyLoaded();
 
 
             test.log(LogStatus.PASS, "Last 7 Days field is successfully verified in date range");
@@ -111,6 +118,7 @@ public class YC_021 extends BaseClass {
             waitExecuter.sleep(1000);
             datePicker.selectLast30Days();
             waitExecuter.sleep(1000);
+            waitExecuter.waitUntilPageFullyLoaded();
 
 
             test.log(LogStatus.PASS, "Last 30 Days field is successfully verified in date range");

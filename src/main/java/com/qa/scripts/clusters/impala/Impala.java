@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import com.qa.enums.UserAction;
 import com.qa.utils.JavaScriptExecuter;
+import com.qa.utils.MouseActions;
 import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -25,8 +26,8 @@ public class Impala {
 
 	/**
 	 * Constructer to initialize wait, driver and necessary objects
-	 * @param driver
-	 * - WebDriver instance
+	 *
+	 * @param driver - WebDriver instance
 	 */
 	public Impala(WebDriver driver) {
 		waitExecuter = new WaitExecuter(driver);
@@ -45,7 +46,6 @@ public class Impala {
 				memoryNodeListText.add(text);
 			}
 			LOGGER.info("The memory graph is being displayed for nodes: " + memoryNodeListText);
-			System.out.println("The memory graph is being displayed for nodes: " + memoryNodeListText);
 			return true;
 		}
 		if (parentMemoryNodeList.size() <= 0) {
@@ -54,7 +54,6 @@ public class Impala {
 			for (int i = 0; i < childList.size(); i++) {
 				String noDataDisplayed = childList.get(i).getText();
 				LOGGER.info("The data displayed in memory graph is: " + noDataDisplayed);
-				System.out.println("The data displayed in memory graph is: " + noDataDisplayed);
 			}
 			return true;
 		} else
@@ -71,7 +70,6 @@ public class Impala {
 				queryUserListText.add(text);
 			}
 			LOGGER.info("The query graph is being displayed for users: " + queryUserListText);
-			System.out.println("The query graph is being displayed for users: " + queryUserListText);
 			return true;
 		}
 		if (parentQueryUserList.size() <= 0) {
@@ -80,7 +78,6 @@ public class Impala {
 			for (int i = 0; i < childList.size(); i++) {
 				String noDataDisplayed = childList.get(i).getText();
 				LOGGER.info("The data displayed in query graph is: " + noDataDisplayed);
-				System.out.println("The data displayed in query graph is: " + noDataDisplayed);
 			}
 			return true;
 		}
@@ -96,6 +93,23 @@ public class Impala {
 			labels.add(label.getText());
 		}
 		return labels;
+	}
+
+	//click on cluster drop down
+	public void selectImpalaType(String resourceType) {
+		// Click on Impala chargeback dropdown
+		userActions.performActionWithPolling(impalaPageObject.impalaDropdownOption, UserAction.CLICK);
+		List<WebElement> userList = impalaPageObject.selectType;
+		String selectImpala = null;
+		for (int i = 0; i < userList.size(); i++) {
+			if (userList.get(i).getText().equals(resourceType)) {
+				selectImpala = userList.get(i).getText();
+				LOGGER.info("Selected Impala from dropdown " + selectImpala);
+				waitExecuter.waitUntilElementClickable(userList.get(i));
+				userActions.performActionWithPolling(userList.get(i), UserAction.CLICK);
+				waitExecuter.sleep(2000);
+			}
+		}
 	}
 
 	/**
@@ -121,29 +135,29 @@ public class Impala {
 		}
 		if (graphName.equalsIgnoreCase("memory")) {
 			dateLabelElements = impalaPageObject.getChildElement(
-				impalaPageObject.graphXAxisDateLabels.get(0), By.tagName("text"));
+					impalaPageObject.graphXAxisDateLabels.get(0), By.tagName("text"));
 		} else {
 			dateLabelElements = impalaPageObject.getChildElement(
-				impalaPageObject.graphXAxisDateLabels.get(1), By.tagName("text"));
+					impalaPageObject.graphXAxisDateLabels.get(1), By.tagName("text"));
 		}
-		for (WebElement dateLabelElement: dateLabelElements) {
+		for (WebElement dateLabelElement : dateLabelElements) {
 			dateLabels.add(dateLabelElement.getText());
 		}
 		return dateLabels;
 	}
 
-	public void selectQueueInGroupBy(){
+	public void selectQueueInGroupBy() {
 		impalaPageObject.groupByDropdownButton.click();
 		waitExecuter.sleep(2000);
 		waitExecuter.waitUntilElementPresent(impalaPageObject.groupByQueueList);
 		impalaPageObject.groupByQueueList.click();
 	}
 
-	public void selectUserInGroupBy(){
+	public void selectUserInGroupBy() {
 		waitExecuter.sleep(1000);
 		try {
 			impalaPageObject.groupByDropdownButton.click();
-		}catch (StaleElementReferenceException e){
+		} catch (StaleElementReferenceException e) {
 			impalaPageObject.groupByDropdownButton.click();
 		}
 		waitExecuter.sleep(2000);
@@ -170,13 +184,13 @@ public class Impala {
 	}
 
 	//validate column name in Impala Queries Table, i.e
-	public Boolean validateHeaderColumnNameInImpalaQueriesTable(){
-		System.out.println("Size of Headers in Impala Queries Table: "+getImpalaQueriesTableHeaderColumnNames().size());
+	public Boolean validateHeaderColumnNameInImpalaQueriesTable() {
+		LOGGER.info("Size of Headers in Impala Queries Table: " + getImpalaQueriesTableHeaderColumnNames().size());
 		List<WebElement> listOfImpalaQueriesTableHeaderNames = getImpalaQueriesTableHeaderColumnNames();
 
 		ArrayList<String> listOfImpalaQueriesColumnNames = new ArrayList<String>();
 
-		for(int i=0; i <listOfImpalaQueriesTableHeaderNames.size()-1; i++){
+		for (int i = 0; i < listOfImpalaQueriesTableHeaderNames.size() - 1; i++) {
 			listOfImpalaQueriesColumnNames.add(listOfImpalaQueriesTableHeaderNames.get(i).getText());
 		}
 		List<String> definedImpalaQueriesColumnNames = Arrays.asList("Type", "State", "User", "App Name / ID",
@@ -192,7 +206,7 @@ public class Impala {
 	}
 
 
-		/*Get list of memory graph labels */
+	/*Get list of memory graph labels */
 	public List<String> getMemoryLabels() {
 		List<String> labels = new ArrayList<String>();
 		for (WebElement label : impalaPageObject.memoryFooterLabels) {
@@ -200,6 +214,7 @@ public class Impala {
 		}
 		return labels;
 	}
+
 
 	/**
 	 * This method used to select impala in resource drowdown displayed at
@@ -211,14 +226,5 @@ public class Impala {
 		// Click on Chargeback tab
 		waitExecuter.waitUntilElementClickable(impalaPageObject.resourcesTab);
 		userActions.performActionWithPolling(impalaPageObject.resourcesTab, UserAction.CLICK);
-		// Click on chargeback dropdown
-		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
-		userActions.performActionWithPolling(impalaPageObject.resourceUsagePointer,
-				UserAction.CLICK);
-		// Selecting the impala option
-		waitExecuter.waitUntilElementClickable(impalaPageObject.selectImpalaOption);
-		userActions.performActionWithPolling(impalaPageObject.selectImpalaOption,
-				UserAction.CLICK);
-		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 	}
 }

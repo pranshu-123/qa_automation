@@ -35,16 +35,19 @@ public class TC_CTP_07 extends BaseClass {
         GraphUtils graphUtils = new GraphUtils();
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         WorkloadPageObject workloadPageObject = new WorkloadPageObject(driver);
-        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-        MouseActions.clickOnElement(driver, topPanelPageObject.workloadTab);
         Workload workload = new Workload(driver);
-        workload.selectByYarn();
+        workload.selectWorkloadTab();
+        waitExecuter.sleep(2000);
 
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
 
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
-        waitExecuter.sleep(1000);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
+        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilPageFullyLoaded();
+
+        workload.selectWorkloadType("Yarn");
+        waitExecuter.sleep(2000);
 
 
         DatePicker datePicker = new DatePicker(driver);
@@ -57,11 +60,10 @@ public class TC_CTP_07 extends BaseClass {
                 + workloadPageObject.timeRange.getText().trim());
         waitExecuter.sleep(1000);
 
-        workload.clickOnHour();
+        workload.selectViewBy("Hour");
         waitExecuter.sleep(1000);
-
-        test.log(LogStatus.PASS, "Verify Workload in selected Sum Hour :"
-                + workloadPageObject.viewBySum.getText());
+        workload.selectAggregateBy("Sum");
+        waitExecuter.sleep(1000);
 
         graphUtils.navigateDifferentPointOnGraph(driver, workloadPageObject.HourHighChartContainer);
         List<String> SumTooltipValues = graphUtils.getMemoryTooltipValues();

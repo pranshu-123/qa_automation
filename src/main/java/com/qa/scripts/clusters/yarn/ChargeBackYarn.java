@@ -1,8 +1,12 @@
 package com.qa.scripts.clusters.yarn;
 
+import com.qa.enums.UserAction;
+import com.qa.pagefactory.CommonPageObject;
 import com.qa.pagefactory.clusters.ChargebackYarnPageObject;
 import com.qa.utils.JavaScriptExecuter;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -18,6 +22,7 @@ public class ChargeBackYarn {
     private WebDriver driver;
     private ChargebackYarnPageObject chargebackYarnPageObject;
     private static final Logger LOGGER = Logger.getLogger(ChargeBackYarn.class.getName());
+    private final UserActions userActions;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -29,6 +34,7 @@ public class ChargeBackYarn {
         waitExecuter = new WaitExecuter(driver);
         this.driver = driver;
         chargebackYarnPageObject = new ChargebackYarnPageObject(driver);
+        userActions = new UserActions(driver);
     }
 
     /**
@@ -41,15 +47,37 @@ public class ChargeBackYarn {
         // Click on Chargeback tab
         waitExecuter.waitUntilElementClickable(chargebackYarnPageObject.clusterChargeBackTab);
         JavaScriptExecuter.clickOnElement(driver, chargebackYarnPageObject.clusterChargeBackTab);
-        // Click on chargeback dropdown
-        waitExecuter.waitUntilElementPresent(chargebackYarnPageObject.chargeBackDropdownOptionsButton);
-        driver.navigate().refresh();
-        waitExecuter.waitUntilElementPresent(chargebackYarnPageObject.chargeBackDropdownOptionsButton);
-        JavaScriptExecuter.clickOnElement(driver, chargebackYarnPageObject.chargeBackDropdownOptionsButton);
-        // Selecting the impala option
-        waitExecuter.sleep(3000);
-        JavaScriptExecuter.clickOnElement(driver, chargebackYarnPageObject.chargeBackDropdownYarnOption);
     }
+
+    public void selectTriggerCondition(String chargeBackType){
+        waitExecuter.sleep(1000);
+        int allTriggerCondition = chargebackYarnPageObject.chargeBackDropdownsButton.size();
+        LOGGER.info("Click on chargeback dropdown: "+ allTriggerCondition);
+        for(int i=0; i< allTriggerCondition ; i++){
+            if(chargebackYarnPageObject.chargeBackDropdownsButton.get(i).getText().equals(chargeBackType)){
+                MouseActions.clickOnElement(driver, chargebackYarnPageObject.chargeBackDropdownsButton.get(i));
+                break;
+            }
+        }
+    }
+
+
+    public void selectChargebackType(String ChargebackType) {
+        // Click on Impala chargeback dropdown
+        userActions.performActionWithPolling(chargebackYarnPageObject.yarnDropdownOption, UserAction.CLICK);
+        List<WebElement> userList = chargebackYarnPageObject.selectType;
+        String selectImpala = null;
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getText().equals(ChargebackType)) {
+                selectImpala = userList.get(i).getText();
+                LOGGER.info("Selected Impala from dropdown " + selectImpala);
+                waitExecuter.waitUntilElementClickable(userList.get(i));
+                userActions.performActionWithPolling(userList.get(i), UserAction.CLICK);
+                waitExecuter.sleep(2000);
+            }
+        }
+    }
+
 
     /**
      * This method is use to return all results grouped by user table rows.
@@ -127,7 +155,7 @@ public class ChargeBackYarn {
         List<WebElement> listOfWebElemnts = chargebackYarnPageObject.listOfGroupByOptions;
         // Iterate Webelement list to get the value of each element
         for (int i = 0; i < listOfWebElemnts.size(); i++) {
-            System.out.println(listOfWebElemnts.get(i).getText());
+            LOGGER.info(listOfWebElemnts.get(i).getText());
             if(listOfWebElemnts.get(i).getText().contains(optionName)){
                 listOfWebElemnts.get(i).click();
                 waitExecuter.sleep(2000);
@@ -157,7 +185,7 @@ public class ChargeBackYarn {
 
     //validate column name in GroupBy Table, i.e chargeBack table
     public Boolean validateHeaderCoulmnNameInGroupByTable(){
-        System.out.println("Size of Headers in Group By Table: "+ getResultsGroupedByTableHeaderNames().size());
+        LOGGER.info("Size of Headers in Group By Table: "+ getResultsGroupedByTableHeaderNames().size());
         //Get List of groupby table column names
         List<WebElement> listOfGroupByTableColumnNames = getResultsGroupedByTableHeaderNames();
         //Empty array to add group by table coumn name
@@ -175,7 +203,7 @@ public class ChargeBackYarn {
     }
 
     public Boolean validateHeaderColumnNameInYarnJobsTable(){
-        System.out.println("Size of Headers in Yarn Jobs Table: "+getYarnJobsTableHeaderNames().size());
+        LOGGER.info("Size of Headers in Yarn Jobs Table: "+getYarnJobsTableHeaderNames().size());
         List<WebElement> listOfYarnJobsTableHeaderNames = getYarnJobsTableHeaderNames();
 
         ArrayList<String> listOfYarnJobsColumnNames = new ArrayList<String>();

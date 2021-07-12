@@ -39,15 +39,17 @@ public class IM_RES_09 extends BaseClass {
     test.log(LogStatus.INFO, "Go to resource page");
     LOGGER.info("Select impala from dropdown");
     impala.selectImpalaResource();
+    waitExecuter.sleep(2000);
 
     //Select the cluster
     test.log(LogStatus.INFO, "This testcase is running for cluster: "+clusterId);
     LOGGER.info("Selecting cluster from the list " +clusterId);
     LOGGER.info("Selecting the cluster");
-    homePage.selectMultiClusterId(clusterId);
+    homePage.selectMultiClusterIdClusterPage(clusterId);
     waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
-
+    impala.selectImpalaType("Impala");
+    waitExecuter.sleep(3000);
 
     datePicker.clickOnDatePicker();
     waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);

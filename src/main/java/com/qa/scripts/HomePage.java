@@ -124,12 +124,24 @@ public class HomePage {
     public void selectMultiClusterId(String clusterId) {
         CommonPageObject commonPageObject = new CommonPageObject(driver);
         waitExecuter.waitUntilElementClickable(commonPageObject.clusterDropdown);
-        waitExecuter.sleep(2000);
+        waitExecuter.sleep(3000);
         userActions.performActionWithPolling(commonPageObject.clusterDropdown, UserAction.CLICK);
         userActions.performActionWithPolling(commonPageObject.clusterSearchBox, UserAction.SEND_KEYS,
                 clusterId);
         userActions.performActionWithPolling(commonPageObject.clusterSearchFirstField, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(commonPageObject.clusterDropdown);
+    }
+
+    //click on cluster drop down all cluster tab workload,cluster,impala,yarn
+    public void selectMultiClusterIdClusterPage(String clusterId) {
+        CommonPageObject commonPageObject = new CommonPageObject(driver);
+        waitExecuter.waitUntilElementClickable(commonPageObject.clusterDropdownPage);
+        waitExecuter.sleep(3000);
+        userActions.performActionWithPolling(commonPageObject.clusterDropdownPage, UserAction.CLICK);
+        userActions.performActionWithPolling(commonPageObject.clusterSearchBox, UserAction.SEND_KEYS,
+                clusterId);
+        userActions.performActionWithPolling(commonPageObject.clusterSearchFirstField, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(commonPageObject.clusterDropdownPage);
     }
 
     /* Get the list of clusters from UI */

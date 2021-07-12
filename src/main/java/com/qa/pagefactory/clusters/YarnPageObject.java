@@ -16,8 +16,14 @@ public class YarnPageObject {
     @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Resources'])")
     public WebElement clusterResourcesTab;
 
-    @FindBy(xpath = "//h1[contains(text(),'Resource Usage')]")
+    @FindBy(xpath = "//label[normalize-space()='Resource Type']")
     public WebElement getResourcesPageHeader;
+
+    @FindBy(css=".select-resource-type ~ .select2 .selection .select2-selection__arrow")
+    public WebElement resourceDropdownOption;
+
+    @FindBy(xpath="//span[@class='select2-results']//li")
+    public List<WebElement> selectType;
 
     @FindBy(xpath = "//label[contains(text(), 'Group By')]/following-sibling::span/span/span/span[contains(@class,'select2-selection__arrow')]")
     public WebElement groupByDropdownButton;
@@ -30,6 +36,12 @@ public class YarnPageObject {
 
     @FindBy(xpath = "//li[contains(text(),'User')]")
     public WebElement groupByUser;
+
+    @FindBy(css = "//span[@id='select2-4abp-container']")
+    public WebElement chargeBackDropdownOptionsButton;
+
+    @FindBy(css = "//span[contains(@class,'select2-dropdown--below')]//ul/li")
+    public WebElement getNamesFromDropDown;
 
     @FindBy(xpath = "//li[contains(text(),'Queue')]")
     public WebElement groupByQueue;

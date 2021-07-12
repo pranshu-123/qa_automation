@@ -33,15 +33,19 @@ public class TC_CTP_08 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         GraphUtils graphUtils = new GraphUtils();
         WorkloadPageObject workloadPageObject = new WorkloadPageObject(driver);
-        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-        MouseActions.clickOnElement(driver, topPanelPageObject.workloadTab);
         Workload workload = new Workload(driver);
-        workload.selectByYarn();
+        workload.selectWorkloadTab();
+        waitExecuter.sleep(2000);
 
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
 
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
+        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilPageFullyLoaded();
+
+        workload.selectWorkloadType("Yarn");
+        waitExecuter.sleep(2000);
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
@@ -51,13 +55,14 @@ public class TC_CTP_08 extends BaseClass {
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.getText().trim());
 
-        workload.clickOnMonth();
         waitExecuter.sleep(3000);
+        workload.selectViewBy("Month");
         test.log(LogStatus.PASS, "Verify View By Month");
 
         test.log(LogStatus.PASS, "Verify current month selected :"
                 + workloadPageObject.currentmonthHeader.getText());
         waitExecuter.sleep(3000);
+        workload.selectGroupBy("Memory Hour");
         try {
             waitExecuter.waitUntilElementPresent(workloadPageObject.timeRange);
             test.log(LogStatus.PASS, "Verify Aggregated datewise Job Count in selected time range:"
@@ -66,7 +71,7 @@ public class TC_CTP_08 extends BaseClass {
             workload.clickOnDateRange(workloadPageObject);
             waitExecuter.sleep(3000);
             test.log(LogStatus.PASS, "Verify selected time range");
-        } catch (VerifyError | AWTException te) {
+        } catch (VerifyError te) {
             throw new AssertionError("workload selected time range not completed successfully." + te);
         }
         test.log(LogStatus.PASS, "Verify report should be same as date range selected in date picker");

@@ -32,17 +32,19 @@ public class TC_CTP_03 extends BaseClass {
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         WorkloadPageObject workloadPageObject = new WorkloadPageObject(driver);
-        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-        MouseActions.clickOnElement(driver, topPanelPageObject.workloadTab);
         Workload workload = new Workload(driver);
-        workload.selectByYarn();
+        workload.selectWorkloadTab();
+        waitExecuter.sleep(2000);
 
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
 
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
-        homePage.clickOnClusterDropDown();
-        waitExecuter.sleep(1000);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
+        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilPageFullyLoaded();
+
+        workload.selectWorkloadType("Yarn");
+        waitExecuter.sleep(2000);
 
         List<String> listOfClusters = workload.getListOfClusters(workloadPageObject.clusterList);
         test.log(LogStatus.PASS, "List of all cluster are: " + listOfClusters);

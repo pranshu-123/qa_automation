@@ -86,40 +86,40 @@ public class HomePageObject {
   @FindBy(xpath = "//a[@href='#/alerts/autoaction/add']")
   public WebElement newautoalert;
 
-  @FindBy(xpath = "//div[@graphid='NodesTS']//a[@class='menu']")
+  @FindBy(xpath = "//div[@graph-id='NodesTS']//a[@class='menu']")
   public WebElement nodesGraphDownloadMenu;
 
-  @FindBy(xpath = "//h4[contains(text(),'Nodes')]/following-sibling::div/span/div/ul/li")
+  @FindBy(xpath = "//h4[contains(text(),'Nodes')]/following-sibling::div[1]/div/ul/li/a")
   public List<WebElement> listnodesGraphDownloadMenu;
 
-  @FindBy(xpath ="//div[@graphid='VCoreTSOverview']//a[@class='menu']")
+  @FindBy(xpath ="//div[@graph-id='VCoreTSOverview']//a[@class='menu']")
   public WebElement vcoresGraphDownloadMenu;
 
-  @FindBy(xpath = "//h4[contains(text(),'VCores')]/following-sibling::div/span/div/ul/li")
+  @FindBy(xpath = "//h4[contains(text(),'VCores')]/following-sibling::div[1]/div/ul/li/a")
   public List<WebElement> listvcoresGraphDownloadMenu;
 
-  @FindBy(xpath ="//div[@graphid='MemryTSOverview']//span")
+  @FindBy(xpath ="//div[@graph-id='MemryTSOverview']//a[@class='menu']")
   public WebElement memoryGraphDownloadMenu;
 
-  @FindBy(xpath = "//h4[contains(text(),'Memory')]/following-sibling::div/span/div/ul/li")
+  @FindBy(xpath = "//h4[contains(text(),'Memory')]/following-sibling::div[1]/div/ul/li/a")
   public List<WebElement> listmemoryGraphDownloadMenu;
 
-  @FindBy(xpath ="//div[@graphid='JobByStatus']//span")
+  @FindBy(xpath ="//div[@graph-id='JobByStatus']//a[@class='menu']")
   public WebElement runningGraphDownloadMenu;
 
-  @FindBy(xpath = "//h4[contains(text(),'By State')]/following-sibling::div/span/div/ul/li")
+  @FindBy(xpath = "//h4[contains(text(),'By State')]/following-sibling::div[1]/div/ul/li/a")
   public List<WebElement> listrunningGraphDownloadMenu;
 
-  @FindBy(xpath ="//div[@graphid='JobsFinishedByStatus']//a[@class='menu']")
+  @FindBy(xpath ="//div[@graph-id='JobsFinishedByStatus']//a[@class='menu']")
   public WebElement bystatusGraphDownloadMenu;
 
-  @FindBy(xpath = "//h4[contains(text(),'By Status')]/following-sibling::div/span/div/ul/li")
+  @FindBy(xpath = "//h4[contains(text(),'By Status')]/following-sibling::div[1]/div/ul/li/a")
   public List<WebElement> listbystatusGraphDownloadMenu;
 
-  @FindBy(xpath ="//div[@graphid='JobsByInefficiency']//a[@class='menu']")
+  @FindBy(xpath ="//div[@graph-id='JobsByInefficiency']//a[@class='menu']")
   public WebElement inefficienteventsGraphDownloadMenu;
 
-  @FindBy(xpath = "//h4[contains(text(),'Inefficient Events')]/following-sibling::div/span/div/ul/li")
+  @FindBy(xpath = "//h4[contains(text(),'Inefficient Events')]/following-sibling::div[1]/div/ul/li/a")
   public List<WebElement> listinefficienteventsGraphDownloadMenu;
 
   /**

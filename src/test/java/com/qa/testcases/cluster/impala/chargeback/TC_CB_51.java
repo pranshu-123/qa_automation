@@ -18,7 +18,6 @@ import org.testng.annotations.Test;
 @Marker.ImpalaChargeback
 public class TC_CB_51 extends BaseClass {
 	private WaitExecuter waitExecuter;
-	private ChargeBackImpala chargebackImpala;
 	private ChargebackImpalaPageObject chargebackImpalaPageObject;
 	private DatePicker picker;
 	private HomePage homePage;
@@ -35,33 +34,23 @@ public class TC_CB_51 extends BaseClass {
 		test.log(LogStatus.INFO, "Initialize all class objects");
 		LOGGER.info("Initialize all class objects");
 		waitExecuter = new WaitExecuter(driver);
-		chargebackImpala = new ChargeBackImpala(driver);
 		picker = new DatePicker(driver);
 		homePage = new HomePage(driver);
 		chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
 
 		// Click on Chargeback tab
-		test.log(LogStatus.INFO, "Click on Chargeback tab");
-		LOGGER.info("Click on Chargeback tab");
-		waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.clusterChargeBackTab);
-		JavaScriptExecuter.clickOnElement(driver, chargebackImpalaPageObject.clusterChargeBackTab);
-		waitExecuter.sleep(1000);
+		ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
+		chargeBackImpala.selectImpalaChargeback();
 
-		// Click on chargeback dropdown and select Impala
-		test.log(LogStatus.INFO, "Click on chargeback dropdown and select Impala");
-		LOGGER.info("Click on chargeback dropdown and select Impala");
-		waitExecuter.sleep(1000);
-		JavaScriptExecuter.clickOnElement(driver, chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
-		waitExecuter.sleep(1000);
-		waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownImpalaOption);
-		chargebackImpalaPageObject.chargeBackDropdownImpalaOption.click();
-		waitExecuter.sleep(1000);
 
 		// Select the cluster
-		test.log(LogStatus.INFO, "Select clusterId : " + clusterId);
-		LOGGER.info("Select clusterId : " + clusterId);
-		homePage.selectMultiClusterId(clusterId);
+		test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
+		HomePage homePage = new HomePage(driver);
+		homePage.selectMultiClusterIdClusterPage(clusterId);
 		waitExecuter.sleep(1000);
+
+		chargeBackImpala.selectImpalaType("Impala");
+		waitExecuter.sleep(2000);
 		
 		// Select last 30 days from date picker
 		test.log(LogStatus.INFO, "Select last 30 days from date picker");
@@ -84,17 +73,17 @@ public class TC_CB_51 extends BaseClass {
 		// Get CPU hours list from chargeback table
 		test.log(LogStatus.INFO, "Get CPU hours consumption of every user from chargeback table");
 		LOGGER.info("Get CPU hours consumption of every user from chargeback table");
-		List<Double> cpuHoursList = chargebackImpala.getUsersCPUHoursFromTable();
+		List<Double> cpuHoursList = chargeBackImpala.getUsersCPUHoursFromTable();
 		waitExecuter.sleep(1000);
 
 		// Get CPU cost list from chargeback table
 		test.log(LogStatus.INFO, "Get CPU consumption cost of every user from chargeback table");
 		LOGGER.info("Get CPU consumption cost of every user from chargeback table");
-		List<Double> cpuCostsList = chargebackImpala.getUsersCPUHoursCostFromTable();
+		List<Double> cpuCostsList = chargeBackImpala.getUsersCPUHoursCostFromTable();
 		waitExecuter.sleep(1000);
 
 		// Validate CPU calculated cost and cost from chargeback table
-		Assert.assertTrue(chargebackImpala.compareTableCPUCostToCalculatedCost(cpuCostsList, cpuHoursList, 5),
+		Assert.assertTrue(chargeBackImpala.compareTableCPUCostToCalculatedCost(cpuCostsList, cpuHoursList, 5),
 				"The table cost do not match with calculated cost of CPU");
 		test.log(LogStatus.PASS, "The table cost match with calculated cost of CPU.");
 
@@ -106,18 +95,19 @@ public class TC_CB_51 extends BaseClass {
 		test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
 		LOGGER.info("Select clusterId : "+clusterId);
 		waitExecuter.sleep(1000);
+		ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
 		HomePage homePage = new HomePage(driver);
-		homePage.selectMultiClusterId(clusterId);
+		homePage.selectMultiClusterIdClusterPage(clusterId);
 		// Get Memory usage in hours from chargeback table
 		waitExecuter.sleep(1000);
-		List<Double> memoryHoursList = chargebackImpala.getUsersMemoryHoursFromTable();
+		List<Double> memoryHoursList = chargeBackImpala.getUsersMemoryHoursFromTable();
 
 		// Get CPU cost list from chargeback table
 		waitExecuter.sleep(1000);
-		List<Double> memoryCostsList = chargebackImpala.getUsersMemoryHoursCostFromTable();
+		List<Double> memoryCostsList = chargeBackImpala.getUsersMemoryHoursCostFromTable();
 
 		// Validate Memory calculated cost and cost from chargeback table
-		Assert.assertTrue(chargebackImpala.compareTableMemoryCostToCalculatedCost(memoryCostsList, memoryHoursList, 5),
+		Assert.assertTrue(chargeBackImpala.compareTableMemoryCostToCalculatedCost(memoryCostsList, memoryHoursList, 5),
 				"The table cost do not match with calculated cost of Memory.");
 		test.log(LogStatus.PASS, "The table cost do match with calculated cost of Memory.");
 	}

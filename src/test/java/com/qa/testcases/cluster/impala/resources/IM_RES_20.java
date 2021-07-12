@@ -42,10 +42,15 @@ public class IM_RES_20 extends BaseClass {
     test.log(LogStatus.INFO, "Go to resource page");
     LOGGER.info("Select impala from dropdown");
     impala.selectImpalaResource();
+    waitExecuter.sleep(2000);
 
     HomePage homePage = new HomePage(driver);
-    homePage.selectMultiClusterId(clusterId);
+    homePage.selectMultiClusterIdClusterPage(clusterId);
     waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+
+    impala.selectImpalaType("Impala");
+    waitExecuter.sleep(3000);
+
 
     DatePicker datePicker = new DatePicker(driver);
     datePicker.clickOnDatePicker();

@@ -10,6 +10,8 @@ import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import java.util.logging.Logger;
+
+import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -21,7 +23,6 @@ import org.testng.annotations.Test;
 @Marker.ImpalaChargeback
 public class TC_CB_09 extends BaseClass {
 	private WaitExecuter waitExecuter;
-	private ChargeBackImpala chargebackImpala;
 	private ChargebackImpalaPageObject chargebackImpalaPageObject;
 	private HomePage homePage;
 	private static final Logger LOGGER = Logger.getLogger(TC_CB_09.class.getName());
@@ -37,43 +38,42 @@ public class TC_CB_09 extends BaseClass {
 		test.log(LogStatus.INFO, "Initialize all class objects");
 		LOGGER.info("Initialize all class objects");
 		waitExecuter = new WaitExecuter(driver);
-		chargebackImpala = new ChargeBackImpala(driver);
+		ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
 		homePage = new HomePage(driver);
 		chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
 
 		// Click on Chargeback tab
+		chargeBackImpala.selectImpalaChargeback();
 		test.log(LogStatus.INFO, "Click on Chargeback tab");
-		LOGGER.info("Click on Chargeback tab");
-		waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.clusterChargeBackTab);
-		JavaScriptExecuter.clickOnElement(driver, chargebackImpalaPageObject.clusterChargeBackTab);
-		waitExecuter.sleep(1000);
 
-		// Click on chargeback dropdown and select Impala
-		test.log(LogStatus.INFO, "Click on chargeback dropdown and select Impala");
-		LOGGER.info("Click on chargeback dropdown and select Impala");
-		JavaScriptExecuter.clickOnElement(driver, chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
-		waitExecuter.sleep(1000);
-		chargebackImpalaPageObject.chargeBackDropdownImpalaOption.click();
-		waitExecuter.sleep(1000);
-		
+
 		// Select the cluster
 		test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
 		LOGGER.info("Select clusterId : "+clusterId);
-		homePage.selectMultiClusterId(clusterId);
+		HomePage homePage = new HomePage(driver);
+		homePage.selectMultiClusterIdClusterPage(clusterId);
 		waitExecuter.sleep(1000);
-		
+
+		chargeBackImpala.selectImpalaType("Impala");
+		waitExecuter.sleep(2000);
+
 		// Click on chargeback group by combobox
 		test.log(LogStatus.INFO, "Click on chargeback group by combobox");
 		LOGGER.info("Click on chargeback group by combobox");
 		waitExecuter.sleep(1000);
 		chargebackImpalaPageObject.groupBySearchBox.click();
-		waitExecuter.sleep(1000);
+		waitExecuter.sleep(2000);
+
 		
 		// Verify the names of options available in group by
 		test.log(LogStatus.INFO, "Verify the names of options available in group by");
 		LOGGER.info("Verify the names of options available in group by");
-		Assert.assertTrue(chargebackImpala.validateGroupByOptions(),
-				"The displayed option does not smatch the group by actual options");
+		Assert.assertFalse(chargeBackImpala.validateGroupByOptions(),
+				"The displayed option does not have group by options");
+		waitExecuter.sleep(2000);
+		test.log(LogStatus.PASS, "Successfully verified options available in group by on impala " +
+				"chargeback page");
+
 
 	}
 }

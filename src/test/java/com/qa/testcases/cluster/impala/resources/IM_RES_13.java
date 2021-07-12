@@ -37,6 +37,11 @@ public class IM_RES_13 extends BaseClass {
     test.log(LogStatus.INFO, "Go to resource page");
     LOGGER.info("Select impala from dropdown");
     impala.selectImpalaResource();
+    waitExecuter.sleep(2000);
+
+    impala.selectImpalaType("Impala");
+    waitExecuter.sleep(3000);
+
     ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);
     impalaPageObject.groupByDropdownButton.click();
     waitExecuter.waitUntilElementPresent(impalaPageObject.groupByQueueList);

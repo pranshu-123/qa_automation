@@ -17,7 +17,6 @@ import com.relevantcodes.extentreports.LogStatus;
 @Marker.ImpalaChargeback
 public class TC_CB_31 extends BaseClass {
 	private WaitExecuter waitExecuter;
-	private ChargeBackImpala chargebackImpala;
 	private ChargebackImpalaPageObject chargebackImpalaPageObject;
 	private DatePicker picker;
 	private static final Logger LOGGER = Logger.getLogger(TC_CB_31.class.getName());
@@ -29,37 +28,36 @@ public class TC_CB_31 extends BaseClass {
 		test.assignCategory(" Cluster - Impala Chargeback");
 
 		waitExecuter = new WaitExecuter(driver);
-		chargebackImpala = new ChargeBackImpala(driver);
 		picker = new DatePicker(driver);
 		// Intialize impala page objects
 		chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
 		// Click on Chargeback tab
-		waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.clusterChargeBackTab);
-		JavaScriptExecuter.clickOnElement(driver, chargebackImpalaPageObject.clusterChargeBackTab);
-		// Click on chargeback dropdown
-		waitExecuter.sleep(1000);
-		JavaScriptExecuter.clickOnElement(driver, chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
-		// Selecting Impala chargeback
-		waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownImpalaOption);
-		chargebackImpalaPageObject.chargeBackDropdownImpalaOption.click();
+		ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
+		chargeBackImpala.selectImpalaChargeback();
 		// Select the cluster
 		LOGGER.info("Selecting the cluster");
 		waitExecuter.sleep(1000);
+		// Select the cluster
+		test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
 		HomePage homePage = new HomePage(driver);
-		homePage.selectMultiClusterId(clusterId);
+		homePage.selectMultiClusterIdClusterPage(clusterId);
+
+		chargeBackImpala.selectImpalaType("Impala");
+		waitExecuter.sleep(2000);
+
 		// Select last 30 days
 		picker.clickOnDatePicker();
 		waitExecuter.sleep(1000);
 		picker.selectLast30Days();
 
 		// Get CPU hours from table
-		double totalCPUHoursFromTable = chargebackImpala.getTotalCPUHoursFromTable();
+		double totalCPUHoursFromTable = chargeBackImpala.getTotalCPUHoursFromTable();
 
 		// Get total CPU hours from table
-		double headerValue = chargebackImpala.getCPUHoursFromGraphHeader();
+		double headerValue = chargeBackImpala.getCPUHoursFromGraphHeader();
 		if (!chargebackImpalaPageObject.CPUHoursFromGraphHeader.getText().equals("0.00")) {
 
-			int avgSecondDiff = chargebackImpala.getCPUHourListFromTable().size() / 2;
+			int avgSecondDiff = chargeBackImpala.getCPUHourListFromTable().size() / 2;
 			double differenceInSeconds = headerValue - totalCPUHoursFromTable;
 			// Compare header CPU hours to total table hours
 			Assert.assertTrue(differenceInSeconds < avgSecondDiff,

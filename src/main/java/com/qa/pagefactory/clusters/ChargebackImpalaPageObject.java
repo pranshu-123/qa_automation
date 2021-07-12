@@ -18,17 +18,24 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Chargeback'])")
     public WebElement clusterChargeBackTab;
 
-    @FindBy(css = "a.dropbtn.pointer")
-    public WebElement chargeBackDropdownOptionsButton;
+    @FindBy(css=".select-chargback-type~.select2 .selection .select2-selection__arrow")
+    public WebElement impalaDropdownOption;
 
-    @FindBy(xpath = "//a[contains(text(),'Impala')]")
-    public WebElement chargeBackDropdownImpalaOption;
-
-    @FindBy(tagName = "h1")
-    public WebElement chargeBackPageHeading;
+    @FindBy(xpath="//span[@class='select2-results']//li")
+    public List<WebElement> selectType;
 
     @FindBy(xpath = "//li[contains(@class,'select2-results__option')]")
     public List<WebElement> clustersList;
+
+    @FindBy(css = ".select-cluster ~ .select2 .selection .select2-selection__arrow")
+    public WebElement clusterDropdown;
+
+    @FindBy(xpath = "//span[contains(@class,'select2-dropdown--below')]//li")
+    public List<WebElement> listOfClusters;
+
+    @FindBy(xpath = "//label[normalize-space()='Chargeback Type']")
+    public WebElement chargeBackPageHeading;
+
 
     @FindBy(xpath = "//table[@id='chargeback-table']/tbody/tr")
     public List<WebElement> resultsGroupedByTableRecords;
@@ -41,15 +48,6 @@ public class ChargebackImpalaPageObject {
 
     @FindBy(xpath = "//table[@id='finishedImpalaJobsTable']/tbody/tr/td[3]/span[1]")
     public List<WebElement> getUsersFromFinishedImpalaJobsTable;
-
-    @FindBy(xpath = "//span[contains(@class, 'select2-selection__arrow')]")
-    public WebElement containerDropdownArrow;
-
-    @FindBy(xpath = "//span[contains(@class,'select2-container')]/span/span/input[contains(@class, 'select2-search__field')]")
-    public WebElement clusterDropdownSearchbox;
-
-    @FindBy(xpath = "//span[contains(@class,'select2-dropdown--below')]//li")
-    public List<WebElement> listOfClusters;
 
     @FindBy(xpath = "//span[contains(@class, 'select2-selection--multiple')]")
     public WebElement groupBySearchBox;
@@ -81,7 +79,7 @@ public class ChargebackImpalaPageObject {
     @FindBy(id = "chargebackmemory")
     public WebElement setChargebackMemoryPerHour;
 
-    @FindBy(xpath = "//div/button[@class='applybtn']")
+    @FindBy(css = ".btn-apply")
     public WebElement applyButton;
 
     @FindBy(xpath = "//li[contains(text(),'User')][1]")
@@ -123,7 +121,7 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "//div/table[@id='chargeback-table']/tbody/tr/td[3]//span[1]")
     public List<WebElement> getUsersCPUHoursFromChargebackTable;
 
-    @FindBy(xpath = "//div/table[@id='chargeback-table']/tbody/tr/td[3]/div/div[@class='costClass']")
+    @FindBy(xpath = "//div/table[@id='chargeback-table']/tbody/tr/td[3]//div")
     public List<WebElement> getUsersCPUHoursCostFromChargebackTable;
 
     @FindBy(xpath = "//div/table[@id='chargeback-table']/tbody/tr/td[4]//span[1]")
@@ -147,7 +145,7 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "//*[@id=\"app\"]/div/div[1]/div/div/div[3]/div/div/div/div[1]/div[1]/div[1]/div/div[1]/h4/span")
     public WebElement impalajobs;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div/div[1]/div/div/div[3]/div/div/div/div[2]/div[1]/div[1]/h2")
+    @FindBy(css = ".pb-2 > div:nth-child(1)")
     public WebElement Chargebacktable;
 
     @FindBy(xpath = "//div[@class='col-md-4'][1]//h4/span")
@@ -158,6 +156,12 @@ public class ChargebackImpalaPageObject {
 
     @FindBy(xpath = "//div/table[@id='chargeback-table']/tbody/tr/td//span")
     public WebElement selectgroup;
+
+    @FindBy(xpath = "(//a[contains(.,'Download CSV')])")
+    public List<WebElement> downloadCSVFile;
+
+    @FindBy(xpath = "//div[@class='dashboard-module bg-white dashboard-sec pb-2']//div[@class='header']//a[@class='menu']")
+    public WebElement downloadFile;
 
     @FindBy(xpath = "//div/table[@id='chargeback-table']/tbody/tr/td//span")
     public WebElement selectQueue;

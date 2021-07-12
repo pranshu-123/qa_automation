@@ -1,5 +1,6 @@
 package com.qa.testcases.cluster.impala.chargeback;
 
+import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -35,17 +36,23 @@ public class TC_CB_22 extends BaseClass {
 		LOGGER.info("Navigate to impala chargeback page", test);
 		// Select Cluster
 		HomePage homePage = new HomePage(driver);
-		homePage.selectMultiClusterId(clusterId);
 		WaitExecuter wait = new WaitExecuter(driver);
+		// Select the cluster
+		test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
+		homePage.selectMultiClusterIdClusterPage(clusterId);
+
+		chargeBackImpala.selectImpalaType("Impala");
+		wait.sleep(2000);
+
 		LOGGER.info("Selected cluster: " + clusterId, test);
 		DatePicker datePicker = new DatePicker(driver);
 		datePicker.clickOnDatePicker();
-		//datePicker.selectLast30Days();
+		datePicker.selectLast90Days();
 		LOGGER.info("Select last 90 days", test);
 		chargeBackImpala.clickOnGroupBySearchBox();
 		chargeBackImpala.selectGroupBy(GroupByOptions.INPUT_TABLES);
 		LOGGER.info("Click on groupBy: " + GroupByOptions.INPUT_TABLES.value, test);
-		wait.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
+		wait.waitUntilElementClickable(chargebackImpalaPageObject.impalaDropdownOption);
 		chargeBackImpala.clickOnGroupBySearchBox();
 		LOGGER.pass("Validated the group by options can be chosen only 2", test);
 		Assert.assertTrue(chargeBackImpala.validateGroupByMessage(),

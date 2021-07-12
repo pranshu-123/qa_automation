@@ -60,6 +60,7 @@ public class TC_CF_01 extends BaseClass {
         LOGGER.info("Set Forecasting days as: "+ forecastingNoOfDays);
         test.log(LogStatus.INFO, "Set Forecasting days as: "+ forecastingNoOfDays);
         forecasting.clickOnModalRunButton();
+        waitExecuter.waitUntilPageFullyLoaded();
         LOGGER.info("Clicked on Modal Run Button");
         test.log(LogStatus.INFO, "Clicked on Modal Run Button");
 

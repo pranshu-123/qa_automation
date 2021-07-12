@@ -91,12 +91,13 @@ public class TC_CTR_03 extends BaseClass {
                         homePage.selectMultiClusterId(clusterId);
                         tuning.clickOnModalRunButton();
                         waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
-                        waitExecuter.sleep(50000);
+                        waitExecuter.sleep(60000);
                         WebElement statusElement = driver.findElement(By.xpath(statusXpath));
                         try{
                             waitExecuter.waitUntilTextToBeInWebElement(statusElement,
                                     "SUCCESS");
                             test.log(LogStatus.PASS, "Verified Tuning report is completed successfully for date: " + date);
+                            waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
                         }catch (TimeoutException te) {
                             throw new AssertionError("Tuning Report not completed successfully.");
                         }

@@ -6,6 +6,7 @@ import com.qa.pagefactory.CommonPageObject;
 import com.qa.pagefactory.clusters.YarnPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
+import com.qa.scripts.clusters.impala.Impala;
 import com.qa.scripts.clusters.yarn.Yarn;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
@@ -29,14 +30,18 @@ public class YR_017 extends BaseClass {
         test.assignCategory(" Cluster - Yarn Resources");
         Log.startTestCase("YR_017_verifyClusterTab");
 
+        Impala impala = new Impala(driver);
+
         Yarn yarn = new Yarn(driver);
         yarn.verifyYarnResourceHeaderisDisplayed();
         Log.info("Yarn Resource Header is displayed.");
         test.log(LogStatus.INFO, "Yarn Resource Header is displayed.");
-
-        YarnPageObject yarnPageObject = new YarnPageObject(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
+
+        //Select cluster id
+        yarn.selectResourceType("Yarn");
         waitExecuter.sleep(2000);
+        waitExecuter.waitUntilPageFullyLoaded();
         CommonPageObject commonPageObject = new CommonPageObject(driver);
         MouseActions.clickOnElement(driver, commonPageObject.clusterDropdown);
         waitExecuter.sleep(2000);

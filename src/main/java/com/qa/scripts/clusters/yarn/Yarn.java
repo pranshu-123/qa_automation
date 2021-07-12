@@ -1,10 +1,12 @@
 package com.qa.scripts.clusters.yarn;
 
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.clusters.YarnPageObject;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -24,6 +26,7 @@ public class Yarn {
     private YarnPageObject yarnPageObject;
     private static final Logger LOGGER = Logger.getLogger(Yarn.class.getName());
     List<String> listOfAllFilterElements = new ArrayList<String>();
+    private final UserActions userActions;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -34,6 +37,7 @@ public class Yarn {
         waitExecuter = new WaitExecuter(driver);
         this.driver = driver;
         yarnPageObject = new YarnPageObject(driver);
+        userActions = new UserActions(driver);
     }
 
     /* Check for Group Drop Down */
@@ -50,6 +54,24 @@ public class Yarn {
         JavaScriptExecuter.clickOnElement(driver, yarnPageObject.clusterResourcesTab);
         waitExecuter.waitUntilElementPresent(yarnPageObject.getResourcesPageHeader);
         LOGGER.info("Yarn Page Header is: "+yarnPageObject.getResourcesPageHeader.getText());
+    }
+
+
+    //click on cluster drop down
+    public void selectResourceType(String resourceType) {
+        // Click on Impala chargeback dropdown
+        userActions.performActionWithPolling(yarnPageObject.resourceDropdownOption, UserAction.CLICK);
+        List<WebElement> userList = yarnPageObject.selectType;
+        String selectImpala = null;
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getText().equals(resourceType)) {
+                selectImpala = userList.get(i).getText();
+                LOGGER.info("Selected Impala from dropdown " + selectImpala);
+                waitExecuter.waitUntilElementClickable(userList.get(i));
+                userActions.performActionWithPolling(userList.get(i), UserAction.CLICK);
+                waitExecuter.sleep(2000);
+            }
+        }
     }
 
     /* Click on Group dropdown */
@@ -149,7 +171,7 @@ public class Yarn {
 
     /* Verify filter elements */
     public boolean verifyFilterElements(){
-        List<String> defineListOfYarnApp = Arrays.asList("MAPREDUCE","SPARK","TEZ","yarn-service");
+        List<String> defineListOfYarnApp = Arrays.asList("MAPREDUCE","SPARK","MAPREDUCE_OOZIE5","TEZ","yarn-service");
         boolean boolYarnApp = defineListOfYarnApp.containsAll(listOfAllFilterElements);
         return boolYarnApp;
     }

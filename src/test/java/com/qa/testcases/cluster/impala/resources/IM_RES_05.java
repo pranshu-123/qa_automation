@@ -40,6 +40,12 @@ public class IM_RES_05 extends BaseClass {
     test.log(LogStatus.INFO, "Go to resource page");
     LOGGER.info("Select impala from dropdown");
     impala.selectImpalaResource();
+    waitExecuter.sleep(2000);
+
+    impala.selectImpalaType("Impala");
+    waitExecuter.sleep(3000);
+
+
     datePicker.clickOnDatePicker();
     waitExecuter.sleep(1000);
     datePicker.selectLast30Days();

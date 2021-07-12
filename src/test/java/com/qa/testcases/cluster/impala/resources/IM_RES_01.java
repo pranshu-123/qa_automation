@@ -41,17 +41,24 @@ public class IM_RES_01 extends BaseClass {
 		impalaPageObject = new ImpalaPageObject(driver);
 		// Click on Resources tab and select Impala
 		impala.selectImpalaResource();
+		waitExecuter.sleep(1000);
 		// Select the cluster
 		LOGGER.info("Selecting the cluster");
-		waitExecuter.sleep(1000);
+		// Select the cluster
+		test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
 		HomePage homePage = new HomePage(driver);
-		homePage.selectMultiClusterId(clusterId);
+		homePage.selectMultiClusterIdClusterPage(clusterId);
+		waitExecuter.sleep(1000);
+
+
+		impala.selectImpalaType("Impala");
+		waitExecuter.sleep(2000);
 
 		// Select last one hour
 		test.log(LogStatus.INFO, "Click on date picker");
 		picker.clickOnDatePicker();
 		test.log(LogStatus.INFO, "Select last 1hour from  date picker");
-		picker.selectLastOneHour();
+		picker.selectLast30Days();
 		waitExecuter.sleep(3000);
 		// Validate of Memory graph is present for selected date range
 		Assert.assertTrue(impala.isMemoryGraphPresent(), "The memory graph is not present with expected conditions");

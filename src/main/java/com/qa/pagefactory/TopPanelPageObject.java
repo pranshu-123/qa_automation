@@ -20,7 +20,7 @@ public class TopPanelPageObject {
     @FindBy(css = ".head-logo")
     public WebElement headLogo;
 
-    @FindBy(tagName = "h1")
+    @FindBy(xpath = "//label[normalize-space()='Resource Type']")
     public WebElement pageHeading;
 
     @FindBy(xpath = "//*[@id=\"dashboard_tabs\"]/button[1]")

@@ -4,7 +4,9 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
+import com.qa.scripts.clusters.impala.ChargeBackImpala;
 import com.qa.scripts.clusters.yarn.ChargeBackYarn;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.annotations.Test;
 
@@ -22,12 +24,17 @@ public class YC_031 extends BaseClass {
         test.assignCategory(" Cluster - Yarn Chargeback");
 
         ChargeBackYarn chargeBackYarn = new ChargeBackYarn(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         chargeBackYarn.selectYarnChargeback();
-        test.log(LogStatus.PASS, "User is redirected to cluster yarn chargeback page");
+        waitExecuter.sleep(2000);
 
-        //ClusterId selection
+        // Select the cluster
+        test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
+        chargeBackYarn.selectChargebackType("Yarn");
+        waitExecuter.sleep(2000);
+
 
         // Click on datepicker button
         DatePicker datePicker = new DatePicker(driver);

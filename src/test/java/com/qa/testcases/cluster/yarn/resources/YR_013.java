@@ -8,6 +8,7 @@ import com.qa.pagefactory.clusters.YarnPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.Graphs;
 import com.qa.scripts.HomePage;
+import com.qa.scripts.clusters.impala.Impala;
 import com.qa.scripts.clusters.yarn.Yarn;
 import com.qa.utils.Log;
 import com.qa.utils.ScreenshotHelper;
@@ -37,18 +38,24 @@ public class YR_013 extends BaseClass {
         Yarn yarn = new Yarn(driver);
         Graphs graphs = new Graphs(driver);
         YarnPageObject yarnPageObject = new YarnPageObject(driver);
+        Impala impala = new Impala(driver);
+
+        waitExecuter.sleep(2000);
 
         yarn.verifyYarnResourceHeaderisDisplayed();
         LOGGER.info("Yarn Resource Header is displayed.");
         test.log(LogStatus.INFO, "Yarn Resource Header is displayed.");
 
+        waitExecuter.sleep(2000);
+        // Select the cluster
+        test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
-        waitExecuter.sleep(3000);
-        waitExecuter.waitUntilPageFullyLoaded();
-        LOGGER.info("ClusterId is selected: " + clusterId);
-        test.log(LogStatus.INFO, "ClusterId is selected: " + clusterId);
-
+        homePage.selectMultiClusterIdClusterPage(clusterId);
+        waitExecuter.sleep(1000);
+        //Select cluster id
+        yarn.selectResourceType("Yarn");
+        waitExecuter.sleep(2000);
+        //Select cluster id
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();

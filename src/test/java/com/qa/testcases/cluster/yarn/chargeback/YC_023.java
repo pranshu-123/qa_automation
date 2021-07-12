@@ -4,7 +4,9 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.constants.PageConstants;
 import com.qa.scripts.HomePage;
+import com.qa.scripts.clusters.impala.ChargeBackImpala;
 import com.qa.scripts.clusters.yarn.ChargeBackYarn;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -20,12 +22,17 @@ public class YC_023 extends BaseClass {
     public void YC_023_verifyYarnChargeBackPageClickOnGroupBy(String clusterId) {
         test = extent.startTest("YC_023_verifyYarnChargeBackPageClickOnGroupBy: "+clusterId, "Verify Click on groupby edit field, Yarn chrageback page.");
         test.assignCategory(" Cluster - Yarn Chargeback");
-
-        HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
-
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         ChargeBackYarn chargeBackYarn = new ChargeBackYarn(driver);
         chargeBackYarn.selectYarnChargeback();
+        waitExecuter.sleep(2000);
+
+        // Select the cluster
+        test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
+        HomePage homePage = new HomePage(driver);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
+        chargeBackYarn.selectChargebackType("Yarn");
+        waitExecuter.sleep(2000);
         test.log(LogStatus.PASS, "User is redirected to cluster chargeback page");
 
         chargeBackYarn.clickOnGroupBySearchBox();

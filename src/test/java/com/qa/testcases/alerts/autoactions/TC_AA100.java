@@ -41,7 +41,12 @@ public class TC_AA100 extends BaseClass {
             test.log(LogStatus.INFO, "clicked on new auto action button");
             Assert.assertTrue(aa.validateNewAutoActionPolicyPageDisplayed(), "New Auto Action Policy page" +
                     " not displayed");
-            String policyName = "abcpolicyname0123456789validateNameAs500CharsvalidateNameAs500CharsvalidateNameAs500Chars";
+            String policyName = "abcpolicyname0123456789validateNameAs500CharsvalidateNameAs500CharsvalidateNameAs500Chars" +
+                    "validateNameAs500Charsabpolicyname0123456789validateNameAs500CharsvalidateNameAs500Chars" +
+                    "validateNameAs500CharsvalidateNameAs500Charsabpolicyname0123456789validateNameAs500Chars" +
+                    "validateNameAs500CharsvalidateNameAs500CharsvalidateNameAs500Charsabpolicyname0123456789" +
+                    "validateNameAs500CharsvalidateNameAs500CharsvalidateNameAs500CharsvalidateNameAs500" +
+                    "Charsabpolicyname0123456789validateNameAs500CharsvalidateNameAs5";
             aa.enterNewAutoActionPolicyDetails(policyName, "User", "3");
             waitExecuter.waitUntilPageFullyLoaded();
             test.log(LogStatus.INFO, "Fill new auto action policy details");

@@ -39,7 +39,7 @@ public class AutoActionsPageObject {
     @FindBy(xpath = "//table[@id='aa-list-table']/tbody/tr/td[1]")
     public List<WebElement> listPolicyNames;
 
-    @FindBy(xpath = "//h2[contains(@class,'inline-blk')]/span/span[contains(@class,'icon-alert')]")
+    @FindBy(xpath = "(//tbody[contains(@id,'allApps-body')]/tr/td[5]/span[2])[1]")
     public WebElement icon_summary_header_apps;
 
     /**

@@ -402,7 +402,6 @@ public class AutoActions {
     public void getTriggeredAAs(){
         List<WebElement> listRunCounts = autoActionsPageObject.listRunCount;
         Assert.assertFalse(listRunCounts.isEmpty(), "The run count is empty from AutoAction Table.");
-
         List<String> totalTriggeredPolicyNames = new ArrayList<>();
         int numOfRows = autoActionsPageObject.listRunCount.size();
         logger.info(" Total num of rows in AAs table: "+numOfRows);
@@ -410,21 +409,25 @@ public class AutoActions {
         boolean triggerFlag = false;
         for(int i=0 ; i< numOfRows ; i++ ){
             waitExecuter.sleep(2000);
-            int runCount = Integer.parseInt(autoActionsPageObject.listRunCount.get(i).getText());
-            if(runCount > 0){
-                waitExecuter.sleep(2000);
-                totalTriggeredPolicyNames.add(autoActionsPageObject.listPolicyNames.get(i).getText());
-                triggerFlag = true;
-            }
+            String runCount = autoActionsPageObject.listRunCount.get(i).getText().trim();
+            String Count = "((?<=[a-zA-Z])(?=[0-9]))|((?<=[0-9])(?=[a-zA-Z]))";
+            String CountVal = runCount.split("/")[0].trim().split(Count)[0];
+            logger.info("total count is " + CountVal);
+            waitExecuter.sleep(2000);
+            totalTriggeredPolicyNames.add(autoActionsPageObject.listPolicyNames.get(i).getText().trim());
+            triggerFlag = true;
         }
 
-        if(triggerFlag){
-            logger.info("Trigger Policy are: "+totalTriggeredPolicyNames);
-            for(String triggerPolicy: totalTriggeredPolicyNames){
-                logger.info("Triggered Policy is: "+triggerPolicy);
-            }
-        }else{
-            logger.info("No Triggered Policy found");
-        }
+        {
+            if(triggerFlag){
+                logger.info("Trigger Policy are: "+totalTriggeredPolicyNames);
+
+                for(String triggerPolicy: totalTriggeredPolicyNames){
+                    logger.info("Triggered Policy is: "+triggerPolicy);
+
+                }
+            }else {
+                logger.info("No Triggered Policy found");
+            }}
     }
 }

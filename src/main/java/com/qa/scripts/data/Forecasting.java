@@ -9,6 +9,9 @@ import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -49,6 +52,20 @@ public class Forecasting {
         }
     }
 
+    public void clickOnScheduleButton() {
+        try {
+            MouseActions.clickOnElement(driver, forecastingPageObject.scheduleButton);
+        } catch (TimeoutException te) {
+            MouseActions.clickOnElement(driver, forecastingPageObject.scheduleButton);
+        }
+    }
+
+    public void clickOnModalScheduleButton() {
+        waitExecuter.waitUntilElementPresent(forecastingPageObject.modalScheduleButton);
+        actions.performActionWithPolling(forecastingPageObject.modalScheduleButton, UserAction.CLICK);
+    }
+
+
     public void clickOnModalRunButton() {
         waitExecuter.waitUntilElementPresent(forecastingPageObject.modalRunButton);
         actions.performActionWithPolling(forecastingPageObject.modalRunButton, UserAction.CLICK);
@@ -77,6 +94,56 @@ public class Forecasting {
 
     public void clickOnHistoryDateRange(){
         actions.performActionWithPolling(forecastingPageObject.historyDateRangeDropDown, UserAction.CLICK);
+    }
+
+    /* Click on schedule button and assign  e-mails */
+    public void scheduleWithEmail(String name, List<String> multiEmail) {
+        waitExecuter.waitUntilElementPresent(forecastingPageObject.scheduleName);
+        actions.performActionWithPolling(forecastingPageObject.scheduleName, UserAction.SEND_KEYS, name);
+        for (String email : multiEmail) {
+            actions.performActionWithPolling(forecastingPageObject.email, UserAction.SEND_KEYS, email);
+            waitExecuter.waitUntilElementPresent(forecastingPageObject.addEmail);
+            MouseActions.clickOnElement(driver, forecastingPageObject.addEmail);
+        }
+    }
+
+    /* Define day and Time to select from drop-down */
+    public void selectDayTime(String day, String hour, String min) {
+        selectByDays(day);
+        forecastingPageObject.displayTime.click();
+        selectByHour(hour);
+        selectByMin(min);
+    }
+
+    /* Select day from drop-down */
+    public void selectByDays(String dayToRun) {
+        waitExecuter.waitUntilElementClickable(forecastingPageObject.scheduleDays);
+        Select scheduleTorunDropDown = new Select(forecastingPageObject.scheduleDays);
+        scheduleTorunDropDown.selectByVisibleText(dayToRun);
+
+    }
+
+    /* Select hour from drop-down */
+    public void selectByHour(String hour) {
+        waitExecuter.waitUntilElementClickable(forecastingPageObject.hoursDropdown);
+        Select scheduleTorunDropDown = new Select(forecastingPageObject.hoursDropdown);
+        scheduleTorunDropDown.selectByVisibleText(hour);
+
+    }
+
+    /* Select minute from drop-down */
+    public void selectByMin(String min) {
+        waitExecuter.waitUntilElementClickable(forecastingPageObject.minutesDropdown);
+        Select scheduleTorunDropDown = new Select(forecastingPageObject.minutesDropdown);
+        scheduleTorunDropDown.selectByVisibleText(min);
+
+    }
+
+    /* Validate success message on report creation */
+    public void verifyScheduleSuccessMsg(String successMsg) {
+        waitExecuter.waitUntilElementPresent(forecastingPageObject.scheduleSuccessMsg);
+        Assert.assertEquals(forecastingPageObject.scheduleSuccessMsg.getText().toLowerCase(), successMsg,
+                "The Schedule success " + "message mismatch");
     }
 
     public List<String> getAllHistoryRanges(){

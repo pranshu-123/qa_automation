@@ -432,12 +432,15 @@ public class CloudMigrationPerHostPage {
         userAction.performActionWithPolling(cmpPageObj.cloudProductServiceDropdownIcon, UserAction.CLICK);
         waitExecuter.sleep(2000);
         List<WebElement> cloudProDD = cmpPageObj.dropDownValues;
+        boolean cloudItemFound = false;
         for (WebElement cloudItem : cloudProDD) {
             if (cloudItem.getText().trim().equalsIgnoreCase(cloudProduct.getValue())) {
                 userAction.performActionWithPolling(cloudItem, UserAction.CLICK);
+                cloudItemFound = true;
                 break;
             }
         }
+        Assert.assertTrue(cloudItemFound, "Cloud product was not found in dropdown option.");
     }
 
     /**

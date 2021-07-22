@@ -2,37 +2,32 @@ package com.qa.testcases.data.Forecasting;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.enums.UserAction;
-import com.qa.pagefactory.DatePickerPageObject;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.data.ForecastingPageObject;
-import com.qa.scripts.DatePicker;
 import com.qa.scripts.data.Forecasting;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
-import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
+
 @Marker.DataForecasting
 @Marker.All
-public class TC_CF_94 extends BaseClass {
-    private static final Logger LOGGER = Logger.getLogger(TC_CF_04.class.getName());
+public class TC_CF_91 extends BaseClass {
+    private static final Logger LOGGER = Logger.getLogger(TC_CF_16.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateForecastingReportGeneratedForInvalidEmailAddress(String clusterId) {
-        test = extent.startTest("TC_CF_94.validateForecastingReportGeneratedForInvalidEmailAddress: " + clusterId,
-                "Verify user fails to entre a invalid email address in the schedule report.");
+    public void validateForecastingReportGeneratedForMinusOneDays(String clusterId) {
+        test = extent.startTest("TC_CF_16.validateForecastingReportGeneratedForMinusOneDays: " + clusterId,
+                "Verify User should not allow the user to enter negative values.");
         test.assignCategory(" Data - Forecasting ");
         LOGGER.info("Passed Parameter Is : " + clusterId);
 
-        //Initialize all require objects
         //Initialize all require objects
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
@@ -62,34 +57,36 @@ public class TC_CF_94 extends BaseClass {
         LOGGER.info("Clicked on Schedule Button");
         test.log(LogStatus.INFO, "Clicked on Schedule Button");
         try {
-            String forecastingNoOfDays = "2";
+            String forecastingNoOfDays = "-1";
             forecasting.setForecastingDays(forecastingNoOfDays);
             LOGGER.info("Set Forecasting days as: " + forecastingNoOfDays);
             test.log(LogStatus.INFO, "Set Forecasting days as: " + forecastingNoOfDays);
-            String scheduleName = "Queue_An_Test1";
+            String scheduleName = "Forecasting_Test1";
             List<String> email = Arrays.asList("test@unravel.com","test1@unravel.com","test2@unravel.com");
             // Schedule with e-mails
-            test.log(LogStatus.INFO, "Schedule with wrong e-mails");
-            LOGGER.info("Schedule with wrong e-mails");
+            test.log(LogStatus.INFO, "Schedule with e-mails");
+            LOGGER.info("Schedule with e-mails");
             forecasting.scheduleWithEmail(scheduleName, email);
-            String colorString = forecastingPageObject.verifyColorCode.getAttribute("class");
-            String[] arrColor = colorString .split("#");
-            Assert.assertTrue(arrColor[1].equals("d54451"));
-            test.log(LogStatus.INFO, "Schedule Notification text box marked in red");
-            LOGGER.info("Schedule Notification text box marked in red");
             // Define day of the week and time
             test.log(LogStatus.INFO, "Define day of the week as- Thursday and time as- 17:30");
             LOGGER.info("Define day of the week as- Thursday and time as- 17:30");
             forecasting.selectDayTime("Daily", "10", "30");
             waitExecuter.waitUntilPageFullyLoaded();
-            forecasting.clickOnModalScheduleButton();
-            LOGGER.info("Clicked on modal Schedule Button");
-            test.log(LogStatus.INFO, "Clicked on modal Schedule Button");
-            String scheduleSuccessMsg = "the report has been scheduled successfully.";
-            forecasting.verifyScheduleSuccessMsg(scheduleSuccessMsg);
-            test.log(LogStatus.PASS, "Verified schedule with multi email for daily.");
+            waitExecuter.waitUntilElementPresent(forecastingPageObject.modalCancelButton);
+            forecasting.clickOnCancelButton();
+            test.log(LogStatus.INFO, "Clicked on CancelButton");
+
+            //Get the previous report data generated
+            String reportDataAfterCancelled = forecasting.getReportData();
+            LOGGER.info("Report generated data after cancelled: " + reportDataAfterCancelled);
+            test.log(LogStatus.INFO, "Report generated data after cancelled: " + reportDataAfterCancelled);
+
+            //Validate both the report data
+            Assert.assertEquals(previousReportData, reportDataAfterCancelled);
+            test.log(LogStatus.PASS, "Verified Schedule Forecasting report after user cancelled.");
+            LOGGER.info("Verified Schedule Forecasting report after user cancelled.");
         } catch (VerifyError te) {
-            throw new AssertionError("Forecasting schedule  not completed successfully for " +
+            throw new AssertionError("Forecasting schedule Report not completed successfully for " +
                     " days: "+te);
         }
     }

@@ -66,7 +66,7 @@ public class TC_CF_12 extends BaseClass {
             LOGGER.info("Set Forecasting days as: " + forecastingNoOfDays);
             test.log(LogStatus.INFO, "Set Forecasting days as: " + forecastingNoOfDays);
             String scheduleName = "Queue_An_Test2";
-            List<String> email = Arrays.asList("test@unravel.com,test1@unravel.com,test2@unravel.com");
+            List<String> email = Arrays.asList("test@unravel.com","test1@unravel.com","test2@unravel.com");
             // Schedule with e-mails
             test.log(LogStatus.INFO, "Schedule with e-mails");
             LOGGER.info("Schedule with e-mails");

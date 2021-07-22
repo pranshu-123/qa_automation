@@ -2,33 +2,28 @@ package com.qa.testcases.data.Forecasting;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.enums.UserAction;
-import com.qa.pagefactory.DatePickerPageObject;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.data.ForecastingPageObject;
-import com.qa.scripts.DatePicker;
 import com.qa.scripts.data.Forecasting;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
-import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.TimeoutException;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
+
 @Marker.DataForecasting
 @Marker.All
-public class TC_CF_12 extends BaseClass {
-    private static final Logger LOGGER = Logger.getLogger(TC_CF_12.class.getName());
+public class TC_CF_92 extends BaseClass {
+    private static final Logger LOGGER = Logger.getLogger(TC_CF_13.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateScheduleForecastingReportForDiffForecastingDays(String clusterId) {
-        test = extent.startTest("TC_CF_12.validateForecastingReportGeneratedForDiffForecastingDays: " + clusterId,
-                "Verify User is able to generate forecasting report for different forecasting days.");
+    public void validateForecastingReportGeneratedForOneDays(String clusterId) {
+        test = extent.startTest("TC_CF_92.validateForecastingReportGeneratedForZeroDays: " + clusterId,
+                "Verify User is able to generate forecasting report for one days.");
         test.assignCategory(" Data - Forecasting ");
         LOGGER.info("Passed Parameter Is : " + clusterId);
 
@@ -61,12 +56,12 @@ public class TC_CF_12 extends BaseClass {
         LOGGER.info("Clicked on Schedule Button");
         test.log(LogStatus.INFO, "Clicked on Schedule Button");
         try {
-            String forecastingNoOfDays = "2";
+            String forecastingNoOfDays = "1";
             forecasting.setForecastingDays(forecastingNoOfDays);
             LOGGER.info("Set Forecasting days as: " + forecastingNoOfDays);
             test.log(LogStatus.INFO, "Set Forecasting days as: " + forecastingNoOfDays);
-            String scheduleName = "Queue_An_Test2";
-            List<String> email = Arrays.asList("test@unravel.com,test1@unravel.com,test2@unravel.com");
+            String scheduleName = "Forecasting_Test3";
+            List<String> email = Arrays.asList("test@unravel.com");
             // Schedule with e-mails
             test.log(LogStatus.INFO, "Schedule with e-mails");
             LOGGER.info("Schedule with e-mails");
@@ -74,7 +69,7 @@ public class TC_CF_12 extends BaseClass {
             // Define day of the week and time
             test.log(LogStatus.INFO, "Define day of the week as- Thursday and time as- 17:30");
             LOGGER.info("Define day of the week as- Thursday and time as- 17:30");
-            forecasting.selectDayTime("Thursday", "10", "30");
+            forecasting.selectDayTime("Every 2 Weeks", "22", "00");
             waitExecuter.waitUntilPageFullyLoaded();
             forecasting.clickOnModalScheduleButton();
             LOGGER.info("Clicked on modal Schedule Button");

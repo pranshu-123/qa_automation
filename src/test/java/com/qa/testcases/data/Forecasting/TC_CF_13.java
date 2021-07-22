@@ -1,5 +1,6 @@
 package com.qa.testcases.data.Forecasting;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.DatePickerPageObject;
@@ -19,7 +20,8 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
-
+@Marker.DataForecasting
+@Marker.All
 public class TC_CF_13 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_CF_13.class.getName());
 
@@ -72,7 +74,7 @@ public class TC_CF_13 extends BaseClass {
             // Define day of the week and time
             test.log(LogStatus.INFO, "Define day of the week as- Thursday and time as- 17:30");
             LOGGER.info("Define day of the week as- Thursday and time as- 17:30");
-            forecasting.selectDayTime("Every two weeks", "22", "00");
+            forecasting.selectDayTime("Every 2 Weeks", "22", "00");
             waitExecuter.waitUntilPageFullyLoaded();
             forecasting.clickOnModalScheduleButton();
             LOGGER.info("Clicked on modal Schedule Button");

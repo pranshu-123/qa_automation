@@ -1,5 +1,6 @@
 package com.qa.testcases.data.Forecasting;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.DatePickerPageObject;
@@ -19,7 +20,8 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
-
+@Marker.DataForecasting
+@Marker.All
 public class TC_CF_16 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_CF_16.class.getName());
 

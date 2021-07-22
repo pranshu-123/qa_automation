@@ -1,5 +1,6 @@
 package com.qa.testcases.data.Forecasting;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.DatePickerPageObject;
@@ -19,13 +20,14 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
-
+@Marker.DataForecasting
+@Marker.All
 public class TC_CF_94 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_CF_04.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void validateForecastingReportGeneratedForInvalidEmailAddress(String clusterId) {
-        test = extent.startTest("TC_CF_04.validateForecastingReportGeneratedForInvalidEmailAddress: " + clusterId,
+        test = extent.startTest("TC_CF_94.validateForecastingReportGeneratedForInvalidEmailAddress: " + clusterId,
                 "Verify user fails to entre a invalid email address in the schedule report.");
         test.assignCategory(" Data - Forecasting ");
         LOGGER.info("Passed Parameter Is : " + clusterId);

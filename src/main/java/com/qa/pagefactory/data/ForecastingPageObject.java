@@ -32,6 +32,9 @@ public class ForecastingPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
     public WebElement confirmationMessageElement;
 
+    @FindBy(xpath = "//span[contains(@class,'text-fatal')]")
+    public WebElement ForecastingErrorMessageElement;
+
     @FindBy(xpath = "//h2[@class='text-white']/div")
     public WebElement modalCancelButton;
 

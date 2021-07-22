@@ -96,6 +96,13 @@ public class Forecasting {
         actions.performActionWithPolling(forecastingPageObject.historyDateRangeDropDown, UserAction.CLICK);
     }
 
+    /* Validate success message on report creation */
+    public void verifyScheduleErrorSuccessMsg(String errorMsg) {
+        waitExecuter.waitUntilElementPresent(forecastingPageObject.ForecastingErrorMessageElement);
+        Assert.assertEquals(forecastingPageObject.ForecastingErrorMessageElement.getText().toLowerCase(), errorMsg,
+                "The Schedule success " + "message mismatch");
+    }
+
     /* Click on schedule button and assign  e-mails */
     public void scheduleWithEmail(String name, List<String> multiEmail) {
         waitExecuter.waitUntilElementPresent(forecastingPageObject.scheduleName);

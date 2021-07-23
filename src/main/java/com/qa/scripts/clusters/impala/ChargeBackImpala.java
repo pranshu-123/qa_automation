@@ -186,7 +186,7 @@ public class ChargeBackImpala {
      * @param groupBy - group by option to select
      */
     public void selectGroupBy(GroupByOptions groupBy) {
-        closeGroupByOptionsExcept(groupBy);
+        //closeGroupByOptionsExcept(groupBy);
         switch (groupBy) {
             case USER:
                 waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.groupByUserOption);

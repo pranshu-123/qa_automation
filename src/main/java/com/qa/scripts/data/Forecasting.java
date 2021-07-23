@@ -8,6 +8,7 @@ import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
+import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -16,16 +17,17 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
 public class Forecasting {
 
-    private WaitExecuter waitExecuter;
-    private WebDriver driver;
-    ForecastingPageObject forecastingPageObject;
-    private UserActions actions;
     private static final Logger LOGGER = Logger.getLogger(Forecasting.class.getName());
+    ForecastingPageObject forecastingPageObject;
+    private final WaitExecuter waitExecuter;
+    private final WebDriver driver;
+    private final UserActions actions;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -95,28 +97,28 @@ public class Forecasting {
         actions.performActionWithPolling(forecastingPageObject.modalRunButton, UserAction.CLICK);
     }
 
-    public void setForecastingDays(String numOfDays){
+    public void setForecastingDays(String numOfDays) {
         actions.performActionWithPolling(forecastingPageObject.numOfDaysForForecasting,
-            UserAction.SEND_KEYS, numOfDays);
+                UserAction.SEND_KEYS, numOfDays);
     }
 
-    public void clickOnCancelButton(){
-        try{
+    public void clickOnCancelButton() {
+        try {
             actions.performActionWithPolling(forecastingPageObject.modalCancelButton, UserAction.CLICK);
 
-        }catch (TimeoutException te) {
+        } catch (TimeoutException te) {
             actions.performActionWithPolling(forecastingPageObject.modalCancelButton, UserAction.CLICK);
         }
     }
 
-    public String getReportData(){
-        if(forecastingPageObject.previousReportData.isDisplayed()){
+    public String getReportData() {
+        if (forecastingPageObject.previousReportData.isDisplayed()) {
             return forecastingPageObject.previousReportData.getText();
         }
         return null;
     }
 
-    public void clickOnHistoryDateRange(){
+    public void clickOnHistoryDateRange() {
         actions.performActionWithPolling(forecastingPageObject.historyDateRangeDropDown, UserAction.CLICK);
     }
 
@@ -135,6 +137,35 @@ public class Forecasting {
             actions.performActionWithPolling(forecastingPageObject.email, UserAction.SEND_KEYS, email);
             waitExecuter.waitUntilElementPresent(forecastingPageObject.addEmail);
             MouseActions.clickOnElement(driver, forecastingPageObject.addEmail);
+        }
+    }
+
+    public void generateForecastingReport(Forecasting forecasting, ExtentTest test) {
+        try {
+            String forecastingNoOfDays = "2";
+            forecasting.setForecastingDays(forecastingNoOfDays);
+            LOGGER.info("Set Forecasting days as: " + forecastingNoOfDays);
+            test.log(LogStatus.INFO, "Set Forecasting days as: " + forecastingNoOfDays);
+            String scheduleName = "Queue_An_Test2";
+            List<String> email = Arrays.asList("test@unravel.com","test1@unravel.com","test2@unravel.com");
+            // Schedule with e-mails
+            test.log(LogStatus.INFO, "Schedule with e-mails");
+            LOGGER.info("Schedule with e-mails");
+            forecasting.scheduleWithEmail(scheduleName, email);
+            // Define day of the week and time
+            test.log(LogStatus.INFO, "Define day of the week as- Thursday and time as- 17:30");
+            LOGGER.info("Define day of the week as- Thursday and time as- 17:30");
+            forecasting.selectDayTime("Daily", "10", "30");
+            waitExecuter.waitUntilPageFullyLoaded();
+            forecasting.clickOnModalScheduleButton();
+            LOGGER.info("Clicked on modal Schedule Button");
+            test.log(LogStatus.INFO, "Clicked on modal Schedule Button");
+            String scheduleSuccessMsg = "the report has been scheduled successfully.";
+            forecasting.verifyScheduleSuccessMsg(scheduleSuccessMsg);
+            test.log(LogStatus.PASS, "Verified schedule with multi email for daily.");
+        } catch (VerifyError te) {
+            throw new AssertionError("Forecasting schedule Report not completed successfully for " +
+                    " days: "+te);
         }
     }
 
@@ -177,16 +208,16 @@ public class Forecasting {
                 "The Schedule success " + "message mismatch");
     }
 
-    public List<String> getAllHistoryRanges(){
+    public List<String> getAllHistoryRanges() {
 
         clickOnHistoryDateRange();
         int dateRangeCount = forecastingPageObject.listDateRange.size();
-        if(dateRangeCount > 0){
+        if (dateRangeCount > 0) {
             List<String> dateRange = new ArrayList<String>();
-            for(WebElement e : forecastingPageObject.listDateRange){
+            for (WebElement e : forecastingPageObject.listDateRange) {
                 dateRange.add(e.getText());
             }
-            LOGGER.info("All History Date ranges from UI are: "+dateRange);
+            LOGGER.info("All History Date ranges from UI are: " + dateRange);
             return dateRange;
         }
         return null;

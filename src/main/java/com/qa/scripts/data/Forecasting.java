@@ -1,11 +1,14 @@
 package com.qa.scripts.data;
 
 import com.qa.enums.UserAction;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
+import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.data.ForecastingPageObject;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
+import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -42,6 +45,27 @@ public class Forecasting {
             waitExecuter.waitUntilElementClickable(forecastingPageObject.confirmationMessageElementClose.get(0));
             JavaScriptExecuter.clickOnElement(driver, forecastingPageObject.confirmationMessageElementClose.get(0));
         }
+    }
+
+    public void generateForecastingReportHeaderTab() {
+        //Initialize all require objects
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
+        waitExecuter.waitUntilElementPresent(topPanelComponentPageObject.data);
+        waitExecuter.sleep(2000);
+        MouseActions.clickOnElement(driver, topPanelComponentPageObject.data);
+        LOGGER.info("Clicked on Data Tab");
+
+        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
+        waitExecuter.waitUntilElementPresent(topPanelPageObject.dataForecastingTab);
+        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilElementClickable(topPanelPageObject.dataForecastingTab);
+        waitExecuter.sleep(3000);
+        MouseActions.clickOnElement(driver, topPanelPageObject.dataForecastingTab);
+        LOGGER.info("Clicked on Forecasting Tab");
+
+        Forecasting forecasting = new Forecasting(driver);
+        forecasting.closeConfirmationMessageNotification();
     }
 
     public void clickOnRunButton() {

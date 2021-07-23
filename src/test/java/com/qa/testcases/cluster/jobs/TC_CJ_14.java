@@ -76,8 +76,6 @@ public class TC_CJ_14 extends BaseClass {
             Assert.assertNotEquals(memoryTooltipValues.get(i), "",
                     "Tooltip value displayed blank value for jobs graph");
         }
-
-
         test.log(LogStatus.PASS, "Validate When the user hovers the mouse over the jobs graph"
                 + " it should simultaneously display the tool tip for jobs graph at the same data point");
 

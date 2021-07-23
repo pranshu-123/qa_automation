@@ -30,26 +30,12 @@ public class TC_CF_91 extends BaseClass {
         test.assignCategory(" Data - Forecasting ");
         LOGGER.info("Passed Parameter Is : " + clusterId);
 
-        WaitExecuter waitExecuter = new WaitExecuter(driver);
-        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
-        waitExecuter.waitUntilElementPresent(topPanelComponentPageObject.data);
-        waitExecuter.sleep(2000);
-        MouseActions.clickOnElement(driver, topPanelComponentPageObject.data);
-        LOGGER.info("Clicked on Data Tab");
-
-        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-        waitExecuter.waitUntilElementPresent(topPanelPageObject.dataForecastingTab);
-        waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.waitUntilElementClickable(topPanelPageObject.dataForecastingTab);
-        waitExecuter.sleep(3000);
-        MouseActions.clickOnElement(driver, topPanelPageObject.dataForecastingTab);
-        LOGGER.info("Clicked on Forecasting Tab");
-        test.log(LogStatus.INFO, "Clicked on Forecasting Tab");
-
-        ForecastingPageObject forecastingPageObject = new ForecastingPageObject(driver);
-
+        //Initialize all require objects
         Forecasting forecasting = new Forecasting(driver);
-        forecasting.closeConfirmationMessageNotification();
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        ForecastingPageObject forecastingPageObject = new ForecastingPageObject(driver);
+        forecasting.generateForecastingReportHeaderTab();
+        test.log(LogStatus.INFO, "Verified the Data Forecasting header tab");
 
         //Get the previous report data generated
         String previousReportData = forecasting.getReportData();

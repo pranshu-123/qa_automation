@@ -33,33 +33,17 @@ public class TC_CF_16 extends BaseClass {
         LOGGER.info("Passed Parameter Is : " + clusterId);
 
         //Initialize all require objects
-        WaitExecuter waitExecuter = new WaitExecuter(driver);
-        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
-        waitExecuter.waitUntilElementPresent(topPanelComponentPageObject.data);
-        waitExecuter.sleep(2000);
-        MouseActions.clickOnElement(driver, topPanelComponentPageObject.data);
-        LOGGER.info("Clicked on Data Tab");
-
-        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-        waitExecuter.waitUntilElementPresent(topPanelPageObject.dataForecastingTab);
-        waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.waitUntilElementClickable(topPanelPageObject.dataForecastingTab);
-        waitExecuter.sleep(3000);
-        MouseActions.clickOnElement(driver, topPanelPageObject.dataForecastingTab);
-        LOGGER.info("Clicked on Forecasting Tab");
-        test.log(LogStatus.INFO, "Clicked on Forecasting Tab");
-
-        ForecastingPageObject forecastingPageObject = new ForecastingPageObject(driver);
-
         Forecasting forecasting = new Forecasting(driver);
-        forecasting.closeConfirmationMessageNotification();
+        ForecastingPageObject forecastingPageObject = new ForecastingPageObject(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        forecasting.generateForecastingReportHeaderTab();
+        test.log(LogStatus.INFO, "Verified the Data Forecasting header tab");
 
         //Get the previous report data generated
         String previousReportData = forecasting.getReportData();
         LOGGER.info("Previous report generated data: " + previousReportData);
         forecasting.clickOnScheduleButton();
         LOGGER.info("Clicked on Schedule Button");
-        test.log(LogStatus.INFO, "Clicked on Schedule Button");
         try {
             String forecastingNoOfDays = "2";
             forecasting.setForecastingDays(forecastingNoOfDays);

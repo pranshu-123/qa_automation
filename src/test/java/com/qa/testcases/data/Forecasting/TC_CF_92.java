@@ -2,7 +2,6 @@ package com.qa.testcases.data.Forecasting;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.data.ForecastingPageObject;
@@ -14,17 +13,19 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Marker.DataForecasting
 @Marker.All
-public class TC_CF_01 extends BaseClass {
-    private static final Logger LOGGER = Logger.getLogger(TC_CF_01.class.getName());
+public class TC_CF_92 extends BaseClass {
+    private static final Logger LOGGER = Logger.getLogger(TC_CF_92.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateForecastingReportGenerated(String clusterId) {
-        test = extent.startTest("TC_CF_01.validateForecastingReportGenerated: "+ clusterId,
-                "Verify User is able to trigger a new report or cancel the selection");
+    public void validateForecastingReportGeneratedForOneDays(String clusterId) {
+        test = extent.startTest("TC_CF_92.validateForecastingReportGeneratedForZeroDays: " + clusterId,
+                "Verify User is able to generate forecasting report for one days.");
         test.assignCategory(" Data - Forecasting ");
         LOGGER.info("Passed Parameter Is : " + clusterId);
 
@@ -35,11 +36,14 @@ public class TC_CF_01 extends BaseClass {
         forecasting.generateForecastingReportHeaderTab();
         test.log(LogStatus.INFO, "Verified the Data Forecasting header tab");
 
+        //Get the previous report data generated
+        String previousReportData = forecasting.getReportData();
+        LOGGER.info("Previous report generated data: " + previousReportData);
         forecasting.clickOnRunButton();
         LOGGER.info("Clicked on Run Button");
         test.log(LogStatus.INFO, "Clicked on Run Button");
 
-        String forecastingNoOfDays = "2";
+        String forecastingNoOfDays = "1";
         forecasting.setForecastingDays(forecastingNoOfDays);
         LOGGER.info("Set Forecasting days as: "+ forecastingNoOfDays);
         test.log(LogStatus.INFO, "Set Forecasting days as: "+ forecastingNoOfDays);
@@ -60,5 +64,4 @@ public class TC_CF_01 extends BaseClass {
             throw new AssertionError("Forecasting Report not completed successfully.");
         }
     }
-
 }

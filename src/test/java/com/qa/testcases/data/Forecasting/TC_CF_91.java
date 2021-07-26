@@ -8,22 +8,25 @@ import com.qa.pagefactory.data.ForecastingPageObject;
 import com.qa.scripts.data.Forecasting;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Marker.DataForecasting
 @Marker.All
-public class TC_CF_02 extends BaseClass {
-    private static final Logger LOGGER = Logger.getLogger(TC_CF_02.class.getName());
+public class TC_CF_91 extends BaseClass {
+    private static final Logger LOGGER = Logger.getLogger(TC_CF_91.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateCanceledForecastingReport(String clusterId) {
-        test = extent.startTest("TC_CF_02.validateCanceledForecastingReport: " + clusterId,
-                "Verify User is able to clicks on \"Cancel\" button and the Mini Window should close ");
+    public void validateForecastingReportGeneratedForMinusOneDays(String clusterId) {
+        test = extent.startTest("TC_CF_16.validateForecastingReportGeneratedForMinusOneDays: " + clusterId,
+                "Verify User should not allow the user to enter negative values.");
         test.assignCategory(" Data - Forecasting ");
         LOGGER.info("Passed Parameter Is : " + clusterId);
 
@@ -41,10 +44,13 @@ public class TC_CF_02 extends BaseClass {
         LOGGER.info("Clicked on Run Button");
         test.log(LogStatus.INFO, "Clicked on Run Button");
         try {
-            String forecastingNoOfDays = "2";
+            String forecastingNoOfDays = "-1";
             forecasting.setForecastingDays(forecastingNoOfDays);
             LOGGER.info("Set Forecasting days as: " + forecastingNoOfDays);
             test.log(LogStatus.INFO, "Set Forecasting days as: " + forecastingNoOfDays);
+            String scheduleErrorMsg = "minimum number of days to predict is 1.";
+            forecasting.verifyScheduleErrorSuccessMsg(scheduleErrorMsg);
+            test.log(LogStatus.PASS, "Verified Minimum number of days to predict is 1. Please enter valid number.");
             forecasting.clickOnModalRunButton();
             LOGGER.info("Clicked on Modal Run Button");
             test.log(LogStatus.INFO, "Clicked on Modal Run Button");
@@ -63,7 +69,7 @@ public class TC_CF_02 extends BaseClass {
             LOGGER.info("Verified Forecasting report after user cancelled.");
         } catch (VerifyError te) {
             throw new AssertionError("Forecasting Report not completed successfully for " +
-                    " days: "+te);
+                    " days: " + te);
         }
     }
 }

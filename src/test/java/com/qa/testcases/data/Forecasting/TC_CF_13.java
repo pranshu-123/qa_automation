@@ -34,6 +34,6 @@ public class TC_CF_13 extends BaseClass {
         forecasting.clickOnScheduleButton();
         LOGGER.info("Clicked on Schedule Button");
 
-        forecasting.generateForecastingReport(forecasting, test);
+        forecasting.generateForecastingReport(forecasting, test,"Forecasting_Test3","Every 2 Weeks","22","00");
     }
 }

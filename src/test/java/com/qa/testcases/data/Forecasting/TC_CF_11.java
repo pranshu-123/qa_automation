@@ -33,6 +33,7 @@ public class TC_CF_11 extends BaseClass {
         forecasting.clickOnScheduleButton();
         LOGGER.info("Clicked on Schedule Button");
 
-        forecasting.generateForecastingReport(forecasting, test);
+        forecasting.generateForecastingReport(forecasting, test,"Forecasting_Test1","Daily","10","30");
+
     }
 }

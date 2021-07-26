@@ -34,7 +34,7 @@ public class TC_CF_14 extends BaseClass {
         forecasting.clickOnScheduleButton();
         LOGGER.info("Clicked on Schedule Button");
 
-        forecasting.generateForecastingReport(forecasting, test);
+        forecasting.generateForecastingReport(forecasting, test,"Forecasting_Test4","Every Month","00","00");
     }
 
 }

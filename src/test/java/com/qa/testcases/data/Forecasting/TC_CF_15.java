@@ -32,6 +32,6 @@ public class TC_CF_15 extends BaseClass {
         LOGGER.info("Previous report generated data: " + previousReportData);
         forecasting.clickOnScheduleButton();
         LOGGER.info("Clicked on Schedule Button");
-        forecasting.generateForecastingReport(forecasting, test);
+        forecasting.generateForecastingReport(forecasting, test,"!@$@$@#$@#%@%","Daily","10","30");
     }
 }

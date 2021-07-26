@@ -81,6 +81,7 @@ public class IM_RES_18 extends BaseClass {
         List<String> queueNameList = new ArrayList<String>();
         for (int i = 0; i < impalaPageObject.filterElements.size(); i++) {
             String queueName = impalaPageObject.filterElements.get(i).getText();
+            if (queueName != null) {
             queueNameList.add(queueName);
             impalaPageObject.filterElements.get(i).click();
             waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
@@ -101,5 +102,5 @@ public class IM_RES_18 extends BaseClass {
         impalaPageObject.filterInput.click();
         waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         waitExecuter.sleep(3000);
-    }
+    }}
 }

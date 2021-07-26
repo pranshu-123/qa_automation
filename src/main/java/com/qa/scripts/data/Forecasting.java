@@ -140,13 +140,14 @@ public class Forecasting {
         }
     }
 
-    public void generateForecastingReport(Forecasting forecasting, ExtentTest test) {
+    public void generateForecastingReport(Forecasting forecasting, ExtentTest test,
+                                          String schedule,String day,String hour,String min) {
         try {
             String forecastingNoOfDays = "2";
             forecasting.setForecastingDays(forecastingNoOfDays);
             LOGGER.info("Set Forecasting days as: " + forecastingNoOfDays);
             test.log(LogStatus.INFO, "Set Forecasting days as: " + forecastingNoOfDays);
-            String scheduleName = "Queue_An_Test2";
+            String scheduleName = schedule;
             List<String> email = Arrays.asList("test@unravel.com","test1@unravel.com","test2@unravel.com");
             // Schedule with e-mails
             test.log(LogStatus.INFO, "Schedule with e-mails");
@@ -155,7 +156,7 @@ public class Forecasting {
             // Define day of the week and time
             test.log(LogStatus.INFO, "Define day of the week as- Thursday and time as- 17:30");
             LOGGER.info("Define day of the week as- Thursday and time as- 17:30");
-            forecasting.selectDayTime("Daily", "10", "30");
+            forecasting.selectDayTime(day, hour, min);
             waitExecuter.waitUntilPageFullyLoaded();
             forecasting.clickOnModalScheduleButton();
             LOGGER.info("Clicked on modal Schedule Button");

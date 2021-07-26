@@ -17,14 +17,23 @@ public class ForecastingPageObject {
     @FindBy(xpath = "//span[contains(text(),'Run New')]/parent::a")
     public WebElement runNowButton;
 
+    @FindBy(xpath = "//span[text()='Schedule']")
+    public WebElement scheduleButton;
+
     @FindBy(xpath = "(//span[contains(text(),'Run')])[2]/parent::a")
     public WebElement modalRunButton;
+
+    @FindBy(xpath = "(//span[contains(text(),'Schedule')])[2]/parent::a")
+    public WebElement modalScheduleButton;
 
     @FindBy(xpath = "//b[contains(text(),'Forecasting')]//parent::p/following-sibling::p/input")
     public WebElement numOfDaysForForecasting;
 
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
     public WebElement confirmationMessageElement;
+
+    @FindBy(xpath = "//span[contains(@class,'text-fatal')]")
+    public WebElement ForecastingErrorMessageElement;
 
     @FindBy(xpath = "//h2[@class='text-white']/div")
     public WebElement modalCancelButton;
@@ -34,6 +43,33 @@ public class ForecastingPageObject {
 
     @FindBy(xpath = "//div[@class='component-date-picker']/i[1]")
     public WebElement historyDateRangeDropDown;
+
+    @FindBy(xpath = "(//form[@name='taskrunnerForm']/div/div[3]/b[contains(text(), 'Schedule Name')]/parent::div/p/input)[1]")
+    public WebElement scheduleName;
+
+    @FindBy(xpath = "//input[@type='email']/following-sibling::span")
+    public WebElement addEmail;
+
+    @FindBy(xpath = "//input[@type='email']")
+    public WebElement email;
+
+    @FindBy(xpath = "//input[@class='display-time']")
+    public WebElement displayTime;
+
+    @FindBy(xpath = "//input[@class='display-time']/following::select[@class='hours']")
+    public WebElement hoursDropdown;
+
+    @FindBy(xpath = "//input[@class='display-time']/following::select[@class='minutes']")
+    public WebElement minutesDropdown;
+
+    @FindBy(xpath = "//div[@class='task-runner-ht']/section/span[1]")
+    public WebElement scheduleSuccessMsg;
+
+    @FindBy(xpath = "//input[@placeholder='Email']")
+    public WebElement verifyColorCode;
+
+    @FindBy(xpath = "//select[contains(@class,'schedule-days')]")
+    public WebElement scheduleDays;
 
     @FindBy(xpath = "//div[@class='ranges']/ul/li")
     public List<WebElement> listDateRange;

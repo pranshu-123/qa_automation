@@ -45,6 +45,8 @@ public class TC_CB_39 extends BaseClass {
     MouseActions.clickOnElement(driver, commonPageObject.clusterDropdown);
     waitExecuter.sleep(1000);
     MouseActions.clickOnElement(driver, commonPageObject.clustersList.get(0));
+    chargeBackImpala.selectImpalaType("Impala");
+    waitExecuter.sleep(3000);
 
     DatePicker datePicker = new DatePicker(driver);
     datePicker.clickOnDatePicker();

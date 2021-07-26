@@ -190,7 +190,7 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath= "//div[@class='chargebackdrill']")
     public List<WebElement> listChargeBackDrillFromGroupByFilters;
 
-    @FindBy(xpath="//table[@id='chargeback-table']//tbody/tr/td[2]/div/span[1]")
+    @FindBy(xpath="//table[@id='chargeback-table']//tbody/tr/td[2]/span[1]")
     public List<WebElement> getJobsCountFromChargebackTable;
 
     @FindBy(xpath = "//button[@class='btn-csv']")
@@ -248,7 +248,7 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "//table[contains(@id,'finishedImpalaJobsTable')]//a[contains(@class,'icon-sort-sorted-up')]")
     public WebElement userSortUp;
     
-    @FindBy(xpath = "//table[contains(@id,'finishedImpalaJobsTable')]//a[contains(@class,'icon-sort-sorted-down')]")
+    @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-down')]")
     public WebElement userSortDown;
 
     public ChargebackImpalaPageObject(WebDriver driver) {

@@ -5,10 +5,14 @@ import com.qa.scripts.DatePicker;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.SkipException;
 
 import java.util.*;
 import java.util.logging.Logger;
@@ -101,6 +105,45 @@ public class KafkaPage {
     waitExecuter.waitUntilPageFullyLoaded();
 
     return clustername;
+  }
+
+
+
+  /***
+   * Method to verify topic pagination.
+   */
+  public void verifyLatestMetricsTopicPagination(KafkaPageObject kafkaPageObject, ExtentTest test) {
+
+    // Verify if the Latest metrics are present
+    test.log(LogStatus.INFO, "Verify if the Latest metrics are present in table");
+    logger.info("Verify if the Latest metrics are present in table");
+    if (kafkaPageObject.getLatestMetricsList.size() > 0) {
+      if (kafkaPageObject.paginationLatMetricsTable.size() > 0) {
+        String numOfPages = getPageNumber(kafkaPageObject);
+        String navigatedPageValue = kafkaPageObject.enterLatMetPageNuToNavigation.getAttribute("value");
+        logger.info("Navigated page value --------- "+navigatedPageValue);
+        test.log(LogStatus.INFO, "Navigated page value --"+navigatedPageValue);
+        Assert.assertEquals(numOfPages, navigatedPageValue, "Pagination is not working");
+        test.log(LogStatus.PASS, "Pagination is present in Latest metrics table");
+      } else {
+        throw new SkipException("Pagination is not present.");
+      }
+    } else {
+      logger.info("There are no Latest metrics in table.");
+      test.log(LogStatus.SKIP, "There are no Latest metrics present in table");
+    }
+
+  }
+
+  public String getPageNumber(KafkaPageObject kafkaPageObject) {
+    String[] numOfPages = kafkaPageObject.getNumberOfMetricsPagesOfReports.getText().split(" ");
+    logger.info("Total number of pages ------------ " + numOfPages[2]);
+    kafkaPageObject.enterLatMetPageNuToNavigation.click();
+    kafkaPageObject.enterLatMetPageNuToNavigation.clear();
+    kafkaPageObject.enterLatMetPageNuToNavigation.sendKeys(numOfPages[2]);
+    kafkaPageObject.enterLatMetPageNuToNavigation.sendKeys(Keys.ENTER);
+    waitExecuter.sleep(2000);
+    return numOfPages[2];
   }
 
   /***
@@ -331,7 +374,7 @@ public class KafkaPage {
   public ArrayList<Integer> sortBrokerIntCol(List<WebElement> brokerRowList, int col) {
     ArrayList<Integer> intArr = new ArrayList<>();
     for (int row = 0; row < brokerRowList.size(); row++) {
-      WebElement rowData = driver.findElement(By.xpath("//tbody[@id='undefined-body']/" +
+      WebElement rowData = driver.findElement(By.xpath("//tbody[@id='kafkaTopicList-body']/" +
           "tr[" + (row + 1) + "]/td[" + (col + 1) + "]/span"));
       int rowVal = Integer.parseInt(rowData.getText());
       intArr.add(rowVal);
@@ -344,6 +387,68 @@ public class KafkaPage {
     for (int row = 0; row < brokerRowList.size(); row++) {
       WebElement rowData = driver.findElement(By.xpath("//tbody[@id='undefined-body']/" +
           "tr[" + (row + 1) + "]/td[" + (col + 1) + "]/span"));
+      strArr.add(rowData.getText());
+    }
+    return strArr;
+  }
+
+  /**
+   * Method to verify column sorting options for Broker Metric table
+   */
+  public void verifyTopicMetricsColSort(KafkaPageObject kafkaPageObject) {
+    List<WebElement> brokerColList = kafkaPageObject.topicCol;
+    Assert.assertFalse(brokerColList.isEmpty(), " No columns displayed for broker metrics");
+    List<WebElement> brokerRowList = kafkaPageObject.topicRows;
+    String[] colStr = {"Topic","Brokers","Bytes In Per Sec", "Bytes Out Per Sec"};
+    Assert.assertFalse(brokerRowList.isEmpty(), "No data displayed for broker metrics table");
+    for (int col = 0; col < brokerColList.size(); col++) {
+      ArrayList<String> strArr = new ArrayList<>();
+      ArrayList<Integer> intArr = new ArrayList<>();
+      ArrayList<String> expectedStrArr = new ArrayList<>();
+      ArrayList<Integer> expectedIntArr = new ArrayList<>();
+      String colName = brokerColList.get(col).getText();
+      logger.info("The Broker colName is: " + colName);
+      if (Arrays.asList(colStr).contains(colName)) {
+        expectedStrArr = sortBrokerStrCol(brokerRowList, col);
+        Collections.sort(expectedStrArr);
+      } else {
+        expectedIntArr = sortBrokerIntCol(brokerRowList, col);
+        Collections.sort(expectedIntArr);
+      }
+      MouseActions.clickOnElement(driver, kafkaPageObject.topicColSortingIcon.get(col));
+      waitExecuter.waitUntilPageFullyLoaded();
+      if (Arrays.asList(colStr).contains(colName)) {
+        strArr = sortTopicStrCol(brokerRowList, col);
+        logger.info("Actual sorted value is: " + strArr + "\n Expected sorted value is " + expectedStrArr);
+        Assert.assertEquals(strArr, expectedStrArr);
+      } else {
+        intArr = sortTopicIntCol(brokerRowList, col);
+        logger.info("Actual sorted value is: " + intArr + "\n Expected sorted value is " + expectedIntArr);
+        Assert.assertEquals(intArr, expectedIntArr);
+      }
+      strArr.clear();
+      intArr.clear();
+      expectedStrArr.clear();
+      expectedIntArr.clear();
+    }
+  }
+
+  public ArrayList<Integer> sortTopicIntCol(List<WebElement> brokerRowList, int col) {
+    ArrayList<Integer> intArr = new ArrayList<>();
+    for (int row = 0; row < brokerRowList.size(); row++) {
+      WebElement rowData = driver.findElement(By.xpath("//tbody[@id='kafkaTopicList-body']/" +
+              "tr[" + (row + 1) + "]/td[" + (col + 1) + "]/span"));
+      int rowVal = Integer.parseInt(rowData.getText());
+      intArr.add(rowVal);
+    }
+    return intArr;
+  }
+
+  public ArrayList<String> sortTopicStrCol(List<WebElement> brokerRowList, int col) {
+    ArrayList<String> strArr = new ArrayList<>();
+    for (int row = 0; row < brokerRowList.size(); row++) {
+      WebElement rowData = driver.findElement(By.xpath("//tbody[@id='kafkaTopicList-body']/" +
+              "tr[" + (row + 1) + "]/td[" + (col + 1) + "]/span"));
       strArr.add(rowData.getText());
     }
     return strArr;

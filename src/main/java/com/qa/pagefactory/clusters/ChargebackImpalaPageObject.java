@@ -67,7 +67,7 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "(.//*[local-name() = 'g'])[last()]/*[local-name() = 'text']/*[local-name() = 'tspan']")
     public List<WebElement> childElementsOfMemoryPieChart;
 
-    @FindBy(xpath = "//*[@id='chargeback-table']/tbody/tr/td[4]/div/span[1]")
+    @FindBy(xpath = "//div/table[@id='chargeback-table']/tbody/tr/td[4]/span[1]")
     public List<WebElement> getMemoryDataFromTable;
 
     @FindBy(xpath = "//div[@class='col-md-4'][3]//h4/span")

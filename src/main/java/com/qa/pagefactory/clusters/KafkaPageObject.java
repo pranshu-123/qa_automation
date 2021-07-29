@@ -40,7 +40,7 @@ public class KafkaPageObject {
     public WebElement getNumberOfMetricsPagesOfReports;
 
     @FindBy(css = "div#topContainer-kafkaTopicList>nav>p>input")
-    public WebElement enterLatMetPageNuToNavigation;
+    public WebElement enterLatestMetricsPageNavigation;
 
     @FindBy(xpath = "//*[@id=\"custom-tbl\"]/div[3]/div/table/tbody")
     public List<WebElement> getAverageMetricsList;

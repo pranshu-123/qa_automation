@@ -120,7 +120,7 @@ public class KafkaPage {
     if (kafkaPageObject.getLatestMetricsList.size() > 0) {
       if (kafkaPageObject.paginationLatMetricsTable.size() > 0) {
         String numOfPages = getPageNumber(kafkaPageObject);
-        String navigatedPageValue = kafkaPageObject.enterLatMetPageNuToNavigation.getAttribute("value");
+        String navigatedPageValue = kafkaPageObject.enterLatestMetricsPageNavigation.getAttribute("value");
         logger.info("Navigated page value --------- "+navigatedPageValue);
         test.log(LogStatus.INFO, "Navigated page value --"+navigatedPageValue);
         Assert.assertEquals(numOfPages, navigatedPageValue, "Pagination is not working");
@@ -138,10 +138,10 @@ public class KafkaPage {
   public String getPageNumber(KafkaPageObject kafkaPageObject) {
     String[] numOfPages = kafkaPageObject.getNumberOfMetricsPagesOfReports.getText().split(" ");
     logger.info("Total number of pages ------------ " + numOfPages[2]);
-    kafkaPageObject.enterLatMetPageNuToNavigation.click();
-    kafkaPageObject.enterLatMetPageNuToNavigation.clear();
-    kafkaPageObject.enterLatMetPageNuToNavigation.sendKeys(numOfPages[2]);
-    kafkaPageObject.enterLatMetPageNuToNavigation.sendKeys(Keys.ENTER);
+    kafkaPageObject.enterLatestMetricsPageNavigation.click();
+    kafkaPageObject.enterLatestMetricsPageNavigation.clear();
+    kafkaPageObject.enterLatestMetricsPageNavigation.sendKeys(numOfPages[2]);
+    kafkaPageObject.enterLatestMetricsPageNavigation.sendKeys(Keys.ENTER);
     waitExecuter.sleep(2000);
     return numOfPages[2];
   }

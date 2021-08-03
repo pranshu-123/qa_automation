@@ -45,6 +45,7 @@ public class TC_CB_51 extends BaseClass {
 
 		// Select the cluster
 		test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
+		waitExecuter.waitUntilPageFullyLoaded();
 		HomePage homePage = new HomePage(driver);
 		homePage.selectMultiClusterIdClusterPage(clusterId);
 		waitExecuter.sleep(1000);
@@ -87,6 +88,7 @@ public class TC_CB_51 extends BaseClass {
 				"The table cost do not match with calculated cost of CPU");
 		test.log(LogStatus.PASS, "The table cost match with calculated cost of CPU.");
 
+
 	}
 
 	@Test(dataProvider = "clusterid-data-provider")
@@ -101,10 +103,12 @@ public class TC_CB_51 extends BaseClass {
 		// Get Memory usage in hours from chargeback table
 		waitExecuter.sleep(1000);
 		List<Double> memoryHoursList = chargeBackImpala.getUsersMemoryHoursFromTable();
+		waitExecuter.waitUntilPageFullyLoaded();
 
 		// Get CPU cost list from chargeback table
 		waitExecuter.sleep(1000);
 		List<Double> memoryCostsList = chargeBackImpala.getUsersMemoryHoursCostFromTable();
+		waitExecuter.waitUntilPageFullyLoaded();
 
 		// Validate Memory calculated cost and cost from chargeback table
 		Assert.assertTrue(chargeBackImpala.compareTableMemoryCostToCalculatedCost(memoryCostsList, memoryHoursList, 5),

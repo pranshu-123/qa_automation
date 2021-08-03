@@ -3,11 +3,11 @@ package com.qa.enums.chargeback;
 public enum GroupByOptions {
     USER("user"),
     REAL_USER("Real User"),
-    QUEUE("queue"),
+    QUEUE("Queue"),
     DEPT("dept"),
     PROJECT("project"),
     DBS("DB"),
-    INPUT_TABLES("input_tables"),
+    INPUT_TABLES("inputTables"),
     PRIORITY("priority"),
     REALUSER("RealUser"),
     TEAM("team");

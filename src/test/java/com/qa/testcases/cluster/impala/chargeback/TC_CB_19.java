@@ -47,7 +47,7 @@ public class TC_CB_19 extends BaseClass {
         chargeBackImpala.clickOnGroupBySearchBox();
         chargeBackImpala.selectGroupBy(GroupByOptions.INPUT_TABLES);
         LOGGER.info("Click on groupBy: " + GroupByOptions.INPUT_TABLES.value, test);
-        chargeBackImpala.remove1stGroupByOption();
+        //chargeBackImpala.remove1stGroupByOption();
         chargeBackImpala.validateJobsPieCharts();
         LOGGER.pass("Validated whether pie charts displayed group by data", test);
         chargeBackImpala.validateGroupByOptions();

@@ -57,7 +57,8 @@ public class TC_CB_42 extends BaseClass {
         LOGGER.info("Select last 30 days in date picker.", test);
         chargeBackImpala.clickOnTableHeading(ImpalaJobTableColumn.USER);
         LOGGER.info("Click on user.", test);
-        Assert.assertTrue(chargebackImpalaPageObject.userSortDown.isDisplayed(), "Data down is not working.");
         waitExecuter.sleep(2000);
+        Assert.assertTrue(chargebackImpalaPageObject.userSortDown.isDisplayed(), "Data down is not working.");
+
     }
 }

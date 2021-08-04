@@ -33,7 +33,7 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "(//thead[@id='sparkStageNavigation-head'])/tr/th")
     public List<WebElement> stageHeaders;
 
-    @FindBy(xpath = "//span[@class=\"success badge\" and @style=\"margin-top: 16px; margin-left: 10px;\" and text()=\"Success\"]")
+    @FindBy(xpath = "//*[@id='statusContainer']/span[1]")
     public WebElement appStatus;
 
     @FindBy(xpath = "//p[normalize-space()='No Configruation Data Available']")
@@ -42,8 +42,18 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//a[normalize-space()='Configuration']")
     public WebElement Configtab;
 
-    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[2]")
+    @FindBy(xpath = "//*[@id='allApps-body']/tr/td[2]")
     public WebElement Status;
+
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr/td[9]")
+    public WebElement queueJobsPage;
+
+    @FindBy(xpath = "//*[@id='app']//div[1]/div[2]/span[3]")
+    public WebElement queueAppPage;
+
+
+    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[2]/span[1]")
+    public WebElement clusterAppPage;
 
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[3]")
     public WebElement getUsername;
@@ -54,8 +64,23 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[4]/span[1]")
     public WebElement getAppname;
 
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[4]/span[1]")
+    public WebElement getAppnameToolTips;
+
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[4]/span[1]")
+    public WebElement AppnameText;
+
+    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/h2/span[2]/span/span")
+    public WebElement Appname;
+
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[6]")
-    public WebElement getstartTime;
+    public WebElement getStartTime;
+
+    @FindBy(xpath = "//div[@class='component-section-header theme-light']//span[2]")
+    public WebElement getEndTimeAppPage;
+
+    @FindBy(xpath = "//div[@class='component-section-header theme-light']//span[1]")
+    public WebElement getStartTimeAppPage;
 
     @FindBy(xpath = "//div[@id='SummaryDetails']//div[3]")
     public WebElement getDbname;

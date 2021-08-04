@@ -127,7 +127,7 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "//div/table[@id='chargeback-table']/tbody/tr/td[4]//span[1]")
     public List<WebElement> getUsersMemoryHoursFromChargebackTable;
 
-    @FindBy(xpath = "//div/table[@id='chargeback-table']/tbody/tr/td[4]//div")
+    @FindBy(xpath = "//table[@id='chargeback-table']/tbody/tr/td[4]//div")
     public List<WebElement> getUsersMemoryHoursCostFromChargebackTable;
 
     @FindBy(xpath = "(//div[contains(@class,'dashboard-module')])[2]//h4/span")

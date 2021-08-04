@@ -55,7 +55,7 @@ TEZ_127 extends BaseClass {
         int appCount = tezDetailsPage.clickOnlyLink("Success");
         //Clicking on the Tez app must go to apps detail page
         if (appCount > 0) {
-            String statusValue = tezDetailsPage.verifyStatus(tezApps, applicationsPageObject);
+            String statusValue = tezDetailsPage.verifyStatus(tezApps);
             test.log(LogStatus.PASS, "Tez Status  is displayed in the Header: " + statusValue);
             waitExecuter.waitUntilPageFullyLoaded();
             //Close apps details page

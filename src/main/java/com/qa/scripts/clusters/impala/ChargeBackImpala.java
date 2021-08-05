@@ -783,7 +783,8 @@ public class ChargeBackImpala {
             }
 			return actualDates.equals(sortedList);
         } else if (impalaJobTableColumn == ImpalaJobTableColumn.REAL_USER
-                   ||impalaJobTableColumn == ImpalaJobTableColumn.QUEUE) {
+                   ||impalaJobTableColumn == ImpalaJobTableColumn.QUEUE
+                ||impalaJobTableColumn == ImpalaJobTableColumn.STATE) {
             List<String> actualDataInteger = actualDataString.stream().map(data ->
                     convertToString(data)).collect(Collectors.toList());
             List<String> sortedList = new ArrayList(actualDataInteger);

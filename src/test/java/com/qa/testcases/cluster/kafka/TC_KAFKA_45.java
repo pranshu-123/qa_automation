@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 @Marker.All
 public class TC_KAFKA_45 extends BaseClass {
 
-  private static final Logger LOGGER = Logger.getLogger(com.qa.testcases.cluster.kafka.TC_KAFKA_44.class.getName());
+  private static final Logger LOGGER = Logger.getLogger(com.qa.testcases.cluster.kafka.TC_KAFKA_45.class.getName());
 
   @Test(dataProvider = "clusterid-data-provider")
   public void verifySortingForBrokerMerticColumns(String clusterId) {

@@ -2,12 +2,17 @@ package com.qa.scripts.clusters.kafka;
 
 import com.qa.pagefactory.clusters.KafkaPageObject;
 import com.qa.scripts.DatePicker;
+import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.SkipException;
 
 import java.util.*;
 import java.util.logging.Logger;
@@ -37,11 +42,11 @@ public class KafkaPage {
   /***
    * Method to Navigate to Kafka tab and then to broker tab
    */
-  public void navigateToBrokerTab(KafkaPageObject kafkaPageObject) {
+  public void navigateToBrokerTab(KafkaPageObject kafkaPageObject, String clusterId) {
     MouseActions.clickOnElement(driver, kafkaPageObject.kafkaTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
-    verifyClusterDropDown(kafkaPageObject);
+    verifyClusterDropDown(kafkaPageObject, clusterId);
     MouseActions.clickOnElement(driver, kafkaPageObject.brokerTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
@@ -50,11 +55,11 @@ public class KafkaPage {
   /***
    * Method to Navigate to Kafka tab and then to Topic tab
    */
-  public void navigateToTopicTab(KafkaPageObject kafkaPageObject) {
+  public void navigateToTopicTab(KafkaPageObject kafkaPageObject, String clusterId) {
     MouseActions.clickOnElement(driver, kafkaPageObject.kafkaTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
-    verifyClusterDropDown(kafkaPageObject);
+    verifyClusterDropDown(kafkaPageObject, clusterId);
     MouseActions.clickOnElement(driver, kafkaPageObject.topicTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
@@ -63,8 +68,8 @@ public class KafkaPage {
   /***
    * Method to verify kafka cluster name in tab
    */
-  public void verifyClusterName(KafkaPageObject kafkaPageObject) {
-    String expectedClusterName = verifyClusterDropDown(kafkaPageObject);
+  public void verifyClusterName(KafkaPageObject kafkaPageObject, String clusterId) {
+    String expectedClusterName = verifyClusterDropDown(kafkaPageObject, clusterId);
     String clusterName = kafkaPageObject.kafkaHeaderTab.getText();
     logger.info("The cluster name in the tab is " + clusterName + " Expected Cluster name is " + expectedClusterName);
     Assert.assertTrue(clusterName.contains(expectedClusterName), " Clustername does not match\n" +
@@ -74,23 +79,71 @@ public class KafkaPage {
   /***
    * Method to verify the kafka cluster dropdown
    */
-  public String verifyClusterDropDown(KafkaPageObject kafkaPageObject) {
+  public String verifyClusterDropDown(KafkaPageObject kafkaPageObject, String clusterId) {
+    // Select cluster
     waitExecuter.waitUntilElementClickable(kafkaPageObject.kafkaClusterDropDown);
-    waitExecuter.sleep(2000);
+    waitExecuter.sleep(3000);
     MouseActions.clickOnElement(driver, kafkaPageObject.kafkaClusterDropDown);
-    waitExecuter.sleep(2000);
+    waitExecuter.sleep(3000);
     List<WebElement> kafkaClusterList = kafkaPageObject.kafkaClusters;
     Assert.assertFalse(kafkaClusterList.isEmpty(), "The drop down list for kafka cluster is empty");
+    logger.info("Select Cluster: " + clusterId);
     String clustername = kafkaClusterList.get(0).getText();
-    MouseActions.clickOnElement(driver, kafkaClusterList.get(0));
-
+    for (int i =0 ;i< kafkaClusterList.size(); i++)
+    {
+      String tempClusterName = kafkaClusterList.get(i).getText();
+      logger.info("tempClusterName = "+ tempClusterName);
+      if (tempClusterName.equals(clusterId)) {
+        MouseActions.clickOnElement(driver, kafkaClusterList.get(i));
+        break;
+      }
+    }
     datePicker.clickOnDatePicker();
     waitExecuter.sleep(1000);
-    datePicker.selectLast7Days();
+    datePicker.selectLast30Days();
     waitExecuter.sleep(3000);
     waitExecuter.waitUntilPageFullyLoaded();
 
     return clustername;
+  }
+
+
+
+  /***
+   * Method to verify topic pagination.
+   */
+  public void verifyLatestMetricsTopicPagination(KafkaPageObject kafkaPageObject, ExtentTest test) {
+
+    // Verify if the Latest metrics are present
+    test.log(LogStatus.INFO, "Verify if the Latest metrics are present in table");
+    logger.info("Verify if the Latest metrics are present in table");
+    if (kafkaPageObject.getLatestMetricsList.size() > 0) {
+      if (kafkaPageObject.paginationLatMetricsTable.size() > 0) {
+        String numOfPages = getPageNumber(kafkaPageObject);
+        String navigatedPageValue = kafkaPageObject.enterLatestMetricsPageNavigation.getAttribute("value");
+        logger.info("Navigated page value --------- "+navigatedPageValue);
+        test.log(LogStatus.INFO, "Navigated page value --"+navigatedPageValue);
+        Assert.assertEquals(numOfPages, navigatedPageValue, "Pagination is not working");
+        test.log(LogStatus.PASS, "Pagination is present in Latest metrics table");
+      } else {
+        throw new SkipException("Pagination is not present.");
+      }
+    } else {
+      logger.info("There are no Latest metrics in table.");
+      test.log(LogStatus.SKIP, "There are no Latest metrics present in table");
+    }
+
+  }
+
+  public String getPageNumber(KafkaPageObject kafkaPageObject) {
+    String[] numOfPages = kafkaPageObject.getNumberOfMetricsPagesOfReports.getText().split(" ");
+    logger.info("Total number of pages ------------ " + numOfPages[2]);
+    kafkaPageObject.enterLatestMetricsPageNavigation.click();
+    kafkaPageObject.enterLatestMetricsPageNavigation.clear();
+    kafkaPageObject.enterLatestMetricsPageNavigation.sendKeys(numOfPages[2]);
+    kafkaPageObject.enterLatestMetricsPageNavigation.sendKeys(Keys.ENTER);
+    waitExecuter.sleep(2000);
+    return numOfPages[2];
   }
 
   /***
@@ -321,7 +374,7 @@ public class KafkaPage {
   public ArrayList<Integer> sortBrokerIntCol(List<WebElement> brokerRowList, int col) {
     ArrayList<Integer> intArr = new ArrayList<>();
     for (int row = 0; row < brokerRowList.size(); row++) {
-      WebElement rowData = driver.findElement(By.xpath("//tbody[@id='undefined-body']/" +
+      WebElement rowData = driver.findElement(By.xpath("//tbody[@id='kafkaTopicList-body']/" +
           "tr[" + (row + 1) + "]/td[" + (col + 1) + "]/span"));
       int rowVal = Integer.parseInt(rowData.getText());
       intArr.add(rowVal);
@@ -334,6 +387,68 @@ public class KafkaPage {
     for (int row = 0; row < brokerRowList.size(); row++) {
       WebElement rowData = driver.findElement(By.xpath("//tbody[@id='undefined-body']/" +
           "tr[" + (row + 1) + "]/td[" + (col + 1) + "]/span"));
+      strArr.add(rowData.getText());
+    }
+    return strArr;
+  }
+
+  /**
+   * Method to verify column sorting options for Broker Metric table
+   */
+  public void verifyTopicMetricsColSort(KafkaPageObject kafkaPageObject) {
+    List<WebElement> brokerColList = kafkaPageObject.topicCol;
+    Assert.assertFalse(brokerColList.isEmpty(), " No columns displayed for broker metrics");
+    List<WebElement> brokerRowList = kafkaPageObject.topicRows;
+    String[] colStr = {"Topic","Brokers","Bytes In Per Sec", "Bytes Out Per Sec"};
+    Assert.assertFalse(brokerRowList.isEmpty(), "No data displayed for broker metrics table");
+    for (int col = 0; col < brokerColList.size(); col++) {
+      ArrayList<String> strArr = new ArrayList<>();
+      ArrayList<Integer> intArr = new ArrayList<>();
+      ArrayList<String> expectedStrArr = new ArrayList<>();
+      ArrayList<Integer> expectedIntArr = new ArrayList<>();
+      String colName = brokerColList.get(col).getText();
+      logger.info("The Broker colName is: " + colName);
+      if (Arrays.asList(colStr).contains(colName)) {
+        expectedStrArr = sortBrokerStrCol(brokerRowList, col);
+        Collections.sort(expectedStrArr);
+      } else {
+        expectedIntArr = sortBrokerIntCol(brokerRowList, col);
+        Collections.sort(expectedIntArr);
+      }
+      MouseActions.clickOnElement(driver, kafkaPageObject.topicColSortingIcon.get(col));
+      waitExecuter.waitUntilPageFullyLoaded();
+      if (Arrays.asList(colStr).contains(colName)) {
+        strArr = sortTopicStrCol(brokerRowList, col);
+        logger.info("Actual sorted value is: " + strArr + "\n Expected sorted value is " + expectedStrArr);
+        Assert.assertEquals(strArr, expectedStrArr);
+      } else {
+        intArr = sortTopicIntCol(brokerRowList, col);
+        logger.info("Actual sorted value is: " + intArr + "\n Expected sorted value is " + expectedIntArr);
+        Assert.assertEquals(intArr, expectedIntArr);
+      }
+      strArr.clear();
+      intArr.clear();
+      expectedStrArr.clear();
+      expectedIntArr.clear();
+    }
+  }
+
+  public ArrayList<Integer> sortTopicIntCol(List<WebElement> brokerRowList, int col) {
+    ArrayList<Integer> intArr = new ArrayList<>();
+    for (int row = 0; row < brokerRowList.size(); row++) {
+      WebElement rowData = driver.findElement(By.xpath("//tbody[@id='kafkaTopicList-body']/" +
+              "tr[" + (row + 1) + "]/td[" + (col + 1) + "]/span"));
+      int rowVal = Integer.parseInt(rowData.getText());
+      intArr.add(rowVal);
+    }
+    return intArr;
+  }
+
+  public ArrayList<String> sortTopicStrCol(List<WebElement> brokerRowList, int col) {
+    ArrayList<String> strArr = new ArrayList<>();
+    for (int row = 0; row < brokerRowList.size(); row++) {
+      WebElement rowData = driver.findElement(By.xpath("//tbody[@id='kafkaTopicList-body']/" +
+              "tr[" + (row + 1) + "]/td[" + (col + 1) + "]/span"));
       strArr.add(rowData.getText());
     }
     return strArr;

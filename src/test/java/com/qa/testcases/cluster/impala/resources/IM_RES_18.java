@@ -48,12 +48,17 @@ public class IM_RES_18 extends BaseClass {
         test.log(LogStatus.INFO, "Go to resource page");
         LOGGER.info("Select impala from dropdown");
         impala.selectImpalaResource();
+        waitExecuter.sleep(2000);
 
         // Select the cluster
         test.log(LogStatus.INFO, "Select cluster : " + clusterId);
         LOGGER.info("Select cluster : " + clusterId);
-        homePage.selectMultiClusterId(clusterId);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
         waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+
+        impala.selectImpalaType("Impala");
+        waitExecuter.sleep(3000);
+
 
         // Select 30 days from date picker
         test.log(LogStatus.INFO, "Select 30 days from date picker");
@@ -76,6 +81,7 @@ public class IM_RES_18 extends BaseClass {
         List<String> queueNameList = new ArrayList<String>();
         for (int i = 0; i < impalaPageObject.filterElements.size(); i++) {
             String queueName = impalaPageObject.filterElements.get(i).getText();
+            if (queueName != null) {
             queueNameList.add(queueName);
             impalaPageObject.filterElements.get(i).click();
             waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
@@ -96,5 +102,5 @@ public class IM_RES_18 extends BaseClass {
         impalaPageObject.filterInput.click();
         waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         waitExecuter.sleep(3000);
-    }
+    }}
 }

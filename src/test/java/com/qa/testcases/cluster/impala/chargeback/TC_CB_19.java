@@ -7,6 +7,8 @@ import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.clusters.impala.ChargeBackImpala;
 import com.qa.utils.LoggingUtils;
+import com.qa.utils.WaitExecuter;
+import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -28,12 +30,16 @@ public class TC_CB_19 extends BaseClass {
             "when Grouped by \"inputTables\"");
         test.assignCategory(" Cluster - Impala Chargeback");
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         chargeBackImpala.selectImpalaChargeback();
         LOGGER.info("Navigate to impala chargeback page", test);
-        //Select Cluster
+        // Select the cluster
+        test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
-        LOGGER.info("Selected cluster: " + clusterId, test);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
+
+        chargeBackImpala.selectImpalaType("Impala");
+        waitExecuter.sleep(2000);
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         datePicker.selectLast30Days();
@@ -41,7 +47,7 @@ public class TC_CB_19 extends BaseClass {
         chargeBackImpala.clickOnGroupBySearchBox();
         chargeBackImpala.selectGroupBy(GroupByOptions.INPUT_TABLES);
         LOGGER.info("Click on groupBy: " + GroupByOptions.INPUT_TABLES.value, test);
-        chargeBackImpala.remove1stGroupByOption();
+        //chargeBackImpala.remove1stGroupByOption();
         chargeBackImpala.validateJobsPieCharts();
         LOGGER.pass("Validated whether pie charts displayed group by data", test);
         chargeBackImpala.validateGroupByOptions();

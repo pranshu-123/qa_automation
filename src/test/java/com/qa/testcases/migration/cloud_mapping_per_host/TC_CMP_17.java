@@ -33,7 +33,7 @@ public class TC_CMP_17 extends BaseClass {
      */
     @Test
     public void verifySingleEC2Instance() {
-        test = extent.startTest("TC_CMP_16.verifySingleEC2Instance", "Verify Unravel displays a single EC2 instance" +
+        test = extent.startTest("TC_CMP_17.verifySingleEC2Instance", "Verify Unravel displays a single EC2 instance" +
             " for all the hosts in the cluster.");
         test.assignCategory("Migration/Cloud Mapping Per Host");
 
@@ -64,7 +64,7 @@ public class TC_CMP_17 extends BaseClass {
             Assert.assertTrue(false, "No data displayed in table");
         }
         String expectedVMType = cloudMigrationPerHostPage.getColumnValuesFromModalTable(MigrationCloudMappingModalTable.VM_TYPE).get(0);
-        cloudMigrationPerHostPage.clickOnRunButton();
+        cloudMigrationPerHostPage.clickOnModalRunButton();
 
         try {
             waitExecuter.waitUntilTextToBeInWebElement(cloudMigrationPerHostPage.getConfirmationMessage(),

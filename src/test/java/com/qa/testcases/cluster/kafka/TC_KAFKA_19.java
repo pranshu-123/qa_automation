@@ -35,7 +35,7 @@ public class TC_KAFKA_19 extends BaseClass {
     MouseActions.clickOnElement(driver, kafkaPageObject.kafkaTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
-    kafkaPage.verifyClusterDropDown(kafkaPageObject);
+    kafkaPage.verifyClusterDropDown(kafkaPageObject, clusterId);
     kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject, "Bytes In per Second", "kafkaGraph0");
     test.log(LogStatus.PASS, "Verified 'Bytes In Per Second' KPI information name ,values and graphs successfully ");
   }

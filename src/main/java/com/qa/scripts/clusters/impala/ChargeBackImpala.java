@@ -4,10 +4,12 @@ import com.qa.enums.UserAction;
 import com.qa.enums.chargeback.GroupByOptions;
 import com.qa.enums.chargeback.ImpalaJobTableColumn;
 import com.qa.enums.hbase.HbaseTablesColumn;
+import com.qa.pagefactory.CommonPageObject;
 import com.qa.pagefactory.clusters.ChargebackImpalaPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.utils.*;
 import com.qa.utils.actions.UserActions;
+import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -51,17 +53,26 @@ public class ChargeBackImpala {
      */
     public void selectImpalaChargeback() {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        // Click on Chargeback tab
         waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.clusterChargeBackTab);
         userActions.performActionWithPolling(chargebackImpalaPageObject.clusterChargeBackTab, UserAction.CLICK);
-        // Click on chargeback dropdown
-        waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
-        userActions.performActionWithPolling(chargebackImpalaPageObject.chargeBackDropdownOptionsButton,
-                UserAction.CLICK);
-        // Selecting the impala option
-        waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownImpalaOption);
-        userActions.performActionWithPolling(chargebackImpalaPageObject.chargeBackDropdownImpalaOption,
-                UserAction.CLICK);
+        waitExecuter.waitUntilPageFullyLoaded();
+    }
+
+    //click on cluster drop down
+    public void selectImpalaType(String impalaType) {
+        // Click on Impala chargeback dropdown
+        userActions.performActionWithPolling(chargebackImpalaPageObject.impalaDropdownOption, UserAction.CLICK);
+        List<WebElement> userList = chargebackImpalaPageObject.selectType;
+        String selectImpala = null;
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getText().equals(impalaType)) {
+                selectImpala = userList.get(i).getText();
+                LOGGER.info("Selected Impala from dropdown " + selectImpala);
+                waitExecuter.waitUntilElementClickable(userList.get(i));
+                userActions.performActionWithPolling(userList.get(i), UserAction.CLICK);
+                waitExecuter.sleep(2000);
+            }
+        }
     }
 
     /**
@@ -123,32 +134,32 @@ public class ChargeBackImpala {
 
     /* Validate groupBy options */
     public Boolean validateGroupByOptions() {
-        // Get the list of webelements of groupby options
+        waitExecuter.waitUntilPageFullyLoaded();
         List<WebElement> listOfWebElemnts = chargebackImpalaPageObject.listOfGroupByOptions;
         // Empty array to add displayed group by options
         ArrayList<String> listOfGroupByOptions = new ArrayList<String>();
-        // Itterate Webelement list to get the value of each element
+        // Iterate Webelement list to get the value of each element
         for (int i = 0; i < listOfWebElemnts.size(); i++) {
-            listOfGroupByOptions.add(listOfWebElemnts.get(i).getText().toLowerCase());
+            listOfGroupByOptions.add(listOfWebElemnts.get(i).getText());
         }
-        List<String> definedGroupByOption = Arrays.asList("user", "real user", "queue");
         LOGGER.info("Actual ist of options" + listOfGroupByOptions);
-        Boolean compareGroupByOptions = listOfGroupByOptions.containsAll(definedGroupByOption);
-        LOGGER.info("Expected list of options" + definedGroupByOption);
+        Boolean compareGroupByOptions = listOfGroupByOptions.isEmpty();
+        waitExecuter.waitUntilPageFullyLoaded();
         return compareGroupByOptions;
 
     }
 
     /* Get list of Users from chargeback table */
     public List<String> getUsersFromTable() {
-
+        waitExecuter.waitUntilPageFullyLoaded();
         List<WebElement> getAllUsers = chargebackImpalaPageObject.getUsersFromChargebackTable;
         List<String> listOfUsers = new ArrayList<String>();
 
         for (int i = 0; i < getAllUsers.size(); i++) {
             String indivualUser = getAllUsers.get(i).getText();
-            System.out.println("getUsersFromTable: " + indivualUser);
+            LOGGER.info("getUsersFromTable: " + indivualUser);
             listOfUsers.add(indivualUser);
+            waitExecuter.sleep(2000);
         }
         LOGGER.info("List of users from chargeback table" + listOfUsers);
         return listOfUsers;
@@ -162,7 +173,7 @@ public class ChargeBackImpala {
 
         for (int i = 0; i < getAllUsers.size(); i++) {
             String indivualUser = getAllUsers.get(i).getText();
-            System.out.println("getUsersFromImpalaJobsTable: " + indivualUser);
+            LOGGER.info("getUsersFromImpalaJobsTable: " + indivualUser);
             listOfUsers.add(indivualUser);
         }
         LOGGER.info("List of users from finished impala jobs table" + listOfUsers);
@@ -175,7 +186,7 @@ public class ChargeBackImpala {
      * @param groupBy - group by option to select
      */
     public void selectGroupBy(GroupByOptions groupBy) {
-        closeGroupByOptionsExcept(groupBy);
+        //closeGroupByOptionsExcept(groupBy);
         switch (groupBy) {
             case USER:
                 waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.groupByUserOption);
@@ -237,7 +248,7 @@ public class ChargeBackImpala {
     public void validateGroupByPieCharts() {
         for (WebElement element : chargebackImpalaPageObject.pieChartGroupBySearchBoxs) {
             Boolean isGroupingDisplayed = false;
-                waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
+                waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.impalaDropdownOption);
                 if (!element.getText().equalsIgnoreCase("")) {
                     isGroupingDisplayed = true;
                 }
@@ -354,7 +365,6 @@ public class ChargeBackImpala {
         for (int i = 0; i < listOfHours.size(); i++) {
             String hours = listOfHours.get(i).getText().trim();
 
-            // System.out.println(hours);
             if (!hours.contains("<1s")) {
                 memoryHoursArray.add(hours);
             }
@@ -446,16 +456,33 @@ public class ChargeBackImpala {
     }
 
     public void clikOnDownloadCSV() {
-
-        List<WebElement> downloadCSVList = TestUtils.getWebElements(driver, "xpath", "//button[@class='btn-csv']");
-        System.out.println("List of downloadCSV file: " + downloadCSVList.size());
+        List<WebElement> downloadCSVList = TestUtils.getWebElements(driver, "xpath", "//div[@class='dashboard-module bg-white dashboard-sec pb-2']//div[@class='header']//a[@class='menu']");
+        LOGGER.info("List of downloadCSV file: " + downloadCSVList.size());
         waitExecuter.sleep(2000);
-
         for (int i = 0; i < downloadCSVList.size(); i++) {
             downloadCSVList.get(i).click();
             waitExecuter.sleep(2000);
         }
     }
+
+    public void clikOnDownloadCSV(String asFile) {
+        waitExecuter.sleep(3000);
+        int graphDownloadMenuCount = chargebackImpalaPageObject.downloadCSVFile.size();
+        if (graphDownloadMenuCount > 0) {
+            for (int i = 0; i < graphDownloadMenuCount; i++) {
+                if (chargebackImpalaPageObject.downloadCSVFile.get(i).getText().equals(asFile)) {
+                    userActions.performActionWithPolling(chargebackImpalaPageObject.downloadCSVFile.get(i), UserAction.CLICK);
+                    waitExecuter.sleep(15000);
+                }
+            }
+        }
+    }
+
+    public void clickOnTableDownloadMenu() {
+        waitExecuter.sleep(3000);
+        MouseActions.clickOnElement(driver, chargebackImpalaPageObject.downloadFile);
+    }
+
 
     /* Get memory data list from table */
     public List<WebElement> getMemoryDataFromTable() {
@@ -547,7 +574,6 @@ public class ChargeBackImpala {
             LOGGER.info("Get only CPU hour cost from string" + trimmedSplitValue);
             String removeCommaFromCost = trimmedSplitValue.replaceAll(",", "");
             LOGGER.info("Remove comma from cost " + trimmedSplitValue);
-            // System.out.println(trimmedSplitValue);
             userCosts.add(Double.parseDouble(removeCommaFromCost));
         }
         LOGGER.info("List of CPU costs calculated from table" + userCosts);
@@ -590,7 +616,6 @@ public class ChargeBackImpala {
             String[] splitted = indivualcost.split(" ");
             String trimmedSplitValue = splitted[2];
             String str = trimmedSplitValue.replaceAll(",", "");
-            // System.out.println(trimmedSplitValue);
             perUserMemoryCost.add(Double.parseDouble(str));
         }
         LOGGER.info("List of memory costs calculated from table" + perUserMemoryCost);
@@ -651,12 +676,12 @@ public class ChargeBackImpala {
 
     public boolean isTotalNumberOfJobCountHeader() {
         waitExecuter.waitUntilElementPresent(chargebackImpalaPageObject.JobsFromGraphHeader);
-        System.out.println("Total Job Counts: " + getTotalJobCountFromJobsGraphHeader());
+        LOGGER.info("Total Job Counts: " + getTotalJobCountFromJobsGraphHeader());
         String strTotalJobCountHeader = getTotalJobCountFromJobsGraphHeader();
         strTotalJobCountHeader = strTotalJobCountHeader.substring(0, strTotalJobCountHeader.length() - 1);
-        System.out.println("Total Job Counts after removing last char: " + strTotalJobCountHeader);
+        LOGGER.info("Total Job Counts after removing last char: " + strTotalJobCountHeader);
         Integer intTotalJobCountHeader = Integer.parseInt(strTotalJobCountHeader);
-        System.out.println("Total Job Counts in Integer: " + intTotalJobCountHeader);
+        LOGGER.info("Total Job Counts in Integer: " + intTotalJobCountHeader);
 		return intTotalJobCountHeader != 0;
 	}
 
@@ -758,7 +783,8 @@ public class ChargeBackImpala {
             }
 			return actualDates.equals(sortedList);
         } else if (impalaJobTableColumn == ImpalaJobTableColumn.REAL_USER
-                   ||impalaJobTableColumn == ImpalaJobTableColumn.QUEUE) {
+                   ||impalaJobTableColumn == ImpalaJobTableColumn.QUEUE
+                ||impalaJobTableColumn == ImpalaJobTableColumn.STATE) {
             List<String> actualDataInteger = actualDataString.stream().map(data ->
                     convertToString(data)).collect(Collectors.toList());
             List<String> sortedList = new ArrayList(actualDataInteger);
@@ -817,7 +843,7 @@ public class ChargeBackImpala {
     }
 
     /* Remove options from group by */
-    public void remove1stGroupByOption() {
+    public void remove1stGroupByOption()throws IndexOutOfBoundsException {
         waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.remove1stGroupBy.get(0));
         userActions.performActionWithPolling(chargebackImpalaPageObject.remove1stGroupBy.get(0), UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.remove1stGroupBy.get(0));
@@ -827,7 +853,7 @@ public class ChargeBackImpala {
     /* Validate if for set group by message is displayed */
     public boolean validatePieChartPresence(WebElement graphElement) {
         try {
-            waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
+            waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.impalaDropdownOption);
             graphElement.isDisplayed();
             return true;
         } catch (NoSuchElementException ex) {
@@ -838,12 +864,12 @@ public class ChargeBackImpala {
 
     /* Validate if message is present */
     public List<Boolean> validateMessageHaveGroupByValues(List<String> groupByList) {
-        waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
+        waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.impalaDropdownOption);
         String message = chargebackImpalaPageObject.showingResultHeader.getText().toLowerCase();
         LOGGER.info("Expected list of options in message- " + message);
         ArrayList<Boolean> isContainFilter = new ArrayList<Boolean>();
         for (String groupBy : groupByList) {
-            waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
+            waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.impalaDropdownOption);
             if (message.contains(groupBy)) {
                 isContainFilter.add(true);
             } else
@@ -856,7 +882,7 @@ public class ChargeBackImpala {
         if (chargebackImpalaPageObject.firstRowOfTable.size() > 0) {
             waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.firstRowOfTable.get(0));
             userActions.performActionWithPolling(chargebackImpalaPageObject.firstRowOfTable.get(0), UserAction.CLICK);
-            waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
+            waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.impalaDropdownOption);
         } else {
             LOGGER.info("No further rows to click on in table");
         }

@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 public class IM_RES_24  extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(IM_RES_24.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the memory chart should displays the top-five hosts")
+    @Test(dataProvider = "clusterid-data-provider", description = "P0-Verify the memory chart should displays the top-five hosts")
     public void verifyGroupByFilterForUserHoverMemoryGraphCompareImpalaTblToolTip(String clusterId) {
         test = extent.startTest("IM_RES_24.verifyGroupByFilterForUserHoverMemoryGraphCompareImpalaTblToolTip (" + clusterId + ")", "Verify if more than 5 hosts exist, the memory chart displays the top-5 hosts .");
         test.assignCategory(" Cluster/Impala Resources");
@@ -36,41 +36,63 @@ public class IM_RES_24  extends BaseClass {
         test.log(LogStatus.INFO, "Go to resource page");
         LOGGER.info("Select impala from dropdown");
         impala.selectImpalaResource();
+        waitExecuter.sleep(2000);
         waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         //Select cluster id
+        // Select the cluster
+        test.log(LogStatus.INFO, "Select clusterId : " + clusterId);
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
         waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+
+        impala.selectImpalaType("Impala");
+        waitExecuter.sleep(3000);
+
         //Select date
-        DatePicker datePicker = new DatePicker(driver);
-        datePicker.clickOnDatePicker();
-        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
-        datePicker.selectLast30Days();
-        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
-        test.log(LogStatus.INFO, "Select Date from DatePicker.");
+        try {
+            DatePicker datePicker = new DatePicker(driver);
+            datePicker.clickOnDatePicker();
+            waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+            datePicker.selectLast30Days();
+            waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+            test.log(LogStatus.INFO, "Select Date from DatePicker.");
 
-        waitExecuter.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
-        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
-        impalaPageObject.groupByDropdownButton.click();
-        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
-        impalaPageObject.groupByUserList.click();
-        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
-        test.log(LogStatus.INFO, "Select User in Group by option.");
+            waitExecuter.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
+            waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+            impalaPageObject.groupByDropdownButton.click();
+            waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+            impalaPageObject.groupByUserList.click();
+            waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+            test.log(LogStatus.INFO, "Select User in Group by option.");
 
-        //1. Click on Queries graph at that point where Impala Queries Table should get populated.
-        test.log(LogStatus.INFO, "Navigate different section in queries graph");
-        GraphUtils graphUtils = new GraphUtils();
-        graphUtils.navigateDifferentPointOnGraphGetTextClickCheckImpalaTbl(driver, impalaPageObject.queryHighChartContainer);
-        test.log(LogStatus.PASS,"Successfully read the impalaQueries header text, after click on queries graph.");
+            // Validate of Query graph is present for selected date range
+            Assert.assertTrue(impala.isQueryGraphPresent(), "The Query graph is not present with expected conditions");
+            test.log(LogStatus.PASS, "Validate the Query graph is present for selected date range.");
 
-        //TBD
-        //Impala Queries table is populated and validate its Header columns
+
+            //1. Click on Queries graph at that point where Impala Queries Table should get populated.
+            test.log(LogStatus.INFO, "Navigate different section in queries graph");
+            GraphUtils graphUtils = new GraphUtils();
+            waitExecuter.waitUntilPageFullyLoaded();
+            graphUtils.navigateDifferentPointOnGraphGetTextClickCheckImpalaTbl(driver, impalaPageObject.memoryHighChartContainer);
+            test.log(LogStatus.PASS, "Successfully read the impalaQueries header text, after click on memory graph.");
+
+            waitExecuter.waitUntilPageFullyLoaded();
+            graphUtils.navigateDifferentPointOnGraphGetTextClickCheckImpalaTbl(driver, impalaPageObject.queryHighChartContainer);
+            test.log(LogStatus.PASS, "Successfully read the impalaQueries header text, after click on queries graph.");
+
+            //TBD
+            //Impala Queries table is populated and validate its Header columns
 //        impala.getImpalaJobsTableRecord();
 //        //Impala Table Header Text: 24 Impala queries running between  26-08-2020 05:30:00 and 27-08-2020 05:30:00
 //        System.out.println("Impala Table Header Text: "+impala.getImpalaQueriesTableHeaderText());
 //        test.log(LogStatus.INFO, "Impala Queries table is populated.");
 //        Assert.assertTrue(impala.validateHeaderColumnNameInImpalaQueriesTable(), "Mismatch in Impala Table header column.");
 
-    }
 
+        } catch (org.openqa.selenium.StaleElementReferenceException ex) {
+            test.log(LogStatus.INFO, "Selecting the queue: " + ex + " in filter.");
+        }
+
+    }
 }

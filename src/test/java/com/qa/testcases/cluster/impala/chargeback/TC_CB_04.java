@@ -6,6 +6,7 @@ import com.qa.io.UnravelConfigYamlReader;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.clusters.impala.ChargeBackImpala;
 import com.qa.utils.LoggingUtils;
+import com.qa.utils.WaitExecuter;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -31,7 +32,12 @@ public class TC_CB_04 extends BaseClass {
             "Impala chrageback page");
         test.assignCategory(" Cluster - Impala Chargeback");
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         chargeBackImpala.selectImpalaChargeback();
+
+        chargeBackImpala.selectImpalaType("Impala");
+        waitExecuter.sleep(2000);
+
         LOGGER.info("Navigate to impala chargeback page",test);
         HomePage homePage = new HomePage(driver);
         List<WebElement> clusters = homePage.getClusterListFromDropdown();

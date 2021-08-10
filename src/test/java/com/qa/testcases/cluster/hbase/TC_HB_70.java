@@ -2,11 +2,13 @@ package com.qa.testcases.cluster.hbase;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.clusters.HBasePageObject;
 import com.qa.scripts.clusters.HBasePage;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -31,6 +33,7 @@ public class TC_HB_70 extends BaseClass {
         LOGGER.info("Initialize all class objects");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         HBasePage hbase = new HBasePage(driver);
+        UserActions userActions = new UserActions(driver);
         HBasePageObject hBasePageObject = new HBasePageObject(driver);
 
         //Navigate to HBase tab
@@ -46,16 +49,15 @@ public class TC_HB_70 extends BaseClass {
         Assert.assertFalse(hBaseClusters.isEmpty(), "HBase clusters not available");
 
         for (String clusterName : hBaseClusters) {
-            if (clusterName.contains("HDP")) {
-                LOGGER.info("Verified Multicluster setup with one HDP cluster."+clusterName);
+            if (clusterName.contains("CDP")) {
+                LOGGER.info("Verified Multicluster setup with one CDP cluster." + clusterName);
                 waitExecuter.waitUntilElementClickable(hBasePageObject.hBaseClusterDropDown);
-                MouseActions.clickOnElement(driver, hBasePageObject.hBaseClusterDropDown);
+                userActions.performActionWithPolling(hBasePageObject.hBaseClusterDropDown, UserAction.CLICK);
                 hbase.verifyClusterList(hBaseClusters);
-                LOGGER.info("HBase headers found: "+ hbase.getHBaseHeader());
-                test.log(LogStatus.PASS, "Verified Multicluster setup with one HDP cluster.");
-            }
-            else{
-                Assert.assertTrue(false, "Multicluster setup with HDP cluster not found.");
+                LOGGER.info("HBase headers found: " + hbase.getHBaseHeader());
+                test.log(LogStatus.PASS, "Verified Multicluster setup with one CDP cluster.");
+            } else {
+                Assert.assertFalse(false, "Multicluster setup with CDP cluster not found.");
             }
         }
     }

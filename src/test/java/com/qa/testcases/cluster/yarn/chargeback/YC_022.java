@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.pagefactory.clusters.ChargebackYarnPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
+import com.qa.scripts.clusters.impala.ChargeBackImpala;
 import com.qa.scripts.clusters.yarn.ChargeBackYarn;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.Log;
@@ -30,26 +31,21 @@ public class YC_022 extends BaseClass {
         Log.startTestCase("YC_022_Verifythecosteditfields");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        test.log(LogStatus.PASS, "Passed Parameter Is : " + clusterId);
-
-        HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
-        Log.info("MultiClusterId is selected.");
+        ChargeBackYarn chargeBackYarn = new ChargeBackYarn(driver);
         ChargeBackYarn = new ChargeBackYarn(driver);
         picker = new DatePicker(driver);
-
-        chargebackYarnPageObject = new ChargebackYarnPageObject(driver);
-        // Click on Chargeback tab
-        waitExecuter.waitUntilElementClickable(chargebackYarnPageObject.clusterChargeBackTab);
-        JavaScriptExecuter.clickOnElement(driver, chargebackYarnPageObject.clusterChargeBackTab);
-        Log.info("Click on Chargeback tab.");
-        // Click on chargeback dropdown
-        waitExecuter.sleep(1000);
-        JavaScriptExecuter.clickOnElement(driver, chargebackYarnPageObject.chargeBackDropdownOptionsButton);
-        Log.info("Click on chargeback dropdown.");
-        // Selecting Impala chargeback
-        ChargeBackYarn chargeBackYarn = new ChargeBackYarn(driver);
         chargeBackYarn.selectYarnChargeback();
+        waitExecuter.sleep(2000);
+
+        // Select the cluster
+        test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
+        HomePage homePage = new HomePage(driver);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
+        waitExecuter.sleep(1000);
+        chargeBackYarn.selectChargebackType("Yarn");
+        waitExecuter.sleep(2000);
+
+
         waitExecuter.sleep(1000);
         picker.clickOnDatePicker();
         Log.info("Click on DatePicker.");

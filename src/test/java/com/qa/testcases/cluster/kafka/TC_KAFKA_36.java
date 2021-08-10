@@ -36,7 +36,7 @@ public class TC_KAFKA_36 extends BaseClass {
     MouseActions.clickOnElement(driver, kafkaPageObject.kafkaTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
-    kafkaPage.verifyClusterDropDown(kafkaPageObject);
+    kafkaPage.verifyClusterDropDown(kafkaPageObject, clusterId);
     kafkaPage.verifyMetricsInfoMsg(kafkaPageObject);
     test.log(LogStatus.PASS, "Verified the metrics info message successfully ");
   }

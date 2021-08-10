@@ -6,6 +6,7 @@ import com.qa.enums.AppDetailsApplicationType;
 import com.qa.enums.ApplicationEnum;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.TopPanelPageObject;
+import com.qa.pagefactory.appsDetailsPage.AppDetailsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.AppDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
@@ -37,6 +38,9 @@ public class IM_TC_01 extends BaseClass {
         loggingUtils.info("Started test case: IM_TC_01.verifyKPIDisplayed", test);
         TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
         UserActions actions = new UserActions(driver);
+        AppDetailsPage appDetailsPage = new AppDetailsPage(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        AppDetailsPageObject appDetailsPageObject = new AppDetailsPageObject(driver);
         actions.performActionWithPolling(topPanelPageObject.jobsTab, UserAction.CLICK);
         loggingUtils.info("Click on Job Tabs", test);
         AllApps allApps = new AllApps(driver);
@@ -44,8 +48,9 @@ public class IM_TC_01 extends BaseClass {
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         datePicker.selectLast90Days();
-        AppDetailsPage appDetailsPage = new AppDetailsPage(driver);
-        appDetailsPage.selectOnlyApplication(AppDetailsApplicationType.IMPALA);
+        waitExecuter.waitUntilElementClickable(appDetailsPageObject.resetButton);
+        int appCount = appDetailsPage.clickOnlyLink("Impala");
+        waitExecuter.waitUntilElementClickable(appDetailsPageObject.resetButton);
         Boolean isOtherAppDisplayed = appDetailsPage.IsOtherApplicationTypesInTable(
             AppDetailsApplicationType.IMPALA);
         Assert.assertFalse(isOtherAppDisplayed,

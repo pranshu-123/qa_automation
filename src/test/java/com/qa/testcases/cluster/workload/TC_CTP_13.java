@@ -34,17 +34,20 @@ public class TC_CTP_13 extends BaseClass {
                 "Verify This should lists all the applications which are executed by selected user on that day.");
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        GraphUtils graphUtils = new GraphUtils();
         WorkloadPageObject workloadPageObject = new WorkloadPageObject(driver);
-        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-        MouseActions.clickOnElement(driver, topPanelPageObject.workloadTab);
         Workload workload = new Workload(driver);
-        workload.selectByYarn();
+        workload.selectWorkloadTab();
+        waitExecuter.sleep(2000);
 
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
 
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
+        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilPageFullyLoaded();
+
+        workload.selectWorkloadType("Yarn");
+        waitExecuter.sleep(2000);
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
@@ -54,7 +57,7 @@ public class TC_CTP_13 extends BaseClass {
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.getText());
 
-        workload.clickOnMonth();
+
         waitExecuter.sleep(3000);
         test.log(LogStatus.PASS, "Verify View By Month");
 
@@ -73,7 +76,7 @@ public class TC_CTP_13 extends BaseClass {
             /* String statusXpath = workload.clickOnDate(reportPageObj, workload.ByStatusGraph.Tuning);*/
             waitExecuter.sleep(3000);
             test.log(LogStatus.PASS, "Verify selected time range");
-        } catch (VerifyError | AWTException te) {
+        } catch (VerifyError te) {
             throw new AssertionError("workload selected time range not completed successfully." + te);
         }
 

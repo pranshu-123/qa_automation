@@ -38,15 +38,19 @@ public class TC_CTP_09 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         GraphUtils graphUtils = new GraphUtils();
         WorkloadPageObject workloadPageObject = new WorkloadPageObject(driver);
-        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-        MouseActions.clickOnElement(driver, topPanelPageObject.workloadTab);
         Workload workload = new Workload(driver);
-        workload.selectByYarn();
+        workload.selectWorkloadTab();
+        waitExecuter.sleep(2000);
 
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
 
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
+        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilPageFullyLoaded();
+
+        workload.selectWorkloadType("Yarn");
+        waitExecuter.sleep(2000);
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
@@ -56,9 +60,8 @@ public class TC_CTP_09 extends BaseClass {
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.getText().trim());
 
-        workload.clickOnMonth();
         waitExecuter.sleep(3000);
-
+        workload.selectViewBy("Month");
         test.log(LogStatus.PASS, "Verify current month selected :"
                 + workloadPageObject.currentmonthHeader.getText());
         waitExecuter.sleep(3000);

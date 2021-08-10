@@ -1,11 +1,11 @@
 package com.qa.constants;
 
 public class PageConstants {
-    public static String YARN_RESOURCE_HEADER = "Resource Usage";
+    public static String YARN_RESOURCE_HEADER = "Resource Type";
 
     public static class Clusters {
-        public static String CHARGEBACK_IMPALA_HEADING = "Chargeback Impala";
-        public static String CHARGEBACK_YARN_HEADING = "Chargeback Yarn";
+        public static String CHARGEBACK_IMPALA_HEADING = "Chargeback Type";
+        public static String CHARGEBACK_YARN_HEADING = "Chargeback Type";
     }
 
     public static class AppTypes {
@@ -39,7 +39,7 @@ public class PageConstants {
         public static String OOZIE_HIVE2_WF = "oozie_hive2_wf";
         public static String OOZIE_SPARK_WF = "oozie_spark_wf";
         public static String OOZIE_TEZ_WF = "oozie_tez";
-        public static String HIVE_TAGGED = "Tagged_HiveWorkflow";
+        public static String HIVE_TAGGED = "Tagged_Hive_Workflow";
         public static String IMPALA_TAGGED = "Tagged_ImpalaWorkflow";
         public static String SPARK_TAGGED = "Tagged_SparkWorkflow";
         public static String OOZIE_HIVE_SPARK = "oozie_hive_spark";
@@ -60,7 +60,7 @@ public class PageConstants {
         public static String ImpalaTablesMissingStatsEvent = "Missing Statistics";
         public static String ImpalaNonColumnarTablesEvent = "Inefficient Storage Format";
         public static String SqlTooManyJoinsEvent = "Query contains too many joins";
-        public static String SqlNoFilterEvent = "No Filter";
+        public static String SqlNoFilterEvent = "Query is missing filtering conditions";
         public static String ImpalaTimeSkewEvent = "Time skew analysis";
         public static String SqlTooManyPartitionsEvent = "Table has too many partitions";
         public static String ImpalaFailureEvent = "Impala query failure";

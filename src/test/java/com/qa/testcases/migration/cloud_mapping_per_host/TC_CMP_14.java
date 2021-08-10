@@ -8,11 +8,14 @@ import com.qa.utils.LoggingUtils;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import org.testng.annotations.Test;
+
 /**
  * @author Ankur Jaiswal
  */
+
 @Marker.CloudMappingPerHost
 @Marker.All
+@Marker.Only
 public class TC_CMP_14 extends BaseClass {
     private static final LoggingUtils LOGGER = new LoggingUtils(TC_CMP_14.class);
 

@@ -28,7 +28,7 @@ public class TC_KAFKA_53 extends BaseClass {
     KafkaPage kafkaPage = new KafkaPage(driver);
     KafkaPageObject kafkaPageObject = new KafkaPageObject(driver);
 
-    kafkaPage.navigateToBrokerTab(kafkaPageObject);
+    kafkaPage.navigateToBrokerTab(kafkaPageObject, clusterId);
     kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject,"Request Handler Idle Ratio Average per Minute",
         "kafkaGraph6");
     test.log(LogStatus.PASS, "Verified 'Request Handler Idle Ratio Average per Minute' details under broker tab for" +

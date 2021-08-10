@@ -31,22 +31,21 @@ public class TC_CTP_12 extends BaseClass {
                 "Verify This should lists application count extecuted by particular user");
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        HomePage homePage = new HomePage(driver);
-
-        GraphUtils graphUtils = new GraphUtils();
         WorkloadPageObject workloadPageObject = new WorkloadPageObject(driver);
-        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-        MouseActions.clickOnElement(driver, topPanelPageObject.workloadTab);
         Workload workload = new Workload(driver);
-        workload.selectByYarn();
+        workload.selectWorkloadTab();
+        waitExecuter.sleep(2000);
 
-        // Set multi cluster
-        test.log(LogStatus.INFO, "Select cluster : " + clusterId);
-        Log.info("Select cluster : " + clusterId);
-        homePage.selectMultiClusterId(clusterId);
-        waitExecuter.sleep(1000);
+        test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
+
+        HomePage homePage = new HomePage(driver);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
+        waitExecuter.sleep(2000);
         waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.sleep(1000);
+
+        workload.selectWorkloadType("Yarn");
+        waitExecuter.sleep(2000);
+
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
@@ -56,8 +55,8 @@ public class TC_CTP_12 extends BaseClass {
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.getText().trim());
 
-        workload.clickOnMonth();
         waitExecuter.sleep(1000);
+        workload.selectViewBy("Month");
         test.log(LogStatus.PASS, "Verify View By Month");
 
         test.log(LogStatus.PASS, "Verify current month selected :"
@@ -74,7 +73,7 @@ public class TC_CTP_12 extends BaseClass {
             workload.clickOnDateRange(workloadPageObject);
             waitExecuter.sleep(3000);
             test.log(LogStatus.PASS, "Verify selected time range");
-        } catch (VerifyError | AWTException te) {
+        } catch (VerifyError te) {
             throw new AssertionError("workload selected time range not completed successfully." + te);
         }
         waitExecuter.sleep(3000);

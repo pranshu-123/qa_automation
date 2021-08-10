@@ -28,7 +28,7 @@ public class TC_KAFKA_63 extends BaseClass {
     KafkaPage kafkaPage = new KafkaPage(driver);
     KafkaPageObject kafkaPageObject = new KafkaPageObject(driver);
 
-    kafkaPage.navigateToBrokerTab(kafkaPageObject);
+    kafkaPage.navigateToBrokerTab(kafkaPageObject, clusterId);
     kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject,"Log Flush Latency, 99th Percentile",
         "kafkaGraph16");
     test.log(LogStatus.PASS, "Verified 'Log Flush Latency, 99th Percentile' details under broker tab for" +

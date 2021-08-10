@@ -7,11 +7,13 @@ import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.appsDetailsPage.AppDetailsPageObject;
+import com.qa.pagefactory.appsDetailsPage.SparkAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.utils.ActionPerformer;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,6 +36,8 @@ public class AppDetailsPage {
     private final ApplicationsPageObject applicationsPageObject;
     private final SparkAppsDetailsPage application;
     private final SubTopPanelModulePageObject subTopPanel;
+    private SparkAppsDetailsPageObject sparkPageObject;
+    private WaitExecuter waitExecuter;
 
     /**
      * Constructor method to initialize object fields
@@ -50,6 +54,8 @@ public class AppDetailsPage {
         application = new SparkAppsDetailsPage(driver);
         subTopPanel = new SubTopPanelModulePageObject(driver);
         jse = (JavascriptExecutor) driver;
+        sparkPageObject = new SparkAppsDetailsPageObject(driver);
+        waitExecuter = new WaitExecuter(driver);
     }
 
     /**
@@ -70,7 +76,9 @@ public class AppDetailsPage {
                 logger.info("App details count- " + appDetails[1]);
                 appCount = Integer.parseInt(appDetails[1].replaceAll("[^0-9]", "").trim());
                 ActionPerformer actionPerformer = new ActionPerformer(driver);
+                //userActions.performActionWithPolling(appDetailsPageObject.applicationTypeLabels.get(i), UserAction.CLICK);
                 actionPerformer.moveToTheElement(appDetailsPageObject.applicationTypeLabels.get(i));
+                wait.waitUntilElementClickable(applicationsPageObject.resetButton);
                 String appId = appDetailsPageObject.applicationTypeShowOnly.getText().trim();
                 logger.info("Impala Insight application Id is " + appId);
                 wait.waitUntilElementClickable(applicationsPageObject.resetButton);
@@ -450,12 +458,16 @@ public class AppDetailsPage {
         wait.waitUntilElementClickable(appDetailsPageObject.eventToggleLeftPane);
         userActions.performActionWithPolling(appDetailsPageObject.eventToggleLeftPane, UserAction.CLICK);
         for (int i = 0; i < appDetailsPageObject.eventTypeLabels.size(); i++) {
-            if (appDetailsPageObject.eventTypeLabels.get(i).getAttribute("content").contains(eventType.getValue())) {
+            if(appDetailsPageObject.eventTypeLabels.get(i).getAttribute("content").contains(eventType.getValue())) {
                 ActionPerformer actionPerformer = new ActionPerformer(driver);
                 actionPerformer.moveToTheElement(appDetailsPageObject.eventTypeLabels.get(i));
-                userActions.performActionWithPolling(appDetailsPageObject.eventTypeShowOnly.get(i),
-                        UserAction.CLICK);
-            }
+                waitExecuter.sleep(3000);
+                logger.info("TOOLTIPS```````````"+appDetailsPageObject.getToolTipValues.getText());
+                    userActions.performActionWithPolling(appDetailsPageObject.eventTypeShowOnly.get(i),
+                            UserAction.CLICK);
+                    waitExecuter.sleep(3000);
+
+           }
         }
     }
 
@@ -467,8 +479,9 @@ public class AppDetailsPage {
         List<String> efficiencyTitleString = new ArrayList<>();
         for (WebElement tags : efficiencyTags) {
             efficiencyTitleString.add(tags.getText().trim());
+            wait.sleep(1000);
         }
-        wait.sleep(1000);
+
         return efficiencyTitleString;
     }
 
@@ -495,5 +508,26 @@ public class AppDetailsPage {
             wait.waitUntilElementClickable(appDetailsPageObject.flippedButton);
         } else
             logger.info("There are no application by name- " + app);
+    }
+
+    public int clickOnlyLink(String types) {
+        Actions action = new Actions(driver);
+        WebElement we = driver
+                .findElement(By.xpath("(//label[contains(@class,'checkbox')])/span[contains(text(),'" + types + "')]"));
+        waitExecuter.waitUntilElementClickable(sparkPageObject.resetButton);
+        waitExecuter.sleep(3000);
+        action.moveToElement(we)
+                .moveToElement(driver.findElement(By.xpath("(//label[contains(@class,'checkbox')])"
+                        + "/span[contains(text(),'" + types + "')]/following-sibling::span[2]")))
+                .click().build().perform();
+        waitExecuter.waitUntilElementClickable(sparkPageObject.resetButton);
+        WebElement ele = driver.findElement(By.xpath("(//label[contains(@class,'checkbox')])"
+                + "/span[contains(text(),'" + types + "')]/following-sibling::span[1]"));
+        waitExecuter.waitUntilElementClickable(sparkPageObject.resetButton);
+        waitExecuter.sleep(3000);
+        int appCount = Integer.parseInt(ele.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
+        waitExecuter.waitUntilElementClickable(sparkPageObject.resetButton);
+        waitExecuter.sleep(3000);
+        return appCount;
     }
 }

@@ -44,11 +44,11 @@ public class TC_CMP_100 extends BaseClass {
         for (int i=0; i<actualUsages.size(); i++) {
             Map actualUsage = ((Map)actualUsages.get(i));
             Map capacity = ((Map)capacityDetails.get(i));
-            Assert.assertTrue(Double.parseDouble(actualUsage.get(CloudMappingHostConstants.HostDetails.ActualUsages.CORES).toString()) <
+            Assert.assertTrue(Double.parseDouble(actualUsage.get(CloudMappingHostConstants.HostDetails.ActualUsages.CORES).toString()) <=
                     Double.parseDouble(capacity.get(CloudMappingHostConstants.HostDetails.ActualUsages.CORES).toString()));
-            Assert.assertTrue(cloudMigrationPerHostPage.convertMemoryToMB(actualUsage.get(CloudMappingHostConstants.HostDetails.ActualUsages.MEMORY).toString()) <
+            Assert.assertTrue(cloudMigrationPerHostPage.convertMemoryToMB(actualUsage.get(CloudMappingHostConstants.HostDetails.ActualUsages.MEMORY).toString()) <=
                     cloudMigrationPerHostPage.convertMemoryToMB(capacity.get(CloudMappingHostConstants.HostDetails.ActualUsages.MEMORY).toString()));
-            Assert.assertTrue(cloudMigrationPerHostPage.convertMemoryToMB(actualUsage.get(CloudMappingHostConstants.HostDetails.ActualUsages.DISK).toString()) <
+            Assert.assertTrue(cloudMigrationPerHostPage.convertMemoryToMB(actualUsage.get(CloudMappingHostConstants.HostDetails.ActualUsages.DISK).toString()) <=
                     cloudMigrationPerHostPage.convertMemoryToMB(capacity.get(CloudMappingHostConstants.HostDetails.ActualUsages.DISK).toString()));
         }
         LOGGER.pass("Verified cores, memory and disk values for actual usages is less than capacity", test);

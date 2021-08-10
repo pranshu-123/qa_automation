@@ -36,8 +36,8 @@ public class TC_KAFKA_12 extends BaseClass {
     MouseActions.clickOnElement(driver, kafkaPageObject.kafkaTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
-    kafkaPage.verifyClusterDropDown(kafkaPageObject);
-    kafkaPage.verifyClusterName(kafkaPageObject);
+    kafkaPage.verifyClusterDropDown(kafkaPageObject, clusterId);
+    kafkaPage.verifyClusterName(kafkaPageObject, clusterId);
     test.log(LogStatus.PASS, "Verified kafka cluster name in tab successfully ");
   }
 }

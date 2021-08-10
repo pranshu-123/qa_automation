@@ -28,7 +28,7 @@ public class TC_KAFKA_48 extends BaseClass {
     KafkaPage kafkaPage = new KafkaPage(driver);
     KafkaPageObject kafkaPageObject = new KafkaPageObject(driver);
 
-    kafkaPage.navigateToBrokerTab(kafkaPageObject);
+    kafkaPage.navigateToBrokerTab(kafkaPageObject, clusterId);
     kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject,"Bytes Out per Second","kafkaGraph1");
     test.log(LogStatus.PASS, "Verified 'Bytes Out Per Second' details under broker tab for selected broker successfully ");
   }

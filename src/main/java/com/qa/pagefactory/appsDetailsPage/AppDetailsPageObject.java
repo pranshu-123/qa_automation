@@ -15,7 +15,7 @@ public class AppDetailsPageObject {
     @FindBy(xpath = "//h3[contains(@class,'expandable-header')]/following-sibling::div[contains(@class,'filter-items')]//label")
     public List<WebElement> applicationTypeLabels;
 
-    @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[4]/a[2]")
+    @FindBy(xpath = "//tbody[@id='inefficientApps-body']/tr/td[4]/a[2]")
     public WebElement applicationTypeShowOnly;
 
     @FindBy(id = "allApps")
@@ -129,13 +129,13 @@ public class AppDetailsPageObject {
     @FindBy(xpath = "(//table[@id='allApps']//tbody/tr)[1]/td")
     public List<WebElement> getTableValuesOfImpalaApp;
 
-    @FindBy(xpath = "//a[@class='dropbtn pointer']/span")
+    @FindBy(xpath = "(//span[contains(@class,'select2-selection__arrow')])[1]")
     public WebElement chargebackDropdown;
 
-    @FindBy(xpath = "//div[contains(@class,'dropdown-content')]//a[normalize-space(text())='Impala']")
+    @FindBy(xpath = "//span[contains(@class,'select2-dropdown')]//li[normalize-space(text())='Impala']")
     public WebElement impalaChargeback;
 
-    @FindBy(className = "select2-selection__arrow")
+    @FindBy(xpath = "(//span[@class='select2-selection__arrow'])[2]")
     public WebElement impalaClusterDrodown;
 
     @FindBy(xpath = "//span[contains(@class,'select2-dropdown')]//input")
@@ -186,7 +186,7 @@ public class AppDetailsPageObject {
     @FindBy(xpath = "//span[@class='globalSearchIcon']")
     public WebElement searchIcon;
 
-    @FindBy(xpath ="(//table[@id='allApps']/tbody//td)[3]")
+    @FindBy(xpath ="(//table[@id='allApps']/tbody//td)[4]/a[2]")
     public List<WebElement> clickFirstApp;
 
     @FindBy(xpath = "//span[contains(@class,'icon-flipped')]")
@@ -194,6 +194,12 @@ public class AppDetailsPageObject {
 
     @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[4]/a[2]")
     public WebElement clickOnAppId;
+
+    @FindBy(xpath = "//tbody[@id='inefficientApps-body']/tr/td[4]/a[2]")
+    public List<WebElement> clickOnInefficientAppId;
+
+    @FindBy(xpath = "//div[contains(@class,'tippy-content')]/span")
+    public WebElement getToolTipValues;
 
     /**
      * @param driver The driver that will be used to look up the elements

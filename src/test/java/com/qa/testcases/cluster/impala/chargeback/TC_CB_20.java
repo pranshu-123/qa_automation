@@ -3,6 +3,8 @@ package com.qa.testcases.cluster.impala.chargeback;
 import java.util.Arrays;
 import java.util.List;
 
+import com.qa.utils.WaitExecuter;
+import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -28,13 +30,18 @@ public class TC_CB_20 extends BaseClass {
             "when Grouped by \"inputTables\"");
         test.assignCategory(" Cluster - Impala Chargeback");
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         chargeBackImpala.selectImpalaChargeback();
         LOGGER.info("Navigate to impala chargeback page", test);
         //Select Cluster
         HomePage homePage = new HomePage(driver);
         ChargebackImpalaPageObject cbPageObject = new ChargebackImpalaPageObject(driver);
-        homePage.selectMultiClusterId(clusterId);
-        LOGGER.info("Selected cluster: " + clusterId, test);
+        // Select the cluster
+        test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
+
+        chargeBackImpala.selectImpalaType("Impala");
+        waitExecuter.sleep(2000);
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         datePicker.selectLast90Days();

@@ -37,8 +37,17 @@ public class  IM_RES_17 extends BaseClass {
     test.log(LogStatus.INFO, "Go to resource page");
     LOGGER.info("Select impala from dropdown");
     impala.selectImpalaResource();
+    waitExecuter.sleep(2000);
+
+    // Select the cluster
+    test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
     HomePage homePage = new HomePage(driver);
-    homePage.selectMultiClusterId(clusterId);
+    homePage.selectMultiClusterIdClusterPage(clusterId);
+    waitExecuter.sleep(1000);
+
+    impala.selectImpalaType("Impala");
+    waitExecuter.sleep(3000);
+
 
     try {
       DatePicker datePicker = new DatePicker(driver);
@@ -58,29 +67,32 @@ public class  IM_RES_17 extends BaseClass {
 
       for (int i = 0; i < impalaPageObject.filterElements.size(); i++) {
         String queueName = impalaPageObject.filterElements.get(i).getText();
-        impalaPageObject.filterElements.get(i).click();
-        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
-        test.log(LogStatus.INFO, "Selecting the queue: " + queueName + " in filter.");
-        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
-        boolean isTagPresent = false;
-        for (String graphTag : impala.getQueriesGraphLabels()) {
-          if (graphTag.equals(queueName)) {
-            isTagPresent = true;
-          } else if (graphTag.contains("...") &&
-                  queueName.contains(graphTag.split("...")[0])) {
-            isTagPresent = true;
-          } else {
-            isTagPresent = false;
+        if (queueName != null) {
+          impalaPageObject.filterElements.get(i).click();
+          waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+          test.log(LogStatus.INFO, "Selecting the queue: " + queueName + " in filter.");
+          waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+          boolean isTagPresent = false;
+          for (String graphTag : impala.getQueriesGraphLabels()) {
+            if (graphTag.equals(queueName)) {
+              isTagPresent = true;
+            } else if (graphTag.contains("...") &&
+                    queueName.contains(graphTag.split("...")[0])) {
+              isTagPresent = true;
+            } else {
+              isTagPresent = false;
+            }
           }
+
+          Assert.assertTrue(isTagPresent, "Filter user not displayed for queue: " + queueName);
+          test.log(LogStatus.PASS, "Graph displayed the user based on filter for queue : " + queueName);
+          waitExecuter.sleep(3000);
+          impalaPageObject.filterInput.click();
+
         }
-        Assert.assertTrue(isTagPresent, "Filter user not displayed for queue: " + queueName);
-        test.log(LogStatus.PASS, "Graph displayed the user based on filter for queue : " + queueName);
         waitExecuter.sleep(2000);
         impalaPageObject.filterInput.click();
-
       }
-      waitExecuter.sleep(2000);
-      impalaPageObject.filterInput.click();
     }
     catch (org.openqa.selenium.StaleElementReferenceException ex)
     {

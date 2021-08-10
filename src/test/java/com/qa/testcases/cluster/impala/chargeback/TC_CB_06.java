@@ -34,8 +34,13 @@ public class TC_CB_06 extends BaseClass {
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
         chargeBackImpala.selectImpalaChargeback();
 
+        //Cluster selected
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
+        waitExecuter.waitUntilPageFullyLoaded();
+
+        chargeBackImpala.selectImpalaType("Impala");
+        waitExecuter.sleep(2000);
 
         CommonPageObject commonPageObject = new CommonPageObject(driver);
         commonPageObject.clusterDropdown.click();

@@ -46,27 +46,19 @@ public class TC_CB_32 extends BaseClass {
 		chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
 
 		// Click on Chargeback tab
-		test.log(LogStatus.INFO, "Click on Chargeback tab");
-		LOGGER.info("Click on Chargeback tab");
-		waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.clusterChargeBackTab);
-		JavaScriptExecuter.clickOnElement(driver, chargebackImpalaPageObject.clusterChargeBackTab);
-		waitExecuter.sleep(1000);
-
-		// Click on chargeback dropdown and select Impala
-		test.log(LogStatus.INFO, "Click on chargeback dropdown and select Impala");
-		LOGGER.info("Click on chargeback dropdown and select Impala");
-		JavaScriptExecuter.clickOnElement(driver, chargebackImpalaPageObject.chargeBackDropdownOptionsButton);
-		waitExecuter.sleep(1000);
-		waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.chargeBackDropdownImpalaOption);
-		chargebackImpalaPageObject.chargeBackDropdownImpalaOption.click();
-		waitExecuter.sleep(1000);
+		ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
+		chargeBackImpala.selectImpalaChargeback();
 
 		// Select the cluster
-		test.log(LogStatus.INFO, "Select clusterId : " + clusterId);
-		LOGGER.info("Select clusterId : " + clusterId);	
-		homePage.selectMultiClusterId(clusterId);
+		test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
+		HomePage homePage = new HomePage(driver);
+		homePage.selectMultiClusterIdClusterPage(clusterId);
 		waitExecuter.sleep(1000);
-		
+
+		chargeBackImpala.selectImpalaType("Impala");
+		waitExecuter.sleep(2000);
+
+
 		// Select last 30 days from date picker
 		test.log(LogStatus.INFO, "Select clusterId : " + clusterId);
 		LOGGER.info("Select clusterId : " + clusterId);

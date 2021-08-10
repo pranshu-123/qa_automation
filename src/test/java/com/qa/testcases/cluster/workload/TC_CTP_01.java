@@ -29,23 +29,30 @@ public class TC_CTP_01 extends BaseClass {
                 "Verify Cluster workload report should be generated for the select date range");
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        WorkloadPageObject workloadPageObject = new WorkloadPageObject(driver);
-        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-        MouseActions.clickOnElement(driver, topPanelPageObject.workloadTab);
         Workload workload = new Workload(driver);
-        workload.selectByYarn();
+        workload.selectWorkloadTab();
+        waitExecuter.sleep(2000);
 
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
 
+        //Cluster selected
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
-        waitExecuter.sleep(3000);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
+        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilPageFullyLoaded();
+
+        workload.selectWorkloadType("Yarn");
+        waitExecuter.sleep(2000);
+
 
         //select 'Last 7 Days'
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
 
         datePicker.selectLast7Days();
+        waitExecuter.sleep(1000);
+
+        workload.selectViewBy("Month");
         waitExecuter.sleep(1000);
         test.log(LogStatus.PASS, "Last 7 Days field is successfully verified in date range");
 
@@ -57,7 +64,10 @@ public class TC_CTP_01 extends BaseClass {
         datePicker.selectLast14Days();
         waitExecuter.sleep(2000);
 
-        test.log(LogStatus.PASS, "Last 14 Days field is successfully verified in date range");
+        workload.selectViewBy("Day");
+        waitExecuter.sleep(1000);
+        test.log(LogStatus.PASS, "Last 7 Days field is successfully verified in date range");
+
 
         //select 'Last 30 Days'
         datePicker.clickOnDatePicker();
@@ -66,7 +76,10 @@ public class TC_CTP_01 extends BaseClass {
         waitExecuter.sleep(1000);
 
 
-        test.log(LogStatus.PASS, "Last 30 Days field is successfully verified in date range");
+        workload.selectViewBy("Month");
+        waitExecuter.sleep(1000);
+        test.log(LogStatus.PASS, "Last 7 Days field is successfully verified in date range");
+
 
         //select 'Last 60 Days'
         datePicker.clickOnDatePicker();
@@ -74,7 +87,10 @@ public class TC_CTP_01 extends BaseClass {
         datePicker.selectLast60Days();
         waitExecuter.sleep(1000);
 
-        test.log(LogStatus.PASS, "Last 60 Days field is successfully verified in date range");
+        workload.selectViewBy("Hour");
+        waitExecuter.sleep(1000);
+        test.log(LogStatus.PASS, "Last 7 Days field is successfully verified in date range");
+
 
         //select 'Custom Range'
         datePicker.clickOnDatePicker();
@@ -82,7 +98,10 @@ public class TC_CTP_01 extends BaseClass {
         datePicker.selectCustomRange();
         waitExecuter.sleep(3000);
 
-        test.log(LogStatus.PASS, "Start Date field is successfully verified in custom date range");
+        workload.selectViewBy("Hour/Day");
+        waitExecuter.sleep(1000);
+        test.log(LogStatus.PASS, "Last 7 Days field is successfully verified in date range");
+
     }
 
 }

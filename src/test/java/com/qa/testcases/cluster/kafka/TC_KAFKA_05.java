@@ -36,7 +36,7 @@ public class TC_KAFKA_05 extends BaseClass {
     MouseActions.clickOnElement(driver, kafkaPageObject.kafkaTab);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
-    kafkaPage.verifyClusterDropDown(kafkaPageObject);
+    kafkaPage.verifyClusterDropDown(kafkaPageObject, clusterId);
     test.log(LogStatus.PASS, "Verified list of connected Kafka Clusters in drop down successfully ");
   }
 }

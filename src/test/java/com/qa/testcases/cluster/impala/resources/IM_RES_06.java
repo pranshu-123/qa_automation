@@ -47,12 +47,17 @@ public class IM_RES_06 extends BaseClass {
 		test.log(LogStatus.INFO, "Go to resource page");
 		LOGGER.info("Select impala from dropdown");
 		impala.selectImpalaResource();
+		waitExecuter.sleep(2000);
 
 		// Set multi cluster
 		test.log(LogStatus.INFO, "Select cluster : " + clusterId);
 		LOGGER.info("Select cluster : " + clusterId);
-		homePage.selectMultiClusterId(clusterId);
+		// Select the cluster
+		homePage.selectMultiClusterIdClusterPage(clusterId);
 		waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+
+		impala.selectImpalaType("Impala");
+		waitExecuter.sleep(3000);
 
 		// Select last 30 days from date picker
 		test.log(LogStatus.INFO, "Select Last 30 days in date picker");

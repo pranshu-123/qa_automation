@@ -1,23 +1,24 @@
 package com.qa.scripts.clusters;
 
 
-import com.qa.enums.UserAction;
-import com.qa.pagefactory.appsDetailsPage.SparkAppsDetailsPageObject;
 import com.qa.pagefactory.clusters.WorkloadPageObject;
-import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
-import com.qa.utils.*;
+import com.qa.utils.ActionPerformer;
+import com.qa.utils.Log;
+import com.qa.utils.MouseActions;
+import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -29,11 +30,13 @@ public class Workload {
     private static final Logger LOGGER = Logger.getLogger(Workload.class.getName());
     private static Calendar cal;
     private static SimpleDateFormat dateFormatter;
+    private static final Boolean isDignosticWin = false;
+    UserActions userActions;
     private WebDriver driver;
     private WaitExecuter waitExecuter;
     private WorkloadPageObject workloadPageObject;
-    UserActions userActions;
-    private static Boolean isDignosticWin = false;
+    private List<String> memoryTooltipValues;
+    private List<String> queriesTooltipValues;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -47,15 +50,11 @@ public class Workload {
     }
 
     /**
-     * Method to return the 1st Jan date of current year.
+     * Constuctor to initialize members
      */
-    public static String getFirstDateOfYear() {
-        cal = Calendar.getInstance();
-        cal.set(Calendar.DATE, 1);
-        cal.set(Calendar.MONTH, Calendar.OCTOBER);
-        dateFormatter = new SimpleDateFormat("d");
-        String startDate = dateFormatter.format(cal.getTime()).toString();
-        return startDate;
+    public Workload() {
+        memoryTooltipValues = new ArrayList<String>();
+        queriesTooltipValues = new ArrayList<String>();
     }
 
     public List<WebElement> getClustersList() {
@@ -70,17 +69,11 @@ public class Workload {
         if (clusterSize > 0) {
             for (int i = 0; i < clusterList.size(); i++) {
                 String clusterNames = clusterList.get(i).getText();
-                //System.out.println("Cluster name: "+ clusterNames);
                 listOfClusters.add(clusterNames);
             }
         }
         return listOfClusters;
     }
-
-   /* *//* Get time range message cluster workload *//*
-    public List<WebElement> gettimerangeMessage() {
-        return workloadPageObject.timerangeMessageElement;
-    }*/
 
     /**
      * This method is use to return all yarn jobs table rows.
@@ -95,21 +88,74 @@ public class Workload {
         return workloadPageObject.workloadJobsTableHeaderNames;
     }
 
-    public void clickOnMonth() {
-        try {
-            LOGGER.info("Click On Month dropdown");
-            WebElement Sum = (workloadPageObject.viewByMonth);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(Sum)
-                    .contextClick()
-                    .doubleClick(workloadPageObject.viewByMonth)
-                    .perform();
-        } catch (NoSuchElementException e) {
-            LOGGER.severe("Class Workload | Method clickOnDay | Exception desc" + e.getMessage());
-            throw (e);
+    //click on cluster drop down
+    public void selectWorkloadType(String workloadType) {
+        // Click on Impala chargeback dropdown
+        MouseActions.clickOnElement(driver, workloadPageObject.workloadDropdownOption);
+        List<WebElement> userList = workloadPageObject.selectDropdown;
+        String selectWorkload = null;
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getText().equals(workloadType)) {
+                selectWorkload = userList.get(i).getText();
+                LOGGER.info("Selected Impala from dropdown " + selectWorkload);
+                waitExecuter.waitUntilElementClickable(userList.get(i));
+                MouseActions.clickOnElement(driver, userList.get(i));
+                waitExecuter.sleep(2000);
+            }
         }
     }
 
+    //click on workload View By
+    public void selectViewBy(String viewBy) {
+        MouseActions.clickOnElement(driver, workloadPageObject.selectViewBy);
+        List<WebElement> userList = workloadPageObject.selectDropdown;
+        String selectWorkload = null;
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getText().equals(viewBy)) {
+                selectWorkload = userList.get(i).getText();
+                LOGGER.info("Selected Impala from dropdown " + selectWorkload);
+                waitExecuter.waitUntilElementClickable(userList.get(i));
+                MouseActions.clickOnElement(driver, userList.get(i));
+                waitExecuter.sleep(2000);
+            }
+        }
+    }
+
+    //click on workload Aggregate By
+    public void selectAggregateBy(String aggregateBy) {
+        MouseActions.clickOnElement(driver, workloadPageObject.aggregateBy);
+        List<WebElement> userList = workloadPageObject.selectDropdown;
+        String selectWorkload = null;
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getText().equals(aggregateBy)) {
+                selectWorkload = userList.get(i).getText();
+                LOGGER.info("Selected Impala from dropdown " + selectWorkload);
+                waitExecuter.waitUntilElementClickable(userList.get(i));
+                MouseActions.clickOnElement(driver, userList.get(i));
+                waitExecuter.sleep(2000);
+            }
+        }
+    }
+
+    public void selectGroupBy(String groupBy) {
+        try {
+            MouseActions.clickOnElement(driver, workloadPageObject.selectGroupBy);
+            List<WebElement> userList = workloadPageObject.selectDropdown;
+            String selectWorkload = null;
+            for (int i = 0; i < userList.size(); i++) {
+                if (userList.get(i).getText().equals(groupBy)) {
+                    selectWorkload = userList.get(i).getText();
+                    LOGGER.info("Selected Impala from dropdown " + selectWorkload);
+                    waitExecuter.waitUntilElementClickable(userList.get(i));
+                    MouseActions.clickOnElement(driver, userList.get(i));
+                    waitExecuter.sleep(2000);
+                }
+            }
+        } catch (NoSuchElementException e) {
+            LOGGER.severe("Class Workload | Method selectGroupBy | Exception desc" + e.getMessage());
+            throw (e);
+        }
+    }
 
     public void validateStagesTabs(WorkloadPageObject workloadPageObject) {
         // click the stageId to sort it
@@ -123,20 +169,6 @@ public class Workload {
         }
     }
 
-    public void clickVCoreHour() {
-        try {
-            LOGGER.info("Click On Month dropdown");
-            WebElement Sum = (workloadPageObject.vcoreHour);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(Sum)
-                    .contextClick()
-                    .doubleClick(workloadPageObject.vcoreHour)
-                    .perform();
-        } catch (NoSuchElementException e) {
-            LOGGER.severe("Class Workload | Method clickOnDay | Exception desc" + e.getMessage());
-            throw (e);
-        }
-    }
 
     public void verifyAssertFalse(Boolean condition, WorkloadPageObject workloadPageObject, String msg) {
         String appDuration = "0";
@@ -150,109 +182,6 @@ public class Workload {
             else
                 MouseActions.clickOnElement(driver, workloadPageObject.closeAppsPageTab);
             throw new AssertionError(msg + e.getMessage());
-        }
-    }
-
-    /* Get Day dropdown cluster workload */
-    public void clickOnDay() {
-        try {
-            LOGGER.info("Click On Day dropdown");
-            WebElement Day = (workloadPageObject.viewByDay);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(Day)
-                    .contextClick()
-                    .doubleClick(workloadPageObject.viewByDay)
-                    .perform();
-        } catch (NoSuchElementException e) {
-            LOGGER.severe("Class Workload | Method clickOnDay | Exception desc" + e.getMessage());
-            throw (e);
-        }
-    }
-
-    /* Get Hour dropdown cluster workload */
-    public void clickOnHour() {
-        try {
-            LOGGER.info("Click on Hour dropdown");
-            WebElement Hour = (workloadPageObject.viewByHour);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(Hour)
-                    .contextClick()
-                    .doubleClick(workloadPageObject.viewByHour)
-                    .perform();
-        } catch (NoSuchElementException e) {
-            LOGGER.severe("Class Workload | Method clickOnHourDay | Exception desc" + e.getMessage());
-            throw (e);
-        }
-    }
-
-    /* Get Hour dropdown cluster workload */
-    public boolean clickOnHourDay() {
-        try {
-            WebDriverWait wait = new WebDriverWait(driver, 40);
-            WebElement Hour = (workloadPageObject.viewByHourDay);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(Hour)
-                    .contextClick()
-                    .doubleClick(workloadPageObject.viewByHourDay)
-                    .perform();
-            return true;
-
-        } catch (NoSuchElementException e) {
-            LOGGER.severe("Class Workload | Method clickOnHourDay | Exception desc" + e.getMessage());
-            throw (e);
-        }
-    }
-
-    /* Get list of Users from workload table */
-    public Boolean validateHeaderColumnNameInworkloadJobsTable() {
-        System.out.println("Size of Headers in Workload Jobs Table: " + getworkloadJobsTableHeaderNames().size());
-        List<WebElement> listOfworkloadJobsTableHeaderNames = getworkloadJobsTableHeaderNames();
-
-        ArrayList<String> listOfYarnJobsColumnNames = new ArrayList<String>();
-
-        for (int i = 0; i < listOfworkloadJobsTableHeaderNames.size() - 1; i++) {
-            listOfYarnJobsColumnNames.add(listOfworkloadJobsTableHeaderNames.get(i).getText());
-        }
-        List<String> definedworkloadJobsColumnNames = Arrays.asList("Job Type", "Job Count");
-        for (String definedworkloadjobsColumnNames : definedworkloadJobsColumnNames) {
-            System.out.println(definedworkloadjobsColumnNames);
-            definedworkloadJobsColumnNames.stream().forEach(System.out::println);
-        }
-        Boolean boolColumnNames = listOfYarnJobsColumnNames.equals(definedworkloadJobsColumnNames);
-        return boolColumnNames;
-    }
-
-    /*Method to Click on Sum */
-    public void clickOnSum() {
-        try {
-            LOGGER.info("Click on Hour dropdown");
-            WebElement Hour = (workloadPageObject.viewBySum);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(Hour)
-                    .contextClick()
-                    .doubleClick(workloadPageObject.viewBySum)
-                    .perform();
-        } catch (NoSuchElementException e) {
-            LOGGER.severe("Class Workload | Method clickOnSum | Exception desc" + e.getMessage());
-            throw (e);
-        }
-    }
-
-    /*Method to Click on Average */
-    public void clickOnAverage() {
-        try {
-            LOGGER.info("Click on Sum in Hour page");
-            WebDriverWait wait = new WebDriverWait(driver, 40);
-            WebElement Sum = (workloadPageObject.viewByAverage);
-            Actions actions = new Actions(driver);
-            actions.moveToElement(Sum)
-                    .contextClick()
-                    .doubleClick(workloadPageObject.viewByAverage)
-                    .perform();
-            wait.pollingEvery(Duration.ofMillis(10));
-        } catch (NoSuchElementException e) {
-            LOGGER.severe("Class Workload | Method clickOnAverage | Exception desc" + e.getMessage());
-            throw (e);
         }
     }
 
@@ -270,17 +199,10 @@ public class Workload {
         return selectedTimeRange;
     }
 
-
-    public static class ByStatusGraph {
-        public static final String COLOR = "#007fad";
-    }
-
-
-    public String clickOnDateRange(WorkloadPageObject workloadPageObject) throws AWTException {
+    public String clickOnDateRange(WorkloadPageObject workloadPageObject) {
         String pattern = "MM-dd-yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         String date = simpleDateFormat.format(new Date());
-        System.out.println(date);
         List<WebElement> dateRange = workloadPageObject.tspanCal;
         waitExecuter.waitUntilPageFullyLoaded();
         Actions actions = new Actions(driver);
@@ -289,13 +211,11 @@ public class Workload {
         int index = 0;
         for (int i = 0; i < dateRange.size(); i++) {
             String reportName = dateRange.get(i).getText().trim();
-            System.out.println("reportName: " + reportName);
+            LOGGER.info("reportName: " + reportName);
             if (reportName.equals(date)) {
                 LOGGER.info("The report name is " + reportName);
                 index = i + 1;
                 iconXpath = "(//*[name()='svg'])[4][" + index + "]//*[local-name()='g']//*[local-name()='text']//*[local-name()='tspan']";
-                //table/tbody/tr[1]/td[4]/div/span/span[contains(@class,'icon-expand')]
-                //System.out.println("iconXpath: "+iconXpath);
                 WebElement iconElement = driver.findElement(By.xpath(iconXpath));
                 waitExecuter.waitUntilElementPresent(iconElement);
                 actions.moveToElement(iconElement)
@@ -308,172 +228,93 @@ public class Workload {
         }
 
         String statusXpath = null;
-        if(index > 0){
+        if (index > 0) {
             statusXpath = "(//*[name()='svg'])[4][" + index + "]//*[local-name()='g']";
             //statusText = getStatusText(statusXpath);
         }
         return statusXpath;
     }
 
-        /**
-         * Method to Click on workload CoreHours tab
-         */
-        public void selectByvCoreHours () {
-            try {
-                LOGGER.info("Click on workload tab");
-                WaitExecuter waitExecuter = new WaitExecuter(driver);
-                // Click on workload tab
-                MouseActions.clickOnElement(driver, workloadPageObject.workloadTab);
-                // Click on workload dropdown
-                MouseActions.clickOnElement(driver, workloadPageObject.workloadDropdownOptionsButton);
-                // Selecting the vCoreHours
-                waitExecuter.sleep(3000);
-                MouseActions.clickOnElement(driver, workloadPageObject.workloadDropdownvCoreHours);
-            } catch (NoSuchElementException e) {
-                LOGGER.severe("Class Workload | Method selectByvCoreHours | Exception desc" + e.getMessage());
-                throw (e);
-            }
+    public void navigateTextClickCheckworkloadTbl(WebDriver driver, WebElement graphElement) {
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
 
-        }
-        private List<String> memoryTooltipValues;
-        private List<String> queriesTooltipValues;
+        int width = graphElement.getSize().getWidth();
+        int height = graphElement.getSize().getHeight();
 
-        /**
-         * Constuctor to initialize members
-         */
-    public Workload() {
-            memoryTooltipValues = new ArrayList<String>();
-            queriesTooltipValues = new ArrayList<String>();
-        }
+        int incrementalWidth = width / 100;
+        int incrementalHeight = height / 100;
 
-        public void navigateTextClickCheckworkloadTbl (WebDriver driver, WebElement graphElement){
-            WaitExecuter waitExecuter = new WaitExecuter(driver);
+        int runningWidth = incrementalWidth;
+        int runningHeight = incrementalHeight;
 
-            int width = graphElement.getSize().getWidth();
-            int height = graphElement.getSize().getHeight();
+        ActionPerformer actionPerformer = new ActionPerformer(driver);
+        // When we use moveToElement, offsets are from the center of element
+        actionPerformer.moveToTheElementByOffset(graphElement, 0, 0);
+        waitExecuter.sleep(2000);
+        WorkloadPageObject workloadPageObject = new WorkloadPageObject(driver);
 
-            int incrementalWidth = width / 100;
-            int incrementalHeight = height / 100;
+        for (int i = 0; i < 4; i++) {
+            /** Moving the cursor to the left of the graph since offsets are from
+             the center of element **/
+            actionPerformer.moveToTheElementByOffset(graphElement, -runningWidth, 0);
+            memoryTooltipValues.add(workloadPageObject.memoryTooltip.getText());
+            //Move and click on the graph
+            actionPerformer.moveToTheElementByOffsetAndClick(graphElement, -runningWidth, 0);
 
-            int runningWidth = incrementalWidth;
-            int runningHeight = incrementalHeight;
-
-            ActionPerformer actionPerformer = new ActionPerformer(driver);
-            // When we use moveToElement, offsets are from the center of element
-            actionPerformer.moveToTheElementByOffset(graphElement, 0, 0);
             waitExecuter.sleep(2000);
-            WorkloadPageObject workloadPageObject = new WorkloadPageObject(driver);
+            if (workloadPageObject.workloadHeader.getText().contains("No workload queries")) {
+                LOGGER.info("workload query header :" + workloadPageObject.workloadHeader.getText());
+            } else {
+                LOGGER.info("workload query header :" + workloadPageObject.workloadHeader.getText());
+                //If Impala queries table populated then verufy for other details.
 
-            for (int i = 0; i < 4; i++) {
-                /** Moving the cursor to the left of the graph since offsets are from
-                 the center of element **/
-                actionPerformer.moveToTheElementByOffset(graphElement, -runningWidth, 0);
-                memoryTooltipValues.add(workloadPageObject.memoryTooltip.getText());
-                //Move and click on the graph
-                actionPerformer.moveToTheElementByOffsetAndClick(graphElement, -runningWidth, 0);
-
-                waitExecuter.sleep(2000);
-                if (workloadPageObject.workloadHeader.getText().contains("No workload queries")) {
-                    System.out.println("workload query header :" + workloadPageObject.workloadHeader.getText());
-                    Log.info("workload query header :" + workloadPageObject.workloadHeader.getText());
-                } else {
-                    System.out.println("workload query header :" + workloadPageObject.workloadHeader.getText());
-                    Log.info("workload query header :" + workloadPageObject.workloadHeader.getText());
-                    //If Impala queries table populated then verufy for other details.
-
-                }
-
-                actionPerformer.moveToTheElementByOffset(graphElement, runningWidth, 0);
-                memoryTooltipValues.add(workloadPageObject.memoryTooltip.getText());
-                //Move and click on the graph
-                actionPerformer.moveToTheElementByOffsetAndClick(graphElement, runningWidth, 0);
-
-                waitExecuter.sleep(2000);
-                if (!workloadPageObject.workloadHeader.getText().contains("No workload queries")) {
-                    System.out.println("workload query header :" + workloadPageObject.workloadHeader.getText());
-                    Log.info("workload query header :" + workloadPageObject.workloadHeader.getText());
-                } else {
-                    System.out.println("workload query header :" + workloadPageObject.workloadHeader.getText());
-                    Log.info("workload query header :" + workloadPageObject.workloadHeader.getText());
-                }
-                runningWidth += incrementalWidth;
             }
-        }
 
-        /* Get list of Users from chargeback table */
-        public List<String> getUsersFromTable () {
+            actionPerformer.moveToTheElementByOffset(graphElement, runningWidth, 0);
+            memoryTooltipValues.add(workloadPageObject.memoryTooltip.getText());
+            //Move and click on the graph
+            actionPerformer.moveToTheElementByOffsetAndClick(graphElement, runningWidth, 0);
 
-            List<WebElement> getAllUsers = workloadPageObject.getUsersFromworkloadTable;
-            List<String> listOfUsers = new ArrayList<String>();
-
-            for (int i = 0; i < getAllUsers.size(); i++) {
-                String indivualUser = getAllUsers.get(i).getText();
-                System.out.println("getUsersFromTable: " + indivualUser);
-                listOfUsers.add(indivualUser);
+            waitExecuter.sleep(2000);
+            if (!workloadPageObject.workloadHeader.getText().contains("No workload queries")) {
+                LOGGER.info("workload query header :" + workloadPageObject.workloadHeader.getText());
+                Log.info("workload query header :" + workloadPageObject.workloadHeader.getText());
+            } else {
+                LOGGER.info("workload query header :" + workloadPageObject.workloadHeader.getText());
+                Log.info("workload query header :" + workloadPageObject.workloadHeader.getText());
             }
-            LOGGER.info("List of users from chargeback table" + listOfUsers);
-            return listOfUsers;
-        }
-
-
-        /**
-         * Method to Click on workload MemoryHours tab
-         */
-        public void selectByMemoryHours () {
-            try {
-                LOGGER.info("Click on workload tab");
-                WaitExecuter waitExecuter = new WaitExecuter(driver);
-                // Click on workload tab
-                MouseActions.clickOnElement(driver, workloadPageObject.workloadTab);
-                // Click on workload dropdown
-                MouseActions.clickOnElement(driver, workloadPageObject.workloadDropdownOptionsButton);
-                // Selecting the Memory Hours
-                waitExecuter.sleep(3000);
-                MouseActions.clickOnElement(driver, workloadPageObject.workloadDropdownMemoryHours);
-            } catch (NoSuchElementException e) {
-                LOGGER.severe("Class Workload | Method selectByMemoryHours | Exception desc" + e.getMessage());
-                throw (e);
-            }
-        }
-
-        /**
-         * Method to Click on workload Yarn tab
-         */
-        public void selectByYarn () {
-            try {
-                LOGGER.info("Click on workload tab");
-                WaitExecuter waitExecuter = new WaitExecuter(driver);
-                // Click on workload tab
-                MouseActions.clickOnElement(driver, workloadPageObject.workloadTab);
-                // Click on workload dropdown
-                MouseActions.clickOnElement(driver, workloadPageObject.workloadDropdownOptionsButton);
-                // Selecting the Memory Hours
-                waitExecuter.sleep(3000);
-                MouseActions.clickOnElement(driver, workloadPageObject.workloadDropdownYarn);
-            } catch (NoSuchElementException e) {
-                LOGGER.severe("Class Workload | Method selectByMemoryHours | Exception desc" + e.getMessage());
-                throw (e);
-            }
-        }
-
-
-        /**
-         * Method to Click on workload Impala tab
-         */
-        public void selectByImpala () {
-            try {
-                LOGGER.info("Click on workload tab");
-                WaitExecuter waitExecuter = new WaitExecuter(driver);
-                // Click on workload tab
-                MouseActions.clickOnElement(driver, workloadPageObject.workloadTab);
-                // Click on workload dropdown
-                MouseActions.clickOnElement(driver, workloadPageObject.workloadDropdownOptionsButton);
-                // Selecting the Memory Hours
-                waitExecuter.sleep(3000);
-                MouseActions.clickOnElement(driver, workloadPageObject.workloadDropdownImpala);
-            } catch (NoSuchElementException e) {
-                LOGGER.severe("Class Workload | Method selectByMemoryHours | Exception desc" + e.getMessage());
-                throw (e);
-            }
+            runningWidth += incrementalWidth;
         }
     }
+
+    /* Get list of Users from chargeback table */
+    public List<String> getUsersFromTable() {
+
+        List<WebElement> getAllUsers = workloadPageObject.getUsersFromworkloadTable;
+        List<String> listOfUsers = new ArrayList<String>();
+
+        for (int i = 0; i < getAllUsers.size(); i++) {
+            String indivualUser = getAllUsers.get(i).getText();
+            LOGGER.info("getUsersFromTable: " + indivualUser);
+            listOfUsers.add(indivualUser);
+        }
+        LOGGER.info("List of users from chargeback table" + listOfUsers);
+        return listOfUsers;
+    }
+
+
+    /**
+     * Method to Click on workload tab
+     */
+    public void selectWorkloadTab() {
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        waitExecuter.waitUntilElementClickable(workloadPageObject.workloadTab);
+        MouseActions.clickOnElement(driver, workloadPageObject.workloadTab);
+        waitExecuter.waitUntilPageFullyLoaded();
+    }
+
+
+    public static class ByStatusGraph {
+        public static final String COLOR = "#007fad";
+    }
+}

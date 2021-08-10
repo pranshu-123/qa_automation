@@ -31,18 +31,19 @@ public class TC_CTP_05 extends BaseClass {
         test.assignCategory("Cluster - Workload");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         WorkloadPageObject workloadPageObject = new WorkloadPageObject(driver);
-        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-        waitExecuter.waitUntilElementPresent(topPanelPageObject.workloadTab);
-        waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.waitUntilElementClickable(topPanelPageObject.workloadTab);
-        waitExecuter.sleep(3000);
-        MouseActions.clickOnElement(driver, topPanelPageObject.workloadTab);
         Workload workload = new Workload(driver);
+        workload.selectWorkloadTab();
+        waitExecuter.sleep(2000);
 
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
 
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
+        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilPageFullyLoaded();
+
+        workload.selectWorkloadType("Yarn");
+        waitExecuter.sleep(2000);
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
@@ -52,14 +53,15 @@ public class TC_CTP_05 extends BaseClass {
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.getText().trim());
         waitExecuter.sleep(3000);
-
-        workload.clickOnMonth();
+        workload.selectGroupBy("vCore Hour");
+        test.log(LogStatus.PASS, "Verify View Group By vCore Hour");
+        waitExecuter.waitUntilPageFullyLoaded();
+        workload.selectViewBy("Month");
         test.log(LogStatus.PASS, "Verify View By Month");
-
         waitExecuter.sleep(3000);
 
-        test.log(LogStatus.PASS, "Verify current month selected :"
-                + workloadPageObject.currentmonthHeader.getText());
+        test.log(LogStatus.PASS, "Verify Workload in selected time range :"
+                + workloadPageObject.timerangeMessageElement.getText().trim());
         waitExecuter.sleep(1000);
 
         datePicker.clickOnDatePicker();
@@ -70,8 +72,12 @@ public class TC_CTP_05 extends BaseClass {
                 + workloadPageObject.timerangeMessageElement.getText().trim());
         waitExecuter.sleep(3000);
 
-        workload.clickOnDay();
-        test.log(LogStatus.PASS, "Verify View By Day ");
+
+        workload.selectGroupBy("vCore Hour");
+        test.log(LogStatus.PASS, "Verify View Group By vCore Hour");
+        waitExecuter.waitUntilPageFullyLoaded();
+        workload.selectViewBy("Day");
+        test.log(LogStatus.PASS, "Verify View By Month");
         waitExecuter.sleep(3000);
 
 
@@ -83,9 +89,11 @@ public class TC_CTP_05 extends BaseClass {
                 + workloadPageObject.timerangeMessageElement.getText().trim());
         waitExecuter.sleep(3000);
 
-        workload.clickOnHour();
-        test.log(LogStatus.PASS, "Verify View By Hour ");
-
+        workload.selectGroupBy("vCore Hour");
+        test.log(LogStatus.PASS, "Verify View Group By vCore Hour");
+        waitExecuter.waitUntilPageFullyLoaded();
+        workload.selectViewBy("Hour");
+        test.log(LogStatus.PASS, "Verify View By Month");
         waitExecuter.sleep(3000);
 
 
@@ -97,16 +105,12 @@ public class TC_CTP_05 extends BaseClass {
                 + workloadPageObject.timerangeMessageElement.getText().trim());
         waitExecuter.sleep(3000);
 
-        if (workload.clickOnHourDay())
-        {
-            test.log(LogStatus.PASS, "verify the Group by dept table");
-
+        workload.selectGroupBy("vCore Hour");
+        test.log(LogStatus.PASS, "Verify View Group By vCore Hour");
+        waitExecuter.waitUntilPageFullyLoaded();
+        workload.selectViewBy("Hour/Day");
+        test.log(LogStatus.PASS, "Verify View By Month");
         waitExecuter.sleep(3000);
-        test.log(LogStatus.PASS, "Verify View By Hour/Day");
-        }
-        else{
-            test.log(LogStatus.FAIL, "Test Failed the Group by dept table");
-        }
 
         test.log(LogStatus.PASS, "Verify report should be generated as per selected view by filter");
     }

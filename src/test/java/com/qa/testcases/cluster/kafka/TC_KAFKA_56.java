@@ -28,7 +28,7 @@ public class TC_KAFKA_56 extends BaseClass {
     KafkaPage kafkaPage = new KafkaPage(driver);
     KafkaPageObject kafkaPageObject = new KafkaPageObject(driver);
 
-    kafkaPage.navigateToBrokerTab(kafkaPageObject);
+    kafkaPage.navigateToBrokerTab(kafkaPageObject, clusterId);
     kafkaPage.verifyKafkaKPIGraphs(kafkaPageObject,"# Offline Partition Count","kafkaGraph9");
     test.log(LogStatus.PASS, "Verified '# Offline Partition Count' details under broker tab for" +
         " selected broker successfully ");

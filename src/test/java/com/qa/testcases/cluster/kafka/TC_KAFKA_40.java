@@ -32,7 +32,7 @@ public class TC_KAFKA_40 extends BaseClass {
     KafkaPageObject kafkaPageObject = new KafkaPageObject(driver);
 
     // Navigate to Kafka tab and then to broker tab
-    kafkaPage.navigateToBrokerTab(kafkaPageObject);
+    kafkaPage.navigateToBrokerTab(kafkaPageObject, clusterId);
     Assert.assertTrue(kafkaPageObject.componentDashboard.isDisplayed(),"The components in broker tab are " +
         "not displayed on the UI");
     test.log(LogStatus.PASS, "Verified broker tab successfully ");

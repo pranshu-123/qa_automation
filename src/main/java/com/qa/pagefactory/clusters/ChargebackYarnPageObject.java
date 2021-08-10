@@ -11,13 +11,16 @@ public class ChargebackYarnPageObject {
     @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Chargeback'])")
     public WebElement clusterChargeBackTab;
 
-    @FindBy(css = "a.dropbtn.pointer")
-    public WebElement chargeBackDropdownOptionsButton;
+    @FindBy(xpath = ".select-chargback-type ~ .select2 .selection .select2-selection__arrow")
+    public List<WebElement> chargeBackDropdownsButton;
 
-    @FindBy(xpath = "//a[contains(text(),'Yarn')]")
-    public WebElement chargeBackDropdownYarnOption;
+    @FindBy(css=".select-chargback-type ~ .select2 .selection .select2-selection__arrow")
+    public WebElement yarnDropdownOption;
 
-    @FindBy(tagName = "h1")
+    @FindBy(xpath="//span[@class='select2-results']//li")
+    public List<WebElement> selectType;
+
+    @FindBy(xpath = "//label[normalize-space()='Chargeback Type']")
     public WebElement chargeBackPageHeading;
 
     @FindBy(id = "chargebackvcore")
@@ -26,7 +29,7 @@ public class ChargebackYarnPageObject {
     @FindBy(id = "chargebackmemory")
     public WebElement setChargebackMemoryPerHour;
 
-    @FindBy(xpath = "//div/button[@class='applybtn']")
+    @FindBy(css = ".btn-apply")
     public WebElement applyButton;
 
     @FindBy(xpath = "//span[contains(@class, 'select2-selection__arrow')]")

@@ -18,11 +18,8 @@ public class WorkloadPageObject {
     @FindBy(xpath = "//ul[contains(concat(' ', @class, ' '), 'select2-results__options')]/li")
     public List<WebElement> clusterList;
 
-    @FindBy(xpath = "(//span[contains(.,'Workload')])[1]")
+    @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Workload'])")
     public WebElement workloadTab;
-
-    @FindBy(css = "a.dropbtn.pointer")
-    public WebElement workloadDropdownOptionsButton;
 
     @FindBy(xpath = "//a[contains(text(),'vCore Hours')]")
     public WebElement workloadDropdownvCoreHours;
@@ -48,8 +45,29 @@ public class WorkloadPageObject {
     @FindBy(css = "div#cluster-workload b:nth-child(3)")
     public WebElement timerangeMessageElement;
 
-    @FindBy(xpath = "//h3[contains(text(),'datewise')]")
+    @FindBy(css = "body div b:nth-child(3)")
     public WebElement currentmonthHeader;
+
+    @FindBy(css=".select-workload-type~.select2 .selection .select2-selection__arrow")
+    public WebElement workloadDropdownOption;
+
+    @FindBy(css = ".select-view-by~ .select2 .selection .select2-selection__arrow")
+    public WebElement selectViewBy;
+
+    @FindBy(css = ".select-aggregate-by ~ .select2 .selection .select2-selection__arrow")
+    public WebElement aggregateBy;
+
+    @FindBy(xpath = "//div[@class='pull-right']//span[@role='presentation']")
+    public WebElement selectGroupBy;
+
+    @FindBy(xpath = "//span[@class='select2-results']//li")
+    public List<WebElement> selectDropdown;
+
+    @FindBy(xpath="//input[@role='searchbox']")
+    public WebElement clusterSearchBox;
+
+    @FindBy(xpath="//span[@class='select2-results']//li")
+    public WebElement clusterSearchFirstField;
 
     @FindBy(xpath = "//*[@class='close pointer']")
     public WebElement loadWinClose;
@@ -114,11 +132,8 @@ public class WorkloadPageObject {
     @FindBy(xpath = "//*[@id=\"kindTable\"]/div[1]")
     public WebElement jobtableHeader;
 
-    @FindBy(xpath = "//b[contains(text(),'05')]")
+    @FindBy(css = "body div b:nth-child(3)")
     public WebElement timeRange;
-
-
-
 
     public WorkloadPageObject(WebDriver driver) {
         PageFactory.initElements(driver, this);

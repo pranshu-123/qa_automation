@@ -535,7 +535,7 @@ public class HBasePage {
         clickOnRegionSvrTable(HbaseRegionSvrTableColumn.REGION_COUNT);
         logger.info("Click on Region Server 'Region Count' column.");
         Boolean isDataSortedForRegionSvrRegionCnt = isRegionSvrTablesDataSorted(
-                HbaseRegionSvrTableColumn.REGION_COUNT, true);
+                HbaseRegionSvrTableColumn.REGION_COUNT, false);
         Assert.assertTrue(isDataSortedForRegionSvrRegionCnt, "Region Server Read Request Count Data is not sorted.");
         waitExecuter.sleep(2000);
     }

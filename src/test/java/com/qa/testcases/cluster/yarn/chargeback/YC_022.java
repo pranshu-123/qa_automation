@@ -19,10 +19,6 @@ public class YC_022 extends BaseClass {
     /**
      * Verify User is able to access Yarn chargeback page and Verify the cost edit fields
      */
-    private WaitExecuter waitExecuter;
-    private ChargeBackYarn ChargeBackYarn;
-    private ChargebackYarnPageObject chargebackYarnPageObject;
-    private DatePicker picker;
 
     @Test(dataProvider = "clusterid-data-provider",description="P0-Verify the cost edit fields on the yarn chargeback page")
     public void YC_022_Verifythecosteditfields(String clusterId) {
@@ -32,8 +28,8 @@ public class YC_022 extends BaseClass {
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         ChargeBackYarn chargeBackYarn = new ChargeBackYarn(driver);
-        ChargeBackYarn = new ChargeBackYarn(driver);
-        picker = new DatePicker(driver);
+        ChargebackYarnPageObject chargebackYarnPageObject=new ChargebackYarnPageObject(driver);
+        DatePicker picker = new DatePicker(driver);
         chargeBackYarn.selectYarnChargeback();
         waitExecuter.sleep(2000);
 

@@ -39,7 +39,7 @@ public class WorkloadFitPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
     public WebElement failedErrorMessage;
 
-    @FindBy(xpath = "//span[contains(text(),'Get HeatMap View')]")
+    @FindBy(xpath = "//span[contains(text(),' HeatMap View')]")
     public WebElement generateHeatMap;
 
     @FindBy(xpath = "//a[contains(text(),'Edit')]")

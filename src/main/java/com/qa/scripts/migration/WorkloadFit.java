@@ -167,6 +167,7 @@ public class WorkloadFit {
 
     /* Select type of heat map */
     public void selectHeatMapTypeFromDropdown(String type) {
+        waitExecuter.waitUntilElementClickable(fitPageObject.heatMapDropdown);
         Select select = new Select(fitPageObject.heatMapDropdown);
         select.selectByValue(type);
         waitExecuter.waitUntilElementClickable(fitPageObject.generateHeatMap);

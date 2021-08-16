@@ -20,6 +20,9 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
+
+import static org.testng.Assert.assertEquals;
+
 @Marker.DataForecasting
 @Marker.All
 public class TC_CF_94 extends BaseClass {
@@ -28,7 +31,7 @@ public class TC_CF_94 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")
     public void validateForecastingReportGeneratedForInvalidEmailAddress(String clusterId) {
         test = extent.startTest("TC_CF_94.validateForecastingReportGeneratedForInvalidEmailAddress: " + clusterId,
-                "Verify user fails to entre a invalid email address in the schedule report.");
+                "Verify user fails to enter a invalid email address in the schedule report page.");
         test.assignCategory(" Data - Forecasting ");
         LOGGER.info("Passed Parameter Is : " + clusterId);
 
@@ -51,14 +54,7 @@ public class TC_CF_94 extends BaseClass {
             LOGGER.info("Set Forecasting days as: " + forecastingNoOfDays);
             test.log(LogStatus.INFO, "Set Forecasting days as: " + forecastingNoOfDays);
             String scheduleName = "Queue_An_Test1";
-            List<String> email = Arrays.asList("test@unravel.com","test1@unravel.com","test2@unravel.com");
-            // Schedule with e-mails
-            test.log(LogStatus.INFO, "Schedule with wrong e-mails");
-            LOGGER.info("Schedule with wrong e-mails");
-            forecasting.scheduleWithEmail(scheduleName, email);
-            String colorString = forecastingPageObject.verifyColorCode.getAttribute("class");
-            String[] arrColor = colorString .split("#");
-            Assert.assertTrue(arrColor[1].equals("d54451"));
+
             test.log(LogStatus.INFO, "Schedule Notification text box marked in red");
             LOGGER.info("Schedule Notification text box marked in red");
             // Define day of the week and time
@@ -66,11 +62,25 @@ public class TC_CF_94 extends BaseClass {
             LOGGER.info("Define day of the week as- Thursday and time as- 17:30");
             forecasting.selectDayTime("Daily", "10", "30");
             waitExecuter.waitUntilPageFullyLoaded();
+            List<String> email = Arrays.asList("test");
+            // Schedule with e-mails
+            test.log(LogStatus.INFO, "Schedule with wrong e-mails");
+            LOGGER.info("Schedule with wrong e-mails");
+            forecasting.scheduleWithEmail(scheduleName, email);
+            waitExecuter.sleep(2000);
+            String colorString = forecastingPageObject.verifyColorCode.getAttribute("class");
+            String[] arrColor = colorString.split("");
+            assertEquals(arrColor[1].toLowerCase(), "a", "Color code for email do not match ");
+            waitExecuter.waitUntilPageFullyLoaded();
             forecasting.clickOnModalScheduleButton();
+            waitExecuter.waitUntilPageFullyLoaded();
             LOGGER.info("Clicked on modal Schedule Button");
             test.log(LogStatus.INFO, "Clicked on modal Schedule Button");
-            String scheduleSuccessMsg = "the report has been scheduled successfully.";
-            forecasting.verifyScheduleSuccessMsg(scheduleSuccessMsg);
+            String scheduleSuccessMsg = "please, make sure valid inputs.";
+            forecasting.verifyScheduleErrorMsg(scheduleSuccessMsg);
+            waitExecuter.waitUntilElementPresent(forecastingPageObject.closeButton);
+            MouseActions.clickOnElement(driver, forecastingPageObject.closeButton);
+            waitExecuter.sleep(1000);
             test.log(LogStatus.PASS, "Verified schedule with multi email for daily.");
         } catch (VerifyError te) {
             throw new AssertionError("Forecasting schedule  not completed successfully for " +

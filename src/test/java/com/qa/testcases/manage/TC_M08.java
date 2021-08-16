@@ -61,11 +61,14 @@ public class TC_M08 extends BaseClass {
         logger.info("Verified Run Diagnostics Tab.");
 
         manage.clickOnLoadLatestDiagnostics();
-        waitExecuter.sleep(3000);
+        waitExecuter.sleep(7000);
+        waitExecuter.waitUntilElementClickable(managePageObject.resetButton);
         test.log(LogStatus.INFO, "Clicked on Load Latest Diagnostics Button.");
         logger.info("Clicked on Load Latest Diagnostics Button.");
 
         try{
+            waitExecuter.waitUntilElementClickable(managePageObject.resetButton);
+            waitExecuter.sleep(8000);
             waitExecuter.waitUntilElementPresent(managePageObject.latestDiagnosticsContentHeader);
             waitExecuter.waitUntilTextToBeInWebElement(managePageObject.latestDiagnosticsContentHeader, "Diagnostics Log");
             waitExecuter.sleep(10000);
@@ -74,6 +77,7 @@ public class TC_M08 extends BaseClass {
             waitExecuter.sleep(8000);
             Assert.assertTrue(managePageObject.latestDiagnosticsContentHeader.isDisplayed(),"Diagnostics Log " +
                     "content not found.");
+            waitExecuter.waitUntilElementClickable(managePageObject.resetButton);
             waitExecuter.sleep(9000);
         }catch (Exception e){
             e.printStackTrace();
@@ -81,6 +85,7 @@ public class TC_M08 extends BaseClass {
             logger.info("Verified Latest Diagnostics Header and Time Stamp not found. ");
             Assert.assertTrue(false, "Latest Diagnostics Header and Time Stamp not found.");
         }
+        waitExecuter.waitUntilElementClickable(managePageObject.resetButton);
         Assert.assertTrue(manage.verifyLoadLatestDiagnosticsHeaderAndTimeStamp(),"Unable to get Latest " +
                 "Diagnostics Log.");
         test.log(LogStatus.INFO, "Verified Latest Diagnostics Header and Time Stamp.");

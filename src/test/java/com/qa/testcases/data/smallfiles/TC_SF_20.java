@@ -51,6 +51,7 @@ public class TC_SF_20 extends BaseClass {
         waitExecuter.waitUntilPageFullyLoaded();
         userActions.performActionWithPolling(smallfilesPageObject.modalRunButton, UserAction.CLICK);
         waitExecuter.sleep(8000);
+        waitExecuter.waitUntilElementClickable(smallfilesPageObject.smallFilesTab);
         logger.info("Clicked on Modal Run Button");
         test.log(LogStatus.INFO, "Clicked on Modal Run Button");
 
@@ -58,6 +59,7 @@ public class TC_SF_20 extends BaseClass {
         waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.verifyReport,
                 "Currently, the Small file Report report is being generated");
         waitExecuter.sleep(2000);
+        waitExecuter.waitUntilElementClickable(smallfilesPageObject.smallFilesTab);
         Assert.assertEquals(smallfilesPageObject.verifyReport.getText(), "Currently, the Small file Report report is being generated, so no other action can be performed at this time. Please wait for the running task to complete",
                 " Currently, the Small file Report report is not being generated..");
         waitExecuter.sleep(2000);

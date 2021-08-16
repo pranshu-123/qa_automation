@@ -63,6 +63,9 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "(//*[@class='col-md-2']//input)")
   public WebElement reportSearchBox;
 
+  @FindBy(xpath = "//span[text()='Archived']")
+  public WebElement resetButton;
+
   @FindBy(xpath = "(//*[contains(@class,'col-md-2')]//input)")
   public WebElement scheduleReportSearchBox;
 

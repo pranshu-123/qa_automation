@@ -70,6 +70,9 @@ public class ManagePageObject {
     @FindBy(xpath = "//ul[@class='diagnostic-ul']/li[contains(text(),'Load Latest Diagnostics')]")
     public WebElement  loadLatestDiagnosticsBtn;
 
+    @FindBy(xpath = "(//span[contains(text(),'Run Diagnostics')])")
+    public WebElement resetButton;
+
     @FindBy(css = ".diagnostic-cnt")
     public WebElement latestDiagnosticsContent;
 

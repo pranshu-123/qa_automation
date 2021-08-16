@@ -58,7 +58,7 @@ public class TC_CF_03 extends BaseClass {
             LOGGER.info("Clicked on Run Button");
             test.log(LogStatus.INFO, "Clicked on Run Button");
             datePicker.clickOnDatePicker();
-            waitExecuter.sleep(1000);
+            waitExecuter.sleep(3000);
             WebElement datePickerElement = datePickerPageObject.dateRangeOptions.get(i);
             String datePickerOption = datePickerElement.getText();
             if (datePickerElement.getText().equalsIgnoreCase("Custom Range")) {
@@ -97,7 +97,7 @@ public class TC_CF_03 extends BaseClass {
             }
             waitExecuter.waitUntilElementPresent(forecastingPageObject.runButton);
             forecasting.closeConfirmationMessageNotification();
-            waitExecuter.sleep(3000);
+            waitExecuter.sleep(7000);
         }
     }
 }

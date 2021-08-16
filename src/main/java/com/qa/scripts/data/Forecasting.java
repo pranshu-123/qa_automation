@@ -209,6 +209,13 @@ public class Forecasting {
                 "The Schedule success " + "message mismatch");
     }
 
+    /* Validate success message on report creation */
+    public void verifyScheduleErrorMsg(String successMsg) {
+        waitExecuter.waitUntilElementPresent(forecastingPageObject.scheduleErrorMsg);
+        Assert.assertEquals(forecastingPageObject.scheduleErrorMsg.getText().toLowerCase(), successMsg,
+                "The Schedule success " + "message mismatch");
+    }
+
     public List<String> getAllHistoryRanges() {
 
         clickOnHistoryDateRange();

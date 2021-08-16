@@ -19,6 +19,9 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//a[@href='#/clusters/overview']")
     public WebElement homeTab;
 
+    @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Small Files'])")
+    public WebElement smallFilesTab;
+
     @FindBy(xpath = "(//span[contains(text(),'Schedule')])")
     public WebElement SheduleButton;
 

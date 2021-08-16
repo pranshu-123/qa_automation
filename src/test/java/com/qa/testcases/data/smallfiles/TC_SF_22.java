@@ -33,6 +33,7 @@ public class TC_SF_22 extends BaseClass {
         SmallfilesPageObject smallfilesPageObject = new SmallfilesPageObject(driver);
         Smallfiles smallfiles = new Smallfiles(driver);
         smallfiles.commonPanelTabValidation(test, logger);
+        waitExecuter.waitUntilPageFullyLoaded();
         smallfiles.closeConfirmationMessageNotification();
         smallfiles.clickOnRunButton();
         logger.info("Clicked on Run Button");
@@ -67,11 +68,13 @@ public class TC_SF_22 extends BaseClass {
             waitExecuter.waitUntilElementPresent(smallfilesPageObject.confirmationMessageElement);
             waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
                     "Small file Report completed successfully.");
+            waitExecuter.waitUntilElementClickable(smallfilesPageObject.smallFilesTab);
             waitExecuter.sleep(3000);
             test.log(LogStatus.PASS, "Verified smallfiles report is loaded properly.");
             logger.info("Verified smallfiles report is loaded properly");
             waitExecuter.waitUntilElementPresent(smallfilesPageObject.verifyAbsoluteSize);
             String heading = smallfilesPageObject.verifyAbsoluteSize.getText();
+            waitExecuter.waitUntilElementClickable(smallfilesPageObject.smallFilesTab);
             waitExecuter.sleep(3000);
             test.log(LogStatus.PASS, "Verified the absolute size  poulated :" + heading);
         } catch (TimeoutException te) {

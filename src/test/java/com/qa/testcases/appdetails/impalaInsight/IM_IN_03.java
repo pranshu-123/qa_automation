@@ -60,6 +60,7 @@ public class IM_IN_03 extends BaseClass {
             loggingUtils.info("Search for appId", test);
             appDetailsPage.selectEventFilter(ImpalaEventTypes.SQLNonPartitionedTableEvent);
             appDetailsPage.clickOnFirstInefficientJob();
+            waitExecuter.waitUntilPageFullyLoaded();
             List<String> titles = appDetailsPage.getEfficiencyTags();
             loggingUtils.info("Titles on page - " + titles, test);
             loggingUtils.info("Expected title on page - " + PageConstants.EventTypes.SQLNonPartitionedTableEvent, test);

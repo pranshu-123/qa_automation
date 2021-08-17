@@ -168,7 +168,7 @@ public class AppDetailsPageObject {
     @FindBy(xpath = "(//h3[contains(@class,'expandable-header')])[2]/following-sibling::div[contains(@class,'filter-items')]//label//span[contains(@class,'show-only')]")
     public List<WebElement> eventTypeShowOnly;
 
-    @FindBy(xpath = "//div[@class='component-tabs-primary']//li/a[normalize-space(text()) = 'Analysis']")
+    @FindBy(xpath = "//a[normalize-space()='Analysis']")
     public WebElement impalaAnalysisTab;
 
     @FindBy(xpath = "//div[@class='status-title']//span[@class='title']")

@@ -2,6 +2,7 @@ package com.qa.testcases.appdetails.spark;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.SparkAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
@@ -12,6 +13,7 @@ import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
@@ -47,6 +49,7 @@ public class TC_spark_220 extends BaseClass {
         SparkAppsDetailsPageObject sparkPageObj = new SparkAppsDetailsPageObject(driver);
         DatePicker datePicker = new DatePicker(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
+        UserActions userActions = new UserActions(driver);
         SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);
         AllApps allApps = new AllApps(driver);
 
@@ -64,9 +67,9 @@ public class TC_spark_220 extends BaseClass {
         if (appCount > 0) {
             appsDetailsPage.navigateToFailedAppsAppPage(applicationsPageObject, sparkPageObj, test, false);
             test.log(LogStatus.PASS, "The Failed apps have all kpis listed along with attempt data ");
-            //Close apps details page
-            MouseActions.clickOnElement(driver, sparkPageObj.closeAppsPageTab);
         } else {
+            //Close apps details page
+            userActions.performActionWithPolling(sparkPageObj.closeAppsPageTab, UserAction.CLICK);
             test.log(LogStatus.SKIP, "No Spark Application present");
             logger.error("No Spark Application present in the " + clusterId + " cluster for the time span " +
                 "of 90 days");

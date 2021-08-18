@@ -65,8 +65,14 @@ public class ForecastingPageObject {
     @FindBy(xpath = "//div[@class='task-runner-ht']/section/span[1]")
     public WebElement scheduleSuccessMsg;
 
+    @FindBy(xpath = "//section[contains(@class,'component-message-banner R')]//span[1]")
+    public WebElement scheduleErrorMsg;
+
     @FindBy(xpath = "//input[@placeholder='Email']")
     public WebElement verifyColorCode;
+
+    @FindBy(xpath = "//div[@class='close pointer']")
+    public WebElement closeButton;
 
     @FindBy(xpath = "//select[contains(@class,'schedule-days')]")
     public WebElement scheduleDays;

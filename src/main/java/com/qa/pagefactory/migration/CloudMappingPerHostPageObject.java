@@ -29,7 +29,6 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//span[@class='select2-selection__arrow']")
   public List<WebElement> dropDownBtn;
 
-  //@FindBy(xpath = "//div[@class='col-md-4']//span[contains(@class,'select2-selection__arrow')]")
   @FindBy(xpath = "//div[contains(@class,'task_runner')]//select")
   public List<WebElement> cloudProductDropDown;
 

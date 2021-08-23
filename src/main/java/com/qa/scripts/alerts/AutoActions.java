@@ -66,10 +66,10 @@ public class AutoActions {
 
     public boolean validateNewAutoActionPolicyPageDisplayed(){
         waitExecuter.sleep(1000);
-        waitExecuter.waitUntilUrlContains("/alerts/autoaction/add");
+        waitExecuter.waitUntilUrlContains("/autoactions/add");
         waitExecuter.sleep(1000);
         waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.newAutoActionPolicyHeader);
-        if(newAutoActionPolicyPageObject.newAutoActionPolicyHeader.getText().equals("New Auto Action Policy")){
+        if(newAutoActionPolicyPageObject.newAutoActionPolicyHeader.getText().equals("New AutoAction Policy")){
             return true;
         }
         return false;
@@ -349,7 +349,7 @@ public class AutoActions {
         waitExecuter.sleep(1000);
         waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.allUserChkBox);
         if(newAutoActionPolicyPageObject.allUserChkBox.isSelected()){
-           return true;
+            return true;
         }
         return false;
     }

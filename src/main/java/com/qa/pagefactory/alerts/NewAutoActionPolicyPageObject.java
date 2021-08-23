@@ -74,7 +74,7 @@ public class NewAutoActionPolicyPageObject {
     @FindBy(xpath = "(//div[contains(@class,'dropdown-content')])[2]/a")
     public List<WebElement> selectRefineScopeList;
 
-    @FindBy(xpath = "//div[contains(@class,'mode-div')]/div/div/span[text()='all']/parent::div/preceding-sibling::div/label/span")
+    @FindBy(xpath = "(//a[contains(text(),'all')])[2]")
     public WebElement allUserChkBox;
 
     @FindBy(xpath = "//div[contains(@class,'mode-div')]/div/div/span[text()='only']/parent::div/preceding-sibling::div/label/span")

@@ -18,7 +18,8 @@ public class AutoActionsPageObject {
     @FindBy(xpath = "//span[contains(@class,'icon-alerts')]/parent::h4/following-sibling::ul/li/span")
     public WebElement autoActionsHeaderLink;
 
-    @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Auto Actions'])")
+    //@FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Auto Actions'])")
+    @FindBy(xpath = "//ul[contains(@class,'primary-links')]//li[5]//span")
     public  WebElement autoActionComponentHeader;
 
     @FindBy(xpath = "//div[contains(@class,'component-section-header')]/div/span[2]/a")
@@ -27,7 +28,8 @@ public class AutoActionsPageObject {
     @FindBy (xpath = "//table[@id = 'aa-list-table']/tbody/tr/td[1]")
     public List<WebElement> firstColumnElementsAATable;
 
-    @FindBy (xpath = "//div[@class='container-fluid']/section/span")
+    //@FindBy (xpath = "//div[@class='container-fluid']/section/span")
+    @FindBy (xpath = "//section//div")
     public WebElement messageBanner;
 
     @FindBy(xpath = "//table[@id='aa-list-table']/thead/tr/th[6]")

@@ -17,7 +17,7 @@ public class NewAutoActionPolicyPageObject {
     @FindBy(xpath="//div[contains(@class,'auto-action-head')]/h2")
     public WebElement newAutoActionPolicyHeader;
 
-    @FindBy(xpath = "//div[contains(@class,'auto-action-head')]/div")
+    @FindBy(xpath = "//button[contains(@class,'close')]")
     public WebElement closeNewAutoAction;
 
     @FindBy(xpath = "(//div/div/label)[1]/following-sibling::input")
@@ -62,13 +62,13 @@ public class NewAutoActionPolicyPageObject {
     @FindBy (xpath = "//button[contains(text(),'Save')]")
     public WebElement saveBtn;
 
-    @FindBy(xpath = "//div[@class='container-fluid']/section/span")
+    @FindBy(xpath = "//section[contains(@class,'component-message-banner')]//div")
     public WebElement messageBanner;
 
     @FindBy(xpath = "//div[@class='component-activity-feed']/div/div[2]")
     public WebElement iconX_RefineScope;
 
-    @FindBy(xpath = "(//div[contains(@class,'autoaction-icon-drop')])[2]/b/span[1]")
+    @FindBy(xpath = "//button[contains(@id,'scope-dropdown')]")
     public WebElement refineScopeBtn;
 
     @FindBy(xpath = "(//div[contains(@class,'dropdown-content')])[2]/a")

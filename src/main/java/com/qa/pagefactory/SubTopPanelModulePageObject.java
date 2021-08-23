@@ -29,16 +29,16 @@ public class SubTopPanelModulePageObject {
     @FindBy(xpath = "//span[contains(@class,'icon-alerts')]")
     public WebElement alerts;
 
-    @FindBy(xpath = "//span[contains(@class,'icon-gear')]")
+    @FindBy(xpath = "//span[contains(text(),'Manage')]")
     public WebElement gear;
 
     @FindBy(xpath = "//li/a[text()='About']")
     public WebElement aboutInfo;
 
-    @FindBy(xpath = "//div[@class='modal-body']//div[2]")
+    @FindBy(xpath = "//div[@class='modal-body scrollbar-s']//div[2]")
     public WebElement versionInfo;
 
-    @FindBy(xpath = "//div[@class='close pointer']")
+    @FindBy(xpath = "//a[contains(text(),'Close')]")
     public WebElement closeAboutWindow;
 
     @FindBy(xpath = "//li[contains(@class,'active')]//span[contains(text(),'Pipelines')]")

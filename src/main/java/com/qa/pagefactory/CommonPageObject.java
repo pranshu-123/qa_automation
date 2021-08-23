@@ -36,7 +36,7 @@ public class CommonPageObject {
   @FindBy(xpath = "//div[contains(@class,'close pointer')]")
   public List<WebElement> closeModalButton;
 
-  @FindBy(xpath = "//div[contains(@class,'close')]")
+  @FindBy(xpath = "//button[contains(@class,'close')]")
   public List<WebElement> closeAppModalButton;
 
   @FindBy(id = "apps-global-search-filter")

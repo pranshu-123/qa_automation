@@ -28,7 +28,7 @@ public class TC_AA110 extends BaseClass {
 
         //Validate Auto Actions header default
         String aaHeader = aa.getAutoActionsHeader();
-        Assert.assertEquals(aaHeader, "Auto Actions", "Auto Actions Header not matched.");
+        Assert.assertEquals(aaHeader, "AutoActions", "Auto Actions Header not matched.");
         test.log(LogStatus.INFO, "Verified Auto Actions Header.");
         logger.info("Auto Actions Header found and matched");
 
@@ -43,7 +43,7 @@ public class TC_AA110 extends BaseClass {
         test.log(LogStatus.INFO,"Click on save button");
         logger.info("Filled New Auto Action Policy details, without value and clicked on save button");
 
-        Assert.assertTrue(aa.validateBannerForNoValue(), "Error message is invalid, when no value is entered " +
+        Assert.assertTrue(aa.   validateBannerForNoValue(), "Error message is invalid, when no value is entered " +
                 "for the metric");
         //Check policy is not get added for withoutvalue
         Assert.assertFalse(aa.validateAutoActionAdded(policyName), "Policy: " +

@@ -273,13 +273,13 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "//*[@class='popover-body']/ul/li/h4")
   public List<WebElement> loadActionList;
 
-  @FindBy(xpath = "//*[@class='modal-body']")
+  @FindBy(xpath = "//*[@class='modal-body scrollbar-s']")
   public WebElement loadDiagnosticWin;
 
   @FindBy(xpath = "(//div[contains(@class,'modal-sec-head')])/h2")
   public WebElement loadDiagnosticWinHeader;
 
-  @FindBy(xpath = "//*[@class='close pointer']")
+  @FindBy(xpath = "//button[@class='close']")
   public WebElement loadWinClose;
 
   @FindBy(xpath ="//div[@class='modal-body']//p/br")

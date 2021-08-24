@@ -61,7 +61,7 @@ public class TC_CO_17 extends BaseClass {
 
         //TBD check for Alerts: Should display all the auto action alerts that is violated.
         HomePageObject hpo = new HomePageObject(driver);
-        Assert.assertEquals(hpo.alertsText.getText(), "Alerts","Alerts not displayed.");
+        Assert.assertEquals(hpo.alertsText.getText(), "AutoActions","Alerts not displayed.");
 
         //Check alert displayed at homepage
         //JavaScriptExecuter.clickOnElement(driver,hpo.firstAlertRow);

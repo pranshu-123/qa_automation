@@ -45,7 +45,6 @@ public class OverviewGraphPageObject {
     @FindBy(xpath = "//div[@id='JobsFinishedByStatus']/div[2]")
     public WebElement statusGraph;
 
-    //@FindBy(xpath = "//*[@id='JobByStatus']/div[2]")
     @FindBy(xpath = "//*[@id='job-by-status']/div[2]")
     public WebElement runningGraph;
 

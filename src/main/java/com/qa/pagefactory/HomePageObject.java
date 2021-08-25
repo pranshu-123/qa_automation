@@ -80,10 +80,10 @@ public class HomePageObject {
   @FindBy(xpath = "//div[@class='clearfix']/table//td/p")
   public WebElement noRecentAlertsText;
 
-  @FindBy(xpath = "//a[@href='#/alerts/autoaction']")
+  @FindBy(xpath = "//a[@href='#/autoactions']")
   public WebElement autoalert;
 
-  @FindBy(xpath = "//a[@href='#/alerts/autoaction/add']")
+  @FindBy(xpath = "//a[@href='#/autoactions/add']")
   public WebElement newautoalert;
 
   @FindBy(xpath = "//div[@graph-id='NodesTS']//a[@class='menu']")
@@ -104,7 +104,7 @@ public class HomePageObject {
   @FindBy(xpath = "//h4[contains(text(),'Memory')]/following-sibling::div[1]/div/ul/li/a")
   public List<WebElement> listmemoryGraphDownloadMenu;
 
-  @FindBy(xpath ="//div[@graph-id='JobByStatus']//a[@class='menu']")
+  @FindBy(xpath ="//div[@graph-id='job-by-status']//a[@class='menu']")
   public WebElement runningGraphDownloadMenu;
 
   @FindBy(xpath = "//h4[contains(text(),'By State')]/following-sibling::div[1]/div/ul/li/a")

@@ -80,11 +80,10 @@ public class HomePageObject {
   @FindBy(xpath = "//div[@class='clearfix']/table//td/p")
   public WebElement noRecentAlertsText;
 
-  //@FindBy(xpath = "//a[@href='#/alerts/autoaction']")
-  @FindBy(xpath = "(//section[@class='component-activity-feed start-feed'])[1]")
+  @FindBy(xpath = "//a[@href='#/autoactions']")
   public WebElement autoalert;
 
-  @FindBy(xpath = "//a[@href='#/alerts/autoaction/add']")
+  @FindBy(xpath = "//a[@href='#/autoactions/add']")
   public WebElement newautoalert;
 
   @FindBy(xpath = "//div[@graph-id='NodesTS']//a[@class='menu']")

@@ -36,7 +36,7 @@ public class TC_AA96 extends BaseClass {
         AutoActions aa = new AutoActions(driver);
         //Validate Auto Actions header default
         String aaHeader = aa.getAutoActionsHeader();
-        Assert.assertEquals(aaHeader, "Auto Actions", "Auto Actions Header not matched.");
+        Assert.assertEquals(aaHeader, "AutoActions", "Auto Actions Header not matched.");
         test.log(LogStatus.INFO, "Verified Auto Actions Header.");
         logger.info("Auto Actions Header found and matched");
 

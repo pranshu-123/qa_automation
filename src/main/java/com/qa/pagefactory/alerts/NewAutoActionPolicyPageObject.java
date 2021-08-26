@@ -31,10 +31,10 @@ public class NewAutoActionPolicyPageObject {
     @FindBy (xpath = "//button[contains(@id,'trigger-dropdown')]//span[2]")
     public WebElement triggerConditionsBtn;
 
-    @FindBy(xpath="//div[@class='container-fluid']/div[5]/div/div/b/span[1]")
+    @FindBy (xpath = "//button[contains(@id,'trigger-dropdown')]//span[2]")
     public WebElement triggerConditionsBtn2;
 
-    @FindBy(xpath="//div[contains(@class,'join-row')]/div/div/b/span[1]")
+    @FindBy(xpath="//button[contains(@id,'0')]")
     public WebElement joinTxtBtn;
 
     @FindBy (xpath = "(//div[contains(@class,'dropdown-content')]/a)[1]")
@@ -113,6 +113,9 @@ public class NewAutoActionPolicyPageObject {
     @FindBy(xpath="//input[contains(@placeholder, 'Email')]")
     public WebElement actionEle;
 
+    @FindBy(xpath="//input[contains(@placeholder, 'Add Url')]")
+    public WebElement actionEleToHttpPost;
+
     @FindBy(xpath="//input[contains(@class, 'input-sm') and @placeholder='Add Webhook Url']")
     public WebElement actionElePostToSlack;
 
@@ -131,10 +134,10 @@ public class NewAutoActionPolicyPageObject {
     @FindBy(xpath = "//input[@placeholder='Queue Name']")
     public WebElement queueNameEle;
 
-    @FindBy(xpath="//textarea[contains(@placeholder,'Insert custom action JSON code here...')]")
+    @FindBy(xpath="//div[contains(@class,'kill-app-component')]//span[@class='checkmark']")
     public WebElement killAppChkBoxEle;
 
-    @FindBy(xpath="//section[contains(@class,'bg-fatal')]/span")
+    @FindBy(xpath="//section[contains(@class,'component-message-banner')]//div")
     public WebElement fatalMsgTextEle;
     /**
      * @param driver The driver that will be used to look up the elements

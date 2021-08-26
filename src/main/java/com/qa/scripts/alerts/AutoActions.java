@@ -178,6 +178,7 @@ public class AutoActions {
         for(WebElement actions : webElements){
             if(actions.getText().equals(inputAction)){
                 actions.click();
+                return;
             }
         }
     }

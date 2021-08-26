@@ -71,22 +71,22 @@ public class NewAutoActionPolicyPageObject {
     @FindBy(xpath = "//button[contains(@id,'scope-dropdown')]")
     public WebElement refineScopeBtn;
 
-    @FindBy(xpath = "(//div[contains(@class,'dropdown-content')])[2]/a")
+    @FindBy(xpath = "//button[@id='scope-dropdown']//div//a")
     public List<WebElement> selectRefineScopeList;
 
-    @FindBy(xpath = "(//a[contains(text(),'all')])[2]")
+    @FindBy(xpath = "(//a[contains(text(),'all')])")
     public WebElement allUserChkBox;
 
-    @FindBy(xpath = "//div[contains(@class,'mode-div')]/div/div/span[text()='only']/parent::div/preceding-sibling::div/label/span")
+    @FindBy(xpath = "(//a[contains(text(),'only')])")
     public  WebElement onlyUserChkBox;
 
-    @FindBy(xpath = "//div[contains(@class,'mode-div')]/div/div/span[text()='except']/parent::div/preceding-sibling::div/label/span")
+    @FindBy(xpath = "(//a[contains(text(),'except')])")
     public WebElement exceptUserChkBox;
 
-    @FindBy(xpath = "//div[contains(@class, 'mode-div')]/div/div/span[text()='always']/parent::div/preceding-sibling::div/label/span")
+    @FindBy(xpath = "(//a[contains(text(),'always')])")
     public WebElement alwaysChkBox;
 
-    @FindBy(xpath = "//div[contains(@class, 'mode-div')]/div/div/span[text()='daily']/parent::div/preceding-sibling::div/label/span")
+    @FindBy(xpath = "(//a[contains(text(),'daily')])")
     public WebElement dailyChkBox;
 
     @FindBy(xpath = "(//select[contains(@class, 'component-multi-select')])[1]")
@@ -95,10 +95,10 @@ public class NewAutoActionPolicyPageObject {
     @FindBy(xpath = "(//select[contains(@class, 'component-multi-select')])[2]")
     public WebElement selectMetric;
 
-    @FindBy(xpath = "(//div[contains(@class,'autoaction-action-div')])/div/div/b/span[2]")
+    @FindBy(xpath = "//button[contains(@id,'action-dropdown')]")
     public WebElement actionButton;
 
-    @FindBy(xpath = "(//div[contains(@class,'autoaction-action-div')])/div/div/div/a")
+    @FindBy(xpath = "//button[contains(@id,'action-dropdown')]//div//a")
     public List<WebElement> listOfActions;
 
     @FindBy(xpath = "(//span[contains(@class, 'select2-selection')])[4]/span[2]")
@@ -110,28 +110,28 @@ public class NewAutoActionPolicyPageObject {
     @FindBy(xpath = "//span[contains(@class, 'select2-dropdown')]/span[2]/ul/li")
     public List<WebElement> listOfMetric;
 
-    @FindBy(xpath="//input[contains(@class, 'input-sm')]")
+    @FindBy(xpath="//input[contains(@placeholder, 'Email')]")
     public WebElement actionEle;
 
     @FindBy(xpath="//input[contains(@class, 'input-sm') and @placeholder='Add Webhook Url']")
     public WebElement actionElePostToSlack;
 
-    @FindBy(xpath="//a/span[text()='Add Email']")
+    @FindBy(xpath="//button[contains(text(),'Add Email')]")
     public WebElement addEmailEleBtn;
 
-    @FindBy(xpath="//a/span[text()='Add Url']")
+    @FindBy(xpath="//button[contains(text(),'Add Url')]")
     public WebElement addUrlBtn;
 
-    @FindBy(xpath="//a/span[text()='Add Webhook Url']")
+    @FindBy(xpath="//button[contains(text(),'Add Webhook Url')]")
     public WebElement addWebhookUrlBtn;
 
-    @FindBy(xpath="//div[@class='token-div']/input[@placeholder='Token']")
+    @FindBy(xpath="//div[contains(@class,'token-div')]/input[@placeholder='Token']")
     public WebElement webHookTokenEle;
 
     @FindBy(xpath = "//input[@placeholder='Queue Name']")
     public WebElement queueNameEle;
 
-    @FindBy(xpath="//div[@id='killapp-div']/label[@class='checkbox']")
+    @FindBy(xpath="//textarea[contains(@placeholder,'Insert custom action JSON code here...')]")
     public WebElement killAppChkBoxEle;
 
     @FindBy(xpath="//section[contains(@class,'bg-fatal')]/span")

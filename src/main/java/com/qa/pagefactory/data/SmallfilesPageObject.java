@@ -43,7 +43,7 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//span[contains(text(),'Run New')]/parent::a")
     public WebElement runNowButton;
 
-    @FindBy(xpath = "(//span[contains(text(),'Run')])[2]/parent::a")
+    @FindBy(xpath = "//a[contains(text(),'Run')]")
     public WebElement modalRunButton;
 
     @FindBy(xpath = "//select[contains(@class,'schedule-days')]")

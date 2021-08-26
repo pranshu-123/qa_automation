@@ -209,8 +209,8 @@ public class AutoActions {
         MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.actionButton);
         waitExecuter.sleep(2000);
         selectActions(inputAction);
-        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.actionEle);
-        newAutoActionPolicyPageObject.actionEle.sendKeys(httpPostUrl.toLowerCase());
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.actionEleToHttpPost);
+        newAutoActionPolicyPageObject.actionEleToHttpPost.sendKeys(httpPostUrl.toLowerCase());
         waitExecuter.waitUntilElementClickable(newAutoActionPolicyPageObject.addUrlBtn);
         MouseActions.clickOnElement(driver,newAutoActionPolicyPageObject.addUrlBtn);
     }

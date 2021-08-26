@@ -31,7 +31,7 @@ public class TC_AA102 extends BaseClass {
 
         //Validate Auto Actions header default
         String aaHeader = aa.getAutoActionsHeader();
-        Assert.assertEquals(aaHeader, "AutoActions", "Auto Actions Header not matched.");
+        Assert.assertEquals(aaHeader, "Auto Actions", "Auto Actions Header not matched.");
         test.log(LogStatus.INFO, "Verified Auto Actions Header.");
         logger.info("Auto Actions Header found and matched");
 

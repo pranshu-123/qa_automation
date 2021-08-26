@@ -79,7 +79,7 @@ public class ImpalaPageObject {
     @FindBy(xpath = "//input[contains(@class,'select2-search__field')]")
     public WebElement filterInput;
 
-    @FindBy(xpath = "//span[contains(@class,'select2-results')]/ul/li")
+    @FindBy(xpath = "//span[contains(@id,'select2-jnam-container')]")
     public List<WebElement> filterElements;
 
     @FindBy(xpath = "//div[@id=\"queryGraph\"]//label")

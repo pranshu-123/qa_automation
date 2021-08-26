@@ -83,8 +83,7 @@ public class JobsWorkflow {
             MouseActions.clickOnElement(driver, workflow.getUserFromTable);
             LOGGER.info("Click on first workflow of the searched pipelines.");
             action.moveToElement(workflow.getUserFromTable).perform();
-            userActions.performActionWithPolling(workflow.getUserFromTable, UserAction.CLICK);
-            waitExecutor.waitUntilElementClickable(workflow.flippedButton);
+            waitExecutor.waitUntilPageFullyLoaded();
         } else {
             workflow.noDataForWorkflows.isDisplayed();
             LOGGER.info("There is no data for workflow searched.");
@@ -182,6 +181,7 @@ public class JobsWorkflow {
     public void selectLast7Days() {
         datePicker.clickOnDatePicker();
         try {
+            waitExecutor.sleep(2000);
             datePicker.selectLast30Days();
             waitExecutor.waitUntilElementClickable(workflow.globalSearch);
         } catch (NoSuchElementException ex) {
@@ -193,7 +193,7 @@ public class JobsWorkflow {
     public void close() {
         LOGGER.info("Close the app details page and navigate to workflow home page.");
         userActions.performActionWithPolling(workflow.close, UserAction.CLICK);
-        waitExecutor.waitUntilElementClickable(workflow.globalSearch);
+        waitExecutor.waitUntilPageFullyLoaded();
     }
 
     /* Validate KPI present */

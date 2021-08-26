@@ -12,10 +12,10 @@ public class JobsWorkflowPageObject {
     @FindBy(xpath = "//div[contains(@class,'component-section-header')]/h2[text()='Pipelines']")
     public WebElement pipelineHeader;
 
-    @FindBy(xpath = "//form[contains(@class,'form-inline')]//input[@id='apps-global-search-filter']")
+    @FindBy(css = "div#app div.row.no-gutters.pipeline-search > input[type='text']")
     public WebElement searchBoxWorkflow;
 
-    @FindBy(id = "pipelinesList-body")
+    @FindBy(xpath = "//*[@id='pipelinesList-body']")
     public List<WebElement> pipelineTablePresent;
 
     @FindBy(xpath = "((//tbody[@id='pipelinesList-body']/tr)[1]/td)")
@@ -51,7 +51,7 @@ public class JobsWorkflowPageObject {
     @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[contains(text(),'MR')]//following::td[11]//span[text()='WFI']")
     public List<WebElement> WFILink;
 
-    @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[contains(text(),'')]//following::td[11]//span[text()='WFI']")
+    @FindBy(xpath = "//table[@id='allApps']/tbody[1]/tr[1]/td[12]/a[1]/span[1]")
     public List<WebElement> genericWFILink;
 
     @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[contains(text(),'')]//following::td[11]//span[text()='Hive']")
@@ -81,7 +81,7 @@ public class JobsWorkflowPageObject {
     @FindBy(xpath = "//div[@id='statusContainer']/span[contains(@class,'unknown')]")
     public List<WebElement> unknownBadge;
 
-    @FindBy(xpath = "(//tbody[@id = 'pipelinesList-body']/tr/td)[2]")
+    @FindBy(xpath = "//table[@id='pipelinesList']/tbody[1]/tr[1]/td[1]/a[1]")
     public WebElement getUserFromTable;
 
     @FindBy(xpath = "//h4[@class='job-times']/span")

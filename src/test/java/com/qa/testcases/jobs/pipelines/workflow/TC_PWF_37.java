@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import com.qa.enums.UserAction;
+import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -33,6 +35,7 @@ public class TC_PWF_37 extends BaseClass {
 		LOGGER.info("Click on Jobs Pipeline tab");
 		test.log(LogStatus.INFO, "Initialize all classes");
 		JobsWorkflow jobWorkflow = new JobsWorkflow(driver);
+		UserActions userActions = new UserActions(driver);
 		JobsWorkflowPageObject workflowPageObject = new JobsWorkflowPageObject(driver);
 		test.log(LogStatus.INFO, "Navigate to pipeline tab through Jobs page");
 		jobWorkflow.clickOnJobsPipelineTab();
@@ -54,6 +57,7 @@ public class TC_PWF_37 extends BaseClass {
 				List<String> getJobIdsFromGanttChart = jobWorkflow.getJobIdsFromParentTag();
 				test.log(LogStatus.INFO, "All job ids from gantt chart- " + getJobIdsFromGanttChart);
 				LOGGER.info("All job ids from gantt chart- " + getJobIdsFromGanttChart);
+
 				jobWorkflow.close();
 				jobWorkflow.scrollToTopOfThePage();
 				//jobWorkflow.searchByJobID(getJobIdsFromGanttChart);
@@ -69,12 +73,17 @@ public class TC_PWF_37 extends BaseClass {
 				test.log(LogStatus.PASS, "All the application KPIS, status and workflowIds validated");
 				}
 			}
+			else{
+				LOGGER.info("The workflow status is not success hence skipping the testcase");
+				test.log(LogStatus.SKIP, "The workflow status is not in success state hence skipping the testcase");
+				userActions.performActionWithPolling(workflowPageObject.close, UserAction.CLICK);
+			}
 		} catch (NoSuchElementException ex) {
 			if (workflowPageObject.close.isDisplayed()) {
-				workflowPageObject.close.click();
+				userActions.performActionWithPolling(workflowPageObject.close, UserAction.CLICK);
+				LOGGER.info("The workflow status is not success");
+				throw ex;
 			}
-			LOGGER.info("The workflow status is not success hence skipping the testcase");
-			test.log(LogStatus.SKIP, "The workflow status is not in success state hence skipping the testcase");
 		}
 
 	}

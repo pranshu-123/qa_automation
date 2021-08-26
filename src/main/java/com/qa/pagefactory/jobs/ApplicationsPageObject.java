@@ -78,7 +78,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[9]")
     public WebElement getQueueNameTable;
 
-    @FindBy(id = "apps-global-search-filter")
+    @FindBy(css = "#apps-global-search-filter")
     public WebElement globalSearchBox;
 
     @FindBy(xpath = "//tbody/tr")
@@ -93,7 +93,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//p[contains(@class,'float-right')]/b")
     public WebElement getTotalAppCount;
 
-    @FindBy(xpath = "//span[@id='reset']")
+    @FindBy(id = "reset")
     public WebElement resetButton;
 
     @FindBy(xpath = "(//ul[contains(@class,'select2-results')])/li")

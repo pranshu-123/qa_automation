@@ -78,8 +78,8 @@ public class TC_SF_07 extends BaseClass {
         try {
             waitExecuter.waitUntilElementPresent(smallfilesPageObject.confirmationMessageElement);
             waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
-                    "Small file Report completed successfully.");
-            Assert.assertEquals(smallfilesPageObject.confirmationMessageElement.getText(), "Small file Report completed successfully.",
+                    "Smallfile Report completed successfully.");
+            Assert.assertEquals(smallfilesPageObject.confirmationMessageElement.getText(), "Smallfile Report completed successfully.",
                     " Small file Report not completed successfully..");
             waitExecuter.sleep(3000);
             test.log(LogStatus.PASS, "Verified smallfiles report is loaded properly.");

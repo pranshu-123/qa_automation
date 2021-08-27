@@ -71,13 +71,13 @@ public class TC_SF_03 extends BaseClass {
         try {
             waitExecuter.waitUntilElementPresent(smallfilesPageObject.confirmationMessageElement);
             waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
-                    "Small file Report completed successfully.");
-            waitExecuter.sleep(3000);
+                    "Smallfile Report completed successfully.");
+            waitExecuter.sleep(2000);
             test.log(LogStatus.PASS, "Verified smallfiles report is loaded properly.");
             LOGGER.info("Verified smallfiles report is loaded properly");
         } catch (TimeoutException te) {
             waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
-                    "Small file Report completed successfully.");
+                    "Smallfile Report completed successfully.");
         }
         catch (VerifyError te) {
             throw new AssertionError("smallfiles Report not completed successfully."+te);

@@ -65,7 +65,7 @@ public class TC_SF_13 extends BaseClass {
         try {
             waitExecuter.waitUntilElementPresent(smallfilesPageObject.confirmationMessageElement);
             waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
-                    "Small file Report completed successfully.");
+                    "Smallfile Report completed successfully.");
             waitExecuter.sleep(3000);
             test.log(LogStatus.PASS, "Verified smallfiles report is loaded properly.");
             logger.info("Verified smallfiles report is loaded properly");
@@ -75,7 +75,7 @@ public class TC_SF_13 extends BaseClass {
             test.log(LogStatus.PASS, "Verified the absolute size  poulated :" + heading);
         } catch (TimeoutException te) {
             waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.confirmationMessageElement,
-                    "Small file Report completed successfully.");
+                    "Smallfile Report completed successfully.");
         }
         catch (VerifyError te) {
             throw new AssertionError("smallfiles Report not completed successfully."+te);

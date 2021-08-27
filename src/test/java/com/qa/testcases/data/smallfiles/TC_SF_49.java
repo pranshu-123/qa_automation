@@ -64,7 +64,7 @@ public class TC_SF_49 extends BaseClass {
                 userActions.performActionWithPolling(smallfilesPageObject.modalRunButton, UserAction.CLICK);
                 waitExecuter.sleep(5000);
             } else {
-                String scheduleSuccessMsg = "Small file Report completed successfully.";
+                String scheduleSuccessMsg = "Smallfile Report completed successfully.";
                 smallfiles.verifyScheduleSuccessMsg(scheduleSuccessMsg);
             }
         } catch (TimeoutException te) {

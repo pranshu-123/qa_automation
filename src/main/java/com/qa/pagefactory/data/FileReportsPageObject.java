@@ -27,25 +27,25 @@ public class FileReportsPageObject {
   public WebElement sortAvgFileSize;
 
 
-  @FindBy(xpath = "(//span[contains(@class,'badge pending')]//a[text()='LARGE'])")
+  @FindBy(xpath = "//button[text()[normalize-space()='LARGE']]")
   public WebElement selectedLargeFileOpt;
 
   @FindBy(xpath = "//a[contains(text(),'MEDIUM')]")
   public WebElement mediumFile;
 
-  @FindBy(xpath = "(//span[contains(@class,'badge pending')]//a[text()='MEDIUM'])")
+  @FindBy(xpath = "//button[text()[normalize-space()='MEDIUM']]")
   public WebElement selecteMediumFileOpt;
 
   @FindBy(xpath = "//a[contains(text(),'TINY')]")
   public WebElement tinyFile;
 
-  @FindBy(xpath = "(//span[contains(@class,'badge pending')]//a[text()='TINY'])")
+  @FindBy(xpath = "//button[text()[normalize-space()='TINY']]")
   public WebElement selecteTinyFileOpt;
 
   @FindBy(xpath = "//a[contains(text(),'EMPTY')]")
   public WebElement emptyFile;
 
-  @FindBy(xpath = "(//span[contains(@class,'badge pending')]//a[text()='EMPTY'])")
+  @FindBy(xpath = "//button[text()[normalize-space()='EMPTY']]")
   public WebElement selecteEmptyFileOpt;
 
   @FindBy(xpath = "//div[@class='col-md-2']/input")

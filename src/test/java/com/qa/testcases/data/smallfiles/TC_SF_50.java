@@ -23,10 +23,10 @@ public class TC_SF_50 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void validateErrorSmallFile(String clusterId) {
-        test = extent.startTest("TC_SF_14.validateErrorSmallFile: " + clusterId,
+        test = extent.startTest("TC_SF_50.validateErrorSmallFile: " + clusterId,
                 " Verify Error displayed by Small file report when fsimage is not available.");
         test.assignCategory("Data- Small Files");
-        Log.startTestCase("TC_SF_14.validateErrorSmallFile");
+        Log.startTestCase("TC_SF_50.validateErrorSmallFile");
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         UserActions userActions = new UserActions(driver);
@@ -52,9 +52,10 @@ public class TC_SF_50 extends BaseClass {
 
         waitExecuter.waitUntilElementClickable(smallfilesPageObject.verifyReport);
         waitExecuter.waitUntilTextToBeInWebElement(smallfilesPageObject.verifyReport,
-                "Currently, the Small file Report report is being generated");
+                "Currently, the Smallfile Report is being generated");
         waitExecuter.sleep(3000);
-        Assert.assertEquals(smallfilesPageObject.verifyReport.getText(), "Currently, the Small file Report report is being generated, so no other action can be performed at this time. Please wait for the running task to complete",
+        Assert.assertEquals(smallfilesPageObject.verifyReport.getText(), "Currently, the Smallfile Report is being generated, " +
+                        "so no other action can be performed at this time. Please wait for the running task to complete.",
                 " Currently, the Small file Report report is not being generated..");
         waitExecuter.sleep(3000);
 

@@ -20,13 +20,13 @@ public class ForecastingPageObject {
     @FindBy(xpath = "//span[text()='Schedule']")
     public WebElement scheduleButton;
 
-    @FindBy(xpath = "(//span[contains(text(),'Run')])[2]/parent::a")
+    @FindBy(linkText= "Run")
     public WebElement modalRunButton;
 
     @FindBy(xpath = "(//span[contains(text(),'Schedule')])[2]/parent::a")
     public WebElement modalScheduleButton;
 
-    @FindBy(xpath = "//b[contains(text(),'Forecasting')]//parent::p/following-sibling::p/input")
+    @FindBy(xpath = "//label[text()[normalize-space()='Forecasting (# Days)']]/following::input")
     public WebElement numOfDaysForForecasting;
 
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")

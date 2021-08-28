@@ -28,7 +28,7 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//input[@class='display-time']")
     public WebElement clickTime;
 
-    @FindBy(xpath = "//div[@class='close pointer']")
+    @FindBy(css = "close")
     public WebElement closeButton;
 
     @FindBy(xpath = "//input[@class='display-time']/following::select[@class='hours']")
@@ -64,7 +64,7 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//div[text()='Smallfile Report completed successfully.']")
     public WebElement confirmationMessageElement;
 
-    @FindBy(css = ".col-md-12.p-0")
+    @FindBy(xpath = "//div[@class='col-md-12 p-0']")
     public WebElement verifyReport;
 
     @FindBy(xpath = "//span[@class='text-fatal']")

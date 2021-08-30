@@ -15,7 +15,7 @@ public class ClusterDiscoveryPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/a/i")
     public List<WebElement> confirmationMessageElementClose;
 
-    @FindBy(xpath = "(//span[contains(text(),'Run')])[2]/parent::a")
+    @FindBy(xpath = "//span[normalize-space()='Run']")
     public WebElement modalRunButton;
 
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")

@@ -35,6 +35,7 @@ public class TC_HB_19 extends BaseClass {
 
         //Navigate to HBase tab
         waitExecuter.waitUntilElementClickable(hBasePageObject.hbaseTab);
+        waitExecuter.sleep(2000);
         MouseActions.clickOnElement(driver,hBasePageObject.hbaseTab);
         LOGGER.info("Clicked on HBase header");
         hbase.selectDateAsLast30Days();

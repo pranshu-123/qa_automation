@@ -14,7 +14,7 @@ public class HBasePageObject {
     @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='HBase'])")
     public WebElement hbaseTab;
 
-    @FindBy(xpath = "//h1[contains(text(), 'HBase')]")
+    @FindBy(xpath = "//span[text()='HBase']")
     public WebElement hbaseHeader;
 
     @FindBy(xpath = "(//span[contains(@class,'select2-selection__rendered')])")
@@ -29,7 +29,7 @@ public class HBasePageObject {
     @FindBy(css = "//span[contains(@class,'select2-dropdown')]//input")
     public WebElement clusterIdsearchfield;
 
-    @FindBy(xpath = "//*[@class='row no-gutters']//div[@class='col']/span")
+    @FindBy(xpath = "//div[@class='component-score-improvement-module']//div//div//div")
     public List<WebElement> hBaseClusterKPIs;
 
     @FindBy(xpath = "//span[@class='select2-selection__rendered']")
@@ -38,7 +38,7 @@ public class HBasePageObject {
     @FindBy(xpath = "//ul[@class='select2-results__options']/li")
     public List<WebElement> clusterList;
 
-    @FindBy(xpath = "//*[@class='row no-gutters']//div[@class='col-4']/h2")
+    @FindBy(xpath = "//div[@class='component-score-improvement-module']//div//h2")
     public List<WebElement> hBaseClusterKPIValues;
 
     @FindBy(xpath = "//div[contains(@class,'kpi-container')]/div/ul/li/span/a")

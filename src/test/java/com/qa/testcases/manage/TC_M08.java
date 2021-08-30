@@ -72,9 +72,11 @@ public class TC_M08 extends BaseClass {
             waitExecuter.waitUntilElementPresent(managePageObject.latestDiagnosticsContentHeader);
             waitExecuter.waitUntilTextToBeInWebElement(managePageObject.latestDiagnosticsContentHeader, "Diagnostics Log");
             waitExecuter.sleep(10000);
+            waitExecuter.waitUntilElementClickable(managePageObject.resetButton);
             test.log(LogStatus.INFO, "Verified Diagnostics Log is loaded properly.");
             waitExecuter.waitUntilElementPresent(managePageObject.latestDiagnosticsContentHeader);
             waitExecuter.sleep(8000);
+            waitExecuter.waitUntilElementClickable(managePageObject.resetButton);
             Assert.assertTrue(managePageObject.latestDiagnosticsContentHeader.isDisplayed(),"Diagnostics Log " +
                     "content not found.");
             waitExecuter.waitUntilElementClickable(managePageObject.resetButton);

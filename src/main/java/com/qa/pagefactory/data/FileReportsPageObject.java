@@ -44,7 +44,7 @@ public class FileReportsPageObject {
   @FindBy(xpath = "//*[contains(text(),'EMPTY')]")
   public WebElement emptyFile;
 
-  @FindBy(xpath = "(//span[contains(@class,'badge pending')]//a[text()='EMPTY'])")
+  @FindBy(xpath = "//button[normalize-space()='EMPTY']")
   public WebElement selecteEmptyFileOpt;
 
   @FindBy(xpath = "//div[@class='col-md-2']/input")

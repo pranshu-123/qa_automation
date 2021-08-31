@@ -28,7 +28,7 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//input[@class='display-time']")
     public WebElement clickTime;
 
-    @FindBy(xpath = "//div[@class='close pointer']")
+    @FindBy(css = "close")
     public WebElement closeButton;
 
     @FindBy(xpath = "//input[@class='display-time']/following::select[@class='hours']")
@@ -37,13 +37,13 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//input[@class='display-time']/following::select[@class='minutes']")
     public WebElement minutesDropdown;
 
-    @FindBy(xpath = "//span[contains(@class,'pointer cta-primary')]//span[contains(text(),'Schedule')]")
+    @FindBy(linkText = "Schedule")
     public WebElement runSheduleButton;
 
     @FindBy(xpath = "//span[contains(text(),'Run New')]/parent::a")
     public WebElement runNowButton;
 
-    @FindBy(xpath = "(//span[contains(text(),'Run')])[2]/parent::a")
+    @FindBy(xpath = "//a[contains(text(),'Run')]")
     public WebElement modalRunButton;
 
     @FindBy(xpath = "//select[contains(@class,'schedule-days')]")
@@ -61,10 +61,10 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//ul[contains(@class,'select2-results__options')]/li[2]")
     public WebElement select2stClusterOption;
 
-    @FindBy(xpath = "//div[contains(text(),'Small file Report')]")
+    @FindBy(xpath = "//div[text()='Smallfile Report completed successfully.']")
     public WebElement confirmationMessageElement;
 
-    @FindBy(css = ".col-md-12.p-0")
+    @FindBy(xpath = "//div[@class='col-md-12 p-0']")
     public WebElement verifyReport;
 
     @FindBy(xpath = "//span[@class='text-fatal']")
@@ -213,10 +213,10 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "(//input[contains(@type,'text')])[7]")
     public WebElement maxParentDirectory;
 
-    @FindBy(xpath = "//div/b[text()='Schedule Name']//following::p/input")
+    @FindBy(xpath = "//label[text()='Schedule Name']/following::input")
     public WebElement scheduleNameTextbox;
 
-    @FindBy(xpath = "//p[@class='element-inline']/input")
+    @FindBy(xpath = "//input[@type='email']")
     public WebElement emailNotification;
 
     @FindBy(xpath = "//div[@class='panel-body']/div[2]/p/b")

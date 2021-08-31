@@ -14,38 +14,37 @@ public class FileReportsPageObject {
   @FindBy(xpath = "//ul[@class='select2-results__options']/li")
   public List<WebElement> clusterList;
 
-  @FindBy(xpath = "//a[contains(text(),'LARGE')]")
+  @FindBy(xpath = "//button[contains(text(),'LARGE')]")
   public WebElement largeFile;
 
-  @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-up')]")
+  @FindBy(xpath = "//a[@class='icon-sort icon-sort-sorted-up']")
   public WebElement sortUp;
 
-  @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-down')]")
+  @FindBy(xpath = "//a[@class='icon-sort icon-sort-sorted-down']")
   public WebElement sortDown;
 
   @FindBy(xpath = "//span[normalize-space()='Avg File Size']")
   public WebElement sortAvgFileSize;
 
-
-  @FindBy(xpath = "(//span[contains(@class,'badge pending')]//a[text()='LARGE'])")
+  @FindBy(xpath = "//button[normalize-space()='LARGE']")
   public WebElement selectedLargeFileOpt;
 
-  @FindBy(xpath = "//a[contains(text(),'MEDIUM')]")
+  @FindBy(xpath = "//*[contains(text(),'MEDIUM')]")
   public WebElement mediumFile;
 
-  @FindBy(xpath = "(//span[contains(@class,'badge pending')]//a[text()='MEDIUM'])")
+  @FindBy(xpath = "//button[normalize-space()='MEDIUM']")
   public WebElement selecteMediumFileOpt;
 
-  @FindBy(xpath = "//a[contains(text(),'TINY')]")
+  @FindBy(xpath = "//*[contains(text(),'TINY')]")
   public WebElement tinyFile;
 
-  @FindBy(xpath = "(//span[contains(@class,'badge pending')]//a[text()='TINY'])")
+  @FindBy(xpath = "//button[normalize-space()='TINY']")
   public WebElement selecteTinyFileOpt;
 
-  @FindBy(xpath = "//a[contains(text(),'EMPTY')]")
+  @FindBy(xpath = "//*[contains(text(),'EMPTY')]")
   public WebElement emptyFile;
 
-  @FindBy(xpath = "(//span[contains(@class,'badge pending')]//a[text()='EMPTY'])")
+  @FindBy(xpath = "//button[normalize-space()='EMPTY']")
   public WebElement selecteEmptyFileOpt;
 
   @FindBy(xpath = "//div[@class='col-md-2']/input")

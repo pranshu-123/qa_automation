@@ -74,6 +74,8 @@ public class TC_HIVE_60 extends BaseClass {
                 LOGGER.info("Sort by parent app");
                 waitExecuter.waitUntilElementClickable(applicationsPageObject.sortByParentApp);
                 userActions.performActionWithPolling(applicationsPageObject.sortByParentApp, UserAction.CLICK);
+                waitExecuter.waitUntilPageFullyLoaded();
+                userActions.performActionWithPolling(applicationsPageObject.sortUp, UserAction.CLICK);
                 waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
                 list.add(applicationsPageObject.checkHiveInParentApp.size());
                 waitExecuter.sleep(1000);
@@ -102,7 +104,6 @@ public class TC_HIVE_60 extends BaseClass {
                             LOGGER.info("Click on first app in table to navigate to app details page");
                             waitExecuter.waitUntilElementClickable(applicationsPageObject.checkHiveInParentApp.get(0));
                             applicationsPageObject.checkHiveInParentApp.get(0).click();
-                            waitExecuter.waitUntilElementPresent(applicationsPageObject.loader);
                             waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
                             Assert.assertEquals(applicationsPageObject.mrHiveLeftPaneHeaders.size(), 2,
                                     "Expected tabs in MR apps having Hive as parent app is 2 but found- "
@@ -136,6 +137,7 @@ public class TC_HIVE_60 extends BaseClass {
                             // Click on reset if there are no hive apps
                             test.log(LogStatus.INFO, "Click on reset if there are no hive apps");
                             LOGGER.info("Click on reset if there are no hive apps");
+                            userActions.performActionWithPolling(applicationsPageObject.closeIcon, UserAction.CLICK);
                             allApps.reset();
                         }
                         break sorting;

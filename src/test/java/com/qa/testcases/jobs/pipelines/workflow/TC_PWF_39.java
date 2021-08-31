@@ -67,9 +67,16 @@ public class TC_PWF_39 extends BaseClass {
 					test.log(LogStatus.PASS, "All the application KPIS, status and workflowIds validated");
 				}
 			}
+			else{
+				LOGGER.info("The workflow status is not success hence skipping the testcase");
+				test.log(LogStatus.SKIP, "The workflow status is not in success state hence skipping the testcase");
+			}
 		} catch (NoSuchElementException ex) {
-			LOGGER.info("The workflow for spark tagged is absent hence skipping the testcase");
-			test.log(LogStatus.SKIP, "The workflow for spark tagged is absent hence skipping the testcase");
+			if (workflowPageObject.close.isDisplayed()) {
+				workflowPageObject.close.click();
+				LOGGER.info("The workflow status is not success");
+				throw ex;
+			}
 		}
 
 	}

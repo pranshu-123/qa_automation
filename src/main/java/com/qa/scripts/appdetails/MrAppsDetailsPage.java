@@ -699,8 +699,7 @@ public class MrAppsDetailsPage {
         for (int f = 0; f < footerNameList.size(); f++) {
             String footerName = footerNameList.get(f).getText();
             String footerValStr = footerValList.get(f).getText();
-            int footerVal = Integer.parseInt(footerValStr.replaceAll("[^\\dA-Za-z ]",
-                    "").trim());
+            int footerVal = Integer.parseInt(footerValStr.replaceAll("[^\\dA-Za-z ]", "").trim());
             totalTaskCnt += footerVal;
             LOGGER.info("FooterName = " + footerName + " Value = " + footerVal);
         }

@@ -87,13 +87,12 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
   public WebElement reportCreationNotSup;
 
-  @FindBy(xpath = "//span[contains(@class,'component-cta')]/a/span")
+  @FindBy(xpath = "//span[@class='cta-primary component-cta']//a[1]")
   public WebElement reportCreationRunButton;
 
   @FindBy(css = "div[value='[object Object]'] input[type='text']")
   public List<WebElement> forcasting;
 
-  //@FindBy(xpath = "(//*[@class='icon-download is-enabled'])[1]")
   @FindBy(xpath="(//span[contains(@class, 'icon-download')])[1]")
   public WebElement downloadReportIcon;
 
@@ -193,7 +192,7 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//*[@class='text-white']")
   public WebElement moreInfoHeader;
 
-  @FindBy(xpath = "//*[@class='modal-body']")
+  @FindBy(xpath = "//*[@class='modal-body scrollbar-s']")
   public WebElement moreInfoWin;
 
   @FindBy(xpath = "//select[contains(@class, 'form-control')]")
@@ -211,7 +210,7 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//table[contains(@class, 'component-data-tables')]//tr//td/span[contains(@class,'icon-delete')]")
   public WebElement iconDelete;
 
-  @FindBy(xpath = "//div[contains(@class,'component-cta')]/a/span")
+  @FindBy(linkText = "Update")
   public WebElement saveScheduleButton;
 
   @FindBy(xpath = "//div[contains(@class,'component-section-header')]/span/a")

@@ -151,7 +151,7 @@ public class AllApps {
         LOGGER.info("Select last 7 days");
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(1000);
-        datePicker.selectLast7Days();
+        datePicker.selectLast30Days();
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
     }
 

@@ -102,7 +102,7 @@ public class AppDetailsPageObject {
     @FindBy(xpath = "//table[@id='impalaOperatorList']/tbody/tr")
     public List<WebElement> getOperatorTypesRow;
 
-    @FindBy(xpath = "//div[@class='filter-section']//a[text()='Status']")
+    @FindBy(xpath = "//a[contains(text(),'Status')]")
     public WebElement statusToggleLeftpane;
 
     @FindBy(id = "reset")

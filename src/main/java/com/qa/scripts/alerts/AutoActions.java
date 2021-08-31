@@ -66,10 +66,10 @@ public class AutoActions {
 
     public boolean validateNewAutoActionPolicyPageDisplayed(){
         waitExecuter.sleep(1000);
-        waitExecuter.waitUntilUrlContains("/alerts/autoaction/add");
+        waitExecuter.waitUntilUrlContains("/autoactions/add");
         waitExecuter.sleep(1000);
         waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.newAutoActionPolicyHeader);
-        if(newAutoActionPolicyPageObject.newAutoActionPolicyHeader.getText().equals("New Auto Action Policy")){
+        if(newAutoActionPolicyPageObject.newAutoActionPolicyHeader.getText().equals("New AutoAction Policy")){
             return true;
         }
         return false;
@@ -178,6 +178,7 @@ public class AutoActions {
         for(WebElement actions : webElements){
             if(actions.getText().equals(inputAction)){
                 actions.click();
+                return;
             }
         }
     }
@@ -208,8 +209,8 @@ public class AutoActions {
         MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.actionButton);
         waitExecuter.sleep(2000);
         selectActions(inputAction);
-        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.actionEle);
-        newAutoActionPolicyPageObject.actionEle.sendKeys(httpPostUrl.toLowerCase());
+        waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.actionEleToHttpPost);
+        newAutoActionPolicyPageObject.actionEleToHttpPost.sendKeys(httpPostUrl.toLowerCase());
         waitExecuter.waitUntilElementClickable(newAutoActionPolicyPageObject.addUrlBtn);
         MouseActions.clickOnElement(driver,newAutoActionPolicyPageObject.addUrlBtn);
     }
@@ -349,7 +350,7 @@ public class AutoActions {
         waitExecuter.sleep(1000);
         waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.allUserChkBox);
         if(newAutoActionPolicyPageObject.allUserChkBox.isSelected()){
-           return true;
+            return true;
         }
         return false;
     }

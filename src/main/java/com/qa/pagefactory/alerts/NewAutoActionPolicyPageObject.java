@@ -23,11 +23,9 @@ public class NewAutoActionPolicyPageObject {
     @FindBy(xpath = "(//div/div/label)[1]/following-sibling::input")
     public WebElement policyName;
 
-    //@FindBy(xpath = "//div[contains(@class, 'rule-row')]/div[2]/input")
     @FindBy(xpath = "//div/div[2]/input")
     public WebElement policyDescription;
 
-    //@FindBy (xpath = "(//div[contains(@class,'rule-row')])[2]/div/div/b/span[1]")
     @FindBy (xpath = "//button[contains(@id,'trigger-dropdown')]//span[2]")
     public WebElement triggerConditionsBtn;
 
@@ -58,7 +56,6 @@ public class NewAutoActionPolicyPageObject {
     @FindBy(xpath="(//li[contains(@class,'rule-li')])[2]/div[3]/div[4]/input")
     public WebElement triggerConditionValue2;
 
-    //@FindBy (xpath = "(//div[contains(@class,'auto-footer')]/div/div/span/a)[1]")
     @FindBy (xpath = "//button[contains(text(),'Save')]")
     public WebElement saveBtn;
 

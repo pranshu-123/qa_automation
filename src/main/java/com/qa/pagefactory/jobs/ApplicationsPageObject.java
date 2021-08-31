@@ -288,7 +288,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[12]")
     public List<WebElement> getParentAppColumnFromTable;
 
-    @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[12]//span[@class='Hive']")
+    @FindBy(xpath = "//table[@id='allApps']/tbody[1]/tr[2]/td[12]/a[1]//span[@class='Hive']")
     public List<WebElement> checkHiveInParentApp;
 
     @FindBy(xpath = "(//div[contains(@class,'component-section-header')]//h2)[2]")

@@ -34,7 +34,7 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span/span")
   public WebElement getHeaderAppId;
 
-  @FindBy(xpath = "//*[@id='app']//*[@class='close']")
+  @FindBy(className = "close")
   public WebElement closeAppsPageTab;
 
   @FindBy(xpath = "//*[@id='app-prev-header']/b")
@@ -263,7 +263,7 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "//*[@class=\"highcharts-title\"]/*[name()='tspan']")
   public List<WebElement> stageTimingHeaders;
 
-  @FindBy(xpath = "//*[@class=\"highcharts-series-group\"]//*[name()='g'][1]")
+  @FindBy(xpath = "//*[@class='highcharts-series-group']//*[name()='g'][1]")
   public List<WebElement> timingGraphList;
 
   //Load Logs and Diagnostic action
@@ -273,13 +273,13 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "//*[@class='popover-body']/ul/li/h4")
   public List<WebElement> loadActionList;
 
-  @FindBy(xpath = "//*[@class='modal-body']")
+  @FindBy(xpath = "//*[@class='modal-body scrollbar-s']")
   public WebElement loadDiagnosticWin;
 
   @FindBy(xpath = "(//div[contains(@class,'modal-sec-head')])/h2")
   public WebElement loadDiagnosticWinHeader;
 
-  @FindBy(xpath = "//*[@class='close pointer']")
+  @FindBy(xpath = "//button[@class='close']")
   public WebElement loadWinClose;
 
   @FindBy(xpath ="//div[@class='modal-body']//p/br")

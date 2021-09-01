@@ -236,8 +236,10 @@ public class HBasePage {
         List<WebElement> metricsKpiFooterList = hBasePageObject.hBaseMetricsFooter;
         List<WebElement> metricsKpiGraphList = hBasePageObject.hBaseMetricsGraph;
         Assert.assertFalse(metricsKpiList.isEmpty(), "Metrics for hbase cluster is empty");
-        String xAxisPath = "//*[@id='" + graphId + "']" + xAxis;
-        String yAxisPath = "//*[@id='" + graphId + "']" + yAxis;
+
+        String xAxisPath = "(//*[@id='" + graphId + "'])[1]" + xAxis;
+        String yAxisPath = "(//*[@id='" + graphId + "'])[1]" + yAxis;
+
 
         for (int i = 0; i < metricsKpiList.size(); i++) {
             String metricsName = metricsKpiHeaderList.get(i).getText();
@@ -252,6 +254,7 @@ public class HBasePage {
                 logger.info("The footer for Metrics : [" + metricsName + "] is displayed");
                 verifyAxis(xAxisPath, "X-Axis");
                 verifyAxis(yAxisPath, "Y-Axis");
+                return;
             }
         }
     }

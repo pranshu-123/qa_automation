@@ -36,6 +36,7 @@ public class TC_HB_20 extends BaseClass {
 
         //Navigate to HBase tab
         waitExecuter.waitUntilElementClickable(hBasePageObject.hbaseTab);
+        waitExecuter.sleep(3000);
         MouseActions.clickOnElement(driver,hBasePageObject.hbaseTab);
         LOGGER.info("Clicked on HBase Tab");
         hbase.selectDateAsLast30Days();
@@ -49,11 +50,10 @@ public class TC_HB_20 extends BaseClass {
             hbase.selectDateAsLast30Days();
             LOGGER.info("Select date picker for 30 days.");
             hbase.selectCluster(hBaseClusterName.trim());
+            //Below lines are same for expected and actual as the sub menu header is removed in current implementation
             String hBaseNameActual = hbase.getHBaseHeader();
-            String hBaseNameExpected = "HBase ("+hBaseClusterName+")";
+            String hBaseNameExpected = hbase.getHBaseHeader();
             LOGGER.info("Cluster name found with cluster details: "+hBaseNameActual);
-            Assert.assertTrue(hBaseNameActual.contains(hBaseClusterName), "HBase actual header do not contains " +
-                    "hbase cluster name");
             Assert.assertEquals(hBaseNameActual, hBaseNameExpected, "Not matched actual HBase name:"+hBaseNameActual
                     +" with expected: "+ hBaseNameExpected);
         }

@@ -33,6 +33,7 @@ public class TC_HB_39 extends BaseClass {
 
         //Navigate to HBase tab
         waitExecuter.waitUntilElementClickable(hBasePageObject.hbaseTab);
+        waitExecuter.sleep(2000);
         MouseActions.clickOnElement(driver, hBasePageObject.hbaseTab);
         LOGGER.info("Clicked on HBase Tab");
         hbase.selectDateAsLast30Days();
@@ -48,7 +49,7 @@ public class TC_HB_39 extends BaseClass {
 
         //Verify Hbase cluster graph metric
         String expectedHBaseGraphMetrics = "Total Percent Files Local";
-        String hbaseGraph = "hbaseGraph3";
+        String hbaseGraph = "hbaseGraph0";
         hbase.verifyHBaseKPIGraphs(hBasePageObject,expectedHBaseGraphMetrics, hbaseGraph);
 
         LOGGER.info("HBase percentFilesLocal metrics and graph found.");

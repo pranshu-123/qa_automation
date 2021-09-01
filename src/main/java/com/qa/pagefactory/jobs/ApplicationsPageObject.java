@@ -54,7 +54,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[6]")
     public List<WebElement> getApplicationClusterId;
 
-    @FindBy(xpath = "//h3[contains(text(),'No Data Available')]")
+    @FindBy(xpath = "//h3[text()='There is no information available.']")
     public WebElement whenNoApplicationPresent;
 
     @FindBy(xpath = "(//div[contains(@class,'check-items-container')])[1]//span[1]")

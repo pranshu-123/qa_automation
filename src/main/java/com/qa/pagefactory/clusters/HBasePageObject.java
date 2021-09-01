@@ -26,9 +26,6 @@ public class HBasePageObject {
     @FindBy(xpath="//div[contains(@class, 'bg-success')]")
     public List<WebElement> hBaseKPIs;
 
-    @FindBy(css = "//span[contains(@class,'select2-dropdown')]//input")
-    public WebElement clusterIdsearchfield;
-
     @FindBy(xpath = "//div[@class='component-score-improvement-module']//div//div//div")
     public List<WebElement> hBaseClusterKPIs;
 
@@ -68,14 +65,8 @@ public class HBasePageObject {
     @FindBy(xpath="//table[1]/tbody[1]/tr/td[6]")
     public List<WebElement> hBaseRegionSvrInsight;
 
-    @FindBy(xpath="//div[@class='container-fluid']/h3/a")
-    public WebElement hBaseSvrHealthHeader;
-
     @FindBy(xpath="//div[@class='col kpi-box']/h5")
     public List<WebElement> regionSvrKpis;
-
-    @FindBy(xpath="//div[contains(@class,'kpi-content')]/div")
-    public List<WebElement> regionSvrKpiContent;
 
     @FindBy(xpath = "//div[contains(@class,'dashboard-module')]")
     public List<WebElement> hBaseMetrics;
@@ -111,20 +102,8 @@ public class HBasePageObject {
     @FindBy(xpath = "//table[@id='TableshbaseInfoTable']/tbody/tr[1]/td[1]")
     public WebElement hBaseFirstRegionSvrTable;
 
-    @FindBy(xpath = "//a[@class='active']")
-    public WebElement hBaseTableTab;
-
     @FindBy(xpath= "//table[@id='null-table']")
     public WebElement hBaseTableHostTbl;
-
-    @FindBy(xpath ="//table[@id='hbaseTableHostDataTAble']/tbody/tr")
-    public List<WebElement> hBaseTableHostTblRows;
-
-    @FindBy(xpath="//table[@id='hbaseTableHostDataTAble']/tbody/tr[1]/td[1]")
-    public WebElement getHbaseTableHostFirstRowRegionName;
-
-    @FindBy(xpath="//table[@id='hbaseTableHostDataTAble']/tbody/tr[1]/td[2]")
-    public WebElement getHbaseTableHostFirstRowRegionSvrName;
 
     @FindBy(xpath="//a[contains(text(), 'Tables')]")
     public WebElement tablesTab;

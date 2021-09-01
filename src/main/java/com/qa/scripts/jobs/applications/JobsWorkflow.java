@@ -79,8 +79,10 @@ public class JobsWorkflow {
         userActions.performActionWithPolling(workflow.searchBoxWorkflow, UserAction.CLICK);
         userActions.performActionWithPolling(workflow.searchBoxWorkflow, UserAction.SEND_KEYS, pipelineName);
         action.sendKeys(Keys.ENTER);
+        waitExecutor.waitUntilPageFullyLoaded();
         if (workflow.pipelineTablePresent.size() != 0) {
             MouseActions.clickOnElement(driver, workflow.getUserFromTable);
+            waitExecutor.waitUntilPageFullyLoaded();
             LOGGER.info("Click on first workflow of the searched pipelines.");
             action.moveToElement(workflow.getUserFromTable).perform();
             waitExecutor.waitUntilPageFullyLoaded();
@@ -181,7 +183,7 @@ public class JobsWorkflow {
     public void selectLast7Days() {
         datePicker.clickOnDatePicker();
         try {
-            waitExecutor.sleep(2000);
+            waitExecutor.sleep(3000);
             datePicker.selectLast30Days();
             waitExecutor.waitUntilElementClickable(workflow.globalSearch);
         } catch (NoSuchElementException ex) {

@@ -25,7 +25,7 @@ public class TopXPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/a")
     public List<WebElement> confirmationMessageElementClose;
 
-    @FindBy(xpath = "//input[contains(@type,'number')]")
+    @FindBy(xpath = "//input[@type='number']")
     public WebElement topXNumber;
     
     @FindBy(xpath = "(//span[contains(text(),'Schedule')])")

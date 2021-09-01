@@ -70,7 +70,9 @@ public class TC_PWF_05 extends BaseClass {
 		} catch (NoSuchElementException ex) {
 			LOGGER.info("The workflow status is not success hence skipping the testcase");
 			test.log(LogStatus.SKIP, "The workflow status is not in success state hence skipping the testcase");
+            throw ex;
 		}
+
 
 	}
 }

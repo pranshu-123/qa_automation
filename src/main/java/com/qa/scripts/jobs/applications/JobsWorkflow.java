@@ -84,7 +84,6 @@ public class JobsWorkflow {
             MouseActions.clickOnElement(driver, workflow.getUserFromTable);
             waitExecutor.waitUntilPageFullyLoaded();
             LOGGER.info("Click on first workflow of the searched pipelines.");
-            action.moveToElement(workflow.getUserFromTable).perform();
             waitExecutor.waitUntilPageFullyLoaded();
         } else {
             workflow.noDataForWorkflows.isDisplayed();

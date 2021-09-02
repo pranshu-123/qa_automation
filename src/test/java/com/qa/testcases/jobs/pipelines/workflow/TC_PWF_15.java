@@ -68,7 +68,6 @@ public class TC_PWF_15 extends BaseClass {
 			else{
 				LOGGER.info("The workflow status is not success hence skipping the testcase");
 				test.log(LogStatus.SKIP, "The workflow status is not in success state hence skipping the testcase");
-				userActions.performActionWithPolling(workflowPageObject.close, UserAction.CLICK);
 			}
 		} catch (NoSuchElementException ex) {
 			LOGGER.info("The workflow status is not success");

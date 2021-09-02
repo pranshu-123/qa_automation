@@ -79,12 +79,11 @@ public class JobsWorkflow {
         userActions.performActionWithPolling(workflow.searchBoxWorkflow, UserAction.CLICK);
         userActions.performActionWithPolling(workflow.searchBoxWorkflow, UserAction.SEND_KEYS, pipelineName);
         action.sendKeys(Keys.ENTER);
-        waitExecutor.sleep(4000);
         if (workflow.pipelineTablePresent.size() != 0) {
             MouseActions.clickOnElement(driver, workflow.getUserFromTable);
-            waitExecutor.waitUntilPageFullyLoaded();
             LOGGER.info("Click on first workflow of the searched pipelines.");
-            waitExecutor.waitUntilPageFullyLoaded();
+            action.moveToElement(workflow.getUserFromTable).perform();
+            waitExecutor.sleep(3000);
         } else {
             workflow.noDataForWorkflows.isDisplayed();
             LOGGER.info("There is no data for workflow searched.");
@@ -193,8 +192,8 @@ public class JobsWorkflow {
     /* Close modal window */
     public void close() {
         LOGGER.info("Close the app details page and navigate to workflow home page.");
-        userActions.performActionWithPolling(workflow.close, UserAction.CLICK);
-        waitExecutor.waitUntilPageFullyLoaded();
+        MouseActions.clickOnElement(driver, workflow.close);
+        waitExecutor.sleep(1000);
     }
 
     /* Validate KPI present */

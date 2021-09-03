@@ -9,12 +9,10 @@ import com.qa.scripts.clusters.impala.Impala;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.clusters.ImpalaPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
 import com.qa.utils.GraphUtils;
-import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -37,7 +35,6 @@ public class IM_RES_06 extends BaseClass {
 		LOGGER.info("Initialize all class objects");
 		WaitExecuter waitExecuter = new WaitExecuter(driver);
 		ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);
-		TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
 		DatePicker datePicker = new DatePicker(driver);
 		HomePage homePage = new HomePage(driver);
 		GraphUtils graphUtils = new GraphUtils();

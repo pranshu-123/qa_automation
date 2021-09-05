@@ -180,6 +180,7 @@ public class JobsWorkflow {
     /* Select last 7 days data to display for workflow */
     public void selectLast7Days() {
         datePicker.clickOnDatePicker();
+        waitExecutor.waitUntilElementClickable(workflow.globalSearch);
         try {
             waitExecutor.sleep(3000);
             datePicker.selectLast30Days();

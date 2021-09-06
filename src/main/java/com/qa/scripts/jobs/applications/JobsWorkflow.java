@@ -80,7 +80,9 @@ public class JobsWorkflow {
         userActions.performActionWithPolling(workflow.searchBoxWorkflow, UserAction.SEND_KEYS, pipelineName);
         action.sendKeys(Keys.ENTER);
         if (workflow.pipelineTablePresent.size() != 0) {
+            waitExecutor.sleep(2000);
             MouseActions.clickOnElement(driver, workflow.getUserFromTable);
+            waitExecutor.waitUntilPageFullyLoaded();
             LOGGER.info("Click on first workflow of the searched pipelines.");
             action.moveToElement(workflow.getUserFromTable).perform();
             waitExecutor.sleep(4000);

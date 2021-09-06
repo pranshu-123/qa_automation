@@ -46,9 +46,10 @@ public class TC_PWF_05 extends BaseClass {
 		
 		try {
 			jobWorkflow.searchWorkflowName(PageConstants.WorkflowName.OOZIE_MR_WF);
-			waitExecuter.waitUntilPageFullyLoaded();
+			waitExecuter.sleep(2000);
 			if (workflowPageObject.successBadge.size() != 0) {
 				List<String> workflowTime = jobWorkflow.isJobTimePresent();
+				waitExecuter.waitUntilPageFullyLoaded();
 				test.log(LogStatus.INFO, "Workflowid time duration on workflow page- " + workflowTime);
 				LOGGER.info("Workflowid time duration on workflow page- " + workflowTime);
 				List<String> workflowKPI = jobWorkflow.isKPIsPresent();

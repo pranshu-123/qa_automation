@@ -83,7 +83,7 @@ public class JobsWorkflow {
             MouseActions.clickOnElement(driver, workflow.getUserFromTable);
             LOGGER.info("Click on first workflow of the searched pipelines.");
             action.moveToElement(workflow.getUserFromTable).perform();
-            waitExecutor.sleep(3000);
+            waitExecutor.sleep(4000);
         } else {
             workflow.noDataForWorkflows.isDisplayed();
             LOGGER.info("There is no data for workflow searched.");

@@ -6,6 +6,7 @@ import com.qa.constants.PageConstants;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.jobs.JobsWorkflowPageObject;
 import com.qa.scripts.jobs.applications.JobsWorkflow;
+import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -34,6 +35,7 @@ public class TC_PWF_05 extends BaseClass {
 		LOGGER.info("Click on Jobs Pipeline tab");
 		test.log(LogStatus.INFO, "Initialize all classes");
 		UserActions userActions = new UserActions(driver);
+		WaitExecuter waitExecuter = new WaitExecuter(driver);
 		JobsWorkflow jobWorkflow = new JobsWorkflow(driver);
 		JobsWorkflowPageObject workflowPageObject = new JobsWorkflowPageObject(driver);
 		test.log(LogStatus.INFO, "Navigate to pipeline tab through Jobs page");
@@ -44,6 +46,7 @@ public class TC_PWF_05 extends BaseClass {
 		
 		try {
 			jobWorkflow.searchWorkflowName(PageConstants.WorkflowName.OOZIE_MR_WF);
+			waitExecuter.waitUntilPageFullyLoaded();
 			if (workflowPageObject.successBadge.size() != 0) {
 				List<String> workflowTime = jobWorkflow.isJobTimePresent();
 				test.log(LogStatus.INFO, "Workflowid time duration on workflow page- " + workflowTime);

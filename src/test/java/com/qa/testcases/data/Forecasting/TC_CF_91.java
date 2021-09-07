@@ -25,7 +25,7 @@ public class TC_CF_91 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider")
     public void validateForecastingReportGeneratedForMinusOneDays(String clusterId) {
-        test = extent.startTest("TC_CF_16.validateForecastingReportGeneratedForMinusOneDays: " + clusterId,
+        test = extent.startTest("TC_CF_91.validateForecastingReportGeneratedForMinusOneDays: " + clusterId,
                 "Verify User should not allow the user to enter negative values.");
         test.assignCategory(" Data - Forecasting ");
         LOGGER.info("Passed Parameter Is : " + clusterId);
@@ -48,7 +48,7 @@ public class TC_CF_91 extends BaseClass {
             forecasting.setForecastingDays(forecastingNoOfDays);
             LOGGER.info("Set Forecasting days as: " + forecastingNoOfDays);
             test.log(LogStatus.INFO, "Set Forecasting days as: " + forecastingNoOfDays);
-            String scheduleErrorMsg = "minimum number of days to predict is 1.";
+            String scheduleErrorMsg = "please enter valid number.";
             forecasting.verifyScheduleErrorSuccessMsg(scheduleErrorMsg);
             test.log(LogStatus.PASS, "Verified Minimum number of days to predict is 1. Please enter valid number.");
             forecasting.clickOnModalRunButton();

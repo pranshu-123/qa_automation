@@ -32,7 +32,7 @@ public class ForecastingPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
     public WebElement confirmationMessageElement;
 
-    @FindBy(xpath = "//span[contains(@class,'text-fatal')]")
+    @FindBy(xpath = "//span[text()[normalize-space()='Please enter valid number.']]")
     public WebElement ForecastingErrorMessageElement;
 
     @FindBy(xpath = "//h2[@class='text-white']//button[1]")
@@ -65,7 +65,7 @@ public class ForecastingPageObject {
     @FindBy(xpath = "//div[text()='The report has been scheduled successfully.']")
     public WebElement scheduleSuccessMsg;
 
-    @FindBy(xpath = "//section[contains(@class,'component-message-banner R')]//span[1]")
+    @FindBy(xpath = "//div[text()='Please, Make sure valid inputs.']")
     public WebElement scheduleErrorMsg;
 
     @FindBy(xpath = "//input[@placeholder='Email']")

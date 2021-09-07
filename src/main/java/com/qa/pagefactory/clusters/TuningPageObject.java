@@ -21,7 +21,7 @@ public class TuningPageObject {
     @FindBy(xpath = "//span[@class='cta-primary component-cta']//a[1]")
     public WebElement runButton;
 
-    @FindBy(xpath = "(//span[contains(text(),'Run')])[2]/parent::a")
+    @FindBy(xpath = "//a[normalize-space()='Run']")
     public WebElement modalRunButton;
 
     @FindBy(xpath = "//div[@class='close pointer']")

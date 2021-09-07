@@ -12,10 +12,10 @@ public class TopXPageObject {
     @FindBy(xpath = "//span[contains(text(),'Run New')]")
     public WebElement runNowButton;
 
-    @FindBy(xpath = "//span[contains(text(),'Run')]")
+    @FindBy(xpath = "//span[@class='cta-primary component-cta']//a[1]")
     public WebElement runButton;
 
-    @FindBy(xpath = "(//span[contains(text(),'Run')])")
+    @FindBy(xpath = "//a[normalize-space()='Run']")
     public WebElement modalRunButton;
 
     //@FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
@@ -50,7 +50,7 @@ public class TopXPageObject {
     @FindBy(xpath = "(//*[@class=\"select2-selection__rendered\"])[4]")
     public WebElement queuesDropdown;
     
-    @FindBy(xpath = "//div/b[text()='Schedule Name']//following::p/input")
+    @FindBy(xpath = "//label[text()='Schedule Name']/following::input")
     public WebElement scheduleNameTextbox;
     
     @FindBy(xpath ="//p[@class='element-inline']/input")
@@ -65,18 +65,18 @@ public class TopXPageObject {
     @FindBy(xpath = "//ul[contains(concat(' ', @class, ' '), 'select2-results__options')]/li")
     public List<WebElement> clusterList;
 
-    @FindBy(xpath = "(//b[contains(text(), 'Users')])[1]/following-sibling::p/select/option")
+    @FindBy(xpath = "(//label[contains(text(), 'Users')])[1]/following-sibling::span//li")
     public List<WebElement> usersList;
 
-    @FindBy(xpath = "(//b[contains(text(), 'Users')])[1]/following-sibling::p//span[contains(@class, 'select2-selection')]")
+    @FindBy(xpath = "(//label[contains(text(), 'Users')])[1]/following-sibling::span//ul[@class='select2-selection__rendered']")
     public WebElement usersSelectTextField;
 
-    @FindBy(xpath = "(//b[contains(text(), 'Real Users')])[1]/following-sibling::p//span[contains(@class, " +
-        "'select2-selection')]")
+    @FindBy(xpath = "(//label[contains(text(), 'Real Users')])[1]/following-sibling::span//ul[contains(@class, " +
+        "'select2-selection__rendered')]")
     public WebElement realUsersSelectTextField;
 
-    @FindBy(xpath = "(//b[contains(text(), 'Queues')])[1]/following-sibling::p//span[contains(@class, " +
-            "'select2-selection')]")
+    @FindBy(xpath = "(//label[contains(text(), 'Queues')])[1]/following-sibling::span//ul[contains(@class, " +
+            "'select2-selection__rendered')]")
     public WebElement queuesSelectTextField;
 
     @FindBy(xpath = "(//b[contains(text(), 'Real Users')])[1]/following-sibling::p/select/option")

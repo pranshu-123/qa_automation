@@ -18,7 +18,7 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/a")
     public List<WebElement> confirmationMessageElementClose;
 
-    @FindBy(linkText = "Run")
+    @FindBy(linkText = "//span[@class='cta-primary component-cta']//a[1]")
     public WebElement modalRunButton;
 
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")

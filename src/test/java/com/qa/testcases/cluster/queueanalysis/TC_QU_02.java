@@ -52,7 +52,7 @@ public class TC_QU_02 extends BaseClass {
             waitExecuter.sleep(2000);
             waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
             qaPageObject.addIcon.click();
-            MouseActions.clickOnElement(driver,qaPageObject.modalRunButton);
+            actions.performActionWithPolling(qaPageObject.modalRunButton, UserAction.CLICK);
             waitExecuter.sleep(1000);
             //Select ClusterId
             test.log(LogStatus.INFO, "Selecting ClusterId: " + clusterId);

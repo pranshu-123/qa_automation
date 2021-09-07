@@ -2,7 +2,9 @@ package com.qa.testcases.cluster.queueanalysis;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.pagefactory.clusters.QueueAnalysisPageObject;
 import com.qa.scripts.clusters.QueueAnalysis;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.annotations.Test;
 
@@ -27,6 +29,8 @@ public class TC_QU_22 extends BaseClass {
         test.log(LogStatus.INFO, "Initialize all class objects");
         LOGGER.info("Initialize all class objects");
         QueueAnalysis queueAnalysis = new QueueAnalysis(driver);
+        QueueAnalysisPageObject qaPageObject = new QueueAnalysisPageObject(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         // Navigate to Queue Analysis tab from header
         test.log(LogStatus.INFO, "Navigate to Queue Analysis tab from header");
         test.log(LogStatus.INFO, "Clicked on Queue Analysis tab");
@@ -43,10 +47,12 @@ public class TC_QU_22 extends BaseClass {
         test.log(LogStatus.INFO, "Schedule with multiple e-mails");
         LOGGER.info("Schedule with multiple e-mails");
         queueAnalysis.scheduleWithMultiEmail(scheduleName, multiEmail);
+        waitExecuter.waitUntilPageFullyLoaded();
         // Define day of the week and time
         test.log(LogStatus.INFO, "Define duration as- Every 2 week and time as 22:00");
         LOGGER.info("Define duration as- Every 2 week and time as 22:00");
         queueAnalysis.selectDayTime("Every 2 Weeks", "22", "00");
+        waitExecuter.waitUntilPageFullyLoaded();
         queueAnalysis.clickOnModalScheduleButton();
         LOGGER.info("Clicked on modal Schedule Button");
         test.log(LogStatus.INFO, "Clicked on modal Schedule Button");

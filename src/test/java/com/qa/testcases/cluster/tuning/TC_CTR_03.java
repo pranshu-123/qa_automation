@@ -74,6 +74,7 @@ public class TC_CTR_03 extends BaseClass {
                         datePicker.setEndDate(DateUtils.getCurrentDate());
                         datePicker.clickOnCustomDateApplyBtn();
                         homePage.selectMultiClusterId(clusterId);
+                        waitExecuter.waitUntilPageFullyLoaded();
                         tuning.clickOnModalRunButton();
                         waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
                         waitExecuter.sleep(50000);

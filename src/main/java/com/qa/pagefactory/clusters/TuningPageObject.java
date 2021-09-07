@@ -9,7 +9,7 @@ import java.util.List;
 
 public class TuningPageObject {
 
-    @FindBy(xpath="")
+    @FindBy(xpath = "")
     public WebElement e;
 
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
@@ -34,7 +34,7 @@ public class TuningPageObject {
     public WebElement scheduleName;
 
     //@FindBy(xpath = "(//span[contains(text(),'Schedule')])[2]/parent::a")
-    @FindBy(xpath = "//div[contains(@class, 'component-section-header')]/span/a/span")
+    @FindBy(xpath = "//span[@class='cta-primary component-cta']//a[1]")
     public WebElement modalScheduleButton;
 
     @FindBy(xpath = "//div[@class='task-runner-ht']/section/span[1]")
@@ -55,8 +55,10 @@ public class TuningPageObject {
     @FindBy(xpath = "//div[@id='breadcrumb']/span/span")
     public WebElement archivesText;
 
-    @FindBy(xpath="//div[@class='close pointer']")
+    @FindBy(xpath = "//div[@class='close pointer']")
     public WebElement close;
 
-    public TuningPageObject(WebDriver driver){PageFactory.initElements(driver,this);}
+    public TuningPageObject(WebDriver driver) {
+        PageFactory.initElements(driver, this);
+    }
 }

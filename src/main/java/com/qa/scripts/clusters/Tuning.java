@@ -15,6 +15,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,11 +23,11 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 public class Tuning {
-    private WebDriver driver;
-    private WaitExecuter waitExecuter;
-    private TuningPageObject tuningPageObject;
     private static final Logger LOGGER = Logger.getLogger(Tuning.class.getName());
-    private UserActions userActions = new UserActions(driver);
+    private WebDriver driver;
+    private final WaitExecuter waitExecuter;
+    private final TuningPageObject tuningPageObject;
+    private final UserActions userActions = new UserActions(driver);
 
     public Tuning(WebDriver driver) {
         this.driver = driver;
@@ -50,9 +51,11 @@ public class Tuning {
     }
 
     public void clickOnModalRunButton() {
-        //MouseActions.clickOnElement(driver, tuningPageObject.modalRunButton);
-        userActions.performActionWithPolling(tuningPageObject.runButton, UserAction.CLICK);
-        /*MouseActions.clickOnElement(driver, tuningPageObject.runButton);*/
+        try {
+            MouseActions.clickOnElement(driver, tuningPageObject.modalRunButton);
+        } catch (TimeoutException te) {
+            MouseActions.clickOnElement(driver, tuningPageObject.modalRunButton);
+        }
     }
 
     public List<String> getClusterOptions(CommonPageObject commonPageObject) {
@@ -88,7 +91,7 @@ public class Tuning {
         }
     }
 
-    public void closeNewReport(){
+    public void closeNewReport() {
         try {
             MouseActions.clickOnElement(driver, tuningPageObject.closeNewReport);
         } catch (TimeoutException te) {
@@ -104,12 +107,12 @@ public class Tuning {
         }
     }
 
-    public void createScheduleWithName(String name){
+    public void createScheduleWithName(String name) {
         waitExecuter.waitUntilElementPresent(tuningPageObject.scheduleName);
         userActions.performActionWithPolling(tuningPageObject.scheduleName, UserAction.SEND_KEYS, name);
     }
 
-    public void createScheduleWithNameAndEmail(String name, String email){
+    public void createScheduleWithNameAndEmail(String name, String email) {
         waitExecuter.waitUntilElementPresent(tuningPageObject.scheduleName);
         userActions.performActionWithPolling(tuningPageObject.scheduleName, UserAction.SEND_KEYS, name);
         userActions.performActionWithPolling(tuningPageObject.email, UserAction.SEND_KEYS, email);
@@ -117,25 +120,25 @@ public class Tuning {
         MouseActions.clickOnElement(driver, tuningPageObject.addEmail);
     }
 
-    public void createScheduleWithNameAndMultiEmail(String name, List<String> multiEmail){
+    public void createScheduleWithNameAndMultiEmail(String name, List<String> multiEmail) {
         waitExecuter.waitUntilElementPresent(tuningPageObject.scheduleName);
         userActions.performActionWithPolling(tuningPageObject.scheduleName, UserAction.SEND_KEYS, name);
-        for(String email: multiEmail){
+        for (String email : multiEmail) {
             userActions.performActionWithPolling(tuningPageObject.email, UserAction.SEND_KEYS, email);
             waitExecuter.waitUntilElementPresent(tuningPageObject.addEmail);
             MouseActions.clickOnElement(driver, tuningPageObject.addEmail);
         }
     }
 
-    public void createSchedule(Map<String, String> scheduleMap ){
-        for(Map.Entry<String, String> e: scheduleMap.entrySet()){
-            if(e.getKey().equalsIgnoreCase("NAME")) {
+    public void createSchedule(Map<String, String> scheduleMap) {
+        for (Map.Entry<String, String> e : scheduleMap.entrySet()) {
+            if (e.getKey().equalsIgnoreCase("NAME")) {
                 tuningPageObject.scheduleName.sendKeys(e.getValue());
             }
         }
     }
 
-    public void clickOnModalScheduleButton(){
+    public void clickOnModalScheduleButton() {
         try {
             waitExecuter.waitUntilElementPresent(tuningPageObject.modalScheduleButton);
             MouseActions.clickOnElement(driver, tuningPageObject.modalScheduleButton);
@@ -145,21 +148,21 @@ public class Tuning {
         }
     }
 
-    public void verifyScheduleSuccessMsg(String successMsg){
+    public void verifyScheduleSuccessMsg(String successMsg) {
         waitExecuter.waitUntilElementPresent(tuningPageObject.scheduleSuccessMsg);
         Assert.assertEquals(tuningPageObject.scheduleSuccessMsg.getText(), successMsg, "The Schedule success " +
                 "message mismatch");
     }
 
-    public void verifyScheduleToRun(){
+    public void verifyScheduleToRun() {
         List<String> expectedSchedule = new ArrayList<>(Arrays.asList(PageConstants.TuningScheduleRun.SCHEDULE_RUN));
         waitExecuter.waitUntilElementPresent(tuningPageObject.scheduleToRun);
         Select scheduleTorunDropDown = new Select(tuningPageObject.scheduleToRun);
-        List <WebElement> elementScheduleTorunDropDown = scheduleTorunDropDown.getOptions();
-        if(elementScheduleTorunDropDown.size() > 0 ){
-            for(int i=0; i<elementScheduleTorunDropDown.size(); i++){
+        List<WebElement> elementScheduleTorunDropDown = scheduleTorunDropDown.getOptions();
+        if (elementScheduleTorunDropDown.size() > 0) {
+            for (int i = 0; i < elementScheduleTorunDropDown.size(); i++) {
                 WebElement e = elementScheduleTorunDropDown.get(i);
-                LOGGER.info("Schedule date: "+ e.getText());
+                LOGGER.info("Schedule date: " + e.getText());
                 Assert.assertEquals(e.getText().trim(), expectedSchedule.get(i), "Mismatch in schedule run date.");
             }
         }

@@ -62,7 +62,7 @@ public class IM_TC_18_Part2 extends BaseClass {
                 test.log(LogStatus.SKIP, "There are no successful apps for impala for selected cluster- " + clusterId);
             }
         } catch (NoSuchElementException ex) {
-
+            throw ex;
         }
 
     }

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import com.qa.enums.UserAction;
+import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -22,7 +24,7 @@ import com.relevantcodes.extentreports.LogStatus;
 @Marker.All
 @Marker.JobsWorkflow
 
-public class TC_PWF_41 extends BaseClass {
+public class   TC_PWF_41 extends BaseClass {
 	private static final Logger LOGGER = Logger.getLogger(TC_PWF_41.class.getName());
 
 	@Test
@@ -33,6 +35,7 @@ public class TC_PWF_41 extends BaseClass {
 		LOGGER.info("Click on Jobs Pipeline tab");
 		test.log(LogStatus.INFO, "Initialize all classes");
 		JobsWorkflow jobWorkflow = new JobsWorkflow(driver);
+		UserActions userActions = new UserActions(driver);
 		JobsWorkflowPageObject workflowPageObject = new JobsWorkflowPageObject(driver);
 		test.log(LogStatus.INFO, "Navigate to pipeline tab through Jobs page");
 		jobWorkflow.clickOnJobsPipelineTab();
@@ -70,6 +73,7 @@ public class TC_PWF_41 extends BaseClass {
 			} else {
 				LOGGER.info("The workflow status is not success hence skipping the testcase");
 				test.log(LogStatus.SKIP, "The workflow status is not in success state hence skipping the testcase");
+
 			}
 		} catch (NoSuchElementException ex) {
 			if (workflowPageObject.close.isDisplayed()) {

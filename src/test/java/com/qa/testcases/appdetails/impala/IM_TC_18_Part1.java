@@ -62,6 +62,7 @@ public class IM_TC_18_Part1 extends BaseClass {
             appDetailsPage.reset();
         } catch (NoSuchElementException ex) {
             appDetailsPage.reset();
+            throw ex;
         }
 
     }

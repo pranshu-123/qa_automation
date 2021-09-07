@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import com.qa.enums.UserAction;
+import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -32,6 +34,7 @@ public class TC_PWF_40 extends BaseClass {
 		LOGGER.info("Click on Jobs Pipeline tab");
 		test.log(LogStatus.INFO, "Initialize all classes");
 		JobsWorkflow jobWorkflow = new JobsWorkflow(driver);
+		UserActions userActions = new UserActions(driver);
 		JobsWorkflowPageObject workflowPageObject = new JobsWorkflowPageObject(driver);
 		test.log(LogStatus.INFO, "Navigate to pipeline tab through Jobs page");
 		jobWorkflow.clickOnJobsPipelineTab();

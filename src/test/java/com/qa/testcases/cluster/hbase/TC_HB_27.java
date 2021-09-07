@@ -35,6 +35,7 @@ public class TC_HB_27 extends BaseClass {
 
         //Navigate to HBase tab
         waitExecuter.waitUntilElementClickable(hBasePageObject.hbaseTab);
+        waitExecuter.sleep(2000);
         MouseActions.clickOnElement(driver, hBasePageObject.hbaseTab);
         LOGGER.info("Clicked on HBase Tab");
         hbase.selectDateAsLast30Days();
@@ -51,7 +52,7 @@ public class TC_HB_27 extends BaseClass {
         //Verify all Hbase cluster graph metric
         String[] expectedHBaseGraphMetrics = {"Total Read Request Count","Total Write Request Count","Total Store File Size",
                 "Total Percent Files Local"};
-        String[] hbaseGraph = {"hbaseGraph0","hbaseGraph1","hbaseGraph2","hbaseGraph3"};
+        String[] hbaseGraph = {"hbaseGraph0","hbaseGraph1","hbaseGraph0","hbaseGraph1"};
         for(int i=0 ; i<4; i++){
             hbase.verifyHBaseKPIGraphs(hBasePageObject,expectedHBaseGraphMetrics[i], hbaseGraph[i]);
         }

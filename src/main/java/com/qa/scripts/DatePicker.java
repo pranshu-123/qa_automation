@@ -272,9 +272,9 @@ public class DatePicker {
     public String convertedSetDate(String startDate, String endDate) {
 
         String convertedStartDate = convertDate(startDate, "MM/dd/yyyy", "MMMM d, yyyy");
-
+        convertedStartDate+=", 00:00";
         String convertedEndDate = convertDate(endDate, "MM/dd/yyyy", "MMMM d, yyyy");
-
+        convertedEndDate+=", 00:00";
         String finalDate = convertedStartDate + " - " + convertedEndDate;
 
         return finalDate;
@@ -288,9 +288,9 @@ public class DatePicker {
     public String convertedSetCurrentAndPastDate(Integer minusDays) {
 
         String convertedStartDate = convertDate(DateUtils.getPastDate(minusDays), "MM/dd/yyyy", "MMMM d, yyyy");
-
+        convertedStartDate+=", 00:00";
         String convertedEndDate = convertDate(DateUtils.getCurrentDate(), "MM/dd/yyyy", "MMMM d, yyyy");
-
+        convertedEndDate+=", 00:00";
         String finalDate = convertedStartDate + " - " + convertedEndDate;
 
         System.out.println(finalDate);

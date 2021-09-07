@@ -2,9 +2,12 @@ package com.qa.testcases.cluster.queueanalysis;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.clusters.QueueAnalysisPageObject;
 import com.qa.scripts.clusters.QueueAnalysis;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
@@ -27,6 +30,7 @@ public class TC_QU_08 extends BaseClass {
         test.log(LogStatus.INFO, "Initialize all class objects");
         LOGGER.info("Initialize all class objects");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
+        UserActions actions = new UserActions(driver);
         QueueAnalysisPageObject qaPageObject = new QueueAnalysisPageObject(driver);
         QueueAnalysis queueAnalysis = new QueueAnalysis(driver);
         // Navigate to Queue Analysis tab from header
@@ -36,14 +40,13 @@ public class TC_QU_08 extends BaseClass {
         queueAnalysis.navigateToQueueAnalysis();
         waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
         qaPageObject.addIcon.click();
-        waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
+        MouseActions.clickOnElement(driver,qaPageObject.modalRunButton);
         waitExecuter.sleep(1000);
         //Click on Run button of modal window
         test.log(LogStatus.INFO, "Click on Run button of modal window");
         LOGGER.info("Click on Run button of modal window");
         waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
-        qaPageObject.modalRunButton.click();
-        waitExecuter.waitUntilTextNotToBeInWebElement(qaPageObject.footerWaitCycle, "Please Wait");
+        actions.performActionWithPolling(qaPageObject.modalRunButton, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
         try {
             waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.successBanner,

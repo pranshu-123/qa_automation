@@ -30,6 +30,7 @@ public class TC_QU_47 extends BaseClass {
         test.log(LogStatus.INFO, "Initialize all class objects");
         LOGGER.info("Initialize all class objects");
         QueueAnalysisPageObject qaPageObject = new QueueAnalysisPageObject(driver);
+        WaitExecuter wait = new WaitExecuter(driver);
         QueueAnalysis queueAnalysis = new QueueAnalysis(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         // Navigate to Queue Analysis tab from header

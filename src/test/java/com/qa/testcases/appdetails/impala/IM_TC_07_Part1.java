@@ -65,6 +65,7 @@ public class IM_TC_07_Part1 extends BaseClass {
             appDetailsPage.reset();
         } catch (NoSuchElementException ex) {
             appDetailsPage.reset();
+            throw ex;
         }
 
     }

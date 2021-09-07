@@ -43,7 +43,7 @@ public class TC_CO_19 extends BaseClass {
     // Select this month
     DatePicker datePicker = new DatePicker(driver);
     datePicker.clickOnDatePicker();
-    datePicker.selectThisMonth();
+    datePicker.selectLast90Days();
 
     //Click on first alert displayed at homepage
     try {

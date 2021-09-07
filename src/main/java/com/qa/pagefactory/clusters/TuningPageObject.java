@@ -18,7 +18,7 @@ public class TuningPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/a")
     public List<WebElement> confirmationMessageElementClose;
 
-    @FindBy(xpath = "//span[contains(text(),'Run')]/parent::a")
+    @FindBy(xpath = "//span[@class='cta-primary component-cta']//a[1]")
     public WebElement runButton;
 
     @FindBy(xpath = "(//span[contains(text(),'Run')])[2]/parent::a")
@@ -30,7 +30,7 @@ public class TuningPageObject {
     @FindBy(xpath = "//span[contains(text(),'Schedule')]/parent::a")
     public WebElement scheduleButton;
 
-    @FindBy(xpath = "(//form[@name='taskrunnerForm']/div/div[3]/b[contains(text(), 'Schedule Name')]/parent::div/p/input)[1]")
+    @FindBy(xpath = "//label[text()='Schedule Name']/following::input")
     public WebElement scheduleName;
 
     //@FindBy(xpath = "(//span[contains(text(),'Schedule')])[2]/parent::a")

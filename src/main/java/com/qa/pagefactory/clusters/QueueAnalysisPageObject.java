@@ -18,7 +18,7 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/a")
     public List<WebElement> confirmationMessageElementClose;
 
-    @FindBy(xpath = "//span[contains(text(),'Run')]")
+    @FindBy(linkText = "Run")
     public WebElement modalRunButton;
 
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
@@ -30,7 +30,7 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "//span[contains(@class,'text-fatal')]")
     public WebElement messageOnSelectingBeyond30days;
 
-    @FindBy(xpath = "//section[contains(@class,'icon-fatal')]/span")
+    @FindBy(xpath = "//section[contains(@class,'component-message-banner bg-fatal')]//div[1]")
     public List<WebElement> invalidInputMessage;
 
     @FindBy(className = "select2-search__field")
@@ -92,10 +92,10 @@ public class QueueAnalysisPageObject {
     public WebElement yarnResources;
 
 
-    @FindBy(xpath = "((//table/tbody/tr)[5]/td)[4]//span[contains(@class,'icon-calendar')]")
+    @FindBy(xpath = "//table[contains(@class,'component-data-tables row-hover')]/tbody[1]/tr[9]/td[4]/div[1]/span[2]/span[1]")
     public WebElement scheduleButton;
 
-    @FindBy(xpath = "(//form[@name='taskrunnerForm']/div/div[3]/b[contains(text(), 'Schedule Name')]/parent::div/p/input)[1]")
+    @FindBy(xpath = "//label[text()='Schedule Name']/following::input")
     public WebElement scheduleName;
 
     @FindBy(xpath = "//input[@type='email']")
@@ -104,10 +104,10 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "//input[@type='email']/following-sibling::span")
     public WebElement addEmail;
 
-    @FindBy(xpath = "//div[contains(@class,'modal')]//span[contains(text(),'Schedule')]")
+    @FindBy(xpath = "//span[@class='cta-primary component-cta']//a[1]")
     public WebElement modalScheduleButton;
 
-    @FindBy(xpath = "//div[@class='task-runner-ht']/section/span[1]")
+    @FindBy(xpath = "//section[contains(@class,'component-message-banner bg-success')]//div[1]")
     public WebElement scheduleSuccessMsg;
 
     @FindBy(xpath = "//select[contains(@class,'schedule-days')]")
@@ -161,7 +161,7 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "//span[@class='text-fatal']")
     public WebElement invalidDateRangeMessage;
 
-    @FindBy(xpath = "((//table/tbody/tr)[5]/td)[4]//span[contains(@class,'icon-add')]")
+    @FindBy(xpath = "//table[contains(@class,'component-data-tables row-hover')]/tbody[1]/tr[9]/td[4]/div[1]/span[1]/span[1]")
     public WebElement addIcon;
 
     @FindBy(xpath = "((//table/tbody/tr)[5]/td)[4]//span[contains(@class,'icon-expand')]")
@@ -176,10 +176,10 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/span")
     public WebElement pleaseWaitBanner;
 
-    @FindBy(xpath="//div[@role='dialog']/div[contains(@class,'modal-sec-foot')]/span//span")
+    @FindBy(xpath="//div[@class='modal-body scrollbar-s']/following-sibling::div[1]")
     public WebElement footerWaitCycle;
 
-    @FindBy(xpath = "//tbody/tr[5]/td/span[text()='Queue Analysis']")
+    @FindBy(xpath = "//tbody[1]/tr[9]/td[1]/span[text()='Queue Analysis']")
     public WebElement clickOnQAReports;
 
     @FindBy(xpath ="//tbody/tr[1]/td[3]/span")

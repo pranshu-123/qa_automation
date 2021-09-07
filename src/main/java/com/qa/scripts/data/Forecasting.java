@@ -217,7 +217,6 @@ public class Forecasting {
     }
 
     public List<String> getAllHistoryRanges() {
-
         clickOnHistoryDateRange();
         int dateRangeCount = forecastingPageObject.listDateRange.size();
         if (dateRangeCount > 0) {

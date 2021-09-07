@@ -35,13 +35,13 @@ public class ForecastingPageObject {
     @FindBy(xpath = "//span[contains(@class,'text-fatal')]")
     public WebElement ForecastingErrorMessageElement;
 
-    @FindBy(xpath = "//h2[@class='text-white']/div")
+    @FindBy(xpath = "//h2[@class='text-white']//button[1]")
     public WebElement modalCancelButton;
 
     @FindBy(xpath = "//div[@class='panel-body']/div[2]/p/b")
     public WebElement previousReportData;
 
-    @FindBy(xpath = "//div[@class='component-date-picker']/i[1]")
+    @FindBy(xpath = "//label[text()='History (Date Range)']/following-sibling::div")
     public WebElement historyDateRangeDropDown;
 
     @FindBy(xpath = "(//form[@name='taskrunnerForm']/div/div[3]/b[contains(text(), 'Schedule Name')]/parent::div/p/input)[1]")

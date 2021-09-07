@@ -1,6 +1,9 @@
 package com.qa.scripts.clusters;
 
 import com.qa.enums.UserAction;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
+import com.qa.pagefactory.TopPanelPageObject;
+import com.qa.pagefactory.clusters.QueueAnalysisPageObject;
 import com.qa.pagefactory.clusters.TopXPageObject;
 import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.utils.JavaScriptExecuter;
@@ -22,6 +25,9 @@ import org.testng.Assert;
 public class TopX {
     private WebDriver driver;
     private WaitExecuter waitExecuter;
+    private QueueAnalysisPageObject queueAnalysisPageObject;
+    private SubTopPanelModulePageObject topPanelComponentPageObject;
+    private UserActions userAction;
     private TopXPageObject topXPageObject;
     private UserActions actions;
     private static final Logger LOGGER = Logger.getLogger(TopX.class.getName());
@@ -52,7 +58,7 @@ public class TopX {
 
     public void setTopXNumber(String number) {
         waitExecuter.waitUntilElementPresent(topXPageObject.topXNumber);
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(2000);
         topXPageObject.topXNumber.clear();
         JavaScriptExecuter.clearTextField(driver, topXPageObject.topXNumber);
         actions.performActionWithPolling(topXPageObject.topXNumber,
@@ -269,6 +275,17 @@ public class TopX {
         }
         return true;
     }
+
+    /* Navigate to Queue Analysis Tab */
+    public void navigateToTuning() {
+        LOGGER.info("Navigate to Queue Analysis tab from header");
+        waitExecuter.sleep(4000);
+        // Click on Queue Analysis tab
+        LOGGER.info("Clicked on Queue Analysis tab");
+        userAction.performActionWithPolling(topPanelComponentPageObject.reports, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.addIcon);
+    }
+
 
     /**
      * Click on the latest report

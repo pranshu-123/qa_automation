@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.clusters.QueueAnalysisPageObject;
 import com.qa.scripts.clusters.QueueAnalysis;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
@@ -39,7 +40,7 @@ public class TC_QU_08 extends BaseClass {
         queueAnalysis.navigateToQueueAnalysis();
         waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
         qaPageObject.addIcon.click();
-        waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
+        MouseActions.clickOnElement(driver,qaPageObject.modalRunButton);
         waitExecuter.sleep(1000);
         //Click on Run button of modal window
         test.log(LogStatus.INFO, "Click on Run button of modal window");

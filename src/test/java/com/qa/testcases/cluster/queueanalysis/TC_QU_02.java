@@ -6,6 +6,7 @@ import com.qa.enums.UserAction;
 import com.qa.pagefactory.DatePickerPageObject;
 import com.qa.pagefactory.clusters.QueueAnalysisPageObject;
 import com.qa.scripts.clusters.QueueAnalysis;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
@@ -51,7 +52,7 @@ public class TC_QU_02 extends BaseClass {
             waitExecuter.sleep(2000);
             waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
             qaPageObject.addIcon.click();
-            waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
+            MouseActions.clickOnElement(driver,qaPageObject.modalRunButton);
             waitExecuter.sleep(1000);
             //Select ClusterId
             test.log(LogStatus.INFO, "Selecting ClusterId: " + clusterId);

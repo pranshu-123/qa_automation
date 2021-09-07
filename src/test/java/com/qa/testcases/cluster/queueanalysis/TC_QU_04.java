@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.clusters.QueueAnalysisPageObject;
 import com.qa.scripts.clusters.QueueAnalysis;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
@@ -45,7 +46,7 @@ public class TC_QU_04 extends BaseClass {
         test.log(LogStatus.INFO, "Click on Run button of modal window");
         LOGGER.info("Click on Run button of modal window");
         waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
-        actions.performActionWithPolling(qaPageObject.modalRunButton, UserAction.CLICK);
+        MouseActions.clickOnElement(driver,qaPageObject.modalRunButton);
         waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
         try {
             waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.successBanner,

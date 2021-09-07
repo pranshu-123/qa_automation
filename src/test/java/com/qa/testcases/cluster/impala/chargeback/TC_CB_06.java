@@ -64,6 +64,7 @@ public class TC_CB_06 extends BaseClass {
         // Convert the set date format to the output format of calendar
         LOGGER.info("Convert the date in expected format");
         String expected_date = datePicker.convertedSetCurrentAndPastDate(-3);
+        LOGGER.info("Expected date"+expected_date);
         waitExecuter.sleep(1000);
 
         LOGGER.info("Verify calendar tab");

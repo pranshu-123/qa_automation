@@ -23,7 +23,7 @@ public class ForecastingPageObject {
     @FindBy(linkText= "Run")
     public WebElement modalRunButton;
 
-    @FindBy(xpath = "(//span[contains(text(),'Schedule')])[2]/parent::a")
+    @FindBy(xpath = "//span[@class='cta-primary component-cta']//a[1]")
     public WebElement modalScheduleButton;
 
     @FindBy(xpath = "//label[text()[normalize-space()='Forecasting (# Days)']]/following::input")
@@ -44,7 +44,7 @@ public class ForecastingPageObject {
     @FindBy(xpath = "//label[text()='History (Date Range)']/following-sibling::div")
     public WebElement historyDateRangeDropDown;
 
-    @FindBy(xpath = "(//form[@name='taskrunnerForm']/div/div[3]/b[contains(text(), 'Schedule Name')]/parent::div/p/input)[1]")
+    @FindBy(xpath = "//label[text()='Schedule Name']/following::input")
     public WebElement scheduleName;
 
     @FindBy(xpath = "//input[@type='email']/following-sibling::span")
@@ -62,7 +62,7 @@ public class ForecastingPageObject {
     @FindBy(xpath = "//input[@class='display-time']/following::select[@class='minutes']")
     public WebElement minutesDropdown;
 
-    @FindBy(xpath = "//div[@class='task-runner-ht']/section/span[1]")
+    @FindBy(xpath = "//div[text()='The report has been scheduled successfully.']")
     public WebElement scheduleSuccessMsg;
 
     @FindBy(xpath = "//section[contains(@class,'component-message-banner R')]//span[1]")

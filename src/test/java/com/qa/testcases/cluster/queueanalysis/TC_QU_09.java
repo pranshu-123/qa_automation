@@ -35,6 +35,7 @@ public class TC_QU_09 extends BaseClass {
         test.log(LogStatus.INFO, "Validate Queue Analysis tab loaded successfully");
         queueAnalysis.navigateToQueueAnalysis();
         queueAnalysis.runAQueueAnalysisReport();
+        waitExecuter.waitUntilPageFullyLoaded();
         try {
             waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.successBanner,
                     "SUCCESS");

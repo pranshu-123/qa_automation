@@ -67,7 +67,7 @@ public class QueueAnalysis {
         waitExecuter.sleep(2000);
         commonPageObject = new CommonPageObject(driver);
         MouseActions.clickOnElement(driver, commonPageObject.clusterDropdown);
-        waitExecuter.sleep(2000);
+        waitExecuter.sleep(3000);
         System.out.println("Size of cluster in dropdown: " + commonPageObject.clustersList.size());
         waitExecuter.waitUntilElementPresent(commonPageObject.clusterSearchBox);
         commonPageObject.clusterSearchBox.sendKeys(clusterId);
@@ -410,8 +410,8 @@ public class QueueAnalysis {
     public void runAQueueAnalysisReport() {
         waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.addIcon);
         queueAnalysisPageObject.addIcon.click();
-        waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.modalRunButton);
-        waitExecuter.sleep(1000);
+        userAction.performActionWithPolling(queueAnalysisPageObject.modalRunButton, UserAction.CLICK);
+        waitExecuter.sleep(3000);
         //Click on Run button of modal window
         LOGGER.info("Click on Run button of modal window");
         waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.modalRunButton);

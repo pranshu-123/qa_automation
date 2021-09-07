@@ -41,12 +41,12 @@ public class TC_QU_04 extends BaseClass {
         waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
         qaPageObject.addIcon.click();
         waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(5000);
         //Click on Run button of modal window
         test.log(LogStatus.INFO, "Click on Run button of modal window");
         LOGGER.info("Click on Run button of modal window");
         waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
-        MouseActions.clickOnElement(driver,qaPageObject.modalRunButton);
+        actions.performActionWithPolling(qaPageObject.modalRunButton, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
         try {
             waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.successBanner,

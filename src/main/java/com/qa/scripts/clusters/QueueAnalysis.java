@@ -415,7 +415,7 @@ public class QueueAnalysis {
         //Click on Run button of modal window
         LOGGER.info("Click on Run button of modal window");
         waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.modalRunButton);
-        userAction.performActionWithPolling(queueAnalysisPageObject.modalRunButton, UserAction.CLICK);
+        MouseActions.clickOnElement(driver,queueAnalysisPageObject.modalRunButton);
         waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.addIcon);
     }
 

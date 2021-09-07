@@ -33,6 +33,7 @@ public class TC_QU_25 extends BaseClass {
         test.log(LogStatus.INFO, "Initialize all class objects");
         LOGGER.info("Initialize all class objects");
         QueueAnalysis queueAnalysis = new QueueAnalysis(driver);
+        WaitExecuter wait = new WaitExecuter(driver);
         QueueAnalysisPageObject qaPageObject = new QueueAnalysisPageObject(driver);
         Actions action = new Actions(driver);
         // Navigate to Queue Analysis tab from header
@@ -55,8 +56,8 @@ public class TC_QU_25 extends BaseClass {
         test.log(LogStatus.INFO, "Define day of the week as- Daily and time- 10.30");
         LOGGER.info("Define day of the week as- Daily and time- 10.30");
         queueAnalysis.selectDayTime("Daily", "10", "30");
+        wait.waitUntilPageFullyLoaded();
         action.sendKeys(Keys.ESCAPE).build().perform();
-        WaitExecuter wait = new WaitExecuter(driver);
         wait.sleep(1000);
         wait.waitUntilElementClickable(qaPageObject.close);
         qaPageObject.close.click();

@@ -54,7 +54,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[6]")
     public List<WebElement> getApplicationClusterId;
 
-    @FindBy(xpath = "//h3[contains(text(),'No Data Available')]")
+    @FindBy(xpath = "//h3[text()='There is no information available.']")
     public WebElement whenNoApplicationPresent;
 
     @FindBy(xpath = "(//div[contains(@class,'check-items-container')])[1]//span[1]")
@@ -282,7 +282,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//tbody[@id = 'runningApps-body']/tr/td[2]")
     public List<WebElement> getStatusColumnOfRunningApps;
 
-    @FindBy(xpath = "//a[text()='Status']//following::div[contains(@class,'check-items-container')]//span[2][not(contains(@class,'show-only'))]")
+    @FindBy(xpath = "//a[contains(.,'Status')]//following::div[contains(@class,'check-items-container')]//span[2][not(contains(@class,'show-only'))]")
     public WebElement statusJobCount;
 
     @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[12]")

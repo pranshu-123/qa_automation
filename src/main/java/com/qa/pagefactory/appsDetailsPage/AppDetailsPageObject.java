@@ -156,10 +156,10 @@ public class AppDetailsPageObject {
     @FindBy(xpath = "//table[contains(@class,'component-data-tables')]//p[normalize-space(text())='No Fragments Data Available']")
     public List<WebElement> noFragments;
 
-    @FindBy(id = "inefficientApps")
+    @FindBy(xpath = "//a[@id='inefficientApps']")
     public WebElement inefficientAppsTab;
 
-    @FindBy(xpath = "//div[@class='filter-section']//a[text()='Application Events']")
+    @FindBy(xpath = "//a[contains(.,'Application Events')]")
     public WebElement eventToggleLeftPane;
 
     @FindBy(xpath = "(//h3[contains(@class,'expandable-header')])[2]/following-sibling::div[contains(@class,'filter-items')]//label")

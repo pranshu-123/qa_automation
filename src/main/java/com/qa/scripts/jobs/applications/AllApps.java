@@ -110,7 +110,7 @@ public class AllApps {
         }
         // Assert if the application type is selected successfully.
         try {
-            waitExecuter.waitUntilElementPresent(applicationsPageObject.whenNoApplicationPresent);
+            waitExecuter.waitUntilPageFullyLoaded();
         } catch (NoSuchElementException te) {
             throw new AssertionError("After de-selecting all status 'No Data Available' is not displayed.");
         }
@@ -124,7 +124,7 @@ public class AllApps {
             waitExecuter.waitUntilElementClickable(statusTypes.get(i));
         }
         try {
-            waitExecuter.waitUntilElementPresent(applicationsPageObject.whenNoApplicationPresent);
+            waitExecuter.waitUntilPageFullyLoaded();
         } catch (NoSuchElementException te) {
             throw new AssertionError("After de-selecting all status 'No Data Available' is not displayed.");
         }

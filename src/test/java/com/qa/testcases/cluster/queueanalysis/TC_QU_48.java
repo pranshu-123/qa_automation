@@ -30,6 +30,7 @@ public class TC_QU_48 extends BaseClass {
         test.log(LogStatus.INFO, "Initialize all class objects");
         LOGGER.info("Initialize all class objects");
         QueueAnalysis queueAnalysis = new QueueAnalysis(driver);
+        WaitExecuter wait = new WaitExecuter(driver);
         QueueAnalysisPageObject qaPageObject = new QueueAnalysisPageObject(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         // Navigate to Queue Analysis tab from header
@@ -52,6 +53,7 @@ public class TC_QU_48 extends BaseClass {
         test.log(LogStatus.INFO, "Define day of the week as- Daily and time- 10.30");
         LOGGER.info("Define day of the week as- Daily and time- 10.30");
         queueAnalysis.selectDayTime("Daily", "10", "30");
+        wait.waitUntilPageFullyLoaded();
         queueAnalysis.clickOnModalScheduleButton();
         LOGGER.info("Clicked on modal Schedule Button");
         test.log(LogStatus.INFO, "Clicked on modal Schedule Button");

@@ -44,9 +44,9 @@ public class IM_TC_07_Part2 extends BaseClass {
             allApps.selectCluster(clusterId);
             datePicker.clickOnDatePicker();
             datePicker.selectLast90Days();
-            waitExecuter.waitUntilElementClickable(appDetailsPageObject.resetButton);
+            waitExecuter.waitUntilPageFullyLoaded();
             int appCount = appDetailsPage.clickOnlyLink("Impala");
-            waitExecuter.waitUntilElementClickable(appDetailsPageObject.resetButton);
+            waitExecuter.waitUntilPageFullyLoaded();
             appDetailsPage.selectSuccessfulApplication();
             parentCondition:
             if (appCount > 0) {
@@ -74,6 +74,7 @@ public class IM_TC_07_Part2 extends BaseClass {
             appDetailsPage.reset();
         } catch (NoSuchElementException ex) {
             appDetailsPage.reset();
+            throw ex;
         }
 
     }

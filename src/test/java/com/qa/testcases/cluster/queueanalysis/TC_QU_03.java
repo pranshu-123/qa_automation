@@ -4,6 +4,7 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.clusters.QueueAnalysisPageObject;
 import com.qa.scripts.clusters.QueueAnalysis;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
@@ -38,7 +39,7 @@ public class TC_QU_03 extends BaseClass {
         queueAnalysis.navigateToQueueAnalysis();
         waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
         qaPageObject.addIcon.click();
-        waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
+        MouseActions.clickOnElement(driver,qaPageObject.modalRunButton);
         waitExecuter.sleep(1000);
         test.log(LogStatus.INFO, "Set custom date for 1 year duration");
         queueAnalysis.assignCustomDate("01/01/2018", "01/01/2019");

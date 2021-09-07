@@ -33,7 +33,7 @@ public class JobsWorkflowPageObject {
     @FindBy(xpath = "(//div[contains(@class,'gantt-parent')]//div[contains(@id,'gantt-container')]//span)[1]")
     public WebElement getParentJobId;
 
-    @FindBy(className = ".close")
+    @FindBy(css = "div[class='close']")
     public WebElement close;
 
     @FindBy(xpath = "//span[contains(@class,'icon-jobs')]")
@@ -51,7 +51,7 @@ public class JobsWorkflowPageObject {
     @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[contains(text(),'MR')]//following::td[11]//span[text()='WFI']")
     public List<WebElement> WFILink;
 
-    @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[contains(text(),'')]//following::td[11]//span[text()='WFI']")
+    @FindBy(xpath = "//span[text()[normalize-space()='WFI']]")
     public List<WebElement> genericWFILink;
 
     @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[contains(text(),'')]//following::td[11]//span[text()='Hive']")
@@ -75,13 +75,13 @@ public class JobsWorkflowPageObject {
     @FindBy(xpath = "//h3[starts-with(normalize-space(text()),'No Data Available')]")
     public WebElement noDataForWorkflows;
 
-    @FindBy(xpath = "//div[@id='statusContainer']/span[contains(@class,'success')]")
+    @FindBy(xpath = "//div[@id='statusContainer']//span[1]")
     public List<WebElement> successBadge;
 
     @FindBy(xpath = "//div[@id='statusContainer']/span[contains(@class,'unknown')]")
     public List<WebElement> unknownBadge;
 
-    @FindBy(xpath = "//table[@id='pipelinesList']/tbody[1]/tr[1]/td[1]/a[1]")
+    @FindBy(xpath = "//table[@id='pipelinesList']/tbody[1]/tr/td[1]/a[1]")
     public WebElement getUserFromTable;
 
     @FindBy(xpath = "//h4[@class='job-times']/span")

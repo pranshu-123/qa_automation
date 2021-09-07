@@ -2,10 +2,13 @@ package com.qa.testcases.cluster.queueanalysis;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.DatePickerPageObject;
 import com.qa.pagefactory.clusters.QueueAnalysisPageObject;
 import com.qa.scripts.clusters.QueueAnalysis;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
@@ -35,6 +38,7 @@ public class TC_QU_02 extends BaseClass {
         test.log(LogStatus.INFO, "Initialize all class objects");
         LOGGER.info("Initialize all class objects");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
+        UserActions actions = new UserActions(driver);
         DatePickerPageObject datePickerPageObject = new DatePickerPageObject(driver);
         QueueAnalysisPageObject qaPageObject = new QueueAnalysisPageObject(driver);
         QueueAnalysis queueAnalysis = new QueueAnalysis(driver);
@@ -46,8 +50,9 @@ public class TC_QU_02 extends BaseClass {
         waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
         for (int i = 0; i < 8; i++) {
             waitExecuter.sleep(2000);
+            waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
             qaPageObject.addIcon.click();
-            waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
+            MouseActions.clickOnElement(driver,qaPageObject.modalRunButton);
             waitExecuter.sleep(1000);
             //Select ClusterId
             test.log(LogStatus.INFO, "Selecting ClusterId: " + clusterId);
@@ -64,7 +69,7 @@ public class TC_QU_02 extends BaseClass {
             //Click on Run button of modal window
             test.log(LogStatus.INFO, "Click on Run button of modal window");
             LOGGER.info("Click on Run button of modal window");
-            qaPageObject.modalRunButton.click();
+            actions.performActionWithPolling(qaPageObject.modalRunButton, UserAction.CLICK);
 
             if (dateRangeValue.equals("Last 7 Days") || dateRangeValue.equals("Last 30 Days")) {
                 try {

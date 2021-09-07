@@ -70,6 +70,7 @@ public class IM_TC_08 extends BaseClass {
         } catch (NoSuchElementException ex) {
             appDetailsPage.close();
             appDetailsPage.reset();
+            throw ex;
         }
 
     }

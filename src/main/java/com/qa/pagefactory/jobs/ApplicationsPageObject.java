@@ -54,7 +54,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[6]")
     public List<WebElement> getApplicationClusterId;
 
-    @FindBy(xpath = "//h3[contains(text(),'No Data Available')]")
+    @FindBy(xpath = "//h3[text()='There is no information available.']")
     public WebElement whenNoApplicationPresent;
 
     @FindBy(xpath = "(//div[contains(@class,'check-items-container')])[1]//span[1]")
@@ -93,7 +93,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//p[contains(@class,'float-right')]/b")
     public WebElement getTotalAppCount;
 
-    @FindBy(id = "reset")
+    @FindBy(css = "span#reset")
     public WebElement resetButton;
 
     @FindBy(xpath = "(//ul[contains(@class,'select2-results')])/li")
@@ -138,7 +138,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//a[contains(text(),'User')]")
     public WebElement expandUser;
 
-    @FindBy(xpath = "//a[text()='Status']//following::div[contains(@class,'check-items-container')]//span[@class='checkmark']")
+    @FindBy(xpath = "//a[contains(.,'Status')]//following::div[contains(@class,'check-items-container')]//span[@class='checkmark']")
     public List<WebElement> selectSingleStatusType;
 
     @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[2]")
@@ -147,7 +147,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "(//div[contains(@class,'check-items-container')])[2]//span[1]")
     public List<WebElement> getStatusTypes;
 
-    @FindBy(xpath = "//a[text()='Status']//following::div[contains(@class,'check-items-container')]//span[2]")
+    @FindBy(xpath = "//a[contains(.,'Status')]//following::div[contains(@class,'check-items-container')]//span[2]")
     public List<WebElement> getEachStatusTypeJobCount;
 
     @FindBy(xpath = "(//div[@id='app-filter-panel']//div[@class='placeholder']//div[contains(@class,'vue-slider-ltr')])[1]")
@@ -282,7 +282,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//tbody[@id = 'runningApps-body']/tr/td[2]")
     public List<WebElement> getStatusColumnOfRunningApps;
 
-    @FindBy(xpath = "//a[text()='Status']//following::div[contains(@class,'check-items-container')]//span[2][not(contains(@class,'show-only'))]")
+    @FindBy(xpath = "//a[contains(.,'Status')]//following::div[contains(@class,'check-items-container')]//span[2][not(contains(@class,'show-only'))]")
     public WebElement statusJobCount;
 
     @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[12]")

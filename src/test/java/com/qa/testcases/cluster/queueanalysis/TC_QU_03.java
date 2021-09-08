@@ -42,7 +42,7 @@ public class TC_QU_03 extends BaseClass {
         queueAnalysis.navigateToQueueAnalysis();
         waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
         qaPageObject.addIcon.click();
-        actions.performActionWithPolling(qaPageObject.modalRunButton, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
         waitExecuter.sleep(1000);
         test.log(LogStatus.INFO, "Set custom date for 1 year duration");
         queueAnalysis.assignCustomDate("01/01/2018", "01/01/2019");

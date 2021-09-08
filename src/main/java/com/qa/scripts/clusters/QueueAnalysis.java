@@ -410,12 +410,12 @@ public class QueueAnalysis {
     public void runAQueueAnalysisReport() {
         waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.addIcon);
         queueAnalysisPageObject.addIcon.click();
-        userAction.performActionWithPolling(queueAnalysisPageObject.modalRunButton, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.modalRunButton);
         waitExecuter.sleep(3000);
         //Click on Run button of modal window
         LOGGER.info("Click on Run button of modal window");
         waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.modalRunButton);
-        MouseActions.clickOnElement(driver,queueAnalysisPageObject.modalRunButton);
+        userAction.performActionWithPolling(queueAnalysisPageObject.modalRunButton, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.addIcon);
     }
 

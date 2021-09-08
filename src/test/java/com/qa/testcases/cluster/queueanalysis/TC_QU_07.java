@@ -40,7 +40,7 @@ public class TC_QU_07 extends BaseClass {
         queueAnalysis.navigateToQueueAnalysis();
         waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
         qaPageObject.addIcon.click();
-        MouseActions.clickOnElement(driver,qaPageObject.modalRunButton);
+        waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
         waitExecuter.sleep(1000);
         //Click on Run button of modal window
         test.log(LogStatus.INFO, "Click on Run button of modal window");

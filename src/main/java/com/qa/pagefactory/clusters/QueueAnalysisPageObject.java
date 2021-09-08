@@ -18,7 +18,7 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/a")
     public List<WebElement> confirmationMessageElementClose;
 
-    @FindBy(linkText = "//span[@class='cta-primary component-cta']//a[1]")
+    @FindBy(xpath = "//span[@class='cta-primary component-cta']//a[1]")
     public WebElement modalRunButton;
 
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
@@ -122,7 +122,7 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "//input[@class='display-time']/following::select[@class='minutes']")
     public WebElement minutesDropdown;
 
-    @FindBy(xpath = "//div[@class='close pointer']")
+    @FindBy(className = "close")
     public WebElement close;
 
     @FindBy(xpath = "(//div[@id='breadcrumb']//span)[2][text()='Archives']")

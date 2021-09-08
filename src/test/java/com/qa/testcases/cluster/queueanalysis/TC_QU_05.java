@@ -50,6 +50,8 @@ public class TC_QU_05 extends BaseClass {
         LOGGER.info("Click on Run button of modal window");
         actions.performActionWithPolling(qaPageObject.modalRunButton, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
+        waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.successBanner,
+                "SUCCESS");
         try {
             waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.successBanner,
                     "SUCCESS");

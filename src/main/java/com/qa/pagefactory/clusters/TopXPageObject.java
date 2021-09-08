@@ -53,7 +53,7 @@ public class TopXPageObject {
     @FindBy(xpath = "//label[text()='Schedule Name']/following::input")
     public WebElement scheduleNameTextbox;
     
-    @FindBy(xpath ="//p[@class='element-inline']/input")
+    @FindBy(xpath ="//input[@type='email']")
     public WebElement emailNotification;
     
     @FindBy(xpath = "//span[normalize-space()='The report has been scheduled successfully.']")
@@ -95,7 +95,7 @@ public class TopXPageObject {
     @FindBy(xpath = "//li//input[contains(@type,'checkbox')]")
     public List<WebElement> tagsCheckbox;
 
-    @FindBy(xpath = "(//div[contains(text(), 'Tags')])/following-sibling::div/descendant::input[not(contains(@type,'checkbox'))][last()]")
+    @FindBy(xpath = "(//div[contains(text(), 'Tags')])/following-sibling::div[1]/ul/li/input/descendant::input[not(contains(@type,'checkbox'))][last()]")
     public WebElement tagsLastInputTextboxField;
 
     @FindBy(xpath = "//div[contains(@class,'close pointer')]")

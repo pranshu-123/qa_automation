@@ -92,7 +92,11 @@ public class TC_CTR_03 extends BaseClass {
                         homePage.selectMultiClusterId(clusterId);
                         tuning.clickOnModalRunButton();
                         waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
-                        waitExecuter.sleep(60000);
+                        waitExecuter.sleep(6000);
+                        waitExecuter.waitUntilElementClickable(tuningPageObject.confirmationMessage);
+                        waitExecuter.waitUntilTextToBeInWebElement(tuningPageObject.confirmationMessage,
+                                "Please wait while the report is being generated.");
+                        waitExecuter.sleep(4000);
                         WebElement statusElement = driver.findElement(By.xpath(statusXpath));
                         try{
                             waitExecuter.waitUntilTextToBeInWebElement(statusElement,

@@ -21,6 +21,9 @@ public class TuningPageObject {
     @FindBy(xpath = "//span[@class='cta-primary component-cta']//a[1]")
     public WebElement runButton;
 
+    @FindBy(xpath = "//section[contains(@class,'component-message-banner bg-info')]//div[1]")
+    public WebElement confirmationMessage;
+
     @FindBy(xpath = "//a[normalize-space()='Run']")
     public WebElement modalRunButton;
 

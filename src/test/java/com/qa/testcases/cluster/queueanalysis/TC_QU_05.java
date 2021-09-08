@@ -43,12 +43,11 @@ public class TC_QU_05 extends BaseClass {
         queueAnalysis.navigateToQueueAnalysis();
         waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
         qaPageObject.addIcon.click();
-        actions.performActionWithPolling(qaPageObject.modalRunButton, UserAction.CLICK);
-        waitExecuter.sleep(5000);
+        waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
+        waitExecuter.sleep(3000);
         //Click on Run button of modal window
         test.log(LogStatus.INFO, "Click on Run button of modal window");
         LOGGER.info("Click on Run button of modal window");
-        waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
         actions.performActionWithPolling(qaPageObject.modalRunButton, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
         try {

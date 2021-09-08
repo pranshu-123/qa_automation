@@ -53,6 +53,7 @@ public class TC_HIVE_35 extends BaseClass {
         sparkApp.clickOnlyLink("Hive");
         int hiveAppCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
                 .replaceAll("[^\\dA-Za-z ]", "").trim());
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         // Click on date picker ranges and verify hive app counts
         test.log(LogStatus.INFO, "Click on date picker ranges and verify hive app counts");
         LOGGER.info("Click on date picker ranges and verify hive app counts");
@@ -67,8 +68,6 @@ public class TC_HIVE_35 extends BaseClass {
             LOGGER.info("Click on date picker range: " + selectedDateRange);
             dateRange.get(i).click();
             waitExecuter.sleep(3000);
-            hiveAppCount = Integer.parseInt(applicationsPageObject.getEachApplicationTypeJobCounts.get(0).getText()
-                    .replaceAll("[^\\dA-Za-z ]", "").trim());
             LOGGER.info("Hive app count: " + hiveAppCount);
             int totalAppCount = Integer
                     .parseInt(applicationsPageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
@@ -81,7 +80,7 @@ public class TC_HIVE_35 extends BaseClass {
                             + selectedDateRange);
             test.log(LogStatus.PASS,
                     "The app count of hive match with totalAppCount for date range selected." + selectedDateRange);
-            datePicker.clickOnDatePicker();
+
         }
         // Reset set filters
         test.log(LogStatus.INFO, "Reset set filters ");

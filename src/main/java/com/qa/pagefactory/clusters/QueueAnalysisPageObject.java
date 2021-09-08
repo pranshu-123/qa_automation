@@ -143,10 +143,10 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "//p[@class='pointer']")
     public List<WebElement> pagination;
 
-    @FindBy(xpath = "//div[contains(@class,'queue-task-runner')]//div[contains(@class,'component-date-picker')]")
+    @FindBy(xpath = "//div[@class='component-date-picker pointer']//i[1]")
     public WebElement dateRange;
 
-    @FindBy(xpath = "//div[@class='ranges']//li[text()='Custom Range']")
+    @FindBy(xpath = "(//li[@class='active'])[2]")
     public WebElement customRange;
 
     @FindBy(xpath = "//div[@class='daterangepicker_input']/input[@name='daterangepicker_start' and contains(@class,'active')]")
@@ -164,10 +164,13 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "//table[contains(@class,'component-data-tables row-hover')]/tbody[1]/tr[9]/td[4]/div[1]/span[1]/span[1]")
     public WebElement addIcon;
 
+    @FindBy(xpath = "//*[@id=\"custom-tbl\"]/div[3]/div/table/tbody/tr[9]/td[3]/span")
+    public WebElement status;
+
     @FindBy(xpath = "((//table/tbody/tr)[5]/td)[4]//span[contains(@class,'icon-expand')]")
     public WebElement latestReportExpandIcon;
 
-    @FindBy(xpath = "((//table/tbody/tr)[5]/td)[3]//span[contains(@class,'success')]")
+    @FindBy(xpath = "//table[contains(@class,'component-data-tables row-hover')]/tbody[1]/tr[9]/td[3]/span[1]")
     public WebElement successBanner;
 
     @FindBy(xpath = "//span[contains(@class,'component-cta')]//span")

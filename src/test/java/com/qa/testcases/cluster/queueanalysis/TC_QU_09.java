@@ -36,6 +36,8 @@ public class TC_QU_09 extends BaseClass {
         queueAnalysis.navigateToQueueAnalysis();
         queueAnalysis.runAQueueAnalysisReport();
         waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.successBanner,
+                "SUCCESS");
         try {
             waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.successBanner,
                     "SUCCESS");

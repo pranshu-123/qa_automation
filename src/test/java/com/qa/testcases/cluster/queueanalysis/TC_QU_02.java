@@ -10,6 +10,7 @@ import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -48,12 +49,14 @@ public class TC_QU_02 extends BaseClass {
         queueAnalysis.navigateToQueueAnalysis();
         waitExecuter.sleep(1000);
         waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
-        for (int i = 0; i < 8; i++) {
-            waitExecuter.sleep(2000);
+        for (int i = 0; i < 3; i++) {
+            waitExecuter.sleep(4000);
             waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
+            waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.successBanner,
+                    "SUCCESS");
             qaPageObject.addIcon.click();
             waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
-            waitExecuter.sleep(1000);
+            waitExecuter.sleep(4000);
             //Select ClusterId
             test.log(LogStatus.INFO, "Selecting ClusterId: " + clusterId);
             LOGGER.info("Selecting ClusterId: " + clusterId);
@@ -96,6 +99,7 @@ public class TC_QU_02 extends BaseClass {
                 test.log(LogStatus.PASS, "Verified Queue Analysis report is loaded properly.");
                 qaPageObject.close.click();
                 waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
+                waitExecuter.sleep(5000);
             } else if (dateRangeValue.equals("Last Month")
                     || dateRangeValue.equals("This Month")) {
                 qaPageObject.close.click();

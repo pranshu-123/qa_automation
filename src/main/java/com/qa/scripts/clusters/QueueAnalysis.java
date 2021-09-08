@@ -417,6 +417,7 @@ public class QueueAnalysis {
         waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.modalRunButton);
         userAction.performActionWithPolling(queueAnalysisPageObject.modalRunButton, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.addIcon);
+
     }
 
     /* Navigate from Reports page to Queue analysis Queue table*/

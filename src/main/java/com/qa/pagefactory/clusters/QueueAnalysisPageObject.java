@@ -18,10 +18,13 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/a")
     public List<WebElement> confirmationMessageElementClose;
 
-    @FindBy(xpath = "//span[@class='cta-primary component-cta']//a[1]")
+    @FindBy(css = "span[class='cta-primary component-cta'] a")
     public WebElement modalRunButton;
 
-    @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
+    @FindBy(css = "//span[text()='STARTED']")
+    public WebElement runningStatus;
+
+    @FindBy(xpath = "//section[contains(@class,'component-message-banner bg-info')]//div[1]")
     public WebElement confirmationMessageElement;
 
     @FindBy(xpath = "//div[contains(@class,'daterangepicker') and contains(@class, 'open')]//li")

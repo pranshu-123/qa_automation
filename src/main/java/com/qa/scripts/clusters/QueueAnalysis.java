@@ -416,8 +416,10 @@ public class QueueAnalysis {
         LOGGER.info("Click on Run button of modal window");
         waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.modalRunButton);
         userAction.performActionWithPolling(queueAnalysisPageObject.modalRunButton, UserAction.CLICK);
-        waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.addIcon);
-
+        waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.confirmationMessageElement);
+        waitExecuter.waitUntilTextToBeInWebElement(queueAnalysisPageObject.confirmationMessageElement,
+                "Please wait while the report is being generated.");
+        waitExecuter.sleep(4000);
     }
 
     /* Navigate from Reports page to Queue analysis Queue table*/

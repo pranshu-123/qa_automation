@@ -32,7 +32,7 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//div[contains(@class,'task_runner')]//select")
   public List<WebElement> cloudProductDropDown;
 
-  @FindBy(xpath = "//div[contains(@class,'col-md-4 boot-icons')]//span[contains(@class,'select2-selection__rendered')]")
+  @FindBy(xpath = "//*[@id=\"cloudmapping\"]/div[1]/div/div[2]/div/div[2]/div/div/form/div/div[2]/div[2]/div/div[2]/span/span[1]/span/span[2]")
   public WebElement regionDropDown;
 
   @FindBy(xpath = "//ul[@class='select2-results__options']/li")
@@ -121,7 +121,7 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//div[contains(@class,'spinner')]")
   public List<WebElement> loaderElement;
 
-  @FindBy(xpath = "//label[contains(text(),'Cloud Product/Service')]/parent::div//span[contains(@class,'select2-selection__arrow')]")
+  @FindBy(xpath = "//*[@id=\"cloudmapping\"]/div[1]/div/div[2]/div/div[2]/div/div/form/div/div[2]/div[2]/div/div[1]/span/span[1]/span/span[2]")
   public WebElement cloudProductServiceDropdownIcon;
 
   @FindBy(xpath = "(//div[@class='cust-row'])[5]/div/div/div/table[@class='component-data-tables']/tbody/tr")

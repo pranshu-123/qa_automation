@@ -48,6 +48,7 @@ public class TC_QU_04 extends BaseClass {
         waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
         actions.performActionWithPolling(qaPageObject.modalRunButton, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
+        waitExecuter.sleep(5000);
         waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.successBanner,
                 "SUCCESS");
         try {

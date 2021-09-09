@@ -18,7 +18,7 @@ public class TC_KAFKA_66 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider")
   public void TC_KAFKA_66_verifyTopicRecPerBroker(String clusterId) {
-    test = extent.startTest("verifyTopicRecPerBroker: " + clusterId,
+    test = extent.startTest("TC_KAFKA_66_verifyTopicRecPerBroker: " + clusterId,
         "Verify topic records with all details for selected broker under broker tab.");
     test.assignCategory("Kafka External");
     Log.startTestCase("verifyTopicRecPerBroker");

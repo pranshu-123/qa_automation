@@ -156,7 +156,7 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//*[name()='svg' and @data-icon='backward']")
   public WebElement backwardCaretReportCnt;
 
-  @FindBy(xpath = "//p[@class='pointer']")
+  @FindBy(xpath = "//div[2]//nav/p[@class='pointer']")
   public WebElement reportCntPerPage;
 
   @FindBy(xpath = "//p[@class='pointer']")

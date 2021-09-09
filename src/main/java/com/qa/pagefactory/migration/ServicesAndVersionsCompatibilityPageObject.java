@@ -139,7 +139,7 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//tbody/tr/td/p[contains(text(),'No Cluster Discover')]")
     public List<WebElement> reportPageEmptyClusterDiscover;
 
-    @FindBy(xpath = "//div[@id='toolbox']//span[@class='pull-right']")
+    @FindBy(xpath = "//span[contains(text(),'Services And Versions Compatibility')]")
     public List<WebElement> toolboxCD;
 
     @FindBy(xpath = "//div[@class='version-comp-inner']//h3[2][contains(text(),'Cloud Product')]")

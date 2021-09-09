@@ -9,7 +9,7 @@ import java.util.List;
 
 public class TuningPageObject {
 
-    @FindBy(xpath="")
+    @FindBy(xpath = "")
     public WebElement e;
 
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
@@ -18,10 +18,13 @@ public class TuningPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/a")
     public List<WebElement> confirmationMessageElementClose;
 
-    @FindBy(xpath = "//span[contains(text(),'Run')]/parent::a")
+    @FindBy(xpath = "//span[@class='cta-primary component-cta']//a[1]")
     public WebElement runButton;
 
-    @FindBy(xpath = "(//span[contains(text(),'Run')])[2]/parent::a")
+    @FindBy(xpath = "//section[contains(@class,'component-message-banner bg-info')]//div[1]")
+    public WebElement confirmationMessage;
+
+    @FindBy(xpath = "//a[normalize-space()='Run']")
     public WebElement modalRunButton;
 
     @FindBy(xpath = "//div[@class='close pointer']")
@@ -30,11 +33,11 @@ public class TuningPageObject {
     @FindBy(xpath = "//span[contains(text(),'Schedule')]/parent::a")
     public WebElement scheduleButton;
 
-    @FindBy(xpath = "(//form[@name='taskrunnerForm']/div/div[3]/b[contains(text(), 'Schedule Name')]/parent::div/p/input)[1]")
+    @FindBy(xpath = "//label[text()='Schedule Name']/following::input")
     public WebElement scheduleName;
 
     //@FindBy(xpath = "(//span[contains(text(),'Schedule')])[2]/parent::a")
-    @FindBy(xpath = "//div[contains(@class, 'component-section-header')]/span/a/span")
+    @FindBy(xpath = "//span[@class='cta-primary component-cta']//a[1]")
     public WebElement modalScheduleButton;
 
     @FindBy(xpath = "//div[@class='task-runner-ht']/section/span[1]")
@@ -55,8 +58,10 @@ public class TuningPageObject {
     @FindBy(xpath = "//div[@id='breadcrumb']/span/span")
     public WebElement archivesText;
 
-    @FindBy(xpath="//div[@class='close pointer']")
+    @FindBy(xpath = "//div[@class='close pointer']")
     public WebElement close;
 
-    public TuningPageObject(WebDriver driver){PageFactory.initElements(driver,this);}
+    public TuningPageObject(WebDriver driver) {
+        PageFactory.initElements(driver, this);
+    }
 }

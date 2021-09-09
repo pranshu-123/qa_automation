@@ -159,7 +159,7 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//div[2]//nav/p[@class='pointer']")
   public WebElement reportCntPerPage;
 
-  @FindBy(xpath = "//div[2]//nav/p[@class='pointer']")
+  @FindBy(xpath = "//p[@class='pointer']")
   public List<WebElement> pagination;
 
   @FindBy(xpath = "//*[@class='select2-selection__rendered']")
@@ -186,7 +186,7 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//div[contains(@class,'component-section-header')]/h2")
   public WebElement latestReportHeader;
 
-  @FindBy(xpath = "//*[@class='close pointer']")
+  @FindBy(className = "close")
   public WebElement closeTab;
 
   @FindBy(xpath = "//*[@class='text-white']")

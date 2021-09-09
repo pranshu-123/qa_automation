@@ -49,6 +49,7 @@ public class TC_CTX_25 extends BaseClass {
         waitExecuter.sleep(1000);
         List<String> clustersList =
             topX.getClustersList().stream().map(data -> data.getText()).collect(Collectors.toList());
+        waitExecuter.sleep(1000);
         topX.closeModalIfExists();
         waitExecuter.sleep(1000);
         for (int i = 0; i < clustersList.size(); i++) {

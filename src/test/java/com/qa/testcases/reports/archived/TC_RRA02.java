@@ -66,6 +66,7 @@ public class TC_RRA02 extends BaseClass {
     Assert.assertTrue(calendarRanges.contains(DatePickerConstants.DatePicker.LAST_1_HOUR),
         "Last 1 Hour is not present in datepicker filter ");
     test.log(LogStatus.PASS, "Verified 'Last 1 hour' option in date picker filter.");
+    waitExecuter.waitUntilPageFullyLoaded();
     Assert.assertTrue(calendarRanges.contains(DatePickerConstants.DatePicker.LAST_2_HOUR),
         "Last 2 Hour is not present in datepicker filter");
     test.log(LogStatus.PASS, "Verified 'Last 2 hour' option in date picker filter.");
@@ -98,6 +99,7 @@ public class TC_RRA02 extends BaseClass {
     test.log(LogStatus.PASS, "Verified 'This Month' option in date picker filter.");
     Assert.assertTrue(calendarRanges.contains(DatePickerConstants.DatePicker.CUSTOM_RANGE),
         "Custom Range is not present in datepicker filter");
+    waitExecuter.waitUntilPageFullyLoaded();
     test.log(LogStatus.PASS, "Verified 'Custom Range' option in date picker filter.");
   }
 }

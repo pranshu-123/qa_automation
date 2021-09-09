@@ -23,7 +23,7 @@ public class ForecastingPageObject {
     @FindBy(linkText= "Run")
     public WebElement modalRunButton;
 
-    @FindBy(xpath = "(//span[contains(text(),'Schedule')])[2]/parent::a")
+    @FindBy(xpath = "//span[@class='cta-primary component-cta']//a[1]")
     public WebElement modalScheduleButton;
 
     @FindBy(xpath = "//label[text()[normalize-space()='Forecasting (# Days)']]/following::input")
@@ -32,19 +32,19 @@ public class ForecastingPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
     public WebElement confirmationMessageElement;
 
-    @FindBy(xpath = "//span[contains(@class,'text-fatal')]")
+    @FindBy(xpath = "//span[text()[normalize-space()='Please enter valid number.']]")
     public WebElement ForecastingErrorMessageElement;
 
-    @FindBy(xpath = "//h2[@class='text-white']/div")
+    @FindBy(xpath = "//h2[@class='text-white']//button[1]")
     public WebElement modalCancelButton;
 
     @FindBy(xpath = "//div[@class='panel-body']/div[2]/p/b")
     public WebElement previousReportData;
 
-    @FindBy(xpath = "//div[@class='component-date-picker']/i[1]")
+    @FindBy(xpath = "//label[text()='History (Date Range)']/following-sibling::div")
     public WebElement historyDateRangeDropDown;
 
-    @FindBy(xpath = "(//form[@name='taskrunnerForm']/div/div[3]/b[contains(text(), 'Schedule Name')]/parent::div/p/input)[1]")
+    @FindBy(xpath = "//label[text()='Schedule Name']/following::input")
     public WebElement scheduleName;
 
     @FindBy(xpath = "//input[@type='email']/following-sibling::span")
@@ -62,10 +62,10 @@ public class ForecastingPageObject {
     @FindBy(xpath = "//input[@class='display-time']/following::select[@class='minutes']")
     public WebElement minutesDropdown;
 
-    @FindBy(xpath = "//div[@class='task-runner-ht']/section/span[1]")
+    @FindBy(xpath = "//div[text()='The report has been scheduled successfully.']")
     public WebElement scheduleSuccessMsg;
 
-    @FindBy(xpath = "//section[contains(@class,'component-message-banner R')]//span[1]")
+    @FindBy(xpath = "//div[text()='Please, Make sure valid inputs.']")
     public WebElement scheduleErrorMsg;
 
     @FindBy(xpath = "//input[@placeholder='Email']")

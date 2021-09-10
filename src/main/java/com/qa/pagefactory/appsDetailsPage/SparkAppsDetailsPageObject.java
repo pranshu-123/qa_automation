@@ -37,6 +37,9 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "//div[contains(@class,'close')]")
   public WebElement closeAppsPageTab;
 
+  @FindBy(xpath = "//a[@href='#/clusters/overview']")
+  public WebElement homeTab;
+
   @FindBy(xpath = "//*[@id='app-prev-header']/b")
   public WebElement ifAttemptPresent;
 

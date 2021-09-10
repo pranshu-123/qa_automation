@@ -2,10 +2,12 @@ package com.qa.testcases.jobs.applications.inefficientapps;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -33,8 +35,9 @@ public class TC_JIA01 extends BaseClass {
 
         //Click on Jobs tab
         SubTopPanelModulePageObject subTopPanelModulePageObject = new SubTopPanelModulePageObject(driver);
+        UserActions actions = new UserActions(driver);
         waitExecuter.sleep(2000);
-        subTopPanelModulePageObject.jobs.click();
+        actions.performActionWithPolling(subTopPanelModulePageObject.jobs, UserAction.CLICK);
 
         //Click on inefficientApps tab
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);

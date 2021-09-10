@@ -94,13 +94,13 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//*[@class='select2-selection__rendered']")
     public WebElement scheduleCloudDropDown;
 
-    @FindBy(xpath = "(//div/b[contains(text(), 'Schedule Name')]//following-sibling::p/input)[1]")
+    @FindBy(xpath = "//label[text()='Schedule Name']/following::input")
     public WebElement scheduleName;
 
     @FindBy(xpath = "//select[contains(@class, 'schedule-days')]")
     public WebElement scheduleToRun;
 
-    @FindBy(xpath = "//p[@class='element-inline']/input")
+    @FindBy(xpath = "//input[@type='email']")
     public WebElement scheduleNotification;
 
     @FindBy(xpath = "//div[contains(text(),'Services and Versions Compatibility')]")
@@ -139,7 +139,7 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//tbody/tr/td/p[contains(text(),'No Cluster Discover')]")
     public List<WebElement> reportPageEmptyClusterDiscover;
 
-    @FindBy(xpath = "//div[@id='toolbox']//span[@class='pull-right']")
+    @FindBy(xpath = "//span[contains(text(),'Services And Versions Compatibility')]")
     public List<WebElement> toolboxCD;
 
     @FindBy(xpath = "//div[@class='version-comp-inner']//h3[2][contains(text(),'Cloud Product')]")

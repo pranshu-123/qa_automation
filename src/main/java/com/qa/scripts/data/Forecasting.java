@@ -159,6 +159,7 @@ public class Forecasting {
             forecasting.selectDayTime(day, hour, min);
             waitExecuter.waitUntilPageFullyLoaded();
             forecasting.clickOnModalScheduleButton();
+            waitExecuter.waitUntilPageFullyLoaded();
             LOGGER.info("Clicked on modal Schedule Button");
             test.log(LogStatus.INFO, "Clicked on modal Schedule Button");
             String scheduleSuccessMsg = "the report has been scheduled successfully.";
@@ -217,7 +218,6 @@ public class Forecasting {
     }
 
     public List<String> getAllHistoryRanges() {
-
         clickOnHistoryDateRange();
         int dateRangeCount = forecastingPageObject.listDateRange.size();
         if (dateRangeCount > 0) {

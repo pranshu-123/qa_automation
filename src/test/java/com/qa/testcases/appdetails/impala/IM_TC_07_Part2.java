@@ -64,14 +64,15 @@ public class IM_TC_07_Part2 extends BaseClass {
                     test.log(LogStatus.PASS, "Operator count matched with expected count.");
                 } else {
                     Assert.assertEquals(appPageObject.noFragments.size(), 1);
+                    waitExecuter.waitUntilPageFullyLoaded();
                     test.log(LogStatus.SKIP, "No fragments present");
                     break parentCondition;
                 }
             } else {
                 loggingUtils.info("There are no successful apps for impala for selected cluster", test);
                 test.log(LogStatus.SKIP, "There are no successful apps for impala for selected cluster- " + clusterId);
+                appDetailsPage.reset();
             }
-            appDetailsPage.reset();
         } catch (NoSuchElementException ex) {
             appDetailsPage.reset();
             throw ex;

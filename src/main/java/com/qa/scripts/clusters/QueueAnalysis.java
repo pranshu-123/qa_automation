@@ -67,7 +67,7 @@ public class QueueAnalysis {
         waitExecuter.sleep(2000);
         commonPageObject = new CommonPageObject(driver);
         MouseActions.clickOnElement(driver, commonPageObject.clusterDropdown);
-        waitExecuter.sleep(2000);
+        waitExecuter.sleep(3000);
         System.out.println("Size of cluster in dropdown: " + commonPageObject.clustersList.size());
         waitExecuter.waitUntilElementPresent(commonPageObject.clusterSearchBox);
         commonPageObject.clusterSearchBox.sendKeys(clusterId);
@@ -411,12 +411,15 @@ public class QueueAnalysis {
         waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.addIcon);
         queueAnalysisPageObject.addIcon.click();
         waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.modalRunButton);
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(3000);
         //Click on Run button of modal window
         LOGGER.info("Click on Run button of modal window");
         waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.modalRunButton);
-        MouseActions.clickOnElement(driver,queueAnalysisPageObject.modalRunButton);
-        waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.addIcon);
+        userAction.performActionWithPolling(queueAnalysisPageObject.modalRunButton, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(queueAnalysisPageObject.confirmationMessageElement);
+        waitExecuter.waitUntilTextToBeInWebElement(queueAnalysisPageObject.confirmationMessageElement,
+                "Please wait while the report is being generated.");
+        waitExecuter.sleep(4000);
     }
 
     /* Navigate from Reports page to Queue analysis Queue table*/

@@ -34,6 +34,8 @@ public class TC_QU_19 extends BaseClass {
         test.log(LogStatus.INFO, "Validate Queue Analysis tab loaded successfully");
         queueAnalysis.navigateToQueueAnalysis();
         queueAnalysis.runAQueueAnalysisReport();
+        waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.successBanner,
+                "SUCCESS");
         String winHandleBefore = driver.getWindowHandle();
 
         try {

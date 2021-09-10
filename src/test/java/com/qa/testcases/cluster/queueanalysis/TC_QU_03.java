@@ -2,10 +2,12 @@ package com.qa.testcases.cluster.queueanalysis;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.clusters.QueueAnalysisPageObject;
 import com.qa.scripts.clusters.QueueAnalysis;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -30,6 +32,7 @@ public class TC_QU_03 extends BaseClass {
         test.log(LogStatus.INFO, "Initialize all class objects");
         LOGGER.info("Initialize all class objects");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
+        UserActions actions = new UserActions(driver);
         QueueAnalysisPageObject qaPageObject = new QueueAnalysisPageObject(driver);
         QueueAnalysis queueAnalysis = new QueueAnalysis(driver);
         // Navigate to Queue Analysis tab from header
@@ -39,7 +42,7 @@ public class TC_QU_03 extends BaseClass {
         queueAnalysis.navigateToQueueAnalysis();
         waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
         qaPageObject.addIcon.click();
-        MouseActions.clickOnElement(driver,qaPageObject.modalRunButton);
+        waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
         waitExecuter.sleep(1000);
         test.log(LogStatus.INFO, "Set custom date for 1 year duration");
         queueAnalysis.assignCustomDate("01/01/2018", "01/01/2019");

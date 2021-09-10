@@ -59,13 +59,15 @@ public class TC_CTR_05 extends BaseClass {
         LOGGER.info("Clicked on Cluster Id button");
         test.log(LogStatus.INFO,"Clicked on Cluster Id button");
         homePage.selectMultiClusterId(clusterId);
+        waitExecuter.waitUntilPageFullyLoaded();
         tuning.clickOnModalRunButton();
         LOGGER.info("Clicked on Run Button");
         test.log(LogStatus.INFO, "Clicked on Run Button");
         waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
-        waitExecuter.sleep(50000);
-
+        waitExecuter.sleep(5000);
         WebElement statusElement = driver.findElement(By.xpath(statusXpath));
+        waitExecuter.waitUntilTextToBeInWebElement(statusElement,
+                "SUCCESS");
         try{
             waitExecuter.waitUntilTextToBeInWebElement(statusElement,
                     "SUCCESS");

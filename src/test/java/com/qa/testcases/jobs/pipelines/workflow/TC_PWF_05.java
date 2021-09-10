@@ -62,8 +62,10 @@ public class TC_PWF_05 extends BaseClass {
 				test.log(LogStatus.INFO, "All job ids from gantt chart- " + getJobIdsFromGanttChart);
 				LOGGER.info("All job ids from gantt chart- " + getJobIdsFromGanttChart);
 				jobWorkflow.close();
+				waitExecuter.waitUntilPageFullyLoaded();
 				jobWorkflow.scrollToTopOfThePage();
 				Set<String> WFLId = jobWorkflow.searchByJobIDGetWFIId(getJobIdsFromGanttChart);
+				waitExecuter.waitUntilPageFullyLoaded();
 				test.log(LogStatus.INFO, "Get workflowid from all different job ids- " + WFLId);
 				LOGGER.info("Get workflowid from all different job ids- " + WFLId);
 				for (String id : WFLId) {

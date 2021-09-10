@@ -34,7 +34,7 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span/span")
   public WebElement getHeaderAppId;
 
-  @FindBy(className = "close")
+  @FindBy(xpath = "//div[contains(@class,'close')]")
   public WebElement closeAppsPageTab;
 
   @FindBy(xpath = "//*[@id='app-prev-header']/b")

@@ -53,6 +53,7 @@ public class TC_QU_01 extends BaseClass {
         LOGGER.info("Click on Run button of modal window");
         waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
         actions.performActionWithPolling(qaPageObject.modalRunButton, UserAction.CLICK);
+        waitExecuter.sleep(2000);
         waitExecuter.waitUntilElementClickable(qaPageObject.confirmationMessageElement);
         waitExecuter.waitUntilTextToBeInWebElement(qaPageObject.confirmationMessageElement,
                 "Please wait while the report is being generated.");

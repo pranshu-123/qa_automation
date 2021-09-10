@@ -64,7 +64,7 @@ public class TC_spark_221 extends BaseClass {
             test.log(LogStatus.PASS, "The Failed apps have all kpis listed along with components present");
         } else {
             //Close apps details page
-            MouseActions.clickOnElement(driver, sparkPageObj.closeAppsPageTab);
+            MouseActions.clickOnElement(driver, sparkPageObj.homeTab);
             test.log(LogStatus.SKIP, "No Spark Application present");
             logger.error("No Spark Application present in the " + clusterId + " cluster for the time span " +
                 "of 90 days");

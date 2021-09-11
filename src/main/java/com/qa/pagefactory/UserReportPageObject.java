@@ -121,7 +121,7 @@ public class UserReportPageObject {
     @FindBy(xpath = "//input[@type=\"email\" and @placeholder=\"Email\"]")
     public WebElement emailNotification;
 
-    @FindBy(xpath = "//span[contains(@class,'pointer cta-primary')]//a")
+    @FindBy(linkText = "Schedule")
     public WebElement saveschedule;
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[1]/div[2]/input")

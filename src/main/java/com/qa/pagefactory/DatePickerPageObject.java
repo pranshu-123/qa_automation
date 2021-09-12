@@ -18,7 +18,7 @@ public class DatePickerPageObject {
     @FindBy(css = "div.component-date-picker")
     public WebElement dateRange;
 
-    @FindBy(xpath = "//div[@class='component-date-picker pointer']//i[1]")
+    @FindBy(xpath = "//div[@value='[object Object]']//div//i[@class='glyphicon-caret']")
     public WebElement dateRangeTopx;
 
     @FindBy(xpath = "//li[contains(text(),'Last 1 Hour')]")

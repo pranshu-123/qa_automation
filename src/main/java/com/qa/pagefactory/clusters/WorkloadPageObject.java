@@ -57,7 +57,7 @@ public class WorkloadPageObject {
     @FindBy(css = ".select-aggregate-by ~ .select2 .selection .select2-selection__arrow")
     public WebElement aggregateBy;
 
-    @FindBy(xpath = ".select-group-by ~ .select2 .selection .select2-selection__arrow")
+    @FindBy(css = ".select-group-by ~ .select2 .selection .select2-selection__arrow")
     public WebElement selectGroupBy;
 
     @FindBy(xpath = "//span[@class='select2-results']//li")

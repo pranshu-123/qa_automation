@@ -285,7 +285,7 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "//button[@class='close']")
   public WebElement loadWinClose;
 
-  @FindBy(xpath ="//div[@class='modal-body']//p/br")
+  @FindBy(xpath ="//div[@class='modal-body scrollbar-s']//p/br")
   public List<WebElement> logScrollable;
 
   @FindBy(xpath = "(//div[contains(@class,'filter-section')]//h3[contains(@class,'expandable-header')])[2]")

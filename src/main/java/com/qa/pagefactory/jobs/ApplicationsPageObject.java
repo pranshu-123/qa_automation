@@ -87,7 +87,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "(//label[contains(@class,'checkbox')])/span[2][not(contains(@class,'show-only'))]")
     public List<WebElement> getEachApplicationTypeJobCounts;
 
-    @FindBy(xpath = "//div[@class='filter-items check-items-container']//div//p[1]//label//span[4]")
+    @FindBy(xpath = "//div[contains(@class,'check-items-container')]//input//following-sibling::span")
     public List<WebElement> selectOneApplicationType;
 
     @FindBy(xpath = "//p[contains(@class,'float-right')]/b")

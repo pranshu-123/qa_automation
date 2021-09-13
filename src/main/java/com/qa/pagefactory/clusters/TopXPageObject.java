@@ -56,7 +56,7 @@ public class TopXPageObject {
     @FindBy(xpath ="//input[@type='email']")
     public WebElement emailNotification;
     
-    @FindBy(xpath = "//span[normalize-space()='The report has been scheduled successfully.']")
+    @FindBy(xpath = "//section[contains(@class,'component-message-banner bg-success')]//div[1]")
     public WebElement scheduleSuccessfulMessage;
     
     @FindBy(xpath = "//span[contains(@class,'icon-download')]")

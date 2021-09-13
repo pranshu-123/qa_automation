@@ -41,6 +41,7 @@ public class IM_TC_18_Part2 extends BaseClass {
 
         try {
             appDetailsPage.navigateToJobsTab();
+            waitExecuter.waitUntilPageFullyLoaded();
             allApps.selectCluster(clusterId);
             datePicker.clickOnDatePicker();
             datePicker.selectLast30Days();

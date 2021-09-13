@@ -40,6 +40,7 @@ public class TC_CTP_08 extends BaseClass {
         test.log(LogStatus.PASS, "verify Clusterid : " + clusterId);
 
         HomePage homePage = new HomePage(driver);
+        waitExecuter.waitUntilPageFullyLoaded();
         homePage.selectMultiClusterIdClusterPage(clusterId);
         waitExecuter.sleep(2000);
         waitExecuter.waitUntilPageFullyLoaded();

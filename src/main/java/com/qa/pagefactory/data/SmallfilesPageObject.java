@@ -222,7 +222,7 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//div[@class='panel-body']/div[2]/p/b")
     public WebElement previousReportData;
 
-    @FindBy(xpath = "//div[contains(@class,'close pointer')]")
+    @FindBy(className = "close")
     public WebElement closebutton;
 
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[2]/select/option[2]")

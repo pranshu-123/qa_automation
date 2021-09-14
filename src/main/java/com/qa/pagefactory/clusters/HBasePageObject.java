@@ -117,7 +117,7 @@ public class HBasePageObject {
     @FindBy(xpath = "//table[@id='null-table']/tbody/tr[1]/td[1]")
     public WebElement hBaseFirstTableElement;
 
-    @FindBy(xpath = "//table[@id='regions-default.t']/tbody/tr[1]/td[1]")
+    @FindBy(xpath = "//tbody[@id='null-table-body']/tr[1]/td[1]")
     public WebElement regionTableName;
 
     @FindBy(xpath="//div[contains(@class, 'kpi-content')]/div")

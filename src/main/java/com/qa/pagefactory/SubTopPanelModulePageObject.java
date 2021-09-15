@@ -32,7 +32,7 @@ public class SubTopPanelModulePageObject {
     @FindBy(xpath = "//span[contains(text(),'Manage')]")
     public WebElement gear;
 
-    @FindBy(xpath = "//li/a[text()='About']")
+    @FindBy(className = "about")
     public WebElement aboutInfo;
 
     @FindBy(xpath = "//div[@class='modal-body scrollbar-s']//div[2]")
@@ -44,7 +44,7 @@ public class SubTopPanelModulePageObject {
     @FindBy(xpath = "//li[contains(@class,'active')]//span[contains(text(),'Pipelines')]")
     public WebElement pipelinesTab;
 
-    @FindBy(id = "support-li")
+    @FindBy(css = "div.header-dropdown:nth-child(2) > a")
     public WebElement supportList;
 
     @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Services And Versions Compatibility'])")

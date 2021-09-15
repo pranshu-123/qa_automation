@@ -39,8 +39,9 @@ public class UnravelBuildInfo {
 		LOGGER.info("Loging to app to get build info");
 		login.loginToApp();
 		LOGGER.info("Click on about button");
-		wait.sleep(3000);
-		builder.moveToElement(topPanel.supportList).perform();
+		wait.sleep(4000);
+		/*builder.moveToElement(topPanel.supportList).build().perform();*/
+		actions.performActionWithPolling(topPanel.supportList, UserAction.CLICK);
 		actions.performActionWithPolling(topPanel.aboutInfo, UserAction.CLICK);
 		String versionDetails = topPanel.versionInfo.getText();
 		List<String> list = new ArrayList<String>();

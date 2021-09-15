@@ -65,6 +65,7 @@ public class TC_M08 extends BaseClass {
         waitExecuter.waitUntilElementClickable(managePageObject.resetButton);
         test.log(LogStatus.INFO, "Clicked on Load Latest Diagnostics Button.");
         logger.info("Clicked on Load Latest Diagnostics Button.");
+        waitExecuter.waitUntilPageFullyLoaded();
 
         try{
             waitExecuter.waitUntilElementClickable(managePageObject.resetButton);

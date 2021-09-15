@@ -133,8 +133,11 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span/span")
     public WebElement getHeaderAppId;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[3]")
+    @FindBy(xpath = "//div[contains(@class,'close')]")
     public WebElement closeAppsPageTab;
+
+    @FindBy(xpath = "//a[@href='#/clusters/overview']")
+    public WebElement homeTab;
 
     @FindBy(xpath = "//*[@class='highcharts-legend']/*[name()='g']//*[name()='g']//*[name()='tspan']")
     public List<WebElement> ATlegendNames;
@@ -145,8 +148,6 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@class='highcharts-legend']/*[name()='g']//*[name()='g']//*[name()='tspan']")
     public List<WebElement> driverLegendNames;
 
-    @FindBy(xpath = "//a[@href='#/clusters/overview']")
-    public WebElement homeTab;
 
     @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/p")
     public WebElement configPropNum;

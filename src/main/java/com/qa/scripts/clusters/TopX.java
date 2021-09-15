@@ -327,7 +327,7 @@ public class TopX {
         for (WebElement row : rows) {
             String reportNameInRow = row.findElement(By.xpath("td[1]")).getText();
             if (reportNameInRow.equals(reportName)) {
-                actions.performActionWithPolling(row.findElement(By.xpath(".//span[contains(@class,'icon-delete')]")),
+                actions.performActionWithPolling(row.findElement(By.xpath("//span[contains(@class,'pointer icon-delete')]")),
                     UserAction.CLICK);
                 return true;
             }

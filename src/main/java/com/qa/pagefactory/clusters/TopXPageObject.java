@@ -28,11 +28,11 @@ public class TopXPageObject {
     @FindBy(xpath = "//input[@type='number']")
     public WebElement topXNumber;
     
-    @FindBy(xpath = "(//span[contains(text(),'Schedule')])")
+    @FindBy(xpath = "//span[@class='cta-primary component-cta']//a[1]")
     public WebElement scheduledTab;
     
     //@FindBy(xpath = "(//a/span[text()='Schedule'])[2]")
-    @FindBy(xpath = "(//a/span[text()='Schedule'])")
+    @FindBy(xpath = "//a[normalize-space()='Schedule']")
     public WebElement scheduleButtonInReport;
 
     @FindBy(xpath="//div[@id='breadcrumb']/span/span")
@@ -56,7 +56,7 @@ public class TopXPageObject {
     @FindBy(xpath ="//input[@type='email']")
     public WebElement emailNotification;
     
-    @FindBy(xpath = "//span[normalize-space()='The report has been scheduled successfully.']")
+    @FindBy(xpath = "//section[contains(@class,'component-message-banner bg-success')]//div[1]")
     public WebElement scheduleSuccessfulMessage;
     
     @FindBy(xpath = "//span[contains(@class,'icon-download')]")
@@ -95,10 +95,10 @@ public class TopXPageObject {
     @FindBy(xpath = "//li//input[contains(@type,'checkbox')]")
     public List<WebElement> tagsCheckbox;
 
-    @FindBy(xpath = "(//div[contains(text(), 'Tags')])/following-sibling::div[1]/ul/li/input/descendant::input[not(contains(@type,'checkbox'))][last()]")
+    @FindBy(xpath = "//input[@class='select-tag']")
     public WebElement tagsLastInputTextboxField;
 
-    @FindBy(xpath = "//div[contains(@class,'close pointer')]")
+    @FindBy(className = "close")
     public List<WebElement> closeModalButton;
 
     @FindBy(xpath = "//td/span[contains(text(),'Top X')]/parent::td/following-sibling::td[3]//span[contains(@class, 'icon-expand')]")

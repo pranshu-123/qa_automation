@@ -34,8 +34,11 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span/span")
   public WebElement getHeaderAppId;
 
-  @FindBy(className = "close")
+  @FindBy(xpath = "//div[contains(@class,'close')]")
   public WebElement closeAppsPageTab;
+
+  @FindBy(xpath = "//a[@href='#/clusters/overview']")
+  public WebElement homeTab;
 
   @FindBy(xpath = "//*[@id='app-prev-header']/b")
   public WebElement ifAttemptPresent;
@@ -282,7 +285,7 @@ public class SparkAppsDetailsPageObject {
   @FindBy(xpath = "//button[@class='close']")
   public WebElement loadWinClose;
 
-  @FindBy(xpath ="//div[@class='modal-body']//p/br")
+  @FindBy(xpath ="//div[@class='modal-body scrollbar-s']//p/br")
   public List<WebElement> logScrollable;
 
   @FindBy(xpath = "(//div[contains(@class,'filter-section')]//h3[contains(@class,'expandable-header')])[2]")

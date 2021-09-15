@@ -267,7 +267,7 @@ public class SparkAppsDetailsPage {
                 int scrollableLines = (logLinesList.size() / 2);
                 logger.info("Scrollable line is " + scrollableLines);
                 WebElement scrollableElement = driver
-                        .findElement(By.xpath("//div[@class='modal-body']//p/br[" + scrollableLines + "]"));
+                        .findElement(By.xpath("//div[@class='modal-body scrollbar-s']//p/br[" + scrollableLines + "]"));
                 executor.executeScript("arguments[0].scrollIntoView(true);", scrollableElement);
                 MouseActions.clickOnElement(driver, sparkAppPageObj.loadWinClose);
                 waitExecuter.waitUntilPageFullyLoaded();
@@ -275,6 +275,7 @@ public class SparkAppsDetailsPage {
                 cnt += 1;
             }
         } catch (NoSuchElementException ex) {
+            MouseActions.clickOnElement(driver, sparkAppPageObj.loadWinClose);
             throw new AssertionError(
                     "Caught exception while clicking the collapsable icon for insights.\n" + ex.getMessage());
         }

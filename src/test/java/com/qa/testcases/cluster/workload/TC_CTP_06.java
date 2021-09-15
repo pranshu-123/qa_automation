@@ -50,7 +50,7 @@ public class TC_CTP_06 extends BaseClass {
 
         test.log(LogStatus.PASS, "Verify Workload in selected time range :"
                 + workloadPageObject.timerangeMessageElement.getText().trim());
-
+        waitExecuter.waitUntilPageFullyLoaded();
         workload.selectGroupBy("vCore Hour");
         test.log(LogStatus.PASS, "Verify Group By vCore Hour");
         waitExecuter.waitUntilPageFullyLoaded();

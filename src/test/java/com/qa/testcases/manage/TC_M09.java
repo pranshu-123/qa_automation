@@ -61,6 +61,7 @@ public class TC_M09 extends BaseClass {
 
 
         manage.clickOnDownloadSupportBundle();
+        waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.INFO, "Clicked on Download Support Bundle button.");
         logger.info("Clicked on Download Support Bundle button.");
 

@@ -80,8 +80,8 @@ public class CUR05 extends BaseClass {
             userReport.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.TopX);
             waitExecuter.waitUntilPageFullyLoaded();
             userReport.setTopXNumber("30");
-            waitExecuter.waitUntilPageFullyLoaded();
             HomePage homePage = new HomePage(driver);
+            waitExecuter.sleep(2000);
             homePage.selectMultiClusterId(clusterId);
             waitExecuter.waitUntilPageFullyLoaded();
             if (!userReport.selectRealUser()) {

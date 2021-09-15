@@ -82,6 +82,7 @@ public class TC_JAL_13 extends BaseClass {
         // Click on the first app in table to get efficiency
         //int countEfficiency = Collections.frequency(badgeTitleTextList, "EFFICIENCY");
         int countEfficiency = badgeTitleTextList.size();
+        waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.INFO, "Count of Efficiency badges " + countEfficiency);
         LOGGER.info("Count of Efficiency badges " + countEfficiency);
         // Assert the efficiency count to events set in slider

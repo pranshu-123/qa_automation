@@ -78,7 +78,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[9]")
     public WebElement getQueueNameTable;
 
-    @FindBy(xpath = "//input[@class='global-app-search']")
+    @FindBy(css = "input.global-app-search")
     public WebElement globalSearchBox;
 
     @FindBy(xpath = "//tbody/tr")

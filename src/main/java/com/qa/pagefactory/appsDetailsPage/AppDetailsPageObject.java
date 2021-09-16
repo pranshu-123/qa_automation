@@ -180,7 +180,7 @@ public class AppDetailsPageObject {
     @FindBy(xpath = "(//table[@id='inefficientApps']//tr/td[4]/a[2])[1]")
     public WebElement firstInefficientRow;
 
-    @FindBy(id = "apps-global-search-filter")
+    @FindBy(css = "input.global-app-search")
     public WebElement globalSearchBox;
 
     @FindBy(xpath = "//span[@class='globalSearchIcon']")

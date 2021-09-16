@@ -389,7 +389,7 @@ public class TezLlapAppsDetailsPageObject {
     @FindBy(xpath = "(//div[contains(@class,'modal-sec-head')])/h2")
     public WebElement loadDiagnosticWinHeader;
 
-    @FindBy(css = "//*[@class='close pointer']")
+    @FindBy(css = "button.close")
     public WebElement loadDiagnosticWinClose;
 
 

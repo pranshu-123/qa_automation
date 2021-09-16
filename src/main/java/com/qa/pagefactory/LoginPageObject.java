@@ -30,8 +30,8 @@ public class LoginPageObject {
   @FindBy(className = "logout")
   public List<WebElement> logoutButtonList;
 
-  @FindBy(css = ".user-profile-dropdown a.menu")
-  public WebElement profileIcon;
+  @FindBy(css = ".support-portal")
+  public WebElement profileMenu;
 
   @FindBy(className= "LoginPage_auth_button_15tdi")
   public WebElement signInButton;

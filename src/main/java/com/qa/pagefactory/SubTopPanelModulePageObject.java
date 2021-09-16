@@ -45,7 +45,7 @@ public class SubTopPanelModulePageObject {
     public WebElement pipelinesTab;
 
     @FindBy(css = ".help-center-dropdown a.menu")
-    public WebElement supportList;
+    public WebElement helpCenterMenu;
 
     @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Services And Versions Compatibility'])")
     public WebElement servicesVersionMigrationTab;

@@ -77,7 +77,7 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span/span")
     public WebElement getHeaderAppId;
 
-    @FindBy(css = "div[class='close']")
+    @FindBy(css = "button.close")
     public WebElement closeAppsPageTab;
 
     @FindBy(xpath = "//a[@href='#/clusters/overview']")
@@ -356,7 +356,7 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "(//div[contains(@class,'modal-sec-head')])/h2")
     public WebElement loadDiagnosticWinHeader;
 
-    @FindBy(css = "//*[@class='close pointer']")
+    @FindBy(css = "button.close")
     public WebElement loadDiagnosticWinClose;
 
     @FindBy(xpath = "//tbody[@id='allApps-body']/tr[1]/td[4]/span")

@@ -38,7 +38,7 @@ public class SubTopPanelModulePageObject {
     @FindBy(xpath = "//div[@class='modal-body scrollbar-s']//div[2]")
     public WebElement versionInfo;
 
-    @FindBy(xpath = "//a[contains(text(),'Close')]")
+    @FindBy(css = "button.close")
     public WebElement closeAboutWindow;
 
     @FindBy(xpath = "//li[contains(@class,'active')]//span[contains(text(),'Pipelines')]")

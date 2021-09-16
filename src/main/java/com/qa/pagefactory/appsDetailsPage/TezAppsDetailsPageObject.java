@@ -21,8 +21,9 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//span[(text()='Duration')]//following-sibling::a[contains(@class,'sorting')]")
     public WebElement sortByDurationApp;
 
-    @FindBy(id = "apps-global-search-filter")
+    @FindBy(css = "input.global-app-search")
     public WebElement globalSearchBox;
+
 
     @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-down')]")
     public WebElement sortDown;

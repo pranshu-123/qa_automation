@@ -24,10 +24,10 @@ public class LoginPageObject {
   @FindBy(name = "username")
   public List<WebElement> loginButtonList;
 
-  @FindBy(className = "logout")
+  @FindBy(css = "a.logout")
   public WebElement logoutButton;
 
-  @FindBy(className = "logout")
+  @FindBy(css = "a.logout")
   public List<WebElement> logoutButtonList;
 
   @FindBy(css = ".user-profile-dropdown a.menu")

@@ -24,11 +24,14 @@ public class LoginPageObject {
   @FindBy(name = "username")
   public List<WebElement> loginButtonList;
 
-  @FindBy(css = "a.icon-logout")
+  @FindBy(css = "a.logout")
   public WebElement logoutButton;
 
-  @FindBy(css = "a.icon-logout")
+  @FindBy(css = "a.logout")
   public List<WebElement> logoutButtonList;
+
+  @FindBy(css = ".user-profile-dropdown a.menu")
+  public WebElement profileMenu;
 
   @FindBy(className= "LoginPage_auth_button_15tdi")
   public WebElement signInButton;

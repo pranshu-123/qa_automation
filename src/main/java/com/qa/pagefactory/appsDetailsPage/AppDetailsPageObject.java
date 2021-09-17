@@ -21,7 +21,7 @@ public class AppDetailsPageObject {
     @FindBy(id = "allApps")
     public WebElement allAppsTable;
 
-    @FindBy(xpath = "//div[contains(@class,'close')]")
+    @FindBy(css = "button.close")
     public WebElement closeModalbutton;
 
     @FindBy(xpath = "//h2/span[2]/span/span")
@@ -114,7 +114,7 @@ public class AppDetailsPageObject {
     @FindBy(xpath = "(//table[@id='allApps']/tbody/tr/td)[3]")
     public WebElement firstRow;
 
-    @FindBy(className = "close")
+    @FindBy(css = "button.close")
     public List<WebElement> closeIcon;
 
     @FindBy(xpath = "//table[@id='appTagsTable']/tbody/tr/td[1]")
@@ -180,7 +180,7 @@ public class AppDetailsPageObject {
     @FindBy(xpath = "(//table[@id='inefficientApps']//tr/td[4]/a[2])[1]")
     public WebElement firstInefficientRow;
 
-    @FindBy(id = "apps-global-search-filter")
+    @FindBy(css = "input.global-app-search")
     public WebElement globalSearchBox;
 
     @FindBy(xpath = "//span[@class='globalSearchIcon']")

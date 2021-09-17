@@ -21,8 +21,9 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//span[(text()='Duration')]//following-sibling::a[contains(@class,'sorting')]")
     public WebElement sortByDurationApp;
 
-    @FindBy(id = "apps-global-search-filter")
+    @FindBy(css = "input.global-app-search")
     public WebElement globalSearchBox;
+
 
     @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-down')]")
     public WebElement sortDown;
@@ -76,7 +77,7 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span/span")
     public WebElement getHeaderAppId;
 
-    @FindBy(css = "div[class='close']")
+    @FindBy(css = "button.close")
     public WebElement closeAppsPageTab;
 
     @FindBy(xpath = "//a[@href='#/clusters/overview']")
@@ -355,7 +356,7 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "(//div[contains(@class,'modal-sec-head')])/h2")
     public WebElement loadDiagnosticWinHeader;
 
-    @FindBy(css = "//*[@class='close pointer']")
+    @FindBy(css = "button.close")
     public WebElement loadDiagnosticWinClose;
 
     @FindBy(xpath = "//tbody[@id='allApps-body']/tr[1]/td[4]/span")

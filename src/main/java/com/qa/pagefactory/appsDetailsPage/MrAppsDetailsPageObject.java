@@ -133,7 +133,7 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span/span")
     public WebElement getHeaderAppId;
 
-    @FindBy(xpath = "//div[contains(@class,'close')]")
+    @FindBy(css = "button.close")
     public WebElement closeAppsPageTab;
 
     @FindBy(xpath = "//a[@href='#/clusters/overview']")
@@ -435,7 +435,7 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "(//div[contains(@class,'modal-sec-head')])/h2")
     public WebElement loadDiagnosticWinHeader;
 
-    @FindBy(css = "//*[@class='close pointer']")
+    @FindBy(css = "button.close")
     public WebElement loadDiagnosticWinClose;
 
     @FindBy(xpath = "//h3[text()='No Errors Found.']")

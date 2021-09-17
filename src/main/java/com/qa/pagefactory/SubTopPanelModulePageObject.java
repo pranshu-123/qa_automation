@@ -32,20 +32,20 @@ public class SubTopPanelModulePageObject {
     @FindBy(xpath = "//span[contains(text(),'Manage')]")
     public WebElement gear;
 
-    @FindBy(xpath = "//li/a[text()='About']")
+    @FindBy(css = "a.about")
     public WebElement aboutInfo;
 
     @FindBy(xpath = "//div[@class='modal-body scrollbar-s']//div[2]")
     public WebElement versionInfo;
 
-    @FindBy(xpath = "//a[contains(text(),'Close')]")
+    @FindBy(css = "button.close")
     public WebElement closeAboutWindow;
 
     @FindBy(xpath = "//li[contains(@class,'active')]//span[contains(text(),'Pipelines')]")
     public WebElement pipelinesTab;
 
-    @FindBy(id = "support-li")
-    public WebElement supportList;
+    @FindBy(css = ".help-center-dropdown a.menu")
+    public WebElement helpCenterMenu;
 
     @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Services And Versions Compatibility'])")
     public WebElement servicesVersionMigrationTab;
@@ -62,7 +62,7 @@ public class SubTopPanelModulePageObject {
     @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Applications'])")
     public WebElement applicationTab;
 
-    @FindBy(id = "apps-global-search-filter")
+    @FindBy(css = "input.global-app-search")
     public WebElement globalSearch;
 
     @FindBy(xpath = "(//ul[@class='sub-menu']//span[text()='Chargeback'])")

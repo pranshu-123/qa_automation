@@ -185,7 +185,7 @@ public class JobsWorkflow {
         waitExecutor.waitUntilElementClickable(workflow.globalSearch);
         try {
             waitExecutor.sleep(3000);
-            datePicker.selectLast30Days();
+            datePicker.selectLast90Days();
             waitExecutor.waitUntilElementClickable(workflow.globalSearch);
         } catch (NoSuchElementException ex) {
             workflow.noDataForWorkflows.isDisplayed();

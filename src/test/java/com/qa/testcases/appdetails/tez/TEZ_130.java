@@ -8,7 +8,6 @@ import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.TezAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
-import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
@@ -61,28 +60,39 @@ public class TEZ_130 extends BaseClass {
                 "the total count of heading.");
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
+        try {
+            if (appCount > 0) {
+                // Get MR app id from the first row
+                test.log(LogStatus.INFO, "Get MR app id from the first row");
+                logger.info("Get MR app id from the first row");
+                WebElement name = applicationsPageObject.getAppNameFromTable;
+                actions.moveToElement(name).perform();
+                waitExecuter.sleep(1000);
+                actions.moveToElement(applicationsPageObject.copyAppName).perform();
+                waitExecuter.sleep(1000);
+                applicationsPageObject.copyAppName.click();
+                List<String> QueryTabs = Arrays.asList("query");
+                List<String> actualTabs = new ArrayList<>();
 
-        if (appCount > 0) {
-            // Get MR app id from the first row
-            test.log(LogStatus.INFO, "Get MR app id from the first row");
-            logger.info("Get MR app id from the first row");
-            WebElement name = applicationsPageObject.getAppNameFromTable;
-            actions.moveToElement(name).perform();
-            waitExecuter.sleep(1000);
-            actions.moveToElement(applicationsPageObject.copyAppName).perform();
-            waitExecuter.sleep(1000);
-            applicationsPageObject.copyAppName.click();
-            List<String> QueryTabs = Arrays.asList("query");
-            List<String> actualTabs = new ArrayList<>();
-
-            // Click on first app in table to navigate to app details page
-            test.log(LogStatus.INFO, "Click on first app in table to navigate to app details page");
-            logger.info("Click on first app in table to navigate to app details page");
-            waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
-            applicationsPageObject.clickOnAppId.click();
-            waitExecuter.waitUntilElementPresent(applicationsPageObject.loader);
-            waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
+                // Click on first app in table to navigate to app details page
+                test.log(LogStatus.INFO, "Click on first app in table to navigate to app details page");
+                logger.info("Click on first app in table to navigate to app details page");
+                waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
+                applicationsPageObject.clickOnAppId.click();
+                waitExecuter.waitUntilPageFullyLoaded();
+                //Close apps details page
+            } else {
+                test.log(LogStatus.SKIP, "No Tez Application present");
+                logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +
+                        "of 90 days");
             }
-    }
+            MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
+            waitExecuter.sleep(3000);
 
+        } catch (VerifyError te) {
+            throw new AssertionError("No Tez Application present in the \" + clusterId + \" cluster for the time span \" +\n" +
+                    " \"of 90 days\"" + te);
+        }
+    }
 }
+

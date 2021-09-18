@@ -77,7 +77,7 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span/span")
     public WebElement getHeaderAppId;
 
-    @FindBy(css = "button.close")
+    @FindBy(css = "div.close")
     public WebElement closeAppsPageTab;
 
     @FindBy(xpath = "//a[@href='#/clusters/overview']")

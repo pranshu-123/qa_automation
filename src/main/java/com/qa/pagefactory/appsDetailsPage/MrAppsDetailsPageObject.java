@@ -87,7 +87,7 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id='taskattemptreduce']//*[div and @class='footer']/div/*/span[1]")
     public List<WebElement> taskAttReduceFooterName;
 
-    @FindBy(xpath = "//*[@id='taskattemptmap']//*[div and @class='footer']/div/*/span[2]")
+    @FindBy(xpath = "//*[@id='taskattemptreduce']//*[div and @class='footer']/div/*/span[2]")
     public List<WebElement> taskAttReduceFooterVal;
 
     @FindBy(xpath = "//*[@id=\"taskattemptmap\"]//*[name()='svg']/*[name()='text' and @class='highcharts-subtitle']/*")

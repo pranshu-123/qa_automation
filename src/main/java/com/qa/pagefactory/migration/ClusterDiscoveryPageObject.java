@@ -30,7 +30,7 @@ public class ClusterDiscoveryPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/span")
     public WebElement invalidInputMessage;
 
-    @FindBy(xpath = "(//div[@class='panel-body']//h3/b)[1]")
+    @FindBy(xpath = "//div[@class='col-md-4']//h3[1]")
     public WebElement getClusterName;
 
     @FindBy(xpath = "(.//*[local-name() = 'svg']/*[local-name() = 'text']/*[local-name() = 'tspan'])[1]")

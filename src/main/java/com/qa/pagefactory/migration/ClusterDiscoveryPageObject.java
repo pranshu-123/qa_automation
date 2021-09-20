@@ -15,10 +15,10 @@ public class ClusterDiscoveryPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/a/i")
     public List<WebElement> confirmationMessageElementClose;
 
-    @FindBy(xpath = "//span[normalize-space()='Run']")
+    @FindBy(xpath = "//a[normalize-space()='Run']")
     public WebElement modalRunButton;
 
-    @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
+    @FindBy(xpath = "//section[contains(@class,'component-message-banner bg-success')]//div[1]")
     public WebElement confirmationMessageElement;
 
     @FindBy(xpath = "//div[contains(@class,'daterangepicker') and contains(@class, 'open')]//li")

@@ -69,16 +69,16 @@ public class ClusterDiscoveryPageObject {
     @FindBy(xpath = "//div[contains(@class,'component-dropdown')]")
     public WebElement clickOnComponentDropdown;
 
-    @FindBy(id = "cpu-memory")
+    @FindBy(id = "cpu")
     public WebElement cpu_memoryHeatMap;
 
-    @FindBy(xpath = "//div[@id='cpu-memory']//div[contains(@class,'highcharts-container ')]")
+    @FindBy(xpath = "(//*[name()='rect'][@class='highcharts-background'])[4]")
     public WebElement heatMapContainer;
 
-    @FindBy(xpath = "(//div[@id='cpu-memory']//span)[1]")
+    @FindBy(xpath = "(//div[@id='cpu']//span)[1]")
     public WebElement cpuDropButton;
 
-    @FindBy(xpath = "//div[@id='cpu-memory']//div[contains(@class,'dropdown-content-display')]/a[text()='Memory']")
+    @FindBy(xpath = "(//*[name()='rect'][@class='highcharts-background'])[5]")
     public WebElement selectMemoryinDropdown;
 
     @FindBy(xpath = "//span[@class='text-fatal']")

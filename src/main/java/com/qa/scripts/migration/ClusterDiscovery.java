@@ -135,7 +135,6 @@ public class ClusterDiscovery {
 
     /* Check of pie charts are present */
     public boolean checkPieIsPresent(List<WebElement> pieType) {
-
         return pieType.size() > 0;
     }
 

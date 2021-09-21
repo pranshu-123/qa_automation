@@ -52,7 +52,8 @@ public class TC_CD_09 extends BaseClass {
 
         // Click on custom date range and set dates
         test.log(LogStatus.INFO, "Click on date range");
-        discovery.setCustomRange("01/01/2020", "01/02/2020");
+        discovery.setCustomRange("01/14/2021", "09/14/2021");
+        waitExecuter.waitUntilPageFullyLoaded();
 
         // Click on Run button of modal window
         test.log(LogStatus.INFO, "Click on Run button of modal window");

@@ -52,7 +52,7 @@ public class TC_CD_09 extends BaseClass {
 
         // Click on custom date range and set dates
         test.log(LogStatus.INFO, "Click on date range");
-        discovery.setCustomRange("01/14/2021", "09/14/2021");
+        discovery.setCustomRange("09/14/2021", "09/15/2021");
         waitExecuter.waitUntilPageFullyLoaded();
 
         // Click on Run button of modal window
@@ -60,7 +60,7 @@ public class TC_CD_09 extends BaseClass {
         discovery.clickRunModalButton();
         try {
             waitExecuter.waitUntilTextToBeInWebElement(cdPageObject.fatalMessage,
-                    "Please Make Sure Date Range More than 2 Days");
+                    "Date range should be greater than two days.");
             test.log(LogStatus.PASS, "Verified Cluster Discovery report throws error " +
                     "when report is generated for less than 2 days.");
         } catch (TimeoutException te) {

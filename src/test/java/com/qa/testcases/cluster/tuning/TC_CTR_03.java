@@ -99,8 +99,10 @@ public class TC_CTR_03 extends BaseClass {
                         waitExecuter.sleep(4000);
                         WebElement statusElement = driver.findElement(By.xpath(statusXpath));
                         try{
+                            waitExecuter.waitUntilElementPresent(statusElement);
                             waitExecuter.waitUntilTextToBeInWebElement(statusElement,
                                     "SUCCESS");
+                            waitExecuter.sleep(4000);
                             test.log(LogStatus.PASS, "Verified Tuning report is completed successfully for date: " + date);
                             waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
                         }catch (TimeoutException te) {

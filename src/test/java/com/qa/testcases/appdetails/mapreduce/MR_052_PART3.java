@@ -50,7 +50,7 @@ public class MR_052_PART3 extends BaseClass {
         if (totalMapReduceAppCnt > 0) {
             applicationsPageObject.expandStatus.click();
             int appCount = mrDetailsPage.clickOnlyLink("Killed");
-            if (appCount > 0) {
+            if (totalMapReduceAppCnt > 0) {
                 String headerAppId = mrDetailsPage.verifyAppId(mrApps, applicationsPageObject);
                 test.log(LogStatus.PASS, "Map Reduce Application Id is displayed in the Header: " + headerAppId);
                 waitExecuter.waitUntilPageFullyLoaded();

@@ -49,10 +49,8 @@ public class MR_052_PART2 extends BaseClass {
         int totalMapReduceAppCnt = mrDetailsPage.clickOnlyLink("MapReduce");
         if (totalMapReduceAppCnt > 0) {
             applicationsPageObject.expandStatus.click();
-            int appCount = mrDetailsPage.clickOnlyLink("Failed");
+            int appCount = mrDetailsPage.clickOnlyLink("Success");
             waitExecuter.sleep(2000);
-            mrApps.sortByDurationApp.click();
-            waitExecuter.waitUntilPageFullyLoaded();
             mrApps.sortUp.click();
             waitExecuter.sleep(2000);
             if (appCount > 0) {

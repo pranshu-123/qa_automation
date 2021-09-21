@@ -72,12 +72,17 @@ public class MR_052_PART1 extends BaseClass {
                 waitExecuter.waitUntilPageFullyLoaded();
 
                 //Close apps details page
+                //Close apps details page
+                waitExecuter.waitUntilElementPresent(mrApps.closeAppsPageTab);
                 MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);
 
             } else {
+                //Close apps details page
+                MouseActions.clickOnElement(driver, mrApps.homeTab);
                 test.log(LogStatus.SKIP, "No Map Reduce Application present");
                 logger.info("No Map Reduce Application present in the " + clusterId + " cluster for the time span " +
                         "of 90 days");
+
             }
         }
     }

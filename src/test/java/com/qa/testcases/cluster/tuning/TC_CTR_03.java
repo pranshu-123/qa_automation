@@ -57,6 +57,7 @@ public class TC_CTR_03 extends BaseClass {
 
             LOGGER.info("Click on + button");
             String statusXpath = reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.Tuning);
+            waitExecuter.sleep(2000);
             LOGGER.info("Clicked on Tuning Tab + icon");
             test.log(LogStatus.INFO, "Clicked on Tuning Tab + icon");
 
@@ -77,10 +78,9 @@ public class TC_CTR_03 extends BaseClass {
                         waitExecuter.waitUntilPageFullyLoaded();
                         tuning.clickOnModalRunButton();
                         waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
-                        waitExecuter.sleep(50000);
+                        waitExecuter.sleep(70000);
                         WebElement statusElement = driver.findElement(By.xpath(statusXpath));
                         try{
-                            waitExecuter.sleep(2000);
                             waitExecuter.waitUntilTextToBeInWebElement(statusElement,
                                     "SUCCESS");
                         }catch (TimeoutException te) {
@@ -99,12 +99,10 @@ public class TC_CTR_03 extends BaseClass {
                                 "Please wait while the report is being generated.");
                         waitExecuter.sleep(4000);
                         WebElement statusElement = driver.findElement(By.xpath(statusXpath));
-                        waitExecuter.sleep(2000);
                         try{
                             waitExecuter.waitUntilElementPresent(statusElement);
                             waitExecuter.waitUntilTextToBeInWebElement(statusElement,
                                     "SUCCESS");
-                            waitExecuter.sleep(4000);
                             test.log(LogStatus.PASS, "Verified Tuning report is completed successfully for date: " + date);
                             waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
                         }catch (TimeoutException te) {

@@ -80,6 +80,7 @@ public class TC_CTR_03 extends BaseClass {
                         waitExecuter.sleep(50000);
                         WebElement statusElement = driver.findElement(By.xpath(statusXpath));
                         try{
+                            waitExecuter.sleep(2000);
                             waitExecuter.waitUntilTextToBeInWebElement(statusElement,
                                     "SUCCESS");
                         }catch (TimeoutException te) {
@@ -98,6 +99,7 @@ public class TC_CTR_03 extends BaseClass {
                                 "Please wait while the report is being generated.");
                         waitExecuter.sleep(4000);
                         WebElement statusElement = driver.findElement(By.xpath(statusXpath));
+                        waitExecuter.sleep(2000);
                         try{
                             waitExecuter.waitUntilElementPresent(statusElement);
                             waitExecuter.waitUntilTextToBeInWebElement(statusElement,

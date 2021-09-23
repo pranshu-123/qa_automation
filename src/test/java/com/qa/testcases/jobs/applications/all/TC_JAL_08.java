@@ -57,8 +57,6 @@ public class TC_JAL_08 extends BaseClass {
         // To apply filter - De-select all application types
         test.log(LogStatus.INFO, "To apply filter - De-select all application types");
         LOGGER.info("To apply filter - De-select all application types");
-        applicationsPageObject.expandStatus.click();
-        waitExecuter.sleep(2000);
         allApps.deselectAllAppTypes();
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         waitExecuter.sleep(7000);

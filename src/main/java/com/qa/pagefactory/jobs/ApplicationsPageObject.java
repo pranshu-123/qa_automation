@@ -349,7 +349,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//h3[contains(@class,'expandable-header')]//a[contains(text(),'Tags')]")
     public WebElement tagExpandableHeader;
 
-    @FindBy(className = "close")
+    @FindBy(css = "div.close")
     public WebElement closeIcon;
 
     @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[4]/a[2]")

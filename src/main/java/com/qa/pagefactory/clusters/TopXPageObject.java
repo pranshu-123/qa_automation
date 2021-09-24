@@ -28,7 +28,7 @@ public class TopXPageObject {
     @FindBy(xpath = "//input[@type='number']")
     public WebElement topXNumber;
     
-    @FindBy(xpath = "//span[text()='Scheduled']")
+    @FindBy(xpath = "//a[normalize-space()='Schedule']")
     public WebElement scheduledTab;
     
     //@FindBy(xpath = "(//a/span[text()='Schedule'])[2]")
@@ -92,7 +92,7 @@ public class TopXPageObject {
     public List<WebElement> inputParamsRowList;
 
     //@FindBy(xpath = "//input[contains(@type,'checkbox')]")
-    @FindBy(css = "input.select-tag")
+    @FindBy(css = "//input[@class='select-tag']")
     public List<WebElement> tagsCheckbox;
 
     @FindBy(xpath = "(//label[contains(text(), 'Tags')])/following::input[(contains(@type,'checkbox'))][last()]")

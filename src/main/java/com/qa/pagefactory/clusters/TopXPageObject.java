@@ -92,10 +92,10 @@ public class TopXPageObject {
     public List<WebElement> inputParamsRowList;
 
     //@FindBy(xpath = "//input[contains(@type,'checkbox')]")
-    @FindBy(xpath = "//input[contains(@type,'checkbox')]")
+    @FindBy(css = "input.select-tag")
     public List<WebElement> tagsCheckbox;
 
-    @FindBy(xpath = "(//div[contains(text(), 'Tags')])/following-sibling::div/descendant::input[not(contains(@type,'checkbox'))][last()]")
+    @FindBy(xpath = "(//label[contains(text(), 'Tags')])/following::input[(contains(@type,'checkbox'))][last()]")
     public WebElement tagsLastInputTextboxField;
 
     @FindBy(className = "close")

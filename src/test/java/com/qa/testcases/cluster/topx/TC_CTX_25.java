@@ -46,7 +46,7 @@ public class TC_CTX_25 extends BaseClass {
         reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.TopX);
         HomePage homePage = new HomePage(driver);
         homePage.clickOnClusterDropDown();
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(2000);
         List<String> clustersList =
             topX.getClustersList().stream().map(data -> data.getText()).collect(Collectors.toList());
         waitExecuter.sleep(1000);
@@ -56,11 +56,13 @@ public class TC_CTX_25 extends BaseClass {
             String statusXpath = reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.TopX);
             String clusterId = clustersList.get(i);
             topX.selectCluster(clusterId);
-            waitExecuter.sleep(1000);
+            waitExecuter.sleep(2000);
             topX.clickOnModalRunButton();
             waitExecuter.sleep(1000);
             WebElement statusElement = driver.findElement(By.xpath(statusXpath));
             try {
+                waitExecuter.waitUntilTextToBeInWebElement(statusElement,
+                        "STARTED");
                 waitExecuter.waitUntilTextToBeInWebElement(statusElement,
                     "SUCCESS");
             } catch (TimeoutException te) {

@@ -82,6 +82,8 @@ public class TC_CTR_03 extends BaseClass {
                         WebElement statusElement = driver.findElement(By.xpath(statusXpath));
                         try{
                             waitExecuter.waitUntilTextToBeInWebElement(statusElement,
+                                    "STARTED");
+                            waitExecuter.waitUntilTextToBeInWebElement(statusElement,
                                     "SUCCESS");
                         }catch (TimeoutException te) {
                             throw new AssertionError("Tuning Report not completed successfully.");
@@ -101,6 +103,8 @@ public class TC_CTR_03 extends BaseClass {
                         WebElement statusElement = driver.findElement(By.xpath(statusXpath));
                         try{
                             waitExecuter.waitUntilElementPresent(statusElement);
+                            waitExecuter.waitUntilTextToBeInWebElement(statusElement,
+                                    "STARTED");
                             waitExecuter.waitUntilTextToBeInWebElement(statusElement,
                                     "SUCCESS");
                             test.log(LogStatus.PASS, "Verified Tuning report is completed successfully for date: " + date);

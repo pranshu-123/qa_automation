@@ -98,7 +98,7 @@ public class TopXPageObject {
     @FindBy(xpath = "(//label[contains(text(), 'Tags')])/following::input[(contains(@type,'checkbox'))][last()]")
     public WebElement tagsLastInputTextboxField;
 
-    @FindBy(className = "close")
+    @FindBy(css = "button.close")
     public List<WebElement> closeModalButton;
 
     @FindBy(xpath = "//td/span[contains(text(),'Top X')]/parent::td/following-sibling::td[3]//span[contains(@class, 'icon-expand')]")

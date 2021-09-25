@@ -33,7 +33,7 @@ public class JobsWorkflowPageObject {
     @FindBy(xpath = "(//div[contains(@class,'gantt-parent')]//div[contains(@id,'gantt-container')]//span)[1]")
     public WebElement getParentJobId;
 
-    @FindBy(css = "div[class='close']")
+    @FindBy(css = "div.close")
     public WebElement close;
 
     @FindBy(xpath = "//span[contains(@class,'icon-jobs')]")
@@ -42,31 +42,31 @@ public class JobsWorkflowPageObject {
     @FindBy(xpath = "//ul[@class='sub-menu']//span[text()='Applications']")
     public WebElement applicationTab;
 
-    @FindBy(id = "apps-global-search-filter")
+    @FindBy(css = "input.global-app-search")
     public WebElement globalSearch;
 
     @FindBy(xpath = "//div[contains(@class,'component-section-header')]/h1[text()='Jobs']")
     public WebElement jobsHeading;
 
-    @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[contains(text(),'MR')]//following::td[11]//span[text()='WFI']")
+    @FindBy(css = "span.badge.tag-mini.font-bold.app-parent-badges")
     public List<WebElement> WFILink;
 
-    @FindBy(xpath = "//span[text()[normalize-space()='WFI']]")
+    @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[contains(text(),'MapReduce')]//following::td[11]//span[contains(text(),'WFI')]    ")
     public List<WebElement> genericWFILink;
 
     @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[contains(text(),'')]//following::td[11]//span[text()='Hive']")
     public List<WebElement> genericHiveLink;
 
-    @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[contains(text(),'MR')]//following::td[11]//span[text()='Hive']")
+    @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[contains(text(),'')]//following::td[11]//span[contains(text(),'WFI')]")
     public List<WebElement> HiveLink;
 
-    @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[contains(text(),'MR')]//following::td[11]//span[text()='WFI']")
+    @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[contains(text(),'')]//following::td[11]//span[text()='WFI']")
     public List<WebElement> HiveMRWFILink;
 
-    @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[contains(text(),'impala')]//following::td[11]//span[text()='WFI']")
+    @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[contains(text(),'Impala')]//following::td[11]//span[contains(text(),'WFI')]")
     public List<WebElement> ImpalaWFILink;
 
-    @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[contains(text(),'spark')]//following::td[11]//span[text()='WFI']")
+    @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[contains(text(),'Spark')]//following::td[11]//span[contains(text(),'WFI')]")
     public List<WebElement> SparkWFILink;
 
     @FindBy(xpath = "//div[@id='pipeline-instance-header']/h2/span")

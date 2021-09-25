@@ -49,14 +49,17 @@ public class MR_052_PART3 extends BaseClass {
         int totalMapReduceAppCnt = mrDetailsPage.clickOnlyLink("MapReduce");
         if (totalMapReduceAppCnt > 0) {
             applicationsPageObject.expandStatus.click();
-            int appCount = mrDetailsPage.clickOnlyLink("Killed");
-            if (totalMapReduceAppCnt > 0) {
+            int appCount = mrDetailsPage.clickOnlyLink("Success");
+            waitExecuter.waitUntilPageFullyLoaded();
+            waitExecuter.sleep(3000);
+            if (appCount > 0) {
                 String headerAppId = mrDetailsPage.verifyAppId(mrApps, applicationsPageObject);
                 test.log(LogStatus.PASS, "Map Reduce Application Id is displayed in the Header: " + headerAppId);
                 waitExecuter.waitUntilPageFullyLoaded();
                 MouseActions.clickOnElement(driver, mrApps.resourcesTab);
                 waitExecuter.waitUntilPageFullyLoaded();
                 mrDetailsPage.validateMapandReduceTab(mrApps,"Task Attempts",test);
+                waitExecuter.waitUntilPageFullyLoaded();
 
                 //Close apps details page
                 waitExecuter.waitUntilElementPresent(mrApps.closeAppsPageTab);

@@ -136,7 +136,7 @@ public class MrAppsDetailsPageObject {
     @FindBy(css = "div.close")
     public WebElement closeAppsPageTab;
 
-    @FindBy(xpath = "//a[@href='#/clusters/overview']")
+    @FindBy(xpath = "//a[@href='#/clusters/overview']//span")
     public WebElement homeTab;
 
     @FindBy(xpath = "//*[@class='highcharts-legend']/*[name()='g']//*[name()='g']//*[name()='tspan']")

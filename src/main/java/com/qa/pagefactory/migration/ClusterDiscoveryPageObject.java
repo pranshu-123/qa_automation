@@ -84,6 +84,9 @@ public class ClusterDiscoveryPageObject {
     @FindBy(xpath = "//span[@class='text-fatal']")
     public WebElement fatalMessage;
 
+    @FindBy(xpath = "//button[@class='close']")
+    public WebElement closeAppsPageTab;
+
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div/span")
     public WebElement failedErrorMessage;
 

@@ -62,6 +62,7 @@ public class ReportsArchiveSchedulePage {
         waitExecuter.sleep(2000);
         userActions.performActionWithPolling(reportPageObj.deleteReport, UserAction.CLICK);
         String bannerMsg = reportPageObj.successfulMsgBanner.getText();
+        waitExecuter.waitUntilElementPresent(reportPageObj.resetButton);
         logger.info("Banner Msg after deleting the scheduled report is " + bannerMsg);
         userActions.performActionWithPolling(reportPageObj.closeBanner, UserAction.CLICK);
         Assert.assertEquals(bannerMsg, expectedBannerMsg, " The bannerMsg is not equal to the expected " +

@@ -14,7 +14,7 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//button[contains(@class,'run-btn')]")
   public WebElement runButton;
 
-  @FindBy(xpath = "//*[@id="cloudmapping"]/div[1]/div/div[2]/div/div[3]/span[1]")
+  @FindBy(xpath = "//*[@id='cloudmapping']/div[1]/div/div[2]/div/div[3]/span[1]")
   public WebElement modalRunButton;
 
   @FindBy(xpath = "//div[contains(@class,'component-section-header')]//span[contains(text(),'Run')]")
@@ -32,7 +32,7 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//div[contains(@class,'task_runner')]//select")
   public List<WebElement> cloudProductDropDown;
 
-  @FindBy(xpath = "//*[@id="cloudmapping"]/div[1]/div/div[2]/div/div[2]/div/div/form/div/div[2]/div[2]/div/div[2]/span/span[1]/span/span[2]")
+  @FindBy(xpath = "//*[@id='cloudmapping']/div[1]/div/div[2]/div/div[2]/div/div/form/div/div[2]/div[2]/div/div[2]/span/span[1]/span/span[2]")
   public WebElement regionDropDown;
 
   @FindBy(xpath = "//ul[@class='select2-results__options']/li")
@@ -121,7 +121,7 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//div[contains(@class,'spinner')]")
   public List<WebElement> loaderElement;
 
-  @FindBy(xpath = "//*[@id="cloudmapping"]/div[1]/div/div[2]/div/div[2]/div/div/form/div/div[2]/div[2]/div/div[1]/span/span[1]/span/span[2]")
+  @FindBy(xpath = "//*[@id='cloudmapping']/div[1]/div/div[2]/div/div[2]/div/div/form/div/div[2]/div[2]/div/div[1]/span/span[1]/span/span[2]")
   public WebElement cloudProductServiceDropdownIcon;
 
   @FindBy(xpath = "(//div[@class='cust-row'])[5]/div/div/div/table[@class='component-data-tables']/tbody/tr")

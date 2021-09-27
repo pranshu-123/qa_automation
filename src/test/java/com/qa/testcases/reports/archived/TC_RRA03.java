@@ -61,8 +61,7 @@ public class TC_RRA03 extends BaseClass {
     // Click on combination of daterange
     test.log(LogStatus.INFO, "Verify reports with status between last one hour");
     datePicker.clickOnDatePicker();
-    waitExecuter.waitUntilPageFullyLoaded();
-    waitExecuter.sleep(2000);
+     waitExecuter.sleep(2000);
     datePicker.selectLastOneHour();
     waitExecuter.sleep(2000);
     reportsPage.validateReportNames(reportPageObj);
@@ -74,10 +73,10 @@ public class TC_RRA03 extends BaseClass {
     //select 'Last 2 Hour'
     test.log(LogStatus.INFO, "Verify reports with status between last two hours");
     datePicker.clickOnDatePicker();
-    waitExecuter.waitUntilPageFullyLoaded();
+    waitExecuter.waitUntilElementPresent(reportPageObj.resetButton);
     waitExecuter.sleep(1000);
     datePicker.selectLastTwoHour();
-    waitExecuter.waitUntilPageFullyLoaded();
+    waitExecuter.waitUntilElementPresent(reportPageObj.resetButton);
     waitExecuter.sleep(2000);
     reportsPage.validateReportNames(reportPageObj);
     waitExecuter.waitUntilPageFullyLoaded();
@@ -89,7 +88,7 @@ public class TC_RRA03 extends BaseClass {
     datePicker.clickOnDatePicker();
     waitExecuter.waitUntilPageFullyLoaded();
     datePicker.selectLastSixHour();
-    waitExecuter.waitUntilPageFullyLoaded();
+    waitExecuter.waitUntilElementPresent(reportPageObj.resetButton);
     waitExecuter.sleep(2000);
     reportsPage.validateReportNames(reportPageObj);
     waitExecuter.waitUntilPageFullyLoaded();
@@ -99,9 +98,9 @@ public class TC_RRA03 extends BaseClass {
 
     test.log(LogStatus.INFO, "Verify reports with status between last 12 hours");
     datePicker.clickOnDatePicker();
-    waitExecuter.waitUntilPageFullyLoaded();
+    waitExecuter.waitUntilElementPresent(reportPageObj.resetButton);
     datePicker.selectLast12Hour();
-    waitExecuter.waitUntilPageFullyLoaded();
+    waitExecuter.waitUntilElementPresent(reportPageObj.resetButton);
     waitExecuter.sleep(3000);
     reportsPage.validateReportNames(reportPageObj);
     waitExecuter.waitUntilPageFullyLoaded();
@@ -111,10 +110,10 @@ public class TC_RRA03 extends BaseClass {
 
     test.log(LogStatus.INFO, "Verify reports with status between today");
     datePicker.clickOnDatePicker();
-    waitExecuter.waitUntilPageFullyLoaded();
+    waitExecuter.waitUntilElementPresent(reportPageObj.resetButton);
     waitExecuter.sleep(2000);
     datePicker.selectToday();
-    waitExecuter.waitUntilPageFullyLoaded();
+    waitExecuter.waitUntilElementPresent(reportPageObj.resetButton);
     waitExecuter.sleep(3000);
     reportsPage.validateReportNames(reportPageObj);
     waitExecuter.waitUntilPageFullyLoaded();
@@ -124,8 +123,9 @@ public class TC_RRA03 extends BaseClass {
 
     test.log(LogStatus.INFO, "Verify reports with status between yesterday");
     datePicker.clickOnDatePicker();
-    waitExecuter.waitUntilPageFullyLoaded();
+    waitExecuter.waitUntilElementPresent(reportPageObj.resetButton);
     datePicker.selectYesterday();
+    waitExecuter.waitUntilElementPresent(reportPageObj.resetButton);
     waitExecuter.sleep(2000);
     waitExecuter.waitUntilPageFullyLoaded();
     waitExecuter.sleep(2000);
@@ -137,10 +137,10 @@ public class TC_RRA03 extends BaseClass {
 
     test.log(LogStatus.INFO, "Verify reports with status between last 7 days");
     datePicker.clickOnDatePicker();
-    waitExecuter.waitUntilPageFullyLoaded();
+    waitExecuter.waitUntilElementPresent(reportPageObj.resetButton);
     waitExecuter.sleep(2000);
     datePicker.selectLast7Days();
-    waitExecuter.waitUntilPageFullyLoaded();
+    waitExecuter.waitUntilElementPresent(reportPageObj.resetButton);
     waitExecuter.sleep(2000);
     reportsPage.validateReportNames(reportPageObj);
     waitExecuter.waitUntilPageFullyLoaded();
@@ -150,9 +150,9 @@ public class TC_RRA03 extends BaseClass {
 
     test.log(LogStatus.INFO, "Verify reports with status between last 30 days");
     datePicker.clickOnDatePicker();
-    waitExecuter.waitUntilPageFullyLoaded();
+    waitExecuter.waitUntilElementPresent(reportPageObj.resetButton);
     datePicker.selectLast30Days();
-    waitExecuter.waitUntilPageFullyLoaded();
+    waitExecuter.waitUntilElementPresent(reportPageObj.resetButton);
     waitExecuter.sleep(2000);
     reportsPage.validateReportNames(reportPageObj);
     waitExecuter.waitUntilPageFullyLoaded();
@@ -162,10 +162,10 @@ public class TC_RRA03 extends BaseClass {
 
     test.log(LogStatus.INFO, "Verify reports with status between last 90 days");
     datePicker.clickOnDatePicker();
-    waitExecuter.waitUntilPageFullyLoaded();
+    waitExecuter.waitUntilElementPresent(reportPageObj.resetButton);
     waitExecuter.sleep(1000);
     datePicker.selectLast90Days();
-    waitExecuter.waitUntilPageFullyLoaded();
+    waitExecuter.waitUntilElementPresent(reportPageObj.resetButton);
     waitExecuter.sleep(2000);
     reportsPage.validateReportNames(reportPageObj);
     waitExecuter.waitUntilPageFullyLoaded();
@@ -175,10 +175,10 @@ public class TC_RRA03 extends BaseClass {
 
     test.log(LogStatus.INFO, "Verify reports with status between this month ");
     datePicker.clickOnDatePicker();
-    waitExecuter.waitUntilPageFullyLoaded();
+    waitExecuter.waitUntilElementPresent(reportPageObj.resetButton);
     waitExecuter.sleep(1000);
     datePicker.selectThisMonth();
-    waitExecuter.waitUntilPageFullyLoaded();
+    waitExecuter.waitUntilElementPresent(reportPageObj.resetButton);
     waitExecuter.sleep(2000);
     reportsPage.validateReportNames(reportPageObj);
     waitExecuter.waitUntilPageFullyLoaded();
@@ -188,10 +188,10 @@ public class TC_RRA03 extends BaseClass {
 
     test.log(LogStatus.INFO, "Verify reports with status between last month ");
     datePicker.clickOnDatePicker();
-    waitExecuter.waitUntilPageFullyLoaded();
+    waitExecuter.waitUntilElementPresent(reportPageObj.resetButton);
     waitExecuter.sleep(1000);
     datePicker.selectLastMonth();
-    waitExecuter.waitUntilPageFullyLoaded();
+    waitExecuter.waitUntilElementPresent(reportPageObj.resetButton);
     waitExecuter.sleep(3000);
     reportsPage.validateReportNames(reportPageObj);
     waitExecuter.waitUntilPageFullyLoaded();

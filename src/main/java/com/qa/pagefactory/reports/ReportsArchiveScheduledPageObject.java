@@ -12,7 +12,7 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//div[contains(@class,'component-section-header')]")
   public WebElement reportArchiveHeader;
 
-  @FindBy(xpath = "//*[@class='select2-selection__arrow']")
+  @FindBy(css = "span.select2-selection__arrow")
   public WebElement scheduleReportDropDown;
 
   @FindBy(xpath = "//*[@class='select2-results__options']/li")
@@ -117,10 +117,10 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath="(//*[@class='pointer icon-delete is-enabled undefined'])")
   public WebElement deleteReportIcon;
 
-  @FindBy(xpath="//span[@class='badge pending pointer']")
+  @FindBy(css="span.badge.pending.pointer")
   public WebElement deleteReport;
 
-  @FindBy(xpath="//div[contains(@class,'popover')]/H3")
+  @FindBy(xpath="//h3[@class='popover-header']//span[1]")
   public WebElement deletePopText;
 
   @FindBy(xpath="(//div[@id='breadcrumb']/span/span)[1]")
@@ -177,7 +177,7 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//*[@class='tag-list']/span")
   public WebElement tagListFields;
 
-  @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
+  @FindBy(css = "section,component-message-banner bg-success.icon-success ")
   public WebElement successfulMsgBanner;
 
   @FindBy(xpath = "//*[@class=\"icon-x\"]")

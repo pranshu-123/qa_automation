@@ -72,6 +72,7 @@ public class MR_052_PART3 extends BaseClass {
                 MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);
 
             } else {
+                MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);
                 test.log(LogStatus.SKIP, "No Map Reduce Application present");
                 logger.info("No Map Reduce Application present in the " + clusterId + " cluster for the time span " +
                         "of 90 days");

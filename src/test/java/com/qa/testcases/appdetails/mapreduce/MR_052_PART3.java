@@ -48,10 +48,16 @@ public class MR_052_PART3 extends BaseClass {
         test.log(LogStatus.INFO, "Verify that the left pane has map reduce check box and the apps number");
         int totalMapReduceAppCnt = mrDetailsPage.clickOnlyLink("MapReduce");
         if (totalMapReduceAppCnt > 0) {
+            mrApps.sortByReadApp.click();
+            waitExecuter.waitUntilPageFullyLoaded();
+            mrApps.sortUp.click();
+            waitExecuter.sleep(2000);
             applicationsPageObject.expandStatus.click();
             int appCount = mrDetailsPage.clickOnlyLink("Success");
+            mrApps.sortByReadApp.click();
             waitExecuter.waitUntilPageFullyLoaded();
-            waitExecuter.sleep(3000);
+            mrApps.sortUp.click();
+            waitExecuter.sleep(2000);
             if (appCount > 0) {
                 String headerAppId = mrDetailsPage.verifyAppId(mrApps, applicationsPageObject);
                 test.log(LogStatus.PASS, "Map Reduce Application Id is displayed in the Header: " + headerAppId);

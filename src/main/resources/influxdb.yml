@@ -1,5 +1,5 @@
 influx:
   url: http://tnode151.unraveldata.com:8086
   db: selenium_metrics
-  username: admin
-  password: unraveldata123
+  username: <username>
+  password: <password>

@@ -72,6 +72,7 @@ public class MR_052_PART2 extends BaseClass {
                 MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);
 
             } else {
+                MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);
                 //Close apps details page
                 MouseActions.clickOnElement(driver, mrApps.homeTab);
                 test.log(LogStatus.SKIP, "No Map Reduce Application present");

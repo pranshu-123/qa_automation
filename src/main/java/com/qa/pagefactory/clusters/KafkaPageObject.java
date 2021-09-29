@@ -107,7 +107,7 @@ public class KafkaPageObject {
     @FindBy(xpath = "//*[@class='component-dashboard']")
     public WebElement componentDashboard;
 
-    @FindBy(xpath = "//*[@class='container-fluid']/h2")
+    @FindBy(xpath = "//*[@class='dashboard-container']/div/div/h2")
     public WebElement latestMetricsInfo;
 
     @FindBy(xpath = "//*[@id='undefined-body']//td[@class='active-td']")

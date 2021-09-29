@@ -762,7 +762,7 @@ public class SparkAppsDetailsPage {
         waitExecuter.waitUntilPageFullyLoaded();
      //   waitExecuter.waitUntilElementClickable(sparkPageObject.resetButton);
        // appPageObj.getTypeFromTable.click();
-        sparkPageObj.getAppId.click();
+        userActions.performActionWithPolling(sparkPageObj.getAppId, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(sparkPageObject.closeAppsPageTab);
         //waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();

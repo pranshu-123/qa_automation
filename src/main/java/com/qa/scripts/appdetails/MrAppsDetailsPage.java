@@ -854,7 +854,9 @@ public class MrAppsDetailsPage {
         String[] expectedGraphTitle = {"Task Attempt (MAP)", "Task Attempt (REDUCE)"};
         waitExecuter.waitUntilPageFullyLoaded();
         List<WebElement> graphTitleList = mrApps.resourcesGraphTitle;
+        verifyAssertFalse(graphTitleList.isEmpty(), mrApps, "No title displayed");
         List<WebElement> allGraphsList = mrApps.resourcesAllGraphs;
+        verifyAssertFalse(allGraphsList.isEmpty(), mrApps, "No title displayed");
         for (WebElement webElement : graphTitleList) {
             String graphTitle = webElement.getText();
             LOGGER.info("Graph title is " + graphTitle);

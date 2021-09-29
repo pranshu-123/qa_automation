@@ -54,10 +54,13 @@ public class MR_052_PART3 extends BaseClass {
             waitExecuter.sleep(2000);
             applicationsPageObject.expandStatus.click();
             int appCount = mrDetailsPage.clickOnlyLink("Success");
-            mrApps.sortByReadApp.click();
+            waitExecuter.waitUntilPageFullyLoaded();
+            waitExecuter.sleep(2000);
+            mrApps.sortByDurationApp.click();
             waitExecuter.waitUntilPageFullyLoaded();
             mrApps.sortUp.click();
             waitExecuter.sleep(2000);
+            //Clicking on the Map reduce app must go to apps detail page and verify Data Tabs must be available on UI
             if (appCount > 0) {
                 String headerAppId = mrDetailsPage.verifyAppId(mrApps, applicationsPageObject);
                 test.log(LogStatus.PASS, "Map Reduce Application Id is displayed in the Header: " + headerAppId);
@@ -72,12 +75,12 @@ public class MR_052_PART3 extends BaseClass {
                 MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);
 
             } else {
-                MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);
+                //Close apps details page
+                MouseActions.clickOnElement(driver, mrApps.homeTab);
                 test.log(LogStatus.SKIP, "No Map Reduce Application present");
                 logger.info("No Map Reduce Application present in the " + clusterId + " cluster for the time span " +
                         "of 90 days");
-                //Close apps details page
-                MouseActions.clickOnElement(driver, mrApps.homeTab);
+
             }
         }
     }

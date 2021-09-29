@@ -72,7 +72,6 @@ public class MR_052_PART1 extends BaseClass {
                 waitExecuter.waitUntilPageFullyLoaded();
 
                 //Close apps details page
-                //Close apps details page
                 waitExecuter.waitUntilElementPresent(mrApps.closeAppsPageTab);
                 MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);
 

@@ -899,13 +899,7 @@ public class SparkAppsDetailsPage {
         waitExecuter.sleep(2000);
         if (totalSparkAppCnt > 0) {
             waitExecuter.waitUntilElementClickable(applicationsPageObject.expandStatus);
-            userActions.performActionWithPolling(applicationsPageObject.expandStatus, UserAction.CLICK);
-            waitExecuter.waitUntilPageFullyLoaded();
-            waitExecuter.sleep(2000);
-            sparkAppPageObj.sortByDurationApp.click();
-            waitExecuter.waitUntilElementClickable(applicationsPageObject.sortUp);
-            sparkAppPageObj.sortUp.click();
-            waitExecuter.sleep(2000);
+            applicationsPageObject.expandStatus.click();
             int appCount = 0;
             if (isFailedApp)
                 appCount = appsDetailsPage.clickOnlyLink("Failed");

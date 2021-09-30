@@ -32,7 +32,7 @@ public class ForecastingPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
     public WebElement confirmationMessageElement;
 
-    @FindBy(xpath = "//span[text()[normalize-space()='Please enter valid number.']]")
+    @FindBy(css = "span.text-fatal")
     public WebElement ForecastingErrorMessageElement;
 
     @FindBy(xpath = "//h2[@class='text-white']//button[1]")
@@ -71,7 +71,7 @@ public class ForecastingPageObject {
     @FindBy(xpath = "//input[@placeholder='Email']")
     public WebElement verifyColorCode;
 
-    @FindBy(xpath = "//div[@class='close pointer']")
+    @FindBy(css = "button.close")
     public WebElement closeButton;
 
     @FindBy(xpath = "//select[contains(@class,'schedule-days')]")

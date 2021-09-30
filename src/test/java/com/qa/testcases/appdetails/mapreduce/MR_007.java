@@ -48,7 +48,7 @@ public class MR_007 extends BaseClass {
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
-        Assert.assertEquals(appCount, totalCount, "The tez app count of map reduce is not equal to " +
+        Assert.assertEquals(appCount, totalCount, "The map reduce app count of map reduce is not equal to " +
                 "the total count of heading.");
         test.log(LogStatus.PASS, "The left pane has map reduce check box and the app counts match to that " +
                 "displayed in the header");

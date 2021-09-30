@@ -64,7 +64,7 @@ public class MR_011 extends BaseClass {
             test.log(LogStatus.PASS, "Write IO is displayed in the Map Reduce Table: " + writeIO);
 
         } else {
-            test.log(LogStatus.SKIP, "No Tez Application present");
+            test.log(LogStatus.SKIP, "No map reduce Application present");
             logger.error("No Map Reduce Application present in the " + clusterId + " cluster for the time span " +
                     "of 90 days");
         }

@@ -117,6 +117,9 @@ public class AppDetailsPageObject {
     @FindBy(css = "div.close")
     public List<WebElement> closeIcon;
 
+    @FindBy(css = "div.close")
+    public WebElement closeButton;
+
     @FindBy(xpath = "//table[@id='appTagsTable']/tbody/tr/td[1]")
     public List<WebElement> getTagNames;
 

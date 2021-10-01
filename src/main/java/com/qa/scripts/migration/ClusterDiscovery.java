@@ -167,12 +167,15 @@ public class ClusterDiscovery {
     public int getJobsCount() {
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         int hiveapp = sparkApp.clickOnlyLink("Tez");
+        waitExecuter.sleep(1000);
         LOGGER.info("Tez apps -- " + hiveapp);
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         int MRapps = sparkApp.clickOnlyLink("MapReduce");
+        waitExecuter.sleep(1000);
         LOGGER.info("Map Reduce -- " + MRapps);
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         int sparkApps = sparkApp.clickOnlyLink("Spark");
+        waitExecuter.sleep(1000);
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         LOGGER.info("Spark -- " + sparkApps);
         int totalJobs = hiveapp + MRapps + sparkApps;

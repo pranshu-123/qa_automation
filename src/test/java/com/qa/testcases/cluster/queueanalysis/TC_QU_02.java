@@ -93,9 +93,9 @@ public class TC_QU_02 extends BaseClass {
                 }
             } else if (dateRangeValue.equals("This Year") || dateRangeValue.equals("Last 90 Days")
                     || dateRangeValue.equals("Last 60 Days")) {
-                Assert.assertTrue(qaPageObject.invalidInputMessage.get(0).getText().trim().contains("Please Make Sure Date Range Less than 30 Days"),
+                Assert.assertTrue(qaPageObject.invalidInputMessage.getText().trim().contains("Please Make Sure Date Range Less than 30 Days"),
                         "Banner message display an in-correct message as "
-                                + qaPageObject.invalidInputMessage.get(0).getText());
+                                + qaPageObject.invalidInputMessage.getText());
                 test.log(LogStatus.PASS, "Verified Queue Analysis report is loaded properly.");
                 qaPageObject.close.click();
                 waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);

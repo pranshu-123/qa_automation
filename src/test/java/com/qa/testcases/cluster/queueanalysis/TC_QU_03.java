@@ -45,17 +45,18 @@ public class TC_QU_03 extends BaseClass {
         waitExecuter.waitUntilElementClickable(qaPageObject.modalRunButton);
         waitExecuter.sleep(1000);
         test.log(LogStatus.INFO, "Set custom date for 1 year duration");
-        queueAnalysis.assignCustomDate("01/01/2018", "01/01/2019");
+        queueAnalysis.assignCustomDate("10/01/2021", "10/04/2021");
 
         //Click on Run button of modal window
         test.log(LogStatus.INFO, "Click on Run button of modal window");
         LOGGER.info("Click on Run button of modal window");
         qaPageObject.modalRunButton.click();
 
-        Assert.assertTrue(qaPageObject.invalidInputMessage.get(0).getText().trim().toLowerCase()
-                        .contains("please, make sure valid inputs."),
+        Assert.assertTrue(qaPageObject.invalidInputMessage.getText().trim().toLowerCase()
+                        .contains("please make sure all inputs are valid."),
                 "Banner message display an in-correct message as "
-                        + qaPageObject.invalidInputMessage.get(0).getText());
+                        + qaPageObject.invalidInputMessage.getText());
+        waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.PASS, "Verified Queue Analysis report is loaded properly.");
         waitExecuter.waitUntilElementClickable(qaPageObject.addIcon);
 

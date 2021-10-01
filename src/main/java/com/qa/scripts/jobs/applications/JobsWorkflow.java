@@ -195,8 +195,8 @@ public class JobsWorkflow {
     /* Close modal window */
     public void close() {
         LOGGER.info("Close the app details page and navigate to workflow home page.");
-        MouseActions.clickOnElement(driver, workflow.close);
-        waitExecutor.sleep(1000);
+        userActions.performActionWithPolling(workflow.close, UserAction.CLICK);
+        waitExecutor.waitUntilElementClickable(workflow.globalSearch);
     }
 
     /* Validate KPI present */

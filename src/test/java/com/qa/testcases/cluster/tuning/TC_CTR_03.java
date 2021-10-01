@@ -71,6 +71,7 @@ public class TC_CTR_03 extends BaseClass {
                     if(date.equalsIgnoreCase("Custom Range")) {
                         LOGGER.info("Checking for date range:"+ date);
                         datePickerElement.click();
+                        waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
                         datePicker.setStartDate(DateUtils.getFirstDateOfYear());
                         datePicker.setEndDate(DateUtils.getCurrentDate());
                         datePicker.clickOnCustomDateApplyBtn();
@@ -81,8 +82,6 @@ public class TC_CTR_03 extends BaseClass {
                         waitExecuter.sleep(70000);
                         WebElement statusElement = driver.findElement(By.xpath(statusXpath));
                         try{
-                            waitExecuter.waitUntilTextToBeInWebElement(statusElement,
-                                    "STARTED");
                             waitExecuter.sleep(2000);
                             waitExecuter.waitUntilTextToBeInWebElement(statusElement,
                                     "SUCCESS");
@@ -93,6 +92,7 @@ public class TC_CTR_03 extends BaseClass {
                     }else{
                         LOGGER.info("Checking for date range:"+ date);
                         datePickerElement.click();
+                        waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
                         homePage.selectMultiClusterId(clusterId);
                         tuning.clickOnModalRunButton();
                         waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
@@ -103,8 +103,6 @@ public class TC_CTR_03 extends BaseClass {
                         waitExecuter.sleep(4000);
                         WebElement statusElement = driver.findElement(By.xpath(statusXpath));
                         try{
-                            waitExecuter.waitUntilTextToBeInWebElement(statusElement,
-                                    "STARTED");
                             waitExecuter.sleep(2000);
                             waitExecuter.waitUntilTextToBeInWebElement(statusElement,
                                     "SUCCESS");

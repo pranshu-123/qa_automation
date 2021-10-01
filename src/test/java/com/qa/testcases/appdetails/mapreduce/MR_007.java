@@ -10,6 +10,7 @@ import com.qa.scripts.appdetails.MrAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +36,7 @@ public class MR_007 extends BaseClass {
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         MrAppsDetailsPageObject mrApps = new MrAppsDetailsPageObject(driver);
         MrAppsDetailsPage mrDetailsPage = new MrAppsDetailsPage(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         DatePicker datePicker = new DatePicker(driver);
         AllApps allApps = new AllApps(driver);
 
@@ -42,15 +44,16 @@ public class MR_007 extends BaseClass {
         mrDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
 
-        test.log(LogStatus.INFO, "Verify that the left pane has map reduce check box and the apps number");
+        test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
         int appCount = mrDetailsPage.clickOnlyLink("MapReduce");
 
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
-        Assert.assertEquals(appCount, totalCount, "The map reduce app count of map reduce is not equal to " +
+        Assert.assertEquals(appCount, totalCount, "The tez app count of TezApp is not equal to " +
                 "the total count of heading.");
-        test.log(LogStatus.PASS, "The left pane has map reduce check box and the app counts match to that " +
+        waitExecuter.waitUntilPageFullyLoaded();
+        test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 
         /*

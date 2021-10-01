@@ -44,15 +44,16 @@ public class MR_006 extends BaseClass {
         mrDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
 
-        test.log(LogStatus.INFO, "Verify that the left pane has map reduce check box and the apps number");
+        test.log(LogStatus.INFO, "Verify that the left pane has tez check box and the apps number");
         int appCount = mrDetailsPage.clickOnlyLink("MapReduce");
-        waitExecuter.waitUntilPageFullyLoaded();
+
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
-        Assert.assertEquals(appCount, totalCount, "The map reduce app count of Map ReduceApp is not equal to " +
+        Assert.assertEquals(appCount, totalCount, "The tez app count of TezApp is not equal to " +
                 "the total count of heading.");
-        test.log(LogStatus.PASS, "The left pane has map reduce check box and the app counts match to that " +
+        waitExecuter.waitUntilPageFullyLoaded();
+        test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
 
     }

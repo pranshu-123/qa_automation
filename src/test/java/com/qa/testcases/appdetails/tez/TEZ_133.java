@@ -2,6 +2,7 @@ package com.qa.testcases.appdetails.tez;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.TezAppsDetailsPageObject;
 import com.qa.pagefactory.appsDetailsPage.TezLlapAppsDetailsPageObject;
@@ -56,11 +57,11 @@ public class TEZ_133 extends BaseClass {
                 "the total count of heading.");
         test.log(LogStatus.PASS, "The left pane has Hive check box and the app counts match to that " +
                 "displayed in the header");
+        waitExecuter.waitUntilElementClickable(tezApps.sortByReadApp);
         tezApps.sortByReadApp.click();
         waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         tezApps.sortUp.click();
-        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+        waitExecuter.sleep(2000);
         applicationsPageObject.expandStatus.click();
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         int statusCount = tezDetailsPage.clickOnlyLink("Success");
@@ -75,6 +76,9 @@ public class TEZ_133 extends BaseClass {
         if (appCount > 0) {
             String Appname = tezDetailsPage.verifyDbname(tezApps);
             test.log(LogStatus.PASS, "Tez Database is displayed in the Header: " + Appname);
+            //Close apps details page
+            MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
+            waitExecuter.sleep(3000);
 
         } else {
             test.log(LogStatus.SKIP, "No Tez Application present");

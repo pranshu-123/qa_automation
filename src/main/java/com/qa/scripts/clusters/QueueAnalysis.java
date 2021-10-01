@@ -158,8 +158,8 @@ public class QueueAnalysis {
 
     /* Get expected MemToolTips */
     public List<String> expectedMemToolTips() {
-        List<String> expectedMemoryToolTip = Arrays.asList("pendingb", "steadyfairshareb", "availablegb", "allocatedb",
-                "reservedb", "fairshareb");
+        List<String> expectedMemoryToolTip = Arrays.asList("pendingb", "steadyfairsharegb", "availablegb", "allocatedb",
+                "reservedb", "fairsharegb");
         waitExecuter.sleep(1000);
         navigateDifferentPointOnGraph(driver, queueAnalysisPageObject.memoryGraph);
         LOGGER.info("Expected tool tip values- " + expectedMemoryToolTip);
@@ -184,8 +184,7 @@ public class QueueAnalysis {
 
     /* Get vcores expected tool tips */
     public List<String> expectedVcoresToolTips() {
-        List<String> expectedVcoresToolTip = Arrays.asList("reserved", "fairshare", "pending", "steadyfairshare",
-                "available", "allocated");
+        List<String> expectedVcoresToolTip = Arrays.asList("reserved","fairshare","pending","steadyfairshare","available", "allocated");
         waitExecuter.sleep(1000);
         navigateDifferentPointOnGraph(driver, queueAnalysisPageObject.vcoresGraph);
         LOGGER.info("Expected tool tip values- " + expectedVcoresToolTip);

@@ -33,8 +33,8 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "//span[contains(@class,'text-fatal')]")
     public WebElement messageOnSelectingBeyond30days;
 
-    @FindBy(xpath = "//section[contains(@class,'component-message-banner bg-fatal')]//div[1]")
-    public List<WebElement> invalidInputMessage;
+    @FindBy(css = "section.component-message-banner.bg-fatal.icon-fatal")
+    public WebElement invalidInputMessage;
 
     @FindBy(className = "select2-search__field")
     public WebElement queueSearchBox;

@@ -21,7 +21,7 @@ public class AppDetailsPageObject {
     @FindBy(id = "allApps")
     public WebElement allAppsTable;
 
-    @FindBy(css = "button.close")
+    @FindBy(css = "div.close")
     public WebElement closeModalbutton;
 
     @FindBy(xpath = "//h2/span[2]/span/span")
@@ -114,8 +114,11 @@ public class AppDetailsPageObject {
     @FindBy(xpath = "(//table[@id='allApps']/tbody/tr/td)[3]")
     public WebElement firstRow;
 
-    @FindBy(css = "button.close")
+    @FindBy(css = "div.close")
     public List<WebElement> closeIcon;
+
+    @FindBy(css = "div.close")
+    public WebElement closeButton;
 
     @FindBy(xpath = "//table[@id='appTagsTable']/tbody/tr/td[1]")
     public List<WebElement> getTagNames;

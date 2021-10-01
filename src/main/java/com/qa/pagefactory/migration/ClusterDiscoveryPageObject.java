@@ -15,10 +15,10 @@ public class ClusterDiscoveryPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/a/i")
     public List<WebElement> confirmationMessageElementClose;
 
-    @FindBy(xpath = "//span[normalize-space()='Run']")
+    @FindBy(xpath = "//a[normalize-space()='Run']")
     public WebElement modalRunButton;
 
-    @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
+    @FindBy(xpath = "//section[contains(@class,'component-message-banner bg-success')]//div[1]")
     public WebElement confirmationMessageElement;
 
     @FindBy(xpath = "//div[contains(@class,'daterangepicker') and contains(@class, 'open')]//li")
@@ -30,7 +30,7 @@ public class ClusterDiscoveryPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/span")
     public WebElement invalidInputMessage;
 
-    @FindBy(xpath = "(//div[@class='panel-body']//h3/b)[1]")
+    @FindBy(xpath = "//div[@class='col-md-4']//h3[1]")
     public WebElement getClusterName;
 
     @FindBy(xpath = "(.//*[local-name() = 'svg']/*[local-name() = 'text']/*[local-name() = 'tspan'])[1]")
@@ -69,20 +69,23 @@ public class ClusterDiscoveryPageObject {
     @FindBy(xpath = "//div[contains(@class,'component-dropdown')]")
     public WebElement clickOnComponentDropdown;
 
-    @FindBy(id = "cpu-memory")
+    @FindBy(id = "cpu")
     public WebElement cpu_memoryHeatMap;
 
-    @FindBy(xpath = "//div[@id='cpu-memory']//div[contains(@class,'highcharts-container ')]")
+    @FindBy(xpath = "(//*[name()='rect'][@class='highcharts-background'])[4]")
     public WebElement heatMapContainer;
 
-    @FindBy(xpath = "(//div[@id='cpu-memory']//span)[1]")
+    @FindBy(xpath = "(//div[@id='cpu']//span)[1]")
     public WebElement cpuDropButton;
 
-    @FindBy(xpath = "//div[@id='cpu-memory']//div[contains(@class,'dropdown-content-display')]/a[text()='Memory']")
+    @FindBy(xpath = "(//*[name()='rect'][@class='highcharts-background'])[5]")
     public WebElement selectMemoryinDropdown;
 
-    @FindBy(xpath = "//span[@class='text-fatal']")
+    @FindBy(xpath = "//div[@class='text-fatal pt-1']")
     public WebElement fatalMessage;
+
+    @FindBy(xpath = "//button[@class='close']")
+    public WebElement closeAppsPageTab;
 
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div/span")
     public WebElement failedErrorMessage;

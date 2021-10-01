@@ -57,6 +57,7 @@ public class TC_CTR_03 extends BaseClass {
 
             LOGGER.info("Click on + button");
             String statusXpath = reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.Tuning);
+            waitExecuter.sleep(2000);
             LOGGER.info("Clicked on Tuning Tab + icon");
             test.log(LogStatus.INFO, "Clicked on Tuning Tab + icon");
 
@@ -70,6 +71,7 @@ public class TC_CTR_03 extends BaseClass {
                     if(date.equalsIgnoreCase("Custom Range")) {
                         LOGGER.info("Checking for date range:"+ date);
                         datePickerElement.click();
+                        waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
                         datePicker.setStartDate(DateUtils.getFirstDateOfYear());
                         datePicker.setEndDate(DateUtils.getCurrentDate());
                         datePicker.clickOnCustomDateApplyBtn();
@@ -77,18 +79,23 @@ public class TC_CTR_03 extends BaseClass {
                         waitExecuter.waitUntilPageFullyLoaded();
                         tuning.clickOnModalRunButton();
                         waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
-                        waitExecuter.sleep(50000);
+                        waitExecuter.sleep(70000);
                         WebElement statusElement = driver.findElement(By.xpath(statusXpath));
                         try{
+                            waitExecuter.sleep(2000);
                             waitExecuter.waitUntilTextToBeInWebElement(statusElement,
                                     "SUCCESS");
                         }catch (TimeoutException te) {
+                            waitExecuter.waitUntilPageFullyLoaded();
+                            waitExecuter.waitUntilTextToBeInWebElement(statusElement,
+                                    "SUCCESS");
                             throw new AssertionError("Tuning Report not completed successfully.");
                         }
                         break;
                     }else{
                         LOGGER.info("Checking for date range:"+ date);
                         datePickerElement.click();
+                        waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
                         homePage.selectMultiClusterId(clusterId);
                         tuning.clickOnModalRunButton();
                         waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
@@ -99,11 +106,15 @@ public class TC_CTR_03 extends BaseClass {
                         waitExecuter.sleep(4000);
                         WebElement statusElement = driver.findElement(By.xpath(statusXpath));
                         try{
+                            waitExecuter.sleep(2000);
                             waitExecuter.waitUntilTextToBeInWebElement(statusElement,
                                     "SUCCESS");
                             test.log(LogStatus.PASS, "Verified Tuning report is completed successfully for date: " + date);
                             waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
                         }catch (TimeoutException te) {
+                            waitExecuter.waitUntilPageFullyLoaded();
+                            waitExecuter.waitUntilTextToBeInWebElement(statusElement,
+                                    "SUCCESS");
                             throw new AssertionError("Tuning Report not completed successfully.");
                         }
                         break;

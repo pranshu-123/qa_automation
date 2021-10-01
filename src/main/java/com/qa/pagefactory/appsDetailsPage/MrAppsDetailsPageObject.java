@@ -87,7 +87,7 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id='taskattemptreduce']//*[div and @class='footer']/div/*/span[1]")
     public List<WebElement> taskAttReduceFooterName;
 
-    @FindBy(xpath = "//*[@id='taskattemptmap']//*[div and @class='footer']/div/*/span[2]")
+    @FindBy(xpath = "//*[@id='taskattemptreduce']//*[div and @class='footer']/div/*/span[2]")
     public List<WebElement> taskAttReduceFooterVal;
 
     @FindBy(xpath = "//*[@id=\"taskattemptmap\"]//*[name()='svg']/*[name()='text' and @class='highcharts-subtitle']/*")
@@ -133,10 +133,10 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span/span")
     public WebElement getHeaderAppId;
 
-    @FindBy(css = "button.close")
+    @FindBy(xpath = "//div[@class='close']")
     public WebElement closeAppsPageTab;
 
-    @FindBy(xpath = "//a[@href='#/clusters/overview']")
+    @FindBy(xpath = "//a[@href='#/']")
     public WebElement homeTab;
 
     @FindBy(xpath = "//*[@class='highcharts-legend']/*[name()='g']//*[name()='g']//*[name()='tspan']")

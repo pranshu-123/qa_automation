@@ -6,6 +6,7 @@ import com.qa.pagefactory.DatePickerPageObject;
 import com.qa.pagefactory.migration.ClusterDiscoveryPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.migration.ClusterDiscovery;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
@@ -52,16 +53,18 @@ public class TC_CD_09 extends BaseClass {
 
         // Click on custom date range and set dates
         test.log(LogStatus.INFO, "Click on date range");
-        discovery.setCustomRange("01/01/2020", "01/02/2020");
+        discovery.setCustomRange("09/16/2021", "09/17/2021");
+        waitExecuter.waitUntilPageFullyLoaded();
 
         // Click on Run button of modal window
         test.log(LogStatus.INFO, "Click on Run button of modal window");
         discovery.clickRunModalButton();
         try {
             waitExecuter.waitUntilTextToBeInWebElement(cdPageObject.fatalMessage,
-                    "Please Make Sure Date Range More than 2 Days");
+                    "Date range should be greater than two days.");
+            waitExecuter.sleep(3000);
             test.log(LogStatus.PASS, "Verified Cluster Discovery report throws error " +
-                    "when report is generated for less than 2 days.");
+                    "when report is generated for  greater than two days.");
         } catch (TimeoutException te) {
             throw new AssertionError("Cluster Discovery Report not completed successfully.");
         }

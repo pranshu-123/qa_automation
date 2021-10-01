@@ -42,17 +42,17 @@ public class MR_041 extends BaseClass {
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         mrDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
                 applicationsPageObject, clusterId);
-
-        test.log(LogStatus.INFO, "Verify that the left pane has map reduce check box and the apps number");
+        waitExecuter.waitUntilPageFullyLoaded();
+        test.log(LogStatus.INFO, "Verify that the left pane has MapReduce check box and the apps number");
         int appCount = mrDetailsPage.clickOnlyLink("MapReduce");
-        waitExecuter.sleep(3000);
 
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
         logger.info("AppCount is " + appCount + " total count is " + totalCount);
-        Assert.assertEquals(appCount, totalCount, "The Map Reduce app count of Map ReduceApp is not equal to " +
+        waitExecuter.waitUntilPageFullyLoaded();
+        Assert.assertEquals(appCount, totalCount, "The MapReduce app count of MapReduce is not equal to " +
                 "the total count of heading.");
-        test.log(LogStatus.PASS, "The left pane has Map Reduce check box and the app counts match to that " +
+        test.log(LogStatus.PASS, "The left pane has MapReduce check box and the app counts match to that " +
                 "displayed in the header");
 
         //click on cluster search field

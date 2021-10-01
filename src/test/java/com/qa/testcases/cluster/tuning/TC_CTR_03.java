@@ -86,6 +86,9 @@ public class TC_CTR_03 extends BaseClass {
                             waitExecuter.waitUntilTextToBeInWebElement(statusElement,
                                     "SUCCESS");
                         }catch (TimeoutException te) {
+                            waitExecuter.waitUntilPageFullyLoaded();
+                            waitExecuter.waitUntilTextToBeInWebElement(statusElement,
+                                    "SUCCESS");
                             throw new AssertionError("Tuning Report not completed successfully.");
                         }
                         break;
@@ -109,6 +112,9 @@ public class TC_CTR_03 extends BaseClass {
                             test.log(LogStatus.PASS, "Verified Tuning report is completed successfully for date: " + date);
                             waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
                         }catch (TimeoutException te) {
+                            waitExecuter.waitUntilPageFullyLoaded();
+                            waitExecuter.waitUntilTextToBeInWebElement(statusElement,
+                                    "SUCCESS");
                             throw new AssertionError("Tuning Report not completed successfully.");
                         }
                         break;

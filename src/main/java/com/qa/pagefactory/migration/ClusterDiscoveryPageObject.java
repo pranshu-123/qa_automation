@@ -81,7 +81,7 @@ public class ClusterDiscoveryPageObject {
     @FindBy(xpath = "(//*[name()='rect'][@class='highcharts-background'])[5]")
     public WebElement selectMemoryinDropdown;
 
-    @FindBy(xpath = "//span[@class='text-fatal']")
+    @FindBy(xpath = "//div[@class='text-fatal pt-1']")
     public WebElement fatalMessage;
 
     @FindBy(xpath = "//button[@class='close']")

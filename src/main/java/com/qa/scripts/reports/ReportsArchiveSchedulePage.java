@@ -974,4 +974,41 @@ public class ReportsArchiveSchedulePage {
             }
         }
     }
+
+    /**
+     *Method to download CLuster discovery Report
+     */
+    public void validateReportDownload(ReportsArchiveScheduledPageObject reportPageObj){
+
+        List<WebElement> reportNameList = reportPageObj.reportNames;
+        List<WebElement> newReportActionList = reportPageObj.newReportIcon;
+        List<WebElement> reportStatusList = reportPageObj.reportStatus;
+
+        for (int i =0 ; i<reportNameList.size(); i++){
+            String reportName = reportNameList.get(i).getText().trim();
+            if (("Cluster Discovery").equals(reportName)){
+                userActions.performActionWithPolling(newReportActionList.get(i), UserAction.CLICK);
+                waitExecuter.sleep(1000);
+                userActions.performActionWithPolling(reportPageObj.reportCreationRunButton, UserAction.CLICK);
+                waitExecuter.sleep(12000);
+                waitExecuter.waitUntilPageFullyLoaded();
+                driver.navigate().refresh();
+                waitExecuter.waitUntilPageFullyLoaded();
+                waitExecuter.waitUntilElementClickable(reportPageObj.reportSearchBox);
+                String status = reportStatusList.get(i).getText().trim();
+
+                if(("SUCCESS").equals(status)){
+                    //CLick to open cluster discovery
+                    userActions.performActionWithPolling(reportNameList.get(i),UserAction.CLICK);
+                    waitExecuter.sleep(1000);
+                    userActions.performActionWithPolling(reportPageObj.downloadReportIcon, UserAction.CLICK);
+                }
+                break;
+            }
+        }
+
+
+
+
+    }
 }

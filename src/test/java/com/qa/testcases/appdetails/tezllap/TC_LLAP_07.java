@@ -13,17 +13,18 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.logging.Logger;
+
 @Marker.AppDetailsTezLlap
 @Marker.All
 public class TC_LLAP_07 extends BaseClass {
 
-    Logger logger = LoggerFactory.getLogger(TC_LLAP_07.class);
+    private static final java.util.logging.Logger LOGGER = Logger.getLogger(TC_LLAP_13.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_LLAP_07_verifyUser(String clusterId) {
@@ -34,7 +35,7 @@ public class TC_LLAP_07 extends BaseClass {
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
-        logger.info("Initialize all class objects");
+        LOGGER.info("Initialize all class objects");
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         TezLlapAppsDetailsPageObject tezLlapPage = new TezLlapAppsDetailsPageObject(driver);
@@ -52,45 +53,22 @@ public class TC_LLAP_07 extends BaseClass {
         int appCount = tezLlapApps.clickOnlyLink("Tez");
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
-        logger.info("AppCount is " + appCount + " total count is " + totalCount);
+        LOGGER.info("AppCount is " + appCount + " total count is " + totalCount);
         test.log(LogStatus.PASS, "AppCount is " + appCount + " total count is " + totalCount);
         Assert.assertEquals(appCount, totalCount, "The tez app count of tezApp is not equal to " +
                 "the total count of heading.");
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
                 "displayed in the header");
-       /* applicationsPageObject.expandStatus.click();
+        applicationsPageObject.expandStatus.click();
         int statusCount = tezLlapApps.clickOnlyLink("Success");
-        test.log(LogStatus.PASS, "Selected success Count is  " + statusCount + " as Status, In Applications page");*/
+        test.log(LogStatus.PASS, "Selected success Count is  " + statusCount + " as Status, In Applications page");
         waitExecuter.waitUntilPageFullyLoaded();
         applicationsPageObject.expandQueue.click();
         waitExecuter.waitUntilPageFullyLoaded();
 
-       /* //Get llap username from table for tez apps
-        String filterByUsername = tezLlapPage.getUsernameFromTable.getText().trim();
-        String upTo10CharUserName = "llap";
-        waitExecuter.waitUntilPageFullyLoaded();
-        logger.info("User name should be filtered by- " + upTo10CharUserName);
-        // Click on user searchbox and get all usernames.
-        test.log(LogStatus.INFO, "Click on user searchbox and get all usernames.");
-        logger.info("Click on user searchbox and get all usernames.");
-        executor.executeScript("arguments[0].scrollIntoView();", applicationsPageObject.userSearchBox);
-        tezLlapPage.userSearchBox.click();
-        waitExecuter.sleep(2000);
-        tezLlapPage.userSearchBox.sendKeys(upTo10CharUserName);
-        List<WebElement> userList = tezLlapPage.getNamesFromDropDown;
-        String usernameSelected = null;
-        for (int i = 0; i < userList.size(); i++) {
-            if (userList.get(i).getText().equals(filterByUsername)) {
-                usernameSelected = userList.get(i).getText();
-                logger.info("Selected username from dropdown " + usernameSelected);
-                userList.get(i).click();
-                waitExecuter.sleep(2000);
-                break;
-            }
-        }*/
         // Get llap queuename from table for tez apps
         String upTo10CharQueueName = "llap";
-        logger.info("Queue name should be filtered by- " + upTo10CharQueueName);
+        LOGGER.info("Queue name should be filtered by- " + upTo10CharQueueName);
         waitExecuter.waitUntilPageFullyLoaded();
         if (!upTo10CharQueueName.trim().isEmpty() || !upTo10CharQueueName.trim().equals("-")) {
             tezLlapPage.queueSearchBox.click();
@@ -104,7 +82,7 @@ public class TC_LLAP_07 extends BaseClass {
 
                     if (queueList.get(i).getText().equals(upTo10CharQueueName)) {
                         queuenameSelected = queueList.get(i).getText();
-                        logger.info("Selected username from dropdown " + queuenameSelected);
+                        LOGGER.info("Selected username from dropdown " + queuenameSelected);
                         queueList.get(i).click();
                         waitExecuter.waitUntilPageFullyLoaded();
                         break;
@@ -118,9 +96,11 @@ public class TC_LLAP_07 extends BaseClass {
                 String userValue = tezLlapApps.verifyAppStatus(tezLlapPage);
                 test.log(LogStatus.PASS, "Tez llap user Value is displayed in the Table: " + userValue);
             } else {
-                Assert.assertTrue(tezLlapPage.whenNoApplicationPresent.isDisplayed(),
-                        "The cluster does not have any application under it and also does not display 'No Data Available' for it");
-                test.log(LogStatus.SKIP, "No Hive-Tezllap Application present");
+                Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
+                        "The clusterId does not have any application under it and also does not display 'No Data Available' for it");
+                test.log(LogStatus.SKIP, "No Tez llap Application present");
+                LOGGER.severe("No Tez llap Application present in the " + clusterId + " cluster for the time span " +
+                        "of 90 days");
             }
         }
     }

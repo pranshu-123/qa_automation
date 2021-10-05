@@ -14,17 +14,18 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.logging.Logger;
+
 @Marker.AppDetailsTezLlap
 @Marker.All
 public class TC_LLAP_25 extends BaseClass {
 
-    Logger logger = LoggerFactory.getLogger(TC_LLAP_25.class);
+    private static final java.util.logging.Logger LOGGER = Logger.getLogger(TC_LLAP_25.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_LLAP_25_verifyNotLlapQueue(String clusterId) {
@@ -35,7 +36,7 @@ public class TC_LLAP_25 extends BaseClass {
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
-        logger.info("Initialize all class objects");
+        LOGGER.info("Initialize all class objects");
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         TezLlapAppsDetailsPageObject tezLlapPage = new TezLlapAppsDetailsPageObject(driver);
@@ -53,7 +54,7 @@ public class TC_LLAP_25 extends BaseClass {
         int appCount = tezLlapApps.clickOnlyLink("Tez");
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
-        logger.info("AppCount is " + appCount + " total count is " + totalCount);
+        LOGGER.info("AppCount is " + appCount + " total count is " + totalCount);
         test.log(LogStatus.PASS, "AppCount is " + appCount + " total count is " + totalCount);
         Assert.assertEquals(appCount, totalCount, "The tez app count of tezApp is not equal to " +
                 "the total count of heading.");
@@ -70,7 +71,7 @@ public class TC_LLAP_25 extends BaseClass {
         // Get 1st queuename from table for Tez apps
         String filterByQueue = applicationsPageObject.getQueueNameTable.getText().trim();
         String upTo10CharQueueName = StringUtils.left(filterByQueue, 10);
-        logger.info("Queue name should be filtered by- " + upTo10CharQueueName);
+        LOGGER.info("Queue name should be filtered by- " + upTo10CharQueueName);
         waitExecuter.waitUntilPageFullyLoaded();
         if (!upTo10CharQueueName.trim().isEmpty() || !upTo10CharQueueName.trim().equals("-")) {
             tezLlapPage.queueSearchBox.click();
@@ -83,7 +84,7 @@ public class TC_LLAP_25 extends BaseClass {
                 for (int i = 0; i < queueList.size(); i++) {
                     if (queueList.get(i).getText().equals(upTo10CharQueueName)) {
                         queuenameSelected = queueList.get(i).getText();
-                        logger.info("Selected username from dropdown " + queuenameSelected);
+                        LOGGER.info("Selected username from dropdown " + queuenameSelected);
                         queueList.get(i).click();
                         waitExecuter.waitUntilPageFullyLoaded();
                         break;
@@ -94,12 +95,16 @@ public class TC_LLAP_25 extends BaseClass {
              */
             if (appCount > 0) {
                 String expectedQueuename = tezLlapApps.verifyQueueName(tezLlapPage);
-                Assert.assertEquals(expectedQueuename,queuenameSelected, "Hive tezllap should not be llap" +
+                Assert.assertEquals(expectedQueuename, queuenameSelected, "Hive tezllap should not be llap" +
                         " displayed.");
 
             } else {
-                waitExecuter.waitUntilElementPresent(applicationsPageObject.whenNoApplicationPresent);
-            }
+                Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
+                        "The clusterId does not have any application under it and also does not display 'No Data Available' for it");
+                test.log(LogStatus.SKIP, "No Tez llap Application present");
+                LOGGER.severe("No Tez llap Application present in the " + clusterId + " cluster for the time span " +
+                        "of 90 days");
             }
         }
     }
+}

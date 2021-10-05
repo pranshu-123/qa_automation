@@ -13,17 +13,18 @@ import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebElement;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.logging.Logger;
+
 @Marker.AppDetailsTezLlap
 @Marker.All
 public class TC_LLAP_18 extends BaseClass {
 
-    Logger logger = LoggerFactory.getLogger(TC_LLAP_18.class);
+    private static final java.util.logging.Logger LOGGER = Logger.getLogger(TC_LLAP_18.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_LLAP_18_verifyClusterID(String clusterId) {
@@ -34,7 +35,7 @@ public class TC_LLAP_18 extends BaseClass {
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
-        logger.info("Initialize all class objects");
+        LOGGER.info("Initialize all class objects");
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         TezLlapAppsDetailsPageObject tezLlapPage = new TezLlapAppsDetailsPageObject(driver);
@@ -51,16 +52,16 @@ public class TC_LLAP_18 extends BaseClass {
         int appCount = tezLlapApps.clickOnlyLink("Hive");
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
-        logger.info("AppCount is " + appCount + " total count is " + totalCount);
+        LOGGER.info("AppCount is " + appCount + " total count is " + totalCount);
         test.log(LogStatus.PASS, "AppCount is " + appCount + " total count is " + totalCount);
         Assert.assertEquals(appCount, totalCount, "The Hive tez app count of tezApp is not equal to " +
                 "the total count of heading.");
         test.log(LogStatus.PASS, "The left pane has Hive tez check box and the app counts match to that " +
                 "displayed in the header");
 
-       /* applicationsPageObject.expandStatus.click();
+        applicationsPageObject.expandStatus.click();
         int statusCount = tezLlapApps.clickOnlyLink("Success");
-        test.log(LogStatus.PASS, "Selected success Count is  " + statusCount + " as Status, In Applications page");*/
+        test.log(LogStatus.PASS, "Selected success Count is  " + statusCount + " as Status, In Applications page");
         waitExecuter.waitUntilPageFullyLoaded();
         applicationsPageObject.expandQueue.click();
         waitExecuter.waitUntilPageFullyLoaded();
@@ -68,7 +69,7 @@ public class TC_LLAP_18 extends BaseClass {
 
         // Get llap username from table for tez apps
         String upTo10CharQueueName = "llap";
-        logger.info("Queue name should be filtered by- " + upTo10CharQueueName);
+        LOGGER.info("Queue name should be filtered by- " + upTo10CharQueueName);
         waitExecuter.waitUntilPageFullyLoaded();
         if (!upTo10CharQueueName.trim().isEmpty() || !upTo10CharQueueName.trim().equals("-")) {
             tezLlapPage.queueSearchBox.click();
@@ -81,7 +82,7 @@ public class TC_LLAP_18 extends BaseClass {
                 for (int i = 0; i < queueList.size(); i++) {
                     if (queueList.get(i).getText().equals(upTo10CharQueueName)) {
                         queuenameSelected = queueList.get(i).getText();
-                        logger.info("Selected username from dropdown " + queuenameSelected);
+                        LOGGER.info("Selected username from dropdown " + queuenameSelected);
                         queueList.get(i).click();
                         waitExecuter.waitUntilPageFullyLoaded();
                         break;
@@ -96,13 +97,15 @@ public class TC_LLAP_18 extends BaseClass {
             String clusterid = tezLlapApps.verifyclusterId(tezLlapPage);
             test.log(LogStatus.PASS, "Cluster Id is displayed in the Hive-Tezllap Table: " + clusterid);
 
-
-        } else {
-            test.log(LogStatus.SKIP, "No Hive-Tezllap Application present");
-            logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +
-                    "of 90 days");
-            //Close apps details page
             MouseActions.clickOnElement(driver, tezLlapPage.closeAppsPageTab);
+         }else {
+                Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
+                        "The clusterId does not have any application under it and also does not display 'No Data Available' for it");
+                test.log(LogStatus.SKIP, "No Tez llap Application present");
+                LOGGER.severe("No Tez llap Application present in the " + clusterId + " cluster for the time span " +
+                        "of 90 days");
+            }
+
         }
     }
-}
+

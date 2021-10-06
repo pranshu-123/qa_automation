@@ -1,6 +1,7 @@
 package com.qa.scripts.reports;
 
 import com.qa.enums.UserAction;
+import com.qa.pagefactory.DatePickerPageObject;
 import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.scripts.clusters.Tuning;
 import com.qa.utils.MouseActions;
@@ -11,6 +12,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import com.qa.pagefactory.DatePickerPageObject;
+import com.qa.scripts.DatePicker;
 
 import java.util.*;
 import java.util.logging.Logger;
@@ -20,6 +23,9 @@ public class ReportsArchiveSchedulePage {
     Logger logger = Logger.getLogger(ReportsArchiveSchedulePage.class.getName());
     private final WaitExecuter waitExecuter;
     private final WebDriver driver;
+    private final DatePickerPageObject datePickerPageObject;
+    private final DatePicker date;
+    private final DatePicker datePicker;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -30,6 +36,10 @@ public class ReportsArchiveSchedulePage {
         waitExecuter = new WaitExecuter(driver);
         this.driver = driver;
         userActions = new UserActions(driver);
+        datePickerPageObject = new DatePickerPageObject(driver);
+        datePicker = new DatePicker(driver);
+        date = new DatePicker(driver);
+
     }
 
     /**
@@ -1006,6 +1016,25 @@ public class ReportsArchiveSchedulePage {
                 break;
             }
         }
+
+    }
+
+    /**
+     *Method to validate Unravel UI displays a error message when trying to generate a report with time range less than two days.
+     */
+    public void validateErrorMessage(ReportsArchiveScheduledPageObject reportPageObj){
+
+        List<WebElement> reportNameList = reportPageObj.reportNames;
+        List<WebElement> newReportActionList = reportPageObj.newReportIcon;
+        List<WebElement> reportStatusList = reportPageObj.reportStatus;
+        userActions.performActionWithPolling(newReportActionList.get(1) , UserAction.CLICK);
+        waitExecuter.sleep(1000);
+//        userActions.performActionWithPolling(reportPageObj.dropDownList.get(4), UserAction.CLICK);
+//        LOGGER.info("Click on date range");
+        userActions.performActionWithPolling(datePickerPageObject.customRange, UserAction.CLICK);
+        date.selectCustomRange();
+
+
 
 
 

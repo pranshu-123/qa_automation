@@ -13,18 +13,18 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Marker.AppDetailsTezLlap
 @Marker.All
 public class TC_LLAP_04 extends BaseClass {
 
-    Logger logger = LoggerFactory.getLogger(TC_LLAP_04.class);
+    private static final java.util.logging.Logger LOGGER = Logger.getLogger(TC_LLAP_04.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_LLAP_04_verifyStatusSuccess(String clusterId) {
@@ -35,7 +35,7 @@ public class TC_LLAP_04 extends BaseClass {
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
-        logger.info("Initialize all class objects");
+        LOGGER.info("Initialize all class objects");
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         TezLlapAppsDetailsPageObject tezLlapPage = new TezLlapAppsDetailsPageObject(driver);
@@ -51,7 +51,7 @@ public class TC_LLAP_04 extends BaseClass {
         int appCount = tezLlapApps.clickOnlyLink("Tez");
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
-        logger.info("AppCount is " + appCount + " total count is " + totalCount);
+        LOGGER.info("AppCount is " + appCount + " total count is " + totalCount);
         Assert.assertEquals(appCount, totalCount, "The tez app count of tezApp is not equal to " +
                 "the total count of heading.");
         test.log(LogStatus.PASS, "The left pane has tez check box and the app counts match to that " +
@@ -63,7 +63,7 @@ public class TC_LLAP_04 extends BaseClass {
 
         // Get llap queuename from table for tez apps
         String upTo10CharQueueName = "llap";
-        logger.info("Queue name should be filtered by- " + upTo10CharQueueName);
+        LOGGER.info("Queue name should be filtered by- " + upTo10CharQueueName);
         waitExecuter.waitUntilPageFullyLoaded();
         if (!upTo10CharQueueName.trim().isEmpty() || !upTo10CharQueueName.trim().equals("-")) {
             tezLlapPage.queueSearchBox.click();
@@ -76,7 +76,7 @@ public class TC_LLAP_04 extends BaseClass {
                 for (int i = 0; i < queueList.size(); i++) {
                     if (queueList.get(i).getText().equals(upTo10CharQueueName)) {
                         queuenameSelected = queueList.get(i).getText();
-                        logger.info("Selected username from dropdown " + queuenameSelected);
+                        LOGGER.info("Selected username from dropdown " + queuenameSelected);
                         queueList.get(i).click();
                         waitExecuter.waitUntilPageFullyLoaded();
                         break;
@@ -91,8 +91,12 @@ public class TC_LLAP_04 extends BaseClass {
             String statusValue = tezLlapApps.verifyAppStatus(tezLlapPage);
             test.log(LogStatus.PASS, "Tez status Value is displayed in the Table: " + statusValue);
         } else {
-                waitExecuter.waitUntilElementPresent(applicationsPageObject.whenNoApplicationPresent);
-            }
+            Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
+                    "The clusterId does not have any application under it and also does not display 'No Data Available' for it");
+            test.log(LogStatus.SKIP, "No Tez llap Application present");
+            LOGGER.severe("No Tez llap Application present in the " + clusterId + " cluster for the time span " +
+                    "of 90 days");
+        }
         }
         catch (NoSuchElementException te) {
             throw new AssertionError("After de-selecting all status 'No Data Available' is not displayed.");

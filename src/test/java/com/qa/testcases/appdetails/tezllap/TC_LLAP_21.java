@@ -12,19 +12,19 @@ import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebElement;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import static com.qa.base.BaseClass.extent;
 @Marker.AppDetailsTezLlap
 @Marker.All
 public class TC_LLAP_21 extends BaseClass {
 
-    Logger logger = LoggerFactory.getLogger(TC_LLAP_21.class);
+    private static final java.util.logging.Logger LOGGER = Logger.getLogger(TC_LLAP_21.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
     public void TC_LLAP_21_verifyParentApp(String clusterId) {
@@ -35,7 +35,7 @@ public class TC_LLAP_21 extends BaseClass {
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
-        logger.info("Initialize all class objects");
+        LOGGER.info("Initialize all class objects");
         SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         TezLlapAppsDetailsPageObject tezLlapPage = new TezLlapAppsDetailsPageObject(driver);
@@ -52,7 +52,7 @@ public class TC_LLAP_21 extends BaseClass {
         int appCount = tezLlapApps.clickOnlyLink("Hive");
         int totalCount = Integer.parseInt(applicationsPageObject.getTotalAppCount.getText().
                 replaceAll("[^\\dA-Za-z ]", "").trim());
-        logger.info("AppCount is " + appCount + " total count is " + totalCount);
+        LOGGER.info("AppCount is " + appCount + " total count is " + totalCount);
         test.log(LogStatus.PASS, "AppCount is " + appCount + " total count is " + totalCount);
         Assert.assertEquals(appCount, totalCount, "The Hive tez app count of tezApp is not equal to " +
                 "the total count of heading.");
@@ -68,7 +68,7 @@ public class TC_LLAP_21 extends BaseClass {
 
         // Get llap username from table for tez apps
         String upTo10CharQueueName = "llap";
-        logger.info("Queue name should be filtered by- " + upTo10CharQueueName);
+        LOGGER.info("Queue name should be filtered by- " + upTo10CharQueueName);
         waitExecuter.waitUntilPageFullyLoaded();
         if (!upTo10CharQueueName.trim().isEmpty() || !upTo10CharQueueName.trim().equals("-")) {
             tezLlapPage.queueSearchBox.click();
@@ -81,7 +81,7 @@ public class TC_LLAP_21 extends BaseClass {
                 for (int i = 0; i < queueList.size(); i++) {
                     if (queueList.get(i).getText().equals(upTo10CharQueueName)) {
                         queuenameSelected = queueList.get(i).getText();
-                        logger.info("Selected username from dropdown " + queuenameSelected);
+                        LOGGER.info("Selected username from dropdown " + queuenameSelected);
                         test.log(LogStatus.PASS, "Queue name should be filtered by- " + queuenameSelected);
                         queueList.get(i).click();
                         waitExecuter.waitUntilPageFullyLoaded();
@@ -99,10 +99,11 @@ public class TC_LLAP_21 extends BaseClass {
 
 
             } else {
-                test.log(LogStatus.SKIP, "No Hive-Tez LLAP Application present");
-                logger.error("No Hive-Tez LLAP Application present in the " + clusterId + " cluster for the time span " +
+                Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
+                        "The clusterId does not have any application under it and also does not display 'No Data Available' for it");
+                test.log(LogStatus.SKIP, "No Tez llap Application present");
+                LOGGER.severe("No Tez llap Application present in the " + clusterId + " cluster for the time span " +
                         "of 90 days");
-
             }
         }
     }

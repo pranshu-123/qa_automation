@@ -1,6 +1,4 @@
 package com.qa.testcases.migration.cloud_mapping_per_host;
-
-
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.enums.migration.MigrationCloudMappingModalTable;
@@ -17,13 +15,13 @@ import java.util.List;
 
 @Marker.CloudMappingPerHost
 @Marker.All
-public class TC_CMP_11 extends BaseClass {
+public class TC_CMP_12 extends BaseClass {
 
-    private static final LoggingUtils LOGGER = new LoggingUtils(TC_CMP_11.class);
+    private static final LoggingUtils LOGGER = new LoggingUtils(TC_CMP_12.class);
 
-    @Test
-    public void verifyEMRCostEffectivenessWithObjectStorage() {
-        test = extent.startTest("TC_CMP_11.verifyEMRCostEffectivenessWithObjectStorage", "Verify Unravel recommends the best EMR instance based on max capacity for \"Lift and Shift\" and cluster node usage for \"cost reduction\" when 5 of the instances in Run/Schedule are selected. Make sure that Unravel recommends the most cost effective instance. " +
+    public void verifyEMRCostEffectivenessWithLocalAttachedStorage() {
+
+        test = extent.startTest("TC_CMP_12.verifyEMRCostEffectivenessWithObjectStorage", "Verify Unravel recommends the best EMR instance based on max capacity for \"Lift and Shift\" and cluster node usage for \"cost reduction\" when 5 of the instances in Run/Schedule are selected. Make sure that Unravel recommends the most cost effective instance. " +
                 "for Object Storage");
 
         test.assignCategory("Migration/Cloud Mapping Per Host");
@@ -51,6 +49,7 @@ public class TC_CMP_11 extends BaseClass {
         cloudMigrationPerHostPage.waitTillLoaderPresent();
         waitExecuter.sleep(10000);
 
-        test.log(LogStatus.PASS, "Validated EMR recommends the most effective instance with Object Storage selected successfully.");
+        test.log(LogStatus.PASS, "Validated EMR recommends the most effective instance with Local Attached Storage selected successfully.");
+
     }
 }

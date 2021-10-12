@@ -1019,6 +1019,7 @@ public class ReportsArchiveSchedulePage {
 
     }
 
+
     /**
      *Method to validate Unravel UI displays a error message when trying to generate a report with time range less than two days.
      */
@@ -1029,15 +1030,36 @@ public class ReportsArchiveSchedulePage {
         List<WebElement> reportStatusList = reportPageObj.reportStatus;
         userActions.performActionWithPolling(newReportActionList.get(1) , UserAction.CLICK);
         waitExecuter.sleep(1000);
-//        userActions.performActionWithPolling(reportPageObj.dropDownList.get(4), UserAction.CLICK);
-//        LOGGER.info("Click on date range");
-        userActions.performActionWithPolling(datePickerPageObject.customRange, UserAction.CLICK);
-        date.selectCustomRange();
+        userActions.performActionWithPolling(reportPageObj.dateRange.get(1) , UserAction.CLICK);
+        waitExecuter.sleep(1000);
 
+        //select custom Range
+//        waitExecuter.waitUntilElementPresent(reportPageObj.customRanges.get(0));
+//        userActions.performActionWithPolling(reportPageObj.customRanges.get(0) , UserAction.CLICK);
 
+        waitExecuter.waitUntilElementPresent(reportPageObj.customRanges.get(1));
+        userActions.performActionWithPolling(reportPageObj.customRanges.get(1) , UserAction.CLICK);
+        waitExecuter.sleep(1000);
 
-
-
+//        //set start date
+        waitExecuter.waitUntilElementPresent(reportPageObj.customRangeStartDates.get(0));
+        userActions.performActionWithPolling(reportPageObj.customRangeStartDates.get(0) , UserAction.CLICK);
+        reportPageObj.customRangeStartDates.get(0).clear();
+        reportPageObj.customRangeStartDates.get(0).sendKeys("01/01/2020");
+//        waitExecuter.sleep(1000);
+//
+//        //        set end date
+//
+//        waitExecuter.waitUntilElementPresent(reportPageObj.customRangeEndDates.get(1));
+//        reportPageObj.customRangeEndDates.get(1).clear();
+//        reportPageObj.customRangeEndDates.get(1).sendKeys("01/01/2020");
+//        waitExecuter.sleep(1000);
+//
+//        //apply range
+//        waitExecuter.waitUntilElementPresent(reportPageObj.applyBtns.get(1));
+//        userActions.performActionWithPolling(reportPageObj.applyBtns.get(1), UserAction.CLICK);
+//        waitExecuter.sleep(1000);
+//
 
     }
 }

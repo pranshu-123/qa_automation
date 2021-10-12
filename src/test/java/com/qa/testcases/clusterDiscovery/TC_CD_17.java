@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
+import com.qa.scripts.migration.ClusterDiscovery;
 import com.qa.scripts.reports.ReportsArchiveSchedulePage;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
@@ -34,6 +35,7 @@ public class TC_CD_17 extends BaseClass{
         ReportsArchiveScheduledPageObject reportPageObj = new ReportsArchiveScheduledPageObject(driver);
         UserActions userActions = new UserActions(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
+        ClusterDiscovery discovery = new ClusterDiscovery(driver);
 
         // Navigate to Reports tab from header
         test.log(LogStatus.INFO, "Navigate to reports tab from header and validate the reports with report status are present");
@@ -42,6 +44,13 @@ public class TC_CD_17 extends BaseClass{
 
         // Validate Error Message displayed by UI
         reportsPage.validateErrorMessage(reportPageObj);
+
+
+
+        // Click on Run button of modal window
+        test.log(LogStatus.INFO, "Click on Run button of modal window");
+        discovery.clickRunModalButton();
+
         test.log(LogStatus.PASS, "Unravel UI displays a error message when trying to generate a report with time range less than two days.");
     }
 }

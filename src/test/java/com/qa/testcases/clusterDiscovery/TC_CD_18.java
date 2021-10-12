@@ -23,10 +23,10 @@ public class TC_CD_18 extends BaseClass {
     private static final java.util.logging.Logger LOGGER = Logger.getLogger(TC_CD_18.class.getName());
     public void verifyaAppropriateErrorMessage(String clusterId){
 
-        test = extent.startTest("TC_CD17_verifyErrorMessage: " + clusterId,
+        test = extent.startTest("TC_CD18_verifyErrorMessage: " + clusterId,
                 "Verify Unravel UI displays appropriate error message when data is not available for a perticular range");
         test.assignCategory("Report Archive");
-        Log.startTestCase("TC_CD17_verifyErrorMessage");
+        Log.startTestCase("TC_CD18_verifyErrorMessage");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

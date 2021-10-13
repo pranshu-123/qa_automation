@@ -1,4 +1,5 @@
 package com.qa.testcases.migration.cloud_mapping_per_host;
+
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.enums.migration.CloudProduct;
@@ -18,14 +19,13 @@ import java.util.List;
 
 @Marker.CloudMappingPerHost
 @Marker.All
-public class TC_CMP_15 extends BaseClass{
+public class TC_CMP_19 extends BaseClass {
 
-    private static final LoggingUtils LOGGER = new LoggingUtils(TC_CMP_15.class);
+    private static final LoggingUtils LOGGER = new LoggingUtils(TC_CMP_19.class);
 
     @Test
-    public void verifyAzureCostEffectivenessWithObjectStorage() {
-
-        test = extent.startTest("TC_CMP_15.verifyAzureCostEffectivenessWithObjectStorage", "Verify Unravel recommends the best EMR instance based on max capacity for \"Lift and Shift\" and cluster node usage for \"cost reduction\" when 5 of the instances in Run/Schedule are selected. Make sure that Unravel recommends the most cost effective instance. " +
+    public void verifyAmazonEC2EffectivenessWithObjectStorage() {
+        test = extent.startTest("TC_CMP_19.verifyAmazonEC2CostEffectivenessWithObjectStorage", "Verify Unravel recommends the best EMR instance based on max capacity for \"Lift and Shift\" and cluster node usage for \"cost reduction\" when 5 of the instances in Run/Schedule are selected. Make sure that Unravel recommends the most cost effective instance. " +
                 "for Object Storage");
         test.assignCategory("Migration/Cloud Mapping Per Host");
 
@@ -38,8 +38,8 @@ public class TC_CMP_15 extends BaseClass{
         cloudMigrationPerHostPage.clickOnRunButton();
         cloudMigrationPerHostPage.waitTillLoaderPresent();
 
-        LOGGER.info("Select AZURE as cloud product.", test);
-        cloudMigrationPerHostPage.selectCloudProduct(CloudProduct.AZURE);
+        LOGGER.info("Select EC2 as cloud product.", test);
+        cloudMigrationPerHostPage.selectCloudProduct(CloudProduct.AMAZON_EC2);
         cloudMigrationPerHostPage.waitTillLoaderPresent();
 
         LOGGER.info("Select Object storage.", test);
@@ -67,8 +67,8 @@ public class TC_CMP_15 extends BaseClass{
         cloudMigrationPerHostPage.clickOnRunButton();
         cloudMigrationPerHostPage.waitTillLoaderPresent();
 
-        LOGGER.info("Select AZURE as cloud product.", test);
-        cloudMigrationPerHostPage.selectCloudProduct(CloudProduct.AZURE);
+        LOGGER.info("Select EC2 as cloud product.", test);
+        cloudMigrationPerHostPage.selectCloudProduct(CloudProduct.AMAZON_EC2);
         cloudMigrationPerHostPage.waitTillLoaderPresent();
 
         LOGGER.info("Select Object storage.", test);
@@ -83,7 +83,8 @@ public class TC_CMP_15 extends BaseClass{
 
         Collections.reverse(costListWithoutDollar2);
         Assert.assertEquals(costListWithoutDollar,costListWithoutDollar);
-        test.log(LogStatus.PASS, "Validated Azure recommends the most effective instance with Object Storage selected successfully.");
+        test.log(LogStatus.PASS, "Validated Amazon EC2 recommends the most effective instance with Object Storage selected successfully.");
 
     }
+
 }

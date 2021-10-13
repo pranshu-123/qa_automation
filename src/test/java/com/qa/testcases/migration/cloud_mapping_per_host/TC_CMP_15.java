@@ -25,7 +25,7 @@ public class TC_CMP_15 extends BaseClass{
     @Test
     public void verifyAzureCostEffectivenessWithObjectStorage() {
 
-        test = extent.startTest("TC_CMP_15.verifyAzureCostEffectivenessWithObjectStorage", "Verify Unravel recommends the best EMR instance based on max capacity for \"Lift and Shift\" and cluster node usage for \"cost reduction\" when 5 of the instances in Run/Schedule are selected. Make sure that Unravel recommends the most cost effective instance. " +
+        test = extent.startTest("TC_CMP_15.verifyAzureCostEffectivenessWithObjectStorage", "Verify Unravel recommends the best AZURE instance based on max capacity for \"Lift and Shift\" and cluster node usage for \"cost reduction\" when 5 of the instances in Run/Schedule are selected. Make sure that Unravel recommends the most cost effective instance. " +
                 "for Object Storage");
         test.assignCategory("Migration/Cloud Mapping Per Host");
 

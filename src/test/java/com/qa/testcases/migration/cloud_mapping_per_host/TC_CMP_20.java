@@ -19,14 +19,13 @@ import java.util.List;
 
 @Marker.CloudMappingPerHost
 @Marker.All
-public class TC_CMP_19 extends BaseClass {
+public class TC_CMP_20 extends BaseClass {
 
-    private static final LoggingUtils LOGGER = new LoggingUtils(TC_CMP_19.class);
-
+    private static final LoggingUtils LOGGER = new LoggingUtils(TC_CMP_20.class);
     @Test
-    public void verifyAmazonEC2EffectivenessWithObjectStorage() {
-        test = extent.startTest("TC_CMP_19.verifyAmazonEC2CostEffectivenessWithObjectStorage", "Verify Unravel recommends the best AMAZON EC2 instance based on max capacity for \"Lift and Shift\" and cluster node usage for \"cost reduction\" when 5 of the instances in Run/Schedule are selected. Make sure that Unravel recommends the most cost effective instance. " +
-                "for Object Storage");
+    public void verifyAmazonEC2CostEffectivenessWithLocalAttachedStorage() {
+        test = extent.startTest("TC_CMP_20.verifyAzureCostEffectivenessWithLocalAttachedStorage", "Verify Unravel recommends the best Amazon EC2 instance based on max capacity for \"Lift and Shift\" and cluster node usage for \"cost reduction\" when 5 of the instances in Run/Schedule are selected. Make sure that Unravel recommends the most cost effective instance. " +
+                "for Local Attached Storage");
         test.assignCategory("Migration/Cloud Mapping Per Host");
 
         CloudMigrationPerHostPage cloudMigrationPerHostPage = new CloudMigrationPerHostPage(driver);
@@ -38,12 +37,12 @@ public class TC_CMP_19 extends BaseClass {
         cloudMigrationPerHostPage.clickOnRunButton();
         cloudMigrationPerHostPage.waitTillLoaderPresent();
 
-        LOGGER.info("Select EC2 as cloud product.", test);
+        LOGGER.info("Select Amazon EC2 as cloud product.", test);
         cloudMigrationPerHostPage.selectCloudProduct(CloudProduct.AMAZON_EC2);
         cloudMigrationPerHostPage.waitTillLoaderPresent();
 
-        LOGGER.info("Select Object storage.", test);
-        cloudMigrationPerHostPage.selectStorage("Object storage");
+        LOGGER.info("Select Local Attached storage.", test);
+        cloudMigrationPerHostPage.selectStorage("Local attached storage");
         cloudMigrationPerHostPage.waitTillLoaderPresent();
         List<String> costList = cloudMigrationPerHostPage.getColumnValuesFromModalTable(MigrationCloudMappingModalTable.COST);
 
@@ -67,12 +66,12 @@ public class TC_CMP_19 extends BaseClass {
         cloudMigrationPerHostPage.clickOnRunButton();
         cloudMigrationPerHostPage.waitTillLoaderPresent();
 
-        LOGGER.info("Select EC2 as cloud product.", test);
+        LOGGER.info("Select Amazon EC2 as cloud product.", test);
         cloudMigrationPerHostPage.selectCloudProduct(CloudProduct.AMAZON_EC2);
         cloudMigrationPerHostPage.waitTillLoaderPresent();
 
-        LOGGER.info("Select Object storage.", test);
-        cloudMigrationPerHostPage.selectStorage("Object storage");
+        LOGGER.info("Select Local Attached storage.", test);
+        cloudMigrationPerHostPage.selectStorage("Local attached storage");
         cloudMigrationPerHostPage.waitTillLoaderPresent();
         List<String> costList2 = cloudMigrationPerHostPage.getColumnValuesFromModalTable(MigrationCloudMappingModalTable.COST);
 
@@ -83,8 +82,6 @@ public class TC_CMP_19 extends BaseClass {
 
         Collections.reverse(costListWithoutDollar2);
         Assert.assertEquals(costListWithoutDollar,costListWithoutDollar);
-        test.log(LogStatus.PASS, "Validated Amazon EC2 recommends the most effective instance with Object Storage selected successfully.");
-
+        test.log(LogStatus.PASS, "Validated Amazon EC2 recommends the most effective instance with Local Attached Storage selected successfully.");
     }
-
 }

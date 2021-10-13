@@ -1,4 +1,5 @@
 package com.qa.testcases.migration.cloud_mapping_per_host;
+
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.enums.migration.CloudProduct;
@@ -12,23 +13,21 @@ import org.testng.Assert;
 import com.qa.pagefactory.migration.CloudMappingPerHostPageObject;
 import org.testng.annotations.Test;
 import com.qa.utils.WaitExecuter;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 @Marker.CloudMappingPerHost
 @Marker.All
-public class TC_CMP_15 extends BaseClass{
+public class TC_CMP_16 extends BaseClass {
 
-    private static final LoggingUtils LOGGER = new LoggingUtils(TC_CMP_15.class);
+    private static final LoggingUtils LOGGER = new LoggingUtils(TC_CMP_16.class);
 
     @Test
-    public void verifyAzureCostEffectivenessWithObjectStorage() {
+    public void verifyAzureCostEffectivenessWithLocalAttachedStorage() {
 
-        test = extent.startTest("TC_CMP_15.verifyAzureCostEffectivenessWithObjectStorage", "Verify Unravel recommends the best EMR instance based on max capacity for \"Lift and Shift\" and cluster node usage for \"cost reduction\" when 5 of the instances in Run/Schedule are selected. Make sure that Unravel recommends the most cost effective instance. " +
-                "for Object Storage");
+        test = extent.startTest("TC_CMP_16.verifyAzureCostEffectivenessWithLocalAttachedStorage", "Verify Unravel recommends the best EMR instance based on max capacity for \"Lift and Shift\" and cluster node usage for \"cost reduction\" when 5 of the instances in Run/Schedule are selected. Make sure that Unravel recommends the most cost effective instance. " +
+                "for Local Attached Storage");
         test.assignCategory("Migration/Cloud Mapping Per Host");
 
         CloudMigrationPerHostPage cloudMigrationPerHostPage = new CloudMigrationPerHostPage(driver);
@@ -44,8 +43,8 @@ public class TC_CMP_15 extends BaseClass{
         cloudMigrationPerHostPage.selectCloudProduct(CloudProduct.AZURE);
         cloudMigrationPerHostPage.waitTillLoaderPresent();
 
-        LOGGER.info("Select Object storage.", test);
-        cloudMigrationPerHostPage.selectStorage("Object storage");
+        LOGGER.info("Select Local Attached storage.", test);
+        cloudMigrationPerHostPage.selectStorage("Local attached storage");
         cloudMigrationPerHostPage.waitTillLoaderPresent();
         List<String> costList = cloudMigrationPerHostPage.getColumnValuesFromModalTable(MigrationCloudMappingModalTable.COST);
 
@@ -73,8 +72,8 @@ public class TC_CMP_15 extends BaseClass{
         cloudMigrationPerHostPage.selectCloudProduct(CloudProduct.AZURE);
         cloudMigrationPerHostPage.waitTillLoaderPresent();
 
-        LOGGER.info("Select Object storage.", test);
-        cloudMigrationPerHostPage.selectStorage("Object storage");
+        LOGGER.info("Select Local Attached storage.", test);
+        cloudMigrationPerHostPage.selectStorage("Local attached storage");
         cloudMigrationPerHostPage.waitTillLoaderPresent();
         List<String> costList2 = cloudMigrationPerHostPage.getColumnValuesFromModalTable(MigrationCloudMappingModalTable.COST);
 
@@ -85,7 +84,7 @@ public class TC_CMP_15 extends BaseClass{
 
         Collections.reverse(costListWithoutDollar2);
         Assert.assertEquals(costListWithoutDollar,costListWithoutDollar);
-        test.log(LogStatus.PASS, "Validated Azure recommends the most effective instance with Object Storage selected successfully.");
+        test.log(LogStatus.PASS, "Validated Azure recommends the most effective instance with Local Attached Storage selected successfully.");
 
     }
 }

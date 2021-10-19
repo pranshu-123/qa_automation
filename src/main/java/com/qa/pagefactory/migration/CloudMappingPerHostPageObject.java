@@ -148,7 +148,9 @@ public class CloudMappingPerHostPageObject {
   @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
   public WebElement confirmationMessageElement;
 
-  @FindBy(xpath = "//span[contains(text(), 'Total Hourly Cost :')]/parent::div/following-sibling::b")
+//  @FindBy(xpath = "//span[contains(text(), 'Total Hourly Cost :')]/parent::div/following-sibling::b")
+  @FindBy(xpath = "//*[@id=\"pdf-all\"]/div/div/div/div[1]/div/div/div[2]/div/div/div[2]/table/tr[5]/td[2]")
+
   public WebElement totalHourlyCostValue;
 
   @FindBy(xpath = "//div[contains(text(), 'Total Local Attached Storage Cost:')]/following-sibling::b")

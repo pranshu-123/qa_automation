@@ -9,21 +9,22 @@ import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import org.testng.annotations.Test;
 
+
 @Marker.CloudMappingPerHost
 @Marker.All
-public class TC_CMP_233 extends BaseClass {
-    private static final LoggingUtils LOGGER = new LoggingUtils(TC_CMP_233.class);
+public class TC_CMP_24 extends BaseClass {
+    private static final LoggingUtils LOGGER = new LoggingUtils(TC_CMP_23.class);
 
 
     /**
-    Verify Unravel recommends the best GCP instance based on max capacity for "Lift and Shift" and cluster node
-    *usage for "cost reduction" when 5 of the instances in Run/Schedule are selected. Make sure that Unravel
-    *recommends the most cost effective instance.
-    */
+     Verify Unravel recommends the best GCP instance based on max capacity for "Lift and Shift" and cluster node
+     *usage for "cost reduction" when 5 of the instances in Run/Schedule are selected. Make sure that Unravel
+     *recommends the most cost effective instance.
+     */
 
     @Test
-    public void verifyBestGCPInstanceWith5InstanceSelected(){
-        test = extent.startTest("TC_CMP_22.verifyBestGCPInstanceWith5InstanceSelected", "Verify Unravel recommends the best GCP " +
+    public void verifyBestGCPInstanceWith5InstanceSelectedWhenOfferCustomPrice(){
+        test = extent.startTest("TC_CMP_24.verifyBestGCPInstanceWith5InstanceSelectedWhenOfferCustomPrice", "Verify Unravel recommends the best GCP " +
                 "instance based on max capacity.");
         test.assignCategory("Migration/Cloud Mapping Per Host");
 
@@ -44,7 +45,7 @@ public class TC_CMP_233 extends BaseClass {
         cloudMigrationPerHostPage.selectRegion("Sao Paulo (southamerica-east1)");
         cloudMigrationPerHostPage.waitTillLoaderPresent();
 
-        cloudMigrationPerHostPage.validateCheapestIsDisplayedInRecommendationWith5InstanceSelected(test);
+        cloudMigrationPerHostPage.validateCheapestIsDisplayedInRecommendationWith5InstanceSelectedWithCustomPrice(test);
         cloudMigrationPerHostPage.verifyTotalHoulyCost(test);
 
     }

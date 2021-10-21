@@ -41,7 +41,7 @@ public class TC_CMP_11 extends BaseClass {
         cloudMigrationPerHostPage.selectStorage("Object storage");
         cloudMigrationPerHostPage.waitTillLoaderPresent();
         List<String> value1 = cloudMigrationPerHostPage.getColumnValuesFromModalTable(MigrationCloudMappingModalTable.COST);
-        System.out.println(Arrays.toString(value1.toArray()));
+//        System.out.println(Arrays.toString(value1.toArray()));
 
         for (WebElement element : cloudMappingPerHostPageObject.modalTableRows) {
             cloudMigrationPerHostPage.setCustomCost(element, "1");

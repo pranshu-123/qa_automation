@@ -8,6 +8,7 @@ import com.qa.scripts.migration.CloudMigrationPerHostPage;
 import com.qa.utils.LoggingUtils;
 import com.relevantcodes.extentreports.LogStatus;
 import org.apache.commons.compress.archivers.ar.ArArchiveEntry;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import com.qa.pagefactory.migration.CloudMappingPerHostPageObject;
@@ -42,48 +43,52 @@ public class TC_CMP_19 extends BaseClass {
         cloudMigrationPerHostPage.selectCloudProduct(CloudProduct.AMAZON_EC2);
         cloudMigrationPerHostPage.waitTillLoaderPresent();
 
+        cloudMigrationPerHostPage.selectRegion("Sao Paulo (southamerica-east1)");
+        cloudMigrationPerHostPage.waitTillLoaderPresent();
+
         LOGGER.info("Select Object storage.", test);
         cloudMigrationPerHostPage.selectStorage("Object storage");
         cloudMigrationPerHostPage.waitTillLoaderPresent();
-        List<String> costList = cloudMigrationPerHostPage.getColumnValuesFromModalTable(MigrationCloudMappingModalTable.COST);
 
-        List<String> costListWithoutDollar = new ArrayList<>();
-        for(String s :costList){
-            costListWithoutDollar.add(s.replace("$",""));
-        }
+        cloudMigrationPerHostPage.checkUncheckColumn(false);
+        cloudMigrationPerHostPage.checkUncheckColumn(true);
 
-        int  index =costListWithoutDollar.size() - 1;
-        for (WebElement element : cloudMigrationPerHostPage.getCustomCosts(cloudMappingPerHostPageObject.modalTableRows)) {
-            cloudMigrationPerHostPage.setCustomCost(element, costListWithoutDollar.get(index));
-            index--;
-        }
-        index =0;
+        cloudMigrationPerHostPage.selectCheckboxList(5);
+        cloudMigrationPerHostPage.offerCustomPriceInReverseOrder();
 
         cloudMigrationPerHostPage.clickOnModalRunButton();
+        try {
+            waitExecuter.waitUntilTextToBeInWebElement(cloudMigrationPerHostPage.getConfirmationMessage(),
+                    "Cloud Mapping Per Host completed successfully.");
+        } catch (TimeoutException te) {
+            Assert.assertTrue(false, "Cloud Mapping Per Host is not completed");
+        }
         cloudMigrationPerHostPage.waitTillLoaderPresent();
-        waitExecuter.sleep(10000);
-        LOGGER.info("Click on Run button", test);
+        waitExecuter.sleep(30000);
 
+        LOGGER.info("Navigate to migration host page", test);
+        cloudMigrationPerHostPage.navigateToCloudMappingPerHost();
+        LOGGER.info("Click on Run button", test);
         cloudMigrationPerHostPage.clickOnRunButton();
         cloudMigrationPerHostPage.waitTillLoaderPresent();
 
-        LOGGER.info("Select EC2 as cloud product.", test);
-        cloudMigrationPerHostPage.selectCloudProduct(CloudProduct.AMAZON_EC2);
+        LOGGER.info("Select GCP as cloud product.", test);
+        cloudMigrationPerHostPage.selectCloudProduct(CloudProduct.AMAZON_EMR);
+        cloudMigrationPerHostPage.waitTillLoaderPresent();
+
+        cloudMigrationPerHostPage.selectRegion("Sao Paulo (southamerica-east1)");
         cloudMigrationPerHostPage.waitTillLoaderPresent();
 
         LOGGER.info("Select Object storage.", test);
         cloudMigrationPerHostPage.selectStorage("Object storage");
         cloudMigrationPerHostPage.waitTillLoaderPresent();
-        List<String> costList2 = cloudMigrationPerHostPage.getColumnValuesFromModalTable(MigrationCloudMappingModalTable.COST);
 
-        List<String> costListWithoutDollar2 = new ArrayList<>();
-        for(String s :costList2){
-            costListWithoutDollar2.add(s.replace("$",""));
-        }
+        LOGGER.info("Select Local Attached storage.", test);
+        cloudMigrationPerHostPage.selectStorage("Local attached storage");
+        cloudMigrationPerHostPage.waitTillLoaderPresent();
 
-        Collections.reverse(costListWithoutDollar2);
-        Assert.assertEquals(costListWithoutDollar,costListWithoutDollar);
-        test.log(LogStatus.PASS, "Validated Amazon EC2 recommends the most effective instance with Object Storage selected successfully.");
+        cloudMigrationPerHostPage.validateCheapestIsDisplayedInRecommendationWith5InstanceSelectedWithCustomPrice(test);
+
 
     }
 

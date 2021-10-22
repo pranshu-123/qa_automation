@@ -13,7 +13,6 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,19 +20,19 @@ import java.util.List;
 
 @Marker.CloudMappingPerHost
 @Marker.All
-public class TC_CMP_24 extends BaseClass {
+public class TC_CMP_32 extends  BaseClass {
     private static final LoggingUtils LOGGER = new LoggingUtils(TC_CMP_23.class);
 
 
     /**
-     Verify Unravel recommends the best GCP instance based on max capacity for "Lift and Shift" and cluster node
-     *usage for "cost reduction" when 5 of the instances in Run/Schedule are selected. Make sure that Unravel
-     *recommends the most cost effective instance.
+     * Verify Unravel recommends the best GCP instance based on max capacity for "Lift and Shift" and cluster node
+     * usage for "cost reduction" when 5 of the instances in Run/Schedule are selected. Make sure that Unravel
+     * recommends the most cost effective instance.
      */
 
     @Test
-    public void verifyBestGCPInstanceWith5InstanceSelectedWhenOfferCustomPrice(){
-        test = extent.startTest("TC_CMP_24.verifyBestGCPInstanceWith5InstanceSelectedWhenOfferCustomPrice", "Verify Unravel recommends the best GCP " +
+    public void verifyBestDataprocInstanceWith5InstanceSelectedWhenOfferCustomPrice() {
+        test = extent.startTest("TC_CMP_32.verifyBestDataprocInstanceWith5InstanceSelectedWhenOfferCustomPrice", "Verify Unravel recommends the best Dataproc " +
                 "instance based on max capacity.");
         test.assignCategory("Migration/Cloud Mapping Per Host");
 
@@ -48,7 +47,7 @@ public class TC_CMP_24 extends BaseClass {
         cloudMigrationPerHostPage.waitTillLoaderPresent();
 
         LOGGER.info("Select GCP as cloud product.", test);
-        cloudMigrationPerHostPage.selectCloudProduct(CloudProduct.GOOGLE_COMPUTE_ENGINE);
+        cloudMigrationPerHostPage.selectCloudProduct(CloudProduct.GOOGLE_DATA_PROC);
         cloudMigrationPerHostPage.waitTillLoaderPresent();
 
         cloudMigrationPerHostPage.selectRegion("Sao Paulo (southamerica-east1)");
@@ -61,16 +60,16 @@ public class TC_CMP_24 extends BaseClass {
         List<String> costList = cloudMigrationPerHostPage.getColumnValuesFromModalTable(MigrationCloudMappingModalTable.COST);
 
         List<String> costListWithoutDollar = new ArrayList<>();
-        for(String s :costList){
-            costListWithoutDollar.add(s.replace("$",""));
+        for (String s : costList) {
+            costListWithoutDollar.add(s.replace("$", ""));
         }
 
-        int  index =costListWithoutDollar.size() - 1;
+        int index = costListWithoutDollar.size() - 1;
         for (WebElement element : cloudMigrationPerHostPage.getCustomCosts(cloudMappingPerHostPageObject.modalTableRows)) {
             cloudMigrationPerHostPage.setCustomCost(element, costListWithoutDollar.get(index));
             index--;
         }
-        index =0;
+        index = 0;
 
         cloudMigrationPerHostPage.clickOnModalRunButton();
         cloudMigrationPerHostPage.waitTillLoaderPresent();
@@ -85,13 +84,12 @@ public class TC_CMP_24 extends BaseClass {
         List<String> costList2 = cloudMigrationPerHostPage.getColumnValuesFromModalTable(MigrationCloudMappingModalTable.COST);
 
         List<String> costListWithoutDollar2 = new ArrayList<>();
-        for(String s :costList2){
-            costListWithoutDollar2.add(s.replace("$",""));
+        for (String s : costList2) {
+            costListWithoutDollar2.add(s.replace("$", ""));
         }
 
         Collections.reverse(costListWithoutDollar2);
-        Assert.assertEquals(costListWithoutDollar,costListWithoutDollar);
-        test.log(LogStatus.PASS, "Validated EMR recommends the most effective instance with Local Attached Storage selected successfully.");
-
+        Assert.assertEquals(costListWithoutDollar, costListWithoutDollar);
+        test.log(LogStatus.PASS, "Validated Dataproc recommends the most effective instance with Local Attached Storage selected successfully.");
     }
 }

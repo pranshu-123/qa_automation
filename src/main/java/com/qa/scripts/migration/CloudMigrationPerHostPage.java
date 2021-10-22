@@ -933,35 +933,6 @@ public class CloudMigrationPerHostPage {
         CloudMigrationPerHostPage cloudMigrationPerHostPage = new CloudMigrationPerHostPage(driver);
         CloudMappingPerHostPageObject cloudMappingPerHostPageObject = new CloudMappingPerHostPageObject(driver);
 
-        LOGGER.info("Select first storage.", test);
-        selectStorage("Object storage");
-        waitTillLoaderPresent();
-
-        LOGGER.info("Select Second storage.", test);
-        selectStorage("Local attached storage");
-        waitTillLoaderPresent();
-
-        checkUncheckColumn(false);
-        checkUncheckColumn(true);
-
-        List<WebElement> checkboxList2 = getCheckboxListForTable();
-        for(int i=0 ; i<5 ; i++){
-            userAction.performActionWithPolling(checkboxList2.get(i),UserAction.CLICK);
-        }
-
-        //Offer custom price
-        List<String> costList = cloudMigrationPerHostPage.getColumnValuesFromModalTable(MigrationCloudMappingModalTable.COST);
-        List<String> costListWithoutDollar = new ArrayList<>();
-
-        for(String s :costList){
-            costListWithoutDollar.add(s.replace("$",""));
-        }
-        int  index =costListWithoutDollar.size() - 1;
-        for (WebElement element : cloudMigrationPerHostPage.getCustomCosts(cloudMappingPerHostPageObject.modalTableRows)) {
-            cloudMigrationPerHostPage.setCustomCost(element, costListWithoutDollar.get(index));
-            index--;
-        }
-        index =0;
 
 
 
@@ -1011,6 +982,37 @@ public class CloudMigrationPerHostPage {
             Assert.assertEquals(actualRecommendedInstanceNames.get(i).toString(), cheapestInstances.get(i).getKey());
             LOGGER.pass("Expected instance is matching for: " + cheapestInstances.get(i).getKey(), test);
         }
+
+
+    }
+
+    public void selectCheckboxList(int number){
+        List<WebElement> checkboxList = getCheckboxListForTable();
+        for(int i =0 ; i<number; i++){
+            userAction.performActionWithPolling(checkboxList.get(i),UserAction.CLICK);
+        }
+
+
+    }
+
+    public void offerCustomPriceInReverseOrder(){
+
+        CloudMigrationPerHostPage cloudMigrationPerHostPage = new CloudMigrationPerHostPage(driver);
+        CloudMappingPerHostPageObject cloudMappingPerHostPageObject = new CloudMappingPerHostPageObject(driver);
+
+
+        List<String> costList = cloudMigrationPerHostPage.getColumnValuesFromModalTable(MigrationCloudMappingModalTable.COST);
+        List<String> costListWithoutDollar = new ArrayList<>();
+
+        for(String s :costList){
+            costListWithoutDollar.add(s.replace("$",""));
+        }
+        int  index =costListWithoutDollar.size() - 1;
+        for (WebElement element : cloudMigrationPerHostPage.getCustomCosts(cloudMappingPerHostPageObject.modalTableRows)) {
+            cloudMigrationPerHostPage.setCustomCost(element, costListWithoutDollar.get(index));
+            index--;
+        }
+        index =0;
     }
 
 

@@ -1,33 +1,35 @@
 package com.qa.testcases.migration.cloud_mapping_per_host;
+
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.enums.migration.CloudProduct;
 import com.qa.enums.migration.MigrationCloudMappingModalTable;
 import com.qa.scripts.migration.CloudMigrationPerHostPage;
 import com.qa.utils.LoggingUtils;
+import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
-import org.apache.commons.compress.archivers.ar.ArArchiveEntry;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import com.qa.pagefactory.migration.CloudMappingPerHostPageObject;
 import org.testng.annotations.Test;
 import com.qa.utils.WaitExecuter;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
+
 
 @Marker.CloudMappingPerHost
 @Marker.All
-public class TC_CMP_15 extends BaseClass{
+public class TC_CMP_27 extends BaseClass {
 
-    private static final LoggingUtils LOGGER = new LoggingUtils(TC_CMP_15.class);
+    private static final LoggingUtils LOGGER = new LoggingUtils(TC_CMP_11.class);
 
     @Test
-    public void verifyAzureCostEffectivenessWithObjectStorage() {
-
-        test = extent.startTest("TC_CMP_15.verifyAzureCostEffectivenessWithObjectStorage", "Verify Unravel recommends the best AZURE instance based on max capacity for \"Lift and Shift\" and cluster node usage for \"cost reduction\" when 5 of the instances in Run/Schedule are selected. Make sure that Unravel recommends the most cost effective instance. " +
+    public void verifyHDICostEffectivenessWithObjectStorage() {
+        test = extent.startTest("TC_CMP_27.verifyEHDICostEffectivenessWithObjectStorage", "Verify Unravel recommends the best HDI instance based on max capacity for \"Lift and Shift\" and cluster node usage for \"cost reduction\" when 5 of the instances in Run/Schedule are selected. Make sure that Unravel recommends the most cost effective instance. " +
                 "for Object Storage");
+
         test.assignCategory("Migration/Cloud Mapping Per Host");
 
         CloudMigrationPerHostPage cloudMigrationPerHostPage = new CloudMigrationPerHostPage(driver);
@@ -39,8 +41,8 @@ public class TC_CMP_15 extends BaseClass{
         cloudMigrationPerHostPage.clickOnRunButton();
         cloudMigrationPerHostPage.waitTillLoaderPresent();
 
-        LOGGER.info("Select AZURE as cloud product.", test);
-        cloudMigrationPerHostPage.selectCloudProduct(CloudProduct.AZURE);
+        LOGGER.info("Select GCP as cloud product.", test);
+        cloudMigrationPerHostPage.selectCloudProduct(CloudProduct.AZURE_HD_INSIGHT);
         cloudMigrationPerHostPage.waitTillLoaderPresent();
 
         cloudMigrationPerHostPage.selectRegion("Sao Paulo (southamerica-east1)");
@@ -59,6 +61,7 @@ public class TC_CMP_15 extends BaseClass{
 
         cloudMigrationPerHostPage.selectCheckboxList(5);
         cloudMigrationPerHostPage.offerCustomPriceInReverseOrder();
+
         cloudMigrationPerHostPage.clickOnModalRunButton();
         try {
             waitExecuter.waitUntilTextToBeInWebElement(cloudMigrationPerHostPage.getConfirmationMessage(),
@@ -76,7 +79,7 @@ public class TC_CMP_15 extends BaseClass{
         cloudMigrationPerHostPage.waitTillLoaderPresent();
 
         LOGGER.info("Select GCP as cloud product.", test);
-        cloudMigrationPerHostPage.selectCloudProduct(CloudProduct.AMAZON_EMR);
+        cloudMigrationPerHostPage.selectCloudProduct(CloudProduct.AZURE_HD_INSIGHT);
         cloudMigrationPerHostPage.waitTillLoaderPresent();
 
         cloudMigrationPerHostPage.selectRegion("Sao Paulo (southamerica-east1)");
@@ -91,9 +94,6 @@ public class TC_CMP_15 extends BaseClass{
         cloudMigrationPerHostPage.waitTillLoaderPresent();
 
         cloudMigrationPerHostPage.validateCheapestIsDisplayedInRecommendationWith5InstanceSelectedWithCustomPrice(test);
-
-
-
 
     }
 }

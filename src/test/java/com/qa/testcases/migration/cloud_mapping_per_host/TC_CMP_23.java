@@ -7,6 +7,8 @@ import com.qa.scripts.migration.CloudMigrationPerHostPage;
 import com.qa.utils.LoggingUtils;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
+import org.openqa.selenium.TimeoutException;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @Marker.CloudMappingPerHost
@@ -44,8 +46,55 @@ public class TC_CMP_23 extends BaseClass {
         cloudMigrationPerHostPage.selectRegion("Sao Paulo (southamerica-east1)");
         cloudMigrationPerHostPage.waitTillLoaderPresent();
 
-        cloudMigrationPerHostPage.validateCheapestIsDisplayedInRecommendationWith5InstanceSelected(test);
-        cloudMigrationPerHostPage.verifyTotalHoulyCost(test);
+        LOGGER.info("Select Object storage.", test);
+        cloudMigrationPerHostPage.selectStorage("Object storage");
+        cloudMigrationPerHostPage.waitTillLoaderPresent();
+
+        LOGGER.info("Select Local Attached storage.", test);
+        cloudMigrationPerHostPage.selectStorage("Local attached storage");
+        cloudMigrationPerHostPage.waitTillLoaderPresent();
+
+        cloudMigrationPerHostPage.checkUncheckColumn(false);
+        cloudMigrationPerHostPage.checkUncheckColumn(true);
+
+        cloudMigrationPerHostPage.selectCheckboxList(5);
+        cloudMigrationPerHostPage.offerCustomPriceInReverseOrder();
+
+        cloudMigrationPerHostPage.clickOnModalRunButton();
+        try {
+            waitExecuter.waitUntilTextToBeInWebElement(cloudMigrationPerHostPage.getConfirmationMessage(),
+                    "Cloud Mapping Per Host completed successfully.");
+        } catch (TimeoutException te) {
+            Assert.assertTrue(false, "Cloud Mapping Per Host is not completed");
+        }
+        cloudMigrationPerHostPage.waitTillLoaderPresent();
+        waitExecuter.sleep(30000);
+
+        LOGGER.info("Navigate to migration host page", test);
+        cloudMigrationPerHostPage.navigateToCloudMappingPerHost();
+        LOGGER.info("Click on Run button", test);
+        cloudMigrationPerHostPage.clickOnRunButton();
+        cloudMigrationPerHostPage.waitTillLoaderPresent();
+
+        LOGGER.info("Select GCP as cloud product.", test);
+        cloudMigrationPerHostPage.selectCloudProduct(CloudProduct.AMAZON_EMR);
+        cloudMigrationPerHostPage.waitTillLoaderPresent();
+
+        cloudMigrationPerHostPage.selectRegion("Sao Paulo (southamerica-east1)");
+        cloudMigrationPerHostPage.waitTillLoaderPresent();
+
+        LOGGER.info("Select Object storage.", test);
+        cloudMigrationPerHostPage.selectStorage("Object storage");
+        cloudMigrationPerHostPage.waitTillLoaderPresent();
+
+        LOGGER.info("Select Local Attached storage.", test);
+        cloudMigrationPerHostPage.selectStorage("Local attached storage");
+        cloudMigrationPerHostPage.waitTillLoaderPresent();
+
+        cloudMigrationPerHostPage.validateCheapestIsDisplayedInRecommendationWith5InstanceSelectedWithCustomPrice(test);
+
+
+
 
     }
 }

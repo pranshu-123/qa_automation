@@ -1007,9 +1007,9 @@ public class ReportsArchiveSchedulePage {
                 waitExecuter.waitUntilElementClickable(reportPageObj.reportSearchBox);
                 String status = reportStatusList.get(i).getText().trim();
 
+                String expectedStatus ="SUCCESS";
+                Assert.assertEquals(expectedStatus ,status ,"The status donot match for =" + reportName + "with status = "+status + " \n Expected = " + expectedStatus);
                 if(("SUCCESS").equals(status)){
-                    String expectedStatus ="SUCCESS";
-                    Assert.assertEquals(expectedStatus ,status ,"The status donot match for =" + reportName + "with status = "+status + " \n Expected = " + expectedStatus);
                     //CLick to open cluster discovery
                     userActions.performActionWithPolling(reportNameList.get(i),UserAction.CLICK);
                     waitExecuter.sleep(1000);

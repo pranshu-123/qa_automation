@@ -25,7 +25,7 @@ public class TC_CMP_23 extends BaseClass {
 
     @Test
     public void verifyBestGCPInstanceWith5InstanceSelected(){
-        test = extent.startTest("TC_CMP_22.verifyBestGCPInstanceWith5InstanceSelected", "Verify Unravel recommends the best GCP " +
+        test = extent.startTest("TC_CMP_23.verifyBestGCPInstanceWith5InstanceSelected", "Verify Unravel recommends the best GCP " +
                 "instance based on max capacity.");
         test.assignCategory("Migration/Cloud Mapping Per Host");
 

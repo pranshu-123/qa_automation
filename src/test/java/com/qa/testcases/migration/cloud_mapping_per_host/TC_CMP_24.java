@@ -22,7 +22,7 @@ import java.util.List;
 @Marker.CloudMappingPerHost
 @Marker.All
 public class TC_CMP_24 extends BaseClass {
-    private static final LoggingUtils LOGGER = new LoggingUtils(TC_CMP_23.class);
+    private static final LoggingUtils LOGGER = new LoggingUtils(TC_CMP_24.class);
 
 
     /**

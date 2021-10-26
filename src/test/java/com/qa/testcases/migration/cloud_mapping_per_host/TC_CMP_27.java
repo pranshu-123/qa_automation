@@ -23,7 +23,7 @@ import java.util.List;
 @Marker.All
 public class TC_CMP_27 extends BaseClass {
 
-    private static final LoggingUtils LOGGER = new LoggingUtils(TC_CMP_11.class);
+    private static final LoggingUtils LOGGER = new LoggingUtils(TC_CMP_27.class);
 
     @Test
     public void verifyHDICostEffectivenessWithObjectStorage() {

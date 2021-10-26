@@ -21,8 +21,7 @@ import java.util.List;
 @Marker.CloudMappingPerHost
 @Marker.All
 public class TC_CMP_28 extends BaseClass {
-    private static final LoggingUtils LOGGER = new LoggingUtils(TC_CMP_23.class);
-
+    private static final LoggingUtils LOGGER = new LoggingUtils(TC_CMP_28.class);
 
     /**
      * Verify Unravel recommends the best HDI instance based on max capacity for "Lift and Shift" and cluster node

@@ -33,7 +33,7 @@ public class MrAppsDetailsPage {
     private final WaitExecuter waitExecuter;
     private final WebDriver driver;
     private final UserActions userActions;
-    private  ApplicationsPageObject applicationsPageObject;
+    private ApplicationsPageObject applicationsPageObject;
 
 
     /**
@@ -851,37 +851,30 @@ public class MrAppsDetailsPage {
      * Method to validate AppSummary Resource tab.
      */
     public void validateMapandReduceTab(MrAppsDetailsPageObject mrApps, String verifyTabName, ExtentTest test) {
-        try {
-            String[] expectedGraphTitle = {"Task Attempt (MAP)", "Task Attempt (REDUCE)"};
-            waitExecuter.waitUntilPageFullyLoaded();
-            List<WebElement> graphTitleList = mrApps.resourcesGraphTitle;
-            verifyAssertFalse(graphTitleList.isEmpty(), mrApps, "No title displayed");
-            List<WebElement> allGraphsList = mrApps.resourcesAllGraphs;
-            verifyAssertFalse(allGraphsList.isEmpty(), mrApps, "No title displayed");
-            for (WebElement webElement : graphTitleList) {
-                String graphTitle = webElement.getText();
-                LOGGER.info("Graph title is " + graphTitle);
-                switch (graphTitle) {
-                    case "Task Attempt (MAP)":
-                        LOGGER.info("Validating the Graph " + graphTitle);
-                        validateTaskAttemptMapTab(mrApps);
-                        break;
-                    case "Task Attempt (REDUCE)":
-                        LOGGER.info("Validating the Graph " + graphTitle);
-                        validateTaskAttemptReduceTab(mrApps);
-                        break;
-                }
-                verifyAssertTrue(allGraphsList.get(0).isDisplayed(), mrApps, " No graph is displayed for "
-                        + graphTitle);
+        String[] expectedGraphTitle = {"Task Attempt (MAP)", "Task Attempt (REDUCE)"};
+        waitExecuter.waitUntilPageFullyLoaded();
+        List<WebElement> graphTitleList = mrApps.resourcesGraphTitle;
+        verifyAssertFalse(graphTitleList.isEmpty(), mrApps, "No title displayed");
+        List<WebElement> allGraphsList = mrApps.resourcesAllGraphs;
+        verifyAssertFalse(allGraphsList.isEmpty(), mrApps, "No title displayed");
+        for (WebElement webElement : graphTitleList) {
+            String graphTitle = webElement.getText();
+            LOGGER.info("Graph title is " + graphTitle);
+            switch (graphTitle) {
+                case "Task Attempt (MAP)":
+                    LOGGER.info("Validating the Graph " + graphTitle);
+                    validateTaskAttemptMapTab(mrApps);
+                    break;
+                case "Task Attempt (REDUCE)":
+                    LOGGER.info("Validating the Graph " + graphTitle);
+                    validateTaskAttemptReduceTab(mrApps);
+                    break;
             }
-        } catch (NoSuchElementException ex) {
-            if (mrApps.closeAppsPageTab.isDisplayed()) {
-                userActions.performActionWithPolling((mrApps.closeAppsPageTab), UserAction.CLICK);
-                LOGGER.info("The Map Reduce Application is not success");
-                throw ex;
-            }
+            verifyAssertTrue(allGraphsList.get(0).isDisplayed(), mrApps, " No graph is displayed for "
+                    + graphTitle);
+            userActions.performActionWithPolling((mrApps.closeAppsPageTab), UserAction.CLICK);
         }
-    }
+}
     /**
      * Method to validate AppSummary Resource tab.
      */

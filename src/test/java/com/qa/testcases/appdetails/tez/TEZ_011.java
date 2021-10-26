@@ -57,10 +57,10 @@ public class TEZ_011 extends BaseClass {
                 "displayed in the header");
 
         /*
-         * Validate the start time types are --
+         * Validate the application name are --
          */
         if (appCount > 0) {
-            String Appname = tezDetailsPage.verifyAppname(tezApps);
+            String Appname = tezDetailsPage.verifyAppName(tezApps);
             test.log(LogStatus.PASS, "Tez App name is displayed in the Table: " + Appname);
 
 

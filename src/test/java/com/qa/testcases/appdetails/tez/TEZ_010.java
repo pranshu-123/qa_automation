@@ -58,7 +58,7 @@ public class TEZ_010 extends BaseClass {
                 "displayed in the header");
 
         /*
-         * Validate the start time types are --
+         * Validate the queue name are --
          */
         if (appCount > 0) {
             String QueueName = tezDetailsPage.verifyQueueName(tezApps);

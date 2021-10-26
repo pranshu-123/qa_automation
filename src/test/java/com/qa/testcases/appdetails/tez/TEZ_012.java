@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 @Marker.AppDetailsTez
 @Marker.All
 public class TEZ_012 extends BaseClass {
@@ -57,7 +58,7 @@ public class TEZ_012 extends BaseClass {
                 "displayed in the header");
 
         /*
-         * Validate the start time types are --
+         * Validate the application id are --
          */
         if (appCount > 0) {
             String Appname = tezDetailsPage.verifyTezApp(tezApps);
@@ -70,9 +71,6 @@ public class TEZ_012 extends BaseClass {
                     "of 90 days");
             //Close apps details page
             MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
-
-
         }
-
     }
 }

@@ -964,20 +964,19 @@ public class TezAppsDetailsPage {
 
     /**
      * Method to click the first app in jobs table , navigate to the details page.
-     * and verify  Appname .
+     * and verify  AppName .
      */
-    public String verifyAppname(TezAppsDetailsPageObject tezApps) {
+    public String verifyAppName(TezAppsDetailsPageObject tezApps) {
         WebElement Appname = tezApps.getAppname;
         Actions toolAct = new Actions(driver);
         toolAct.moveToElement(Appname).build().perform();
         WebElement AppnametoolTip = driver.findElement(By.xpath("//*[@id=\"allApps-body\"]/tr[1]/td[4]"));
         waitExecuter.sleep(3000);
-        String AppnameText = AppnametoolTip.getText().trim();
-        System.out.println(AppnameText);
+        String appNameText = AppnametoolTip.getText().trim();
         waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();
-        Assert.assertNotSame(AppnameText, Appname, "Tez App name is not displayed in the Table");
-        return AppnameText;
+        Assert.assertNotSame(appNameText, Appname, "Tez App name is not displayed in the Table");
+        return appNameText;
     }
 
     /**
@@ -998,8 +997,7 @@ public class TezAppsDetailsPage {
         waitExecuter.waitUntilPageFullyLoaded();
         String appPageEndTime = tezApps.getEndTimeAppPage.getText();
         waitExecuter.waitUntilPageFullyLoaded();
-        Assert.assertNotSame(appPageStartTime, startTimeJobsPage, "Tez Start time is not displayed in the Application Page");
-        Assert.assertNotSame("", appPageEndTime, "Tez End time is not displayed in the Application Page");
+        Assert.assertNotSame(appPageEndTime, startTimeJobsPage, "Tez Start time is not displayed in the Application Page");
         return appPageStartTime;
     }
 

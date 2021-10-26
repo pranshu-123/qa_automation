@@ -1008,6 +1008,8 @@ public class ReportsArchiveSchedulePage {
                 String status = reportStatusList.get(i).getText().trim();
 
                 if(("SUCCESS").equals(status)){
+                    String expectedStatus ="SUCCESS";
+                    Assert.assertEquals(expectedStatus ,status ,"The status donot match for =" + reportName + "with status = "+status + " \n Expected = " + expectedStatus);
                     //CLick to open cluster discovery
                     userActions.performActionWithPolling(reportNameList.get(i),UserAction.CLICK);
                     waitExecuter.sleep(1000);
@@ -1029,8 +1031,6 @@ public class ReportsArchiveSchedulePage {
         List<WebElement> reportStatusList = reportPageObj.reportStatus;
         userActions.performActionWithPolling(newReportActionList.get(1) , UserAction.CLICK);
         waitExecuter.sleep(1000);
-//        userActions.performActionWithPolling(reportPageObj.dropDownList.get(4), UserAction.CLICK);
-//        LOGGER.info("Click on date range");
         userActions.performActionWithPolling(datePickerPageObject.customRange, UserAction.CLICK);
         date.selectCustomRange();
 

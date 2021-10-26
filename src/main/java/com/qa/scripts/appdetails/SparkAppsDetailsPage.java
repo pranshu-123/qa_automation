@@ -34,6 +34,7 @@ public class SparkAppsDetailsPage {
     private WebDriver driver;
     private JavascriptExecutor jse;
     private UserActions userActions;
+    private Actions action;
     private AppDetailsPageObject appDetailsPageObject;
     private SparkAppsDetailsPageObject sparkPageObject;
 
@@ -919,6 +920,8 @@ public class SparkAppsDetailsPage {
 
                 waitExecuter.waitUntilElementClickable(sparkAppPageObj.closeAppsPageTab);
                 MouseActions.clickOnElement(driver, sparkAppPageObj.closeAppsPageTab);
+                action.moveToElement(sparkAppPageObj.closeAppsPageTab).doubleClick().perform();
+                waitExecuter.waitUntilPageFullyLoaded();
             } else {
                 test.log(LogStatus.SKIP, "No Spark Application present");
                 logger.info("No Spark Application present in the " + clusterId + " cluster for the time span "

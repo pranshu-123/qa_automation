@@ -1034,10 +1034,5 @@ public class ReportsArchiveSchedulePage {
         userActions.performActionWithPolling(datePickerPageObject.customRange, UserAction.CLICK);
         date.selectCustomRange();
 
-
-
-
-
-
     }
 }

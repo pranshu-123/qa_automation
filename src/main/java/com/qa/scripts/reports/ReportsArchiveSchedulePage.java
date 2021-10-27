@@ -1,6 +1,7 @@
 package com.qa.scripts.reports;
 
 import com.qa.enums.UserAction;
+import com.qa.pagefactory.DatePickerPageObject;
 import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.scripts.clusters.Tuning;
 import com.qa.utils.MouseActions;
@@ -11,6 +12,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import com.qa.pagefactory.DatePickerPageObject;
+import com.qa.scripts.DatePicker;
 
 import java.util.*;
 import java.util.logging.Logger;
@@ -20,6 +23,9 @@ public class ReportsArchiveSchedulePage {
     Logger logger = Logger.getLogger(ReportsArchiveSchedulePage.class.getName());
     private final WaitExecuter waitExecuter;
     private final WebDriver driver;
+    private final DatePickerPageObject datePickerPageObject;
+    private final DatePicker date;
+    private final DatePicker datePicker;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
@@ -30,6 +36,10 @@ public class ReportsArchiveSchedulePage {
         waitExecuter = new WaitExecuter(driver);
         this.driver = driver;
         userActions = new UserActions(driver);
+        datePickerPageObject = new DatePickerPageObject(driver);
+        datePicker = new DatePicker(driver);
+        date = new DatePicker(driver);
+
     }
 
     /**
@@ -974,5 +984,56 @@ public class ReportsArchiveSchedulePage {
                         " reports before deletion and after deletion has " + reportCntAfterDelete);
             }
         }
+    }
+
+    /**
+     *Method to download CLuster discovery Report
+     */
+    public void validateReportDownload(ReportsArchiveScheduledPageObject reportPageObj){
+
+        List<WebElement> reportNameList = reportPageObj.reportNames;
+        List<WebElement> newReportActionList = reportPageObj.newReportIcon;
+        List<WebElement> reportStatusList = reportPageObj.reportStatus;
+
+        for (int i =0 ; i<reportNameList.size(); i++){
+            String reportName = reportNameList.get(i).getText().trim();
+            if (("Cluster Discovery").equals(reportName)){
+                userActions.performActionWithPolling(newReportActionList.get(i), UserAction.CLICK);
+                waitExecuter.sleep(1000);
+                userActions.performActionWithPolling(reportPageObj.reportCreationRunButton, UserAction.CLICK);
+                waitExecuter.sleep(12000);
+                waitExecuter.waitUntilPageFullyLoaded();
+                driver.navigate().refresh();
+                waitExecuter.waitUntilPageFullyLoaded();
+                waitExecuter.waitUntilElementClickable(reportPageObj.reportSearchBox);
+                String status = reportStatusList.get(i).getText().trim();
+
+                String expectedStatus ="SUCCESS";
+                Assert.assertEquals(expectedStatus ,status ,"The status donot match for =" + reportName + "with status = "+status + " \n Expected = " + expectedStatus);
+                if(("SUCCESS").equals(status)){
+                    //CLick to open cluster discovery
+                    userActions.performActionWithPolling(reportNameList.get(i),UserAction.CLICK);
+                    waitExecuter.sleep(1000);
+                    userActions.performActionWithPolling(reportPageObj.downloadReportIcon, UserAction.CLICK);
+                }
+                break;
+            }
+        }
+
+    }
+
+    /**
+     *Method to validate Unravel UI displays a error message when trying to generate a report with time range less than two days.
+     */
+    public void validateErrorMessage(ReportsArchiveScheduledPageObject reportPageObj){
+
+        List<WebElement> reportNameList = reportPageObj.reportNames;
+        List<WebElement> newReportActionList = reportPageObj.newReportIcon;
+        List<WebElement> reportStatusList = reportPageObj.reportStatus;
+        userActions.performActionWithPolling(newReportActionList.get(1) , UserAction.CLICK);
+        waitExecuter.sleep(1000);
+        userActions.performActionWithPolling(datePickerPageObject.customRange, UserAction.CLICK);
+        date.selectCustomRange();
+
     }
 }

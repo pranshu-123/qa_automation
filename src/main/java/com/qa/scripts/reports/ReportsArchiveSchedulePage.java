@@ -1029,33 +1029,6 @@ public class ReportsArchiveSchedulePage {
         List<WebElement> newReportActionList = reportPageObj.newReportIcon;
         List<WebElement> reportStatusList = reportPageObj.reportStatus;
         userActions.performActionWithPolling(newReportActionList.get(1) , UserAction.CLICK);
-        waitExecuter.sleep(1000);
-        userActions.performActionWithPolling(reportPageObj.dateRange.get(1) , UserAction.CLICK);
-        waitExecuter.sleep(1000);
-
-        waitExecuter.waitUntilElementPresent(reportPageObj.customRanges.get(1));
-        userActions.performActionWithPolling(reportPageObj.customRanges.get(1) , UserAction.CLICK);
-        waitExecuter.sleep(1000);
-
-        //set start date
-        waitExecuter.waitUntilElementPresent(reportPageObj.customRangeStartDates.get(0));
-        userActions.performActionWithPolling(reportPageObj.customRangeStartDates.get(0) , UserAction.CLICK);
-        reportPageObj.customRangeStartDates.get(0).clear();
-        reportPageObj.customRangeStartDates.get(0).sendKeys("01/01/2020");
-        waitExecuter.sleep(1000);
-
-        //set end date
-
-        waitExecuter.waitUntilElementPresent(reportPageObj.customRangeEndDates.get(1));
-        reportPageObj.customRangeEndDates.get(1).clear();
-        reportPageObj.customRangeEndDates.get(1).sendKeys("01/01/2020");
-        waitExecuter.sleep(1000);
-
-        //apply range
-        waitExecuter.waitUntilElementPresent(reportPageObj.applyBtns.get(1));
-        userActions.performActionWithPolling(reportPageObj.applyBtns.get(1), UserAction.CLICK);
-        waitExecuter.sleep(1000);
-
 
     }
 }

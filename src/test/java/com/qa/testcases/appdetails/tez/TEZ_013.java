@@ -16,19 +16,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 @Marker.AppDetailsTez
 @Marker.All
-public class TEZ_009 extends BaseClass {
+public class TEZ_013 extends BaseClass {
 
-    Logger logger = LoggerFactory.getLogger(TEZ_009.class);
+    Logger logger = LoggerFactory.getLogger(TEZ_013.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_009_verifyClusterIDandGOTO(String clusterId) {
-        test = extent.startTest("TEZ_009_verifyClusterIDandGOTO: " + clusterId,
-                "Verify Cluster ID must be present for the apps and parent app must be linked.");
+    public void TEZ_013_VerifyApplicationStatus(String clusterId) {
+        test = extent.startTest("TEZ_013_VerifyApplicationStatus: " + clusterId,
+                "Verify application status should be present in application details page.");
         test.assignCategory(" Apps Details-Tez");
-        Log.startTestCase("TEZ_009_verifyClusterIDandGOTO");
+        Log.startTestCase("TEZ_013_VerifyApplicationStatus");
 
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -61,9 +60,8 @@ public class TEZ_009 extends BaseClass {
          * Validate the start time types are --
          */
         if (appCount > 0) {
-            String clusterid = tezDetailsPage.verifyclusterId(tezApps);
-            test.log(LogStatus.PASS, "Read IO is displayed in the Tez application page: " + clusterid);
-
+            String appStatus = tezDetailsPage.verifyStatus(tezApps);
+            test.log(LogStatus.PASS, "Tez App Status is displayed in the application page: " + appStatus);
 
         } else {
             test.log(LogStatus.SKIP, "No Tez Application present");
@@ -76,5 +74,4 @@ public class TEZ_009 extends BaseClass {
         }
 
     }
-    }
-
+}

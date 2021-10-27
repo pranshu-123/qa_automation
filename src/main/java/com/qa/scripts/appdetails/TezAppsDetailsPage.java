@@ -934,17 +934,17 @@ public class TezAppsDetailsPage {
 
     /**
      * Method to click the first app in jobs table , navigate to the details page.
-     * and verify app Id .
+     * and verify Status App details Page .
      */
-    public String verifyStatus(TezAppsDetailsPageObject tezApps, ApplicationsPageObject appPageObj) {
+    public String verifyStatus(TezAppsDetailsPageObject tezApps) {
         String statusTable = tezApps.Status.getText();
         LOGGER.info("Tez application Id is " + statusTable);
-        waitExecuter.waitUntilElementClickable(appPageObj.clickOnAppId);
-        appPageObj.clickOnAppId.click();
-        waitExecuter.waitUntilElementClickable(appPageObj.closeIcon);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
+        applicationsPageObject.clickOnAppId.click();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
         waitExecuter.waitUntilPageFullyLoaded();
         String status = tezApps.appStatus.getText();
-        Assert.assertNotSame("", status, "Tez Status is not displayed in the Header");
+        Assert.assertNotSame(statusTable, status, "Tez Status is not displayed in the Header");
         return status;
     }
 
@@ -964,20 +964,41 @@ public class TezAppsDetailsPage {
 
     /**
      * Method to click the first app in jobs table , navigate to the details page.
-     * and verify  Appname .
+     * and verify  AppName .
      */
-    public String verifyAppname(TezAppsDetailsPageObject tezApps) {
+    public String verifyAppName(TezAppsDetailsPageObject tezApps) {
         WebElement Appname = tezApps.getAppname;
         Actions toolAct = new Actions(driver);
         toolAct.moveToElement(Appname).build().perform();
         WebElement AppnametoolTip = driver.findElement(By.xpath("//*[@id=\"allApps-body\"]/tr[1]/td[4]"));
         waitExecuter.sleep(3000);
-        String AppnameText = AppnametoolTip.getText().trim();
-        System.out.println(AppnameText);
+        String appNameText = AppnametoolTip.getText().trim();
         waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();
-        Assert.assertNotSame("", Appname, "Tez App name is not displayed in the Table");
-        return AppnameText;
+        Assert.assertNotSame(appNameText, Appname, "Tez App name is not displayed in the Table");
+        return appNameText;
+    }
+
+    /**
+     * Method to click the first app in jobs table , navigate to the details page.
+     * and verify  StartTime and EndTime .
+     */
+    public String verifyStartTimeEndTime(TezAppsDetailsPageObject tezApps) {
+        String startTimeJobsPage = tezApps.getStartTime.getText();
+        LOGGER.info("Tez Status is " + startTimeJobsPage);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
+        applicationsPageObject.clickOnAppId.click();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
+        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.sleep(5000);
+        waitExecuter.waitUntilPageFullyLoaded();
+        String appPageStartTime = tezApps.getStartTimeAppPage.getText();
+        waitExecuter.sleep(1000);
+        waitExecuter.waitUntilPageFullyLoaded();
+        String appPageEndTime = tezApps.getEndTimeAppPage.getText();
+        waitExecuter.waitUntilPageFullyLoaded();
+        Assert.assertNotSame(appPageEndTime, startTimeJobsPage, "Tez Start time is not displayed in the Application Page");
+        return appPageStartTime;
     }
 
     /**
@@ -997,6 +1018,27 @@ public class TezAppsDetailsPage {
         waitExecuter.waitUntilPageFullyLoaded();
         Assert.assertNotSame("", AppSummaryDbName, "Tez User name is not displayed in the Table");
         return AppSummaryDbName;
+    }
+
+    /**
+     * Method to click the first app in jobs table , navigate to the details page.
+     * and verify  Appname .
+     */
+    public String verifyTezApp(TezAppsDetailsPageObject tezApps) {
+        WebElement Appname = tezApps.getAppname;
+        Actions toolAct = new Actions(driver);
+        toolAct.moveToElement(Appname).build().perform();
+        WebElement AppnametoolTip = tezApps.getAppnameToolTips;
+        waitExecuter.sleep(3000);
+        String AppnameText = AppnametoolTip.getText().trim();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
+        applicationsPageObject.clickOnAppId.click();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
+        String tezAppName = tezApps.Appname.getText().trim();
+        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilPageFullyLoaded();
+        Assert.assertNotSame(AppnameText, tezAppName, "Tez App name is not displayed in the Table");
+        return AppnameText;
     }
 
     /**
@@ -1030,9 +1072,32 @@ public class TezAppsDetailsPage {
         String AppIdText = AppnametoolTip.getText().trim();
         LOGGER.info("Tez Status is " + Appid);
         waitExecuter.sleep(5000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
+        applicationsPageObject.clickOnAppId.click();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
+        String AppIdName =tezApps.queueAppPage.getText().trim();
         waitExecuter.waitUntilPageFullyLoaded();
-        Assert.assertNotSame("", Appid, "Tez App id name is not displayed in the Table");
+        Assert.assertNotSame(AppIdName, Appid, "Tez App id name is not displayed in the Table");
         return AppIdText;
+    }
+
+    /**
+     * Method to click the first app in jobs table , navigate to the details page.
+     * and verify  clusterId .
+     */
+    public String verifyQueueName(TezAppsDetailsPageObject tezApps) {
+        String queueNameText = tezApps.queueJobsPage.getText().trim();
+        LOGGER.info("Tez Status is " + queueNameText);
+        waitExecuter.sleep(3000);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
+        applicationsPageObject.clickOnAppId.click();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
+        String queueNameAppPage =tezApps.queueAppPage.getText().trim();
+        LOGGER.info("Tez Status is " + queueNameAppPage);
+        waitExecuter.sleep(2000);
+        waitExecuter.waitUntilPageFullyLoaded();
+        Assert.assertNotSame(queueNameText, queueNameAppPage, "Tez Queue name is not displayed in the App page");
+        return queueNameAppPage;
     }
 
     /**
@@ -1040,7 +1105,7 @@ public class TezAppsDetailsPage {
      * and verify  starttime .
      */
     public String verifystarttime(TezAppsDetailsPageObject tezApps) {
-        String typetarttime = tezApps.getstartTime.getText();
+        String typetarttime = tezApps.getStartTime.getText();
         LOGGER.info("Tez Status is " + typetarttime);
         waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();
@@ -1053,12 +1118,17 @@ public class TezAppsDetailsPage {
      * and verify  duration .
      */
     public String verifyduration(TezAppsDetailsPageObject tezApps) {
-        String typetarttime = tezApps.getduration.getText();
-        LOGGER.info("Tez Status is " + typetarttime);
+        String typeDuration = tezApps.getduration.getText();
+        LOGGER.info("Tez Status is " + typeDuration);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
+        applicationsPageObject.clickOnAppId.click();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
+        String appDuration =tezApps.queueAppPage.getText().trim();
+        LOGGER.info("Tez Status is " + appDuration);
         waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();
-        Assert.assertNotSame("", typetarttime, "Tez User name is not displayed in the Table");
-        return typetarttime;
+        Assert.assertNotSame(appDuration, typeDuration, "Tez User name is not displayed in the Table");
+        return typeDuration;
     }
 
 

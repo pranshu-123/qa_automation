@@ -63,7 +63,7 @@ public class TEZ_006 extends BaseClass {
          * Validate the username types are --
          */
         if (appCount > 0) {
-            String Appname = tezDetailsPage.verifyAppname(tezApps);
+            String Appname = tezDetailsPage.verifyAppName(tezApps);
             test.log(LogStatus.PASS, "Tez App name is displayed in the Table: " + Appname);
 
             String AppId = tezDetailsPage.verifyappId(tezApps);

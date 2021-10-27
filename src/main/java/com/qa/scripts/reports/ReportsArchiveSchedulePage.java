@@ -1022,6 +1022,7 @@ public class ReportsArchiveSchedulePage {
 
     }
 
+
     /**
      *Method to validate Unravel UI displays a error message when trying to generate a report with time range less than two days.
      */

@@ -231,7 +231,23 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//*[@id='topx-param-tbl']/tbody/tr/td[2]")
   public List<WebElement> latestReportTableContent;
 
+  @FindBy(xpath = "//div[contains(@class,'daterangepicker') and contains(@class, 'open')]//li")
+  public WebElement dateRanges;
 
+  @FindBy(css = "div.component-date-picker")
+  public List<WebElement> dateRange;
+
+  @FindBy(xpath = "//li[contains(text(),'Custom Range')]")
+  public List<WebElement> customRanges;
+
+  @FindBy(xpath = "(//input[contains(@name,'daterangepicker_start')])[last()]")
+  public List<WebElement> customRangeStartDates;
+
+  @FindBy(xpath = "(//input[contains(@name,'daterangepicker_end')])[last()]")
+  public List<WebElement>  customRangeEndDates;
+
+  @FindBy(xpath = "(//button[contains( @class, 'applyBtn')])[last()]")
+  public List<WebElement>  applyBtns;
   /**
    * @param driver The driver that will be used to look up the elements
    */

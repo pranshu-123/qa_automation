@@ -851,6 +851,172 @@ public class CloudMigrationPerHostPage {
     }
 
     /**
+     * Validate whether cheapest instance displayed in recommendation
+     * when multiple 5 instance was selected during run
+     *
+     * @param test - ExtentTest instance to log into report
+     */
+    public void validateCheapestIsDisplayedInRecommendationWith5InstanceSelected(ExtentTest test) {
+        LOGGER.info("Select first storage.", test);
+        selectStorage("Object storage");
+        waitTillLoaderPresent();
+
+        LOGGER.info("Select Second storage.", test);
+        selectStorage("Local attached storage");
+        waitTillLoaderPresent();
+
+        checkUncheckColumn(false);
+        checkUncheckColumn(true);
+
+        List<WebElement> checkboxList2 = getCheckboxListForTable();
+        for(int i=0 ; i<5 ; i++){
+            userAction.performActionWithPolling(checkboxList2.get(i),UserAction.CLICK);
+        }
+
+        Map<String, List> instanceValuesFromModalTable = getInstanceValuesFromModalTable(false);
+        System.out.println(instanceValuesFromModalTable.size());
+        clickOnModalRunButton();
+        try {
+            waitExecuter.waitUntilTextToBeInWebElement(getConfirmationMessage(),
+                    "Cloud Mapping Per Host completed successfully.");
+        } catch (TimeoutException te) {
+            Assert.assertTrue(false, "Cloud Mapping Per Host is not completed");
+        }
+        waitTillLoaderPresent();
+        waitExecuter.sleep(30000);
+
+        LOGGER.info("Validate recommended for lift and shift.", test);
+
+        List recommendedUsages = getDataFromCloudMappingTable(
+                MigrationCloudMappingHostDetailsTable.RECOMMENDATION);
+        List actualRecommendedInstanceNames =
+                (List) recommendedUsages.stream().filter(data -> data instanceof Map).map(data -> ((Map) data)
+                        .get(CloudMappingHostConstants.HostDetails.RecommendedUsages.TYPE)).collect(Collectors.toList());
+
+        waitTillLoaderPresent();
+
+        List capacityUsages = getDataFromCloudMappingTable(
+                MigrationCloudMappingHostDetailsTable.CAPACITY);
+        List<Map.Entry> cheapestInstances = getCheapestInstance(capacityUsages, instanceValuesFromModalTable);
+
+        for (int i = 0; i < actualRecommendedInstanceNames.size(); i++) {
+            Assert.assertEquals(actualRecommendedInstanceNames.get(i).toString(), cheapestInstances.get(i).getKey());
+            LOGGER.pass("Expected instance is matching for: " + cheapestInstances.get(i).getKey(), test);
+        }
+
+        clickOnCostReductionTab();
+        waitExecuter.sleep(5000);
+        LOGGER.info("Validate recommended for Cost Reduction.", test);
+        recommendedUsages = getDataFromCloudMappingTable(
+                MigrationCloudMappingHostDetailsTable.RECOMMENDATION);
+        actualRecommendedInstanceNames =
+                (List) recommendedUsages.stream().filter(data -> data instanceof Map).map(data -> ((Map) data)
+                        .get(CloudMappingHostConstants.HostDetails.RecommendedUsages.TYPE)).collect(Collectors.toList());
+        List actualUsages = getDataFromCloudMappingTable(
+                MigrationCloudMappingHostDetailsTable.ACTUAL_USAGE);
+        cheapestInstances = getCheapestInstance(actualUsages, instanceValuesFromModalTable);
+
+        for (int i = 0; i < actualRecommendedInstanceNames.size(); i++) {
+            Assert.assertEquals(actualRecommendedInstanceNames.get(i).toString(), cheapestInstances.get(i).getKey());
+            LOGGER.pass("Expected instance is matching for: " + cheapestInstances.get(i).getKey(), test);
+        }
+    }
+
+    /**
+     * Validate whether cheapest instance displayed in recommendation
+     * when multiple 5 instance was selected during run
+     * and when Custom Price is given
+     * @param test - ExtentTest instance to log into report
+     */
+    public void validateCheapestIsDisplayedInRecommendationWith5InstanceSelectedWithCustomPrice(ExtentTest test) {
+
+        CloudMigrationPerHostPage cloudMigrationPerHostPage = new CloudMigrationPerHostPage(driver);
+        CloudMappingPerHostPageObject cloudMappingPerHostPageObject = new CloudMappingPerHostPageObject(driver);
+
+
+
+
+        Map<String, List> instanceValuesFromModalTable = getInstanceValuesFromModalTable(false);
+        clickOnModalRunButton();
+        try {
+            waitExecuter.waitUntilTextToBeInWebElement(getConfirmationMessage(),
+                    "Cloud Mapping Per Host completed successfully.");
+        } catch (TimeoutException te) {
+            Assert.assertTrue(false, "Cloud Mapping Per Host is not completed");
+        }
+        waitTillLoaderPresent();
+        waitExecuter.sleep(30000);
+
+        LOGGER.info("Validate recommended for lift and shift.", test);
+
+        List recommendedUsages = getDataFromCloudMappingTable(
+                MigrationCloudMappingHostDetailsTable.RECOMMENDATION);
+        List actualRecommendedInstanceNames =
+                (List) recommendedUsages.stream().filter(data -> data instanceof Map).map(data -> ((Map) data)
+                        .get(CloudMappingHostConstants.HostDetails.RecommendedUsages.TYPE)).collect(Collectors.toList());
+
+        waitTillLoaderPresent();
+
+        List capacityUsages = getDataFromCloudMappingTable(
+                MigrationCloudMappingHostDetailsTable.CAPACITY);
+        List<Map.Entry> cheapestInstances = getCheapestInstance(capacityUsages, instanceValuesFromModalTable);
+
+        for (int i = 0; i < actualRecommendedInstanceNames.size(); i++) {
+            Assert.assertEquals(actualRecommendedInstanceNames.get(i).toString(), cheapestInstances.get(i).getKey());
+            LOGGER.pass("Expected instance is matching for: " + cheapestInstances.get(i).getKey(), test);
+        }
+
+        clickOnCostReductionTab();
+        waitExecuter.sleep(5000);
+        LOGGER.info("Validate recommended for Cost Reduction.", test);
+        recommendedUsages = getDataFromCloudMappingTable(
+                MigrationCloudMappingHostDetailsTable.RECOMMENDATION);
+        actualRecommendedInstanceNames =
+                (List) recommendedUsages.stream().filter(data -> data instanceof Map).map(data -> ((Map) data)
+                        .get(CloudMappingHostConstants.HostDetails.RecommendedUsages.TYPE)).collect(Collectors.toList());
+        List actualUsages = getDataFromCloudMappingTable(
+                MigrationCloudMappingHostDetailsTable.ACTUAL_USAGE);
+        cheapestInstances = getCheapestInstance(actualUsages, instanceValuesFromModalTable);
+
+        for (int i = 0; i < actualRecommendedInstanceNames.size(); i++) {
+            Assert.assertEquals(actualRecommendedInstanceNames.get(i).toString(), cheapestInstances.get(i).getKey());
+            LOGGER.pass("Expected instance is matching for: " + cheapestInstances.get(i).getKey(), test);
+        }
+
+
+    }
+
+    public void selectCheckboxList(int number){
+        List<WebElement> checkboxList = getCheckboxListForTable();
+        for(int i =0 ; i<number; i++){
+            userAction.performActionWithPolling(checkboxList.get(i),UserAction.CLICK);
+        }
+
+
+    }
+
+    public void offerCustomPriceInReverseOrder(){
+
+        CloudMigrationPerHostPage cloudMigrationPerHostPage = new CloudMigrationPerHostPage(driver);
+        CloudMappingPerHostPageObject cloudMappingPerHostPageObject = new CloudMappingPerHostPageObject(driver);
+
+
+        List<String> costList = cloudMigrationPerHostPage.getColumnValuesFromModalTable(MigrationCloudMappingModalTable.COST);
+        List<String> costListWithoutDollar = new ArrayList<>();
+
+        for(String s :costList){
+            costListWithoutDollar.add(s.replace("$",""));
+        }
+        int  index =costListWithoutDollar.size() - 1;
+        for (WebElement element : cloudMigrationPerHostPage.getCustomCosts(cloudMappingPerHostPageObject.modalTableRows)) {
+            cloudMigrationPerHostPage.setCustomCost(element, costListWithoutDollar.get(index));
+            index--;
+        }
+        index =0;
+    }
+
+
+    /**
      * Verify Total Hourly cost is less for cost reduction is less
      * than what is displayed for lift and shift
      *

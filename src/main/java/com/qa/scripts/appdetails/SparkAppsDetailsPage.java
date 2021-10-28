@@ -277,6 +277,8 @@ public class SparkAppsDetailsPage {
             }
         } catch (NoSuchElementException ex) {
             MouseActions.clickOnElement(driver, sparkAppPageObj.loadWinClose);
+            waitExecuter.waitUntilElementClickable(sparkAppPageObj.closeAppsPageTab);
+            MouseActions.clickOnElement(driver, sparkAppPageObj.closeAppsPageTab);
             throw new AssertionError(
                     "Caught exception while clicking the collapsable icon for insights.\n" + ex.getMessage());
         }
@@ -919,8 +921,6 @@ public class SparkAppsDetailsPage {
 
                 waitExecuter.waitUntilElementClickable(sparkAppPageObj.closeAppsPageTab);
                 MouseActions.clickOnElement(driver, sparkAppPageObj.closeAppsPageTab);
-                action.moveToElement(sparkAppPageObj.closeAppsPageTab).doubleClick().perform();
-                waitExecuter.waitUntilPageFullyLoaded();
             } else {
                 test.log(LogStatus.SKIP, "No Spark Application present");
                 logger.info("No Spark Application present in the " + clusterId + " cluster for the time span "

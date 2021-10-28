@@ -2,14 +2,12 @@ package com.qa.testcases.appdetails.spark;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.appsDetailsPage.SparkAppsDetailsPageObject;
 import com.qa.scripts.appdetails.SparkAppsDetailsPage;
 import com.qa.utils.Log;
 import com.relevantcodes.extentreports.LogStatus;
-import java.util.logging.Logger;
-
-import org.openqa.selenium.NoSuchElementException;
 import org.testng.annotations.Test;
+
+import java.util.logging.Logger;
 
 @Marker.AppDetailsSpark
 @Marker.All
@@ -31,15 +29,7 @@ public class TC_spark_235 extends BaseClass {
         test.assignCategory(" Apps Details-Spark");
         Log.startTestCase("TC_spark_235_verifyLogsTab");
         SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);
-        SparkAppsDetailsPageObject sparkAppPageObj = new SparkAppsDetailsPageObject(driver);
-        try {
-            appsDetailsPage.commonSetupCodeForSumarryTabValidation(test, clusterId, "Logs", logger, false);
-            test.log(LogStatus.PASS, "Verified the Logs tab successfully");
-        } catch (NoSuchElementException ex) {
-            if (sparkAppPageObj.closeAppsPageTab.isDisplayed()) {
-                sparkAppPageObj.closeAppsPageTab.click();
-                throw ex;
-            }
-        }
+        appsDetailsPage.commonSetupCodeForSumarryTabValidation(test, clusterId, "Logs", logger, false);
+        test.log(LogStatus.PASS, "Verified the Logs tab successfully");
     }
 }

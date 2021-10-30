@@ -33,7 +33,7 @@ public class MrAppsDetailsPage {
     private final WaitExecuter waitExecuter;
     private final WebDriver driver;
     private final UserActions userActions;
-    private ApplicationsPageObject applicationsPageObject;
+    private final ApplicationsPageObject applicationsPageObject;
 
 
     /**
@@ -684,27 +684,37 @@ public class MrAppsDetailsPage {
      * Method to validate the tasks attempt Reduce tab in Resources and stages tab.
      */
     public void validateTaskAttemptReduceTab(MrAppsDetailsPageObject mrApps) {
-        List<WebElement> footerNameList = mrApps.taskAttReduceFooterName;
-        Assert.assertFalse(footerNameList.isEmpty(),
-                "SUCCESS Attempts not displayed");
-        List<WebElement> footerValList = mrApps.taskAttReduceFooterVal;
-        Assert.assertFalse(footerValList.isEmpty(), "SUCCESS Attempts values " +
-                "not displayed");
-        String pValStr = mrApps.resourcesReducePieChartInternalVal.getText();
-        String regex = "((?<=[a-zA-Z])(?=[0-9]))|((?<=[0-9])(?=[a-zA-Z]))";
-        int pieChartInternalVal = Integer.parseInt(Arrays.asList(pValStr.split(regex)).get(0));
-        LOGGER.info("The value displayed inside the Pie Chart is " +
-                pieChartInternalVal);
-        int totalTaskCnt = 0;
-        for (int f = 0; f < footerNameList.size(); f++) {
-            String footerName = footerNameList.get(f).getText();
-            String footerValStr = footerValList.get(f).getText();
-            int footerVal = Integer.parseInt(footerValStr.replaceAll("[^\\dA-Za-z ]", "").trim());
-            totalTaskCnt += footerVal;
-            LOGGER.info("FooterName = " + footerName + " Value = " + footerVal);
+        try {
+            List<WebElement> footerNameList = mrApps.taskAttReduceFooterName;
+            Assert.assertFalse(footerNameList.isEmpty(),
+                    "SUCCESS Attempts not displayed");
+            List<WebElement> footerValList = mrApps.taskAttReduceFooterVal;
+            Assert.assertFalse(footerValList.isEmpty(), "SUCCESS Attempts values " +
+                    "not displayed");
+            String pValStr = mrApps.resourcesReducePieChartInternalVal.getText();
+            String regex = "((?<=[a-zA-Z])(?=[0-9]))|((?<=[0-9])(?=[a-zA-Z]))";
+            int pieChartInternalVal = Integer.parseInt(Arrays.asList(pValStr.split(regex)).get(0));
+            LOGGER.info("The value displayed inside the Pie Chart is " +
+                    pieChartInternalVal);
+            int totalTaskCnt = 0;
+            for (int f = 0; f < footerNameList.size(); f++) {
+                String footerName = footerNameList.get(f).getText();
+                String footerValStr = footerValList.get(f).getText();
+                int footerVal = Integer.parseInt(footerValStr.replaceAll("[^\\dA-Za-z ]", "").trim());
+                totalTaskCnt += footerVal;
+                LOGGER.info("FooterName = " + footerName + " Value = " + footerVal);
+            }
+            LOGGER.info("Total Task Attempts = " + totalTaskCnt + " pie chart val = " +
+                    pieChartInternalVal);
+
+        } catch (NoSuchElementException ex) {
+            waitExecuter.waitUntilElementPresent(mrApps.closeAppsPageTab);
+            waitExecuter.sleep(2000);
+            MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+            throw new AssertionError(
+                    "Caught exception while clicking on the resource tab.\n" + ex.getMessage());
         }
-        LOGGER.info("Total Task Attempts = " + totalTaskCnt + " pie chart val = " +
-                pieChartInternalVal);
     }
 
     public void validateResourcesMetricsTab(MrAppsDetailsPageObject mrApps,
@@ -872,9 +882,10 @@ public class MrAppsDetailsPage {
             }
             verifyAssertTrue(allGraphsList.get(0).isDisplayed(), mrApps, " No graph is displayed for "
                     + graphTitle);
-            userActions.performActionWithPolling((mrApps.closeAppsPageTab), UserAction.CLICK);
         }
-}
+    }
+
+
     /**
      * Method to validate AppSummary Resource tab.
      */

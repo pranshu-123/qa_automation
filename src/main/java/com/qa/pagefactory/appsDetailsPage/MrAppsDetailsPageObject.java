@@ -84,7 +84,7 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//div[@class='component-dashboard']//div[contains(@class,'col-md-6')]")
     public List<WebElement> containerMetrics;
 
-    @FindBy(xpath = "//*[@id='taskattemptmap']//*[div and @class='footer']/div/*/span[1]")
+    @FindBy(xpath = "//*[@id='taskattemptreduce']//*[div and @class='footer']/div/*/span[1]")
     public List<WebElement> taskAttReduceFooterName;
 
     @FindBy(xpath = "//*[@id='taskattemptreduce']//*[div and @class='footer']/div/*/span[2]")

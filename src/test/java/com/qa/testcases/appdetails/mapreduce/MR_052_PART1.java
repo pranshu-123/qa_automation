@@ -71,11 +71,13 @@ public class MR_052_PART1 extends BaseClass {
                 waitExecuter.waitUntilPageFullyLoaded();
 
                 //Close apps details page
+                waitExecuter.sleep(3000);
                 waitExecuter.waitUntilElementPresent(mrApps.closeAppsPageTab);
                 MouseActions.clickOnElement(driver, mrApps.closeAppsPageTab);
 
             } else {
                 //Close apps details page
+                waitExecuter.waitUntilElementPresent(mrApps.homeTab);
                 MouseActions.clickOnElement(driver, mrApps.homeTab);
                 test.log(LogStatus.SKIP, "No Map Reduce Application present");
                 logger.info("No Map Reduce Application present in the " + clusterId + " cluster for the time span " +

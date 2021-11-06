@@ -33,7 +33,7 @@ public class JobsWorkflowPageObject {
     @FindBy(xpath = "(//div[contains(@class,'gantt-parent')]//div[contains(@id,'gantt-container')]//span)[1]")
     public WebElement getParentJobId;
 
-    @FindBy(xpath = "//div[@class='close']")
+    @FindBy(xpath = "//button[@class='close']")
     public WebElement close;
 
     @FindBy(xpath = "//span[contains(@class,'icon-jobs')]")

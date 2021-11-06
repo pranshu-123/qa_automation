@@ -34,7 +34,7 @@ public class SparkAppsDetailsPageObject {
     @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span/span")
     public WebElement getHeaderAppId;
 
-    @FindBy(css = "div.close")
+    @FindBy(css = "button.close")
     public WebElement closeAppsPageTab;
 
     @FindBy(xpath = "//span[(text()='Duration')]//following-sibling::a[contains(@class,'sorting')]")

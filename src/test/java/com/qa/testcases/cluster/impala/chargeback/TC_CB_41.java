@@ -24,8 +24,7 @@ public class TC_CB_41 extends BaseClass {
      */
     @Test(dataProvider = "clusterid-data-provider",description ="P1-Verify that the tables should sorted by type ascending and descending order.")
     public void validateSortByType(String clusterId) {
-        test =
-            extent.startTest("TC_CB_41.validateSortByType","Validate table sorting - By type");
+        test = extent.startTest("TC_CB_41.validateSortByType","Validate table sorting - By type");
         test.assignCategory(" Cluster - Impala Chargeback");
         ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
         LOGGER.info("Click on impala chargeback", test);

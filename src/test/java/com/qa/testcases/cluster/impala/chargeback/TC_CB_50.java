@@ -38,6 +38,7 @@ public class TC_CB_50 extends BaseClass {
         // Select the cluster
         test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
         HomePage homePage = new HomePage(driver);
+        waitExecuter.sleep(1000);
         homePage.selectMultiClusterIdClusterPage(clusterId);
         waitExecuter.sleep(1000);
 

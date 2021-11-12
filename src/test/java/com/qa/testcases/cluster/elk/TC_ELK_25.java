@@ -33,7 +33,6 @@ public class TC_ELK_25 extends BaseClass {
 	LOGGER.info("Initialize all class objects");
 	ELKPage elkPage = new ELKPage(driver);
 	ELKPageObject elkPageObj = new ELKPageObject(driver);
-	KafkaPage kafkaPage = new KafkaPage(driver);
 	KafkaPageObject kafkaPageObject = new KafkaPageObject(driver);
 	WaitExecuter waitExecuter = new WaitExecuter(driver);
 

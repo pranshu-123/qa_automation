@@ -23,33 +23,33 @@ public class TC_ELK_27 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider",description="Verify that the node-specific metrics graph should be loaded and match with graphs in kibana UI.")
   public void TC_ELK_27_verifyESNodeSpecificGraphs(String clusterId) {
-    test = extent.startTest("TC_ELK_27_verifyESNodeSpecificGraphs: " + clusterId,
-        "Validate ES cluster metrics node specific graph");
-    test.assignCategory(" ELK ");
-    Log.startTestCase("TC_ELK_27_verifyESNodeSpecificGraphs");
+	test = extent.startTest("TC_ELK_27_verifyESNodeSpecificGraphs: " + clusterId,
+			"Validate ES cluster metrics node specific graph");
+	test.assignCategory(" ELK ");
+	Log.startTestCase("TC_ELK_27_verifyESNodeSpecificGraphs");
+	int totalGraphs = 8;
+	// Initialize all classes objects
+	test.log(LogStatus.INFO, "Initialize all class objects");
+	LOGGER.info("Initialize all class objects");
+	ELKPage elkPage = new ELKPage(driver);
+	ELKPageObject elkPageObj = new ELKPageObject(driver);
+	KafkaPage kafkaPage = new KafkaPage(driver);
+	KafkaPageObject kafkaPageObject = new KafkaPageObject(driver);
+	WaitExecuter waitExecuter = new WaitExecuter(driver);
 
-    // Initialize all classes objects
-    test.log(LogStatus.INFO, "Initialize all class objects");
-    LOGGER.info("Initialize all class objects");
-    ELKPage elkPage = new ELKPage(driver);
-    ELKPageObject elkPageObj = new ELKPageObject(driver);
-    KafkaPage kafkaPage = new KafkaPage(driver);
-    KafkaPageObject kafkaPageObject = new KafkaPageObject(driver);
-    WaitExecuter waitExecuter = new WaitExecuter(driver);
+	// Navigate to ES tab from header
+	MouseActions.clickOnElement(driver, elkPageObj.ESTab);
+	waitExecuter.waitUntilPageFullyLoaded();
+	waitExecuter.sleep(2000);
+	DatePicker datePicker = new DatePicker(driver);
+	datePicker.clickOnDatePicker();
+	waitExecuter.sleep(2000);
+	datePicker.selectLast30Days();
+	waitExecuter.waitUntilPageFullyLoaded();
 
-    // Navigate to ES tab from header
-    MouseActions.clickOnElement(driver, elkPageObj.ESTab);
-    waitExecuter.waitUntilPageFullyLoaded();
-    waitExecuter.sleep(2000);
-    DatePicker datePicker = new DatePicker(driver);
-    datePicker.clickOnDatePicker();
-    waitExecuter.sleep(1000);
-    datePicker.selectLast30Days();
-    waitExecuter.waitUntilPageFullyLoaded();
+	elkPage.verifyClusterDropDown(elkPageObj);
+	elkPage.verifyNodeSpecificGraphs(elkPageObj, kafkaPageObject,totalGraphs-1);
 
-    elkPage.verifyClusterDropDown(elkPageObj);
-    elkPage.verifyNodeSpecificGraphs(elkPageObj, kafkaPageObject);
-
-    test.log(LogStatus.PASS, "Verified ES cluster metrics node specific graph in UI successfully ");
-  }
+	test.log(LogStatus.PASS, "Verified ES cluster metrics node specific graph in UI successfully ");
+	}
 }

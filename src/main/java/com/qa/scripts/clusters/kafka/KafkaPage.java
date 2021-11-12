@@ -192,7 +192,7 @@ public class KafkaPage {
         logger.info("The graph for Metrics : [" + metricsName + "] is displayed");
         Assert.assertTrue(metricsKpiFooterList.get(i).isDisplayed(), "The footer for metrics " + metricsName + " is not displayed");
         logger.info("The footer for Metrics : [" + metricsName + "] is displayed");
-       // verifyAxis(xAxisPath, "X-Axis");
+        //verifyAxis(xAxisPath, "X-Axis");
         verifyAxis(yAxisPath, "Y-Axis");
       }
     }

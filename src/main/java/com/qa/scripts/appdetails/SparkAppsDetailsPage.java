@@ -34,6 +34,7 @@ public class SparkAppsDetailsPage {
     private WebDriver driver;
     private JavascriptExecutor jse;
     private UserActions userActions;
+    private Actions action;
     private AppDetailsPageObject appDetailsPageObject;
     private SparkAppsDetailsPageObject sparkPageObject;
 
@@ -267,7 +268,7 @@ public class SparkAppsDetailsPage {
                 int scrollableLines = (logLinesList.size() / 2);
                 logger.info("Scrollable line is " + scrollableLines);
                 WebElement scrollableElement = driver
-                        .findElement(By.xpath("//div[@class='modal-body scrollbar-s']//p/br[" + scrollableLines + "]"));
+                        .findElement(By.xpath("//div[@class='modal-body scrollbar-s']//p[" + scrollableLines + "]"));
                 executor.executeScript("arguments[0].scrollIntoView(true);", scrollableElement);
                 MouseActions.clickOnElement(driver, sparkAppPageObj.loadWinClose);
                 waitExecuter.waitUntilPageFullyLoaded();
@@ -276,6 +277,8 @@ public class SparkAppsDetailsPage {
             }
         } catch (NoSuchElementException ex) {
             MouseActions.clickOnElement(driver, sparkAppPageObj.loadWinClose);
+            waitExecuter.waitUntilElementClickable(sparkAppPageObj.closeAppsPageTab);
+            MouseActions.clickOnElement(driver, sparkAppPageObj.closeAppsPageTab);
             throw new AssertionError(
                     "Caught exception while clicking the collapsable icon for insights.\n" + ex.getMessage());
         }
@@ -385,7 +388,6 @@ public class SparkAppsDetailsPage {
         String tabName = "";
         WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.pollingEvery(Duration.ofMillis(10));
-
         for (int i = 0; i < appsTabList.size(); i++) {
             tabName = appsTabList.get(i).getText();
             logger.info("Validating tab " + tabName);

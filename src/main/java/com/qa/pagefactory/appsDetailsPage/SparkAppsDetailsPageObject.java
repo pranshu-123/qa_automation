@@ -34,7 +34,7 @@ public class SparkAppsDetailsPageObject {
     @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span/span")
     public WebElement getHeaderAppId;
 
-    @FindBy(css = "div.close")
+    @FindBy(css = "button.close")
     public WebElement closeAppsPageTab;
 
     @FindBy(xpath = "//span[(text()='Duration')]//following-sibling::a[contains(@class,'sorting')]")
@@ -291,7 +291,7 @@ public class SparkAppsDetailsPageObject {
     @FindBy(css = "button.close")
     public WebElement loadWinClose;
 
-    @FindBy(xpath = "//div[@class='modal-body scrollbar-s']//p/br")
+    @FindBy(xpath = "//div[@class='modal-body scrollbar-s']//p")
     public List<WebElement> logScrollable;
 
     @FindBy(xpath = "(//div[contains(@class,'filter-section')]//h3[contains(@class,'expandable-header')])[2]")

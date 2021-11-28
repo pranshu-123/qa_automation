@@ -12,7 +12,7 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//tbody[@id='allApps-body']/tr[1]/td[4]/a[2]")
     public WebElement getAppId;
 
-    @FindBy(xpath = "//span[(text()='Read')]//following-sibling::a[contains(@class,'sorting')]")
+    @FindBy(xpath = "//table[@id='allApps']/thead//th[10]/a[1]")
     public WebElement sortByReadApp;
 
     @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-up')]")
@@ -98,11 +98,10 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//tbody[@id='allApps-body']/tr[1]/td[4]/a[2]")
     public WebElement getAppid;
 
-
     @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span/span")
     public WebElement getHeaderAppId;
 
-    @FindBy(css = "div.close")
+    @FindBy(css = "button.close")
     public WebElement closeAppsPageTab;
 
     @FindBy(xpath = "//a[@href='#/clusters/overview']")

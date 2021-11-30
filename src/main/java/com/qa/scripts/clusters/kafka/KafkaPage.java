@@ -383,7 +383,7 @@ public class KafkaPage {
 	public ArrayList<Integer> sortBrokerIntCol(List<WebElement> brokerRowList, int col) {
 		ArrayList<Integer> intArr = new ArrayList<>();
 		for (int row = 0; row < brokerRowList.size(); row++) {
-			WebElement rowData = driver.findElement(By.xpath("//tbody[@id='kafkaTopicList-body']/" +
+			WebElement rowData = driver.findElement(By.xpath("//tbody[@id='undefined-body']/" +
 					"tr[" + (row + 1) + "]/td[" + (col + 1) + "]/span"));
 			int rowVal = Integer.parseInt(rowData.getText());
 			intArr.add(rowVal);
@@ -394,7 +394,7 @@ public class KafkaPage {
 	public ArrayList<String> sortBrokerStrCol(List<WebElement> brokerRowList, int col) {
 		ArrayList<String> strArr = new ArrayList<>();
 		for (int row = 0; row < brokerRowList.size(); row++) {
-			WebElement rowData = driver.findElement(By.xpath("//tbody[@id='kafkaTopicList-body']/" +
+			WebElement rowData = driver.findElement(By.xpath("//tbody[@id='undefined-body']/" +
 					"tr[" + (row + 1) + "]/td[" + (col + 1) + "]/span"));
 			strArr.add(rowData.getText());
 		}

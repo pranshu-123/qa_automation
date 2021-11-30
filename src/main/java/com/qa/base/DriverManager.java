@@ -72,6 +72,8 @@ public class DriverManager {
     File folderUUID = FileUtils.createDownloadsFolder();
     HashMap<String, Object> chromePref = new HashMap<String, Object>();
     chromePref.put("profile.default_content_settings.popups", 0);
+    chromePref.put("profile.password_manager_enabled", false);
+    chromePref.put("profile.default_content_settings.popups", 0);
     chromePref.put("download.default_directory", folderUUID.getAbsolutePath());
     ChromeOptions options = new ChromeOptions();
     options.setCapability("goog:loggingPrefs", logPrefs);

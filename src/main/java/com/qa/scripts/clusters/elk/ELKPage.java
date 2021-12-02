@@ -27,6 +27,7 @@ import java.util.regex.Matcher;
 
 public class ELKPage {
 
+
 	private WaitExecuter waitExecuter;
 	private WebDriver driver;
 	private DatePicker datePicker;
@@ -614,4 +615,5 @@ public class ELKPage {
 		verifyESClusterKPIs(elkPageObject);
 		verifyESKPIColors(elkPageObject);
 	}
+
 }

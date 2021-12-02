@@ -50,7 +50,7 @@ public class TC_CB_47 extends BaseClass {
         LOGGER.info("Select last 90 days in date picker.", test);
         chargeBackImpala.clickOnTableHeading(ImpalaJobTableColumn.FINISHED_TIME);
         LOGGER.info("Click on Finished time.", test);
-        Boolean isDataSorted = chargeBackImpala.isDataSorted(ImpalaJobTableColumn.FINISHED_TIME, true);
+        boolean isDataSorted = chargeBackImpala.isDataSorted(ImpalaJobTableColumn.FINISHED_TIME, true);
         Assert.assertTrue(isDataSorted, "Data is not sorted.");
         LOGGER.pass("Data is displayed in ascending order.", test);
         chargeBackImpala.clickOnTableHeading(ImpalaJobTableColumn.FINISHED_TIME);

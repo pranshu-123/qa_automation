@@ -40,7 +40,6 @@ public class TC_CB_43 extends BaseClass {
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterIdClusterPage(clusterId);
         waitExecuter.sleep(1000);
-
         chargeBackImpala.selectImpalaType("Impala");
         waitExecuter.sleep(2000);
         waitExecuter.waitUntilPageFullyLoaded();

@@ -224,7 +224,6 @@ public class Impala {
 		return labels;
 	}
 
-
 	/**
 	 * This method used to select impala in resource drowdown displayed at
 	 * resource page. First it click on resource tab which navigates to

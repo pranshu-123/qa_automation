@@ -74,8 +74,6 @@ public class DriverManager {
     chromePref.put("credentials_enable_service", false);
     chromePref.put("profile.password_manager_enabled", false);
     chromePref.put("profile.default_content_settings.popups", 0);
-    chromePref.put("profile.password_manager_enabled", false);
-    chromePref.put("profile.default_content_settings.popups", 0);
     chromePref.put("download.default_directory", folderUUID.getAbsolutePath());
     ChromeOptions options = new ChromeOptions();
     options.setCapability("goog:loggingPrefs", logPrefs);

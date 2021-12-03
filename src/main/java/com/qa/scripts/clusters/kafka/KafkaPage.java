@@ -18,7 +18,6 @@ import java.util.logging.Logger;
 
 public class KafkaPage {
 
-
 	private WaitExecuter waitExecuter;
 	private WebDriver driver;
 	private DatePicker datePicker;

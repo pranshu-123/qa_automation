@@ -28,7 +28,6 @@ public class KafkaPage {
 	String plottedGraph = "//*[name()='g' and contains(@class,'highcharts-line-series')]";
 
 	Logger logger = Logger.getLogger(KafkaPage.class.getName());
-
 	/**
 	 * Constructor to initialize wait, driver and necessary objects
 	 *

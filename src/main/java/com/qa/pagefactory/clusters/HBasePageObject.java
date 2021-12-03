@@ -53,7 +53,7 @@ public class HBasePageObject {
     @FindBy(xpath="//table[@id='hbaseRegionsDataTble']/tbody/tr/td[6]/span")
     public List<WebElement> hBaseRegionSvrHealth;
 
-    @FindBy(xpath = "//span[(text()='Table Name')]//following-sibling::a[contains(@class,'sorting')]")
+    @FindBy(xpath = "//span[contains(text(),'Table Name')]/..//following-sibling::a[contains(@class,'sorting')]")
     public WebElement sortByTableName;
 
     @FindBy(xpath = "//a[contains(@class,'sorting icon-sort icon-sort-sorted-up')]")

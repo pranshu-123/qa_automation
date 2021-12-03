@@ -38,7 +38,6 @@ public class IM_RES_16 extends BaseClass {
         LOGGER.info("Initialize all class objects");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);
-        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
         DatePicker datePicker = new DatePicker(driver);
         HomePage homePage = new HomePage(driver);
         GraphUtils graphUtils = new GraphUtils();
@@ -53,14 +52,11 @@ public class IM_RES_16 extends BaseClass {
         // Set multi cluster
         test.log(LogStatus.INFO, "Select cluster : " + clusterId);
         LOGGER.info("Select cluster : " + clusterId);
-        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
-        homePage.selectMultiClusterIdClusterPage(clusterId);
-        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
-
         impala.selectImpalaType("Impala");
         waitExecuter.sleep(3000);
-
-
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
+        impala.verifyImpalaType("Impala",clusterId);
         // Select last 30 days from date picker
         test.log(LogStatus.INFO, "Select Last 30 days in date picker");
         LOGGER.info("Select Last 30 days in date picker");

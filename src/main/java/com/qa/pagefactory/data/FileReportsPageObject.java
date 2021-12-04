@@ -14,7 +14,7 @@ public class FileReportsPageObject {
   @FindBy(xpath = "//ul[@class='select2-results__options']/li")
   public List<WebElement> clusterList;
 
-  @FindBy(xpath = "//button[contains(text(),'LARGE')]")
+  @FindBy(xpath = "//button[contains(text(),'large')]")
   public WebElement largeFile;
 
   @FindBy(xpath = "//a[@class='icon-sort icon-sort-sorted-up']")
@@ -26,25 +26,25 @@ public class FileReportsPageObject {
   @FindBy(xpath = "//span[normalize-space()='Avg File Size']")
   public WebElement sortAvgFileSize;
 
-  @FindBy(xpath = "//button[normalize-space()='LARGE']")
+  @FindBy(xpath = "//button[text()[normalize-space()='large']]")
   public WebElement selectedLargeFileOpt;
 
-  @FindBy(xpath = "//*[contains(text(),'MEDIUM')]")
+  @FindBy(xpath = "//*[contains(text(),'medium')]")
   public WebElement mediumFile;
 
-  @FindBy(xpath = "//button[normalize-space()='MEDIUM']")
+  @FindBy(xpath = "//button[text()[normalize-space()='medium']]")
   public WebElement selecteMediumFileOpt;
 
-  @FindBy(xpath = "//*[contains(text(),'TINY')]")
+  @FindBy(xpath = "//*[contains(text(),'tiny')]")
   public WebElement tinyFile;
 
-  @FindBy(xpath = "//button[normalize-space()='TINY']")
+  @FindBy(xpath = "//button[normalize-space()='tiny']")
   public WebElement selecteTinyFileOpt;
 
-  @FindBy(xpath = "//*[contains(text(),'EMPTY')]")
+  @FindBy(xpath = "//*[contains(text(),'empty')]")
   public WebElement emptyFile;
 
-  @FindBy(xpath = "//button[normalize-space()='EMPTY']")
+  @FindBy(xpath = "//button[normalize-space()='empty']")
   public WebElement selecteEmptyFileOpt;
 
   @FindBy(xpath = "//div[@class='col-md-2']/input")

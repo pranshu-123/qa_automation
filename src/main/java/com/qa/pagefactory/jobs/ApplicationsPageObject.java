@@ -54,6 +54,9 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[6]")
     public List<WebElement> getApplicationClusterId;
 
+    @FindBy(css = ".col-md-12.no-data-msg")
+    public WebElement whenNoApplicationPresent;
+
     @FindBy(xpath = "//*[@id='allApps-body']/tr[1]/td")
     public WebElement ApplicationPresent;
 

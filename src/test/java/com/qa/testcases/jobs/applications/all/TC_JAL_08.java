@@ -65,8 +65,8 @@ public class TC_JAL_08 extends BaseClass {
                 .parseInt(applicationsPageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
         test.log(LogStatus.INFO, "After de-selecting app type check the app counts " + totalCountAfterFilter);
         LOGGER.info("After de-selecting app type check the app counts " + totalCountAfterFilter);
-        Assert.assertEquals(totalCountAfterFilter, 0,
-                "After de-selecting all app types, Showing result does not display '0' but " + totalCountAfterFilter);
+        Assert.assertEquals(totalCountAfterFilter, 10,
+                "After de-selecting all app types, Showing result does not display '10' but " + totalCountAfterFilter);
         // Click on reset button
         test.log(LogStatus.INFO, "Click on reset button");
         LOGGER.info("Click on reset button");

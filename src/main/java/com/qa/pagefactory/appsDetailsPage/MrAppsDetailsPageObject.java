@@ -130,7 +130,7 @@ public class MrAppsDetailsPageObject {
     public WebElement getAppid;
 
 
-    @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span/span")
+    @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span[2]/span")
     public WebElement getHeaderAppId;
 
     @FindBy(xpath = "//button[@class='close']")

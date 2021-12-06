@@ -18,13 +18,12 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-up')]")
     public WebElement sortUp;
 
-    @FindBy(xpath = "//span[(text()='Duration')]//following-sibling::a[contains(@class,'sorting')]")
+    @FindBy(xpath = "//*[@id='allApps-head']/tr/th[8]/a")
     public WebElement sortByDurationApp;
 
     @FindBy(css = "input.global-app-search")
     public WebElement globalSearchBox;
-
-
+    
     @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-down')]")
     public WebElement sortDown;
 

@@ -23,7 +23,7 @@ public class TezAppsDetailsPageObject {
 
     @FindBy(css = "input.global-app-search")
     public WebElement globalSearchBox;
-    
+
     @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-down')]")
     public WebElement sortDown;
 

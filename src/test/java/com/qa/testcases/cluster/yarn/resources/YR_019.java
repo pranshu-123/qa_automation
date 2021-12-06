@@ -30,9 +30,7 @@ public class YR_019 extends BaseClass {
 
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         Yarn yarn = new Yarn(driver);
-        Impala impala = new Impala(driver);
         waitExecuter.sleep(2000);
-
         yarn.verifyYarnResourceHeaderisDisplayed();
         Log.info("Yarn Resource Header is displayed.");
         test.log(LogStatus.INFO, "Yarn Resource Header is displayed.");

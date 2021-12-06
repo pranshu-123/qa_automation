@@ -2,6 +2,7 @@ package com.qa.testcases.cluster.yarn.chargeback;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.chargeback.GroupByOptions;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.clusters.impala.ChargeBackImpala;
@@ -26,17 +27,18 @@ public class YC_027 extends BaseClass {
 
         ChargeBackYarn chargeBackYarn = new ChargeBackYarn(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
+        ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
         chargeBackYarn.selectYarnChargeback();
         waitExecuter.sleep(2000);
 
         // Select the cluster
         test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterIdClusterPage(clusterId);
-        waitExecuter.sleep(1000);
         chargeBackYarn.selectChargebackType("Yarn");
         waitExecuter.sleep(2000);
-
+        homePage.selectMultiClusterIdClusterPage(clusterId);
+        waitExecuter.sleep(1000);
+        
 
         // Click on datepicker button
         DatePicker datePicker = new DatePicker(driver);
@@ -46,6 +48,7 @@ public class YC_027 extends BaseClass {
 
         chargeBackYarn.clickOnGroupBySearchBox();
         String optionName = "User";
+        chargeBackImpala.remove1stGroupByOption();
         chargeBackYarn.selectOptionsInGroupBy(optionName);
         test.log(LogStatus.PASS, "Selected "+ optionName + " as option in Group By filter, yarn chargeback page");
 

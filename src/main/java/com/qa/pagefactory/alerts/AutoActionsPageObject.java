@@ -24,19 +24,19 @@ public class AutoActionsPageObject {
     @FindBy(xpath = "//div[contains(@class,'component-section-header')]/div/span[2]/a")
     public WebElement newAutoActionBtn;
 
-    @FindBy (xpath = "//table[@id = 'aa-list-table']/tbody/tr/td[1]")
+    @FindBy (xpath = "//table[contains(@class,'autoaction-list-table')]/tbody/tr/td[1]")
     public List<WebElement> firstColumnElementsAATable;
 
     @FindBy (xpath = "//section//div")
     public WebElement messageBanner;
 
-    @FindBy(xpath = "//table[@id='aa-list-table']/thead/tr/th[6]")
+    @FindBy(xpath = "//table[contains(@class,'autoaction-list-table')]/thead/tr/th[6]")
     public WebElement headerRunColumn;
 
-    @FindBy(xpath = "//table[@id='aa-list-table']/tbody/tr/td[6]")
+    @FindBy(xpath = "//table[contains(@class,'autoaction-list-table')]/tbody/tr/td[6]")
     public List<WebElement> listRunCount;
 
-    @FindBy(xpath = "//table[@id='aa-list-table']/tbody/tr/td[1]")
+    @FindBy(xpath = "//table[contains(@class,'autoaction-list-table')]/tbody/tr/td[1]")
     public List<WebElement> listPolicyNames;
 
     @FindBy(xpath = "(//tbody[contains(@id,'allApps-body')]/tr/td[5]/span[2])[1]")

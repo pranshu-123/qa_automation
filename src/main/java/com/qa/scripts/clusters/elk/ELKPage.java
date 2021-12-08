@@ -288,7 +288,7 @@ public class ELKPage {
 			List<WebElement> metricsKpiFooterList, List<WebElement> metricsKpiGraphList, int totalGraphs) {
 		KafkaPage kafkaPage = new KafkaPage(driver);
 		for (int i = 0; i < metricsKpiList.size(); i++) {
-			if(i>totalGraphs) {
+			if(i>=totalGraphs) {
 				break;
 			}
 			String graphId = "elasticsearchGraph" + i;

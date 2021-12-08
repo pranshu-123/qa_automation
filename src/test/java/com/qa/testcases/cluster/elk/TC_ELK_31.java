@@ -45,7 +45,7 @@ public class TC_ELK_31 extends BaseClass {
 
     elkPage.verifyClusterDropDown(elkPageObj);
     elkPage.navigateToIndicesTab(elkPageObj);
-    elkPage.verifyPerIndicesMetricsGraph(elkPageObj,8);
+    elkPage.verifyPerIndicesMetricsGraph(elkPageObj,6);
     test.log(LogStatus.PASS, "Verified ES Indices specific metrics graph in UI successfully ");
   }
 }

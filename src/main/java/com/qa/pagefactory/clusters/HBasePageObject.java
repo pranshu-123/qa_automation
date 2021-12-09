@@ -26,6 +26,9 @@ public class HBasePageObject {
     @FindBy(xpath="//div[contains(@class, 'bg-success')]")
     public List<WebElement> hBaseKPIs;
 
+    @FindBy(xpath="//div[contains(@class, 'bg-error')]")
+    public List<WebElement> hBaseDeadRegionKPIs;
+    
     @FindBy(xpath = "//div[@class='component-score-improvement-module']//div//div//div")
     public List<WebElement> hBaseClusterKPIs;
 

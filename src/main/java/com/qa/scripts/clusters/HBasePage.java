@@ -127,6 +127,7 @@ public class HBasePage {
     //Method is to verify the presence of tool tip for HBase cluster KPI's
     public boolean verifyMetricsToolTips() {
         List<WebElement> hBaseKPIList = hBasePageObject.hBaseKPIs;
+        List<WebElement> hBaseDeadRegionKPIList = hBasePageObject.hBaseDeadRegionKPIs;
         Assert.assertFalse(hBaseKPIList.isEmpty(), "HBase cluster KPIs not found.");
         List<String> toolTipList = new ArrayList<>();
 
@@ -149,7 +150,7 @@ public class HBasePage {
 
         }
         //Check for tooltips and total 7 KPI's in HBase
-        return toolTipList.size() == 7;
+        return toolTipList.size() + hBaseDeadRegionKPIList.size() == 7;
     }
 
     // Method to verify the HBase cluster Metrics

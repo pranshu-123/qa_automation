@@ -240,5 +240,4 @@ public class ChargeBackYarn {
 		waitExecuter.sleep(2000);
 		chargebackYarnPageObject.iconGearTypeChkBox.click();
 	}
-
 }

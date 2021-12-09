@@ -8,12 +8,10 @@ import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

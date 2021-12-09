@@ -1,7 +1,6 @@
 package com.qa.scripts.clusters.yarn;
 
 import com.qa.enums.UserAction;
-import com.qa.enums.chargeback.GroupByOptions;
 import com.qa.pagefactory.clusters.ChargebackImpalaPageObject;
 import com.qa.pagefactory.clusters.ChargebackYarnPageObject;
 import com.qa.utils.JavaScriptExecuter;

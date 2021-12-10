@@ -73,22 +73,22 @@ public class YarnPageObject {
     @FindBy(xpath = "//span[contains(@class,'select2-selection__choice__remove')]")
     public List<WebElement> filterRemoveElements;
 
-    @FindBy(xpath = "//span[@id='VCoreTS']//*[name()='svg']//*[local-name()='rect' and @class='highcharts-background']")
+    @FindBy(xpath = "//span[@id='VCoreTS-Resources']//*[name()='svg']//*[local-name()='rect' and @class='highcharts-background']")
     public WebElement vcoresSVGGraph;
 
-    @FindBy(xpath = "//div[@id='VCoreTS']//div[@class='footer']//div[@class='container']//label[@class='checkbox alt-error']//span//span[contains(text(),'Total Available')]")
+    @FindBy(xpath = "//div[@id='VCoreTS-Resources']//div[@class='footer']//div[@class='container']//label[@class='checkbox alt-error']//span//span[contains(text(),'Total Available')]")
     public WebElement vcoresTotalAvailableChkBox;
 
-    @FindBy(xpath = "//span[@id='MemoryTS']//*[name()='svg']//*[local-name()='rect' and @class='highcharts-background']")
+    @FindBy(xpath = "//span[@id='MemoryTS-Resources']//*[name()='svg']//*[local-name()='rect' and @class='highcharts-background']")
     public WebElement memorySVGGraph;
 
-    @FindBy(xpath = "//div[@id='VCoreTS']//div[@class='footer']//div[@class='container']//label[@class='checkbox alt-error']//span//span[contains(text(),'Total Allocated')]")
+    @FindBy(xpath = "//div[@id='VCoreTS-Resources']//div[@class='footer']//div[@class='container']//label[@class='checkbox alt-error']//span//span[contains(text(),'Total Allocated')]")
     public WebElement vcoresTotalAllocatedChkBox;
 
-    @FindBy(xpath = "//div[@id='MemoryTS']//div[@class='footer']//div[@class='container']//label[@class='checkbox alt-error']//span//span[contains(text(),'Total Available')]")
+    @FindBy(xpath = "//div[@id='MemoryTS-Resources']//div[@class='footer']//div[@class='container']//label[@class='checkbox alt-error']//span//span[contains(text(),'Total Available')]")
     public WebElement memoryTotalAvailableChkBox;
 
-    @FindBy(xpath = "//div[@id='MemoryTS']//div[@class='footer']//div[@class='container']//label[@class='checkbox alt-error']//span//span[contains(text(),'Total Allocated')]")
+    @FindBy(xpath = "//div[@id='MemoryTS-Resources']//div[@class='footer']//div[@class='container']//label[@class='checkbox alt-error']//span//span[contains(text(),'Total Allocated')]")
     public WebElement memoryTotalAllocatedChkBox;
 
     @FindBy(xpath = "//div[@id='VCore-Application']//h4")
@@ -103,7 +103,7 @@ public class YarnPageObject {
     @FindBy(xpath = "//div[@id='Memory-Application']//div[3]//label/span[1]")
     public List<WebElement> memoryApplicationChkBoxList;
 
-    @FindBy(xpath = "//span[@id='VCoreTS']/div/div")
+    @FindBy(xpath = "//span[@id='VCoreTS-Resources']/div/div")
     public WebElement vCoresGraph;
 
     public By graphGContents = By.cssSelector("svg > g.highcharts-series-group");

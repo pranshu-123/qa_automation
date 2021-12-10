@@ -49,7 +49,7 @@ public class ChargebackImpalaPageObject {
     @FindBy(xpath = "//table[@id='finishedImpalaJobsTable']/tbody/tr/td[3]/span[1]")
     public List<WebElement> getUsersFromFinishedImpalaJobsTable;
 
-    @FindBy(xpath = "//span[contains(@class, 'select2-selection--multiple')]")
+    @FindBy(xpath = "//span[contains(@class, 'select2-selection--multiple')]//input")
     public WebElement groupBySearchBox;
 
     @FindBy(xpath = "//span[contains(@class, 'select2-results')]/ul/li")

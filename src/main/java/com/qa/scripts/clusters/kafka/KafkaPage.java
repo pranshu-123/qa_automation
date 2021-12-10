@@ -1,17 +1,13 @@
 package com.qa.scripts.clusters.kafka;
 
-import com.qa.pagefactory.clusters.ELKPageObject;
 import com.qa.pagefactory.clusters.KafkaPageObject;
 import com.qa.scripts.DatePicker;
-import com.qa.scripts.clusters.elk.ELKPage;
-import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -213,11 +209,11 @@ public class KafkaPage {
 		Assert.assertFalse(axisPathList.isEmpty(), "No points plotted on the " + axisName);
 		HashSet<String> axisValSet = new HashSet<>();
 		ArrayList<String> axisValArr = new ArrayList<>();
-			for (int i = 0; i < axisPathList.size(); i++) {
-				logger.info("axis value = "+ axisPathList.get(i).getText());
-				axisValArr.add(axisPathList.get(i).getText());
-				axisValSet.add(axisPathList.get(i).getText());
-			}
+		for (int i = 0; i < axisPathList.size(); i++) {
+			logger.info("axis value = "+ axisPathList.get(i).getText());
+			axisValArr.add(axisPathList.get(i).getText());
+			axisValSet.add(axisPathList.get(i).getText());
+		}
 		if (axisValSet.size() != axisValArr.size()){
 			if (!axisValArr.contains("12:00")) {
 				logger.info("Expected " + axisName + " : " + axisValSet + "\n Actual " + axisName + " : " + axisValArr);

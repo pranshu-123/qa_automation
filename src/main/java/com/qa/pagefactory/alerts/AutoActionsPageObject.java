@@ -15,37 +15,37 @@ import java.util.List;
 
 public class AutoActionsPageObject {
 
-    @FindBy(xpath = "//span[contains(@class,'icon-alerts')]/parent::h4/following-sibling::ul/li/span")
-    public WebElement autoActionsHeaderLink;
+	@FindBy(xpath = "//span[contains(@class,'icon-alerts')]/parent::h4/following-sibling::ul/li/span")
+	public WebElement autoActionsHeaderLink;
 
-    @FindBy(xpath = "//ul[contains(@class,'primary-links')]//li[5]//span")
-    public  WebElement autoActionComponentHeader;
+	@FindBy(xpath = "//ul[contains(@class,'primary-links')]//li[5]//span")
+	public  WebElement autoActionComponentHeader;
 
-    @FindBy(xpath = "//div[contains(@class,'component-section-header')]/div/span[2]/a")
-    public WebElement newAutoActionBtn;
+	@FindBy(xpath = "//div[contains(@class,'component-section-header')]/div/span[2]/a")
+	public WebElement newAutoActionBtn;
 
-    @FindBy (xpath = "//table[contains(@class,'autoaction-list-table')]/tbody/tr/td[1]")
-    public List<WebElement> firstColumnElementsAATable;
+	@FindBy (xpath = "//table[contains(@class,'autoaction-list-table')]/tbody/tr/td[1]")
+	public List<WebElement> firstColumnElementsAATable;
 
-    @FindBy (xpath = "//section//div")
-    public WebElement messageBanner;
+	@FindBy (xpath = "//section//div")
+	public WebElement messageBanner;
 
-    @FindBy(xpath = "//table[contains(@class,'autoaction-list-table')]/thead/tr/th[6]")
-    public WebElement headerRunColumn;
+	@FindBy(xpath = "//table[contains(@class,'autoaction-list-table')]/thead/tr/th[6]")
+	public WebElement headerRunColumn;
 
-    @FindBy(xpath = "//table[contains(@class,'autoaction-list-table')]/tbody/tr/td[6]")
-    public List<WebElement> listRunCount;
+	@FindBy(xpath = "//table[contains(@class,'autoaction-list-table')]/tbody/tr/td[6]")
+	public List<WebElement> listRunCount;
 
-    @FindBy(xpath = "//table[contains(@class,'autoaction-list-table')]/tbody/tr/td[1]")
-    public List<WebElement> listPolicyNames;
+	@FindBy(xpath = "//table[contains(@class,'autoaction-list-table')]/tbody/tr/td[1]")
+	public List<WebElement> listPolicyNames;
 
-    @FindBy(xpath = "(//tbody[contains(@id,'allApps-body')]/tr/td[5]/span[2])[1]")
-    public WebElement icon_summary_header_apps;
+	@FindBy(xpath = "(//tbody[contains(@id,'allApps-body')]/tr/td[5]/span[2])[1]")
+	public WebElement icon_summary_header_apps;
 
-    /**
-     * @param driver The driver that will be used to look up the elements
-     */
-    public AutoActionsPageObject(WebDriver driver){
-        PageFactory.initElements(driver, this);
-    }
+	/**
+	 * @param driver The driver that will be used to look up the elements
+	 */
+	public AutoActionsPageObject(WebDriver driver){
+		PageFactory.initElements(driver, this);
+	}
 }

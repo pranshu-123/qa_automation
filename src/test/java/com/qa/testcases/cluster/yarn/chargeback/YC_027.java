@@ -9,6 +9,9 @@ import com.qa.scripts.clusters.impala.ChargeBackImpala;
 import com.qa.scripts.clusters.yarn.ChargeBackYarn;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+
+import java.util.logging.Logger;
+
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -16,6 +19,8 @@ import org.testng.annotations.Test;
 @Marker.YarnChargeback
 @Marker.All
 public class YC_027 extends BaseClass {
+
+	private static final Logger LOGGER = Logger.getLogger(ChargeBackYarn.class.getName());
 
 	/**
 	 * Verify Group By Table on Yarn chrageback page
@@ -54,7 +59,7 @@ public class YC_027 extends BaseClass {
 
 		chargeBackYarn.getResultsGroupedByTableRecords();
 		test.log(LogStatus.PASS, "Verified Group By Table is available on Yarn chargeback page");
-		System.out.println("Size of Headers: "+ chargeBackYarn.getResultsGroupedByTableHeaderNames().size());
+		LOGGER.info("Size of Headers: "+ chargeBackYarn.getResultsGroupedByTableHeaderNames().size());
 		Assert.assertTrue(chargeBackYarn.getResultsGroupedByTableHeaderNames().size() == 5 || chargeBackYarn.getResultsGroupedByTableHeaderNames().size() == 4);
 		test.log(LogStatus.PASS, "Verified total columns found in Groupby table are: "+chargeBackYarn.getResultsGroupedByTableHeaderNames().size());
 		test.log(LogStatus.PASS, "Verified Group By Table Header consist of minimun 4 cloumns or max 5 columns on Yarn chargeback page");

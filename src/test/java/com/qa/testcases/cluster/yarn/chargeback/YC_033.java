@@ -14,10 +14,13 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Marker.YarnChargeback
 @Marker.All
 public class YC_033 extends BaseClass {
+
+	private static final Logger LOGGER = Logger.getLogger(ChargeBackYarn.class.getName());
 
 	/**
 	 * Verify the columns of the Yarn Job table are editable by clicking the settings icon.
@@ -72,7 +75,7 @@ public class YC_033 extends BaseClass {
 
 		//Verify Header columns size after uncheck
 		List<WebElement> afterYarnJobsTblHeaderColumn = chargeBackYarn.getYarnJobsTableHeaderNames();
-		System.out.println("After uncheck Type from IconGear, Header Size: "+afterYarnJobsTblHeaderColumn.size());
+		LOGGER.info("After uncheck Type from IconGear, Header Size: "+afterYarnJobsTblHeaderColumn.size());
 		int afterTypeChkBox =afterYarnJobsTblHeaderColumn.size();
 
 		Assert.assertTrue((beforeTypeChkBox>afterTypeChkBox),"Column of Yarn Jobs Table is not Editable");

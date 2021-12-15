@@ -254,5 +254,4 @@ public class ChargebackImpalaPageObject {
 	public ChargebackImpalaPageObject(WebDriver driver) {
 		PageFactory.initElements(driver, this);
 	}
-
 }

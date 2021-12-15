@@ -128,5 +128,4 @@ public class YarnPageObject {
 	public List<WebElement> getChildElement(WebElement parentElement, By childElement) {
 		return parentElement.findElements(childElement);
 	}
-
 }

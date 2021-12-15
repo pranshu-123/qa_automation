@@ -25,7 +25,6 @@ public class TC_ELK_31 extends BaseClass {
 				"Validate ES indices specific metrics graph.");
 		test.assignCategory(" ELK ");
 		Log.startTestCase("TC_ELK_31_verifyPerIndicesMetricsGraph");
-
 		// Initialize all classes objects
 		test.log(LogStatus.INFO, "Initialize all class objects");
 		LOGGER.info("Initialize all class objects");

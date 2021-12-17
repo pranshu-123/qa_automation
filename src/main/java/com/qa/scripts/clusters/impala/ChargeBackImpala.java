@@ -920,5 +920,4 @@ public class ChargeBackImpala {
 		Assert.assertTrue(isGroupingDisplayed, "Group by option not displayed for pie chart");
 	}
 
-
 }

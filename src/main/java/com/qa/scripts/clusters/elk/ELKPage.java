@@ -1,8 +1,6 @@
 package com.qa.scripts.clusters.elk;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.qa.constants.DatePickerConstants;
-import com.qa.enums.UserAction;
 import com.qa.pagefactory.clusters.ELKPageObject;
 import com.qa.pagefactory.clusters.KafkaPageObject;
 import com.qa.scripts.DatePicker;
@@ -13,17 +11,12 @@ import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
 
 public class ELKPage {
 
@@ -288,7 +281,7 @@ public class ELKPage {
 			List<WebElement> metricsKpiFooterList, List<WebElement> metricsKpiGraphList, int totalGraphs) {
 		KafkaPage kafkaPage = new KafkaPage(driver);
 		for (int i = 0; i < metricsKpiList.size(); i++) {
-			if(i>totalGraphs) {
+			if(i>=totalGraphs) {
 				break;
 			}
 			String graphId = "elasticsearchGraph" + i;

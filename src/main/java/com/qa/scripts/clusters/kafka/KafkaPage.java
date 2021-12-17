@@ -2,7 +2,6 @@ package com.qa.scripts.clusters.kafka;
 
 import com.qa.pagefactory.clusters.KafkaPageObject;
 import com.qa.scripts.DatePicker;
-import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.ExtentTest;
@@ -199,7 +198,7 @@ public class KafkaPage {
 			}
 		}
 	}
-	
+
 	public void verifyAxisElementPresence(String axisPath) {
 		List<WebElement> axisPathList = driver.findElements(By.xpath(axisPath));
 		axisPathList.stream().forEach(e -> e.isDisplayed());
@@ -273,7 +272,7 @@ public class KafkaPage {
 			String colName = brokerColList.get(col).getText();
 			logger.info("The Broker colName is: " + colName);
 			for (int row = 1; row <= brokerRowList.size(); row++) {
-				WebElement rowData = driver.findElement(By.xpath("//tbody[@id='undefined-body']/tr[" + row + "]/td[" + (col + 1) + "]/span"));
+				WebElement rowData = driver.findElement(By.xpath("//tbody[@id='kafkaTopicList-body']/tr[" + row + "]/td[" + (col + 1) + "]/span"));
 				Assert.assertTrue(rowData.isDisplayed(), "No data under column: " + colName);
 				//Check if data has only special charaters
 				boolean onlySpecialChars = rowData.getText().matches("[^a-zA-Z0-9]+");
@@ -381,7 +380,7 @@ public class KafkaPage {
 	public ArrayList<Integer> sortBrokerIntCol(List<WebElement> brokerRowList, int col) {
 		ArrayList<Integer> intArr = new ArrayList<>();
 		for (int row = 0; row < brokerRowList.size(); row++) {
-			WebElement rowData = driver.findElement(By.xpath("//tbody[@id='undefined-body']/" +
+			WebElement rowData = driver.findElement(By.xpath("//tbody[@id='kafkaTopicList-body']/" +
 					"tr[" + (row + 1) + "]/td[" + (col + 1) + "]/span"));
 			int rowVal = Integer.parseInt(rowData.getText());
 			intArr.add(rowVal);
@@ -392,7 +391,7 @@ public class KafkaPage {
 	public ArrayList<String> sortBrokerStrCol(List<WebElement> brokerRowList, int col) {
 		ArrayList<String> strArr = new ArrayList<>();
 		for (int row = 0; row < brokerRowList.size(); row++) {
-			WebElement rowData = driver.findElement(By.xpath("//tbody[@id='undefined-body']/" +
+			WebElement rowData = driver.findElement(By.xpath("//tbody[@id='kafkaTopicList-body']/" +
 					"tr[" + (row + 1) + "]/td[" + (col + 1) + "]/span"));
 			strArr.add(rowData.getText());
 		}
@@ -423,7 +422,7 @@ public class KafkaPage {
 				expectedIntArr = sortBrokerIntCol(brokerRowList, col);
 				Collections.sort(expectedIntArr);
 			}
-		//	MouseActions.clickOnElement(driver, kafkaPageObject.topicColSortingIcon.get(col));
+			//	MouseActions.clickOnElement(driver, kafkaPageObject.topicColSortingIcon.get(col));
 			waitExecuter.waitUntilPageFullyLoaded();
 			if (Arrays.asList(colStr).contains(colName)) {
 				strArr = sortTopicStrCol(brokerRowList, col);

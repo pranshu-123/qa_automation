@@ -69,6 +69,7 @@ public class IM_RES_16 extends BaseClass {
         test.log(LogStatus.INFO, "Select Queue in Group by option.");
         LOGGER.info("Select Queue in Group by option.");
         waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+        waitExecuter.sleep(3000);
         impalaPageObject.groupByDropdownButton.click();
         waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         impalaPageObject.groupByQueueList.click();

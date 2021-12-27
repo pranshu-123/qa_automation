@@ -54,11 +54,8 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[6]")
     public List<WebElement> getApplicationClusterId;
 
-    @FindBy(css = ".col-md-12.no-data-msg")
+    @FindBy(xpath = "//h3[text()='There is no information available.']")
     public WebElement whenNoApplicationPresent;
-
-    @FindBy(xpath = "//*[@id='allApps-body']/tr[1]/td")
-    public WebElement ApplicationPresent;
 
     @FindBy(xpath = "(//div[contains(@class,'check-items-container')])[1]//span[1]")
     public List<WebElement> getApplicationTypes;
@@ -177,7 +174,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "(//div[contains(@class,'input-section')])[4]/input[2]")
     public WebElement eventsSliderInputRight;
 
-    @FindBy(xpath = "//table[@id='allApps']/tbody[1]/tr/td[2]")
+    @FindBy(xpath = "//div[@class='status-title']//following-sibling::span[contains(@class,'badge') and not(contains(@class,'module-status'))]")
     public List<WebElement> getBadgeTitle;
 
     @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')])[3]//input")
@@ -237,10 +234,10 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-up')]")
     public WebElement sortUp;
 
-    @FindBy(xpath = "//table[@id='allApps']/thead//th[12]/a[1]")
+    @FindBy(xpath = "//span[(text()='Parent App')]//following-sibling::a[contains(@class,'sorting')]")
     public WebElement sortByParentApp;
 
-    @FindBy(xpath = "//table[@id='allApps']/thead//th[12]/a[1]")
+    @FindBy(xpath = "//span[(text()='Status')]//following-sibling::a[contains(@class,'sorting')]")
     public WebElement sortStatus;
 
     @FindBy(xpath = "//span[(text()='ClusterId')]//following-sibling::a[contains(@class,'sorting')]")
@@ -352,7 +349,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//h3[contains(@class,'expandable-header')]//a[contains(text(),'Tags')]")
     public WebElement tagExpandableHeader;
 
-    @FindBy(css = "button.close")
+    @FindBy(xpath = "//button[@class='close']")
     public WebElement closeIcon;
 
     @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[4]/a[2]")

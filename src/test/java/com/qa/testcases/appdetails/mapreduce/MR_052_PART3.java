@@ -2,7 +2,6 @@ package com.qa.testcases.appdetails.mapreduce;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.MrAppsDetailsPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
@@ -43,12 +42,11 @@ public class MR_052_PART3 extends BaseClass {
         DatePicker datePicker = new DatePicker(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         AllApps allApps = new AllApps(driver);
-
-        test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-        mrDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
-                applicationsPageObject, clusterId);
-        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         try {
+            test.log(LogStatus.INFO, "Navigate to jobs tab from header");
+            mrDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
+                    applicationsPageObject, clusterId);
+            waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
             test.log(LogStatus.INFO, "Verify that the left pane has map reduce check box and the apps number");
             int totalMapReduceAppCnt = mrDetailsPage.clickOnlyLink("MapReduce");
             if (totalMapReduceAppCnt > 0) {
@@ -89,8 +87,7 @@ public class MR_052_PART3 extends BaseClass {
             }
         } catch (NoSuchElementException ex) {
             if (mrApps.closeAppsPageTab.isDisplayed()) {
-                userActions.performActionWithPolling((mrApps.closeAppsPageTab), UserAction.CLICK);
-                logger.info("The Map Reduce Application is not success");
+                mrApps.closeAppsPageTab.click();
                 throw ex;
             }
         }

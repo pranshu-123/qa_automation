@@ -55,7 +55,7 @@ public class ManagePageObject {
     @FindBy(xpath = "(//div[@class='container-fluid']//label)[3]/parent::div/following-sibling::div/input")
     public WebElement elasticSearchNumOfIndexesValue;
 
-    @FindBy(xpath = "(//div[@class='component-tabs-primary']//a)[3]")
+    @FindBy(css = "a.active")
     public WebElement sensorHeartbeatTab;
 
     @FindBy(xpath = "//table[contains(@class,'component-data-tables')]/tbody/tr")

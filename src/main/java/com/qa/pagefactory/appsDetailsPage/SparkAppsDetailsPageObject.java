@@ -31,7 +31,7 @@ public class SparkAppsDetailsPageObject {
     @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[4]/a[2]")
     public WebElement getAppId;
 
-    @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span/span")
+    @FindBy(xpath = "//span[@class='text-ellipsis app-id']/following-sibling::span[1]")
     public WebElement getHeaderAppId;
 
     @FindBy(css = "button.close")

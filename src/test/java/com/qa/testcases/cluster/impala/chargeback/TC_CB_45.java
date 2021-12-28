@@ -64,7 +64,7 @@ public class TC_CB_45 extends BaseClass {
         datePicker.clickOnDatePicker();
         datePicker.selectLast90Days();
         chargeBackImpala.clickOnGroupBySearchBox();
-    chargeBackImpala.closeGroupByOptionsExcept(GroupByOptions.INPUT_TABLES);
+        chargeBackImpala.closeGroupByOptionsExcept(GroupByOptions.INPUT_TABLES);
         chargeBackImpala.clickOnTableHeading(ImpalaJobTableColumn.APP_NAME_ID);
         LOGGER.info("Click again on App Name / ID.", test);
         isDataSorted = chargeBackImpala.isDataSorted(ImpalaJobTableColumn.APP_NAME_ID, false);

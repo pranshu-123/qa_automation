@@ -50,7 +50,7 @@ public class TC_CB_47 extends BaseClass {
         datePicker.selectLast90Days();
         LOGGER.info("Select last 90 days in date picker.", test);
         chargeBackImpala.clickOnGroupBySearchBox();
-      chargeBackImpala.closeGroupByOptionsExcept(GroupByOptions.INPUT_TABLES);
+        chargeBackImpala.closeGroupByOptionsExcept(GroupByOptions.INPUT_TABLES);
         chargeBackImpala.clickOnTableHeading(ImpalaJobTableColumn.FINISHED_TIME);
         LOGGER.info("Click on Finished time.", test);
         boolean isDataSorted = chargeBackImpala.isDataSorted(ImpalaJobTableColumn.FINISHED_TIME, true);

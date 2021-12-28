@@ -132,6 +132,7 @@ public class Impala {
 	public List<String> getGraphDateLabel(String graphName) {
 		List<String> dateLabels = new ArrayList<String>();
 		List<WebElement> dateLabelElements;
+		driver.navigate().refresh();
 		if (impalaPageObject.graphXAxisDateLabels.size() < 2) {
 			return dateLabels;
 		}

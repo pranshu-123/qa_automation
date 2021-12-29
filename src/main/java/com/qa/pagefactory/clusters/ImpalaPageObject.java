@@ -45,7 +45,7 @@ public class ImpalaPageObject {
     @FindBy(xpath = "(//*[@id=\"app\"]/div/div/div/div[3]/div[1]/div[1]/div/div/div/div/div[3]/div/label[6]/span[2]")
     public WebElement Nodecheckbox;
 
-    @FindBy(xpath="//label[contains(text(),'Chargeback Type')]/..//span[@class='select2-selection__rendered']")
+    @FindBy(xpath="(//span[@class='select2-selection__rendered'])[1]")
     public WebElement selectedType;
     
     public By checkNoDataOnGraph = By.xpath(

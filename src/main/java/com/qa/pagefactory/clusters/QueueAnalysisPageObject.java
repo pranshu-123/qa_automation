@@ -146,10 +146,10 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "//p[@class='pointer']")
     public List<WebElement> pagination;
 
-    @FindBy(xpath = "//div[@class='component-date-picker pointer']//i[1]")
+    @FindBy(xpath = "//div[@class='pb-2']//div[@class='component-date-picker']")
     public WebElement dateRange;
 
-    @FindBy(xpath = "(//li[@class='active'])[2]")
+    @FindBy(xpath = "//li[@class='active'][normalize-space()='Custom Range']")
     public WebElement customRange;
 
     @FindBy(xpath = "//div[@class='daterangepicker_input']/input[@name='daterangepicker_start' and contains(@class,'active')]")
@@ -164,7 +164,7 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "//span[@class='text-fatal']")
     public WebElement invalidDateRangeMessage;
 
-    @FindBy(xpath = "//table[contains(@class,'component-data-tables row-hover')]/tbody[1]/tr[9]/td[4]/div[1]/span[1]/span[1]")
+    @FindBy(xpath = "//table[contains(@class,'component-data-tables row-hover')]/tbody[1]/tr[5]/td[4]/div[1]/span[1]/span[1]")
     public WebElement addIcon;
 
     @FindBy(xpath = "//*[@id=\"custom-tbl\"]/div[3]/div/table/tbody/tr[9]/td[3]/span")

@@ -21,10 +21,10 @@ public class AppDetailsPageObject {
     @FindBy(id = "allApps")
     public WebElement allAppsTable;
 
-    @FindBy(css = "div.close")
+    @FindBy(css = "button.close")
     public WebElement closeModalbutton;
 
-    @FindBy(xpath = "//h2/span[2]/span/span")
+    @FindBy(xpath = "(//h2[@class='text-white']//span)[3]")
     public WebElement jobUUID;
 
     @FindBy(xpath = "(//h2/span)[1]")
@@ -90,10 +90,10 @@ public class AppDetailsPageObject {
     @FindBy(xpath = "//div[@class='component-tabs-primary']//li/a[normalize-space(text()) = 'Query Plan']")
     public WebElement impalaQueryPlanTab;
 
-    @FindBy(xpath = "//div[@class='component-tabs-secondary']//li//a[normalize-space(text()) = 'Fragment View']")
+    @FindBy(xpath = "//div[@class='component-tabs-secondary scroll-contant']//li//a[normalize-space(text()) = 'Fragment View']")
     public WebElement queryPlanFragmentTab;
 
-    @FindBy(xpath = "//div[@class='component-tabs-secondary']//li//a[normalize-space(text()) = 'Operator View']")
+    @FindBy(xpath = "//div[@class='component-tabs-secondary scroll-contant']//li//a[normalize-space(text()) = 'Operator View']")
     public WebElement queryPlanOperatorTab;
 
     @FindBy(xpath = "//table[@id='appNavigation']/tbody/tr")
@@ -114,10 +114,10 @@ public class AppDetailsPageObject {
     @FindBy(xpath = "(//table[@id='allApps']/tbody/tr/td)[3]")
     public WebElement firstRow;
 
-    @FindBy(css = "div.close")
+    @FindBy(css = "button.close")
     public List<WebElement> closeIcon;
 
-    @FindBy(css = "div.close")
+    @FindBy(css = "button.close")
     public WebElement closeButton;
 
     @FindBy(xpath = "//table[@id='appTagsTable']/tbody/tr/td[1]")

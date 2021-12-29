@@ -12,13 +12,13 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//tbody[@id='allApps-body']/tr[1]/td[4]/a[2]")
     public WebElement getAppId;
 
-    @FindBy(xpath = "//span[(text()='Read')]//following-sibling::a[contains(@class,'sorting')]")
+    @FindBy(xpath = "(//a[@class='sorting icon-sort'])[8]")
     public WebElement sortByReadApp;
 
     @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-up')]")
     public WebElement sortUp;
 
-    @FindBy(xpath = "//span[(text()='Duration')]//following-sibling::a[contains(@class,'sorting')]")
+    @FindBy(xpath = "(//a[@class='sorting icon-sort'])[6]")
     public WebElement sortByDurationApp;
 
     @FindBy(css = "input.global-app-search")
@@ -71,7 +71,7 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[4]/span[1]")
     public WebElement AppnameText;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/h2/span[2]/span/span")
+    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/h2/span[3]")
     public WebElement Appname;
 
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[6]")
@@ -98,8 +98,7 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//tbody[@id='allApps-body']/tr[1]/td[4]/a[2]")
     public WebElement getAppid;
 
-
-    @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span/span")
+    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/h2/span[3]")
     public WebElement getHeaderAppId;
 
     @FindBy(css = "button.close")

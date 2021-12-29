@@ -38,7 +38,7 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//span[(text()='Write')]//following-sibling::a[contains(@class,'sorting')]")
     public WebElement sortByWriteApp;
 
-    @FindBy(xpath = "//span[(text()='Duration')]//following-sibling::a[contains(@class,'sorting')]")
+    @FindBy(xpath = "//*[@id=\"allApps-head\"]/tr/th[8]/a")
     public WebElement sortByDurationApp;
 
     @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[11]//span[@class='icon-tuning']")
@@ -129,8 +129,7 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[4]/div")
     public WebElement getAppid;
 
-
-    @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span/span")
+    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/h2/span[3]")
     public WebElement getHeaderAppId;
 
     @FindBy(xpath = "//button[@class='close']")

@@ -207,10 +207,10 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[1]")
     public List<WebElement> getTypesColumnFromTable;
 
-    @FindBy(xpath = "//span[(text()='Type')]//following-sibling::a[contains(@class,'sorting')]")
+    @FindBy(xpath = "(//a[@class='sorting icon-sort'])[1]")
     public WebElement sortByType;
 
-    @FindBy(xpath = "//span[(text()='User')]//following-sibling::a[contains(@class,'sorting')]")
+    @FindBy(xpath = "//*[@id=\"allApps-head\"]/tr/th[3]/a")
     public WebElement sortByUser;
 
     @FindBy(id = "runningAppList")
@@ -234,25 +234,25 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-up')]")
     public WebElement sortUp;
 
-    @FindBy(xpath = "//span[(text()='Parent App')]//following-sibling::a[contains(@class,'sorting')]")
+    @FindBy(xpath = "//*[@id=\"allApps-head\"]/tr/th[12]/a")
     public WebElement sortByParentApp;
 
-    @FindBy(xpath = "//span[(text()='Status')]//following-sibling::a[contains(@class,'sorting')]")
+    @FindBy(xpath = "//*[@id=\"allApps-head\"]/tr/th[2]/a")
     public WebElement sortStatus;
 
-    @FindBy(xpath = "//span[(text()='ClusterId')]//following-sibling::a[contains(@class,'sorting')]")
+    @FindBy(xpath = "//*[@id=\"allApps-head\"]/tr/th[6]/a")
     public WebElement sortByClusterId;
 
-    @FindBy(xpath = "//span[(text()='Start Time')]//following-sibling::a[contains(@class,'sorting')]")
+    @FindBy(xpath = "//*[@id=\"allApps-head\"]/tr/th[7]/a")
     public WebElement sortByStartTime;
 
-    @FindBy(xpath = "//span[(text()='Duration')]//following-sibling::a[contains(@class,'sorting')]")
+    @FindBy(xpath = "//*[@id=\"allApps-head\"]/tr/th[8]/a")
     public WebElement sortByDuration;
 
-    @FindBy(xpath = "//span[(text()='Read')]//following-sibling::a[contains(@class,'sorting')]")
+    @FindBy(xpath = "//*[@id=\"allApps-head\"]/tr/th[10]/a")
     public WebElement sortByRead;
 
-    @FindBy(xpath = "//span[(text()='Write')]//following-sibling::a[contains(@class,'sorting')]")
+    @FindBy(xpath = "//*[@id=\"allApps-head\"]/tr/th[11]/a")
     public WebElement sortByWrite;
 
     @FindBy(xpath = "//a[@class='icon-gear']")

@@ -39,12 +39,12 @@ public class IM_RES_08 extends BaseClass {
         HomePage homePage = new HomePage(driver);
         test.log(LogStatus.INFO, "Select cluster : " + clusterId);
         LOGGER.info("Select cluster : " + clusterId);
-        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
-        homePage.selectMultiClusterIdClusterPage(clusterId);
-        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
-
         impala.selectImpalaType("Impala");
         waitExecuter.sleep(3000);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
+        waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
+        impala.verifyImpalaType("Impala",clusterId);
+       
         //Select date
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();

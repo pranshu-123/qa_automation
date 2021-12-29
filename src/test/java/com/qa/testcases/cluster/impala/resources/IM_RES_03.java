@@ -29,19 +29,18 @@ public class IM_RES_03 extends BaseClass {
     test.assignCategory(" Cluster/Impala Resources");
 
     WaitExecuter executer = new WaitExecuter(driver);
-    ImpalaPageObject impalaPageObject = new ImpalaPageObject(driver);
+    new ImpalaPageObject(driver);
     Impala impala = new Impala(driver);
-    TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
+    new TopPanelPageObject(driver);
 
     // Click on Resources tab and select Impala
     impala.selectImpalaResource();
     executer.sleep(2000);
 
     HomePage homePage = new HomePage(driver);
-    homePage.selectMultiClusterIdClusterPage(clusterId);
-
     impala.selectImpalaType("Impala");
     executer.sleep(3000);
+    homePage.selectMultiClusterIdClusterPage(clusterId);
 
     DatePicker datePicker = new DatePicker(driver);
     datePicker.clickOnDatePicker();

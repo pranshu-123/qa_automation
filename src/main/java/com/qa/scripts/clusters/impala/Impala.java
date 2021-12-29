@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
-
+import com.qa.scripts.HomePage;
 import com.qa.enums.UserAction;
 import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
@@ -22,6 +22,7 @@ public class Impala {
 	private WebDriver driver;
 	private ImpalaPageObject impalaPageObject;
 	private UserActions userActions;
+	private final HomePage homePage;
 	private static final Logger LOGGER = Logger.getLogger(Impala.class.getName());
 
 	/**
@@ -34,6 +35,7 @@ public class Impala {
 		this.driver = driver;
 		impalaPageObject = new ImpalaPageObject(driver);
 		userActions = new UserActions(driver);
+		homePage = new HomePage(driver);
 	}
 
 	public Boolean isMemoryGraphPresent() {
@@ -130,6 +132,7 @@ public class Impala {
 	public List<String> getGraphDateLabel(String graphName) {
 		List<String> dateLabels = new ArrayList<String>();
 		List<WebElement> dateLabelElements;
+		driver.navigate().refresh();
 		if (impalaPageObject.graphXAxisDateLabels.size() < 2) {
 			return dateLabels;
 		}
@@ -205,6 +208,13 @@ public class Impala {
 		impalaPageObject.selectimpalatable.click();
 	}
 
+	public void verifyImpalaType(String impalaType,String clusterId) {
+ 		String selectedImpalaType = impalaPageObject.selectedType.getText();
+ 		if(!selectedImpalaType.equalsIgnoreCase(impalaType)) {
+ 			selectImpalaType(impalaType);
+ 			homePage.selectMultiClusterIdClusterPage(clusterId);
+ 		}	
+ 	}
 
 	/*Get list of memory graph labels */
 	public List<String> getMemoryLabels() {
@@ -214,7 +224,6 @@ public class Impala {
 		}
 		return labels;
 	}
-
 
 	/**
 	 * This method used to select impala in resource drowdown displayed at

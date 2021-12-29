@@ -131,7 +131,6 @@ public class KafkaPage {
 			logger.info("There are no Latest metrics in table.");
 			test.log(LogStatus.SKIP, "There are no Latest metrics present in table");
 		}
-
 	}
 
 	public String getPageNumber(KafkaPageObject kafkaPageObject) {

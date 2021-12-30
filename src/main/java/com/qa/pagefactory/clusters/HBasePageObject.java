@@ -117,7 +117,7 @@ public class HBasePageObject {
 	@FindBy(xpath="//table[@id='null-table']/tbody/tr")
 	public List<WebElement> tablesTabTblRecords;
 
-	@FindBy(xpath = "//table[@id='null-table']/tbody/tr[1]/td[1]")
+	@FindBy(xpath = "//table[@id='null-table']/tbody/tr[1]/td[1]/span")
 	public WebElement hBaseFirstTableElement;
 
 	@FindBy(xpath = "//tbody[@id='null-table-body']/tr[1]/td[1]")
@@ -125,5 +125,11 @@ public class HBasePageObject {
 
 	@FindBy(xpath="//div[contains(@class, 'kpi-content')]/div")
 	public List<WebElement> regionKpiContent;
+	
+	@FindBy(xpath = "//table[@id='null-table']")
+	public WebElement tables;
+
+	@FindBy(xpath="//table[@id='TableshbaseInfoTable']")
+	public WebElement tableInfo;
 
 }

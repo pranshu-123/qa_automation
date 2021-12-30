@@ -7,6 +7,7 @@ import com.qa.pagefactory.clusters.HBasePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.utils.MouseActions;
+import com.qa.utils.TestUtils;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.By;
@@ -388,10 +389,17 @@ public class HBasePage {
 	}
 
 	public void verifyTblRegionUIWithinRegionServer(String tblName) {
-		String xpathRegionTbl = "//table[@id='regions-" + tblName + "']";   //table[@id='null-table']
-		WebElement regionTblEle = driver.findElement(By.xpath(xpathRegionTbl));
-		waitExecuter.waitUntilElementPresent(regionTblEle);
-
+		String xpathRegionTbl;
+		String xpathRegion = "//table[@id='TableshbaseInfoTable']";   
+		String xpathTables = "//table[@id='null-table']";
+		boolean isRegionPresent = false;
+		isRegionPresent = TestUtils.isElementDisplayed(hBasePageObject.tableInfo);
+		if(isRegionPresent) {
+		  	xpathRegionTbl = xpathRegion;
+		  }
+		  else {
+		  	xpathRegionTbl = xpathTables;
+		  }
 		List<WebElement> hBaseTableHostTblRowsList = driver.findElements(By.xpath(xpathRegionTbl + "/tbody/tr"));
 		Assert.assertFalse(hBaseTableHostTblRowsList.isEmpty(), "HBase Table Host Table Rows not generated.");
 
@@ -450,7 +458,18 @@ public class HBasePage {
 	}
 
 	public void verifyRegionTabColumns(String tableName) {
-		String xpathRegionsTblName = "//table[@id='regions-" + tableName + "']";
+		String xpathRegionsTblName;
+		String xpathRegion = "//table[@id='TableshbaseInfoTable']";   
+		String xpathTables = "//table[@id='null-table']";
+		boolean isRegionPresent = false;
+		isRegionPresent = TestUtils.isElementDisplayed(hBasePageObject.tableInfo);
+		if(isRegionPresent) {
+			xpathRegionsTblName = xpathRegion;
+		  }
+		  else {
+		  	xpathRegionsTblName = xpathTables;
+		  }
+		
 		WebElement regionsTblNameEle = driver.findElement(By.xpath(xpathRegionsTblName));
 		waitExecuter.waitUntilElementPresent(regionsTblNameEle);
 

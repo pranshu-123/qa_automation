@@ -49,7 +49,7 @@ public class TC_M14 extends BaseClass {
         manage.clickMonitoringTab();
         waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.INFO, "Clicked on Monitoring Tab.");
-        waitExecuter.waitUntilElementPresent(managePageObject.monitoringHeader);
+        /*waitExecuter.waitUntilElementPresent(managePageObject.monitoringHeader);*/
         Assert.assertTrue(manage.validateMonitoringHeader(), "Monitoring Header is not present.");
         waitExecuter.waitUntilPageFullyLoaded();
         test.log(LogStatus.INFO, "Verified Monitoring Tab.");

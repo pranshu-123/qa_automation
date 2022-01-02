@@ -34,6 +34,8 @@ public class TC_M04 extends BaseClass {
         waitExecuter.sleep(3000);
         MouseActions.clickOnElement(driver, subTopPanelModulePageObject.gear);
         test.log(LogStatus.INFO, "Verified Manage Tab is clicked.");
+        waitExecuter.waitUntilPageFullyLoaded();
+        MouseActions.clickOnElement(driver, subTopPanelModulePageObject.daemeons);
 
         Manage manage = new Manage(driver);
         //Validate daemon header default

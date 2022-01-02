@@ -35,7 +35,7 @@ public class Manage {
     }
 
     public String validateDaemonHeader(){
-        waitExecuter.sleep(2000);
+        waitExecuter.sleep(1000);
         String headers = managePageObject.daemonsHeader.getText();
         logger.info("Daemons Header found:"+headers);
         return headers;
@@ -51,6 +51,7 @@ public class Manage {
     }
 
     public Boolean validateAllTabsPresent(){
+        MouseActions.clickOnElement(driver, managePageObject.gear);
         logger.info("Number of tabs on manage: "+managePageObject.allManageTabList.size());
         List<String> allTabsOnManagePage = new ArrayList<String>();
         for(int i=0; i<managePageObject.allManageTabList.size(); i++){
@@ -124,7 +125,9 @@ public class Manage {
     }
 
     public boolean validateStatsHeader(){
-        waitExecuter.sleep(3000);
+        waitExecuter.sleep(1000);
+        MouseActions.clickOnElement(driver, managePageObject.gear);
+        waitExecuter.sleep(1000);
         logger.info("Stats Headers found: "+managePageObject.statsHeader.getText());
         return managePageObject.statsHeader.getText().equals("Stats");
     }
@@ -238,14 +241,16 @@ public class Manage {
     }
 
     public void clickMonitoringTab(){
-        UserActions actions = new UserActions(driver);
+        waitExecuter.sleep(1000);
         waitExecuter.waitUntilElementClickable(managePageObject.monitoringTab);
-        actions.performActionWithPolling(managePageObject.monitoringTab,UserAction.CLICK);
+        MouseActions.clickOnElement(driver, managePageObject.monitoringTab);
         waitExecuter.waitUntilPageFullyLoaded();
     }
 
     public boolean validateMonitoringHeader(){
-        waitExecuter.sleep(2000);
+        waitExecuter.sleep(1000);
+        MouseActions.clickOnElement(driver, managePageObject.gear);
+        waitExecuter.sleep(1000);
         if(managePageObject.monitoringHeader.isDisplayed()){
             if(managePageObject.monitoringHeader.getText().equals("Monitoring")){
                 logger.info("Monitoring Headers found: "+managePageObject.monitoringHeader.getText());

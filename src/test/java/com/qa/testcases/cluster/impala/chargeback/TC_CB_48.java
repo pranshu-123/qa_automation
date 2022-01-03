@@ -40,11 +40,12 @@ public class TC_CB_48 extends BaseClass {
         // Select the cluster
         test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterIdClusterPage(clusterId);
-        waitExecuter.sleep(1000);
 
         chargeBackImpala.selectImpalaType("Impala");
         waitExecuter.sleep(2000);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
+        waitExecuter.sleep(1000);
+
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
         datePicker.selectLast90Days();
@@ -54,6 +55,12 @@ public class TC_CB_48 extends BaseClass {
         Boolean isDataSorted = chargeBackImpala.isDataSorted(ImpalaJobTableColumn.QUEUE, true);
         Assert.assertTrue(isDataSorted, "Data is not sorted.");
         LOGGER.pass("Data is displayed in ascending order.", test);
+        chargeBackImpala.selectImpalaType("Impala");
+        waitExecuter.sleep(2000);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
+        waitExecuter.sleep(1000);
+        datePicker.clickOnDatePicker();
+        datePicker.selectLast90Days();
         chargeBackImpala.clickOnTableHeading(ImpalaJobTableColumn.QUEUE);
         LOGGER.info("Click again on Queue.", test);
         isDataSorted = chargeBackImpala.isDataSorted(ImpalaJobTableColumn.QUEUE, false);

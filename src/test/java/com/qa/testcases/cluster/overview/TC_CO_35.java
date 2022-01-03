@@ -18,45 +18,45 @@ import java.util.logging.Logger;
 @Marker.All
 public class TC_CO_35  extends BaseClass {
 
-    /**
-     * Verify Memory graph 'Download SVG'
-     */
+   /**
+   * Verify Memory graph 'Download SVG'
+   */
 
-    private static final Logger LOGGER = Logger.getLogger(TC_CO_35.class.getName());
+  private static final Logger LOGGER = Logger.getLogger(TC_CO_35.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the memory graph should to be 'Download SVG.")
-    public void ValidateMemoryGraphDownloadAsSVG(String clusterId) {
+  @Test(dataProvider = "clusterid-data-provider",description="P0-Verify that the memory graph should to be 'Download SVG.")
+  public void ValidateMemoryGraphDownloadAsSVG(String clusterId) {
 
-        test = extent.startTest("TC_CO_35.ValidateMemoryGraphDownloadAsSVG: " + clusterId,
-                "Validate download of Memory graph as SVG file.");
-        test.assignCategory(" Cluster Overview");
+    test = extent.startTest("TC_CO_35.ValidateMemoryGraphDownloadAsSVG: " + clusterId,
+            "Validate download of Memory graph as SVG file.");
+    test.assignCategory(" Cluster Overview");
 
-        TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
-        MouseActions.clickOnElement(driver, topPanelPageObject.overviewTab);
+    TopPanelPageObject topPanelPageObject = new TopPanelPageObject(driver);
+    MouseActions.clickOnElement(driver, topPanelPageObject.overviewTab);
 
-        HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterId(clusterId);
-        LOGGER.info("Select cluster: "+clusterId);
+    HomePage homePage = new HomePage(driver);
+    homePage.selectMultiClusterId(clusterId);
+    LOGGER.info("Select cluster: "+clusterId);
 
-        WaitExecuter executer = new WaitExecuter(driver);
-        executer.sleep(3000);
+    WaitExecuter executer = new WaitExecuter(driver);
+    executer.sleep(3000);
 
-        // Select this month
-        DatePicker datePicker = new DatePicker(driver);
-        datePicker.clickOnDatePicker();
-        datePicker.selectLast30Days();
-        LOGGER.info("Select date picker for 30 days.");
+    // Select this month
+    DatePicker datePicker = new DatePicker(driver);
+    datePicker.clickOnDatePicker();
+    datePicker.selectLast30Days();
+    LOGGER.info("Select date picker for 30 days.");
 
-        homePage.clickOnMemoryGraphDownloadMenu();
-        LOGGER.info("Clicked on Memory Graph download menu ... ");
+    homePage.clickOnMemoryGraphDownloadMenu();
+    LOGGER.info("Clicked on Memory Graph download menu ... ");
 
-        homePage.downloadMemoryGraphAsFile("Download SVG");
-        LOGGER.info("Download SVG file");
+    homePage.downloadMemoryGraphAsFile("Download SVG");
+    LOGGER.info("Download SVG file");
 
-        Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("Memory.svg"), "File is not downloaded " +
-                "or size of file is zero bytes.");
-        test.log(LogStatus.PASS, "Successfully downloaded Memory graph as SVG file.");
-        LOGGER.info("Successfully downloaded Memory graph as SVG file.");
+    Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("Memory.svg+xml"), "File is not downloaded " +
+            "or size of file is zero bytes.");
+    test.log(LogStatus.PASS, "Successfully downloaded Memory graph as SVG file.");
+    LOGGER.info("Successfully downloaded Memory graph as SVG file.");
     }
 
 }

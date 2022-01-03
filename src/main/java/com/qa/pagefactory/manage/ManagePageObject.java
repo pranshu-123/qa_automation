@@ -12,20 +12,23 @@ import java.util.List;
  */
 public class ManagePageObject {
 
-    @FindBy(xpath="//ul[contains(@class,'primary-links')]//li[7]//ul//li//span")
+    @FindBy(xpath="//*[@id=\"app\"]//div[1]/nav//div[1]/div/ul/li/a")
     public List<WebElement> allManageTabList;
 
     //@FindBy(css = "div#daemons-template h1")
-    @FindBy(xpath="//li[@class='active']//ul[@class='sub-menu']//li//span[contains(text(),'Daemons')]")
+    @FindBy(xpath="//span[normalize-space()='Daemons']")
     public WebElement daemonsHeader;
+
+    @FindBy(xpath = "(//a[@class='menu'])[1]")
+    public WebElement gear;
 
     @FindBy(xpath = "(//ul[@class='sub-menu']/li[contains(@class,'router-link-active')]/span[@class='selected'])[7]")
     public WebElement daemonsTab;
 
-    @FindBy(xpath="(//ul[contains(@class,'sub-menu')]//span[text()='Stats'])")
+    @FindBy(xpath="//a[@href='#/manage/stats']")
     public WebElement statsTab;
 
-    @FindBy(xpath="(//span[contains(text(),'Stats')])")
+    @FindBy(xpath="//span[normalize-space()='Stats']")
     public WebElement statsHeader;
 
     @FindBy(xpath = "(//div[@class='component-tabs-primary']//a)[1]")
@@ -35,7 +38,7 @@ public class ManagePageObject {
     public List<WebElement> dbStatsTable;
 
     @FindBy(xpath = "(//div[@class='component-tabs-primary']//a)[2]")
-    public WebElement elasticSearchTab;
+    public WebElement  elasticSearchTab;
 
     @FindBy(xpath = "//a[normalize-space()='Elasticsearch']")
     public WebElement elasticSearchStatus;
@@ -61,7 +64,7 @@ public class ManagePageObject {
     @FindBy(xpath = "//table[contains(@class,'component-data-tables')]/tbody/tr")
     public List<WebElement> sensorHeartbeatTblRows;
 
-    @FindBy(xpath="(//ul[contains(@class,'sub-menu')]//span[text()='Run Diagnostics'])")
+    @FindBy(xpath="//span[text()='Run Diagnostics']")
     public WebElement runDiagnosticsTab;
 
     @FindBy(xpath="(//span[contains(text(),'Run Diagnostics')])")
@@ -70,7 +73,7 @@ public class ManagePageObject {
     @FindBy(xpath = "//ul[@class='diagnostic-ul']/li[contains(text(),'Load Latest Diagnostics')]")
     public WebElement  loadLatestDiagnosticsBtn;
 
-    @FindBy(xpath = "(//span[contains(text(),'Run Diagnostics')])")
+    @FindBy(xpath = "//a[@class='logo']")
     public WebElement resetButton;
 
     @FindBy(css = ".diagnostic-cnt")
@@ -85,10 +88,10 @@ public class ManagePageObject {
     @FindBy(xpath="//ul[@class='diagnostic-ul']/li[2]")
     public WebElement  downloadSupportBundleBtn;
 
-    @FindBy(xpath="(//ul[contains(@class,'sub-menu')]//span[text()='Monitoring'])")
+    @FindBy(xpath="//span[text()='Monitoring']")
     public WebElement monitoringTab;
 
-    @FindBy(xpath="(//span[contains(text(),'Monitoring')])")
+    @FindBy(xpath="//span[normalize-space()='Monitoring']")
     public WebElement monitoringHeader;
 
     @FindBy(xpath="(//a[contains(text(),'Partition Info')])")

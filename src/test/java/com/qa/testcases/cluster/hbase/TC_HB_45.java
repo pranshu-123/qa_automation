@@ -40,10 +40,9 @@ public class TC_HB_45 extends BaseClass {
         waitExecuter.waitUntilElementClickable(hBasePageObject.hbaseTab);
         userActions.performActionWithPolling(hBasePageObject.hbaseTab, UserAction.CLICK);
         LOGGER.info("Clicked on HBase Tab");
-        hbase.selectDateAsLast30Days();
-
         LOGGER.info("HBase cluster using : "+ clusterId);
         hbase.selectCluster(clusterId);
+        hbase.selectDateAsLast30Days();
         waitExecuter.waitUntilElementPresent(hBasePageObject.hbaseHeader);
         LOGGER.info("HBase headers found: " + hbase.getHBaseHeader());
         test.log(LogStatus.INFO, "Verified HBase cluster setup with :"+ clusterId);

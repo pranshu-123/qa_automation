@@ -20,10 +20,10 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[5]")
     public WebElement getClusterId;
 
-    @FindBy(xpath = "//table[@id='allApps']/thead//th[12]/a[1]")
+    @FindBy(xpath = "//span[(text()='Insights')]//following-sibling::a[contains(@class,'sorting')]")
     public WebElement sortByParentApp;
 
-    @FindBy(xpath = "//table[@id='allApps']/thead//th[10]/a[1]")
+    @FindBy(xpath = "//span[(text()='Read')]//following-sibling::a[contains(@class,'sorting')]")
     public WebElement sortByReadApp;
 
     @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-up')]")
@@ -38,7 +38,7 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//span[(text()='Write')]//following-sibling::a[contains(@class,'sorting')]")
     public WebElement sortByWriteApp;
 
-    @FindBy(xpath = "//table[@id='allApps']/thead//th[8]/a[1]")
+    @FindBy(xpath = "//*[@id=\"allApps-head\"]/tr/th[8]/a")
     public WebElement sortByDurationApp;
 
     @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[11]//span[@class='icon-tuning']")
@@ -129,15 +129,11 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[4]/div")
     public WebElement getAppid;
 
-
-    @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[1]/h2/span[2]/span[2]/span")
+    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/h2/span[3]")
     public WebElement getHeaderAppId;
 
     @FindBy(xpath = "//button[@class='close']")
     public WebElement closeAppsPageTab;
-
-    @FindBy(css = "button.close")
-    public WebElement closeTab;
 
     @FindBy(xpath = "//a[@href='#/']")
     public WebElement homeTab;

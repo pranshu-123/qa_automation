@@ -41,6 +41,9 @@ public class TC_M05 extends BaseClass {
         String daemonHeader = manage.validateDaemonHeader();
         Assert.assertEquals(daemonHeader, "Daemons", "Daemons Header not matched.");
         test.log(LogStatus.INFO, "Verified Manage Page is loaded successfully.");
+
+        waitExecuter.waitUntilPageFullyLoaded();
+        MouseActions.clickOnElement(driver, subTopPanelModulePageObject.daemeons);
         //Click on Stats tab and validate header
         waitExecuter.sleep(2000);
         manage.clickStatsTab();

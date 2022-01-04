@@ -45,6 +45,8 @@ public class TC_M05 extends BaseClass {
         waitExecuter.waitUntilPageFullyLoaded();
         MouseActions.clickOnElement(driver, subTopPanelModulePageObject.daemeons);
         //Click on Stats tab and validate header
+        waitExecuter.waitUntilPageFullyLoaded();
+        MouseActions.clickOnElement(driver, subTopPanelModulePageObject.gear);
         waitExecuter.sleep(2000);
         manage.clickStatsTab();
         test.log(LogStatus.INFO, "Clicked on Stats Tab.");

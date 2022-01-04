@@ -61,7 +61,7 @@ public class TC_M08 extends BaseClass {
         logger.info("Verified Run Diagnostics Tab.");
 
         manage.clickOnLoadLatestDiagnostics();
-        waitExecuter.sleep(7000);
+        waitExecuter.sleep(8000);
         waitExecuter.waitUntilElementClickable(managePageObject.resetButton);
         test.log(LogStatus.INFO, "Clicked on Load Latest Diagnostics Button.");
         logger.info("Clicked on Load Latest Diagnostics Button.");
@@ -72,11 +72,11 @@ public class TC_M08 extends BaseClass {
             waitExecuter.sleep(8000);
             waitExecuter.waitUntilElementPresent(managePageObject.latestDiagnosticsContentHeader);
             waitExecuter.waitUntilTextToBeInWebElement(managePageObject.latestDiagnosticsContentHeader, "Diagnostics Log");
-            waitExecuter.sleep(7000);
+            waitExecuter.sleep(9000);
             waitExecuter.waitUntilElementClickable(managePageObject.resetButton);
             test.log(LogStatus.INFO, "Verified Diagnostics Log is loaded properly.");
             waitExecuter.waitUntilElementPresent(managePageObject.latestDiagnosticsContentHeader);
-            waitExecuter.sleep(8000);
+            waitExecuter.sleep(9000);
             waitExecuter.waitUntilElementClickable(managePageObject.resetButton);
             Assert.assertTrue(managePageObject.latestDiagnosticsContentHeader.isDisplayed(),"Diagnostics Log " +
                     "content not found.");
@@ -94,7 +94,7 @@ public class TC_M08 extends BaseClass {
         test.log(LogStatus.INFO, "Verified Latest Diagnostics Header and Time Stamp.");
         logger.info("Verified Latest Diagnostics Header and Time Stamp.");
 
-        waitExecuter.sleep(9000);
+        waitExecuter.sleep(5000);
         Assert.assertTrue(manage.verifyLoadLatestDiagnosticsContent(), "Unable to load latest " +
                 "Diagnostics contents.");
         waitExecuter.waitUntilPageFullyLoaded();

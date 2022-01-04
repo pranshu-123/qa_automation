@@ -119,8 +119,6 @@ public class Manage {
     }
 
     public void clickStatsTab(){
-        waitExecuter.waitUntilPageFullyLoaded();
-        MouseActions.clickOnElement(driver, managePageObject.gear);
         waitExecuter.sleep(1000);
         managePageObject.statsTab.click();
         waitExecuter.sleep(3000);

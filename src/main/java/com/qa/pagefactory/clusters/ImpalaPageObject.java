@@ -84,7 +84,7 @@ public class ImpalaPageObject {
     @FindBy(xpath = "//span[contains(@id,'select2-jnam-container')]")
     public List<WebElement> filterElements;
 
-    @FindBy(xpath = "//div[@id=\"queryGraph\"]//label")
+    @FindBy(xpath = "//div[@id='queryGraph']//label")
     public List<WebElement> queriesFooterLabels;
 
     @FindBy(css=".select-resource-type ~ .select2 .selection .select2-selection__arrow")

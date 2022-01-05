@@ -53,11 +53,6 @@ public class TC_CB_39 extends BaseClass {
     DatePicker datePicker = new DatePicker(driver);
     datePicker.clickOnDatePicker();
     datePicker.selectLast90Days();
-//    datePicker.selectCustomRange();
-//    datePicker.setStartDate(DateUtils.getFirstDateOfYear());
-//    datePicker.setEndDate(DateUtils.getCurrentDate());
-  //  datePicker.clickOnCustomDateApplyBtn();
-
     waitExecuter.sleep(2000);
 
     String parentWindow = driver.getWindowHandle();

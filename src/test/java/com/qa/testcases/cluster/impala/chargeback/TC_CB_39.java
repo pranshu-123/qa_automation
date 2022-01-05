@@ -7,6 +7,7 @@ import com.qa.scripts.DatePicker;
 import com.qa.scripts.HomePage;
 import com.qa.scripts.clusters.impala.ChargeBackImpala;
 import com.qa.utils.DateUtils;
+import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
@@ -35,11 +36,12 @@ public class TC_CB_39 extends BaseClass {
     // Select the cluster
     test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
     HomePage homePage = new HomePage(driver);
-    homePage.selectMultiClusterIdClusterPage(clusterId);
-    waitExecuter.sleep(1000);
 
     chargeBackImpala.selectImpalaType("Impala");
     waitExecuter.sleep(2000);
+    homePage.selectMultiClusterIdClusterPage(clusterId);
+    waitExecuter.sleep(1000);
+
 
     CommonPageObject commonPageObject = new CommonPageObject(driver);
     MouseActions.clickOnElement(driver, commonPageObject.clusterDropdown);
@@ -50,15 +52,11 @@ public class TC_CB_39 extends BaseClass {
 
     DatePicker datePicker = new DatePicker(driver);
     datePicker.clickOnDatePicker();
-    datePicker.selectCustomRange();
-    datePicker.setStartDate(DateUtils.getFirstDateOfYear());
-    datePicker.setEndDate(DateUtils.getCurrentDate());
-    datePicker.clickOnCustomDateApplyBtn();
-
+    datePicker.selectLast90Days();
     waitExecuter.sleep(2000);
 
     String parentWindow = driver.getWindowHandle();
-
+    JavaScriptExecuter.scrollOnElement(driver, chargeBackImpala.getImpalaJobsTableRecord().get(0));
     chargeBackImpala.getImpalaJobsTableRecord().get(0).click();
     Assert.assertTrue(driver.getWindowHandles().size() > 1, "two windows is not present");
     test.log(LogStatus.PASS, "Validate window is opened by clicking at impala jobs.");

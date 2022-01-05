@@ -36,7 +36,7 @@ public class Graphs {
         // Empty array to add rgbValue
         List<String> rgbList = new ArrayList<String>();
         // Iterate the list to get the rgb value
-        for (int i = 0; i < listWebelementOfAppName.size(); i++) {
+        for (int i = 0; i < listWebelementOfRGB.size(); i++) {
             String styleTagValue = listWebelementOfRGB.get(i).getAttribute("style");
             String[] arrayOfStyleTagValues = styleTagValue.split(":");
             String rgbValueWithSemiColon = arrayOfStyleTagValues[2];

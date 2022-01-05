@@ -45,7 +45,9 @@ public class ImpalaPageObject {
     @FindBy(xpath = "(//*[@id=\"app\"]/div/div/div/div[3]/div[1]/div[1]/div/div/div/div/div[3]/div/label[6]/span[2]")
     public WebElement Nodecheckbox;
 
-
+    @FindBy(xpath="(//span[@class='select2-selection__rendered'])[1]")
+    public WebElement selectedType;
+    
     public By checkNoDataOnGraph = By.xpath(
             "(.//*[local-name() = 'svg']/*[local-name() = 'g']/*[local-name() = 'text']/*[local-name() = 'tspan'])[1]");
 
@@ -82,7 +84,7 @@ public class ImpalaPageObject {
     @FindBy(xpath = "//span[contains(@id,'select2-jnam-container')]")
     public List<WebElement> filterElements;
 
-    @FindBy(xpath = "//div[@id=\"queryGraph\"]//label")
+    @FindBy(xpath = "//div[@id='queryGraph']//label")
     public List<WebElement> queriesFooterLabels;
 
     @FindBy(css=".select-resource-type ~ .select2 .selection .select2-selection__arrow")

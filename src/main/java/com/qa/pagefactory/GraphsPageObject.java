@@ -18,10 +18,10 @@ import bsh.classpath.BshClassPath.GeneratedClassSource;
 
 public class GraphsPageObject {
 
-	@FindBy(xpath = "//div[contains(@class,'component-dashboard')]/div[2]/div/div[2]/div/div/div[3]/label")
+	@FindBy(xpath ="//div[contains(@class,'footer')]//label")
 	public List<WebElement> listOfAppNameFromFooter;
 
-	@FindBy(xpath = "//div[contains(@class,'component-dashboard')]/div[2]/div/div[2]/div/div/div[3]/label/span")
+	@FindBy(xpath ="//div[contains(@class,'footer')]//label/span/span[@class='checkmark']")
 	public List<WebElement> listOfRGBFromFooter;
 
 	@FindBy(xpath = "//div/h4[text()='By Type']//following::div[contains(@class,'content')]/div/div")

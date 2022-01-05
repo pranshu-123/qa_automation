@@ -147,8 +147,8 @@ public class DatePicker {
      * Method to select 'Last 30 Days' in data picker
      */
     public void selectLast30Days() {
-        waitExecuter.waitUntilElementClickable(datePickerPageObject.last30Days);
-        userActions.performActionWithPolling(datePickerPageObject.last30Days, UserAction.CLICK);
+        waitExecuter.waitUntilElementPresent(datePickerPageObject.last30Days);
+        datePickerPageObject.last30Days.click();
         waitExecuter.waitUntilElementClickable(datePickerPageObject.dateRange);
     }
 

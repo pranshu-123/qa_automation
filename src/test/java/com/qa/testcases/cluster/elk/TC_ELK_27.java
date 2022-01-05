@@ -48,7 +48,7 @@ public class TC_ELK_27 extends BaseClass {
     waitExecuter.waitUntilPageFullyLoaded();
 
     elkPage.verifyClusterDropDown(elkPageObj);
-    elkPage.verifyNodeSpecificGraphs(elkPageObj, kafkaPageObject);
+    elkPage.verifyNodeSpecificGraphs(elkPageObj, kafkaPageObject,4);
 
     test.log(LogStatus.PASS, "Verified ES cluster metrics node specific graph in UI successfully ");
   }

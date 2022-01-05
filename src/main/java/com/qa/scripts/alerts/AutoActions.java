@@ -390,7 +390,7 @@ public class AutoActions {
     }
 
     public void clickOnRunHeader(){
-        if(autoActionsPageObject.headerRunColumn.isDisplayed()){
+    	if(autoActionsPageObject.headerRunColumn.isDisplayed()){
             MouseActions.clickOnElement(driver, autoActionsPageObject.headerRunColumn);
         }else{
             logger.info("AutoAction Table with header is not displayed.");

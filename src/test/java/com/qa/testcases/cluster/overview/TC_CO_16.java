@@ -57,7 +57,7 @@ public class TC_CO_16 extends BaseClass {
          */
         LOGGER.info("Set current and past date");
         test.log(LogStatus.INFO, "Set current and past date");
-        datePicker.setCurrentAndPastDate(-30);
+        datePicker.setCurrentAndPastDate(-90);
         waitExecuter.sleep(1000);
         // Click on apply button of Cluster
         LOGGER.info("Click on apply button");

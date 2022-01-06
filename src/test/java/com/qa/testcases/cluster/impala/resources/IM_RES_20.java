@@ -55,13 +55,13 @@ public class IM_RES_20 extends BaseClass {
     DatePicker datePicker = new DatePicker(driver);
     datePicker.clickOnDatePicker();
     waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
-    datePicker.selectThisMonth();
+    datePicker.selectLastMonth();
     waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
     JavaScriptExecuter.scrollViewWithYAxis(driver,-100);
 
     int scrollY = 150;
     JavaScriptExecuter.scrollViewWithYAxis(driver,scrollY);
-
+    JavaScriptExecuter.scrollOnElement(driver, impalaPageObject.queriesFooterLabels.get(0));
     String user = impala.getQueriesGraphLabels().get(0);
     test.log(LogStatus.INFO, "Deselecting the user: " + user);
     waitExecuter.sleep(5000);

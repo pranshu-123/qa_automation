@@ -4,6 +4,7 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.clusters.HBasePageObject;
+import com.qa.scripts.DatePicker;
 import com.qa.scripts.clusters.HBasePage;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
@@ -40,7 +41,9 @@ public class TC_HB_71  extends BaseClass {
         waitExecuter.waitUntilElementClickable(hBasePageObject.hbaseTab);
         MouseActions.clickOnElement(driver, hBasePageObject.hbaseTab);
         LOGGER.info("Clicked on HBase Tab");
-        hbase.selectDateAsLast30Days();
+      	DatePicker datePicker = new DatePicker(driver);
+        datePicker.clickOnDatePicker();
+        datePicker.selectLast30Days();
         waitExecuter.waitUntilElementPresent(hBasePageObject.hbaseHeader);
         LOGGER.info("HBase headers found: " + hbase.getHBaseHeader());
 

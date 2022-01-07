@@ -57,7 +57,7 @@ public class IM_RES_21 extends BaseClass {
       DatePicker datePicker = new DatePicker(driver);
       datePicker.clickOnDatePicker();
       waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
-      datePicker.selectThisMonth();
+      datePicker.selectLast90Days();
       waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
 
       waitExecuter.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);

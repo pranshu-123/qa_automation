@@ -71,7 +71,7 @@ public class KafkaPageObject {
     @FindBy(xpath = "//*[@id='app']//div[@class='dashboard-section']/h2")
     public WebElement metricsTitle;
 
-    @FindBy(xpath = "//div[@class='col-md-2']/input")
+    @FindBy(xpath = "//div[contains(@class,'col-md-2')]/input")
     public WebElement topicSearchBox;
 
     @FindBy(xpath = "//div[@class='filterclass']/input")

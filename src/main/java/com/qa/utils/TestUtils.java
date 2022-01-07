@@ -190,6 +190,17 @@ public class TestUtils extends TestBase {
 		}
 	}
 
+	public static boolean isElementDisplayed(WebElement element) {
+		boolean flag = false;
+		try {
+			flag = element.isDisplayed();
+			flag = true;
+		} catch (NoSuchElementException e) {
+		
+		}
+		return flag;
+	}
+	
 	public static boolean compareStringArrays(String[] actual, String[] expected) {
 		// ArrayList<String> ar = new ArrayList<String>();
 

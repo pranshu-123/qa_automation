@@ -24,7 +24,6 @@ public class YC_032 extends BaseClass {
 	public void YC_032_verifyYarnJobsTableColumnsOnYarnChargeBackPage(String clusterId) {
 		test = extent.startTest("YC_032_verifyYarnJobsTableColumnsOnYarnChargeBackPage: " + clusterId, "Verify yarn jobs table columns on Yarn chrageback page.");
 		test.assignCategory(" Cluster - Yarn Chargeback");
-
 		ChargeBackYarn chargeBackYarn = new ChargeBackYarn(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);
 		ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);

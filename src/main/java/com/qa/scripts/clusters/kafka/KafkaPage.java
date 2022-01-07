@@ -131,7 +131,6 @@ public class KafkaPage {
 			logger.info("There are no Latest metrics in table.");
 			test.log(LogStatus.SKIP, "There are no Latest metrics present in table");
 		}
-
 	}
 
 	public String getPageNumber(KafkaPageObject kafkaPageObject) {
@@ -207,7 +206,7 @@ public class KafkaPage {
 	public void verifyAxis(String axisPath, String axisName) {
 		List<WebElement> axisPathList = driver.findElements(By.xpath(axisPath));
 		Assert.assertFalse(axisPathList.isEmpty(), "No points plotted on the " + axisName);
-		HashSet<String> axisValSet = new HashSet<>();
+		ArrayList<String> axisValSet = new ArrayList<>();
 		ArrayList<String> axisValArr = new ArrayList<>();
 		for (int i = 0; i < axisPathList.size(); i++) {
 			logger.info("axis value = "+ axisPathList.get(i).getText());
@@ -272,7 +271,7 @@ public class KafkaPage {
 			String colName = brokerColList.get(col).getText();
 			logger.info("The Broker colName is: " + colName);
 			for (int row = 1; row <= brokerRowList.size(); row++) {
-				WebElement rowData = driver.findElement(By.xpath("//tbody[@id='kafkaTopicList-body']/tr[" + row + "]/td[" + (col + 1) + "]/span"));
+				WebElement rowData = driver.findElement(By.xpath("//tbody[@id='undefined-body']/tr[" + row + "]/td[" + (col + 1) + "]/span"));
 				Assert.assertTrue(rowData.isDisplayed(), "No data under column: " + colName);
 				//Check if data has only special charaters
 				boolean onlySpecialChars = rowData.getText().matches("[^a-zA-Z0-9]+");

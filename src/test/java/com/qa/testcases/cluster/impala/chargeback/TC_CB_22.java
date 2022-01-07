@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.UserAction;
 import com.qa.enums.chargeback.GroupByOptions;
 import com.qa.pagefactory.clusters.ChargebackImpalaPageObject;
 import com.qa.scripts.DatePicker;
@@ -51,8 +52,12 @@ public class TC_CB_22 extends BaseClass {
 		LOGGER.info("Select last 90 days", test);
 		chargeBackImpala.clickOnGroupBySearchBox();
 		chargeBackImpala.selectGroupBy(GroupByOptions.INPUT_TABLES);
+		
+		
 		LOGGER.info("Click on groupBy: " + GroupByOptions.INPUT_TABLES.value, test);
 		wait.waitUntilElementClickable(chargebackImpalaPageObject.impalaDropdownOption);
+		chargeBackImpala.clickOnGroupBySearchBox();
+		chargebackImpalaPageObject.groupByUserOption.click();;
 		chargeBackImpala.clickOnGroupBySearchBox();
 		LOGGER.pass("Validated the group by options can be chosen only 2", test);
 		Assert.assertTrue(chargeBackImpala.validateGroupByMessage(),

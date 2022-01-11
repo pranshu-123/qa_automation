@@ -77,7 +77,7 @@ public class TC_JAL_14 extends BaseClass {
             test.log(LogStatus.PASS, "The application in table matches username: " + usernameFromTable);
         } else
             Assert.assertTrue(applicationsPageObject.whenApplicationPresent.isDisplayed(),
-                    "The clusterId does have any application under it and displays any available data for it");
+                    "The clusterId has application under it and displays available data for it");
         executor.executeScript("arguments[0].scrollIntoView();", applicationsPageObject.resetButton);
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         userActions.performActionWithPolling(applicationsPageObject.resetButton, UserAction.CLICK);

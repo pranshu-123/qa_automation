@@ -29,8 +29,14 @@ public class SubTopPanelModulePageObject {
     @FindBy(xpath = "//span[contains(@class,'icon-alerts')]")
     public WebElement alerts;
 
-    @FindBy(xpath = "//span[contains(text(),'Manage')]")
+    @FindBy(xpath = "(//a[@class='menu'])[1]")
     public WebElement gear;
+
+    @FindBy(xpath = "//ul[@class='dropdown-content']//a")
+    public WebElement daemeons;
+
+    @FindBy(xpath = "//a[@href='#/manage/stats']")
+    public WebElement stats;
 
     @FindBy(css = "a.about")
     public WebElement aboutInfo;

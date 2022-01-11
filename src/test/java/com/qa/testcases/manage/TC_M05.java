@@ -34,6 +34,7 @@ public class TC_M05 extends BaseClass {
         waitExecuter.sleep(3000);
         MouseActions.clickOnElement(driver, subTopPanelModulePageObject.gear);
         test.log(LogStatus.INFO, "Verified Manage Tab is clicked.");
+        waitExecuter.waitUntilPageFullyLoaded();
 
         Manage manage = new Manage(driver);
         //Validate daemon header default
@@ -41,7 +42,11 @@ public class TC_M05 extends BaseClass {
         Assert.assertEquals(daemonHeader, "Daemons", "Daemons Header not matched.");
         test.log(LogStatus.INFO, "Verified Manage Page is loaded successfully.");
 
+        waitExecuter.waitUntilPageFullyLoaded();
+        MouseActions.clickOnElement(driver, subTopPanelModulePageObject.daemeons);
         //Click on Stats tab and validate header
+        waitExecuter.waitUntilPageFullyLoaded();
+        MouseActions.clickOnElement(driver, subTopPanelModulePageObject.gear);
         waitExecuter.sleep(2000);
         manage.clickStatsTab();
         test.log(LogStatus.INFO, "Clicked on Stats Tab.");

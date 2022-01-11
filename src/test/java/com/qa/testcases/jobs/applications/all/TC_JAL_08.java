@@ -45,14 +45,15 @@ public class TC_JAL_08 extends BaseClass {
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         // Get total app counts before applying filter
         waitExecuter.sleep(1000);
-
-        String totalCountBeforeFilter = applicationsPageObject.getTotalAppCount.getText();
+        int totalCountBeforeFilter = Integer
+                .parseInt(applicationsPageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
+        waitExecuter.sleep(2000);
         test.log(LogStatus.INFO, "Get total app counts before applying filter " + totalCountBeforeFilter);
         LOGGER.info("Get total app counts before applying filter " + totalCountBeforeFilter);
         // Select cluster
         test.log(LogStatus.INFO, "Select clusterid : " + clusterId);
         LOGGER.info("Select clusterId : " + clusterId);
-        allApps.selectCluster(clusterId);
+        /*allApps.selectCluster(clusterId);*/
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         // To apply filter - De-select all application types
         test.log(LogStatus.INFO, "To apply filter - De-select all application types");
@@ -63,10 +64,12 @@ public class TC_JAL_08 extends BaseClass {
         // After de-selecting app type check the app counts
         int totalCountAfterFilter = Integer
                 .parseInt(applicationsPageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
+        waitExecuter.sleep(2000);
         test.log(LogStatus.INFO, "After de-selecting app type check the app counts " + totalCountAfterFilter);
         LOGGER.info("After de-selecting app type check the app counts " + totalCountAfterFilter);
-        Assert.assertEquals(totalCountAfterFilter, 0,
-                "After de-selecting all app types, Showing result does not display '0' but " + totalCountAfterFilter);
+        Assert.assertEquals(totalCountAfterFilter, totalCountBeforeFilter, "After de-selecting all app types is not equal to " +
+                "the total count of heading.");
+        waitExecuter.waitUntilPageFullyLoaded();
         // Click on reset button
         test.log(LogStatus.INFO, "Click on reset button");
         LOGGER.info("Click on reset button");
@@ -74,7 +77,8 @@ public class TC_JAL_08 extends BaseClass {
         waitExecuter.sleep(2000);
 
         // Get total app count after clicking on reset button
-        String totalCountAfterReset = applicationsPageObject.getTotalAppCount.getText();
+        int totalCountAfterReset = Integer
+                .parseInt(applicationsPageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
         waitExecuter.sleep(2000);
         test.log(LogStatus.INFO, "Get total app count after clicking on reset button " + totalCountAfterReset);
         LOGGER.info("Get total app count after clicking on reset button " + totalCountAfterReset);
@@ -83,3 +87,4 @@ public class TC_JAL_08 extends BaseClass {
         test.log(LogStatus.PASS, "Total count of application are same before and after filter ");
     }
 }
+

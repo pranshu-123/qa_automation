@@ -131,8 +131,8 @@ public class TC_HIVE_38 extends BaseClass {
             test.log(LogStatus.PASS, "The max duration match the slider duration.");
             waitExecuter.sleep(2000);
         } else {
-            Assert.assertEquals(applicationsPageObject.whenNoApplicationPresent.getText(), "No Data Available",
-                    "For 0 application hive 'No Data Available' is not displayed");
+            Assert.assertEquals(applicationsPageObject.whenNoApplicationPresent.getText(), "There is no information available.",
+                    "For 0 application hive 'There is no information available.' is not displayed");
             test.log(LogStatus.SKIP, "Hive apps are not available for the selected duration and cluster.");
         }
         // Reset slider duration to default

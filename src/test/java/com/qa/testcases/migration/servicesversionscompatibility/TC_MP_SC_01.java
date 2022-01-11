@@ -32,7 +32,7 @@ public class TC_MP_SC_01 extends BaseClass {
                 new ServicesAndVersionsCompatibilityPageObject(driver);
 
         servicesAndVersionsCompatibility.setupServicesAndVersionsCompatibilityPage();
-        servicesAndVersionsCompatibility.clickOnServicesAndVersionMigrationTab();
+        /*servicesAndVersionsCompatibility.clickOnServicesAndVersionMigrationTab();*/
         //servicesAndVersionsCompatibility.closeMessageBanner();
         servicesAndVersionsCompatibility.clickOnRunButton();
         String cloudProductName = "Google Dataproc";

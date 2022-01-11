@@ -28,7 +28,7 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//input[@class='display-time']")
     public WebElement clickTime;
 
-    @FindBy(css = "div.close")
+    @FindBy(css = "button.close")
     public WebElement closeButton;
 
     @FindBy(xpath = "//input[@class='display-time']/following::select[@class='hours']")

@@ -35,12 +35,16 @@ public class TC_M02 extends BaseClass {
         test.log(LogStatus.INFO, "Verified Manage Tab is clicked.");
         logger.info("Verified Manage Tab is clicked.");
 
+
         Manage manage = new Manage(driver);
         //Validate daemon header default
         String daemonHeader = manage.validateDaemonHeader();
         Assert.assertEquals(daemonHeader, "Daemons", "Daemons Header not matched.");
         test.log(LogStatus.INFO, "Verified Manage Page is loaded successfully.");
         logger.info("Verified Manage Page is loaded successfully.");
+
+        waitExecuter.waitUntilPageFullyLoaded();
+        MouseActions.clickOnElement(driver, subTopPanelModulePageObject.daemeons);
 
         //Validate daemons table is populated
         Assert.assertTrue(manage.validateDaemonsCountInTbl(), "Daemons not found in the table.");

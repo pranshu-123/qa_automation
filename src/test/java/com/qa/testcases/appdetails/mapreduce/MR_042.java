@@ -10,6 +10,7 @@ import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.MrAppsDetailsPage;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.testcases.jobs.applications.details.hive.TC_HIVE_42;
+import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.Log;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
@@ -67,7 +68,8 @@ public class MR_042 extends BaseClass {
         LOGGER.info("To apply status filter - De-select all status types");
         allApps.deselectAllStatusTypes();
         waitExecuter.sleep(2000);
-
+        int scrollY = 100;
+        JavaScriptExecuter.scrollViewWithYAxis(driver, scrollY);
         /*
          * Validate that status types are --
          * "Killed","Failed","Running","Success","Pending","Unknown", "Waiting"
@@ -78,7 +80,7 @@ public class MR_042 extends BaseClass {
         List<String> existingStatusTypes = new ArrayList<>(Arrays.asList(PageConstants.JobsStatusType.STATUSTYPE));
         List<WebElement> statusTypes = applicationsPageObject.getStatusTypes;
         List<String> listOfStatusTypes = new ArrayList<String>();
-        waitExecuter.sleep(2000);
+        waitExecuter.sleep(3000);
         for (int i = 0; i < statusTypes.size(); i++) {
             listOfStatusTypes.add(statusTypes.get(i).getText().trim());
         }
@@ -91,11 +93,11 @@ public class MR_042 extends BaseClass {
         test.log(LogStatus.INFO, "Select single app and assert that table contain its data.");
         LOGGER.info("Select single app and assert that table contain its data.");
         List<WebElement> clickOnIndividualStatus = applicationsPageObject.selectSingleStatusType;
-        waitExecuter.sleep(2000);
+        waitExecuter.sleep(3000);
         for (int i = 0; i < clickOnIndividualStatus.size(); i++) {
-            waitExecuter.sleep(2000);
+            waitExecuter.sleep(4000);
             clickOnIndividualStatus.get(i).click();
-            waitExecuter.sleep(2000);
+            waitExecuter.sleep(4000);
             int appCount = Integer
                     .parseInt(applicationsPageObject.statusJobCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
             LOGGER.info("Status app count- " + appCount);

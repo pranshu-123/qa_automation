@@ -13,7 +13,7 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/a")
     public List<WebElement> confirmationMessageElementClose;
 
-    @FindBy(xpath = "(//span[contains(text(),'Run')])")
+    @FindBy(xpath = "//button[@class='run-btn']")
     public WebElement runButton;
 
     @FindBy(xpath = "//a[@href='#/clusters/overview']")

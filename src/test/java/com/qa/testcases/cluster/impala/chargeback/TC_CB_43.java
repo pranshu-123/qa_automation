@@ -38,10 +38,11 @@ public class TC_CB_43 extends BaseClass {
         // Select the cluster
         test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
         HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterIdClusterPage(clusterId);
-        waitExecuter.sleep(1000);
+
         chargeBackImpala.selectImpalaType("Impala");
         waitExecuter.sleep(2000);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
+        waitExecuter.sleep(1000);
         waitExecuter.waitUntilPageFullyLoaded();
         datePicker.clickOnDatePicker();
         datePicker.selectLast90Days();

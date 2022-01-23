@@ -35,7 +35,7 @@ public class Manage {
     }
 
     public String validateDaemonHeader(){
-        waitExecuter.sleep(1000);
+        waitExecuter.sleep(2000);
         String headers = managePageObject.daemonsHeader.getText();
         logger.info("Daemons Header found:"+headers);
         return headers;
@@ -51,7 +51,6 @@ public class Manage {
     }
 
     public Boolean validateAllTabsPresent(){
-        MouseActions.clickOnElement(driver, managePageObject.gear);
         logger.info("Number of tabs on manage: "+managePageObject.allManageTabList.size());
         List<String> allTabsOnManagePage = new ArrayList<String>();
         for(int i=0; i<managePageObject.allManageTabList.size(); i++){

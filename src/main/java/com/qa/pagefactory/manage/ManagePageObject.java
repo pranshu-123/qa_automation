@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class ManagePageObject {
 
-    @FindBy(xpath="//*[@id=\"app\"]//div[1]/nav//div[1]/div/ul/li/a")
+    @FindBy(xpath="//*[@id=\"app\"]//div[1]/nav//div[2]/div/ul/li")
     public List<WebElement> allManageTabList;
 
     //@FindBy(css = "div#daemons-template h1")

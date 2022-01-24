@@ -55,7 +55,7 @@ public class TuningPageObject {
     @FindBy(xpath = "//input[@type='email']/following-sibling::span")
     public WebElement addEmail;
 
-    @FindBy(xpath = "//div[@id='breadcrumb']/span/span")
+    @FindBy(xpath = "//span[text()='Archives']")
     public WebElement archivesText;
 
     @FindBy(xpath = "//div[@class='close pointer']")

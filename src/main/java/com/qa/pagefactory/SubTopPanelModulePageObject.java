@@ -29,10 +29,10 @@ public class SubTopPanelModulePageObject {
     @FindBy(xpath = "//span[contains(@class,'icon-alerts')]")
     public WebElement alerts;
 
-    @FindBy(xpath = "(//a[@class='menu'])[1]")
+    @FindBy(xpath = "(//a[@class='menu'])[2]")
     public WebElement gear;
 
-    @FindBy(xpath = "//ul[@class='dropdown-content']//a")
+    @FindBy(xpath = "//span[normalize-space()='Daemons']")
     public WebElement daemeons;
 
     @FindBy(xpath = "//a[@href='#/manage/stats']")

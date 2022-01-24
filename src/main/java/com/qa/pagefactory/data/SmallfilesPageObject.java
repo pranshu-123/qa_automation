@@ -270,7 +270,7 @@ public class SmallfilesPageObject {
     @FindBy(xpath = "//*[@id=\"topx-landing-page\"]/div/div[3]/div[3]/div[3]/span/div[2]/div/select[2]/option[61]")
     public List<WebElement> Fiftynine;
 
-    @FindBy(xpath = "//div[@id='breadcrumb']/span[2]/span")
+    @FindBy(xpath = "//span[text()='Small File Report']")
     public WebElement archiveReportSVCHeader;
 
     @FindBy(xpath = "//tbody/tr[1]/td[2]")
@@ -294,7 +294,7 @@ public class SmallfilesPageObject {
     @FindBy(xpath="//div[contains(@class,'popover')]/div/span[contains(@class,'pending')]")
     public WebElement deleteOkBtn;
 
-    @FindBy(xpath="(//div[@id='breadcrumb']/span/span)[1]")
+    @FindBy(xpath="//span[normalize-space()='Archives']")
     public WebElement archives;
 
     @FindBy(xpath = "(//*[@role='dialog'])")

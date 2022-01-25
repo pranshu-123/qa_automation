@@ -47,7 +47,7 @@ public class FileReportsPageObject {
   @FindBy(xpath = "//button[normalize-space()='empty']")
   public WebElement selecteEmptyFileOpt;
 
-  @FindBy(xpath = "//div[@class='col-md-2']/input")
+  @FindBy(xpath = "//label[text()='Cluster']/following::input")
   public WebElement searchField;
 
   @FindBy(xpath = "//table[@class='component-data-tables row-hover']/thead/tr/th")

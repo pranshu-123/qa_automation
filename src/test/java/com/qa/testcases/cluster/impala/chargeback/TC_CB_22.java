@@ -32,6 +32,7 @@ public class TC_CB_22 extends BaseClass {
 				"Validate Charge Back report " + "when Grouped by \"inputTables\"");
 		test.assignCategory(" Cluster - Impala Chargeback");
 		ChargeBackImpala chargeBackImpala = new ChargeBackImpala(driver);
+	    WaitExecuter waitExecuter = new WaitExecuter(driver);
 		ChargebackImpalaPageObject chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
 		chargeBackImpala.selectImpalaChargeback();
 		LOGGER.info("Navigate to impala chargeback page", test);
@@ -40,11 +41,10 @@ public class TC_CB_22 extends BaseClass {
 		WaitExecuter wait = new WaitExecuter(driver);
 		// Select the cluster
 		test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
+
+        chargeBackImpala.selectImpalaType("Impala");
+        waitExecuter.sleep(2000);
 		homePage.selectMultiClusterIdClusterPage(clusterId);
-
-		chargeBackImpala.selectImpalaType("Impala");
-		wait.sleep(2000);
-
 		LOGGER.info("Selected cluster: " + clusterId, test);
 		DatePicker datePicker = new DatePicker(driver);
 		datePicker.clickOnDatePicker();

@@ -19,7 +19,7 @@ public class ManagePageObject {
     @FindBy(xpath="//span[normalize-space()='Daemons']")
     public WebElement daemonsHeader;
 
-    @FindBy(xpath = "(//a[@class='menu'])[1]")
+    @FindBy(xpath = "(//a[@class='menu'])[2]")
     public WebElement gear;
 
     @FindBy(xpath = "(//ul[@class='sub-menu']/li[contains(@class,'router-link-active')]/span[@class='selected'])[7]")

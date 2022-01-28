@@ -29,10 +29,10 @@ public class SubTopPanelModulePageObject {
     @FindBy(xpath = "//span[contains(@class,'icon-alerts')]")
     public WebElement alerts;
 
-    @FindBy(xpath = "(//a[@class='menu'])[1]")
+    @FindBy(xpath = "(//a[@class='menu'])[2]")
     public WebElement gear;
 
-    @FindBy(xpath = "//ul[@class='dropdown-content']//a")
+    @FindBy(xpath = "//span[normalize-space()='Daemons']")
     public WebElement daemeons;
 
     @FindBy(xpath = "//a[@href='#/manage/stats']")
@@ -50,7 +50,7 @@ public class SubTopPanelModulePageObject {
     @FindBy(xpath = "//li[contains(@class,'active')]//span[contains(text(),'Pipelines')]")
     public WebElement pipelinesTab;
 
-    @FindBy(xpath = "(//a[@class='menu'])[2]")
+    @FindBy(xpath = "//div[@class='header-dropdown help-center-dropdown']//a[@class='menu']")
     public WebElement helpCenterMenu;
 
     @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Services And Versions Compatibility'])")

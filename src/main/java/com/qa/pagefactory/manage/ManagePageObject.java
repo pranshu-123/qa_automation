@@ -12,14 +12,14 @@ import java.util.List;
  */
 public class ManagePageObject {
 
-    @FindBy(xpath="//*[@id=\"app\"]//div[1]/nav//div[1]/div/ul/li/a")
+    @FindBy(xpath="//*[@id=\"app\"]//div[1]/nav//div[2]/div/ul/li")
     public List<WebElement> allManageTabList;
 
     //@FindBy(css = "div#daemons-template h1")
     @FindBy(xpath="//span[normalize-space()='Daemons']")
     public WebElement daemonsHeader;
 
-    @FindBy(xpath = "(//a[@class='menu'])[1]")
+    @FindBy(xpath = "(//a[@class='menu'])[2]")
     public WebElement gear;
 
     @FindBy(xpath = "(//ul[@class='sub-menu']/li[contains(@class,'router-link-active')]/span[@class='selected'])[7]")

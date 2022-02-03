@@ -31,6 +31,7 @@ public class DC_02 extends BaseClass{
 		chargeBackCluster.validatePieChartGraph();
 		chargeBackCluster.validateResultSetIsDisplayedWithValues();
 		chargeBackCluster.validateResultSet(expectedValues);
+
 	}
 
 }

@@ -155,8 +155,9 @@ public class Jobs {
 	 */
 	public boolean selectGroupByFilterValue(String value) {
 		try {
-			waitExecuter.waitUntilElementPresent(jobsPageObject.groupByUser);
-			waitExecuter.sleep(2000);
+			waitExecuter.sleep(3000);
+			clickOnGroupByDropDown();
+			waitExecuter.sleep(1000);
 			if(value.equalsIgnoreCase("user")) {
 				jobsPageObject.groupByUser.click();
 			}
@@ -171,7 +172,7 @@ public class Jobs {
 			}
 
 		} catch (WebDriverException e) {
-			LOGGER.info("click On select ApplicationType is:" + e.getStackTrace());
+			LOGGER.info("click On select Group by is failed due to:" + e.getMessage());
 		}
 		return false;
 	}

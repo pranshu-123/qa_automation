@@ -9,13 +9,14 @@ import com.qa.scripts.databricks.cost.ChargeBackCluster;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 
-public class DC_03 extends BaseClass{
+public class DC_05 extends BaseClass{
 
 	@Test
-	public void TC_Cost_CB_03_VerifyChargebackGraphGroupByUser() {
-		test = extent.startTest("TC_Cost_CB_03_VerifyChargebackGraphGroupByUser", "\"User\" Graph validation");
+	public void TC_Cost_CB_05_VerifyChargebackResultGroupByWorkspace() {
+		test = extent.startTest("TC_Cost_CB_05_VerifyChargebackResultGroupByWorkspace", "If \"Workspace\" is selected the table should show all the apps as per workspace");
 		test.assignCategory("Cluster / Job");
-		Log.startTestCase("TC_Cost_CB_01_VerifyGroupByFilter");
+		Log.startTestCase("TC_Cost_CB_05_VerifyChargebackResultGroupByWorkspace");
+		String[] expectedValues = {"AI_Workspace","ML_Workspace","4730_PG"};
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  
 		DatePicker datePicker = new DatePicker(driver);
@@ -25,8 +26,9 @@ public class DC_03 extends BaseClass{
 
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
-		jobs.selectGroupByFilterValue("User");
+		jobs.selectGroupByFilterValue("Workspace");
 		chargeBackCluster.validatePieChartGraph();
-		chargeBackCluster.validateGeneratedPieChartValues();
+		chargeBackCluster.validateResultSetIsDisplayedWithValues("Workspace");
+		chargeBackCluster.validateResultSet(expectedValues);
 	}
 }

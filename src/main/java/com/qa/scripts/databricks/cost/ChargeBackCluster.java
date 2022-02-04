@@ -2,12 +2,14 @@ package com.qa.scripts.databricks.cost;
 
 import com.qa.pagefactory.clusters.ChargebackImpalaPageObject;
 import com.qa.pagefactory.databricks.cost.ChargebackClusterPageObject;
+import com.qa.scripts.DatePicker;
 import com.qa.scripts.clusters.impala.ChargeBackImpala;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -19,7 +21,8 @@ public class ChargeBackCluster {
 	private final ChargebackImpalaPageObject chargebackImpalaPageObject;
 	private final UserActions userActions;
 	private final ChargebackClusterPageObject chargebackClusterPageObject;
-
+	private final DatePicker datePicker;
+	
 	/**
 	 * Constructer to initialize wait, driver and necessary objects
 	 *
@@ -31,9 +34,11 @@ public class ChargeBackCluster {
 		chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
 		userActions = new UserActions(driver);
 		chargebackClusterPageObject = new ChargebackClusterPageObject(driver);
+		datePicker = new DatePicker(driver);
 	}
 
 	public void navigateToCostTab(String tab) {
+		waitExecuter.sleep(3500);
 		if(tab.equalsIgnoreCase("trends")) {
 			chargebackClusterPageObject.costTrendsTab.click();
 		}
@@ -46,12 +51,12 @@ public class ChargeBackCluster {
 	}
 
 	public List<String> fetchAllGroupByFilterValues(){
+		waitExecuter.sleep(3000);
 		chargebackClusterPageObject.groupBy.click();
 		List<String> list =chargebackClusterPageObject.groupByValues.stream()
 				.map(a-> a.getText())
 				.collect(Collectors.toList());
 		return list;
-
 	}
 
 	public void validatePieChartGraph() {
@@ -62,6 +67,7 @@ public class ChargeBackCluster {
 	}
 
 	public void validateGeneratedPieChartValues() {
+		waitExecuter.sleep(1500);
 		List<String> pieChartValues = chargebackClusterPageObject.pieChartValues.stream()
 				.map(values -> values.getText()).distinct().skip(1)
 				.collect(Collectors.toList());
@@ -83,19 +89,26 @@ public class ChargeBackCluster {
 		}
 	}
 
-	public void validateResultSetIsDisplayedWithValues() {
-		chargebackClusterPageObject.user.isDisplayed();
+	public void validateResultSetIsDisplayedWithValues(String groupBy) {
+		String header = chargebackClusterPageObject.lblResultSetHeader.getText();
+		Assert.assertTrue(header.equalsIgnoreCase(groupBy));
 		chargebackClusterPageObject.dbu.isDisplayed();
 		chargebackClusterPageObject.cost.isDisplayed();
 		chargebackClusterPageObject.clusterCount.isDisplayed();
 		chargebackClusterPageObject.resultSetValues.stream().iterator().next().isDisplayed();
 	}
-	
+
 	public void selectOptimize() {
 		chargebackClusterPageObject.optimize.click();
 	}
-	
-	
+
+	public void validateDate() {
+		String date = datePicker.getDate(30);
+		//String datefromCostPage = date.toString();
+		String selectedDate = chargebackClusterPageObject.selectedDates.getText();
+		Assert.assertTrue(selectedDate.contains(date));
+	}
+
 }
 
 

@@ -44,6 +44,9 @@ public class ChargebackClusterPageObject {
     @FindBy(xpath = "//ul[contains(@id,'results')]/li")
     public List<WebElement> groupByValues;
     
+    @FindBy(xpath = "//label[contains(text(),'Chargeback results group by')]/b")
+    public WebElement lblResultSetHeader;
+    
     @FindBy(xpath = "//th/span[contains(text(),'User')]")
     public WebElement user;
     
@@ -61,6 +64,10 @@ public class ChargebackClusterPageObject {
     
     @FindBy(xpath = "//button[contains(text(),'Copy URL')]/../../..//td/span")
     public List<WebElement> resultSetValues;
+    
+    @FindBy(xpath = "//div[@class='component-date-picker']/span")
+    public WebElement selectedDates;
+    
     /**
      * @param driver The driver that will be used to look up the elements
      */

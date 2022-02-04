@@ -16,7 +16,7 @@ public class DC_04 extends BaseClass{
 	public void TC_Cost_CB_04_VerifyChargebackOptimizeFunctionality() {
 		test = extent.startTest("TC_Cost_CB_04_VerifyChargebackOptimizeFunctionality", "Verify \"Optimize\" Chargeback as per User group");
 		test.assignCategory("Cluster / Job");
-		Log.startTestCase("TC_Cost_CB_04_VerifyGroupByFilter");
+		Log.startTestCase("TC_Cost_CB_04_VerifyChargebackOptimizeFunctionality");
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  
 		DatePicker datePicker = new DatePicker(driver);
@@ -31,7 +31,7 @@ public class DC_04 extends BaseClass{
 		chargeBackCluster.selectOptimize();
 		waitExecuter.sleep(2000);
 		String url = driver.getCurrentUrl();
-		
+		chargeBackCluster.validateDate();
 		Assert.assertTrue(url.contains("compute/dbclusters"));
 	}
 }

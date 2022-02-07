@@ -20,7 +20,7 @@ public class ChargebackClusterPageObject {
 	@FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Budget'])")
 	public WebElement costBudgetTab;
 	
-    @FindBy(xpath = "//span[@id='select2-mjwl-container']")
+    @FindBy(xpath = "//span[@title='Cluster']")
     public WebElement chargeBackType;
     
     @FindBy(xpath = "//ul[@class='select2-results__options']/li")
@@ -68,6 +68,20 @@ public class ChargebackClusterPageObject {
     @FindBy(xpath = "//div[@class='component-date-picker']/span")
     public WebElement selectedDates;
     
+    @FindBy(xpath = "//h4[contains(text(),'Cluster')]/../h4/span")
+    public WebElement clusterValue;
+    
+    @FindBy(xpath = "//h4[contains(text(),'Cost')]/../h4/span")
+    public WebElement costValue;
+    
+    @FindBy(xpath = "//h4[contains(text(),'DBU')]/../h4/span")
+    public WebElement dbuValue;
+    
+    public String dbuDownloadFormat = "//h4[contains(text(),'DBU')]/..//a[contains(text(),'%s')]";
+    
+    public String costDownloadFormat = "//h4[contains(text(),'Cost')]/..//a[contains(text(),'%s')]";
+    
+    public String clusterDownloadFormat = "//h4[contains(text(),'Cluster')]/..//a[contains(text(),'%s')]";
     /**
      * @param driver The driver that will be used to look up the elements
      */

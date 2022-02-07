@@ -6,6 +6,8 @@ import com.qa.scripts.DatePicker;
 import com.qa.scripts.clusters.impala.ChargeBackImpala;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
@@ -22,7 +24,7 @@ public class ChargeBackCluster {
 	private final UserActions userActions;
 	private final ChargebackClusterPageObject chargebackClusterPageObject;
 	private final DatePicker datePicker;
-	
+
 	/**
 	 * Constructer to initialize wait, driver and necessary objects
 	 *
@@ -38,11 +40,13 @@ public class ChargeBackCluster {
 	}
 
 	public void navigateToCostTab(String tab) {
-		waitExecuter.sleep(3500);
+		waitExecuter.sleep(2000);
+		waitExecuter.waitUntilPageFullyLoaded();
 		if(tab.equalsIgnoreCase("trends")) {
 			chargebackClusterPageObject.costTrendsTab.click();
 		}
 		else if(tab.equalsIgnoreCase("chargeback")) {
+			waitExecuter.waitUntilElementClickable(chargebackClusterPageObject.costChargeBackTab);
 			chargebackClusterPageObject.costChargeBackTab.click();
 		}
 		else {
@@ -59,9 +63,12 @@ public class ChargeBackCluster {
 		return list;
 	}
 
-	public void validatePieChartGraph() {
-		chargebackClusterPageObject.graphsHeader.stream()
-		.forEach(graph -> graph.isDisplayed());
+	public void validatePieChartGraph(String[] headers) {
+		List<String> list = chargebackClusterPageObject.graphsHeader.stream()
+				.map(graph -> graph.getText()).collect(Collectors.toList());
+		for(String s : headers) {
+			list.contains(s);
+		}
 		chargebackClusterPageObject.pieGraph.stream()
 		.forEach(graph -> graph.isDisplayed());
 	}
@@ -109,6 +116,39 @@ public class ChargeBackCluster {
 		Assert.assertTrue(selectedDate.contains(date));
 	}
 
+	public void selectDownloadOption(String type,String format) {
+		if(type.equalsIgnoreCase("dbu")) {
+			chargebackClusterPageObject.graphsThreeDots.get(0).click();
+			driver.findElement(By.xpath(String.format(chargebackClusterPageObject.dbuDownloadFormat,format))).click();}
+		else if(type.equalsIgnoreCase("cost")) {
+			chargebackClusterPageObject.graphsThreeDots.get(1).click();
+		}
+		else {
+			chargebackClusterPageObject.graphsThreeDots.get(2).click();	
+		}
+	}
+
+	public String calculateDBUSumFromResultSet() {
+		double sum =0.00;
+		int size = chargebackClusterPageObject.resultSetValues.size();
+		for(int i =1; i< size;i=i+7) {
+			sum = sum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText());
+		}
+
+		return String.valueOf(sum);
+	}
+
+	public String fetchDBUValueFromGraph() {
+		return chargebackClusterPageObject.dbuValue.getText();
+	}
+
+	public void selectChargebackType(String type) {
+		if(type.equalsIgnoreCase("Cluster")) {}
+		else {
+			chargebackClusterPageObject.chargeBackType.click();
+			chargebackClusterPageObject.chargeBackTypeValues.get(1).click();
+		}
+	}
 }
 
 

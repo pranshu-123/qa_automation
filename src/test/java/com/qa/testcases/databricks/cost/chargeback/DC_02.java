@@ -1,5 +1,7 @@
 package com.qa.testcases.databricks.cost.chargeback;
 
+import java.util.logging.Logger;
+
 import org.testng.annotations.Test;
 
 import com.qa.base.BaseClass;
@@ -8,15 +10,19 @@ import com.qa.scripts.clusters.Jobs;
 import com.qa.scripts.databricks.cost.ChargeBackCluster;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
+import com.relevantcodes.extentreports.LogStatus;
 
 public class DC_02 extends BaseClass{
 
+	private static final Logger LOGGER = Logger.getLogger(DC_02.class.getName());
+	
 	@Test
 	public void TC_Cost_CB_02_VerifyChargebackResultGroupByUser() {
 		test = extent.startTest("TC_Cost_CB_02_VerifyChargebackResultGroupByUser", "If \"user\" is selected the table should show all the apps run by the users");
 		test.assignCategory("Cluster / Job");
 		Log.startTestCase("TC_Cost_CB_02_VerifyChargebackResultGroupByUser");
 		String[] expectedValues = {"root","smananghat@unraveldata.com"};
+		String[] expectedGraphValues = {"DBU","Cost","Cluster"};
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  
 		DatePicker datePicker = new DatePicker(driver);
@@ -27,10 +33,11 @@ public class DC_02 extends BaseClass{
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
 		jobs.selectGroupByFilterValue("User");
-		chargeBackCluster.validatePieChartGraph();
+		chargeBackCluster.validatePieChartGraph(expectedGraphValues);
 		chargeBackCluster.validateResultSetIsDisplayedWithValues("User");
 		chargeBackCluster.validateResultSet(expectedValues);
-
+		test.log(LogStatus.PASS, "Result table was displayed correctly");
+		LOGGER.info("Result table was displayed correctly");
 	}
 
 }

@@ -13,15 +13,15 @@ import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 
-public class DC_07 extends BaseClass{
+public class DC_28 extends BaseClass{
 
-	private static final Logger LOGGER = Logger.getLogger(DC_07.class.getName());
-	
+	private static final Logger LOGGER = Logger.getLogger(DC_28.class.getName());
+
 	@Test
-	public void TC_Cost_CB_07_VerifyChargebackOptimizeFunctionalityForWorkspaceType() {
-		test = extent.startTest("TC_Cost_CB_07_VerifyChargebackOptimizeFunctionalityForWorkspaceType", "Verify \"Optimize\" Chargeback as per User group");
+	public void TC_Cost_CB_28_VerifyDBUCountOnGeneratedGraph() {
+		test = extent.startTest("TC_Cost_CB_28_VerifyDBUCountOnGeneratedGraph", "Add up the DBUs of the result and verify the total DBUs is populated correctly on generated graph ");
 		test.assignCategory("Cluster / Job");
-		Log.startTestCase("TC_Cost_CB_07_VerifyChargebackOptimizeFunctionalityForWorkspaceType");
+		Log.startTestCase("TC_Cost_CB_28_VerifyDBUCountOnGeneratedGraph");
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  
 		DatePicker datePicker = new DatePicker(driver);
@@ -33,13 +33,12 @@ public class DC_07 extends BaseClass{
 		datePicker.selectLast30Days();
 		jobs.clickOnGroupByDropDown();
 		jobs.selectGroupByFilterValue("Workspace");
-		chargeBackCluster.selectOptimize();
-		waitExecuter.sleep(2000);
-		String url = driver.getCurrentUrl();
-		chargeBackCluster.validateDate();
-		Assert.assertTrue(url.contains("compute/dbclusters"));
-		test.log(LogStatus.PASS, "Compute page succesfully opened up");
-		LOGGER.info("Compute page succesfully opened up");
+		
+		String actualValue = chargeBackCluster.calculateDBUSumFromResultSet();
+		String expectedVale = chargeBackCluster.fetchDBUValueFromGraph();
+		Assert.assertTrue(actualValue.equals(expectedVale), "DBU value calculated from Result Set does not matches with the value populated in DBU Graph");
+		test.log(LogStatus.PASS, "DBU values are matching.");
+		LOGGER.info("DBU values are matching.");
 	}
 
 }

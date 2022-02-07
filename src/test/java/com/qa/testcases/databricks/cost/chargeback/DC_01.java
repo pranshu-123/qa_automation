@@ -1,6 +1,8 @@
 package com.qa.testcases.databricks.cost.chargeback;
 
 import java.util.List;
+import java.util.logging.Logger;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.qa.annotations.Marker;
@@ -10,10 +12,12 @@ import com.qa.scripts.clusters.Jobs;
 import com.qa.scripts.databricks.cost.ChargeBackCluster;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
+import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.DbCostChargeback
 public class DC_01 extends BaseClass{
 
+	private static final Logger LOGGER = Logger.getLogger(DC_01.class.getName());
 	@Test
 	public void TC_Cost_CB_01_VerifyGroupByFilter() {
 		test = extent.startTest("TC_Cost_CB_01_VerifyGroupByFilter", "The \"group by\" options should switch all the tabs accordingly (Users, workspaces, cluster, Tag Key)	");
@@ -40,5 +44,7 @@ public class DC_01 extends BaseClass{
 		chargeBackCluster.validateResultSetIsDisplayedWithValues("Cluster");
 		jobs.selectGroupByFilterValue("Tag Key");
 		chargeBackCluster.validateResultSetIsDisplayedWithValues("Tag Key");
+		test.log(LogStatus.PASS, "Group By filter display all 4 types: User, Workspace, Cluster, Tag key");
+		LOGGER.info("Group By filter display all 4 types: User, Workspace, Cluster, Tag key");
 	}
 }

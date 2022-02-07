@@ -155,9 +155,9 @@ public class Jobs {
 	 */
 	public boolean selectGroupByFilterValue(String value) {
 		try {
-			waitExecuter.sleep(3000);
+			waitExecuter.sleep(2000);
 			clickOnGroupByDropDown();
-			waitExecuter.sleep(1000);
+			waitExecuter.sleep(2000);
 			if(value.equalsIgnoreCase("user")) {
 				jobsPageObject.groupByUser.click();
 			}

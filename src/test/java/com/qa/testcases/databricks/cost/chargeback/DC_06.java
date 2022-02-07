@@ -16,6 +16,7 @@ public class DC_06 extends BaseClass{
 		test = extent.startTest("TC_Cost_CB_06_VerifyChargebackGraphGroupByWorkspace", "\"Workspace\" Graph validation");
 		test.assignCategory("Cluster / Job");
 		Log.startTestCase("TC_Cost_CB_06_VerifyChargebackGraphGroupByWorkspace");
+		String[] expectedGraphValues = {"DBU","Cost","Cluster"};
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  
 		DatePicker datePicker = new DatePicker(driver);
@@ -25,7 +26,7 @@ public class DC_06 extends BaseClass{
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
 		jobs.selectGroupByFilterValue("Workspace");
-		chargeBackCluster.validatePieChartGraph();
+		chargeBackCluster.validatePieChartGraph(expectedGraphValues);
 		chargeBackCluster.validateGeneratedPieChartValues();
 	}
 }

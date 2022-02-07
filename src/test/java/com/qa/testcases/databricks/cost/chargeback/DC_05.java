@@ -17,6 +17,7 @@ public class DC_05 extends BaseClass{
 		test.assignCategory("Cluster / Job");
 		Log.startTestCase("TC_Cost_CB_05_VerifyChargebackResultGroupByWorkspace");
 		String[] expectedValues = {"AI_Workspace","ML_Workspace","4730_PG"};
+		String[] expectedGraphValues = {"DBU","Cost","Cluster"};
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  
 		DatePicker datePicker = new DatePicker(driver);
@@ -27,7 +28,7 @@ public class DC_05 extends BaseClass{
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
 		jobs.selectGroupByFilterValue("Workspace");
-		chargeBackCluster.validatePieChartGraph();
+		chargeBackCluster.validatePieChartGraph(expectedGraphValues);
 		chargeBackCluster.validateResultSetIsDisplayedWithValues("Workspace");
 		chargeBackCluster.validateResultSet(expectedValues);
 	}

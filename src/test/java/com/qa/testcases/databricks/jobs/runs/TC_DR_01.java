@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-@Marker.DbJobsRuns
+@Marker.DbxJobsRuns
 @Marker.All
 public class TC_DR_01 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_DR_01.class.getName());

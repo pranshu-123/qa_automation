@@ -6,12 +6,9 @@ import com.qa.scripts.DatePicker;
 import com.qa.scripts.clusters.impala.ChargeBackImpala;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -26,7 +23,7 @@ public class ChargeBackCluster {
 	private final DatePicker datePicker;
 
 	/**
-	 * Constructer to initialize wait, driver and necessary objects
+	 * Constructor to initialize wait, driver and necessary objects
 	 *
 	 * @param driver - WebDriver instance
 	 */
@@ -42,11 +39,11 @@ public class ChargeBackCluster {
 	public void navigateToCostTab(String tab) {
 		waitExecuter.sleep(2000);
 		waitExecuter.waitUntilPageFullyLoaded();
+		waitExecuter.waitUntilElementClickable(chargebackClusterPageObject.costChargeBackTab);
 		if(tab.equalsIgnoreCase("trends")) {
 			chargebackClusterPageObject.costTrendsTab.click();
 		}
 		else if(tab.equalsIgnoreCase("chargeback")) {
-			waitExecuter.waitUntilElementClickable(chargebackClusterPageObject.costChargeBackTab);
 			chargebackClusterPageObject.costChargeBackTab.click();
 		}
 		else {
@@ -134,7 +131,6 @@ public class ChargeBackCluster {
 		for(int i =1; i< size;i=i+7) {
 			sum = sum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText());
 		}
-
 		return String.valueOf(sum);
 	}
 
@@ -148,6 +144,12 @@ public class ChargeBackCluster {
 			chargebackClusterPageObject.chargeBackType.click();
 			chargebackClusterPageObject.chargeBackTypeValues.get(1).click();
 		}
+	}
+	
+	public void filterCost(String filter) {
+		waitExecuter.waitUntilElementClickable(chargebackClusterPageObject.filterByDropDown);
+		chargebackClusterPageObject.filterByDropDown.click();
+		driver.findElement(By.xpath(String.format(chargebackClusterPageObject.filterByValues,filter))).click();
 	}
 }
 

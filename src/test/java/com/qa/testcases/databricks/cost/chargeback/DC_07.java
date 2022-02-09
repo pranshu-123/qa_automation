@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.clusters.Jobs;
@@ -13,6 +14,7 @@ import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 
+@Marker.DbxCostChargeback
 public class DC_07 extends BaseClass{
 
 	private static final Logger LOGGER = Logger.getLogger(DC_07.class.getName());

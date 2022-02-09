@@ -29,8 +29,8 @@ public class CostTrends {
 	 * @param driver - WebDriver instance
 	 */
 	public CostTrends(WebDriver driver) {
-		waitExecuter = new WaitExecuter(driver);
 		this.driver = driver;
+		waitExecuter = new WaitExecuter(driver);
 		chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
 		userActions = new UserActions(driver);
 		chargebackClusterPageObject = new ChargebackClusterPageObject(driver);
@@ -39,6 +39,8 @@ public class CostTrends {
 	}
 
 	public void validateGraphFooter(String footer) {
+		waitExecuter.waitUntilElementPresent(trendsPageObject.dbuGraphHeader);
+		waitExecuter.sleep(1500);
 		trendsPageObject.graphFooter.stream()
 		.forEach(f ->f.getText().equals(footer));
 	}
@@ -48,6 +50,10 @@ public class CostTrends {
 		Assert.assertTrue(trendsPageObject.costGraphHeader.isDisplayed());
 		Assert.assertTrue(trendsPageObject.clusterGraphHeader.isDisplayed());
 		trendsPageObject.generatedGraph.stream().forEach(f -> f.isDisplayed());
+	}
+	
+	public void selectChargeback() {
+		trendsPageObject.dbuChargebackButton.click();
 	}
 	
 }

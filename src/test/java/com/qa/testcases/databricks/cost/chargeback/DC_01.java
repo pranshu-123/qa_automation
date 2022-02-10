@@ -14,7 +14,7 @@ import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 
-@Marker.DbCostChargeback
+@Marker.DbxCostChargeback
 public class DC_01 extends BaseClass{
 
 	private static final Logger LOGGER = Logger.getLogger(DC_01.class.getName());

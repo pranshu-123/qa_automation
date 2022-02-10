@@ -3,30 +3,23 @@ package com.qa.scripts.databricks.cost;
 import com.qa.pagefactory.clusters.ChargebackImpalaPageObject;
 import com.qa.pagefactory.databricks.cost.ChargebackClusterPageObject;
 import com.qa.scripts.DatePicker;
-import com.qa.scripts.clusters.impala.ChargeBackImpala;
 import com.qa.utils.WaitExecuter;
-import com.qa.utils.actions.UserActions;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-
-import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class ChargeBackCluster {
-	private static final Logger LOGGER = Logger.getLogger(ChargeBackImpala.class.getName());
+
 	private final WaitExecuter waitExecuter;
 	private final WebDriver driver;
 	private final ChargebackImpalaPageObject chargebackImpalaPageObject;
-	private final UserActions userActions;
 	private final ChargebackClusterPageObject chargebackClusterPageObject;
 	private final DatePicker datePicker;
 
 	/**
-	 * Constructer to initialize wait, driver and necessary objects
+	 * Constructor to initialize wait, driver and necessary objects
 	 *
 	 * @param driver - WebDriver instance
 	 */
@@ -34,7 +27,6 @@ public class ChargeBackCluster {
 		waitExecuter = new WaitExecuter(driver);
 		this.driver = driver;
 		chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
-		userActions = new UserActions(driver);
 		chargebackClusterPageObject = new ChargebackClusterPageObject(driver);
 		datePicker = new DatePicker(driver);
 	}
@@ -42,11 +34,11 @@ public class ChargeBackCluster {
 	public void navigateToCostTab(String tab) {
 		waitExecuter.sleep(2000);
 		waitExecuter.waitUntilPageFullyLoaded();
+		waitExecuter.waitUntilElementClickable(chargebackClusterPageObject.costChargeBackTab);
 		if(tab.equalsIgnoreCase("trends")) {
 			chargebackClusterPageObject.costTrendsTab.click();
 		}
 		else if(tab.equalsIgnoreCase("chargeback")) {
-			waitExecuter.waitUntilElementClickable(chargebackClusterPageObject.costChargeBackTab);
 			chargebackClusterPageObject.costChargeBackTab.click();
 		}
 		else {
@@ -111,7 +103,6 @@ public class ChargeBackCluster {
 
 	public void validateDate() {
 		String date = datePicker.getDate(30);
-		//String datefromCostPage = date.toString();
 		String selectedDate = chargebackClusterPageObject.selectedDates.getText();
 		Assert.assertTrue(selectedDate.contains(date));
 	}
@@ -134,7 +125,6 @@ public class ChargeBackCluster {
 		for(int i =1; i< size;i=i+7) {
 			sum = sum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText());
 		}
-
 		return String.valueOf(sum);
 	}
 
@@ -148,6 +138,13 @@ public class ChargeBackCluster {
 			chargebackClusterPageObject.chargeBackType.click();
 			chargebackClusterPageObject.chargeBackTypeValues.get(1).click();
 		}
+	}
+	
+	public void filterCost(String filter) {
+		waitExecuter.waitUntilElementClickable(chargebackClusterPageObject.filterByDropDown);
+		waitExecuter.sleep(1500);
+		chargebackClusterPageObject.filterByDropDown.click();
+		driver.findElement(By.xpath(String.format(chargebackClusterPageObject.filterByValues,filter))).click();
 	}
 }
 

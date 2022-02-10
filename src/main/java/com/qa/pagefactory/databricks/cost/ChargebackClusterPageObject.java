@@ -77,11 +77,17 @@ public class ChargebackClusterPageObject {
     @FindBy(xpath = "//h4[contains(text(),'DBU')]/../h4/span")
     public WebElement dbuValue;
     
+    @FindBy(xpath = "//span[@class='select2-selection__rendered']")
+    public WebElement filterByDropDown;
+    
+    public String filterByValues = "//li[contains(text(),'%s')]";
+    
     public String dbuDownloadFormat = "//h4[contains(text(),'DBU')]/..//a[contains(text(),'%s')]";
     
     public String costDownloadFormat = "//h4[contains(text(),'Cost')]/..//a[contains(text(),'%s')]";
     
     public String clusterDownloadFormat = "//h4[contains(text(),'Cluster')]/..//a[contains(text(),'%s')]";
+   
     /**
      * @param driver The driver that will be used to look up the elements
      */

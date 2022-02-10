@@ -56,4 +56,10 @@ public class CostTrends {
 		trendsPageObject.dbuChargebackButton.click();
 	}
 	
+	public void filterSingleValue(String value) {
+		waitExecuter.waitUntilElementPresent(trendsPageObject.dbuGraphHeader);
+		waitExecuter.sleep(1500);
+		trendsPageObject.searchTextArea.sendKeys(value);
+		trendsPageObject.searchResult.click();
+	}
 }

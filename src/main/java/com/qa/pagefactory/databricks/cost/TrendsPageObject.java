@@ -43,6 +43,12 @@ public class TrendsPageObject {
     @FindBy(xpath = "//div[@class='highcharts-container ']")
     public List<WebElement> generatedGraph;
     
+    @FindBy(xpath = "//input[@class='select2-search__field']")
+    public WebElement searchTextArea;
+    
+    @FindBy(xpath = "//li[@class='select2-results__option select2-results__option--highlighted']")
+    public WebElement searchResult;
+    
     /**
      * @param driver The driver that will be used to look up the elements
      */

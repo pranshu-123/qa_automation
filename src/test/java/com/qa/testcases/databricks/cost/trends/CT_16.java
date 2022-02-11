@@ -23,7 +23,7 @@ public class CT_16 extends BaseClass{
 	@Test
 	public void TC_Cost_Trends_16_VerifyOptimizeFunctionalityForSingleUser() {
 		test = extent.startTest("TC_Cost_Trends_16_VerifyOptimizeFunctionalityForSingleUser", "Validate Optimize for single User");
-		test.assignCategory("Cluster / Job");
+		test.assignCategory("Cost/Trends");
 		Log.startTestCase("TC_Cost_Trends_16_VerifyOptimizeFunctionalityForSingleUser");
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  

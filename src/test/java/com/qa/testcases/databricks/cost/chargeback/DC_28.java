@@ -22,7 +22,7 @@ public class DC_28 extends BaseClass{
 	@Test
 	public void TC_Cost_CB_28_VerifyDBUCountOnGeneratedGraph() {
 		test = extent.startTest("TC_Cost_CB_28_VerifyDBUCountOnGeneratedGraph", "Add up the DBUs of the result and verify the total DBUs is populated correctly on generated graph ");
-		test.assignCategory("Cluster / Job");
+		test.assignCategory("Cost/Chargeback");
 		Log.startTestCase("TC_Cost_CB_28_VerifyDBUCountOnGeneratedGraph");
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  
@@ -35,8 +35,9 @@ public class DC_28 extends BaseClass{
 		datePicker.selectLast30Days();
 		jobs.clickOnGroupByDropDown();
 		jobs.selectGroupByFilterValue("Workspace");
-		
-		String actualValue = chargeBackCluster.calculateDBUSumFromResultSet();
+		waitExecuter.sleep(2000);
+		String resultSetValue = chargeBackCluster.calculateDBUSumFromResultSet();
+		String actualValue = resultSetValue.substring(0,resultSetValue.indexOf(".")+3);
 		String expectedVale = chargeBackCluster.fetchDBUValueFromGraph();
 		Assert.assertTrue(actualValue.equals(expectedVale), "DBU value calculated from Result Set does not matches with the value populated in DBU Graph");
 		test.log(LogStatus.PASS, "DBU values are matching.");

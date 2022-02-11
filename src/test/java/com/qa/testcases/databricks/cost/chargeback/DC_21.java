@@ -23,7 +23,7 @@ public class DC_21  extends BaseClass{
 	@Test
 	public void TC_Cost_CB_21_VerifyDownloadInSVGFormat() {
 		test = extent.startTest("TC_Cost_CB_21_VerifyDownloadInSVGFormat", "Verify download in SVG format");
-		test.assignCategory("Cluster / Job");
+		test.assignCategory("Cost/Chargeback");
 		Log.startTestCase("TC_Cost_CB_21_VerifyDownloadInSVGFormat");
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  

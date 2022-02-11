@@ -22,7 +22,7 @@ public class DC_04 extends BaseClass{
 	@Test
 	public void TC_Cost_CB_04_VerifyChargebackOptimizeFunctionality() {
 		test = extent.startTest("TC_Cost_CB_04_VerifyChargebackOptimizeFunctionality", "Verify \"Optimize\" Chargeback as per User group");
-		test.assignCategory("Cluster / Job");
+		test.assignCategory("Cost/Chargeback");
 		Log.startTestCase("TC_Cost_CB_04_VerifyChargebackOptimizeFunctionality");
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  

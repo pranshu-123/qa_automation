@@ -15,17 +15,15 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.DbxCostTrends
-public class CT_15 extends BaseClass{
+public class CT_06 extends BaseClass{
 
-	private static final Logger LOGGER = Logger.getLogger(CT_15.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(CT_06.class.getName());
 	
 	@Test
-	public void TC_Cost_Trends_15_VerifyChargebackFunctionalityForSingleUser() {
-		test = extent.startTest("TC_Cost_Trends_15_VerifyChargebackFunctionalityForSingleUser", "Validate Chareback for single User");
+	public void TC_Cost_Trends_06_VerifyChargebackForCostWorkspaceTrends() {
+		test = extent.startTest("TC_Cost_Trends_06_VerifyChargebackForCostWorkspaceTrends", "Validate Chargeback functionality for Workspace Trends");
 		test.assignCategory("Cost/Trends");
-		Log.startTestCase("TC_Cost_Trends_15_VerifyChargebackFunctionalityForSingleUser");
-		String[] expectedValues = {"root"};
-		String[] expectedGraphValues = {"DBU","Cost","Cluster"};
+		Log.startTestCase("TC_Cost_Trends_06_VerifyChargebackForCostWorkspaceTrends");
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		CostTrends costTrends = new CostTrends(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  
@@ -35,18 +33,14 @@ public class CT_15 extends BaseClass{
 
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
-		chargeBackCluster.filterCost("Users");
-		costTrends.filterSingleValue("root");
 		costTrends.selectChargeback();
 		waitExecuter.sleep(2000);
 		String url = driver.getCurrentUrl();
 		chargeBackCluster.validateDate();
 		Assert.assertTrue(url.contains("/cost/chargeback"));
-		chargeBackCluster.validatePieChartGraph(expectedGraphValues);
-		chargeBackCluster.validateResultSetIsDisplayedWithValues("User");
-		chargeBackCluster.validateResultSet(expectedValues);
 		
-		test.log(LogStatus.PASS, "Navigated to Cost Chargeback page and result set was displayed as per selected user");
-		LOGGER.info("Navigated to Cost Chargeback page and result set was displayed as per selected user");
+		test.log(LogStatus.PASS, "Navigated to Cost Chargeback page");
+		LOGGER.info("Navigated to Cost Chargeback page");
 	}
-	}
+
+}

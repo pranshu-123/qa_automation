@@ -22,7 +22,7 @@ public class DC_06 extends BaseClass{
 	@Test
 	public void TC_Cost_CB_06_VerifyChargebackGraphGroupByWorkspace() {
 		test = extent.startTest("TC_Cost_CB_06_VerifyChargebackGraphGroupByWorkspace", "\"Workspace\" Graph validation");
-		test.assignCategory("Cluster / Job");
+		test.assignCategory("Cost/Chargeback");
 		Log.startTestCase("TC_Cost_CB_06_VerifyChargebackGraphGroupByWorkspace");
 		String[] expectedGraphValues = {"DBU","Cost","Cluster"};
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);

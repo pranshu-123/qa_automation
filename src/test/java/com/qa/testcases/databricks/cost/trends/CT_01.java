@@ -18,7 +18,7 @@ public class CT_01 extends BaseClass{
 	@Test
 	public void TC_Cost_Trends_01_VerifyGroupByFilter() {
 		test = extent.startTest("TC_Cost_CB_01_VerifyGroupByFilter", "The \"group by\" options should switch all the tabs accordingly (Users, workspaces, cluster, Tag Key)");
-		test.assignCategory(" Cluster / Job");
+		test.assignCategory("Cost/Trends");
 		Log.startTestCase("TC_Cost_CB_01_VerifyGroupByFilter");
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  

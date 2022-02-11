@@ -22,7 +22,7 @@ public class DC_05 extends BaseClass{
 	@Test
 	public void TC_Cost_CB_05_VerifyChargebackResultGroupByWorkspace() {
 		test = extent.startTest("TC_Cost_CB_05_VerifyChargebackResultGroupByWorkspace", "If \"Workspace\" is selected the table should show all the apps as per workspace");
-		test.assignCategory("Cluster / Job");
+		test.assignCategory("Cost/Chargeback");
 		Log.startTestCase("TC_Cost_CB_05_VerifyChargebackResultGroupByWorkspace");
 		String[] expectedValues = {"AI_Workspace","ML_Workspace","4730_PG"};
 		String[] expectedGraphValues = {"DBU","Cost","Cluster"};

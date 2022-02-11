@@ -21,7 +21,7 @@ public class DC_02 extends BaseClass{
 	@Test
 	public void TC_Cost_CB_02_VerifyChargebackResultGroupByUser() {
 		test = extent.startTest("TC_Cost_CB_02_VerifyChargebackResultGroupByUser", "If \"user\" is selected the table should show all the apps run by the users");
-		test.assignCategory("Cluster / Job");
+		test.assignCategory("Cost/Chargeback");
 		Log.startTestCase("TC_Cost_CB_02_VerifyChargebackResultGroupByUser");
 		String[] expectedValues = {"root","smananghat@unraveldata.com"};
 		String[] expectedGraphValues = {"DBU","Cost","Cluster"};

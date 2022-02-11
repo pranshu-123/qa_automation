@@ -21,7 +21,7 @@ public class CT_14 extends BaseClass{
 	@Test
 	public void TC_Cost_Trends_14_ValidateGraphForSingleUser() {
 		test = extent.startTest("TC_Cost_Trends_14_ValidateGraphForSingleUser", "Validate Graph for single User");
-		test.assignCategory("Cluster / Job");
+		test.assignCategory("Cost/Trends");
 		Log.startTestCase("TC_Cost_Trends_14_ValidateGraphForSingleUser");
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		CostTrends costTrends = new CostTrends(driver);

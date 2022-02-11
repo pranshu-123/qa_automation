@@ -21,7 +21,7 @@ public class DC_03 extends BaseClass{
 	@Test
 	public void TC_Cost_CB_03_VerifyChargebackGraphGroupByUser() {
 		test = extent.startTest("TC_Cost_CB_03_VerifyChargebackGraphGroupByUser", "\"User\" Graph validation");
-		test.assignCategory("Cluster / Job");
+		test.assignCategory("Cost/Chargeback");
 		Log.startTestCase("TC_Cost_CB_01_VerifyGroupByFilter");
 		String[] expectedGraphValues = {"DBU","Cost","Cluster"};
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);

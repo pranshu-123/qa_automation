@@ -22,7 +22,7 @@ public class DC_31  extends BaseClass{
 	@Test
 	public void TC_Cost_CB_31_VerifyJobRunChargeback() {
 		test = extent.startTest("TC_Cost_CB_31_VerifyJobRunChargeback", "Validate JobRun chargeback type");
-		test.assignCategory("Cluster / Job");
+		test.assignCategory("Cost/Chargeback");
 		Log.startTestCase("TC_Cost_CB_31_VerifyJobRunChargeback");
 		String[] expectedValues = {"DBU","Cost","JobRuns"};
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);

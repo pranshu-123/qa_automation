@@ -12,6 +12,7 @@ import com.qa.scripts.clusters.Jobs;
 import com.qa.scripts.databricks.cost.ChargeBackCluster;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
+import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.DbxCostChargeback
 public class DC_04 extends BaseClass{
@@ -39,5 +40,8 @@ public class DC_04 extends BaseClass{
 		String url = driver.getCurrentUrl();
 		chargeBackCluster.validateDate();
 		Assert.assertTrue(url.contains("compute/dbclusters"));
+
+		test.log(LogStatus.PASS, "Navigated to Cluster page");
+		LOGGER.info("Navigated to Cluster page");
 	}
 }

@@ -1,5 +1,7 @@
 package com.qa.testcases.databricks.cost.chargeback;
 
+import java.util.logging.Logger;
+
 import org.testng.annotations.Test;
 
 import com.qa.annotations.Marker;
@@ -7,12 +9,16 @@ import com.qa.base.BaseClass;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.clusters.Jobs;
 import com.qa.scripts.databricks.cost.ChargeBackCluster;
+import com.qa.testcases.databricks.cost.trends.CT_03;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
+import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.DbxCostChargeback
 public class DC_06 extends BaseClass{
 
+	private static final Logger LOGGER = Logger.getLogger(DC_06.class.getName());
+	
 	@Test
 	public void TC_Cost_CB_06_VerifyChargebackGraphGroupByWorkspace() {
 		test = extent.startTest("TC_Cost_CB_06_VerifyChargebackGraphGroupByWorkspace", "\"Workspace\" Graph validation");
@@ -30,5 +36,7 @@ public class DC_06 extends BaseClass{
 		jobs.selectGroupByFilterValue("Workspace");
 		chargeBackCluster.validatePieChartGraph(expectedGraphValues);
 		chargeBackCluster.validateGeneratedPieChartValues();
+		test.log(LogStatus.PASS, "Graph populated as  per Group By filter");
+		LOGGER.info("Graph populated as  per Group By filter");
 	}
 }

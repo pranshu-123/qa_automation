@@ -38,5 +38,6 @@ public class DC_06 extends BaseClass{
 		chargeBackCluster.validateGeneratedPieChartValues();
 		test.log(LogStatus.PASS, "Graph populated as  per Group By filter");
 		LOGGER.info("Graph populated as  per Group By filter");
+		
 	}
 }

@@ -39,7 +39,6 @@ public class DC_05 extends BaseClass{
 		chargeBackCluster.validatePieChartGraph(expectedGraphValues);
 		chargeBackCluster.validateResultSetIsDisplayedWithValues("Workspace");
 		chargeBackCluster.validateResultSet(expectedValues);
-
 		test.log(LogStatus.PASS, "Result populated as  per Group By filter");
 		LOGGER.info("Result populated as  per Group By filter");
 	}

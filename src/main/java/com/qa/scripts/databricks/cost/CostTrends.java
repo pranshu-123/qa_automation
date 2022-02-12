@@ -53,6 +53,7 @@ public class CostTrends {
 	}
 	
 	public void selectChargeback() {
+		waitExecuter.sleep(3000);
 		trendsPageObject.dbuChargebackButton.click();
 	}
 	

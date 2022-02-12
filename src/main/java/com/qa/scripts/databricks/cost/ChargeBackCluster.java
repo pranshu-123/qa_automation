@@ -5,6 +5,7 @@ import com.qa.pagefactory.databricks.cost.ChargebackClusterPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.utils.WaitExecuter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import java.util.List;
@@ -32,18 +33,21 @@ public class ChargeBackCluster {
 	}
 
 	public void navigateToCostTab(String tab) {
-		waitExecuter.sleep(2000);
+		waitExecuter.sleep(3000);
 		waitExecuter.waitUntilPageFullyLoaded();
 		waitExecuter.waitUntilElementClickable(chargebackClusterPageObject.costChargeBackTab);
-		if(tab.equalsIgnoreCase("trends")) {
-			chargebackClusterPageObject.costTrendsTab.click();
+		try {
+			if(tab.equalsIgnoreCase("trends")) {
+				chargebackClusterPageObject.costTrendsTab.click();
+			}
+			else if(tab.equalsIgnoreCase("chargeback")) {
+				chargebackClusterPageObject.costChargeBackTab.click();
+			}
+			else {
+				chargebackClusterPageObject.costBudgetTab.click();
+			}
 		}
-		else if(tab.equalsIgnoreCase("chargeback")) {
-			chargebackClusterPageObject.costChargeBackTab.click();
-		}
-		else {
-			chargebackClusterPageObject.costBudgetTab.click();
-		}
+		catch(ElementClickInterceptedException e) {}
 	}
 
 	public List<String> fetchAllGroupByFilterValues(){
@@ -139,10 +143,10 @@ public class ChargeBackCluster {
 			chargebackClusterPageObject.chargeBackTypeValues.get(1).click();
 		}
 	}
-	
+
 	public void filterCost(String filter) {
 		waitExecuter.waitUntilElementClickable(chargebackClusterPageObject.filterByDropDown);
-		waitExecuter.sleep(1500);
+		waitExecuter.sleep(2500);
 		chargebackClusterPageObject.filterByDropDown.click();
 		driver.findElement(By.xpath(String.format(chargebackClusterPageObject.filterByValues,filter))).click();
 	}

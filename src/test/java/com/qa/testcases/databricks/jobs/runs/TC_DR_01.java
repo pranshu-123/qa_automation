@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class TC_DR_01 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_DR_01.class.getName());
 
-    @Test(dataProvider = "clusterid-data-provider")
+    @Test()
     public void validateFilterByClusterName(String clusterId) {
         test = extent.startTest("TC_DR_01.validateFilterByClusterName",
                 "Verify Jobs page should populate the data as per selected cluster");
@@ -39,7 +39,7 @@ public class TC_DR_01 extends BaseClass {
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         test.log(LogStatus.INFO, "Select last 7 days");
         test.log(LogStatus.INFO, "Select clusterId : " + clusterId);
-        allApps.inJobsSelectClusterAndLast7Days(clusterId);
+        allApps.inJobsSelectClusterAndLast7Days();
 
         // Select cluster
         test.log(LogStatus.INFO, "Select clusterid : " + clusterId);

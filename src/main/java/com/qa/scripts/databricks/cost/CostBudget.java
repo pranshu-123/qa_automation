@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import com.qa.pagefactory.clusters.ChargebackImpalaPageObject;
@@ -38,6 +39,10 @@ public class CostBudget {
 
 	public void createNewBudget(String budgetName) {
 		waitExecuter.waitUntilElementClickable(budgetPageObject.newBudget);
+		if(budgetPageObject.activeBudgetTable.stream().map(f -> f.getText())
+				.collect(Collectors.toList()).contains(budgetName)) {
+			deleteExistingBudget(budgetName);
+		}
 		budgetPageObject.newBudget.click();
 		budgetPageObject.addBudgetName.sendKeys(budgetName);
 		budgetPageObject.addBudgetDescription.sendKeys(budgetName);
@@ -57,20 +62,44 @@ public class CostBudget {
 		budgetPageObject.yes.click();
 	}
 
+	public void editExistingBudget(String budgetName) {
+		driver.findElement(By.xpath(String.format(budgetPageObject.edit,budgetName))).click();
+		waitExecuter.sleep(1000);
+		Select select = new Select(budgetPageObject.scopeDropdown);
+		select.selectByIndex(4);
+		waitExecuter.sleep(1000);
+		budgetPageObject.users.click();
+		budgetPageObject.users.sendKeys("root");
+		waitExecuter.sleep(1000);
+		budgetPageObject.searchResult.click();
+		waitExecuter.sleep(1000);
+		budgetPageObject.addBudgetSave.click();
+	}
+
 	public void verifyBudgetPageObjects() {
 		Assert.assertTrue(budgetPageObject.newBudget.isDisplayed());
 		budgetPageObject.activeBudgetTable.stream().forEach(element -> element.isDisplayed());
 		Assert.assertTrue(budgetPageObject.upcomingBudgetTable.isDisplayed());
 		Assert.assertTrue(budgetPageObject.expiredBudgetTable.isDisplayed());
 	}
-	
+
 	public void verifyBudgetActiveSectionColumns(String[] columnHeader) {
 		List<String> list = budgetPageObject.activeBudgetTableHeader.stream().distinct()
-		.map(header -> header.getText())
-		.collect(Collectors.toList());
-		
+				.map(header -> header.getText())
+				.collect(Collectors.toList());
+
 		for(String header : columnHeader) {
 			Assert.assertTrue(list.contains(header),header + " column missing.");
 		}
+	}
+
+	public void selectActionButton(String action) {
+		waitExecuter.sleep(2000);
+		driver.navigate().refresh();
+		driver.findElement(By.xpath(String.format(budgetPageObject.actionButtons,action))).click();
+	}
+
+	public void verifyUpdatedScope(String scope) {
+		Assert.assertTrue(budgetPageObject.addedScope.getText().contains(scope));
 	}
 }

@@ -16,11 +16,6 @@ import com.qa.utils.actions.UserActions;
 public class CostTrends {
 	private static final Logger LOGGER = Logger.getLogger(ChargeBackImpala.class.getName());
 	private final WaitExecuter waitExecuter;
-	private final WebDriver driver;
-	private final ChargebackImpalaPageObject chargebackImpalaPageObject;
-	private final UserActions userActions;
-	private final ChargebackClusterPageObject chargebackClusterPageObject;
-	private final DatePicker datePicker;
 	private final TrendsPageObject trendsPageObject;
 
 	/**
@@ -29,12 +24,11 @@ public class CostTrends {
 	 * @param driver - WebDriver instance
 	 */
 	public CostTrends(WebDriver driver) {
-		this.driver = driver;
 		waitExecuter = new WaitExecuter(driver);
-		chargebackImpalaPageObject = new ChargebackImpalaPageObject(driver);
-		userActions = new UserActions(driver);
-		chargebackClusterPageObject = new ChargebackClusterPageObject(driver);
-		datePicker = new DatePicker(driver);
+		new ChargebackImpalaPageObject(driver);
+		new UserActions(driver);
+		new ChargebackClusterPageObject(driver);
+		new DatePicker(driver);
 		trendsPageObject = new TrendsPageObject(driver);
 	}
 

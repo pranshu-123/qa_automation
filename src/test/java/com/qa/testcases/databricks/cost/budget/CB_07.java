@@ -13,23 +13,28 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.DbxCostBudget
-public class CB_01 extends BaseClass{
+public class CB_07  extends BaseClass{
 
-	private static final Logger LOGGER = Logger.getLogger(CB_01.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(CB_07.class.getName());
 	
 	@Test
-	public void TC_Cost_Budget_01_validateBudgetPageElements() {
-		test = extent.startTest("TC_Cost_Budget_01_validateBudgetPageElements", "Validate Budget page objects");
+	public void TC_Cost_Budget_07_editCreatedBudget() {
+		test = extent.startTest("TC_Cost_Budget_07_editCreatedBudget", "Create new active Budget");
 		test.assignCategory("Cost/Budget");
-		Log.startTestCase("TC_Cost_Budget_01_validateBudgetPageElements");
+		Log.startTestCase("TC_Cost_Budget_07_editCreatedBudget");
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  
 		CostBudget costBudget = new CostBudget(driver);
 		chargeBackCluster.navigateToCostTab("Budget");
 		LOGGER.info("Navigated to Cost Budget Page");
 		waitExecuter.sleep(2000);
-		costBudget.verifyBudgetPageObjects();
-		test.log(LogStatus.PASS, "All the elements are listed correctly");
-		LOGGER.info("All the elements are listed correctly");
+		costBudget.createNewBudget("Test Budget");
+		costBudget.validateCreatedBudget("Test Budget");
+		test.log(LogStatus.PASS, "New Budget creaated successfully.");
+		LOGGER.info("New Budget creaated successfully.");
+		costBudget.editExistingBudget("Test Budget");
+		LOGGER.info("Budget Edited successfully.");
+		costBudget.verifyUpdatedScope("root");
+		LOGGER.info("Budget Edited sucessfully.");
 	}
 }

@@ -1,7 +1,7 @@
 package com.qa.testcases.databricks.cost.budget;
 
 import java.util.logging.Logger;
-
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
@@ -11,17 +11,16 @@ import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 
-
 @Marker.DbxCostBudget
-public class CB_03  extends BaseClass{
+public class CB_06 extends BaseClass{
 
-	
-	private static final Logger LOGGER = Logger.getLogger(CB_03.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(CB_06.class.getName());
+
 	@Test
-	public void TC_Cost_Budget_03_createNewBudget() {
-		test = extent.startTest("TC_Cost_Budget_03_createNewBudget", "Create new active Budget");
+	public void TC_Cost_Budget_06_validateNewBudgetOptimize() {
+		test = extent.startTest("TC_Cost_Budget_06_validateNewBudgetOptimize", "Validate Optimize feature for added Budget");
 		test.assignCategory("Cost/Budget");
-		Log.startTestCase("TC_Cost_Budget_03_createNewBudget");
+		Log.startTestCase("TC_Cost_Budget_06_validateNewBudgetOptimize");
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  
 		CostBudget costBudget = new CostBudget(driver);
@@ -30,8 +29,16 @@ public class CB_03  extends BaseClass{
 		waitExecuter.sleep(2000);
 		costBudget.createNewBudget("Test Budget");
 		costBudget.validateCreatedBudget("Test Budget");
-		test.log(LogStatus.PASS, "New Budget creaated successfully.");
 		LOGGER.info("New Budget creaated successfully.");
+		costBudget.selectActionButton("Chargeback");
+		waitExecuter.sleep(2000);
+		String url = driver.getCurrentUrl();
+		Assert.assertTrue(url.contains("/compute/dbclusters"));
+		LOGGER.info("Navigated to compute page");
+		test.log(LogStatus.PASS, "Navigated to cost trends page");	
+		chargeBackCluster.navigateToCostTab("Budget");
+		waitExecuter.sleep(2000);
+		costBudget.deleteExistingBudget("Test Budget");
+		LOGGER.info("New Budget deleted successfully.");
 	}
-
 }

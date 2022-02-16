@@ -2,6 +2,7 @@ package com.qa.testcases.databricks.cost.budget;
 
 import java.util.logging.Logger;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.qa.annotations.Marker;
@@ -13,23 +14,33 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.DbxCostBudget
-public class CB_08 extends BaseClass{
+public class CB_04 extends BaseClass{
 
-	private static final Logger LOGGER = Logger.getLogger(CB_08.class.getName());
-	
+	private static final Logger LOGGER = Logger.getLogger(CB_04.class.getName());
+
 	@Test
-	public void TC_Cost_Budget_08_deleteCreatedBudget() {
-		test = extent.startTest("TC_Cost_Budget_08_deleteCreatedBudget", "Delete existing budget");
+	public void TC_Cost_Budget_04_validateNewBudgetTrends() {
+		test = extent.startTest("TC_Cost_Budget_04_validateNewBudgetTrends", "Validate New Budget Trends");
 		test.assignCategory("Cost/Budget");
-		Log.startTestCase("TC_Cost_Budget_08_deleteCreatedBudget");
+		Log.startTestCase("TC_Cost_Budget_04_validateNewBudgetTrends");
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  
 		CostBudget costBudget = new CostBudget(driver);
 		chargeBackCluster.navigateToCostTab("Budget");
 		LOGGER.info("Navigated to Cost Budget Page");
 		waitExecuter.sleep(2000);
+		costBudget.createNewBudget("Test Budget");
+		costBudget.validateCreatedBudget("Test Budget");
+		LOGGER.info("New Budget creaated successfully.");
+		costBudget.selectActionButton("Trends");
+		waitExecuter.sleep(2000);
+		String url = driver.getCurrentUrl();
+		Assert.assertTrue(url.contains("/cost/trends"));
+		LOGGER.info("Navigated to cost trends page");
+		test.log(LogStatus.PASS, "Navigated to cost trends page");	
+		chargeBackCluster.navigateToCostTab("Budget");
+		waitExecuter.sleep(2000);
 		costBudget.deleteExistingBudget("Test Budget");
-		test.log(LogStatus.PASS, "New Budget deleted successfully.");
 		LOGGER.info("New Budget deleted successfully.");
 	}
 }

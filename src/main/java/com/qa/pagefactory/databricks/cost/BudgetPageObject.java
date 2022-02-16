@@ -48,7 +48,19 @@ public class BudgetPageObject {
 	@FindBy(xpath = "//input[@type='number']")
 	public WebElement addBudgetDBU;
 	
-	public String actionButtons = "//div[contains(text(),'Budget Test')]/../..//a/span[contains(text(),'%s')]"; //Chargeback,Trends,Optimize
+	@FindBy(xpath = "//label[contains(text(),'Scope')]/..//select")
+	public WebElement scopeDropdown;
+	
+	@FindBy(xpath = "//span[@class='select2-selection select2-selection--multiple']")
+	public WebElement users;
+	
+	@FindBy(xpath = "//li[@class='select2-results__option select2-results__option--highlighted']")
+	public WebElement searchResult;
+	
+	@FindBy(xpath = "//label[contains(text(),'Users')]/following-sibling::div")
+	public WebElement addedScope;
+		
+	public String actionButtons = "//div[contains(text(),'Test Budget')]/../..//a/span[contains(text(),'%s')]"; //Chargeback,Trends,Optimize
 
 	public String delete = "//div[contains(text(),'%s')]/../..//td//button[@title='Delete']";
 	

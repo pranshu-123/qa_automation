@@ -28,17 +28,17 @@ public class CB_06 extends BaseClass{
 		LOGGER.info("Navigated to Cost Budget Page");
 		waitExecuter.sleep(2000);
 		costBudget.createNewBudget("Test Budget");
+		costBudget.saveBudget();
+		LOGGER.info("New Budget created successfully.");
+		test.log(LogStatus.PASS, "New Budget created successfully.");
 		costBudget.validateCreatedBudget("Test Budget");
-		LOGGER.info("New Budget creaated successfully.");
-		costBudget.selectActionButton("Chargeback");
+		LOGGER.info("Newly created budget is displayed.");
+		costBudget.selectActionButton("Optimize");
 		waitExecuter.sleep(2000);
 		String url = driver.getCurrentUrl();
 		Assert.assertTrue(url.contains("/compute/dbclusters"));
 		LOGGER.info("Navigated to compute page");
 		test.log(LogStatus.PASS, "Navigated to cost trends page");	
-		chargeBackCluster.navigateToCostTab("Budget");
-		waitExecuter.sleep(2000);
-		costBudget.deleteExistingBudget("Test Budget");
-		LOGGER.info("New Budget deleted successfully.");
+		
 	}
 }

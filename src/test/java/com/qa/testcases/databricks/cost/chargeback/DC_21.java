@@ -31,7 +31,7 @@ public class DC_21  extends BaseClass{
 		Jobs jobs = new Jobs(driver);
 		chargeBackCluster.navigateToCostTab("Chargeback");
 		waitExecuter.sleep(2000);
-
+		LOGGER.info("Navigated to Chareback page");
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
 		jobs.clickOnGroupByDropDown();
@@ -40,7 +40,7 @@ public class DC_21  extends BaseClass{
 		waitExecuter.sleep(2000);
 		Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("chart.csv"), "File is not downloaded " +
 				"or size of file is zero bytes.");
-		test.log(LogStatus.PASS, "Successfully downloaded Nodes graph as PDF file.");
+		test.log(LogStatus.PASS, "Successfully downloaded Nodes graph as CSV file.");
 		LOGGER.info("Successfully downloaded graph as CSV file.");
 	}
 }

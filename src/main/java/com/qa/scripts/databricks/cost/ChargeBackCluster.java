@@ -9,10 +9,13 @@ import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class ChargeBackCluster {
 
+	private static final Logger LOGGER = Logger.getLogger(ChargeBackCluster.class.getName());
+	
 	private final WaitExecuter waitExecuter;
 	private final WebDriver driver;
 	private final ChargebackImpalaPageObject chargebackImpalaPageObject;
@@ -37,10 +40,10 @@ public class ChargeBackCluster {
 		waitExecuter.waitUntilPageFullyLoaded();
 		waitExecuter.waitUntilElementClickable(chargebackClusterPageObject.costChargeBackTab);
 		try {
-			if(tab.equalsIgnoreCase("trends")) {
+			if(tab.equalsIgnoreCase("Trends")) {
 				chargebackClusterPageObject.costTrendsTab.click();
 			}
-			else if(tab.equalsIgnoreCase("chargeback")) {
+			else if(tab.equalsIgnoreCase("Chargeback")) {
 				chargebackClusterPageObject.costChargeBackTab.click();
 			}
 			else {
@@ -67,6 +70,7 @@ public class ChargeBackCluster {
 		}
 		chargebackClusterPageObject.pieGraph.stream()
 		.forEach(graph -> graph.isDisplayed());
+		LOGGER.info("Pie Chart is displyed");
 	}
 
 	public void validateGeneratedPieChartValues() {
@@ -80,6 +84,7 @@ public class ChargeBackCluster {
 				.collect(Collectors.toList());
 		for(String s : pieChartValues) {
 			Assert.assertTrue(resultSet.contains(s));
+			LOGGER.info("Pie Chart is populated with " +s+" result values");
 		}
 	}
 
@@ -98,7 +103,9 @@ public class ChargeBackCluster {
 		chargebackClusterPageObject.dbu.isDisplayed();
 		chargebackClusterPageObject.cost.isDisplayed();
 		chargebackClusterPageObject.clusterCount.isDisplayed();
+		Assert.assertTrue(chargebackClusterPageObject.resultSetValues.stream().count()>0);
 		chargebackClusterPageObject.resultSetValues.stream().iterator().next().isDisplayed();
+		LOGGER.info("Result set is populaed with selected Group By: "+groupBy + " values");
 	}
 
 	public void selectOptimize() {
@@ -109,6 +116,7 @@ public class ChargeBackCluster {
 		String date = datePicker.getDate(30);
 		String selectedDate = chargebackClusterPageObject.selectedDates.getText();
 		Assert.assertTrue(selectedDate.contains(date));
+		LOGGER.info("Selected date is displayed");
 	}
 
 	public void selectDownloadOption(String type,String format) {

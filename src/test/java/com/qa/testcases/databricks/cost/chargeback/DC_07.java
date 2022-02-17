@@ -30,7 +30,7 @@ public class DC_07 extends BaseClass{
 		Jobs jobs = new Jobs(driver);
 		chargeBackCluster.navigateToCostTab("Chargeback");
 		waitExecuter.sleep(2000);
-
+		LOGGER.info("Navigated to Chareback page");
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
 		jobs.clickOnGroupByDropDown();
@@ -38,6 +38,7 @@ public class DC_07 extends BaseClass{
 		chargeBackCluster.selectOptimize();
 		waitExecuter.sleep(2000);
 		String url = driver.getCurrentUrl();
+		LOGGER.info("New URL is fetched");
 		chargeBackCluster.validateDate();
 		Assert.assertTrue(url.contains("compute/dbclusters"));
 		test.log(LogStatus.PASS, "Compute page succesfully opened up");

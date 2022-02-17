@@ -19,13 +19,16 @@ public class BudgetPageObject {
 	public List<WebElement> activeBudgetTableHeader;
 
 	@FindBy(xpath = "//h2[contains(text(),'Upcoming')]/following-sibling::div//tr/td")
-	public WebElement upcomingBudgetTable;
+	public List<WebElement> upcomingBudgetTable;
 
 	@FindBy(xpath = "//h2[contains(text(),'Upcoming')]/following-sibling::div//tr/td")
 	public WebElement expiredBudgetTable;
 
 	@FindBy(xpath = "//button[contains(text(),'Yes')]")
 	public WebElement yes;
+	
+	@FindBy(xpath = "//input[@type='search']")
+	public WebElement search;	
 	
 	@FindBy(xpath = "//input[@name='name']")
 	public WebElement addBudgetName;
@@ -42,8 +45,11 @@ public class BudgetPageObject {
 	@FindBy(xpath = "//div[@class='vdp-datepicker']")
 	public List<WebElement> dateWidget;
 	
-	@FindBy(xpath = "(//div[@class='vdp-datepicker__calendar'])[1]/span[contains(text(),'December')]")
-	public WebElement futureDate;
+	@FindBy(xpath = "(//div[@class='vdp-datepicker__calendar'])[1]/span[contains(text(),'August')]")
+	public WebElement futureStartDate;
+	
+	@FindBy(xpath = "(//div[@class='vdp-datepicker'])[2]//span[contains(text(),'September')]")
+	public WebElement futureExpiryDate;
 	
 	@FindBy(xpath = "//input[@type='number']")
 	public WebElement addBudgetDBU;

@@ -30,17 +30,16 @@ public class CB_04 extends BaseClass{
 		LOGGER.info("Navigated to Cost Budget Page");
 		waitExecuter.sleep(2000);
 		costBudget.createNewBudget("Test Budget");
+		costBudget.saveBudget();
+		LOGGER.info("New Budget created successfully.");
+		test.log(LogStatus.PASS, "New Budget created successfully.");
 		costBudget.validateCreatedBudget("Test Budget");
-		LOGGER.info("New Budget creaated successfully.");
+		LOGGER.info("Newly created budget is displayed.");
 		costBudget.selectActionButton("Trends");
 		waitExecuter.sleep(2000);
 		String url = driver.getCurrentUrl();
 		Assert.assertTrue(url.contains("/cost/trends"));
 		LOGGER.info("Navigated to cost trends page");
 		test.log(LogStatus.PASS, "Navigated to cost trends page");	
-		chargeBackCluster.navigateToCostTab("Budget");
-		waitExecuter.sleep(2000);
-		costBudget.deleteExistingBudget("Test Budget");
-		LOGGER.info("New Budget deleted successfully.");
 	}
 }

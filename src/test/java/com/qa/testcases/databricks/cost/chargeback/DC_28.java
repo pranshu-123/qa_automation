@@ -30,7 +30,7 @@ public class DC_28 extends BaseClass{
 		Jobs jobs = new Jobs(driver);
 		chargeBackCluster.navigateToCostTab("Chargeback");
 		waitExecuter.sleep(2000);
-
+		LOGGER.info("Navigated to Chareback page");
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
 		jobs.clickOnGroupByDropDown();

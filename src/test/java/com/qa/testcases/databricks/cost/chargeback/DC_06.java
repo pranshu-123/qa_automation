@@ -30,6 +30,7 @@ public class DC_06 extends BaseClass{
 		DatePicker datePicker = new DatePicker(driver);
 		Jobs jobs = new Jobs(driver);
 		chargeBackCluster.navigateToCostTab("Chargeback");
+		LOGGER.info("Navigated to Chareback page");
 		waitExecuter.sleep(2000);
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();

@@ -47,8 +47,19 @@ public class CostBudget {
 		budgetPageObject.addBudgetName.sendKeys(budgetName);
 		budgetPageObject.addBudgetDescription.sendKeys(budgetName);
 		budgetPageObject.addBudgetDBU.sendKeys("1");
+	}
+	
+	public void setBudgetActivationDate() {
+		waitExecuter.sleep(1000);
+		budgetPageObject.dateWidget.get(0).click();
+		budgetPageObject.futureStartDate.click();
+		waitExecuter.sleep(2000);
+		budgetPageObject.dateWidget.get(1).click();
+		budgetPageObject.futureExpiryDate.click();
+	}
+	
+	public void saveBudget() {
 		budgetPageObject.addBudgetSave.click();
-
 	}
 
 	public void validateCreatedBudget(String budgetName) {
@@ -57,6 +68,12 @@ public class CostBudget {
 				.collect(Collectors.toList()).contains(budgetName),"Created Budget not displayed");
 	}
 
+	public void validateUpcomingBudget(String budgetName) {
+		waitExecuter.sleep(2000);
+		Assert.assertTrue(budgetPageObject.upcomingBudgetTable.stream().map(f -> f.getText())
+				.collect(Collectors.toList()).contains(budgetName),"Created Budget not displayed");
+	}
+	
 	public void deleteExistingBudget(String budgetName) {
 		driver.findElement(By.xpath(String.format(budgetPageObject.delete,budgetName))).click();
 		budgetPageObject.yes.click();
@@ -69,7 +86,7 @@ public class CostBudget {
 		select.selectByIndex(4);
 		waitExecuter.sleep(1000);
 		budgetPageObject.users.click();
-		budgetPageObject.users.sendKeys("root");
+		budgetPageObject.users.sendKeys("smananghat@unraveldata.com");
 		waitExecuter.sleep(1000);
 		budgetPageObject.searchResult.click();
 		waitExecuter.sleep(1000);
@@ -79,7 +96,7 @@ public class CostBudget {
 	public void verifyBudgetPageObjects() {
 		Assert.assertTrue(budgetPageObject.newBudget.isDisplayed());
 		budgetPageObject.activeBudgetTable.stream().forEach(element -> element.isDisplayed());
-		Assert.assertTrue(budgetPageObject.upcomingBudgetTable.isDisplayed());
+		budgetPageObject.upcomingBudgetTable.stream().forEach(element -> element.isDisplayed());
 		Assert.assertTrue(budgetPageObject.expiredBudgetTable.isDisplayed());
 	}
 
@@ -101,5 +118,11 @@ public class CostBudget {
 
 	public void verifyUpdatedScope(String scope) {
 		Assert.assertTrue(budgetPageObject.addedScope.getText().contains(scope));
+	}
+	
+	public void searchCreatedBudget(String budgetName) {
+		waitExecuter.sleep(1000);
+		budgetPageObject.search.sendKeys(budgetName);
+		waitExecuter.sleep(1000);
 	}
 }

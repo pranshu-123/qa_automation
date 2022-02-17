@@ -14,15 +14,15 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.DbxCostChargeback
-public class DC_03 extends BaseClass{
+public class DC_08 extends BaseClass{
 
-	private static final Logger LOGGER = Logger.getLogger(DC_03.class.getName());
-	
+	private static final Logger LOGGER = Logger.getLogger(DC_08	.class.getName());
+
 	@Test
-	public void TC_Cost_CB_03_VerifyChargebackGraphGroupByUser() {
-		test = extent.startTest("TC_Cost_CB_03_VerifyChargebackGraphGroupByUser", "\"User\" Graph validation");
+	public void TC_Cost_CB_08_VerifyChargebackResultGroupByCluster() {
+		test = extent.startTest("TC_Cost_CB_08_VerifyChargebackResultGroupByCluster", "If \"Cluster\" is selected the table should show all the apps run by the users");
 		test.assignCategory("Cost/Chargeback");
-		Log.startTestCase("TC_Cost_CB_01_VerifyGroupByFilter");
+		Log.startTestCase("TC_Cost_CB_08_VerifyChargebackResultGroupByCluster");
 		String[] expectedGraphValues = {"DBU","Cost","Cluster"};
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  
@@ -33,10 +33,10 @@ public class DC_03 extends BaseClass{
 		LOGGER.info("Navigated to Chareback page");
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
-		jobs.selectGroupByFilterValue("User");
+		jobs.selectGroupByFilterValue("Cluster");
 		chargeBackCluster.validatePieChartGraph(expectedGraphValues);
-		chargeBackCluster.validateGeneratedPieChartValues();
-		test.log(LogStatus.PASS, "Graph was displayed successfully");
-		LOGGER.info("Graph was displayed successfully");
+		chargeBackCluster.validateResultSetIsDisplayedWithValues("Cluster");
+		test.log(LogStatus.PASS, "Result populated as  per Group By filter");
+		LOGGER.info("Result populated as  per Group By filter");
 	}
 }

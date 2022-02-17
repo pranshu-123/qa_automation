@@ -29,12 +29,12 @@ public class CB_07  extends BaseClass{
 		LOGGER.info("Navigated to Cost Budget Page");
 		waitExecuter.sleep(2000);
 		costBudget.createNewBudget("Test Budget");
+		costBudget.saveBudget();
 		costBudget.validateCreatedBudget("Test Budget");
-		test.log(LogStatus.PASS, "New Budget creaated successfully.");
-		LOGGER.info("New Budget creaated successfully.");
+		LOGGER.info("Newly created budget is displayed.");
 		costBudget.editExistingBudget("Test Budget");
 		LOGGER.info("Budget Edited successfully.");
-		costBudget.verifyUpdatedScope("root");
+		costBudget.verifyUpdatedScope("smananghat@unraveldata.com");
 		LOGGER.info("Budget Edited sucessfully.");
 	}
 }

@@ -28,6 +28,7 @@ public class DC_01 extends BaseClass{
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  
 		DatePicker datePicker = new DatePicker(driver);
 		chargeBackCluster.navigateToCostTab("Chargeback");
+		LOGGER.info("Navigated to Chareback page");
 		waitExecuter.sleep(2000);
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();

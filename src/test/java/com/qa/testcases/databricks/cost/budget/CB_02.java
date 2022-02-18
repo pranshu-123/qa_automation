@@ -34,3 +34,4 @@ public class CB_02 extends BaseClass{
 		LOGGER.info("New Budget creaated successfully.");
 	}
 }
+

@@ -127,9 +127,6 @@ public @interface Marker {
   @interface ImpalaInsights {}
 
   @Retention(RetentionPolicy.RUNTIME)
-  @interface DbCostChargeback {}
-
-  @Retention(RetentionPolicy.RUNTIME)
   @interface DbJobsRuns {}
   
   @Retention(RetentionPolicy.RUNTIME)

@@ -18,7 +18,7 @@ import com.relevantcodes.extentreports.LogStatus;
 public class CT_15 extends BaseClass{
 
 	private static final Logger LOGGER = Logger.getLogger(CT_15.class.getName());
-	
+
 	@Test
 	public void TC_Cost_Trends_15_VerifyChargebackFunctionalityForSingleUser() {
 		test = extent.startTest("TC_Cost_Trends_15_VerifyChargebackFunctionalityForSingleUser", "Validate Chareback for single User");
@@ -37,7 +37,7 @@ public class CT_15 extends BaseClass{
 		datePicker.selectLast30Days();
 		chargeBackCluster.filterCost("Users");
 		costTrends.filterSingleValue("root");
-		costTrends.selectChargeback();
+		costTrends.selectChargeback("Cost");
 		waitExecuter.sleep(2000);
 		String url = driver.getCurrentUrl();
 		chargeBackCluster.validateDate();
@@ -45,8 +45,8 @@ public class CT_15 extends BaseClass{
 		chargeBackCluster.validatePieChartGraph(expectedGraphValues);
 		chargeBackCluster.validateResultSetIsDisplayedWithValues("User");
 		chargeBackCluster.validateResultSet(expectedValues);
-		
+
 		test.log(LogStatus.PASS, "Navigated to Cost Chargeback page and result set was displayed as per selected user");
 		LOGGER.info("Navigated to Cost Chargeback page and result set was displayed as per selected user");
 	}
-	}
+}

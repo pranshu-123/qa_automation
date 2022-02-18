@@ -16,7 +16,7 @@ import com.relevantcodes.extentreports.LogStatus;
 public class CB_07  extends BaseClass{
 
 	private static final Logger LOGGER = Logger.getLogger(CB_07.class.getName());
-	
+
 	@Test
 	public void TC_Cost_Budget_07_editCreatedBudget() {
 		test = extent.startTest("TC_Cost_Budget_07_editCreatedBudget", "Create new active Budget");
@@ -32,9 +32,9 @@ public class CB_07  extends BaseClass{
 		costBudget.saveBudget();
 		costBudget.validateCreatedBudget("Test Budget");
 		LOGGER.info("Newly created budget is displayed.");
-		costBudget.editExistingBudget("Test Budget");
+		String expectedValue = costBudget.editExistingBudget("Test Budget");
 		LOGGER.info("Budget Edited successfully.");
-		costBudget.verifyUpdatedScope("smananghat@unraveldata.com");
+		costBudget.verifyUpdatedScope(expectedValue);
 		LOGGER.info("Budget Edited sucessfully.");
 	}
 }

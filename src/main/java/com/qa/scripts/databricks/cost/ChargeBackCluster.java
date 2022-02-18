@@ -50,7 +50,9 @@ public class ChargeBackCluster {
 				chargebackClusterPageObject.costBudgetTab.click();
 			}
 		}
-		catch(ElementClickInterceptedException e) {}
+		catch(ElementClickInterceptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public List<String> fetchAllGroupByFilterValues(){
@@ -120,15 +122,20 @@ public class ChargeBackCluster {
 	}
 
 	public void selectDownloadOption(String type,String format) {
+		waitExecuter.sleep(2000);
 		if(type.equalsIgnoreCase("dbu")) {
 			chargebackClusterPageObject.graphsThreeDots.get(0).click();
-			driver.findElement(By.xpath(String.format(chargebackClusterPageObject.dbuDownloadFormat,format))).click();}
+			driver.findElement(By.xpath(String.format(chargebackClusterPageObject.dbuDownloadFormat,format))).click();
+			}
 		else if(type.equalsIgnoreCase("cost")) {
 			chargebackClusterPageObject.graphsThreeDots.get(1).click();
+			driver.findElement(By.xpath(String.format(chargebackClusterPageObject.costDownloadFormat,format))).click();
 		}
 		else {
 			chargebackClusterPageObject.graphsThreeDots.get(2).click();	
+			driver.findElement(By.xpath(String.format(chargebackClusterPageObject.clusterDownloadFormat,format))).click();
 		}
+		
 	}
 
 	public String calculateDBUSumFromResultSet() {

@@ -2,6 +2,7 @@ package com.qa.testcases.databricks.cost.trends;
 
 import java.util.logging.Logger;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.qa.annotations.Marker;
@@ -14,14 +15,15 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.DbxCostTrends
-public class CT_08 extends BaseClass{
+public class CT_07 extends BaseClass{
 
-	private static final Logger LOGGER = Logger.getLogger(CT_08.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(CT_07.class.getName());
+	
 	@Test
-	public void TC_Cost_Trends_08_VerifyClusterGraph() {
-		test = extent.startTest("TC_Cost_Trends_08_VerifyClusterGraph", "Validate Graphs for Clusters Group By filter");
+	public void TC_Cost_Trends_07_VerifyWorkspaceOptimizeFunctionality() {
+		test = extent.startTest("TC_Cost_Trends_07_VerifyWorkspaceOptimizeFunctionality", "Validate Optimize functionality for Workspace Trends");
 		test.assignCategory("Cost/Trends");
-		Log.startTestCase("TC_Cost_Trends_08_VerifyClusterGraph");
+		Log.startTestCase("TC_Cost_Trends_07_VerifyWorkspaceOptimizeFunctionality");
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  
 		DatePicker datePicker = new DatePicker(driver);
@@ -30,10 +32,15 @@ public class CT_08 extends BaseClass{
 		waitExecuter.sleep(2000);
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
-		chargeBackCluster.filterCost("Clusters");
-		costTrends.validateGraphFooter("Clusters");
-		costTrends.validateGeneratedGraph();
-		test.log(LogStatus.PASS, "Cluster graph generated succesfully.");
-		LOGGER.info("Cluster graph generated succesfully.");
+		chargeBackCluster.filterCost("Workspace");
+		waitExecuter.sleep(2000);
+		costTrends.selectOptimize("dbu");
+		waitExecuter.sleep(2000);
+		String url = driver.getCurrentUrl();
+		chargeBackCluster.validateDate();
+		Assert.assertTrue(url.contains("compute/dbclusters"));
+
+		test.log(LogStatus.PASS, "Navigated to Cluster page");
+		LOGGER.info("Navigated to Cluster page");
 	}
 }

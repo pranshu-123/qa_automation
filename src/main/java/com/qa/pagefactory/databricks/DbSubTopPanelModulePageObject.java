@@ -1,4 +1,4 @@
-package com.qa.pagefactory.databricks;
+	package com.qa.pagefactory.databricks;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -48,7 +48,7 @@ public class DbSubTopPanelModulePageObject {
     @FindBy(xpath = "//li[contains(@class,'active')]//span[contains(text(),'Pipelines')]")
     public WebElement pipelinesTab;
 
-    @FindBy(xpath = "(//a[@class='menu'])[2]")
+    @FindBy(xpath = "//div[@class='header-dropdown help-center-dropdown']//a[@class='menu']")
     public WebElement helpCenterMenu;
 
     @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Services And Versions Compatibility'])")

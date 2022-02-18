@@ -112,7 +112,7 @@ public class DbAllApps {
             try {
                 waitExecuter.waitUntilElementPresent(applicationsPageObject.whenApplicationPresent);
             } catch (NoSuchElementException te) {
-                throw new AssertionError("After de-selecting all status 'No Data Available' is not displayed.");
+                throw new AssertionError("After de-selecting all apps types 'No Data Available' is not displayed.");
             }
         }
 

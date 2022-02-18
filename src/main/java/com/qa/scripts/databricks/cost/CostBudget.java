@@ -71,7 +71,7 @@ public class CostBudget {
 	public void validateUpcomingBudget(String budgetName) {
 		waitExecuter.sleep(2000);
 		Assert.assertTrue(budgetPageObject.upcomingBudgetTable.stream().map(f -> f.getText())
-				.collect(Collectors.toList()).contains(budgetName),"Created Budget not displayed");
+				.collect(Collectors.toList()).contains(budgetName),"Created Upcoming Budget not displayed");
 	}
 	
 	public void deleteExistingBudget(String budgetName) {
@@ -79,18 +79,18 @@ public class CostBudget {
 		budgetPageObject.yes.click();
 	}
 
-	public void editExistingBudget(String budgetName) {
+	public String editExistingBudget(String budgetName) {
 		driver.findElement(By.xpath(String.format(budgetPageObject.edit,budgetName))).click();
 		waitExecuter.sleep(1000);
 		Select select = new Select(budgetPageObject.scopeDropdown);
 		select.selectByIndex(4);
 		waitExecuter.sleep(1000);
 		budgetPageObject.users.click();
-		budgetPageObject.users.sendKeys("smananghat@unraveldata.com");
 		waitExecuter.sleep(1000);
 		budgetPageObject.searchResult.click();
 		waitExecuter.sleep(1000);
 		budgetPageObject.addBudgetSave.click();
+		return budgetPageObject.editedScopeText.getText();
 	}
 
 	public void verifyBudgetPageObjects() {

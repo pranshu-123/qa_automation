@@ -65,6 +65,9 @@ public class BudgetPageObject {
 	
 	@FindBy(xpath = "//label[contains(text(),'Users')]/following-sibling::div")
 	public WebElement addedScope;
+	
+	@FindBy(xpath = "//li[@class='select2-selection__choice']")
+	public WebElement editedScopeText;
 		
 	public String actionButtons = "//div[contains(text(),'Test Budget')]/../..//a/span[contains(text(),'%s')]"; //Chargeback,Trends,Optimize
 

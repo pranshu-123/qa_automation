@@ -17,31 +17,32 @@ import java.util.List;
 
 @Marker.DbxJobsRuns
 @Marker.All
-public class TC_DR_02 extends BaseClass {
-    private final LoggingUtils loggingUtils = new LoggingUtils(TC_DR_02.class);
+public class TC_DR_03 extends BaseClass {
+    private final LoggingUtils loggingUtils = new LoggingUtils(TC_DR_03.class);
 
     @Test()
-    public void SearchJobsByName() {
-        test = extent.startTest("TC_DR_02.SearchJobsByName",
-                "Verify search must be populate desired job by name");
-        test.log(LogStatus.INFO, "Initialize all class objects");
-        loggingUtils.info("Initialize all class objects", test);
+    public void validateSearchJobsById() {
+        test = extent.startTest("TC_DR_03.validateSearchJobsById",
+                "Verify search must be populate desired job by id");
+        test.log(LogStatus.INFO, "Login to the application");
+        // Initialize all classes objects
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         DbxSubTopPanelModulePageObject dbpageObject = new DbxSubTopPanelModulePageObject(driver);
-        DbAllApps dballApps = new DbAllApps(driver);
-        // Navigate to Jobs tab select cluster and last 7 days
-        test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-        test.log(LogStatus.INFO, "Select last 7 days");
-        dballApps.inJobsSelectClusterAndLast7Days();
-        waitExecuter.sleep(2000);
+        DbAllApps allApps = new DbAllApps(driver);
+
         try {
+            // Navigate to Jobs tab select cluster and last 7 days
+            test.log(LogStatus.INFO, "Navigate to jobs tab from header");
+            test.log(LogStatus.INFO, "Select last 7 days");
+            allApps.inJobsSelectClusterAndLast7Days();
+
             // Assert if the application are as per the filter applied on global search
-            test.log(LogStatus.INFO, "Assert if the application listed are as per the filter applied on search");
+            test.log(LogStatus.INFO, "Assert if the application listed are as per the filter applied on global search");
             loggingUtils.info("Assert if the application are as per the filter applied on search", test);
 
             test.log(LogStatus.INFO, "Get application type of first application listed in table");
             loggingUtils.info("Get application type of first application listed in table", test);
-            String applicationTypeToSearch = dbpageObject.getNameeFromTable.getText();
+            String applicationTypeToSearch = dbpageObject.getIdeFromTable.getText();
             dbpageObject.searchBox.clear();
             waitExecuter.sleep(1000);
             dbpageObject.searchBox.sendKeys(applicationTypeToSearch);
@@ -54,7 +55,6 @@ public class TC_DR_02 extends BaseClass {
             test.log(LogStatus.INFO, "Get username of first application listed in table and search ");
             dbpageObject.searchBox.clear();
 
-
         } catch (
                 NoSuchElementException ex) {
             loggingUtils.info("No app present by this name", test);
@@ -62,4 +62,3 @@ public class TC_DR_02 extends BaseClass {
         }
     }
 }
-

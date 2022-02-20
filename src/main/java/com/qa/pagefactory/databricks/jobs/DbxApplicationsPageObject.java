@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class ApplicationsPageObject {
+public class DbxApplicationsPageObject {
 
     @FindBy(xpath = "input[placeholder='Filter by Cluster Name']")
     public WebElement clusterIdsearchfield;
@@ -63,7 +63,7 @@ public class ApplicationsPageObject {
     /**
      * @param driver The driver that will be used to look up the elements
      */
-    public ApplicationsPageObject(WebDriver driver) {
+    public DbxApplicationsPageObject(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
 }

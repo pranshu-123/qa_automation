@@ -131,4 +131,10 @@ public @interface Marker {
 
   @Retention(RetentionPolicy.RUNTIME)
   @interface DbxJobsRuns {}
+
+  @Retention(RetentionPolicy.RUNTIME)
+  @interface DbxCostTrends {}
+
+  @Retention(RetentionPolicy.RUNTIME)
+  @interface DbxCostBudget {}
 }

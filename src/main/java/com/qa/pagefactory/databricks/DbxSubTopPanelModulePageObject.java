@@ -19,8 +19,6 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//*[@id='RunsListAll-body']/tr/td[1]")
     public WebElement Status;
 
-    @FindBy(xpath = "//ul[@class='dropdown-content']//a")
-    public WebElement daemeons;
 
     @FindBy(xpath = "//a[@href='#/manage/stats']")
     public WebElement stats;
@@ -30,6 +28,21 @@ public class DbxSubTopPanelModulePageObject {
 
     @FindBy(id = "reset")
     public WebElement resetButton;
+
+    @FindBy(xpath ="//table[@id='RunsListAll']/tbody[1]/tr/td[1]")
+    public List<WebElement> listStaus;
+
+    @FindBy(xpath ="//table[@id='RunsListAll']/tbody[1]/tr/td[4]/span[1]")
+    public List<WebElement> listIds;
+
+    @FindBy(xpath= "//a[@class='sorting icon-sort']")
+    public List<WebElement> iconSort;
+
+    @FindBy(xpath = "//*[@id=\"runs-filter-panel\"]//div/p/label/div/span[1]")
+    public List<WebElement> getStatusTypes;
+
+    @FindBy(xpath = "//table[@id='RunsListAll']/thead[1]/tr[1]/th/span[1]")
+    public List<WebElement> getColumnsTypes;
 
     @FindBy(xpath = "//a[text()[normalize-space()='Only']]")
     public WebElement clickTab;
@@ -73,6 +86,9 @@ public class DbxSubTopPanelModulePageObject {
 
     @FindBy(xpath = "//*[@id=\"RunsListAll-body\"]/tr/td[3]/a[2]")
     public WebElement clickOnAppId;
+
+    @FindBy(xpath = "//button[text()[normalize-space()='Spark']]")
+    public WebElement clickOnSpark;
 
     @FindBy(xpath = "//table[@id='RunsListAll']/tbody[1]/tr/td[3]/a[1]")
     public WebElement getAppname;

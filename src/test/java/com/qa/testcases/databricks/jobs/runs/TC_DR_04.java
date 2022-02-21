@@ -33,7 +33,7 @@ public class TC_DR_04 extends BaseClass {
         DbAllApps allApps = new DbAllApps(driver);
 
         try {
-            // Navigate to Jobs tab select cluster and last 7 days
+            // Navigate to Runs tab select cluster and last 7 days
             test.log(LogStatus.INFO, "Navigate to jobs tab from header");
             test.log(LogStatus.INFO, "Select last 7 days");
             allApps.inJobsSelectClusterAndLast7Days();

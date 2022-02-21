@@ -37,7 +37,7 @@ public class TC_DR_10 extends BaseClass {
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         dballApps.navigateToJobsTab();
         try {
-        // Navigate to Jobs tab from header
+        // Navigate to Runs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         test.log(LogStatus.INFO, "Select last 7 days");
         dballApps.inJobsSelectClusterAndLast7Days();

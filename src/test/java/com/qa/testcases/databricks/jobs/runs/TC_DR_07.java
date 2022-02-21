@@ -29,11 +29,11 @@ public class TC_DR_07 extends BaseClass {
         DbxApplicationsPageObject applicationsPageObject = new DbxApplicationsPageObject(driver);
         DbAllApps dballApps = new DbAllApps(driver);
         DbxSubTopPanelModulePageObject dbpageObject = new DbxSubTopPanelModulePageObject(driver);
-        // Navigate to Jobs tab from header
+        // Navigate to Runs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         dballApps.navigateToRunsTab();
         try {
-            // Navigate to Jobs tab from header
+            // Navigate to Runs tab from header
             test.log(LogStatus.INFO, "Navigate to jobs tab from header");
             test.log(LogStatus.INFO, "Select last 7 days");
             dballApps.inJobsSelectClusterAndLast7Days();

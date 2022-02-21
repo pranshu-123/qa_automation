@@ -31,11 +31,11 @@ public class TC_DR_01 extends BaseClass {
         LOGGER.info("Initialize all class objects");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         DbAllApps allApps = new DbAllApps(driver);
-        // Navigate to Jobs tab from header
+        // Navigate to Runs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         allApps.navigateToJobsTab();
 
-        // Navigate to Jobs tab from header
+        // Navigate to Runs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         test.log(LogStatus.INFO, "Select last 7 days");
         allApps.inJobsSelectClusterAndLast7Days();

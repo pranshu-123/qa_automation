@@ -237,12 +237,45 @@ public class DbAllApps {
         return status;
     }
 
+
     /* To reset the settings made in apps page */
     public void reset() {
         logger.info("Reset username filter");
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         userAction.performActionWithPolling(applicationsPageObject.resetButton, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+    }
+
+    public int clickOnStatusSort(){
+        int countOfIconSort = dbSubTopPanelModulePageObject.iconSort.size();
+        logger.info("Number of total icon sort :"+ countOfIconSort);
+        if(countOfIconSort > 0 ){
+            for(int i=0; i<countOfIconSort-1 ;i++){
+                waitExecuter.sleep(2000);
+                dbSubTopPanelModulePageObject.iconSort.get(i).click();
+                waitExecuter.sleep(3000);
+                int tableCount = dbSubTopPanelModulePageObject.listStaus.size();
+                logger.info("Count of Table :"+tableCount);
+
+            }
+        }
+        return countOfIconSort;
+    }
+
+    public int clickOnIdsSort(){
+        int countOfIconSort = dbSubTopPanelModulePageObject.iconSort.size();
+        logger.info("Number of total icon sort :"+ countOfIconSort);
+        if(countOfIconSort > 0 ){
+            for(int i=0; i<countOfIconSort-1 ;i++){
+                waitExecuter.sleep(2000);
+                dbSubTopPanelModulePageObject.iconSort.get(i).click();
+                waitExecuter.sleep(3000);
+                int tableCount = dbSubTopPanelModulePageObject.listIds.size();
+                logger.info("Count of Table :"+tableCount);
+
+            }
+        }
+        return countOfIconSort;
     }
 
     /* Select last 30 days from date range */

@@ -29,7 +29,7 @@ public class TC_DR_02 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         DbxSubTopPanelModulePageObject dbpageObject = new DbxSubTopPanelModulePageObject(driver);
         DbAllApps dballApps = new DbAllApps(driver);
-        // Navigate to Jobs tab select cluster and last 7 days
+        // Navigate to Runs tab select cluster and last 7 days
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         test.log(LogStatus.INFO, "Select last 7 days");
         dballApps.inJobsSelectClusterAndLast7Days();

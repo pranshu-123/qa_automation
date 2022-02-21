@@ -27,24 +27,22 @@ public class TC_M01 extends BaseClass {
         test.assignCategory(" Manage ");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         SubTopPanelModulePageObject subTopPanelModulePageObject = new SubTopPanelModulePageObject(driver);
-        // Navigate to Manage tab from header
         waitExecuter.waitUntilElementPresent(subTopPanelModulePageObject.gear);
         waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.waitUntilElementClickable(subTopPanelModulePageObject.gear);
         waitExecuter.sleep(3000);
         MouseActions.clickOnElement(driver, subTopPanelModulePageObject.gear);
-        test.log(LogStatus.INFO, "Verified Manage Tab is clicked.");
-        logger.info("Verified Manage Tab is clicked.");
 
+        test.log(LogStatus.PASS, "Verified Manage Tab is clicked.");
+        logger.info("Verified Manage Tab is clicked.");
 
         Manage manage = new Manage(driver);
         //Validate daemon header default
         String daemonHeader = manage.validateDaemonHeader();
-        Assert.assertEquals(daemonHeader, "Daemons", "Daemons Header not matched.");
-        test.log(LogStatus.INFO, "Verified Manage Page is loaded successfully.");
-        logger.info("Verified Manage Page is loaded successfully.");
+        Assert.assertEquals(daemonHeader,"Daemons","Daemons Header not matched.");
 
-
+        waitExecuter.waitUntilPageFullyLoaded();
+        MouseActions.clickOnElement(driver, subTopPanelModulePageObject.daemeons);
 
         //Validate tabs under Manage tab.
         Assert.assertTrue(manage.validateAllTabsPresent(), "Missing tabs on Manage Page.");

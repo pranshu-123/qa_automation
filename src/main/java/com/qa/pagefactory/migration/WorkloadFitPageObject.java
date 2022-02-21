@@ -39,7 +39,7 @@ public class WorkloadFitPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
     public WebElement failedErrorMessage;
 
-    @FindBy(xpath = "//button[text()[normalize-space()='Get HeatMap View']]")
+    @FindBy(xpath = "//span[contains(text(),' HeatMap View')]")
     public WebElement generateHeatMap;
 
     @FindBy(xpath = "//a[contains(text(),'Edit')]")
@@ -96,16 +96,16 @@ public class WorkloadFitPageObject {
     @FindBy(xpath = "//div[contains(@class,'scrollable-tab-container')]//li/a[contains(@class,'tab-margin')]")
     public List<WebElement> mapToClusterTabs;
 
-    @FindBy (xpath = "//label[text()='Object Storage Size Required:']/following::input")
+    @FindBy (xpath = "(//div[contains(@class,'run-preference')]//div[contains(@class,'col-md-12')]//input)[1]")
     public WebElement objectStorageSize;
 
-    @FindBy (xpath = "//label[text()='Local Attached Storage Size Required for all Clusters:']/following::input")
+    @FindBy (xpath = "(//div[contains(@class,'run-preference')]//div[contains(@class,'col-md-12')]//input)[2]")
     public WebElement localStorageSize;
 
     @FindBy(xpath = "//div[contains(@class,'component-cta')]//span[contains(text(),'Run')]")
     public WebElement runButton;
 
-    @FindBy(css = "i.glyphicon-caret")
+    @FindBy(xpath = "//div[contains(@class,'panel-heading')]//span[contains(@class,'glyphicon')]")
     public WebElement dateRangePointer;
 
     public WorkloadFitPageObject(WebDriver driver) {

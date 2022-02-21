@@ -52,6 +52,10 @@ public class MarkerConstants {
     public static final String CLOUD_MAPPING_PER_HOST = "cloud_mapping_per_host";
     public static final String JOBS_WORKFLOW = "jobs_workflow";
     public static final String IMPALA_INSIGHTS = "impala_insights";
+    public static final String DB_JOBS_RUNS = "db_jobs_runs";
+    public static final String DBX_COST_CHARGEBACK = "dbx_cost_chargeback";
+    public static final String DBX_COST_TRENDS = "dbx_cost_trends";
+    public static final String DBX_COST_BUDGET = "dbx_cost_budget";
     public static final Map<String, Class<? extends Annotation>> MARKER_MAPPING = initMap();
 
     /**
@@ -102,6 +106,10 @@ public class MarkerConstants {
         map.put(CLOUD_MAPPING_PER_HOST, Marker.CloudMappingPerHost.class);
         map.put(JOBS_WORKFLOW, Marker.JobsWorkflow.class);
         map.put(IMPALA_INSIGHTS, Marker.ImpalaInsights.class);
+        map.put(DBX_COST_CHARGEBACK, Marker.DbxCostChargeback.class);
+        map.put(DBX_COST_BUDGET, Marker.DbxCostBudget.class);
+        map.put(DBX_COST_TRENDS, Marker.DbxCostTrends.class);
+        map.put(DB_JOBS_RUNS, Marker.DbJobsRuns.class);
         return Collections.unmodifiableMap(map);
     }
 }

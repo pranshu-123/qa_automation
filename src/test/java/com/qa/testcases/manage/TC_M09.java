@@ -66,7 +66,6 @@ public class TC_M09 extends BaseClass {
         logger.info("Clicked on Download Support Bundle button.");
 
         waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.sleep(4000);
         userActions.performActionWithPolling(managePageObject.downloadSupportBundleBtn, UserAction.CLICK);
         Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("diagnostics.txt"), "Not able to " +
                 "Download Support Bundle.");

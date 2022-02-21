@@ -8,11 +8,19 @@ import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -355,5 +363,13 @@ public class DatePicker {
         setStartDate(DateUtils.getPastDate(startDateInMinus));
         waitExecuter.sleep(2000);
         setEndDate(DateUtils.getPastDate(endDateInMinus));
+    }
+    
+    
+    public  String getDate(int xdaysago){
+        LocalDate localDate = LocalDate.now(ZoneId.of("America/Montreal")).minus( Period.ofDays( xdaysago ));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy");
+        String date = localDate.format(formatter);
+        return date;
     }
 }

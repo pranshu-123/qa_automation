@@ -20,10 +20,10 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[5]")
     public WebElement getClusterId;
 
-    @FindBy(xpath = "//th[12]//a[1]")
+    @FindBy(xpath = "//span[(text()='Insights')]//following-sibling::a[contains(@class,'sorting')]")
     public WebElement sortByParentApp;
 
-    @FindBy(xpath = "(//a[@class='sorting icon-sort'])[3]")
+    @FindBy(xpath = "//span[(text()='Read')]//following-sibling::a[contains(@class,'sorting')]")
     public WebElement sortByReadApp;
 
     @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-up')]")

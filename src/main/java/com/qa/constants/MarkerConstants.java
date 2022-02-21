@@ -53,6 +53,7 @@ public class MarkerConstants {
     public static final String JOBS_WORKFLOW = "jobs_workflow";
     public static final String IMPALA_INSIGHTS = "impala_insights";
     public static final String DBX_JOBS_RUNS = "dbx_jobs_runs";
+    public static final String DBX_JOBS = "dbx_jobs";
     public static final String DBX_COST_TRENDS = "dbx_cost_trends";
     public static final String DBX_COST_BUDGET = "dbx_cost_budget";
     public static final String DBX_COST_CHARGEBACK = "dbx_cost_chargeback";
@@ -110,6 +111,7 @@ public class MarkerConstants {
         map.put(DBX_COST_TRENDS, Marker.DbxCostTrends.class);
         map.put(DBX_COST_BUDGET, Marker.DbxCostBudget.class);
         map.put(DBX_JOBS_RUNS, Marker.DbxJobsRuns.class);
+        map.put(DBX_JOBS, Marker.DbxJobs.class);
         return Collections.unmodifiableMap(map);
     }
 }

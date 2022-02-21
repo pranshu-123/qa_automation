@@ -19,7 +19,6 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//*[@id='RunsListAll-body']/tr/td[1]")
     public WebElement Status;
 
-
     @FindBy(xpath = "//a[@href='#/manage/stats']")
     public WebElement stats;
 
@@ -92,6 +91,9 @@ public class DbxSubTopPanelModulePageObject {
 
     @FindBy(xpath = "//table[@id='RunsListAll']/tbody[1]/tr/td[3]/a[1]")
     public WebElement getAppname;
+
+    @FindBy(xpath = "//span[text()='Jobs']")
+    public WebElement runs;
 
     @FindBy(css = ".col-md-12.no-data-msg")
     public WebElement whenNoApplicationPresent;

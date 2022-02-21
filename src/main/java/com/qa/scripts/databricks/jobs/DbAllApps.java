@@ -47,18 +47,6 @@ public class DbAllApps {
         this.driver = driver;
     }
 
-    /*Get all range from calendar */
-    public List<String> getCalendarRanges() {
-        List<WebElement> getCalendarRangeElements = applicationsPageObject.dateRanges;
-        waitExecuter.sleep(1000);
-        List<String> listOfCaledarRanges = new ArrayList<>();
-        logger.info("Total number of ranges in datepicker: " + getCalendarRangeElements.size());
-        for (int i = 0; i < getCalendarRangeElements.size(); i++) {
-            logger.info("The range in the calendar " + getCalendarRangeElements.get(i).getText());
-            listOfCaledarRanges.add(getCalendarRangeElements.get(i).getText());
-        }
-        return listOfCaledarRanges;
-    }
 
     /*Search for the app Id*/
     public void searchByAppID(String app) {
@@ -178,7 +166,8 @@ public class DbAllApps {
         logger.info("Navigate to jobs tab from header");
         waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.jobs);
         userAction.performActionWithPolling(dbSubTopPanelModulePageObject.jobs, UserAction.CLICK);
-        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+        waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.resetButton);
+        userAction.performActionWithPolling(dbSubTopPanelModulePageObject.runs, UserAction.CLICK);
         waitExecuter.waitUntilPageFullyLoaded();
     }
 
@@ -188,7 +177,7 @@ public class DbAllApps {
         datePicker.clickOnDatePicker();
         waitExecuter.sleep(1000);
         datePicker.selectLast7Days();
-        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+        waitExecuter.waitUntilPageFullyLoaded();
     }
 
     /* Select cluster and Last 7 days */

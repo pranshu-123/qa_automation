@@ -9,12 +9,12 @@ import java.util.List;
 
 public class DbxApplicationsPageObject {
 
-    @FindBy(xpath = "input[placeholder='Filter by Cluster Name']")
+    @FindBy(xpath = "	")
     public WebElement clusterIdsearchfield;
 
-    @FindBy(xpath = "//span[@class='select2-results']/ul/li")
+    @FindBy(xpath = "	")
     public List<WebElement> clusterIdsList;
-
+    
     @FindBy(css = "tbody#RunsListAll-body")
     public WebElement whenApplicationPresent;
 

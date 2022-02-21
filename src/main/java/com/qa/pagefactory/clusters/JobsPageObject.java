@@ -63,6 +63,16 @@ public class JobsPageObject {
 
     @FindBy(xpath = "//li[contains(text(),'Queue')]")
     public WebElement groupByQueue;
+    
+    @FindBy(xpath = "//li[contains(text(),'Tag Key')]")
+    public WebElement groupByTagKey;
+
+    @FindBy(xpath = "//li[contains(text(),'Cluster')]")
+    public WebElement groupByCluster;
+
+    @FindBy(xpath = "//li[contains(text(),'Workspace')]")
+    public WebElement groupByWorkspace;
+
 
     @FindBy(xpath = "//span[contains(@class,'select2-results')]/ul/li")
     public WebElement filterElements;

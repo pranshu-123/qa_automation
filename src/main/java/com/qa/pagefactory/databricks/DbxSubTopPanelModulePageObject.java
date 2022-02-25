@@ -92,7 +92,7 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//table[@id='RunsListAll']/tbody[1]/tr/td[3]/a[1]")
     public WebElement getAppname;
 
-    @FindBy(xpath = "//span[text()='Jobs']")
+    @FindBy(xpath = "//span[text()='Runs']")
     public WebElement runs;
 
     @FindBy(css = ".col-md-12.no-data-msg")

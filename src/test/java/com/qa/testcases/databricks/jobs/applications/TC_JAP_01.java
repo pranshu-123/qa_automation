@@ -1,54 +1,78 @@
 package com.qa.testcases.databricks.jobs.applications;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.pagefactory.SubTopPanelModulePageObject;
+import com.qa.pagefactory.appsDetailsPage.SparkAppsDetailsPageObject;
+import com.qa.pagefactory.databricks.DbxSubTopPanelModulePageObject;
+import com.qa.pagefactory.databricks.jobs.DbxApplicationsPageObject;
+import com.qa.pagefactory.databricks.jobs.DbxSummaryPageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
+import com.qa.scripts.DatePicker;
+import com.qa.scripts.appdetails.SparkAppsDetailsPage;
+import com.qa.scripts.databricks.Runs.SummaryDetailsPage;
 import com.qa.scripts.databricks.jobs.DbAllApps;
+import com.qa.scripts.jobs.applications.AllApps;
+import com.qa.testcases.databricks.jobs.jobs.TC_DJ_01;
 import com.qa.testcases.databricks.jobs.runs.TC_DR_01;
+import com.qa.utils.Log;
+import com.qa.utils.LoggingUtils;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-
+@Marker.DbxAppDetails
 public class TC_JAP_01 extends BaseClass {
-    private static final Logger LOGGER = Logger.getLogger(TC_DR_01.class.getName());
+    private final LoggingUtils loggingUtils = new LoggingUtils(TC_DJ_01.class);
 
     @Test()
-    public void validateJobsTab() {
-        test = extent.startTest("TC_DR_01.validateFilterByClusterName",
-                "Verify Jobs page should populate the data as per selected cluster");
+    public void validateAppListedUI() {
+        test = extent.startTest("TC_DR_06.validateFailedStatus",
+                "Verify All the Failed jobs are listed on the page");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
-        LOGGER.info("Initialize all class objects");
+        loggingUtils.info("Initialize all class objects",test);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
-        DbAllApps allApps = new DbAllApps(driver);
-        // Navigate to Jobs tab from header
+        DbxSummaryPageObject summaryPageObject=new DbxSummaryPageObject(driver);
+        DbxApplicationsPageObject applicationsPageObject = new DbxApplicationsPageObject(driver);
+        DbAllApps dballApps = new DbAllApps(driver);
+        SummaryDetailsPage  summaryPage=new SummaryDetailsPage(driver);
+        // Navigate to Runs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-        allApps.navigateToJobsTab();
+        dballApps.navigateToRunsTab();
+        try {
+            // Navigate to Runs tab from header
+            test.log(LogStatus.INFO, "Navigate to jobs tab from header");
+            test.log(LogStatus.INFO, "Select last 7 days");
+            dballApps.inJobsSelectClusterAndLast7Days();
+            waitExecuter.sleep(2000);
 
-        // Navigate to Jobs tab from header
-        test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-        test.log(LogStatus.INFO, "Select last 7 days");
-        allApps.inJobsSelectClusterAndLast7Days();
 
-        // Select cluster
-        waitExecuter.sleep(1000);
-        List<WebElement> applicationsClusterIds = applicationsPageObject.getApplicationClusterId;
-        List<String> addClusterIdToList = new ArrayList<>();
-        // Itterate through all the application to get the clusterId
-        test.log(LogStatus.INFO, "Itterate through all the application to get the clusterId");
-        LOGGER.info("Itterate through all the application to get the clusterId");
-        for (int i = 0; i < applicationsClusterIds.size(); i++) {
-            String appcClusterId = applicationsClusterIds.get(i).getText();
-            //String subStringOfAppClusterId = appcClusterId.substring(0, 19);
+            int appCount = dballApps.clickOnlyLink("Success");
 
+            if (appCount > 0) {
+                String headerAppId = summaryPage.verifyGoToSpark(summaryPageObject);
+                test.log(LogStatus.PASS, "Application Spark name is displayed in the Header: " + headerAppId);
+                //Close apps details page
+                MouseActions.clickOnElement(driver, summaryPageObject.closeIcon);
+                waitExecuter.sleep(3000);
+
+            } else {
+                test.log(LogStatus.SKIP, "No Application present ");
+                loggingUtils.error("No Application present in the Runs page",test);
+            }
+        } catch (NoSuchElementException ex) {
+            loggingUtils.info("No app present by this name", test);
+            loggingUtils.info("Error- " + ex, test);
         }
-        waitExecuter.sleep(1000);
-
     }
 }
+

@@ -18,6 +18,9 @@ public class DbxJobsPageObject {
     @FindBy(xpath = "(//h2[@class='text-white']//span)[3]")
     public WebElement appName;
 
+    @FindBy(xpath = "(//div[@class='right text-white']//span)[2]")
+    public WebElement appClusterName;
+
     @FindBy(xpath = "//tbody/tr/td[1]")
     public WebElement status;
 
@@ -26,6 +29,12 @@ public class DbxJobsPageObject {
 
     @FindBy(xpath = "//tbody/tr/td[3]")
     public WebElement jobName;
+
+    @FindBy(xpath = "//tbody/tr/td[4]")
+    public WebElement clusterName;
+
+    @FindBy(xpath = "//tbody/tr/td[5]")
+    public WebElement workSpace;
 
     @FindBy(css = "tbody#RunsListAll-body")
     public WebElement whenApplicationPresent;

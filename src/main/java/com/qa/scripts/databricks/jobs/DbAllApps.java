@@ -158,6 +158,7 @@ public class DbAllApps {
         waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.jobs);
         userAction.performActionWithPolling(dbSubTopPanelModulePageObject.jobs, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+        userAction.performActionWithPolling(dbSubTopPanelModulePageObject.runs, UserAction.CLICK);
         waitExecuter.waitUntilPageFullyLoaded();
     }
 
@@ -167,7 +168,6 @@ public class DbAllApps {
         waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.jobs);
         userAction.performActionWithPolling(dbSubTopPanelModulePageObject.jobs, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.resetButton);
-        userAction.performActionWithPolling(dbSubTopPanelModulePageObject.runs, UserAction.CLICK);
         waitExecuter.waitUntilPageFullyLoaded();
     }
 

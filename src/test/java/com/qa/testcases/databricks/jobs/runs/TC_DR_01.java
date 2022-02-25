@@ -33,7 +33,7 @@ public class TC_DR_01 extends BaseClass {
         DbAllApps allApps = new DbAllApps(driver);
         // Navigate to Runs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-        allApps.navigateToJobsTab();
+        allApps.navigateToRunsTab();
 
         // Navigate to Runs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");

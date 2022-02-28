@@ -57,8 +57,8 @@ public class JobsPage {
                 jobsPage.clickOnStatus.click();
                 waitExecuter.waitUntilElementClickable(jobsPage.closeIcon);
                 waitExecuter.waitUntilPageFullyLoaded();
-                String status = jobsPage.appStatus.getText();
-                Assert.assertNotSame(statusTable, status, "Runs Status is not displayed in the Header");
+                String status = jobsPage.appStatus.getText().trim();
+                Assert.assertEquals(statusTable, status, "Runs Status is not displayed in the Header");
                 return status;
             }
 
@@ -68,14 +68,14 @@ public class JobsPage {
      * and verify jobs Id details Page .
      */
     public String verifyJobId(DbxJobsPageObject jobsPage) {
-        String jobsTable = jobsPage.jobId.getText();
-        logger.info("Application Id is " + jobsTable);
+        String jobsIdTable = jobsPage.jobId.getText();
+        logger.info("Application Id is " + jobsIdTable);
         waitExecuter.waitUntilElementClickable(jobsPage.clickOnJobId);
         jobsPage.clickOnJobId.click();
         waitExecuter.waitUntilElementClickable(jobsPage.closeIcon);
         waitExecuter.waitUntilPageFullyLoaded();
         String jobsIdAppPage = jobsPage.appJobId.getText().trim();
-        Assert.assertNotSame(jobsTable, jobsIdAppPage, "Runs Id is not displayed in the Header");
+        Assert.assertEquals(jobsIdTable, jobsIdAppPage, "Runs Id is not displayed in the Header");
         return jobsIdAppPage;
     }
 
@@ -87,11 +87,98 @@ public class JobsPage {
         String jobsName = jobsPage.jobName.getText();
         logger.info("Application Id is " + jobsName);
         waitExecuter.waitUntilElementClickable(jobsPage.clickOnName);
+        waitExecuter.waitUntilPageFullyLoaded();
         jobsPage.clickOnName.click();
         waitExecuter.waitUntilElementClickable(jobsPage.closeIcon);
         waitExecuter.waitUntilPageFullyLoaded();
-        String jobsNameAppPage = jobsPage.appName.getText().trim();
-        Assert.assertNotSame(jobsName, jobsNameAppPage, "Runs Id is not displayed in the Header");
+        String jobsNameAppPage = jobsPage.appJobName.getText().trim();
+        Assert.assertEquals(jobsName, jobsNameAppPage, "Runs Id is not displayed in the Header");
         return jobsNameAppPage;
     }
+
+    /**
+     * Method to click on Cluster Name , navigate to the details page.
+     * and verify Cluster Name details Page .
+     */
+    public String verifyClusterName(DbxJobsPageObject jobsPage) {
+        String clusterName = jobsPage.clusterName.getText();
+        logger.info("Application Cluster Name is " + clusterName);
+        waitExecuter.waitUntilElementClickable(jobsPage.clickOnName);
+        jobsPage.clickOnName.click();
+        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilElementClickable(jobsPage.closeIcon);
+        waitExecuter.waitUntilPageFullyLoaded();
+        String clusterNameAppPage = jobsPage.appclusterName.getText().trim();
+        Assert.assertEquals(clusterName, clusterNameAppPage, "Cluster Name is not displayed in the Header");
+        return clusterNameAppPage;
+    }
+
+
+    /**
+     * Method to click on Work Space , navigate to the details page.
+     * and verify Work Space details Page .
+     */
+    public String verifyWorkSpace(DbxJobsPageObject jobsPage) {
+        String workSpace = jobsPage.workSpace.getText();
+        logger.info("Application WorkSpace is " + workSpace);
+        waitExecuter.waitUntilElementClickable(jobsPage.clickOnName);
+        jobsPage.clickOnName.click();
+        waitExecuter.waitUntilElementClickable(jobsPage.closeIcon);
+        waitExecuter.waitUntilPageFullyLoaded();
+        String workSpaceAppPage = jobsPage.appWorkSpace.getText().trim();
+        Assert.assertEquals(workSpace, workSpaceAppPage, "WorkSpace is not displayed in the Header");
+        return workSpaceAppPage;
+    }
+
+    /**
+     * Method to click on Work Space , navigate to the details page.
+     * and verify Work Space details Page .
+     */
+    public String verifyUser(DbxJobsPageObject jobsPage) {
+        String user = jobsPage.userName.getText();
+        logger.info("Application User Name is " + user);
+        waitExecuter.waitUntilElementClickable(jobsPage.clickOnName);
+        jobsPage.clickOnName.click();
+        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilElementClickable(jobsPage.closeIcon);
+        waitExecuter.waitUntilPageFullyLoaded();
+        String userNameAppPage = jobsPage.appUserName.getText().trim();
+        Assert.assertEquals(user, userNameAppPage, "User Name is not displayed in the Header");
+        return userNameAppPage;
+    }
+
+    /**
+     * Method to click on App details , navigate to the details page.
+     * and verify Start Time details Page .
+     */
+    public String verifyStartTime(DbxJobsPageObject jobsPage) {
+        String startTime = jobsPage.startTime.getText();
+        logger.info("Application Start Name is " + startTime);
+        waitExecuter.waitUntilElementClickable(jobsPage.clickOnName);
+        waitExecuter.waitUntilPageFullyLoaded();
+        jobsPage.clickOnName.click();
+        waitExecuter.waitUntilElementClickable(jobsPage.closeIcon);
+        waitExecuter.waitUntilPageFullyLoaded();
+        String startTimeAppPage = jobsPage.appStartTime.getText().trim();
+        Assert.assertEquals(startTime, startTimeAppPage, "Start Name is not displayed in the Header");
+        return startTimeAppPage;
+    }
+
+    /**
+     * Method to click on App details , navigate to the details page.
+     * and verify Start Time details Page .
+     */
+    public String verifyRunCount(DbxJobsPageObject jobsPage) {
+        String user = jobsPage.runCount.getText();
+        logger.info("Application Run Count is " + user);
+        waitExecuter.waitUntilElementClickable(jobsPage.clickOnName);
+        waitExecuter.waitUntilPageFullyLoaded();
+        jobsPage.clickOnName.click();
+        waitExecuter.waitUntilElementClickable(jobsPage.closeIcon);
+        waitExecuter.waitUntilPageFullyLoaded();
+        String clusterNameAppPage = jobsPage.appRunCount.getText().trim();
+        Assert.assertNotSame(user, clusterNameAppPage, "Run Count is not displayed in the Header");
+        return clusterNameAppPage;
+    }
 }
+

@@ -18,22 +18,52 @@ public class DbxJobsPageObject {
     @FindBy(xpath = "(//h2[@class='text-white']//span)[3]")
     public WebElement appName;
 
+    @FindBy(xpath = "//span[@class='start']")
+    public WebElement appStartTime;
+
+    @FindBy(xpath = "//div[@class='right text-white']//span[1]")
+    public WebElement appUserName;
+
+    @FindBy(xpath = "(//div[@class='right text-white']//span)[3]")
+    public WebElement appWorkSpace;
+
+    @FindBy(xpath = "(//h2[@class='text-white']//span)[3]")
+    public WebElement appJobName;
+
+    @FindBy(xpath = "(//div[@class='right text-white']//span)[2]")
+        public WebElement appclusterName;
+
+    @FindBy(xpath = "//span[@class='start']")
+    public WebElement appStartName;
+
+    @FindBy(xpath = "(//h2[@class='text-white']//span)[3]")
+    public WebElement appRunCount;
+
     @FindBy(xpath = "(//div[@class='right text-white']//span)[2]")
     public WebElement appClusterName;
 
-    @FindBy(xpath = "//tbody/tr/td[1]")
+    @FindBy(xpath = "//tbody/tr/td[1]/span[1]")
     public WebElement status;
 
-    @FindBy(xpath = "//tbody/tr/td[2]")
+    @FindBy(xpath = "//tbody/tr/td[2]/span[1]")
     public WebElement jobId;
 
-    @FindBy(xpath = "//tbody/tr/td[3]")
+    @FindBy(xpath = "//tbody/tr/td[3]/span[1]")
     public WebElement jobName;
 
-    @FindBy(xpath = "//tbody/tr/td[4]")
+    @FindBy(xpath = "//tbody/tr/td[4]/span[1]")
     public WebElement clusterName;
 
-    @FindBy(xpath = "//tbody/tr/td[5]")
+    @FindBy(xpath = "//tbody/tr/td[7]")
+    public WebElement startTime;
+
+    @FindBy(xpath = "//tbody/tr/td[6]/span[1]")
+    public WebElement userName;
+
+    @FindBy(xpath = "//tbody/tr/td[8]/span[1]")
+    public WebElement runCount;
+
+    @FindBy(xpath = "//tbody/tr/td[5]/span[1]")
     public WebElement workSpace;
 
     @FindBy(css = "tbody#RunsListAll-body")

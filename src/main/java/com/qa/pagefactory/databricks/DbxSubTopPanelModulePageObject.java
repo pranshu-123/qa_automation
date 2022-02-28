@@ -95,6 +95,9 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//span[text()='Runs']")
     public WebElement runs;
 
+    @FindBy(xpath = "//span[text()='Jobs']")
+    public WebElement jobsTab;
+
     @FindBy(css = ".col-md-12.no-data-msg")
     public WebElement whenNoApplicationPresent;
 

@@ -168,6 +168,7 @@ public class DbAllApps {
         waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.jobs);
         userAction.performActionWithPolling(dbSubTopPanelModulePageObject.jobs, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.resetButton);
+        userAction.performActionWithPolling(dbSubTopPanelModulePageObject.jobsTab, UserAction.CLICK);
         waitExecuter.waitUntilPageFullyLoaded();
     }
 
@@ -222,7 +223,7 @@ public class DbAllApps {
         waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.closeIcon);
         waitExecuter.waitUntilPageFullyLoaded();
         String status = dballApps.appStatus.getText();
-        Assert.assertNotSame(statusTable, status, "Runs Status is not displayed in the Header");
+        Assert.assertEquals(statusTable, status, "Runs Status is not displayed in the Header");
         return status;
     }
 

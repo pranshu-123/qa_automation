@@ -32,7 +32,7 @@ public class CT_14 extends BaseClass{
 
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
-		chargeBackCluster.filterCost("Users");
+		chargeBackCluster.filterBy("Users");
 		costTrends.filterSingleValue("root");
 		costTrends.validateGraphFooter("root");
 		costTrends.validateGeneratedGraph();

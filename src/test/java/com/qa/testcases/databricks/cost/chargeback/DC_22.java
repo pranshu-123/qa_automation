@@ -34,8 +34,7 @@ public class DC_22  extends BaseClass{
 		LOGGER.info("Navigated to Chareback page");
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
-		jobs.clickOnGroupByDropDown();
-		jobs.selectGroupByFilterValue("Workspace");
+		jobs.selectGroupByFilterValue("User");
 		chargeBackCluster.selectDownloadOption("dbu", "Download PDF");
 		waitExecuter.sleep(2000);
 		Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("chart.pdf"), "File is not downloaded " +

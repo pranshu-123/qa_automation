@@ -16,15 +16,15 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.DbxCostChargeback
-public class DC_24  extends BaseClass{
+public class DC_26  extends BaseClass{
 
-	private static final Logger LOGGER = Logger.getLogger(DC_24.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(DC_26.class.getName());
 
 	@Test
-	public void TC_Cost_CB_24_VerifyDownloadInPNGFormat() {
-		test = extent.startTest("TC_Cost_CB_24_VerifyDownloadInPNGFormat", "Verify download in PNG format");
+	public void TC_Cost_CB_26_VerifyDownloadInCSVFormat() {
+		test = extent.startTest("TC_Cost_CB_26_VerifyDownloadInCSVFormat", "Verify download in CSV format");
 		test.assignCategory("Cost/Chargeback");
-		Log.startTestCase("TC_Cost_CB_24_VerifyDownloadInPNGFormat");
+		Log.startTestCase("TC_Cost_CB_26_VerifyDownloadInCSVFormat");
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  
 		DatePicker datePicker = new DatePicker(driver);
@@ -35,11 +35,12 @@ public class DC_24  extends BaseClass{
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
 		jobs.selectGroupByFilterValue("Workspace");
-		chargeBackCluster.selectDownloadOption("dbu", "Download PNG");
+		chargeBackCluster.selectDownloadOption("dbu", "Download CSV");
 		waitExecuter.sleep(2000);
-		Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("chart.png"), "File is not downloaded " +
+		Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("chart.csv"), "File is not downloaded " +
 				"or size of file is zero bytes.");
-		test.log(LogStatus.PASS, "Successfully downloaded Nodes graph as PNG file.");
-		LOGGER.info("Successfully downloaded graph as PNG file.");
+		test.log(LogStatus.PASS, "Successfully downloaded Nodes graph as CSV file.");
+		LOGGER.info("Successfully downloaded graph as CSV file.");
 	}
 }
+

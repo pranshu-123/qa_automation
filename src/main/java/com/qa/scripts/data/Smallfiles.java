@@ -63,6 +63,7 @@ public class Smallfiles {
      */
     public void clickOnRunButton() {
         try {
+            if(smallfilesPageObject.runButton!=null);
             waitExecuter.waitUntilElementPresent(smallfilesPageObject.runButton);
             MouseActions.clickOnElement(driver, smallfilesPageObject.runButton);
         } catch (TimeoutException te) {

@@ -71,6 +71,7 @@ public class TC_M08 extends BaseClass {
             waitExecuter.waitUntilElementClickable(managePageObject.resetButton);
             waitExecuter.sleep(8000);
             waitExecuter.waitUntilElementPresent(managePageObject.latestDiagnosticsContentHeader);
+            waitExecuter.sleep(4000);
             waitExecuter.waitUntilTextToBeInWebElement(managePageObject.latestDiagnosticsContentHeader, "Diagnostics Log");
             waitExecuter.sleep(9000);
             waitExecuter.waitUntilElementClickable(managePageObject.resetButton);

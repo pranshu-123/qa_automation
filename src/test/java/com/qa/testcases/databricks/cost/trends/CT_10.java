@@ -33,7 +33,7 @@ public class CT_10 extends BaseClass{
 
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
-		chargeBackCluster.filterCost("Cluster");
+		chargeBackCluster.filterBy("Cluster");
 		waitExecuter.sleep(2000);
 		costTrends.selectOptimize("Cluster");
 		waitExecuter.sleep(2000);

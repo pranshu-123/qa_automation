@@ -10,21 +10,20 @@ import com.qa.base.BaseClass;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.clusters.Jobs;
 import com.qa.scripts.databricks.cost.ChargeBackCluster;
-import com.qa.utils.FileUtils;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.DbxCostChargeback
-public class DC_24  extends BaseClass{
+public class DC_16 extends BaseClass{
 
-	private static final Logger LOGGER = Logger.getLogger(DC_24.class.getName());
-
+	private static final Logger LOGGER = Logger.getLogger(DC_16.class.getName());
+	
 	@Test
-	public void TC_Cost_CB_24_VerifyDownloadInPNGFormat() {
-		test = extent.startTest("TC_Cost_CB_24_VerifyDownloadInPNGFormat", "Verify download in PNG format");
+	public void TC_Cost_CB_16_VerifyCopyUrlFunctionality() {
+		test = extent.startTest("TC_Cost_CB_16_VerifyCopyUrlFunctionality", "Verify Copy URL functionality");
 		test.assignCategory("Cost/Chargeback");
-		Log.startTestCase("TC_Cost_CB_24_VerifyDownloadInPNGFormat");
+		Log.startTestCase("TC_Cost_CB_16_VerifyCopyUrlFunctionality");
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  
 		DatePicker datePicker = new DatePicker(driver);
@@ -34,12 +33,16 @@ public class DC_24  extends BaseClass{
 		LOGGER.info("Navigated to Chareback page");
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
-		jobs.selectGroupByFilterValue("Workspace");
-		chargeBackCluster.selectDownloadOption("dbu", "Download PNG");
+		jobs.selectGroupByFilterValue("Cluster");
+		String url = chargeBackCluster.selectCopyUrl();
 		waitExecuter.sleep(2000);
-		Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("chart.png"), "File is not downloaded " +
-				"or size of file is zero bytes.");
-		test.log(LogStatus.PASS, "Successfully downloaded Nodes graph as PNG file.");
-		LOGGER.info("Successfully downloaded graph as PNG file.");
+		LOGGER.info("URL copied");
+		driver.navigate().to(url);
+		waitExecuter.sleep(2000);
+		LOGGER.info("Navigated to copied URL");
+		chargeBackCluster.validateDate();
+		Assert.assertTrue(url.contains("compute/dbclusters"));
+		test.log(LogStatus.PASS, "Navigated to Cluster page");
+		LOGGER.info("Navigated to Cluster page");
 	}
 }

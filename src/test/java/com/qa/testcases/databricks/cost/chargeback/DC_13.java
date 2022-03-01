@@ -2,7 +2,6 @@ package com.qa.testcases.databricks.cost.chargeback;
 
 import java.util.logging.Logger;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.qa.annotations.Marker;
@@ -10,21 +9,21 @@ import com.qa.base.BaseClass;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.clusters.Jobs;
 import com.qa.scripts.databricks.cost.ChargeBackCluster;
-import com.qa.utils.FileUtils;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.DbxCostChargeback
-public class DC_24  extends BaseClass{
+public class DC_13 extends BaseClass{
 
-	private static final Logger LOGGER = Logger.getLogger(DC_24.class.getName());
-
+	private static final Logger LOGGER = Logger.getLogger(DC_13.class.getName());
+	
 	@Test
-	public void TC_Cost_CB_24_VerifyDownloadInPNGFormat() {
-		test = extent.startTest("TC_Cost_CB_24_VerifyDownloadInPNGFormat", "Verify download in PNG format");
+	public void TC_Cost_CB_13_VerifyTagKeyValues() {
+		test = extent.startTest("TC_Cost_CB_13_VerifyTagKeyValues", "Tag Key validation");
 		test.assignCategory("Cost/Chargeback");
-		Log.startTestCase("TC_Cost_CB_24_VerifyDownloadInPNGFormat");
+		Log.startTestCase("TC_Cost_CB_13_VerifyTagKeyValues");
+		String[] expectedValues = {"AI Team","ML team","4730_PG_III"};
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  
 		DatePicker datePicker = new DatePicker(driver);
@@ -34,12 +33,10 @@ public class DC_24  extends BaseClass{
 		LOGGER.info("Navigated to Chareback page");
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
-		jobs.selectGroupByFilterValue("Workspace");
-		chargeBackCluster.selectDownloadOption("dbu", "Download PNG");
-		waitExecuter.sleep(2000);
-		Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("chart.png"), "File is not downloaded " +
-				"or size of file is zero bytes.");
-		test.log(LogStatus.PASS, "Successfully downloaded Nodes graph as PNG file.");
-		LOGGER.info("Successfully downloaded graph as PNG file.");
+		jobs.selectGroupByFilterValue("Tag Key");
+		
+		test.log(LogStatus.PASS, "Result populated as  per Group By filter");
+		LOGGER.info("Result populated as  per Group By filter");
 	}
 }
+

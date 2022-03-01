@@ -6,6 +6,7 @@ import com.qa.scripts.DatePicker;
 import com.qa.utils.WaitExecuter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import java.util.List;
@@ -91,6 +92,7 @@ public class ChargeBackCluster {
 	}
 
 	public void validateResultSet(String[] str) {
+		waitExecuter.sleep(1000);
 		List<String> list =chargebackClusterPageObject.resultSetValues.stream()
 				.map(a-> a.getText())
 				.collect(Collectors.toList());
@@ -111,7 +113,14 @@ public class ChargeBackCluster {
 	}
 
 	public void selectOptimize() {
+		waitExecuter.sleep(2000);
 		chargebackClusterPageObject.optimize.click();
+	}
+
+	public String selectCopyUrl() {
+		waitExecuter.sleep(2000);
+		chargebackClusterPageObject.copyURL.get(0).click();
+		return chargebackClusterPageObject.urlLinks.get(0).getAttribute("href");
 	}
 
 	public void validateDate() {
@@ -135,7 +144,7 @@ public class ChargeBackCluster {
 			chargebackClusterPageObject.graphsThreeDots.get(2).click();	
 			driver.findElement(By.xpath(String.format(chargebackClusterPageObject.clusterDownloadFormat,format))).click();
 		}
-		
+		LOGGER.info(type+ " is selected to download resultant graph in "+ format + " format");
 	}
 
 	public String calculateDBUSumFromResultSet() {
@@ -145,6 +154,7 @@ public class ChargeBackCluster {
 			sum = sum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText());
 		}
 		return String.valueOf(sum);
+		
 	}
 
 	public String fetchDBUValueFromGraph() {
@@ -159,12 +169,21 @@ public class ChargeBackCluster {
 		}
 	}
 
-	public void filterCost(String filter) {
+	public void filterBy(String filter) {
 		waitExecuter.waitUntilElementClickable(chargebackClusterPageObject.filterByDropDown);
 		waitExecuter.sleep(2500);
 		chargebackClusterPageObject.filterByDropDown.click();
 		driver.findElement(By.xpath(String.format(chargebackClusterPageObject.filterByValues,filter))).click();
 	}
+	
+	public void filterByTagKey(String tagKey) {		
+		waitExecuter.sleep(2500);
+		chargebackClusterPageObject.tagKeyDropdown.click();
+		chargebackClusterPageObject.tagKeySearchField.sendKeys(tagKey);
+		chargebackClusterPageObject.tagKeySearchField.sendKeys(Keys.ENTER);
+		LOGGER.info("Specified Tag Key selected: "+tagKey);
+	}	
+	
 }
 
 

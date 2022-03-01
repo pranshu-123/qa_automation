@@ -28,7 +28,7 @@ public class TrendsPageObject {
     @FindBy(xpath = "//h4[contains(text(),'Cost')]/../following-sibling::div/a/span[contains(text(),'Chargeback')]")
     public WebElement costChargebackButton;
     
-    @FindBy(xpath = "//h4[contains(text(),'Cost	')]/../following-sibling::div/a/span[contains(text(),'Optimize')]")
+    @FindBy(xpath = "//h4[contains(text(),'Cost')]/../following-sibling::div/a/span[contains(text(),'Optimize')]")
     public WebElement costOptimizeButton;
     
     @FindBy(xpath = "//h4[contains(text(),'Number of Clusters')]/../following-sibling::div/a/span[contains(text(),'Chargeback')]")

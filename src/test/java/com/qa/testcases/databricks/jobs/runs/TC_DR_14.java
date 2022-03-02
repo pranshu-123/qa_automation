@@ -29,8 +29,8 @@ public class TC_DR_14 extends BaseClass {
         DbAllApps dballApps = new DbAllApps(driver);
         DbxSubTopPanelModulePageObject dbpageObject = new DbxSubTopPanelModulePageObject(driver);
         // Navigate to Runs tab from header
-        test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-        dballApps.navigateToRunsTab();
+        test.log(LogStatus.INFO, "Navigate to Runs tab from header");
+        dballApps.navigateToJobsTab("Runs");
         try {
             // Navigate to Runs tab from header
             test.log(LogStatus.INFO, "Navigate to jobs tab from header");
@@ -51,10 +51,9 @@ public class TC_DR_14 extends BaseClass {
                 test.log(LogStatus.SKIP, "No Application present ");
                 loggingUtils.error("No Application present in the Runs page", test);
             }
-        } catch (
-                NoSuchElementException ex) {
-            loggingUtils.info("No app present by this name", test);
-            loggingUtils.info("Error- " + ex, test);
+        } catch (NoSuchElementException ex) {
+            loggingUtils.error("No app present by this name", test);
+            loggingUtils.error("Error- " + ex, test);
         }
     }
 }

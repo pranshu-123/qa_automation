@@ -37,7 +37,7 @@ public class TC_DR_13 extends BaseClass {
         DbxSubTopPanelModulePageObject dbpageObject = new DbxSubTopPanelModulePageObject(driver);
         // Navigate to Runs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-        dballApps.navigateToRunsTab();
+        dballApps.navigateToJobsTab("Runs");
         try {
             // Navigate to Runs tab from header
             test.log(LogStatus.INFO, "Navigate to jobs tab from header");
@@ -67,8 +67,8 @@ public class TC_DR_13 extends BaseClass {
                     "Columns types displayed does not match the expected Table list");
             test.log(LogStatus.PASS, "Columns types displayed match the expected Table list");
         } catch (NoSuchElementException ex) {
-            loggingUtils.info("No app present by this name", test);
-            loggingUtils.info("Error- " + ex, test);
+            loggingUtils.error("No app present by this name", test);
+            loggingUtils.error("Error- " + ex, test);
         }
     }
 

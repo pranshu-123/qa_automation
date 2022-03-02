@@ -9,12 +9,6 @@ import java.util.List;
 
 public class DbxApplicationsPageObject {
 
-    @FindBy(xpath = "	")
-    public WebElement clusterIdsearchfield;
-
-    @FindBy(xpath = "	")
-    public List<WebElement> clusterIdsList;
-    
     @FindBy(css = "tbody#RunsListAll-body")
     public WebElement whenApplicationPresent;
 
@@ -23,6 +17,9 @@ public class DbxApplicationsPageObject {
 
     @FindBy(xpath = "(//div[contains(@class,'check-items-container')])[1]//span[1]")
     public List<WebElement> getApplicationTypes;
+
+    @FindBy(xpath = "//input[@class='select2-search__field']")
+    public WebElement clusterDropdown;
 
     @FindBy(css = ".col-md-12.no-data-msg")
     public WebElement whenNoApplicationPresent;
@@ -33,7 +30,7 @@ public class DbxApplicationsPageObject {
     @FindBy(css = "span#reset")
     public WebElement resetButton;
 
-    @FindBy(xpath = "//div[contains(@class,'check-items-container')]//input//following-sibling::span")
+    @FindBy(xpath = "//*[@id=\"runs-filter-panel\"]/div[2]/div/p/label/span[1]")
     public List<WebElement> selectOneApplicationType;
 
     @FindBy(xpath = "//*[@id=\"app-filter-panel\"]//div[2]/div[2]//div/p/label/span[2]")

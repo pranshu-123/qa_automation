@@ -24,7 +24,7 @@ public class TC_DR_01 extends BaseClass {
     @Test()
     public void validateFilterByClusterName() {
         test = extent.startTest("TC_DR_01.validateFilterByClusterName",
-                "Verify Jobs page should populate the data as per selected cluster");
+                "Verify the options available in date picker filter");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -33,7 +33,7 @@ public class TC_DR_01 extends BaseClass {
         DbAllApps allApps = new DbAllApps(driver);
         // Navigate to Runs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-        allApps.navigateToRunsTab();
+        allApps.navigateToJobsTab("Runs");
 
         // Navigate to Runs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");

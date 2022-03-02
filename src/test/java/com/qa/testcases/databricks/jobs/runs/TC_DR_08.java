@@ -10,6 +10,7 @@ import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.NoSuchElementException;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @Marker.DbxJobsRuns
@@ -31,7 +32,7 @@ public class TC_DR_08 extends BaseClass {
         DbxSubTopPanelModulePageObject dbpageObject = new DbxSubTopPanelModulePageObject(driver);
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-        dballApps.navigateToRunsTab();
+        dballApps.navigateToJobsTab("Runs");
         try {
             // Navigate to Runs tab from header
             test.log(LogStatus.INFO, "Navigate to jobs tab from header");
@@ -41,6 +42,11 @@ public class TC_DR_08 extends BaseClass {
 
 
             int appCount = dballApps.clickOnlyLink("Success");
+            int totalCount = Integer
+                    .parseInt(dbpageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
+            Assert.assertEquals(appCount, totalCount,
+                    "The Spark app count of SparkApp is not equal to " + "the total count of heading.");
+            waitExecuter.sleep(2000);
 
             if (appCount > 0) {
                 String headerAppId = dballApps.verifyStatus(dbpageObject);
@@ -54,10 +60,9 @@ public class TC_DR_08 extends BaseClass {
                 test.log(LogStatus.SKIP, "No Application present ");
                 loggingUtils.error("No Application present in the Runs page", test);
             }
-        } catch (
-                NoSuchElementException ex) {
-            loggingUtils.info("No app present by this name", test);
-            loggingUtils.info("Error- " + ex, test);
+        } catch (NoSuchElementException ex) {
+            loggingUtils.error("No app present by this name", test);
+            loggingUtils.error("Error- " + ex, test);
         }
     }
 }

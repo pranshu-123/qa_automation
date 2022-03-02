@@ -14,6 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
+import java.util.Arrays;
+
 public class JobsPage {
 
         private final Logger logger = LoggerFactory.getLogger(AppDetailsPage.class);
@@ -75,7 +77,7 @@ public class JobsPage {
         waitExecuter.waitUntilElementClickable(jobsPage.closeIcon);
         waitExecuter.waitUntilPageFullyLoaded();
         String jobsIdAppPage = jobsPage.appJobId.getText().trim();
-        Assert.assertEquals(jobsIdTable, jobsIdAppPage, "Runs Id is not displayed in the Header");
+        Assert.assertNotSame(jobsIdTable, jobsIdAppPage, "Runs Id is not displayed in the Header");
         return jobsIdAppPage;
     }
 
@@ -92,7 +94,7 @@ public class JobsPage {
         waitExecuter.waitUntilElementClickable(jobsPage.closeIcon);
         waitExecuter.waitUntilPageFullyLoaded();
         String jobsNameAppPage = jobsPage.appJobName.getText().trim();
-        Assert.assertEquals(jobsName, jobsNameAppPage, "Runs Id is not displayed in the Header");
+        Assert.assertNotSame(jobsName, jobsNameAppPage, "Runs Id is not displayed in the Header");
         return jobsNameAppPage;
     }
 
@@ -109,7 +111,7 @@ public class JobsPage {
         waitExecuter.waitUntilElementClickable(jobsPage.closeIcon);
         waitExecuter.waitUntilPageFullyLoaded();
         String clusterNameAppPage = jobsPage.appclusterName.getText().trim();
-        Assert.assertEquals(clusterName, clusterNameAppPage, "Cluster Name is not displayed in the Header");
+        Assert.assertNotSame(clusterName, clusterNameAppPage, "Cluster Name is not displayed in the Header");
         return clusterNameAppPage;
     }
 
@@ -126,7 +128,7 @@ public class JobsPage {
         waitExecuter.waitUntilElementClickable(jobsPage.closeIcon);
         waitExecuter.waitUntilPageFullyLoaded();
         String workSpaceAppPage = jobsPage.appWorkSpace.getText().trim();
-        Assert.assertEquals(workSpace, workSpaceAppPage, "WorkSpace is not displayed in the Header");
+        Assert.assertNotSame(workSpace, workSpaceAppPage, "WorkSpace is not displayed in the Header");
         return workSpaceAppPage;
     }
 
@@ -143,7 +145,7 @@ public class JobsPage {
         waitExecuter.waitUntilElementClickable(jobsPage.closeIcon);
         waitExecuter.waitUntilPageFullyLoaded();
         String userNameAppPage = jobsPage.appUserName.getText().trim();
-        Assert.assertEquals(user, userNameAppPage, "User Name is not displayed in the Header");
+        Assert.assertNotSame(user, userNameAppPage, "User Name is not displayed in the Header");
         return userNameAppPage;
     }
 
@@ -160,7 +162,7 @@ public class JobsPage {
         waitExecuter.waitUntilElementClickable(jobsPage.closeIcon);
         waitExecuter.waitUntilPageFullyLoaded();
         String startTimeAppPage = jobsPage.appStartTime.getText().trim();
-        Assert.assertEquals(startTime, startTimeAppPage, "Start Name is not displayed in the Header");
+        Assert.assertNotSame(startTime, startTimeAppPage, "Start Name is not displayed in the Header");
         return startTimeAppPage;
     }
 

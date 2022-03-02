@@ -37,7 +37,7 @@ public class TC_DR_12 extends BaseClass {
         DbxSubTopPanelModulePageObject dbpageObject = new DbxSubTopPanelModulePageObject(driver);
         // Navigate to Runs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-        dballApps.navigateToRunsTab();
+        dballApps.navigateToJobsTab("Runs");
         try {
             // Navigate to Runs tab from header
             test.log(LogStatus.INFO, "Navigate to jobs tab from header");

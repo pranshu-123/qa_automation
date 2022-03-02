@@ -3,18 +3,12 @@ package com.qa.testcases.databricks.jobs.runs;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.constants.PageConstants;
-import com.qa.pagefactory.databricks.DbxSubTopPanelModulePageObject;
 import com.qa.scripts.databricks.jobs.DbAllApps;
 import com.qa.utils.LoggingUtils;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 @Marker.DbxJobsRuns
 @Marker.All
@@ -29,9 +23,8 @@ public class TC_DR_04 extends BaseClass {
         // Initialize all classes objects
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         DbAllApps dballApps = new DbAllApps(driver);
-        DbxSubTopPanelModulePageObject dbpageObject = new DbxSubTopPanelModulePageObject(driver);
         DbAllApps allApps = new DbAllApps(driver);
-
+        dballApps.navigateToJobsTab("Runs");
         try {
             // Navigate to Runs tab select cluster and last 7 days
             test.log(LogStatus.INFO, "Navigate to jobs tab from header");
@@ -44,10 +37,9 @@ public class TC_DR_04 extends BaseClass {
             loggingUtils.info("Get application type of first application listed in table", test);
             loggingUtils.info("Search for appId", test);
             dballApps.searchByAppID(PageConstants.jobId.appIdForDbxjob);
-        } catch (
-                NoSuchElementException ex) {
-            loggingUtils.info("No app present by this name", test);
-            loggingUtils.info("Error- " + ex, test);
+        } catch (NoSuchElementException ex) {
+            loggingUtils.error("No app present by this name", test);
+            loggingUtils.error("Error- " + ex, test);
         }
     }
 }

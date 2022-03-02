@@ -92,17 +92,17 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//table[@id='RunsListAll']/tbody[1]/tr/td[3]/a[1]")
     public WebElement getAppname;
 
-    @FindBy(xpath = "//span[text()='Runs']")
-    public WebElement runs;
-
-    @FindBy(xpath = "//span[text()='Jobs']")
-    public WebElement jobsTab;
+    @FindBy(xpath = "(//a[@href='#/jobs/runs'])[2]")
+    public WebElement runsTab;
 
     @FindBy(css = ".col-md-12.no-data-msg")
     public WebElement whenNoApplicationPresent;
 
     @FindBy(xpath = "//ul[contains(concat(' ', @class, ' '), 'select2-results__options')]/li")
     public List<WebElement> clusterList;
+
+    @FindBy(xpath = "//input[@class='select2-search__field']")
+    public WebElement clusterDropdown;
 
     @FindBy(xpath = "//div[@class='modal-body scrollbar-s']//div[2]")
     public WebElement versionInfo;

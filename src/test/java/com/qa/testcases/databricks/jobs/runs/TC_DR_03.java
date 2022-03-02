@@ -29,7 +29,7 @@ public class TC_DR_03 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         DbxSubTopPanelModulePageObject dbpageObject = new DbxSubTopPanelModulePageObject(driver);
         DbAllApps allApps = new DbAllApps(driver);
-
+        allApps.navigateToJobsTab("Runs");
         try {
             // Navigate to Runs tab select cluster and last 7 days
             test.log(LogStatus.INFO, "Navigate to jobs tab from header");
@@ -55,10 +55,9 @@ public class TC_DR_03 extends BaseClass {
             test.log(LogStatus.INFO, "Get username of first application listed in table and search ");
             dbpageObject.searchBox.clear();
 
-        } catch (
-                NoSuchElementException ex) {
-            loggingUtils.info("No app present by this name", test);
-            loggingUtils.info("Error- " + ex, test);
+        } catch (NoSuchElementException ex) {
+            loggingUtils.error("No app present by this name", test);
+            loggingUtils.error("Error- " + ex, test);
         }
     }
 }

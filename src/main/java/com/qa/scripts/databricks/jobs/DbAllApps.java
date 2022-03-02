@@ -7,6 +7,7 @@ import com.qa.pagefactory.databricks.jobs.DbxApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.AppDetailsPage;
 import com.qa.utils.LoggingUtils;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.*;
@@ -125,10 +126,23 @@ public class DbAllApps {
         }
         // Assert if the application type is selected successfully.
         try {
-            waitExecuter.waitUntilElementPresent(applicationsPageObject.whenApplicationPresent);
+            waitExecuter.waitUntilElementPresent(applicationsPageObject.whenNoApplicationPresent);
         } catch (NoSuchElementException te) {
             throw new AssertionError("After de-selecting all status 'No Data Available' is not displayed.");
         }
+    }
+
+    /*Get all range from calendar */
+    public List<String> getCalendarRanges() {
+        List<WebElement> getCalendarRangeElements = applicationsPageObject.dateRanges;
+        waitExecuter.sleep(1000);
+        List<String> listOfCaledarRanges = new ArrayList<>();
+        logger.info("Total number of ranges in datepicker: " + getCalendarRangeElements.size());
+        for (int i = 0; i < getCalendarRangeElements.size(); i++) {
+            logger.info("The range in the calendar " + getCalendarRangeElements.get(i).getText());
+            listOfCaledarRanges.add(getCalendarRangeElements.get(i).getText());
+        }
+        return listOfCaledarRanges;
     }
 
     /* De-Select all status types */
@@ -158,8 +172,24 @@ public class DbAllApps {
         waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.jobs);
         userAction.performActionWithPolling(dbSubTopPanelModulePageObject.jobs, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
-        userAction.performActionWithPolling(dbSubTopPanelModulePageObject.runs, UserAction.CLICK);
+        userAction.performActionWithPolling(dbSubTopPanelModulePageObject.runsTab, UserAction.CLICK);
         waitExecuter.waitUntilPageFullyLoaded();
+    }
+
+    public void navigateToJobsTab(String tab) {
+        userAction.performActionWithPolling(dbSubTopPanelModulePageObject.jobs, UserAction.CLICK);
+        try {
+            if(tab.equalsIgnoreCase("Runs")){
+                userAction.performActionWithPolling(dbSubTopPanelModulePageObject.runsTab, UserAction.CLICK);
+            }
+            else if(tab.equalsIgnoreCase("Jobs")) {
+                MouseActions.clickOnElement(driver, dbSubTopPanelModulePageObject.jobsTabs);
+               waitExecuter.waitUntilElementPresent(dbSubTopPanelModulePageObject.jobsTabs);
+            }
+        }
+        catch(ElementClickInterceptedException e) {
+            e.printStackTrace();
+        }
     }
 
     /* Navigate to Jobs Tab */
@@ -168,7 +198,7 @@ public class DbAllApps {
         waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.jobs);
         userAction.performActionWithPolling(dbSubTopPanelModulePageObject.jobs, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.resetButton);
-        userAction.performActionWithPolling(dbSubTopPanelModulePageObject.jobsTab, UserAction.CLICK);
+        userAction.performActionWithPolling(dbSubTopPanelModulePageObject.jobsTabs, UserAction.CLICK);
         waitExecuter.waitUntilPageFullyLoaded();
     }
 
@@ -206,8 +236,8 @@ public class DbAllApps {
     }
 
     public void clickOnClusterDropDown() {
-        CommonPageObject commonPageObject = new CommonPageObject(driver);
-        userAction.performActionWithPolling(commonPageObject.clusterDropdown, UserAction.CLICK);
+        userAction.performActionWithPolling( dbSubTopPanelModulePageObject.clusterDropdown, UserAction.CLICK);
+        waitExecuter.waitUntilElementPresent(dbSubTopPanelModulePageObject.resetButton);
     }
 
 
@@ -216,13 +246,13 @@ public class DbAllApps {
      * and verify Status App details Page .
      */
     public String verifyStatus(DbxSubTopPanelModulePageObject dballApps) {
-        String statusTable = dballApps.Status.getText();
+        String statusTable = dballApps.Status.getText().trim().toLowerCase();;
         logger.info("Application Id is " + statusTable);
         waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.clickOnAppId);
         dbSubTopPanelModulePageObject.clickOnAppId.click();
         waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.closeIcon);
         waitExecuter.waitUntilPageFullyLoaded();
-        String status = dballApps.appStatus.getText();
+        String status = dballApps.appStatus.getText().trim().toLowerCase();
         Assert.assertEquals(statusTable, status, "Runs Status is not displayed in the Header");
         return status;
     }

@@ -19,7 +19,7 @@ public class TC_DR_11 extends BaseClass {
 
     @Test()
     public void validateWaitingStatus() {
-        test = extent.startTest("TC_DR_11.validateFilterByClusterName",
+        test = extent.startTest("TC_DR_11.validateWaitingStatus",
                 "Verify All the Waiting jobs are listed on the page");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects

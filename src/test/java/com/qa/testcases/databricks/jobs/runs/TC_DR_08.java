@@ -20,7 +20,7 @@ public class TC_DR_08 extends BaseClass {
 
     @Test()
     public void validateSuccessStatus() {
-        test = extent.startTest("TC_DR_08.validateFilterByClusterName",
+        test = extent.startTest("TC_DR_08.validateSuccessStatus",
                 "Verify All the Success jobs are listed on the page");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects

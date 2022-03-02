@@ -17,7 +17,7 @@ public class TC_DR_16  extends BaseClass {
 
     @Test()
     public void validateSortIds() {
-        test = extent.startTest("TC_DR_15.validateSortIds",
+        test = extent.startTest("TC_DR_16.validateSortIds",
                 "Verify Sort jobs as per Ids");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects

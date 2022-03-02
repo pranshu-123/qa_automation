@@ -20,7 +20,7 @@ public class TC_DR_09 extends BaseClass {
 
     @Test()
     public void validatePendingStatus() {
-        test = extent.startTest("TC_DR_09.validateFilterByClusterName",
+        test = extent.startTest("TC_DR_09.validatePendingStatus",
                 "Verify All the Pending jobs are listed on the page");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects

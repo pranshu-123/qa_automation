@@ -20,7 +20,7 @@ public class TC_DR_10 extends BaseClass {
 
     @Test()
     public void validateUnknownStatus() {
-        test = extent.startTest("TC_DR_10.validateFilterByClusterName",
+        test = extent.startTest("TC_DR_10.validateUnknownStatus",
                 "Verify All the Unknown jobs are listed on the page");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects

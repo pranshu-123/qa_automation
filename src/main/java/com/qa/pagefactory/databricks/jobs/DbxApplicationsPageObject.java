@@ -21,6 +21,21 @@ public class DbxApplicationsPageObject {
     @FindBy(xpath = "//input[@class='select2-search__field']")
     public WebElement clusterDropdown;
 
+    @FindBy(xpath = "//*[@id='RunsListAll-body']/tr/td[2]")
+    public WebElement getUserFromTable;
+
+    @FindBy(xpath = "//tbody/tr")
+    public List<WebElement> getTableData;
+
+    @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')])[2]//input")
+    public WebElement userSearchBox;
+
+    @FindBy(xpath = "//tbody/tr[1]/td/a[2]")
+    public List<WebElement> getNamesFromDropDown;
+
+    @FindBy(xpath = "//*[@id='RunsListAll-body']/tr/td[10]")
+    public WebElement getWorkspaceNameTable;
+
     @FindBy(css = ".col-md-12.no-data-msg")
     public WebElement whenNoApplicationPresent;
 

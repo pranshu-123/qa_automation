@@ -28,6 +28,9 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(id = "reset")
     public WebElement resetButton;
 
+    @FindBy(xpath = "//div[contains(@class,'opensleft') and contains(@class,'show-calendar')]")
+    public WebElement datepickerCalendar;
+
     @FindBy(xpath ="//table[@id='RunsListAll']/tbody[1]/tr/td[1]")
     public List<WebElement> listStaus;
 
@@ -55,6 +58,15 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//button[@class='close']")
     public WebElement closeIcon;
 
+    @FindBy(xpath = "(//div[contains(@class,'duration-section')])[2]/input[1]")
+    public WebElement eventsSliderInputLeft;
+
+    @FindBy(xpath = "(//div[contains(@class,'duration-section')])[2]/input[2]")
+    public WebElement eventsSliderInputRight;
+
+    @FindBy(xpath = "//div[@class='vue-slider-process']")
+    public WebElement eventsSlider;
+
     @FindBy(xpath = "//*[@id='app']//*[@class='right']/span")
     public List<WebElement> rightPaneKpis;
 
@@ -73,6 +85,8 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//table[@id='RunsListAll']/tbody[1]/tr/td[3]/span[1]")
     public WebElement getNameeFromTable;
 
+    @FindBy(xpath = "//div[@class='status-title']//following-sibling::span[contains(@class,'badge') and not(contains(@class,'module-status'))]")
+    public List<WebElement> getBadgeTitle;
 
     @FindBy(xpath = "//tbody/tr")
     public List<WebElement> getTableData;
@@ -92,7 +106,7 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//table[@id='RunsListAll']/tbody[1]/tr/td[3]/a[1]")
     public WebElement getAppname;
 
-    @FindBy(xpath = "(//a[@href='#/jobs/runs'])[2]")
+    @FindBy(xpath = "//span[text()='Runs']")
     public WebElement runsTab;
 
     @FindBy(css = ".col-md-12.no-data-msg")

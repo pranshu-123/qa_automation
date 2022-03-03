@@ -2,6 +2,7 @@ package com.qa.testcases.databricks.jobs.jobs;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.pagefactory.databricks.DbxSubTopPanelModulePageObject;
 import com.qa.pagefactory.databricks.jobs.DbxApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.databricks.jobs.DbAllApps;
@@ -31,11 +32,12 @@ public class TC_DJ_02 extends BaseClass {
         test.log(LogStatus.INFO, "Initialize all class objects");
         loggingUtils.info("Initialize all class objects",test);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
-        DbxApplicationsPageObject applicationsPageObject = new DbxApplicationsPageObject(driver);
+        DbxSubTopPanelModulePageObject dbpageObject = new DbxSubTopPanelModulePageObject(driver);
         DbAllApps allApps = new DbAllApps(driver);
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         allApps.navigateToJobsTab("Jobs");
+        waitExecuter.waitUntilElementPresent(dbpageObject.jobsTabs);
 
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");

@@ -2,6 +2,7 @@ package com.qa.testcases.databricks.jobs.jobs;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.pagefactory.databricks.DbxSubTopPanelModulePageObject;
 import com.qa.pagefactory.databricks.jobs.DbxJobsPageObject;
 import com.qa.scripts.databricks.jobs.DbAllApps;
 import com.qa.scripts.databricks.jobs.JobsPage;
@@ -11,6 +12,7 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.annotations.Test;
+
 @Marker.DbxJobs
 @Marker.All
 public class TC_DJ_09 extends BaseClass {
@@ -27,10 +29,12 @@ public class TC_DJ_09 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         DbAllApps dballApps = new DbAllApps(driver);
         DbxJobsPageObject jobsPageObject = new DbxJobsPageObject(driver);
+        DbxSubTopPanelModulePageObject dbpageObject = new DbxSubTopPanelModulePageObject(driver);
         JobsPage jobsPage = new JobsPage(driver);
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         dballApps.navigateToJobsTab("Jobs");
+        waitExecuter.waitUntilElementPresent(dbpageObject.jobsTabs);
         try {
             // Navigate to Jobs tab from header
             test.log(LogStatus.INFO, "Navigate to jobs tab from header");

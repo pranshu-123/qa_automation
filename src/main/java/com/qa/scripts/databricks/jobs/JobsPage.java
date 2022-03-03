@@ -164,16 +164,16 @@ public class JobsPage {
      * and verify Duration details Page .
      */
     public String verifyDuration(DbxJobsPageObject jobsPage) {
-        String user = jobsPage.userName.getText();
-        logger.info("Application User Name is " + user);
+        String duration = jobsPage.duration.getText();
+        logger.info("Application Duration Name is " + duration);
         waitExecuter.waitUntilElementClickable(jobsPage.clickOnName);
         jobsPage.clickOnName.click();
         waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.waitUntilElementClickable(jobsPage.closeIcon);
         waitExecuter.waitUntilPageFullyLoaded();
-        String userNameAppPage = jobsPage.appUserName.getText().trim();
-        Assert.assertNotSame(user, userNameAppPage, "User Name is not displayed in the Header");
-        return userNameAppPage;
+        String durationAppPage = jobsPage.appDuration.getText().trim();
+        Assert.assertNotSame(duration, durationAppPage, "duration is not displayed in the Header");
+        return durationAppPage;
     }
 
     /**

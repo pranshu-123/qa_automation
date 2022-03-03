@@ -29,11 +29,14 @@ public class TC_DJ_03 extends BaseClass {
         loggingUtils.info("Initialize all class objects", test);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         DbAllApps dballApps = new DbAllApps(driver);
+        DbxSubTopPanelModulePageObject dbpageObject = new DbxSubTopPanelModulePageObject(driver);
         DbxJobsPageObject jobsPageObject = new DbxJobsPageObject(driver);
         JobsPage jobsPage = new JobsPage(driver);
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         dballApps.navigateToJobsTab("Jobs");
+        waitExecuter.waitUntilElementPresent(dbpageObject.jobsTabs);
+
         try {
             // Navigate to Jobs tab from header
             test.log(LogStatus.INFO, "Navigate to jobs tab from header");

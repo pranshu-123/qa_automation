@@ -31,6 +31,7 @@ public class TC_DJ_01 extends BaseClass {
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         allApps.navigateToJobsTab("Jobs");
+        waitExecuter.waitUntilElementPresent(dbpageObject.jobsTabs);
 
         String jobsTab=dbpageObject.jobs.getText().trim();
         test.log(LogStatus.INFO, "Jobs tab from header is :"+jobsTab);

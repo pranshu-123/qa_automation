@@ -192,16 +192,6 @@ public class DbAllApps {
         }
     }
 
-    /* Navigate to Jobs Tab */
-    public void navigateToJobsTab() {
-        logger.info("Navigate to jobs tab from header");
-        waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.jobs);
-        userAction.performActionWithPolling(dbSubTopPanelModulePageObject.jobs, UserAction.CLICK);
-        waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.resetButton);
-        userAction.performActionWithPolling(dbSubTopPanelModulePageObject.jobsTabs, UserAction.CLICK);
-        waitExecuter.waitUntilPageFullyLoaded();
-    }
-
     /* Select last 7 days from date range */
     public void select7Days() {
         logger.info("Select last 7 days");
@@ -213,8 +203,6 @@ public class DbAllApps {
 
     /* Select cluster and Last 7 days */
     public void inJobsSelectClusterAndLast7Days() {
-        // Navigate to Jobs tab from header
-        navigateToJobsTab();
         // Select last 7 days from date picker
         select7Days();
         // Select cluster

@@ -1,5 +1,6 @@
 package com.qa.testcases.databricks.jobs.applications;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.databricks.jobs.DbxApplicationsPageObject;
 import com.qa.pagefactory.databricks.jobs.DbxSummaryPageObject;
@@ -19,7 +20,8 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-
+@Marker.DbxAppDetails
+@Marker.All
 public class TC_JAP_03 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_JAP_03.class);
 
@@ -38,7 +40,7 @@ public class TC_JAP_03 extends BaseClass {
         SummaryDetailsPage summaryPage = new SummaryDetailsPage(driver);
         // Navigate to Runs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-        dballApps.navigateToRunsTab();
+        dballApps.navigateToJobsTab("Runs");
         try {
             // Navigate to Runs tab from header
             test.log(LogStatus.INFO, "Navigate to jobs tab from header");

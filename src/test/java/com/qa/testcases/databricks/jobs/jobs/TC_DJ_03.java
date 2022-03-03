@@ -33,7 +33,7 @@ public class TC_DJ_03 extends BaseClass {
         JobsPage jobsPage = new JobsPage(driver);
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-        dballApps.navigateToJobsTab();
+        dballApps.navigateToJobsTab("Jobs");
         try {
             // Navigate to Jobs tab from header
             test.log(LogStatus.INFO, "Navigate to jobs tab from header");

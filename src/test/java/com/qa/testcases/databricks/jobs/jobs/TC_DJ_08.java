@@ -18,8 +18,8 @@ public class TC_DJ_08 extends BaseClass {
 
     @Test()
     public void validateUser() {
-        test = extent.startTest("TC_DJ_08.validateWorkSpace",
-                "Verify User are listed on the page");
+        test = extent.startTest("TC_DJ_08.validateUser",
+                "Verify User Name are listed on the application page");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -30,7 +30,7 @@ public class TC_DJ_08 extends BaseClass {
         JobsPage jobsPage = new JobsPage(driver);
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-        dballApps.navigateToJobsTab();
+        dballApps.navigateToJobsTab("Jobs");
         try {
             // Navigate to Jobs tab from header
             test.log(LogStatus.INFO, "Navigate to jobs tab from header");

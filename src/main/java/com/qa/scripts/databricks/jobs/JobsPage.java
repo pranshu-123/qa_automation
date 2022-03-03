@@ -14,7 +14,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class JobsPage {
 
@@ -30,7 +32,10 @@ public class JobsPage {
         private final DatePicker datePicker;
         private final UserActions userAction;
 
-        /**
+        private List<String> durationTooltipValues;
+
+
+    /**
          * Constructer to initialize wait, driver and necessary objects
          *
          * @param driver - WebDriver instance
@@ -46,7 +51,12 @@ public class JobsPage {
             jobsPageObject = new DbxJobsPageObject(driver);
             userAction = new UserActions(driver);
             this.driver = driver;
+            durationTooltipValues = new ArrayList<String>();
         }
+
+      public List<String> getDurationTooltipValues() {
+        return durationTooltipValues;
+       }
 
             /**
              * Method to click the first app in jobs table , navigate to the details page.
@@ -137,6 +147,23 @@ public class JobsPage {
      * and verify Work Space details Page .
      */
     public String verifyUser(DbxJobsPageObject jobsPage) {
+        String user = jobsPage.userName.getText();
+        logger.info("Application User Name is " + user);
+        waitExecuter.waitUntilElementClickable(jobsPage.clickOnName);
+        jobsPage.clickOnName.click();
+        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilElementClickable(jobsPage.closeIcon);
+        waitExecuter.waitUntilPageFullyLoaded();
+        String userNameAppPage = jobsPage.appUserName.getText().trim();
+        Assert.assertNotSame(user, userNameAppPage, "User Name is not displayed in the Header");
+        return userNameAppPage;
+    }
+
+    /**
+     * Method to click on Duration , navigate to the details page.
+     * and verify Duration details Page .
+     */
+    public String verifyDuration(DbxJobsPageObject jobsPage) {
         String user = jobsPage.userName.getText();
         logger.info("Application User Name is " + user);
         waitExecuter.waitUntilElementClickable(jobsPage.clickOnName);

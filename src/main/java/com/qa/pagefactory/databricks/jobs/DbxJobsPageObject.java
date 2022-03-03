@@ -31,7 +31,7 @@ public class DbxJobsPageObject {
     public WebElement appJobName;
 
     @FindBy(xpath = "(//div[@class='right text-white']//span)[2]")
-        public WebElement appclusterName;
+    public WebElement appclusterName;
 
     @FindBy(xpath = "//span[@class='start']")
     public WebElement appStartName;

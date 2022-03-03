@@ -13,7 +13,7 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//span[contains(@class,'icon-jobs')]")
     public WebElement jobs;
 
-    @FindBy(xpath = "//span[contains(@class,'icon-jobs')]")
+    @FindBy(xpath = "//span[text()='Jobs']")
     public WebElement jobsTabs;
 
     @FindBy(xpath = "//*[@id='RunsListAll-body']/tr/td[1]")
@@ -22,7 +22,7 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//a[@href='#/manage/stats']")
     public WebElement stats;
 
-    @FindBy(xpath ="//h3[normalize-space()='No Data Available']")
+    @FindBy(xpath = "//h3[normalize-space()='No Data Available']")
     public List<WebElement> noDataPresent;
 
     @FindBy(id = "reset")
@@ -31,13 +31,13 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//div[contains(@class,'opensleft') and contains(@class,'show-calendar')]")
     public WebElement datepickerCalendar;
 
-    @FindBy(xpath ="//table[@id='RunsListAll']/tbody[1]/tr/td[1]")
+    @FindBy(xpath = "//table[@id='RunsListAll']/tbody[1]/tr/td[1]")
     public List<WebElement> listStaus;
 
-    @FindBy(xpath ="//table[@id='RunsListAll']/tbody[1]/tr/td[4]/span[1]")
+    @FindBy(xpath = "//table[@id='RunsListAll']/tbody[1]/tr/td[4]/span[1]")
     public List<WebElement> listIds;
 
-    @FindBy(xpath= "//a[@class='sorting icon-sort']")
+    @FindBy(xpath = "//a[@class='sorting icon-sort']")
     public List<WebElement> iconSort;
 
     @FindBy(xpath = "//*[@id=\"runs-filter-panel\"]//div/p/label/div/span[1]")

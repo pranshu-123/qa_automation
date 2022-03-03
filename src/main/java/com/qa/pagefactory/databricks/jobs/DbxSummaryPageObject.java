@@ -14,7 +14,7 @@ public class DbxSummaryPageObject {
     @FindBy(xpath = "//table[@id='RunsListAll']/tbody[1]/tr/td[14]/button[2]")
     public WebElement sparkIcon;
 
-    @FindBy(xpath = "//*[@id='app']//*[@class='right']/span")
+    @FindBy(xpath = "//*[@id=\"app\"]//div[2]/div[1]//div[1]/div[2]/h4/span/b")
     public List<WebElement> rightPaneKpis;
 
     @FindBy(xpath = "(//div[@id='SummaryDetails']/div/div)/h5")

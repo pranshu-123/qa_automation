@@ -35,7 +35,7 @@ public class TC_DJ_02 extends BaseClass {
         DbAllApps allApps = new DbAllApps(driver);
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-        allApps.navigateToJobsTab();
+        allApps.navigateToJobsTab("Jobs");
 
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");

@@ -18,7 +18,7 @@ public class TC_DR_04 extends BaseClass {
     @Test()
     public void validateSearchIncorrectName() {
         test = extent.startTest("TC_DR_04.validateFilterByClusterName",
-                "Verify search must be shown valid error");
+                "Verify search must show valid error");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         WaitExecuter waitExecuter = new WaitExecuter(driver);

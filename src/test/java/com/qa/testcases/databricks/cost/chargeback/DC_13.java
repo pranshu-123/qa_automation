@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.cost.ExpectedResultGroupValues;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.clusters.Jobs;
 import com.qa.scripts.databricks.cost.ChargeBackCluster;
@@ -23,7 +24,6 @@ public class DC_13 extends BaseClass{
 		test = extent.startTest("TC_Cost_CB_13_VerifyTagKeyValues", "Tag Key validation");
 		test.assignCategory("Cost/Chargeback");
 		Log.startTestCase("TC_Cost_CB_13_VerifyTagKeyValues");
-		String[] expectedValues = {"AI Team","ML team","4730_PG_III"};
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  
 		DatePicker datePicker = new DatePicker(driver);

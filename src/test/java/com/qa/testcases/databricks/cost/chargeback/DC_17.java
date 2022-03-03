@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.enums.cost.ExpectedResultGroupValues;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.clusters.Jobs;
 import com.qa.scripts.databricks.cost.ChargeBackCluster;
@@ -23,7 +24,7 @@ public class DC_17 extends BaseClass{
 		test = extent.startTest("TC_Cost_CB_17_VerifyFilterByUser", "Verify if the filter is working for selected user");
 		test.assignCategory("Cost/Chargeback");
 		Log.startTestCase("TC_Cost_CB_17_VerifyFilterByUser");
-		String[] expectedValues = {"root","smananghat@unraveldata.com"};
+		String[] expectedValues = {ExpectedResultGroupValues.ROOT.value,ExpectedResultGroupValues.USER.value};
 		String[] expectedGraphValues = {"DBU","Cost","Cluster"};
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  

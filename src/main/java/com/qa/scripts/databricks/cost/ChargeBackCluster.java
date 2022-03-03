@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class ChargeBackCluster {
 
 	private static final Logger LOGGER = Logger.getLogger(ChargeBackCluster.class.getName());
-	
+
 	private final WaitExecuter waitExecuter;
 	private final WebDriver driver;
 	private final ChargebackImpalaPageObject chargebackImpalaPageObject;
@@ -135,7 +135,7 @@ public class ChargeBackCluster {
 		if(type.equalsIgnoreCase("dbu")) {
 			chargebackClusterPageObject.graphsThreeDots.get(0).click();
 			driver.findElement(By.xpath(String.format(chargebackClusterPageObject.dbuDownloadFormat,format))).click();
-			}
+		}
 		else if(type.equalsIgnoreCase("cost")) {
 			chargebackClusterPageObject.graphsThreeDots.get(1).click();
 			driver.findElement(By.xpath(String.format(chargebackClusterPageObject.costDownloadFormat,format))).click();
@@ -154,7 +154,7 @@ public class ChargeBackCluster {
 			sum = sum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText());
 		}
 		return String.valueOf(sum);
-		
+
 	}
 
 	public String fetchDBUValueFromGraph() {
@@ -175,7 +175,7 @@ public class ChargeBackCluster {
 		chargebackClusterPageObject.filterByDropDown.click();
 		driver.findElement(By.xpath(String.format(chargebackClusterPageObject.filterByValues,filter))).click();
 	}
-	
+
 	public void filterByTagKey(String tagKey) {		
 		waitExecuter.sleep(2500);
 		chargebackClusterPageObject.tagKeyDropdown.click();
@@ -183,7 +183,36 @@ public class ChargeBackCluster {
 		chargebackClusterPageObject.tagKeySearchField.sendKeys(Keys.ENTER);
 		LOGGER.info("Specified Tag Key selected: "+tagKey);
 	}	
-	
+
+	public String calculateClusterSumFromResultSet() {
+		double sum =0.00;
+		int size = chargebackClusterPageObject.resultSetValues.size();
+		for(int i =5; i< size;i=i+7) {
+			sum = sum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText());
+		}
+		String value = String.valueOf(sum);
+		return (value.charAt(0) + "k");
+	}
+
+	public String fetchClusterValueFromGraph() {
+		return chargebackClusterPageObject.clusterValue.getText();
+	}
+
+
+	public String calculateTotalCostFromResultSet() {
+		double sum =0.00;
+		int size = chargebackClusterPageObject.resultSetValues.size();
+		for(int i =3; i< size;i=i+7) {
+			sum = sum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText().substring(2));
+		}
+		return ("$ "+String.valueOf(sum));
+
+	}
+
+	public String fetchTotalCostFromGraph() {
+		return chargebackClusterPageObject.costValue.getText();
+	}
+
 }
 
 

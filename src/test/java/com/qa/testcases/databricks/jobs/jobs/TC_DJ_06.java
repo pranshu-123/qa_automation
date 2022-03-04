@@ -42,8 +42,7 @@ public class TC_DJ_06 extends BaseClass {
             waitExecuter.sleep(2000);
 
 
-            String headerAppId = jobsPage.verifyClusterName(jobsPageObject);
-            test.log(LogStatus.PASS, "Application Cluster Name is displayed: " + headerAppId);
+            jobsPage.VerifyJobsName(jobsPageObject,"ClusterName",test);
             waitExecuter.waitUntilPageFullyLoaded();
             //Close apps details page
             MouseActions.clickOnElement(driver, jobsPageObject.closeIcon);

@@ -1,7 +1,6 @@
 package com.qa.scripts.databricks.jobs;
 
 import com.qa.enums.UserAction;
-import com.qa.pagefactory.CommonPageObject;
 import com.qa.pagefactory.databricks.DbxSubTopPanelModulePageObject;
 import com.qa.pagefactory.databricks.jobs.DbxApplicationsPageObject;
 import com.qa.scripts.DatePicker;
@@ -57,8 +56,8 @@ public class DbAllApps {
         dbSubTopPanelModulePageObject.searchBox.sendKeys(Keys.RETURN);
         waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.searchBox);
         if (dbSubTopPanelModulePageObject.noDataPresent.size() > 0) {
-            Boolean noData=dbSubTopPanelModulePageObject.noDataPresent.contains("No Data Available.");
-            logger.info("There are no application by Jobid- "+noData);
+            Boolean noData = dbSubTopPanelModulePageObject.noDataPresent.contains("No Data Available.");
+            logger.info("There are no application by Jobid- " + noData);
             waitExecuter.waitUntilPageFullyLoaded();
         } else
             logger.info("There are  application by name- " + app);
@@ -179,18 +178,17 @@ public class DbAllApps {
     public void navigateToJobsTab(String tab) {
         userAction.performActionWithPolling(dbSubTopPanelModulePageObject.jobs, UserAction.CLICK);
         try {
-            if(tab.equalsIgnoreCase("Runs")){
+            if (tab.equalsIgnoreCase("Runs")) {
                 userAction.performActionWithPolling(dbSubTopPanelModulePageObject.runsTab, UserAction.CLICK);
-            }
-            else if(tab.equalsIgnoreCase("Jobs")) {
+            } else if (tab.equalsIgnoreCase("Jobs")) {
                 MouseActions.clickOnElement(driver, dbSubTopPanelModulePageObject.jobsTabs);
-               waitExecuter.waitUntilElementPresent(dbSubTopPanelModulePageObject.jobsTabs);
+                waitExecuter.waitUntilElementPresent(dbSubTopPanelModulePageObject.jobsTabs);
             }
-        }
-        catch(ElementClickInterceptedException e) {
+        } catch (ElementClickInterceptedException e) {
             e.printStackTrace();
         }
     }
+
 
     /* Select last 7 days from date range */
     public void select7Days() {
@@ -224,7 +222,7 @@ public class DbAllApps {
     }
 
     public void clickOnClusterDropDown() {
-        userAction.performActionWithPolling( dbSubTopPanelModulePageObject.clusterDropdown, UserAction.CLICK);
+        userAction.performActionWithPolling(dbSubTopPanelModulePageObject.clusterDropdown, UserAction.CLICK);
         waitExecuter.waitUntilElementPresent(dbSubTopPanelModulePageObject.resetButton);
     }
 
@@ -234,7 +232,7 @@ public class DbAllApps {
      * and verify Status App details Page .
      */
     public String verifyStatus(DbxSubTopPanelModulePageObject dballApps) {
-        String statusTable = dballApps.Status.getText().trim().toLowerCase();;
+        String statusTable = dballApps.Status.getText().trim().toLowerCase();
         logger.info("Application Id is " + statusTable);
         waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.clickOnAppId);
         dbSubTopPanelModulePageObject.clickOnAppId.click();
@@ -254,32 +252,32 @@ public class DbAllApps {
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
     }
 
-    public int clickOnStatusSort(){
+    public int clickOnStatusSort() {
         int countOfIconSort = dbSubTopPanelModulePageObject.iconSort.size();
-        logger.info("Number of total icon sort :"+ countOfIconSort);
-        if(countOfIconSort > 0 ){
-            for(int i=0; i<countOfIconSort-1 ;i++){
+        logger.info("Number of total icon sort :" + countOfIconSort);
+        if (countOfIconSort > 0) {
+            for (int i = 0; i < countOfIconSort - 1; i++) {
                 waitExecuter.sleep(2000);
                 dbSubTopPanelModulePageObject.iconSort.get(i).click();
                 waitExecuter.sleep(3000);
                 int tableCount = dbSubTopPanelModulePageObject.listStaus.size();
-                logger.info("Count of Table :"+tableCount);
+                logger.info("Count of Table :" + tableCount);
 
             }
         }
         return countOfIconSort;
     }
 
-    public int clickOnIdsSort(){
+    public int clickOnIdsSort() {
         int countOfIconSort = dbSubTopPanelModulePageObject.iconSort.size();
-        logger.info("Number of total icon sort :"+ countOfIconSort);
-        if(countOfIconSort > 0 ){
-            for(int i=0; i<countOfIconSort-1 ;i++){
+        logger.info("Number of total icon sort :" + countOfIconSort);
+        if (countOfIconSort > 0) {
+            for (int i = 0; i < countOfIconSort - 1; i++) {
                 waitExecuter.sleep(2000);
                 dbSubTopPanelModulePageObject.iconSort.get(i).click();
                 waitExecuter.sleep(3000);
                 int tableCount = dbSubTopPanelModulePageObject.listIds.size();
-                logger.info("Count of Table :"+tableCount);
+                logger.info("Count of Table :" + tableCount);
 
             }
         }

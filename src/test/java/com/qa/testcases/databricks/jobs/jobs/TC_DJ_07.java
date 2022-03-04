@@ -41,9 +41,7 @@ public class TC_DJ_07 extends BaseClass {
             dballApps.inJobsSelectClusterAndLast7Days();
             waitExecuter.sleep(2000);
 
-
-            String headerAppId = jobsPage.verifyWorkSpace(jobsPageObject);
-            test.log(LogStatus.PASS, "Application WorkSpace is displayed: " + headerAppId);
+            jobsPage.VerifyJobsName(jobsPageObject,"WorkSpaceName",test);
             waitExecuter.waitUntilPageFullyLoaded();
             //Close apps details page
             MouseActions.clickOnElement(driver, jobsPageObject.closeIcon);

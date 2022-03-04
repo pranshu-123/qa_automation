@@ -26,8 +26,8 @@ public class TC_DJ_05 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DJ_05.class);
 
     @Test()
-    public void validateJobId() {
-        test = extent.startTest("TC_DJ_04.validateJobId",
+    public void validateJobName() {
+        test = extent.startTest("TC_DJ_04.validateJobName",
                 "Verify jobs Name are listed on the application page");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects

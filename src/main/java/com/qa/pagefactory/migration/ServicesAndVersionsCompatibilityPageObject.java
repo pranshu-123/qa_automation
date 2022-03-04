@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ServicesAndVersionsCompatibilityPageObject {
 
-    @FindBy(xpath = "//a[@class='icon-x']")
+    @FindBy(xpath = "//section[contains(@class,'component-message-banner bg-success')]//i[1]")
     public WebElement closeMsgBanner;
 
     @FindBy(xpath = "//button[@class='run-btn']")
@@ -48,7 +48,7 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//h3/b")
     public List<WebElement> latestReportList;
 
-    @FindBy(xpath = "//div[@class='version-comp-inner']/div[2]/div/p[contains(@class, 'pd')]")
+    @FindBy(xpath = "//div[contains(@class,'col-md-12 col-lg-12')]//div")
     public List<WebElement> legendList;
 
     /*@FindBy(xpath = "(//table[contains(@class, 'component-data-tables')])[2]")*/
@@ -142,7 +142,7 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//span[contains(text(),'Services And Versions Compatibility')]")
     public List<WebElement> toolboxCD;
 
-    @FindBy(xpath = "//div[@class='version-comp-inner']//h3[2][contains(text(),'Cloud Product')]")
+    @FindBy(xpath = "//div[@id='app']//h3[3]")
     public List<WebElement> clusterProductHeader;
 
 

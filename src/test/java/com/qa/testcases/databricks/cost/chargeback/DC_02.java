@@ -23,7 +23,6 @@ public class DC_02 extends BaseClass{
 		test = extent.startTest("TC_Cost_CB_02_VerifyChargebackResultGroupByUser", "If \"user\" is selected the table should show all the apps run by the users");
 		test.assignCategory("Cost/Chargeback");
 		Log.startTestCase("TC_Cost_CB_02_VerifyChargebackResultGroupByUser");
-		String[] expectedValues = {"root","smananghat@unraveldata.com"};
 		String[] expectedGraphValues = {"DBU","Cost","Cluster"};
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  
@@ -37,7 +36,7 @@ public class DC_02 extends BaseClass{
 		jobs.selectGroupByFilterValue("User");
 		chargeBackCluster.validatePieChartGraph(expectedGraphValues);
 		chargeBackCluster.validateResultSetIsDisplayedWithValues("User");
-		chargeBackCluster.validateResultSet(expectedValues);
+		chargeBackCluster.validateResultSet();
 		test.log(LogStatus.PASS, "Result table was displayed correctly");
 		LOGGER.info("Result table was displayed correctly");
 	}

@@ -24,7 +24,6 @@ public class CT_15 extends BaseClass{
 		test = extent.startTest("TC_Cost_Trends_15_VerifyChargebackFunctionalityForSingleUser", "Validate Chareback for single User");
 		test.assignCategory("Cost/Trends");
 		Log.startTestCase("TC_Cost_Trends_15_VerifyChargebackFunctionalityForSingleUser");
-		String[] expectedValues = {"root"};
 		String[] expectedGraphValues = {"DBU","Cost","Cluster"};
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		CostTrends costTrends = new CostTrends(driver);
@@ -35,7 +34,7 @@ public class CT_15 extends BaseClass{
 
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
-		chargeBackCluster.filterCost("Users");
+		costTrends.filterBy("Users");
 		costTrends.filterSingleValue("root");
 		costTrends.selectChargeback("Cost");
 		waitExecuter.sleep(2000);
@@ -44,7 +43,7 @@ public class CT_15 extends BaseClass{
 		Assert.assertTrue(url.contains("/cost/chargeback"));
 		chargeBackCluster.validatePieChartGraph(expectedGraphValues);
 		chargeBackCluster.validateResultSetIsDisplayedWithValues("User");
-		chargeBackCluster.validateResultSet(expectedValues);
+		chargeBackCluster.validateResultSet();
 
 		test.log(LogStatus.PASS, "Navigated to Cost Chargeback page and result set was displayed as per selected user");
 		LOGGER.info("Navigated to Cost Chargeback page and result set was displayed as per selected user");

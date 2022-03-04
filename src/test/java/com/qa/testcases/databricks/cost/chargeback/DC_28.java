@@ -33,13 +33,12 @@ public class DC_28 extends BaseClass{
 		LOGGER.info("Navigated to Chareback page");
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
-		jobs.clickOnGroupByDropDown();
 		jobs.selectGroupByFilterValue("Workspace");
 		waitExecuter.sleep(2000);
 		String resultSetValue = chargeBackCluster.calculateDBUSumFromResultSet();
-		String actualValue = resultSetValue.substring(0,resultSetValue.indexOf(".")+3);
+		//String actualValue = resultSetValue.substring(0,resultSetValue.indexOf(".")+3);
 		String expectedVale = chargeBackCluster.fetchDBUValueFromGraph();
-		Assert.assertTrue(actualValue.equals(expectedVale), "DBU value calculated from Result Set does not matches with the value populated in DBU Graph");
+		Assert.assertTrue(resultSetValue.equals(expectedVale), "DBU value calculated from Result Set does not matches with the value populated in DBU Graph");
 		test.log(LogStatus.PASS, "DBU values are matching.");
 		LOGGER.info("DBU values are matching.");
 	}

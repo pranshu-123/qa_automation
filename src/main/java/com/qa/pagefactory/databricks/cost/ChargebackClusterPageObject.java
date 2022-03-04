@@ -23,6 +23,9 @@ public class ChargebackClusterPageObject {
     @FindBy(xpath = "//span[@title='Cluster']")
     public WebElement chargeBackType;
     
+    @FindBy(xpath = "//li[contains(text(),'JobRun')]")
+    public WebElement chargeBackTypeJobRun;
+    
     @FindBy(xpath = "//ul[@class='select2-results__options']/li")
     public List<WebElement> chargeBackTypeValues;
 
@@ -62,6 +65,12 @@ public class ChargebackClusterPageObject {
     @FindBy(xpath = "//span[contains(text(),'Optimize')]")
     public WebElement optimize;
     
+    @FindBy(xpath = "//button[contains(text(),'Copy URL')]")
+    public List<WebElement> copyURL;
+    
+    @FindBy(xpath = "//button[contains(text(),'Copy URL')]/../a")
+    public List<WebElement> urlLinks;
+    
     @FindBy(xpath = "//button[contains(text(),'Copy URL')]/../../..//td/span")
     public List<WebElement> resultSetValues;
     
@@ -71,15 +80,33 @@ public class ChargebackClusterPageObject {
     @FindBy(xpath = "//h4[contains(text(),'Cluster')]/../h4/span")
     public WebElement clusterValue;
     
+    @FindBy(xpath = "//h4[contains(text(),'JobRuns')]/../h4/span")
+    public WebElement JobRunsValue;
+    
     @FindBy(xpath = "//h4[contains(text(),'Cost')]/../h4/span")
     public WebElement costValue;
     
     @FindBy(xpath = "//h4[contains(text(),'DBU')]/../h4/span")
     public WebElement dbuValue;
     
-    @FindBy(xpath = "//span[@class='select2-selection__rendered']")
+    @FindBy(xpath = "(//span[@class='select2-selection__rendered'])[2]")
     public WebElement filterByDropDown;
     
+    @FindBy(xpath = "//label[contains(text(),'Tag Key')]/..//span[@title='Name']")
+    public WebElement tagKeyDropdown;
+    
+    @FindBy(xpath = "//span/input[@class='select2-search__field']")
+    public WebElement tagKeySearchField;
+    
+    @FindBy(xpath = "//a[@class='icon-sort icon-sort-sorted-up']")
+    public WebElement sortUp;
+    
+    @FindBy(xpath = "//a[@class='icon-sort icon-sort-sorted-down']")
+    public WebElement sortDown;
+    
+    @FindBy(xpath = "//ul[@class='select2-results__options']/li")
+    public List<WebElement> tagKeyValues;
+   
     public String filterByValues = "//li[contains(text(),'%s')]";
     
     public String dbuDownloadFormat = "//h4[contains(text(),'DBU')]/..//a[contains(text(),'%s')]";

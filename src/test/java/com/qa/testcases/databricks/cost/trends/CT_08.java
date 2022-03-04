@@ -30,7 +30,7 @@ public class CT_08 extends BaseClass{
 		waitExecuter.sleep(2000);
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
-		chargeBackCluster.filterCost("Clusters");
+		costTrends.filterBy("Clusters");
 		costTrends.validateGraphFooter("Clusters");
 		costTrends.validateGeneratedGraph();
 		test.log(LogStatus.PASS, "Cluster graph generated succesfully.");

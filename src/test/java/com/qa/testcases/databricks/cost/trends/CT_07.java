@@ -32,7 +32,7 @@ public class CT_07 extends BaseClass{
 		waitExecuter.sleep(2000);
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
-		chargeBackCluster.filterBy("Workspace");
+		costTrends.filterBy("Workspace");
 		waitExecuter.sleep(2000);
 		costTrends.selectOptimize("dbu");
 		waitExecuter.sleep(2000);

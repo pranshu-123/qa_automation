@@ -23,7 +23,6 @@ public class DC_11 extends BaseClass{
 		test = extent.startTest("TC_Cost_CB_11_VerifyChargebackResultGroupByTagKey", "If \"Tag Name\" is selected the table should show all the apps run by the users ");
 		test.assignCategory("Cost/Chargeback");
 		Log.startTestCase("TC_Cost_CB_11_VerifyChargebackResultGroupByTagKey");
-		String[] expectedValues = {"AI Team","ML team","4730_PG_III"};
 		String[] expectedGraphValues = {"DBU","Cost","Cluster"};
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  
@@ -38,7 +37,7 @@ public class DC_11 extends BaseClass{
 		chargeBackCluster.filterByTagKey("Environment");
 		chargeBackCluster.validatePieChartGraph(expectedGraphValues);
 		chargeBackCluster.validateResultSetIsDisplayedWithValues("Tag Key");
-		chargeBackCluster.validateResultSet(expectedValues);
+		chargeBackCluster.validateResultSet();
 		test.log(LogStatus.PASS, "Result populated as  per Group By filter");
 		LOGGER.info("Result populated as  per Group By filter");
 	}

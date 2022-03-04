@@ -14,16 +14,15 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.DbxCostChargeback
-public class DC_02 extends BaseClass{
+public class DC_34 extends BaseClass{
 
-	private static final Logger LOGGER = Logger.getLogger(DC_02.class.getName());
-	
+	private static final Logger LOGGER = Logger.getLogger(DC_34.class.getName());
+
 	@Test
-	public void TC_Cost_CB_02_VerifyChargebackResultGroupByUser() {
-		test = extent.startTest("TC_Cost_CB_02_VerifyChargebackResultGroupByUser", "If \"user\" is selected the table should show all the apps run by the users");
+	public void TC_Cost_CB_34_ValidateCustomDateFeature() {
+		test = extent.startTest("TC_Cost_CB_34_ValidateCustomDateFeature", "Validate Custom Date feature");
 		test.assignCategory("Cost/Chargeback");
-		Log.startTestCase("TC_Cost_CB_02_VerifyChargebackResultGroupByUser");
-		String[] expectedGraphValues = {"DBU","Cost","Cluster"};
+		Log.startTestCase("TC_Cost_CB_34_ValidateCustomDateFeature");
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  
 		DatePicker datePicker = new DatePicker(driver);
@@ -32,13 +31,17 @@ public class DC_02 extends BaseClass{
 		waitExecuter.sleep(2000);
 		LOGGER.info("Navigated to Chareback page");
 		datePicker.clickOnDatePicker();
-		datePicker.selectLast30Days();
+		datePicker.selectCustomRange();
+		datePicker.setCurrentAndPastDate(-13);
+		LOGGER.info("Custom Date Selected");
+		waitExecuter.sleep(3000);
+		datePicker.clickOnCustomDateApplyBtn();
+		chargeBackCluster.selectChargebackType("JobRun");
+		waitExecuter.sleep(2000);
 		jobs.selectGroupByFilterValue("User");
-		chargeBackCluster.validatePieChartGraph(expectedGraphValues);
 		chargeBackCluster.validateResultSetIsDisplayedWithValues("User");
-		chargeBackCluster.validateResultSet();
-		test.log(LogStatus.PASS, "Result table was displayed correctly");
-		LOGGER.info("Result table was displayed correctly");
-	}
+		test.log(LogStatus.PASS, "Resultant Table displays data as per selected Custom Date");
+		LOGGER.info("Resultant Table displays data as per selected Custom Date");
 
+	}
 }

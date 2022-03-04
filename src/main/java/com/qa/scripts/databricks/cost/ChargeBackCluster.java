@@ -9,7 +9,11 @@ import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -82,6 +86,7 @@ public class ChargeBackCluster {
 				.map(values -> values.getText()).distinct().skip(1)
 				.collect(Collectors.toList());
 
+		//This is match result set data with generated graph values
 		List<String> resultSet =chargebackClusterPageObject.resultSetValues.stream()
 				.map(a-> a.getText())
 				.collect(Collectors.toList());
@@ -91,14 +96,12 @@ public class ChargeBackCluster {
 		}
 	}
 
-	public void validateResultSet(String[] str) {
+	public void validateResultSet() {
 		waitExecuter.sleep(1000);
 		List<String> list =chargebackClusterPageObject.resultSetValues.stream()
 				.map(a-> a.getText())
 				.collect(Collectors.toList());
-		for(String s : str) {
-			Assert.assertTrue(list.contains(s));
-		}
+		Assert.assertTrue(list.size()>0);
 	}
 
 	public void validateResultSetIsDisplayedWithValues(String groupBy) {
@@ -211,6 +214,45 @@ public class ChargeBackCluster {
 
 	public String fetchTotalCostFromGraph() {
 		return chargebackClusterPageObject.costValue.getText();
+	}
+
+	public String fetchJobRunsValueFromGraph() {
+		return chargebackClusterPageObject.JobRunsValue.getText();
+	}
+
+	public void validateSorting(String sortingType) {
+		Set<String> initialSet = new HashSet<String>();
+		Set<String> resultantSet = new HashSet<String>();
+		TreeSet<String> up = null;
+		TreeSet<String> down = null ;
+
+		int size = chargebackClusterPageObject.resultSetValues.size();
+
+		for(int i =5; i< size;i=i+7) {
+			initialSet.add(chargebackClusterPageObject.resultSetValues.get(i).getText());
+		}
+
+		if(sortingType.equalsIgnoreCase("up")) {
+			up = new TreeSet<String>(initialSet);
+			chargebackClusterPageObject.sortUp.click();
+			waitExecuter.sleep(1000);
+			for(int i =5; i< size;i=i+7) {
+				resultantSet.add(chargebackClusterPageObject.resultSetValues.get(i).getText());
+			}
+
+			Assert.assertEquals(resultantSet, up);
+		}
+		else {
+			down = new TreeSet<String>(initialSet);
+			chargebackClusterPageObject.sortDown.click();
+			waitExecuter.sleep(1000);
+			for(int i =5; i< size;i=i+7) {
+				resultantSet.add(chargebackClusterPageObject.resultSetValues.get(i).getText());
+			}
+
+			Assert.assertEquals(resultantSet, down);
+		}
+
 	}
 
 }

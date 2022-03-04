@@ -23,6 +23,9 @@ public class ChargebackClusterPageObject {
     @FindBy(xpath = "//span[@title='Cluster']")
     public WebElement chargeBackType;
     
+    @FindBy(xpath = "//li[contains(text(),'JobRun')]")
+    public WebElement chargeBackTypeJobRun;
+    
     @FindBy(xpath = "//ul[@class='select2-results__options']/li")
     public List<WebElement> chargeBackTypeValues;
 
@@ -77,6 +80,9 @@ public class ChargebackClusterPageObject {
     @FindBy(xpath = "//h4[contains(text(),'Cluster')]/../h4/span")
     public WebElement clusterValue;
     
+    @FindBy(xpath = "//h4[contains(text(),'JobRuns')]/../h4/span")
+    public WebElement JobRunsValue;
+    
     @FindBy(xpath = "//h4[contains(text(),'Cost')]/../h4/span")
     public WebElement costValue;
     
@@ -91,6 +97,12 @@ public class ChargebackClusterPageObject {
     
     @FindBy(xpath = "//span/input[@class='select2-search__field']")
     public WebElement tagKeySearchField;
+    
+    @FindBy(xpath = "//a[@class='icon-sort icon-sort-sorted-up']")
+    public WebElement sortUp;
+    
+    @FindBy(xpath = "//a[@class='icon-sort icon-sort-sorted-down']")
+    public WebElement sortDown;
     
     @FindBy(xpath = "//ul[@class='select2-results__options']/li")
     public List<WebElement> tagKeyValues;

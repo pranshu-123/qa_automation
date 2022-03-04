@@ -1,12 +1,9 @@
 package com.qa.testcases.databricks.cost.chargeback;
 
 import java.util.logging.Logger;
-
 import org.testng.annotations.Test;
-
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.enums.cost.ExpectedResultGroupValues;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.clusters.Jobs;
 import com.qa.scripts.databricks.cost.ChargeBackCluster;
@@ -24,8 +21,6 @@ public class DC_18 extends BaseClass{
 		test = extent.startTest("TC_Cost_CB_18_VerifyFilterByWorkspace", "Verify if the filter is working for selected workspace");
 		test.assignCategory("Cost/Chargeback");
 		Log.startTestCase("TC_Cost_CB_18_VerifyFilterByWorkspace");
-		String[] expectedValues = {ExpectedResultGroupValues.AI_WORKSPACE.value,ExpectedResultGroupValues.ML_WORKSPACE.value,
-				ExpectedResultGroupValues.PG.value};
 		String[] expectedGraphValues = {"DBU","Cost","Cluster"};
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  
@@ -40,7 +35,7 @@ public class DC_18 extends BaseClass{
 		chargeBackCluster.filterBy("Workspaces");
 		chargeBackCluster.validatePieChartGraph(expectedGraphValues);
 		chargeBackCluster.validateResultSetIsDisplayedWithValues("Workspace");
-		chargeBackCluster.validateResultSet(expectedValues);
+		chargeBackCluster.validateResultSet();
 		test.log(LogStatus.PASS, "Result table was displayed correctly");
 		LOGGER.info("Result table was displayed correctly");
 	}

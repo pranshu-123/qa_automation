@@ -49,6 +49,11 @@ public class TrendsPageObject {
     @FindBy(xpath = "//li[@class='select2-results__option select2-results__option--highlighted']")
     public WebElement searchResult;
     
+    @FindBy(xpath = "//span[@class='select2-selection__rendered']")
+    public WebElement filterByDropDown;
+    
+    public String filterByValues = "//li[contains(text(),'%s')]";
+    
     /**
      * @param driver The driver that will be used to look up the elements
      */

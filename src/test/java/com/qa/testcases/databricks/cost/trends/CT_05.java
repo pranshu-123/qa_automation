@@ -30,7 +30,7 @@ public class CT_05 extends BaseClass{
 		waitExecuter.sleep(2000);
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
-		chargeBackCluster.filterBy("Workspaces");
+		costTrends.filterBy("Workspaces");
 		costTrends.validateGraphFooter("Workspaces");
 		costTrends.validateGeneratedGraph();
 		test.log(LogStatus.PASS, "Job Run graph generated succesfully.");

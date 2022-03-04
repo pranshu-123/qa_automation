@@ -28,13 +28,13 @@ public class CT_01 extends BaseClass{
 		waitExecuter.sleep(2000);
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
-		chargeBackCluster.filterBy("Users");
+		costTrends.filterBy("Users");
 		costTrends.validateGraphFooter("Users");
-		chargeBackCluster.filterBy("Workspaces");
+		costTrends.filterBy("Workspaces");
 		costTrends.validateGraphFooter("Workspaces");
-		chargeBackCluster.filterBy("Clusters");
+		costTrends.filterBy("Clusters");
 		costTrends.validateGraphFooter("Clusters");
-		chargeBackCluster.filterBy("Tags");
+		costTrends.filterBy("Tags");
 		costTrends.validateGraphFooter("Tags");
 		test.log(LogStatus.PASS, "Job Run graph generated succesfully.");
 		LOGGER.info("Job Run graph generated succesfully.");

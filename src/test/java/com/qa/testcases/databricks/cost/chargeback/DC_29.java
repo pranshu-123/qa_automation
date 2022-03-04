@@ -33,7 +33,6 @@ public class DC_29 extends BaseClass{
 		LOGGER.info("Navigated to Chareback page");
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
-		jobs.clickOnGroupByDropDown();
 		jobs.selectGroupByFilterValue("Workspace");
 		waitExecuter.sleep(2000);
 		String resultSetValue = chargeBackCluster.calculateTotalCostFromResultSet();

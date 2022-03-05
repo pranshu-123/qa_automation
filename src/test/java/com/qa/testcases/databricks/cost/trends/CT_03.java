@@ -33,7 +33,7 @@ public class CT_03 extends BaseClass{
 
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
-		chargeBackCluster.filterCost("Users");
+		costTrends.filterBy("Users");
 		costTrends.selectChargeback("cluster");
 		waitExecuter.sleep(2000);
 		String url = driver.getCurrentUrl();

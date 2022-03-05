@@ -9,22 +9,19 @@ import com.qa.base.BaseClass;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.clusters.Jobs;
 import com.qa.scripts.databricks.cost.ChargeBackCluster;
-import com.qa.testcases.databricks.cost.trends.CT_03;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
-import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.DbxCostChargeback
-public class DC_05 extends BaseClass{
+public class DC_33 extends BaseClass{
 
-	private static final Logger LOGGER = Logger.getLogger(DC_05.class.getName());
-	
+	private static final Logger LOGGER = Logger.getLogger(DC_33.class.getName());
+
 	@Test
-	public void TC_Cost_CB_05_VerifyChargebackResultGroupByWorkspace() {
-		test = extent.startTest("TC_Cost_CB_05_VerifyChargebackResultGroupByWorkspace", "If \"Workspace\" is selected the table should show all the apps as per workspace");
+	public void TC_Cost_CB_33_ValidateSortingFeature() {
+		test = extent.startTest("TC_Cost_CB_33_ValidateSortingFeature", "Validate Sorting feature");
 		test.assignCategory("Cost/Chargeback");
-		Log.startTestCase("TC_Cost_CB_05_VerifyChargebackResultGroupByWorkspace");
-		String[] expectedGraphValues = {"DBU","Cost","Cluster"};
+		Log.startTestCase("TC_Cost_CB_33_ValidateSortingFeature");
 		ChargeBackCluster chargeBackCluster = new ChargeBackCluster(driver);
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  
 		DatePicker datePicker = new DatePicker(driver);
@@ -35,10 +32,11 @@ public class DC_05 extends BaseClass{
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
 		jobs.selectGroupByFilterValue("Workspace");
-		chargeBackCluster.validatePieChartGraph(expectedGraphValues);
-		chargeBackCluster.validateResultSetIsDisplayedWithValues("Workspace");
-		chargeBackCluster.validateResultSet();
-		test.log(LogStatus.PASS, "Result populated as  per Group By filter");
-		LOGGER.info("Result populated as  per Group By filter");
+		waitExecuter.sleep(2000);
+		chargeBackCluster.selectChargebackType("JobRun");
+		waitExecuter.sleep(2000);
+		chargeBackCluster.validateSorting("up");
+		chargeBackCluster.validateSorting("down");
 	}
 }
+

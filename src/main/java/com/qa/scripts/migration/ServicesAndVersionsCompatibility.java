@@ -112,7 +112,7 @@ public class ServicesAndVersionsCompatibility {
 
     //Validate the latest report generated
     public void validateLatestReport() {
-        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.sleep(3000);
 
         List<WebElement> reportList = servicesAndVersionsCompatibilityPageObject.latestReportList;
         Assert.assertFalse(reportList.isEmpty(), "No latest report generated.");
@@ -139,27 +139,27 @@ public class ServicesAndVersionsCompatibility {
         String legend4 = legendsList.get(3).getText().trim();
 
         Assert.assertFalse(legend1.isEmpty(), "Legend1: 'Services and Versions are Compatible' not displayed");
-        Assert.assertEquals(legend1.trim(), "Services and Versions are Compatible", "Legend1" +
+        Assert.assertEquals(legend1.trim(), "Services and Versions are Compatible.", "Legend1" +
                 " value mismatch");
         logger.info("Legend1 name: [" + legend1 + "] displayed in the header");
 
         logger.info("Legend2: " + legend2.trim());
         Assert.assertFalse(legend2.isEmpty(), "Legend2: 'Services and Versions are not Compatible' not displayed");
-        Assert.assertEquals(legend2.trim(), "Services and Versions are not Compatible", "Legend2" +
+        Assert.assertEquals(legend2.trim(), "Services and Versions are not Compatible.", "Legend2" +
                 " value mismatch");
         logger.info("Legend2 name: [" + legend2 + "] displayed in the header");
 
         logger.info("Legend3: " + legend3.trim());
         Assert.assertFalse(legend3.isEmpty(), "Legend3: 'Service is available in Source, but missing in Target'" +
                 " not displayed");
-        Assert.assertEquals(legend3.trim(), "Service is available in Source, but missing in Target",
+        Assert.assertEquals(legend3.trim(), "Service is available in Source, but missing in Target.",
                 "Legend3 value mismatch");
         logger.info("Legend3 name: [" + legend3 + "] displayed in the header");
 
         logger.info("Legend4: " + legend4.trim());
         Assert.assertFalse(legend4.isEmpty(), "Legend4: 'Service is missing in Source, but available in Target'" +
                 " not displayed");
-        Assert.assertEquals(legend4.trim(), "Service is missing in Source, but available in Target",
+        Assert.assertEquals(legend4.trim(), "Service is missing in Source , but available in Target.",
                 "Legend4 value mismatch");
         logger.info("Legend4 name: [" + legend4 + "] displayed in the header");
 

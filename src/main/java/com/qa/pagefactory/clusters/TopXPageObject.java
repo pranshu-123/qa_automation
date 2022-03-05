@@ -35,7 +35,7 @@ public class TopXPageObject {
     @FindBy(xpath = "//a[normalize-space()='Schedule']")
     public WebElement scheduleButtonInReport;
 
-    @FindBy(xpath="//div[@id='breadcrumb']/span/span")
+    @FindBy(xpath="//span[text()='Archives']")
     public WebElement archivesHeader;
 
     @FindBy(xpath = "(//*[@class=\"select2-selection__rendered\"])[2]")
@@ -59,7 +59,7 @@ public class TopXPageObject {
     @FindBy(xpath = "//section[contains(@class,'component-message-banner bg-success')]//div[1]")
     public WebElement scheduleSuccessfulMessage;
     
-    @FindBy(xpath = "//span[contains(@class,'icon-download')]")
+    @FindBy(xpath = "//div[@class='pull-right']//a[@class='menu']")
     public WebElement downloadJsonButton;
 
     @FindBy(xpath = "//ul[contains(concat(' ', @class, ' '), 'select2-results__options')]/li")

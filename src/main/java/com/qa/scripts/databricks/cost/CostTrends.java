@@ -2,6 +2,7 @@ package com.qa.scripts.databricks.cost;
 
 import java.util.logging.Logger;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
@@ -78,5 +79,12 @@ public class CostTrends {
 		waitExecuter.sleep(1500);
 		trendsPageObject.searchTextArea.sendKeys(value);
 		trendsPageObject.searchResult.click();
+	}
+	
+	public void filterBy(String filter) {
+		waitExecuter.waitUntilElementClickable(trendsPageObject.filterByDropDown);
+		waitExecuter.sleep(2500);
+		trendsPageObject.filterByDropDown.click();
+		driver.findElement(By.xpath(String.format(trendsPageObject.filterByValues,filter))).click();
 	}
 }

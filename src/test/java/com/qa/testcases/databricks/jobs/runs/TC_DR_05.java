@@ -12,7 +12,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-@Marker.DbxJobsRuns
+@Marker.DbxRuns
 @Marker.All
 public class TC_DR_05 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DR_05.class);

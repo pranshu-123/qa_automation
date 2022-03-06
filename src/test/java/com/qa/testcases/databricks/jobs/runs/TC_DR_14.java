@@ -11,7 +11,7 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.annotations.Test;
-@Marker.DbxJobsRuns
+@Marker.DbxRuns
 @Marker.All
 public class TC_DR_14 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DR_11.class);

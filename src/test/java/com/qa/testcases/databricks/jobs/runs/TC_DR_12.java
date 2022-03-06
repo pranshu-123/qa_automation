@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Marker.DbxJobsRuns
+@Marker.DbxRuns
 @Marker.All
 public class TC_DR_12 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DR_12.class);

@@ -74,6 +74,7 @@ public class TC_JAP_02 extends BaseClass {
         SummaryDetailsPage summaryPage = new SummaryDetailsPage(driver);
         summaryPage.navigateToJobsTabFromHeader(dballApps, test);
         int appCount = dballApps.clickOnlyLink("Success");
+        waitExecuter.sleep(2000);
 
         if (appCount > 0) {
             String headerAppId = summaryPage.verifyGoToSpark(summaryPageObject);
@@ -111,6 +112,7 @@ public class TC_JAP_02 extends BaseClass {
         SummaryDetailsPage summaryPage = new SummaryDetailsPage(driver);
         summaryPage.navigateToJobsTabFromHeader(dballApps, test);
         int appCount = dballApps.clickOnlyLink("Failed");
+        waitExecuter.sleep(2000);
 
         if (appCount > 0) {
             String headerAppId = summaryPage.verifyGoToSpark(summaryPageObject);
@@ -148,6 +150,7 @@ public class TC_JAP_02 extends BaseClass {
         SummaryDetailsPage summaryPage = new SummaryDetailsPage(driver);
         summaryPage.navigateToJobsTabFromHeader(dballApps, test);
         int appCount = dballApps.clickOnlyLink("Killed");
+        waitExecuter.sleep(2000);
 
         if (appCount > 0) {
             String headerAppId = summaryPage.verifyGoToSpark(summaryPageObject);

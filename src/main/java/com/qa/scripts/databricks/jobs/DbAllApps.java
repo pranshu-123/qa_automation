@@ -181,7 +181,7 @@ public class DbAllApps {
             if (tab.equalsIgnoreCase("Runs")) {
                 userAction.performActionWithPolling(dbSubTopPanelModulePageObject.runsTab, UserAction.CLICK);
             } else if (tab.equalsIgnoreCase("Jobs")) {
-                MouseActions.clickOnElement(driver, dbSubTopPanelModulePageObject.jobsTabs);
+                userAction.performActionWithPolling(dbSubTopPanelModulePageObject.jobsTabs, UserAction.CLICK);
                 waitExecuter.waitUntilElementPresent(dbSubTopPanelModulePageObject.jobsTabs);
             }
         } catch (ElementClickInterceptedException e) {

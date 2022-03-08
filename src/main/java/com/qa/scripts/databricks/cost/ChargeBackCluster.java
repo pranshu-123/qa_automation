@@ -7,6 +7,7 @@ import com.qa.utils.WaitExecuter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
@@ -179,11 +180,23 @@ public class ChargeBackCluster {
 		driver.findElement(By.xpath(String.format(chargebackClusterPageObject.filterByValues,filter))).click();
 	}
 
-	public void filterByTagKey(String tagKey) {		
-		waitExecuter.sleep(2500);
+	public void filterTags(String tagKey) {
 		chargebackClusterPageObject.tagKeyDropdown.click();
 		chargebackClusterPageObject.tagKeySearchField.sendKeys(tagKey);
 		chargebackClusterPageObject.tagKeySearchField.sendKeys(Keys.ENTER);
+	}
+	
+	public void filterByTagKey(String tagKey) {		
+		waitExecuter.sleep(2500);
+		try {
+			filterTags(tagKey);
+		}
+		catch(StaleElementReferenceException e) {
+			e.printStackTrace();
+			driver.navigate().refresh();
+			filterTags(tagKey);
+		}
+	
 		LOGGER.info("Specified Tag Key selected: "+tagKey);
 	}	
 

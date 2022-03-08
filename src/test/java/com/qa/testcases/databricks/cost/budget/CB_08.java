@@ -28,12 +28,12 @@ public class CB_08 extends BaseClass{
 		chargeBackCluster.navigateToCostTab("Budget");
 		LOGGER.info("Navigated to Cost Budget Page");
 		waitExecuter.sleep(2000);
-		costBudget.createNewBudget("Test Budget");
+		costBudget.createNewBudget("Finance Budget");
 		costBudget.saveBudget();
 		test.log(LogStatus.PASS, "New Budget creaated successfully.");
-		costBudget.validateCreatedBudget("Test Budget");
+		costBudget.validateCreatedBudget("Finance Budget");
 		LOGGER.info("Newly created budget is displayed.");
-		costBudget.deleteExistingBudget("Test Budget");
+		costBudget.deleteExistingBudget("Finance Budget");
 		test.log(LogStatus.PASS, "New Budget deleted successfully.");
 		LOGGER.info("New Budget deleted successfully.");
 	}

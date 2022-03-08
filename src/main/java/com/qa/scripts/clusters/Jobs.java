@@ -170,7 +170,7 @@ public class Jobs {
 			else {
 				jobsPageObject.groupByTagKey.click();
 			}
-			waitExecuter.sleep(2000);
+			waitExecuter.sleep(3000);
 		} catch (WebDriverException e) {
 			LOGGER.info("click On select Group by is failed due to:" + e.getMessage());
 		}

@@ -64,6 +64,7 @@ public class CostBudget {
 
 	public void validateCreatedBudget(String budgetName) {
 		waitExecuter.sleep(2000);
+		driver.navigate().refresh();
 		Assert.assertTrue(budgetPageObject.activeBudgetTable.stream().map(f -> f.getText())
 				.collect(Collectors.toList()).contains(budgetName),"Created Budget not displayed");
 	}

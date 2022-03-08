@@ -29,14 +29,14 @@ import com.relevantcodes.extentreports.LogStatus;
 			chargeBackCluster.navigateToCostTab("Budget");
 			LOGGER.info("Navigated to Cost Budget Page");
 			waitExecuter.sleep(2000);
-			costBudget.createNewBudget("Test Upcoming Budget");
+			costBudget.createNewBudget("Finance Upcoming Budget");
 			costBudget.setBudgetActivationDate();
 			costBudget.saveBudget();
 			LOGGER.info("New Upcoming Budget created successfully.");
 			test.log(LogStatus.PASS, "New Upcoming Budget created successfully.");
 			costBudget.validateUpcomingBudget("Test Upcoming Budget");
 			LOGGER.info("Newly created upcoming budget is displayed.");
-			costBudget.deleteExistingBudget("Test Upcoming Budget");
+			costBudget.deleteExistingBudget("Finance Upcoming Budget");
 			LOGGER.info("New Budget deleted successfully.");
 		}
 	}

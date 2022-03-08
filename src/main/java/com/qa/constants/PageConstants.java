@@ -47,6 +47,10 @@ public class PageConstants {
 
     }
 
+    public static class jobId {
+        public static String appIdForDbxjob = "0149c49037160d42:115fbdc200000000";
+    }
+
     public static class AppQueue {
         public static String LLAP = "llap";
     }
@@ -74,8 +78,22 @@ public class PageConstants {
 
     }
 
+    public static class RunsStatusType {
+        public static String[] STATUSTYPE = {"Killed", "Failed", "Running", "Success", "Pending", "Unknown", "Waiting"};
+        public static String RUNNING = "running";
+    }
+
+    public static class columnsType {
+        public static String[] COLUMNSTYPE = {"Status","User","Run Name / ID","Job ID","Run ID",
+                "Start Time", "Duration","Read","Write","Workspace", "Cluster Name","Cluster Type", "Cost","GO TO"};
+
+        public static String RUNNING = "running";
+    }
+
     /*Impala application Id*/
     public static class appId {
         public static String appIdForImpala = "0149c49037160d42:115fbdc200000000";
     }
+
+
 }

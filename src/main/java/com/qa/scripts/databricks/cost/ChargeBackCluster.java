@@ -15,6 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -71,6 +72,7 @@ public class ChargeBackCluster {
 	}
 
 	public void validatePieChartGraph(String[] headers) {
+		driver.manage().timeouts().pageLoadTimeout(4, TimeUnit.SECONDS);
 		List<String> list = chargebackClusterPageObject.graphsHeader.stream()
 				.map(graph -> graph.getText()).collect(Collectors.toList());
 		for(String s : headers) {
@@ -186,7 +188,8 @@ public class ChargeBackCluster {
 		chargebackClusterPageObject.tagKeySearchField.sendKeys(Keys.ENTER);
 	}
 	
-	public void filterByTagKey(String tagKey) {		
+	public void filterByTagKey(String tagKey) {	
+		driver.manage().timeouts().pageLoadTimeout(4, TimeUnit.SECONDS);
 		waitExecuter.sleep(2500);
 		try {
 			filterTags(tagKey);

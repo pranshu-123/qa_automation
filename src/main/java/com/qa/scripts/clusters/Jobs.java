@@ -171,6 +171,7 @@ public class Jobs {
 				jobsPageObject.groupByTagKey.click();
 			}
 			waitExecuter.sleep(3000);
+			LOGGER.info(value.toUpperCase() + " group selected successfully.");
 		} catch (WebDriverException e) {
 			LOGGER.info("click On select Group by is failed due to:" + e.getMessage());
 		}

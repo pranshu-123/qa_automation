@@ -34,7 +34,7 @@ import com.relevantcodes.extentreports.LogStatus;
 			costBudget.saveBudget();
 			LOGGER.info("New Upcoming Budget created successfully.");
 			test.log(LogStatus.PASS, "New Upcoming Budget created successfully.");
-			costBudget.validateUpcomingBudget("Test Upcoming Budget");
+			costBudget.validateUpcomingBudget("Finance Upcoming Budget");
 			LOGGER.info("Newly created upcoming budget is displayed.");
 			costBudget.deleteExistingBudget("Finance Upcoming Budget");
 			LOGGER.info("New Budget deleted successfully.");

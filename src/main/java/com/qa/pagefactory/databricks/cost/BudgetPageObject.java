@@ -69,7 +69,7 @@ public class BudgetPageObject {
 	@FindBy(xpath = "//li[@class='select2-selection__choice']")
 	public WebElement editedScopeText;
 		
-	public String actionButtons = "//div[contains(text(),'Test Budget')]/../..//a/span[contains(text(),'%s')]"; //Chargeback,Trends,Optimize
+	public String actionButtons = "//div[contains(text(),'Finance Budget')]/../..//a/span[contains(text(),'%s')]"; //Chargeback,Trends,Optimize
 
 	public String delete = "//div[contains(text(),'%s')]/../..//td//button[@title='Delete']";
 	

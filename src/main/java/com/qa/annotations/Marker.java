@@ -190,4 +190,12 @@ public @interface Marker {
     @Retention(RetentionPolicy.RUNTIME)
     @interface DbxCostBudget {
     }
+
+    @Target(ElementType.TYPE)
+    @interface DBX {
+        @Retention(RetentionPolicy.RUNTIME)
+        @interface Data {
+            String PAGE = "DBX - DATA";
+        }
+    }
 }

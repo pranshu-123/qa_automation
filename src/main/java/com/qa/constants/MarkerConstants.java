@@ -58,6 +58,8 @@ public class MarkerConstants {
     public static final String DBX_COST_BUDGET = "dbx_cost_budget";
     public static final String DBX_COST_CHARGEBACK = "dbx_cost_chargeback";
     public static final String DBX_APP_DETAILS = "dbx_app_details";
+    // DBX Markers
+    public static final String DBX_DATA = "dbx_data";
     public static final Map<String, Class<? extends Annotation>> MARKER_MAPPING = initMap();
 
     /**
@@ -114,6 +116,7 @@ public class MarkerConstants {
         map.put(DBX_RUNS, Marker.DbxRuns.class);
         map.put(DBX_JOBS, Marker.DbxJobs.class);
         map.put(DBX_APP_DETAILS, Marker.DbxAppDetails.class);
+        map.put(DBX_DATA, Marker.DBX.Data.class);
         return Collections.unmodifiableMap(map);
     }
 }

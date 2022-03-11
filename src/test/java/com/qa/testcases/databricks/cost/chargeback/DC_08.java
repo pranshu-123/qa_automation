@@ -18,7 +18,7 @@ public class DC_08 extends BaseClass{
 
 	private static final Logger LOGGER = Logger.getLogger(DC_08	.class.getName());
 
-	@Test
+	//@Test
 	public void TC_Cost_CB_08_VerifyChargebackResultGroupByCluster() {
 		test = extent.startTest("TC_Cost_CB_08_VerifyChargebackResultGroupByCluster", "If \"Cluster\" is selected the table should show all the apps run by the users");
 		test.assignCategory("Cost/Chargeback");

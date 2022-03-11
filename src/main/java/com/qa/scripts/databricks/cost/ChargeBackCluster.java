@@ -159,7 +159,8 @@ public class ChargeBackCluster {
 		for(int i =1; i< size;i=i+7) {
 			sum = sum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText());
 		}
-		return String.valueOf(sum);
+	
+		return 	String.format("%.2f",sum);
 
 	}
 

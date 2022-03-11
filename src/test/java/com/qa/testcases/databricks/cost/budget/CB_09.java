@@ -29,7 +29,7 @@ import com.relevantcodes.extentreports.LogStatus;
 			chargeBackCluster.navigateToCostTab("Budget");
 			LOGGER.info("Navigated to Cost Budget Page");
 			waitExecuter.sleep(2000);
-			costBudget.createNewBudget("Finance Upcoming Budget");
+			costBudget.createNewBudget("Finance Upcoming Budget","1");
 			costBudget.setBudgetActivationDate();
 			costBudget.saveBudget();
 			LOGGER.info("New Upcoming Budget created successfully.");

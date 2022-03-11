@@ -69,11 +69,18 @@ public class BudgetPageObject {
 	@FindBy(xpath = "//li[@class='select2-selection__choice']")
 	public WebElement editedScopeText;
 		
+	@FindBy(xpath = "//span[@class='text-error']")
+	public List<WebElement> errorLabel;
+	
+	@FindBy(xpath = "//div[contains(text(),'Finance Budget')]/../following-sibling::td/div/span/b")
+	public WebElement budgetStatus;
+	
 	public String actionButtons = "//div[contains(text(),'Finance Budget')]/../..//a/span[contains(text(),'%s')]"; //Chargeback,Trends,Optimize
 
 	public String delete = "//div[contains(text(),'%s')]/../..//td//button[@title='Delete']";
 	
 	public String edit = "//div[contains(text(),'%s')]/../..//td//button[@title='Edit']";
+	
 	/**
 	 * @param driver The driver that will be used to look up the elements
 	 */

@@ -1,16 +1,13 @@
 package com.qa.testcases.databricks.cost.budget;
 
 import java.util.logging.Logger;
-
 import org.testng.annotations.Test;
-
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.scripts.databricks.cost.ChargeBackCluster;
 import com.qa.scripts.databricks.cost.CostBudget;
 import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
-import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.DbxCostBudget
 public class CB_07  extends BaseClass{
@@ -28,11 +25,11 @@ public class CB_07  extends BaseClass{
 		chargeBackCluster.navigateToCostTab("Budget");
 		LOGGER.info("Navigated to Cost Budget Page");
 		waitExecuter.sleep(2000);
-		costBudget.createNewBudget("Test Budget");
+		costBudget.createNewBudget("Finance Budget","1");
 		costBudget.saveBudget();
-		costBudget.validateCreatedBudget("Test Budget");
+		costBudget.validateCreatedBudget("Finance Budget");
 		LOGGER.info("Newly created budget is displayed.");
-		String expectedValue = costBudget.editExistingBudget("Test Budget");
+		String expectedValue = costBudget.editExistingBudget("Finance Budget");
 		LOGGER.info("Budget Edited successfully.");
 		costBudget.verifyUpdatedScope(expectedValue);
 		LOGGER.info("Budget Edited sucessfully.");

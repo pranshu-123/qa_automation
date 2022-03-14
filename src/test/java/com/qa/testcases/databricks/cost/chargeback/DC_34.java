@@ -36,7 +36,6 @@ public class DC_34 extends BaseClass{
 		LOGGER.info("Custom Date Selected");
 		waitExecuter.sleep(3000);
 		datePicker.clickOnCustomDateApplyBtn();
-		chargeBackCluster.selectChargebackType("JobRun");
 		waitExecuter.sleep(2000);
 		jobs.selectGroupByFilterValue("User");
 		chargeBackCluster.validateResultSetIsDisplayedWithValues("User");

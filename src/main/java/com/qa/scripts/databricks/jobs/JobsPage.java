@@ -218,6 +218,17 @@ public class JobsPage {
         }
     }
 
+
+    /**
+     * Method to click the first app in jobs table , navigate to the details page.
+     * and check if the table data like start time, duration, read and write is displayed or not.
+     */
+    public void checkAppsJobTableData(String data, String colType) {
+        boolean onlySpecialChars = data.matches("[^a-zA-Z0-9]+");
+        Assert.assertFalse(data.isEmpty() || onlySpecialChars, colType + " data is not displayed in the table");
+        logger.info("Data for " + colType + " is displayed in the table");
+    }
+
     /**
      * Method to click on App details , navigate to the details page.
      * and verify Start Time details Page .

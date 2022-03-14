@@ -94,8 +94,11 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')])[2]//input")
     public WebElement userSearchBox;
 
-    @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')])[2]//input")
+    @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')])[3]//input")
     public WebElement workspaceSearchBox;
+
+    @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')])[3]//input")
+    public WebElement clusterTypeSearchBox;
 
     @FindBy(xpath = "//div[@class='status-title']//following-sibling::span[contains(@class,'badge') and not(contains(@class,'module-status'))]")
     public List<WebElement> getBadgeTitle;
@@ -132,6 +135,12 @@ public class DbxSubTopPanelModulePageObject {
 
     @FindBy(xpath = "//h3[contains(@class,'expandable-header')]//a[contains(text(),'User')]")
     public WebElement userExpandableHeader;
+
+    @FindBy(xpath = "//h3[contains(@class,'expandable-header')]//a[contains(text(),'Workspace')]")
+    public WebElement workspaceExpandableHeader;
+
+    @FindBy(xpath = "//h3[contains(@class,'expandable-header')]//a[contains(text(),'Workspace')]")
+    public WebElement clusterTypeExpandableHeader;
 
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr")
     public WebElement whenApplicationPresent;

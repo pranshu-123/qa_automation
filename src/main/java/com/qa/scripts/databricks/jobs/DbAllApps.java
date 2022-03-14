@@ -221,6 +221,20 @@ public class DbAllApps {
         return nameOfAppTypes;
     }
 
+    /* Add all application count */
+    public int addApplicationTypeCount() {
+        List<WebElement> appJobCounts = applicationsPageObject.getEachApplicationTypeJobCounts;
+        List<Integer> listOfJobCounts = new ArrayList<>();
+        int totalCount = 0;
+        for (int i = 0; i < appJobCounts.size(); i++) {
+            listOfJobCounts.add(Integer.parseInt(appJobCounts.get(i).getText().replaceAll("[^\\dA-Za-z ]", "").trim()));
+        }
+        for (int jobCount : listOfJobCounts) {
+            totalCount += jobCount;
+        }
+        return totalCount;
+    }
+
     public void clickOnClusterDropDown() {
         userAction.performActionWithPolling(dbSubTopPanelModulePageObject.clusterDropdown, UserAction.CLICK);
         waitExecuter.waitUntilElementPresent(dbSubTopPanelModulePageObject.resetButton);

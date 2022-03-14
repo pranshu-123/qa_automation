@@ -22,6 +22,9 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//a[@href='#/manage/stats']")
     public WebElement stats;
 
+    @FindBy(xpath = "(//ul[contains(@class,'select2-results')])/li")
+    public List<WebElement> getNamesFromDropDown;
+
     @FindBy(xpath = "//h3[normalize-space()='No Data Available']")
     public List<WebElement> noDataPresent;
 
@@ -85,6 +88,15 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//table[@id='RunsListAll']/tbody[1]/tr/td[3]/span[1]")
     public WebElement getNameeFromTable;
 
+    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[3]")
+    public WebElement getUsernameFromTable;
+
+    @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')])[2]//input")
+    public WebElement userSearchBox;
+
+    @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')])[2]//input")
+    public WebElement workspaceSearchBox;
+
     @FindBy(xpath = "//div[@class='status-title']//following-sibling::span[contains(@class,'badge') and not(contains(@class,'module-status'))]")
     public List<WebElement> getBadgeTitle;
 
@@ -114,6 +126,15 @@ public class DbxSubTopPanelModulePageObject {
 
     @FindBy(xpath = "//ul[contains(concat(' ', @class, ' '), 'select2-results__options')]/li")
     public List<WebElement> clusterList;
+
+    @FindBy(css = "input.global-app-search")
+    public WebElement globalSearchBox;
+
+    @FindBy(xpath = "//h3[contains(@class,'expandable-header')]//a[contains(text(),'User')]")
+    public WebElement userExpandableHeader;
+
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr")
+    public WebElement whenApplicationPresent;
 
     @FindBy(xpath = "//input[@class='select2-search__field']")
     public WebElement clusterDropdown;

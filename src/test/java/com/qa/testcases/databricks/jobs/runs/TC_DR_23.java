@@ -18,13 +18,13 @@ import org.testng.annotations.Test;
 import java.util.List;
 @Marker.DbxRuns
 @Marker.All
-public class TC_DR_21 extends BaseClass {
-    private final LoggingUtils loggingUtils = new LoggingUtils(TC_DR_21.class);
+public class TC_DR_23 extends BaseClass {
+    private final LoggingUtils loggingUtils = new LoggingUtils(TC_DR_19.class);
 
     @Test()
-    public void validUserSearch() {
-        test = extent.startTest("TC_DR_21.validUserSearch ",
-                "Verify application is listed only of selected username");
+    public void validClusterTypeSearch() {
+        test = extent.startTest("TC_DR_19.validClusterTypeSearch",
+                "Verify application is listed only of selected ClusterType");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -43,15 +43,15 @@ public class TC_DR_21 extends BaseClass {
             test.log(LogStatus.INFO, "Select last 7 days");
             dballApps.inJobsSelectClusterAndLast7Days();
             waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
-            // Click on user searchbox and get all usernames.
-            test.log(LogStatus.INFO, "Click on user searchbox and get all usernames.");
-            loggingUtils.info("Click on user searchbox and get all usernames.", test);
-            executor.executeScript("arguments[0].scrollIntoView();", dbpageObject.userSearchBox);
+            // Click on user searchbox and get all ClusterType.
+            test.log(LogStatus.INFO, "Click on ClusterType searchBox and get all usernames.");
+            loggingUtils.info("Click on ClusterType searchBox and get all usernames.",test);
+            executor.executeScript("arguments[0].scrollIntoView();", dbpageObject.clusterTypeSearchBox);
 
-            waitExecuter.waitUntilElementClickable(dbpageObject.userExpandableHeader);
-            waitExecuter.waitUntilElementClickable(dbpageObject.userSearchBox);
-            userActions.performActionWithPolling(dbpageObject.userSearchBox, UserAction.CLICK);
-            waitExecuter.waitUntilElementClickable(dbpageObject.userSearchBox);
+            waitExecuter.waitUntilElementClickable(dbpageObject.clusterTypeExpandableHeader);
+            waitExecuter.waitUntilElementClickable(dbpageObject.clusterTypeSearchBox);
+            userActions.performActionWithPolling(dbpageObject.clusterTypeSearchBox, UserAction.CLICK);
+            waitExecuter.waitUntilElementClickable(dbpageObject.clusterTypeSearchBox);
             List<WebElement> userList = dbpageObject.getNamesFromDropDown;
             waitExecuter.sleep(1000);
             String usernameSelected = userList.get(0).getText();
@@ -59,19 +59,19 @@ public class TC_DR_21 extends BaseClass {
             userList.get(0).click();
             waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
             waitExecuter.sleep(2000);
-            loggingUtils.info("Selected username from dropdown " + usernameSelected, test);
+            loggingUtils.info("Selected ClusterType from dropdown " + usernameSelected,test);
             executor.executeScript("arguments[0].scrollIntoView();", dbpageObject.globalSearchBox);
             int totalCount = Integer
                     .parseInt(dbpageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
             if (totalCount > 0) {
-                String usernameFromTable = dbpageObject.getUsernameFromTable.getAttribute("title");
-                loggingUtils.info("Username displayed in table " + usernameFromTable, test);
-                Assert.assertTrue(usernameSelected.contains(usernameFromTable),
-                        "The application in table contains username other than that of " + usernameFromTable);
-                test.log(LogStatus.PASS, "The application in table matches username: " + usernameFromTable);
+                String workspaceNameFromTable = dbpageObject.getUsernameFromTable.getAttribute("title");
+                loggingUtils.info("ClusterType displayed in table " + workspaceNameFromTable,test);
+                Assert.assertTrue(usernameSelected.contains(workspaceNameFromTable),
+                        "The application in table contains ClusterType name other than that of " + workspaceNameFromTable);
+                test.log(LogStatus.PASS, "The application in table matches workspace name: " + workspaceNameFromTable);
             } else
                 Assert.assertTrue(dbpageObject.whenApplicationPresent.isDisplayed(),
-                        "The clusterId has application under it and displays available data for it");
+                        "The ClusterType has application under it and displays available data for it");
             executor.executeScript("arguments[0].scrollIntoView();", dbpageObject.resetButton);
             waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
             userActions.performActionWithPolling(dbpageObject.resetButton, UserAction.CLICK);

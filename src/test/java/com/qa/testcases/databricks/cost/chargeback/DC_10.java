@@ -20,7 +20,7 @@ public class DC_10 extends BaseClass{
 
 	private static final Logger LOGGER = Logger.getLogger(DC_10.class.getName());
 	
-	@Test
+	//@Test
 	public void TC_Cost_CB_10_VerifyOptimizeFunctionalityAsPerClusterGroup() {
 		test = extent.startTest("TC_Cost_CB_10_VerifyOptimizeFunctionalityAsPerClusterGroup", "Verify \"Optimize\" Chargeback as per Cluster group");
 		test.assignCategory("Cost/Chargeback");

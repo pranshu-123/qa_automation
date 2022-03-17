@@ -17,7 +17,7 @@ public class DC_27 extends BaseClass{
 
 	private static final Logger LOGGER = Logger.getLogger(DC_27.class.getName());
 
-	@Test
+	//@Test
 	public void TC_Cost_CB_27_VerifyClusterCountOnGeneratedGraph() {
 		test = extent.startTest("TC_Cost_CB_27_VerifyClusterCountOnGeneratedGraph", "Add up the Cluster count of the result and verify the total Cluster Count is populated correctly on generated graph");
 		test.assignCategory("Cost/Chargeback");

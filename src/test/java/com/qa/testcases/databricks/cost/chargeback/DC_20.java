@@ -16,7 +16,7 @@ public class DC_20 extends BaseClass{
 
 	private static final Logger LOGGER = Logger.getLogger(DC_20.class.getName());
 	
-	@Test
+	//@Test
 	public void TC_Cost_CB_20_VerifyFilterByTagKey() {
 		test = extent.startTest("TC_Cost_CB_20_VerifyFilterByTagKey", "Verify if the filter is working for selected Tag name");
 		test.assignCategory("Cost/Chargeback");

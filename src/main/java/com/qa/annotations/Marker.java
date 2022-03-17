@@ -137,4 +137,13 @@ public @interface Marker {
   
   @Retention(RetentionPolicy.RUNTIME)
   @interface DbxCostBudget {}
+  
+  @Retention(RetentionPolicy.RUNTIME)
+  @interface DbxReportsTopX {}
+  
+  @Retention(RetentionPolicy.RUNTIME)
+  @interface DbxReportsArchived {}
+  
+  @Retention(RetentionPolicy.RUNTIME)
+  @interface DbxReportsScheduled {}
 }

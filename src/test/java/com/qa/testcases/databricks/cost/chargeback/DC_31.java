@@ -19,7 +19,7 @@ public class DC_31  extends BaseClass{
 
 	private static final Logger LOGGER = Logger.getLogger(DC_31.class.getName());
 
-	@Test
+	//@Test
 	public void TC_Cost_CB_31_VerifyJobRunChargeback() {
 		test = extent.startTest("TC_Cost_CB_31_VerifyJobRunChargeback", "Validate JobRun chargeback type");
 		test.assignCategory("Cost/Chargeback");

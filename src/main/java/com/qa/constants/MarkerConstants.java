@@ -56,6 +56,9 @@ public class MarkerConstants {
     public static final String DBX_COST_CHARGEBACK = "dbx_cost_chargeback";
     public static final String DBX_COST_TRENDS = "dbx_cost_trends";
     public static final String DBX_COST_BUDGET = "dbx_cost_budget";
+    public static final String DBX_REPORTS_TOPX = "dbx_reports_topX";
+    public static final String DBX_REPORTS_ARCHIVED = "dbx_reports_archived";
+    public static final String DBX_REPORTS_SCHEDULED = "dbx_reports_scheduled";
     public static final Map<String, Class<? extends Annotation>> MARKER_MAPPING = initMap();
 
     /**
@@ -110,6 +113,9 @@ public class MarkerConstants {
         map.put(DBX_COST_BUDGET, Marker.DbxCostBudget.class);
         map.put(DBX_COST_TRENDS, Marker.DbxCostTrends.class);
         map.put(DB_JOBS_RUNS, Marker.DbJobsRuns.class);
+        map.put(DBX_REPORTS_TOPX, Marker.DbxReportsTopX.class);
+        map.put(DBX_REPORTS_ARCHIVED, Marker.DbxReportsArchived.class);
+        map.put(DBX_REPORTS_SCHEDULED, Marker.DbxReportsScheduled.class);
         return Collections.unmodifiableMap(map);
     }
 }

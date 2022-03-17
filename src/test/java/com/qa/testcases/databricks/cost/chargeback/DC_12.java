@@ -18,7 +18,7 @@ public class DC_12 extends BaseClass{
 
 	private static final Logger LOGGER = Logger.getLogger(DC_12.class.getName());
 	
-	@Test
+//@Test
 	public void TC_Cost_CB_12_VerifyChargebackGraphGroupByTagKey() {
 		test = extent.startTest("TC_Cost_CB_12_VerifyChargebackGraphGroupByTagKey", "\"Tag Name\" Graph validation");
 		test.assignCategory("Cost/Chargeback");

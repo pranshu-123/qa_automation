@@ -113,7 +113,7 @@ public class Jobs {
 	 */
 	public boolean clickOnGroupByDropDown() {
 		try {
-			waitExecuter.waitUntilElementPresent(jobsPageObject.groupByDropdownButton);
+			//waitExecuter.waitUntilElementPresent(jobsPageObject.groupByDropdownButton);
 			waitExecuter.sleep(6000);
 			jobsPageObject.groupByDropdownButton.click();
 		} catch (WebDriverException e) {

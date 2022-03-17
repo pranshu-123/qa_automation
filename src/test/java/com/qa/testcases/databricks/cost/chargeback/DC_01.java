@@ -18,7 +18,7 @@ import com.relevantcodes.extentreports.LogStatus;
 public class DC_01 extends BaseClass{
 
 	private static final Logger LOGGER = Logger.getLogger(DC_01.class.getName());
-	@Test
+	//@Test
 	public void TC_Cost_CB_01_VerifyGroupByFilter() {
 		test = extent.startTest("TC_Cost_CB_01_VerifyGroupByFilter", "The \"group by\" options should switch all the tabs accordingly (Users, workspaces, cluster, Tag Key)	");
 		test.assignCategory("Cost/Chargeback");

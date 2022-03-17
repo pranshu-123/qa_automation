@@ -17,7 +17,7 @@ public class DC_15 extends BaseClass{
 
 	private static final Logger LOGGER = Logger.getLogger(DC_15.class.getName());
 	
-	@Test
+	//@Test
 	public void TC_Cost_CB_15_VerifyOptimizeFunctionalityAsPerTagkey() {
 		test = extent.startTest("TC_Cost_CB_15_VerifyOptimizeFunctionalityAsPerTagkey", "Optimize Chargeback as per Tag Key");
 		test.assignCategory("Cost/Chargeback");

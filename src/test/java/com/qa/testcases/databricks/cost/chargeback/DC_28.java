@@ -19,7 +19,7 @@ public class DC_28 extends BaseClass{
 
 	private static final Logger LOGGER = Logger.getLogger(DC_28.class.getName());
 
-	@Test
+	//@Test
 	public void TC_Cost_CB_28_VerifyDBUCountOnGeneratedGraph() {
 		test = extent.startTest("TC_Cost_CB_28_VerifyDBUCountOnGeneratedGraph", "Add up the DBUs of the result and verify the total DBUs is populated correctly on generated graph ");
 		test.assignCategory("Cost/Chargeback");

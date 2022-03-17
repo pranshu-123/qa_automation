@@ -20,7 +20,7 @@ public class DC_22  extends BaseClass{
 
 	private static final Logger LOGGER = Logger.getLogger(DC_22.class.getName());
 
-	@Test
+	//@Test
 	public void TC_Cost_CB_22_VerifyDownloadInPDFFormat() {
 		test = extent.startTest("TC_Cost_CB_22_VerifyDownloadInPDFFormat", "Verify download in PDF format");
 		test.assignCategory("Cost/Chargeback");

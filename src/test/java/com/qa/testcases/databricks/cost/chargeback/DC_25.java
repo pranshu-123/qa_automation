@@ -20,7 +20,7 @@ public class DC_25  extends BaseClass{
 
 	private static final Logger LOGGER = Logger.getLogger(DC_25.class.getName());
 
-	@Test
+	//@Test
 	public void TC_Cost_CB_25_VerifyDownloadInJPEGFormat() {
 		test = extent.startTest("TC_Cost_CB_25_VerifyDownloadInJPEGFormat", "Verify download in JPEG format");
 		test.assignCategory("Cost/Chargeback");

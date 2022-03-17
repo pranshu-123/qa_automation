@@ -42,6 +42,30 @@ public class ReportsScheduledPageObject {
 	@FindBy(xpath = "//div[@id='custom-tbl']//tbody/tr/td/span")
 	public List<WebElement> reportTableValues;
 	
+	@FindBy(xpath = "(//span[@class='pointer icon-edit is-enabled undefined'])[1]")
+	public WebElement editScheduleReport;
+	
+	@FindBy(xpath = "(//span[@class='pointer icon-delete is-enabled undefined'])[1]")
+	public WebElement deleteScheduleReport;
+	
+	@FindBy(xpath = "(//span[@class='pointer icon-expand is-enabled undefined'])[1]")
+	public WebElement moreInfo;
+	
+	@FindBy(xpath = "//h2[contains(text(),'Scheduled Info')]")
+	public WebElement scheduledInfo;
+	
+	@FindBy(xpath = "//h2[contains(text(),'Schedule Report')]/button")
+	public WebElement closeButton;
+	
+	@FindBy(xpath = "//a[contains(text(),'Update')]")
+	public WebElement updateBtn;
+	
+	@FindBy(xpath = "//h2[contains(text(),'Scheduled Info')]/../following-sibling::div//table/thead/tr/th/span")
+	public List<WebElement> inputParameterHeader;
+	
+	@FindBy(xpath = "//h2[contains(text(),'Scheduled Info')]/../following-sibling::div//table/tbody/tr/td/span")
+	public List<WebElement> inputParameterValue;
+	
 	/**
 	 * @param driver The driver that will be used to look up the elements
 	 */

@@ -73,6 +73,7 @@ public class ChargeBackCluster {
 
 	public void validatePieChartGraph(String[] headers) {
 		driver.manage().timeouts().pageLoadTimeout(4, TimeUnit.SECONDS);
+		waitExecuter.sleep(4500);
 		List<String> list = chargebackClusterPageObject.graphsHeader.stream()
 				.map(graph -> graph.getText()).collect(Collectors.toList());
 		for(String s : headers) {
@@ -119,12 +120,12 @@ public class ChargeBackCluster {
 	}
 
 	public void selectOptimize() {
-		waitExecuter.sleep(2000);
+		waitExecuter.sleep(4000);
 		chargebackClusterPageObject.optimize.click();
 	}
 
 	public String selectCopyUrl() {
-		waitExecuter.sleep(2000);
+		waitExecuter.sleep(4000);
 		chargebackClusterPageObject.copyURL.get(0).click();
 		return chargebackClusterPageObject.urlLinks.get(0).getAttribute("href");
 	}
@@ -177,8 +178,7 @@ public class ChargeBackCluster {
 	}
 
 	public void filterBy(String filter) {
-		waitExecuter.waitUntilElementClickable(chargebackClusterPageObject.filterByDropDown);
-		waitExecuter.sleep(2500);
+		waitExecuter.sleep(3500);
 		chargebackClusterPageObject.filterByDropDown.click();
 		driver.findElement(By.xpath(String.format(chargebackClusterPageObject.filterByValues,filter))).click();
 	}

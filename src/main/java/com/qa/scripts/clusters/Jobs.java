@@ -116,6 +116,9 @@ public class Jobs {
 			//waitExecuter.waitUntilElementPresent(jobsPageObject.groupByDropdownButton);
 			waitExecuter.sleep(6000);
 			jobsPageObject.groupByDropdownButton.click();
+			if(!TestUtils.isElementDisplayed(jobsPageObject.groupByWorkspace)) {
+				jobsPageObject.groupByDropdownButton.click();	
+			}
 		} catch (WebDriverException e) {
 			LOGGER.info("click On Group By DropDown" + e.getStackTrace());
 		}
@@ -168,7 +171,7 @@ public class Jobs {
 	}
 
 	public void groupByFilterSelection(String value) {
-		waitExecuter.sleep(2000);
+		waitExecuter.sleep(5000);
 		clickOnGroupByDropDown();
 		waitExecuter.sleep(2000);
 		if(value.equalsIgnoreCase("user")) {

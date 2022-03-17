@@ -66,17 +66,6 @@ public class ScheduledReports {
 		reportsScheduledPageObject.notificationTextBox.sendKeys(email);
 	}
 
-	public List<String> scheduledTimeOptions(){
-		Select select = new Select(reportsScheduledPageObject.scheduleTime);
-		return select.getOptions().stream()
-				.map(option -> option.getText()).collect(Collectors.toList());
-	}
-
-	public String createNewReportWithDefaultValues(String top) {
-		reportsTopXPageObject.topxTextArea.sendKeys(top);
-		waitExecuter.sleep(10000);
-		return top;
-	}
 
 	public void validateScheduledReport(List<String> tableHeaders, List<String> tableValues) {
 		List<String> headers = reportsScheduledPageObject.reportTableHeader.stream()
@@ -93,4 +82,43 @@ public class ScheduledReports {
 			Assert.assertTrue(values.contains(value),"Value not present");
 		}
 	}
+
+	public List<String> scheduledTimeOptions(){
+		Select select = new Select(reportsScheduledPageObject.scheduleTime);
+		return select.getOptions().stream()
+				.map(option -> option.getText()).collect(Collectors.toList());
+	}
+
+	public String createNewReportWithDefaultValues(String top) {
+		reportsTopXPageObject.topxTextArea.sendKeys(top);
+		waitExecuter.sleep(10000);
+		return top;
+	}
+
+	public void updateReport() {
+		reportsScheduledPageObject.updateBtn.click();
+		reportsScheduledPageObject.closeButton.click();
+	}
+	
+	public void searchScheduledReport() {
+		
+	}
+
+	public void validateScheduledReportInfo(List<String> tableHeaders, List<String> tableValues) {
+		List<String> headers = reportsScheduledPageObject.inputParameterHeader.stream()
+				.map(el -> el.getText()).collect(Collectors.toList());
+
+		List<String> values = reportsScheduledPageObject.inputParameterValue.stream()
+				.map(el -> el.getText()).collect(Collectors.toList());
+
+		for(String header : tableHeaders) {
+			Assert.assertTrue(headers.contains(header),"Header not present");
+		}
+
+		for(String value : tableValues) {
+			Assert.assertTrue(values.contains(value),"Value not present");
+		}
+	}
+	
+	
 }

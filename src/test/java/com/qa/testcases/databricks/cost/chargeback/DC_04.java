@@ -33,7 +33,6 @@ public class DC_04 extends BaseClass{
 		LOGGER.info("Navigated to Chareback page");
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
-		jobs.clickOnGroupByDropDown();
 		jobs.selectGroupByFilterValue("User");
 		chargeBackCluster.selectOptimize();
 		waitExecuter.sleep(2000);

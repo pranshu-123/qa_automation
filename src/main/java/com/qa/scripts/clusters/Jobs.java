@@ -4,6 +4,7 @@ import com.qa.pagefactory.clusters.JobsPageObject;
 import com.qa.scripts.clusters.impala.ChargeBackImpala;
 import com.qa.utils.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -155,29 +156,36 @@ public class Jobs {
 	 */
 	public boolean selectGroupByFilterValue(String value) {
 		try {
-			waitExecuter.sleep(2000);
-			clickOnGroupByDropDown();
-			waitExecuter.sleep(2000);
-			if(value.equalsIgnoreCase("user")) {
-				jobsPageObject.groupByUser.click();
-			}
-			else if(value.equalsIgnoreCase("workspace")) {
-				jobsPageObject.groupByWorkspace.click();
-			}
-			else if(value.equalsIgnoreCase("cluster")) {
-				jobsPageObject.groupByCluster.click();
-			}
-			else {
-				jobsPageObject.groupByTagKey.click();
-			}
-			waitExecuter.sleep(3000);
-			LOGGER.info(value.toUpperCase() + " group selected successfully.");
-		} catch (WebDriverException e) {
+			groupByFilterSelection(value);
+		} catch (StaleElementReferenceException e) {
 			LOGGER.info("click On select Group by is failed due to:" + e.getMessage());
+			LOGGER.info("Retrying selection.........");
+			driver.navigate().refresh();
+			waitExecuter.sleep(2000);
+			groupByFilterSelection(value);
 		}
 		return false;
 	}
 
+	public void groupByFilterSelection(String value) {
+		waitExecuter.sleep(2000);
+		clickOnGroupByDropDown();
+		waitExecuter.sleep(2000);
+		if(value.equalsIgnoreCase("user")) {
+			jobsPageObject.groupByUser.click();
+		}
+		else if(value.equalsIgnoreCase("workspace")) {
+			jobsPageObject.groupByWorkspace.click();
+		}
+		else if(value.equalsIgnoreCase("cluster")) {
+			jobsPageObject.groupByCluster.click();
+		}
+		else {
+			jobsPageObject.groupByTagKey.click();
+		}
+		waitExecuter.sleep(3000);
+		LOGGER.info(value.toUpperCase() + " group selected successfully.");
+	}
 	/**
 	 * This method verify the select Queue present on Jobs page
 	 */

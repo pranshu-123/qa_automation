@@ -210,6 +210,7 @@ public class ChargeBackCluster {
 		for(int i =5; i< size;i=i+7) {
 			sum = sum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText());
 		}
+	    sum = Math.ceil(sum / 1000) * 1000;
 		String value = String.valueOf(sum);
 		return (value.charAt(0) + "k");
 	}
@@ -225,7 +226,7 @@ public class ChargeBackCluster {
 		for(int i =3; i< size;i=i+7) {
 			sum = sum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText().substring(2));
 		}
-		return ("$ "+String.valueOf(sum));
+		return ("$ "+String.format("%.2f",sum));
 
 	}
 

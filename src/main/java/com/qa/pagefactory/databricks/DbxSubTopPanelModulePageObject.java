@@ -91,6 +91,9 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[3]")
     public WebElement getUsernameFromTable;
 
+    @FindBy(xpath = "//li[@class='select2-results__option select2-results__message']")
+    public WebElement getNoDataTable;
+
     @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')])[2]//input")
     public WebElement userSearchBox;
 

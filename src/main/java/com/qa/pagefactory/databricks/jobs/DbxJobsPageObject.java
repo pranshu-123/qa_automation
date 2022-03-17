@@ -18,8 +18,26 @@ public class DbxJobsPageObject {
     @FindBy(xpath = "(//h2[@class='text-white']//span)[3]")
     public WebElement appName;
 
+    @FindBy(xpath = "//*[@id=\"app\"]//div[2]/div[1]//div[1]/div[2]/h4/span/b")
+    public List<WebElement> rightPaneKpis;
+
+    @FindBy(xpath = "(//div[@id='SummaryDetails']/div/div)/h5")
+    public List<WebElement> rightPaneAppKpis;
+
+    @FindBy(xpath = "(//div[@id='SummaryDetails']/div/div)/div//h3")
+    public List<WebElement> rightPaneAppKpiVal;
+
+    @FindBy(xpath = "(//div[@id='scrollableMenu'])/ul/li/a")
+    public List<WebElement> appJobsTabs;
+
     @FindBy(xpath = "//span[@class='start']")
     public WebElement appStartTime;
+
+    @FindBy(css = "h2[class='text-white'] button[class='close']")
+    public WebElement loadWinClose;
+
+    @FindBy(css = "button.close")
+    public WebElement closeAppsPageTab;
 
     @FindBy(xpath = "//div[@class='right text-white']//span[1]")
     public WebElement appUserName;

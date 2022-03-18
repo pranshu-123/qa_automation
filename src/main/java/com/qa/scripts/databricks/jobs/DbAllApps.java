@@ -189,6 +189,20 @@ public class DbAllApps {
         }
     }
 
+    public void selectTab(String tab) {
+        userAction.performActionWithPolling(dbSubTopPanelModulePageObject.runsTab, UserAction.CLICK);
+        try {
+            if (tab.equalsIgnoreCase("Finished")) {
+                userAction.performActionWithPolling(dbSubTopPanelModulePageObject.finishedTab, UserAction.CLICK);
+            } else if (tab.equalsIgnoreCase("Running")) {
+                userAction.performActionWithPolling(dbSubTopPanelModulePageObject.runningTab, UserAction.CLICK);
+                waitExecuter.waitUntilElementPresent(dbSubTopPanelModulePageObject.runningTab);
+            }
+        } catch (ElementClickInterceptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     /* Select last 7 days from date range */
     public void select7Days() {
@@ -205,6 +219,14 @@ public class DbAllApps {
         select7Days();
         // Select cluster
         logger.info("Select last 7 days from date picker");
+    }
+
+    /* Select cluster and Last 7 days */
+    public void inJobsSelectClusterAndLast30Days() {
+        // Select last 30 days from date picker
+        select30Days();
+        // Select cluster
+        logger.info("Select last 30 days from date picker");
     }
 
     public List<WebElement> getClusterListFromDropdown() {

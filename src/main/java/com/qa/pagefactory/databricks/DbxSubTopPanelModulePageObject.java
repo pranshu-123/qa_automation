@@ -127,6 +127,12 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//span[text()='Runs']")
     public WebElement runsTab;
 
+    @FindBy(id = "running")
+    public WebElement runningTab;
+
+    @FindBy(id = "finished")
+    public WebElement finishedTab;
+
     @FindBy(css = ".col-md-12.no-data-msg")
     public WebElement whenNoApplicationPresent;
 

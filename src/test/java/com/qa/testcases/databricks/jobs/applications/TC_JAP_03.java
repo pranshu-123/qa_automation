@@ -27,7 +27,7 @@ public class TC_JAP_03 extends BaseClass {
 
     @Test()
     public void validateKPI() {
-        test = extent.startTest("TC_DR_06.validateFailedStatus",
+        test = extent.startTest("TC_JAP_03.validateKPI",
                 "Verify App should have KPI defined");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects

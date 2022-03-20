@@ -72,7 +72,6 @@ public class ChargeBackCluster {
 	}
 
 	public void validatePieChartGraph(String[] headers) {
-		driver.manage().timeouts().pageLoadTimeout(4, TimeUnit.SECONDS);
 		waitExecuter.sleep(4500);
 		List<String> list = chargebackClusterPageObject.graphsHeader.stream()
 				.map(graph -> graph.getText()).collect(Collectors.toList());

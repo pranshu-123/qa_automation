@@ -186,8 +186,6 @@ public class Jobs {
 		else {
 			jobsPageObject.groupByTagKey.click();
 		}
-		waitExecuter.sleep(3000);
-		LOGGER.info(value.toUpperCase() + " group selected successfully.");
 	}
 	/**
 	 * This method verify the select Queue present on Jobs page

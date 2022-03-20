@@ -30,6 +30,12 @@ public class TC_DR_29 extends BaseClass {
         test.log(LogStatus.INFO, "Navigate to Runs tab from header");
         dballApps.navigateToJobsTab("Runs");
         try {
+            // Navigate to Runs tab from header
+            test.log(LogStatus.INFO, "Navigate to jobs tab from header");
+            test.log(LogStatus.INFO, "Select last 30 days");
+            dballApps.inJobsSelectClusterAndLast30Days();
+            waitExecuter.sleep(2000);
+
             // Add the job count of each application
             test.log(LogStatus.INFO, "Add the job count of each application");
             loggingUtils.info("Add the job count of each application", test);

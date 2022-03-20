@@ -1,5 +1,6 @@
 package com.qa.testcases.databricks.jobs.runs;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.databricks.DbxSubTopPanelModulePageObject;
@@ -18,7 +19,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
-
+@Marker.DbxRuns
+@Marker.All
 public class TC_DR_45 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DR_45.class);
 

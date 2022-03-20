@@ -1,5 +1,6 @@
 package com.qa.testcases.databricks.jobs.runs;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.constants.PageConstants;
 import com.qa.pagefactory.databricks.DbxSubTopPanelModulePageObject;
@@ -17,9 +18,10 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+@Marker.DbxRuns
+@Marker.All
 public class TC_DR_50 extends BaseClass {
-    private final LoggingUtils loggingUtils = new LoggingUtils(TC_DR_13.class);
+    private final LoggingUtils loggingUtils = new LoggingUtils(TC_DR_50.class);
 
     @Test()
     public void validateAllColumnsInFinishedTab() {

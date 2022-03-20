@@ -1,5 +1,6 @@
 package com.qa.testcases.databricks.jobs.runs;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.databricks.DbxSubTopPanelModulePageObject;
 import com.qa.scripts.DatePicker;
@@ -11,7 +12,8 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+@Marker.DbxRuns
+@Marker.All
 public class TC_DR_47 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DR_47.class);
 

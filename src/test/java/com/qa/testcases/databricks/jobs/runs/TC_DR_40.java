@@ -19,6 +19,7 @@ public class TC_DR_40 extends BaseClass {
     public void verifyApplicationCountFinishedTab() {
         test = extent.startTest("TC_DR_40.verifyApplicationCountFinishedTab",
                 "Verify both application count list and the showing result are same");
+        test.assignCategory("Jobs-Runs");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

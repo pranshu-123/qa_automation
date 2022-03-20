@@ -27,6 +27,7 @@ public class TC_DR_50 extends BaseClass {
     public void validateAllColumnsInFinishedTab() {
         test = extent.startTest("TC_DR_50.validateAllColumnsInFinishedTab",
                 "Verify All columns must be listed in the Table");
+        test.assignCategory("Jobs-Runs/Finished");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -38,6 +39,8 @@ public class TC_DR_50 extends BaseClass {
         // Navigate to Runs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         dballApps.navigateToJobsTab("Runs");
+        dballApps.selectTab("Finished");
+        waitExecuter.waitUntilPageFullyLoaded();
         try {
             // Navigate to Runs tab from header
             test.log(LogStatus.INFO, "Navigate to jobs tab from header");

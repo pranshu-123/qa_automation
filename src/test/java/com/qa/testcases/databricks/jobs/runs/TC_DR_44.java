@@ -27,6 +27,7 @@ public class TC_DR_44 extends BaseClass {
     public void VerifyUserSearchInFinishedTab() {
         test = extent.startTest("TC_DR_44.VerifyUserSearchInFinishedTab ",
                 "Verify application is listed only of selected username");
+        test.assignCategory("Jobs-Runs/Finished");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -68,7 +69,7 @@ public class TC_DR_44 extends BaseClass {
             int totalCount = Integer
                     .parseInt(dbpageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
             if (totalCount > 0) {
-                String usernameFromTable = dbpageObject.getUsernameFromTable.getAttribute("title");
+                String usernameFromTable = dbpageObject.getUsernameFromFinishedTable.getAttribute("title");
                 loggingUtils.info("Username displayed in table " + usernameFromTable, test);
                 Assert.assertTrue(usernameSelected.contains(usernameFromTable),
                         "The application in table contains username other than that of " + usernameFromTable);

@@ -21,6 +21,7 @@ public class TC_DR_49 extends BaseClass {
     public void validateResetFuncInFinishedTab() {
         test = extent.startTest("TC_DR_49.validateResetFuncInFinishedTab",
                 "Selection of reset option should reset all the filters which are applied");
+        test.assignCategory("Jobs-Runs/Finished");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -32,13 +33,15 @@ public class TC_DR_49 extends BaseClass {
         // Navigate to Runs tab from header
         test.log(LogStatus.INFO, "Navigate to Runs tab from header");
         dballApps.navigateToJobsTab("Runs");
+        dballApps.selectTab("Finished");
+        waitExecuter.waitUntilPageFullyLoaded();
         try {
             waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
             datePicker.clickOnDatePicker();
             waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
             datePicker.selectCustomRange();
             waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
-            datePicker.setStartAndEndDateFromCurrentDate(-3,-1);
+            datePicker.setStartAndEndDateFromCurrentDate(-6,-2);
             datePicker.clickOnCustomDateApplyBtn();
             waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
             // Get total app counts before applying filter

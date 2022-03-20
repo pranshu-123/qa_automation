@@ -21,6 +21,7 @@ public class TC_DR_43 extends BaseClass {
     public void validateSuccessStatusInFinishedTab() {
         test = extent.startTest("TC_DR_43.validateSuccessStatusInFinishedTab",
                 "Verify All the Success jobs are listed on the page");
+        test.assignCategory("Jobs-Runs/Finished");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -49,8 +50,8 @@ public class TC_DR_43 extends BaseClass {
             waitExecuter.sleep(2000);
 
             if (appCount > 0) {
-                String headerAppId = dballApps.verifyStatus(dbpageObject);
-                test.log(LogStatus.PASS, "Application Id is displayed in the Header: " + headerAppId);
+                String appStatus = dballApps.verifyFinishedTabStatus(dbpageObject);
+                test.log(LogStatus.PASS, "Application status is displayed in the Header: " + appStatus);
                 waitExecuter.waitUntilPageFullyLoaded();
                 //Close apps details page
                 MouseActions.clickOnElement(driver, dbpageObject.closeAppsPageTab);

@@ -42,7 +42,7 @@ public class TC_DR_18 extends BaseClass {
             waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
             datePicker.selectCustomRange();
             waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
-            datePicker.setStartAndEndDateFromCurrentDate(-3, -1);
+            datePicker.setStartAndEndDateFromCurrentDate(-6,-2);
             datePicker.clickOnCustomDateApplyBtn();
             waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
             waitExecuter.sleep(2000);

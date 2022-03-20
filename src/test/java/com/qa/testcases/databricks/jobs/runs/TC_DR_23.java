@@ -64,7 +64,7 @@ public class TC_DR_23 extends BaseClass {
             int totalCount = Integer
                     .parseInt(dbpageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
             if (totalCount > 0) {
-                String workspaceNameFromTable = dbpageObject.getUsernameFromTable.getAttribute("title");
+                String workspaceNameFromTable = dbpageObject.getClusterTypeFromTable.getAttribute("title");
                 loggingUtils.info("ClusterType displayed in table " + workspaceNameFromTable,test);
                 Assert.assertTrue(usernameSelected.contains(workspaceNameFromTable),
                         "The application in table contains ClusterType name other than that of " + workspaceNameFromTable);

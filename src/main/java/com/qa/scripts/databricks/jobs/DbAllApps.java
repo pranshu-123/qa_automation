@@ -177,11 +177,11 @@ public class DbAllApps {
 
     public void navigateToJobsTab(String tab) {
         userAction.performActionWithPolling(dbSubTopPanelModulePageObject.jobs, UserAction.CLICK);
-        waitExecuter.waitUntilElementPresent(dbSubTopPanelModulePageObject.jobs);
+        waitExecuter.sleep(2000);
         try {
             if (tab.equalsIgnoreCase("Runs")) {
                 userAction.performActionWithPolling(dbSubTopPanelModulePageObject.runsTab, UserAction.CLICK);
-                waitExecuter.waitUntilElementPresent(dbSubTopPanelModulePageObject.jobsTabs);
+                waitExecuter.waitUntilElementPresent(dbSubTopPanelModulePageObject.runsTab);
             } else if (tab.equalsIgnoreCase("Jobs")) {
                 userAction.performActionWithPolling(dbSubTopPanelModulePageObject.jobsTabs, UserAction.CLICK);
                 waitExecuter.waitUntilElementPresent(dbSubTopPanelModulePageObject.jobsTabs);
@@ -274,6 +274,23 @@ public class DbAllApps {
         logger.info("Application Id is " + statusTable);
         waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.clickOnAppId);
         dbSubTopPanelModulePageObject.clickOnAppId.click();
+        waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.closeIcon);
+        waitExecuter.waitUntilPageFullyLoaded();
+        String status = dballApps.appStatus.getText().trim().toLowerCase();
+        Assert.assertEquals(statusTable, status, "Runs Status is not displayed in the Header");
+        return status;
+    }
+
+
+    /**
+     * Method to click the first app in jobs table , navigate to the details page.
+     * and verify Status App details Page .
+     */
+    public String verifyFinishedTabStatus(DbxSubTopPanelModulePageObject dballApps) {
+        String statusTable = dballApps.statusFinishedTab.getText().trim().toLowerCase();
+        logger.info("Application Id is " + statusTable);
+        waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.finishedAppId);
+        dbSubTopPanelModulePageObject.finishedAppId.click();
         waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.closeIcon);
         waitExecuter.waitUntilPageFullyLoaded();
         String status = dballApps.appStatus.getText().trim().toLowerCase();

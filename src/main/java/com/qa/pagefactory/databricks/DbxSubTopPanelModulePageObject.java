@@ -19,6 +19,9 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//*[@id='RunsListAll-body']/tr/td[1]")
     public WebElement Status;
 
+    @FindBy(xpath = "//*[@id='RunsListFinished']//tr/td[1]")
+    public WebElement statusFinishedTab;
+
     @FindBy(xpath = "//a[@href='#/manage/stats']")
     public WebElement stats;
 
@@ -88,8 +91,23 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//table[@id='RunsListAll']/tbody[1]/tr/td[3]/span[1]")
     public WebElement getNameeFromTable;
 
-    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[3]")
+    @FindBy(xpath = "//*[@id='RunsListAll']/tbody[1]/tr/td[2]/span[1]")
     public WebElement getUsernameFromTable;
+
+    @FindBy(xpath = "//*[@id='RunsListFinished']/tbody[1]/tr/td[2]/span[1]")
+    public WebElement getUsernameFromFinishedTable;
+
+    @FindBy(xpath = "//*[@id='RunsListAll']/tbody[1]/tr/td[12]/span[1]")
+    public WebElement getClusterTypeFromTable;
+
+    @FindBy(xpath = "//*[@id='RunsListFinished']/tbody[1]/tr/td[12]/span[1]")
+    public WebElement getClusterTypeFromFinishedTable;
+
+    @FindBy(xpath = "//*[@id='RunsListAll']/tbody[1]/tr/td[10]/span[1]")
+    public WebElement getWorkspaceFromTable;
+
+    @FindBy(xpath = "//*[@id='RunsListFinished']/tbody[1]/tr/td[10]/span[1]")
+    public WebElement getWorkspaceFromFinishedTable;
 
     @FindBy(xpath = "//li[@class='select2-results__option select2-results__message']")
     public WebElement getNoDataTable;
@@ -117,6 +135,9 @@ public class DbxSubTopPanelModulePageObject {
 
     @FindBy(xpath = "//*[@id=\"RunsListAll-body\"]/tr/td[3]/a[2]")
     public WebElement clickOnAppId;
+
+    @FindBy(xpath = "//*[@id='RunsListFinished']//tr/td[3]/a[2]")
+    public WebElement finishedAppId;
 
     @FindBy(xpath = "//button[text()[normalize-space()='Spark']]")
     public WebElement clickOnSpark;

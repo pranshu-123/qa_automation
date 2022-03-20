@@ -21,6 +21,7 @@ public class TC_DR_48 extends BaseClass {
     public void validateCustomDateFuncInFinishedTab() {
         test = extent.startTest("TC_DR_48.validateCustomDateFuncInFinishedTab",
                 "Verify the user can select custom date ranges");
+        test.assignCategory("Jobs-Runs/Finished");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -32,6 +33,8 @@ public class TC_DR_48 extends BaseClass {
         // Navigate to Runs tab from header
         test.log(LogStatus.INFO, "Navigate to Runs tab from header");
         dballApps.navigateToJobsTab("Runs");
+        dballApps.selectTab("Finished");
+        waitExecuter.waitUntilPageFullyLoaded();
         try {
             // Navigate to Runs tab from header
             test.log(LogStatus.INFO, "Navigate to jobs tab from header");
@@ -41,7 +44,7 @@ public class TC_DR_48 extends BaseClass {
             waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
             datePicker.selectCustomRange();
             waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
-            datePicker.setStartAndEndDateFromCurrentDate(-3, -1);
+            datePicker.setStartAndEndDateFromCurrentDate(-6, -2);
             datePicker.clickOnCustomDateApplyBtn();
             waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
             waitExecuter.sleep(2000);
@@ -55,7 +58,7 @@ public class TC_DR_48 extends BaseClass {
                     "The Spark app count of SparkApp is not equal to " + "the total count of heading.");
 
             if (appCount > 0) {
-                String headerAppId = dballApps.verifyStatus(dbpageObject);
+                String headerAppId = dballApps.verifyFinishedTabStatus(dbpageObject);
                 test.log(LogStatus.PASS, "Application Id is displayed in the Header: " + headerAppId);
                 waitExecuter.waitUntilPageFullyLoaded();
                 //Close apps details page

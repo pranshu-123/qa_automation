@@ -27,6 +27,7 @@ public class TC_DR_46 extends BaseClass {
     public void VerifyClusterTypeSearchInFinishedTab() {
         test = extent.startTest("TC_DR_46.VerifyClusterTypeSearchInFinishedTab",
                 "Verify application is listed only of selected ClusterType");
+        test.assignCategory("Jobs-Runs/Finished");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -39,6 +40,8 @@ public class TC_DR_46 extends BaseClass {
         // Navigate to Runs tab from header
         test.log(LogStatus.INFO, "Navigate to Runs tab from header");
         dballApps.navigateToJobsTab("Runs");
+        dballApps.selectTab("Finished");
+        waitExecuter.waitUntilPageFullyLoaded();
         try {
             // Navigate to Runs tab from header
             test.log(LogStatus.INFO, "Navigate to jobs tab from header");
@@ -66,7 +69,7 @@ public class TC_DR_46 extends BaseClass {
             int totalCount = Integer
                     .parseInt(dbpageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
             if (totalCount > 0) {
-                String workspaceNameFromTable = dbpageObject.getUsernameFromTable.getAttribute("title");
+                String workspaceNameFromTable = dbpageObject.getClusterTypeFromFinishedTable.getAttribute("title");
                 loggingUtils.info("ClusterType displayed in table " + workspaceNameFromTable,test);
                 Assert.assertTrue(usernameSelected.contains(workspaceNameFromTable),
                         "The application in table contains ClusterType name other than that of " + workspaceNameFromTable);

@@ -177,9 +177,11 @@ public class DbAllApps {
 
     public void navigateToJobsTab(String tab) {
         userAction.performActionWithPolling(dbSubTopPanelModulePageObject.jobs, UserAction.CLICK);
+        waitExecuter.waitUntilElementPresent(dbSubTopPanelModulePageObject.jobs);
         try {
             if (tab.equalsIgnoreCase("Runs")) {
                 userAction.performActionWithPolling(dbSubTopPanelModulePageObject.runsTab, UserAction.CLICK);
+                waitExecuter.waitUntilElementPresent(dbSubTopPanelModulePageObject.jobsTabs);
             } else if (tab.equalsIgnoreCase("Jobs")) {
                 userAction.performActionWithPolling(dbSubTopPanelModulePageObject.jobsTabs, UserAction.CLICK);
                 waitExecuter.waitUntilElementPresent(dbSubTopPanelModulePageObject.jobsTabs);

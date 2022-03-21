@@ -36,7 +36,6 @@ public class DC_28 extends BaseClass{
 		jobs.selectGroupByFilterValue("Workspace");
 		waitExecuter.sleep(2000);
 		String resultSetValue = chargeBackCluster.calculateDBUSumFromResultSet();
-		//String actualValue = resultSetValue.substring(0,resultSetValue.indexOf(".")+3);
 		String expectedVale = chargeBackCluster.fetchDBUValueFromGraph();
 		Assert.assertTrue(resultSetValue.equals(expectedVale), "DBU value calculated from Result Set does not matches with the value populated in DBU Graph");
 		test.log(LogStatus.PASS, "DBU values are matching.");

@@ -7,6 +7,7 @@ import com.qa.utils.WaitExecuter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
@@ -14,6 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -70,6 +72,7 @@ public class ChargeBackCluster {
 	}
 
 	public void validatePieChartGraph(String[] headers) {
+		driver.manage().timeouts().pageLoadTimeout(4, TimeUnit.SECONDS);
 		List<String> list = chargebackClusterPageObject.graphsHeader.stream()
 				.map(graph -> graph.getText()).collect(Collectors.toList());
 		for(String s : headers) {
@@ -156,7 +159,8 @@ public class ChargeBackCluster {
 		for(int i =1; i< size;i=i+7) {
 			sum = sum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText());
 		}
-		return String.valueOf(sum);
+	
+		return 	String.format("%.2f",sum);
 
 	}
 
@@ -179,11 +183,24 @@ public class ChargeBackCluster {
 		driver.findElement(By.xpath(String.format(chargebackClusterPageObject.filterByValues,filter))).click();
 	}
 
-	public void filterByTagKey(String tagKey) {		
-		waitExecuter.sleep(2500);
+	public void filterTags(String tagKey) {
 		chargebackClusterPageObject.tagKeyDropdown.click();
 		chargebackClusterPageObject.tagKeySearchField.sendKeys(tagKey);
 		chargebackClusterPageObject.tagKeySearchField.sendKeys(Keys.ENTER);
+	}
+	
+	public void filterByTagKey(String tagKey) {	
+		driver.manage().timeouts().pageLoadTimeout(4, TimeUnit.SECONDS);
+		waitExecuter.sleep(2500);
+		try {
+			filterTags(tagKey);
+		}
+		catch(StaleElementReferenceException e) {
+			e.printStackTrace();
+			driver.navigate().refresh();
+			filterTags(tagKey);
+		}
+	
 		LOGGER.info("Specified Tag Key selected: "+tagKey);
 	}	
 

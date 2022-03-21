@@ -83,7 +83,7 @@ public class CostTrends {
 	
 	public void filterBy(String filter) {
 		waitExecuter.waitUntilElementClickable(trendsPageObject.filterByDropDown);
-		waitExecuter.sleep(2500);
+		waitExecuter.sleep(3500);
 		trendsPageObject.filterByDropDown.click();
 		driver.findElement(By.xpath(String.format(trendsPageObject.filterByValues,filter))).click();
 	}

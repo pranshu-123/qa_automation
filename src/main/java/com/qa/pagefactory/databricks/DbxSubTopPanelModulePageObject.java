@@ -91,6 +91,9 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//table[@id='RunsListAll']/tbody[1]/tr/td[3]/a[2]")
     public WebElement getIdeFromTable;
 
+    @FindBy(xpath = "//table[@id='RunsListAll']/tbody[1]/tr/td[5]/span[1]")
+    public WebElement getRunIdFromTable;
+
     @FindBy(xpath = "//table[@id='RunsListAll']/tbody[1]/tr/td[3]/span[1]")
     public WebElement getNameeFromTable;
 

@@ -22,11 +22,11 @@ import java.util.List;
 @Marker.DbxRuns
 @Marker.All
 public class TC_DR_55 extends BaseClass {
-    private final LoggingUtils loggingUtils = new LoggingUtils(TC_DR_54.class);
+    private final LoggingUtils loggingUtils = new LoggingUtils(TC_DR_55.class);
 
     @Test()
     public void SearchJobsByRunIDInFinishedTab() {
-        test = extent.startTest("TC_DR_54.SearchJobsByRunIDInFinishedTab",
+        test = extent.startTest("TC_DR_55.SearchJobsByRunIDInFinishedTab",
                 "Verify search must populate desired job by Run ID");
         test.assignCategory("Jobs-Runs/Finished");
         test.log(LogStatus.INFO, "Initialize all class objects");

@@ -52,6 +52,9 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//table[@id='RunsListAll']/thead[1]/tr[1]/th/span[1]")
     public List<WebElement> getColumnsTypes;
 
+    @FindBy(xpath = "//table[@id='RunsListFinished']/thead[1]/tr[1]/th/span[1]")
+    public List<WebElement> getColumnsTypesFinishedTab;
+
     @FindBy(xpath = "//a[text()[normalize-space()='Only']]")
     public WebElement clickTab;
 

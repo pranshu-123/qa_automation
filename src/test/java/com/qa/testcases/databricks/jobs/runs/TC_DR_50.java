@@ -49,15 +49,13 @@ public class TC_DR_50 extends BaseClass {
             waitExecuter.sleep(2000);
             /*
              * Validate All columns  types are --
-             * "Killed","Failed","Running","Success","Pending","Unknown", "Waiting"
+
              */
             test.log(LogStatus.INFO,
-                    "Assert All columns  types - 'Status', 'User','Run Name /  ID','Job ID', 'Run ID', " +
-                            "'Start Time', 'Duration', 'Read', 'Write', 'Workspace', 'Cluster Name', 'Cluster Type', 'Cost','GO TO'");
-            loggingUtils.info("Assert status types - 'Status','User','Run Name / ID','Job ID','Run ID', \" +\n" +
-                    "                            \"'Start Time', 'Duration','Read','Write','Workspace', 'Cluster Name','Cluster Type', 'Cost','GO TO'", test);
+                    "Assert All columns  types - Status, User, Run Name / ID, Job ID, Run ID, End Time, Duration, Read, Write, Workspace, Cluster Name, Cluster Type, Cost, GO TO");
+            loggingUtils.info("Assert status types - Status, User, Run Name / ID, Job ID, Run ID, End Time, Duration, Read, Write, Workspace, Cluster Name, Cluster Type, Cost, GO TO", test);
             List<String> existingStatusTypes = new ArrayList<>(Arrays.asList(PageConstants.columnsType.COLUMNSTYPE));
-            List<WebElement> statusTypes = dbpageObject.getColumnsTypes;
+            List<WebElement> statusTypes = dbpageObject.getColumnsTypesFinishedTab;
             List<String> listOfStatusTypes = new ArrayList<String>();
             waitExecuter.sleep(2000);
             for (int i = 0; i < statusTypes.size(); i++) {

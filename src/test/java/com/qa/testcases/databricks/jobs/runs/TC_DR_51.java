@@ -78,14 +78,14 @@ public class TC_DR_51 extends BaseClass {
                 loggingUtils.info("Get application Queue name of first application listed in table and search", test);
                 waitExecuter.sleep(1000);
                 applicationsPageObject.globalSearchBox.clear();
-                String workspacenameToSearch = applicationsPageObject.getWorkspaceNameTable.getText();
+                String workSpaceNameToSearch = applicationsPageObject.getWorkspaceNameTable.getText();
                 waitExecuter.sleep(1000);
-                applicationsPageObject.globalSearchBox.sendKeys(workspacenameToSearch);
+                applicationsPageObject.globalSearchBox.sendKeys(workSpaceNameToSearch);
                 waitExecuter.sleep(1000);
                 applicationsPageObject.globalSearchBox.sendKeys(Keys.RETURN);
                 waitExecuter.sleep(3000);
                 Assert.assertTrue(tableData.size() > 0,
-                        "Table does not contain data according to the Workspace name type " + workspacenameToSearch);
+                        "Table does not contain data according to the Workspace name type " + workSpaceNameToSearch);
                 test.log(LogStatus.PASS, "Table contain data according to the Workspace name type ");
             } else
                 Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),

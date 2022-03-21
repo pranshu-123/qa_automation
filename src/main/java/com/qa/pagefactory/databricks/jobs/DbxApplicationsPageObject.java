@@ -7,14 +7,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class ApplicationsPageObject {
+public class DbxApplicationsPageObject {
 
-    @FindBy(xpath = "	")
-    public WebElement clusterIdsearchfield;
-
-    @FindBy(xpath = "	")
-    public List<WebElement> clusterIdsList;
-    
     @FindBy(css = "tbody#RunsListAll-body")
     public WebElement whenApplicationPresent;
 
@@ -23,6 +17,24 @@ public class ApplicationsPageObject {
 
     @FindBy(xpath = "(//div[contains(@class,'check-items-container')])[1]//span[1]")
     public List<WebElement> getApplicationTypes;
+
+    @FindBy(xpath = "//input[@class='select2-search__field']")
+    public WebElement clusterDropdown;
+
+    @FindBy(xpath = "//*[@id='RunsListAll-body']/tr/td[2]")
+    public WebElement getUserFromTable;
+
+    @FindBy(xpath = "//tbody/tr")
+    public List<WebElement> getTableData;
+
+    @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')])[2]//input")
+    public WebElement userSearchBox;
+
+    @FindBy(xpath = "//tbody/tr[1]/td/a[2]")
+    public List<WebElement> getNamesFromDropDown;
+
+    @FindBy(xpath = "//*[@id='RunsListAll-body']/tr/td[10]")
+    public WebElement getWorkspaceNameTable;
 
     @FindBy(css = ".col-md-12.no-data-msg")
     public WebElement whenNoApplicationPresent;
@@ -33,7 +45,7 @@ public class ApplicationsPageObject {
     @FindBy(css = "span#reset")
     public WebElement resetButton;
 
-    @FindBy(xpath = "//div[contains(@class,'check-items-container')]//input//following-sibling::span")
+    @FindBy(xpath = "//*[@id=\"runs-filter-panel\"]/div[2]/div/p/label/span[1]")
     public List<WebElement> selectOneApplicationType;
 
     @FindBy(xpath = "//*[@id=\"app-filter-panel\"]//div[2]/div[2]//div/p/label/span[2]")
@@ -63,7 +75,7 @@ public class ApplicationsPageObject {
     /**
      * @param driver The driver that will be used to look up the elements
      */
-    public ApplicationsPageObject(WebDriver driver) {
+    public DbxApplicationsPageObject(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
 }

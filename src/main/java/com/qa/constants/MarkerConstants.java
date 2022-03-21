@@ -52,13 +52,16 @@ public class MarkerConstants {
     public static final String CLOUD_MAPPING_PER_HOST = "cloud_mapping_per_host";
     public static final String JOBS_WORKFLOW = "jobs_workflow";
     public static final String IMPALA_INSIGHTS = "impala_insights";
-    public static final String DB_JOBS_RUNS = "db_jobs_runs";
-    public static final String DBX_COST_CHARGEBACK = "dbx_cost_chargeback";
+    public static final String DBX_RUNS = "dbx_runs";
+    public static final String DBX_JOBS = "dbx_jobs";
     public static final String DBX_COST_TRENDS = "dbx_cost_trends";
     public static final String DBX_COST_BUDGET = "dbx_cost_budget";
     public static final String DBX_REPORTS_TOPX = "dbx_reports_topX";
     public static final String DBX_REPORTS_ARCHIVED = "dbx_reports_archived";
     public static final String DBX_REPORTS_SCHEDULED = "dbx_reports_scheduled";
+    public static final String DBX_COST_CHARGEBACK = "dbx_cost_chargeback";
+    public static final String DBX_APP_DETAILS = "dbx_app_details";
+
     public static final Map<String, Class<? extends Annotation>> MARKER_MAPPING = initMap();
 
     /**
@@ -110,12 +113,15 @@ public class MarkerConstants {
         map.put(JOBS_WORKFLOW, Marker.JobsWorkflow.class);
         map.put(IMPALA_INSIGHTS, Marker.ImpalaInsights.class);
         map.put(DBX_COST_CHARGEBACK, Marker.DbxCostChargeback.class);
-        map.put(DBX_COST_BUDGET, Marker.DbxCostBudget.class);
         map.put(DBX_COST_TRENDS, Marker.DbxCostTrends.class);
         map.put(DB_JOBS_RUNS, Marker.DbJobsRuns.class);
         map.put(DBX_REPORTS_TOPX, Marker.DbxReportsTopX.class);
         map.put(DBX_REPORTS_ARCHIVED, Marker.DbxReportsArchived.class);
         map.put(DBX_REPORTS_SCHEDULED, Marker.DbxReportsScheduled.class);
+        map.put(DBX_COST_BUDGET, Marker.DbxCostBudget.class);
+        map.put(DBX_RUNS, Marker.DbxRuns.class);
+        map.put(DBX_JOBS, Marker.DbxJobs.class);
+        map.put(DBX_APP_DETAILS, Marker.DbxAppDetails.class);
         return Collections.unmodifiableMap(map);
     }
 }

@@ -1,5 +1,7 @@
 package com.qa.testcases.databricks.cost.chargeback;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import org.testng.Assert;
@@ -37,9 +39,9 @@ public class DC_32 extends BaseClass{
 		waitExecuter.sleep(2000);
 		chargeBackCluster.selectChargebackType("JobRun");
 		waitExecuter.sleep(2000);
-		String resultSetValue = chargeBackCluster.calculateClusterSumFromResultSet();
+		List<String> resultSetValue = chargeBackCluster.calculateClusterSumFromResultSet();
 		String expectedVale = chargeBackCluster.fetchJobRunsValueFromGraph();
-		Assert.assertTrue(resultSetValue.equals(expectedVale), "JobRun value calculated from Result Set does not matches with the value populated in DBU Graph");
+		Assert.assertTrue(resultSetValue.contains(expectedVale), "JobRun value calculated from Result Set does not matches with the value populated in DBU Graph");
 		test.log(LogStatus.PASS, "JobRun values are matching.");
 		LOGGER.info("JobRun values are matching.");
 	}

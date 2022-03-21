@@ -16,7 +16,7 @@ public class DC_17 extends BaseClass{
 
 	private static final Logger LOGGER = Logger.getLogger(DC_17.class.getName());
 	
-	//@Test
+	@Test
 	public void TC_Cost_CB_17_VerifyFilterByUser() {
 		test = extent.startTest("TC_Cost_CB_17_VerifyFilterByUser", "Verify if the filter is working for selected user");
 		test.assignCategory("Cost/Chargeback");

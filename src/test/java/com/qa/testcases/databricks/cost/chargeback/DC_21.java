@@ -20,7 +20,7 @@ public class DC_21  extends BaseClass{
 
 	private static final Logger LOGGER = Logger.getLogger(DC_21.class.getName());
 
-	//@Test
+	@Test
 	public void TC_Cost_CB_21_VerifyDownloadInSVGFormat() {
 		test = extent.startTest("TC_Cost_CB_21_VerifyDownloadInSVGFormat", "Verify download in SVG format");
 		test.assignCategory("Cost/Chargeback");

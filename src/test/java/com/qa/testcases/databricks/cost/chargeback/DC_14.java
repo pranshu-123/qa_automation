@@ -16,7 +16,7 @@ public class DC_14 extends BaseClass{
 
 	private static final Logger LOGGER = Logger.getLogger(DC_14.class.getName());
 	
-	//@Test
+	@Test
 	public void TC_Cost_CB_14_VerifyChargebackResultGroupByTagKey() {
 		test = extent.startTest("TC_Cost_CB_14_VerifyChargebackResultGroupByTagKey", "Chargeback result set should populate result as per Tag Key");
 		test.assignCategory("Cost/Chargeback");

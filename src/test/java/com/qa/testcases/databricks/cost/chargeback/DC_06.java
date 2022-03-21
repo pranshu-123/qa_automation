@@ -19,7 +19,7 @@ public class DC_06 extends BaseClass{
 
 	private static final Logger LOGGER = Logger.getLogger(DC_06.class.getName());
 	
-	//@Test
+	@Test
 	public void TC_Cost_CB_06_VerifyChargebackGraphGroupByWorkspace() {
 		test = extent.startTest("TC_Cost_CB_06_VerifyChargebackGraphGroupByWorkspace", "\"Workspace\" Graph validation");
 		test.assignCategory("Cost/Chargeback");

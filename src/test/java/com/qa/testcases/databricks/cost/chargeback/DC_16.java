@@ -19,7 +19,7 @@ public class DC_16 extends BaseClass{
 
 	private static final Logger LOGGER = Logger.getLogger(DC_16.class.getName());
 	
-	//@Test
+	@Test
 	public void TC_Cost_CB_16_VerifyCopyUrlFunctionality() {
 		test = extent.startTest("TC_Cost_CB_16_VerifyCopyUrlFunctionality", "Verify Copy URL functionality");
 		test.assignCategory("Cost/Chargeback");

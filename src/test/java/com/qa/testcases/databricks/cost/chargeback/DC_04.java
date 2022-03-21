@@ -19,7 +19,7 @@ public class DC_04 extends BaseClass{
 
 	private static final Logger LOGGER = Logger.getLogger(DC_04.class.getName());
 	
-	//@Test
+	@Test
 	public void TC_Cost_CB_04_VerifyChargebackOptimizeFunctionality() {
 		test = extent.startTest("TC_Cost_CB_04_VerifyChargebackOptimizeFunctionality", "Verify \"Optimize\" Chargeback as per User group");
 		test.assignCategory("Cost/Chargeback");

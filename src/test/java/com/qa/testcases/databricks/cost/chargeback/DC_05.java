@@ -19,7 +19,7 @@ public class DC_05 extends BaseClass{
 
 	private static final Logger LOGGER = Logger.getLogger(DC_05.class.getName());
 	
-	//@Test
+	@Test
 	public void TC_Cost_CB_05_VerifyChargebackResultGroupByWorkspace() {
 		test = extent.startTest("TC_Cost_CB_05_VerifyChargebackResultGroupByWorkspace", "If \"Workspace\" is selected the table should show all the apps as per workspace");
 		test.assignCategory("Cost/Chargeback");

@@ -18,7 +18,7 @@ public class DC_11 extends BaseClass{
 
 	private static final Logger LOGGER = Logger.getLogger(DC_11.class.getName());
 	
-//	@Test
+	@Test
 	public void TC_Cost_CB_11_VerifyChargebackResultGroupByTagKey() {
 		test = extent.startTest("TC_Cost_CB_11_VerifyChargebackResultGroupByTagKey", "If \"Tag Name\" is selected the table should show all the apps run by the users ");
 		test.assignCategory("Cost/Chargeback");

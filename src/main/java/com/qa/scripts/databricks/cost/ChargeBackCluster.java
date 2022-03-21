@@ -11,6 +11,7 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -159,7 +160,7 @@ public class ChargeBackCluster {
 		for(int i =1; i< size;i=i+7) {
 			sum = sum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText());
 		}
-	
+
 		return 	String.format("%.2f",sum);
 
 	}
@@ -187,7 +188,7 @@ public class ChargeBackCluster {
 		chargebackClusterPageObject.tagKeySearchField.sendKeys(tagKey);
 		chargebackClusterPageObject.tagKeySearchField.sendKeys(Keys.ENTER);
 	}
-	
+
 	public void filterByTagKey(String tagKey) {	
 		driver.manage().timeouts().pageLoadTimeout(4, TimeUnit.SECONDS);
 		waitExecuter.sleep(2500);
@@ -199,19 +200,28 @@ public class ChargeBackCluster {
 			driver.navigate().refresh();
 			filterTags(tagKey);
 		}
-	
+
 		LOGGER.info("Specified Tag Key selected: "+tagKey);
 	}	
 
-	public String calculateClusterSumFromResultSet() {
-		double sum =0.00;
+	public List<String> calculateClusterSumFromResultSet() {
+		double floorSum =0.00;
+		double ceilSum =0.00;
 		int size = chargebackClusterPageObject.resultSetValues.size();
 		for(int i =5; i< size;i=i+7) {
-			sum = sum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText());
+			floorSum = floorSum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText());
 		}
-	    sum = Math.ceil(sum / 1000) * 1000;
-		String value = String.valueOf(sum);
-		return (value.charAt(0) + "k");
+		ceilSum = floorSum;
+		floorSum = Math.floor(floorSum / 1000) * 1000;
+		String floorValue;
+		String ceilValue;
+		ArrayList<String> list = new ArrayList<String>();
+		floorValue = String.valueOf(floorSum);
+		list.add(floorValue.charAt(0) + "k");
+		ceilSum = Math.ceil(ceilSum / 1000) * 1000;
+		ceilValue = String.valueOf(ceilSum);
+		list.add(ceilValue.charAt(0) + "k");
+		return list;
 	}
 
 	public String fetchClusterValueFromGraph() {

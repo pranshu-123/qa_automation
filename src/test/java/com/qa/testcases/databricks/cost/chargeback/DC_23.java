@@ -20,7 +20,7 @@ public class DC_23  extends BaseClass{
 
 	private static final Logger LOGGER = Logger.getLogger(DC_23.class.getName());
 
-	//@Test
+	@Test
 	public void TC_Cost_CB_23_VerifyDownloadInXLSFormat() {
 		test = extent.startTest("TC_Cost_CB_23_VerifyDownloadInXLSFormat", "Verify download in XLS format");
 		test.assignCategory("Cost/Chargeback");

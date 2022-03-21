@@ -76,7 +76,7 @@ public class ReportsTopXPageObject {
 	
 	public String tagsType = "//label[contains(text(),'%s')]/preceding-sibling::input";
 	
-	public String tagsName = "//label[contains(text(),'%s')]/../../..//ul/li/input[@role='searchbox']";
+	public String tagsName = "//label[contains(text(),'%s')]/preceding-sibling::input/../../following-sibling::footer/ul//input";
 	
 	public String applicationStatusStates = "//a[contains(text(),'%s')]";
 

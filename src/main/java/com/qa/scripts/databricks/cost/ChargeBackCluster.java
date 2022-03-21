@@ -120,12 +120,12 @@ public class ChargeBackCluster {
 	}
 
 	public void selectOptimize() {
-		waitExecuter.sleep(4000);
+		waitExecuter.sleep(5000);
 		chargebackClusterPageObject.optimize.click();
 	}
 
 	public String selectCopyUrl() {
-		waitExecuter.sleep(4000);
+		waitExecuter.sleep(5000);
 		chargebackClusterPageObject.copyURL.get(0).click();
 		return chargebackClusterPageObject.urlLinks.get(0).getAttribute("href");
 	}

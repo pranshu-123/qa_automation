@@ -59,6 +59,10 @@ public class ArchivedReports {
 	public void selectReportList() {
 		reportsArchivedPageObject.success.click();
 	}
+	
+	public void selectScheduledReport() {
+		reportsArchivedPageObject.scheduledNewReport.click();
+	}
 
 	public void downloadArchivedReport() {
 		reportsArchivedPageObject.downloadList.get(0).click();
@@ -112,9 +116,6 @@ public class ArchivedReports {
 
 	}
 
-	public void copyReportUrl() {
-
-	}
 
 	public String searchReport(String reportName) {
 		reportsArchivedPageObject.searchBox.sendKeys(reportName);
@@ -133,4 +134,16 @@ public class ArchivedReports {
 		waitExecuter.sleep(10000);
 		return top;
 	}
+	
+	public String returnLatestReportStatus() {
+		waitExecuter.sleep(2000);
+		return reportsArchivedPageObject.latestSuccessfulReport.getText();
+	}
+	
+	public void validateReportList() {
+		Assert.assertTrue(reportsArchivedPageObject.archivedTopXReportList
+				.stream().iterator().next().getText().contains("Top X"));
+	}
+	
+
 }

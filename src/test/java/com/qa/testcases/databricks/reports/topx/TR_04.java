@@ -30,6 +30,4 @@ public class TR_04 extends BaseClass
 		LOGGER.info("Url copied successfully and is navigable");
 		test.log(LogStatus.PASS, "Url copied successfully and is navigable");
 	}
-
-
 }

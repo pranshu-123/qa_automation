@@ -52,6 +52,9 @@ public class ReportsArchivedPageObject {
 	
 	@FindBy(xpath = "//span[contains(text(),'/')]")
 	public List<WebElement> archivedTopXReportCreatedDates;
+	
+	@FindBy(xpath = "//h2[contains(text(),'LATEST SUCCESSFUL TOP X REPORT')]")
+	public WebElement latestSuccessfulReport;
 
 	/**
 	 * @param driver The driver that will be used to look up the elements

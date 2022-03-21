@@ -22,6 +22,7 @@ import org.testng.Assert;
 import com.qa.pagefactory.databricks.cost.ChargebackClusterPageObject;
 import com.qa.pagefactory.databricks.reports.ReportsTopXPageObject;
 import com.qa.scripts.DatePicker;
+import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.WaitExecuter;
 
 public class TopXReports {
@@ -111,7 +112,7 @@ public class TopXReports {
 		reportsTopXPageObject.topxTextArea.sendKeys(top);
 		reportsTopXPageObject.realUserTextArea.sendKeys(value);
 		reportsTopXPageObject.newReportRunBtn.click();
-		waitExecuter.sleep(10000);
+		waitExecuter.sleep(12000);
 		waitExecuter.waitUntilElementPresent(reportsTopXPageObject.reportGenerationMsg);
 		return top;
 	}
@@ -121,7 +122,7 @@ public class TopXReports {
 		reportsTopXPageObject.cluster.click();
 		reportsTopXPageObject.clusterTextArea.sendKeys(value);
 		reportsTopXPageObject.newReportRunBtn.click();
-		waitExecuter.sleep(10000);
+		waitExecuter.sleep(12000);
 		waitExecuter.waitUntilElementPresent(reportsTopXPageObject.reportGenerationMsg);
 		return top;
 	}
@@ -130,7 +131,7 @@ public class TopXReports {
 		reportsTopXPageObject.topxTextArea.sendKeys(top);
 		reportsTopXPageObject.workspaceTextArea.sendKeys(value);
 		reportsTopXPageObject.newReportRunBtn.click();
-		waitExecuter.sleep(10000);
+		waitExecuter.sleep(12000);
 		waitExecuter.waitUntilElementPresent(reportsTopXPageObject.reportGenerationMsg);
 		return top;
 	}
@@ -138,9 +139,10 @@ public class TopXReports {
 	public String createNewReportWithTags(String top,String tagsType, String tagsName) {
 		reportsTopXPageObject.topxTextArea.sendKeys(top);
 		driver.findElement(By.xpath(String.format(reportsTopXPageObject.tagsType, tagsType))).click();
-		driver.findElement(By.xpath(String.format(reportsTopXPageObject.tagsName, tagsName))).click();
+		JavaScriptExecuter.scrollViewWithYAxis(driver, 600);
+		driver.findElement(By.xpath(String.format(reportsTopXPageObject.tagsName, tagsType))).sendKeys(tagsName,Keys.ENTER);
 		reportsTopXPageObject.newReportRunBtn.click();
-		waitExecuter.sleep(10000);
+		waitExecuter.sleep(12000);
 		waitExecuter.waitUntilElementPresent(reportsTopXPageObject.reportGenerationMsg);
 		return top;
 	}

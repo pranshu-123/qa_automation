@@ -13,7 +13,6 @@ import com.qa.utils.Log;
 import com.qa.utils.WaitExecuter;
 
 @Marker.DbxCostChargeback
-@Marker.All
 public class DC_33 extends BaseClass{
 
 	private static final Logger LOGGER = Logger.getLogger(DC_33.class.getName());

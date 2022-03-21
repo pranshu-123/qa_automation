@@ -52,7 +52,7 @@ public class ScheduledReports {
 	public void scheduleReport() {
 		JavaScriptExecuter.scrollOnElement(driver, reportsScheduledPageObject.scheduleReport);
 		reportsScheduledPageObject.scheduleReport.click();
-		waitExecuter.waitUntilElementPresent(reportsTopXPageObject.reportGenerationMsg);
+		waitExecuter.sleep(10000);
 	}
 
 	public String selectScheduledTime(String option) {
@@ -105,6 +105,8 @@ public class ScheduledReports {
 	}
 
 	public void validateScheduledReportInfo(List<String> tableHeaders, List<String> tableValues) {
+		driver.navigate().refresh();
+		reportsScheduledPageObject.reportTableValues.get(0).click();
 		List<String> headers = reportsScheduledPageObject.inputParameterHeader.stream()
 				.map(el -> el.getText()).collect(Collectors.toList());
 
@@ -120,5 +122,11 @@ public class ScheduledReports {
 		}
 	}
 	
+	public void validateScheduledPageObjects() {
+		Assert.assertTrue(reportsScheduledPageObject.deleteScheduleReport.isDisplayed());
+		Assert.assertTrue(reportsScheduledPageObject.editScheduleReport.isDisplayed());
+		Assert.assertTrue(reportsScheduledPageObject.searchBox.isDisplayed());
+		Assert.assertTrue(reportsScheduledPageObject.moreInfo.isDisplayed());
+	}
 	
 }

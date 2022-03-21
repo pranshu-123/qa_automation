@@ -1,5 +1,6 @@
 package com.qa.testcases.databricks.jobs.runs;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.databricks.DbxSubTopPanelModulePageObject;
 import com.qa.scripts.databricks.jobs.DbAllApps;
@@ -13,7 +14,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
-
+@Marker.DbxRuns
+@Marker.All
 public class TC_DR_54 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DR_54.class);
 
@@ -28,6 +30,8 @@ public class TC_DR_54 extends BaseClass {
         DbxSubTopPanelModulePageObject dbpageObject = new DbxSubTopPanelModulePageObject(driver);
         DbAllApps dballApps = new DbAllApps(driver);
         dballApps.navigateToJobsTab("Runs");
+        dballApps.selectTab("Finished");
+        waitExecuter.waitUntilPageFullyLoaded();
         // Navigate to Runs tab select cluster and last 7 days
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         test.log(LogStatus.INFO, "Select last 7 days");

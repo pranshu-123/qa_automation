@@ -37,6 +37,8 @@ public class TC_DR_52 extends BaseClass {
         // Navigate to Runs tab from header
         test.log(LogStatus.INFO, "Navigate to Runs tab from header");
         dballApps.navigateToJobsTab("Runs");
+        dballApps.selectTab("Finished");
+        waitExecuter.waitUntilPageFullyLoaded();
         try {
             // Click on date picker ranges and verify Runs app counts
             test.log(LogStatus.INFO, "Click on date picker ranges and verify Runs app counts");

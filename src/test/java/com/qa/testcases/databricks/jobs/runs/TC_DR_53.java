@@ -33,6 +33,7 @@ public class TC_DR_53 extends BaseClass {
         // Navigate to Runs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         dballApps.navigateToJobsTab("Runs");
+        dballApps.selectTab("Finished");
         waitExecuter.waitUntilPageFullyLoaded();
         try {
             // Click on date picker and get list of calendar ranges

@@ -82,4 +82,40 @@ public class ImageUtils {
             return (percentage < 5) ? true : false;
         }
     }
+
+    /**
+     * Check if an image contains color
+     * @param image
+     * @param rgb
+     * @return
+     */
+    public static Boolean isImageContainsColor(File image, int[] rgb) {
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(image);
+        } catch (IOException ae) {
+            loggingUtils.info("Image not found.", null);
+        }
+        int width = img.getWidth();
+        int height = img.getHeight();
+        for (int y=0; y<height; y++) {
+            for (int x=0; x<width; x++) {
+                int difference = 0;
+                int rgbPixel = img.getRGB(x, y);
+                int redA = (rgbPixel >> 16) & 0xff;
+                int greenA = (rgbPixel >> 8) & 0xff;
+                int blueA = (rgbPixel) & 0xff;
+                difference += Math.abs(redA - rgb[0]);
+                difference += Math.abs(greenA - rgb[1]);
+                difference += Math.abs(blueA - rgb[2]);
+                double total_pixels = width * height * 3;
+                double avg_different_pixels = difference / total_pixels;
+                double percentage = (avg_different_pixels / 255) * 100;
+                if (percentage < 10) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

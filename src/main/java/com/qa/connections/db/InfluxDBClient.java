@@ -49,19 +49,19 @@ public class InfluxDBClient {
      * @param data - Data to be written in influx
      */
     public void writeDataToInflux(Map<String, Object> data) {
-        influxDB.write(Point.measurement("test_execution")
-                .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
-                .tag(InfluxMetricsConstants.UNRAVEL_BUILD, data.get(ConfigConstants.UnravelConfig.UNRAVEL_BUILD).toString())
-                .tag(InfluxMetricsConstants.UNRAVEL_VERSION, data.get(ConfigConstants.UnravelConfig.UNRAVEL_VERSION).toString())
-                .tag(InfluxMetricsConstants.URL, data.get(InfluxMetricsConstants.URL).toString())
-                .tag(InfluxMetricsConstants.BATCH_ID, data.get(InfluxMetricsConstants.BATCH_ID).toString())
-                .addField(InfluxMetricsConstants.METHOD_NAME, data.get(InfluxMetricsConstants.METHOD_NAME).toString())
-                .tag(InfluxMetricsConstants.HOST, data.get(InfluxMetricsConstants.HOST).toString())
-                .tag(InfluxMetricsConstants.STATUS, data.get(InfluxMetricsConstants.STATUS).toString())
-                .addField(InfluxMetricsConstants.DURATION, data.get(InfluxMetricsConstants.DURATION).toString())
-                .tag(InfluxMetricsConstants.MARKERS, data.get(InfluxMetricsConstants.MARKERS).toString())
-                .tag(InfluxMetricsConstants.PILLAR, data.get(InfluxMetricsConstants.PILLAR).toString())
-                .build());
+//        influxDB.write(Point.measurement("test_execution")
+//                .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
+//                .tag(InfluxMetricsConstants.UNRAVEL_BUILD, data.get(ConfigConstants.UnravelConfig.UNRAVEL_BUILD).toString())
+//                .tag(InfluxMetricsConstants.UNRAVEL_VERSION, data.get(ConfigConstants.UnravelConfig.UNRAVEL_VERSION).toString())
+//                .tag(InfluxMetricsConstants.URL, data.get(InfluxMetricsConstants.URL).toString())
+//                .tag(InfluxMetricsConstants.BATCH_ID, data.get(InfluxMetricsConstants.BATCH_ID).toString())
+//                .addField(InfluxMetricsConstants.METHOD_NAME, data.get(InfluxMetricsConstants.METHOD_NAME).toString())
+//                .tag(InfluxMetricsConstants.HOST, data.get(InfluxMetricsConstants.HOST).toString())
+//                .tag(InfluxMetricsConstants.STATUS, data.get(InfluxMetricsConstants.STATUS).toString())
+//                .addField(InfluxMetricsConstants.DURATION, data.get(InfluxMetricsConstants.DURATION).toString())
+//                .tag(InfluxMetricsConstants.MARKERS, data.get(InfluxMetricsConstants.MARKERS).toString())
+//                .tag(InfluxMetricsConstants.PILLAR, data.get(InfluxMetricsConstants.PILLAR).toString())
+//                .build());
     }
 
     /**

@@ -3,8 +3,8 @@ package com.qa.testcases.cloud.databricks.data.tables;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.enums.UserAction;
-import com.qa.pagefactory.cloud.dbx.DataPageObject;
-import com.qa.scripts.cloud.dbx.DataTablesHelper;
+import com.qa.pagefactory.cloud.databricks.DataPageObject;
+import com.qa.scripts.cloud.databricks.DataTablesHelper;
 import com.qa.utils.ImageUtils;
 import com.qa.utils.LoggingUtils;
 import com.qa.utils.ScreenshotHelper;
@@ -37,11 +37,11 @@ public class TC_DBX_DT_32 extends BaseClass {
             actions.performActionWithPolling(dataPageObject.tableRows.get(1).findElement(By.cssSelector("td.border" +
                     "-warm > label > span.checkmark")), UserAction.CLICK);
             File screenshot1 = ScreenshotHelper.takeScreenshotOfElement(driver,
-                dataPageObject.usersAppsAndSizeGraphs.get(0).findElement(By.cssSelector("svg")), 0);
+                dataPageObject.displayedGraphs.get(0).findElement(By.cssSelector("svg")), 0);
             actions.performActionWithPolling(dataPageObject.tableRows.get(2).findElement(By.cssSelector("td.border" +
                     "-warm > label > span.checkmark")), UserAction.CLICK);
             File screenshot2 = ScreenshotHelper.takeScreenshotOfElement(driver,
-                dataPageObject.usersAppsAndSizeGraphs.get(0).findElement(By.cssSelector("svg")), 0);
+                dataPageObject.displayedGraphs.get(0).findElement(By.cssSelector("svg")), 0);
             Boolean isImageIdentical = ImageUtils.compareImage(screenshot1, screenshot2);
             if (isImageIdentical) {
                 loggingUtils.info("Image is identical. <b style='color:red'>Please cross check.</>", test);

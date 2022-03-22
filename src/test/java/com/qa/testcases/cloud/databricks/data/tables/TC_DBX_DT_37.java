@@ -2,8 +2,8 @@ package com.qa.testcases.cloud.databricks.data.tables;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.cloud.dbx.DataPageObject;
-import com.qa.scripts.cloud.dbx.DataTablesHelper;
+import com.qa.pagefactory.cloud.databricks.DataPageObject;
+import com.qa.scripts.cloud.databricks.DataTablesHelper;
 import com.qa.utils.LoggingUtils;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
@@ -16,7 +16,7 @@ import java.util.List;
 
 @Marker.DBX.Data
 public class TC_DBX_DT_37 extends BaseClass {
-    private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_37.class);
+    private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(description = "Verify the Analysis section of Table Details page.")
     public void verifyAnalysisSection() {

@@ -50,7 +50,7 @@ public class TC_DR_43 extends BaseClass {
             waitExecuter.sleep(2000);
 
             if (appCount > 0) {
-                String appStatus = dballApps.verifyFinishedTabStatus(dbpageObject);
+                String appStatus = dballApps.verifyStatusInFinishedTab(dbpageObject);
                 test.log(LogStatus.PASS, "Application status is displayed in the Header: " + appStatus);
                 waitExecuter.waitUntilPageFullyLoaded();
                 //Close apps details page

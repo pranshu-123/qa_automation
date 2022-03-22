@@ -58,7 +58,7 @@ public class TC_DR_48 extends BaseClass {
                     "The Spark app count of SparkApp is not equal to " + "the total count of heading.");
 
             if (appCount > 0) {
-                String headerAppId = dballApps.verifyFinishedTabStatus(dbpageObject);
+                String headerAppId = dballApps.verifyStatusInFinishedTab(dbpageObject);
                 test.log(LogStatus.PASS, "Application Id is displayed in the Header: " + headerAppId);
                 waitExecuter.waitUntilPageFullyLoaded();
                 //Close apps details page

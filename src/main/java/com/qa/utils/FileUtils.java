@@ -2,7 +2,6 @@ package com.qa.utils;
 
 import com.qa.constants.DirectoryConstants;
 import com.qa.parameters.FIleConstants;
-import com.qa.scripts.clusters.yarn.Yarn;
 import org.testng.Assert;
 
 import java.io.*;
@@ -44,8 +43,8 @@ public class FileUtils {
             createDirectory(fileDir);
             String fileName = file.getName();
             if (isAppendDate) {
-                fileName = file.getName().split("\\.")[0] + DateUtils.getCurrentDateTime().replaceAll("[: ]", "-") +
-                        "." + file.getName().split("\\.")[1];
+                fileName = file.getName().split("\\.")[0] + DateUtils.getCurrentDateTimeAsFormat("MM-dd-YYYY hh:mm:ss")
+                    .replaceAll("[: ]", "-") + "." + file.getName().split("\\.")[1];
             }
             String resultFilePath = fileDir + File.separator + fileName;
             if (file.renameTo(new File(resultFilePath))) {

@@ -25,6 +25,10 @@ public class ActionPerformer {
     actions.moveToElement(element, xOffset, yOffset).click().perform();
   }
 
+  public void moveToTheElementAndClick(WebElement element) {
+    actions.moveToElement(element).click().perform();
+  }
+
   public static void hoverToPosition(WebDriver driver, int xOffset, int yOffset) {
     Actions actions = new Actions(driver);
     actions.moveByOffset(xOffset, yOffset).perform();
@@ -52,5 +56,12 @@ public class ActionPerformer {
   public void moveToTheElement(WebElement element) {
     Actions actions = new Actions(driver);
     actions.moveToElement(element).perform();
+  }
+
+  /**
+   * Slide element horizontally by defined offset
+   */
+  public void slideElementHorizontallyByOffset(WebElement element, int offset) {
+    actions.moveToElement(element).clickAndHold().moveByOffset(offset, 0).release().build().perform();
   }
 }

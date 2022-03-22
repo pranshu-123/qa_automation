@@ -163,21 +163,21 @@ public @interface Marker {
     @interface JobsWorkflow {
     }
 
-  @Retention(RetentionPolicy.RUNTIME)
-  @interface DbJobsRuns {}
-  
-  @Retention(RetentionPolicy.RUNTIME)
-  @interface DbxReportsTopX {}
-  
-  @Retention(RetentionPolicy.RUNTIME)
-  @interface DbxReportsArchived {}
-  
-  @Retention(RetentionPolicy.RUNTIME)
-  @interface DbxReportsScheduled {}
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface DbJobsRuns {}
 
-  @Retention(RetentionPolicy.RUNTIME)
-  @interface ImpalaInsights {
-  }
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface DbxReportsTopX {}
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface DbxReportsArchived {}
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface DbxReportsScheduled {}
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface ImpalaInsights {
+    }
 
     @Retention(RetentionPolicy.RUNTIME)
     @interface DbxCostChargeback {
@@ -203,4 +203,11 @@ public @interface Marker {
     @interface DbxCostBudget {
     }
 
+    @Target(ElementType.TYPE)
+    @interface DBX {
+        @Retention(RetentionPolicy.RUNTIME)
+        @interface Data {
+            String PAGE = "DBX - DATA";
+        }
+    }
 }

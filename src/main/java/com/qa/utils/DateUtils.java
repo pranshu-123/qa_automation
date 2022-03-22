@@ -23,11 +23,28 @@ public class DateUtils {
 	}
 
 	/**
-	 * @return Return current Date & Time
+	 * @return Return current Date & Time as format
 	 */
-	public static String getCurrentDateTime() {
+	public static Date getCurrentDateTime() {
 		cal = Calendar.getInstance();
-		dateFormatter = new SimpleDateFormat("MM-dd-YYYY hh:mm:ss");
+		return cal.getTime();
+	}
+
+	/**
+	 * @return Return current Date & Time as format
+	 */
+	public static Date getDateDifferenceFromCurrentDate(int days) {
+		cal = Calendar.getInstance();
+		cal.add(Calendar.DATE, days);
+		return cal.getTime();
+	}
+
+	/**
+	 * @return Return current Date & Time as format
+	 */
+	public static String getCurrentDateTimeAsFormat(String format) {
+		cal = Calendar.getInstance();
+		dateFormatter = new SimpleDateFormat(format);
 		String startDate = dateFormatter.format(cal.getTime());
 		return startDate;
 	}
@@ -48,7 +65,7 @@ public class DateUtils {
 		cal = Calendar.getInstance();
 		dateFormatter = new SimpleDateFormat("MM/dd/yyyy");
 		cal.add(Calendar.DATE, days);
-		String pastDate = dateFormatter.format(cal.getTime()).toString();
+		String pastDate = dateFormatter.format(cal.getTime());
 		return pastDate;
 	}
 

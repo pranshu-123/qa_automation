@@ -73,7 +73,7 @@ public class TC_DR_19 extends BaseClass {
                 test.log(LogStatus.PASS, "The application in table matches workspace name: " + workspaceNameFromTable);
             } else
                 Assert.assertTrue(dbpageObject.whenApplicationPresent.isDisplayed(),
-                        "The clusterId has application under it and displays available data for it");
+                        "The  has application under it and displays available data for it");
             executor.executeScript("arguments[0].scrollIntoView();", dbpageObject.resetButton);
             waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
             userActions.performActionWithPolling(dbpageObject.resetButton, UserAction.CLICK);

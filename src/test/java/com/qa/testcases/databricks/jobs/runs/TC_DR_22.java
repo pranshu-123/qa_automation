@@ -3,6 +3,7 @@ package com.qa.testcases.databricks.jobs.runs;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.enums.UserAction;
+import com.qa.pagefactory.DatePickerPageObject;
 import com.qa.pagefactory.databricks.DbxSubTopPanelModulePageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.databricks.jobs.DbAllApps;
@@ -17,6 +18,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
+
 @Marker.DbxRuns
 @Marker.All
 public class TC_DR_22 extends BaseClass {
@@ -32,25 +34,30 @@ public class TC_DR_22 extends BaseClass {
         loggingUtils.info("Initialize all class objects", test);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         DbxSubTopPanelModulePageObject dbpageObject = new DbxSubTopPanelModulePageObject(driver);
+        DatePickerPageObject datePickerPageObject = new DatePickerPageObject(driver);
         DbAllApps dballApps = new DbAllApps(driver);
+        DatePicker datePicker = new DatePicker(driver);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         UserActions userActions = new UserActions(driver);
         // Navigate to Runs tab from header
         test.log(LogStatus.INFO, "Navigate to Runs tab from header");
         dballApps.navigateToJobsTab("Runs");
         try {
-            // Navigate to Runs tab from header
             test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-            test.log(LogStatus.INFO, "Select last 7 days");
-            dballApps.inJobsSelectClusterAndLast7Days();
+            test.log(LogStatus.INFO, "Select custom range in datepicker");
+            waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
+            datePicker.clickOnDatePicker();
+            waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
+            datePicker.selectCustomRange();
+            waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
+            datePicker.setStartAndEndDateFromCurrentDate(-3, -1);
+            datePicker.clickOnCustomDateApplyBtn();
             waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
             // Click on user searchbox and get all usernames.
             test.log(LogStatus.INFO, "Click on user searchbox and get all usernames.");
             loggingUtils.info("Click on user searchbox and get all usernames.", test);
             executor.executeScript("arguments[0].scrollIntoView();", dbpageObject.userSearchBox);
 
-            waitExecuter.waitUntilElementClickable(dbpageObject.userExpandableHeader);
-            userActions.performActionWithPolling(dbpageObject.userExpandableHeader, UserAction.CLICK);
             waitExecuter.waitUntilElementClickable(dbpageObject.userExpandableHeader);
             waitExecuter.waitUntilElementClickable(dbpageObject.userSearchBox);
             userActions.performActionWithPolling(dbpageObject.userSearchBox, UserAction.CLICK);
@@ -80,6 +87,7 @@ public class TC_DR_22 extends BaseClass {
             waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
             userActions.performActionWithPolling(dbpageObject.resetButton, UserAction.CLICK);
             waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
+
         } catch (NoSuchElementException ex) {
             loggingUtils.error("No app present by this name", test);
             loggingUtils.error("Error- " + ex, test);

@@ -64,7 +64,7 @@ public class TC_DR_20 extends BaseClass {
                 loggingUtils.info("Username displayed in table " + usernameFromTable,test);
             } else
                 Assert.assertTrue(dbpageObject.whenApplicationPresent.isDisplayed(),
-                        "The clusterId has application under it and displays available data for it");
+                        "he application display 'Data Available'");
             executor.executeScript("arguments[0].scrollIntoView();", dbpageObject.resetButton);
             waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
             userActions.performActionWithPolling(dbpageObject.resetButton, UserAction.CLICK);

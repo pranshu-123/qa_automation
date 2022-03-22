@@ -1,5 +1,6 @@
 package com.qa.testcases.databricks.jobs.jobs;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.databricks.DbxSubTopPanelModulePageObject;
 import com.qa.pagefactory.databricks.jobs.DbxJobsPageObject;
@@ -11,7 +12,8 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.annotations.Test;
-
+@Marker.DbxJobs
+@Marker.All
 public class TC_DJ_15 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DJ_15.class);
 

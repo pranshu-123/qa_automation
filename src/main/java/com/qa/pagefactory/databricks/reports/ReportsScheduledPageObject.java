@@ -66,6 +66,24 @@ public class ReportsScheduledPageObject {
 	@FindBy(xpath = "//h2[contains(text(),'Scheduled Info')]/../following-sibling::div//table/tbody/tr/td/span")
 	public List<WebElement> inputParameterValue;
 	
+	@FindBy(xpath = "//span[contains(text(),'Name')]")
+	public WebElement sortName;
+	
+	@FindBy(xpath = "//span[contains(text(),'TopX')]")
+	public List<WebElement> scheduledTopXReportNameList;
+	
+	@FindBy(xpath = "//span[contains(text(),'Report')]")
+	public WebElement sortReportType;
+	
+	@FindBy(xpath = "//td/span[contains(text(),'Top X')]")
+	public List<WebElement> scheduledTopXReportTypeList;
+	
+	@FindBy(xpath = "//span[contains(text(),'Next')]")
+	public WebElement sortNextScheduledRun;
+	
+	@FindBy(xpath = "//span[contains(text(),'TopX')]")
+	public List<WebElement> scheduledTopXReportNextRunList;
+	
 	/**
 	 * @param driver The driver that will be used to look up the elements
 	 */

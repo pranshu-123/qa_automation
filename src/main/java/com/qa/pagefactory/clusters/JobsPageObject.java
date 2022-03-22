@@ -40,7 +40,7 @@ public class JobsPageObject {
     @FindBy(xpath = "//div[contains(@class,'component-section-header')]/h1[text()='Jobs']")
     public WebElement getjobsPageHeader;
 
-    @FindBy(xpath = "//label[contains(text(), 'Group By')]/following-sibling::span/span/span/span[contains(@class,'select2-selection__arrow')]")
+    @FindBy(xpath = "//label[contains(text(), 'Group By')]/following-sibling::span/span/span/span[contains(text(),'User')]")
     public WebElement groupByDropdownButton;
 
     @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Jobs Trends'])")

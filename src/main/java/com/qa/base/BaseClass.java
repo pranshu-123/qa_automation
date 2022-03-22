@@ -52,7 +52,7 @@ public class BaseClass {
     @BeforeSuite
     public void setup() {
         LOGGER.info("Update config based on user input");
-//        UnravelConfigUtils.updateConfig();
+        UnravelConfigUtils.updateConfig();
         LOGGER.info("Starting browser");
         System.setProperty(ConfigConstants.SystemConfig.HEADLESS, "false");
         DriverManager driverManager = new DriverManager();
@@ -69,10 +69,10 @@ public class BaseClass {
         LOGGER.info("Set build info to html report.");
         extent.addSystemInfo(ConfigConstants.ReportConfig.SELENIUM_VERSION,
                 prop.getProperty(ConfigConstants.ReportConfig.SELENIUM_VERSION));
-//        UnravelBuildInfo unravelBuildInfo = new UnravelBuildInfo(driver);
-//        unravelBuildInfo.setBuildInfo(extent);
-//        Map buildInfo = unravelBuildInfo.getUnravelBuildInfo();
-//        UnravelConfigUtils.updateBuildDetails(buildInfo);
+        UnravelBuildInfo unravelBuildInfo = new UnravelBuildInfo(driver);
+        unravelBuildInfo.setBuildInfo(extent);
+        Map buildInfo = unravelBuildInfo.getUnravelBuildInfo();
+        UnravelConfigUtils.updateBuildDetails(buildInfo);
     }
 
     /**

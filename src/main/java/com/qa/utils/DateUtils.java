@@ -33,7 +33,7 @@ public class DateUtils {
 	/**
 	 * @return Return current Date & Time as format
 	 */
-	public static Date getDateDifferFromCurrentDate(int days) {
+	public static Date getDateDifferenceFromCurrentDate(int days) {
 		cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, days);
 		return cal.getTime();

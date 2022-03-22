@@ -35,7 +35,7 @@ public class TC_DBX_DT_37 extends BaseClass {
                 recommendationAndInsights.stream().map(item -> item.getText()).forEach(item ->
                     loggingUtils.info("Analysis tab displays insights: " + item, test));
             } else {
-                loggingUtils.info("No insights and recommendation displayed", test);
+                loggingUtils.warning("No insights and recommendation displayed. Please verify manually.", test);
             }
             loggingUtils.pass("Verified Analysis tab", test);
         } finally {

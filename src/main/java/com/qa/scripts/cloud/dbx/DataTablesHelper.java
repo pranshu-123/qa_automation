@@ -111,13 +111,6 @@ public class DataTablesHelper {
     }
 
     /**
-     * Select workspace for which Users, Apps and Size graphs data available
-     */
-    public void selectWorkspaceForLoadedGraph() {
-
-    }
-
-    /**
      * Check whether data table is loaded
      */
     public boolean isTableLoadedWithData() {
@@ -405,16 +398,16 @@ public class DataTablesHelper {
 
             for (int i=0; i<createdDates.size(); i++) {
                 if (label.equalsIgnoreCase("hot")) {
-                    Assert.assertTrue(((Date)createdDates.get(i)).after(DateUtils.getDateDifferFromCurrentDate(-appliedSetting[0])) ||
-                        ((Date)latestAccessDates.get(i)).after(DateUtils.getDateDifferFromCurrentDate(-appliedSetting[1])));
+                    Assert.assertTrue(((Date)createdDates.get(i)).after(DateUtils.getDateDifferenceFromCurrentDate(-appliedSetting[0])) ||
+                        ((Date)latestAccessDates.get(i)).after(DateUtils.getDateDifferenceFromCurrentDate(-appliedSetting[1])));
                 } else if (label.equalsIgnoreCase("cold")){
-                    Assert.assertTrue(((Date)createdDates.get(i)).before(DateUtils.getDateDifferFromCurrentDate(-appliedSetting[0])) ||
-                        ((Date)latestAccessDates.get(i)).before(DateUtils.getDateDifferFromCurrentDate(-appliedSetting[1])));
+                    Assert.assertTrue(((Date)createdDates.get(i)).before(DateUtils.getDateDifferenceFromCurrentDate(-appliedSetting[0])) ||
+                        ((Date)latestAccessDates.get(i)).before(DateUtils.getDateDifferenceFromCurrentDate(-appliedSetting[1])));
                 }  else {
-                    Assert.assertTrue((((Date)createdDates.get(i)).before(DateUtils.getDateDifferFromCurrentDate(-appliedSetting[0])) &&
-                            ((Date)createdDates.get(i)).after(DateUtils.getDateDifferFromCurrentDate(-appliedSetting[1]))) ||
-                            (((Date)createdDates.get(i)).before(DateUtils.getDateDifferFromCurrentDate(-appliedSetting[2])) &&
-                                    ((Date)createdDates.get(i)).after(DateUtils.getDateDifferFromCurrentDate(-appliedSetting[3]))));
+                    Assert.assertTrue((((Date)createdDates.get(i)).before(DateUtils.getDateDifferenceFromCurrentDate(-appliedSetting[0])) &&
+                            ((Date)createdDates.get(i)).after(DateUtils.getDateDifferenceFromCurrentDate(-appliedSetting[1]))) ||
+                            (((Date)createdDates.get(i)).before(DateUtils.getDateDifferenceFromCurrentDate(-appliedSetting[2])) &&
+                                    ((Date)createdDates.get(i)).after(DateUtils.getDateDifferenceFromCurrentDate(-appliedSetting[3]))));
                 }
             }
         }

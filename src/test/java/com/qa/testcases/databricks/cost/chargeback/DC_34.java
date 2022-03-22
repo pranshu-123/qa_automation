@@ -3,7 +3,6 @@ package com.qa.testcases.databricks.cost.chargeback;
 import java.util.logging.Logger;
 
 import org.testng.annotations.Test;
-
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.scripts.DatePicker;
@@ -36,7 +35,6 @@ public class DC_34 extends BaseClass{
 		LOGGER.info("Custom Date Selected");
 		waitExecuter.sleep(3000);
 		datePicker.clickOnCustomDateApplyBtn();
-		chargeBackCluster.selectChargebackType("JobRun");
 		waitExecuter.sleep(2000);
 		jobs.selectGroupByFilterValue("User");
 		chargeBackCluster.validateResultSetIsDisplayedWithValues("User");

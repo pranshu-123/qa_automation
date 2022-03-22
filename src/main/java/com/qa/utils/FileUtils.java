@@ -122,7 +122,7 @@ public class FileUtils {
     public static boolean checkForFileNameInDownloadsFolder(String fileName) {
         if (downloadFolder.exists()) {
             for (File f : downloadFolder.listFiles()) {
-                if (f.getName().equals(fileName)) {
+                if (f.getName().contains(fileName)) {
                     String fileNamePath = f.getAbsolutePath();
                     LOGGER.info("Absolute filename path: " + fileName);
                     Path path = Paths.get(fileNamePath);

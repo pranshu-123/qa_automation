@@ -37,8 +37,9 @@ public class CostBudget {
 		budgetPageObject = new BudgetPageObject(driver);
 	}
 
-	public void createNewBudget(String budgetName) {
+	public void createNewBudget(String budgetName, String dbu) {
 		waitExecuter.waitUntilElementClickable(budgetPageObject.newBudget);
+		waitExecuter.sleep(1000);
 		if(budgetPageObject.activeBudgetTable.stream().map(f -> f.getText())
 				.collect(Collectors.toList()).contains(budgetName)) {
 			deleteExistingBudget(budgetName);
@@ -46,9 +47,9 @@ public class CostBudget {
 		budgetPageObject.newBudget.click();
 		budgetPageObject.addBudgetName.sendKeys(budgetName);
 		budgetPageObject.addBudgetDescription.sendKeys(budgetName);
-		budgetPageObject.addBudgetDBU.sendKeys("1");
+		budgetPageObject.addBudgetDBU.sendKeys(dbu);
 	}
-	
+
 	public void setBudgetActivationDate() {
 		waitExecuter.sleep(1000);
 		budgetPageObject.dateWidget.get(0).click();
@@ -57,13 +58,14 @@ public class CostBudget {
 		budgetPageObject.dateWidget.get(1).click();
 		budgetPageObject.futureExpiryDate.click();
 	}
-	
+
 	public void saveBudget() {
 		budgetPageObject.addBudgetSave.click();
 	}
 
 	public void validateCreatedBudget(String budgetName) {
 		waitExecuter.sleep(2000);
+		driver.navigate().refresh();
 		Assert.assertTrue(budgetPageObject.activeBudgetTable.stream().map(f -> f.getText())
 				.collect(Collectors.toList()).contains(budgetName),"Created Budget not displayed");
 	}
@@ -73,7 +75,7 @@ public class CostBudget {
 		Assert.assertTrue(budgetPageObject.upcomingBudgetTable.stream().map(f -> f.getText())
 				.collect(Collectors.toList()).contains(budgetName),"Created Upcoming Budget not displayed");
 	}
-	
+
 	public void deleteExistingBudget(String budgetName) {
 		driver.findElement(By.xpath(String.format(budgetPageObject.delete,budgetName))).click();
 		budgetPageObject.yes.click();
@@ -119,10 +121,37 @@ public class CostBudget {
 	public void verifyUpdatedScope(String scope) {
 		Assert.assertTrue(budgetPageObject.addedScope.getText().contains(scope));
 	}
-	
+
 	public void searchCreatedBudget(String budgetName) {
 		waitExecuter.sleep(1000);
 		budgetPageObject.search.sendKeys(budgetName);
 		waitExecuter.sleep(1000);
+	}
+
+	public List<String> createBudgetWithInvalidDBUs(String budgetName) {
+		waitExecuter.waitUntilElementClickable(budgetPageObject.newBudget);
+		budgetPageObject.newBudget.click();
+		budgetPageObject.addBudgetName.sendKeys(budgetName);
+		budgetPageObject.addBudgetDescription.sendKeys(budgetName);
+		budgetPageObject.addBudgetDBU.sendKeys("0.1");
+		saveBudget();
+		return	budgetPageObject.errorLabel.stream().distinct()
+				.map(error -> error.getText())
+				.collect(Collectors.toList());
+
+	}
+
+	public List<String> createBudgetWithEmptyDetails() {
+		waitExecuter.waitUntilElementClickable(budgetPageObject.newBudget);
+		budgetPageObject.newBudget.click();
+		saveBudget();
+		return	budgetPageObject.errorLabel.stream().distinct()
+				.map(error -> error.getText())
+				.collect(Collectors.toList());
+
+	}
+
+	public String fetchBudgetStatus() {
+		return budgetPageObject.budgetStatus.getText();
 	}
 }

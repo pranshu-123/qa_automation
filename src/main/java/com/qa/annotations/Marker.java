@@ -164,6 +164,18 @@ public @interface Marker {
     }
 
     @Retention(RetentionPolicy.RUNTIME)
+    @interface DbJobsRuns {}
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface DbxReportsTopX {}
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface DbxReportsArchived {}
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface DbxReportsScheduled {}
+
+    @Retention(RetentionPolicy.RUNTIME)
     @interface ImpalaInsights {
     }
 

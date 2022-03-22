@@ -7,13 +7,16 @@ import com.qa.utils.WaitExecuter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -70,6 +73,7 @@ public class ChargeBackCluster {
 	}
 
 	public void validatePieChartGraph(String[] headers) {
+		waitExecuter.sleep(4500);
 		List<String> list = chargebackClusterPageObject.graphsHeader.stream()
 				.map(graph -> graph.getText()).collect(Collectors.toList());
 		for(String s : headers) {
@@ -116,12 +120,12 @@ public class ChargeBackCluster {
 	}
 
 	public void selectOptimize() {
-		waitExecuter.sleep(2000);
+		waitExecuter.sleep(5000);
 		chargebackClusterPageObject.optimize.click();
 	}
 
 	public String selectCopyUrl() {
-		waitExecuter.sleep(2000);
+		waitExecuter.sleep(5000);
 		chargebackClusterPageObject.copyURL.get(0).click();
 		return chargebackClusterPageObject.urlLinks.get(0).getAttribute("href");
 	}
@@ -156,7 +160,8 @@ public class ChargeBackCluster {
 		for(int i =1; i< size;i=i+7) {
 			sum = sum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText());
 		}
-		return String.valueOf(sum);
+
+		return 	String.format("%.2f",sum);
 
 	}
 
@@ -173,28 +178,50 @@ public class ChargeBackCluster {
 	}
 
 	public void filterBy(String filter) {
-		waitExecuter.waitUntilElementClickable(chargebackClusterPageObject.filterByDropDown);
-		waitExecuter.sleep(2500);
+		waitExecuter.sleep(3500);
 		chargebackClusterPageObject.filterByDropDown.click();
 		driver.findElement(By.xpath(String.format(chargebackClusterPageObject.filterByValues,filter))).click();
 	}
 
-	public void filterByTagKey(String tagKey) {		
-		waitExecuter.sleep(2500);
+	public void filterTags(String tagKey) {
 		chargebackClusterPageObject.tagKeyDropdown.click();
 		chargebackClusterPageObject.tagKeySearchField.sendKeys(tagKey);
 		chargebackClusterPageObject.tagKeySearchField.sendKeys(Keys.ENTER);
+	}
+
+	public void filterByTagKey(String tagKey) {	
+		driver.manage().timeouts().pageLoadTimeout(4, TimeUnit.SECONDS);
+		waitExecuter.sleep(2500);
+		try {
+			filterTags(tagKey);
+		}
+		catch(StaleElementReferenceException e) {
+			e.printStackTrace();
+			driver.navigate().refresh();
+			filterTags(tagKey);
+		}
+
 		LOGGER.info("Specified Tag Key selected: "+tagKey);
 	}	
 
-	public String calculateClusterSumFromResultSet() {
-		double sum =0.00;
+	public List<String> calculateClusterSumFromResultSet() {
+		double floorSum =0.00;
+		double ceilSum =0.00;
 		int size = chargebackClusterPageObject.resultSetValues.size();
 		for(int i =5; i< size;i=i+7) {
-			sum = sum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText());
+			floorSum = floorSum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText());
 		}
-		String value = String.valueOf(sum);
-		return (value.charAt(0) + "k");
+		ceilSum = floorSum;
+		floorSum = Math.floor(floorSum / 1000) * 1000;
+		String floorValue;
+		String ceilValue;
+		ArrayList<String> list = new ArrayList<String>();
+		floorValue = String.valueOf(floorSum);
+		list.add(floorValue.charAt(0) + "k");
+		ceilSum = Math.ceil(ceilSum / 1000) * 1000;
+		ceilValue = String.valueOf(ceilSum);
+		list.add(ceilValue.charAt(0) + "k");
+		return list;
 	}
 
 	public String fetchClusterValueFromGraph() {
@@ -208,7 +235,7 @@ public class ChargeBackCluster {
 		for(int i =3; i< size;i=i+7) {
 			sum = sum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText().substring(2));
 		}
-		return ("$ "+String.valueOf(sum));
+		return ("$ "+String.format("%.2f",sum));
 
 	}
 

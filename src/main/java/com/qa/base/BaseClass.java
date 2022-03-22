@@ -54,7 +54,6 @@ public class BaseClass {
         LOGGER.info("Update config based on user input");
         UnravelConfigUtils.updateConfig();
         LOGGER.info("Starting browser");
-        System.setProperty(ConfigConstants.SystemConfig.HEADLESS, "false");
         DriverManager driverManager = new DriverManager();
         Properties prop = ConfigReader.readBaseConfig();
         String browser = prop.getProperty(ConfigConstants.UnravelConfig.BROWSER);

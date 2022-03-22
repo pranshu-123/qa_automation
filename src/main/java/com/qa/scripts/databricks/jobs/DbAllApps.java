@@ -3,6 +3,7 @@ package com.qa.scripts.databricks.jobs;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.databricks.DbxSubTopPanelModulePageObject;
 import com.qa.pagefactory.databricks.jobs.DbxApplicationsPageObject;
+import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.AppDetailsPage;
 import com.qa.utils.LoggingUtils;
@@ -16,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DbAllApps {
@@ -177,7 +179,7 @@ public class DbAllApps {
 
     public void navigateToJobsTab(String tab) {
         userAction.performActionWithPolling(dbSubTopPanelModulePageObject.jobs, UserAction.CLICK);
-        waitExecuter.sleep(2000);
+        waitExecuter.sleep(4000);
         try {
             if (tab.equalsIgnoreCase("Runs")) {
                 userAction.performActionWithPolling(dbSubTopPanelModulePageObject.runsTab, UserAction.CLICK);
@@ -235,7 +237,7 @@ public class DbAllApps {
         return dbSubTopPanelModulePageObject.clusterList;
     }
 
-    /* Get all app types that have run in unravel UI */
+    /* Get all Status types that have run in unravel UI */
     public List<String> getAllApplicationTypes() {
         List<WebElement> appTypes = applicationsPageObject.getApplicationTypes;
         List<String> nameOfAppTypes = new ArrayList<>();
@@ -283,12 +285,12 @@ public class DbAllApps {
 
 
     /**
-     * Method to click the first app in jobs table , navigate to the details page.
+     * Method to click the first app in Finished table , navigate to the details page.
      * and verify Status App details Page .
      */
-    public String verifyFinishedTabStatus(DbxSubTopPanelModulePageObject dballApps) {
+    public String verifyStatusInFinishedTab(DbxSubTopPanelModulePageObject dballApps) {
         String statusTable = dballApps.statusFinishedTab.getText().trim().toLowerCase();
-        logger.info("Application Id is " + statusTable);
+        logger.info("Application Status is " + statusTable);
         waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.finishedAppId);
         dbSubTopPanelModulePageObject.finishedAppId.click();
         waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.closeIcon);

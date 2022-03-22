@@ -102,6 +102,15 @@ public class DbxJobsPageObject {
     @FindBy(xpath = "//table[@id='pipelinesList']/tbody[1]/tr/td[3]/span[1]")
     public WebElement clickOnName;
 
+    @FindBy(xpath = "//table[@id='pipelinesList']/tbody[1]/tr/td[3]/span[1]")
+    public WebElement totalCostValue;
+
+    @FindBy(xpath = "//table[@id='pipelinesList']/tbody[1]/tr/td[3]/span[1]")
+    public WebElement totalCostDBUValue;
+
+    @FindBy(xpath = "//table[@id='pipelinesList']/tbody[1]/tr/td[3]/span[1]")
+    public WebElement totalCost;
+
     @FindBy(className = "close")
     public WebElement closeIcon;
 

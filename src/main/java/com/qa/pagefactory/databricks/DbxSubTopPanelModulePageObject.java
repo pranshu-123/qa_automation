@@ -94,6 +94,12 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//table[@id='RunsListAll']/tbody[1]/tr/td[5]/span[1]")
     public WebElement getRunIdFromTable;
 
+    @FindBy(xpath = "//table[@id='RunsListFinished']//tr/td[10]/span[1]")
+    public WebElement getWorkspaceFromTable;
+
+    @FindBy(xpath = "//table[@id='RunsListFinished']//tr/td[11]/span[1]")
+    public WebElement getClusterNameFromTable;
+
     @FindBy(xpath = "//table[@id='RunsListAll']/tbody[1]/tr/td[3]/span[1]")
     public WebElement getNameeFromTable;
 
@@ -110,7 +116,7 @@ public class DbxSubTopPanelModulePageObject {
     public WebElement getClusterTypeFromFinishedTable;
 
     @FindBy(xpath = "//*[@id='RunsListAll']/tbody[1]/tr/td[10]/span[1]")
-    public WebElement getWorkspaceFromTable;
+    public WebElement getWorkspaceAllFromTable;
 
     @FindBy(xpath = "//*[@id='RunsListFinished']/tbody[1]/tr/td[10]/span[1]")
     public WebElement getWorkspaceFromFinishedTable;

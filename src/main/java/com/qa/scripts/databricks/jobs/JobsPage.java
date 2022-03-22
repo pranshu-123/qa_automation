@@ -144,30 +144,6 @@ public class JobsPage {
     }
 
     /**
-     * Method to verify the following:
-     * 1.All the KPIs should be listed and the data must be populated.
-     * (Duration, Start time, end time, job count, stages count)
-     * 2. Owner, cluster, queue must be populated on the top right
-     */
-    public String verifyRightPaneKpis(DbxJobsPageObject jobsPage) {
-        List<WebElement> kpiList = jobsPage.rightPaneKpis;
-        validateLeftPaneKpis(kpiList);
-        List<WebElement> appKpis = jobsPage.rightPaneAppKpis;
-        List<WebElement> appKpiVal = jobsPage.rightPaneAppKpiVal;
-        Assert.assertFalse(appKpis.isEmpty(), "No application kpis are listed in the right pane");
-        Assert.assertFalse(appKpiVal.isEmpty(), "Application kpi values are empty");
-        String appDuration = "0";
-        for (int i = 0; i < appKpis.size(); i++) {
-            Assert.assertNotNull(appKpis.get(i).getText(), "Kpi text is empty");
-            Assert.assertNotNull(appKpiVal.get(i).getText(), "Kpi Value is empty");
-            appDuration = (appKpiVal.get(0).getText().trim());
-            logger.info("Kpi Name = " + appKpis.get(i).getText() + " Value = " + appKpiVal.get(i).getText());
-        }
-        logger.info("The application duration is " + appDuration);
-        return appDuration;
-    }
-
-    /**
      * Method to verify the summary tabs in the right pane of the App Details page
      */
     public String verifyAllDataTabs(DbxJobsPageObject jobsPage, String verifyTabName, ExtentTest test) {
@@ -311,6 +287,29 @@ public class JobsPage {
         String durationAppPage = jobsPage.appDuration.getText().trim();
         Assert.assertNotSame(duration, durationAppPage, "duration is not displayed in the Header");
         return durationAppPage;
+    }
+
+    /**
+     * Get total cost value
+     */
+    public Double getTotalCostValue() {
+        return Double.parseDouble(jobsPageObject.totalCostValue.getText().replace("$", ""));
+    }
+
+    /**
+     * Get total storage cost value
+     */
+    public Double getTotalDBUValue() {
+        return Double.parseDouble(jobsPageObject.totalCostDBUValue.getText().replace("$", ""));
+    }
+
+
+    public void verifyTotalCost() {
+        String totalCost = jobsPageObject.totalCost.getText();
+        logger.info("Total cost is " + totalCost);
+        boolean onlySpecialChars = totalCost.matches("[^a-zA-Z0-9]+");
+        Assert.assertFalse(totalCost.isEmpty() || onlySpecialChars, "No values for total cost displayed " +
+                "\n Expected: AlphaNumeric value but Actual: [" + totalCost + "]");
     }
 
     public void VerifyJobsName(DbxJobsPageObject jobsPage, String tableValue, ExtentTest test) {

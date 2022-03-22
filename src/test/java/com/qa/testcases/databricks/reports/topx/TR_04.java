@@ -20,13 +20,15 @@ public class TR_04 extends BaseClass
 		test.assignCategory("Reports/TopX");
 		Log.startTestCase("TopX_Reports_04_VerifyCopyURLFunctionality");
 		TopXReports topXReports = new TopXReports(driver);
+		Properties prop = ConfigReader.readBaseConfig();
+		String url = prop.getProperty("url");
 		topXReports.navigateToDifferentReportsTab("TopX");
 		LOGGER.info("Navigated to Reports tab");
 		topXReports.selectRun();
 		topXReports.createNewReportWithDefaultValues("1");
 		LOGGER.info("Top X Report created successfully");
 		String copiedUrl = topXReports.copyUrlAndNavigate();
-		Assert.assertTrue(copiedUrl.contains("https://playground-databricks4730.unraveldata.com/#/reports/topx?report_id="),"URL not copied or is incorrect");		
+		Assert.assertTrue(copiedUrl.contains(url+"#/reports/topx?report_id="),"URL not copied or is incorrect");		
 		LOGGER.info("Url copied successfully and is navigable");
 		test.log(LogStatus.PASS, "Url copied successfully and is navigable");
 	}

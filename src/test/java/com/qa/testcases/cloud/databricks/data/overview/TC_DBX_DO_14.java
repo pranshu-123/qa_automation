@@ -26,14 +26,18 @@ public class TC_DBX_DO_14 extends BaseClass {
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
         dataTablesHelper.clickOnDataTab();
+        dataTablesHelper.selectWorkspaceForConfiguredMetastore();
         DataOverviewHelper dataOverviewHelper = new DataOverviewHelper(driver, test);
         Set<Map.Entry<String, String>> kpisKV = dataOverviewHelper.getLastDayPartitionKPIs().entrySet();
         Iterator itr = kpisKV.iterator();
+        int counter = 0;
         while (itr.hasNext()) {
+            counter++;
             Map.Entry<String, String> kpiKV = (Map.Entry<String, String>) itr.next();
-            Assert.assertNotEquals(kpiKV.getKey(), "KPI title is not missing.");
-            Assert.assertNotEquals(kpiKV.getValue(), "KPI value is not missing.");
+            Assert.assertNotEquals(kpiKV.getKey().trim(), "", "KPI title is not missing.");
+            Assert.assertNotEquals(kpiKV.getValue().trim(), "", "KPI value is not missing.");
         }
+        Assert.assertEquals(counter, 5, "");
         loggingUtils.pass("Partitions KPIs titles are present", test);
         loggingUtils.pass("Partitions KPIs values are present", test);
     }

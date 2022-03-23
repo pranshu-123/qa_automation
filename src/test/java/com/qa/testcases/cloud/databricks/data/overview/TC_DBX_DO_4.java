@@ -26,14 +26,18 @@ public class TC_DBX_DO_4 extends BaseClass {
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
         dataTablesHelper.clickOnDataTab();
+        dataTablesHelper.selectWorkspaceForConfiguredMetastore();
         DataOverviewHelper dataOverviewHelper = new DataOverviewHelper(driver, test);
         Set<Map.Entry<String, String>> kpisKV = dataOverviewHelper.getLastDayTablesKPIs().entrySet();
         Iterator itr = kpisKV.iterator();
+        int counter = 0;
         while (itr.hasNext()) {
+            counter++;
             Map.Entry<String, String> kpiKV = (Map.Entry<String, String>) itr.next();
             Assert.assertNotEquals(kpiKV.getKey(), "KPI title is not missing.");
             Assert.assertNotEquals(kpiKV.getValue(), "KPI value is not missing.");
         }
+        Assert.assertEquals(counter, 5, "");
         loggingUtils.pass("Table KPIs titles are present", test);
         loggingUtils.pass("Table KPIs values are present", test);
     }

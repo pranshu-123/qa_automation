@@ -109,11 +109,6 @@ public class ScheduledReports {
 		reportsScheduledPageObject.searchBox.sendKeys(name,Keys.ENTER);
 	}
 
-	public void deleteScheduledReport() {
-		reportsScheduledPageObject.deleteScheduleReport.click();
-		reportsScheduledPageObject.deleteYes.click();
-	}
-
 	public void selectScheduledReport() {
 		driver.navigate().refresh();
 		waitExecuter.sleep(1000);

@@ -34,8 +34,8 @@ public class TC_DBX_DO_4 extends BaseClass {
         while (itr.hasNext()) {
             counter++;
             Map.Entry<String, String> kpiKV = (Map.Entry<String, String>) itr.next();
-            Assert.assertNotEquals(kpiKV.getKey(), "KPI title is not missing.");
-            Assert.assertNotEquals(kpiKV.getValue(), "KPI value is not missing.");
+            Assert.assertNotEquals(kpiKV.getKey().trim(), "", "KPI title is not missing.");
+            Assert.assertNotEquals(kpiKV.getValue().trim(), "", "KPI value is not missing.");
         }
         Assert.assertEquals(counter, 5, "");
         loggingUtils.pass("Table KPIs titles are present", test);

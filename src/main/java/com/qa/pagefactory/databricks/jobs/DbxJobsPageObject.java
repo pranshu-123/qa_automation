@@ -96,6 +96,12 @@ public class DbxJobsPageObject {
     @FindBy(xpath = "//tbody/tr/td[1]")
     public WebElement clickOnStatus;
 
+    @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[2]/div/div[2]/div[3]/div/div/section/div[1]/span[1]")
+    public List<WebElement> analysisCollapse;
+
+    @FindBy(xpath = "//*[@class=\"status-title\"]//*[@class=\"badge fatal\"]")
+    public List<WebElement> insightsType;
+
     @FindBy(xpath = "//table[@id='pipelinesList']/tbody[1]/tr/td[2]/span[1]")
     public WebElement clickOnJobId;
 
@@ -110,6 +116,9 @@ public class DbxJobsPageObject {
 
     @FindBy(xpath = "//table[@id='pipelinesList']/tbody[1]/tr/td[3]/span[1]")
     public WebElement totalCost;
+
+    @FindBy(xpath = "(//div[@id='scrollableMenu'])/ul/li/a")
+    public List<WebElement> appSummaryTabs;
 
     @FindBy(className = "close")
     public WebElement closeIcon;

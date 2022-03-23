@@ -1,11 +1,15 @@
 package com.qa.scripts.databricks.jobs;
 
+import com.qa.enums.UserAction;
+import com.qa.pagefactory.appsDetailsPage.SparkAppsDetailsPageObject;
 import com.qa.pagefactory.databricks.DbxSubTopPanelModulePageObject;
 import com.qa.pagefactory.databricks.jobs.DbxApplicationsPageObject;
 import com.qa.pagefactory.databricks.jobs.DbxJobsPageObject;
-import com.qa.pagefactory.databricks.jobs.DbxSummaryPageObject;
+import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.AppDetailsPage;
+import com.qa.scripts.appdetails.SparkAppsDetailsPage;
+import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
@@ -142,6 +146,105 @@ public class JobsPage {
             Assert.assertNotSame("", kpiVal, "The kpi " + kpiVal + " is empty");
         }
     }
+
+    /**
+     * Common steps to navigate to the Jobs page from header. Clicks on jobs tab
+     * Selects a specific cluster Selects 30 days time interval
+     */
+    public void navigateToJobsTabFromHeader(DbAllApps dballApps, DatePicker datePicker) {
+        dballApps.navigateToJobsTab("Jobs");
+
+        datePicker.clickOnDatePicker();
+        waitExecuter.sleep(1000);
+        datePicker.selectLast30Days();
+        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.sleep(3000);
+    }
+
+    public void verifySummaryTabValidation(ExtentTest test, String tabName, Logger logger) {
+        // Initialize all classes objects
+        test.log(LogStatus.INFO, "Initialize all class objects");
+
+        logger.info("Initialize all class objects");
+        DbxSubTopPanelModulePageObject dbpageObject = new DbxSubTopPanelModulePageObject(driver);
+        ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
+        DbxJobsPageObject jobsPageObject = new DbxJobsPageObject(driver);
+        JobsPage jobsPage = new JobsPage(driver);
+        DbAllApps dballApps = new DbAllApps(driver);
+        DatePicker datePicker = new DatePicker(driver);
+
+        // Navigate to Jobs tab from header
+        test.log(LogStatus.INFO, "Navigate to jobs tab from header");
+        jobsPage.navigateToJobsTabFromHeader(dballApps, datePicker);
+
+        waitExecuter.sleep(2000);
+        String headerAppId = jobsPage.verifyJobId(jobsPageObject);
+        test.log(LogStatus.PASS, "Jobs Application Id is displayed in the Header: " + headerAppId);
+        jobsPage.verifyAppSummaryTabs(jobsPageObject, tabName, test);
+        // Close apps details page
+
+        waitExecuter.waitUntilElementClickable(jobsPageObject.closeAppsPageTab);
+        MouseActions.clickOnElement(driver, jobsPageObject.closeAppsPageTab);
+
+    }
+
+    /**
+     * Method to verify the Spark summary tabs in the right pane of the App Details page
+     */
+    public String verifyAppSummaryTabs(DbxJobsPageObject jobsPage, String verifyTabName,
+                                       ExtentTest test) {
+        List<WebElement> appsTabList = jobsPage.appSummaryTabs;
+        verifyAssertFalse(appsTabList.isEmpty(), jobsPage, "No Tabs loaded");
+        String tabName = "";
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.pollingEvery(Duration.ofMillis(10));
+        for (int i = 0; i < appsTabList.size(); i++) {
+            tabName = appsTabList.get(i).getText();
+            logger.info("Validating tab " + tabName);
+            if (tabName.equals(verifyTabName)) {
+                switch (verifyTabName) {
+                    case "Analysis":
+                        validateAnalysisTab(jobsPage);
+                        test.log(LogStatus.PASS, "Analysis tab is populated");
+                        break;
+                }
+                break;
+            }
+        }
+        return "";
+    }
+
+    /**
+     * Method to validate Jobs Application Summary Analysis tab.
+     */
+    public void validateAnalysisTab(DbxJobsPageObject jobsPage) {
+        ArrayList<String> efficiency = new ArrayList<>();
+        ArrayList<String> recommendation = new ArrayList<>();
+        List<WebElement> insightType = jobsPage.insightsType;
+        verifyAssertFalse(insightType.isEmpty(), jobsPage, "No Insights generated");
+        for (int j = 0; j < insightType.size(); j++) {
+            String insights = insightType.get(j).getText();
+            logger.info("Insight generated are " + insights);
+            if (insights.equals("EFFICIENCY")) {
+                // Store it in efficiency array
+                efficiency.add(insights);
+            } else {
+                // Store it in recommendation array
+                recommendation.add(insights);
+            }
+        }
+        verifyAssertFalse((efficiency.isEmpty() && recommendation.isEmpty()), jobsPage, "No insights generated");
+        List<WebElement> collapsableList = jobsPage.analysisCollapse;
+        try {
+            for (int c = 0; c < collapsableList.size(); c++) {
+                collapsableList.get(c).click();
+            }
+        } catch (Exception ex) {
+            throw new AssertionError(
+                    "Caught exception while clicking the collapsable" + " icon for insights.\n" + ex.getMessage());
+        }
+    }
+
 
     /**
      * Method to verify the summary tabs in the right pane of the App Details page

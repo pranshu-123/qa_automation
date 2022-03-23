@@ -35,28 +35,6 @@ public class TC_DJ_15 extends BaseClass {
         dballApps.navigateToJobsTab("Jobs");
         waitExecuter.waitUntilElementPresent(dbpageObject.jobsTabs);
         try {
-            // Navigate to Jobs tab from header
-            test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-            test.log(LogStatus.INFO, "Select last 7 days");
-            dballApps.inJobsSelectClusterAndLast7Days();
-            waitExecuter.sleep(2000);
-
-
-            String headerAppId = jobsPage.verifyRunCount(jobsPageObject);
-            test.log(LogStatus.PASS, "Application RunCount is displayed: " + headerAppId);
-            waitExecuter.waitUntilPageFullyLoaded();
-            jobsPage.verifyAllDataTabs(jobsPageObject, "Analysis", test);
-            jobsPage.verifyAllDataTabs(jobsPageObject, "Resources", test);
-            jobsPage.verifyAllDataTabs(jobsPageObject, "Daggraph", test);
-            jobsPage.verifyAllDataTabs(jobsPageObject, "Errors", test);
-            jobsPage.verifyAllDataTabs(jobsPageObject, "Tags", test);
-            waitExecuter.sleep(2000);
-            test.log(LogStatus.PASS, "All the KPIs are listed and the data is populated");
-            //Close apps details page
-            waitExecuter.sleep(3000);
-            //Close apps details page
-            MouseActions.clickOnElement(driver, jobsPageObject.closeIcon);
-            waitExecuter.sleep(3000);
 
         } catch (NoSuchElementException ex) {
             loggingUtils.info("No app present by this name", test);

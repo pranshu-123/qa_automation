@@ -1,8 +1,8 @@
-package com.qa.scripts.cloud.dbx;
+package com.qa.scripts.cloud.databricks;
 
 import com.qa.constants.DirectoryConstants;
 import com.qa.enums.UserAction;
-import com.qa.pagefactory.cloud.dbx.DataPageObject;
+import com.qa.pagefactory.cloud.databricks.DataPageObject;
 import com.qa.utils.ActionPerformer;
 import com.qa.utils.DateUtils;
 import com.qa.utils.LoggingUtils;
@@ -19,6 +19,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -291,23 +292,23 @@ public class DataTablesHelper {
      * @return - Tooltip value
      */
     public String getTooltipValuesOfLoadedGraph(String graphType) {
-        if (dataPageObject.usersAppsAndSizeGraphs.size() > 0) {
+        if (dataPageObject.displayedGraphs.size() > 0) {
             switch (graphType.toLowerCase().trim()) {
                 case "users":
-                    actionPerformer.moveToTheElementByOffset(dataPageObject.usersAppsAndSizeGraphs.get(0), 0, 0);
-                    actionPerformer.moveToTheElementByOffset(dataPageObject.usersAppsAndSizeGraphs.get(0), 100, 100);
+                    actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(0), 0, 0);
+                    actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(0), 100, 100);
                     String usersTooltip = dataPageObject.graphsTooltips.get(0).getText();
                     loggingUtils.pass("Users graph displayed. Tooltip loaded: " + usersTooltip , test);
                     return usersTooltip;
                 case "apps":
-                    actionPerformer.moveToTheElementByOffset(dataPageObject.usersAppsAndSizeGraphs.get(1), 0, 0);
-                    actionPerformer.moveToTheElementByOffset(dataPageObject.usersAppsAndSizeGraphs.get(1), 100, 100);
+                    actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(1), 0, 0);
+                    actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(1), 100, 100);
                     String appsTooltip = dataPageObject.graphsTooltips.get(0).getText();
                     loggingUtils.pass("Apps graph displayed. Tooltip loaded: " + appsTooltip , test);
                     return appsTooltip;
                 case "size":
-                    actionPerformer.moveToTheElementByOffset(dataPageObject.usersAppsAndSizeGraphs.get(2), 0, 0);
-                    actionPerformer.moveToTheElementByOffset(dataPageObject.usersAppsAndSizeGraphs.get(2), 100, 100);
+                    actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(2), 0, 0);
+                    actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(2), 100, 100);
                     String sizeTooltip = dataPageObject.graphsTooltips.get(0).getText();
                     loggingUtils.pass("Size graph displayed. Tooltip loaded: " + sizeTooltip , test);
                     return sizeTooltip;
@@ -365,7 +366,6 @@ public class DataTablesHelper {
      * @return - Slider values for hot and cold
      */
     public void changeAppliedStateSettings(String settingType) {
-        int hotByAge, coldByAge, hotByLatestAccess, coldByLatestAccess;
         try {
             loggingUtils.info("Click on setting icon on table state", test);
             actions.performActionWithPolling(dataPageObject.tableStateSettings, UserAction.CLICK);
@@ -413,6 +413,9 @@ public class DataTablesHelper {
         }
     }
 
+    /**
+     * Read column value from the CSV file
+     */
     public List<Object> readCSVFileForColumn(File csvFile, String column) {
         try (FileReader fileReader = new FileReader(csvFile)) {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -429,5 +432,84 @@ public class DataTablesHelper {
         } catch (IOException io) {
             return null;
         }
+    }
+
+    /**
+     * Select All applications columns to display on UI
+     * Data -> Tables -> Table Details -> Applications
+     */
+    public void selectAllApplicationsColumn() {
+        actions.performActionWithPolling(dataPageObject.settingsIcon, UserAction.CLICK);
+        List<WebElement> columnCheckboxes = dataPageObject.columnCheckboxes;
+        columnCheckboxes.stream().forEach(checkbox -> {
+            if (!checkbox.isSelected()) {
+                actions.performActionWithPolling(checkbox.findElement(By.xpath("parent::label")), UserAction.CLICK);
+            }
+        });
+        actions.performActionWithPolling(dataPageObject.settingsIcon, UserAction.CLICK);
+    }
+
+    /**
+     * Read column values from application table
+     */
+    public List<String> getColumnValuesFromApplicationsTable(String column) {
+        switch (column.toLowerCase().trim()) {
+            case "type":
+                return dataPageObject.tableRows.stream().map(row -> row.findElements(By.tagName("td"))
+                    .get(0).getText()).collect(Collectors.toList());
+            case "status":
+                return dataPageObject.tableRows.stream().map(row -> row.findElements(By.tagName("td"))
+                    .get(1).getText()).collect(Collectors.toList());
+            case "user":
+                return dataPageObject.tableRows.stream().map(row -> row.findElements(By.tagName("td"))
+                    .get(2).getText()).collect(Collectors.toList());
+            case "app name / id":
+                return dataPageObject.tableRows.stream().map(row -> row.findElements(By.tagName("td"))
+                    .get(3).getText()).collect(Collectors.toList());
+            case "insights":
+                return dataPageObject.tableRows.stream().map(row -> row.findElements(By.tagName("td"))
+                    .get(4).getText()).collect(Collectors.toList());
+            case "cluster id":
+                return dataPageObject.tableRows.stream().map(row -> row.findElements(By.tagName("td"))
+                    .get(5).getText()).collect(Collectors.toList());
+            case "start time":
+                return dataPageObject.tableRows.stream().map(row -> row.findElements(By.tagName("td"))
+                    .get(6).getText()).collect(Collectors.toList());
+            case "duration":
+                return dataPageObject.tableRows.stream().map(row -> row.findElements(By.tagName("td"))
+                    .get(7).getText()).collect(Collectors.toList());
+            case "queue":
+                return dataPageObject.tableRows.stream().map(row -> row.findElements(By.tagName("td"))
+                    .get(8).getText()).collect(Collectors.toList());
+            case "read":
+                return dataPageObject.tableRows.stream().map(row -> row.findElements(By.tagName("td"))
+                    .get(9).getText()).collect(Collectors.toList());
+            case "write":
+                return dataPageObject.tableRows.stream().map(row -> row.findElements(By.tagName("td"))
+                    .get(10).getText()).collect(Collectors.toList());
+            case "events":
+                return dataPageObject.tableRows.stream().map(row -> row.findElements(By.tagName("td"))
+                    .get(12).getText()).collect(Collectors.toList());
+            default:
+                return new ArrayList<>();
+        }
+    }
+
+    /**
+     * Click on parent app column of nth row
+     * @param rowNum
+     */
+    public void clickOnParentAppOfNthRow(int rowNum) {
+        actions.performActionWithPolling(dataPageObject.tableRows.get(rowNum).findElements(By.tagName("td"))
+            .get(11), UserAction.CLICK);
+    }
+
+    /**
+     * Click on close button to close application details page which navigates user
+     * to table details page
+     */
+    public void closeApplicationDetailsPage() {
+        loggingUtils.info("Click on close button, go back to table details page", test);
+        actions.performActionWithPolling(dataPageObject.closeApplicationsDetailsButton, UserAction.CLICK);
     }
 }

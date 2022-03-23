@@ -1,8 +1,8 @@
 package com.qa.testcases.cloud.databricks.data.tables;
 
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.cloud.dbx.DataPageObject;
-import com.qa.scripts.cloud.dbx.DataTablesHelper;
+import com.qa.pagefactory.cloud.databricks.DataPageObject;
+import com.qa.scripts.cloud.databricks.DataTablesHelper;
 import com.qa.utils.LoggingUtils;
 import com.qa.utils.WaitExecuter;
 import org.testng.Assert;

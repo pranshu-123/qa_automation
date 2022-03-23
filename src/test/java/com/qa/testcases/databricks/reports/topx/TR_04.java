@@ -1,7 +1,9 @@
 package com.qa.testcases.databricks.reports.topx;
 
+import java.util.Properties;
 import java.util.logging.Logger;
 
+import com.qa.io.ConfigReader;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.qa.annotations.Marker;

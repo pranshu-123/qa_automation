@@ -33,6 +33,7 @@ public class DateUtils {
 	/**
 	 * @return Return current Date & Time as format
 	 */
+
 	public static Date getDateDifferenceFromCurrentDate(int days) {
 		cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, days);
@@ -47,6 +48,19 @@ public class DateUtils {
 		dateFormatter = new SimpleDateFormat(format);
 		String startDate = dateFormatter.format(cal.getTime());
 		return startDate;
+	}
+
+	/**
+	 * @return Return current Date & Time as format
+	 */
+	public static Date getDateTimeAsFormat(String date, String format) {
+		dateFormatter = new SimpleDateFormat(format);
+		try {
+			Date startDate = dateFormatter.parse(date);
+			return startDate;
+		} catch (ParseException parseException) {
+			return null;
+		}
 	}
 
 	/**

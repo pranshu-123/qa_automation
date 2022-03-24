@@ -18,8 +18,26 @@ public class DbxJobsPageObject {
     @FindBy(xpath = "(//h2[@class='text-white']//span)[3]")
     public WebElement appName;
 
+    @FindBy(xpath = "//*[@id=\"app\"]//div[2]/div[1]//div[1]/div[2]/h4/span/b")
+    public List<WebElement> rightPaneKpis;
+
+    @FindBy(xpath = "(//div[@id='SummaryDetails']/div/div)/h5")
+    public List<WebElement> rightPaneAppKpis;
+
+    @FindBy(xpath = "(//div[@id='SummaryDetails']/div/div)/div//h3")
+    public List<WebElement> rightPaneAppKpiVal;
+
+    @FindBy(xpath = "(//div[@id='scrollableMenu'])/ul/li/a")
+    public List<WebElement> appJobsTabs;
+
     @FindBy(xpath = "//span[@class='start']")
     public WebElement appStartTime;
+
+    @FindBy(css = "h2[class='text-white'] button[class='close']")
+    public WebElement loadWinClose;
+
+    @FindBy(xpath = "//div[@class='close']")
+    public WebElement closeAppsPageTab;
 
     @FindBy(xpath = "//div[@class='right text-white']//span[1]")
     public WebElement appUserName;
@@ -36,8 +54,8 @@ public class DbxJobsPageObject {
     @FindBy(xpath = "(//div[@class='right text-white']//span)[2]")
     public WebElement appclusterName;
 
-    @FindBy(xpath = "//span[@class='start']")
-    public WebElement appStartName;
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[9]")
+    public WebElement getRead;
 
     @FindBy(xpath = "(//h2[@class='text-white']//span)[3]")
     public WebElement appRunCount;
@@ -78,11 +96,32 @@ public class DbxJobsPageObject {
     @FindBy(xpath = "//tbody/tr/td[1]")
     public WebElement clickOnStatus;
 
+    @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[2]/div/div[2]/div[3]/div/div/section/div[1]/span[1]")
+    public List<WebElement> analysisCollapse;
+
+    @FindBy(xpath = "//*[@class=\"status-title\"]//*[@class=\"badge fatal\"]")
+    public List<WebElement> insightsType;
+
+    @FindBy(xpath = "//p[normalize-space()='No Recommendations and Insights found.']")
+    public List<WebElement> noDatainsightsAppid;
+
     @FindBy(xpath = "//table[@id='pipelinesList']/tbody[1]/tr/td[2]/span[1]")
     public WebElement clickOnJobId;
 
     @FindBy(xpath = "//table[@id='pipelinesList']/tbody[1]/tr/td[3]/span[1]")
     public WebElement clickOnName;
+
+    @FindBy(xpath = "//table[@id='pipelinesList']/tbody[1]/tr/td[3]/span[1]")
+    public WebElement totalCostValue;
+
+    @FindBy(xpath = "//table[@id='pipelinesList']/tbody[1]/tr/td[3]/span[1]")
+    public WebElement totalCostDBUValue;
+
+    @FindBy(xpath = "//table[@id='pipelinesList']/tbody[1]/tr/td[3]/span[1]")
+    public WebElement totalCost;
+
+    @FindBy(xpath = "(//div[@class='component-tabs-primary'])/ul/li/a")
+    public List<WebElement> appSummaryTabs;
 
     @FindBy(className = "close")
     public WebElement closeIcon;

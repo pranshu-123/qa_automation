@@ -3,6 +3,7 @@ package com.qa.scripts.databricks.jobs;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.databricks.DbxSubTopPanelModulePageObject;
 import com.qa.pagefactory.databricks.jobs.DbxApplicationsPageObject;
+import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.AppDetailsPage;
 import com.qa.utils.LoggingUtils;
@@ -16,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DbAllApps {
@@ -177,12 +179,28 @@ public class DbAllApps {
 
     public void navigateToJobsTab(String tab) {
         userAction.performActionWithPolling(dbSubTopPanelModulePageObject.jobs, UserAction.CLICK);
+        waitExecuter.sleep(4000);
         try {
             if (tab.equalsIgnoreCase("Runs")) {
                 userAction.performActionWithPolling(dbSubTopPanelModulePageObject.runsTab, UserAction.CLICK);
+                waitExecuter.waitUntilElementPresent(dbSubTopPanelModulePageObject.runsTab);
             } else if (tab.equalsIgnoreCase("Jobs")) {
                 userAction.performActionWithPolling(dbSubTopPanelModulePageObject.jobsTabs, UserAction.CLICK);
                 waitExecuter.waitUntilElementPresent(dbSubTopPanelModulePageObject.jobsTabs);
+            }
+        } catch (ElementClickInterceptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void selectTab(String tab) {
+        userAction.performActionWithPolling(dbSubTopPanelModulePageObject.runsTab, UserAction.CLICK);
+        try {
+            if (tab.equalsIgnoreCase("Finished")) {
+                userAction.performActionWithPolling(dbSubTopPanelModulePageObject.finishedTab, UserAction.CLICK);
+            } else if (tab.equalsIgnoreCase("Running")) {
+                userAction.performActionWithPolling(dbSubTopPanelModulePageObject.runningTab, UserAction.CLICK);
+                waitExecuter.waitUntilElementPresent(dbSubTopPanelModulePageObject.runningTab);
             }
         } catch (ElementClickInterceptedException e) {
             e.printStackTrace();
@@ -207,11 +225,19 @@ public class DbAllApps {
         logger.info("Select last 7 days from date picker");
     }
 
+    /* Select cluster and Last 7 days */
+    public void inJobsSelectClusterAndLast30Days() {
+        // Select last 30 days from date picker
+        select30Days();
+        // Select cluster
+        logger.info("Select last 30 days from date picker");
+    }
+
     public List<WebElement> getClusterListFromDropdown() {
         return dbSubTopPanelModulePageObject.clusterList;
     }
 
-    /* Get all app types that have run in unravel UI */
+    /* Get all Status types that have run in unravel UI */
     public List<String> getAllApplicationTypes() {
         List<WebElement> appTypes = applicationsPageObject.getApplicationTypes;
         List<String> nameOfAppTypes = new ArrayList<>();
@@ -219,6 +245,20 @@ public class DbAllApps {
             nameOfAppTypes.add(appType.getText().trim());
         }
         return nameOfAppTypes;
+    }
+
+    /* Add all application count */
+    public int addApplicationTypeCount() {
+        List<WebElement> appJobCounts = applicationsPageObject.getEachApplicationTypeJobCounts;
+        List<Integer> listOfJobCounts = new ArrayList<>();
+        int totalCount = 0;
+        for (int i = 0; i < appJobCounts.size(); i++) {
+            listOfJobCounts.add(Integer.parseInt(appJobCounts.get(i).getText().replaceAll("[^\\dA-Za-z ]", "").trim()));
+        }
+        for (int jobCount : listOfJobCounts) {
+            totalCount += jobCount;
+        }
+        return totalCount;
     }
 
     public void clickOnClusterDropDown() {
@@ -236,6 +276,23 @@ public class DbAllApps {
         logger.info("Application Id is " + statusTable);
         waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.clickOnAppId);
         dbSubTopPanelModulePageObject.clickOnAppId.click();
+        waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.closeIcon);
+        waitExecuter.waitUntilPageFullyLoaded();
+        String status = dballApps.appStatus.getText().trim().toLowerCase();
+        Assert.assertEquals(statusTable, status, "Runs Status is not displayed in the Header");
+        return status;
+    }
+
+
+    /**
+     * Method to click the first app in Finished table , navigate to the details page.
+     * and verify Status App details Page .
+     */
+    public String verifyStatusInFinishedTab(DbxSubTopPanelModulePageObject dballApps) {
+        String statusTable = dballApps.statusFinishedTab.getText().trim().toLowerCase();
+        logger.info("Application Status is " + statusTable);
+        waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.finishedAppId);
+        dbSubTopPanelModulePageObject.finishedAppId.click();
         waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.closeIcon);
         waitExecuter.waitUntilPageFullyLoaded();
         String status = dballApps.appStatus.getText().trim().toLowerCase();

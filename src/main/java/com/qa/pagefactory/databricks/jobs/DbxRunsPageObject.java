@@ -30,6 +30,24 @@ public class DbxRunsPageObject {
     @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[6]")
     public List<WebElement> getApplicationClusterId;
 
+    @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')])[3]//input")
+    public WebElement queueNameSearchBox;
+
+    @FindBy(xpath = "//h3[contains(@class,'expandable-header')]//a[contains(text(),'Queue')]")
+    public WebElement queueExpandableHeader;
+
+    @FindBy(xpath = "//p[contains(@class,'float-right')]/b")
+    public WebElement getTotalAppCount;
+
+    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[9]")
+    public WebElement getQueueNameTable;
+
+    @FindBy(css = "input.global-app-search")
+    public WebElement globalSearchBox;
+
+    @FindBy(xpath = "(//ul[contains(@class,'select2-results')])/li")
+    public List<WebElement> getNamesFromDropDown;
+
     /**
      * @param driver The driver that will be used to look up the elements
      */

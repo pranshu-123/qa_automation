@@ -19,8 +19,14 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//*[@id='RunsListAll-body']/tr/td[1]")
     public WebElement Status;
 
+    @FindBy(xpath = "//*[@id='RunsListFinished']//tr/td[1]")
+    public WebElement statusFinishedTab;
+
     @FindBy(xpath = "//a[@href='#/manage/stats']")
     public WebElement stats;
+
+    @FindBy(xpath = "(//ul[contains(@class,'select2-results')])/li")
+    public List<WebElement> getNamesFromDropDown;
 
     @FindBy(xpath = "//h3[normalize-space()='No Data Available']")
     public List<WebElement> noDataPresent;
@@ -45,6 +51,9 @@ public class DbxSubTopPanelModulePageObject {
 
     @FindBy(xpath = "//table[@id='RunsListAll']/thead[1]/tr[1]/th/span[1]")
     public List<WebElement> getColumnsTypes;
+
+    @FindBy(xpath = "//table[@id='RunsListFinished']/thead[1]/tr[1]/th/span[1]")
+    public List<WebElement> getColumnsTypesFinishedTab;
 
     @FindBy(xpath = "//a[text()[normalize-space()='Only']]")
     public WebElement clickTab;
@@ -82,8 +91,47 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//table[@id='RunsListAll']/tbody[1]/tr/td[3]/a[2]")
     public WebElement getIdeFromTable;
 
+    @FindBy(xpath = "//table[@id='RunsListAll']/tbody[1]/tr/td[5]/span[1]")
+    public WebElement getRunIdFromTable;
+
+    @FindBy(xpath = "//table[@id='RunsListFinished']//tr/td[10]/span[1]")
+    public WebElement getWorkspaceFromTable;
+
+    @FindBy(xpath = "//table[@id='RunsListFinished']//tr/td[11]/span[1]")
+    public WebElement getClusterNameFromTable;
+
     @FindBy(xpath = "//table[@id='RunsListAll']/tbody[1]/tr/td[3]/span[1]")
     public WebElement getNameeFromTable;
+
+    @FindBy(xpath = "//*[@id='RunsListAll']/tbody[1]/tr/td[2]/span[1]")
+    public WebElement getUsernameFromTable;
+
+    @FindBy(xpath = "//*[@id='RunsListFinished']/tbody[1]/tr/td[2]/span[1]")
+    public WebElement getUsernameFromFinishedTable;
+
+    @FindBy(xpath = "//*[@id='RunsListAll']/tbody[1]/tr/td[12]/span[1]")
+    public WebElement getClusterTypeFromTable;
+
+    @FindBy(xpath = "//*[@id='RunsListFinished']/tbody[1]/tr/td[12]/span[1]")
+    public WebElement getClusterTypeFromFinishedTable;
+
+    @FindBy(xpath = "//*[@id='RunsListAll']/tbody[1]/tr/td[10]/span[1]")
+    public WebElement getWorkspaceAllFromTable;
+
+    @FindBy(xpath = "//*[@id='RunsListFinished']/tbody[1]/tr/td[10]/span[1]")
+    public WebElement getWorkspaceFromFinishedTable;
+
+    @FindBy(xpath = "//li[@class='select2-results__option select2-results__message']")
+    public WebElement getNoDataTable;
+
+    @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')])[2]//input")
+    public WebElement userSearchBox;
+
+    @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')])[3]//input")
+    public WebElement workspaceSearchBox;
+
+    @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')])[3]//input")
+    public WebElement clusterTypeSearchBox;
 
     @FindBy(xpath = "//div[@class='status-title']//following-sibling::span[contains(@class,'badge') and not(contains(@class,'module-status'))]")
     public List<WebElement> getBadgeTitle;
@@ -100,6 +148,9 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//*[@id=\"RunsListAll-body\"]/tr/td[3]/a[2]")
     public WebElement clickOnAppId;
 
+    @FindBy(xpath = "//*[@id='RunsListFinished']//tr/td[3]/a[2]")
+    public WebElement finishedAppId;
+
     @FindBy(xpath = "//button[text()[normalize-space()='Spark']]")
     public WebElement clickOnSpark;
 
@@ -109,11 +160,32 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//span[text()='Runs']")
     public WebElement runsTab;
 
+    @FindBy(id = "running")
+    public WebElement runningTab;
+
+    @FindBy(id = "finished")
+    public WebElement finishedTab;
+
     @FindBy(css = ".col-md-12.no-data-msg")
     public WebElement whenNoApplicationPresent;
 
     @FindBy(xpath = "//ul[contains(concat(' ', @class, ' '), 'select2-results__options')]/li")
     public List<WebElement> clusterList;
+
+    @FindBy(css = "input.global-app-search")
+    public WebElement globalSearchBox;
+
+    @FindBy(xpath = "//h3[contains(@class,'expandable-header')]//a[contains(text(),'User')]")
+    public WebElement userExpandableHeader;
+
+    @FindBy(xpath = "//h3[contains(@class,'expandable-header')]//a[contains(text(),'Workspace')]")
+    public WebElement workspaceExpandableHeader;
+
+    @FindBy(xpath = "//h3[contains(@class,'expandable-header')]//a[contains(text(),'Workspace')]")
+    public WebElement clusterTypeExpandableHeader;
+
+    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr")
+    public WebElement whenApplicationPresent;
 
     @FindBy(xpath = "//input[@class='select2-search__field']")
     public WebElement clusterDropdown;

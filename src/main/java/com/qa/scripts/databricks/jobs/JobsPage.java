@@ -6,22 +6,27 @@ import com.qa.pagefactory.databricks.jobs.DbxJobsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.scripts.appdetails.AppDetailsPage;
 import com.qa.utils.LoggingUtils;
+import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
 public class JobsPage {
 
+    private static final Boolean isDignosticWin = false;
     private final Logger logger = LoggerFactory.getLogger(AppDetailsPage.class);
     private final LoggingUtils loggingUtils = new LoggingUtils(com.qa.scripts.databricks.jobs.DbAllApps.class);
     private final WaitExecuter waitExecuter;
@@ -92,6 +97,172 @@ public class JobsPage {
         Assert.assertNotSame(jobsIdTable, jobsIdAppPage, "Runs Id is not displayed in the Header");
         return jobsIdAppPage;
     }
+
+
+    /**
+     * Method to verify the following:
+     * 1.All the KPIs should be listed and the data must be populated.
+     * (Duration, Start time, end time, job count, stages count)
+     * 2. Owner, cluster, queue must be populated on the top right
+     */
+    public String verifyRightPaneKpis() {
+        List<WebElement> kpiList = jobsPageObject.rightPaneKpis;
+        validateLeftPaneKpis(kpiList);
+        List<WebElement> appKpis = jobsPageObject.rightPaneAppKpis;
+        List<WebElement> appKpiVal = jobsPageObject.rightPaneAppKpiVal;
+        Assert.assertFalse(appKpis.isEmpty(), "No application kpis are listed in the right pane");
+        Assert.assertFalse(appKpiVal.isEmpty(), "Application kpi values are empty");
+        String appDuration = "0";
+        for (int i = 0; i < appKpis.size(); i++) {
+            Assert.assertNotNull(appKpis.get(i).getText(), "Kpi text is empty");
+            Assert.assertNotNull(appKpiVal.get(i).getText(), "Kpi Value is empty");
+            appDuration = (appKpiVal.get(0).getText().trim());
+            logger.info("Kpi Name = " + appKpis.get(i).getText() + " Value = " + appKpiVal.get(i).getText());
+        }
+        logger.info("The application duration is " + appDuration);
+        return appDuration;
+    }
+
+    /**
+     * Verify that Left pane must be opened and should have KPIs listed (start, end
+     * and duration are listed and should not be empty)
+     */
+    public void validateLeftPaneKpis(List<WebElement> kpiList) {
+        Assert.assertFalse(kpiList.isEmpty(), "The kpi list is empty");
+        for (WebElement webElement : kpiList) {
+            logger.info("The leftPane kpi is " + webElement.getText());
+            String kpis = webElement.getText();
+            Assert.assertNotSame("", kpis, "The kpis is empty");
+            String[] kpisOut = kpis.split(":");
+            String kpiName = kpisOut[0];
+            String kpiVal = kpisOut[1];
+            logger.info("Kpi name = " + kpisOut[1] + "  Kpi Value = " + kpisOut[1]);
+            Assert.assertNotSame("", kpiName, "The kpi " + kpiName + " is empty");
+            Assert.assertNotSame("", kpiVal, "The kpi " + kpiVal + " is empty");
+        }
+    }
+
+    /**
+     * Common steps to navigate to the Jobs page from header. Clicks on jobs tab
+     * Selects a specific cluster Selects 30 days time interval
+     */
+    public void navigateToJobsTabFromHeader(DbAllApps dballApps, DatePicker datePicker) {
+        dballApps.navigateToJobsTab("Jobs");
+
+        datePicker.clickOnDatePicker();
+        waitExecuter.sleep(1000);
+        datePicker.selectLast30Days();
+        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.sleep(3000);
+    }
+
+    public void verifySummaryTabValidation(ExtentTest test, String tabName, Logger logger) {
+        // Initialize all classes objects
+        test.log(LogStatus.INFO, "Initialize all class objects");
+
+        logger.info("Initialize all class objects");
+        DbxJobsPageObject jobsPageObject = new DbxJobsPageObject(driver);
+        JobsPage jobsPage = new JobsPage(driver);
+        DbAllApps dballApps = new DbAllApps(driver);
+        DatePicker datePicker = new DatePicker(driver);
+
+        // Navigate to Jobs tab from header
+        test.log(LogStatus.INFO, "Navigate to jobs tab from header");
+        jobsPage.navigateToJobsTabFromHeader(dballApps, datePicker);
+
+        waitExecuter.sleep(2000);
+        String headerAppId = jobsPage.verifyJobId(jobsPageObject);
+        test.log(LogStatus.PASS, "Jobs Application Id is displayed in the Header: " + headerAppId);
+        jobsPage.verifyAppSummaryTabs(jobsPageObject, tabName, test);
+        // Close apps details page
+
+        waitExecuter.waitUntilElementClickable(jobsPageObject.closeAppsPageTab);
+        MouseActions.clickOnElement(driver, jobsPageObject.closeAppsPageTab);
+
+    }
+
+    /**
+     * Method to verify the Spark summary tabs in the right pane of the App Details page
+     */
+    public String verifyAppSummaryTabs(DbxJobsPageObject jobsPage, String verifyTabName,
+                                       ExtentTest test) {
+        List<WebElement> appsTabList = jobsPage.appSummaryTabs;
+        verifyAssertFalse(appsTabList.isEmpty(), jobsPage, "No Tabs loaded");
+        String tabName = "";
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.pollingEvery(Duration.ofMillis(10));
+        for (int i = 0; i < appsTabList.size(); i++) {
+            tabName = appsTabList.get(i).getText();
+            logger.info("Validating tab " + tabName);
+            if (tabName.equals(verifyTabName)) {
+                switch (verifyTabName) {
+                    case "Analysis":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        try {
+                            validateAnalysisTab(jobsPage, test);
+                            test.log(LogStatus.PASS, "Analysis tab is populated");
+                        } catch (Exception ex) {
+                            test.log(LogStatus.WARNING, "Analysis tab is empty for application <app_id>, " +
+                                    "Check manually if recommendations/Insights were expected");
+                        }
+                        break;
+                }
+                break;
+            }
+        }
+        return "";
+    }
+
+    /**
+     * Method to validate Jobs Application Summary Analysis tab.
+     */
+    public void validateAnalysisTab(DbxJobsPageObject jobsPage, ExtentTest test) {
+        ArrayList<String> efficiency = new ArrayList<>();
+        ArrayList<String> recommendation = new ArrayList<>();
+        List<WebElement> insightType = jobsPage.insightsType;
+        boolean isPresent = jobsPage.insightsType.size() > 0;
+        if (isPresent) {
+            for (int j = 0; j < insightType.size(); j++) {
+                String insights = insightType.get(j).getText();
+                logger.info("Insight generated are " + insights);
+                if (insights.equals("EFFICIENCY")) {
+                    // Store it in efficiency array
+                    efficiency.add(insights);
+                } else {
+                    // Store it in recommendation array
+                    recommendation.add(insights);
+                }
+            }
+            List<WebElement> collapsableList = jobsPage.analysisCollapse;
+            try {
+                for (int c = 0; c < collapsableList.size(); c++) {
+                    collapsableList.get(c).click();
+                }
+            } catch (Exception ex) {
+                throw new AssertionError(
+                        "Caught exception while clicking the collapsable" + " icon for insights.\n" + ex.getMessage());
+            }
+        } else {
+            test.log(LogStatus.WARNING, "Analysis tab is empty for application <app_id>, " +
+                    "Check manually if recommendations/Insights were expected");
+        }
+    }
+
+
+    public void verifyAssertFalse(Boolean condition, DbxJobsPageObject jobsPageObject, String msg) {
+        String appDuration = "0";
+        try {
+            Assert.assertFalse(condition, msg);
+        } catch (Throwable e) {
+            // Close apps details page
+            if (isDignosticWin)
+                MouseActions.clickOnElement(driver, jobsPageObject.loadWinClose);
+            else
+                MouseActions.clickOnElement(driver, jobsPageObject.closeAppsPageTab);
+            throw new AssertionError(msg + e.getMessage());
+        }
+    }
+
 
     /**
      * Method to click on jobs Name , navigate to the details page.
@@ -178,6 +349,29 @@ public class JobsPage {
         return durationAppPage;
     }
 
+    /**
+     * Get total cost value
+     */
+    public Double getTotalCostValue() {
+        return Double.parseDouble(jobsPageObject.totalCostValue.getText().replace("$", ""));
+    }
+
+    /**
+     * Get total storage cost value
+     */
+    public Double getTotalDBUValue() {
+        return Double.parseDouble(jobsPageObject.totalCostDBUValue.getText().replace("$", ""));
+    }
+
+
+    public void verifyTotalCost() {
+        String totalCost = jobsPageObject.totalCost.getText();
+        logger.info("Total cost is " + totalCost);
+        boolean onlySpecialChars = totalCost.matches("[^a-zA-Z0-9]+");
+        Assert.assertFalse(totalCost.isEmpty() || onlySpecialChars, "No values for total cost displayed " +
+                "\n Expected: AlphaNumeric value but Actual: [" + totalCost + "]");
+    }
+
     public void VerifyJobsName(DbxJobsPageObject jobsPage, String tableValue, ExtentTest test) {
         try {
             if (tableValue.equalsIgnoreCase("JobsName")) {
@@ -216,6 +410,17 @@ public class JobsPage {
         } catch (ElementClickInterceptedException e) {
             e.printStackTrace();
         }
+    }
+
+
+    /**
+     * Method to click the first app in jobs table , navigate to the details page.
+     * and check if the table data like start time, duration, read and write is displayed or not.
+     */
+    public void checkAppsJobTableData(String data, String colType) {
+        boolean onlySpecialChars = data.matches("[^a-zA-Z0-9]+");
+        Assert.assertFalse(data.isEmpty() || onlySpecialChars, colType + " data is not displayed in the table");
+        logger.info("Data for " + colType + " is displayed in the table");
     }
 
     /**

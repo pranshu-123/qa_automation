@@ -48,7 +48,7 @@ public class DbxApplicationsPageObject {
     @FindBy(xpath = "//*[@id=\"runs-filter-panel\"]/div[2]/div/p/label/span[1]")
     public List<WebElement> selectOneApplicationType;
 
-    @FindBy(xpath = "//*[@id=\"app-filter-panel\"]//div[2]/div[2]//div/p/label/span[2]")
+    @FindBy(xpath = "//*[@id=\"runs-filter-panel\"]/div[2]/div/p/label/div/span[2]")
     public List<WebElement> getEachApplicationTypeJobCounts;
 
     @FindBy(xpath = "//span[contains(@class,'select2-dropdown--below')]//ul/li")

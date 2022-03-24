@@ -36,7 +36,7 @@ public class DbxJobsPageObject {
     @FindBy(css = "h2[class='text-white'] button[class='close']")
     public WebElement loadWinClose;
 
-    @FindBy(css = "button.close")
+    @FindBy(xpath = "//div[@class='close']")
     public WebElement closeAppsPageTab;
 
     @FindBy(xpath = "//div[@class='right text-white']//span[1]")
@@ -102,6 +102,9 @@ public class DbxJobsPageObject {
     @FindBy(xpath = "//*[@class=\"status-title\"]//*[@class=\"badge fatal\"]")
     public List<WebElement> insightsType;
 
+    @FindBy(xpath = "//p[normalize-space()='No Recommendations and Insights found.']")
+    public List<WebElement> noDatainsightsAppid;
+
     @FindBy(xpath = "//table[@id='pipelinesList']/tbody[1]/tr/td[2]/span[1]")
     public WebElement clickOnJobId;
 
@@ -117,7 +120,7 @@ public class DbxJobsPageObject {
     @FindBy(xpath = "//table[@id='pipelinesList']/tbody[1]/tr/td[3]/span[1]")
     public WebElement totalCost;
 
-    @FindBy(xpath = "(//div[@id='scrollableMenu'])/ul/li/a")
+    @FindBy(xpath = "(//div[@class='component-tabs-primary'])/ul/li/a")
     public List<WebElement> appSummaryTabs;
 
     @FindBy(className = "close")

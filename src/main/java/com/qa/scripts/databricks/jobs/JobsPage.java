@@ -198,8 +198,13 @@ public class JobsPage {
                 switch (verifyTabName) {
                     case "Analysis":
                         MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        try {
                             validateAnalysisTab(jobsPage, test);
                             test.log(LogStatus.PASS, "Analysis tab is populated");
+                        } catch (Exception ex) {
+                            test.log(LogStatus.WARNING, "Analysis tab is empty for application <app_id>, " +
+                                    "Check manually if recommendations/Insights were expected");
+                        }
                         break;
                 }
                 break;
@@ -243,51 +248,6 @@ public class JobsPage {
         }
     }
 
-    /**
-     * Method to verify the summary tabs in the right pane of the App Details page
-     */
-    public String verifyAllDataTabs(DbxJobsPageObject jobsPage, String verifyTabName, ExtentTest test) {
-        List<WebElement> appsTabList = jobsPage.appJobsTabs;
-        verifyAssertFalse(appsTabList.isEmpty(), jobsPage, "No Tabs loaded");
-        String tabName = "";
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.pollingEvery(Duration.ofMillis(10));
-
-        for (int i = 0; i < appsTabList.size(); i++) {
-            tabName = appsTabList.get(i).getText();
-            logger.info("Validating tab " + tabName);
-            if (tabName.equals(verifyTabName)) {
-                switch (verifyTabName) {
-                    case "Analysis":
-                        MouseActions.clickOnElement(driver, appsTabList.get(i));
-                        test.log(LogStatus.PASS, "Analysis tab is populated");
-                        break;
-                    case "Resources":
-                        MouseActions.clickOnElement(driver, appsTabList.get(i));
-                        waitExecuter.sleep(3000);
-                        test.log(LogStatus.PASS, "Resources tab is populated");
-                        break;
-                    case "Daggraph":
-                        MouseActions.clickOnElement(driver, appsTabList.get(i));
-                        waitExecuter.sleep(3000);
-                        test.log(LogStatus.PASS, "Errors tab is populated");
-                        break;
-                    case "Errors":
-                        MouseActions.clickOnElement(driver, appsTabList.get(i));
-                        waitExecuter.sleep(3000);
-                        test.log(LogStatus.PASS, "Logs tab is populated");
-                        break;
-                    case "Tags":
-                        MouseActions.clickOnElement(driver, appsTabList.get(i));
-                        waitExecuter.sleep(3000);
-                        test.log(LogStatus.PASS, "Tags tab is populated");
-                        break;
-                }
-                break;
-            }
-        }
-        return "";
-    }
 
     public void verifyAssertFalse(Boolean condition, DbxJobsPageObject jobsPageObject, String msg) {
         String appDuration = "0";

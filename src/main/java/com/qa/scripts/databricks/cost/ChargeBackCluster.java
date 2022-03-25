@@ -178,7 +178,7 @@ public class ChargeBackCluster {
 	}
 
 	public void filterBy(String filter) {
-		waitExecuter.sleep(3500);
+		waitExecuter.sleep(4500);
 		chargebackClusterPageObject.filterByDropDown.click();
 		driver.findElement(By.xpath(String.format(chargebackClusterPageObject.filterByValues,filter))).click();
 	}

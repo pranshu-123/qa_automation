@@ -15,22 +15,22 @@ import com.qa.utils.Log;
 import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.DbxReportsScheduled
-public class SR_04 extends BaseClass
+public class SR_07 extends BaseClass
 
 {
-	private static final Logger LOGGER = Logger.getLogger(SR_04.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(SR_07.class.getName());
 	@Test
-	public void SH_Reports_4_ValidateScheduledInfo() {
-		test = extent.startTest("SH_Reports_4_ValidateScheduledInfo", "Validate Scheduled Info of the report");
+	public void SH_Reports_7_ValidateScheduledMoreInfo() {
+		test = extent.startTest("SH_Reports_7_ValidateScheduledMoreInfo", "Validate More Info on the report");
 		test.assignCategory("Reports/Scheduled");
-		Log.startTestCase("SH_Reports_4_ValidateScheduledInfo");
+		Log.startTestCase("SH_Reports_7_ValidateScheduledMoreInfo");
 		TopXReports topXReports = new TopXReports(driver);
 		ScheduledReports scheduledReports = new ScheduledReports(driver);
 		List<String> headers = new ArrayList<String>(Arrays.asList("Parameters","Value"));
 		List<String> values = new ArrayList<String>(Arrays.asList("Cluster","Top X","Date Range"));
 		topXReports.navigateToDifferentReportsTab("Scheduled");
 		LOGGER.info("Navigated to Reports tab");
-		scheduledReports.selectScheduledReport();
+		scheduledReports.selectMoreInfo();
 		scheduledReports.validateScheduledReportInfo(headers, values);
 		LOGGER.info("Scheduled Info page shows correct data");
 		test.log(LogStatus.PASS, "Scheduled Info page shows correct data");

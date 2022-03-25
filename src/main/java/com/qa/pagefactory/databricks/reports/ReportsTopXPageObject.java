@@ -58,6 +58,9 @@ public class ReportsTopXPageObject {
 	
 	@FindBy(xpath = "//div[contains(text(),'Top X is required.')]")
 	public WebElement requiredFieldErrorMessage;
+	
+	@FindBy(xpath = "//div[contains(text(),'Top X should be a number')]")
+	public WebElement invalidTopXNumberErrorMessage;
 
 	@FindBy(xpath = "//span[contains(text(),'Archived')]")
 	public WebElement archivedTab;
@@ -73,6 +76,12 @@ public class ReportsTopXPageObject {
 	
 	@FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody/tr/td/span")
 	public List<WebElement>  applicationHeadersValue;
+	
+	@FindBy(xpath = "//label[contains(text(),'Workspaces')]/..//table//tr/td/span")
+	public List<WebElement>  appCount;
+	
+	@FindBy(xpath = "//span[contains(text(),'Total Apps')]/../../following-sibling::div//h2")
+	public WebElement totalAppCount;
 	
 	public String tagsType = "//label[contains(text(),'%s')]/preceding-sibling::input";
 	

@@ -121,7 +121,7 @@ public class ScheduledReports {
 	}
 
 	public void validateScheduledReportInfo(List<String> tableHeaders, List<String> tableValues) {
-
+		waitExecuter.sleep(3000);
 		List<String> headers = reportsScheduledPageObject.inputParameterHeader.stream()
 				.map(el -> el.getText()).collect(Collectors.toList());
 
@@ -129,11 +129,11 @@ public class ScheduledReports {
 				.map(el -> el.getText()).collect(Collectors.toList());
 
 		for(String header : tableHeaders) {
-			Assert.assertTrue(headers.contains(header),"Header not present");
+			Assert.assertTrue(headers.contains(header),header +" header not present");
 		}
 
 		for(String value : tableValues) {
-			Assert.assertTrue(values.contains(value),"Value not present");
+			Assert.assertTrue(values.contains(value),value + " value not present");
 		}
 
 	}
@@ -153,6 +153,7 @@ public class ScheduledReports {
 	}
 
 	public List<String> fetchReportName() {
+		driver.navigate().refresh();
 		waitExecuter.sleep(3000);
 		return reportsScheduledPageObject.reportTableValues.stream()
 				.map(el -> el.getText()).collect(Collectors.toList());
@@ -160,6 +161,7 @@ public class ScheduledReports {
 	}
 
 	public void filterReport(String filterType) {
+		waitExecuter.sleep(1000);
 		reportsScheduledPageObject.reportFilter.click();
 		waitExecuter.sleep(1000);
 		if(filterType.equalsIgnoreCase("top x")) {
@@ -226,4 +228,15 @@ public class ScheduledReports {
 
 	}
 
+	public Set<String> fetchReportType() {
+		
+		return reportsScheduledPageObject.scheduledTopXReportTypeList
+				.stream().map(el -> el.getText())
+				.collect(Collectors.toSet());
+	}
+
+	public void deleteScheduledReport() {
+		reportsScheduledPageObject.deleteScheduleReport.click();
+		reportsScheduledPageObject.deleteYes.click();
+	}
 }

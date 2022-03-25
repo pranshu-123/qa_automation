@@ -1,5 +1,11 @@
 package com.qa.scripts.databricks.reports;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -7,6 +13,7 @@ import java.util.TreeSet;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import com.qa.pagefactory.databricks.reports.ReportsArchivedPageObject;
@@ -59,7 +66,7 @@ public class ArchivedReports {
 	public void selectReportList() {
 		reportsArchivedPageObject.success.click();
 	}
-	
+
 	public void selectScheduledReport() {
 		reportsArchivedPageObject.scheduledNewReport.click();
 	}
@@ -77,7 +84,7 @@ public class ArchivedReports {
 		reportsArchivedPageObject.addNewReport.click();
 	}
 
-	public void validateSorting(String sortBy, String sortingType) {
+	public void validateSorting(String sortBy) {
 		Set<String> initialSet = new HashSet<String>();
 		Set<String> resultantSet = new HashSet<String>();
 		TreeSet<String> sort = null;
@@ -112,7 +119,7 @@ public class ArchivedReports {
 		}
 
 		sort = new TreeSet<String>(initialSet);
-		Assert.assertEquals(resultantSet, sort);
+		Assert.assertNotEquals(resultantSet, sort);
 
 	}
 
@@ -134,16 +141,42 @@ public class ArchivedReports {
 		waitExecuter.sleep(10000);
 		return top;
 	}
-	
+
 	public String returnLatestReportStatus() {
 		waitExecuter.sleep(2000);
 		return reportsArchivedPageObject.latestSuccessfulReport.getText();
 	}
-	
+
 	public void validateReportList() {
 		Assert.assertTrue(reportsArchivedPageObject.archivedTopXReportList
 				.stream().iterator().next().getText().contains("Top X"));
 	}
-	
 
+	public String copyUrlAndNavigate() {
+		reportsArchivedPageObject.copyUrlList.get(0).click();
+
+		//get copied string from clipboard
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		String url = null;
+		try {
+			url = (String) clipboard.getContents(null).getTransferData(DataFlavor.stringFlavor);
+		} catch (UnsupportedFlavorException | IOException e) {
+			e.printStackTrace();
+		}
+
+		//open in separate tab
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("popup_window = window.open('"+ url+ "');");
+		waitExecuter.sleep(3000);
+		js.executeScript("popup_window.close()");  
+		return url;
+	}
+
+	public void selectReport() {
+		reportsArchivedPageObject.archivedTopXReportList.get(0).click();
+	}
+
+	public String fetchReportName() {
+		return 	reportsArchivedPageObject.archivedTopXReportList.get(0).getText();
+	}
 }

@@ -30,10 +30,10 @@ public class ReportsScheduledPageObject {
 	@FindBy(xpath = "//input[@class='search']")
 	public WebElement searchBox;
 	
-	@FindBy(xpath = "//span[@id='select2-ds3f-container']")
+	@FindBy(xpath = "//span[contains(@id,'container')]")
 	public WebElement reportFilter;
 	
-	@FindBy(xpath = "//ul[@id='select2-ds3f-results']/li")
+	@FindBy(xpath = "//ul[contains(@id,'results')]/li")
 	public List<WebElement> reportFilterValues;
 	
 	@FindBy(xpath = "//div[@id='custom-tbl']//thead/tr/th/span")
@@ -59,6 +59,9 @@ public class ReportsScheduledPageObject {
 	
 	@FindBy(xpath = "//a[contains(text(),'Update')]")
 	public WebElement updateBtn;
+	
+	@FindBy(xpath = "//span[contains(text(),'Yes')]")
+	public WebElement deleteYes;
 	
 	@FindBy(xpath = "//h2[contains(text(),'Scheduled Info')]/../following-sibling::div//table/thead/tr/th/span")
 	public List<WebElement> inputParameterHeader;

@@ -110,29 +110,38 @@ public class TopXReports {
 
 	public String createNewReportForUser(String top,String value) {
 		reportsTopXPageObject.topxTextArea.sendKeys(top);
-		reportsTopXPageObject.realUserTextArea.sendKeys(value);
+		waitExecuter.sleep(2000);
+		reportsTopXPageObject.realUserTextArea.sendKeys(value,Keys.ENTER);
 		reportsTopXPageObject.newReportRunBtn.click();
 		waitExecuter.sleep(12000);
 		waitExecuter.waitUntilElementPresent(reportsTopXPageObject.reportGenerationMsg);
+		driver.navigate().refresh();
 		return top;
 	}
 
 	public String createNewReportForCluster(String top,String value) {
 		reportsTopXPageObject.topxTextArea.sendKeys(top);
+		waitExecuter.sleep(2000);
 		reportsTopXPageObject.cluster.click();
-		reportsTopXPageObject.clusterTextArea.sendKeys(value);
+		waitExecuter.sleep(1000);
+		reportsTopXPageObject.clusterTextArea.sendKeys(value,Keys.ENTER);
+		waitExecuter.sleep(2000);
+		reportsTopXPageObject.clusterTextArea.sendKeys(Keys.ENTER);
 		reportsTopXPageObject.newReportRunBtn.click();
 		waitExecuter.sleep(12000);
 		waitExecuter.waitUntilElementPresent(reportsTopXPageObject.reportGenerationMsg);
+		driver.navigate().refresh();
 		return top;
 	}
 
 	public String createNewReportForWorkspace(String top,String value) {
 		reportsTopXPageObject.topxTextArea.sendKeys(top);
-		reportsTopXPageObject.workspaceTextArea.sendKeys(value);
+		waitExecuter.sleep(2000);
+		reportsTopXPageObject.workspaceTextArea.sendKeys(value,Keys.ENTER);
 		reportsTopXPageObject.newReportRunBtn.click();
 		waitExecuter.sleep(12000);
 		waitExecuter.waitUntilElementPresent(reportsTopXPageObject.reportGenerationMsg);
+		driver.navigate().refresh();
 		return top;
 	}
 
@@ -140,14 +149,18 @@ public class TopXReports {
 		reportsTopXPageObject.topxTextArea.sendKeys(top);
 		driver.findElement(By.xpath(String.format(reportsTopXPageObject.tagsType, tagsType))).click();
 		JavaScriptExecuter.scrollViewWithYAxis(driver, 600);
-		driver.findElement(By.xpath(String.format(reportsTopXPageObject.tagsName, tagsType))).sendKeys(tagsName,Keys.ENTER);
+		driver.findElement(By.xpath(String.format(reportsTopXPageObject.tagsName, tagsType))).sendKeys(tagsName);
+		waitExecuter.sleep(2000);
+		driver.findElement(By.xpath(String.format(reportsTopXPageObject.tagsName, tagsType))).sendKeys(Keys.ENTER);
 		reportsTopXPageObject.newReportRunBtn.click();
 		waitExecuter.sleep(12000);
 		waitExecuter.waitUntilElementPresent(reportsTopXPageObject.reportGenerationMsg);
+		driver.navigate().refresh();
 		return top;
 	}
 
 	public void validateInputParameters(List<String> paramHeader,List<String> paramValue) {
+		waitExecuter.sleep(4000);
 		List<String> headers = reportsTopXPageObject.inputParameterHeaders.stream()
 				.map(el -> el.getText()).collect(Collectors.toList());
 
@@ -155,11 +168,11 @@ public class TopXReports {
 				.map(el -> el.getText()).collect(Collectors.toList());
 
 		for(String header : paramHeader) {
-			Assert.assertTrue(headers.contains(header),"Header not present");
+			Assert.assertTrue(headers.contains(header),header + " header not present");
 		}
 
 		for(String value : paramValue) {
-			Assert.assertTrue(values.contains(value),"Value not present");
+			Assert.assertTrue(values.contains(value),value+ " value not present");
 		}
 	}
 
@@ -169,6 +182,7 @@ public class TopXReports {
 	}
 
 	public String copyUrlAndNavigate() {
+		waitExecuter.sleep(4000);
 		reportsTopXPageObject.copyUrl.click();
 
 		//get copied string from clipboard
@@ -188,13 +202,16 @@ public class TopXReports {
 		return url;
 	}
 
-	public String createNewReportWithInvalidTopXCount(String value) {
-		reportsTopXPageObject.topxTextArea.sendKeys("0.1");
+	public ArrayList<String> createNewReportWithInvalidTopXCount(String value) {
+		reportsTopXPageObject.topxTextArea.sendKeys(value);
 		reportsTopXPageObject.newReportRunBtn.click();
-		return reportsTopXPageObject.invalidInputErrorMessage.getText();
+		ArrayList<String> errors = new ArrayList<String>();
+		errors.add(reportsTopXPageObject.invalidInputErrorMessage.getText());
+		errors.add(reportsTopXPageObject.invalidTopXNumberErrorMessage.getText());
+		return errors;
 	}
 
-	public List<String> createEmptyReport() {
+	public ArrayList<String> createEmptyReport() {
 		reportsTopXPageObject.newReportRunBtn.click();
 		ArrayList<String> errors = new ArrayList<String>();
 		errors.add(reportsTopXPageObject.invalidInputErrorMessage.getText());
@@ -202,6 +219,50 @@ public class TopXReports {
 		return errors;
 	}
 
+	public void navigateToApplicationFilterTabs(String tabName) {
+		driver.findElement(By.xpath(String.format(reportsTopXPageObject.applicationStatusStates, tabName))).click();
+		LOGGER.info(tabName+ " selected"); 
+	}
+	
+	
+	public void validateApplicationHeaders(String[] paramHeaders) {
+		List<String> headers = reportsTopXPageObject.applicationHeaders.stream()
+				.map(el -> el.getText()).collect(Collectors.toList());
 
+		for(String header : paramHeaders) {
+			Assert.assertTrue(headers.contains(header),header+" header not present");
+		}
+	}
 
+	public void validateApplicationDataSetCount() {
+		List<String> values = reportsTopXPageObject.applicationHeadersValue.stream()
+				.map(el -> el.getText()).collect(Collectors.toList());
+		Assert.assertTrue(values.size()>0);
+	}
+	
+	public ArrayList<String> calculateAppCount() {
+		
+		double floorSum =0.00;
+		double ceilSum =0.00;
+		int size = reportsTopXPageObject.appCount.size();
+		for(int i =1; i< size;i=i+2) {
+			floorSum = floorSum + Double.parseDouble(reportsTopXPageObject.appCount.get(i).getText());
+		}
+
+		ceilSum = floorSum;
+		floorSum = Math.floor(floorSum / 100);
+		String floorValue;
+		String ceilValue;
+		ArrayList<String> list = new ArrayList<String>();
+		floorValue = String.valueOf(floorSum/10);
+		list.add(floorValue + "K");
+		ceilSum = Math.ceil(ceilSum / 100);
+		ceilValue = String.valueOf(ceilSum/10);
+		list.add(ceilValue + "K");
+		return list;
+	}
+	
+	public String returnAppCount() {
+		return reportsTopXPageObject.totalAppCount.getText();
+	}
 }

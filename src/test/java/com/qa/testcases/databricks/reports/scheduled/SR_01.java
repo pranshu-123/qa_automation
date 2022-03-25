@@ -29,7 +29,7 @@ public class SR_01 extends BaseClass
 		LOGGER.info("Navigated to Reports tab");
 		topXReports.selectSchedule();
 		scheduledReports.createNewReportWithDefaultValues("3");
-	  String name = scheduledReports.setScheduledReportName("TopX Report");
+		String name = scheduledReports.setScheduledReportName("TopX Report");
 		scheduledReports.selectScheduledTime("Monday");
 		scheduledReports.scheduleReport();
 		LOGGER.info("Report Scheduled.");

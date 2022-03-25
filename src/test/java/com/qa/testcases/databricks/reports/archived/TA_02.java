@@ -21,10 +21,10 @@ public class TA_02 extends BaseClass
 {
 	private static final Logger LOGGER = Logger.getLogger(TA_02.class.getName());
 	@Test
-	public void AR_Reports_04_ValidateLastArchivedReport() {
-		test = extent.startTest("AR_Reports_04_ValidateLastArchivedReport", "Validate last generated report from Archived tab");
+	public void AR_Reports_02_ValidateLastArchivedReport() {
+		test = extent.startTest("AR_Reports_02_ValidateLastArchivedReport", "Validate last generated report from Archived tab");
 		test.assignCategory("Reports/Archived");
-		Log.startTestCase("AR_Reports_04_ValidateLastArchivedReport");
+		Log.startTestCase("AR_Reports_02_ValidateLastArchivedReport");
 		List<String> headers = new ArrayList<String>(Arrays.asList("Parameter","Value"));
 		TopXReports topXReports = new TopXReports(driver);
 		ArchivedReports archivedReports = new ArchivedReports(driver);
@@ -38,7 +38,8 @@ public class TA_02 extends BaseClass
 		archivedReports.selectViewReport();
 		LOGGER.info("Last Archived Report Selected");
 		Assert.assertTrue(archivedReports.returnLatestReportStatus().equals("LATEST SUCCESSFUL TOP X REPORT"), "Latest successful report not shown");
-		List<String> values = new ArrayList<String>(Arrays.asList(top,"All Clusters","Name"));
+		List<String> values = new ArrayList<String>(Arrays.asList(top,"All Clusters","1. Name",
+				"1. ML Team"));
 
 		topXReports.validateInputParameters(headers, values);
 		LOGGER.info("Correct Input Parameters are displayed");

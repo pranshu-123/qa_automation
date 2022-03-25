@@ -41,6 +41,9 @@ public class ReportsArchivedPageObject {
 	@FindBy(xpath = "//span[@class='pointer icon-delete is-enabled undefined']")
 	public List<WebElement> deleteList;
 	
+	@FindBy(xpath = "//span[@class='pointer icon-copy undefined']")
+	public List<WebElement> copyUrlList;
+	
 	@FindBy(xpath = "//span[contains(text(),'Yes')]")
 	public WebElement deleteYes;
 	

@@ -30,7 +30,7 @@ public class TR_06 extends BaseClass
 		topXReports.selectRun();
 		String top = topXReports.createNewReportForUser("4", "root");
 		LOGGER.info("Top X Report created successfully");
-		List<String> values = new ArrayList<String>(Arrays.asList(top,"All Clusters","root"));
+		List<String> values = new ArrayList<String>(Arrays.asList(top,"All Clusters","Date Range","Top X"));
 		
 		topXReports.validateInputParameters(headers, values);
 		LOGGER.info("Correct Input Parameters are displayed");

@@ -1,13 +1,10 @@
 package com.qa.testcases.databricks.cost.trends;
 
 import java.util.logging.Logger;
-
 import org.testng.annotations.Test;
-
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.scripts.DatePicker;
-import com.qa.scripts.clusters.Jobs;
 import com.qa.scripts.databricks.cost.ChargeBackCluster;
 import com.qa.scripts.databricks.cost.CostTrends;
 import com.qa.utils.Log;
@@ -27,12 +24,11 @@ public class CT_11 extends BaseClass{
 		WaitExecuter waitExecuter = new WaitExecuter(driver);  
 		DatePicker datePicker = new DatePicker(driver);
 		CostTrends costTrends = new CostTrends(driver);
-		Jobs jobs = new Jobs(driver);
 		chargeBackCluster.navigateToCostTab("Trends");
 		waitExecuter.sleep(2000);
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
-		jobs.selectGroupByFilterValue("Tag Key");
+		costTrends.filterBy("Tags");
 		costTrends.validateGraphFooter("Tags");
 		costTrends.validateGeneratedGraph();
 		test.log(LogStatus.PASS, "Job Run graph generated succesfully.");

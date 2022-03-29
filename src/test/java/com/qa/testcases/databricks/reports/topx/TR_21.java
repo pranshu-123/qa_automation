@@ -12,31 +12,28 @@ import com.qa.utils.Log;
 import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.DbxReportsTopX
-public class TR_08 extends BaseClass
+public class TR_21 extends BaseClass
 
 {
-	private static final Logger LOGGER = Logger.getLogger(TR_08.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(TR_21.class.getName());
 	@Test
-	public void TopX_Reports_08_GenerateNewReportForAWorkspace() {
-		test = extent.startTest("TopX_Reports_08_GenerateNewReportForAWorkspace", "Create new report for any workspace");
+	public void TopX_Reports_21_ValidateInputParams() {
+		test = extent.startTest("TopX_Reports_21_ValidateInputParams", "Validate added Input Parameters for report creation");
 		test.assignCategory("Reports/TopX");
-		Log.startTestCase("TopX_Reports_08_GenerateNewReportForAWorkspace");
-		List<String> headers = new ArrayList<String>(Arrays.asList("Parameter","Value"));
-		String workspaceName ="AI-Workspace";
+		Log.startTestCase("TopX_Reports_21_ValidateInputParams");
 		TopXReports topXReports = new TopXReports(driver);
+		List<String> headers = new ArrayList<String>(Arrays.asList("Parameter","Value"));
 		topXReports.navigateToDifferentReportsTab("TopX");
 		LOGGER.info("Navigated to Reports tab");
 		topXReports.selectRun();
-		String top = topXReports.createNewReportForWorkspace("8", workspaceName);
+		String top = topXReports.createNewReportWithDefaultValues("1");
 		LOGGER.info("Top X Report created successfully");
-		List<String> values = new ArrayList<String>(Arrays.asList(top,"Date Range","Top X","All Clusters"));
+		List<String> values = new ArrayList<String>(Arrays.asList(top,"All Clusters"));
 		
 		topXReports.validateInputParameters(headers, values);
 		LOGGER.info("Correct Input Parameters are displayed");
 		test.log(LogStatus.PASS, "Top X Report created successfully");
 	}
+	
 
 }
-
-
-

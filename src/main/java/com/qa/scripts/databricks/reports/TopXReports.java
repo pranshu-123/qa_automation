@@ -6,7 +6,10 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -93,6 +96,7 @@ public class TopXReports {
 		reportsTopXPageObject.newReportRunBtn.click();
 		waitExecuter.sleep(10000);
 		waitExecuter.waitUntilElementPresent(reportsTopXPageObject.reportGenerationMsg);
+		waitExecuter.waitUntilElementClickable(reportsTopXPageObject.topXRunBtn);
 		return top;
 	}
 
@@ -125,7 +129,7 @@ public class TopXReports {
 		reportsTopXPageObject.cluster.click();
 		waitExecuter.sleep(1000);
 		reportsTopXPageObject.clusterTextArea.sendKeys(value,Keys.ENTER);
-		waitExecuter.sleep(2000);
+		waitExecuter.sleep(3000);
 		reportsTopXPageObject.clusterTextArea.sendKeys(Keys.ENTER);
 		reportsTopXPageObject.newReportRunBtn.click();
 		waitExecuter.sleep(12000);
@@ -160,7 +164,9 @@ public class TopXReports {
 	}
 
 	public void validateInputParameters(List<String> paramHeader,List<String> paramValue) {
-		waitExecuter.sleep(4000);
+		waitExecuter.sleep(6000);
+		waitExecuter.waitUntilElementPresent(reportsTopXPageObject.reportGenerationMsg);
+		waitExecuter.waitUntilElementClickable(reportsTopXPageObject.topXRunBtn);
 		List<String> headers = reportsTopXPageObject.inputParameterHeaders.stream()
 				.map(el -> el.getText()).collect(Collectors.toList());
 
@@ -202,6 +208,27 @@ public class TopXReports {
 		return url;
 	}
 
+	public void validateSortingByAppCount() {
+		Set<String> initialSet = new HashSet<String>();
+		Set<String> resultantSet = new HashSet<String>();
+		TreeSet<String> sort = null;
+
+		JavaScriptExecuter.scrollOnElement(driver, reportsTopXPageObject.sortIcon);
+		//Fetching data before applying sorting
+		for(int i =1; i< reportsTopXPageObject.appCount.size();i=i+2) {
+			initialSet.add(reportsTopXPageObject.appCount.get(i).getText());
+		}
+		reportsTopXPageObject.sortIcon.click();
+
+		//Fetching data after applying sorting
+
+		for(int i =1; i< reportsTopXPageObject.appCount.size();i=i+2) {
+			resultantSet.add(reportsTopXPageObject.appCount.get(i).getText());
+		}
+		sort = new TreeSet<String>(initialSet);
+		Assert.assertEquals(resultantSet, sort);
+	}
+	
 	public ArrayList<String> createNewReportWithInvalidTopXCount(String value) {
 		reportsTopXPageObject.topxTextArea.sendKeys(value);
 		reportsTopXPageObject.newReportRunBtn.click();
@@ -223,8 +250,8 @@ public class TopXReports {
 		driver.findElement(By.xpath(String.format(reportsTopXPageObject.applicationStatusStates, tabName))).click();
 		LOGGER.info(tabName+ " selected"); 
 	}
-	
-	
+
+
 	public void validateApplicationHeaders(String[] paramHeaders) {
 		List<String> headers = reportsTopXPageObject.applicationHeaders.stream()
 				.map(el -> el.getText()).collect(Collectors.toList());
@@ -239,9 +266,9 @@ public class TopXReports {
 				.map(el -> el.getText()).collect(Collectors.toList());
 		Assert.assertTrue(values.size()>0);
 	}
-	
+
 	public ArrayList<String> calculateAppCount() {
-		
+
 		double floorSum =0.00;
 		double ceilSum =0.00;
 		int size = reportsTopXPageObject.appCount.size();
@@ -261,8 +288,29 @@ public class TopXReports {
 		list.add(ceilValue + "K");
 		return list;
 	}
-	
+
 	public String returnAppCount() {
 		return reportsTopXPageObject.totalAppCount.getText();
+	}
+
+	public void validateSortingByWorkspace() {
+		Set<String> initialSet = new HashSet<String>();
+		Set<String> resultantSet = new HashSet<String>();
+		TreeSet<String> sort = null;
+
+		JavaScriptExecuter.scrollOnElement(driver, reportsTopXPageObject.sortIcon);
+		//Fetching data before applying sorting
+		for(int i =0; i< reportsTopXPageObject.appCount.size();i=i+2) {
+			initialSet.add(reportsTopXPageObject.appCount.get(i).getText());
+		}
+		reportsTopXPageObject.sortIcon.click();
+
+		//Fetching data after applying sorting
+
+		for(int i =0; i< reportsTopXPageObject.appCount.size();i=i+2) {
+			resultantSet.add(reportsTopXPageObject.appCount.get(i).getText());
+		}
+		sort = new TreeSet<String>(initialSet);
+		Assert.assertEquals(resultantSet, sort);
 	}
 }

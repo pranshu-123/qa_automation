@@ -35,7 +35,7 @@ public class CT_07 extends BaseClass{
 		costTrends.filterBy("Workspace");
 		waitExecuter.sleep(2000);
 		costTrends.selectOptimize("dbu");
-		waitExecuter.sleep(2000);
+		waitExecuter.sleep(4000);
 		String url = driver.getCurrentUrl();
 		chargeBackCluster.validateDate();
 		Assert.assertTrue(url.contains("compute/dbclusters"));

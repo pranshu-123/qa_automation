@@ -78,6 +78,7 @@ public class CostTrends {
 		waitExecuter.waitUntilElementPresent(trendsPageObject.dbuGraphHeader);
 		waitExecuter.sleep(1500);
 		trendsPageObject.searchTextArea.sendKeys(value);
+		waitExecuter.sleep(1500);
 		trendsPageObject.searchResult.click();
 	}
 	

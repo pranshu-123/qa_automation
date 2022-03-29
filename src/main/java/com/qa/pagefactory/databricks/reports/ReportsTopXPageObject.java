@@ -83,6 +83,12 @@ public class ReportsTopXPageObject {
 	@FindBy(xpath = "//span[contains(text(),'Total Apps')]/../../following-sibling::div//h2")
 	public WebElement totalAppCount;
 	
+	@FindBy(xpath = "//span[contains(text(),'Name')]/..//a[@class='icon-sort']")
+	public WebElement sortIcon;
+	
+	@FindBy(xpath = "//span[contains(text(),'App Count')]/..//a[contains(@class,'icon-sort')]")
+	public WebElement sortAppCount;
+	
 	public String tagsType = "//label[contains(text(),'%s')]/preceding-sibling::input";
 	
 	public String tagsName = "//label[contains(text(),'%s')]/preceding-sibling::input/../../following-sibling::footer/ul//input";

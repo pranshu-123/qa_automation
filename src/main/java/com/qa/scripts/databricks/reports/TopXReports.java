@@ -94,9 +94,9 @@ public class TopXReports {
 	public String createNewReportWithDefaultValues(String top) {
 		reportsTopXPageObject.topxTextArea.sendKeys(top);
 		reportsTopXPageObject.newReportRunBtn.click();
-		waitExecuter.sleep(10000);
+		waitExecuter.sleep(12000);
 		waitExecuter.waitUntilElementPresent(reportsTopXPageObject.reportGenerationMsg);
-		waitExecuter.waitUntilElementClickable(reportsTopXPageObject.topXRunBtn);
+		waitExecuter.waitUntilElementPresent(reportsTopXPageObject.topXRunBtn);
 		return top;
 	}
 

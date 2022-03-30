@@ -93,6 +93,7 @@ public class ScheduledReports {
 	}
 
 	public List<String> scheduledTimeOptions(){
+		JavaScriptExecuter.scrollOnElement(driver,reportsScheduledPageObject.notificationTextBox);
 		Select select = new Select(reportsScheduledPageObject.scheduleTime);
 		return select.getOptions().stream()
 				.map(option -> option.getText()).collect(Collectors.toList());
@@ -116,7 +117,7 @@ public class ScheduledReports {
 	public void selectScheduledReport() {
 		driver.navigate().refresh();
 		waitExecuter.sleep(1000);
-		reportsScheduledPageObject.reportTableValues.get(0).click();
+		reportsScheduledPageObject.reportTableValues.get(1).click();
 	}
 
 	public void selectMoreInfo() {

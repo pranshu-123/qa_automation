@@ -228,7 +228,7 @@ public class TopXReports {
 		sort = new TreeSet<String>(initialSet);
 		Assert.assertEquals(resultantSet, sort);
 	}
-	
+
 	public ArrayList<String> createNewReportWithInvalidTopXCount(String value) {
 		reportsTopXPageObject.topxTextArea.sendKeys(value);
 		reportsTopXPageObject.newReportRunBtn.click();
@@ -268,24 +268,29 @@ public class TopXReports {
 	}
 
 	public ArrayList<String> calculateAppCount() {
-
 		double floorSum =0.00;
 		double ceilSum =0.00;
+		ArrayList<String> list = new ArrayList<String>();
 		int size = reportsTopXPageObject.appCount.size();
-		for(int i =1; i< size;i=i+2) {
+		for(int i = 1; i< size;i=i+2) {
 			floorSum = floorSum + Double.parseDouble(reportsTopXPageObject.appCount.get(i).getText());
 		}
+		if(floorSum<100) {
+			String value = String.valueOf(floorSum);
+			list.add(value.substring(0, value.indexOf('.')));
+		}
+		else {
+			ceilSum = floorSum;
+			floorSum = Math.floor(floorSum / 10);
+			String floorValue;
+			String ceilValue;
 
-		ceilSum = floorSum;
-		floorSum = Math.floor(floorSum / 100);
-		String floorValue;
-		String ceilValue;
-		ArrayList<String> list = new ArrayList<String>();
-		floorValue = String.valueOf(floorSum/10);
-		list.add(floorValue + "K");
-		ceilSum = Math.ceil(ceilSum / 100);
-		ceilValue = String.valueOf(ceilSum/10);
-		list.add(ceilValue + "K");
+			floorValue = String.valueOf(floorSum/10);
+			list.add(floorValue + "K");
+			ceilSum = Math.ceil(ceilSum / 100);
+			ceilValue = String.valueOf(ceilSum/10);
+			list.add(ceilValue + "K");
+		}
 		return list;
 	}
 

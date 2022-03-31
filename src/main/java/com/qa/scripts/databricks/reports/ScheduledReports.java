@@ -1,5 +1,6 @@
 package com.qa.scripts.databricks.reports;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -66,8 +67,11 @@ public class ScheduledReports {
 		return option;
 	}
 
-	public void addEmailNotification(String email) {
+	public void addEmailNotification(String email, Boolean addMultiple) {
 		reportsScheduledPageObject.notificationTextBox.sendKeys(email);
+		if(addMultiple) {
+			reportsScheduledPageObject.addMoreEmails.click();
+		}
 	}
 
 
@@ -80,15 +84,17 @@ public class ScheduledReports {
 				.map(el -> el.getText()).collect(Collectors.toList());
 
 		for(String header : tableHeaders) {
-			Assert.assertTrue(headers.contains(header),"Header not present");
+			Assert.assertTrue(headers.contains(header),header + " Header not present");
 		}
 
 		for(String value : tableValues) {
-			Assert.assertTrue(values.contains(value),"Value not present");
+			Assert.assertTrue(values.contains(value),value + " Value not present");
 		}
 	}
 
 	public List<String> scheduledTimeOptions(){
+		JavaScriptExecuter.scrollOnElement(driver,reportsScheduledPageObject.notificationTextBox);
+		waitExecuter.sleep(1000);
 		Select select = new Select(reportsScheduledPageObject.scheduleTime);
 		return select.getOptions().stream()
 				.map(option -> option.getText()).collect(Collectors.toList());
@@ -111,8 +117,9 @@ public class ScheduledReports {
 
 	public void selectScheduledReport() {
 		driver.navigate().refresh();
-		waitExecuter.sleep(1000);
-		reportsScheduledPageObject.reportTableValues.get(0).click();
+		waitExecuter.sleep(2000);
+		reportsScheduledPageObject.reportTableValues.get(1).click();
+		waitExecuter.sleep(2000);
 	}
 
 	public void selectMoreInfo() {
@@ -146,8 +153,11 @@ public class ScheduledReports {
 	}
 
 	public String editScheduledReport() {
-		String name = driver.getWindowHandle().substring(0, 10);
+		String name = driver.getWindowHandle().substring(0, 14);
+		waitExecuter.waitUntilElementClickable(	reportsScheduledPageObject.editScheduleReport);
 		reportsScheduledPageObject.editScheduleReport.click();
+		JavaScriptExecuter.scrollOnElement(driver,reportsScheduledPageObject.notificationTextBox);
+		JavaScriptExecuter.clearTextField(driver,reportsScheduledPageObject.scheduleName);
 		reportsScheduledPageObject.scheduleName.sendKeys(name);
 		return name;
 	}
@@ -239,4 +249,9 @@ public class ScheduledReports {
 		reportsScheduledPageObject.deleteScheduleReport.click();
 		reportsScheduledPageObject.deleteYes.click();
 	}
-}
+
+	public String fetchErrorMessage() {
+			return reportsScheduledPageObject.requiredFieldErrorMessage.getText();
+		}
+	}
+

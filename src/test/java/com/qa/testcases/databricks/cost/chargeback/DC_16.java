@@ -38,7 +38,7 @@ public class DC_16 extends BaseClass{
 		waitExecuter.sleep(2000);
 		LOGGER.info("URL copied");
 		driver.navigate().to(url);
-		waitExecuter.sleep(2000);
+		waitExecuter.sleep(4000);
 		LOGGER.info("Navigated to copied URL");
 		chargeBackCluster.validateDate();
 		Assert.assertTrue(url.contains("compute/dbclusters"));

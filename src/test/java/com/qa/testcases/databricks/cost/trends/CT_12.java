@@ -37,7 +37,7 @@ public class CT_12 extends BaseClass{
 		datePicker.selectLast30Days();
 		jobs.selectGroupByFilterValue("Tag Key");
 		costTrends.selectChargeback("cluster");
-		waitExecuter.sleep(2000);
+		waitExecuter.sleep(4000);
 		String url = driver.getCurrentUrl();
 		chargeBackCluster.validateDate();
 		Assert.assertTrue(url.contains("/cost/chargeback"));

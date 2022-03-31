@@ -35,7 +35,7 @@ public class DC_04 extends BaseClass{
 		datePicker.selectLast30Days();
 		jobs.selectGroupByFilterValue("User");
 		chargeBackCluster.selectOptimize();
-		waitExecuter.sleep(2000);
+		waitExecuter.sleep(4000);
 		String url = driver.getCurrentUrl();
 		LOGGER.info("New URL is fetched");
 		chargeBackCluster.validateDate();

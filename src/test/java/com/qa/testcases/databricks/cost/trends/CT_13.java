@@ -33,7 +33,7 @@ public class CT_13 extends BaseClass{
 		costTrends.filterBy("Tags");
 		waitExecuter.sleep(2000);
 		costTrends.selectOptimize("cost");
-		waitExecuter.sleep(2000);
+		waitExecuter.sleep(4000);
 		String url = driver.getCurrentUrl();
 		chargeBackCluster.validateDate();
 		Assert.assertTrue(url.contains("compute/dbclusters"));

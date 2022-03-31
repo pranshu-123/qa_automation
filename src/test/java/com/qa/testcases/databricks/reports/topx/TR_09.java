@@ -23,7 +23,7 @@ public class TR_09 extends BaseClass
 		Log.startTestCase("TopX_Reports_09_GenerateNewReportWithTags");
 		List<String> headers = new ArrayList<String>(Arrays.asList("Parameter","Value"));
 		String tagName ="Name";
-		String tagType ="ML team";
+		String tagType ="AI-Workspace";
 		TopXReports topXReports = new TopXReports(driver);
 		topXReports.navigateToDifferentReportsTab("TopX");
 		LOGGER.info("Navigated to Reports tab");
@@ -31,7 +31,7 @@ public class TR_09 extends BaseClass
 		String top = topXReports.createNewReportWithTags("3",tagName,tagType);
 		LOGGER.info("Top X Report created successfully");
 		List<String> values = new ArrayList<String>(Arrays.asList(top,"All Clusters","1. Name",
-				"1. ML Team"));
+				"1. AI-Workspace"));
 		
 		topXReports.validateInputParameters(headers, values);
 		LOGGER.info("Correct Input Parameters are displayed");

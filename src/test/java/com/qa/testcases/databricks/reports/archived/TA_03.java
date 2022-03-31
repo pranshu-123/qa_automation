@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.io.ConfigReader;
+import com.qa.scripts.databricks.reports.ArchivedReports;
 import com.qa.scripts.databricks.reports.TopXReports;
 import com.qa.utils.Log;
 import com.relevantcodes.extentreports.LogStatus;
@@ -24,6 +25,7 @@ public class TA_03 extends BaseClass
 		test.assignCategory("Reports/Archived");
 		Log.startTestCase("AR_Reports_03_ValidateCopyUrlFunctionality");
 		TopXReports topXReports = new TopXReports(driver);
+		ArchivedReports archivedReports = new ArchivedReports(driver);
 		topXReports.navigateToDifferentReportsTab("TopX");
 		Properties prop = ConfigReader.readBaseConfig();
 		String url = prop.getProperty("url");
@@ -33,7 +35,7 @@ public class TA_03 extends BaseClass
 		LOGGER.info("New Custom Report with tags created");
 		topXReports.navigateToDifferentReportsTab("Archived");
 		LOGGER.info("Navigated to Reports tab");
-		String copiedUrl = topXReports.copyUrlAndNavigate();
+		String copiedUrl = archivedReports.copyUrlAndNavigate();
 		Assert.assertTrue(copiedUrl.contains(url+"#/reports/topx?report_id="),"URL not copied or is incorrect");		
 		LOGGER.info("Url copied successfully and is navigable");
 		test.log(LogStatus.PASS, "Url copied successfully and is navigable");

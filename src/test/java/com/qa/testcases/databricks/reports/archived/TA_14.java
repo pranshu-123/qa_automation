@@ -35,7 +35,7 @@ public class TA_14 extends BaseClass
 		archivedReports.selectReportList();
 		LOGGER.info("Report list selected.");
 		String copiedUrl = archivedReports.copyUrlAndNavigate();
-		waitExecuter.sleep(2000);
+		waitExecuter.sleep(4000);
 		Assert.assertTrue(copiedUrl.contains(url+"#/reports/topx?report_id="),"URL not copied or is incorrect");		
 		LOGGER.info("Url copied successfully and is navigable");
 		test.log(LogStatus.PASS, "Url copied successfully and is navigable");

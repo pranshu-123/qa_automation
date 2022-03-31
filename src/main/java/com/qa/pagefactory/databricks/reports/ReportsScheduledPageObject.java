@@ -36,10 +36,10 @@ public class ReportsScheduledPageObject {
 	@FindBy(xpath = "//ul[contains(@id,'results')]/li")
 	public List<WebElement> reportFilterValues;
 	
-	@FindBy(xpath = "//div[@id='custom-tbl']//thead/tr/th/span")
+	@FindBy(xpath = "//div[contains(@class,'custom-table')]//thead/tr/th/span")
 	public List<WebElement> reportTableHeader;
 	
-	@FindBy(xpath = "//div[@id='custom-tbl']//tbody/tr/td/span")
+	@FindBy(xpath = "//div[contains(@class,'custom-table')]//tbody/tr/td/span")
 	public List<WebElement> reportTableValues;
 	
 	@FindBy(xpath = "(//span[@class='pointer icon-edit is-enabled undefined'])[1]")
@@ -86,6 +86,9 @@ public class ReportsScheduledPageObject {
 	
 	@FindBy(xpath = "//span[contains(text(),'TopX')]")
 	public List<WebElement> scheduledTopXReportNextRunList;
+	
+	@FindBy(xpath = "//div[contains(text(),'Schedule Name is required')]")
+	public WebElement requiredFieldErrorMessage;
 	
 	/**
 	 * @param driver The driver that will be used to look up the elements

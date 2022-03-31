@@ -64,6 +64,7 @@ public class ArchivedReports {
 	}
 
 	public void selectReportList() {
+		waitExecuter.sleep(2000);
 		reportsArchivedPageObject.success.click();
 	}
 

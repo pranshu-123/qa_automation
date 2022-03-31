@@ -36,7 +36,7 @@ public class CT_09 extends BaseClass{
 		costTrends.filterBy("Cluster");
 		waitExecuter.sleep(2000);
 		costTrends.selectChargeback("cluster");
-		waitExecuter.sleep(2000);
+		waitExecuter.sleep(4000);
 		String url = driver.getCurrentUrl();
 		chargeBackCluster.validateDate();
 		Assert.assertTrue(url.contains("/cost/chargeback"));

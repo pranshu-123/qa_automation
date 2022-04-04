@@ -16,6 +16,12 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//span[text()='Jobs']")
     public WebElement jobsTabs;
 
+    @FindBy(xpath = "(//a[@class='menu'])[2]")
+    public WebElement gear;
+
+    @FindBy(xpath = "//span[normalize-space()='Daemons']")
+    public WebElement daemeons;
+
     @FindBy(xpath = "//*[@id='RunsListAll-body']/tr/td[1]")
     public WebElement Status;
 

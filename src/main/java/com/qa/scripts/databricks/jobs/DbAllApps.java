@@ -178,6 +178,7 @@ public class DbAllApps {
     }
 
     public void navigateToJobsTab(String tab) {
+        waitExecuter.waitUntilElementPresent(dbSubTopPanelModulePageObject.jobs);
         userAction.performActionWithPolling(dbSubTopPanelModulePageObject.jobs, UserAction.CLICK);
         waitExecuter.sleep(4000);
         try {

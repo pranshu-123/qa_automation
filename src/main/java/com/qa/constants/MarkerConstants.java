@@ -61,7 +61,7 @@ public class MarkerConstants {
     public static final String DBX_REPORTS_SCHEDULED = "dbx_reports_scheduled";
     public static final String DBX_COST_CHARGEBACK = "dbx_cost_chargeback";
     public static final String DBX_APP_DETAILS = "dbx_app_details";
-    public static final String DB_JOBS_RUNS = "dbx_jobs_runs";
+    public static final String DBX_MANAGE = "dbx_manage";
     // DBX Markers
     public static final String DBX_DATA = "dbx_data";
     public static final Map<String, Class<? extends Annotation>> MARKER_MAPPING = initMap();
@@ -115,16 +115,16 @@ public class MarkerConstants {
         map.put(JOBS_WORKFLOW, Marker.JobsWorkflow.class);
         map.put(IMPALA_INSIGHTS, Marker.ImpalaInsights.class);
         map.put(DBX_COST_CHARGEBACK, Marker.DbxCostChargeback.class);
-        map.put(DBX_COST_TRENDS, Marker.DbxCostTrends.class);
-        map.put(DB_JOBS_RUNS, Marker.DbJobsRuns.class);
         map.put(DBX_REPORTS_TOPX, Marker.DbxReportsTopX.class);
         map.put(DBX_REPORTS_ARCHIVED, Marker.DbxReportsArchived.class);
         map.put(DBX_REPORTS_SCHEDULED, Marker.DbxReportsScheduled.class);
+        map.put(DBX_COST_TRENDS, Marker.DbxCostTrends.class);
         map.put(DBX_COST_BUDGET, Marker.DbxCostBudget.class);
         map.put(DBX_RUNS, Marker.DbxRuns.class);
         map.put(DBX_JOBS, Marker.DbxJobs.class);
         map.put(DBX_APP_DETAILS, Marker.DbxAppDetails.class);
         map.put(DBX_DATA, Marker.DBX.Data.class);
+        map.put(DBX_MANAGE, Marker.DbxManage.class);
         return Collections.unmodifiableMap(map);
     }
 }

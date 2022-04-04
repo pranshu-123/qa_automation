@@ -4,11 +4,8 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.databricks.DbxSubTopPanelModulePageObject;
-import com.qa.pagefactory.databricks.jobs.DbxRunsPageObject;
-import com.qa.scripts.DatePicker;
 import com.qa.scripts.databricks.jobs.DbAllApps;
 import com.qa.utils.LoggingUtils;
-import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.LogStatus;
@@ -21,14 +18,14 @@ import org.testng.annotations.Test;
 import java.util.List;
 @Marker.DbxRuns
 @Marker.All
-public class TC_DR_45 extends BaseClass {
-    private final LoggingUtils loggingUtils = new LoggingUtils(TC_DR_45.class);
+public class TC_DR_63 extends BaseClass {
+    private final LoggingUtils loggingUtils = new LoggingUtils(TC_DR_63.class);
 
     @Test()
-    public void VerifyWorkspaceFilterSearchInFinishedTab() {
-        test = extent.startTest("TC_DR_45.VerifyWorkspaceFilterSearchInFinishedTab",
+    public void VerifyWorkspaceFilterSearchInRunningTab() {
+        test = extent.startTest("TC_DR_63.VerifyWorkspaceFilterSearchInRunningTab",
                 "Selection of reset option should reset all the filters which are applied");
-        test.assignCategory("Jobs-Runs/Finished");
+        test.assignCategory("Jobs-Runs/Running");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -41,7 +38,7 @@ public class TC_DR_45 extends BaseClass {
         // Navigate to Runs tab from header
         test.log(LogStatus.INFO, "Navigate to Runs tab from header");
         dballApps.navigateToJobsTab("Runs");
-        dballApps.selectTab("Finished");
+        dballApps.selectTab("Running");
         waitExecuter.waitUntilPageFullyLoaded();
         try {
             // Navigate to Runs tab from header
@@ -88,3 +85,4 @@ public class TC_DR_45 extends BaseClass {
         }
     }
 }
+

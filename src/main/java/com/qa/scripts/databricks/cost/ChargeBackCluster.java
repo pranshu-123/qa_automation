@@ -183,44 +183,51 @@ public class ChargeBackCluster {
 		driver.findElement(By.xpath(String.format(chargebackClusterPageObject.filterByValues,filter))).click();
 	}
 
-	public void filterTags(String tagKey) {
+	public void filterTags() {
 		chargebackClusterPageObject.tagKeyDropdown.click();
-		chargebackClusterPageObject.tagKeySearchField.sendKeys(tagKey);
-		chargebackClusterPageObject.tagKeySearchField.sendKeys(Keys.ENTER);
+		chargebackClusterPageObject.tagKeySearchField.click();
+		chargebackClusterPageObject.keyTeam.click();
 	}
 
-	public void filterByTagKey(String tagKey) {	
+	public void filterByTagKey() {	
 		driver.manage().timeouts().pageLoadTimeout(4, TimeUnit.SECONDS);
 		waitExecuter.sleep(2500);
 		try {
-			filterTags(tagKey);
+			filterTags();
 		}
 		catch(StaleElementReferenceException e) {
 			e.printStackTrace();
 			driver.navigate().refresh();
-			filterTags(tagKey);
+			filterTags();
 		}
 
-		LOGGER.info("Specified Tag Key selected: "+tagKey);
+		LOGGER.info("Specified Tag Key selected: ");
 	}	
 
 	public List<String> calculateClusterSumFromResultSet() {
 		double floorSum =0.00;
 		double ceilSum =0.00;
 		int size = chargebackClusterPageObject.resultSetValues.size();
+		ArrayList<String> list = new ArrayList<String>();
 		for(int i =5; i< size;i=i+7) {
 			floorSum = floorSum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText());
 		}
-		ceilSum = floorSum;
-		floorSum = Math.floor(floorSum / 1000) * 1000;
-		String floorValue;
-		String ceilValue;
-		ArrayList<String> list = new ArrayList<String>();
-		floorValue = String.valueOf(floorSum);
-		list.add(floorValue.charAt(0) + "k");
-		ceilSum = Math.ceil(ceilSum / 1000) * 1000;
-		ceilValue = String.valueOf(ceilSum);
-		list.add(ceilValue.charAt(0) + "k");
+		if(floorSum<1000) {
+			String value = String.valueOf(floorSum);
+			list.add(value.substring(0, value.indexOf('.')));
+		}
+		else {
+			ceilSum = floorSum;
+			floorSum = Math.floor(floorSum / 1000) * 1000;
+			String floorValue;
+			String ceilValue;
+
+			floorValue = String.valueOf(floorSum);
+			list.add(floorValue.charAt(0) + "k");
+			ceilSum = Math.ceil(ceilSum / 1000) * 1000;
+			ceilValue = String.valueOf(ceilSum);
+			list.add(ceilValue.charAt(0) + "k");
+		}
 		return list;
 	}
 

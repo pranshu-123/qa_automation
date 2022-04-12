@@ -30,8 +30,8 @@ public class TR_09 extends BaseClass
 		topXReports.selectRun();
 		String top = topXReports.createNewReportWithTags("3",tagName,tagType);
 		LOGGER.info("Top X Report created successfully");
-		List<String> values = new ArrayList<String>(Arrays.asList(top,"All Clusters","1. Name",
-				"1. AI-Workspace"));
+		List<String> values = new ArrayList<String>(Arrays.asList(top,"All Clusters","Name",
+				"AI-Workspace"));
 		
 		topXReports.validateInputParameters(headers, values);
 		LOGGER.info("Correct Input Parameters are displayed");

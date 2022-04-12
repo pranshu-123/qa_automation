@@ -155,7 +155,7 @@ public class ArchivedReports {
 
 	public String copyUrlAndNavigate() {
 		reportsArchivedPageObject.copyUrlList.get(0).click();
-
+		waitExecuter.sleep(3000);
 		//get copied string from clipboard
 		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 		String url = null;

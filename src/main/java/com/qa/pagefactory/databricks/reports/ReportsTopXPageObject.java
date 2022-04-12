@@ -32,6 +32,9 @@ public class ReportsTopXPageObject {
 	@FindBy(xpath = "//th[contains(text(),'Parameter')]/../../../tbody//tr/td")
 	public List<WebElement> inputParameterValues;
 
+	@FindBy(xpath = "//th[contains(text(),'Parameter')]/../../../tbody//tr/td//span")
+	public List<WebElement> inputParameterTagsValues;
+	
 	@FindBy(xpath = "//label[contains(text(),'Top X')]/following-sibling::input")
 	public WebElement topxTextArea;
 
@@ -88,6 +91,18 @@ public class ReportsTopXPageObject {
 	
 	@FindBy(xpath = "//span[contains(text(),'App Count')]/..//a[contains(@class,'icon-sort')]")
 	public WebElement sortAppCount;
+	
+	@FindBy(xpath = "//td[@class='key border-success']/..")
+	public WebElement  successfulJobRunRow;
+	
+	@FindBy(xpath = "//td[@class='key border-success']/../td/span")
+	public List<WebElement>  successfulJobRunData;
+	
+	@FindBy(xpath = "//td[@class='key border-running']/../td/span")
+	public List<WebElement>  runningJobRunData;
+	
+	@FindBy(xpath = "//a[@class='icon-gear']/../..//th/span")
+	public List<WebElement>  successfulJobRunHeaders;
 	
 	public String tagsType = "//label[contains(text(),'%s')]/preceding-sibling::input";
 	

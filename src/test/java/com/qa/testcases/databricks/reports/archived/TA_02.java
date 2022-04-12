@@ -31,15 +31,14 @@ public class TA_02 extends BaseClass
 		topXReports.navigateToDifferentReportsTab("TopX");
 		LOGGER.info("Navigated to Reports tab");
 		topXReports.selectRun();
-		String top = topXReports.createNewReportWithTags("3","Name","ML team");
+		String top = topXReports.createNewReportWithDefaultValues("5");
 		LOGGER.info("New Custom Report with tags created");
 		topXReports.navigateToDifferentReportsTab("Archived");
 		LOGGER.info("Navigated to Reports tab");
 		archivedReports.selectViewReport();
 		LOGGER.info("Last Archived Report Selected");
 		Assert.assertTrue(archivedReports.returnLatestReportStatus().equals("LATEST SUCCESSFUL TOP X REPORT"), "Latest successful report not shown");
-		List<String> values = new ArrayList<String>(Arrays.asList(top,"All Clusters","1. Name",
-				"1. ML Team"));
+		List<String> values = new ArrayList<String>(Arrays.asList(top,"All Clusters","Date Range","Top X"));
 
 		topXReports.validateInputParameters(headers, values);
 		LOGGER.info("Correct Input Parameters are displayed");

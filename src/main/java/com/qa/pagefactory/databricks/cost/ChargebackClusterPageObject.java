@@ -92,11 +92,14 @@ public class ChargebackClusterPageObject {
     @FindBy(xpath = "(//span[@class='select2-selection__rendered'])[2]")
     public WebElement filterByDropDown;
     
-    @FindBy(xpath = "//label[contains(text(),'Tag Key')]/..//span[@title='Name']")
+    @FindBy(xpath = "//label[contains(text(),'Tag Key')]/..//span[contains(@class,'select2-selection__rendered')]")
     public WebElement tagKeyDropdown;
     
     @FindBy(xpath = "//span/input[@class='select2-search__field']")
     public WebElement tagKeySearchField;
+    
+    @FindBy(xpath = "//li[contains(text(),'Team')]")
+    public WebElement keyTeam;
     
     @FindBy(xpath = "//a[@class='icon-sort icon-sort-sorted-up']")
     public WebElement sortUp;

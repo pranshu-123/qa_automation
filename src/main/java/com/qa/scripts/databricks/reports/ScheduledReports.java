@@ -117,7 +117,7 @@ public class ScheduledReports {
 
 	public void selectScheduledReport() {
 		driver.navigate().refresh();
-		waitExecuter.sleep(2000);
+		waitExecuter.sleep(3000);
 		reportsScheduledPageObject.reportTableValues.get(1).click();
 		waitExecuter.sleep(2000);
 	}

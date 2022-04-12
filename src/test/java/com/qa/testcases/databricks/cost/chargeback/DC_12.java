@@ -34,7 +34,7 @@ public class DC_12 extends BaseClass{
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
 		jobs.selectGroupByFilterValue("Tag Key");
-		chargeBackCluster.filterByTagKey("Environment");
+		chargeBackCluster.filterByTagKey();
 		chargeBackCluster.validatePieChartGraph(expectedGraphValues);
 		chargeBackCluster.validateGeneratedPieChartValues();
 		test.log(LogStatus.PASS, "Graph populated as  per Group By filter");

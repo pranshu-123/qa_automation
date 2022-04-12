@@ -7,12 +7,15 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-
+import java.util.stream.IntStream;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
@@ -21,11 +24,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
-
 import com.qa.pagefactory.databricks.cost.ChargebackClusterPageObject;
 import com.qa.pagefactory.databricks.reports.ReportsTopXPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.utils.JavaScriptExecuter;
+import com.qa.utils.TestUtils;
 import com.qa.utils.WaitExecuter;
 
 public class TopXReports {
@@ -53,8 +56,7 @@ public class TopXReports {
 		waitExecuter.sleep(2000);
 		waitExecuter.waitUntilPageFullyLoaded();
 		reportsTopXPageObject.reports.click();
-		waitExecuter.sleep(2000);
-		waitExecuter.waitUntilPageFullyLoaded();
+		waitExecuter.sleep(1000);
 		waitExecuter.waitUntilElementClickable(reportsTopXPageObject.archivedTab);
 		try {
 			if(tab.equalsIgnoreCase("topx")) {
@@ -71,6 +73,7 @@ public class TopXReports {
 			e.printStackTrace();
 		}
 		LOGGER.info(tab.toUpperCase() + " has been selected");
+		waitExecuter.sleep(1000);
 	}
 
 	public void validateReportsTab() {
@@ -128,7 +131,7 @@ public class TopXReports {
 		waitExecuter.sleep(2000);
 		reportsTopXPageObject.cluster.click();
 		waitExecuter.sleep(1000);
-		reportsTopXPageObject.clusterTextArea.sendKeys(value,Keys.ENTER);
+		reportsTopXPageObject.clusterTextArea.sendKeys(value);
 		waitExecuter.sleep(3000);
 		reportsTopXPageObject.clusterTextArea.sendKeys(Keys.ENTER);
 		reportsTopXPageObject.newReportRunBtn.click();
@@ -159,20 +162,25 @@ public class TopXReports {
 		reportsTopXPageObject.newReportRunBtn.click();
 		waitExecuter.sleep(12000);
 		waitExecuter.waitUntilElementPresent(reportsTopXPageObject.reportGenerationMsg);
-		driver.navigate().refresh();
+		//driver.navigate().refresh();
 		return top;
 	}
 
 	public void validateInputParameters(List<String> paramHeader,List<String> paramValue) {
-		waitExecuter.sleep(6000);
-		waitExecuter.waitUntilElementPresent(reportsTopXPageObject.reportGenerationMsg);
-		waitExecuter.waitUntilElementClickable(reportsTopXPageObject.topXRunBtn);
+		waitExecuter.sleep(8000);
 		List<String> headers = reportsTopXPageObject.inputParameterHeaders.stream()
 				.map(el -> el.getText()).collect(Collectors.toList());
 
 		List<String> values = reportsTopXPageObject.inputParameterValues.stream()
 				.map(el -> el.getText()).collect(Collectors.toList());
 
+		if(reportsTopXPageObject.inputParameterTagsValues.size()>0) {
+			int size = reportsTopXPageObject.inputParameterTagsValues.size();
+			while(size!=0) {
+				values.add(reportsTopXPageObject.inputParameterTagsValues.get(size-1).getText());
+				size--;
+			}
+		}
 		for(String header : paramHeader) {
 			Assert.assertTrue(headers.contains(header),header + " header not present");
 		}
@@ -247,6 +255,7 @@ public class TopXReports {
 	}
 
 	public void navigateToApplicationFilterTabs(String tabName) {
+		waitExecuter.sleep(4000);
 		driver.findElement(By.xpath(String.format(reportsTopXPageObject.applicationStatusStates, tabName))).click();
 		LOGGER.info(tabName+ " selected"); 
 	}
@@ -275,7 +284,7 @@ public class TopXReports {
 		for(int i = 1; i< size;i=i+2) {
 			floorSum = floorSum + Double.parseDouble(reportsTopXPageObject.appCount.get(i).getText());
 		}
-		if(floorSum<100) {
+		if(floorSum<1000) {
 			String value = String.valueOf(floorSum);
 			list.add(value.substring(0, value.indexOf('.')));
 		}
@@ -317,5 +326,38 @@ public class TopXReports {
 		}
 		sort = new TreeSet<String>(initialSet);
 		Assert.assertEquals(resultantSet, sort);
+	}
+
+	public LinkedHashMap<String, String> populateSparkDetailValues() {
+		LinkedHashMap<String, String> resultTable = new LinkedHashMap<String, String>();
+
+		List<String> values;
+		List<String> headers = reportsTopXPageObject.successfulJobRunHeaders.stream()
+				.map(el -> el.getText()).collect(Collectors.toList());
+
+		if(TestUtils.isElementDisplayed(reportsTopXPageObject.successfulJobRunRow)) {
+			values = reportsTopXPageObject.successfulJobRunData.stream()
+					.map(el -> el.getText()).collect(Collectors.toList());
+		}
+		else {
+			values = reportsTopXPageObject.runningJobRunData.stream()
+					.map(el -> el.getText()).collect(Collectors.toList());
+		}
+		Iterator<String> i1 = headers.iterator();
+		Iterator<String> i2 = values.iterator();
+		while (i1.hasNext() || i2.hasNext()) {
+			resultTable.put(i1.next(), i2.next());
+		}
+		return resultTable;
+	}
+
+	public void openSparkDetailsPage() {
+		if(TestUtils.isElementDisplayed(reportsTopXPageObject.successfulJobRunRow)) {
+			reportsTopXPageObject.successfulJobRunData.get(0).click();
+		}
+		else {
+			reportsTopXPageObject.runningJobRunData.get(0).click();
+		}
+
 	}
 }

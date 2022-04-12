@@ -32,7 +32,7 @@ public class DC_15 extends BaseClass{
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
 		jobs.selectGroupByFilterValue("Tag Key");
-		chargeBackCluster.filterByTagKey("Environment");
+		chargeBackCluster.filterByTagKey();
 		chargeBackCluster.selectOptimize();
 		waitExecuter.sleep(2000);
 		String url = driver.getCurrentUrl();

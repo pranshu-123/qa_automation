@@ -35,7 +35,7 @@ public class CT_15 extends BaseClass{
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
 		costTrends.filterBy("Users");
-		costTrends.filterSingleValue("root");
+		costTrends.filterBy("Tags");
 		costTrends.selectChargeback("Cost");
 		waitExecuter.sleep(2000);
 		String url = driver.getCurrentUrl();

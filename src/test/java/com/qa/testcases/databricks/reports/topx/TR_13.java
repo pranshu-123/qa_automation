@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.scripts.DatePicker;
 import com.qa.scripts.databricks.reports.TopXReports;
 import com.qa.utils.Log;
 import com.relevantcodes.extentreports.LogStatus;
@@ -16,15 +17,21 @@ public class TR_13 extends BaseClass
 {
 	private static final Logger LOGGER = Logger.getLogger(TR_13.class.getName());
 	@Test
-	public void TopX_Reports_13_ValidateLongestDurationTableSet() {
-		test = extent.startTest("TopX_Reports_13_ValidateLongestDurationTableSet", "Validate Highest Disk I/O table result set");
+	public void TopX_Reports_13_ValidateHighestDiskIOTableSet() {
+		test = extent.startTest("TopX_Reports_13_ValidateHighestDiskIOTableSet", "Validate Highest Disk I/O table result set");
 		test.assignCategory("Reports/TopX");
-		Log.startTestCase("TopX_Reports_13_ValidateLongestDurationTableSet");
+		Log.startTestCase("TopX_Reports_13_ValidateHighestDiskIOTableSet");
 		TopXReports topXReports = new TopXReports(driver);
+		DatePicker date = new DatePicker(driver);
 		topXReports.navigateToDifferentReportsTab("TopX");
 		LOGGER.info("Navigated to Reports tab");
+		topXReports.selectRun();
+		date.clickOnDatePicker();
+		date.selectLast90Days();
+		topXReports.createNewReportWithDefaultValues("1");
+		LOGGER.info("Top X Report created successfully");
 		topXReports.navigateToApplicationFilterTabs("Highest Disk I/O");
-		String[] headers = {"User","Real User","Id","Reports Top X Disk Io","CPU","Memory","# Events","# Spark Stages",
+		String[] headers = {"User","Real User","Id","Disk I O","CPU","Memory","# Events","# Spark Stages",
 				"# Spark Tasks","Cluster"};
 		topXReports.validateApplicationHeaders(headers);
 		topXReports.validateApplicationDataSetCount();

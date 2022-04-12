@@ -74,12 +74,12 @@ public class CostTrends {
 		}
 	}
 
-	public void filterSingleValue(String value) {
+	public String filterSingleValue(String value) {
 		waitExecuter.waitUntilElementPresent(trendsPageObject.dbuGraphHeader);
 		waitExecuter.sleep(1500);
-		trendsPageObject.searchTextArea.sendKeys(value);
+		trendsPageObject.searchTextArea.click();
 		waitExecuter.sleep(1500);
-		trendsPageObject.searchResult.click();
+		return trendsPageObject.searchResult.getText();
 	}
 	
 	public void filterBy(String filter) {

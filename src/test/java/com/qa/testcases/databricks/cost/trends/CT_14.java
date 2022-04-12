@@ -33,7 +33,7 @@ public class CT_14 extends BaseClass{
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
 		costTrends.filterBy("Users");
-		costTrends.filterSingleValue("root");
+		String user = costTrends.filterSingleValue("root");
 		costTrends.validateGraphFooter("root");
 		costTrends.validateGeneratedGraph();
 		test.log(LogStatus.PASS, "Job Run graph generated succesfully.");

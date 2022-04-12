@@ -35,7 +35,7 @@ public class CT_12 extends BaseClass{
 		waitExecuter.sleep(2000);	
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast30Days();
-		jobs.selectGroupByFilterValue("Tag Key");
+		costTrends.filterBy("Tags");
 		costTrends.selectChargeback("cluster");
 		waitExecuter.sleep(4000);
 		String url = driver.getCurrentUrl();

@@ -1,8 +1,5 @@
 package com.qa.testcases.databricks.reports.scheduled;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.logging.Logger;
 
 import org.testng.annotations.Test;

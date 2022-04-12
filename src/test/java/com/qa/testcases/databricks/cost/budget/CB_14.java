@@ -27,7 +27,7 @@ public class CB_14  extends BaseClass{
 		chargeBackCluster.navigateToCostTab("Budget");
 		LOGGER.info("Navigated to Cost Budget Page");
 		waitExecuter.sleep(2000);
-		costBudget.createNewBudget("Finance Budget","5000");
+		costBudget.createNewBudget("Finance Budget","500");
 		costBudget.saveBudget();
 		LOGGER.info("New Budget created successfully.");
 		costBudget.validateCreatedBudget("Finance Budget");

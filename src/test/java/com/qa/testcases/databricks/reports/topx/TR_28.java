@@ -9,26 +9,31 @@ import org.testng.annotations.Test;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.scripts.DatePicker;
 import com.qa.scripts.databricks.reports.TopXReports;
 import com.qa.utils.Log;
 import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.DbxReportsTopX
-public class TR_07 extends BaseClass
+public class TR_28 extends BaseClass
 
 {
-	private static final Logger LOGGER = Logger.getLogger(TR_07.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(TR_28.class.getName());
 	@Test
-	public void TopX_Reports_07_GenerateNewReportForACluster() {
-		test = extent.startTest("TopX_Reports_07_GenerateNewReportForACluster", "Create new report for a particular cluster");
+	public void TopX_Reports_28_GenerateNewReportForACluster() {
+		test = extent.startTest("TopX_Reports_07_GenerateNewReportForACluster", "Create new Report with Custom Date");
 		test.assignCategory("Reports/TopX");
 		Log.startTestCase("TopX_Reports_07_GenerateNewReportForACluster");
 		List<String> headers = new ArrayList<String>(Arrays.asList("Parameter","Value"));
 		String clusterName ="Delta-cluster";
 		TopXReports topXReports = new TopXReports(driver);
+		DatePicker date = new DatePicker(driver);
 		topXReports.navigateToDifferentReportsTab("TopX");
 		LOGGER.info("Navigated to Reports tab");
 		topXReports.selectRun();
+		date.clickOnDatePicker();
+		date.setCurrentAndPastDate(-10);
+		date.clickOnCustomDateApplyBtn();
 		String top = topXReports.createNewReportForCluster("8", clusterName);
 		LOGGER.info("Top X Report created successfully");
 		List<String> values = new ArrayList<String>(Arrays.asList(top,clusterName));
@@ -39,5 +44,3 @@ public class TR_07 extends BaseClass
 	}
 
 }
-
-

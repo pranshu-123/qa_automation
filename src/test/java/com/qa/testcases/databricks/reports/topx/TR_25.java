@@ -2,6 +2,7 @@ package com.qa.testcases.databricks.reports.topx;
 
 import java.util.LinkedHashMap;
 import java.util.logging.Logger;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
@@ -12,15 +13,15 @@ import com.qa.utils.Log;
 import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.DbxReportsTopX
-public class TR_24 extends BaseClass
+public class TR_25 extends BaseClass
 
 {
-	private static final Logger LOGGER = Logger.getLogger(TR_24.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(TR_25.class.getName());
 	@Test
-	public void TopX_Reports_24_ValidateHighestClusterUsageSparkPage() {
-		test = extent.startTest("TopX_Reports_24_ValidateHighestClusterUsageSparkPage", "Validate Highest Cluster UsageSpark Page");
+	public void TopX_Reports_25_ValidateHighestCPUSparkPage() {
+		test = extent.startTest("TopX_Reports_25_ValidateHighestCPUSparkPage", "Validate Highest CPU Usage Spark Page");
 		test.assignCategory("Reports/TopX");
-		Log.startTestCase("TopX_Reports_24_ValidateHighestClusterUsageSparkPage");
+		Log.startTestCase("TopX_Reports_25_ValidateHighestCPUSparkPage");
 		TopXReports topXReports = new TopXReports(driver);
 		DatePicker date = new DatePicker(driver);
 		SparkDetails sparkDetails = new SparkDetails(driver);
@@ -30,15 +31,18 @@ public class TR_24 extends BaseClass
 		topXReports.selectRun();
 		date.clickOnDatePicker();
 		date.selectLast90Days();
-		topXReports.createNewReportForCluster("38", clusterName);
+		topXReports.createNewReportForCluster("8", clusterName);
 		LOGGER.info("Top X Report created successfully");
-		topXReports.navigateToApplicationFilterTabs("Highest Cluster Usage");
+		topXReports.navigateToApplicationFilterTabs("Highest CPU Usage");
 		LinkedHashMap<String, String> appValues = topXReports.populateSparkDetailValues();
 		topXReports.openSparkDetailsPage();
 		sparkDetails.navigateToSparkPage();
+		String jobDuration = sparkDetails.returnJobDuration();
 		sparkDetails.validateSummaryTabValues();
 		LOGGER.info("All tabs are present in Spark details page.");
-		sparkDetails.validateSparkDetailsPage(appValues);	
+		Assert.assertTrue(appValues.containsValue(jobDuration), "Job Run Duration is either incorrect or not captured in spark page");
+		LOGGER.info("Job Run Duration is displayed in Spark details page.");
+		sparkDetails.validateSparkDetailsPage(appValues);
 		LOGGER.info("Correct details are captured in Spark details page.");
 		test.log(LogStatus.PASS, "Correct details are captured in Spark details page.");
 	}

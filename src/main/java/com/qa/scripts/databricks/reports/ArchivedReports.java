@@ -166,10 +166,7 @@ public class ArchivedReports {
 		}
 
 		//open in separate tab
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("popup_window = window.open('"+ url+ "');");
-		waitExecuter.sleep(3000);
-		js.executeScript("popup_window.close()");  
+		driver.navigate().to(url);  
 		return url;
 	}
 

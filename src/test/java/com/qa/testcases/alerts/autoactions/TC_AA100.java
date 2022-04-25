@@ -2,13 +2,10 @@ package com.qa.testcases.alerts.autoactions;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
-import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.alerts.AutoActionsPageObject;
 import com.qa.scripts.alerts.AutoActions;
-import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
-import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

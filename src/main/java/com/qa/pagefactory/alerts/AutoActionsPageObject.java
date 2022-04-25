@@ -31,10 +31,10 @@ public class AutoActionsPageObject {
 	@FindBy (xpath = "//section//div")
 	public WebElement messageBanner;
 
-	@FindBy(xpath = "//table[contains(@class,'autoaction-list-table')]/thead/tr/th[6]")
+	@FindBy(xpath = "//table[contains(@class,'autoaction-list-table')]/thead/tr/th[5]")
 	public WebElement headerRunColumn;
 
-	@FindBy(xpath = "//table[contains(@class,'autoaction-list-table')]/tbody/tr/td[6]")
+	@FindBy(xpath = "//table[contains(@class,'autoaction-list-table')]/tbody/tr/td[5]")
 	public List<WebElement> listRunCount;
 
 	@FindBy(xpath = "//table[contains(@class,'autoaction-list-table')]/tbody/tr/td[1]")

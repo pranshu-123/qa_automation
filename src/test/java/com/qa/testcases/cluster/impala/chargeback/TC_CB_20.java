@@ -49,14 +49,19 @@ public class TC_CB_20 extends BaseClass {
         chargeBackImpala.clickOnGroupBySearchBox();
         chargeBackImpala.selectGroupBy(GroupByOptions.QUEUE);
         LOGGER.info("Click on groupBy: " + GroupByOptions.QUEUE.value, test);
+        List<String> definedGroupByOption = Arrays.asList("queue");
+        List<Boolean> isMessageContained = chargeBackImpala.validateMessageHaveGroupByValues(definedGroupByOption);
+        Assert.assertFalse(isMessageContained.contains(false), "Message is not displayed with set filter under pie-chart");
         chargeBackImpala.remove1stGroupByOption();
         chargeBackImpala.validateGroupByPieCharts();
         chargeBackImpala.selectGroupBy(GroupByOptions.TEAM);
         LOGGER.info("Click on groupBy: " + GroupByOptions.TEAM.value, test);
         LOGGER.pass("Validated whether pie charts displayed group by data", test);
-        List<String> definedGroupByOption = Arrays.asList("team", "queue");
+      
         LOGGER.info("Expected group by options- "+definedGroupByOption, test);
-        List<Boolean> isMessageContained = chargeBackImpala.validateMessageHaveGroupByValues(definedGroupByOption);
+        definedGroupByOption = Arrays.asList("team");
+        isMessageContained = chargeBackImpala.validateMessageHaveGroupByValues(definedGroupByOption);
+        Assert.assertFalse(isMessageContained.contains(false), "Message is not displayed with set filter under pie-chart");
         LOGGER.info("Actual group by options- "+isMessageContained, test);
         LOGGER.pass("Validated the group by options in group by table", test);
         Assert.assertFalse(isMessageContained.contains(false), "Message is not displayed with set filter under pie-chart");

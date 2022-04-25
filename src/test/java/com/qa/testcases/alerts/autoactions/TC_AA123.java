@@ -52,7 +52,7 @@ public class TC_AA123 extends BaseClass {
         test.log(LogStatus.INFO,"Selected scope");
 
         String userScopeChkBoxName = "always";
-        Assert.assertFalse(aa.validateDefaultAlwaysScopeChkBox(), "Check box 'only' in refine scope is not checked");
+        Assert.assertFalse(aa.validateDefaultAlwaysScopeChkBox(scope), "Check box 'only' in refine scope is not checked");
         test.log(LogStatus.INFO,"Verified scope '" + userScopeChkBoxName + "' checkbox is checked. ");
 
         aa.clickOnSaveBtn();

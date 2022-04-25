@@ -60,6 +60,7 @@ public class HBasePage {
 		waitExecuter.waitUntilElementClickable(hBasePageObject.hBaseClusterDropDown);
 		MouseActions.clickOnElement(driver, hBasePageObject.hBaseClusterDropDown);
 		waitExecuter.waitUntilPageFullyLoaded();
+		waitExecuter.sleep(2000);
 		List<WebElement> hBaseClusterElementList = hBasePageObject.hBaseClusters;
 		Assert.assertFalse(hBaseClusterElementList.isEmpty(), "HBase clusters not found");
 		List<String> hBaseClusterList = new ArrayList<>();

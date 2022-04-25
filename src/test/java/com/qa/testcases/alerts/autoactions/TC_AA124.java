@@ -53,7 +53,7 @@ public class TC_AA124 extends BaseClass {
         test.log(LogStatus.INFO,"Selected scope");
 
         String userScopeChkBoxName = "daily";
-        aa.clickScopeChkBox(userScopeChkBoxName);
+        aa.clickScopeChkBox(userScopeChkBoxName,scope);
         test.log(LogStatus.INFO,"Clicked on scope '" + userScopeChkBoxName + "' checkbox");
 
         aa.clickOnSaveBtn();

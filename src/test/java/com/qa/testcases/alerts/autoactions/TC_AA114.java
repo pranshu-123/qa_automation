@@ -52,7 +52,7 @@ public class TC_AA114 extends BaseClass {
         aa.selectRefineScope(scope);
         test.log(LogStatus.INFO,"Selected scope");
 
-        Assert.assertFalse(aa.validateDefaultAllUserScopeChkBox(), "Check box 'all' in refine scope is not checked");
+        Assert.assertFalse(aa.validateDefaultAllUserScopeChkBox(scope), "Check box 'all' in refine scope is not checked");
 
         aa.clickOnSaveBtn();
         test.log(LogStatus.INFO,"Clicked on save button");

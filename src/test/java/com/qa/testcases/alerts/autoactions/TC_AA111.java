@@ -50,7 +50,7 @@ public class TC_AA111 extends BaseClass {
         String scope = "User";
         aa.selectRefineScope(scope);
         test.log(LogStatus.INFO,"Selected scope");
-        Assert.assertFalse(aa.validateDefaultAllUserScopeChkBox(), "all check box in refine scope is not checked");
+        Assert.assertFalse(aa.validateDefaultAllUserScopeChkBox(scope), "all check box in refine scope is not checked");
         aa.clickOnSaveBtn();
         test.log(LogStatus.INFO,"Click on save button");
         Assert.assertTrue(aa.validateAutoActionAdded(policyName), "Policy: " +

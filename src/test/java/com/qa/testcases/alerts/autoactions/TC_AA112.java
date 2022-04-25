@@ -51,7 +51,7 @@ public class TC_AA112 extends BaseClass {
         aa.selectRefineScope(scope);
         test.log(LogStatus.INFO,"Selected scope");
         String userScopeChkBoxName = "only";
-        aa.clickScopeChkBox(userScopeChkBoxName);
+        aa.clickScopeChkBox(userScopeChkBoxName,scope);
         test.log(LogStatus.INFO,"Clicked on user scope 'only' checkbox");
         aa.clickOnSaveBtn();
         test.log(LogStatus.INFO,"Clicked on save button");

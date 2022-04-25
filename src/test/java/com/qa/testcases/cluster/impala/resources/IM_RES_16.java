@@ -83,7 +83,7 @@ public class IM_RES_16 extends BaseClass {
         List<String> memoryTooltipValues = graphUtils.getMemoryTooltipValues();
         waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         LOGGER.info("Memory tooltip values : " +memoryTooltipValues);
-
+        waitExecuter.sleep(3000);
         // Check if tool-tip contains 5 nodes
         test.log(LogStatus.INFO, "Validate 'Total' and 'Allocated' memory have 5 nodes are present");
         List<String> nodes = new ArrayList<String>();

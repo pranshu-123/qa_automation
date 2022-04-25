@@ -52,7 +52,7 @@ public class TC_AA116 extends BaseClass {
         test.log(LogStatus.INFO,"Selected scope");
 
         String userScopeChkBoxName = "except";
-        aa.clickScopeChkBox(userScopeChkBoxName);
+        aa.clickScopeChkBox(userScopeChkBoxName,scope);
         test.log(LogStatus.INFO,"Clicked on scope '" + userScopeChkBoxName + "' checkbox");
 
         aa.clickOnSaveBtn();

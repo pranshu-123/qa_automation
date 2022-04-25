@@ -1,7 +1,9 @@
 package com.qa.testcases.databricks.reports.topx;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.logging.Logger;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
@@ -43,4 +45,3 @@ public class TR_24 extends BaseClass
 		test.log(LogStatus.PASS, "Correct details are captured in Spark details page.");
 	}
 }
-

@@ -236,7 +236,7 @@ public class ChargebackImpalaPageObject {
 	@FindBy(xpath = "(((//div[contains(@class,'highcharts-container ')]//*[local-name() = 'svg'])[3]/*[local-name() = 'g']/*[local-name() = 'g'])[1]/*[local-name() = 'path'])[1]")
 	public WebElement memoryHourPie;
 
-	@FindBy(xpath = "(//div[contains(@class,'row')])[5]//h2")
+	@FindBy(xpath = "(//div[contains(@class,'row')])[7]//label")
 	public WebElement showingResultHeader;
 
 	@FindBy(xpath = "(//div[@id='searchBox'])[1]/child::div")

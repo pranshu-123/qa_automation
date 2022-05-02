@@ -180,6 +180,7 @@ public class ChargeBackCluster {
 	public void filterBy(String filter) {
 		waitExecuter.sleep(4500);
 		chargebackClusterPageObject.filterByDropDown.click();
+		waitExecuter.sleep(1000);
 		driver.findElement(By.xpath(String.format(chargebackClusterPageObject.filterByValues,filter))).click();
 	}
 

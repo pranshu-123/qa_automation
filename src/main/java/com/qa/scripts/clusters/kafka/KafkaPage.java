@@ -246,7 +246,7 @@ public class KafkaPage {
 				String colName = colList.get(col).getText();
 				logger.info("The colName is: " + colName);
 				// WebElement rowData = driver.findElement(By.xpath("//tbody/tr[" + (row + 1) + "]/td[" + (col + 1) + "]"));
-				WebElement rowData = driver.findElement(By.xpath("//*[@id='custom-tbl']//table/tbody/tr[" + (row + 1) + "]" +
+				WebElement rowData = driver.findElement(By.xpath("//table/tbody/tr[" + (row + 1) + "]" +
 						"/td[" + (col + 1) + "]"));
 				if ((col + 1) != 2 ) {
 					Assert.assertTrue(rowData.isDisplayed(), "No data under column: " + colName);

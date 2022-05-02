@@ -121,7 +121,7 @@ public class TopXReports {
 		return top;
 	}
 
-	public String createNewReportForCluster(String top,String value) {
+	public String[] createNewReportForCluster(String top,String value) {
 		reportsTopXPageObject.topxTextArea.sendKeys(top);
 		waitExecuter.sleep(2000);
 		reportsTopXPageObject.cluster.click();
@@ -129,11 +129,13 @@ public class TopXReports {
 		reportsTopXPageObject.clusterTextArea.sendKeys(value);
 		waitExecuter.sleep(3000);
 		reportsTopXPageObject.clusterTextArea.sendKeys(Keys.ENTER);
+		String cluster = reportsTopXPageObject.addedCluster.getText();
 		reportsTopXPageObject.newReportRunBtn.click();
 		waitExecuter.sleep(12000);
 		waitExecuter.waitUntilElementPresent(reportsTopXPageObject.reportGenerationMsg);
 		driver.navigate().refresh();
-		return top;
+		String[] val = {top,cluster};
+		return val;
 	}
 
 	public String createNewReportForWorkspace(String top,String value) {

@@ -29,9 +29,9 @@ public class TR_07 extends BaseClass
 		topXReports.navigateToDifferentReportsTab("TopX");
 		LOGGER.info("Navigated to Reports tab");
 		topXReports.selectRun();
-		String top = topXReports.createNewReportForCluster("8", clusterName);
+		String[] result = topXReports.createNewReportForCluster("8", clusterName);
 		LOGGER.info("Top X Report created successfully");
-		List<String> values = new ArrayList<String>(Arrays.asList(top,clusterName));
+		List<String> values = new ArrayList<String>(Arrays.asList(result));
 		
 		topXReports.validateInputParameters(headers, values);
 		LOGGER.info("Correct Input Parameters are displayed");

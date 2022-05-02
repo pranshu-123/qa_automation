@@ -1,5 +1,7 @@
 package com.qa.scripts.databricks.reports;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -132,9 +134,13 @@ public class SparkDetails {
 	}
 
 	public void validateSummaryTabValues() {
-		String[] actualSummaryTabsValues = {"Analysis","Resources","Errors","Configuration","Logs","Tags","Program","SQL","Timings"};
+		String[] actualSummaryTabsValues = {"Analysis","Resources","Errors","Configuration","Logs","Tags","Program","Timings"};
+	    List<String> actualSummaryTabsValueList = Arrays.asList(actualSummaryTabsValues);
 		List<String> summaryTabs = fetchSummaryTabsValues();
-		for(String summaryDetails : actualSummaryTabsValues) {
+		if(summaryTabs.size()==9) {
+			actualSummaryTabsValueList.add("SQL");
+		}
+		for(String summaryDetails : actualSummaryTabsValueList) {
 			Assert.assertTrue(summaryTabs.contains(summaryDetails), summaryDetails + " tab not listed in Spark Page");
 		}
 	}

@@ -34,9 +34,9 @@ public class TR_28 extends BaseClass
 		date.clickOnDatePicker();
 		date.setCurrentAndPastDate(-10);
 		date.clickOnCustomDateApplyBtn();
-		String top = topXReports.createNewReportForCluster("8", clusterName);
+		String[] result = topXReports.createNewReportForCluster("8", clusterName);
 		LOGGER.info("Top X Report created successfully");
-		List<String> values = new ArrayList<String>(Arrays.asList(top,clusterName));
+		List<String> values = new ArrayList<String>(Arrays.asList(result));
 		
 		topXReports.validateInputParameters(headers, values);
 		LOGGER.info("Correct Input Parameters are displayed");

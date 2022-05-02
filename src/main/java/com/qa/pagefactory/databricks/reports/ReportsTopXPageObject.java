@@ -53,6 +53,9 @@ public class ReportsTopXPageObject {
 	@FindBy(xpath = "//a[contains(text(),'Run')]")
 	public WebElement newReportRunBtn;
 	
+	@FindBy(xpath = "//span[@class='multiselect__single']")
+	public WebElement addedCluster;
+	
 	@FindBy(xpath = "//div[contains(text(),'Top X Report completed successfully.')]")
 	public WebElement reportGenerationMsg;
 	
@@ -95,7 +98,7 @@ public class ReportsTopXPageObject {
 	@FindBy(xpath = "//td[@class='key border-success']/..")
 	public WebElement  successfulJobRunRow;
 	
-	@FindBy(xpath = "//td[@class='key border-success']/../td/span")
+	@FindBy(xpath = "(//td[@class='key border-success'])[1]/../td/span")
 	public List<WebElement>  successfulJobRunData;
 	
 	@FindBy(xpath = "//td[@class='key border-running']/../td/span")

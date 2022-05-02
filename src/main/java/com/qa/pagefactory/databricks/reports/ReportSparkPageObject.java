@@ -36,7 +36,7 @@ public class ReportSparkPageObject {
 	@FindBy(xpath = "//tbody[@id='sparkDiagnosis-body']//span")
 	public List<WebElement> diagnosticValues;
 
-	@FindBy(xpath = "//span[@class='text-ellipsis app-id']/following-sibling::span[1]")
+	@FindBy(xpath = "//span[@class='text-ellipsis']/../following-sibling::span[1]/span")
 	public WebElement getHeaderAppId;
 	
 	@FindBy(xpath = "//a[contains(text(),'Navigation')]")

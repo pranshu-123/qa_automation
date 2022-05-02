@@ -5,15 +5,12 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import com.qa.pagefactory.databricks.reports.ReportsArchivedPageObject;
@@ -157,10 +154,12 @@ public class ArchivedReports {
 		reportsArchivedPageObject.copyUrlList.get(0).click();
 		waitExecuter.sleep(3000);
 		//get copied string from clipboard
-		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		//	Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 		String url = null;
 		try {
-			url = (String) clipboard.getContents(null).getTransferData(DataFlavor.stringFlavor);
+			url = (String) Toolkit.getDefaultToolkit()
+					.getSystemClipboard().getData(DataFlavor.stringFlavor); 
+			//url = (String) clipboard.getContents(null).getTransferData(DataFlavor.stringFlavor);
 		} catch (UnsupportedFlavorException | IOException e) {
 			e.printStackTrace();
 		}

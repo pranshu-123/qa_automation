@@ -11,6 +11,7 @@ import com.qa.base.BaseClass;
 import com.qa.scripts.databricks.reports.ScheduledReports;
 import com.qa.scripts.databricks.reports.TopXReports;
 import com.qa.utils.Log;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.DbxReportsScheduled
@@ -24,6 +25,7 @@ public class SR_14 extends BaseClass
 		test.assignCategory("Reports/Scheduled");
 		Log.startTestCase("SH_Reports_14_ValidateScheduledToRunOptions");
 		TopXReports topXReports = new TopXReports(driver);
+		WaitExecuter waitExecuter = new WaitExecuter(driver); 
 		ScheduledReports scheduledReports = new ScheduledReports(driver);
 		topXReports.navigateToDifferentReportsTab("TopX");
 		LOGGER.info("Navigated to Reports tab");
@@ -32,7 +34,7 @@ public class SR_14 extends BaseClass
 		List<String> actual = scheduledReports.scheduledTimeOptions();
 		String[] expectedDateOptions = {"Daily","Sunday", "Monday", "Tuesday", "Wednesday",
 				"Thursday","Friday","Every 2 Weeks","Every Month"};
-
+		waitExecuter.sleep(2000);
         for (String expectedDateOption : expectedDateOptions) {
             Assert.assertTrue(actual.contains(expectedDateOption),
                     "Date list does not contain: " + expectedDateOption);

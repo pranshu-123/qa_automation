@@ -27,6 +27,7 @@ public class CB_07  extends BaseClass{
 		waitExecuter.sleep(2000);
 		costBudget.createNewBudget("Finance Budget","1");
 		costBudget.saveBudget();
+		waitExecuter.sleep(2000);
 		costBudget.validateCreatedBudget("Finance Budget");
 		LOGGER.info("Newly created budget is displayed.");
 		String expectedValue = costBudget.editExistingBudget("Finance Budget");

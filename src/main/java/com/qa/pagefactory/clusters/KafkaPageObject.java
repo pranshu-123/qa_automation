@@ -77,13 +77,13 @@ public class KafkaPageObject {
     @FindBy(xpath = "//div[@class='filterclass']/input")
     public WebElement brokerSearchBox;
 
-    @FindBy(xpath = "//*[@id=\"custom-tbl\"]/div[3]/div/table/thead/tr/th")
+    @FindBy(xpath = "//table/thead/tr/th")
     public List<WebElement> topicTableCol;
 
     @FindBy(xpath = "//tbody/tr")
     public List<WebElement> topicTableRows;
 
-    @FindBy(xpath = "//*[@id='custom-tbl']//table/tbody/tr")
+    @FindBy(xpath = "//table/tbody/tr")
     public List<WebElement> topicTableRowData;
 
     @FindBy(xpath = "//*[contains(@id,'column-')]/span")

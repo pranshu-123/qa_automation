@@ -1,5 +1,6 @@
 package com.qa.testcases.cloud.databricks.data.tables;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
 import com.qa.utils.LoggingUtils;
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  * @author Ankur Jaiswal
  */
+@Marker.DbxDataTables
 public class TC_DBX_DT_12 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_12.class);
 

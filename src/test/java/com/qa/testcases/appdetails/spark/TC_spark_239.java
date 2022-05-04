@@ -78,7 +78,7 @@ public class TC_spark_239 extends BaseClass {
             MouseActions.clickOnElement(driver, sparkAppsDetailsPageObject.closeAppsPageTab);
         } else {
             test.log(LogStatus.SKIP , "No Spark Application present");
-            logger.error("No Spark Application present in the " + clusterId + " cluster for the time span " +
+            logger.warn("No Spark Application present in the " + clusterId + " cluster for the time span " +
                 "of 90 days");
         }
     }

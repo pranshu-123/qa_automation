@@ -26,6 +26,7 @@ public class TC_DR_25 extends BaseClass {
         test = extent.startTest("TC_DR_25.validateCustomRange",
                 "Verify the apps listed in page for selected date picker filter");
         test.log(LogStatus.INFO, "Login to the application");
+        test.assignCategory("Jobs-Runs/All");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
         loggingUtils.info("Initialize all class objects", test);

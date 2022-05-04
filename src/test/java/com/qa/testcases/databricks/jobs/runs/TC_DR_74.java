@@ -38,13 +38,6 @@ public class TC_DR_74 extends BaseClass {
         dballApps.navigateToJobsTab("Runs");
         dballApps.selectTab("Running");
         try {
-            // Navigate to Runs tab from header
-            test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-            test.log(LogStatus.INFO, "Select last 7 days");
-            dballApps.inJobsSelectClusterAndLast7Days();
-            waitExecuter.sleep(2000);
-
-
             int totalCount = Integer
                     .parseInt(dbpageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
             test.log(LogStatus.INFO, "Assert if the application listed are as per the filter applied on global search");

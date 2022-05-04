@@ -24,8 +24,19 @@ public class DataPageObject {
     @FindBy(xpath = "(//label[contains(text(),'Workspace')]/following-sibling::span)[1]//span[contains(@class,'select2-selection__arrow')]")
     public WebElement workspaceDropdown;
 
+    @FindBy(css = "input.global-app-search")
+    public WebElement globalSearchBox;
+
+    public String filterByValues = "//li[contains(text(),'%s')]";
+
+    @FindBy(xpath = "//ul[contains(@class,'select2-results__options')]/li[2]")
+    public WebElement select1stCluster;
+
     @FindBy(xpath = "(//label[contains(text(),'Metastore')]/following-sibling::span)[1]")
     public WebElement metastoreParentElement;
+
+    @FindBy(xpath = "//span[@class='select2-results']//li")
+    public List<WebElement> selectType;
 
     @FindBy(xpath = "//li[contains(@class,'select2-results__option')]")
     public List<WebElement> dropdownValues;
@@ -72,6 +83,9 @@ public class DataPageObject {
     @FindBy(xpath = "//a[contains(text(),'Tables')]")
     public WebElement backToTablesLinkOnTableDetails;
 
+    @FindBy(xpath = "//td[15]/a[1]/span[1]")
+    public WebElement moreInfo;
+
     @FindBy(xpath = "//div[contains(@class,'kpi-box')]//div[@class='row']//div/h3")
     public List<WebElement> usersAppsSizePartitionsValues;
 
@@ -87,6 +101,9 @@ public class DataPageObject {
     @FindBy(xpath = "//a[contains(text(),'Partition Detail')]")
     public WebElement partitionDetailTabOnTableDetails;
 
+    @FindBy(xpath = "//a[@href='#/data/tables']")
+    public WebElement closeTab;
+
     @FindBy(xpath = "//section/div[contains(@class,'status-title')]/span[@class='title']")
     public List<WebElement> analysisRecommendationAndInsightsTitle;
 
@@ -96,7 +113,7 @@ public class DataPageObject {
     @FindBy(xpath = "//div[contains(@class,'dashboard-module')]")
     public List<WebElement> displayedGraphs;
 
-    @FindBy(css = "body > div.highcharts-tooltip-container > svg > g > text > tspan:nth-child(4)")
+    @FindBy(css = "body > div.highcharts-tooltip-container >svg>g")
     public List<WebElement> graphsTooltips;
 
     @FindBy(xpath = "//div[contains(@class,'vue-slider-dot-handle')]")
@@ -125,6 +142,9 @@ public class DataPageObject {
 
     @FindBy(xpath = "//p[contains(text(),'No table KPIs available.')]")
     public List<WebElement> noTableKPIsElements;
+
+    @FindBy(xpath = "//div[@class='row no-gutters container-fluid']")
+    public List<WebElement> tableKPIsElements;
 
     @FindBy(xpath = "//p[contains(text(),'No partition KPIs available.')]")
     public List<WebElement> noPartitionKPIsElements;

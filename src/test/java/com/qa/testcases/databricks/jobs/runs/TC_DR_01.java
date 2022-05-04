@@ -25,6 +25,7 @@ public class TC_DR_01 extends BaseClass {
     public void validateFilterByClusterName() {
         test = extent.startTest("TC_DR_01.validateFilterByClusterName",
                 "Verify the options available in date picker filter");
+        test.assignCategory("Jobs-Runs/All");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

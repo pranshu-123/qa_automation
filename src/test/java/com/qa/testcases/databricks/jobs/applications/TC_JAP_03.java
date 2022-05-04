@@ -53,6 +53,7 @@ public class TC_JAP_03 extends BaseClass {
 
             if (appCount > 0) {
                 String headerAppId = summaryPage.verifyGoToSpark(summaryPageObject);
+                waitExecuter.waitUntilPageFullyLoaded();
                 test.log(LogStatus.PASS, "Application Spark name is displayed in the Header: " + headerAppId);
                 test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);
                 summaryPage.verifyRightPaneKpis(summaryPageObject);

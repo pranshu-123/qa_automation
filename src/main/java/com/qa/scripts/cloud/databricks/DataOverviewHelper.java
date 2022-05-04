@@ -44,13 +44,16 @@ public class DataOverviewHelper {
      */
     public Map<String,String> getLastDayTablesKPIs() {
         Map<String,String> lastDayTablesKPIsKV = new HashMap<>();
-        if (dataPageObject.noTableKPIsElements.size() > 0) {
-            loggingUtils.info("No Table KPIs present.", test);
-        } else {
-            for (int i=0; i<dataPageObject.tablesKPIsLastDayTitles.size(); i++) {
+        if(dataPageObject.tableKPIsElements.size() > 0) {
+            for (int i = 0; i < dataPageObject.tablesKPIsLastDayTitles.size(); i++) {
                 lastDayTablesKPIsKV.put(dataPageObject.tablesKPIsLastDayTitles.get(i).getText(),
                         dataPageObject.tablesKPIsLastDayValues.get(i).getText());
+                waitExecuter.sleep(1000);
             }
+        }
+        else  {
+            int tablevalue=dataPageObject.noTableKPIsElements.size();
+            loggingUtils.info("No Table KPIs present."+tablevalue, test);
         }
         return lastDayTablesKPIsKV;
     }
@@ -78,62 +81,67 @@ public class DataOverviewHelper {
      * @return - Tooltip value
      */
     public String getTooltipValuesOfLoadedGraph(String graphType) {
-        if (dataPageObject.displayedGraphs.size() > 0) {
-            switch (graphType.toLowerCase().trim()) {
-                case "number of tables created":
-                    actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(0), 0, 0);
-                    actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(0), 50, 50);
-                    String numberOfTablesCreatedTooltip = dataPageObject.graphsTooltips.get(0).getText();
-                    loggingUtils.pass("Users graph displayed. Tooltip loaded: " + numberOfTablesCreatedTooltip , test);
-                    return numberOfTablesCreatedTooltip;
-                case "total number of tables":
-                    actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(1), 0, 0);
-                    actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(1), 50, 50);
-                    String totalNumberOfTablesTooltip = dataPageObject.graphsTooltips.get(0).getText();
-                    loggingUtils.pass("Apps graph displayed. Tooltip loaded: " + totalNumberOfTablesTooltip , test);
-                    return totalNumberOfTablesTooltip;
-                case "number of tables accessed":
-                    actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(2), 0, 0);
-                    actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(2), 50, 50);
-                    String numberOfTablesAccessedTooltip = dataPageObject.graphsTooltips.get(0).getText();
-                    loggingUtils.pass("Size graph displayed. Tooltip loaded: " + numberOfTablesAccessedTooltip , test);
-                    return numberOfTablesAccessedTooltip;
-                case "number of queries":
-                    actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(3), 0, 0);
-                    actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(3), 50, 50);
-                    String numberOfQueriesTooltip = dataPageObject.graphsTooltips.get(0).getText();
-                    loggingUtils.pass("Size graph displayed. Tooltip loaded: " + numberOfQueriesTooltip , test);
-                    return numberOfQueriesTooltip;
-                case "number of users":
-                    actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(4), 0, 0);
-                    actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(4), 50, 50);
-                    String numberOfUsersTooltip = dataPageObject.graphsTooltips.get(0).getText();
-                    loggingUtils.pass("Size graph displayed. Tooltip loaded: " + numberOfUsersTooltip , test);
-                    return numberOfUsersTooltip;
-                case "number of partitions created":
-                    actionPerformer.moveToTheElement(dataPageObject.displayedGraphs.get(6));
-                    actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(6), 0, 0);
-                    actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(6), 50, 50);
-                    String numberOfPartitionsCreatedTooltip = dataPageObject.graphsTooltips.get(0).getText();
-                    loggingUtils.pass("Size graph displayed. Tooltip loaded: " + numberOfPartitionsCreatedTooltip , test);
-                    return numberOfPartitionsCreatedTooltip;
-                case "total number of partitions":
-                    actionPerformer.moveToTheElement(dataPageObject.displayedGraphs.get(7));
-                    actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(7), 0, 0);
-                    actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(7), 50, 50);
-                    String totalNumberOfPartitionsTooltip = dataPageObject.graphsTooltips.get(0).getText();
-                    loggingUtils.pass("Size graph displayed. Tooltip loaded: " + totalNumberOfPartitionsTooltip , test);
-                    return totalNumberOfPartitionsTooltip;
-                default:
-                    loggingUtils.error("Incorrect value is passed for graph", test);
-                    return "";
+        try {
+            if (dataPageObject.displayedGraphs.size() > 0) {
+                switch (graphType.toLowerCase().trim()) {
+                    case "number of tables created":
+                        actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(0), 0, 0);
+                        actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(0), 50, 50);
+                        String numberOfTablesCreatedTooltip = dataPageObject.graphsTooltips.get(0).getText();
+                        loggingUtils.pass("Users graph displayed. Tooltip loaded: " + numberOfTablesCreatedTooltip, test);
+                        return numberOfTablesCreatedTooltip;
+                    case "total number of tables":
+                        actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(1), 0, 0);
+                        actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(1), 50, 50);
+                        String totalNumberOfTablesTooltip = dataPageObject.graphsTooltips.get(0).getText();
+                        loggingUtils.pass("Apps graph displayed. Tooltip loaded: " + totalNumberOfTablesTooltip, test);
+                        return totalNumberOfTablesTooltip;
+                    case "number of tables accessed":
+                        actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(2), 0, 0);
+                        actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(2), 50, 50);
+                        String numberOfTablesAccessedTooltip = dataPageObject.graphsTooltips.get(0).getText();
+                        loggingUtils.pass("Size graph displayed. Tooltip loaded: " + numberOfTablesAccessedTooltip, test);
+                        return numberOfTablesAccessedTooltip;
+                    case "number of queries":
+                        actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(3), 0, 0);
+                        actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(3), 50, 50);
+                        String numberOfQueriesTooltip = dataPageObject.graphsTooltips.get(0).getText();
+                        loggingUtils.pass("Size graph displayed. Tooltip loaded: " + numberOfQueriesTooltip, test);
+                        return numberOfQueriesTooltip;
+                    case "number of users":
+                        actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(4), 0, 0);
+                        actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(4), 50, 50);
+                        String numberOfUsersTooltip = dataPageObject.graphsTooltips.get(0).getText();
+                        loggingUtils.pass("Size graph displayed. Tooltip loaded: " + numberOfUsersTooltip, test);
+                        return numberOfUsersTooltip;
+                    case "number of partitions created":
+                        actionPerformer.moveToTheElement(dataPageObject.displayedGraphs.get(6));
+                        actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(6), 0, 0);
+                        actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(6), 50, 50);
+                        String numberOfPartitionsCreatedTooltip = dataPageObject.graphsTooltips.get(0).getText().trim();
+                        loggingUtils.pass("Size graph displayed. Tooltip loaded: " + numberOfPartitionsCreatedTooltip, test);
+                        return numberOfPartitionsCreatedTooltip;
+                    case "total number of partitions":
+                        actionPerformer.moveToTheElement(dataPageObject.displayedGraphs.get(7));
+                        actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(7), 0, 0);
+                        actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(7), 50, 50);
+                        String totalNumberOfPartitionsTooltip = dataPageObject.graphsTooltips.get(0).getText();
+                        loggingUtils.pass("Size graph displayed. Tooltip loaded: " + totalNumberOfPartitionsTooltip, test);
+                        return totalNumberOfPartitionsTooltip;
+                    default:
+                        loggingUtils.error("Incorrect value is passed for graph", test);
+                        return "";
+                }
+            } else {
+                return "";
             }
-        } else {
-            return "";
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
         }
+        return graphType;
     }
 
-    /**
+        /**
      * Get Table State Values
      */
     public Map<String,String> getTableStatePieChartValues() {
@@ -174,7 +182,8 @@ public class DataOverviewHelper {
             }
             waitExecuter.sleep(1000);
             actions.performActionWithPolling(dataPageObject.saveRulesButton, UserAction.CLICK);
-        } finally {
+        } catch (Exception e){
+            waitExecuter.sleep(1000);
             actions.performActionWithPolling(dataPageObject.modalCloseButton, UserAction.CLICK);
         }
         return true;

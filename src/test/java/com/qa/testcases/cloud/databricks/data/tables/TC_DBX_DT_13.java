@@ -1,5 +1,6 @@
 package com.qa.testcases.cloud.databricks.data.tables;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
 import com.qa.utils.LoggingUtils;
@@ -10,12 +11,13 @@ import java.util.List;
 /**
  * @author Ankur Jaiswal
  */
+@Marker.DbxDataTables
 public class TC_DBX_DT_13 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_13.class);
 
     @Test(description = "Validate whether user is able to change the setting of label by making changes in Last App Access")
     public void verifyTablesDisplayedIfChangedLatestAccess() {
-        test = extent.startTest("TC_DBX_DT_12.verifyTablesDisplayedIfChangedLatestAccess", "Validate whether user is able to change the setting" +
+        test = extent.startTest("TC_DBX_DT_13.verifyTablesDisplayedIfChangedLatestAccess", "Validate whether user is able to change the setting" +
                 " of label by making changes in Last App Access");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);

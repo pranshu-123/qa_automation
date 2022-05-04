@@ -4,7 +4,9 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.scripts.cloud.databricks.DataOverviewHelper;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
+import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
+import com.qa.utils.WaitExecuter;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -15,18 +17,21 @@ import java.util.Set;
 /**
  * @author Ankur Jaiswal
  */
-
 @Marker.DBX.Data
+@Marker.DbxDataOverview
 public class TC_DBX_DO_4 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
-    @Test(description = "Verify Last Day of Table KPIs")
-    public void verifyLastDayOfTableKPIs() {
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify Last Day of Table KPIs")
+    public void verifyLastDayOfTableKPIs(String clusterId) {
         test = extent.startTest("TC_DBX_DO_4.verifyLastDayOfTableKPIs", "Verify Last Day of Table KPIs");
         test.assignCategory("Databricks - Data");
+        AllApps allApps = new AllApps(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
         dataTablesHelper.clickOnDataTab();
-        dataTablesHelper.selectWorkspaceForConfiguredMetastore();
+        allApps.selectWorkSpaceId(clusterId);
+        waitExecuter.sleep(3000);
         DataOverviewHelper dataOverviewHelper = new DataOverviewHelper(driver, test);
         Set<Map.Entry<String, String>> kpisKV = dataOverviewHelper.getLastDayTablesKPIs().entrySet();
         Iterator itr = kpisKV.iterator();

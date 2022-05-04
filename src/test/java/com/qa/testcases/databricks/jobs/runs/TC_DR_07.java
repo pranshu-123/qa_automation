@@ -22,6 +22,7 @@ public class TC_DR_07 extends BaseClass {
     public void validateRunningStatus() {
         test = extent.startTest("TC_DR_07.validateRunningStatus",
                 "Verify All the Running jobs are listed on the page");
+        test.assignCategory("Jobs-Runs/All");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

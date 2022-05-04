@@ -26,6 +26,8 @@ public class DataProviderClass {
             return unravelConfigYamlReader.getClusterList("hbase");
         }else if(method.getDeclaringClass().getPackage().getName().contains("mapreduce")) {
             return unravelConfigYamlReader.getClusterList("mapreduce");
+        } else if(method.getDeclaringClass().getPackage().getName().contains("overview")) {
+            return unravelConfigYamlReader.getClusterList("workspace");
         }
         else {
             return unravelConfigYamlReader.getClusterList(false);

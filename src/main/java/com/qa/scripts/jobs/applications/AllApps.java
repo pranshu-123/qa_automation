@@ -1,6 +1,7 @@
 package com.qa.scripts.jobs.applications;
 
 import com.qa.enums.UserAction;
+import com.qa.pagefactory.CommonPageObject;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
@@ -70,6 +71,19 @@ public class AllApps {
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         waitExecuter.sleep(4000);
 
+    }
+
+    //click on workspace drop down
+    public void selectWorkSpaceId(String clusterId) {
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.workspaceDropdown);
+        waitExecuter.sleep(3000);
+        userAction.performActionWithPolling(applicationsPageObject.clusterDropdownPage, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.globalSearchBox);
+        userAction.performActionWithPolling(applicationsPageObject.clusterSearchBox, UserAction.SEND_KEYS,
+                clusterId);
+        waitExecuter.sleep(3000);
+        userAction.performActionWithPolling(applicationsPageObject.clusterSearchFirstField, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.clusterDropdownPage);
     }
 
     /* Check and remove cluster from searchbox */

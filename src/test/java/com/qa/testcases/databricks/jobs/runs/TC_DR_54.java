@@ -44,7 +44,7 @@ public class TC_DR_54 extends BaseClass {
 
             test.log(LogStatus.INFO, "Get application type of first application listed in table");
             loggingUtils.info("Get application type of first application listed in table", test);
-            String applicationTypeToSearch = dbpageObject.getNameeFromTable.getText();
+            String applicationTypeToSearch = dbpageObject.getNameFromTable.getText();
             dbpageObject.searchBox.clear();
             waitExecuter.sleep(1000);
             dbpageObject.searchBox.sendKeys(applicationTypeToSearch);

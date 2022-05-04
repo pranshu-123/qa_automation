@@ -36,11 +36,23 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//div[contains(@class,'ranges')]//li")
     public List<WebElement> dateRanges;
 
-    @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')]//input)[1]")
+    @FindBy(xpath = "//span[contains(@class, 'select2-search--dropdown')]/input")
     public WebElement clusterSearchBox;
 
     @FindBy(xpath = "//ul[contains(@class,'select2-results__options')]/li[1]")
     public WebElement select1stCluster;
+
+    @FindBy(css = ".select-cluster~.select2 .selection .select2-selection__arrow")
+    public WebElement clusterDropdownPage;
+
+    @FindBy(css = ".select-cluster~.select2 .selection .select2-selection__arrow")
+    public WebElement workspaceDropdown;
+
+    @FindBy(xpath="//span[@class='select2-results']//li")
+    public WebElement clusterSearchFirstField;
+
+    @FindBy(xpath="//span[contains(@class, 'select2-search--dropdown')]/input")
+    public WebElement workspaceSearchBox;
 
     @FindBy(xpath = "//span[contains(@class,'select2-selection__choice__remove')]")
     public WebElement removeCluster;
@@ -129,7 +141,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//a[contains(@class,'icon-sort')]")
     public List<WebElement> inefficientAppsIconSortTbl;
 
-    @FindBy(className = "show-all")
+    @FindBy(xpath = "//span[text()[normalize-space()='Show all']]")
     public WebElement showAll;
 
     @FindBy(xpath = "//a[contains(text(),'Status')]")

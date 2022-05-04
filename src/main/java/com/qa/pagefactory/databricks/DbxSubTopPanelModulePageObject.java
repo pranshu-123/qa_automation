@@ -25,7 +25,16 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//*[@id='RunsListAll-body']/tr/td[1]")
     public WebElement Status;
 
-    @FindBy(xpath = "//*[@id='RunsListFinished']//tr/td[1]")
+    @FindBy(xpath = "//tbody/tr/td[13]/span[1]")
+    public WebElement costValue;
+
+    @FindBy(xpath = "//tbody[1]/tr/td[13]/div[1]")
+    public WebElement costDbu;
+
+    @FindBy(xpath = "//div[@class='col-12']//div[1]")
+    public WebElement appCostDbu;
+
+    @FindBy(xpath = "//tr/td[1]")
     public WebElement statusFinishedTab;
 
     @FindBy(xpath = "//a[@href='#/manage/stats']")
@@ -58,7 +67,7 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//table[@id='RunsListAll']/thead[1]/tr[1]/th/span[1]")
     public List<WebElement> getColumnsTypes;
 
-    @FindBy(xpath = "//table[@id='RunsListFinished']/thead[1]/tr[1]/th/span[1]")
+    @FindBy(xpath = "//thead[1]/tr[1]/th/span[1]")
     public List<WebElement> getColumnsTypesFinishedTab;
 
     @FindBy(xpath = "//a[text()[normalize-space()='Only']]")
@@ -97,34 +106,37 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//table[@id='RunsListAll']/tbody[1]/tr/td[3]/a[2]")
     public WebElement getIdeFromTable;
 
-    @FindBy(xpath = "//table[@id='RunsListAll']/tbody[1]/tr/td[5]/span[1]")
+    @FindBy(xpath = "//tbody[1]/tr/td[5]")
     public WebElement getRunIdFromTable;
 
-    @FindBy(xpath = "//table[@id='RunsListFinished']//tr/td[10]/span[1]")
+    @FindBy(xpath = "//tbody[1]/tr/td[10]")
     public WebElement getWorkspaceFromTable;
 
-    @FindBy(xpath = "//table[@id='RunsListFinished']//tr/td[11]/span[1]")
+    @FindBy(xpath = "//tbody[1]/tr/td[11]")
     public WebElement getClusterNameFromTable;
 
-    @FindBy(xpath = "//table[@id='RunsListAll']/tbody[1]/tr/td[3]/span[1]")
-    public WebElement getNameeFromTable;
+    @FindBy(xpath = "//tbody/tr/td[11]/span[1]")
+    public WebElement getClusterName;
 
-    @FindBy(xpath = "//*[@id='RunsListAll']/tbody[1]/tr/td[2]/span[1]")
+    @FindBy(xpath = "//tbody/tr[1]/td[3]/span[1]")
+    public WebElement getNameFromTable;
+
+    @FindBy(xpath = "//tbody[1]/tr/td[2]")
     public WebElement getUsernameFromTable;
 
-    @FindBy(xpath = "//*[@id='RunsListFinished']/tbody[1]/tr/td[2]/span[1]")
+    @FindBy(xpath = "//tr/td[2]/span[1]")
     public WebElement getUsernameFromFinishedTable;
 
-    @FindBy(xpath = "//*[@id='RunsListAll']/tbody[1]/tr/td[12]/span[1]")
+    @FindBy(xpath = "//tbody[1]/tr/td[12]")
     public WebElement getClusterTypeFromTable;
 
-    @FindBy(xpath = "//*[@id='RunsListFinished']/tbody[1]/tr/td[12]/span[1]")
+    @FindBy(xpath = "//tbody[1]/tr/td[12]/span[1]")
     public WebElement getClusterTypeFromFinishedTable;
 
-    @FindBy(xpath = "//*[@id='RunsListAll']/tbody[1]/tr/td[10]/span[1]")
+    @FindBy(xpath = "/er/tbody[1]/tr/td[10]/span[1]")
     public WebElement getWorkspaceAllFromTable;
 
-    @FindBy(xpath = "//*[@id='RunsListFinished']/tbody[1]/tr/td[10]/span[1]")
+    @FindBy(xpath = "//tbody[1]/tr/td[10]/span[1]")
     public WebElement getWorkspaceFromFinishedTable;
 
     @FindBy(xpath = "//li[@class='select2-results__option select2-results__message']")
@@ -148,19 +160,25 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(id = "apps-global-search-filter")
     public WebElement searchBox;
 
+    @FindBy(xpath = "//input[@class='select2-search__field']")
+    public WebElement clusterSearchBox;
+
     @FindBy(xpath = "//*[@id='statusContainer']/span[1]")
     public WebElement appStatus;
 
-    @FindBy(xpath = "//*[@id=\"RunsListAll-body\"]/tr/td[3]/a[2]")
+    @FindBy(xpath = "//*[@id=\"SummaryDetails\"]//div[2]/div/div/h3")
+    public WebElement appCost;
+
+    @FindBy(xpath = "//tr/td[3]/a[2]")
     public WebElement clickOnAppId;
 
-    @FindBy(xpath = "//*[@id='RunsListFinished']//tr/td[3]/a[2]")
+    @FindBy(xpath = "//tr/td[3]/a[2]")
     public WebElement finishedAppId;
 
     @FindBy(xpath = "//button[text()[normalize-space()='Spark']]")
     public WebElement clickOnSpark;
 
-    @FindBy(xpath = "//table[@id='RunsListAll']/tbody[1]/tr/td[3]/a[1]")
+    @FindBy(xpath = "//tbody[1]/tr/td[3]/a[1]")
     public WebElement getAppname;
 
     @FindBy(xpath = "//span[text()='Runs']")
@@ -172,7 +190,7 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(id = "finished")
     public WebElement finishedTab;
 
-    @FindBy(css = ".col-md-12.no-data-msg")
+    @FindBy(xpath = "//h3[text()[normalize-space()='No Data Available']]")
     public WebElement whenNoApplicationPresent;
 
     @FindBy(xpath = "//ul[contains(concat(' ', @class, ' '), 'select2-results__options')]/li")

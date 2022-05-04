@@ -20,6 +20,7 @@ public class TC_DR_29 extends BaseClass {
         test = extent.startTest("TC_DR_29.validateJobAndSpark",
                 "Verify both application count list and the showing result are same");
         test.log(LogStatus.INFO, "Login to the application");
+        test.assignCategory("Jobs-Runs/All");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
         loggingUtils.info("Initialize all class objects", test);

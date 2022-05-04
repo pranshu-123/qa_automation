@@ -33,10 +33,6 @@ public class TC_DR_71 extends BaseClass {
         dballApps.selectTab("Running");
         waitExecuter.waitUntilPageFullyLoaded();
         // Navigate to Runs tab select cluster and last 7 days
-        test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-        test.log(LogStatus.INFO, "Select last 7 days");
-        dballApps.inJobsSelectClusterAndLast7Days();
-        waitExecuter.sleep(2000);
         try {
             // Assert if the application are as per the filter applied on global search
             test.log(LogStatus.INFO, "Assert if the application listed are as per the filter applied on search");

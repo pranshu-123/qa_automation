@@ -10,6 +10,8 @@ import com.qa.utils.LoggingUtils;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.slf4j.Logger;
@@ -127,7 +129,7 @@ public class DbAllApps {
         }
         // Assert if the application type is selected successfully.
         try {
-            waitExecuter.waitUntilElementPresent(applicationsPageObject.whenNoApplicationPresent);
+            waitExecuter.waitUntilElementPresent(applicationsPageObject.selectApplicationPresent);
         } catch (NoSuchElementException te) {
             throw new AssertionError("After de-selecting all status 'No Data Available' is not displayed.");
         }
@@ -282,6 +284,35 @@ public class DbAllApps {
         String status = dballApps.appStatus.getText().trim().toLowerCase();
         Assert.assertEquals(statusTable, status, "Runs Status is not displayed in the Header");
         return status;
+    }
+
+    /**
+     * Method to click the first app in jobs table , navigate to the details page.
+     * and verify Cost App details Page .
+     */
+    public String verifyCost(DbxSubTopPanelModulePageObject dballApps, ExtentTest test) {
+        double sum =0.00;
+        String cost = dballApps.costValue.getText().trim();
+        String costValue = cost.replaceAll("[^\\d-]", "");
+        String costDbu = dballApps.costDbu.getText().trim();
+        String costDbuValue = costDbu.replaceAll("[^\\d-]", "");
+        logger.info("cost is " + costValue);
+        logger.info("cost DBU is " + costDbu);
+        test.log(LogStatus.PASS, "cost is " + costValue);
+        test.log(LogStatus.PASS, "cost DBU is " + costDbu);
+        waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.clickOnAppId);
+        dbSubTopPanelModulePageObject.clickOnAppId.click();
+        waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.closeIcon);
+        waitExecuter.waitUntilPageFullyLoaded();
+        String appCost = dballApps.appCost.getText().trim();
+        String appCostValue = appCost.replaceAll("[^\\d.]+", "");
+        String appCostDbu = dballApps.appCostDbu.getText().trim();
+        String appCostDbuValue = appCostDbu.replaceAll("[^\\d.]", "");
+        test.log(LogStatus.PASS, "cost value in summary page is " + costValue);
+        test.log(LogStatus.PASS, "cost DBU value in  summary page is " + costDbu);
+        Assert.assertEquals(costValue, appCostValue, "Runs Cost is not displayed in the Header");
+        Assert.assertEquals(costDbuValue, appCostDbuValue, "Runs Cost DBU is not displayed in the Header");
+        return ("$ "+String.format("%.2f",sum));
     }
 
 

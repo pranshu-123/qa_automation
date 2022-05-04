@@ -2,6 +2,7 @@ package com.qa.testcases.databricks.jobs.runs;
 
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
+import com.qa.pagefactory.databricks.DbxSubTopPanelModulePageObject;
 import com.qa.pagefactory.databricks.jobs.DbxApplicationsPageObject;
 import com.qa.scripts.databricks.jobs.DbAllApps;
 import com.qa.utils.LoggingUtils;
@@ -30,6 +31,7 @@ public class TC_DR_67 extends BaseClass {
         loggingUtils.info("Initialize all class objects", test);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         DbxApplicationsPageObject applicationsPageObject = new DbxApplicationsPageObject(driver);
+        DbxSubTopPanelModulePageObject dbpageObject = new DbxSubTopPanelModulePageObject(driver);
         DbAllApps dballApps = new DbAllApps(driver);
         // Navigate to Runs tab from header
         test.log(LogStatus.INFO, "Navigate to Runs tab from header");
@@ -37,17 +39,11 @@ public class TC_DR_67 extends BaseClass {
         dballApps.selectTab("Running");
         waitExecuter.waitUntilPageFullyLoaded();
         try {
-            // Navigate to Runs tab from header
-            test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-            test.log(LogStatus.INFO, "Select last 7 days");
-            dballApps.inJobsSelectClusterAndLast30Days();
-            waitExecuter.sleep(2000);
-
-
-            int appCount = dballApps.clickOnlyLink("Success");
+            int totalCount = Integer
+                    .parseInt(dbpageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
             test.log(LogStatus.INFO, "Assert if the application listed are as per the filter applied on global search");
             loggingUtils.info("Assert if the application are as per the filter applied on global search", test);
-            if (appCount > 0) {
+            if (totalCount > 0) {
                 test.log(LogStatus.INFO, "Get application type of first application listed in table");
                 loggingUtils.info("Get application type of first application listed in table", test);
                 String userTypeToSearch = applicationsPageObject.getUserFromTable.getText();

@@ -18,6 +18,7 @@ import java.io.File;
  */
 
 @Marker.DBX.Data
+@Marker.DbxDataTables
 public class TC_DBX_DT_33 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_33.class);
 

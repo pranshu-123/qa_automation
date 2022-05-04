@@ -206,6 +206,15 @@ public @interface Marker {
     @Retention(RetentionPolicy.RUNTIME)
     @interface DbxCostBudget {
     }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface DbxDataOverview {
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface DbxDataTables {
+    }
+
     @Target(ElementType.TYPE)
     @interface DBX {
         @Retention(RetentionPolicy.RUNTIME)
@@ -213,4 +222,5 @@ public @interface Marker {
             String PAGE = "DBX - DATA";
         }
     }
+
 }

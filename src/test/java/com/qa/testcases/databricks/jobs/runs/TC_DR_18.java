@@ -23,6 +23,7 @@ public class TC_DR_18 extends BaseClass {
         test = extent.startTest("TC_DR_18.validateCustomDateFunctionality",
                 "Verify the user can select custom date ranges");
         test.log(LogStatus.INFO, "Login to the application");
+        test.assignCategory("Jobs-Runs/All");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
         loggingUtils.info("Initialize all class objects", test);

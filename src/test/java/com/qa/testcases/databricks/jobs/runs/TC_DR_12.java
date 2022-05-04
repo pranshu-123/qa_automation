@@ -28,6 +28,7 @@ public class TC_DR_12 extends BaseClass {
         test = extent.startTest("TC_DR_11.validateAllStatusTab",
                 "Verify  All tab - Killed, Failed, Running, Success, Pending, Unknown, Waiting Jobs statuses are present.");
         test.log(LogStatus.INFO, "Login to the application");
+        test.assignCategory("Jobs-Runs/All");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
         loggingUtils.info("Initialize all class objects", test);

@@ -35,16 +35,7 @@ public class TC_DR_65 extends BaseClass {
         dballApps.selectTab("Running");
         waitExecuter.waitUntilPageFullyLoaded();
         try {
-            waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
-            datePicker.clickOnDatePicker();
-            waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
-            datePicker.selectCustomRange();
-            waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
-            datePicker.setStartAndEndDateFromCurrentDate(-6,-2);
-            datePicker.clickOnCustomDateApplyBtn();
-            waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
-            // Get total app counts before applying filter
-            waitExecuter.sleep(1000);
+
             int totalCountBeforeFilter = Integer
                     .parseInt(dbpageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
             waitExecuter.sleep(2000);

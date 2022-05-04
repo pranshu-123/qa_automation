@@ -26,6 +26,7 @@ public class TC_DR_23 extends BaseClass {
         test = extent.startTest("TC_DR_19.validClusterTypeSearch",
                 "Verify application is listed only of selected ClusterType");
         test.log(LogStatus.INFO, "Login to the application");
+        test.assignCategory("Jobs-Runs/All");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
         loggingUtils.info("Initialize all class objects", test);

@@ -27,7 +27,7 @@ public class TC_DR_46 extends BaseClass {
     public void VerifyClusterTypeSearchInFinishedTab() {
         test = extent.startTest("TC_DR_46.VerifyClusterTypeSearchInFinishedTab",
                 "Verify application is listed only of selected ClusterType");
-        test.assignCategory("Jobs-Runs/finishedTab");
+        test.assignCategory("Jobs-Runs/Finished");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

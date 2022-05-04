@@ -24,6 +24,7 @@ public class TC_DR_02 extends BaseClass {
     public void SearchJobsByName() {
         test = extent.startTest("TC_DR_02.SearchJobsByName",
                 "Verify search must populate desired job by name");
+        test.assignCategory("Jobs-Runs/All");
         test.log(LogStatus.INFO, "Initialize all class objects");
         loggingUtils.info("Initialize all class objects", test);
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -42,7 +43,7 @@ public class TC_DR_02 extends BaseClass {
 
             test.log(LogStatus.INFO, "Get application type of first application listed in table");
             loggingUtils.info("Get application type of first application listed in table", test);
-            String applicationTypeToSearch = dbpageObject.getNameeFromTable.getText();
+            String applicationTypeToSearch = dbpageObject.getNameFromTable.getText();
             dbpageObject.searchBox.clear();
             waitExecuter.sleep(1000);
             dbpageObject.searchBox.sendKeys(applicationTypeToSearch);

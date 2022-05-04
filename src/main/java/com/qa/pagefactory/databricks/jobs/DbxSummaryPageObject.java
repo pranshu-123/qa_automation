@@ -14,13 +14,114 @@ public class DbxSummaryPageObject {
     @FindBy(xpath = "//table[@id='RunsListAll']/tbody[1]/tr/td[14]/button[2]")
     public WebElement sparkIcon;
 
+    @FindBy(xpath = "(//tbody[@id='appNavigation-body'])/tr")
+    public List<WebElement> navigationTableRows;
+
+    @FindBy(xpath = "(//thead[@id='appNavigation-head'])/tr/th")
+    public List<WebElement> navigationHeaders;
+
+    @FindBy(xpath = "//*[@class='link-item']")
+    public WebElement programSourceLink;
+
+    @FindBy(xpath = "//*[@class='link-item']")
+    public WebElement programSourceLinkText;
+
+    @FindBy(xpath = "//th[7]//a[1]")
+    public WebElement sortByDurationApp;
+
+    @FindBy(xpath = "//p[@class='results-title']//b[1]")
+    public WebElement getTotalAppCount;
+
+    @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-up')]")
+    public WebElement sortUp;
+
+    @FindBy(xpath = "//*[@class=\"highcharts-title\"]/*[name()='tspan']")
+    public List<WebElement> stageTimingHeaders;
+
+    @FindBy(xpath = "//*[contains(@class,'component-data-tables')]//td/p")
+    public WebElement programDataNotFound;
+
+    //Load Logs and Diagnostic action
+    @FindBy(xpath = "//*[@id='spark-action-container']")
+    public WebElement loadAction;
+
+    @FindBy(xpath = "//*[@class='popover-body']/ul/li/h4")
+    public List<WebElement> loadActionList;
+
+    @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[4]/a[2]")
+    public WebElement getAppId;
+
+    @FindBy(xpath = "//span[@class='text-ellipsis app-id']/following-sibling::span[1]")
+    public WebElement getHeaderAppId;
+
+    @FindBy(xpath = "//span[@class='text-ellipsis app-id']/following-sibling::span[1]")
+    public WebElement clickOnAppId;
+
+    @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[1]/div/div[1]/div[2]/h4/span")
+    public List<WebElement> leftPaneKPIList;
+
+    @FindBy(xpath = "//*[@id='app-prev-header']/b")
+    public WebElement ifAttemptPresent;
+
+    @FindBy(xpath = "(//div[@id=\"app\"])/div/div/div[2]/div[1]/div/div[2]/div/ul/li")
+    public List<WebElement> component_element;
+
+    @FindBy(xpath = "(//div[@class='timeline gantt-timeline pipeline row no-gutters'])")
+    public List<WebElement> ganttChartTable;
+
+    @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[1]/div/div[2]/div/div/div/div[1]/div/p/b")
+    public List<WebElement> ganttChartHeaders;
+
+    @FindBy(xpath = "(//div[@class='timeline gantt-timeline pipeline row no-gutters'])//div/p")
+    public List<WebElement> ganttChartDuration;
+
+    @FindBy(xpath = "(//div[@class='timeline gantt-timeline pipeline row no-gutters'])//span[1]")
+    public List<WebElement> ganttChartJobId;
+
+    @FindBy(xpath = "(//div[@class='timeline gantt-timeline pipeline row no-gutters'])//span[2]")
+    public List<WebElement> ganttChartStartTime;
+
+    @FindBy(xpath = "//*[@id=\"spark_exec_plan\"]/*[name()='svg']")
+    public WebElement DAGData;
+
+    @FindBy(xpath = "(//thead[@id='appNavigation-head'])/tr/th[1]")
+    public WebElement singleJobHeader;
+
+    @FindBy(xpath = "//*[@id=\"dagContainer\"]/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']")
+    public List<WebElement> rddBlockList;
+
+    @FindBy(xpath = "//*[@class='consumers']")
+    public List<WebElement> rddBlockNumList;
+
+    @FindBy(xpath = "(//thead[@id='sparkStageNavigation-head'])/tr/th")
+    public List<WebElement> stageHeaders;
+
+    @FindBy(xpath = "//div[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0" +
+            " highcharts-tracker']/span")
+    public List<WebElement> numAttempts;
+
+    @FindBy(xpath = "//*[@id='sparkStageNavigation-body']//tr")
+    public List<WebElement> stageRows;
+
+    @FindBy(xpath = "//div [@class='component-tabs-primary']/ul/li")
+    public List<WebElement> stagesTab;
+
+    @FindBy(xpath = "//div [@class='dashboard-container']//h4")
+    public List<WebElement> stagesTimelineHeader;
+
+    @FindBy(xpath = "//*[@class='histogram']/*[name()='g'][3]")
+    public List<WebElement> timelineBarGraph;
+
+    @FindBy(xpath = "//*[@id=\"timeline_tab\"]/li/span/a")
+    public List<WebElement> stagesTimelineSubTab;
+
     @FindBy(xpath = "//*[@id=\"app\"]//div[2]/div[1]//div[1]/div[2]/h4/span/b")
     public List<WebElement> rightPaneKpis;
 
     @FindBy(xpath = "(//div[@id='SummaryDetails']/div/div)/h5")
     public List<WebElement> rightPaneAppKpis;
 
-    @FindBy(xpath = "(//div[@id='SummaryDetails']/div/div)/div//h3")
+    @FindBy(xpath = "//*[@id=\"SummaryDetails\"]/div/div/div[1]/div/h3")
     public List<WebElement> rightPaneAppKpiVal;
 
 
@@ -155,8 +256,22 @@ public class DbxSummaryPageObject {
     @FindBy(xpath = "//*[@class='col-md-12 no-left-gutter no-right-gutter']//*[@role='presentation'][1]")
     public WebElement resourcesMetricsDropDown;
 
+    @FindBy(xpath = "//div[@class='component-dashboard']//div[contains(@class,'col-md-6')]")
+    public List<WebElement> vcoreMetrics;
+
+
     @FindBy(xpath = "//*[@class='select2-results']//ul/li/ul/li")
     public List<WebElement> resourcesMetricsDropDownData;
+
+    @FindBy(xpath = "//span[@id='select2-qvbs-container']/following-sibling::span[1]")
+    public WebElement resourcesHotsMetricsDropDown;
+
+    @FindBy(xpath = "//*[@class='select2-results']//ul/li/ul/li")
+    public List<WebElement> resourcesHostMetricsDropDownData;
+
+
+    @FindBy(xpath = "//div[@class='component-dashboard']//div[contains(@class,'col-md-6')]")
+    public List<WebElement> memoryMetrics;
 
     @FindBy(xpath = "//*[@chart-options='getappResourceUseageOptions']//*[name()='path' and @class='highcharts-tracker-line']")
     public List<WebElement> resourcesMetricsLineGraph;
@@ -166,6 +281,37 @@ public class DbxSummaryPageObject {
 
     @FindBy(xpath = "//*[@class=\"highcharts-series-group\"]")
     public List<WebElement> resourcesAllGraphs;
+
+    @FindBy(xpath = "//div[@class='component-dashboard']//div[contains(@class,'col-md-6')]" +
+            "//div[@class='content']//*[name()='g' and @class='highcharts-series-group']")
+    public List<WebElement> containerMetricsGraph;
+
+    @FindBy(xpath = "//div[@class='component-dashboard']//div[contains(@class,'col-md-6')]//div[@class='header']/h4")
+    public List<WebElement> vcoreMetricsHeader;
+
+    @FindBy(xpath = "//div[@class='component-dashboard']//div[contains(@class,'col-md-6')]//div[@class='header']/h4")
+    public List<WebElement> memoryMetricsHeader;
+
+
+    @FindBy(xpath = "//div[@class='component-dashboard']//div[contains(@class,'col-md-6')]")
+    public List<WebElement> containerMetrics;
+
+    @FindBy(xpath = "//*[@chart-options='getappResourceUseageOptions']//*[name()='path' and @class='highcharts-tracker-line']")
+    public List<WebElement> resourcesHostMetricsLineGraph;
+
+    @FindBy(xpath = "//div[@class='component-dashboard']//div[contains(@class,'col-md-6')]//div[@class='header']/h4")
+    public List<WebElement> containerMetricsHeader;
+
+    @FindBy(xpath = "//*[@class=\"legendclass\"]//span")
+    public List<WebElement> resourcesHostMetricsPlotGraphLegend;
+
+    @FindBy(xpath = "//div[@class='component-dashboard']//div[contains(@class,'col-md-6')]" +
+            "//div[@class='content']//*[name()='g' and @class='highcharts-series-group']")
+    public List<WebElement> vcoreMetricsGraph;
+
+    @FindBy(xpath = "//div[@class='component-dashboard']//div[contains(@class,'col-md-6')]" +
+            "//div[@class='content']//*[name()='g' and @class='highcharts-series-group']")
+    public List<WebElement> memoryMetricsGraph;
 
     @FindBy(xpath = "//*[@id='taskattempts']//*[div and @class='footer']/div/*/span[1]")
     public List<WebElement> taskAttFooterName;
@@ -180,6 +326,4 @@ public class DbxSummaryPageObject {
         PageFactory.initElements(driver, this);
 
     }
-
-
 }

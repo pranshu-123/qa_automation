@@ -3,5 +3,6 @@ unravel:
   impala_clusters: CM-tnode1-Unravel-tnode3-impala
   hbase_clusters: HDPab722, CM-tnode1-Unravel-tnode3-impala
   mapreduce_clusters: tnode3-CDH633-TLS-kerb-Sentry
+  workspace_clusters: ML-Workspace,AI-Workspace
 aws:
   bucket_name: unravel-automation-files

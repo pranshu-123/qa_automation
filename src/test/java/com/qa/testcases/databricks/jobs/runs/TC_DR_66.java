@@ -43,11 +43,6 @@ public class TC_DR_66 extends BaseClass {
         dballApps.selectTab("Running");
         waitExecuter.waitUntilPageFullyLoaded();
         try {
-            // Navigate to Runs tab from header
-            test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-            test.log(LogStatus.INFO, "Select last 7 days");
-            dballApps.inJobsSelectClusterAndLast7Days();
-            waitExecuter.sleep(2000);
             /*
              * Validate All columns  types are --
 
@@ -62,7 +57,7 @@ public class TC_DR_66 extends BaseClass {
             for (int i = 0; i < statusTypes.size(); i++) {
                 listOfStatusTypes.add(statusTypes.get(i).getText().trim());
             }
-            waitExecuter.sleep(2000);
+            waitExecuter.sleep(3000);
             loggingUtils.info("List of status type actual - " + listOfStatusTypes, test);
             loggingUtils.info("List of status type expected - " + existingStatusTypes, test);
             Assert.assertTrue(listOfStatusTypes.equals(existingStatusTypes),

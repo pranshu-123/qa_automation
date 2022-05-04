@@ -24,6 +24,7 @@ public class TC_DR_03 extends BaseClass {
     public void validateSearchJobsById() {
         test = extent.startTest("TC_DR_03.validateSearchJobsById",
                 "VVerify search must populate desired job by id");
+        test.assignCategory("Jobs-Runs/All");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         WaitExecuter waitExecuter = new WaitExecuter(driver);

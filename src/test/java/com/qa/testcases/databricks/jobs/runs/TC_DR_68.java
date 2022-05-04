@@ -32,7 +32,6 @@ public class TC_DR_68 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         DbxSubTopPanelModulePageObject dbpageObject = new DbxSubTopPanelModulePageObject(driver);
         DatePicker datePicker = new DatePicker(driver);
-        DatePickerPageObject datePickerPageObject = new DatePickerPageObject(driver);
         DbAllApps dballApps = new DbAllApps(driver);
         // Navigate to Runs tab from header
         test.log(LogStatus.INFO, "Navigate to Runs tab from header");
@@ -40,20 +39,6 @@ public class TC_DR_68 extends BaseClass {
         dballApps.selectTab("Running");
         waitExecuter.waitUntilPageFullyLoaded();
         try {
-            // Click on date picker ranges and verify Runs app counts
-            test.log(LogStatus.INFO, "Click on date picker ranges and verify Runs app counts");
-            loggingUtils.info("Click on date picker ranges and verify Runs app counts", test);
-            List<WebElement> dateRange = datePickerPageObject.dateRangeOptions;
-            waitExecuter.sleep(2000);
-            datePicker.clickOnDatePicker();
-            for (int i = 0; i < dateRange.size() - 1; i++) {
-                String selectedDateRange = dateRange.get(i).getText();
-                waitExecuter.sleep(1000);
-                // Click on date picker ranges and verify Runs app counts
-                test.log(LogStatus.INFO, "Click on date picker range: " + selectedDateRange);
-                loggingUtils.info("Click on date picker range: " + selectedDateRange,test);
-                dateRange.get(i).click();
-                waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
                 int totalAppCount = Integer
                         .parseInt(dbpageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
                 loggingUtils.info("Total app count: " + totalAppCount, test);
@@ -61,13 +46,11 @@ public class TC_DR_68 extends BaseClass {
                 test.log(LogStatus.INFO, "Assert if apps are displayed for selected date range");
                 loggingUtils.info("Assert if total count of apps are equal to Runs apps on selected date range", test);
                 Assert.assertTrue(totalAppCount >= 0,
-                        "The app count of page does not match with totalAppCount for date range selected: "
-                                + selectedDateRange);
+                        "The app count of page does not match with totalAppCount for date range selected: ");
                 test.log(LogStatus.PASS,
-                        "Apps are listed for selected date range- " + selectedDateRange);
+                        "Apps are listed for selected date range-");
                 waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
-                datePicker.clickOnDatePicker();
-            }
+
         } catch (NoSuchElementException ex) {
             loggingUtils.error("No app present by this name", test);
             loggingUtils.error("Error- " + ex, test);

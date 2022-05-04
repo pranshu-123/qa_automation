@@ -20,6 +20,7 @@ public class TC_DR_14 extends BaseClass {
     public void validateJobAndSpark() {
         test = extent.startTest("TC_DR_14.validateJobAndSpark",
                 "Verify JOB and SPARK button are operational");
+        test.assignCategory("Jobs-Runs/All");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

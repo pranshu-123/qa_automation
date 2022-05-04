@@ -27,6 +27,7 @@ public class TC_DR_13 extends BaseClass {
     public void validateAllColumns() {
         test = extent.startTest("TC_DR_13.validateAllColumns",
                 "Verify All columns must be listed in the Table");
+        test.assignCategory("Jobs-Runs/All");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

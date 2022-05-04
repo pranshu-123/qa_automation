@@ -21,6 +21,7 @@ public class TC_DR_05 extends BaseClass {
     public void validateKilledStatus() {
         test = extent.startTest("TC_DR_05.validateKilledStatus",
                 "Verify All the Killed jobs are listed on the page");
+        test.assignCategory("Jobs-Runs/All");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -54,8 +55,8 @@ public class TC_DR_05 extends BaseClass {
                 waitExecuter.sleep(3000);
 
             } else {
-                test.log(LogStatus.SKIP, "No Application present ");
-                loggingUtils.error("No Application present in the Runs page", test);
+                test.log(LogStatus.WARNING, "No Application present in the Runs page., " +
+                        "Manually check to see if the data on the Runs page is present.");
             }
         } catch (NoSuchElementException ex) {
             loggingUtils.error("No app present by this name", test);

@@ -33,11 +33,6 @@ public class TC_DR_70 extends BaseClass {
         dballApps.navigateToJobsTab("Runs");
         dballApps.selectTab("Running");
         waitExecuter.waitUntilPageFullyLoaded();
-        // Navigate to Runs tab select cluster and last 7 days
-        test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-        test.log(LogStatus.INFO, "Select last 7 days");
-        dballApps.inJobsSelectClusterAndLast7Days();
-        waitExecuter.sleep(2000);
         try {
             // Assert if the application are as per the filter applied on global search
             test.log(LogStatus.INFO, "Assert if the application listed are as per the filter applied on search");
@@ -45,7 +40,7 @@ public class TC_DR_70 extends BaseClass {
 
             test.log(LogStatus.INFO, "Get application type of first application listed in table");
             loggingUtils.info("Get application type of first application listed in table", test);
-            String applicationTypeToSearch = dbpageObject.getNameeFromTable.getText();
+            String applicationTypeToSearch = dbpageObject.getNameFromTable.getText();
             dbpageObject.searchBox.clear();
             waitExecuter.sleep(1000);
             dbpageObject.searchBox.sendKeys(applicationTypeToSearch);

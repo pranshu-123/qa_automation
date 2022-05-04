@@ -7,7 +7,7 @@ import com.qa.utils.LoggingUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-@Marker.DBX.Data
+@Marker.DbxDataTables
 public class TC_DBX_DT_7 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_1.class);
 

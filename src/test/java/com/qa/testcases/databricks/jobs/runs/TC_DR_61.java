@@ -36,12 +36,6 @@ public class TC_DR_61 extends BaseClass {
         dballApps.selectTab("Running");
         waitExecuter.waitUntilPageFullyLoaded();
         try {
-            // Navigate to Runs tab from header
-            test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-            test.log(LogStatus.INFO, "Select last 7 days");
-            dballApps.inJobsSelectClusterAndLast7Days();
-            waitExecuter.sleep(2000);
-
 
             int totalCount = Integer
                     .parseInt(dbpageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());

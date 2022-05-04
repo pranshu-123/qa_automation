@@ -20,6 +20,7 @@ public class TC_DR_04 extends BaseClass {
         test = extent.startTest("TC_DR_04.validateFilterByClusterName",
                 "Verify search must show valid error");
         test.log(LogStatus.INFO, "Login to the application");
+        test.assignCategory("Jobs-Runs/All");
         // Initialize all classes objects
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         DbAllApps dballApps = new DbAllApps(driver);

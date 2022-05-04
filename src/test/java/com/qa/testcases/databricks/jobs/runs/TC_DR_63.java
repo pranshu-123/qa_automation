@@ -41,11 +41,6 @@ public class TC_DR_63 extends BaseClass {
         dballApps.selectTab("Running");
         waitExecuter.waitUntilPageFullyLoaded();
         try {
-            // Navigate to Runs tab from header
-            test.log(LogStatus.INFO, "Navigate to jobs tab from header");
-            test.log(LogStatus.INFO, "Select last 7 days");
-            dballApps.inJobsSelectClusterAndLast7Days();
-            waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
             // Click on user searchbox and get all ClusterType.
             test.log(LogStatus.INFO, "Click on ClusterType searchBox and get all usernames.");
             loggingUtils.info("Click on ClusterType searchBox and get all usernames.",test);

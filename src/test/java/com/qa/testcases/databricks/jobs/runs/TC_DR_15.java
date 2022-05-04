@@ -20,6 +20,7 @@ public class TC_DR_15 extends BaseClass {
     public void validateSortJobs() {
         test = extent.startTest("TC_DR_15.validateSortJobs",
                 "Verify Sort jobs as per status");
+        test.assignCategory("Jobs-Runs/All");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

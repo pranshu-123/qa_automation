@@ -1,5 +1,6 @@
 package com.qa.testcases.cloud.databricks.data.tables;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.cloud.databricks.DataPageObject;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
@@ -7,7 +8,7 @@ import com.qa.utils.LoggingUtils;
 import com.qa.utils.WaitExecuter;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+@Marker.DbxDataTables
 public class TC_DBX_DT_29 extends BaseClass {
 
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_29.class);

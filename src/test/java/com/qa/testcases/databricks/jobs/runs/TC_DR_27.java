@@ -27,6 +27,7 @@ public class TC_DR_27 extends BaseClass {
         test = extent.startTest("TC_DR_14.validateJobAndSpark",
                 "Verify that global search is able to search by application type, workspace name, user name or app Id");
         test.log(LogStatus.INFO, "Login to the application");
+        test.assignCategory("Jobs-Runs/All");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
         loggingUtils.info("Initialize all class objects", test);

@@ -22,6 +22,7 @@ public class TC_DR_06 extends BaseClass {
     public void validateFailedStatus() {
         test = extent.startTest("TC_DR_06.validateFailedStatus",
                 "Verify All the Failed jobs are listed on the page");
+        test.assignCategory("Jobs-Runs/All");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");

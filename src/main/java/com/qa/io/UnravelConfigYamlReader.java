@@ -79,6 +79,8 @@ public class UnravelConfigYamlReader implements YamlReader {
             clusters = (String) unravelNode.get(ConfigConstants.UnravelYamlConfig.HBASE_CLUSTERS);
         }else if (appName.contains("mapreduce")){
             clusters = (String) unravelNode.get(ConfigConstants.UnravelYamlConfig.MAPREDUCE_CLUSTERS);
+        }else if (appName.contains("overview")){
+            clusters = (String) unravelNode.get(ConfigConstants.UnravelYamlConfig.WORKSPACE_CLUSTERS);
         } else {
             clusters = (String) unravelNode.get(ConfigConstants.UnravelYamlConfig.CLUSTERS);
         }

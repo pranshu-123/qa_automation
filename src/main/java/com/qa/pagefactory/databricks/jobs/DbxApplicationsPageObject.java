@@ -21,7 +21,10 @@ public class DbxApplicationsPageObject {
     @FindBy(xpath = "//input[@class='select2-search__field']")
     public WebElement clusterDropdown;
 
-    @FindBy(xpath = "//*[@id='RunsListAll-body']/tr/td[2]")
+    @FindBy(xpath = "//tbody/tr/td[11]/span[1]")
+    public WebElement getClusterName;
+
+    @FindBy(xpath = "//tbody/tr/td[2]/span[1]")
     public WebElement getUserFromTable;
 
     @FindBy(xpath = "//tbody/tr")
@@ -33,7 +36,7 @@ public class DbxApplicationsPageObject {
     @FindBy(xpath = "//tbody/tr[1]/td/a[2]")
     public List<WebElement> getNamesFromDropDown;
 
-    @FindBy(xpath = "//*[@id='RunsListAll-body']/tr/td[10]")
+    @FindBy(xpath = "//tbody[1]/tr/td[4]/a[2]")
     public WebElement getWorkspaceNameTable;
 
     @FindBy(css = ".col-md-12.no-data-msg")
@@ -48,11 +51,17 @@ public class DbxApplicationsPageObject {
     @FindBy(xpath = "//*[@id=\"runs-filter-panel\"]/div[2]/div/p/label/span[1]")
     public List<WebElement> selectOneApplicationType;
 
+    @FindBy(xpath = "//tbody[1]/tr/td")
+    public WebElement selectApplicationPresent;
+
     @FindBy(xpath = "//*[@id=\"runs-filter-panel\"]/div[2]/div/p/label/div/span[2]")
     public List<WebElement> getEachApplicationTypeJobCounts;
 
     @FindBy(xpath = "//span[contains(@class,'select2-dropdown--below')]//ul/li")
     public List<WebElement> getclusterListDropdown;
+
+    @FindBy(xpath = "//span[contains(@class,'select2-dropdown--below')]//ul/li")
+    public List<WebElement> getClusterDropdown;
 
     @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')]//input)[1]")
     public WebElement clusterSearchBox;

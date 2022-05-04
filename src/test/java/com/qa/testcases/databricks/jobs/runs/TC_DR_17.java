@@ -22,6 +22,7 @@ public class TC_DR_17 extends BaseClass {
         test = extent.startTest("TC_DR_17.validateResetFunctionality",
                 "Selection of reset option should reset all the filters which are applied");
         test.log(LogStatus.INFO, "Login to the application");
+        test.assignCategory("Jobs-Runs/All");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
         loggingUtils.info("Initialize all class objects", test);

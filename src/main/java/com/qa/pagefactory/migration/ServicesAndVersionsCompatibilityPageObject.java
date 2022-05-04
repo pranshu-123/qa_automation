@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ServicesAndVersionsCompatibilityPageObject {
 
-    @FindBy(xpath = "//section[contains(@class,'component-message-banner bg-success')]//i[1]")
+    @FindBy(xpath = "//div[text()='Services and Versions Compatibility completed successfully.']")
     public WebElement closeMsgBanner;
 
     @FindBy(xpath = "//button[@class='run-btn']")

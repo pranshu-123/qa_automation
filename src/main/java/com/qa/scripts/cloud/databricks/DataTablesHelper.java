@@ -3,16 +3,10 @@ package com.qa.scripts.cloud.databricks;
 import com.qa.constants.DirectoryConstants;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.cloud.databricks.DataPageObject;
-import com.qa.utils.ActionPerformer;
-import com.qa.utils.DateUtils;
-import com.qa.utils.LoggingUtils;
-import com.qa.utils.WaitExecuter;
+import com.qa.utils.*;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.ExtentTest;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.testng.Assert;
 
 import java.io.BufferedReader;
@@ -38,6 +32,7 @@ public class DataTablesHelper {
     private final UserActions actions;
     private final ActionPerformer actionPerformer;
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
+
 
     public DataTablesHelper(WebDriver driver, ExtentTest extentTest) {
         this.driver = driver;
@@ -104,12 +99,13 @@ public class DataTablesHelper {
             } else {
                 isMetastorePresent = true;
                 loggingUtils.info(String.format("Metastore present for selected workspace %s",
-                    dropdownValueText), test);
+                        dropdownValueText), test);
                 break;
             }
         }
         Assert.assertTrue(isMetastorePresent, "Metastore not present");
     }
+
 
     /**
      * Check whether data table is loaded
@@ -251,8 +247,13 @@ public class DataTablesHelper {
      * @param rowNum - Row Number to get info
      */
     public void clickOnMoreInfoOfNthRow(int rowNum) {
+        int scrollY = 600;
+        JavaScriptExecuter.scrollViewWithYAxis(driver,scrollY);
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        //executor.executeScript("arguments[0].scrollIntoView(true);", dataPageObject.logScrollable);
         WebElement row = dataPageObject.tableRows.get(rowNum);
-        actions.performActionWithPolling(row.findElement(By.xpath("//td[15]/a")), UserAction.CLICK);
+        actions.performActionWithPolling(dataPageObject.moreInfo, UserAction.CLICK);
+        waitExecuter.sleep(2000);
     }
 
     /**
@@ -281,6 +282,7 @@ public class DataTablesHelper {
                 actions.performActionWithPolling(dataPageObject.partitionDetailTabOnTableDetails, UserAction.CLICK);
                 break;
             default:
+                backToTablesPage();
                 loggingUtils.error("Incorrect tab name is passed to click", test);
                 break;
         }

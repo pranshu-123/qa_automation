@@ -342,7 +342,7 @@ public class TopXReports {
 		}
 		Iterator<String> i1 = headers.iterator();
 		Iterator<String> i2 = values.iterator();
-		while (i1.hasNext() || i2.hasNext()) {
+		while (i1.hasNext() && i2.hasNext()) {
 			resultTable.put(i1.next(), i2.next());
 		}
 		return resultTable;

@@ -146,15 +146,18 @@ public class SparkDetails {
 	}
 
 	public void validateSparkDetailsPage(LinkedHashMap<String, String> appValues) {
-		List<String> sparkAppDetails = fetchAppDetails();
 		String appId = returnAppId();
 		String stageCount = returnStagesCount();
 		Assert.assertTrue(appValues.containsValue(appId), "App Id is either incorrect or not captured in spark page");
 		logger.info("App ID is displayed in Spark details page.");
 		Assert.assertTrue(appValues.containsValue(stageCount), "Stage Count is either incorrect or not captured in spark page");
 		logger.info("Stage Count is displayed in Spark details page.");
+	}
+	
+	public void validateUserAndClusterSparkDetails(LinkedHashMap<String, String> appValues) {
+		List<String> sparkAppDetails = fetchAppDetails();
 		Assert.assertTrue(sparkAppDetails.contains("Owner : "+appValues.get("User")+" |"),appValues.get("User") + " not listed in Spark Page");
-		Assert.assertTrue(sparkAppDetails.contains("Cluster: "+appValues.get("Cluster")+" |"),appValues.get("Cluster") + " not listed in Spark Page");
+		Assert.assertTrue(sparkAppDetails.contains("Cluster: "+appValues.get("Cluster Name")+" |"),appValues.get("Cluster") + " not listed in Spark Page");
 
 	}
 }

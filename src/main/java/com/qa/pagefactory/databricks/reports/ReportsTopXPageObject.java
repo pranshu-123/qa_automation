@@ -95,10 +95,10 @@ public class ReportsTopXPageObject {
 	@FindBy(xpath = "//span[contains(text(),'App Count')]/..//a[contains(@class,'icon-sort')]")
 	public WebElement sortAppCount;
 	
-	@FindBy(xpath = "//td[@class='key border-success']/..")
+	@FindBy(xpath = "//td[contains(@class,'border-success')]/..")
 	public WebElement  successfulJobRunRow;
 	
-	@FindBy(xpath = "(//td[@class='key border-success'])[1]/../td/span")
+	@FindBy(xpath = "(//td[contains(@class,'border-success')])[1]/../td")
 	public List<WebElement>  successfulJobRunData;
 	
 	@FindBy(xpath = "//td[@class='key border-running']/../td/span")

@@ -208,12 +208,17 @@ public @interface Marker {
     }
 
     @Retention(RetentionPolicy.RUNTIME)
+    @interface DbxCompute {
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
     @interface DbxDataOverview {
     }
 
     @Retention(RetentionPolicy.RUNTIME)
     @interface DbxDataTables {
     }
+
 
     @Target(ElementType.TYPE)
     @interface DBX {

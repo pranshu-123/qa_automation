@@ -1,9 +1,7 @@
 package com.qa.testcases.databricks.compute;
 
 import java.util.logging.Logger;
-
 import org.testng.annotations.Test;
-
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.scripts.DatePicker;
@@ -31,7 +29,6 @@ public class TC_CMP_13 extends BaseClass{
 		date.selectLast90Days();
 		LOGGER.info("Last 90 days selected");
 		compute.validateSorting("Workspace");
-		compute.validateJobDetailsAsPerSelectedStatus("Success");
 		test.log(LogStatus.PASS, "Jobs are sorted and listed as per sorted criteria");
 		LOGGER.info("Jobs are sorted and listed as per sorted criteria");
 	}

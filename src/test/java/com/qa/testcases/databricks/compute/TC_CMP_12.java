@@ -31,7 +31,6 @@ public class TC_CMP_12 extends BaseClass{
 		date.selectLast90Days();
 		LOGGER.info("Last 90 days selected");
 		compute.validateSorting("Status");
-		compute.validateJobDetailsAsPerSelectedStatus("Failed");
 		test.log(LogStatus.PASS, "Jobs are sorted and listed as per sorted criteria");
 		LOGGER.info("Jobs are sorted and listed as per sorted criteria");
 	}

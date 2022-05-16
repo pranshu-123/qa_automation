@@ -12,15 +12,15 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.DbxCompute
-public class TC_CMP_02 extends BaseClass{
+public class TC_CMP_38 extends BaseClass{
 
-	private static final Logger LOGGER = Logger.getLogger(TC_CMP_02.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(TC_CMP_38.class.getName());
 
 	@Test
-	public void TC_Compute_02_verifyKilledJobStatus() {
-		test = extent.startTest("TC_Compute_02_verifyKilledJobStatus", "Verify All the killed jobs are listed on the page");
+	public void TC_Compute_38_verifyRunningTabJobs() {
+		test = extent.startTest("TC_Compute_38_verifyRunningTabJobs", "Verify Running Tab contains only running Jobs");
 		test.assignCategory("Compute");
-		Log.startTestCase("TC_Compute_02_verifyKilledJobStatus");
+		Log.startTestCase("TC_Compute_38_verifyRunningTabJobs");
 		Compute compute = new Compute(driver);
 		WaitExecuter wait = new WaitExecuter(driver);
 		DatePicker date = new DatePicker(driver);
@@ -29,10 +29,11 @@ public class TC_CMP_02 extends BaseClass{
 		date.clickOnDatePicker();
 		date.selectLast90Days();
 		LOGGER.info("Last 90 days selected");
-		List<String> status = compute.selectStatus("Killed");
+		compute.returnJobStatustes("running");
+		List<String> status = compute.selectStatus("Running");
 		compute.validateJobDetailsAsPerSelectedStatus(status);
-		test.log(LogStatus.PASS, "Jobs are listed as per selected status");
-		LOGGER.info("Jobs are listed as per selected status.");
+		LOGGER.info("Only Running job are shown on Running tab");
+		test.log(LogStatus.PASS, "Only Running job are shown on Running tab");
 	}
 
 }

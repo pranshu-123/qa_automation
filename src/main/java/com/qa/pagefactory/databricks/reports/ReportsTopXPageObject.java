@@ -95,16 +95,17 @@ public class ReportsTopXPageObject {
 	@FindBy(xpath = "//span[contains(text(),'App Count')]/..//a[contains(@class,'icon-sort')]")
 	public WebElement sortAppCount;
 	
-	@FindBy(xpath = "//td[contains(@class,'border-success')]/..")
+
+	@FindBy(xpath = "//td[contains(@class,'border')]/..")
 	public WebElement  successfulJobRunRow;
 	
-	@FindBy(xpath = "(//td[contains(@class,'border-success')])[1]/../td")
+	@FindBy(xpath = "(//td[contains(@class,'border')])[1]/../td")
 	public List<WebElement>  successfulJobRunData;
 	
 	@FindBy(xpath = "//td[@class='key border-running']/../td/span")
 	public List<WebElement>  runningJobRunData;
 	
-	@FindBy(xpath = "//a[@class='icon-gear']/../..//th/span")
+	@FindBy(xpath = "//a[contains(@class,'icon')]/../..//th/span")
 	public List<WebElement>  successfulJobRunHeaders;
 	
 	public String tagsType = "//label[contains(text(),'%s')]/preceding-sibling::input";

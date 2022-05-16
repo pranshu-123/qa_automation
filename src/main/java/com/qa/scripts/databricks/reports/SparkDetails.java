@@ -135,7 +135,7 @@ public class SparkDetails {
 
 	public void validateSummaryTabValues() {
 		String[] actualSummaryTabsValues = {"Analysis","Resources","Errors","Configuration","Logs","Tags","Program","Timings"};
-	    List<String> actualSummaryTabsValueList = Arrays.asList(actualSummaryTabsValues);
+	    List<String> actualSummaryTabsValueList =new ArrayList<>(Arrays.asList(actualSummaryTabsValues));
 		List<String> summaryTabs = fetchSummaryTabsValues();
 		if(summaryTabs.size()==9) {
 			actualSummaryTabsValueList.add("SQL");

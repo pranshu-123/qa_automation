@@ -215,7 +215,7 @@ public class Compute {
 	public void validateFilteredRows(String choice) {
 		Set<String> resultSet = new HashSet<String>();
 		for(WebElement el: computePageObject.filteredResultRows) {
-			resultSet.add(el.getAttribute("title").stripLeading());
+			resultSet.add(el.getAttribute("title"));
 
 		}
 		Assert.assertTrue(resultSet.contains(choice),"Filter not applied successfully");

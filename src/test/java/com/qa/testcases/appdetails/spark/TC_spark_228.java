@@ -58,7 +58,7 @@ public class TC_spark_228 extends BaseClass {
         int appCount = appsDetailsPage.clickOnlyLink("Success");
         //Clicking on the Spark app must go to apps detail page
         if (appCount > 0) {
-            String headerAppId = appsDetailsPage.verifyAppId(sparkPageObj, applicationsPageObject);
+            String headerAppId = appsDetailsPage.verifyAppId(sparkPageObj);
             test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);
             appsDetailsPage.verifyRightPaneKpis(sparkPageObj);
             test.log(LogStatus.PASS, "All the KPIs are listed and the data is populated");

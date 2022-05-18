@@ -1138,7 +1138,6 @@ public class MrAppsDetailsPage {
         waitExecuter.waitUntilElementClickable(topPanelObj.jobs);
         waitExecuter.sleep(1000);
         userActions.performActionWithPolling(topPanelObj.jobs, UserAction.CLICK);
-        waitExecuter.waitUntilElementClickable(appPageObj.resetButton);
         waitExecuter.sleep(1000);
 
         //Select cluster

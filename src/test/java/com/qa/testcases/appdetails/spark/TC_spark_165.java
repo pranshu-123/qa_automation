@@ -69,7 +69,7 @@ public class TC_spark_165 extends BaseClass {
 
 		// Clicking on the Spark app must go to apps detail page
 		if (appCount > 0) {
-			String headerAppId = appsDetailsPage.verifyAppId(sparkAppsDetailsPageObject, applicationsPageObject);
+			String headerAppId = appsDetailsPage.verifyAppId(sparkAppsDetailsPageObject);
 			test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);
 			test.log(LogStatus.INFO, "Verify if the user can execute the Load Diagnostics action");
 			appsDetailsPage.verifyLoadDiagnosticAction(sparkAppsDetailsPageObject);

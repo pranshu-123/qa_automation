@@ -36,7 +36,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//div[contains(@class,'ranges')]//li")
     public List<WebElement> dateRanges;
 
-    @FindBy(xpath = "//span[contains(@class, 'select2-search--dropdown')]/input")
+    @FindBy(css = "input.select2-search__field")
     public WebElement clusterSearchBox;
 
     @FindBy(xpath = "//ul[contains(@class,'select2-results__options')]/li[1]")

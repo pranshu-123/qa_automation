@@ -218,6 +218,10 @@ public @interface Marker {
     @Retention(RetentionPolicy.RUNTIME)
     @interface DbxDataTables {
     }
+    
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface DbxAutoAction {
+    }
 
     @Target(ElementType.TYPE)
     @interface DBX {

@@ -223,6 +223,10 @@ public @interface Marker {
     @interface DbxAutoAction {
     }
 
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface EMRAllApps {
+    }
+
     @Target(ElementType.TYPE)
     @interface DBX {
         @Retention(RetentionPolicy.RUNTIME)

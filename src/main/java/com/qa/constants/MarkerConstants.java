@@ -63,7 +63,6 @@ public class MarkerConstants {
     public static final String DBX_APP_DETAILS = "dbx_app_details";
     public static final String DBX_MANAGE = "dbx_manage";
     public static final String DBX_COMPUTE = "dbx_compute";
-    public static final String DBX_AUTOACTION = "dbx_autoaction";
     // DBX Markers
 
    
@@ -136,7 +135,6 @@ public class MarkerConstants {
         map.put(DBX_DATA_TABLES, Marker.DbxDataTables.class);
         map.put(DBX_MANAGE, Marker.DbxManage.class);
         map.put(DBX_COMPUTE, Marker.DbxCompute.class);
-        map.put(DBX_AUTOACTION, Marker.DbxAutoAction.class);
         return Collections.unmodifiableMap(map);
     }
 }

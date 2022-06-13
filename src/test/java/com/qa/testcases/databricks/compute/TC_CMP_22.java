@@ -31,7 +31,7 @@ public class TC_CMP_22 extends BaseClass{
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast90Days();
 		LOGGER.info("Last 90 days selected");
-		compute.selectTags("Name");
+		compute.selectTags("Organization");
 		compute.selectTagKey();
 		compute.returnSelectedTags();
 		List<String> status = compute.selectStatus("Failed");

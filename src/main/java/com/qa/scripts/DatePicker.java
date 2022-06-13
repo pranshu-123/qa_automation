@@ -49,6 +49,7 @@ public class DatePicker {
      * This method used to click on date picker to open datepicker dropdown
      */
     public void clickOnDatePicker() {
+    	waitExecuter.sleep(2000);
         waitExecuter.waitUntilElementClickable(datePickerPageObject.dateRange);
         userActions.performActionWithPolling(datePickerPageObject.dateRange, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(datePickerPageObject.dateRange);

@@ -24,12 +24,11 @@ public class TR_07 extends BaseClass
 		test.assignCategory("Reports/TopX");
 		Log.startTestCase("TopX_Reports_07_GenerateNewReportForACluster");
 		List<String> headers = new ArrayList<String>(Arrays.asList("Parameter","Value"));
-		String clusterName ="Delta-cluster";
 		TopXReports topXReports = new TopXReports(driver);
 		topXReports.navigateToDifferentReportsTab("TopX");
 		LOGGER.info("Navigated to Reports tab");
 		topXReports.selectRun();
-		String[] result = topXReports.createNewReportForCluster("8", clusterName);
+		String[] result = topXReports.createNewReportForCluster("8");
 		LOGGER.info("Top X Report created successfully");
 		List<String> values = new ArrayList<String>(Arrays.asList(result));
 		

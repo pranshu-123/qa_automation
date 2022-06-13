@@ -24,8 +24,11 @@ public class TC_CMP_10 extends BaseClass{
 		Log.startTestCase("TC_Compute_10_verifyAllSettingsOption");
 		Compute compute = new Compute(driver);
 		WaitExecuter wait = new WaitExecuter(driver);
+		DatePicker date = new DatePicker(driver);
 		compute.navigateToCompute();
 		wait.sleep(1000);
+		date.clickOnDatePicker();
+		date.selectLast90Days();
 		compute.selectSettings();
 		List<String> actualValues = compute.returnSettingsOption();
 		String[] expectedSettingsOptions = {"Status", "Cluster Name", "Cluster Type","User",

@@ -31,7 +31,7 @@ public class TC_CMP_26 extends BaseClass{
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast90Days();
 		LOGGER.info("Last 90 days selected");
-		compute.selectTags("Tenure");
+		compute.selectTags("Unravel URL");
 		compute.selectTagKey();
 		compute.returnSelectedTags();
 		List<String> status = compute.selectStatus("Success");

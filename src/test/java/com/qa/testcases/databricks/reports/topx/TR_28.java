@@ -25,7 +25,6 @@ public class TR_28 extends BaseClass
 		test.assignCategory("Reports/TopX");
 		Log.startTestCase("TopX_Reports_07_GenerateNewReportForACluster");
 		List<String> headers = new ArrayList<String>(Arrays.asList("Parameter","Value"));
-		String clusterName ="Delta-cluster";
 		TopXReports topXReports = new TopXReports(driver);
 		DatePicker date = new DatePicker(driver);
 		topXReports.navigateToDifferentReportsTab("TopX");
@@ -34,7 +33,7 @@ public class TR_28 extends BaseClass
 		date.clickOnDatePicker();
 		date.setCurrentAndPastDate(-10);
 		date.clickOnCustomDateApplyBtn();
-		String[] result = topXReports.createNewReportForCluster("8", clusterName);
+		String[] result = topXReports.createNewReportForCluster("8");
 		LOGGER.info("Top X Report created successfully");
 		List<String> values = new ArrayList<String>(Arrays.asList(result));
 		

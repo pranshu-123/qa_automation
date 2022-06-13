@@ -30,8 +30,8 @@ public class TC_CMP_14 extends BaseClass{
 		date.clickOnDatePicker();
 		date.selectLast90Days();
 		LOGGER.info("Last 90 days selected");
-		compute.selectStatus("Running");
-		compute.validateJobStatus("Running");
+		compute.selectStatus("Failed");
+		compute.validateJobStatus("Failed");
 		LOGGER.info("Only Running jobs are displayed");
 		compute.resetStatuses();
 		compute.selectStatus("Success");

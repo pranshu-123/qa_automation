@@ -29,7 +29,7 @@ public class TC_CMP_08 extends BaseClass{
 		date.clickOnDatePicker();
 		date.selectLast90Days();
 		LOGGER.info("Last 90 days selected");
-		List<String> status = compute.selectStatus("Waitinng");
+		List<String> status = compute.selectStatus("Waiting");
 		compute.validateJobDetailsAsPerSelectedStatus(status);
 		test.log(LogStatus.PASS, "Jobs are listed as per selected status");
 		LOGGER.info("Jobs are listed as per selected status.");

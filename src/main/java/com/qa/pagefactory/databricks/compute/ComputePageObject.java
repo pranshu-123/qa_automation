@@ -33,7 +33,7 @@ public class ComputePageObject {
 	@FindBy(xpath = "//a[contains(text(),'Inefficient')]")
 	public WebElement inefficientTab;	
 
-	@FindBy(xpath = "//span[contains(@class,'event-name text-ellipsis')]/../..")
+	@FindBy(xpath = "//span[contains(@class,'event-name text-ellipsis')]/../../div/span[contains(@class,'event-name')]")
 	public List<WebElement> statusCheckboxes;	
 	
 	@FindBy(xpath = "//span[contains(@class,'event-name text-ellipsis')]/../..//span[@class='event-count']")
@@ -99,10 +99,8 @@ public class ComputePageObject {
 	@FindBy(xpath = "//input[@class='global-app-search']")
 	public WebElement globalSearch;
 
-
 	@FindBy(xpath = "//td[contains(@class,'border')]")
 	public List<WebElement>  jobRunStatus;
-	
 	
 	@FindBy(xpath = "//tbody[@id='allApps-body']/tr")
 	public List<WebElement>  globalSearchResult;
@@ -112,6 +110,12 @@ public class ComputePageObject {
 	
 	@FindBy(xpath = "//li[@class='select2-selection__choice']")
 	public WebElement filteredChoice;
+	
+	@FindBy(xpath = "//span[contains(text(),'Page')]")
+	public WebElement pageLabel;
+	
+	@FindBy(xpath = "//span[contains(@class,'event-name text-ellipsis')]/../..")
+	public List<WebElement> runningStatus;	
 	
 	public String sortType = "//span[contains(text(),'%s')]/../a[@class='sorting icon-sort']"; //Duration, Cost, Start time, User
 	

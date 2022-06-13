@@ -50,6 +50,9 @@ public class ReportsTopXPageObject {
 	@FindBy(xpath = "//input[@placeholder='Search...']")
 	public WebElement clusterTextArea;
 	
+	@FindBy(xpath = "//li[@class='multiselect__element']/span/span")
+	public List<WebElement> clusterList;
+	
 	@FindBy(xpath = "//a[contains(text(),'Run')]")
 	public WebElement newReportRunBtn;
 	
@@ -107,6 +110,21 @@ public class ReportsTopXPageObject {
 	
 	@FindBy(xpath = "//a[contains(@class,'icon')]/../..//th/span")
 	public List<WebElement>  successfulJobRunHeaders;
+	
+	@FindBy(xpath = "//label[contains(text(),'Tag')]/../div//li/input")
+	public List<WebElement>  tagTypeList;
+	
+	@FindBy(xpath = "//label[contains(text(),'Tag')]/../div//li/label")
+	public List<WebElement>  tagTypeNames;
+	
+	@FindBy(xpath = "//label[contains(text(),'Tag')]/..//input[@class='select2-search__field']")
+	public WebElement  tagTextField;
+	
+	@FindBy(xpath = "//span[@class='select2-selection__choice__remove']/..")
+	public WebElement  tagTextFieldValue;
+	
+	@FindBy(xpath = "//span[@class='select2-results']//li")
+	public WebElement  tagName;
 	
 	public String tagsType = "//label[contains(text(),'%s')]/preceding-sibling::input";
 	

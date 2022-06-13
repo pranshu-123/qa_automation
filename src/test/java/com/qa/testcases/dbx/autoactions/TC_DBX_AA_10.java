@@ -31,6 +31,8 @@ public class TC_DBX_AA_10 extends BaseClass {
 		waitExecuter.waitUntilPageFullyLoaded();
 		dbxAutoAction.removeTriggerConditions();
 		test.log(LogStatus.INFO, "Trigger conditions are removed");
+		String policyName = "Policy_"+driver.getWindowHandle().substring(10, 20);
+		dbxAutoAction.enterNewAutoActionPolicyDetails(policyName, "3");
 		dbxAutoAction.saveAA();
 		test.log(LogStatus.INFO, "Click on save button");
 		Assert.assertTrue(dbxAutoAction.fetchMessage().contains("Please add trigger conditions."), "Auto action policy created without trigger conditions");

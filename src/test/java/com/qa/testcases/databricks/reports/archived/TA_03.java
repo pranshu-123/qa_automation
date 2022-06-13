@@ -31,7 +31,7 @@ public class TA_03 extends BaseClass
 		String url = prop.getProperty("url");
 		LOGGER.info("Navigated to Reports tab");
 		topXReports.selectRun();
-		 topXReports.createNewReportWithTags("3","Name","ML team");
+		topXReports.createNewReportWithTags("3");
 		LOGGER.info("New Custom Report with tags created");
 		topXReports.navigateToDifferentReportsTab("Archived");
 		LOGGER.info("Navigated to Reports tab");

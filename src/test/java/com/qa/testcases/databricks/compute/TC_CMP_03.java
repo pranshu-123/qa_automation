@@ -25,7 +25,7 @@ public class TC_CMP_03 extends BaseClass{
 		WaitExecuter wait = new WaitExecuter(driver);
 		DatePicker date = new DatePicker(driver);
 		compute.navigateToCompute();
-		wait.sleep(1000);
+		wait.sleep(2000);
 		date.clickOnDatePicker();
 		date.selectLast90Days();
 		LOGGER.info("Last 90 days selected");

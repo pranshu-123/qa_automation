@@ -172,10 +172,8 @@ public class DbxAutoAction {
 	}
 
 	public void removeTriggerConditions() {
-		for(WebElement e : dbxAutoActionPolicyPageObject.listOfCrosses) {
-			e.click();
-		}
-
+		dbxAutoActionPolicyPageObject.listOfCrosses.get(0).click();
+		driver.navigate().refresh();
 	}
 
 	public String fetchMessage() {

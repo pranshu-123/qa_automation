@@ -187,7 +187,7 @@ public class ChargeBackCluster {
 	public void filterTags() {
 		chargebackClusterPageObject.tagKeyDropdown.click();
 		chargebackClusterPageObject.tagKeySearchField.click();
-		chargebackClusterPageObject.keyTeam.click();
+		chargebackClusterPageObject.keyTeam.get(0).click();
 	}
 
 	public void filterByTagKey() {	

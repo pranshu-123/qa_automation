@@ -28,11 +28,10 @@ public class TR_24 extends BaseClass
 		SparkDetails sparkDetails = new SparkDetails(driver);
 		topXReports.navigateToDifferentReportsTab("TopX");
 		LOGGER.info("Navigated to Reports tab");
-		String clusterName ="Delta-cluster";
 		topXReports.selectRun();
 		date.clickOnDatePicker();
 		date.selectLast90Days();
-		topXReports.createNewReportForCluster("38", clusterName);
+		topXReports.createNewReportForCluster("38");
 		LOGGER.info("Top X Report created successfully");
 		topXReports.navigateToApplicationFilterTabs("Highest Cluster Usage");
 		LinkedHashMap<String, String> appValues = topXReports.populateSparkDetailValues();

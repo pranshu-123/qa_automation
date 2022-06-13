@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class ReportSparkPageObject {
 
-	@FindBy(xpath = "//span[contains(text(),'Spark')]/../following-sibling::div//span")
+	@FindBy(xpath = "//span[contains(text(),'Spark')]/../../following-sibling::div//span")
 	public List<WebElement> appsDetails;
 
 	@FindBy(xpath = "//h5[contains(text(),'Duration')]/..//h3")
@@ -36,7 +36,7 @@ public class ReportSparkPageObject {
 	@FindBy(xpath = "//tbody[@id='sparkDiagnosis-body']//span")
 	public List<WebElement> diagnosticValues;
 
-	@FindBy(xpath = "//a[@class='home-link']/following-sibling::span[contains(@content,'app')]")
+	@FindBy(xpath = "//a[@class='home-link']/following-sibling::span//span[contains(@content,'app')]")
 	public WebElement getHeaderAppId;
 	
 	@FindBy(xpath = "//a[contains(text(),'Navigation')]")

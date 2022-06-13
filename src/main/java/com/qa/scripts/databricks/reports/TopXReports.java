@@ -121,14 +121,15 @@ public class TopXReports {
 		return top;
 	}
 
-	public String[] createNewReportForCluster(String top,String value) {
+	public String[] createNewReportForCluster(String top) {
 		reportsTopXPageObject.topxTextArea.sendKeys(top);
 		waitExecuter.sleep(2000);
 		reportsTopXPageObject.cluster.click();
 		waitExecuter.sleep(1000);
-		reportsTopXPageObject.clusterTextArea.sendKeys(value);
+		reportsTopXPageObject.clusterTextArea.click();
 		waitExecuter.sleep(3000);
-		reportsTopXPageObject.clusterTextArea.sendKeys(Keys.ENTER);
+		reportsTopXPageObject.clusterTextArea.sendKeys("a"); //random value entered, so to open up the cluster list
+		reportsTopXPageObject.clusterList.get(1).click();
 		String cluster = reportsTopXPageObject.addedCluster.getText();
 		reportsTopXPageObject.newReportRunBtn.click();
 		waitExecuter.sleep(12000);
@@ -149,18 +150,21 @@ public class TopXReports {
 		return top;
 	}
 
-	public String createNewReportWithTags(String top,String tagsType, String tagsName) {
+	public ArrayList<String> createNewReportWithTags(String top) {
+		ArrayList<String> al = new ArrayList<String>();
 		reportsTopXPageObject.topxTextArea.sendKeys(top);
-		driver.findElement(By.xpath(String.format(reportsTopXPageObject.tagsType, tagsType))).click();
 		JavaScriptExecuter.scrollViewWithYAxis(driver, 600);
-		driver.findElement(By.xpath(String.format(reportsTopXPageObject.tagsName, tagsType))).sendKeys(tagsName);
+		reportsTopXPageObject.tagTypeList.get(0).click();
+		al.add(top);
+		al.add(reportsTopXPageObject.tagTypeNames.get(0).getText());
+		reportsTopXPageObject.tagTextField.click();
+		reportsTopXPageObject.tagName.click();
+		al.add(reportsTopXPageObject.tagTextFieldValue.getText().substring(2));
 		waitExecuter.sleep(2000);
-		driver.findElement(By.xpath(String.format(reportsTopXPageObject.tagsName, tagsType))).sendKeys(Keys.ENTER);
 		reportsTopXPageObject.newReportRunBtn.click();
 		waitExecuter.sleep(12000);
 		waitExecuter.waitUntilElementPresent(reportsTopXPageObject.reportGenerationMsg);
-		//driver.navigate().refresh();
-		return top;
+		return al;
 	}
 
 	public void validateInputParameters(List<String> paramHeader,List<String> paramValue) {

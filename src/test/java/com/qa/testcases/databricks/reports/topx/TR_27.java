@@ -27,16 +27,15 @@ public class TR_27 extends BaseClass
 		SparkDetails sparkDetails = new SparkDetails(driver);
 		topXReports.navigateToDifferentReportsTab("TopX");
 		LOGGER.info("Navigated to Reports tab");
-		String clusterName ="Delta-cluster";
 		topXReports.selectRun();
 		date.clickOnDatePicker();
 		date.selectLast90Days();
-		topXReports.createNewReportForCluster("28", clusterName);
+		topXReports.createNewReportForCluster("28");
 		LOGGER.info("Top X Report created successfully");
 		topXReports.navigateToApplicationFilterTabs("Highest Disk I/O");
 		topXReports.openSparkDetailsPage();
 		sparkDetails.navigateToSparkPage();
-		String[] actualSummaryTabsValues = {"Analysis","Resources","Errors","Configuration","Logs","Tags","Program","SQL","Timings"};
+		String[] actualSummaryTabsValues = {"Analysis","Resources","Errors","Configuration","Logs","Tags","Program","Timings"};
 		List<String> summaryTabs = sparkDetails.fetchSummaryTabsValues();
 		for(String summaryDetails : actualSummaryTabsValues) {
 			Assert.assertTrue(summaryTabs.contains(summaryDetails), summaryDetails + " tab not listed in Spark Page");

@@ -31,9 +31,8 @@ public class TC_CMP_28 extends BaseClass{
 		date.selectLast90Days();
 		List<String> status = compute.selectStatus("Success");
 		compute.paginateToNextLastPage("next");
-		compute.validateJobDetailsAsPerSelectedStatus(status);
 		LOGGER.info("Navigated to next page");
-		compute.paginateToNextLastPage("last");
+		compute.paginateToNextLastPage("next");
 		compute.validateJobDetailsAsPerSelectedStatus(status);
 		LOGGER.info("Navigated to last page");
 		test.log(LogStatus.PASS, "Pagination working as expected");

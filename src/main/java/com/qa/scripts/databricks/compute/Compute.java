@@ -111,11 +111,12 @@ public class Compute {
 					.map(element -> element.getText())
 					.collect(Collectors.toList()).contains(status.get(0)));
 			JavaScriptExecuter.scrollViewWithYAxis(driver, 500);
-			if(TestUtils.isElementDisplayed(computePageObject.pagination.get(1))) {
+			if(TestUtils.isElementDisplayed(computePageObject.pageLabel)) {
 				JavaScriptExecuter.scrollOnElement(driver, computePageObject.pagination.get(1));
 				computePageObject.pagination.get(1).click();
+				waitExecuter.sleep(2000);
 				String pageCount = computePageObject.pageNumber.getText();
-				String count = pageCount.substring(pageCount.length()-1, pageCount.length());
+				String count = pageCount.substring((pageCount.lastIndexOf(' ')+1), pageCount.length());
 				long totalPages = Long.parseLong(count);
 				long rowsCount = computePageObject.jobRunValuesRows.stream().count();
 				long totalCount = (totalPages-1)*18 + rowsCount;
@@ -168,7 +169,7 @@ public class Compute {
 	}
 
 	public void selectSettings() {
-		waitExecuter.sleep(1000);
+		waitExecuter.sleep(2000);
 		waitExecuter.waitUntilElementClickable(computePageObject.settings);
 		computePageObject.settings.click();
 	}
@@ -257,6 +258,7 @@ public class Compute {
 
 
 	public void selectTagKey() {
+		JavaScriptExecuter.scrollOnElement(driver, computePageObject.tagKeySearchBox);
 		computePageObject.tagKeySearchBox.click();
 		computePageObject.tagKeyValue.click();
 		LOGGER.info("Tag Key selected");

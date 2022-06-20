@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 public class TC_DBX_DO_9 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
-    @Test(description = "Verify \"Number of Users\" chart under Trends of Tables KPIs")
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify \"Number of Users\" chart under Trends of Tables KPIs")
     public void verifyNumberOfUsersGraph(String clusterId) {
         test = extent.startTest("TC_DBX_DO_9.verifyNumberOfUsersGraph", "Verify \"Number of Users\" chart under Trends of Tables KPIs");
         test.assignCategory("Databricks - Data");

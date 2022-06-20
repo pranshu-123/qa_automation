@@ -68,6 +68,7 @@ public class TC_DR_19 extends BaseClass {
                     .parseInt(dbpageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
             if (totalCount > 0) {
                 String workspaceNameFromTable = dbpageObject.getWorkspaceFromTable.getAttribute("title");
+                waitExecuter.waitUntilPageFullyLoaded();
                 loggingUtils.info("Username displayed in table " + workspaceNameFromTable,test);
                 Assert.assertTrue(usernameSelected.contains(workspaceNameFromTable),
                         "The application in table contains workspace name other than that of " + workspaceNameFromTable);

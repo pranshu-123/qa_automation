@@ -32,12 +32,8 @@ public class TC_JAP_17 extends BaseClass {
         SummaryDetailsPage summaryPage = new SummaryDetailsPage(driver);
         summaryPage.navigateToJobsTabFromHeader(dballApps, test);
         try {
-            String headerAppId = summaryPage.verifyGoToSpark(summaryPageObject);
-            test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);
             summaryPage.commonSetupCodeForSumarryTabValidation(test, "Timings", logger, false);
             test.log(LogStatus.PASS, "Verified the Timings tab successfully");
-            //Close apps details page
-            MouseActions.clickOnElement(driver, summaryPageObject.closeAppsPageTab);
         } catch (NoSuchElementException ex) {
             logger.info("No app present by this name");
             logger.info("Error- " + ex);

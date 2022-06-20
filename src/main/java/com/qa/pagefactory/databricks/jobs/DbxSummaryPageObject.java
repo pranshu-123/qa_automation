@@ -11,7 +11,7 @@ public class DbxSummaryPageObject {
     @FindBy(className = "close")
     public WebElement closeIcon;
 
-    @FindBy(xpath = "//table[@id='RunsListAll']/tbody[1]/tr/td[14]/button[2]")
+    @FindBy(xpath = "//tbody[1]/tr/td[14]/button[2]")
     public WebElement sparkIcon;
 
     @FindBy(xpath = "(//tbody[@id='appNavigation-body'])/tr")
@@ -143,7 +143,7 @@ public class DbxSummaryPageObject {
     @FindBy(xpath = "//span[text()[normalize-space()='Spark:']]")
     public WebElement getAppSparkIcon;
 
-    @FindBy(css = "button.close")
+    @FindBy(xpath = "//button[@class='close']")
     public WebElement closeAppsPageTab;
 
     @FindBy(xpath = "//*[@id='topContainer-appConfiguration']/form/div[1]/p")
@@ -218,7 +218,7 @@ public class DbxSummaryPageObject {
     @FindBy(xpath = "//*[@class='stg-link link']")
     public List<WebElement> topStages;
 
-    @FindBy(xpath = "//*[@id='app']//section/div/span")
+    @FindBy(xpath = "//*[@id='app']//section/div/a")
     public List<WebElement> logElementCollapsable;
 
     @FindBy(xpath = "//div[@class='modal-body scrollbar-s']//p")

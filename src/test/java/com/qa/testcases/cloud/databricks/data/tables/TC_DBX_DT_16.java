@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
  * @author Ankur Jaiswal
  */
 
-@Marker.DBX.Data
+
 @Marker.DbxDataTables
 public class TC_DBX_DT_16 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_16.class);

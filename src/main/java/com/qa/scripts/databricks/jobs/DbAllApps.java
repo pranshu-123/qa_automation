@@ -307,7 +307,7 @@ public class DbAllApps {
         String appCost = dballApps.appCost.getText().trim();
         String appCostValue = appCost.replaceAll("[^\\d.]+", "");
         String appCostDbu = dballApps.appCostDbu.getText().trim();
-        String appCostDbuValue = appCostDbu.replaceAll("[^\\d.]", "");
+        String appCostDbuValue = appCostDbu.replaceAll("\"\\\\.\",\"\"", "");
         test.log(LogStatus.PASS, "cost value in summary page is " + costValue);
         test.log(LogStatus.PASS, "cost DBU value in  summary page is " + costDbu);
         Assert.assertEquals(costValue, appCostValue, "Runs Cost is not displayed in the Header");

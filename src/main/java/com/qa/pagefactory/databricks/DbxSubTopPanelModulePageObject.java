@@ -25,7 +25,7 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//*[@id='RunsListAll-body']/tr/td[1]")
     public WebElement Status;
 
-    @FindBy(xpath = "//tbody/tr/td[13]/span[1]")
+    @FindBy(xpath = "//tbody[1]/tr/td[13]/span[1]")
     public WebElement costValue;
 
     @FindBy(xpath = "//tbody[1]/tr/td[13]/div[1]")
@@ -166,7 +166,7 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//*[@id='statusContainer']/span[1]")
     public WebElement appStatus;
 
-    @FindBy(xpath = "//*[@id=\"SummaryDetails\"]//div[2]/div/div/h3")
+    @FindBy(xpath = "//*[@id=\"SummaryDetails\"]//div[1]/div/div/h3")
     public WebElement appCost;
 
     @FindBy(xpath = "//tr/td[3]/a[2]")

@@ -589,7 +589,7 @@ public class SummaryDetailsPage {
 
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         test.log(LogStatus.INFO, "Select last 7 days");
-        dballApps.inJobsSelectClusterAndLast7Days();
+        dballApps.select30Days();
         waitExecuter.sleep(2000);
         summaryPageObject.sortByDurationApp.click();
         waitExecuter.waitUntilPageFullyLoaded();

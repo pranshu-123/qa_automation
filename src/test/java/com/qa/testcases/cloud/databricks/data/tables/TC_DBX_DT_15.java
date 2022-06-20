@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
  * @author Ankur Jaiswal
  */
 
-@Marker.DBX.Data
 @Marker.DbxDataTables
 public class TC_DBX_DT_15 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_15.class);

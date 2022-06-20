@@ -20,8 +20,7 @@ public class TC_DR_18 extends BaseClass {
 
     @Test()
     public void validateCustomDateFunctionality() {
-        test = extent.startTest("TC_DR_18.validateCustomDateFunctionality",
-                "Verify the user can select custom date ranges");
+        test = extent.startTest("TC_DR_18.validateCustomDateFunctionality", "Verify the user can select custom date ranges");
         test.log(LogStatus.INFO, "Login to the application");
         test.assignCategory("Jobs-Runs/All");
         // Initialize all classes objects
@@ -43,7 +42,7 @@ public class TC_DR_18 extends BaseClass {
             waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
             datePicker.selectCustomRange();
             waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
-            datePicker.setStartAndEndDateFromCurrentDate(-6,-2);
+            datePicker.setStartAndEndDateFromCurrentDate(365, 30);
             datePicker.clickOnCustomDateApplyBtn();
             waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
             waitExecuter.sleep(2000);
@@ -51,10 +50,8 @@ public class TC_DR_18 extends BaseClass {
 
             int appCount = dballApps.clickOnlyLink("Killed");
             waitExecuter.sleep(2000);
-            int totalCount = Integer
-                    .parseInt(dbpageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
-            Assert.assertEquals(appCount, totalCount,
-                    "The Spark app count of SparkApp is not equal to " + "the total count of heading.");
+            int totalCount = Integer.parseInt(dbpageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
+            Assert.assertEquals(appCount, totalCount, "The Spark app count of SparkApp is not equal to " + "the total count of heading.");
 
             if (appCount > 0) {
                 String headerAppId = dballApps.verifyStatus(dbpageObject);
@@ -65,8 +62,7 @@ public class TC_DR_18 extends BaseClass {
                 waitExecuter.sleep(3000);
 
             } else {
-                test.log(LogStatus.SKIP, "No Application present ");
-                loggingUtils.error("No Application present in the Runs page", test);
+                test.log(LogStatus.WARNING, "No Application present in the Runs page., " + "Manually check to see if the data on the Runs page is present.");
             }
         } catch (NoSuchElementException ex) {
             loggingUtils.error("No app present by this name", test);

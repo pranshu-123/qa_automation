@@ -22,7 +22,7 @@ public class TC_DR_58 extends BaseClass {
 
     @Test()
     public void validateCostFinishedTab() {
-        test = extent.startTest("TC_DR_05.validateCostFinishedTab",
+        test = extent.startTest("TC_DR_58.validateCostFinishedTab",
                 "Verify All the Cost value are listed on the page");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects

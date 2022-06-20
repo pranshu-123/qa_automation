@@ -24,7 +24,7 @@ public class TC_DBX_DO_14 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider",description = "Verify Last Day of Partitions KPIs")
     public void verifyLastDayOfPartitionsKPIs(String clusterId) {
-        test = extent.startTest("TC_DBX_DO_4.verifyLastDayOfPartitionsKPIs", "Verify Last Day of Partitions KPIs");
+        test = extent.startTest("TC_DBX_DO_14.verifyLastDayOfPartitionsKPIs", "Verify Last Day of Partitions KPIs");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
         AllApps allApps = new AllApps(driver);
@@ -42,7 +42,7 @@ public class TC_DBX_DO_14 extends BaseClass {
             Assert.assertNotEquals(kpiKV.getKey().trim(), "", "KPI title is not missing.");
             Assert.assertNotEquals(kpiKV.getValue().trim(), "", "KPI value is not missing.");
         }
-        Assert.assertEquals(counter, 5, "");
+        Assert.assertEquals(counter, 2, "");
         loggingUtils.pass("Partitions KPIs titles are present", test);
         loggingUtils.pass("Partitions KPIs values are present", test);
     }

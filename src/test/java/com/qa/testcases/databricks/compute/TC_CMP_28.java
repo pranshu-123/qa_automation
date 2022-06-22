@@ -32,6 +32,7 @@ public class TC_CMP_28 extends BaseClass{
 		List<String> status = compute.selectStatus("Success");
 		compute.paginateToNextLastPage("next");
 		LOGGER.info("Navigated to next page");
+		wait.sleep(1000);
 		compute.paginateToNextLastPage("next");
 		compute.validateJobDetailsAsPerSelectedStatus(status);
 		LOGGER.info("Navigated to last page");

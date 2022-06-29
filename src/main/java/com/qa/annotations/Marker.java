@@ -228,6 +228,10 @@ public @interface Marker {
 	}
 
 	@Retention(RetentionPolicy.RUNTIME)
+	@interface EMRSpark {
+	}
+
+	@Retention(RetentionPolicy.RUNTIME)
 	@interface DbxApiToken {
 	}
 

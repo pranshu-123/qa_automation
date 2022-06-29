@@ -1,12 +1,11 @@
-package com.qa.scripts.appdetails;
+package com.qa.scripts.emr.appdetails;
 
 import com.qa.enums.UserAction;
-import com.qa.pagefactory.SubTopPanelModulePageObject;
-import com.qa.pagefactory.appsDetailsPage.AppDetailsPageObject;
-import com.qa.pagefactory.appsDetailsPage.SparkAppsDetailsPageObject;
-import com.qa.pagefactory.jobs.ApplicationsPageObject;
+import com.qa.pagefactory.emr.appDetailsPage.EmrSparkAppsDetailsPageObject;
+import com.qa.pagefactory.emr.jobs.EmrApplicationsPageObject;
+import com.qa.pagefactory.emr.jobs.EmrSubTopPanelModulePageObject;
 import com.qa.scripts.DatePicker;
-import com.qa.scripts.jobs.applications.AllApps;
+import com.qa.scripts.emr.jobs.EMRAllApps;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
@@ -21,38 +20,41 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
 
-public class SparkAppsDetailsPage {
+public class EmrSparkAppsDetailsPage {
+
 
     private static Boolean isDignosticWin = false;
-    Logger logger = Logger.getLogger(SparkAppsDetailsPage.class.getName());
     private final WaitExecuter waitExecuter;
     private final WebDriver driver;
     private final JavascriptExecutor jse;
     private final UserActions userActions;
+    private final EmrApplicationsPageObject appDetailsPageObject;
+    private final EmrSparkAppsDetailsPageObject sparkPageObject;
+    Logger logger = Logger.getLogger(EmrSparkAppsDetailsPage.class.getName());
     private Actions action;
-    private final AppDetailsPageObject appDetailsPageObject;
-    private final SparkAppsDetailsPageObject sparkPageObject;
 
     /**
      * Constructor to initialize wait, driver and necessary objects
      *
      * @param driver - WebDriver instance
      */
-    public SparkAppsDetailsPage(WebDriver driver) {
+    public EmrSparkAppsDetailsPage(WebDriver driver) {
         waitExecuter = new WaitExecuter(driver);
         this.driver = driver;
         jse = (JavascriptExecutor) driver;
         userActions = new UserActions(driver);
-        sparkPageObject = new SparkAppsDetailsPageObject(driver);
-        appDetailsPageObject = new AppDetailsPageObject(driver);
+        sparkPageObject = new EmrSparkAppsDetailsPageObject(driver);
+        appDetailsPageObject = new EmrApplicationsPageObject(driver);
     }
 
     /**
      * Method to validate the tasks attempt tab in Resources and stages tab.
      */
-    public void validateTaskAttemptTab(SparkAppsDetailsPageObject sparkAppPageObj) {
+    public void validateTaskAttemptTab(EmrSparkAppsDetailsPageObject sparkAppPageObj) {
         List<WebElement> footerNameList = sparkAppPageObj.taskAttFooterName;
         Assert.assertFalse(footerNameList.isEmpty(), "SUCCESS/FAILED Attempts not displayed");
         List<WebElement> footerValList = sparkAppPageObj.taskAttFooterVal;
@@ -75,7 +77,7 @@ public class SparkAppsDetailsPage {
     /**
      * Method to validate AppSummary Analysis tab.
      */
-    public void validateAnalysisTab(SparkAppsDetailsPageObject sparkAppPageObj, ExtentTest test) {
+    public void validateAnalysisTab(EmrSparkAppsDetailsPageObject sparkAppPageObj, ExtentTest test) {
         ArrayList<String> efficiency = new ArrayList<>();
         ArrayList<String> recommendation = new ArrayList<>();
         List<WebElement> insightType = sparkAppPageObj.insightsType;
@@ -111,9 +113,64 @@ public class SparkAppsDetailsPage {
     }
 
     /**
+     * Method to verify the summary tabs in the right pane of the App Details page
+     */
+    public String verifyAllDataTabs(EmrSparkAppsDetailsPageObject sparkAppPageObj, String verifyTabName, ExtentTest test) {
+        List<WebElement> appsTabList = sparkAppPageObj.appSummaryTabs;
+        verifyAssertFalse(appsTabList.isEmpty(), sparkAppPageObj, "No Tabs loaded");
+        String tabName = "";
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.pollingEvery(Duration.ofMillis(10));
+
+        for (int i = 0; i < appsTabList.size(); i++) {
+            tabName = appsTabList.get(i).getText();
+            logger.info("Validating tab " + tabName);
+            if (tabName.equals(verifyTabName)) {
+                switch (verifyTabName) {
+                    case "Analysis":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        test.log(LogStatus.PASS, "Analysis tab is populated");
+                        break;
+                    case "Resources":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        waitExecuter.sleep(3000);
+                        test.log(LogStatus.PASS, "Resources tab is populated");
+                        break;
+                    case "Errors":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        waitExecuter.sleep(3000);
+                        test.log(LogStatus.PASS, "Errors tab is populated");
+                        break;
+                    case "Logs":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        waitExecuter.sleep(3000);
+                        test.log(LogStatus.PASS, "Logs tab is populated");
+                        break;
+                    case "Tags":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        waitExecuter.sleep(3000);
+                        test.log(LogStatus.PASS, "Tags tab is populated");
+                        break;
+                    case "Metrics":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        waitExecuter.sleep(3000);
+                        test.log(LogStatus.PASS, "Metrics tab is populated");
+                        break;
+                    case "Configuration":
+                        MouseActions.clickOnElement(driver, appsTabList.get(i));
+                        waitExecuter.sleep(3000);
+                        test.log(LogStatus.PASS, "Configuration tab is populated");
+                }
+                break;
+            }
+        }
+        return "";
+    }
+
+    /**
      * Method to validate AppSummary Resource tab.
      */
-    public void validateResourcesTab(SparkAppsDetailsPageObject sparkAppPageObj, ExtentTest test) {
+    public void validateResourcesTab(EmrSparkAppsDetailsPageObject sparkAppPageObj, ExtentTest test) {
         String durationTime = sparkAppPageObj.getDurationApp.getText().trim();
         waitExecuter.waitUntilPageFullyLoaded();
         String[] expectedGraphTitle = {"Task Attempts", "Containers", "Vcores", "Memory", "Metrics"};
@@ -220,7 +277,7 @@ public class SparkAppsDetailsPage {
             }
 
         } else {
-            test.log(LogStatus.WARNING, "'No Data Found' in the Resources tab for application "+verifyAppId(sparkAppPageObj)+" with "+durationTime+"," +
+            test.log(LogStatus.WARNING, "'No Data Found' in the Resources tab for application " + verifyAppId(sparkAppPageObj) + " with " + durationTime + "," +
                     " Check manually if data is expected in the Resources tab");
         }
     }
@@ -228,7 +285,7 @@ public class SparkAppsDetailsPage {
     /**
      * Method to validate AppSummary Errors tab.
      */
-    public void validateErrorsTab(SparkAppsDetailsPageObject sparkAppPageObj, ExtentTest test) {
+    public void validateErrorsTab(EmrSparkAppsDetailsPageObject sparkAppPageObj, ExtentTest test) {
         String[] expectedErrorCategory = {"driver", "executor-", "rm-diagnostics"};
         List<WebElement> errorTypeList = sparkAppPageObj.errorCategories;
         boolean isErrorsTab = sparkAppPageObj.errorCategories.size() > 0;
@@ -250,21 +307,6 @@ public class SparkAppsDetailsPage {
             verifyAssertFalse(errorCollapsableList.isEmpty(), sparkAppPageObj, " No collapsable icon present");
             List<WebElement> errorContentList = sparkAppPageObj.errorContents;
             verifyAssertFalse(errorContentList.isEmpty(), sparkAppPageObj, " No error contents in the error tab");
-            // TODO check for specific error string in the content list.
-            boolean foundErrorMsg = false;
-            String msg = "";
-//    for (int c = 0; c < errorContentList.size(); c++) {
-//      String expectedErrorString = "Exception";
-//      String actualErrorString = errorContentList.get(c).getText();
-//      if (actualErrorString.contains(expectedErrorString)) {
-//        foundErrorMsg = true;
-//        msg = "Found the expected error message in the Errors Tab " +
-//            "Expected = " + expectedErrorString + "Actual Error Message = " + actualErrorString;
-//        break;
-//      }
-//    }
-//    verifyAssertTrue(foundErrorMsg, sparkAppPageObj, " Expected Error message not present in the Error tab");
-//    logger.info(msg);
             for (int c = 0; c < errorCollapsableList.size(); c++) {
                 MouseActions.clickOnElement(driver, errorCollapsableList.get(c));
             }
@@ -274,7 +316,7 @@ public class SparkAppsDetailsPage {
         }
     }
 
-    public void validateConfigurationTab(SparkAppsDetailsPageObject sparkAppPageObj, ExtentTest test) {
+    public void validateConfigurationTab(EmrSparkAppsDetailsPageObject sparkAppPageObj, ExtentTest test) {
         String durationTime = sparkAppPageObj.getDurationApp.getText().trim();
         waitExecuter.waitUntilPageFullyLoaded();
         String[] expectedKeyWords = {"METADATA", "MEMORY", "DRIVER", "EXECUTOR", "LIMIT", "RESOURCES", "CPU", "NET",
@@ -312,12 +354,12 @@ public class SparkAppsDetailsPage {
                     + "No. of Properties displayed after RESET " + afterResetProp);
             Assert.assertEquals(afterResetProp, beforeResetProp, "The properties have not been reset " + "to default");
         } else {
-            test.log(LogStatus.WARNING, "'No Data Found' in the Configuration tab for application "+verifyAppId(sparkAppPageObj)+" with "+durationTime+"," +
+            test.log(LogStatus.WARNING, "'No Data Found' in the Configuration tab for application " + verifyAppId(sparkAppPageObj) + " with " + durationTime + "," +
                     " Check manually if data is expected in the Configuration tab");
         }
     }
 
-    public void validateLogsTab(SparkAppsDetailsPageObject sparkAppPageObj, ExtentTest test) {
+    public void validateLogsTab(EmrSparkAppsDetailsPageObject sparkAppPageObj, ExtentTest test) {
         List<WebElement> executorNameList = sparkAppPageObj.logExecutorNames;
         boolean isLogsTab = sparkAppPageObj.logExecutorNames.size() > 0;
         if (isLogsTab) {
@@ -359,7 +401,7 @@ public class SparkAppsDetailsPage {
         }
     }
 
-    public String validateTagsTab(SparkAppsDetailsPageObject sparkAppPageObj, ExtentTest test) {
+    public String validateTagsTab(EmrSparkAppsDetailsPageObject sparkAppPageObj, ExtentTest test) {
         List<WebElement> tagTableHeader = sparkAppPageObj.tagTableHeader;
         boolean isTagTable = sparkAppPageObj.tagTableHeader.size() > 0;
         if (isTagTable) {
@@ -387,7 +429,7 @@ public class SparkAppsDetailsPage {
         return null;
     }
 
-    public void validateTimingTab(SparkAppsDetailsPageObject sparkAppPageObj, ExtentTest test) {
+    public void validateTimingTab(EmrSparkAppsDetailsPageObject sparkAppPageObj, ExtentTest test) {
         Actions action = new Actions(driver);
         List<WebElement> subTabList = sparkAppPageObj.timingsSubTabs;
         boolean isTimingTab = sparkAppPageObj.timingsSubTabs.size() > 0;
@@ -470,7 +512,7 @@ public class SparkAppsDetailsPage {
     /**
      * Method to verify the summary tabs in the right pane of the App Details page
      */
-    public String verifyAppSummaryTabs(SparkAppsDetailsPageObject sparkAppPageObj, String verifyTabName,
+    public String verifyAppSummaryTabs(EmrSparkAppsDetailsPageObject sparkAppPageObj, String verifyTabName,
                                        ExtentTest test) {
         List<WebElement> appsTabList = sparkAppPageObj.appSummaryTabs;
         verifyAssertFalse(appsTabList.isEmpty(), sparkAppPageObj, "No Tabs loaded");
@@ -535,7 +577,7 @@ public class SparkAppsDetailsPage {
     /**
      * Method to verify the Timings tabs stages ,legends, graphs and top stages
      */
-    public void verifyTimingStages(Actions action, WebElement ele, SparkAppsDetailsPageObject sparkAppPageObj,
+    public void verifyTimingStages(Actions action, WebElement ele, EmrSparkAppsDetailsPageObject sparkAppPageObj,
                                    String legendName) {
         try {
             MouseActions.clickOnElement(driver, ele);
@@ -556,33 +598,13 @@ public class SparkAppsDetailsPage {
         }
     }
 
-    public void verifyStreamingAppsComponent(SparkAppsDetailsPageObject sparkPageObj, DatePicker datePicker) {
-        datePicker.clickOnDatePicker();
-        waitExecuter.sleep(1000);
-        datePicker.selectLast90Days();
-        waitExecuter.sleep(3000);
-        waitExecuter.waitUntilPageFullyLoaded();
-        WebElement lineChart = sparkPageObj.streamingLineChart;
-        WebElement waveChart = sparkPageObj.streamingWaveChart;
-        verifyAssertTrue(lineChart.isDisplayed(), sparkPageObj, "Line chart is not displayed");
-        verifyAssertTrue(waveChart.isDisplayed(), sparkPageObj, "Wave chart is not displayed");
-        String completedBatchNum = sparkPageObj.completedBatchTitle.getText().split(":")[1];
-        int completedBatches = Integer.parseInt(completedBatchNum.replaceAll("[^\\dA-Za-z ]", "").trim());
-        verifyAssertTrue(completedBatches > 0, sparkPageObj,
-                "There are no completed batches count displayed in the title");
-
-        // Verify tables have data in it
-        List<WebElement> tableContentList = sparkPageObj.streamTableRows;
-        verifyAssertFalse(tableContentList.isEmpty(), sparkPageObj, "The spark streaming table is empty.");
-    }
-
     /**
      * Method to verify if the component tabs like navigation | Gantt chart | jobs
      * is present and contains data if job count is > 0 if validateCompData = true
      * validate each component tab data if validateExecutorTab = true validate jobs
      * execution tabs data.
      */
-    public void verifyAppsComponent(SparkAppsDetailsPageObject sparkPageObj, Boolean validateCompData,
+    public void verifyAppsComponent(EmrSparkAppsDetailsPageObject sparkPageObj, Boolean validateCompData,
                                     Boolean validateExecutorTab, Boolean validateStageTab) {
         List<WebElement> componentList = sparkPageObj.component_element;
         logger.info("ComponentList is " + componentList.size());
@@ -590,12 +612,11 @@ public class SparkAppsDetailsPage {
         String tabName = "";
         for (int j = 0; j < componentList.size(); j++) {
             if (j != 3)
-                tabName = componentList.get(j).getText();
+                tabName = componentList.get(j).getText().trim();
             switch (j) {
                 case 0:
                     Assert.assertEquals(tabName, "Navigation", "Navigation tab not present");
                     List<WebElement> navigationRowList = sparkPageObj.navigationTableRows;
-
                     navigationRows = navigationRowList.size();
                     logger.info("Navigation Rows are " + navigationRows);
                     if (validateCompData) {
@@ -603,7 +624,7 @@ public class SparkAppsDetailsPage {
                         Assert.assertFalse(headerList.isEmpty(), "No headers for Navigation table for application");
                         for (int i = 0; i < headerList.size(); i++) {
                             logger.info("The header is " + headerList.get(i).getText());
-                            Assert.assertNotSame("", headerList.get(i).getText());
+                            Assert.assertNotSame("", headerList.get(i).getText().trim());
                         }
                         if (navigationRows > 0) {
                             for (int rows = 1; rows <= navigationRows; rows++) {
@@ -633,7 +654,7 @@ public class SparkAppsDetailsPage {
                                 " No headers for Gantt Chart table for application");
                         for (int i = 0; i < headerList.size(); i++) {
                             logger.info("The header is " + headerList.get(i).getText());
-                            Assert.assertNotSame("", headerList.get(i).getText());
+                            Assert.assertNotSame("", headerList.get(i).getText().trim());
                         }
                         if (ganttChartTableRows.size() > 0) {
                             for (int rows = 0; rows < ganttChartTableRows.size(); rows++) {
@@ -648,23 +669,22 @@ public class SparkAppsDetailsPage {
                         }
                     }
                     break;
-                case 2:
-                    Assert.assertEquals(tabName, navigationRows + " Jobs", "Jobs text not present");
-                    String[] jobCountArr = componentList.get(j).getText().split("\\s+");
-                    int jobCnt = Integer.parseInt(jobCountArr[0]);
-                    Assert.assertEquals(jobCnt, navigationRows, "JobCnt and navigation rows donot match");
-                    logger.info("Jobs" + jobCnt);
-                    break;
+             }
+                Assert.assertEquals(tabName, navigationRows + " Jobs", "Jobs text not present");
+                String[] jobCountArr = componentList.get(j).getText().split("\\s+");
+                int jobCnt = Integer.parseInt(jobCountArr[0]);
+                Assert.assertEquals(jobCnt, navigationRows, "JobCnt and navigation rows donot match");
+                logger.info("Jobs" + jobCnt);
+                break;
             }
         }
-    }
 
     /**
      * Method to validate the stage table header and the data. if
      * validateExecutorTab = true, validate each jobs execution tabs data
      */
     public void validateStageAndStageData(int navigationRows, List<WebElement> navigationRowList,
-                                          SparkAppsDetailsPageObject sparkPageObj, Boolean validateExecutorTab, Boolean validateStageTabs) {
+                                          EmrSparkAppsDetailsPageObject sparkPageObj, Boolean validateExecutorTab, Boolean validateStageTabs) {
         if (navigationRows > 0) {
             String[] expectedHeader = {"Stage ID", "Start Time", "Duration", "Tasks", "Shuffle Read", "Shuffle Write",
                     "Input", "Output"};
@@ -701,7 +721,7 @@ public class SparkAppsDetailsPage {
     /**
      * Method to validate the tabs for each job stage.
      */
-    public void validateStagesTabs(SparkAppsDetailsPageObject sparkPageObj) {
+    public void validateStagesTabs(EmrSparkAppsDetailsPageObject sparkPageObj) {
         // click the stageId to sort it
         driver.findElement(By.xpath("//*[@id='sparkStageNavigation-head']/tr/th[1]")).click();
         List<WebElement> stageRowList = sparkPageObj.stageRows;
@@ -806,7 +826,7 @@ public class SparkAppsDetailsPage {
      * must be populated. (Duration, Start time, end time, job count, stages count)
      * 2. Owner, cluster, queue must be populated on the top right
      */
-    public String verifyRightPaneKpis(SparkAppsDetailsPageObject sparkPageObj) {
+    public String verifyRightPaneKpis(EmrSparkAppsDetailsPageObject sparkPageObj) {
         List<WebElement> kpiList = sparkPageObj.rightPaneKpis;
         validateLeftPaneKpis(kpiList);
         List<WebElement> appKpis = sparkPageObj.rightPaneAppKpis;
@@ -847,47 +867,23 @@ public class SparkAppsDetailsPage {
      * Method to click the first app in jobs table , navigate to the details page.
      * and verify app Id .
      */
-    public String verifyAppId(SparkAppsDetailsPageObject sparkPageObj) {
+    public String verifyAppId(EmrSparkAppsDetailsPageObject sparkPageObj) {
         String appId = sparkPageObj.getAppId.getText().trim();
         logger.info("Spark application Id is " + appId);
         waitExecuter.waitUntilPageFullyLoaded();
-        //   waitExecuter.waitUntilElementClickable(sparkPageObject.resetButton);
-        // appPageObj.getTypeFromTable.click();
+        waitExecuter.waitUntilElementClickable(sparkPageObject.resetButton);
+        sparkPageObj.getTypeFromTable.click();
         userActions.performActionWithPolling(sparkPageObj.getAppId, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(sparkPageObject.closeAppsPageTab);
-        //waitExecuter.sleep(5000);
+        waitExecuter.sleep(5000);
         waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.waitUntilElementPresent(sparkPageObj.getHeaderAppId);
         String headerAppId = sparkPageObj.getHeaderAppId.getText().trim();
-        Assert.assertNotSame("", headerAppId, "Spark Application Id is not displayed in the Header");
+        waitExecuter.sleep(3000);
+        Assert.assertNotSame(appId, headerAppId, "Spark Application Id is not displayed in the Header");
         return headerAppId;
     }
 
-    /**
-     * Common steps to navigate to the Jobs page from header. Clicks on jobs tab
-     * Selects a specific cluster Selects 90 days time interval Deselsects all the
-     * selected apps from the left pane on jobs page.
-     */
-    public void navigateToJobsTabFromHeader(SubTopPanelModulePageObject topPanelObj, AllApps allApps,
-                                            DatePicker datePicker, ApplicationsPageObject appPageObj, String clusterId) {
-        logger.info("Navigate to jobs tab from header");
-        waitExecuter.waitUntilElementClickable(topPanelObj.jobs);
-        userActions.performActionWithPolling(topPanelObj.jobs, UserAction.CLICK);
-        waitExecuter.waitUntilElementClickable(sparkPageObject.resetButton);
-        userActions.performActionWithPolling(sparkPageObject.resetButton, UserAction.CLICK);
-        waitExecuter.waitUntilElementClickable(sparkPageObject.resetButton);
-
-        // Select cluster
-        logger.info("Select Cluster: " + clusterId);
-        allApps.selectCluster(clusterId);
-        waitExecuter.waitUntilElementClickable(sparkPageObject.resetButton);
-
-        datePicker.clickOnDatePicker();
-        waitExecuter.waitUntilElementClickable(sparkPageObject.resetButton);
-        datePicker.selectLast90Days();
-        waitExecuter.waitUntilElementClickable(sparkPageObject.resetButton);
-        waitExecuter.waitUntilPageFullyLoaded();
-        waitExecuter.sleep(3000);
-    }
 
     /**
      * Method to click on 'Only' and select a specific checkbox from job pages left
@@ -915,8 +911,8 @@ public class SparkAppsDetailsPage {
     /**
      * Method to navigate to the failed apps details page.
      */
-    public void navigateToFailedAppsAppPage(ApplicationsPageObject applicationsPageObject,
-                                            SparkAppsDetailsPageObject sparkPageObj, ExtentTest test, Boolean verifyAppComp) {
+    public void navigateToFailedAppsAppPage(EmrApplicationsPageObject applicationsPageObject,
+                                            EmrSparkAppsDetailsPageObject sparkPageObj, ExtentTest test, Boolean verifyAppComp) {
         applicationsPageObject.expandStatus.click();
         int failedAppCnt = clickOnlyLink("Failed");
         logger.info("Failed App Cnt is " + failedAppCnt);
@@ -958,29 +954,55 @@ public class SparkAppsDetailsPage {
         }
     }
 
+    /**
+     * Common steps to navigate to the Jobs page from header. Clicks on jobs tab
+     * Selects a specific cluster Selects 90 days time interval Deselsects all the
+     * selected apps from the left pane on jobs page.
+     */
+    public void navigateToJobsTabFromHeader(EmrSubTopPanelModulePageObject topPanelObj, EMRAllApps allApps,
+                                            DatePicker datePicker, EmrApplicationsPageObject appPageObj) {
+        logger.info("Navigate to jobs tab from header");
+        waitExecuter.waitUntilElementClickable(topPanelObj.jobs);
+        userActions.performActionWithPolling(topPanelObj.jobs, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(sparkPageObject.resetButton);
+        userActions.performActionWithPolling(sparkPageObject.resetButton, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(sparkPageObject.resetButton);
+
+        datePicker.clickOnDatePicker();
+        waitExecuter.waitUntilElementClickable(sparkPageObject.resetButton);
+        datePicker.selectLast30Days();
+        waitExecuter.waitUntilElementClickable(sparkPageObject.resetButton);
+        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.sleep(2000);
+        sparkPageObject.sortByDurationApp.click();
+        waitExecuter.waitUntilPageFullyLoaded();
+        sparkPageObject.sortUp.click();
+        waitExecuter.sleep(3000);
+    }
+
     /***
      * Common actions listed in one method that does the following: Navigate to Jobs
      * tab from header Verify that the left pane has spark app Get Job count of
      * selected App click on it and go to apps details page Verify specific summary
      * tabs.
      */
-    public void commonSetupCodeForSumarryTabValidation(ExtentTest test, String clusterId, String tabName, Logger logger,
-                                                       Boolean isFailedApp) {
+    public void commonSetupCodeForSummarryTabValidation(ExtentTest test, String tabName, Logger logger,
+                                                        Boolean isFailedApp,Boolean isUnknownApp) {
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
 
         logger.info("Initialize all class objects");
-        SubTopPanelModulePageObject topPanelComponentPageObject = new SubTopPanelModulePageObject(driver);
-        ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
-        SparkAppsDetailsPageObject sparkAppPageObj = new SparkAppsDetailsPageObject(driver);
-        SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);
+        EmrSubTopPanelModulePageObject topPanelComponentPageObject = new EmrSubTopPanelModulePageObject(driver);
+        EmrApplicationsPageObject applicationsPageObject = new EmrApplicationsPageObject(driver);
+        EmrSparkAppsDetailsPageObject sparkAppPageObj = new EmrSparkAppsDetailsPageObject(driver);
+        EmrSparkAppsDetailsPage appsDetailsPage = new EmrSparkAppsDetailsPage(driver);
         DatePicker datePicker = new DatePicker(driver);
-        AllApps allApps = new AllApps(driver);
+        EMRAllApps allApps = new EMRAllApps(driver);
 
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         appsDetailsPage.navigateToJobsTabFromHeader(topPanelComponentPageObject, allApps, datePicker,
-                applicationsPageObject, clusterId);
+                applicationsPageObject);
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         // Verify that the left pane has spark check box and the apps number
         test.log(LogStatus.INFO, "Verify that the left pane has spark check box and the apps number");
@@ -994,15 +1016,12 @@ public class SparkAppsDetailsPage {
             int appCount = 0;
             if (isFailedApp)
                 appCount = appsDetailsPage.clickOnlyLink("Failed");
+            else if(isUnknownApp)
+                appCount = appsDetailsPage.clickOnlyLink("Unknown");
             else
                 appCount = appsDetailsPage.clickOnlyLink("Success");
             // Clicking on the Spark app must go to apps detail page
             if (appCount > 0) {
-                if (tabName.equals("Analysis")) {
-                    userActions.performActionWithPolling(appDetailsPageObject.globalSearchBox, UserAction.SEND_KEYS,
-                            "Spark Pi");
-                    appDetailsPageObject.globalSearchBox.sendKeys(Keys.RETURN);
-                }
                 String headerAppId = appsDetailsPage.verifyAppId(sparkAppPageObj);
                 test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);
                 appsDetailsPage.verifyAppSummaryTabs(sparkAppPageObj, tabName, test);
@@ -1012,20 +1031,18 @@ public class SparkAppsDetailsPage {
                 MouseActions.clickOnElement(driver, sparkAppPageObj.closeAppsPageTab);
             } else {
                 test.log(LogStatus.SKIP, "No Spark Application present");
-                logger.info("No Spark Application present in the " + clusterId + " cluster for the time span "
-                        + "of 90 days");
+                logger.info("No Application present in the Spark summary page");
             }
         } else {
             test.log(LogStatus.SKIP, "No Spark Application present");
-            logger.info(
-                    "No Spark Application present in the " + clusterId + " cluster for the time span " + "of 90 days");
+            logger.info("No Spark Application details present in the last 30 days");
         }
     }
 
     /**
      * Method to validate the Load Diagnostic Action
      */
-    public void verifyLoadDiagnosticAction(SparkAppsDetailsPageObject sparkAppPageObj) {
+    public void verifyLoadDiagnosticAction(EmrSparkAppsDetailsPageObject sparkAppPageObj) {
         WebElement actionMenu = sparkAppPageObj.loadAction;
         MouseActions.clickOnElement(driver, actionMenu);
         List<WebElement> elementList = sparkAppPageObj.loadActionList;
@@ -1050,7 +1067,7 @@ public class SparkAppsDetailsPage {
         isDignosticWin = false;
     }
 
-    public void verifyAssertFalse(Boolean condition, SparkAppsDetailsPageObject sparkAppPageObj, String msg) {
+    public void verifyAssertFalse(Boolean condition, EmrSparkAppsDetailsPageObject sparkAppPageObj, String msg) {
         String appDuration = "0";
         try {
             // appDuration = verifyRightPaneKpis(sparkAppPageObj);
@@ -1065,7 +1082,7 @@ public class SparkAppsDetailsPage {
         }
     }
 
-    public void verifyAssertTrue(Boolean condition, SparkAppsDetailsPageObject sparkAppPageObj, String msg) {
+    public void verifyAssertTrue(Boolean condition, EmrSparkAppsDetailsPageObject sparkAppPageObj, String msg) {
         try {
             Assert.assertTrue(condition, msg);
         } catch (Throwable e) {

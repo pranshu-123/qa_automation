@@ -68,7 +68,9 @@ public class MarkerConstants {
 	// DBX Markers
 
 
-	// DBX
+	// EMR Markers
+
+	public static final String EMR_SPARK = "Emr_Spark";
 
 	public static final String DBX_DATA = "dbx_data";
 	public static final String DBX_DATA_OVERVIEW = "dbx_data_overview";
@@ -139,6 +141,7 @@ public class MarkerConstants {
 		map.put(DBX_COMPUTE, Marker.DbxCompute.class);
 		map.put(DBX_AUTOACTION, Marker.DbxAutoAction.class);
 		map.put(DBX_APITOKEN, Marker.DbxApiToken.class);
+		map.put(EMR_SPARK, Marker.EMRSpark.class);
 		return Collections.unmodifiableMap(map);
 	}
 }

@@ -239,6 +239,16 @@ public @interface Marker {
 	@interface DbxApiToken {
 	}
 
+	
+	@Retention(RetentionPolicy.RUNTIME)
+	@interface emrClusterinsights {
+	}
+	
+	@Retention(RetentionPolicy.RUNTIME)
+	@interface emrClusterjobtrends {
+	}
+
+
 	@Target(ElementType.TYPE)
 	@interface DBX {
 		@Retention(RetentionPolicy.RUNTIME)

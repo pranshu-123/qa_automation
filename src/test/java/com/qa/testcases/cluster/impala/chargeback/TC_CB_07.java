@@ -33,14 +33,14 @@ public class TC_CB_07 extends BaseClass {
         chargeBackImpala.selectImpalaChargeback();
         LOGGER.info("Navigate to impala chargeback page", test);
 
+        chargeBackImpala.selectImpalaType("Impala");
+        waitExecuter.sleep(2000);
         //Cluster selected
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterIdClusterPage(clusterId);
         waitExecuter.waitUntilPageFullyLoaded();
         LOGGER.info("Selected cluster: " + clusterId, test);
 
-        chargeBackImpala.selectImpalaType("Impala");
-        waitExecuter.sleep(2000);
 
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();

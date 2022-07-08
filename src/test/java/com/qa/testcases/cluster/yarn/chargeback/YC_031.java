@@ -30,11 +30,10 @@ public class YC_031 extends BaseClass {
 
         // Select the cluster
         test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
-        HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterIdClusterPage(clusterId);
         chargeBackYarn.selectChargebackType("Yarn");
         waitExecuter.sleep(2000);
-
+        HomePage homePage = new HomePage(driver);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
 
         // Click on datepicker button
         DatePicker datePicker = new DatePicker(driver);

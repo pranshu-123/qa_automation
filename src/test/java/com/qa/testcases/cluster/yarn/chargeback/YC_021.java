@@ -34,11 +34,12 @@ public class YC_021 extends BaseClass {
 
         // Select the cluster
         test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
-        HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterIdClusterPage(clusterId);
+      
         waitExecuter.waitUntilPageFullyLoaded();
         chargeBackYarn.selectChargebackType("Yarn");
         waitExecuter.sleep(2000);
+        HomePage homePage = new HomePage(driver);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
 
         try {
         //click on cluster drop down

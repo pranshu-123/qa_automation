@@ -29,12 +29,11 @@ public class YC_023 extends BaseClass {
 
         // Select the cluster
         test.log(LogStatus.INFO, "Select clusterId : "+clusterId);
-        HomePage homePage = new HomePage(driver);
-        homePage.selectMultiClusterIdClusterPage(clusterId);
         chargeBackYarn.selectChargebackType("Yarn");
         waitExecuter.sleep(2000);
         test.log(LogStatus.PASS, "User is redirected to cluster chargeback page");
-
+        HomePage homePage = new HomePage(driver);
+        homePage.selectMultiClusterIdClusterPage(clusterId);
         chargeBackYarn.clickOnGroupBySearchBox();
         test.log(LogStatus.PASS, "Successfully clicked on group by serach box on yarn chargeback page");
 

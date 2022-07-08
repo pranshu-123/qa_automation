@@ -32,7 +32,7 @@ public class TC_CO_12 extends BaseClass {
 		test.log(LogStatus.INFO, "This testcase is running for cluster: "+clusterId);
 		LOGGER.info("Selecting cluster from the list " +clusterId);
 		HomePage homePage = new HomePage(driver);
-	    homePage.selectMultiClusterId(clusterId);
+		homePage.selectMultiClusterId(clusterId);
 		DatePicker datePicker = new DatePicker(driver);
 		// Click on datepicker button
 		waitExecuter.sleep(3000);

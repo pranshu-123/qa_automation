@@ -32,13 +32,11 @@ public class TC_CB_05 extends BaseClass {
 
 
         //Cluster selected
+        chargeBackImpala.selectImpalaType("Impala");
+        waitExecuter.sleep(2000);
         HomePage homePage = new HomePage(driver);
         homePage.selectMultiClusterIdClusterPage(clusterId);
         waitExecuter.waitUntilPageFullyLoaded();
-
-        chargeBackImpala.selectImpalaType("Impala");
-        waitExecuter.sleep(2000);
-
         //click on cluster drop down
         //CommonPageObject commonPageObject = new CommonPageObject(driver);
         //commonPageObject.clusterDropdown.click();

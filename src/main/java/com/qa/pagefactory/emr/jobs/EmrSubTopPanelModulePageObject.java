@@ -23,6 +23,18 @@ public class EmrSubTopPanelModulePageObject {
     @FindBy(xpath = "//a[@href='#/manage/stats']")
     public WebElement stats;
 
+    @FindBy(id = "running")
+    public WebElement runningTab;
+
+    @FindBy(css = "a#inefficient")
+    public WebElement inefficientApps;
+
+    @FindBy(id = "finished")
+    public WebElement finishedTab;
+
+    @FindBy(id = "allApps")
+    public WebElement allApps;
+
     @FindBy(xpath = "(//ul[contains(@class,'select2-results')])/li")
     public List<WebElement> getNamesFromDropDown;
 

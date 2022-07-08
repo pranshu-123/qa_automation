@@ -72,6 +72,8 @@ public class MarkerConstants {
 
 	public static final String EMR_SPARK = "Emr_Spark";
 
+	public static final String EMR_INEFFICIENT_APPS = "emr_Inefficient_apps";
+
 	public static final String DBX_DATA = "dbx_data";
 	public static final String DBX_DATA_OVERVIEW = "dbx_data_overview";
 	public static final String DBX_DATA_TABLES = "dbx_data_tables";
@@ -142,6 +144,7 @@ public class MarkerConstants {
 		map.put(DBX_AUTOACTION, Marker.DbxAutoAction.class);
 		map.put(DBX_APITOKEN, Marker.DbxApiToken.class);
 		map.put(EMR_SPARK, Marker.EMRSpark.class);
+		map.put(EMR_INEFFICIENT_APPS, Marker.EmrInefficientApps.class);
 		return Collections.unmodifiableMap(map);
 	}
 }

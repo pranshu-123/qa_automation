@@ -31,7 +31,7 @@ public class TC_CMP_18 extends BaseClass{
 		datePicker.selectLast90Days();
 		LOGGER.info("Last 90 days selected");
 		String choice =	compute.filterByUser();
-		compute.validateFilteredRows(choice.substring(2));
+		compute.validateFilteredRows(choice.substring(15));
 		test.log(LogStatus.PASS, "Filtered by User");
 		LOGGER.info("Filtered by user working as expected");
 	}

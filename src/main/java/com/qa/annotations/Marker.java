@@ -232,6 +232,10 @@ public @interface Marker {
 	}
 
 	@Retention(RetentionPolicy.RUNTIME)
+	@interface EmrInefficientApps {
+	}
+
+	@Retention(RetentionPolicy.RUNTIME)
 	@interface DbxApiToken {
 	}
 

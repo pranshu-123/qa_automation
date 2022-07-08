@@ -97,6 +97,28 @@ public class EMRAllApps {
         return appCount;
     }
 
+    public void selectTab(String tab) {
+        waitExecuter.waitUntilElementClickable(subTopPanelModulePageObject.jobs);
+        userAction.performActionWithPolling(subTopPanelModulePageObject.jobs, UserAction.CLICK);
+        try {
+            if (tab.equalsIgnoreCase("All")) {
+                userAction.performActionWithPolling(subTopPanelModulePageObject.allApps, UserAction.CLICK);
+            } else if (tab.equalsIgnoreCase("Finished")) {
+                userAction.performActionWithPolling(subTopPanelModulePageObject.finishedTab, UserAction.CLICK);
+                waitExecuter.waitUntilElementPresent(subTopPanelModulePageObject.finishedTab);
+            } else if (tab.equalsIgnoreCase("Running")) {
+                userAction.performActionWithPolling(subTopPanelModulePageObject.runningTab, UserAction.CLICK);
+                waitExecuter.waitUntilElementPresent(subTopPanelModulePageObject.runningTab);
+            } else if (tab.equalsIgnoreCase("Inefficient")) {
+                userAction.performActionWithPolling(subTopPanelModulePageObject.inefficientApps, UserAction.CLICK);
+                waitExecuter.waitUntilElementPresent(subTopPanelModulePageObject.inefficientApps);
+            }
+            }
+        catch(ElementClickInterceptedException e){
+            e.printStackTrace();
+        }
+    }
+
     /* De-Select all app types */
     public void deselectAllAppTypes() {
         List<WebElement> appTypes = applicationsPageObject.selectOneApplicationType;

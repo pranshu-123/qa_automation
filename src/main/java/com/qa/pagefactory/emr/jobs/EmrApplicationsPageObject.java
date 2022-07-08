@@ -16,6 +16,30 @@ public class EmrApplicationsPageObject {
     @FindBy(xpath = "//span[@class='select2-results']/ul/li")
     public List<WebElement> clusterIdsList;
 
+    @FindBy(xpath = "(//label[contains(@class,'checkbox')])[1]/input")
+    public WebElement applicationTypeFirstApp;
+
+    @FindBy(xpath = "(//label[contains(@class,'checkbox')])[6]/input")
+    public WebElement applicationEventFirstApp;
+
+    @FindBy(xpath = "(//label[contains(@class,'checkbox')])/input")
+    public List<WebElement> getApplicationTypeChkBoxList;
+
+    @FindBy(xpath = "//tbody[@id='inefficientApps-body']/tr")
+    public List<WebElement> tblInefficientAppsRowsList;
+
+    @FindBy(xpath = "(//span[@class='checkmark'])")
+    public List<WebElement> getApplicationEventChkBoxList;
+
+    @FindBy(xpath = "//tbody[@id='inefficientApps-body']/tr")
+    public List<WebElement> inefficientAppsTblRowsList;
+
+    @FindBy(xpath = "//a[contains(@class,'icon-sort')]")
+    public List<WebElement> inefficientAppsIconSortTbl;
+
+    @FindBy(xpath = "//h3[contains(@class,'no-data-msg')]")
+    public WebElement inefficientAppsTblNoDataMsg;
+
     @FindBy(xpath = "//tbody[@id='inefficientApps-body']")
     public WebElement tblInefficientApps;
 
@@ -58,6 +82,12 @@ public class EmrApplicationsPageObject {
 
     @FindBy(xpath = "(//div[contains(@class,'check-items-container')])[1]//span[1]")
     public List<WebElement> getApplicationTypes;
+
+    @FindBy(xpath = "(//h3[contains(@class,'expandable-header')]/a)[1]")
+    public WebElement applicationType;
+
+    @FindBy(xpath = "(//h3[contains(@class,'expandable-header')]/a)[2]")
+    public WebElement applicationEvent;
 
     @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')])[2]//input")
     public WebElement userSearchBox;

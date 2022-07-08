@@ -32,6 +32,7 @@ public class TC_EMR_JAL_01 extends BaseClass {
         // Navigate to Jobs tab from header
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         allApps.navigateToJobsTab();
+        allApps.selectTab("All");
         waitExecuter.sleep(3000);
         // Click on date picker and get list of calendar ranges
         test.log(LogStatus.INFO, "Click on date picker and list of calendar ranges");

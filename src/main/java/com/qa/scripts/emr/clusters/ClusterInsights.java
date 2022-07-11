@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import com.qa.pagefactory.emr.clusters.ClusterInsightsPageObject;
 import com.qa.utils.WaitExecuter;

@@ -17,6 +17,7 @@ import org.testng.annotations.Test;
 import java.util.logging.Logger;
 
 @Marker.AppDetailsHive
+@Marker.EMRHive
 @Marker.All
 public class TC_HIVE_36 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_HIVE_36.class.getName());

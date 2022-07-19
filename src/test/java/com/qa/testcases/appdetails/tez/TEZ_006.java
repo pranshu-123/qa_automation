@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 @Marker.AppDetailsTez
+@Marker.EMRTez
 @Marker.All
 public class TEZ_006 extends BaseClass {
 

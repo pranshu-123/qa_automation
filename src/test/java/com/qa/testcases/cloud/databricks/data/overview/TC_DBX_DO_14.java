@@ -17,8 +17,8 @@ import java.util.Set;
 /**
  * @author Ankur Jaiswal
  */
-@Marker.DBX.Data
 @Marker.DbxDataOverview
+@Marker.EmrDataOverview
 public class TC_DBX_DO_14 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 

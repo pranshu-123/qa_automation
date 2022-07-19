@@ -16,6 +16,7 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.DbxReportsArchived
+@Marker.EmrReportsArchived
 public class TA_13 extends BaseClass
 
 {

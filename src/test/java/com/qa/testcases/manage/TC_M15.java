@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 @Marker.Manage
+@Marker.emrManage
 @Marker.All
 public class TC_M15 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_M15.class);

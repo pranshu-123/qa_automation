@@ -1159,13 +1159,17 @@ public class MrAppsDetailsPage {
      */
     public int clickOnlyLink(String types) {
         Actions action = new Actions(driver);
-        WebElement we = driver.findElement(By.xpath("(//label[contains(@class,'checkbox')])/span[contains(text(),'" + types + "')]"));
-        action.moveToElement(we).moveToElement(driver.findElement(By.xpath("(//label[contains(@class,'checkbox')])" +
-                "/span[contains(text(),'" + types + "')]/following-sibling::span[2]"))).click().build().perform();
-        WebElement ele = driver.findElement(By.xpath("(//label[contains(@class,'checkbox')])" +
-                "/span[contains(text(),'" + types + "')]/following-sibling::span[1]"));
-        int appCount = Integer.parseInt(ele.getText().replaceAll("[^\\dA-Za-z ]",
-                "").trim());
+        WebElement we = driver
+                .findElement(By.xpath("(//label[contains(@class,'checkbox')])/span[contains(text(),'" + types + "')]"));
+        action.moveToElement(we)
+                .moveToElement(driver.findElement(By.xpath("(//label[contains(@class,'checkbox')])"
+                        + "/span[contains(text(),'" + types + "')]/following-sibling::span[2]")))
+                .click().build().perform();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+        WebElement ele = driver.findElement(By.xpath("(//label[contains(@class,'checkbox')])"
+                + "/span[contains(text(),'" + types + "')]/following-sibling::span[1]"));
+        waitExecuter.sleep(3000);
+        int appCount = Integer.parseInt(ele.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
         waitExecuter.sleep(3000);
         return appCount;
     }

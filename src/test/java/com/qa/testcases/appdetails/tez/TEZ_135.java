@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Marker.AppDetailsTez
+@Marker.EMRTez
 @Marker.All
 public class TEZ_135 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TEZ_135.class);

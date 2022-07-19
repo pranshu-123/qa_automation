@@ -1,5 +1,6 @@
 package com.qa.testcases.appdetails.tez;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
 import com.qa.pagefactory.appsDetailsPage.TezAppsDetailsPageObject;
@@ -17,7 +18,9 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-
+@Marker.AppDetailsTez
+@Marker.EMRTez
+@Marker.All
 public class TEZ_122 extends BaseClass {
 
     Logger logger = LoggerFactory.getLogger(TEZ_122.class);

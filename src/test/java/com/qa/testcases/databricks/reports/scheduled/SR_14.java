@@ -15,6 +15,7 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.DbxReportsScheduled
+@Marker.EmrReportsScheduled
 public class SR_14 extends BaseClass
 
 {

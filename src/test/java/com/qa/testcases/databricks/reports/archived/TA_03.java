@@ -15,6 +15,7 @@ import com.qa.utils.Log;
 import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.DbxReportsArchived
+@Marker.EmrReportsArchived
 public class TA_03 extends BaseClass
 
 {

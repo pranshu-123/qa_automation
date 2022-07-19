@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 import java.util.logging.Logger;
 
 @Marker.AppDetailsMr
+@Marker.EMRMapReduce
 @Marker.All
 public class MR_060 extends BaseClass {
 

@@ -40,7 +40,7 @@ public class SparkAppsDetailsPageObject {
     @FindBy(css = "button.close")
     public WebElement closeAppsPageTab;
 
-    @FindBy(xpath = "//span[(text()='Duration')]//following-sibling::a[contains(@class,'sorting')]")
+    @FindBy(xpath = "//thead[1]/tr[1]/th[9]/a[1]")
     public WebElement sortByDurationApp;
 
     @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-up')]")
@@ -108,7 +108,7 @@ public class SparkAppsDetailsPageObject {
     @FindBy(xpath = "(//div[@class='timeline gantt-timeline pipeline row no-gutters'])//span[2]")
     public List<WebElement> ganttChartStartTime;
 
-    @FindBy(xpath = "(//div[@id='app'])/div/div/div[2]/div[1]/div/div[2]/div/div/div/div[1]/div/p/b")
+    @FindBy(xpath = "//div[@class='row no-gutters']//div//p")
     public List<WebElement> ganttChartHeaders;
 
     @FindBy(xpath = "(//tbody[@id='appNavigation-body'])/tr")

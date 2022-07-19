@@ -1,5 +1,6 @@
 package com.qa.testcases.appdetails.tez;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.constants.PageConstants;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
@@ -20,7 +21,9 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+@Marker.AppDetailsTez
+@Marker.EMRTez
+@Marker.All
 public class TEZ_123 extends BaseClass {
 
     Logger logger = LoggerFactory.getLogger(TEZ_123.class);

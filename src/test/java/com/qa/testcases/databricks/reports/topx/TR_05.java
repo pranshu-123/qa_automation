@@ -13,6 +13,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 
 @Marker.DbxReportsTopX
+@Marker.EmrReportsTopX
 public class TR_05 extends BaseClass
 
 {

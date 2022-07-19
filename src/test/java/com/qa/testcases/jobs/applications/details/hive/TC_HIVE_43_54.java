@@ -20,6 +20,7 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 @Marker.AppDetailsHive
+@Marker.EMRHive
 @Marker.All
 public class TC_HIVE_43_54 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_HIVE_43_54.class.getName());
@@ -68,7 +69,8 @@ public class TC_HIVE_43_54 extends BaseClass {
         } else {
             Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
                     "The clusterId does not have any application under it and also does not display 'No Data Available' for it");
-            test.log(LogStatus.SKIP, "The clusterId does not have any running application under it.");
+            test.log(LogStatus.WARNING, "The clusterId does not have any running application under it," +
+                    ".Check manually if data was expected.");
         }
         // Reset set filter to default
         test.log(LogStatus.INFO, "Reset set filter");

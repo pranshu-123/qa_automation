@@ -23,6 +23,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Marker.AppDetailsMr
+@Marker.EMRMapReduce
 @Marker.All
 public class MR_056 extends BaseClass {
 

@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 @Marker.AppDetailsMr
+@Marker.EMRMapReduce
 @Marker.All
 public class MR_041 extends BaseClass {
 

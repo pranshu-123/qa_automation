@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Marker.AppDetailsMr
+@Marker.EMRMapReduce
 @Marker.All
 public class MR_042 extends BaseClass {
 

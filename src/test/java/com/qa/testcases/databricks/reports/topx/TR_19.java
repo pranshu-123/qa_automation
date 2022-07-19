@@ -11,6 +11,7 @@ import com.qa.utils.Log;
 import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.DbxReportsTopX
+@Marker.EmrReportsTopX
 public class TR_19 extends BaseClass
 
 {

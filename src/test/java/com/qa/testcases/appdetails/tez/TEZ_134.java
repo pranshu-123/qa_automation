@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 @Marker.AppDetailsTez
+@Marker.EMRTez
 @Marker.All
 public class TEZ_134 extends BaseClass {
 

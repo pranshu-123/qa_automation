@@ -129,7 +129,7 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[4]/div")
     public WebElement getAppid;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/h2/span[3]")
+    @FindBy(xpath = "(//span[@class='instance-id']//span)[3]")
     public WebElement getHeaderAppId;
 
     @FindBy(xpath = "//button[@class='close']")
@@ -357,6 +357,7 @@ public class MrAppsDetailsPageObject {
 
     @FindBy(xpath = "//*[@class=\"highcharts-series-group\"]")
     public List<WebElement> resourcesAllGraphs;
+
 
     @FindBy(xpath = "//div[@id='taskattemptmap']//div[@class='footer']//div//span[contains(text(),'SUCCESS')]")
     public List<WebElement> taskAttMFooterName;

@@ -12,6 +12,7 @@ import com.qa.utils.Log;
 import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.DbxReportsScheduled
+@Marker.EmrReportsScheduled
 public class SR_05 extends BaseClass
 
 {

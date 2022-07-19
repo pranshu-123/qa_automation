@@ -65,18 +65,29 @@ public class MarkerConstants {
 	public static final String DBX_COMPUTE = "dbx_compute";
 	public static final String DBX_AUTOACTION = "dbx_autoaction";
 	public static final String DBX_APITOKEN = "DbxApiToken";
-	public static final String EMR_CLUSTER_INSIGHTS = "emrclusterinsights";
-	public static final String EMR_CLUSTER_JOBTRENDS = "emrclusterjobtrends";
-	public static final String EMR_INEFFICIENT_APPS = "emr_Inefficient_apps";
-    
-  // DBX Markers
+	// DBX Markers
+
+
+	// EMR Markers
 
 	public static final String EMR_SPARK = "Emr_Spark";
+
+	public static final String EMR_ALL_APPLICATION = "emr_all_apps";
+
+	public static final String EMR_DATA_OVERVIEW = "emr_data_overview";
+
+	public static final String EMR_REPORTS_TOPX = "emr_reports_topX";
+
+	public static final String EMR_MANAGE = "emr_manage";
+
+	public static final String EMR_REPORTS_ARCHIVED = "emr_reports_archived";
+
+	public static final String EMR_REPORTS_SCHEDULED = "emr_reports_scheduled";
+
 	public static final String DBX_DATA = "dbx_data";
 	public static final String DBX_DATA_OVERVIEW = "dbx_data_overview";
 	public static final String DBX_DATA_TABLES = "dbx_data_tables";
 	public static final Map<String, Class<? extends Annotation>> MARKER_MAPPING = initMap();
-
 
 	/**
 	 * This method will generate the reference of Marker Interface with
@@ -143,9 +154,12 @@ public class MarkerConstants {
 		map.put(DBX_AUTOACTION, Marker.DbxAutoAction.class);
 		map.put(DBX_APITOKEN, Marker.DbxApiToken.class);
 		map.put(EMR_SPARK, Marker.EMRSpark.class);
-		map.put(EMR_CLUSTER_INSIGHTS, Marker.emrClusterinsights.class);
-		map.put(EMR_CLUSTER_JOBTRENDS, Marker.emrClusterjobtrends.class);
-		map.put(EMR_INEFFICIENT_APPS, Marker.EmrInefficientApps.class);
+		map.put(EMR_MANAGE, Marker.emrManage.class);
+		map.put(EMR_ALL_APPLICATION, Marker.EMRAllApps.class);
+		map.put(EMR_DATA_OVERVIEW, Marker.EmrDataOverview.class);
+		map.put(EMR_REPORTS_TOPX, Marker.EmrReportsTopX.class);
+		map.put(EMR_REPORTS_ARCHIVED, Marker.EmrReportsArchived.class);
+		map.put(EMR_REPORTS_SCHEDULED, Marker.EmrReportsScheduled.class);
 		return Collections.unmodifiableMap(map);
 	}
 }

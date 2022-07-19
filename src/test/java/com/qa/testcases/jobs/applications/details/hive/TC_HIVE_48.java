@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Marker.AppDetailsHive
+@Marker.EMRHive
 @Marker.All
 public class TC_HIVE_48 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_HIVE_48.class.getName());

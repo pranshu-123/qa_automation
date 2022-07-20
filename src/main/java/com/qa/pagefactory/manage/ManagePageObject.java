@@ -28,6 +28,8 @@ public class ManagePageObject {
     @FindBy(xpath="//a[@href='#/manage/stats']")
     public WebElement statsTab;
 
+
+
     @FindBy(xpath="//span[normalize-space()='Stats']")
     public WebElement statsHeader;
 
@@ -40,6 +42,8 @@ public class ManagePageObject {
     @FindBy(xpath = "(//div[@class='component-tabs-primary']//a)[2]")
     public WebElement  elasticSearchTab;
 
+    @FindBy(xpath = "//input[@placeholder='Search']")
+    public WebElement  AuditSearch;
     @FindBy(xpath = "//a[normalize-space()='Elasticsearch']")
     public WebElement elasticSearchStatus;
 
@@ -70,6 +74,9 @@ public class ManagePageObject {
     @FindBy(xpath="(//span[contains(text(),'Run Diagnostics')])")
     public WebElement runDiagnosticsHeader;
 
+    @FindBy(xpath="(//div/h1[contains(text(),'Run Diagnostics')])")
+    public WebElement runDiagnosticsHeader1;
+
     @FindBy(xpath = "//ul[@class='diagnostic-ul']/li[contains(text(),'Load Latest Diagnostics')]")
     public WebElement  loadLatestDiagnosticsBtn;
 
@@ -91,8 +98,15 @@ public class ManagePageObject {
     @FindBy(xpath="//span[text()='Monitoring']")
     public WebElement monitoringTab;
 
+
     @FindBy(xpath="//span[normalize-space()='Monitoring']")
     public WebElement monitoringHeader;
+
+    @FindBy(xpath="//span[text()='Audit']")
+    public WebElement AuditTab;
+
+        @FindBy(xpath="//span[normalize-space()='Audit']")
+    public WebElement AuditHeader;
 
     @FindBy(xpath="(//a[contains(text(),'Partition Info')])")
     public WebElement partitionInfoTab;
@@ -154,8 +168,21 @@ public class ManagePageObject {
     @FindBy(xpath ="//td[@class='border-success']")
     public List<WebElement> listDaemons;
 
-    @FindBy(xpath= "//a[@class='icon-sort']")
+    @FindBy(xpath ="//td[@class='key text-left']")
+    public List<WebElement> listAudits;
+
+    @FindBy(xpath ="//td[@class='key text-left']/span")
+    public WebElement SearchSample;
+
+    @FindBy(xpath ="//label[@class='checkbox' and @content!='NA']")
+    public List<WebElement> listFilterOptions;
+    @FindBy(xpath= "//a[@class='icon-sort' or @class='icon-sort sort-top']")
     public List<WebElement> iconSort;
+
+    public String sortType ="//a[@class='icon-sort' or @class='icon-sort sort-top']//parent::th";
+
+    @FindBy(xpath= "//a[@class=\"filter-select\"]")
+    public List<WebElement> iconFilter;
 
     @FindBy(xpath="(//tbody/tr/td[14])[1]")
     public WebElement viewLink;

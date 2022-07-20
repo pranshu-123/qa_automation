@@ -154,7 +154,7 @@ public class MarkerConstants {
 		map.put(DBX_AUTOACTION, Marker.DbxAutoAction.class);
 		map.put(DBX_APITOKEN, Marker.DbxApiToken.class);
 		map.put(EMR_SPARK, Marker.EMRSpark.class);
-		map.put(EMR_MANAGE, Marker.emrManage.class);
+		map.put(EMR_MANAGE, Marker.EmrManage.class);
 		map.put(EMR_ALL_APPLICATION, Marker.EMRAllApps.class);
 		map.put(EMR_DATA_OVERVIEW, Marker.EmrDataOverview.class);
 		map.put(EMR_REPORTS_TOPX, Marker.EmrReportsTopX.class);

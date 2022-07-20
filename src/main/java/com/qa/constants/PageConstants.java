@@ -6,6 +6,7 @@ public class PageConstants {
     public static class Clusters {
         public static String CHARGEBACK_IMPALA_HEADING = "Chargeback Type";
         public static String CHARGEBACK_YARN_HEADING = "Chargeback Type";
+        public static String CHARGEBACK_EMR_HEADING = "Chargeback Type";
     }
 
     public static class AppTypes {

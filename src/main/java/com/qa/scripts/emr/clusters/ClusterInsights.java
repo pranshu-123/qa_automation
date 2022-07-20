@@ -66,7 +66,7 @@ public class ClusterInsights {
 		clusterInsightsPageObject.search.sendKeys("Test Search");
 		return clusterInsightsPageObject.noDataMsg.getText();
 	}
-	
+
 	public void validateSearchResult() {
 		Assert.assertTrue(clusterInsightsPageObject.clusterResultTableValues.stream().count()>0);
 		Assert.assertTrue(clusterInsightsPageObject.clusterResultSetRows.stream().count()==1);
@@ -165,7 +165,7 @@ public class ClusterInsights {
 		return clusterInsightsPageObject.noDataMsg.getText();
 	}
 
-        public void validateInsightsDetails() {
+	public void validateInsightsDetails() {
 		String header = clusterInsightsPageObject.clusterResultTableValues.get(0).getText();
 		Assert.assertTrue(clusterInsightsPageObject.insightsHeader.getText().contains("of "+header));
 		Assert.assertTrue(clusterInsightsPageObject.insightsBody.isDisplayed());
@@ -183,5 +183,29 @@ public class ClusterInsights {
 		String instanceTotal = "$ "+ String.valueOf(sum);
 		String totalCost =	clusterInsightsPageObject.clusterResultSetRowsValues.get(8).getText();
 		Assert.assertEquals(instanceTotal, totalCost);
+	}
+
+	public String retrieveClusterCostValues(String parameter) {
+		String value = "";
+		switch(parameter)
+		{
+		case "Cluster Id":
+			value =	clusterInsightsPageObject.clusterResultTableValues.get(0).getText();
+			break;
+		case "EC2 Cost":
+			value =	clusterInsightsPageObject.clusterResultTableValues.get(5).getText();
+			break;
+		case "EMR Cost":
+			value =	clusterInsightsPageObject.clusterResultTableValues.get(6).getText();
+			break;
+		case "EBS Cost":
+			value =	clusterInsightsPageObject.clusterResultTableValues.get(7).getText();
+			break;
+		case "Total Cost":
+			value =	clusterInsightsPageObject.clusterResultTableValues.get(8).getText();
+			break;
+		}
+		String total = value.substring(2,value.length()-1);
+		return ("$ "+total);
 	}
 }

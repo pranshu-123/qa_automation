@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
  */
 
 @Marker.Manage
-@Marker.emrManage
+
 @Marker.All
 public class TC_M01 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_M01.class);

@@ -30,6 +30,7 @@ public class TC_EMR_12 extends BaseClass {
 		waitExecuter.sleep(2000);
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast90Days();
+		waitExecuter.sleep(2000);
 		String cost = 	emrChargeback.fetchResultSetValues(type);
 		emrChargeback.selectInsights();
 		logger.info("Insight selected from chargeback page", test);

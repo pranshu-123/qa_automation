@@ -33,7 +33,7 @@ public class TC_EMR_03 extends BaseClass {
 		datePicker.selectLast90Days();
 		String clusterName = emrChargeback.selectClusterJobs();
 		String selectedClusterName = emrChargeback.retreiveClusterNameFromJobsPage();
-		Assert.assertEquals(clusterName, selectedClusterName);
+		Assert.assertTrue(selectedClusterName.contains(clusterName));
 		String url = driver.getCurrentUrl();
 		logger.info("New URL is fetched");
 		Assert.assertTrue(url.contains("jobs/applications"));

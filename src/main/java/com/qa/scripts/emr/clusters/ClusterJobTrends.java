@@ -110,7 +110,7 @@ public class ClusterJobTrends {
 	}
 
 	public void validateCluster() {
-		if(TestUtils.isElementDisplayed(jobtreJobsTrendsPageObject.noDataHeader)) {
+		if(!TestUtils.isElementDisplayed(jobtreJobsTrendsPageObject.graphXAxisDateLabels)) {
 			validateEmptyGraphData();
 		}
 		else {

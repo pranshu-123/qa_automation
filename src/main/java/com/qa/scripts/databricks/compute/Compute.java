@@ -241,6 +241,7 @@ public class Compute {
 	}
 
 	public void selectTags(String tagKey) {
+		JavaScriptExecuter.scrollOnElement(driver, computePageObject.tagKeyLabels.get(2));
 		int position = 0;
 		List<String> keys = computePageObject.tagKeyLabels.stream()
 				.map(k -> k.getText())
@@ -249,9 +250,13 @@ public class Compute {
 			if(key.equalsIgnoreCase(tagKey)) {
 				JavaScriptExecuter.scrollOnElement(driver, computePageObject.tagKeyLabels.get(position));
 				computePageObject.tagKeyLabels.get(position).click();
-				break;
+			
+			}
+			else {
+				computePageObject.tagKeyLabels.get(0).click();
 			}
 			position++;
+			break;
 		}
 		LOGGER.info(tagKey+  ": Key selected");
 	}

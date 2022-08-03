@@ -45,7 +45,7 @@ public class TC_AA132 extends BaseClass {
         test.log(LogStatus.INFO, "Fill new auto action policy details, without value");
 
         String inputAction = "Move App To Queue";
-        String queueName = "";
+        String queueName = "someQueueName";
         aa.enterMoveAppToQueueName(inputAction, queueName);
         test.log(LogStatus.INFO,"Clicked action Move App To Queue");
         aa.clickOnSaveBtn();

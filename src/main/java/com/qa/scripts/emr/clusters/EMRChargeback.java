@@ -192,7 +192,7 @@ public class EMRChargeback {
 		String cluster = chargebackEmrPageObject.clusterName.get(0).getText();
 		JavaScriptExecuter.scrollOnElement(driver, chargebackEmrPageObject.clusterJobs.get(totalList-1));
 		waitExecuter.sleep(2000);
-		chargebackEmrPageObject.clusterJobs.get(totalList-1).click();
+		chargebackEmrPageObject.clusterJobs.get(totalList-2).click();
 		return cluster;
 	}
 

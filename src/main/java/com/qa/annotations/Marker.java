@@ -67,21 +67,21 @@ public @interface Marker {
     @interface AppDetailsTezLlap {
     }
 
-    @Retention(RetentionPolicy.RUNTIME)
-    @interface emrClusterinsights {
-    }
+	@Retention(RetentionPolicy.RUNTIME)
+	@interface emrClusterinsights {
+	}
 
-    @Retention(RetentionPolicy.RUNTIME)
-    @interface EmrInefficientApps {
-    }
+	@Retention(RetentionPolicy.RUNTIME)
+	@interface EmrInefficientApps {
+	}
 
-    @Retention(RetentionPolicy.RUNTIME)
-    @interface emrClusterjobtrends {
-    }
+	@Retention(RetentionPolicy.RUNTIME)
+	@interface emrClusterjobtrends {
+	}
 
-    @Retention(RetentionPolicy.RUNTIME)
-    @interface EMRTez {
-    }
+	@Retention(RetentionPolicy.RUNTIME)
+	@interface EMRTez {
+	}
 
     @Retention(RetentionPolicy.RUNTIME)
     @interface AppDetailsMr {
@@ -132,8 +132,9 @@ public @interface Marker {
     }
 
     @Retention(RetentionPolicy.RUNTIME)
-    @interface EmrManage {
+    @interface emrManage {
     }
+
 
     @Retention(RetentionPolicy.RUNTIME)
     @interface DataForecasting {
@@ -145,6 +146,10 @@ public @interface Marker {
 
     @Retention(RetentionPolicy.RUNTIME)
     @interface DataFileReports {
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface EmrManage {
     }
 
     @Retention(RetentionPolicy.RUNTIME)
@@ -244,6 +249,10 @@ public @interface Marker {
     }
 
     @Retention(RetentionPolicy.RUNTIME)
+    @interface DbxDataOverview {
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
     @interface EmrDataOverview {
     }
 
@@ -256,15 +265,15 @@ public @interface Marker {
     }
 
     @Retention(RetentionPolicy.RUNTIME)
-    @interface DbxDataOverview {
-    }
-
-    @Retention(RetentionPolicy.RUNTIME)
     @interface EMRSpark {
     }
 
     @Retention(RetentionPolicy.RUNTIME)
     @interface DbxApiToken {
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface GCPHive {
     }
 
     @Retention(RetentionPolicy.RUNTIME)
@@ -290,5 +299,5 @@ public @interface Marker {
             String PAGE = "DBX - DATA";
         }
     }
-
 }
+

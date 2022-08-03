@@ -69,8 +69,6 @@ public class MarkerConstants {
 	public static final String EMR_CLUSTER_JOBTRENDS = "emrclusterjobtrends";
 	public static final String EMR_INEFFICIENT_APPS = "emr_Inefficient_apps";
 	public static final String EMR_CLUSTER_CHARGEBACK = "emrClusterChargeback";
-  
-	// DBX Markers
 
 
 	// EMR Markers
@@ -158,7 +156,6 @@ public class MarkerConstants {
 		map.put(DBX_AUTOACTION, Marker.DbxAutoAction.class);
 		map.put(DBX_APITOKEN, Marker.DbxApiToken.class);
 		map.put(EMR_SPARK, Marker.EMRSpark.class);
-
 		map.put(EMR_CLUSTER_INSIGHTS, Marker.emrClusterinsights.class);
 		map.put(EMR_CLUSTER_JOBTRENDS, Marker.emrClusterjobtrends.class);
 		map.put(EMR_INEFFICIENT_APPS, Marker.EmrInefficientApps.class);

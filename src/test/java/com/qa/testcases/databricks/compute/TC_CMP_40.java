@@ -27,7 +27,7 @@ public class TC_CMP_40 extends BaseClass{
 		Compute compute = new Compute(driver);
 		WaitExecuter wait = new WaitExecuter(driver);
 		DatePicker date = new DatePicker(driver);
-		String[] expectedValues = {"ContendedDriverEvent","DriverOomeEvent","ExecutorOomeEvent","NodeDownsizingEvent","SlowSQLOperatorEvent"};
+		String[] expectedValues = {"ContendedDriverEvent","DriverOomeEvent","NodeDownsizingEvent","SlowSQLOperatorEvent"};
 		compute.navigateToCompute();
 		wait.sleep(1000);
 		date.clickOnDatePicker();

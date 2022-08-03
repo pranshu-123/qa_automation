@@ -26,7 +26,8 @@ public class TC_CJT_16  extends BaseClass{
 		clusterJobTrends.navigateToClusterInsights();
 		waitExecuter.sleep(2000);
 		datePicker.clickOnDatePicker();
-		datePicker.selectLast90Days();
+		datePicker.selectLastOneHour();
+		waitExecuter.sleep(4000);
 		clusterJobTrends.selectCluster();
 		clusterJobTrends.validateEmptyGraphData();
 		test.log(LogStatus.PASS, "Empty Graph validated");

@@ -184,6 +184,17 @@ public class AutoActions {
 			}
 		}
 	}
+	
+	public void selectScopeActions(String inputAction){
+		waitExecuter.sleep(2000);
+		List<WebElement> webElements = newAutoActionPolicyPageObject.listOfScopeActions;
+		for(WebElement actions : webElements){
+			if(actions.getText().equals(inputAction)){
+				actions.click();
+				return;
+			}
+		}
+	}
 
 	public void enterEmail(String inputAction, String email){
 		MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.actionButton);

@@ -37,8 +37,8 @@ public class TC_EMR_14 extends BaseClass {
 		emrChargeback.switchToNewTab();
 		String url = driver.getCurrentUrl();
 		logger.info("Navigated to insight page: "+ url, test);
-		String ec2Cost = clusterInsights.retrieveClusterCostValues(type);
-		Assert.assertEquals(cost, ec2Cost);
+		String ebsCost = clusterInsights.retrieveClusterCostValues(type);
+		Assert.assertEquals(cost, ebsCost);
 		test.log(LogStatus.PASS,"Cost on Chargeback page and Insights page are matching.");
 	}
 

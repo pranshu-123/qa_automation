@@ -30,6 +30,7 @@ public class TC_EMR_13 extends BaseClass {
 		waitExecuter.sleep(2000);
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast90Days();
+		waitExecuter.sleep(2000);
 		String cost = 	emrChargeback.fetchResultSetValues(type);
 		emrChargeback.selectInsights();
 		logger.info("Insight selected from chargeback page", test);
@@ -37,8 +38,8 @@ public class TC_EMR_13 extends BaseClass {
 		emrChargeback.switchToNewTab();
 		String url = driver.getCurrentUrl();
 		logger.info("Navigated to insight page: "+ url, test);
-		String ec2Cost = clusterInsights.retrieveClusterCostValues(type);
-		Assert.assertEquals(cost, ec2Cost);
+		String emrCost = clusterInsights.retrieveClusterCostValues(type);
+		Assert.assertEquals(cost, emrCost);
 		test.log(LogStatus.PASS,"Cost on Chargeback page and Insights page are matching.");
 	}
 

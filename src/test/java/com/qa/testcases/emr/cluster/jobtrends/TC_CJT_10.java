@@ -39,7 +39,7 @@ public class TC_CJT_10  extends BaseClass{
 		LOGGER.info("Job Trends filtered as per State group");
 		clusterJobTrends.selectDownloadOption("PNG");
 		waitExecuter.sleep(2000);
-		Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("jobs.png"), "File is not downloaded " +
+		Assert.assertTrue(FileUtils.checkForFileNameInDownloadsFolder("Jobs.png"), "File is not downloaded " +
 				"or size of file is zero bytes.");
 		test.log(LogStatus.PASS, "Successfully downloaded Nodes graph as PNG file.");
 		LOGGER.info("Successfully downloaded graph as PNG file.");

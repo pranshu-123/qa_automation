@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 
 @Marker.AppDetailsHive
 @Marker.EMRHive
+@Marker.GCPAppDetailsHive
 @Marker.All
 public class TC_HIVE_52 extends BaseClass {
 	private static final Logger LOGGER = Logger.getLogger(TC_HIVE_52.class.getName());
@@ -76,7 +77,7 @@ public class TC_HIVE_52 extends BaseClass {
 				waitExecuter.waitUntilElementClickable(applicationsPageObject.sortByParentApp);
 				applicationsPageObject.sortByParentApp.click();
 				waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
-				list.add(applicationsPageObject.checkTezInParentApp.size());
+				list.add(applicationsPageObject.tezInParentApp.size());
 				waitExecuter.sleep(1000);
 
 				for (int value : list) {

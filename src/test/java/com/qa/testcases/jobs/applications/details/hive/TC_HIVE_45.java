@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 
 @Marker.AppDetailsHive
 @Marker.EMRHive
+@Marker.GCPAppDetailsHive
 @Marker.All
 public class TC_HIVE_45 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_HIVE_45.class.getName());

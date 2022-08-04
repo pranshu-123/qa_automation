@@ -12,6 +12,7 @@ import java.util.List;
  * @author Ankur Jaiswal
  */
 @Marker.DbxDataTables
+@Marker.GCPDataTables
 public class TC_DBX_DT_12 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_12.class);
 

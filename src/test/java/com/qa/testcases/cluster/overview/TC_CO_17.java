@@ -17,6 +17,7 @@ import java.util.logging.Logger;
  * @author Birender Kumar
  */
 @Marker.ClusterOverview
+@Marker.GCPClusterOverview
 @Marker.All
 public class TC_CO_17 extends BaseClass {
 

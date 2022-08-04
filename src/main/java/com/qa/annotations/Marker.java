@@ -67,21 +67,21 @@ public @interface Marker {
     @interface AppDetailsTezLlap {
     }
 
-	@Retention(RetentionPolicy.RUNTIME)
-	@interface emrClusterinsights {
-	}
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface emrClusterinsights {
+    }
 
-	@Retention(RetentionPolicy.RUNTIME)
-	@interface EmrInefficientApps {
-	}
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface EmrInefficientApps {
+    }
 
-	@Retention(RetentionPolicy.RUNTIME)
-	@interface emrClusterjobtrends {
-	}
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface emrClusterjobtrends {
+    }
 
-	@Retention(RetentionPolicy.RUNTIME)
-	@interface EMRTez {
-	}
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface EMRTez {
+    }
 
     @Retention(RetentionPolicy.RUNTIME)
     @interface AppDetailsMr {
@@ -130,11 +130,6 @@ public @interface Marker {
     @Retention(RetentionPolicy.RUNTIME)
     @interface Manage {
     }
-
-    @Retention(RetentionPolicy.RUNTIME)
-    @interface emrManage {
-    }
-
 
     @Retention(RetentionPolicy.RUNTIME)
     @interface DataForecasting {
@@ -273,10 +268,6 @@ public @interface Marker {
     }
 
     @Retention(RetentionPolicy.RUNTIME)
-    @interface GCPHive {
-    }
-
-    @Retention(RetentionPolicy.RUNTIME)
     @interface AppDetailsHive {
     }
 
@@ -286,6 +277,66 @@ public @interface Marker {
 
     @Retention(RetentionPolicy.RUNTIME)
     @interface EMRMapReduce {
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface GCPAppDetailsSpark {
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface GCPAppDetailsHive {
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface GCPAppDetailsTez {
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface GCPAppDetailsMr {
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface GCPClusterOverview {
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface GCPYarnResources {
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface GCPYarnChargeback {
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface GCPInefficientApps {
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface GCPManage {
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface GCPAllApps {
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface GCPClusterJobs {
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface GCPClusterWorkload {
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface GCPDataTables {
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface GCPDataOverview {
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface GCPAutoAction {
     }
 
     @Retention(RetentionPolicy.RUNTIME)

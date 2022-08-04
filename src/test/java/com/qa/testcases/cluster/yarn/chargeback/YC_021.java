@@ -14,6 +14,7 @@ import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Test;
 
 @Marker.YarnChargeback
+@Marker.GCPYarnChargeback
 @Marker.All
 public class YC_021 extends BaseClass {
 

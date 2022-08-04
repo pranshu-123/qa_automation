@@ -24,6 +24,7 @@ import java.util.List;
 
 @Marker.AppDetailsMr
 @Marker.EMRMapReduce
+@Marker.GCPAppDetailsMr
 @Marker.All
 public class MR_056 extends BaseClass {
 

@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
  */
 @Marker.DbxDataOverview
 @Marker.EmrDataOverview
+@Marker.GCPDataOverview
 public class TC_DBX_DO_2 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 

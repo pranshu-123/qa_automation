@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
  */
 
 @Marker.ClusterJobs
+@Marker.GCPClusterJobs
 @Marker.All
 public class TC_CJ_03 extends BaseClass {
 

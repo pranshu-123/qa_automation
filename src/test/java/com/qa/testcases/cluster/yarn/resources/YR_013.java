@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Marker.YarnResources
+@Marker.GCPYarnResources
 @Marker.All
 public class YR_013 extends BaseClass {
 

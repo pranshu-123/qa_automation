@@ -25,6 +25,7 @@ import java.awt.*;
  */
 @Marker.All
 @Marker.ClusterWorkload
+@Marker.GCPClusterWorkload
 public class TC_CTP_11 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_CTP_11.class);
 

@@ -18,6 +18,7 @@ import com.qa.base.BaseClass;
 import java.io.File;
 
 @Marker.ClusterOverview
+@Marker.GCPClusterOverview
 @Marker.All
 public class TC_CO_13 extends BaseClass {
 

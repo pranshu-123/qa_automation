@@ -20,6 +20,7 @@ import java.util.List;
  */
 
 @Marker.ClusterJobs
+@Marker.GCPClusterJobs
 @Marker.All
 public class TC_CJ_07 extends BaseClass {
     @Test(dataProvider = "clusterid-data-provider")

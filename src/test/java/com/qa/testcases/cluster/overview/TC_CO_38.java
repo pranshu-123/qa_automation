@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import java.util.logging.Logger;
 
 @Marker.ClusterOverview
+@Marker.GCPClusterOverview
 @Marker.All
 public class TC_CO_38 extends BaseClass {
 

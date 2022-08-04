@@ -343,6 +343,9 @@ public class ApplicationsPageObject {
     @FindBy (xpath ="(//tbody[@id = 'allApps-body']/tr/td[12]//span)[@class='tez']")
     public List<WebElement> checkTezInParentApp;
 
+    @FindBy (xpath ="//tbody/tr/td[12]/a[1]/span[1]/span[1]")
+    public List<WebElement> tezInParentApp;
+
     @FindBy(xpath = "//div[@id = 'scrollableMenu']//li/a")
     public List<WebElement> hiveTezAppDetailsTab;
 

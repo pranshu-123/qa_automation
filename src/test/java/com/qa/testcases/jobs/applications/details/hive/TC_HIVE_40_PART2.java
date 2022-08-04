@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 
 @Marker.AppDetailsHive
 @Marker.EMRHive
+@Marker.GCPAppDetailsHive
 @Marker.All
 public class TC_HIVE_40_PART2 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_HIVE_40_PART2.class.getName());
@@ -106,7 +107,7 @@ public class TC_HIVE_40_PART2 extends BaseClass {
             waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
             userAction.performActionWithPolling(applicationsPageObject.clickOnAppId, UserAction.CLICK);
             driver.getWindowHandle();
-            waitExecuter.waitUntilElementClickable(applicationsPageObject.tagsTab);
+            waitExecuter.sleep(2000);
             userAction.performActionWithPolling(applicationsPageObject.tagsTab, UserAction.CLICK);
             waitExecuter.waitUntilElementClickable(applicationsPageObject.tagsTab);
             waitExecuter.sleep(1000);

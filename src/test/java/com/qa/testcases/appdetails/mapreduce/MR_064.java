@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 @Marker.AppDetailsMr
 @Marker.EMRMapReduce
+@Marker.GCPAppDetailsMr
 @Marker.All
 public class MR_064 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mapreduce.MR_064.class);

@@ -13,6 +13,7 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.ClusterOverview
+@Marker.GCPClusterOverview
 @Marker.All
 public class TC_CO_04 extends BaseClass {
 	

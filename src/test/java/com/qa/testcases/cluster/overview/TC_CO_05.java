@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
  * @author Birender Kumar
  */
 @Marker.ClusterOverview
+@Marker.GCPClusterOverview
 @Marker.All
 public class TC_CO_05 extends BaseClass {
 

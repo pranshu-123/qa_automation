@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 
 @Marker.AppDetailsMr
 @Marker.EMRMapReduce
+@Marker.GCPAppDetailsMr
 @Marker.All
 public class MR_050 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(MR_050.class.getName());

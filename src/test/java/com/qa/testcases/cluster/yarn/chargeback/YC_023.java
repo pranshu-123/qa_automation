@@ -12,6 +12,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @Marker.YarnChargeback
+@Marker.GCPYarnChargeback
 @Marker.All
 public class YC_023 extends BaseClass {
 

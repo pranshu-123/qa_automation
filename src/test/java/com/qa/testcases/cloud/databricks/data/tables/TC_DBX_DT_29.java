@@ -9,6 +9,7 @@ import com.qa.utils.WaitExecuter;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 @Marker.DbxDataTables
+@Marker.GCPDataTables
 public class TC_DBX_DT_29 extends BaseClass {
 
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_29.class);

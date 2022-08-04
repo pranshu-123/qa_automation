@@ -14,6 +14,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.testng.annotations.Test;
 
 @Marker.YarnResources
+@Marker.GCPYarnResources
 @Marker.All
 public class YR_010 extends BaseClass {
 

@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 @Marker.YarnResources
+@Marker.GCPYarnResources
 @Marker.All
 public class YR_019 extends BaseClass {
 

@@ -18,6 +18,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 @Marker.AppDetailsTez
 @Marker.EMRTez
+@Marker.GCPAppDetailsTez
 @Marker.All
 public class TEZ_011 extends BaseClass {
 

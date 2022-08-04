@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import java.util.logging.Logger;
 
 @Marker.InefficientApps
+@Marker.GCPInefficientApps
 @Marker.All
 public class TC_JIA02 extends BaseClass {
 

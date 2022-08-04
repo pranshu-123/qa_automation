@@ -11,6 +11,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.testng.annotations.Test;
 
 @Marker.InefficientApps
+@Marker.GCPInefficientApps
 @Marker.All
 public class TC_JIA05 extends BaseClass {
 

@@ -18,6 +18,7 @@ import java.io.File;
  * @author Birender Kumar
  */
 @Marker.ClusterOverview
+@Marker.GCPClusterOverview
 @Marker.All
 public class TC_CO_09 extends BaseClass {
 

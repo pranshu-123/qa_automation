@@ -18,6 +18,7 @@ import java.util.logging.Logger;
  */
 /* This test is to validate filters in date picker dropdown */
 @Marker.AllApps
+@Marker.GCPAllApps
 @Marker.All
 public class TC_JAL_01 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_JAL_01.class.getName());

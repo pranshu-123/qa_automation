@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 
 @Marker.AppDetailsHive
 @Marker.EMRHive
+@Marker.GCPAppDetailsHive
 @Marker.All
 public class TC_HIVE_59_Tez extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_HIVE_59_Tez.class.getName());
@@ -96,7 +97,7 @@ public class TC_HIVE_59_Tez extends BaseClass {
                             // Click on first app in table to navigate to app details page
                             test.log(LogStatus.INFO, "Click on first app in table to navigate to app details page");
                             LOGGER.info("Click on first app in table to navigate to app details page");
-                            applicationsPageObject.checkTezInParentApp.get(0).click();
+                            applicationsPageObject.tezInParentApp.get(0).click();
                             waitExecuter.waitUntilElementPresent(applicationsPageObject.loader);
                             waitExecuter.sleep(3000);
                             Assert.assertTrue(applicationsPageObject.tezDagsDisplayed.getText().trim().toLowerCase().contains("dags"),

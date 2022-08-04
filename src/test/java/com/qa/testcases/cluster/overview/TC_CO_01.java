@@ -16,6 +16,7 @@ import java.util.Properties;
  */
 
 @Marker.ClusterOverview
+@Marker.GCPClusterOverview
 @Marker.All
 public class TC_CO_01 extends BaseClass{
 

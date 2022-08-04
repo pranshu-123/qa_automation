@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 import java.util.logging.Logger;
 
 @Marker.Manage
+@Marker.GCPManage
 @Marker.All
 public class TC_M10 extends BaseClass {
     private static final java.util.logging.Logger logger = Logger.getLogger(TC_M10.class.getName());

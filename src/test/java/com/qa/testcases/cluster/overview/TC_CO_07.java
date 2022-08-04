@@ -15,6 +15,7 @@ import java.util.List;
  * @author Ankur Jaiswal
  */
 @Marker.ClusterOverview
+@Marker.GCPClusterOverview
 @Marker.All
 public class TC_CO_07 extends BaseClass {
 

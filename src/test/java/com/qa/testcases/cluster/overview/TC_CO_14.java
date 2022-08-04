@@ -19,6 +19,7 @@ import java.util.logging.Logger;
  * @author Sarbashree Ray
  */
 @Marker.ClusterOverview
+@Marker.GCPClusterOverview
 @Marker.All
 public class TC_CO_14 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_CO_14.class.getName());

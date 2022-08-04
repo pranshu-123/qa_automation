@@ -12,6 +12,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @Marker.InefficientApps
+@Marker.GCPInefficientApps
 @Marker.All
 public class TC_JIA08 extends BaseClass {
 

@@ -21,6 +21,7 @@ import org.testng.annotations.Test;
  */
 @Marker.All
 @Marker.ClusterWorkload
+@Marker.GCPClusterWorkload
 public class TC_CTP_04 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_CTP_04.class);
 

@@ -19,6 +19,7 @@ import java.util.Set;
  */
 @Marker.DbxDataOverview
 @Marker.EmrDataOverview
+@Marker.GCPDataOverview
 public class TC_DBX_DO_10 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 

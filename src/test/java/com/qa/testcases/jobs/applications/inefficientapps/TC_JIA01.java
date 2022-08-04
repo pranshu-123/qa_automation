@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Marker.InefficientApps
+@Marker.GCPInefficientApps
 @Marker.All
 public class TC_JIA01 extends BaseClass {
 

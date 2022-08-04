@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.testng.annotations.Test;
 
 @Marker.AppDetailsSpark
+@Marker.GCPAppDetailsSpark
 @Marker.All
 public class TC_spark_239 extends BaseClass {
     /**

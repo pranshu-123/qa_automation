@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 @Marker.AppDetailsTez
 @Marker.EMRTez
+@Marker.GCPAppDetailsTez
 @Marker.All
 public class TEZ_123 extends BaseClass {
 

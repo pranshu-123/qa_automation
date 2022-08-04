@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 
 @Marker.AppDetailsTez
 @Marker.EMRTez
+@Marker.GCPAppDetailsTez
 @Marker.All
 public class TEZ_005 extends BaseClass {
 

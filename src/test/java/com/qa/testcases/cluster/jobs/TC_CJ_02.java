@@ -21,6 +21,7 @@ import java.io.File;
 import java.util.List;
 
 @Marker.ClusterJobs
+@Marker.GCPClusterJobs
 @Marker.All
 public class TC_CJ_02 extends BaseClass {
 

@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import java.util.logging.Logger;
 
 @Marker.AppDetailsSpark
+@Marker.GCPAppDetailsSpark
 @Marker.All
 public class TC_spark_235 extends BaseClass {
     /**

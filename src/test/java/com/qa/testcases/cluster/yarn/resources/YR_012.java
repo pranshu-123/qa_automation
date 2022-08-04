@@ -13,6 +13,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @Marker.YarnResources
+@Marker.GCPYarnResources
 @Marker.All
 public class YR_012 extends BaseClass {
 

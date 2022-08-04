@@ -26,6 +26,7 @@ import java.util.logging.Logger;
  */
 
 @Marker.ClusterJobs
+@Marker.GCPClusterJobs
 @Marker.All
 public class TC_CJ_05 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_CJ_05.class.getName());

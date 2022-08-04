@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Marker.YarnChargeback
+@Marker.GCPYarnChargeback
 @Marker.All
 public class YC_033 extends BaseClass {
 

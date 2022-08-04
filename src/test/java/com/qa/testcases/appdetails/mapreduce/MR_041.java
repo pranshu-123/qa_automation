@@ -17,6 +17,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 @Marker.AppDetailsMr
 @Marker.EMRMapReduce
+@Marker.GCPAppDetailsMr
 @Marker.All
 public class MR_041 extends BaseClass {
 

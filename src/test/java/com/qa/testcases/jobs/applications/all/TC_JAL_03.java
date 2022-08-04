@@ -24,6 +24,7 @@ import java.util.logging.Logger;
  */
 
 @Marker.AllApps
+@Marker.GCPAllApps
 @Marker.All
 public class TC_JAL_03 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(TC_JAL_03.class.getName());

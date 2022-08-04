@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 @Marker.InefficientApps
+@Marker.GCPInefficientApps
 @Marker.All
 public class TC_JIA06 extends BaseClass {
 

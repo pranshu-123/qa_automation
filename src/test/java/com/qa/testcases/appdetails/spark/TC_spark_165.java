@@ -19,6 +19,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @Marker.AppDetailsSpark
+@Marker.GCPAppDetailsSpark
 @Marker.All
 public class TC_spark_165 extends BaseClass {
 	/**

@@ -11,6 +11,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.testng.annotations.Test;
 
 @Marker.YarnChargeback
+@Marker.GCPYarnChargeback
 @Marker.All
 public class YC_031 extends BaseClass {
 

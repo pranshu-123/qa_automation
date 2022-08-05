@@ -48,13 +48,13 @@ public class DbxManage {
     }
 
     public Boolean validateAllTabsPresent() {
-        logger.info("Number of tabs on manage: " + managePageObject.allManageTabList.size());
+            logger.info("Number of tabs on manage: " + managePageObject.allManageTabList.size());
         List<String> allTabsOnManagePage = new ArrayList<String>();
         for (int i = 0; i < managePageObject.allManageTabList.size(); i++) {
             allTabsOnManagePage.add(managePageObject.allManageTabList.get(i).getText());
         }
         logger.info("Actual tabs."+allTabsOnManagePage);
-        String[] expectedTabsOnManagePage = {"Daemons", "Stats", "Run Diagnostics", "Monitoring","Audit","Workspace","Unravel Billing"};
+        String[] expectedTabsOnManagePage = {"Daemons", "Stats", "Run Diagnostics", "Monitoring","API Tokens","Audit","Workspaces","Unravel Billing"};
         Boolean boolAllTabs = true;
         for (String strTab : expectedTabsOnManagePage) {
             if (!allTabsOnManagePage.contains(strTab)) {

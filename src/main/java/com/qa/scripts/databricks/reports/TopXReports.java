@@ -1,5 +1,4 @@
 package com.qa.scripts.databricks.reports;
-
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
@@ -50,7 +49,11 @@ public class TopXReports {
 	public void navigateToDifferentReportsTab(String tab) {
 		waitExecuter.sleep(2000);
 		waitExecuter.waitUntilPageFullyLoaded();
-		reportsTopXPageObject.reports.click();
+		waitExecuter.waitUntilElementClickable(reportsTopXPageObject.reports);
+		try{reportsTopXPageObject.reports.click();}
+		catch (Exception e ){
+			reportsTopXPageObject.reports.click();
+		}
 		waitExecuter.sleep(1000);
 		waitExecuter.waitUntilElementClickable(reportsTopXPageObject.archivedTab);
 		try {
@@ -142,7 +145,10 @@ public class TopXReports {
 	public String createNewReportForWorkspace(String top,String value) {
 		reportsTopXPageObject.topxTextArea.sendKeys(top);
 		waitExecuter.sleep(2000);
-		reportsTopXPageObject.workspaceTextArea.sendKeys(value,Keys.ENTER);
+		try {
+		reportsTopXPageObject.workspaceTextArea.sendKeys(value,Keys.ENTER);}
+		catch (Exception e ){
+		}
 		reportsTopXPageObject.newReportRunBtn.click();
 		waitExecuter.sleep(12000);
 		waitExecuter.waitUntilElementPresent(reportsTopXPageObject.reportGenerationMsg);
@@ -154,12 +160,7 @@ public class TopXReports {
 		ArrayList<String> al = new ArrayList<String>();
 		reportsTopXPageObject.topxTextArea.sendKeys(top);
 		JavaScriptExecuter.scrollViewWithYAxis(driver, 600);
-		reportsTopXPageObject.tagTypeList.get(0).click();
 		al.add(top);
-		al.add(reportsTopXPageObject.tagTypeNames.get(0).getText());
-		reportsTopXPageObject.tagTextField.click();
-		reportsTopXPageObject.tagName.click();
-		al.add(reportsTopXPageObject.tagTextFieldValue.getText().substring(2));
 		waitExecuter.sleep(2000);
 		reportsTopXPageObject.newReportRunBtn.click();
 		waitExecuter.sleep(12000);
@@ -173,12 +174,12 @@ public class TopXReports {
 				.map(el -> el.getText()).collect(Collectors.toList());
 
 		List<String> values = reportsTopXPageObject.inputParameterValues.stream()
-				.map(el -> el.getText()).collect(Collectors.toList());
+				.map(el -> el.getText().toLowerCase()).collect(Collectors.toList());
 
 		if(reportsTopXPageObject.inputParameterTagsValues.size()>0) {
 			int size = reportsTopXPageObject.inputParameterTagsValues.size();
 			while(size!=0) {
-				values.add(reportsTopXPageObject.inputParameterTagsValues.get(size-1).getText());
+				values.add(reportsTopXPageObject.inputParameterTagsValues.get(size-1).getText().toLowerCase());
 				size--;
 			}
 		}
@@ -187,7 +188,10 @@ public class TopXReports {
 		}
 
 		for(String value : paramValue) {
-			Assert.assertTrue(values.contains(value),value+ " value not present");
+
+			Assert.assertTrue(values.contains(value.toLowerCase()),value+ " value not present");
+
+
 		}
 	}
 
@@ -198,7 +202,12 @@ public class TopXReports {
 
 	public String copyUrlAndNavigate() {
 		waitExecuter.sleep(4000);
-		reportsTopXPageObject.copyUrl.click();
+
+		try {reportsTopXPageObject.copyUrl.click();}
+		catch(Exception e){
+			reportsTopXPageObject.copyUrl.click();
+
+		}
 
 		//get copied string from clipboard
 		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -213,7 +222,7 @@ public class TopXReports {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("popup_window = window.open('"+ url+ "');");
 		waitExecuter.sleep(3000);
-		js.executeScript("popup_window.close()");  
+		js.executeScript("popup_window.close()");
 		return url;
 	}
 
@@ -258,7 +267,7 @@ public class TopXReports {
 	public void navigateToApplicationFilterTabs(String tabName) {
 		waitExecuter.sleep(4000);
 		driver.findElement(By.xpath(String.format(reportsTopXPageObject.applicationStatusStates, tabName))).click();
-		LOGGER.info(tabName+ " selected"); 
+		LOGGER.info(tabName+ " selected");
 	}
 
 

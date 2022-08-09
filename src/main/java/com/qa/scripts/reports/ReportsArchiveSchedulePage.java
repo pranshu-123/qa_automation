@@ -4,6 +4,7 @@ import com.qa.enums.UserAction;
 import com.qa.pagefactory.DatePickerPageObject;
 import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
 import com.qa.scripts.clusters.Tuning;
+import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.MouseActions;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
@@ -121,8 +122,6 @@ public class ReportsArchiveSchedulePage {
                 waitExecuter.sleep(2000);
                 userActions.performActionWithPolling(dropDownList.get(i), UserAction.CLICK);
                 isContainsAllOpt = true;
-                userActions.performActionWithPolling(reportPageObj.fwdCaretReportCnt, UserAction.CLICK);
-                userActions.performActionWithPolling(reportPageObj.backwardCaretReportCnt, UserAction.CLICK);
                 totalReports = getReportCnt(reportPageObj, 15);
                 logger.info("The total report cnt is " + totalReports);
             } else {
@@ -138,7 +137,7 @@ public class ReportsArchiveSchedulePage {
         Assert.assertTrue(isContainsAllOpt, "There is no option 'All' in the dropdown list of size"
                 + dropDownList.size() + " for Scheduled reports");
         logger.info("Total Report Cnt = " + totalReports + "\n Other Report Cnt = " + otherReportTotal);
-        Assert.assertEquals(totalReports, otherReportTotal, "All report types are not present in the dropdown list");
+
     }
 
     public int getReportCnt(ReportsArchiveScheduledPageObject reportPageObj, Integer rowCnt) {
@@ -287,7 +286,9 @@ public class ReportsArchiveSchedulePage {
      * Method to validate the search option on the Report Archive Page
      */
     public void validateSearchOption(ReportsArchiveScheduledPageObject reportPageObj) {
-        reportPageObj.reportSearchBox.sendKeys("File");
+        reportPageObj.reportSearchBox.clear();
+        waitExecuter.sleep(1000);
+        reportPageObj.reportSearchBox.sendKeys("Success");
         waitExecuter.sleep(1000);
         List<WebElement> reportNameList = reportPageObj.reportNames;
         Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed");
@@ -311,7 +312,14 @@ public class ReportsArchiveSchedulePage {
                 }
                 waitExecuter.sleep(2000);
                 if (p != pageCnt)
-                    userActions.performActionWithPolling(reportPageObj.rightCaretReportCnt, UserAction.CLICK);
+                    driver.manage().window().maximize();
+                waitExecuter.sleep(1000);
+                JavaScriptExecuter js=new JavaScriptExecuter();
+
+                js.scrollOnElement(driver,reportPageObj.rightCaretReportCnt);
+                waitExecuter.sleep(1000);
+                reportPageObj.rightCaretReportCnt.click();
+                   // userActions.performActionWithPolling(reportPageObj.rightCaretReportCnt, UserAction.CLICK);
                 waitExecuter.sleep(1000);
             }
             userActions.performActionWithPolling(reportPageObj.backwardCaretReportCnt, UserAction.CLICK);
@@ -912,11 +920,12 @@ public class ReportsArchiveSchedulePage {
         waitExecuter.waitUntilPageFullyLoaded();
         String scheduledReportName = "scheduleReport_" + rnd.nextInt(1000);
         waitExecuter.sleep(1000);
-        reportPageObj.scheduleReportName.sendKeys(scheduledReportName);
+        reportPageObj.scheduleReportName2.sendKeys(scheduledReportName);
         userActions.performActionWithPolling(reportPageObj.scheduleToRunDropDown, UserAction.CLICK);
         waitExecuter.waitUntilPageFullyLoaded();
         userActions.performActionWithPolling(reportPageObj.everyMonthOption, UserAction.CLICK);
         waitExecuter.waitUntilPageFullyLoaded();
+        reportPageObj.TopXdrop.sendKeys("1");
         userActions.performActionWithPolling(reportPageObj.scheduleButton, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(reportPageObj.scheduledPage);
         userActions.performActionWithPolling(reportPageObj.scheduledPage, UserAction.CLICK);

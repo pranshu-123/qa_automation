@@ -135,10 +135,14 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//*[@id='app']//div[3]/p[1]/input")
   public WebElement scheduleReportName;
 
-  @FindBy(xpath = "//*[@id='app']//p[3]/select")
+  @FindBy(xpath = "(//div[@class='pb-2'])[5]//input")
+  public WebElement scheduleReportName2;
+  @FindBy(xpath = "//div[@class='scheduler pb-2']")
   public WebElement scheduleToRunDropDown;
 
-  @FindBy(xpath = "//*[@id='app']//p[3]/select/option[10]")
+  @FindBy(xpath = "//input[@type='number']")
+  public WebElement TopXdrop;
+  @FindBy(xpath = "//div[@class='scheduler pb-2']/select/option[10]")
   public WebElement everyMonthOption;
 
   @FindBy(xpath = "(//*[@class='pointer icon-expand is-enabled undefined'])")

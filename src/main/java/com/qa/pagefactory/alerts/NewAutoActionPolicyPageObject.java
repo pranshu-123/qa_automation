@@ -90,6 +90,9 @@ public class NewAutoActionPolicyPageObject {
 	@FindBy(xpath = "//button[contains(@id,'action-dropdown')]")
 	public WebElement actionButton;
 
+	@FindBy(xpath = "//button[contains(@id,'action-dropdown')]")
+	public List<WebElement> listOfScopeActions;
+
 	@FindBy(xpath = "//button[contains(@id,'action-dropdown')]//div//a")
 	public List<WebElement> listOfActions;
 

@@ -233,6 +233,7 @@ public class ChargeBackYarn {
 	}
 
 	public void clickOnIconGearUnChekckTypeChkBox(){
+		JavaScriptExecuter.scrollOnElement(driver, chargebackYarnPageObject.yarnDropdownOption);
 		waitExecuter.waitUntilElementPresent(chargebackYarnPageObject.iconGear);
 		JavaScriptExecuter.scrollOnElement(driver, chargebackYarnPageObject.iconGear);
 		chargebackYarnPageObject.iconGear.click();

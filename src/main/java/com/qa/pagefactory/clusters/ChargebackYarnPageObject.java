@@ -65,7 +65,7 @@ public class ChargebackYarnPageObject {
     @FindBy(xpath = "//a[@class='icon-gear']/div/ul/li/p/label/input")
     public List<WebElement> listOfIconGearChkBox;
 
-    @FindBy(xpath = "//a[@class='icon-gear']/div/ul/li/p/label/input[@id='Type']")
+    @FindBy(xpath = "//a[@class='icon-gear']/div/ul/li/p/label/input[@id='Type']/../span")
     public WebElement iconGearTypeChkBox;
 
     public ChargebackYarnPageObject(WebDriver driver) {

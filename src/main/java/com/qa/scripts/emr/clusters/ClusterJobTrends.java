@@ -31,6 +31,8 @@ public class ClusterJobTrends {
 
 	public void navigateToClusterInsights() {
 		waitExecuter.sleep(3500);
+		jobtreJobsTrendsPageObject.cluster.click();
+		waitExecuter.sleep(1500);
 		jobtreJobsTrendsPageObject.jobTrends.click();
 	}
 

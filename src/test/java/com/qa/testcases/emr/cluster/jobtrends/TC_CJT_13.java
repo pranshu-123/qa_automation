@@ -31,10 +31,6 @@ public class TC_CJT_13  extends BaseClass{
 		datePicker.clickOnDatePicker();
 		datePicker.selectLast90Days();
 		String groupBy = "Application Type";
-		clusterJobTrends.navigateToClusterInsights();
-		waitExecuter.sleep(2000);
-		datePicker.clickOnDatePicker();
-		datePicker.selectLast90Days();
 		clusterJobTrends.filterByGroup(groupBy);
 		LOGGER.info("Job Trends filtered as per State group");
 		clusterJobTrends.selectDownloadOption("XLS");

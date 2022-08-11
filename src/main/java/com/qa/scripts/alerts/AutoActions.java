@@ -184,10 +184,10 @@ public class AutoActions {
 			}
 		}
 	}
-	
+
 	public void selectScopeActions(String inputAction){
 		waitExecuter.sleep(2000);
-		List<WebElement> webElements = newAutoActionPolicyPageObject.listOfScopeActions;
+		List<WebElement> webElements = newAutoActionPolicyPageObject.listOfActions;
 		for(WebElement actions : webElements){
 			if(actions.getText().equals(inputAction)){
 				actions.click();
@@ -440,5 +440,12 @@ public class AutoActions {
 			}else {
 				logger.info("No Triggered Policy found");
 			}}
+	}
+
+	public void addMoveAppToQueue(String inputAction, String queueName){
+		MouseActions.clickOnElement(driver, newAutoActionPolicyPageObject.actionButton);
+		waitExecuter.sleep(2000);
+		selectActions(inputAction);
+		waitExecuter.waitUntilElementPresent(newAutoActionPolicyPageObject.queueNameEle);
 	}
 }

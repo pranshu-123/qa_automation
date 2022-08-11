@@ -46,7 +46,7 @@ public class TC_AA132 extends BaseClass {
 
         String inputAction = "Move App To Queue";
         String queueName = "someQueueName";
-        aa.enterMoveAppToQueueName(inputAction, queueName);
+        aa.addMoveAppToQueue(inputAction, queueName);
         test.log(LogStatus.INFO,"Clicked action Move App To Queue");
         aa.clickOnSaveBtn();
         test.log(LogStatus.INFO,"Clicked on save button");

@@ -51,7 +51,7 @@ public class BudgetPageObject {
 	@FindBy(xpath = "(//div[@class='vdp-datepicker'])[2]//span[contains(text(),'September')]")
 	public WebElement futureExpiryDate;
 	
-	@FindBy(xpath = "//input[@type='number']")
+	@FindBy(xpath = "//div[contains(@class,'budget-value')]/input[@type='text']")
 	public WebElement addBudgetDBU;
 	
 	@FindBy(xpath = "//label[contains(text(),'Scope')]/..//select")

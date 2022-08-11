@@ -31,7 +31,7 @@ public class CB_11  extends BaseClass{
 		LOGGER.info("Navigated to Cost Budget Page");
 		waitExecuter.sleep(2000);
 		List<String> errorMsg = costBudget.createBudgetWithInvalidDBUs("Finance Budget");
-		Assert.assertTrue(errorMsg.contains("Value should be between 1 & 10000000000"), "Error Message not displayed");
+		Assert.assertTrue(errorMsg.contains("Specify a value between 0.000001 & 10000000000"), "Error Message not displayed");
 		LOGGER.info("Invalid DBU error message was displayed.");
 		test.log(LogStatus.PASS, "Invalid DBU error message was displayed.");
 	}

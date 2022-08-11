@@ -7,6 +7,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class JobsTrendsPageObject {
+	
+	@FindBy(xpath="//span[@class='icon-cluster capitalize']")
+	public WebElement cluster;
 
 	@FindBy(xpath="//a/span[contains(text(),'Jobs Trends')]")
 	public WebElement jobTrends;

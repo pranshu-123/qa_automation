@@ -12,6 +12,7 @@ import com.qa.pagefactory.clusters.ChargebackImpalaPageObject;
 import com.qa.pagefactory.databricks.cost.BudgetPageObject;
 import com.qa.pagefactory.databricks.cost.ChargebackClusterPageObject;
 import com.qa.scripts.DatePicker;
+import com.qa.utils.TestUtils;
 import com.qa.utils.WaitExecuter;
 
 public class CostBudget {
@@ -133,7 +134,7 @@ public class CostBudget {
 		budgetPageObject.newBudget.click();
 		budgetPageObject.addBudgetName.sendKeys(budgetName);
 		budgetPageObject.addBudgetDescription.sendKeys(budgetName);
-		budgetPageObject.addBudgetDBU.sendKeys("0.1");
+		budgetPageObject.addBudgetDBU.sendKeys("-0.1");
 		saveBudget();
 		return	budgetPageObject.errorLabel.stream().distinct()
 				.map(error -> error.getText())

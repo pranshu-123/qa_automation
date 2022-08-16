@@ -40,7 +40,7 @@ public class TC_M10 extends BaseClass {
         test.log(LogStatus.INFO, "Verified Manage Tab is clicked.");
         logger.info("Verified Manage Tab is clicked.");
 
-        Manage manage = new Manage(driver);
+        Manage manage = new Manage(driver,test);
         ManagePageObject managePageObject = new ManagePageObject(driver);
         //Validate daemon header default
         String daemonHeader = manage.validateDaemonHeader();

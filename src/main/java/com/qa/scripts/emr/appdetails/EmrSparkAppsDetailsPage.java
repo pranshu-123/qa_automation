@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
 
 public class EmrSparkAppsDetailsPage {
 
@@ -669,15 +668,19 @@ public class EmrSparkAppsDetailsPage {
                         }
                     }
                     break;
-             }
-                Assert.assertEquals(tabName, navigationRows + " Jobs", "Jobs text not present");
-                String[] jobCountArr = componentList.get(j).getText().split("\\s+");
+            }
+            try {
+                Assert.assertEquals(tabName, "Total jobs:" + navigationRows, "Jobs text not present");
+                String[] jobCountArr = componentList.get(j).getText().split("\\s");
                 int jobCnt = Integer.parseInt(jobCountArr[0]);
                 Assert.assertEquals(jobCnt, navigationRows, "JobCnt and navigation rows donot match");
-                logger.info("Jobs" + jobCnt);
+                logger.info("Total job" + jobCnt);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
                 break;
             }
         }
+    }
 
     /**
      * Method to validate the stage table header and the data. if
@@ -987,7 +990,7 @@ public class EmrSparkAppsDetailsPage {
      * tabs.
      */
     public void commonSetupCodeForSummarryTabValidation(ExtentTest test, String tabName, Logger logger,
-                                                        Boolean isFailedApp,Boolean isUnknownApp) {
+                                                        Boolean isFailedApp, Boolean isUnknownApp) {
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
 
@@ -1016,7 +1019,7 @@ public class EmrSparkAppsDetailsPage {
             int appCount = 0;
             if (isFailedApp)
                 appCount = appsDetailsPage.clickOnlyLink("Failed");
-            else if(isUnknownApp)
+            else if (isUnknownApp)
                 appCount = appsDetailsPage.clickOnlyLink("Unknown");
             else
                 appCount = appsDetailsPage.clickOnlyLink("Success");

@@ -105,7 +105,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//div[contains(@class,'check-items-container')]//input//following-sibling::span")
     public List<WebElement> selectOneApplicationType;
 
-    @FindBy(xpath = "//p[contains(@class,'float-right')]/b")
+    @FindBy(xpath = "//p[@class='float-right']//b[1]")
     public WebElement getTotalAppCount;
 
     @FindBy(css = "span#reset")
@@ -120,13 +120,13 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "(//h3[contains(@class,'expandable-header')]/a)[2]")
     public WebElement applicationEvent;
 
-    @FindBy(xpath = "(//label[contains(@class,'checkbox')])[1]/input")
+    @FindBy(xpath = "//div[@id='app-filter-panel']/div[2]/div[1]//div[1]/p[1]/label[1]/span[4]")
     public WebElement applicationTypeFirstApp;
 
-    @FindBy(xpath = "(//label[contains(@class,'checkbox')])[6]/input")
+    @FindBy(xpath = "//label[@title='ExecutorOomeEvent']//span[@class='checkmark']")
     public WebElement applicationEventFirstApp;
 
-    @FindBy(xpath = "(//label[contains(@class,'checkbox')])/input")
+    @FindBy(xpath = "//*[@id=\"app-filter-panel\"]/div[2]/div[1]//div/p/label/span[4]")
     public List<WebElement> getApplicationTypeChkBoxList;
 
     @FindBy(xpath = "(//label[contains(@class,'checkbox')])/input")

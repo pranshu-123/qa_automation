@@ -51,6 +51,13 @@ public class MarkerConstants {
     public static final String WORKLOAD_FIT = "workload_fit";
     public static final String CLOUD_MAPPING_PER_HOST = "cloud_mapping_per_host";
     public static final String JOBS_WORKFLOW = "jobs_workflow";
+
+    public static final String JOBS_SESSIONS = "jobs_sessions";
+
+
+    public static final String DATA_OVERVIEW = "data_overview";
+
+    public static final String DATA_TABLES = "data_tables";
     public static final String IMPALA_INSIGHTS = "impala_insights";
     public static final String DBX_RUNS = "dbx_runs";
     public static final String DBX_JOBS = "dbx_jobs";
@@ -74,6 +81,12 @@ public class MarkerConstants {
     // EMR Markers
     public static final String EMR_SPARK = "Emr_Spark";
 
+    public static final String EMR_HIVE = "Emr_hive";
+
+    public static final String EMR_TEZ = "Emr_tez";
+
+    public static final String EMR_MAPREDUCE = "Emr_mapreduce";
+
     public static final String EMR_ALL_APPLICATION = "emr_all_apps";
 
     public static final String EMR_DATA_OVERVIEW = "emr_data_overview";
@@ -86,7 +99,6 @@ public class MarkerConstants {
 
     public static final String EMR_REPORTS_SCHEDULED = "emr_reports_scheduled";
 
-    public static final String DBX_DATA = "dbx_data";
     public static final String DBX_DATA_OVERVIEW = "dbx_data_overview";
     public static final String DBX_DATA_TABLES = "dbx_data_tables";
 
@@ -171,6 +183,9 @@ public class MarkerConstants {
         map.put(WORKLOAD_FIT, Marker.WorkloadFit.class);
         map.put(CLOUD_MAPPING_PER_HOST, Marker.CloudMappingPerHost.class);
         map.put(JOBS_WORKFLOW, Marker.JobsWorkflow.class);
+        map.put(JOBS_SESSIONS, Marker.JobsSessions.class);
+        map.put(DATA_OVERVIEW, Marker.DataOverview.class);
+        map.put(DATA_TABLES, Marker.DataTables.class);
         map.put(IMPALA_INSIGHTS, Marker.ImpalaInsights.class);
         map.put(DBX_COST_CHARGEBACK, Marker.DbxCostChargeback.class);
         map.put(DBX_REPORTS_TOPX, Marker.DbxReportsTopX.class);
@@ -181,7 +196,6 @@ public class MarkerConstants {
         map.put(DBX_RUNS, Marker.DbxRuns.class);
         map.put(DBX_JOBS, Marker.DbxJobs.class);
         map.put(DBX_APP_DETAILS, Marker.DbxAppDetails.class);
-        map.put(DBX_DATA, Marker.DBX.Data.class);
         map.put(DBX_DATA_OVERVIEW, Marker.DbxDataOverview.class);
         map.put(DBX_DATA_TABLES, Marker.DbxDataTables.class);
         map.put(DBX_MANAGE, Marker.DbxManage.class);
@@ -189,6 +203,9 @@ public class MarkerConstants {
         map.put(DBX_AUTOACTION, Marker.DbxAutoAction.class);
         map.put(DBX_APITOKEN, Marker.DbxApiToken.class);
         map.put(EMR_SPARK, Marker.EMRSpark.class);
+        map.put(EMR_HIVE, Marker.EMRHive.class);
+        map.put(EMR_TEZ, Marker.EMRTez.class);
+        map.put(EMR_MAPREDUCE, Marker.EMRMapReduce.class);
         map.put(EMR_CLUSTER_INSIGHTS, Marker.emrClusterinsights.class);
         map.put(EMR_CLUSTER_JOBTRENDS, Marker.emrClusterjobtrends.class);
         map.put(EMR_INEFFICIENT_APPS, Marker.EmrInefficientApps.class);

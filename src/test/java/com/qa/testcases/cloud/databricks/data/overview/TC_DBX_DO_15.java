@@ -20,7 +20,7 @@ public class TC_DBX_DO_15 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(dataProvider = "clusterid-data-provider",description = "Verify \"Number of Partitions Created\" chart under Trends of Partitions KPIs")
-    public void verifyNumberOfPartitionsCreatedGraph(String clusterId) {
+    public void TC_DBX_DO_15_verifyNumberOfPartitionsCreatedGraph(String clusterId) {
         test = extent.startTest("TC_DBX_DO_15.verifyNumberOfPartitionsCreatedGraph", "Verify" +
             " \"Number of Partitions Created\" chart under Trends of Partitions KPIs");
         test.assignCategory("Databricks - Data");

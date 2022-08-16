@@ -65,6 +65,9 @@ public class SubTopPanelModulePageObject {
     @FindBy(xpath = "//ul[@class='sub-menu']//span[text()='Pipelines']")
     public WebElement jobsPipelinesTab;
 
+    @FindBy(xpath = "//ul[@class='sub-menu']//span[text()='Sessions']")
+    public WebElement jobsSessionsTab;
+
     @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Applications'])")
     public WebElement applicationTab;
 

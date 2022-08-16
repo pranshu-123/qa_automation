@@ -33,6 +33,21 @@ public class ManagePageObject {
     @FindBy(xpath="//span[normalize-space()='Stats']")
     public WebElement statsHeader;
 
+    @FindBy(xpath = "//input[@placeholder='Search']")
+    public WebElement searchField;
+
+    @FindBy(xpath = "//table[@class='component-data-tables row-hover']/thead/tr/th")
+    public List<WebElement> searchTableHeader;
+
+    @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody/tr")
+    public List<WebElement> searchFileTableRows;
+
+    @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody")
+    public WebElement rowData;
+
+    @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody/tr")
+    public List<WebElement> fileTableRows;
+
     @FindBy(xpath = "(//div[@class='component-tabs-primary']//a)[1]")
     public WebElement dbStatsTab;
 
@@ -105,7 +120,10 @@ public class ManagePageObject {
     @FindBy(xpath="//span[text()='Audit']")
     public WebElement AuditTab;
 
-        @FindBy(xpath="//span[normalize-space()='Audit']")
+    @FindBy(xpath="//span[text()='Unravel Billing']")
+    public WebElement billingTab;
+
+    @FindBy(xpath="//span[normalize-space()='Audit']")
     public WebElement AuditHeader;
 
     @FindBy(xpath="(//a[contains(text(),'Partition Info')])")
@@ -168,6 +186,40 @@ public class ManagePageObject {
     @FindBy(xpath ="//td[@class='border-success']")
     public List<WebElement> listDaemons;
 
+    @FindBy(xpath ="//span[text()='API Tokens']")
+    public WebElement apiTokenMenuManager;
+
+    @FindBy(xpath = "//a[contains(text(),'New API Token')]")
+    public WebElement newApiTokenButton;
+
+    @FindBy(xpath = "//section[contains(@class,'icon-success')]/div")
+    public WebElement successTextMessage;
+
+    public String sortOption = "//span[contains(text(),'%s')]/..//a[contains(@class,'icon-sort')]";
+
+    @FindBy(xpath = "//a[contains(@class,'icon-copy')]")
+    public List<WebElement> copyButton;
+
+    @FindBy(xpath = "//td[contains(@class,'key token-txt')]")
+    public List<WebElement> apiKeyList;
+
+    @FindBy(xpath = "//label[contains(text(),'Client Id')]/../input")
+    public WebElement clientIdText;
+
+    @FindBy(xpath = "//td[contains(@class,'key')][1]/span")
+    public List<WebElement> tokenNameList;
+
+    public String deleteOption = "//span[contains(text(),'%s')]/../..//span[contains(@class,'icon-delete')]";
+
+    @FindBy(xpath = "//a[contains(text(),'Create')]")
+    public WebElement createButton;
+
+    @FindBy(xpath = "//a/span[contains(text(),'API Tokens')]")
+    public WebElement apiTokenLink;
+
+    @FindBy(xpath = "//div[contains(@class,'text-fatal')]")
+    public WebElement errorTextMessage;
+
     @FindBy(xpath ="//td[@class='key text-left']")
     public List<WebElement> listAudits;
 
@@ -178,6 +230,9 @@ public class ManagePageObject {
     public List<WebElement> listFilterOptions;
     @FindBy(xpath= "//a[@class='icon-sort' or @class='icon-sort sort-top']")
     public List<WebElement> iconSort;
+
+    @FindBy(xpath= "//span[contains(@class,'icon-download pointer')]")
+    public WebElement downloadCSVButton;
 
     public String sortType ="//a[@class='icon-sort' or @class='icon-sort sort-top']//parent::th";
 

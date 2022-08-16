@@ -602,7 +602,7 @@ public class SparkAppsDetailsPage {
                     break;
                 case 2:
                     try {
-                        Assert.assertEquals(tabName, "Total jobs:"+navigationRows, "Jobs text not present");
+                        Assert.assertEquals(tabName, "Total job: "+navigationRows, "Jobs text not present");
                         String[] jobCountArr = componentList.get(j).getText().split("\\s");
                         int jobCnt = Integer.parseInt(jobCountArr[0]);
                         Assert.assertEquals(jobCnt, navigationRows, "JobCnt and navigation rows donot match");

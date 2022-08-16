@@ -60,8 +60,7 @@ public class SummaryDetailsPage {
     /**
      * Method to verify the Spark summary tabs in the right pane of the App Details page
      */
-    public String verifyAppSummaryTabs(DbxSummaryPageObject summaryPageObject, String verifyTabName,
-                                       ExtentTest test) {
+    public String verifyAppSummaryTabs(DbxSummaryPageObject summaryPageObject, String verifyTabName, ExtentTest test) {
         List<WebElement> appsTabList = summaryPageObject.appSummaryTabs;
         verifyAssertFalse(appsTabList.isEmpty(), summaryPageObject, "No Tabs loaded");
         String tabName = "";
@@ -137,23 +136,19 @@ public class SummaryDetailsPage {
             for (int t = 0; t < subTabList.size(); t++) {
                 String subTabName = subTabList.get(t).getText();
                 logger.info("The Timings subTab is " + subTabName);
-                verifyAssertTrue(Arrays.asList(expectedSubTabList).contains(subTabName), summaryPageObject,
-                        " Tab list displayed in the UI doesnot match with the expected list of tabs");
+                verifyAssertTrue(Arrays.asList(expectedSubTabList).contains(subTabName), summaryPageObject, " Tab list displayed in the UI doesnot match with the expected list of tabs");
                 MouseActions.clickOnElement(driver, subTabList.get(t));
                 waitExecuter.sleep(1000);
                 String titleName = summaryPageObject.timingsTabTitle.getText();
                 logger.info("The Timings subTabs Title is " + titleName);
-                verifyAssertTrue(summaryPageObject.pieChart.isDisplayed(), summaryPageObject,
-                        " Piechart for Task Attempts" + " is not displayed");
+                verifyAssertTrue(summaryPageObject.pieChart.isDisplayed(), summaryPageObject, " Piechart for Task Attempts" + " is not displayed");
                 if (subTabName.equals("Task Time")) {
                     List<WebElement> legendNameTTList = summaryPageObject.legendNames;
                     verifyAssertFalse(legendNameTTList.isEmpty(), summaryPageObject, "Empty legend list");
                     for (int l = 0; l < legendNameTTList.size(); l++) {
                         String legendName = legendNameTTList.get(l).getText();
                         logger.info("The Legends for subTab " + subTabName + " is " + legendName);
-                        verifyAssertTrue(Arrays.asList(expectedTTLegendNames).contains(legendName), summaryPageObject,
-                                " The legends:[" + legendName + "] displayed in the UI for Task Time doesnot match to the"
-                                        + " expected list of legends: " + Arrays.toString(expectedTTLegendNames));
+                        verifyAssertTrue(Arrays.asList(expectedTTLegendNames).contains(legendName), summaryPageObject, " The legends:[" + legendName + "] displayed in the UI for Task Time doesnot match to the" + " expected list of legends: " + Arrays.toString(expectedTTLegendNames));
                         waitExecuter.sleep(1000);
                         if (legendName.equals("Processing Stages")) {
                             WebElement ele = summaryPageObject.processingStage;
@@ -168,8 +163,7 @@ public class SummaryDetailsPage {
                     }
 
                 } else {
-                    test.log(LogStatus.WARNING, "Timing tab displays 'No data found' msg" +
-                            ".Check manually if data was expected.");
+                    test.log(LogStatus.WARNING, "Timing tab displays 'No data found' msg" + ".Check manually if data was expected.");
                 }
             }
         } else {
@@ -180,25 +174,17 @@ public class SummaryDetailsPage {
                 verifyAssertFalse(legendNameATList.isEmpty(), summaryPageObject, "Empty legend list for APP TIME");
                 for (int a = 0; a < legendNameATList.size(); a++) {
                     String ATlegendName = legendNameATList.get(a).getText();
-                    verifyAssertTrue(Arrays.asList(expectedATLegendNames).contains(ATlegendName), summaryPageObject,
-                            " The legends [" + ATlegendName + "] displayed in the UI for App Time doesnot match to the "
-                                    + "expected list of legends: " + Arrays.toString(expectedATLegendNames));
+                    verifyAssertTrue(Arrays.asList(expectedATLegendNames).contains(ATlegendName), summaryPageObject, " The legends [" + ATlegendName + "] displayed in the UI for App Time doesnot match to the " + "expected list of legends: " + Arrays.toString(expectedATLegendNames));
                     if (ATlegendName.equals("Driver Time")) {
                         WebElement ele = summaryPageObject.driverDrillDown;
                         MouseActions.clickOnElement(driver, ele);
                         String[] expectedDriverLegends = {"FileCommit Time", "File Setup Time", "Others"};
                         List<WebElement> driverLegendNameList = summaryPageObject.driverLegendNames;
-                        verifyAssertFalse(driverLegendNameList.isEmpty(), summaryPageObject,
-                                "Empty legend list for DRIVER TIME");
+                        verifyAssertFalse(driverLegendNameList.isEmpty(), summaryPageObject, "Empty legend list for DRIVER TIME");
                         for (int d = 0; d < driverLegendNameList.size(); d++) {
                             String driverLegend = driverLegendNameList.get(d).getText();
                             logger.info("The driverLegend name " + driverLegend);
-                            verifyAssertTrue(Arrays.asList(expectedDriverLegends).contains(driverLegend),
-                                    summaryPageObject,
-                                    " The legend [" + driverLegend
-                                            + "] displayed in the UI for App Time-> Driver Time does not "
-                                            + "match to the expected list of legends: "
-                                            + Arrays.toString(expectedDriverLegends));
+                            verifyAssertTrue(Arrays.asList(expectedDriverLegends).contains(driverLegend), summaryPageObject, " The legend [" + driverLegend + "] displayed in the UI for App Time-> Driver Time does not " + "match to the expected list of legends: " + Arrays.toString(expectedDriverLegends));
                         }
                         driverLegendNameList.clear();
                         WebElement backButton = summaryPageObject.backButton;
@@ -207,8 +193,7 @@ public class SummaryDetailsPage {
                     }
                 }
             } else {
-                test.log(LogStatus.WARNING, "Timing tab displays 'No data found' msg." +
-                        "Check manually if data was expected.");
+                test.log(LogStatus.WARNING, "Timing tab displays 'No data found' msg." + "Check manually if data was expected.");
             }
         }
     }
@@ -216,8 +201,7 @@ public class SummaryDetailsPage {
     /**
      * Method to verify the Timings tabs stages ,legends, graphs and top stages
      */
-    public void verifyTimingStages(Actions action, WebElement ele, DbxSummaryPageObject summaryPageObject,
-                                   String legendName) {
+    public void verifyTimingStages(Actions action, WebElement ele, DbxSummaryPageObject summaryPageObject, String legendName) {
         try {
             MouseActions.clickOnElement(driver, ele);
             waitExecuter.sleep(1000);
@@ -249,13 +233,10 @@ public class SummaryDetailsPage {
             String errorType = errorTypeList.get(e).getText();
             String newErrorType = "";
             logger.info("Error Type is " + errorType);
-            if (errorType.contains("executor-"))
-                newErrorType = "executor-";
-            else
-                newErrorType = errorType;
+            if (errorType.contains("executor-")) newErrorType = "executor-";
+            else newErrorType = errorType;
             logger.info("New Error Type is " + errorType);
-            verifyAssertTrue(Arrays.asList(expectedErrorCategory).contains(newErrorType), summaryPageObject,
-                    " The UI error types displayed does not match with the Expected error types ");
+            verifyAssertTrue(Arrays.asList(expectedErrorCategory).contains(newErrorType), summaryPageObject, " The UI error types displayed does not match with the Expected error types ");
         }
         List<WebElement> errorCollapsableList = summaryPageObject.errorCollapse;
         verifyAssertFalse(errorCollapsableList.isEmpty(), summaryPageObject, " No collapsable icon present");
@@ -279,8 +260,7 @@ public class SummaryDetailsPage {
         try {
             int cnt = 0;
             for (int c = 0; c < logCollapsableList.size(); c++) {
-                if (cnt != 0)
-                    MouseActions.clickOnElement(driver, logCollapsableList.get(c));
+                if (cnt != 0) MouseActions.clickOnElement(driver, logCollapsableList.get(c));
                 waitExecuter.sleep(5000);
                 WebElement contents = summaryPageObject.logExecutorContents;
                 verifyAssertTrue(contents.isDisplayed(), summaryPageObject, " No logs found");
@@ -289,8 +269,7 @@ public class SummaryDetailsPage {
                 List<WebElement> logLinesList = summaryPageObject.logScrollable;
                 int scrollableLines = (logLinesList.size() / 2);
                 logger.info("Scrollable line is " + scrollableLines);
-                WebElement scrollableElement = driver
-                        .findElement(By.xpath("//div[@class='modal-body scrollbar-s']//p[" + scrollableLines + "]"));
+                WebElement scrollableElement = driver.findElement(By.xpath("//div[@class='modal-body scrollbar-s']//p[" + scrollableLines + "]"));
                 executor.executeScript("arguments[0].scrollIntoView(true);", scrollableElement);
                 MouseActions.clickOnElement(driver, summaryPageObject.loadWinClose);
                 waitExecuter.waitUntilPageFullyLoaded();
@@ -301,8 +280,7 @@ public class SummaryDetailsPage {
             MouseActions.clickOnElement(driver, summaryPageObject.loadWinClose);
             waitExecuter.waitUntilElementClickable(summaryPageObject.closeAppsPageTab);
             MouseActions.clickOnElement(driver, summaryPageObject.closeAppsPageTab);
-            throw new AssertionError(
-                    "Caught exception while clicking the collapsable icon for insights.\n" + ex.getMessage());
+            throw new AssertionError("Caught exception while clicking the collapsable icon for insights.\n" + ex.getMessage());
         }
     }
 
@@ -311,8 +289,7 @@ public class SummaryDetailsPage {
         verifyAssertFalse(tagTableHeader.isEmpty(), summaryPageObject, " Tags header is not populated");
         List<WebElement> tagKeyList = summaryPageObject.tagKey;
         List<WebElement> tagValueList = summaryPageObject.tagValue;
-        verifyAssertFalse((tagKeyList.isEmpty() || tagValueList.isEmpty()), summaryPageObject,
-                "The tags key value pair are empty");
+        verifyAssertFalse((tagKeyList.isEmpty() || tagValueList.isEmpty()), summaryPageObject, "The tags key value pair are empty");
         String tagValue = "";
         for (int k = 0; k < tagKeyList.size(); k++) {
             String key = tagKeyList.get(k).getText();
@@ -320,8 +297,7 @@ public class SummaryDetailsPage {
             logger.info("The key value pair is " + "Key = " + key + " | Value = " + value);
             verifyAssertTrue(key.length() > 0, summaryPageObject, "Key is not present");
             verifyAssertTrue(value.length() > 0, summaryPageObject, "Key is not present");
-            if (key.equals("JobType"))
-                tagValue = value;
+            if (key.equals("JobType")) tagValue = value;
         }
         return tagValue;
     }
@@ -339,22 +315,18 @@ public class SummaryDetailsPage {
             MouseActions.clickOnElement(driver, summaryPageObject.programSourceLink);
             List<WebElement> programList = summaryPageObject.programTabData;
             verifyAssertFalse(programList.isEmpty(), summaryPageObject, summaryPageObject.programDataNotFound.getText());
-            WebElement highlightedLine = driver.findElement(By.xpath("//*[@id=\"app-query\"]" +
-                    "/div[contains(@data-range,'" + lineNo + "')]"));
-            verifyAssertTrue(highlightedLine.isDisplayed(), summaryPageObject, " The line no from the stage source doesnot " +
-                    "point to the same line in the source program file");
+            WebElement highlightedLine = driver.findElement(By.xpath("//*[@id=\"app-query\"]" + "/div[contains(@data-range,'" + lineNo + "')]"));
+            verifyAssertTrue(highlightedLine.isDisplayed(), summaryPageObject, " The line no from the stage source doesnot " + "point to the same line in the source program file");
             return sourceStr;
         } else {
-            test.log(LogStatus.WARNING, "Program tab displays 'No data found' msg." +
-                    "Check manually if data was expected.");
+            test.log(LogStatus.WARNING, "Program tab displays 'No data found' msg." + "Check manually if data was expected.");
         }
         return null;
     }
 
 
     public void validateConfigurationTab(DbxSummaryPageObject summaryPageObject) {
-        String[] expectedKeyWords = {"METADATA", "MEMORY", "DRIVER", "EXECUTOR", "LIMIT", "RESOURCES", "CPU", "NET",
-                "YARN", "DEPLOY", "DYNALLOC"};
+        String[] expectedKeyWords = {"METADATA", "MEMORY", "DRIVER", "EXECUTOR", "LIMIT", "RESOURCES", "CPU", "NET", "YARN", "DEPLOY", "DYNALLOC"};
         List<WebElement> keyWordsList = summaryPageObject.configKeywords;
         verifyAssertFalse(keyWordsList.isEmpty(), summaryPageObject, " Keywords not found");
         String beforeResetProp = summaryPageObject.configPropNum.getText();
@@ -372,9 +344,7 @@ public class SummaryDetailsPage {
         for (int k = 0; k < keyWordsList.size(); k++) {
             String keyword = keyWordsList.get(k).getText();
             logger.info("Keyword Type is " + keyword);
-            verifyAssertTrue(Arrays.asList(expectedKeyWords).contains(keyword), summaryPageObject,
-                    " Keywords displayed on the UI: [" + keyword + "] doesnot match with the expected keywords"
-                            + Arrays.toString(expectedKeyWords));
+            verifyAssertTrue(Arrays.asList(expectedKeyWords).contains(keyword), summaryPageObject, " Keywords displayed on the UI: [" + keyword + "] doesnot match with the expected keywords" + Arrays.toString(expectedKeyWords));
             MouseActions.clickOnElement(driver, keyWordsList.get(k));
             waitExecuter.sleep(2000);
         }
@@ -382,8 +352,7 @@ public class SummaryDetailsPage {
         MouseActions.clickOnElement(driver, summaryPageObject.resetButtonAppDetails);
         waitExecuter.sleep(3000);
         String afterResetProp = summaryPageObject.configPropNum.getText();
-        logger.info("No. of Properties displayed by default " + beforeResetProp + "\n "
-                + "No. of Properties displayed after RESET " + afterResetProp);
+        logger.info("No. of Properties displayed by default " + beforeResetProp + "\n " + "No. of Properties displayed after RESET " + afterResetProp);
         Assert.assertEquals(afterResetProp, beforeResetProp, "The properties have not been reset " + "to default");
     }
 
@@ -400,12 +369,10 @@ public class SummaryDetailsPage {
         for (int t = 0; t < graphTitleList.size(); t++) {
             String graphTitle = graphTitleList.get(t).getText();
             logger.info("Graph title is " + graphTitle);
-            verifyAssertTrue(Arrays.asList(expectedGraphTitle).contains(graphTitle), summaryPageObject,
-                    " The expected" + " Graph title doesnot match with the titles in the UI");
+            verifyAssertTrue(Arrays.asList(expectedGraphTitle).contains(graphTitle), summaryPageObject, " The expected" + " Graph title doesnot match with the titles in the UI");
             String appDuration = summaryPageObject.rightPaneAppKpiVal.get(0).getText();
             logger.info("AppDuration is = " + appDuration);
-            verifyAssertTrue(allGraphsList.get(t).isDisplayed(), summaryPageObject, " All Graphs are not displayed," +
-                    " its an expected behaviour if app duration is < 90secs.\n The app Duration is " + appDuration);
+            verifyAssertTrue(allGraphsList.get(t).isDisplayed(), summaryPageObject, " All Graphs are not displayed," + " its an expected behaviour if app duration is < 90secs.\n The app Duration is " + appDuration);
             switch (graphTitle) {
                 case "Task Attempts":
                     logger.info("Validating the Graph " + graphTitle);
@@ -420,20 +387,16 @@ public class SummaryDetailsPage {
                     List<WebElement> dropDownList = summaryPageObject.resourcesMetricsDropDownData;
                     waitExecuter.sleep(2000);
                     verifyAssertFalse(dropDownList.isEmpty(), summaryPageObject, " No contents listed in the dropdown");
-                    String[] expectetContents = {"availableMemory", "vmRss", "systemCpuLoad", "processCpuLoad", "gcLoad",
-                            "maxHeap", "usedHeap"};
+                    String[] expectetContents = {"availableMemory", "vmRss", "systemCpuLoad", "processCpuLoad", "gcLoad", "maxHeap", "usedHeap"};
                     for (int d = 0; d < dropDownList.size(); d++) {
                         String metric = dropDownList.get(d).getText();
                         logger.info("The metric is " + metric);
-                        verifyAssertTrue(Arrays.asList(expectetContents).contains(metric), summaryPageObject,
-                                " The expected" + " metric is not listed in the drop down box");
+                        verifyAssertTrue(Arrays.asList(expectetContents).contains(metric), summaryPageObject, " The expected" + " metric is not listed in the drop down box");
                         // click on the dropdown list element and validate the graph
                         MouseActions.clickOnElement(driver, dropDownList.get(d));
                         List<WebElement> resourcesMetricsLineGraphList = summaryPageObject.resourcesMetricsLineGraph;
                         List<WebElement> metricLegendList = summaryPageObject.resourcesMetricsPlotGraphLegend;
-                        Assert.assertEquals(resourcesMetricsLineGraphList.size(), metricLegendList.size(),
-                                "The number of executors in the legend do not match to the ones plotted in the graph for metrics "
-                                        + metric);
+                        Assert.assertEquals(resourcesMetricsLineGraphList.size(), metricLegendList.size(), "The number of executors in the legend do not match to the ones plotted in the graph for metrics " + metric);
                         MouseActions.clickOnElement(driver, metricDropDown);
                     }
                 case "Containers":
@@ -493,27 +456,22 @@ public class SummaryDetailsPage {
                     List<WebElement> dropDownValue = summaryPageObject.resourcesHostMetricsDropDownData;
                     waitExecuter.sleep(2000);
                     verifyAssertFalse(dropDownValue.isEmpty(), summaryPageObject, " No contents listed in the dropdown");
-                    String[] expectedtContents = {"Memory Buffers", "Cached Memory", "CPU Number", "CPU System", "CPU User", "CPU Idle", "CPU wio", "CPU Speed",
-                            "Disk Free", "Disk Total", "Packets Received", "Packets Sent", "Load One"};
+                    String[] expectedtContents = {"Memory Buffers", "Cached Memory", "CPU Number", "CPU System", "CPU User", "CPU Idle", "CPU wio", "CPU Speed", "Disk Free", "Disk Total", "Packets Received", "Packets Sent", "Load One"};
                     for (int d = 0; d < dropDownValue.size(); d++) {
                         String metric = dropDownValue.get(d).getText();
                         logger.info("The metric is " + metric);
-                        verifyAssertTrue(Arrays.asList(expectedtContents).contains(metric), summaryPageObject,
-                                " The expected" + " metric is not listed in the drop down box");
+                        verifyAssertTrue(Arrays.asList(expectedtContents).contains(metric), summaryPageObject, " The expected" + " metric is not listed in the drop down box");
                         // click on the dropdown list element and validate the graph
                         MouseActions.clickOnElement(driver, dropDownValue.get(d));
                         List<WebElement> resourcesMetricsLineGraphList = summaryPageObject.resourcesHostMetricsLineGraph;
                         List<WebElement> metricLegendList = summaryPageObject.resourcesHostMetricsPlotGraphLegend;
-                        Assert.assertEquals(resourcesMetricsLineGraphList.size(), metricLegendList.size(),
-                                "The number of executors in the legend do not match to the ones plotted in the graph for metrics "
-                                        + metric);
+                        Assert.assertEquals(resourcesMetricsLineGraphList.size(), metricLegendList.size(), "The number of executors in the legend do not match to the ones plotted in the graph for metrics " + metric);
                         MouseActions.clickOnElement(driver, hostMetricsDropDown);
                     }
                     break;
 
             }
-            verifyAssertTrue(allGraphsList.get(0).isDisplayed(), summaryPageObject,
-                    " No graph is displayed for " + graphTitle);
+            verifyAssertTrue(allGraphsList.get(0).isDisplayed(), summaryPageObject, " No graph is displayed for " + graphTitle);
         }
     }
 
@@ -567,8 +525,7 @@ public class SummaryDetailsPage {
                 collapsableList.get(c).click();
             }
         } catch (Exception ex) {
-            throw new AssertionError(
-                    "Caught exception while clicking the collapsable" + " icon for insights.\n" + ex.getMessage());
+            throw new AssertionError("Caught exception while clicking the collapsable" + " icon for insights.\n" + ex.getMessage());
         }
     }
 
@@ -605,20 +562,17 @@ public class SummaryDetailsPage {
         WebElement actionMenu = summaryPageObject.loadAction;
         MouseActions.clickOnElement(driver, actionMenu);
         List<WebElement> elementList = summaryPageObject.loadActionList;
-        verifyAssertFalse(elementList.isEmpty(), summaryPageObject,
-                "No elements listed in the Action Menu Expected " + "(Load Diagnostic | Load Logs)");
+        verifyAssertFalse(elementList.isEmpty(), summaryPageObject, "No elements listed in the Action Menu Expected " + "(Load Diagnostic | Load Logs)");
         isDignosticWin = true;
         for (int i = 0; i < elementList.size(); i++) {
             if (elementList.get(i).getText().equals("Load Diagnostics")) {
                 MouseActions.clickOnElement(driver, elementList.get(i));
                 waitExecuter.sleep(1000);
-                verifyAssertTrue(summaryPageObject.loadDiagnosticWin.isDisplayed(), summaryPageObject,
-                        "The load diagnostic window is not displayed");
+                verifyAssertTrue(summaryPageObject.loadDiagnosticWin.isDisplayed(), summaryPageObject, "The load diagnostic window is not displayed");
                 String expectedStr = "APPLICATION DIAGNOSTICS";
                 String winHeader = summaryPageObject.loadDiagnosticWinHeader.getText();
                 logger.info("The LoadDignostics window header is " + winHeader);
-                verifyAssertTrue(winHeader.contains(expectedStr), summaryPageObject, " Expected Header String is not "
-                        + "displayed\n Expected = " + expectedStr + " Actual = " + winHeader);
+                verifyAssertTrue(winHeader.contains(expectedStr), summaryPageObject, " Expected Header String is not " + "displayed\n Expected = " + expectedStr + " Actual = " + winHeader);
                 MouseActions.clickOnElement(driver, summaryPageObject.loadWinClose);
                 MouseActions.clickOnElement(driver, actionMenu);
             }
@@ -646,16 +600,14 @@ public class SummaryDetailsPage {
     /**
      * Method to navigate to the failed apps details page.
      */
-    public void navigateToFailedAppsAppPage(DbxSubTopPanelModulePageObject applicationsPageObject,
-                                            DbxSummaryPageObject summaryPageObject, ExtentTest test, Boolean verifyAppComp) {
+    public void navigateToFailedAppsAppPage(DbxSubTopPanelModulePageObject applicationsPageObject, DbxSummaryPageObject summaryPageObject, ExtentTest test, Boolean verifyAppComp) {
         int failedAppCnt = clickOnlyLink("Failed");
         logger.info("Failed App Cnt is " + failedAppCnt);
         if (failedAppCnt > 0) {
             verifyGoToSpark(summaryPageObject);
             List<WebElement> kpiList = summaryPageObject.leftPaneKPIList;
             validateLeftPanelKpis(kpiList);
-            test.log(LogStatus.PASS,
-                    "All the Kpis (start, end and duration are listed )are" + " displayed and are not empty: ");
+            test.log(LogStatus.PASS, "All the Kpis (start, end and duration are listed )are" + " displayed and are not empty: ");
 
             /**
              * There should be attempts tab under which attempts for "failed" and "success"
@@ -683,8 +635,7 @@ public class SummaryDetailsPage {
             logger.info("There are no failed apps to navigate to");
             List<WebElement> kpiList = summaryPageObject.leftPaneKPIList;
             validateLeftPanelKpis(kpiList);
-            test.log(LogStatus.PASS,
-                    "All the Kpis (start, end and duration are listed )are" + " displayed and are not empty: ");
+            test.log(LogStatus.PASS, "All the Kpis (start, end and duration are listed )are" + " displayed and are not empty: ");
         }
     }
 
@@ -694,15 +645,13 @@ public class SummaryDetailsPage {
      * validate each component tab data if validateExecutorTab = true validate jobs
      * execution tabs data.
      */
-    public void verifyAppsComponent(DbxSummaryPageObject summaryPageObject, Boolean validateCompData,
-                                    Boolean validateExecutorTab, Boolean validateStageTab) {
+    public void verifyAppsComponent(DbxSummaryPageObject summaryPageObject, Boolean validateCompData, Boolean validateExecutorTab, Boolean validateStageTab) {
         List<WebElement> componentList = summaryPageObject.component_element;
         logger.info("ComponentList is " + componentList.size());
         int navigationRows = 0;
         String tabName = "";
         for (int j = 0; j < componentList.size(); j++) {
-            if (j != 3)
-                tabName = componentList.get(j).getText();
+            if (j != 3) tabName = componentList.get(j).getText();
             switch (j) {
                 case 0:
                     Assert.assertEquals(tabName, "Navigation", "Navigation tab not present");
@@ -720,17 +669,14 @@ public class SummaryDetailsPage {
                         if (navigationRows > 0) {
                             for (int rows = 1; rows <= navigationRows; rows++) {
                                 for (int col = 1; col <= headerList.size(); col++) {
-                                    String data = driver.findElement(By.xpath(
-                                                    "//*[@id='appNavigation-body']/" + "tr[" + rows + "]/td[" + col + "]/span"))
-                                            .getText();
+                                    String data = driver.findElement(By.xpath("//*[@id='appNavigation-body']/" + "tr[" + rows + "]/td[" + col + "]/span")).getText();
                                     logger.info("The data is " + data);
                                     Assert.assertNotSame("", data);
                                 }
                             }
                         }
                     }
-                    validateStageAndStageData(navigationRows, navigationRowList, summaryPageObject, validateExecutorTab,
-                            validateStageTab);
+                    validateStageAndStageData(navigationRows, navigationRowList, summaryPageObject, validateExecutorTab, validateStageTab);
                     break;
                 case 1:
                     // The component is Gantt Chart ,click it and then verify the no. rows in the
@@ -741,8 +687,7 @@ public class SummaryDetailsPage {
                     logger.info("No. of rows in Gantt Chart tables are " + ganttChartTableRows.size());
                     if (validateCompData) {
                         List<WebElement> headerList = summaryPageObject.ganttChartHeaders;
-                        verifyAssertFalse(headerList.isEmpty(), summaryPageObject,
-                                " No headers for Gantt Chart table for application");
+                        verifyAssertFalse(headerList.isEmpty(), summaryPageObject, " No headers for Gantt Chart table for application");
                         for (int i = 0; i < headerList.size(); i++) {
                             logger.info("The header is " + headerList.get(i).getText());
                             Assert.assertNotSame("", headerList.get(i).getText());
@@ -761,12 +706,16 @@ public class SummaryDetailsPage {
                     }
                     break;
                 case 2:
-                    Assert.assertEquals(tabName, navigationRows + " Jobs", "Jobs text not present");
-                    String[] jobCountArr = componentList.get(j).getText().split("\\s+");
-                    int jobCnt = Integer.parseInt(jobCountArr[0]);
-                    Assert.assertEquals(jobCnt, navigationRows, "JobCnt and navigation rows donot match");
-                    logger.info("JobCount is " + jobCnt);
-                    break;
+                    try {
+                        Assert.assertEquals(tabName, "Total jobs:" + navigationRows, "Jobs text not present");
+                        String[] jobCountArr = componentList.get(j).getText().split("\\s");
+                        int jobCnt = Integer.parseInt(jobCountArr[0]);
+                        Assert.assertEquals(jobCnt, navigationRows, "JobCnt and navigation rows donot match");
+                        logger.info("Total job" + jobCnt);
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                        break;
+                    }
             }
         }
     }
@@ -775,11 +724,9 @@ public class SummaryDetailsPage {
      * Method to validate the stage table header and the data. if
      * validateExecutorTab = true, validate each jobs execution tabs data
      */
-    public void validateStageAndStageData(int navigationRows, List<WebElement> navigationRowList,
-                                          DbxSummaryPageObject summaryPageObject, Boolean validateExecutorTab, Boolean validateStageTabs) {
+    public void validateStageAndStageData(int navigationRows, List<WebElement> navigationRowList, DbxSummaryPageObject summaryPageObject, Boolean validateExecutorTab, Boolean validateStageTabs) {
         if (navigationRows > 0) {
-            String[] expectedHeader = {"Stage ID", "Start Time", "Duration", "Tasks", "Shuffle Read", "Shuffle Write",
-                    "Input", "Output"};
+            String[] expectedHeader = {"Stage ID", "Start Time", "Duration", "Tasks", "Shuffle Read", "Shuffle Write", "Input", "Output"};
             // click the jobId to sort it .
             MouseActions.clickOnElement(driver, summaryPageObject.singleJobHeader);
             for (int rows = 0; rows < navigationRows; rows++) {
@@ -792,8 +739,7 @@ public class SummaryDetailsPage {
                     verifyAssertFalse(rddBlockList.isEmpty(), summaryPageObject, "No DAGs data");
                     logger.info("No. of RDD blocks in the flow chart is " + rddBlockList.size());
                     for (int i = 0; i < rddBlockList.size(); i++) {
-                        verifyAssertTrue(rddBlockList.get(i).isDisplayed(), summaryPageObject,
-                                "FlowChart doesnot have the RDD blocks displayed");
+                        verifyAssertTrue(rddBlockList.get(i).isDisplayed(), summaryPageObject, "FlowChart doesnot have the RDD blocks displayed");
                     }
                     List<WebElement> rddNumberList = summaryPageObject.rddBlockNumList;
                     verifyAssertFalse(rddNumberList.isEmpty(), summaryPageObject, "Rdd block numbers are present");
@@ -801,11 +747,9 @@ public class SummaryDetailsPage {
                 List<WebElement> stageHeaderList = summaryPageObject.stageHeaders;
                 for (int i = 0; i < stageHeaderList.size(); i++) {
                     Assert.assertNotSame("", stageHeaderList.get(i).getText());
-                    Assert.assertEquals(expectedHeader[i], stageHeaderList.get(i).getText(),
-                            "expected stage header do not match to the one in the UI");
+                    Assert.assertEquals(expectedHeader[i], stageHeaderList.get(i).getText(), "expected stage header do not match to the one in the UI");
                 }
-                if (validateStageTabs)
-                    validateStagesTabs(summaryPageObject);
+                if (validateStageTabs) validateStagesTabs(summaryPageObject);
             }
         }
     }
@@ -848,11 +792,8 @@ public class SummaryDetailsPage {
                             logger.info("Program list size- " + programList.size());
                             verifyAssertFalse(programList.isEmpty(), summaryPageObject, "Program tab not verified");
                             //sparkPageObj.programDataNotFound.getText());
-                            WebElement highlightedLine = driver.findElement(
-                                    By.xpath("//*[@id=\"app-query\"]" + "/div[contains(@data-range,'" + lineNo + "')]"));
-                            verifyAssertTrue(highlightedLine.isDisplayed(), summaryPageObject,
-                                    " The line no from the stage source doesnot "
-                                            + "point to the same line in the source program file");
+                            WebElement highlightedLine = driver.findElement(By.xpath("//*[@id=\"app-query\"]" + "/div[contains(@data-range,'" + lineNo + "')]"));
+                            verifyAssertTrue(highlightedLine.isDisplayed(), summaryPageObject, " The line no from the stage source doesnot " + "point to the same line in the source program file");
                         } catch (NoSuchElementException ex) {
                             throw new AssertionError("Programs tab got exception " + ex.getMessage());
                         }
@@ -861,9 +802,7 @@ public class SummaryDetailsPage {
                         logger.info("Validating the stage tab Timeline");
                         MouseActions.clickOnElement(driver, stageTabsList.get(i));
                         waitExecuter.sleep(1000);
-                        String[] expectedHeaderList = {"ShuffleMap Input (KB)", "Shuffle Map Time(sec)",
-                                "ShuffleMap Output (KB)", "Disk Bytes Spilled (KB)", "Memory Bytes Spilled (KB)",
-                                "Records Read (count)"};
+                        String[] expectedHeaderList = {"ShuffleMap Input (KB)", "Shuffle Map Time(sec)", "ShuffleMap Output (KB)", "Disk Bytes Spilled (KB)", "Memory Bytes Spilled (KB)", "Records Read (count)"};
                         String[] expectedSubTabs = {"Timeline", "Selected Tass"};
                         List<WebElement> headerlist = summaryPageObject.stagesTimelineHeader;
                         verifyAssertFalse(headerlist.isEmpty(), summaryPageObject, " No header displayed");
@@ -873,18 +812,15 @@ public class SummaryDetailsPage {
                         for (int h = 0; h < headerlist.size(); h++) {
                             String headerName = headerlist.get(h).getText();
                             logger.info("The header name is " + headerName);
-                            verifyAssertTrue(Arrays.asList(expectedHeaderList).contains(headerName), summaryPageObject,
-                                    "Header names displayed on the UI does not match with the expected headerList");
-                            verifyAssertTrue(barGraphList.get(h).isDisplayed(), summaryPageObject,
-                                    " The bar graph for " + "" + headerName + " is not displayed");
+                            verifyAssertTrue(Arrays.asList(expectedHeaderList).contains(headerName), summaryPageObject, "Header names displayed on the UI does not match with the expected headerList");
+                            verifyAssertTrue(barGraphList.get(h).isDisplayed(), summaryPageObject, " The bar graph for " + "" + headerName + " is not displayed");
                         }
                         List<WebElement> subTabList = summaryPageObject.stagesTimelineSubTab;
                         Assert.assertFalse(subTabList.isEmpty(), "No sub tab displayed for Timeline tab");
                         for (int s = 0; s < subTabList.size(); s++) {
                             String subTask = subTabList.get(s).getText();
                             logger.info("The subTask is " + subTask);
-                            Assert.assertTrue(Arrays.asList(expectedSubTabs).contains(subTask),
-                                    "Subtask names displayed on the UI does not match with the expected list");
+                            Assert.assertTrue(Arrays.asList(expectedSubTabs).contains(subTask), "Subtask names displayed on the UI does not match with the expected list");
                         }
                         break;
                     case "Timings":
@@ -892,8 +828,7 @@ public class SummaryDetailsPage {
                         MouseActions.clickOnElement(driver, stageTabsList.get(i));
                         waitExecuter.sleep(1000);
                         List<WebElement> stageTimingHeaderList = summaryPageObject.stageTimingHeaders;
-                        Assert.assertFalse(stageTimingHeaderList.isEmpty(),
-                                "The headers in the timmings " + "tab not displayed");
+                        Assert.assertFalse(stageTimingHeaderList.isEmpty(), "The headers in the timmings " + "tab not displayed");
                         String[] expectedTimingHeaders = {"Stage Time Distribution", "IO Metrics", "Time Metrics"};
                         List<WebElement> legendList = summaryPageObject.legendNames;
                         Assert.assertFalse(legendList.isEmpty(), "No legends displayed");
@@ -903,9 +838,7 @@ public class SummaryDetailsPage {
                         for (int s = 0; s < stageTimingHeaderList.size(); s++) {
                             String stageTimingHeader = stageTimingHeaderList.get(s).getText();
                             logger.info("The stageTimingHeader is " + stageTimingHeader);
-                            Assert.assertTrue(Arrays.asList(expectedTimingHeaders).contains(stageTimingHeader),
-                                    "Stage Timing header names displayed on the UI does not match with "
-                                            + "the expected list");
+                            Assert.assertTrue(Arrays.asList(expectedTimingHeaders).contains(stageTimingHeader), "Stage Timing header names displayed on the UI does not match with " + "the expected list");
                         }
                         break;
                 }
@@ -1043,15 +976,11 @@ public class SummaryDetailsPage {
     public int clickOnlyLink(String types) {
         Actions action = new Actions(driver);
         waitExecuter.sleep(1000);
-        WebElement we = driver
-                .findElement(By.xpath("(//label[contains(@class,'checkbox')])//span[contains(text(),'" + types + "')]"));
-        action.moveToElement(we)
-                .moveToElement(driver.findElement(By.xpath("//label[@title='" + types + "']/following-sibling::a[1]")))
-                .click().build().perform();
+        WebElement we = driver.findElement(By.xpath("(//label[contains(@class,'checkbox')])//span[contains(text(),'" + types + "')]"));
+        action.moveToElement(we).moveToElement(driver.findElement(By.xpath("//label[@title='" + types + "']/following-sibling::a[1]"))).click().build().perform();
         waitExecuter.sleep(1000);
         waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.resetButton);
-        WebElement ele = driver.findElement(By.xpath("(//label[contains(@class,'checkbox')])"
-                + "//span[contains(text(),'" + types + "')]/following-sibling::span[1]"));
+        WebElement ele = driver.findElement(By.xpath("(//label[contains(@class,'checkbox')])" + "//span[contains(text(),'" + types + "')]/following-sibling::span[1]"));
         waitExecuter.sleep(3000);
         int appCount = Integer.parseInt(ele.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
         waitExecuter.sleep(3000);
@@ -1065,8 +994,7 @@ public class SummaryDetailsPage {
      * selected App click on it and go to apps details page Verify specific summary
      * tabs.
      */
-    public void commonSetupCodeForSumarryTabValidation(ExtentTest test, String tabName, Logger logger,
-                                                       Boolean isFailedApp) {
+    public void commonSetupCodeForSumarryTabValidation(ExtentTest test, String tabName, Logger logger, Boolean isFailedApp) {
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
 
@@ -1085,15 +1013,12 @@ public class SummaryDetailsPage {
         logger.info("Select individual app and assert that table contain its data");
 
         int appCount = 0;
-        if (isFailedApp)
-            appCount = summaryPage.clickOnlyLink("Failed");
-        else
-            appCount = summaryPage.clickOnlyLink("Success");
+        if (isFailedApp) appCount = summaryPage.clickOnlyLink("Failed");
+        else appCount = summaryPage.clickOnlyLink("Success");
         // Clicking on the Spark app must go to apps detail page
         if (appCount > 0) {
             if (tabName.equals("Analysis")) {
-                userActions.performActionWithPolling(applicationsPageObject.globalSearchBox, UserAction.SEND_KEYS,
-                        "com.unraveldata.spark.usecase.LightExecutor");
+                userActions.performActionWithPolling(applicationsPageObject.globalSearchBox, UserAction.SEND_KEYS, "com.unraveldata.spark.usecase.LightExecutor");
                 applicationsPageObject.globalSearchBox.sendKeys(Keys.RETURN);
             }
             String headerAppId = summaryPage.verifyGoToSpark(summaryPageObject);
@@ -1105,8 +1030,7 @@ public class SummaryDetailsPage {
             MouseActions.clickOnElement(driver, summaryPageObject.closeAppsPageTab);
         } else {
             test.log(LogStatus.SKIP, "No Spark Application present");
-            logger.info("No Spark Application present "
-                    + "of 90 days");
+            logger.info("No Spark Application present " + "of 90 days");
         }
     }
 
@@ -1142,10 +1066,8 @@ public class SummaryDetailsPage {
             Assert.assertFalse(condition, msg);
         } catch (Throwable e) {
             // Close apps details page
-            if (isDignosticWin)
-                MouseActions.clickOnElement(driver, summaryPageObject.loadWinClose);
-            else
-                MouseActions.clickOnElement(driver, summaryPageObject.closeAppsPageTab);
+            if (isDignosticWin) MouseActions.clickOnElement(driver, summaryPageObject.loadWinClose);
+            else MouseActions.clickOnElement(driver, summaryPageObject.closeAppsPageTab);
             throw new AssertionError(msg + e.getMessage());
         }
     }
@@ -1159,8 +1081,7 @@ public class SummaryDetailsPage {
                 MouseActions.clickOnElement(driver, summaryPageObject.loadWinClose);
                 waitExecuter.sleep(1000);
                 MouseActions.clickOnElement(driver, summaryPageObject.closeAppsPageTab);
-            } else
-                MouseActions.clickOnElement(driver, summaryPageObject.closeAppsPageTab);
+            } else MouseActions.clickOnElement(driver, summaryPageObject.closeAppsPageTab);
             throw new AssertionError(msg);
         }
     }

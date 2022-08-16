@@ -18,7 +18,7 @@ public class TC_DBX_DO_2 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(dataProvider = "clusterid-data-provider",description = "Verify workspace on data page")
-    public void verifyWorkspaceOnDataPage(String clusterId) {
+    public void TC_DBX_DO_2_verifyWorkspaceOnDataPage(String clusterId) {
         test = extent.startTest("TC_DBX_DO_2.verifyWorkspaceOnDataPage", "Verify workspace on data page");
         test.assignCategory("Databricks - Data");
         AllApps allApps = new AllApps(driver);

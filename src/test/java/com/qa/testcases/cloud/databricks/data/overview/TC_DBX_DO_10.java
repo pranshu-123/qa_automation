@@ -24,7 +24,7 @@ public class TC_DBX_DO_10 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(dataProvider = "clusterid-data-provider",description = "Verify the Table state graph")
-    public void verifyTableStates(String clusterId) {
+    public void TC_DBX_DO_10_verifyTableStates(String clusterId) {
         test = extent.startTest("TC_DBX_DO_10.verifyTableStates", "Verify the Table state graph");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);

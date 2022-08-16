@@ -20,7 +20,7 @@ public class TC_DBX_DO_8 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(dataProvider = "clusterid-data-provider",description = "Verify \"Number of Queries\" chart under Trends of Tables KPIs")
-    public void verifyNumberOfQueriesGraph(String clusterId) {
+    public void TC_DBX_DO_8_verifyNumberOfQueriesGraph(String clusterId) {
         test = extent.startTest("TC_DBX_DO_8.verifyNumberOfQueriesGraph", "Verify \"Number of Queries\" chart under Trends of Tables KPIs");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);

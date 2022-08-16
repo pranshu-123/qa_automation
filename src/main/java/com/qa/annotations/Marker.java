@@ -80,10 +80,6 @@ public @interface Marker {
     }
 
     @Retention(RetentionPolicy.RUNTIME)
-    @interface EMRTez {
-    }
-
-    @Retention(RetentionPolicy.RUNTIME)
     @interface AppDetailsMr {
     }
 
@@ -180,6 +176,10 @@ public @interface Marker {
     }
 
     @Retention(RetentionPolicy.RUNTIME)
+    @interface JobsSessions {
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
     @interface ImpalaInsights {
     }
 
@@ -205,6 +205,10 @@ public @interface Marker {
 
     @Retention(RetentionPolicy.RUNTIME)
     @interface DbxReportsTopX {
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface DbxInsightsOverview {
     }
 
     @Retention(RetentionPolicy.RUNTIME)
@@ -264,19 +268,23 @@ public @interface Marker {
     }
 
     @Retention(RetentionPolicy.RUNTIME)
+    @interface EMRHive {
+    }
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface EMRMapReduce {
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface EMRTez {
+    }
+
+
+    @Retention(RetentionPolicy.RUNTIME)
     @interface DbxApiToken {
     }
 
     @Retention(RetentionPolicy.RUNTIME)
     @interface AppDetailsHive {
-    }
-
-    @Retention(RetentionPolicy.RUNTIME)
-    @interface EMRHive {
-    }
-
-    @Retention(RetentionPolicy.RUNTIME)
-    @interface EMRMapReduce {
     }
 
     @Retention(RetentionPolicy.RUNTIME)
@@ -343,12 +351,12 @@ public @interface Marker {
     @interface emrClusterChargeback {
     }
 
-    @Target(ElementType.TYPE)
-    @interface DBX {
-        @Retention(RetentionPolicy.RUNTIME)
-        @interface Data {
-            String PAGE = "DBX - DATA";
-        }
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface DataTables {
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface DataOverview {
     }
 }
 

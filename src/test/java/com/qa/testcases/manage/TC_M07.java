@@ -35,7 +35,7 @@ public class TC_M07 extends BaseClass {
         MouseActions.clickOnElement(driver, subTopPanelModulePageObject.gear);
         test.log(LogStatus.INFO, "Verified Manage Tab is clicked.");
 
-        Manage manage = new Manage(driver);
+        Manage manage = new Manage(driver,test);
         //Validate daemon header default
         String daemonHeader = manage.validateDaemonHeader();
         Assert.assertEquals(daemonHeader, "Daemons", "Daemons Header not matched.");

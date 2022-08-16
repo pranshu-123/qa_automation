@@ -20,7 +20,7 @@ public class TC_DBX_DO_13 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(dataProvider = "clusterid-data-provider",description = "Validate whether user is able to change the setting of label by making changes in Last App Access")
-    public void verifyTableStatesByChangingLastAppAccess(String clusterId) {
+    public void TC_DBX_DO_13_verifyTableStatesByChangingLastAppAccess(String clusterId) {
         test = extent.startTest("TC_DBX_DO_12.verifyTableStatesByChangingLastAppAccess", "Validate whether user is able" +
                 " to change the setting of label by making changes in Last App Access");
         test.assignCategory("Databricks - Data");

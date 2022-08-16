@@ -19,7 +19,7 @@ public class TC_DBX_DO_1 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DO_1.class);
 
     @Test(description = "Verify whether Data tab is accessible")
-    public void verifyDataTabIsAccessible() {
+    public void TC_DBX_DO_1_verifyDataTabIsAccessible() {
         test = extent.startTest("TC_DBX_DO_1.verifyDataTabIsAccessible", "Verify whether Data tab is accessible");
         test.assignCategory("Databricks - Data");
         AllApps allApps = new AllApps(driver);

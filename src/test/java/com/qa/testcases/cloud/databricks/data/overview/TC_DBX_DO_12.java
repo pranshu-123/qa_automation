@@ -20,7 +20,7 @@ public class TC_DBX_DO_12 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(dataProvider = "clusterid-data-provider",description = "Validate whether user is able to change the setting of label of Table state graph")
-    public void verifyTableStatesByChangeAge(String clusterId) {
+    public void TC_DBX_DO_12_verifyTableStatesByChangeAge(String clusterId) {
         test = extent.startTest("TC_DBX_DO_10.verifyTableStatesByChangeAge", "Validate whether user" +
                 " is able to change the setting of label of Table state graph");
         test.assignCategory("Databricks - Data");

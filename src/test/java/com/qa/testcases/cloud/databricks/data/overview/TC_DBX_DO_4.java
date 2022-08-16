@@ -24,7 +24,7 @@ public class TC_DBX_DO_4 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(dataProvider = "clusterid-data-provider",description = "Verify Last Day of Table KPIs")
-    public void verifyLastDayOfTableKPIs(String clusterId) {
+    public void TC_DBX_DO_4_verifyLastDayOfTableKPIs(String clusterId) {
         test = extent.startTest("TC_DBX_DO_4.verifyLastDayOfTableKPIs", "Verify Last Day of Table KPIs");
         test.assignCategory("Databricks - Data");
         AllApps allApps = new AllApps(driver);

@@ -37,7 +37,7 @@ public class TC_M05 extends BaseClass {
         test.log(LogStatus.INFO, "Verified Manage Tab is clicked.");
         waitExecuter.waitUntilPageFullyLoaded();
 
-        Manage manage = new Manage(driver);
+        Manage manage = new Manage(driver,test);
         //Validate daemon header default
         String daemonHeader = manage.validateDaemonHeader();
         Assert.assertEquals(daemonHeader, "Daemons", "Daemons Header not matched.");

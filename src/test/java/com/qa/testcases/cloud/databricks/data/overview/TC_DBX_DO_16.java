@@ -20,7 +20,7 @@ public class TC_DBX_DO_16 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(dataProvider = "clusterid-data-provider",description = "Verify \"Total Number of Partitions\" chart under Trends of Partitions KPIs")
-    public void verifyTotalNumberOfPartitionsGraph(String clusterId) {
+    public void TC_DBX_DO_16_verifyTotalNumberOfPartitionsGraph(String clusterId) {
         test = extent.startTest("TC_DBX_DO_16.verifyTotalNumberOfPartitionsGraph", "Verify " +
             "\"Total Number of Partitions\" chart under Trends of Partitions KPIs");
         test.assignCategory("Databricks - Data");

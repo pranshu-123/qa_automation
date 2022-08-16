@@ -37,7 +37,7 @@ public class TC_M02 extends BaseClass {
         logger.info("Verified Manage Tab is clicked.");
 
 
-        Manage manage = new Manage(driver);
+        Manage manage = new Manage(driver,test);
         //Validate daemon header default
         String daemonHeader = manage.validateDaemonHeader();
         Assert.assertEquals(daemonHeader, "Daemons", "Daemons Header not matched.");

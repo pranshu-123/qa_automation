@@ -36,7 +36,7 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody/tr")
   public List<WebElement> tableRows;
 
-  @FindBy(xpath = "//*[@class='clearfix']//td/p")
+  @FindBy(xpath = "//td[@class='text-center']//p")
   public WebElement noDataToDisplay;
 
 //  @FindBy(xpath = " //div[contains(@class,'component-cta')]")

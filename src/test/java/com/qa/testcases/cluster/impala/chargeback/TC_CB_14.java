@@ -45,8 +45,8 @@ public class TC_CB_14 extends BaseClass {
         datePicker.selectLast90Days();
         LOGGER.info("Select last 90 days", test);
         chargeBackImpala.clickOnGroupBySearchBox();
-        chargeBackImpala.selectGroupBy(GroupByOptions.PRIORITY);
-        LOGGER.info("Click on groupBy: " + GroupByOptions.PRIORITY.value, test);
+        chargeBackImpala.selectGroupBy(GroupByOptions.PROJECT);
+        LOGGER.info("Click on groupBy: " + GroupByOptions.PROJECT.value, test);
         chargeBackImpala.validateGroupByPieCharts();
         LOGGER.pass("Validated whether pie charts displayed group by data", test);
         chargeBackImpala.validateGroupByOptions();

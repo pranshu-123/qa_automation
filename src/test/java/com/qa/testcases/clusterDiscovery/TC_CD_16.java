@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 import org.testng.annotations.Test;
 import com.qa.utils.WaitExecuter;
 
-@Marker.ReportArchive
+@Marker.MigrationClusterDiscovery
 @Marker.All
 public class TC_CD_16 extends BaseClass{
     private static final Logger LOGGER = Logger.getLogger(TC_CD_16.class.getName());

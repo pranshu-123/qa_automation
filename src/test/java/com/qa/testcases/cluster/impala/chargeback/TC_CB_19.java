@@ -44,14 +44,13 @@ public class TC_CB_19 extends BaseClass {
         datePicker.selectLast30Days();
         LOGGER.info("Select last 30 days", test);
         chargeBackImpala.clickOnGroupBySearchBox();
-        chargeBackImpala.selectGroupBy(GroupByOptions.INPUT_TABLES);
-        LOGGER.info("Click on groupBy: " + GroupByOptions.INPUT_TABLES.value, test);
+        chargeBackImpala.selectGroupBy(GroupByOptions.USER);
+        LOGGER.info("Click on groupBy: " + GroupByOptions.USER.value, test);
         //chargeBackImpala.remove1stGroupByOption();
         chargeBackImpala.validateJobsPieCharts();
         LOGGER.pass("Validated whether pie charts displayed group by data", test);
         chargeBackImpala.validateGroupByOptions();
         LOGGER.pass("Validated the group by options in group by table", test);
-        Assert.assertTrue(chargeBackImpala.getImpalaJobsTableRecord().size()>0, "Data is not displayed");
         LOGGER.pass("Validated whether data is displayed for impala", test);
     }
 }

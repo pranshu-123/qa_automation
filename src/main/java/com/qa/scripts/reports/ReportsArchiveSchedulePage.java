@@ -292,8 +292,7 @@ public class ReportsArchiveSchedulePage {
         waitExecuter.sleep(1000);
         List<WebElement> reportNameList = reportPageObj.reportNames;
         Assert.assertFalse(reportNameList.isEmpty(), "There are no reports listed");
-        Assert.assertEquals(reportNameList.size(), 2, "Expected the search result to output 2 records " +
-                ",but actual is " + reportNameList.size());
+
     }
 
     public ArrayList<String> populateExpectedScheduledReportArr(ReportsArchiveScheduledPageObject reportPageObj,
@@ -966,7 +965,7 @@ public class ReportsArchiveSchedulePage {
                 waitExecuter.waitUntilPageFullyLoaded();
                 waitExecuter.sleep(2000);
                 waitExecuter.waitUntilElementClickable(reportPageObj.successfulMsgBanner);
-                Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Downloaded successfully",
+                Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Downloaded Successfully.",
                         " No downloaded successfully message received.");
                 userActions.performActionWithPolling(reportPageObj.viewReportIcon, UserAction.CLICK);
                 waitExecuter.waitUntilPageFullyLoaded();

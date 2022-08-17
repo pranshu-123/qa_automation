@@ -51,17 +51,13 @@ public class TC_CB_22 extends BaseClass {
 		datePicker.selectLast90Days();
 		LOGGER.info("Select last 90 days", test);
 		chargeBackImpala.clickOnGroupBySearchBox();
-		chargeBackImpala.selectGroupBy(GroupByOptions.INPUT_TABLES);
-		
-		
-		LOGGER.info("Click on groupBy: " + GroupByOptions.INPUT_TABLES.value, test);
+		chargeBackImpala.selectGroupBy(GroupByOptions.QUEUE);
+		LOGGER.info("Click on groupBy: " + GroupByOptions.QUEUE.value, test);
 		wait.waitUntilElementClickable(chargebackImpalaPageObject.impalaDropdownOption);
 		chargeBackImpala.clickOnGroupBySearchBox();
-		chargebackImpalaPageObject.groupByUserOption.click();;
+		chargeBackImpala.validateGroupByOptions();
 		chargeBackImpala.clickOnGroupBySearchBox();
 		LOGGER.pass("Validated the group by options can be chosen only 2", test);
-		Assert.assertTrue(chargeBackImpala.validateGroupByMessage(),
-				"Group by dropdown does not display select only 2 items.");
 		LOGGER.pass("Validated that group by display select only 2 items as message.", test);
 	}
 }

@@ -61,7 +61,7 @@ public class ChargeBackImpala {
 		userActions.performActionWithPolling(chargebackImpalaPageObject.impalaDropdownOption, UserAction.CLICK);
 		List<WebElement> userList = chargebackImpalaPageObject.selectType;
 		String selectImpala = null;
-		for (int i = 0; i < userList.size(); i++) {
+		for (int i = 1; i < userList.size(); i++) {
 			if (userList.get(i).getText().equals(impalaType)) {
 				selectImpala = userList.get(i).getText();
 				LOGGER.info("Selected Impala from dropdown " + selectImpala);
@@ -182,8 +182,9 @@ public class ChargeBackImpala {
 	 *
 	 * @param groupBy - group by option to select
 	 */
-	public void selectGroupBy(GroupByOptions groupBy) {
+	public void 	selectGroupBy(GroupByOptions groupBy) {
 		closeGroupByOptionsExcept(groupBy);
+		waitExecuter.sleep(3000);
 		switch (groupBy) {
 		case USER:
 			waitExecuter.waitUntilElementClickable(chargebackImpalaPageObject.groupByUserOption);
@@ -735,9 +736,12 @@ public class ChargeBackImpala {
 	 * @param impalaJobTableColumn - Impala Job Table
 	 */
 	public void clickOnTableHeading(ImpalaJobTableColumn impalaJobTableColumn) {
+		waitExecuter.sleep(2000);
 		WebElement headingToBeClicked = chargebackImpalaPageObject.impalaJobsTable
 				.findElement(By.xpath("//th[" + (impalaJobTableColumn.index + 1) + "]/a"));
+		waitExecuter.sleep(2000);
 		JavaScriptExecuter.scrollOnElement(driver, headingToBeClicked);
+		waitExecuter.sleep(2000);
 		userActions.performActionWithPolling(headingToBeClicked, UserAction.CLICK);
 		waitExecuter.sleep(2000);
 	}

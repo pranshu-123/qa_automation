@@ -97,13 +97,10 @@ public class TC_CTR_03 extends BaseClass {
                         datePickerElement.click();
                         waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
                         homePage.selectMultiClusterId(clusterId);
+                        waitExecuter.sleep(3000);
                         tuning.clickOnModalRunButton();
                         waitExecuter.waitUntilElementPresent(tuningPageObject.archivesText);
                         waitExecuter.sleep(6000);
-                        waitExecuter.waitUntilElementClickable(tuningPageObject.confirmationMessage);
-                        waitExecuter.waitUntilTextToBeInWebElement(tuningPageObject.confirmationMessage,
-                                "Please wait while the report is being generated.");
-                        waitExecuter.sleep(4000);
                         WebElement statusElement = driver.findElement(By.xpath(statusXpath));
                         try{
                             waitExecuter.sleep(2000);

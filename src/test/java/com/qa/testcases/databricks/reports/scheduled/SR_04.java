@@ -28,7 +28,7 @@ public class SR_04 extends BaseClass
 		TopXReports topXReports = new TopXReports(driver);
 		ScheduledReports scheduledReports = new ScheduledReports(driver);
 		List<String> headers = new ArrayList<String>(Arrays.asList("Parameters","Value"));
-		List<String> values = new ArrayList<String>(Arrays.asList("Cluster","Top X","Date Range"));
+		List<String> values = new ArrayList<String>(Arrays.asList("Cluster","Top X","Date range"));
 		topXReports.navigateToDifferentReportsTab("Scheduled");
 		LOGGER.info("Navigated to Reports tab");
 		scheduledReports.selectScheduledReport();

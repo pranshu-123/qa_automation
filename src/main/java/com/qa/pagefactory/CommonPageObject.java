@@ -24,7 +24,7 @@ public class CommonPageObject {
   @FindBy(xpath = "//span[contains(@class,'select2-selection__arrow')]")
   public WebElement clusterDropdown;
 
-  @FindBy(xpath="//span[contains(@class, 'select2-search--dropdown')]/input")
+  @FindBy(xpath="//span[contains(@class, 'select2-search--dropdown')]//input")
   public WebElement clusterSearchBox;
 
   @FindBy(xpath="//span[@class='select2-results']//li")

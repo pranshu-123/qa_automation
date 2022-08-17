@@ -75,7 +75,7 @@ public class TC_EMRM_15 extends BaseClass {
 
         //Click on Elastic tab and validate its details
         waitExecuter.sleep(2000);
-        manage.clickDBStatusTab();
+        manage.clickElasticTab();
         test.log(LogStatus.INFO, "Clicked on DbStats Tab.");
         waitExecuter.sleep(3000);
         Assert.assertTrue(manage.validateElasticDataDetails(), "DB Stats Header columns are not present");

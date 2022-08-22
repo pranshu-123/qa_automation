@@ -25,7 +25,7 @@ public class IM_RES_09 extends BaseClass {
   private static final Logger LOGGER = Logger.getLogger(IM_RES_09.class.getName());
 
   @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the UI should display the Usage only the selected group of user")
-  public void verifyDataDisplayedAsFilteredUser(String clusterId) {
+  public void IM_RES_09_verifyDataDisplayedAsFilteredUser(String clusterId) {
     test = extent.startTest("IM_RES_09.verifyQueryGraphForUserGroup ("+clusterId+")", "Validate the \"Group By\" filter for user.");
     test.assignCategory(" Cluster/Impala Resources");
     WaitExecuter waitExecuter = new WaitExecuter(driver);

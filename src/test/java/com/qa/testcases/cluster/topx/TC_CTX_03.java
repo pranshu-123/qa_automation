@@ -81,8 +81,10 @@ public class TC_CTX_03 extends BaseClass {
 
         topX.validateLatestReport("Top X", topXValue);
         LOGGER.pass("Correct value is displayed on report.", test);
-
         userActions.performActionWithPolling(topXPageObject.downloadJsonButton, UserAction.CLICK);
+        waitExecuter.sleep(2000);
+        userActions.performActionWithPolling(topXPageObject.downloadJsonButton2,UserAction.CLICK);
+        waitExecuter.sleep(4000);
         LOGGER.info("Clicked on Download JSON", test);
         FileUtils.isFileDownloadedInUUIDFolder();
         LOGGER.pass("Verified Download CSV files present in directory.", test);

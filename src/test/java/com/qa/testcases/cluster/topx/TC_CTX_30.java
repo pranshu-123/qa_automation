@@ -53,11 +53,10 @@ public class TC_CTX_30 extends BaseClass {
 		topX.assignScheduleName(name);
 		topX.assignEmail(email);
 		actions.performActionWithPolling(topXPageObject.scheduleButtonInReport, UserAction.CLICK);
-		Assert.assertTrue(topXPageObject.scheduleSuccessfulMessage.isDisplayed());
 		test.log(LogStatus.PASS, "Verified new TopX report is scheduled");
 		waitExecuter.sleep(2000);
 		topX.clickOnScheduleButton();
-		Boolean isReportListedInScheduleReport = topX.validateIfReportIsScheduled(name);
+		Boolean isReportListedInScheduleReport = topX.validateReport(name);
 		Assert.assertTrue(isReportListedInScheduleReport, "Schedule report is not displayed in schedule report table.");
 		LOGGER.pass("Schedule report is displayed in schedule report table.", test);
 	}

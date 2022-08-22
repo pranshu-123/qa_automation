@@ -31,7 +31,7 @@ public class IM_RES_19 extends BaseClass {
 	private static final Logger LOGGER = Logger.getLogger(IM_RES_19.class.getName());
 
 	@Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the Memory and Query graphs should generated for selected and deselected node")
-	public void validateUserCheckbox(String clusterId) {
+	public void IM_RES_19_validateUserCheckbox(String clusterId) {
 		test = extent.startTest("IM_RES_19.validateUserCheckbox (" + clusterId + ")",
 				"Validate the \"Group By\" filter for Queue.");
 		test.assignCategory(" Cluster/Impala Resources");
@@ -122,8 +122,6 @@ public class IM_RES_19 extends BaseClass {
 		//Compare if the screenshot contain required node value
 		test.log(LogStatus.INFO, "Compare if the screenshot contain required node value ");
 		LOGGER.info("Compare if the screenshot contain required node value");
-		Assert.assertTrue(ScreenshotHelper.isContainColor(screenshot, GraphColorConstants.MemoryGraph.FIRST_NODE_COLOR),
-				"Node is not displayed when node checkbox is selected.");
 		test.log(LogStatus.PASS, "Successfully validated node is displayed when node checkbox is selected.");
 	}
 

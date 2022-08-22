@@ -25,7 +25,7 @@ public class IM_RES_05 extends BaseClass {
   private static final Logger LOGGER = Logger.getLogger(IM_RES_05.class.getName());
 
   @Test(description ="P0-Verify the mouse over the Query graph it should simultaneously display the tool tip for Memory graph at the same data point")
-  public void verifyQueryGraphForUserGroup() {
+  public void IM_RES_05_verifyQueryGraphForUserGroup() {
     test = extent.startTest("IM_RES_05.verifyQueryGraphForUserGroup", "Verify Query graph with mouse hover.)");
     test.assignCategory(" Cluster/Impala Resources");
 
@@ -58,7 +58,7 @@ public class IM_RES_05 extends BaseClass {
       impalaPageObject.memoryHighChartContainer);
     List<String> memoryTooltipValues = graphUtils.getMemoryTooltipValues();
     List<String> queriesTooltipValues = graphUtils.getQueriesTooltipValues();
-
+waitExecuter.sleep(2000);
     Assert.assertTrue(memoryTooltipValues.size() > 0, "memory tooltips are not displayed");
     Assert.assertTrue(queriesTooltipValues.size() > 0, "queries tooltips are not displayed");
     for (int i=0; i<memoryTooltipValues.size(); i++) {

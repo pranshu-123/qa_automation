@@ -25,7 +25,7 @@ public class TC_CB_19 extends BaseClass {
      * @param clusterId - ClusterId to select for test execution
      */
     @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the chargeback report should be present when clicking on grouped by inputTables.")
-    public void validateGroupByInputTablesImpalaChargeback(String clusterId) {
+    public void TC_CB_19_validateGroupByInputTablesImpalaChargeback(String clusterId) {
         test = extent.startTest("TC_CB_19.validateGroupByInputTablesImpalaChargeback", "Validate Charge Back report " +
             "when Grouped by \"inputTables\"");
         test.assignCategory(" Cluster - Impala Chargeback");

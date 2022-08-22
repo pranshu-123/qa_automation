@@ -25,7 +25,7 @@ public class TC_CB_50 extends BaseClass {
      * Validate table sorting - By Total Processing Time Seconds
      */
     @Test(dataProvider = "clusterid-data-provider",description ="P1-Verify that the tables should sorted by Total Processing Time Seconds ascending and descending order")
-    public void validateSortByTotalProcessingTimeSeconds(String clusterId) {
+    public void TC_CB_50_validateSortByTotalProcessingTimeSeconds(String clusterId) {
         test =
             extent.startTest("TC_CB_50.validateSortByTotalProcessingTimeSeconds", "Validate table sorting - By Total Processing Time Seconds");
         test.assignCategory(" Cluster - Impala Chargeback");

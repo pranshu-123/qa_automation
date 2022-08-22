@@ -30,8 +30,12 @@ public class TopXPageObject {
     
     @FindBy(xpath = "//a[normalize-space()='Schedule']")
     public WebElement scheduledTab;
+
+    @FindBy(xpath = "//ul[@class='sub-menu']/li[2]//a/span")
+    public WebElement scheduledTab2;
+
     
-    //@FindBy(xpath = "(//a/span[text()='Schedule'])[2]")
+
     @FindBy(xpath = "//a[normalize-space()='Schedule']")
     public WebElement scheduleButtonInReport;
 
@@ -61,6 +65,9 @@ public class TopXPageObject {
     
     @FindBy(xpath = "//div[@class='pull-right']//a[@class='menu']")
     public WebElement downloadJsonButton;
+
+    @FindBy(xpath = "//div[@class='export-container']/div/button")
+    public WebElement downloadJsonButton2;
 
     @FindBy(xpath = "//ul[contains(concat(' ', @class, ' '), 'select2-results__options')]/li")
     public List<WebElement> clusterList;
@@ -113,6 +120,8 @@ public class TopXPageObject {
     @FindBy(xpath = "//span[contains(@class,'select2-search--dropdown')]/input")
     public WebElement clusterSearchbox;
 
+    @FindBy(xpath = "//input[@placeholder='Search']")
+    public WebElement SearchTab;
     @FindBy(xpath = "//ul[contains(@class,'select2-results__options')]/li[1]")
     public WebElement select1stClusterOption;
 
@@ -123,7 +132,7 @@ public class TopXPageObject {
     public WebElement lastPage;
 
     public By tagsFooter = By.xpath("(ancestor::div)[last()]/parent::div/footer");
-
+    public By tagsFooter1 = By.xpath( "//input[@type='checkbox' and @class='select-tag']");
     @FindBy(xpath="//div[@class='modal-body scrollbar-s']/following-sibling::div[1]")
     public WebElement footerWaitCycle;
 

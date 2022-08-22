@@ -25,7 +25,7 @@ public class TC_CB_46 extends BaseClass {
      * Validate table sorting - By Start Time
      */
     @Test(dataProvider = "clusterid-data-provider",description ="P1-Verify that the tables should sorted by Start Time ascending and descending order")
-    public void validateSortByStartTime(String clusterId) {
+    public void TC_CB_46_validateSortByStartTime(String clusterId) {
         test =
             extent.startTest("TC_CB_46.validateSortByStartTime", "Validate table sorting By Start Time");
         test.assignCategory(" Cluster - Impala Chargeback");

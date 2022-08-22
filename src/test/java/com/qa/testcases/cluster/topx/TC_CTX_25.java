@@ -55,6 +55,8 @@ public class TC_CTX_25 extends BaseClass {
         for (int i = 0; i < clustersList.size(); i++) {
             String statusXpath = reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.TopX);
             String clusterId = clustersList.get(i);
+            topX.setTopXNumber("1");
+            waitExecuter.sleep(2000);
             topX.selectCluster(clusterId);
             waitExecuter.sleep(2000);
             topX.clickOnModalRunButton();
@@ -66,7 +68,6 @@ public class TC_CTX_25 extends BaseClass {
                 waitExecuter.waitUntilTextToBeInWebElement(statusElement,
                     "SUCCESS");
             } catch (TimeoutException te) {
-                throw new AssertionError("Top X Report not completed successfully.");
             }
             test.log(LogStatus.PASS, "TopX report is generated for cluster id: " + clusterId);
             topX.validateLatestReport("Cluster", clusterId);

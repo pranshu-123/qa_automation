@@ -25,7 +25,7 @@ public class TC_CB_49 extends BaseClass {
      * Validate table sorting - By Memory MB seconds
      */
     @Test(dataProvider = "clusterid-data-provider",description ="P1-Verify that the tables should sorted by Memory MB seconds ascending and descending order")
-    public void validateSortByMemoryMBSeconds(String clusterId) {
+    public void TC_CB_49_validateSortByMemoryMBSeconds(String clusterId) {
         test =
             extent.startTest("TC_CB_48.validateSortByQueue", "Validate table sorting - By Memory MB seconds");
         test.assignCategory(" Cluster - Impala Chargeback");

@@ -45,6 +45,8 @@ public class TC_CTX_31 extends BaseClass {
 		UserActions actions = new UserActions(driver);
 
 		actions.performActionWithPolling(topXPageObject.downloadJsonButton, UserAction.CLICK);
+		waitExecuter.sleep(2000);
+		actions.performActionWithPolling(topXPageObject.downloadJsonButton2, UserAction.CLICK);
 		test.log(LogStatus.PASS, "Clicked on Download JSON");
         FileUtils.isFileDownloadedInUUIDFolder();
         test.log(LogStatus.PASS, "Verified Download CSV files present in directory.");

@@ -23,7 +23,7 @@ import java.util.List;
 public class IM_RES_03 extends BaseClass {
 
   @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify that the Memory and Query graphs in sync while selecting the same date range")
-  public void validateDateRangeOfBothGraph(String clusterId) {
+  public void IM_RES_03_validateDateRangeOfBothGraph(String clusterId) {
     test = extent.startTest("IM_RES_03.validateDateRangeOfBothGraph (" + clusterId + ")",
       "Verify that the Memory and Query graphs in sync (they display the same date range and granularity)");
     test.assignCategory(" Cluster/Impala Resources");

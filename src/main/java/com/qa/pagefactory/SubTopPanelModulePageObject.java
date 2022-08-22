@@ -23,7 +23,7 @@ public class SubTopPanelModulePageObject {
     @FindBy(xpath = "//span[contains(@class,'icon-data')]")
     public WebElement data;
 
-    @FindBy(xpath = "//span[contains(@class,'icon-reports')]")
+    @FindBy(xpath = "//i[contains(@class,'icon-reports')]")
     public WebElement reports;
 
     @FindBy(xpath = "//span[contains(@class,'icon-alerts')]")

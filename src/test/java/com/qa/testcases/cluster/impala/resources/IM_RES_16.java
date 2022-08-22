@@ -28,7 +28,7 @@ public class IM_RES_16 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(IM_RES_16.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the tooltip of the graph should display the Total Memory and Allocated Memory of five Nodes")
-    public void verifyGroupByFilterForQueueHoverMemoryGraph(String clusterId) {
+    public void IM_RES_16_verifyGroupByFilterForQueueHoverMemoryGraph(String clusterId) {
         test = extent.startTest("IM_RES_16.verifyGroupByFilterForQueueHoverMemoryGraph (" + clusterId + ")", "Verify if more than 5 hosts exist, the memory chart displays the top-5 hosts .");
         test.assignCategory(" Cluster/Impala Resources");
         test.log(LogStatus.INFO, "Login to the application");

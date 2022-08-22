@@ -2,7 +2,6 @@ package com.qa.scripts.clusters;
 
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
-import com.qa.pagefactory.TopPanelPageObject;
 import com.qa.pagefactory.clusters.QueueAnalysisPageObject;
 import com.qa.pagefactory.clusters.TopXPageObject;
 import com.qa.pagefactory.reports.ReportsArchiveScheduledPageObject;
@@ -52,6 +51,10 @@ public class TopX {
         waitExecuter.waitUntilTextNotToBeInWebElement(topXPageObject.footerWaitCycle,"Please Wait");
     }
 
+    public void sendkeysinTopx() {
+        actions.performActionWithPolling(topXPageObject.runButton, UserAction.CLICK);
+        waitExecuter.waitUntilTextNotToBeInWebElement(topXPageObject.footerWaitCycle,"Please Wait");
+    }
     public String getConfirmationMessageContent() {
         return topXPageObject.confirmationMessageElement.getText();
     }
@@ -108,6 +111,8 @@ public class TopX {
      */
     public void clickOnScheduleButton() {
         actions.performActionWithPolling(topXPageObject.scheduledTab, UserAction.CLICK);
+        waitExecuter.sleep(3000);
+        actions.performActionWithPolling(topXPageObject.scheduledTab2, UserAction.CLICK);
     }
 
   public List<WebElement> getClustersList() {
@@ -122,6 +127,7 @@ public class TopX {
     public void selectCluster(String clusterId) {
         waitExecuter.waitUntilElementClickable(topXPageObject.clusterDropdown);
         actions.performActionWithPolling(topXPageObject.clusterDropdown, UserAction.CLICK);
+        waitExecuter.sleep(1000);
         waitExecuter.waitUntilElementClickable(topXPageObject.clusterSearchbox);
         actions.performActionWithPolling(topXPageObject.clusterSearchbox, UserAction.CLICK);
         actions.performActionWithPolling(topXPageObject.clusterSearchbox, UserAction.SEND_KEYS, clusterId);
@@ -180,6 +186,7 @@ public class TopX {
      * Returns the list of checkbox present on tags page
      */
     public List<WebElement> getTagsCheckbox() {
+        waitExecuter.sleep(1000);
         return topXPageObject.tagsCheckbox;
     }
 
@@ -329,6 +336,23 @@ public class TopX {
             if (reportNameInRow.equals(reportName)) {
                 actions.performActionWithPolling(row.findElement(By.xpath("//span[contains(@class,'pointer icon-delete')]")),
                     UserAction.CLICK);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean validateReport(String reportName) {
+        waitExecuter.sleep(1000);
+        actions.performActionWithPolling(topXPageObject.SearchTab, UserAction.SEND_KEYS,reportName);
+        waitExecuter.sleep(1000);
+        WebElement scheduleTableData = topXPageObject.scheduleReportTableData;
+        List<WebElement> rows = scheduleTableData.findElements(By.tagName("tr"));
+        for (WebElement row : rows) {
+            String reportNameInRow = row.findElement(By.xpath("td[1]")).getText();
+            if (reportNameInRow.equals(reportName)) {
+                actions.performActionWithPolling(row.findElement(By.xpath("//span[contains(@class,'pointer icon-delete')]")),
+                        UserAction.CLICK);
                 return true;
             }
         }

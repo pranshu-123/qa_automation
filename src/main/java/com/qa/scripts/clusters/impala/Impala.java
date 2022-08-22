@@ -150,8 +150,9 @@ public class Impala {
 	}
 
 	public void selectQueueInGroupBy() {
+		waitExecuter.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
 		impalaPageObject.groupByDropdownButton.click();
-		waitExecuter.sleep(2000);
+		waitExecuter.sleep(1000);
 		waitExecuter.waitUntilElementPresent(impalaPageObject.groupByQueueList);
 		impalaPageObject.groupByQueueList.click();
 	}

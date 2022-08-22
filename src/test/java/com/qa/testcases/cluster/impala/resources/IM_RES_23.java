@@ -23,7 +23,7 @@ public class IM_RES_23 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(IM_RES_23.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the data displayed for the Impala queries")
-    public void verifythedatadisplayedfortheImpalaqueriesTblToolTip(String clusterId) {
+    public void IM_RES_23_verifythedatadisplayedfortheImpalaqueriesTblToolTip(String clusterId) {
         test = extent.startTest("IM_RES_23.verifythedatadisplayedfortheImpalaqueriesTblToolTip (" + clusterId + ")", "Verify if more than 5 hosts exist, the memory chart displays the top-5 hosts .");
         test.assignCategory(" Cluster/Impala Resources");
         test.log(LogStatus.INFO, "Login to the application");
@@ -63,7 +63,9 @@ public class IM_RES_23 extends BaseClass {
         // Click on group by dropdown and select queue in filter
         test.log(LogStatus.INFO, "Click on group by dropdown and select queue in filter");
         LOGGER.info("Click on group by dropdown and select queue in filter");
+        driver.navigate().refresh();
         waitExecuter.waitUntilElementClickable(impalaPageObject.groupByDropdownButton);
+        waitExecuter.sleep(3000);
         impalaPageObject.groupByDropdownButton.click();
         waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         impalaPageObject.groupByQueueList.click();
@@ -71,7 +73,6 @@ public class IM_RES_23 extends BaseClass {
         impala.clearFilter();
         waitExecuter.waitUntilElementClickable(impalaPageObject.resourceUsagePointer);
         waitExecuter.sleep(1000);
-
         test.log(LogStatus.INFO, "Navigate different section in memory graph");
         GraphUtils graphUtils = new GraphUtils();
         graphUtils.navigateDifferentPointOnGraph(driver, impalaPageObject.queryHighChartContainer);

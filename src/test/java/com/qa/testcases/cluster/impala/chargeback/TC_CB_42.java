@@ -24,7 +24,7 @@ public class TC_CB_42 extends BaseClass {
      * Validate table sorting - By user
      */
     @Test(dataProvider = "clusterid-data-provider",description ="P1-Verify that the tables should sorted by User ascending and descending order.")
-    public void validateSortByUser(String clusterId) {
+    public void TC_CB_42_validateSortByUser(String clusterId) {
         test =
             extent.startTest("TC_CB_42.validateSortByUser","Verify the sorting of tables By User.");
         test.assignCategory(" Cluster - Impala Chargeback");

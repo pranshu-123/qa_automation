@@ -24,7 +24,7 @@ public class TC_CB_43 extends BaseClass {
      * Validate table sorting - By State
      */
     @Test(dataProvider = "clusterid-data-provider",description ="P1-Verify that the tables should sorted by State ascending and descending order")
-    public void validateSortByUser(String clusterId) {
+    public void TC_CB_43_validateSortByUser(String clusterId) {
         test =
             extent.startTest("TC_CB_43.validateSortByUser","Validate table sorting - By State");
         test.assignCategory(" Cluster - Impala Chargeback");

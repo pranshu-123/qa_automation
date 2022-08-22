@@ -21,7 +21,7 @@ public class IM_RES_12 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(IM_RES_12.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify that the user chooses the same date range to display the memory and Queries graphs")
-    public void verifyGroupByFilterForQueue(String clusterId) {
+    public void IM_RES_12_verifyGroupByFilterForQueue(String clusterId) {
         test = extent.startTest("IM_RES_12.verifyGroupByFilterForQueue (" + clusterId + ")", "Validate the \"Group By\" filter for Queue.");
         test.assignCategory(" Cluster/Impala Resources");
         WaitExecuter waitExecuter = new WaitExecuter(driver);

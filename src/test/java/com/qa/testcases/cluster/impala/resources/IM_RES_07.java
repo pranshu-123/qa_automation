@@ -24,7 +24,7 @@ public class IM_RES_07  extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(IM_RES_07.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the tool tip of the graph should display the Total Memory and Allocated Memory of five Nodes")
-    public void Verifythetopfivehosts (String clusterId) {
+    public void IM_RES_07_Verifythetopfivehosts (String clusterId) {
         test = extent.startTest("IM_RES_07.Verifythetopfivehosts", "Verify the tool tip of the graph should display the Total Memory and Allocated Memory of all the Nodes.)");
         test.log(LogStatus.INFO, "Login to the application");
 

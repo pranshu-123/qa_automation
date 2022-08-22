@@ -22,7 +22,7 @@ public class IM_RES_08 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(IM_RES_08.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the Group By filter for user should display the Usage only for that particular user")
-    public void verifyGroupByFilterForUser(String clusterId) {
+    public void IM_RES_08_verifyGroupByFilterForUser(String clusterId) {
         test = extent.startTest("IM_RES_08.verifyGroupByFilterForUser (" + clusterId + ")",
                 "Validate the \"Group By\" filter for User.");
         test.assignCategory(" Cluster/Impala Resources");

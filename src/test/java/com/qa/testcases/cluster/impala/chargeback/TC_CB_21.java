@@ -23,7 +23,7 @@ public class TC_CB_21 extends BaseClass {
 	 * @param clusterId - ClusterId to select for test execution
 	 */
 	@Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the chargeback report should be present when clicking on grouped by Queue and team")
-	public void validateGroupByQueueTeam(String clusterId) {
+	public void TC_CB_21_validateGroupByQueueTeam(String clusterId) {
 		test = extent.startTest("TC_CB_20.validateGroupByQueueTeam", "Validate Impala ChargeBack Queue and Team report " +
 				"when Grouped by \"inputTables\"");
 		test.assignCategory(" Cluster - Impala Chargeback");

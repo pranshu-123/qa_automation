@@ -22,7 +22,7 @@ public class IM_RES_25 extends BaseClass {
     private static final Logger LOGGER = Logger.getLogger(IM_RES_25.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider",description ="P0-Verify the UI should open the Impala details page.")
-    public void verifyusertotheapplicationdetailspage(String clusterId) {
+    public void IM_RES_25_verifyusertotheapplicationdetailspage(String clusterId) {
         test = extent.startTest("IM_RES_25.verifyusertotheapplicationdetailspage (" + clusterId + ")", "Verify UI should open the Impala details page.");
         test.assignCategory(" Cluster/Impala Resources");
         WaitExecuter waitExecuter = new WaitExecuter(driver);

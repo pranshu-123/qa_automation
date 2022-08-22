@@ -26,7 +26,7 @@ public class TC_CB_47 extends BaseClass {
      * Validate table sorting - By Finished Time
      */
     @Test(dataProvider = "clusterid-data-provider",description ="P1-Verify that the tables should sorted by Finished Time ascending and descending order")
-    public void validateSortByFinishedTime(String clusterId) {
+    public void TC_CB_47_validateSortByFinishedTime(String clusterId) {
         test =
             extent.startTest("TC_CB_47.validateSortByFinishedTime", "Validate table sorting - By Finished Time");
         test.assignCategory(" Cluster - Impala Chargeback");

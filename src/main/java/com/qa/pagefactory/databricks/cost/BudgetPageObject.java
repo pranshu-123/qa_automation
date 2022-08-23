@@ -45,11 +45,11 @@ public class BudgetPageObject {
 	@FindBy(xpath = "//div[@class='vdp-datepicker']")
 	public List<WebElement> dateWidget;
 	
-	@FindBy(xpath = "(//div[@class='vdp-datepicker__calendar'])[1]/span[contains(text(),'August')]")
-	public WebElement futureStartDate;
+	@FindBy(xpath = "(//div[@class='vdp-datepicker__calendar'])[1]/span[@class='cell month']")
+	public List<WebElement> futureStartDate;
 	
-	@FindBy(xpath = "(//div[@class='vdp-datepicker'])[2]//span[contains(text(),'September')]")
-	public WebElement futureExpiryDate;
+	@FindBy(xpath = "(//div[@class='vdp-datepicker'])[2]//span[@class='cell month']")
+	public List<WebElement> futureExpiryDate;
 	
 	@FindBy(xpath = "//div[contains(@class,'budget-value')]/input[@type='text']")
 	public WebElement addBudgetDBU;

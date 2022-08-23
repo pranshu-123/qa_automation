@@ -116,9 +116,8 @@ public class DbxAutoAction {
 	}
 
 	public void deleteJob(String policyName) {
-		waitExecuter.sleep(2000);
 		dbxAutoActionPageObject.delete.get(0).click();
-		waitExecuter.sleep(2000);
+		waitExecuter.sleep(4000);
 		Assert.assertFalse(dbxAutoActionPageObject.resultSetValues.stream()
 				.map(a-> a.getText())
 				.collect(Collectors.toList()).contains(policyName),"Policy not deleted");

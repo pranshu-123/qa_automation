@@ -54,10 +54,10 @@ public class CostBudget {
 	public void setBudgetActivationDate() {
 		waitExecuter.sleep(1000);
 		budgetPageObject.dateWidget.get(0).click();
-		budgetPageObject.futureStartDate.click();
+		budgetPageObject.futureStartDate.get(1).click();
 		waitExecuter.sleep(2000);
 		budgetPageObject.dateWidget.get(1).click();
-		budgetPageObject.futureExpiryDate.click();
+		budgetPageObject.futureExpiryDate.get(2).click();
 	}
 
 	public void saveBudget() {

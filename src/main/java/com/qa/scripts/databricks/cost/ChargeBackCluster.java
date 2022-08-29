@@ -61,6 +61,7 @@ public class ChargeBackCluster {
 		catch(ElementClickInterceptedException e) {
 			e.printStackTrace();
 		}
+		waitExecuter.sleep(2000);
 	}
 
 	public List<String> fetchAllGroupByFilterValues(){

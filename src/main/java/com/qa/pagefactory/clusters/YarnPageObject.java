@@ -25,7 +25,7 @@ public class YarnPageObject {
 	@FindBy(xpath="//span[@class='select2-results']//li")
 	public List<WebElement> selectType;
 
-	@FindBy(xpath = "//label[contains(text(), 'Group By')]/following-sibling::span/span/span/span[contains(@class,'select2-selection__arrow')]")
+	@FindBy(xpath = "//label[contains(text(), 'Group by')]/following-sibling::span/span/span/span[contains(@class,'select2-selection__rendered')]")
 	public WebElement groupByDropdownButton;
 
 	@FindBy(xpath = "//ul[@class='select2-results__options']/li")

@@ -61,7 +61,9 @@ public class ChargeBackCluster {
 		catch(ElementClickInterceptedException e) {
 			e.printStackTrace();
 		}
-		waitExecuter.sleep(2000);
+		waitExecuter.waitUntilPageFullyLoaded();
+		waitExecuter.waitUntilElementClickable(chargebackClusterPageObject.costChargeBackTab);
+		waitExecuter.sleep(3000);
 	}
 
 	public List<String> fetchAllGroupByFilterValues(){

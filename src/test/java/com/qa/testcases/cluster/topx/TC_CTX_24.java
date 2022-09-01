@@ -25,7 +25,7 @@ public class TC_CTX_24 extends BaseClass {
 
   Logger logger = LoggerFactory.getLogger(TC_CTX_24.class);
   @Test()
-  public void verifyClusterFilter() {
+  public void TC_CTX_24_verifyClusterFilter() {
     test = extent.startTest("TC_CTX_24.verifyClusterFilter",
       "Verify cluster filter in new report page.");
     test.assignCategory(" Cluster - Top X");

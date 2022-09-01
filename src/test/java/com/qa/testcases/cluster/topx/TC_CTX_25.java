@@ -30,7 +30,7 @@ public class TC_CTX_25 extends BaseClass {
     private final LoggingUtils LOGGER = new LoggingUtils(TC_CTX_24.class);
 
     @Test
-    public void verifyForDifferentCluster() {
+    public void TC_CTX_25_verifyForDifferentCluster() {
         test = extent.startTest("TC_CTX_25.verifyForDifferentCluster",
             "Verify TopX report is generation for different clusters");
         test.assignCategory(" Cluster - Top X");

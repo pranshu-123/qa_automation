@@ -35,7 +35,7 @@ public class TC_CTX_29 extends BaseClass {
      * Verify Tag filter in new report page
      */
     @Test
-    public void verifyTagsFilter() {
+    public void TC_CTX_29_verifyTagsFilter() {
         test = extent.startTest("TC_CTX_29.verifyTagsFilters", "Verify Tags in new report page");
         test.assignCategory(" Cluster - Top X");
         LOGGER.info("Go to TopX page.", test);

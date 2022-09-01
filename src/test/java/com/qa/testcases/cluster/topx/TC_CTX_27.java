@@ -34,7 +34,7 @@ public class TC_CTX_27 extends BaseClass {
      * Verify Real Users filter in new report page
      */
     @Test
-    public void verifyRealUserFilter() {
+    public void TC_CTX_27_verifyRealUserFilter() {
         test = extent.startTest("TC_CTX_26.verifyRealUserFilter", "Verify Real Users filter in new report page");
         test.assignCategory(" Cluster - Top X");
         LOGGER.info("Go to TopX page.", test);

@@ -27,7 +27,7 @@ public class TC_CTX_20 extends BaseClass {
     LoggingUtils LOGGER = new LoggingUtils(TC_CTX_20.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void validateTopXGenerated(String clusterId) {
+    public void TC_CTX_20_validateTopXGenerated(String clusterId) {
         test = extent.startTest("TC_CTX_20.validateTopXGenerated", "Verify new TopX report is generated");
         test.assignCategory(" Cluster - Top X");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -44,7 +44,6 @@ public class TC_CTX_20 extends BaseClass {
         TopXPageObject topXPageObject = new TopXPageObject(driver);
         waitExecuter.sleep(2000);
         String statusXpath = reportsPage.clickOnReportName(reportPageObj, PageConstants.ReportsArchiveNames.TopX);
-
         String topXValue = "10";
         topX.setTopXNumber(topXValue);
         topX.clickOnModalRunButton();

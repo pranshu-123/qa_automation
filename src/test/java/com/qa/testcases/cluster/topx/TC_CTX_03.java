@@ -35,7 +35,7 @@ public class TC_CTX_03 extends BaseClass {
     private final LoggingUtils LOGGER = new LoggingUtils(TC_CTX_03.class);
 
     @Test
-    public void verifyCreateReport() {
+    public void TC_CTX_03_verifyCreateReport() {
         test = extent.startTest("TC_CTX_03.verifyCreateReport", "Running reports from UI");
         test.assignCategory(" Cluster - Top X");
         LOGGER.info("Go to TopX page.", test);

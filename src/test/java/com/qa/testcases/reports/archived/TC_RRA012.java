@@ -1,5 +1,6 @@
 package com.qa.testcases.reports.archived;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.SubTopPanelModulePageObject;
@@ -13,11 +14,12 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
-
+@Marker.ReportArchive
+@Marker.All
 public class TC_RRA012 extends BaseClass {
   Logger logger = LoggerFactory.getLogger(TC_RRA012.class);
 
-  @Test(dataProvider = "clusterid-data-provider",description = "Verify that the schedule report option from actions tab")
+  @Test(dataProvider = "clusterid-data-provider",description = "Verify the schedule report option from actions tab")
   public void verifyScheduleReportOption(String clusterId) {
     test = extent.startTest("verifyScheduleReportOption: " + clusterId,
         "Verify schedule report option from actions tab");

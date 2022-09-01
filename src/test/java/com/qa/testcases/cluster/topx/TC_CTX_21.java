@@ -27,7 +27,7 @@ public class TC_CTX_21 extends BaseClass {
   Logger logger = LoggerFactory.getLogger(TC_CTX_21.class);
 
   @Test(dataProvider = "clusterid-data-provider")
-  public void verifyDatePicker(String clusterId) {
+  public void TC_CTX_21_verifyDatePicker(String clusterId) {
     test = extent.startTest("TC_CTX_21.verifyDatePicker", "Verify date picker in new report page");
     test.assignCategory(" Cluster - Top X");
     WaitExecuter waitExecuter = new WaitExecuter(driver);

@@ -36,7 +36,7 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody/tr")
   public List<WebElement> tableRows;
 
-  @FindBy(xpath = "//td[@class='text-center']//p")
+  @FindBy(xpath = "//*[@class='clearfix']//td/p")
   public WebElement noDataToDisplay;
 
 //  @FindBy(xpath = " //div[contains(@class,'component-cta')]")
@@ -99,7 +99,7 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(css = "div[value='[object Object]'] input[type='text']")
   public WebElement clearFilter;
 
-  @FindBy(xpath = "(//*[@role='dialog'])")
+  @FindBy(xpath = "//div[@class='col-md-9']//section//div")
   public WebElement viewReportDialogWin;
 
   @FindBy(xpath = "//*[@class='base-modal-backdrop']//tr")
@@ -135,7 +135,7 @@ public class ReportsArchiveScheduledPageObject {
   @FindBy(xpath = "//*[@id='app']//div[3]/p[1]/input")
   public WebElement scheduleReportName;
 
-  @FindBy(xpath = "(//div[@class='pb-2'])[5]//input")
+  @FindBy(xpath = "(//div[@class='pb-2'])//input")
   public WebElement scheduleReportName2;
   @FindBy(xpath = "//div[@class='scheduler pb-2']")
   public WebElement scheduleToRunDropDown;

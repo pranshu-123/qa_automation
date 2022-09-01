@@ -33,7 +33,7 @@ public class TC_CTX_23 extends BaseClass {
   private final LoggingUtils LOGGER = new LoggingUtils(TC_CTX_23.class);
 
   @Test(dataProvider = "clusterid-data-provider")
-  public void verifyTopXWithDifferentCount(String clusterId) {
+  public void TC_CTX_23_verifyTopXWithDifferentCount(String clusterId) {
     test = extent.startTest("TC_CTX_23.verifyTopXWithDifferentCount",
       "Verify TopX report is generation for different application counts.");
     test.assignCategory(" Cluster - Top X");

@@ -915,7 +915,7 @@ public class ReportsArchiveSchedulePage {
         Random rnd = new Random();
         List<WebElement> scheduleReportIconList = reportPageObj.scheduleReportIcon;
         userActions.performActionWithPolling(scheduleReportIconList.get(2), UserAction.CLICK);
-        waitExecuter.waitUntilNumberOfWindowsToBe(1);
+        //waitExecuter.waitUntilNumberOfWindowsToBe(;
         waitExecuter.waitUntilPageFullyLoaded();
         String scheduledReportName = "scheduleReport_" + rnd.nextInt(1000);
         waitExecuter.sleep(1000);
@@ -924,7 +924,7 @@ public class ReportsArchiveSchedulePage {
         waitExecuter.waitUntilPageFullyLoaded();
         userActions.performActionWithPolling(reportPageObj.everyMonthOption, UserAction.CLICK);
         waitExecuter.waitUntilPageFullyLoaded();
-        reportPageObj.TopXdrop.sendKeys("1");
+       // reportPageObj.TopXdrop.sendKeys("1");
         userActions.performActionWithPolling(reportPageObj.scheduleButton, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(reportPageObj.scheduledPage);
         userActions.performActionWithPolling(reportPageObj.scheduledPage, UserAction.CLICK);
@@ -969,7 +969,7 @@ public class ReportsArchiveSchedulePage {
                         " No downloaded successfully message received.");
                 userActions.performActionWithPolling(reportPageObj.viewReportIcon, UserAction.CLICK);
                 waitExecuter.waitUntilPageFullyLoaded();
-                Assert.assertTrue(reportPageObj.viewReportDialogWin.isDisplayed(), "Report  view not present.");
+                Assert.assertTrue(reportPageObj.viewReportDialogWin.isDisplayed(), "Report view not present.");
                 userActions.performActionWithPolling(reportPageObj.closeTab, UserAction.CLICK);
                 waitExecuter.waitUntilPageFullyLoaded();
                 userActions.performActionWithPolling(reportPageObj.deleteReportIcon, UserAction.CLICK);

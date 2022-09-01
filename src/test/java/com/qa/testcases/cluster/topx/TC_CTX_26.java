@@ -34,7 +34,7 @@ public class TC_CTX_26 extends BaseClass {
      * Verify user filter in new report page
      */
     @Test
-    public void verifyUserFilter() {
+    public void TC_CTX_26_verifyUserFilter() {
         test = extent.startTest("TC_CTX_26.verifyUserFilter", "Verify user filter in new report page");
         test.assignCategory(" Cluster - Top X");
         LOGGER.info("Go to TopX page.", test);

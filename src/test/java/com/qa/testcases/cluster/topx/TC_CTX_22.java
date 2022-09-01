@@ -36,7 +36,7 @@ public class TC_CTX_22 extends BaseClass {
   LoggingUtils LOGGER = new LoggingUtils(TC_CTX_22.class);
 
   @Test(dataProvider = "clusterid-data-provider")
-  public void verifyTopXWithDifferentDateRange(String clusterId) {
+  public void TC_CTX_22_verifyTopXWithDifferentDateRange(String clusterId) {
     test = extent.startTest("TC_CTX_22.verifyTopXWithDifferentDateRange",
         "Verify TopX report is generated for different date range");
     test.assignCategory(" Cluster - Top X");

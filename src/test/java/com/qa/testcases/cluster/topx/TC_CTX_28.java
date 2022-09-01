@@ -34,7 +34,7 @@ public class TC_CTX_28 extends BaseClass {
      * Verify Queues filter in new report page
      */
     @Test
-    public void verifyQueueFilter() {
+    public void TC_CTX_28_verifyQueueFilter() {
         test = extent.startTest("TC_CTX_28.verifyQueueFilter", "Verify Queues filter in new report page");
         test.assignCategory(" Cluster - Top X");
         LOGGER.info("Go to TopX page.", test);

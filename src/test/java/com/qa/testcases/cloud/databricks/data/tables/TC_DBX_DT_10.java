@@ -20,7 +20,7 @@ public class TC_DBX_DT_10 extends BaseClass {
 
     @Test(description = "Verify the table state filter present.")
     public void verifyTableStateFilter() {
-        test = extent.startTest("verifyTableStateFilter", "Verify the table state filter present.");
+        test = extent.startTest("TC_DBX_DT_10.verifyTableStateFilter", "Verify the table state filter present.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
         dataTablesHelper.clickOnDataTab();

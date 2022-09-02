@@ -68,11 +68,11 @@ public class TC_WF_10 extends BaseClass {
 
         try {
             waitExecuter.waitUntilTextToBeInWebElement(cdPageObject.confirmationMessageElement,
-                    "Workload Fit report completed successfully");
+                    "workload fit completed successfully.");
             test.log(LogStatus.PASS, "Verified Workload Fit report is loaded properly.");
         } catch (TimeoutException te) {
             waitExecuter.waitUntilTextToBeInWebElement(cdPageObject.confirmationMessageElement,
-                    "Workload Fit report completed successfully");
+                    "workload fit completed successfully.");
             test.log(LogStatus.PASS, "Verified Workload Fit report is loaded properly.");
         }
 

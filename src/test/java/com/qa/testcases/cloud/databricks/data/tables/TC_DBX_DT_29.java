@@ -16,7 +16,7 @@ public class TC_DBX_DT_29 extends BaseClass {
 
     @Test(description = "Verify Total Tables label left of tabular data")
     public void verifyTotalTablesLabel() {
-        test = extent.startTest("verifyTotalTablesLabel", "Verify Total Tables label left of tabular data");
+        test = extent.startTest("TC_DBX_DT_29.verifyTotalTablesLabel", "Verify Total Tables label left of tabular data");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
         dataTablesHelper.clickOnDataTab();

@@ -49,8 +49,6 @@ public class TC_spark_220 extends BaseClass {
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
         SparkAppsDetailsPageObject sparkPageObj = new SparkAppsDetailsPageObject(driver);
         DatePicker datePicker = new DatePicker(driver);
-        WaitExecuter waitExecuter = new WaitExecuter(driver);
-        UserActions userActions = new UserActions(driver);
         SparkAppsDetailsPage appsDetailsPage = new SparkAppsDetailsPage(driver);
         AllApps allApps = new AllApps(driver);
 
@@ -68,7 +66,6 @@ public class TC_spark_220 extends BaseClass {
         if (appCount > 0) {
             appsDetailsPage.navigateToFailedAppsAppPage(applicationsPageObject, sparkPageObj, test, false);
             test.log(LogStatus.PASS, "The Failed apps have all kpis listed along with attempt data ");
-            MouseActions.clickOnElement(driver, sparkPageObj.closeAppsPageTab);
         } else {
             //Close apps details page
             MouseActions.clickOnElement(driver, sparkPageObj.homeTab);

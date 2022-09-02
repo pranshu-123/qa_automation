@@ -20,7 +20,7 @@ public class TC_DBX_DT_35 extends BaseClass {
 
     @Test(description = "Validate the more info of the table record.")
     public void validateMoreInfo() {
-        test = extent.startTest("validateMoreInfo", "Validate the more info of the table record.");
+        test = extent.startTest("TC_DBX_DT_35.validateMoreInfo", "Validate the more info of the table record.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
         DataPageObject dataPageObject = new DataPageObject(driver);

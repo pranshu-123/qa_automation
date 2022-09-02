@@ -18,7 +18,7 @@ public class TC_DBX_DT_21 extends BaseClass {
 
     @Test(description = "Validate whether user is able to filter data with File System column value.")
     public void verifyTableDataFilterByFileSystemColumn() {
-        test = extent.startTest("verifyTableDataFilterByFileSystemColumn", "Validate whether user is able to filter data " +
+        test = extent.startTest("TC_DBX_DT_21.verifyTableDataFilterByFileSystemColumn", "Validate whether user is able to filter data " +
             "with File System column value.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);

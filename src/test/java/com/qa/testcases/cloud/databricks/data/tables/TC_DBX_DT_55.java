@@ -21,7 +21,7 @@ public class TC_DBX_DT_55 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(description = "Verify the Instance Summary section on Application Details page")
-    public void verifyInstanceSummaryPage() {
+    public void TC_DBX_DT_55_verifyInstanceSummaryPage() {
         test = extent.startTest("TC_DBX_DT_55.verifyInstanceSummaryPage",
             "Verify the Instance Summary section on Application Details page");
         test.assignCategory("Databricks - Data");

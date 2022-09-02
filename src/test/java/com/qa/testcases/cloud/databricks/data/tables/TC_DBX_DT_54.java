@@ -70,6 +70,7 @@ public class TC_DBX_DT_54 extends BaseClass {
             loggingUtils.pass("Correct duration value displayed", test);
             Assert.assertTrue(actualQueueValue.contains(expectedQueue), "Incorrect queue value displayed");
             loggingUtils.pass("Correct queue value displayed", test);
+
         } finally {
             dataTablesHelper.closeApplicationDetailsPage();
             dataTablesHelper.backToTablesPage();

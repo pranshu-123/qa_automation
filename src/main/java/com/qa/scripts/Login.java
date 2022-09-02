@@ -95,6 +95,7 @@ public class Login {
      */
     public void logout() {
         userActions.performActionWithPolling(loginObj.profileMenu, UserAction.CLICK);
+        executer.sleep(2000);
         if (loginObj.logoutButtonList.size() > 0) {
             RetryExecuter<Object> retryExecuter = new RetryExecuter<>();
             Supplier<Object> method = () -> doLogout();

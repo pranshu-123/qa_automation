@@ -67,6 +67,7 @@ public class TC_JAL_15 extends BaseClass {
                 .parseInt(applicationsPageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
         if (totalCount > 0) {
             String usernameFromTable = applicationsPageObject.getQueueNameTable.getText();
+            waitExecuter.waitUntilPageFullyLoaded();
             LOGGER.info("Username displayed in table " + usernameFromTable);
             LOGGER.info("queuenameSelected displayed in table " + queuenameSelected);
             Assert.assertEquals(usernameFromTable, queuenameSelected,

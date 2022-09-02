@@ -43,6 +43,9 @@ public class TC_JIA08 extends BaseClass {
         waitExecuter.sleep(3000);
         test.log(LogStatus.INFO, "Select clusterid : " + clusterId);
 
+        inefficientApps.clickOnApplicationEvent();
+        test.log(LogStatus.INFO, "Clicked on Application Event link");
+
         // Add the job count of each application
         test.log(LogStatus.INFO, "Add the job count of each application");
         LOGGER.info("Add the job count of each application");
@@ -50,6 +53,7 @@ public class TC_JIA08 extends BaseClass {
         waitExecuter.sleep(2000);
         test.log(LogStatus.INFO, "Sum of all job counts = " + sumOfAllAppCounts);
         LOGGER.info("Sum of all job counts = " + sumOfAllAppCounts);
+
 
         // Get 'Showing total counts' from the left heading
         test.log(LogStatus.INFO, "Get 'Showing total counts' from the left heading ");

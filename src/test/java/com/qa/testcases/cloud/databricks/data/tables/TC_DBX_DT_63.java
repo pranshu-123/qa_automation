@@ -21,7 +21,7 @@ public class TC_DBX_DT_63 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(description = "Verify \"Resources\" tab on application details page")
-    public void verifyResourcesTab() {
+    public void TC_DBX_DT_63_verifyResourcesTab() {
         test = extent.startTest("TC_DBX_DT_63.verifyResourcesTab",
             "Verify \"Resources\" tab on application details page");
         test.assignCategory("Databricks - Data");

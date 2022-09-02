@@ -18,7 +18,7 @@ public class TC_DBX_DT_18 extends BaseClass {
 
     @Test(description = "Validate whether user is able to filter data with Owner column value.")
     public void verifyTableDataFilterByOwnerColumn() {
-        test = extent.startTest("verifyTableDataFilterByOwnerColumn", "Validate whether user is able to filter data " +
+        test = extent.startTest("TC_DBX_DT_18.verifyTableDataFilterByOwnerColumn", "Validate whether user is able to filter data " +
             "with owner column value.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);

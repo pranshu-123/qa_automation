@@ -23,7 +23,7 @@ public class TC_DBX_DT_60 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(description = "Validate the search box for application search")
-    public void verifySearchBoxNavigationTab() {
+    public void TC_DBX_DT_60_verifySearchBoxNavigationTab() {
         test = extent.startTest("TC_DBX_DT_60.verifySearchBoxNavigationTab",
             "Validate the search box for application search");
         test.assignCategory("Databricks - Data");

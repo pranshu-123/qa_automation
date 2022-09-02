@@ -18,7 +18,7 @@ public class TC_DBX_DT_4 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_4.class);
 
     @Test(description = "Verify the Users graph")
-    public void verifyUsersTab() {
+    public void TC_DBX_DT_4_verifyUsersTab() {
         test = extent.startTest("verifyUsersTab", "Verify the Users graph");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);

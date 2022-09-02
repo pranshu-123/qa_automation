@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 @Marker.All
 public class TC_CD_18 extends BaseClass {
     private static final java.util.logging.Logger LOGGER = Logger.getLogger(TC_CD_18.class.getName());
+    @Test(dataProvider = "clusterid-data-provider")
     public void verifyaAppropriateErrorMessage(String clusterId){
 
         test = extent.startTest("TC_CD18_verifyErrorMessage: " + clusterId,

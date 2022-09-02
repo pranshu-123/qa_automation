@@ -21,7 +21,7 @@ public class TC_DBX_DT_14 extends BaseClass {
 
     @Test(description = "Verify the table events filter present.")
     public void verifyTableEventFilter() {
-        test = extent.startTest("verifyTableEventFilter", "Verify the table events filter present.");
+        test = extent.startTest("TC_DBX_DT_14.verifyTableEventFilter", "Verify the table events filter present.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
         dataTablesHelper.clickOnDataTab();

@@ -23,7 +23,7 @@ public class TC_DBX_DT_36 extends BaseClass {
 
     @Test(description = "Verify the table information displayed on \"Table Details\" page.")
     public void verifyInfoDisplayedOnTableDetails() {
-        test = extent.startTest("verifyInfoDisplayedOnTableDetails", "Verify the table information displayed on \"Table Details\" page");
+        test = extent.startTest("TC_DBX_DT_36.verifyInfoDisplayedOnTableDetails", "Verify the table information displayed on \"Table Details\" page");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
         DataPageObject dataPageObject = new DataPageObject(driver);

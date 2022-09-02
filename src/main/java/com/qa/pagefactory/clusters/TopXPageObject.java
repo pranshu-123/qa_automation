@@ -111,7 +111,7 @@ public class TopXPageObject {
     @FindBy(xpath = "//td/span[contains(text(),'Top X')]/parent::td/following-sibling::td[3]//span[contains(@class, 'icon-expand')]")
     public List<WebElement> lastExecutionReportButton;
 
-    @FindBy(xpath = "//span/parent::a")
+    @FindBy(xpath = "//section[contains(@class,'component-message-banner scrollbar-s')]//div[1]")
     public WebElement modalAfterRunButton;
 
     @FindBy(xpath = "//span[contains(@class,'select2-selection--single')]")
@@ -131,7 +131,7 @@ public class TopXPageObject {
     @FindBy(xpath = "(.//*[local-name() = 'svg']/*[local-name() = 'path'])[4]")
     public WebElement lastPage;
 
-    public By tagsFooter = By.xpath("(ancestor::div)[last()]/parent::div/footer");
+    public By tagsFooter = By.xpath("//input[@type='checkbox' and @class='select-tag']");
     public By tagsFooter1 = By.xpath( "//input[@type='checkbox' and @class='select-tag']");
     @FindBy(xpath="//div[@class='modal-body scrollbar-s']/following-sibling::div[1]")
     public WebElement footerWaitCycle;

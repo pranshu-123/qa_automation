@@ -40,8 +40,6 @@ public class TC_JIA07 extends BaseClass {
         LOGGER.info("Select clusterId : " + clusterId);
         inefficientApps.selectCluster(clusterId);
         waitExecuter.sleep(3000);
-        inefficientApps.clickOnApplicationEvent();
-        test.log(LogStatus.INFO, "Clicked on Application Event link");
 
         inefficientApps.clickFirstChkBoxOfAppTypeAndAppEventEach();
         test.log(LogStatus.INFO, "Deselected one application each from Application Type and Application Event");
@@ -53,8 +51,6 @@ public class TC_JIA07 extends BaseClass {
         waitExecuter.sleep(2000);
         test.log(LogStatus.INFO, "Clicked on Reset button");
 
-        inefficientApps.clickOnApplicationEvent();
-        test.log(LogStatus.INFO, "Clicked on Application Event link");
 
         Assert.assertTrue(inefficientApps.verifyFirstChkBoxOfAppTypeIsChecked(), "ApplicationType " +
                 "checkbox is not checked after Reset functionality fails");

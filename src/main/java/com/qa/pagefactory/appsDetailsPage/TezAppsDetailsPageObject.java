@@ -71,7 +71,7 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[4]/span[1]")
     public WebElement AppnameText;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/h2/span[3]")
+    @FindBy(xpath = "(//span[@class='instance-id']//span)[3]")
     public WebElement Appname;
 
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[6]")

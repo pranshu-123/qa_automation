@@ -83,13 +83,13 @@ public class TopPanelPageObject {
     @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='File Reports'])")
     public WebElement fileReportsTab;
 
-    @FindBy(xpath = "//span[contains(@class,'icon-jobs')]")
+    @FindBy(xpath = "//span[text()[normalize-space()='Jobs']]")
     public WebElement jobsTab;
 
-    @FindBy(xpath = "//span[contains(@class,'icon-cloud')]")
+    @FindBy(xpath = "//span[text()[normalize-space()='Migration']]")
     public WebElement migrationTab;
 
-    @FindBy(xpath = "//span[contains(@class,'icon-cluster')]")
+    @FindBy(xpath = "//span[text()[normalize-space()='Clusters']]")
     public WebElement clusterTab;
 
     @FindBy(xpath = "//nav/ul//span[contains(text(),'Reports')]")

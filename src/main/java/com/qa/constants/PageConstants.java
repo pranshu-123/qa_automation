@@ -29,14 +29,14 @@ public class PageConstants {
 
     public static class MigrationAndServices {
         public static String[] Google_Dataproc = {"Dataproc 2.0.18", "Dataproc 2.0.17", "Dataproc 2.0.16", "Dataproc 2.0.15"};
-        public static String[] Amazon_EMR = {"EMR 6.2.0", "EMR 6.1.0", "EMR 6.0.0", "EMR 5.32.0"};
+        public static String[] Amazon_EMR = {"EMR 6.5.0", "EMR 6.4.0", "EMR 6.3.1", "EMR 6.3.0"};
         public static String[] Azure_HDI = {"HDInsight 4.0", "HDInsight 3.6"};
     }
 
     /*Workflow name for each application*/
     public static class WorkflowName {
-        public static String OOZIE_MR_WF = "oozie_map_reduce_wf";
-        public static String OOZIE_HIVE_WF = "oozie_hive_wf";
+        public static String OOZIE_MR_WF = "Covid_Data_Processing";
+        public static String OOZIE_HIVE_WF = "Signup_Subs";
         public static String OOZIE_HIVE2_WF = "oozie_hive2_wf";
         public static String OOZIE_SPARK_WF = "oozie_spark_wf";
         public static String OOZIE_TEZ_WF = "oozie_tez";

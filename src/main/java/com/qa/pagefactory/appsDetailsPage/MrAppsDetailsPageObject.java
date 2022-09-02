@@ -117,10 +117,10 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[7]")
     public WebElement getduration;
 
-    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[9]")
+    @FindBy(xpath = "//tr/td[11]")
     public WebElement getRead;
 
-    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[10]")
+    @FindBy(xpath = "//tr/td[12]")
     public WebElement getWrite;
 
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[4]/span[1]")

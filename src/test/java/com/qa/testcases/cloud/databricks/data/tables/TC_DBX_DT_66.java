@@ -19,7 +19,7 @@ public class TC_DBX_DT_66 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(description = "Verify \"Tag\" tab on application details page")
-    public void verifyTagTab() {
+    public void TC_DBX_DT_66_verifyTagTab() {
         test = extent.startTest("TC_DBX_DT_66.verifyTagTab",
             "Verify \"Tag\" tab on application details page");
         test.assignCategory("Databricks - Data");

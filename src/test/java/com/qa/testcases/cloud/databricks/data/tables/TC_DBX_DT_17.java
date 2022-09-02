@@ -18,7 +18,7 @@ public class TC_DBX_DT_17 extends BaseClass {
 
     @Test(description = "Validate whether user is able to filter data with database column value.")
     public void verifyTableDataFilterByDatabaseColumn() {
-        test = extent.startTest("verifyTableDataFilterByDatabaseColumn", "Validate whether user is able to filter data " +
+        test = extent.startTest("TC_DBX_DT_17.verifyTableDataFilterByDatabaseColumn", "Validate whether user is able to filter data " +
             "with database column value.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);

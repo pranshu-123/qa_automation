@@ -10,7 +10,7 @@ import java.util.List;
 
 public class DbxSubTopPanelModulePageObject {
 
-    @FindBy(xpath = "//span[contains(@class,'icon-jobs')]")
+    @FindBy(xpath = "//span[text()[normalize-space()='Jobs']]")
     public WebElement jobs;
 
     @FindBy(xpath = "//span[text()='Jobs']")
@@ -28,7 +28,7 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//tbody[1]/tr/td[13]/span[1]")
     public WebElement costValue;
 
-    @FindBy(xpath = "//tbody[1]/tr/td[13]/div[1]")
+    @FindBy(xpath = "//*[@id=\"SummaryDetails\"]//div[1]/div/div/h3")
     public WebElement costDbu;
 
     @FindBy(xpath = "//div[@class='col-12']//div[1]")

@@ -81,7 +81,7 @@ public class WorkloadFit {
         LOGGER.info("Click on date range");
         waitExecuter.waitUntilElementClickable(datePickerPageObject.dateRange);
         userAction.performActionWithPolling(datePickerPageObject.dateRange, UserAction.CLICK);
-        userAction.performActionWithPolling(datePickerPageObject.last7Days, UserAction.CLICK);
+        userAction.performActionWithPolling(datePickerPageObject.last60Days, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(fitPageObject.generateHeatMap);
         waitExecuter.sleep(2000);
 
@@ -116,7 +116,7 @@ public class WorkloadFit {
             waitExecuter.waitUntilElementClickable(cdPageObject.runButton);
             userAction.performActionWithPolling(cdPageObject.runButton, UserAction.CLICK);
             waitExecuter.waitUntilElementClickable(fitPageObject.generateHeatMap);
-            waitExecuter.sleep(2000);
+            waitExecuter.sleep(4000);
         } catch (TimeoutException | NoSuchElementException ex) {
 
             try {

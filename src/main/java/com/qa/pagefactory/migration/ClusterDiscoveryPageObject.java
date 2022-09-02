@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ClusterDiscoveryPageObject {
 
-    @FindBy(xpath = "//div[contains(@class,'component-cta')]//span[contains(text(),'Run')]")
+    @FindBy(xpath = "//div[contains(@class,'component-cta cta-primary')]//button")
     public WebElement runButton;
 
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/a/i")
@@ -18,7 +18,7 @@ public class ClusterDiscoveryPageObject {
     @FindBy(xpath = "//a[normalize-space()='Run']")
     public WebElement modalRunButton;
 
-    @FindBy(xpath = "//section[contains(@class,'component-message-banner bg-success')]//div[1]")
+    @FindBy(xpath = "//section[contains(@class,'component-message-banner scrollbar-s')]//div[1]")
     public WebElement confirmationMessageElement;
 
     @FindBy(xpath = "//div[contains(@class,'daterangepicker') and contains(@class, 'open')]//li")
@@ -54,16 +54,16 @@ public class ClusterDiscoveryPageObject {
     @FindBy(xpath = "(//div[contains(@class,'app-details')])[1]//div[@class='highcharts-container ']")
     public WebElement appDataTypePie;
 
-    @FindBy(xpath = "//div[@id='appt']//div[@class='pie-legend']//label/span[1]")
+    @FindBy(xpath = "//div[@id='appt']//div[@class='pie-legend-container']//label/span[1]")
     public List<WebElement> getByAppTypesName;
 
-    @FindBy(xpath = "//div[@id='user']//div[@class='pie-legend']//label/span[1]")
+    @FindBy(xpath = "//div[@id='appt']//div[@class='pie-legend-container']//label/span[1]")
     public List<WebElement> getByUserTypesName;
 
-    @FindBy(xpath = "//div[@id='queue']//div[@class='pie-legend']//label/span[1]")
+    @FindBy(xpath = "//div[@id='appt']//div[@class='pie-legend-container']//label/span[1]")
     public List<WebElement> getByQueueTypesName;
 
-    @FindBy(id = "exporter")
+    @FindBy(xpath = "//span[text()='Download JSON']")
     public WebElement downloadJsonButton;
 
     @FindBy(xpath = "//div[contains(@class,'component-dropdown')]")

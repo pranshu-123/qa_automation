@@ -24,7 +24,7 @@ public class TC_DBX_DT_56 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(description = "Verify the chart displayed on left side of application details page.")
-    public void verifyLeftChartApplicationDetailPage() {
+    public void TC_DBX_DT_56_verifyLeftChartApplicationDetailPage() {
         test = extent.startTest("TC_DBX_DT_56.verifyLeftChartApplicationDetailPage",
             "Verify the chart displayed on left side of application details page.");
         test.assignCategory("Databricks - Data");

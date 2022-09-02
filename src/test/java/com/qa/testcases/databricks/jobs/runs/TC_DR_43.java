@@ -39,7 +39,7 @@ public class TC_DR_43 extends BaseClass {
             test.log(LogStatus.INFO, "Navigate to jobs tab from header");
             test.log(LogStatus.INFO, "Select last 7 days");
             dballApps.inJobsSelectClusterAndLast7Days();
-            waitExecuter.sleep(2000);
+            waitExecuter.sleep(3000);
 
 
             int appCount = dballApps.clickOnlyLink("Success");

@@ -68,6 +68,8 @@ public class MarkerConstants {
     public static final String DBX_REPORTS_SCHEDULED = "dbx_reports_scheduled";
     public static final String DBX_COST_CHARGEBACK = "dbx_cost_chargeback";
     public static final String DBX_APP_DETAILS = "dbx_app_details";
+
+    public static final String DBX_INSIGHTS_OVERVIEW = "dbx_insights_overview";
     public static final String DBX_MANAGE = "dbx_manage";
     public static final String DBX_COMPUTE = "dbx_compute";
     public static final String DBX_AUTOACTION = "dbx_autoaction";
@@ -196,6 +198,7 @@ public class MarkerConstants {
         map.put(DBX_RUNS, Marker.DbxRuns.class);
         map.put(DBX_JOBS, Marker.DbxJobs.class);
         map.put(DBX_APP_DETAILS, Marker.DbxAppDetails.class);
+        map.put(DBX_INSIGHTS_OVERVIEW, Marker.DbxInsightsOverview.class);
         map.put(DBX_DATA_OVERVIEW, Marker.DbxDataOverview.class);
         map.put(DBX_DATA_TABLES, Marker.DbxDataTables.class);
         map.put(DBX_MANAGE, Marker.DbxManage.class);

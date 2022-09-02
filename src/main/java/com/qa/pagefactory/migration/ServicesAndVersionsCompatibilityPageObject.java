@@ -67,7 +67,7 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//tbody/tr[1]/td")
     public List<WebElement> colList;
 
-    @FindBy(xpath = "//div[@id='breadcrumb']/span[2]/span")
+    @FindBy(xpath = "//span[text()='Archived']")
     public WebElement archiveReportSVCHeader;
 
     @FindBy(xpath = "//div[contains(@class,'popover')]/H3")
@@ -76,10 +76,10 @@ public class ServicesAndVersionsCompatibilityPageObject {
     @FindBy(xpath = "//div[contains(@class,'popover')]/div/span[contains(@class,'pending')]")
     public WebElement deleteOkBtn;
 
-    @FindBy(xpath = "//div[@id='breadcrumb']/span/span")
+    @FindBy(xpath = "//span[text()='Archives']")
     public WebElement archivesText;
 
-    @FindBy(xpath = "(//div[@id='breadcrumb']/span/span)[1]")
+    @FindBy(xpath = "//div[@class='bread-crumb boot-icons']")
     public WebElement archives;
 
     @FindBy(xpath = "//tbody/tr[1]/td[2]")

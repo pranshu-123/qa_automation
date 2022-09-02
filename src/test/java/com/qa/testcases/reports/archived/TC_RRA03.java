@@ -151,6 +151,7 @@ public class TC_RRA03 extends BaseClass {
     test.log(LogStatus.INFO, "Verify reports with status between last 30 days");
     datePicker.clickOnDatePicker();
     waitExecuter.waitUntilElementPresent(reportPageObj.resetButton);
+    waitExecuter.sleep(2000);
     datePicker.selectLast30Days();
     waitExecuter.waitUntilElementPresent(reportPageObj.resetButton);
     waitExecuter.sleep(2000);
@@ -163,7 +164,7 @@ public class TC_RRA03 extends BaseClass {
     test.log(LogStatus.INFO, "Verify reports with status between last 90 days");
     datePicker.clickOnDatePicker();
     waitExecuter.waitUntilElementPresent(reportPageObj.resetButton);
-    waitExecuter.sleep(1000);
+    waitExecuter.sleep(2000);
     datePicker.selectLast90Days();
     waitExecuter.waitUntilElementPresent(reportPageObj.resetButton);
     waitExecuter.sleep(2000);
@@ -179,7 +180,7 @@ public class TC_RRA03 extends BaseClass {
     waitExecuter.sleep(1000);
     datePicker.selectThisMonth();
     waitExecuter.waitUntilElementPresent(reportPageObj.resetButton);
-    waitExecuter.sleep(2000);
+    waitExecuter.sleep(3000);
     reportsPage.validateReportNames(reportPageObj);
     waitExecuter.waitUntilPageFullyLoaded();
     reportsPage.validateReportStatus(reportPageObj);
@@ -192,7 +193,7 @@ public class TC_RRA03 extends BaseClass {
     waitExecuter.sleep(1000);
     datePicker.selectLastMonth();
     waitExecuter.waitUntilElementPresent(reportPageObj.resetButton);
-    waitExecuter.sleep(3000);
+    waitExecuter.sleep(4000);
     reportsPage.validateReportNames(reportPageObj);
     waitExecuter.waitUntilPageFullyLoaded();
     reportsPage.validateReportStatus(reportPageObj);

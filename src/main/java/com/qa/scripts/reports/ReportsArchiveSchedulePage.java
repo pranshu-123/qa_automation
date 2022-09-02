@@ -1039,7 +1039,7 @@ public class ReportsArchiveSchedulePage {
         List<WebElement> reportNameList = reportPageObj.reportNames;
         List<WebElement> newReportActionList = reportPageObj.newReportIcon;
         List<WebElement> reportStatusList = reportPageObj.reportStatus;
-        userActions.performActionWithPolling(newReportActionList.get(1) , UserAction.CLICK);
+        userActions.performActionWithPolling(newReportActionList.get(2) , UserAction.CLICK);
         waitExecuter.sleep(1000);
         userActions.performActionWithPolling(datePickerPageObject.customRange, UserAction.CLICK);
         date.selectCustomRange();

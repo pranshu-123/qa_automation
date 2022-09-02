@@ -24,7 +24,7 @@ public class QueueAnalysisPageObject {
     @FindBy(css = "//span[text()='STARTED']")
     public WebElement runningStatus;
 
-    @FindBy(xpath = "//section[contains(@class,'component-message-banner bg-info')]//div[1]")
+    @FindBy(xpath = "//section[contains(@class,'component-message-banner scrollbar-s')]//div[1]")
     public WebElement confirmationMessageElement;
 
     @FindBy(xpath = "//div[contains(@class,'daterangepicker') and contains(@class, 'open')]//li")
@@ -95,7 +95,7 @@ public class QueueAnalysisPageObject {
     public WebElement yarnResources;
 
 
-    @FindBy(xpath = "//table[contains(@class,'component-data-tables row-hover')]/tbody[1]/tr[9]/td[4]/div[1]/span[2]/span[1]")
+    @FindBy(xpath = "//table[contains(@class,'component-data-tables row-hover')]/tbody[1]/tr[4]/td[4]/div[1]/span[2]/span[1]")
     public WebElement scheduleButton;
 
     @FindBy(xpath = "//label[text()='Schedule Name']/following::input")
@@ -110,7 +110,7 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "//span[@class='cta-primary component-cta']//a[1]")
     public WebElement modalScheduleButton;
 
-    @FindBy(xpath = "//section[contains(@class,'component-message-banner bg-success')]//div[1]")
+    @FindBy(xpath = "//section[contains(@class,'component-message-banner scrollbar-s')]//div[1]")
     public WebElement scheduleSuccessMsg;
 
     @FindBy(xpath = "//select[contains(@class,'schedule-days')]")
@@ -164,7 +164,7 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "//span[@class='text-fatal']")
     public WebElement invalidDateRangeMessage;
 
-    @FindBy(xpath = "//table[contains(@class,'component-data-tables row-hover')]/tbody[1]/tr[5]/td[4]/div[1]/span[1]/span[1]")
+    @FindBy(xpath = "((//table/tbody/tr)[4]/td)[4]//span[contains(@class,'icon-add')]")
     public WebElement addIcon;
 
     @FindBy(xpath = "//*[@id=\"custom-tbl\"]/div[3]/div/table/tbody/tr[9]/td[3]/span")
@@ -173,7 +173,7 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath = "((//table/tbody/tr)[5]/td)[4]//span[contains(@class,'icon-expand')]")
     public WebElement latestReportExpandIcon;
 
-    @FindBy(xpath = "//table[contains(@class,'component-data-tables row-hover')]/tbody[1]/tr[9]/td[3]/span[1]")
+    @FindBy(xpath = "//table[contains(@class,'component-data-tables row-hover')]/tbody[1]/tr[2]/td[3]/span[1]")
     public WebElement successBanner;
 
     @FindBy(xpath = "//span[contains(@class,'component-cta')]//span")
@@ -185,7 +185,7 @@ public class QueueAnalysisPageObject {
     @FindBy(xpath="//div[@class='modal-body scrollbar-s']/following-sibling::div[1]")
     public WebElement footerWaitCycle;
 
-    @FindBy(xpath = "//tbody[1]/tr[9]/td[1]/span[text()='Queue Analysis']")
+    @FindBy(xpath = "//span[text()='Queue Analysis']")
     public WebElement clickOnQAReports;
 
     @FindBy(xpath ="//tbody/tr[1]/td[3]/span")

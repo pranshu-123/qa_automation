@@ -20,8 +20,8 @@ public class TC_DBX_DT_30 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_30.class);
 
     @Test(description = "Verify the \"Download CSV\" button")
-    public void verifyDownloadCSV() {
-        test = extent.startTest("verifyDownloadCSV", "Verify the \"Download CSV\" button");
+    public void TC_DBX_DT_30_verifyDownloadCSV() {
+        test = extent.startTest("TC_DBX_DT_30.verifyDownloadCSV", "Verify the \"Download CSV\" button");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
         dataTablesHelper.clickOnDataTab();

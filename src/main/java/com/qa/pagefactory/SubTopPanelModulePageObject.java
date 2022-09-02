@@ -17,16 +17,16 @@ public class SubTopPanelModulePageObject {
     @FindBy(css = "a.logo")
     public WebElement unravelLogo;
 
-    @FindBy(xpath = "//span[contains(@class,'icon-jobs')]")
+    @FindBy(xpath = "//span[text()[normalize-space()='Jobs']]")
     public WebElement jobs;
 
-    @FindBy(xpath = "//span[contains(@class,'icon-data')]")
+    @FindBy(xpath = "//span[text()[normalize-space()='Data']]")
     public WebElement data;
 
-    @FindBy(xpath = "//i[contains(@class,'icon-reports')]")
+    @FindBy(xpath = "//span[text()[normalize-space()='Reports']]")
     public WebElement reports;
 
-    @FindBy(xpath = "//span[contains(@class,'icon-alerts')]")
+    @FindBy(xpath = "//span[text()[normalize-space()='AutoActions']]")
     public WebElement alerts;
 
     @FindBy(xpath = "(//a[@class='menu'])[2]")
@@ -56,7 +56,7 @@ public class SubTopPanelModulePageObject {
     @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Services And Versions Compatibility'])")
     public WebElement servicesVersionMigrationTab;
 
-    @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Cluster Discovery'])")
+    @FindBy(xpath = "//span[text()='Cluster Discovery']")
     public WebElement clusterDiscoveryTab;
 
     @FindBy(xpath = "(//ul[contains(@class,'sub-menu')]//span[text()='Workload Fit'])")

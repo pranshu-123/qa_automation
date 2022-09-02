@@ -24,7 +24,7 @@ public class TC_DBX_DT_34 extends BaseClass {
 
     @Test(description = "Validate whether Size graph is updated when different rows are selected from table details.")
     public void verifySizeGraphWithDifferentTables() {
-        test = extent.startTest("verifySizeGraphWithDifferentTables", "Validate whether Size graph is updated " +
+        test = extent.startTest("TC_DBX_DT_34.verifySizeGraphWithDifferentTables", "Validate whether Size graph is updated " +
             "when different rows are selected from table details.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);

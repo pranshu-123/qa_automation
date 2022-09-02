@@ -22,7 +22,7 @@ public class TC_DBX_DT_15 extends BaseClass {
 
     @Test(description = "Verify the table columns.")
     public void verifyTableColumns() {
-        test = extent.startTest("verifyTableColumns", "Verify the table columns.");
+        test = extent.startTest("TC_DBX_DT_15.verifyTableColumns", "Verify the table columns.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
         dataTablesHelper.clickOnDataTab();

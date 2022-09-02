@@ -503,7 +503,7 @@ public class DataTablesHelper {
      */
     public void clickOnParentAppOfNthRow(int rowNum) {
         actions.performActionWithPolling(dataPageObject.tableRows.get(rowNum).findElements(By.tagName("td"))
-            .get(11), UserAction.CLICK);
+            .get(12), UserAction.CLICK);
     }
 
     /**

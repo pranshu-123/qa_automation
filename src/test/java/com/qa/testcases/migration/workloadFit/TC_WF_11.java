@@ -67,11 +67,11 @@ public class TC_WF_11 extends BaseClass {
         fit.clickRunForNewReport();
         try {
             waitExecuter.waitUntilTextToBeInWebElement(cdPageObject.confirmationMessageElement,
-                    "Workload Fit report completed successfully");
+                    "workload fit completed successfully.");
             test.log(LogStatus.PASS, "Verified Workload Fit report is loaded properly.");
         } catch (TimeoutException te) {
             waitExecuter.waitUntilTextToBeInWebElement(cdPageObject.confirmationMessageElement,
-                    "Workload Fit report completed successfully");
+                    "workload fit completed successfully.");
             test.log(LogStatus.PASS, "Verified Workload Fit report is loaded properly.");
         }
         List<WebElement> appNamesInQueueTypes = fitPageObject.getQueuesTypeNames;

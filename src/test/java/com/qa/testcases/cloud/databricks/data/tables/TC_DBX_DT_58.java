@@ -26,7 +26,7 @@ public class TC_DBX_DT_58 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(description = "Verify the chart by different selection of the dropdown values")
-    public void verifyLeftChartOnDifferentOptionSelection() {
+    public void TC_DBX_DT_58_verifyLeftChartOnDifferentOptionSelection() {
         test = extent.startTest("TC_DBX_DT_58.verifyLeftChartOnDifferentOptionSelection",
             "Verify the chart by different selection of the dropdown values.");
         test.assignCategory("Databricks - Data");

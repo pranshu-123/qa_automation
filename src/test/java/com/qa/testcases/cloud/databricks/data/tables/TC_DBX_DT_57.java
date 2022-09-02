@@ -22,7 +22,7 @@ public class TC_DBX_DT_57 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(description = "Verify the options for chart display on application details page")
-    public void verifyOptionsOfLeftGraphApplicationDetailPage() {
+    public void TC_DBX_DT_57_verifyOptionsOfLeftGraphApplicationDetailPage() {
         test = extent.startTest("TC_DBX_DT_57.verifyOptionsOfLeftGraphApplicationDetailPage",
             "Verify the options for chart display on application details page.");
         test.assignCategory("Databricks - Data");
@@ -36,7 +36,7 @@ public class TC_DBX_DT_57 extends BaseClass {
         try {
             dataTablesHelper.clickOnTabOnTableDetails("Applications");
             dataTablesHelper.selectAllApplicationsColumn();
-            dataTablesHelper.clickOnParentAppOfNthRow(0);
+            dataTablesHelper.clickOnParentAppOfNthRow(13);
             actionPerformer.moveToTheElement(dataPageObject.dropdownIconOnApplicationDetails);
             List<String> leftGraphOptions = dataPageObject.leftGraphOptions.stream()
                 .map(option -> option.getText().trim()).collect(Collectors.toList());

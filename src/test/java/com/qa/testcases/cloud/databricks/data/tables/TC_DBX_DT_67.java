@@ -20,8 +20,8 @@ public class TC_DBX_DT_67 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(description = "Validate the close button of application page")
-    public void validateCloseButtonApplicationDetailsPage() {
-        test = extent.startTest("TC_DBX_DT_66.validateCloseButtonApplicationDetailsPage",
+    public void TC_DBX_DT_67_validateCloseButtonApplicationDetailsPage() {
+        test = extent.startTest("TC_DBX_DT_67.validateCloseButtonApplicationDetailsPage",
             "Validate the close button of application page");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);

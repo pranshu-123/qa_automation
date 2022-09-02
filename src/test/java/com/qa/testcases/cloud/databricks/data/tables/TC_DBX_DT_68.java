@@ -23,8 +23,8 @@ public class TC_DBX_DT_68 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_68.class);
 
     @Test(description = "Verify the Partition Detail of Table Details Page")
-    public void verifyPartitionDetailSection() {
-        test = extent.startTest("verifyPartitionDetailSection", "Verify the Partition Detail of Table Details Page");
+    public void TC_DBX_DT_68_verifyPartitionDetailSection() {
+        test = extent.startTest("TC_DBX_DT_68.verifyPartitionDetailSection", "Verify the Partition Detail of Table Details Page");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
         DataPageObject dataPageObject = new DataPageObject(driver);

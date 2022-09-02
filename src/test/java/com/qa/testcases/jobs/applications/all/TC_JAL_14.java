@@ -51,7 +51,7 @@ public class TC_JAL_14 extends BaseClass {
         test.log(LogStatus.INFO, "Click on user searchbox and get all usernames.");
         LOGGER.info("Click on user searchbox and get all usernames.");
         executor.executeScript("arguments[0].scrollIntoView();", applicationsPageObject.userSearchBox);
-
+        waitExecuter.waitUntilPageFullyLoaded();
         waitExecuter.waitUntilElementClickable(applicationsPageObject.userExpandableHeader);
         userActions.performActionWithPolling(applicationsPageObject.userExpandableHeader, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(applicationsPageObject.userExpandableHeader);

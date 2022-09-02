@@ -7,10 +7,7 @@ import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 
 import java.util.ArrayList;
@@ -103,7 +100,15 @@ public class AllApps {
 
     /* Add all application count */
     public int addApplicationTypeCount() {
+        Actions action = new Actions(driver);
+        waitExecuter.sleep(1000);
         List<WebElement> appJobCounts = applicationsPageObject.getEachApplicationTypeJobCounts;
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+        waitExecuter.sleep(3000);
+        action.moveToElement((WebElement) appJobCounts)
+                .moveToElement(driver.findElement(By.xpath("//label[@class='checkbox']//span[@class='show-only']")))
+                .click().build().perform();
+        waitExecuter.waitUntilPageFullyLoaded();
         List<Integer> listOfJobCounts = new ArrayList<>();
         int totalCount = 0;
         for (int i = 0; i < appJobCounts.size(); i++) {

@@ -6,9 +6,11 @@ import com.qa.pagefactory.jobs.ApplicationsPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -133,19 +135,33 @@ public class InefficientApps {
 
     /* Click on First check box in Application Type and Application Event check boxes */
     public void clickFirstChkBoxOfAppTypeAndAppEventEach() {
+        Actions action = new Actions(driver);
         waitExecuter.sleep(1000);
-        applicationsPageObject.applicationTypeFirstApp.click();
+        WebElement appType = applicationsPageObject.applicationTypeFirstApp;
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         waitExecuter.sleep(3000);
+        action.moveToElement(appType)
+                .moveToElement(driver.findElement(By.xpath("//label[@class='checkbox']//span[@class='show-only']")))
+                .click().build().perform();
         waitExecuter.waitUntilPageFullyLoaded();
-        applicationsPageObject.applicationEventFirstApp.click();
-        waitExecuter.sleep(3000);
+        WebElement appEvent = applicationsPageObject.applicationEventFirstApp;
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
+        action.moveToElement(appEvent)
+                .moveToElement(driver.findElement(By.xpath("//label[@class='checkbox']//span[@class='show-only']")))
+                .click().perform();
         waitExecuter.waitUntilPageFullyLoaded();
     }
 
     /* Check First check box in Application Type check boxes is checked */
     public boolean verifyFirstChkBoxOfAppTypeIsChecked() {
+        WebElement checkbox = applicationsPageObject.applicationEventFirstApp;
         waitExecuter.sleep(2000);
-        return applicationsPageObject.applicationTypeFirstApp.isSelected();
+        boolean isChecked = checkbox.getAttribute("class").contains("checkmark");
+        if (isChecked) {
+            // uncheck the checkbox
+            checkbox.click();
+        }
+        return isChecked;
     }
 
     /* Check First check box in Application Event check boxes is checked */
@@ -157,13 +173,17 @@ public class InefficientApps {
     /* Click on Application Type check boxes */
     public void clickAllApplicationTypeChkBox() {
         waitExecuter.sleep(1000);
-        int chkBoxCount = applicationsPageObject.getApplicationTypeChkBoxList.size();
-        if (chkBoxCount > 0) {
-            for (int i = 0; i < chkBoxCount; i++) {
-                waitExecuter.sleep(2000);
-                applicationsPageObject.getApplicationTypeChkBoxList.get(i).click();
-                waitExecuter.sleep(2000);
-                waitExecuter.waitUntilPageFullyLoaded();
+        List<WebElement> chkBoxCount = applicationsPageObject.getApplicationTypeChkBoxList;
+        if (chkBoxCount.isEmpty()) {
+            LOGGER.info("No Checkbox present in the page");
+        } else {
+            for (WebElement checkbox : chkBoxCount) {
+                if (checkbox.isDisplayed()) {
+                    waitExecuter.sleep(2000);
+                    checkbox.click();
+                    waitExecuter.sleep(2000);
+                    waitExecuter.waitUntilPageFullyLoaded();
+                }
             }
         }
     }

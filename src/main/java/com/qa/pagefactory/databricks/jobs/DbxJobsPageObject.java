@@ -12,7 +12,7 @@ public class DbxJobsPageObject {
     @FindBy(xpath = "//*[@id='statusContainer']/span[1]")
     public WebElement appStatus;
 
-    @FindBy(xpath = "(//div[@class='right text-white']//span)[2]")
+    @FindBy(xpath = "//tbody[1]/tr/td[2]/span[1]")
     public WebElement appJobId;
 
     @FindBy(xpath = "//*[@id='io_metrics']//tbody/tr/td[2]")
@@ -69,16 +69,16 @@ public class DbxJobsPageObject {
     @FindBy(xpath = "//*[@id=\"pipelinesList-body\"]/tr/td[1]")
     public List<WebElement> lastRunStatusList;
 
-    @FindBy(xpath = "//*[@id=\"pipelinesList-body\"]/tr/td[2]")
+    @FindBy(xpath = "//tr/td[2]")
     public List<WebElement> lastJobID;
 
-    @FindBy(xpath = "//*[@id=\"pipelinesList-body\"]/tr/td[3]")
+    @FindBy(xpath = "//tr/td[3]")
     public List<WebElement> lastJobName;
 
-    @FindBy(xpath = "//*[@id=\"pipelinesList-body\"]/tr/td[4]")
+    @FindBy(xpath = "//tr/td[4]")
     public List<WebElement> lastClusterName;
 
-    @FindBy(xpath = "//*[@id=\"pipelinesList-body\"]/tr/td[5]")
+    @FindBy(xpath = "//tr/td[5]")
     public List<WebElement> lastWorkspace;
 
     @FindBy(xpath = "//*[@id=\"pipelinesList-body\"]/tr/td[6]")
@@ -189,7 +189,7 @@ public class DbxJobsPageObject {
     @FindBy(xpath = "//table[@id='pipelinesList']/tbody[1]/tr/td[2]/span[1]")
     public WebElement clickOnJobId;
 
-    @FindBy(xpath = "//table[@id='pipelinesList']/tbody[1]/tr/td[3]/span[1]")
+    @FindBy(xpath = "//tr/td[3]/span[1]")
     public WebElement clickOnName;
 
     @FindBy(xpath = "//table[@id='pipelinesList']/tbody[1]/tr/td[3]/span[1]")

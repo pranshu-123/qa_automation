@@ -24,7 +24,7 @@ public class TC_DBX_DT_59 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(description = "Verify the Navigation tab of left of application detail page")
-    public void verifyNavigationTab() {
+    public void TC_DBX_DT_59_verifyNavigationTab() {
         test = extent.startTest("TC_DBX_DT_59.verifyNavigationTab",
             "Verify the Navigation tab of left of application detail page.");
         test.assignCategory("Databricks - Data");

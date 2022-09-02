@@ -18,7 +18,7 @@ public class TC_DBX_DT_6 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_6.class);
 
     @Test(description = "Verify the Size graph")
-    public void verifySizeTab() {
+    public void TC_DBX_DT_6_verifySizeTab() {
         test = extent.startTest("verifySizeTab", "Verify the Size graph");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);

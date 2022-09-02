@@ -44,7 +44,7 @@ public class TC_MP_SC_01 extends BaseClass {
             waitExecuter.waitUntilTextToBeInWebElement(servicesAndVersionsCompatibilityPageObject.confirmationMessageElement,
                     "Services and Versions Compatibility completed successfully.");
             waitExecuter.sleep(2000);
-            test.log(LogStatus.PASS, "Verified Services and Versions CowaitExecuter.sleep(2000);mpatibility report is loaded properly.");
+            test.log(LogStatus.PASS, "Verified Services and Versions compatibility report is loaded properly.");
             servicesAndVersionsCompatibility.validateLatestReport();
             waitExecuter.sleep(2000);
         } catch (TimeoutException te) {

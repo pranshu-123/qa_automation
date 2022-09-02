@@ -18,7 +18,7 @@ public class TC_DBX_DT_22 extends BaseClass {
 
     @Test(description = "Validate whether user is able to filter data with Storage Format column value.")
     public void verifyTableDataFilterByStorageFormatColumn() {
-        test = extent.startTest("verifyTableDataFilterByStorageFormatColumn", "Validate whether user is able to filter data " +
+        test = extent.startTest("TC_DBX_DT_22.verifyTableDataFilterByStorageFormatColumn", "Validate whether user is able to filter data " +
             "with Storage Format column value.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);

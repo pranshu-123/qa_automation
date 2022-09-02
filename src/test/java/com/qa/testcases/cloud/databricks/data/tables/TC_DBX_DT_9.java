@@ -17,7 +17,7 @@ public class TC_DBX_DT_9 extends BaseClass {
 
     @Test(description = "Validate the search textbox is able to filter for tables data.")
     public void verifySearchBoxIsAbleToFilter() {
-        test = extent.startTest("verifySearchBoxIsAbleToFilter", "Validate the search textbox is able to filter for tables data.");
+        test = extent.startTest("TC_DBX_DT_9.verifySearchBoxIsAbleToFilter", "Validate the search textbox is able to filter for tables data.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
         dataTablesHelper.clickOnDataTab();

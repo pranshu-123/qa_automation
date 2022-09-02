@@ -33,7 +33,7 @@ public class TC_DBX_DT_53 extends BaseClass {
         try {
             dataTablesHelper.clickOnTabOnTableDetails("Applications");
             dataTablesHelper.selectAllApplicationsColumn();
-            String expectedClusterId = dataPageObject.tableRows.get(0).findElements(By.tagName("td")).get(5).getText();
+            String expectedClusterId = dataPageObject.tableRows.get(0).findElements(By.tagName("td")).get(6).getText();
             String expectedApplicationId = dataPageObject.applicationId.getText();
             dataTablesHelper.clickOnParentAppOfNthRow(0);
             String applicationDetailsHeading = dataPageObject.applicationDetailsHeading.getText();
@@ -41,7 +41,8 @@ public class TC_DBX_DT_53 extends BaseClass {
                 applicationDetailsHeading.contains(expectedApplicationId), "Incorrect applicationId or clusterId are" +
                 "displayed");
             loggingUtils.pass("Correct applicationId or clusterId are displayed", test);
-        } finally {
+        } catch (Exception e) {
+            loggingUtils.error("Exception occured " +e.getStackTrace(),test);
             dataTablesHelper.closeApplicationDetailsPage();
             dataTablesHelper.backToTablesPage();
         }

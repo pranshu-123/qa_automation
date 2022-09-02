@@ -11,14 +11,14 @@ import org.openqa.selenium.NoSuchElementException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
-@Marker.DbxAppDetails
+
 @Marker.All
 public class TC_JAP_16 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_JAP_16.class);
 
     @Test()
     public void TC_JAP_16_verifySQLTab() {
-        test = extent.startTest("TC_JAP_15.verifySQLTab",
+        test = extent.startTest("TC_JAP_16.verifySQLTab",
                 "Verify Program tab must be loaded on the UI and data should be available");
         test.assignCategory("Apps Details-Spark");
         test.log(LogStatus.INFO, "Login to the application");

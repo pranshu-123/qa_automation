@@ -9,7 +9,7 @@ import java.util.List;
 
 public class WorkloadFitPageObject {
 
-    @FindBy(xpath = "//section[contains(@class,'alert')]/span[contains(text(),'Please select one or more')]")
+    @FindBy(xpath = "//section[contains(@class,'component-message-banner scrollbar-s')]//div")
     public List<WebElement> noJobSelectedErrorMessage;
 
     @FindBy(xpath = "(//div[contains(@class,'pie-legend')])[1]//label/span[text()='All']")
@@ -24,16 +24,16 @@ public class WorkloadFitPageObject {
     @FindBy(xpath = "(//div[contains(@class,'pie-legend')])[7]//label/span[text()='All']")
     public List<WebElement> AllTagOfTagsTypes;
 
-    @FindBy(xpath = "((//div[contains(@class,'pie-legend')])[1]//label/span[@class='checkmark'])[1]")
+    @FindBy(xpath = "//span[@class='checkmark legend-checkbox-all']")
     public WebElement selectAllJobTypes;
 
-    @FindBy(xpath = "((//div[contains(@class,'pie-legend')])[3]//label/span[@class='checkmark'])[1]")
+    @FindBy(xpath = "(//span[@class='checkmark legend-checkbox-all'])[2]")
     public WebElement selectAllUserTypes;
 
-    @FindBy(xpath = "((//div[contains(@class,'pie-legend')])[5]//label/span[@class='checkmark'])[1]")
+    @FindBy(xpath = "(//span[@class='checkmark legend-checkbox-all'])[3]")
     public WebElement selectAllQueueTypes;
 
-    @FindBy(xpath = "((//div[contains(@class,'pie-legend')])[7]//label/span[@class='checkmark'])[1]")
+    @FindBy(xpath = "(//span[@class='checkmark legend-checkbox-all'])[4]")
     public WebElement selectAllTagTypes;
 
     @FindBy(xpath = "//section[contains(@class,'component-message-banner')]/div")
@@ -75,7 +75,7 @@ public class WorkloadFitPageObject {
     @FindBy(xpath = "//div[text()='Tags']//parent::div//div[@track-by='name']//div/span")
     public List<WebElement> getTagsTypeNames;
 
-    @FindBy(xpath = "//div[contains(@class,'heat-section')]//select")
+    @FindBy(xpath = "(//span[@class='select2-selection__arrow'])[2]")
     public WebElement heatMapDropdown;
 
     @FindBy(xpath = "//div[contains(@class,'heat-section')]//div[contains(@class,'highcharts-container')]")
@@ -93,7 +93,7 @@ public class WorkloadFitPageObject {
     @FindBy(xpath = "((//div[contains(@class,'pie-legend')])[7]//div[@track-by='name']/label/span[@class='checkmark'])[1]")
     public WebElement selectTagFirstCheckBox;
 
-    @FindBy(xpath = "//div[contains(@class,'scrollable-tab-container')]//li/a[contains(@class,'tab-margin')]")
+    @FindBy(xpath = "//div[contains(@class,'scrollable-tab-container')]//li/a")
     public List<WebElement> mapToClusterTabs;
 
     @FindBy (xpath = "//label[text()='Object Storage Size Required:']/following::input")

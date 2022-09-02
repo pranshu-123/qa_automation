@@ -22,7 +22,7 @@ public class TC_DBX_DT_61 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(description = "Verify the Gantt Chart tab of left of application detail page")
-    public void verifyGanttChart() {
+    public void TC_DBX_DT_61_verifyGanttChart() {
         test = extent.startTest("TC_DBX_DT_61.verifyGanttChart",
             "Verify the Gantt Chart tab of left of application detail page");
         test.assignCategory("Databricks - Data");

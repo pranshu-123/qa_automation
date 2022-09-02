@@ -17,7 +17,6 @@ import java.io.File;
  * @author Ankur Jaiswal
  */
 
-
 @Marker.DbxDataTables
 @Marker.GCPDataTables
 public class TC_DBX_DT_33 extends BaseClass {
@@ -25,7 +24,7 @@ public class TC_DBX_DT_33 extends BaseClass {
 
     @Test(description = "Validate whether Apps graph is updated when different rows are selected from table details.")
     public void verifyAppsGraphWithDifferentTables() {
-        test = extent.startTest("verifyAppsGraphWithDifferentTables", "Validate whether Apps graph is updated when" +
+        test = extent.startTest("TC_DBX_DT_33.verifyAppsGraphWithDifferentTables", "Validate whether Apps graph is updated when" +
             " different rows are selected from table details.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);

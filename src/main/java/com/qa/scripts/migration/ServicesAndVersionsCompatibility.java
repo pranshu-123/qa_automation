@@ -440,7 +440,7 @@ public class ServicesAndVersionsCompatibility {
                         MouseActions.clickOnElement(driver, reportPageObj.downloadReportIcon);
                         logger.info("Downloading report");
                         waitExecuter.waitUntilPageFullyLoaded();
-                        Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Downloaded successfully",
+                        Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Downloaded Successfully.",
                                 " No downloaded successfully message received.");
                         MouseActions.clickOnElement(driver, servicesAndVersionsCompatibilityPageObject.archives);
                         break;
@@ -459,7 +459,7 @@ public class ServicesAndVersionsCompatibility {
                         waitExecuter.waitUntilElementPresent(servicesAndVersionsCompatibilityPageObject.deleteOkBtn);
                         MouseActions.clickOnElement(driver, servicesAndVersionsCompatibilityPageObject.deleteOkBtn);
                         logger.info("Deleted report");
-                        Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Removed successfully",
+                        Assert.assertEquals(reportPageObj.successfulMsgBanner.getText(), "Removed Successfully.",
                                 " Report not removed");
                         MouseActions.clickOnElement(driver, servicesAndVersionsCompatibilityPageObject.archives);
                         break;

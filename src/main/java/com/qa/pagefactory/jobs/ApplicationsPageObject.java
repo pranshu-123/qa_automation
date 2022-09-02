@@ -81,7 +81,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "(//ul[contains(@class,'select2-results')])/li")
     public List<WebElement> getNamesFromDropDown;
 
-    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[1]")
+    @FindBy(xpath = "//tr/td[3]")
     public WebElement getTypeFromTable;
 
     @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr[2]/td)[1]")
@@ -90,7 +90,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[3]")
     public WebElement getUsernameFromTable;
 
-    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[9]")
+    @FindBy(xpath = "//tr/td[10]")
     public WebElement getQueueNameTable;
 
     @FindBy(css = "input.global-app-search")
@@ -120,13 +120,17 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "(//h3[contains(@class,'expandable-header')]/a)[2]")
     public WebElement applicationEvent;
 
-    @FindBy(xpath = "//div[@id='app-filter-panel']/div[2]/div[1]//div[1]/p[1]/label[1]/span[4]")
+    @FindBy(xpath = "//div[@id='app-filter-panel']//div[1]//div[1]//div//p//label//span[4]")
     public WebElement applicationTypeFirstApp;
 
-    @FindBy(xpath = "//label[@title='ExecutorOomeEvent']//span[@class='checkmark']")
+    @FindBy(xpath = "//label[@class='checkbox']//span[@class='show-only']")
+    public WebElement applicationTypeCheck;
+
+
+    @FindBy(xpath = "//*[@id=\"app-filter-panel\"]/div[2]/div[2]/div/div/p/label/span[4]")
     public WebElement applicationEventFirstApp;
 
-    @FindBy(xpath = "//*[@id=\"app-filter-panel\"]/div[2]/div[1]//div/p/label/span[4]")
+    @FindBy(xpath = "//div[@id='app-filter-panel']//div[1]//div[1]//div//p//label//span[4]")
     public List<WebElement> getApplicationTypeChkBoxList;
 
     @FindBy(xpath = "(//label[contains(@class,'checkbox')])/input")
@@ -141,7 +145,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//a[contains(@class,'icon-sort')]")
     public List<WebElement> inefficientAppsIconSortTbl;
 
-    @FindBy(xpath = "//span[text()[normalize-space()='Show all']]")
+    @FindBy(xpath = "//span[@class='show-all']//span[1]")
     public WebElement showAll;
 
     @FindBy(xpath = "//a[contains(text(),'Status')]")

@@ -16,10 +16,10 @@ import org.testng.annotations.Test;
 @Marker.DbxDataTables
 @Marker.GCPDataTables
 public class TC_DBX_DT_8 extends BaseClass {
-    private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_1.class);
+    private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_8.class);
 
     @Test(description = "Verify whether search textbox is present to filter data from data table")
-    public void verifySearchBox() {
+    public void TC_DBX_DT_8_verifySearchBox() {
         test = extent.startTest("verifySearchBox", "Verify whether search textbox is present to filter data from data table");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);

@@ -17,7 +17,7 @@ public class TC_DBX_DT_24 extends BaseClass {
 
     @Test(description = "Validate whether user is able to filter data with \"Latest Access\" column value.")
     public void verifyTableDataFilterByLatestAccessColumn() {
-        test = extent.startTest("verifyTableDataFilterByLatestAccessColumn", "Validate whether user is able to filter data " +
+        test = extent.startTest("TC_DBX_DT_24.verifyTableDataFilterByLatestAccessColumn", "Validate whether user is able to filter data " +
             "with \"Latest Access\" column value.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);

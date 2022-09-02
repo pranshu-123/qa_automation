@@ -26,7 +26,7 @@ public class TC_DBX_DT_32 extends BaseClass {
 
     @Test(description = "Validate whether Users graph is updated when different rows are selected from table details.")
     public void verifyUsersGraphWithDifferentTables() {
-        test = extent.startTest("verifyUsersGraphWithDifferentTables", "Validate whether Users graph is updated" +
+        test = extent.startTest("TC_DBX_DT_32.verifyUsersGraphWithDifferentTables", "Validate whether Users graph is updated" +
             " when different rows are selected from table details.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);

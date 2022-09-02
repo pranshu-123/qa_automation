@@ -45,6 +45,5 @@ public class TC_CD_16 extends BaseClass{
         reportsPage.validateReportDownload(reportPageObj);
         test.log(LogStatus.PASS, "User is able to download the Report.");
 
-
     }
 }

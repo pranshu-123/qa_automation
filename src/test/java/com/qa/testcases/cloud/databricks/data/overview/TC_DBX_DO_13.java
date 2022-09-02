@@ -21,7 +21,7 @@ public class TC_DBX_DO_13 extends BaseClass {
 
     @Test(dataProvider = "clusterid-data-provider",description = "Validate whether user is able to change the setting of label by making changes in Last App Access")
     public void TC_DBX_DO_13_verifyTableStatesByChangingLastAppAccess(String clusterId) {
-        test = extent.startTest("TC_DBX_DO_12.verifyTableStatesByChangingLastAppAccess", "Validate whether user is able" +
+        test = extent.startTest("TC_DBX_DO_13.verifyTableStatesByChangingLastAppAccess", "Validate whether user is able" +
                 " to change the setting of label by making changes in Last App Access");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);

@@ -17,7 +17,7 @@ public class TC_DBX_DT_25 extends BaseClass {
 
     @Test(description = "Validate whether user is able to filter data with Size column value.")
     public void verifyTableDataFilterBySizeColumn() {
-        test = extent.startTest("verifyTableDataFilterBySizeColumn", "Validate whether user is able to filter data " +
+        test = extent.startTest("TC_DBX_DT_25.verifyTableDataFilterBySizeColumn", "Validate whether user is able to filter data " +
             "with Size column value.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);

@@ -12,10 +12,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import com.qa.utils.actions.UserActions;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.testng.Assert;
 
 /**
@@ -59,13 +56,14 @@ public class TopX {
         return topXPageObject.confirmationMessageElement.getText();
     }
 
-    public void setTopXNumber(String number) {
+    public void setTopXNumber(String topXValue) {
         waitExecuter.waitUntilElementPresent(topXPageObject.topXNumber);
         waitExecuter.sleep(2000);
         topXPageObject.topXNumber.clear();
         JavaScriptExecuter.clearTextField(driver, topXPageObject.topXNumber);
         actions.performActionWithPolling(topXPageObject.topXNumber,
-            UserAction.SEND_KEYS, number);
+            UserAction.SEND_KEYS,topXValue);
+        topXPageObject.topXNumber.sendKeys(Keys.ENTER);
     }
 
     public TopX(WebDriver driver) {

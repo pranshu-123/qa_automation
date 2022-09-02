@@ -825,6 +825,10 @@ public class SparkAppsDetailsPage {
         datePicker.selectLast30Days();
         waitExecuter.waitUntilElementClickable(sparkPageObject.resetButton);
         waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.sleep(1000);
+        sparkPageObject.sortByDurationApp.click();
+        waitExecuter.waitUntilPageFullyLoaded();
+        sparkPageObject.sortUp.click();
         waitExecuter.sleep(3000);
     }
 
@@ -926,7 +930,7 @@ public class SparkAppsDetailsPage {
             // Clicking on the Spark app must go to apps detail page
             if (appCount > 0) {
                 if (tabName.equals("Analysis")) {
-                    userActions.performActionWithPolling(appDetailsPageObject.globalSearchBox, UserAction.SEND_KEYS, "Spark Pi");
+                    userActions.performActionWithPolling(appDetailsPageObject.globalSearchBox, UserAction.SEND_KEYS, "unravel");
                     appDetailsPageObject.globalSearchBox.sendKeys(Keys.RETURN);
                 }
                 String headerAppId = appsDetailsPage.verifyAppId(sparkAppPageObj);

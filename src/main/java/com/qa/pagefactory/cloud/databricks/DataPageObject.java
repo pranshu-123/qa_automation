@@ -53,6 +53,9 @@ public class DataPageObject {
     @FindBy(xpath = "//table[contains(@class,'component-data-tables')]/tbody/tr")
     public List<WebElement> tableRows;
 
+    @FindBy(xpath = "//tbody[1]/tr/td[13]/a[1]/span[1]/span[1]")
+    public List<WebElement> parentRows;
+
     @FindBy(xpath = "//input[@placeholder=\"Search\"]")
     public WebElement searchBoxForTableData;
 
@@ -128,7 +131,7 @@ public class DataPageObject {
     @FindBy(xpath = "//a[contains(@class,'icon-gear')]")
     public WebElement settingsIcon;
 
-    @FindBy(xpath = "//button[@class='close']")
+    @FindBy(css = "button.close")
     public WebElement modalCloseButton;
 
     @FindBy(xpath = "//a[contains(text(),'Save Rules')]")
@@ -177,7 +180,7 @@ public class DataPageObject {
     @FindBy(xpath = "//input[@type='checkbox']")
     public List<WebElement> columnCheckboxes;
 
-    @FindBy(xpath = "//a[@class='applist-id']")
+    @FindBy(xpath = "//tbody[1]/tr/td[4]/div[1]/div[1]/a[2]")
     public WebElement applicationId;
 
     @FindBy(xpath = "//h2/span")
@@ -185,6 +188,9 @@ public class DataPageObject {
 
     @FindBy(css = "div.close")
     public WebElement closeApplicationsDetailsButton;
+
+    @FindBy(css = "//h2[@class='text-white']//a[1]")
+    public WebElement homeTab;
 
     @FindBy(xpath = "(//h2/following-sibling::div)[1]")
     public WebElement ownerClusterQueueDetailsApplicationPage;

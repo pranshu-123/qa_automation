@@ -33,10 +33,10 @@ public class DbxApplicationsPageObject {
     @FindBy(xpath = "(//ul[contains(@class,'select2-selection__rendered')])[2]//input")
     public WebElement userSearchBox;
 
-    @FindBy(xpath = "//tbody/tr[1]/td/a[2]")
+    @FindBy(xpath = "//tbody/tr/td[4]/div[1]/div[1]/span[1]")
     public List<WebElement> getNamesFromDropDown;
 
-    @FindBy(xpath = "//tbody[1]/tr/td[4]/a[2]")
+    @FindBy(xpath = "//tbody/tr/td[4]/div[1]/div[1]/a[2]")
     public WebElement getWorkspaceNameTable;
 
     @FindBy(css = ".col-md-12.no-data-msg")

@@ -30,7 +30,7 @@ public class MR_058 extends BaseClass {
     java.util.logging.Logger logger = Logger.getLogger(MR_058.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_058_verifyMetricsGraphs(String clusterId) {
+    public void MR_058_verifyMetricsGraphs(String clusterId) throws InterruptedException {
         test = extent.startTest("MR_058_verifyMetricsGraphs: " + clusterId,
                 "Verify the Metrics Graphs are present \n" + "OS Memory");
         test.assignCategory(" Apps Details-Mr");

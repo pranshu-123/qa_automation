@@ -59,6 +59,11 @@ public class WaitExecuter {
       throw new TimeoutException("Maximum time exceeded.");
   }
 
+    public void waitForSeconds(int strWaitTime) throws InterruptedException {
+        Thread.sleep(strWaitTime*1000);
+        Log.info("Waited for <<" + strWaitTime + ">> seconds");
+    }
+
   public void waitUntilNumberOfWindowsToBe(int size) {
     wait.until(ExpectedConditions.numberOfWindowsToBe(size));
   }

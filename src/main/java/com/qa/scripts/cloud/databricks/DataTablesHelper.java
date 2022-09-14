@@ -128,7 +128,7 @@ public class DataTablesHelper {
         }
     }
 
-    public void verifyTableFilterByColumn(String column) {
+    public void verifyTableFilterByColumn(String column) throws InterruptedException {
         int columnIndex = -1;
         column = column.trim();
         switch (column) {
@@ -153,20 +153,23 @@ public class DataTablesHelper {
             case "Storage Format":
                 columnIndex = 7;
                 break;
-            case "Latest Access":
+            case "Created":
                 columnIndex = 8;
                 break;
-            case "Size":
+            case "Latest Access":
                 columnIndex = 9;
                 break;
-            case "Apps":
+            case "Size":
                 columnIndex = 10;
                 break;
-            case "Partitions":
+            case "Apps":
                 columnIndex = 11;
                 break;
-            case "Users":
+            case "Partitions":
                 columnIndex = 12;
+                break;
+            case "Users":
+                columnIndex = 13;
                 break;
         }
         String textToFilter =
@@ -175,10 +178,11 @@ public class DataTablesHelper {
             "..."));
         actions.performActionWithPolling(dataPageObject.searchBoxForTableData, UserAction.SEND_KEYS, textToFilter);
         actions.performActionWithPolling(dataPageObject.searchBoxButton, UserAction.CLICK);
-        waitExecuter.sleep(2000);
+        waitExecuter.waitForSeconds(5);
 
         loggingUtils.info("Sorting data in descending order by column " + column, test);
         actions.performActionWithPolling(dataPageObject.tableHeadings.get(columnIndex), UserAction.CLICK);
+        waitExecuter.waitForSeconds(3);
         for (WebElement row: dataPageObject.tableRows) {
             if (row.findElements(By.xpath("//td")).size() != 1) {
                 String columnDataText = row.findElement(By.xpath("//td[" + (columnIndex+1) + "]")).getText();
@@ -367,11 +371,12 @@ public class DataTablesHelper {
      * Get applied state filter of hot and cold tables
      * @return - Slider values for hot and cold
      */
-    public void changeAppliedStateSettings(String settingType) {
+    public void changeAppliedStateSettings(String settingType) throws InterruptedException {
         try {
             loggingUtils.info("Click on setting icon on table state", test);
+            waitExecuter.waitForSeconds(5);
             actions.performActionWithPolling(dataPageObject.tableStateSettings, UserAction.CLICK);
-            waitExecuter.waitUntilPageFullyLoaded();
+            waitExecuter.waitForSeconds(10);
             waitExecuter.sleep(3000);
             if (settingType.equalsIgnoreCase("age")) {
                 actionPerformer.slideElementHorizontallyByOffset(dataPageObject.labelTablesSlider.get(0), -20);
@@ -503,8 +508,26 @@ public class DataTablesHelper {
      */
     public void clickOnParentAppOfNthRow(int rowNum) {
         actions.performActionWithPolling(dataPageObject.tableRows.get(rowNum).findElements(By.tagName("td"))
-            .get(12), UserAction.CLICK);
+            .get(13),UserAction.CLICK);
     }
+
+    /**
+     * Click on parent app column of nth row
+     * @param rowNum
+     */
+    public void clickOnParentApp(int rowNum) {
+        actions.performActionWithPolling(dataPageObject.parentRows.get(rowNum), UserAction.CLICK);
+    }
+
+    /**
+     * Click on close button to close application details page which navigates user
+     * to table details page
+     */
+    public void homePage() {
+        loggingUtils.info("Click on close button, go back to table details page", test);
+        actions.performActionWithPolling(dataPageObject.homeTab, UserAction.CLICK);
+    }
+
 
     /**
      * Click on close button to close application details page which navigates user

@@ -71,13 +71,13 @@ public class JobsPage {
      * and verify Status App details Page .
      */
     public String verifyStatus(DbxJobsPageObject jobsPage) {
-        String statusTable = jobsPage.status.getText();
+        String statusTable = jobsPage.status.getText().trim().toLowerCase();
         logger.info("Application Id is " + statusTable);
         waitExecuter.waitUntilElementClickable(jobsPage.clickOnStatus);
         jobsPage.clickOnStatus.click();
         waitExecuter.waitUntilElementClickable(jobsPage.closeIcon);
         waitExecuter.waitUntilPageFullyLoaded();
-        String status = jobsPage.appStatus.getText().trim();
+        String status = jobsPage.appStatus.getText().trim().toLowerCase();
         Assert.assertEquals(statusTable, status, "Runs Status is not displayed in the Header");
         return status;
     }

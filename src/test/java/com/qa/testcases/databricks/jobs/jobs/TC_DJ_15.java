@@ -35,6 +35,7 @@ public class TC_DJ_15 extends BaseClass {
         dballApps.navigateToJobsTab("Jobs");
         waitExecuter.waitUntilElementPresent(dbpageObject.jobsTabs);
         try {
+            dballApps.inJobsSelectClusterAndLast7Days();
             String headerAppId = jobsPage.verifyJobName(jobsPageObject);
             test.log(LogStatus.PASS, "Application Job Name is displayed: " + headerAppId);
             waitExecuter.waitUntilPageFullyLoaded();
@@ -43,9 +44,9 @@ public class TC_DJ_15 extends BaseClass {
             //Close apps details page
             waitExecuter.waitUntilElementClickable(jobsPageObject.closeAppsPageTab);
             MouseActions.clickOnElement(driver, jobsPageObject.closeAppsPageTab);
-        } catch (NoSuchElementException ex) {
+        } catch (Exception ex) {
             loggingUtils.info("No app present by this name", test);
-            loggingUtils.info("Error- " + ex, test);
+            loggingUtils.error("Error- " + ex, test);
         }
     }
 }

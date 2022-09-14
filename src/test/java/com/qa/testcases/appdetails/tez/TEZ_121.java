@@ -25,7 +25,7 @@ public class TEZ_121 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TEZ_121.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_121_verifyTezAppsWithClusterIDs(String clusterId) {
+    public void TEZ_121_verifyTezAppsWithClusterIDs(String clusterId) throws InterruptedException {
         test = extent.startTest("TEZ_121_verifyTezAppsWithClusterIDs: " + clusterId,
                 "Verify All the Tez apps run on different Clusters must have the cluster ID.");
         test.assignCategory(" Apps Details-Tez");

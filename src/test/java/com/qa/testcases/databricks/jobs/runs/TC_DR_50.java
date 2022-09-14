@@ -45,8 +45,8 @@ public class TC_DR_50 extends BaseClass {
             // Navigate to Runs tab from header
             test.log(LogStatus.INFO, "Navigate to jobs tab from header");
             test.log(LogStatus.INFO, "Select last 7 days");
-            dballApps.inJobsSelectClusterAndLast7Days();
-            waitExecuter.sleep(2000);
+            dballApps.inJobsSelectClusterAndLast30Days();
+            waitExecuter.waitForSeconds(10);
             /*
              * Validate All columns  types are --
 
@@ -57,7 +57,7 @@ public class TC_DR_50 extends BaseClass {
             List<String> existingStatusTypes = new ArrayList<>(Arrays.asList(PageConstants.columnsType.COLUMNSTYPE));
             List<WebElement> statusTypes = dbpageObject.getColumnsTypesFinishedTab;
             List<String> listOfStatusTypes = new ArrayList<String>();
-            waitExecuter.sleep(2000);
+            waitExecuter.waitForSeconds(30);
             for (int i = 0; i < statusTypes.size(); i++) {
                 listOfStatusTypes.add(statusTypes.get(i).getText().trim());
             }
@@ -67,7 +67,7 @@ public class TC_DR_50 extends BaseClass {
             Assert.assertTrue(listOfStatusTypes.equals(existingStatusTypes),
                     "Columns types displayed does not match the expected Table list");
             test.log(LogStatus.PASS, "Columns types displayed match the expected Table list");
-        } catch (NoSuchElementException ex) {
+        } catch (NoSuchElementException | InterruptedException ex) {
             loggingUtils.error("No app present by this name", test);
             loggingUtils.error("Error- " + ex, test);
         }

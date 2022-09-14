@@ -293,7 +293,7 @@ public class DbAllApps {
     public String verifyCost(DbxSubTopPanelModulePageObject dballApps, ExtentTest test) {
         double sum =0.00;
         String cost = dballApps.costValue.getText().trim();
-        String costValue = cost.replaceAll("[^\\d-]", "");
+        String costValue = cost.replaceAll("[^\\d.]+", "");
         String costDbu = dballApps.costDbu.getText().trim();
         String costDbuValue = costDbu.replaceAll("[^\\d-]", "");
         logger.info("cost is " + costValue);
@@ -307,7 +307,7 @@ public class DbAllApps {
         String appCost = dballApps.appCost.getText().trim();
         String appCostValue = appCost.replaceAll("[^\\d.]+", "");
         String appCostDbu = dballApps.appCostDbu.getText().trim();
-        String appCostDbuValue = appCostDbu.replaceAll("\"\\\\.\",\"\"", "");
+        String appCostDbuValue = appCostDbu.replaceAll("[^\\d-]", "");
         test.log(LogStatus.PASS, "cost value in summary page is " + costValue);
         test.log(LogStatus.PASS, "cost DBU value in  summary page is " + costDbu);
         Assert.assertEquals(costValue, appCostValue, "Runs Cost is not displayed in the Header");

@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.pagefactory.cloud.databricks.DataPageObject;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
 import com.qa.utils.LoggingUtils;
+import com.qa.utils.WaitExecuter;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -13,18 +14,18 @@ import org.testng.annotations.Test;
 /**
  * @author Ankur Jaiswal
  */
-
 @Marker.DbxDataTables
 @Marker.GCPDataTables
 public class TC_DBX_DT_53 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(description = "Validate the Parent App column of the table detail.")
-    public void validateParentAppColumnApplicationsTable() {
+    public void validateParentAppColumnApplicationsTable() throws InterruptedException {
         test = extent.startTest("TC_DBX_DT_53.validateParentAppColumnApplicationsTable",
-            "Validate the Parent App column of the table detail.");
+                "Validate the Parent App column of the table detail.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
+        WaitExecuter executor = new WaitExecuter(driver);
         dataTablesHelper.clickOnDataTab();
         dataTablesHelper.clickOnDataTablesTab();
         dataTablesHelper.selectWorkspaceForConfiguredMetastore();
@@ -33,18 +34,26 @@ public class TC_DBX_DT_53 extends BaseClass {
         try {
             dataTablesHelper.clickOnTabOnTableDetails("Applications");
             dataTablesHelper.selectAllApplicationsColumn();
-            String expectedClusterId = dataPageObject.tableRows.get(0).findElements(By.tagName("td")).get(6).getText();
+            executor.waitForSeconds(5);
+            String expectedClusterId = dataPageObject.tableRows.get(0).findElements(By.tagName("td")).get(5).getText();
+            loggingUtils.pass("Correct applicationId or clusterId are displayed" + expectedClusterId, test);
             String expectedApplicationId = dataPageObject.applicationId.getText();
-            dataTablesHelper.clickOnParentAppOfNthRow(0);
+            loggingUtils.pass("Correct applicationId or clusterId are displayed" + expectedApplicationId, test);
+            dataTablesHelper.clickOnParentApp(0);
             String applicationDetailsHeading = dataPageObject.applicationDetailsHeading.getText();
+            loggingUtils.pass("Correct applicationId or clusterId are displayed" + applicationDetailsHeading, test);
+            executor.waitForSeconds(5);
             Assert.assertTrue(applicationDetailsHeading.contains(expectedClusterId) &&
-                applicationDetailsHeading.contains(expectedApplicationId), "Incorrect applicationId or clusterId are" +
-                "displayed");
+                    applicationDetailsHeading.contains(expectedApplicationId), "Incorrect applicationId or clusterId are" +
+                    "displayed");
             loggingUtils.pass("Correct applicationId or clusterId are displayed", test);
-        } catch (Exception e) {
-            loggingUtils.error("Exception occured " +e.getStackTrace(),test);
             dataTablesHelper.closeApplicationDetailsPage();
             dataTablesHelper.backToTablesPage();
+        } catch (Exception e) {
+            executor.waitForSeconds(5);
+            dataTablesHelper.closeApplicationDetailsPage();
+            dataTablesHelper.backToTablesPage();
+            loggingUtils.error("Exception occured " + e.getStackTrace(), test);
         }
     }
 }

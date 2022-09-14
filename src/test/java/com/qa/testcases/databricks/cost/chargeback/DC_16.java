@@ -20,7 +20,7 @@ public class DC_16 extends BaseClass{
 	private static final Logger LOGGER = Logger.getLogger(DC_16.class.getName());
 	
 	@Test
-	public void TC_Cost_CB_16_VerifyCopyUrlFunctionality() {
+	public void TC_Cost_CB_16_VerifyCopyUrlFunctionality() throws InterruptedException {
 		test = extent.startTest("TC_Cost_CB_16_VerifyCopyUrlFunctionality", "Verify Copy URL functionality");
 		test.assignCategory("Cost/Chargeback");
 		Log.startTestCase("TC_Cost_CB_16_VerifyCopyUrlFunctionality");
@@ -35,7 +35,7 @@ public class DC_16 extends BaseClass{
 		datePicker.selectLast30Days();
 		jobs.selectGroupByFilterValue("Cluster");
 		String url = chargeBackCluster.selectCopyUrl();
-		waitExecuter.sleep(2000);
+		waitExecuter.waitForSeconds(3);
 		LOGGER.info("URL copied");
 		driver.navigate().to(url);
 		waitExecuter.sleep(4000);

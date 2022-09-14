@@ -19,7 +19,7 @@ public class MR_060 extends BaseClass {
     java.util.logging.Logger logger = Logger.getLogger(MR_060.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_060_verifyErrorsTab(String clusterId) {
+    public void MR_060_verifyErrorsTab(String clusterId) throws InterruptedException {
         test = extent.startTest("MR_060_verifyErrorsTab: " + clusterId,
                 "Verify errors should be populated in the UI");
         test.assignCategory(" Apps Details-Mr");

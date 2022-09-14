@@ -17,7 +17,7 @@ public class TC_DBX_DT_12 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_12.class);
 
     @Test(description = "Validate whether user is able to change the setting of label by making changes in Age")
-    public void verifyTablesDisplayedIfChangedAge() {
+    public void verifyTablesDisplayedIfChangedAge() throws InterruptedException {
         test = extent.startTest("TC_DBX_DT_12.verifyTablesDisplayedIfChangedAge", "Validate whether user is able" +
                 " to change the setting of label by making changes in Age");
         test.assignCategory("Databricks - Data");

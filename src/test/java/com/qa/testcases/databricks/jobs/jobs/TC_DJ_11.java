@@ -16,12 +16,12 @@ import org.testng.annotations.Test;
 @Marker.DbxJobs
 @Marker.All
 public class TC_DJ_11 extends BaseClass {
-    private final LoggingUtils loggingUtils = new LoggingUtils(TC_DJ_10.class);
+    private final LoggingUtils loggingUtils = new LoggingUtils(TC_DJ_11.class);
 
     @Test()
-    public void validateRunCount() {
-        test = extent.startTest("TC_DJ_10.validateRunCount",
-                "Verify Run Count are listed on the application page");
+    public void validateDuration() {
+        test = extent.startTest("TC_DJ_11.validateDuration",
+                "Verify duration are listed on the application page");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -50,9 +50,9 @@ public class TC_DJ_11 extends BaseClass {
             MouseActions.clickOnElement(driver, jobsPageObject.closeIcon);
             waitExecuter.sleep(3000);
 
-        } catch (NoSuchElementException ex) {
+        } catch (Exception ex) {
             loggingUtils.info("No app present by this name", test);
-            loggingUtils.info("Error- " + ex, test);
+            loggingUtils.error("Error- " + ex, test);
         }
     }
 }

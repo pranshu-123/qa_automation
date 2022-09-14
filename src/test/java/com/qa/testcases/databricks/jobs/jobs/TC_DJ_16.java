@@ -43,7 +43,7 @@ public class TC_DJ_16 extends BaseClass {
             test.log(LogStatus.PASS, "Verified the Analysis tab successfully");
         } catch (NoSuchElementException ex) {
             logger.info("No app present by this name", test);
-            logger.info("Error- " + ex, test);
+            logger.error("Error- " + ex, test);
         }
     }
 }

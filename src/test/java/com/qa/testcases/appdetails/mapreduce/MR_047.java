@@ -39,7 +39,7 @@ public class MR_047 extends BaseClass {
     org.slf4j.Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mapreduce.MR_046.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_047_verifyMRJobsSummary(String clusterId) {
+    public void MR_047_verifyMRJobsSummary(String clusterId) throws InterruptedException {
         test = extent.startTest("MR_047_verifyMRJobsSummary: " + clusterId,
                 "Verify job summary must be defined based the actual state of the apps");
         test.assignCategory(" Apps Details-Mr");

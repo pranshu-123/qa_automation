@@ -16,7 +16,7 @@ public class TC_DBX_DT_25 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_25.class);
 
     @Test(description = "Validate whether user is able to filter data with Size column value.")
-    public void verifyTableDataFilterBySizeColumn() {
+    public void verifyTableDataFilterBySizeColumn() throws InterruptedException {
         test = extent.startTest("TC_DBX_DT_25.verifyTableDataFilterBySizeColumn", "Validate whether user is able to filter data " +
             "with Size column value.");
         test.assignCategory("Databricks - Data");

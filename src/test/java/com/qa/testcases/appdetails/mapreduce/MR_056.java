@@ -31,7 +31,7 @@ public class MR_056 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mapreduce.MR_056.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_056_verifycontainersGraphs(String clusterId) {
+    public void MR_056_verifycontainersGraphs(String clusterId) throws InterruptedException {
         test = extent.startTest("MR_056_verifycontainersGraphs: " + clusterId,
                 "Verify the number of containers plotted aganist the time");
         test.assignCategory(" Apps Details-Mr");

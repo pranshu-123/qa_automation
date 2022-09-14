@@ -238,7 +238,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[2]")
     public List<WebElement> getStatusColumnFromTable;
 
-    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[4]/a[1]")
+    @FindBy(xpath = "//*[@id = 'allApps']//tr/td[4]//div[1]/span[1]")
     public WebElement copyAppName;
 
     @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[4]")
@@ -253,7 +253,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//a[contains(@class,'icon-sort-sorted-up')]")
     public WebElement sortUp;
 
-    @FindBy(xpath = "//*[@id=\"allApps-head\"]/tr/th[12]/a")
+    @FindBy(xpath = "//*[@id=\"allApps-head\"]/tr/th[11]/a")
     public WebElement sortByParentApp;
 
     @FindBy(xpath = "//*[@id=\"allApps-head\"]/tr/th[2]/a")
@@ -374,7 +374,7 @@ public class ApplicationsPageObject {
     @FindBy(xpath = "//button[@class='close']")
     public WebElement closeIcon;
 
-    @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[4]/a[2]")
+    @FindBy(xpath = "//*[@id='app']//*[@class='applist-id']")
     public WebElement clickOnAppId;
 
     @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[4]")

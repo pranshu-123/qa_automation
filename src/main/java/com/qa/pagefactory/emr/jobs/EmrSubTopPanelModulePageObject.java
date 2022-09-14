@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 
 public class EmrSubTopPanelModulePageObject {
-    @FindBy(xpath = "//span[contains(@class,'icon-jobs')]")
+    @FindBy(xpath = "//*[@id='app']//span[normalize-space()='Jobs']")
     public WebElement jobs;
 
     @FindBy(xpath = "//span[text()='Jobs']")

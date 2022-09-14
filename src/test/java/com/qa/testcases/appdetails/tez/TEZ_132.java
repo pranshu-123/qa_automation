@@ -29,7 +29,7 @@ public class TEZ_132 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TEZ_130.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_132_VerifyTheConfiguration(String clusterId) {
+    public void TEZ_132_VerifyTheConfiguration(String clusterId) throws InterruptedException {
         test = extent.startTest("TEZ_132_VerifyTheConfiguration: " + clusterId,
                 "Verify the configuration tab must be populated");
         test.assignCategory(" Apps Details-Tez");

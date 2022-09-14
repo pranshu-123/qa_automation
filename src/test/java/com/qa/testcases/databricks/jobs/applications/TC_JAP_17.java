@@ -17,7 +17,7 @@ public class TC_JAP_17 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_JAP_17.class);
 
     @Test()
-    public void TC_JAP_17_verifyTimingsTab() {
+    public void TC_JAP_17_verifyTimingsTab() throws InterruptedException {
         test = extent.startTest("TC_JAP_17.verifyTimingsTab",
                 "Verify 1. All the spark apps must be listed on the UI\n" +
                         " 2. left pane must have spark check box and the apps number\n" +

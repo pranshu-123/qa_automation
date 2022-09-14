@@ -38,13 +38,14 @@ public class TC_DBX_DT_59 extends BaseClass {
         try {
             dataTablesHelper.clickOnTabOnTableDetails("Applications");
             dataTablesHelper.selectAllApplicationsColumn();
-            dataTablesHelper.clickOnParentAppOfNthRow(0);
+            dataTablesHelper.clickOnParentApp(0);
             actions.performActionWithPolling(dataPageObject.navigationTabApplicationDetailsPage, UserAction.CLICK);
             List<String> headings = dataPageObject.tableHeadings.stream().map(heading -> heading.getText().trim())
                 .collect(Collectors.toList()).subList(0, dataPageObject.tableHeadings.size()-1);
             List<String> expectedHeadings = Arrays.asList("Type","Id","Start Time", "Duration", "I/O");
             Assert.assertEquals(headings, expectedHeadings, "Mismatch in table headings");
             loggingUtils.pass("Verified the table in navigation details.", test);
+            dataTablesHelper.closeApplicationDetailsPage();
         } finally {
             dataTablesHelper.closeApplicationDetailsPage();
             dataTablesHelper.backToTablesPage();

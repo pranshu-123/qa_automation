@@ -18,7 +18,6 @@ import java.util.List;
 
 @Marker.All
 @Marker.ClusterWorkload
-@Marker.GCPClusterWorkload
 public class TC_CTP_06 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_CTP_06.class);
 

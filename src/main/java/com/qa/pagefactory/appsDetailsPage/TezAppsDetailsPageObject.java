@@ -9,7 +9,7 @@ import java.util.List;
 
 public class TezAppsDetailsPageObject {
 
-    @FindBy(xpath = "//tbody[@id='allApps-body']/tr[1]/td[4]/a[2]")
+    @FindBy(xpath = "//*[@id='app']//*[@class='applist-id']")
     public WebElement getAppId;
 
     @FindBy(xpath = "(//a[@class='sorting icon-sort'])[8]")
@@ -46,12 +46,17 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id='allApps-body']/tr/td[2]")
     public WebElement Status;
 
-    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr/td[9]")
+    @FindBy(xpath = "//*[@id='app']//tr/td[8]")
     public WebElement queueJobsPage;
 
-    @FindBy(xpath = "//*[@id='app']//div[1]/div[2]/span[3]")
+    @FindBy(xpath = "//*[@id=\"SummaryDetails\"]//div[1]/div[1]/div/h3")
     public WebElement queueAppPage;
 
+    @FindBy(xpath = "(//div[@class='timeline gantt-timeline pipeline row no-gutters'])//span[2]")
+    public WebElement ganttChartStartTime;
+
+    @FindBy(xpath = "//span[@class='start'][1]")
+    public WebElement appStartTime;
 
     @FindBy(xpath = "//*[@id=\"app\"]/div/div/div[1]/div[2]/span[1]")
     public WebElement clusterAppPage;
@@ -62,10 +67,10 @@ public class TezAppsDetailsPageObject {
     @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[1]")
     public WebElement getTypeFromTable;
 
-    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[4]/span[1]")
+    @FindBy(xpath = "//*[@id='app']//tr/td[4]/div[1]/div[1]/span[1]")
     public WebElement getAppname;
 
-    @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[4]/span[1]")
+    @FindBy(xpath = "//*[@id='app']//tr/td[4]/div[1]/div[1]/span[1]")
     public WebElement getAppnameToolTips;
 
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[4]/span[1]")
@@ -104,7 +109,7 @@ public class TezAppsDetailsPageObject {
     @FindBy(css = "button.close")
     public WebElement closeAppsPageTab;
 
-    @FindBy(xpath = "//a[@href='#/clusters/overview']")
+    @FindBy(css = "a.home-link")
     public WebElement homeTab;
 
     @FindBy(xpath = "//span[(text()='Insights')]//following-sibling::a[contains(@class,'sorting')]")
@@ -171,9 +176,6 @@ public class TezAppsDetailsPageObject {
 
     @FindBy(xpath = "(//div[@class='timeline gantt-timeline pipeline row no-gutters'])//span[1]")
     public List<WebElement> ganttChartJobId;
-
-    @FindBy(xpath = "(//div[@class='timeline gantt-timeline pipeline row no-gutters'])//span[2]")
-    public List<WebElement> ganttChartStartTime;
 
     @FindBy(xpath = "(//span[contains(@class,'start')])")
     public WebElement startTime;

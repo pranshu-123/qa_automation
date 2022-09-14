@@ -32,15 +32,16 @@ public class TC_DBX_DT_66 extends BaseClass {
         UserActions userActions = new UserActions(driver);
         try {
             dataTablesHelper.clickOnTabOnTableDetails("Applications");
-            dataTablesHelper.clickOnParentAppOfNthRow(0);
+            dataTablesHelper.clickOnParentApp(0);
             userActions.performActionWithPolling(dataPageObject.tagsTabApplicationDetails, UserAction.CLICK);
             if(dataPageObject.noTagsFoundElements.size() == 0) {
                 loggingUtils.pass("Tags data displayed.", test);
             } else {
                 loggingUtils.warning("Tags data are not displayed. Please verify manually", test);
             }
-        } finally {
             dataTablesHelper.closeApplicationDetailsPage();
+        } finally {
+
             dataTablesHelper.backToTablesPage();
         }
     }

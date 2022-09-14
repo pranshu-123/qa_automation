@@ -31,7 +31,7 @@ public class TEZ_130 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TEZ_130.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_130_verifytheTablesTab(String clusterId) {
+    public void TEZ_130_verifytheTablesTab(String clusterId) throws InterruptedException {
         test = extent.startTest("TEZ_130_verifytheTablesTab: " + clusterId,
                 "Verify Tables accessed by the query must be populated");
         test.assignCategory(" Apps Details-Tez");

@@ -27,7 +27,7 @@ public class TEZ_124 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TEZ_124.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_124_verifyKPIsAreListed(String clusterId) {
+    public void TEZ_124_verifyKPIsAreListed(String clusterId) throws InterruptedException {
         test = extent.startTest("TEZ_124_verifyKPIsAreListed: " + clusterId,
                 "Verify listed and the values are populated");
         test.assignCategory(" Apps Details-Tez");
@@ -65,10 +65,10 @@ public class TEZ_124 extends BaseClass {
             test.log(LogStatus.PASS, "Tez Application Id is displayed in the Header: " + headerAppId);
 
             tezDetailsPage.validateHeaderTab(tezApps,test);
-            waitExecuter.sleep(4000);
+            waitExecuter.waitForSeconds(5);
             //Close apps details page
             MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
-            waitExecuter.sleep(3000);
+            waitExecuter.waitForSeconds(5);
 
 
 

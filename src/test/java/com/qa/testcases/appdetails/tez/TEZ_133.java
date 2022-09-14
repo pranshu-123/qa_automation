@@ -31,7 +31,7 @@ public class TEZ_133 extends BaseClass {
     private static final java.util.logging.Logger LOGGER = Logger.getLogger(TEZ_133.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_133_verifyDatabase(String clusterId) {
+    public void TEZ_133_verifyDatabase(String clusterId) throws InterruptedException {
         test = extent.startTest("TEZ_133_verifyDatabase: " + clusterId,
                 "Verify Name of the database must be listed in the UI");
         test.assignCategory(" Apps Details-Tez");

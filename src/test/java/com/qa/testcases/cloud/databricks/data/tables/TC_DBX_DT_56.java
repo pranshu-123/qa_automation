@@ -39,14 +39,14 @@ public class TC_DBX_DT_56 extends BaseClass {
         try {
             dataTablesHelper.clickOnTabOnTableDetails("Applications");
             dataTablesHelper.selectAllApplicationsColumn();
-            dataTablesHelper.clickOnParentAppOfNthRow(0);
+            dataTablesHelper.clickOnParentApp(0);
             WebElement leftChartElement = dataPageObject.applicationDetailsPageCharts.get(0);
             File leftGraphImg = screenshotHelper.takeScreenshotOfElement(driver, leftChartElement, 0);
             Boolean ifContainsColor = ImageUtils.isImageContainsColor(leftGraphImg, new int[]{44, 199, 23});
             Assert.assertTrue(ifContainsColor, "Graph not loaded with data");
             loggingUtils.pass(String.format("Graph loaded: %s", ifContainsColor), test);
-        } finally {
             dataTablesHelper.closeApplicationDetailsPage();
+        } finally {
             dataTablesHelper.backToTablesPage();
         }
     }

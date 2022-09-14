@@ -26,7 +26,7 @@ public class TEZ_131 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TEZ_130.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_131_VerifyTheTags(String clusterId) {
+    public void TEZ_131_VerifyTheTags(String clusterId) throws InterruptedException {
         test = extent.startTest("TEZ_131_VerifyTheTags: " + clusterId,
                 "Verify Tags needs to be populated randomly");
         test.assignCategory(" Apps Details-Tez");

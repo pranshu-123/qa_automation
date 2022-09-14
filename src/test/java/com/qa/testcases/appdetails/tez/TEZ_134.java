@@ -27,7 +27,7 @@ public class TEZ_134 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TEZ_134.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_134_verifyLeftPane(String clusterId) {
+    public void TEZ_134_verifyLeftPane(String clusterId) throws InterruptedException {
         test = extent.startTest("TEZ_134_verifyLeftPane: " + clusterId,
                 "Verify left pane in the app details page");
         test.assignCategory(" Apps Details-Tez");

@@ -25,7 +25,7 @@ public class MR_007 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mapreduce.MR_006.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_007_verifyApplicationStatus(String clusterId) {
+    public void MR_007_verifyApplicationStatus(String clusterId) throws InterruptedException {
         test = extent.startTest("MR_007_VerifyApplicationStatus: " + clusterId,
                 "Verify App status must be defined compared to yarn status");
         test.assignCategory(" Apps Details-Mr");

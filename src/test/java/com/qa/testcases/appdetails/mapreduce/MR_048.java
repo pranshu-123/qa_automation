@@ -24,7 +24,7 @@ public class MR_048 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mapreduce.MR_048.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_048_verifyMRAppsKPIs(String clusterId) {
+    public void MR_048_verifyMRAppsKPIs(String clusterId) throws InterruptedException {
         test = extent.startTest("MR_048_verifyMRAppsKPIs: " + clusterId,
                 "Verify KPI for MR must be listed and all the values should be populated");
         test.assignCategory(" Apps Details-Mr");

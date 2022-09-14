@@ -21,7 +21,7 @@ public class TC_DJ_03 extends BaseClass {
 
     @Test()
     public void validateJobsStatus() {
-        test = extent.startTest("TC_DR_05.validateJobsStatus",
+        test = extent.startTest("TC_DJ_03.validateJobsStatus",
                 "Verify jobs status jobs are listed on the page");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
@@ -52,9 +52,9 @@ public class TC_DJ_03 extends BaseClass {
             MouseActions.clickOnElement(driver, jobsPageObject.closeIcon);
             waitExecuter.sleep(3000);
 
-        } catch (NoSuchElementException ex) {
+        } catch (Exception ex) {
             loggingUtils.info("No app present by this name", test);
-            loggingUtils.info("Error- " + ex, test);
+            loggingUtils.error("Error- " + ex, test);
         }
     }
 }

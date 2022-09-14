@@ -17,7 +17,7 @@ public class TC_DBX_DT_18 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_17.class);
 
     @Test(description = "Validate whether user is able to filter data with Owner column value.")
-    public void verifyTableDataFilterByOwnerColumn() {
+    public void verifyTableDataFilterByOwnerColumn() throws InterruptedException {
         test = extent.startTest("TC_DBX_DT_18.verifyTableDataFilterByOwnerColumn", "Validate whether user is able to filter data " +
             "with owner column value.");
         test.assignCategory("Databricks - Data");

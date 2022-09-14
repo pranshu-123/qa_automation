@@ -16,7 +16,6 @@ import java.io.File;
 /**
  * @author Ankur Jaiswal
  */
-
 @Marker.DbxDataTables
 @Marker.GCPDataTables
 public class TC_DBX_DT_33 extends BaseClass {
@@ -24,7 +23,7 @@ public class TC_DBX_DT_33 extends BaseClass {
 
     @Test(description = "Validate whether Apps graph is updated when different rows are selected from table details.")
     public void verifyAppsGraphWithDifferentTables() {
-        test = extent.startTest("TC_DBX_DT_33.verifyAppsGraphWithDifferentTables", "Validate whether Apps graph is updated when" +
+        test = extent.startTest("verifyAppsGraphWithDifferentTables", "Validate whether Apps graph is updated when" +
             " different rows are selected from table details.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
@@ -34,11 +33,13 @@ public class TC_DBX_DT_33 extends BaseClass {
         DataPageObject dataPageObject = new DataPageObject(driver);
         UserActions actions = new UserActions(driver);
         if (dataPageObject.tableRows.size() > 1) {
-            actions.performActionWithPolling(dataPageObject.tableRows.get(1).findElement(By.cssSelector("td.border-warm > label > span.checkmark")),
+            actions.performActionWithPolling(dataPageObject.tableRows.get(1).findElement
+                            (By.xpath("//div[@class='filter-items']//div[2]//p[1]//label[1]//span[1]")),
                 UserAction.CLICK);
             File screenshot1 = ScreenshotHelper.takeScreenshotOfElement(driver,
                 dataPageObject.displayedGraphs.get(1), 0);
-            actions.performActionWithPolling(dataPageObject.tableRows.get(2).findElement(By.cssSelector("td.border-warm > label > span.checkmark")),
+            actions.performActionWithPolling(dataPageObject.tableRows.get(2).findElement(By.xpath
+                            ("//div[@class='filter-items']//div[2]//p[1]//label[1]//span[1]")),
                 UserAction.CLICK);
             File screenshot2 = ScreenshotHelper.takeScreenshotOfElement(driver,
                 dataPageObject.displayedGraphs.get(1), 0);

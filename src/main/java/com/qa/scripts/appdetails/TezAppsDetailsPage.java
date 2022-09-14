@@ -108,7 +108,7 @@ public class TezAppsDetailsPage {
     /**
      * Method to validate AppSummary Resource tab.
      */
-    public void validateResourcesTab(TezAppsDetailsPageObject tezApps) {
+    public void validateResourcesTab(TezAppsDetailsPageObject tezApps) throws InterruptedException {
         String[] expectedGraphTitle = {"Containers", "Vcores", "Memory", "Metrics"};
         List<WebElement> graphTitleList = tezApps.resourcesGraphTitle;
         verifyAssertFalse(graphTitleList.isEmpty(), tezApps, "No title displayed");
@@ -162,7 +162,7 @@ public class TezAppsDetailsPage {
     /**
      * Method to validate AppSummary Errors tab.
      */
-    public void validateErrorsTab(TezAppsDetailsPageObject tezApps) {
+    public void validateErrorsTab(TezAppsDetailsPageObject tezApps) throws InterruptedException {
         String[] expectedErrorCategory = {"driver", "executor-1", "executor-2", "rm-diagnostics"};
         List<WebElement> errorTypeList = tezApps.errorCategories;
         verifyAssertFalse(errorTypeList.isEmpty(), tezApps, " Errors tab is not populated");
@@ -212,11 +212,13 @@ public class TezAppsDetailsPage {
         } catch (NoSuchElementException ex) {
             throw new AssertionError("Caught exception while clicking the collapsable icon for insights.\n" +
                     ex.getMessage());
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
 
-    public String validateTagsTab(TezAppsDetailsPageObject tezApps) {
+    public String validateTagsTab(TezAppsDetailsPageObject tezApps) throws InterruptedException {
         List<WebElement> tagTableHeader = tezApps.tagTableHeader;
         /*verifyAssertFalse(tagTableHeader.isEmpty(), tezApps, " Tags header is not populated");*/
         List<WebElement> tagKeyList = tezApps.tagKey;
@@ -273,7 +275,7 @@ public class TezAppsDetailsPage {
      */
     public void validateDags(int navigationRows, List<WebElement> navigationRowList,
                              TezAppsDetailsPageObject tezApps, Boolean validateExecutorTab,
-                             Boolean validateStageTabs) {
+                             Boolean validateStageTabs) throws InterruptedException {
         if (navigationRows > 0) {
             String[] expectedHeader = {"Stage ID", "Start Time", "Duration", "Tasks", "Shuffle Read",
                     "Shuffle Write", "Input", "Output"};
@@ -306,7 +308,7 @@ public class TezAppsDetailsPage {
         }
     }
 
-    public void validateTimingTab(TezAppsDetailsPageObject tezApps) {
+    public void validateTimingTab(TezAppsDetailsPageObject tezApps) throws InterruptedException {
         Actions action = new Actions(driver);
         List<WebElement> subTabList = tezApps.timingsSubTabs;
         /*Assert.assertFalse(subTabList.isEmpty(), "No sub tabs available");*/
@@ -375,7 +377,7 @@ public class TezAppsDetailsPage {
     /**
      * Method to verify the summary tabs in the right pane of the App Details page
      */
-    public String verifyDagTabs(TezAppsDetailsPageObject tezApps, String verifyTabName, ExtentTest test) {
+    public String verifyDagTabs(TezAppsDetailsPageObject tezApps, String verifyTabName, ExtentTest test) throws InterruptedException {
 
         List<WebElement> appsTabList = tezApps.appSummaryTabs;
         verifyAssertFalse(appsTabList.isEmpty(), tezApps, "No Tabs loaded");
@@ -426,7 +428,7 @@ public class TezAppsDetailsPage {
     /**
      * Method to verify the summary tabs in the right pane of the App Details page
      */
-    public String verifyAppSummaryTabs(TezAppsDetailsPageObject tezApps, String verifyTabName, ExtentTest test) {
+    public String verifyAppSummaryTabs(TezAppsDetailsPageObject tezApps, String verifyTabName, ExtentTest test) throws InterruptedException {
         waitExecuter.waitUntilPageFullyLoaded();
         List<WebElement> appsTabList = tezApps.appSummaryTabs;
         waitExecuter.waitUntilPageFullyLoaded();
@@ -487,7 +489,7 @@ public class TezAppsDetailsPage {
     /**
      * Method to verify the summary tabs in the right pane of the App Details page
      */
-    public String verifyAppDagTabs(TezAppsDetailsPageObject tezApps, String verifyTabName, ExtentTest test) {
+    public String verifyAppDagTabs(TezAppsDetailsPageObject tezApps, String verifyTabName, ExtentTest test) throws InterruptedException {
         List<WebElement> appsTabList = tezApps.appSummaryTabs;
         verifyAssertFalse(appsTabList.isEmpty(), tezApps, "No Tabs loaded");
         String tabName = "";
@@ -557,7 +559,9 @@ public class TezAppsDetailsPage {
             action.moveToElement(backButton).click().build().perform();
             waitExecuter.sleep(1000);
         } catch (NoSuchElementException | JavascriptException ex) {
-            System.out.println("The element is not present for stage " + legendName);
+            LOGGER.info("The element is not present for stage " + legendName);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -728,7 +732,7 @@ public class TezAppsDetailsPage {
      */
     public void validateStageAndStageData(int navigationRows, List<WebElement> navigationRowList,
                                           TezAppsDetailsPageObject tezApps, Boolean validateExecutorTab,
-                                          Boolean validateStageTabs) {
+                                          Boolean validateStageTabs) throws InterruptedException {
         if (navigationRows > 0) {
             String[] expectedHeader = {"Dag Id", "Start Time", "Duration", "IO", "Events"};
             //click the jobId to sort it .
@@ -763,7 +767,7 @@ public class TezAppsDetailsPage {
     /**
      * Method to validate the tabs for each job stage.
      */
-    public void validateStagesTabs(TezAppsDetailsPageObject tezApps) {
+    public void validateStagesTabs(TezAppsDetailsPageObject tezApps) throws InterruptedException {
         //click the stageId to sort it
         driver.findElement(By.xpath("//*[@id='tezStageNavigation-head']/tr/th[1]")).click();
         List<WebElement> stageRowList = tezApps.stageRows;
@@ -1045,15 +1049,15 @@ public class TezAppsDetailsPage {
      * Method to click the first app in jobs table , navigate to the details page.
      * and verify  Appid .
      */
-    public String verifyappId(TezAppsDetailsPageObject tezApps) {
+    public String verifyAppId(TezAppsDetailsPageObject tezApps) throws InterruptedException {
         WebElement Appid = tezApps.getAppid;
         Actions toolAct = new Actions(driver);
         toolAct.moveToElement(Appid).build().perform();
         WebElement AppnametoolTip = tezApps.appNameToolTip;
-        waitExecuter.sleep(3000);
+        waitExecuter.waitForSeconds(5);
         String AppIdText = AppnametoolTip.getText().trim();
         LOGGER.info("Tez Status is " + Appid);
-        waitExecuter.sleep(5000);
+        waitExecuter.waitForSeconds(5);
         waitExecuter.waitUntilPageFullyLoaded();
         Assert.assertNotSame("", Appid, "Tez App id name is not displayed in the Table");
         return AppIdText;
@@ -1063,15 +1067,15 @@ public class TezAppsDetailsPage {
      * Method to click the first app in jobs table , navigate to the details page.
      * and verify  clusterId .
      */
-    public String verifyclusterId(TezAppsDetailsPageObject tezApps) {
+    public String verifyclusterId(TezAppsDetailsPageObject tezApps) throws InterruptedException {
         WebElement Appid = tezApps.getClusterId;
         Actions toolAct = new Actions(driver);
         toolAct.moveToElement(Appid).build().perform();
         WebElement AppnametoolTip = tezApps.getClusterId;
-        waitExecuter.sleep(3000);
+        waitExecuter.waitForSeconds(5);
         String AppIdText = AppnametoolTip.getText().trim();
         LOGGER.info("Tez Status is " + Appid);
-        waitExecuter.sleep(5000);
+        waitExecuter.waitForSeconds(5);
         waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
         applicationsPageObject.clickOnAppId.click();
         waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
@@ -1085,16 +1089,16 @@ public class TezAppsDetailsPage {
      * Method to click the first app in jobs table , navigate to the details page.
      * and verify  clusterId .
      */
-    public String verifyQueueName(TezAppsDetailsPageObject tezApps) {
+    public String verifyQueueName(TezAppsDetailsPageObject tezApps) throws InterruptedException {
         String queueNameText = tezApps.queueJobsPage.getText().trim();
         LOGGER.info("Tez Status is " + queueNameText);
-        waitExecuter.sleep(3000);
+        waitExecuter.waitForSeconds(5);
         waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
         applicationsPageObject.clickOnAppId.click();
         waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
         String queueNameAppPage =tezApps.queueAppPage.getText().trim();
         LOGGER.info("Tez Status is " + queueNameAppPage);
-        waitExecuter.sleep(2000);
+        waitExecuter.waitForSeconds(5);
         waitExecuter.waitUntilPageFullyLoaded();
         Assert.assertNotSame(queueNameText, queueNameAppPage, "Tez Queue name is not displayed in the App page");
         return queueNameAppPage;
@@ -1104,58 +1108,44 @@ public class TezAppsDetailsPage {
      * Method to click the first app in jobs table , navigate to the details page.
      * and verify  starttime .
      */
-    public String verifystarttime(TezAppsDetailsPageObject tezApps) {
-        String typetarttime = tezApps.getStartTime.getText();
-        LOGGER.info("Tez Status is " + typetarttime);
-        waitExecuter.sleep(5000);
+    public String verifyStartTime(TezAppsDetailsPageObject tezApps) {
+        String typeStartTime = tezApps.getStartTime.getText();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
+        applicationsPageObject.clickOnAppId.click();
+        waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
         waitExecuter.waitUntilPageFullyLoaded();
-        Assert.assertNotSame("", typetarttime, "Tez User name is not displayed in the Table");
-        return typetarttime;
+        String appStartTime =tezApps.appStartTime.getText().trim();
+        LOGGER.info("Tez Status is " + appStartTime);
+        Assert.assertEquals(appStartTime, typeStartTime, "Tez User name is not displayed in the Table");
+        return typeStartTime;
+    }
+
+    /**
+     * Method to click the first app in jobs table , navigate to the details page.
+     * and check if the table data like start time, duration, read and write is displayed or not.
+     */
+    public void checkAppsJobTableData(String data, String colType) {
+        boolean onlySpecialChars = data.matches("[^a-zA-Z0-9]+");
+        Assert.assertFalse(data.isEmpty() || onlySpecialChars, colType + " data is not displayed in the table");
+        LOGGER.info("Data for " + colType + " is displayed in the table");
     }
 
     /**
      * Method to click the first app in jobs table , navigate to the details page.
      * and verify  duration .
      */
-    public String verifyduration(TezAppsDetailsPageObject tezApps) {
-        String typeDuration = tezApps.getduration.getText();
+    public String verifyDuration(TezAppsDetailsPageObject tezApps) throws InterruptedException {
+        String typeDuration = tezApps.getduration.getText().trim();
         LOGGER.info("Tez Status is " + typeDuration);
         waitExecuter.waitUntilElementClickable(applicationsPageObject.clickOnAppId);
         applicationsPageObject.clickOnAppId.click();
         waitExecuter.waitUntilElementClickable(applicationsPageObject.closeIcon);
         String appDuration =tezApps.queueAppPage.getText().trim();
         LOGGER.info("Tez Status is " + appDuration);
-        waitExecuter.sleep(5000);
+        waitExecuter.waitForSeconds(5);
         waitExecuter.waitUntilPageFullyLoaded();
-        Assert.assertNotSame(appDuration, typeDuration, "Tez User name is not displayed in the Table");
+        Assert.assertEquals(appDuration, typeDuration, "Tez duration is not displayed in the Table");
         return typeDuration;
-    }
-
-
-    /**
-     * Method to click the first app in jobs table , navigate to the details page.
-     * and verify  Read IO .
-     */
-    public String verifyRead(TezAppsDetailsPageObject tezApps) {
-        String ReadIO = tezApps.getRead.getText();
-        LOGGER.info("Tez Status is " + ReadIO);
-        waitExecuter.sleep(5000);
-        waitExecuter.waitUntilPageFullyLoaded();
-        Assert.assertNotSame("", ReadIO, "Tez User name is not displayed in the Table");
-        return ReadIO;
-    }
-
-    /**
-     * Method to click the first app in jobs table , navigate to the details page.
-     * and verify  Write .
-     */
-    public String verifyWrite(TezAppsDetailsPageObject tezApps) {
-        String WriteIO = tezApps.getWrite.getText();
-        LOGGER.info("Tez Status is " + WriteIO);
-        waitExecuter.sleep(5000);
-        waitExecuter.waitUntilPageFullyLoaded();
-        Assert.assertNotSame("", WriteIO, "Tez User name is not displayed in the Table");
-        return WriteIO;
     }
 
     /**
@@ -1166,7 +1156,7 @@ public class TezAppsDetailsPage {
      * Deselsects all the selected apps from the left pane on jobs page.
      */
     public void navigateToJobsTabFromHeader(SubTopPanelModulePageObject topPanelObj, AllApps allApps,
-                                            DatePicker datePicker, ApplicationsPageObject appPageObj, String clusterId) {
+                                            DatePicker datePicker, ApplicationsPageObject appPageObj, String clusterId) throws InterruptedException {
         LOGGER.info("Navigate to jobs tab from header");
         waitExecuter.waitUntilElementClickable(topPanelObj.jobs);
         MouseActions.clickOnElement(driver, topPanelObj.jobs);
@@ -1176,12 +1166,12 @@ public class TezAppsDetailsPage {
         //Select cluster
         LOGGER.info("Select Cluster: " + clusterId);
         allApps.selectCluster(clusterId);
-        waitExecuter.sleep(3000);
+        waitExecuter.waitForSeconds(5);
         datePicker.clickOnDatePicker();
-        waitExecuter.sleep(1000);
+        waitExecuter.waitForSeconds(5);
         waitExecuter.waitUntilPageFullyLoaded();
         datePicker.selectLast30Days();
-        waitExecuter.sleep(3000);
+        waitExecuter.waitForSeconds(5);
         waitExecuter.waitUntilPageFullyLoaded();
     }
 
@@ -1190,7 +1180,7 @@ public class TezAppsDetailsPage {
      *
      * @param types Types can be appType | status Type
      */
-    public int clickOnlyLink(String types) {
+    public int clickOnlyLink(String types) throws InterruptedException {
         Actions action = new Actions(driver);
         WebElement we = driver.findElement(By.xpath("(//label[contains(@class,'checkbox')])/span[contains(text(),'" + types + "')]"));
         action.moveToElement(we).moveToElement(driver.findElement(By.xpath("(//label[contains(@class,'checkbox')])" +
@@ -1199,7 +1189,7 @@ public class TezAppsDetailsPage {
                 "/span[contains(text(),'" + types + "')]/following-sibling::span[1]"));
         int appCount = Integer.parseInt(ele.getText().replaceAll("[^\\dA-Za-z ]",
                 "").trim());
-        waitExecuter.sleep(3000);
+        waitExecuter.waitForSeconds(5);
         return appCount;
     }
 
@@ -1211,7 +1201,7 @@ public class TezAppsDetailsPage {
      * tabs.
      */
     public void commonTabValidation(ExtentTest test, String clusterId, String tabName, Logger logger,
-                                                       Boolean isFailedApp) {
+                                                       Boolean isFailedApp) throws InterruptedException {
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
 
@@ -1272,7 +1262,7 @@ public class TezAppsDetailsPage {
     /**
      * Method to validate the Load Diagnostic Action
      */
-    public void verifyLoadDiagnosticAction(TezAppsDetailsPageObject tezApps) {
+    public void verifyLoadDiagnosticAction(TezAppsDetailsPageObject tezApps) throws InterruptedException {
         WebElement actionMenu = tezApps.loadAction;
         MouseActions.clickOnElement(driver, actionMenu);
         List<WebElement> elementList = tezApps.loadActionList;
@@ -1312,14 +1302,14 @@ public class TezAppsDetailsPage {
         }
     }
 
-    public void verifyAssertTrue(Boolean condition, TezAppsDetailsPageObject tezApps, String msg) {
+    public void verifyAssertTrue(Boolean condition, TezAppsDetailsPageObject tezApps, String msg) throws InterruptedException {
         try {
             Assert.assertTrue(condition, msg);
         } catch (Throwable e) {
             //Close apps details page
             if (isDignosticWin) {
                 MouseActions.clickOnElement(driver, tezApps.loadDiagnosticWinClose);
-                waitExecuter.sleep(1000);
+                waitExecuter.waitForSeconds(5);
                 MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
             } else
                 MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);

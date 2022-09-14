@@ -25,7 +25,7 @@ public class MR_053 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mapreduce.MR_051.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_053_verifyColourCode(String clusterId) {
+    public void MR_053_verifyColourCode(String clusterId) throws InterruptedException {
         test = extent.startTest("MR_053_verifyColourCode: " + clusterId,
                 "Verify if the number of maps and reduces are listed inside the chart");
         test.assignCategory(" Apps Details-Mr");

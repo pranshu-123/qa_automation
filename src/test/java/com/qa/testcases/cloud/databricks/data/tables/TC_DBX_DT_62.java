@@ -33,7 +33,7 @@ public class TC_DBX_DT_62 extends BaseClass {
         try {
             dataTablesHelper.clickOnTabOnTableDetails("Applications");
             dataTablesHelper.selectAllApplicationsColumn();
-            dataTablesHelper.clickOnParentAppOfNthRow(0);
+            dataTablesHelper.clickOnParentApp(0);
             userActions.performActionWithPolling(dataPageObject.analysisTabOnTableDetails, UserAction.CLICK);
             if(dataPageObject.noRecommendationAndInsightsElements.size() == 0) {
                 loggingUtils.pass("Recommendation and Insights displayed.", test);
@@ -41,8 +41,9 @@ public class TC_DBX_DT_62 extends BaseClass {
                 loggingUtils.info("Recommendation and Insights displayed not displayed.", test);
                 loggingUtils.warning("No recommendation and insights found. Please verify manually", test);
             }
-        } finally {
             dataTablesHelper.closeApplicationDetailsPage();
+        } finally {
+
             dataTablesHelper.backToTablesPage();
         }
     }

@@ -534,7 +534,7 @@ public class SummaryDetailsPage {
      * Selects a specific cluster Selects 90 days time interval Deselsects all the
      * selected apps from the left pane on jobs page.
      */
-    public void navigateToJobsTabFromHeader(DbAllApps dballApps, ExtentTest test) {
+    public void navigateToJobsTabFromHeader(DbAllApps dballApps, ExtentTest test) throws InterruptedException {
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
@@ -547,11 +547,7 @@ public class SummaryDetailsPage {
         test.log(LogStatus.INFO, "Navigate to jobs tab from header");
         test.log(LogStatus.INFO, "Select last 7 days");
         dballApps.select30Days();
-        waitExecuter.sleep(2000);
-        summaryPageObject.sortByDurationApp.click();
-        waitExecuter.waitUntilPageFullyLoaded();
-        summaryPageObject.sortUp.click();
-        waitExecuter.sleep(2000);
+        waitExecuter.waitForSeconds(5);
     }
 
 
@@ -707,11 +703,11 @@ public class SummaryDetailsPage {
                     break;
                 case 2:
                     try {
-                        Assert.assertEquals(tabName, "Total jobs: "+ navigationRows, "Jobs text not present");
+                        Assert.assertEquals(tabName, "Total job: "+ navigationRows, "Jobs text not present");
                         String[] jobCountArr = componentList.get(j).getText().split("\\s");
                         int jobCnt = Integer.parseInt(jobCountArr[0]);
                         Assert.assertEquals(jobCnt, navigationRows, "JobCnt and navigation rows donot match");
-                        logger.info("Total job" + jobCnt);
+                        logger.info("Total job"+ jobCnt);
                     } catch (NumberFormatException e) {
                         e.printStackTrace();
                         break;
@@ -994,7 +990,7 @@ public class SummaryDetailsPage {
      * selected App click on it and go to apps details page Verify specific summary
      * tabs.
      */
-    public void commonSetupCodeForSumarryTabValidation(ExtentTest test, String tabName, Logger logger, Boolean isFailedApp) {
+    public void commonSetupCodeForSumarryTabValidation(ExtentTest test, String tabName, Logger logger, Boolean isFailedApp) throws InterruptedException {
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
 

@@ -60,7 +60,7 @@ public class TC_JAP_05 extends BaseClass {
                 test.log(LogStatus.SKIP, "No Spark Application present");
                 logger.error("No Job Application present in the last 30 days");
             }
-        } catch (NoSuchElementException ex) {
+        } catch (NoSuchElementException | InterruptedException ex) {
             logger.info("No app present by this name");
             logger.info("Error- " + ex);
         }

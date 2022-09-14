@@ -30,7 +30,7 @@ public class MR_050 extends BaseClass {
 
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_050_verifyAnalysisTab(String clusterId) {
+    public void MR_050_verifyAnalysisTab(String clusterId) throws InterruptedException {
         test = extent.startTest("MR_050_verifyClusterFilter: " + clusterId,
                 "Verify Collapsable tabs on Recommendations and effeciency must be listed");
         test.assignCategory(" Apps Details-Mr");

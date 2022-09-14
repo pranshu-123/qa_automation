@@ -26,7 +26,7 @@ public class TEZ_008 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TEZ_008.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_008_verifyDataIO(String clusterId) {
+    public void TEZ_008_verifyDataIO(String clusterId) throws InterruptedException {
         test = extent.startTest("TEZ_008_verifyDataIO: " + clusterId,
                 "Verify Data IO must be present for apps that access the data.");
         test.assignCategory(" Apps Details-Tez");
@@ -59,23 +59,22 @@ public class TEZ_008 extends BaseClass {
                 "displayed in the header");
 
         /*
-         * Validate the start time types are --
+         * Validate the start time and duration types are --
          */
         if (appCount > 0) {
-            String Read = tezDetailsPage.verifyRead(tezApps);
-            test.log(LogStatus.PASS, "Read IO is displayed in the Tez Table: " + Read);
+            String startTime = tezApps.getStartTime.getText();
+            tezDetailsPage.checkAppsJobTableData(startTime, "Start Time");
+            test.log(LogStatus.PASS, "Start time is displayed in the Map Reduce Table: " + startTime);
 
-            String Write = tezDetailsPage.verifyWrite(tezApps);
-            test.log(LogStatus.PASS, "Write IO is displayed in the Tez Table: " + Write);
+            String duration = tezApps.getduration.getText();
+            tezDetailsPage.checkAppsJobTableData(duration, "Duration");
+            test.log(LogStatus.PASS, "Duration is displayed in the Map Reduce Table: " + duration);
 
-        } else {
-            test.log(LogStatus.SKIP, "No Tez Application present");
+            test.log(LogStatus.SKIP, "No Map Reduce Application present");
             logger.error("No Tez Application present in the " + clusterId + " cluster for the time span " +
                     "of 90 days");
-
-
+            //Close apps details page
+            MouseActions.clickOnElement(driver, tezApps.closeAppsPageTab);
         }
-        //Close apps details page
-        MouseActions.clickOnElement(driver, tezApps.homeTab);
     }
 }

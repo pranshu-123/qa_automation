@@ -18,7 +18,7 @@ public class TC_JAP_15 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_JAP_15.class);
 
     @Test()
-    public void TC_JAP_15_verifyProgramsTab() {
+    public void TC_JAP_15_verifyProgramsTab() throws InterruptedException {
         test = extent.startTest("TC_JAP_15.verifyProgramsTab",
                 "Verify Program tab must be loaded on the UI and data should be available");
         test.assignCategory("Apps Details-Spark");

@@ -26,7 +26,7 @@ public class TC_JIA01 extends BaseClass {
      * Verify User is able to access Jobs / InEfficient Apps and Verify datepicker filter in UI
      */
     @Test(dataProvider = "clusterid-data-provider")
-    public void TC_JIA01_verifyDatePicker(String clusterId) {
+    public void TC_JIA01_verifyDatePicker(String clusterId) throws InterruptedException {
         test = extent.startTest("TC_JIA01_verifyDatePicker" + clusterId, "Verify the calender time");
         test.assignCategory(" Jobs / InEfficient Apps");
 
@@ -37,12 +37,12 @@ public class TC_JIA01 extends BaseClass {
         //Click on Jobs tab
         SubTopPanelModulePageObject subTopPanelModulePageObject = new SubTopPanelModulePageObject(driver);
         UserActions actions = new UserActions(driver);
-        waitExecuter.sleep(2000);
+        waitExecuter.waitForSeconds(3);
         actions.performActionWithPolling(subTopPanelModulePageObject.jobs, UserAction.CLICK);
 
         //Click on inefficientApps tab
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
-        waitExecuter.sleep(2000);
+        waitExecuter.waitForSeconds(3);
         applicationsPageObject.inefficientApps.click();
 
         //Click on date picker

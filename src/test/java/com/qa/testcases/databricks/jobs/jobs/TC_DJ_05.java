@@ -57,9 +57,9 @@ public class TC_DJ_05 extends BaseClass {
             MouseActions.clickOnElement(driver, jobsPageObject.closeIcon);
             waitExecuter.sleep(3000);
 
-        } catch (NoSuchElementException ex) {
+        } catch (Exception ex) {
             loggingUtils.info("No app present by this name", test);
-            loggingUtils.info("Error- " + ex, test);
+            loggingUtils.error("Error- " + ex, test);
         }
     }
 }

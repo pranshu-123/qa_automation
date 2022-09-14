@@ -28,7 +28,7 @@ public class TEZ_128 extends BaseClass {
     private static final java.util.logging.Logger LOGGER = Logger.getLogger(TEZ_133.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_128_verifyTheAnalysisTab(String clusterId) {
+    public void TEZ_128_verifyTheAnalysisTab(String clusterId) throws InterruptedException {
         test = extent.startTest("TEZ_128_verifyTheAnalysisTab: " + clusterId,
                 "Verify App details should have the Analysis tab and the app events must be captured");
         test.assignCategory(" Apps Details-Tez");

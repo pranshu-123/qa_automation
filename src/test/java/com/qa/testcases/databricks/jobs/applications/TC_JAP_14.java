@@ -17,7 +17,7 @@ public class TC_JAP_14 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_JAP_14.class);
 
     @Test()
-    public void TC_JAP_14_verifyTagsTab() {
+    public void TC_JAP_14_verifyTagsTab() throws InterruptedException {
         test = extent.startTest("TC_JAP_14.verifyTagsTab",
                 "Verify that the Tags tab contains tags in form of key value pair");
         test.assignCategory("Apps Details-Spark");

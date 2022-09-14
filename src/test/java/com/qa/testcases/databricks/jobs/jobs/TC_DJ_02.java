@@ -25,7 +25,7 @@ public class TC_DJ_02 extends BaseClass {
 
     @Test()
     public void VerifyDatepickerInUI() {
-        test = extent.startTest("TC_DR_01.validateFilterByClusterName",
+        test = extent.startTest("TC_DJ_02.validateFilterByClusterName",
                 "Verify datepicker filter in UI");
         test.log(LogStatus.INFO, "Login to the application");
         // Initialize all classes objects

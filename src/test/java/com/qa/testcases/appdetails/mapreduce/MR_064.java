@@ -23,7 +23,7 @@ public class MR_064 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mapreduce.MR_064.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_064_verifySearchBox(String clusterId) {
+    public void MR_064_verifySearchBox(String clusterId) throws InterruptedException {
         test = extent.startTest("MR_064_verifySearchBox: " + clusterId,
                 "Verify type the property in the search box");
         test.assignCategory(" Apps Details-Mr");
@@ -49,11 +49,11 @@ public class MR_064 extends BaseClass {
         if (totalMapReduceAppCnt > 0) {
             applicationsPageObject.expandStatus.click();
             appCount = mrDetailsPage.clickOnlyLink("Success");
-            waitExecuter.sleep(2000);
+            waitExecuter.waitForSeconds(4);
             mrApps.sortByDurationApp.click();
             waitExecuter.waitUntilPageFullyLoaded();
             mrApps.sortUp.click();
-            waitExecuter.sleep(2000);
+            waitExecuter.waitForSeconds(4);
             //Clicking on the Map reduce app must go to apps detail page and verify Data Tabs must be available on UI
             if (appCount > 0) {
                 String headerAppId = mrDetailsPage.verifyAppId(mrApps, applicationsPageObject);

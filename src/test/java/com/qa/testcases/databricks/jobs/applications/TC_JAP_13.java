@@ -17,7 +17,7 @@ public class TC_JAP_13 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_JAP_13.class);
 
     @Test()
-    public void TC_JAP_13_verifyLogsTab() {
+    public void TC_JAP_13_verifyLogsTab() throws InterruptedException {
         test = extent.startTest("TC_JAP_13.verifyLogsTab",
                 "Verify 1. Logs tab must contain One Driver and executor logs listed\n" +
                         " 2. They must be collapsible tabs\n" +

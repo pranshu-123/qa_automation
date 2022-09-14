@@ -34,7 +34,7 @@ public class MR_042 extends BaseClass {
     private static final java.util.logging.Logger LOGGER = Logger.getLogger(TC_HIVE_42.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_042_verifyClusterIdFilterByStatus(String clusterId) {
+    public void MR_042_verifyClusterIdFilterByStatus(String clusterId) throws InterruptedException {
         test = extent.startTest("MR_042_verifyClusterIdFilterByStatus: " + clusterId,
                 "Verify  mrapps should have Cluster IDs for all the states of application (Running, Success, Uknown, Killed, pending");
         test.assignCategory(" Apps Details-Mr");

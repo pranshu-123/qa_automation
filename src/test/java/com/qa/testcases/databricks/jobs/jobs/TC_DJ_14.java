@@ -77,9 +77,9 @@ public class TC_DJ_14 extends BaseClass {
             loggingUtils.info("Duration are sorted as per Last Run Status", test);
             test.log(LogStatus.PASS, "Duration are sorted as per Last Run Status");
 
-        } catch (NoSuchElementException ex) {
+        } catch (Exception ex) {
             loggingUtils.info("No app present by this name", test);
-            loggingUtils.info("Error- " + ex, test);
+            loggingUtils.error("Error- " + ex, test);
         }
     }
 }

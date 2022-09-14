@@ -24,7 +24,7 @@ public class MR_046 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mapreduce.MR_046.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_046_verifyMRAppsList(String clusterId) {
+    public void MR_046_verifyMRAppsList(String clusterId) throws InterruptedException {
         test = extent.startTest("MR_046_verifyMRAppsList: " + clusterId,
                 "Verify User must be able to open the MR app detail page");
         test.assignCategory(" Apps Details-Mr");

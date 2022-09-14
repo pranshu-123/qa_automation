@@ -28,7 +28,7 @@ public class TEZ_007 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_spark_219.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_007_verifyStarttimeAndDuration(String clusterId) {
+    public void TEZ_007_verifyStarttimeAndDuration(String clusterId) throws InterruptedException {
         test = extent.startTest("TEZ_007_verifyStarttimeAndDuration: " + clusterId,
                 "Verify Start time and duration. must be available for all the apps.");
         test.assignCategory(" Apps Details-Tez");
@@ -64,10 +64,10 @@ public class TEZ_007 extends BaseClass {
          * Validate the start time types are --
          */
         if (appCount > 0) {
-            String starttime = tezDetailsPage.verifystarttime(tezApps);
+            String starttime = tezDetailsPage.verifyStartTime(tezApps);
             test.log(LogStatus.PASS, "Start time is displayed in the Tez Table: " + starttime);
 
-            String duration = tezDetailsPage.verifyduration(tezApps);
+            String duration = tezDetailsPage.verifyDuration(tezApps);
             test.log(LogStatus.PASS, "Duration is displayed in the Tez Table: " + duration);
 
         } else {

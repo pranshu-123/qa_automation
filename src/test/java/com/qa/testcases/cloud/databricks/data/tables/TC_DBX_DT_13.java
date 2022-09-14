@@ -17,7 +17,7 @@ public class TC_DBX_DT_13 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_13.class);
 
     @Test(description = "Validate whether user is able to change the setting of label by making changes in Last App Access")
-    public void verifyTablesDisplayedIfChangedLatestAccess() {
+    public void verifyTablesDisplayedIfChangedLatestAccess() throws InterruptedException {
         test = extent.startTest("TC_DBX_DT_13.verifyTablesDisplayedIfChangedLatestAccess", "Validate whether user is able to change the setting" +
                 " of label by making changes in Last App Access");
         test.assignCategory("Databricks - Data");

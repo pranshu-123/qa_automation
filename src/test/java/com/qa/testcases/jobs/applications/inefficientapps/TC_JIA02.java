@@ -24,7 +24,7 @@ public class TC_JIA02 extends BaseClass {
      * Verify Custom Range in datepicker
      */
     @Test(dataProvider = "clusterid-data-provider")
-    public void verifyCustomRangeDatePicker(String clusterId) {
+    public void verifyCustomRangeDatePicker(String clusterId) throws InterruptedException {
         test = extent.startTest("TC_JIA02.verifyCustomRangeDatePicker" + clusterId, "Verify the calender time");
         test.assignCategory(" Jobs / InEfficient Apps");
 
@@ -35,14 +35,14 @@ public class TC_JIA02 extends BaseClass {
         //Click on Jobs tab
         SubTopPanelModulePageObject subTopPanelModulePageObject = new SubTopPanelModulePageObject(driver);
         UserActions actions = new UserActions(driver);
-        waitExecuter.sleep(2000);
+        waitExecuter.waitForSeconds(3);
         actions.performActionWithPolling(subTopPanelModulePageObject.jobs, UserAction.CLICK);
         test.log(LogStatus.PASS, "Jobs tab is clicked successfully");
         LOGGER.info("Jobs tab is clicked successfully");
 
         //Click on inefficientApps tab
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
-        waitExecuter.sleep(2000);
+        waitExecuter.waitForSeconds(3);
         applicationsPageObject.inefficientApps.click();
         test.log(LogStatus.PASS, "inefficientApps tab is clicked successfully");
         LOGGER.info("inefficientApps tab is clicked successfully");
@@ -51,9 +51,9 @@ public class TC_JIA02 extends BaseClass {
         DatePicker datePicker = new DatePicker(driver);
         datePicker.clickOnDatePicker();
 
-        waitExecuter.sleep(1000);
+        waitExecuter.waitForSeconds(1);
         datePicker.selectCustomRange();
-        waitExecuter.sleep(1000);
+        waitExecuter.waitForSeconds(3);
 
         test.log(LogStatus.PASS, "Custom Range date is successfully verified in date range");
         LOGGER.info("Custom Range date is successfully verified in date range");

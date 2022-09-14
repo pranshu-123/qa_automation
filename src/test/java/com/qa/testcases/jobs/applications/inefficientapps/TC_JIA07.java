@@ -22,7 +22,7 @@ public class TC_JIA07 extends BaseClass {
      * Verify RESET functionality
      */
     @Test(dataProvider = "clusterid-data-provider")
-    public void verifyRESETfunctionality(String clusterId) {
+    public void verifyRESETfunctionality(String clusterId) throws InterruptedException {
         test = extent.startTest("TC_JIA07.verifyRESETfunctionality" + clusterId, "Verify RESET functionality");
         test.assignCategory(" Jobs / InEfficient Apps");
 
@@ -48,7 +48,7 @@ public class TC_JIA07 extends BaseClass {
         test.log(LogStatus.INFO, "Click on reset button");
         LOGGER.info("Click on reset button");
         applicationsPageObject.resetButton.click();
-        waitExecuter.sleep(2000);
+        waitExecuter.waitForSeconds(2);
         test.log(LogStatus.INFO, "Clicked on Reset button");
 
 

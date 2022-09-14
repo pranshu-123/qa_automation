@@ -24,7 +24,7 @@ public class MR_011 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mapreduce.MR_006.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_011_verifydataIO(String clusterId) {
+    public void MR_011_verifydataIO(String clusterId) throws InterruptedException {
         test = extent.startTest("MR_011_verifydataIO: " + clusterId,
                 "Verify if data IO have values");
         test.assignCategory(" Apps Details-Mr");

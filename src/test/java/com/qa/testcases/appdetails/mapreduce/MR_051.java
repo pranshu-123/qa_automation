@@ -27,7 +27,7 @@ public class MR_051 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mapreduce.MR_051.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_051_verifyColourCode(String clusterId) {
+    public void MR_051_verifyColourCode(String clusterId) throws InterruptedException {
         test = extent.startTest("MR_051_verifyColourCode: " + clusterId,
                 "Verify color coded value Effeciency and REcommendation");
         test.assignCategory(" Apps Details-Mr");

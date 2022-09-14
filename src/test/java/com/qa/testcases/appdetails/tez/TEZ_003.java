@@ -27,7 +27,7 @@ public class TEZ_003 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TEZ_003.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_003_verifyTezApplicationInUnravelUI(String clusterId) {
+    public void TEZ_003_verifyTezApplicationInUnravelUI(String clusterId) throws InterruptedException {
         test = extent.startTest("TEZ_003_verifyTezApplicationInUnravelUI: " + clusterId,
                 "Verify App type should be tez");
         test.assignCategory(" Apps Details-Tez");

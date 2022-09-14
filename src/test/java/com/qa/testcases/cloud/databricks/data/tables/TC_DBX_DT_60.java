@@ -39,7 +39,7 @@ public class TC_DBX_DT_60 extends BaseClass {
             dataTablesHelper.clickOnTabOnTableDetails("Applications");
             dataTablesHelper.selectAllApplicationsColumn();
             String applicationId = dataPageObject.applicationId.getText();
-            dataTablesHelper.clickOnParentAppOfNthRow(0);
+            dataTablesHelper.clickOnParentApp(0);
             actions.performActionWithPolling(dataPageObject.navigationTabApplicationDetailsPage, UserAction.CLICK);
             waitExecuter.sleep(2000);
             actions.performActionWithPolling(dataPageObject.searchBoxForTableData, UserAction.SEND_KEYS, applicationId);
@@ -49,8 +49,8 @@ public class TC_DBX_DT_60 extends BaseClass {
                 RandomGenerator.generateRandomName());
             Assert.assertEquals(dataPageObject.tableRows.size(), 0, "Data is displayed");
             loggingUtils.pass("Verified search box with application id", test);
-        } finally {
             dataTablesHelper.closeApplicationDetailsPage();
+        } finally {
             dataTablesHelper.backToTablesPage();
         }
     }

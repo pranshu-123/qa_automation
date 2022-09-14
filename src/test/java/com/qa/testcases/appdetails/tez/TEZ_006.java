@@ -35,7 +35,7 @@ public class TEZ_006 extends BaseClass {
     private static final java.util.logging.Logger LOGGER = Logger.getLogger(TEZ_006.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_006_verifyApplicationNameID(String clusterId) {
+    public void TEZ_006_verifyApplicationNameID(String clusterId) throws InterruptedException {
         test = extent.startTest("TEZ_006_verifyApplicationNameID: " + clusterId,
                 "Verify application name and ID must be present for all the apps.");
         test.assignCategory(" Apps Details-Tez");
@@ -68,7 +68,7 @@ public class TEZ_006 extends BaseClass {
             String Appname = tezDetailsPage.verifyAppName(tezApps);
             test.log(LogStatus.PASS, "Tez App name is displayed in the Table: " + Appname);
 
-            String AppId = tezDetailsPage.verifyappId(tezApps);
+            String AppId = tezDetailsPage.verifyAppId(tezApps);
             test.log(LogStatus.PASS, "Tez App Id is displayed in the Table: " + AppId);
 
 

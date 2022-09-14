@@ -35,7 +35,7 @@ public class TEZ_004 extends BaseClass {
     private static final java.util.logging.Logger LOGGER = Logger.getLogger(TEZ_004.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_004_verifyApplicationStatus(String clusterId) {
+    public void TEZ_004_verifyApplicationStatus(String clusterId) throws InterruptedException {
         test = extent.startTest("TEZ_004_verifyApplicationStatus: " + clusterId,
                 "Verify the status for the application should be present and not empty.");
         test.assignCategory(" Apps Details-Tez");

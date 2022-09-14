@@ -17,7 +17,7 @@ public class MR_062 extends BaseClass {
     java.util.logging.Logger logger = Logger.getLogger(MR_062.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_062_verifyConfigurationTab(String clusterId) {
+    public void MR_062_verifyConfigurationTab(String clusterId) throws InterruptedException {
         test = extent.startTest("MR_062_verifyConfigurationTab: " + clusterId,
                 "Verify the Configuration Tab should be populated in the UI");
         test.assignCategory(" Apps Details-Mr");

@@ -36,9 +36,9 @@ public class TC_DJ_19 extends BaseClass {
         try {
             jobsPage.verifySummaryTabValidation(test, "Tags", logger);
             test.log(LogStatus.PASS, "Verified the Tags tab successfully");
-        } catch (NoSuchElementException ex) {
+        } catch (Exception ex) {
             logger.info("No app present by this name", test);
-            logger.info("Error- " + ex, test);
+            logger.error("Error- " + ex, test);
         }
     }
 }

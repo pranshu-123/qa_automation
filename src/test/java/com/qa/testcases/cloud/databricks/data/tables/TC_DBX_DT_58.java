@@ -41,7 +41,7 @@ public class TC_DBX_DT_58 extends BaseClass {
         try {
             dataTablesHelper.clickOnTabOnTableDetails("Applications");
             dataTablesHelper.selectAllApplicationsColumn();
-            dataTablesHelper.clickOnParentAppOfNthRow(0);
+            dataTablesHelper.clickOnParentApp(0);
             // Select duration as option
             verifyleftGraph(dataPageObject);
             loggingUtils.pass("Verified graph with selecting duration as option", test);
@@ -50,8 +50,8 @@ public class TC_DBX_DT_58 extends BaseClass {
             actions.performActionWithPolling(dataPageObject.leftGraphOptions.get(1), UserAction.CLICK);
             verifyleftGraph(dataPageObject);
             loggingUtils.pass("Verified graph with selecting I/O as option", test);
-        } finally {
             dataTablesHelper.closeApplicationDetailsPage();
+        } finally {
             dataTablesHelper.backToTablesPage();
         }
     }

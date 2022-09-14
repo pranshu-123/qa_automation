@@ -28,7 +28,7 @@ TEZ_127 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TEZ_127.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_127_verifyAppStatus(String clusterId) {
+    public void TEZ_127_verifyAppStatus(String clusterId) throws InterruptedException {
         test = extent.startTest("TEZ_127_verifyAppStatus: " + clusterId,
                 "Verify App status must be updated relevantly");
         test.assignCategory(" Apps Details-Tez");

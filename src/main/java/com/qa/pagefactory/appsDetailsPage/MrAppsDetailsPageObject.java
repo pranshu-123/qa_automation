@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 
 public class MrAppsDetailsPageObject {
-    @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[4]/a[2]")
+    @FindBy(xpath = "//*[@id='app']//*[@class='applist-id']")
     public WebElement getAppId;
 
     @FindBy(xpath = "(//tbody[@id = 'allApps-body']/tr/td)[1]")
@@ -20,7 +20,7 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//*[@id=\"allApps-body\"]/tr[1]/td[5]")
     public WebElement getClusterId;
 
-    @FindBy(xpath = "//th[12]//a[1]")
+    @FindBy(xpath = "//th[11]//a[1]")
     public WebElement sortByParentApp;
 
     @FindBy(xpath = "(//a[@class='sorting icon-sort'])[3]")
@@ -56,7 +56,7 @@ public class MrAppsDetailsPageObject {
     @FindBy(xpath = "//a[normalize-space()='Resources']")
     public WebElement resourcesTab;
 
-    @FindBy(xpath = "//a[normalize-space()='Configuration']")
+    @FindBy(linkText = "Configuration")
     public WebElement configurationTab;
 
     @FindBy(xpath = "//*[@id='taskattemptmap']//*[div and @class='footer']/div/*/span[1]")

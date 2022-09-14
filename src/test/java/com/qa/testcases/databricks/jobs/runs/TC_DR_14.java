@@ -45,6 +45,7 @@ public class TC_DR_14 extends BaseClass {
             if (appCount > 0) {
                 waitExecuter.waitUntilElementClickable(dbpageObject.clickOnSpark);
                 dbpageObject.clickOnSpark.click();
+                waitExecuter.waitForSeconds(10);
                 waitExecuter.waitUntilElementClickable(dbpageObject.closeIcon);
                 waitExecuter.waitUntilPageFullyLoaded();
 
@@ -52,7 +53,7 @@ public class TC_DR_14 extends BaseClass {
                 test.log(LogStatus.SKIP, "No Application present ");
                 loggingUtils.error("No Application present in the Runs page", test);
             }
-        } catch (NoSuchElementException ex) {
+        } catch (NoSuchElementException | InterruptedException ex) {
             loggingUtils.error("No app present by this name", test);
             loggingUtils.error("Error- " + ex, test);
         }

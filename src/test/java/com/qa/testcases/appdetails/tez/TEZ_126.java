@@ -26,7 +26,7 @@ public class TEZ_126 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TEZ_126.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_126_verifyClusterAndQueue(String clusterId) {
+    public void TEZ_126_verifyClusterAndQueue(String clusterId) throws InterruptedException {
         test = extent.startTest("TEZ_126_verifyClusterAndQueue: " + clusterId,
                 "Verify KPIs should be populated and the values must be populated");
         test.assignCategory(" Apps Details-Tez");

@@ -26,7 +26,7 @@ public class TEZ_009 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TEZ_009.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_009_verifyClusterIDandGOTO(String clusterId) {
+    public void TEZ_009_verifyClusterIDandGOTO(String clusterId) throws InterruptedException {
         test = extent.startTest("TEZ_009_verifyClusterIDandGOTO: " + clusterId,
                 "Verify Cluster ID must be present for the apps and parent app must be linked.");
         test.assignCategory(" Apps Details-Tez");

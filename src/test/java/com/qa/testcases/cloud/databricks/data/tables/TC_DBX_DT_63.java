@@ -34,7 +34,7 @@ public class TC_DBX_DT_63 extends BaseClass {
         UserActions userActions = new UserActions(driver);
         try {
             dataTablesHelper.clickOnTabOnTableDetails("Applications");
-            dataTablesHelper.clickOnParentAppOfNthRow(0);
+            dataTablesHelper.clickOnParentApp(0);
             userActions.performActionWithPolling(dataPageObject.resourcesTabApplicationDetails, UserAction.CLICK);
             Assert.assertTrue(dataPageObject.applicationDetailsPageCharts.size() == 5, "Some graphs" +
                 " are not loaded.");
@@ -56,8 +56,9 @@ public class TC_DBX_DT_63 extends BaseClass {
                 By.xpath("parent::div/../preceding-sibling::div/h4")).getText().trim(), "Task Attempts",
                 "Task Attempts graph is not loaded");
             loggingUtils.pass("Task Attempts graph is displayed.", test);
-        } finally {
             dataTablesHelper.closeApplicationDetailsPage();
+        } finally {
+
             dataTablesHelper.backToTablesPage();
         }
     }

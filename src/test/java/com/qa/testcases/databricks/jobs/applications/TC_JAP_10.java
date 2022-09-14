@@ -20,7 +20,7 @@ public class TC_JAP_10 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_JAP_10.class);
 
     @Test()
-    public void TC_JAP_10_verifyResourcesTab() {
+    public void TC_JAP_10_verifyResourcesTab() throws InterruptedException {
         test = extent.startTest("TC_JAP_10.validateAppSummaryPage",
                 "Verify that on a Clicking on Resources tab:\n" +
                         "1. Should contain all the below graphs\n" +

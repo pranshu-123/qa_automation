@@ -26,7 +26,7 @@ public class TEZ_010 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TEZ_010.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_010_VerifyQueueName(String clusterId) {
+    public void TEZ_010_VerifyQueueName(String clusterId) throws InterruptedException {
         test = extent.startTest("TEZ_010_VerifyQueueName: " + clusterId,
                 "Verify Queue name should be present in app details page.");
         test.assignCategory(" Apps Details-Tez");

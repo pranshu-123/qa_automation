@@ -27,7 +27,7 @@ public class MR_052_PART2 extends BaseClass {
     java.util.logging.Logger logger = Logger.getLogger(MR_052_PART2.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_052_PART2_verifyFailedStatus(String clusterId) {
+    public void MR_052_PART2_verifyFailedStatus(String clusterId) throws InterruptedException {
         test = extent.startTest("MR_052_PART2_verifyFailedStatus: " + clusterId,
                 "Verify there are 2 tabs , Task Attempt (Map), Task Attempt(Reduce)");
         test.assignCategory(" Apps Details-Mr");

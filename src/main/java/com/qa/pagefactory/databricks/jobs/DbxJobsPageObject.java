@@ -12,7 +12,7 @@ public class DbxJobsPageObject {
     @FindBy(xpath = "//*[@id='statusContainer']/span[1]")
     public WebElement appStatus;
 
-    @FindBy(xpath = "//tbody[1]/tr/td[2]/span[1]")
+    @FindBy(xpath = "//span[@class='instance-id']//span")
     public WebElement appJobId;
 
     @FindBy(xpath = "//*[@id='io_metrics']//tbody/tr/td[2]")
@@ -144,31 +144,31 @@ public class DbxJobsPageObject {
     @FindBy(xpath = "(//div[@class='right text-white']//span)[2]")
     public WebElement appClusterName;
 
-    @FindBy(xpath = "//tbody/tr/td[1]/span[1]")
+    @FindBy(xpath = "//tbody/tr/td[1]")
     public WebElement status;
 
-    @FindBy(xpath = "//tbody/tr/td[2]/span[1]")
+    @FindBy(xpath = "//tbody/tr/td[2]")
     public WebElement jobId;
 
-    @FindBy(xpath = "//tbody/tr/td[3]/span[1]")
+    @FindBy(xpath = "//tbody/tr/td[3]")
     public WebElement jobName;
 
-    @FindBy(xpath = "//tbody/tr/td[4]/span[1]")
+    @FindBy(xpath = "//tbody/tr/td[4]")
     public WebElement clusterName;
 
     @FindBy(xpath = "//tbody/tr/td[7]")
     public WebElement startTime;
 
-    @FindBy(xpath = "//tbody/tr/td[6]/span[1]")
+    @FindBy(xpath = "//tbody/tr/td[6]")
     public WebElement userName;
 
-    @FindBy(xpath = "//table[@id='pipelinesList']/tbody[1]/tr/td[9]/div[2]/span[1]")
+    @FindBy(xpath = "//tbody/tr/td[9]/div[1]/div[2]/span[1]")
     public WebElement duration;
 
-    @FindBy(xpath = "//tbody/tr/td[8]/span[1]")
+    @FindBy(xpath = "//tbody/tr/td[8]")
     public WebElement runCount;
 
-    @FindBy(xpath = "//tbody/tr/td[5]/span[1]")
+    @FindBy(xpath = "//tbody/tr/td[5]")
     public WebElement workSpace;
 
     @FindBy(css = "tbody#RunsListAll-body")
@@ -189,7 +189,7 @@ public class DbxJobsPageObject {
     @FindBy(xpath = "//table[@id='pipelinesList']/tbody[1]/tr/td[2]/span[1]")
     public WebElement clickOnJobId;
 
-    @FindBy(xpath = "//tr/td[3]/span[1]")
+    @FindBy(xpath = "//tr/td[3]")
     public WebElement clickOnName;
 
     @FindBy(xpath = "//table[@id='pipelinesList']/tbody[1]/tr/td[3]/span[1]")
@@ -240,7 +240,7 @@ public class DbxJobsPageObject {
     @FindBy(xpath = "(//div[@class='component-tabs-primary'])/ul/li/a")
     public List<WebElement> appSummaryTabs;
 
-    @FindBy(className = "close")
+    @FindBy(css = "div.close")
     public WebElement closeIcon;
 
     @FindBy(xpath = "//a[contains(.,'Status')]//following::div[contains(@class,'check-items-container')]//span[@class='checkmark']")
@@ -272,18 +272,6 @@ public class DbxJobsPageObject {
 
     @FindBy(css = "input.global-app-search")
     public WebElement globalSearchBox;
-
-    @FindBy(xpath = "//ul[contains(@class,'select2-results__options')]/li[1]")
-    public WebElement select1stCluster;
-
-    @FindBy(xpath = "//span[contains(@class,'select2-selection__choice__remove')]")
-    public WebElement removeCluster;
-
-    @FindBy(xpath = "//div[contains(@class,'opensleft') and contains(@class,'show-calendar')]")
-    public WebElement datepickerCalendar;
-
-    @FindBy(xpath = "//tbody[@id = 'allApps-body']/tr/td[6]")
-    public List<WebElement> getApplicationClusterId;
 
     /**
      * @param driver The driver that will be used to look up the elements

@@ -25,7 +25,7 @@ public class MR_010 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mapreduce.MR_006.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_010_verifyStarttimeandduration(String clusterId) {
+    public void MR_010_verifyStarttimeandduration(String clusterId) throws InterruptedException {
         test = extent.startTest("MR_010_verifyStarttimeandduration: " + clusterId,
                 "Verify Start and end duration must be present for apps");
         test.assignCategory(" Apps Details-Mr");

@@ -23,7 +23,7 @@ public class MR_040 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mapreduce.MR_006.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_040_verfyMrAppswithClusterIDs(String clusterId) {
+    public void MR_040_verfyMrAppswithClusterIDs(String clusterId) throws InterruptedException {
         test = extent.startTest("MR_040_verfyMrAppswithClusterIDs: " + clusterId,
                 "Verify All the MR apps run on different Clusters must have the cluster ID");
         test.assignCategory(" Apps Details-Mr");

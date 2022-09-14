@@ -18,7 +18,7 @@ public class TC_JAP_11 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_JAP_11.class);
 
     @Test()
-    public void verifyErrorsTab() {
+    public void verifyErrorsTab() throws InterruptedException {
         test = extent.startTest("TC_JAP_11.verifyErrorsTab",
                 "Verify Spark Properties and values must be listed in the UI, " +
                         "1. Spark Properties and values must be listed here\n" +

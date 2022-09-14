@@ -68,6 +68,8 @@ public class TC_JAP_04 extends BaseClass {
         } catch (NoSuchElementException ex) {
             logger.info("No app present by this name");
             logger.info("Error- " + ex);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 }

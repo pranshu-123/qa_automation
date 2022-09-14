@@ -40,7 +40,7 @@ public class TC_DBX_DT_54 extends BaseClass {
             String expectedDuration = dataPageObject.tableRows.get(0).findElements(By.tagName("td")).get(7).getText().trim();
             String expectedQueue = dataPageObject.tableRows.get(0).findElements(By.tagName("td")).get(8).getText().trim();
 
-            dataTablesHelper.clickOnParentAppOfNthRow(0);
+            dataTablesHelper.clickOnParentApp(0);
             String actualStatusValue = dataPageObject.statusValueApplicationPage.getText();
             String[] ownerClusterQueueDetailsValue =
                 dataPageObject.ownerClusterQueueDetailsApplicationPage.getText().split("\\|");
@@ -70,9 +70,8 @@ public class TC_DBX_DT_54 extends BaseClass {
             loggingUtils.pass("Correct duration value displayed", test);
             Assert.assertTrue(actualQueueValue.contains(expectedQueue), "Incorrect queue value displayed");
             loggingUtils.pass("Correct queue value displayed", test);
-
-        } finally {
             dataTablesHelper.closeApplicationDetailsPage();
+        } finally {
             dataTablesHelper.backToTablesPage();
         }
     }

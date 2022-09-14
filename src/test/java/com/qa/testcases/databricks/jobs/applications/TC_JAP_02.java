@@ -19,7 +19,7 @@ public class TC_JAP_02 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_JAP_02.class);
 
     @Test()
-    public void validateJobSummaryRunning() {
+    public void validateJobSummaryRunning() throws InterruptedException {
         test = extent.startTest("TC_JAP_02_PART1.validateJobSummary",
                 "Verify Job summary must be defined Running");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -65,7 +65,7 @@ public class TC_JAP_02 extends BaseClass {
     }
 
     @Test()
-    public void validateJobSummarySuccess() {
+    public void validateJobSummarySuccess() throws InterruptedException {
         test = extent.startTest("TC_JAP_02_PART2.validateJobSummary",
                 "Verify All the Success jobs are listed on the Application Summary page");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -103,7 +103,7 @@ public class TC_JAP_02 extends BaseClass {
     }
 
     @Test()
-    public void validateJobSummaryFailed() {
+    public void validateJobSummaryFailed() throws InterruptedException {
         test = extent.startTest("TC_JAP_02_PART3.validateJobSummary",
                 "Verify All the Failed jobs are listed on the Application Summary page");
         WaitExecuter waitExecuter = new WaitExecuter(driver);
@@ -141,7 +141,7 @@ public class TC_JAP_02 extends BaseClass {
     }
 
     @Test()
-    public void validateJobSummaryKilled() {
+    public void validateJobSummaryKilled() throws InterruptedException {
         test = extent.startTest("TC_JAP_02_PART4.validateJobSummary",
                 "Verify All the Killed jobs are listed on the Application Summary page");
         WaitExecuter waitExecuter = new WaitExecuter(driver);

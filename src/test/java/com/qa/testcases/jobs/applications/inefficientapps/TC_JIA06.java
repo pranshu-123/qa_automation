@@ -23,7 +23,7 @@ public class TC_JIA06 extends BaseClass {
      * Verify Application with Inefficient events are listed for different clusters
      */
     @Test(dataProvider = "clusterid-data-provider")
-    public void TC_JIA06_verifyWithDifferentClusterFilter(String clusterId) {
+    public void TC_JIA06_verifyWithDifferentClusterFilter(String clusterId) throws InterruptedException {
         test = extent.startTest("TC_JIA06_verifyWithDifferentClusterFilter" + clusterId, "Verify Application " +
                 "with Inefficient events are listed for different clusters");
         test.assignCategory(" Jobs / InEfficient Apps");
@@ -44,7 +44,7 @@ public class TC_JIA06 extends BaseClass {
         test.log(LogStatus.INFO, "Select clusterid : " + clusterId);
         LOGGER.info("Select clusterId : " + clusterId);
         inefficientApps.selectCluster(clusterId);
-        waitExecuter.sleep(1000);
+        waitExecuter.waitForSeconds(2);
 
         Assert.assertTrue(inefficientApps.verifyInefficientTbl(), "Inefficient Apps table is missing.");
         test.log(LogStatus.PASS, "Verified Application with Inefficient events are " +

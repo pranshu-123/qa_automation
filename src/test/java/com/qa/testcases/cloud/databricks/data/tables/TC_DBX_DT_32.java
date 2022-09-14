@@ -36,12 +36,12 @@ public class TC_DBX_DT_32 extends BaseClass {
         DataPageObject dataPageObject = new DataPageObject(driver);
         UserActions actions = new UserActions(driver);
         if (dataPageObject.tableRows.size() > 1) {
-            actions.performActionWithPolling(dataPageObject.tableRows.get(1).findElement(By.cssSelector("td.border" +
-                    "-warm > label > span.checkmark")), UserAction.CLICK);
+            actions.performActionWithPolling(dataPageObject.tableRows.get(1).findElement(By.xpath
+                    ("//div[@class='filter-items']//div[2]//p[1]//label[1]//span[1]")), UserAction.CLICK);
             File screenshot1 = ScreenshotHelper.takeScreenshotOfElement(driver,
                 dataPageObject.displayedGraphs.get(0).findElement(By.cssSelector("svg")), 0);
-            actions.performActionWithPolling(dataPageObject.tableRows.get(2).findElement(By.cssSelector("td.border" +
-                    "-warm > label > span.checkmark")), UserAction.CLICK);
+            actions.performActionWithPolling(dataPageObject.tableRows.get(2).findElement(By.xpath
+                    ("//div[@class='filter-items']//div[2]//p[1]//label[1]//span[1]")), UserAction.CLICK);
             File screenshot2 = ScreenshotHelper.takeScreenshotOfElement(driver,
                 dataPageObject.displayedGraphs.get(0).findElement(By.cssSelector("svg")), 0);
             Boolean isImageIdentical = ImageUtils.compareImage(screenshot1, screenshot2);

@@ -25,7 +25,7 @@ public class TEZ_011 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TEZ_011.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_011_VerifyApplicationPage(String clusterId) {
+    public void TEZ_011_VerifyApplicationPage(String clusterId) throws InterruptedException {
         test = extent.startTest("TEZ_011_VerifyApplicationPage: " + clusterId,
                 "Verify user should be navigated to the Tez application details page.");
         test.assignCategory(" Apps Details-Tez");

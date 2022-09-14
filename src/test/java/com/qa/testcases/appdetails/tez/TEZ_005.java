@@ -27,7 +27,7 @@ public class TEZ_005 extends BaseClass {
     private static final java.util.logging.Logger LOGGER = Logger.getLogger(TEZ_005.class.getName());
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_005_verifyApplicationUsername(String clusterId) {
+    public void TEZ_005_verifyApplicationUsername(String clusterId) throws InterruptedException {
         test = extent.startTest("TEZ_005_verifyApplicationUsername: " + clusterId,
                 "Verify Username must be present for all the apps.");
         test.assignCategory(" Apps Details-Tez");

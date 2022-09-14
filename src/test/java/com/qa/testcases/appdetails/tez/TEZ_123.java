@@ -30,7 +30,7 @@ public class TEZ_123 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TEZ_123.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_123_verifyKPI(String clusterId) {
+    public void TEZ_123_verifyKPI(String clusterId) throws InterruptedException {
         test = extent.startTest("TEZ_123_verifyKPI: " + clusterId,
                 "Verify Tez apps should have Cluster IDs for all the states of application ");
         test.assignCategory(" Apps Details-Tez");
@@ -59,12 +59,12 @@ public class TEZ_123 extends BaseClass {
         test.log(LogStatus.INFO, "Expand status filter on left pane");
         logger.info("Expand status filter on left pane");
         applicationsPageObject.expandStatus.click();
-        waitExecuter.sleep(2000);
+        waitExecuter.waitForSeconds(5);
         // To apply filter - De-select all status types
         test.log(LogStatus.INFO, "To apply status filter - De-select all status types");
         logger.info("To apply status filter - De-select all status types");
         allApps.deselectAllStatusTypes();
-        waitExecuter.sleep(2000);
+        waitExecuter.waitForSeconds(5);
 
         /*
          * Validate that status types are --
@@ -97,11 +97,11 @@ public class TEZ_123 extends BaseClass {
             waitExecuter.sleep(2000);
             int appCount = Integer.parseInt(applicationsPageObject.statusJobCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
             logger.info("Status app count- " + appCount);
-            waitExecuter.sleep(2000);
+            waitExecuter.waitForSeconds(3);
             int totalCount = Integer
                     .parseInt(applicationsPageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
             logger.info("Total app count- " + totalCount);
-            waitExecuter.sleep(1000);
+            waitExecuter.waitForSeconds(3);
 
             Assert.assertEquals(appCount, totalCount, "The app count of " + statusTypes.get(i).getText().trim()
                     + " is not equal to the total count of heading.");
@@ -109,24 +109,24 @@ public class TEZ_123 extends BaseClass {
 
             if (appCount > 0) {
                 String getStatusTypeFromTable = applicationsPageObject.getStatusFromTable.getText();
-                waitExecuter.sleep(2000);
+                waitExecuter.waitForSeconds(3);
                 Assert.assertEquals(getStatusTypeFromTable.toLowerCase(),
                         statusTypes.get(i).getText().trim().toLowerCase(),
                         "The Jobs displayed in tables contains application other than that of selected App Type");
                 test.log(LogStatus.PASS, "The Jobs displayed in tables contains application of selected App Type: "+getStatusTypeFromTable);
-                waitExecuter.sleep(1000);
+                waitExecuter.waitForSeconds(3);
             } else {
                 Assert.assertTrue(applicationsPageObject.whenNoApplicationPresent.isDisplayed(),
                         "The clusterId does not have any application under it and also does not display 'No Data Available' for it"
                                 + clusterId);
                 test.log(LogStatus.SKIP, "The clusterId does not have any application under it.");
             }
-            waitExecuter.sleep(1000);
+            waitExecuter.waitForSeconds(2);
             clickOnIndividualStatus.get(i).click();
-            waitExecuter.sleep(2000);
+            waitExecuter.waitForSeconds(3);
         }
         // Click on show-all to view all type of applications
         applicationsPageObject.resetButton.click();
-        waitExecuter.sleep(3000);
+        waitExecuter.waitForSeconds(3);
     }
 }

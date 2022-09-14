@@ -36,13 +36,14 @@ public class TC_DBX_DT_61 extends BaseClass {
             dataTablesHelper.clickOnTabOnTableDetails("Applications");
             dataTablesHelper.selectAllApplicationsColumn();
             String applicationId = dataPageObject.applicationId.getText();
-            dataTablesHelper.clickOnParentAppOfNthRow(0);
+            dataTablesHelper.clickOnParentApp(0);
             Assert.assertTrue(dataPageObject.ganttChart.findElement(By.xpath("descendant::span")).getText().contains(
                 applicationId), "Invalid application is displayed in gantt chart");
             loggingUtils.pass("Correct application Id is displayed in gantt chart", test);
             verifyLeftGraph(dataPageObject);
-        } finally {
             dataTablesHelper.closeApplicationDetailsPage();
+        } finally {
+
             dataTablesHelper.backToTablesPage();
         }
     }

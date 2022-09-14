@@ -28,7 +28,7 @@ public class TEZ_135 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TEZ_135.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void TEZ_135_verifytheDags(String clusterId) {
+    public void TEZ_135_verifytheDags(String clusterId) throws InterruptedException {
         test = extent.startTest("TEZ_135_verifytheDags: " + clusterId,
                 "Verify if the dags are present in the left pane and value should be populated");
         test.assignCategory(" Apps Details-Tez");

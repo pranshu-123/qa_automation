@@ -16,7 +16,7 @@ public class TC_DBX_DT_24 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_24.class);
 
     @Test(description = "Validate whether user is able to filter data with \"Latest Access\" column value.")
-    public void verifyTableDataFilterByLatestAccessColumn() {
+    public void verifyTableDataFilterByLatestAccessColumn() throws InterruptedException {
         test = extent.startTest("TC_DBX_DT_24.verifyTableDataFilterByLatestAccessColumn", "Validate whether user is able to filter data " +
             "with \"Latest Access\" column value.");
         test.assignCategory("Databricks - Data");

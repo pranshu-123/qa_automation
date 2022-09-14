@@ -25,7 +25,7 @@ public class MR_006 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mapreduce.MR_006.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_006_verifyApplicationType(String clusterId) {
+    public void MR_006_verifyApplicationType(String clusterId) throws InterruptedException {
         test = extent.startTest("MR_006_applicationType: " + clusterId,
                 "Verify App type must be present");
         test.assignCategory(" Apps Details-Mr");

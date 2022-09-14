@@ -24,7 +24,7 @@ public class MR_049 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mapreduce.MR_049.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_049_verifyAllDataTabs(String clusterId) {
+    public void MR_049_verifyAllDataTabs(String clusterId) throws InterruptedException {
         test = extent.startTest("MR_049_verifyAllDataTabs: " + clusterId,
                 "Verify Data Tabs must be available on UI");
         test.assignCategory(" Apps Details-Mr");

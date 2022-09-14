@@ -195,7 +195,7 @@ public class AppDetailsPageObject {
     @FindBy(xpath = "//span[contains(@class,'icon-flipped')]")
     public WebElement flippedButton;
 
-    @FindBy(xpath = "//tbody[@id='allApps-body']/tr/td[4]/a[2]")
+    @FindBy(xpath = "//*[@id='app']//*[@class='applist-id']")
     public WebElement clickOnAppId;
 
     @FindBy(xpath = "//tbody[@id='inefficientApps-body']/tr/td[4]/a[2]")

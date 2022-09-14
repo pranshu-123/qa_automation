@@ -23,7 +23,7 @@ public class TC_JIA04 extends BaseClass {
      * Verify Application with Inefficient events are listed for Custom Range
      */
     @Test(dataProvider = "clusterid-data-provider")
-    public void TC_JIA04_verifyCustomRangeDatePicker(String clusterId) {
+    public void TC_JIA04_verifyCustomRangeDatePicker(String clusterId) throws InterruptedException {
         test = extent.startTest("TC_JIA04_verifyCustomRangeDatePicker" + clusterId, "Verify " +
                 "Application with Inefficient events are listed for Custom Range");
         test.assignCategory(" Jobs / InEfficient Apps");
@@ -34,12 +34,12 @@ public class TC_JIA04 extends BaseClass {
         //Click on Jobs tab
         SubTopPanelModulePageObject subTopPanelModulePageObject = new SubTopPanelModulePageObject(driver);
         UserActions actions = new UserActions(driver);
-        waitExecuter.sleep(2000);
+        waitExecuter.waitForSeconds(2);
         actions.performActionWithPolling(subTopPanelModulePageObject.jobs, UserAction.CLICK);
 
         //Click on inefficientApps tab
         ApplicationsPageObject applicationsPageObject = new ApplicationsPageObject(driver);
-        waitExecuter.sleep(2000);
+        waitExecuter.waitForSeconds(2);
         MouseActions.clickOnElement(driver, applicationsPageObject.inefficientApps);
 
         // Click on datepicker button
@@ -47,16 +47,16 @@ public class TC_JIA04 extends BaseClass {
         datePicker.clickOnDatePicker();
         // Click on custom range
         datePicker.selectCustomRange();
-        waitExecuter.sleep(3000);
+        waitExecuter.waitForSeconds(3);
 
         applicationsPageObject.startDatePicker.clear();
         applicationsPageObject.startDatePicker.sendKeys("08/07/2020");
-        waitExecuter.sleep(2000);
+        waitExecuter.waitForSeconds(2);
         applicationsPageObject.applyBtn.click();
         test.log(LogStatus.INFO, "Successfully clicked on custom date range Apply button.");
 
         InefficientApps inefficientApps = new InefficientApps(driver);
-        waitExecuter.sleep(2000);
+        waitExecuter.waitForSeconds(2);
         Assert.assertTrue(inefficientApps.verifyInefficientTbl(), "Inefficient Apps table is missing.");
         test.log(LogStatus.PASS, "Inefficient Apps table is present");
     }

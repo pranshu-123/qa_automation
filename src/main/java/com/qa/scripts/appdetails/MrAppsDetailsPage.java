@@ -1036,7 +1036,7 @@ public class MrAppsDetailsPage {
      * Verify specific summary tabs.
      * */
     public void commonSetupCodeForSumarryTabValidation(ExtentTest test, String clusterId, String tabName, Logger logger,
-                                                       Boolean isFailedApp) {
+                                                       Boolean isFailedApp) throws InterruptedException {
         // Initialize all classes objects
         test.log(LogStatus.INFO, "Initialize all class objects");
 
@@ -1133,7 +1133,7 @@ public class MrAppsDetailsPage {
      * Deselsects all the selected apps from the left pane on jobs page.
      */
     public void navigateToJobsTabFromHeader(SubTopPanelModulePageObject topPanelObj, AllApps allApps,
-                                            DatePicker datePicker, ApplicationsPageObject appPageObj, String clusterId) {
+                                            DatePicker datePicker, ApplicationsPageObject appPageObj, String clusterId) throws InterruptedException {
         LOGGER.info("Navigate to jobs tab from header");
         waitExecuter.waitUntilElementClickable(topPanelObj.jobs);
         waitExecuter.sleep(1000);
@@ -1145,10 +1145,10 @@ public class MrAppsDetailsPage {
         allApps.selectCluster(clusterId);
         waitExecuter.waitUntilElementClickable(appPageObj.resetButton);
         datePicker.clickOnDatePicker();
-        waitExecuter.sleep(1000);
+        waitExecuter.waitForSeconds(2);
         datePicker.selectLast30Days();
         waitExecuter.waitUntilElementClickable(appPageObj.resetButton);
-        waitExecuter.sleep(1000);
+        waitExecuter.waitForSeconds(5);
         waitExecuter.waitUntilPageFullyLoaded();
     }
 

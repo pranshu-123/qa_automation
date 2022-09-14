@@ -36,15 +36,15 @@ public class TC_DBX_DT_57 extends BaseClass {
         try {
             dataTablesHelper.clickOnTabOnTableDetails("Applications");
             dataTablesHelper.selectAllApplicationsColumn();
-            dataTablesHelper.clickOnParentAppOfNthRow(13);
+            dataTablesHelper.clickOnParentApp(0);
             actionPerformer.moveToTheElement(dataPageObject.dropdownIconOnApplicationDetails);
             List<String> leftGraphOptions = dataPageObject.leftGraphOptions.stream()
                 .map(option -> option.getText().trim()).collect(Collectors.toList());
             List<String> expectedOptions = Arrays.asList("Duration", "I/O", "Apps", "Events");
             Assert.assertEquals(leftGraphOptions, expectedOptions, "Incorrect options displayed.");
             loggingUtils.pass("Verified Duration, I/O, Apps, Events options are displayed", test);
-        } finally {
             dataTablesHelper.closeApplicationDetailsPage();
+        } finally {
             dataTablesHelper.backToTablesPage();
         }
     }

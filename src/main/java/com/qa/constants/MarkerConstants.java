@@ -34,7 +34,6 @@ public class MarkerConstants {
     public static final String CLUSTER_USER_REPORTS = "cluster_user_report";
     public static final String CLUSTER_WORKLOAD = "cluster_workload";
     public static final String CLUSTER_HBASE = "cluster_hbase";
-    public static final String USER_REPORTS = "user_reports";
     public static final String MANAGE = "manage";
     public static final String REPORT_ARCHIEVE = "report_archieve";
     public static final String REPORTS_SCHEDULED = "reports_scheduled";
@@ -165,10 +164,9 @@ public class MarkerConstants {
         map.put(YARN_CHARGEBACK, Marker.YarnChargeback.class);
         map.put(YARN_RESOURCES, Marker.YarnResources.class);
         map.put(CLUSTER_JOBS, Marker.ClusterJobs.class);
-        map.put(CLUSTER_USER_REPORTS, Marker.ClusterUserReports.class);
+        map.put(CLUSTER_USER_REPORTS, Marker.UserReports.class);
         map.put(CLUSTER_WORKLOAD, Marker.ClusterWorkload.class);
         map.put(CLUSTER_HBASE, Marker.ClusterHBase.class);
-        map.put(USER_REPORTS, Marker.UserReports.class);
         map.put(MANAGE, Marker.Manage.class);
         map.put(REPORT_ARCHIEVE, Marker.ReportArchive.class);
         map.put(REPORTS_SCHEDULED, Marker.ReportsScheduled.class);

@@ -24,7 +24,7 @@ public class MR_041 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(com.qa.testcases.appdetails.mapreduce.MR_006.class);
 
     @Test(dataProvider = "clusterid-data-provider")
-    public void MR_041_verifytheclusterlistedbasedonthefilter(String clusterId) {
+    public void MR_041_verifytheclusterlistedbasedonthefilter(String clusterId) throws InterruptedException {
         test = extent.startTest("MR_041_verifytheclusterlistedbasedonthefilter: " + clusterId,
                 "Verify User must be able to filter by the cluster  and apps must be listed based on the filter");
         test.assignCategory(" Apps Details-Mr");

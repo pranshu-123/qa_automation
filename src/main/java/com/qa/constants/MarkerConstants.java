@@ -77,7 +77,7 @@ public class MarkerConstants {
     public static final String EMR_CLUSTER_JOBTRENDS = "emrclusterjobtrends";
     public static final String EMR_INEFFICIENT_APPS = "emr_Inefficient_apps";
     public static final String EMR_CLUSTER_CHARGEBACK = "emrClusterChargeback";
-
+    public static final String EMR_COST_CHARGEBACK = "emr_cost_chargeback";
 
     // EMR Markers
     public static final String EMR_SPARK = "Emr_Spark";
@@ -232,6 +232,7 @@ public class MarkerConstants {
         map.put(GCP_CLUSTER_WORKLOAD, Marker.GCPClusterWorkload.class);
         map.put(GCP_DATA_TABLES, Marker.GCPDataTables.class);
         map.put(GCP_DATA_OVERVIEW, Marker.GCPDataOverview.class);
+        map.put(EMR_COST_CHARGEBACK, Marker.EmrCostChargeback.class);
         return Collections.unmodifiableMap(map);
     }
 }

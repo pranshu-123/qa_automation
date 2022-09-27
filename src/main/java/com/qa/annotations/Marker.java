@@ -188,6 +188,9 @@ public @interface Marker {
     }
 
     @Retention(RetentionPolicy.RUNTIME)
+    @interface EmrCostChargeback {
+    }
+    @Retention(RetentionPolicy.RUNTIME)
     @interface DbxRuns {
     }
 

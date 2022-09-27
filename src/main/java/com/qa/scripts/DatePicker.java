@@ -61,6 +61,11 @@ public class DatePicker {
         waitExecuter.waitUntilElementClickable(datePickerPageObject.dateRangeTopx);
     }
 
+    public void clickOnDatePickerForCost() {
+        waitExecuter.waitUntilElementClickable(datePickerPageObject.dateRangeCost);
+        userActions.performActionWithPolling(datePickerPageObject.dateRangeCost, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(datePickerPageObject.dateRangeCost);
+    }
     /**
      * Method to select 'Last 14 Days' in data picker
      */
@@ -90,6 +95,12 @@ public class DatePicker {
     public void clickOnCustomDateApplyBtn() {
         waitExecuter.waitUntilElementPresent(datePickerPageObject.applyBtn);
         userActions.performActionWithPolling(datePickerPageObject.applyBtn, UserAction.CLICK);
+        waitExecuter.sleep(1000);
+    }
+
+    public void clickOnCustomDateApplyBtnCost() {
+        waitExecuter.waitUntilElementPresent(datePickerPageObject.applyBtnCost);
+        userActions.performActionWithPolling(datePickerPageObject.applyBtnCost, UserAction.CLICK);
         waitExecuter.sleep(1000);
     }
 

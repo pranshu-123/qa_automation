@@ -21,6 +21,9 @@ public class DatePickerPageObject {
     @FindBy(xpath = "//div[@value='[object Object]']//div//i[@class='glyphicon-caret']")
     public WebElement dateRangeTopx;
 
+    @FindBy(xpath = "//i[@class='calendar-icon']")
+    public WebElement dateRangeCost;
+
     @FindBy(xpath = "//li[contains(text(),'Last 1 Hour')]")
     public WebElement lastOneHour;
 
@@ -74,6 +77,9 @@ public class DatePickerPageObject {
 
     @FindBy(xpath = "(//button[contains( @class, 'applyBtn')])[last()]")
     public WebElement applyBtn;
+
+    @FindBy(xpath = "//button[@type='button'][2]")
+    public WebElement applyBtnCost;
 
     @FindBy(xpath = "//div[contains(@class,'component-date-picker')]/span")
     public WebElement calendarDate;

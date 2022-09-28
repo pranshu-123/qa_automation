@@ -135,7 +135,7 @@ public class SparkDetails {
 
 	public void validateSummaryTabValues() {
 		String[] actualSummaryTabsValues = {"Analysis","Resources","Errors","Configuration","Logs","Tags","Program","Timings"};
-	    List<String> actualSummaryTabsValueList =new ArrayList<>(Arrays.asList(actualSummaryTabsValues));
+		List<String> actualSummaryTabsValueList =new ArrayList<>(Arrays.asList(actualSummaryTabsValues));
 		List<String> summaryTabs = fetchSummaryTabsValues();
 		if(summaryTabs.size()==9) {
 			actualSummaryTabsValueList.add("SQL");
@@ -148,17 +148,30 @@ public class SparkDetails {
 	public void validateSparkDetailsPage(LinkedHashMap<String, String> appValues) {
 		waitExecuter.sleep(1000);
 		String appId = returnAppId();
-	//	String stageCount = returnStagesCount();
 		Assert.assertTrue(appValues.containsValue(appId), "App Id is either incorrect or not captured in spark page");
 		logger.info("App ID is displayed in Spark details page.");
-	//	Assert.assertTrue(appValues.containsValue(stageCount), "Stage Count is either incorrect or not captured in spark page");
 		logger.info("Stage Count is displayed in Spark details page.");
 	}
-	
+
 	public void validateUserAndClusterSparkDetails(LinkedHashMap<String, String> appValues) {
 		List<String> sparkAppDetails = fetchAppDetails();
 		Assert.assertTrue(sparkAppDetails.contains("Owner : "+appValues.get("User")+" |"),appValues.get("User") + " not listed in Spark Page");
 		Assert.assertTrue(sparkAppDetails.contains("Cluster: "+appValues.get("Cluster Name")+" |"),appValues.get("Cluster") + " not listed in Spark Page");
+	}
 
+	public void validateInsightsAndRecommendationForSpark() {
+		Assert.assertTrue(sparkPageObject.insights.isDisplayed());
+	}
+	
+	public void navigateToAppMenu(String menu) {
+		if(menu.equalsIgnoreCase("resources")) {
+			sparkPageObject.resources.click();
+		}
+	}
+	
+	public void validateResourcesGraph() {
+		Assert.assertTrue(sparkPageObject.taskAttemptGraph.isDisplayed());
+		Assert.assertTrue(sparkPageObject.vcoresGraph.isDisplayed());
+		Assert.assertTrue(sparkPageObject.memoryGraph.isDisplayed());
 	}
 }

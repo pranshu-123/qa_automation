@@ -90,7 +90,7 @@ public class ChargeBackCluster {
 	public void validateGeneratedPieChartValues() {
 		waitExecuter.sleep(1500);
 		List<String> pieChartValues = chargebackClusterPageObject.pieChartValues.stream()
-				.map(values -> values.getText()).distinct().skip(1)
+				.map(values -> values.getText()).distinct().skip(2)
 				.collect(Collectors.toList());
 
 		//This is match result set data with generated graph values
@@ -187,6 +187,14 @@ public class ChargeBackCluster {
 		driver.findElement(By.xpath(String.format(chargebackClusterPageObject.filterByValues,filter))).click();
 	}
 
+	public void filterByCluster() {
+		waitExecuter.sleep(1000);
+		chargebackClusterPageObject.filterSearchTextField.click();
+		waitExecuter.sleep(1000);
+		chargebackClusterPageObject.filterSearchValueList.get(0).click();
+		waitExecuter.sleep(2000);
+	}
+	
 	public void filterTags() {
 		chargebackClusterPageObject.tagKeyDropdown.click();
 		chargebackClusterPageObject.tagKeySearchField.click();
@@ -290,6 +298,16 @@ public class ChargeBackCluster {
 
 			Assert.assertEquals(resultantSet, down);
 		}
+
+	}
+	
+	public String calculateClusterCountFromResultSet() {
+		double sum =0.00;
+		int size = chargebackClusterPageObject.resultSetValues.size();
+		for(int i = 5; i< size;i=i+7) {
+			sum = sum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText());
+		}
+		return (String.format("%.2f",sum));
 
 	}
 

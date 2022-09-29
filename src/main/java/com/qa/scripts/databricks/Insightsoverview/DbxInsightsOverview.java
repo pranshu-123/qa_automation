@@ -55,7 +55,7 @@ public class DbxInsightsOverview {
      */
     public void navigateToInsightsTab() {
         try {
-            userAction.performActionWithPolling(dbSubTopPanelModulePageObject.jobs, UserAction.CLICK);
+            userAction.performActionWithPolling(dbSubTopPanelModulePageObject.workflows, UserAction.CLICK);
             waitExecuter.waitUntilPageFullyLoaded();
             waitExecuter.waitUntilElementClickable(insightsOverview.insightsTab);
             waitExecuter.sleep(3000);

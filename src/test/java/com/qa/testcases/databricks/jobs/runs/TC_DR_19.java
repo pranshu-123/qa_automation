@@ -64,6 +64,7 @@ public class TC_DR_19 extends BaseClass {
             waitExecuter.sleep(2000);
             loggingUtils.info("Selected username from dropdown " + usernameSelected,test);
             executor.executeScript("arguments[0].scrollIntoView();", dbpageObject.globalSearchBox);
+            waitExecuter.waitForSeconds(1);
             int totalCount = Integer
                     .parseInt(dbpageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
             if (totalCount > 0) {
@@ -80,7 +81,7 @@ public class TC_DR_19 extends BaseClass {
             waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
             userActions.performActionWithPolling(dbpageObject.resetButton, UserAction.CLICK);
             waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
-                    } catch (NoSuchElementException ex) {
+                    } catch (NoSuchElementException | InterruptedException ex) {
             loggingUtils.error("No app present by this name", test);
             loggingUtils.error("Error- " + ex, test);
         }

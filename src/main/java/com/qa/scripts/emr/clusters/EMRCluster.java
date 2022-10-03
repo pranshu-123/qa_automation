@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -175,4 +176,16 @@ public class EMRCluster {
 		return clusterCount;
 	}
 
+	public void selectClusterTabs(String tab) {
+		driver.findElement(By.xpath(String.format(clusterHomePageObjects.clusterTabs, tab))).click();
+	}
+
+	public void selectCluster(String id) {
+		for(WebElement e : clusterHomePageObjects.listOfClusterId) {
+			if(e.getText().equals(id)) {
+				e.click();
+			}
+			break;
+		}
+	}
 }

@@ -370,4 +370,8 @@ public class TopXReports {
 		}
 
 	}
+	
+	public void downloadReport() {
+		reportsTopXPageObject.download.click();
+	}
 }

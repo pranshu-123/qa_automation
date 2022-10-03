@@ -117,6 +117,12 @@ public class ComputePageObject {
 	@FindBy(xpath = "//span[contains(@class,'event-name text-ellipsis')]/../..")
 	public List<WebElement> runningStatus;	
 	
+	@FindBy(xpath = "//div[contains(text(),'DBU')]")
+	public List<WebElement> dbuCount;
+	
+	@FindBy(xpath = "//span[contains(text(),'$')]")
+	public List<WebElement> cost;
+	
 	public String sortType = "//span[contains(text(),'%s')]/../a[@class='sorting icon-sort']"; //Duration, Cost, Start time, User
 	
 	/**

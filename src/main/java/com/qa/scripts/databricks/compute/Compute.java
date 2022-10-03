@@ -250,7 +250,7 @@ public class Compute {
 			if(key.equalsIgnoreCase(tagKey)) {
 				JavaScriptExecuter.scrollOnElement(driver, computePageObject.tagKeyLabels.get(position));
 				computePageObject.tagKeyLabels.get(position).click();
-			
+
 			}
 			else {
 				computePageObject.tagKeyLabels.get(0).click();
@@ -341,5 +341,30 @@ public class Compute {
 		computePageObject.selectWorkspace.click();
 		waitExecuter.sleep(1000);
 		return computePageObject.filteredChoice.getText();
+	}
+
+	public String retrieveDbuCount() {
+		double sum =0.00;
+		int size = computePageObject.dbuCount.size();
+		for(int i =0; i< size;i++) {
+			sum = sum + Double.parseDouble(computePageObject.dbuCount.get(i).getText().replace("DBUs : ", ""));
+		}
+
+		return 	String.format("%.2f",sum);
+	}
+
+	public String retrieveCostSum() {
+		double sum =0.00;
+		int size = computePageObject.cost.size();
+		for(int i =0; i< size;i++) {
+			sum = sum + Double.parseDouble(computePageObject.cost.get(i).getText().replace("$ ", ""));
+		}
+
+		return 	String.format("%.2f",sum);
+	}
+
+	public String retrieveTotalClusterCount() {
+		double rowsCount = computePageObject.jobRunValuesRows.stream().count();
+		return String.format("%.2f",rowsCount);
 	}
 }

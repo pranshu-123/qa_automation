@@ -126,6 +126,9 @@ public class ReportsTopXPageObject {
 	@FindBy(xpath = "//span[@class='select2-results']//li")
 	public WebElement  tagName;
 	
+	@FindBy(xpath = "//span[@class='icon-download pointer downlod-pos']")
+	public WebElement download;
+	
 	public String tagsType = "//label[contains(text(),'%s')]/preceding-sibling::input";
 	
 	public String tagsName = "//label[contains(text(),'%s')]/preceding-sibling::input/../../following-sibling::footer/ul//input";

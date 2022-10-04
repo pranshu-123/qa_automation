@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 public class TC_DBX_DT_7 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_7.class);
 
-    @Test(description = "Verify tables data is displayed in table")
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify tables data is displayed in table")
     public void TC_DBX_DT_7_verifyTablesData(String clusterId) {
         test = extent.startTest("verifyTablesData", "Verify tables data is displayed in table");
         test.assignCategory("Databricks - Data");

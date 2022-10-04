@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class TC_DBX_DT_55 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
-    @Test(description = "Verify the Instance Summary section on Application Details page")
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify the Instance Summary section on Application Details page")
     public void TC_DBX_DT_55_verifyInstanceSummaryPage(String clusterId) {
         test = extent.startTest("TC_DBX_DT_55.verifyInstanceSummaryPage",
             "Verify the Instance Summary section on Application Details page");

@@ -21,7 +21,7 @@ import java.io.*;
 public class TC_DBX_DT_31 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_31.class);
 
-    @Test(description = "Verify the content of csv file")
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify the content of csv file")
     public void TC_DBX_DT_31_verifyDownloadedCSVFile(String clusterId) {
         test = extent.startTest("TC_DBX_DT_31.verifyDownloadedCSVFile", "Verify the content of csv file");
         test.assignCategory("Databricks - Data");

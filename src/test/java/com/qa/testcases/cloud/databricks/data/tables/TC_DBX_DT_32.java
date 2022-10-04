@@ -25,7 +25,7 @@ import java.io.File;
 public class TC_DBX_DT_32 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_32.class);
 
-    @Test(description = "Validate whether Users graph is updated when different rows are selected from table details.")
+    @Test(dataProvider = "clusterid-data-provider",description = "Validate whether Users graph is updated when different rows are selected from table details.")
     public void verifyUsersGraphWithDifferentTables(String clusterId) {
         test = extent.startTest("TC_DBX_DT_32.verifyUsersGraphWithDifferentTables", "Validate whether Users graph is updated" +
             " when different rows are selected from table details.");

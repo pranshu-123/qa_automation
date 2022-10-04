@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class TC_DBX_DT_40 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
-    @Test(description = "Verify whether user is able to sort the table columns of Application Table displayed on \"Table Details\" page.")
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify whether user is able to sort the table columns of Application Table displayed on \"Table Details\" page.")
     public void validateSortFunctionalityOfApplicationsTable(String clusterId) {
         test = extent.startTest("TC_DBX_DT_40.validateSortFunctionalityOfApplicationsTable",
             "Verify whether user is able to sort the table columns of Application Table displayed on \"Table Details\" page.");

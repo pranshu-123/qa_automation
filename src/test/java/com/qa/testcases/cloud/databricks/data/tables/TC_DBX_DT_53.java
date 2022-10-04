@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
 public class TC_DBX_DT_53 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
-    @Test(description = "Validate the Parent App column of the table detail.")
+    @Test(dataProvider = "clusterid-data-provider",description = "Validate the Parent App column of the table detail.")
     public void validateParentAppColumnApplicationsTable(String clusterId) throws InterruptedException {
         test = extent.startTest("TC_DBX_DT_53.validateParentAppColumnApplicationsTable",
                 "Validate the Parent App column of the table detail.");

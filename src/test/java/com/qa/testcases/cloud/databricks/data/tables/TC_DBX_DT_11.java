@@ -17,7 +17,7 @@ import java.util.List;
 public class TC_DBX_DT_11 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_11.class);
 
-    @Test(description = "Validate the data table details are displayed based on applied filter for table state.")
+    @Test(dataProvider = "clusterid-data-provider",dataProvider = "clusterid-data-provider",description = "Validate the data table details are displayed based on applied filter for table state.")
     public void verifyTablesDisplayedAsStateFilter(String clusterId) {
         test = extent.startTest("TC_DBX_DT_11.verifyTablesDisplayedAsStateFilter", "Validate the data table details" +
             " are displayed based on applied filter for table state.");

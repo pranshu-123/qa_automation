@@ -15,7 +15,7 @@ public class TC_DBX_DT_29 extends BaseClass {
 
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_29.class);
 
-    @Test(description = "Verify Total Tables label left of tabular data")
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify Total Tables label left of tabular data")
     public void verifyTotalTablesLabel(String clusterId) {
         test = extent.startTest("TC_DBX_DT_29.verifyTotalTablesLabel", "Verify Total Tables label left of tabular data");
         test.assignCategory("Databricks - Data");

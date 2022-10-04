@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 public class TC_DBX_DT_26 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_26.class);
 
-    @Test(description = "Validate whether user is able to filter data with Apps column value.")
+    @Test(dataProvider = "clusterid-data-provider",description = "Validate whether user is able to filter data with Apps column value.")
     public void verifyTableDataFilterByAppsColumn(String clusterId) throws InterruptedException {
         test = extent.startTest("TC_DBX_DT_26.verifyTableDataFilterByAppsColumn", "Validate whether user is able to filter data " +
             "with Apps column value.");

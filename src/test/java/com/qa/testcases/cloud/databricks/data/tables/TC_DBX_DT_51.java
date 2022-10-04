@@ -19,7 +19,7 @@ import java.util.List;
 public class TC_DBX_DT_51 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
-    @Test(description = "Verify the \"Write\" column of \"Applications\" table.")
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify the \"Write\" column of \"Applications\" table.")
     public void verifyWriteColumnApplicationsTable(String clusterId) {
         test = extent.startTest("TC_DBX_DT_51.verifyWriteColumnApplicationsTable",
             "Verify the \"Write\" column of \"Applications\" table.");

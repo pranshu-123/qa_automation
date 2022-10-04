@@ -18,7 +18,7 @@ import java.util.List;
 public class TC_DBX_DT_42 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
-    @Test(description = "Verify the Type column of \"Applications\" table.")
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify the Type column of \"Applications\" table.")
     public void verifyTypeColumnApplicationsTable(String clusterId) {
         test = extent.startTest("TC_DBX_DT_42.verifyTypeColumnApplicationsTable",
             "Verify the Type column of \"Applications\" table.");

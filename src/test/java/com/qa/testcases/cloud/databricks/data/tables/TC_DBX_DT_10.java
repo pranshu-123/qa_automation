@@ -19,7 +19,7 @@ import org.testng.annotations.Test;
 public class TC_DBX_DT_10 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_10.class);
 
-    @Test(description = "Verify the table state filter present.")
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify the table state filter present.")
     public void verifyTableStateFilter(String clusterId) {
         test = extent.startTest("TC_DBX_DT_10.verifyTableStateFilter", "Verify the table state filter present.");
         test.assignCategory("Databricks - Data");

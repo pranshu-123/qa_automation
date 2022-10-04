@@ -22,7 +22,7 @@ import java.io.File;
 public class TC_DBX_DT_33 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_33.class);
 
-    @Test(description = "Validate whether Apps graph is updated when different rows are selected from table details.")
+    @Test(dataProvider = "clusterid-data-provider",description = "Validate whether Apps graph is updated when different rows are selected from table details.")
     public void verifyAppsGraphWithDifferentTables(String clusterId) {
         test = extent.startTest("verifyAppsGraphWithDifferentTables", "Validate whether Apps graph is updated when" +
             " different rows are selected from table details.");

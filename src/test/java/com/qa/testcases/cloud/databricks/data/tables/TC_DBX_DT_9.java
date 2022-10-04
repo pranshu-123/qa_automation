@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 public class TC_DBX_DT_9 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_9.class);
 
-    @Test(description = "Validate the search textbox is able to filter for tables data.")
+    @Test(dataProvider = "clusterid-data-provider",description = "Validate the search textbox is able to filter for tables data.")
     public void verifySearchBoxIsAbleToFilter(String clusterId) throws InterruptedException {
         test = extent.startTest("TC_DBX_DT_9.verifySearchBoxIsAbleToFilter", "Validate the search textbox is able to filter for tables data.");
         test.assignCategory("Databricks - Data");

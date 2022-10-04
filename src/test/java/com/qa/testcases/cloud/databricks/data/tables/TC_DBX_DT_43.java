@@ -20,7 +20,7 @@ import java.util.List;
 public class TC_DBX_DT_43 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
-    @Test(description = "Verify the \"Status\" column of \"Applications\" table.")
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify the \"Status\" column of \"Applications\" table.")
     public void verifyStatusColumnApplicationsTable(String clusterId) {
         test = extent.startTest("TC_DBX_DT_43.verifyStatusColumnApplicationsTable",
             "Verify the \"Status\" column of \"Applications\" table.");

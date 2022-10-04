@@ -20,7 +20,7 @@ import java.util.List;
 public class TC_DBX_DT_46 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
-    @Test(description = "Verify the \"Cluster Id\" column of \"Applications\" table.")
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify the \"Cluster Id\" column of \"Applications\" table.")
     public void verifyClusterIdColumnApplicationsTable(String clusterId) throws InterruptedException {
         test = extent.startTest("TC_DBX_DT_46.verifyClusterIdColumnApplicationsTable",
             "Verify the \"Cluster Id\" column of \"Applications\" table.");

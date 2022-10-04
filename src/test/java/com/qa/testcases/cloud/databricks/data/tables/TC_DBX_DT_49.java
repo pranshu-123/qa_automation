@@ -19,7 +19,7 @@ import java.util.List;
 public class TC_DBX_DT_49 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
-    @Test(description = "Verify the \"Queue\" column of \"Applications\" table.")
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify the \"Queue\" column of \"Applications\" table.")
     public void verifyQueueColumnApplicationsTable(String clusterId) {
         test = extent.startTest("TC_DBX_DT_49.verifyQueueColumnApplicationsTable",
             "Verify the \"Queue\" column of \"Applications\" table.");

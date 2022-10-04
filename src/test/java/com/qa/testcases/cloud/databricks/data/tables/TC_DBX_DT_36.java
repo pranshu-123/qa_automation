@@ -22,7 +22,7 @@ import java.util.List;
 public class TC_DBX_DT_36 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_36.class);
 
-    @Test(description = "Verify the table information displayed on \"Table Details\" page.")
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify the table information displayed on \"Table Details\" page.")
     public void verifyInfoDisplayedOnTableDetails(String clusterId) {
         test = extent.startTest("TC_DBX_DT_36.verifyInfoDisplayedOnTableDetails", "Verify the table information displayed on \"Table Details\" page");
         test.assignCategory("Databricks - Data");

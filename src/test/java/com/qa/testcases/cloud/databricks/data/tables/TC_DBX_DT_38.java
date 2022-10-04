@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 public class TC_DBX_DT_38 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
-    @Test(description = "Verify the Applications section of Table Details page.")
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify the Applications section of Table Details page.")
     public void verifyApplicationsSection(String clusterId) {
         test = extent.startTest("TC_DBX_DT_38.verifyApplicationsSection", "Verify the Applications section of Table Details page.");
         test.assignCategory("Databricks - Data");

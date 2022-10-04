@@ -18,7 +18,7 @@ public class TC_DBX_DT_3 extends BaseClass {
 
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_1.class);
 
-    @Test(description = "Validate the metastore on data page")
+    @Test(dataProvider = "clusterid-data-provider",description = "Validate the metastore on data page")
     public void TC_DBX_DT_3_verifyMetaStoreOnDataPage(String clusterId) {
         test = extent.startTest("TC_DBX_DT_3.verifyMetaStoreOnDataPage", "Validate the metastore on data page");
         test.assignCategory("Databricks - Data");

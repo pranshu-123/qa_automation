@@ -23,7 +23,7 @@ import org.testng.annotations.Test;
 public class TC_DBX_DT_60 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
-    @Test(description = "Validate the search box for application search")
+    @Test(dataProvider = "clusterid-data-provider",description = "Validate the search box for application search")
     public void TC_DBX_DT_60_verifySearchBoxNavigationTab(String clusterId) {
         test = extent.startTest("TC_DBX_DT_60.verifySearchBoxNavigationTab",
             "Validate the search box for application search");

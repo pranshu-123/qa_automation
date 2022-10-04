@@ -20,7 +20,7 @@ import java.io.File;
 public class TC_DBX_DT_30 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_30.class);
 
-    @Test(description = "Verify the \"Download CSV\" button")
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify the \"Download CSV\" button")
     public void TC_DBX_DT_30_verifyDownloadCSV(String clusterId) {
         test = extent.startTest("TC_DBX_DT_30.verifyDownloadCSV", "Verify the \"Download CSV\" button");
         test.assignCategory("Databricks - Data");

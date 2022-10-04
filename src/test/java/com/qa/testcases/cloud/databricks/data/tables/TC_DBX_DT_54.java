@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
 public class TC_DBX_DT_54 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
-    @Test(description = "Verify the application details page.")
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify the application details page.")
     public void verifyApplicationDetailsPage(String clusterId) {
         test = extent.startTest("TC_DBX_DT_54.verifyApplicationDetailsPage",
             "Verify the application details page.");

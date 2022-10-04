@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class TC_DBX_DT_57 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
-    @Test(description = "Verify the options for chart display on application details page")
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify the options for chart display on application details page")
     public void TC_DBX_DT_57_verifyOptionsOfLeftGraphApplicationDetailPage(String clusterId) {
         test = extent.startTest("TC_DBX_DT_57.verifyOptionsOfLeftGraphApplicationDetailPage",
             "Verify the options for chart display on application details page.");

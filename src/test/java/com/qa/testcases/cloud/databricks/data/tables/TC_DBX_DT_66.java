@@ -19,7 +19,7 @@ import org.testng.annotations.Test;
 public class TC_DBX_DT_66 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
-    @Test(description = "Verify \"Tag\" tab on application details page")
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify \"Tag\" tab on application details page")
     public void TC_DBX_DT_66_verifyTagTab(String clusterId) {
         test = extent.startTest("TC_DBX_DT_66.verifyTagTab",
             "Verify \"Tag\" tab on application details page");

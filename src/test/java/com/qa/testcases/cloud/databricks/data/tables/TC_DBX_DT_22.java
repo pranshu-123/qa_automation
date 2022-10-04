@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 public class TC_DBX_DT_22 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_22.class);
 
-    @Test(description = "Validate whether user is able to filter data with Storage Format column value.")
+    @Test(dataProvider = "clusterid-data-provider",description = "Validate whether user is able to filter data with Storage Format column value.")
     public void verifyTableDataFilterByStorageFormatColumn(String clusterId) throws InterruptedException {
         test = extent.startTest("TC_DBX_DT_22.verifyTableDataFilterByStorageFormatColumn", "Validate whether user is able to filter data " +
             "with Storage Format column value.");

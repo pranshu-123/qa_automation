@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 public class TC_DBX_DT_59 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
-    @Test(description = "Verify the Navigation tab of left of application detail page")
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify the Navigation tab of left of application detail page")
     public void TC_DBX_DT_59_verifyNavigationTab(String clusterId) {
         test = extent.startTest("TC_DBX_DT_59.verifyNavigationTab",
             "Verify the Navigation tab of left of application detail page.");

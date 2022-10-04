@@ -21,7 +21,7 @@ import java.util.List;
 public class TC_DBX_DT_39 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
-    @Test(description = "Verify the Applications table of Table Details Page")
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify the Applications table of Table Details Page")
     public void verifyApplicationsDetailsTable(String clusterId) {
         test = extent.startTest("TC_DBX_DT_39.verifyApplicationsDetailsTable", "Verify the Applications table of Table Details Page.");
         test.assignCategory("Databricks - Data");

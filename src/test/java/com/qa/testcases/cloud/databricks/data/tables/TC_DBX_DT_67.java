@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
 public class TC_DBX_DT_67 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
-    @Test(description = "Validate the close button of application page")
+    @Test(dataProvider = "clusterid-data-provider",description = "Validate the close button of application page")
     public void TC_DBX_DT_67_validateCloseButtonApplicationDetailsPage(String clusterId) {
         test = extent.startTest("TC_DBX_DT_67.validateCloseButtonApplicationDetailsPage",
             "Validate the close button of application page");

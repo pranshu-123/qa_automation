@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
 public class TC_DBX_DT_14 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_14.class);
 
-    @Test(description = "Verify the table events filter present.")
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify the table events filter present.")
     public void verifyTableEventFilter(String clusterId) {
         test = extent.startTest("TC_DBX_DT_14.verifyTableEventFilter", "Verify the table events filter present.");
         test.assignCategory("Databricks - Data");

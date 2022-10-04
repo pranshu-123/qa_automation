@@ -21,7 +21,7 @@ import org.testng.annotations.Test;
 public class TC_DBX_DT_63 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
-    @Test(description = "Verify \"Resources\" tab on application details page")
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify \"Resources\" tab on application details page")
     public void TC_DBX_DT_63_verifyResourcesTab(String clusterId) {
         test = extent.startTest("TC_DBX_DT_63.verifyResourcesTab",
             "Verify \"Resources\" tab on application details page");

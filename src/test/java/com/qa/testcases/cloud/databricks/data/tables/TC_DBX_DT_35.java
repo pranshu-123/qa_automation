@@ -19,7 +19,7 @@ import org.testng.annotations.Test;
 public class TC_DBX_DT_35 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_35.class);
 
-    @Test(description = "Validate the more info of the table record.")
+    @Test(dataProvider = "clusterid-data-provider",description = "Validate the more info of the table record.")
     public void validateMoreInfo(String clusterId) {
         test = extent.startTest("TC_DBX_DT_35.validateMoreInfo", "Validate the more info of the table record.");
         test.assignCategory("Databricks - Data");

@@ -19,7 +19,7 @@ import org.testng.annotations.Test;
 public class TC_DBX_DT_8 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_8.class);
 
-    @Test(description = "Verify whether search textbox is present to filter data from data table")
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify whether search textbox is present to filter data from data table")
     public void TC_DBX_DT_8_verifySearchBox(String clusterId) {
         test = extent.startTest("verifySearchBox", "Verify whether search textbox is present to filter data from data table");
         test.assignCategory("Databricks - Data");

@@ -18,7 +18,7 @@ public class TC_DBX_DT_5 extends BaseClass {
 
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_5.class);
 
-    @Test(description = "Verify the Apps graph")
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify the Apps graph")
     public void TC_DBX_DT_5_verifyAppsTab(String clusterId) {
         test = extent.startTest("verifyAppsTab", "Verify the Apps graph");
         test.assignCategory("Databricks - Data");

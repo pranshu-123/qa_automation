@@ -4,6 +4,7 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.cloud.databricks.DataPageObject;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
+import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -19,7 +20,7 @@ public class TC_DBX_DT_35 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_35.class);
 
     @Test(description = "Validate the more info of the table record.")
-    public void validateMoreInfo() {
+    public void validateMoreInfo(String clusterId) {
         test = extent.startTest("TC_DBX_DT_35.validateMoreInfo", "Validate the more info of the table record.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
@@ -27,7 +28,9 @@ public class TC_DBX_DT_35 extends BaseClass {
         try {
             dataTablesHelper.clickOnDataTab();
             dataTablesHelper.clickOnDataTablesTab();
-            dataTablesHelper.selectWorkspaceForConfiguredMetastore();
+            AllApps allApps = new AllApps(driver);
+            allApps.selectWorkSpaceId(clusterId);
+            /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
             dataTablesHelper.clickOnMoreInfoOfNthRow(0);
             Assert.assertEquals(dataPageObject.tableDetailsPageHeading.getText(), "Tables Table Details",
                 "Table Details Page is not displayed.");

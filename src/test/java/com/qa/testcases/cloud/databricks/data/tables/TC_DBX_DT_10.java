@@ -4,6 +4,7 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.cloud.databricks.DataPageObject;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
+import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
 import com.qa.utils.WaitExecuter;
 import org.testng.Assert;
@@ -19,13 +20,15 @@ public class TC_DBX_DT_10 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_10.class);
 
     @Test(description = "Verify the table state filter present.")
-    public void verifyTableStateFilter() {
+    public void verifyTableStateFilter(String clusterId) {
         test = extent.startTest("TC_DBX_DT_10.verifyTableStateFilter", "Verify the table state filter present.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
         dataTablesHelper.clickOnDataTab();
         dataTablesHelper.clickOnDataTablesTab();
-        dataTablesHelper.selectWorkspaceForConfiguredMetastore();
+        AllApps allApps = new AllApps(driver);
+        allApps.selectWorkSpaceId(clusterId);
+        /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
         DataPageObject dataPageObject = new DataPageObject(driver);
         WaitExecuter executor = new WaitExecuter(driver);
         executor.waitUntilElementPresent(dataPageObject.tableStateFilterLabel);

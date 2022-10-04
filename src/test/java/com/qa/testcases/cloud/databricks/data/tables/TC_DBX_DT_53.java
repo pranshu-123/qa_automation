@@ -4,6 +4,7 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.cloud.databricks.DataPageObject;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
+import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
 import com.qa.utils.WaitExecuter;
 import org.openqa.selenium.By;
@@ -20,7 +21,7 @@ public class TC_DBX_DT_53 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(description = "Validate the Parent App column of the table detail.")
-    public void validateParentAppColumnApplicationsTable() throws InterruptedException {
+    public void validateParentAppColumnApplicationsTable(String clusterId) throws InterruptedException {
         test = extent.startTest("TC_DBX_DT_53.validateParentAppColumnApplicationsTable",
                 "Validate the Parent App column of the table detail.");
         test.assignCategory("Databricks - Data");
@@ -28,7 +29,9 @@ public class TC_DBX_DT_53 extends BaseClass {
         WaitExecuter executor = new WaitExecuter(driver);
         dataTablesHelper.clickOnDataTab();
         dataTablesHelper.clickOnDataTablesTab();
-        dataTablesHelper.selectWorkspaceForConfiguredMetastore();
+        AllApps allApps = new AllApps(driver);
+        allApps.selectWorkSpaceId(clusterId);
+        /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
         dataTablesHelper.clickOnMoreInfoOfNthRow(0);
         DataPageObject dataPageObject = new DataPageObject(driver);
         try {

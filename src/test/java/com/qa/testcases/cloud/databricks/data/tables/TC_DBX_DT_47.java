@@ -3,6 +3,7 @@ package com.qa.testcases.cloud.databricks.data.tables;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
+import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.DateUtils;
 import com.qa.utils.LoggingUtils;
 import org.testng.Assert;
@@ -20,14 +21,16 @@ public class TC_DBX_DT_47 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(description = "Verify the \"Start Time\" column of \"Applications\" table.")
-    public void verifyStartTimeColumnApplicationsTable() {
+    public void verifyStartTimeColumnApplicationsTable(String clusterId) {
         test = extent.startTest("TC_DBX_DT_47.verifyStartTimeColumnApplicationsTable",
             "Verify the \"Start Time\" column of \"Applications\" table.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
         dataTablesHelper.clickOnDataTab();
         dataTablesHelper.clickOnDataTablesTab();
-        dataTablesHelper.selectWorkspaceForConfiguredMetastore();
+        AllApps allApps = new AllApps(driver);
+        allApps.selectWorkSpaceId(clusterId);
+        /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
         dataTablesHelper.clickOnMoreInfoOfNthRow(0);
         try {
             dataTablesHelper.clickOnTabOnTableDetails("Applications");

@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.cloud.databricks.DataPageObject;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
+import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.ActionPerformer;
 import com.qa.utils.ImageUtils;
 import com.qa.utils.LoggingUtils;
@@ -26,14 +27,16 @@ public class TC_DBX_DT_58 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(description = "Verify the chart by different selection of the dropdown values")
-    public void TC_DBX_DT_58_verifyLeftChartOnDifferentOptionSelection() {
+    public void TC_DBX_DT_58_verifyLeftChartOnDifferentOptionSelection(String clusterId) {
         test = extent.startTest("TC_DBX_DT_58.verifyLeftChartOnDifferentOptionSelection",
             "Verify the chart by different selection of the dropdown values.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
         dataTablesHelper.clickOnDataTab();
         dataTablesHelper.clickOnDataTablesTab();
-        dataTablesHelper.selectWorkspaceForConfiguredMetastore();
+        AllApps allApps = new AllApps(driver);
+        allApps.selectWorkSpaceId(clusterId);
+        /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
         dataTablesHelper.clickOnMoreInfoOfNthRow(0);
         DataPageObject dataPageObject = new DataPageObject(driver);
         ActionPerformer actionPerformer = new ActionPerformer(driver);

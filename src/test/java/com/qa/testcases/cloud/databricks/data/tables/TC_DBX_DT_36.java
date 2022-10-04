@@ -4,6 +4,7 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.cloud.databricks.DataPageObject;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
+import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -22,7 +23,7 @@ public class TC_DBX_DT_36 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_36.class);
 
     @Test(description = "Verify the table information displayed on \"Table Details\" page.")
-    public void verifyInfoDisplayedOnTableDetails() {
+    public void verifyInfoDisplayedOnTableDetails(String clusterId) {
         test = extent.startTest("TC_DBX_DT_36.verifyInfoDisplayedOnTableDetails", "Verify the table information displayed on \"Table Details\" page");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
@@ -30,7 +31,9 @@ public class TC_DBX_DT_36 extends BaseClass {
         try {
             dataTablesHelper.clickOnDataTab();
             dataTablesHelper.clickOnDataTablesTab();
-            dataTablesHelper.selectWorkspaceForConfiguredMetastore();
+            AllApps allApps = new AllApps(driver);
+            allApps.selectWorkSpaceId(clusterId);
+            /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
             List<String> getRowValues = dataTablesHelper.getCellValuesOfNthRow(0);
             dataTablesHelper.clickOnMoreInfoOfNthRow(0);
             String actualDatabaseValue = dataPageObject.generalKPIsStorageKPIsValues

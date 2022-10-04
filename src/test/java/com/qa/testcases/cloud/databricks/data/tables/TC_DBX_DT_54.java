@@ -4,6 +4,7 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.cloud.databricks.DataPageObject;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
+import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.DateUtils;
 import com.qa.utils.LoggingUtils;
 import org.openqa.selenium.By;
@@ -20,14 +21,16 @@ public class TC_DBX_DT_54 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(description = "Verify the application details page.")
-    public void verifyApplicationDetailsPage() {
+    public void verifyApplicationDetailsPage(String clusterId) {
         test = extent.startTest("TC_DBX_DT_54.verifyApplicationDetailsPage",
             "Verify the application details page.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
         dataTablesHelper.clickOnDataTab();
         dataTablesHelper.clickOnDataTablesTab();
-        dataTablesHelper.selectWorkspaceForConfiguredMetastore();
+        AllApps allApps = new AllApps(driver);
+        allApps.selectWorkSpaceId(clusterId);
+        /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
         dataTablesHelper.clickOnMoreInfoOfNthRow(0);
         DataPageObject dataPageObject = new DataPageObject(driver);
         try {

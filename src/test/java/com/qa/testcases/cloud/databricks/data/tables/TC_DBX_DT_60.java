@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.cloud.databricks.DataPageObject;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
+import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
 import com.qa.utils.RandomGenerator;
 import com.qa.utils.WaitExecuter;
@@ -23,14 +24,16 @@ public class TC_DBX_DT_60 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(description = "Validate the search box for application search")
-    public void TC_DBX_DT_60_verifySearchBoxNavigationTab() {
+    public void TC_DBX_DT_60_verifySearchBoxNavigationTab(String clusterId) {
         test = extent.startTest("TC_DBX_DT_60.verifySearchBoxNavigationTab",
             "Validate the search box for application search");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
         dataTablesHelper.clickOnDataTab();
         dataTablesHelper.clickOnDataTablesTab();
-        dataTablesHelper.selectWorkspaceForConfiguredMetastore();
+        AllApps allApps = new AllApps(driver);
+        allApps.selectWorkSpaceId(clusterId);
+        /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
         dataTablesHelper.clickOnMoreInfoOfNthRow(0);
         DataPageObject dataPageObject = new DataPageObject(driver);
         WaitExecuter waitExecuter = new WaitExecuter(driver);

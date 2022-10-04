@@ -3,6 +3,7 @@ package com.qa.testcases.cloud.databricks.data.tables;
 import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
+import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
 import org.testng.annotations.Test;
 
@@ -17,14 +18,16 @@ public class TC_DBX_DT_12 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_12.class);
 
     @Test(description = "Validate whether user is able to change the setting of label by making changes in Age")
-    public void verifyTablesDisplayedIfChangedAge() throws InterruptedException {
+    public void verifyTablesDisplayedIfChangedAge(String clusterId) throws InterruptedException {
         test = extent.startTest("TC_DBX_DT_12.verifyTablesDisplayedIfChangedAge", "Validate whether user is able" +
                 " to change the setting of label by making changes in Age");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
         dataTablesHelper.clickOnDataTab();
         dataTablesHelper.clickOnDataTablesTab();
-        dataTablesHelper.selectWorkspaceForConfiguredMetastore();
+        AllApps allApps = new AllApps(driver);
+        allApps.selectWorkSpaceId(clusterId);
+        /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
         dataTablesHelper.changeAppliedStateSettings("age");
         List<Integer> tableStateFilterSetting = dataTablesHelper.getAppliedStateFilter();
         loggingUtils.info("Changed the setting for age", test);

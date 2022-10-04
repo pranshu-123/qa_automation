@@ -4,6 +4,7 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.cloud.databricks.DataPageObject;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
+import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -21,13 +22,15 @@ public class TC_DBX_DT_31 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_31.class);
 
     @Test(description = "Verify the content of csv file")
-    public void TC_DBX_DT_31_verifyDownloadedCSVFile() {
+    public void TC_DBX_DT_31_verifyDownloadedCSVFile(String clusterId) {
         test = extent.startTest("TC_DBX_DT_31.verifyDownloadedCSVFile", "Verify the content of csv file");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
         dataTablesHelper.clickOnDataTab();
         dataTablesHelper.clickOnDataTablesTab();
-        dataTablesHelper.selectWorkspaceForConfiguredMetastore();
+        AllApps allApps = new AllApps(driver);
+        allApps.selectWorkSpaceId(clusterId);
+        /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
         File downloadedFile = dataTablesHelper.downloadDataTable();
         try {
             FileReader fileReader = new FileReader(downloadedFile);

@@ -12,10 +12,10 @@ public class BudgetPageObject {
 	@FindBy(id = "btn-new-budget")
 	public WebElement newBudget;
 
-	@FindBy(xpath = "//h2[contains(text(),'Active')]/following-sibling::div//tr/td/div")
+	@FindBy(xpath = "//div//tr/td/div")
 	public List<WebElement> activeBudgetTable;
 	
-	@FindBy(xpath = "//h2[contains(text(),'Active')]/following-sibling::div//tr/th")
+	@FindBy(xpath = "//div[contains(text(),'actively')]/following-sibling::div//tr/th")
 	public List<WebElement> activeBudgetTableHeader;
 
 	@FindBy(xpath = "//h2[contains(text(),'Upcoming')]/following-sibling::div//tr/td")
@@ -80,6 +80,12 @@ public class BudgetPageObject {
 	public String delete = "//div[contains(text(),'%s')]/../..//td//button[@title='Delete']";
 	
 	public String edit = "//div[contains(text(),'%s')]/../..//td//button[@title='Edit']";
+	
+	@FindBy(xpath = "//a//span[contains(text(),'Upcoming')]")
+	public WebElement upcomingBudgetTab;
+	
+	@FindBy(xpath = "//a//span[contains(text(),'Expired')]")
+	public WebElement expiredBudgetTab;
 	
 	/**
 	 * @param driver The driver that will be used to look up the elements

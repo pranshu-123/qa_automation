@@ -71,7 +71,7 @@ public class ChargebackClusterPageObject {
     @FindBy(xpath = "//button[contains(text(),'Copy URL')]/../a")
     public List<WebElement> urlLinks;
     
-    @FindBy(xpath = "//button[contains(text(),'Copy URL')]/../../..//td/span")
+    @FindBy(xpath = "//span[contains(text(),'Optimize')]/../../../..//span")
     public List<WebElement> resultSetValues;
     
     @FindBy(xpath = "//div[@class='component-date-picker']/span")

@@ -1,4 +1,4 @@
-package com.qa.pagefactory.emr.Cost;
+package com.qa.pagefactory.emr.cost;
 
 import com.qa.enums.UserAction;
 import com.qa.utils.actions.UserActions;

@@ -98,8 +98,10 @@ public class ChargeBackCluster {
 				.map(a-> a.getText())
 				.collect(Collectors.toList());
 		for(String s : pieChartValues) {
-			Assert.assertTrue(resultSet.contains(s));
-			LOGGER.info("Pie Chart is populated with " +s+" result values");
+			if(s!="Others") {
+				Assert.assertTrue(resultSet.contains(s));
+				LOGGER.info("Pie Chart is populated with " +s+" result values");
+			}
 		}
 	}
 
@@ -160,7 +162,7 @@ public class ChargeBackCluster {
 	public String calculateDBUSumFromResultSet() {
 		double sum =0.00;
 		int size = chargebackClusterPageObject.resultSetValues.size();
-		for(int i =1; i< size;i=i+7) {
+		for(int i =1; i< size;i=i+8) {
 			sum = sum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText());
 		}
 
@@ -194,7 +196,7 @@ public class ChargeBackCluster {
 		chargebackClusterPageObject.filterSearchValueList.get(0).click();
 		waitExecuter.sleep(2000);
 	}
-	
+
 	public void filterTags() {
 		chargebackClusterPageObject.tagKeyDropdown.click();
 		chargebackClusterPageObject.tagKeySearchField.click();
@@ -221,7 +223,7 @@ public class ChargeBackCluster {
 		double ceilSum =0.00;
 		int size = chargebackClusterPageObject.resultSetValues.size();
 		ArrayList<String> list = new ArrayList<String>();
-		for(int i =5; i< size;i=i+7) {
+		for(int i =5; i< size;i=i+8) {
 			floorSum = floorSum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText());
 		}
 		if(floorSum<1000) {
@@ -251,7 +253,7 @@ public class ChargeBackCluster {
 	public String calculateTotalCostFromResultSet() {
 		double sum =0.00;
 		int size = chargebackClusterPageObject.resultSetValues.size();
-		for(int i =3; i< size;i=i+7) {
+		for(int i =3; i< size;i=i+8) {
 			sum = sum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText().substring(2));
 		}
 		return ("$ "+String.format("%.2f",sum));
@@ -274,7 +276,7 @@ public class ChargeBackCluster {
 
 		int size = chargebackClusterPageObject.resultSetValues.size();
 
-		for(int i =5; i< size;i=i+7) {
+		for(int i =5; i< size;i=i+8) {
 			initialSet.add(chargebackClusterPageObject.resultSetValues.get(i).getText());
 		}
 
@@ -282,7 +284,7 @@ public class ChargeBackCluster {
 			up = new TreeSet<String>(initialSet);
 			chargebackClusterPageObject.sortUp.click();
 			waitExecuter.sleep(1000);
-			for(int i =5; i< size;i=i+7) {
+			for(int i =5; i< size;i=i+8) {
 				resultantSet.add(chargebackClusterPageObject.resultSetValues.get(i).getText());
 			}
 
@@ -292,7 +294,7 @@ public class ChargeBackCluster {
 			down = new TreeSet<String>(initialSet);
 			chargebackClusterPageObject.sortDown.click();
 			waitExecuter.sleep(1000);
-			for(int i =5; i< size;i=i+7) {
+			for(int i =5; i< size;i=i+8) {
 				resultantSet.add(chargebackClusterPageObject.resultSetValues.get(i).getText());
 			}
 
@@ -300,11 +302,11 @@ public class ChargeBackCluster {
 		}
 
 	}
-	
+
 	public String calculateClusterCountFromResultSet() {
 		double sum =0.00;
 		int size = chargebackClusterPageObject.resultSetValues.size();
-		for(int i = 5; i< size;i=i+7) {
+		for(int i = 5; i< size;i=i+8) {
 			sum = sum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText());
 		}
 		return (String.format("%.2f",sum));

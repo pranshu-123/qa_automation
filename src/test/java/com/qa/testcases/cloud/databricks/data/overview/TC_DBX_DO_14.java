@@ -24,7 +24,7 @@ public class TC_DBX_DO_14 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(dataProvider = "clusterid-data-provider",description = "Verify Last Day of Partitions KPIs")
-    public void TC_DBX_DO_14_verifyLastDayOfPartitionsKPIs(String clusterId) {
+    public void TC_DBX_DO_14_verifyLastDayOfPartitionsKPIs(String clusterId) throws InterruptedException {
         test = extent.startTest("TC_DBX_DO_14.verifyLastDayOfPartitionsKPIs", "Verify Last Day of Partitions KPIs");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
@@ -32,7 +32,7 @@ public class TC_DBX_DO_14 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         dataTablesHelper.clickOnDataTab();
         allApps.selectWorkSpaceId(clusterId);
-        waitExecuter.sleep(3000);
+        waitExecuter.waitForSeconds(3);
         DataOverviewHelper dataOverviewHelper = new DataOverviewHelper(driver, test);
         Set<Map.Entry<String, String>> kpisKV = dataOverviewHelper.getLastDayPartitionKPIs().entrySet();
         Iterator itr = kpisKV.iterator();

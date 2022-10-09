@@ -48,8 +48,8 @@ public class TC_DR_66 extends BaseClass {
 
              */
             test.log(LogStatus.INFO,
-                    "Assert All columns  types - Status, User, Run Name / ID, Job ID, Run ID, End Time, Duration, Read, Write, Workspace, Cluster Name, Cluster Type, Cost, GO TO");
-            loggingUtils.info("Assert status types - Status, User, Run Name / ID, Job ID, Run ID, End Time, Duration, Read, Write, Workspace, Cluster Name, Cluster Type, Cost, GO TO", test);
+                    "Assert All columns  types - Status, User, Run Name / ID, Job ID, Run ID, Start Time, Duration, Read, Write, Workspace, Cluster Name, Cluster Type, Cost, GO TO");
+            loggingUtils.info("Assert status types - Status, User, Run Name / ID, Job ID, Run ID, Start Time, Duration, Read, Write, Workspace, Cluster Name, Cluster Type, Cost, GO TO", test);
             List<String> existingStatusTypes = new ArrayList<>(Arrays.asList(PageConstants.columnsType.COLUMNSTYPE));
             List<WebElement> statusTypes = dbpageObject.getColumnsTypesFinishedTab;
             List<String> listOfStatusTypes = new ArrayList<String>();

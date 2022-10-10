@@ -186,7 +186,7 @@ public class DataPageObject {
     @FindBy(xpath = "//h2/span")
     public WebElement applicationDetailsHeading;
 
-    @FindBy(css = "div.close")
+    @FindBy(xpath = "//div[@class='close']")
     public WebElement closeApplicationsDetailsButton;
 
     @FindBy(css = "//h2[@class='text-white']//a[1]")

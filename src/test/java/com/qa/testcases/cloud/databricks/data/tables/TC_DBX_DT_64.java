@@ -39,9 +39,8 @@ public class TC_DBX_DT_64 extends BaseClass {
             dataTablesHelper.clickOnParentApp(0);
             userActions.performActionWithPolling(dataPageObject.dagGraphTabApplicationDetails, UserAction.CLICK);
             loggingUtils.warning("Daggraph not loaded. Please verify manually", test);
-            dataTablesHelper.closeApplicationDetailsPage();
         } finally {
-
+            dataTablesHelper.closeApplicationDetailsPage();
             dataTablesHelper.backToTablesPage();
         }
     }

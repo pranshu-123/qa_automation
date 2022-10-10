@@ -42,9 +42,8 @@ public class TC_DBX_DT_65 extends BaseClass {
             } else {
                 loggingUtils.warning("Errors data are not displayed. Please verify manually", test);
             }
-            dataTablesHelper.closeApplicationDetailsPage();
         } finally {
-
+            dataTablesHelper.closeApplicationDetailsPage();
             dataTablesHelper.backToTablesPage();
         }
     }

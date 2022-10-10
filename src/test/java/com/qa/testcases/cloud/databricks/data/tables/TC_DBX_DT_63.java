@@ -59,9 +59,8 @@ public class TC_DBX_DT_63 extends BaseClass {
                 By.xpath("parent::div/../preceding-sibling::div/h4")).getText().trim(), "Task Attempts",
                 "Task Attempts graph is not loaded");
             loggingUtils.pass("Task Attempts graph is displayed.", test);
-            dataTablesHelper.closeApplicationDetailsPage();
         } finally {
-
+            dataTablesHelper.closeApplicationDetailsPage();
             dataTablesHelper.backToTablesPage();
         }
     }

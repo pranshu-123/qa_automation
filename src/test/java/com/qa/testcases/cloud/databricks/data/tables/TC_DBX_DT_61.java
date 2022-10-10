@@ -44,9 +44,9 @@ public class TC_DBX_DT_61 extends BaseClass {
                 applicationId), "Invalid application is displayed in gantt chart");
             loggingUtils.pass("Correct application Id is displayed in gantt chart", test);
             verifyLeftGraph(dataPageObject);
-            dataTablesHelper.closeApplicationDetailsPage();
-        } finally {
 
+        } finally {
+            dataTablesHelper.closeApplicationDetailsPage();
             dataTablesHelper.backToTablesPage();
         }
     }

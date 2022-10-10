@@ -44,9 +44,9 @@ public class TC_DBX_DT_62 extends BaseClass {
                 loggingUtils.info("Recommendation and Insights displayed not displayed.", test);
                 loggingUtils.warning("No recommendation and insights found. Please verify manually", test);
             }
-            dataTablesHelper.closeApplicationDetailsPage();
-        } finally {
 
+        } finally {
+            dataTablesHelper.closeApplicationDetailsPage();
             dataTablesHelper.backToTablesPage();
         }
     }

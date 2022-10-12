@@ -1014,7 +1014,7 @@ public class SummaryDetailsPage {
         // Clicking on the Spark app must go to apps detail page
         if (appCount > 0) {
             if (tabName.equals("Analysis")) {
-                userActions.performActionWithPolling(applicationsPageObject.globalSearchBox, UserAction.SEND_KEYS, "com.unraveldata.spark.usecase.LightExecutor");
+                userActions.performActionWithPolling(applicationsPageObject.globalSearchBox, UserAction.SEND_KEYS, "Databricks Shell");
                 applicationsPageObject.globalSearchBox.sendKeys(Keys.RETURN);
             }
             String headerAppId = summaryPage.verifyGoToSpark(summaryPageObject);

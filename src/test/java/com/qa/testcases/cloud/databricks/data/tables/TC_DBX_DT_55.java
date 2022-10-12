@@ -49,7 +49,6 @@ public class TC_DBX_DT_55 extends BaseClass {
                 loggingUtils.pass("Duration value is loaded", test);
                 Assert.assertNotEquals(instanceSummaryValues.get(2).trim(), "", "Data I/O value is blank");
                 loggingUtils.pass("Data I/O value is loaded", test);
-                dataTablesHelper.closeApplicationDetailsPage();
             }
         } finally {
             dataTablesHelper.backToTablesPage();

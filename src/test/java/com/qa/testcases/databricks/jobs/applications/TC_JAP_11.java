@@ -36,7 +36,7 @@ public class TC_JAP_11 extends BaseClass {
         SummaryDetailsPage summaryPage = new SummaryDetailsPage(driver);
         summaryPage.navigateToJobsTabFromHeader(dballApps, test);
         try {
-            summaryPage.commonSetupCodeForSumarryTabValidation(test, "Errors", logger, false);
+            summaryPage.commonSetupCodeForSumarryTabValidation(test, "Errors", logger, true);
             test.log(LogStatus.PASS, "Verified the Errors tab successfully");
             //Close apps details page
             MouseActions.clickOnElement(driver, summaryPageObject.closeAppsPageTab);

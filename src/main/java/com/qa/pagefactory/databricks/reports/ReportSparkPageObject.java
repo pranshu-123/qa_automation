@@ -71,6 +71,24 @@ public class ReportSparkPageObject {
 	
 	@FindBy(xpath = "//a[contains(text(),'Timings')]")
 	public WebElement timings;
+	
+	@FindBy(xpath = "//a[contains(text(),'Resources')]")
+	public WebElement resources;
+	
+	@FindBy(css = "path.highcharts-point.highcharts-color-0")
+	public WebElement taskAttemptGraph;
+	
+	@FindBy(css = "path.highcharts-tracker-line")
+	public List<WebElement> containerGraph;
+	
+	@FindBy(xpath = "//h4[contains(text(),'Vcores')]")
+	public WebElement vcoresGraph;
+	
+	@FindBy(xpath = "//h4[contains(text(),'Memory')]")
+	public WebElement memoryGraph;
+	
+	@FindBy(xpath = "//p[contains(text(),'No Recommendations and Insights found.')]")
+	public WebElement insights;
 
 	/**
 	 * @param driver The driver that will be used to look up the elements

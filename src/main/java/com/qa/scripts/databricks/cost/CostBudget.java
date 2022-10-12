@@ -56,8 +56,8 @@ public class CostBudget {
 		budgetPageObject.dateWidget.get(0).click();
 		budgetPageObject.futureStartDate.get(1).click();
 		waitExecuter.sleep(2000);
-		budgetPageObject.dateWidget.get(1).click();
-		budgetPageObject.futureExpiryDate.get(2).click();
+		//budgetPageObject.dateWidget.get(1).click();
+		//budgetPageObject.futureExpiryDate.get(2).click();
 	}
 
 	public void saveBudget() {
@@ -72,6 +72,7 @@ public class CostBudget {
 	}
 
 	public void validateUpcomingBudget(String budgetName) {
+		budgetPageObject.upcomingBudgetTab.click();
 		waitExecuter.sleep(2000);
 		Assert.assertTrue(budgetPageObject.upcomingBudgetTable.stream().map(f -> f.getText())
 				.collect(Collectors.toList()).contains(budgetName),"Created Upcoming Budget not displayed");
@@ -99,7 +100,9 @@ public class CostBudget {
 	public void verifyBudgetPageObjects() {
 		Assert.assertTrue(budgetPageObject.newBudget.isDisplayed());
 		budgetPageObject.activeBudgetTable.stream().forEach(element -> element.isDisplayed());
+		budgetPageObject.upcomingBudgetTab.click();
 		budgetPageObject.upcomingBudgetTable.stream().forEach(element -> element.isDisplayed());
+		budgetPageObject.expiredBudgetTab.click();
 		Assert.assertTrue(budgetPageObject.expiredBudgetTable.isDisplayed());
 	}
 

@@ -71,7 +71,7 @@ public class ChargebackClusterPageObject {
     @FindBy(xpath = "//button[contains(text(),'Copy URL')]/../a")
     public List<WebElement> urlLinks;
     
-    @FindBy(xpath = "//button[contains(text(),'Copy URL')]/../../..//td/span")
+    @FindBy(xpath = "//span[contains(text(),'Optimize')]/../../../..//span")
     public List<WebElement> resultSetValues;
     
     @FindBy(xpath = "//div[@class='component-date-picker']/span")
@@ -107,8 +107,14 @@ public class ChargebackClusterPageObject {
     @FindBy(xpath = "//a[@class='icon-sort icon-sort-sorted-down']")
     public WebElement sortDown;
     
+    @FindBy(xpath = "//input[@class='select2-search__field']")
+    public WebElement filterSearchTextField;
+    
     @FindBy(xpath = "//ul[@class='select2-results__options']/li")
     public List<WebElement> tagKeyValues;
+    
+    @FindBy(xpath = "//ul[@class='select2-results__options']/li")
+    public List<WebElement> filterSearchValueList;
    
     public String filterByValues = "//li[contains(text(),'%s')]";
     

@@ -1,6 +1,6 @@
 package com.qa.scripts.emr.Cost;
 
-import com.qa.pagefactory.emr.Cost.BudgetPageObject;
+import com.qa.pagefactory.emr.cost.BudgetPageObject;
 import com.qa.scripts.DatePicker;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;

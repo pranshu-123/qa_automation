@@ -90,7 +90,7 @@ public class ChargeBackCluster {
 	public void validateGeneratedPieChartValues() {
 		waitExecuter.sleep(1500);
 		List<String> pieChartValues = chargebackClusterPageObject.pieChartValues.stream()
-				.map(values -> values.getText()).distinct().skip(1)
+				.map(values -> values.getText()).distinct().skip(2)
 				.collect(Collectors.toList());
 
 		//This is match result set data with generated graph values
@@ -98,8 +98,10 @@ public class ChargeBackCluster {
 				.map(a-> a.getText())
 				.collect(Collectors.toList());
 		for(String s : pieChartValues) {
-			Assert.assertTrue(resultSet.contains(s));
-			LOGGER.info("Pie Chart is populated with " +s+" result values");
+			if(s!="Others") {
+				Assert.assertTrue(resultSet.contains(s));
+				LOGGER.info("Pie Chart is populated with " +s+" result values");
+			}
 		}
 	}
 
@@ -160,7 +162,7 @@ public class ChargeBackCluster {
 	public String calculateDBUSumFromResultSet() {
 		double sum =0.00;
 		int size = chargebackClusterPageObject.resultSetValues.size();
-		for(int i =1; i< size;i=i+7) {
+		for(int i =1; i< size;i=i+8) {
 			sum = sum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText());
 		}
 
@@ -185,6 +187,14 @@ public class ChargeBackCluster {
 		chargebackClusterPageObject.filterByDropDown.click();
 		waitExecuter.sleep(1000);
 		driver.findElement(By.xpath(String.format(chargebackClusterPageObject.filterByValues,filter))).click();
+	}
+
+	public void filterByCluster() {
+		waitExecuter.sleep(1000);
+		chargebackClusterPageObject.filterSearchTextField.click();
+		waitExecuter.sleep(1000);
+		chargebackClusterPageObject.filterSearchValueList.get(0).click();
+		waitExecuter.sleep(2000);
 	}
 
 	public void filterTags() {
@@ -213,7 +223,7 @@ public class ChargeBackCluster {
 		double ceilSum =0.00;
 		int size = chargebackClusterPageObject.resultSetValues.size();
 		ArrayList<String> list = new ArrayList<String>();
-		for(int i =5; i< size;i=i+7) {
+		for(int i =5; i< size;i=i+8) {
 			floorSum = floorSum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText());
 		}
 		if(floorSum<1000) {
@@ -243,7 +253,7 @@ public class ChargeBackCluster {
 	public String calculateTotalCostFromResultSet() {
 		double sum =0.00;
 		int size = chargebackClusterPageObject.resultSetValues.size();
-		for(int i =3; i< size;i=i+7) {
+		for(int i =3; i< size;i=i+8) {
 			sum = sum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText().substring(2));
 		}
 		return ("$ "+String.format("%.2f",sum));
@@ -266,7 +276,7 @@ public class ChargeBackCluster {
 
 		int size = chargebackClusterPageObject.resultSetValues.size();
 
-		for(int i =5; i< size;i=i+7) {
+		for(int i =5; i< size;i=i+8) {
 			initialSet.add(chargebackClusterPageObject.resultSetValues.get(i).getText());
 		}
 
@@ -274,7 +284,7 @@ public class ChargeBackCluster {
 			up = new TreeSet<String>(initialSet);
 			chargebackClusterPageObject.sortUp.click();
 			waitExecuter.sleep(1000);
-			for(int i =5; i< size;i=i+7) {
+			for(int i =5; i< size;i=i+8) {
 				resultantSet.add(chargebackClusterPageObject.resultSetValues.get(i).getText());
 			}
 
@@ -284,12 +294,22 @@ public class ChargeBackCluster {
 			down = new TreeSet<String>(initialSet);
 			chargebackClusterPageObject.sortDown.click();
 			waitExecuter.sleep(1000);
-			for(int i =5; i< size;i=i+7) {
+			for(int i =5; i< size;i=i+8) {
 				resultantSet.add(chargebackClusterPageObject.resultSetValues.get(i).getText());
 			}
 
 			Assert.assertEquals(resultantSet, down);
 		}
+
+	}
+
+	public String calculateClusterCountFromResultSet() {
+		double sum =0.00;
+		int size = chargebackClusterPageObject.resultSetValues.size();
+		for(int i = 5; i< size;i=i+8) {
+			sum = sum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText());
+		}
+		return (String.format("%.2f",sum));
 
 	}
 

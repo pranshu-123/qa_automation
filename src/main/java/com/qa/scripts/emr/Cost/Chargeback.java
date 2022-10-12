@@ -8,7 +8,7 @@ import io.opentelemetry.exporter.logging.SystemOutLogExporter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
-import com.qa.pagefactory.emr.Cost.ChargebackPageObject;
+import com.qa.pagefactory.emr.cost.ChargebackPageObject;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import java.util.List;

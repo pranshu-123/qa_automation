@@ -55,7 +55,7 @@ public class JobsPageObject {
     @FindBy(xpath = "//span[contains(@class, 'select2-selection--multiple')]")
     public WebElement groupBySearchBox;
 
-    @FindBy(xpath = "//li[contains(text(),'User')]")
+    @FindBy(xpath = "//span/span[contains(text(),'User')]")
     public WebElement groupByUser;
 
     @FindBy(xpath = "//li[contains(text(),'Application Type')]")

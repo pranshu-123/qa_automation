@@ -1,4 +1,4 @@
-package com.qa.pagefactory.emr.Cost;
+package com.qa.pagefactory.emr.cost;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

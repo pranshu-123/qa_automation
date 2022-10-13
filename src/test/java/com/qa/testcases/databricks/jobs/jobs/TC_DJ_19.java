@@ -1,5 +1,6 @@
 package com.qa.testcases.databricks.jobs.jobs;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.databricks.DbxSubTopPanelModulePageObject;
 import com.qa.scripts.databricks.jobs.DbAllApps;
@@ -11,14 +12,15 @@ import org.openqa.selenium.NoSuchElementException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
-
+@Marker.DbxJobs
+@Marker.All
 public class TC_DJ_19 extends BaseClass {
     Logger logger = LoggerFactory.getLogger(TC_DJ_18.class);
 
     @Test()
     public void verifyTagsTab() {
         test = extent.startTest("TC_DJ_18.verifyTagsTab",
-                "Verify the Analysis tab should list the Insights and the recommendations tabs must be collapsable");
+                "Verify that the Tags tab contains tags in form of key value pair");
         test.assignCategory("Jobs");
         Log.startTestCase("TC_DJ_18.verifyTagsTab");
         test.log(LogStatus.INFO, "Login to the application");

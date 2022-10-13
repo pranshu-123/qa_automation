@@ -11,10 +11,8 @@ import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
@@ -147,7 +145,8 @@ public class JobsPage {
         }
         return String.valueOf(0);
     }
-        /**
+
+    /**
      * Common steps to navigate to the Jobs page from header. Clicks on jobs tab
      * Selects a specific cluster Selects 30 days time interval
      */
@@ -186,160 +185,49 @@ public class JobsPage {
 
     }
 
-    public void validateTableSorting(String sortBy) {
+    public void validateJobSorting(String sortOn) {
         Set<String> initialSet = new HashSet<String>();
         Set<String> resultantSet = new HashSet<String>();
         TreeSet<String> sort = null;
-
-        switch (sortBy) {
-            case "Last Run Status":
-                //Fetching data before applying sorting
-                initialSet = jobsPageObject.lastRunStatusList
-                        .stream().map(el -> el.getText())
-                        .collect(Collectors.toSet());
-                jobsPageObject.sortLastRunStatus.click();
-
-                //Fetching data after applying sorting
-                resultantSet = jobsPageObject.lastRunStatusList
-                        .stream().map(el -> el.getText())
-                        .collect(Collectors.toSet());
-                break;
-            case "Job ID":
-                //Fetching data before applying sorting
-                initialSet = jobsPageObject.lastJobID
-                        .stream().map(el -> el.getText())
-                        .collect(Collectors.toSet());
-                jobsPageObject.sortJobID.click();
-
-                //Fetching data after applying sorting
-                resultantSet = jobsPageObject.lastJobID
-                        .stream().map(el -> el.getText())
-                        .collect(Collectors.toSet());
-                break;
-            case "Job Name":
-                //Fetching data before applying sorting
-                initialSet = jobsPageObject.lastJobName
-                        .stream().map(el -> el.getText())
-                        .collect(Collectors.toSet());
-                jobsPageObject.sortJobName.click();
-
-                //Fetching data after applying sorting
-                resultantSet = jobsPageObject.lastJobName
-                        .stream().map(el -> el.getText())
-                        .collect(Collectors.toSet());
-                break;
-            case "Cluster Name":
-                //Fetching data before applying sorting
-                initialSet = jobsPageObject.lastClusterName
-                        .stream().map(el -> el.getText())
-                        .collect(Collectors.toSet());
-                jobsPageObject.sortClusterName.click();
-
-                //Fetching data after applying sorting
-                resultantSet = jobsPageObject.lastClusterName
-                        .stream().map(el -> el.getText())
-                        .collect(Collectors.toSet());
-                break;
-            case "Workspace":
-                //Fetching data before applying sorting
-                initialSet = jobsPageObject.lastWorkspace
-                        .stream().map(el -> el.getText())
-                        .collect(Collectors.toSet());
-                jobsPageObject.sortWorkspace.click();
-
-                //Fetching data after applying sorting
-                resultantSet = jobsPageObject.lastWorkspace
-                        .stream().map(el -> el.getText())
-                        .collect(Collectors.toSet());
-                break;
-            case "User":
-                //Fetching data before applying sorting
-                initialSet = jobsPageObject.lastUser
-                        .stream().map(el -> el.getText())
-                        .collect(Collectors.toSet());
-                jobsPageObject.sortUser.click();
-
-                //Fetching data after applying sorting
-                resultantSet = jobsPageObject.lastUser
-                        .stream().map(el -> el.getText())
-                        .collect(Collectors.toSet());
-                break;
-            case "Start Time":
-                //Fetching data before applying sorting
-                initialSet = jobsPageObject.lastStartTime
-                        .stream().map(el -> el.getText())
-                        .collect(Collectors.toSet());
-                jobsPageObject.sortStartTime.click();
-
-                //Fetching data after applying sorting
-                resultantSet = jobsPageObject.lastStartTime
-                        .stream().map(el -> el.getText())
-                        .collect(Collectors.toSet());
-                break;
-            case "Run Count":
-                //Fetching data before applying sorting
-                initialSet = jobsPageObject.lastRunCount
-                        .stream().map(el -> el.getText())
-                        .collect(Collectors.toSet());
-                jobsPageObject.sortRunCount.click();
-
-                //Fetching data after applying sorting
-                resultantSet = jobsPageObject.lastRunCount
-                        .stream().map(el -> el.getText())
-                        .collect(Collectors.toSet());
-                break;
-            case "Duration":
-                //Fetching data before applying sorting
-                initialSet = jobsPageObject.lastDuration
-                        .stream().map(el -> el.getText())
-                        .collect(Collectors.toSet());
-                jobsPageObject.sortDuration.click();
-
-                //Fetching data after applying sorting
-                resultantSet = jobsPageObject.lastDuration
-                        .stream().map(el -> el.getText())
-                        .collect(Collectors.toSet());
-                break;
-            case "Read":
-                //Fetching data before applying sorting
-                initialSet = jobsPageObject.lastRead
-                        .stream().map(el -> el.getText())
-                        .collect(Collectors.toSet());
-                jobsPageObject.sortRead.click();
-
-                //Fetching data after applying sorting
-                resultantSet = jobsPageObject.lastRead
-                        .stream().map(el -> el.getText())
-                        .collect(Collectors.toSet());
-                break;
-            case "Write":
-                //Fetching data before applying sorting
-                initialSet = jobsPageObject.lastWrite
-                        .stream().map(el -> el.getText())
-                        .collect(Collectors.toSet());
-                jobsPageObject.sortWrite.click();
-
-                //Fetching data after applying sorting
-                resultantSet = jobsPageObject.lastWrite
-                        .stream().map(el -> el.getText())
-                        .collect(Collectors.toSet());
-                break;
-            case "Cost":
-                //Fetching data before applying sorting
-                initialSet = jobsPageObject.lastCost
-                        .stream().map(el -> el.getText())
-                        .collect(Collectors.toSet());
-                jobsPageObject.sortCost.click();
-
-                //Fetching data after applying sorting
-                resultantSet = jobsPageObject.lastCost
-                        .stream().map(el -> el.getText())
-                        .collect(Collectors.toSet());
-                break;
+        int size = jobsPageObject.jobRunResults.size();
+        int startCounter = 0;
+        if (sortOn.equalsIgnoreCase("Last Run Status")) {
+            startCounter = 0;
+        } else if (sortOn.equalsIgnoreCase("Cluster Name")) {
+            startCounter = 7;
+        } else if (sortOn.equalsIgnoreCase("user")) {
+            startCounter = 1;
+        } else if (sortOn.equalsIgnoreCase("Start Time")) {
+            startCounter = 2;
+        } else if (sortOn.equalsIgnoreCase("Read")) {
+            startCounter = 3;
+        } else if (sortOn.equalsIgnoreCase("cost")) {
+            startCounter = 4;
+        } else {
+            startCounter = 6;
         }
-
+        for (int i = startCounter; i < size; i = i + 10) {
+            initialSet.add(jobsPageObject.jobRunResults.get(i).getText());
+        }
+        logger.info("Data captured not in order");
         sort = new TreeSet<String>(initialSet);
-        Assert.assertNotEquals(resultantSet, sort);
+        driver.findElement(By.xpath(String.format(jobsPageObject.sortType, sortOn))).click();
+        waitExecuter.sleep(1000);
+        for (int i = startCounter; i < size; i = i + 10) {
+            resultantSet.add(jobsPageObject.jobRunResults.get(i).getText());
+        }
+        Assert.assertNotEquals(resultantSet, sort, "Data not sorted");
+    }
+
+
+    public void validateJobStatus(String status) {
+        int size = jobsPageObject.jobRunStatus.size();
+        Set<String> set = new HashSet<String>();
+        for(int i = 0; i< size;i++) {
+            set.add(jobsPageObject.jobRunStatus.get(i).getText());
+        }
+        Assert.assertTrue(set.contains(status),"Job Tab contains another jobs");
+        Assert.assertTrue(set.size()==1);
     }
 
     /**

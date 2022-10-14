@@ -87,6 +87,8 @@ public class PageConstants {
     public static class columnsType {
         public static String[] COLUMNSTYPE = {"Status", "User", "Run Name / ID", "Job ID", "Run ID", "Start Time", "Duration", "Read", "Write", "Workspace", "Cluster Name", "Cluster Type", "Cost", "GO TO"};
 
+        public static String[] FINISH_COLUMNS_TYPE = {"Status", "User", "Run Name / ID", "Job ID", "Run ID","End Time", "Duration", "Read", "Write", "Workspace", "Cluster Name", "Cluster Type", "Cost", "GO TO"};
+
         public static String RUNNING = "running";
     }
 

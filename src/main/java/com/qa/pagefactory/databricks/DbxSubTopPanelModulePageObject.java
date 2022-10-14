@@ -127,7 +127,7 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//tr/td[2]/span[1]")
     public WebElement getUsernameFromFinishedTable;
 
-    @FindBy(xpath = "//tbody[1]/tr/td[12]")
+    @FindBy(xpath = "//tbody[1]/tr/td[10]")
     public WebElement getClusterTypeFromTable;
 
     @FindBy(xpath = "//tbody[1]/tr/td[12]/span[1]")

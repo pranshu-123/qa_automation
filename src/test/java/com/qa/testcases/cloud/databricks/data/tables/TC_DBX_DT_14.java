@@ -21,14 +21,16 @@ public class TC_DBX_DT_14 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_14.class);
 
     @Test(dataProvider = "clusterid-data-provider",description = "Verify the table events filter present.")
-    public void verifyTableEventFilter(String clusterId) {
+    public void verifyTableEventFilter(String clusterId) throws InterruptedException {
         test = extent.startTest("TC_DBX_DT_14.verifyTableEventFilter", "Verify the table events filter present.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         dataTablesHelper.clickOnDataTab();
         dataTablesHelper.clickOnDataTablesTab();
         AllApps allApps = new AllApps(driver);
         allApps.selectWorkSpaceId(clusterId);
+        waitExecuter.waitForSeconds(2);
         /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
         DataPageObject dataPageObject = new DataPageObject(driver);
         WaitExecuter executor = new WaitExecuter(driver);

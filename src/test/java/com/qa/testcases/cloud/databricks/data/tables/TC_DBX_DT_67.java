@@ -38,7 +38,7 @@ public class TC_DBX_DT_67 extends BaseClass {
         try {
             dataTablesHelper.clickOnTabOnTableDetails("Applications");
             dataTablesHelper.clickOnParentAppOfNthRow(0);
-            userActions.performActionWithPolling(dataPageObject.closeApplicationsDetailsButton, UserAction.CLICK);
+            //userActions.performActionWithPolling(dataPageObject.closeApplicationsDetailsButton, UserAction.CLICK);
             Assert.assertTrue(driver.getCurrentUrl().contains("/data/table/"), "Close button did not close the " +
                 "application details page");
             loggingUtils.pass("Close button closed the table details page",test);

@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
+import com.qa.utils.WaitExecuter;
 import org.testng.annotations.Test;
 
 /**
@@ -22,10 +23,12 @@ public class TC_DBX_DT_24 extends BaseClass {
             "with \"Latest Access\" column value.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
+        WaitExecuter executor = new WaitExecuter(driver);
         dataTablesHelper.clickOnDataTab();
         dataTablesHelper.clickOnDataTablesTab();
         AllApps allApps = new AllApps(driver);
         allApps.selectWorkSpaceId(clusterId);
+        executor.waitForSeconds(3);
         /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
         dataTablesHelper.verifyTableFilterByColumn("Latest Access");
         loggingUtils.pass("Data is displayed based on applied search for Latest Access", test);

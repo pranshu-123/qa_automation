@@ -9,6 +9,7 @@ import com.qa.utils.ActionPerformer;
 import com.qa.utils.ImageUtils;
 import com.qa.utils.LoggingUtils;
 import com.qa.utils.ScreenshotHelper;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -24,10 +25,9 @@ import java.io.File;
 public class TC_DBX_DT_56 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
-    @Test(dataProvider = "clusterid-data-provider",description = "Verify the chart displayed on left side of application details page.")
+    @Test(dataProvider = "clusterid-data-provider", description = "Verify the chart displayed on left side of application details page.")
     public void TC_DBX_DT_56_verifyLeftChartApplicationDetailPage(String clusterId) {
-        test = extent.startTest("TC_DBX_DT_56.verifyLeftChartApplicationDetailPage",
-            "Verify the chart displayed on left side of application details page.");
+        test = extent.startTest("TC_DBX_DT_56.verifyLeftChartApplicationDetailPage", "Verify the chart displayed on left side of application details page.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
         dataTablesHelper.clickOnDataTab();
@@ -44,13 +44,18 @@ public class TC_DBX_DT_56 extends BaseClass {
             dataTablesHelper.selectAllApplicationsColumn();
             dataTablesHelper.clickOnParentApp(0);
             WebElement leftChartElement = dataPageObject.applicationDetailsPageCharts.get(0);
-            File leftGraphImg = screenshotHelper.takeScreenshotOfElement(driver, leftChartElement, 0);
+            File leftGraphImg = ScreenshotHelper.takeScreenshotOfElement(driver, leftChartElement, 0);
             Boolean ifContainsColor = ImageUtils.isImageContainsColor(leftGraphImg, new int[]{44, 199, 23});
             Assert.assertTrue(ifContainsColor, "Graph not loaded with data");
             loggingUtils.pass(String.format("Graph loaded: %s", ifContainsColor), test);
+        } catch (NoSuchElementException e) {
             dataTablesHelper.closeApplicationDetailsPage();
+            dataTablesHelper.backToTablesPage();
+            loggingUtils.error("Exception occured " + e.getStackTrace(), test);
         } finally {
+            dataTablesHelper.closeApplicationDetailsPage();
             dataTablesHelper.backToTablesPage();
         }
     }
+
 }

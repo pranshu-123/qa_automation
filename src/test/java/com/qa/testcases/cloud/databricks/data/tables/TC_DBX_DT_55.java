@@ -6,6 +6,7 @@ import com.qa.pagefactory.cloud.databricks.DataPageObject;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
+import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -50,8 +51,16 @@ public class TC_DBX_DT_55 extends BaseClass {
                 Assert.assertNotEquals(instanceSummaryValues.get(2).trim(), "", "Data I/O value is blank");
                 loggingUtils.pass("Data I/O value is loaded", test);
             }
-        } finally {
+        } catch (NoSuchElementException e) {
+            dataTablesHelper.closeApplicationDetailsPage();
+            dataTablesHelper.backToTablesPage();
+            loggingUtils.error("Exception occured " + e.getStackTrace(), test);
+        }
+        finally {
+            dataTablesHelper.closeApplicationDetailsPage();
             dataTablesHelper.backToTablesPage();
         }
     }
+
 }
+

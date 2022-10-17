@@ -6,6 +6,7 @@ import com.qa.pagefactory.cloud.databricks.DataPageObject;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
+import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -53,6 +54,10 @@ public class TC_DBX_DT_68 extends BaseClass {
             } else {
                 loggingUtils.info("No partitions value is displayed", test);
             }
+        }
+        catch (NoSuchElementException e) {
+            dataTablesHelper.backToTablesPage();
+            loggingUtils.error("Exception occured " + e.getStackTrace(), test);
         } finally {
             dataTablesHelper.backToTablesPage();
         }

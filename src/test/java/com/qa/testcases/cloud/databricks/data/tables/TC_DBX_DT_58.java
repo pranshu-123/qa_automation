@@ -11,6 +11,7 @@ import com.qa.utils.ImageUtils;
 import com.qa.utils.LoggingUtils;
 import com.qa.utils.ScreenshotHelper;
 import com.qa.utils.actions.UserActions;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -53,11 +54,16 @@ public class TC_DBX_DT_58 extends BaseClass {
             actions.performActionWithPolling(dataPageObject.leftGraphOptions.get(1), UserAction.CLICK);
             verifyleftGraph(dataPageObject);
             loggingUtils.pass("Verified graph with selecting I/O as option", test);
-            dataTablesHelper.closeApplicationDetailsPage();
-        } finally {
-            dataTablesHelper.backToTablesPage();
         }
-    }
+             catch (NoSuchElementException e) {
+                dataTablesHelper.closeApplicationDetailsPage();
+                dataTablesHelper.backToTablesPage();
+                loggingUtils.error("Exception occured " + e.getStackTrace(), test);
+            } finally {
+                dataTablesHelper.closeApplicationDetailsPage();
+                dataTablesHelper.backToTablesPage();
+            }
+        }
 
     public void verifyleftGraph(DataPageObject dataPageObject) {
         ScreenshotHelper screenshotHelper = new ScreenshotHelper();

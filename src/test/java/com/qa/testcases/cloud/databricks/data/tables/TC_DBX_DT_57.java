@@ -7,6 +7,7 @@ import com.qa.scripts.cloud.databricks.DataTablesHelper;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.ActionPerformer;
 import com.qa.utils.LoggingUtils;
+import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.util.Arrays;
@@ -46,8 +47,12 @@ public class TC_DBX_DT_57 extends BaseClass {
             List<String> expectedOptions = Arrays.asList("Duration", "I/O", "Apps", "Events");
             Assert.assertEquals(leftGraphOptions, expectedOptions, "Incorrect options displayed.");
             loggingUtils.pass("Verified Duration, I/O, Apps, Events options are displayed", test);
+        } catch (NoSuchElementException e) {
             dataTablesHelper.closeApplicationDetailsPage();
+            dataTablesHelper.backToTablesPage();
+            loggingUtils.error("Exception occured " + e.getStackTrace(), test);
         } finally {
+            dataTablesHelper.closeApplicationDetailsPage();
             dataTablesHelper.backToTablesPage();
         }
     }

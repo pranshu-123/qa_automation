@@ -8,6 +8,7 @@ import com.qa.scripts.cloud.databricks.DataTablesHelper;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
 import com.qa.utils.actions.UserActions;
+import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -44,14 +45,19 @@ public class TC_DBX_DT_59 extends BaseClass {
             dataTablesHelper.clickOnParentApp(0);
             actions.performActionWithPolling(dataPageObject.navigationTabApplicationDetailsPage, UserAction.CLICK);
             List<String> headings = dataPageObject.tableHeadings.stream().map(heading -> heading.getText().trim())
-                .collect(Collectors.toList()).subList(0, dataPageObject.tableHeadings.size()-1);
-            List<String> expectedHeadings = Arrays.asList("Type","Id","Start Time", "Duration", "I/O");
+                    .collect(Collectors.toList()).subList(0, dataPageObject.tableHeadings.size() - 1);
+            List<String> expectedHeadings = Arrays.asList("Type", "Id", "Start Time", "Duration", "I/O");
             Assert.assertEquals(headings, expectedHeadings, "Mismatch in table headings");
             loggingUtils.pass("Verified the table in navigation details.", test);
-            dataTablesHelper.closeApplicationDetailsPage();
-        } finally {
-            dataTablesHelper.closeApplicationDetailsPage();
-            dataTablesHelper.backToTablesPage();
+        }
+            catch (NoSuchElementException e) {
+                dataTablesHelper.closeApplicationDetailsPage();
+                dataTablesHelper.backToTablesPage();
+                loggingUtils.error("Exception occured " + e.getStackTrace(), test);
+            } finally {
+                dataTablesHelper.closeApplicationDetailsPage();
+                dataTablesHelper.backToTablesPage();
+            }
         }
     }
-}
+

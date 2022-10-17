@@ -8,6 +8,7 @@ import com.qa.scripts.cloud.databricks.DataTablesHelper;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
 import com.qa.utils.actions.UserActions;
+import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -41,6 +42,10 @@ public class TC_DBX_DT_67 extends BaseClass {
             Assert.assertTrue(driver.getCurrentUrl().contains("/data/table/"), "Close button did not close the " +
                 "application details page");
             loggingUtils.pass("Close button closed the table details page",test);
+        }
+        catch (NoSuchElementException e) {
+            dataTablesHelper.backToTablesPage();
+            loggingUtils.error("Exception occured " + e.getStackTrace(), test);
         } finally {
             dataTablesHelper.backToTablesPage();
         }

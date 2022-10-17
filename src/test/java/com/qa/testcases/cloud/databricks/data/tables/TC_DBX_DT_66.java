@@ -8,6 +8,7 @@ import com.qa.scripts.cloud.databricks.DataTablesHelper;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
 import com.qa.utils.actions.UserActions;
+import org.openqa.selenium.NoSuchElementException;
 import org.testng.annotations.Test;
 
 /**
@@ -42,6 +43,11 @@ public class TC_DBX_DT_66 extends BaseClass {
             } else {
                 loggingUtils.warning("Tags data are not displayed. Please verify manually", test);
             }
+        }
+        catch (NoSuchElementException e) {
+            dataTablesHelper.closeApplicationDetailsPage();
+            dataTablesHelper.backToTablesPage();
+            loggingUtils.error("Exception occured " + e.getStackTrace(), test);
         } finally {
             dataTablesHelper.closeApplicationDetailsPage();
             dataTablesHelper.backToTablesPage();

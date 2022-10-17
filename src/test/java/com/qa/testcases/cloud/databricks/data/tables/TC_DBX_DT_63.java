@@ -9,6 +9,7 @@ import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
 import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -59,6 +60,11 @@ public class TC_DBX_DT_63 extends BaseClass {
                 By.xpath("parent::div/../preceding-sibling::div/h4")).getText().trim(), "Task Attempts",
                 "Task Attempts graph is not loaded");
             loggingUtils.pass("Task Attempts graph is displayed.", test);
+        }
+        catch (NoSuchElementException e) {
+            dataTablesHelper.closeApplicationDetailsPage();
+            dataTablesHelper.backToTablesPage();
+            loggingUtils.error("Exception occured " + e.getStackTrace(), test);
         } finally {
             dataTablesHelper.closeApplicationDetailsPage();
             dataTablesHelper.backToTablesPage();

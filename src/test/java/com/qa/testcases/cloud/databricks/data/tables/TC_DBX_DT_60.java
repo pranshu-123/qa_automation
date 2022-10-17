@@ -11,6 +11,7 @@ import com.qa.utils.RandomGenerator;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -52,8 +53,13 @@ public class TC_DBX_DT_60 extends BaseClass {
                 RandomGenerator.generateRandomName());
             Assert.assertEquals(dataPageObject.tableRows.size(), 0, "Data is displayed");
             loggingUtils.pass("Verified search box with application id", test);
+        }
+        catch (NoSuchElementException e) {
             dataTablesHelper.closeApplicationDetailsPage();
+            dataTablesHelper.backToTablesPage();
+            loggingUtils.error("Exception occured " + e.getStackTrace(), test);
         } finally {
+            dataTablesHelper.closeApplicationDetailsPage();
             dataTablesHelper.backToTablesPage();
         }
     }

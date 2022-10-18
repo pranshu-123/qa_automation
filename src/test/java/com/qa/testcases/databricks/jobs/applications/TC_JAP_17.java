@@ -6,6 +6,7 @@ import com.qa.pagefactory.databricks.jobs.DbxSummaryPageObject;
 import com.qa.scripts.databricks.Runs.SummaryDetailsPage;
 import com.qa.scripts.databricks.jobs.DbAllApps;
 import com.qa.utils.MouseActions;
+import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.NoSuchElementException;
 import org.slf4j.Logger;
@@ -28,9 +29,13 @@ public class TC_JAP_17 extends BaseClass {
         test.log(LogStatus.INFO, "Initialize all class objects");
         logger.info("Initialize all class objects");
         DbxSummaryPageObject summaryPageObject = new DbxSummaryPageObject(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         DbAllApps dballApps = new DbAllApps(driver);
         SummaryDetailsPage summaryPage = new SummaryDetailsPage(driver);
         summaryPage.navigateToJobsTabFromHeader(dballApps, test);
+        summaryPageObject.sortByDurationApp.click();
+        waitExecuter.waitUntilPageFullyLoaded();
+        summaryPageObject.sortUp.click();
         try {
             summaryPage.commonSetupCodeForSumarryTabValidation(test, "Timings", logger, false);
             test.log(LogStatus.PASS, "Verified the Timings tab successfully");

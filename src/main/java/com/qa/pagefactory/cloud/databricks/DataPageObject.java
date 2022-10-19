@@ -113,6 +113,18 @@ public class DataPageObject {
     @FindBy(xpath = "//div[contains(text(),'Total Partitions')]")
     public WebElement totalPartitionsLabel;
 
+    @FindBy(xpath = "//th[13]//a[1]")
+    public WebElement sortByDurationApp;
+
+    @FindBy(xpath = "//th[4]//a[1]")
+    public WebElement sortByTable;
+
+    @FindBy(xpath = "//a[@class='icon-sort icon-sort-sorted-up']")
+    public WebElement sortUp;
+
+    @FindBy(xpath = "//a[contains(@class,'icon-sort icon-sort-sorted-down')]")
+    public WebElement sortDown;
+
     @FindBy(xpath = "//div[contains(@class,'dashboard-module')]")
     public List<WebElement> displayedGraphs;
 

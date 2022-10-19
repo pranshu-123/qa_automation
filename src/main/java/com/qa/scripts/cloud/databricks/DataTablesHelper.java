@@ -258,7 +258,7 @@ public class DataTablesHelper {
         //executor.executeScript("arguments[0].scrollIntoView(true);", dataPageObject.logScrollable);
         WebElement row = dataPageObject.tableRows.get(rowNum);
         actions.performActionWithPolling(dataPageObject.moreInfo, UserAction.CLICK);
-        waitExecuter.sleep(2000);
+        waitExecuter.sleep(4000);
     }
 
     /**

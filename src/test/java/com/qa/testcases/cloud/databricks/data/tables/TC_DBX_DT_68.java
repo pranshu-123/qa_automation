@@ -38,13 +38,12 @@ public class TC_DBX_DT_68 extends BaseClass {
             WaitExecuter waitExecuter = new WaitExecuter(driver);
             allApps.selectWorkSpaceId(clusterId);
             waitExecuter.waitForSeconds(5);
+            dataPageObject.sortByDurationApp.click();
+            waitExecuter.waitUntilElementPresent(dataPageObject.sortDown);
+            dataPageObject.sortDown.click();
+            waitExecuter.waitUntilPageFullyLoaded();
             /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
             dataTablesHelper.clickOnMoreInfoOfNthRow(0);
-            dataPageObject.sortByDurationApp.click();
-            waitExecuter.waitUntilPageFullyLoaded();
-            dataPageObject.sortUp.click();
-            waitExecuter.waitUntilPageFullyLoaded();
-            dataPageObject.sortUp.click();
             dataTablesHelper.clickOnTabOnTableDetails("partition detail");
             if (dataPageObject.tableRows.size() > 0) {
                 int expectedPartitionsCount =

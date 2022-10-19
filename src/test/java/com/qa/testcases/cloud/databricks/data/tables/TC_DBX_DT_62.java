@@ -7,6 +7,7 @@ import com.qa.pagefactory.cloud.databricks.DataPageObject;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
+import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.annotations.Test;
@@ -21,19 +22,25 @@ public class TC_DBX_DT_62 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(dataProvider = "clusterid-data-provider",description = "Verify Analysis tab on application details page")
-    public void TC_DBX_DT_62_verifyAnalysisTab(String clusterId) {
+    public void TC_DBX_DT_62_verifyAnalysisTab(String clusterId) throws InterruptedException {
         test = extent.startTest("TC_DBX_DT_62.verifyAnalysisTab",
             "Verify Analysis tab on application details page");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
+        DataPageObject dataPageObject = new DataPageObject(driver);
+        UserActions userActions = new UserActions(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         dataTablesHelper.clickOnDataTab();
         dataTablesHelper.clickOnDataTablesTab();
         AllApps allApps = new AllApps(driver);
         allApps.selectWorkSpaceId(clusterId);
-        /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
+        waitExecuter.waitForSeconds(5);
+        dataPageObject.sortByDurationApp.click();
+        waitExecuter.waitUntilElementPresent(dataPageObject.sortDown);
+        dataPageObject.sortDown.click();
+        waitExecuter.waitUntilPageFullyLoaded();
         dataTablesHelper.clickOnMoreInfoOfNthRow(0);
-        DataPageObject dataPageObject = new DataPageObject(driver);
-        UserActions userActions = new UserActions(driver);
+        /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
         try {
             dataTablesHelper.clickOnTabOnTableDetails("Applications");
             dataTablesHelper.selectAllApplicationsColumn();

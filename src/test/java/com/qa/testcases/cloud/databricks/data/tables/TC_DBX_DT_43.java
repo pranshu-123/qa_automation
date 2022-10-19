@@ -36,7 +36,7 @@ public class TC_DBX_DT_43 extends BaseClass {
             dataTablesHelper.clickOnTabOnTableDetails("Applications");
             dataTablesHelper.selectAllApplicationsColumn();
             List<String> statusValues = dataTablesHelper.getColumnValuesFromApplicationsTable("Status");
-            List<String> expectedStatus = Arrays.asList("success","failed","killed");
+            List<String> expectedStatus = Arrays.asList("success","running","failed","killed");
             statusValues.stream().forEach(typeValue -> Assert.assertTrue(expectedStatus.
                     contains(typeValue.toLowerCase().trim()), "Incorrect status value displayed. " + typeValue.trim()));
             loggingUtils.pass("Correct status value displayed.", test);

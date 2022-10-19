@@ -25,19 +25,24 @@ public class TC_DBX_DT_60 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(dataProvider = "clusterid-data-provider",description = "Validate the search box for application search")
-    public void TC_DBX_DT_60_verifySearchBoxNavigationTab(String clusterId) {
+    public void TC_DBX_DT_60_verifySearchBoxNavigationTab(String clusterId) throws InterruptedException {
         test = extent.startTest("TC_DBX_DT_60.verifySearchBoxNavigationTab",
             "Validate the search box for application search");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
+        DataPageObject dataPageObject = new DataPageObject(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         dataTablesHelper.clickOnDataTab();
         dataTablesHelper.clickOnDataTablesTab();
         AllApps allApps = new AllApps(driver);
         allApps.selectWorkSpaceId(clusterId);
+        waitExecuter.waitForSeconds(2);
+        dataPageObject.sortByDurationApp.click();
+        waitExecuter.waitUntilElementPresent(dataPageObject.sortDown);
+        dataPageObject.sortDown.click();
+        waitExecuter.waitUntilPageFullyLoaded();
         /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
         dataTablesHelper.clickOnMoreInfoOfNthRow(0);
-        DataPageObject dataPageObject = new DataPageObject(driver);
-        WaitExecuter waitExecuter = new WaitExecuter(driver);
         UserActions actions = new UserActions(driver);
         try {
             dataTablesHelper.clickOnTabOnTableDetails("Applications");

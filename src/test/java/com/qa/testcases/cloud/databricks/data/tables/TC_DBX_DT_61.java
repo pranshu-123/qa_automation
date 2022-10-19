@@ -24,18 +24,27 @@ public class  TC_DBX_DT_61 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(dataProvider = "clusterid-data-provider",description = "Verify the Gantt Chart tab of left of application detail page")
-    public void TC_DBX_DT_61_verifyGanttChart(String clusterId) {
+    public void TC_DBX_DT_61_verifyGanttChart(String clusterId) throws InterruptedException {
         test = extent.startTest("TC_DBX_DT_61.verifyGanttChart",
             "Verify the Gantt Chart tab of left of application detail page");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
+        DataPageObject dataPageObject = new DataPageObject(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         dataTablesHelper.clickOnDataTab();
         dataTablesHelper.clickOnDataTablesTab();
         AllApps allApps = new AllApps(driver);
         allApps.selectWorkSpaceId(clusterId);
         /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
+        allApps.selectWorkSpaceId(clusterId);
+        waitExecuter.waitForSeconds(5);
+        waitExecuter.waitUntilElementPresent(dataPageObject.sortByDurationApp);
+        dataPageObject.sortByDurationApp.click();
+        waitExecuter.waitUntilElementPresent(dataPageObject.sortDown);
+        dataPageObject.sortDown.click();
+        waitExecuter.waitUntilPageFullyLoaded();
+        /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
         dataTablesHelper.clickOnMoreInfoOfNthRow(0);
-        DataPageObject dataPageObject = new DataPageObject(driver);
         try {
             dataTablesHelper.clickOnTabOnTableDetails("Applications");
             dataTablesHelper.selectAllApplicationsColumn();

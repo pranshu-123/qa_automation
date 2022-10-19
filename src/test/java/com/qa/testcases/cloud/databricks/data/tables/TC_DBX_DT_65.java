@@ -7,6 +7,7 @@ import com.qa.pagefactory.cloud.databricks.DataPageObject;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
+import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.annotations.Test;
@@ -26,14 +27,19 @@ public class TC_DBX_DT_65 extends BaseClass {
             "Verify \"Errors\" tab on application details page");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
+        DataPageObject dataPageObject = new DataPageObject(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
+        UserActions userActions = new UserActions(driver);
         dataTablesHelper.clickOnDataTab();
         dataTablesHelper.clickOnDataTablesTab();
         AllApps allApps = new AllApps(driver);
         allApps.selectWorkSpaceId(clusterId);
+        dataPageObject.sortByDurationApp.click();
+        waitExecuter.waitUntilElementPresent(dataPageObject.sortDown);
+        dataPageObject.sortDown.click();
         /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
         dataTablesHelper.clickOnMoreInfoOfNthRow(0);
-        DataPageObject dataPageObject = new DataPageObject(driver);
-        UserActions userActions = new UserActions(driver);
+
         try {
             dataTablesHelper.clickOnTabOnTableDetails("Applications");
             dataTablesHelper.clickOnParentApp(0);
@@ -41,6 +47,7 @@ public class TC_DBX_DT_65 extends BaseClass {
             if(dataPageObject.noErrorsFoundElements.size() == 0) {
                 loggingUtils.pass("Errors data displayed.", test);
             } else {
+                loggingUtils.info("Errors data are not displayed..", test);
                 loggingUtils.warning("Errors data are not displayed. Please verify manually", test);
             }
         }

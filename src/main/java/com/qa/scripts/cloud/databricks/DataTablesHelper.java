@@ -268,6 +268,13 @@ public class DataTablesHelper {
         loggingUtils.info("Go back to tables page", test);
         actions.performActionWithPolling(dataPageObject.backToTablesLinkOnTableDetails, UserAction.CLICK);
     }
+    /**
+     * Go back to home page from table details page
+     */
+    public void backToHomePage() {
+        loggingUtils.info("Go back to home page", test);
+        actions.performActionWithPolling(dataPageObject.homeTab, UserAction.CLICK);
+    }
 
     /**
      * Click on tab on table details page

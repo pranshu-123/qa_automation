@@ -88,7 +88,7 @@ public class DataTablesHelper {
         clickOnWorkspaceDropdown();
         List<WebElement> dropDownValues = dataPageObject.dropdownValues;
         Boolean isMetastorePresent = false;
-        for (int i=0; i<dropDownValues.size(); i++) {
+        for (int i = 0; i < dropDownValues.size(); i++) {
             WebElement dropDownValue = dropDownValues.get(i);
             String dropdownValueText = dropDownValue.getText();
             actions.performActionWithPolling(dropDownValue, UserAction.CLICK);
@@ -107,20 +107,19 @@ public class DataTablesHelper {
     }
 
 
-
     /**
      * Check whether data table is loaded
      */
     public boolean isTableLoadedWithData() {
         List<WebElement> dataTableHeading = dataPageObject.tableHeadings;
         List<String> expectedHeadings = Arrays.asList("Database", "Table", "Owner", "Path", "Table Type",
-            "File System", "Storage Format", "Created", "Latest Access", "Size", "Apps", "Partitions",
-            "Users", "More Info", "");
+                "File System", "Storage Format", "Created", "Latest Access", "Size", "Apps", "Partitions",
+                "Users", "More Info", "");
         if (dataTableHeading.size() == 0) {
             return false;
         } else {
             dataTableHeading.stream().forEach(heading -> Assert.assertTrue(expectedHeadings.contains(heading.getText().trim())
-                ,String.format("Mismatch in heading for %s", heading.getText().trim())));
+                    , String.format("Mismatch in heading for %s", heading.getText().trim())));
         }
         if (dataPageObject.tableRows.size() < 1) {
             return false;
@@ -174,9 +173,9 @@ public class DataTablesHelper {
                 break;
         }
         String textToFilter =
-            dataPageObject.tableRows.get(0).findElement(By.xpath("//td[" + (columnIndex+1) + "]")).getText();
+                dataPageObject.tableRows.get(0).findElement(By.xpath("//td[" + (columnIndex + 1) + "]")).getText();
         textToFilter = !textToFilter.endsWith("...") ? textToFilter : textToFilter.substring(0, textToFilter.indexOf(
-            "..."));
+                "..."));
         actions.performActionWithPolling(dataPageObject.searchBoxForTableData, UserAction.SEND_KEYS, textToFilter);
         actions.performActionWithPolling(dataPageObject.searchBoxButton, UserAction.CLICK);
         waitExecuter.waitForSeconds(5);
@@ -184,9 +183,9 @@ public class DataTablesHelper {
         loggingUtils.info("Sorting data in descending order by column " + column, test);
         actions.performActionWithPolling(dataPageObject.tableHeadings.get(columnIndex), UserAction.CLICK);
         waitExecuter.waitForSeconds(3);
-        for (WebElement row: dataPageObject.tableRows) {
+        for (WebElement row : dataPageObject.tableRows) {
             if (row.findElements(By.xpath("//td")).size() != 1) {
-                String columnDataText = row.findElement(By.xpath("//td[" + (columnIndex+1) + "]")).getText();
+                String columnDataText = row.findElement(By.xpath("//td[" + (columnIndex + 1) + "]")).getText();
                 if (!column.equals("Latest Access")) {
                     try {
                         Assert.assertEquals(columnDataText, textToFilter, "");
@@ -203,9 +202,9 @@ public class DataTablesHelper {
 
         loggingUtils.info("Sorting data in ascending order by column " + column, test);
         actions.performActionWithPolling(dataPageObject.tableHeadings.get(columnIndex), UserAction.CLICK);
-        for (WebElement row: dataPageObject.tableRows) {
+        for (WebElement row : dataPageObject.tableRows) {
             if (row.findElements(By.xpath("//td")).size() != 1) {
-                String columnDataText = row.findElement(By.xpath("//td[" + (columnIndex+1) + "]")).getText();
+                String columnDataText = row.findElement(By.xpath("//td[" + (columnIndex + 1) + "]")).getText();
                 if (!column.equals("Latest Access")) {
                     try {
                         Assert.assertEquals(columnDataText, textToFilter, "");
@@ -224,6 +223,7 @@ public class DataTablesHelper {
     /**
      * Click on download CSV button and return the File object of
      * downloaded file
+     *
      * @return - Downloaded File Object
      */
     public File downloadDataTable() {
@@ -236,24 +236,26 @@ public class DataTablesHelper {
 
     /**
      * Get Cell values of nth row of data table
+     *
      * @param rowNum - Row number to get the info
      * @return - Cell Values list of String
      */
-    public List<String>  getCellValuesOfNthRow(int rowNum) {
+    public List<String> getCellValuesOfNthRow(int rowNum) {
         WebElement row = dataPageObject.tableRows.get(rowNum);
         List<WebElement> rowValues = row.findElements(By.xpath("//td"));
         List<String> cellStrValue = rowValues.stream().map(rowValue -> rowValue.getText().trim())
-            .collect(Collectors.toList());
+                .collect(Collectors.toList());
         return cellStrValue;
     }
 
     /**
      * Click on more info button of Nth row
+     *
      * @param rowNum - Row Number to get info
      */
     public void clickOnMoreInfoOfNthRow(int rowNum) {
         int scrollY = 600;
-        JavaScriptExecuter.scrollViewWithYAxis(driver,scrollY);
+        JavaScriptExecuter.scrollViewWithYAxis(driver, scrollY);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         //executor.executeScript("arguments[0].scrollIntoView(true);", dataPageObject.logScrollable);
         WebElement row = dataPageObject.tableRows.get(rowNum);
@@ -268,6 +270,7 @@ public class DataTablesHelper {
         loggingUtils.info("Go back to tables page", test);
         actions.performActionWithPolling(dataPageObject.backToTablesLinkOnTableDetails, UserAction.CLICK);
     }
+
     /**
      * Go back to home page from table details page
      */
@@ -302,6 +305,7 @@ public class DataTablesHelper {
 
     /**
      * Get toollTip values for loaded graph
+     *
      * @param graphType - Users/Apps/Size
      * @return - Tooltip value
      */
@@ -312,19 +316,19 @@ public class DataTablesHelper {
                     actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(0), 0, 0);
                     actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(0), 100, 100);
                     String usersTooltip = dataPageObject.graphsTooltips.get(0).getText();
-                    loggingUtils.pass("Users graph displayed. Tooltip loaded: " + usersTooltip , test);
+                    loggingUtils.pass("Users graph displayed. Tooltip loaded: " + usersTooltip, test);
                     return usersTooltip;
                 case "apps":
                     actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(1), 0, 0);
                     actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(1), 100, 100);
                     String appsTooltip = dataPageObject.graphsTooltips.get(0).getText();
-                    loggingUtils.pass("Apps graph displayed. Tooltip loaded: " + appsTooltip , test);
+                    loggingUtils.pass("Apps graph displayed. Tooltip loaded: " + appsTooltip, test);
                     return appsTooltip;
                 case "size":
                     actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(2), 0, 0);
                     actionPerformer.moveToTheElementByOffset(dataPageObject.displayedGraphs.get(2), 100, 100);
                     String sizeTooltip = dataPageObject.graphsTooltips.get(0).getText();
-                    loggingUtils.pass("Size graph displayed. Tooltip loaded: " + sizeTooltip , test);
+                    loggingUtils.pass("Size graph displayed. Tooltip loaded: " + sizeTooltip, test);
                     return sizeTooltip;
                 default:
                     loggingUtils.error("Incorrect value is passed for graph", test);
@@ -341,7 +345,7 @@ public class DataTablesHelper {
      */
     public void filterByTableStateOrEvents(String label) {
         WebElement element = dataPageObject.tablesFilterItems.stream().filter(item -> item.getText().toLowerCase()
-            .contains(label.toLowerCase())).collect(Collectors.toList()).get(0);
+                .contains(label.toLowerCase())).collect(Collectors.toList()).get(0);
         waitExecuter.sleep(300);
         actionPerformer.moveToTheElement(dataPageObject.tableEventsFilterLabel);
         actionPerformer.moveToTheElement(element);
@@ -350,6 +354,7 @@ public class DataTablesHelper {
 
     /**
      * Get applied state filter of hot and cold tables
+     *
      * @return - Slider values for hot and cold
      */
     public List<Integer> getAppliedStateFilter() {
@@ -370,11 +375,11 @@ public class DataTablesHelper {
             actionPerformer.moveToTheElement(dataPageObject.labelTablesSlider.get(3));
             coldByLatestAccess = Integer.valueOf(dataPageObject.slidersTooltipValues.get(3).getText());
         } finally {
+
             actions.performActionWithPolling(dataPageObject.modalCloseButton, UserAction.CLICK);
         }
         return Arrays.asList(hotByAge, coldByAge, hotByLatestAccess, coldByLatestAccess);
     }
-
     /**
      * Get applied state filter of hot and cold tables
      * @return - Slider values for hot and cold

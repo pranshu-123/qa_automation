@@ -42,6 +42,8 @@ public class TC_DBX_DT_68 extends BaseClass {
             waitExecuter.waitUntilElementPresent(dataPageObject.sortDown);
             dataPageObject.sortDown.click();
             waitExecuter.waitUntilPageFullyLoaded();
+            dataPageObject.sortDown.click();
+            waitExecuter.waitUntilPageFullyLoaded();
             /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
             dataTablesHelper.clickOnMoreInfoOfNthRow(0);
             dataTablesHelper.clickOnTabOnTableDetails("partition detail");
@@ -64,6 +66,8 @@ public class TC_DBX_DT_68 extends BaseClass {
         } catch (NoSuchElementException | InterruptedException e) {
             dataTablesHelper.backToTablesPage();
             loggingUtils.error("Exception occured " + e.getStackTrace(), test);
+        } finally {
+            dataTablesHelper.backToTablesPage();
         }
     }
 }

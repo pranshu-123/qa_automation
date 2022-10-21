@@ -4,6 +4,7 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.cloud.databricks.DataPageObject;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
+import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
@@ -20,8 +21,8 @@ import java.util.List;
 public class TC_DBX_DT_37 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
-    @Test(description = "Verify the Analysis section of Table Details page.")
-    public void verifyAnalysisSection() {
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify the Analysis section of Table Details page.")
+    public void verifyAnalysisSection(String clusterId) {
         test = extent.startTest("TC_DBX_DT_37.verifyAnalysisSection", "Verify the Analysis section of Table Details page.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
@@ -29,7 +30,9 @@ public class TC_DBX_DT_37 extends BaseClass {
         try {
             dataTablesHelper.clickOnDataTab();
             dataTablesHelper.clickOnDataTablesTab();
-            dataTablesHelper.selectWorkspaceForConfiguredMetastore();
+            AllApps allApps = new AllApps(driver);
+            allApps.selectWorkSpaceId(clusterId);
+            /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
             dataTablesHelper.clickOnMoreInfoOfNthRow(0);
             dataTablesHelper.clickOnTabOnTableDetails("analysis");
             List<WebElement> recommendationAndInsights = dataPageObject.analysisRecommendationAndInsightsTitle;

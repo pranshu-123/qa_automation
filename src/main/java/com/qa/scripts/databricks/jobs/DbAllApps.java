@@ -172,16 +172,16 @@ public class DbAllApps {
     /* Navigate to Jobs Tab */
     public void navigateToRunsTab() {
         logger.info("Navigate to jobs tab from header");
-        waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.jobs);
-        userAction.performActionWithPolling(dbSubTopPanelModulePageObject.jobs, UserAction.CLICK);
+        waitExecuter.waitUntilElementClickable(dbSubTopPanelModulePageObject.workflows);
+        userAction.performActionWithPolling(dbSubTopPanelModulePageObject.workflows, UserAction.CLICK);
         waitExecuter.waitUntilElementClickable(applicationsPageObject.resetButton);
         userAction.performActionWithPolling(dbSubTopPanelModulePageObject.runsTab, UserAction.CLICK);
         waitExecuter.waitUntilPageFullyLoaded();
     }
 
     public void navigateToJobsTab(String tab) {
-        waitExecuter.waitUntilElementPresent(dbSubTopPanelModulePageObject.jobs);
-        userAction.performActionWithPolling(dbSubTopPanelModulePageObject.jobs, UserAction.CLICK);
+        waitExecuter.waitUntilElementPresent(dbSubTopPanelModulePageObject.workflows);
+        userAction.performActionWithPolling(dbSubTopPanelModulePageObject.workflows, UserAction.CLICK);
         waitExecuter.sleep(4000);
         try {
             if (tab.equalsIgnoreCase("Runs")) {

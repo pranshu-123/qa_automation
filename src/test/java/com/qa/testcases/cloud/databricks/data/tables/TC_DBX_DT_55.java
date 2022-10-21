@@ -4,7 +4,9 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.cloud.databricks.DataPageObject;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
+import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
+import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -20,15 +22,17 @@ import java.util.stream.Collectors;
 public class TC_DBX_DT_55 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
-    @Test(description = "Verify the Instance Summary section on Application Details page")
-    public void TC_DBX_DT_55_verifyInstanceSummaryPage() {
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify the Instance Summary section on Application Details page")
+    public void TC_DBX_DT_55_verifyInstanceSummaryPage(String clusterId) {
         test = extent.startTest("TC_DBX_DT_55.verifyInstanceSummaryPage",
             "Verify the Instance Summary section on Application Details page");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
         dataTablesHelper.clickOnDataTab();
         dataTablesHelper.clickOnDataTablesTab();
-        dataTablesHelper.selectWorkspaceForConfiguredMetastore();
+        AllApps allApps = new AllApps(driver);
+        allApps.selectWorkSpaceId(clusterId);
+        /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
         dataTablesHelper.clickOnMoreInfoOfNthRow(0);
         DataPageObject dataPageObject = new DataPageObject(driver);
         try {
@@ -46,10 +50,17 @@ public class TC_DBX_DT_55 extends BaseClass {
                 loggingUtils.pass("Duration value is loaded", test);
                 Assert.assertNotEquals(instanceSummaryValues.get(2).trim(), "", "Data I/O value is blank");
                 loggingUtils.pass("Data I/O value is loaded", test);
-                dataTablesHelper.closeApplicationDetailsPage();
             }
-        } finally {
+        } catch (NoSuchElementException e) {
+            dataTablesHelper.closeApplicationDetailsPage();
+            dataTablesHelper.backToTablesPage();
+            loggingUtils.error("Exception occured " + e.getStackTrace(), test);
+        }
+        finally {
+            dataTablesHelper.closeApplicationDetailsPage();
             dataTablesHelper.backToTablesPage();
         }
     }
+
 }
+

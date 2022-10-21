@@ -11,7 +11,7 @@ public class DbxSummaryPageObject {
     @FindBy(className = "close")
     public WebElement closeIcon;
 
-    @FindBy(xpath = "//tbody[1]/tr/td[14]/button[2]")
+    @FindBy(xpath = "//button[text()[normalize-space()='Spark']]")
     public WebElement sparkIcon;
 
     @FindBy(xpath = "(//tbody[@id='appNavigation-body'])/tr")

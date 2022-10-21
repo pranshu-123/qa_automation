@@ -66,7 +66,15 @@ public class DbxJobsPageObject {
     @FindBy(xpath = "//div[@class='close']")
     public WebElement closeAppsPageTab;
 
-    @FindBy(xpath = "//*[@id=\"pipelinesList-body\"]/tr/td[1]")
+    @FindBy(xpath = "//td[contains(@class,'border')]")
+    public List<WebElement>  jobRunStatus;
+
+    @FindBy(xpath = "//tbody[@id='pipelinesList-body']/tr/td")
+    public List<WebElement>  jobRunResults;
+
+    public String sortType = "//a[@class='icon-sort' or @class='sorting icon-sort icon-sort-sorted-up']//parent::th";
+
+    @FindBy(xpath = "//tr/td[1]")
     public List<WebElement> lastRunStatusList;
 
     @FindBy(xpath = "//tr/td[2]")

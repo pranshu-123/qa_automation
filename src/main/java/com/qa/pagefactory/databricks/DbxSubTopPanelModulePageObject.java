@@ -10,8 +10,8 @@ import java.util.List;
 
 public class DbxSubTopPanelModulePageObject {
 
-    @FindBy(xpath = "//span[text()[normalize-space()='Jobs']]")
-    public WebElement jobs;
+    @FindBy(xpath = "//span[text()[normalize-space()='Workflows']]")
+    public WebElement workflows;
 
     @FindBy(xpath = "//span[text()='Jobs']")
     public WebElement jobsTabs;
@@ -127,7 +127,7 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//tr/td[2]/span[1]")
     public WebElement getUsernameFromFinishedTable;
 
-    @FindBy(xpath = "//tbody[1]/tr/td[12]")
+    @FindBy(xpath = "//tbody[1]/tr/td[10]")
     public WebElement getClusterTypeFromTable;
 
     @FindBy(xpath = "//tbody[1]/tr/td[12]/span[1]")
@@ -181,7 +181,7 @@ public class DbxSubTopPanelModulePageObject {
     @FindBy(xpath = "//tbody[1]/tr/td[3]/a[1]")
     public WebElement getAppname;
 
-    @FindBy(xpath = "//span[text()='Runs']")
+    @FindBy(xpath = "//span[text()='Job Runs']")
     public WebElement runsTab;
 
     @FindBy(id = "running")

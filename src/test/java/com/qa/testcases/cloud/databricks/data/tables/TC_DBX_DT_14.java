@@ -4,6 +4,7 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.cloud.databricks.DataPageObject;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
+import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
 import com.qa.utils.WaitExecuter;
 import org.openqa.selenium.WebElement;
@@ -19,14 +20,18 @@ import org.testng.annotations.Test;
 public class TC_DBX_DT_14 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_14.class);
 
-    @Test(description = "Verify the table events filter present.")
-    public void verifyTableEventFilter() {
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify the table events filter present.")
+    public void verifyTableEventFilter(String clusterId) throws InterruptedException {
         test = extent.startTest("TC_DBX_DT_14.verifyTableEventFilter", "Verify the table events filter present.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         dataTablesHelper.clickOnDataTab();
         dataTablesHelper.clickOnDataTablesTab();
-        dataTablesHelper.selectWorkspaceForConfiguredMetastore();
+        AllApps allApps = new AllApps(driver);
+        allApps.selectWorkSpaceId(clusterId);
+        waitExecuter.waitForSeconds(2);
+        /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
         DataPageObject dataPageObject = new DataPageObject(driver);
         WaitExecuter executor = new WaitExecuter(driver);
         executor.waitUntilElementPresent(dataPageObject.tableEventsFilterLabel);

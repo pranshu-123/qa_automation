@@ -1,5 +1,6 @@
 package com.qa.testcases.databricks.jobs.jobs;
 
+import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.databricks.DbxSubTopPanelModulePageObject;
 import com.qa.pagefactory.databricks.jobs.DbxJobsPageObject;
@@ -10,7 +11,8 @@ import com.qa.utils.WaitExecuter;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.annotations.Test;
-
+@Marker.DbxJobs
+@Marker.All
 public class TC_DJ_14 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DJ_14.class);
 
@@ -36,46 +38,13 @@ public class TC_DJ_14 extends BaseClass {
             test.log(LogStatus.INFO, "Navigate to jobs tab from header");
             test.log(LogStatus.INFO, "Select last 7 days");
             dballApps.inJobsSelectClusterAndLast7Days();
-            waitExecuter.sleep(2000);
+            waitExecuter.waitForSeconds(5);
 
             loggingUtils.info("Navigated to jobs page", test);
-            jobsPage.validateTableSorting("Last Run Status");
-            loggingUtils.info("Jobs page are sorted as per Last Run Status", test);
-            test.log(LogStatus.PASS, "Jobs page are sorted as per Last Run Status");
+            jobsPage.validateJobSorting("Last Run Status");
+            loggingUtils.info("Jobs are sorted and listed as per sorted criteria",test);
+            test.log(LogStatus.PASS, "Jobs are sorted and listed as per sorted criteria");
 
-
-            jobsPage.validateTableSorting("Job ID");
-            loggingUtils.info("Job ID are sorted as per Last Run Status", test);
-            test.log(LogStatus.PASS, "Job ID are sorted as per Last Run Status");
-
-            jobsPage.validateTableSorting("Job Name");
-            loggingUtils.info("Job Name are sorted as per Last Run Status", test);
-            test.log(LogStatus.PASS, "Job Name are sorted as per Last Run Status");
-
-
-            jobsPage.validateTableSorting("Cluster Name");
-            loggingUtils.info("Cluster Name are sorted as per Last Run Status", test);
-            test.log(LogStatus.PASS, "Cluster Name are sorted as per Last Run Status");
-
-
-            jobsPage.validateTableSorting("Workspace");
-            loggingUtils.info("Workspace are sorted as per Last Run Status", test);
-            test.log(LogStatus.PASS, "Workspace are sorted as per Last Run Status");
-
-
-            loggingUtils.info("Navigated to jobs page", test);
-            jobsPage.validateTableSorting("User");
-            loggingUtils.info("User are sorted as per Last Run Status", test);
-            test.log(LogStatus.PASS, "User are sorted as per Last Run Status");
-
-            jobsPage.validateTableSorting("Start Time");
-            loggingUtils.info("Start Time are sorted as per Last Run Status", test);
-            test.log(LogStatus.PASS, "Start Time are sorted as per Last Run Status");
-
-
-            jobsPage.validateTableSorting("Duration");
-            loggingUtils.info("Duration are sorted as per Last Run Status", test);
-            test.log(LogStatus.PASS, "Duration are sorted as per Last Run Status");
 
         } catch (Exception ex) {
             loggingUtils.info("No app present by this name", test);

@@ -20,7 +20,7 @@ public class TC_DBX_DO_11 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(dataProvider = "clusterid-data-provider",description = "Verify the graph chart is updated when filter is applied for table selection")
-    public void TC_DBX_DO_11_verifyPieChartWhenAppStateSelected(String clusterId) {
+    public void TC_DBX_DO_11_verifyPieChartWhenAppStateSelected(String clusterId) throws InterruptedException {
         test = extent.startTest("TC_DBX_DO_11.verifyPieChartWhenAppStateSelected", "Verify the graph chart " +
             "is updated when filter is applied for table selection");
         test.assignCategory("Databricks - Data");
@@ -30,7 +30,7 @@ public class TC_DBX_DO_11 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         dataTablesHelper.clickOnDataTab();
         allApps.selectWorkSpaceId(clusterId);
-        waitExecuter.sleep(3000);
+        waitExecuter.waitForSeconds(2);
         dataOverviewHelper.selectOnlyTableState("hot");
         loggingUtils.pass("Pie chart displayed as per selection", test);
     }

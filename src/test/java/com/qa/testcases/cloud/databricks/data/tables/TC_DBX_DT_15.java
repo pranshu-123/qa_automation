@@ -4,6 +4,7 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.cloud.databricks.DataPageObject;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
+import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -20,14 +21,16 @@ import java.util.stream.Collectors;
 public class TC_DBX_DT_15 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_15.class);
 
-    @Test(description = "Verify the table columns.")
-    public void verifyTableColumns() {
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify the table columns.")
+    public void verifyTableColumns(String clusterId) {
         test = extent.startTest("TC_DBX_DT_15.verifyTableColumns", "Verify the table columns.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
         dataTablesHelper.clickOnDataTab();
         dataTablesHelper.clickOnDataTablesTab();
-        dataTablesHelper.selectWorkspaceForConfiguredMetastore();
+        AllApps allApps = new AllApps(driver);
+        allApps.selectWorkSpaceId(clusterId);
+        /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
         DataPageObject dataPageObject = new DataPageObject(driver);
         List<String> tableColumns=
             dataPageObject.tableHeadings.stream().map(tableHeading -> tableHeading.getText().trim()).collect(Collectors.toList());

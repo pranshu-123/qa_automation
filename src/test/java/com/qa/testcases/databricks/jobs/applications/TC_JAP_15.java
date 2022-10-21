@@ -31,6 +31,9 @@ public class TC_JAP_15 extends BaseClass {
         DbAllApps dballApps = new DbAllApps(driver);
         SummaryDetailsPage summaryPage = new SummaryDetailsPage(driver);
         summaryPage.navigateToJobsTabFromHeader(dballApps, test);
+        summaryPageObject.sortByDurationApp.click();
+        waitExecuter.waitUntilPageFullyLoaded();
+        summaryPageObject.sortUp.click();
         try {
             summaryPage.commonSetupCodeForSumarryTabValidation(test, "Program", logger, false);
             test.log(LogStatus.PASS, "Verified the Program tab successfully");

@@ -4,6 +4,7 @@ import com.qa.base.BaseClass;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.cloud.databricks.DataPageObject;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
+import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.ImageUtils;
 import com.qa.utils.LoggingUtils;
 import com.qa.utils.ScreenshotHelper;
@@ -20,15 +21,17 @@ import java.io.File;
 public class TC_DBX_DT_34 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_34.class);
 
-    @Test(description = "Validate whether Size graph is updated when different rows are selected from table details.")
-    public void verifySizeGraphWithDifferentTables() {
+    @Test(dataProvider = "clusterid-data-provider",description = "Validate whether Size graph is updated when different rows are selected from table details.")
+    public void verifySizeGraphWithDifferentTables(String clusterId) {
         test = extent.startTest("TC_DBX_DT_34.verifySizeGraphWithDifferentTables", "Validate whether Size graph is updated " +
             "when different rows are selected from table details.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
         dataTablesHelper.clickOnDataTab();
         dataTablesHelper.clickOnDataTablesTab();
-        dataTablesHelper.selectWorkspaceForConfiguredMetastore();
+        AllApps allApps = new AllApps(driver);
+        allApps.selectWorkSpaceId(clusterId);
+        /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
         DataPageObject dataPageObject = new DataPageObject(driver);
         UserActions actions = new UserActions(driver);
         if (dataPageObject.tableRows.size() > 1) {

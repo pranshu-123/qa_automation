@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DbxInsightsOverviewPageObject {
 
-    @FindBy(xpath = "//span[@class='icon-value-dashboard capitalize']")
+    @FindBy(xpath = "//a[@href='#/value_dashboard']//span")
     public WebElement insightsTab;
 
     @FindBy(xpath = "//span[text()='Cost']")

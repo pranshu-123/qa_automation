@@ -44,7 +44,7 @@ public class TC_DR_23 extends BaseClass {
             test.log(LogStatus.INFO, "Select last 7 days");
             dballApps.inJobsSelectClusterAndLast7Days();
             waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
-            // Click on user searchbox and get all ClusterType.
+            // Click on user search box and get all ClusterType.
             test.log(LogStatus.INFO, "Click on ClusterType searchBox and get all usernames.");
             loggingUtils.info("Click on ClusterType searchBox and get all usernames.",test);
             executor.executeScript("arguments[0].scrollIntoView();", dbpageObject.clusterTypeSearchBox);

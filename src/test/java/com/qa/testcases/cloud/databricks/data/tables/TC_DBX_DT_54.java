@@ -4,9 +4,13 @@ import com.qa.annotations.Marker;
 import com.qa.base.BaseClass;
 import com.qa.pagefactory.cloud.databricks.DataPageObject;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
+import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.DateUtils;
 import com.qa.utils.LoggingUtils;
+import com.qa.utils.WaitExecuter;
+import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -19,17 +23,25 @@ import org.testng.annotations.Test;
 public class TC_DBX_DT_54 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
-    @Test(description = "Verify the application details page.")
-    public void verifyApplicationDetailsPage() {
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify the application details page.")
+    public void verifyApplicationDetailsPage(String clusterId) {
         test = extent.startTest("TC_DBX_DT_54.verifyApplicationDetailsPage",
             "Verify the application details page.");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
+        DataPageObject dataPageObject = new DataPageObject(driver);
+        UserActions userActions = new UserActions(driver);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         dataTablesHelper.clickOnDataTab();
         dataTablesHelper.clickOnDataTablesTab();
-        dataTablesHelper.selectWorkspaceForConfiguredMetastore();
+        AllApps allApps = new AllApps(driver);
+        allApps.selectWorkSpaceId(clusterId);
+        dataPageObject.sortByDurationApp.click();
+        waitExecuter.waitUntilElementPresent(dataPageObject.sortDown);
+        dataPageObject.sortDown.click();
+        waitExecuter.waitUntilPageFullyLoaded();
+        /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
         dataTablesHelper.clickOnMoreInfoOfNthRow(0);
-        DataPageObject dataPageObject = new DataPageObject(driver);
         try {
             dataTablesHelper.clickOnTabOnTableDetails("Applications");
             dataTablesHelper.selectAllApplicationsColumn();
@@ -70,9 +82,16 @@ public class TC_DBX_DT_54 extends BaseClass {
             loggingUtils.pass("Correct duration value displayed", test);
             Assert.assertTrue(actualQueueValue.contains(expectedQueue), "Incorrect queue value displayed");
             loggingUtils.pass("Correct queue value displayed", test);
+        } catch (NoSuchElementException e) {
             dataTablesHelper.closeApplicationDetailsPage();
-        } finally {
+            dataTablesHelper.backToTablesPage();
+            loggingUtils.error("Exception occured " + e.getStackTrace(), test);
+        }
+        finally {
+            dataTablesHelper.closeApplicationDetailsPage();
             dataTablesHelper.backToTablesPage();
         }
     }
+
 }
+

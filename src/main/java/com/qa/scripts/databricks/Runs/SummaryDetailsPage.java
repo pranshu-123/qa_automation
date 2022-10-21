@@ -641,7 +641,7 @@ public class SummaryDetailsPage {
      * validate each component tab data if validateExecutorTab = true validate jobs
      * execution tabs data.
      */
-    public void verifyAppsComponent(DbxSummaryPageObject summaryPageObject, Boolean validateCompData, Boolean validateExecutorTab, Boolean validateStageTab) {
+    public void verifyAppsComponent(DbxSummaryPageObject summaryPageObject, Boolean validateCompData, Boolean validateExecutorTab, Boolean validateStageTab) throws InterruptedException {
         List<WebElement> componentList = summaryPageObject.component_element;
         logger.info("ComponentList is " + componentList.size());
         int navigationRows = 0;
@@ -666,6 +666,7 @@ public class SummaryDetailsPage {
                             for (int rows = 1; rows <= navigationRows; rows++) {
                                 for (int col = 1; col <= headerList.size(); col++) {
                                     String data = driver.findElement(By.xpath("//*[@id='appNavigation-body']/" + "tr[" + rows + "]/td[" + col + "]/span")).getText();
+                                    waitExecuter.waitForSeconds(4);
                                     logger.info("The data is " + data);
                                     Assert.assertNotSame("", data);
                                 }
@@ -703,7 +704,7 @@ public class SummaryDetailsPage {
                     break;
                 case 2:
                     try {
-                        Assert.assertEquals(tabName, "Total job: "+ navigationRows, "Jobs text not present");
+                        Assert.assertEquals(tabName, "Total jobs: "+ navigationRows, "Jobs text not present");
                         String[] jobCountArr = componentList.get(j).getText().split("\\s");
                         int jobCnt = Integer.parseInt(jobCountArr[0]);
                         Assert.assertEquals(jobCnt, navigationRows, "JobCnt and navigation rows donot match");
@@ -890,14 +891,14 @@ public class SummaryDetailsPage {
      * (Duration, Start time, end time, job count, stages count)
      * 2. Owner, cluster, queue must be populated on the top right
      */
-    public String verifyRightPaneKpis(DbxSummaryPageObject summaryPageObject) {
+    public String verifyRightPaneKpis(DbxSummaryPageObject summaryPageObject) throws InterruptedException {
         List<WebElement> kpiList = summaryPageObject.rightPaneKpis;
-        waitExecuter.sleep(2000);
+        waitExecuter.waitForSeconds(4);
         validateLeftPanelKpis(kpiList);
         List<WebElement> appKpis = summaryPageObject.rightPaneAppKpis;
         List<WebElement> appKpiVal = summaryPageObject.rightPaneAppKpiVal;
         Assert.assertFalse(appKpis.isEmpty(), "No application kpis are listed in the right pane");
-        Assert.assertFalse(appKpiVal.isEmpty(), "Application kpi values are empty");
+        Assert.assertFalse(appKpiVal.isEmpty(), "Application kpi values are emrightPaneAppKpispty");
         String appDuration = "0";
         for (int i = 0; i < appKpis.size(); i++) {
             Assert.assertNotNull(appKpis.get(i).getText(), "Kpi text is empty");
@@ -1014,8 +1015,9 @@ public class SummaryDetailsPage {
         // Clicking on the Spark app must go to apps detail page
         if (appCount > 0) {
             if (tabName.equals("Analysis")) {
-                userActions.performActionWithPolling(applicationsPageObject.globalSearchBox, UserAction.SEND_KEYS, "com.unraveldata.spark.usecase.LightExecutor");
+                userActions.performActionWithPolling(applicationsPageObject.globalSearchBox, UserAction.SEND_KEYS, "Databricks Shell");
                 applicationsPageObject.globalSearchBox.sendKeys(Keys.RETURN);
+                waitExecuter.waitForSeconds(1);
             }
             String headerAppId = summaryPage.verifyGoToSpark(summaryPageObject);
             test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);

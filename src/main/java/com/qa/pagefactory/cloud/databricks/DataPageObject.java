@@ -113,6 +113,18 @@ public class DataPageObject {
     @FindBy(xpath = "//div[contains(text(),'Total Partitions')]")
     public WebElement totalPartitionsLabel;
 
+    @FindBy(xpath = "//th[13]//a[1]")
+    public WebElement sortByDurationApp;
+
+    @FindBy(xpath = "//th[4]//a[1]")
+    public WebElement sortByTable;
+
+    @FindBy(xpath = "//a[@class='icon-sort icon-sort-sorted-up']")
+    public WebElement sortUp;
+
+    @FindBy(xpath = "//a[contains(@class,'icon-sort icon-sort-sorted-down')]")
+    public WebElement sortDown;
+
     @FindBy(xpath = "//div[contains(@class,'dashboard-module')]")
     public List<WebElement> displayedGraphs;
 
@@ -183,13 +195,16 @@ public class DataPageObject {
     @FindBy(xpath = "//tbody[1]/tr/td[4]/div[1]/div[1]/a[2]")
     public WebElement applicationId;
 
-    @FindBy(xpath = "//h2/span")
+    @FindBy(xpath = "//h2/span[1]")
     public WebElement applicationDetailsHeading;
 
-    @FindBy(css = "div.close")
+    @FindBy(xpath = "(//div[@class='right text-white']//span)[2]")
+    public WebElement applicationClusterId;
+
+    @FindBy(xpath = "//div[@class='close']")
     public WebElement closeApplicationsDetailsButton;
 
-    @FindBy(css = "//h2[@class='text-white']//a[1]")
+    @FindBy(xpath = "//a[@class='home-link']")
     public WebElement homeTab;
 
     @FindBy(xpath = "(//h2/following-sibling::div)[1]")

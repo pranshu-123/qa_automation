@@ -58,7 +58,7 @@ public class MarkerConstants {
 
     public static final String DATA_TABLES = "data_tables";
     public static final String IMPALA_INSIGHTS = "impala_insights";
-    public static final String DBX_RUNS = "dbx_runs";
+    public static final String DBX_RUNS = "dbx_job_runs";
     public static final String DBX_JOBS = "dbx_jobs";
     public static final String DBX_COST_TRENDS = "dbx_cost_trends";
     public static final String DBX_COST_BUDGET = "dbx_cost_budget";

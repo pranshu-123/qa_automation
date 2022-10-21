@@ -20,7 +20,7 @@ public class TC_DBX_DO_13 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
     @Test(dataProvider = "clusterid-data-provider",description = "Validate whether user is able to change the setting of label by making changes in Last App Access")
-    public void TC_DBX_DO_13_verifyTableStatesByChangingLastAppAccess(String clusterId) {
+    public void TC_DBX_DO_13_verifyTableStatesByChangingLastAppAccess(String clusterId) throws InterruptedException {
         test = extent.startTest("TC_DBX_DO_13.verifyTableStatesByChangingLastAppAccess", "Validate whether user is able" +
                 " to change the setting of label by making changes in Last App Access");
         test.assignCategory("Databricks - Data");
@@ -30,7 +30,7 @@ public class TC_DBX_DO_13 extends BaseClass {
         WaitExecuter waitExecuter = new WaitExecuter(driver);
         dataTablesHelper.clickOnDataTab();
         allApps.selectWorkSpaceId(clusterId);
-        waitExecuter.sleep(3000);
+        waitExecuter.waitForSeconds(3);
         Boolean changeAppSetting = dataOverviewHelper.changeAppliedStateSettings("last app access");
         Assert.assertTrue(changeAppSetting, "User is not able to change table state setting by changing \"Last App Access\"");
         loggingUtils.pass("User is able to change setting of table state by changing \"Last App Access\"", test);

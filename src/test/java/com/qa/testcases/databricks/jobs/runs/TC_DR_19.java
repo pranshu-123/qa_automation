@@ -64,11 +64,12 @@ public class TC_DR_19 extends BaseClass {
             waitExecuter.sleep(2000);
             loggingUtils.info("Selected username from dropdown " + usernameSelected,test);
             executor.executeScript("arguments[0].scrollIntoView();", dbpageObject.globalSearchBox);
+            waitExecuter.waitForSeconds(1);
             int totalCount = Integer
                     .parseInt(dbpageObject.getTotalAppCount.getText().replaceAll("[^\\dA-Za-z ]", "").trim());
             if (totalCount > 0) {
                 String workspaceNameFromTable = dbpageObject.getWorkspaceFromTable.getAttribute("title");
-                waitExecuter.waitUntilPageFullyLoaded();
+                waitExecuter.waitForSeconds(2);
                 loggingUtils.info("Username displayed in table " + workspaceNameFromTable,test);
                 Assert.assertTrue(usernameSelected.contains(workspaceNameFromTable),
                         "The application in table contains workspace name other than that of " + workspaceNameFromTable);
@@ -80,7 +81,7 @@ public class TC_DR_19 extends BaseClass {
             waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
             userActions.performActionWithPolling(dbpageObject.resetButton, UserAction.CLICK);
             waitExecuter.waitUntilElementClickable(dbpageObject.resetButton);
-                    } catch (NoSuchElementException ex) {
+                    } catch (NoSuchElementException | InterruptedException ex) {
             loggingUtils.error("No app present by this name", test);
             loggingUtils.error("Error- " + ex, test);
         }

@@ -33,7 +33,7 @@ public class TC_DJ_01 extends BaseClass {
         allApps.navigateToJobsTab("Jobs");
         waitExecuter.waitUntilElementPresent(dbpageObject.jobsTabs);
 
-        String jobsTab=dbpageObject.jobs.getText().trim();
+        String jobsTab=dbpageObject.workflows.getText().trim();
         test.log(LogStatus.INFO, "Jobs tab from header is :"+jobsTab);
     }
 }

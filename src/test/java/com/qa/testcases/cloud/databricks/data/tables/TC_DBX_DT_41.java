@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.enums.UserAction;
 import com.qa.pagefactory.cloud.databricks.DataPageObject;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
+import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
 import com.qa.utils.actions.UserActions;
 import org.openqa.selenium.By;
@@ -24,8 +25,8 @@ import java.util.stream.Collectors;
 public class TC_DBX_DT_41 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(this.getClass());
 
-    @Test(description = "Verify whether user is able to choose the columns to be displayed in table")
-    public void validateTableColumnSelection() {
+    @Test(dataProvider = "clusterid-data-provider",description = "Verify whether user is able to choose the columns to be displayed in table")
+    public void validateTableColumnSelection(String clusterId) {
         test = extent.startTest("TC_DBX_DT_41.validateTableColumnSelection",
             "Verify whether user is able to choose the columns to be displayed in table");
         test.assignCategory("Databricks - Data");
@@ -34,7 +35,9 @@ public class TC_DBX_DT_41 extends BaseClass {
         DataPageObject dataPageObject = new DataPageObject(driver);
         dataTablesHelper.clickOnDataTab();
         dataTablesHelper.clickOnDataTablesTab();
-        dataTablesHelper.selectWorkspaceForConfiguredMetastore();
+        AllApps allApps = new AllApps(driver);
+        allApps.selectWorkSpaceId(clusterId);
+        /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
         dataTablesHelper.clickOnMoreInfoOfNthRow(0);
         try {
             dataTablesHelper.clickOnTabOnTableDetails("Applications");

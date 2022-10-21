@@ -35,8 +35,6 @@ public class TC_JAP_09 extends BaseClass {
         try {
             summaryPage.commonSetupCodeForSumarryTabValidation(test, "Analysis", logger, false);
             test.log(LogStatus.PASS, "Verified the Analysis tab successfully");
-            //Close apps details page
-            MouseActions.clickOnElement(driver, summaryPageObject.closeAppsPageTab);
             test.log(LogStatus.PASS, "The Failed apps have all kpis listed along with components present");
         } catch (NoSuchElementException ex) {
             logger.info("No app present by this name");

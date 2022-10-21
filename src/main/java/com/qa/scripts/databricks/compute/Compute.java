@@ -1,5 +1,7 @@
 package com.qa.scripts.databricks.compute;
 
+import static org.testng.Assert.ARRAY_MISMATCH_TEMPLATE;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -120,7 +122,8 @@ public class Compute {
 				long totalPages = Long.parseLong(count);
 				long rowsCount = computePageObject.jobRunValuesRows.stream().count();
 				long totalCount = (totalPages-1)*18 + rowsCount;
-				Assert.assertEquals(status.get(1), String.valueOf(totalCount));
+				String value = status.get(1).replace(",", "");
+				Assert.assertEquals(value,String.valueOf(totalCount));
 			}
 			LOGGER.info("Result Set data displayed");
 		}

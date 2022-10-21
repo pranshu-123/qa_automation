@@ -66,7 +66,7 @@ public class TC_JAP_03 extends BaseClass {
                 test.log(LogStatus.SKIP, "No Application present ");
                 loggingUtils.error("No Application present in the Runs page", test);
             }
-        } catch (NoSuchElementException ex) {
+        } catch (NoSuchElementException | InterruptedException ex) {
             loggingUtils.info("No app present by this name", test);
             loggingUtils.info("Error- " + ex, test);
         }

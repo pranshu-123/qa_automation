@@ -891,14 +891,14 @@ public class SummaryDetailsPage {
      * (Duration, Start time, end time, job count, stages count)
      * 2. Owner, cluster, queue must be populated on the top right
      */
-    public String verifyRightPaneKpis(DbxSummaryPageObject summaryPageObject) {
+    public String verifyRightPaneKpis(DbxSummaryPageObject summaryPageObject) throws InterruptedException {
         List<WebElement> kpiList = summaryPageObject.rightPaneKpis;
-        waitExecuter.sleep(2000);
+        waitExecuter.waitForSeconds(4);
         validateLeftPanelKpis(kpiList);
         List<WebElement> appKpis = summaryPageObject.rightPaneAppKpis;
         List<WebElement> appKpiVal = summaryPageObject.rightPaneAppKpiVal;
         Assert.assertFalse(appKpis.isEmpty(), "No application kpis are listed in the right pane");
-        Assert.assertFalse(appKpiVal.isEmpty(), "Application kpi values are empty");
+        Assert.assertFalse(appKpiVal.isEmpty(), "Application kpi values are emrightPaneAppKpispty");
         String appDuration = "0";
         for (int i = 0; i < appKpis.size(); i++) {
             Assert.assertNotNull(appKpis.get(i).getText(), "Kpi text is empty");

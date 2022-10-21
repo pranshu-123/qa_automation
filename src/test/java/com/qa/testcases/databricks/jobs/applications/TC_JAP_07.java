@@ -41,6 +41,11 @@ public class TC_JAP_07 extends BaseClass {
         Assert.assertEquals(appCount, totalCount,
                 "The Spark app count of SparkApp is not equal to " + "the total count of heading.");
         waitExecuter.sleep(2000);
+        waitExecuter.waitUntilPageFullyLoaded();
+        waitExecuter.sleep(2000);
+        summaryPageObject.sortByDurationApp.click();
+        waitExecuter.waitUntilPageFullyLoaded();
+        summaryPageObject.sortUp.click();
         try {
             String headerAppId = summaryPage.verifyGoToSpark(summaryPageObject);
             test.log(LogStatus.PASS, "Spark Application Id is displayed in the Header: " + headerAppId);

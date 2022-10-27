@@ -98,7 +98,7 @@ public class ChargeBackCluster {
 				.map(a-> a.getText())
 				.collect(Collectors.toList());
 		for(String s : pieChartValues) {
-			if(s!="Others") {
+			if(!s.contains("Others")) {
 				Assert.assertTrue(resultSet.contains(s));
 				LOGGER.info("Pie Chart is populated with " +s+" result values");
 			}

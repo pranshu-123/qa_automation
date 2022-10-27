@@ -171,7 +171,7 @@ public class Jobs {
 	}
 
 	public void groupByFilterSelection(String value) {
-		waitExecuter.sleep(5000);
+		waitExecuter.sleep(7000);
 		clickOnGroupByDropDown();
 		waitExecuter.sleep(2000);
 		if(value.equalsIgnoreCase("user")) {

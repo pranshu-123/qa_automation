@@ -15,7 +15,6 @@ import org.testng.annotations.Test;
 /**
  * @author Ankur Jaiswal
  */
-
 @Marker.DbxDataTables
 @Marker.GCPDataTables
 public class TC_DBX_DT_64 extends BaseClass {
@@ -38,7 +37,7 @@ public class TC_DBX_DT_64 extends BaseClass {
         try {
             dataTablesHelper.clickOnTabOnTableDetails("Applications");
             dataTablesHelper.clickOnParentApp(0);
-            userActions.performActionWithPolling(dataPageObject.dagGraphTabApplicationDetails, UserAction.CLICK);
+            /*userActions.performActionWithPolling(dataPageObject.dagGraphTabApplicationDetails, UserAction.CLICK);*/
             loggingUtils.warning("Daggraph not loaded. Please verify manually", test);
         }
         catch (NoSuchElementException e) {

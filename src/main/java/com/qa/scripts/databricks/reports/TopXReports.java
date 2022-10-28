@@ -202,8 +202,9 @@ public class TopXReports {
 
 	public String copyUrlAndNavigate() {
 		waitExecuter.sleep(4000);
-
-		try {reportsTopXPageObject.copyUrl.click();}
+		try {
+			reportsTopXPageObject.copyUrl.click();
+		}
 		catch(Exception e){
 			reportsTopXPageObject.copyUrl.click();
 

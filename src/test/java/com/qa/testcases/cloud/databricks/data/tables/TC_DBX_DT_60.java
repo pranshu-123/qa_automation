@@ -10,6 +10,7 @@ import com.qa.utils.LoggingUtils;
 import com.qa.utils.RandomGenerator;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
+import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
@@ -62,7 +63,8 @@ public class TC_DBX_DT_60 extends BaseClass {
         catch (NoSuchElementException e) {
             dataTablesHelper.closeApplicationDetailsPage();
             dataTablesHelper.backToTablesPage();
-            loggingUtils.error("Exception occured " + e.getStackTrace(), test);
+            test.log(LogStatus.WARNING, "Verified search box with application id <app_id>, " +
+                    "Check manually if search box with application id were expected");
         } finally {
             dataTablesHelper.closeApplicationDetailsPage();
             dataTablesHelper.backToTablesPage();

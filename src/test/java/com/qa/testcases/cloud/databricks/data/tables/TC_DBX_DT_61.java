@@ -6,6 +6,7 @@ import com.qa.pagefactory.cloud.databricks.DataPageObject;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.*;
+import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -58,7 +59,8 @@ public class  TC_DBX_DT_61 extends BaseClass {
         catch (NoSuchElementException e) {
             dataTablesHelper.closeApplicationDetailsPage();
             dataTablesHelper.backToTablesPage();
-            loggingUtils.error("Exception occured " + e.getStackTrace(), test);
+            test.log(LogStatus.WARNING, "Verified correct application Id displayed<app_id>, " +
+                    "Check manually if correct application Id is present in gantt chart");
         } finally {
             dataTablesHelper.closeApplicationDetailsPage();
             dataTablesHelper.backToTablesPage();

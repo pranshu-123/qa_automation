@@ -394,14 +394,17 @@ public class DataTablesHelper {
             if (settingType.equalsIgnoreCase("age")) {
                 actionPerformer.slideElementHorizontallyByOffset(dataPageObject.labelTablesSlider.get(0), -20);
                 waitExecuter.sleep(1000);
-                actionPerformer.slideElementHorizontallyByOffset(dataPageObject.labelTablesSlider.get(1),20);
+                actionPerformer.slideElementHorizontallyByOffset(dataPageObject.labelTablesSlider.get(1), 20);
             } else {
                 actionPerformer.slideElementHorizontallyByOffset(dataPageObject.labelTablesSlider.get(2), -20);
                 waitExecuter.sleep(1000);
-                actionPerformer.slideElementHorizontallyByOffset(dataPageObject.labelTablesSlider.get(3),20);
+                actionPerformer.slideElementHorizontallyByOffset(dataPageObject.labelTablesSlider.get(3), 20);
             }
             waitExecuter.sleep(1000);
             actions.performActionWithPolling(dataPageObject.saveRulesButton, UserAction.CLICK);
+        }
+            catch(NoSuchElementException e)
+            {actions.performActionWithPolling(dataPageObject.modalCloseButton, UserAction.CLICK);
         } finally {
             actions.performActionWithPolling(dataPageObject.modalCloseButton, UserAction.CLICK);
         }

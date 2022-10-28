@@ -9,6 +9,7 @@ import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
 import com.qa.utils.WaitExecuter;
 import com.qa.utils.actions.UserActions;
+import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.annotations.Test;
 
@@ -57,7 +58,8 @@ public class TC_DBX_DT_62 extends BaseClass {
         catch (NoSuchElementException e) {
             dataTablesHelper.closeApplicationDetailsPage();
             dataTablesHelper.backToTablesPage();
-            loggingUtils.error("Exception occured " + e.getStackTrace(), test);
+            test.log(LogStatus.WARNING, "Recommendation and Insights displayed not displayed <app_id>, " +
+                    "Check manually if correct application Id is present"+ e.getStackTrace());
         } finally {
             dataTablesHelper.closeApplicationDetailsPage();
             dataTablesHelper.backToTablesPage();

@@ -18,7 +18,7 @@ public class TC_DBX_DT_11 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_11.class);
 
     @Test(dataProvider = "clusterid-data-provider",description = "Validate the data table details are displayed based on applied filter for table state.")
-    public void verifyTablesDisplayedAsStateFilter(String clusterId) {
+    public void verifyTablesDisplayedAsStateFilter(String clusterId) throws InterruptedException {
         test = extent.startTest("TC_DBX_DT_11.verifyTablesDisplayedAsStateFilter", "Validate the data table details" +
             " are displayed based on applied filter for table state.");
         test.assignCategory("Databricks - Data");

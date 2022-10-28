@@ -405,18 +405,18 @@ public class DataTablesHelper {
         }
             catch(NoSuchElementException e)
             {actions.performActionWithPolling(dataPageObject.modalCloseButton, UserAction.CLICK);
-        } finally {
-            actions.performActionWithPolling(dataPageObject.modalCloseButton, UserAction.CLICK);
+
         }
     }
 
-    public void checkIfTablesDisplayedBasedOnAppliedFilter(String label, int[] appliedSetting) {
+    public void checkIfTablesDisplayedBasedOnAppliedFilter(String label, int[] appliedSetting) throws InterruptedException {
         filterByTableStateOrEvents(label);
         if (dataPageObject.noTablesAvailableElement.size() > 0) {
             loggingUtils.info("No Tables present for hot", test);
         } else {
             File downloadedCSV = downloadDataTable();
             List<Object> createdDates = readCSVFileForColumn(downloadedCSV, "Created");
+            waitExecuter.waitForSeconds(2);
             List<Object> latestAccessDates = readCSVFileForColumn(downloadedCSV, "Latest Access");
 
             for (int i=0; i<createdDates.size(); i++) {

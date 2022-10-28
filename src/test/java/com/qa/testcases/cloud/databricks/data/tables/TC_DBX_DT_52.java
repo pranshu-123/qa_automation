@@ -36,7 +36,7 @@ public class TC_DBX_DT_52 extends BaseClass {
             dataTablesHelper.selectAllApplicationsColumn();
             List<String> eventsValues = dataTablesHelper.getColumnValuesFromApplicationsTable("Events");
             eventsValues.stream().forEach(eventValue ->
-                Assert.assertNotEquals(eventValue, ""));
+                Assert.assertNotEquals(eventValue, " "));
             loggingUtils.pass("Verify all applications contains correct Events value.", test);
         } finally {
             dataTablesHelper.backToTablesPage();

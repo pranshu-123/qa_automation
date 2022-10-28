@@ -33,13 +33,14 @@ public class SR_14 extends BaseClass
 		topXReports.selectSchedule();
 		scheduledReports.createNewReportWithDefaultValues("3");
 		List<String> actual = scheduledReports.scheduledTimeOptions();
+		waitExecuter.waitForSeconds(5);
 		String[] expectedDateOptions = {"Daily","Sunday", "Monday", "Tuesday", "Wednesday",
 				"Thursday","Friday","Every 2 Weeks","Every Month"};
-		waitExecuter.waitForSeconds(3);
+		waitExecuter.waitForSeconds(2);
         for (String expectedDateOption : expectedDateOptions) {
             Assert.assertTrue(actual.contains(expectedDateOption),
                     "Date list does not contain: " + expectedDateOption);
-			waitExecuter.waitForSeconds(3);
+			waitExecuter.waitForSeconds(1);
             test.log(LogStatus.PASS, "Date list contains option: " + expectedDateOption);
         }
 	}

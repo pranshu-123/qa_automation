@@ -305,10 +305,10 @@ public class TopXReports {
 			String ceilValue;
 
 			floorValue = String.valueOf(floorSum/10);
-			list.add(floorValue + "K");
+			list.add(floorValue.substring(0, floorValue.indexOf('.')) + "K");
 			ceilSum = Math.ceil(ceilSum / 100);
 			ceilValue = String.valueOf(ceilSum/10);
-			list.add(ceilValue + "K");
+			list.add(ceilValue.substring(0, ceilValue.indexOf('.')) + "K");
 		}
 		return list;
 	}

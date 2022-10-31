@@ -17,7 +17,7 @@ public class ReportsTopXPageObject {
 	@FindBy(xpath = "//button/span[contains(text(),'Schedule')]")
 	public WebElement scheduleBtn;
 
-	@FindBy(xpath = "//button[@title='Copy report URL']")
+	@FindBy(xpath = "//button[@class='copy-btn glyphicon md icon-copy alt']")
 	public WebElement copyUrl;
 
 	@FindBy(xpath = "//div[@class='toolbox']")
@@ -86,7 +86,7 @@ public class ReportsTopXPageObject {
 	@FindBy(xpath = "//table[@class='component-data-tables row-hover']/tbody/tr/td/span")
 	public List<WebElement>  applicationHeadersValue;
 	
-	@FindBy(xpath = "//label[contains(text(),'Workspaces')]/..//table//tr/td/span")
+	@FindBy(xpath = "//label[contains(text(),'Workspaces')]/..//table//tr/td[2]/span")
 	public List<WebElement>  appCount;
 	
 	@FindBy(xpath = "//span[contains(text(),'Total Apps')]/../../following-sibling::div//h2")

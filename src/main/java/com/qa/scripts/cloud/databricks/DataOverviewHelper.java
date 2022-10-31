@@ -167,6 +167,7 @@ public class DataOverviewHelper {
     public Boolean changeAppliedStateSettings(String settingType) {
         try {
             loggingUtils.info("Click on setting icon on table state", test);
+            waitExecuter.waitForSeconds(3);
             actionPerformer.moveToTheElement(dataPageObject.settingsIcon);
             actions.performActionWithPolling(dataPageObject.settingsIcon, UserAction.CLICK);
             waitExecuter.waitUntilPageFullyLoaded();

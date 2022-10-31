@@ -5,6 +5,7 @@ import com.qa.base.BaseClass;
 import com.qa.scripts.cloud.databricks.DataTablesHelper;
 import com.qa.scripts.jobs.applications.AllApps;
 import com.qa.utils.LoggingUtils;
+import com.qa.utils.WaitExecuter;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class TC_DBX_DT_12 extends BaseClass {
                 " to change the setting of label by making changes in Age");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
+        WaitExecuter waitExecuter = new WaitExecuter(driver);
         dataTablesHelper.clickOnDataTab();
         dataTablesHelper.clickOnDataTablesTab();
         AllApps allApps = new AllApps(driver);
@@ -40,6 +42,7 @@ public class TC_DBX_DT_12 extends BaseClass {
         loggingUtils.pass("Data is displayed as per applied table state: Hot", test);
 
         loggingUtils.info("Selecting only Cold", test);
+        waitExecuter.waitForSeconds(2);
         dataTablesHelper.checkIfTablesDisplayedBasedOnAppliedFilter("cold", new int[]{coldByAge, coldByLatestAccess});
         loggingUtils.pass("Data is displayed as per applied table state: Cold", test);
 

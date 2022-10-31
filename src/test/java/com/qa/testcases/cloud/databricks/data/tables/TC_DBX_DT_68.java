@@ -26,26 +26,25 @@ public class TC_DBX_DT_68 extends BaseClass {
     private final LoggingUtils loggingUtils = new LoggingUtils(TC_DBX_DT_68.class);
 
     @Test(dataProvider = "clusterid-data-provider", description = "Verify the Partition Detail of Table Details Page")
-    public void TC_DBX_DT_68_verifyPartitionDetailSection(String clusterId) {
+    public void TC_DBX_DT_68_verifyPartitionDetailSection(String clusterId) throws InterruptedException {
         test = extent.startTest("TC_DBX_DT_68.verifyPartitionDetailSection", "Verify the Partition Detail of Table Details Page");
         test.assignCategory("Databricks - Data");
         DataTablesHelper dataTablesHelper = new DataTablesHelper(driver, test);
         DataPageObject dataPageObject = new DataPageObject(driver);
-        try {
+
             dataTablesHelper.clickOnDataTab();
             dataTablesHelper.clickOnDataTablesTab();
             AllApps allApps = new AllApps(driver);
             WaitExecuter waitExecuter = new WaitExecuter(driver);
             allApps.selectWorkSpaceId(clusterId);
-            waitExecuter.waitForSeconds(5);
+            waitExecuter.waitForSeconds(2);
             dataPageObject.sortByDurationApp.click();
             waitExecuter.waitUntilElementPresent(dataPageObject.sortDown);
             dataPageObject.sortDown.click();
             waitExecuter.waitUntilPageFullyLoaded();
-            dataPageObject.sortDown.click();
-            waitExecuter.waitUntilPageFullyLoaded();
-            /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
             dataTablesHelper.clickOnMoreInfoOfNthRow(0);
+        try {
+            /*dataTablesHelper.selectWorkspaceForConfiguredMetastore(clusterId);*/
             dataTablesHelper.clickOnTabOnTableDetails("partition detail");
             if (dataPageObject.tableRows.size() > 0) {
                 int expectedPartitionsCount =
@@ -63,7 +62,7 @@ public class TC_DBX_DT_68 extends BaseClass {
             } else {
                 loggingUtils.info("No partitions value is displayed", test);
             }
-        } catch (NoSuchElementException | InterruptedException e) {
+        } catch (NoSuchElementException e) {
             dataTablesHelper.backToTablesPage();
             loggingUtils.error("Exception occured " + e.getStackTrace(), test);
         } finally {

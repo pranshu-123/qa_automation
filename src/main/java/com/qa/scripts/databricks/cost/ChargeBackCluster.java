@@ -191,9 +191,10 @@ public class ChargeBackCluster {
 
 	public void filterByCluster() {
 		waitExecuter.sleep(1000);
+		waitExecuter.waitUntilElementClickable(chargebackClusterPageObject.filterSearchTextField);
 		chargebackClusterPageObject.filterSearchTextField.click();
 		waitExecuter.sleep(1000);
-		chargebackClusterPageObject.filterSearchValueList.get(0).click();
+		chargebackClusterPageObject.filterSearchValueList.get(3).click();
 		waitExecuter.sleep(2000);
 	}
 
@@ -218,6 +219,22 @@ public class ChargeBackCluster {
 		LOGGER.info("Specified Tag Key selected: ");
 	}	
 
+	public List<String> calculateSumFromResultSet() {
+		double sum =0.00;
+		String value;
+		int size = chargebackClusterPageObject.resultSetValues.size();
+		ArrayList<String> list = new ArrayList<String>();
+		for(int i =5; i< size;i=i+8) {
+			sum = sum + Double.parseDouble(chargebackClusterPageObject.resultSetValues.get(i).getText());
+		}
+		sum = sum/1000;
+		value = String.valueOf(sum);
+		String finalSum = String.format("%.2f",sum);
+		list.add(finalSum + "k");
+		return list;
+	}
+	
+	
 	public List<String> calculateClusterSumFromResultSet() {
 		double floorSum =0.00;
 		double ceilSum =0.00;

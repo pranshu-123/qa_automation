@@ -38,7 +38,7 @@ public class DC_32 extends BaseClass{
 		waitExecuter.sleep(2000);
 		chargeBackCluster.selectChargebackType("JobRun");
 		waitExecuter.sleep(2000);
-		List<String> resultSetValue = chargeBackCluster.calculateClusterSumFromResultSet();
+		List<String> resultSetValue = chargeBackCluster.calculateSumFromResultSet();
 		String expectedVale = chargeBackCluster.fetchJobRunsValueFromGraph();
 		Assert.assertTrue(resultSetValue.contains(expectedVale), "JobRun value calculated from Result Set does not matches with the value populated in DBU Graph");
 		test.log(LogStatus.PASS, "JobRun values are matching.");

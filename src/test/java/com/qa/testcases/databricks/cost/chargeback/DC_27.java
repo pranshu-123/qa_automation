@@ -34,7 +34,7 @@ public class DC_27 extends BaseClass{
 		datePicker.selectLast30Days();
 		jobs.selectGroupByFilterValue("Workspace");
 		waitExecuter.sleep(2000);
-		List<String> resultSetValue = chargeBackCluster.calculateClusterSumFromResultSet();
+		List<String> resultSetValue = chargeBackCluster.calculateSumFromResultSet();
 		String expectedVale = chargeBackCluster.fetchClusterValueFromGraph();
 		Assert.assertTrue(resultSetValue.contains(expectedVale), "Cluster count calculated from Result Set does not matches with the value populated in Cluster Graph");
 		test.log(LogStatus.PASS, "Cluster values are matching.");

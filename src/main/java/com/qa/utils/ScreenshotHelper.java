@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * @author Ankur Jaiswal
+ * @author Pranshu
  * This class take the UI screenshot and all related activity with the screenshot
  */
 public class ScreenshotHelper {
@@ -60,39 +60,7 @@ public class ScreenshotHelper {
     }
   }
 
-  /**
-   * This method read the image pixel by pixel and check whether any pixel contains the
-   * color which user expecting or not. If that is present then it returns true else false.
-   * Please note even if expected color is matching at least 90% then it will return true
-   * @param screenshot Screenshot image
-   * @param rgb - RGB expected value which is expecting user
-   * @return boolean value if color present
-   */
-  public static boolean isContainColor(File screenshot, String rgb) {
-    String[] expectedRGB = rgb.split(",");
-    Color expectedColor = new Color(Integer.parseInt(expectedRGB[0]),
-      Integer.parseInt(expectedRGB[1]), Integer.parseInt(expectedRGB[2]));
-
-    BufferedImage image = null;
-    try {
-      image = ImageIO.read(screenshot);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    int width = image.getWidth();
-    int height = image.getHeight();
-    for (int i=0; i<height; i++) {
-      for(int j=0; j<width; j++) {
-        Color c = new Color(image.getRGB(j, i));
-        float colorDiff = ColorHelper.findPercentDifference(c,expectedColor);
-        if (colorDiff < 10) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
-
+  
   /**
    * Take the screenshot of the page and store it to local machine in png format.
    * @param driver - WebDriver instance

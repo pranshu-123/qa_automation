@@ -3,7 +3,7 @@ package com.qa.utils;
 import org.apache.commons.lang3.RandomStringUtils;
 
 /**
- * @author Ankur Jaiswal
+ * @author Pranshu
  * Random generator of data
  */
 public class RandomGenerator {

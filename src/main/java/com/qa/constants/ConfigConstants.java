@@ -7,15 +7,16 @@ package com.qa.constants;
 public class ConfigConstants {
 
     /**
-     * This class contains constants related with unravel configuration files
+     * This class contains constants related with Iris configuration files
      */
-    public static class UnravelConfig {
+    public static class IrisConfig {
         public static final String URL = "url";
         public static final String USERNAME = "username";
         public static final String PASSWORD = "password";
         public static final String BROWSER = "browser";
-        public static final String UNRAVEL_VERSION = "Version";
-        public static final String UNRAVEL_BUILD = "Build";
+        public static final String IRIS_VERSION = "Version";
+        public static final String IRIS_BUILD = "Build";
+        public static final String EXECUTION = "execution";
     }
 
     /**
@@ -38,17 +39,4 @@ public class ConfigConstants {
         public static final String SELENIUM_VERSION = "SeleniumVersion";
     }
 
-    /**
-     * This class contains constants related with unravel yaml config
-     */
-    public static class UnravelYamlConfig {
-        public static final String UNRAVEL = "unravel";
-        public static final String CLUSTERS = "clusters";
-        public static final String IMPALA_CLUSTERS = "impala_clusters";
-        public static final String AWS = "aws";
-        public static final String BUCKET_NAME = "bucket_name";
-        public static final String HBASE_CLUSTERS = "hbase_clusters";
-        public static final String MAPREDUCE_CLUSTERS = "mapreduce_clusters";
-        public static final String WORKSPACE_CLUSTERS = "workspace_clusters";
-    }
 }

@@ -14,7 +14,7 @@ import java.net.URLDecoder;
 import java.util.*;
 
 /**
- * @author Ankur Jaiswal
+ * @author Pranshu
  * This calls contains all browser network tab related methods
  */
 public class NetworkManager {

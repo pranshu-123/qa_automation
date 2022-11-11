@@ -1,5 +1,7 @@
 package com.qa.utils;
 
+import java.time.Duration;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -14,7 +16,7 @@ public class WaitExecuter {
 
   public WaitExecuter(WebDriver driver) {
     this.driver = driver;
-    wait = new WebDriverWait(driver,MAX_TIME);
+    wait = new WebDriverWait(driver,Duration.ofSeconds(60));
   }
 
   public void sleep(int milisecs) {

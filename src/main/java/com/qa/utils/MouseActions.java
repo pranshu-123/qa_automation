@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import java.util.logging.Logger;
 
 /**
- * @author Ankur Jaiswal
+ * @author Pranshu
  * This class contains all methods related to mouse actions
  */
 public class MouseActions {

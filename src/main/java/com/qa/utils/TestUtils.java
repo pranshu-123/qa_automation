@@ -3,6 +3,7 @@ package com.qa.utils;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,27 +29,11 @@ public class TestUtils extends TestBase {
 	public static long PAGE_LOAD_TIMEOUT = 30;
 	public static long IMPLICIT_WAIT = 30;
 
-	public static String OPERATIONS_TEXT = "OPERATIONS";
-	public static String APPLICATIONS_TEXT = "APPLICATIONS";
-	public static String REPORTS_TEXT = "REPORTS";
-
-	public static String SPARK_APP = "Spark";
-	public static String MAPREDUCE_APP = "MapReduce";
-	public static String HIVE_APP = "Hive";
-	public static String IMPALA_APP = "Impala";
-	public static String PIG_APP = "Pig";
-	public static String TEZ_APP = "Tez";
-
-	public static String MANAGE = "Manage";
-	public static String ABOUT = "About";
-	public static String API_TOKEN = "API Token";
-	public static String New_UX = "New Ux";
-	public static String LOGOUT = "Logout";
 
 	/**
 	 * This method is used to take screen shot
 	 *
-	 * @author Birender Kumar
+	 * @author Pranshu
 	 *
 	 */
 	public static void takeScreenshotAtEndOfTest() throws IOException {
@@ -79,7 +64,7 @@ public class TestUtils extends TestBase {
 	 *
 	 * @param locatorType
 	 *            , locatorValue
-	 * @author Birender Kumar
+	 * @author Pranshu
 	 * @return WebElement
 	 */
 	public static WebElement getWebElement(String locatorType, String locatorValue) {
@@ -166,7 +151,7 @@ public class TestUtils extends TestBase {
 	 *
 	 * @param locatorType
 	 *            , locatorValue
-	 * @author Birender Kumar
+	 * @author Pranshu
 	 * @return void
 	 */
 	public static void clickOnElement(String locatorType, String locatorValue) {
@@ -202,77 +187,13 @@ public class TestUtils extends TestBase {
 	}
 	
 	public static boolean compareStringArrays(String[] actual, String[] expected) {
-		// ArrayList<String> ar = new ArrayList<String>();
-
 		for (int i = 0; i < expected.length; i++) {
 			if (!Arrays.asList(actual).contains(expected[i])) {
-				// ar.add(expected[i]);
 				return false;
 			}
 		}
 		return true;
 	}
-
-	public static void compareImage(WebElement element, String expectedImagefilepath) {
-		// The below line will create an object for AShot
-		AShot ashot = new AShot();
-		// The below line will take the screenshot for the webelement which we
-		// will pass
-		Screenshot sc = ashot.takeScreenshot(driver, element);
-		// the below line will fetch us the image which is been taken previously
-		// and store it in a BufferedImage
-		BufferedImage actualImage = sc.getImage();
-
-		// the below line will fetch us the expected Image of the WebElement
-		// from where it is stored
-		BufferedImage expectedImage = null;
-		try {
-			expectedImage = ImageIO.read(new File(expectedImagefilepath));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		// The below line will create an object of ImageDiffer in which we have
-		// a method which compares two images
-		ru.yandex.qatools.ashot.comparison.ImageDiffer differ = new ru.yandex.qatools.ashot.comparison.ImageDiffer();
-
-		// In below line we call the method which compares two images by use of
-		// the reference for ImageDiffer class object
-		ru.yandex.qatools.ashot.comparison.ImageDiff diff = differ.makeDiff(actualImage, expectedImage);
-
-		Assert.assertFalse(diff.hasDiff(), "Result of Image comparsion");
-	}
-
-	//Explicit wait for element until it appears
-	public static WebElement waitForElement(String type, String locator){
-		WebElement el = null;
-		boolean bool=false;
-		try{
-			System.out.println("Waiting for max: "+TestUtils.IMPLICIT_WAIT+"seconds to see the element.");
-			WebDriverWait wait = new WebDriverWait(driver, TestUtils.IMPLICIT_WAIT);
-			if(type.equals("xpath")){
-				el = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
-				bool=true;
-			}else if (type.equals("css")) {
-				el = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator)));
-				bool=true;
-			}else{
-				System.out.println("Locator type not supported!");
-			}
-
-			if(bool){
-				System.out.println("Element appeared on webpage!");
-			}else{
-				System.out.println("Element not appeared on webpage");
-			}
-
-		}catch(Exception e){
-			System.out.println("Element not appeared on webpage");
-		}
-		return el;
-	}
-
 
 
 	public static void clickWhenReady(String type, String locator){
@@ -281,7 +202,7 @@ public class TestUtils extends TestBase {
 			WebElement el = null;
 			boolean bool=false;
 			System.out.println("Waiting for max: "+TestUtils.IMPLICIT_WAIT+"seconds to see the element.");
-			WebDriverWait wait = new WebDriverWait(driver, TestUtils.IMPLICIT_WAIT);
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
 			if(type.equals("xpath")){
 				el = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(locator)));
@@ -307,11 +228,11 @@ public class TestUtils extends TestBase {
 	}
 
 	public static WebElement waitAndGetWebElementByXpath(String xpath) throws Exception{
-		return (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+		return (new WebDriverWait(driver, Duration.ofSeconds(10))).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
 	}
 
 	public static WebElement waitAndGetWebElementByXpath(int seconds, String xpath) throws Exception{
-		return (new WebDriverWait(driver, seconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+		return (new WebDriverWait(driver, Duration.ofSeconds(10))).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
 	}
 
 	public static void scrollIntoView(WebElement element) throws Exception{

@@ -4,14 +4,16 @@ import org.testng.TestNG;
 import org.testng.xml.XmlClass;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
-import java.nio.file.Paths;
+
+import com.qa.listeners.CustomListener;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
 /**
- * @author Ankur Jaiswal
+ * @author Pranshu
  * This class contains all testNg suite related utilities.
  */
 public class TestNGSuiteManager {

@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import javax.annotation.Nullable;
 
 /**
- * @author Ankur Jaiswal
+ * @author Pranshu
  * Common Utilily class to maintain log
  */
 public class LoggingUtils {

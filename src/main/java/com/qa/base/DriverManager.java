@@ -17,6 +17,7 @@ import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.CapabilityType;
 
 import java.io.File;
+import java.time.Duration;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Properties;
@@ -42,18 +43,9 @@ public class DriverManager {
       log.info("Using Chrome browser");
       driver = new ChromeDriver(getChromeOptionWithNetworkEnable());
       driver.manage().window().maximize();
-
-      driver.manage().timeouts().implicitlyWait(TestUtils.IMPLICIT_WAIT, TimeUnit.SECONDS);
+      driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
       String url = prop.getProperty("url");
       driver.get(url);
-    }else if(browser.equalsIgnoreCase("Firefox")){
-      driver = new FirefoxDriver(getFirefoxOptionsWithNetworkEnable());
-      driver.manage().window().maximize();
-
-      driver.manage().timeouts().implicitlyWait(TestUtils.IMPLICIT_WAIT, TimeUnit.SECONDS);
-      String url = prop.getProperty("url");
-      driver.get(url);
-
     }else {
       System.out.println("Not Support for "+browser+ " browser.");
     }
@@ -88,30 +80,5 @@ public class DriverManager {
     return options;
   }
 
-  //TBD
-  private FirefoxOptions getFirefoxOptionsWithNetworkEnable() {
-    LoggingPreferences logPrefs = new LoggingPreferences();
-    logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
-    WebDriverManager.firefoxdriver().setup();
-
-    //chrome option setting for downloadFile
-    //String downloadFilePath = prop.getProperty("downloadFilePath");
-    //File folderUUID = FileUtils.createRandomUUIDDirectory();
-    File folderUUID = FileUtils.createDownloadsFolder();
-
-    HashMap<String, Object> fireFoxPref = new HashMap<String, Object>();
-    fireFoxPref.put("profile.default_content_settings.popups", 0);
-    fireFoxPref.put("download.default_directory", folderUUID.getAbsolutePath());
-
-    FirefoxOptions options = new FirefoxOptions();
-    options.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
-    options.setCapability("useAutomationExtension", false);
-    options.setCapability("excludeSwitches", Collections.singletonList("enable-automation"));
-
-    options.setCapability("prefs", fireFoxPref);
-    options.setCapability(FirefoxOptions.FIREFOX_OPTIONS,options);
-
-    return options;
-  }
 }
 

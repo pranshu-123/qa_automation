@@ -5,7 +5,7 @@ import com.qa.utils.LoggingUtils;
 import java.util.function.Supplier;
 
 /**
- * @author Ankur Jaiswal
+ * @author Pranshu
  * @param <T> Type operator class
  */
 public class RetryExecuter<T> {

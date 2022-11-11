@@ -6,8 +6,8 @@ package com.qa.constants;
  */
 public class InfluxMetricsConstants {
 
-    public static final String UNRAVEL_BUILD = "unravel_build";
-    public static final String UNRAVEL_VERSION = "unravel_version";
+    public static final String IRIS_BUILD = "iris_build";
+    public static final String IRIS_VERSION = "iris_version";
     public static final String URL = "url";
     public static final String BATCH_ID = "batch_id";
     public static final String METHOD_NAME = "method_name";

@@ -51,8 +51,8 @@ public class InfluxDBClient {
     public void writeDataToInflux(Map<String, Object> data) {
         influxDB.write(Point.measurement("test_execution")
                 .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
-                .tag(InfluxMetricsConstants.UNRAVEL_BUILD, data.get(ConfigConstants.UnravelConfig.UNRAVEL_BUILD).toString())
-                .tag(InfluxMetricsConstants.UNRAVEL_VERSION, data.get(ConfigConstants.UnravelConfig.UNRAVEL_VERSION).toString())
+                .tag(InfluxMetricsConstants.IRIS_BUILD, data.get(ConfigConstants.IrisConfig.IRIS_BUILD).toString())
+                .tag(InfluxMetricsConstants.IRIS_BUILD, data.get(ConfigConstants.IrisConfig.IRIS_BUILD).toString())
                 .tag(InfluxMetricsConstants.URL, data.get(InfluxMetricsConstants.URL).toString())
                 .tag(InfluxMetricsConstants.BATCH_ID, data.get(InfluxMetricsConstants.BATCH_ID).toString())
                 .addField(InfluxMetricsConstants.METHOD_NAME, data.get(InfluxMetricsConstants.METHOD_NAME).toString())

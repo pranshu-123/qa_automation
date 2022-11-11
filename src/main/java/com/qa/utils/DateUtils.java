@@ -7,9 +7,6 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-/**
- *  @author  Ojasvi Pandey
- */
 
 public class DateUtils {
 	private static Calendar cal;

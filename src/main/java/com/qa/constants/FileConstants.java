@@ -5,7 +5,6 @@ import java.util.UUID;
 public class FileConstants {
   public static final String CONFIG_PROPERTIES = "config.properties";
   public static final String EXTENT_REPORT = "extentReport.html";
-  public static final String UNRAVEL_CONFIG_YAML = "unravel_config.yml";
   public static final String INFLUXDB_CONFIG_YAML = "influxdb.yml";
   public static final String MARKER_PILLAR_MAPPING = "marker_pillar_mapping.properties";
 
@@ -22,13 +21,6 @@ public class FileConstants {
     return "ss-" + uuid + ".png";
   }
 
-  /**
-   * This method will return absolute path for unravel yaml config
-   * @return - path of unravel yaml config
-   */
-  public static String getUnravelConfigYaml() {
-    return DirectoryConstants.getResourcesDir() + UNRAVEL_CONFIG_YAML;
-  }
 
   /**
    * This method will return absolute path for influx DB yaml config file

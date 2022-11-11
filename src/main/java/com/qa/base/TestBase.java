@@ -1,19 +1,12 @@
 package com.qa.base;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.time.Duration;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 import com.qa.io.ConfigReader;
-import com.qa.utils.TestUtils;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class TestBase {
@@ -38,7 +31,7 @@ public class TestBase {
 			driver.manage().window().maximize();
 			driver.manage().deleteAllCookies();
 			//driver.manage().timeouts().pageLoadTimeout(TestUtils.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
-			driver.manage().timeouts().implicitlyWait(TestUtils.IMPLICIT_WAIT, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 			String url = prop.getProperty("url");
 			driver.get(url);
 		}

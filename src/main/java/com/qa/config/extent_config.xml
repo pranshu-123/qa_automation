@@ -14,10 +14,10 @@
     <protocol>https</protocol>
     
     <!-- title of the document -->
-    <documentTitle>Unravel Automation Result</documentTitle>
+    <documentTitle>Iris Automation Result</documentTitle>
     
     <!-- report name - displayed at top-nav -->
-    <reportName>Unravel Automation Report</reportName>
+    <reportName>Iris Automation Report</reportName>
     
     <!-- report headline - displayed at top-nav, after reportHeadline -->
     <reportHeadline></reportHeadline>
@@ -37,7 +37,7 @@
         $(document).ready(function() {
           $("body").addClass("dark");
           var elements = document.getElementsByClassName("logo-content");
-          elements[0].innerHTML = '<span>Unravel UI</span>';
+          elements[0].innerHTML = '<span>Iris UI</span>';
           var elem = document.getElementsByClassName("_addedCell1");
           elem[0].style.width = '35%';
       });

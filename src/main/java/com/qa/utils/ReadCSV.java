@@ -2,7 +2,6 @@ package com.qa.utils;
 
 import java.nio.file.*;
 import java.util.*;
-import java.nio.*;
 
 public class ReadCSV {
     public static void main(String[] args){

@@ -1,2 +1,2 @@
 # UnravelUIAutomation
-This project is for Unravel data UI Automation using Selenium, Java, TestNG, Maven 
+This project is for Iris UI Automation using Selenium, Java, TestNG, Maven 

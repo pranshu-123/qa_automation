@@ -105,6 +105,7 @@ public class MainAccelerator {
 		extent.flush();
 		NFMHomepageWorkflow hfMHomepageWorkflow = new NFMHomepageWorkflow(driver);
 		hfMHomepageWorkflow.logout();
+		
 	}
 
 	/**

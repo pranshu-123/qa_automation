@@ -9,16 +9,16 @@ import com.qa.workflows.NFMLoginWorkflow;
 import com.qa.workflows.OrderManagementWorkflow;
 import com.relevantcodes.extentreports.LogStatus;
 
-public class TC_OM_AddOrder_01 extends MainAccelerator{
-	
-	private static final Logger LOGGER = Logger.getLogger(TC_OM_AddOrder_01.class.getName());
+public class TC_OM_AddOrder_03 extends MainAccelerator{
 
-	
+	private static final Logger LOGGER = Logger.getLogger(TC_OM_AddOrder_03.class.getName());
+
+
 	@Test
-	public void verifyAddOrderMasterDetailPage() {
-		test = extent.startTest("verifyAddOrderMasterDetailPage", "Verify Add Order Master detail page elements");
+	public void createNewOrder() {
+		test = extent.startTest("createNewOrder", "Create New Order");
 		test.assignCategory("OrderManagement");
-		Log.startTestCase("verifyAddOrderMasterDetailPage");
+		Log.startTestCase("createNewOrder");
 		NFMLoginWorkflow loginWorkflow = new NFMLoginWorkflow(driver);
 		NFMHomepageWorkflow homepageWorkflow = new NFMHomepageWorkflow(driver);
 		OrderManagementWorkflow orderManagementWorkflow = new OrderManagementWorkflow(driver);
@@ -29,8 +29,10 @@ public class TC_OM_AddOrder_01 extends MainAccelerator{
 		LOGGER.info("Navigated to Order Management page");
 		orderManagementWorkflow.selectAddOrderMasterDetail();
 		orderManagementWorkflow.selectOrder();
-		orderManagementWorkflow.validateOrderPageElements();
-		test.log(LogStatus.PASS, "All Page elements validated sucessfully");
+		orderManagementWorkflow.provideAdvanceAmount("1");
+		orderManagementWorkflow.saveOrder();
+		orderManagementWorkflow.createOrder();
+		test.log(LogStatus.PASS, "Order Created successfully");
 	}
 
 }

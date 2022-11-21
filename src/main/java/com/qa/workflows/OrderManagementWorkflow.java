@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 import com.qa.pagefactory.AddOrderPageObject;
+import com.qa.utils.JavaScriptExecuter;
 import com.qa.utils.WaitExecuter;
 
 public class OrderManagementWorkflow {
@@ -48,7 +49,7 @@ public class OrderManagementWorkflow {
 		waitExecuter.sleep(1000);
 		waitExecuter.waitUntilElementPresent(addOrderPageObject.orderList);
 		addOrderPageObject.orderList.click();
-		waitExecuter.sleep(2000);
+		waitExecuter.sleep(3000);
 		addOrderPageObject.orders.click();
 		waitExecuter.sleep(1000);
 	}
@@ -71,6 +72,7 @@ public class OrderManagementWorkflow {
 	
 	public void saveOrder() {
 		waitExecuter.sleep(3000);
+		JavaScriptExecuter.scrollOnElement(driver, addOrderPageObject.saveOrder);
 		addOrderPageObject.saveOrder.click();
 	}
 	

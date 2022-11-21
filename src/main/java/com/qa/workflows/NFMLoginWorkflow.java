@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import com.qa.constants.ConfigConstants;
 import com.qa.io.ConfigReader;
 import com.qa.pagefactory.NFMLoginPageObject;
+import com.qa.utils.TestUtils;
 import com.qa.utils.WaitExecuter;
 
 public class NFMLoginWorkflow {
@@ -34,5 +35,8 @@ public class NFMLoginWorkflow {
 		nfmLoginPageObject.username.sendKeys(uname);
 		nfmLoginPageObject.password.sendKeys(password);
 		nfmLoginPageObject.login.click();
+		if(TestUtils.isElementDisplayed(nfmLoginPageObject.endSession)) {
+			nfmLoginPageObject.endSession.click();
+		}
 	}
 }

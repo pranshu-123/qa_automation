@@ -23,24 +23,19 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 
 public class MainAccelerator {
+
 	private static final Logger LOGGER = Logger.getLogger(MainAccelerator.class.getName());
 	public static WebDriver driver;
 	public static ExtentReports extent;
 	public static ExtentTest test;
-	private final LoggingUtils logger = new LoggingUtils(MainAccelerator.class);
+	private static Properties prop;
 
 	/**
 	 * This will be executed before suite starts. Start the browser. Initiate report
 	 */
 	@BeforeSuite
 	public void setup() {
-		LOGGER.info("Update config based on user input");
-		System.setProperty(ConfigConstants.SystemConfig.HEADLESS, "false");
-		LOGGER.info("Starting browser");
-		DriverManager driverManager = new DriverManager();
-		Properties prop = ConfigReader.readBaseConfig();
-		String browser = prop.getProperty(ConfigConstants.IrisConfig.BROWSER);
-		driver = driverManager.getDriver(browser);
+		prop = ConfigReader.readBaseConfig();
 		FileUtils.createDirectory(DirectoryConstants.getExtentResultDir());
 		LOGGER.info("Moving old report to archive directory.");
 		FileUtils.moveFileToArchive(FileConstants.getExtentReportFile(), true);
@@ -59,7 +54,12 @@ public class MainAccelerator {
 	 */
 	@BeforeClass
 	public void beforeClass() {
-		LOGGER.info("Login to the application.");
+		LOGGER.info("Update config based on user input");
+		System.setProperty(ConfigConstants.SystemConfig.HEADLESS, "false");
+		LOGGER.info("Starting browser");
+		DriverManager driverManager = new DriverManager();
+		String browser = prop.getProperty(ConfigConstants.IrisConfig.BROWSER);
+		driver = driverManager.getDriver(browser);
 	}
 
 	/**
@@ -99,13 +99,14 @@ public class MainAccelerator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// Code to add test result in report
-		LOGGER.info("Adding test case to report");
-		extent.endTest(test);
-		extent.flush();
-		NFMHomepageWorkflow hfMHomepageWorkflow = new NFMHomepageWorkflow(driver);
-		hfMHomepageWorkflow.logout();
-		
+		finally {
+			// Code to add test result in report
+			LOGGER.info("Adding test case to report");
+			extent.endTest(test);
+			extent.flush();
+			NFMHomepageWorkflow hfMHomepageWorkflow = new NFMHomepageWorkflow(driver);
+			hfMHomepageWorkflow.logout();
+		}
 	}
 
 	/**
@@ -114,6 +115,7 @@ public class MainAccelerator {
 	 */
 	@AfterClass(alwaysRun = true)
 	public void afterClass() {
+		driver.quit();
 	}
 
 	/**

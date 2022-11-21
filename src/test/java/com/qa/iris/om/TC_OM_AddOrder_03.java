@@ -2,6 +2,8 @@ package com.qa.iris.om;
 
 import java.util.logging.Logger;
 import org.testng.annotations.Test;
+
+import com.qa.annotations.Marker;
 import com.qa.base.MainAccelerator;
 import com.qa.utils.Log;
 import com.qa.workflows.NFMHomepageWorkflow;
@@ -9,6 +11,7 @@ import com.qa.workflows.NFMLoginWorkflow;
 import com.qa.workflows.OrderManagementWorkflow;
 import com.relevantcodes.extentreports.LogStatus;
 
+@Marker.OrderManagement
 public class TC_OM_AddOrder_03 extends MainAccelerator{
 
 	private static final Logger LOGGER = Logger.getLogger(TC_OM_AddOrder_03.class.getName());

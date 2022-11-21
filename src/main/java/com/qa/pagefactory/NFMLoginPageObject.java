@@ -15,6 +15,9 @@ public class NFMLoginPageObject {
   
   @FindBy(xpath="//input[@name ='Login']")
   public WebElement login;
+  
+  @FindBy(xpath="//input[@Value='End Other Session']")
+  public WebElement endSession;
 
 
   /**

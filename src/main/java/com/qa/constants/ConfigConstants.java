@@ -1,7 +1,7 @@
 package com.qa.constants;
 
 /**
- * @author Ankur Jaiswal
+ * @author Pranshu 
  * This class contains constants related with configuration files
  */
 public class ConfigConstants {

@@ -1,7 +1,7 @@
 package com.qa.constants;
 
 /**
- * @author Ankur Jaiswal
+ * @author Pranshu
  * Constants related to influx metrics
  */
 public class InfluxMetricsConstants {

@@ -65,6 +65,9 @@ public class AddOrderPageObject {
 
 	@FindBy(xpath="//dx-number-box[@label='Advance Amount']//div/input")
 	public WebElement advanceAmount;
+	
+	@FindBy(xpath="//a[@title='Cancel']")
+	public WebElement cancel;
 
 	/**
 	 * @param driver The driver that will be used to look up the elements

@@ -1,6 +1,5 @@
 package com.qa.base;
 
-import com.qa.connections.db.InfluxDBClient;
 import com.qa.constants.ConfigConstants;
 import com.qa.constants.DirectoryConstants;
 import com.qa.constants.FileConstants;
@@ -129,8 +128,6 @@ public class MainAccelerator {
 		FileUtils.deleteDownloadsFolderFiles();
 		driver.quit();
 		String execution = prop.getProperty(ConfigConstants.IrisConfig.EXECUTION);
-		if(!execution.equals("local")) {
-			InfluxDBClient.getConnection().closeInfluxConnection();}
 	}
 
 }

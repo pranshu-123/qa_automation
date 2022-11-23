@@ -110,4 +110,10 @@ public class OrderManagementWorkflow {
 		addOrderPageObject.deleteLineItems.get(0).click();
 		
 	}
+	
+	public void cancelLineItem() {
+		waitExecuter.sleep(1000);
+		addOrderPageObject.cancel.click();
+		
+	}
 }

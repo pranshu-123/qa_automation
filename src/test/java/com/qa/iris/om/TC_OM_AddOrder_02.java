@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import com.qa.annotations.Marker;
 import com.qa.base.MainAccelerator;
+import com.qa.constants.Categories;
 import com.qa.utils.Log;
 import com.qa.workflows.NFMHomepageWorkflow;
 import com.qa.workflows.NFMLoginWorkflow;
@@ -17,7 +18,7 @@ public class TC_OM_AddOrder_02 extends MainAccelerator{
 	private static final Logger LOGGER = Logger.getLogger(TC_OM_AddOrder_02.class.getName());
 
 	
-	@Test
+	@Test(groups = Categories.ORDER_MANAGEMENT)
 	public void verifyAddOrderAddressDetailPage() {
 		test = extent.startTest("verifyAddOrderAddressDetailPage", "Verify Add Order Address detail page elements");
 		test.assignCategory("OrderManagement");
@@ -27,13 +28,13 @@ public class TC_OM_AddOrder_02 extends MainAccelerator{
 		OrderManagementWorkflow orderManagementWorkflow = new OrderManagementWorkflow(driver);
 		loginWorkflow.loginToOM();
 		LOGGER.info("Navigated to NFM Dev Page");
-		orderManagementWorkflow.selectAddOrderMasterDetail();
+	//	orderManagementWorkflow.selectAddOrderMasterDetail();
 		homepageWorkflow.selectAddOrder();
 		homepageWorkflow.navigateToAddOrderPage();
 		LOGGER.info("Navigated to Order Management page");
 		orderManagementWorkflow.selectOrder();
 		orderManagementWorkflow.selectAddressTab();
-		orderManagementWorkflow.validateOrderPageElements();
+		orderManagementWorkflow.validateAddressPageElements();
 		test.log(LogStatus.PASS, "All Page elements validated sucessfully");
 	}
 

@@ -55,6 +55,7 @@ public class NFMHomepageWorkflow {
 	}
 
 	public void logout() {
+		driver.close();
 		driver.switchTo().window(parentHandle);
 		nfmPageObject.logout.click();
 		driver.switchTo().alert().accept();

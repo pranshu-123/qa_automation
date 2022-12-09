@@ -1,8 +1,11 @@
 package com.qa.base;
 
+import com.qa.connections.db.InsertRecordInMySql;
 import com.qa.constants.ConfigConstants;
 import com.qa.constants.DirectoryConstants;
 import com.qa.constants.FileConstants;
+import com.qa.constants.MarkerConstants;
+import com.qa.constants.SystemVariables;
 import com.qa.io.ConfigReader;
 import com.qa.utils.*;
 import com.qa.workflows.NFMHomepageWorkflow;
@@ -14,6 +17,11 @@ import org.testng.ITestResult;
 import org.testng.annotations.*;
 import java.io.File;
 import java.lang.reflect.Method;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Properties;
 import java.util.logging.Logger;
 import org.testng.annotations.AfterClass;
@@ -28,6 +36,10 @@ public class MainAccelerator {
 	public static ExtentReports extent;
 	public static ExtentTest test;
 	private static Properties prop;
+	public static DateTimeFormatter dtf;
+	public static LocalDateTime now;
+	public static  Calendar cal;
+	public static  Timestamp timestamp;
 
 	/**
 	 * This will be executed before suite starts. Start the browser. Initiate report
@@ -35,6 +47,10 @@ public class MainAccelerator {
 	@BeforeSuite
 	public void setup() {
 		prop = ConfigReader.readBaseConfig();
+		dtf = DateTimeFormatter.ofPattern("MM-dd-YYYY hh:mm:ss"); 
+		now = LocalDateTime.now();
+		cal = Calendar.getInstance();  
+		timestamp = new Timestamp(cal.getTimeInMillis());
 		FileUtils.createDirectory(DirectoryConstants.getExtentResultDir());
 		LOGGER.info("Moving old report to archive directory.");
 		FileUtils.moveFileToArchive(FileConstants.getExtentReportFile(), true);
@@ -114,7 +130,7 @@ public class MainAccelerator {
 	 */
 	@AfterClass(alwaysRun = true)
 	public void afterClass() {
-		driver.quit();
+		driver.close();
 	}
 
 	/**
@@ -126,8 +142,30 @@ public class MainAccelerator {
 		LOGGER.info("Suite completed. Closing the browser.");
 		Properties prop = ConfigReader.readBaseConfig();
 		FileUtils.deleteDownloadsFolderFiles();
-		driver.quit();
-		String execution = prop.getProperty(ConfigConstants.IrisConfig.EXECUTION);
+		//driver.quit();
+	}
+
+	public void sendTestMethodStatus(ITestResult iTestResult, String status) {
+
+		String build_number = "3";//SystemVariables.BUILD_NUMBER.toString();
+		if(build_number!=null) {
+			String tableName = "features";
+			String marker = "OM";//SystemVariables.FEATURE.toString();
+			if(marker.equalsIgnoreCase(MarkerConstants.SANITY)) {
+				tableName = "sanity";
+			}
+			else if( marker.equalsIgnoreCase(MarkerConstants.REGRESSION)) {
+				tableName = "regression";
+			}
+			else {
+				tableName = "features";
+			}
+
+			String className = iTestResult.getMethod().getRealClass().getName();
+			InsertRecordInMySql insertRecordInMySql = new InsertRecordInMySql();
+			insertRecordInMySql.insert(timestamp,build_number,iTestResult.getMethod().getMethodName(),className.substring(className.lastIndexOf('.')+1)
+					,iTestResult.getMethod().getGroups()[0],status);
+		}
 	}
 
 }

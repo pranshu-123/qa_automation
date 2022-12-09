@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 public @interface Marker {
 
     @Retention(RetentionPolicy.RUNTIME)
-    @interface Smoke {
+    @interface Sanity {
     }
 
     @Retention(RetentionPolicy.RUNTIME)

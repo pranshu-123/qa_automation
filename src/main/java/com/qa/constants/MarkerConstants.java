@@ -12,7 +12,7 @@ import java.util.Map;
  * This class contains all constants related with markers
  */
 public class MarkerConstants {
-    public static final String SMOKE = "smoke";
+    public static final String SANITY = "sanity";
     public static final String REGRESSION = "regression";
     public static final String ALL = "all";
     public static final String LOGIN = "login";
@@ -28,7 +28,7 @@ public class MarkerConstants {
      */
     private static Map<String, Class<? extends Annotation>> initMap() {
         Map<String, Class<? extends Annotation>> map = new LinkedHashMap<>();
-        map.put(SMOKE, Marker.Smoke.class);
+        map.put(SANITY, Marker.Sanity.class);
         map.put(REGRESSION, Marker.Regression.class);
         map.put(ALL, Marker.All.class);
         map.put(LOGIN, Marker.Login.class);

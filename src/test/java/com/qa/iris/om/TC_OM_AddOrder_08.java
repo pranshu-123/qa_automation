@@ -17,7 +17,7 @@ public class TC_OM_AddOrder_08 extends MainAccelerator{
 	private static final Logger LOGGER = Logger.getLogger(TC_OM_AddOrder_08.class.getName());
 
 
-	@Test
+	//@Test
 	public void deleteExistingLineItem() {
 		test = extent.startTest("deleteExistingLineItem", "Delete existing Line Item");
 		test.assignCategory("OrderManagement");

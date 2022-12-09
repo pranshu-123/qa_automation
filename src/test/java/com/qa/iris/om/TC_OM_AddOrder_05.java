@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import com.qa.annotations.Marker;
 import com.qa.base.MainAccelerator;
+import com.qa.constants.Categories;
 import com.qa.utils.Log;
 import com.qa.workflows.NFMHomepageWorkflow;
 import com.qa.workflows.NFMLoginWorkflow;
@@ -17,7 +18,7 @@ public class TC_OM_AddOrder_05 extends MainAccelerator{
 	private static final Logger LOGGER = Logger.getLogger(TC_OM_AddOrder_05.class.getName());
 
 
-	@Test
+	//@Test(groups = Categories.ORDER_MANAGEMENT)
 	public void deleteNewOrder() {
 		test = extent.startTest("deleteNewOrder", "Delete existing Order");
 		test.assignCategory("OrderManagement");

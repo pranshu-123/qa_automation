@@ -19,9 +19,9 @@ public class Main {
 	private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
 
 	/**
-	 * Entrypoint of Execution. Pass the markers that you want to execute
+	 * Entry point of Execution. Pass the markers that you want to execute
 	 * Based on the marker it will pick all classed which are having these markers at run time
-	 * and pass it to TestNgSuite creater.
+	 * and pass it to TestNgSuite.
 	 * @param args
 	 * @throws MalformedURLException
 	 */

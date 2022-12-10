@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Suite">
-  <test thread-count="5" name="Test">
-    <packages>
-      <package name="com.qa.iris.om"/>
-    </packages>
+<suite name="Iris Automation Suite">
+  <test thread-count="5" name="Automation Test Execution">
+    <classes>
+      <class name="com.qa.base.Main"></class>
+    </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

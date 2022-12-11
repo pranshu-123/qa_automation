@@ -11,7 +11,6 @@ import java.util.logging.Logger;
 import org.reflections.*;
 import org.reflections.scanners.TypeAnnotationsScanner;
 import org.testng.annotations.Test;
-
 import com.qa.constants.MarkerConstants;
 import com.qa.constants.SystemVariables;
 
@@ -56,6 +55,6 @@ public class Main {
 	    TestNGSuiteManager testNGSuite = new TestNGSuiteManager();
 	    testNGSuite.createTestNGSuite(classes);
 
-
-	}
 }
+	}
+

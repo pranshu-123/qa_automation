@@ -70,7 +70,7 @@ public class MainAccelerator {
 	@BeforeClass
 	public void beforeClass() {
 		LOGGER.info("Update config based on user input");
-		System.setProperty(ConfigConstants.SystemConfig.HEADLESS, "false");
+		System.setProperty(ConfigConstants.SystemConfig.HEADLESS, "true");
 		LOGGER.info("Starting browser");
 		DriverManager driverManager = new DriverManager();
 		String browser = prop.getProperty(ConfigConstants.IrisConfig.BROWSER);
@@ -142,7 +142,7 @@ public class MainAccelerator {
 		LOGGER.info("Suite completed. Closing the browser.");
 		Properties prop = ConfigReader.readBaseConfig();
 		FileUtils.deleteDownloadsFolderFiles();
-		//driver.quit();
+		driver.quit();
 	}
 
 	public void sendTestMethodStatus(ITestResult iTestResult, String status) {
@@ -150,7 +150,7 @@ public class MainAccelerator {
 		String build_number = SystemVariables.BUILD_NUMBER.toString();
 		if(build_number!=null) {
 			String tableName = "features";
-			String marker = "OM";//SystemVariables.FEATURE.toString();
+			String marker = SystemVariables.FEATURE.toString();
 			if(marker.equalsIgnoreCase(MarkerConstants.SANITY)) {
 				tableName = "sanity";
 			}

@@ -24,6 +24,7 @@ public class TestNGSuiteManager {
      * @param classes
      */
     public void createTestNGSuite(Set<Class> classes) throws ClassNotFoundException {
+    	LOGGER.info("Generating TestNG XML");
         TestNG myTestNG = new TestNG();
         //Create an instance of XML Suite and assign a name for it.
         XmlSuite mySuite = new XmlSuite();
@@ -35,7 +36,7 @@ public class TestNGSuiteManager {
         //Create a list which can contain the classes that you want to run.
         List<XmlClass> myClasses = new ArrayList<XmlClass>();
         for (Class testClass : classes) {
-            testClass = Class.forName(testClass.getName());
+            testClass = Class.forName(testClass.getTypeName());
             myClasses.add(new XmlClass(testClass));
         }
         //Assign that to the XmlTest Object created earlier.

@@ -8,8 +8,10 @@ import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.logging.Logger;
-import org.reflections.Reflections;
+import org.reflections.*;
 import org.reflections.scanners.TypeAnnotationsScanner;
+import org.testng.annotations.Test;
+
 import com.qa.constants.MarkerConstants;
 import com.qa.constants.SystemVariables;
 
@@ -25,32 +27,35 @@ public class Main {
 	 * @param args
 	 * @throws MalformedURLException
 	 */
-	public static void main(String[] args) throws MalformedURLException, ClassNotFoundException {
+	@Test
+	public void main() throws MalformedURLException, ClassNotFoundException {
 		String markers = SystemVariables.FEATURE.toString();
-		Set<Class> classes = new TreeSet<>(Comparator.comparing(Class::getName));
-		/**
-		 * Get the list of classes which are having provided markers
-		 */
-		LOGGER.info("Get the list of classes which are having provided markers");
-		URL sourceClassesURL = Paths.get("target/classes").toUri().toURL();
-		URL testClassesURL = Paths.get("target/test-classes").toUri().toURL();
-		URLClassLoader classLoader = URLClassLoader.newInstance(new URL[]{sourceClassesURL,testClassesURL});
-		for (String marker : markers.split(",")) {
-			marker = marker.trim();
-			Reflections reflections = new Reflections("com.qa", classLoader, new TypeAnnotationsScanner());
-			Set<Class<?>> challengeClasses =
-					reflections.getTypesAnnotatedWith(MarkerConstants.MARKER_MAPPING.get(marker.startsWith("!") ?
-							marker.substring(1) : marker), true);
-			for (Class<?> className: challengeClasses) {
-				if (marker.startsWith("!")) {
-					classes.remove(className);
-				} else {
-					classes.add(className);
-				}
-			}
-		}
-		LOGGER.info("Creating TestNg.xml suite");
-		TestNGSuiteManager testNGSuite = new TestNGSuiteManager();
-		testNGSuite.createTestNGSuite(classes);
+	    Set<Class> classes = new TreeSet<>(Comparator.comparing(Class::getName));
+	    /**
+	     * Get the list of classes which are having provided markers
+	     */
+	    LOGGER.info("Get the list of classes which are having provided markers");
+	    URL sourceClassesURL = Paths.get("target/classes").toUri().toURL();
+	    URL testClassesURL = Paths.get("target/test-classes").toUri().toURL();
+	    URLClassLoader classLoader = URLClassLoader.newInstance(new URL[]{sourceClassesURL,testClassesURL});
+	    for (String marker : markers.split(",")) {
+	      marker = marker.trim();
+	      Reflections reflections = new Reflections("com.qa", classLoader, new TypeAnnotationsScanner());
+	      Set<Class<?>> challengeClasses =
+	          reflections.getTypesAnnotatedWith(MarkerConstants.MARKER_MAPPING.get(marker.startsWith("!") ?
+	                  marker.substring(1) : marker), true);
+	      for (Class<?> className: challengeClasses) {
+	        if (marker.startsWith("!")) {
+	          classes.remove(className);
+	        } else {
+	          classes.add(className);
+	        }
+	      }
+	    }
+	    LOGGER.info("Creating TestNg.xml suite");
+	    TestNGSuiteManager testNGSuite = new TestNGSuiteManager();
+	    testNGSuite.createTestNGSuite(classes);
+
+
 	}
 }

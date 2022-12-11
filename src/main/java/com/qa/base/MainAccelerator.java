@@ -75,6 +75,7 @@ public class MainAccelerator {
 		DriverManager driverManager = new DriverManager();
 		String browser = prop.getProperty(ConfigConstants.IrisConfig.BROWSER);
 		driver = driverManager.getDriver(browser);
+		
 	}
 
 	/**

@@ -70,7 +70,7 @@ public class MainAccelerator {
 	@BeforeClass
 	public void beforeClass() {
 		LOGGER.info("Update config based on user input");
-		System.setProperty(ConfigConstants.SystemConfig.HEADLESS, "false");
+		System.setProperty(ConfigConstants.SystemConfig.HEADLESS, "true");
 		LOGGER.info("Starting browser");
 		DriverManager driverManager = new DriverManager();
 		String browser = prop.getProperty(ConfigConstants.IrisConfig.BROWSER);

@@ -4,12 +4,14 @@ import java.util.logging.Logger;
 
 import org.testng.annotations.Test;
 
+import com.qa.annotations.Marker;
 import com.qa.base.MainAccelerator;
 import com.qa.utils.Log;
 import com.qa.workflows.NFMHomepageWorkflow;
 import com.qa.workflows.NFMLoginWorkflow;
 import com.relevantcodes.extentreports.LogStatus;
 
+@Marker.Login
 public class LoginTests extends MainAccelerator{
 	
 	private static final Logger LOGGER = Logger.getLogger(LoginTests.class.getName());

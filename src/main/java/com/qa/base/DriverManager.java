@@ -60,13 +60,14 @@ public class DriverManager {
 	private ChromeOptions getChromeOptionWithNetworkEnable() {
 		LoggingPreferences logPrefs = new LoggingPreferences();
 		logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
-		WebDriverManager.chromedriver().setup();
-		File folderUUID = FileUtils.createDownloadsFolder();
+		//WebDriverManager.chromedriver().setup();
+		//File folderUUID = FileUtils.createDownloadsFolder();
+	      System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
 		HashMap<String, Object> chromePref = new HashMap<String, Object>();
 		chromePref.put("credentials_enable_service", false);
 		chromePref.put("profile.password_manager_enabled", false);
 		chromePref.put("profile.default_content_settings.popups", 0);
-		chromePref.put("download.default_directory", folderUUID.getAbsolutePath());
+		//chromePref.put("download.default_directory", folderUUID.getAbsolutePath());
 		ChromeOptions options = new ChromeOptions();
 		options.setCapability("goog:loggingPrefs", logPrefs);
 		if (System.getProperty(ConfigConstants.SystemConfig.HEADLESS).equals("true")) {

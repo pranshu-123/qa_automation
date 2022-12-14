@@ -62,7 +62,7 @@ public class DriverManager {
 		logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
 		//WebDriverManager.chromedriver().setup();
 		//File folderUUID = FileUtils.createDownloadsFolder();
-		System.setProperty("webdriver.chrome.driver", "/var/lib/jenkins/workspace/chromedriver");
+		System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
 		ChromeOptions options = new ChromeOptions();
 		// options.addArguments("headless");
 	        options.addArguments("disable-gpu");

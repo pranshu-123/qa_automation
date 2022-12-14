@@ -62,7 +62,7 @@ public class DriverManager {
 		logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
 		//WebDriverManager.chromedriver().setup();
 		//File folderUUID = FileUtils.createDownloadsFolder();
-		System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+		System.setProperty("webdriver.chrome.driver", "/usr/lib/chromium-browser/chromedriver");
 		ChromeOptions options = new ChromeOptions();
 		    options.addArguments("--no-sandbox");
 	        options.addArguments("disable-gpu");

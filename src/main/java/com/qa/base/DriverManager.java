@@ -62,7 +62,7 @@ public class DriverManager {
 		logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
 		//WebDriverManager.chromedriver().setup();
 		//File folderUUID = FileUtils.createDownloadsFolder();
-	      System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+		System.setProperty("webdriver.chrome.driver", "/var/lib/jenkins/workspace/qa_automation/downloadsFolder");
 		HashMap<String, Object> chromePref = new HashMap<String, Object>();
 		chromePref.put("credentials_enable_service", false);
 		chromePref.put("profile.password_manager_enabled", false);

@@ -64,7 +64,7 @@ public class DriverManager {
 		//File folderUUID = FileUtils.createDownloadsFolder();
 		System.setProperty("webdriver.chrome.driver", "/var/lib/jenkins/workspace/chromedriver");
 		ChromeOptions options = new ChromeOptions();
-		 options.addArguments("headless");
+		// options.addArguments("headless");
 	        options.addArguments("disable-gpu");
 //		HashMap<String, Object> chromePref = new HashMap<String, Object>();
 //		chromePref.put("credentials_enable_service", false);

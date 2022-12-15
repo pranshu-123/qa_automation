@@ -62,24 +62,21 @@ public class DriverManager {
 		logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
 		//WebDriverManager.chromedriver().setup();
 		//File folderUUID = FileUtils.createDownloadsFolder();
-		System.setProperty("webdriver.chrome.driver", "/quality-ui/downloadsFolder/chromedriver");
+		System.setProperty("webdriver.chrome.driver", "/var/lib/jenkins/workspace/qa_automation/downloadsFolder/chromedriver");
+		HashMap<String, Object> chromePref = new HashMap<String, Object>();
+		chromePref.put("credentials_enable_service", false);
+		chromePref.put("profile.password_manager_enabled", false);
+		chromePref.put("profile.default_content_settings.popups", 0);
+		//chromePref.put("download.default_directory", folderUUID.getAbsolutePath());
 		ChromeOptions options = new ChromeOptions();
-		//   options.addArguments("--no-sandbox");
-		//    options.addArguments("disable-gpu");
-		//		HashMap<String, Object> chromePref = new HashMap<String, Object>();
-		//		chromePref.put("credentials_enable_service", false);
-		//		chromePref.put("profile.password_manager_enabled", false);
-		//		chromePref.put("profile.default_content_settings.popups", 0);
-		//		//chromePref.put("download.default_directory", folderUUID.getAbsolutePath());
-		//		ChromeOptions options = new ChromeOptions();
-		//		options.setCapability("goog:loggingPrefs", logPrefs);
+		options.setCapability("goog:loggingPrefs", logPrefs);
 		if (System.getProperty(ConfigConstants.SystemConfig.HEADLESS).equals("true")) {
 			options.addArguments("--headless","window-size=1920,1080");
 			options.addArguments("--no-sandbox","--disable-dev-shm-usage");
 		}
 		options.setExperimentalOption("useAutomationExtension", false);
 		options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
-		//		options.setExperimentalOption("prefs", chromePref);
+		options.setExperimentalOption("prefs", chromePref);
 		options.setCapability(ChromeOptions.CAPABILITY,options);
 		return options;
 	}

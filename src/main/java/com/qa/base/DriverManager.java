@@ -10,6 +10,7 @@ import org.apache.logging.log4j.core.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.logging.LogType;
@@ -41,7 +42,7 @@ public class DriverManager {
 	public WebDriver initializeDriver(String browser) {
 		if (browser.equalsIgnoreCase("chrome")) {
 			log.info("Using Chrome browser");
-			driver = new ChromeDriver(getChromeOptionWithNetworkEnable());
+			driver = new FirefoxDriver(getChromeOptionWithNetworkEnable());
 			driver.manage().window().maximize();
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 			String url = prop.getProperty("url");
@@ -57,7 +58,7 @@ public class DriverManager {
 	 *
 	 * @return Chrome Options with customized configurations
 	 */
-	private ChromeOptions getChromeOptionWithNetworkEnable() {
+	private FirefoxOptions getChromeOptionWithNetworkEnable() {
 		LoggingPreferences logPrefs = new LoggingPreferences();
 		logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
 		//WebDriverManager.chromedriver().setup();
@@ -78,13 +79,20 @@ public class DriverManager {
 //		options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
 //		options.setExperimentalOption("prefs", chromePref);
 //		options.setCapability(ChromeOptions.CAPABILITY,options);
-		 System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
-         ChromeOptions chromeOptions = new ChromeOptions();
-         chromeOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage");
-         chromeOptions.setExperimentalOption("useAutomationExtension", false);
+//		 System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+//         ChromeOptions chromeOptions = new ChromeOptions();
+//         chromeOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage");
+//         chromeOptions.setExperimentalOption("useAutomationExtension", false);
+//
+//		return chromeOptions;
 
-		return chromeOptions;
+		 FirefoxBinary firefoxBinary = new FirefoxBinary();
+		 firefoxBinary.addCommandLineOptions("--headless");
+		 firefoxBinary.addCommandLineOptions("--no-sandbox");
+		 System.setProperty("webdriver.gecko.driver", "/usr/bin/geckodriver");
+		 FirefoxOptions firefoxOptions = new FirefoxOptions();
+		 firefoxOptions.setBinary(firefoxBinary);
+		return firefoxOptions;
 	}
-
 }
 

@@ -16,8 +16,11 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 import java.util.Collections;
 import java.util.HashMap;
@@ -42,7 +45,12 @@ public class DriverManager {
 	public WebDriver initializeDriver(String browser) {
 		if (browser.equalsIgnoreCase("chrome")) {
 			log.info("Using Chrome browser");
-			driver = new FirefoxDriver(getChromeOptionWithNetworkEnable());
+			try {
+				driver = new RemoteWebDriver(new URL("http://34.202.230.157:4444/wd/hub"),getChromeOptionWithNetworkEnable());
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			driver.manage().window().maximize();
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 			String url = prop.getProperty("url");

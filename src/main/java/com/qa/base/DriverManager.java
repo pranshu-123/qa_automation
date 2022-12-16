@@ -81,6 +81,7 @@ public class DriverManager {
 		 System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
          ChromeOptions chromeOptions = new ChromeOptions();
          chromeOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage");
+         chromeOptions.setExperimentalOption("useAutomationExtension", false);
 
 		return chromeOptions;
 	}

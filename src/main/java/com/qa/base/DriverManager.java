@@ -83,8 +83,7 @@ public class DriverManager {
          chromeOptions.addArguments("--headless");
          chromeOptions.addArguments("--no-sandbox");
 
-         WebDriver driver = new ChromeDriver(chromeOptions);
-		return options;
+		return chromeOptions;
 	}
 
 }

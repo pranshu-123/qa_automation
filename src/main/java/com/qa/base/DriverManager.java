@@ -82,6 +82,7 @@ public class DriverManager {
          ChromeOptions chromeOptions = new ChromeOptions();
          chromeOptions.addArguments("--disable-dev-shm-usage");
          chromeOptions.addArguments("--no-sandbox");
+         chromeOptions.addArguments("--remote-debugging-port=9222");
 
 		return chromeOptions;
 	}

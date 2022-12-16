@@ -46,7 +46,7 @@ public class DriverManager {
 		if (browser.equalsIgnoreCase("chrome")) {
 			log.info("Using Chrome browser");
 			try {
-				driver = new RemoteWebDriver(new URL("http://34.202.230.157:4444/wd/hub"),getChromeOptionWithNetworkEnable());
+				driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),getChromeOptionWithNetworkEnable());
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -66,7 +66,7 @@ public class DriverManager {
 	 *
 	 * @return Chrome Options with customized configurations
 	 */
-	private FirefoxOptions getChromeOptionWithNetworkEnable() {
+	private ChromeOptions getChromeOptionWithNetworkEnable() {
 		LoggingPreferences logPrefs = new LoggingPreferences();
 		logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
 		//WebDriverManager.chromedriver().setup();
@@ -87,20 +87,21 @@ public class DriverManager {
 //		options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
 //		options.setExperimentalOption("prefs", chromePref);
 //		options.setCapability(ChromeOptions.CAPABILITY,options);
-//		 System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
-//         ChromeOptions chromeOptions = new ChromeOptions();
-//         chromeOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage");
-//         chromeOptions.setExperimentalOption("useAutomationExtension", false);
-//
-//		return chromeOptions;
+		 System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+         ChromeOptions chromeOptions = new ChromeOptions();
+         chromeOptions.addArguments("--headless","window-size=1920,1080");
+         chromeOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage");
+         chromeOptions.setExperimentalOption("useAutomationExtension", false);
 
-		 FirefoxBinary firefoxBinary = new FirefoxBinary();
-		 firefoxBinary.addCommandLineOptions("--headless");
-		 firefoxBinary.addCommandLineOptions("--no-sandbox");
-		 System.setProperty("webdriver.gecko.driver", "/usr/bin/geckodriver");
-		 FirefoxOptions firefoxOptions = new FirefoxOptions();
-		 firefoxOptions.setBinary(firefoxBinary);
-		return firefoxOptions;
+		return chromeOptions;
+//
+//		 FirefoxBinary firefoxBinary = new FirefoxBinary();
+//		 firefoxBinary.addCommandLineOptions("--headless");
+//		 firefoxBinary.addCommandLineOptions("--no-sandbox");
+//		 System.setProperty("webdriver.gecko.driver", "/usr/bin/geckodriver");
+//		 FirefoxOptions firefoxOptions = new FirefoxOptions();
+//		 firefoxOptions.setBinary(firefoxBinary);
+	//	return firefoxOptions;
 	}
 }
 

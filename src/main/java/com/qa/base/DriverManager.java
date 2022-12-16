@@ -80,9 +80,7 @@ public class DriverManager {
 //		options.setCapability(ChromeOptions.CAPABILITY,options);
 		 System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
          ChromeOptions chromeOptions = new ChromeOptions();
-         chromeOptions.addArguments("--disable-dev-shm-usage");
-         chromeOptions.addArguments("--no-sandbox");
-         chromeOptions.addArguments("--remote-debugging-port=9222");
+         chromeOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage");
 
 		return chromeOptions;
 	}

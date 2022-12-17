@@ -46,7 +46,7 @@ public class DriverManager {
 		if (browser.equalsIgnoreCase("chrome")) {
 			log.info("Using Chrome browser");
 			try {
-				driver = new RemoteWebDriver(new URL("http://34.202.230.157:4444"),getChromeOptionWithNetworkEnable());
+				driver = new RemoteWebDriver(new URL("http://localhost:4444"),getChromeOptionWithNetworkEnable());
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -89,7 +89,7 @@ public class DriverManager {
 //		options.setCapability(ChromeOptions.CAPABILITY,options);
 		 System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
          ChromeOptions chromeOptions = new ChromeOptions();
-         chromeOptions.addArguments("--headless","window-size=1920,1080");
+       //  chromeOptions.addArguments("--headless","window-size=1920,1080");
          chromeOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage");
          chromeOptions.setExperimentalOption("useAutomationExtension", false);
 

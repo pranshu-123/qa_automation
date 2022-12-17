@@ -142,7 +142,7 @@ public class MainAccelerator {
 	public void tearDown() {
 		LOGGER.info("Suite completed. Closing the browser.");
 		Properties prop = ConfigReader.readBaseConfig();
-		FileUtils.deleteDownloadsFolderFiles();
+		//FileUtils.deleteDownloadsFolderFiles();
 		driver.quit();
 	}
 

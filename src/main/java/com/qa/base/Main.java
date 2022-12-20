@@ -30,7 +30,6 @@ public class Main {
 	public void main() throws MalformedURLException, ClassNotFoundException {
 		String markers = SystemVariables.FEATURE.toString();
 		LOGGER.info(markers);
-		LOGGER.info(SystemVariables.BUILD_NUMBER.toString());
 		Set<Class> classes = new TreeSet<>(Comparator.comparing(Class::getName));
 		/**
 		 * Get the list of classes which are having provided markers

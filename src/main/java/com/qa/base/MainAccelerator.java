@@ -75,7 +75,7 @@ public class MainAccelerator {
 		DriverManager driverManager = new DriverManager();
 		String browser = prop.getProperty(ConfigConstants.IrisConfig.BROWSER);
 		driver = driverManager.getDriver(browser);
-		
+
 	}
 
 	/**
@@ -131,7 +131,7 @@ public class MainAccelerator {
 	 */
 	@AfterClass(alwaysRun = true)
 	public void afterClass() {
-		//driver.close();
+		driver.close();
 	}
 
 	/**
@@ -147,7 +147,6 @@ public class MainAccelerator {
 	}
 
 	public void sendTestMethodStatus(ITestResult iTestResult, String status) {
-
 		String build_number = SystemVariables.BUILD_NUMBER.toString();
 		if(build_number!=null) {
 			String tableName = "features";

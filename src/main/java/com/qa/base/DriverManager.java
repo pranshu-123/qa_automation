@@ -1,9 +1,13 @@
 package com.qa.base;
 
 import com.qa.io.ConfigReader;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
@@ -29,21 +33,24 @@ public class DriverManager {
 	}
 
 	public WebDriver initializeDriver(String browser) {
-		if (browser.equalsIgnoreCase("chrome")) {
-			log.info("Using Chrome browser");
-			try {
-				driver = new RemoteWebDriver(new URL("http://localhost:4444"),getChromeOptionWithNetworkEnable());
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		String executeOn = prop.getProperty("execution");
+		if(executeOn.equalsIgnoreCase("remote")) {
+			if (browser.equalsIgnoreCase("chrome")) {
+				log.info("Using Chrome browser");
+				try {
+					driver = new RemoteWebDriver(new URL("http://localhost:4444"),getChromeOptionWithNetworkEnable());
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				}
 			}
-			driver.manage().window().maximize();
-			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-			String url = prop.getProperty("url");
-			driver.get(url);
-		}else {
-			System.out.println("Not Support for "+browser+ " browser.");
 		}
+		else {
+			driver = new ChromeDriver(getChromeOptionWithNetworkEnable());
+		}
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		String url = prop.getProperty("url");
+		driver.get(url);
 
 		return driver;
 	}
@@ -53,9 +60,15 @@ public class DriverManager {
 	 * @return Chrome Options with customized configurations
 	 */
 	private ChromeOptions getChromeOptionWithNetworkEnable() {
+		String executeOn = prop.getProperty("execution");
 		LoggingPreferences logPrefs = new LoggingPreferences();
 		logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
-		System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+		if(executeOn.equalsIgnoreCase("remote")) {
+			System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+		}
+		else {
+			WebDriverManager.chromedriver().setup();
+		}
 		ChromeOptions chromeOptions = new ChromeOptions();
 		chromeOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage");
 		chromeOptions.setExperimentalOption("useAutomationExtension", false);

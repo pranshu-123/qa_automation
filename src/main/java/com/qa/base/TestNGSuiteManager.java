@@ -6,6 +6,7 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
 import com.qa.listeners.CustomListener;
+import com.qa.listeners.TestNGListeners;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class TestNGSuiteManager {
         //Create an instance of XML Suite and assign a name for it.
         XmlSuite mySuite = new XmlSuite();
         mySuite.setName("UnravelUISuite");
-        mySuite.addListener(CustomListener.class.getCanonicalName());
+        mySuite.addListener(TestNGListeners.class.getCanonicalName());
         //Create an instance of XmlTest and assign a name for it.
         XmlTest myTest = new XmlTest(mySuite);
         myTest.setName("UnravelTest");

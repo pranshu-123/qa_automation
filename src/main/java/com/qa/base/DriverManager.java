@@ -34,7 +34,7 @@ public class DriverManager {
 
 	public WebDriver initializeDriver(String browser) {
 		String executeOn = prop.getProperty("execution");
-		if(executeOn.equalsIgnoreCase("remote")) {
+		if(executeOn.contains("remote")) {
 			if (browser.equalsIgnoreCase("chrome")) {
 				log.info("Using Chrome browser");
 				try {

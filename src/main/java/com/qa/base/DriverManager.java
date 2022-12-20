@@ -1,6 +1,7 @@
 package com.qa.base;
 
 import com.qa.io.ConfigReader;
+import com.qa.utils.Log;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -28,6 +29,7 @@ public class DriverManager {
 
 	public WebDriver getDriver(String browser) {
 		if (driver == null) {
+			Log.info("Creating new driver **********");
 			driver = initializeDriver(browser);
 		}
 		return driver;
@@ -61,7 +63,6 @@ public class DriverManager {
 	 * @return Chrome Options with customized configurations
 	 */
 	private ChromeOptions getChromeOptionWithNetworkEnable() {
-		String executeOn = prop.getProperty("execution");
 		LoggingPreferences logPrefs = new LoggingPreferences();
 		logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
 		if(executeOn.equalsIgnoreCase("remote")) {

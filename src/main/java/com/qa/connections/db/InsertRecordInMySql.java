@@ -13,6 +13,7 @@ public class InsertRecordInMySql {
 	        " (?, ?, ?, ?, ?,?);";
 	
 	public void insert(Timestamp timestamp, String build, String testName, String testClass, String feature, String status) {
+		System.out.println("Inserting into DB");
 		String dbURL = "jdbc:postgresql://34.202.230.157:5432/automation_report";
 		String username = "postgres";
 		String password = "Iris@2022";

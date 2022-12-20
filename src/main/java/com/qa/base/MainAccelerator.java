@@ -149,6 +149,7 @@ public class MainAccelerator {
 	public void sendTestMethodStatus(ITestResult iTestResult, String status) {
 		LOGGER.info("@@@@@@@@@@@@@@@@@@@@@@@@");
 		String build_number = SystemVariables.BUILD_NUMBER.toString();
+		LOGGER.info(build_number);
 		if(build_number!=null) {
 			String tableName = "features";
 			String marker = SystemVariables.FEATURE.toString();
@@ -161,7 +162,6 @@ public class MainAccelerator {
 			else {
 				tableName = "features";
 			}
-
 			String className = iTestResult.getMethod().getRealClass().getName();
 			InsertRecordInMySql insertRecordInMySql = new InsertRecordInMySql();
 			insertRecordInMySql.insert(timestamp,build_number,iTestResult.getMethod().getMethodName(),className.substring(className.lastIndexOf('.')+1)

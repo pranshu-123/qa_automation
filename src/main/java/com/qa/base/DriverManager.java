@@ -21,7 +21,8 @@ import java.util.logging.Level;
 public class DriverManager {
 
 	WebDriver driver;
-	Properties prop = ConfigReader.readBaseConfig();
+	static Properties prop = ConfigReader.readBaseConfig();
+	static String executeOn = prop.getProperty("execution");
 
 	public static final Logger log = (Logger) LogManager.getLogger();
 
@@ -33,7 +34,7 @@ public class DriverManager {
 	}
 
 	public WebDriver initializeDriver(String browser) {
-		String executeOn = prop.getProperty("execution");
+		
 		if(executeOn.contains("remote")) {
 			if (browser.equalsIgnoreCase("chrome")) {
 				log.info("Using Chrome browser");

@@ -147,6 +147,7 @@ public class MainAccelerator {
 	}
 
 	public void sendTestMethodStatus(ITestResult iTestResult, String status) {
+		LOGGER.info("@@@@@@@@@@@@@@@@@@@@@@@@");
 		String build_number = SystemVariables.BUILD_NUMBER.toString();
 		if(build_number!=null) {
 			String tableName = "features";

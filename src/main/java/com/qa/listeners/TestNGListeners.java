@@ -1,13 +1,10 @@
 package com.qa.listeners;
 
-import java.io.IOException;
-
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 import com.qa.base.MainAccelerator;
-import com.qa.utils.TestUtils;
 
 public class TestNGListeners extends MainAccelerator implements ITestListener{
 

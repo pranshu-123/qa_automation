@@ -36,19 +36,14 @@ public class DriverManager {
 	}
 
 	public WebDriver initializeDriver(String browser) {
-		
-		if(executeOn.contains("remote")) {
-			if (browser.equalsIgnoreCase("chrome")) {
-				log.info("Using Chrome browser");
-				try {
-					driver = new RemoteWebDriver(new URL("http://localhost:4444"),getChromeOptionWithNetworkEnable());
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
-				}
+
+		if (browser.equalsIgnoreCase("chrome")) {
+			log.info("Using Chrome browser");
+			try {
+				driver = new RemoteWebDriver(new URL("http://localhost:4444"),getChromeOptionWithNetworkEnable());
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
 			}
-		}
-		else {
-			driver = new ChromeDriver(getChromeOptionWithNetworkEnable());
 		}
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -65,12 +60,7 @@ public class DriverManager {
 	private ChromeOptions getChromeOptionWithNetworkEnable() {
 		LoggingPreferences logPrefs = new LoggingPreferences();
 		logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
-		if(executeOn.equalsIgnoreCase("remote")) {
-			System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
-		}
-		else {
-			WebDriverManager.chromedriver().setup();
-		}
+		System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
 		ChromeOptions chromeOptions = new ChromeOptions();
 		chromeOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage");
 		chromeOptions.setExperimentalOption("useAutomationExtension", false);

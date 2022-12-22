@@ -18,14 +18,13 @@ import com.qa.workflows.NFMHomepageWorkflow;
 import com.qa.workflows.NFMLoginWorkflow;
 import com.qa.workflows.OrderManagementWorkflow;
 import com.relevantcodes.extentreports.LogStatus;
-@Listeners(TestNGListeners.class)
 @Marker.OrderManagement
 public class TC_OM_AddOrder_04 extends MainAccelerator{
 
 	private static final Logger LOGGER = Logger.getLogger(TC_OM_AddOrder_04.class.getName());
 
 
-	@Test(groups = Categories.ORDER_MANAGEMENT)
+	//@Test(groups = Categories.ORDER_MANAGEMENT)
 	public void editNewOrder() {
 		test = extent.startTest("editNewOrder", "Edit existing Order");
 		test.assignCategory("OrderManagement");

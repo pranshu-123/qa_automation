@@ -17,7 +17,7 @@ public class TC_OM_AddOrder_06 extends MainAccelerator{
 	private static final Logger LOGGER = Logger.getLogger(TC_OM_AddOrder_06.class.getName());
 
 
-	//@Test
+	@Test
 	public void createNewBuildOrder() {
 		test = extent.startTest("createNewBuildOrder", "Create New Build Order");
 		test.assignCategory("OrderManagement");

@@ -131,7 +131,8 @@ public class MainAccelerator {
 	 */
 	@AfterClass(alwaysRun = true)
 	public void afterClass() {
-		driver.close();
+	//	driver.close();
+		driver.quit();
 	}
 
 	/**

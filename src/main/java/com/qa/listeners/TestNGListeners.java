@@ -10,29 +10,31 @@ public class TestNGListeners extends MainAccelerator implements ITestListener{
 
 	public void onFinish(ITestContext arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void onStart(ITestContext arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void onTestFailedButWithinSuccessPercentage(ITestResult arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void onTestFailure(ITestResult iTestResult) {
-		this.sendTestMethodStatus(iTestResult, "Fail");
+		if(iTestResult.getMethod().getMethodName()!="main") {
+			this.sendTestMethodStatus(iTestResult, "Fail");
+		}
 		//take screen shot
-//		try {
-//		TestUtils.takeScreenshotAtEndOfTest();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
+		//		try {
+		//		TestUtils.takeScreenshotAtEndOfTest();
+		//		} catch (IOException e) {
+		//			// TODO Auto-generated catch block
+		//			e.printStackTrace();
+		//		}
+
 	}
 
 	public void onTestSkipped(ITestResult iTestResult) {
@@ -41,7 +43,7 @@ public class TestNGListeners extends MainAccelerator implements ITestListener{
 
 	public void onTestStart(ITestResult arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void onTestSuccess(ITestResult iTestResult) {

@@ -40,7 +40,7 @@ public class DriverManager {
 		if (browser.equalsIgnoreCase("chrome")) {
 			log.info("Using Chrome browser");
 			try {
-				driver = new RemoteWebDriver(new URL("http://localhost:4444"),getChromeOptionWithNetworkEnable());
+				driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),getChromeOptionWithNetworkEnable());
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			}

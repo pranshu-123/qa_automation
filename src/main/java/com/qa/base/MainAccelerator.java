@@ -147,7 +147,6 @@ public class MainAccelerator {
 	}
 
 	public void sendTestMethodStatus(ITestResult iTestResult, String status) {
-		LOGGER.info("@@@@@@@@@@@@@@@@@@@@@@@@");
 		String build_number = SystemVariables.BUILD_NUMBER.toString();
 		LOGGER.info(build_number);
 		if(build_number!=null) {

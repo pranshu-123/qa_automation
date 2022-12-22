@@ -22,7 +22,7 @@ public class TC_OM_AddOrder_03 extends MainAccelerator{
 	private static final Logger LOGGER = Logger.getLogger(TC_OM_AddOrder_03.class.getName());
 
 
-	//@Test(groups = Categories.ORDER_MANAGEMENT)
+	@Test(groups = Categories.ORDER_MANAGEMENT)
 	public void createNewOrder() {
 		test = extent.startTest("createNewOrder", "Create New Order");
 		test.assignCategory("OrderManagement");

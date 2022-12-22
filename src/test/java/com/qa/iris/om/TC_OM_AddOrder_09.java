@@ -17,7 +17,7 @@ public class TC_OM_AddOrder_09 extends MainAccelerator{
 	private static final Logger LOGGER = Logger.getLogger(TC_OM_AddOrder_09.class.getName());
 
 
-	//@Test
+	@Test
 	public void verifyCancelFunctionalForLineItem() {
 		test = extent.startTest("verifyCancelFunctionalForLineItem", "Verify Cancel functionality");
 		test.assignCategory("OrderManagement");

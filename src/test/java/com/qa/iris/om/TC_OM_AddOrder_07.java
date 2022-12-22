@@ -17,7 +17,7 @@ public class TC_OM_AddOrder_07 extends MainAccelerator{
 	private static final Logger LOGGER = Logger.getLogger(TC_OM_AddOrder_07.class.getName());
 
 
-	//@Test
+	@Test
 	public void copyExistingLineItem() {
 		test = extent.startTest("copyExistingLineItem", "Copy existing Line details");
 		test.assignCategory("OrderManagement");

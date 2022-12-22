@@ -13,7 +13,6 @@ import com.qa.workflows.NFMLoginWorkflow;
 import com.qa.workflows.OrderManagementWorkflow;
 import com.relevantcodes.extentreports.LogStatus;
 
-@Listeners(TestNGListeners.class)
 @Marker.OrderManagement
 public class TC_OM_AddOrder_01 extends MainAccelerator{
 	

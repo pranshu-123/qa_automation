@@ -3,13 +3,13 @@ package com.qa.iris.om;
 import java.util.logging.Logger;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.Status;
 import com.qa.annotations.Marker;
 import com.qa.base.MainAccelerator;
 import com.qa.utils.Log;
 import com.qa.workflows.NFMHomepageWorkflow;
 import com.qa.workflows.NFMLoginWorkflow;
 import com.qa.workflows.OrderManagementWorkflow;
-import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.OrderManagement
 public class TC_OM_AddOrder_08 extends MainAccelerator{
@@ -19,7 +19,7 @@ public class TC_OM_AddOrder_08 extends MainAccelerator{
 
 	@Test
 	public void deleteExistingLineItem() {
-		test = extent.startTest("deleteExistingLineItem", "Delete existing Line Item");
+		test = extent.createTest("deleteExistingLineItem", "Delete existing Line Item");
 		test.assignCategory("OrderManagement");
 		Log.startTestCase("deleteExistingLineItem");
 		NFMLoginWorkflow loginWorkflow = new NFMLoginWorkflow(driver);
@@ -40,7 +40,7 @@ public class TC_OM_AddOrder_08 extends MainAccelerator{
 		LOGGER.info("New Line Item deleted");
 		orderManagementWorkflow.saveOrder();
 		orderManagementWorkflow.createOrder();
-		test.log(LogStatus.PASS, "Delete existing line item working successful");
+		test.log(Status.PASS, "Delete existing line item working successful");
 	}
 
 }

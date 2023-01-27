@@ -3,6 +3,7 @@ package com.qa.iris.om;
 import java.util.logging.Logger;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.Status;
 import com.qa.annotations.Marker;
 import com.qa.base.MainAccelerator;
 import com.qa.constants.Categories;
@@ -10,7 +11,6 @@ import com.qa.utils.Log;
 import com.qa.workflows.NFMHomepageWorkflow;
 import com.qa.workflows.NFMLoginWorkflow;
 import com.qa.workflows.OrderManagementWorkflow;
-import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.OrderManagement
 public class TC_OM_AddOrder_02 extends MainAccelerator{
@@ -20,7 +20,7 @@ public class TC_OM_AddOrder_02 extends MainAccelerator{
 	
 	@Test(groups = Categories.ORDER_MANAGEMENT)
 	public void verifyAddOrderAddressDetailPage() {
-		test = extent.startTest("verifyAddOrderAddressDetailPage", "Verify Add Order Address detail page elements");
+		test = extent.createTest("verifyAddOrderAddressDetailPage", "Verify Add Order Address detail page elements");
 		test.assignCategory("OrderManagement");
 		Log.startTestCase("verifyAddOrderAddressDetailPage");
 		NFMLoginWorkflow loginWorkflow = new NFMLoginWorkflow(driver);
@@ -35,7 +35,7 @@ public class TC_OM_AddOrder_02 extends MainAccelerator{
 		orderManagementWorkflow.selectOrder();
 		orderManagementWorkflow.selectAddressTab();
 		orderManagementWorkflow.validateAddressPageElements();
-		test.log(LogStatus.PASS, "All Page elements validated sucessfully");
+		test.log(Status.PASS, "All Page elements validated sucessfully");
 	}
 
 }

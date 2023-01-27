@@ -37,20 +37,15 @@ public class DriverManager {
 
 	public WebDriver initializeDriver(String browser) {
 
-		if (browser.equalsIgnoreCase("chrome")) {
-			log.info("Using Chrome browser");
-			try {
-				driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),getChromeOptionWithNetworkEnable());
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-			}
-		}
+		log.info("Using Chrome browser");
+		driver = new ChromeDriver(getChromeOptionWithNetworkEnable());
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		String url = prop.getProperty("url");
 		driver.get(url);
 
 		return driver;
+
 	}
 
 	/**
@@ -60,11 +55,12 @@ public class DriverManager {
 	private ChromeOptions getChromeOptionWithNetworkEnable() {
 		LoggingPreferences logPrefs = new LoggingPreferences();
 		logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
-		System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+		WebDriverManager.chromedriver().setup();
 		ChromeOptions chromeOptions = new ChromeOptions();
 		chromeOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage");
 		chromeOptions.setExperimentalOption("useAutomationExtension", false);
 		return chromeOptions;
 	}
 }
+
 

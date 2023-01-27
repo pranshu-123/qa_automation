@@ -1,17 +1,16 @@
 package com.qa.iris.om;
 
 import java.util.logging.Logger;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.Status;
 import com.qa.annotations.Marker;
 import com.qa.base.MainAccelerator;
 import com.qa.constants.Categories;
-import com.qa.listeners.TestNGListeners;
 import com.qa.utils.Log;
 import com.qa.workflows.NFMHomepageWorkflow;
 import com.qa.workflows.NFMLoginWorkflow;
 import com.qa.workflows.OrderManagementWorkflow;
-import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.OrderManagement
 public class TC_OM_AddOrder_01 extends MainAccelerator{
@@ -22,7 +21,7 @@ public class TC_OM_AddOrder_01 extends MainAccelerator{
 	
 	@Test(groups = Categories.ORDER_MANAGEMENT)
 	public void verifyAddOrderMasterDetailPage() {
-		test = extent.startTest("verifyAddOrderMasterDetailPage", "Verify Add Order Master detail page elements");
+		test = extent.createTest("verifyAddOrderMasterDetailPage", "Verify Add Order Master detail page elements");
 		test.assignCategory("OrderManagement");
 		Log.startTestCase("verifyAddOrderMasterDetailPage");
 		NFMLoginWorkflow loginWorkflow = new NFMLoginWorkflow(driver);
@@ -36,7 +35,7 @@ public class TC_OM_AddOrder_01 extends MainAccelerator{
 		orderManagementWorkflow.selectAddOrderMasterDetail();
 		orderManagementWorkflow.selectOrder();
 		orderManagementWorkflow.validateOrderPageElements();
-		test.log(LogStatus.PASS, "All Page elements validated sucessfully");
+		test.log(Status.PASS, "All Page elements validated sucessfully");
 	}
 
 }

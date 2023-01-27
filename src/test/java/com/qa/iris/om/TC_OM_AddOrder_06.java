@@ -3,13 +3,13 @@ package com.qa.iris.om;
 import java.util.logging.Logger;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.Status;
 import com.qa.annotations.Marker;
 import com.qa.base.MainAccelerator;
 import com.qa.utils.Log;
 import com.qa.workflows.NFMHomepageWorkflow;
 import com.qa.workflows.NFMLoginWorkflow;
 import com.qa.workflows.OrderManagementWorkflow;
-import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.OrderManagement
 public class TC_OM_AddOrder_06 extends MainAccelerator{
@@ -19,7 +19,7 @@ public class TC_OM_AddOrder_06 extends MainAccelerator{
 
 	@Test
 	public void createNewBuildOrder() {
-		test = extent.startTest("createNewBuildOrder", "Create New Build Order");
+		test = extent.createTest("createNewBuildOrder", "Create New Build Order");
 		test.assignCategory("OrderManagement");
 		Log.startTestCase("createNewBuildOrder");
 		NFMLoginWorkflow loginWorkflow = new NFMLoginWorkflow(driver);
@@ -36,7 +36,7 @@ public class TC_OM_AddOrder_06 extends MainAccelerator{
 		LOGGER.info("New Line Item added up");
 		orderManagementWorkflow.saveOrder();
 		orderManagementWorkflow.createOrder();
-		test.log(LogStatus.PASS, "New Build Order Created successfully");
+		test.log(Status.PASS, "New Build Order Created successfully");
 	}
 
 }

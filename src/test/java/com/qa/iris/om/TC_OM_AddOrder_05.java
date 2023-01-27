@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.Status;
 import com.qa.annotations.Marker;
 import com.qa.base.MainAccelerator;
 import com.qa.constants.Categories;
@@ -11,7 +12,6 @@ import com.qa.utils.Log;
 import com.qa.workflows.NFMHomepageWorkflow;
 import com.qa.workflows.NFMLoginWorkflow;
 import com.qa.workflows.OrderManagementWorkflow;
-import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.OrderManagement
 public class TC_OM_AddOrder_05 extends MainAccelerator{
@@ -21,7 +21,7 @@ public class TC_OM_AddOrder_05 extends MainAccelerator{
 
 	@Test(groups = Categories.ORDER_MANAGEMENT)
 	public void deleteNewOrder() {
-		test = extent.startTest("deleteNewOrder", "Delete existing Order");
+		test = extent.createTest("deleteNewOrder", "Delete existing Order");
 		test.assignCategory("OrderManagement");
 		Log.startTestCase("deleteNewOrder");
 		NFMLoginWorkflow loginWorkflow = new NFMLoginWorkflow(driver);
@@ -35,7 +35,7 @@ public class TC_OM_AddOrder_05 extends MainAccelerator{
 		orderManagementWorkflow.selectAddOrderMasterDetail();
 		orderManagementWorkflow.selectOrder();
 		orderManagementWorkflow.deleteOrder();
-		test.log(LogStatus.PASS, "Order deleted successfully");
+		test.log(Status.PASS, "Order deleted successfully");
 	}
 
 }

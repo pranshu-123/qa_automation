@@ -3,13 +3,13 @@ package com.qa.iris.om;
 import java.util.logging.Logger;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.Status;
 import com.qa.annotations.Marker;
 import com.qa.base.MainAccelerator;
 import com.qa.utils.Log;
 import com.qa.workflows.NFMHomepageWorkflow;
 import com.qa.workflows.NFMLoginWorkflow;
 import com.qa.workflows.OrderManagementWorkflow;
-import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.OrderManagement
 public class TC_OM_AddOrder_07 extends MainAccelerator{
@@ -19,7 +19,7 @@ public class TC_OM_AddOrder_07 extends MainAccelerator{
 
 	@Test
 	public void copyExistingLineItem() {
-		test = extent.startTest("copyExistingLineItem", "Copy existing Line details");
+		test = extent.createTest("copyExistingLineItem", "Copy existing Line details");
 		test.assignCategory("OrderManagement");
 		Log.startTestCase("copyExistingLineItem");
 		NFMLoginWorkflow loginWorkflow = new NFMLoginWorkflow(driver);
@@ -38,7 +38,7 @@ public class TC_OM_AddOrder_07 extends MainAccelerator{
 		LOGGER.info("New Line Item copied");
 		orderManagementWorkflow.saveOrder();
 		orderManagementWorkflow.createOrder();
-		test.log(LogStatus.PASS, "Copy existing line item working successful");
+		test.log(Status.PASS, "Copy existing line item working successful");
 	}
 
 }

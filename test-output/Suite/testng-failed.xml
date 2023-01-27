@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Test(failed)">
+    <classes>
+      <class name="com.qa.iris.om.TC_OM_AddOrder_03">
+        <methods>
+          <include name="setupBeforeMethod"/>
+          <include name="beforeClass"/>
+          <include name="afterClass"/>
+          <include name="tearDown"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+          <include name="createNewOrder"/>
+        </methods>
+      </class> <!-- com.qa.iris.om.TC_OM_AddOrder_03 -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->

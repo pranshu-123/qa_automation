@@ -92,8 +92,9 @@ public class OrderManagementWorkflow {
 	}
 	
 	public void addNewLineItem() {
-		waitExecuter.sleep(1000);
+		waitExecuter.sleep(4000);
 		addOrderPageObject.addNewLineItem.click();
+		JavaScriptExecuter.scrollOnElement(driver, addOrderPageObject.expandLineItems.get(0));
 		addOrderPageObject.expandLineItems.get(0).click();
 		addOrderPageObject.itemNo.click();
 		addOrderPageObject.itemList.click();

@@ -4,6 +4,9 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.qa.base.MainAccelerator;
 
 public class TestNGListeners extends MainAccelerator implements ITestListener{
@@ -27,6 +30,7 @@ public class TestNGListeners extends MainAccelerator implements ITestListener{
 		if(iTestResult.getMethod().getMethodName()!="main") {
 			this.sendTestMethodStatus(iTestResult, "Fail");
 		}
+		test.log(Status.FAIL, MarkupHelper.createLabel(iTestResult.getName() + " FAILED", ExtentColor.RED));
 		//take screen shot
 		//		try {
 		//		TestUtils.takeScreenshotAtEndOfTest();
@@ -48,6 +52,7 @@ public class TestNGListeners extends MainAccelerator implements ITestListener{
 
 	public void onTestSuccess(ITestResult iTestResult) {
 		this.sendTestMethodStatus(iTestResult, "Pass");
+		test.log(Status.PASS, MarkupHelper.createLabel(iTestResult.getName() + " PASSED", ExtentColor.GREEN));;
 	}
 
 }

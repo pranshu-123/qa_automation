@@ -1,7 +1,7 @@
 package com.qa.listeners;
 
+import com.aventstack.extentreports.Status;
 import com.qa.base.MainAccelerator;
-import com.relevantcodes.extentreports.LogStatus;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -14,10 +14,9 @@ public class CustomListener extends MainAccelerator implements ITestListener {
      */
     @Override
     public void onTestSkipped(ITestResult result) {
-        test = extent.startTest(result.getMethod().getMethodName());
-        test.log(LogStatus.SKIP, result.getTestName() + " skipped because " +
+        test = extent.createTest(result.getMethod().getMethodName());
+        test.log(Status.SKIP, result.getTestName() + " skipped because " +
                 result.getThrowable().getMessage());
-        extent.endTest(test);
         extent.flush();
 //        try {
 ////            influxDBClient.writeDataToInflux(getDataToPushForInflux(result,

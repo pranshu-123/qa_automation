@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.Status;
 import com.qa.annotations.Marker;
 import com.qa.base.MainAccelerator;
 import com.qa.constants.Categories;
@@ -11,7 +12,6 @@ import com.qa.utils.Log;
 import com.qa.workflows.NFMHomepageWorkflow;
 import com.qa.workflows.NFMLoginWorkflow;
 import com.qa.workflows.OrderManagementWorkflow;
-import com.relevantcodes.extentreports.LogStatus;
 @Marker.OrderManagement
 public class TC_OM_AddOrder_04 extends MainAccelerator{
 
@@ -20,7 +20,7 @@ public class TC_OM_AddOrder_04 extends MainAccelerator{
 
 	@Test(groups = Categories.ORDER_MANAGEMENT)
 	public void editNewOrder() {
-		test = extent.startTest("editNewOrder", "Edit existing Order");
+		test = extent.createTest("editNewOrder", "Edit existing Order");
 		test.assignCategory("OrderManagement");
 		Log.startTestCase("editNewOrder");
 		NFMLoginWorkflow loginWorkflow = new NFMLoginWorkflow(driver);
@@ -34,7 +34,7 @@ public class TC_OM_AddOrder_04 extends MainAccelerator{
 		orderManagementWorkflow.selectAddOrderMasterDetail();
 		orderManagementWorkflow.selectOrder();
 		orderManagementWorkflow.editCreatedOrder();
-		test.log(LogStatus.PASS, "Order edited successfully");
+		test.log(Status.PASS, "Order edited successfully");
 	}
 
 }

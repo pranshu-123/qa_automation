@@ -1,9 +1,11 @@
 package com.qa.utils;
 
-import com.relevantcodes.extentreports.ExtentTest;
-import com.relevantcodes.extentreports.LogStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+
 import javax.annotation.Nullable;
 
 /**
@@ -28,7 +30,7 @@ public class LoggingUtils {
     public void info(String message, @Nullable ExtentTest test) {
         logger.info(message);
         if (test != null) {
-            test.log(LogStatus.INFO, message);
+            test.log(Status.INFO, message);
         }
     }
 
@@ -40,7 +42,7 @@ public class LoggingUtils {
     public void error(String message, @Nullable ExtentTest test) {
         logger.error(message);
         if (test != null) {
-            test.log(LogStatus.ERROR, message);
+            test.log(Status.WARNING, message);
         }
     }
 
@@ -52,7 +54,7 @@ public class LoggingUtils {
     public void warning(String message, @Nullable ExtentTest test) {
         logger.warn(message);
         if (test != null) {
-            test.log(LogStatus.WARNING, message);
+            test.log(Status.WARNING, message);
         }
     }
 
@@ -64,7 +66,7 @@ public class LoggingUtils {
     public void pass(String message, @Nullable ExtentTest test) {
         logger.info(message);
         if (test != null) {
-            test.log(LogStatus.PASS, message);
+            test.log(Status.PASS, message);
         }
     }
 }

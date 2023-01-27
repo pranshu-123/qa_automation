@@ -1,5 +1,10 @@
 package com.qa.base;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.qa.connections.db.InsertRecordInMySql;
 import com.qa.constants.ConfigConstants;
 import com.qa.constants.DirectoryConstants;
@@ -9,9 +14,6 @@ import com.qa.constants.SystemVariables;
 import com.qa.io.ConfigReader;
 import com.qa.utils.*;
 import com.qa.workflows.NFMHomepageWorkflow;
-import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
-import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -40,6 +42,7 @@ public class MainAccelerator {
 	public static LocalDateTime now;
 	public static  Calendar cal;
 	public static  Timestamp timestamp;
+	private static ExtentSparkReporter htmlReporter;
 
 	/**
 	 * This will be executed before suite starts. Start the browser. Initiate report
@@ -56,11 +59,25 @@ public class MainAccelerator {
 		FileUtils.moveFileToArchive(FileConstants.getExtentReportFile(), true);
 		FileUtils.createDirectory(DirectoryConstants.getScreenshotDir());
 		LOGGER.info("Initiated html report.");
-		extent = new ExtentReports(FileConstants.getExtentReportFile(), true);
-		extent.loadConfig(new File(DirectoryConstants.getConfigDir() + "extent_config.xml"));
-		LOGGER.info("Set build info to html report.");
-		extent.addSystemInfo(ConfigConstants.ReportConfig.SELENIUM_VERSION,
-				prop.getProperty(ConfigConstants.ReportConfig.SELENIUM_VERSION));
+		htmlReporter = new ExtentSparkReporter(System.getProperty("user.dir") +"/test-output/extentTestReport.html");
+
+		//initialize ExtentReports and attach the HtmlReporter
+		extent = new ExtentReports();
+		extent.attachReporter(htmlReporter);
+
+		//To add system or environment info by using the setSystemInfo method.
+		extent.setSystemInfo("Operating System", System.getProperty("os.name"));
+		extent.setSystemInfo("Operating System Version", System.getProperty("os.version"));
+		extent.setSystemInfo("Browser", "Chrome");
+		extent.setSystemInfo("User", System.getProperty("user.name"));
+
+		//configuration items to change the look and feel
+		//add content, manage tests etc
+		htmlReporter.config().setDocumentTitle("Test Execution Report");
+		htmlReporter.config().setReportName("Test Report");
+		htmlReporter.config().setTheme(Theme.STANDARD);
+		htmlReporter.config().setTimeStampFormat("EEEE, MMMM dd, yyyy, hh:mm a '('zzz')'");
+
 	}
 
 	/**
@@ -101,14 +118,14 @@ public class MainAccelerator {
 			/* Mark TC as FAIL if its an assertion error, else FATAL */
 			if (result.getStatus() == ITestResult.FAILURE) {
 				if (result.getThrowable() instanceof AssertionError) {
-					test.log(LogStatus.FAIL, "<b style='color:yellow'>" + result.getThrowable().getMessage());
+					test.log(Status.FAIL, "<b style='color:yellow'>" + result.getThrowable().getMessage());
 					LOGGER.info(method.getName() + " is failed");
 				} else {
-					test.log(LogStatus.FATAL, result.getThrowable().getMessage());
+					test.log(Status.WARNING, result.getThrowable().getMessage());
 					LOGGER.info(method.getName() + " is failed due to code issue");
 				}
 				String screenshotImg = ScreenshotHelper.takeScreenshotOfPage(driver);
-				test.log(LogStatus.FAIL, test.addScreenCapture(screenshotImg));
+			 test.addScreenCaptureFromPath(screenshotImg);
 			}
 			Log.endTestCase(method.getDeclaringClass().getName() + " - " + method.getName());
 		} catch (Exception e) {
@@ -118,7 +135,7 @@ public class MainAccelerator {
 		finally {
 			// Code to add test result in report
 			LOGGER.info("Adding test case to report");
-			extent.endTest(test);
+			//extent.endTest(test);
 			extent.flush();
 			NFMHomepageWorkflow hfMHomepageWorkflow = new NFMHomepageWorkflow(driver);
 			hfMHomepageWorkflow.logout();

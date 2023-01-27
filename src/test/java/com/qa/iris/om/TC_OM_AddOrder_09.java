@@ -3,13 +3,13 @@ package com.qa.iris.om;
 import java.util.logging.Logger;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.Status;
 import com.qa.annotations.Marker;
 import com.qa.base.MainAccelerator;
 import com.qa.utils.Log;
 import com.qa.workflows.NFMHomepageWorkflow;
 import com.qa.workflows.NFMLoginWorkflow;
 import com.qa.workflows.OrderManagementWorkflow;
-import com.relevantcodes.extentreports.LogStatus;
 
 @Marker.OrderManagement
 public class TC_OM_AddOrder_09 extends MainAccelerator{
@@ -19,7 +19,7 @@ public class TC_OM_AddOrder_09 extends MainAccelerator{
 
 	@Test
 	public void verifyCancelFunctionalForLineItem() {
-		test = extent.startTest("verifyCancelFunctionalForLineItem", "Verify Cancel functionality");
+		test = extent.createTest("verifyCancelFunctionalForLineItem", "Verify Cancel functionality");
 		test.assignCategory("OrderManagement");
 		Log.startTestCase("verifyCancelFunctionalForLineItem");
 		NFMLoginWorkflow loginWorkflow = new NFMLoginWorkflow(driver);
@@ -36,7 +36,7 @@ public class TC_OM_AddOrder_09 extends MainAccelerator{
 		LOGGER.info("New Line Item added up");
 		orderManagementWorkflow.cancelLineItem();
 		LOGGER.info("Added Line Item cancelled");
-		test.log(LogStatus.PASS, "Cancelling line item functionality working successful");
+		test.log(Status.PASS, "Cancelling line item functionality working successful");
 	}
 
 }

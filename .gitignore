@@ -58,13 +58,13 @@ local.properties
 .texlipse
 
 #HTML report
-*.html
+
 
 # Maven stuff
 target/
 
 # TestNG Output
-test-output/
+
 
 #Screenshot
 screenshots/

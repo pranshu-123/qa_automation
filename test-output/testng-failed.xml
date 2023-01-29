@@ -3,7 +3,7 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.qa.iris.om.TC_OM_AddOrder_06">
+      <class name="com.qa.base.MainAccelerator">
         <methods>
           <include name="setupBeforeMethod"/>
           <include name="beforeClass"/>
@@ -11,9 +11,8 @@
           <include name="tearDown"/>
           <include name="tearDown"/>
           <include name="setup"/>
-          <include name="createNewBuildOrder"/>
         </methods>
-      </class> <!-- com.qa.iris.om.TC_OM_AddOrder_06 -->
+      </class> <!-- com.qa.base.MainAccelerator -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

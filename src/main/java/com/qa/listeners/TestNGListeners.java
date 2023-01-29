@@ -14,6 +14,7 @@ public class TestNGListeners extends MainAccelerator implements ITestListener{
 	public void onFinish(ITestContext arg0) {
 		// TODO Auto-generated method stub
 
+		tearDown();
 	}
 
 	public void onStart(ITestContext arg0) {

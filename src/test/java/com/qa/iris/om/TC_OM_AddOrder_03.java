@@ -10,12 +10,14 @@ import com.aventstack.extentreports.Status;
 import com.qa.annotations.Marker;
 import com.qa.base.MainAccelerator;
 import com.qa.constants.Categories;
+import com.qa.listeners.CustomListener;
 import com.qa.listeners.TestNGListeners;
 import com.qa.utils.Log;
 import com.qa.workflows.NFMHomepageWorkflow;
 import com.qa.workflows.NFMLoginWorkflow;
 import com.qa.workflows.OrderManagementWorkflow;
 
+@Listeners(CustomListener.class)
 @Marker.OrderManagement
 public class TC_OM_AddOrder_03 extends MainAccelerator{
 

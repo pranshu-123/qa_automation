@@ -171,7 +171,7 @@ public class MainAccelerator {
 	 * This will be executed after suite completed.
 	 * Quit the browser
 	 */
-	@AfterSuite
+	@AfterSuite(alwaysRun = true)
 	public void tearDown() {
 		LOGGER.info("Suite completed. Closing the browser.");
 		Properties prop = ConfigReader.readBaseConfig();
@@ -257,7 +257,9 @@ public class MainAccelerator {
 		}
 
 		//FileUtils.deleteDownloadsFolderFiles();
-		driver.quit();
+		if(driver!=null) {
+			driver.quit();
+		}
 	}
 
 	public void sendTestMethodStatus(ITestResult iTestResult, String status) {

@@ -21,7 +21,7 @@ public class AddOrderPageObject {
 	@FindBy(xpath="(//dx-drop-down-box[@valueexpr='orderNo']//input[@class = 'dx-texteditor-input'])[1]")
 	public WebElement orderList;
 
-	@FindBy(xpath="(//tbody[@role='presentation']//tr[contains(@class,'dx-data-row')])[2]/td[2]")
+	@FindBy(xpath="(//tbody[@role='presentation']//tr[contains(@class,'dx-data-row')])[2]/td[1]")
 	public WebElement orders;
 
 	@FindBy(xpath="//div[@class='header-toolbar']//i[@class='dx-icon dx-icon-add']")

@@ -26,6 +26,21 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Properties;
 import java.util.logging.Logger;
+
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
@@ -125,7 +140,7 @@ public class MainAccelerator {
 					LOGGER.info(method.getName() + " is failed due to code issue");
 				}
 				String screenshotImg = ScreenshotHelper.takeScreenshotOfPage(driver);
-			 test.addScreenCaptureFromPath(screenshotImg);
+				test.addScreenCaptureFromPath(screenshotImg);
 			}
 			Log.endTestCase(method.getDeclaringClass().getName() + " - " + method.getName());
 		} catch (Exception e) {
@@ -148,7 +163,7 @@ public class MainAccelerator {
 	 */
 	@AfterClass(alwaysRun = true)
 	public void afterClass() {
-	//	driver.close();
+		//	driver.close();
 		driver.quit();
 	}
 
@@ -160,6 +175,87 @@ public class MainAccelerator {
 	public void tearDown() {
 		LOGGER.info("Suite completed. Closing the browser.");
 		Properties prop = ConfigReader.readBaseConfig();
+
+		// Create object of Property file
+		Properties props = new Properties();
+		// this will set host of server- you can change based on your requirement 
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		// set the port of socket factory 
+		props.put("mail.smtp.socketFactory.port", "465");
+		// set socket factory
+		props.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
+		// set the authentication to true
+		props.put("mail.smtp.auth", "true");
+		// set the port of SMTP server
+		props.put("mail.smtp.port", "465");
+		// This will handle the complete authentication
+		Session session = Session.getDefaultInstance(props,
+				new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication("iris.automation.report@gmail.com", "bodrxbyloywqpwny");
+
+			}
+
+		});
+
+		try {
+
+			// Create object of MimeMessage class
+			Message message = new MimeMessage(session);
+
+			// Set the from address
+			message.setFrom(new InternetAddress("iris.automation.report@gmail.com"));
+
+			// Set the recipient address
+			message.setRecipients(Message.RecipientType.TO,InternetAddress.parse("pranshu@irislogic.com"));
+
+			// Add the subject link
+			message.setSubject("Iris UI Automation Report");
+
+			// Create object to add multimedia type content
+			BodyPart messageBodyPart1 = new MimeBodyPart();
+
+			//			messageBodyPart1.setContent("<h3 style = \"text-align:center\">TEST AUTOMATION REPORT FOR BUILD: </br></hr>"
+			//					+ "<p><b>Execution Summary Report is attached with the mail.</b> Please find the attached suite report. </p>", "text/html");
+
+			// Set the body of email
+			messageBodyPart1.setText("TEST AUTOMATION REPORT FOR BUILD: ");
+
+			// Create another object to add another content
+			MimeBodyPart messageBodyPart2 = new MimeBodyPart();
+
+			// Mention the file which you want to send
+			String filename = System.getProperty("user.dir") +"/test-output/extentTestReport.html";
+
+			// Create data source and pass the filename
+			DataSource source = new FileDataSource(filename);
+
+			// set the handler
+			messageBodyPart2.setDataHandler(new DataHandler(source));
+
+			// set the file
+			messageBodyPart2.setFileName(filename);
+
+			// Create object of MimeMultipart class
+			Multipart multipart = new MimeMultipart();
+
+			// add body part 1
+			multipart.addBodyPart(messageBodyPart2);
+
+			// add body part 2
+			multipart.addBodyPart(messageBodyPart1);
+
+			// set the content
+			message.setContent(multipart);
+			// finally send the email
+			Transport.send(message);
+
+			System.out.println("=====Email Sent=====");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		//FileUtils.deleteDownloadsFolderFiles();
 		driver.quit();
 	}

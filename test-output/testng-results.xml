@@ -1,81 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-01-27T14:10:38Z" name="Default suite" finished-at="2023-01-27T14:14:54Z" duration-ms="256113">
+  <suite started-at="2023-01-29T08:00:41Z" name="Default suite" finished-at="2023-01-29T08:01:33Z" duration-ms="51559">
     <groups>
+      <group name="ORDER_MANAGEMENT">
+        <method signature="TC_OM_AddOrder_03.createNewOrder()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_03@74589991]" name="createNewOrder" class="com.qa.iris.om.TC_OM_AddOrder_03"/>
+      </group> <!-- ORDER_MANAGEMENT -->
     </groups>
-    <test started-at="2023-01-27T14:10:38Z" name="Default test" finished-at="2023-01-27T14:14:54Z" duration-ms="256113">
-      <class name="com.qa.iris.om.TC_OM_AddOrder_06">
-        <test-method is-config="true" signature="setup()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_06@401f7633]" started-at="2023-01-27T14:10:37Z" name="setup" finished-at="2023-01-27T14:10:38Z" duration-ms="427" status="PASS">
+    <test started-at="2023-01-29T08:00:41Z" name="Default test" finished-at="2023-01-29T08:01:33Z" duration-ms="51559">
+      <class name="com.qa.iris.om.TC_OM_AddOrder_03">
+        <test-method is-config="true" signature="setup()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_03@74589991]" started-at="2023-01-29T08:00:41Z" name="setup" finished-at="2023-01-29T08:00:41Z" duration-ms="421" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_06@401f7633]" started-at="2023-01-27T14:10:38Z" name="beforeClass" finished-at="2023-01-27T14:10:43Z" duration-ms="5932" status="PASS">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_03@74589991]" started-at="2023-01-29T08:00:41Z" name="beforeClass" finished-at="2023-01-29T08:00:47Z" duration-ms="5172" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClass -->
-        <test-method is-config="true" signature="setupBeforeMethod(java.lang.reflect.Method)[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_06@401f7633]" started-at="2023-01-27T14:10:43Z" name="setupBeforeMethod" finished-at="2023-01-27T14:10:43Z" duration-ms="2" status="PASS">
+        <test-method is-config="true" signature="setupBeforeMethod(java.lang.reflect.Method)[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_03@74589991]" started-at="2023-01-29T08:00:47Z" name="setupBeforeMethod" finished-at="2023-01-29T08:00:47Z" duration-ms="2" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void com.qa.iris.om.TC_OM_AddOrder_06.createNewBuildOrder()]]>
+                <![CDATA[public void com.qa.iris.om.TC_OM_AddOrder_03.createNewOrder()]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setupBeforeMethod -->
-        <test-method signature="createNewBuildOrder()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_06@401f7633]" started-at="2023-01-27T14:10:43Z" name="createNewBuildOrder" finished-at="2023-01-27T14:14:46Z" duration-ms="242145" status="FAIL">
-          <exception class="org.openqa.selenium.ElementNotInteractableException">
+        <test-method signature="createNewOrder()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_03@74589991]" started-at="2023-01-29T08:00:47Z" name="createNewOrder" finished-at="2023-01-29T08:01:32Z" duration-ms="45872" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createNewOrder -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult, java.lang.reflect.Method)[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_03@74589991]" started-at="2023-01-29T08:01:32Z" name="tearDown" finished-at="2023-01-29T08:01:33Z" duration-ms="476" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=createNewOrder status=SUCCESS method=TC_OM_AddOrder_03.createNewOrder()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_03@74589991] output={null}]]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[public void com.qa.iris.om.TC_OM_AddOrder_03.createNewOrder()]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.openqa.selenium.NoSuchSessionException">
             <message>
-              <![CDATA[element not interactable
-  (Session info: chrome=108.0.5359.125)
+              <![CDATA[Session ID is null. Using WebDriver after calling quit()?
 Build info: version: '4.0.0-beta-4', revision: '29f46d02dd'
 System info: host: 'DESKTOP-U7APJPA', ip: '192.168.1.7', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.13'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [f9bf77e89ce724913fe054f9dae798fb, clickElement {id=625e0117-36a2-498f-bd3e-dcd77d146121}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 108.0.5359.125, chrome: {chromedriverVersion: 108.0.5359.71 (1e0e3868ee06..., userDataDir: C:\Users\bhavs\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:61219}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:61219/devtoo..., se:cdpVersion: 108.0.5359.125, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
-Element: [[ChromeDriver: chrome on WINDOWS (f9bf77e89ce724913fe054f9dae798fb)] -> xpath: (//table//div[contains(@class,'dx-dropdowneditor-button')])[3]]
-Session ID: f9bf77e89ce724913fe054f9dae798fb]]>
+Command: [null, close {}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 108.0.5359.125, chrome: {chromedriverVersion: 108.0.5359.71 (1e0e3868ee06..., userDataDir: C:\Users\bhavs\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:59296}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:59296/devtoo..., se:cdpVersion: 108.0.5359.125, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.openqa.selenium.ElementNotInteractableException: element not interactable
-  (Session info: chrome=108.0.5359.125)
+              <![CDATA[org.openqa.selenium.NoSuchSessionException: Session ID is null. Using WebDriver after calling quit()?
 Build info: version: '4.0.0-beta-4', revision: '29f46d02dd'
 System info: host: 'DESKTOP-U7APJPA', ip: '192.168.1.7', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.13'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [f9bf77e89ce724913fe054f9dae798fb, clickElement {id=625e0117-36a2-498f-bd3e-dcd77d146121}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 108.0.5359.125, chrome: {chromedriverVersion: 108.0.5359.71 (1e0e3868ee06..., userDataDir: C:\Users\bhavs\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:61219}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:61219/devtoo..., se:cdpVersion: 108.0.5359.125, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
-Element: [[ChromeDriver: chrome on WINDOWS (f9bf77e89ce724913fe054f9dae798fb)] -> xpath: (//table//div[contains(@class,'dx-dropdowneditor-button')])[3]]
-Session ID: f9bf77e89ce724913fe054f9dae798fb
-at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
-at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
-at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
-at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
-at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)
+Command: [null, close {}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 108.0.5359.125, chrome: {chromedriverVersion: 108.0.5359.71 (1e0e3868ee06..., userDataDir: C:\Users\bhavs\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:59296}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:59296/devtoo..., se:cdpVersion: 108.0.5359.125, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:145)
 at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:162)
 at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:137)
 at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:612)
-at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:235)
-at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:73)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:52)
-at com.sun.proxy.$Proxy29.click(Unknown Source)
-at com.qa.workflows.OrderManagementWorkflow.addNewLineItem(OrderManagementWorkflow.java:99)
-at com.qa.iris.om.TC_OM_AddOrder_06.createNewBuildOrder(TC_OM_AddOrder_06.java:35)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:667)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:671)
+at org.openqa.selenium.remote.RemoteWebDriver.close(RemoteWebDriver.java:497)
+at com.qa.workflows.NFMHomepageWorkflow.logout(NFMHomepageWorkflow.java:58)
+at com.qa.base.MainAccelerator.tearDown(MainAccelerator.java:156)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 at java.base/java.lang.reflect.Method.invoke(Method.java:566)
 at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
-at org.testng.internal.Invoker.invokeMethod(Invoker.java:583)
+at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:59)
+at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:458)
+at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:222)
+at org.testng.internal.Invoker.invokeMethod(Invoker.java:646)
 at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)
 at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)
 at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
@@ -97,35 +101,15 @@ at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 ]]>
             </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.ElementNotInteractableException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- createNewBuildOrder -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult, java.lang.reflect.Method)[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_06@401f7633]" started-at="2023-01-27T14:14:46Z" name="tearDown" finished-at="2023-01-27T14:14:50Z" duration-ms="4147" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=createNewBuildOrder status=FAILURE method=TC_OM_AddOrder_06.createNewBuildOrder()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_06@401f7633] output={null}]]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[public void com.qa.iris.om.TC_OM_AddOrder_06.createNewBuildOrder()]]>
-              </value>
-            </param>
-          </params>
+          </exception> <!-- org.openqa.selenium.NoSuchSessionException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="afterClass()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_06@401f7633]" started-at="2023-01-27T14:14:50Z" name="afterClass" finished-at="2023-01-27T14:14:54Z" duration-ms="3845" status="PASS">
+        <test-method is-config="true" signature="afterClass()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_03@74589991]" started-at="2023-01-29T08:01:33Z" name="afterClass" finished-at="2023-01-29T08:01:33Z" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterClass -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_06@401f7633]" started-at="2023-01-27T14:14:54Z" name="tearDown" finished-at="2023-01-27T14:14:59Z" duration-ms="5547" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-      </class> <!-- com.qa.iris.om.TC_OM_AddOrder_06 -->
+      </class> <!-- com.qa.iris.om.TC_OM_AddOrder_03 -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

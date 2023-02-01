@@ -46,9 +46,9 @@ public class OrderManagementWorkflow {
 	}
 	
 	public void selectOrder() {
-		waitExecuter.sleep(1000);
-		waitExecuter.waitUntilElementPresent(addOrderPageObject.orderList);
-		addOrderPageObject.orderList.click();
+		waitExecuter.sleep(5000);
+		waitExecuter.waitUntilElementPresent(addOrderPageObject.orderDropdown);
+		addOrderPageObject.orderDropdown.click();
 		waitExecuter.sleep(3000);
 		addOrderPageObject.orders.click();
 		waitExecuter.sleep(1000);
@@ -96,6 +96,7 @@ public class OrderManagementWorkflow {
 		addOrderPageObject.addNewLineItem.click();
 		JavaScriptExecuter.scrollOnElement(driver, addOrderPageObject.expandLineItems.get(0));
 		addOrderPageObject.expandLineItems.get(0).click();
+		JavaScriptExecuter.scrollOnElement(driver, addOrderPageObject.itemNo);
 		addOrderPageObject.itemNo.click();
 		addOrderPageObject.itemList.click();
 	}

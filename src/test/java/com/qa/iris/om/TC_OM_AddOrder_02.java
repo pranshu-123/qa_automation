@@ -19,10 +19,10 @@ public class TC_OM_AddOrder_02 extends MainAccelerator{
 
 	
 	@Test(groups = Categories.ORDER_MANAGEMENT)
-	public void verifyAddOrderAddressDetailPage() {
-		test = extent.createTest("verifyAddOrderAddressDetailPage", "Verify Add Order Address detail page elements");
+	public void TC_OM_AddOrder_02_verifyAddOrderAddressDetailPage() {
+		test = extent.createTest("TC_OM_AddOrder_02_verifyAddOrderAddressDetailPage", "Verify Add Order Address detail page elements");
 		test.assignCategory("OrderManagement");
-		Log.startTestCase("verifyAddOrderAddressDetailPage");
+		Log.startTestCase("TC_OM_AddOrder_02_verifyAddOrderAddressDetailPage");
 		NFMLoginWorkflow loginWorkflow = new NFMLoginWorkflow(driver);
 		NFMHomepageWorkflow homepageWorkflow = new NFMHomepageWorkflow(driver);
 		OrderManagementWorkflow orderManagementWorkflow = new OrderManagementWorkflow(driver);

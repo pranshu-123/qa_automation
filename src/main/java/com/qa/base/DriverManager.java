@@ -1,12 +1,9 @@
 package com.qa.base;
 
-
 import com.qa.io.ConfigReader;
 import com.qa.utils.Log;
 
-
 import io.github.bonigarcia.wdm.WebDriverManager;
-
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
@@ -22,17 +19,13 @@ import java.time.Duration;
 import java.util.Properties;
 import java.util.logging.Level;
 
-
 public class DriverManager {
-
 
 	WebDriver driver;
 	static Properties prop = ConfigReader.readBaseConfig();
 	static String executeOn = prop.getProperty("execution");
 
-
 	public static final Logger log = (Logger) LogManager.getLogger();
-
 
 	public WebDriver getDriver(String browser) {
 		if (driver == null) {
@@ -42,27 +35,18 @@ public class DriverManager {
 		return driver;
 	}
 
-
 	public WebDriver initializeDriver(String browser) {
 
-
-		if (browser.equalsIgnoreCase("chrome")) {
-			log.info("Using Chrome browser");
-			try {
-				driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),getChromeOptionWithNetworkEnable());
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-			}
-		}
+		log.info("Using Chrome browser");
+		driver = new ChromeDriver(getChromeOptionWithNetworkEnable());
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		String url = prop.getProperty("url");
 		driver.get(url);
 
-
 		return driver;
-	}
 
+	}
 
 	/**
 	 *
@@ -71,10 +55,12 @@ public class DriverManager {
 	private ChromeOptions getChromeOptionWithNetworkEnable() {
 		LoggingPreferences logPrefs = new LoggingPreferences();
 		logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
-		System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+		WebDriverManager.chromedriver().setup();
 		ChromeOptions chromeOptions = new ChromeOptions();
 		chromeOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage");
 		chromeOptions.setExperimentalOption("useAutomationExtension", false);
 		return chromeOptions;
 	}
 }
+
+

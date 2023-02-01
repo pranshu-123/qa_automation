@@ -18,10 +18,10 @@ public class TC_OM_AddOrder_06 extends MainAccelerator{
 
 
 	@Test
-	public void createNewBuildOrder() {
-		test = extent.createTest("createNewBuildOrder", "Create New Build Order");
+	public void TC_OM_AddOrder_06_createNewBuildOrder() {
+		test = extent.createTest("TC_OM_AddOrder_06_createNewBuildOrder", "Create New Build Order");
 		test.assignCategory("OrderManagement");
-		Log.startTestCase("createNewBuildOrder");
+		Log.startTestCase("TC_OM_AddOrder_06_createNewBuildOrder");
 		NFMLoginWorkflow loginWorkflow = new NFMLoginWorkflow(driver);
 		NFMHomepageWorkflow homepageWorkflow = new NFMHomepageWorkflow(driver);
 		OrderManagementWorkflow orderManagementWorkflow = new OrderManagementWorkflow(driver);

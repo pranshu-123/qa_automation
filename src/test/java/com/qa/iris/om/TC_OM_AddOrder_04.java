@@ -19,10 +19,10 @@ public class TC_OM_AddOrder_04 extends MainAccelerator{
 
 
 	@Test(groups = Categories.ORDER_MANAGEMENT)
-	public void editNewOrder() {
-		test = extent.createTest("editNewOrder", "Edit existing Order");
+	public void TC_OM_AddOrder_04_editNewOrder() {
+		test = extent.createTest("TC_OM_AddOrder_04_editNewOrder", "Edit existing Order");
 		test.assignCategory("OrderManagement");
-		Log.startTestCase("editNewOrder");
+		Log.startTestCase("TC_OM_AddOrder_04_editNewOrder");
 		NFMLoginWorkflow loginWorkflow = new NFMLoginWorkflow(driver);
 		NFMHomepageWorkflow homepageWorkflow = new NFMHomepageWorkflow(driver);
 		OrderManagementWorkflow orderManagementWorkflow = new OrderManagementWorkflow(driver);

@@ -18,10 +18,10 @@ public class TC_OM_AddOrder_09 extends MainAccelerator{
 
 
 	@Test
-	public void verifyCancelFunctionalForLineItem() {
-		test = extent.createTest("verifyCancelFunctionalForLineItem", "Verify Cancel functionality");
+	public void TC_OM_AddOrder_09_verifyCancelFunctionalForLineItem() {
+		test = extent.createTest("TC_OM_AddOrder_09_verifyCancelFunctionalForLineItem", "Verify Cancel functionality");
 		test.assignCategory("OrderManagement");
-		Log.startTestCase("verifyCancelFunctionalForLineItem");
+		Log.startTestCase("TC_OM_AddOrder_09_verifyCancelFunctionalForLineItem");
 		NFMLoginWorkflow loginWorkflow = new NFMLoginWorkflow(driver);
 		NFMHomepageWorkflow homepageWorkflow = new NFMHomepageWorkflow(driver);
 		OrderManagementWorkflow orderManagementWorkflow = new OrderManagementWorkflow(driver);

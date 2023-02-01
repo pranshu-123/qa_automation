@@ -20,10 +20,10 @@ public class TC_OM_AddOrder_05 extends MainAccelerator{
 
 
 	@Test(groups = Categories.ORDER_MANAGEMENT)
-	public void deleteNewOrder() {
-		test = extent.createTest("deleteNewOrder", "Delete existing Order");
+	public void TC_OM_AddOrder_05_deleteNewOrder() {
+		test = extent.createTest("TC_OM_AddOrder_05_deleteNewOrder", "Delete existing Order");
 		test.assignCategory("OrderManagement");
-		Log.startTestCase("deleteNewOrder");
+		Log.startTestCase("TC_OM_AddOrder_05_deleteNewOrder");
 		NFMLoginWorkflow loginWorkflow = new NFMLoginWorkflow(driver);
 		NFMHomepageWorkflow homepageWorkflow = new NFMHomepageWorkflow(driver);
 		OrderManagementWorkflow orderManagementWorkflow = new OrderManagementWorkflow(driver);

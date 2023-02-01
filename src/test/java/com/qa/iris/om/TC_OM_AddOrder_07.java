@@ -18,10 +18,10 @@ public class TC_OM_AddOrder_07 extends MainAccelerator{
 
 
 	@Test
-	public void copyExistingLineItem() {
-		test = extent.createTest("copyExistingLineItem", "Copy existing Line details");
+	public void TC_OM_AddOrder_07_copyExistingLineItem() {
+		test = extent.createTest("TC_OM_AddOrder_07_copyExistingLineItem", "Copy existing Line details");
 		test.assignCategory("OrderManagement");
-		Log.startTestCase("copyExistingLineItem");
+		Log.startTestCase("TC_OM_AddOrder_07_copyExistingLineItem");
 		NFMLoginWorkflow loginWorkflow = new NFMLoginWorkflow(driver);
 		NFMHomepageWorkflow homepageWorkflow = new NFMHomepageWorkflow(driver);
 		OrderManagementWorkflow orderManagementWorkflow = new OrderManagementWorkflow(driver);

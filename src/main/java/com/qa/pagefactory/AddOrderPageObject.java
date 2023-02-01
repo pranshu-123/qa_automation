@@ -18,10 +18,14 @@ public class AddOrderPageObject {
 	@FindBy(xpath="//span[@class = 'dx-tab-text' and contains(text(),'Addresses')]")
 	public WebElement AddressTab;
 
-	@FindBy(xpath="(//dx-drop-down-box[@valueexpr='orderNo']//input[@class = 'dx-texteditor-input'])[1]")
+	@FindBy(xpath="//tbody[@role='presentation']//tr[contains(@class,'dx-selection')]/td[1]")
 	public WebElement orderList;
+	
 
-	@FindBy(xpath="(//tbody[@role='presentation']//tr[contains(@class,'dx-data-row')])[2]/td[1]")
+	@FindBy(xpath="//dx-drop-down-box[@label='Orders']")
+	public WebElement orderDropdown;
+
+	@FindBy(xpath="(//tbody[@role='presentation']//tr[contains(@class,'dx-data-row')])[3]/td[2]")
 	public WebElement orders;
 
 	@FindBy(xpath="//div[@class='header-toolbar']//i[@class='dx-icon dx-icon-add']")

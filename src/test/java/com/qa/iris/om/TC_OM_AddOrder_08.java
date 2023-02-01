@@ -18,10 +18,10 @@ public class TC_OM_AddOrder_08 extends MainAccelerator{
 
 
 	@Test
-	public void deleteExistingLineItem() {
-		test = extent.createTest("deleteExistingLineItem", "Delete existing Line Item");
+	public void TC_OM_AddOrder_08_deleteExistingLineItem() {
+		test = extent.createTest("TC_OM_AddOrder_08_deleteExistingLineItem", "Delete existing Line Item");
 		test.assignCategory("OrderManagement");
-		Log.startTestCase("deleteExistingLineItem");
+		Log.startTestCase("TC_OM_AddOrder_08_deleteExistingLineItem");
 		NFMLoginWorkflow loginWorkflow = new NFMLoginWorkflow(driver);
 		NFMHomepageWorkflow homepageWorkflow = new NFMHomepageWorkflow(driver);
 		OrderManagementWorkflow orderManagementWorkflow = new OrderManagementWorkflow(driver);

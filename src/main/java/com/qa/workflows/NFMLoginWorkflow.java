@@ -4,6 +4,7 @@ import java.util.Properties;
 import java.util.logging.Logger;
 import org.openqa.selenium.WebDriver;
 import com.qa.constants.ConfigConstants;
+import com.qa.constants.SystemVariables;
 import com.qa.io.ConfigReader;
 import com.qa.pagefactory.NFMLoginPageObject;
 import com.qa.utils.TestUtils;
@@ -30,8 +31,17 @@ public class NFMLoginWorkflow {
 
 	public void loginToOM() {
 		Properties prop = ConfigReader.readBaseConfig();
-		String uname = prop.getProperty(ConfigConstants.IrisConfig.USERNAME);
-		String password = prop.getProperty(ConfigConstants.IrisConfig.PASSWORD);
+		String build_number = SystemVariables.BUILD_NUMBER.toString();
+		String uname;
+		String password;
+		if(build_number==null) {
+			uname = prop.getProperty(ConfigConstants.IrisConfig.USERNAME);
+			password = prop.getProperty(ConfigConstants.IrisConfig.PASSWORD);
+		}
+		else {
+			uname = SystemVariables.USERNAME.toString();
+			password = SystemVariables.PASSWORD.toString();
+		}
 		nfmLoginPageObject.username.sendKeys(uname);
 		nfmLoginPageObject.password.sendKeys(password);
 		nfmLoginPageObject.login.click();

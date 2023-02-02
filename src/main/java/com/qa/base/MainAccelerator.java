@@ -174,6 +174,8 @@ public class MainAccelerator {
 	@AfterSuite(alwaysRun = true)
 	public void tearDown() {
 		LOGGER.info("Suite completed. Closing the browser.");
+		String build_number = SystemVariables.BUILD_NUMBER.toString();
+		if(build_number!=null) {
 		Properties prop = ConfigReader.readBaseConfig();
 
 		// Create object of Property file
@@ -205,9 +207,9 @@ public class MainAccelerator {
 
 			// Set the from address
 			message.setFrom(new InternetAddress("iris.automation.report@gmail.com"));
-
+			String emailTo = SystemVariables.EMAIL_TO.toString();
 			// Set the recipient address
-			message.setRecipients(Message.RecipientType.TO,InternetAddress.parse("pranshu@irislogic.com"));
+			message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(emailTo));
 
 			// Add the subject link
 			message.setSubject("Iris UI Automation Report");
@@ -219,8 +221,8 @@ public class MainAccelerator {
 			//					+ "<p><b>Execution Summary Report is attached with the mail.</b> Please find the attached suite report. </p>", "text/html");
 
 			// Set the body of email
-			messageBodyPart1.setText("TEST AUTOMATION REPORT FOR BUILD: ");
-
+			messageBodyPart1.setText("TEST AUTOMATION REPORT FOR BUILD: " + build_number);
+			messageBodyPart1.setDescription("Please download the attachment and open in browser to view the results.");
 			// Create another object to add another content
 			MimeBodyPart messageBodyPart2 = new MimeBodyPart();
 
@@ -254,6 +256,7 @@ public class MainAccelerator {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
 		}
 
 		//FileUtils.deleteDownloadsFolderFiles();

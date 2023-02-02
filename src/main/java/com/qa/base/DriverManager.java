@@ -45,8 +45,8 @@ public class DriverManager {
 
 
 	public WebDriver initializeDriver(String browser) {
-
 		String build_number = SystemVariables.BUILD_NUMBER.toString();
+		log.info("Build Number: " + build_number);
 		if(build_number!=null) {
 			if (browser.equalsIgnoreCase("chrome")) {
 				log.info("Using Chrome browser");

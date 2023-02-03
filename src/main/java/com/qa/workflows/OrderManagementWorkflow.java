@@ -26,12 +26,12 @@ public class OrderManagementWorkflow {
 		waitExecuter = new WaitExecuter(driver);
 		addOrderPageObject = new AddOrderPageObject(driver);
 	}
-	
+
 	public void selectAddOrderMasterDetail() {
 		waitExecuter.waitUntilElementPresent(addOrderPageObject.addOrderMasterDetail);
 		addOrderPageObject.addOrderMasterDetail.click();
 	}
-	
+
 	public void validateOrderPageElements() {
 		Assert.assertTrue(addOrderPageObject.AddressTab.isDisplayed());
 		LOGGER.info("Address tab is displayed");
@@ -44,7 +44,7 @@ public class OrderManagementWorkflow {
 		Assert.assertTrue(addOrderPageObject.createNewOrder.isDisplayed());
 		LOGGER.info("Create New Order button is displayed");
 	}
-	
+
 	public void selectOrder() {
 		waitExecuter.sleep(5000);
 		waitExecuter.waitUntilElementPresent(addOrderPageObject.orderDropdown);
@@ -53,69 +53,79 @@ public class OrderManagementWorkflow {
 		addOrderPageObject.orders.click();
 		waitExecuter.sleep(1000);
 	}
-	
+
 	public void selectAddressTab() {
 		addOrderPageObject.AddressTab.click();
 	}
-	
+
 	public void validateAddressPageElements() {
 		Assert.assertTrue(addOrderPageObject.customerAddress.isDisplayed());
 		LOGGER.info("Customer Address section is displayed");
 		Assert.assertTrue(addOrderPageObject.shippingAddress.isDisplayed());
 		LOGGER.info("Shipping Address section is displayed");
 	}
-	
+
 	public void provideAdvanceAmount(String amount) {
 		waitExecuter.sleep(3000);
 		addOrderPageObject.advanceAmount.sendKeys(amount);
 	}
-	
+
 	public void saveOrder() {
 		waitExecuter.sleep(3000);
 		JavaScriptExecuter.scrollOnElement(driver, addOrderPageObject.saveOrder);
+		waitExecuter.sleep(3000);
 		addOrderPageObject.saveOrder.click();
 	}
-	
+
 	public void createOrder() {
+		waitExecuter.sleep(2000);
+		JavaScriptExecuter.scrollOnElement(driver, addOrderPageObject.createNewOrder);
 		addOrderPageObject.createNewOrder.click();
 	}
-	
+
 	public void editCreatedOrder() {
-		provideAdvanceAmount("3");
+		deleteLineItem();
 		createOrder();
 	}
 
 	public void deleteOrder() {
 		waitExecuter.sleep(2000);
 		addOrderPageObject.deleteOrder.click();
-		
+
 	}
-	
+
 	public void addNewLineItem() {
 		waitExecuter.sleep(4000);
-		addOrderPageObject.addNewLineItem.click();
+		addOrderPageObject.addNewLineItem.get(1).click();
 		JavaScriptExecuter.scrollOnElement(driver, addOrderPageObject.expandLineItems.get(0));
 		addOrderPageObject.expandLineItems.get(0).click();
 		JavaScriptExecuter.scrollOnElement(driver, addOrderPageObject.itemNo);
 		addOrderPageObject.itemNo.click();
+		waitExecuter.sleep(3000);
 		addOrderPageObject.itemList.click();
 	}
-	
+
 	public void copyLineItem() {
 		waitExecuter.sleep(1000);
 		addOrderPageObject.copyLineItems.get(0).click();
-		
+
 	}
-	
+
 	public void deleteLineItem() {
 		waitExecuter.sleep(1000);
 		addOrderPageObject.deleteLineItems.get(0).click();
-		
+		waitExecuter.sleep(1000);
+		addOrderPageObject.yes.click();
 	}
-	
+
 	public void cancelLineItem() {
+		waitExecuter.sleep(4000);
+		addOrderPageObject.addNewLineItem.get(1).click();
+		JavaScriptExecuter.scrollOnElement(driver, addOrderPageObject.expandLineItems.get(0));
+		addOrderPageObject.expandLineItems.get(0).click();
+		JavaScriptExecuter.scrollOnElement(driver, addOrderPageObject.itemNo);
 		waitExecuter.sleep(1000);
 		addOrderPageObject.cancel.click();
-		
+
 	}
 }

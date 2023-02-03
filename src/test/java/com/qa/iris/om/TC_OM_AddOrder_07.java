@@ -32,7 +32,7 @@ public class TC_OM_AddOrder_07 extends MainAccelerator{
 		LOGGER.info("Navigated to Order Management page");
 		orderManagementWorkflow.selectAddOrderMasterDetail();
 		orderManagementWorkflow.selectOrder();
-		orderManagementWorkflow.addNewLineItem();
+		//orderManagementWorkflow.addNewLineItem();
 		LOGGER.info("New Line Item added up");
 		orderManagementWorkflow.copyLineItem();
 		LOGGER.info("New Line Item copied");

@@ -2,62 +2,59 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-02-02T14:32:10Z" name="Default suite" finished-at="2023-02-02T14:34:21Z" duration-ms="131511">
+  <suite started-at="2023-02-03T16:47:23Z" name="Default suite" finished-at="2023-02-03T16:48:38Z" duration-ms="74922">
     <groups>
-      <group name="ORDER_MANAGEMENT">
-        <method signature="TC_OM_AddOrder_05.TC_OM_AddOrder_05_deleteNewOrder()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_05@146dfe6]" name="TC_OM_AddOrder_05_deleteNewOrder" class="com.qa.iris.om.TC_OM_AddOrder_05"/>
-      </group> <!-- ORDER_MANAGEMENT -->
     </groups>
-    <test started-at="2023-02-02T14:32:10Z" name="Default test" finished-at="2023-02-02T14:34:21Z" duration-ms="131511">
-      <class name="com.qa.iris.om.TC_OM_AddOrder_05">
-        <test-method is-config="true" signature="setup()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_05@146dfe6]" started-at="2023-02-02T14:32:09Z" name="setup" finished-at="2023-02-02T14:32:10Z" duration-ms="408" status="PASS">
+    <test started-at="2023-02-03T16:47:23Z" name="Default test" finished-at="2023-02-03T16:48:38Z" duration-ms="74922">
+      <class name="com.qa.iris.om.TC_OM_AddOrder_09">
+        <test-method is-config="true" signature="setup()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_09@146dfe6]" started-at="2023-02-03T16:47:22Z" name="setup" finished-at="2023-02-03T16:47:23Z" duration-ms="408" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_05@146dfe6]" started-at="2023-02-02T14:32:10Z" name="beforeClass" finished-at="2023-02-02T14:32:19Z" duration-ms="8608" status="PASS">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_09@146dfe6]" started-at="2023-02-03T16:47:23Z" name="beforeClass" finished-at="2023-02-03T16:47:28Z" duration-ms="5259" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClass -->
-        <test-method is-config="true" signature="setupBeforeMethod(java.lang.reflect.Method)[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_05@146dfe6]" started-at="2023-02-02T14:32:19Z" name="setupBeforeMethod" finished-at="2023-02-02T14:32:19Z" duration-ms="3" status="PASS">
+        <test-method is-config="true" signature="setupBeforeMethod(java.lang.reflect.Method)[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_09@146dfe6]" started-at="2023-02-03T16:47:28Z" name="setupBeforeMethod" finished-at="2023-02-03T16:47:28Z" duration-ms="2" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void com.qa.iris.om.TC_OM_AddOrder_05.TC_OM_AddOrder_05_deleteNewOrder()]]>
+                <![CDATA[public void com.qa.iris.om.TC_OM_AddOrder_09.TC_OM_AddOrder_09_verifyCancelFunctionalForLineItem()]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setupBeforeMethod -->
-        <test-method signature="TC_OM_AddOrder_05_deleteNewOrder()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_05@146dfe6]" started-at="2023-02-02T14:32:19Z" name="TC_OM_AddOrder_05_deleteNewOrder" finished-at="2023-02-02T14:34:16Z" duration-ms="117876" status="PASS">
+        <test-method signature="TC_OM_AddOrder_09_verifyCancelFunctionalForLineItem()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_09@146dfe6]" started-at="2023-02-03T16:47:28Z" name="TC_OM_AddOrder_09_verifyCancelFunctionalForLineItem" finished-at="2023-02-03T16:48:33Z" duration-ms="64686" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC_OM_AddOrder_05_deleteNewOrder -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult, java.lang.reflect.Method)[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_05@146dfe6]" started-at="2023-02-02T14:34:16Z" name="tearDown" finished-at="2023-02-02T14:34:21Z" duration-ms="4198" status="PASS">
+        </test-method> <!-- TC_OM_AddOrder_09_verifyCancelFunctionalForLineItem -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult, java.lang.reflect.Method)[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_09@146dfe6]" started-at="2023-02-03T16:48:33Z" name="tearDown" finished-at="2023-02-03T16:48:37Z" duration-ms="4109" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=TC_OM_AddOrder_05_deleteNewOrder status=SUCCESS method=TC_OM_AddOrder_05.TC_OM_AddOrder_05_deleteNewOrder()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_05@146dfe6] output={null}]]]>
+                <![CDATA[[TestResult name=TC_OM_AddOrder_09_verifyCancelFunctionalForLineItem status=SUCCESS method=TC_OM_AddOrder_09.TC_OM_AddOrder_09_verifyCancelFunctionalForLineItem()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_09@146dfe6] output={null}]]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[public void com.qa.iris.om.TC_OM_AddOrder_05.TC_OM_AddOrder_05_deleteNewOrder()]]>
+                <![CDATA[public void com.qa.iris.om.TC_OM_AddOrder_09.TC_OM_AddOrder_09_verifyCancelFunctionalForLineItem()]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="afterClass()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_05@146dfe6]" started-at="2023-02-02T14:34:21Z" name="afterClass" finished-at="2023-02-02T14:34:21Z" duration-ms="807" status="PASS">
+        <test-method is-config="true" signature="afterClass()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_09@146dfe6]" started-at="2023-02-03T16:48:37Z" name="afterClass" finished-at="2023-02-03T16:48:38Z" duration-ms="838" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterClass -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_05@146dfe6]" started-at="2023-02-02T14:34:21Z" name="tearDown" finished-at="2023-02-02T14:34:21Z" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_09@146dfe6]" started-at="2023-02-03T16:48:38Z" name="tearDown" finished-at="2023-02-03T16:48:38Z" duration-ms="3" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- com.qa.iris.om.TC_OM_AddOrder_05 -->
+      </class> <!-- com.qa.iris.om.TC_OM_AddOrder_09 -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

@@ -39,7 +39,7 @@ public class TC_OM_AddOrder_03 extends MainAccelerator{
 		LOGGER.info("Navigated to Order Management page");
 		orderManagementWorkflow.selectAddOrderMasterDetail();
 		orderManagementWorkflow.selectOrder();
-		orderManagementWorkflow.provideAdvanceAmount("1");
+		orderManagementWorkflow.deleteLineItem();
 		orderManagementWorkflow.saveOrder();
 		orderManagementWorkflow.createOrder();
 		test.log(Status.PASS, "Order Created successfully");

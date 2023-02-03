@@ -38,7 +38,7 @@ public class AddOrderPageObject {
 	public WebElement deleteOrder;
 	
 	@FindBy(xpath="//div[@class='dx-item dx-toolbar-item dx-toolbar-button']//i[@class='dx-icon dx-icon-add']")
-	public WebElement addNewLineItem;
+	public List<WebElement> addNewLineItem;
 	
 	@FindBy(xpath="//a[@title='Delete']")
 	public List<WebElement> deleteLineItems;
@@ -60,6 +60,9 @@ public class AddOrderPageObject {
 	
 	@FindBy(xpath="//span[contains(text(),'Yes')]")
 	public WebElement yes;
+	
+	@FindBy(xpath="//span[contains(text(),'Save')]")
+	public WebElement save;
 	
 	@FindBy(xpath="//span[contains(text(),'Customer Address')]")
 	public WebElement customerAddress;

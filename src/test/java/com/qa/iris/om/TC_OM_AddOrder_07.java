@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import com.aventstack.extentreports.Status;
 import com.qa.annotations.Marker;
 import com.qa.base.MainAccelerator;
+import com.qa.constants.Categories;
 import com.qa.utils.Log;
 import com.qa.workflows.NFMHomepageWorkflow;
 import com.qa.workflows.NFMLoginWorkflow;
@@ -17,7 +18,7 @@ public class TC_OM_AddOrder_07 extends MainAccelerator{
 	private static final Logger LOGGER = Logger.getLogger(TC_OM_AddOrder_07.class.getName());
 
 
-	@Test
+	@Test(groups = Categories.ORDER_MANAGEMENT)
 	public void TC_OM_AddOrder_07_copyExistingLineItem() {
 		test = extent.createTest("TC_OM_AddOrder_07_copyExistingLineItem", "Copy existing Line details");
 		test.assignCategory("OrderManagement");

@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
 
 /**
  * @author Pranshu
- * Common Utilily class to maintain log
+ * Common Utility class to maintain log
  */
 public class LoggingUtils {
     private Logger logger;

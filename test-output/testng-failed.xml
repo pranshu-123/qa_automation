@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.qa.iris.om.TC_OM_AddOrder_09">
+      <class name="com.qa.iris.om.purchaseorder.TC_OM_PurchaseOrder_03">
         <methods>
           <include name="setupBeforeMethod"/>
           <include name="beforeClass"/>
-          <include name="TC_OM_AddOrder_09_verifyCancelFunctionalForLineItem"/>
+          <include name="TC_OM_PurchaseOrder_03_createNewOrder"/>
           <include name="afterClass"/>
           <include name="tearDown"/>
           <include name="tearDown"/>
           <include name="setup"/>
         </methods>
-      </class> <!-- com.qa.iris.om.TC_OM_AddOrder_09 -->
+      </class> <!-- com.qa.iris.om.purchaseorder.TC_OM_PurchaseOrder_03 -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -1,60 +1,135 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+<testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-02-03T16:47:23Z" name="Default suite" finished-at="2023-02-03T16:48:38Z" duration-ms="74922">
+  <suite started-at="2023-11-09T19:55:27 IST" name="Default suite" finished-at="2023-11-09T19:57:53 IST" duration-ms="145574">
     <groups>
+      <group name="PURCHASE_ORDER">
+        <method signature="TC_OM_PurchaseOrder_03.TC_OM_PurchaseOrder_03_createNewOrder()[pri:0, instance:com.qa.iris.om.purchaseorder.TC_OM_PurchaseOrder_03@201a4587]" name="TC_OM_PurchaseOrder_03_createNewOrder" class="com.qa.iris.om.purchaseorder.TC_OM_PurchaseOrder_03"/>
+      </group> <!-- PURCHASE_ORDER -->
     </groups>
-    <test started-at="2023-02-03T16:47:23Z" name="Default test" finished-at="2023-02-03T16:48:38Z" duration-ms="74922">
-      <class name="com.qa.iris.om.TC_OM_AddOrder_09">
-        <test-method is-config="true" signature="setup()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_09@146dfe6]" started-at="2023-02-03T16:47:22Z" name="setup" finished-at="2023-02-03T16:47:23Z" duration-ms="408" status="PASS">
+    <test started-at="2023-11-09T19:55:27 IST" name="Default test" finished-at="2023-11-09T19:57:53 IST" duration-ms="145574">
+      <class name="com.qa.iris.om.purchaseorder.TC_OM_PurchaseOrder_03">
+        <test-method is-config="true" signature="setup()[pri:0, instance:com.qa.iris.om.purchaseorder.TC_OM_PurchaseOrder_03@201a4587]" started-at="2023-11-09T19:55:27 IST" name="setup" finished-at="2023-11-09T19:55:27 IST" duration-ms="461" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_09@146dfe6]" started-at="2023-02-03T16:47:23Z" name="beforeClass" finished-at="2023-02-03T16:47:28Z" duration-ms="5259" status="PASS">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.qa.iris.om.purchaseorder.TC_OM_PurchaseOrder_03@201a4587]" started-at="2023-11-09T19:55:27 IST" name="beforeClass" finished-at="2023-11-09T19:55:33 IST" duration-ms="5859" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClass -->
-        <test-method is-config="true" signature="setupBeforeMethod(java.lang.reflect.Method)[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_09@146dfe6]" started-at="2023-02-03T16:47:28Z" name="setupBeforeMethod" finished-at="2023-02-03T16:47:28Z" duration-ms="2" status="PASS">
+        <test-method is-config="true" signature="setupBeforeMethod(java.lang.reflect.Method)[pri:0, instance:com.qa.iris.om.purchaseorder.TC_OM_PurchaseOrder_03@201a4587]" started-at="2023-11-09T19:55:33 IST" name="setupBeforeMethod" finished-at="2023-11-09T19:55:33 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void com.qa.iris.om.TC_OM_AddOrder_09.TC_OM_AddOrder_09_verifyCancelFunctionalForLineItem()]]>
+                <![CDATA[public void com.qa.iris.om.purchaseorder.TC_OM_PurchaseOrder_03.TC_OM_PurchaseOrder_03_createNewOrder()]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setupBeforeMethod -->
-        <test-method signature="TC_OM_AddOrder_09_verifyCancelFunctionalForLineItem()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_09@146dfe6]" started-at="2023-02-03T16:47:28Z" name="TC_OM_AddOrder_09_verifyCancelFunctionalForLineItem" finished-at="2023-02-03T16:48:33Z" duration-ms="64686" status="PASS">
+        <test-method signature="TC_OM_PurchaseOrder_03_createNewOrder()[pri:0, instance:com.qa.iris.om.purchaseorder.TC_OM_PurchaseOrder_03@201a4587]" started-at="2023-11-09T19:55:33 IST" name="TC_OM_PurchaseOrder_03_createNewOrder" finished-at="2023-11-09T19:57:44 IST" duration-ms="130543" status="FAIL">
+          <exception class="org.openqa.selenium.NoSuchElementException">
+            <message>
+              <![CDATA[no such element: Unable to locate element: {"method":"xpath","selector":"//span[contains(text(),'Yes')]"}
+  (Session info: chrome=119.0.6045.124)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: '4.0.0-beta-4', revision: '29f46d02dd'
+System info: host: 'DESKTOP-U7APJPA', ip: '192.168.1.12', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.13'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [feade8a0c629b2697ac566bd51beb32d, findElement {using=xpath, value=//span[contains(text(),'Yes')]}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 119.0.6045.124, chrome: {chromedriverVersion: 119.0.6045.105 (38c72552c5e..., userDataDir: C:\Users\bhavs\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:62445}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:62445/devtoo..., se:cdpVersion: 119.0.6045.124, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: feade8a0c629b2697ac566bd51beb32d]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//span[contains(text(),'Yes')]"}
+  (Session info: chrome=119.0.6045.124)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: '4.0.0-beta-4', revision: '29f46d02dd'
+System info: host: 'DESKTOP-U7APJPA', ip: '192.168.1.12', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.13'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [feade8a0c629b2697ac566bd51beb32d, findElement {using=xpath, value=//span[contains(text(),'Yes')]}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 119.0.6045.124, chrome: {chromedriverVersion: 119.0.6045.105 (38c72552c5e..., userDataDir: C:\Users\bhavs\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:62445}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:62445/devtoo..., se:cdpVersion: 119.0.6045.124, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: feade8a0c629b2697ac566bd51beb32d
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:162)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:137)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:612)
+at org.openqa.selenium.remote.RemoteWebDriver$Mechanism$2.findElement(RemoteWebDriver.java:1251)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:379)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:373)
+at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:70)
+at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:39)
+at com.sun.proxy.$Proxy30.click(Unknown Source)
+at com.qa.workflows.PurchaseManagementWorkflow.createNewPurchaseOrder(PurchaseManagementWorkflow.java:51)
+at com.qa.iris.om.purchaseorder.TC_OM_PurchaseOrder_03.TC_OM_PurchaseOrder_03_createNewOrder(TC_OM_PurchaseOrder_03.java:41)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:132)
+at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:599)
+at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:174)
+at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:822)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+at org.testng.TestRunner.privateRun(TestRunner.java:764)
+at org.testng.TestRunner.run(TestRunner.java:585)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:384)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:378)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:337)
+at org.testng.SuiteRunner.run(SuiteRunner.java:286)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1218)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1140)
+at org.testng.TestNG.runSuites(TestNG.java:1069)
+at org.testng.TestNG.run(TestNG.java:1037)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.NoSuchElementException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC_OM_AddOrder_09_verifyCancelFunctionalForLineItem -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult, java.lang.reflect.Method)[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_09@146dfe6]" started-at="2023-02-03T16:48:33Z" name="tearDown" finished-at="2023-02-03T16:48:37Z" duration-ms="4109" status="PASS">
+        </test-method> <!-- TC_OM_PurchaseOrder_03_createNewOrder -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult, java.lang.reflect.Method)[pri:0, instance:com.qa.iris.om.purchaseorder.TC_OM_PurchaseOrder_03@201a4587]" started-at="2023-11-09T19:57:44 IST" name="tearDown" finished-at="2023-11-09T19:57:52 IST" duration-ms="8356" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=TC_OM_AddOrder_09_verifyCancelFunctionalForLineItem status=SUCCESS method=TC_OM_AddOrder_09.TC_OM_AddOrder_09_verifyCancelFunctionalForLineItem()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_09@146dfe6] output={null}]]]>
+                <![CDATA[[TestResult name=TC_OM_PurchaseOrder_03_createNewOrder status=FAILURE method=TC_OM_PurchaseOrder_03.TC_OM_PurchaseOrder_03_createNewOrder()[pri:0, instance:com.qa.iris.om.purchaseorder.TC_OM_PurchaseOrder_03@201a4587] output={null}]]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[public void com.qa.iris.om.TC_OM_AddOrder_09.TC_OM_AddOrder_09_verifyCancelFunctionalForLineItem()]]>
+                <![CDATA[public void com.qa.iris.om.purchaseorder.TC_OM_PurchaseOrder_03.TC_OM_PurchaseOrder_03_createNewOrder()]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="afterClass()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_09@146dfe6]" started-at="2023-02-03T16:48:37Z" name="afterClass" finished-at="2023-02-03T16:48:38Z" duration-ms="838" status="PASS">
+        <test-method is-config="true" signature="afterClass()[pri:0, instance:com.qa.iris.om.purchaseorder.TC_OM_PurchaseOrder_03@201a4587]" started-at="2023-11-09T19:57:52 IST" name="afterClass" finished-at="2023-11-09T19:57:53 IST" duration-ms="718" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterClass -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.qa.iris.om.TC_OM_AddOrder_09@146dfe6]" started-at="2023-02-03T16:48:38Z" name="tearDown" finished-at="2023-02-03T16:48:38Z" duration-ms="3" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.qa.iris.om.purchaseorder.TC_OM_PurchaseOrder_03@201a4587]" started-at="2023-11-09T19:57:53 IST" name="tearDown" finished-at="2023-11-09T19:57:53 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- com.qa.iris.om.TC_OM_AddOrder_09 -->
+      </class> <!-- com.qa.iris.om.purchaseorder.TC_OM_PurchaseOrder_03 -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

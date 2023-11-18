@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class AddOrderPageObject {
 	
-	@FindBy(xpath="//span[contains(text(),'Add Order Master Detail')]")
+	@FindBy(xpath="//span[contains(text(),'Order Entry')]")
 	public WebElement addOrderMasterDetail;
 
 	@FindBy(xpath="//span[@class = 'dx-tab-text' and contains(text(),'Order')]")
@@ -21,8 +21,7 @@ public class AddOrderPageObject {
 	@FindBy(xpath="//tbody[@role='presentation']//tr[contains(@class,'dx-selection')]/td[1]")
 	public WebElement orderList;
 	
-
-	@FindBy(xpath="//dx-drop-down-box[@label='Orders']")
+	@FindBy(xpath="(//div[@class='dx-dropdowneditor-icon'])[1]")
 	public WebElement orderDropdown;
 
 	@FindBy(xpath="(//tbody[@role='presentation']//tr[contains(@class,'dx-data-row')])[3]/td[2]")
@@ -75,6 +74,21 @@ public class AddOrderPageObject {
 	
 	@FindBy(xpath="//a[@title='Cancel']")
 	public WebElement cancel;
+	
+	@FindBy(xpath="//span[contains(text(),'Action')]")
+	public WebElement btnAction;
+	
+	@FindBy(xpath="//div[contains(text(),'Submit')]")
+	public WebElement btnSubmit;
+	
+	@FindBy(xpath="//span[contains(text(),'Reports')]")
+	public WebElement btnReports;
+	
+	@FindBy(xpath="//div[contains(text(),'Order Details')]")
+	public WebElement btnOrderDetails;
+
+	@FindBy(xpath="//span[contains(text(),'Multiple Ship To')]")
+	public WebElement multipleShipTo;
 
 	/**
 	 * @param driver The driver that will be used to look up the elements

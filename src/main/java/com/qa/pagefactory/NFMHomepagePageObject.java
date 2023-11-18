@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class NFMHomepagePageObject {
 
-  @FindBy(xpath="//td[@class='tdborderdashboard']/a[contains(text(),'Add Order Master Detail')]")
+  @FindBy(xpath="//td[@class='tdborderdashboard']/a[contains(@href,'ADD')]")
   public WebElement addOrderMasterDetails;
 
   @FindBy(xpath="//a[contains(text(),'Logout')]")

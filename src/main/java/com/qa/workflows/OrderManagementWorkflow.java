@@ -6,6 +6,7 @@ import org.testng.Assert;
 
 import com.qa.pagefactory.AddOrderPageObject;
 import com.qa.utils.JavaScriptExecuter;
+import com.qa.utils.TestUtils;
 import com.qa.utils.WaitExecuter;
 
 public class OrderManagementWorkflow {
@@ -91,9 +92,31 @@ public class OrderManagementWorkflow {
 	public void deleteOrder() {
 		waitExecuter.sleep(2000);
 		addOrderPageObject.deleteOrder.click();
-
+	}
+	
+	public void submitOrder() {
+		waitExecuter.sleep(2000);
+		addOrderPageObject.btnAction.click();
+		addOrderPageObject.btnSubmit.click();
+	}
+	
+	public void viewOrderDetails() {
+		waitExecuter.sleep(2000);
+		addOrderPageObject.btnReports.click();
+		addOrderPageObject.btnOrderDetails.click();
+	}
+	
+	public void checkOrderDetails() {
+		TestUtils.switchToNewTab();
+		//TODO: validate
+		TestUtils.switchToMainWindow();
 	}
 
+	public void selectMultipleShipTo() {
+		waitExecuter.sleep(2000);
+		addOrderPageObject.multipleShipTo.click();
+	}
+	
 	public void addNewLineItem() {
 		waitExecuter.sleep(4000);
 		addOrderPageObject.addNewLineItem.get(1).click();

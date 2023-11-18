@@ -1,28 +1,19 @@
 package com.qa.utils;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
-
-import javax.imageio.ImageIO;
-
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-
 import com.qa.base.TestBase;
-
-import ru.yandex.qatools.ashot.AShot;
-import ru.yandex.qatools.ashot.Screenshot;
 
 public class TestUtils extends TestBase {
 
@@ -56,6 +47,26 @@ public class TestUtils extends TestBase {
 
 	public static String getWindowHandle(){
 		return driver.getWindowHandle();
+	}
+
+	public static void switchToNewTab() {
+		String mainWindowHandle = driver.getWindowHandle();
+		Set<String> allWindowHandles = driver.getWindowHandles();
+		Iterator<String> iterator = allWindowHandles.iterator();
+
+		// Here we will check if child window has other child windows and will fetch the heading of the child window
+		while (iterator.hasNext()) {
+			String ChildWindow = iterator.next();
+			if (!mainWindowHandle.equalsIgnoreCase(ChildWindow)) {
+				driver.switchTo().window(ChildWindow);
+			}
+		}
+
+	}
+
+	public static void switchToMainWindow() {
+		driver.close();
+		driver.switchTo().window(getWindowHandle());
 	}
 
 	/**
@@ -181,11 +192,11 @@ public class TestUtils extends TestBase {
 			flag = element.isDisplayed();
 			flag = true;
 		} catch (NoSuchElementException e) {
-		
+
 		}
 		return flag;
 	}
-	
+
 	public static boolean compareStringArrays(String[] actual, String[] expected) {
 		for (int i = 0; i < expected.length; i++) {
 			if (!Arrays.asList(actual).contains(expected[i])) {

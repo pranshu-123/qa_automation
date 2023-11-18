@@ -84,10 +84,13 @@ public class DriverManager {
 			System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
 		}
 		else {
-			WebDriverManager.chromedriver().setup();
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\bhavs\\OneDrive\\Documents\\iris\\quality-ui\\downloadsFolder\\chromedriver.exe");
+
+			//WebDriverManager.chromedriver().setup();
 		}
 		ChromeOptions chromeOptions = new ChromeOptions();
 		chromeOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage");
+		chromeOptions.addArguments("--remote-allow-origins=*");
 		chromeOptions.setExperimentalOption("useAutomationExtension", false);
 		return chromeOptions;
 	}

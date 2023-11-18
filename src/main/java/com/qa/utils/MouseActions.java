@@ -5,8 +5,6 @@ import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.logging.Logger;
-
 /**
  * @author Pranshu
  * This class contains all methods related to mouse actions

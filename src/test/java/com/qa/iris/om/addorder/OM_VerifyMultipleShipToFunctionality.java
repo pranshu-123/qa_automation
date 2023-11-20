@@ -4,7 +4,6 @@ import java.util.logging.Logger;
 
 import org.testng.annotations.Test;
 
-import com.aventstack.extentreports.Status;
 import com.qa.annotations.Marker;
 import com.qa.base.MainAccelerator;
 import com.qa.constants.Categories;
@@ -19,10 +18,10 @@ public class OM_VerifyMultipleShipToFunctionality extends MainAccelerator{
 
 
 	@Test(groups = Categories.ORDER_MANAGEMENT)
-	public void TC_OM_AddOrder_12_MultipleShipTo() {
-		test = extent.createTest("TC_OM_AddOrder_12_MultipleShipTo", "View Order Details");
+	public void TC_OM_AddOrder_15_MultipleShipTo() {
+		test = extent.createTest("TC_OM_AddOrder_15_MultipleShipTo", "View Order Details");
 		test.assignCategory("OrderManagement");
-		Log.startTestCase("TC_OM_AddOrder_12_MultipleShipTo");
+		Log.startTestCase("TC_OM_AddOrder_15_MultipleShipTo");
 		NFMLoginWorkflow loginWorkflow = new NFMLoginWorkflow(driver);
 		NFMHomepageWorkflow homepageWorkflow = new NFMHomepageWorkflow(driver);
 		OrderManagementWorkflow orderManagementWorkflow = new OrderManagementWorkflow(driver);
@@ -34,6 +33,7 @@ public class OM_VerifyMultipleShipToFunctionality extends MainAccelerator{
 		orderManagementWorkflow.selectAddOrderMasterDetail();
 		orderManagementWorkflow.selectOrder();
 		orderManagementWorkflow.selectMultipleShipTo();
+		orderManagementWorkflow.addMultipleShippers();
 	}
 
 }

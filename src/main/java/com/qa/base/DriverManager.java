@@ -3,6 +3,7 @@ package com.qa.base;
 
 import com.qa.constants.SystemVariables;
 import com.qa.io.ConfigReader;
+import com.qa.utils.FileUtils;
 import com.qa.utils.Log;
 
 
@@ -17,9 +18,12 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.RemoteWebDriver;
+
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.Properties;
 import java.util.logging.Level;
 
@@ -80,11 +84,17 @@ public class DriverManager {
 		LoggingPreferences logPrefs = new LoggingPreferences();
 		logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
 		String build_number = SystemVariables.BUILD_NUMBER.toString();
+		File folderUUID = FileUtils.createDownloadsFolder();
+		HashMap<String, Object> chromePref = new HashMap<String, Object>();
+		chromePref.put("credentials_enable_service", false);
+		chromePref.put("profile.password_manager_enabled", false);
+		chromePref.put("profile.default_content_settings.popups", 0);
+		chromePref.put("download.default_directory", folderUUID.getAbsolutePath());
 		if(build_number!=null) {
 			System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
 		}
 		else {
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\bhavs\\OneDrive\\Documents\\iris\\quality-ui\\downloadsFolder\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "C:\\Users\\bhavs\\OneDrive\\Documents\\iris\\quality-ui\\downloadsFolder\\chromedriver.exe");
 
 			//WebDriverManager.chromedriver().setup();
 		}
@@ -92,6 +102,7 @@ public class DriverManager {
 		chromeOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage");
 		chromeOptions.addArguments("--remote-allow-origins=*");
 		chromeOptions.setExperimentalOption("useAutomationExtension", false);
+		chromeOptions.setExperimentalOption("prefs", chromePref);
 		return chromeOptions;
 	}
 }

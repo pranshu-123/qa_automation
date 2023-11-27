@@ -34,8 +34,9 @@ public class PO_AddLineItem extends MainAccelerator{
 		homepageWorkflow.navigateToAddOrderPage();
 		LOGGER.info("Navigated to Order Management page");
 		purchaseManagementWorkflow.selectPurchaseOrder();
-		purchaseManagementWorkflow.addLineItem("5", "2.50");
-		purchaseManagementWorkflow.verifyLineAmount(5.00, 2.50);
+		purchaseManagementWorkflow.selectOrder();
+		purchaseManagementWorkflow.addLineItem("5", "2.22");
+		purchaseManagementWorkflow.verifyLineAmount(5.00, 2.22);
 		purchaseManagementWorkflow.saveOrder();
 		test.log(Status.PASS, "Line Item Created successfully");
 	}

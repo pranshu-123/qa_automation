@@ -1,6 +1,8 @@
 package com.qa.workflows;
 
 import java.util.logging.Logger;
+
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
@@ -53,8 +55,10 @@ public class PurchaseManagementWorkflow {
 	}
 
 	public void selectOrder() {
-		waitExecuter.sleep(5000);
-		waitExecuter.waitUntilElementPresent(addOrderPageObject.orderDropdown);
+		waitExecuter.sleep(1000);
+		waitExecuter.waitUntilElementClickable(addOrderPageObject.orderDropdown);
+		waitExecuter.sleep(8000);
+		waitExecuter.waitUntilPageFullyLoaded();
 		addOrderPageObject.orderDropdown.click();
 		waitExecuter.sleep(3000);
 		addOrderPageObject.orders.click();
@@ -62,12 +66,19 @@ public class PurchaseManagementWorkflow {
 	}
 
 	public void addLineItem(String qty, String price) {
-		purchaseOrderPageObject.itemNo.click();
-		purchaseOrderPageObject.itemDropdown.click();
+		purchaseOrderPageObject.addNewLineItem.get(0).click();
+		purchaseOrderPageObject.itemNo.sendKeys("1");
 		waitExecuter.sleep(2000);
 		purchaseOrderPageObject.item.click();
+		waitExecuter.sleep(2000);
+		purchaseOrderPageObject.orderQty.clear();
 		purchaseOrderPageObject.orderQty.click();
+		waitExecuter.sleep(2000);
 		purchaseOrderPageObject.orderQty.sendKeys(qty);
+		waitExecuter.sleep(2000);
+		purchaseOrderPageObject.purchasePrice.clear();
+		purchaseOrderPageObject.purchasePrice.click();
+		waitExecuter.sleep(2000);
 		purchaseOrderPageObject.purchasePrice.sendKeys(price);
 		purchaseOrderPageObject.lineAmount.click();
 	}
@@ -88,14 +99,16 @@ public class PurchaseManagementWorkflow {
 	public void deleteOrder() {
 		JavaScriptExecuter.scrollOnElement(driver, purchaseOrderPageObject.saveOrder);
 		purchaseOrderPageObject.deleteOrder.click();
+		purchaseOrderPageObject.yes.click();
 	}
 
 	public void copyLineItem() {
-
+		purchaseOrderPageObject.copyLineItems.get(0).click();
 	}
 
 	public void deleteLineItem() {
-
+		purchaseOrderPageObject.deleteLineItems.get(0).click();
+		purchaseOrderPageObject.yes.click();
 	}
 
 	public void updateLineItem() {

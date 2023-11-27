@@ -93,19 +93,19 @@ public class OrderManagementWorkflow {
 		waitExecuter.sleep(2000);
 		addOrderPageObject.deleteOrder.click();
 	}
-	
+
 	public void submitOrder() {
 		waitExecuter.sleep(2000);
 		addOrderPageObject.btnAction.click();
 		addOrderPageObject.btnSubmit.click();
 	}
-	
+
 	public void viewOrderDetails() {
 		waitExecuter.sleep(2000);
 		addOrderPageObject.btnReports.click();
 		addOrderPageObject.btnOrderDetails.click();
 	}
-	
+
 	public void checkOrderDetails() {
 		TestUtils.switchToNewTab();
 		//TODO: validate
@@ -116,7 +116,28 @@ public class OrderManagementWorkflow {
 		waitExecuter.sleep(2000);
 		addOrderPageObject.multipleShipTo.click();
 	}
-	
+
+	public void addMultipleShippers() {
+		waitExecuter.sleep(2000);
+		addOrderPageObject.itemNo.click();
+		addOrderPageObject.itemList.click();
+		addOrderPageObject.quantity.sendKeys("5");
+		addOrderPageObject.expectedDateIcon.click();
+		waitExecuter.sleep(2000);
+		addOrderPageObject.calendarNextMonth.click();
+		addOrderPageObject.date.click();
+		addOrderPageObject.selectShipTo.click();
+		addOrderPageObject.shipToList.click();
+		waitExecuter.sleep(2000);
+		addOrderPageObject.btnApply.click();
+		addOrderPageObject.btnAddToOrder.click();
+	}
+
+	public void exportAllData() {
+		addOrderPageObject.exportDropdown.click();
+		addOrderPageObject.exportAllData.click();
+	}
+
 	public void addNewLineItem() {
 		waitExecuter.sleep(4000);
 		addOrderPageObject.addNewLineItem.get(1).click();

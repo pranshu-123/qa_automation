@@ -19,10 +19,10 @@ public class OM_ViewOrderDetails extends MainAccelerator{
 
 
 	@Test(groups = Categories.ORDER_MANAGEMENT)
-	public void TC_OM_AddOrder_11_ViewOrderDetails() {
-		test = extent.createTest("TC_OM_AddOrder_11_ViewOrderDetails", "View Order Details");
+	public void TC_OM_AddOrder_16_ViewOrderDetails() {
+		test = extent.createTest("TC_OM_AddOrder_16_ViewOrderDetails", "View Order Details");
 		test.assignCategory("OrderManagement");
-		Log.startTestCase("TC_OM_AddOrder_11_ViewOrderDetails");
+		Log.startTestCase("TC_OM_AddOrder_16_ViewOrderDetails");
 		NFMLoginWorkflow loginWorkflow = new NFMLoginWorkflow(driver);
 		NFMHomepageWorkflow homepageWorkflow = new NFMHomepageWorkflow(driver);
 		OrderManagementWorkflow orderManagementWorkflow = new OrderManagementWorkflow(driver);

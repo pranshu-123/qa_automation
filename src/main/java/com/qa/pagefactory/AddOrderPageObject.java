@@ -51,12 +51,6 @@ public class AddOrderPageObject {
 	@FindBy(xpath="//textarea[@class='dx-texteditor-input']")
 	public WebElement addRemarkLineItems;
 	
-	@FindBy(xpath="(//table//div[contains(@class,'dx-dropdowneditor-button')])[3]")
-	public WebElement itemNo;
-	
-	@FindBy(xpath="(//tbody[@role='presentation'])[7]//tr[1]/td[1]")
-	public WebElement itemList;
-	
 	@FindBy(xpath="//span[contains(text(),'Yes')]")
 	public WebElement yes;
 	
@@ -89,6 +83,45 @@ public class AddOrderPageObject {
 
 	@FindBy(xpath="//span[contains(text(),'Multiple Ship To')]")
 	public WebElement multipleShipTo;
+	
+	@FindBy(xpath="//dx-drop-down-box[@label='Item No']//div[@class='dx-dropdowneditor-icon']")
+	public WebElement itemNo;
+	
+	@FindBy(xpath="(//tbody[@role='presentation'])[13]//tr[4]/td[1]")
+	public WebElement itemList;
+	
+	@FindBy(xpath="//dx-text-box[@label='Quantity']")
+	public WebElement quantity;
+	
+	@FindBy(xpath="//dx-drop-down-box[@label='Select ship to...']//div[@class='dx-dropdowneditor-icon']")
+	public WebElement selectShipTo;
+	
+	@FindBy(xpath="(//span[@class='dx-checkbox-icon'])[5]")
+	public WebElement shipToList;
+	
+	@FindBy(xpath="(//span[contains(text(),'Apply')])[2]")
+	public WebElement btnApply;
+	
+	@FindBy(xpath="//span[contains(text(),'Close')]")
+	public WebElement btnClose;
+	
+	@FindBy(xpath="//div[@data-dx_placeholder='MM/dd/yyyy']/../following-sibling::div//div[@class='dx-dropdowneditor-icon']")
+	public WebElement expectedDateIcon;
+
+	@FindBy(xpath="//a[contains(@class,'dx-calendar-navigator-next-month')]")
+	public WebElement calendarNextMonth;
+
+	@FindBy(xpath="(//span[contains(text(),'12')])[1]")
+	public WebElement date;
+	
+	@FindBy(xpath="//span[contains(text(),'Add to order')]")
+	public WebElement btnAddToOrder;
+
+	@FindBy(xpath="//i[@class='dx-icon dx-icon-export']")
+	public WebElement exportDropdown;
+	
+	@FindBy(xpath="//div[contains(text(),'Export all data to Excel')]")
+	public WebElement exportAllData;
 
 	/**
 	 * @param driver The driver that will be used to look up the elements

@@ -27,5 +27,9 @@ public @interface Marker {
     @Retention(RetentionPolicy.RUNTIME)
     @interface OrderManagement {
     }
+    
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface PurchaseOrder {
+    }
 }
 

@@ -14,7 +14,7 @@ import com.qa.workflows.NFMLoginWorkflow;
 import com.qa.workflows.PurchaseManagementWorkflow;
 
 @Listeners(CustomListener.class)
-@Marker.OrderManagement
+@Marker.PurchaseOrder
 public class PO_CreateOrder extends MainAccelerator{
 
 	private static final Logger LOGGER = Logger.getLogger(PO_CreateOrder.class.getName());
@@ -23,7 +23,7 @@ public class PO_CreateOrder extends MainAccelerator{
 	@Test(groups = Categories.PURCHASE_ORDER)
 	public void TC_PO_01_createNewOrder() {
 		test = extent.createTest("TC_PO_01_createNewOrder", "Create New Order");
-		test.assignCategory("OrderManagement");
+		test.assignCategory("PurchaseOrder");
 		Log.startTestCase("TC_PO_01_createNewOrder");
 		NFMLoginWorkflow loginWorkflow = new NFMLoginWorkflow(driver);
 		NFMHomepageWorkflow homepageWorkflow = new NFMHomepageWorkflow(driver);

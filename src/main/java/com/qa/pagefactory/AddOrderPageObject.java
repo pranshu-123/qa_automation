@@ -21,7 +21,7 @@ public class AddOrderPageObject {
 	@FindBy(xpath="//tbody[@role='presentation']//tr[contains(@class,'dx-selection')]/td[1]")
 	public WebElement orderList;
 	
-	@FindBy(xpath="(//div[@class='dx-dropdowneditor-icon'])[1]")
+	@FindBy(xpath="(//div[@aria-label='Select']/div[@class='dx-button-content'])[1]")
 	public WebElement orderDropdown;
 
 	@FindBy(xpath="(//tbody[@role='presentation']//tr[contains(@class,'dx-data-row')])[3]/td[2]")
@@ -36,8 +36,8 @@ public class AddOrderPageObject {
 	@FindBy(xpath="//div[@class='header-toolbar']//i[@class='dx-icon dx-icon-trash']")
 	public WebElement deleteOrder;
 	
-	@FindBy(xpath="//div[@class='dx-item dx-toolbar-item dx-toolbar-button']//i[@class='dx-icon dx-icon-add']")
-	public List<WebElement> addNewLineItem;
+	@FindBy(xpath="//div[@aria-label='Add a row']")
+	public WebElement addNewLineItem;
 	
 	@FindBy(xpath="//a[@title='Delete']")
 	public List<WebElement> deleteLineItems;
@@ -87,16 +87,16 @@ public class AddOrderPageObject {
 	@FindBy(xpath="//dx-drop-down-box[@label='Item No']//div[@class='dx-dropdowneditor-icon']")
 	public WebElement itemNo;
 	
-	@FindBy(xpath="(//tbody[@role='presentation'])[13]//tr[4]/td[1]")
+	@FindBy(xpath="(//tbody[@role='presentation'])[last()]//tr[4]/td[1]")
 	public WebElement itemList;
 	
-	@FindBy(xpath="//dx-text-box[@label='Quantity']")
+	@FindBy(xpath="(//dx-text-box[@label='Quantity']/..//input)[1]")
 	public WebElement quantity;
 	
 	@FindBy(xpath="//dx-drop-down-box[@label='Select ship to...']//div[@class='dx-dropdowneditor-icon']")
 	public WebElement selectShipTo;
 	
-	@FindBy(xpath="(//span[@class='dx-checkbox-icon'])[5]")
+	@FindBy(xpath="(//span[@class='dx-checkbox-icon'])[last()]")
 	public WebElement shipToList;
 	
 	@FindBy(xpath="(//span[contains(text(),'Apply')])[2]")

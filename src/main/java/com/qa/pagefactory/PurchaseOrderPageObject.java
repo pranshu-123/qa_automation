@@ -39,6 +39,9 @@ public class PurchaseOrderPageObject {
 	@FindBy(xpath="//div[@class='header-toolbar']//i[@class='dx-icon dx-icon-save']")
 	public WebElement saveOrder;
 
+	@FindBy(xpath="(//span[contains(text(),'Purchase Order')])[3]")
+	public WebElement header;
+
 	@FindBy(xpath="//div[@class='header-toolbar']//i[@class='dx-icon dx-icon-trash']")
 	public WebElement deleteOrder;
 
@@ -77,19 +80,62 @@ public class PurchaseOrderPageObject {
 
 	@FindBy(xpath="//span[contains(text(),'Save')]")
 	public WebElement save;
+	
+	@FindBy(xpath="//span[contains(text(),'Action')]")
+	public WebElement action;
 
-	//	@FindBy(xpath="//span[contains(text(),'Customer Address')]")
-	//	public WebElement customerAddress;
-	//	
-	//	@FindBy(xpath="//span[contains(text(),'Shipping Address')]")
-	//	public WebElement shippingAddress;
-	//
-	//	@FindBy(xpath="//dx-number-box[@label='Advance Amount']//div/input")
-	//	public WebElement advanceAmount;
-	//	
-	//	@FindBy(xpath="//a[@title='Cancel']")
-	//	public WebElement cancel;
+	@FindBy(xpath="//span[contains(text(),'Reports')]")
+	public WebElement reports;
+	
+	@FindBy(xpath="//div[contains(text(),'Pull from WO BOM')]")
+	public WebElement pullFromWoBom;
 
+	@FindBy(xpath="//div[contains(text(),'Pull from Reorder Points')]")
+	public WebElement pullFromreorderPoints;
+	
+	@FindBy(xpath="//div[contains(text(),'Pull from Allocations')]")
+	public WebElement pullFromAllocations;
+	
+	@FindBy(xpath="//div[contains(text(),'Cancel PO Quantities')]")
+	public WebElement cancelPOQuantities;
+	
+	@FindBy(xpath="//div[contains(text(),'Create PO from SO')]")
+	public WebElement createPoFromSo;
+	
+	@FindBy(xpath="(//div[@class='dx-dropdowneditor-icon'])[last()]")
+	public WebElement cancelDropdown;
+	
+	@FindBy(xpath="//div[contains(text(),'Cancel Full PO')]")
+	public WebElement cancelFullPO;
+	
+	@FindBy(xpath="//span[contains(text(),'Show Balance Lines')]")
+	public WebElement showBalanceLines;
+	
+	@FindBy(xpath="(//span[contains(text(),'Close')])[last()]")
+	public WebElement close;
+	
+	@FindBy(xpath="//span[contains(text(),'Process Cancellations')]")
+	public WebElement processCancellation;
+	
+
+	@FindBy(xpath="(//div[@class='dx-dropdowneditor-icon'])[last()-1]")
+	public WebElement workOrder;
+	
+	@FindBy(xpath="(//div[@class='dx-dropdowneditor-icon'])[last()]")
+	public WebElement operationCode;
+	
+	@FindBy(xpath="(//div[contains(text(),'Workorder No')])/../../../../../../following-sibling::div//tr[5]/td[1]")
+	public WebElement workorderNumber;
+	
+	@FindBy(xpath="//span[contains(text(),'Apply')]")
+	public WebElement apply;
+	
+	@FindBy(xpath="(//div[contains(@class,'dx-select-checkbox')])[last()]")
+	public WebElement selectWorkOrder;
+	
+	@FindBy(xpath="//span[contains(text(),'Add to PO Lines')]")
+	public WebElement addToPoLines;
+	
 	/**
 	 * @param driver The driver that will be used to look up the elements
 	 */

@@ -48,17 +48,21 @@ public class PurchaseManagementWorkflow {
 		waitExecuter.sleep(1000);
 		purchaseOrderPageObject.expectedDateIcon.click();
 		purchaseOrderPageObject.calendarNextMonth.click();
+		waitExecuter.sleep(1000);
 		purchaseOrderPageObject.date.click();
+		waitExecuter.sleep(1000);
 		purchaseOrderPageObject.createNewOrder.click();
 		waitExecuter.sleep(2000);
 		purchaseOrderPageObject.save.click();
 	}
 
 	public void selectOrder() {
-		waitExecuter.sleep(1000);
+		waitExecuter.sleep(12000);
 		waitExecuter.waitUntilElementClickable(addOrderPageObject.orderDropdown);
-		waitExecuter.sleep(8000);
+		waitExecuter.sleep(12000);
 		waitExecuter.waitUntilPageFullyLoaded();
+		purchaseOrderPageObject.header.click();
+		waitExecuter.sleep(3000);
 		addOrderPageObject.orderDropdown.click();
 		waitExecuter.sleep(3000);
 		addOrderPageObject.orders.click();
@@ -71,21 +75,23 @@ public class PurchaseManagementWorkflow {
 		waitExecuter.sleep(2000);
 		purchaseOrderPageObject.item.click();
 		waitExecuter.sleep(2000);
-		purchaseOrderPageObject.orderQty.clear();
+		//purchaseOrderPageObject.orderQty.clear();
 		purchaseOrderPageObject.orderQty.click();
 		waitExecuter.sleep(2000);
 		purchaseOrderPageObject.orderQty.sendKeys(qty);
+		purchaseOrderPageObject.orderQty.sendKeys(Keys.ENTER);
 		waitExecuter.sleep(2000);
-		purchaseOrderPageObject.purchasePrice.clear();
+		//purchaseOrderPageObject.purchasePrice.clear();
 		purchaseOrderPageObject.purchasePrice.click();
 		waitExecuter.sleep(2000);
 		purchaseOrderPageObject.purchasePrice.sendKeys(price);
+		purchaseOrderPageObject.purchasePrice.sendKeys(Keys.ENTER);
 		purchaseOrderPageObject.lineAmount.click();
 	}
 
 	public void verifyLineAmount(Double qty, Double price) {
 		Double amt =   qty * price;
-		String amount = String.valueOf(amt);
+		String amount = String.format("%.2f", amt);
 		String lineAmount = purchaseOrderPageObject.lineAmount.getText();
 		Assert.assertTrue(lineAmount.contains(amount));
 
@@ -114,8 +120,17 @@ public class PurchaseManagementWorkflow {
 	public void updateLineItem() {
 
 	}
-
+	
 	public void pullFromWoBom() {
+		purchaseOrderPageObject.pullFromWoBom.click();
+		waitExecuter.sleep(2000);
+		purchaseOrderPageObject.workOrder.click();
+		waitExecuter.sleep(2000);
+		purchaseOrderPageObject.workorderNumber.click();
+		waitExecuter.sleep(2000);
+		purchaseOrderPageObject.apply.click();
+		purchaseOrderPageObject.selectWorkOrder.click();
+		purchaseOrderPageObject.addToPoLines.click();
 
 	}
 
@@ -126,10 +141,21 @@ public class PurchaseManagementWorkflow {
 
 	}
 	public void cancelPoQuantities() {
-
+		purchaseOrderPageObject.cancelPOQuantities.click();
+		waitExecuter.sleep(2000);
+		purchaseOrderPageObject.cancelDropdown.click();
+		purchaseOrderPageObject.cancelFullPO.click();
+		waitExecuter.sleep(2000);
+		purchaseOrderPageObject.showBalanceLines.click();
+		purchaseOrderPageObject.processCancellation.click();
+		waitExecuter.sleep(2000);
 	}
 
 	public void generateReports() {
 
+	}
+
+	public void selectActionTab() {
+		purchaseOrderPageObject.action.click();
 	}
 }

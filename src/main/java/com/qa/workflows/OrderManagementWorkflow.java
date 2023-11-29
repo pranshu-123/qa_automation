@@ -49,6 +49,7 @@ public class OrderManagementWorkflow {
 	public void selectOrder() {
 		waitExecuter.sleep(5000);
 		waitExecuter.waitUntilElementPresent(addOrderPageObject.orderDropdown);
+		waitExecuter.sleep(18000);
 		addOrderPageObject.orderDropdown.click();
 		waitExecuter.sleep(3000);
 		addOrderPageObject.orders.click();
@@ -107,9 +108,10 @@ public class OrderManagementWorkflow {
 	}
 
 	public void checkOrderDetails() {
-		TestUtils.switchToNewTab();
+		TestUtils.switchToNewTab(driver);
+		Assert.assertTrue(driver.getCurrentUrl().contains("ExportReport"));
 		//TODO: validate
-		TestUtils.switchToMainWindow();
+		TestUtils.switchToMainWindow(driver);
 	}
 
 	public void selectMultipleShipTo() {
@@ -118,19 +120,24 @@ public class OrderManagementWorkflow {
 	}
 
 	public void addMultipleShippers() {
-		waitExecuter.sleep(2000);
+		waitExecuter.sleep(5000);
 		addOrderPageObject.itemNo.click();
+		waitExecuter.sleep(2000);
 		addOrderPageObject.itemList.click();
+		waitExecuter.sleep(2000);
 		addOrderPageObject.quantity.sendKeys("5");
 		addOrderPageObject.expectedDateIcon.click();
 		waitExecuter.sleep(2000);
 		addOrderPageObject.calendarNextMonth.click();
 		addOrderPageObject.date.click();
+		waitExecuter.sleep(2000);
 		addOrderPageObject.selectShipTo.click();
+		waitExecuter.sleep(2000);
 		addOrderPageObject.shipToList.click();
 		waitExecuter.sleep(2000);
 		addOrderPageObject.btnApply.click();
 		addOrderPageObject.btnAddToOrder.click();
+		addOrderPageObject.btnClose.click();
 	}
 
 	public void exportAllData() {
@@ -140,7 +147,7 @@ public class OrderManagementWorkflow {
 
 	public void addNewLineItem() {
 		waitExecuter.sleep(4000);
-		addOrderPageObject.addNewLineItem.get(1).click();
+		addOrderPageObject.addNewLineItem.click();
 		JavaScriptExecuter.scrollOnElement(driver, addOrderPageObject.expandLineItems.get(0));
 		addOrderPageObject.expandLineItems.get(0).click();
 		JavaScriptExecuter.scrollOnElement(driver, addOrderPageObject.itemNo);
@@ -164,10 +171,10 @@ public class OrderManagementWorkflow {
 
 	public void cancelLineItem() {
 		waitExecuter.sleep(4000);
-		addOrderPageObject.addNewLineItem.get(1).click();
+		addOrderPageObject.addNewLineItem.click();
 		JavaScriptExecuter.scrollOnElement(driver, addOrderPageObject.expandLineItems.get(0));
 		addOrderPageObject.expandLineItems.get(0).click();
-		JavaScriptExecuter.scrollOnElement(driver, addOrderPageObject.itemNo);
+	//	JavaScriptExecuter.scrollOnElement(driver, addOrderPageObject.itemNo);
 		waitExecuter.sleep(1000);
 		addOrderPageObject.cancel.click();
 

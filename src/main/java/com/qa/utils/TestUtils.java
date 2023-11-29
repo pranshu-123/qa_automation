@@ -49,7 +49,7 @@ public class TestUtils extends TestBase {
 		return driver.getWindowHandle();
 	}
 
-	public static void switchToNewTab() {
+	public static void switchToNewTab(WebDriver driver) {
 		String mainWindowHandle = driver.getWindowHandle();
 		Set<String> allWindowHandles = driver.getWindowHandles();
 		Iterator<String> iterator = allWindowHandles.iterator();
@@ -64,7 +64,7 @@ public class TestUtils extends TestBase {
 
 	}
 
-	public static void switchToMainWindow() {
+	public static void switchToMainWindow(WebDriver driver) {
 		driver.close();
 		driver.switchTo().window(getWindowHandle());
 	}

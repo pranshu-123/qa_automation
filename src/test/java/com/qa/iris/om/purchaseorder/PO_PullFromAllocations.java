@@ -15,16 +15,16 @@ import com.qa.workflows.PurchaseManagementWorkflow;
 
 @Listeners(CustomListener.class)
 @Marker.PurchaseOrder
-public class PO_PullFromWoBOM extends MainAccelerator{
+public class PO_PullFromAllocations extends MainAccelerator{
 
-	private static final Logger LOGGER = Logger.getLogger(PO_PullFromWoBOM.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(PO_PullFromAllocations.class.getName());
 
 
 	@Test(groups = Categories.PURCHASE_ORDER)
-	public void TC_PO_06_pullFromWOBom() {
-		test = extent.createTest("TC_PO_06_pullFromWOBom", "Pull From WO BOM");
+	public void TC_PO_08_pullFromAllocations() {
+		test = extent.createTest("TC_PO_08_pullFromAllocations", "Cancel PO Qunatites");
 		test.assignCategory("PurchaseOrder");
-		Log.startTestCase("TC_PO_06_pullFromWOBom");
+		Log.startTestCase("TC_PO_08_pullFromAllocations");
 		NFMLoginWorkflow loginWorkflow = new NFMLoginWorkflow(driver);
 		NFMHomepageWorkflow homepageWorkflow = new NFMHomepageWorkflow(driver);
 		PurchaseManagementWorkflow purchaseManagementWorkflow = new PurchaseManagementWorkflow(driver);
@@ -36,9 +36,9 @@ public class PO_PullFromWoBOM extends MainAccelerator{
 		purchaseManagementWorkflow.selectPurchaseOrder();
 		purchaseManagementWorkflow.selectOrder();
 		purchaseManagementWorkflow.selectActionTab();
-		purchaseManagementWorkflow.pullFromWoBom();
+		purchaseManagementWorkflow.pullFromAllocation();
 		purchaseManagementWorkflow.saveOrder();
-		test.log(Status.PASS, "PO Quanties are cancelled");
+		test.log(Status.PASS, "New PO lines are added successfully!");
 	}
 
 }

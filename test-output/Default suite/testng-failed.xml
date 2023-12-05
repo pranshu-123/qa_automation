@@ -3,17 +3,17 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.qa.iris.om.purchaseorder.TC_OM_PurchaseOrder_03">
+      <class name="com.qa.iris.om.purchaseorder.PO_ExportAllDataToExcel">
         <methods>
+          <include name="TC_PO_14_exportToExcel"/>
           <include name="setupBeforeMethod"/>
           <include name="beforeClass"/>
-          <include name="TC_OM_PurchaseOrder_03_createNewOrder"/>
           <include name="afterClass"/>
           <include name="tearDown"/>
           <include name="tearDown"/>
           <include name="setup"/>
         </methods>
-      </class> <!-- com.qa.iris.om.purchaseorder.TC_OM_PurchaseOrder_03 -->
+      </class> <!-- com.qa.iris.om.purchaseorder.PO_ExportAllDataToExcel -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

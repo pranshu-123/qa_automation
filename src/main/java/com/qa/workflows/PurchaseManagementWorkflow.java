@@ -117,10 +117,7 @@ public class PurchaseManagementWorkflow {
 		purchaseOrderPageObject.yes.click();
 	}
 
-	public void updateLineItem() {
 
-	}
-	
 	public void pullFromWoBom() {
 		purchaseOrderPageObject.pullFromWoBom.click();
 		waitExecuter.sleep(2000);
@@ -135,11 +132,26 @@ public class PurchaseManagementWorkflow {
 	}
 
 	public void pullFromReorderPoints() {
-
+		purchaseOrderPageObject.pullFromreorderPoints.click();
+		waitExecuter.sleep(2000);
+		purchaseOrderPageObject.reorderPoints.click();
+		purchaseOrderPageObject.addToPoLines.click();
+		waitExecuter.sleep(2000);
 	}
+
 	public void pullFromAllocation() {
-
+		purchaseOrderPageObject.pullFromAllocations.click();
+		waitExecuter.sleep(2000);
+		purchaseOrderPageObject.orderByDate.click();
+		purchaseOrderPageObject.calendarNextMonth.click();
+		purchaseOrderPageObject.date.click();
+		waitExecuter.sleep(2000);
+		purchaseOrderPageObject.apply.click();
+		purchaseOrderPageObject.reorderPoints.click();
+		purchaseOrderPageObject.addToPoLines.click();
+		waitExecuter.sleep(2000);
 	}
+
 	public void cancelPoQuantities() {
 		purchaseOrderPageObject.cancelPOQuantities.click();
 		waitExecuter.sleep(2000);
@@ -151,11 +163,38 @@ public class PurchaseManagementWorkflow {
 		waitExecuter.sleep(2000);
 	}
 
-	public void generateReports() {
-
+	public void generateReports(String type) {
+		if(type.equalsIgnoreCase("pdf")) {
+			purchaseOrderPageObject.exportPdf.click();
+		}
+		else {
+			purchaseOrderPageObject.exportExcel.click();
+		}
 	}
 
 	public void selectActionTab() {
 		purchaseOrderPageObject.action.click();
+	}
+
+	public void createPoFromSo() {
+		purchaseOrderPageObject.createPoFromSo.click();
+		purchaseOrderPageObject.orderDropdown.click();
+		waitExecuter.sleep(2000);
+		purchaseOrderPageObject.orders.click();
+		waitExecuter.sleep(2000);
+		purchaseOrderPageObject.apply.click();
+		waitExecuter.sleep(4000);
+		purchaseOrderPageObject.reorderPoints.click();
+		purchaseOrderPageObject.addToPoLines.click();
+		waitExecuter.sleep(2000);
+	}
+
+	public void addNotes(String notes) {
+		purchaseOrderPageObject.notesTab.click();
+		purchaseOrderPageObject.internalNotes.sendKeys(notes);
+	}
+
+	public void navigateToPurchaseOrder() {
+		purchaseOrderPageObject.purchaseOrder.click();
 	}
 }

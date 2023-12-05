@@ -8,6 +8,7 @@ import com.qa.annotations.Marker;
 import com.qa.base.MainAccelerator;
 import com.qa.constants.Categories;
 import com.qa.listeners.CustomListener;
+import com.qa.utils.FileUtils;
 import com.qa.utils.Log;
 import com.qa.workflows.NFMHomepageWorkflow;
 import com.qa.workflows.NFMLoginWorkflow;
@@ -15,16 +16,16 @@ import com.qa.workflows.PurchaseManagementWorkflow;
 
 @Listeners(CustomListener.class)
 @Marker.PurchaseOrder
-public class PO_PullFromWoBOM extends MainAccelerator{
+public class PO_ExportAllDataToExcel extends MainAccelerator{
 
-	private static final Logger LOGGER = Logger.getLogger(PO_PullFromWoBOM.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(PO_ExportAllDataToExcel.class.getName());
 
 
 	@Test(groups = Categories.PURCHASE_ORDER)
-	public void TC_PO_06_pullFromWOBom() {
-		test = extent.createTest("TC_PO_06_pullFromWOBom", "Pull From WO BOM");
+	public void TC_PO_14_exportToExcel() {
+		test = extent.createTest("TC_PO_14_exportToExcel", "Create New Order");
 		test.assignCategory("PurchaseOrder");
-		Log.startTestCase("TC_PO_06_pullFromWOBom");
+		Log.startTestCase("TC_PO_14_exportToExcel");
 		NFMLoginWorkflow loginWorkflow = new NFMLoginWorkflow(driver);
 		NFMHomepageWorkflow homepageWorkflow = new NFMHomepageWorkflow(driver);
 		PurchaseManagementWorkflow purchaseManagementWorkflow = new PurchaseManagementWorkflow(driver);
@@ -34,11 +35,9 @@ public class PO_PullFromWoBOM extends MainAccelerator{
 		homepageWorkflow.navigateToAddOrderPage();
 		LOGGER.info("Navigated to Order Management page");
 		purchaseManagementWorkflow.selectPurchaseOrder();
-		purchaseManagementWorkflow.selectOrder();
-		purchaseManagementWorkflow.selectActionTab();
-		purchaseManagementWorkflow.pullFromWoBom();
-		purchaseManagementWorkflow.saveOrder();
-		test.log(Status.PASS, "PO Quanties are cancelled");
+		purchaseManagementWorkflow.generateReports("excel");
+		FileUtils.checkForFileNameInDownloadsFolder("DataGrid");
+		test.log(Status.PASS, "File downloaded successfully");
 	}
 
 }

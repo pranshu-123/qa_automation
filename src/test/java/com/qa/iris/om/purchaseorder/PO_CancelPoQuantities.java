@@ -34,6 +34,7 @@ public class PO_CancelPoQuantities extends MainAccelerator{
 		homepageWorkflow.navigateToAddOrderPage();
 		LOGGER.info("Navigated to Order Management page");
 		purchaseManagementWorkflow.selectPurchaseOrder();
+		purchaseManagementWorkflow.selectOrder();
 		purchaseManagementWorkflow.selectActionTab();
 		purchaseManagementWorkflow.cancelPoQuantities();
 		purchaseManagementWorkflow.saveOrder();

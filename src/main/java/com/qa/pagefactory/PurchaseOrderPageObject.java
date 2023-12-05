@@ -136,6 +136,39 @@ public class PurchaseOrderPageObject {
 	@FindBy(xpath="//span[contains(text(),'Add to PO Lines')]")
 	public WebElement addToPoLines;
 	
+	@FindBy(xpath="(//span[@class='dx-checkbox-icon'])[last()]")
+	public WebElement reorderPoints;
+	
+	@FindBy(xpath="//dx-date-box[@formcontrolname='orderByDate']//div[@class='dx-dropdowneditor-icon']")
+	public WebElement orderByDate;
+	
+	@FindBy(xpath="//dx-drop-down-box[@label='Order No*']//div[@aria-label='Select']")
+	public WebElement orderDropdown;
+	
+	@FindBy(xpath="//dx-select-box[@label='Shipping Destination*']")
+	public WebElement shippingDestinationDropdown;
+	
+	@FindBy(xpath="//dx-drop-down-box[@label='Ship To Code']")
+	public WebElement shipToCode;
+	
+	@FindBy(xpath="(//tbody[@role='presentation']//tr[contains(@class,'dx-data-row')])[last()]//td[1]")
+	public WebElement orders;
+	
+	@FindBy(xpath="//div[contains(@class,'dx-tab-content')]//span[contains(text(),'Notes')]")
+	public WebElement notesTab;
+	
+	@FindBy(xpath="//div[contains(@class,'dx-tab-content')]//span[contains(text(),'Purchase Order')]")
+	public WebElement purchaseOrderTab;
+	
+	@FindBy(xpath="//dx-text-area[@formcontrolname='internalNote']")
+	public WebElement internalNotes;
+	
+	@FindBy(xpath="//div[contains(text(),'Export all data to PDF')]")
+	public WebElement exportPdf;
+	
+	@FindBy(xpath="//div[contains(text(),'Export all data to Excel')]")
+	public WebElement exportExcel;
+	
 	/**
 	 * @param driver The driver that will be used to look up the elements
 	 */

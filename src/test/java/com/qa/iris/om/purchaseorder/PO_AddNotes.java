@@ -3,7 +3,6 @@ package com.qa.iris.om.purchaseorder;
 import java.util.logging.Logger;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import com.aventstack.extentreports.Status;
 import com.qa.annotations.Marker;
 import com.qa.base.MainAccelerator;
 import com.qa.constants.Categories;
@@ -15,16 +14,16 @@ import com.qa.workflows.PurchaseManagementWorkflow;
 
 @Listeners(CustomListener.class)
 @Marker.PurchaseOrder
-public class PO_PullFromWoBOM extends MainAccelerator{
+public class PO_AddNotes extends MainAccelerator{
 
-	private static final Logger LOGGER = Logger.getLogger(PO_PullFromWoBOM.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(PO_AddNotes.class.getName());
 
 
 	@Test(groups = Categories.PURCHASE_ORDER)
-	public void TC_PO_06_pullFromWOBom() {
-		test = extent.createTest("TC_PO_06_pullFromWOBom", "Pull From WO BOM");
+	public void TC_PO_11_addNotes() {
+		test = extent.createTest("TC_PO_11_addNotes", "Create New Order");
 		test.assignCategory("PurchaseOrder");
-		Log.startTestCase("TC_PO_06_pullFromWOBom");
+		Log.startTestCase("TC_PO_11_addNotes");
 		NFMLoginWorkflow loginWorkflow = new NFMLoginWorkflow(driver);
 		NFMHomepageWorkflow homepageWorkflow = new NFMHomepageWorkflow(driver);
 		PurchaseManagementWorkflow purchaseManagementWorkflow = new PurchaseManagementWorkflow(driver);
@@ -34,11 +33,10 @@ public class PO_PullFromWoBOM extends MainAccelerator{
 		homepageWorkflow.navigateToAddOrderPage();
 		LOGGER.info("Navigated to Order Management page");
 		purchaseManagementWorkflow.selectPurchaseOrder();
-		purchaseManagementWorkflow.selectOrder();
-		purchaseManagementWorkflow.selectActionTab();
-		purchaseManagementWorkflow.pullFromWoBom();
+		purchaseManagementWorkflow.createNewPurchaseOrder();
+		purchaseManagementWorkflow.addNotes("Testing Notes!!!!!!");
+		purchaseManagementWorkflow.navigateToPurchaseOrder();
 		purchaseManagementWorkflow.saveOrder();
-		test.log(Status.PASS, "PO Quanties are cancelled");
 	}
 
 }

@@ -94,9 +94,8 @@ public class DriverManager {
 			System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
 		}
 		else {
-			System.setProperty("webdriver.chrome.driver", "C:\\Users\\bhavs\\OneDrive\\Documents\\iris\\quality-ui\\downloadsFolder\\chromedriver.exe");
 
-			//WebDriverManager.chromedriver().setup();
+			WebDriverManager.chromedriver().setup();
 		}
 		ChromeOptions chromeOptions = new ChromeOptions();
 		chromeOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage");

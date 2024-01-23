@@ -14,7 +14,7 @@ public class DateUtils {
 
 	public static String getCurrentDate() {
 		cal = Calendar.getInstance();
-		dateFormatter = new SimpleDateFormat("MM/dd/YYYY");
+		dateFormatter = new SimpleDateFormat("YYYY/MM/dd");
 		String startDate = dateFormatter.format(cal.getTime()).toString();
 		return startDate;
 	}

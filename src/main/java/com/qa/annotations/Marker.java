@@ -31,5 +31,9 @@ public @interface Marker {
     @Retention(RetentionPolicy.RUNTIME)
     @interface PurchaseOrder {
     }
+    
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface PackingSlip {
+    }
 }
 

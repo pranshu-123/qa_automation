@@ -13,7 +13,7 @@ import com.qa.utils.WaitExecuter;
 
 public class PurchaseManagementWorkflow {
 
-	private static final Logger LOGGER = Logger.getLogger(NFMLoginWorkflow.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(PurchaseManagementWorkflow.class.getName());
 
 	private final WaitExecuter waitExecuter;
 	private final WebDriver driver;
@@ -164,6 +164,7 @@ public class PurchaseManagementWorkflow {
 	}
 
 	public void generateReports(String type) {
+		purchaseOrderPageObject.export.click();
 		if(type.equalsIgnoreCase("pdf")) {
 			purchaseOrderPageObject.exportPdf.click();
 		}

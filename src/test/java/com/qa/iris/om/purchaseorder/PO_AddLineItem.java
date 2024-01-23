@@ -14,7 +14,7 @@ import com.qa.workflows.NFMLoginWorkflow;
 import com.qa.workflows.PurchaseManagementWorkflow;
 
 @Listeners(CustomListener.class)
-@Marker.PurchaseOrder
+@Marker.PackingSlip
 public class PO_AddLineItem extends MainAccelerator{
 
 	private static final Logger LOGGER = Logger.getLogger(PO_AddLineItem.class.getName());

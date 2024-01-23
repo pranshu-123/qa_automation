@@ -197,6 +197,18 @@ public class TestUtils extends TestBase {
 		return flag;
 	}
 
+	public static boolean isElementDisplayed(List<WebElement> element) {
+		boolean flag = false;
+		try {
+			flag = element.get(0).isDisplayed();
+			flag = true;
+		} catch (NoSuchElementException e) {
+
+		}
+		return flag;
+	}
+
+
 	public static boolean compareStringArrays(String[] actual, String[] expected) {
 		for (int i = 0; i < expected.length; i++) {
 			if (!Arrays.asList(actual).contains(expected[i])) {

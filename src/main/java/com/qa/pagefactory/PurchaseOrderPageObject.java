@@ -163,6 +163,9 @@ public class PurchaseOrderPageObject {
 	@FindBy(xpath="//dx-text-area[@formcontrolname='internalNote']")
 	public WebElement internalNotes;
 	
+	@FindBy(xpath="//div[@aria-label='export']")
+	public WebElement export;
+	
 	@FindBy(xpath="//div[contains(text(),'Export all data to PDF')]")
 	public WebElement exportPdf;
 	

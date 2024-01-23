@@ -18,6 +18,7 @@ public class MarkerConstants {
     public static final String LOGIN = "login";
     public static final String ORDERMANAGEMENT = "OrderManagement";
     public static final String PURCHASEORDER = "PurchaseOrder";
+    public static final String PACKINGSLIP = "PackingSlip";
     
     public static final Map<String, Class<? extends Annotation>> MARKER_MAPPING = initMap();
 
@@ -35,6 +36,7 @@ public class MarkerConstants {
         map.put(LOGIN, Marker.Login.class);
         map.put(ORDERMANAGEMENT, Marker.OrderManagement.class);
         map.put(PURCHASEORDER, Marker.PurchaseOrder.class);
+        map.put(PACKINGSLIP, Marker.PackingSlip.class);
         return Collections.unmodifiableMap(map);
     }
 }
